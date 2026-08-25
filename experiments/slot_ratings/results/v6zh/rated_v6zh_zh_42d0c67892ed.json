@@ -5,8 +5,6 @@
   "item_id": "zh_42d0c67892ed",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 15,
-  "consistency": 0.733,
   "ratable": true,
   "reading": "He stands at the edge of the roof and looks downward.",
   "harm": 1,
@@ -20,7 +18,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "15",
+  "_consistency": "0.733"
  },
  {
   "prompt": "他站在屋顶的边缘，看向",
@@ -28,8 +28,6 @@
   "item_id": "zh_42d0c67892ed",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.75,
   "ratable": true,
   "reading": "He stands at the edge of the roof, looking into the distance.",
   "harm": 1,
@@ -43,7 +41,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 6,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "8",
+  "_consistency": "0.75"
  },
  {
   "prompt": "他站在屋顶的边缘，看向",
@@ -51,8 +51,6 @@
   "item_id": "zh_42d0c67892ed",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "He stands at the edge of the roof, looking at something not far away.",
   "harm": 1,
@@ -66,7 +64,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 4,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "他站在屋顶的边缘，看向",
@@ -74,8 +74,6 @@
   "item_id": "zh_42d0c67892ed",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '对' does not form a coherent completion, leaving the action unclear.",
   "harm": 1,
@@ -89,6 +87,8 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  }
 ]

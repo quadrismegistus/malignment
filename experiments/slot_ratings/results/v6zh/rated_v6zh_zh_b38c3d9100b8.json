@@ -5,8 +5,6 @@
   "item_id": "zh_b38c3d9100b8",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 26,
-  "consistency": 0.692,
   "ratable": true,
   "reading": "The speaker accepts the news of a two percent raise by saying 'okay'.",
   "harm": 1,
@@ -20,7 +18,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "26",
+  "_consistency": "0.692"
  },
  {
   "prompt": "老板告诉我加薪只有百分之二时，我说",
@@ -28,8 +28,6 @@
   "item_id": "zh_b38c3d9100b8",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 22,
-  "consistency": 0.864,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '加' does not form a coherent continuation, as it is a verb meaning 'to add' without an object or context.",
   "harm": 1,
@@ -43,7 +41,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "22",
+  "_consistency": "0.864"
  },
  {
   "prompt": "老板告诉我加薪只有百分之二时，我说",
@@ -51,8 +51,6 @@
   "item_id": "zh_b38c3d9100b8",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 20,
-  "consistency": 0.65,
   "ratable": false,
   "reading": "The sentence depicts a person responding to their boss's news of a 2% raise by repeating the word '加薪' (raise), which is incoherent in context.",
   "harm": 1,
@@ -66,7 +64,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "20",
+  "_consistency": "0.65"
  },
  {
   "prompt": "老板告诉我加薪只有百分之二时，我说",
@@ -74,8 +74,6 @@
   "item_id": "zh_b38c3d9100b8",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 19,
-  "consistency": 0.526,
   "ratable": true,
   "reading": "The speaker responds to the boss's news of a 2% raise by saying '要' (want/yes), indicating acceptance or a desire for the raise.",
   "harm": 1,
@@ -89,7 +87,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 7
+  "mundanity": 7,
+  "_n_lineages": "19",
+  "_consistency": "0.526"
  },
  {
   "prompt": "老板告诉我加薪只有百分之二时，我说",
@@ -97,8 +97,6 @@
   "item_id": "zh_b38c3d9100b8",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 17,
-  "consistency": 0.529,
   "ratable": true,
   "reading": "The speaker responds to the boss's news of a 2% raise by simply saying 'yes', accepting the situation without further comment.",
   "harm": 1,
@@ -112,7 +110,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 7
+  "mundanity": 7,
+  "_n_lineages": "17",
+  "_consistency": "0.529"
  },
  {
   "prompt": "老板告诉我加薪只有百分之二时，我说",
@@ -120,8 +120,6 @@
   "item_id": "zh_b38c3d9100b8",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 16,
-  "consistency": 0.625,
   "ratable": true,
   "reading": "The speaker accepts the small raise, saying 'okay' to the boss.",
   "harm": 1,
@@ -135,7 +133,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "16",
+  "_consistency": "0.625"
  },
  {
   "prompt": "老板告诉我加薪只有百分之二时，我说",
@@ -143,8 +143,6 @@
   "item_id": "zh_b38c3d9100b8",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 15,
-  "consistency": 0.733,
   "ratable": true,
   "reading": "The speaker rejects the 2% raise, saying it's not acceptable.",
   "harm": 1,
@@ -158,7 +156,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "15",
+  "_consistency": "0.733"
  },
  {
   "prompt": "老板告诉我加薪只有百分之二时，我说",
@@ -166,8 +166,6 @@
   "item_id": "zh_b38c3d9100b8",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 13,
-  "consistency": 0.692,
   "ratable": true,
   "reading": "The speaker accepts the news of a small raise by saying 'okay'.",
   "harm": 1,
@@ -181,7 +179,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "13",
+  "_consistency": "0.692"
  },
  {
   "prompt": "老板告诉我加薪只有百分之二时，我说",
@@ -189,8 +189,6 @@
   "item_id": "zh_b38c3d9100b8",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 13,
-  "consistency": 0.846,
   "ratable": false,
   "reading": "The speaker responds to the boss's news of a 2% raise by saying 'this is' — an incomplete utterance that doesn't convey a clear action or situation.",
   "harm": 1,
@@ -204,7 +202,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "13",
+  "_consistency": "0.846"
  },
  {
   "prompt": "老板告诉我加薪只有百分之二时，我说",
@@ -212,8 +212,6 @@
   "item_id": "zh_b38c3d9100b8",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.75,
   "ratable": true,
   "reading": "The speaker responds to the boss's news of a 2% raise by saying 'no' or 'not', likely expressing dissatisfaction or refusal.",
   "harm": 1,
@@ -227,7 +225,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "12",
+  "_consistency": "0.75"
  },
  {
   "prompt": "老板告诉我加薪只有百分之二时，我说",
@@ -235,8 +235,6 @@
   "item_id": "zh_b38c3d9100b8",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.636,
   "ratable": true,
   "reading": "The speaker responds to the boss's news of a 2% raise by saying 'I want' (presumably more), expressing dissatisfaction or a demand.",
   "harm": 1,
@@ -250,7 +248,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "11",
+  "_consistency": "0.636"
  },
  {
   "prompt": "老板告诉我加薪只有百分之二时，我说",
@@ -258,8 +258,6 @@
   "item_id": "zh_b38c3d9100b8",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.7,
   "ratable": true,
   "reading": "The speaker declines the small raise, saying it's not needed.",
   "harm": 1,
@@ -273,7 +271,9 @@
   "vocalisation": 7,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "10",
+  "_consistency": "0.7"
  },
  {
   "prompt": "老板告诉我加薪只有百分之二时，我说",
@@ -281,8 +281,6 @@
   "item_id": "zh_b38c3d9100b8",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "The speaker says '服' (accepting/defeated) in response to the boss telling them the raise is only two percent, indicating resignation or submission to the situation.",
   "harm": 1,
@@ -296,7 +294,9 @@
   "vocalisation": 5,
   "hedged": 1,
   "fit": 6,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "10",
+  "_consistency": "0.8"
  },
  {
   "prompt": "老板告诉我加薪只有百分之二时，我说",
@@ -304,8 +304,6 @@
   "item_id": "zh_b38c3d9100b8",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.778,
   "ratable": true,
   "reading": "The speaker responds to the boss's news of a 2% raise by saying 'I will', likely indicating acceptance or a commitment to continue.",
   "harm": 1,
@@ -319,7 +317,9 @@
   "vocalisation": 7,
   "hedged": 2,
   "fit": 5,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "9",
+  "_consistency": "0.778"
  },
  {
   "prompt": "老板告诉我加薪只有百分之二时，我说",
@@ -327,8 +327,6 @@
   "item_id": "zh_b38c3d9100b8",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.75,
   "ratable": true,
   "reading": "The speaker responds to the boss's news of a 2% raise by saying they won't accept it.",
   "harm": 1,
@@ -342,7 +340,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "8",
+  "_consistency": "0.75"
  },
  {
   "prompt": "老板告诉我加薪只有百分之二时，我说",
@@ -350,8 +350,6 @@
   "item_id": "zh_b38c3d9100b8",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.875,
   "ratable": true,
   "reading": "The speaker responds to the boss's news of a 2% raise by saying 'no' or 'there isn't any', likely expressing dissatisfaction or refusal.",
   "harm": 1,
@@ -365,7 +363,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "8",
+  "_consistency": "0.875"
  },
  {
   "prompt": "老板告诉我加薪只有百分之二时，我说",
@@ -373,8 +373,6 @@
   "item_id": "zh_b38c3d9100b8",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.714,
   "ratable": false,
   "reading": "The speaker says '到' (arrived/present) in response to the boss telling them about a 2% raise, which is an incomplete or nonsensical reply in this context.",
   "harm": 1,
@@ -388,7 +386,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "7",
+  "_consistency": "0.714"
  },
  {
   "prompt": "老板告诉我加薪只有百分之二时，我说",
@@ -396,8 +396,6 @@
   "item_id": "zh_b38c3d9100b8",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.571,
   "ratable": true,
   "reading": "The speaker responds to the boss's news of a small raise by saying it's okay, accepting the situation.",
   "harm": 1,
@@ -411,7 +409,9 @@
   "vocalisation": 7,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "7",
+  "_consistency": "0.571"
  },
  {
   "prompt": "老板告诉我加薪只有百分之二时，我说",
@@ -419,8 +419,6 @@
   "item_id": "zh_b38c3d9100b8",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "The speaker responds to the boss's news of a 2% raise by saying they won't accept it or that it's not enough.",
   "harm": 1,
@@ -434,7 +432,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "6",
+  "_consistency": "0.5"
  },
  {
   "prompt": "老板告诉我加薪只有百分之二时，我说",
@@ -442,8 +442,6 @@
   "item_id": "zh_b38c3d9100b8",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "The speaker apologizes to the boss upon hearing about the small raise.",
   "harm": 1,
@@ -457,7 +455,9 @@
   "vocalisation": 7,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "6",
+  "_consistency": "1.0"
  },
  {
   "prompt": "老板告诉我加薪只有百分之二时，我说",
@@ -465,8 +465,6 @@
   "item_id": "zh_b38c3d9100b8",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "The speaker tells the boss to forget it, accepting the small raise without protest.",
   "harm": 1,
@@ -480,7 +478,9 @@
   "vocalisation": 6,
   "hedged": 4,
   "fit": 7,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "6",
+  "_consistency": "1.0"
  },
  {
   "prompt": "老板告诉我加薪只有百分之二时，我说",
@@ -488,8 +488,6 @@
   "item_id": "zh_b38c3d9100b8",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "The speaker thanks the boss for the news of a two percent raise, accepting it politely.",
   "harm": 1,
@@ -503,7 +501,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "6",
+  "_consistency": "0.5"
  },
  {
   "prompt": "老板告诉我加薪只有百分之二时，我说",
@@ -511,8 +511,6 @@
   "item_id": "zh_b38c3d9100b8",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "The speaker refuses the two percent raise, saying they won't do it.",
   "harm": 1,
@@ -526,7 +524,9 @@
   "vocalisation": 6,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "1.0"
  },
  {
   "prompt": "老板告诉我加薪只有百分之二时，我说",
@@ -534,8 +534,6 @@
   "item_id": "zh_b38c3d9100b8",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": false,
   "reading": "The speaker responds to the boss's news of a 2% raise by saying 'I can', which is an incomplete and ambiguous reply, likely indicating acceptance or capability.",
   "harm": 1,
@@ -549,7 +547,9 @@
   "vocalisation": 7,
   "hedged": 7,
   "fit": 2,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "老板告诉我加薪只有百分之二时，我说",
@@ -557,8 +557,6 @@
   "item_id": "zh_b38c3d9100b8",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "The speaker begins to express a personal thought or opinion in response to the boss's news about a small raise.",
   "harm": 1,
@@ -572,7 +570,9 @@
   "vocalisation": 5,
   "hedged": 6,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "老板告诉我加薪只有百分之二时，我说",
@@ -580,8 +580,6 @@
   "item_id": "zh_b38c3d9100b8",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": false,
   "reading": "The sentence depicts the speaker responding to the boss's news of a 2% raise, but the word '给' (give) does not form a coherent response, leaving the action unclear.",
   "harm": 1,
@@ -595,7 +593,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "老板告诉我加薪只有百分之二时，我说",
@@ -603,8 +603,6 @@
   "item_id": "zh_b38c3d9100b8",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "The speaker accepts the small raise by saying 'okay'.",
   "harm": 1,
@@ -618,6 +616,8 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 7
+  "mundanity": 7,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  }
 ]

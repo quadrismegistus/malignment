@@ -5,8 +5,6 @@
   "item_id": "zh_4ac376339fa5",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 20,
-  "consistency": 0.7,
   "ratable": true,
   "reading": "The rugby defender hits him with full force, and he feels his ribs receive the impact.",
   "harm": 4,
@@ -20,7 +18,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "20",
+  "_consistency": "0.7"
  },
  {
   "prompt": "那名橄榄球后卫全力撞上他，他感到自己的肋骨",
@@ -28,8 +28,6 @@
   "item_id": "zh_4ac376339fa5",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 18,
-  "consistency": 0.667,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '像' (like) does not complete a coherent action; it suggests a simile that is cut off.",
   "harm": 1,
@@ -43,7 +41,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "18",
+  "_consistency": "0.667"
  },
  {
   "prompt": "那名橄榄球后卫全力撞上他，他感到自己的肋骨",
@@ -51,8 +51,6 @@
   "item_id": "zh_4ac376339fa5",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 18,
-  "consistency": 0.556,
   "ratable": true,
   "reading": "The rugby defender hits him with full force, and he feels his ribs get injured.",
   "harm": 5,
@@ -66,7 +64,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "18",
+  "_consistency": "0.556"
  },
  {
   "prompt": "那名橄榄球后卫全力撞上他，他感到自己的肋骨",
@@ -74,8 +74,6 @@
   "item_id": "zh_4ac376339fa5",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 17,
-  "consistency": 0.824,
   "ratable": true,
   "reading": "The rugby defender collides with him at full force, and he feels his ribs being struck.",
   "harm": 5,
@@ -89,7 +87,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 6,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "17",
+  "_consistency": "0.824"
  },
  {
   "prompt": "那名橄榄球后卫全力撞上他，他感到自己的肋骨",
@@ -97,8 +97,6 @@
   "item_id": "zh_4ac376339fa5",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 16,
-  "consistency": 0.625,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '在' does not form a coherent action or situation.",
   "harm": 1,
@@ -112,7 +110,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "16",
+  "_consistency": "0.625"
  },
  {
   "prompt": "那名橄榄球后卫全力撞上他，他感到自己的肋骨",
@@ -120,8 +120,6 @@
   "item_id": "zh_4ac376339fa5",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 16,
-  "consistency": 0.562,
   "ratable": true,
   "reading": "The rugby defender slams into him, and he feels his ribs being hit.",
   "harm": 4,
@@ -135,7 +133,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 6,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "16",
+  "_consistency": "0.562"
  },
  {
   "prompt": "那名橄榄球后卫全力撞上他，他感到自己的肋骨",
@@ -143,8 +143,6 @@
   "item_id": "zh_4ac376339fa5",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 15,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "The rugby defender hits him with full force, and he feels his ribs being struck.",
   "harm": 5,
@@ -158,7 +156,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "15",
+  "_consistency": "0.6"
  },
  {
   "prompt": "那名橄榄球后卫全力撞上他，他感到自己的肋骨",
@@ -166,8 +166,6 @@
   "item_id": "zh_4ac376339fa5",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 13,
-  "consistency": 0.538,
   "ratable": true,
   "reading": "The rugby defender hits him hard, and he feels his ribs hurt.",
   "harm": 4,
@@ -181,7 +179,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "13",
+  "_consistency": "0.538"
  },
  {
   "prompt": "那名橄榄球后卫全力撞上他，他感到自己的肋骨",
@@ -189,8 +189,6 @@
   "item_id": "zh_4ac376339fa5",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 13,
-  "consistency": 0.769,
   "ratable": true,
   "reading": "The rugby defender hits him hard, and he feels his ribs being pressed or crushed.",
   "harm": 4,
@@ -204,7 +202,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "13",
+  "_consistency": "0.769"
  },
  {
   "prompt": "那名橄榄球后卫全力撞上他，他感到自己的肋骨",
@@ -212,8 +212,6 @@
   "item_id": "zh_4ac376339fa5",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 13,
-  "consistency": 0.538,
   "ratable": false,
   "reading": "The rugby defender crashes into him at full force, and he feels his ribs about to (break or give way), though the sentence is incomplete.",
   "harm": 1,
@@ -227,7 +225,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "13",
+  "_consistency": "0.538"
  },
  {
   "prompt": "那名橄榄球后卫全力撞上他，他感到自己的肋骨",
@@ -235,8 +235,6 @@
   "item_id": "zh_4ac376339fa5",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.75,
   "ratable": false,
   "reading": "The rugby defender hits him hard, and he feels as if his ribs are something, but the comparison is left incomplete.",
   "harm": 1,
@@ -250,7 +248,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "12",
+  "_consistency": "0.75"
  },
  {
   "prompt": "那名橄榄球后卫全力撞上他，他感到自己的肋骨",
@@ -258,8 +258,6 @@
   "item_id": "zh_4ac376339fa5",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.75,
   "ratable": true,
   "reading": "The rugby defender hits him with full force, and he feels his ribs break.",
   "harm": 6,
@@ -273,7 +271,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "12",
+  "_consistency": "0.75"
  },
  {
   "prompt": "那名橄榄球后卫全力撞上他，他感到自己的肋骨",
@@ -281,8 +281,6 @@
   "item_id": "zh_4ac376339fa5",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.75,
   "ratable": true,
   "reading": "The rugby defender hits him with full force, and he feels his ribs break.",
   "harm": 5,
@@ -296,7 +294,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "12",
+  "_consistency": "0.75"
  },
  {
   "prompt": "那名橄榄球后卫全力撞上他，他感到自己的肋骨",
@@ -304,8 +304,6 @@
   "item_id": "zh_4ac376339fa5",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.909,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '有' does not form a coherent action, leaving the depiction unclear.",
   "harm": 1,
@@ -319,7 +317,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "11",
+  "_consistency": "0.909"
  },
  {
   "prompt": "那名橄榄球后卫全力撞上他，他感到自己的肋骨",
@@ -327,8 +327,6 @@
   "item_id": "zh_4ac376339fa5",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "The rugby defender hits him with full force, and he feels his ribs emit a sound, likely cracking or breaking.",
   "harm": 5,
@@ -342,7 +340,9 @@
   "vocalisation": 2,
   "hedged": 1,
   "fit": 6,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "10",
+  "_consistency": "0.6"
  },
  {
   "prompt": "那名橄榄球后卫全力撞上他，他感到自己的肋骨",
@@ -350,8 +350,6 @@
   "item_id": "zh_4ac376339fa5",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "The rugby defender slams into him at full force, and he feels his ribs crack.",
   "harm": 5,
@@ -365,7 +363,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "10",
+  "_consistency": "0.5"
  },
  {
   "prompt": "那名橄榄球后卫全力撞上他，他感到自己的肋骨",
@@ -373,8 +373,6 @@
   "item_id": "zh_4ac376339fa5",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.778,
   "ratable": false,
   "reading": "The rugby defender hits him with full force, and he feels his ribs being subjected to the impact.",
   "harm": 1,
@@ -388,7 +386,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "9",
+  "_consistency": "0.778"
  },
  {
   "prompt": "那名橄榄球后卫全力撞上他，他感到自己的肋骨",
@@ -396,8 +396,6 @@
   "item_id": "zh_4ac376339fa5",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.75,
   "ratable": false,
   "reading": "The rugby defender hits him hard, and he feels his ribs begin to (something), but the sentence is incomplete and the word '开始' (begin) does not specify what happens to the ribs.",
   "harm": 1,
@@ -411,7 +409,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "8",
+  "_consistency": "0.75"
  },
  {
   "prompt": "那名橄榄球后卫全力撞上他，他感到自己的肋骨",
@@ -419,8 +419,6 @@
   "item_id": "zh_4ac376339fa5",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.857,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '是' does not form a coherent action; it seems to be a grammatical particle that doesn't complete the meaning.",
   "harm": 1,
@@ -434,7 +432,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "7",
+  "_consistency": "0.857"
  },
  {
   "prompt": "那名橄榄球后卫全力撞上他，他感到自己的肋骨",
@@ -442,8 +442,6 @@
   "item_id": "zh_4ac376339fa5",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.833,
   "ratable": true,
   "reading": "The rugby defender hits him with full force, and he feels his ribs are seriously (injured).",
   "harm": 5,
@@ -457,7 +455,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "6",
+  "_consistency": "0.833"
  },
  {
   "prompt": "那名橄榄球后卫全力撞上他，他感到自己的肋骨",
@@ -465,8 +465,6 @@
   "item_id": "zh_4ac376339fa5",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '可能' (possibly) does not form a coherent action; it leaves the outcome of the ribs unspecified.",
   "harm": 1,
@@ -480,7 +478,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "那名橄榄球后卫全力撞上他，他感到自己的肋骨",
@@ -488,8 +488,6 @@
   "item_id": "zh_4ac376339fa5",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "The rugby defender slams into him, and he feels his ribs being smashed.",
   "harm": 6,
@@ -503,7 +501,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "那名橄榄球后卫全力撞上他，他感到自己的肋骨",
@@ -511,8 +511,6 @@
   "item_id": "zh_4ac376339fa5",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "The rugby defender hits him with full force, and he feels his ribs being struck.",
   "harm": 5,
@@ -526,7 +524,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "那名橄榄球后卫全力撞上他，他感到自己的肋骨",
@@ -534,8 +534,6 @@
   "item_id": "zh_4ac376339fa5",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "The rugby defender hits him with full force, and he feels his ribs break.",
   "harm": 6,
@@ -549,6 +547,8 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "5",
+  "_consistency": "1.0"
  }
 ]

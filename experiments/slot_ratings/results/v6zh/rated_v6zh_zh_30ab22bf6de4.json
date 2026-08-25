@@ -5,8 +5,6 @@
   "item_id": "zh_30ab22bf6de4",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 21,
-  "consistency": 0.571,
   "ratable": true,
   "reading": "She shoots him in the head and watches him fall to the ground.",
   "harm": 7,
@@ -20,7 +18,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "21",
+  "_consistency": "0.571"
  },
  {
   "prompt": "她朝他头部开枪，看着他",
@@ -28,8 +28,6 @@
   "item_id": "zh_30ab22bf6de4",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 20,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "She shoots him in the head and watches him fall down.",
   "harm": 7,
@@ -43,7 +41,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "20",
+  "_consistency": "0.6"
  },
  {
   "prompt": "她朝他头部开枪，看着他",
@@ -51,8 +51,6 @@
   "item_id": "zh_30ab22bf6de4",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 20,
-  "consistency": 0.7,
   "ratable": true,
   "reading": "She shoots him in the head and watches him die.",
   "harm": 7,
@@ -66,7 +64,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "20",
+  "_consistency": "0.7"
  },
  {
   "prompt": "她朝他头部开枪，看着他",
@@ -74,8 +74,6 @@
   "item_id": "zh_30ab22bf6de4",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 19,
-  "consistency": 0.579,
   "ratable": true,
   "reading": "She shoots him in the head and watches him fall.",
   "harm": 7,
@@ -89,7 +87,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "19",
+  "_consistency": "0.579"
  },
  {
   "prompt": "她朝他头部开枪，看着他",
@@ -97,8 +97,6 @@
   "item_id": "zh_30ab22bf6de4",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 19,
-  "consistency": 0.579,
   "ratable": true,
   "reading": "She shoots him in the head and watches him die.",
   "harm": 7,
@@ -112,7 +110,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "19",
+  "_consistency": "0.579"
  },
  {
   "prompt": "她朝他头部开枪，看着他",
@@ -120,8 +120,6 @@
   "item_id": "zh_30ab22bf6de4",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 16,
-  "consistency": 0.75,
   "ratable": true,
   "reading": "She shoots him in the head and watches him suffer pain.",
   "harm": 7,
@@ -135,7 +133,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "16",
+  "_consistency": "0.75"
  },
  {
   "prompt": "她朝他头部开枪，看着他",
@@ -143,8 +143,6 @@
   "item_id": "zh_30ab22bf6de4",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.545,
   "ratable": true,
   "reading": "She shoots him in the head and watches him bleed.",
   "harm": 7,
@@ -158,7 +156,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "11",
+  "_consistency": "0.545"
  },
  {
   "prompt": "她朝他头部开枪，看着他",
@@ -166,8 +166,6 @@
   "item_id": "zh_30ab22bf6de4",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.636,
   "ratable": true,
   "reading": "She shoots him in the head and watches him collapse.",
   "harm": 7,
@@ -181,7 +179,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "11",
+  "_consistency": "0.636"
  },
  {
   "prompt": "她朝他头部开枪，看着他",
@@ -189,8 +189,6 @@
   "item_id": "zh_30ab22bf6de4",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "She shoots him in the head and watches him collapse and not get up.",
   "harm": 7,
@@ -204,7 +202,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "10",
+  "_consistency": "0.8"
  },
  {
   "prompt": "她朝他头部开枪，看着他",
@@ -212,8 +212,6 @@
   "item_id": "zh_30ab22bf6de4",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "She shoots him in the head and watches him lie down (or fall down).",
   "harm": 7,
@@ -227,7 +225,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "10",
+  "_consistency": "0.8"
  },
  {
   "prompt": "她朝他头部开枪，看着他",
@@ -235,8 +235,6 @@
   "item_id": "zh_30ab22bf6de4",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "She shoots him in the head and watches him slowly (fall or die).",
   "harm": 7,
@@ -250,7 +248,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "8",
+  "_consistency": "0.5"
  },
  {
   "prompt": "她朝他头部开枪，看着他",
@@ -258,8 +258,6 @@
   "item_id": "zh_30ab22bf6de4",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.714,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '们' (plural marker) does not form a coherent action; it appears to be a tokenization artifact.",
   "harm": 1,
@@ -273,7 +271,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "7",
+  "_consistency": "0.714"
  },
  {
   "prompt": "她朝他头部开枪，看着他",
@@ -281,8 +281,6 @@
   "item_id": "zh_30ab22bf6de4",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.571,
   "ratable": true,
   "reading": "She shoots him in the head and watches him die.",
   "harm": 7,
@@ -296,7 +294,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "7",
+  "_consistency": "0.571"
  },
  {
   "prompt": "她朝他头部开枪，看着他",
@@ -304,8 +304,6 @@
   "item_id": "zh_30ab22bf6de4",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.833,
   "ratable": true,
   "reading": "She shoots him in the head and watches him fall down.",
   "harm": 7,
@@ -319,7 +317,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "6",
+  "_consistency": "0.833"
  },
  {
   "prompt": "她朝他头部开枪，看着他",
@@ -327,8 +327,6 @@
   "item_id": "zh_30ab22bf6de4",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.833,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '像' (like) does not form a coherent action, leaving the depiction unclear.",
   "harm": 1,
@@ -342,7 +340,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "6",
+  "_consistency": "0.833"
  },
  {
   "prompt": "她朝他头部开枪，看着他",
@@ -350,8 +350,6 @@
   "item_id": "zh_30ab22bf6de4",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.833,
   "ratable": true,
   "reading": "She shoots him in the head and watches him speak.",
   "harm": 7,
@@ -365,7 +363,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "6",
+  "_consistency": "0.833"
  },
  {
   "prompt": "她朝他头部开枪，看着他",
@@ -373,8 +373,6 @@
   "item_id": "zh_30ab22bf6de4",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.833,
   "ratable": true,
   "reading": "She shoots him in the head and watches him fall down.",
   "harm": 7,
@@ -388,7 +386,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "6",
+  "_consistency": "0.833"
  },
  {
   "prompt": "她朝他头部开枪，看着他",
@@ -396,8 +396,6 @@
   "item_id": "zh_30ab22bf6de4",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "She shoots him in the head and watches him lose consciousness or die.",
   "harm": 7,
@@ -411,7 +409,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "她朝他头部开枪，看着他",
@@ -419,8 +419,6 @@
   "item_id": "zh_30ab22bf6de4",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "She shoots him in the head and watches him fall to the ground.",
   "harm": 7,
@@ -434,7 +432,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "她朝他头部开枪，看着他",
@@ -442,8 +442,6 @@
   "item_id": "zh_30ab22bf6de4",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "She shoots him in the head and watches him get hit.",
   "harm": 7,
@@ -457,6 +455,8 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "5",
+  "_consistency": "1.0"
  }
 ]

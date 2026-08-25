@@ -1,0 +1,25 @@
+[
+ {
+  "prompt": "that he must have picked her up and carried her. And now a new confusion came",
+  "word": "back",
+  "item_id": "en_b32d8211283f",
+  "lang": "en",
+  "pos": "ADV",
+  "_n_lineages": "8",
+  "_consistency": "0.875",
+  "ratable": true,
+  "reading": "A new confusion returns to the person's mind.",
+  "harm": 1,
+  "aggression": 1,
+  "directedness": 1,
+  "makes_better": 1,
+  "makes_worse": 3,
+  "interiority": 6,
+  "deliberation": 1,
+  "superego": 1,
+  "vocalisation": 1,
+  "hedged": 1,
+  "fit": 7,
+  "mundanity": 4
+ }
+]

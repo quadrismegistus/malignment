@@ -5,8 +5,6 @@
   "item_id": "zh_5fcf4f7d7475",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.571,
   "ratable": false,
   "reading": "The completed sentence is incoherent because '倒' (to fall/topple) cannot serve as the object of '穿过' (to pass through), so the action is not clearly depicted.",
   "harm": 1,
@@ -20,7 +18,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "7",
+  "_consistency": "0.571"
  },
  {
   "prompt": "楼房在她周围坍塌，她爬着穿过",
@@ -28,8 +28,6 @@
   "item_id": "zh_5fcf4f7d7475",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.833,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '去' does not form a coherent completion; it seems to be a particle or part of a verb phrase that is missing its main verb or object.",
   "harm": 1,
@@ -43,6 +41,8 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "6",
+  "_consistency": "0.833"
  }
 ]

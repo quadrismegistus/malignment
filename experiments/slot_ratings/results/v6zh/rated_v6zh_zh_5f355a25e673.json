@@ -5,8 +5,6 @@
   "item_id": "zh_5f355a25e673",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 18,
-  "consistency": 0.722,
   "ratable": true,
   "reading": "He raised his fist to strike dead, implying a lethal blow.",
   "harm": 7,
@@ -20,7 +18,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "18",
+  "_consistency": "0.722"
  },
  {
   "prompt": "他举起拳头要打",
@@ -28,8 +28,6 @@
   "item_id": "zh_5f355a25e673",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.818,
   "ratable": false,
   "reading": "He raised his fist to fight, but the fragment is incomplete and '架' alone does not form a coherent action.",
   "harm": 1,
@@ -43,7 +41,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "11",
+  "_consistency": "0.818"
  },
  {
   "prompt": "他举起拳头要打",
@@ -51,8 +51,6 @@
   "item_id": "zh_5f355a25e673",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.8,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '到' does not form a coherent action with the fragment.",
   "harm": 1,
@@ -66,7 +64,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "10",
+  "_consistency": "0.8"
  },
  {
   "prompt": "他举起拳头要打",
@@ -74,8 +74,6 @@
   "item_id": "zh_5f355a25e673",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.5,
   "ratable": false,
   "reading": "He raised his fist to strike downward, but the sentence is incomplete and the target is unspecified.",
   "harm": 1,
@@ -89,7 +87,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "8",
+  "_consistency": "0.5"
  },
  {
   "prompt": "他举起拳头要打",
@@ -97,8 +97,6 @@
   "item_id": "zh_5f355a25e673",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.5,
   "ratable": false,
   "reading": "The sentence is incoherent; '过来' (come here) does not fit as the object of '打' (hit).",
   "harm": 1,
@@ -112,6 +110,8 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "6",
+  "_consistency": "0.5"
  }
 ]

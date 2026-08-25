@@ -5,8 +5,6 @@
   "item_id": "zh_7483558c6487",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "The rope breaks and he falls straight down toward death.",
   "harm": 7,
@@ -20,7 +18,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "6",
+  "_consistency": "0.5"
  },
  {
   "prompt": "绳子断了，他直直地坠向",
@@ -28,8 +28,6 @@
   "item_id": "zh_7483558c6487",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": false,
   "reading": "The rope broke and he fell straight down, with '下去' indicating the downward direction of the fall.",
   "harm": 1,
@@ -43,6 +41,8 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  }
 ]

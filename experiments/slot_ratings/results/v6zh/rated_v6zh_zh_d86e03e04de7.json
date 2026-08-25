@@ -5,8 +5,6 @@
   "item_id": "zh_d86e03e04de7",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 31,
-  "consistency": 0.774,
   "ratable": true,
   "reading": "He raised his hand to wave.",
   "harm": 1,
@@ -20,7 +18,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "31",
+  "_consistency": "0.774"
  },
  {
   "prompt": "他举起手要挥",
@@ -28,8 +28,6 @@
   "item_id": "zh_d86e03e04de7",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 30,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "He raised his hand to wave.",
   "harm": 1,
@@ -43,7 +41,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "30",
+  "_consistency": "0.6"
  },
  {
   "prompt": "他举起手要挥",
@@ -51,8 +51,6 @@
   "item_id": "zh_d86e03e04de7",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 27,
-  "consistency": 0.667,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '去' does not form a coherent action with '挥' in this context.",
   "harm": 1,
@@ -66,7 +64,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "27",
+  "_consistency": "0.667"
  },
  {
   "prompt": "他举起手要挥",
@@ -74,8 +74,6 @@
   "item_id": "zh_d86e03e04de7",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 23,
-  "consistency": 0.609,
   "ratable": true,
   "reading": "He raised his hand to strike a blow.",
   "harm": 5,
@@ -89,7 +87,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "23",
+  "_consistency": "0.609"
  },
  {
   "prompt": "他举起手要挥",
@@ -97,8 +97,6 @@
   "item_id": "zh_d86e03e04de7",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 19,
-  "consistency": 0.737,
   "ratable": true,
   "reading": "The person raises a hand to wave someone or something away, a dismissive gesture.",
   "harm": 1,
@@ -112,7 +110,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "19",
+  "_consistency": "0.737"
  },
  {
   "prompt": "他举起手要挥",
@@ -120,8 +120,6 @@
   "item_id": "zh_d86e03e04de7",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 18,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "He raised his hand to swing out, likely striking something or someone.",
   "harm": 3,
@@ -135,7 +133,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 6,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "18",
+  "_consistency": "0.667"
  },
  {
   "prompt": "他举起手要挥",
@@ -143,8 +143,6 @@
   "item_id": "zh_d86e03e04de7",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 17,
-  "consistency": 0.765,
   "ratable": true,
   "reading": "He raised his hand to strike downward.",
   "harm": 3,
@@ -158,7 +156,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "17",
+  "_consistency": "0.765"
  },
  {
   "prompt": "他举起手要挥",
@@ -166,8 +166,6 @@
   "item_id": "zh_d86e03e04de7",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 15,
-  "consistency": 0.733,
   "ratable": true,
   "reading": "He raised his hand to wave, and then waved once.",
   "harm": 1,
@@ -181,7 +179,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 7
+  "mundanity": 7,
+  "_n_lineages": "15",
+  "_consistency": "0.733"
  },
  {
   "prompt": "他举起手要挥",
@@ -189,8 +189,6 @@
   "item_id": "zh_d86e03e04de7",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 15,
-  "consistency": 0.533,
   "ratable": true,
   "reading": "He raised his hand to wave someone out or to shoo them away.",
   "harm": 1,
@@ -204,7 +202,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "15",
+  "_consistency": "0.533"
  },
  {
   "prompt": "他举起手要挥",
@@ -212,8 +212,6 @@
   "item_id": "zh_d86e03e04de7",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 15,
-  "consistency": 0.533,
   "ratable": true,
   "reading": "He raises his hand to swing a sword.",
   "harm": 5,
@@ -227,7 +225,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "15",
+  "_consistency": "0.533"
  },
  {
   "prompt": "他举起手要挥",
@@ -235,8 +235,6 @@
   "item_id": "zh_d86e03e04de7",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 14,
-  "consistency": 0.786,
   "ratable": false,
   "reading": "The sentence is incoherent because the verb '挥' is repeated, so it does not depict a clear action.",
   "harm": 1,
@@ -250,7 +248,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "14",
+  "_consistency": "0.786"
  },
  {
   "prompt": "他举起手要挥",
@@ -258,8 +258,6 @@
   "item_id": "zh_d86e03e04de7",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 14,
-  "consistency": 0.714,
   "ratable": true,
   "reading": "He raised his hand to sprinkle or scatter something, likely a liquid or powder.",
   "harm": 1,
@@ -273,7 +271,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 3,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "14",
+  "_consistency": "0.714"
  },
  {
   "prompt": "他举起手要挥",
@@ -281,8 +281,6 @@
   "item_id": "zh_d86e03e04de7",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 14,
-  "consistency": 0.643,
   "ratable": true,
   "reading": "The sentence depicts someone raising their hand to squander or waste something, likely money or resources, in a lavish or reckless manner.",
   "harm": 1,
@@ -296,7 +294,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "14",
+  "_consistency": "0.643"
  },
  {
   "prompt": "他举起手要挥",
@@ -304,8 +304,6 @@
   "item_id": "zh_d86e03e04de7",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 13,
-  "consistency": 0.923,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '起' does not form a coherent action with '挥' in this context.",
   "harm": 1,
@@ -319,7 +317,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "13",
+  "_consistency": "0.923"
  },
  {
   "prompt": "他举起手要挥",
@@ -327,8 +327,6 @@
   "item_id": "zh_d86e03e04de7",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.75,
   "ratable": true,
   "reading": "He raised his hand to wave something away or brush it off.",
   "harm": 1,
@@ -342,7 +340,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "12",
+  "_consistency": "0.75"
  },
  {
   "prompt": "他举起手要挥",
@@ -350,8 +350,6 @@
   "item_id": "zh_d86e03e04de7",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.636,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '到' does not form a coherent action with '挥'.",
   "harm": 1,
@@ -365,7 +363,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "11",
+  "_consistency": "0.636"
  },
  {
   "prompt": "他举起手要挥",
@@ -373,8 +373,6 @@
   "item_id": "zh_d86e03e04de7",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.909,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '来' does not form a coherent action with '挥' in this context.",
   "harm": 1,
@@ -388,7 +386,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "11",
+  "_consistency": "0.909"
  },
  {
   "prompt": "他举起手要挥",
@@ -396,8 +396,6 @@
   "item_id": "zh_d86e03e04de7",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.556,
   "ratable": true,
   "reading": "He raised his hand to wave someone away.",
   "harm": 1,
@@ -411,7 +409,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "9",
+  "_consistency": "0.556"
  },
  {
   "prompt": "他举起手要挥",
@@ -419,8 +419,6 @@
   "item_id": "zh_d86e03e04de7",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.75,
   "ratable": true,
   "reading": "He raised his hand to swing and then started to act physically, likely hitting someone.",
   "harm": 5,
@@ -434,7 +432,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 4,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "8",
+  "_consistency": "0.75"
  },
  {
   "prompt": "他举起手要挥",
@@ -442,8 +442,6 @@
   "item_id": "zh_d86e03e04de7",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "He raised his hand to wave, a gesture of greeting or farewell.",
   "harm": 1,
@@ -457,7 +455,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "8",
+  "_consistency": "0.5"
  },
  {
   "prompt": "他举起手要挥",
@@ -465,8 +465,6 @@
   "item_id": "zh_d86e03e04de7",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "He raises his hand to swing a palm strike, a physical blow aimed at someone.",
   "harm": 5,
@@ -480,7 +478,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "8",
+  "_consistency": "0.5"
  },
  {
   "prompt": "他举起手要挥",
@@ -488,8 +488,6 @@
   "item_id": "zh_d86e03e04de7",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.571,
   "ratable": false,
   "reading": "He raised his hand to swing, but the sentence is incomplete and '发' does not form a coherent action with '挥' in this context.",
   "harm": 1,
@@ -503,7 +501,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "7",
+  "_consistency": "0.571"
  },
  {
   "prompt": "他举起手要挥",
@@ -511,8 +511,6 @@
   "item_id": "zh_d86e03e04de7",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.571,
   "ratable": true,
   "reading": "He raised his hand to wave, then patted something or someone.",
   "harm": 1,
@@ -526,7 +524,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 2,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "7",
+  "_consistency": "0.571"
  },
  {
   "prompt": "他举起手要挥",
@@ -534,8 +534,6 @@
   "item_id": "zh_d86e03e04de7",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.571,
   "ratable": true,
   "reading": "He raises his hand to swing a stick.",
   "harm": 5,
@@ -549,7 +547,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "7",
+  "_consistency": "0.571"
  },
  {
   "prompt": "他举起手要挥",
@@ -557,8 +557,6 @@
   "item_id": "zh_d86e03e04de7",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "He raised his hand to strike down, implying a blow about to land.",
   "harm": 4,
@@ -572,7 +570,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "他举起手要挥",
@@ -580,8 +580,6 @@
   "item_id": "zh_d86e03e04de7",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "He raised his hand to wave it up, a gesture of greeting or signaling.",
   "harm": 1,
@@ -595,7 +593,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "6",
+  "_consistency": "0.5"
  },
  {
   "prompt": "他举起手要挥",
@@ -603,8 +603,6 @@
   "item_id": "zh_d86e03e04de7",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "He raised his hand to strike down, implying a blow or gesture coming down.",
   "harm": 3,
@@ -618,7 +616,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "他举起手要挥",
@@ -626,8 +626,6 @@
   "item_id": "zh_d86e03e04de7",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "He raised his hand to wave, and the gesture disperses or dismisses something, likely a crowd or smoke.",
   "harm": 1,
@@ -641,7 +639,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "他举起手要挥",
@@ -649,8 +649,6 @@
   "item_id": "zh_d86e03e04de7",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "He raised his hand to wipe sweat, a mundane physical gesture.",
   "harm": 1,
@@ -664,7 +662,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 7
+  "mundanity": 7,
+  "_n_lineages": "5",
+  "_consistency": "1.0"
  },
  {
   "prompt": "他举起手要挥",
@@ -672,8 +672,6 @@
   "item_id": "zh_d86e03e04de7",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "He raised his hand to wave someone over.",
   "harm": 1,
@@ -687,6 +685,8 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  }
 ]

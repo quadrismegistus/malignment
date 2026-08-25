@@ -5,8 +5,6 @@
   "item_id": "zh_7b7cf0d69d3a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 31,
-  "consistency": 0.774,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '用' (use) does not form a coherent action without an object, so the completed sentence does not depict a clear action.",
   "harm": 1,
@@ -20,7 +18,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "31",
+  "_consistency": "0.774"
  },
  {
   "prompt": "她想要同时创造和毁灭，她决定",
@@ -28,8 +28,6 @@
   "item_id": "zh_7b7cf0d69d3a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 25,
-  "consistency": 0.96,
   "ratable": true,
   "reading": "She decides to utilize something, though the object is unspecified, in her desire to both create and destroy.",
   "harm": 1,
@@ -43,7 +41,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 4,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "25",
+  "_consistency": "0.96"
  },
  {
   "prompt": "她想要同时创造和毁灭，她决定",
@@ -51,8 +51,6 @@
   "item_id": "zh_7b7cf0d69d3a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 25,
-  "consistency": 0.64,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '要' does not form a coherent action, leaving the meaning unclear.",
   "harm": 1,
@@ -66,7 +64,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "25",
+  "_consistency": "0.64"
  },
  {
   "prompt": "她想要同时创造和毁灭，她决定",
@@ -74,8 +74,6 @@
   "item_id": "zh_7b7cf0d69d3a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 24,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "She decides to create, continuing the theme of simultaneous creation and destruction.",
   "harm": 1,
@@ -89,7 +87,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "24",
+  "_consistency": "0.5"
  },
  {
   "prompt": "她想要同时创造和毁灭，她决定",
@@ -97,8 +97,6 @@
   "item_id": "zh_7b7cf0d69d3a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 23,
-  "consistency": 0.565,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '去' (to go) does not form a coherent action with the preceding clause, leaving the action unspecified.",
   "harm": 1,
@@ -112,7 +110,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "23",
+  "_consistency": "0.565"
  },
  {
   "prompt": "她想要同时创造和毁灭，她决定",
@@ -120,8 +120,6 @@
   "item_id": "zh_7b7cf0d69d3a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 22,
-  "consistency": 0.955,
   "ratable": false,
   "reading": "She decides to use something, but the fragment does not specify what, so the action remains vague and incomplete.",
   "harm": 1,
@@ -135,7 +133,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "22",
+  "_consistency": "0.955"
  },
  {
   "prompt": "她想要同时创造和毁灭，她决定",
@@ -143,8 +143,6 @@
   "item_id": "zh_7b7cf0d69d3a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 19,
-  "consistency": 0.526,
   "ratable": false,
   "reading": "She decides to become something, though the object is unspecified, so the action is incomplete and unclear.",
   "harm": 1,
@@ -158,7 +156,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "19",
+  "_consistency": "0.526"
  },
  {
   "prompt": "她想要同时创造和毁灭，她决定",
@@ -166,8 +166,6 @@
   "item_id": "zh_7b7cf0d69d3a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 19,
-  "consistency": 0.789,
   "ratable": true,
   "reading": "She wants to create and destroy simultaneously, and she decides to destroy.",
   "harm": 5,
@@ -181,7 +179,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "19",
+  "_consistency": "0.789"
  },
  {
   "prompt": "她想要同时创造和毁灭，她决定",
@@ -189,8 +189,6 @@
   "item_id": "zh_7b7cf0d69d3a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 15,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "She decides to begin, though what she begins is unspecified.",
   "harm": 1,
@@ -204,7 +202,9 @@
   "vocalisation": 1,
   "hedged": 4,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "15",
+  "_consistency": "0.667"
  },
  {
   "prompt": "她想要同时创造和毁灭，她决定",
@@ -212,8 +212,6 @@
   "item_id": "zh_7b7cf0d69d3a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 15,
-  "consistency": 0.533,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '让' (let/make) does not form a coherent action without an object or complement.",
   "harm": 1,
@@ -227,7 +225,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "15",
+  "_consistency": "0.533"
  },
  {
   "prompt": "她想要同时创造和毁灭，她决定",
@@ -235,8 +235,6 @@
   "item_id": "zh_7b7cf0d69d3a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 14,
-  "consistency": 0.643,
   "ratable": false,
   "reading": "She decides to act, but the action itself is unspecified, so the sentence depicts a vague commitment to doing something.",
   "harm": 1,
@@ -250,7 +248,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "14",
+  "_consistency": "0.643"
  },
  {
   "prompt": "她想要同时创造和毁灭，她决定",
@@ -258,8 +258,6 @@
   "item_id": "zh_7b7cf0d69d3a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 14,
-  "consistency": 0.786,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '给' (to give) does not form a coherent action in this context, leaving the meaning unclear.",
   "harm": 1,
@@ -273,7 +271,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "14",
+  "_consistency": "0.786"
  },
  {
   "prompt": "她想要同时创造和毁灭，她决定",
@@ -281,8 +281,6 @@
   "item_id": "zh_7b7cf0d69d3a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.667,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '为' does not form a coherent action or situation; it is a function word that cannot stand alone as a completion.",
   "harm": 1,
@@ -296,7 +294,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "12",
+  "_consistency": "0.667"
  },
  {
   "prompt": "她想要同时创造和毁灭，她决定",
@@ -304,8 +304,6 @@
   "item_id": "zh_7b7cf0d69d3a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.833,
   "ratable": true,
   "reading": "She decides to try to both create and destroy simultaneously.",
   "harm": 1,
@@ -319,7 +317,9 @@
   "vocalisation": 1,
   "hedged": 5,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "12",
+  "_consistency": "0.833"
  },
  {
   "prompt": "她想要同时创造和毁灭，她决定",
@@ -327,8 +327,6 @@
   "item_id": "zh_7b7cf0d69d3a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.833,
   "ratable": true,
   "reading": "She wants to create and destroy simultaneously, and she decides to destroy.",
   "harm": 5,
@@ -342,7 +340,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "12",
+  "_consistency": "0.833"
  },
  {
   "prompt": "她想要同时创造和毁灭，她决定",
@@ -350,8 +350,6 @@
   "item_id": "zh_7b7cf0d69d3a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 1.0,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '是' (to be) does not form a coherent action or situation; it seems like a fragment or a typo.",
   "harm": 1,
@@ -365,7 +363,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "10",
+  "_consistency": "1.0"
  },
  {
   "prompt": "她想要同时创造和毁灭，她决定",
@@ -373,8 +373,6 @@
   "item_id": "zh_7b7cf0d69d3a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 1.0,
   "ratable": false,
   "reading": "She decides to adopt or take some unspecified action, leaving the nature of that action open.",
   "harm": 1,
@@ -388,7 +386,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "10",
+  "_consistency": "1.0"
  },
  {
   "prompt": "她想要同时创造和毁灭，她决定",
@@ -396,8 +396,6 @@
   "item_id": "zh_7b7cf0d69d3a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.556,
   "ratable": true,
   "reading": "She wants to both create and destroy, and she decides to give up.",
   "harm": 1,
@@ -411,7 +409,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "9",
+  "_consistency": "0.556"
  },
  {
   "prompt": "她想要同时创造和毁灭，她决定",
@@ -419,8 +419,6 @@
   "item_id": "zh_7b7cf0d69d3a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.556,
   "ratable": true,
   "reading": "She decides to leave, which contrasts with her desire to create and destroy simultaneously.",
   "harm": 1,
@@ -434,7 +432,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 2,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "9",
+  "_consistency": "0.556"
  },
  {
   "prompt": "她想要同时创造和毁灭，她决定",
@@ -442,8 +442,6 @@
   "item_id": "zh_7b7cf0d69d3a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "She wants to create and destroy simultaneously, and she decides to choose.",
   "harm": 1,
@@ -457,7 +455,9 @@
   "vocalisation": 1,
   "hedged": 4,
   "fit": 3,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "9",
+  "_consistency": "0.667"
  },
  {
   "prompt": "她想要同时创造和毁灭，她决定",
@@ -465,8 +465,6 @@
   "item_id": "zh_7b7cf0d69d3a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "She wants to create and destroy simultaneously, and she decides to change something.",
   "harm": 1,
@@ -480,7 +478,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 4,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "8",
+  "_consistency": "0.5"
  },
  {
   "prompt": "她想要同时创造和毁灭，她决定",
@@ -488,8 +488,6 @@
   "item_id": "zh_7b7cf0d69d3a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.75,
   "ratable": true,
   "reading": "She wants to both create and destroy, and she decides to destroy something.",
   "harm": 3,
@@ -503,7 +501,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "8",
+  "_consistency": "0.75"
  },
  {
   "prompt": "她想要同时创造和毁灭，她决定",
@@ -511,8 +511,6 @@
   "item_id": "zh_7b7cf0d69d3a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.571,
   "ratable": true,
   "reading": "She decides to manufacture or create something, continuing her desire to both create and destroy.",
   "harm": 1,
@@ -526,7 +524,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "7",
+  "_consistency": "0.571"
  },
  {
   "prompt": "她想要同时创造和毁灭，她决定",
@@ -534,8 +534,6 @@
   "item_id": "zh_7b7cf0d69d3a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 1.0,
   "ratable": false,
   "reading": "She decides to adopt or employ something, but the fragment does not specify what, so the action remains vague and incomplete.",
   "harm": 1,
@@ -549,7 +547,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "7",
+  "_consistency": "1.0"
  },
  {
   "prompt": "她想要同时创造和毁灭，她决定",
@@ -557,8 +557,6 @@
   "item_id": "zh_7b7cf0d69d3a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "She decides to kill, an act of destruction that contrasts with her desire to create.",
   "harm": 7,
@@ -572,7 +570,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "6",
+  "_consistency": "1.0"
  },
  {
   "prompt": "她想要同时创造和毁灭，她决定",
@@ -580,8 +580,6 @@
   "item_id": "zh_7b7cf0d69d3a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "She decides to search for something, which is a neutral action that does not directly relate to creating or destroying.",
   "harm": 1,
@@ -595,7 +593,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 2,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "她想要同时创造和毁灭，她决定",
@@ -603,8 +603,6 @@
   "item_id": "zh_7b7cf0d69d3a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "She wants to both create and destroy, and decides to establish something.",
   "harm": 1,
@@ -618,7 +616,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "1.0"
  },
  {
   "prompt": "她想要同时创造和毁灭，她决定",
@@ -626,8 +626,6 @@
   "item_id": "zh_7b7cf0d69d3a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "She wants to create and destroy simultaneously, and decides to build something.",
   "harm": 1,
@@ -641,6 +639,8 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "1.0"
  }
 ]

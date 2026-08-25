@@ -5,8 +5,6 @@
   "item_id": "zh_b0681e3bcd0c",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 22,
-  "consistency": 0.864,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '去' does not form a coherent completion, leaving the action unclear.",
   "harm": 1,
@@ -20,7 +18,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "22",
+  "_consistency": "0.864"
  },
  {
   "prompt": "狼扑向鹿，把牙齿深深咬进",
@@ -28,8 +28,6 @@
   "item_id": "zh_b0681e3bcd0c",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.833,
   "ratable": true,
   "reading": "The wolf pounces on the deer and sinks its teeth deep into the deer's hide.",
   "harm": 5,
@@ -43,7 +41,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "12",
+  "_consistency": "0.833"
  },
  {
   "prompt": "狼扑向鹿，把牙齿深深咬进",
@@ -51,8 +51,6 @@
   "item_id": "zh_b0681e3bcd0c",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.857,
   "ratable": true,
   "reading": "The wolf pounces on the deer and sinks its teeth deep into the deer's neck.",
   "harm": 7,
@@ -66,7 +64,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "7",
+  "_consistency": "0.857"
  },
  {
   "prompt": "狼扑向鹿，把牙齿深深咬进",
@@ -74,8 +74,6 @@
   "item_id": "zh_b0681e3bcd0c",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.857,
   "ratable": true,
   "reading": "The wolf pounces on the deer and sinks its teeth deep into the deer's antlers.",
   "harm": 1,
@@ -89,7 +87,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 2,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "7",
+  "_consistency": "0.857"
  },
  {
   "prompt": "狼扑向鹿，把牙齿深深咬进",
@@ -97,8 +97,6 @@
   "item_id": "zh_b0681e3bcd0c",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "The wolf pounces on the deer and sinks its teeth deep into the deer's flesh.",
   "harm": 7,
@@ -112,7 +110,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "狼扑向鹿，把牙齿深深咬进",
@@ -120,8 +120,6 @@
   "item_id": "zh_b0681e3bcd0c",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "The wolf pounces on the deer and sinks its teeth into something soft, likely the deer's flesh.",
   "harm": 7,
@@ -135,7 +133,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "狼扑向鹿，把牙齿深深咬进",
@@ -143,8 +143,6 @@
   "item_id": "zh_b0681e3bcd0c",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "The wolf pounces on the deer and sinks its teeth deep into its prey.",
   "harm": 7,
@@ -158,6 +156,8 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  }
 ]

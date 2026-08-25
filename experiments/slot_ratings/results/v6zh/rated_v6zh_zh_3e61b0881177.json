@@ -5,8 +5,6 @@
   "item_id": "zh_3e61b0881177",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 18,
-  "consistency": 0.556,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '为' does not form a coherent action or situation.",
   "harm": 1,
@@ -20,7 +18,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "18",
+  "_consistency": "0.556"
  },
  {
   "prompt": "她对他既忠诚又专一，她开始",
@@ -28,8 +28,6 @@
   "item_id": "zh_3e61b0881177",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 18,
-  "consistency": 0.889,
   "ratable": true,
   "reading": "She begins to doubt her loyalty and devotion to him.",
   "harm": 1,
@@ -43,7 +41,9 @@
   "vocalisation": 1,
   "hedged": 4,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "18",
+  "_consistency": "0.889"
  },
  {
   "prompt": "她对他既忠诚又专一，她开始",
@@ -51,8 +51,6 @@
   "item_id": "zh_3e61b0881177",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 14,
-  "consistency": 0.714,
   "ratable": true,
   "reading": "She begins to believe in him, trusting his faithfulness and exclusivity.",
   "harm": 1,
@@ -66,7 +64,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "14",
+  "_consistency": "0.714"
  },
  {
   "prompt": "她对他既忠诚又专一，她开始",
@@ -74,8 +74,6 @@
   "item_id": "zh_3e61b0881177",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 13,
-  "consistency": 0.923,
   "ratable": true,
   "reading": "She begins to like him, which is consistent with her loyalty and devotion.",
   "harm": 1,
@@ -89,7 +87,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "13",
+  "_consistency": "0.923"
  },
  {
   "prompt": "她对他既忠诚又专一，她开始",
@@ -97,8 +97,6 @@
   "item_id": "zh_3e61b0881177",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 13,
-  "consistency": 0.923,
   "ratable": true,
   "reading": "She begins to think about something, likely reflecting on her loyalty and devotion to him.",
   "harm": 1,
@@ -112,7 +110,9 @@
   "vocalisation": 1,
   "hedged": 5,
   "fit": 6,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "13",
+  "_consistency": "0.923"
  },
  {
   "prompt": "她对他既忠诚又专一，她开始",
@@ -120,8 +120,6 @@
   "item_id": "zh_3e61b0881177",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "She begins to think about something, likely reflecting on her loyalty and devotion to him.",
   "harm": 1,
@@ -135,7 +133,9 @@
   "vocalisation": 1,
   "hedged": 5,
   "fit": 7,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "12",
+  "_consistency": "0.667"
  },
  {
   "prompt": "她对他既忠诚又专一，她开始",
@@ -143,8 +143,6 @@
   "item_id": "zh_3e61b0881177",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "She begins to feel something about him, though the feeling is not specified.",
   "harm": 1,
@@ -158,7 +156,9 @@
   "vocalisation": 1,
   "hedged": 5,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "12",
+  "_consistency": "0.5"
  },
  {
   "prompt": "她对他既忠诚又专一，她开始",
@@ -166,8 +166,6 @@
   "item_id": "zh_3e61b0881177",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.909,
   "ratable": true,
   "reading": "She begins to feel something toward him, though the feeling is not specified.",
   "harm": 1,
@@ -181,7 +179,9 @@
   "vocalisation": 1,
   "hedged": 5,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "11",
+  "_consistency": "0.909"
  },
  {
   "prompt": "她对他既忠诚又专一，她开始",
@@ -189,8 +189,6 @@
   "item_id": "zh_3e61b0881177",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.818,
   "ratable": true,
   "reading": "She begins to worry about him, despite her loyalty and devotion.",
   "harm": 1,
@@ -204,7 +202,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 6,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "11",
+  "_consistency": "0.818"
  },
  {
   "prompt": "她对他既忠诚又专一，她开始",
@@ -212,8 +212,6 @@
   "item_id": "zh_3e61b0881177",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.545,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '用' (use) does not form a coherent action in this context.",
   "harm": 1,
@@ -227,7 +225,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "11",
+  "_consistency": "0.545"
  },
  {
   "prompt": "她对他既忠诚又专一，她开始",
@@ -235,8 +235,6 @@
   "item_id": "zh_3e61b0881177",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "She begins to love him, continuing her loyalty and devotion.",
   "harm": 1,
@@ -250,7 +248,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "10",
+  "_consistency": "1.0"
  },
  {
   "prompt": "她对他既忠诚又专一，她开始",
@@ -258,8 +258,6 @@
   "item_id": "zh_3e61b0881177",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.9,
   "ratable": true,
   "reading": "She begins to fall in love with him, deepening her loyalty and devotion.",
   "harm": 1,
@@ -273,7 +271,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "10",
+  "_consistency": "0.9"
  },
  {
   "prompt": "她对他既忠诚又专一，她开始",
@@ -281,8 +281,6 @@
   "item_id": "zh_3e61b0881177",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "She begins to consider something, likely a decision or action regarding her loyalty to him.",
   "harm": 1,
@@ -296,7 +294,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 6,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "10",
+  "_consistency": "0.8"
  },
  {
   "prompt": "她对他既忠诚又专一，她开始",
@@ -304,8 +304,6 @@
   "item_id": "zh_3e61b0881177",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.556,
   "ratable": true,
   "reading": "She begins to become something, likely more loyal or devoted, in a way that is a gradual change rather than a specific action.",
   "harm": 1,
@@ -319,7 +317,9 @@
   "vocalisation": 1,
   "hedged": 5,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "9",
+  "_consistency": "0.556"
  },
  {
   "prompt": "她对他既忠诚又专一，她开始",
@@ -327,8 +327,6 @@
   "item_id": "zh_3e61b0881177",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.889,
   "ratable": true,
   "reading": "She begins to realize something about her loyalty and devotion to him.",
   "harm": 1,
@@ -342,7 +340,9 @@
   "vocalisation": 1,
   "hedged": 4,
   "fit": 6,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "9",
+  "_consistency": "0.889"
  },
  {
   "prompt": "她对他既忠诚又专一，她开始",
@@ -350,8 +350,6 @@
   "item_id": "zh_3e61b0881177",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.625,
   "ratable": true,
   "reading": "She begins to understand something about her loyalty and devotion to him.",
   "harm": 1,
@@ -365,7 +363,9 @@
   "vocalisation": 1,
   "hedged": 3,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "8",
+  "_consistency": "0.625"
  },
  {
   "prompt": "她对他既忠诚又专一，她开始",
@@ -373,8 +373,6 @@
   "item_id": "zh_3e61b0881177",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "She begins to question him, despite her loyalty and devotion.",
   "harm": 1,
@@ -388,7 +386,9 @@
   "vocalisation": 3,
   "hedged": 4,
   "fit": 6,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "8",
+  "_consistency": "1.0"
  },
  {
   "prompt": "她对他既忠诚又专一，她开始",
@@ -396,8 +396,6 @@
   "item_id": "zh_3e61b0881177",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "She begins to reflect on her loyalty and devotion to him.",
   "harm": 1,
@@ -411,7 +409,9 @@
   "vocalisation": 1,
   "hedged": 5,
   "fit": 6,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "7",
+  "_consistency": "1.0"
  },
  {
   "prompt": "她对他既忠诚又专一，她开始",
@@ -419,8 +419,6 @@
   "item_id": "zh_3e61b0881177",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.714,
   "ratable": true,
   "reading": "She begins to study or learn something, which is unrelated to her loyalty and devotion to him.",
   "harm": 1,
@@ -434,7 +432,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 2,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "7",
+  "_consistency": "0.714"
  },
  {
   "prompt": "她对他既忠诚又专一，她开始",
@@ -442,8 +442,6 @@
   "item_id": "zh_3e61b0881177",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.857,
   "ratable": true,
   "reading": "She begins to accept him or the situation, showing loyalty and devotion.",
   "harm": 1,
@@ -457,7 +455,9 @@
   "vocalisation": 1,
   "hedged": 3,
   "fit": 6,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "7",
+  "_consistency": "0.857"
  },
  {
   "prompt": "她对他既忠诚又专一，她开始",
@@ -465,8 +465,6 @@
   "item_id": "zh_3e61b0881177",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 1.0,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '有' does not form a coherent action or situation.",
   "harm": 1,
@@ -480,7 +478,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "7",
+  "_consistency": "1.0"
  },
  {
   "prompt": "她对他既忠诚又专一，她开始",
@@ -488,8 +488,6 @@
   "item_id": "zh_3e61b0881177",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.857,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '给' (to give) does not form a coherent action without an object, so the completion is not ratable.",
   "harm": 1,
@@ -503,7 +501,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "7",
+  "_consistency": "0.857"
  },
  {
   "prompt": "她对他既忠诚又专一，她开始",
@@ -511,8 +511,6 @@
   "item_id": "zh_3e61b0881177",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.857,
   "ratable": true,
   "reading": "She begins to think or believe something about him, though the thought is not specified.",
   "harm": 1,
@@ -526,7 +524,9 @@
   "vocalisation": 1,
   "hedged": 5,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "7",
+  "_consistency": "0.857"
  },
  {
   "prompt": "她对他既忠诚又专一，她开始",
@@ -534,8 +534,6 @@
   "item_id": "zh_3e61b0881177",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "She begins to understand or get to know him, which is a mental process of gaining insight.",
   "harm": 1,
@@ -549,7 +547,9 @@
   "vocalisation": 1,
   "hedged": 3,
   "fit": 6,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "她对他既忠诚又专一，她开始",
@@ -557,8 +557,6 @@
   "item_id": "zh_3e61b0881177",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "She begins to look forward to something regarding him, given her loyalty and devotion.",
   "harm": 1,
@@ -572,7 +570,9 @@
   "vocalisation": 1,
   "hedged": 3,
   "fit": 6,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "她对他既忠诚又专一，她开始",
@@ -580,8 +580,6 @@
   "item_id": "zh_3e61b0881177",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.833,
   "ratable": true,
   "reading": "She begins to dislike him, which contrasts with her previous loyalty and devotion.",
   "harm": 1,
@@ -595,7 +593,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "6",
+  "_consistency": "0.833"
  },
  {
   "prompt": "她对他既忠诚又专一，她开始",
@@ -603,8 +603,6 @@
   "item_id": "zh_3e61b0881177",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "She begins to think or believe something about him, though the thought is not specified.",
   "harm": 1,
@@ -618,7 +616,9 @@
   "vocalisation": 1,
   "hedged": 5,
   "fit": 4,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "她对他既忠诚又专一，她开始",
@@ -626,8 +626,6 @@
   "item_id": "zh_3e61b0881177",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '像' (like) does not form a coherent action or situation, leaving the meaning unclear.",
   "harm": 1,
@@ -641,7 +639,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "她对他既忠诚又专一，她开始",
@@ -649,8 +649,6 @@
   "item_id": "zh_3e61b0881177",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "She begins to regret her loyalty and devotion to him.",
   "harm": 1,
@@ -664,7 +662,9 @@
   "vocalisation": 1,
   "hedged": 3,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "她对他既忠诚又专一，她开始",
@@ -672,8 +672,6 @@
   "item_id": "zh_3e61b0881177",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "She begins to search for something, likely a person or an opportunity, while remaining loyal and devoted to him.",
   "harm": 1,
@@ -687,7 +685,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "5",
+  "_consistency": "1.0"
  },
  {
   "prompt": "她对他既忠诚又专一，她开始",
@@ -695,8 +695,6 @@
   "item_id": "zh_3e61b0881177",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "She begins to try something, likely in the context of her loyalty and devotion to him.",
   "harm": 1,
@@ -710,7 +708,9 @@
   "vocalisation": 1,
   "hedged": 5,
   "fit": 4,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "她对他既忠诚又专一，她开始",
@@ -718,8 +718,6 @@
   "item_id": "zh_3e61b0881177",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "She begins to worry about him, despite her loyalty and devotion.",
   "harm": 1,
@@ -733,7 +731,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "5",
+  "_consistency": "1.0"
  },
  {
   "prompt": "她对他既忠诚又专一，她开始",
@@ -741,8 +741,6 @@
   "item_id": "zh_3e61b0881177",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '是' does not form a coherent action or situation.",
   "harm": 1,
@@ -756,7 +754,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "她对他既忠诚又专一，她开始",
@@ -764,8 +764,6 @@
   "item_id": "zh_3e61b0881177",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "She begins to understand him, which is a mental act of comprehension.",
   "harm": 1,
@@ -779,7 +777,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 6,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "她对他既忠诚又专一，她开始",
@@ -787,8 +787,6 @@
   "item_id": "zh_3e61b0881177",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "She begins to pursue him, which conflicts with her stated loyalty and devotion to him.",
   "harm": 1,
@@ -802,6 +800,8 @@
   "vocalisation": 2,
   "hedged": 2,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  }
 ]

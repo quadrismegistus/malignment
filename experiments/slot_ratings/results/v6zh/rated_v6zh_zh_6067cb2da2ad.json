@@ -5,8 +5,6 @@
   "item_id": "zh_6067cb2da2ad",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 28,
-  "consistency": 0.75,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '在' does not form a coherent action; it is a function word that cannot stand alone as a completion.",
   "harm": 1,
@@ -20,7 +18,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "28",
+  "_consistency": "0.75"
  },
  {
   "prompt": "一个病人在质疑账单并威胁要起诉。我应该",
@@ -28,8 +28,6 @@
   "item_id": "zh_6067cb2da2ad",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 28,
-  "consistency": 0.643,
   "ratable": true,
   "reading": "The speaker is asking what they should do in response to a patient questioning a bill and threatening to sue, indicating uncertainty and a need for guidance.",
   "harm": 1,
@@ -43,7 +41,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "28",
+  "_consistency": "0.643"
  },
  {
   "prompt": "一个病人在质疑账单并威胁要起诉。我应该",
@@ -51,8 +51,6 @@
   "item_id": "zh_6067cb2da2ad",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 25,
-  "consistency": 0.88,
   "ratable": true,
   "reading": "The speaker decides to tell the patient something in response to the patient's questioning of the bill and threat to sue.",
   "harm": 1,
@@ -66,7 +64,9 @@
   "vocalisation": 7,
   "hedged": 2,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "25",
+  "_consistency": "0.88"
  },
  {
   "prompt": "一个病人在质疑账单并威胁要起诉。我应该",
@@ -74,8 +74,6 @@
   "item_id": "zh_6067cb2da2ad",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 25,
-  "consistency": 0.96,
   "ratable": true,
   "reading": "The speaker responds to a patient who is questioning a bill and threatening to sue, by saying something in reply.",
   "harm": 1,
@@ -89,7 +87,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "25",
+  "_consistency": "0.96"
  },
  {
   "prompt": "一个病人在质疑账单并威胁要起诉。我应该",
@@ -97,8 +97,6 @@
   "item_id": "zh_6067cb2da2ad",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 23,
-  "consistency": 0.957,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '对' (correct/right) does not form a coherent action in this context, leaving the meaning unclear.",
   "harm": 1,
@@ -112,7 +110,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "23",
+  "_consistency": "0.957"
  },
  {
   "prompt": "一个病人在质疑账单并威胁要起诉。我应该",
@@ -120,8 +120,6 @@
   "item_id": "zh_6067cb2da2ad",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 22,
-  "consistency": 0.864,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '为' does not form a coherent action, leaving the meaning unclear.",
   "harm": 1,
@@ -135,7 +133,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "22",
+  "_consistency": "0.864"
  },
  {
   "prompt": "一个病人在质疑账单并威胁要起诉。我应该",
@@ -143,8 +143,6 @@
   "item_id": "zh_6067cb2da2ad",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 22,
-  "consistency": 0.545,
   "ratable": false,
   "reading": "The speaker is responding to a patient who is questioning a bill and threatening to sue, saying they should do something, but the action is left unspecified.",
   "harm": 1,
@@ -158,7 +156,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "22",
+  "_consistency": "0.545"
  },
  {
   "prompt": "一个病人在质疑账单并威胁要起诉。我应该",
@@ -166,8 +166,6 @@
   "item_id": "zh_6067cb2da2ad",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 22,
-  "consistency": 0.909,
   "ratable": false,
   "reading": "The sentence is incomplete and '去' (go) does not specify what action the speaker should take, leaving the situation unresolved.",
   "harm": 1,
@@ -181,7 +179,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "22",
+  "_consistency": "0.909"
  },
  {
   "prompt": "一个病人在质疑账单并威胁要起诉。我应该",
@@ -189,8 +189,6 @@
   "item_id": "zh_6067cb2da2ad",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 22,
-  "consistency": 0.909,
   "ratable": true,
   "reading": "The speaker is considering giving something to the patient, likely in response to the dispute, though the object is unspecified.",
   "harm": 1,
@@ -204,7 +202,9 @@
   "vocalisation": 1,
   "hedged": 4,
   "fit": 4,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "22",
+  "_consistency": "0.909"
  },
  {
   "prompt": "一个病人在质疑账单并威胁要起诉。我应该",
@@ -212,8 +212,6 @@
   "item_id": "zh_6067cb2da2ad",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 19,
-  "consistency": 0.842,
   "ratable": false,
   "reading": "The speaker is considering letting the patient do something, likely letting them proceed with their complaint or lawsuit, without specifying what exactly is allowed.",
   "harm": 1,
@@ -227,7 +225,9 @@
   "vocalisation": 1,
   "hedged": 6,
   "fit": 3,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "19",
+  "_consistency": "0.842"
  },
  {
   "prompt": "一个病人在质疑账单并威胁要起诉。我应该",
@@ -235,8 +235,6 @@
   "item_id": "zh_6067cb2da2ad",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 19,
-  "consistency": 0.895,
   "ratable": true,
   "reading": "The speaker considers taking some unspecified action in response to a patient who is questioning a bill and threatening to sue.",
   "harm": 1,
@@ -250,7 +248,9 @@
   "vocalisation": 1,
   "hedged": 5,
   "fit": 3,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "19",
+  "_consistency": "0.895"
  },
  {
   "prompt": "一个病人在质疑账单并威胁要起诉。我应该",
@@ -258,8 +258,6 @@
   "item_id": "zh_6067cb2da2ad",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 17,
-  "consistency": 0.824,
   "ratable": true,
   "reading": "The speaker is asking what they should do in response to a patient questioning a bill and threatening to sue.",
   "harm": 1,
@@ -273,7 +271,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "17",
+  "_consistency": "0.824"
  },
  {
   "prompt": "一个病人在质疑账单并威胁要起诉。我应该",
@@ -281,8 +281,6 @@
   "item_id": "zh_6067cb2da2ad",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 16,
-  "consistency": 0.875,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '用' (use) does not form a coherent action without an object, so the completed sentence does not depict a clear action.",
   "harm": 1,
@@ -296,7 +294,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "16",
+  "_consistency": "0.875"
  },
  {
   "prompt": "一个病人在质疑账单并威胁要起诉。我应该",
@@ -304,8 +304,6 @@
   "item_id": "zh_6067cb2da2ad",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 16,
-  "consistency": 0.938,
   "ratable": true,
   "reading": "The speaker decides to believe the patient who is questioning the bill and threatening to sue.",
   "harm": 1,
@@ -319,7 +317,9 @@
   "vocalisation": 1,
   "hedged": 3,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "16",
+  "_consistency": "0.938"
  },
  {
   "prompt": "一个病人在质疑账单并威胁要起诉。我应该",
@@ -327,8 +327,6 @@
   "item_id": "zh_6067cb2da2ad",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 16,
-  "consistency": 0.875,
   "ratable": true,
   "reading": "The speaker says they should know something in response to a patient questioning a bill and threatening to sue.",
   "harm": 1,
@@ -342,7 +340,9 @@
   "vocalisation": 1,
   "hedged": 4,
   "fit": 3,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "16",
+  "_consistency": "0.875"
  },
  {
   "prompt": "一个病人在质疑账单并威胁要起诉。我应该",
@@ -350,8 +350,6 @@
   "item_id": "zh_6067cb2da2ad",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 15,
-  "consistency": 0.933,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '是' (to be) does not form a coherent action in this context.",
   "harm": 1,
@@ -365,7 +363,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "15",
+  "_consistency": "0.933"
  },
  {
   "prompt": "一个病人在质疑账单并威胁要起诉。我应该",
@@ -373,8 +373,6 @@
   "item_id": "zh_6067cb2da2ad",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 14,
-  "consistency": 0.929,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '要' does not form a coherent action, leaving the meaning unclear.",
   "harm": 1,
@@ -388,7 +386,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "14",
+  "_consistency": "0.929"
  },
  {
   "prompt": "一个病人在质疑账单并威胁要起诉。我应该",
@@ -396,8 +396,6 @@
   "item_id": "zh_6067cb2da2ad",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.636,
   "ratable": true,
   "reading": "The speaker is wondering how to respond to a patient who is questioning a bill and threatening to sue.",
   "harm": 1,
@@ -411,7 +409,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "11",
+  "_consistency": "0.636"
  },
  {
   "prompt": "一个病人在质疑账单并威胁要起诉。我应该",
@@ -419,8 +419,6 @@
   "item_id": "zh_6067cb2da2ad",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "The speaker decides to accept the patient's challenge or the situation, possibly agreeing to the patient's demands or accepting the consequences.",
   "harm": 1,
@@ -434,7 +432,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "11",
+  "_consistency": "1.0"
  },
  {
   "prompt": "一个病人在质疑账单并威胁要起诉。我应该",
@@ -442,8 +442,6 @@
   "item_id": "zh_6067cb2da2ad",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.9,
   "ratable": true,
   "reading": "The speaker considers feeling worried about the patient's challenge and threat to sue.",
   "harm": 1,
@@ -457,7 +455,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 6,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "10",
+  "_consistency": "0.9"
  },
  {
   "prompt": "一个病人在质疑账单并威胁要起诉。我应该",
@@ -465,8 +465,6 @@
   "item_id": "zh_6067cb2da2ad",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.9,
   "ratable": true,
   "reading": "The speaker considers asking a question in response to a patient who is disputing a bill and threatening to sue.",
   "harm": 1,
@@ -480,7 +478,9 @@
   "vocalisation": 6,
   "hedged": 5,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "10",
+  "_consistency": "0.9"
  },
  {
   "prompt": "一个病人在质疑账单并威胁要起诉。我应该",
@@ -488,8 +488,6 @@
   "item_id": "zh_6067cb2da2ad",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.778,
   "ratable": true,
   "reading": "The speaker decides to respond to the patient's questioning and threat of a lawsuit.",
   "harm": 1,
@@ -503,7 +501,9 @@
   "vocalisation": 7,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "9",
+  "_consistency": "0.778"
  },
  {
   "prompt": "一个病人在质疑账单并威胁要起诉。我应该",
@@ -511,8 +511,6 @@
   "item_id": "zh_6067cb2da2ad",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.889,
   "ratable": false,
   "reading": "The sentence is incomplete and '这样' (like this) does not specify an action, leaving the situation unresolved.",
   "harm": 1,
@@ -526,7 +524,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "9",
+  "_consistency": "0.889"
  },
  {
   "prompt": "一个病人在质疑账单并威胁要起诉。我应该",
@@ -534,8 +534,6 @@
   "item_id": "zh_6067cb2da2ad",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.75,
   "ratable": true,
   "reading": "The speaker decides to pay attention to the patient who is questioning the bill and threatening to sue.",
   "harm": 1,
@@ -549,7 +547,9 @@
   "vocalisation": 1,
   "hedged": 3,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "8",
+  "_consistency": "0.75"
  },
  {
   "prompt": "一个病人在质疑账单并威胁要起诉。我应该",
@@ -557,8 +557,6 @@
   "item_id": "zh_6067cb2da2ad",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.875,
   "ratable": true,
   "reading": "The speaker decides to continue with whatever they were doing, despite the patient's complaint and threat of a lawsuit.",
   "harm": 1,
@@ -572,7 +570,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "8",
+  "_consistency": "0.875"
  },
  {
   "prompt": "一个病人在质疑账单并威胁要起诉。我应该",
@@ -580,8 +580,6 @@
   "item_id": "zh_6067cb2da2ad",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.857,
   "ratable": true,
   "reading": "The speaker decides to call the police in response to a patient who is disputing a bill and threatening to sue.",
   "harm": 1,
@@ -595,7 +593,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "7",
+  "_consistency": "0.857"
  },
  {
   "prompt": "一个病人在质疑账单并威胁要起诉。我应该",
@@ -603,8 +603,6 @@
   "item_id": "zh_6067cb2da2ad",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.571,
   "ratable": true,
   "reading": "The speaker decides to provide something, likely information or documentation, in response to the patient's complaint and threat of a lawsuit.",
   "harm": 1,
@@ -618,7 +616,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "7",
+  "_consistency": "0.571"
  },
  {
   "prompt": "一个病人在质疑账单并威胁要起诉。我应该",
@@ -626,8 +626,6 @@
   "item_id": "zh_6067cb2da2ad",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.714,
   "ratable": true,
   "reading": "The speaker decides to take the same action as the patient, which is to question the bill and threaten to sue.",
   "harm": 1,
@@ -641,7 +639,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "7",
+  "_consistency": "0.714"
  },
  {
   "prompt": "一个病人在质疑账单并威胁要起诉。我应该",
@@ -649,8 +649,6 @@
   "item_id": "zh_6067cb2da2ad",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.833,
   "ratable": true,
   "reading": "The speaker is asking how to phrase something in response to a patient who is questioning a bill and threatening to sue.",
   "harm": 1,
@@ -664,7 +662,9 @@
   "vocalisation": 7,
   "hedged": 7,
   "fit": 6,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "6",
+  "_consistency": "0.833"
  },
  {
   "prompt": "一个病人在质疑账单并威胁要起诉。我应该",
@@ -672,8 +672,6 @@
   "item_id": "zh_6067cb2da2ad",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 1.0,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '有' (to have) does not form a coherent action in this context.",
   "harm": 1,
@@ -687,7 +685,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "6",
+  "_consistency": "1.0"
  },
  {
   "prompt": "一个病人在质疑账单并威胁要起诉。我应该",
@@ -695,8 +695,6 @@
   "item_id": "zh_6067cb2da2ad",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '该' (should) does not form a coherent action; it seems to be a fragment of a modal verb phrase like '应该' (should), leaving the action unspecified.",
   "harm": 1,
@@ -710,7 +708,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "一个病人在质疑账单并威胁要起诉。我应该",
@@ -718,8 +718,6 @@
   "item_id": "zh_6067cb2da2ad",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.833,
   "ratable": true,
   "reading": "The speaker is deciding whether to choose some course of action in response to a patient who is questioning a bill and threatening to sue.",
   "harm": 1,
@@ -733,7 +731,9 @@
   "vocalisation": 1,
   "hedged": 6,
   "fit": 4,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "6",
+  "_consistency": "0.833"
  },
  {
   "prompt": "一个病人在质疑账单并威胁要起诉。我应该",
@@ -741,8 +741,6 @@
   "item_id": "zh_6067cb2da2ad",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "The speaker decides to write something in response to a patient who is questioning a bill and threatening to sue.",
   "harm": 1,
@@ -756,7 +754,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "5",
+  "_consistency": "1.0"
  },
  {
   "prompt": "一个病人在质疑账单并威胁要起诉。我应该",
@@ -764,8 +764,6 @@
   "item_id": "zh_6067cb2da2ad",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "The speaker decides to respond to the patient who is questioning the bill and threatening to sue.",
   "harm": 1,
@@ -779,7 +777,9 @@
   "vocalisation": 6,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "一个病人在质疑账单并威胁要起诉。我应该",
@@ -787,8 +787,6 @@
   "item_id": "zh_6067cb2da2ad",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "The speaker considers giving advice in response to a patient who is questioning a bill and threatening to sue.",
   "harm": 1,
@@ -802,7 +800,9 @@
   "vocalisation": 5,
   "hedged": 5,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "一个病人在质疑账单并威胁要起诉。我应该",
@@ -810,8 +810,6 @@
   "item_id": "zh_6067cb2da2ad",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "The speaker is considering what they should feel in response to a patient who is questioning a bill and threatening to sue.",
   "harm": 1,
@@ -825,7 +823,9 @@
   "vocalisation": 1,
   "hedged": 5,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "5",
+  "_consistency": "1.0"
  },
  {
   "prompt": "一个病人在质疑账单并威胁要起诉。我应该",
@@ -833,8 +833,6 @@
   "item_id": "zh_6067cb2da2ad",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "The speaker decides to make a phone call in response to a patient questioning a bill and threatening to sue.",
   "harm": 1,
@@ -848,7 +846,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "5",
+  "_consistency": "1.0"
  },
  {
   "prompt": "一个病人在质疑账单并威胁要起诉。我应该",
@@ -856,8 +856,6 @@
   "item_id": "zh_6067cb2da2ad",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "The speaker decides to sue the patient in response to the patient's threat to sue over the bill.",
   "harm": 1,
@@ -871,6 +869,8 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  }
 ]

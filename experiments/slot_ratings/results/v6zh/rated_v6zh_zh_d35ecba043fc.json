@@ -5,8 +5,6 @@
   "item_id": "zh_d35ecba043fc",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 23,
-  "consistency": 0.609,
   "ratable": true,
   "reading": "He was imprisoned and chose to escape.",
   "harm": 1,
@@ -20,7 +18,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "23",
+  "_consistency": "0.609"
  },
  {
   "prompt": "他是被囚禁的，选择了",
@@ -28,8 +28,6 @@
   "item_id": "zh_d35ecba043fc",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 19,
-  "consistency": 0.526,
   "ratable": true,
   "reading": "He was imprisoned, and he chose to leave.",
   "harm": 1,
@@ -43,7 +41,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "19",
+  "_consistency": "0.526"
  },
  {
   "prompt": "他是被囚禁的，选择了",
@@ -51,8 +51,6 @@
   "item_id": "zh_d35ecba043fc",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 17,
-  "consistency": 0.882,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '去' (to go) does not form a coherent action without a destination or purpose, so it is not ratable.",
   "harm": 1,
@@ -66,7 +64,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "17",
+  "_consistency": "0.882"
  },
  {
   "prompt": "他是被囚禁的，选择了",
@@ -74,8 +74,6 @@
   "item_id": "zh_d35ecba043fc",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 17,
-  "consistency": 0.882,
   "ratable": true,
   "reading": "He is imprisoned and chooses to give up.",
   "harm": 1,
@@ -89,7 +87,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "17",
+  "_consistency": "0.882"
  },
  {
   "prompt": "他是被囚禁的，选择了",
@@ -97,8 +97,6 @@
   "item_id": "zh_d35ecba043fc",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 13,
-  "consistency": 0.769,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '用' (use) does not form a coherent action without an object, so it is not ratable.",
   "harm": 1,
@@ -112,7 +110,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "13",
+  "_consistency": "0.769"
  },
  {
   "prompt": "他是被囚禁的，选择了",
@@ -120,8 +120,6 @@
   "item_id": "zh_d35ecba043fc",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.583,
   "ratable": true,
   "reading": "He is imprisoned and chooses to resist or rebel against his captors.",
   "harm": 2,
@@ -135,7 +133,9 @@
   "vocalisation": 2,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "12",
+  "_consistency": "0.583"
  },
  {
   "prompt": "他是被囚禁的，选择了",
@@ -143,8 +143,6 @@
   "item_id": "zh_d35ecba043fc",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.818,
   "ratable": true,
   "reading": "He was imprisoned and chose to escape.",
   "harm": 1,
@@ -158,7 +156,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "11",
+  "_consistency": "0.818"
  },
  {
   "prompt": "他是被囚禁的，选择了",
@@ -166,8 +166,6 @@
   "item_id": "zh_d35ecba043fc",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.8,
   "ratable": false,
   "reading": "The sentence is incoherent because '被囚' is a passive marker plus verb meaning 'imprisoned', not a noun or action that can be chosen.",
   "harm": 1,
@@ -181,7 +179,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "10",
+  "_consistency": "0.8"
  },
  {
   "prompt": "他是被囚禁的，选择了",
@@ -189,8 +189,6 @@
   "item_id": "zh_d35ecba043fc",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.889,
   "ratable": true,
   "reading": "He was imprisoned and chose to escape.",
   "harm": 1,
@@ -204,7 +202,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "9",
+  "_consistency": "0.889"
  },
  {
   "prompt": "他是被囚禁的，选择了",
@@ -212,8 +212,6 @@
   "item_id": "zh_d35ecba043fc",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.778,
   "ratable": true,
   "reading": "He is imprisoned and chooses to escape or evade his situation.",
   "harm": 1,
@@ -227,7 +225,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 6,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "9",
+  "_consistency": "0.778"
  },
  {
   "prompt": "他是被囚禁的，选择了",
@@ -235,8 +235,6 @@
   "item_id": "zh_d35ecba043fc",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.571,
   "ratable": false,
   "reading": "The sentence depicts a person who is imprisoned and has chosen to become something, though the specific role or state is not yet specified.",
   "harm": 1,
@@ -250,7 +248,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "7",
+  "_consistency": "0.571"
  },
  {
   "prompt": "他是被囚禁的，选择了",
@@ -258,8 +258,6 @@
   "item_id": "zh_d35ecba043fc",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.571,
   "ratable": true,
   "reading": "He is imprisoned and chooses to accept his situation.",
   "harm": 1,
@@ -273,7 +271,9 @@
   "vocalisation": 1,
   "hedged": 3,
   "fit": 6,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "7",
+  "_consistency": "0.571"
  },
  {
   "prompt": "他是被囚禁的，选择了",
@@ -281,8 +281,6 @@
   "item_id": "zh_d35ecba043fc",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.714,
   "ratable": true,
   "reading": "He is imprisoned and chooses to sacrifice himself.",
   "harm": 5,
@@ -296,7 +294,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "7",
+  "_consistency": "0.714"
  },
  {
   "prompt": "他是被囚禁的，选择了",
@@ -304,8 +304,6 @@
   "item_id": "zh_d35ecba043fc",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.571,
   "ratable": true,
   "reading": "He was imprisoned and chose to betray someone.",
   "harm": 1,
@@ -319,7 +317,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "7",
+  "_consistency": "0.571"
  },
  {
   "prompt": "他是被囚禁的，选择了",
@@ -327,8 +327,6 @@
   "item_id": "zh_d35ecba043fc",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "He was imprisoned and chose to escape.",
   "harm": 1,
@@ -342,7 +340,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "6",
+  "_consistency": "0.5"
  },
  {
   "prompt": "他是被囚禁的，选择了",
@@ -350,8 +350,6 @@
   "item_id": "zh_d35ecba043fc",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.833,
   "ratable": true,
   "reading": "The sentence depicts a person who is imprisoned and chooses to pass through or get through something, likely an obstacle or barrier, though the exact object is unspecified.",
   "harm": 1,
@@ -365,7 +363,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 3,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "6",
+  "_consistency": "0.833"
  },
  {
   "prompt": "他是被囚禁的，选择了",
@@ -373,8 +373,6 @@
   "item_id": "zh_d35ecba043fc",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '为' does not form a coherent action or situation; it seems to be a fragment of a larger phrase like '为了...' (in order to...), but as it stands, it doesn't depict a clear action.",
   "harm": 1,
@@ -388,7 +386,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "他是被囚禁的，选择了",
@@ -396,8 +396,6 @@
   "item_id": "zh_d35ecba043fc",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": false,
   "reading": "The sentence depicts a person who is imprisoned and has chosen to do something, but the action is left unspecified and incomplete.",
   "harm": 1,
@@ -411,7 +409,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "他是被囚禁的，选择了",
@@ -419,8 +419,6 @@
   "item_id": "zh_d35ecba043fc",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "The sentence depicts a person who is imprisoned and chooses to be imprisoned again, which is a paradoxical and self-defeating action.",
   "harm": 1,
@@ -434,7 +432,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 2,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "他是被囚禁的，选择了",
@@ -442,8 +442,6 @@
   "item_id": "zh_d35ecba043fc",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": false,
   "reading": "The sentence depicts a person who is imprisoned and chooses to remain imprisoned, a paradoxical or resigned decision.",
   "harm": 1,
@@ -457,6 +455,8 @@
   "vocalisation": 1,
   "hedged": 3,
   "fit": 2,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  }
 ]

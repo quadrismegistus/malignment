@@ -5,8 +5,6 @@
   "item_id": "zh_6c7668c8dcb2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 18,
-  "consistency": 0.944,
   "ratable": true,
   "reading": "The mechanic looks at the engine and says 'um, yes'.",
   "harm": 1,
@@ -20,7 +18,9 @@
   "vocalisation": 6,
   "hedged": 4,
   "fit": 5,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "18",
+  "_consistency": "0.944"
  },
  {
   "prompt": "修理工看着引擎说嗯",
@@ -28,8 +28,6 @@
   "item_id": "zh_6c7668c8dcb2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.833,
   "ratable": true,
   "reading": "The mechanic looks at the engine and says 'um, okay'.",
   "harm": 1,
@@ -43,7 +41,9 @@
   "vocalisation": 6,
   "hedged": 4,
   "fit": 7,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "12",
+  "_consistency": "0.833"
  },
  {
   "prompt": "修理工看着引擎说嗯",
@@ -51,8 +51,6 @@
   "item_id": "zh_6c7668c8dcb2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "The mechanic looks at the engine and says 'not bad', expressing a positive assessment.",
   "harm": 1,
@@ -66,6 +64,8 @@
   "vocalisation": 6,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "5",
+  "_consistency": "1.0"
  }
 ]

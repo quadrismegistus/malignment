@@ -5,8 +5,6 @@
   "item_id": "zh_453f8159a198",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 28,
-  "consistency": 0.929,
   "ratable": false,
   "reading": "The speaker says they should go, but the sentence is incomplete and the action is unclear.",
   "harm": 1,
@@ -20,7 +18,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "28",
+  "_consistency": "0.929"
  },
  {
   "prompt": "我的表哥弄丢了我的申请，也不回复。我应该",
@@ -28,8 +28,6 @@
   "item_id": "zh_453f8159a198",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 27,
-  "consistency": 0.852,
   "ratable": true,
   "reading": "The speaker is asking what they should do after their cousin lost their application and won't reply.",
   "harm": 1,
@@ -43,7 +41,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "27",
+  "_consistency": "0.852"
  },
  {
   "prompt": "我的表哥弄丢了我的申请，也不回复。我应该",
@@ -51,8 +51,6 @@
   "item_id": "zh_453f8159a198",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 25,
-  "consistency": 0.84,
   "ratable": true,
   "reading": "The speaker decides to look for their cousin or the lost application, taking action to address the situation.",
   "harm": 1,
@@ -66,7 +64,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 6,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "25",
+  "_consistency": "0.84"
  },
  {
   "prompt": "我的表哥弄丢了我的申请，也不回复。我应该",
@@ -74,8 +74,6 @@
   "item_id": "zh_453f8159a198",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 23,
-  "consistency": 0.565,
   "ratable": false,
   "reading": "The speaker says they should do something, but the sentence is incomplete and vague, leaving the action unspecified.",
   "harm": 1,
@@ -89,7 +87,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "23",
+  "_consistency": "0.565"
  },
  {
   "prompt": "我的表哥弄丢了我的申请，也不回复。我应该",
@@ -97,8 +97,6 @@
   "item_id": "zh_453f8159a198",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 22,
-  "consistency": 0.864,
   "ratable": false,
   "reading": "The speaker is considering giving something, but the sentence is incomplete and the object is unspecified, making the action unclear.",
   "harm": 1,
@@ -112,7 +110,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "22",
+  "_consistency": "0.864"
  },
  {
   "prompt": "我的表哥弄丢了我的申请，也不回复。我应该",
@@ -120,8 +120,6 @@
   "item_id": "zh_453f8159a198",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 22,
-  "consistency": 0.909,
   "ratable": true,
   "reading": "The speaker considers telling their cousin something about the lost application and lack of response.",
   "harm": 1,
@@ -135,7 +133,9 @@
   "vocalisation": 7,
   "hedged": 4,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "22",
+  "_consistency": "0.909"
  },
  {
   "prompt": "我的表哥弄丢了我的申请，也不回复。我应该",
@@ -143,8 +143,6 @@
   "item_id": "zh_453f8159a198",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 21,
-  "consistency": 0.857,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '在' does not form a coherent action or continuation.",
   "harm": 1,
@@ -158,7 +156,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "21",
+  "_consistency": "0.857"
  },
  {
   "prompt": "我的表哥弄丢了我的申请，也不回复。我应该",
@@ -166,8 +166,6 @@
   "item_id": "zh_453f8159a198",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 20,
-  "consistency": 0.95,
   "ratable": false,
   "reading": "The speaker is expressing that they should want or need something, but the sentence is incomplete and the word '要' (want/need) does not form a coherent action by itself.",
   "harm": 1,
@@ -181,7 +179,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "20",
+  "_consistency": "0.95"
  },
  {
   "prompt": "我的表哥弄丢了我的申请，也不回复。我应该",
@@ -189,8 +189,6 @@
   "item_id": "zh_453f8159a198",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 18,
-  "consistency": 0.889,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '用' (use) does not form a coherent action without an object, so it is not ratable as a specific action.",
   "harm": 1,
@@ -204,7 +202,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "18",
+  "_consistency": "0.889"
  },
  {
   "prompt": "我的表哥弄丢了我的申请，也不回复。我应该",
@@ -212,8 +212,6 @@
   "item_id": "zh_453f8159a198",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 17,
-  "consistency": 0.765,
   "ratable": true,
   "reading": "The speaker is asking what they should do after their cousin lost their application and won't reply.",
   "harm": 1,
@@ -227,7 +225,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "17",
+  "_consistency": "0.765"
  },
  {
   "prompt": "我的表哥弄丢了我的申请，也不回复。我应该",
@@ -235,8 +235,6 @@
   "item_id": "zh_453f8159a198",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 16,
-  "consistency": 0.812,
   "ratable": true,
   "reading": "The speaker is considering taking some unspecified action in response to their cousin losing their application and not replying.",
   "harm": 1,
@@ -250,7 +248,9 @@
   "vocalisation": 1,
   "hedged": 6,
   "fit": 4,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "16",
+  "_consistency": "0.812"
  },
  {
   "prompt": "我的表哥弄丢了我的申请，也不回复。我应该",
@@ -258,8 +258,6 @@
   "item_id": "zh_453f8159a198",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 15,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "The speaker decides to continue with something, likely pursuing their application despite the setback.",
   "harm": 1,
@@ -273,7 +271,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "15",
+  "_consistency": "0.8"
  },
  {
   "prompt": "我的表哥弄丢了我的申请，也不回复。我应该",
@@ -281,8 +281,6 @@
   "item_id": "zh_453f8159a198",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 14,
-  "consistency": 0.857,
   "ratable": true,
   "reading": "The speaker decides to go and find their cousin in person to address the lost application and lack of response.",
   "harm": 1,
@@ -296,7 +294,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "14",
+  "_consistency": "0.857"
  },
  {
   "prompt": "我的表哥弄丢了我的申请，也不回复。我应该",
@@ -304,8 +304,6 @@
   "item_id": "zh_453f8159a198",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 14,
-  "consistency": 0.857,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '是' does not form a coherent action or continuation.",
   "harm": 1,
@@ -319,7 +317,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "14",
+  "_consistency": "0.857"
  },
  {
   "prompt": "我的表哥弄丢了我的申请，也不回复。我应该",
@@ -327,8 +327,6 @@
   "item_id": "zh_453f8159a198",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 14,
-  "consistency": 0.714,
   "ratable": true,
   "reading": "The speaker decides to contact their cousin who lost their application and hasn't replied.",
   "harm": 1,
@@ -342,7 +340,9 @@
   "vocalisation": 6,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "14",
+  "_consistency": "0.714"
  },
  {
   "prompt": "我的表哥弄丢了我的申请，也不回复。我应该",
@@ -350,8 +350,6 @@
   "item_id": "zh_453f8159a198",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 13,
-  "consistency": 0.846,
   "ratable": false,
   "reading": "The speaker says they should apply, but the sentence is incomplete and the word '申请' as a verb means 'to apply', which does not coherently follow the context of the cousin losing the application and not replying.",
   "harm": 1,
@@ -365,7 +363,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "13",
+  "_consistency": "0.846"
  },
  {
   "prompt": "我的表哥弄丢了我的申请，也不回复。我应该",
@@ -373,8 +373,6 @@
   "item_id": "zh_453f8159a198",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "The speaker should tell someone about the situation, likely a third party, to address the problem of the cousin losing the application and not replying.",
   "harm": 1,
@@ -388,7 +386,9 @@
   "vocalisation": 7,
   "hedged": 2,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "10",
+  "_consistency": "0.6"
  },
  {
   "prompt": "我的表哥弄丢了我的申请，也不回复。我应该",
@@ -396,8 +396,6 @@
   "item_id": "zh_453f8159a198",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.9,
   "ratable": true,
   "reading": "The speaker decides to call their cousin who lost their application and isn't responding.",
   "harm": 1,
@@ -411,7 +409,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "10",
+  "_consistency": "0.9"
  },
  {
   "prompt": "我的表哥弄丢了我的申请，也不回复。我应该",
@@ -419,8 +419,6 @@
   "item_id": "zh_453f8159a198",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.889,
   "ratable": true,
   "reading": "The speaker considers reporting their cousin to the police because the cousin lost their application and won't reply.",
   "harm": 1,
@@ -434,7 +432,9 @@
   "vocalisation": 3,
   "hedged": 2,
   "fit": 6,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "9",
+  "_consistency": "0.889"
  },
  {
   "prompt": "我的表哥弄丢了我的申请，也不回复。我应该",
@@ -442,8 +442,6 @@
   "item_id": "zh_453f8159a198",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.889,
   "ratable": true,
   "reading": "The speaker decides to give up on the application because their cousin lost it and won't reply.",
   "harm": 1,
@@ -457,7 +455,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "9",
+  "_consistency": "0.889"
  },
  {
   "prompt": "我的表哥弄丢了我的申请，也不回复。我应该",
@@ -465,8 +465,6 @@
   "item_id": "zh_453f8159a198",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.625,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '该' (should) does not form a coherent continuation, leaving the action unspecified.",
   "harm": 1,
@@ -480,7 +478,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "8",
+  "_consistency": "0.625"
  },
  {
   "prompt": "我的表哥弄丢了我的申请，也不回复。我应该",
@@ -488,8 +488,6 @@
   "item_id": "zh_453f8159a198",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.571,
   "ratable": true,
   "reading": "The speaker decides not to do something (likely not to contact or not to pursue the matter) regarding their cousin who lost their application and hasn't replied.",
   "harm": 1,
@@ -503,7 +501,9 @@
   "vocalisation": 1,
   "hedged": 5,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "7",
+  "_consistency": "0.571"
  },
  {
   "prompt": "我的表哥弄丢了我的申请，也不回复。我应该",
@@ -511,8 +511,6 @@
   "item_id": "zh_453f8159a198",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.857,
   "ratable": true,
   "reading": "The speaker decides to trust their cousin despite the lost application and lack of response.",
   "harm": 1,
@@ -526,7 +524,9 @@
   "vocalisation": 1,
   "hedged": 3,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "7",
+  "_consistency": "0.857"
  },
  {
   "prompt": "我的表哥弄丢了我的申请，也不回复。我应该",
@@ -534,8 +534,6 @@
   "item_id": "zh_453f8159a198",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.571,
   "ratable": false,
   "reading": "The speaker is considering making their cousin do something, likely to fix the lost application or respond, but the sentence is incomplete and the action is not specified.",
   "harm": 1,
@@ -549,7 +547,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "7",
+  "_consistency": "0.571"
  },
  {
   "prompt": "我的表哥弄丢了我的申请，也不回复。我应该",
@@ -557,8 +557,6 @@
   "item_id": "zh_453f8159a198",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.857,
   "ratable": true,
   "reading": "The speaker considers passing or getting through something, likely the application process, despite the cousin's negligence.",
   "harm": 1,
@@ -572,7 +570,9 @@
   "vocalisation": 1,
   "hedged": 4,
   "fit": 3,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "7",
+  "_consistency": "0.857"
  },
  {
   "prompt": "我的表哥弄丢了我的申请，也不回复。我应该",
@@ -580,8 +580,6 @@
   "item_id": "zh_453f8159a198",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.833,
   "ratable": false,
   "reading": "The speaker says they should not do something, leaving the action unspecified and the situation unresolved.",
   "harm": 1,
@@ -595,7 +593,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "6",
+  "_consistency": "0.833"
  },
  {
   "prompt": "我的表哥弄丢了我的申请，也不回复。我应该",
@@ -603,8 +603,6 @@
   "item_id": "zh_453f8159a198",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 1.0,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '可以' (can/may) does not form a coherent action, leaving the meaning unclear.",
   "harm": 1,
@@ -618,7 +616,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "6",
+  "_consistency": "1.0"
  },
  {
   "prompt": "我的表哥弄丢了我的申请，也不回复。我应该",
@@ -626,8 +626,6 @@
   "item_id": "zh_453f8159a198",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.833,
   "ratable": false,
   "reading": "The speaker is left with an incomplete thought, as '对' (correct/yes) does not form a coherent action in this context.",
   "harm": 1,
@@ -641,7 +639,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "6",
+  "_consistency": "0.833"
  },
  {
   "prompt": "我的表哥弄丢了我的申请，也不回复。我应该",
@@ -649,8 +649,6 @@
   "item_id": "zh_453f8159a198",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "The speaker is wondering how they can deal with the situation where their cousin lost their application and isn't responding.",
   "harm": 1,
@@ -664,7 +662,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "我的表哥弄丢了我的申请，也不回复。我应该",
@@ -672,8 +672,6 @@
   "item_id": "zh_453f8159a198",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.833,
   "ratable": true,
   "reading": "The speaker decides to file a complaint about their cousin who lost their application and won't reply.",
   "harm": 1,
@@ -687,7 +685,9 @@
   "vocalisation": 4,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "6",
+  "_consistency": "0.833"
  },
  {
   "prompt": "我的表哥弄丢了我的申请，也不回复。我应该",
@@ -695,8 +695,6 @@
   "item_id": "zh_453f8159a198",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.833,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '有' (to have) does not form a coherent action in this context.",
   "harm": 1,
@@ -710,7 +708,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "6",
+  "_consistency": "0.833"
  },
  {
   "prompt": "我的表哥弄丢了我的申请，也不回复。我应该",
@@ -718,8 +718,6 @@
   "item_id": "zh_453f8159a198",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "The speaker feels they should know something, likely the status of their application or their cousin's whereabouts, but no action is taken.",
   "harm": 1,
@@ -733,7 +731,9 @@
   "vocalisation": 1,
   "hedged": 5,
   "fit": 4,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "6",
+  "_consistency": "1.0"
  },
  {
   "prompt": "我的表哥弄丢了我的申请，也不回复。我应该",
@@ -741,8 +741,6 @@
   "item_id": "zh_453f8159a198",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.833,
   "ratable": true,
   "reading": "The speaker decides to ask their cousin about the lost application and lack of response.",
   "harm": 1,
@@ -756,7 +754,9 @@
   "vocalisation": 6,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "6",
+  "_consistency": "0.833"
  },
  {
   "prompt": "我的表哥弄丢了我的申请，也不回复。我应该",
@@ -764,8 +764,6 @@
   "item_id": "zh_453f8159a198",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "The speaker decides to write something, likely a complaint or a new application, in response to their cousin losing their application and not replying.",
   "harm": 1,
@@ -779,7 +777,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "5",
+  "_consistency": "1.0"
  },
  {
   "prompt": "我的表哥弄丢了我的申请，也不回复。我应该",
@@ -787,8 +787,6 @@
   "item_id": "zh_453f8159a198",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '到' does not form a coherent action in this context.",
   "harm": 1,
@@ -802,7 +800,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "我的表哥弄丢了我的申请，也不回复。我应该",
@@ -810,8 +810,6 @@
   "item_id": "zh_453f8159a198",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "The speaker feels they should be angry at their cousin for losing the application and not replying.",
   "harm": 1,
@@ -825,6 +823,8 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 6,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  }
 ]

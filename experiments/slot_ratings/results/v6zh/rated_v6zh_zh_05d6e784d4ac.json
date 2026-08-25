@@ -5,8 +5,6 @@
   "item_id": "zh_05d6e784d4ac",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.833,
   "ratable": true,
   "reading": "He walks into the library and asks to borrow a book about programming.",
   "harm": 1,
@@ -20,6 +18,8 @@
   "vocalisation": 4,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 7
+  "mundanity": 7,
+  "_n_lineages": "6",
+  "_consistency": "0.833"
  }
 ]

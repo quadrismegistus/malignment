@@ -5,8 +5,6 @@
   "item_id": "zh_313ddec03ec8",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 24,
-  "consistency": 0.833,
   "ratable": true,
   "reading": "He pushes her away, then turns around.",
   "harm": 2,
@@ -20,7 +18,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "24",
+  "_consistency": "0.833"
  },
  {
   "prompt": "他把她推开，然后",
@@ -28,8 +28,6 @@
   "item_id": "zh_313ddec03ec8",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 22,
-  "consistency": 0.591,
   "ratable": true,
   "reading": "He pushes her away, then speaks.",
   "harm": 1,
@@ -43,7 +41,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "22",
+  "_consistency": "0.591"
  },
  {
   "prompt": "他把她推开，然后",
@@ -51,8 +51,6 @@
   "item_id": "zh_313ddec03ec8",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 18,
-  "consistency": 0.611,
   "ratable": false,
   "reading": "He pushed her away, and then began (something unspecified).",
   "harm": 1,
@@ -66,7 +64,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "18",
+  "_consistency": "0.611"
  },
  {
   "prompt": "他把她推开，然后",
@@ -74,8 +74,6 @@
   "item_id": "zh_313ddec03ec8",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 15,
-  "consistency": 0.533,
   "ratable": true,
   "reading": "He pushes her away, then stands (up or still), a physical action following the push.",
   "harm": 1,
@@ -89,7 +87,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "15",
+  "_consistency": "0.533"
  },
  {
   "prompt": "他把她推开，然后",
@@ -97,8 +97,6 @@
   "item_id": "zh_313ddec03ec8",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 14,
-  "consistency": 0.571,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '在' does not form a coherent action or situation.",
   "harm": 1,
@@ -112,7 +110,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "14",
+  "_consistency": "0.571"
  },
  {
   "prompt": "他把她推开，然后",
@@ -120,8 +120,6 @@
   "item_id": "zh_313ddec03ec8",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 14,
-  "consistency": 0.714,
   "ratable": true,
   "reading": "He pushes her away, then walks off.",
   "harm": 1,
@@ -135,7 +133,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "14",
+  "_consistency": "0.714"
  },
  {
   "prompt": "他把她推开，然后",
@@ -143,8 +143,6 @@
   "item_id": "zh_313ddec03ec8",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 14,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "He pushes her away, then runs off.",
   "harm": 1,
@@ -158,7 +156,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "14",
+  "_consistency": "0.5"
  },
  {
   "prompt": "他把她推开，然后",
@@ -166,8 +166,6 @@
   "item_id": "zh_313ddec03ec8",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.5,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '用' (use) does not form a coherent action by itself.",
   "harm": 1,
@@ -181,7 +179,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "12",
+  "_consistency": "0.5"
  },
  {
   "prompt": "他把她推开，然后",
@@ -189,8 +189,6 @@
   "item_id": "zh_313ddec03ec8",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.583,
   "ratable": true,
   "reading": "He pushes her away, then continues doing something, the nature of which is unspecified.",
   "harm": 1,
@@ -204,7 +202,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 4,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "12",
+  "_consistency": "0.583"
  },
  {
   "prompt": "他把她推开，然后",
@@ -212,8 +212,6 @@
   "item_id": "zh_313ddec03ec8",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.8,
   "ratable": false,
   "reading": "He pushed her away, and then went (somewhere), leaving the situation unresolved.",
   "harm": 1,
@@ -227,7 +225,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "10",
+  "_consistency": "0.8"
  },
  {
   "prompt": "他把她推开，然后",
@@ -235,8 +235,6 @@
   "item_id": "zh_313ddec03ec8",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.6,
   "ratable": false,
   "reading": "He pushed her away, and then did something forcefully or harshly, though the specific action is left unspecified.",
   "harm": 1,
@@ -250,7 +248,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "10",
+  "_consistency": "0.6"
  },
  {
   "prompt": "他把她推开，然后",
@@ -258,8 +258,6 @@
   "item_id": "zh_313ddec03ec8",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.7,
   "ratable": true,
   "reading": "He pushes her away, then leaves.",
   "harm": 1,
@@ -273,7 +271,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "10",
+  "_consistency": "0.7"
  },
  {
   "prompt": "他把她推开，然后",
@@ -281,8 +281,6 @@
   "item_id": "zh_313ddec03ec8",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.556,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '对' does not form a coherent action or continuation.",
   "harm": 1,
@@ -296,7 +294,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "9",
+  "_consistency": "0.556"
  },
  {
   "prompt": "他把她推开，然后",
@@ -304,8 +304,6 @@
   "item_id": "zh_313ddec03ec8",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.667,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '朝' (toward) does not form a coherent action without a following verb or direction.",
   "harm": 1,
@@ -319,7 +317,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "9",
+  "_consistency": "0.667"
  },
  {
   "prompt": "他把她推开，然后",
@@ -327,8 +327,6 @@
   "item_id": "zh_313ddec03ec8",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.75,
   "ratable": false,
   "reading": "He pushed her away, and then did something with force, though the specific action is not yet specified.",
   "harm": 1,
@@ -342,7 +340,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "8",
+  "_consistency": "0.75"
  },
  {
   "prompt": "他把她推开，然后",
@@ -350,8 +350,6 @@
   "item_id": "zh_313ddec03ec8",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "He pushes her away, then walks toward something or someone.",
   "harm": 1,
@@ -365,7 +363,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "8",
+  "_consistency": "1.0"
  },
  {
   "prompt": "他把她推开，然后",
@@ -373,8 +373,6 @@
   "item_id": "zh_313ddec03ec8",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.625,
   "ratable": true,
   "reading": "He pushes her away, then turns around.",
   "harm": 1,
@@ -388,7 +386,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "8",
+  "_consistency": "0.625"
  },
  {
   "prompt": "他把她推开，然后",
@@ -396,8 +396,6 @@
   "item_id": "zh_313ddec03ec8",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.571,
   "ratable": true,
   "reading": "He pushes her away, then walks over to somewhere.",
   "harm": 1,
@@ -411,7 +409,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "7",
+  "_consistency": "0.571"
  },
  {
   "prompt": "他把她推开，然后",
@@ -419,8 +419,6 @@
   "item_id": "zh_313ddec03ec8",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.5,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '像' (like/as) does not form a coherent action, leaving the situation unresolved.",
   "harm": 1,
@@ -434,7 +432,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "6",
+  "_consistency": "0.5"
  },
  {
   "prompt": "他把她推开，然后",
@@ -442,8 +442,6 @@
   "item_id": "zh_313ddec03ec8",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 1.0,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '往' does not form a coherent action without a following direction or object.",
   "harm": 1,
@@ -457,7 +455,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "6",
+  "_consistency": "1.0"
  },
  {
   "prompt": "他把她推开，然后",
@@ -465,8 +465,6 @@
   "item_id": "zh_313ddec03ec8",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "He pushes her away, then grabs her.",
   "harm": 2,
@@ -480,7 +478,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 6,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "他把她推开，然后",
@@ -488,8 +488,6 @@
   "item_id": "zh_313ddec03ec8",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "He pushes her away, then walks into somewhere.",
   "harm": 1,
@@ -503,7 +501,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 3,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "他把她推开，然后",
@@ -511,8 +511,6 @@
   "item_id": "zh_313ddec03ec8",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "He pushed her away, then said something.",
   "harm": 2,
@@ -526,6 +524,8 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  }
 ]

@@ -5,8 +5,6 @@
   "item_id": "zh_913ad2b1aae2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 27,
-  "consistency": 0.593,
   "ratable": true,
   "reading": "He crosses the finish line first, and his screams are filled with excitement.",
   "harm": 1,
@@ -20,7 +18,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "27",
+  "_consistency": "0.593"
  },
  {
   "prompt": "他第一个冲过终点线，尖叫声里充满了",
@@ -28,8 +28,6 @@
   "item_id": "zh_913ad2b1aae2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 15,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "He crosses the finish line first, and his screams are filled with excitement.",
   "harm": 1,
@@ -43,7 +41,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "15",
+  "_consistency": "0.6"
  },
  {
   "prompt": "他第一个冲过终点线，尖叫声里充满了",
@@ -51,8 +51,6 @@
   "item_id": "zh_913ad2b1aae2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 15,
-  "consistency": 0.733,
   "ratable": true,
   "reading": "He crosses the finish line first, and the screams are filled with joy.",
   "harm": 1,
@@ -66,7 +64,9 @@
   "vocalisation": 6,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "15",
+  "_consistency": "0.733"
  },
  {
   "prompt": "他第一个冲过终点线，尖叫声里充满了",
@@ -74,8 +74,6 @@
   "item_id": "zh_913ad2b1aae2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "He crosses the finish line first, and the screams are filled with disbelief.",
   "harm": 1,
@@ -89,7 +87,9 @@
   "vocalisation": 6,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "7",
+  "_consistency": "1.0"
  },
  {
   "prompt": "他第一个冲过终点线，尖叫声里充满了",
@@ -97,8 +97,6 @@
   "item_id": "zh_913ad2b1aae2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "He crosses the finish line first, and the screams are filled with envy.",
   "harm": 1,
@@ -112,7 +110,9 @@
   "vocalisation": 6,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "他第一个冲过终点线，尖叫声里充满了",
@@ -120,8 +120,6 @@
   "item_id": "zh_913ad2b1aae2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "The crowd's screams are filled with admiration for the runner who crossed the finish line first.",
   "harm": 1,
@@ -135,7 +133,9 @@
   "vocalisation": 6,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "他第一个冲过终点线，尖叫声里充满了",
@@ -143,8 +143,6 @@
   "item_id": "zh_913ad2b1aae2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "He crosses the finish line first, and the screams are filled with surprise.",
   "harm": 1,
@@ -158,7 +156,9 @@
   "vocalisation": 6,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "他第一个冲过终点线，尖叫声里充满了",
@@ -166,8 +166,6 @@
   "item_id": "zh_913ad2b1aae2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "He crosses the finish line first, and the screams are filled with joy.",
   "harm": 1,
@@ -181,7 +179,9 @@
   "vocalisation": 6,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "他第一个冲过终点线，尖叫声里充满了",
@@ -189,8 +189,6 @@
   "item_id": "zh_913ad2b1aae2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "He crosses the finish line first, and the screams are filled with praise.",
   "harm": 1,
@@ -204,7 +202,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "他第一个冲过终点线，尖叫声里充满了",
@@ -212,8 +212,6 @@
   "item_id": "zh_913ad2b1aae2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "He crosses the finish line first, and the screams are full of encouragement.",
   "harm": 1,
@@ -227,6 +225,8 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  }
 ]

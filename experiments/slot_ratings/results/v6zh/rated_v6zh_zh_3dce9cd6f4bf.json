@@ -5,8 +5,6 @@
   "item_id": "zh_3dce9cd6f4bf",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 27,
-  "consistency": 0.704,
   "ratable": true,
   "reading": "She is wailing and pulling her hair while they carry the corpse out.",
   "harm": 5,
@@ -20,7 +18,9 @@
   "vocalisation": 6,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "27",
+  "_consistency": "0.704"
  },
  {
   "prompt": "她揪住自己的头发嚎啕大哭，这时他们把尸体抬",
@@ -28,8 +28,6 @@
   "item_id": "zh_3dce9cd6f4bf",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 24,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "She is pulling her hair and wailing as they lift up the corpse.",
   "harm": 1,
@@ -43,7 +41,9 @@
   "vocalisation": 5,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "24",
+  "_consistency": "0.667"
  },
  {
   "prompt": "她揪住自己的头发嚎啕大哭，这时他们把尸体抬",
@@ -51,8 +51,6 @@
   "item_id": "zh_3dce9cd6f4bf",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 24,
-  "consistency": 0.917,
   "ratable": true,
   "reading": "She is wailing and pulling her hair while they carry the corpse over to her.",
   "harm": 5,
@@ -66,7 +64,9 @@
   "vocalisation": 6,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "24",
+  "_consistency": "0.917"
  },
  {
   "prompt": "她揪住自己的头发嚎啕大哭，这时他们把尸体抬",
@@ -74,8 +74,6 @@
   "item_id": "zh_3dce9cd6f4bf",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 23,
-  "consistency": 0.565,
   "ratable": true,
   "reading": "She is wailing and pulling her hair while they carry the corpse out.",
   "harm": 1,
@@ -89,7 +87,9 @@
   "vocalisation": 5,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "23",
+  "_consistency": "0.565"
  },
  {
   "prompt": "她揪住自己的头发嚎啕大哭，这时他们把尸体抬",
@@ -97,8 +97,6 @@
   "item_id": "zh_3dce9cd6f4bf",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 22,
-  "consistency": 0.591,
   "ratable": true,
   "reading": "She is wailing and pulling her hair while they carry the corpse out.",
   "harm": 1,
@@ -112,7 +110,9 @@
   "vocalisation": 6,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "22",
+  "_consistency": "0.591"
  },
  {
   "prompt": "她揪住自己的头发嚎啕大哭，这时他们把尸体抬",
@@ -120,8 +120,6 @@
   "item_id": "zh_3dce9cd6f4bf",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 22,
-  "consistency": 0.727,
   "ratable": true,
   "reading": "She is wailing and pulling her hair while they carry the corpse away.",
   "harm": 1,
@@ -135,7 +133,9 @@
   "vocalisation": 5,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "22",
+  "_consistency": "0.727"
  },
  {
   "prompt": "她揪住自己的头发嚎啕大哭，这时他们把尸体抬",
@@ -143,8 +143,6 @@
   "item_id": "zh_3dce9cd6f4bf",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 22,
-  "consistency": 0.545,
   "ratable": true,
   "reading": "She is wailing and pulling her hair while they carry the body in.",
   "harm": 1,
@@ -158,7 +156,9 @@
   "vocalisation": 5,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "22",
+  "_consistency": "0.545"
  },
  {
   "prompt": "她揪住自己的头发嚎啕大哭，这时他们把尸体抬",
@@ -166,8 +166,6 @@
   "item_id": "zh_3dce9cd6f4bf",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 21,
-  "consistency": 0.714,
   "ratable": true,
   "reading": "She is wailing and pulling her hair while they carry the corpse up (to her or into view).",
   "harm": 5,
@@ -181,7 +179,9 @@
   "vocalisation": 6,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "21",
+  "_consistency": "0.714"
  },
  {
   "prompt": "她揪住自己的头发嚎啕大哭，这时他们把尸体抬",
@@ -189,8 +189,6 @@
   "item_id": "zh_3dce9cd6f4bf",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 21,
-  "consistency": 0.81,
   "ratable": true,
   "reading": "The completed sentence depicts a scene where a woman is wailing and pulling her hair while others carry a corpse down from somewhere.",
   "harm": 5,
@@ -204,7 +202,9 @@
   "vocalisation": 6,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "21",
+  "_consistency": "0.81"
  },
  {
   "prompt": "她揪住自己的头发嚎啕大哭，这时他们把尸体抬",
@@ -212,8 +212,6 @@
   "item_id": "zh_3dce9cd6f4bf",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 21,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "She is wailing and pulling her hair while they carry the corpse back.",
   "harm": 1,
@@ -227,7 +225,9 @@
   "vocalisation": 5,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "21",
+  "_consistency": "0.667"
  },
  {
   "prompt": "她揪住自己的头发嚎啕大哭，这时他们把尸体抬",
@@ -235,8 +235,6 @@
   "item_id": "zh_3dce9cd6f4bf",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 19,
-  "consistency": 0.632,
   "ratable": true,
   "reading": "She is wailing and pulling her hair while they lift up the corpse.",
   "harm": 1,
@@ -250,7 +248,9 @@
   "vocalisation": 5,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "19",
+  "_consistency": "0.632"
  },
  {
   "prompt": "她揪住自己的头发嚎啕大哭，这时他们把尸体抬",
@@ -258,8 +258,6 @@
   "item_id": "zh_3dce9cd6f4bf",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 18,
-  "consistency": 0.611,
   "ratable": false,
   "reading": "The completed sentence is incomplete and the word '到' is a function word that doesn't complete a coherent action on its own.",
   "harm": 1,
@@ -273,7 +271,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "18",
+  "_consistency": "0.611"
  },
  {
   "prompt": "她揪住自己的头发嚎啕大哭，这时他们把尸体抬",
@@ -281,8 +281,6 @@
   "item_id": "zh_3dce9cd6f4bf",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 18,
-  "consistency": 0.833,
   "ratable": true,
   "reading": "She is wailing and pulling her hair while they bring the corpse over.",
   "harm": 1,
@@ -296,7 +294,9 @@
   "vocalisation": 5,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "18",
+  "_consistency": "0.833"
  },
  {
   "prompt": "她揪住自己的头发嚎啕大哭，这时他们把尸体抬",
@@ -304,8 +304,6 @@
   "item_id": "zh_3dce9cd6f4bf",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 17,
-  "consistency": 0.882,
   "ratable": true,
   "reading": "She is wailing and pulling her hair while they load the corpse into a vehicle.",
   "harm": 1,
@@ -319,7 +317,9 @@
   "vocalisation": 4,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "17",
+  "_consistency": "0.882"
  },
  {
   "prompt": "她揪住自己的头发嚎啕大哭，这时他们把尸体抬",
@@ -327,8 +327,6 @@
   "item_id": "zh_3dce9cd6f4bf",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 13,
-  "consistency": 0.846,
   "ratable": true,
   "reading": "She is wailing and pulling her hair while they carry the corpse up (stairs or a slope).",
   "harm": 1,
@@ -342,7 +340,9 @@
   "vocalisation": 4,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "13",
+  "_consistency": "0.846"
  },
  {
   "prompt": "她揪住自己的头发嚎啕大哭，这时他们把尸体抬",
@@ -350,8 +350,6 @@
   "item_id": "zh_3dce9cd6f4bf",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 13,
-  "consistency": 0.615,
   "ratable": true,
   "reading": "She is wailing and pulling her hair while they carry the corpse in through the door.",
   "harm": 5,
@@ -365,7 +363,9 @@
   "vocalisation": 6,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "13",
+  "_consistency": "0.615"
  },
  {
   "prompt": "她揪住自己的头发嚎啕大哭，这时他们把尸体抬",
@@ -373,8 +373,6 @@
   "item_id": "zh_3dce9cd6f4bf",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.75,
   "ratable": true,
   "reading": "She is wailing and pulling her hair while they carry the corpse back.",
   "harm": 5,
@@ -388,7 +386,9 @@
   "vocalisation": 6,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "12",
+  "_consistency": "0.75"
  },
  {
   "prompt": "她揪住自己的头发嚎啕大哭，这时他们把尸体抬",
@@ -396,8 +396,6 @@
   "item_id": "zh_3dce9cd6f4bf",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.9,
   "ratable": true,
   "reading": "She is wailing and pulling her hair while they carry the corpse away.",
   "harm": 1,
@@ -411,7 +409,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "10",
+  "_consistency": "0.9"
  },
  {
   "prompt": "她揪住自己的头发嚎啕大哭，这时他们把尸体抬",
@@ -419,8 +419,6 @@
   "item_id": "zh_3dce9cd6f4bf",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.9,
   "ratable": true,
   "reading": "She is wailing and pulling her hair while they carry the corpse back.",
   "harm": 1,
@@ -434,7 +432,9 @@
   "vocalisation": 4,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "10",
+  "_consistency": "0.9"
  },
  {
   "prompt": "她揪住自己的头发嚎啕大哭，这时他们把尸体抬",
@@ -442,8 +442,6 @@
   "item_id": "zh_3dce9cd6f4bf",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "She is wailing and pulling her hair while they carry the body home.",
   "harm": 5,
@@ -457,7 +455,9 @@
   "vocalisation": 6,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "10",
+  "_consistency": "0.5"
  },
  {
   "prompt": "她揪住自己的头发嚎啕大哭，这时他们把尸体抬",
@@ -465,8 +465,6 @@
   "item_id": "zh_3dce9cd6f4bf",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "She is wailing and pulling her hair while they lift the corpse up.",
   "harm": 1,
@@ -480,7 +478,9 @@
   "vocalisation": 4,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "9",
+  "_consistency": "0.667"
  },
  {
   "prompt": "她揪住自己的头发嚎啕大哭，这时他们把尸体抬",
@@ -488,8 +488,6 @@
   "item_id": "zh_3dce9cd6f4bf",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.889,
   "ratable": true,
   "reading": "She is wailing and pulling her hair while they carry the corpse in.",
   "harm": 1,
@@ -503,7 +501,9 @@
   "vocalisation": 5,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "9",
+  "_consistency": "0.889"
  },
  {
   "prompt": "她揪住自己的头发嚎啕大哭，这时他们把尸体抬",
@@ -511,8 +511,6 @@
   "item_id": "zh_3dce9cd6f4bf",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "She is wailing and pulling her hair while they carry the corpse out.",
   "harm": 5,
@@ -526,7 +524,9 @@
   "vocalisation": 6,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "8",
+  "_consistency": "0.5"
  },
  {
   "prompt": "她揪住自己的头发嚎啕大哭，这时他们把尸体抬",
@@ -534,8 +534,6 @@
   "item_id": "zh_3dce9cd6f4bf",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.833,
   "ratable": true,
   "reading": "She is wailing and pulling her hair while they carry the corpse down.",
   "harm": 5,
@@ -549,7 +547,9 @@
   "vocalisation": 6,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "6",
+  "_consistency": "0.833"
  },
  {
   "prompt": "她揪住自己的头发嚎啕大哭，这时他们把尸体抬",
@@ -557,8 +557,6 @@
   "item_id": "zh_3dce9cd6f4bf",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "She is wailing and pulling her hair while they carry the corpse away.",
   "harm": 1,
@@ -572,6 +570,8 @@
   "vocalisation": 5,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  }
 ]

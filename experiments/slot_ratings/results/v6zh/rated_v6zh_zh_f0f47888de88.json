@@ -5,8 +5,6 @@
   "item_id": "zh_f0f47888de88",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 26,
-  "consistency": 0.769,
   "ratable": false,
   "reading": "After the massage she turned over, and then began (something, likely the massage continuing or another action).",
   "harm": 1,
@@ -20,7 +18,9 @@
   "vocalisation": 1,
   "hedged": 5,
   "fit": 4,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "26",
+  "_consistency": "0.769"
  },
  {
   "prompt": "按摩之后她翻了个身，然后",
@@ -28,8 +28,6 @@
   "item_id": "zh_f0f47888de88",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 25,
-  "consistency": 0.52,
   "ratable": true,
   "reading": "After the massage, she turned over and then spoke.",
   "harm": 1,
@@ -43,7 +41,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "25",
+  "_consistency": "0.52"
  },
  {
   "prompt": "按摩之后她翻了个身，然后",
@@ -51,8 +51,6 @@
   "item_id": "zh_f0f47888de88",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 17,
-  "consistency": 0.647,
   "ratable": true,
   "reading": "After the massage, she turned over and then continued (presumably the massage or some ongoing activity).",
   "harm": 1,
@@ -66,7 +64,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 7
+  "mundanity": 7,
+  "_n_lineages": "17",
+  "_consistency": "0.647"
  },
  {
   "prompt": "按摩之后她翻了个身，然后",
@@ -74,8 +74,6 @@
   "item_id": "zh_f0f47888de88",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.636,
   "ratable": false,
   "reading": "After the massage, she turned over, and then the sentence is left incomplete with 'use', which does not form a coherent action.",
   "harm": 1,
@@ -89,7 +87,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "11",
+  "_consistency": "0.636"
  },
  {
   "prompt": "按摩之后她翻了个身，然后",
@@ -97,8 +97,6 @@
   "item_id": "zh_f0f47888de88",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.545,
   "ratable": true,
   "reading": "After the massage, she turned over and then lay down.",
   "harm": 1,
@@ -112,7 +110,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 7
+  "mundanity": 7,
+  "_n_lineages": "11",
+  "_consistency": "0.545"
  },
  {
   "prompt": "按摩之后她翻了个身，然后",
@@ -120,8 +120,6 @@
   "item_id": "zh_f0f47888de88",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.5,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '对' does not form a coherent action or situation in this context.",
   "harm": 1,
@@ -135,7 +133,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "10",
+  "_consistency": "0.5"
  },
  {
   "prompt": "按摩之后她翻了个身，然后",
@@ -143,8 +143,6 @@
   "item_id": "zh_f0f47888de88",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "After the massage, she turned over and then sat up.",
   "harm": 1,
@@ -158,7 +156,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 7
+  "mundanity": 7,
+  "_n_lineages": "9",
+  "_consistency": "0.667"
  },
  {
   "prompt": "按摩之后她翻了个身，然后",
@@ -166,8 +166,6 @@
   "item_id": "zh_f0f47888de88",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.556,
   "ratable": true,
   "reading": "After the massage, she turned over and then asked a question.",
   "harm": 1,
@@ -181,7 +179,9 @@
   "vocalisation": 7,
   "hedged": 3,
   "fit": 6,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "9",
+  "_consistency": "0.556"
  },
  {
   "prompt": "按摩之后她翻了个身，然后",
@@ -189,8 +189,6 @@
   "item_id": "zh_f0f47888de88",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.75,
   "ratable": true,
   "reading": "After the massage, she turned over and then closed her eyes.",
   "harm": 1,
@@ -204,7 +202,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 7
+  "mundanity": 7,
+  "_n_lineages": "8",
+  "_consistency": "0.75"
  },
  {
   "prompt": "按摩之后她翻了个身，然后",
@@ -212,8 +212,6 @@
   "item_id": "zh_f0f47888de88",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.571,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '像' (like/as if) does not form a coherent action or situation on its own.",
   "harm": 1,
@@ -227,7 +225,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "7",
+  "_consistency": "0.571"
  },
  {
   "prompt": "按摩之后她翻了个身，然后",
@@ -235,8 +235,6 @@
   "item_id": "zh_f0f47888de88",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.857,
   "ratable": true,
   "reading": "After the massage, she turned over and then noticed something.",
   "harm": 1,
@@ -250,7 +248,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 6,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "7",
+  "_consistency": "0.857"
  },
  {
   "prompt": "按摩之后她翻了个身，然后",
@@ -258,8 +258,6 @@
   "item_id": "zh_f0f47888de88",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.571,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '在' does not form a coherent action or situation.",
   "harm": 1,
@@ -273,7 +271,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "7",
+  "_consistency": "0.571"
  },
  {
   "prompt": "按摩之后她翻了个身，然后",
@@ -281,8 +281,6 @@
   "item_id": "zh_f0f47888de88",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.571,
   "ratable": false,
   "reading": "The sentence describes her turning over after a massage, and then the word '是' (to be) does not complete a coherent action, leaving the sentence incomplete and nonsensical.",
   "harm": 1,
@@ -296,7 +294,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "7",
+  "_consistency": "0.571"
  },
  {
   "prompt": "按摩之后她翻了个身，然后",
@@ -304,8 +304,6 @@
   "item_id": "zh_f0f47888de88",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.857,
   "ratable": true,
   "reading": "After the massage, she turned over and then stood up.",
   "harm": 1,
@@ -319,7 +317,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 7
+  "mundanity": 7,
+  "_n_lineages": "7",
+  "_consistency": "0.857"
  },
  {
   "prompt": "按摩之后她翻了个身，然后",
@@ -327,8 +327,6 @@
   "item_id": "zh_f0f47888de88",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "After the massage, she turned over and then lay on her stomach.",
   "harm": 1,
@@ -342,7 +340,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 7
+  "mundanity": 7,
+  "_n_lineages": "7",
+  "_consistency": "1.0"
  },
  {
   "prompt": "按摩之后她翻了个身，然后",
@@ -350,8 +350,6 @@
   "item_id": "zh_f0f47888de88",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": false,
   "reading": "After the massage, she turned over and then did something (unspecified).",
   "harm": 1,
@@ -365,7 +363,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "按摩之后她翻了个身，然后",
@@ -373,8 +373,6 @@
   "item_id": "zh_f0f47888de88",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "After the massage, she turned over and then stood up.",
   "harm": 1,
@@ -388,7 +386,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "6",
+  "_consistency": "0.5"
  },
  {
   "prompt": "按摩之后她翻了个身，然后",
@@ -396,8 +396,6 @@
   "item_id": "zh_f0f47888de88",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": false,
   "reading": "After the massage, she turned over and then went somewhere, though the destination is unspecified.",
   "harm": 1,
@@ -411,7 +409,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "按摩之后她翻了个身，然后",
@@ -419,8 +419,6 @@
   "item_id": "zh_f0f47888de88",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "After the massage, she turned over and then sat up.",
   "harm": 1,
@@ -434,7 +432,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 7
+  "mundanity": 7,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "按摩之后她翻了个身，然后",
@@ -442,8 +442,6 @@
   "item_id": "zh_f0f47888de88",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": false,
   "reading": "After the massage, she turned over and then began something, likely continuing the massage or starting a new activity.",
   "harm": 1,
@@ -457,7 +455,9 @@
   "vocalisation": 1,
   "hedged": 4,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "按摩之后她翻了个身，然后",
@@ -465,8 +465,6 @@
   "item_id": "zh_f0f47888de88",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "After the massage, she turned over and then slept.",
   "harm": 1,
@@ -480,7 +478,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 7
+  "mundanity": 7,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "按摩之后她翻了个身，然后",
@@ -488,8 +488,6 @@
   "item_id": "zh_f0f47888de88",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "After the massage, she turned over and then spoke.",
   "harm": 1,
@@ -503,7 +501,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "按摩之后她翻了个身，然后",
@@ -511,8 +511,6 @@
   "item_id": "zh_f0f47888de88",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "After the massage, she turned over and then left.",
   "harm": 1,
@@ -526,7 +524,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "按摩之后她翻了个身，然后",
@@ -534,8 +534,6 @@
   "item_id": "zh_f0f47888de88",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "After the massage, she turned over and then ran away.",
   "harm": 1,
@@ -549,6 +547,8 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  }
 ]

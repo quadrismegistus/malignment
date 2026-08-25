@@ -5,8 +5,6 @@
   "item_id": "zh_bf53cf8bb6de",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 18,
-  "consistency": 0.833,
   "ratable": true,
   "reading": "She begins to doubt or suspect something, feeling disgust and repulsion.",
   "harm": 1,
@@ -20,7 +18,9 @@
   "vocalisation": 1,
   "hedged": 5,
   "fit": 6,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "18",
+  "_consistency": "0.833"
  },
  {
   "prompt": "她感到厌恶和反感，开始",
@@ -28,8 +28,6 @@
   "item_id": "zh_bf53cf8bb6de",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 17,
-  "consistency": 0.941,
   "ratable": true,
   "reading": "She feels disgust and aversion, and begins to question or challenge something.",
   "harm": 1,
@@ -43,7 +41,9 @@
   "vocalisation": 4,
   "hedged": 4,
   "fit": 6,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "17",
+  "_consistency": "0.941"
  },
  {
   "prompt": "她感到厌恶和反感，开始",
@@ -51,8 +51,6 @@
   "item_id": "zh_bf53cf8bb6de",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 13,
-  "consistency": 0.846,
   "ratable": true,
   "reading": "She feels disgust and aversion, and begins to search for something.",
   "harm": 1,
@@ -66,7 +64,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 4,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "13",
+  "_consistency": "0.846"
  },
  {
   "prompt": "她感到厌恶和反感，开始",
@@ -74,8 +74,6 @@
   "item_id": "zh_bf53cf8bb6de",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 13,
-  "consistency": 0.923,
   "ratable": true,
   "reading": "She feels disgust and aversion, and begins to think about something.",
   "harm": 1,
@@ -89,7 +87,9 @@
   "vocalisation": 1,
   "hedged": 4,
   "fit": 6,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "13",
+  "_consistency": "0.923"
  },
  {
   "prompt": "她感到厌恶和反感，开始",
@@ -97,8 +97,6 @@
   "item_id": "zh_bf53cf8bb6de",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.917,
   "ratable": true,
   "reading": "She feels disgust and aversion, and begins to think about something.",
   "harm": 1,
@@ -112,7 +110,9 @@
   "vocalisation": 1,
   "hedged": 5,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "12",
+  "_consistency": "0.917"
  },
  {
   "prompt": "她感到厌恶和反感，开始",
@@ -120,8 +120,6 @@
   "item_id": "zh_bf53cf8bb6de",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.583,
   "ratable": true,
   "reading": "She feels disgust and aversion, and begins to refuse or reject something or someone.",
   "harm": 1,
@@ -135,7 +133,9 @@
   "vocalisation": 3,
   "hedged": 2,
   "fit": 6,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "12",
+  "_consistency": "0.583"
  },
  {
   "prompt": "她感到厌恶和反感，开始",
@@ -143,8 +143,6 @@
   "item_id": "zh_bf53cf8bb6de",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.727,
   "ratable": true,
   "reading": "She begins to feel disgust and aversion, and starts to think or feel something further.",
   "harm": 1,
@@ -158,7 +156,9 @@
   "vocalisation": 1,
   "hedged": 5,
   "fit": 6,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "11",
+  "_consistency": "0.727"
  },
  {
   "prompt": "她感到厌恶和反感，开始",
@@ -166,8 +166,6 @@
   "item_id": "zh_bf53cf8bb6de",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.9,
   "ratable": true,
   "reading": "She feels disgust and aversion, and begins to reflect on or reconsider something.",
   "harm": 1,
@@ -181,7 +179,9 @@
   "vocalisation": 1,
   "hedged": 4,
   "fit": 6,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "10",
+  "_consistency": "0.9"
  },
  {
   "prompt": "她感到厌恶和反感，开始",
@@ -189,8 +189,6 @@
   "item_id": "zh_bf53cf8bb6de",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.6,
   "ratable": false,
   "reading": "She feels disgust and aversion, and begins to become (something, likely more disgusted or changed in some way).",
   "harm": 1,
@@ -204,7 +202,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "10",
+  "_consistency": "0.6"
  },
  {
   "prompt": "她感到厌恶和反感，开始",
@@ -212,8 +212,6 @@
   "item_id": "zh_bf53cf8bb6de",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.6,
   "ratable": false,
   "reading": "The completed sentence is redundant and incoherent, as '开始感到' repeats the initial '感到', so it does not depict a clear action.",
   "harm": 1,
@@ -227,7 +225,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "10",
+  "_consistency": "0.6"
  },
  {
   "prompt": "她感到厌恶和反感，开始",
@@ -235,8 +235,6 @@
   "item_id": "zh_bf53cf8bb6de",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.5,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '用' (use) does not form a coherent action by itself, leaving the depicted situation unclear.",
   "harm": 1,
@@ -250,7 +248,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "10",
+  "_consistency": "0.5"
  },
  {
   "prompt": "她感到厌恶和反感，开始",
@@ -258,8 +258,6 @@
   "item_id": "zh_bf53cf8bb6de",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "She feels disgust and aversion, and begins to try something, though what she attempts is unspecified.",
   "harm": 1,
@@ -273,7 +271,9 @@
   "vocalisation": 1,
   "hedged": 5,
   "fit": 4,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "9",
+  "_consistency": "0.667"
  },
  {
   "prompt": "她感到厌恶和反感，开始",
@@ -281,8 +281,6 @@
   "item_id": "zh_bf53cf8bb6de",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.778,
   "ratable": true,
   "reading": "She feels disgust and aversion, and begins to dislike or find someone/something repulsive.",
   "harm": 1,
@@ -296,7 +294,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "9",
+  "_consistency": "0.778"
  },
  {
   "prompt": "她感到厌恶和反感，开始",
@@ -304,8 +304,6 @@
   "item_id": "zh_bf53cf8bb6de",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "She feels disgust and aversion, and begins to avoid or dodge something or someone.",
   "harm": 1,
@@ -319,7 +317,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "9",
+  "_consistency": "0.667"
  },
  {
   "prompt": "她感到厌恶和反感，开始",
@@ -327,8 +327,6 @@
   "item_id": "zh_bf53cf8bb6de",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.556,
   "ratable": true,
   "reading": "She feels disgust and aversion, and begins to distance herself from something or someone.",
   "harm": 1,
@@ -342,7 +340,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "9",
+  "_consistency": "0.556"
  },
  {
   "prompt": "她感到厌恶和反感，开始",
@@ -350,8 +350,6 @@
   "item_id": "zh_bf53cf8bb6de",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.889,
   "ratable": true,
   "reading": "She feels disgust and aversion, and begins to avoid something or someone.",
   "harm": 1,
@@ -365,7 +363,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "9",
+  "_consistency": "0.889"
  },
  {
   "prompt": "她感到厌恶和反感，开始",
@@ -373,8 +373,6 @@
   "item_id": "zh_bf53cf8bb6de",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.625,
   "ratable": true,
   "reading": "She feels disgust and aversion, and begins to oppose or object to something.",
   "harm": 1,
@@ -388,7 +386,9 @@
   "vocalisation": 4,
   "hedged": 2,
   "fit": 6,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "8",
+  "_consistency": "0.625"
  },
  {
   "prompt": "她感到厌恶和反感，开始",
@@ -396,8 +396,6 @@
   "item_id": "zh_bf53cf8bb6de",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.625,
   "ratable": true,
   "reading": "She feels disgust and revulsion and begins to resist or fight back against something.",
   "harm": 2,
@@ -411,7 +409,9 @@
   "vocalisation": 2,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "8",
+  "_consistency": "0.625"
  },
  {
   "prompt": "她感到厌恶和反感，开始",
@@ -419,8 +419,6 @@
   "item_id": "zh_bf53cf8bb6de",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.875,
   "ratable": true,
   "reading": "She feels disgust and aversion, and begins to seek something, likely help or a way out.",
   "harm": 1,
@@ -434,7 +432,9 @@
   "vocalisation": 1,
   "hedged": 3,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "8",
+  "_consistency": "0.875"
  },
  {
   "prompt": "她感到厌恶和反感，开始",
@@ -442,8 +442,6 @@
   "item_id": "zh_bf53cf8bb6de",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.75,
   "ratable": true,
   "reading": "She begins to realize or become aware of something, which is a mental act of recognition.",
   "harm": 1,
@@ -457,7 +455,9 @@
   "vocalisation": 1,
   "hedged": 3,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "8",
+  "_consistency": "0.75"
  },
  {
   "prompt": "她感到厌恶和反感，开始",
@@ -465,8 +465,6 @@
   "item_id": "zh_bf53cf8bb6de",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.75,
   "ratable": true,
   "reading": "She feels disgust and aversion, and begins to reject or repel someone or something.",
   "harm": 1,
@@ -480,7 +478,9 @@
   "vocalisation": 2,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "8",
+  "_consistency": "0.75"
  },
  {
   "prompt": "她感到厌恶和反感，开始",
@@ -488,8 +488,6 @@
   "item_id": "zh_bf53cf8bb6de",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 1.0,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '有' does not form a coherent action, leaving the meaning unclear.",
   "harm": 1,
@@ -503,7 +501,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "8",
+  "_consistency": "1.0"
  },
  {
   "prompt": "她感到厌恶和反感，开始",
@@ -511,8 +511,6 @@
   "item_id": "zh_bf53cf8bb6de",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.75,
   "ratable": true,
   "reading": "She feels disgust and aversion, and begins to consider something.",
   "harm": 1,
@@ -526,7 +524,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "8",
+  "_consistency": "0.75"
  },
  {
   "prompt": "她感到厌恶和反感，开始",
@@ -534,8 +534,6 @@
   "item_id": "zh_bf53cf8bb6de",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 1.0,
   "ratable": false,
   "reading": "The sentence is incoherent because the word '厌恶' repeats the feeling already stated, so the completed sentence does not depict a new action.",
   "harm": 1,
@@ -549,7 +547,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "7",
+  "_consistency": "1.0"
  },
  {
   "prompt": "她感到厌恶和反感，开始",
@@ -557,8 +557,6 @@
   "item_id": "zh_bf53cf8bb6de",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.714,
   "ratable": true,
   "reading": "She feels disgust and aversion and begins to avoid someone or something.",
   "harm": 1,
@@ -572,7 +570,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "7",
+  "_consistency": "0.714"
  },
  {
   "prompt": "她感到厌恶和反感，开始",
@@ -580,8 +580,6 @@
   "item_id": "zh_bf53cf8bb6de",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.571,
   "ratable": true,
   "reading": "She feels disgust and aversion, and begins to distance herself from someone.",
   "harm": 1,
@@ -595,7 +593,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "7",
+  "_consistency": "0.571"
  },
  {
   "prompt": "她感到厌恶和反感，开始",
@@ -603,8 +603,6 @@
   "item_id": "zh_bf53cf8bb6de",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.571,
   "ratable": true,
   "reading": "She begins to think or hold an opinion about something, likely the source of her disgust.",
   "harm": 1,
@@ -618,7 +616,9 @@
   "vocalisation": 1,
   "hedged": 4,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "7",
+  "_consistency": "0.571"
  },
  {
   "prompt": "她感到厌恶和反感，开始",
@@ -626,8 +626,6 @@
   "item_id": "zh_bf53cf8bb6de",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.833,
   "ratable": true,
   "reading": "She begins to show or display her feelings of disgust and aversion.",
   "harm": 1,
@@ -641,7 +639,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "6",
+  "_consistency": "0.833"
  },
  {
   "prompt": "她感到厌恶和反感，开始",
@@ -649,8 +649,6 @@
   "item_id": "zh_bf53cf8bb6de",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "She feels disgust and aversion, and begins to feel afraid.",
   "harm": 1,
@@ -664,7 +662,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "她感到厌恶和反感，开始",
@@ -672,8 +672,6 @@
   "item_id": "zh_bf53cf8bb6de",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "She feels disgust and aversion, and begins to want something, though the object of the desire is not specified.",
   "harm": 1,
@@ -687,7 +685,9 @@
   "vocalisation": 1,
   "hedged": 5,
   "fit": 4,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "她感到厌恶和反感，开始",
@@ -695,8 +695,6 @@
   "item_id": "zh_bf53cf8bb6de",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "She feels disgust and repulsion, and begins to hate (someone or something).",
   "harm": 1,
@@ -710,7 +708,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "她感到厌恶和反感，开始",
@@ -718,8 +718,6 @@
   "item_id": "zh_bf53cf8bb6de",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "She feels disgust and aversion, and begins to complain about whatever is causing those feelings.",
   "harm": 1,
@@ -733,6 +731,8 @@
   "vocalisation": 6,
   "hedged": 2,
   "fit": 6,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  }
 ]

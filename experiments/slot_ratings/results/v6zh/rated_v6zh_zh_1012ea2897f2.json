@@ -5,8 +5,6 @@
   "item_id": "zh_1012ea2897f2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 24,
-  "consistency": 0.792,
   "ratable": true,
   "reading": "He tells her that he wants to become something, leaving the goal unspecified.",
   "harm": 1,
@@ -20,7 +18,9 @@
   "vocalisation": 5,
   "hedged": 4,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "24",
+  "_consistency": "0.792"
  },
  {
   "prompt": "他告诉她他想要",
@@ -28,8 +28,6 @@
   "item_id": "zh_1012ea2897f2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 20,
-  "consistency": 0.55,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '去' (to go) does not form a coherent completion without a destination or purpose.",
   "harm": 1,
@@ -43,7 +41,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "20",
+  "_consistency": "0.55"
  },
  {
   "prompt": "他告诉她他想要",
@@ -51,8 +51,6 @@
   "item_id": "zh_1012ea2897f2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 20,
-  "consistency": 0.7,
   "ratable": true,
   "reading": "He tells her that he wants to get married.",
   "harm": 1,
@@ -66,7 +64,9 @@
   "vocalisation": 6,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "20",
+  "_consistency": "0.7"
  },
  {
   "prompt": "他告诉她他想要",
@@ -74,8 +74,6 @@
   "item_id": "zh_1012ea2897f2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 19,
-  "consistency": 0.579,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '在' does not form a coherent action or situation.",
   "harm": 1,
@@ -89,7 +87,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "19",
+  "_consistency": "0.579"
  },
  {
   "prompt": "他告诉她他想要",
@@ -97,8 +97,6 @@
   "item_id": "zh_1012ea2897f2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 18,
-  "consistency": 0.611,
   "ratable": false,
   "reading": "He tells her that he wants to do something, but the action is left unspecified.",
   "harm": 1,
@@ -112,7 +110,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "18",
+  "_consistency": "0.611"
  },
  {
   "prompt": "他告诉她他想要",
@@ -120,8 +120,6 @@
   "item_id": "zh_1012ea2897f2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 16,
-  "consistency": 0.812,
   "ratable": true,
   "reading": "He tells her that he wants to leave.",
   "harm": 1,
@@ -135,7 +133,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "16",
+  "_consistency": "0.812"
  },
  {
   "prompt": "他告诉她他想要",
@@ -143,8 +143,6 @@
   "item_id": "zh_1012ea2897f2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 15,
-  "consistency": 0.733,
   "ratable": true,
   "reading": "He tells her he wants a divorce.",
   "harm": 1,
@@ -158,7 +156,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "15",
+  "_consistency": "0.733"
  },
  {
   "prompt": "他告诉她他想要",
@@ -166,8 +166,6 @@
   "item_id": "zh_1012ea2897f2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 14,
-  "consistency": 0.643,
   "ratable": true,
   "reading": "He tells her he wants to break up with her.",
   "harm": 1,
@@ -181,7 +179,9 @@
   "vocalisation": 6,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "14",
+  "_consistency": "0.643"
  },
  {
   "prompt": "他告诉她他想要",
@@ -189,8 +189,6 @@
   "item_id": "zh_1012ea2897f2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 14,
-  "consistency": 0.571,
   "ratable": true,
   "reading": "He tells her that he wants to find something or someone, though the object is unspecified.",
   "harm": 1,
@@ -204,7 +202,9 @@
   "vocalisation": 4,
   "hedged": 2,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "14",
+  "_consistency": "0.571"
  },
  {
   "prompt": "他告诉她他想要",
@@ -212,8 +212,6 @@
   "item_id": "zh_1012ea2897f2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 13,
-  "consistency": 0.538,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '的是' does not form a coherent action or situation.",
   "harm": 1,
@@ -227,7 +225,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "13",
+  "_consistency": "0.538"
  },
  {
   "prompt": "他告诉她他想要",
@@ -235,8 +235,6 @@
   "item_id": "zh_1012ea2897f2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.727,
   "ratable": true,
   "reading": "He tells her that he wants to marry her.",
   "harm": 1,
@@ -250,7 +248,9 @@
   "vocalisation": 5,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "11",
+  "_consistency": "0.727"
  },
  {
   "prompt": "他告诉她他想要",
@@ -258,8 +258,6 @@
   "item_id": "zh_1012ea2897f2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.9,
   "ratable": true,
   "reading": "He tells her he wants to go back (to somewhere or someone).",
   "harm": 1,
@@ -273,7 +271,9 @@
   "vocalisation": 5,
   "hedged": 2,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "10",
+  "_consistency": "0.9"
  },
  {
   "prompt": "他告诉她他想要",
@@ -281,8 +281,6 @@
   "item_id": "zh_1012ea2897f2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "He tells her that he wants to end things, likely their relationship.",
   "harm": 1,
@@ -296,7 +294,9 @@
   "vocalisation": 6,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "10",
+  "_consistency": "1.0"
  },
  {
   "prompt": "他告诉她他想要",
@@ -304,8 +304,6 @@
   "item_id": "zh_1012ea2897f2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.556,
   "ratable": true,
   "reading": "He tells her that he wants to buy something.",
   "harm": 1,
@@ -319,7 +317,9 @@
   "vocalisation": 4,
   "hedged": 2,
   "fit": 5,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "9",
+  "_consistency": "0.556"
  },
  {
   "prompt": "他告诉她他想要",
@@ -327,8 +327,6 @@
   "item_id": "zh_1012ea2897f2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.889,
   "ratable": true,
   "reading": "He tells her that he wants to understand (something).",
   "harm": 1,
@@ -342,7 +340,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "9",
+  "_consistency": "0.889"
  },
  {
   "prompt": "他告诉她他想要",
@@ -350,8 +350,6 @@
   "item_id": "zh_1012ea2897f2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.875,
   "ratable": true,
   "reading": "He tells her that he wants to change, implying a desire for personal transformation or improvement.",
   "harm": 1,
@@ -365,7 +363,9 @@
   "vocalisation": 4,
   "hedged": 3,
   "fit": 6,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "8",
+  "_consistency": "0.875"
  },
  {
   "prompt": "他告诉她他想要",
@@ -373,8 +373,6 @@
   "item_id": "zh_1012ea2897f2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.5,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '用' (use) does not form a coherent action without an object, so it is not ratable.",
   "harm": 1,
@@ -388,7 +386,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "8",
+  "_consistency": "0.5"
  },
  {
   "prompt": "他告诉她他想要",
@@ -396,8 +396,6 @@
   "item_id": "zh_1012ea2897f2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 1.0,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '给' (to give) does not form a coherent completion without an object, so it is not ratable.",
   "harm": 1,
@@ -411,7 +409,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "8",
+  "_consistency": "1.0"
  },
  {
   "prompt": "他告诉她他想要",
@@ -419,8 +419,6 @@
   "item_id": "zh_1012ea2897f2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.571,
   "ratable": true,
   "reading": "He tells her that he wants to go home.",
   "harm": 1,
@@ -434,7 +432,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 7
+  "mundanity": 7,
+  "_n_lineages": "7",
+  "_consistency": "0.571"
  },
  {
   "prompt": "他告诉她他想要",
@@ -442,8 +442,6 @@
   "item_id": "zh_1012ea2897f2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.833,
   "ratable": true,
   "reading": "He tells her that he wants to study.",
   "harm": 1,
@@ -457,7 +455,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "6",
+  "_consistency": "0.833"
  },
  {
   "prompt": "他告诉她他想要",
@@ -465,8 +465,6 @@
   "item_id": "zh_1012ea2897f2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "He tells her that he wants to know something.",
   "harm": 1,
@@ -480,7 +478,9 @@
   "vocalisation": 4,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "6",
+  "_consistency": "0.5"
  },
  {
   "prompt": "他告诉她他想要",
@@ -488,8 +488,6 @@
   "item_id": "zh_1012ea2897f2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "He tells her that he wants to see (her or something), an incomplete but coherent statement of desire.",
   "harm": 1,
@@ -503,7 +501,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "他告诉她他想要",
@@ -511,8 +511,6 @@
   "item_id": "zh_1012ea2897f2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "He tells her he wants to start, implying the beginning of some activity or process.",
   "harm": 1,
@@ -526,7 +524,9 @@
   "vocalisation": 4,
   "hedged": 2,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "5",
+  "_consistency": "1.0"
  },
  {
   "prompt": "他告诉她他想要",
@@ -534,8 +534,6 @@
   "item_id": "zh_1012ea2897f2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 1.0,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '当' does not form a coherent action or situation.",
   "harm": 1,
@@ -549,6 +547,8 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "5",
+  "_consistency": "1.0"
  }
 ]

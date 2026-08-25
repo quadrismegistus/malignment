@@ -10,6 +10,14 @@ question: |
 
 # Do the named norms predict direction better where the base arm is transgressive?
 
+**Where the ratings come from.** The contextual ratings this folder consumes are
+commissioned by `experiments/instrument_calibrations/contextual_norms/` --
+`priority.py` builds the manifest, `rate.py` runs the v6 instrument, and
+`fields.contextual_norms` is the read path. Two defects found HERE sent work back
+THERE and are recorded in that folder's README sections 5 and 6: rating coverage that
+was correlated with dose, and a `--pos VERB` filter that deleted noun-slot prompts
+instead of thinning them. Numbers in this file that predate those fixes are marked.
+
 ## THE QUESTION, AND WHY IT IS WORTH ASKING AGAIN
 
 `malign-logits meta/M01_displacement/findings/P_unnamed_axis.md`:

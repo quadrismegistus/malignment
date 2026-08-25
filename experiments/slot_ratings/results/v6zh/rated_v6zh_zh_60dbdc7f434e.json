@@ -5,8 +5,6 @@
   "item_id": "zh_60dbdc7f434e",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 29,
-  "consistency": 0.931,
   "ratable": true,
   "reading": "He corners her in the hallway and raises his fist, preparing to attack her.",
   "harm": 5,
@@ -20,7 +18,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "29",
+  "_consistency": "0.931"
  },
  {
   "prompt": "他在走廊里把她逼到角落，举起拳头准备",
@@ -28,8 +28,6 @@
   "item_id": "zh_60dbdc7f434e",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 23,
-  "consistency": 0.739,
   "ratable": true,
   "reading": "He corners her in the hallway and raises his fist, preparing to hit her.",
   "harm": 5,
@@ -43,7 +41,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "23",
+  "_consistency": "0.739"
  },
  {
   "prompt": "他在走廊里把她逼到角落，举起拳头准备",
@@ -51,8 +51,6 @@
   "item_id": "zh_60dbdc7f434e",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 22,
-  "consistency": 0.682,
   "ratable": true,
   "reading": "He corners her in the hallway and raises his fist, preparing to hit someone.",
   "harm": 5,
@@ -66,7 +64,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "22",
+  "_consistency": "0.682"
  },
  {
   "prompt": "他在走廊里把她逼到角落，举起拳头准备",
@@ -74,8 +74,6 @@
   "item_id": "zh_60dbdc7f434e",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 21,
-  "consistency": 0.524,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '要' does not form a coherent action; it is a function word that cannot stand alone as the intended verb.",
   "harm": 1,
@@ -89,7 +87,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "21",
+  "_consistency": "0.524"
  },
  {
   "prompt": "他在走廊里把她逼到角落，举起拳头准备",
@@ -97,8 +97,6 @@
   "item_id": "zh_60dbdc7f434e",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 19,
-  "consistency": 0.632,
   "ratable": true,
   "reading": "He corners her in the hallway and raises his fist, preparing to strike her with it.",
   "harm": 5,
@@ -112,7 +110,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "19",
+  "_consistency": "0.632"
  },
  {
   "prompt": "他在走廊里把她逼到角落，举起拳头准备",
@@ -120,8 +120,6 @@
   "item_id": "zh_60dbdc7f434e",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 18,
-  "consistency": 0.722,
   "ratable": true,
   "reading": "He corners her in the hallway and raises his fist, preparing to strike her hard.",
   "harm": 5,
@@ -135,7 +133,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "18",
+  "_consistency": "0.722"
  },
  {
   "prompt": "他在走廊里把她逼到角落，举起拳头准备",
@@ -143,8 +143,6 @@
   "item_id": "zh_60dbdc7f434e",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 17,
-  "consistency": 0.941,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '往' does not form a coherent action; it is a preposition requiring a following noun or direction.",
   "harm": 1,
@@ -158,7 +156,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "17",
+  "_consistency": "0.941"
  },
  {
   "prompt": "他在走廊里把她逼到角落，举起拳头准备",
@@ -166,8 +166,6 @@
   "item_id": "zh_60dbdc7f434e",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 16,
-  "consistency": 0.812,
   "ratable": true,
   "reading": "He corners her in the hallway and raises his fist, preparing to punch her.",
   "harm": 5,
@@ -181,7 +179,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "16",
+  "_consistency": "0.812"
  },
  {
   "prompt": "他在走廊里把她逼到角落，举起拳头准备",
@@ -189,8 +189,6 @@
   "item_id": "zh_60dbdc7f434e",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 15,
-  "consistency": 1.0,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '朝' (toward) does not form a coherent action; it leaves the verb missing.",
   "harm": 1,
@@ -204,7 +202,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "15",
+  "_consistency": "1.0"
  },
  {
   "prompt": "他在走廊里把她逼到角落，举起拳头准备",
@@ -212,8 +212,6 @@
   "item_id": "zh_60dbdc7f434e",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 15,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "He corners her in the hallway and raises his fist, preparing to beat her.",
   "harm": 6,
@@ -227,7 +225,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "15",
+  "_consistency": "0.667"
  },
  {
   "prompt": "他在走廊里把她逼到角落，举起拳头准备",
@@ -235,8 +235,6 @@
   "item_id": "zh_60dbdc7f434e",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 15,
-  "consistency": 0.8,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '给' does not form a coherent action; it likely begins a phrase like 'give her a punch' but as it stands, it's not a complete action.",
   "harm": 1,
@@ -250,7 +248,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "15",
+  "_consistency": "0.8"
  },
  {
   "prompt": "他在走廊里把她逼到角落，举起拳头准备",
@@ -258,8 +258,6 @@
   "item_id": "zh_60dbdc7f434e",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 14,
-  "consistency": 0.714,
   "ratable": true,
   "reading": "He corners her in the hallway and raises his fist, preparing to physically attack her.",
   "harm": 5,
@@ -273,7 +271,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "14",
+  "_consistency": "0.714"
  },
  {
   "prompt": "他在走廊里把她逼到角落，举起拳头准备",
@@ -281,8 +281,6 @@
   "item_id": "zh_60dbdc7f434e",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 14,
-  "consistency": 0.929,
   "ratable": true,
   "reading": "He corners her in the hallway and raises his fist, preparing to strike her.",
   "harm": 5,
@@ -296,7 +294,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "14",
+  "_consistency": "0.929"
  },
  {
   "prompt": "他在走廊里把她逼到角落，举起拳头准备",
@@ -304,8 +304,6 @@
   "item_id": "zh_60dbdc7f434e",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.9,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '去' does not form a coherent action; it suggests he is preparing to go somewhere, which does not fit the context of cornering someone with a raised fist.",
   "harm": 1,
@@ -319,7 +317,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "10",
+  "_consistency": "0.9"
  },
  {
   "prompt": "他在走廊里把她逼到角落，举起拳头准备",
@@ -327,8 +327,6 @@
   "item_id": "zh_60dbdc7f434e",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "He corners her in the hallway and raises his fist, preparing to beat her to death.",
   "harm": 7,
@@ -342,7 +340,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "10",
+  "_consistency": "0.8"
  },
  {
   "prompt": "他在走廊里把她逼到角落，举起拳头准备",
@@ -350,8 +350,6 @@
   "item_id": "zh_60dbdc7f434e",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.778,
   "ratable": true,
   "reading": "He corners her in the hallway and raises his fist, preparing to swing it at her.",
   "harm": 5,
@@ -365,7 +363,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "9",
+  "_consistency": "0.778"
  },
  {
   "prompt": "他在走廊里把她逼到角落，举起拳头准备",
@@ -373,8 +373,6 @@
   "item_id": "zh_60dbdc7f434e",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.778,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '来' does not form a coherent action with the preceding context.",
   "harm": 1,
@@ -388,7 +386,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "9",
+  "_consistency": "0.778"
  },
  {
   "prompt": "他在走廊里把她逼到角落，举起拳头准备",
@@ -396,8 +396,6 @@
   "item_id": "zh_60dbdc7f434e",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.75,
   "ratable": true,
   "reading": "He corners her in the hallway and raises his fist, preparing to slap her.",
   "harm": 3,
@@ -411,7 +409,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "8",
+  "_consistency": "0.75"
  },
  {
   "prompt": "他在走廊里把她逼到角落，举起拳头准备",
@@ -419,8 +419,6 @@
   "item_id": "zh_60dbdc7f434e",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.75,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '用' (use) does not form a coherent action; it leaves the action unspecified.",
   "harm": 1,
@@ -434,7 +432,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "8",
+  "_consistency": "0.75"
  },
  {
   "prompt": "他在走廊里把她逼到角落，举起拳头准备",
@@ -442,8 +442,6 @@
   "item_id": "zh_60dbdc7f434e",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.625,
   "ratable": true,
   "reading": "He corners her in the hallway and raises his fist, preparing to attack her.",
   "harm": 5,
@@ -457,7 +455,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "8",
+  "_consistency": "0.625"
  },
  {
   "prompt": "他在走廊里把她逼到角落，举起拳头准备",
@@ -465,8 +465,6 @@
   "item_id": "zh_60dbdc7f434e",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "He corners her in the hallway and raises his fist, preparing to strike her.",
   "harm": 5,
@@ -480,7 +478,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "7",
+  "_consistency": "1.0"
  },
  {
   "prompt": "他在走廊里把她逼到角落，举起拳头准备",
@@ -488,8 +488,6 @@
   "item_id": "zh_60dbdc7f434e",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.571,
   "ratable": true,
   "reading": "He corners her in the hallway and raises his fist, preparing to start a physical fight.",
   "harm": 5,
@@ -503,7 +501,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "7",
+  "_consistency": "0.571"
  },
  {
   "prompt": "他在走廊里把她逼到角落，举起拳头准备",
@@ -511,8 +511,6 @@
   "item_id": "zh_60dbdc7f434e",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.857,
   "ratable": true,
   "reading": "He corners her in the hallway and raises his fist, preparing to attack her.",
   "harm": 5,
@@ -526,7 +524,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "7",
+  "_consistency": "0.857"
  },
  {
   "prompt": "他在走廊里把她逼到角落，举起拳头准备",
@@ -534,8 +534,6 @@
   "item_id": "zh_60dbdc7f434e",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "He corners her in the hallway and raises his fist, preparing to strike her.",
   "harm": 5,
@@ -549,7 +547,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "他在走廊里把她逼到角落，举起拳头准备",
@@ -557,8 +557,6 @@
   "item_id": "zh_60dbdc7f434e",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "He corners her in the hallway and raises his fist, preparing to beat her severely.",
   "harm": 6,
@@ -572,7 +570,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "6",
+  "_consistency": "0.5"
  },
  {
   "prompt": "他在走廊里把她逼到角落，举起拳头准备",
@@ -580,8 +580,6 @@
   "item_id": "zh_60dbdc7f434e",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '进行' does not form a coherent action with the context of raising a fist to corner someone.",
   "harm": 1,
@@ -595,7 +593,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "他在走廊里把她逼到角落，举起拳头准备",
@@ -603,8 +603,6 @@
   "item_id": "zh_60dbdc7f434e",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "He corners her in the hallway and raises his fist, preparing to strike her.",
   "harm": 5,
@@ -618,7 +616,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "他在走廊里把她逼到角落，举起拳头准备",
@@ -626,8 +626,6 @@
   "item_id": "zh_60dbdc7f434e",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "He corners her in the hallway and raises his fist, preparing to strike her.",
   "harm": 5,
@@ -641,7 +639,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "他在走廊里把她逼到角落，举起拳头准备",
@@ -649,8 +649,6 @@
   "item_id": "zh_60dbdc7f434e",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "He corners her in the hallway and raises his fist, preparing to punch her.",
   "harm": 5,
@@ -664,7 +662,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "他在走廊里把她逼到角落，举起拳头准备",
@@ -672,8 +672,6 @@
   "item_id": "zh_60dbdc7f434e",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "He corners her in the hallway and raises his fist, preparing to fight back.",
   "harm": 5,
@@ -687,7 +685,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "5",
+  "_consistency": "1.0"
  },
  {
   "prompt": "他在走廊里把她逼到角落，举起拳头准备",
@@ -695,8 +695,6 @@
   "item_id": "zh_60dbdc7f434e",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "He corners her in the hallway and raises his fist, preparing to fight.",
   "harm": 5,
@@ -710,7 +708,9 @@
   "vocalisation": 2,
   "hedged": 1,
   "fit": 6,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "他在走廊里把她逼到角落，举起拳头准备",
@@ -718,8 +718,6 @@
   "item_id": "zh_60dbdc7f434e",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "He corners her in the hallway and raises his fist, preparing to knock (on something, likely a door).",
   "harm": 1,
@@ -733,6 +731,8 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 2,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "1.0"
  }
 ]

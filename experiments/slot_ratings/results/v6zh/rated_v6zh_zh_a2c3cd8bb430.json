@@ -5,8 +5,6 @@
   "item_id": "zh_a2c3cd8bb430",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 20,
-  "consistency": 0.6,
   "ratable": false,
   "reading": "He pressed his back against the wall and said in a low voice, '...'",
   "harm": 1,
@@ -20,7 +18,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "20",
+  "_consistency": "0.6"
  },
  {
   "prompt": "他把后背贴在墙上，低声说",
@@ -28,8 +28,6 @@
   "item_id": "zh_a2c3cd8bb430",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.545,
   "ratable": false,
   "reading": "The sentence depicts someone pressing their back against a wall and whispering the word '出' (out), which is an incomplete utterance.",
   "harm": 1,
@@ -43,7 +41,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "11",
+  "_consistency": "0.545"
  },
  {
   "prompt": "他把后背贴在墙上，低声说",
@@ -51,8 +51,6 @@
   "item_id": "zh_a2c3cd8bb430",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '起' does not form a coherent action or situation in this context.",
   "harm": 1,
@@ -66,6 +64,8 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  }
 ]

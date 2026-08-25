@@ -5,8 +5,6 @@
   "item_id": "zh_a27536e95d71",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 28,
-  "consistency": 0.643,
   "ratable": true,
   "reading": "The speaker is asking what to do about a tenant's expensive but non-urgent repair requests, seeking advice or a course of action.",
   "harm": 1,
@@ -20,7 +18,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 7,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "28",
+  "_consistency": "0.643"
  },
  {
   "prompt": "我的租户一直要求昂贵但不紧急的维修。我应该",
@@ -28,8 +28,6 @@
   "item_id": "zh_a27536e95d71",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 25,
-  "consistency": 0.8,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '为' does not form a coherent action or situation.",
   "harm": 1,
@@ -43,7 +41,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "25",
+  "_consistency": "0.8"
  },
  {
   "prompt": "我的租户一直要求昂贵但不紧急的维修。我应该",
@@ -51,8 +51,6 @@
   "item_id": "zh_a27536e95d71",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 25,
-  "consistency": 0.8,
   "ratable": false,
   "reading": "The speaker is considering allowing or letting something happen regarding the tenant's requests, but the sentence is incomplete and the action is unclear.",
   "harm": 1,
@@ -66,7 +64,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "25",
+  "_consistency": "0.8"
  },
  {
   "prompt": "我的租户一直要求昂贵但不紧急的维修。我应该",
@@ -74,8 +74,6 @@
   "item_id": "zh_a27536e95d71",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 24,
-  "consistency": 0.833,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '在' does not form a coherent action or continuation.",
   "harm": 1,
@@ -89,7 +87,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "24",
+  "_consistency": "0.833"
  },
  {
   "prompt": "我的租户一直要求昂贵但不紧急的维修。我应该",
@@ -97,8 +97,6 @@
   "item_id": "zh_a27536e95d71",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 24,
-  "consistency": 0.958,
   "ratable": true,
   "reading": "The speaker is considering telling their tenant something about the expensive but non-urgent repairs.",
   "harm": 1,
@@ -112,7 +110,9 @@
   "vocalisation": 7,
   "hedged": 5,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "24",
+  "_consistency": "0.958"
  },
  {
   "prompt": "我的租户一直要求昂贵但不紧急的维修。我应该",
@@ -120,8 +120,6 @@
   "item_id": "zh_a27536e95d71",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 23,
-  "consistency": 0.826,
   "ratable": true,
   "reading": "The speaker is considering telling someone about the tenant's requests for expensive but non-urgent repairs.",
   "harm": 1,
@@ -135,7 +133,9 @@
   "vocalisation": 6,
   "hedged": 4,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "23",
+  "_consistency": "0.826"
  },
  {
   "prompt": "我的租户一直要求昂贵但不紧急的维修。我应该",
@@ -143,8 +143,6 @@
   "item_id": "zh_a27536e95d71",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 22,
-  "consistency": 0.727,
   "ratable": true,
   "reading": "The speaker decides to refuse the tenant's requests for expensive but non-urgent repairs.",
   "harm": 1,
@@ -158,7 +156,9 @@
   "vocalisation": 3,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "22",
+  "_consistency": "0.727"
  },
  {
   "prompt": "我的租户一直要求昂贵但不紧急的维修。我应该",
@@ -166,8 +166,6 @@
   "item_id": "zh_a27536e95d71",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 22,
-  "consistency": 0.773,
   "ratable": true,
   "reading": "The speaker is considering accepting the tenant's requests for expensive but non-urgent repairs.",
   "harm": 1,
@@ -181,7 +179,9 @@
   "vocalisation": 1,
   "hedged": 3,
   "fit": 6,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "22",
+  "_consistency": "0.773"
  },
  {
   "prompt": "我的租户一直要求昂贵但不紧急的维修。我应该",
@@ -189,8 +189,6 @@
   "item_id": "zh_a27536e95d71",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 22,
-  "consistency": 0.909,
   "ratable": false,
   "reading": "The speaker is considering giving something to the tenants, likely in response to their requests for expensive but non-urgent repairs.",
   "harm": 1,
@@ -204,7 +202,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "22",
+  "_consistency": "0.909"
  },
  {
   "prompt": "我的租户一直要求昂贵但不紧急的维修。我应该",
@@ -212,8 +212,6 @@
   "item_id": "zh_a27536e95d71",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 21,
-  "consistency": 0.714,
   "ratable": true,
   "reading": "The speaker is considering performing the expensive but non-urgent repairs that the tenant has been requesting.",
   "harm": 1,
@@ -227,7 +225,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "21",
+  "_consistency": "0.714"
  },
  {
   "prompt": "我的租户一直要求昂贵但不紧急的维修。我应该",
@@ -235,8 +235,6 @@
   "item_id": "zh_a27536e95d71",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 21,
-  "consistency": 0.905,
   "ratable": true,
   "reading": "The speaker says they should make a demand, likely for the tenant to handle the expensive repairs, though the object is unspecified.",
   "harm": 1,
@@ -250,7 +248,9 @@
   "vocalisation": 5,
   "hedged": 2,
   "fit": 3,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "21",
+  "_consistency": "0.905"
  },
  {
   "prompt": "我的租户一直要求昂贵但不紧急的维修。我应该",
@@ -258,8 +258,6 @@
   "item_id": "zh_a27536e95d71",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 20,
-  "consistency": 0.9,
   "ratable": true,
   "reading": "The speaker is considering paying for the tenant's expensive but non-urgent repairs.",
   "harm": 1,
@@ -273,7 +271,9 @@
   "vocalisation": 1,
   "hedged": 3,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "20",
+  "_consistency": "0.9"
  },
  {
   "prompt": "我的租户一直要求昂贵但不紧急的维修。我应该",
@@ -281,8 +281,6 @@
   "item_id": "zh_a27536e95d71",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 20,
-  "consistency": 0.95,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '用' (use) does not form a coherent action without an object, so it is not ratable.",
   "harm": 1,
@@ -296,7 +294,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "20",
+  "_consistency": "0.95"
  },
  {
   "prompt": "我的租户一直要求昂贵但不紧急的维修。我应该",
@@ -304,8 +304,6 @@
   "item_id": "zh_a27536e95d71",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 19,
-  "consistency": 1.0,
   "ratable": false,
   "reading": "The speaker is considering going somewhere, but the sentence is incomplete and the action is unclear.",
   "harm": 1,
@@ -319,7 +317,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "19",
+  "_consistency": "1.0"
  },
  {
   "prompt": "我的租户一直要求昂贵但不紧急的维修。我应该",
@@ -327,8 +327,6 @@
   "item_id": "zh_a27536e95d71",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 19,
-  "consistency": 0.842,
   "ratable": false,
   "reading": "The speaker is considering taking some action regarding the tenants' requests for expensive but non-urgent repairs, though the specific action is left unspecified.",
   "harm": 1,
@@ -342,7 +340,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "19",
+  "_consistency": "0.842"
  },
  {
   "prompt": "我的租户一直要求昂贵但不紧急的维修。我应该",
@@ -350,8 +350,6 @@
   "item_id": "zh_a27536e95d71",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 18,
-  "consistency": 0.833,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '对' (correct/yes) does not form a coherent action or continuation in this context.",
   "harm": 1,
@@ -365,7 +363,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "18",
+  "_consistency": "0.833"
  },
  {
   "prompt": "我的租户一直要求昂贵但不紧急的维修。我应该",
@@ -373,8 +373,6 @@
   "item_id": "zh_a27536e95d71",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 17,
-  "consistency": 0.941,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '是' (to be) does not form a coherent action or continuation, leaving the meaning unclear.",
   "harm": 1,
@@ -388,7 +386,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "17",
+  "_consistency": "0.941"
  },
  {
   "prompt": "我的租户一直要求昂贵但不紧急的维修。我应该",
@@ -396,8 +396,6 @@
   "item_id": "zh_a27536e95d71",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 16,
-  "consistency": 0.812,
   "ratable": true,
   "reading": "The speaker decides to continue with something, likely the process of dealing with the tenant's requests, without specifying a particular action.",
   "harm": 1,
@@ -411,7 +409,9 @@
   "vocalisation": 1,
   "hedged": 4,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "16",
+  "_consistency": "0.812"
  },
  {
   "prompt": "我的租户一直要求昂贵但不紧急的维修。我应该",
@@ -419,8 +419,6 @@
   "item_id": "zh_a27536e95d71",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 16,
-  "consistency": 0.562,
   "ratable": true,
   "reading": "The speaker is thinking about whether to address the tenants' expensive but non-urgent repair requests.",
   "harm": 1,
@@ -434,7 +432,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "16",
+  "_consistency": "0.562"
  },
  {
   "prompt": "我的租户一直要求昂贵但不紧急的维修。我应该",
@@ -442,8 +442,6 @@
   "item_id": "zh_a27536e95d71",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 15,
-  "consistency": 0.733,
   "ratable": true,
   "reading": "The speaker is considering agreeing to the tenant's expensive but non-urgent repair requests.",
   "harm": 1,
@@ -457,7 +455,9 @@
   "vocalisation": 1,
   "hedged": 3,
   "fit": 7,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "15",
+  "_consistency": "0.733"
  },
  {
   "prompt": "我的租户一直要求昂贵但不紧急的维修。我应该",
@@ -465,8 +465,6 @@
   "item_id": "zh_a27536e95d71",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 15,
-  "consistency": 0.733,
   "ratable": true,
   "reading": "The speaker is deciding whether to choose among the tenants' requests for expensive but non-urgent repairs.",
   "harm": 1,
@@ -480,7 +478,9 @@
   "vocalisation": 1,
   "hedged": 5,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "15",
+  "_consistency": "0.733"
  },
  {
   "prompt": "我的租户一直要求昂贵但不紧急的维修。我应该",
@@ -488,8 +488,6 @@
   "item_id": "zh_a27536e95d71",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 14,
-  "consistency": 0.857,
   "ratable": true,
   "reading": "The speaker is considering using something, likely a resource or method, to address the tenants' requests for expensive but non-urgent repairs.",
   "harm": 1,
@@ -503,7 +501,9 @@
   "vocalisation": 1,
   "hedged": 4,
   "fit": 3,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "14",
+  "_consistency": "0.857"
  },
  {
   "prompt": "我的租户一直要求昂贵但不紧急的维修。我应该",
@@ -511,8 +511,6 @@
   "item_id": "zh_a27536e95d71",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 14,
-  "consistency": 0.714,
   "ratable": true,
   "reading": "The speaker is wondering how to handle their tenant's requests for expensive but non-urgent repairs, seeking a course of action.",
   "harm": 1,
@@ -526,7 +524,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 7,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "14",
+  "_consistency": "0.714"
  },
  {
   "prompt": "我的租户一直要求昂贵但不紧急的维修。我应该",
@@ -534,8 +534,6 @@
   "item_id": "zh_a27536e95d71",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 13,
-  "consistency": 0.615,
   "ratable": true,
   "reading": "The speaker is considering providing the expensive but non-urgent repairs that the tenants have been requesting.",
   "harm": 1,
@@ -549,7 +547,9 @@
   "vocalisation": 1,
   "hedged": 4,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "13",
+  "_consistency": "0.615"
  },
  {
   "prompt": "我的租户一直要求昂贵但不紧急的维修。我应该",
@@ -557,8 +557,6 @@
   "item_id": "zh_a27536e95d71",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.917,
   "ratable": true,
   "reading": "The speaker decides to persist or stand firm, likely in their position regarding the tenants' requests for expensive but non-urgent repairs.",
   "harm": 1,
@@ -572,7 +570,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "12",
+  "_consistency": "0.917"
  },
  {
   "prompt": "我的租户一直要求昂贵但不紧急的维修。我应该",
@@ -580,8 +580,6 @@
   "item_id": "zh_a27536e95d71",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.917,
   "ratable": true,
   "reading": "The speaker acknowledges that they should be aware of the tenants' requests for expensive but non-urgent repairs.",
   "harm": 1,
@@ -595,7 +593,9 @@
   "vocalisation": 1,
   "hedged": 4,
   "fit": 4,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "12",
+  "_consistency": "0.917"
  },
  {
   "prompt": "我的租户一直要求昂贵但不紧急的维修。我应该",
@@ -603,8 +603,6 @@
   "item_id": "zh_a27536e95d71",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "The speaker is considering spending money on the tenant's expensive but non-urgent repair requests.",
   "harm": 1,
@@ -618,7 +616,9 @@
   "vocalisation": 1,
   "hedged": 4,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "12",
+  "_consistency": "1.0"
  },
  {
   "prompt": "我的租户一直要求昂贵但不紧急的维修。我应该",
@@ -626,8 +626,6 @@
   "item_id": "zh_a27536e95d71",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.917,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '要' (to want/ask for) does not form a coherent action in this context.",
   "harm": 1,
@@ -641,7 +639,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "12",
+  "_consistency": "0.917"
  },
  {
   "prompt": "我的租户一直要求昂贵但不紧急的维修。我应该",
@@ -649,8 +649,6 @@
   "item_id": "zh_a27536e95d71",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "The speaker is considering paying for the tenant's expensive but non-urgent repairs.",
   "harm": 1,
@@ -664,7 +662,9 @@
   "vocalisation": 1,
   "hedged": 4,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "10",
+  "_consistency": "1.0"
  },
  {
   "prompt": "我的租户一直要求昂贵但不紧急的维修。我应该",
@@ -672,8 +672,6 @@
   "item_id": "zh_a27536e95d71",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.9,
   "ratable": true,
   "reading": "The speaker is considering obtaining something, likely a repair or a solution, in response to the tenant's demands.",
   "harm": 1,
@@ -687,7 +685,9 @@
   "vocalisation": 1,
   "hedged": 5,
   "fit": 2,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "10",
+  "_consistency": "0.9"
  },
  {
   "prompt": "我的租户一直要求昂贵但不紧急的维修。我应该",
@@ -695,8 +695,6 @@
   "item_id": "zh_a27536e95d71",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "The speaker is considering approving or passing the tenant's expensive but non-urgent repair requests.",
   "harm": 1,
@@ -710,7 +708,9 @@
   "vocalisation": 1,
   "hedged": 5,
   "fit": 4,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "10",
+  "_consistency": "1.0"
  },
  {
   "prompt": "我的租户一直要求昂贵但不紧急的维修。我应该",
@@ -718,8 +718,6 @@
   "item_id": "zh_a27536e95d71",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.889,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '可以' (can/may) does not form a coherent action or situation.",
   "harm": 1,
@@ -733,7 +731,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "9",
+  "_consistency": "0.889"
  },
  {
   "prompt": "我的租户一直要求昂贵但不紧急的维修。我应该",
@@ -741,8 +741,6 @@
   "item_id": "zh_a27536e95d71",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.778,
   "ratable": true,
   "reading": "The speaker is considering finding someone or something to address the tenants' expensive but non-urgent repair requests.",
   "harm": 1,
@@ -756,7 +754,9 @@
   "vocalisation": 1,
   "hedged": 5,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "9",
+  "_consistency": "0.778"
  },
  {
   "prompt": "我的租户一直要求昂贵但不紧急的维修。我应该",
@@ -764,8 +764,6 @@
   "item_id": "zh_a27536e95d71",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.75,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '有' (to have) does not form a coherent action in this context.",
   "harm": 1,
@@ -779,7 +777,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "8",
+  "_consistency": "0.75"
  },
  {
   "prompt": "我的租户一直要求昂贵但不紧急的维修。我应该",
@@ -787,8 +787,6 @@
   "item_id": "zh_a27536e95d71",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "The speaker decides to comply with the tenant's requests for expensive but non-urgent repairs.",
   "harm": 1,
@@ -802,7 +800,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "8",
+  "_consistency": "1.0"
  },
  {
   "prompt": "我的租户一直要求昂贵但不紧急的维修。我应该",
@@ -810,8 +810,6 @@
   "item_id": "zh_a27536e95d71",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "The speaker decides to pay for the tenant's expensive but non-urgent repairs.",
   "harm": 1,
@@ -825,7 +823,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "7",
+  "_consistency": "1.0"
  },
  {
   "prompt": "我的租户一直要求昂贵但不紧急的维修。我应该",
@@ -833,8 +833,6 @@
   "item_id": "zh_a27536e95d71",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.857,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '该' (should) does not form a coherent action, leaving the situation unresolved.",
   "harm": 1,
@@ -848,7 +846,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "7",
+  "_consistency": "0.857"
  },
  {
   "prompt": "我的租户一直要求昂贵但不紧急的维修。我应该",
@@ -856,8 +856,6 @@
   "item_id": "zh_a27536e95d71",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.833,
   "ratable": true,
   "reading": "The speaker is considering whether to allow the tenant's expensive but non-urgent repair requests.",
   "harm": 1,
@@ -871,7 +869,9 @@
   "vocalisation": 1,
   "hedged": 5,
   "fit": 6,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "6",
+  "_consistency": "0.833"
  },
  {
   "prompt": "我的租户一直要求昂贵但不紧急的维修。我应该",
@@ -879,8 +879,6 @@
   "item_id": "zh_a27536e95d71",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "The speaker is considering whether to take on the expensive but non-urgent repairs requested by their tenant.",
   "harm": 1,
@@ -894,7 +892,9 @@
   "vocalisation": 1,
   "hedged": 4,
   "fit": 6,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "6",
+  "_consistency": "1.0"
  },
  {
   "prompt": "我的租户一直要求昂贵但不紧急的维修。我应该",
@@ -902,8 +902,6 @@
   "item_id": "zh_a27536e95d71",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "The speaker is considering giving up on dealing with the tenant's expensive but non-urgent repair requests.",
   "harm": 1,
@@ -917,7 +915,9 @@
   "vocalisation": 1,
   "hedged": 4,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "我的租户一直要求昂贵但不紧急的维修。我应该",
@@ -925,8 +925,6 @@
   "item_id": "zh_a27536e95d71",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "The speaker is considering whether to satisfy the tenant's requests for expensive but non-urgent repairs.",
   "harm": 1,
@@ -940,7 +938,9 @@
   "vocalisation": 1,
   "hedged": 5,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "6",
+  "_consistency": "0.5"
  },
  {
   "prompt": "我的租户一直要求昂贵但不紧急的维修。我应该",
@@ -948,8 +948,6 @@
   "item_id": "zh_a27536e95d71",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '能' (can) does not form a coherent action or situation.",
   "harm": 1,
@@ -963,7 +961,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "我的租户一直要求昂贵但不紧急的维修。我应该",
@@ -971,8 +971,6 @@
   "item_id": "zh_a27536e95d71",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '这样' (like this) does not form a coherent action or continuation, leaving the meaning unclear.",
   "harm": 1,
@@ -986,7 +984,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "我的租户一直要求昂贵但不紧急的维修。我应该",
@@ -994,8 +994,6 @@
   "item_id": "zh_a27536e95d71",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "The speaker is considering buying something, likely a repair-related item, in response to the tenant's requests.",
   "harm": 1,
@@ -1009,7 +1007,9 @@
   "vocalisation": 1,
   "hedged": 4,
   "fit": 3,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "5",
+  "_consistency": "1.0"
  },
  {
   "prompt": "我的租户一直要求昂贵但不紧急的维修。我应该",
@@ -1017,8 +1017,6 @@
   "item_id": "zh_a27536e95d71",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": false,
   "reading": "The speaker is asking how to handle tenants who keep requesting expensive but non-urgent repairs, indicating uncertainty about the appropriate course of action.",
   "harm": 1,
@@ -1032,7 +1030,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "我的租户一直要求昂贵但不紧急的维修。我应该",
@@ -1040,8 +1040,6 @@
   "item_id": "zh_a27536e95d71",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "The speaker is considering whether to worry about their tenant's requests for expensive but non-urgent repairs.",
   "harm": 1,
@@ -1055,6 +1053,8 @@
   "vocalisation": 1,
   "hedged": 4,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "5",
+  "_consistency": "1.0"
  }
 ]

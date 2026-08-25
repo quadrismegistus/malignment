@@ -5,8 +5,6 @@
   "item_id": "zh_4f8a2a92b7e5",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 18,
-  "consistency": 0.889,
   "ratable": true,
   "reading": "The plumber looks at the new faucet and says 'okay' or 'good', expressing approval.",
   "harm": 1,
@@ -20,7 +18,9 @@
   "vocalisation": 6,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 7
+  "mundanity": 7,
+  "_n_lineages": "18",
+  "_consistency": "0.889"
  },
  {
   "prompt": "管道工看着新的水龙头说嗯",
@@ -28,8 +28,6 @@
   "item_id": "zh_4f8a2a92b7e5",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 15,
-  "consistency": 1.0,
   "ratable": false,
   "reading": "The plumber looks at the new faucet and says 'um, yes'.",
   "harm": 1,
@@ -43,7 +41,9 @@
   "vocalisation": 6,
   "hedged": 4,
   "fit": 5,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "15",
+  "_consistency": "1.0"
  },
  {
   "prompt": "管道工看着新的水龙头说嗯",
@@ -51,8 +51,6 @@
   "item_id": "zh_4f8a2a92b7e5",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.9,
   "ratable": true,
   "reading": "The plumber looks at the new faucet and says 'not bad', expressing approval.",
   "harm": 1,
@@ -66,7 +64,9 @@
   "vocalisation": 6,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 7
+  "mundanity": 7,
+  "_n_lineages": "10",
+  "_consistency": "0.9"
  },
  {
   "prompt": "管道工看着新的水龙头说嗯",
@@ -74,8 +74,6 @@
   "item_id": "zh_4f8a2a92b7e5",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "The plumber looks at the new faucet and says 'okay' in a neutral, accepting manner.",
   "harm": 1,
@@ -89,6 +87,8 @@
   "vocalisation": 6,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 7
+  "mundanity": 7,
+  "_n_lineages": "6",
+  "_consistency": "0.5"
  }
 ]

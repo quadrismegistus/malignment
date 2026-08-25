@@ -1,0 +1,25 @@
+[
+ {
+  "prompt": "hot for destiny and the street. She turned off the Avenue and walked down a line",
+  "word": "street",
+  "item_id": "en_7ea808a26e52",
+  "lang": "en",
+  "pos": "NOUN",
+  "_n_lineages": "7",
+  "_consistency": "0.714",
+  "ratable": false,
+  "reading": "The sentence depicts a woman walking down a street after turning off an avenue, with the word 'street' creating a redundant or awkward continuation.",
+  "harm": 1,
+  "aggression": 1,
+  "directedness": 1,
+  "makes_better": 1,
+  "makes_worse": 1,
+  "interiority": 1,
+  "deliberation": 1,
+  "superego": 1,
+  "vocalisation": 1,
+  "hedged": 1,
+  "fit": 1,
+  "mundanity": 4
+ }
+]

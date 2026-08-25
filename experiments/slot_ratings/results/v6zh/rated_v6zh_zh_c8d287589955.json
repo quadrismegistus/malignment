@@ -5,8 +5,6 @@
   "item_id": "zh_c8d287589955",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 23,
-  "consistency": 0.522,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '人在' does not form a coherent continuation, leaving the action unclear.",
   "harm": 1,
@@ -20,7 +18,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "23",
+  "_consistency": "0.522"
  },
  {
   "prompt": "她握着他的手，这时机器",
@@ -28,8 +28,6 @@
   "item_id": "zh_c8d287589955",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 20,
-  "consistency": 0.75,
   "ratable": true,
   "reading": "She holds his hand as the machine begins to operate.",
   "harm": 1,
@@ -43,7 +41,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "20",
+  "_consistency": "0.75"
  },
  {
   "prompt": "她握着他的手，这时机器",
@@ -51,8 +51,6 @@
   "item_id": "zh_c8d287589955",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 15,
-  "consistency": 0.6,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '在' is a function word that does not complete a coherent action.",
   "harm": 1,
@@ -66,7 +64,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "15",
+  "_consistency": "0.6"
  },
  {
   "prompt": "她握着他的手，这时机器",
@@ -74,8 +74,6 @@
   "item_id": "zh_c8d287589955",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 13,
-  "consistency": 0.769,
   "ratable": true,
   "reading": "She holds his hand as the machine emits a sound or signal.",
   "harm": 1,
@@ -89,7 +87,9 @@
   "vocalisation": 4,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "13",
+  "_consistency": "0.769"
  },
  {
   "prompt": "她握着他的手，这时机器",
@@ -97,8 +97,6 @@
   "item_id": "zh_c8d287589955",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "She holds his hand while the machine roars in the background.",
   "harm": 1,
@@ -112,7 +110,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "12",
+  "_consistency": "0.5"
  },
  {
   "prompt": "她握着他的手，这时机器",
@@ -120,8 +120,6 @@
   "item_id": "zh_c8d287589955",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.818,
   "ratable": true,
   "reading": "She holds his hand as the machine stops.",
   "harm": 1,
@@ -135,7 +133,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "11",
+  "_consistency": "0.818"
  },
  {
   "prompt": "她握着他的手，这时机器",
@@ -143,8 +143,6 @@
   "item_id": "zh_c8d287589955",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "She holds his hand as the machine makes a sound.",
   "harm": 1,
@@ -158,7 +156,9 @@
   "vocalisation": 4,
   "hedged": 1,
   "fit": 6,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "10",
+  "_consistency": "0.6"
  },
  {
   "prompt": "她握着他的手，这时机器",
@@ -166,8 +166,6 @@
   "item_id": "zh_c8d287589955",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "She holds his hand as the machine stops.",
   "harm": 1,
@@ -181,7 +179,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "9",
+  "_consistency": "0.667"
  },
  {
   "prompt": "她握着他的手，这时机器",
@@ -189,8 +189,6 @@
   "item_id": "zh_c8d287589955",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.625,
   "ratable": false,
   "reading": "The completed sentence is incoherent; '人走' does not form a meaningful continuation with '机器'.",
   "harm": 1,
@@ -204,7 +202,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "8",
+  "_consistency": "0.625"
  },
  {
   "prompt": "她握着他的手，这时机器",
@@ -212,8 +212,6 @@
   "item_id": "zh_c8d287589955",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "She holds his hand while the machine starts operating.",
   "harm": 1,
@@ -227,7 +225,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "她握着他的手，这时机器",
@@ -235,8 +235,6 @@
   "item_id": "zh_c8d287589955",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '会' (will) does not form a coherent action, leaving the situation unresolved.",
   "harm": 1,
@@ -250,7 +248,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "她握着他的手，这时机器",
@@ -258,8 +258,6 @@
   "item_id": "zh_c8d287589955",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "She holds his hand as a machine appears.",
   "harm": 1,
@@ -273,7 +271,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "她握着他的手，这时机器",
@@ -281,8 +281,6 @@
   "item_id": "zh_c8d287589955",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "She holds his hand as the machine starts again.",
   "harm": 1,
@@ -296,7 +294,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "她握着他的手，这时机器",
@@ -304,8 +304,6 @@
   "item_id": "zh_c8d287589955",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '发' alone does not form a coherent action; it likely begins a verb like '发' (to send, to start) but without completion it is not ratable.",
   "harm": 1,
@@ -319,7 +317,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "她握着他的手，这时机器",
@@ -327,8 +327,6 @@
   "item_id": "zh_c8d287589955",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": false,
   "reading": "She holds his hand while the machine is in some state, but the sentence is incomplete and the word 'is' does not depict a specific action.",
   "harm": 1,
@@ -342,6 +340,8 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  }
 ]

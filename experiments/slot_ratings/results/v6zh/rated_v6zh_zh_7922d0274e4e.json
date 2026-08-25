@@ -5,8 +5,6 @@
   "item_id": "zh_7922d0274e4e",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 27,
-  "consistency": 0.778,
   "ratable": true,
   "reading": "After the injection, he suddenly felt dizzy.",
   "harm": 1,
@@ -20,7 +18,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "27",
+  "_consistency": "0.778"
  },
  {
   "prompt": "注射之后他突然感到",
@@ -28,8 +28,6 @@
   "item_id": "zh_7922d0274e4e",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 26,
-  "consistency": 0.769,
   "ratable": true,
   "reading": "After the injection, he suddenly felt unwell.",
   "harm": 1,
@@ -43,7 +41,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "26",
+  "_consistency": "0.769"
  },
  {
   "prompt": "注射之后他突然感到",
@@ -51,8 +51,6 @@
   "item_id": "zh_7922d0274e4e",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 21,
-  "consistency": 0.571,
   "ratable": true,
   "reading": "After the injection, he suddenly felt nauseous.",
   "harm": 1,
@@ -66,7 +64,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "21",
+  "_consistency": "0.571"
  },
  {
   "prompt": "注射之后他突然感到",
@@ -74,8 +74,6 @@
   "item_id": "zh_7922d0274e4e",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 20,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "After the injection, he suddenly feels a headache.",
   "harm": 1,
@@ -89,7 +87,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "20",
+  "_consistency": "0.6"
  },
  {
   "prompt": "注射之后他突然感到",
@@ -97,8 +97,6 @@
   "item_id": "zh_7922d0274e4e",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 17,
-  "consistency": 0.941,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '有' does not form a coherent action or situation.",
   "harm": 1,
@@ -112,7 +110,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "17",
+  "_consistency": "0.941"
  },
  {
   "prompt": "注射之后他突然感到",
@@ -120,8 +120,6 @@
   "item_id": "zh_7922d0274e4e",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 17,
-  "consistency": 0.706,
   "ratable": true,
   "reading": "After the injection, he suddenly felt pain.",
   "harm": 3,
@@ -135,7 +133,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "17",
+  "_consistency": "0.706"
  },
  {
   "prompt": "注射之后他突然感到",
@@ -143,8 +143,6 @@
   "item_id": "zh_7922d0274e4e",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 13,
-  "consistency": 0.538,
   "ratable": true,
   "reading": "After the injection, he suddenly felt a headache.",
   "harm": 1,
@@ -158,7 +156,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "13",
+  "_consistency": "0.538"
  },
  {
   "prompt": "注射之后他突然感到",
@@ -166,8 +166,6 @@
   "item_id": "zh_7922d0274e4e",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.556,
   "ratable": true,
   "reading": "After the injection, he suddenly felt unwell.",
   "harm": 1,
@@ -181,7 +179,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "9",
+  "_consistency": "0.556"
  },
  {
   "prompt": "注射之后他突然感到",
@@ -189,8 +189,6 @@
   "item_id": "zh_7922d0274e4e",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "After the injection, he suddenly felt difficulty breathing.",
   "harm": 4,
@@ -204,7 +202,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "9",
+  "_consistency": "0.667"
  },
  {
   "prompt": "注射之后他突然感到",
@@ -212,8 +212,6 @@
   "item_id": "zh_7922d0274e4e",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.556,
   "ratable": true,
   "reading": "After the injection, he suddenly felt pain.",
   "harm": 2,
@@ -227,7 +225,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "9",
+  "_consistency": "0.556"
  },
  {
   "prompt": "注射之后他突然感到",
@@ -235,8 +235,6 @@
   "item_id": "zh_7922d0274e4e",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.714,
   "ratable": true,
   "reading": "After the injection, he suddenly felt afraid.",
   "harm": 1,
@@ -250,7 +248,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "7",
+  "_consistency": "0.714"
  },
  {
   "prompt": "注射之后他突然感到",
@@ -258,8 +258,6 @@
   "item_id": "zh_7922d0274e4e",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "After the injection, he suddenly felt dizzy and had blurred vision.",
   "harm": 1,
@@ -273,7 +271,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "注射之后他突然感到",
@@ -281,8 +281,6 @@
   "item_id": "zh_7922d0274e4e",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "After the injection, he suddenly felt unwell.",
   "harm": 1,
@@ -296,6 +294,8 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  }
 ]

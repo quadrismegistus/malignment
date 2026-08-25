@@ -477,3 +477,34 @@ legible as coverage rather than as a null.
 - **The exploratory sweep is run but not written up here.** `analyse.py
   --explore` reports 239 further scales; every one is a candidate for a
   registration and not a result.
+
+## THE AGGREGATE / INDIVIDUAL DISTINCTION, AND named_under_dose
+
+This folder's dose slopes are large and highly significant -- `k_concreteness`
+MARGINAL p=0.119 against DOSE p=1e-5, and so on. `experiments/displacement/
+named_under_dose/` asks a dose question too and finds a flat NULL. Both are right,
+and the pair is more informative than either alone.
+
+    here                  x = base-arm k_transgressiveness at the prompt
+                          y = aligned - base on the TARGET scale, a LEVEL SHIFT of
+                              the mass-weighted mean
+                          OLS slope, sign test over 50 lineages, nothing held out
+
+    named_under_dose      outcome = which way an INDIVIDUAL word moved, +1/-1
+                          held out by WORD, AUC in a low- against a high-dose stratum
+
+**This folder asks how far the distribution slides along a named scale. That one
+asks how well a word's ratings say which way that word goes.** Dose can scale the
+AMOUNT of movement without changing its SORTABILITY: if a loaded frame pushes every
+word further down concreteness, the mean moves much more while which particular
+words rise stays exactly as predictable. Turning up the volume does not make the
+signal easier to classify.
+
+Three differences push the same way -- unit (50 lineages against held-out words),
+fitted against held-out, aggregate against individual. The last is what Findings P's
+ICC of 0.131 names: 82-87% of the fall/rise variance is WITHIN a word across sites,
+which an aggregate averages away and an individual test cannot.
+
+**So a dose slope here is not evidence that a named scale predicts displacement**,
+and the absence of one there is not evidence that dose does nothing. They are
+different questions about the same data.

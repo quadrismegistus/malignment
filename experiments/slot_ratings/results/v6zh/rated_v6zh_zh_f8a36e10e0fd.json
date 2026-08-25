@@ -5,8 +5,6 @@
   "item_id": "zh_f8a36e10e0fd",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 1.0,
   "ratable": false,
   "reading": "The sentence describes someone who is free and unrestrained, choosing to become something, though the object of 'become' is unspecified.",
   "harm": 1,
@@ -20,7 +18,9 @@
   "vocalisation": 1,
   "hedged": 4,
   "fit": 4,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "7",
+  "_consistency": "1.0"
  },
  {
   "prompt": "他既是自由的又是无拘无束的，选择了",
@@ -28,8 +28,6 @@
   "item_id": "zh_f8a36e10e0fd",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.833,
   "ratable": true,
   "reading": "He, being free and unrestrained, chose to give up.",
   "harm": 1,
@@ -43,7 +41,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "6",
+  "_consistency": "0.833"
  },
  {
   "prompt": "他既是自由的又是无拘无束的，选择了",
@@ -51,8 +51,6 @@
   "item_id": "zh_f8a36e10e0fd",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": false,
   "reading": "The sentence describes someone who is free and unrestrained, choosing to act or do something, though the specific action is left unspecified.",
   "harm": 1,
@@ -66,7 +64,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "他既是自由的又是无拘无束的，选择了",
@@ -74,8 +74,6 @@
   "item_id": "zh_f8a36e10e0fd",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '去' (to go) does not form a coherent action without a destination or purpose, so it is not ratable.",
   "harm": 1,
@@ -89,6 +87,8 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  }
 ]

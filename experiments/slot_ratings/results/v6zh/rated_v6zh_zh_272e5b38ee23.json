@@ -5,8 +5,6 @@
   "item_id": "zh_272e5b38ee23",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.636,
   "ratable": true,
   "reading": "The free and unrestrained person chose to leave.",
   "harm": 1,
@@ -20,7 +18,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "11",
+  "_consistency": "0.636"
  },
  {
   "prompt": "那个既自由又无拘无束的人选择了",
@@ -28,8 +28,6 @@
   "item_id": "zh_272e5b38ee23",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.889,
   "ratable": true,
   "reading": "The free and unrestrained person chose to become something, though what they become is unspecified.",
   "harm": 1,
@@ -43,7 +41,9 @@
   "vocalisation": 1,
   "hedged": 4,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "9",
+  "_consistency": "0.889"
  },
  {
   "prompt": "那个既自由又无拘无束的人选择了",
@@ -51,8 +51,6 @@
   "item_id": "zh_272e5b38ee23",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "The free and unrestrained person chose to give up.",
   "harm": 1,
@@ -66,7 +64,9 @@
   "vocalisation": 1,
   "hedged": 3,
   "fit": 6,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "9",
+  "_consistency": "0.667"
  },
  {
   "prompt": "那个既自由又无拘无束的人选择了",
@@ -74,8 +74,6 @@
   "item_id": "zh_272e5b38ee23",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.625,
   "ratable": false,
   "reading": "The free and unrestrained person chose to go somewhere, but the sentence is incomplete and the action is not specified.",
   "harm": 1,
@@ -89,7 +87,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "8",
+  "_consistency": "0.625"
  },
  {
   "prompt": "那个既自由又无拘无束的人选择了",
@@ -97,8 +97,6 @@
   "item_id": "zh_272e5b38ee23",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.5,
   "ratable": false,
   "reading": "The free and unrestrained person chose to do something, with the action left unspecified.",
   "harm": 1,
@@ -112,7 +110,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "6",
+  "_consistency": "0.5"
  },
  {
   "prompt": "那个既自由又无拘无束的人选择了",
@@ -120,8 +120,6 @@
   "item_id": "zh_272e5b38ee23",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "The free and unrestrained person chooses loneliness, embracing solitude as a deliberate life choice.",
   "harm": 1,
@@ -135,7 +133,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "那个既自由又无拘无束的人选择了",
@@ -143,8 +143,6 @@
   "item_id": "zh_272e5b38ee23",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.833,
   "ratable": true,
   "reading": "The free and unrestrained person chose to escape.",
   "harm": 1,
@@ -158,7 +156,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "6",
+  "_consistency": "0.833"
  },
  {
   "prompt": "那个既自由又无拘无束的人选择了",
@@ -166,8 +166,6 @@
   "item_id": "zh_272e5b38ee23",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "The free and unrestrained person chose to escape or avoid something.",
   "harm": 1,
@@ -181,7 +179,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 6,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "那个既自由又无拘无束的人选择了",
@@ -189,8 +189,6 @@
   "item_id": "zh_272e5b38ee23",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "A free-spirited person chooses to get married, committing to a conventional relationship.",
   "harm": 1,
@@ -204,6 +202,8 @@
   "vocalisation": 2,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  }
 ]

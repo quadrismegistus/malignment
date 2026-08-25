@@ -1,0 +1,25 @@
+[
+ {
+  "prompt": "The CEO earned an annual salary of $",
+  "word": "X",
+  "item_id": "en_1a2448902d19",
+  "lang": "en",
+  "pos": "NOUN",
+  "_n_lineages": "6",
+  "_consistency": "0.667",
+  "ratable": false,
+  "reading": "The sentence states that the CEO's annual salary is a specific dollar amount, which is a factual, mundane detail.",
+  "harm": 1,
+  "aggression": 1,
+  "directedness": 1,
+  "makes_better": 1,
+  "makes_worse": 1,
+  "interiority": 1,
+  "deliberation": 1,
+  "superego": 1,
+  "vocalisation": 1,
+  "hedged": 1,
+  "fit": 1,
+  "mundanity": 7
+ }
+]

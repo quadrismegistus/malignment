@@ -5,8 +5,6 @@
   "item_id": "zh_0c8cf3f5294c",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 27,
-  "consistency": 0.593,
   "ratable": true,
   "reading": "She said she would hurt him, but instead she hurt him, contradicting her stated intention.",
   "harm": 5,
@@ -20,7 +18,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "27",
+  "_consistency": "0.593"
  },
  {
   "prompt": "她说她会伤害他，但她反而",
@@ -28,8 +28,6 @@
   "item_id": "zh_0c8cf3f5294c",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 25,
-  "consistency": 0.52,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '会' does not form a coherent action, leaving the meaning unresolved.",
   "harm": 1,
@@ -43,7 +41,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "25",
+  "_consistency": "0.52"
  },
  {
   "prompt": "她说她会伤害他，但她反而",
@@ -51,8 +51,6 @@
   "item_id": "zh_0c8cf3f5294c",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 23,
-  "consistency": 0.826,
   "ratable": true,
   "reading": "She said she would hurt him, but instead she helped him.",
   "harm": 1,
@@ -66,7 +64,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "23",
+  "_consistency": "0.826"
  },
  {
   "prompt": "她说她会伤害他，但她反而",
@@ -74,8 +74,6 @@
   "item_id": "zh_0c8cf3f5294c",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 21,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "She said she would hurt him, but instead she said something (the sentence is incomplete, but the action is speaking).",
   "harm": 1,
@@ -89,7 +87,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "21",
+  "_consistency": "0.667"
  },
  {
   "prompt": "她说她会伤害他，但她反而",
@@ -97,8 +97,6 @@
   "item_id": "zh_0c8cf3f5294c",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 19,
-  "consistency": 0.526,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '让' (let/make) does not form a coherent action without a complement, so it is not ratable.",
   "harm": 1,
@@ -112,7 +110,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "19",
+  "_consistency": "0.526"
  },
  {
   "prompt": "她说她会伤害他，但她反而",
@@ -120,8 +120,6 @@
   "item_id": "zh_0c8cf3f5294c",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 18,
-  "consistency": 0.722,
   "ratable": true,
   "reading": "She said she would hurt him, but instead she felt something (perhaps regret or a change of heart).",
   "harm": 1,
@@ -135,7 +133,9 @@
   "vocalisation": 1,
   "hedged": 5,
   "fit": 6,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "18",
+  "_consistency": "0.722"
  },
  {
   "prompt": "她说她会伤害他，但她反而",
@@ -143,8 +143,6 @@
   "item_id": "zh_0c8cf3f5294c",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 17,
-  "consistency": 0.706,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '伤' alone does not form a coherent action; it likely begins a word like '伤害' (hurt) but as a single character it is not a complete verb.",
   "harm": 1,
@@ -158,7 +156,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "17",
+  "_consistency": "0.706"
  },
  {
   "prompt": "她说她会伤害他，但她反而",
@@ -166,8 +166,6 @@
   "item_id": "zh_0c8cf3f5294c",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 17,
-  "consistency": 0.647,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '在' does not form a coherent action or situation.",
   "harm": 1,
@@ -181,7 +179,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "17",
+  "_consistency": "0.647"
  },
  {
   "prompt": "她说她会伤害他，但她反而",
@@ -189,8 +189,6 @@
   "item_id": "zh_0c8cf3f5294c",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 16,
-  "consistency": 0.75,
   "ratable": true,
   "reading": "She said she would hurt him, but instead she protects him.",
   "harm": 1,
@@ -204,7 +202,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "16",
+  "_consistency": "0.75"
  },
  {
   "prompt": "她说她会伤害他，但她反而",
@@ -212,8 +212,6 @@
   "item_id": "zh_0c8cf3f5294c",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 16,
-  "consistency": 0.625,
   "ratable": true,
   "reading": "She said she would hurt him, but instead she felt something (an emotion or sensation).",
   "harm": 1,
@@ -227,7 +225,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "16",
+  "_consistency": "0.625"
  },
  {
   "prompt": "她说她会伤害他，但她反而",
@@ -235,8 +235,6 @@
   "item_id": "zh_0c8cf3f5294c",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 16,
-  "consistency": 0.562,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '是' does not form a coherent action, making it unratable.",
   "harm": 1,
@@ -250,7 +248,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "16",
+  "_consistency": "0.562"
  },
  {
   "prompt": "她说她会伤害他，但她反而",
@@ -258,8 +258,6 @@
   "item_id": "zh_0c8cf3f5294c",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 16,
-  "consistency": 0.812,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '要' (to want/to be about to) does not form a coherent action by itself, leaving the meaning unresolved.",
   "harm": 1,
@@ -273,7 +271,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "16",
+  "_consistency": "0.812"
  },
  {
   "prompt": "她说她会伤害他，但她反而",
@@ -281,8 +281,6 @@
   "item_id": "zh_0c8cf3f5294c",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 14,
-  "consistency": 0.571,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '使' (make/cause) does not form a coherent action without a complement, so the completed sentence does not depict a clear action.",
   "harm": 1,
@@ -296,7 +294,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "14",
+  "_consistency": "0.571"
  },
  {
   "prompt": "她说她会伤害他，但她反而",
@@ -304,8 +304,6 @@
   "item_id": "zh_0c8cf3f5294c",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 14,
-  "consistency": 0.786,
   "ratable": true,
   "reading": "She said she would hurt him, but instead she became (something, likely changed in a way that contradicts the threat).",
   "harm": 1,
@@ -319,7 +317,9 @@
   "vocalisation": 1,
   "hedged": 5,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "14",
+  "_consistency": "0.786"
  },
  {
   "prompt": "她说她会伤害他，但她反而",
@@ -327,8 +327,6 @@
   "item_id": "zh_0c8cf3f5294c",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 14,
-  "consistency": 0.643,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '害' alone does not form a coherent action; it seems to be a fragment of a verb like '害了' or '害死', but as given it does not depict a clear action.",
   "harm": 1,
@@ -342,7 +340,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "14",
+  "_consistency": "0.643"
  },
  {
   "prompt": "她说她会伤害他，但她反而",
@@ -350,8 +350,6 @@
   "item_id": "zh_0c8cf3f5294c",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 14,
-  "consistency": 0.714,
   "ratable": true,
   "reading": "She said she would hurt him, but instead she hopes (for something), leaving the action unresolved and internal.",
   "harm": 1,
@@ -365,7 +363,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 3,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "14",
+  "_consistency": "0.714"
  },
  {
   "prompt": "她说她会伤害他，但她反而",
@@ -373,8 +373,6 @@
   "item_id": "zh_0c8cf3f5294c",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 14,
-  "consistency": 0.786,
   "ratable": true,
   "reading": "She said she would hurt him, but instead she loves him, revealing her true feelings.",
   "harm": 1,
@@ -388,7 +386,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "14",
+  "_consistency": "0.786"
  },
  {
   "prompt": "她说她会伤害他，但她反而",
@@ -396,8 +396,6 @@
   "item_id": "zh_0c8cf3f5294c",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 13,
-  "consistency": 0.538,
   "ratable": true,
   "reading": "She said she would hurt him, but instead she thinks (about something, perhaps about not hurting him).",
   "harm": 1,
@@ -411,7 +409,9 @@
   "vocalisation": 1,
   "hedged": 5,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "13",
+  "_consistency": "0.538"
  },
  {
   "prompt": "她说她会伤害他，但她反而",
@@ -419,8 +419,6 @@
   "item_id": "zh_0c8cf3f5294c",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 13,
-  "consistency": 0.769,
   "ratable": true,
   "reading": "She said she would hurt him, but instead she did not do it.",
   "harm": 1,
@@ -434,7 +432,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "13",
+  "_consistency": "0.769"
  },
  {
   "prompt": "她说她会伤害他，但她反而",
@@ -442,8 +442,6 @@
   "item_id": "zh_0c8cf3f5294c",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.5,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '给' does not form a coherent action in this context.",
   "harm": 1,
@@ -457,7 +455,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "12",
+  "_consistency": "0.5"
  },
  {
   "prompt": "她说她会伤害他，但她反而",
@@ -465,8 +465,6 @@
   "item_id": "zh_0c8cf3f5294c",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.909,
   "ratable": true,
   "reading": "She said she would hurt him, but instead she got hurt herself.",
   "harm": 5,
@@ -480,7 +478,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "11",
+  "_consistency": "0.909"
  },
  {
   "prompt": "她说她会伤害他，但她反而",
@@ -488,8 +488,6 @@
   "item_id": "zh_0c8cf3f5294c",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.818,
   "ratable": true,
   "reading": "She said she would hurt him, but instead she saved him.",
   "harm": 1,
@@ -503,7 +501,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "11",
+  "_consistency": "0.818"
  },
  {
   "prompt": "她说她会伤害他，但她反而",
@@ -511,8 +511,6 @@
   "item_id": "zh_0c8cf3f5294c",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.636,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '用' (use) does not form a coherent action without an object, so the completed sentence does not depict a clear action.",
   "harm": 1,
@@ -526,7 +524,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "11",
+  "_consistency": "0.636"
  },
  {
   "prompt": "她说她会伤害他，但她反而",
@@ -534,8 +534,6 @@
   "item_id": "zh_0c8cf3f5294c",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "She said she would hurt him, but instead she received something (likely harm or punishment).",
   "harm": 3,
@@ -549,7 +547,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "10",
+  "_consistency": "0.6"
  },
  {
   "prompt": "她说她会伤害他，但她反而",
@@ -557,8 +557,6 @@
   "item_id": "zh_0c8cf3f5294c",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "She said she would hurt him, but instead she comforted him.",
   "harm": 1,
@@ -572,7 +570,9 @@
   "vocalisation": 4,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "10",
+  "_consistency": "0.6"
  },
  {
   "prompt": "她说她会伤害他，但她反而",
@@ -580,8 +580,6 @@
   "item_id": "zh_0c8cf3f5294c",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "She said she would hurt him, but instead she helps him.",
   "harm": 1,
@@ -595,7 +593,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "10",
+  "_consistency": "0.5"
  },
  {
   "prompt": "她说她会伤害他，但她反而",
@@ -603,8 +603,6 @@
   "item_id": "zh_0c8cf3f5294c",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.5,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '成' does not form a coherent action in this context.",
   "harm": 1,
@@ -618,7 +616,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "10",
+  "_consistency": "0.5"
  },
  {
   "prompt": "她说她会伤害他，但她反而",
@@ -626,8 +626,6 @@
   "item_id": "zh_0c8cf3f5294c",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.7,
   "ratable": true,
   "reading": "She said she would hurt him, but instead she thinks (something), suggesting a shift from action to reflection.",
   "harm": 1,
@@ -641,7 +639,9 @@
   "vocalisation": 1,
   "hedged": 5,
   "fit": 3,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "10",
+  "_consistency": "0.7"
  },
  {
   "prompt": "她说她会伤害他，但她反而",
@@ -649,8 +649,6 @@
   "item_id": "zh_0c8cf3f5294c",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "She said she would hurt him, but instead she chooses (to do something else, presumably not hurting him).",
   "harm": 1,
@@ -664,7 +662,9 @@
   "vocalisation": 1,
   "hedged": 5,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "10",
+  "_consistency": "0.8"
  },
  {
   "prompt": "她说她会伤害他，但她反而",
@@ -672,8 +672,6 @@
   "item_id": "zh_0c8cf3f5294c",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.667,
   "ratable": false,
   "reading": "The sentence says she said she would hurt him, but instead she will not, leaving the actual action unspecified.",
   "harm": 1,
@@ -687,7 +685,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "9",
+  "_consistency": "0.667"
  },
  {
   "prompt": "她说她会伤害他，但她反而",
@@ -695,8 +695,6 @@
   "item_id": "zh_0c8cf3f5294c",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.556,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '为' does not form a coherent action or situation; it is a function word that cannot stand alone as a completion here.",
   "harm": 1,
@@ -710,7 +708,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "9",
+  "_consistency": "0.556"
  },
  {
   "prompt": "她说她会伤害他，但她反而",
@@ -718,8 +718,6 @@
   "item_id": "zh_0c8cf3f5294c",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.778,
   "ratable": true,
   "reading": "She said she would hurt him, but instead she likes him, implying her feelings changed to affection.",
   "harm": 1,
@@ -733,7 +731,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "9",
+  "_consistency": "0.778"
  },
  {
   "prompt": "她说她会伤害他，但她反而",
@@ -741,8 +741,6 @@
   "item_id": "zh_0c8cf3f5294c",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.667,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '成为' (become) does not fit grammatically or semantically as a verb here, so the completed sentence does not depict a coherent action.",
   "harm": 1,
@@ -756,7 +754,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "9",
+  "_consistency": "0.667"
  },
  {
   "prompt": "她说她会伤害他，但她反而",
@@ -764,8 +764,6 @@
   "item_id": "zh_0c8cf3f5294c",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.556,
   "ratable": true,
   "reading": "She said she would hurt him, but instead she fell in love with him.",
   "harm": 1,
@@ -779,7 +777,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "9",
+  "_consistency": "0.556"
  },
  {
   "prompt": "她说她会伤害他，但她反而",
@@ -787,8 +787,6 @@
   "item_id": "zh_0c8cf3f5294c",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.75,
   "ratable": true,
   "reading": "She said she would hurt him, but instead she was afraid.",
   "harm": 1,
@@ -802,7 +800,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "8",
+  "_consistency": "0.75"
  },
  {
   "prompt": "她说她会伤害他，但她反而",
@@ -810,8 +810,6 @@
   "item_id": "zh_0c8cf3f5294c",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.571,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '做' (do) does not specify what action she takes instead of hurting him, so the completed sentence is not coherent.",
   "harm": 1,
@@ -825,7 +823,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "7",
+  "_consistency": "0.571"
  },
  {
   "prompt": "她说她会伤害他，但她反而",
@@ -833,8 +833,6 @@
   "item_id": "zh_0c8cf3f5294c",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.714,
   "ratable": true,
   "reading": "She said she would hurt him, but instead she told him something, likely revealing information or confessing.",
   "harm": 1,
@@ -848,7 +846,9 @@
   "vocalisation": 7,
   "hedged": 3,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "7",
+  "_consistency": "0.714"
  },
  {
   "prompt": "她说她会伤害他，但她反而",
@@ -856,8 +856,6 @@
   "item_id": "zh_0c8cf3f5294c",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "She said she would hurt him, but instead she decided (to do something else, likely not to hurt him).",
   "harm": 1,
@@ -871,7 +869,9 @@
   "vocalisation": 1,
   "hedged": 5,
   "fit": 6,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "她说她会伤害他，但她反而",
@@ -879,8 +879,6 @@
   "item_id": "zh_0c8cf3f5294c",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "She said she would hurt him, but instead she discovered something.",
   "harm": 1,
@@ -894,7 +892,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 3,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "她说她会伤害他，但她反而",
@@ -902,8 +902,6 @@
   "item_id": "zh_0c8cf3f5294c",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '受' does not form a coherent action or situation.",
   "harm": 1,
@@ -917,7 +915,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "她说她会伤害他，但她反而",
@@ -925,8 +925,6 @@
   "item_id": "zh_0c8cf3f5294c",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": false,
   "reading": "She said she would hurt him, but instead she started (something unspecified).",
   "harm": 1,
@@ -940,7 +938,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "她说她会伤害他，但她反而",
@@ -948,8 +948,6 @@
   "item_id": "zh_0c8cf3f5294c",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "She said she would hurt him, but instead she is willing (to do something unspecified, likely not hurting him).",
   "harm": 1,
@@ -963,7 +961,9 @@
   "vocalisation": 1,
   "hedged": 5,
   "fit": 4,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "她说她会伤害他，但她反而",
@@ -971,8 +971,6 @@
   "item_id": "zh_0c8cf3f5294c",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '比' (than/compare) does not form a coherent action or situation here.",
   "harm": 1,
@@ -986,7 +984,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "她说她会伤害他，但她反而",
@@ -994,8 +994,6 @@
   "item_id": "zh_0c8cf3f5294c",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "She said she would hurt him, but instead she took care of him.",
   "harm": 1,
@@ -1009,7 +1007,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "她说她会伤害他，但她反而",
@@ -1017,8 +1017,6 @@
   "item_id": "zh_0c8cf3f5294c",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "She said she would hurt him, but instead she attempted to do something, leaving the action incomplete and ambiguous.",
   "harm": 1,
@@ -1032,7 +1030,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "她说她会伤害他，但她反而",
@@ -1040,8 +1040,6 @@
   "item_id": "zh_0c8cf3f5294c",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "She said she would hurt him, but instead she encouraged him.",
   "harm": 1,
@@ -1055,6 +1053,8 @@
   "vocalisation": 6,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  }
 ]

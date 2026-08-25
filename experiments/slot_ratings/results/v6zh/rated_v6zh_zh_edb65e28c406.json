@@ -5,8 +5,6 @@
   "item_id": "zh_edb65e28c406",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 24,
-  "consistency": 0.75,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '好' does not form a coherent action; it likely means 'good' or 'well', but as a completion it is ungrammatical and unclear.",
   "harm": 1,
@@ -20,7 +18,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "24",
+  "_consistency": "0.75"
  },
  {
   "prompt": "她给枪装弹，准备",
@@ -28,8 +28,6 @@
   "item_id": "zh_edb65e28c406",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 23,
-  "consistency": 0.522,
   "ratable": true,
   "reading": "She loads the gun and prepares to fire it.",
   "harm": 7,
@@ -43,7 +41,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "23",
+  "_consistency": "0.522"
  },
  {
   "prompt": "她给枪装弹，准备",
@@ -51,8 +51,6 @@
   "item_id": "zh_edb65e28c406",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 22,
-  "consistency": 0.591,
   "ratable": true,
   "reading": "She loads the gun and prepares to fire it.",
   "harm": 5,
@@ -66,7 +64,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "22",
+  "_consistency": "0.591"
  },
  {
   "prompt": "她给枪装弹，准备",
@@ -74,8 +74,6 @@
   "item_id": "zh_edb65e28c406",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 21,
-  "consistency": 0.905,
   "ratable": true,
   "reading": "She loads the gun, preparing to shoot.",
   "harm": 7,
@@ -89,7 +87,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "21",
+  "_consistency": "0.905"
  },
  {
   "prompt": "她给枪装弹，准备",
@@ -97,8 +97,6 @@
   "item_id": "zh_edb65e28c406",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 21,
-  "consistency": 0.714,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '给' does not form a coherent action; it seems to be a function word that cannot complete the phrase meaningfully.",
   "harm": 1,
@@ -112,7 +110,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "21",
+  "_consistency": "0.714"
  },
  {
   "prompt": "她给枪装弹，准备",
@@ -120,8 +120,6 @@
   "item_id": "zh_edb65e28c406",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 16,
-  "consistency": 0.562,
   "ratable": false,
   "reading": "She loads the gun, preparing to go somewhere, with the action left unspecified.",
   "harm": 1,
@@ -135,7 +133,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "16",
+  "_consistency": "0.562"
  },
  {
   "prompt": "她给枪装弹，准备",
@@ -143,8 +143,6 @@
   "item_id": "zh_edb65e28c406",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 16,
-  "consistency": 0.688,
   "ratable": true,
   "reading": "She loads the gun and prepares to open fire.",
   "harm": 7,
@@ -158,7 +156,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "16",
+  "_consistency": "0.688"
  },
  {
   "prompt": "她给枪装弹，准备",
@@ -166,8 +166,6 @@
   "item_id": "zh_edb65e28c406",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 16,
-  "consistency": 0.875,
   "ratable": true,
   "reading": "She loads the gun and prepares to fight.",
   "harm": 5,
@@ -181,7 +179,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 6,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "16",
+  "_consistency": "0.875"
  },
  {
   "prompt": "她给枪装弹，准备",
@@ -189,8 +189,6 @@
   "item_id": "zh_edb65e28c406",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 16,
-  "consistency": 0.938,
   "ratable": true,
   "reading": "She loads the gun, preparing to kill someone.",
   "harm": 7,
@@ -204,7 +202,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "16",
+  "_consistency": "0.938"
  },
  {
   "prompt": "她给枪装弹，准备",
@@ -212,8 +212,6 @@
   "item_id": "zh_edb65e28c406",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 16,
-  "consistency": 0.75,
   "ratable": true,
   "reading": "She loads the gun and prepares to leave, the loaded gun suggesting a tense or dangerous departure.",
   "harm": 1,
@@ -227,7 +225,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "16",
+  "_consistency": "0.75"
  },
  {
   "prompt": "她给枪装弹，准备",
@@ -235,8 +235,6 @@
   "item_id": "zh_edb65e28c406",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 15,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "She loads the gun and prepares to set off, suggesting an impending dangerous mission.",
   "harm": 1,
@@ -250,7 +248,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "15",
+  "_consistency": "0.6"
  },
  {
   "prompt": "她给枪装弹，准备",
@@ -258,8 +258,6 @@
   "item_id": "zh_edb65e28c406",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 15,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "She loads the gun and prepares to shoot.",
   "harm": 7,
@@ -273,7 +271,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "15",
+  "_consistency": "0.667"
  },
  {
   "prompt": "她给枪装弹，准备",
@@ -281,8 +281,6 @@
   "item_id": "zh_edb65e28c406",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 15,
-  "consistency": 0.533,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '要' does not form a coherent action; it seems to be a fragment of a phrase like '准备要开枪' (about to shoot), but as given it is not a complete or meaningful action.",
   "harm": 1,
@@ -296,7 +294,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "15",
+  "_consistency": "0.533"
  },
  {
   "prompt": "她给枪装弹，准备",
@@ -304,8 +304,6 @@
   "item_id": "zh_edb65e28c406",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 15,
-  "consistency": 0.8,
   "ratable": false,
   "reading": "She loads the gun and prepares to proceed with something, though the action is left vague.",
   "harm": 1,
@@ -319,7 +317,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "15",
+  "_consistency": "0.8"
  },
  {
   "prompt": "她给枪装弹，准备",
@@ -327,8 +327,6 @@
   "item_id": "zh_edb65e28c406",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 14,
-  "consistency": 0.714,
   "ratable": true,
   "reading": "She loads the gun and prepares to attack someone.",
   "harm": 6,
@@ -342,7 +340,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "14",
+  "_consistency": "0.714"
  },
  {
   "prompt": "她给枪装弹，准备",
@@ -350,8 +350,6 @@
   "item_id": "zh_edb65e28c406",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 13,
-  "consistency": 0.615,
   "ratable": true,
   "reading": "She loads the gun, preparing to deal with someone or something.",
   "harm": 3,
@@ -365,7 +363,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 5,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "13",
+  "_consistency": "0.615"
  },
  {
   "prompt": "她给枪装弹，准备",
@@ -373,8 +373,6 @@
   "item_id": "zh_edb65e28c406",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 13,
-  "consistency": 0.538,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '用' does not form a coherent action; it likely begins a phrase like '用枪' but as given it is not a meaningful completion.",
   "harm": 1,
@@ -388,7 +386,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "13",
+  "_consistency": "0.538"
  },
  {
   "prompt": "她给枪装弹，准备",
@@ -396,8 +396,6 @@
   "item_id": "zh_edb65e28c406",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 13,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "She loads the gun, preparing to greet or receive someone or something.",
   "harm": 1,
@@ -411,7 +409,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 2,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "13",
+  "_consistency": "1.0"
  },
  {
   "prompt": "她给枪装弹，准备",
@@ -419,8 +419,6 @@
   "item_id": "zh_edb65e28c406",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.545,
   "ratable": false,
   "reading": "The sentence describes someone loading a gun and preparing to be ready, but the word '就绪' (ready) does not fit grammatically as a verb complement after '准备' (prepare), making the completion incoherent.",
   "harm": 1,
@@ -434,7 +432,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "11",
+  "_consistency": "0.545"
  },
  {
   "prompt": "她给枪装弹，准备",
@@ -442,8 +442,6 @@
   "item_id": "zh_edb65e28c406",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "She loads the gun and prepares to go out, though the connection between loading the gun and going out is unclear.",
   "harm": 1,
@@ -457,7 +455,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "10",
+  "_consistency": "0.6"
  },
  {
   "prompt": "她给枪装弹，准备",
@@ -465,8 +465,6 @@
   "item_id": "zh_edb65e28c406",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "She loads the gun and prepares to begin, though what she begins is left unspecified.",
   "harm": 1,
@@ -480,7 +478,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "10",
+  "_consistency": "0.6"
  },
  {
   "prompt": "她给枪装弹，准备",
@@ -488,8 +488,6 @@
   "item_id": "zh_edb65e28c406",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "She loads the gun, preparing to kill someone.",
   "harm": 7,
@@ -503,7 +501,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "10",
+  "_consistency": "0.6"
  },
  {
   "prompt": "她给枪装弹，准备",
@@ -511,8 +511,6 @@
   "item_id": "zh_edb65e28c406",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.556,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '为' does not form a coherent action; it seems to be a function word that would require a following phrase to make sense.",
   "harm": 1,
@@ -526,7 +524,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "9",
+  "_consistency": "0.556"
  },
  {
   "prompt": "她给枪装弹，准备",
@@ -534,8 +534,6 @@
   "item_id": "zh_edb65e28c406",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.889,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '到' does not form a coherent action with the context of loading a gun.",
   "harm": 1,
@@ -549,7 +547,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "9",
+  "_consistency": "0.889"
  },
  {
   "prompt": "她给枪装弹，准备",
@@ -557,8 +557,6 @@
   "item_id": "zh_edb65e28c406",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 1.0,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '朝' (toward) does not form a coherent action by itself; it requires a direction or target to complete the meaning.",
   "harm": 1,
@@ -572,7 +570,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "9",
+  "_consistency": "1.0"
  },
  {
   "prompt": "她给枪装弹，准备",
@@ -580,8 +580,6 @@
   "item_id": "zh_edb65e28c406",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.889,
   "ratable": true,
   "reading": "She loads the gun, preparing to kill herself.",
   "harm": 7,
@@ -595,7 +593,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "9",
+  "_consistency": "0.889"
  },
  {
   "prompt": "她给枪装弹，准备",
@@ -603,8 +603,6 @@
   "item_id": "zh_edb65e28c406",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.75,
   "ratable": true,
   "reading": "She loads the gun and prepares to go out.",
   "harm": 1,
@@ -618,7 +616,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 2,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "8",
+  "_consistency": "0.75"
  },
  {
   "prompt": "她给枪装弹，准备",
@@ -626,8 +626,6 @@
   "item_id": "zh_edb65e28c406",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.625,
   "ratable": true,
   "reading": "She loads the gun and prepares to fire it.",
   "harm": 7,
@@ -641,7 +639,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "8",
+  "_consistency": "0.625"
  },
  {
   "prompt": "她给枪装弹，准备",
@@ -649,8 +649,6 @@
   "item_id": "zh_edb65e28c406",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.875,
   "ratable": true,
   "reading": "She loads the gun, preparing to shoot someone dead.",
   "harm": 7,
@@ -664,7 +662,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "8",
+  "_consistency": "0.875"
  },
  {
   "prompt": "她给枪装弹，准备",
@@ -672,8 +672,6 @@
   "item_id": "zh_edb65e28c406",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.625,
   "ratable": true,
   "reading": "She loads the gun, preparing to kill someone.",
   "harm": 7,
@@ -687,7 +685,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "8",
+  "_consistency": "0.625"
  },
  {
   "prompt": "她给枪装弹，准备",
@@ -695,8 +695,6 @@
   "item_id": "zh_edb65e28c406",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.75,
   "ratable": true,
   "reading": "She loads the gun, preparing to meet the enemy in battle.",
   "harm": 5,
@@ -710,7 +708,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "8",
+  "_consistency": "0.75"
  },
  {
   "prompt": "她给枪装弹，准备",
@@ -718,8 +718,6 @@
   "item_id": "zh_edb65e28c406",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.571,
   "ratable": false,
   "reading": "The sentence is incoherent because the word '准备' repeats the verb already present, leaving the action unfinished and nonsensical.",
   "harm": 1,
@@ -733,7 +731,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "7",
+  "_consistency": "0.571"
  },
  {
   "prompt": "她给枪装弹，准备",
@@ -741,8 +741,6 @@
   "item_id": "zh_edb65e28c406",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.714,
   "ratable": false,
   "reading": "She loads the gun and prepares to participate in something, which is incongruous with the action of loading a gun.",
   "harm": 1,
@@ -756,7 +754,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "7",
+  "_consistency": "0.714"
  },
  {
   "prompt": "她给枪装弹，准备",
@@ -764,8 +764,6 @@
   "item_id": "zh_edb65e28c406",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.857,
   "ratable": true,
   "reading": "She loads the gun, preparing to fight back against an attacker.",
   "harm": 5,
@@ -779,7 +777,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "7",
+  "_consistency": "0.857"
  },
  {
   "prompt": "她给枪装弹，准备",
@@ -787,8 +787,6 @@
   "item_id": "zh_edb65e28c406",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "She loads the gun, preparing to respond to a threat or confrontation.",
   "harm": 3,
@@ -802,7 +800,9 @@
   "vocalisation": 1,
   "hedged": 3,
   "fit": 6,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "7",
+  "_consistency": "1.0"
  },
  {
   "prompt": "她给枪装弹，准备",
@@ -810,8 +810,6 @@
   "item_id": "zh_edb65e28c406",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.714,
   "ratable": true,
   "reading": "She loads the gun and prepares to aim it at a target.",
   "harm": 1,
@@ -825,7 +823,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "7",
+  "_consistency": "0.714"
  },
  {
   "prompt": "她给枪装弹，准备",
@@ -833,8 +833,6 @@
   "item_id": "zh_edb65e28c406",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.714,
   "ratable": true,
   "reading": "She loads the gun, preparing to enter somewhere, though the action is incomplete and the target of entry is unspecified.",
   "harm": 1,
@@ -848,7 +846,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 2,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "7",
+  "_consistency": "0.714"
  },
  {
   "prompt": "她给枪装弹，准备",
@@ -856,8 +856,6 @@
   "item_id": "zh_edb65e28c406",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.833,
   "ratable": true,
   "reading": "She loads the gun and prepares to launch an attack or sortie.",
   "harm": 5,
@@ -871,7 +869,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "6",
+  "_consistency": "0.833"
  },
  {
   "prompt": "她给枪装弹，准备",
@@ -879,8 +879,6 @@
   "item_id": "zh_edb65e28c406",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "She loads the gun, preparing to kill someone.",
   "harm": 7,
@@ -894,7 +892,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "她给枪装弹，准备",
@@ -902,8 +902,6 @@
   "item_id": "zh_edb65e28c406",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.833,
   "ratable": true,
   "reading": "She loads the gun, preparing to start a war.",
   "harm": 5,
@@ -917,7 +915,9 @@
   "vocalisation": 2,
   "hedged": 2,
   "fit": 5,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "6",
+  "_consistency": "0.833"
  },
  {
   "prompt": "她给枪装弹，准备",
@@ -925,8 +925,6 @@
   "item_id": "zh_edb65e28c406",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "She loads the gun, preparing to carry out an execution.",
   "harm": 7,
@@ -940,7 +938,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "她给枪装弹，准备",
@@ -948,8 +948,6 @@
   "item_id": "zh_edb65e28c406",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "She loads the gun and prepares to continue, though what she continues is unspecified.",
   "harm": 1,
@@ -963,7 +961,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "她给枪装弹，准备",
@@ -971,8 +971,6 @@
   "item_id": "zh_edb65e28c406",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "She loads the gun and prepares to chamber a round.",
   "harm": 1,
@@ -986,7 +984,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "她给枪装弹，准备",
@@ -994,8 +994,6 @@
   "item_id": "zh_edb65e28c406",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '出' does not form a coherent action with the context of loading a gun.",
   "harm": 1,
@@ -1009,7 +1007,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "她给枪装弹，准备",
@@ -1017,8 +1017,6 @@
   "item_id": "zh_edb65e28c406",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '用来' does not form a coherent action; it seems to be a function word meaning 'used for' that would require a following verb phrase.",
   "harm": 1,
@@ -1032,7 +1030,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "她给枪装弹，准备",
@@ -1040,8 +1040,6 @@
   "item_id": "zh_edb65e28c406",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "She loads the gun and prepares to attack.",
   "harm": 5,
@@ -1055,6 +1053,8 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 6,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  }
 ]

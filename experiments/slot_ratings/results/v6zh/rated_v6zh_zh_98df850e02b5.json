@@ -5,8 +5,6 @@
   "item_id": "zh_98df850e02b5",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 17,
-  "consistency": 0.706,
   "ratable": false,
   "reading": "The committee decides to postpone the vote until there is something, but the sentence is incomplete and unclear.",
   "harm": 1,
@@ -20,7 +18,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "17",
+  "_consistency": "0.706"
  },
  {
   "prompt": "委员会决定推迟投票，直到",
@@ -28,8 +28,6 @@
   "item_id": "zh_98df850e02b5",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 15,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "The committee decides to postpone the vote until the next [session/meeting], indicating a deferral to a future time.",
   "harm": 1,
@@ -43,7 +41,9 @@
   "vocalisation": 1,
   "hedged": 5,
   "fit": 6,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "15",
+  "_consistency": "0.667"
  },
  {
   "prompt": "委员会决定推迟投票，直到",
@@ -51,8 +51,6 @@
   "item_id": "zh_98df850e02b5",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 13,
-  "consistency": 0.692,
   "ratable": true,
   "reading": "The committee decides to postpone the vote until it obtains something, likely more information or a consensus.",
   "harm": 1,
@@ -66,7 +64,9 @@
   "vocalisation": 1,
   "hedged": 5,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "13",
+  "_consistency": "0.692"
  },
  {
   "prompt": "委员会决定推迟投票，直到",
@@ -74,8 +74,6 @@
   "item_id": "zh_98df850e02b5",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.583,
   "ratable": true,
   "reading": "The committee decides to postpone the vote until the next time, implying a future unspecified session.",
   "harm": 1,
@@ -89,7 +87,9 @@
   "vocalisation": 1,
   "hedged": 6,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "12",
+  "_consistency": "0.583"
  },
  {
   "prompt": "委员会决定推迟投票，直到",
@@ -97,8 +97,6 @@
   "item_id": "zh_98df850e02b5",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.583,
   "ratable": true,
   "reading": "The committee decides to postpone the vote until it receives something, though the object is unspecified.",
   "harm": 1,
@@ -112,7 +110,9 @@
   "vocalisation": 1,
   "hedged": 5,
   "fit": 4,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "12",
+  "_consistency": "0.583"
  },
  {
   "prompt": "委员会决定推迟投票，直到",
@@ -120,8 +120,6 @@
   "item_id": "zh_98df850e02b5",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.545,
   "ratable": false,
   "reading": "The committee decides to postpone the vote until a vote occurs, which is circular and incoherent.",
   "harm": 1,
@@ -135,7 +133,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "11",
+  "_consistency": "0.545"
  },
  {
   "prompt": "委员会决定推迟投票，直到",
@@ -143,8 +143,6 @@
   "item_id": "zh_98df850e02b5",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "The committee decides to postpone the vote until it is certain or confirmed, implying a wait for clarity or assurance before proceeding.",
   "harm": 1,
@@ -158,7 +156,9 @@
   "vocalisation": 1,
   "hedged": 6,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "10",
+  "_consistency": "0.5"
  },
  {
   "prompt": "委员会决定推迟投票，直到",
@@ -166,8 +166,6 @@
   "item_id": "zh_98df850e02b5",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.556,
   "ratable": false,
   "reading": "The committee decides to postpone the vote until it is able to do something, but the sentence is incomplete and the word '能够' (can/be able to) does not specify what action or condition is needed.",
   "harm": 1,
@@ -181,7 +179,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "9",
+  "_consistency": "0.556"
  },
  {
   "prompt": "委员会决定推迟投票，直到",
@@ -189,8 +189,6 @@
   "item_id": "zh_98df850e02b5",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.75,
   "ratable": false,
   "reading": "The committee decides to postpone the vote until a later time, with the word '在' leaving the sentence incomplete and unclear.",
   "harm": 1,
@@ -204,7 +202,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "8",
+  "_consistency": "0.75"
  },
  {
   "prompt": "委员会决定推迟投票，直到",
@@ -212,8 +212,6 @@
   "item_id": "zh_98df850e02b5",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "The committee decides to postpone the vote until something is completed, though the specific task is not named.",
   "harm": 1,
@@ -227,7 +225,9 @@
   "vocalisation": 1,
   "hedged": 5,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "6",
+  "_consistency": "0.5"
  },
  {
   "prompt": "委员会决定推迟投票，直到",
@@ -235,8 +235,6 @@
   "item_id": "zh_98df850e02b5",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.833,
   "ratable": true,
   "reading": "The committee decides to postpone the vote until they find something, likely more information or a consensus.",
   "harm": 1,
@@ -250,7 +248,9 @@
   "vocalisation": 1,
   "hedged": 5,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "6",
+  "_consistency": "0.833"
  },
  {
   "prompt": "委员会决定推迟投票，直到",
@@ -258,8 +258,6 @@
   "item_id": "zh_98df850e02b5",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "The committee decides to postpone the vote until an agreement is reached.",
   "harm": 1,
@@ -273,6 +271,8 @@
   "vocalisation": 1,
   "hedged": 5,
   "fit": 6,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "6",
+  "_consistency": "1.0"
  }
 ]

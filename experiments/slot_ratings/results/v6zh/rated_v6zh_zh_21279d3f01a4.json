@@ -5,8 +5,6 @@
   "item_id": "zh_21279d3f01a4",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 14,
-  "consistency": 0.786,
   "ratable": false,
   "reading": "The sentence fragment is incomplete and the word '们' is a grammatical particle that does not form a coherent action or situation.",
   "harm": 1,
@@ -20,7 +18,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "14",
+  "_consistency": "0.786"
  },
  {
   "prompt": "尽管他们尽了全力，他",
@@ -28,8 +28,6 @@
   "item_id": "zh_21279d3f01a4",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.6,
   "ratable": false,
   "reading": "The fragment is incomplete and the word '們' is a function word that does not form a coherent action.",
   "harm": 1,
@@ -43,7 +41,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "10",
+  "_consistency": "0.6"
  },
  {
   "prompt": "尽管他们尽了全力，他",
@@ -51,8 +51,6 @@
   "item_id": "zh_21279d3f01a4",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.889,
   "ratable": false,
   "reading": "The sentence depicts a situation where, despite their best efforts, he also did not achieve something, leaving the outcome unresolved.",
   "harm": 1,
@@ -66,7 +64,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "9",
+  "_consistency": "0.889"
  },
  {
   "prompt": "尽管他们尽了全力，他",
@@ -74,8 +74,6 @@
   "item_id": "zh_21279d3f01a4",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.571,
   "ratable": false,
   "reading": "Despite their best efforts, he did not [do something], leaving the outcome unresolved.",
   "harm": 1,
@@ -89,7 +87,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "7",
+  "_consistency": "0.571"
  },
  {
   "prompt": "尽管他们尽了全力，他",
@@ -97,8 +97,6 @@
   "item_id": "zh_21279d3f01a4",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 1.0,
   "ratable": false,
   "reading": "The sentence depicts a situation where, despite everyone's best efforts, he remains in a certain state or condition, which is left unspecified.",
   "harm": 1,
@@ -112,7 +110,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "6",
+  "_consistency": "1.0"
  },
  {
   "prompt": "尽管他们尽了全力，他",
@@ -120,8 +120,6 @@
   "item_id": "zh_21279d3f01a4",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": false,
   "reading": "The fragment is incomplete and the word '们尽' does not form a coherent continuation, so the sentence does not depict a clear action.",
   "harm": 1,
@@ -135,7 +133,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "尽管他们尽了全力，他",
@@ -143,8 +143,6 @@
   "item_id": "zh_21279d3f01a4",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": false,
   "reading": "The sentence describes that despite their full efforts, he did not achieve the expected result, leaving the outcome unresolved.",
   "harm": 1,
@@ -158,7 +156,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "尽管他们尽了全力，他",
@@ -166,8 +166,6 @@
   "item_id": "zh_21279d3f01a4",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "Despite their efforts, he felt something, likely an emotion or sensation.",
   "harm": 1,
@@ -181,7 +179,9 @@
   "vocalisation": 1,
   "hedged": 4,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "5",
+  "_consistency": "1.0"
  },
  {
   "prompt": "尽管他们尽了全力，他",
@@ -189,8 +189,6 @@
   "item_id": "zh_21279d3f01a4",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "Despite their best efforts, he feels something, likely a negative emotion or assessment.",
   "harm": 1,
@@ -204,7 +202,9 @@
   "vocalisation": 1,
   "hedged": 4,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "尽管他们尽了全力，他",
@@ -212,8 +212,6 @@
   "item_id": "zh_21279d3f01a4",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": false,
   "reading": "Despite their best efforts, he will still do something, with the outcome left unspecified.",
   "harm": 1,
@@ -227,6 +225,8 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  }
 ]

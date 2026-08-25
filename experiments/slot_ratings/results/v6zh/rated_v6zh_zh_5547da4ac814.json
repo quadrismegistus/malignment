@@ -5,8 +5,6 @@
   "item_id": "zh_5547da4ac814",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 13,
-  "consistency": 0.615,
   "ratable": false,
   "reading": "He whispers to her that he wants to go, leaving the destination or action unspecified.",
   "harm": 1,
@@ -20,7 +18,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "13",
+  "_consistency": "0.615"
  },
  {
   "prompt": "他对她低声说“我想要",
@@ -28,8 +28,6 @@
   "item_id": "zh_5547da4ac814",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.833,
   "ratable": false,
   "reading": "He whispers to her that he wants to do something, but the action is unspecified.",
   "harm": 1,
@@ -43,7 +41,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "12",
+  "_consistency": "0.833"
  },
  {
   "prompt": "他对她低声说“我想要",
@@ -51,8 +51,6 @@
   "item_id": "zh_5547da4ac814",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.636,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '的是' is a grammatical particle that cannot stand alone as a meaningful completion.",
   "harm": 1,
@@ -66,7 +64,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "11",
+  "_consistency": "0.636"
  },
  {
   "prompt": "他对她低声说“我想要",
@@ -74,8 +74,6 @@
   "item_id": "zh_5547da4ac814",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "He whispers to her that he wants to eat.",
   "harm": 1,
@@ -89,7 +87,9 @@
   "vocalisation": 6,
   "hedged": 2,
   "fit": 5,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "10",
+  "_consistency": "0.8"
  },
  {
   "prompt": "他对她低声说“我想要",
@@ -97,8 +97,6 @@
   "item_id": "zh_5547da4ac814",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.9,
   "ratable": true,
   "reading": "He whispers to her that he wants to become something, leaving the goal unspecified.",
   "harm": 1,
@@ -112,7 +110,9 @@
   "vocalisation": 6,
   "hedged": 5,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "10",
+  "_consistency": "0.9"
  },
  {
   "prompt": "他对她低声说“我想要",
@@ -120,8 +120,6 @@
   "item_id": "zh_5547da4ac814",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "He whispers to her that he wants to know something.",
   "harm": 1,
@@ -135,7 +133,9 @@
   "vocalisation": 6,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "10",
+  "_consistency": "0.8"
  },
  {
   "prompt": "他对她低声说“我想要",
@@ -143,8 +143,6 @@
   "item_id": "zh_5547da4ac814",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.556,
   "ratable": true,
   "reading": "He whispers to her that he wants to see her, implying a desire for a meeting or encounter.",
   "harm": 1,
@@ -158,7 +156,9 @@
   "vocalisation": 6,
   "hedged": 1,
   "fit": 6,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "9",
+  "_consistency": "0.556"
  },
  {
   "prompt": "他对她低声说“我想要",
@@ -166,8 +166,6 @@
   "item_id": "zh_5547da4ac814",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.625,
   "ratable": true,
   "reading": "He whispers to her that he wants to kiss her.",
   "harm": 1,
@@ -181,7 +179,9 @@
   "vocalisation": 6,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "8",
+  "_consistency": "0.625"
  },
  {
   "prompt": "他对她低声说“我想要",
@@ -189,8 +189,6 @@
   "item_id": "zh_5547da4ac814",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.75,
   "ratable": true,
   "reading": "He whispers to her that he wants to marry her.",
   "harm": 1,
@@ -204,7 +202,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "8",
+  "_consistency": "0.75"
  },
  {
   "prompt": "他对她低声说“我想要",
@@ -212,8 +212,6 @@
   "item_id": "zh_5547da4ac814",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.571,
   "ratable": true,
   "reading": "He whispers to her that he wants her to do something, leaving the specific action unstated.",
   "harm": 1,
@@ -227,7 +225,9 @@
   "vocalisation": 6,
   "hedged": 4,
   "fit": 6,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "7",
+  "_consistency": "0.571"
  },
  {
   "prompt": "他对她低声说“我想要",
@@ -235,8 +235,6 @@
   "item_id": "zh_5547da4ac814",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.571,
   "ratable": true,
   "reading": "He whispers to her that he wants to tell her something.",
   "harm": 1,
@@ -250,7 +248,9 @@
   "vocalisation": 7,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "7",
+  "_consistency": "0.571"
  },
  {
   "prompt": "他对她低声说“我想要",
@@ -258,8 +258,6 @@
   "item_id": "zh_5547da4ac814",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.714,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '在' does not form a coherent action or situation.",
   "harm": 1,
@@ -273,7 +271,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "7",
+  "_consistency": "0.714"
  },
  {
   "prompt": "他对她低声说“我想要",
@@ -281,8 +281,6 @@
   "item_id": "zh_5547da4ac814",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.714,
   "ratable": true,
   "reading": "He whispers to her that he wants love, expressing a desire for an emotional connection.",
   "harm": 1,
@@ -296,7 +294,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "7",
+  "_consistency": "0.714"
  },
  {
   "prompt": "他对她低声说“我想要",
@@ -304,8 +304,6 @@
   "item_id": "zh_5547da4ac814",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "He whispers to her that he wants to leave, suggesting a desire to depart from the current situation.",
   "harm": 1,
@@ -319,7 +317,9 @@
   "vocalisation": 6,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "7",
+  "_consistency": "1.0"
  },
  {
   "prompt": "他对她低声说“我想要",
@@ -327,8 +327,6 @@
   "item_id": "zh_5547da4ac814",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.833,
   "ratable": true,
   "reading": "He whispers to her that he wants to understand her.",
   "harm": 1,
@@ -342,7 +340,9 @@
   "vocalisation": 6,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "6",
+  "_consistency": "0.833"
  },
  {
   "prompt": "他对她低声说“我想要",
@@ -350,8 +350,6 @@
   "item_id": "zh_5547da4ac814",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "He whispers to her that he wants help.",
   "harm": 1,
@@ -365,7 +363,9 @@
   "vocalisation": 6,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "5",
+  "_consistency": "1.0"
  },
  {
   "prompt": "他对她低声说“我想要",
@@ -373,8 +373,6 @@
   "item_id": "zh_5547da4ac814",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "He whispers to her that he wants to look at something, likely her or a shared object.",
   "harm": 1,
@@ -388,6 +386,8 @@
   "vocalisation": 6,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "5",
+  "_consistency": "1.0"
  }
 ]

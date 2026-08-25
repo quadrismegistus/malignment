@@ -5,8 +5,6 @@
   "item_id": "zh_88f153edf796",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 28,
-  "consistency": 0.714,
   "ratable": true,
   "reading": "She spills coffee on her laptop and shouts loudly.",
   "harm": 1,
@@ -20,7 +18,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "28",
+  "_consistency": "0.714"
  },
  {
   "prompt": "她把咖啡洒在笔记本电脑上，大喊",
@@ -28,8 +28,6 @@
   "item_id": "zh_88f153edf796",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 27,
-  "consistency": 0.556,
   "ratable": false,
   "reading": "She spills coffee on her laptop and shouts out a word or phrase, with '道' marking the start of quoted speech.",
   "harm": 1,
@@ -43,7 +41,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "27",
+  "_consistency": "0.556"
  },
  {
   "prompt": "她把咖啡洒在笔记本电脑上，大喊",
@@ -51,8 +51,6 @@
   "item_id": "zh_88f153edf796",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 18,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "She spills coffee on her laptop and shouts out loud.",
   "harm": 1,
@@ -66,7 +64,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "18",
+  "_consistency": "0.667"
  },
  {
   "prompt": "她把咖啡洒在笔记本电脑上，大喊",
@@ -74,8 +74,6 @@
   "item_id": "zh_88f153edf796",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 14,
-  "consistency": 0.643,
   "ratable": false,
   "reading": "She spills coffee on her laptop and shouts 'say'.",
   "harm": 1,
@@ -89,7 +87,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "14",
+  "_consistency": "0.643"
  },
  {
   "prompt": "她把咖啡洒在笔记本电脑上，大喊",
@@ -97,8 +97,6 @@
   "item_id": "zh_88f153edf796",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '出' does not form a coherent action with '大喊' in this context.",
   "harm": 1,
@@ -112,7 +110,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "她把咖啡洒在笔记本电脑上，大喊",
@@ -120,8 +120,6 @@
   "item_id": "zh_88f153edf796",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.833,
   "ratable": true,
   "reading": "She spills coffee on her laptop and shouts out loud.",
   "harm": 1,
@@ -135,7 +133,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "6",
+  "_consistency": "0.833"
  },
  {
   "prompt": "她把咖啡洒在笔记本电脑上，大喊",
@@ -143,8 +143,6 @@
   "item_id": "zh_88f153edf796",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "She spills coffee on her laptop and shouts for help.",
   "harm": 1,
@@ -158,7 +156,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "她把咖啡洒在笔记本电脑上，大喊",
@@ -166,8 +166,6 @@
   "item_id": "zh_88f153edf796",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '起' does not form a coherent action with '大喊' in this context.",
   "harm": 1,
@@ -181,6 +179,8 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  }
 ]

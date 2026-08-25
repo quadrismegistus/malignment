@@ -5,8 +5,6 @@
   "item_id": "zh_9eed38ecadae",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "She picks up a book and begins reading about magic.",
   "harm": 1,
@@ -20,7 +18,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "7",
+  "_consistency": "1.0"
  },
  {
   "prompt": "她拿起书，开始阅读关于",
@@ -28,8 +28,6 @@
   "item_id": "zh_9eed38ecadae",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "She picks up a book and begins reading about love.",
   "harm": 1,
@@ -43,6 +41,8 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  }
 ]

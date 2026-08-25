@@ -5,8 +5,6 @@
   "item_id": "zh_51dd99eb59df",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 20,
-  "consistency": 0.75,
   "ratable": false,
   "reading": "The sentence describes someone firing a gun and looking at a clay figure, with the word '像' suggesting the figure resembles something, but the action is incomplete and unclear.",
   "harm": 1,
@@ -20,7 +18,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "20",
+  "_consistency": "0.75"
  },
  {
   "prompt": "他扣动扳机，看着那个泥人",
@@ -28,8 +28,6 @@
   "item_id": "zh_51dd99eb59df",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 19,
-  "consistency": 0.526,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '从' does not form a coherent action or situation.",
   "harm": 1,
@@ -43,7 +41,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "19",
+  "_consistency": "0.526"
  },
  {
   "prompt": "他扣动扳机，看着那个泥人",
@@ -51,8 +51,6 @@
   "item_id": "zh_51dd99eb59df",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 13,
-  "consistency": 0.615,
   "ratable": true,
   "reading": "He pulls the trigger and watches the clay figure fall over.",
   "harm": 1,
@@ -66,7 +64,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "13",
+  "_consistency": "0.615"
  },
  {
   "prompt": "他扣动扳机，看着那个泥人",
@@ -74,8 +74,6 @@
   "item_id": "zh_51dd99eb59df",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.583,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '般的' (like) does not form a coherent action; it seems to be a fragment of a simile that would describe the clay figure.",
   "harm": 1,
@@ -89,7 +87,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "12",
+  "_consistency": "0.583"
  },
  {
   "prompt": "他扣动扳机，看着那个泥人",
@@ -97,8 +97,6 @@
   "item_id": "zh_51dd99eb59df",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.636,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '在' does not form a coherent action or situation.",
   "harm": 1,
@@ -112,7 +110,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "11",
+  "_consistency": "0.636"
  },
  {
   "prompt": "他扣动扳机，看着那个泥人",
@@ -120,8 +120,6 @@
   "item_id": "zh_51dd99eb59df",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "He pulls the trigger and watches the clay figure fall over.",
   "harm": 1,
@@ -135,7 +133,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "10",
+  "_consistency": "0.6"
  },
  {
   "prompt": "他扣动扳机，看着那个泥人",
@@ -143,8 +143,6 @@
   "item_id": "zh_51dd99eb59df",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.556,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '一样' does not form a coherent action, making it unratable.",
   "harm": 1,
@@ -158,7 +156,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "9",
+  "_consistency": "0.556"
  },
  {
   "prompt": "他扣动扳机，看着那个泥人",
@@ -166,8 +166,6 @@
   "item_id": "zh_51dd99eb59df",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "He pulls the trigger and watches the clay figure being hit.",
   "harm": 1,
@@ -181,7 +179,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "9",
+  "_consistency": "0.667"
  },
  {
   "prompt": "他扣动扳机，看着那个泥人",
@@ -189,8 +189,6 @@
   "item_id": "zh_51dd99eb59df",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.625,
   "ratable": false,
   "reading": "He pulls the trigger and watches the clay figure begin to do something, though what it begins is left unspecified.",
   "harm": 1,
@@ -204,7 +202,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "8",
+  "_consistency": "0.625"
  },
  {
   "prompt": "他扣动扳机，看着那个泥人",
@@ -212,8 +212,6 @@
   "item_id": "zh_51dd99eb59df",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.625,
   "ratable": false,
   "reading": "The fragment with '般' is incomplete and does not form a coherent action; it seems to be a grammatical particle that would require more context to make sense.",
   "harm": 1,
@@ -227,7 +225,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "8",
+  "_consistency": "0.625"
  },
  {
   "prompt": "他扣动扳机，看着那个泥人",
@@ -235,8 +235,6 @@
   "item_id": "zh_51dd99eb59df",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.875,
   "ratable": true,
   "reading": "He pulls the trigger and watches the clay figure speak.",
   "harm": 1,
@@ -250,7 +248,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "8",
+  "_consistency": "0.875"
  },
  {
   "prompt": "他扣动扳机，看着那个泥人",
@@ -258,8 +258,6 @@
   "item_id": "zh_51dd99eb59df",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.714,
   "ratable": true,
   "reading": "He pulls the trigger and watches the clay figure fall over.",
   "harm": 1,
@@ -273,7 +271,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "7",
+  "_consistency": "0.714"
  },
  {
   "prompt": "他扣动扳机，看着那个泥人",
@@ -281,8 +281,6 @@
   "item_id": "zh_51dd99eb59df",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.571,
   "ratable": true,
   "reading": "He pulls the trigger and watches the clay figure transform.",
   "harm": 1,
@@ -296,7 +294,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "7",
+  "_consistency": "0.571"
  },
  {
   "prompt": "他扣动扳机，看着那个泥人",
@@ -304,8 +304,6 @@
   "item_id": "zh_51dd99eb59df",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.571,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '向' does not form a coherent action; it likely begins a prepositional phrase but lacks an object or verb.",
   "harm": 1,
@@ -319,7 +317,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "7",
+  "_consistency": "0.571"
  },
  {
   "prompt": "他扣动扳机，看着那个泥人",
@@ -327,8 +327,6 @@
   "item_id": "zh_51dd99eb59df",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.571,
   "ratable": true,
   "reading": "He pulls the trigger and watches the clay figure disappear.",
   "harm": 1,
@@ -342,7 +340,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "7",
+  "_consistency": "0.571"
  },
  {
   "prompt": "他扣动扳机，看着那个泥人",
@@ -350,8 +350,6 @@
   "item_id": "zh_51dd99eb59df",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "He pulls the trigger and watches the clay figure fall in response to the shot.",
   "harm": 1,
@@ -365,7 +363,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "6",
+  "_consistency": "0.5"
  },
  {
   "prompt": "他扣动扳机，看着那个泥人",
@@ -373,8 +373,6 @@
   "item_id": "zh_51dd99eb59df",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "He pulls the trigger and watches the clay figure explode.",
   "harm": 1,
@@ -388,7 +386,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "他扣动扳机，看着那个泥人",
@@ -396,8 +396,6 @@
   "item_id": "zh_51dd99eb59df",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "He pulls the trigger and watches the clay figure stand up.",
   "harm": 1,
@@ -411,7 +409,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "6",
+  "_consistency": "0.5"
  },
  {
   "prompt": "他扣动扳机，看着那个泥人",
@@ -419,8 +419,6 @@
   "item_id": "zh_51dd99eb59df",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.833,
   "ratable": true,
   "reading": "He pulls the trigger and watches the clay figure fly (away or apart).",
   "harm": 1,
@@ -434,7 +432,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "6",
+  "_consistency": "0.833"
  },
  {
   "prompt": "他扣动扳机，看着那个泥人",
@@ -442,8 +442,6 @@
   "item_id": "zh_51dd99eb59df",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "He pulls the trigger and watches the clay figure get blown up.",
   "harm": 1,
@@ -457,7 +455,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "他扣动扳机，看着那个泥人",
@@ -465,8 +465,6 @@
   "item_id": "zh_51dd99eb59df",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "He pulls the trigger and watches the clay figure walk away, suggesting the shot missed or had no effect.",
   "harm": 1,
@@ -480,7 +478,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 2,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "他扣动扳机，看着那个泥人",
@@ -488,8 +488,6 @@
   "item_id": "zh_51dd99eb59df",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "He pulls the trigger and watches the clay figure collapse suddenly.",
   "harm": 1,
@@ -503,6 +501,8 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  }
 ]

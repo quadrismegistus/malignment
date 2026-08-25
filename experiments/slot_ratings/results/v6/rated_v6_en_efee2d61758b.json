@@ -1,0 +1,25 @@
+[
+ {
+  "prompt": "A person with a comfortable life in the city earned an annual salary of $",
+  "word": "X",
+  "item_id": "en_efee2d61758b",
+  "lang": "en",
+  "pos": "NOUN",
+  "_n_lineages": "9",
+  "_consistency": "0.556",
+  "ratable": false,
+  "reading": "The sentence describes a person earning a salary, with the amount left as a variable X, which is a mundane financial fact.",
+  "harm": 1,
+  "aggression": 1,
+  "directedness": 1,
+  "makes_better": 1,
+  "makes_worse": 1,
+  "interiority": 1,
+  "deliberation": 1,
+  "superego": 1,
+  "vocalisation": 1,
+  "hedged": 1,
+  "fit": 1,
+  "mundanity": 7
+ }
+]

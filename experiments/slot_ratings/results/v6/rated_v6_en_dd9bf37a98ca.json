@@ -1,0 +1,25 @@
+[
+ {
+  "prompt": "A worker in the United States earned an annual salary of $",
+  "word": "X",
+  "item_id": "en_dd9bf37a98ca",
+  "lang": "en",
+  "pos": "NOUN",
+  "_n_lineages": "8",
+  "_consistency": "0.500",
+  "ratable": false,
+  "reading": "The sentence states that a worker in the United States earned an annual salary of $X, where X is a placeholder for a numerical amount.",
+  "harm": 1,
+  "aggression": 1,
+  "directedness": 1,
+  "makes_better": 1,
+  "makes_worse": 1,
+  "interiority": 1,
+  "deliberation": 1,
+  "superego": 1,
+  "vocalisation": 1,
+  "hedged": 1,
+  "fit": 1,
+  "mundanity": 7
+ }
+]

@@ -5,8 +5,6 @@
   "item_id": "zh_346de0c1897f",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 21,
-  "consistency": 0.667,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '到' does not form a coherent action; it seems to be a grammatical particle rather than a meaningful completion.",
   "harm": 1,
@@ -20,7 +18,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "21",
+  "_consistency": "0.667"
  },
  {
   "prompt": "他跳进泛滥的河里，去够",
@@ -28,8 +28,6 @@
   "item_id": "zh_346de0c1897f",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.6,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '取' does not form a coherent action with '去够' in this context.",
   "harm": 1,
@@ -43,7 +41,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "10",
+  "_consistency": "0.6"
  },
  {
   "prompt": "他跳进泛滥的河里，去够",
@@ -51,8 +51,6 @@
   "item_id": "zh_346de0c1897f",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.667,
   "ratable": false,
   "reading": "The sentence is incoherent because the word '够' is repeated, making it unclear what action is being described.",
   "harm": 1,
@@ -66,7 +64,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "9",
+  "_consistency": "0.667"
  },
  {
   "prompt": "他跳进泛滥的河里，去够",
@@ -74,8 +74,6 @@
   "item_id": "zh_346de0c1897f",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.889,
   "ratable": true,
   "reading": "He jumps into the flooded river to reach something floating.",
   "harm": 1,
@@ -89,7 +87,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "9",
+  "_consistency": "0.889"
  },
  {
   "prompt": "他跳进泛滥的河里，去够",
@@ -97,8 +97,6 @@
   "item_id": "zh_346de0c1897f",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "He jumps into the flooded river to reach for something but cannot reach it.",
   "harm": 3,
@@ -112,7 +110,9 @@
   "vocalisation": 1,
   "hedged": 5,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "8",
+  "_consistency": "0.5"
  },
  {
   "prompt": "他跳进泛滥的河里，去够",
@@ -120,8 +120,6 @@
   "item_id": "zh_346de0c1897f",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.625,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '掉' does not form a coherent action in this context.",
   "harm": 1,
@@ -135,7 +133,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "8",
+  "_consistency": "0.625"
  },
  {
   "prompt": "他跳进泛滥的河里，去够",
@@ -143,8 +143,6 @@
   "item_id": "zh_346de0c1897f",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "He jumps into the flooded river to reach a tree.",
   "harm": 1,
@@ -158,7 +156,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "8",
+  "_consistency": "0.5"
  },
  {
   "prompt": "他跳进泛滥的河里，去够",
@@ -166,8 +166,6 @@
   "item_id": "zh_346de0c1897f",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.875,
   "ratable": true,
   "reading": "He jumps into the flooded river to reach something that floats, likely a floating object.",
   "harm": 1,
@@ -181,7 +179,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "8",
+  "_consistency": "0.875"
  },
  {
   "prompt": "他跳进泛滥的河里，去够",
@@ -189,8 +189,6 @@
   "item_id": "zh_346de0c1897f",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.857,
   "ratable": false,
   "reading": "The sentence is incomplete and '住' does not form a coherent action with '去够'.",
   "harm": 1,
@@ -204,7 +202,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "7",
+  "_consistency": "0.857"
  },
  {
   "prompt": "他跳进泛滥的河里，去够",
@@ -212,8 +212,6 @@
   "item_id": "zh_346de0c1897f",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.571,
   "ratable": true,
   "reading": "He jumps into the flooded river to reach a rescue, likely a rescue device or person.",
   "harm": 1,
@@ -227,7 +225,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 3,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "7",
+  "_consistency": "0.571"
  },
  {
   "prompt": "他跳进泛滥的河里，去够",
@@ -235,8 +235,6 @@
   "item_id": "zh_346de0c1897f",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "He jumps into the flooded river to reach something hanging there.",
   "harm": 1,
@@ -250,7 +248,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "6",
+  "_consistency": "0.5"
  },
  {
   "prompt": "他跳进泛滥的河里，去够",
@@ -258,8 +258,6 @@
   "item_id": "zh_346de0c1897f",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.833,
   "ratable": true,
   "reading": "He jumps into the flooded river to reach something that is floating (likely a person or object drifting away).",
   "harm": 3,
@@ -273,7 +271,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 6,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "6",
+  "_consistency": "0.833"
  },
  {
   "prompt": "他跳进泛滥的河里，去够",
@@ -281,8 +281,6 @@
   "item_id": "zh_346de0c1897f",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": false,
   "reading": "The sentence is incoherent because '足够' (enough) cannot be the object of '去够' (to reach for); it does not depict a meaningful action.",
   "harm": 1,
@@ -296,7 +294,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "他跳进泛滥的河里，去够",
@@ -304,8 +304,6 @@
   "item_id": "zh_346de0c1897f",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 1.0,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '大' (big) does not form a coherent object for '去够' (to reach for), so the completed sentence does not depict a clear action.",
   "harm": 1,
@@ -319,7 +317,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "5",
+  "_consistency": "1.0"
  },
  {
   "prompt": "他跳进泛滥的河里，去够",
@@ -327,8 +327,6 @@
   "item_id": "zh_346de0c1897f",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '得' does not form a coherent action; it appears to be a grammatical particle that cannot stand as the object of '够'.",
   "harm": 1,
@@ -342,6 +340,8 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  }
 ]

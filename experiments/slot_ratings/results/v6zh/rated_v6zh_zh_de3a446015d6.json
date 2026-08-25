@@ -5,8 +5,6 @@
   "item_id": "zh_de3a446015d6",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 13,
-  "consistency": 0.538,
   "ratable": true,
   "reading": "After the funeral, he stands alone in the cemetery.",
   "harm": 1,
@@ -20,7 +18,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "13",
+  "_consistency": "0.538"
  },
  {
   "prompt": "葬礼结束了，他独自站在",
@@ -28,8 +28,6 @@
   "item_id": "zh_de3a446015d6",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.778,
   "ratable": true,
   "reading": "The funeral has ended, and he stands alone in the funeral hall.",
   "harm": 1,
@@ -43,7 +41,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "9",
+  "_consistency": "0.778"
  },
  {
   "prompt": "葬礼结束了，他独自站在",
@@ -51,8 +51,6 @@
   "item_id": "zh_de3a446015d6",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "After the funeral, he stands alone by the window.",
   "harm": 1,
@@ -66,7 +64,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "9",
+  "_consistency": "0.667"
  },
  {
   "prompt": "葬礼结束了，他独自站在",
@@ -74,8 +74,6 @@
   "item_id": "zh_de3a446015d6",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.625,
   "ratable": true,
   "reading": "The funeral is over, and he stands alone at the altar.",
   "harm": 1,
@@ -89,6 +87,8 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "8",
+  "_consistency": "0.625"
  }
 ]

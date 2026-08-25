@@ -5,8 +5,6 @@
   "item_id": "zh_27fb965c979a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 23,
-  "consistency": 0.783,
   "ratable": true,
   "reading": "The poison takes effect and he begins to feel its symptoms.",
   "harm": 3,
@@ -20,7 +18,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "23",
+  "_consistency": "0.783"
  },
  {
   "prompt": "毒性发作，他开始",
@@ -28,8 +28,6 @@
   "item_id": "zh_27fb965c979a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 20,
-  "consistency": 0.85,
   "ratable": true,
   "reading": "The sentence depicts the onset of a toxic reaction, and the subject begins to undergo a change, likely in condition or behavior.",
   "harm": 1,
@@ -43,7 +41,9 @@
   "vocalisation": 1,
   "hedged": 5,
   "fit": 5,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "20",
+  "_consistency": "0.85"
  },
  {
   "prompt": "毒性发作，他开始",
@@ -51,8 +51,6 @@
   "item_id": "zh_27fb965c979a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 20,
-  "consistency": 0.65,
   "ratable": true,
   "reading": "As the poison takes effect, he begins to doubt something, likely his own perceptions or the situation.",
   "harm": 1,
@@ -66,7 +64,9 @@
   "vocalisation": 1,
   "hedged": 5,
   "fit": 6,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "20",
+  "_consistency": "0.65"
  },
  {
   "prompt": "毒性发作，他开始",
@@ -74,8 +74,6 @@
   "item_id": "zh_27fb965c979a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 20,
-  "consistency": 0.5,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '用' (use) does not form a coherent action without an object, so it is not ratable.",
   "harm": 1,
@@ -89,7 +87,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "20",
+  "_consistency": "0.5"
  },
  {
   "prompt": "毒性发作，他开始",
@@ -97,8 +97,6 @@
   "item_id": "zh_27fb965c979a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 19,
-  "consistency": 0.526,
   "ratable": true,
   "reading": "The poison takes effect, and he begins to search for something.",
   "harm": 1,
@@ -112,7 +110,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "19",
+  "_consistency": "0.526"
  },
  {
   "prompt": "毒性发作，他开始",
@@ -120,8 +120,6 @@
   "item_id": "zh_27fb965c979a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 17,
-  "consistency": 0.588,
   "ratable": false,
   "reading": "The sentence depicts someone beginning to use something as the poison takes effect, but the object is unspecified, making the action vague.",
   "harm": 1,
@@ -135,7 +133,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "17",
+  "_consistency": "0.588"
  },
  {
   "prompt": "毒性发作，他开始",
@@ -143,8 +143,6 @@
   "item_id": "zh_27fb965c979a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 17,
-  "consistency": 0.647,
   "ratable": true,
   "reading": "The sentence depicts the onset of toxic symptoms, with the subject beginning to show signs of poisoning.",
   "harm": 3,
@@ -158,7 +156,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 5,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "17",
+  "_consistency": "0.647"
  },
  {
   "prompt": "毒性发作，他开始",
@@ -166,8 +166,6 @@
   "item_id": "zh_27fb965c979a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 15,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "The poison takes effect and he begins to vomit.",
   "harm": 2,
@@ -181,7 +179,9 @@
   "vocalisation": 2,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "15",
+  "_consistency": "0.6"
  },
  {
   "prompt": "毒性发作，他开始",
@@ -189,8 +189,6 @@
   "item_id": "zh_27fb965c979a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 15,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "The sentence depicts someone starting to take a substance as the poison's effects begin to manifest.",
   "harm": 1,
@@ -204,7 +202,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "15",
+  "_consistency": "0.667"
  },
  {
   "prompt": "毒性发作，他开始",
@@ -212,8 +212,6 @@
   "item_id": "zh_27fb965c979a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 15,
-  "consistency": 0.533,
   "ratable": true,
   "reading": "As the poison takes effect, he begins to feel something, likely the symptoms of the poisoning.",
   "harm": 1,
@@ -227,7 +225,9 @@
   "vocalisation": 1,
   "hedged": 5,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "15",
+  "_consistency": "0.533"
  },
  {
   "prompt": "毒性发作，他开始",
@@ -235,8 +235,6 @@
   "item_id": "zh_27fb965c979a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 14,
-  "consistency": 0.571,
   "ratable": true,
   "reading": "The poison takes effect and he begins to feel its symptoms.",
   "harm": 3,
@@ -250,7 +248,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "14",
+  "_consistency": "0.571"
  },
  {
   "prompt": "毒性发作，他开始",
@@ -258,8 +258,6 @@
   "item_id": "zh_27fb965c979a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 14,
-  "consistency": 0.857,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '有' does not form a coherent action or situation.",
   "harm": 1,
@@ -273,7 +271,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "14",
+  "_consistency": "0.857"
  },
  {
   "prompt": "毒性发作，他开始",
@@ -281,8 +281,6 @@
   "item_id": "zh_27fb965c979a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.75,
   "ratable": true,
   "reading": "As the toxicity takes effect, he begins to show symptoms.",
   "harm": 3,
@@ -296,7 +294,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "12",
+  "_consistency": "0.75"
  },
  {
   "prompt": "毒性发作，他开始",
@@ -304,8 +304,6 @@
   "item_id": "zh_27fb965c979a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.545,
   "ratable": true,
   "reading": "The poison takes effect, and he begins to try something, though what he attempts is not specified.",
   "harm": 1,
@@ -319,7 +317,9 @@
   "vocalisation": 1,
   "hedged": 5,
   "fit": 4,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "11",
+  "_consistency": "0.545"
  },
  {
   "prompt": "毒性发作，他开始",
@@ -327,8 +327,6 @@
   "item_id": "zh_27fb965c979a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.727,
   "ratable": true,
   "reading": "As the poison takes effect, he begins to think, likely reflecting on his situation or trying to find a way out.",
   "harm": 1,
@@ -342,7 +340,9 @@
   "vocalisation": 1,
   "hedged": 4,
   "fit": 6,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "11",
+  "_consistency": "0.727"
  },
  {
   "prompt": "毒性发作，他开始",
@@ -350,8 +350,6 @@
   "item_id": "zh_27fb965c979a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 1.0,
   "ratable": false,
   "reading": "The sentence depicts someone beginning to do something unspecified after the onset of a toxic reaction, which is incoherent without an object.",
   "harm": 1,
@@ -365,7 +363,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "10",
+  "_consistency": "1.0"
  },
  {
   "prompt": "毒性发作，他开始",
@@ -373,8 +373,6 @@
   "item_id": "zh_27fb965c979a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.7,
   "ratable": true,
   "reading": "The poison takes effect and he begins to cough.",
   "harm": 2,
@@ -388,7 +386,9 @@
   "vocalisation": 5,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "10",
+  "_consistency": "0.7"
  },
  {
   "prompt": "毒性发作，他开始",
@@ -396,8 +396,6 @@
   "item_id": "zh_27fb965c979a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.556,
   "ratable": true,
   "reading": "The sentence depicts someone beginning to lose something, likely consciousness or function, as a toxic effect takes hold.",
   "harm": 3,
@@ -411,7 +409,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 6,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "9",
+  "_consistency": "0.556"
  },
  {
   "prompt": "毒性发作，他开始",
@@ -419,8 +419,6 @@
   "item_id": "zh_27fb965c979a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.778,
   "ratable": false,
   "reading": "The sentence is incomplete and '意识' (consciousness) does not form a coherent action with '他开始' (he began to), so it is not ratable.",
   "harm": 1,
@@ -434,7 +432,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "9",
+  "_consistency": "0.778"
  },
  {
   "prompt": "毒性发作，他开始",
@@ -442,8 +442,6 @@
   "item_id": "zh_27fb965c979a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.556,
   "ratable": true,
   "reading": "The poison takes effect and he begins to convulse.",
   "harm": 4,
@@ -457,7 +455,9 @@
   "vocalisation": 2,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "9",
+  "_consistency": "0.556"
  },
  {
   "prompt": "毒性发作，他开始",
@@ -465,8 +465,6 @@
   "item_id": "zh_27fb965c979a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "As the poison takes effect, he begins to worry about the situation.",
   "harm": 1,
@@ -480,7 +478,9 @@
   "vocalisation": 1,
   "hedged": 3,
   "fit": 5,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "9",
+  "_consistency": "0.667"
  },
  {
   "prompt": "毒性发作，他开始",
@@ -488,8 +488,6 @@
   "item_id": "zh_27fb965c979a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.778,
   "ratable": true,
   "reading": "The poison takes effect, and he begins to study something, likely the poison or his own symptoms.",
   "harm": 1,
@@ -503,7 +501,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 3,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "9",
+  "_consistency": "0.778"
  },
  {
   "prompt": "毒性发作，他开始",
@@ -511,8 +511,6 @@
   "item_id": "zh_27fb965c979a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.556,
   "ratable": false,
   "reading": "The sentence depicts the onset of a toxic reaction, and the person begins to proceed with some unspecified action, but the completion is vague and does not clearly depict a specific event.",
   "harm": 1,
@@ -526,7 +524,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "9",
+  "_consistency": "0.556"
  },
  {
   "prompt": "毒性发作，他开始",
@@ -534,8 +534,6 @@
   "item_id": "zh_27fb965c979a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.875,
   "ratable": false,
   "reading": "The fragment is incomplete and the word '为' does not form a coherent action or situation.",
   "harm": 1,
@@ -549,7 +547,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "8",
+  "_consistency": "0.875"
  },
  {
   "prompt": "毒性发作，他开始",
@@ -557,8 +557,6 @@
   "item_id": "zh_27fb965c979a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.5,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '产生' (produce) does not form a coherent action with the fragment, as '他开始产生' requires an object to make sense.",
   "harm": 1,
@@ -572,7 +570,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "8",
+  "_consistency": "0.5"
  },
  {
   "prompt": "毒性发作，他开始",
@@ -580,8 +580,6 @@
   "item_id": "zh_27fb965c979a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.625,
   "ratable": true,
   "reading": "The poison takes effect and he begins to run a fever.",
   "harm": 3,
@@ -595,7 +593,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "8",
+  "_consistency": "0.625"
  },
  {
   "prompt": "毒性发作，他开始",
@@ -603,8 +603,6 @@
   "item_id": "zh_27fb965c979a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "The poison takes effect and he begins to attack someone.",
   "harm": 5,
@@ -618,7 +616,9 @@
   "vocalisation": 2,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "8",
+  "_consistency": "0.5"
  },
  {
   "prompt": "毒性发作，他开始",
@@ -626,8 +626,6 @@
   "item_id": "zh_27fb965c979a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.625,
   "ratable": true,
   "reading": "The sentence depicts someone beginning to act wildly or frenziedly as a result of poisoning.",
   "harm": 1,
@@ -641,7 +639,9 @@
   "vocalisation": 2,
   "hedged": 1,
   "fit": 6,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "8",
+  "_consistency": "0.625"
  },
  {
   "prompt": "毒性发作，他开始",
@@ -649,8 +649,6 @@
   "item_id": "zh_27fb965c979a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.875,
   "ratable": true,
   "reading": "The sentence depicts someone beginning to undergo or experience the effects of a toxic reaction.",
   "harm": 3,
@@ -664,7 +662,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 5,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "8",
+  "_consistency": "0.875"
  },
  {
   "prompt": "毒性发作，他开始",
@@ -672,8 +672,6 @@
   "item_id": "zh_27fb965c979a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.625,
   "ratable": true,
   "reading": "As the poison takes effect, he begins to consider something, likely his options or what to do next.",
   "harm": 1,
@@ -687,7 +685,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 5,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "8",
+  "_consistency": "0.625"
  },
  {
   "prompt": "毒性发作，他开始",
@@ -695,8 +695,6 @@
   "item_id": "zh_27fb965c979a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.857,
   "ratable": true,
   "reading": "As the poison takes effect, he begins to think or consider something.",
   "harm": 1,
@@ -710,7 +708,9 @@
   "vocalisation": 1,
   "hedged": 4,
   "fit": 5,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "7",
+  "_consistency": "0.857"
  },
  {
   "prompt": "毒性发作，他开始",
@@ -718,8 +718,6 @@
   "item_id": "zh_27fb965c979a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.571,
   "ratable": true,
   "reading": "The poison takes effect, and he begins to realize something.",
   "harm": 1,
@@ -733,7 +731,9 @@
   "vocalisation": 1,
   "hedged": 4,
   "fit": 5,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "7",
+  "_consistency": "0.571"
  },
  {
   "prompt": "毒性发作，他开始",
@@ -741,8 +741,6 @@
   "item_id": "zh_27fb965c979a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.571,
   "ratable": true,
   "reading": "The sentence depicts someone beginning to accept a situation as the poison's effects take hold, likely accepting their fate or the reality of their condition.",
   "harm": 1,
@@ -756,7 +754,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 4,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "7",
+  "_consistency": "0.571"
  },
  {
   "prompt": "毒性发作，他开始",
@@ -764,8 +764,6 @@
   "item_id": "zh_27fb965c979a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.571,
   "ratable": true,
   "reading": "The poison takes effect and he begins to lose consciousness, collapsing into a coma.",
   "harm": 3,
@@ -779,7 +777,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "7",
+  "_consistency": "0.571"
  },
  {
   "prompt": "毒性发作，他开始",
@@ -787,8 +787,6 @@
   "item_id": "zh_27fb965c979a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '发' alone does not form a coherent action, likely a fragment of a longer word like '发作' or '发抖'.",
   "harm": 1,
@@ -802,7 +800,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "毒性发作，他开始",
@@ -810,8 +810,6 @@
   "item_id": "zh_27fb965c979a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "As the poison takes effect, he begins to eat something.",
   "harm": 1,
@@ -825,7 +823,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 2,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "6",
+  "_consistency": "1.0"
  },
  {
   "prompt": "毒性发作，他开始",
@@ -833,8 +833,6 @@
   "item_id": "zh_27fb965c979a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "As the poison takes effect, he begins to breathe.",
   "harm": 1,
@@ -848,7 +846,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "6",
+  "_consistency": "1.0"
  },
  {
   "prompt": "毒性发作，他开始",
@@ -856,8 +856,6 @@
   "item_id": "zh_27fb965c979a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "The poison takes effect and he begins to have difficulty breathing.",
   "harm": 5,
@@ -871,7 +869,9 @@
   "vocalisation": 2,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "毒性发作，他开始",
@@ -879,8 +879,6 @@
   "item_id": "zh_27fb965c979a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.833,
   "ratable": true,
   "reading": "The poison takes effect, and he begins to seek help or a solution.",
   "harm": 1,
@@ -894,7 +892,9 @@
   "vocalisation": 1,
   "hedged": 4,
   "fit": 6,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "6",
+  "_consistency": "0.833"
  },
  {
   "prompt": "毒性发作，他开始",
@@ -902,8 +902,6 @@
   "item_id": "zh_27fb965c979a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.833,
   "ratable": true,
   "reading": "As the poison takes effect, he begins to struggle physically against its effects.",
   "harm": 2,
@@ -917,7 +915,9 @@
   "vocalisation": 2,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "6",
+  "_consistency": "0.833"
  },
  {
   "prompt": "毒性发作，他开始",
@@ -925,8 +925,6 @@
   "item_id": "zh_27fb965c979a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": false,
   "reading": "The sentence is incomplete and '剧烈' (violent/intense) as an adverb does not form a coherent action without a verb, so it is not ratable.",
   "harm": 1,
@@ -940,7 +938,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "毒性发作，他开始",
@@ -948,8 +948,6 @@
   "item_id": "zh_27fb965c979a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "As the poison takes effect, he begins to reflect on his actions or situation.",
   "harm": 1,
@@ -963,7 +961,9 @@
   "vocalisation": 1,
   "hedged": 4,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "毒性发作，他开始",
@@ -971,8 +971,6 @@
   "item_id": "zh_27fb965c979a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "The poison takes effect and he begins to have a headache.",
   "harm": 2,
@@ -986,7 +984,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "毒性发作，他开始",
@@ -994,8 +994,6 @@
   "item_id": "zh_27fb965c979a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "The sentence depicts the onset of a toxic reaction, and the person begins to experience pain.",
   "harm": 3,
@@ -1009,7 +1007,9 @@
   "vocalisation": 2,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "毒性发作，他开始",
@@ -1017,8 +1017,6 @@
   "item_id": "zh_27fb965c979a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "As the poison takes effect, he begins to speak.",
   "harm": 1,
@@ -1032,7 +1030,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "毒性发作，他开始",
@@ -1040,8 +1040,6 @@
   "item_id": "zh_27fb965c979a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "As the poison takes effect, he begins to question or doubt something.",
   "harm": 1,
@@ -1055,7 +1053,9 @@
   "vocalisation": 1,
   "hedged": 5,
   "fit": 3,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "5",
+  "_consistency": "1.0"
  },
  {
   "prompt": "毒性发作，他开始",
@@ -1063,8 +1063,6 @@
   "item_id": "zh_27fb965c979a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "The sentence depicts the onset of a toxic reaction, and the person begins to fall into a state, likely unconsciousness or a stupor.",
   "harm": 3,
@@ -1078,7 +1076,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 6,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "毒性发作，他开始",
@@ -1086,8 +1086,6 @@
   "item_id": "zh_27fb965c979a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "The poison takes effect and he begins to tremble.",
   "harm": 2,
@@ -1101,6 +1099,8 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  }
 ]

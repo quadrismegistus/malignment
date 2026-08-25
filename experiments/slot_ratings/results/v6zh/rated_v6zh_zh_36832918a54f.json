@@ -5,8 +5,6 @@
   "item_id": "zh_36832918a54f",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 14,
-  "consistency": 0.714,
   "ratable": true,
   "reading": "The person, described as both free and imprisoned, chooses to give up or abandon something.",
   "harm": 1,
@@ -20,7 +18,9 @@
   "vocalisation": 1,
   "hedged": 3,
   "fit": 6,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "14",
+  "_consistency": "0.714"
  },
  {
   "prompt": "他既是自由的又是被囚禁的，选择了",
@@ -28,8 +28,6 @@
   "item_id": "zh_36832918a54f",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 13,
-  "consistency": 0.769,
   "ratable": true,
   "reading": "The sentence describes someone who is both free and imprisoned, and who chooses imprisonment.",
   "harm": 1,
@@ -43,7 +41,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "13",
+  "_consistency": "0.769"
  },
  {
   "prompt": "他既是自由的又是被囚禁的，选择了",
@@ -51,8 +51,6 @@
   "item_id": "zh_36832918a54f",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 13,
-  "consistency": 0.538,
   "ratable": true,
   "reading": "The person, described as both free and imprisoned, chooses to leave.",
   "harm": 1,
@@ -66,7 +64,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 6,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "13",
+  "_consistency": "0.538"
  },
  {
   "prompt": "他既是自由的又是被囚禁的，选择了",
@@ -74,8 +74,6 @@
   "item_id": "zh_36832918a54f",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.545,
   "ratable": true,
   "reading": "The sentence describes someone who is both free and imprisoned, and who chooses to remain imprisoned.",
   "harm": 1,
@@ -89,7 +87,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "11",
+  "_consistency": "0.545"
  },
  {
   "prompt": "他既是自由的又是被囚禁的，选择了",
@@ -97,8 +97,6 @@
   "item_id": "zh_36832918a54f",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.778,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '去' (to go) does not form a coherent action without a destination or purpose.",
   "harm": 1,
@@ -112,7 +110,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "9",
+  "_consistency": "0.778"
  },
  {
   "prompt": "他既是自由的又是被囚禁的，选择了",
@@ -120,8 +120,6 @@
   "item_id": "zh_36832918a54f",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.778,
   "ratable": false,
   "reading": "The sentence describes someone who is both free and imprisoned, and who has chosen to become something, though the object of 'become' is unspecified.",
   "harm": 1,
@@ -135,7 +133,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "9",
+  "_consistency": "0.778"
  },
  {
   "prompt": "他既是自由的又是被囚禁的，选择了",
@@ -143,8 +143,6 @@
   "item_id": "zh_36832918a54f",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "He is both free and imprisoned, and he chose to escape.",
   "harm": 1,
@@ -158,7 +156,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "8",
+  "_consistency": "1.0"
  },
  {
   "prompt": "他既是自由的又是被囚禁的，选择了",
@@ -166,8 +166,6 @@
   "item_id": "zh_36832918a54f",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.714,
   "ratable": true,
   "reading": "The sentence describes someone who is both free and imprisoned, and who chooses to be imprisoned, which is paradoxical and self-contradictory.",
   "harm": 1,
@@ -181,7 +179,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "7",
+  "_consistency": "0.714"
  },
  {
   "prompt": "他既是自由的又是被囚禁的，选择了",
@@ -189,8 +189,6 @@
   "item_id": "zh_36832918a54f",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.833,
   "ratable": true,
   "reading": "The person, described as both free and imprisoned, chooses loneliness as their state.",
   "harm": 1,
@@ -204,7 +202,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "6",
+  "_consistency": "0.833"
  },
  {
   "prompt": "他既是自由的又是被囚禁的，选择了",
@@ -212,8 +212,6 @@
   "item_id": "zh_36832918a54f",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "The person, described as both free and imprisoned, chooses to escape or evade something.",
   "harm": 1,
@@ -227,7 +225,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 6,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "他既是自由的又是被囚禁的，选择了",
@@ -235,8 +235,6 @@
   "item_id": "zh_36832918a54f",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '为' does not form a coherent action or situation.",
   "harm": 1,
@@ -250,6 +248,8 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  }
 ]

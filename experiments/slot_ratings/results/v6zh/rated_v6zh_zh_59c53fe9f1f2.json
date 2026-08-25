@@ -5,8 +5,6 @@
   "item_id": "zh_59c53fe9f1f2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.727,
   "ratable": true,
   "reading": "The sentence describes someone who is both imprisoned and bound, and who chooses imprisonment, which is a paradoxical or self-defeating choice.",
   "harm": 1,
@@ -20,7 +18,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "11",
+  "_consistency": "0.727"
  },
  {
   "prompt": "他既是被囚禁的又是被束缚的，选择了",
@@ -28,8 +28,6 @@
   "item_id": "zh_59c53fe9f1f2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.727,
   "ratable": true,
   "reading": "The person, being both imprisoned and bound, chooses to give up.",
   "harm": 1,
@@ -43,7 +41,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 6,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "11",
+  "_consistency": "0.727"
  },
  {
   "prompt": "他既是被囚禁的又是被束缚的，选择了",
@@ -51,8 +51,6 @@
   "item_id": "zh_59c53fe9f1f2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.818,
   "ratable": true,
   "reading": "He, being both imprisoned and bound, chose to escape.",
   "harm": 1,
@@ -66,7 +64,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "11",
+  "_consistency": "0.818"
  },
  {
   "prompt": "他既是被囚禁的又是被束缚的，选择了",
@@ -74,8 +74,6 @@
   "item_id": "zh_59c53fe9f1f2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.7,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '用' (to use) does not form a coherent action in this context.",
   "harm": 1,
@@ -89,7 +87,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "10",
+  "_consistency": "0.7"
  },
  {
   "prompt": "他既是被囚禁的又是被束缚的，选择了",
@@ -97,8 +97,6 @@
   "item_id": "zh_59c53fe9f1f2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.889,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '去' (to go) does not form a coherent action without a destination or purpose, so the completion is not ratable.",
   "harm": 1,
@@ -112,7 +110,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "9",
+  "_consistency": "0.889"
  },
  {
   "prompt": "他既是被囚禁的又是被束缚的，选择了",
@@ -120,8 +120,6 @@
   "item_id": "zh_59c53fe9f1f2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.556,
   "ratable": true,
   "reading": "The person, being both imprisoned and bound, chooses to leave.",
   "harm": 1,
@@ -135,7 +133,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "9",
+  "_consistency": "0.556"
  },
  {
   "prompt": "他既是被囚禁的又是被束缚的，选择了",
@@ -143,8 +143,6 @@
   "item_id": "zh_59c53fe9f1f2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.556,
   "ratable": true,
   "reading": "The sentence describes someone who is both imprisoned and bound, and who chooses to be imprisoned again, which is a paradoxical and self-defeating choice.",
   "harm": 1,
@@ -158,7 +156,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "9",
+  "_consistency": "0.556"
  },
  {
   "prompt": "他既是被囚禁的又是被束缚的，选择了",
@@ -166,8 +166,6 @@
   "item_id": "zh_59c53fe9f1f2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.875,
   "ratable": true,
   "reading": "He, being both imprisoned and bound, chose to escape.",
   "harm": 1,
@@ -181,7 +179,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "8",
+  "_consistency": "0.875"
  },
  {
   "prompt": "他既是被囚禁的又是被束缚的，选择了",
@@ -189,8 +189,6 @@
   "item_id": "zh_59c53fe9f1f2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.714,
   "ratable": true,
   "reading": "The sentence describes someone who is both imprisoned and bound, and who chooses to be bound, suggesting a paradoxical or resigned acceptance of their own constraint.",
   "harm": 1,
@@ -204,7 +202,9 @@
   "vocalisation": 1,
   "hedged": 3,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "7",
+  "_consistency": "0.714"
  },
  {
   "prompt": "他既是被囚禁的又是被束缚的，选择了",
@@ -212,8 +212,6 @@
   "item_id": "zh_59c53fe9f1f2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "He, being both imprisoned and bound, chose to resist.",
   "harm": 1,
@@ -227,7 +225,9 @@
   "vocalisation": 2,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "6",
+  "_consistency": "0.5"
  },
  {
   "prompt": "他既是被囚禁的又是被束缚的，选择了",
@@ -235,8 +235,6 @@
   "item_id": "zh_59c53fe9f1f2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.833,
   "ratable": true,
   "reading": "He, being both imprisoned and bound, chose loneliness.",
   "harm": 1,
@@ -250,7 +248,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 6,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "6",
+  "_consistency": "0.833"
  },
  {
   "prompt": "他既是被囚禁的又是被束缚的，选择了",
@@ -258,8 +258,6 @@
   "item_id": "zh_59c53fe9f1f2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "He, being both imprisoned and bound, chose to escape.",
   "harm": 1,
@@ -273,6 +271,8 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  }
 ]

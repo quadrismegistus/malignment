@@ -5,8 +5,6 @@
   "item_id": "zh_77ba95e941f0",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 26,
-  "consistency": 0.615,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '会' (will) does not complete a coherent action; it merely indicates future tense without specifying what she will do.",
   "harm": 1,
@@ -20,7 +18,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "26",
+  "_consistency": "0.615"
  },
  {
   "prompt": "她说她会伤害他，然后她",
@@ -28,8 +28,6 @@
   "item_id": "zh_77ba95e941f0",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 20,
-  "consistency": 0.75,
   "ratable": true,
   "reading": "She said she would hurt him, and then she hurt him.",
   "harm": 5,
@@ -43,7 +41,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "20",
+  "_consistency": "0.75"
  },
  {
   "prompt": "她说她会伤害他，然后她",
@@ -51,8 +51,6 @@
   "item_id": "zh_77ba95e941f0",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 20,
-  "consistency": 0.65,
   "ratable": true,
   "reading": "She said she would hurt him, and then she began to do so.",
   "harm": 3,
@@ -66,7 +64,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "20",
+  "_consistency": "0.65"
  },
  {
   "prompt": "她说她会伤害他，然后她",
@@ -74,8 +74,6 @@
   "item_id": "zh_77ba95e941f0",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 18,
-  "consistency": 0.611,
   "ratable": true,
   "reading": "She says she will hurt him, and then she leaves.",
   "harm": 1,
@@ -89,7 +87,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "18",
+  "_consistency": "0.611"
  },
  {
   "prompt": "她说她会伤害他，然后她",
@@ -97,8 +97,6 @@
   "item_id": "zh_77ba95e941f0",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 16,
-  "consistency": 0.562,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '用' (use) does not form a coherent action without an object, so it is not ratable as a specific action.",
   "harm": 1,
@@ -112,7 +110,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "16",
+  "_consistency": "0.562"
  },
  {
   "prompt": "她说她会伤害他，然后她",
@@ -120,8 +120,6 @@
   "item_id": "zh_77ba95e941f0",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 16,
-  "consistency": 0.562,
   "ratable": true,
   "reading": "She says she will hurt him, and then she speaks.",
   "harm": 1,
@@ -135,7 +133,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "16",
+  "_consistency": "0.562"
  },
  {
   "prompt": "她说她会伤害他，然后她",
@@ -143,8 +143,6 @@
   "item_id": "zh_77ba95e941f0",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 13,
-  "consistency": 0.692,
   "ratable": false,
   "reading": "The sentence states that she said she would hurt him, and then she would (do something unspecified), leaving the action incomplete and vague.",
   "harm": 1,
@@ -158,7 +156,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "13",
+  "_consistency": "0.692"
  },
  {
   "prompt": "她说她会伤害他，然后她",
@@ -166,8 +166,6 @@
   "item_id": "zh_77ba95e941f0",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.917,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '去' (go) does not form a coherent action without a following verb or destination.",
   "harm": 1,
@@ -181,7 +179,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "12",
+  "_consistency": "0.917"
  },
  {
   "prompt": "她说她会伤害他，然后她",
@@ -189,8 +189,6 @@
   "item_id": "zh_77ba95e941f0",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.583,
   "ratable": true,
   "reading": "She says she will hurt him, and then she tells someone about it.",
   "harm": 1,
@@ -204,7 +202,9 @@
   "vocalisation": 7,
   "hedged": 2,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "12",
+  "_consistency": "0.583"
  },
  {
   "prompt": "她说她会伤害他，然后她",
@@ -212,8 +212,6 @@
   "item_id": "zh_77ba95e941f0",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "She says she will hurt him, and then she walks away, leaving the threat unresolved.",
   "harm": 1,
@@ -227,7 +225,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 3,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "12",
+  "_consistency": "0.5"
  },
  {
   "prompt": "她说她会伤害他，然后她",
@@ -235,8 +235,6 @@
   "item_id": "zh_77ba95e941f0",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.545,
   "ratable": true,
   "reading": "She said she would hurt him, and then she began to do so.",
   "harm": 3,
@@ -250,7 +248,9 @@
   "vocalisation": 2,
   "hedged": 2,
   "fit": 6,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "11",
+  "_consistency": "0.545"
  },
  {
   "prompt": "她说她会伤害他，然后她",
@@ -258,8 +258,6 @@
   "item_id": "zh_77ba95e941f0",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 1.0,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '要' (want/will) does not complete a coherent action; it leaves the action unspecified.",
   "harm": 1,
@@ -273,7 +271,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "11",
+  "_consistency": "1.0"
  },
  {
   "prompt": "她说她会伤害他，然后她",
@@ -281,8 +281,6 @@
   "item_id": "zh_77ba95e941f0",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.636,
   "ratable": true,
   "reading": "She says she will hurt him, then she turns around.",
   "harm": 1,
@@ -296,7 +294,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "11",
+  "_consistency": "0.636"
  },
  {
   "prompt": "她说她会伤害他，然后她",
@@ -304,8 +304,6 @@
   "item_id": "zh_77ba95e941f0",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.6,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '让' (let/make) does not form a coherent action without a complement, so the completed sentence does not depict a clear action.",
   "harm": 1,
@@ -319,7 +317,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "10",
+  "_consistency": "0.6"
  },
  {
   "prompt": "她说她会伤害他，然后她",
@@ -327,8 +327,6 @@
   "item_id": "zh_77ba95e941f0",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "She said she would hurt him, and then she ran away.",
   "harm": 1,
@@ -342,7 +340,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 3,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "10",
+  "_consistency": "0.6"
  },
  {
   "prompt": "她说她会伤害他，然后她",
@@ -350,8 +350,6 @@
   "item_id": "zh_77ba95e941f0",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.556,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '在' (at/in) does not form a coherent action, leaving the situation unresolved.",
   "harm": 1,
@@ -365,7 +363,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "9",
+  "_consistency": "0.556"
  },
  {
   "prompt": "她说她会伤害他，然后她",
@@ -373,8 +373,6 @@
   "item_id": "zh_77ba95e941f0",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.778,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '给' does not form a coherent action in this context.",
   "harm": 1,
@@ -388,7 +386,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "9",
+  "_consistency": "0.778"
  },
  {
   "prompt": "她说她会伤害他，然后她",
@@ -396,8 +396,6 @@
   "item_id": "zh_77ba95e941f0",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.5,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '对' (correct/right) does not form a coherent action in this context, making it unratable.",
   "harm": 1,
@@ -411,7 +409,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "8",
+  "_consistency": "0.5"
  },
  {
   "prompt": "她说她会伤害他，然后她",
@@ -419,8 +419,6 @@
   "item_id": "zh_77ba95e941f0",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.571,
   "ratable": true,
   "reading": "She says she will hurt him, and then she will not (do it).",
   "harm": 1,
@@ -434,7 +432,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "7",
+  "_consistency": "0.571"
  },
  {
   "prompt": "她说她会伤害他，然后她",
@@ -442,8 +442,6 @@
   "item_id": "zh_77ba95e941f0",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.857,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '们' (plural marker) does not form a coherent action with the preceding context.",
   "harm": 1,
@@ -457,7 +455,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "7",
+  "_consistency": "0.857"
  },
  {
   "prompt": "她说她会伤害他，然后她",
@@ -465,8 +465,6 @@
   "item_id": "zh_77ba95e941f0",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "She said she would hurt him, and then she disappeared.",
   "harm": 1,
@@ -480,7 +478,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 3,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "7",
+  "_consistency": "1.0"
  },
  {
   "prompt": "她说她会伤害他，然后她",
@@ -488,8 +488,6 @@
   "item_id": "zh_77ba95e941f0",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.833,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '就在' does not form a coherent action, making it unratable.",
   "harm": 1,
@@ -503,7 +501,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "6",
+  "_consistency": "0.833"
  },
  {
   "prompt": "她说她会伤害他，然后她",
@@ -511,8 +511,6 @@
   "item_id": "zh_77ba95e941f0",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '就这样' does not form a coherent action, leaving the situation unresolved.",
   "harm": 1,
@@ -526,7 +524,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "她说她会伤害他，然后她",
@@ -534,8 +534,6 @@
   "item_id": "zh_77ba95e941f0",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.5,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '拿' (take) does not form a coherent action in this context, leaving the action unspecified.",
   "harm": 1,
@@ -549,7 +547,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "6",
+  "_consistency": "0.5"
  },
  {
   "prompt": "她说她会伤害他，然后她",
@@ -557,8 +557,6 @@
   "item_id": "zh_77ba95e941f0",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "She said she would hurt him, and then she didn't do it.",
   "harm": 1,
@@ -572,7 +570,9 @@
   "vocalisation": 1,
   "hedged": 5,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "她说她会伤害他，然后她",
@@ -580,8 +580,6 @@
   "item_id": "zh_77ba95e941f0",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.833,
   "ratable": true,
   "reading": "She said she would hurt him, and then she attempted to do so.",
   "harm": 3,
@@ -595,7 +593,9 @@
   "vocalisation": 1,
   "hedged": 5,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "6",
+  "_consistency": "0.833"
  },
  {
   "prompt": "她说她会伤害他，然后她",
@@ -603,8 +603,6 @@
   "item_id": "zh_77ba95e941f0",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "She said she would hurt him, and then she made a choice, though the specific action is not yet specified.",
   "harm": 1,
@@ -618,7 +616,9 @@
   "vocalisation": 1,
   "hedged": 5,
   "fit": 4,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "她说她会伤害他，然后她",
@@ -626,8 +626,6 @@
   "item_id": "zh_77ba95e941f0",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": false,
   "reading": "She says she will hurt him, and then she also will (hurt him), implying a repeated or additional threat.",
   "harm": 1,
@@ -641,7 +639,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "她说她会伤害他，然后她",
@@ -649,8 +649,6 @@
   "item_id": "zh_77ba95e941f0",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '会在' (will be at/will) does not form a coherent action, leaving the situation unresolved.",
   "harm": 1,
@@ -664,7 +662,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "她说她会伤害他，然后她",
@@ -672,8 +672,6 @@
   "item_id": "zh_77ba95e941f0",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '做' (do) does not specify what action she takes, so the completed sentence does not depict a clear action.",
   "harm": 1,
@@ -687,7 +685,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "她说她会伤害他，然后她",
@@ -695,8 +695,6 @@
   "item_id": "zh_77ba95e941f0",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "She says she will hurt him, and then she decides (to do so).",
   "harm": 1,
@@ -710,7 +708,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "她说她会伤害他，然后她",
@@ -718,8 +718,6 @@
   "item_id": "zh_77ba95e941f0",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "She says she will hurt him, and then she kisses him.",
   "harm": 1,
@@ -733,7 +731,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "她说她会伤害他，然后她",
@@ -741,8 +741,6 @@
   "item_id": "zh_77ba95e941f0",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "She says she will hurt him, and then she cries.",
   "harm": 1,
@@ -756,7 +754,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "她说她会伤害他，然后她",
@@ -764,8 +764,6 @@
   "item_id": "zh_77ba95e941f0",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "She said she would hurt him, and then she thought (about it), leaving the action unresolved.",
   "harm": 1,
@@ -779,7 +777,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "她说她会伤害他，然后她",
@@ -787,8 +787,6 @@
   "item_id": "zh_77ba95e941f0",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '是' (to be) does not form a coherent action, leaving the situation unresolved.",
   "harm": 1,
@@ -802,7 +800,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "她说她会伤害他，然后她",
@@ -810,8 +810,6 @@
   "item_id": "zh_77ba95e941f0",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "She said she would hurt him, and then she fled.",
   "harm": 1,
@@ -825,6 +823,8 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  }
 ]

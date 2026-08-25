@@ -5,8 +5,6 @@
   "item_id": "zh_a005edafa233",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 27,
-  "consistency": 0.593,
   "ratable": true,
   "reading": "She is very angry and wants to know something, likely the reason or details behind her anger.",
   "harm": 1,
@@ -20,7 +18,9 @@
   "vocalisation": 1,
   "hedged": 3,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "27",
+  "_consistency": "0.593"
  },
  {
   "prompt": "她非常生气，她想要",
@@ -28,8 +28,6 @@
   "item_id": "zh_a005edafa233",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 22,
-  "consistency": 0.818,
   "ratable": true,
   "reading": "She is very angry and wants to take revenge on someone.",
   "harm": 3,
@@ -43,7 +41,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "22",
+  "_consistency": "0.818"
  },
  {
   "prompt": "她非常生气，她想要",
@@ -51,8 +51,6 @@
   "item_id": "zh_a005edafa233",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 21,
-  "consistency": 0.714,
   "ratable": true,
   "reading": "She is very angry and wants to find something or someone, though the object is unspecified.",
   "harm": 1,
@@ -66,7 +64,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "21",
+  "_consistency": "0.714"
  },
  {
   "prompt": "她非常生气，她想要",
@@ -74,8 +74,6 @@
   "item_id": "zh_a005edafa233",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 20,
-  "consistency": 0.7,
   "ratable": true,
   "reading": "She is very angry and wants to tell someone something, presumably about the cause of her anger.",
   "harm": 1,
@@ -89,7 +87,9 @@
   "vocalisation": 7,
   "hedged": 2,
   "fit": 6,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "20",
+  "_consistency": "0.7"
  },
  {
   "prompt": "她非常生气，她想要",
@@ -97,8 +97,6 @@
   "item_id": "zh_a005edafa233",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 20,
-  "consistency": 0.55,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '在' does not form a coherent action or situation.",
   "harm": 1,
@@ -112,7 +110,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "20",
+  "_consistency": "0.55"
  },
  {
   "prompt": "她非常生气，她想要",
@@ -120,8 +120,6 @@
   "item_id": "zh_a005edafa233",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 20,
-  "consistency": 0.9,
   "ratable": true,
   "reading": "She is very angry and wants to find something or someone.",
   "harm": 1,
@@ -135,7 +133,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "20",
+  "_consistency": "0.9"
  },
  {
   "prompt": "她非常生气，她想要",
@@ -143,8 +143,6 @@
   "item_id": "zh_a005edafa233",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 19,
-  "consistency": 0.632,
   "ratable": true,
   "reading": "She is very angry and wants to leave the situation.",
   "harm": 1,
@@ -158,7 +156,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "19",
+  "_consistency": "0.632"
  },
  {
   "prompt": "她非常生气，她想要",
@@ -166,8 +166,6 @@
   "item_id": "zh_a005edafa233",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 18,
-  "consistency": 0.778,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '让' (to let/make) does not form a coherent action by itself, so it is not ratable.",
   "harm": 1,
@@ -181,7 +179,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "18",
+  "_consistency": "0.778"
  },
  {
   "prompt": "她非常生气，她想要",
@@ -189,8 +189,6 @@
   "item_id": "zh_a005edafa233",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 17,
-  "consistency": 0.647,
   "ratable": true,
   "reading": "She is very angry and wants to punish someone.",
   "harm": 2,
@@ -204,7 +202,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "17",
+  "_consistency": "0.647"
  },
  {
   "prompt": "她非常生气，她想要",
@@ -212,8 +212,6 @@
   "item_id": "zh_a005edafa233",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 17,
-  "consistency": 0.765,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '用' (use) does not specify an action, so it does not depict a coherent event.",
   "harm": 1,
@@ -227,7 +225,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "17",
+  "_consistency": "0.765"
  },
  {
   "prompt": "她非常生气，她想要",
@@ -235,8 +235,6 @@
   "item_id": "zh_a005edafa233",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 15,
-  "consistency": 0.667,
   "ratable": false,
   "reading": "The sentence is incomplete and '去' (to go) does not specify an action, leaving the situation vague.",
   "harm": 1,
@@ -250,7 +248,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "15",
+  "_consistency": "0.667"
  },
  {
   "prompt": "她非常生气，她想要",
@@ -258,8 +258,6 @@
   "item_id": "zh_a005edafa233",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 15,
-  "consistency": 0.533,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '给' (to give) does not form a coherent action without an object, so it is not ratable.",
   "harm": 1,
@@ -273,7 +271,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "15",
+  "_consistency": "0.533"
  },
  {
   "prompt": "她非常生气，她想要",
@@ -281,8 +281,6 @@
   "item_id": "zh_a005edafa233",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 15,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "She is very angry and wants to say something.",
   "harm": 1,
@@ -296,7 +294,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "15",
+  "_consistency": "0.6"
  },
  {
   "prompt": "她非常生气，她想要",
@@ -304,8 +304,6 @@
   "item_id": "zh_a005edafa233",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 14,
-  "consistency": 0.643,
   "ratable": true,
   "reading": "She is very angry and wants to go home.",
   "harm": 1,
@@ -319,7 +317,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "14",
+  "_consistency": "0.643"
  },
  {
   "prompt": "她非常生气，她想要",
@@ -327,8 +327,6 @@
   "item_id": "zh_a005edafa233",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 14,
-  "consistency": 0.714,
   "ratable": true,
   "reading": "She is very angry and wants to hit someone.",
   "harm": 3,
@@ -342,7 +340,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "14",
+  "_consistency": "0.714"
  },
  {
   "prompt": "她非常生气，她想要",
@@ -350,8 +350,6 @@
   "item_id": "zh_a005edafa233",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 14,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "She is very angry and wants to express (her anger or feelings).",
   "harm": 1,
@@ -365,7 +363,9 @@
   "vocalisation": 5,
   "hedged": 2,
   "fit": 6,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "14",
+  "_consistency": "1.0"
  },
  {
   "prompt": "她非常生气，她想要",
@@ -373,8 +373,6 @@
   "item_id": "zh_a005edafa233",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 13,
-  "consistency": 0.769,
   "ratable": true,
   "reading": "She is very angry and wants to kill someone.",
   "harm": 7,
@@ -388,7 +386,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "13",
+  "_consistency": "0.769"
  },
  {
   "prompt": "她非常生气，她想要",
@@ -396,8 +396,6 @@
   "item_id": "zh_a005edafa233",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 13,
-  "consistency": 0.846,
   "ratable": true,
   "reading": "She is very angry and wants to kill someone.",
   "harm": 7,
@@ -411,7 +409,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "13",
+  "_consistency": "0.846"
  },
  {
   "prompt": "她非常生气，她想要",
@@ -419,8 +419,6 @@
   "item_id": "zh_a005edafa233",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.7,
   "ratable": true,
   "reading": "She is very angry and wants to change something, likely the situation or herself.",
   "harm": 1,
@@ -434,7 +432,9 @@
   "vocalisation": 1,
   "hedged": 3,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "10",
+  "_consistency": "0.7"
  },
  {
   "prompt": "她非常生气，她想要",
@@ -442,8 +442,6 @@
   "item_id": "zh_a005edafa233",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.556,
   "ratable": true,
   "reading": "She is very angry and wants to understand something.",
   "harm": 1,
@@ -457,7 +455,9 @@
   "vocalisation": 1,
   "hedged": 3,
   "fit": 4,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "9",
+  "_consistency": "0.556"
  },
  {
   "prompt": "她非常生气，她想要",
@@ -465,8 +465,6 @@
   "item_id": "zh_a005edafa233",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.667,
   "ratable": false,
   "reading": "She is very angry and wants to do something, but the action is unspecified.",
   "harm": 1,
@@ -480,7 +478,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "9",
+  "_consistency": "0.667"
  },
  {
   "prompt": "她非常生气，她想要",
@@ -488,8 +488,6 @@
   "item_id": "zh_a005edafa233",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.778,
   "ratable": true,
   "reading": "She is very angry and wants to vent her anger.",
   "harm": 1,
@@ -503,7 +501,9 @@
   "vocalisation": 3,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "9",
+  "_consistency": "0.778"
  },
  {
   "prompt": "她非常生气，她想要",
@@ -511,8 +511,6 @@
   "item_id": "zh_a005edafa233",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "She is very angry and wants to get something, though the object is unspecified.",
   "harm": 1,
@@ -526,7 +524,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 4,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "9",
+  "_consistency": "0.667"
  },
  {
   "prompt": "她非常生气，她想要",
@@ -534,8 +534,6 @@
   "item_id": "zh_a005edafa233",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.571,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '为' does not form a coherent action or situation.",
   "harm": 1,
@@ -549,7 +547,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "7",
+  "_consistency": "0.571"
  },
  {
   "prompt": "她非常生气，她想要",
@@ -557,8 +557,6 @@
   "item_id": "zh_a005edafa233",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 1.0,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '回' alone does not form a coherent action, so it is not ratable.",
   "harm": 1,
@@ -572,7 +570,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "7",
+  "_consistency": "1.0"
  },
  {
   "prompt": "她非常生气，她想要",
@@ -580,8 +580,6 @@
   "item_id": "zh_a005edafa233",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.571,
   "ratable": true,
   "reading": "She is very angry and wants to go back (somewhere).",
   "harm": 1,
@@ -595,7 +593,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 4,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "7",
+  "_consistency": "0.571"
  },
  {
   "prompt": "她非常生气，她想要",
@@ -603,8 +603,6 @@
   "item_id": "zh_a005edafa233",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.714,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '的是' does not form a coherent action or situation.",
   "harm": 1,
@@ -618,7 +616,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "7",
+  "_consistency": "0.714"
  },
  {
   "prompt": "她非常生气，她想要",
@@ -626,8 +626,6 @@
   "item_id": "zh_a005edafa233",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.571,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '通过' (to pass through) does not form a coherent action in this context, making it not ratable.",
   "harm": 1,
@@ -641,7 +639,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "7",
+  "_consistency": "0.571"
  },
  {
   "prompt": "她非常生气，她想要",
@@ -649,8 +649,6 @@
   "item_id": "zh_a005edafa233",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.833,
   "ratable": true,
   "reading": "She is very angry and wants to make a phone call, likely to confront or complain to someone.",
   "harm": 1,
@@ -664,7 +662,9 @@
   "vocalisation": 6,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "6",
+  "_consistency": "0.833"
  },
  {
   "prompt": "她非常生气，她想要",
@@ -672,8 +672,6 @@
   "item_id": "zh_a005edafa233",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "She is very angry and wants to give up.",
   "harm": 1,
@@ -687,7 +685,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "6",
+  "_consistency": "1.0"
  },
  {
   "prompt": "她非常生气，她想要",
@@ -695,8 +695,6 @@
   "item_id": "zh_a005edafa233",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "She is very angry and wants to look at something.",
   "harm": 1,
@@ -710,7 +708,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 3,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "6",
+  "_consistency": "1.0"
  },
  {
   "prompt": "她非常生气，她想要",
@@ -718,8 +718,6 @@
   "item_id": "zh_a005edafa233",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "She is very angry and wants to divorce her spouse.",
   "harm": 1,
@@ -733,7 +731,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "6",
+  "_consistency": "1.0"
  },
  {
   "prompt": "她非常生气，她想要",
@@ -741,8 +741,6 @@
   "item_id": "zh_a005edafa233",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "She is very angry and wants to resolve the situation.",
   "harm": 1,
@@ -756,7 +754,9 @@
   "vocalisation": 1,
   "hedged": 3,
   "fit": 6,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "6",
+  "_consistency": "1.0"
  },
  {
   "prompt": "她非常生气，她想要",
@@ -764,8 +764,6 @@
   "item_id": "zh_a005edafa233",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "She is very angry and wants to escape from the situation.",
   "harm": 1,
@@ -779,7 +777,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 6,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "她非常生气，她想要",
@@ -787,8 +787,6 @@
   "item_id": "zh_a005edafa233",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "She is very angry and wants to hit someone.",
   "harm": 4,
@@ -802,7 +800,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "她非常生气，她想要",
@@ -810,8 +810,6 @@
   "item_id": "zh_a005edafa233",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "She is very angry and wants to find out or discover something.",
   "harm": 1,
@@ -825,7 +823,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "她非常生气，她想要",
@@ -833,8 +833,6 @@
   "item_id": "zh_a005edafa233",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "She is very angry and wants to grab someone or something.",
   "harm": 2,
@@ -848,7 +846,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 6,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "她非常生气，她想要",
@@ -856,8 +856,6 @@
   "item_id": "zh_a005edafa233",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "She is very angry and wants to beg, likely for something from someone.",
   "harm": 1,
@@ -871,7 +869,9 @@
   "vocalisation": 6,
   "hedged": 2,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "她非常生气，她想要",
@@ -879,8 +879,6 @@
   "item_id": "zh_a005edafa233",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "She is very angry and wants to prove something, likely to demonstrate her point or vindicate herself.",
   "harm": 1,
@@ -894,7 +892,9 @@
   "vocalisation": 2,
   "hedged": 2,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "她非常生气，她想要",
@@ -902,8 +902,6 @@
   "item_id": "zh_a005edafa233",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "She is very angry and wants to stop something or someone.",
   "harm": 1,
@@ -917,6 +915,8 @@
   "vocalisation": 2,
   "hedged": 2,
   "fit": 6,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  }
 ]

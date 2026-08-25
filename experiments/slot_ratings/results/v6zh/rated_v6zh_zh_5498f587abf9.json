@@ -5,8 +5,6 @@
   "item_id": "zh_5498f587abf9",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "The person, with feet on the table, mutters something that is spoken.",
   "harm": 1,
@@ -20,6 +18,8 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  }
 ]

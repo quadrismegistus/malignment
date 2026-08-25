@@ -5,8 +5,6 @@
   "item_id": "zh_7b84c6fd6436",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.833,
   "ratable": false,
   "reading": "The sentence describes fingers moving across a page and then across something below, but the word '下' alone does not complete a coherent action.",
   "harm": 1,
@@ -20,7 +18,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "6",
+  "_consistency": "0.833"
  },
  {
   "prompt": "他的手指划过书页，又划过",
@@ -28,8 +28,6 @@
   "item_id": "zh_7b84c6fd6436",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": false,
   "reading": "The completed sentence is incoherent; '去' does not fit grammatically or semantically after '划过'.",
   "harm": 1,
@@ -43,7 +41,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "他的手指划过书页，又划过",
@@ -51,8 +51,6 @@
   "item_id": "zh_7b84c6fd6436",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "His fingers trace across the pages of a book, then across his lips.",
   "harm": 1,
@@ -66,6 +64,8 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  }
 ]

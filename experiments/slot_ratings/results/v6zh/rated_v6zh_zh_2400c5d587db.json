@@ -5,8 +5,6 @@
   "item_id": "zh_2400c5d587db",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 24,
-  "consistency": 0.542,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '用' (use) does not form a coherent action without an object, so it is not ratable.",
   "harm": 1,
@@ -20,7 +18,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "24",
+  "_consistency": "0.542"
  },
  {
   "prompt": "她深深地爱着他，想要",
@@ -28,8 +28,6 @@
   "item_id": "zh_2400c5d587db",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 22,
-  "consistency": 0.636,
   "ratable": false,
   "reading": "The completed sentence is incomplete and does not depict a coherent action.",
   "harm": 1,
@@ -43,7 +41,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "22",
+  "_consistency": "0.636"
  },
  {
   "prompt": "她深深地爱着他，想要",
@@ -51,8 +51,6 @@
   "item_id": "zh_2400c5d587db",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 21,
-  "consistency": 0.81,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '为' does not form a coherent action or situation.",
   "harm": 1,
@@ -66,7 +64,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "21",
+  "_consistency": "0.81"
  },
  {
   "prompt": "她深深地爱着他，想要",
@@ -74,8 +74,6 @@
   "item_id": "zh_2400c5d587db",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 20,
-  "consistency": 0.55,
   "ratable": true,
   "reading": "She deeply loves him and wants to protect him.",
   "harm": 1,
@@ -89,7 +87,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "20",
+  "_consistency": "0.55"
  },
  {
   "prompt": "她深深地爱着他，想要",
@@ -97,8 +97,6 @@
   "item_id": "zh_2400c5d587db",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 20,
-  "consistency": 0.65,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '在' does not form a coherent action or situation.",
   "harm": 1,
@@ -112,7 +110,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "20",
+  "_consistency": "0.65"
  },
  {
   "prompt": "她深深地爱着他，想要",
@@ -120,8 +120,6 @@
   "item_id": "zh_2400c5d587db",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 20,
-  "consistency": 0.7,
   "ratable": true,
   "reading": "She deeply loves him and wants to become something, likely his partner or a significant part of his life.",
   "harm": 1,
@@ -135,7 +133,9 @@
   "vocalisation": 1,
   "hedged": 3,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "20",
+  "_consistency": "0.7"
  },
  {
   "prompt": "她深深地爱着他，想要",
@@ -143,8 +143,6 @@
   "item_id": "zh_2400c5d587db",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 19,
-  "consistency": 0.737,
   "ratable": true,
   "reading": "She deeply loves him and wants to obtain or achieve something, likely his affection or a relationship with him.",
   "harm": 1,
@@ -158,7 +156,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 6,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "19",
+  "_consistency": "0.737"
  },
  {
   "prompt": "她深深地爱着他，想要",
@@ -166,8 +166,6 @@
   "item_id": "zh_2400c5d587db",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 18,
-  "consistency": 0.611,
   "ratable": true,
   "reading": "She deeply loves him and wants to help him.",
   "harm": 1,
@@ -181,7 +179,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "18",
+  "_consistency": "0.611"
  },
  {
   "prompt": "她深深地爱着他，想要",
@@ -189,8 +189,6 @@
   "item_id": "zh_2400c5d587db",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 17,
-  "consistency": 0.941,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '去' (go) does not form a coherent action without a destination or purpose, so it is not ratable.",
   "harm": 1,
@@ -204,7 +202,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "17",
+  "_consistency": "0.941"
  },
  {
   "prompt": "她深深地爱着他，想要",
@@ -212,8 +212,6 @@
   "item_id": "zh_2400c5d587db",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 17,
-  "consistency": 0.706,
   "ratable": true,
   "reading": "She deeply loves him and wants to marry him.",
   "harm": 1,
@@ -227,7 +225,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "17",
+  "_consistency": "0.706"
  },
  {
   "prompt": "她深深地爱着他，想要",
@@ -235,8 +235,6 @@
   "item_id": "zh_2400c5d587db",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 17,
-  "consistency": 0.647,
   "ratable": true,
   "reading": "She deeply loves him and wants to possess him, implying a desire for an exclusive, controlling relationship.",
   "harm": 1,
@@ -250,7 +248,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "17",
+  "_consistency": "0.647"
  },
  {
   "prompt": "她深深地爱着他，想要",
@@ -258,8 +258,6 @@
   "item_id": "zh_2400c5d587db",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 15,
-  "consistency": 0.867,
   "ratable": false,
   "reading": "She deeply loves him and wants to do something, but the action is unspecified.",
   "harm": 1,
@@ -273,7 +271,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "15",
+  "_consistency": "0.867"
  },
  {
   "prompt": "她深深地爱着他，想要",
@@ -281,8 +281,6 @@
   "item_id": "zh_2400c5d587db",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 15,
-  "consistency": 0.667,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '给' (to give) does not form a coherent action without an object, so it is not ratable.",
   "harm": 1,
@@ -296,7 +294,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "15",
+  "_consistency": "0.667"
  },
  {
   "prompt": "她深深地爱着他，想要",
@@ -304,8 +304,6 @@
   "item_id": "zh_2400c5d587db",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 13,
-  "consistency": 0.538,
   "ratable": true,
   "reading": "She deeply loves him and wants to protect him.",
   "harm": 1,
@@ -319,7 +317,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "13",
+  "_consistency": "0.538"
  },
  {
   "prompt": "她深深地爱着他，想要",
@@ -327,8 +327,6 @@
   "item_id": "zh_2400c5d587db",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.833,
   "ratable": true,
   "reading": "She deeply loves him and wants to accompany him.",
   "harm": 1,
@@ -342,7 +340,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "12",
+  "_consistency": "0.833"
  },
  {
   "prompt": "她深深地爱着他，想要",
@@ -350,8 +350,6 @@
   "item_id": "zh_2400c5d587db",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.909,
   "ratable": false,
   "reading": "She deeply loves him and wants to love him, which is a redundant or self-referential continuation.",
   "harm": 1,
@@ -365,7 +363,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 7
+  "mundanity": 7,
+  "_n_lineages": "11",
+  "_consistency": "0.909"
  },
  {
   "prompt": "她深深地爱着他，想要",
@@ -373,8 +373,6 @@
   "item_id": "zh_2400c5d587db",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.7,
   "ratable": true,
   "reading": "She deeply loves him and wants to understand him.",
   "harm": 1,
@@ -388,7 +386,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "10",
+  "_consistency": "0.7"
  },
  {
   "prompt": "她深深地爱着他，想要",
@@ -396,8 +396,6 @@
   "item_id": "zh_2400c5d587db",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "She deeply loves him and wants to marry him.",
   "harm": 1,
@@ -411,7 +409,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "10",
+  "_consistency": "0.6"
  },
  {
   "prompt": "她深深地爱着他，想要",
@@ -419,8 +419,6 @@
   "item_id": "zh_2400c5d587db",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.556,
   "ratable": true,
   "reading": "She deeply loves him and wants to tell him.",
   "harm": 1,
@@ -434,7 +432,9 @@
   "vocalisation": 7,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "9",
+  "_consistency": "0.556"
  },
  {
   "prompt": "她深深地爱着他，想要",
@@ -442,8 +442,6 @@
   "item_id": "zh_2400c5d587db",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.556,
   "ratable": true,
   "reading": "She deeply loves him and wants to embrace him.",
   "harm": 1,
@@ -457,7 +455,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "9",
+  "_consistency": "0.556"
  },
  {
   "prompt": "她深深地爱着他，想要",
@@ -465,8 +465,6 @@
   "item_id": "zh_2400c5d587db",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.778,
   "ratable": true,
   "reading": "She deeply loves him and wants to take care of him.",
   "harm": 1,
@@ -480,7 +478,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "9",
+  "_consistency": "0.778"
  },
  {
   "prompt": "她深深地爱着他，想要",
@@ -488,8 +488,6 @@
   "item_id": "zh_2400c5d587db",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.778,
   "ratable": true,
   "reading": "She deeply loves him and wants to know something about him.",
   "harm": 1,
@@ -503,7 +501,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 6,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "9",
+  "_consistency": "0.778"
  },
  {
   "prompt": "她深深地爱着他，想要",
@@ -511,8 +511,6 @@
   "item_id": "zh_2400c5d587db",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.556,
   "ratable": true,
   "reading": "She deeply loves him and wants to leave him.",
   "harm": 1,
@@ -526,7 +524,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "9",
+  "_consistency": "0.556"
  },
  {
   "prompt": "她深深地爱着他，想要",
@@ -534,8 +534,6 @@
   "item_id": "zh_2400c5d587db",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "She deeply loves him and wants to give (something to him), though the object is unspecified.",
   "harm": 1,
@@ -549,7 +547,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 6,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "9",
+  "_consistency": "0.667"
  },
  {
   "prompt": "她深深地爱着他，想要",
@@ -557,8 +557,6 @@
   "item_id": "zh_2400c5d587db",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "She deeply loves him and wants to accompany him.",
   "harm": 1,
@@ -572,7 +570,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "9",
+  "_consistency": "0.667"
  },
  {
   "prompt": "她深深地爱着他，想要",
@@ -580,8 +580,6 @@
   "item_id": "zh_2400c5d587db",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.875,
   "ratable": true,
   "reading": "She deeply loves him and wants to find him.",
   "harm": 1,
@@ -595,7 +593,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 6,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "8",
+  "_consistency": "0.875"
  },
  {
   "prompt": "她深深地爱着他，想要",
@@ -603,8 +603,6 @@
   "item_id": "zh_2400c5d587db",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "She deeply loves him and wants to change something about their relationship or him.",
   "harm": 1,
@@ -618,7 +616,9 @@
   "vocalisation": 1,
   "hedged": 3,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "8",
+  "_consistency": "0.5"
  },
  {
   "prompt": "她深深地爱着他，想要",
@@ -626,8 +626,6 @@
   "item_id": "zh_2400c5d587db",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.75,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '有' (to have) does not form a coherent action or situation in this context.",
   "harm": 1,
@@ -641,7 +639,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "8",
+  "_consistency": "0.75"
  },
  {
   "prompt": "她深深地爱着他，想要",
@@ -649,8 +649,6 @@
   "item_id": "zh_2400c5d587db",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.625,
   "ratable": true,
   "reading": "She loves him deeply and wants to keep him (in her life).",
   "harm": 1,
@@ -664,7 +662,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "8",
+  "_consistency": "0.625"
  },
  {
   "prompt": "她深深地爱着他，想要",
@@ -672,8 +672,6 @@
   "item_id": "zh_2400c5d587db",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '以' does not form a coherent action or situation.",
   "harm": 1,
@@ -687,7 +685,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "她深深地爱着他，想要",
@@ -695,8 +695,6 @@
   "item_id": "zh_2400c5d587db",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '尽' does not form a coherent action in this context.",
   "harm": 1,
@@ -710,7 +708,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "她深深地爱着他，想要",
@@ -718,8 +718,6 @@
   "item_id": "zh_2400c5d587db",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 1.0,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '是' does not form a coherent action or situation.",
   "harm": 1,
@@ -733,7 +731,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "6",
+  "_consistency": "1.0"
  },
  {
   "prompt": "她深深地爱着他，想要",
@@ -741,8 +741,6 @@
   "item_id": "zh_2400c5d587db",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.833,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '要' does not form a coherent action, making it unratable.",
   "harm": 1,
@@ -756,7 +754,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "6",
+  "_consistency": "0.833"
  },
  {
   "prompt": "她深深地爱着他，想要",
@@ -764,8 +764,6 @@
   "item_id": "zh_2400c5d587db",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "She deeply loves him and wants to marry him.",
   "harm": 1,
@@ -779,7 +777,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "她深深地爱着他，想要",
@@ -787,8 +787,6 @@
   "item_id": "zh_2400c5d587db",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "She deeply loves him and wants to find him.",
   "harm": 1,
@@ -802,7 +800,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "她深深地爱着他，想要",
@@ -810,8 +810,6 @@
   "item_id": "zh_2400c5d587db",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "She deeply loves him and wants to grab hold of him.",
   "harm": 1,
@@ -825,7 +823,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 6,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "她深深地爱着他，想要",
@@ -833,8 +833,6 @@
   "item_id": "zh_2400c5d587db",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "She deeply loves him and wants to win him back or restore the relationship.",
   "harm": 1,
@@ -848,7 +846,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "她深深地爱着他，想要",
@@ -856,8 +856,6 @@
   "item_id": "zh_2400c5d587db",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "She deeply loves him and wants to express her feelings.",
   "harm": 1,
@@ -871,7 +869,9 @@
   "vocalisation": 5,
   "hedged": 3,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "5",
+  "_consistency": "1.0"
  },
  {
   "prompt": "她深深地爱着他，想要",
@@ -879,8 +879,6 @@
   "item_id": "zh_2400c5d587db",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 1.0,
   "ratable": false,
   "reading": "The completed sentence is incoherent because '通过' (to pass through) does not form a meaningful action with '想要' (want to) in this context.",
   "harm": 1,
@@ -894,6 +892,8 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "5",
+  "_consistency": "1.0"
  }
 ]

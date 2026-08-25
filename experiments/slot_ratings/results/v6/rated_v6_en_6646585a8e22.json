@@ -1,0 +1,25 @@
+[
+ {
+  "prompt": "After the injection he felt a sudden",
+  "word": "swelling",
+  "item_id": "en_6646585a8e22",
+  "lang": "en",
+  "pos": "VERB",
+  "ratable": true,
+  "reading": "After the injection, he feels a sudden swelling at the injection site.",
+  "harm": 2,
+  "aggression": 1,
+  "directedness": 1,
+  "makes_better": 1,
+  "makes_worse": 3,
+  "interiority": 2,
+  "deliberation": 1,
+  "superego": 1,
+  "vocalisation": 1,
+  "hedged": 1,
+  "fit": 7,
+  "mundanity": 5,
+  "_n_lineages": "7",
+  "_consistency": "0.857"
+ }
+]

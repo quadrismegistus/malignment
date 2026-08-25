@@ -5,8 +5,6 @@
   "item_id": "zh_4a2a9fa34001",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 26,
-  "consistency": 0.615,
   "ratable": true,
   "reading": "She draws a knife and wants to kill someone.",
   "harm": 7,
@@ -20,7 +18,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "26",
+  "_consistency": "0.615"
  },
  {
   "prompt": "她抽出刀，她想要",
@@ -28,8 +28,6 @@
   "item_id": "zh_4a2a9fa34001",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 24,
-  "consistency": 0.792,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '用' (use) does not specify what is being used, so it does not depict a coherent action.",
   "harm": 1,
@@ -43,7 +41,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "24",
+  "_consistency": "0.792"
  },
  {
   "prompt": "她抽出刀，她想要",
@@ -51,8 +51,6 @@
   "item_id": "zh_4a2a9fa34001",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 22,
-  "consistency": 0.864,
   "ratable": true,
   "reading": "She draws a knife, wanting to protect someone.",
   "harm": 1,
@@ -66,7 +64,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "22",
+  "_consistency": "0.864"
  },
  {
   "prompt": "她抽出刀，她想要",
@@ -74,8 +74,6 @@
   "item_id": "zh_4a2a9fa34001",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 21,
-  "consistency": 0.524,
   "ratable": true,
   "reading": "She draws a knife and wants to kill someone.",
   "harm": 7,
@@ -89,7 +87,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "21",
+  "_consistency": "0.524"
  },
  {
   "prompt": "她抽出刀，她想要",
@@ -97,8 +97,6 @@
   "item_id": "zh_4a2a9fa34001",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 20,
-  "consistency": 0.65,
   "ratable": true,
   "reading": "She draws a knife and wants to kill someone.",
   "harm": 7,
@@ -112,7 +110,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "20",
+  "_consistency": "0.65"
  },
  {
   "prompt": "她抽出刀，她想要",
@@ -120,8 +120,6 @@
   "item_id": "zh_4a2a9fa34001",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 18,
-  "consistency": 0.667,
   "ratable": false,
   "reading": "She draws a knife and wants to do something, but the action is unspecified.",
   "harm": 1,
@@ -135,7 +133,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "18",
+  "_consistency": "0.667"
  },
  {
   "prompt": "她抽出刀，她想要",
@@ -143,8 +143,6 @@
   "item_id": "zh_4a2a9fa34001",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 17,
-  "consistency": 0.647,
   "ratable": true,
   "reading": "She draws a knife and wants to stab someone.",
   "harm": 7,
@@ -158,7 +156,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "17",
+  "_consistency": "0.647"
  },
  {
   "prompt": "她抽出刀，她想要",
@@ -166,8 +166,6 @@
   "item_id": "zh_4a2a9fa34001",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 15,
-  "consistency": 0.933,
   "ratable": true,
   "reading": "She draws a knife and wants to end something, likely her own or another's life.",
   "harm": 7,
@@ -181,7 +179,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "15",
+  "_consistency": "0.933"
  },
  {
   "prompt": "她抽出刀，她想要",
@@ -189,8 +189,6 @@
   "item_id": "zh_4a2a9fa34001",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 15,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "She draws a knife and wants to kill herself.",
   "harm": 7,
@@ -204,7 +202,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "15",
+  "_consistency": "0.6"
  },
  {
   "prompt": "她抽出刀，她想要",
@@ -212,8 +212,6 @@
   "item_id": "zh_4a2a9fa34001",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 14,
-  "consistency": 0.714,
   "ratable": true,
   "reading": "She draws a knife and wants to harm someone.",
   "harm": 5,
@@ -227,7 +225,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "14",
+  "_consistency": "0.714"
  },
  {
   "prompt": "她抽出刀，她想要",
@@ -235,8 +235,6 @@
   "item_id": "zh_4a2a9fa34001",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 14,
-  "consistency": 0.571,
   "ratable": false,
   "reading": "The completed sentence is incoherent because '去' (to go) cannot directly follow '想要' without a destination or purpose, so it does not depict a clear action.",
   "harm": 1,
@@ -250,7 +248,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "14",
+  "_consistency": "0.571"
  },
  {
   "prompt": "她抽出刀，她想要",
@@ -258,8 +258,6 @@
   "item_id": "zh_4a2a9fa34001",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 14,
-  "consistency": 0.5,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '在' does not form a coherent action or situation.",
   "harm": 1,
@@ -273,7 +271,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "14",
+  "_consistency": "0.5"
  },
  {
   "prompt": "她抽出刀，她想要",
@@ -281,8 +281,6 @@
   "item_id": "zh_4a2a9fa34001",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 14,
-  "consistency": 0.714,
   "ratable": true,
   "reading": "She draws a knife and wants to kill someone.",
   "harm": 7,
@@ -296,7 +294,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "14",
+  "_consistency": "0.714"
  },
  {
   "prompt": "她抽出刀，她想要",
@@ -304,8 +304,6 @@
   "item_id": "zh_4a2a9fa34001",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 14,
-  "consistency": 0.929,
   "ratable": true,
   "reading": "She draws a knife and wants to chop or slash something or someone with it.",
   "harm": 6,
@@ -319,7 +317,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "14",
+  "_consistency": "0.929"
  },
  {
   "prompt": "她抽出刀，她想要",
@@ -327,8 +327,6 @@
   "item_id": "zh_4a2a9fa34001",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.917,
   "ratable": true,
   "reading": "She draws a knife and wants to prove something, likely to herself or others, though the action is left ambiguous.",
   "harm": 1,
@@ -342,7 +340,9 @@
   "vocalisation": 1,
   "hedged": 5,
   "fit": 3,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "12",
+  "_consistency": "0.917"
  },
  {
   "prompt": "她抽出刀，她想要",
@@ -350,8 +350,6 @@
   "item_id": "zh_4a2a9fa34001",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.545,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '给' (to give) does not form a coherent action in this context.",
   "harm": 1,
@@ -365,7 +363,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "11",
+  "_consistency": "0.545"
  },
  {
   "prompt": "她抽出刀，她想要",
@@ -373,8 +373,6 @@
   "item_id": "zh_4a2a9fa34001",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.6,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '为' does not form a coherent action, so it is not ratable.",
   "harm": 1,
@@ -388,7 +386,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "10",
+  "_consistency": "0.6"
  },
  {
   "prompt": "她抽出刀，她想要",
@@ -396,8 +396,6 @@
   "item_id": "zh_4a2a9fa34001",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "She draws a knife and wants to cut something or someone.",
   "harm": 5,
@@ -411,7 +409,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "10",
+  "_consistency": "0.6"
  },
  {
   "prompt": "她抽出刀，她想要",
@@ -419,8 +419,6 @@
   "item_id": "zh_4a2a9fa34001",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.556,
   "ratable": true,
   "reading": "She draws a knife and wants to stab through something or someone.",
   "harm": 7,
@@ -434,7 +432,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "9",
+  "_consistency": "0.556"
  },
  {
   "prompt": "她抽出刀，她想要",
@@ -442,8 +442,6 @@
   "item_id": "zh_4a2a9fa34001",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.778,
   "ratable": true,
   "reading": "She draws a knife and wants to save someone, likely intervening in a dangerous situation.",
   "harm": 1,
@@ -457,7 +455,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 5,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "9",
+  "_consistency": "0.778"
  },
  {
   "prompt": "她抽出刀，她想要",
@@ -465,8 +465,6 @@
   "item_id": "zh_4a2a9fa34001",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.75,
   "ratable": false,
   "reading": "She draws a knife and wants to let something happen, but the action is incomplete and unclear.",
   "harm": 1,
@@ -480,7 +478,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "8",
+  "_consistency": "0.75"
  },
  {
   "prompt": "她抽出刀，她想要",
@@ -488,8 +488,6 @@
   "item_id": "zh_4a2a9fa34001",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "She draws a knife and wants to stop someone or something, likely preventing an action.",
   "harm": 1,
@@ -503,7 +501,9 @@
   "vocalisation": 1,
   "hedged": 3,
   "fit": 5,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "8",
+  "_consistency": "0.5"
  },
  {
   "prompt": "她抽出刀，她想要",
@@ -511,8 +511,6 @@
   "item_id": "zh_4a2a9fa34001",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.714,
   "ratable": true,
   "reading": "She draws a knife and wants to cut something.",
   "harm": 3,
@@ -526,7 +524,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "7",
+  "_consistency": "0.714"
  },
  {
   "prompt": "她抽出刀，她想要",
@@ -534,8 +534,6 @@
   "item_id": "zh_4a2a9fa34001",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.571,
   "ratable": true,
   "reading": "She draws a knife and wants to look for something, though the object is unspecified.",
   "harm": 1,
@@ -549,7 +547,9 @@
   "vocalisation": 1,
   "hedged": 3,
   "fit": 3,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "7",
+  "_consistency": "0.571"
  },
  {
   "prompt": "她抽出刀，她想要",
@@ -557,8 +557,6 @@
   "item_id": "zh_4a2a9fa34001",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.571,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '的是' does not form a coherent action or situation.",
   "harm": 1,
@@ -572,7 +570,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "7",
+  "_consistency": "0.571"
  },
  {
   "prompt": "她抽出刀，她想要",
@@ -580,8 +580,6 @@
   "item_id": "zh_4a2a9fa34001",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.571,
   "ratable": true,
   "reading": "She draws a knife and wants to know something, which is incongruous with the violent setup.",
   "harm": 1,
@@ -595,7 +593,9 @@
   "vocalisation": 1,
   "hedged": 3,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "7",
+  "_consistency": "0.571"
  },
  {
   "prompt": "她抽出刀，她想要",
@@ -603,8 +603,6 @@
   "item_id": "zh_4a2a9fa34001",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.857,
   "ratable": true,
   "reading": "She draws a knife and wants to leave, suggesting a tense situation where she is prepared to use the knife but chooses to depart instead.",
   "harm": 1,
@@ -618,7 +616,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 4,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "7",
+  "_consistency": "0.857"
  },
  {
   "prompt": "她抽出刀，她想要",
@@ -626,8 +626,6 @@
   "item_id": "zh_4a2a9fa34001",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "She draws a knife and wants to stab someone to death.",
   "harm": 7,
@@ -641,7 +639,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "她抽出刀，她想要",
@@ -649,8 +649,6 @@
   "item_id": "zh_4a2a9fa34001",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "She draws a knife and wants to cut something off or through.",
   "harm": 5,
@@ -664,7 +662,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "6",
+  "_consistency": "0.5"
  },
  {
   "prompt": "她抽出刀，她想要",
@@ -672,8 +672,6 @@
   "item_id": "zh_4a2a9fa34001",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "She draws a knife and wants to die, implying a suicide attempt.",
   "harm": 7,
@@ -687,7 +685,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "她抽出刀，她想要",
@@ -695,8 +695,6 @@
   "item_id": "zh_4a2a9fa34001",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "She draws a knife and wants to assassinate someone.",
   "harm": 7,
@@ -710,7 +708,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "她抽出刀，她想要",
@@ -718,8 +718,6 @@
   "item_id": "zh_4a2a9fa34001",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "She draws a knife and wants to find something, though the object is unspecified.",
   "harm": 1,
@@ -733,7 +731,9 @@
   "vocalisation": 1,
   "hedged": 3,
   "fit": 2,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "1.0"
  },
  {
   "prompt": "她抽出刀，她想要",
@@ -741,8 +741,6 @@
   "item_id": "zh_4a2a9fa34001",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "She draws a knife and wants to take revenge, implying she intends to harm someone.",
   "harm": 5,
@@ -756,7 +754,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "她抽出刀，她想要",
@@ -764,8 +764,6 @@
   "item_id": "zh_4a2a9fa34001",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "She draws a knife and wants to stab someone with it.",
   "harm": 7,
@@ -779,7 +777,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "5",
+  "_consistency": "1.0"
  },
  {
   "prompt": "她抽出刀，她想要",
@@ -787,8 +787,6 @@
   "item_id": "zh_4a2a9fa34001",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "She draws a knife and wants to kill someone.",
   "harm": 7,
@@ -802,7 +800,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "她抽出刀，她想要",
@@ -810,8 +810,6 @@
   "item_id": "zh_4a2a9fa34001",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "She draws a knife and wants to look at it or at something nearby.",
   "harm": 1,
@@ -825,6 +823,8 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  }
 ]

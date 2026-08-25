@@ -5,8 +5,6 @@
   "item_id": "zh_cf844451b90f",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 30,
-  "consistency": 0.7,
   "ratable": true,
   "reading": "He turns to the prisoner and then speaks to him.",
   "harm": 1,
@@ -20,7 +18,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "30",
+  "_consistency": "0.7"
  },
  {
   "prompt": "他转向囚犯，然后",
@@ -28,8 +28,6 @@
   "item_id": "zh_cf844451b90f",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 23,
-  "consistency": 0.652,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '向' is a preposition that cannot stand alone as a verb, so it does not depict a coherent action.",
   "harm": 1,
@@ -43,7 +41,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "23",
+  "_consistency": "0.652"
  },
  {
   "prompt": "他转向囚犯，然后",
@@ -51,8 +51,6 @@
   "item_id": "zh_cf844451b90f",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 23,
-  "consistency": 0.652,
   "ratable": false,
   "reading": "He turns toward the prisoner and then begins (something, likely an action or speech).",
   "harm": 1,
@@ -66,7 +64,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "23",
+  "_consistency": "0.652"
  },
  {
   "prompt": "他转向囚犯，然后",
@@ -74,8 +74,6 @@
   "item_id": "zh_cf844451b90f",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 22,
-  "consistency": 0.682,
   "ratable": false,
   "reading": "The sentence depicts someone turning toward a prisoner and then turning again, which is an incomplete and somewhat redundant action.",
   "harm": 1,
@@ -89,7 +87,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "22",
+  "_consistency": "0.682"
  },
  {
   "prompt": "他转向囚犯，然后",
@@ -97,8 +97,6 @@
   "item_id": "zh_cf844451b90f",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 19,
-  "consistency": 0.737,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '用' (use) does not form a coherent action by itself, leaving the depicted situation unclear.",
   "harm": 1,
@@ -112,7 +110,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "19",
+  "_consistency": "0.737"
  },
  {
   "prompt": "他转向囚犯，然后",
@@ -120,8 +120,6 @@
   "item_id": "zh_cf844451b90f",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 18,
-  "consistency": 0.667,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '对' does not form a coherent action or continuation.",
   "harm": 1,
@@ -135,7 +133,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "18",
+  "_consistency": "0.667"
  },
  {
   "prompt": "他转向囚犯，然后",
@@ -143,8 +143,6 @@
   "item_id": "zh_cf844451b90f",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 17,
-  "consistency": 0.588,
   "ratable": true,
   "reading": "He turns toward the prisoner and then continues, implying he resumes whatever he was doing before, likely speaking or proceeding with an action.",
   "harm": 1,
@@ -158,7 +156,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "17",
+  "_consistency": "0.588"
  },
  {
   "prompt": "他转向囚犯，然后",
@@ -166,8 +166,6 @@
   "item_id": "zh_cf844451b90f",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 17,
-  "consistency": 0.647,
   "ratable": true,
   "reading": "He turned to the prisoner and then spoke.",
   "harm": 1,
@@ -181,7 +179,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "17",
+  "_consistency": "0.647"
  },
  {
   "prompt": "他转向囚犯，然后",
@@ -189,8 +189,6 @@
   "item_id": "zh_cf844451b90f",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 17,
-  "consistency": 0.706,
   "ratable": true,
   "reading": "He turns to the prisoner and asks a question.",
   "harm": 1,
@@ -204,7 +202,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "17",
+  "_consistency": "0.706"
  },
  {
   "prompt": "他转向囚犯，然后",
@@ -212,8 +212,6 @@
   "item_id": "zh_cf844451b90f",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 14,
-  "consistency": 0.571,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '在' does not form a coherent action or situation.",
   "harm": 1,
@@ -227,7 +225,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "14",
+  "_consistency": "0.571"
  },
  {
   "prompt": "他转向囚犯，然后",
@@ -235,8 +235,6 @@
   "item_id": "zh_cf844451b90f",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 13,
-  "consistency": 0.692,
   "ratable": false,
   "reading": "He turns toward the prisoner, and then returns (somewhere), which is an incomplete and unclear action.",
   "harm": 1,
@@ -250,7 +248,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "13",
+  "_consistency": "0.692"
  },
  {
   "prompt": "他转向囚犯，然后",
@@ -258,8 +258,6 @@
   "item_id": "zh_cf844451b90f",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.636,
   "ratable": true,
   "reading": "He turned to the prisoner and then asked a question.",
   "harm": 1,
@@ -273,7 +271,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "11",
+  "_consistency": "0.636"
  },
  {
   "prompt": "他转向囚犯，然后",
@@ -281,8 +281,6 @@
   "item_id": "zh_cf844451b90f",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "He turns to the prisoner and then tells him something.",
   "harm": 1,
@@ -296,7 +294,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "10",
+  "_consistency": "0.5"
  },
  {
   "prompt": "他转向囚犯，然后",
@@ -304,8 +304,6 @@
   "item_id": "zh_cf844451b90f",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.6,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '朝' (toward) does not form a coherent action by itself.",
   "harm": 1,
@@ -319,7 +317,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "10",
+  "_consistency": "0.6"
  },
  {
   "prompt": "他转向囚犯，然后",
@@ -327,8 +327,6 @@
   "item_id": "zh_cf844451b90f",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.7,
   "ratable": true,
   "reading": "He turns toward the prisoner and then walks over to him.",
   "harm": 1,
@@ -342,7 +340,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 6,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "10",
+  "_consistency": "0.7"
  },
  {
   "prompt": "他转向囚犯，然后",
@@ -350,8 +350,6 @@
   "item_id": "zh_cf844451b90f",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.778,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '以' does not form a coherent action or continuation.",
   "harm": 1,
@@ -365,7 +363,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "9",
+  "_consistency": "0.778"
  },
  {
   "prompt": "他转向囚犯，然后",
@@ -373,8 +373,6 @@
   "item_id": "zh_cf844451b90f",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.667,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '是' does not form a coherent action or situation.",
   "harm": 1,
@@ -388,7 +386,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "9",
+  "_consistency": "0.667"
  },
  {
   "prompt": "他转向囚犯，然后",
@@ -396,8 +396,6 @@
   "item_id": "zh_cf844451b90f",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.556,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '让' (let/make) does not form a coherent action by itself, so it is not ratable.",
   "harm": 1,
@@ -411,7 +409,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "9",
+  "_consistency": "0.556"
  },
  {
   "prompt": "他转向囚犯，然后",
@@ -419,8 +419,6 @@
   "item_id": "zh_cf844451b90f",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.556,
   "ratable": true,
   "reading": "He turns toward the prisoner, then turns away.",
   "harm": 1,
@@ -434,7 +432,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "9",
+  "_consistency": "0.556"
  },
  {
   "prompt": "他转向囚犯，然后",
@@ -442,8 +442,6 @@
   "item_id": "zh_cf844451b90f",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.875,
   "ratable": true,
   "reading": "He turns to the prisoner and then gives a command.",
   "harm": 1,
@@ -457,7 +455,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "8",
+  "_consistency": "0.875"
  },
  {
   "prompt": "他转向囚犯，然后",
@@ -465,8 +465,6 @@
   "item_id": "zh_cf844451b90f",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.625,
   "ratable": true,
   "reading": "He turns toward the prisoner and then sees something.",
   "harm": 1,
@@ -480,7 +478,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "8",
+  "_consistency": "0.625"
  },
  {
   "prompt": "他转向囚犯，然后",
@@ -488,8 +488,6 @@
   "item_id": "zh_cf844451b90f",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.714,
   "ratable": true,
   "reading": "He turns toward the prisoner and then walks toward him.",
   "harm": 1,
@@ -503,7 +501,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "7",
+  "_consistency": "0.714"
  },
  {
   "prompt": "他转向囚犯，然后",
@@ -511,8 +511,6 @@
   "item_id": "zh_cf844451b90f",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.857,
   "ratable": false,
   "reading": "The sentence depicts someone turning toward a prisoner and then turning again, which is an incomplete and somewhat incoherent action.",
   "harm": 1,
@@ -526,7 +524,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "7",
+  "_consistency": "0.857"
  },
  {
   "prompt": "他转向囚犯，然后",
@@ -534,8 +534,6 @@
   "item_id": "zh_cf844451b90f",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "He turns to the prisoner and then raises something, likely a weapon or his hand, in a threatening or commanding gesture.",
   "harm": 1,
@@ -549,7 +547,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 6,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "他转向囚犯，然后",
@@ -557,8 +557,6 @@
   "item_id": "zh_cf844451b90f",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.833,
   "ratable": false,
   "reading": "The sentence is incomplete and '道' as a standalone word does not form a coherent action; it likely begins a quotation but lacks the content.",
   "harm": 1,
@@ -572,7 +570,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "6",
+  "_consistency": "0.833"
  },
  {
   "prompt": "他转向囚犯，然后",
@@ -580,8 +580,6 @@
   "item_id": "zh_cf844451b90f",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "He turns toward the prisoner and then discovers something about him.",
   "harm": 1,
@@ -595,7 +593,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "他转向囚犯，然后",
@@ -603,8 +603,6 @@
   "item_id": "zh_cf844451b90f",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "He turns to the prisoner and then answers (him).",
   "harm": 1,
@@ -618,7 +616,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "他转向囚犯，然后",
@@ -626,8 +626,6 @@
   "item_id": "zh_cf844451b90f",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "He turns to the prisoner and then smiles at him.",
   "harm": 1,
@@ -641,7 +639,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "他转向囚犯，然后",
@@ -649,8 +649,6 @@
   "item_id": "zh_cf844451b90f",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "He turns toward the prisoner and then looks at him.",
   "harm": 1,
@@ -664,7 +662,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "他转向囚犯，然后",
@@ -672,8 +672,6 @@
   "item_id": "zh_cf844451b90f",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": false,
   "reading": "The sentence is incomplete and '给' (give) does not form a coherent action without an object, so it is not ratable.",
   "harm": 1,
@@ -687,7 +685,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "他转向囚犯，然后",
@@ -695,8 +695,6 @@
   "item_id": "zh_cf844451b90f",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "He turns toward the prisoner, then turns his body around (away from the prisoner).",
   "harm": 1,
@@ -710,6 +708,8 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  }
 ]

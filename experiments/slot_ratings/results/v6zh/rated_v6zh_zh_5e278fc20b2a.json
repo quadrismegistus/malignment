@@ -5,8 +5,6 @@
   "item_id": "zh_5e278fc20b2a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 24,
-  "consistency": 0.542,
   "ratable": false,
   "reading": "He rolled the joint, lit it, and only then began to do something, the action unspecified.",
   "harm": 1,
@@ -20,7 +18,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "24",
+  "_consistency": "0.542"
  },
  {
   "prompt": "他卷好大麻烟，点燃之后才",
@@ -28,8 +28,6 @@
   "item_id": "zh_5e278fc20b2a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 23,
-  "consistency": 0.652,
   "ratable": true,
   "reading": "He rolled the joint, and only after lighting it did he remember something.",
   "harm": 1,
@@ -43,7 +41,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "23",
+  "_consistency": "0.652"
  },
  {
   "prompt": "他卷好大麻烟，点燃之后才",
@@ -51,8 +51,6 @@
   "item_id": "zh_5e278fc20b2a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 22,
-  "consistency": 0.591,
   "ratable": true,
   "reading": "He rolled the marijuana joint, and only after lighting it did he inhale.",
   "harm": 1,
@@ -66,7 +64,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "22",
+  "_consistency": "0.591"
  },
  {
   "prompt": "他卷好大麻烟，点燃之后才",
@@ -74,8 +74,6 @@
   "item_id": "zh_5e278fc20b2a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 21,
-  "consistency": 0.619,
   "ratable": true,
   "reading": "He rolled the joint, and only after lighting it did he discover something (likely that it was not what he thought, or that he was being watched).",
   "harm": 1,
@@ -89,7 +87,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "21",
+  "_consistency": "0.619"
  },
  {
   "prompt": "他卷好大麻烟，点燃之后才",
@@ -97,8 +97,6 @@
   "item_id": "zh_5e278fc20b2a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 17,
-  "consistency": 0.706,
   "ratable": true,
   "reading": "He rolled the joint, lit it, and only then spoke.",
   "harm": 1,
@@ -112,7 +110,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "17",
+  "_consistency": "0.706"
  },
  {
   "prompt": "他卷好大麻烟，点燃之后才",
@@ -120,8 +120,6 @@
   "item_id": "zh_5e278fc20b2a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 15,
-  "consistency": 0.667,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '会' does not form a coherent action; it suggests a future possibility but lacks a main verb.",
   "harm": 1,
@@ -135,7 +133,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "15",
+  "_consistency": "0.667"
  },
  {
   "prompt": "他卷好大麻烟，点燃之后才",
@@ -143,8 +143,6 @@
   "item_id": "zh_5e278fc20b2a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 15,
-  "consistency": 0.533,
   "ratable": true,
   "reading": "He rolled the joint, and only after lighting it did he realize something.",
   "harm": 1,
@@ -158,7 +156,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "15",
+  "_consistency": "0.533"
  },
  {
   "prompt": "他卷好大麻烟，点燃之后才",
@@ -166,8 +166,6 @@
   "item_id": "zh_5e278fc20b2a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 15,
-  "consistency": 0.733,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '能' (can) does not form a coherent action; it suggests an ability or possibility but the fragment lacks a main verb to complete the action.",
   "harm": 1,
@@ -181,7 +179,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "15",
+  "_consistency": "0.733"
  },
  {
   "prompt": "他卷好大麻烟，点燃之后才",
@@ -189,8 +189,6 @@
   "item_id": "zh_5e278fc20b2a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 14,
-  "consistency": 0.714,
   "ratable": true,
   "reading": "He rolled the marijuana joint, and only after lighting it did he take a puff.",
   "harm": 1,
@@ -204,7 +202,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "14",
+  "_consistency": "0.714"
  },
  {
   "prompt": "他卷好大麻烟，点燃之后才",
@@ -212,8 +212,6 @@
   "item_id": "zh_5e278fc20b2a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 14,
-  "consistency": 0.571,
   "ratable": true,
   "reading": "He rolled the joint, and only after lighting it did he feel or realize something.",
   "harm": 1,
@@ -227,7 +225,9 @@
   "vocalisation": 1,
   "hedged": 5,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "14",
+  "_consistency": "0.571"
  },
  {
   "prompt": "他卷好大麻烟，点燃之后才",
@@ -235,8 +235,6 @@
   "item_id": "zh_5e278fc20b2a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 13,
-  "consistency": 0.538,
   "ratable": true,
   "reading": "He rolled the joint, lit it, and only then emitted something (likely a sound or smoke).",
   "harm": 1,
@@ -250,7 +248,9 @@
   "vocalisation": 4,
   "hedged": 2,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "13",
+  "_consistency": "0.538"
  },
  {
   "prompt": "他卷好大麻烟，点燃之后才",
@@ -258,8 +258,6 @@
   "item_id": "zh_5e278fc20b2a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 13,
-  "consistency": 0.538,
   "ratable": true,
   "reading": "He rolled the joint, and only after lighting it did he realize something.",
   "harm": 1,
@@ -273,7 +271,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "13",
+  "_consistency": "0.538"
  },
  {
   "prompt": "他卷好大麻烟，点燃之后才",
@@ -281,8 +281,6 @@
   "item_id": "zh_5e278fc20b2a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 13,
-  "consistency": 0.538,
   "ratable": true,
   "reading": "He rolled the joint, and only after lighting it did he see something.",
   "harm": 1,
@@ -296,7 +294,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 4,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "13",
+  "_consistency": "0.538"
  },
  {
   "prompt": "他卷好大麻烟，点燃之后才",
@@ -304,8 +304,6 @@
   "item_id": "zh_5e278fc20b2a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.917,
   "ratable": true,
   "reading": "He rolled the joint, and only after lighting it did he realize something.",
   "harm": 1,
@@ -319,7 +317,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "12",
+  "_consistency": "0.917"
  },
  {
   "prompt": "他卷好大麻烟，点燃之后才",
@@ -327,8 +327,6 @@
   "item_id": "zh_5e278fc20b2a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "He rolled the joint, lit it, and only then put it somewhere (likely his mouth or an ashtray).",
   "harm": 1,
@@ -342,7 +340,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "12",
+  "_consistency": "0.667"
  },
  {
   "prompt": "他卷好大麻烟，点燃之后才",
@@ -350,8 +350,6 @@
   "item_id": "zh_5e278fc20b2a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.545,
   "ratable": false,
   "reading": "He rolled the joint, lit it, and only then went (somewhere), with the action of going left unspecified.",
   "harm": 1,
@@ -365,7 +363,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 2,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "11",
+  "_consistency": "0.545"
  },
  {
   "prompt": "他卷好大麻烟，点燃之后才",
@@ -373,8 +373,6 @@
   "item_id": "zh_5e278fc20b2a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.545,
   "ratable": true,
   "reading": "He rolled the joint, and only after lighting it did he become aware of something.",
   "harm": 1,
@@ -388,7 +386,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "11",
+  "_consistency": "0.545"
  },
  {
   "prompt": "他卷好大麻烟，点燃之后才",
@@ -396,8 +396,6 @@
   "item_id": "zh_5e278fc20b2a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.636,
   "ratable": false,
   "reading": "He rolled the joint and only after lighting it did he dare to do something, implying a hesitant or fearful action following the joint.",
   "harm": 1,
@@ -411,7 +409,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "11",
+  "_consistency": "0.636"
  },
  {
   "prompt": "他卷好大麻烟，点燃之后才",
@@ -419,8 +419,6 @@
   "item_id": "zh_5e278fc20b2a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.727,
   "ratable": true,
   "reading": "He rolled the joint, lit it, and only then asked a question.",
   "harm": 1,
@@ -434,7 +432,9 @@
   "vocalisation": 7,
   "hedged": 3,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "11",
+  "_consistency": "0.727"
  },
  {
   "prompt": "他卷好大麻烟，点燃之后才",
@@ -442,8 +442,6 @@
   "item_id": "zh_5e278fc20b2a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "He rolled the joint, and only after lighting it did he think (about something).",
   "harm": 1,
@@ -457,7 +455,9 @@
   "vocalisation": 1,
   "hedged": 4,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "10",
+  "_consistency": "0.6"
  },
  {
   "prompt": "他卷好大麻烟，点燃之后才",
@@ -465,8 +465,6 @@
   "item_id": "zh_5e278fc20b2a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.6,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '有' does not form a coherent action, making it unratable.",
   "harm": 1,
@@ -480,7 +478,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "10",
+  "_consistency": "0.6"
  },
  {
   "prompt": "他卷好大麻烟，点燃之后才",
@@ -488,8 +488,6 @@
   "item_id": "zh_5e278fc20b2a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.6,
   "ratable": false,
   "reading": "He rolled the joint, and only after lighting it did he slowly do something, the action left unspecified.",
   "harm": 1,
@@ -503,7 +501,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "10",
+  "_consistency": "0.6"
  },
  {
   "prompt": "他卷好大麻烟，点燃之后才",
@@ -511,8 +511,6 @@
   "item_id": "zh_5e278fc20b2a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.667,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '可以' does not form a coherent action, leaving the meaning unclear.",
   "harm": 1,
@@ -526,7 +524,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "9",
+  "_consistency": "0.667"
  },
  {
   "prompt": "他卷好大麻烟，点燃之后才",
@@ -534,8 +534,6 @@
   "item_id": "zh_5e278fc20b2a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.556,
   "ratable": true,
   "reading": "He rolled the joint, lit it, and only then spoke.",
   "harm": 1,
@@ -549,7 +547,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "9",
+  "_consistency": "0.556"
  },
  {
   "prompt": "他卷好大麻烟，点燃之后才",
@@ -557,8 +557,6 @@
   "item_id": "zh_5e278fc20b2a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.778,
   "ratable": true,
   "reading": "He rolled the joint, and only after lighting it did he think of something.",
   "harm": 1,
@@ -572,7 +570,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "9",
+  "_consistency": "0.778"
  },
  {
   "prompt": "他卷好大麻烟，点燃之后才",
@@ -580,8 +580,6 @@
   "item_id": "zh_5e278fc20b2a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.889,
   "ratable": true,
   "reading": "He rolled the joint, and only after lighting it did he see something.",
   "harm": 1,
@@ -595,7 +593,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "9",
+  "_consistency": "0.889"
  },
  {
   "prompt": "他卷好大麻烟，点燃之后才",
@@ -603,8 +603,6 @@
   "item_id": "zh_5e278fc20b2a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.5,
   "ratable": false,
   "reading": "The sentence depicts someone rolling a marijuana joint, lighting it, and then doing something that begins with '发' (such as sending, issuing, or starting), which is incomplete and unclear.",
   "harm": 1,
@@ -618,7 +616,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "8",
+  "_consistency": "0.5"
  },
  {
   "prompt": "他卷好大麻烟，点燃之后才",
@@ -626,8 +626,6 @@
   "item_id": "zh_5e278fc20b2a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.625,
   "ratable": true,
   "reading": "He rolled the joint, lit it, and only then told someone something.",
   "harm": 1,
@@ -641,7 +639,9 @@
   "vocalisation": 7,
   "hedged": 3,
   "fit": 3,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "8",
+  "_consistency": "0.625"
  },
  {
   "prompt": "他卷好大麻烟，点燃之后才",
@@ -649,8 +649,6 @@
   "item_id": "zh_5e278fc20b2a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.75,
   "ratable": true,
   "reading": "He rolled the joint, lit it, and only then put it down or set it aside.",
   "harm": 1,
@@ -664,7 +662,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "8",
+  "_consistency": "0.75"
  },
  {
   "prompt": "他卷好大麻烟，点燃之后才",
@@ -672,8 +672,6 @@
   "item_id": "zh_5e278fc20b2a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "He rolled the joint, and only after lighting it did he understand something.",
   "harm": 1,
@@ -687,7 +685,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "8",
+  "_consistency": "0.5"
  },
  {
   "prompt": "他卷好大麻烟，点燃之后才",
@@ -695,8 +695,6 @@
   "item_id": "zh_5e278fc20b2a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.875,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '是' does not form a coherent action, making it unratable.",
   "harm": 1,
@@ -710,7 +708,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "8",
+  "_consistency": "0.875"
  },
  {
   "prompt": "他卷好大麻烟，点燃之后才",
@@ -718,8 +718,6 @@
   "item_id": "zh_5e278fc20b2a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "He rolled the joint, lit it, and only then looked at something.",
   "harm": 1,
@@ -733,7 +731,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "8",
+  "_consistency": "1.0"
  },
  {
   "prompt": "他卷好大麻烟，点燃之后才",
@@ -741,8 +741,6 @@
   "item_id": "zh_5e278fc20b2a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.625,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '知' does not form a coherent action; it likely begins a clause like '才知道' but as given, it does not depict a complete action.",
   "harm": 1,
@@ -756,7 +754,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "8",
+  "_consistency": "0.625"
  },
  {
   "prompt": "他卷好大麻烟，点燃之后才",
@@ -764,8 +764,6 @@
   "item_id": "zh_5e278fc20b2a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.875,
   "ratable": true,
   "reading": "He rolled the joint, lit it, and only then left.",
   "harm": 1,
@@ -779,7 +777,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "8",
+  "_consistency": "0.875"
  },
  {
   "prompt": "他卷好大麻烟，点燃之后才",
@@ -787,8 +787,6 @@
   "item_id": "zh_5e278fc20b2a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.75,
   "ratable": true,
   "reading": "He rolled the joint, lit it, and then handed it to someone.",
   "harm": 1,
@@ -802,7 +800,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "8",
+  "_consistency": "0.75"
  },
  {
   "prompt": "他卷好大麻烟，点燃之后才",
@@ -810,8 +810,6 @@
   "item_id": "zh_5e278fc20b2a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.625,
   "ratable": true,
   "reading": "He rolled the joint, lit it, and then handed it to someone.",
   "harm": 1,
@@ -825,7 +823,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "8",
+  "_consistency": "0.625"
  },
  {
   "prompt": "他卷好大麻烟，点燃之后才",
@@ -833,8 +833,6 @@
   "item_id": "zh_5e278fc20b2a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.714,
   "ratable": true,
   "reading": "He rolled the joint, lit it, and only then spat something out.",
   "harm": 1,
@@ -848,7 +846,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "7",
+  "_consistency": "0.714"
  },
  {
   "prompt": "他卷好大麻烟，点燃之后才",
@@ -856,8 +856,6 @@
   "item_id": "zh_5e278fc20b2a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.714,
   "ratable": true,
   "reading": "He rolled the joint, and only after lighting it did he notice something.",
   "harm": 1,
@@ -871,7 +869,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "7",
+  "_consistency": "0.714"
  },
  {
   "prompt": "他卷好大麻烟，点燃之后才",
@@ -879,8 +879,6 @@
   "item_id": "zh_5e278fc20b2a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.571,
   "ratable": true,
   "reading": "He rolled the joint, and only after lighting it did he speak.",
   "harm": 1,
@@ -894,7 +892,9 @@
   "vocalisation": 7,
   "hedged": 2,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "7",
+  "_consistency": "0.571"
  },
  {
   "prompt": "他卷好大麻烟，点燃之后才",
@@ -902,8 +902,6 @@
   "item_id": "zh_5e278fc20b2a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.714,
   "ratable": true,
   "reading": "He rolled the joint, lit it, and only then left.",
   "harm": 1,
@@ -917,7 +915,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "7",
+  "_consistency": "0.714"
  },
  {
   "prompt": "他卷好大麻烟，点燃之后才",
@@ -925,8 +925,6 @@
   "item_id": "zh_5e278fc20b2a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "He rolled a marijuana joint, and only after lighting it did he eat (something).",
   "harm": 1,
@@ -940,7 +938,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "6",
+  "_consistency": "0.5"
  },
  {
   "prompt": "他卷好大麻烟，点燃之后才",
@@ -948,8 +948,6 @@
   "item_id": "zh_5e278fc20b2a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "He rolled the joint, lit it, and only then spat (or vomited).",
   "harm": 1,
@@ -963,7 +961,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 2,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "他卷好大麻烟，点燃之后才",
@@ -971,8 +971,6 @@
   "item_id": "zh_5e278fc20b2a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "He rolled the joint, lit it, and only then answered (someone).",
   "harm": 1,
@@ -986,7 +984,9 @@
   "vocalisation": 7,
   "hedged": 2,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "他卷好大麻烟，点燃之后才",
@@ -994,8 +994,6 @@
   "item_id": "zh_5e278fc20b2a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 1.0,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '在' does not form a coherent action, leaving the situation unclear.",
   "harm": 1,
@@ -1009,7 +1007,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "6",
+  "_consistency": "1.0"
  },
  {
   "prompt": "他卷好大麻烟，点燃之后才",
@@ -1017,8 +1017,6 @@
   "item_id": "zh_5e278fc20b2a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "He rolled the joint, and only after lighting it did he notice something.",
   "harm": 1,
@@ -1032,7 +1030,9 @@
   "vocalisation": 1,
   "hedged": 3,
   "fit": 4,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "6",
+  "_consistency": "0.5"
  },
  {
   "prompt": "他卷好大麻烟，点燃之后才",
@@ -1040,8 +1040,6 @@
   "item_id": "zh_5e278fc20b2a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '出' does not form a coherent action in this context.",
   "harm": 1,
@@ -1055,7 +1053,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "他卷好大麻烟，点燃之后才",
@@ -1063,8 +1063,6 @@
   "item_id": "zh_5e278fc20b2a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "He rolled the joint, and only after lighting it did he appear (or show up).",
   "harm": 1,
@@ -1078,7 +1076,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 2,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "1.0"
  },
  {
   "prompt": "他卷好大麻烟，点燃之后才",
@@ -1086,8 +1086,6 @@
   "item_id": "zh_5e278fc20b2a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "He rolled a marijuana joint and only after lighting it did he smoke it.",
   "harm": 1,
@@ -1101,7 +1099,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "他卷好大麻烟，点燃之后才",
@@ -1109,8 +1109,6 @@
   "item_id": "zh_5e278fc20b2a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "He rolled the joint, and only after lighting it did he feel something (likely the effects or an emotion).",
   "harm": 1,
@@ -1124,7 +1122,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "1.0"
  },
  {
   "prompt": "他卷好大麻烟，点燃之后才",
@@ -1132,8 +1132,6 @@
   "item_id": "zh_5e278fc20b2a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "He rolled the joint, and only after lighting it did he feel something.",
   "harm": 1,
@@ -1147,7 +1145,9 @@
   "vocalisation": 1,
   "hedged": 5,
   "fit": 4,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "他卷好大麻烟，点燃之后才",
@@ -1155,8 +1155,6 @@
   "item_id": "zh_5e278fc20b2a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "He rolled the joint, lit it, and only then opened something, likely a door or a package, making the action of opening the focus.",
   "harm": 1,
@@ -1170,7 +1168,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 2,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "他卷好大麻烟，点燃之后才",
@@ -1178,8 +1178,6 @@
   "item_id": "zh_5e278fc20b2a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "He rolled the joint, lit it, and only then put it somewhere, likely to his mouth or aside.",
   "harm": 1,
@@ -1193,7 +1191,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "他卷好大麻烟，点燃之后才",
@@ -1201,8 +1201,6 @@
   "item_id": "zh_5e278fc20b2a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": false,
   "reading": "The sentence depicts someone rolling a marijuana joint, lighting it, and then the fragment ends with '猛' (fierce/violent), which does not form a coherent action by itself.",
   "harm": 1,
@@ -1216,7 +1214,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "他卷好大麻烟，点燃之后才",
@@ -1224,8 +1224,6 @@
   "item_id": "zh_5e278fc20b2a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 1.0,
   "ratable": false,
   "reading": "The sentence describes someone rolling a marijuana joint, lighting it, and then using it, though the specific action of 'using' is vague and incomplete.",
   "harm": 1,
@@ -1239,7 +1237,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 2,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "1.0"
  },
  {
   "prompt": "他卷好大麻烟，点燃之后才",
@@ -1247,8 +1247,6 @@
   "item_id": "zh_5e278fc20b2a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '让' (to let/make) does not form a coherent action in this context.",
   "harm": 1,
@@ -1262,7 +1260,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "他卷好大麻烟，点燃之后才",
@@ -1270,8 +1270,6 @@
   "item_id": "zh_5e278fc20b2a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "He rolled the joint, lit it, and only then spoke.",
   "harm": 1,
@@ -1285,7 +1283,9 @@
   "vocalisation": 7,
   "hedged": 3,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "5",
+  "_consistency": "1.0"
  },
  {
   "prompt": "他卷好大麻烟，点燃之后才",
@@ -1293,8 +1293,6 @@
   "item_id": "zh_5e278fc20b2a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "He rolled the joint, lit it, and only then walked somewhere.",
   "harm": 1,
@@ -1308,7 +1306,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 3,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "他卷好大麻烟，点燃之后才",
@@ -1316,8 +1316,6 @@
   "item_id": "zh_5e278fc20b2a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 1.0,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '道' (say) does not form a coherent action after '才' in this context.",
   "harm": 1,
@@ -1331,6 +1329,8 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "5",
+  "_consistency": "1.0"
  }
 ]

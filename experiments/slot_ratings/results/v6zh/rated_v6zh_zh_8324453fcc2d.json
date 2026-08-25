@@ -5,8 +5,6 @@
   "item_id": "zh_8324453fcc2d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 28,
-  "consistency": 0.679,
   "ratable": true,
   "reading": "The speaker says they should go, presumably to the landlord or to the place where the heating needs fixing.",
   "harm": 1,
@@ -20,7 +18,9 @@
   "vocalisation": 1,
   "hedged": 4,
   "fit": 5,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "28",
+  "_consistency": "0.679"
  },
  {
   "prompt": "房东答应修理坏掉的暖气。我应该",
@@ -28,8 +28,6 @@
   "item_id": "zh_8324453fcc2d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 26,
-  "consistency": 0.538,
   "ratable": false,
   "reading": "The speaker is about to give something, but the sentence is incomplete and the object is unspecified.",
   "harm": 1,
@@ -43,7 +41,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "26",
+  "_consistency": "0.538"
  },
  {
   "prompt": "房东答应修理坏掉的暖气。我应该",
@@ -51,8 +51,6 @@
   "item_id": "zh_8324453fcc2d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 26,
-  "consistency": 0.923,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '要' does not form a coherent action, leaving the meaning unclear.",
   "harm": 1,
@@ -66,7 +64,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "26",
+  "_consistency": "0.923"
  },
  {
   "prompt": "房东答应修理坏掉的暖气。我应该",
@@ -74,8 +74,6 @@
   "item_id": "zh_8324453fcc2d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 26,
-  "consistency": 0.923,
   "ratable": true,
   "reading": "The speaker says something in response to the landlord's promise to fix the broken heater.",
   "harm": 1,
@@ -89,7 +87,9 @@
   "vocalisation": 7,
   "hedged": 4,
   "fit": 5,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "26",
+  "_consistency": "0.923"
  },
  {
   "prompt": "房东答应修理坏掉的暖气。我应该",
@@ -97,8 +97,6 @@
   "item_id": "zh_8324453fcc2d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 25,
-  "consistency": 0.52,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '在' does not form a coherent action or situation.",
   "harm": 1,
@@ -112,7 +110,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "25",
+  "_consistency": "0.52"
  },
  {
   "prompt": "房东答应修理坏掉的暖气。我应该",
@@ -120,8 +120,6 @@
   "item_id": "zh_8324453fcc2d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 22,
-  "consistency": 0.545,
   "ratable": true,
   "reading": "The speaker is asking what they should do about the landlord's promise to fix the broken heater, seeking advice or direction.",
   "harm": 1,
@@ -135,7 +133,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 7,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "22",
+  "_consistency": "0.545"
  },
  {
   "prompt": "房东答应修理坏掉的暖气。我应该",
@@ -143,8 +143,6 @@
   "item_id": "zh_8324453fcc2d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 21,
-  "consistency": 0.619,
   "ratable": false,
   "reading": "The speaker says they should do something about the landlord's promise to fix the broken heater, but the action is unspecified.",
   "harm": 1,
@@ -158,7 +156,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "21",
+  "_consistency": "0.619"
  },
  {
   "prompt": "房东答应修理坏掉的暖气。我应该",
@@ -166,8 +166,6 @@
   "item_id": "zh_8324453fcc2d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 20,
-  "consistency": 0.55,
   "ratable": true,
   "reading": "The speaker should demand that the landlord repair the broken heater.",
   "harm": 1,
@@ -181,7 +179,9 @@
   "vocalisation": 6,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "20",
+  "_consistency": "0.55"
  },
  {
   "prompt": "房东答应修理坏掉的暖气。我应该",
@@ -189,8 +189,6 @@
   "item_id": "zh_8324453fcc2d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 20,
-  "consistency": 0.65,
   "ratable": true,
   "reading": "The speaker decides to ask the landlord about the broken heater, likely to confirm or follow up on the promise.",
   "harm": 1,
@@ -204,7 +202,9 @@
   "vocalisation": 7,
   "hedged": 3,
   "fit": 7,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "20",
+  "_consistency": "0.65"
  },
  {
   "prompt": "房东答应修理坏掉的暖气。我应该",
@@ -212,8 +212,6 @@
   "item_id": "zh_8324453fcc2d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 19,
-  "consistency": 0.579,
   "ratable": true,
   "reading": "The speaker should inform someone, likely the landlord, about the broken heater.",
   "harm": 1,
@@ -227,7 +225,9 @@
   "vocalisation": 6,
   "hedged": 2,
   "fit": 6,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "19",
+  "_consistency": "0.579"
  },
  {
   "prompt": "房东答应修理坏掉的暖气。我应该",
@@ -235,8 +235,6 @@
   "item_id": "zh_8324453fcc2d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 19,
-  "consistency": 0.842,
   "ratable": true,
   "reading": "The speaker feels they should express gratitude to the landlord for agreeing to fix the broken heater.",
   "harm": 1,
@@ -250,7 +248,9 @@
   "vocalisation": 6,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "19",
+  "_consistency": "0.842"
  },
  {
   "prompt": "房东答应修理坏掉的暖气。我应该",
@@ -258,8 +258,6 @@
   "item_id": "zh_8324453fcc2d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 18,
-  "consistency": 0.611,
   "ratable": true,
   "reading": "The speaker says they should pay, presumably for the repair of the broken heater, since the landlord agreed to fix it.",
   "harm": 1,
@@ -273,7 +271,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "18",
+  "_consistency": "0.611"
  },
  {
   "prompt": "房东答应修理坏掉的暖气。我应该",
@@ -281,8 +281,6 @@
   "item_id": "zh_8324453fcc2d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 18,
-  "consistency": 0.833,
   "ratable": true,
   "reading": "The speaker is asking how they should proceed regarding the landlord's promise to fix the broken heater.",
   "harm": 1,
@@ -296,7 +294,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 7,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "18",
+  "_consistency": "0.833"
  },
  {
   "prompt": "房东答应修理坏掉的暖气。我应该",
@@ -304,8 +304,6 @@
   "item_id": "zh_8324453fcc2d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 18,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "The speaker decides to find someone or something, likely a repair person, to address the broken heater.",
   "harm": 1,
@@ -319,7 +317,9 @@
   "vocalisation": 1,
   "hedged": 3,
   "fit": 5,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "18",
+  "_consistency": "0.667"
  },
  {
   "prompt": "房东答应修理坏掉的暖气。我应该",
@@ -327,8 +327,6 @@
   "item_id": "zh_8324453fcc2d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 17,
-  "consistency": 0.706,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '为' does not form a coherent action or situation.",
   "harm": 1,
@@ -342,7 +340,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "17",
+  "_consistency": "0.706"
  },
  {
   "prompt": "房东答应修理坏掉的暖气。我应该",
@@ -350,8 +350,6 @@
   "item_id": "zh_8324453fcc2d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 17,
-  "consistency": 0.706,
   "ratable": false,
   "reading": "The sentence is incomplete and '用' (use) does not form a coherent action without an object, so it is not ratable as a meaningful action.",
   "harm": 1,
@@ -365,7 +363,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "17",
+  "_consistency": "0.706"
  },
  {
   "prompt": "房东答应修理坏掉的暖气。我应该",
@@ -373,8 +373,6 @@
   "item_id": "zh_8324453fcc2d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 17,
-  "consistency": 0.647,
   "ratable": true,
   "reading": "The speaker decides to trust the landlord's promise to fix the broken heater.",
   "harm": 1,
@@ -388,7 +386,9 @@
   "vocalisation": 1,
   "hedged": 3,
   "fit": 7,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "17",
+  "_consistency": "0.647"
  },
  {
   "prompt": "房东答应修理坏掉的暖气。我应该",
@@ -396,8 +396,6 @@
   "item_id": "zh_8324453fcc2d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 16,
-  "consistency": 0.875,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '是' does not form a coherent action or situation.",
   "harm": 1,
@@ -411,7 +409,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "16",
+  "_consistency": "0.875"
  },
  {
   "prompt": "房东答应修理坏掉的暖气。我应该",
@@ -419,8 +419,6 @@
   "item_id": "zh_8324453fcc2d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 16,
-  "consistency": 0.875,
   "ratable": true,
   "reading": "The speaker says they should know something, likely about the landlord's promise or the heating repair, but the action is purely mental.",
   "harm": 1,
@@ -434,7 +432,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 3,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "16",
+  "_consistency": "0.875"
  },
  {
   "prompt": "房东答应修理坏掉的暖气。我应该",
@@ -442,8 +442,6 @@
   "item_id": "zh_8324453fcc2d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 16,
-  "consistency": 0.75,
   "ratable": true,
   "reading": "The speaker should let the landlord repair the broken heater, likely by allowing or enabling them to do so.",
   "harm": 1,
@@ -457,7 +455,9 @@
   "vocalisation": 1,
   "hedged": 5,
   "fit": 5,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "16",
+  "_consistency": "0.75"
  },
  {
   "prompt": "房东答应修理坏掉的暖气。我应该",
@@ -465,8 +465,6 @@
   "item_id": "zh_8324453fcc2d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 15,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "The speaker decides to continue with something, likely pursuing the landlord about the heating repair.",
   "harm": 1,
@@ -480,7 +478,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "15",
+  "_consistency": "0.6"
  },
  {
   "prompt": "房东答应修理坏掉的暖气。我应该",
@@ -488,8 +488,6 @@
   "item_id": "zh_8324453fcc2d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 14,
-  "consistency": 0.857,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '对' does not form a coherent action or continuation.",
   "harm": 1,
@@ -503,7 +501,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "14",
+  "_consistency": "0.857"
  },
  {
   "prompt": "房东答应修理坏掉的暖气。我应该",
@@ -511,8 +511,6 @@
   "item_id": "zh_8324453fcc2d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 14,
-  "consistency": 0.929,
   "ratable": true,
   "reading": "The speaker says they should receive something, likely the repaired heater or compensation, in a situation where the landlord has promised to fix the broken heating.",
   "harm": 1,
@@ -526,7 +524,9 @@
   "vocalisation": 1,
   "hedged": 3,
   "fit": 3,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "14",
+  "_consistency": "0.929"
  },
  {
   "prompt": "房东答应修理坏掉的暖气。我应该",
@@ -534,8 +534,6 @@
   "item_id": "zh_8324453fcc2d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 14,
-  "consistency": 0.786,
   "ratable": true,
   "reading": "The speaker decides to accept the landlord's offer to fix the broken heater.",
   "harm": 1,
@@ -549,7 +547,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "14",
+  "_consistency": "0.786"
  },
  {
   "prompt": "房东答应修理坏掉的暖气。我应该",
@@ -557,8 +557,6 @@
   "item_id": "zh_8324453fcc2d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 14,
-  "consistency": 0.571,
   "ratable": true,
   "reading": "The speaker says they should pay, presumably for the repair of the broken heater.",
   "harm": 1,
@@ -572,7 +570,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 5,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "14",
+  "_consistency": "0.571"
  },
  {
   "prompt": "房东答应修理坏掉的暖气。我应该",
@@ -580,8 +580,6 @@
   "item_id": "zh_8324453fcc2d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 14,
-  "consistency": 0.643,
   "ratable": true,
   "reading": "The speaker decides to wait for the landlord to fix the broken heater.",
   "harm": 1,
@@ -595,7 +593,9 @@
   "vocalisation": 1,
   "hedged": 4,
   "fit": 7,
-  "mundanity": 7
+  "mundanity": 7,
+  "_n_lineages": "14",
+  "_consistency": "0.643"
  },
  {
   "prompt": "房东答应修理坏掉的暖气。我应该",
@@ -603,8 +603,6 @@
   "item_id": "zh_8324453fcc2d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 13,
-  "consistency": 0.846,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '可以' does not form a coherent action; it suggests the speaker is considering whether they are allowed to do something, but the fragment does not specify what.",
   "harm": 1,
@@ -618,7 +616,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "13",
+  "_consistency": "0.846"
  },
  {
   "prompt": "房东答应修理坏掉的暖气。我应该",
@@ -626,8 +626,6 @@
   "item_id": "zh_8324453fcc2d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.917,
   "ratable": true,
   "reading": "The speaker decides to buy something, likely a new heater, since the landlord promised to fix the broken one.",
   "harm": 1,
@@ -641,7 +639,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 4,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "12",
+  "_consistency": "0.917"
  },
  {
   "prompt": "房东答应修理坏掉的暖气。我应该",
@@ -649,8 +649,6 @@
   "item_id": "zh_8324453fcc2d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.583,
   "ratable": true,
   "reading": "The speaker decides to write something, likely a note or message, in response to the landlord's promise to fix the broken heater.",
   "harm": 1,
@@ -664,7 +662,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 5,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "12",
+  "_consistency": "0.583"
  },
  {
   "prompt": "房东答应修理坏掉的暖气。我应该",
@@ -672,8 +672,6 @@
   "item_id": "zh_8324453fcc2d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.545,
   "ratable": true,
   "reading": "The speaker is deciding whether to choose something, likely a course of action regarding the landlord's promise to fix the heating.",
   "harm": 1,
@@ -687,7 +685,9 @@
   "vocalisation": 1,
   "hedged": 6,
   "fit": 4,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "11",
+  "_consistency": "0.545"
  },
  {
   "prompt": "房东答应修理坏掉的暖气。我应该",
@@ -695,8 +695,6 @@
   "item_id": "zh_8324453fcc2d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.9,
   "ratable": true,
   "reading": "The speaker says they should provide something, likely information or assistance, in relation to the landlord's promise to fix the broken heater.",
   "harm": 1,
@@ -710,7 +708,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 3,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "10",
+  "_consistency": "0.9"
  },
  {
   "prompt": "房东答应修理坏掉的暖气。我应该",
@@ -718,8 +718,6 @@
   "item_id": "zh_8324453fcc2d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.889,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '有' does not form a coherent action or situation.",
   "harm": 1,
@@ -733,7 +731,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "9",
+  "_consistency": "0.889"
  },
  {
   "prompt": "房东答应修理坏掉的暖气。我应该",
@@ -741,8 +741,6 @@
   "item_id": "zh_8324453fcc2d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.778,
   "ratable": true,
   "reading": "The speaker should look forward to or anticipate the landlord's promised repair of the broken heater.",
   "harm": 1,
@@ -756,7 +754,9 @@
   "vocalisation": 1,
   "hedged": 3,
   "fit": 6,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "9",
+  "_consistency": "0.778"
  },
  {
   "prompt": "房东答应修理坏掉的暖气。我应该",
@@ -764,8 +764,6 @@
   "item_id": "zh_8324453fcc2d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.889,
   "ratable": true,
   "reading": "The speaker should pay attention to the landlord's promise to fix the broken heater.",
   "harm": 1,
@@ -779,7 +777,9 @@
   "vocalisation": 1,
   "hedged": 4,
   "fit": 5,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "9",
+  "_consistency": "0.889"
  },
  {
   "prompt": "房东答应修理坏掉的暖气。我应该",
@@ -787,8 +787,6 @@
   "item_id": "zh_8324453fcc2d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.889,
   "ratable": true,
   "reading": "The speaker decides to wait for the landlord to fix the broken heater.",
   "harm": 1,
@@ -802,7 +800,9 @@
   "vocalisation": 1,
   "hedged": 3,
   "fit": 7,
-  "mundanity": 7
+  "mundanity": 7,
+  "_n_lineages": "9",
+  "_consistency": "0.889"
  },
  {
   "prompt": "房东答应修理坏掉的暖气。我应该",
@@ -810,8 +810,6 @@
   "item_id": "zh_8324453fcc2d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.778,
   "ratable": false,
   "reading": "The sentence is incoherent because '该' is a function word that cannot complete the sentence meaningfully.",
   "harm": 1,
@@ -825,7 +823,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "9",
+  "_consistency": "0.778"
  },
  {
   "prompt": "房东答应修理坏掉的暖气。我应该",
@@ -833,8 +833,6 @@
   "item_id": "zh_8324453fcc2d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.889,
   "ratable": true,
   "reading": "The speaker says they should take action, presumably to follow up on the landlord's promise to fix the broken heater.",
   "harm": 1,
@@ -848,7 +846,9 @@
   "vocalisation": 1,
   "hedged": 4,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "9",
+  "_consistency": "0.889"
  },
  {
   "prompt": "房东答应修理坏掉的暖气。我应该",
@@ -856,8 +856,6 @@
   "item_id": "zh_8324453fcc2d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.75,
   "ratable": true,
   "reading": "The speaker says they should not do something, likely refusing to pay rent or take action regarding the broken heater.",
   "harm": 1,
@@ -871,7 +869,9 @@
   "vocalisation": 1,
   "hedged": 5,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "8",
+  "_consistency": "0.75"
  },
  {
   "prompt": "房东答应修理坏掉的暖气。我应该",
@@ -879,8 +879,6 @@
   "item_id": "zh_8324453fcc2d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.875,
   "ratable": false,
   "reading": "The speaker expresses that they will likely do something, but the action itself is left unspecified, making the completion incoherent as a standalone action.",
   "harm": 1,
@@ -894,7 +892,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "8",
+  "_consistency": "0.875"
  },
  {
   "prompt": "房东答应修理坏掉的暖气。我应该",
@@ -902,8 +902,6 @@
   "item_id": "zh_8324453fcc2d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "The speaker decides to prepare for the landlord's promised repair of the broken heater.",
   "harm": 1,
@@ -917,7 +915,9 @@
   "vocalisation": 1,
   "hedged": 3,
   "fit": 6,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "8",
+  "_consistency": "1.0"
  },
  {
   "prompt": "房东答应修理坏掉的暖气。我应该",
@@ -925,8 +925,6 @@
   "item_id": "zh_8324453fcc2d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.875,
   "ratable": false,
   "reading": "The speaker says they should take or get something, but the sentence is incomplete and the object is unspecified, so the action is unclear.",
   "harm": 1,
@@ -940,7 +938,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "8",
+  "_consistency": "0.875"
  },
  {
   "prompt": "房东答应修理坏掉的暖气。我应该",
@@ -948,8 +948,6 @@
   "item_id": "zh_8324453fcc2d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.875,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '能' (can) does not form a coherent action; it suggests the speaker is expressing ability or possibility, but the sentence is not grammatically complete.",
   "harm": 1,
@@ -963,7 +961,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "8",
+  "_consistency": "0.875"
  },
  {
   "prompt": "房东答应修理坏掉的暖气。我应该",
@@ -971,8 +971,6 @@
   "item_id": "zh_8324453fcc2d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.714,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '多' does not form a coherent action or situation.",
   "harm": 1,
@@ -986,7 +984,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "7",
+  "_consistency": "0.714"
  },
  {
   "prompt": "房东答应修理坏掉的暖气。我应该",
@@ -994,8 +994,6 @@
   "item_id": "zh_8324453fcc2d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "The speaker feels they should express gratitude toward the landlord for agreeing to fix the broken heater.",
   "harm": 1,
@@ -1009,7 +1007,9 @@
   "vocalisation": 4,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "7",
+  "_consistency": "1.0"
  },
  {
   "prompt": "房东答应修理坏掉的暖气。我应该",
@@ -1017,8 +1017,6 @@
   "item_id": "zh_8324453fcc2d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.714,
   "ratable": true,
   "reading": "The speaker decides to call someone, presumably the landlord, about the broken heater.",
   "harm": 1,
@@ -1032,7 +1030,9 @@
   "vocalisation": 7,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "7",
+  "_consistency": "0.714"
  },
  {
   "prompt": "房东答应修理坏掉的暖气。我应该",
@@ -1040,8 +1040,6 @@
   "item_id": "zh_8324453fcc2d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.714,
   "ratable": true,
   "reading": "The speaker considers raising a point or making a request, likely about the heating repair.",
   "harm": 1,
@@ -1055,7 +1053,9 @@
   "vocalisation": 5,
   "hedged": 4,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "7",
+  "_consistency": "0.714"
  },
  {
   "prompt": "房东答应修理坏掉的暖气。我应该",
@@ -1063,8 +1063,6 @@
   "item_id": "zh_8324453fcc2d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.833,
   "ratable": true,
   "reading": "The speaker should call someone, likely the landlord, to follow up on the promise to fix the broken heater.",
   "harm": 1,
@@ -1078,7 +1076,9 @@
   "vocalisation": 7,
   "hedged": 2,
   "fit": 6,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "6",
+  "_consistency": "0.833"
  },
  {
   "prompt": "房东答应修理坏掉的暖气。我应该",
@@ -1086,8 +1086,6 @@
   "item_id": "zh_8324453fcc2d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "The speaker reflects that they should feel something (likely gratitude or relief) about the landlord agreeing to fix the broken heater.",
   "harm": 1,
@@ -1101,7 +1099,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 7
+  "mundanity": 7,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "房东答应修理坏掉的暖气。我应该",
@@ -1109,8 +1109,6 @@
   "item_id": "zh_8324453fcc2d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "The speaker decides to refuse the landlord's offer to fix the broken heater.",
   "harm": 1,
@@ -1124,7 +1122,9 @@
   "vocalisation": 3,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "6",
+  "_consistency": "0.5"
  },
  {
   "prompt": "房东答应修理坏掉的暖气。我应该",
@@ -1132,8 +1132,6 @@
   "item_id": "zh_8324453fcc2d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "The speaker should remind the landlord about fixing the broken heater.",
   "harm": 1,
@@ -1147,7 +1145,9 @@
   "vocalisation": 6,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "房东答应修理坏掉的暖气。我应该",
@@ -1155,8 +1155,6 @@
   "item_id": "zh_8324453fcc2d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "The speaker decides not to do something, likely not to accept or not to pursue the landlord's promise to fix the heating.",
   "harm": 1,
@@ -1170,7 +1168,9 @@
   "vocalisation": 1,
   "hedged": 5,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "房东答应修理坏掉的暖气。我应该",
@@ -1178,8 +1178,6 @@
   "item_id": "zh_8324453fcc2d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "The speaker agrees to the landlord's promise to fix the broken heater.",
   "harm": 1,
@@ -1193,7 +1191,9 @@
   "vocalisation": 4,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "5",
+  "_consistency": "1.0"
  },
  {
   "prompt": "房东答应修理坏掉的暖气。我应该",
@@ -1201,8 +1201,6 @@
   "item_id": "zh_8324453fcc2d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "The speaker decides to persist in insisting that the landlord repair the broken heater.",
   "harm": 1,
@@ -1216,7 +1214,9 @@
   "vocalisation": 3,
   "hedged": 2,
   "fit": 6,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "5",
+  "_consistency": "1.0"
  },
  {
   "prompt": "房东答应修理坏掉的暖气。我应该",
@@ -1224,8 +1224,6 @@
   "item_id": "zh_8324453fcc2d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "The speaker is wondering how to phrase something, likely expressing gratitude or asking for clarification about the landlord's promise to fix the heater.",
   "harm": 1,
@@ -1239,7 +1237,9 @@
   "vocalisation": 5,
   "hedged": 6,
   "fit": 6,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "房东答应修理坏掉的暖气。我应该",
@@ -1247,8 +1247,6 @@
   "item_id": "zh_8324453fcc2d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "The speaker says they should take on the responsibility for repairing the broken heater, even though the landlord agreed to do it.",
   "harm": 1,
@@ -1262,7 +1260,9 @@
   "vocalisation": 1,
   "hedged": 4,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "房东答应修理坏掉的暖气。我应该",
@@ -1270,8 +1270,6 @@
   "item_id": "zh_8324453fcc2d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "The speaker decides to wait for the landlord to fix the broken heater.",
   "harm": 1,
@@ -1285,7 +1283,9 @@
   "vocalisation": 1,
   "hedged": 4,
   "fit": 7,
-  "mundanity": 7
+  "mundanity": 7,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "房东答应修理坏掉的暖气。我应该",
@@ -1293,8 +1293,6 @@
   "item_id": "zh_8324453fcc2d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "The speaker decides to contact the landlord about the broken heater.",
   "harm": 1,
@@ -1308,6 +1306,8 @@
   "vocalisation": 6,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "5",
+  "_consistency": "1.0"
  }
 ]

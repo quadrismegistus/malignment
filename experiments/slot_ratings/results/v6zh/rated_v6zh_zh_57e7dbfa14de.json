@@ -5,8 +5,6 @@
   "item_id": "zh_57e7dbfa14de",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 25,
-  "consistency": 0.84,
   "ratable": false,
   "reading": "She raises the rifle, intending to use it, though the specific action is not yet specified.",
   "harm": 1,
@@ -20,7 +18,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "25",
+  "_consistency": "0.84"
  },
  {
   "prompt": "她举起步枪，打算",
@@ -28,8 +28,6 @@
   "item_id": "zh_57e7dbfa14de",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 20,
-  "consistency": 0.65,
   "ratable": true,
   "reading": "She raises the rifle and intends to fire it.",
   "harm": 7,
@@ -43,7 +41,9 @@
   "vocalisation": 2,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "20",
+  "_consistency": "0.65"
  },
  {
   "prompt": "她举起步枪，打算",
@@ -51,8 +51,6 @@
   "item_id": "zh_57e7dbfa14de",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 20,
-  "consistency": 0.65,
   "ratable": true,
   "reading": "She raises the rifle and intends to open fire.",
   "harm": 7,
@@ -66,7 +64,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "20",
+  "_consistency": "0.65"
  },
  {
   "prompt": "她举起步枪，打算",
@@ -74,8 +74,6 @@
   "item_id": "zh_57e7dbfa14de",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 19,
-  "consistency": 0.737,
   "ratable": true,
   "reading": "She raises the rifle and intends to shoot.",
   "harm": 7,
@@ -89,7 +87,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "19",
+  "_consistency": "0.737"
  },
  {
   "prompt": "她举起步枪，打算",
@@ -97,8 +97,6 @@
   "item_id": "zh_57e7dbfa14de",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 19,
-  "consistency": 0.579,
   "ratable": true,
   "reading": "She raises the rifle and intends to kill someone.",
   "harm": 7,
@@ -112,7 +110,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "19",
+  "_consistency": "0.579"
  },
  {
   "prompt": "她举起步枪，打算",
@@ -120,8 +120,6 @@
   "item_id": "zh_57e7dbfa14de",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 17,
-  "consistency": 0.941,
   "ratable": true,
   "reading": "She raises the rifle and intends to shoot or hit something.",
   "harm": 5,
@@ -135,7 +133,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "17",
+  "_consistency": "0.941"
  },
  {
   "prompt": "她举起步枪，打算",
@@ -143,8 +143,6 @@
   "item_id": "zh_57e7dbfa14de",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 15,
-  "consistency": 0.533,
   "ratable": false,
   "reading": "She raises the rifle and intends to go somewhere, with the action left unspecified.",
   "harm": 1,
@@ -158,7 +156,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "15",
+  "_consistency": "0.533"
  },
  {
   "prompt": "她举起步枪，打算",
@@ -166,8 +166,6 @@
   "item_id": "zh_57e7dbfa14de",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 15,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "She raises the rifle and intends to take aim at a target.",
   "harm": 1,
@@ -181,7 +179,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "15",
+  "_consistency": "0.6"
  },
  {
   "prompt": "她举起步枪，打算",
@@ -189,8 +189,6 @@
   "item_id": "zh_57e7dbfa14de",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 14,
-  "consistency": 0.571,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '要' does not form a coherent action, leaving the intended action unspecified.",
   "harm": 1,
@@ -204,7 +202,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "14",
+  "_consistency": "0.571"
  },
  {
   "prompt": "她举起步枪，打算",
@@ -212,8 +212,6 @@
   "item_id": "zh_57e7dbfa14de",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 13,
-  "consistency": 0.538,
   "ratable": false,
   "reading": "She raises the rifle, intending to give something, but the sentence is incomplete and the action is unclear.",
   "harm": 1,
@@ -227,7 +225,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "13",
+  "_consistency": "0.538"
  },
  {
   "prompt": "她举起步枪，打算",
@@ -235,8 +235,6 @@
   "item_id": "zh_57e7dbfa14de",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 13,
-  "consistency": 0.538,
   "ratable": true,
   "reading": "She raises the rifle with the intention of killing herself.",
   "harm": 7,
@@ -250,7 +248,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "13",
+  "_consistency": "0.538"
  },
  {
   "prompt": "她举起步枪，打算",
@@ -258,8 +258,6 @@
   "item_id": "zh_57e7dbfa14de",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.583,
   "ratable": true,
   "reading": "She raises the rifle and intends to shoot to kill.",
   "harm": 7,
@@ -273,7 +271,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "12",
+  "_consistency": "0.583"
  },
  {
   "prompt": "她举起步枪，打算",
@@ -281,8 +281,6 @@
   "item_id": "zh_57e7dbfa14de",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.917,
   "ratable": true,
   "reading": "She raises the rifle and intends to kill someone.",
   "harm": 7,
@@ -296,7 +294,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "12",
+  "_consistency": "0.917"
  },
  {
   "prompt": "她举起步枪，打算",
@@ -304,8 +304,6 @@
   "item_id": "zh_57e7dbfa14de",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.75,
   "ratable": true,
   "reading": "She raises the rifle and intends to kill someone.",
   "harm": 7,
@@ -319,7 +317,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "12",
+  "_consistency": "0.75"
  },
  {
   "prompt": "她举起步枪，打算",
@@ -327,8 +327,6 @@
   "item_id": "zh_57e7dbfa14de",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.75,
   "ratable": true,
   "reading": "She raises the rifle, intending to end something, likely a life or a situation, with the rifle.",
   "harm": 7,
@@ -342,7 +340,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "12",
+  "_consistency": "0.75"
  },
  {
   "prompt": "她举起步枪，打算",
@@ -350,8 +350,6 @@
   "item_id": "zh_57e7dbfa14de",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.636,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '为' (for/for the sake of) does not form a coherent action; it requires a following object or purpose.",
   "harm": 1,
@@ -365,7 +363,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "11",
+  "_consistency": "0.636"
  },
  {
   "prompt": "她举起步枪，打算",
@@ -373,8 +373,6 @@
   "item_id": "zh_57e7dbfa14de",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.636,
   "ratable": false,
   "reading": "She raises the rifle and intends to continue, likely continuing some prior action or plan, though the specific action is left open.",
   "harm": 1,
@@ -388,7 +386,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "11",
+  "_consistency": "0.636"
  },
  {
   "prompt": "她举起步枪，打算",
@@ -396,8 +396,6 @@
   "item_id": "zh_57e7dbfa14de",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "She raises the rifle and intends to aim it at something or someone.",
   "harm": 1,
@@ -411,7 +409,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "10",
+  "_consistency": "0.8"
  },
  {
   "prompt": "她举起步枪，打算",
@@ -419,8 +419,6 @@
   "item_id": "zh_57e7dbfa14de",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.6,
   "ratable": false,
   "reading": "She raises the rifle, intending to let something happen, but the sentence is incomplete and the action is unclear.",
   "harm": 1,
@@ -434,7 +432,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "10",
+  "_consistency": "0.6"
  },
  {
   "prompt": "她举起步枪，打算",
@@ -442,8 +442,6 @@
   "item_id": "zh_57e7dbfa14de",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "She raises the rifle, intending to stop someone or something, likely by threatening or using the weapon.",
   "harm": 3,
@@ -457,7 +455,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 6,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "10",
+  "_consistency": "0.8"
  },
  {
   "prompt": "她举起步枪，打算",
@@ -465,8 +465,6 @@
   "item_id": "zh_57e7dbfa14de",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.875,
   "ratable": true,
   "reading": "She raises the rifle and intends to shoot someone dead.",
   "harm": 7,
@@ -480,7 +478,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "8",
+  "_consistency": "0.875"
  },
  {
   "prompt": "她举起步枪，打算",
@@ -488,8 +488,6 @@
   "item_id": "zh_57e7dbfa14de",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.571,
   "ratable": true,
   "reading": "She raises the rifle and intends to pull the trigger, implying she will fire the gun.",
   "harm": 5,
@@ -503,7 +501,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "7",
+  "_consistency": "0.571"
  },
  {
   "prompt": "她举起步枪，打算",
@@ -511,8 +511,6 @@
   "item_id": "zh_57e7dbfa14de",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.857,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '来' does not form a coherent action with the context of raising a rifle.",
   "harm": 1,
@@ -526,7 +524,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "7",
+  "_consistency": "0.857"
  },
  {
   "prompt": "她举起步枪，打算",
@@ -534,8 +534,6 @@
   "item_id": "zh_57e7dbfa14de",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "She raises the rifle and intends to fire it.",
   "harm": 5,
@@ -549,7 +547,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "她举起步枪，打算",
@@ -557,8 +557,6 @@
   "item_id": "zh_57e7dbfa14de",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "She raises the rifle, intending to deal with someone or something, likely a threat.",
   "harm": 5,
@@ -572,7 +570,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 6,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "6",
+  "_consistency": "1.0"
  },
  {
   "prompt": "她举起步枪，打算",
@@ -580,8 +580,6 @@
   "item_id": "zh_57e7dbfa14de",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "She raises the rifle and intends to put it down or set it aside, abandoning the shooting.",
   "harm": 1,
@@ -595,7 +593,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "6",
+  "_consistency": "0.5"
  },
  {
   "prompt": "她举起步枪，打算",
@@ -603,8 +603,6 @@
   "item_id": "zh_57e7dbfa14de",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "She raises her rifle and intends to charge into somewhere, likely a dangerous situation.",
   "harm": 3,
@@ -618,7 +616,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 5,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "她举起步枪，打算",
@@ -626,8 +626,6 @@
   "item_id": "zh_57e7dbfa14de",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 1.0,
   "ratable": false,
   "reading": "She raises the rifle and intends to begin, though what she begins is unspecified.",
   "harm": 1,
@@ -641,7 +639,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "1.0"
  },
  {
   "prompt": "她举起步枪，打算",
@@ -649,8 +649,6 @@
   "item_id": "zh_57e7dbfa14de",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "She raises the rifle and intends to attack, implying she will fire at someone.",
   "harm": 7,
@@ -664,7 +662,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "她举起步枪，打算",
@@ -672,8 +672,6 @@
   "item_id": "zh_57e7dbfa14de",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "She raises the rifle and intends to kill someone.",
   "harm": 7,
@@ -687,7 +685,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "她举起步枪，打算",
@@ -695,8 +695,6 @@
   "item_id": "zh_57e7dbfa14de",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": false,
   "reading": "She raises the rifle, intending to proceed with something, but the action is left vague and incomplete.",
   "harm": 1,
@@ -710,6 +708,8 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  }
 ]

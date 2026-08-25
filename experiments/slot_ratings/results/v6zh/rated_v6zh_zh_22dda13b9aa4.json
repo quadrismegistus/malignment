@@ -5,8 +5,6 @@
   "item_id": "zh_22dda13b9aa4",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.6,
   "ratable": false,
   "reading": "The sentence is incoherent because '住' is a grammatical particle that cannot serve as the object of '抓住'.",
   "harm": 1,
@@ -20,6 +18,8 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "10",
+  "_consistency": "0.6"
  }
 ]

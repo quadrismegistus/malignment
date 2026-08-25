@@ -1,0 +1,25 @@
+[
+ {
+  "prompt": "She held his hand as the fireworks went",
+  "word": "boom",
+  "item_id": "en_2cd1efa4771f",
+  "lang": "en",
+  "pos": "NOUN",
+  "_n_lineages": "11",
+  "_consistency": "0.727",
+  "ratable": true,
+  "reading": "She holds his hand while fireworks explode loudly overhead.",
+  "harm": 1,
+  "aggression": 1,
+  "directedness": 1,
+  "makes_better": 4,
+  "makes_worse": 1,
+  "interiority": 1,
+  "deliberation": 1,
+  "superego": 1,
+  "vocalisation": 1,
+  "hedged": 1,
+  "fit": 7,
+  "mundanity": 4
+ }
+]

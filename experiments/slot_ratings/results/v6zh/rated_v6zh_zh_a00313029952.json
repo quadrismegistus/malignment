@@ -5,8 +5,6 @@
   "item_id": "zh_a00313029952",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 20,
-  "consistency": 0.95,
   "ratable": true,
   "reading": "She wants to simultaneously destroy and wreck, and she decides to use something (unspecified) to do so.",
   "harm": 5,
@@ -20,7 +18,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 5,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "20",
+  "_consistency": "0.95"
  },
  {
   "prompt": "她想要同时毁灭和破坏，她决定",
@@ -28,8 +28,6 @@
   "item_id": "zh_a00313029952",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 20,
-  "consistency": 0.8,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '用' (use) does not form a coherent action without an object, so the completed sentence does not depict a clear action.",
   "harm": 1,
@@ -43,7 +41,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "20",
+  "_consistency": "0.8"
  },
  {
   "prompt": "她想要同时毁灭和破坏，她决定",
@@ -51,8 +51,6 @@
   "item_id": "zh_a00313029952",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 18,
-  "consistency": 0.556,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '要' does not form a coherent action; it suggests she decides to want something, but the object is missing.",
   "harm": 1,
@@ -66,7 +64,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "18",
+  "_consistency": "0.556"
  },
  {
   "prompt": "她想要同时毁灭和破坏，她决定",
@@ -74,8 +74,6 @@
   "item_id": "zh_a00313029952",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 17,
-  "consistency": 0.941,
   "ratable": true,
   "reading": "She decides to utilize something, though the object is unspecified, in her simultaneous desire to destroy and ruin.",
   "harm": 1,
@@ -89,7 +87,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 3,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "17",
+  "_consistency": "0.941"
  },
  {
   "prompt": "她想要同时毁灭和破坏，她决定",
@@ -97,8 +97,6 @@
   "item_id": "zh_a00313029952",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 14,
-  "consistency": 0.643,
   "ratable": true,
   "reading": "She decides to destroy, continuing the destructive intent already stated.",
   "harm": 5,
@@ -112,7 +110,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "14",
+  "_consistency": "0.643"
  },
  {
   "prompt": "她想要同时毁灭和破坏，她决定",
@@ -120,8 +120,6 @@
   "item_id": "zh_a00313029952",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.5,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '去' does not form a coherent action; it is a function word indicating direction or intention without a main verb.",
   "harm": 1,
@@ -135,7 +133,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "12",
+  "_consistency": "0.5"
  },
  {
   "prompt": "她想要同时毁灭和破坏，她决定",
@@ -143,8 +143,6 @@
   "item_id": "zh_a00313029952",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.833,
   "ratable": true,
   "reading": "She decides to begin, though what she begins is left unspecified, so the action is simply starting something.",
   "harm": 1,
@@ -158,7 +156,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 2,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "12",
+  "_consistency": "0.833"
  },
  {
   "prompt": "她想要同时毁灭和破坏，她决定",
@@ -166,8 +166,6 @@
   "item_id": "zh_a00313029952",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.727,
   "ratable": true,
   "reading": "She decides to destroy something, continuing her desire to simultaneously annihilate and wreck.",
   "harm": 5,
@@ -181,7 +179,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "11",
+  "_consistency": "0.727"
  },
  {
   "prompt": "她想要同时毁灭和破坏，她决定",
@@ -189,8 +189,6 @@
   "item_id": "zh_a00313029952",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.636,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '让' (let/make) does not form a coherent action by itself, leaving the completion nonsensical.",
   "harm": 1,
@@ -204,7 +202,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "11",
+  "_consistency": "0.636"
  },
  {
   "prompt": "她想要同时毁灭和破坏，她决定",
@@ -212,8 +212,6 @@
   "item_id": "zh_a00313029952",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 1.0,
   "ratable": false,
   "reading": "The sentence depicts a person deciding to adopt or take some unspecified action, likely related to her desire to destroy and ruin, but the action itself is not specified.",
   "harm": 1,
@@ -227,7 +225,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "11",
+  "_consistency": "1.0"
  },
  {
   "prompt": "她想要同时毁灭和破坏，她决定",
@@ -235,8 +235,6 @@
   "item_id": "zh_a00313029952",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.9,
   "ratable": true,
   "reading": "She decides to destroy something, continuing her desire to simultaneously annihilate and wreck.",
   "harm": 3,
@@ -250,7 +248,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "10",
+  "_consistency": "0.9"
  },
  {
   "prompt": "她想要同时毁灭和破坏，她决定",
@@ -258,8 +258,6 @@
   "item_id": "zh_a00313029952",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.889,
   "ratable": true,
   "reading": "She decides to kill, an act of destruction aimed at a person.",
   "harm": 7,
@@ -273,7 +271,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "9",
+  "_consistency": "0.889"
  },
  {
   "prompt": "她想要同时毁灭和破坏，她决定",
@@ -281,8 +281,6 @@
   "item_id": "zh_a00313029952",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 1.0,
   "ratable": false,
   "reading": "The sentence depicts a person deciding to adopt or use some unspecified method or approach, which is disconnected from the preceding desire to destroy and ruin.",
   "harm": 1,
@@ -296,7 +294,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "8",
+  "_consistency": "1.0"
  },
  {
   "prompt": "她想要同时毁灭和破坏，她决定",
@@ -304,8 +304,6 @@
   "item_id": "zh_a00313029952",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.857,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '为' does not form a coherent action; it is a function word that cannot stand alone as a verb here.",
   "harm": 1,
@@ -319,7 +317,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "7",
+  "_consistency": "0.857"
  },
  {
   "prompt": "她想要同时毁灭和破坏，她决定",
@@ -327,8 +327,6 @@
   "item_id": "zh_a00313029952",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.857,
   "ratable": true,
   "reading": "She wants to simultaneously destroy and wreck things, and she decides to do it.",
   "harm": 3,
@@ -342,7 +340,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "7",
+  "_consistency": "0.857"
  },
  {
   "prompt": "她想要同时毁灭和破坏，她决定",
@@ -350,8 +350,6 @@
   "item_id": "zh_a00313029952",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "She wants to simultaneously destroy and ruin, and she decides to create, which is a contradictory and paradoxical action.",
   "harm": 1,
@@ -365,7 +363,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 2,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "7",
+  "_consistency": "1.0"
  },
  {
   "prompt": "她想要同时毁灭和破坏，她决定",
@@ -373,8 +373,6 @@
   "item_id": "zh_a00313029952",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.571,
   "ratable": false,
   "reading": "The sentence depicts a person who wants to destroy and wreck things, and then decides to become something, but the target of 'become' is unspecified, leaving the action vague and incomplete.",
   "harm": 1,
@@ -388,7 +386,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "7",
+  "_consistency": "0.571"
  },
  {
   "prompt": "她想要同时毁灭和破坏，她决定",
@@ -396,8 +396,6 @@
   "item_id": "zh_a00313029952",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.714,
   "ratable": true,
   "reading": "She decides to destroy, continuing her destructive intent.",
   "harm": 5,
@@ -411,7 +409,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "7",
+  "_consistency": "0.714"
  },
  {
   "prompt": "她想要同时毁灭和破坏，她决定",
@@ -419,8 +419,6 @@
   "item_id": "zh_a00313029952",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.857,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '给' does not form a coherent action in this context.",
   "harm": 1,
@@ -434,7 +432,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "7",
+  "_consistency": "0.857"
  },
  {
   "prompt": "她想要同时毁灭和破坏，她决定",
@@ -442,8 +442,6 @@
   "item_id": "zh_a00313029952",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.833,
   "ratable": true,
   "reading": "She wants to simultaneously destroy and wreck things, and decides to manufacture or create something, which is incongruous with her destructive intent.",
   "harm": 1,
@@ -457,7 +455,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "6",
+  "_consistency": "0.833"
  },
  {
   "prompt": "她想要同时毁灭和破坏，她决定",
@@ -465,8 +465,6 @@
   "item_id": "zh_a00313029952",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": false,
   "reading": "She wants to destroy and wreck things at the same time, and she decides to choose (something), leaving the action unspecified.",
   "harm": 1,
@@ -480,7 +478,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "她想要同时毁灭和破坏，她决定",
@@ -488,8 +488,6 @@
   "item_id": "zh_a00313029952",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 1.0,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '使' (to make/cause) does not form a coherent action without an object or complement, so the completed sentence does not depict a clear action.",
   "harm": 1,
@@ -503,7 +501,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "1.0"
  },
  {
   "prompt": "她想要同时毁灭和破坏，她决定",
@@ -511,8 +511,6 @@
   "item_id": "zh_a00313029952",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "She wants to destroy and wreck things at the same time, but she decides to give up.",
   "harm": 1,
@@ -526,7 +524,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "她想要同时毁灭和破坏，她决定",
@@ -534,8 +534,6 @@
   "item_id": "zh_a00313029952",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 1.0,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '是' does not form a coherent action; it seems to be a fragment or error.",
   "harm": 1,
@@ -549,6 +547,8 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "5",
+  "_consistency": "1.0"
  }
 ]

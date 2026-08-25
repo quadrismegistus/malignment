@@ -5,8 +5,6 @@
   "item_id": "zh_99788a81105a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 20,
-  "consistency": 0.75,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '去' does not form a coherent action with the fragment.",
   "harm": 1,
@@ -20,7 +18,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "20",
+  "_consistency": "0.75"
  },
  {
   "prompt": "狼扑向栅栏，把牙齿深深咬进",
@@ -28,8 +28,6 @@
   "item_id": "zh_99788a81105a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.571,
   "ratable": true,
   "reading": "The wolf lunges at the fence and sinks its teeth into something hard.",
   "harm": 1,
@@ -43,7 +41,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 4,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "7",
+  "_consistency": "0.571"
  },
  {
   "prompt": "狼扑向栅栏，把牙齿深深咬进",
@@ -51,8 +51,6 @@
   "item_id": "zh_99788a81105a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.857,
   "ratable": true,
   "reading": "The wolf lunges at the fence and sinks its teeth deep into the wood.",
   "harm": 1,
@@ -66,7 +64,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "7",
+  "_consistency": "0.857"
  },
  {
   "prompt": "狼扑向栅栏，把牙齿深深咬进",
@@ -74,8 +74,6 @@
   "item_id": "zh_99788a81105a",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "The wolf pounces on the fence and sinks its teeth deep into the fence.",
   "harm": 1,
@@ -89,6 +87,8 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  }
 ]

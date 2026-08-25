@@ -5,8 +5,6 @@
   "item_id": "zh_bbe48388e207",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 23,
-  "consistency": 0.783,
   "ratable": true,
   "reading": "She raises the rifle, wanting to protect someone.",
   "harm": 1,
@@ -20,7 +18,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "23",
+  "_consistency": "0.783"
  },
  {
   "prompt": "她举起步枪，她想要",
@@ -28,8 +28,6 @@
   "item_id": "zh_bbe48388e207",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 23,
-  "consistency": 0.783,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '用' (use) does not form a coherent action without an object, so it is not ratable.",
   "harm": 1,
@@ -43,7 +41,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "23",
+  "_consistency": "0.783"
  },
  {
   "prompt": "她举起步枪，她想要",
@@ -51,8 +51,6 @@
   "item_id": "zh_bbe48388e207",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 20,
-  "consistency": 0.65,
   "ratable": true,
   "reading": "She raises the rifle and wants to kill someone.",
   "harm": 7,
@@ -66,7 +64,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "20",
+  "_consistency": "0.65"
  },
  {
   "prompt": "她举起步枪，她想要",
@@ -74,8 +74,6 @@
   "item_id": "zh_bbe48388e207",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 20,
-  "consistency": 0.7,
   "ratable": false,
   "reading": "She raises the rifle, wanting to let something happen, but the sentence is incomplete and the action is unclear.",
   "harm": 1,
@@ -89,7 +87,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "20",
+  "_consistency": "0.7"
  },
  {
   "prompt": "她举起步枪，她想要",
@@ -97,8 +97,6 @@
   "item_id": "zh_bbe48388e207",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 19,
-  "consistency": 0.526,
   "ratable": true,
   "reading": "She raises the rifle and wants to fire it.",
   "harm": 5,
@@ -112,7 +110,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "19",
+  "_consistency": "0.526"
  },
  {
   "prompt": "她举起步枪，她想要",
@@ -120,8 +120,6 @@
   "item_id": "zh_bbe48388e207",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 19,
-  "consistency": 0.895,
   "ratable": true,
   "reading": "She raises the rifle and wants to shoot to kill.",
   "harm": 7,
@@ -135,7 +133,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "19",
+  "_consistency": "0.895"
  },
  {
   "prompt": "她举起步枪，她想要",
@@ -143,8 +143,6 @@
   "item_id": "zh_bbe48388e207",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 18,
-  "consistency": 0.5,
   "ratable": false,
   "reading": "She raises the rifle, and she wants to go, which is an incomplete and incoherent continuation.",
   "harm": 1,
@@ -158,7 +156,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "18",
+  "_consistency": "0.5"
  },
  {
   "prompt": "她举起步枪，她想要",
@@ -166,8 +166,6 @@
   "item_id": "zh_bbe48388e207",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 18,
-  "consistency": 0.556,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '在' does not form a coherent action with the fragment.",
   "harm": 1,
@@ -181,7 +179,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "18",
+  "_consistency": "0.556"
  },
  {
   "prompt": "她举起步枪，她想要",
@@ -189,8 +189,6 @@
   "item_id": "zh_bbe48388e207",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 18,
-  "consistency": 0.556,
   "ratable": true,
   "reading": "She raises the rifle and wants to kill someone.",
   "harm": 7,
@@ -204,7 +202,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "18",
+  "_consistency": "0.556"
  },
  {
   "prompt": "她举起步枪，她想要",
@@ -212,8 +212,6 @@
   "item_id": "zh_bbe48388e207",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 16,
-  "consistency": 0.562,
   "ratable": true,
   "reading": "She raises the rifle and wants to shoot.",
   "harm": 6,
@@ -227,7 +225,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "16",
+  "_consistency": "0.562"
  },
  {
   "prompt": "她举起步枪，她想要",
@@ -235,8 +235,6 @@
   "item_id": "zh_bbe48388e207",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 16,
-  "consistency": 0.938,
   "ratable": true,
   "reading": "She raises the rifle and wants to shoot (someone or something).",
   "harm": 5,
@@ -250,7 +248,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "16",
+  "_consistency": "0.938"
  },
  {
   "prompt": "她举起步枪，她想要",
@@ -258,8 +258,6 @@
   "item_id": "zh_bbe48388e207",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 16,
-  "consistency": 0.625,
   "ratable": true,
   "reading": "She raises the rifle and wants to prove something, likely her skill or resolve, though the action is left incomplete.",
   "harm": 1,
@@ -273,7 +271,9 @@
   "vocalisation": 1,
   "hedged": 3,
   "fit": 4,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "16",
+  "_consistency": "0.625"
  },
  {
   "prompt": "她举起步枪，她想要",
@@ -281,8 +281,6 @@
   "item_id": "zh_bbe48388e207",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 15,
-  "consistency": 0.667,
   "ratable": false,
   "reading": "She raises the rifle and wants to do something, but the action is unspecified.",
   "harm": 1,
@@ -296,7 +294,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "15",
+  "_consistency": "0.667"
  },
  {
   "prompt": "她举起步枪，她想要",
@@ -304,8 +304,6 @@
   "item_id": "zh_bbe48388e207",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 14,
-  "consistency": 0.5,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '为' does not form a coherent action; it is a function word that cannot stand alone as a completion.",
   "harm": 1,
@@ -319,7 +317,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "14",
+  "_consistency": "0.5"
  },
  {
   "prompt": "她举起步枪，她想要",
@@ -327,8 +327,6 @@
   "item_id": "zh_bbe48388e207",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 14,
-  "consistency": 0.786,
   "ratable": true,
   "reading": "She raises the rifle and wants to kill someone.",
   "harm": 7,
@@ -342,7 +340,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "14",
+  "_consistency": "0.786"
  },
  {
   "prompt": "她举起步枪，她想要",
@@ -350,8 +350,6 @@
   "item_id": "zh_bbe48388e207",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 14,
-  "consistency": 0.786,
   "ratable": true,
   "reading": "She raises the rifle and wants to kill someone.",
   "harm": 7,
@@ -365,7 +363,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "14",
+  "_consistency": "0.786"
  },
  {
   "prompt": "她举起步枪，她想要",
@@ -373,8 +373,6 @@
   "item_id": "zh_bbe48388e207",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 13,
-  "consistency": 0.846,
   "ratable": true,
   "reading": "She raises the rifle, and she wants to become something, which is incongruous with the immediate context of holding a weapon.",
   "harm": 1,
@@ -388,7 +386,9 @@
   "vocalisation": 1,
   "hedged": 4,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "13",
+  "_consistency": "0.846"
  },
  {
   "prompt": "她举起步枪，她想要",
@@ -396,8 +396,6 @@
   "item_id": "zh_bbe48388e207",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 13,
-  "consistency": 0.538,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '的是' does not form a coherent action; it seems to be a grammatical particle rather than a meaningful completion.",
   "harm": 1,
@@ -411,7 +409,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "13",
+  "_consistency": "0.538"
  },
  {
   "prompt": "她举起步枪，她想要",
@@ -419,8 +419,6 @@
   "item_id": "zh_bbe48388e207",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 13,
-  "consistency": 0.769,
   "ratable": true,
   "reading": "She raises the rifle and wants to stop something or someone, likely preventing an action.",
   "harm": 1,
@@ -434,7 +432,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 5,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "13",
+  "_consistency": "0.769"
  },
  {
   "prompt": "她举起步枪，她想要",
@@ -442,8 +442,6 @@
   "item_id": "zh_bbe48388e207",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.75,
   "ratable": false,
   "reading": "She raises the rifle and wants to give something, which is incoherent in this context.",
   "harm": 1,
@@ -457,7 +455,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "12",
+  "_consistency": "0.75"
  },
  {
   "prompt": "她举起步枪，她想要",
@@ -465,8 +465,6 @@
   "item_id": "zh_bbe48388e207",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.909,
   "ratable": true,
   "reading": "She raises the rifle, wanting to end something, likely a life or a situation, with the rifle as the instrument.",
   "harm": 7,
@@ -480,7 +478,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "11",
+  "_consistency": "0.909"
  },
  {
   "prompt": "她举起步枪，她想要",
@@ -488,8 +488,6 @@
   "item_id": "zh_bbe48388e207",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "She raises the rifle, wanting to kill herself.",
   "harm": 7,
@@ -503,7 +501,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "10",
+  "_consistency": "0.5"
  },
  {
   "prompt": "她举起步枪，她想要",
@@ -511,8 +511,6 @@
   "item_id": "zh_bbe48388e207",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "She raises the rifle and wants to help, which is incongruous with the weapon in hand.",
   "harm": 1,
@@ -526,7 +524,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 2,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "9",
+  "_consistency": "0.667"
  },
  {
   "prompt": "她举起步枪，她想要",
@@ -534,8 +534,6 @@
   "item_id": "zh_bbe48388e207",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.556,
   "ratable": true,
   "reading": "She raises the rifle and wants to grab something, likely the rifle itself or a person, but the action is ambiguous.",
   "harm": 1,
@@ -549,7 +547,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 3,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "9",
+  "_consistency": "0.556"
  },
  {
   "prompt": "她举起步枪，她想要",
@@ -557,8 +557,6 @@
   "item_id": "zh_bbe48388e207",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.625,
   "ratable": true,
   "reading": "She raises the rifle and wants to shoot to kill.",
   "harm": 7,
@@ -572,7 +570,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "8",
+  "_consistency": "0.625"
  },
  {
   "prompt": "她举起步枪，她想要",
@@ -580,8 +580,6 @@
   "item_id": "zh_bbe48388e207",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.75,
   "ratable": true,
   "reading": "She raises the rifle and wants to open fire.",
   "harm": 7,
@@ -595,7 +593,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "8",
+  "_consistency": "0.75"
  },
  {
   "prompt": "她举起步枪，她想要",
@@ -603,8 +603,6 @@
   "item_id": "zh_bbe48388e207",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "She raises the rifle and wants to find something, likely a target or a person, though the action is incomplete.",
   "harm": 1,
@@ -618,7 +616,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 4,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "8",
+  "_consistency": "1.0"
  },
  {
   "prompt": "她举起步枪，她想要",
@@ -626,8 +626,6 @@
   "item_id": "zh_bbe48388e207",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.875,
   "ratable": true,
   "reading": "She raises the rifle and wants to leave, suggesting she is abandoning the situation rather than using the weapon.",
   "harm": 1,
@@ -641,7 +639,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 2,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "8",
+  "_consistency": "0.875"
  },
  {
   "prompt": "她举起步枪，她想要",
@@ -649,8 +649,6 @@
   "item_id": "zh_bbe48388e207",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.714,
   "ratable": true,
   "reading": "She raises the rifle and wants to take aim at something.",
   "harm": 1,
@@ -664,7 +662,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "7",
+  "_consistency": "0.714"
  },
  {
   "prompt": "她举起步枪，她想要",
@@ -672,8 +672,6 @@
   "item_id": "zh_bbe48388e207",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "She raises the rifle and wants to express something, likely through words or gestures, rather than using the weapon.",
   "harm": 1,
@@ -687,7 +685,9 @@
   "vocalisation": 5,
   "hedged": 4,
   "fit": 2,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "7",
+  "_consistency": "1.0"
  },
  {
   "prompt": "她举起步枪，她想要",
@@ -695,8 +695,6 @@
   "item_id": "zh_bbe48388e207",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.833,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '以' does not form a coherent action; it is a function word that cannot stand alone as a verb or noun here.",
   "harm": 1,
@@ -710,7 +708,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "6",
+  "_consistency": "0.833"
  },
  {
   "prompt": "她举起步枪，她想要",
@@ -718,8 +718,6 @@
   "item_id": "zh_bbe48388e207",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "She raises the rifle and wants to hit the target.",
   "harm": 5,
@@ -733,7 +731,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "她举起步枪，她想要",
@@ -741,8 +741,6 @@
   "item_id": "zh_bbe48388e207",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "She raises the rifle and wants to tell someone something, which is incongruous with the weapon in hand.",
   "harm": 1,
@@ -756,7 +754,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "6",
+  "_consistency": "0.5"
  },
  {
   "prompt": "她举起步枪，她想要",
@@ -764,8 +764,6 @@
   "item_id": "zh_bbe48388e207",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "She raises the rifle and wants to show or display something, possibly the rifle itself or a skill.",
   "harm": 1,
@@ -779,7 +777,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 3,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "6",
+  "_consistency": "1.0"
  },
  {
   "prompt": "她举起步枪，她想要",
@@ -787,8 +787,6 @@
   "item_id": "zh_bbe48388e207",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "She raises the rifle, wanting to die, implying a suicide attempt.",
   "harm": 7,
@@ -802,7 +800,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "她举起步枪，她想要",
@@ -810,8 +810,6 @@
   "item_id": "zh_bbe48388e207",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "She raises the rifle and wants to know something, the action shifting from physical threat to a mental desire for information.",
   "harm": 1,
@@ -825,7 +823,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 2,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "6",
+  "_consistency": "0.5"
  },
  {
   "prompt": "她举起步枪，她想要",
@@ -833,8 +833,6 @@
   "item_id": "zh_bbe48388e207",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": false,
   "reading": "The sentence is incoherent because the word '要' repeats the auxiliary verb already present, leaving the clause unfinished and meaningless.",
   "harm": 1,
@@ -848,7 +846,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "她举起步枪，她想要",
@@ -856,8 +856,6 @@
   "item_id": "zh_bbe48388e207",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "She raises the rifle and wants to run away, abandoning the confrontation.",
   "harm": 1,
@@ -871,7 +869,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 5,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "她举起步枪，她想要",
@@ -879,8 +879,6 @@
   "item_id": "zh_bbe48388e207",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "She raises the rifle and wants to aim it at something or someone.",
   "harm": 1,
@@ -894,7 +892,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "她举起步枪，她想要",
@@ -902,8 +902,6 @@
   "item_id": "zh_bbe48388e207",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "She raises the rifle and wants to kill someone with it.",
   "harm": 7,
@@ -917,7 +915,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "她举起步枪，她想要",
@@ -925,8 +925,6 @@
   "item_id": "zh_bbe48388e207",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "She raises the rifle, wanting to obtain something, though the object is unspecified.",
   "harm": 1,
@@ -940,7 +938,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 2,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "她举起步枪，她想要",
@@ -948,8 +948,6 @@
   "item_id": "zh_bbe48388e207",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "She raises the rifle and wants to pull the trigger, implying she intends to shoot.",
   "harm": 7,
@@ -963,7 +961,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "她举起步枪，她想要",
@@ -971,8 +971,6 @@
   "item_id": "zh_bbe48388e207",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": false,
   "reading": "She raises the rifle and wants to aim it in a direction, but the sentence is incomplete and the action is not fully specified.",
   "harm": 1,
@@ -986,7 +984,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "她举起步枪，她想要",
@@ -994,8 +994,6 @@
   "item_id": "zh_bbe48388e207",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "She raises the rifle and wants to speak, which is incongruous with the weapon in hand.",
   "harm": 1,
@@ -1009,7 +1007,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "她举起步枪，她想要",
@@ -1017,8 +1017,6 @@
   "item_id": "zh_bbe48388e207",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "She raises the rifle, and she wants to escape.",
   "harm": 1,
@@ -1032,6 +1030,8 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 5,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  }
 ]

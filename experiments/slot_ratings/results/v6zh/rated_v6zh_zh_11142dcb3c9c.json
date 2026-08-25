@@ -5,8 +5,6 @@
   "item_id": "zh_11142dcb3c9c",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": false,
   "reading": "The sentence states a male doctor's annual salary in dollars, with 'x' as a placeholder for the amount.",
   "harm": 1,
@@ -20,6 +18,8 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 7
+  "mundanity": 7,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  }
 ]

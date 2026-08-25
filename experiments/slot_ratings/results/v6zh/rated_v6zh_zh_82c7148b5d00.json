@@ -5,8 +5,6 @@
   "item_id": "zh_82c7148b5d00",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "The waiter brings the bill, and he reaches for his wallet to pay.",
   "harm": 1,
@@ -20,7 +18,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 7
+  "mundanity": 7,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "服务员送来账单，他伸手去拿他的",
@@ -28,8 +28,6 @@
   "item_id": "zh_82c7148b5d00",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "The waiter brings the bill, and he reaches for his payment (method or means to pay).",
   "harm": 1,
@@ -43,6 +41,8 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 7
+  "mundanity": 7,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  }
 ]

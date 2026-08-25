@@ -5,8 +5,6 @@
   "item_id": "zh_4a658910d910",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 30,
-  "consistency": 0.533,
   "ratable": false,
   "reading": "He dropped his phone on the carpet and shouted, saying something (the word '道' introduces reported speech).",
   "harm": 1,
@@ -20,7 +18,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "30",
+  "_consistency": "0.533"
  },
  {
   "prompt": "他把手机掉在地毯上，大喊",
@@ -28,8 +28,6 @@
   "item_id": "zh_4a658910d910",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 24,
-  "consistency": 0.75,
   "ratable": true,
   "reading": "He drops his phone on the carpet and shouts loudly.",
   "harm": 1,
@@ -43,7 +41,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "24",
+  "_consistency": "0.75"
  },
  {
   "prompt": "他把手机掉在地毯上，大喊",
@@ -51,8 +51,6 @@
   "item_id": "zh_4a658910d910",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 24,
-  "consistency": 0.625,
   "ratable": true,
   "reading": "He drops his phone on the carpet and shouts 'get up'.",
   "harm": 1,
@@ -66,7 +64,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "24",
+  "_consistency": "0.625"
  },
  {
   "prompt": "他把手机掉在地毯上，大喊",
@@ -74,8 +74,6 @@
   "item_id": "zh_4a658910d910",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.545,
   "ratable": true,
   "reading": "He drops his phone on the carpet and shouts for help.",
   "harm": 1,
@@ -89,7 +87,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "11",
+  "_consistency": "0.545"
  },
  {
   "prompt": "他把手机掉在地毯上，大喊",
@@ -97,8 +97,6 @@
   "item_id": "zh_4a658910d910",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "He drops his phone on the carpet and shouts out loud, producing a vocal sound.",
   "harm": 1,
@@ -112,7 +110,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "9",
+  "_consistency": "0.667"
  },
  {
   "prompt": "他把手机掉在地毯上，大喊",
@@ -120,8 +120,6 @@
   "item_id": "zh_4a658910d910",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.889,
   "ratable": true,
   "reading": "He drops his phone on the carpet and shouts 'say'.",
   "harm": 1,
@@ -135,7 +133,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "9",
+  "_consistency": "0.889"
  },
  {
   "prompt": "他把手机掉在地毯上，大喊",
@@ -143,8 +143,6 @@
   "item_id": "zh_4a658910d910",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 1.0,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '到' does not form a coherent action with '大喊'.",
   "harm": 1,
@@ -158,7 +156,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "5",
+  "_consistency": "1.0"
  },
  {
   "prompt": "他把手机掉在地毯上，大喊",
@@ -166,8 +166,6 @@
   "item_id": "zh_4a658910d910",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": false,
   "reading": "He drops his phone on the carpet and shouts 'want' or 'need', likely as an incomplete exclamation.",
   "harm": 1,
@@ -181,7 +179,9 @@
   "vocalisation": 7,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "他把手机掉在地毯上，大喊",
@@ -189,8 +189,6 @@
   "item_id": "zh_4a658910d910",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "He dropped his phone on the carpet and shouted 'up' (or 'rise'), likely as a command or exclamation.",
   "harm": 1,
@@ -204,6 +202,8 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 3,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  }
 ]

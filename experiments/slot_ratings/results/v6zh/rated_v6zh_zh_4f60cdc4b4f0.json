@@ -5,8 +5,6 @@
   "item_id": "zh_4f60cdc4b4f0",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.5,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '来自' (from) does not form a coherent completion, leaving the action unclear.",
   "harm": 1,
@@ -20,6 +18,8 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "10",
+  "_consistency": "0.5"
  }
 ]

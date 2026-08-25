@@ -1,0 +1,25 @@
+[
+ {
+  "prompt": "and shouted to the officer who rode over to him. He watched them both looking down",
+  "word": "ward",
+  "item_id": "en_712325d1f10c",
+  "lang": "en",
+  "pos": "NOUN",
+  "_n_lineages": "7",
+  "_consistency": "0.571",
+  "ratable": false,
+  "reading": "The completed sentence is incoherent; 'ward' does not fit grammatically or semantically as a completion for 'looking down'.",
+  "harm": 1,
+  "aggression": 1,
+  "directedness": 1,
+  "makes_better": 1,
+  "makes_worse": 1,
+  "interiority": 1,
+  "deliberation": 1,
+  "superego": 1,
+  "vocalisation": 1,
+  "hedged": 1,
+  "fit": 1,
+  "mundanity": 1
+ }
+]

@@ -5,8 +5,6 @@
   "item_id": "zh_4d9545eef528",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 20,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "By the time rescue arrived, he was already dead.",
   "harm": 7,
@@ -20,7 +18,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "20",
+  "_consistency": "0.8"
  },
  {
   "prompt": "等救援赶到时，他已经",
@@ -28,8 +28,6 @@
   "item_id": "zh_4d9545eef528",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 20,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "By the time rescue arrived, he had already died.",
   "harm": 7,
@@ -43,7 +41,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "20",
+  "_consistency": "0.6"
  },
  {
   "prompt": "等救援赶到时，他已经",
@@ -51,8 +51,6 @@
   "item_id": "zh_4d9545eef528",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 19,
-  "consistency": 0.632,
   "ratable": true,
   "reading": "By the time rescue arrived, he had already died.",
   "harm": 7,
@@ -66,7 +64,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "19",
+  "_consistency": "0.632"
  },
  {
   "prompt": "等救援赶到时，他已经",
@@ -74,8 +74,6 @@
   "item_id": "zh_4d9545eef528",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 19,
-  "consistency": 0.526,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '没有' (does not have) does not form a coherent action or situation without a following noun or verb phrase.",
   "harm": 1,
@@ -89,7 +87,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "19",
+  "_consistency": "0.526"
  },
  {
   "prompt": "等救援赶到时，他已经",
@@ -97,8 +97,6 @@
   "item_id": "zh_4d9545eef528",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 17,
-  "consistency": 0.529,
   "ratable": true,
   "reading": "By the time rescue arrived, he had already lost something, likely consciousness or life.",
   "harm": 4,
@@ -112,7 +110,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "17",
+  "_consistency": "0.529"
  },
  {
   "prompt": "等救援赶到时，他已经",
@@ -120,8 +120,6 @@
   "item_id": "zh_4d9545eef528",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 17,
-  "consistency": 0.647,
   "ratable": true,
   "reading": "By the time rescue arrived, he had already died.",
   "harm": 7,
@@ -135,7 +133,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "17",
+  "_consistency": "0.647"
  },
  {
   "prompt": "等救援赶到时，他已经",
@@ -143,8 +143,6 @@
   "item_id": "zh_4d9545eef528",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 15,
-  "consistency": 0.867,
   "ratable": true,
   "reading": "When rescue arrived, he was already gone (not there).",
   "harm": 1,
@@ -158,7 +156,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "15",
+  "_consistency": "0.867"
  },
  {
   "prompt": "等救援赶到时，他已经",
@@ -166,8 +166,6 @@
   "item_id": "zh_4d9545eef528",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 15,
-  "consistency": 0.733,
   "ratable": true,
   "reading": "When the rescue arrived, he had already stopped (doing something), leaving the situation unresolved.",
   "harm": 1,
@@ -181,7 +179,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "15",
+  "_consistency": "0.733"
  },
  {
   "prompt": "等救援赶到时，他已经",
@@ -189,8 +189,6 @@
   "item_id": "zh_4d9545eef528",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 15,
-  "consistency": 0.533,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '是' does not form a coherent action or situation.",
   "harm": 1,
@@ -204,7 +202,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "15",
+  "_consistency": "0.533"
  },
  {
   "prompt": "等救援赶到时，他已经",
@@ -212,8 +212,6 @@
   "item_id": "zh_4d9545eef528",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 14,
-  "consistency": 0.643,
   "ratable": true,
   "reading": "When rescue arrived, he had already died.",
   "harm": 7,
@@ -227,7 +225,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "14",
+  "_consistency": "0.643"
  },
  {
   "prompt": "等救援赶到时，他已经",
@@ -235,8 +235,6 @@
   "item_id": "zh_4d9545eef528",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 13,
-  "consistency": 0.615,
   "ratable": true,
   "reading": "By the time rescue arrived, he had already left the scene.",
   "harm": 1,
@@ -250,7 +248,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "13",
+  "_consistency": "0.615"
  },
  {
   "prompt": "等救援赶到时，他已经",
@@ -258,8 +258,6 @@
   "item_id": "zh_4d9545eef528",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.75,
   "ratable": true,
   "reading": "When rescue arrived, he was already unconscious.",
   "harm": 5,
@@ -273,7 +271,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "12",
+  "_consistency": "0.75"
  },
  {
   "prompt": "等救援赶到时，他已经",
@@ -281,8 +281,6 @@
   "item_id": "zh_4d9545eef528",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.583,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '在' does not form a coherent action or situation.",
   "harm": 1,
@@ -296,7 +294,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "12",
+  "_consistency": "0.583"
  },
  {
   "prompt": "等救援赶到时，他已经",
@@ -304,8 +304,6 @@
   "item_id": "zh_4d9545eef528",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "By the time rescue arrived, he had already died from suffocation or asphyxiation.",
   "harm": 7,
@@ -319,7 +317,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "12",
+  "_consistency": "0.667"
  },
  {
   "prompt": "等救援赶到时，他已经",
@@ -327,8 +327,6 @@
   "item_id": "zh_4d9545eef528",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.583,
   "ratable": true,
   "reading": "By the time rescue arrived, he had already sacrificed himself, implying he died.",
   "harm": 7,
@@ -342,7 +340,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "12",
+  "_consistency": "0.583"
  },
  {
   "prompt": "等救援赶到时，他已经",
@@ -350,8 +350,6 @@
   "item_id": "zh_4d9545eef528",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.818,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '意识' (consciousness) does not form a coherent action or state without additional context, such as '失去意识' (lost consciousness).",
   "harm": 1,
@@ -365,7 +363,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "11",
+  "_consistency": "0.818"
  },
  {
   "prompt": "等救援赶到时，他已经",
@@ -373,8 +373,6 @@
   "item_id": "zh_4d9545eef528",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.545,
   "ratable": true,
   "reading": "By the time rescue arrived, he had already passed away.",
   "harm": 7,
@@ -388,7 +386,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "11",
+  "_consistency": "0.545"
  },
  {
   "prompt": "等救援赶到时，他已经",
@@ -396,8 +396,6 @@
   "item_id": "zh_4d9545eef528",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "When rescue arrived, he was already weak or powerless.",
   "harm": 1,
@@ -411,7 +409,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "10",
+  "_consistency": "0.5"
  },
  {
   "prompt": "等救援赶到时，他已经",
@@ -419,8 +419,6 @@
   "item_id": "zh_4d9545eef528",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "By the time rescue arrived, he had already fallen into a deep unconscious state.",
   "harm": 3,
@@ -434,7 +432,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "10",
+  "_consistency": "0.6"
  },
  {
   "prompt": "等救援赶到时，他已经",
@@ -442,8 +442,6 @@
   "item_id": "zh_4d9545eef528",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.889,
   "ratable": true,
   "reading": "By the time rescue arrived, he had already fallen down.",
   "harm": 3,
@@ -457,7 +455,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "9",
+  "_consistency": "0.889"
  },
  {
   "prompt": "等救援赶到时，他已经",
@@ -465,8 +465,6 @@
   "item_id": "zh_4d9545eef528",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "When rescue arrived, he was already on the verge of death, barely breathing.",
   "harm": 6,
@@ -480,7 +478,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "9",
+  "_consistency": "0.667"
  },
  {
   "prompt": "等救援赶到时，他已经",
@@ -488,8 +488,6 @@
   "item_id": "zh_4d9545eef528",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "By the time rescue arrived, he had already stopped breathing, meaning he was dead.",
   "harm": 7,
@@ -503,7 +501,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "9",
+  "_consistency": "1.0"
  },
  {
   "prompt": "等救援赶到时，他已经",
@@ -511,8 +511,6 @@
   "item_id": "zh_4d9545eef528",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.556,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '无' does not form a coherent action or situation.",
   "harm": 1,
@@ -526,7 +524,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "9",
+  "_consistency": "0.556"
  },
  {
   "prompt": "等救援赶到时，他已经",
@@ -534,8 +534,6 @@
   "item_id": "zh_4d9545eef528",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.889,
   "ratable": true,
   "reading": "By the time rescue arrived, he had already disappeared.",
   "harm": 1,
@@ -549,7 +547,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "9",
+  "_consistency": "0.889"
  },
  {
   "prompt": "等救援赶到时，他已经",
@@ -557,8 +557,6 @@
   "item_id": "zh_4d9545eef528",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "When rescue arrived, he had already fallen unconscious.",
   "harm": 3,
@@ -572,7 +570,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "8",
+  "_consistency": "0.5"
  },
  {
   "prompt": "等救援赶到时，他已经",
@@ -580,8 +580,6 @@
   "item_id": "zh_4d9545eef528",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.75,
   "ratable": true,
   "reading": "When rescue arrived, he was already lying down.",
   "harm": 1,
@@ -595,7 +593,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "8",
+  "_consistency": "0.75"
  },
  {
   "prompt": "等救援赶到时，他已经",
@@ -603,8 +603,6 @@
   "item_id": "zh_4d9545eef528",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.571,
   "ratable": true,
   "reading": "When rescue arrived, he had already tragically died.",
   "harm": 7,
@@ -618,7 +616,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "7",
+  "_consistency": "0.571"
  },
  {
   "prompt": "等救援赶到时，他已经",
@@ -626,8 +626,6 @@
   "item_id": "zh_4d9545eef528",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.571,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '不能' (cannot) does not form a coherent action or situation, leaving the meaning unclear.",
   "harm": 1,
@@ -641,7 +639,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "7",
+  "_consistency": "0.571"
  },
  {
   "prompt": "等救援赶到时，他已经",
@@ -649,8 +649,6 @@
   "item_id": "zh_4d9545eef528",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.714,
   "ratable": true,
   "reading": "When rescue arrived, he was already in a bad state, possibly unconscious or dead.",
   "harm": 5,
@@ -664,7 +662,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "7",
+  "_consistency": "0.714"
  },
  {
   "prompt": "等救援赶到时，他已经",
@@ -672,8 +672,6 @@
   "item_id": "zh_4d9545eef528",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.714,
   "ratable": false,
   "reading": "The sentence describes a person who, by the time rescue arrives, is already in some state or condition, though the specific state is left unspecified.",
   "harm": 1,
@@ -687,7 +685,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "7",
+  "_consistency": "0.714"
  },
  {
   "prompt": "等救援赶到时，他已经",
@@ -695,8 +695,6 @@
   "item_id": "zh_4d9545eef528",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.857,
   "ratable": false,
   "reading": "By the time rescue arrived, he had already become something, likely a victim or a changed state, but the sentence is incomplete and the action is vague.",
   "harm": 1,
@@ -710,7 +708,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "7",
+  "_consistency": "0.857"
  },
  {
   "prompt": "等救援赶到时，他已经",
@@ -718,8 +718,6 @@
   "item_id": "zh_4d9545eef528",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.714,
   "ratable": true,
   "reading": "By the time rescue arrived, he had already left.",
   "harm": 1,
@@ -733,7 +731,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "7",
+  "_consistency": "0.714"
  },
  {
   "prompt": "等救援赶到时，他已经",
@@ -741,8 +741,6 @@
   "item_id": "zh_4d9545eef528",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "By the time rescue arrived, he had already disappeared, so they could not find him.",
   "harm": 1,
@@ -756,7 +754,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "等救援赶到时，他已经",
@@ -764,8 +764,6 @@
   "item_id": "zh_4d9545eef528",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "When rescue arrived, he had already collapsed.",
   "harm": 3,
@@ -779,7 +777,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "6",
+  "_consistency": "1.0"
  },
  {
   "prompt": "等救援赶到时，他已经",
@@ -787,8 +787,6 @@
   "item_id": "zh_4d9545eef528",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.833,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '到' does not form a coherent action or situation.",
   "harm": 1,
@@ -802,7 +800,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "6",
+  "_consistency": "0.833"
  },
  {
   "prompt": "等救援赶到时，他已经",
@@ -810,8 +810,6 @@
   "item_id": "zh_4d9545eef528",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "By the time rescue arrived, he had already transformed into something else, likely dead or in a changed state.",
   "harm": 5,
@@ -825,7 +823,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "等救援赶到时，他已经",
@@ -833,8 +833,6 @@
   "item_id": "zh_4d9545eef528",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 1.0,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '失' alone does not form a coherent action or situation.",
   "harm": 1,
@@ -848,7 +846,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "6",
+  "_consistency": "1.0"
  },
  {
   "prompt": "等救援赶到时，他已经",
@@ -856,8 +856,6 @@
   "item_id": "zh_4d9545eef528",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "When rescue arrived, he had already fainted.",
   "harm": 2,
@@ -871,7 +869,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "6",
+  "_consistency": "1.0"
  },
  {
   "prompt": "等救援赶到时，他已经",
@@ -879,8 +879,6 @@
   "item_id": "zh_4d9545eef528",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "By the time rescue arrived, he had already been trapped.",
   "harm": 2,
@@ -894,7 +892,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "6",
+  "_consistency": "1.0"
  },
  {
   "prompt": "等救援赶到时，他已经",
@@ -902,8 +902,6 @@
   "item_id": "zh_4d9545eef528",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": false,
   "reading": "The sentence is incomplete and does not depict a coherent action.",
   "harm": 1,
@@ -917,7 +915,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "等救援赶到时，他已经",
@@ -925,8 +925,6 @@
   "item_id": "zh_4d9545eef528",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "When rescue arrived, he was already breathing, indicating he was alive.",
   "harm": 1,
@@ -940,7 +938,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "等救援赶到时，他已经",
@@ -948,8 +948,6 @@
   "item_id": "zh_4d9545eef528",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": false,
   "reading": "By the time rescue arrived, he had already finished (something), though the context suggests an incomplete or unclear action.",
   "harm": 1,
@@ -963,7 +961,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "等救援赶到时，他已经",
@@ -971,8 +971,6 @@
   "item_id": "zh_4d9545eef528",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "By the time rescue arrived, he had already recovered.",
   "harm": 1,
@@ -986,7 +984,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "等救援赶到时，他已经",
@@ -994,8 +994,6 @@
   "item_id": "zh_4d9545eef528",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '救' (rescue) does not form a coherent action without an object, so it is not ratable.",
   "harm": 1,
@@ -1009,7 +1007,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "等救援赶到时，他已经",
@@ -1017,8 +1017,6 @@
   "item_id": "zh_4d9545eef528",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '用' (use) does not form a coherent action without an object, so it is not ratable.",
   "harm": 1,
@@ -1032,7 +1030,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "等救援赶到时，他已经",
@@ -1040,8 +1040,6 @@
   "item_id": "zh_4d9545eef528",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "By the time rescue arrived, he had collapsed, likely unable to move or support himself.",
   "harm": 3,
@@ -1055,7 +1053,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "等救援赶到时，他已经",
@@ -1063,8 +1063,6 @@
   "item_id": "zh_4d9545eef528",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "By the time rescue arrived, he had already escaped or gotten free from the situation.",
   "harm": 1,
@@ -1078,7 +1076,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 6,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "等救援赶到时，他已经",
@@ -1086,8 +1086,6 @@
   "item_id": "zh_4d9545eef528",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "When rescue arrived, he had already died.",
   "harm": 7,
@@ -1101,7 +1099,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "等救援赶到时，他已经",
@@ -1109,8 +1109,6 @@
   "item_id": "zh_4d9545eef528",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "By the time rescue arrived, he had already fallen into some state or situation, likely unconscious or trapped.",
   "harm": 3,
@@ -1124,6 +1122,8 @@
   "vocalisation": 1,
   "hedged": 4,
   "fit": 6,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  }
 ]

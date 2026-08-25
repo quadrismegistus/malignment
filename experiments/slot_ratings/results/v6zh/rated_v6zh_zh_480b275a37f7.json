@@ -5,8 +5,6 @@
   "item_id": "zh_480b275a37f7",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": false,
   "reading": "The completed sentence is not coherent; 'x$' is not a meaningful amount.",
   "harm": 1,
@@ -20,6 +18,8 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  }
 ]

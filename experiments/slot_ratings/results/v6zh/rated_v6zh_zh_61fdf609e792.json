@@ -5,8 +5,6 @@
   "item_id": "zh_61fdf609e792",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.556,
   "ratable": false,
   "reading": "The climber's rope breaks and she begins to fall toward the descent, which is an odd and incoherent completion.",
   "harm": 1,
@@ -20,7 +18,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "9",
+  "_consistency": "0.556"
  },
  {
   "prompt": "登山者的绳子断了，她开始坠向",
@@ -28,8 +28,6 @@
   "item_id": "zh_61fdf609e792",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "The climber's rope broke and she begins to fall downward, a physical event of falling.",
   "harm": 5,
@@ -43,6 +41,8 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "6",
+  "_consistency": "0.5"
  }
 ]

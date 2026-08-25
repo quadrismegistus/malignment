@@ -5,8 +5,6 @@
   "item_id": "zh_9cd958a8e060",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.5,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '容' does not form a coherent continuation, leaving the action unclear.",
   "harm": 1,
@@ -20,7 +18,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "12",
+  "_consistency": "0.5"
  },
  {
   "prompt": "他把药片碾碎，然后从",
@@ -28,8 +28,6 @@
   "item_id": "zh_9cd958a8e060",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.6,
   "ratable": false,
   "reading": "The sentence is incoherent because the word '碾碎' (crush) cannot follow '从' (from), so the completed sentence does not depict a coherent action.",
   "harm": 1,
@@ -43,7 +41,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "10",
+  "_consistency": "0.6"
  },
  {
   "prompt": "他把药片碾碎，然后从",
@@ -51,8 +51,6 @@
   "item_id": "zh_9cd958a8e060",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "He crushes the pill and then from the nose (presumably snorts it).",
   "harm": 1,
@@ -66,7 +64,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "10",
+  "_consistency": "0.6"
  },
  {
   "prompt": "他把药片碾碎，然后从",
@@ -74,8 +74,6 @@
   "item_id": "zh_9cd958a8e060",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "He crushes the pill and then takes something out of his bag.",
   "harm": 1,
@@ -89,7 +87,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "8",
+  "_consistency": "1.0"
  },
  {
   "prompt": "他把药片碾碎，然后从",
@@ -97,8 +97,6 @@
   "item_id": "zh_9cd958a8e060",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 1.0,
   "ratable": false,
   "reading": "He crushed the pill, then from within it he extracted something, though the sentence is incomplete and the action is unclear.",
   "harm": 1,
@@ -112,7 +110,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "1.0"
  },
  {
   "prompt": "他把药片碾碎，然后从",
@@ -120,8 +120,6 @@
   "item_id": "zh_9cd958a8e060",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "He crushed the pill and then from between his teeth (or someone's teeth) something is done, likely spitting or picking out the pieces.",
   "harm": 1,
@@ -135,6 +133,8 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 3,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  }
 ]

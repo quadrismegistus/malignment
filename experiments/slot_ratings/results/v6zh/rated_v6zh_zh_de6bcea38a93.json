@@ -5,8 +5,6 @@
   "item_id": "zh_de6bcea38a93",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 22,
-  "consistency": 0.773,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '用' (use) does not form a coherent action by itself, leaving the depicted situation unclear.",
   "harm": 1,
@@ -20,7 +18,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "22",
+  "_consistency": "0.773"
  },
  {
   "prompt": "他在柜台上碾碎草药，然后",
@@ -28,8 +28,6 @@
   "item_id": "zh_de6bcea38a93",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 18,
-  "consistency": 0.611,
   "ratable": true,
   "reading": "He crushes herbs on the counter and then pours them (into something).",
   "harm": 1,
@@ -43,7 +41,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "18",
+  "_consistency": "0.611"
  },
  {
   "prompt": "他在柜台上碾碎草药，然后",
@@ -51,8 +51,6 @@
   "item_id": "zh_de6bcea38a93",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 18,
-  "consistency": 0.5,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '在' does not form a coherent action, leaving the continuation unclear.",
   "harm": 1,
@@ -66,7 +64,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "18",
+  "_consistency": "0.5"
  },
  {
   "prompt": "他在柜台上碾碎草药，然后",
@@ -74,8 +74,6 @@
   "item_id": "zh_de6bcea38a93",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 17,
-  "consistency": 0.824,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '给' does not form a coherent action without an object or continuation.",
   "harm": 1,
@@ -89,7 +87,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "17",
+  "_consistency": "0.824"
  },
  {
   "prompt": "他在柜台上碾碎草药，然后",
@@ -97,8 +97,6 @@
   "item_id": "zh_de6bcea38a93",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 16,
-  "consistency": 0.812,
   "ratable": true,
   "reading": "He crushes herbs on the counter, then takes something.",
   "harm": 1,
@@ -112,7 +110,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "16",
+  "_consistency": "0.812"
  },
  {
   "prompt": "他在柜台上碾碎草药，然后",
@@ -120,8 +120,6 @@
   "item_id": "zh_de6bcea38a93",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 15,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "He crushes herbs on the counter and then pours them (or something) out.",
   "harm": 1,
@@ -135,7 +133,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 6,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "15",
+  "_consistency": "0.8"
  },
  {
   "prompt": "他在柜台上碾碎草药，然后",
@@ -143,8 +143,6 @@
   "item_id": "zh_de6bcea38a93",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 15,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "He crushes herbs on the counter and then puts them somewhere.",
   "harm": 1,
@@ -158,7 +156,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "15",
+  "_consistency": "0.667"
  },
  {
   "prompt": "他在柜台上碾碎草药，然后",
@@ -166,8 +166,6 @@
   "item_id": "zh_de6bcea38a93",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 14,
-  "consistency": 0.571,
   "ratable": true,
   "reading": "He crushes herbs on the counter and then pours them into something.",
   "harm": 1,
@@ -181,7 +179,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "14",
+  "_consistency": "0.571"
  },
  {
   "prompt": "他在柜台上碾碎草药，然后",
@@ -189,8 +189,6 @@
   "item_id": "zh_de6bcea38a93",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 13,
-  "consistency": 0.615,
   "ratable": true,
   "reading": "He crushes herbs on the counter and then adds them to something.",
   "harm": 1,
@@ -204,7 +202,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "13",
+  "_consistency": "0.615"
  },
  {
   "prompt": "他在柜台上碾碎草药，然后",
@@ -212,8 +212,6 @@
   "item_id": "zh_de6bcea38a93",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 13,
-  "consistency": 0.538,
   "ratable": true,
   "reading": "He crushes herbs on the counter and then sprinkles them (presumably onto something).",
   "harm": 1,
@@ -227,7 +225,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "13",
+  "_consistency": "0.538"
  },
  {
   "prompt": "他在柜台上碾碎草药，然后",
@@ -235,8 +235,6 @@
   "item_id": "zh_de6bcea38a93",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.75,
   "ratable": true,
   "reading": "He crushes herbs on the counter and then puts them somewhere.",
   "harm": 1,
@@ -250,7 +248,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "12",
+  "_consistency": "0.75"
  },
  {
   "prompt": "他在柜台上碾碎草药，然后",
@@ -258,8 +258,6 @@
   "item_id": "zh_de6bcea38a93",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.8,
   "ratable": false,
   "reading": "He crushes herbs on the counter, then begins (something, likely the next step of preparation).",
   "harm": 1,
@@ -273,7 +271,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "10",
+  "_consistency": "0.8"
  },
  {
   "prompt": "他在柜台上碾碎草药，然后",
@@ -281,8 +281,6 @@
   "item_id": "zh_de6bcea38a93",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "He crushes herbs on the counter and then uses water, likely to mix or rinse them.",
   "harm": 1,
@@ -296,7 +294,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 6,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "10",
+  "_consistency": "0.6"
  },
  {
   "prompt": "他在柜台上碾碎草药，然后",
@@ -304,8 +304,6 @@
   "item_id": "zh_de6bcea38a93",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.5,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '让' (let/make) does not form a coherent action by itself, leaving the continuation unresolved.",
   "harm": 1,
@@ -319,7 +317,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "10",
+  "_consistency": "0.5"
  },
  {
   "prompt": "他在柜台上碾碎草药，然后",
@@ -327,8 +327,6 @@
   "item_id": "zh_de6bcea38a93",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.556,
   "ratable": true,
   "reading": "He crushes herbs on the counter, then takes something out.",
   "harm": 1,
@@ -342,7 +340,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "9",
+  "_consistency": "0.556"
  },
  {
   "prompt": "他在柜台上碾碎草药，然后",
@@ -350,8 +350,6 @@
   "item_id": "zh_de6bcea38a93",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "He crushes herbs on the counter, then picks something up.",
   "harm": 1,
@@ -365,7 +363,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "9",
+  "_consistency": "0.667"
  },
  {
   "prompt": "他在柜台上碾碎草药，然后",
@@ -373,8 +373,6 @@
   "item_id": "zh_de6bcea38a93",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.778,
   "ratable": true,
   "reading": "He crushes herbs on the counter and then mixes them.",
   "harm": 1,
@@ -388,7 +386,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "9",
+  "_consistency": "0.778"
  },
  {
   "prompt": "他在柜台上碾碎草药，然后",
@@ -396,8 +396,6 @@
   "item_id": "zh_de6bcea38a93",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.778,
   "ratable": true,
   "reading": "He crushes herbs on the counter and then hands something (presumably the herbs) to someone.",
   "harm": 1,
@@ -411,7 +409,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "9",
+  "_consistency": "0.778"
  },
  {
   "prompt": "他在柜台上碾碎草药，然后",
@@ -419,8 +419,6 @@
   "item_id": "zh_de6bcea38a93",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.889,
   "ratable": true,
   "reading": "He crushes herbs on the counter and then hands them to someone.",
   "harm": 1,
@@ -434,7 +432,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "9",
+  "_consistency": "0.889"
  },
  {
   "prompt": "他在柜台上碾碎草药，然后",
@@ -442,8 +442,6 @@
   "item_id": "zh_de6bcea38a93",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.625,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '对' (correct/yes) does not form a coherent action after crushing herbs on the counter.",
   "harm": 1,
@@ -457,7 +455,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "8",
+  "_consistency": "0.625"
  },
  {
   "prompt": "他在柜台上碾碎草药，然后",
@@ -465,8 +465,6 @@
   "item_id": "zh_de6bcea38a93",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.75,
   "ratable": true,
   "reading": "He crushes herbs on the counter and then places them somewhere.",
   "harm": 1,
@@ -480,7 +478,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "8",
+  "_consistency": "0.75"
  },
  {
   "prompt": "他在柜台上碾碎草药，然后",
@@ -488,8 +488,6 @@
   "item_id": "zh_de6bcea38a93",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.625,
   "ratable": true,
   "reading": "He crushes herbs on the counter and then speaks.",
   "harm": 1,
@@ -503,7 +501,9 @@
   "vocalisation": 7,
   "hedged": 3,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "8",
+  "_consistency": "0.625"
  },
  {
   "prompt": "他在柜台上碾碎草药，然后",
@@ -511,8 +511,6 @@
   "item_id": "zh_de6bcea38a93",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.714,
   "ratable": true,
   "reading": "He crushes herbs on the counter, then takes something out.",
   "harm": 1,
@@ -526,7 +524,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "7",
+  "_consistency": "0.714"
  },
  {
   "prompt": "他在柜台上碾碎草药，然后",
@@ -534,8 +534,6 @@
   "item_id": "zh_de6bcea38a93",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": false,
   "reading": "The fragment ends with a function word '以' that cannot stand alone as a verb or action, leaving the sentence incomplete and incoherent.",
   "harm": 1,
@@ -549,7 +547,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "他在柜台上碾碎草药，然后",
@@ -557,8 +557,6 @@
   "item_id": "zh_de6bcea38a93",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.833,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '往' does not form a coherent action by itself.",
   "harm": 1,
@@ -572,7 +570,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "6",
+  "_consistency": "0.833"
  },
  {
   "prompt": "他在柜台上碾碎草药，然后",
@@ -580,8 +580,6 @@
   "item_id": "zh_de6bcea38a93",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.833,
   "ratable": true,
   "reading": "The sentence depicts someone crushing herbs on a counter and then pressing down on them, likely to further grind or flatten them.",
   "harm": 1,
@@ -595,7 +593,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 6,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "6",
+  "_consistency": "0.833"
  },
  {
   "prompt": "他在柜台上碾碎草药，然后",
@@ -603,8 +603,6 @@
   "item_id": "zh_de6bcea38a93",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "He crushes herbs on the counter and then packs them into something.",
   "harm": 1,
@@ -618,7 +616,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "他在柜台上碾碎草药，然后",
@@ -626,8 +626,6 @@
   "item_id": "zh_de6bcea38a93",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.5,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '通过' does not form a coherent action in this context.",
   "harm": 1,
@@ -641,7 +639,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "6",
+  "_consistency": "0.5"
  },
  {
   "prompt": "他在柜台上碾碎草药，然后",
@@ -649,8 +649,6 @@
   "item_id": "zh_de6bcea38a93",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "He crushes herbs on the counter and then uses them, presumably in some preparation.",
   "harm": 1,
@@ -664,7 +662,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "他在柜台上碾碎草药，然后",
@@ -672,8 +672,6 @@
   "item_id": "zh_de6bcea38a93",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": false,
   "reading": "The sentence is incomplete and '去' (go) does not form a coherent action without a destination or purpose.",
   "harm": 1,
@@ -687,7 +685,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "他在柜台上碾碎草药，然后",
@@ -695,8 +695,6 @@
   "item_id": "zh_de6bcea38a93",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "He crushes herbs on the counter, then does so carefully.",
   "harm": 1,
@@ -710,7 +708,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 6,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "他在柜台上碾碎草药，然后",
@@ -718,8 +718,6 @@
   "item_id": "zh_de6bcea38a93",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "He crushes herbs on the counter, then packs them (into something).",
   "harm": 1,
@@ -733,6 +731,8 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  }
 ]

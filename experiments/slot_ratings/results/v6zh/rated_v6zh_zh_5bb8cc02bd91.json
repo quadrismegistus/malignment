@@ -5,8 +5,6 @@
   "item_id": "zh_5bb8cc02bd91",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 19,
-  "consistency": 0.579,
   "ratable": true,
   "reading": "He is free and chooses to leave.",
   "harm": 1,
@@ -20,7 +18,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "19",
+  "_consistency": "0.579"
  },
  {
   "prompt": "他是自由的，选择了",
@@ -28,8 +28,6 @@
   "item_id": "zh_5bb8cc02bd91",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 18,
-  "consistency": 0.611,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '去' (to go) does not form a coherent action without a destination or purpose.",
   "harm": 1,
@@ -43,7 +41,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "18",
+  "_consistency": "0.611"
  },
  {
   "prompt": "他是自由的，选择了",
@@ -51,8 +51,6 @@
   "item_id": "zh_5bb8cc02bd91",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 15,
-  "consistency": 0.933,
   "ratable": true,
   "reading": "He is free and has chosen to become something, though what he becomes is left unspecified.",
   "harm": 1,
@@ -66,7 +64,9 @@
   "vocalisation": 1,
   "hedged": 5,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "15",
+  "_consistency": "0.933"
  },
  {
   "prompt": "他是自由的，选择了",
@@ -74,8 +74,6 @@
   "item_id": "zh_5bb8cc02bd91",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 14,
-  "consistency": 0.643,
   "ratable": false,
   "reading": "The sentence depicts a person who is free and has chosen to act, though the specific action is left unspecified.",
   "harm": 1,
@@ -89,7 +87,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "14",
+  "_consistency": "0.643"
  },
  {
   "prompt": "他是自由的，选择了",
@@ -97,8 +97,6 @@
   "item_id": "zh_5bb8cc02bd91",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.727,
   "ratable": true,
   "reading": "He is free and chooses to give up (something).",
   "harm": 1,
@@ -112,7 +110,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 6,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "11",
+  "_consistency": "0.727"
  },
  {
   "prompt": "他是自由的，选择了",
@@ -120,8 +120,6 @@
   "item_id": "zh_5bb8cc02bd91",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.75,
   "ratable": false,
   "reading": "The sentence is incomplete and '要' (to want) does not form a coherent action; it suggests he chose to want something, but the object is missing.",
   "harm": 1,
@@ -135,7 +133,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "8",
+  "_consistency": "0.75"
  },
  {
   "prompt": "他是自由的，选择了",
@@ -143,8 +143,6 @@
   "item_id": "zh_5bb8cc02bd91",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "He is free and has chosen loneliness.",
   "harm": 1,
@@ -158,7 +156,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "6",
+  "_consistency": "1.0"
  },
  {
   "prompt": "他是自由的，选择了",
@@ -166,8 +166,6 @@
   "item_id": "zh_5bb8cc02bd91",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "He is free and chooses to distance himself from something or someone.",
   "harm": 1,
@@ -181,6 +179,8 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 6,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  }
 ]

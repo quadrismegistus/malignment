@@ -5,8 +5,6 @@
   "item_id": "zh_53f5950e83da",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 15,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "The plumber looks at the burst pipe and says 'um, yes', acknowledging the situation without taking action.",
   "harm": 1,
@@ -20,7 +18,9 @@
   "vocalisation": 7,
   "hedged": 5,
   "fit": 4,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "15",
+  "_consistency": "1.0"
  },
  {
   "prompt": "管道工看着爆裂的水管说嗯",
@@ -28,8 +28,6 @@
   "item_id": "zh_53f5950e83da",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "The plumber looks at the burst pipe and says 'okay'.",
   "harm": 1,
@@ -43,7 +41,9 @@
   "vocalisation": 6,
   "hedged": 3,
   "fit": 7,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "9",
+  "_consistency": "1.0"
  },
  {
   "prompt": "管道工看着爆裂的水管说嗯",
@@ -51,8 +51,6 @@
   "item_id": "zh_53f5950e83da",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "The plumber looks at the burst pipe and says 'mm, right' in acknowledgment.",
   "harm": 1,
@@ -66,6 +64,8 @@
   "vocalisation": 6,
   "hedged": 4,
   "fit": 7,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "5",
+  "_consistency": "1.0"
  }
 ]

@@ -5,8 +5,6 @@
   "item_id": "zh_08c293556031",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 18,
-  "consistency": 0.722,
   "ratable": true,
   "reading": "She pulls out a knife and then begins (to do something, presumably something violent or threatening).",
   "harm": 1,
@@ -20,7 +18,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "18",
+  "_consistency": "0.722"
  },
  {
   "prompt": "她拔出刀，然后",
@@ -28,8 +28,6 @@
   "item_id": "zh_08c293556031",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 16,
-  "consistency": 0.625,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '朝' (toward) does not form a coherent action by itself.",
   "harm": 1,
@@ -43,7 +41,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "16",
+  "_consistency": "0.625"
  },
  {
   "prompt": "她拔出刀，然后",
@@ -51,8 +51,6 @@
   "item_id": "zh_08c293556031",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 16,
-  "consistency": 0.812,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '用' (use) does not specify an action, so it does not depict a coherent event.",
   "harm": 1,
@@ -66,7 +64,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "16",
+  "_consistency": "0.812"
  },
  {
   "prompt": "她拔出刀，然后",
@@ -74,8 +74,6 @@
   "item_id": "zh_08c293556031",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 16,
-  "consistency": 0.562,
   "ratable": true,
   "reading": "She pulls out a knife and then speaks.",
   "harm": 1,
@@ -89,7 +87,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 4,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "16",
+  "_consistency": "0.562"
  },
  {
   "prompt": "她拔出刀，然后",
@@ -97,8 +97,6 @@
   "item_id": "zh_08c293556031",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 15,
-  "consistency": 0.867,
   "ratable": true,
   "reading": "She pulls out a knife and then turns around.",
   "harm": 1,
@@ -112,7 +110,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "15",
+  "_consistency": "0.867"
  },
  {
   "prompt": "她拔出刀，然后",
@@ -120,8 +120,6 @@
   "item_id": "zh_08c293556031",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.545,
   "ratable": true,
   "reading": "She pulls out a knife and then stabs (someone).",
   "harm": 7,
@@ -135,7 +133,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "11",
+  "_consistency": "0.545"
  },
  {
   "prompt": "她拔出刀，然后",
@@ -143,8 +143,6 @@
   "item_id": "zh_08c293556031",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.545,
   "ratable": false,
   "reading": "The fragment '她拔出刀，然后 在' is incomplete and does not form a coherent action; '在' is a function word that cannot complete the sentence meaningfully.",
   "harm": 1,
@@ -158,7 +156,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "11",
+  "_consistency": "0.545"
  },
  {
   "prompt": "她拔出刀，然后",
@@ -166,8 +166,6 @@
   "item_id": "zh_08c293556031",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.545,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '对' does not form a coherent action after 'then'.",
   "harm": 1,
@@ -181,7 +179,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "11",
+  "_consistency": "0.545"
  },
  {
   "prompt": "她拔出刀，然后",
@@ -189,8 +189,6 @@
   "item_id": "zh_08c293556031",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.7,
   "ratable": true,
   "reading": "She pulls out a knife and then uses force, implying she stabs or attacks someone with it.",
   "harm": 7,
@@ -204,7 +202,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "10",
+  "_consistency": "0.7"
  },
  {
   "prompt": "她拔出刀，然后",
@@ -212,8 +212,6 @@
   "item_id": "zh_08c293556031",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 1.0,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '往' does not form a coherent action by itself.",
   "harm": 1,
@@ -227,7 +225,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "8",
+  "_consistency": "1.0"
  },
  {
   "prompt": "她拔出刀，然后",
@@ -235,8 +235,6 @@
   "item_id": "zh_08c293556031",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.75,
   "ratable": false,
   "reading": "She pulls out a knife and then suddenly (does something with it), the action being abrupt and forceful.",
   "harm": 1,
@@ -250,7 +248,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "8",
+  "_consistency": "0.75"
  },
  {
   "prompt": "她拔出刀，然后",
@@ -258,8 +258,6 @@
   "item_id": "zh_08c293556031",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.75,
   "ratable": true,
   "reading": "She pulls out a knife and then chops or slashes with it.",
   "harm": 6,
@@ -273,7 +271,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "8",
+  "_consistency": "0.75"
  },
  {
   "prompt": "她拔出刀，然后",
@@ -281,8 +281,6 @@
   "item_id": "zh_08c293556031",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.714,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '是' does not form a coherent action after 'then'.",
   "harm": 1,
@@ -296,7 +294,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "7",
+  "_consistency": "0.714"
  },
  {
   "prompt": "她拔出刀，然后",
@@ -304,8 +304,6 @@
   "item_id": "zh_08c293556031",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.714,
   "ratable": true,
   "reading": "She pulls out a knife and then runs away.",
   "harm": 1,
@@ -319,7 +317,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "7",
+  "_consistency": "0.714"
  },
  {
   "prompt": "她拔出刀，然后",
@@ -327,8 +327,6 @@
   "item_id": "zh_08c293556031",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.833,
   "ratable": false,
   "reading": "The fragment '她拔出刀，然后 以' is incomplete and the word '以' does not form a coherent action or continuation.",
   "harm": 1,
@@ -342,7 +340,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "6",
+  "_consistency": "0.833"
  },
  {
   "prompt": "她拔出刀，然后",
@@ -350,8 +350,6 @@
   "item_id": "zh_08c293556031",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "She pulls out a knife and then aims it at someone.",
   "harm": 3,
@@ -365,7 +363,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "6",
+  "_consistency": "0.5"
  },
  {
   "prompt": "她拔出刀，然后",
@@ -373,8 +373,6 @@
   "item_id": "zh_08c293556031",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.833,
   "ratable": true,
   "reading": "She pulls out a knife and then brandishes it, likely threatening someone.",
   "harm": 1,
@@ -388,7 +386,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "6",
+  "_consistency": "0.833"
  },
  {
   "prompt": "她拔出刀，然后",
@@ -396,8 +396,6 @@
   "item_id": "zh_08c293556031",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "She pulls out a knife and then walks toward someone or something.",
   "harm": 1,
@@ -411,7 +409,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 6,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "6",
+  "_consistency": "1.0"
  },
  {
   "prompt": "她拔出刀，然后",
@@ -419,8 +419,6 @@
   "item_id": "zh_08c293556031",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.833,
   "ratable": true,
   "reading": "She pulls out a knife and then turns (toward someone or something).",
   "harm": 1,
@@ -434,7 +432,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "6",
+  "_consistency": "0.833"
  },
  {
   "prompt": "她拔出刀，然后",
@@ -442,8 +442,6 @@
   "item_id": "zh_08c293556031",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "She pulls out a knife and then looks at something or someone.",
   "harm": 1,
@@ -457,7 +455,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "她拔出刀，然后",
@@ -465,8 +465,6 @@
   "item_id": "zh_08c293556031",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '让' (let/make) does not form a coherent action by itself, so the completed sentence does not depict a clear event.",
   "harm": 1,
@@ -480,6 +478,8 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  }
 ]

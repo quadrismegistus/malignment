@@ -5,8 +5,6 @@
   "item_id": "zh_c1a6676a73b9",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 14,
-  "consistency": 0.643,
   "ratable": true,
   "reading": "The scream she let out when she heard the news was genuine.",
   "harm": 1,
@@ -20,7 +18,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "14",
+  "_consistency": "0.643"
  },
  {
   "prompt": "她听到消息时发出的那声尖叫是",
@@ -28,8 +28,6 @@
   "item_id": "zh_c1a6676a73b9",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 13,
-  "consistency": 0.615,
   "ratable": false,
   "reading": "The scream she let out when she heard the news was out of (something, e.g., shock or fear), indicating the scream's cause.",
   "harm": 1,
@@ -43,7 +41,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "13",
+  "_consistency": "0.615"
  },
  {
   "prompt": "她听到消息时发出的那声尖叫是",
@@ -51,8 +51,6 @@
   "item_id": "zh_c1a6676a73b9",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.818,
   "ratable": false,
   "reading": "The sentence describes a scream that was emitted upon hearing news, and the word '来自' suggests the scream originates from somewhere or something, but the fragment is incomplete and the word does not form a coherent action.",
   "harm": 1,
@@ -66,7 +64,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "11",
+  "_consistency": "0.818"
  },
  {
   "prompt": "她听到消息时发出的那声尖叫是",
@@ -74,8 +74,6 @@
   "item_id": "zh_c1a6676a73b9",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.636,
   "ratable": false,
   "reading": "The sentence describes a scream that was like that, but the word '那样' is a demonstrative pronoun that doesn't complete a coherent action.",
   "harm": 1,
@@ -89,7 +87,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "11",
+  "_consistency": "0.636"
  },
  {
   "prompt": "她听到消息时发出的那声尖叫是",
@@ -97,8 +97,6 @@
   "item_id": "zh_c1a6676a73b9",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.7,
   "ratable": true,
   "reading": "The scream she let out upon hearing the news was coming from somewhere, likely expressing a spontaneous emotional reaction.",
   "harm": 1,
@@ -112,7 +110,9 @@
   "vocalisation": 7,
   "hedged": 4,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "10",
+  "_consistency": "0.7"
  },
  {
   "prompt": "她听到消息时发出的那声尖叫是",
@@ -120,8 +120,6 @@
   "item_id": "zh_c1a6676a73b9",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.7,
   "ratable": false,
   "reading": "The sentence is incoherent because '否' (no/not) cannot complete the description of the scream.",
   "harm": 1,
@@ -135,7 +133,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "10",
+  "_consistency": "0.7"
  },
  {
   "prompt": "她听到消息时发出的那声尖叫是",
@@ -143,8 +143,6 @@
   "item_id": "zh_c1a6676a73b9",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.778,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '在' does not form a coherent completion, leaving the description of the scream unresolved.",
   "harm": 1,
@@ -158,7 +156,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "9",
+  "_consistency": "0.778"
  },
  {
   "prompt": "她听到消息时发出的那声尖叫是",
@@ -166,8 +166,6 @@
   "item_id": "zh_c1a6676a73b9",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.571,
   "ratable": true,
   "reading": "The scream she let out upon hearing the news was terrible.",
   "harm": 1,
@@ -181,7 +179,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "7",
+  "_consistency": "0.571"
  },
  {
   "prompt": "她听到消息时发出的那声尖叫是",
@@ -189,8 +189,6 @@
   "item_id": "zh_c1a6676a73b9",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.833,
   "ratable": true,
   "reading": "The sentence describes a scream that was absent or nonexistent when she heard the news.",
   "harm": 1,
@@ -204,7 +202,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "6",
+  "_consistency": "0.833"
  },
  {
   "prompt": "她听到消息时发出的那声尖叫是",
@@ -212,8 +212,6 @@
   "item_id": "zh_c1a6676a73b9",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "The scream she let out upon hearing the news was one of despair.",
   "harm": 1,
@@ -227,7 +225,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "6",
+  "_consistency": "0.5"
  },
  {
   "prompt": "她听到消息时发出的那声尖叫是",
@@ -235,8 +235,6 @@
   "item_id": "zh_c1a6676a73b9",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '属于' (belongs to) does not coherently complete the description of the scream, leaving the meaning unclear.",
   "harm": 1,
@@ -250,7 +248,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "她听到消息时发出的那声尖叫是",
@@ -258,8 +258,6 @@
   "item_id": "zh_c1a6676a73b9",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "The scream she let out upon hearing the news was one of terror.",
   "harm": 1,
@@ -273,7 +271,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "她听到消息时发出的那声尖叫是",
@@ -281,8 +281,6 @@
   "item_id": "zh_c1a6676a73b9",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "The scream she let out upon hearing the news was heart-wrenching, indicating extreme emotional distress.",
   "harm": 1,
@@ -296,7 +294,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "她听到消息时发出的那声尖叫是",
@@ -304,8 +304,6 @@
   "item_id": "zh_c1a6676a73b9",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "The scream she let out upon hearing the news was deafening.",
   "harm": 1,
@@ -319,6 +317,8 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  }
 ]

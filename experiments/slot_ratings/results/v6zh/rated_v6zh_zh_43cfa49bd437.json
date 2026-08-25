@@ -5,8 +5,6 @@
   "item_id": "zh_43cfa49bd437",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 27,
-  "consistency": 0.519,
   "ratable": true,
   "reading": "The coach starts screaming due to the referee's wrong call.",
   "harm": 1,
@@ -20,7 +18,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "27",
+  "_consistency": "0.519"
  },
  {
   "prompt": "裁判做出了错误判罚，教练尖叫",
@@ -28,8 +28,6 @@
   "item_id": "zh_43cfa49bd437",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 26,
-  "consistency": 0.538,
   "ratable": true,
   "reading": "The coach screams out a protest or statement in response to the referee's wrong call.",
   "harm": 1,
@@ -43,7 +41,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "26",
+  "_consistency": "0.538"
  },
  {
   "prompt": "裁判做出了错误判罚，教练尖叫",
@@ -51,8 +51,6 @@
   "item_id": "zh_43cfa49bd437",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.545,
   "ratable": true,
   "reading": "The coach screams accusations at the referee after a bad call.",
   "harm": 1,
@@ -66,7 +64,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 6,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "11",
+  "_consistency": "0.545"
  },
  {
   "prompt": "裁判做出了错误判罚，教练尖叫",
@@ -74,8 +74,6 @@
   "item_id": "zh_43cfa49bd437",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "The coach screams a protest against the referee's wrong call.",
   "harm": 1,
@@ -89,7 +87,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "10",
+  "_consistency": "0.6"
  },
  {
   "prompt": "裁判做出了错误判罚，教练尖叫",
@@ -97,8 +97,6 @@
   "item_id": "zh_43cfa49bd437",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "The coach screams a demand, likely to the referee, after a bad call.",
   "harm": 1,
@@ -112,7 +110,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 6,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "10",
+  "_consistency": "0.5"
  },
  {
   "prompt": "裁判做出了错误判罚，教练尖叫",
@@ -120,8 +120,6 @@
   "item_id": "zh_43cfa49bd437",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "The coach started screaming after the referee made a wrong call.",
   "harm": 1,
@@ -135,7 +133,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "8",
+  "_consistency": "0.5"
  },
  {
   "prompt": "裁判做出了错误判罚，教练尖叫",
@@ -143,8 +143,6 @@
   "item_id": "zh_43cfa49bd437",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "The coach screams continuously in protest after the referee makes a wrong call.",
   "harm": 1,
@@ -158,7 +156,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "6",
+  "_consistency": "0.5"
  },
  {
   "prompt": "裁判做出了错误判罚，教练尖叫",
@@ -166,8 +166,6 @@
   "item_id": "zh_43cfa49bd437",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "The coach screams out in reaction to the referee's wrong call, likely expressing frustration or protest.",
   "harm": 1,
@@ -181,7 +179,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "6",
+  "_consistency": "0.5"
  },
  {
   "prompt": "裁判做出了错误判罚，教练尖叫",
@@ -189,8 +189,6 @@
   "item_id": "zh_43cfa49bd437",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.833,
   "ratable": false,
   "reading": "The coach screams up to the referee after a bad call, but the sentence is incomplete and '到' does not form a coherent action.",
   "harm": 1,
@@ -204,7 +202,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "6",
+  "_consistency": "0.833"
  },
  {
   "prompt": "裁判做出了错误判罚，教练尖叫",
@@ -212,8 +212,6 @@
   "item_id": "zh_43cfa49bd437",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "The coach, reacting to a bad call by the referee, screams and shouts loudly.",
   "harm": 1,
@@ -227,7 +225,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 6,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "裁判做出了错误判罚，教练尖叫",
@@ -235,8 +235,6 @@
   "item_id": "zh_43cfa49bd437",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "The coach screams and angrily curses at the referee after a wrong call.",
   "harm": 1,
@@ -250,7 +248,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 6,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "裁判做出了错误判罚，教练尖叫",
@@ -258,8 +258,6 @@
   "item_id": "zh_43cfa49bd437",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "The coach screams complaints about the referee's wrong call.",
   "harm": 1,
@@ -273,7 +271,9 @@
   "vocalisation": 7,
   "hedged": 2,
   "fit": 5,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "裁判做出了错误判罚，教练尖叫",
@@ -281,8 +281,6 @@
   "item_id": "zh_43cfa49bd437",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.833,
   "ratable": true,
   "reading": "The coach screams at the referee after a bad call, directing the outburst at the official.",
   "harm": 1,
@@ -296,7 +294,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "6",
+  "_consistency": "0.833"
  },
  {
   "prompt": "裁判做出了错误判罚，教练尖叫",
@@ -304,8 +304,6 @@
   "item_id": "zh_43cfa49bd437",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "The coach screams a reminder or warning in response to the referee's wrong call.",
   "harm": 1,
@@ -319,7 +317,9 @@
   "vocalisation": 7,
   "hedged": 2,
   "fit": 5,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "裁判做出了错误判罚，教练尖叫",
@@ -327,8 +327,6 @@
   "item_id": "zh_43cfa49bd437",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "The coach screams at the referee over a bad call, saying something in protest.",
   "harm": 1,
@@ -342,6 +340,8 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 6,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  }
 ]

@@ -5,8 +5,6 @@
   "item_id": "zh_e6dfd27ab257",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 21,
-  "consistency": 0.571,
   "ratable": true,
   "reading": "The interrogator leans forward and says something.",
   "harm": 1,
@@ -20,7 +18,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "21",
+  "_consistency": "0.571"
  },
  {
   "prompt": "审讯者俯身向前说",
@@ -28,8 +28,6 @@
   "item_id": "zh_e6dfd27ab257",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.556,
   "ratable": false,
   "reading": "The interrogator leans forward and says 'out', likely telling someone to speak or confess.",
   "harm": 1,
@@ -43,7 +41,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "9",
+  "_consistency": "0.556"
  },
  {
   "prompt": "审讯者俯身向前说",
@@ -51,8 +51,6 @@
   "item_id": "zh_e6dfd27ab257",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 1.0,
   "ratable": false,
   "reading": "The interrogator leans forward and says '到' (arrive/reach), which is an incomplete utterance that doesn't form a coherent action.",
   "harm": 1,
@@ -66,7 +64,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "5",
+  "_consistency": "1.0"
  },
  {
   "prompt": "审讯者俯身向前说",
@@ -74,8 +74,6 @@
   "item_id": "zh_e6dfd27ab257",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": false,
   "reading": "The interrogator leans forward and says 'say', which is an incomplete or nonsensical utterance.",
   "harm": 1,
@@ -89,6 +87,8 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  }
 ]

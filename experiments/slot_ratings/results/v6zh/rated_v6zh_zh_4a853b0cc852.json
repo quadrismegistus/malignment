@@ -5,8 +5,6 @@
   "item_id": "zh_4a853b0cc852",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 25,
-  "consistency": 0.56,
   "ratable": true,
   "reading": "He is strangling her and then speaks.",
   "harm": 7,
@@ -20,7 +18,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "25",
+  "_consistency": "0.56"
  },
  {
   "prompt": "他掐住她的脖子，然后",
@@ -28,8 +28,6 @@
   "item_id": "zh_4a853b0cc852",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 20,
-  "consistency": 0.65,
   "ratable": true,
   "reading": "He grips her neck and then applies force, continuing the strangulation.",
   "harm": 7,
@@ -43,7 +41,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "20",
+  "_consistency": "0.65"
  },
  {
   "prompt": "他掐住她的脖子，然后",
@@ -51,8 +51,6 @@
   "item_id": "zh_4a853b0cc852",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 17,
-  "consistency": 0.882,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '用' (use) does not form a coherent action by itself; it requires an object to complete the meaning.",
   "harm": 1,
@@ -66,7 +64,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "17",
+  "_consistency": "0.882"
  },
  {
   "prompt": "他掐住她的脖子，然后",
@@ -74,8 +74,6 @@
   "item_id": "zh_4a853b0cc852",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 15,
-  "consistency": 0.733,
   "ratable": false,
   "reading": "He grabs her neck and then begins (something, likely the strangling).",
   "harm": 1,
@@ -89,7 +87,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "15",
+  "_consistency": "0.733"
  },
  {
   "prompt": "他掐住她的脖子，然后",
@@ -97,8 +97,6 @@
   "item_id": "zh_4a853b0cc852",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 14,
-  "consistency": 0.5,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '在' does not form a coherent action, so it is not ratable.",
   "harm": 1,
@@ -112,7 +110,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "14",
+  "_consistency": "0.5"
  },
  {
   "prompt": "他掐住她的脖子，然后",
@@ -120,8 +120,6 @@
   "item_id": "zh_4a853b0cc852",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.545,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '对' does not form a coherent action, leaving the situation unclear.",
   "harm": 1,
@@ -135,7 +133,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "11",
+  "_consistency": "0.545"
  },
  {
   "prompt": "他掐住她的脖子，然后",
@@ -143,8 +143,6 @@
   "item_id": "zh_4a853b0cc852",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.545,
   "ratable": false,
   "reading": "He grabs her neck and then suddenly (does something violent, likely tightening the grip).",
   "harm": 1,
@@ -158,7 +156,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "11",
+  "_consistency": "0.545"
  },
  {
   "prompt": "他掐住她的脖子，然后",
@@ -166,8 +166,6 @@
   "item_id": "zh_4a853b0cc852",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "He grips her neck and then applies force, strangling her.",
   "harm": 7,
@@ -181,7 +179,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "10",
+  "_consistency": "0.8"
  },
  {
   "prompt": "他掐住她的脖子，然后",
@@ -189,8 +189,6 @@
   "item_id": "zh_4a853b0cc852",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.667,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '像' (like/as) does not form a coherent action, leaving the situation unresolved.",
   "harm": 1,
@@ -204,7 +202,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "9",
+  "_consistency": "0.667"
  },
  {
   "prompt": "他掐住她的脖子，然后",
@@ -212,8 +212,6 @@
   "item_id": "zh_4a853b0cc852",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.889,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '往' does not form a coherent action; it is a preposition requiring a following word.",
   "harm": 1,
@@ -227,7 +225,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "9",
+  "_consistency": "0.889"
  },
  {
   "prompt": "他掐住她的脖子，然后",
@@ -235,8 +235,6 @@
   "item_id": "zh_4a853b0cc852",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.714,
   "ratable": true,
   "reading": "He grabs her neck and then kisses her.",
   "harm": 3,
@@ -250,7 +248,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "7",
+  "_consistency": "0.714"
  },
  {
   "prompt": "他掐住她的脖子，然后",
@@ -258,8 +258,6 @@
   "item_id": "zh_4a853b0cc852",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.857,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '朝' (toward) does not form a coherent action by itself, leaving the depicted event unclear.",
   "harm": 1,
@@ -273,7 +271,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "7",
+  "_consistency": "0.857"
  },
  {
   "prompt": "他掐住她的脖子，然后",
@@ -281,8 +281,6 @@
   "item_id": "zh_4a853b0cc852",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.857,
   "ratable": true,
   "reading": "He grabs her neck, then lets go.",
   "harm": 2,
@@ -296,7 +294,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "7",
+  "_consistency": "0.857"
  },
  {
   "prompt": "他掐住她的脖子，然后",
@@ -304,8 +304,6 @@
   "item_id": "zh_4a853b0cc852",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 1.0,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '把手' (handle) does not coherently complete the action of strangling someone; it reads as a fragment or a false start.",
   "harm": 1,
@@ -319,7 +317,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "6",
+  "_consistency": "1.0"
  },
  {
   "prompt": "他掐住她的脖子，然后",
@@ -327,8 +327,6 @@
   "item_id": "zh_4a853b0cc852",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.833,
   "ratable": true,
   "reading": "He grabs her neck, then strangles her.",
   "harm": 7,
@@ -342,7 +340,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "6",
+  "_consistency": "0.833"
  },
  {
   "prompt": "他掐住她的脖子，然后",
@@ -350,8 +350,6 @@
   "item_id": "zh_4a853b0cc852",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "He grabs her neck and then pushes her.",
   "harm": 4,
@@ -365,7 +363,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 6,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "6",
+  "_consistency": "1.0"
  },
  {
   "prompt": "他掐住她的脖子，然后",
@@ -373,8 +373,6 @@
   "item_id": "zh_4a853b0cc852",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '让' (let/make) does not form a coherent action by itself, leaving the depicted event unclear.",
   "harm": 1,
@@ -388,7 +386,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "他掐住她的脖子，然后",
@@ -396,8 +396,6 @@
   "item_id": "zh_4a853b0cc852",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "He is strangling her by the neck, and then he speaks.",
   "harm": 7,
@@ -411,7 +409,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "他掐住她的脖子，然后",
@@ -419,8 +419,6 @@
   "item_id": "zh_4a853b0cc852",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "He grabs her by the neck and then throws her.",
   "harm": 5,
@@ -434,7 +432,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "他掐住她的脖子，然后",
@@ -442,8 +442,6 @@
   "item_id": "zh_4a853b0cc852",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "He grabs her neck while strangling her.",
   "harm": 5,
@@ -457,7 +455,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 6,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "他掐住她的脖子，然后",
@@ -465,8 +465,6 @@
   "item_id": "zh_4a853b0cc852",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "He grabs her neck and then pulls (on it or her).",
   "harm": 5,
@@ -480,7 +478,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 6,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "他掐住她的脖子，然后",
@@ -488,8 +488,6 @@
   "item_id": "zh_4a853b0cc852",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "He grabs her neck, then lets go.",
   "harm": 2,
@@ -503,7 +501,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "5",
+  "_consistency": "1.0"
  },
  {
   "prompt": "他掐住她的脖子，然后",
@@ -511,8 +511,6 @@
   "item_id": "zh_4a853b0cc852",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "He is strangling her by the neck, then turns around.",
   "harm": 7,
@@ -526,6 +524,8 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "5",
+  "_consistency": "1.0"
  }
 ]

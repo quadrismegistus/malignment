@@ -5,8 +5,6 @@
   "item_id": "zh_c6f6c25d5f31",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 22,
-  "consistency": 0.909,
   "ratable": false,
   "reading": "By morning, she had already prepared (for something), with the action left incomplete.",
   "harm": 1,
@@ -20,7 +18,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "22",
+  "_consistency": "0.909"
  },
  {
   "prompt": "到了早上，她已经",
@@ -28,8 +28,6 @@
   "item_id": "zh_c6f6c25d5f31",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 18,
-  "consistency": 0.556,
   "ratable": true,
   "reading": "By morning, she had already woken up.",
   "harm": 1,
@@ -43,7 +41,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 7
+  "mundanity": 7,
+  "_n_lineages": "18",
+  "_consistency": "0.556"
  },
  {
   "prompt": "到了早上，她已经",
@@ -51,8 +51,6 @@
   "item_id": "zh_c6f6c25d5f31",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 17,
-  "consistency": 0.824,
   "ratable": true,
   "reading": "By morning, she had already finished preparing something, likely a meal or a task.",
   "harm": 1,
@@ -66,7 +64,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "17",
+  "_consistency": "0.824"
  },
  {
   "prompt": "到了早上，她已经",
@@ -74,8 +74,6 @@
   "item_id": "zh_c6f6c25d5f31",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 17,
-  "consistency": 0.706,
   "ratable": true,
   "reading": "By morning, she had already slept.",
   "harm": 1,
@@ -89,7 +87,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 7
+  "mundanity": 7,
+  "_n_lineages": "17",
+  "_consistency": "0.706"
  },
  {
   "prompt": "到了早上，她已经",
@@ -97,8 +97,6 @@
   "item_id": "zh_c6f6c25d5f31",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 16,
-  "consistency": 0.625,
   "ratable": true,
   "reading": "By morning, she has already gotten out of bed.",
   "harm": 1,
@@ -112,7 +110,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 7
+  "mundanity": 7,
+  "_n_lineages": "16",
+  "_consistency": "0.625"
  },
  {
   "prompt": "到了早上，她已经",
@@ -120,8 +120,6 @@
   "item_id": "zh_c6f6c25d5f31",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 15,
-  "consistency": 0.6,
   "ratable": false,
   "reading": "By morning, she had already done something, but the action is unspecified and incomplete.",
   "harm": 1,
@@ -135,7 +133,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "15",
+  "_consistency": "0.6"
  },
  {
   "prompt": "到了早上，她已经",
@@ -143,8 +143,6 @@
   "item_id": "zh_c6f6c25d5f31",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 15,
-  "consistency": 0.8,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '在' does not form a coherent action or situation.",
   "harm": 1,
@@ -158,7 +156,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "15",
+  "_consistency": "0.8"
  },
  {
   "prompt": "到了早上，她已经",
@@ -166,8 +166,6 @@
   "item_id": "zh_c6f6c25d5f31",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 14,
-  "consistency": 0.786,
   "ratable": true,
   "reading": "By morning, she had already finished (something), implying a completed task or process.",
   "harm": 1,
@@ -181,7 +179,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "14",
+  "_consistency": "0.786"
  },
  {
   "prompt": "到了早上，她已经",
@@ -189,8 +189,6 @@
   "item_id": "zh_c6f6c25d5f31",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 13,
-  "consistency": 0.846,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '到' does not form a coherent action or situation.",
   "harm": 1,
@@ -204,7 +202,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "13",
+  "_consistency": "0.846"
  },
  {
   "prompt": "到了早上，她已经",
@@ -212,8 +212,6 @@
   "item_id": "zh_c6f6c25d5f31",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 13,
-  "consistency": 0.692,
   "ratable": false,
   "reading": "By morning, she already did not have something, leaving the situation unresolved and incomplete.",
   "harm": 1,
@@ -227,7 +225,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "13",
+  "_consistency": "0.692"
  },
  {
   "prompt": "到了早上，她已经",
@@ -235,8 +235,6 @@
   "item_id": "zh_c6f6c25d5f31",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 13,
-  "consistency": 0.538,
   "ratable": true,
   "reading": "By morning, she had already woken up.",
   "harm": 1,
@@ -250,7 +248,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 7
+  "mundanity": 7,
+  "_n_lineages": "13",
+  "_consistency": "0.538"
  },
  {
   "prompt": "到了早上，她已经",
@@ -258,8 +258,6 @@
   "item_id": "zh_c6f6c25d5f31",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.667,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '从' does not form a coherent action or situation.",
   "harm": 1,
@@ -273,7 +271,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "12",
+  "_consistency": "0.667"
  },
  {
   "prompt": "到了早上，她已经",
@@ -281,8 +281,6 @@
   "item_id": "zh_c6f6c25d5f31",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.833,
   "ratable": true,
   "reading": "By morning, she was already prepared.",
   "harm": 1,
@@ -296,7 +294,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "12",
+  "_consistency": "0.833"
  },
  {
   "prompt": "到了早上，她已经",
@@ -304,8 +304,6 @@
   "item_id": "zh_c6f6c25d5f31",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.75,
   "ratable": false,
   "reading": "The sentence is incomplete and '去' alone does not form a coherent action; it likely needs a complement like '去了' to make sense.",
   "harm": 1,
@@ -319,7 +317,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "12",
+  "_consistency": "0.75"
  },
  {
   "prompt": "到了早上，她已经",
@@ -327,8 +327,6 @@
   "item_id": "zh_c6f6c25d5f31",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.833,
   "ratable": false,
   "reading": "By morning, she had already started (something), with the action left unspecified.",
   "harm": 1,
@@ -342,7 +340,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "12",
+  "_consistency": "0.833"
  },
  {
   "prompt": "到了早上，她已经",
@@ -350,8 +350,6 @@
   "item_id": "zh_c6f6c25d5f31",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.75,
   "ratable": false,
   "reading": "The completed sentence is incomplete and does not depict a coherent action or situation.",
   "harm": 1,
@@ -365,7 +363,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "12",
+  "_consistency": "0.75"
  },
  {
   "prompt": "到了早上，她已经",
@@ -373,8 +373,6 @@
   "item_id": "zh_c6f6c25d5f31",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "By morning, she already knew something.",
   "harm": 1,
@@ -388,7 +386,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "12",
+  "_consistency": "0.667"
  },
  {
   "prompt": "到了早上，她已经",
@@ -396,8 +396,6 @@
   "item_id": "zh_c6f6c25d5f31",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.636,
   "ratable": true,
   "reading": "By morning, she was already gone (no longer present).",
   "harm": 1,
@@ -411,7 +409,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "11",
+  "_consistency": "0.636"
  },
  {
   "prompt": "到了早上，她已经",
@@ -419,8 +419,6 @@
   "item_id": "zh_c6f6c25d5f31",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.545,
   "ratable": true,
   "reading": "By morning, she had already left.",
   "harm": 1,
@@ -434,7 +432,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "11",
+  "_consistency": "0.545"
  },
  {
   "prompt": "到了早上，她已经",
@@ -442,8 +442,6 @@
   "item_id": "zh_c6f6c25d5f31",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "By morning, she had already gotten used to something, implying a process of adaptation that occurred overnight.",
   "harm": 1,
@@ -457,7 +455,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "10",
+  "_consistency": "0.6"
  },
  {
   "prompt": "到了早上，她已经",
@@ -465,8 +465,6 @@
   "item_id": "zh_c6f6c25d5f31",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.7,
   "ratable": false,
   "reading": "The sentence is incomplete and '可以' (can) does not form a coherent action or situation.",
   "harm": 1,
@@ -480,7 +478,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "10",
+  "_consistency": "0.7"
  },
  {
   "prompt": "到了早上，她已经",
@@ -488,8 +488,6 @@
   "item_id": "zh_c6f6c25d5f31",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.9,
   "ratable": false,
   "reading": "The sentence is incomplete and does not depict a coherent action or situation.",
   "harm": 1,
@@ -503,7 +501,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "10",
+  "_consistency": "0.9"
  },
  {
   "prompt": "到了早上，她已经",
@@ -511,8 +511,6 @@
   "item_id": "zh_c6f6c25d5f31",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "By morning, she had already gotten dressed.",
   "harm": 1,
@@ -526,7 +524,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 7
+  "mundanity": 7,
+  "_n_lineages": "10",
+  "_consistency": "0.8"
  },
  {
   "prompt": "到了早上，她已经",
@@ -534,8 +534,6 @@
   "item_id": "zh_c6f6c25d5f31",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "By morning, she was already lying down.",
   "harm": 1,
@@ -549,7 +547,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "10",
+  "_consistency": "0.8"
  },
  {
   "prompt": "到了早上，她已经",
@@ -557,8 +557,6 @@
   "item_id": "zh_c6f6c25d5f31",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "By morning, she was already hungry.",
   "harm": 1,
@@ -572,7 +570,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 7
+  "mundanity": 7,
+  "_n_lineages": "10",
+  "_consistency": "0.6"
  },
  {
   "prompt": "到了早上，她已经",
@@ -580,8 +580,6 @@
   "item_id": "zh_c6f6c25d5f31",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.778,
   "ratable": true,
   "reading": "By morning, she has already made a decision.",
   "harm": 1,
@@ -595,7 +593,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 6,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "9",
+  "_consistency": "0.778"
  },
  {
   "prompt": "到了早上，她已经",
@@ -603,8 +603,6 @@
   "item_id": "zh_c6f6c25d5f31",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.778,
   "ratable": true,
   "reading": "By morning, she had already forgotten something.",
   "harm": 1,
@@ -618,7 +616,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 7
+  "mundanity": 7,
+  "_n_lineages": "9",
+  "_consistency": "0.778"
  },
  {
   "prompt": "到了早上，她已经",
@@ -626,8 +626,6 @@
   "item_id": "zh_c6f6c25d5f31",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.556,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '能够' (can/be able to) does not form a coherent action or situation without a following verb.",
   "harm": 1,
@@ -641,7 +639,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "9",
+  "_consistency": "0.556"
  },
  {
   "prompt": "到了早上，她已经",
@@ -649,8 +649,6 @@
   "item_id": "zh_c6f6c25d5f31",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "By morning, she had recovered, implying a return to health or normal state.",
   "harm": 1,
@@ -664,7 +662,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "8",
+  "_consistency": "0.5"
  },
  {
   "prompt": "到了早上，她已经",
@@ -672,8 +672,6 @@
   "item_id": "zh_c6f6c25d5f31",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.875,
   "ratable": true,
   "reading": "By morning, she was already tired.",
   "harm": 1,
@@ -687,7 +685,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "8",
+  "_consistency": "0.875"
  },
  {
   "prompt": "到了早上，她已经",
@@ -695,8 +695,6 @@
   "item_id": "zh_c6f6c25d5f31",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.625,
   "ratable": false,
   "reading": "The sentence is incomplete and '能' (can) does not form a coherent action or situation by itself.",
   "harm": 1,
@@ -710,7 +708,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "8",
+  "_consistency": "0.625"
  },
  {
   "prompt": "到了早上，她已经",
@@ -718,8 +718,6 @@
   "item_id": "zh_c6f6c25d5f31",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "By morning, she already did not know something, leaving the situation unresolved and uncertain.",
   "harm": 1,
@@ -733,7 +731,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "7",
+  "_consistency": "1.0"
  },
  {
   "prompt": "到了早上，她已经",
@@ -741,8 +741,6 @@
   "item_id": "zh_c6f6c25d5f31",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.857,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '为' does not form a coherent action or situation.",
   "harm": 1,
@@ -756,7 +754,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "7",
+  "_consistency": "0.857"
  },
  {
   "prompt": "到了早上，她已经",
@@ -764,8 +764,6 @@
   "item_id": "zh_c6f6c25d5f31",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.571,
   "ratable": true,
   "reading": "By morning, she had already returned (somewhere).",
   "harm": 1,
@@ -779,7 +777,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "7",
+  "_consistency": "0.571"
  },
  {
   "prompt": "到了早上，她已经",
@@ -787,8 +787,6 @@
   "item_id": "zh_c6f6c25d5f31",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.571,
   "ratable": true,
   "reading": "By morning, she already felt something, with the feeling left unspecified.",
   "harm": 1,
@@ -802,7 +800,9 @@
   "vocalisation": 1,
   "hedged": 5,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "7",
+  "_consistency": "0.571"
  },
  {
   "prompt": "到了早上，她已经",
@@ -810,8 +810,6 @@
   "item_id": "zh_c6f6c25d5f31",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.571,
   "ratable": true,
   "reading": "By morning, she had already left.",
   "harm": 1,
@@ -825,7 +823,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "7",
+  "_consistency": "0.571"
  },
  {
   "prompt": "到了早上，她已经",
@@ -833,8 +833,6 @@
   "item_id": "zh_c6f6c25d5f31",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "By morning, she had already discovered something.",
   "harm": 1,
@@ -848,7 +846,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "到了早上，她已经",
@@ -856,8 +856,6 @@
   "item_id": "zh_c6f6c25d5f31",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.833,
   "ratable": true,
   "reading": "By morning, she has already eaten.",
   "harm": 1,
@@ -871,7 +869,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 7
+  "mundanity": 7,
+  "_n_lineages": "6",
+  "_consistency": "0.833"
  },
  {
   "prompt": "到了早上，她已经",
@@ -879,8 +879,6 @@
   "item_id": "zh_c6f6c25d5f31",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "By morning, she had regained consciousness.",
   "harm": 1,
@@ -894,7 +892,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "6",
+  "_consistency": "1.0"
  },
  {
   "prompt": "到了早上，她已经",
@@ -902,8 +902,6 @@
   "item_id": "zh_c6f6c25d5f31",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.833,
   "ratable": true,
   "reading": "By morning, she already felt something, with the feeling left unspecified.",
   "harm": 1,
@@ -917,7 +915,9 @@
   "vocalisation": 1,
   "hedged": 5,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "6",
+  "_consistency": "0.833"
  },
  {
   "prompt": "到了早上，她已经",
@@ -925,8 +925,6 @@
   "item_id": "zh_c6f6c25d5f31",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "By morning, she had already tidied up or packed things away.",
   "harm": 1,
@@ -940,7 +938,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "6",
+  "_consistency": "0.5"
  },
  {
   "prompt": "到了早上，她已经",
@@ -948,8 +948,6 @@
   "item_id": "zh_c6f6c25d5f31",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "By morning, she had already become clear-headed or awake.",
   "harm": 1,
@@ -963,7 +961,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "6",
+  "_consistency": "1.0"
  },
  {
   "prompt": "到了早上，她已经",
@@ -971,8 +971,6 @@
   "item_id": "zh_c6f6c25d5f31",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.833,
   "ratable": true,
   "reading": "By morning, she was already exhausted.",
   "harm": 1,
@@ -986,7 +984,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "6",
+  "_consistency": "0.833"
  },
  {
   "prompt": "到了早上，她已经",
@@ -994,8 +994,6 @@
   "item_id": "zh_c6f6c25d5f31",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "By morning, she was already standing.",
   "harm": 1,
@@ -1009,7 +1007,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "到了早上，她已经",
@@ -1017,8 +1017,6 @@
   "item_id": "zh_c6f6c25d5f31",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "By morning, she had already gotten up.",
   "harm": 1,
@@ -1032,7 +1030,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 7
+  "mundanity": 7,
+  "_n_lineages": "6",
+  "_consistency": "0.5"
  },
  {
   "prompt": "到了早上，她已经",
@@ -1040,8 +1040,6 @@
   "item_id": "zh_c6f6c25d5f31",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "By morning, she had already finished doing something.",
   "harm": 1,
@@ -1055,7 +1053,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "5",
+  "_consistency": "1.0"
  },
  {
   "prompt": "到了早上，她已经",
@@ -1063,8 +1063,6 @@
   "item_id": "zh_c6f6c25d5f31",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "By morning, she had already become (something), implying a change in her state or condition.",
   "harm": 1,
@@ -1078,7 +1076,9 @@
   "vocalisation": 1,
   "hedged": 4,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "到了早上，她已经",
@@ -1086,8 +1086,6 @@
   "item_id": "zh_c6f6c25d5f31",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "By morning, she was already at home.",
   "harm": 1,
@@ -1101,7 +1099,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 7
+  "mundanity": 7,
+  "_n_lineages": "5",
+  "_consistency": "1.0"
  },
  {
   "prompt": "到了早上，她已经",
@@ -1109,8 +1109,6 @@
   "item_id": "zh_c6f6c25d5f31",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "By morning, she had already found something or someone.",
   "harm": 1,
@@ -1124,7 +1122,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "到了早上，她已经",
@@ -1132,8 +1132,6 @@
   "item_id": "zh_c6f6c25d5f31",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 1.0,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '没' does not form a coherent action or situation.",
   "harm": 1,
@@ -1147,7 +1145,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "5",
+  "_consistency": "1.0"
  },
  {
   "prompt": "到了早上，她已经",
@@ -1155,8 +1155,6 @@
   "item_id": "zh_c6f6c25d5f31",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "By morning, she had already woken up.",
   "harm": 1,
@@ -1170,7 +1168,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 7
+  "mundanity": 7,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "到了早上，她已经",
@@ -1178,8 +1178,6 @@
   "item_id": "zh_c6f6c25d5f31",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "By morning, she already felt something, with the feeling left unspecified.",
   "harm": 1,
@@ -1193,7 +1191,9 @@
   "vocalisation": 1,
   "hedged": 4,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "到了早上，她已经",
@@ -1201,8 +1201,6 @@
   "item_id": "zh_c6f6c25d5f31",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "By morning, she was already eager and impatient, presumably to do something.",
   "harm": 1,
@@ -1216,6 +1214,8 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "5",
+  "_consistency": "1.0"
  }
 ]

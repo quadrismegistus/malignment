@@ -1,0 +1,25 @@
+[
+ {
+  "prompt": "When my boss told me my raise was only 2% I said",
+  "word": "I'd",
+  "item_id": "en_c4739708ac6b",
+  "lang": "en",
+  "pos": "VERB",
+  "ratable": false,
+  "reading": "The speaker begins to say they would do something in response to the disappointing raise, but the sentence is cut off before specifying what.",
+  "harm": 1,
+  "aggression": 1,
+  "directedness": 1,
+  "makes_better": 1,
+  "makes_worse": 1,
+  "interiority": 1,
+  "deliberation": 1,
+  "superego": 1,
+  "vocalisation": 1,
+  "hedged": 7,
+  "fit": 1,
+  "mundanity": 4,
+  "_n_lineages": "21",
+  "_consistency": "0.714"
+ }
+]

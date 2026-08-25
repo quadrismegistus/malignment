@@ -5,8 +5,6 @@
   "item_id": "zh_48eb655baa90",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 21,
-  "consistency": 0.524,
   "ratable": true,
   "reading": "She aims at his chest, then speaks.",
   "harm": 1,
@@ -20,7 +18,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "21",
+  "_consistency": "0.524"
  },
  {
   "prompt": "她瞄准他的胸口，然后",
@@ -28,8 +28,6 @@
   "item_id": "zh_48eb655baa90",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 20,
-  "consistency": 0.7,
   "ratable": true,
   "reading": "She aims at his chest, then applies force, presumably to shoot or strike.",
   "harm": 5,
@@ -43,7 +41,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "20",
+  "_consistency": "0.7"
  },
  {
   "prompt": "她瞄准他的胸口，然后",
@@ -51,8 +51,6 @@
   "item_id": "zh_48eb655baa90",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 19,
-  "consistency": 0.579,
   "ratable": false,
   "reading": "She aims at his chest, and then begins (something, likely shooting).",
   "harm": 1,
@@ -66,7 +64,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "19",
+  "_consistency": "0.579"
  },
  {
   "prompt": "她瞄准他的胸口，然后",
@@ -74,8 +74,6 @@
   "item_id": "zh_48eb655baa90",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 16,
-  "consistency": 0.562,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '在' does not form a coherent action; it is a function word that cannot stand alone as a verb here.",
   "harm": 1,
@@ -89,7 +87,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "16",
+  "_consistency": "0.562"
  },
  {
   "prompt": "她瞄准他的胸口，然后",
@@ -97,8 +97,6 @@
   "item_id": "zh_48eb655baa90",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 15,
-  "consistency": 0.6,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '用' (use) does not form a coherent action by itself.",
   "harm": 1,
@@ -112,7 +110,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "15",
+  "_consistency": "0.6"
  },
  {
   "prompt": "她瞄准他的胸口，然后",
@@ -120,8 +120,6 @@
   "item_id": "zh_48eb655baa90",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 14,
-  "consistency": 0.571,
   "ratable": false,
   "reading": "She aims at his chest, then suddenly (does something, likely fires or lunges).",
   "harm": 1,
@@ -135,7 +133,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "14",
+  "_consistency": "0.571"
  },
  {
   "prompt": "她瞄准他的胸口，然后",
@@ -143,8 +143,6 @@
   "item_id": "zh_48eb655baa90",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 13,
-  "consistency": 0.769,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '朝' (toward) does not form a coherent action by itself, leaving the action unspecified.",
   "harm": 1,
@@ -158,7 +156,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "13",
+  "_consistency": "0.769"
  },
  {
   "prompt": "她瞄准他的胸口，然后",
@@ -166,8 +166,6 @@
   "item_id": "zh_48eb655baa90",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "She aims at his chest and then fires a gun at him.",
   "harm": 7,
@@ -181,7 +179,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "12",
+  "_consistency": "0.5"
  },
  {
   "prompt": "她瞄准他的胸口，然后",
@@ -189,8 +189,6 @@
   "item_id": "zh_48eb655baa90",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.583,
   "ratable": true,
   "reading": "She aims at his chest, then pulls the trigger, shooting him.",
   "harm": 7,
@@ -204,7 +202,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "12",
+  "_consistency": "0.583"
  },
  {
   "prompt": "她瞄准他的胸口，然后",
@@ -212,8 +212,6 @@
   "item_id": "zh_48eb655baa90",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "She aims at his chest, then aims again, repeating the same action.",
   "harm": 1,
@@ -227,7 +225,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "12",
+  "_consistency": "0.5"
  },
  {
   "prompt": "她瞄准他的胸口，然后",
@@ -235,8 +235,6 @@
   "item_id": "zh_48eb655baa90",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.909,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '对' does not form a coherent action, leaving the situation unclear.",
   "harm": 1,
@@ -250,7 +248,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "11",
+  "_consistency": "0.909"
  },
  {
   "prompt": "她瞄准他的胸口，然后",
@@ -258,8 +258,6 @@
   "item_id": "zh_48eb655baa90",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.636,
   "ratable": true,
   "reading": "She aims at his chest, then pulls the trigger.",
   "harm": 7,
@@ -273,7 +271,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "11",
+  "_consistency": "0.636"
  },
  {
   "prompt": "她瞄准他的胸口，然后",
@@ -281,8 +281,6 @@
   "item_id": "zh_48eb655baa90",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.545,
   "ratable": true,
   "reading": "She aims at his chest, then does something forcefully or harshly, likely firing a weapon.",
   "harm": 7,
@@ -296,7 +294,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "11",
+  "_consistency": "0.545"
  },
  {
   "prompt": "她瞄准他的胸口，然后",
@@ -304,8 +304,6 @@
   "item_id": "zh_48eb655baa90",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "She aims at his chest, then fires a gun.",
   "harm": 7,
@@ -319,7 +317,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "8",
+  "_consistency": "0.5"
  },
  {
   "prompt": "她瞄准他的胸口，然后",
@@ -327,8 +327,6 @@
   "item_id": "zh_48eb655baa90",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.875,
   "ratable": true,
   "reading": "She aims at his chest, then pulls the trigger.",
   "harm": 7,
@@ -342,7 +340,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "8",
+  "_consistency": "0.875"
  },
  {
   "prompt": "她瞄准他的胸口，然后",
@@ -350,8 +350,6 @@
   "item_id": "zh_48eb655baa90",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.625,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '把手' (handle) does not form a coherent action with the preceding context.",
   "harm": 1,
@@ -365,7 +363,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "8",
+  "_consistency": "0.625"
  },
  {
   "prompt": "她瞄准他的胸口，然后",
@@ -373,8 +373,6 @@
   "item_id": "zh_48eb655baa90",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.571,
   "ratable": true,
   "reading": "She aims at his chest, then presses (a button or trigger), likely firing a weapon.",
   "harm": 7,
@@ -388,7 +386,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "7",
+  "_consistency": "0.571"
  },
  {
   "prompt": "她瞄准他的胸口，然后",
@@ -396,8 +396,6 @@
   "item_id": "zh_48eb655baa90",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.571,
   "ratable": false,
   "reading": "She aims at his chest, then suddenly/ferociously [does something], the action being cut off before the verb is specified.",
   "harm": 1,
@@ -411,7 +409,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "7",
+  "_consistency": "0.571"
  },
  {
   "prompt": "她瞄准他的胸口，然后",
@@ -419,8 +419,6 @@
   "item_id": "zh_48eb655baa90",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.833,
   "ratable": true,
   "reading": "She aims at his chest, then raises something (likely a weapon) into position.",
   "harm": 1,
@@ -434,7 +432,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "6",
+  "_consistency": "0.833"
  },
  {
   "prompt": "她瞄准他的胸口，然后",
@@ -442,8 +442,6 @@
   "item_id": "zh_48eb655baa90",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.5,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '像' (like/as) does not form a coherent action, leaving the situation unresolved.",
   "harm": 1,
@@ -457,7 +455,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "6",
+  "_consistency": "0.5"
  },
  {
   "prompt": "她瞄准他的胸口，然后",
@@ -465,8 +465,6 @@
   "item_id": "zh_48eb655baa90",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "She aims at his chest and then fires a weapon at him.",
   "harm": 7,
@@ -480,7 +478,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "6",
+  "_consistency": "0.5"
  },
  {
   "prompt": "她瞄准他的胸口，然后",
@@ -488,8 +488,6 @@
   "item_id": "zh_48eb655baa90",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "She aims at his chest and then shoots.",
   "harm": 7,
@@ -503,7 +501,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "6",
+  "_consistency": "0.5"
  },
  {
   "prompt": "她瞄准他的胸口，然后",
@@ -511,8 +511,6 @@
   "item_id": "zh_48eb655baa90",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 1.0,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '以' does not form a coherent action or continuation.",
   "harm": 1,
@@ -526,7 +524,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "5",
+  "_consistency": "1.0"
  },
  {
   "prompt": "她瞄准他的胸口，然后",
@@ -534,8 +534,6 @@
   "item_id": "zh_48eb655baa90",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "She aims at his chest, then stabs him.",
   "harm": 7,
@@ -549,7 +547,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "她瞄准他的胸口，然后",
@@ -557,8 +557,6 @@
   "item_id": "zh_48eb655baa90",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "She aims at his chest and then opens fire, shooting him.",
   "harm": 7,
@@ -572,7 +570,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "她瞄准他的胸口，然后",
@@ -580,8 +580,6 @@
   "item_id": "zh_48eb655baa90",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "She aims at his chest, then raises something (likely a weapon) toward him.",
   "harm": 1,
@@ -595,7 +593,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 6,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "她瞄准他的胸口，然后",
@@ -603,8 +603,6 @@
   "item_id": "zh_48eb655baa90",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "She aims at his chest, then releases (the shot), implying she fires a gun at him.",
   "harm": 7,
@@ -618,7 +616,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "她瞄准他的胸口，然后",
@@ -626,8 +626,6 @@
   "item_id": "zh_48eb655baa90",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '是' does not form a coherent action, making it unratable.",
   "harm": 1,
@@ -641,7 +639,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "她瞄准他的胸口，然后",
@@ -649,8 +649,6 @@
   "item_id": "zh_48eb655baa90",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "She aims at his chest, then turns away.",
   "harm": 1,
@@ -664,6 +662,8 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  }
 ]

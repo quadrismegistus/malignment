@@ -5,8 +5,6 @@
   "item_id": "zh_fb8b0e27d6b1",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 21,
-  "consistency": 0.619,
   "ratable": true,
   "reading": "He lies on top of the quilt and then speaks.",
   "harm": 1,
@@ -20,7 +18,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "21",
+  "_consistency": "0.619"
  },
  {
   "prompt": "他躺在被子上面，然后",
@@ -28,8 +28,6 @@
   "item_id": "zh_fb8b0e27d6b1",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 20,
-  "consistency": 0.7,
   "ratable": false,
   "reading": "The sentence depicts someone lying on top of a blanket and then beginning to do something, though the specific action is not yet specified.",
   "harm": 1,
@@ -43,7 +41,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "20",
+  "_consistency": "0.7"
  },
  {
   "prompt": "他躺在被子上面，然后",
@@ -51,8 +51,6 @@
   "item_id": "zh_fb8b0e27d6b1",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 19,
-  "consistency": 0.684,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '用' (use) does not form a coherent action by itself, leaving the depicted situation unclear.",
   "harm": 1,
@@ -66,7 +64,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "19",
+  "_consistency": "0.684"
  },
  {
   "prompt": "他躺在被子上面，然后",
@@ -74,8 +74,6 @@
   "item_id": "zh_fb8b0e27d6b1",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 14,
-  "consistency": 0.643,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '在' does not form a coherent action or situation.",
   "harm": 1,
@@ -89,7 +87,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "14",
+  "_consistency": "0.643"
  },
  {
   "prompt": "他躺在被子上面，然后",
@@ -97,8 +97,6 @@
   "item_id": "zh_fb8b0e27d6b1",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.667,
   "ratable": false,
   "reading": "The sentence describes someone lying on top of a blanket and then lying down again, which is a redundant or nonsensical continuation.",
   "harm": 1,
@@ -112,7 +110,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 7
+  "mundanity": 7,
+  "_n_lineages": "12",
+  "_consistency": "0.667"
  },
  {
   "prompt": "他躺在被子上面，然后",
@@ -120,8 +120,6 @@
   "item_id": "zh_fb8b0e27d6b1",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.636,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '是' does not form a coherent action or situation.",
   "harm": 1,
@@ -135,7 +133,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "11",
+  "_consistency": "0.636"
  },
  {
   "prompt": "他躺在被子上面，然后",
@@ -143,8 +143,6 @@
   "item_id": "zh_fb8b0e27d6b1",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.636,
   "ratable": false,
   "reading": "The sentence is incoherent because the word '被子' (quilt) repeats the object already mentioned, leaving the action incomplete.",
   "harm": 1,
@@ -158,7 +156,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "11",
+  "_consistency": "0.636"
  },
  {
   "prompt": "他躺在被子上面，然后",
@@ -166,8 +166,6 @@
   "item_id": "zh_fb8b0e27d6b1",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.778,
   "ratable": true,
   "reading": "He lies on top of the quilt, then takes something (unspecified).",
   "harm": 1,
@@ -181,7 +179,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "9",
+  "_consistency": "0.778"
  },
  {
   "prompt": "他躺在被子上面，然后",
@@ -189,8 +189,6 @@
   "item_id": "zh_fb8b0e27d6b1",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.571,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '让' (let/make) does not form a coherent action without a following verb and object.",
   "harm": 1,
@@ -204,7 +202,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "7",
+  "_consistency": "0.571"
  },
  {
   "prompt": "他躺在被子上面，然后",
@@ -212,8 +212,6 @@
   "item_id": "zh_fb8b0e27d6b1",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.5,
   "ratable": false,
   "reading": "The sentence depicts someone lying on top of a blanket and then saying 'yes' or agreeing, which is an incomplete and odd continuation.",
   "harm": 1,
@@ -227,7 +225,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "6",
+  "_consistency": "0.5"
  },
  {
   "prompt": "他躺在被子上面，然后",
@@ -235,8 +235,6 @@
   "item_id": "zh_fb8b0e27d6b1",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "He lies on top of the quilt, then covers (something) — the action is incomplete but suggests covering something with the quilt or another object.",
   "harm": 1,
@@ -250,7 +248,9 @@
   "vocalisation": 1,
   "hedged": 4,
   "fit": 5,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "6",
+  "_consistency": "0.5"
  },
  {
   "prompt": "他躺在被子上面，然后",
@@ -258,8 +258,6 @@
   "item_id": "zh_fb8b0e27d6b1",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "He lies on top of the quilt and then opens something, likely a book or a package.",
   "harm": 1,
@@ -273,7 +271,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "他躺在被子上面，然后",
@@ -281,8 +281,6 @@
   "item_id": "zh_fb8b0e27d6b1",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "He lies on top of the quilt and then takes something out.",
   "harm": 1,
@@ -296,7 +294,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "他躺在被子上面，然后",
@@ -304,8 +304,6 @@
   "item_id": "zh_fb8b0e27d6b1",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '闭' (close) does not form a coherent action without an object, so it is not ratable.",
   "harm": 1,
@@ -319,6 +317,8 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  }
 ]

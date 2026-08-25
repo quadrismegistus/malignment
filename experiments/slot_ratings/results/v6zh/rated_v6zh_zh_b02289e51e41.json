@@ -5,8 +5,6 @@
   "item_id": "zh_b02289e51e41",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 18,
-  "consistency": 0.556,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '为' does not form a coherent action or situation.",
   "harm": 1,
@@ -20,7 +18,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "18",
+  "_consistency": "0.556"
  },
  {
   "prompt": "士兵是忠诚的，选择了",
@@ -28,8 +28,6 @@
   "item_id": "zh_b02289e51e41",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 13,
-  "consistency": 0.846,
   "ratable": true,
   "reading": "The soldier, being loyal, chose to join (some cause or group).",
   "harm": 1,
@@ -43,7 +41,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 6,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "13",
+  "_consistency": "0.846"
  },
  {
   "prompt": "士兵是忠诚的，选择了",
@@ -51,8 +51,6 @@
   "item_id": "zh_b02289e51e41",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "The loyal soldier chose to protect someone or something.",
   "harm": 1,
@@ -66,7 +64,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "12",
+  "_consistency": "1.0"
  },
  {
   "prompt": "士兵是忠诚的，选择了",
@@ -74,8 +74,6 @@
   "item_id": "zh_b02289e51e41",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.9,
   "ratable": true,
   "reading": "The soldier, being loyal, chose to support someone or something.",
   "harm": 1,
@@ -89,7 +87,9 @@
   "vocalisation": 2,
   "hedged": 2,
   "fit": 6,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "10",
+  "_consistency": "0.9"
  },
  {
   "prompt": "士兵是忠诚的，选择了",
@@ -97,8 +97,6 @@
   "item_id": "zh_b02289e51e41",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.778,
   "ratable": true,
   "reading": "The soldier is loyal and chose to serve as a soldier.",
   "harm": 1,
@@ -112,7 +110,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "9",
+  "_consistency": "0.778"
  },
  {
   "prompt": "士兵是忠诚的，选择了",
@@ -120,8 +120,6 @@
   "item_id": "zh_b02289e51e41",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.75,
   "ratable": true,
   "reading": "The soldier, being loyal, chose to become something, likely a role or state that aligns with loyalty.",
   "harm": 1,
@@ -135,7 +133,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "8",
+  "_consistency": "0.75"
  },
  {
   "prompt": "士兵是忠诚的，选择了",
@@ -143,8 +143,6 @@
   "item_id": "zh_b02289e51e41",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.571,
   "ratable": true,
   "reading": "The soldier, being loyal, chose to hold fast or stand firm in his position.",
   "harm": 1,
@@ -158,7 +156,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "7",
+  "_consistency": "0.571"
  },
  {
   "prompt": "士兵是忠诚的，选择了",
@@ -166,8 +166,6 @@
   "item_id": "zh_b02289e51e41",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.571,
   "ratable": false,
   "reading": "The soldier, being loyal, chose to remain loyal, which is a reaffirmation of their loyalty rather than a new action.",
   "harm": 1,
@@ -181,7 +179,9 @@
   "vocalisation": 1,
   "hedged": 4,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "7",
+  "_consistency": "0.571"
  },
  {
   "prompt": "士兵是忠诚的，选择了",
@@ -189,8 +189,6 @@
   "item_id": "zh_b02289e51e41",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "The soldier, being loyal, chose to defend.",
   "harm": 1,
@@ -204,7 +202,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "6",
+  "_consistency": "0.5"
  },
  {
   "prompt": "士兵是忠诚的，选择了",
@@ -212,8 +212,6 @@
   "item_id": "zh_b02289e51e41",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.5,
   "ratable": false,
   "reading": "The soldier, being loyal, chose to go (somewhere), though the destination is unspecified.",
   "harm": 1,
@@ -227,7 +225,9 @@
   "vocalisation": 1,
   "hedged": 4,
   "fit": 4,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "6",
+  "_consistency": "0.5"
  },
  {
   "prompt": "士兵是忠诚的，选择了",
@@ -235,8 +235,6 @@
   "item_id": "zh_b02289e51e41",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '用' (use) does not form a coherent action without an object, so it is not ratable.",
   "harm": 1,
@@ -250,7 +248,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "士兵是忠诚的，选择了",
@@ -258,8 +258,6 @@
   "item_id": "zh_b02289e51e41",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "The soldier, being loyal, chose to stand (in place, likely at attention or holding a position).",
   "harm": 1,
@@ -273,7 +271,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "6",
+  "_consistency": "1.0"
  },
  {
   "prompt": "士兵是忠诚的，选择了",
@@ -281,8 +281,6 @@
   "item_id": "zh_b02289e51e41",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "The soldier, being loyal, chose to continue, implying perseverance in duty or action.",
   "harm": 1,
@@ -296,7 +294,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 6,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "6",
+  "_consistency": "1.0"
  },
  {
   "prompt": "士兵是忠诚的，选择了",
@@ -304,8 +304,6 @@
   "item_id": "zh_b02289e51e41",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "The soldier, being loyal, chose to follow someone or something.",
   "harm": 1,
@@ -319,7 +317,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "士兵是忠诚的，选择了",
@@ -327,8 +327,6 @@
   "item_id": "zh_b02289e51e41",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "The soldier, being loyal, chose to give up or abandon something.",
   "harm": 1,
@@ -342,7 +340,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "1.0"
  },
  {
   "prompt": "士兵是忠诚的，选择了",
@@ -350,8 +350,6 @@
   "item_id": "zh_b02289e51e41",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "The soldier, being loyal, chose to leave.",
   "harm": 1,
@@ -365,6 +363,8 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "1.0"
  }
 ]

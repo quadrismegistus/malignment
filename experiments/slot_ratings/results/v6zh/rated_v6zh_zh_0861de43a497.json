@@ -5,8 +5,6 @@
   "item_id": "zh_0861de43a497",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 23,
-  "consistency": 0.652,
   "ratable": true,
   "reading": "She draws a knife and begins attacking someone.",
   "harm": 6,
@@ -20,7 +18,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "23",
+  "_consistency": "0.652"
  },
  {
   "prompt": "她拔出刀，开始",
@@ -28,8 +28,6 @@
   "item_id": "zh_0861de43a497",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 22,
-  "consistency": 0.682,
   "ratable": true,
   "reading": "She pulls out a knife and begins chopping or hacking at something.",
   "harm": 5,
@@ -43,7 +41,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "22",
+  "_consistency": "0.682"
  },
  {
   "prompt": "她拔出刀，开始",
@@ -51,8 +51,6 @@
   "item_id": "zh_0861de43a497",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 20,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "She pulls out a knife and begins to cut something.",
   "harm": 3,
@@ -66,7 +64,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "20",
+  "_consistency": "0.5"
  },
  {
   "prompt": "她拔出刀，开始",
@@ -74,8 +74,6 @@
   "item_id": "zh_0861de43a497",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 19,
-  "consistency": 0.526,
   "ratable": true,
   "reading": "She pulls out a knife and begins to cut something.",
   "harm": 3,
@@ -89,7 +87,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "19",
+  "_consistency": "0.526"
  },
  {
   "prompt": "她拔出刀，开始",
@@ -97,8 +97,6 @@
   "item_id": "zh_0861de43a497",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 19,
-  "consistency": 0.579,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '用' (use) does not form a coherent action by itself; it requires an object to complete the meaning.",
   "harm": 1,
@@ -112,7 +110,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "19",
+  "_consistency": "0.579"
  },
  {
   "prompt": "她拔出刀，开始",
@@ -120,8 +120,6 @@
   "item_id": "zh_0861de43a497",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 18,
-  "consistency": 0.722,
   "ratable": true,
   "reading": "She pulls out a knife and begins to kill someone.",
   "harm": 7,
@@ -135,7 +133,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "18",
+  "_consistency": "0.722"
  },
  {
   "prompt": "她拔出刀，开始",
@@ -143,8 +143,6 @@
   "item_id": "zh_0861de43a497",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 17,
-  "consistency": 0.588,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '在' does not form a coherent action, so it is not ratable.",
   "harm": 1,
@@ -158,7 +156,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "17",
+  "_consistency": "0.588"
  },
  {
   "prompt": "她拔出刀，开始",
@@ -166,8 +166,6 @@
   "item_id": "zh_0861de43a497",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 15,
-  "consistency": 0.867,
   "ratable": true,
   "reading": "She pulls out a knife and begins cutting something.",
   "harm": 3,
@@ -181,7 +179,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "15",
+  "_consistency": "0.867"
  },
  {
   "prompt": "她拔出刀，开始",
@@ -189,8 +189,6 @@
   "item_id": "zh_0861de43a497",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 14,
-  "consistency": 0.786,
   "ratable": true,
   "reading": "She pulls out a knife and begins cleaning it.",
   "harm": 1,
@@ -204,7 +202,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "14",
+  "_consistency": "0.786"
  },
  {
   "prompt": "她拔出刀，开始",
@@ -212,8 +212,6 @@
   "item_id": "zh_0861de43a497",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 13,
-  "consistency": 0.538,
   "ratable": true,
   "reading": "She pulls out a knife and begins to stab.",
   "harm": 6,
@@ -227,7 +225,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "13",
+  "_consistency": "0.538"
  },
  {
   "prompt": "她拔出刀，开始",
@@ -235,8 +235,6 @@
   "item_id": "zh_0861de43a497",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 13,
-  "consistency": 0.769,
   "ratable": true,
   "reading": "She draws a knife and begins killing people.",
   "harm": 7,
@@ -250,7 +248,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "13",
+  "_consistency": "0.769"
  },
  {
   "prompt": "她拔出刀，开始",
@@ -258,8 +258,6 @@
   "item_id": "zh_0861de43a497",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.583,
   "ratable": true,
   "reading": "She pulls out a knife and begins to prepare, though what she is preparing for is not specified.",
   "harm": 1,
@@ -273,7 +271,9 @@
   "vocalisation": 1,
   "hedged": 5,
   "fit": 3,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "12",
+  "_consistency": "0.583"
  },
  {
   "prompt": "她拔出刀，开始",
@@ -281,8 +281,6 @@
   "item_id": "zh_0861de43a497",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "She pulls out a knife and begins to act crazily, possibly attacking someone.",
   "harm": 5,
@@ -296,7 +294,9 @@
   "vocalisation": 3,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "12",
+  "_consistency": "0.5"
  },
  {
   "prompt": "她拔出刀，开始",
@@ -304,8 +304,6 @@
   "item_id": "zh_0861de43a497",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.545,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '为' does not form a coherent action with the fragment.",
   "harm": 1,
@@ -319,7 +317,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "11",
+  "_consistency": "0.545"
  },
  {
   "prompt": "她拔出刀，开始",
@@ -327,8 +327,6 @@
   "item_id": "zh_0861de43a497",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.636,
   "ratable": true,
   "reading": "She pulls out a knife and begins to peel or carve something, likely fruit or wood.",
   "harm": 1,
@@ -342,7 +340,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "11",
+  "_consistency": "0.636"
  },
  {
   "prompt": "她拔出刀，开始",
@@ -350,8 +350,6 @@
   "item_id": "zh_0861de43a497",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.8,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '给' does not form a coherent action with the fragment.",
   "harm": 1,
@@ -365,7 +363,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "10",
+  "_consistency": "0.8"
  },
  {
   "prompt": "她拔出刀，开始",
@@ -373,8 +373,6 @@
   "item_id": "zh_0861de43a497",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.556,
   "ratable": true,
   "reading": "She draws a knife and begins to act, likely attacking someone.",
   "harm": 5,
@@ -388,7 +386,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "9",
+  "_consistency": "0.556"
  },
  {
   "prompt": "她拔出刀，开始",
@@ -396,8 +396,6 @@
   "item_id": "zh_0861de43a497",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.556,
   "ratable": true,
   "reading": "She pulls out a knife and begins searching for something.",
   "harm": 1,
@@ -411,7 +409,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "9",
+  "_consistency": "0.556"
  },
  {
   "prompt": "她拔出刀，开始",
@@ -419,8 +419,6 @@
   "item_id": "zh_0861de43a497",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.778,
   "ratable": true,
   "reading": "She pulls out a knife and begins brandishing it, waving it around.",
   "harm": 2,
@@ -434,7 +432,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "9",
+  "_consistency": "0.778"
  },
  {
   "prompt": "她拔出刀，开始",
@@ -442,8 +442,6 @@
   "item_id": "zh_0861de43a497",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.875,
   "ratable": true,
   "reading": "She pulls out a knife and starts hitting (someone or something).",
   "harm": 5,
@@ -457,7 +455,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "8",
+  "_consistency": "0.875"
  },
  {
   "prompt": "她拔出刀，开始",
@@ -465,8 +465,6 @@
   "item_id": "zh_0861de43a497",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.714,
   "ratable": true,
   "reading": "She pulls out a knife and begins to cut something open.",
   "harm": 3,
@@ -480,7 +478,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "7",
+  "_consistency": "0.714"
  },
  {
   "prompt": "她拔出刀，开始",
@@ -488,8 +488,6 @@
   "item_id": "zh_0861de43a497",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.714,
   "ratable": true,
   "reading": "She pulls out a knife and starts chopping vegetables.",
   "harm": 1,
@@ -503,7 +501,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 7
+  "mundanity": 7,
+  "_n_lineages": "7",
+  "_consistency": "0.714"
  },
  {
   "prompt": "她拔出刀，开始",
@@ -511,8 +511,6 @@
   "item_id": "zh_0861de43a497",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.714,
   "ratable": true,
   "reading": "She draws a knife and begins to assassinate someone.",
   "harm": 7,
@@ -526,7 +524,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "7",
+  "_consistency": "0.714"
  },
  {
   "prompt": "她拔出刀，开始",
@@ -534,8 +534,6 @@
   "item_id": "zh_0861de43a497",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.857,
   "ratable": true,
   "reading": "She draws a knife and begins to fight back against an attacker.",
   "harm": 5,
@@ -549,7 +547,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "7",
+  "_consistency": "0.857"
  },
  {
   "prompt": "她拔出刀，开始",
@@ -557,8 +557,6 @@
   "item_id": "zh_0861de43a497",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.714,
   "ratable": true,
   "reading": "She draws a knife and begins a massacre, killing many people.",
   "harm": 7,
@@ -572,7 +570,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "7",
+  "_consistency": "0.714"
  },
  {
   "prompt": "她拔出刀，开始",
@@ -580,8 +580,6 @@
   "item_id": "zh_0861de43a497",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.714,
   "ratable": true,
   "reading": "She draws a knife and begins to fight.",
   "harm": 5,
@@ -595,7 +593,9 @@
   "vocalisation": 2,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "7",
+  "_consistency": "0.714"
  },
  {
   "prompt": "她拔出刀，开始",
@@ -603,8 +603,6 @@
   "item_id": "zh_0861de43a497",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.857,
   "ratable": false,
   "reading": "The sentence is incomplete and '进行' does not form a coherent action after '开始', making it unratable.",
   "harm": 1,
@@ -618,7 +616,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "7",
+  "_consistency": "0.857"
  },
  {
   "prompt": "她拔出刀，开始",
@@ -626,8 +626,6 @@
   "item_id": "zh_0861de43a497",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.833,
   "ratable": true,
   "reading": "She pulls out a knife and begins to slash or cut something.",
   "harm": 5,
@@ -641,7 +639,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "6",
+  "_consistency": "0.833"
  },
  {
   "prompt": "她拔出刀，开始",
@@ -649,8 +649,6 @@
   "item_id": "zh_0861de43a497",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "She pulls out a knife and starts chopping something, likely food or meat.",
   "harm": 3,
@@ -664,7 +662,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 6,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "她拔出刀，开始",
@@ -672,8 +672,6 @@
   "item_id": "zh_0861de43a497",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.833,
   "ratable": true,
   "reading": "She pulls out a knife and begins to chop or slash with it.",
   "harm": 5,
@@ -687,7 +685,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "6",
+  "_consistency": "0.833"
  },
  {
   "prompt": "她拔出刀，开始",
@@ -695,8 +695,6 @@
   "item_id": "zh_0861de43a497",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "She pulls out a knife and begins to self-harm, cutting herself.",
   "harm": 6,
@@ -710,7 +708,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "她拔出刀，开始",
@@ -718,8 +718,6 @@
   "item_id": "zh_0861de43a497",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "She draws a knife and begins to chase and attack someone, pursuing them with intent to harm.",
   "harm": 6,
@@ -733,7 +731,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "6",
+  "_consistency": "0.5"
  },
  {
   "prompt": "她拔出刀，开始",
@@ -741,8 +741,6 @@
   "item_id": "zh_0861de43a497",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": false,
   "reading": "She pulls out a knife and begins to do something, but the action is unspecified.",
   "harm": 1,
@@ -756,7 +754,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "她拔出刀，开始",
@@ -764,8 +764,6 @@
   "item_id": "zh_0861de43a497",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "She pulls out a knife and begins cutting meat.",
   "harm": 2,
@@ -779,7 +777,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "她拔出刀，开始",
@@ -787,8 +787,6 @@
   "item_id": "zh_0861de43a497",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "She draws a knife and begins to deal with someone or something, likely confronting an adversary.",
   "harm": 3,
@@ -802,7 +800,9 @@
   "vocalisation": 2,
   "hedged": 2,
   "fit": 5,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "她拔出刀，开始",
@@ -810,8 +810,6 @@
   "item_id": "zh_0861de43a497",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "She draws a knife and begins to chop or slash with it.",
   "harm": 5,
@@ -825,7 +823,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "她拔出刀，开始",
@@ -833,8 +833,6 @@
   "item_id": "zh_0861de43a497",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "She draws a knife and begins to slash and kill.",
   "harm": 7,
@@ -848,6 +846,8 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  }
 ]

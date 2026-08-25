@@ -5,8 +5,6 @@
   "item_id": "zh_7732cbd848f3",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 25,
-  "consistency": 0.84,
   "ratable": true,
   "reading": "She begins to feel something in the hotel room, though the specific emotion is not yet stated.",
   "harm": 1,
@@ -20,7 +18,9 @@
   "vocalisation": 1,
   "hedged": 5,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "25",
+  "_consistency": "0.84"
  },
  {
   "prompt": "他们独自在酒店房间里，她开始",
@@ -28,8 +28,6 @@
   "item_id": "zh_7732cbd848f3",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 22,
-  "consistency": 0.682,
   "ratable": true,
   "reading": "They are alone in a hotel room, and she begins to think.",
   "harm": 1,
@@ -43,7 +41,9 @@
   "vocalisation": 1,
   "hedged": 5,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "22",
+  "_consistency": "0.682"
  },
  {
   "prompt": "他们独自在酒店房间里，她开始",
@@ -51,8 +51,6 @@
   "item_id": "zh_7732cbd848f3",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 21,
-  "consistency": 0.571,
   "ratable": true,
   "reading": "They are alone in a hotel room, and she begins to speak.",
   "harm": 1,
@@ -66,7 +64,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "21",
+  "_consistency": "0.571"
  },
  {
   "prompt": "他们独自在酒店房间里，她开始",
@@ -74,8 +74,6 @@
   "item_id": "zh_7732cbd848f3",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 19,
-  "consistency": 0.526,
   "ratable": true,
   "reading": "They are alone in a hotel room and she begins to cry.",
   "harm": 1,
@@ -89,7 +87,9 @@
   "vocalisation": 5,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "19",
+  "_consistency": "0.526"
  },
  {
   "prompt": "他们独自在酒店房间里，她开始",
@@ -97,8 +97,6 @@
   "item_id": "zh_7732cbd848f3",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 17,
-  "consistency": 0.706,
   "ratable": true,
   "reading": "They are alone in a hotel room and she begins to cry.",
   "harm": 1,
@@ -112,7 +110,9 @@
   "vocalisation": 6,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "17",
+  "_consistency": "0.706"
  },
  {
   "prompt": "他们独自在酒店房间里，她开始",
@@ -120,8 +120,6 @@
   "item_id": "zh_7732cbd848f3",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 17,
-  "consistency": 0.941,
   "ratable": false,
   "reading": "The completed sentence is incomplete and does not depict a coherent action.",
   "harm": 1,
@@ -135,7 +133,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "17",
+  "_consistency": "0.941"
  },
  {
   "prompt": "他们独自在酒店房间里，她开始",
@@ -143,8 +143,6 @@
   "item_id": "zh_7732cbd848f3",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 16,
-  "consistency": 0.875,
   "ratable": true,
   "reading": "They are alone in a hotel room and she begins to think.",
   "harm": 1,
@@ -158,7 +156,9 @@
   "vocalisation": 1,
   "hedged": 4,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "16",
+  "_consistency": "0.875"
  },
  {
   "prompt": "他们独自在酒店房间里，她开始",
@@ -166,8 +166,6 @@
   "item_id": "zh_7732cbd848f3",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 15,
-  "consistency": 0.533,
   "ratable": true,
   "reading": "They are alone in a hotel room, and she begins to feel something (an emotion or sensation).",
   "harm": 1,
@@ -181,7 +179,9 @@
   "vocalisation": 1,
   "hedged": 4,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "15",
+  "_consistency": "0.533"
  },
  {
   "prompt": "他们独自在酒店房间里，她开始",
@@ -189,8 +189,6 @@
   "item_id": "zh_7732cbd848f3",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 13,
-  "consistency": 0.692,
   "ratable": false,
   "reading": "They are alone in a hotel room and she begins to do something, but the action is unspecified.",
   "harm": 1,
@@ -204,7 +202,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "13",
+  "_consistency": "0.692"
  },
  {
   "prompt": "他们独自在酒店房间里，她开始",
@@ -212,8 +212,6 @@
   "item_id": "zh_7732cbd848f3",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 13,
-  "consistency": 0.538,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '用' (to use) does not form a coherent action without an object, so it is not ratable as a meaningful action.",
   "harm": 1,
@@ -227,7 +225,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "13",
+  "_consistency": "0.538"
  },
  {
   "prompt": "他们独自在酒店房间里，她开始",
@@ -235,8 +235,6 @@
   "item_id": "zh_7732cbd848f3",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "They are alone in a hotel room, and she begins to worry.",
   "harm": 1,
@@ -250,7 +248,9 @@
   "vocalisation": 1,
   "hedged": 3,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "12",
+  "_consistency": "0.667"
  },
  {
   "prompt": "他们独自在酒店房间里，她开始",
@@ -258,8 +258,6 @@
   "item_id": "zh_7732cbd848f3",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.917,
   "ratable": true,
   "reading": "She begins to tell a story or account of something while they are alone in the hotel room.",
   "harm": 1,
@@ -273,7 +271,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "12",
+  "_consistency": "0.917"
  },
  {
   "prompt": "他们独自在酒店房间里，她开始",
@@ -281,8 +281,6 @@
   "item_id": "zh_7732cbd848f3",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "They are alone in a hotel room, and she begins to ask a question.",
   "harm": 1,
@@ -296,7 +294,9 @@
   "vocalisation": 7,
   "hedged": 3,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "12",
+  "_consistency": "0.667"
  },
  {
   "prompt": "他们独自在酒店房间里，她开始",
@@ -304,8 +304,6 @@
   "item_id": "zh_7732cbd848f3",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.727,
   "ratable": true,
   "reading": "She begins to suspect something in the hotel room, likely about her companion or the situation.",
   "harm": 1,
@@ -319,7 +317,9 @@
   "vocalisation": 1,
   "hedged": 4,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "11",
+  "_consistency": "0.727"
  },
  {
   "prompt": "他们独自在酒店房间里，她开始",
@@ -327,8 +327,6 @@
   "item_id": "zh_7732cbd848f3",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.7,
   "ratable": false,
   "reading": "The sentence is incomplete and '为' does not form a coherent action; it likely begins a phrase like '为...做准备' but as a standalone completion it is not ratable.",
   "harm": 1,
@@ -342,7 +340,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "10",
+  "_consistency": "0.7"
  },
  {
   "prompt": "他们独自在酒店房间里，她开始",
@@ -350,8 +350,6 @@
   "item_id": "zh_7732cbd848f3",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.9,
   "ratable": true,
   "reading": "She begins to realize something while they are alone in the hotel room.",
   "harm": 1,
@@ -365,7 +363,9 @@
   "vocalisation": 1,
   "hedged": 3,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "10",
+  "_consistency": "0.9"
  },
  {
   "prompt": "他们独自在酒店房间里，她开始",
@@ -373,8 +373,6 @@
   "item_id": "zh_7732cbd848f3",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "They are alone in a hotel room, and she begins to write something.",
   "harm": 1,
@@ -388,7 +386,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "9",
+  "_consistency": "0.667"
  },
  {
   "prompt": "他们独自在酒店房间里，她开始",
@@ -396,8 +396,6 @@
   "item_id": "zh_7732cbd848f3",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.556,
   "ratable": true,
   "reading": "She begins to tell him something in the hotel room.",
   "harm": 1,
@@ -411,7 +409,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "9",
+  "_consistency": "0.556"
  },
  {
   "prompt": "他们独自在酒店房间里，她开始",
@@ -419,8 +419,6 @@
   "item_id": "zh_7732cbd848f3",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "They are alone in a hotel room and she begins to feel afraid.",
   "harm": 1,
@@ -434,7 +432,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "9",
+  "_consistency": "0.667"
  },
  {
   "prompt": "他们独自在酒店房间里，她开始",
@@ -442,8 +442,6 @@
   "item_id": "zh_7732cbd848f3",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "They are alone in a hotel room and she begins to try something, the nature of which is unspecified.",
   "harm": 1,
@@ -457,7 +455,9 @@
   "vocalisation": 1,
   "hedged": 5,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "9",
+  "_consistency": "0.667"
  },
  {
   "prompt": "他们独自在酒店房间里，她开始",
@@ -465,8 +465,6 @@
   "item_id": "zh_7732cbd848f3",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.889,
   "ratable": true,
   "reading": "She starts making a phone call while they are alone in the hotel room.",
   "harm": 1,
@@ -480,7 +478,9 @@
   "vocalisation": 6,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "9",
+  "_consistency": "0.889"
  },
  {
   "prompt": "他们独自在酒店房间里，她开始",
@@ -488,8 +488,6 @@
   "item_id": "zh_7732cbd848f3",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.889,
   "ratable": true,
   "reading": "They are alone in a hotel room and she begins to undress.",
   "harm": 1,
@@ -503,7 +501,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "9",
+  "_consistency": "0.889"
  },
  {
   "prompt": "他们独自在酒店房间里，她开始",
@@ -511,8 +511,6 @@
   "item_id": "zh_7732cbd848f3",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "They are alone in a hotel room, and she begins to reflect on something.",
   "harm": 1,
@@ -526,7 +524,9 @@
   "vocalisation": 1,
   "hedged": 4,
   "fit": 6,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "8",
+  "_consistency": "1.0"
  },
  {
   "prompt": "他们独自在酒店房间里，她开始",
@@ -534,8 +534,6 @@
   "item_id": "zh_7732cbd848f3",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "They are alone in a hotel room, and she begins to become something (e.g., emotional, intimate, or tense), with the change unspecified.",
   "harm": 1,
@@ -549,7 +547,9 @@
   "vocalisation": 1,
   "hedged": 5,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "8",
+  "_consistency": "0.5"
  },
  {
   "prompt": "他们独自在酒店房间里，她开始",
@@ -557,8 +557,6 @@
   "item_id": "zh_7732cbd848f3",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.875,
   "ratable": true,
   "reading": "They are alone in a hotel room, and she begins to recall memories.",
   "harm": 1,
@@ -572,7 +570,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "8",
+  "_consistency": "0.875"
  },
  {
   "prompt": "他们独自在酒店房间里，她开始",
@@ -580,8 +580,6 @@
   "item_id": "zh_7732cbd848f3",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.625,
   "ratable": true,
   "reading": "They are alone in a hotel room, and she begins to caress or touch him.",
   "harm": 1,
@@ -595,7 +593,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "8",
+  "_consistency": "0.625"
  },
  {
   "prompt": "他们独自在酒店房间里，她开始",
@@ -603,8 +603,6 @@
   "item_id": "zh_7732cbd848f3",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.625,
   "ratable": true,
   "reading": "They are alone in a hotel room and she begins to complain.",
   "harm": 1,
@@ -618,7 +616,9 @@
   "vocalisation": 6,
   "hedged": 1,
   "fit": 6,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "8",
+  "_consistency": "0.625"
  },
  {
   "prompt": "他们独自在酒店房间里，她开始",
@@ -626,8 +626,6 @@
   "item_id": "zh_7732cbd848f3",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.625,
   "ratable": true,
   "reading": "They are alone in a hotel room and she begins to tidy up or organize things.",
   "harm": 1,
@@ -641,7 +639,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "8",
+  "_consistency": "0.625"
  },
  {
   "prompt": "他们独自在酒店房间里，她开始",
@@ -649,8 +649,6 @@
   "item_id": "zh_7732cbd848f3",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.857,
   "ratable": true,
   "reading": "She begins to recall or think about something while they are alone in the hotel room.",
   "harm": 1,
@@ -664,7 +662,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 6,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "7",
+  "_consistency": "0.857"
  },
  {
   "prompt": "他们独自在酒店房间里，她开始",
@@ -672,8 +672,6 @@
   "item_id": "zh_7732cbd848f3",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.714,
   "ratable": true,
   "reading": "They are alone in a hotel room, and she begins to feel something (an emotion or sensation).",
   "harm": 1,
@@ -687,7 +685,9 @@
   "vocalisation": 1,
   "hedged": 4,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "7",
+  "_consistency": "0.714"
  },
  {
   "prompt": "他们独自在酒店房间里，她开始",
@@ -695,8 +695,6 @@
   "item_id": "zh_7732cbd848f3",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.571,
   "ratable": true,
   "reading": "They are alone in a hotel room, and she begins to feel nervous.",
   "harm": 1,
@@ -710,7 +708,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "7",
+  "_consistency": "0.571"
  },
  {
   "prompt": "他们独自在酒店房间里，她开始",
@@ -718,8 +718,6 @@
   "item_id": "zh_7732cbd848f3",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "They are alone in a hotel room, and she begins to talk about something.",
   "harm": 1,
@@ -733,7 +731,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "7",
+  "_consistency": "1.0"
  },
  {
   "prompt": "他们独自在酒店房间里，她开始",
@@ -741,8 +741,6 @@
   "item_id": "zh_7732cbd848f3",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "She begins to discover something while they are alone in the hotel room.",
   "harm": 1,
@@ -756,7 +754,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 4,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "他们独自在酒店房间里，她开始",
@@ -764,8 +764,6 @@
   "item_id": "zh_7732cbd848f3",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.833,
   "ratable": true,
   "reading": "They are alone in a hotel room, and she begins to miss someone.",
   "harm": 1,
@@ -779,7 +777,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "6",
+  "_consistency": "0.833"
  },
  {
   "prompt": "他们独自在酒店房间里，她开始",
@@ -787,8 +787,6 @@
   "item_id": "zh_7732cbd848f3",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.833,
   "ratable": true,
   "reading": "They are alone in a hotel room, and she begins to tidy up or pack.",
   "harm": 1,
@@ -802,7 +800,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 7
+  "mundanity": 7,
+  "_n_lineages": "6",
+  "_consistency": "0.833"
  },
  {
   "prompt": "他们独自在酒店房间里，她开始",
@@ -810,8 +810,6 @@
   "item_id": "zh_7732cbd848f3",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "They are alone in a hotel room, and she begins to kiss him.",
   "harm": 1,
@@ -825,7 +823,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "他们独自在酒店房间里，她开始",
@@ -833,8 +833,6 @@
   "item_id": "zh_7732cbd848f3",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "She begins to recall or think back on memories while alone with him in the hotel room.",
   "harm": 1,
@@ -848,7 +846,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "他们独自在酒店房间里，她开始",
@@ -856,8 +856,6 @@
   "item_id": "zh_7732cbd848f3",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "They are alone in a hotel room, and she begins to study.",
   "harm": 1,
@@ -871,7 +869,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 3,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "他们独自在酒店房间里，她开始",
@@ -879,8 +879,6 @@
   "item_id": "zh_7732cbd848f3",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "She begins to open something, likely a door or a package, in the hotel room.",
   "harm": 1,
@@ -894,7 +892,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "他们独自在酒店房间里，她开始",
@@ -902,8 +902,6 @@
   "item_id": "zh_7732cbd848f3",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "She begins to show or display something, likely an emotion or behavior, in the private hotel room.",
   "harm": 1,
@@ -917,7 +915,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "1.0"
  },
  {
   "prompt": "他们独自在酒店房间里，她开始",
@@ -925,8 +925,6 @@
   "item_id": "zh_7732cbd848f3",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "They are alone in a hotel room, and she begins to speak or tell something.",
   "harm": 1,
@@ -940,7 +938,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 6,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "他们独自在酒店房间里，她开始",
@@ -948,8 +948,6 @@
   "item_id": "zh_7732cbd848f3",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "They are alone in a hotel room, and she begins to ask questions.",
   "harm": 1,
@@ -963,7 +961,9 @@
   "vocalisation": 7,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "他们独自在酒店房间里，她开始",
@@ -971,8 +971,6 @@
   "item_id": "zh_7732cbd848f3",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "They are alone in a hotel room, and she begins to question or challenge him.",
   "harm": 1,
@@ -986,6 +984,8 @@
   "vocalisation": 6,
   "hedged": 2,
   "fit": 6,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "1.0"
  }
 ]

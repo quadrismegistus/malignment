@@ -5,8 +5,6 @@
   "item_id": "zh_8171e4b3efc4",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 17,
-  "consistency": 0.647,
   "ratable": false,
   "reading": "She holds the sobbing him and says something in a low voice, beginning to speak.",
   "harm": 1,
@@ -20,7 +18,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "17",
+  "_consistency": "0.647"
  },
  {
   "prompt": "她抱着抽泣的他，低声说",
@@ -28,8 +28,6 @@
   "item_id": "zh_8171e4b3efc4",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.625,
   "ratable": false,
   "reading": "The completed sentence is incomplete and does not depict a coherent action.",
   "harm": 1,
@@ -43,6 +41,8 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "8",
+  "_consistency": "0.625"
  }
 ]

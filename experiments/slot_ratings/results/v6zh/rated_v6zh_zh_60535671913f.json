@@ -5,8 +5,6 @@
   "item_id": "zh_60535671913f",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 28,
-  "consistency": 0.536,
   "ratable": true,
   "reading": "She spills coffee on her laptop and cries out in alarm.",
   "harm": 1,
@@ -20,7 +18,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "28",
+  "_consistency": "0.536"
  },
  {
   "prompt": "她把咖啡洒在笔记本电脑上，惊呼",
@@ -28,8 +28,6 @@
   "item_id": "zh_60535671913f",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 26,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "She spilled coffee on her laptop and exclaimed, saying something.",
   "harm": 1,
@@ -43,7 +41,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "26",
+  "_consistency": "0.5"
  },
  {
   "prompt": "她把咖啡洒在笔记本电脑上，惊呼",
@@ -51,8 +51,6 @@
   "item_id": "zh_60535671913f",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 22,
-  "consistency": 0.682,
   "ratable": true,
   "reading": "She spills coffee on her laptop and exclaims, saying something.",
   "harm": 1,
@@ -66,7 +64,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "22",
+  "_consistency": "0.682"
  },
  {
   "prompt": "她把咖啡洒在笔记本电脑上，惊呼",
@@ -74,8 +74,6 @@
   "item_id": "zh_60535671913f",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "She spilled coffee on her laptop and cried out in surprise.",
   "harm": 1,
@@ -89,6 +87,8 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "1.0"
  }
 ]

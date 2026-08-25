@@ -5,8 +5,6 @@
   "item_id": "zh_1bfa45212207",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 28,
-  "consistency": 0.607,
   "ratable": true,
   "reading": "He places his hand on her breast and then speaks.",
   "harm": 1,
@@ -20,7 +18,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "28",
+  "_consistency": "0.607"
  },
  {
   "prompt": "他把手放在她的乳房上，然后",
@@ -28,8 +28,6 @@
   "item_id": "zh_1bfa45212207",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 24,
-  "consistency": 0.75,
   "ratable": false,
   "reading": "He places his hand on her breast, and then begins (something unspecified).",
   "harm": 1,
@@ -43,7 +41,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "24",
+  "_consistency": "0.75"
  },
  {
   "prompt": "他把手放在她的乳房上，然后",
@@ -51,8 +51,6 @@
   "item_id": "zh_1bfa45212207",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 21,
-  "consistency": 0.714,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '把手' (handle) does not coherently continue the action of placing a hand on her breast.",
   "harm": 1,
@@ -66,7 +64,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "21",
+  "_consistency": "0.714"
  },
  {
   "prompt": "他把手放在她的乳房上，然后",
@@ -74,8 +74,6 @@
   "item_id": "zh_1bfa45212207",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 20,
-  "consistency": 0.65,
   "ratable": true,
   "reading": "He places his hand on her breast and then applies force, implying a rough or aggressive sexual advance.",
   "harm": 2,
@@ -89,7 +87,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "20",
+  "_consistency": "0.65"
  },
  {
   "prompt": "他把手放在她的乳房上，然后",
@@ -97,8 +97,6 @@
   "item_id": "zh_1bfa45212207",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 18,
-  "consistency": 0.722,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '用' (use) does not form a coherent action by itself, leaving the action unspecified.",
   "harm": 1,
@@ -112,7 +110,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "18",
+  "_consistency": "0.722"
  },
  {
   "prompt": "他把手放在她的乳房上，然后",
@@ -120,8 +120,6 @@
   "item_id": "zh_1bfa45212207",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 15,
-  "consistency": 0.6,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '在' does not form a coherent action or continuation.",
   "harm": 1,
@@ -135,7 +133,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "15",
+  "_consistency": "0.6"
  },
  {
   "prompt": "他把手放在她的乳房上，然后",
@@ -143,8 +143,6 @@
   "item_id": "zh_1bfa45212207",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.7,
   "ratable": true,
   "reading": "He places his hand on her breast and then kisses her.",
   "harm": 1,
@@ -158,7 +156,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "10",
+  "_consistency": "0.7"
  },
  {
   "prompt": "他把手放在她的乳房上，然后",
@@ -166,8 +166,6 @@
   "item_id": "zh_1bfa45212207",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "He places his hand on her breast and then caresses it.",
   "harm": 1,
@@ -181,7 +179,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "10",
+  "_consistency": "0.6"
  },
  {
   "prompt": "他把手放在她的乳房上，然后",
@@ -189,8 +189,6 @@
   "item_id": "zh_1bfa45212207",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "He places his hand on her breast and then grabs it.",
   "harm": 1,
@@ -204,7 +202,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "9",
+  "_consistency": "0.667"
  },
  {
   "prompt": "他把手放在她的乳房上，然后",
@@ -212,8 +212,6 @@
   "item_id": "zh_1bfa45212207",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 1.0,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '像' (like/as) does not form a coherent action, leaving the situation unresolved.",
   "harm": 1,
@@ -227,7 +225,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "8",
+  "_consistency": "1.0"
  },
  {
   "prompt": "他把手放在她的乳房上，然后",
@@ -235,8 +235,6 @@
   "item_id": "zh_1bfa45212207",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.625,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '是' does not form a coherent action, leaving the situation unclear.",
   "harm": 1,
@@ -250,7 +248,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "8",
+  "_consistency": "0.625"
  },
  {
   "prompt": "他把手放在她的乳房上，然后",
@@ -258,8 +258,6 @@
   "item_id": "zh_1bfa45212207",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "He places his hand on her breast and then presses down on it.",
   "harm": 1,
@@ -273,7 +271,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "7",
+  "_consistency": "1.0"
  },
  {
   "prompt": "他把手放在她的乳房上，然后",
@@ -281,8 +281,6 @@
   "item_id": "zh_1bfa45212207",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.571,
   "ratable": true,
   "reading": "He slowly places his hand on her breast.",
   "harm": 1,
@@ -296,7 +294,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "7",
+  "_consistency": "0.571"
  },
  {
   "prompt": "他把手放在她的乳房上，然后",
@@ -304,8 +304,6 @@
   "item_id": "zh_1bfa45212207",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "He places his hand on her breast and then kisses her.",
   "harm": 1,
@@ -319,7 +317,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "6",
+  "_consistency": "0.5"
  },
  {
   "prompt": "他把手放在她的乳房上，然后",
@@ -327,8 +327,6 @@
   "item_id": "zh_1bfa45212207",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "He places his hand on her breast and then kneads or massages it.",
   "harm": 1,
@@ -342,7 +340,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "他把手放在她的乳房上，然后",
@@ -350,8 +350,6 @@
   "item_id": "zh_1bfa45212207",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "He puts his hand on her breast and then continues doing so.",
   "harm": 1,
@@ -365,7 +363,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "他把手放在她的乳房上，然后",
@@ -373,8 +373,6 @@
   "item_id": "zh_1bfa45212207",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '让' (let/make) does not form a coherent action by itself, leaving the situation unresolved.",
   "harm": 1,
@@ -388,7 +386,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "他把手放在她的乳房上，然后",
@@ -396,8 +396,6 @@
   "item_id": "zh_1bfa45212207",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "He places his hand on her breast, then reaches out (with his hand).",
   "harm": 1,
@@ -411,7 +409,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 2,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "他把手放在她的乳房上，然后",
@@ -419,8 +419,6 @@
   "item_id": "zh_1bfa45212207",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "He places his hand on her breast and then squeezes it.",
   "harm": 1,
@@ -434,7 +432,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "他把手放在她的乳房上，然后",
@@ -442,8 +442,6 @@
   "item_id": "zh_1bfa45212207",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "He places his hand on her breast and then grips it.",
   "harm": 1,
@@ -457,7 +455,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "他把手放在她的乳房上，然后",
@@ -465,8 +465,6 @@
   "item_id": "zh_1bfa45212207",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "He places his hand on her breast and then touches it.",
   "harm": 1,
@@ -480,7 +478,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "他把手放在她的乳房上，然后",
@@ -488,8 +488,6 @@
   "item_id": "zh_1bfa45212207",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "He places his hand on her breast, and then does so slowly.",
   "harm": 1,
@@ -503,6 +501,8 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  }
 ]

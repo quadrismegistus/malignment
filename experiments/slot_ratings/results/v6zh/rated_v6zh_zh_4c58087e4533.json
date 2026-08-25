@@ -5,8 +5,6 @@
   "item_id": "zh_4c58087e4533",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 24,
-  "consistency": 0.75,
   "ratable": false,
   "reading": "The train arrives at the station, and then it is ridden or taken (by someone), though the sentence is incomplete and the action is not fully specified.",
   "harm": 1,
@@ -20,7 +18,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "24",
+  "_consistency": "0.75"
  },
  {
   "prompt": "火车到达车站，然后",
@@ -28,8 +28,6 @@
   "item_id": "zh_4c58087e4533",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 23,
-  "consistency": 0.522,
   "ratable": false,
   "reading": "The train arrives at the station, and then it begins (something, likely departing or some process).",
   "harm": 1,
@@ -43,7 +41,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "23",
+  "_consistency": "0.522"
  },
  {
   "prompt": "火车到达车站，然后",
@@ -51,8 +51,6 @@
   "item_id": "zh_4c58087e4533",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 21,
-  "consistency": 0.81,
   "ratable": false,
   "reading": "The train arrives at the station, and then goes (somewhere), but the sentence is incomplete and the action is vague.",
   "harm": 1,
@@ -66,7 +64,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 7
+  "mundanity": 7,
+  "_n_lineages": "21",
+  "_consistency": "0.81"
  },
  {
   "prompt": "火车到达车站，然后",
@@ -74,8 +74,6 @@
   "item_id": "zh_4c58087e4533",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 21,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "The train arrives at the station, and then it waits.",
   "harm": 1,
@@ -89,7 +87,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 7
+  "mundanity": 7,
+  "_n_lineages": "21",
+  "_consistency": "0.667"
  },
  {
   "prompt": "火车到达车站，然后",
@@ -97,8 +97,6 @@
   "item_id": "zh_4c58087e4533",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 19,
-  "consistency": 0.895,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '到' does not form a coherent continuation, leaving the action unclear.",
   "harm": 1,
@@ -112,7 +110,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "19",
+  "_consistency": "0.895"
  },
  {
   "prompt": "火车到达车站，然后",
@@ -120,8 +120,6 @@
   "item_id": "zh_4c58087e4533",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 18,
-  "consistency": 0.778,
   "ratable": true,
   "reading": "The train arrives at the station, and then the person gets off the train.",
   "harm": 1,
@@ -135,7 +133,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 7
+  "mundanity": 7,
+  "_n_lineages": "18",
+  "_consistency": "0.778"
  },
  {
   "prompt": "火车到达车站，然后",
@@ -143,8 +143,6 @@
   "item_id": "zh_4c58087e4533",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 18,
-  "consistency": 0.611,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '是' does not form a coherent action or situation.",
   "harm": 1,
@@ -158,7 +156,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "18",
+  "_consistency": "0.611"
  },
  {
   "prompt": "火车到达车站，然后",
@@ -166,8 +166,6 @@
   "item_id": "zh_4c58087e4533",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 18,
-  "consistency": 0.611,
   "ratable": true,
   "reading": "The train arrives at the station and then passes through, continuing on its way.",
   "harm": 1,
@@ -181,7 +179,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "18",
+  "_consistency": "0.611"
  },
  {
   "prompt": "火车到达车站，然后",
@@ -189,8 +189,6 @@
   "item_id": "zh_4c58087e4533",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 17,
-  "consistency": 0.588,
   "ratable": true,
   "reading": "The train arrives at the station, and then the subject walks (presumably to their destination).",
   "harm": 1,
@@ -204,7 +202,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 7
+  "mundanity": 7,
+  "_n_lineages": "17",
+  "_consistency": "0.588"
  },
  {
   "prompt": "火车到达车站，然后",
@@ -212,8 +212,6 @@
   "item_id": "zh_4c58087e4533",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 17,
-  "consistency": 0.588,
   "ratable": true,
   "reading": "The train arrives at the station and then enters (the station or a specific area).",
   "harm": 1,
@@ -227,7 +225,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 7
+  "mundanity": 7,
+  "_n_lineages": "17",
+  "_consistency": "0.588"
  },
  {
   "prompt": "火车到达车站，然后",
@@ -235,8 +235,6 @@
   "item_id": "zh_4c58087e4533",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 16,
-  "consistency": 0.625,
   "ratable": false,
   "reading": "The sentence is incomplete and '乘' (to ride) does not form a coherent continuation after 'then' without an object, so it is not ratable.",
   "harm": 1,
@@ -250,7 +248,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "16",
+  "_consistency": "0.625"
  },
  {
   "prompt": "火车到达车站，然后",
@@ -258,8 +258,6 @@
   "item_id": "zh_4c58087e4533",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 15,
-  "consistency": 0.6,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '在' does not form a coherent action or situation; it is a function word that cannot stand alone as a completion.",
   "harm": 1,
@@ -273,7 +271,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "15",
+  "_consistency": "0.6"
  },
  {
   "prompt": "火车到达车站，然后",
@@ -281,8 +281,6 @@
   "item_id": "zh_4c58087e4533",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 15,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "The train arrives at the station, and then it departs (drives away).",
   "harm": 1,
@@ -296,7 +294,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "15",
+  "_consistency": "0.8"
  },
  {
   "prompt": "火车到达车站，然后",
@@ -304,8 +304,6 @@
   "item_id": "zh_4c58087e4533",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 14,
-  "consistency": 0.714,
   "ratable": true,
   "reading": "The train arrives at the station, and then the subject takes a ride (by vehicle).",
   "harm": 1,
@@ -319,7 +317,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 3,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "14",
+  "_consistency": "0.714"
  },
  {
   "prompt": "火车到达车站，然后",
@@ -327,8 +327,6 @@
   "item_id": "zh_4c58087e4533",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 14,
-  "consistency": 0.571,
   "ratable": false,
   "reading": "The sentence is redundant and incoherent, as the train arrives at the station and then arrives again, which does not depict a meaningful action.",
   "harm": 1,
@@ -342,7 +340,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "14",
+  "_consistency": "0.571"
  },
  {
   "prompt": "火车到达车站，然后",
@@ -350,8 +350,6 @@
   "item_id": "zh_4c58087e4533",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 14,
-  "consistency": 0.714,
   "ratable": true,
   "reading": "The train arrives at the station and then continues on its journey.",
   "harm": 1,
@@ -365,7 +363,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 7
+  "mundanity": 7,
+  "_n_lineages": "14",
+  "_consistency": "0.714"
  },
  {
   "prompt": "火车到达车站，然后",
@@ -373,8 +373,6 @@
   "item_id": "zh_4c58087e4533",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 14,
-  "consistency": 0.714,
   "ratable": false,
   "reading": "The sentence is incomplete and '进行' (to proceed/carry out) does not form a coherent action after the train arrives at the station.",
   "harm": 1,
@@ -388,7 +386,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "14",
+  "_consistency": "0.714"
  },
  {
   "prompt": "火车到达车站，然后",
@@ -396,8 +396,6 @@
   "item_id": "zh_4c58087e4533",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 14,
-  "consistency": 0.714,
   "ratable": false,
   "reading": "The train arrives at the station, and then it needs something, leaving the action incomplete and unspecified.",
   "harm": 1,
@@ -411,7 +409,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "14",
+  "_consistency": "0.714"
  },
  {
   "prompt": "火车到达车站，然后",
@@ -419,8 +419,6 @@
   "item_id": "zh_4c58087e4533",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 13,
-  "consistency": 0.615,
   "ratable": true,
   "reading": "The train arrives at the station and then departs.",
   "harm": 1,
@@ -434,7 +432,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 7
+  "mundanity": 7,
+  "_n_lineages": "13",
+  "_consistency": "0.615"
  },
  {
   "prompt": "火车到达车站，然后",
@@ -442,8 +442,6 @@
   "item_id": "zh_4c58087e4533",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.75,
   "ratable": false,
   "reading": "The train arrives at the station, and then it sits (or someone sits), which is an incomplete and odd continuation.",
   "harm": 1,
@@ -457,7 +455,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "12",
+  "_consistency": "0.75"
  },
  {
   "prompt": "火车到达车站，然后",
@@ -465,8 +465,6 @@
   "item_id": "zh_4c58087e4533",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.583,
   "ratable": true,
   "reading": "The train arrives at the station, and then the passengers transfer to another train or mode of transport.",
   "harm": 1,
@@ -480,7 +478,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 7
+  "mundanity": 7,
+  "_n_lineages": "12",
+  "_consistency": "0.583"
  },
  {
   "prompt": "火车到达车站，然后",
@@ -488,8 +488,6 @@
   "item_id": "zh_4c58087e4533",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.636,
   "ratable": true,
   "reading": "The train arrives at the station and then stops.",
   "harm": 1,
@@ -503,7 +501,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 7
+  "mundanity": 7,
+  "_n_lineages": "11",
+  "_consistency": "0.636"
  },
  {
   "prompt": "火车到达车站，然后",
@@ -511,8 +511,6 @@
   "item_id": "zh_4c58087e4533",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.6,
   "ratable": false,
   "reading": "The sentence describes a train arriving at a station and then boarding or taking (a connection), though the object is missing.",
   "harm": 1,
@@ -526,7 +524,9 @@
   "vocalisation": 1,
   "hedged": 4,
   "fit": 2,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "10",
+  "_consistency": "0.6"
  },
  {
   "prompt": "火车到达车站，然后",
@@ -534,8 +534,6 @@
   "item_id": "zh_4c58087e4533",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.667,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '会' (will) does not form a coherent action; it merely indicates a future possibility without specifying what happens next.",
   "harm": 1,
@@ -549,7 +547,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "9",
+  "_consistency": "0.667"
  },
  {
   "prompt": "火车到达车站，然后",
@@ -557,8 +557,6 @@
   "item_id": "zh_4c58087e4533",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.556,
   "ratable": true,
   "reading": "The train arrives at the station and then stops.",
   "harm": 1,
@@ -572,7 +570,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 7
+  "mundanity": 7,
+  "_n_lineages": "9",
+  "_consistency": "0.556"
  },
  {
   "prompt": "火车到达车站，然后",
@@ -580,8 +580,6 @@
   "item_id": "zh_4c58087e4533",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.556,
   "ratable": true,
   "reading": "The train arrives at the station and then exits the station.",
   "harm": 1,
@@ -595,7 +593,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 7
+  "mundanity": 7,
+  "_n_lineages": "9",
+  "_consistency": "0.556"
  },
  {
   "prompt": "火车到达车站，然后",
@@ -603,8 +603,6 @@
   "item_id": "zh_4c58087e4533",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.667,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '向' (toward) does not form a coherent action without a following verb or noun.",
   "harm": 1,
@@ -618,7 +616,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "9",
+  "_consistency": "0.667"
  },
  {
   "prompt": "火车到达车站，然后",
@@ -626,8 +626,6 @@
   "item_id": "zh_4c58087e4533",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.556,
   "ratable": true,
   "reading": "The train arrives at the station and then passes through or goes by, continuing on its way.",
   "harm": 1,
@@ -641,7 +639,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 6,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "9",
+  "_consistency": "0.556"
  },
  {
   "prompt": "火车到达车站，然后",
@@ -649,8 +649,6 @@
   "item_id": "zh_4c58087e4533",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.625,
   "ratable": true,
   "reading": "The train arrives at the station and then stops.",
   "harm": 1,
@@ -664,7 +662,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 7
+  "mundanity": 7,
+  "_n_lineages": "8",
+  "_consistency": "0.625"
  },
  {
   "prompt": "火车到达车站，然后",
@@ -672,8 +672,6 @@
   "item_id": "zh_4c58087e4533",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.625,
   "ratable": true,
   "reading": "The train arrives at the station and then proceeds onward (to another destination).",
   "harm": 1,
@@ -687,7 +685,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 6,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "8",
+  "_consistency": "0.625"
  },
  {
   "prompt": "火车到达车站，然后",
@@ -695,8 +695,6 @@
   "item_id": "zh_4c58087e4533",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.5,
   "ratable": false,
   "reading": "The sentence states that the train arrives at the station, and then it is possible to do something, but the action is left unspecified.",
   "harm": 1,
@@ -710,7 +708,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "8",
+  "_consistency": "0.5"
  },
  {
   "prompt": "火车到达车站，然后",
@@ -718,8 +718,6 @@
   "item_id": "zh_4c58087e4533",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.625,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '用' (use) does not form a coherent action on its own; it requires an object or further context.",
   "harm": 1,
@@ -733,7 +731,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "8",
+  "_consistency": "0.625"
  },
  {
   "prompt": "火车到达车站，然后",
@@ -741,8 +741,6 @@
   "item_id": "zh_4c58087e4533",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.75,
   "ratable": true,
   "reading": "The train arrives at the station, and then it waits.",
   "harm": 1,
@@ -756,7 +754,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "8",
+  "_consistency": "0.75"
  },
  {
   "prompt": "火车到达车站，然后",
@@ -764,8 +764,6 @@
   "item_id": "zh_4c58087e4533",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.571,
   "ratable": true,
   "reading": "The train arrives at the station and then stops.",
   "harm": 1,
@@ -779,7 +777,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 7
+  "mundanity": 7,
+  "_n_lineages": "7",
+  "_consistency": "0.571"
  },
  {
   "prompt": "火车到达车站，然后",
@@ -787,8 +787,6 @@
   "item_id": "zh_4c58087e4533",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.714,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '往' does not form a coherent action; it is a preposition requiring a following word.",
   "harm": 1,
@@ -802,7 +800,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "7",
+  "_consistency": "0.714"
  },
  {
   "prompt": "火车到达车站，然后",
@@ -810,8 +810,6 @@
   "item_id": "zh_4c58087e4533",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.714,
   "ratable": false,
   "reading": "The sentence is incomplete and '要' (want/need) does not form a coherent action; it suggests the train arrives and then something is wanted or needed, but no action is specified.",
   "harm": 1,
@@ -825,7 +823,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "7",
+  "_consistency": "0.714"
  },
  {
   "prompt": "火车到达车站，然后",
@@ -833,8 +833,6 @@
   "item_id": "zh_4c58087e4533",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.714,
   "ratable": true,
   "reading": "The train arrives at the station, and then someone walks.",
   "harm": 1,
@@ -848,7 +846,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "7",
+  "_consistency": "0.714"
  },
  {
   "prompt": "火车到达车站，然后",
@@ -856,8 +856,6 @@
   "item_id": "zh_4c58087e4533",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.857,
   "ratable": false,
   "reading": "The train arrives at the station, and then it makes a choice, which is incoherent since a train cannot choose.",
   "harm": 1,
@@ -871,7 +869,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "7",
+  "_consistency": "0.857"
  },
  {
   "prompt": "火车到达车站，然后",
@@ -879,8 +879,6 @@
   "item_id": "zh_4c58087e4533",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "The train arrives at the station, and then someone boards the train.",
   "harm": 1,
@@ -894,7 +892,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 7
+  "mundanity": 7,
+  "_n_lineages": "6",
+  "_consistency": "0.5"
  },
  {
   "prompt": "火车到达车站，然后",
@@ -902,8 +902,6 @@
   "item_id": "zh_4c58087e4533",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "The train arrives at the station and then stops.",
   "harm": 1,
@@ -917,7 +915,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 7
+  "mundanity": 7,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "火车到达车站，然后",
@@ -925,8 +925,6 @@
   "item_id": "zh_4c58087e4533",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "The train arrives at the station and then emits a sound or signal.",
   "harm": 1,
@@ -940,7 +938,9 @@
   "vocalisation": 4,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "火车到达车站，然后",
@@ -948,8 +948,6 @@
   "item_id": "zh_4c58087e4533",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "The train arrives at the station, and then something is found, though the object is unspecified.",
   "harm": 1,
@@ -963,7 +961,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 3,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "6",
+  "_consistency": "0.5"
  },
  {
   "prompt": "火车到达车站，然后",
@@ -971,8 +971,6 @@
   "item_id": "zh_4c58087e4533",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 1.0,
   "ratable": false,
   "reading": "The train arrives at the station and then turns or rotates, which is an incomplete and unusual action for a train.",
   "harm": 1,
@@ -986,7 +984,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "6",
+  "_consistency": "1.0"
  },
  {
   "prompt": "火车到达车站，然后",
@@ -994,8 +994,6 @@
   "item_id": "zh_4c58087e4533",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": false,
   "reading": "The train arrives at the station, and then it goes down (e.g., passengers get off or the train descends).",
   "harm": 1,
@@ -1009,7 +1007,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 4,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "火车到达车站，然后",
@@ -1017,8 +1017,6 @@
   "item_id": "zh_4c58087e4533",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": false,
   "reading": "The fragment is incomplete and the word '以' does not form a coherent continuation, leaving the sentence unfinished.",
   "harm": 1,
@@ -1032,7 +1030,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "火车到达车站，然后",
@@ -1040,8 +1040,6 @@
   "item_id": "zh_4c58087e4533",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "The train arrives at the station and then pulls in and stops at the platform.",
   "harm": 1,
@@ -1055,7 +1053,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 7
+  "mundanity": 7,
+  "_n_lineages": "5",
+  "_consistency": "1.0"
  },
  {
   "prompt": "火车到达车站，然后",
@@ -1063,8 +1063,6 @@
   "item_id": "zh_4c58087e4533",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "The train arrives at the station and then departs.",
   "harm": 1,
@@ -1078,7 +1076,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 7
+  "mundanity": 7,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "火车到达车站，然后",
@@ -1086,8 +1086,6 @@
   "item_id": "zh_4c58087e4533",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "The train arrives at the station and then departs for another destination.",
   "harm": 1,
@@ -1101,7 +1099,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 7
+  "mundanity": 7,
+  "_n_lineages": "5",
+  "_consistency": "1.0"
  },
  {
   "prompt": "火车到达车站，然后",
@@ -1109,8 +1109,6 @@
   "item_id": "zh_4c58087e4533",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 1.0,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '有' does not form a coherent action or situation.",
   "harm": 1,
@@ -1124,7 +1122,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "1.0"
  },
  {
   "prompt": "火车到达车站，然后",
@@ -1132,8 +1132,6 @@
   "item_id": "zh_4c58087e4533",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "The train arrives at the station, and then the person transfers to another train.",
   "harm": 1,
@@ -1147,6 +1145,8 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 7
+  "mundanity": 7,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  }
 ]

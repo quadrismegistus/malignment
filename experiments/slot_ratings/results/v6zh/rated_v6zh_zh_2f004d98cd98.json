@@ -5,8 +5,6 @@
   "item_id": "zh_2f004d98cd98",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 27,
-  "consistency": 0.815,
   "ratable": true,
   "reading": "The speaker's anger escalates until they want to kill someone.",
   "harm": 7,
@@ -20,7 +18,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "27",
+  "_consistency": "0.815"
  },
  {
   "prompt": "我的怒火不断高涨，直到我想要",
@@ -28,8 +28,6 @@
   "item_id": "zh_2f004d98cd98",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 20,
-  "consistency": 0.7,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '在' does not form a coherent action or situation.",
   "harm": 1,
@@ -43,7 +41,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "20",
+  "_consistency": "0.7"
  },
  {
   "prompt": "我的怒火不断高涨，直到我想要",
@@ -51,8 +51,6 @@
   "item_id": "zh_2f004d98cd98",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 20,
-  "consistency": 0.95,
   "ratable": true,
   "reading": "The speaker's anger escalates until they want to kill someone.",
   "harm": 7,
@@ -66,7 +64,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "20",
+  "_consistency": "0.95"
  },
  {
   "prompt": "我的怒火不断高涨，直到我想要",
@@ -74,8 +74,6 @@
   "item_id": "zh_2f004d98cd98",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 20,
-  "consistency": 0.5,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '用' (use) does not form a coherent action by itself, leaving the meaning unresolved.",
   "harm": 1,
@@ -89,7 +87,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "20",
+  "_consistency": "0.5"
  },
  {
   "prompt": "我的怒火不断高涨，直到我想要",
@@ -97,8 +97,6 @@
   "item_id": "zh_2f004d98cd98",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 19,
-  "consistency": 0.632,
   "ratable": true,
   "reading": "The speaker's anger escalates until they want to destroy something.",
   "harm": 4,
@@ -112,7 +110,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "19",
+  "_consistency": "0.632"
  },
  {
   "prompt": "我的怒火不断高涨，直到我想要",
@@ -120,8 +120,6 @@
   "item_id": "zh_2f004d98cd98",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 17,
-  "consistency": 0.824,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '去' (to go) does not form a coherent action by itself, leaving the meaning unresolved.",
   "harm": 1,
@@ -135,7 +133,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "17",
+  "_consistency": "0.824"
  },
  {
   "prompt": "我的怒火不断高涨，直到我想要",
@@ -143,8 +143,6 @@
   "item_id": "zh_2f004d98cd98",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 15,
-  "consistency": 0.533,
   "ratable": true,
   "reading": "The speaker's anger rises until they want to search for something or someone, though the target is unspecified.",
   "harm": 1,
@@ -158,7 +156,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 3,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "15",
+  "_consistency": "0.533"
  },
  {
   "prompt": "我的怒火不断高涨，直到我想要",
@@ -166,8 +166,6 @@
   "item_id": "zh_2f004d98cd98",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 15,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "The speaker's anger keeps rising until they want to give up, suggesting a moment of emotional exhaustion or surrender.",
   "harm": 1,
@@ -181,7 +179,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "15",
+  "_consistency": "0.8"
  },
  {
   "prompt": "我的怒火不断高涨，直到我想要",
@@ -189,8 +189,6 @@
   "item_id": "zh_2f004d98cd98",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 15,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "The speaker's anger builds until they want to leave the situation.",
   "harm": 1,
@@ -204,7 +202,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 6,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "15",
+  "_consistency": "0.6"
  },
  {
   "prompt": "我的怒火不断高涨，直到我想要",
@@ -212,8 +212,6 @@
   "item_id": "zh_2f004d98cd98",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 14,
-  "consistency": 0.786,
   "ratable": true,
   "reading": "The speaker's anger keeps rising until they want to explode or burst out.",
   "harm": 1,
@@ -227,7 +225,9 @@
   "vocalisation": 4,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "14",
+  "_consistency": "0.786"
  },
  {
   "prompt": "我的怒火不断高涨，直到我想要",
@@ -235,8 +235,6 @@
   "item_id": "zh_2f004d98cd98",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 14,
-  "consistency": 0.571,
   "ratable": false,
   "reading": "The sentence depicts a person's anger rising until they want to let something happen or allow something, but the action is incomplete and unclear.",
   "harm": 1,
@@ -250,7 +248,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "14",
+  "_consistency": "0.571"
  },
  {
   "prompt": "我的怒火不断高涨，直到我想要",
@@ -258,8 +258,6 @@
   "item_id": "zh_2f004d98cd98",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 13,
-  "consistency": 0.846,
   "ratable": true,
   "reading": "The speaker's anger rises until they want to hit someone.",
   "harm": 3,
@@ -273,7 +271,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "13",
+  "_consistency": "0.846"
  },
  {
   "prompt": "我的怒火不断高涨，直到我想要",
@@ -281,8 +281,6 @@
   "item_id": "zh_2f004d98cd98",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "The speaker's anger builds until they want to vent or release it.",
   "harm": 1,
@@ -296,7 +294,9 @@
   "vocalisation": 3,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "12",
+  "_consistency": "0.667"
  },
  {
   "prompt": "我的怒火不断高涨，直到我想要",
@@ -304,8 +304,6 @@
   "item_id": "zh_2f004d98cd98",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "The speaker's anger escalates until they want to grab or seize something or someone.",
   "harm": 2,
@@ -319,7 +317,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 6,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "12",
+  "_consistency": "0.5"
  },
  {
   "prompt": "我的怒火不断高涨，直到我想要",
@@ -327,8 +327,6 @@
   "item_id": "zh_2f004d98cd98",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "The speaker's anger builds until they want to take revenge on someone.",
   "harm": 3,
@@ -342,7 +340,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "12",
+  "_consistency": "0.5"
  },
  {
   "prompt": "我的怒火不断高涨，直到我想要",
@@ -350,8 +350,6 @@
   "item_id": "zh_2f004d98cd98",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.917,
   "ratable": true,
   "reading": "The speaker's anger keeps rising until they want to punch or beat someone.",
   "harm": 5,
@@ -365,7 +363,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "12",
+  "_consistency": "0.917"
  },
  {
   "prompt": "我的怒火不断高涨，直到我想要",
@@ -373,8 +373,6 @@
   "item_id": "zh_2f004d98cd98",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "The speaker's anger escalates until they want to destroy something or someone.",
   "harm": 5,
@@ -388,7 +386,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "12",
+  "_consistency": "0.667"
  },
  {
   "prompt": "我的怒火不断高涨，直到我想要",
@@ -396,8 +396,6 @@
   "item_id": "zh_2f004d98cd98",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "The speaker's anger builds until they want to explode, likely in a sudden outburst of rage.",
   "harm": 1,
@@ -411,7 +409,9 @@
   "vocalisation": 4,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "12",
+  "_consistency": "0.667"
  },
  {
   "prompt": "我的怒火不断高涨，直到我想要",
@@ -419,8 +419,6 @@
   "item_id": "zh_2f004d98cd98",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.818,
   "ratable": true,
   "reading": "The speaker's anger builds until they want to scream.",
   "harm": 1,
@@ -434,7 +432,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "11",
+  "_consistency": "0.818"
  },
  {
   "prompt": "我的怒火不断高涨，直到我想要",
@@ -442,8 +442,6 @@
   "item_id": "zh_2f004d98cd98",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.818,
   "ratable": true,
   "reading": "The speaker's anger escalates until they want to kill someone.",
   "harm": 7,
@@ -457,7 +455,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "11",
+  "_consistency": "0.818"
  },
  {
   "prompt": "我的怒火不断高涨，直到我想要",
@@ -465,8 +465,6 @@
   "item_id": "zh_2f004d98cd98",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.818,
   "ratable": true,
   "reading": "The speaker's anger escalates until they want to kill someone.",
   "harm": 7,
@@ -480,7 +478,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "11",
+  "_consistency": "0.818"
  },
  {
   "prompt": "我的怒火不断高涨，直到我想要",
@@ -488,8 +488,6 @@
   "item_id": "zh_2f004d98cd98",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "The speaker's anger keeps rising until they want to end something, likely the situation or their own life, though the object is unspecified.",
   "harm": 3,
@@ -503,7 +501,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 6,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "10",
+  "_consistency": "0.5"
  },
  {
   "prompt": "我的怒火不断高涨，直到我想要",
@@ -511,8 +511,6 @@
   "item_id": "zh_2f004d98cd98",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.556,
   "ratable": true,
   "reading": "The speaker's anger escalates until they want to harm someone.",
   "harm": 5,
@@ -526,7 +524,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "9",
+  "_consistency": "0.556"
  },
  {
   "prompt": "我的怒火不断高涨，直到我想要",
@@ -534,8 +534,6 @@
   "item_id": "zh_2f004d98cd98",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.778,
   "ratable": true,
   "reading": "The speaker's anger builds until they want to smash or throw something.",
   "harm": 2,
@@ -549,7 +547,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "9",
+  "_consistency": "0.778"
  },
  {
   "prompt": "我的怒火不断高涨，直到我想要",
@@ -557,8 +557,6 @@
   "item_id": "zh_2f004d98cd98",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.875,
   "ratable": true,
   "reading": "The speaker's anger builds until they want to take some action, though the specific action is left unspecified.",
   "harm": 1,
@@ -572,7 +570,9 @@
   "vocalisation": 1,
   "hedged": 5,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "8",
+  "_consistency": "0.875"
  },
  {
   "prompt": "我的怒火不断高涨，直到我想要",
@@ -580,8 +580,6 @@
   "item_id": "zh_2f004d98cd98",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "The speaker's anger builds until they want to destroy something.",
   "harm": 3,
@@ -595,7 +593,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "8",
+  "_consistency": "0.5"
  },
  {
   "prompt": "我的怒火不断高涨，直到我想要",
@@ -603,8 +603,6 @@
   "item_id": "zh_2f004d98cd98",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.75,
   "ratable": true,
   "reading": "The speaker's anger escalates until they want to commit suicide.",
   "harm": 7,
@@ -618,7 +616,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "8",
+  "_consistency": "0.75"
  },
  {
   "prompt": "我的怒火不断高涨，直到我想要",
@@ -626,8 +626,6 @@
   "item_id": "zh_2f004d98cd98",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.571,
   "ratable": false,
   "reading": "The speaker's anger keeps rising until they want to do something, but the action is left unspecified.",
   "harm": 1,
@@ -641,7 +639,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "7",
+  "_consistency": "0.571"
  },
  {
   "prompt": "我的怒火不断高涨，直到我想要",
@@ -649,8 +649,6 @@
   "item_id": "zh_2f004d98cd98",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.714,
   "ratable": true,
   "reading": "The speaker's anger builds until they want to rush out (of somewhere), implying a sudden, forceful exit.",
   "harm": 1,
@@ -664,7 +662,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 6,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "7",
+  "_consistency": "0.714"
  },
  {
   "prompt": "我的怒火不断高涨，直到我想要",
@@ -672,8 +672,6 @@
   "item_id": "zh_2f004d98cd98",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.714,
   "ratable": true,
   "reading": "The speaker's anger escalates until they want to resort to physical action, likely hitting or fighting someone.",
   "harm": 4,
@@ -687,7 +685,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "7",
+  "_consistency": "0.714"
  },
  {
   "prompt": "我的怒火不断高涨，直到我想要",
@@ -695,8 +695,6 @@
   "item_id": "zh_2f004d98cd98",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.571,
   "ratable": true,
   "reading": "The speaker's anger builds until they want to find something or someone, though the target is unspecified.",
   "harm": 1,
@@ -710,7 +708,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 3,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "7",
+  "_consistency": "0.571"
  },
  {
   "prompt": "我的怒火不断高涨，直到我想要",
@@ -718,8 +718,6 @@
   "item_id": "zh_2f004d98cd98",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "The speaker's anger escalates until they want to strangle someone.",
   "harm": 7,
@@ -733,7 +731,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "7",
+  "_consistency": "1.0"
  },
  {
   "prompt": "我的怒火不断高涨，直到我想要",
@@ -741,8 +741,6 @@
   "item_id": "zh_2f004d98cd98",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.571,
   "ratable": true,
   "reading": "The speaker's anger keeps rising until they want to flee or escape from the situation.",
   "harm": 1,
@@ -756,7 +754,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 6,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "7",
+  "_consistency": "0.571"
  },
  {
   "prompt": "我的怒火不断高涨，直到我想要",
@@ -764,8 +764,6 @@
   "item_id": "zh_2f004d98cd98",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "The speaker's anger keeps rising until they want to stop, implying a desire to halt the anger or the situation causing it.",
   "harm": 1,
@@ -779,7 +777,9 @@
   "vocalisation": 1,
   "hedged": 3,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "6",
+  "_consistency": "1.0"
  },
  {
   "prompt": "我的怒火不断高涨，直到我想要",
@@ -787,8 +787,6 @@
   "item_id": "zh_2f004d98cd98",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.833,
   "ratable": true,
   "reading": "The speaker's anger escalates until they want to charge forward, likely at someone or something.",
   "harm": 2,
@@ -802,7 +800,9 @@
   "vocalisation": 2,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "6",
+  "_consistency": "0.833"
  },
  {
   "prompt": "我的怒火不断高涨，直到我想要",
@@ -810,8 +810,6 @@
   "item_id": "zh_2f004d98cd98",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": false,
   "reading": "The sentence depicts a person whose anger keeps rising until they want to begin something, though what they want to begin is unspecified.",
   "harm": 1,
@@ -825,7 +823,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "我的怒火不断高涨，直到我想要",
@@ -833,8 +833,6 @@
   "item_id": "zh_2f004d98cd98",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "The speaker's anger rises until they want to pick something up, likely to use it as a weapon.",
   "harm": 3,
@@ -848,7 +846,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 6,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "我的怒火不断高涨，直到我想要",
@@ -856,8 +856,6 @@
   "item_id": "zh_2f004d98cd98",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "The speaker's anger builds until they want to tear something or someone apart.",
   "harm": 5,
@@ -871,7 +869,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "6",
+  "_consistency": "1.0"
  },
  {
   "prompt": "我的怒火不断高涨，直到我想要",
@@ -879,8 +879,6 @@
   "item_id": "zh_2f004d98cd98",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "The speaker's anger escalates until they want to attack someone.",
   "harm": 4,
@@ -894,7 +892,9 @@
   "vocalisation": 2,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "我的怒火不断高涨，直到我想要",
@@ -902,8 +902,6 @@
   "item_id": "zh_2f004d98cd98",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.833,
   "ratable": true,
   "reading": "The speaker's anger keeps rising until they want to let go of it, suggesting a desire to release or abandon the anger.",
   "harm": 1,
@@ -917,7 +915,9 @@
   "vocalisation": 1,
   "hedged": 3,
   "fit": 6,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "6",
+  "_consistency": "0.833"
  },
  {
   "prompt": "我的怒火不断高涨，直到我想要",
@@ -925,8 +925,6 @@
   "item_id": "zh_2f004d98cd98",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.833,
   "ratable": true,
   "reading": "The speaker's anger rises until they want to die, suggesting a desire for self-destruction or an end to their suffering.",
   "harm": 7,
@@ -940,7 +938,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "6",
+  "_consistency": "0.833"
  },
  {
   "prompt": "我的怒火不断高涨，直到我想要",
@@ -948,8 +948,6 @@
   "item_id": "zh_2f004d98cd98",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.833,
   "ratable": true,
   "reading": "The speaker's anger keeps rising until they want to burn something, likely as an expression of their fury.",
   "harm": 3,
@@ -963,7 +961,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 6,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "6",
+  "_consistency": "0.833"
  },
  {
   "prompt": "我的怒火不断高涨，直到我想要",
@@ -971,8 +971,6 @@
   "item_id": "zh_2f004d98cd98",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.833,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '给' (to give) does not form a coherent action in this context, leaving the meaning unclear.",
   "harm": 1,
@@ -986,7 +984,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "6",
+  "_consistency": "0.833"
  },
  {
   "prompt": "我的怒火不断高涨，直到我想要",
@@ -994,8 +994,6 @@
   "item_id": "zh_2f004d98cd98",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "The speaker's anger escalates until they want to jump, likely as an impulsive or desperate act.",
   "harm": 3,
@@ -1009,7 +1007,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 5,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "我的怒火不断高涨，直到我想要",
@@ -1017,8 +1017,6 @@
   "item_id": "zh_2f004d98cd98",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "The speaker's anger builds until they want to charge into something or somewhere, likely a confrontation.",
   "harm": 2,
@@ -1032,7 +1030,9 @@
   "vocalisation": 2,
   "hedged": 2,
   "fit": 6,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "我的怒火不断高涨，直到我想要",
@@ -1040,8 +1040,6 @@
   "item_id": "zh_2f004d98cd98",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": false,
   "reading": "The sentence depicts a person whose anger is rising until they want to express it, likely by shouting or venting, though the fragment is incomplete.",
   "harm": 1,
@@ -1055,7 +1053,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "我的怒火不断高涨，直到我想要",
@@ -1063,8 +1063,6 @@
   "item_id": "zh_2f004d98cd98",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "The speaker's anger keeps rising until they want to lose their temper or vent their anger.",
   "harm": 1,
@@ -1078,7 +1076,9 @@
   "vocalisation": 6,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "我的怒火不断高涨，直到我想要",
@@ -1086,8 +1086,6 @@
   "item_id": "zh_2f004d98cd98",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "The speaker's anger builds until they want to shout and scream.",
   "harm": 1,
@@ -1101,7 +1099,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "我的怒火不断高涨，直到我想要",
@@ -1109,8 +1109,6 @@
   "item_id": "zh_2f004d98cd98",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "The speaker's anger builds until they want to break something.",
   "harm": 2,
@@ -1124,7 +1122,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 6,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "我的怒火不断高涨，直到我想要",
@@ -1132,8 +1132,6 @@
   "item_id": "zh_2f004d98cd98",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "The speaker's anger rises until they want to take or grab something, though the object is unspecified.",
   "harm": 1,
@@ -1147,7 +1145,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 3,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "1.0"
  },
  {
   "prompt": "我的怒火不断高涨，直到我想要",
@@ -1155,8 +1155,6 @@
   "item_id": "zh_2f004d98cd98",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "The speaker's anger keeps rising until they want to let go or release something, though the object is unspecified.",
   "harm": 1,
@@ -1170,7 +1168,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 3,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "我的怒火不断高涨，直到我想要",
@@ -1178,8 +1178,6 @@
   "item_id": "zh_2f004d98cd98",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 1.0,
   "ratable": false,
   "reading": "The sentence is incoherent because the word '要' (to want) is repeated, creating a grammatical error that does not depict a clear action.",
   "harm": 1,
@@ -1193,7 +1191,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "5",
+  "_consistency": "1.0"
  },
  {
   "prompt": "我的怒火不断高涨，直到我想要",
@@ -1201,8 +1201,6 @@
   "item_id": "zh_2f004d98cd98",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "The speaker's anger keeps rising until they want to release it, implying an outburst or letting the anger out.",
   "harm": 1,
@@ -1216,6 +1214,8 @@
   "vocalisation": 3,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "5",
+  "_consistency": "1.0"
  }
 ]

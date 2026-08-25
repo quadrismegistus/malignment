@@ -5,8 +5,6 @@
   "item_id": "zh_6c4d789eb804",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 22,
-  "consistency": 0.818,
   "ratable": false,
   "reading": "He softly says 'I want to go' — the sentence is incomplete, so the action is simply the act of stating a desire to go somewhere.",
   "harm": 1,
@@ -20,7 +18,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "22",
+  "_consistency": "0.818"
  },
  {
   "prompt": "他轻声说“我想要",
@@ -28,8 +28,6 @@
   "item_id": "zh_6c4d789eb804",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 16,
-  "consistency": 0.5,
   "ratable": false,
   "reading": "He softly says 'I want to do' without specifying what, leaving the action undefined.",
   "harm": 1,
@@ -43,7 +41,9 @@
   "vocalisation": 7,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "16",
+  "_consistency": "0.5"
  },
  {
   "prompt": "他轻声说“我想要",
@@ -51,8 +51,6 @@
   "item_id": "zh_6c4d789eb804",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 16,
-  "consistency": 0.625,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '在' does not form a coherent continuation of the phrase '我想要', making it unclear what action or situation is depicted.",
   "harm": 1,
@@ -66,7 +64,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "16",
+  "_consistency": "0.625"
  },
  {
   "prompt": "他轻声说“我想要",
@@ -74,8 +74,6 @@
   "item_id": "zh_6c4d789eb804",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 16,
-  "consistency": 0.938,
   "ratable": true,
   "reading": "He softly says 'I want to become' — an incomplete aspiration, likely about becoming something or someone.",
   "harm": 1,
@@ -89,7 +87,9 @@
   "vocalisation": 6,
   "hedged": 5,
   "fit": 6,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "16",
+  "_consistency": "0.938"
  },
  {
   "prompt": "他轻声说“我想要",
@@ -97,8 +97,6 @@
   "item_id": "zh_6c4d789eb804",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 16,
-  "consistency": 0.625,
   "ratable": true,
   "reading": "He softly says 'I want to know'.",
   "harm": 1,
@@ -112,7 +110,9 @@
   "vocalisation": 7,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "16",
+  "_consistency": "0.625"
  },
  {
   "prompt": "他轻声说“我想要",
@@ -120,8 +120,6 @@
   "item_id": "zh_6c4d789eb804",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "He softly says 'I want to eat'.",
   "harm": 1,
@@ -135,7 +133,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 7
+  "mundanity": 7,
+  "_n_lineages": "12",
+  "_consistency": "0.5"
  },
  {
   "prompt": "他轻声说“我想要",
@@ -143,8 +143,6 @@
   "item_id": "zh_6c4d789eb804",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.818,
   "ratable": true,
   "reading": "He softly says he wants to go home.",
   "harm": 1,
@@ -158,7 +156,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "11",
+  "_consistency": "0.818"
  },
  {
   "prompt": "他轻声说“我想要",
@@ -166,8 +166,6 @@
   "item_id": "zh_6c4d789eb804",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.6,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '的是' is a grammatical particle that cannot stand alone as a meaningful completion, making the sentence incoherent.",
   "harm": 1,
@@ -181,7 +179,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "10",
+  "_consistency": "0.6"
  },
  {
   "prompt": "他轻声说“我想要",
@@ -189,8 +189,6 @@
   "item_id": "zh_6c4d789eb804",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.9,
   "ratable": true,
   "reading": "He softly says 'I want to see' — an incomplete but coherent expression of a desire to look at something.",
   "harm": 1,
@@ -204,7 +202,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "10",
+  "_consistency": "0.9"
  },
  {
   "prompt": "他轻声说“我想要",
@@ -212,8 +212,6 @@
   "item_id": "zh_6c4d789eb804",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "He softly says he wants to leave.",
   "harm": 1,
@@ -227,7 +225,9 @@
   "vocalisation": 7,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "10",
+  "_consistency": "1.0"
  },
  {
   "prompt": "他轻声说“我想要",
@@ -235,8 +235,6 @@
   "item_id": "zh_6c4d789eb804",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.714,
   "ratable": true,
   "reading": "He softly says 'I want to buy' — the sentence depicts someone quietly expressing a desire to make a purchase.",
   "harm": 1,
@@ -250,7 +248,9 @@
   "vocalisation": 7,
   "hedged": 2,
   "fit": 5,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "7",
+  "_consistency": "0.714"
  },
  {
   "prompt": "他轻声说“我想要",
@@ -258,8 +258,6 @@
   "item_id": "zh_6c4d789eb804",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "He softly says 'I want to go see' — the action is going to see something or someone, with the object unspecified.",
   "harm": 1,
@@ -273,7 +271,9 @@
   "vocalisation": 6,
   "hedged": 2,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "7",
+  "_consistency": "1.0"
  },
  {
   "prompt": "他轻声说“我想要",
@@ -281,8 +281,6 @@
   "item_id": "zh_6c4d789eb804",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.571,
   "ratable": true,
   "reading": "He softly says 'I want to find' — the sentence depicts someone quietly expressing a desire to search for something or someone.",
   "harm": 1,
@@ -296,7 +294,9 @@
   "vocalisation": 6,
   "hedged": 2,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "7",
+  "_consistency": "0.571"
  },
  {
   "prompt": "他轻声说“我想要",
@@ -304,8 +304,6 @@
   "item_id": "zh_6c4d789eb804",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.571,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '是' does not form a coherent action or situation.",
   "harm": 1,
@@ -319,7 +317,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "7",
+  "_consistency": "0.571"
  },
  {
   "prompt": "他轻声说“我想要",
@@ -327,8 +327,6 @@
   "item_id": "zh_6c4d789eb804",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.571,
   "ratable": true,
   "reading": "He softly says he wants to take a look.",
   "harm": 1,
@@ -342,7 +340,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 7
+  "mundanity": 7,
+  "_n_lineages": "7",
+  "_consistency": "0.571"
  },
  {
   "prompt": "他轻声说“我想要",
@@ -350,8 +350,6 @@
   "item_id": "zh_6c4d789eb804",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.833,
   "ratable": true,
   "reading": "He softly says 'I want to understand'.",
   "harm": 1,
@@ -365,7 +363,9 @@
   "vocalisation": 7,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "6",
+  "_consistency": "0.833"
  },
  {
   "prompt": "他轻声说“我想要",
@@ -373,8 +373,6 @@
   "item_id": "zh_6c4d789eb804",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "He softly says 'I want to go back'.",
   "harm": 1,
@@ -388,7 +386,9 @@
   "vocalisation": 6,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "6",
+  "_consistency": "1.0"
  },
  {
   "prompt": "他轻声说“我想要",
@@ -396,8 +396,6 @@
   "item_id": "zh_6c4d789eb804",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "He softly says 'I want to marry'.",
   "harm": 1,
@@ -411,6 +409,8 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "6",
+  "_consistency": "0.5"
  }
 ]

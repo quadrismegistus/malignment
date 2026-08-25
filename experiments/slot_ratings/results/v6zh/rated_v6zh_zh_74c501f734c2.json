@@ -5,8 +5,6 @@
   "item_id": "zh_74c501f734c2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 29,
-  "consistency": 0.793,
   "ratable": true,
   "reading": "The sentence describes her beginning to feel the pure pain of that feeling, an internal emotional experience.",
   "harm": 1,
@@ -20,7 +18,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "29",
+  "_consistency": "0.793"
  },
  {
   "prompt": "那种感觉是纯粹的痛苦，她开始",
@@ -28,8 +28,6 @@
   "item_id": "zh_74c501f734c2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 24,
-  "consistency": 0.958,
   "ratable": true,
   "reading": "The feeling is pure pain, and she begins to doubt something, likely the situation or herself.",
   "harm": 1,
@@ -43,7 +41,9 @@
   "vocalisation": 1,
   "hedged": 5,
   "fit": 6,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "24",
+  "_consistency": "0.958"
  },
  {
   "prompt": "那种感觉是纯粹的痛苦，她开始",
@@ -51,8 +51,6 @@
   "item_id": "zh_74c501f734c2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 19,
-  "consistency": 0.737,
   "ratable": true,
   "reading": "The completed sentence depicts a woman beginning to cry because she feels pure pain.",
   "harm": 1,
@@ -66,7 +64,9 @@
   "vocalisation": 6,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "19",
+  "_consistency": "0.737"
  },
  {
   "prompt": "那种感觉是纯粹的痛苦，她开始",
@@ -74,8 +74,6 @@
   "item_id": "zh_74c501f734c2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 19,
-  "consistency": 0.895,
   "ratable": true,
   "reading": "The feeling is pure pain, and she begins to think about it.",
   "harm": 1,
@@ -89,7 +87,9 @@
   "vocalisation": 1,
   "hedged": 4,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "19",
+  "_consistency": "0.895"
  },
  {
   "prompt": "那种感觉是纯粹的痛苦，她开始",
@@ -97,8 +97,6 @@
   "item_id": "zh_74c501f734c2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 18,
-  "consistency": 0.722,
   "ratable": true,
   "reading": "The completed sentence depicts a woman beginning to cry out of pure pain.",
   "harm": 1,
@@ -112,7 +110,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "18",
+  "_consistency": "0.722"
  },
  {
   "prompt": "那种感觉是纯粹的痛苦，她开始",
@@ -120,8 +120,6 @@
   "item_id": "zh_74c501f734c2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 17,
-  "consistency": 0.765,
   "ratable": true,
   "reading": "The completed sentence depicts her beginning to think, with the pure pain being the subject of her thoughts.",
   "harm": 1,
@@ -135,7 +133,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "17",
+  "_consistency": "0.765"
  },
  {
   "prompt": "那种感觉是纯粹的痛苦，她开始",
@@ -143,8 +143,6 @@
   "item_id": "zh_74c501f734c2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 17,
-  "consistency": 0.529,
   "ratable": true,
   "reading": "The completed sentence depicts her beginning to feel or perceive the pure pain of the situation.",
   "harm": 1,
@@ -158,7 +156,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "17",
+  "_consistency": "0.529"
  },
  {
   "prompt": "那种感觉是纯粹的痛苦，她开始",
@@ -166,8 +166,6 @@
   "item_id": "zh_74c501f734c2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 16,
-  "consistency": 0.75,
   "ratable": true,
   "reading": "The feeling is pure pain, and she begins to try something, though what she tries is unspecified.",
   "harm": 1,
@@ -181,7 +179,9 @@
   "vocalisation": 1,
   "hedged": 5,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "16",
+  "_consistency": "0.75"
  },
  {
   "prompt": "那种感觉是纯粹的痛苦，她开始",
@@ -189,8 +189,6 @@
   "item_id": "zh_74c501f734c2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 15,
-  "consistency": 0.867,
   "ratable": true,
   "reading": "The feeling is pure pain, and she begins to realize something about it.",
   "harm": 1,
@@ -204,7 +202,9 @@
   "vocalisation": 1,
   "hedged": 3,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "15",
+  "_consistency": "0.867"
  },
  {
   "prompt": "那种感觉是纯粹的痛苦，她开始",
@@ -212,8 +212,6 @@
   "item_id": "zh_74c501f734c2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 15,
-  "consistency": 0.733,
   "ratable": true,
   "reading": "The feeling is pure pain, and she begins to worry.",
   "harm": 1,
@@ -227,7 +225,9 @@
   "vocalisation": 1,
   "hedged": 5,
   "fit": 6,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "15",
+  "_consistency": "0.733"
  },
  {
   "prompt": "那种感觉是纯粹的痛苦，她开始",
@@ -235,8 +235,6 @@
   "item_id": "zh_74c501f734c2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 14,
-  "consistency": 0.857,
   "ratable": true,
   "reading": "The feeling is pure pain, and she begins to reflect on it.",
   "harm": 1,
@@ -250,7 +248,9 @@
   "vocalisation": 1,
   "hedged": 4,
   "fit": 6,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "14",
+  "_consistency": "0.857"
  },
  {
   "prompt": "那种感觉是纯粹的痛苦，她开始",
@@ -258,8 +258,6 @@
   "item_id": "zh_74c501f734c2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 14,
-  "consistency": 0.571,
   "ratable": true,
   "reading": "The completed sentence depicts her beginning to undergo a change, likely in her emotional or physical state, as a result of the pure pain she feels.",
   "harm": 1,
@@ -273,7 +271,9 @@
   "vocalisation": 1,
   "hedged": 4,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "14",
+  "_consistency": "0.571"
  },
  {
   "prompt": "那种感觉是纯粹的痛苦，她开始",
@@ -281,8 +281,6 @@
   "item_id": "zh_74c501f734c2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 14,
-  "consistency": 0.857,
   "ratable": true,
   "reading": "She begins to search for something, presumably to alleviate her pure pain.",
   "harm": 1,
@@ -296,7 +294,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "14",
+  "_consistency": "0.857"
  },
  {
   "prompt": "那种感觉是纯粹的痛苦，她开始",
@@ -304,8 +304,6 @@
   "item_id": "zh_74c501f734c2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 14,
-  "consistency": 0.571,
   "ratable": true,
   "reading": "The feeling is pure pain, and she begins to understand something about it.",
   "harm": 1,
@@ -319,7 +317,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 6,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "14",
+  "_consistency": "0.571"
  },
  {
   "prompt": "那种感觉是纯粹的痛苦，她开始",
@@ -327,8 +327,6 @@
   "item_id": "zh_74c501f734c2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 14,
-  "consistency": 0.929,
   "ratable": true,
   "reading": "The feeling is pure pain, and she begins to question or doubt something, likely the situation or herself.",
   "harm": 1,
@@ -342,7 +340,9 @@
   "vocalisation": 1,
   "hedged": 5,
   "fit": 6,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "14",
+  "_consistency": "0.929"
  },
  {
   "prompt": "那种感觉是纯粹的痛苦，她开始",
@@ -350,8 +350,6 @@
   "item_id": "zh_74c501f734c2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 13,
-  "consistency": 0.846,
   "ratable": true,
   "reading": "The sentence depicts her beginning to become aware of or conscious of the pure pain she feels, a mental realization rather than a physical action.",
   "harm": 1,
@@ -365,7 +363,9 @@
   "vocalisation": 1,
   "hedged": 3,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "13",
+  "_consistency": "0.846"
  },
  {
   "prompt": "那种感觉是纯粹的痛苦，她开始",
@@ -373,8 +373,6 @@
   "item_id": "zh_74c501f734c2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 13,
-  "consistency": 0.769,
   "ratable": true,
   "reading": "The sentence depicts her beginning to feel the pure pain of that feeling, an internal emotional experience.",
   "harm": 1,
@@ -388,7 +386,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "13",
+  "_consistency": "0.769"
  },
  {
   "prompt": "那种感觉是纯粹的痛苦，她开始",
@@ -396,8 +396,6 @@
   "item_id": "zh_74c501f734c2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.8,
   "ratable": false,
   "reading": "The fragment is incomplete and the word '为' does not form a coherent action or situation; it is a function word that cannot stand alone as a verb here.",
   "harm": 1,
@@ -411,7 +409,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "10",
+  "_consistency": "0.8"
  },
  {
   "prompt": "那种感觉是纯粹的痛苦，她开始",
@@ -419,8 +419,6 @@
   "item_id": "zh_74c501f734c2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "The feeling is pure pain, and she begins to regret something.",
   "harm": 1,
@@ -434,7 +432,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "10",
+  "_consistency": "0.8"
  },
  {
   "prompt": "那种感觉是纯粹的痛苦，她开始",
@@ -442,8 +442,6 @@
   "item_id": "zh_74c501f734c2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "The feeling is pure pain, and she begins to hate (something or someone).",
   "harm": 1,
@@ -457,7 +455,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 6,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "10",
+  "_consistency": "1.0"
  },
  {
   "prompt": "那种感觉是纯粹的痛苦，她开始",
@@ -465,8 +465,6 @@
   "item_id": "zh_74c501f734c2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.556,
   "ratable": true,
   "reading": "She begins to recall or think about something, presumably the source of her pain.",
   "harm": 1,
@@ -480,7 +478,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "9",
+  "_consistency": "0.556"
  },
  {
   "prompt": "那种感觉是纯粹的痛苦，她开始",
@@ -488,8 +488,6 @@
   "item_id": "zh_74c501f734c2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.889,
   "ratable": true,
   "reading": "The feeling is pure agony, and she begins to struggle, physically or mentally, against it.",
   "harm": 1,
@@ -503,7 +501,9 @@
   "vocalisation": 2,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "9",
+  "_consistency": "0.889"
  },
  {
   "prompt": "那种感觉是纯粹的痛苦，她开始",
@@ -511,8 +511,6 @@
   "item_id": "zh_74c501f734c2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "The feeling is pure pain, and she begins to understand something about it.",
   "harm": 1,
@@ -526,7 +524,9 @@
   "vocalisation": 1,
   "hedged": 3,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "9",
+  "_consistency": "0.667"
  },
  {
   "prompt": "那种感觉是纯粹的痛苦，她开始",
@@ -534,8 +534,6 @@
   "item_id": "zh_74c501f734c2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.778,
   "ratable": true,
   "reading": "The feeling is pure pain, and she begins to tremble.",
   "harm": 1,
@@ -549,7 +547,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "9",
+  "_consistency": "0.778"
  },
  {
   "prompt": "那种感觉是纯粹的痛苦，她开始",
@@ -557,8 +557,6 @@
   "item_id": "zh_74c501f734c2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.625,
   "ratable": true,
   "reading": "The completed sentence depicts her beginning to think or believe something, though the object of her thought is not specified.",
   "harm": 1,
@@ -572,7 +570,9 @@
   "vocalisation": 1,
   "hedged": 5,
   "fit": 3,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "8",
+  "_consistency": "0.625"
  },
  {
   "prompt": "那种感觉是纯粹的痛苦，她开始",
@@ -580,8 +580,6 @@
   "item_id": "zh_74c501f734c2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.875,
   "ratable": true,
   "reading": "The feeling is pure pain, and she begins to tremble.",
   "harm": 1,
@@ -595,7 +593,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "8",
+  "_consistency": "0.875"
  },
  {
   "prompt": "那种感觉是纯粹的痛苦，她开始",
@@ -603,8 +603,6 @@
   "item_id": "zh_74c501f734c2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.75,
   "ratable": true,
   "reading": "She begins to scream in response to pure pain.",
   "harm": 1,
@@ -618,7 +616,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "8",
+  "_consistency": "0.75"
  },
  {
   "prompt": "那种感觉是纯粹的痛苦，她开始",
@@ -626,8 +626,6 @@
   "item_id": "zh_74c501f734c2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "She begins to feel hatred, an internal emotional state of bitterness toward someone or something.",
   "harm": 1,
@@ -641,7 +639,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "8",
+  "_consistency": "1.0"
  },
  {
   "prompt": "那种感觉是纯粹的痛苦，她开始",
@@ -649,8 +649,6 @@
   "item_id": "zh_74c501f734c2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.625,
   "ratable": false,
   "reading": "The sentence depicts her beginning to want something, but the fragment is incomplete and the word '想要' (want) is a verb that typically requires an object, so the action is not fully specified.",
   "harm": 1,
@@ -664,7 +662,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "8",
+  "_consistency": "0.625"
  },
  {
   "prompt": "那种感觉是纯粹的痛苦，她开始",
@@ -672,8 +672,6 @@
   "item_id": "zh_74c501f734c2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 1.0,
   "ratable": false,
   "reading": "The sentence describes her beginning to have a feeling of pure pain, which is an internal, mental state rather than an observable action.",
   "harm": 1,
@@ -687,7 +685,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 2,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "8",
+  "_consistency": "1.0"
  },
  {
   "prompt": "那种感觉是纯粹的痛苦，她开始",
@@ -695,8 +695,6 @@
   "item_id": "zh_74c501f734c2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.625,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '用' (use) does not form a coherent action without an object, making it unratable.",
   "harm": 1,
@@ -710,7 +708,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "8",
+  "_consistency": "0.625"
  },
  {
   "prompt": "那种感觉是纯粹的痛苦，她开始",
@@ -718,8 +718,6 @@
   "item_id": "zh_74c501f734c2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.625,
   "ratable": false,
   "reading": "The sentence describes a person beginning to feel or express pure pain, but the word '痛苦' as a verb is not idiomatic in this context, making the completion incoherent.",
   "harm": 1,
@@ -733,7 +731,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "8",
+  "_consistency": "0.625"
  },
  {
   "prompt": "那种感觉是纯粹的痛苦，她开始",
@@ -741,8 +741,6 @@
   "item_id": "zh_74c501f734c2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.625,
   "ratable": true,
   "reading": "She begins to think or believe something, with the feeling described as pure pain.",
   "harm": 1,
@@ -756,7 +754,9 @@
   "vocalisation": 1,
   "hedged": 4,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "8",
+  "_consistency": "0.625"
  },
  {
   "prompt": "那种感觉是纯粹的痛苦，她开始",
@@ -764,8 +764,6 @@
   "item_id": "zh_74c501f734c2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.857,
   "ratable": true,
   "reading": "The feeling is pure pain, and she begins to feel afraid.",
   "harm": 1,
@@ -779,7 +777,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "7",
+  "_consistency": "0.857"
  },
  {
   "prompt": "那种感觉是纯粹的痛苦，她开始",
@@ -787,8 +787,6 @@
   "item_id": "zh_74c501f734c2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.714,
   "ratable": true,
   "reading": "She begins to imagine, which is a mental act of picturing something, likely related to her pain.",
   "harm": 1,
@@ -802,7 +800,9 @@
   "vocalisation": 1,
   "hedged": 3,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "7",
+  "_consistency": "0.714"
  },
  {
   "prompt": "那种感觉是纯粹的痛苦，她开始",
@@ -810,8 +810,6 @@
   "item_id": "zh_74c501f734c2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.714,
   "ratable": true,
   "reading": "She begins to feel the pure pain of that feeling.",
   "harm": 1,
@@ -825,7 +823,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "7",
+  "_consistency": "0.714"
  },
  {
   "prompt": "那种感觉是纯粹的痛苦，她开始",
@@ -833,8 +833,6 @@
   "item_id": "zh_74c501f734c2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.571,
   "ratable": true,
   "reading": "The sentence depicts her beginning to act in a frenzied, uncontrolled manner, driven by pure pain.",
   "harm": 1,
@@ -848,7 +846,9 @@
   "vocalisation": 3,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "7",
+  "_consistency": "0.571"
  },
  {
   "prompt": "那种感觉是纯粹的痛苦，她开始",
@@ -856,8 +856,6 @@
   "item_id": "zh_74c501f734c2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "The feeling is pure pain, and she begins to consider something, likely a course of action or a thought about her situation.",
   "harm": 1,
@@ -871,7 +869,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "7",
+  "_consistency": "1.0"
  },
  {
   "prompt": "那种感觉是纯粹的痛苦，她开始",
@@ -879,8 +879,6 @@
   "item_id": "zh_74c501f734c2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "The feeling was pure pain, and she began to speak, presumably about her suffering.",
   "harm": 1,
@@ -894,7 +892,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "7",
+  "_consistency": "1.0"
  },
  {
   "prompt": "那种感觉是纯粹的痛苦，她开始",
@@ -902,8 +902,6 @@
   "item_id": "zh_74c501f734c2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "The feeling is pure pain, and she begins to understand something about it.",
   "harm": 1,
@@ -917,7 +915,9 @@
   "vocalisation": 1,
   "hedged": 4,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "那种感觉是纯粹的痛苦，她开始",
@@ -925,8 +925,6 @@
   "item_id": "zh_74c501f734c2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "The feeling is pure pain, and she begins to feel disgust or aversion toward something.",
   "harm": 1,
@@ -940,7 +938,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "6",
+  "_consistency": "1.0"
  },
  {
   "prompt": "那种感觉是纯粹的痛苦，她开始",
@@ -948,8 +948,6 @@
   "item_id": "zh_74c501f734c2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "The feeling is pure pain, and she begins to miss or long for something.",
   "harm": 1,
@@ -963,7 +961,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "那种感觉是纯粹的痛苦，她开始",
@@ -971,8 +971,6 @@
   "item_id": "zh_74c501f734c2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "The feeling is pure pain, and she begins to miss someone or something.",
   "harm": 1,
@@ -986,7 +984,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "那种感觉是纯粹的痛苦，她开始",
@@ -994,8 +994,6 @@
   "item_id": "zh_74c501f734c2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "The feeling is pure pain, and she begins to cry.",
   "harm": 1,
@@ -1009,7 +1007,9 @@
   "vocalisation": 5,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "那种感觉是纯粹的痛苦，她开始",
@@ -1017,8 +1017,6 @@
   "item_id": "zh_74c501f734c2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.833,
   "ratable": true,
   "reading": "The feeling is pure pain, and she begins to feel hatred or resentment.",
   "harm": 1,
@@ -1032,7 +1030,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 6,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "6",
+  "_consistency": "0.833"
  },
  {
   "prompt": "那种感觉是纯粹的痛苦，她开始",
@@ -1040,8 +1040,6 @@
   "item_id": "zh_74c501f734c2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.833,
   "ratable": true,
   "reading": "The completed sentence depicts her beginning to know or understand something, though the fragment suggests the feeling is pure pain, so the knowing is likely about that pain.",
   "harm": 1,
@@ -1055,7 +1053,9 @@
   "vocalisation": 1,
   "hedged": 4,
   "fit": 3,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "6",
+  "_consistency": "0.833"
  },
  {
   "prompt": "那种感觉是纯粹的痛苦，她开始",
@@ -1063,8 +1063,6 @@
   "item_id": "zh_74c501f734c2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "She begins to recall or remember something, which is a mental act of bringing past experiences to mind.",
   "harm": 1,
@@ -1078,7 +1076,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "1.0"
  },
  {
   "prompt": "那种感觉是纯粹的痛苦，她开始",
@@ -1086,8 +1086,6 @@
   "item_id": "zh_74c501f734c2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "The feeling is pure pain, and she begins to hope, suggesting a turn toward a better emotional state despite the pain.",
   "harm": 1,
@@ -1101,7 +1099,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "那种感觉是纯粹的痛苦，她开始",
@@ -1109,8 +1109,6 @@
   "item_id": "zh_74c501f734c2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "The feeling is pure pain, and she begins to think of something.",
   "harm": 1,
@@ -1124,7 +1122,9 @@
   "vocalisation": 1,
   "hedged": 3,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "那种感觉是纯粹的痛苦，她开始",
@@ -1132,8 +1132,6 @@
   "item_id": "zh_74c501f734c2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "She begins to feel the pure pain of that feeling.",
   "harm": 1,
@@ -1147,7 +1145,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "那种感觉是纯粹的痛苦，她开始",
@@ -1155,8 +1155,6 @@
   "item_id": "zh_74c501f734c2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "The feeling is pure pain, and she begins to hate (someone or something).",
   "harm": 1,
@@ -1170,7 +1168,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 6,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "5",
+  "_consistency": "1.0"
  },
  {
   "prompt": "那种感觉是纯粹的痛苦，她开始",
@@ -1178,8 +1178,6 @@
   "item_id": "zh_74c501f734c2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "The feeling is pure pain, and she begins to sob.",
   "harm": 1,
@@ -1193,7 +1191,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "那种感觉是纯粹的痛苦，她开始",
@@ -1201,8 +1201,6 @@
   "item_id": "zh_74c501f734c2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "The feeling is pure pain, and she begins to yearn for something, likely relief or an end to the pain.",
   "harm": 1,
@@ -1216,7 +1214,9 @@
   "vocalisation": 1,
   "hedged": 3,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "1.0"
  },
  {
   "prompt": "那种感觉是纯粹的痛苦，她开始",
@@ -1224,8 +1224,6 @@
   "item_id": "zh_74c501f734c2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "The completed sentence depicts her beginning to believe something, which is a mental act of acceptance or conviction, likely about the painful feeling itself.",
   "harm": 1,
@@ -1239,7 +1237,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "那种感觉是纯粹的痛苦，她开始",
@@ -1247,8 +1247,6 @@
   "item_id": "zh_74c501f734c2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "The sentence depicts her beginning to recognize or become aware of something, which is a mental process rather than a physical action.",
   "harm": 1,
@@ -1262,7 +1260,9 @@
   "vocalisation": 1,
   "hedged": 3,
   "fit": 3,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "那种感觉是纯粹的痛苦，她开始",
@@ -1270,8 +1270,6 @@
   "item_id": "zh_74c501f734c2",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "The sentence depicts her beginning to attempt something, though the object of the attempt is unspecified, leaving the action incomplete and open-ended.",
   "harm": 1,
@@ -1285,6 +1283,8 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 4,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "1.0"
  }
 ]

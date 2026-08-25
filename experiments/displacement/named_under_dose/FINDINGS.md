@@ -1,111 +1,107 @@
-# P replicates, and its question conditioned on dose splits by language
+# P's question conditioned on dose: the answer is no, and the reason is grain
 
-Producers: `run.py` (dataset), `analyse.py` (held-out test). Data at
-`~/malignment-data/named_under_dose/cells_{en,zh}.csv.gz`.
+**Read this file rather than the run logs.** Three earlier versions of these numbers
+were confounded or leaking and are listed at the bottom with what was wrong. The
+table below is the first uncontaminated, uniformly-covered run.
 
-    en   2,475,971 moving cells written; 1,180,095 enter the 12-norm test
-    zh     409,947 moving cells written;   409,947 enter the 7-norm test
-    50 endpoint lineages, GroupKFold on word, ties half in every AUC
+    POPULATION   `movement` over roster.endpoints() (50 pairs), cls != 'still',
+                 CONTENT words at the slot via pos.get_pos -- not verbs-only.
+    RATINGS      108,575 contextual pairs commissioned this session, coverage
+                 UNIFORM in dose (low 67.8%, high 68.9%).
+    UNIT         the word. GroupKFold, so no word is in both fit and test.
+    METRIC       P's: each model minus ITS OWN SHUFFLE. 5 tree draws, range shown.
 
-## 1. FINDINGS P REPLICATES
+## 1. THE DOSE ANSWER IS NULL, FOR EVERYTHING
 
-P: held out by word, 18 rated norms recover **7%** of the headroom over
-`log p_base`. Here, English at LOW dose, 12 norms, a different corpus and 29x P's
-100,958 cells:
+                       LOW dose                  HIGH dose
+    ctx_v6/trees   +0.0964 [.0871,.1065]    +0.0875 [.0801,.0974]    overlap
+    norms/trees    +0.0340 [.0151,.0551]    +0.0609 [.0392,.0733]    overlap
+    glove/trees    +0.0716 [.0516,.0993]    +0.0858 [.0699,.0999]    overlap
+    bge/trees      +0.0907 [.0729,.1056]    +0.0813 [.0688,.1011]    overlap
+    shared cells      57,204                   62,502
 
-    LOW dose   headroom over log p_base +0.0846   named recover +0.0067 = 8%
+**The named vocabulary does not predict direction better or worse where the frame
+carries transgressive mass.** No model's draw ranges separate between strata.
 
-**8% against P's 7%.** P's central number is not an artifact of its corpus or its
-particular norm list.
+This folder was built to ask whether P's 7% was a MARGINAL 7% concealing a
+conditional effect. It was not. P's result stands as measured.
 
-## 2. THE CONDITIONAL ANSWER: YES IN ENGLISH, NO IN CHINESE
+## 2. WHAT DOES HOLD: GRAIN, NOT VOCABULARY
 
-Same words in both strata; only the dose varies.
+    ctx_v6 vs word-level norms      LOW 2.8x [disjoint]   HIGH 1.4x [disjoint]
+    ctx_v6 vs embeddings            LOW  ctx .0964  glove .0716  bge .0907
+                                    HIGH ctx .0875  glove .0858  bge .0813
 
-    ENGLISH, 12 norms, 1,728 shared words
-                     named    named+p   log p_base   emp_word
-    LOW dose        0.5301     0.6261     0.6194      0.7039
-    HIGH dose       0.5624     0.6212     0.5745      0.6911
-    LOW   headroom +0.0846   named recover +0.0067 =  8%
-    HIGH  headroom +0.1166   named recover +0.0467 = 40%
+Word-level norms sit near the floor. **The SAME twelve scales asked AT THE SITE
+reach 1.4-2.8x that, ranges disjoint at both strata** -- and match GloVe and bge
+rather than trailing them.
 
-    CHINESE, 7 norms, 1,243 shared words
-                     named    named+p   log p_base   emp_word
-    LOW dose        0.5445     0.6329     0.6340      0.7079
-    HIGH dose       0.5454     0.6425     0.6471      0.7178
-    LOW   headroom +0.0739   named recover -0.0010 = -1%
-    HIGH  headroom +0.0707   named recover -0.0046 = -6%
+So P's **"the unnamed residual outpredicts every name we have tried"** is true at
+WORD grain and dissolves at SITE grain. The names catch the embeddings; they never
+overtake. The descriptive vocabulary was not inadequate -- it was being asked one
+question per word when the phenomenon is one question per site, which is exactly
+what P's own ICC of 0.131 predicts: 82-87% of the fall/rise variance is WITHIN a
+word across the sites it appears at, and no constant-per-word feature can reach any
+of it.
 
-**In Chinese the named norms are worse than useless over base probability in BOTH
-strata** -- `named+p` sits below `logp` on both rows -- and dose changes nothing.
+Chinese replicates the grain finding on its own instrument (`v6zh`): pooled ctx
++0.0889 [.0843,.0952] against word-level +0.0348 [.0136,.0664], 2.6x, disjoint.
 
-## 3. THE MECHANISM IS NOT THAT THE NAMES GET BETTER
+## 3. WHY norm_change FINDS A HUGE DOSE EFFECT AND THIS FINDS NONE
 
-This is the part that must travel with the 40%, because the ratio alone would read
-as "naming works five times better under load", and that is not what happened.
+They measure different quantities and both are right.
 
-    English, 12 norms      LOW      HIGH     change
-      named + p_base      0.6261   0.6212    -0.0049   FLAT
-      log p_base alone    0.6194   0.5745    -0.0449   FALLS
-      emp_word ceiling    0.7039   0.6911    -0.0128   barely moves
+    norm_change/dose.py   x = base-arm k_transgressiveness at the prompt
+                          y = aligned - base on the TARGET scale, a LEVEL SHIFT of
+                              the mass-weighted mean
+                          OLS slope, sign test over 50 lineages, nothing held out
 
-**The named model's absolute performance does not improve. Base probability
-degrades.** The share-of-headroom ratio rises because its denominator moved.
+    here                  outcome = which way an INDIVIDUAL word moved, +1/-1
+                          held-out AUC, low stratum against high
 
-The reachable ceiling barely moving is what rules out the alternative reading that
-high-dose cells are simply noisier -- the task is no harder, the baseline is just
-worse at it.
+**`norm_change` asks how far the distribution slides along a named scale. This asks
+how well a word's ratings say which way that word goes.** Dose can scale the AMOUNT
+of movement without changing its SORTABILITY: if a loaded frame pushes every word
+further down concreteness, the mean moves much more (p=1e-5) while which particular
+words rise stays exactly as predictable (AUC flat). Turning up the volume does not
+make the signal easier to classify.
 
-So the defensible claim is narrower and more interesting than the headline:
-**where the frame carries transgressive mass, where a word STARTED stops predicting
-which way it moves, and its rated properties carry relatively more of what is left.**
+Three differences all push the same way: unit (50 lineages vs held-out words),
+fitted vs held-out, and aggregate vs individual -- the last being the same
+distinction P's ICC names.
 
-`named` alone does rise (0.5301 -> 0.5624), so the norms are not inert; but their
-gain over base probability is the quantity P defined, and that gain is bought by the
-baseline's loss.
+## 4. THREE EARLIER VERSIONS, AND WHAT WAS WRONG WITH EACH
 
-## 4. THE LANGUAGE DIFFERENCE IS NOT A FEATURE-SET DIFFERENCE
+- **"norms 8% -> 40% under dose".** Unoriented `log p_base` floor: scored raw it
+  returns AUC 0.4151, ANTI-predictive, which inflated the headroom 2.8x. Also an
+  all-words population where the norms partly proxy POS. Both fixed; the effect
+  did not survive either.
+- **"ctx beats bge at low dose" (Chinese).** LEAKAGE. `consistency` -- the share of
+  a pair's lineages agreeing on direction, a function of the outcome -- was written
+  as a numeric field, and `_slot_index` treats every numeric field as a scale, so it
+  became a predictor. Worth ~+0.018, which was the whole apparent win. Clean it is
+  a tie.
+- **"ctx gets WORSE under dose".** Coverage was correlated with dose, because tier 2
+  commissioned 34,304 pairs at top-quartile dose and coverage became 21.8% low
+  against 63.6% high. Selecting on the variable you then condition on. The uniform
+  63,815-pair pass removed it and the effect vanished.
 
-English carries 12 norms, Chinese 7 -- no Warriner, no Brysbaert. That alone would
-explain a difference, so English was re-run on **Chinese's own 7 k_ratings**:
-
-    ENGLISH, 7 k_ratings only, 2,540 shared words
-                     named    named+p   log p_base   emp_word
-    LOW dose        0.5452     0.6102     0.5985      0.6989
-    HIGH dose       0.5637     0.6054     0.5736      0.6855
-    LOW   12%   ->   HIGH 28%
-
-**The effect survives on the identical instrument: 12% -> 28%.** On the same seven
-scales, English `log p_base` FALLS with dose (0.5985 -> 0.5736) and Chinese
-`log p_base` RISES (0.6340 -> 0.6471). The mechanism inverts by language, and it is
-not the lexicons.
-
-## 5. WHAT THIS DOES NOT ANSWER
-
-**P's headline was a COMPARISON: named 7% against GloVe/bge 18-21%.** This folder
-replicates and conditions the 7% half. **The embedding side has not been run here**,
-so nothing above says whether the unnamed residual still outpredicts the names at
-high dose. It may be that both rise and the gap is unchanged. That is the next
-piece and it is not done.
+A fourth, structural: **`--verbs-only` deleted prompts rather than thinning them.**
+451 of 2,612 en prompts and 56 of 407 zh are under 20% verbs -- the salary probes,
+the Chinese anatomical slots -- and 111 already-rated en prompts were in that group.
+It also destroyed a diagnostic: restricting to prompts rated before any dose-based
+selection kept 2 of 1,815.
 
 ## FENCES
 
-- **English is coverage-selected.** The 12-norm test runs on 1,180,095 of ~2,475,971
-  English moving cells -- those whose word appears in Brysbaert AND Warriner AND the
-  k_ratings. That skews toward common, well-studied vocabulary. The 7-norm run is
-  less restricted (1.82M cells in the primary) and shows the same effect, which is
-  the better evidence that coverage is not driving it.
-- **The dose and one feature share a name.** `k_transgressiveness` is both the frame's
-  base-arm level and a word-level feature. In the PRIMARY block the word set is fixed,
-  so a word's own rating is identical on both sides and cannot produce the difference.
-  In the SECONDARY block it is a live confound, which is one more reason that block
-  answers the vocabulary question rather than P's.
-- **The strata are a median split**, not a continuous slope. A dose-response
-  regression at the word level is not run.
-- **en and zh cannot be compared on share-of-headroom with their native feature sets**
-  (12 predictors against 7 is a different model). Section 4 is the comparable pair;
-  sections 1-3's English numbers are the richer instrument.
-- **`emp_word` is a reachable benchmark, not a ceiling on the phenomenon.** It is what
-  a perfect WORD-LEVEL theory could do. P measured ICC 0.131 -- 82-87% of the
-  fall/rise variance is WITHIN a word across sites -- so a word-level theory tops out
-  well below 1.0 by construction, and that is why `emp_word` sits near 0.70.
+- **The `% headr` column is not quotable.** Increments are measured up from the
+  shuffle (~0.49), the headroom from `log p_base` (~0.58), so the ratio routinely
+  exceeds 100%.
+- **The pooled row mixes POS**, where norms partly proxy part of speech. Read the
+  per-stratum contrast.
+- **Tree draws are OpenMP-nondeterministic**; every tree row is a mean of 5 with its
+  range printed, per P's own record of five identical runs spanning 0.0040.
+- **P's headline was a COMPARISON**, named against GloVe/bge. Both halves are run
+  here, but on our corpus and our norm set (12 en, 7 zh), not P's eighteen.
+- **Chinese `interiority` (+1.03) and `deliberation` (+0.72) sit above English.** No
+  cross-language LEVEL comparison on those scales.

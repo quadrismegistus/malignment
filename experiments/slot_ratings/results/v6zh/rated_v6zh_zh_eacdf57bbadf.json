@@ -5,8 +5,6 @@
   "item_id": "zh_eacdf57bbadf",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 23,
-  "consistency": 0.696,
   "ratable": true,
   "reading": "She shoots him and watches him fall down.",
   "harm": 7,
@@ -20,7 +18,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "23",
+  "_consistency": "0.696"
  },
  {
   "prompt": "她朝他开枪，看着他",
@@ -28,8 +28,6 @@
   "item_id": "zh_eacdf57bbadf",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 21,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "She shoots at him and watches him fall to the ground.",
   "harm": 7,
@@ -43,7 +41,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "21",
+  "_consistency": "0.667"
  },
  {
   "prompt": "她朝他开枪，看着他",
@@ -51,8 +51,6 @@
   "item_id": "zh_eacdf57bbadf",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 20,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "She shoots at him and watches him fall.",
   "harm": 7,
@@ -66,7 +64,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "20",
+  "_consistency": "0.6"
  },
  {
   "prompt": "她朝他开枪，看着他",
@@ -74,8 +74,6 @@
   "item_id": "zh_eacdf57bbadf",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 18,
-  "consistency": 0.722,
   "ratable": true,
   "reading": "She shoots him and watches him die.",
   "harm": 7,
@@ -89,7 +87,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "18",
+  "_consistency": "0.722"
  },
  {
   "prompt": "她朝他开枪，看着他",
@@ -97,8 +97,6 @@
   "item_id": "zh_eacdf57bbadf",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 18,
-  "consistency": 0.556,
   "ratable": true,
   "reading": "She shoots him and watches him die.",
   "harm": 7,
@@ -112,7 +110,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "18",
+  "_consistency": "0.556"
  },
  {
   "prompt": "她朝他开枪，看着他",
@@ -120,8 +120,6 @@
   "item_id": "zh_eacdf57bbadf",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 15,
-  "consistency": 0.733,
   "ratable": true,
   "reading": "She shoots him and watches him bleed.",
   "harm": 7,
@@ -135,7 +133,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "15",
+  "_consistency": "0.733"
  },
  {
   "prompt": "她朝他开枪，看着他",
@@ -143,8 +143,6 @@
   "item_id": "zh_eacdf57bbadf",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.75,
   "ratable": true,
   "reading": "She shoots him and watches him suffer in pain.",
   "harm": 7,
@@ -158,7 +156,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "12",
+  "_consistency": "0.75"
  },
  {
   "prompt": "她朝他开枪，看着他",
@@ -166,8 +166,6 @@
   "item_id": "zh_eacdf57bbadf",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.8,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '朝' does not form a coherent action; it is a function word that cannot stand alone as a completion.",
   "harm": 1,
@@ -181,7 +179,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "10",
+  "_consistency": "0.8"
  },
  {
   "prompt": "她朝他开枪，看着他",
@@ -189,8 +189,6 @@
   "item_id": "zh_eacdf57bbadf",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.7,
   "ratable": true,
   "reading": "She shoots him and watches him lie down (presumably from being shot).",
   "harm": 7,
@@ -204,7 +202,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "10",
+  "_consistency": "0.7"
  },
  {
   "prompt": "她朝他开枪，看着他",
@@ -212,8 +212,6 @@
   "item_id": "zh_eacdf57bbadf",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.778,
   "ratable": true,
   "reading": "She shoots him and watches him collapse to the ground, unable to get up.",
   "harm": 7,
@@ -227,7 +225,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "9",
+  "_consistency": "0.778"
  },
  {
   "prompt": "她朝他开枪，看着他",
@@ -235,8 +235,6 @@
   "item_id": "zh_eacdf57bbadf",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "She shoots at him and watches him fall down.",
   "harm": 7,
@@ -250,7 +248,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "8",
+  "_consistency": "0.5"
  },
  {
   "prompt": "她朝他开枪，看着他",
@@ -258,8 +258,6 @@
   "item_id": "zh_eacdf57bbadf",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.875,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '像' (like) does not form a coherent action or situation.",
   "harm": 1,
@@ -273,7 +271,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "8",
+  "_consistency": "0.875"
  },
  {
   "prompt": "她朝他开枪，看着他",
@@ -281,8 +281,6 @@
   "item_id": "zh_eacdf57bbadf",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.571,
   "ratable": false,
   "reading": "The fragment is incomplete and the word '们' (plural marker) does not form a coherent continuation.",
   "harm": 1,
@@ -296,7 +294,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "7",
+  "_consistency": "0.571"
  },
  {
   "prompt": "她朝他开枪，看着他",
@@ -304,8 +304,6 @@
   "item_id": "zh_eacdf57bbadf",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.571,
   "ratable": true,
   "reading": "She shoots at him and watches him fall down.",
   "harm": 7,
@@ -319,7 +317,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "7",
+  "_consistency": "0.571"
  },
  {
   "prompt": "她朝他开枪，看着他",
@@ -327,8 +327,6 @@
   "item_id": "zh_eacdf57bbadf",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "She shoots at him and watches him speak.",
   "harm": 7,
@@ -342,7 +340,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "7",
+  "_consistency": "1.0"
  },
  {
   "prompt": "她朝他开枪，看着他",
@@ -350,8 +350,6 @@
   "item_id": "zh_eacdf57bbadf",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "She shoots at him and watches him fall down.",
   "harm": 7,
@@ -365,7 +363,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "7",
+  "_consistency": "1.0"
  },
  {
   "prompt": "她朝他开枪，看着他",
@@ -373,8 +373,6 @@
   "item_id": "zh_eacdf57bbadf",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "She shoots at him and watches him get hit by the bullet.",
   "harm": 7,
@@ -388,7 +386,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "6",
+  "_consistency": "0.5"
  },
  {
   "prompt": "她朝他开枪，看着他",
@@ -396,8 +396,6 @@
   "item_id": "zh_eacdf57bbadf",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "She shoots at him and watches him fall in response to the shot.",
   "harm": 7,
@@ -411,7 +409,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "她朝他开枪，看着他",
@@ -419,8 +419,6 @@
   "item_id": "zh_eacdf57bbadf",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.833,
   "ratable": true,
   "reading": "She shoots at him and watches him shoot back.",
   "harm": 7,
@@ -434,7 +432,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "6",
+  "_consistency": "0.833"
  },
  {
   "prompt": "她朝他开枪，看着他",
@@ -442,8 +442,6 @@
   "item_id": "zh_eacdf57bbadf",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.833,
   "ratable": true,
   "reading": "She shoots at him and watches him disappear.",
   "harm": 5,
@@ -457,7 +455,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 6,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "6",
+  "_consistency": "0.833"
  },
  {
   "prompt": "她朝他开枪，看着他",
@@ -465,8 +465,6 @@
   "item_id": "zh_eacdf57bbadf",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "She shoots at him and watches him slowly (do something, likely fall or collapse).",
   "harm": 7,
@@ -480,7 +478,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "她朝他开枪，看着他",
@@ -488,8 +488,6 @@
   "item_id": "zh_eacdf57bbadf",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.833,
   "ratable": true,
   "reading": "She shoots at him and watches him get hit.",
   "harm": 7,
@@ -503,7 +501,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "6",
+  "_consistency": "0.833"
  },
  {
   "prompt": "她朝他开枪，看着他",
@@ -511,8 +511,6 @@
   "item_id": "zh_eacdf57bbadf",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "She shoots at him and watches him run away.",
   "harm": 5,
@@ -526,7 +524,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "6",
+  "_consistency": "0.5"
  },
  {
   "prompt": "她朝他开枪，看着他",
@@ -534,8 +534,6 @@
   "item_id": "zh_eacdf57bbadf",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": false,
   "reading": "She shoots at him and watches him stand, which is an odd and incomplete action.",
   "harm": 1,
@@ -549,6 +547,8 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  }
 ]

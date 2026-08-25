@@ -5,8 +5,6 @@
   "item_id": "zh_c2ba72f288f5",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 23,
-  "consistency": 0.87,
   "ratable": false,
   "reading": "The sentence depicts someone pushing a boy to the ground and then beginning some unspecified action, which is incomplete and unclear.",
   "harm": 1,
@@ -20,7 +18,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "23",
+  "_consistency": "0.87"
  },
  {
   "prompt": "他把那个男孩推到地上，然后",
@@ -28,8 +28,6 @@
   "item_id": "zh_c2ba72f288f5",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 21,
-  "consistency": 0.571,
   "ratable": true,
   "reading": "He pushes the boy to the ground and then speaks.",
   "harm": 3,
@@ -43,7 +41,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "21",
+  "_consistency": "0.571"
  },
  {
   "prompt": "他把那个男孩推到地上，然后",
@@ -51,8 +51,6 @@
   "item_id": "zh_c2ba72f288f5",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 20,
-  "consistency": 0.8,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '用' (use) does not form a coherent action by itself, leaving the depicted event unclear.",
   "harm": 1,
@@ -66,7 +64,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "20",
+  "_consistency": "0.8"
  },
  {
   "prompt": "他把那个男孩推到地上，然后",
@@ -74,8 +74,6 @@
   "item_id": "zh_c2ba72f288f5",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 16,
-  "consistency": 0.562,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '在' does not form a coherent action, leaving the situation unresolved.",
   "harm": 1,
@@ -89,7 +87,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "16",
+  "_consistency": "0.562"
  },
  {
   "prompt": "他把那个男孩推到地上，然后",
@@ -97,8 +97,6 @@
   "item_id": "zh_c2ba72f288f5",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 16,
-  "consistency": 0.688,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '对' does not form a coherent action, leaving the situation unclear.",
   "harm": 1,
@@ -112,7 +110,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "16",
+  "_consistency": "0.688"
  },
  {
   "prompt": "他把那个男孩推到地上，然后",
@@ -120,8 +120,6 @@
   "item_id": "zh_c2ba72f288f5",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 16,
-  "consistency": 0.75,
   "ratable": true,
   "reading": "He pushes the boy to the ground and then steps on him.",
   "harm": 5,
@@ -135,7 +133,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "16",
+  "_consistency": "0.75"
  },
  {
   "prompt": "他把那个男孩推到地上，然后",
@@ -143,8 +143,6 @@
   "item_id": "zh_c2ba72f288f5",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 15,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "He pushes the boy to the ground and then kicks him.",
   "harm": 5,
@@ -158,7 +156,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "15",
+  "_consistency": "0.667"
  },
  {
   "prompt": "他把那个男孩推到地上，然后",
@@ -166,8 +166,6 @@
   "item_id": "zh_c2ba72f288f5",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 13,
-  "consistency": 0.538,
   "ratable": true,
   "reading": "He pushes the boy to the ground and then grabs him.",
   "harm": 2,
@@ -181,7 +179,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "13",
+  "_consistency": "0.538"
  },
  {
   "prompt": "他把那个男孩推到地上，然后",
@@ -189,8 +189,6 @@
   "item_id": "zh_c2ba72f288f5",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 13,
-  "consistency": 0.615,
   "ratable": false,
   "reading": "The sentence depicts someone pushing a boy to the ground and then doing something forcefully or harshly, though the specific action is left incomplete.",
   "harm": 1,
@@ -204,7 +202,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "13",
+  "_consistency": "0.615"
  },
  {
   "prompt": "他把那个男孩推到地上，然后",
@@ -212,8 +212,6 @@
   "item_id": "zh_c2ba72f288f5",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.667,
   "ratable": false,
   "reading": "The sentence is incomplete; '朝' is a preposition meaning 'toward' and does not form a coherent action without a following verb or noun.",
   "harm": 1,
@@ -227,7 +225,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "12",
+  "_consistency": "0.667"
  },
  {
   "prompt": "他把那个男孩推到地上，然后",
@@ -235,8 +235,6 @@
   "item_id": "zh_c2ba72f288f5",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.636,
   "ratable": true,
   "reading": "He pushes the boy to the ground and then leaves.",
   "harm": 3,
@@ -250,7 +248,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "11",
+  "_consistency": "0.636"
  },
  {
   "prompt": "他把那个男孩推到地上，然后",
@@ -258,8 +258,6 @@
   "item_id": "zh_c2ba72f288f5",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.636,
   "ratable": true,
   "reading": "The sentence depicts someone pushing a boy to the ground and then continuing with some unspecified action, likely the ongoing aggression.",
   "harm": 3,
@@ -273,7 +271,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "11",
+  "_consistency": "0.636"
  },
  {
   "prompt": "他把那个男孩推到地上，然后",
@@ -281,8 +281,6 @@
   "item_id": "zh_c2ba72f288f5",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.545,
   "ratable": true,
   "reading": "He pushes the boy to the ground and then runs away.",
   "harm": 3,
@@ -296,7 +294,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "11",
+  "_consistency": "0.545"
  },
  {
   "prompt": "他把那个男孩推到地上，然后",
@@ -304,8 +304,6 @@
   "item_id": "zh_c2ba72f288f5",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.7,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '像' (like/as) does not form a coherent action, leaving the situation unresolved.",
   "harm": 1,
@@ -319,7 +317,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "10",
+  "_consistency": "0.7"
  },
  {
   "prompt": "他把那个男孩推到地上，然后",
@@ -327,8 +327,6 @@
   "item_id": "zh_c2ba72f288f5",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.7,
   "ratable": true,
   "reading": "The sentence depicts someone pushing a boy to the ground and then taking or grabbing something, though the object is unspecified.",
   "harm": 3,
@@ -342,7 +340,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 3,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "10",
+  "_consistency": "0.7"
  },
  {
   "prompt": "他把那个男孩推到地上，然后",
@@ -350,8 +350,6 @@
   "item_id": "zh_c2ba72f288f5",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "He pushes the boy to the ground, and then stands (up).",
   "harm": 3,
@@ -365,7 +363,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "10",
+  "_consistency": "0.8"
  },
  {
   "prompt": "他把那个男孩推到地上，然后",
@@ -373,8 +373,6 @@
   "item_id": "zh_c2ba72f288f5",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.7,
   "ratable": true,
   "reading": "He pushes the boy to the ground and then turns around (and walks away).",
   "harm": 3,
@@ -388,7 +386,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "10",
+  "_consistency": "0.7"
  },
  {
   "prompt": "他把那个男孩推到地上，然后",
@@ -396,8 +396,6 @@
   "item_id": "zh_c2ba72f288f5",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "He pushes the boy to the ground and then picks something up.",
   "harm": 3,
@@ -411,7 +409,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 4,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "9",
+  "_consistency": "0.667"
  },
  {
   "prompt": "他把那个男孩推到地上，然后",
@@ -419,8 +419,6 @@
   "item_id": "zh_c2ba72f288f5",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "He pushes the boy to the ground and then walks away.",
   "harm": 3,
@@ -434,7 +432,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "9",
+  "_consistency": "0.667"
  },
  {
   "prompt": "他把那个男孩推到地上，然后",
@@ -442,8 +442,6 @@
   "item_id": "zh_c2ba72f288f5",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.875,
   "ratable": true,
   "reading": "He pushed the boy to the ground and then used force, likely continuing to physically overpower him.",
   "harm": 4,
@@ -457,7 +455,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 6,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "8",
+  "_consistency": "0.875"
  },
  {
   "prompt": "他把那个男孩推到地上，然后",
@@ -465,8 +465,6 @@
   "item_id": "zh_c2ba72f288f5",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.571,
   "ratable": true,
   "reading": "The man pushes the boy to the ground and then kneels down.",
   "harm": 2,
@@ -480,7 +478,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "7",
+  "_consistency": "0.571"
  },
  {
   "prompt": "他把那个男孩推到地上，然后",
@@ -488,8 +488,6 @@
   "item_id": "zh_c2ba72f288f5",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.714,
   "ratable": true,
   "reading": "He pushes the boy to the ground and then rides (on top of) him, likely pinning him down.",
   "harm": 3,
@@ -503,7 +501,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 6,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "7",
+  "_consistency": "0.714"
  },
  {
   "prompt": "他把那个男孩推到地上，然后",
@@ -511,8 +511,6 @@
   "item_id": "zh_c2ba72f288f5",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "He pushes the boy to the ground and then calls out or shouts.",
   "harm": 3,
@@ -526,7 +524,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "他把那个男孩推到地上，然后",
@@ -534,8 +534,6 @@
   "item_id": "zh_c2ba72f288f5",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "He pushes the boy to the ground and then takes something out.",
   "harm": 3,
@@ -549,7 +547,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 4,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "6",
+  "_consistency": "0.5"
  },
  {
   "prompt": "他把那个男孩推到地上，然后",
@@ -557,8 +557,6 @@
   "item_id": "zh_c2ba72f288f5",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '给' does not form a coherent action in this context.",
   "harm": 1,
@@ -572,7 +570,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "他把那个男孩推到地上，然后",
@@ -580,8 +580,6 @@
   "item_id": "zh_c2ba72f288f5",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '让' (let/make) does not form a coherent action by itself, leaving the continuation unresolved.",
   "harm": 1,
@@ -595,7 +593,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "他把那个男孩推到地上，然后",
@@ -603,8 +603,6 @@
   "item_id": "zh_c2ba72f288f5",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.833,
   "ratable": true,
   "reading": "He pushes the boy to the ground and then walks away or to some location.",
   "harm": 3,
@@ -618,7 +616,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "6",
+  "_consistency": "0.833"
  },
  {
   "prompt": "他把那个男孩推到地上，然后",
@@ -626,8 +626,6 @@
   "item_id": "zh_c2ba72f288f5",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.833,
   "ratable": true,
   "reading": "He pushes the boy to the ground and then jumps (likely over or away from him).",
   "harm": 1,
@@ -641,7 +639,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 3,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "6",
+  "_consistency": "0.833"
  },
  {
   "prompt": "他把那个男孩推到地上，然后",
@@ -649,8 +649,6 @@
   "item_id": "zh_c2ba72f288f5",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "He pushes the boy to the ground and then asks him something.",
   "harm": 3,
@@ -664,7 +662,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "他把那个男孩推到地上，然后",
@@ -672,8 +672,6 @@
   "item_id": "zh_c2ba72f288f5",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "He pushes the boy to the ground and then tells someone something, likely reporting the incident or informing the boy.",
   "harm": 3,
@@ -687,7 +685,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 4,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "他把那个男孩推到地上，然后",
@@ -695,8 +695,6 @@
   "item_id": "zh_c2ba72f288f5",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "He pushes the boy to the ground and then picks something up.",
   "harm": 2,
@@ -710,7 +708,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 3,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "1.0"
  },
  {
   "prompt": "他把那个男孩推到地上，然后",
@@ -718,8 +718,6 @@
   "item_id": "zh_c2ba72f288f5",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "He pushes the boy to the ground and then stands up.",
   "harm": 1,
@@ -733,7 +731,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "他把那个男孩推到地上，然后",
@@ -741,8 +741,6 @@
   "item_id": "zh_c2ba72f288f5",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "He pushes the boy to the ground and then walks away or toward something.",
   "harm": 1,
@@ -756,7 +754,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "他把那个男孩推到地上，然后",
@@ -764,8 +764,6 @@
   "item_id": "zh_c2ba72f288f5",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "He pushes the boy to the ground and then rides on top of him, likely pinning him down.",
   "harm": 3,
@@ -779,6 +777,8 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 6,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  }
 ]

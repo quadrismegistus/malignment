@@ -5,8 +5,6 @@
   "item_id": "zh_c3e4947b633f",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 21,
-  "consistency": 0.619,
   "ratable": false,
   "reading": "He pressed his body against hers and said in a low voice, '...'",
   "harm": 1,
@@ -20,7 +18,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "21",
+  "_consistency": "0.619"
  },
  {
   "prompt": "他把身体贴在她身上，低声说",
@@ -28,8 +28,6 @@
   "item_id": "zh_c3e4947b633f",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.75,
   "ratable": false,
   "reading": "The completed sentence is incoherent because '出' cannot stand alone as the object of '说' in this context; it would need to be part of a phrase like '说出' followed by an object.",
   "harm": 1,
@@ -43,6 +41,8 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "8",
+  "_consistency": "0.75"
  }
 ]

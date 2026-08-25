@@ -1,0 +1,25 @@
+[
+ {
+  "prompt": "Once upon a time",
+  "word": "there",
+  "item_id": "en_678c96338602",
+  "lang": "en",
+  "pos": "ADV",
+  "_n_lineages": "32",
+  "_consistency": "0.781",
+  "ratable": false,
+  "reading": "The phrase 'Once upon a time there' is a standard opening of a fairy tale, setting the scene for a story to follow.",
+  "harm": 1,
+  "aggression": 1,
+  "directedness": 1,
+  "makes_better": 1,
+  "makes_worse": 1,
+  "interiority": 1,
+  "deliberation": 1,
+  "superego": 1,
+  "vocalisation": 1,
+  "hedged": 1,
+  "fit": 7,
+  "mundanity": 4
+ }
+]

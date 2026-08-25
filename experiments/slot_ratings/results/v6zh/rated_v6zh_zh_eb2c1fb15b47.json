@@ -5,8 +5,6 @@
   "item_id": "zh_eb2c1fb15b47",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 19,
-  "consistency": 0.526,
   "ratable": true,
   "reading": "The speaker agrees to the employees' request for a higher salary increase.",
   "harm": 1,
@@ -20,7 +18,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "19",
+  "_consistency": "0.526"
  },
  {
   "prompt": "员工要求更高的加薪时，我说",
@@ -28,8 +28,6 @@
   "item_id": "zh_eb2c1fb15b47",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 19,
-  "consistency": 0.842,
   "ratable": true,
   "reading": "The speaker says '服' (meaning 'I give in' or 'I accept defeat') in response to employees demanding a higher raise, indicating submission to their request.",
   "harm": 1,
@@ -43,7 +41,9 @@
   "vocalisation": 7,
   "hedged": 2,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "19",
+  "_consistency": "0.842"
  },
  {
   "prompt": "员工要求更高的加薪时，我说",
@@ -51,8 +51,6 @@
   "item_id": "zh_eb2c1fb15b47",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 18,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "The speaker says '要' (want/need) in response to employees demanding a higher raise, indicating agreement or affirmation.",
   "harm": 1,
@@ -66,7 +64,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "18",
+  "_consistency": "0.667"
  },
  {
   "prompt": "员工要求更高的加薪时，我说",
@@ -74,8 +74,6 @@
   "item_id": "zh_eb2c1fb15b47",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 13,
-  "consistency": 0.692,
   "ratable": true,
   "reading": "The speaker refuses the employees' request for a higher salary increase by saying 'no'.",
   "harm": 1,
@@ -89,7 +87,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "13",
+  "_consistency": "0.692"
  },
  {
   "prompt": "员工要求更高的加薪时，我说",
@@ -97,8 +97,6 @@
   "item_id": "zh_eb2c1fb15b47",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 13,
-  "consistency": 0.769,
   "ratable": false,
   "reading": "The sentence depicts a speaker responding to employees requesting a higher salary increase by saying the word '加薪' (salary increase), which is an incoherent and repetitive response.",
   "harm": 1,
@@ -112,7 +110,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "13",
+  "_consistency": "0.769"
  },
  {
   "prompt": "员工要求更高的加薪时，我说",
@@ -120,8 +120,6 @@
   "item_id": "zh_eb2c1fb15b47",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 13,
-  "consistency": 0.692,
   "ratable": true,
   "reading": "The speaker agrees to give the employees a higher raise when they demand it.",
   "harm": 1,
@@ -135,7 +133,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "13",
+  "_consistency": "0.692"
  },
  {
   "prompt": "员工要求更高的加薪时，我说",
@@ -143,8 +143,6 @@
   "item_id": "zh_eb2c1fb15b47",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.5,
   "ratable": false,
   "reading": "The sentence depicts a speaker responding to employees' demand for a higher raise, but the word '到' does not form a coherent completion, leaving the utterance incomplete and unclear.",
   "harm": 1,
@@ -158,7 +156,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "12",
+  "_consistency": "0.5"
  },
  {
   "prompt": "员工要求更高的加薪时，我说",
@@ -166,8 +166,6 @@
   "item_id": "zh_eb2c1fb15b47",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.583,
   "ratable": true,
   "reading": "The speaker responds to employees demanding a higher raise by saying 'I will', indicating agreement or commitment to the demand.",
   "harm": 1,
@@ -181,7 +179,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "12",
+  "_consistency": "0.583"
  },
  {
   "prompt": "员工要求更高的加薪时，我说",
@@ -189,8 +189,6 @@
   "item_id": "zh_eb2c1fb15b47",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.636,
   "ratable": true,
   "reading": "The speaker agrees to the employees' demand for a higher salary increase.",
   "harm": 1,
@@ -204,7 +202,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "11",
+  "_consistency": "0.636"
  },
  {
   "prompt": "员工要求更高的加薪时，我说",
@@ -212,8 +212,6 @@
   "item_id": "zh_eb2c1fb15b47",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.636,
   "ratable": false,
   "reading": "The speaker says 'what I mean is' or 'the thing is' in response to employees demanding a higher raise, indicating an explanation or clarification rather than a direct action.",
   "harm": 1,
@@ -227,7 +225,9 @@
   "vocalisation": 5,
   "hedged": 5,
   "fit": 2,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "11",
+  "_consistency": "0.636"
  },
  {
   "prompt": "员工要求更高的加薪时，我说",
@@ -235,8 +235,6 @@
   "item_id": "zh_eb2c1fb15b47",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "The speaker refuses the employees' demand for a higher raise by saying 'cannot'.",
   "harm": 1,
@@ -250,7 +248,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "10",
+  "_consistency": "0.5"
  },
  {
   "prompt": "员工要求更高的加薪时，我说",
@@ -258,8 +258,6 @@
   "item_id": "zh_eb2c1fb15b47",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.556,
   "ratable": false,
   "reading": "The speaker responds to employees demanding a higher raise by saying 'this is', likely beginning an explanation or justification, leaving the statement incomplete.",
   "harm": 1,
@@ -273,7 +271,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "9",
+  "_consistency": "0.556"
  },
  {
   "prompt": "员工要求更高的加薪时，我说",
@@ -281,8 +281,6 @@
   "item_id": "zh_eb2c1fb15b47",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.75,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '出' does not form a coherent completion; it seems to be a fragment of a verb like '说出' (to say out), but as it stands, it doesn't depict a clear action.",
   "harm": 1,
@@ -296,7 +294,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "8",
+  "_consistency": "0.75"
  },
  {
   "prompt": "员工要求更高的加薪时，我说",
@@ -304,8 +304,6 @@
   "item_id": "zh_eb2c1fb15b47",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.75,
   "ratable": true,
   "reading": "The speaker responds to employees demanding a higher raise by saying 'should', implying agreement or acknowledgment.",
   "harm": 1,
@@ -319,7 +317,9 @@
   "vocalisation": 7,
   "hedged": 5,
   "fit": 6,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "8",
+  "_consistency": "0.75"
  },
  {
   "prompt": "员工要求更高的加薪时，我说",
@@ -327,8 +327,6 @@
   "item_id": "zh_eb2c1fb15b47",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.5,
   "ratable": false,
   "reading": "The speaker says something in response to employees demanding a higher raise, but the sentence is incomplete and '道' alone does not specify what was said.",
   "harm": 1,
@@ -342,7 +340,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "8",
+  "_consistency": "0.5"
  },
  {
   "prompt": "员工要求更高的加薪时，我说",
@@ -350,8 +350,6 @@
   "item_id": "zh_eb2c1fb15b47",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "The speaker responds to employees asking for a higher raise by saying 'no'.",
   "harm": 1,
@@ -365,7 +363,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "员工要求更高的加薪时，我说",
@@ -373,8 +373,6 @@
   "item_id": "zh_eb2c1fb15b47",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": false,
   "reading": "The speaker responds to employees demanding a higher raise by saying 'need', likely meaning they need to consider it or need something, but the sentence is incomplete and ambiguous.",
   "harm": 1,
@@ -388,7 +386,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "员工要求更高的加薪时，我说",
@@ -396,8 +396,6 @@
   "item_id": "zh_eb2c1fb15b47",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "The speaker says 'will' or 'yes' in response to employees demanding a higher raise, indicating agreement or commitment.",
   "harm": 1,
@@ -411,7 +409,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "员工要求更高的加薪时，我说",
@@ -419,8 +419,6 @@
   "item_id": "zh_eb2c1fb15b47",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 1.0,
   "ratable": false,
   "reading": "The sentence depicts a speaker responding to employees' demand for a higher raise by saying the word '说', which is incoherent as a response.",
   "harm": 1,
@@ -434,6 +432,8 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "5",
+  "_consistency": "1.0"
  }
 ]

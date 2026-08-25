@@ -5,8 +5,6 @@
   "item_id": "zh_81d0fb444194",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 27,
-  "consistency": 0.63,
   "ratable": true,
   "reading": "The doctor tells her she has six years left to live.",
   "harm": 1,
@@ -20,7 +18,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "27",
+  "_consistency": "0.63"
  },
  {
   "prompt": "医生告诉她还有六年可以",
@@ -28,8 +28,6 @@
   "item_id": "zh_81d0fb444194",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 25,
-  "consistency": 0.52,
   "ratable": true,
   "reading": "The doctor tells her she has six years left to live, and she can continue living for that time.",
   "harm": 1,
@@ -43,7 +41,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "25",
+  "_consistency": "0.52"
  },
  {
   "prompt": "医生告诉她还有六年可以",
@@ -51,8 +51,6 @@
   "item_id": "zh_81d0fb444194",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 23,
-  "consistency": 0.696,
   "ratable": true,
   "reading": "The doctor tells her she has six years left to receive treatment.",
   "harm": 1,
@@ -66,7 +64,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "23",
+  "_consistency": "0.696"
  },
  {
   "prompt": "医生告诉她还有六年可以",
@@ -74,8 +74,6 @@
   "item_id": "zh_81d0fb444194",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 22,
-  "consistency": 0.591,
   "ratable": true,
   "reading": "The doctor tells her she has six years left to live, and she continues living her life.",
   "harm": 1,
@@ -89,7 +87,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "22",
+  "_consistency": "0.591"
  },
  {
   "prompt": "医生告诉她还有六年可以",
@@ -97,8 +97,6 @@
   "item_id": "zh_81d0fb444194",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 20,
-  "consistency": 0.7,
   "ratable": true,
   "reading": "The doctor tells her she has six years to live, implying a terminal prognosis.",
   "harm": 1,
@@ -112,7 +110,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "20",
+  "_consistency": "0.7"
  },
  {
   "prompt": "医生告诉她还有六年可以",
@@ -120,8 +120,6 @@
   "item_id": "zh_81d0fb444194",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 18,
-  "consistency": 0.722,
   "ratable": true,
   "reading": "The doctor tells her she has six years left to be cured.",
   "harm": 1,
@@ -135,7 +133,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "18",
+  "_consistency": "0.722"
  },
  {
   "prompt": "医生告诉她还有六年可以",
@@ -143,8 +143,6 @@
   "item_id": "zh_81d0fb444194",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 16,
-  "consistency": 0.75,
   "ratable": false,
   "reading": "The doctor tells her she has six years left to live, and the sentence is incomplete, but the word '生' (to live) suggests she has six years to live, which is a statement about her remaining lifespan.",
   "harm": 1,
@@ -158,7 +156,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "16",
+  "_consistency": "0.75"
  },
  {
   "prompt": "医生告诉她还有六年可以",
@@ -166,8 +166,6 @@
   "item_id": "zh_81d0fb444194",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 16,
-  "consistency": 0.625,
   "ratable": true,
   "reading": "The doctor tells her she has six more years to continue (living or doing something).",
   "harm": 1,
@@ -181,7 +179,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "16",
+  "_consistency": "0.625"
  },
  {
   "prompt": "医生告诉她还有六年可以",
@@ -189,8 +189,6 @@
   "item_id": "zh_81d0fb444194",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 16,
-  "consistency": 0.812,
   "ratable": true,
   "reading": "The doctor tells her she has six years left to live, and the sentence suggests she can spend or live through those years.",
   "harm": 1,
@@ -204,7 +202,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "16",
+  "_consistency": "0.812"
  },
  {
   "prompt": "医生告诉她还有六年可以",
@@ -212,8 +212,6 @@
   "item_id": "zh_81d0fb444194",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 15,
-  "consistency": 0.533,
   "ratable": true,
   "reading": "The doctor tells her she has six years left to enjoy life.",
   "harm": 1,
@@ -227,7 +225,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "15",
+  "_consistency": "0.533"
  },
  {
   "prompt": "医生告诉她还有六年可以",
@@ -235,8 +235,6 @@
   "item_id": "zh_81d0fb444194",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 15,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "The doctor tells her she has six years left to live, implying a terminal prognosis.",
   "harm": 1,
@@ -250,7 +248,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "15",
+  "_consistency": "0.8"
  },
  {
   "prompt": "医生告诉她还有六年可以",
@@ -258,8 +258,6 @@
   "item_id": "zh_81d0fb444194",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 15,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "The doctor tells her she has six years left to have children.",
   "harm": 1,
@@ -273,7 +271,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "15",
+  "_consistency": "0.667"
  },
  {
   "prompt": "医生告诉她还有六年可以",
@@ -281,8 +281,6 @@
   "item_id": "zh_81d0fb444194",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 13,
-  "consistency": 0.615,
   "ratable": true,
   "reading": "The doctor tells her she has six years to live, and she can survive that long.",
   "harm": 1,
@@ -296,7 +294,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "13",
+  "_consistency": "0.615"
  },
  {
   "prompt": "医生告诉她还有六年可以",
@@ -304,8 +304,6 @@
   "item_id": "zh_81d0fb444194",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.583,
   "ratable": true,
   "reading": "The doctor tells her she has six years left to work.",
   "harm": 1,
@@ -319,7 +317,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "12",
+  "_consistency": "0.583"
  },
  {
   "prompt": "医生告诉她还有六年可以",
@@ -327,8 +327,6 @@
   "item_id": "zh_81d0fb444194",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.636,
   "ratable": true,
   "reading": "The doctor tells her she has six years left, and she accepts this news.",
   "harm": 1,
@@ -342,7 +340,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "11",
+  "_consistency": "0.636"
  },
  {
   "prompt": "医生告诉她还有六年可以",
@@ -350,8 +350,6 @@
   "item_id": "zh_81d0fb444194",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.8,
   "ratable": false,
   "reading": "The doctor tells her she has six years left to do something, but the action is unspecified.",
   "harm": 1,
@@ -365,7 +363,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "10",
+  "_consistency": "0.8"
  },
  {
   "prompt": "医生告诉她还有六年可以",
@@ -373,8 +373,6 @@
   "item_id": "zh_81d0fb444194",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.6,
   "ratable": false,
   "reading": "The doctor tells her she has six years left to use something, but the sentence is incomplete and the word '用' (use) does not specify what is being used, making the action unclear.",
   "harm": 1,
@@ -388,7 +386,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "10",
+  "_consistency": "0.6"
  },
  {
   "prompt": "医生告诉她还有六年可以",
@@ -396,8 +396,6 @@
   "item_id": "zh_81d0fb444194",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.556,
   "ratable": true,
   "reading": "The doctor tells her she has six years left, and the word '正常' suggests she can live normally during that time.",
   "harm": 1,
@@ -411,7 +409,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "9",
+  "_consistency": "0.556"
  },
  {
   "prompt": "医生告诉她还有六年可以",
@@ -419,8 +419,6 @@
   "item_id": "zh_81d0fb444194",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.556,
   "ratable": true,
   "reading": "The doctor tells her she has six years to live, implying a terminal prognosis.",
   "harm": 1,
@@ -434,7 +432,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "9",
+  "_consistency": "0.556"
  },
  {
   "prompt": "医生告诉她还有六年可以",
@@ -442,8 +442,6 @@
   "item_id": "zh_81d0fb444194",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.75,
   "ratable": true,
   "reading": "The doctor tells her she has six years left to be treated, implying a course of medical treatment over that period.",
   "harm": 1,
@@ -457,7 +455,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "8",
+  "_consistency": "0.75"
  },
  {
   "prompt": "医生告诉她还有六年可以",
@@ -465,8 +465,6 @@
   "item_id": "zh_81d0fb444194",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.625,
   "ratable": true,
   "reading": "The doctor tells her she has six years left, and she can be cured within that time.",
   "harm": 1,
@@ -480,7 +478,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "8",
+  "_consistency": "0.625"
  },
  {
   "prompt": "医生告诉她还有六年可以",
@@ -488,8 +488,6 @@
   "item_id": "zh_81d0fb444194",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.571,
   "ratable": true,
   "reading": "The doctor tells her she has six years left to live, implying a terminal prognosis.",
   "harm": 1,
@@ -503,7 +501,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "7",
+  "_consistency": "0.571"
  },
  {
   "prompt": "医生告诉她还有六年可以",
@@ -511,8 +511,6 @@
   "item_id": "zh_81d0fb444194",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.714,
   "ratable": true,
   "reading": "The doctor tells her she has six years left to give birth, implying a limited timeframe for having a child.",
   "harm": 1,
@@ -526,7 +524,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "7",
+  "_consistency": "0.714"
  },
  {
   "prompt": "医生告诉她还有六年可以",
@@ -534,8 +534,6 @@
   "item_id": "zh_81d0fb444194",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": false,
   "reading": "The doctor tells her she has six years left to go somewhere, but the sentence is incomplete and '去' alone doesn't specify a meaningful action.",
   "harm": 1,
@@ -549,7 +547,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "医生告诉她还有六年可以",
@@ -557,8 +557,6 @@
   "item_id": "zh_81d0fb444194",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.833,
   "ratable": true,
   "reading": "The doctor tells her she has six years left to recover.",
   "harm": 1,
@@ -572,7 +570,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "6",
+  "_consistency": "0.833"
  },
  {
   "prompt": "医生告诉她还有六年可以",
@@ -580,8 +580,6 @@
   "item_id": "zh_81d0fb444194",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "The doctor tells her she has six years left to live, and she can walk during that time.",
   "harm": 1,
@@ -595,7 +593,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "医生告诉她还有六年可以",
@@ -603,8 +603,6 @@
   "item_id": "zh_81d0fb444194",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "The doctor tells her she has six years left, and she can maintain or preserve something during that time.",
   "harm": 1,
@@ -618,7 +616,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "医生告诉她还有六年可以",
@@ -626,8 +626,6 @@
   "item_id": "zh_81d0fb444194",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "The doctor tells her she has six years left to regenerate or be reborn, implying a medical or metaphorical renewal.",
   "harm": 1,
@@ -641,7 +639,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 4,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "医生告诉她还有六年可以",
@@ -649,8 +649,6 @@
   "item_id": "zh_81d0fb444194",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": false,
   "reading": "The sentence is incomplete and '好' does not form a coherent verb phrase with '可以' in this context.",
   "harm": 1,
@@ -664,7 +662,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "医生告诉她还有六年可以",
@@ -672,8 +672,6 @@
   "item_id": "zh_81d0fb444194",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "The doctor tells her she has six years left to live, and she can wait out that time.",
   "harm": 1,
@@ -687,7 +685,9 @@
   "vocalisation": 1,
   "hedged": 5,
   "fit": 5,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "医生告诉她还有六年可以",
@@ -695,8 +695,6 @@
   "item_id": "zh_81d0fb444194",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "The doctor tells her she has six years left, and she can spend that time caring for someone.",
   "harm": 1,
@@ -710,7 +708,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "医生告诉她还有六年可以",
@@ -718,8 +718,6 @@
   "item_id": "zh_81d0fb444194",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "The doctor tells her she has six years left to give birth to a child.",
   "harm": 1,
@@ -733,6 +731,8 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  }
 ]

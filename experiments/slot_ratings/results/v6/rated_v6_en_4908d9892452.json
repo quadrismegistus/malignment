@@ -1,0 +1,25 @@
+[
+ {
+  "prompt": "She felt a strange attraction to",
+  "word": "Alex",
+  "item_id": "en_4908d9892452",
+  "lang": "en",
+  "pos": "PROPN",
+  "_n_lineages": "5",
+  "_consistency": "1.000",
+  "ratable": true,
+  "reading": "She feels an unusual pull or interest toward a person named Alex.",
+  "harm": 1,
+  "aggression": 1,
+  "directedness": 7,
+  "makes_better": 4,
+  "makes_worse": 1,
+  "interiority": 5,
+  "deliberation": 1,
+  "superego": 1,
+  "vocalisation": 1,
+  "hedged": 1,
+  "fit": 7,
+  "mundanity": 4
+ }
+]

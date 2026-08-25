@@ -5,8 +5,6 @@
   "item_id": "zh_983703480038",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 24,
-  "consistency": 0.583,
   "ratable": true,
   "reading": "The coach mutters in response to the referee's wrong call.",
   "harm": 1,
@@ -20,7 +18,9 @@
   "vocalisation": 6,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "24",
+  "_consistency": "0.583"
  },
  {
   "prompt": "裁判做出了错误判罚，教练嘟囔",
@@ -28,8 +28,6 @@
   "item_id": "zh_983703480038",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 23,
-  "consistency": 0.609,
   "ratable": true,
   "reading": "The coach mutters something in response to the referee's wrong call.",
   "harm": 1,
@@ -43,7 +41,9 @@
   "vocalisation": 6,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "23",
+  "_consistency": "0.609"
  },
  {
   "prompt": "裁判做出了错误判罚，教练嘟囔",
@@ -51,8 +51,6 @@
   "item_id": "zh_983703480038",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "The coach starts to mutter in response to the referee's wrong call.",
   "harm": 1,
@@ -66,7 +64,9 @@
   "vocalisation": 6,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "10",
+  "_consistency": "0.6"
  },
  {
   "prompt": "裁判做出了错误判罚，教练嘟囔",
@@ -74,8 +74,6 @@
   "item_id": "zh_983703480038",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.889,
   "ratable": true,
   "reading": "The coach mutters complaints about the referee's incorrect call.",
   "harm": 1,
@@ -89,7 +87,9 @@
   "vocalisation": 6,
   "hedged": 2,
   "fit": 6,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "9",
+  "_consistency": "0.889"
  },
  {
   "prompt": "裁判做出了错误判罚，教练嘟囔",
@@ -97,8 +97,6 @@
   "item_id": "zh_983703480038",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.571,
   "ratable": true,
   "reading": "The coach mutters the word 'referee' after a bad call, expressing frustration.",
   "harm": 1,
@@ -112,7 +110,9 @@
   "vocalisation": 6,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "7",
+  "_consistency": "0.571"
  },
  {
   "prompt": "裁判做出了错误判罚，教练嘟囔",
@@ -120,8 +120,6 @@
   "item_id": "zh_983703480038",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": false,
   "reading": "The coach mutters '到' (arrive/reach) in response to the referee's wrong call, which is an incomplete and incoherent utterance.",
   "harm": 1,
@@ -135,7 +133,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "裁判做出了错误判罚，教练嘟囔",
@@ -143,8 +143,6 @@
   "item_id": "zh_983703480038",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": false,
   "reading": "The coach mutters something, but the word '在' does not complete a coherent action or phrase.",
   "harm": 1,
@@ -158,6 +156,8 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  }
 ]

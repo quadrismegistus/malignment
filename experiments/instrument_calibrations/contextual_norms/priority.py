@@ -156,9 +156,26 @@ def main(argv=None):
     ap.add_argument("--min-lineages", type=int, default=5,
                     help="a pair must MOVE on this many endpoint lineages")
     ap.add_argument("--out", default=OUT)
-    ap.add_argument("--pos", default="VERB",
-                    help="VERB (default, P's population), 'content' for "
-                         "NOUN/VERB/ADJ/ADV/PROPN, or a comma list of UPOS tags")
+    ap.add_argument("--uniform", action="store_true",
+                    help="ignore tiers: emit every unrated pair at >=--min-lineages, "
+                         "so rating coverage is INDEPENDENT of dose. The tiered "
+                         "manifest commissioned tier 2 at top-quartile dose, which "
+                         "made coverage 21.8%% at low dose against 63.6%% at high, so "
+                         "a low-vs-high contrast confounds dose with which prompts got "
+                         "rated. Selecting on the variable you then condition on is "
+                         "the same error as selecting on the outcome, one step "
+                         "removed.")
+    ap.add_argument("--pos", default="content",
+                    help="'content' (default) = NOUN/VERB/ADJ/ADV/PROPN. 'VERB' is "
+                         "P's population and is the RIGHT filter for the one table "
+                         "that replicates P, and the WRONG one everywhere else: it "
+                         "does not thin a noun-slot prompt, it DELETES it. 451 of "
+                         "2,612 en prompts and 56 of 407 zh are under 20%% verbs -- "
+                         "the salary probes in English, the sexual-domain frames in "
+                         "Chinese -- and 111 already-rated en prompts fall in that "
+                         "group. The POS-proxy problem that motivated verbs-only is "
+                         "fixed by STRATIFYING on POS, not by discarding four fifths "
+                         "of the tagset.")
     ap.add_argument("--top-quantile", type=float, default=0.75,
                     help="dose quantile above which an en prompt is tier 2")
     a = ap.parse_args(argv)
@@ -233,7 +250,7 @@ def main(argv=None):
         if t not in want:
             drop_unratable += 1
             continue
-        tier = 1 if lg == "zh" else (2 if dv >= cut else 3)
+        tier = 0 if a.uniform else (1 if lg == "zh" else (2 if dv >= cut else 3))
         n = int(r["n_lin"]); up = int(r["up"]); dn = int(r["dn"])
         out.append((tier, -n, p, w, lg, dv, n, up, dn))
     out.sort()
@@ -261,8 +278,10 @@ def main(argv=None):
             wr.writerow(row)
 
     print("\n%-6s %-5s %10s %10s %12s" % ("tier", "lang", "pairs", "prompts", "words"))
-    for t, name in ((1, "zh"), (2, "en high-dose"), (3, "en general")):
+    for t, name in ((0, "uniform"), (1, "zh"), (2, "en high-dose"), (3, "en general")):
         sub = [x for x in out if x[0] == t]
+        if not sub:
+            continue
         print("  %-4d %-5s %10d %10d %12d   %s"
               % (t, sub[0][4] if sub else "-", len(sub),
                  len({x[2] for x in sub}), len({x[3] for x in sub}), name))

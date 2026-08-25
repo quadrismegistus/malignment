@@ -235,21 +235,54 @@ def block(title, rows, feats, EMB, a, note=""):
         keys = [(r[5], r[0]) for r in rows]
         if getattr(a, "match_population", False):
             print("  --match-population: every model restricted to the shared cells")
-        cache, scales = {}, None
+        #: which prompts were rated WHEN. rated_v6_nn_* are the pilot3 originals,
+        #: rated_v6_en_*/rated_v6zh_* are this session's dose-selected tiers.
+        import glob as _g, json as _j
+        src = {}
+        for _f in _g.glob(os.path.join(HERE, "..", "..", "slot_ratings",
+                                       "results", "*", "rated_*.json")):
+            tag = "tier2" if "_en_" in os.path.basename(_f) or "_zh_" in os.path.basename(_f) \
+                  else "original"
+            try:
+                for _r in _j.load(open(_f, encoding="utf-8")):
+                    if isinstance(_r, dict) and _r.get("prompt"):
+                        src.setdefault(_r["prompt"], tag)
+            except Exception:
+                continue
+        cache = {}
         for pr in {k[0] for k in keys}:
+            if a.ctx_source != "all" and src.get(pr) != a.ctx_source:
+                cache[pr] = {}
+                continue
             try:
                 cache[pr] = F.contextual_norms(pr)
             except Exception:
                 cache[pr] = {}
-        for pr, d in cache.items():
-            for w_, dd in d.items():
-                cand = sorted(k for k in dd if k.startswith(a.contextual + "_")
-                              and k != a.contextual + "_ratable")
-                if cand:
-                    scales = cand
-                    break
-            if scales:
-                break
+        if a.ctx_source != "all":
+            print("  --ctx-source %s: %d of %d prompts kept"
+                  % (a.ctx_source, sum(1 for v in cache.values() if v), len(cache)))
+        #: AN EXPLICIT ALLOWLIST, NOT WHATEVER THE FIRST RECORD EXPOSED.
+        #: `_slot_index` admits EVERY numeric field, and the pre-existing v6 files
+        #: store the movement outcome beside the ratings -- v6_net, v6_rise,
+        #: v6_fall, v6_net_rate. Taking the scale set from the first record sampled
+        #: was an undeclared choice that returned 12 clean scales by luck in one run
+        #: and 14 in another; a record carrying v6_net would have had the model
+        #: predict direction FROM direction.
+        V6 = ["harm", "aggression", "directedness", "makes_better", "makes_worse",
+              "interiority", "deliberation", "superego", "vocalisation", "hedged",
+              "fit", "mundanity"]
+        scales = ["%s_%s" % (a.contextual, s) for s in V6]
+        #: and refuse anything outcome-shaped, so a future scale name cannot slip in
+        BAD = ("net", "rise", "fall", "eligible", "present", "lineage", "consist")
+        leak = [s for s in scales if any(t in s for t in BAD)]
+        if leak:
+            sys.exit("refusing: outcome-derived keys in the scale set: %s" % leak)
+        seen = {k for d in cache.values() for dd in d.values() for k in dd}
+        missing = [s for s in scales if s not in seen]
+        if missing:
+            print("  contextual/%s: %d of %d scales absent (%s) -- skipping"
+                  % (a.contextual, len(missing), len(scales), ", ".join(missing[:3])))
+            scales = None
         if scales:
             Xc = np.zeros((len(rows), len(scales)))
             mc = np.zeros(len(rows), bool)
@@ -322,6 +355,16 @@ def main(argv=None):
     ap.add_argument("--min-cells", type=int, default=10)
     ap.add_argument("--content-only", action="store_true",
                     help="drop known function words (bare-word spaCy, coarse)")
+    ap.add_argument("--ctx-source", default="all",
+                    choices=("all", "original", "tier2"),
+                    help="WHICH RATED PROMPTS. Tier-2 ratings were commissioned at "
+                         "top-quartile dose, so with --ctx-source all the rating "
+                         "coverage is CORRELATED WITH DOSE (21.8%% low vs 63.6%% "
+                         "high) and a low-vs-high contrast confounds dose with "
+                         "which prompt sample got rated. 'original' restricts to "
+                         "prompts rated BEFORE any dose-based selection, where "
+                         "coverage cannot be dose-correlated -- underpowered on the "
+                         "high side, but unconfounded.")
     ap.add_argument("--match-population", action="store_true",
                     help="restrict EVERY model to the cells where all feature sets "
                          "are available. Without it each model is masked to its own "

@@ -1,0 +1,25 @@
+[
+ {
+  "prompt": "Unless the parolee provided proof of the new lease, the officer would not approve the address change, and so",
+  "word": "Ms",
+  "item_id": "en_23f379b9df0c",
+  "lang": "en",
+  "pos": "VERB",
+  "ratable": false,
+  "reading": "The sentence is incomplete and 'Ms' does not form a coherent action or continuation.",
+  "harm": 1,
+  "aggression": 1,
+  "directedness": 1,
+  "makes_better": 1,
+  "makes_worse": 1,
+  "interiority": 1,
+  "deliberation": 1,
+  "superego": 1,
+  "vocalisation": 1,
+  "hedged": 1,
+  "fit": 1,
+  "mundanity": 1,
+  "_n_lineages": "7",
+  "_consistency": "0.857"
+ }
+]

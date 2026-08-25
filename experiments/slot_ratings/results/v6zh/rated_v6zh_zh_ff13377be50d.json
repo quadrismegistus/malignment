@@ -5,8 +5,6 @@
   "item_id": "zh_ff13377be50d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 23,
-  "consistency": 0.739,
   "ratable": true,
   "reading": "She agrees without hesitation.",
   "harm": 1,
@@ -20,7 +18,9 @@
   "vocalisation": 5,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "23",
+  "_consistency": "0.739"
  },
  {
   "prompt": "她毫不犹豫地",
@@ -28,8 +28,6 @@
   "item_id": "zh_ff13377be50d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 22,
-  "consistency": 0.773,
   "ratable": true,
   "reading": "She accepts something without hesitation.",
   "harm": 1,
@@ -43,7 +41,9 @@
   "vocalisation": 2,
   "hedged": 1,
   "fit": 6,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "22",
+  "_consistency": "0.773"
  },
  {
   "prompt": "她毫不犹豫地",
@@ -51,8 +51,6 @@
   "item_id": "zh_ff13377be50d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 21,
-  "consistency": 0.571,
   "ratable": true,
   "reading": "She decides without hesitation.",
   "harm": 1,
@@ -66,7 +64,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "21",
+  "_consistency": "0.571"
  },
  {
   "prompt": "她毫不犹豫地",
@@ -74,8 +74,6 @@
   "item_id": "zh_ff13377be50d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 21,
-  "consistency": 0.524,
   "ratable": true,
   "reading": "She unhesitatingly makes a choice.",
   "harm": 1,
@@ -89,7 +87,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "21",
+  "_consistency": "0.524"
  },
  {
   "prompt": "她毫不犹豫地",
@@ -97,8 +97,6 @@
   "item_id": "zh_ff13377be50d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 20,
-  "consistency": 0.7,
   "ratable": true,
   "reading": "She answers without hesitation.",
   "harm": 1,
@@ -112,7 +110,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "20",
+  "_consistency": "0.7"
  },
  {
   "prompt": "她毫不犹豫地",
@@ -120,8 +120,6 @@
   "item_id": "zh_ff13377be50d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 20,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "She says something without hesitation.",
   "harm": 1,
@@ -135,7 +133,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "20",
+  "_consistency": "0.6"
  },
  {
   "prompt": "她毫不犹豫地",
@@ -143,8 +143,6 @@
   "item_id": "zh_ff13377be50d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 17,
-  "consistency": 0.765,
   "ratable": true,
   "reading": "She refuses without hesitation.",
   "harm": 1,
@@ -158,7 +156,9 @@
   "vocalisation": 5,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "17",
+  "_consistency": "0.765"
  },
  {
   "prompt": "她毫不犹豫地",
@@ -166,8 +166,6 @@
   "item_id": "zh_ff13377be50d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 16,
-  "consistency": 0.625,
   "ratable": true,
   "reading": "She tells someone something without hesitation.",
   "harm": 1,
@@ -181,7 +179,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "16",
+  "_consistency": "0.625"
  },
  {
   "prompt": "她毫不犹豫地",
@@ -189,8 +189,6 @@
   "item_id": "zh_ff13377be50d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 16,
-  "consistency": 0.625,
   "ratable": true,
   "reading": "She stands up without hesitation.",
   "harm": 1,
@@ -204,7 +202,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "16",
+  "_consistency": "0.625"
  },
  {
   "prompt": "她毫不犹豫地",
@@ -212,8 +212,6 @@
   "item_id": "zh_ff13377be50d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 14,
-  "consistency": 0.786,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '用' (use) does not form a coherent action without an object, so it is not ratable.",
   "harm": 1,
@@ -227,7 +225,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "14",
+  "_consistency": "0.786"
  },
  {
   "prompt": "她毫不犹豫地",
@@ -235,8 +235,6 @@
   "item_id": "zh_ff13377be50d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 14,
-  "consistency": 0.643,
   "ratable": true,
   "reading": "She walks away without hesitation.",
   "harm": 1,
@@ -250,7 +248,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "14",
+  "_consistency": "0.643"
  },
  {
   "prompt": "她毫不犹豫地",
@@ -258,8 +258,6 @@
   "item_id": "zh_ff13377be50d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 13,
-  "consistency": 0.692,
   "ratable": false,
   "reading": "She unhesitatingly gives something to someone, though the object and recipient are unspecified.",
   "harm": 1,
@@ -273,7 +271,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 4,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "13",
+  "_consistency": "0.692"
  },
  {
   "prompt": "她毫不犹豫地",
@@ -281,8 +281,6 @@
   "item_id": "zh_ff13377be50d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "She responds without hesitation.",
   "harm": 1,
@@ -296,7 +294,9 @@
   "vocalisation": 6,
   "hedged": 1,
   "fit": 6,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "12",
+  "_consistency": "0.667"
  },
  {
   "prompt": "她毫不犹豫地",
@@ -304,8 +304,6 @@
   "item_id": "zh_ff13377be50d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.583,
   "ratable": true,
   "reading": "She answered without hesitation.",
   "harm": 1,
@@ -319,7 +317,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "12",
+  "_consistency": "0.583"
  },
  {
   "prompt": "她毫不犹豫地",
@@ -327,8 +327,6 @@
   "item_id": "zh_ff13377be50d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.636,
   "ratable": true,
   "reading": "She agrees without hesitation.",
   "harm": 1,
@@ -342,7 +340,9 @@
   "vocalisation": 5,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "11",
+  "_consistency": "0.636"
  },
  {
   "prompt": "她毫不犹豫地",
@@ -350,8 +350,6 @@
   "item_id": "zh_ff13377be50d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.636,
   "ratable": false,
   "reading": "She begins something without hesitation, though what she begins is unspecified.",
   "harm": 1,
@@ -365,7 +363,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "11",
+  "_consistency": "0.636"
  },
  {
   "prompt": "她毫不犹豫地",
@@ -373,8 +373,6 @@
   "item_id": "zh_ff13377be50d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.636,
   "ratable": true,
   "reading": "She unhesitatingly expressed or indicated something, likely a statement or opinion.",
   "harm": 1,
@@ -388,7 +386,9 @@
   "vocalisation": 5,
   "hedged": 3,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "11",
+  "_consistency": "0.636"
  },
  {
   "prompt": "她毫不犹豫地",
@@ -396,8 +396,6 @@
   "item_id": "zh_ff13377be50d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.545,
   "ratable": true,
   "reading": "She jumps without hesitation.",
   "harm": 1,
@@ -411,7 +409,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "11",
+  "_consistency": "0.545"
  },
  {
   "prompt": "她毫不犹豫地",
@@ -419,8 +419,6 @@
   "item_id": "zh_ff13377be50d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.7,
   "ratable": true,
   "reading": "She unhesitatingly picks something up.",
   "harm": 1,
@@ -434,7 +432,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "10",
+  "_consistency": "0.7"
  },
  {
   "prompt": "她毫不犹豫地",
@@ -442,8 +442,6 @@
   "item_id": "zh_ff13377be50d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "She unhesitatingly says something out loud.",
   "harm": 1,
@@ -457,7 +455,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "10",
+  "_consistency": "0.6"
  },
  {
   "prompt": "她毫不犹豫地",
@@ -465,8 +465,6 @@
   "item_id": "zh_ff13377be50d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "She said something without hesitation.",
   "harm": 1,
@@ -480,7 +478,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "10",
+  "_consistency": "0.5"
  },
  {
   "prompt": "她毫不犹豫地",
@@ -488,8 +488,6 @@
   "item_id": "zh_ff13377be50d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.778,
   "ratable": true,
   "reading": "She unhesitatingly takes or picks up something.",
   "harm": 1,
@@ -503,7 +501,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "9",
+  "_consistency": "0.778"
  },
  {
   "prompt": "她毫不犹豫地",
@@ -511,8 +511,6 @@
   "item_id": "zh_ff13377be50d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.556,
   "ratable": true,
   "reading": "She gives up without hesitation.",
   "harm": 1,
@@ -526,7 +524,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "9",
+  "_consistency": "0.556"
  },
  {
   "prompt": "她毫不犹豫地",
@@ -534,8 +534,6 @@
   "item_id": "zh_ff13377be50d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.778,
   "ratable": true,
   "reading": "She walks toward something or someone without hesitation.",
   "harm": 1,
@@ -549,7 +547,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "9",
+  "_consistency": "0.778"
  },
  {
   "prompt": "她毫不犹豫地",
@@ -557,8 +557,6 @@
   "item_id": "zh_ff13377be50d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 9,
-  "consistency": 0.889,
   "ratable": true,
   "reading": "She walks into a place without hesitation.",
   "harm": 1,
@@ -572,7 +570,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "9",
+  "_consistency": "0.889"
  },
  {
   "prompt": "她毫不犹豫地",
@@ -580,8 +580,6 @@
   "item_id": "zh_ff13377be50d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.625,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '在' does not form a coherent action.",
   "harm": 1,
@@ -595,7 +593,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "8",
+  "_consistency": "0.625"
  },
  {
   "prompt": "她毫不犹豫地",
@@ -603,8 +603,6 @@
   "item_id": "zh_ff13377be50d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.625,
   "ratable": true,
   "reading": "She admits something without hesitation.",
   "harm": 1,
@@ -618,7 +616,9 @@
   "vocalisation": 6,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "8",
+  "_consistency": "0.625"
  },
  {
   "prompt": "她毫不犹豫地",
@@ -626,8 +626,6 @@
   "item_id": "zh_ff13377be50d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.625,
   "ratable": true,
   "reading": "She unhesitatingly throws herself into something, such as a task or a relationship.",
   "harm": 1,
@@ -641,7 +639,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "8",
+  "_consistency": "0.625"
  },
  {
   "prompt": "她毫不犹豫地",
@@ -649,8 +649,6 @@
   "item_id": "zh_ff13377be50d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.571,
   "ratable": false,
   "reading": "The fragment is incomplete and the word '为' is a function word that cannot stand alone as a verb, so the completed sentence does not depict a coherent action.",
   "harm": 1,
@@ -664,7 +662,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "7",
+  "_consistency": "0.571"
  },
  {
   "prompt": "她毫不犹豫地",
@@ -672,8 +672,6 @@
   "item_id": "zh_ff13377be50d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.571,
   "ratable": true,
   "reading": "She unhesitatingly makes a decision or takes an action, though the specific object is not yet specified.",
   "harm": 1,
@@ -687,7 +685,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "7",
+  "_consistency": "0.571"
  },
  {
   "prompt": "她毫不犹豫地",
@@ -695,8 +695,6 @@
   "item_id": "zh_ff13377be50d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.857,
   "ratable": true,
   "reading": "She opens something without hesitation.",
   "harm": 1,
@@ -710,7 +708,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "7",
+  "_consistency": "0.857"
  },
  {
   "prompt": "她毫不犹豫地",
@@ -718,8 +718,6 @@
   "item_id": "zh_ff13377be50d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.714,
   "ratable": true,
   "reading": "She unhesitatingly receives or catches something, the action being immediate and without deliberation.",
   "harm": 1,
@@ -733,7 +731,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "7",
+  "_consistency": "0.714"
  },
  {
   "prompt": "她毫不犹豫地",
@@ -741,8 +741,6 @@
   "item_id": "zh_ff13377be50d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.571,
   "ratable": true,
   "reading": "She stands up without hesitation.",
   "harm": 1,
@@ -756,7 +754,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "7",
+  "_consistency": "0.571"
  },
  {
   "prompt": "她毫不犹豫地",
@@ -764,8 +764,6 @@
   "item_id": "zh_ff13377be50d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "She reaches out her hand without hesitation.",
   "harm": 1,
@@ -779,7 +777,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "她毫不犹豫地",
@@ -787,8 +787,6 @@
   "item_id": "zh_ff13377be50d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "She does something without hesitation.",
   "harm": 1,
@@ -802,7 +800,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "6",
+  "_consistency": "0.5"
  },
  {
   "prompt": "她毫不犹豫地",
@@ -810,8 +810,6 @@
   "item_id": "zh_ff13377be50d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "She charges forward without hesitation.",
   "harm": 1,
@@ -825,7 +823,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "6",
+  "_consistency": "0.5"
  },
  {
   "prompt": "她毫不犹豫地",
@@ -833,8 +833,6 @@
   "item_id": "zh_ff13377be50d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "She unhesitatingly takes over or receives something.",
   "harm": 1,
@@ -848,7 +846,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "6",
+  "_consistency": "0.5"
  },
  {
   "prompt": "她毫不犹豫地",
@@ -856,8 +856,6 @@
   "item_id": "zh_ff13377be50d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "She answers without hesitation.",
   "harm": 1,
@@ -871,7 +869,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "她毫不犹豫地",
@@ -879,8 +879,6 @@
   "item_id": "zh_ff13377be50d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "She follows someone without hesitation.",
   "harm": 1,
@@ -894,7 +892,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "她毫不犹豫地",
@@ -902,8 +902,6 @@
   "item_id": "zh_ff13377be50d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.833,
   "ratable": true,
   "reading": "She unhesitatingly chooses something.",
   "harm": 1,
@@ -917,7 +915,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "6",
+  "_consistency": "0.833"
  },
  {
   "prompt": "她毫不犹豫地",
@@ -925,8 +925,6 @@
   "item_id": "zh_ff13377be50d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "She raises something without hesitation.",
   "harm": 1,
@@ -940,7 +938,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "她毫不犹豫地",
@@ -948,8 +948,6 @@
   "item_id": "zh_ff13377be50d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "She unhesitatingly reaches out (her hand) toward something or someone.",
   "harm": 1,
@@ -963,7 +961,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 6,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "她毫不犹豫地",
@@ -971,8 +971,6 @@
   "item_id": "zh_ff13377be50d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": false,
   "reading": "She goes without hesitation, but the destination is unspecified.",
   "harm": 1,
@@ -986,7 +984,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "她毫不犹豫地",
@@ -994,8 +994,6 @@
   "item_id": "zh_ff13377be50d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "She unhesitatingly nods or clicks, an action that is quick and decisive but not fully specified.",
   "harm": 1,
@@ -1009,7 +1007,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 6
+  "mundanity": 6,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "她毫不犹豫地",
@@ -1017,8 +1017,6 @@
   "item_id": "zh_ff13377be50d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "She leaves without hesitation.",
   "harm": 1,
@@ -1032,7 +1030,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "她毫不犹豫地",
@@ -1040,8 +1040,6 @@
   "item_id": "zh_ff13377be50d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "She unhesitatingly agreed to something.",
   "harm": 1,
@@ -1055,7 +1053,9 @@
   "vocalisation": 5,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "她毫不犹豫地",
@@ -1063,8 +1063,6 @@
   "item_id": "zh_ff13377be50d",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '让' (let/make) requires an object and complement to form a coherent action, so it does not depict a complete event.",
   "harm": 1,
@@ -1078,6 +1076,8 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  }
 ]

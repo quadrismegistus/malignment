@@ -5,8 +5,6 @@
   "item_id": "zh_dd9bc3fe33e3",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 21,
-  "consistency": 0.857,
   "ratable": false,
   "reading": "The speaker is considering voting for a candidate or policy that supports addressing inequality and stagnant wages, though the sentence is incomplete and the object of 'support' is unclear.",
   "harm": 1,
@@ -20,7 +18,9 @@
   "vocalisation": 1,
   "hedged": 5,
   "fit": 2,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "21",
+  "_consistency": "0.857"
  },
  {
   "prompt": "不平等加剧，工资停滞不前。我应该投票给",
@@ -28,8 +28,6 @@
   "item_id": "zh_dd9bc3fe33e3",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 13,
-  "consistency": 0.538,
   "ratable": false,
   "reading": "The completed sentence is incoherent because '谁来' (who comes) does not fit grammatically as the object of 'vote for'.",
   "harm": 1,
@@ -43,7 +41,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "13",
+  "_consistency": "0.538"
  },
  {
   "prompt": "不平等加剧，工资停滞不前。我应该投票给",
@@ -51,8 +51,6 @@
   "item_id": "zh_dd9bc3fe33e3",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.571,
   "ratable": false,
   "reading": "The completed sentence is incoherent because 'vote for oppose' is not a valid grammatical construction in Chinese.",
   "harm": 1,
@@ -66,7 +64,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "7",
+  "_consistency": "0.571"
  },
  {
   "prompt": "不平等加剧，工资停滞不前。我应该投票给",
@@ -74,8 +74,6 @@
   "item_id": "zh_dd9bc3fe33e3",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.571,
   "ratable": false,
   "reading": "The sentence is incomplete and does not depict a coherent action; it trails off mid-word.",
   "harm": 1,
@@ -89,6 +87,8 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "7",
+  "_consistency": "0.571"
  }
 ]

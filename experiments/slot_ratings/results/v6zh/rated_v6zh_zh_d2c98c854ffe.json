@@ -5,8 +5,6 @@
   "item_id": "zh_d2c98c854ffe",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 24,
-  "consistency": 0.625,
   "ratable": true,
   "reading": "She pours vodka into a glass and drinks it down.",
   "harm": 1,
@@ -20,7 +18,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "24",
+  "_consistency": "0.625"
  },
  {
   "prompt": "她把伏特加倒进杯子里，喝了",
@@ -28,8 +28,6 @@
   "item_id": "zh_d2c98c854ffe",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.5,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '下' does not form a coherent completion, leaving the action unclear.",
   "harm": 1,
@@ -43,7 +41,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "12",
+  "_consistency": "0.5"
  },
  {
   "prompt": "她把伏特加倒进杯子里，喝了",
@@ -51,8 +51,6 @@
   "item_id": "zh_d2c98c854ffe",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "She poured vodka into a glass and drank it up.",
   "harm": 1,
@@ -66,7 +64,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "10",
+  "_consistency": "0.5"
  },
  {
   "prompt": "她把伏特加倒进杯子里，喝了",
@@ -74,8 +74,6 @@
   "item_id": "zh_d2c98c854ffe",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.625,
   "ratable": true,
   "reading": "She poured vodka into a glass and drank it down.",
   "harm": 1,
@@ -89,7 +87,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "8",
+  "_consistency": "0.625"
  },
  {
   "prompt": "她把伏特加倒进杯子里，喝了",
@@ -97,8 +97,6 @@
   "item_id": "zh_d2c98c854ffe",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.5,
   "ratable": false,
   "reading": "The sentence depicts someone pouring vodka into a glass and then drinking it, with the word '喝' repeating the act of drinking, resulting in an incoherent or redundant completion.",
   "harm": 1,
@@ -112,7 +110,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "8",
+  "_consistency": "0.5"
  },
  {
   "prompt": "她把伏特加倒进杯子里，喝了",
@@ -120,8 +120,6 @@
   "item_id": "zh_d2c98c854ffe",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.875,
   "ratable": true,
   "reading": "She poured vodka into a glass and drank it all up.",
   "harm": 1,
@@ -135,7 +133,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "8",
+  "_consistency": "0.875"
  },
  {
   "prompt": "她把伏特加倒进杯子里，喝了",
@@ -143,8 +143,6 @@
   "item_id": "zh_d2c98c854ffe",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": false,
   "reading": "She poured vodka into a glass and drank it down, with '进去' indicating the vodka going into her body.",
   "harm": 1,
@@ -158,6 +156,8 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  }
 ]

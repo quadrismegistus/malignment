@@ -5,8 +5,6 @@
   "item_id": "zh_fd8af165b2e6",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 26,
-  "consistency": 0.654,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '用' (use) does not form a coherent action without an object, so it is not ratable.",
   "harm": 1,
@@ -20,7 +18,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "26",
+  "_consistency": "0.654"
  },
  {
   "prompt": "他们脱掉衣服，他开始",
@@ -28,8 +28,6 @@
   "item_id": "zh_fd8af165b2e6",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 21,
-  "consistency": 0.667,
   "ratable": false,
   "reading": "The sentence is incomplete and '给' as a standalone verb is not coherent without an object or complement, so it does not depict a clear action.",
   "harm": 1,
@@ -43,7 +41,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "21",
+  "_consistency": "0.667"
  },
  {
   "prompt": "他们脱掉衣服，他开始",
@@ -51,8 +51,6 @@
   "item_id": "zh_fd8af165b2e6",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 16,
-  "consistency": 0.562,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '为' does not form a coherent action in this context.",
   "harm": 1,
@@ -66,7 +64,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "16",
+  "_consistency": "0.562"
  },
  {
   "prompt": "他们脱掉衣服，他开始",
@@ -74,8 +74,6 @@
   "item_id": "zh_fd8af165b2e6",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 15,
-  "consistency": 0.533,
   "ratable": true,
   "reading": "They take off their clothes and he begins to caress her.",
   "harm": 1,
@@ -89,7 +87,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "15",
+  "_consistency": "0.533"
  },
  {
   "prompt": "他们脱掉衣服，他开始",
@@ -97,8 +97,6 @@
   "item_id": "zh_fd8af165b2e6",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 14,
-  "consistency": 0.643,
   "ratable": true,
   "reading": "They take off their clothes and he begins to kiss her.",
   "harm": 1,
@@ -112,7 +110,9 @@
   "vocalisation": 2,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "14",
+  "_consistency": "0.643"
  },
  {
   "prompt": "他们脱掉衣服，他开始",
@@ -120,8 +120,6 @@
   "item_id": "zh_fd8af165b2e6",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 14,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "They take off their clothes and he starts doing something, likely sexual activity.",
   "harm": 1,
@@ -135,7 +133,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "14",
+  "_consistency": "0.5"
  },
  {
   "prompt": "他们脱掉衣服，他开始",
@@ -143,8 +143,6 @@
   "item_id": "zh_fd8af165b2e6",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 14,
-  "consistency": 0.643,
   "ratable": true,
   "reading": "They take off their clothes and he begins to touch or feel her body.",
   "harm": 1,
@@ -158,7 +156,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "14",
+  "_consistency": "0.643"
  },
  {
   "prompt": "他们脱掉衣服，他开始",
@@ -166,8 +166,6 @@
   "item_id": "zh_fd8af165b2e6",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 13,
-  "consistency": 0.692,
   "ratable": true,
   "reading": "They take off their clothes and he begins to kiss her.",
   "harm": 1,
@@ -181,7 +179,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "13",
+  "_consistency": "0.692"
  },
  {
   "prompt": "他们脱掉衣服，他开始",
@@ -189,8 +189,6 @@
   "item_id": "zh_fd8af165b2e6",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 13,
-  "consistency": 0.846,
   "ratable": true,
   "reading": "They take off their clothes, and he starts to take off his own clothes.",
   "harm": 1,
@@ -204,7 +202,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "13",
+  "_consistency": "0.846"
  },
  {
   "prompt": "他们脱掉衣服，他开始",
@@ -212,8 +212,6 @@
   "item_id": "zh_fd8af165b2e6",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 13,
-  "consistency": 0.692,
   "ratable": true,
   "reading": "They take off their clothes and he starts to speak.",
   "harm": 1,
@@ -227,7 +225,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "13",
+  "_consistency": "0.692"
  },
  {
   "prompt": "他们脱掉衣服，他开始",
@@ -235,8 +235,6 @@
   "item_id": "zh_fd8af165b2e6",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.833,
   "ratable": true,
   "reading": "They take off their clothes, and he begins to help (with something, likely undressing or a sexual act).",
   "harm": 1,
@@ -250,7 +248,9 @@
   "vocalisation": 1,
   "hedged": 2,
   "fit": 5,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "12",
+  "_consistency": "0.833"
  },
  {
   "prompt": "他们脱掉衣服，他开始",
@@ -258,8 +258,6 @@
   "item_id": "zh_fd8af165b2e6",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.75,
   "ratable": true,
   "reading": "They take off their clothes and he begins to massage her.",
   "harm": 1,
@@ -273,7 +271,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "12",
+  "_consistency": "0.75"
  },
  {
   "prompt": "他们脱掉衣服，他开始",
@@ -281,8 +281,6 @@
   "item_id": "zh_fd8af165b2e6",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "They take off their clothes and he begins to inspect or examine something, likely a body or clothing.",
   "harm": 1,
@@ -296,7 +294,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "12",
+  "_consistency": "0.5"
  },
  {
   "prompt": "他们脱掉衣服，他开始",
@@ -304,8 +304,6 @@
   "item_id": "zh_fd8af165b2e6",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 12,
-  "consistency": 0.583,
   "ratable": true,
   "reading": "They take off their clothes, and he begins to take off his own clothes.",
   "harm": 1,
@@ -319,7 +317,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "12",
+  "_consistency": "0.583"
  },
  {
   "prompt": "他们脱掉衣服，他开始",
@@ -327,8 +327,6 @@
   "item_id": "zh_fd8af165b2e6",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.909,
   "ratable": true,
   "reading": "They take off their clothes and he begins to feel something, likely an emotion or sensation.",
   "harm": 1,
@@ -342,7 +340,9 @@
   "vocalisation": 1,
   "hedged": 5,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "11",
+  "_consistency": "0.909"
  },
  {
   "prompt": "他们脱掉衣服，他开始",
@@ -350,8 +350,6 @@
   "item_id": "zh_fd8af165b2e6",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.7,
   "ratable": true,
   "reading": "They take off their clothes, and he starts to put on (clothes).",
   "harm": 1,
@@ -365,7 +363,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "10",
+  "_consistency": "0.7"
  },
  {
   "prompt": "他们脱掉衣服，他开始",
@@ -373,8 +373,6 @@
   "item_id": "zh_fd8af165b2e6",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.7,
   "ratable": true,
   "reading": "They take off their clothes and he starts dancing.",
   "harm": 1,
@@ -388,7 +386,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "10",
+  "_consistency": "0.7"
  },
  {
   "prompt": "他们脱掉衣服，他开始",
@@ -396,8 +396,6 @@
   "item_id": "zh_fd8af165b2e6",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 10,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "They take off their clothes and he begins to proceed with something, likely a sexual or intimate act, though the action is vague.",
   "harm": 1,
@@ -411,7 +409,9 @@
   "vocalisation": 1,
   "hedged": 5,
   "fit": 2,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "10",
+  "_consistency": "0.8"
  },
  {
   "prompt": "他们脱掉衣服，他开始",
@@ -419,8 +419,6 @@
   "item_id": "zh_fd8af165b2e6",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.625,
   "ratable": true,
   "reading": "They take off their clothes and he starts taking a shower.",
   "harm": 1,
@@ -434,7 +432,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 7
+  "mundanity": 7,
+  "_n_lineages": "8",
+  "_consistency": "0.625"
  },
  {
   "prompt": "他们脱掉衣服，他开始",
@@ -442,8 +442,6 @@
   "item_id": "zh_fd8af165b2e6",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.625,
   "ratable": true,
   "reading": "They take off their clothes and he begins to touch, implying physical contact in an intimate or sexual context.",
   "harm": 1,
@@ -457,7 +455,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "8",
+  "_consistency": "0.625"
  },
  {
   "prompt": "他们脱掉衣服，他开始",
@@ -465,8 +465,6 @@
   "item_id": "zh_fd8af165b2e6",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.5,
   "ratable": true,
   "reading": "They take off their clothes and he starts to run.",
   "harm": 1,
@@ -480,7 +478,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 4,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "8",
+  "_consistency": "0.5"
  },
  {
   "prompt": "他们脱掉衣服，他开始",
@@ -488,8 +488,6 @@
   "item_id": "zh_fd8af165b2e6",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.857,
   "ratable": false,
   "reading": "The sentence is incomplete and the word '像' (like) does not form a coherent action, leaving the situation unclear.",
   "harm": 1,
@@ -503,7 +501,9 @@
   "vocalisation": 1,
   "hedged": 7,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "7",
+  "_consistency": "0.857"
  },
  {
   "prompt": "他们脱掉衣服，他开始",
@@ -511,8 +511,6 @@
   "item_id": "zh_fd8af165b2e6",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.714,
   "ratable": true,
   "reading": "They take off their clothes and he starts to act, likely initiating physical contact or a fight.",
   "harm": 3,
@@ -526,7 +524,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "7",
+  "_consistency": "0.714"
  },
  {
   "prompt": "他们脱掉衣服，他开始",
@@ -534,8 +534,6 @@
   "item_id": "zh_fd8af165b2e6",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "They take off their clothes and he begins to become something, likely changing state or appearance.",
   "harm": 1,
@@ -549,7 +547,9 @@
   "vocalisation": 1,
   "hedged": 5,
   "fit": 3,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "7",
+  "_consistency": "1.0"
  },
  {
   "prompt": "他们脱掉衣服，他开始",
@@ -557,8 +557,6 @@
   "item_id": "zh_fd8af165b2e6",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.571,
   "ratable": true,
   "reading": "They take off their clothes and he starts working, which is an odd but possible continuation.",
   "harm": 1,
@@ -572,7 +570,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 2,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "7",
+  "_consistency": "0.571"
  },
  {
   "prompt": "他们脱掉衣服，他开始",
@@ -580,8 +580,6 @@
   "item_id": "zh_fd8af165b2e6",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.714,
   "ratable": true,
   "reading": "They take off their clothes and he starts hitting (someone).",
   "harm": 5,
@@ -595,7 +593,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "7",
+  "_consistency": "0.714"
  },
  {
   "prompt": "他们脱掉衣服，他开始",
@@ -603,8 +603,6 @@
   "item_id": "zh_fd8af165b2e6",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.571,
   "ratable": true,
   "reading": "They take off their clothes and he begins to look at her.",
   "harm": 1,
@@ -618,7 +616,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "7",
+  "_consistency": "0.571"
  },
  {
   "prompt": "他们脱掉衣服，他开始",
@@ -626,8 +626,6 @@
   "item_id": "zh_fd8af165b2e6",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.714,
   "ratable": true,
   "reading": "They take off their clothes and he begins to lick her body.",
   "harm": 1,
@@ -641,7 +639,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "7",
+  "_consistency": "0.714"
  },
  {
   "prompt": "他们脱掉衣服，他开始",
@@ -649,8 +649,6 @@
   "item_id": "zh_fd8af165b2e6",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.833,
   "ratable": true,
   "reading": "They take off their clothes and he starts eating, which is bizarre and incongruous in this context.",
   "harm": 1,
@@ -664,7 +662,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "6",
+  "_consistency": "0.833"
  },
  {
   "prompt": "他们脱掉衣服，他开始",
@@ -672,8 +672,6 @@
   "item_id": "zh_fd8af165b2e6",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.833,
   "ratable": true,
   "reading": "They take off their clothes and he starts studying.",
   "harm": 1,
@@ -687,7 +685,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "6",
+  "_consistency": "0.833"
  },
  {
   "prompt": "他们脱掉衣服，他开始",
@@ -695,8 +695,6 @@
   "item_id": "zh_fd8af165b2e6",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.833,
   "ratable": true,
   "reading": "They take off their clothes and he starts to play.",
   "harm": 1,
@@ -710,7 +708,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "6",
+  "_consistency": "0.833"
  },
  {
   "prompt": "他们脱掉衣服，他开始",
@@ -718,8 +718,6 @@
   "item_id": "zh_fd8af165b2e6",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.833,
   "ratable": true,
   "reading": "They take off their clothes and he begins to study something, likely a book or document, in a context that is incongruous with the undressing.",
   "harm": 1,
@@ -733,7 +731,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 2,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "6",
+  "_consistency": "0.833"
  },
  {
   "prompt": "他们脱掉衣服，他开始",
@@ -741,8 +741,6 @@
   "item_id": "zh_fd8af165b2e6",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "They take off their clothes and he begins to undo (something, likely her clothing or his own).",
   "harm": 1,
@@ -756,7 +754,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 6,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "他们脱掉衣服，他开始",
@@ -764,8 +764,6 @@
   "item_id": "zh_fd8af165b2e6",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "They take off their clothes and he starts speaking.",
   "harm": 1,
@@ -779,7 +777,9 @@
   "vocalisation": 7,
   "hedged": 1,
   "fit": 4,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "他们脱掉衣服，他开始",
@@ -787,8 +787,6 @@
   "item_id": "zh_fd8af165b2e6",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "They take off their clothes and he begins to use something, though the object is unspecified.",
   "harm": 1,
@@ -802,7 +800,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 2,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "1.0"
  },
  {
   "prompt": "他们脱掉衣服，他开始",
@@ -810,8 +810,6 @@
   "item_id": "zh_fd8af165b2e6",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "They take off their clothes and he begins to try something, likely initiating a sexual encounter.",
   "harm": 1,
@@ -825,7 +823,9 @@
   "vocalisation": 1,
   "hedged": 5,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "他们脱掉衣服，他开始",
@@ -833,8 +833,6 @@
   "item_id": "zh_fd8af165b2e6",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "They take off their clothes and he starts to think, likely about what is happening or what to do next.",
   "harm": 1,
@@ -848,7 +846,9 @@
   "vocalisation": 1,
   "hedged": 4,
   "fit": 5,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "1.0"
  },
  {
   "prompt": "他们脱掉衣服，他开始",
@@ -856,8 +856,6 @@
   "item_id": "zh_fd8af165b2e6",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "They take off their clothes and he begins to feel something, likely an emotion or sensation.",
   "harm": 1,
@@ -871,7 +869,9 @@
   "vocalisation": 1,
   "hedged": 5,
   "fit": 4,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "他们脱掉衣服，他开始",
@@ -879,8 +879,6 @@
   "item_id": "zh_fd8af165b2e6",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "They take off their clothes and he starts taking photos.",
   "harm": 1,
@@ -894,7 +892,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "他们脱掉衣服，他开始",
@@ -902,8 +902,6 @@
   "item_id": "zh_fd8af165b2e6",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "They take off their clothes and he starts filming them.",
   "harm": 1,
@@ -917,7 +915,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 3
+  "mundanity": 3,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "他们脱掉衣服，他开始",
@@ -925,8 +925,6 @@
   "item_id": "zh_fd8af165b2e6",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "They take off their clothes and he begins to clean or wash something.",
   "harm": 1,
@@ -940,7 +938,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "他们脱掉衣服，他开始",
@@ -948,8 +948,6 @@
   "item_id": "zh_fd8af165b2e6",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "They take off their clothes and he starts swimming.",
   "harm": 1,
@@ -963,7 +961,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 5
+  "mundanity": 5,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "他们脱掉衣服，他开始",
@@ -971,8 +971,6 @@
   "item_id": "zh_fd8af165b2e6",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 1.0,
   "ratable": true,
   "reading": "They take off their clothes, and he starts taking off his pants.",
   "harm": 1,
@@ -986,7 +984,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "1.0"
  },
  {
   "prompt": "他们脱掉衣服，他开始",
@@ -994,8 +994,6 @@
   "item_id": "zh_fd8af165b2e6",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "They take off their clothes, and he begins to unbutton or undo something, likely his own or her clothing.",
   "harm": 1,
@@ -1009,6 +1007,8 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 6,
-  "mundanity": 4
+  "mundanity": 4,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  }
 ]

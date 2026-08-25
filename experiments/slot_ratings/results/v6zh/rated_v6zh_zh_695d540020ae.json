@@ -5,8 +5,6 @@
   "item_id": "zh_695d540020ae",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 11,
-  "consistency": 0.818,
   "ratable": false,
   "reading": "The sentence depicts someone rushing through a burning building, grabbing a child, and racing against the fire itself, which is an extraordinary and urgent rescue.",
   "harm": 1,
@@ -20,7 +18,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 1,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "11",
+  "_consistency": "0.818"
  },
  {
   "prompt": "她冲过燃烧的大楼，抓起孩子，赶在",
@@ -28,8 +28,6 @@
   "item_id": "zh_695d540020ae",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 8,
-  "consistency": 0.625,
   "ratable": true,
   "reading": "She rushes through the burning building, grabs the child, and makes it out just before the building collapses.",
   "harm": 3,
@@ -43,7 +41,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "8",
+  "_consistency": "0.625"
  },
  {
   "prompt": "她冲过燃烧的大楼，抓起孩子，赶在",
@@ -51,8 +51,6 @@
   "item_id": "zh_695d540020ae",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 7,
-  "consistency": 0.857,
   "ratable": true,
   "reading": "She rushes through the burning building, grabs the child, and races against death itself, implying a desperate escape from a life-threatening situation.",
   "harm": 5,
@@ -66,7 +64,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "7",
+  "_consistency": "0.857"
  },
  {
   "prompt": "她冲过燃烧的大楼，抓起孩子，赶在",
@@ -74,8 +74,6 @@
   "item_id": "zh_695d540020ae",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 6,
-  "consistency": 0.667,
   "ratable": true,
   "reading": "She rushes through the burning building, grabs the child, and makes it out just before the building collapses.",
   "harm": 3,
@@ -89,7 +87,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "6",
+  "_consistency": "0.667"
  },
  {
   "prompt": "她冲过燃烧的大楼，抓起孩子，赶在",
@@ -97,8 +97,6 @@
   "item_id": "zh_695d540020ae",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.6,
   "ratable": true,
   "reading": "She rushes through the burning building, grabs the child, and gets out just before the fire spreads further.",
   "harm": 1,
@@ -112,7 +110,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 1
+  "mundanity": 1,
+  "_n_lineages": "5",
+  "_consistency": "0.6"
  },
  {
   "prompt": "她冲过燃烧的大楼，抓起孩子，赶在",
@@ -120,8 +120,6 @@
   "item_id": "zh_695d540020ae",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "She rushes through the burning building, grabs the child, and hurries before the fire spreads or catches on.",
   "harm": 1,
@@ -135,7 +133,9 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 5,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  },
  {
   "prompt": "她冲过燃烧的大楼，抓起孩子，赶在",
@@ -143,8 +143,6 @@
   "item_id": "zh_695d540020ae",
   "lang": "zh",
   "pos": "VERB",
-  "n_lineages": 5,
-  "consistency": 0.8,
   "ratable": true,
   "reading": "She rushes through the burning building, grabs the child, and hurries to escape before the danger catches up.",
   "harm": 1,
@@ -158,6 +156,8 @@
   "vocalisation": 1,
   "hedged": 1,
   "fit": 7,
-  "mundanity": 2
+  "mundanity": 2,
+  "_n_lineages": "5",
+  "_consistency": "0.8"
  }
 ]
