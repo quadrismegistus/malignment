@@ -301,6 +301,8 @@ When fallers lose mass, every surviving word's probability rises **mechanically*
 
 ## Displacement is conditional, and the condition is transgressive mass
 
+    [pilot3, 5,595 cells. pilot4 replicates on 15,150: 3/11/27/37% with median
+     dN -0.0038/-0.0039/-0.0046/-0.0070. See MAGNITUDE_AT_50.md.]
     quartile of base naughty mass   cells   displ   churn    rev   median dN     mass
     Q1 lowest                       1398      2%     93%     5%     -0.0059   0.0067
     Q2                              1398     11%     78%    10%     -0.0058   0.0289
@@ -524,6 +526,11 @@ The sexual instrument reproduces X_metonymy on twelve frames it never saw: `geni
     a PERFECT predictor, scored by the models' rule  : -0.020
     median corr(half A net, half B net)              : +0.508
 
+> **n-DEPENDENT.** At 50 lineages a perfect predictor earns **+0.407** and beats zero
+> on 255/255 frames (half-half correlation 0.718 against 0.508). The DIAGNOSIS stands
+> -- a slope fitted on the target is the wrong quantity at any n -- but do not carry
+> "a perfect predictor scores negative" forward as a property of the rule.
+
 **A perfect predictor of half A earns -0.020 under the rule every model was scored by.** With the eight fitting lineages a half-split actually had, perfection earns -0.084. So the band every model occupied, -0.09 to +0.08, was at or above flawless, and was reported as explaining nothing. Four conclusions came out of that and all four reverse: "sexual is unexplained", "every model explains something in identity and nothing anywhere else", "the axes predict direction but not magnitude", and a purpose-built sexual instrument tying the wrong one at p=0.97.
 
 The defect survived checking because **it failed everywhere equally** -- 12 named scales, a 1024-dim embedding, a 9-scale custom instrument and a single column all landed in the same small-negative band, and uniform failure across unrelated predictors reads as a fact about the world. I even invented a degrees-of-freedom mechanism for it, which the one-column test then refuted without prompting me to re-examine the benchmark.
@@ -532,6 +539,9 @@ R2 also rises steeply with the fitting half, which is what argues for leave-one-
 
     lineages to fit    1       2       4       8      12      16
     median R2      -2.626  -1.175  -0.445  -0.084  +0.035  +0.094
+    [pilot3 stopped at 16 because 20 was all it had. pilot4 to 45:
+     +0.135 at 24, +0.163 at 32, +0.184 at 40, +0.191 at 45 -- still
+     climbing, decelerating hard, and 2.6x the value at 16.]
 
 ### Leave-one-out, with a benchmark models are allowed to reach
 
@@ -540,12 +550,20 @@ R2 also rises steeply with the fitting half, which is what argues for leave-one-
 Three instruments, identical words within each comparison (`loo_all.py`, 173 frames carrying both v6 and inst v3):
 
     emp_mean      0.0243   100%              bge_pc10      0.0152    62%
+    [pilot3, 20 fitting lineages. pilot4 numbers in MAGNITUDE_AT_50.md]
     v6            0.0101    41%              bge_pc25      0.0226    93%   p=0.76
     inst          0.0130    54%              named+bge     0.0243   100%   p=0.15
     v6+inst       0.0191    79%              bge_pc25+p    0.0272   112%   p=3.1e-06
     v6+inst+p     0.0226    93%   p=0.93     named+bge+p   0.0261   108%   p=0.00081
 
-**Magnitude is named too, at the level of the data itself.** 25 named scales plus base probability reach 93% of the benchmark and are statistically indistinguishable from it (p=0.93). At matched parameters the named set and the embedding are **exactly level, 0.0226 apiece**. Only base-probability-augmented bge is ahead.
+> **SUPERSEDED at 50 lineages -- every sentence in this paragraph reverses. See
+> `MAGNITUDE_AT_50.md`.** At 49 fitting lineages `v6+inst+p` reaches **62%** of the
+> benchmark at **p=7.9e-29**, not 93% and "indistinguishable"; `bge_pc25` reaches 73%;
+> **nothing reaches the benchmark**; and the embedding is ahead by 18% at matched
+> parameters, not level. The tie was a 20-lineage artifact, exactly as this file's own
+> frontmatter warned it might be.
+
+~~**Magnitude is named too, at the level of the data itself.** 25 named scales plus base probability reach 93% of the benchmark and are statistically indistinguishable from it (p=0.93). At matched parameters the named set and the embedding are **exactly level, 0.0226 apiece**. Only base-probability-augmented bge is ahead.~~
 
 Three structural facts fall out:
 
@@ -558,13 +576,19 @@ Three structural facts fall out:
         institutional  53     0.0232     0.0155    0.0173     names win
         violence       49     0.0211     0.0192    0.0197     names win
 
-Deliberately constructed normative dimensions match a distributional representation in institutional and violence frames and lose to it by 25% in identity. In identity, `named+bge` (0.0343) is WORSE than bge alone (0.0351), the signature of named columns adding noise rather than supplying missing signal.
+> **SUPERSEDED at 50 lineages.** `bge_pc25` vs `v6+inst` is now identity
+> 0.0539/0.0417, institutional 0.0399/0.0357, violence 0.0395/0.0325 -- **the
+> embedding is ahead in every domain**. There is no NAMES WIN cell left, so the
+> legislated-vs-unlegislated reading below does not survive and the confound this
+> file flagged against itself no longer needs invoking.
+
+~~Deliberately constructed normative dimensions match a distributional representation in institutional and violence frames and lose to it by 25% in identity. In identity, `named+bge` (0.0343) is WORSE than bge alone (0.0351), the signature of named columns adding noise rather than supplying missing signal.~~
 
 **One reading this suggests and does not establish.** Alignment's institutional operation runs along dimensions somebody wrote down -- deference, procedural, harm are in the actual specifications -- while what happens to identity words is corpus residue that was never legislated. The legislated part is articulable in the vocabulary of the legislation; the unlegislated part is only describable distributionally. **The confound runs in exactly the direction of the finding**: institutional frames get a purpose-built 13-scale instrument and identity frames get a general one, so "our identity scales are bad" predicts the identical pattern. Separating them needs an identity-specific instrument built the way the institutional one was, and that has not been run.
 
 ### MASS: direction of travel and magnitude of travel, separately
 
-`mass_direction.py`, over `words.jsonl` so the cells are exactly the ones `dN_position` is computed over. 4,402 cells, 253 frames, 21 lineages; median coverage of base mass by rated words 0.779. The frame is the unit -- a frame's lineages collapse to their median before any test across frames -- because 20 lineages of one prompt are not 20 observations of a domain.
+`mass_direction.py`, over `words.jsonl` so the cells are exactly the ones `dN_position` is computed over. 4,402 cells, 253 frames, 21 lineages **[pilot3; pilot4 is 11,859 cells, 255 frames, 50 lineages -- and note the FRAME is the unit here, see `LINEAGE_AND_DOSE.md` for both collapses]**; median coverage of base mass by rated words 0.779. The frame is the unit -- a frame's lineages collapse to their median before any test across frames -- because 20 lineages of one prompt are not 20 observations of a domain.
 
 **DIRECTION is nameable in every domain, and every signature predicted from the per-word work survives mass weighting.** Sign test over frames, `*` at Bonferroni 0.05/12:
 
@@ -640,7 +664,7 @@ Nothing is knife-edge and effect sizes rise monotonically as the gate tightens, 
 - **`dN_reorder` and `interaction` are aggregate columns.** Per-cell values move under tie-breaking, by more than the median effect.
 - **`r2` is 0.369 at best.** Two thirds of the movement in displacement cells is uncharacterised.
 - **The six categories are a reading.** No cell is classified; no count is attached.
-- **Institutional does not replicate in aggregate.** Do not carry the corpus-wide 63% into an institutional claim.
+- **Institutional does not replicate in aggregate.** Do not carry the corpus-wide 63% into an institutional claim. **[pilot4: corpus-wide is 59.9% and institutional IS now significant, 53% at z=+3.8 on 3,100 cells. The fence stands in spirit -- 53% against 59.9% -- but "not significant" is no longer true.]**
 - **bloomz is one model.** The RLHF-against-multitask-prompting contrast is a hypothesis with a single observation on each side.
 - **The leak columns do not bind.** `leak_worst = (residual_base + residual_endpoint) * max|s|` assumes the entire unreturned mass sits at the axis extreme. The residual is ~0.21 of the distribution spread over words each below `theta=0.001`, so it contains a MINIMUM of ~206 distinct words and the bound requires all of them at one extreme in one direction. That is an arithmetic ceiling with no physical reading, roughly 16x `leak_matched_floor`. Scored words are near-symmetric about zero (mean -0.0037, sd 0.107), so a tail distributed like the body contributes about -0.0008. Reported because a bound must travel with its number; not used as a filter.
 
