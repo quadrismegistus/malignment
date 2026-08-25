@@ -5,6 +5,7 @@ import QuadrantMap from './QuadrantMap.svelte';
 import OperationGraph from './OperationGraph.svelte';
 import MetaGraph from './MetaGraph.svelte';
 import DoseScatter from './DoseScatter.svelte';
+import DoseTrends from './DoseTrends.svelte';
 
 /**
  * chart type -> component, keyed by the `chart` field a producer writes into its
@@ -25,5 +26,6 @@ export const CHARTS: Record<string, Component<any>> = {
 	//: four levels, two of them not drawn. Its producer sets this name after
 	//: `graph()` validates the artifact.
 	metagraph: MetaGraph,
-	dose_scatter: DoseScatter
+	dose_scatter: DoseScatter,
+	dose_trends: DoseTrends
 };
