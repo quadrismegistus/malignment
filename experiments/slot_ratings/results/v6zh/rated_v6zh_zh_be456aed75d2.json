@@ -1,0 +1,25 @@
+[
+ {
+  "prompt": "她呻吟着，他的手滑到她的两腿之间",
+  "word": "去",
+  "item_id": "zh_be456aed75d2",
+  "lang": "zh",
+  "pos": "VERB",
+  "n_lineages": 10,
+  "consistency": 1.0,
+  "ratable": false,
+  "reading": "The sentence depicts a sexual encounter where the man's hand moves between the woman's legs, and the word '去' (go) is a directional complement that doesn't add a new action but completes the motion phrase, indicating the hand's movement toward that area.",
+  "harm": 1,
+  "aggression": 1,
+  "directedness": 1,
+  "makes_better": 1,
+  "makes_worse": 1,
+  "interiority": 1,
+  "deliberation": 1,
+  "superego": 1,
+  "vocalisation": 1,
+  "hedged": 1,
+  "fit": 1,
+  "mundanity": 1
+ }
+]

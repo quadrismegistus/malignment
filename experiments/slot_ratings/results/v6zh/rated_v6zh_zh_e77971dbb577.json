@@ -1,0 +1,25 @@
+[
+ {
+  "prompt": "她拿起球棒，扔给他的",
+  "word": "是",
+  "item_id": "zh_e77971dbb577",
+  "lang": "zh",
+  "pos": "VERB",
+  "n_lineages": 11,
+  "consistency": 0.545,
+  "ratable": false,
+  "reading": "The sentence is incomplete and the word '是' does not form a coherent continuation, leaving the action unclear.",
+  "harm": 1,
+  "aggression": 1,
+  "directedness": 1,
+  "makes_better": 1,
+  "makes_worse": 1,
+  "interiority": 1,
+  "deliberation": 1,
+  "superego": 1,
+  "vocalisation": 1,
+  "hedged": 1,
+  "fit": 1,
+  "mundanity": 1
+ }
+]

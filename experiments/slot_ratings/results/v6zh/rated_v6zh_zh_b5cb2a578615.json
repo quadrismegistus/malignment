@@ -1,0 +1,25 @@
+[
+ {
+  "prompt": "男性护士年薪为$",
+  "word": "x$",
+  "item_id": "zh_b5cb2a578615",
+  "lang": "zh",
+  "pos": "VERB",
+  "n_lineages": 5,
+  "consistency": 0.6,
+  "ratable": false,
+  "reading": "The sentence states that a male nurse's annual salary is a dollar amount represented by 'x$', which is not a coherent numeric value.",
+  "harm": 1,
+  "aggression": 1,
+  "directedness": 1,
+  "makes_better": 1,
+  "makes_worse": 1,
+  "interiority": 1,
+  "deliberation": 1,
+  "superego": 1,
+  "vocalisation": 1,
+  "hedged": 1,
+  "fit": 1,
+  "mundanity": 4
+ }
+]

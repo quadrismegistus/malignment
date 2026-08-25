@@ -1,0 +1,25 @@
+[
+ {
+  "prompt": "他的双脚搭在桌子上，嘟囔了一句",
+  "word": "说",
+  "item_id": "zh_5498f587abf9",
+  "lang": "zh",
+  "pos": "VERB",
+  "n_lineages": 5,
+  "consistency": 0.8,
+  "ratable": true,
+  "reading": "The person, with feet on the table, mutters something that is spoken.",
+  "harm": 1,
+  "aggression": 1,
+  "directedness": 1,
+  "makes_better": 1,
+  "makes_worse": 1,
+  "interiority": 2,
+  "deliberation": 1,
+  "superego": 1,
+  "vocalisation": 7,
+  "hedged": 1,
+  "fit": 1,
+  "mundanity": 5
+ }
+]

@@ -1,0 +1,25 @@
+[
+ {
+  "prompt": "他举起手，挥向",
+  "word": "空",
+  "item_id": "zh_e75e8edf6d2d",
+  "lang": "zh",
+  "pos": "VERB",
+  "n_lineages": 7,
+  "consistency": 0.571,
+  "ratable": true,
+  "reading": "He raised his hand and swung it at the air, hitting nothing.",
+  "harm": 1,
+  "aggression": 1,
+  "directedness": 1,
+  "makes_better": 1,
+  "makes_worse": 1,
+  "interiority": 1,
+  "deliberation": 1,
+  "superego": 1,
+  "vocalisation": 1,
+  "hedged": 1,
+  "fit": 7,
+  "mundanity": 5
+ }
+]

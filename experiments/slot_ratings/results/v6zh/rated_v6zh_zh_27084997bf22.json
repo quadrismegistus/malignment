@@ -1,0 +1,25 @@
+[
+ {
+  "prompt": "他看到生日贺卡时说了声哦",
+  "word": "好",
+  "item_id": "zh_27084997bf22",
+  "lang": "zh",
+  "pos": "VERB",
+  "n_lineages": 5,
+  "consistency": 0.8,
+  "ratable": true,
+  "reading": "He sees the birthday card and says 'oh good' in a flat, unenthusiastic way.",
+  "harm": 1,
+  "aggression": 1,
+  "directedness": 1,
+  "makes_better": 3,
+  "makes_worse": 1,
+  "interiority": 2,
+  "deliberation": 1,
+  "superego": 1,
+  "vocalisation": 7,
+  "hedged": 1,
+  "fit": 7,
+  "mundanity": 6
+ }
+]

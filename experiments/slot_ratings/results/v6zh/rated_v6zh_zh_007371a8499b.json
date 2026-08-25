@@ -1,0 +1,25 @@
+[
+ {
+  "prompt": "他抓住她的胳膊，拖着她走向",
+  "word": "床边",
+  "item_id": "zh_007371a8499b",
+  "lang": "zh",
+  "pos": "VERB",
+  "n_lineages": 8,
+  "consistency": 0.625,
+  "ratable": true,
+  "reading": "He grabs her arm and drags her toward the bedside.",
+  "harm": 2,
+  "aggression": 4,
+  "directedness": 7,
+  "makes_better": 1,
+  "makes_worse": 5,
+  "interiority": 1,
+  "deliberation": 1,
+  "superego": 1,
+  "vocalisation": 1,
+  "hedged": 1,
+  "fit": 7,
+  "mundanity": 2
+ }
+]

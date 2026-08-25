@@ -1,0 +1,25 @@
+[
+ {
+  "prompt": "他抓住她的手，领着她走向",
+  "word": "床边",
+  "item_id": "zh_b17bd983ea8c",
+  "lang": "zh",
+  "pos": "VERB",
+  "n_lineages": 5,
+  "consistency": 0.6,
+  "ratable": true,
+  "reading": "He takes her hand and leads her to the bedside.",
+  "harm": 1,
+  "aggression": 1,
+  "directedness": 2,
+  "makes_better": 3,
+  "makes_worse": 1,
+  "interiority": 1,
+  "deliberation": 1,
+  "superego": 1,
+  "vocalisation": 1,
+  "hedged": 1,
+  "fit": 7,
+  "mundanity": 4
+ }
+]
