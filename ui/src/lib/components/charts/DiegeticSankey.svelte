@@ -1,13 +1,14 @@
 <!--
   Diegetic superego Sankey: where does the passage go? Base vs aligned.
-  Side-by-side Sankeys using LayerChart's Sankey component.
+  Uses d3-sankey directly (no LayerChart Chart wrapper — the Sankey needs
+  explicit dimensions and Chart's container-measurement was not resolving).
 -->
 <script lang="ts">
-	import { Sankey } from 'layerchart';
-	import { sankeyLinkHorizontal } from 'd3-sankey';
+	import { sankey as d3Sankey, sankeyJustify, sankeyLinkHorizontal } from 'd3-sankey';
 
 	let { art }: { art: any } = $props();
 
+	const W = 500, H = 370;
 	const NODE_COLOURS: Record<string, string> = {
 		'all passages': '#888',
 		'sexual scene': '#c2477f',
@@ -22,11 +23,11 @@
 		'refusal': '#edc948'
 	};
 
-	function sankeyData(arm: any) {
+	function layout(arm: any) {
 		const nodeNames: string[] = arm.nodes;
 		const nodeMap: Record<string, number> = {};
 		nodeNames.forEach((n: string, i: number) => (nodeMap[n] = i));
-		return {
+		const data = {
 			nodes: nodeNames.map((n: string) => ({ name: n })),
 			links: arm.links.map((l: any) => ({
 				source: nodeMap[l.source],
@@ -36,10 +37,18 @@
 				targetName: l.target
 			}))
 		};
+		const sk = d3Sankey()
+			.nodeWidth(14)
+			.nodePadding(14)
+			.nodeAlign(sankeyJustify)
+			.size([W - 8, H - 8]);
+		return sk(data as any);
 	}
 
-	let baseData = $derived(sankeyData(art.base));
-	let alignedData = $derived(sankeyData(art.aligned));
+	let baseLayout = $derived(layout(art.base));
+	let alignedLayout = $derived(layout(art.aligned));
+
+	const path = sankeyLinkHorizontal();
 
 	function linkColour(link: any): string {
 		return NODE_COLOURS[link.targetName] ?? NODE_COLOURS[link.sourceName] ?? '#ccc';
@@ -55,58 +64,48 @@
 	</figcaption>
 
 	<div class="pair">
-		{#each [{ label: 'Base', data: baseData, total: art.base.total, key: 'base' },
-		        { label: 'Aligned', data: alignedData, total: art.aligned.total, key: 'aligned' }] as arm}
+		{#each [{ label: 'Base', sk: baseLayout, total: art.base.total, key: 'base' },
+		        { label: 'Aligned', sk: alignedLayout, total: art.aligned.total, key: 'aligned' }] as arm}
 			<div class="arm">
 				<div class="arm-label">{arm.label} <span class="arm-n">({arm.total.toLocaleString()} passages)</span></div>
 				<div class="sankey-area">
-					<svg width="100%" height="100%" viewBox="0 0 500 360">
-						<Sankey
-							data={arm.data}
-							nodeId={(d) => d.index}
-							nodeWidth={14}
-							nodePadding={12}
-							nodeAlign="justify"
-						>
-							{#snippet children({ nodes, links })}
-								<!-- links -->
-								{#each links as link}
-									{@const path = sankeyLinkHorizontal()}
-									<path
-										d={path(link)}
-										fill="none"
-										stroke={linkColour(link)}
-										stroke-opacity={hover && hover.arm === arm.key && hover.label !== link.targetName && hover.label !== link.sourceName ? 0.08 : 0.35}
-										stroke-width={Math.max(1, link.width)}
-										onmouseenter={() => hover = {
-											arm: arm.key,
-											label: link.targetName,
-											value: link.value,
-											pct: (100 * link.value / arm.total).toFixed(1)
-										}}
-										onmouseleave={() => hover = null}
-									/>
-								{/each}
-								<!-- nodes -->
-								{#each nodes as node}
-									<rect
-										x={node.x0} y={node.y0}
-										width={node.x1 - node.x0}
-										height={Math.max(1, node.y1 - node.y0)}
-										fill={NODE_COLOURS[node.name] ?? '#888'}
-										rx="2"
-									/>
-									{#if node.y1 - node.y0 > 8}
-										<text
-											x={node.x0 < 250 ? node.x1 + 6 : node.x0 - 6}
-											y={(node.y0 + node.y1) / 2 + 4}
-											text-anchor={node.x0 < 250 ? 'start' : 'end'}
-											font-size="10" fill="var(--text-2, #555)"
-										>{node.name}</text>
-									{/if}
-								{/each}
-							{/snippet}
-						</Sankey>
+					<svg viewBox="0 0 {W} {H}" width="100%" preserveAspectRatio="xMidYMid meet">
+						<g transform="translate(4, 4)">
+							{#each arm.sk.links as link}
+								<path
+									d={path(link)}
+									fill="none"
+									stroke={linkColour(link)}
+									stroke-opacity={hover && hover.arm === arm.key && hover.label !== link.targetName && hover.label !== link.sourceName ? 0.08 : 0.35}
+									stroke-width={Math.max(1, link.width)}
+									onmouseenter={() => hover = {
+										arm: arm.key,
+										label: link.targetName,
+										value: link.value,
+										pct: (100 * link.value / arm.total).toFixed(1)
+									}}
+									onmouseleave={() => hover = null}
+								/>
+							{/each}
+							{#each arm.sk.nodes as node}
+								<rect
+									x={node.x0} y={node.y0}
+									width={node.x1 - node.x0}
+									height={Math.max(1, node.y1 - node.y0)}
+									fill={NODE_COLOURS[node.name] ?? '#888'}
+									rx="2"
+								/>
+								{#if node.y1 - node.y0 > 10}
+									<text
+										x={node.x0 < W / 2 ? node.x1 + 6 : node.x0 - 6}
+										y={(node.y0 + node.y1) / 2 + 4}
+										text-anchor={node.x0 < W / 2 ? 'start' : 'end'}
+										font-size="10" fill="var(--text-2, #ccc)"
+										font-family="-apple-system, BlinkMacSystemFont, sans-serif"
+									>{node.name}</text>
+								{/if}
+							{/each}
+						</g>
 					</svg>
 					{#if hover && hover.arm === arm.key}
 						<div class="tip">
@@ -123,9 +122,7 @@
 	.sankey-fig { margin: 0; }
 	figcaption h3 { margin: 0 0 0.15rem; font-size: 1rem; }
 	.sub { margin: 0 0 0.8rem; font-size: 0.8rem; color: var(--text-3); max-width: 100ch; }
-	.pair {
-		display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
-	}
+	.pair { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
 	@media (max-width: 800px) { .pair { grid-template-columns: 1fr; } }
 	.arm { min-width: 0; }
 	.arm-label {
@@ -133,7 +130,8 @@
 		color: var(--text-2); margin-bottom: 4px;
 	}
 	.arm-n { font-weight: 400; color: var(--text-3); font-size: 0.75rem; }
-	.sankey-area { position: relative; height: 360px; }
+	.sankey-area { position: relative; }
+	svg { display: block; width: 100%; }
 	.tip {
 		position: absolute; bottom: 8px; left: 8px;
 		background: var(--panel, #fff); border: 1px solid var(--rule, #ddd);
