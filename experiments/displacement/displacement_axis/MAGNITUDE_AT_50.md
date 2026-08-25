@@ -1,4 +1,8 @@
-# The magnitude stack at 50 lineages: direction holds, the horse race reverses
+# displacement_axis at 50 lineages: the axis predicts direction, not magnitude
+
+**Read the first section before the rest.** The original experiment -- bge, the
+declared pole words, no rated scales -- is separate from the slot_ratings overlay
+added 2026-08-20, and this file had been leading with the overlay.
 
 The README frontmatter carried `status: awaiting more lineages`,
 `blocked_on: more base->aligned lineages in twp_words_v4 / movement`, and said which
@@ -15,7 +19,89 @@ every magnitude claim in the README.
 Producers rerun on pilot4: `rated.py`, `rated_contextual.py`, `protocol_check.py`,
 `loo.py`, `loo_all.py`, `rho_domains.py`. All six now take `--run` (default pilot3).
 
-## DIRECTION SURVIVES, essentially unmoved
+## FIRST: THE ORIGINAL EXPERIMENT, WHICH USES NO RATED SCALES AT ALL
+
+**A framing correction.** Everything below this section, and everything in
+`LINEAGE_AND_DOSE.md`, is the slot_ratings v6 OVERLAY added 2026-08-20 --
+`harm`, `vocalisation`, `fit`, `mundanity` and the rest, which ask whether
+hand-built scales predict the movement and whether they beat a general embedding.
+That is not the experiment this folder is named for.
+
+**The original experiment uses bge and the declared pole words and nothing else.**
+`Axis(prompt, naughty, nice)` embeds the author's pole words from the slot prompts,
+takes `u = centroid(naughty) - centroid(nice)` at unit length, projects every word
+the model returns onto it, and reports
+`dN_position = N_aligned - N_base` where `N = sum p(w)s(w) / sum p(w)`. One question:
+**does the pole vector predict the direction of the change, or its magnitude?**
+Run at 50 lineages via `report.py --run pilot4`, 15,150 cells:
+
+### DIRECTION: yes, and the null is what makes it a result
+
+    all cells nice-ward            9076 / 15150 = 59.9%     z = +24.4
+    31 of 50 lineages significantly nice-ward on their own
+    3 significantly REVERSED   bloom-7b1 -> bloomz 32% (z=-6.4)
+                               salamandra 40%   Zamba2 41%
+    16 null
+
+    CONSTRUCTION-MATCHED NULL -- 24 size-matched random bisections of each
+    frame's OWN vocabulary, same centroid-difference construction:
+       declared axis      0.599 nice-ward
+       random bisections  0.499 median, range 0.485 - 0.512, |dev| max 0.015
+       declared beats 24 of 24 draws
+
+**50% is only the right null if the orientation is arbitrary, and ours is fixed by
+the author's labels** -- so the empirical null is the load-bearing part. Random
+centroid differences over the same vocabularies land at 0.499 with a maximum
+deviation of 0.015; the declared axis lands at 0.599. The direction is carried by
+the labelling, not by the geometry of taking centroid differences.
+
+    by domain   violence 67%  sexual 67%  identity 58%  institutional 53% (z=+3.8)
+                power 44%, poverty 48%, medical 48% -- NOT significant
+
+### MAGNITUDE: no
+
+    AXIS SHARE                cells    |D| move   |cos|   null    beats     r2
+      all cells               15150     0.0474    0.355   0.179    88%    0.126
+      displacement cells       2927     0.0613    0.602   0.195   100%    0.362
+      churn                   10408     0.0438    0.264   0.171    75%    0.070
+
+The centroid's movement is partly along the axis -- `|cos|` 0.355 against a
+construction-matched 0.179, beating it in 88% of cells -- but **r2 is 0.126 overall
+and 0.362 even in the cells the instrument classifies as displacement.** Two thirds
+of the movement in its own best cells is in directions it does not characterise.
+
+Held out, the axis is close to useless as a magnitude predictor: `loo.py` over 222
+frames gives **`bge_axis` 0.0013 against `bge_pcs` 0.0224** on the same embedding.
+
+**So the original experiment's answer is: the pole vector predicts WHICH WAY the
+mass moves and not HOW FAR.** That is the folder's actual finding, it needs no rated
+scale, and it holds at full roster.
+
+### DOSE: the rate responds, the size does not
+
+    quartile of base naughty mass   cells   displ   churn   rev   median dN     mass
+    Q1 lowest                        3786      3%    92%     5%    -0.0038    0.0074
+    Q2                               3786     11%    77%    12%    -0.0039    0.0295
+    Q3                               3786     27%    59%    14%    -0.0046    0.0803
+    Q4 highest                       3788     37%    47%    16%    -0.0070    0.2224
+
+    layered:  all cells 19%  |  displacing regime (22 of 50 pairs) 26%
+              transgressive site 32%  |  BOTH 39%
+
+Monotone 3% -> 37% on the rate; the median dN moves from -0.0038 to -0.0070 and is
+small throughout. **pilot3's 2/11/28/38 replicates at 2.7x the cells.** This is the
+same rate-not-magnitude split the overlay finds by a different route, and it is the
+cleanest statement of it because no rated scale is involved.
+
+### MECHANISM: reordering, not sharpening
+
+    entropy fell in 75% of cells, dT rose in 80%       sum|reorder| / sum|sharpen| = 1.43
+    displacement cells   total -0.0342   sharpen -0.0049   reorder -0.0238
+
+In displacement cells reordering is 4.9x sharpening. Alignment is not mostly
+concentrating the distribution it already had; it is re-ranking it.
+
+## THE OVERLAY: DIRECTION SURVIVES, essentially unmoved
 
 `rho_domains.py`, per-frame rho against the mover verdict, sign test across frames.
 Frame counts are identical to pilot3 by construction -- the frame set did not change,
