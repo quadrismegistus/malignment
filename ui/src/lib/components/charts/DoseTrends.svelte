@@ -19,10 +19,21 @@
 
 	let activeLang = $state('en');
 
-	const COLOURS = [
-		'#4e79a7', '#e15759', '#76b7b2', '#59a14f', '#edc948',
-		'#f28e2b', '#b07aa1', '#ff9da7', '#9c755f', '#bab0ac'
-	];
+	const COLOURS: Record<string, string> = {
+		'bodily harm': '#e15759',
+		'register': '#4e79a7',
+		'valence': '#59a14f',
+		'concreteness': '#f28e2b',
+		'vulgarity': '#b07aa1',
+		'charge': '#edc948',
+		'valence (W)': '#76b7b2',
+		'arousal (W)': '#ff9da7',
+		'dominance (W)': '#9c755f',
+		'concreteness (B)': '#bab0ac',
+		'concreteness (zh)': '#f28e2b',
+		'transgressiveness': '#e15759'
+	};
+	const FALLBACK = '#888';
 
 	function langRows(lang: string): Row[] {
 		return rows.filter((r) => r.lang === lang);
@@ -36,11 +47,8 @@
 		return [...new Set(rows.filter((r) => r.lang === lang).map((r) => r.scale))];
 	}
 
-	function colourMap(lang: string): Record<string, string> {
-		const scales = allScales(lang);
-		const m: Record<string, string> = {};
-		scales.forEach((s, i) => (m[s] = COLOURS[i % COLOURS.length]));
-		return m;
+	function cm(s: string): string {
+		return COLOURS[s] ?? FALLBACK;
 	}
 
 	function seriesData(lang: string, facet: string, scale: string): Row[] {
@@ -49,11 +57,11 @@
 			.sort((a, b) => a.dose - b.dose);
 	}
 
-	function xDomain(lang: string): [number, number] {
-		const xs = langRows(lang).map((r) => r.dose);
-		if (!xs.length) return [1, 2];
-		return [Math.min(...xs), Math.max(...xs)];
-	}
+	let xd = $derived.by(() => {
+		const xs = langRows(activeLang).map((r) => r.dose);
+		if (!xs.length) return [1, 2] as [number, number];
+		return [Math.min(...xs), Math.max(...xs)] as [number, number];
+	});
 
 	function yDomain(lang: string, facet: string): [number, number] {
 		const rs = rows.filter((r) => r.lang === lang && r.facet === facet);
@@ -85,9 +93,6 @@
 		{/each}
 	</div>
 
-	{@const cm = colourMap(activeLang)}
-	{@const xd = xDomain(activeLang)}
-
 	<div class="facet-grid" style="--cols: {facets.filter((f) => facetScales(activeLang, f).length > 0).length}">
 		{#each facets as facet}
 			{@const scales = facetScales(activeLang, facet)}
@@ -110,7 +115,7 @@
 							rule={{ x: false, y: 0 }}
 							series={scales.map((s) => ({
 								key: s,
-								color: cm[s],
+								color: cm(s),
 								data: seriesData(activeLang, facet, s)
 							}))}
 							props={{
@@ -129,7 +134,7 @@
 												...sd.map((r) => `${context.xScale(r.dose)},${context.yScale(r.z + r.se)}`),
 												...sd.toReversed().map((r) => `${context.xScale(r.dose)},${context.yScale(r.z - r.se)}`)
 											].join(' ')}
-											fill={cm[s]}
+											fill={cm(s)}
 											opacity="0.12"
 										/>
 									{/if}
@@ -141,7 +146,7 @@
 										<polyline
 											points={sd.map((r) => `${context.xScale(r.dose)},${context.yScale(r.z)}`).join(' ')}
 											fill="none"
-											stroke={cm[s]}
+											stroke={cm(s)}
 											stroke-width="2"
 										/>
 									{/if}
@@ -158,7 +163,7 @@
 		{#each allScales(activeLang) as s}
 			{@const info = scaleInfo.find((i) => i.scale === s && i.lang === activeLang)}
 			<span class="leg-item">
-				<i style:background={cm[s]}></i>
+				<i style:background={cm(s)}></i>
 				{s}
 				{#if info}
 					<span class="leg-p">
