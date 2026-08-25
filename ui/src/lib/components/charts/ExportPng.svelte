@@ -51,6 +51,11 @@
 			const computed = getComputedStyle(svg);
 			const bgColor = computed.backgroundColor || '#ffffff';
 
+			// Force sans-serif on all text for clean export
+			const fontStyle = document.createElementNS('http://www.w3.org/2000/svg', 'style');
+			fontStyle.textContent = 'text, .tick text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif !important; }';
+			clone.insertBefore(fontStyle, clone.firstChild);
+
 			const bbox = svg.getBoundingClientRect();
 			clone.setAttribute('width', String(bbox.width));
 			clone.setAttribute('height', String(bbox.height));
