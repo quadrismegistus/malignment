@@ -6,6 +6,7 @@ import OperationGraph from './OperationGraph.svelte';
 import MetaGraph from './MetaGraph.svelte';
 import DoseScatter from './DoseScatter.svelte';
 import DoseTrends from './DoseTrends.svelte';
+import CapacityCurves from './CapacityCurves.svelte';
 
 /**
  * chart type -> component, keyed by the `chart` field a producer writes into its
@@ -27,5 +28,6 @@ export const CHARTS: Record<string, Component<any>> = {
 	//: `graph()` validates the artifact.
 	metagraph: MetaGraph,
 	dose_scatter: DoseScatter,
-	dose_trends: DoseTrends
+	dose_trends: DoseTrends,
+	capacity_curves: CapacityCurves
 };
