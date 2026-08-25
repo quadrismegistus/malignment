@@ -124,27 +124,35 @@ def verse(keys):
 
 
 def sense(keys_by_ladder):
-    """Pythia only. The OLMo sense series (22 ckpts) rides the sense
-    study's OWN checkpoint roster with no model ids in the JSON, so it
-    cannot be joined to the ladder's ckpt_idx honestly — joining by
-    index compressed it onto the first 22 rungs in this file's first
-    version (caught as a vertical line in fig26). Excluded until the
-    sense producer emits model ids."""
-    sc = json.load(open("results/sense_curve.json"))
+    """Natural share per rung, BOTH LADDERS, from the sense mass parquet.
+
+    The first version read from `sense_curve.json` (Pythia only) because
+    that JSON lacked model ids for OLMo and joining by index compressed
+    the series onto the wrong rungs. `produce_sense_mass.py` now writes
+    `m05_sense_mass.parquet` with proper model strings for both ladders,
+    so the join is on model and the index compression cannot recur.
+    """
+    sm = pd.read_parquet("data/m05_sense_mass.parquet")
+    sm = sm[~sm.payload_empty]
     rows = []
-    for ladder in ("pythia",):
-        series = sc[ladder]["natural_by_ckpt"]
-        keys = keys_by_ladder[ladder].reset_index().set_index("ckpt_idx")
-        for ck, v in series.items():
-            ck = int(ck)
-            if ck not in keys.index:
+    for ladder in ("olmo", "pythia"):
+        keys = keys_by_ladder[ladder].reset_index().set_index("model")
+        sub = sm[sm.ladder == ladder]
+        for (model, ckpt_idx), g in sub.groupby(["model", "ckpt_idx"]):
+            classified = g[g.band.isin(["natural", "odd", "ungrammatical", "not_a_word"])]
+            total = classified.mass.sum()
+            if total <= 0:
                 continue
-            k = keys.loc[ck]
+            natural = g[g.band == "natural"].mass.sum()
+            if model not in keys.index:
+                continue
+            k = keys.loc[model]
             k = k.iloc[0] if isinstance(k, pd.DataFrame) else k
-            rows.append(dict(ladder=ladder, model=k.model, ckpt_idx=ck,
+            rows.append(dict(ladder=ladder, model=model,
+                             ckpt_idx=int(ckpt_idx),
                              role=k.role, stage=k.stage, step=k.step,
                              family="sense", measure="natural_share",
-                             value=float(v), n=0))
+                             value=float(natural / total), n=0))
     return pd.DataFrame(rows)
 
 
