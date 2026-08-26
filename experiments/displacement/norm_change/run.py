@@ -228,6 +228,10 @@ def contextual_pos(ch, limit_lang=None):
     return out
 
 
+#: instruments excluded from contextual_long; see the note in contextual()
+SKIP_INSTRUMENTS = {"slot_institutional_en_v2"}
+
+
 def contextual(ch, a):
     """H6/H7: mass-weight the (prompt, word) slot ratings. -> contextual_long
 
@@ -253,6 +257,15 @@ def contextual(ch, a):
         if pr not in mp:
             continue
         for inst, vals in byinst.items():
+            #: v2 IS EXCLUDED. slot_institutional_en_v2 is a STRICT SUBSET of v3 --
+            #: the same 11 scales, and all 276 of its prompts inside v3's 462 -- so
+            #: carrying both double-counts every shared construct. Worse after the
+            #: wide sweep: v3 now covers 2,270 prompts and v2 still covers 276, so a
+            #: table holding both shows the SAME scale at two coverages and a reader
+            #: takes the stale one as corroboration. `v2:vocalisation +0.337` is the
+            #: superseded estimate of a slope that does not survive on the wide set.
+            if inst in SKIP_INSTRUMENTS:
+                continue
             for scale, v in vals.items():
                 if scale == "ratable" or not isinstance(v, (int, float)) \
                         or isinstance(v, bool):
