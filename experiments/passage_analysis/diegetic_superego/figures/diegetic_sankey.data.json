@@ -1,139 +1,139 @@
 {
  "chart": "diegetic_sankey",
- "title": "The superego is diegetic: tag sequence through sexual scenes",
- "subtitle": "Passages containing sexual content. Left: what opens the passage. Centre: sexual content. Right: what follows. Alignment increases the moral responses (consent, guilt, moralisation) while clean endings thin. Some passages have multiple moral tags.",
+ "title": "The superego is diegetic: what comes before and after sexual content",
+ "subtitle": "Passages containing sexual content. Left: what precedes the first sexual tag. Right: what follows the last. Alignment increases moral-before (2.3%\u21924.0%), consent-after, guilt-after; decreases exits and clean endings.",
  "base": {
   "nodes": [
-   "opens sexual",
-   "opens moral",
-   "opens other",
-   "sexual content",
+   "moral before",
+   "non-narrative before",
+   "opens with sex",
+   "sexual",
    "clean ending",
-   "consent hesitation",
-   "guilt / shame",
-   "moralisation",
-   "resistance",
-   "exits frame",
-   "degenerates"
+   "consent after",
+   "guilt after",
+   "moralisation after",
+   "resistance after",
+   "refusal after",
+   "exits to non-narrative"
   ],
   "links": [
    {
-    "source": "opens moral",
-    "target": "sexual content",
-    "value": 285
+    "source": "moral before",
+    "target": "sexual",
+    "value": 290
    },
    {
-    "source": "sexual content",
+    "source": "sexual",
     "target": "clean ending",
     "value": 7868
    },
    {
-    "source": "opens sexual",
-    "target": "sexual content",
+    "source": "opens with sex",
+    "target": "sexual",
     "value": 11557
    },
    {
-    "source": "sexual content",
-    "target": "degenerates",
-    "value": 602
+    "source": "sexual",
+    "target": "exits to non-narrative",
+    "value": 3453
    },
    {
-    "source": "sexual content",
-    "target": "exits frame",
-    "value": 2878
+    "source": "non-narrative before",
+    "target": "sexual",
+    "value": 307
    },
    {
-    "source": "opens other",
-    "target": "sexual content",
-    "value": 312
-   },
-   {
-    "source": "sexual content",
-    "target": "consent hesitation",
+    "source": "sexual",
+    "target": "consent after",
     "value": 220
    },
    {
-    "source": "sexual content",
-    "target": "resistance",
+    "source": "sexual",
+    "target": "resistance after",
     "value": 303
    },
    {
-    "source": "sexual content",
-    "target": "guilt / shame",
+    "source": "sexual",
+    "target": "guilt after",
     "value": 228
    },
    {
-    "source": "sexual content",
-    "target": "moralisation",
+    "source": "sexual",
+    "target": "moralisation after",
     "value": 151
+   },
+   {
+    "source": "sexual",
+    "target": "refusal after",
+    "value": 27
    }
   ],
   "total": 12154
  },
  "aligned": {
   "nodes": [
-   "opens sexual",
-   "opens moral",
-   "opens other",
-   "sexual content",
+   "moral before",
+   "non-narrative before",
+   "opens with sex",
+   "sexual",
    "clean ending",
-   "consent hesitation",
-   "guilt / shame",
-   "moralisation",
-   "resistance",
-   "exits frame",
-   "degenerates"
+   "consent after",
+   "guilt after",
+   "moralisation after",
+   "resistance after",
+   "refusal after",
+   "exits to non-narrative"
   ],
   "links": [
    {
-    "source": "opens sexual",
-    "target": "sexual content",
+    "source": "opens with sex",
+    "target": "sexual",
     "value": 10708
    },
    {
-    "source": "sexual content",
+    "source": "sexual",
     "target": "clean ending",
     "value": 8082
    },
    {
-    "source": "sexual content",
-    "target": "exits frame",
-    "value": 1808
+    "source": "sexual",
+    "target": "exits to non-narrative",
+    "value": 2119
    },
    {
-    "source": "sexual content",
-    "target": "resistance",
+    "source": "sexual",
+    "target": "resistance after",
     "value": 351
    },
    {
-    "source": "sexual content",
-    "target": "degenerates",
-    "value": 543
-   },
-   {
-    "source": "sexual content",
-    "target": "moralisation",
+    "source": "sexual",
+    "target": "moralisation after",
     "value": 229
    },
    {
-    "source": "opens moral",
-    "target": "sexual content",
-    "value": 460
+    "source": "moral before",
+    "target": "sexual",
+    "value": 462
    },
    {
-    "source": "sexual content",
-    "target": "guilt / shame",
+    "source": "sexual",
+    "target": "guilt after",
     "value": 333
    },
    {
-    "source": "sexual content",
-    "target": "consent hesitation",
+    "source": "sexual",
+    "target": "consent after",
     "value": 314
    },
    {
-    "source": "opens other",
-    "target": "sexual content",
-    "value": 304
+    "source": "non-narrative before",
+    "target": "sexual",
+    "value": 302
+   },
+   {
+    "source": "sexual",
+    "target": "refusal after",
+    "value": 249
    }
   ],
   "total": 11472
