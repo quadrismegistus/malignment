@@ -9,19 +9,17 @@
 	let { art }: { art: any } = $props();
 
 	const W = 500, H = 370;
-	const NODE_COLOURS: Record<string, string> = {
-		'all passages': '#888',
-		'sexual scene': '#c2477f',
-		'no sexual scene': '#76b7b2',
-		'clean scene': '#59a14f',
-		'superego in scene': '#e15759',
-		'consent hesitation': '#f28e2b',
-		'guilt / shame': '#e15759',
-		'moralisation': '#b07aa1',
-		'frame exit': '#4e79a7',
-		'continues': '#76b7b2',
-		'refusal': '#edc948'
-	};
+	const NODE_COLOURS: Record<string, string> = $derived(art.tag_colours ?? {
+		'sexual': '#c2477f', 'straight to sex': '#888',
+		'consent': '#f28e2b', 'consent after': '#f28e2b',
+		'guilt': '#e15759', 'guilt after': '#e15759',
+		'moral': '#b07aa1', 'moral after': '#b07aa1',
+		'resist': '#9c755f', 'resist after': '#9c755f',
+		'refusal': '#edc948',
+		'ends clean': '#59a14f', 'exits narrative': '#76b7b2',
+		'sex (1 span)': '#c2477f', 'sex (2 spans)': '#c2477f',
+		'sex (3 spans)': '#c2477f', 'sex (3+ spans)': '#c2477f',
+	});
 
 	function layout(arm: any) {
 		const nodeNames: string[] = arm.nodes;
