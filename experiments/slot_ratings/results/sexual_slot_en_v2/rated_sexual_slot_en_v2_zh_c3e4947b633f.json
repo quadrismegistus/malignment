@@ -1,0 +1,22 @@
+[
+ {
+  "prompt": "他把身体贴在她身上，低声说",
+  "word": "话",
+  "item_id": "zh_c3e4947b633f",
+  "lang": "zh",
+  "pos": "NOUN",
+  "_n_lineages": "8",
+  "_consistency": "0.500",
+  "ratable": true,
+  "reading": "He pressed his body against hers and spoke in a low voice.",
+  "orality": 1,
+  "tactility": 1,
+  "genitality": 1,
+  "incorporation": 1,
+  "body_distance": 0,
+  "exposure": 1,
+  "charge": 1,
+  "euphemism": 4,
+  "explicitness": 1
+ }
+]

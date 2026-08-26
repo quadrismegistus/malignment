@@ -1,0 +1,42 @@
+[
+ {
+  "prompt": "They took off their clothes and he began to",
+  "word": "gently",
+  "item_id": "en_0b86b8981c31",
+  "lang": "en",
+  "pos": "ADV",
+  "_n_lineages": "11",
+  "_consistency": "0.636",
+  "ratable": false,
+  "reading": "They took off their clothes and he began to gently (do something unspecified).",
+  "orality": 1,
+  "tactility": 1,
+  "genitality": 1,
+  "incorporation": 1,
+  "body_distance": 0,
+  "exposure": 1,
+  "charge": 4,
+  "euphemism": 4,
+  "explicitness": 1
+ },
+ {
+  "prompt": "They took off their clothes and he began to",
+  "word": "sexually",
+  "item_id": "en_0b86b8981c31",
+  "lang": "en",
+  "pos": "ADV",
+  "_n_lineages": "5",
+  "_consistency": "0.800",
+  "ratable": false,
+  "reading": "They took off their clothes and he began to sexually [do something].",
+  "orality": 1,
+  "tactility": 1,
+  "genitality": 1,
+  "incorporation": 1,
+  "body_distance": 0,
+  "exposure": 1,
+  "charge": 4,
+  "euphemism": 4,
+  "explicitness": 1
+ }
+]

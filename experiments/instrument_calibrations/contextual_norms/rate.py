@@ -75,6 +75,26 @@ sys.path.insert(0, SLOT)
 #: which is the thing v6zh exists to prevent.
 DIRS = {1: ("v6zh", "zh"), 2: ("v6", "en"), 3: ("v6", "en")}
 BY_LANG = {"en": "v6", "zh": "v6zh"}
+
+#: OTHER INSTRUMENTS. `--instrument` swaps the task and the output directory; the
+#: manifest, the resume and the record shape are unchanged.
+#:
+#:   inst_v3   InstitutionalSupplementENv3. v2 is a STRICT SUBSET -- same 11 scales,
+#:             and all 276 of its prompts sit inside v3's 462 -- so running both
+#:             double-counts every shared construct. v3 only.
+#:   sexual    SexualSlotEN. RESTRICTED BY DEFAULT, because a smoke test on four
+#:             random non-sexual frames returned orality/tactility/genitality/
+#:             incorporation at 1.0 with RANGE ZERO on every word. That is not a low
+#:             value, it is no variance: it cannot produce a dose slope, cannot beat
+#:             its own shuffle, and cannot contribute to anything. `--domain` keeps
+#:             it to the frames it was built for, plus a documented off-domain
+#:             control so the floor is recorded rather than assumed.
+TASKS = {
+    "v6":      ("slot_ratings/task.py",               "SlotRatingENv6",           "v6"),
+    "inst_v3": ("slot_ratings/institutional/task.py", "InstitutionalSupplementENv3",
+                                                      "slot_institutional_en_v3"),
+    "sexual":  ("slot_ratings/sexual/task.py",        "SexualSlotEN", "sexual_slot_en_v2"),
+}
 MANIFEST = os.path.expanduser("~/malignment-data/contextual_norms/priority.csv.gz")
 
 
@@ -82,32 +102,73 @@ def pid(prompt, lang):
     return "%s_%s" % (lang, hashlib.sha1(prompt.encode("utf-8")).hexdigest()[:12])
 
 
-def load(tier, min_lineages):
-    """-> {prompt: [rows]} for the requested tier, biggest frame first."""
-    import collections
+def load(tier, min_lineages, domains=None, control=0):
+    """-> {prompt: [rows]} for the requested tier, biggest frame first.
+
+    `domains` keeps only prompts in those prompt-table domains. `control` then adds
+    that many OFF-domain pairs, so a floor is DOCUMENTED rather than assumed -- the
+    sexual instrument returns 1.0 at range ZERO on non-sexual frames, and a constant
+    is not a low value: it cannot produce a slope, cannot beat its own shuffle, and
+    cannot contribute to anything. Recording it costs a few hundred calls.
+    """
+    import collections, random
     by = collections.defaultdict(list)
     with gzip.open(MANIFEST, "rt", encoding="utf-8") as fh:
         for r in csv.DictReader(fh, delimiter="\t"):
-            if int(r["tier"]) != tier:
-                continue
-            if int(r["n_lineages"]) < min_lineages:
+            if int(r["tier"]) != tier or int(r["n_lineages"]) < min_lineages:
                 continue
             by[r["prompt"]].append(r)
+    if domains:
+        from malignment import ch
+        dom = {x["prompt"]: x["domain"]
+               for x in ch.query("SELECT prompt, domain FROM prompts")}
+        want = {d.strip() for d in domains.split(",")}
+        inn = {p: v for p, v in by.items() if dom.get(p) in want}
+        out = {p: v for p, v in by.items() if dom.get(p) not in want}
+        print("domain filter %s: %d prompts in, %d out"
+              % (sorted(want), len(inn), len(out)), flush=True)
+        if control and out:
+            rng = random.Random(20260826)
+            n = 0
+            for p in rng.sample(sorted(out), min(len(out), 40)):
+                if n >= control:
+                    break
+                inn[p] = out[p][:8]
+                n += len(inn[p])
+            print("  + %d off-domain CONTROL pairs over %d prompts"
+                  % (n, sum(1 for p in inn if dom.get(p) not in want)), flush=True)
+        by = inn
     return sorted(by.items(), key=lambda kv: -len(kv[1]))
 
 
 def main(argv=None):
     ap = argparse.ArgumentParser()
     ap.add_argument("--tier", type=int, default=1, choices=(0, 1, 2, 3))
+    ap.add_argument("--instrument", default="v6", choices=sorted(TASKS),
+                    help="which rating task; see TASKS")
+    ap.add_argument("--domain", default=None,
+                    help="comma list of prompt domains to keep (e.g. sexual)")
+    ap.add_argument("--control", type=int, default=0,
+                    help="ALSO rate this many off-domain pairs, so a floor is "
+                         "DOCUMENTED rather than assumed")
     ap.add_argument("--min-lineages", type=int, default=5)
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--workers", type=int, default=32)
     ap.add_argument("--audit", type=int, default=6, help="readings to print per file")
     a = ap.parse_args(argv)
 
-    from task import SlotRatingENv6, SCALES_V6, render
+    import importlib.util
+    rel, clsname, outdir = TASKS[a.instrument]
+    _p = os.path.abspath(os.path.join(HERE, "..", "..", rel))
+    _sp = importlib.util.spec_from_file_location("task_%s" % a.instrument, _p)
+    _m = importlib.util.module_from_spec(_sp); _sp.loader.exec_module(_m)
+    TaskCls, render = getattr(_m, clsname), _m.render
+    SCALES = [k for k, f in TaskCls.schema.model_fields.items()
+              if f.annotation is int]
+    print("instrument %s -> %s, %d int scales -> results/%s"
+          % (a.instrument, clsname, len(SCALES), outdir), flush=True)
 
-    frames = load(a.tier, a.min_lineages)
+    frames = load(a.tier, a.min_lineages, a.domain, a.control)
     if a.tier == 0:
         print("tier 0 (uniform): instrument chosen per prompt from its lang column",
               flush=True)
@@ -116,6 +177,8 @@ def main(argv=None):
 
     def route(rows):
         lg = rows[0].get("lang") or DIRS.get(a.tier, ("v6", "en"))[1]
+        if a.instrument != "v6":
+            return outdir, lg
         return BY_LANG.get(lg, "v6"), lg
     if a.limit:
         frames = frames[:a.limit]
@@ -127,10 +190,10 @@ def main(argv=None):
     print("tier %d: %d prompts, %d pairs | %d prompts already done | %d to run"
           % (a.tier, len(frames), sum(len(r) for _, r in frames),
              len(frames) - len(todo), len(todo)), flush=True)
-    for _i in set(BY_LANG.values()):
+    for _i in set(BY_LANG.values()) | {outdir}:
         os.makedirs(os.path.join(SLOT, "results", _i), exist_ok=True)
 
-    t = SlotRatingENv6()
+    t = TaskCls()
     done_pairs = n_err = 0
     for i, (prompt, rows) in enumerate(todo, 1):
         inst, lang = route(rows)
@@ -157,8 +220,8 @@ def main(argv=None):
                  "_n_lineages": str(r["n_lineages"]),
                  "_consistency": str(r["consistency"]),
                  "ratable": out.ratable, "reading": out.reading}
-            for s in SCALES_V6:
-                d[s] = getattr(out, s)
+            for s in SCALES:
+                d[s] = getattr(out, s, None)
             recs.append(d)
         path = path_for(prompt, rows)
         #: written whole, never appended -- a partial file that looks complete is
@@ -171,10 +234,14 @@ def main(argv=None):
               % (i, len(todo), prompt[:26], len(recs), rat, len(errs), done_pairs),
               flush=True)
         if a.audit and i <= 2:
+            #: the audit line must not assume v6's scale names -- the
+            #: institutional and sexual schemas have none of them.
+            show = [x for x in SCALES if x in recs[0]][:3]
             for d in recs[:a.audit]:
-                print("      %-8s harm %s aggr %s mund %s | %s"
-                      % (d["word"], d["harm"], d["aggression"], d["mundanity"],
-                         (d["reading"] or "")[:70]), flush=True)
+                print("      %-10s %s | %s"
+                      % (d["word"],
+                         "  ".join("%s %s" % (k[:11], d.get(k)) for k in show),
+                         (d.get("reading") or "")[:60]), flush=True)
     print("\nDONE: %d pairs rated, %d errors" % (done_pairs, n_err))
     return 0
 
