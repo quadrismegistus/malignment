@@ -1,105 +1,141 @@
 {
  "chart": "diegetic_sankey",
- "title": "Given a sexual scene: what does alignment change?",
- "subtitle": "Passages entering a sexual scene only. Alignment does not increase frame exits or degeneration; it increases the in-scene moral response (consent hesitation, guilt, moralisation) while clean scenes thin.",
+ "title": "The superego is diegetic: tag sequence through sexual scenes",
+ "subtitle": "Passages containing sexual content. Left: what opens the passage. Centre: sexual content. Right: what follows. Alignment increases the moral responses (consent, guilt, moralisation) while clean endings thin. Some passages have multiple moral tags.",
  "base": {
   "nodes": [
-   "sexual scene",
-   "clean",
-   "superego response",
-   "exits frame",
-   "degenerates",
+   "opens sexual",
+   "opens moral",
+   "opens other",
+   "sexual content",
+   "clean ending",
    "consent hesitation",
    "guilt / shame",
-   "moralisation / resistance"
+   "moralisation",
+   "resistance",
+   "exits frame",
+   "degenerates"
   ],
   "links": [
    {
-    "source": "sexual scene",
-    "target": "clean",
-    "value": 7218
+    "source": "opens moral",
+    "target": "sexual content",
+    "value": 285
    },
    {
-    "source": "sexual scene",
+    "source": "sexual content",
+    "target": "clean ending",
+    "value": 7868
+   },
+   {
+    "source": "opens sexual",
+    "target": "sexual content",
+    "value": 11557
+   },
+   {
+    "source": "sexual content",
     "target": "degenerates",
-    "value": 576
+    "value": 602
    },
    {
-    "source": "sexual scene",
+    "source": "sexual content",
     "target": "exits frame",
-    "value": 2798
+    "value": 2878
    },
    {
-    "source": "sexual scene",
-    "target": "superego response",
-    "value": 965
+    "source": "opens other",
+    "target": "sexual content",
+    "value": 312
    },
    {
-    "source": "superego response",
-    "target": "moralisation / resistance",
-    "value": 513
-   },
-   {
-    "source": "superego response",
+    "source": "sexual content",
     "target": "consent hesitation",
-    "value": 297
+    "value": 220
    },
    {
-    "source": "superego response",
+    "source": "sexual content",
+    "target": "resistance",
+    "value": 303
+   },
+   {
+    "source": "sexual content",
     "target": "guilt / shame",
-    "value": 247
+    "value": 228
+   },
+   {
+    "source": "sexual content",
+    "target": "moralisation",
+    "value": 151
    }
   ],
-  "total": 11557
+  "total": 12154
  },
  "aligned": {
   "nodes": [
-   "sexual scene",
-   "clean",
-   "superego response",
-   "exits frame",
-   "degenerates",
+   "opens sexual",
+   "opens moral",
+   "opens other",
+   "sexual content",
+   "clean ending",
    "consent hesitation",
    "guilt / shame",
-   "moralisation / resistance"
+   "moralisation",
+   "resistance",
+   "exits frame",
+   "degenerates"
   ],
   "links": [
    {
-    "source": "sexual scene",
-    "target": "clean",
-    "value": 7129
+    "source": "opens sexual",
+    "target": "sexual content",
+    "value": 10708
    },
    {
-    "source": "sexual scene",
+    "source": "sexual content",
+    "target": "clean ending",
+    "value": 8082
+   },
+   {
+    "source": "sexual content",
     "target": "exits frame",
-    "value": 1751
+    "value": 1808
    },
    {
-    "source": "sexual scene",
+    "source": "sexual content",
+    "target": "resistance",
+    "value": 351
+   },
+   {
+    "source": "sexual content",
     "target": "degenerates",
-    "value": 587
+    "value": 543
    },
    {
-    "source": "sexual scene",
-    "target": "superego response",
-    "value": 1241
+    "source": "sexual content",
+    "target": "moralisation",
+    "value": 229
    },
    {
-    "source": "superego response",
-    "target": "moralisation / resistance",
-    "value": 596
+    "source": "opens moral",
+    "target": "sexual content",
+    "value": 460
    },
    {
-    "source": "superego response",
-    "target": "consent hesitation",
-    "value": 461
-   },
-   {
-    "source": "superego response",
+    "source": "sexual content",
     "target": "guilt / shame",
-    "value": 354
+    "value": 333
+   },
+   {
+    "source": "sexual content",
+    "target": "consent hesitation",
+    "value": 314
+   },
+   {
+    "source": "opens other",
+    "target": "sexual content",
+    "value": 304
    }
   ],
-  "total": 10708
+  "total": 11472
  }
 }
