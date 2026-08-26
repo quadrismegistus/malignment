@@ -1,139 +1,345 @@
 {
  "chart": "diegetic_sankey",
- "title": "The superego is diegetic: what comes before and after sexual content",
- "subtitle": "Passages containing sexual content. Left: what precedes the first sexual tag. Right: what follows the last. Alignment increases moral-before (2.3%\u21924.0%), consent-after, guilt-after; decreases exits and clean endings.",
+ "title": "Tag flow through sexual scenes, position by position",
+ "subtitle": "Each tag is placed at the position it occurs in the sequence. 'sexual @0' is the opening; 'consent @1' means consent was the first thing after the sex began. Alignment increases moral tags at every position and adds resumption flows (sexual @2 after consent @1).",
  "base": {
   "nodes": [
-   "moral before",
-   "non-narrative before",
-   "opens with sex",
-   "sexual",
-   "clean ending",
-   "consent after",
-   "guilt after",
-   "moralisation after",
-   "resistance after",
-   "refusal after",
-   "exits to non-narrative"
+   "consent @0",
+   "guilt @0",
+   "moral @0",
+   "non-narr @0",
+   "resist @0",
+   "sexual @0",
+   "consent @1",
+   "guilt @1",
+   "moral @1",
+   "non-narr @1",
+   "refusal @1",
+   "resist @1",
+   "sexual @1",
+   "consent @2",
+   "guilt @2",
+   "moral @2",
+   "non-narr @2",
+   "refusal @2",
+   "resist @2",
+   "sexual @2",
+   "consent @3",
+   "guilt @3",
+   "moral @3",
+   "non-narr @3",
+   "refusal @3",
+   "resist @3",
+   "sexual @3",
+   "consent @4",
+   "guilt @4",
+   "moral @4",
+   "non-narr @4",
+   "refusal @4",
+   "resist @4",
+   "sexual @4"
   ],
   "links": [
    {
-    "source": "moral before",
-    "target": "sexual",
-    "value": 290
+    "source": "consent @0",
+    "target": "sexual @1",
+    "value": 122
    },
    {
-    "source": "sexual",
-    "target": "clean ending",
-    "value": 7868
+    "source": "sexual @0",
+    "target": "non-narr @1",
+    "value": 3392
    },
    {
-    "source": "opens with sex",
-    "target": "sexual",
-    "value": 11557
+    "source": "non-narr @1",
+    "target": "sexual @2",
+    "value": 217
    },
    {
-    "source": "sexual",
-    "target": "exits to non-narrative",
-    "value": 3453
+    "source": "sexual @2",
+    "target": "non-narr @3",
+    "value": 135
    },
    {
-    "source": "non-narrative before",
-    "target": "sexual",
+    "source": "non-narr @3",
+    "target": "sexual @4",
+    "value": 31
+   },
+   {
+    "source": "non-narr @0",
+    "target": "sexual @1",
     "value": 307
    },
    {
-    "source": "sexual",
-    "target": "consent after",
-    "value": 220
+    "source": "guilt @0",
+    "target": "sexual @1",
+    "value": 31
    },
    {
-    "source": "sexual",
-    "target": "resistance after",
-    "value": 303
+    "source": "sexual @0",
+    "target": "resist @1",
+    "value": 350
    },
    {
-    "source": "sexual",
-    "target": "guilt after",
-    "value": 228
+    "source": "resist @1",
+    "target": "sexual @2",
+    "value": 77
    },
    {
-    "source": "sexual",
-    "target": "moralisation after",
-    "value": 151
+    "source": "sexual @0",
+    "target": "consent @1",
+    "value": 273
    },
    {
-    "source": "sexual",
-    "target": "refusal after",
-    "value": 27
+    "source": "consent @1",
+    "target": "sexual @2",
+    "value": 100
+   },
+   {
+    "source": "sexual @0",
+    "target": "guilt @1",
+    "value": 192
+   },
+   {
+    "source": "resist @0",
+    "target": "sexual @1",
+    "value": 101
+   },
+   {
+    "source": "sexual @0",
+    "target": "moral @1",
+    "value": 119
+   },
+   {
+    "source": "moral @1",
+    "target": "guilt @2",
+    "value": 25
+   },
+   {
+    "source": "sexual @1",
+    "target": "non-narr @2",
+    "value": 217
+   },
+   {
+    "source": "non-narr @2",
+    "target": "sexual @3",
+    "value": 49
+   },
+   {
+    "source": "sexual @3",
+    "target": "non-narr @4",
+    "value": 36
+   },
+   {
+    "source": "guilt @1",
+    "target": "sexual @2",
+    "value": 31
+   },
+   {
+    "source": "resist @1",
+    "target": "non-narr @2",
+    "value": 22
    }
   ],
   "total": 12154
  },
  "aligned": {
   "nodes": [
-   "moral before",
-   "non-narrative before",
-   "opens with sex",
-   "sexual",
-   "clean ending",
-   "consent after",
-   "guilt after",
-   "moralisation after",
-   "resistance after",
-   "refusal after",
-   "exits to non-narrative"
+   "consent @0",
+   "guilt @0",
+   "moral @0",
+   "non-narr @0",
+   "resist @0",
+   "sexual @0",
+   "consent @1",
+   "guilt @1",
+   "moral @1",
+   "non-narr @1",
+   "refusal @1",
+   "resist @1",
+   "sexual @1",
+   "consent @2",
+   "guilt @2",
+   "moral @2",
+   "non-narr @2",
+   "refusal @2",
+   "resist @2",
+   "sexual @2",
+   "consent @3",
+   "guilt @3",
+   "moral @3",
+   "non-narr @3",
+   "refusal @3",
+   "resist @3",
+   "sexual @3",
+   "consent @4",
+   "guilt @4",
+   "moral @4",
+   "non-narr @4",
+   "refusal @4",
+   "resist @4",
+   "sexual @4"
   ],
   "links": [
    {
-    "source": "opens with sex",
-    "target": "sexual",
-    "value": 10708
+    "source": "sexual @0",
+    "target": "non-narr @1",
+    "value": 2219
    },
    {
-    "source": "sexual",
-    "target": "clean ending",
-    "value": 8082
+    "source": "non-narr @1",
+    "target": "sexual @2",
+    "value": 259
    },
    {
-    "source": "sexual",
-    "target": "exits to non-narrative",
-    "value": 2119
+    "source": "sexual @0",
+    "target": "moral @1",
+    "value": 168
    },
    {
-    "source": "sexual",
-    "target": "resistance after",
-    "value": 351
+    "source": "moral @1",
+    "target": "sexual @2",
+    "value": 23
    },
    {
-    "source": "sexual",
-    "target": "moralisation after",
-    "value": 229
+    "source": "sexual @0",
+    "target": "resist @1",
+    "value": 366
    },
    {
-    "source": "moral before",
-    "target": "sexual",
-    "value": 462
+    "source": "resist @1",
+    "target": "sexual @2",
+    "value": 78
    },
    {
-    "source": "sexual",
-    "target": "guilt after",
-    "value": 333
+    "source": "sexual @0",
+    "target": "consent @1",
+    "value": 421
    },
    {
-    "source": "sexual",
-    "target": "consent after",
-    "value": 314
+    "source": "consent @1",
+    "target": "sexual @2",
+    "value": 176
    },
    {
-    "source": "non-narrative before",
-    "target": "sexual",
+    "source": "resist @0",
+    "target": "sexual @1",
+    "value": 140
+   },
+   {
+    "source": "sexual @2",
+    "target": "non-narr @3",
+    "value": 118
+   },
+   {
+    "source": "moral @1",
+    "target": "guilt @2",
+    "value": 46
+   },
+   {
+    "source": "consent @0",
+    "target": "sexual @1",
+    "value": 227
+   },
+   {
+    "source": "guilt @1",
+    "target": "sexual @2",
+    "value": 39
+   },
+   {
+    "source": "sexual @0",
+    "target": "guilt @1",
+    "value": 242
+   },
+   {
+    "source": "guilt @0",
+    "target": "sexual @1",
+    "value": 36
+   },
+   {
+    "source": "sexual @1",
+    "target": "guilt @2",
+    "value": 21
+   },
+   {
+    "source": "non-narr @0",
+    "target": "sexual @1",
     "value": 302
    },
    {
-    "source": "sexual",
-    "target": "refusal after",
-    "value": 249
+    "source": "sexual @1",
+    "target": "non-narr @2",
+    "value": 184
+   },
+   {
+    "source": "resist @1",
+    "target": "non-narr @2",
+    "value": 23
+   },
+   {
+    "source": "non-narr @2",
+    "target": "sexual @3",
+    "value": 57
+   },
+   {
+    "source": "sexual @1",
+    "target": "resist @2",
+    "value": 30
+   },
+   {
+    "source": "guilt @1",
+    "target": "moral @2",
+    "value": 26
+   },
+   {
+    "source": "non-narr @3",
+    "target": "sexual @4",
+    "value": 52
+   },
+   {
+    "source": "sexual @3",
+    "target": "non-narr @4",
+    "value": 44
+   },
+   {
+    "source": "sexual @2",
+    "target": "consent @3",
+    "value": 23
+   },
+   {
+    "source": "consent @1",
+    "target": "non-narr @2",
+    "value": 20
+   },
+   {
+    "source": "resist @1",
+    "target": "guilt @2",
+    "value": 31
+   },
+   {
+    "source": "moral @0",
+    "target": "sexual @1",
+    "value": 20
+   },
+   {
+    "source": "sexual @1",
+    "target": "consent @2",
+    "value": 36
+   },
+   {
+    "source": "consent @2",
+    "target": "sexual @3",
+    "value": 22
+   },
+   {
+    "source": "sexual @0",
+    "target": "refusal @1",
+    "value": 163
+   },
+   {
+    "source": "non-narr @1",
+    "target": "refusal @2",
+    "value": 59
    }
   ],
   "total": 11472
