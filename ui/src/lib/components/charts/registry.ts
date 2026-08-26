@@ -10,6 +10,7 @@ import CapacityCurves from './CapacityCurves.svelte';
 import NormAcquisition from './NormAcquisition.svelte';
 import NovelArc from './NovelArc.svelte';
 import DiegeticSankey from './DiegeticSankey.svelte';
+import DiegeticChord from './DiegeticChord.svelte';
 
 /**
  * chart type -> component, keyed by the `chart` field a producer writes into its
@@ -35,5 +36,6 @@ export const CHARTS: Record<string, Component<any>> = {
 	capacity_curves: CapacityCurves,
 	norm_acquisition: NormAcquisition,
 	novel_arc: NovelArc,
-	diegetic_sankey: DiegeticSankey
+	diegetic_sankey: DiegeticSankey,
+	diegetic_chord: DiegeticChord
 };
