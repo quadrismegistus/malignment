@@ -1,0 +1,9 @@
+# Per-prompt tag files. NOT COMMITTED, and they should not have existed:
+# largeliterarymodels' Task already caches every call, so the run was resumable
+# without them and `task.df` / `task.results` give the consolidated output
+# directly. They are a working artifact of a resume pattern copied from rate.py,
+# where per-file writes WERE the resume mechanism.
+#
+# `consolidate.py` folds them into tags.csv.gz, which is what downstream reads
+# and what gets committed.
+tag_*.json
