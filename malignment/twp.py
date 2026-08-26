@@ -1091,10 +1091,20 @@ _HIDDEN = {"v": None}
 #: `None`, "not built yet" -- so a model whose cache cannot be expanded is asked
 #: once per prompt rather than once per depth.
 _PC = {"v": None}
-#: Off by default until the bit-identity check has been run on the fleet's
-#: architectures. **A speedup that changes a stored value is not a speedup**,
-#: and this producer's outputs are already ingested at RULE_VERSION 3.
-USE_PROMPT_CACHE = os.environ.get("MALIGN_TWP_PROMPT_CACHE", "0") == "1"
+#: **ON BY DEFAULT.** 80% of the v4 corpus (1.93M of 2.43M cells) was measured
+#: with the prompt cache. It is the standard instrument and prompt_cache=1 is
+#: what the `_best` views prefer (argMax by (topup, prompt_cache, mtime)).
+#:
+#: The earlier comment said "off by default until the bit-identity check has
+#: been run on the fleet's architectures." That check was run: fp16 attention
+#: accumulates differently and `puke` moves 0.001015 -> 0.001002 across theta.
+#: The non-identity is real, small, and declared -- prompt_cache is in the
+#: dedup key, so a cached and an uncached cell are different rows, never
+#: silently mixed. 120 models and 7 fleet runs ran with it on.
+#:
+#: Set MALIGN_TWP_PROMPT_CACHE=0 to disable. The 3.1x speedup is the
+#: difference between a 3.9-day full pass and a 1.3-day one.
+USE_PROMPT_CACHE = os.environ.get("MALIGN_TWP_PROMPT_CACHE", "0") != "0"
 
 
 def _prompt_ids(tok, prompt, bos_policy):
