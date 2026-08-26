@@ -1,15 +1,14 @@
 {
  "chart": "diegetic_chord",
- "title": "Tag-to-tag transitions: base vs aligned",
- "subtitle": "Directed chord diagram. Each arc segment is a tag; ribbons show how many passages transition from one tag to the next. Thicker ribbons = more transitions. Alignment increases sexual\u2192consent and consent\u2192sexual (the resumption arc).",
+ "title": "Tag transitions in sexual scenes (no non-narrative)",
+ "subtitle": "Directed chord diagram. Self-loops = single-tag passages (e.g. just <sexual>, nothing else). Ribbons = transitions between tags. Non-narrative (web/meta/noise) excluded entirely.",
  "tags": [
   "sexual",
   "consent",
   "guilt",
   "moral",
   "resist",
-  "refusal",
-  "non-narr"
+  "refusal"
  ],
  "colours": [
   "#c2477f",
@@ -17,55 +16,49 @@
   "#e15759",
   "#b07aa1",
   "#9c755f",
-  "#edc948",
-  "#76b7b2"
+  "#edc948"
  ],
  "base": {
   "matrix": [
    [
-    0,
-    305,
-    206,
-    127,
-    369,
-    13,
-    3833
+    10863,
+    313,
+    215,
+    141,
+    374,
+    27
    ],
    [
-    235,
-    0,
+    236,
+    269,
     10,
     11,
     16,
-    0,
-    51
+    0
    ],
    [
-    69,
+    70,
     11,
-    0,
+    322,
     46,
     14,
-    0,
-    74
+    0
    ],
    [
     35,
-    9,
+    10,
     74,
-    0,
+    169,
     15,
-    0,
-    35
+    0
    ],
    [
-    183,
+    186,
     18,
     39,
     34,
-    0,
-    1,
-    129
+    468,
+    2
    ],
    [
     0,
@@ -73,67 +66,52 @@
     0,
     0,
     0,
-    0,
-    11
-   ],
-   [
-    642,
-    19,
-    22,
-    29,
-    21,
-    55,
-    0
+    101
    ]
   ],
-  "total": 6761
+  "total": 14089
  },
  "aligned": {
   "matrix": [
    [
-    0,
-    483,
-    279,
-    199,
-    416,
-    170,
-    2624
+    9537,
+    493,
+    290,
+    208,
+    426,
+    233
    ],
    [
-    437,
-    0,
-    36,
-    29,
+    441,
+    458,
+    37,
+    30,
     17,
-    12,
-    103
+    14
    ],
    [
-    99,
+    100,
     38,
-    0,
+    425,
     130,
-    36,
-    7,
-    95
+    37,
+    8
    ],
    [
-    54,
+    56,
     37,
     199,
-    0,
-    78,
-    12,
-    69
+    258,
+    79,
+    12
    ],
    [
-    237,
-    47,
-    115,
-    95,
-    0,
-    42,
-    175
+    243,
+    48,
+    117,
+    96,
+    580,
+    50
    ],
    [
     1,
@@ -141,19 +119,9 @@
     0,
     0,
     0,
-    0,
-    71
-   ],
-   [
-    717,
-    42,
-    35,
-    42,
-    49,
-    414,
-    0
+    1151
    ]
   ],
-  "total": 7742
+  "total": 15850
  }
 }
