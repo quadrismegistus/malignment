@@ -80,7 +80,7 @@
 									stroke-width={Math.max(1, link.width)}
 									onmouseenter={() => hover = {
 										arm: arm.key,
-										label: link.targetName,
+										label: link.sourceName + ' → ' + link.targetName,
 										value: link.value,
 										pct: (100 * link.value / arm.total).toFixed(1)
 									}}
