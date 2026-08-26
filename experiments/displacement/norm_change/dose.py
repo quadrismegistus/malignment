@@ -257,7 +257,17 @@ def main(argv=None):
     ap = argparse.ArgumentParser()
     ap.add_argument("--lang", default=None, choices=("en", "zh"))
     ap.add_argument("--dose", default=DOSE_DEFAULT)
-    ap.add_argument("--table", default="both", choices=("levels", "fields", "both"))
+    ap.add_argument("--table", default="both",
+                    choices=("levels", "fields", "contextual", "both", "all"))
+    ap.add_argument("--contextual", action="store_true",
+                    help="run ALL THREE tables -- word norms, USAS fields, and the "
+                         "contextual slot ratings -- on the SHARED PROMPT SET, i.e. "
+                         "only prompts that carry contextual ratings. Without the "
+                         "subset the comparison is word-level-on-everything against "
+                         "contextual-on-the-rated-subset, which is a population "
+                         "difference wearing a grain costume: the rated prompts were "
+                         "chosen by whoever built the instrument and are not a "
+                         "random sample of the corpus.")
     ap.add_argument("--top", type=int, default=20)
     ap.add_argument("--magnitude", action="store_true",
                     help="does MORE MASS MOVE where the base is transgressive?")
@@ -266,7 +276,12 @@ def main(argv=None):
     langs = [a.lang] if a.lang else ["en", "zh"]
     if a.magnitude:
         return magnitude(a, langs)
-    tables = ["levels", "fields"] if a.table == "both" else [a.table]
+    if a.contextual or a.table == "all":
+        tables = ["levels", "fields", "contextual"]
+    elif a.table == "both":
+        tables = ["levels", "fields"]
+    else:
+        tables = [a.table]
 
     print("DOSE-RESPONSE: does base-arm %s predict what alignment changes?" % a.dose)
     print("unit = the lineage; slope of (aligned-base) on base dose, across prompts")
@@ -283,12 +298,35 @@ def main(argv=None):
         print("dose scale %r not present in levels_long" % a.dose)
         return 1
 
+    #: THE SHARED PROMPT SET. Contextual ratings cover a subset of the corpus, so
+    #: comparing a word-level slope computed on 2,245 prompts against a contextual
+    #: slope computed on the rated ~1,800 compares two POPULATIONS, not two grains.
+    #: Every table is restricted to the prompts the contextual table actually holds.
+    keep_prompts = None
+    if a.contextual or "contextual" in tables:
+        cx = read("contextual")
+        if cx is None:
+            print("no contextual_long -- run.py --contextual first")
+            return 1
+        keep_prompts = {k[2] for k in cx}
+        allp = {k[2] for k in lv}
+        print("SHARED PROMPT SET: %d of %d prompts carry contextual ratings (%.0f%%)"
+              % (len(keep_prompts & allp), len(allp),
+                 100.0 * len(keep_prompts & allp) / max(1, len(allp))))
+        lv = {k: v for k, v in lv.items() if k[2] in keep_prompts}
+        dose_rows = {k: v for k, v in dose_rows.items() if k[2] in keep_prompts}
+
     for name in tables:
-        tbl = lv if name == "levels" else read("fields")
+        tbl = lv if name == "levels" else read(name)
         if tbl is None:
+            print("no %s_long -- skipping" % name)
             continue
-        if name == "fields":
+        if name != "levels":
             tbl = dict(tbl)
+            if keep_prompts is not None:
+                tbl = {k: v for k, v in tbl.items() if k[2] in keep_prompts}
+            #: the dose ALWAYS comes from levels; fields and contextual have no
+            #: transgressiveness counterpart of their own.
             tbl.update(dose_rows)
         for lang in langs:
             idx = index_by_scale(tbl, lang)

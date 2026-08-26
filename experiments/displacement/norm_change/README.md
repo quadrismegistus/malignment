@@ -508,3 +508,51 @@ which an aggregate averages away and an individual test cannot.
 **So a dose slope here is not evidence that a named scale predicts displacement**,
 and the absence of one there is not evidence that dose does nothing. They are
 different questions about the same data.
+
+### MEASURED, not just argued: `dose.py --contextual`
+
+The flag runs all three tables -- word norms, USAS fields, contextual slot ratings --
+on the SHARED PROMPT SET, i.e. only prompts carrying contextual ratings (2,344 of
+2,717, 86%; before 2026-08-25 it would have been 279, about 10%). Subsetting every
+table is what makes it a GRAIN comparison: the rated prompts were chosen by whoever
+built the instrument and are not a random sample, so word-level-on-everything against
+contextual-on-the-rated-subset would be a population difference in a grain costume.
+
+`harm` is the one construct measured both ways, and the aggregate dose slopes are
+indistinguishable:
+
+    word-level  k_bodily_harm   -0.18702   7/43   p<1e-5
+    contextual  v6:harm         -0.16747   8/42   p<1e-5
+
+Set against the held-out individual-direction result from `named_under_dose` on the
+same day:
+
+                        aggregate dose slope   individual direction (held out)
+    word-level norms         -0.187                 +0.0340 .. +0.0609
+    contextual, same 12      -0.167                 +0.0875 .. +0.0964  disjoint
+
+**Grain matters for predicting WHICH WORD MOVES and not at all for HOW FAR THE
+DISTRIBUTION SLIDES.** That is what Findings P's ICC of 0.131 implies: 82-87% of the
+fall/rise variance is WITHIN a word across sites, which a site-level rating can see
+and an aggregate averages away before the statistic is computed.
+
+Caveats: ONE construct pair, and `k_bodily_harm` ("does this word denote bodily
+harm", out of context) and `v6:harm` ("how much harm does this action cause in this
+scene") are close but not identical constructs. The raw significance counts (levels
+31/38, contextual 23/48) are NOT the test -- they compare different target sets.
+
+### KNOWN DEFECT IN THE CONTEXTUAL TARGET SET
+
+`contextual()` excludes only `scale == "ratable"` and admits every other numeric
+field, so the pre-existing v6 files' movement bookkeeping is carried in AS DOSE
+TARGETS: `v6` reports 18 scales where the instrument has 12, the extras being
+`net`, `rise`, `fall`, `net_rate`, `n_eligible`, `n_present`. Same root cause as the
+leak fixed in `named_under_dose/predict.py` -- a denylist of known bookkeeping names
+admits every new one.
+
+Bounded, not harmless: none of them reached any significant list, and a dose SLOPE on
+`net` is a real if uninteresting quantity rather than the circular PREDICTION the
+predict.py leak produced. But they inflate the tested-target denominator and a reader
+would reasonably assume every row is a rating. Three strays covering 2 prompts each
+(`v6full`, `v6_wide`, `results`) are also in the table. Fix is to name the twelve v6
+scales explicitly and rebuild; NOT done at time of writing.
