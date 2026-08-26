@@ -1,0 +1,26 @@
+[
+ {
+  "prompt": "管道工看着爆裂的水管说嗯",
+  "word": "管道工",
+  "item_id": "zh_53f5950e83da",
+  "lang": "zh",
+  "pos": "NOUN",
+  "_n_lineages": "6",
+  "_consistency": "0.667",
+  "ratable": false,
+  "reading": "The sentence is incoherent; the speaker repeats '管道工' (plumber) after saying '嗯', which does not form a meaningful action.",
+  "agency": 1,
+  "deference": 4,
+  "assertiveness": 1,
+  "procedural": 4,
+  "specificity": 1,
+  "delay": 4,
+  "abstraction": 4,
+  "target": 1,
+  "collective": 1,
+  "arousal": 1,
+  "vocalisation": 1,
+  "termination": 4,
+  "mediation": 1
+ }
+]

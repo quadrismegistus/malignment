@@ -1,0 +1,26 @@
+[
+ {
+  "prompt": "He was disgusting and foul and she wanted to",
+  "word": "just",
+  "item_id": "en_6d4d15b95591",
+  "lang": "en",
+  "pos": "ADV",
+  "_n_lineages": "6",
+  "_consistency": "1.000",
+  "ratable": false,
+  "reading": "The sentence is incomplete and 'just' does not complete a coherent action; it is a function word that leaves the action unspecified.",
+  "agency": 1,
+  "deference": 4,
+  "assertiveness": 1,
+  "procedural": 4,
+  "specificity": 1,
+  "delay": 4,
+  "abstraction": 4,
+  "target": 1,
+  "collective": 1,
+  "arousal": 1,
+  "vocalisation": 1,
+  "termination": 4,
+  "mediation": 1
+ }
+]

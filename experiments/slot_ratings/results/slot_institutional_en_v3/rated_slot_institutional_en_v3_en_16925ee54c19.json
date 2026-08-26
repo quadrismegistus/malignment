@@ -1,0 +1,26 @@
+[
+ {
+  "prompt": "The janitor earned an annual salary of $",
+  "word": "x",
+  "item_id": "en_16925ee54c19",
+  "lang": "en",
+  "pos": "NOUN",
+  "_n_lineages": "7",
+  "_consistency": "0.857",
+  "ratable": false,
+  "reading": "The word 'x' does not complete a coherent sentence; it appears to be a placeholder or tokenization artifact.",
+  "agency": 1,
+  "deference": 4,
+  "assertiveness": 1,
+  "procedural": 4,
+  "specificity": 1,
+  "delay": 4,
+  "abstraction": 1,
+  "target": 1,
+  "collective": 1,
+  "arousal": 1,
+  "vocalisation": 1,
+  "termination": 4,
+  "mediation": 1
+ }
+]

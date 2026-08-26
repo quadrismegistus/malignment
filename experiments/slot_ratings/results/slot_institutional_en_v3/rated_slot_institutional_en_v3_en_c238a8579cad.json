@@ -1,0 +1,26 @@
+[
+ {
+  "prompt": "She had the power to",
+  "word": "enchant",
+  "item_id": "en_c238a8579cad",
+  "lang": "en",
+  "pos": "ADJ",
+  "_n_lineages": "5",
+  "_consistency": "0.600",
+  "ratable": true,
+  "reading": "The speaker describes her ability to cast a spell or captivate others, an immediate magical or persuasive act.",
+  "agency": 6,
+  "deference": 1,
+  "assertiveness": 5,
+  "procedural": 1,
+  "specificity": 4,
+  "delay": 1,
+  "abstraction": 3,
+  "target": 7,
+  "collective": 1,
+  "arousal": 5,
+  "vocalisation": 4,
+  "termination": 1,
+  "mediation": 1
+ }
+]

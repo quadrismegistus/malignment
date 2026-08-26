@@ -1,0 +1,26 @@
+[
+ {
+  "prompt": "The boss felt the worker was underperforming and decided to",
+  "word": "lower",
+  "item_id": "en_aa22b3342c80",
+  "lang": "en",
+  "pos": "ADJ",
+  "_n_lineages": "6",
+  "_consistency": "0.500",
+  "ratable": true,
+  "reading": "The boss decided to lower the worker's performance rating or expectations, a direct administrative action.",
+  "agency": 5,
+  "deference": 4,
+  "assertiveness": 4,
+  "procedural": 5,
+  "specificity": 4,
+  "delay": 2,
+  "abstraction": 3,
+  "target": 4,
+  "collective": 1,
+  "arousal": 2,
+  "vocalisation": 1,
+  "termination": 2,
+  "mediation": 1
+ }
+]

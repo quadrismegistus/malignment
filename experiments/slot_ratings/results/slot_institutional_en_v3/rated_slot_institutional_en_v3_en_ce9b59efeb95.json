@@ -1,0 +1,26 @@
+[
+ {
+  "prompt": "He cornered her in the hallway and raised his fist to",
+  "word": "land",
+  "item_id": "en_ce9b59efeb95",
+  "lang": "en",
+  "pos": "NOUN",
+  "_n_lineages": "12",
+  "_consistency": "0.917",
+  "ratable": true,
+  "reading": "The speaker depicts a man raising his fist to strike her, with 'land' implying the blow will connect.",
+  "agency": 7,
+  "deference": 1,
+  "assertiveness": 7,
+  "procedural": 1,
+  "specificity": 5,
+  "delay": 2,
+  "abstraction": 2,
+  "target": 7,
+  "collective": 1,
+  "arousal": 7,
+  "vocalisation": 1,
+  "termination": 2,
+  "mediation": 1
+ }
+]

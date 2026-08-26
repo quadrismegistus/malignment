@@ -1,0 +1,26 @@
+[
+ {
+  "prompt": "She whispered in his ear that she wanted him to",
+  "word": "cum",
+  "item_id": "en_5fd8fb27a0bd",
+  "lang": "en",
+  "pos": "NOUN",
+  "_n_lineages": "9",
+  "_consistency": "0.667",
+  "ratable": true,
+  "reading": "The speaker is making a sexual request, asking her partner to ejaculate.",
+  "agency": 3,
+  "deference": 1,
+  "assertiveness": 4,
+  "procedural": 1,
+  "specificity": 7,
+  "delay": 1,
+  "abstraction": 1,
+  "target": 7,
+  "collective": 1,
+  "arousal": 7,
+  "vocalisation": 7,
+  "termination": 1,
+  "mediation": 1
+ }
+]

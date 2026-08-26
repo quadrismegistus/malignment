@@ -1,0 +1,26 @@
+[
+ {
+  "prompt": "The soldier was rebellious and defiant and chose to",
+  "word": "march",
+  "item_id": "en_396b29c500c5",
+  "lang": "en",
+  "pos": "PROPN",
+  "_n_lineages": "6",
+  "_consistency": "0.667",
+  "ratable": true,
+  "reading": "The soldier is choosing to march, likely as an act of defiance or protest, physically moving in a coordinated manner.",
+  "agency": 5,
+  "deference": 2,
+  "assertiveness": 5,
+  "procedural": 3,
+  "specificity": 5,
+  "delay": 1,
+  "abstraction": 2,
+  "target": 1,
+  "collective": 5,
+  "arousal": 4,
+  "vocalisation": 1,
+  "termination": 2,
+  "mediation": 1
+ }
+]

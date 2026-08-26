@@ -1,0 +1,26 @@
+[
+ {
+  "prompt": "她躺在病床上，知道自己很快就会",
+  "word": "永远",
+  "item_id": "zh_19e5b3072b95",
+  "lang": "zh",
+  "pos": "ADV",
+  "_n_lineages": "11",
+  "_consistency": "0.636",
+  "ratable": false,
+  "reading": "The sentence is incomplete and the word '永远' (forever) does not form a coherent action; it likely is a fragment of a phrase like '永远离开' (leave forever), but as given it does not depict a clear action.",
+  "agency": 1,
+  "deference": 4,
+  "assertiveness": 1,
+  "procedural": 4,
+  "specificity": 1,
+  "delay": 4,
+  "abstraction": 4,
+  "target": 1,
+  "collective": 1,
+  "arousal": 1,
+  "vocalisation": 1,
+  "termination": 4,
+  "mediation": 1
+ }
+]

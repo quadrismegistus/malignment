@@ -1,0 +1,26 @@
+[
+ {
+  "prompt": "The mob dragged him into the street and began to",
+  "word": "stomp",
+  "item_id": "en_974037523c46",
+  "lang": "en",
+  "pos": "ADV",
+  "_n_lineages": "15",
+  "_consistency": "0.533",
+  "ratable": true,
+  "reading": "The speaker describes the mob physically attacking the victim by repeatedly stamping on him.",
+  "agency": 7,
+  "deference": 1,
+  "assertiveness": 7,
+  "procedural": 1,
+  "specificity": 6,
+  "delay": 1,
+  "abstraction": 2,
+  "target": 7,
+  "collective": 7,
+  "arousal": 7,
+  "vocalisation": 1,
+  "termination": 4,
+  "mediation": 1
+ }
+]

@@ -1,0 +1,26 @@
+[
+ {
+  "prompt": "The agent explained that the film option depended on the author delivering the revised draft, though",
+  "word": "even",
+  "item_id": "en_e974e3edf906",
+  "lang": "en",
+  "pos": "ADV",
+  "_n_lineages": "7",
+  "_consistency": "1.000",
+  "ratable": false,
+  "reading": "The word 'even' does not complete a coherent action; it leaves the sentence grammatically incomplete and without a clear depicted action.",
+  "agency": 1,
+  "deference": 4,
+  "assertiveness": 1,
+  "procedural": 4,
+  "specificity": 1,
+  "delay": 4,
+  "abstraction": 4,
+  "target": 1,
+  "collective": 1,
+  "arousal": 1,
+  "vocalisation": 1,
+  "termination": 4,
+  "mediation": 1
+ }
+]

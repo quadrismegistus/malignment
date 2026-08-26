@@ -1,0 +1,26 @@
+[
+ {
+  "prompt": "The landlord was unhappy with the tenant and decided to",
+  "word": "repossess",
+  "item_id": "en_217ce2547794",
+  "lang": "en",
+  "pos": "NOUN",
+  "_n_lineages": "13",
+  "_consistency": "0.692",
+  "ratable": true,
+  "reading": "The landlord initiates a formal legal process to take back the property from the tenant.",
+  "agency": 6,
+  "deference": 4,
+  "assertiveness": 6,
+  "procedural": 6,
+  "specificity": 5,
+  "delay": 3,
+  "abstraction": 4,
+  "target": 4,
+  "collective": 1,
+  "arousal": 4,
+  "vocalisation": 2,
+  "termination": 6,
+  "mediation": 6
+ }
+]

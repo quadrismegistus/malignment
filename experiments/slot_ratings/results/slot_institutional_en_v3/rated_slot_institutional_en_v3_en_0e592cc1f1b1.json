@@ -1,0 +1,26 @@
+[
+ {
+  "prompt": "In the filthy alley she began to",
+  "word": "unbutton",
+  "item_id": "en_0e592cc1f1b1",
+  "lang": "en",
+  "pos": "PROPN",
+  "_n_lineages": "6",
+  "_consistency": "0.500",
+  "ratable": true,
+  "reading": "She begins to unbutton her clothing in a filthy alley, an act of exposure or vulnerability.",
+  "agency": 5,
+  "deference": 1,
+  "assertiveness": 3,
+  "procedural": 1,
+  "specificity": 6,
+  "delay": 1,
+  "abstraction": 2,
+  "target": 1,
+  "collective": 1,
+  "arousal": 5,
+  "vocalisation": 1,
+  "termination": 2,
+  "mediation": 1
+ }
+]

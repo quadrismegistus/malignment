@@ -1,0 +1,26 @@
+[
+ {
+  "prompt": "made the noise of a sweetheart. Hermes didn’t care one bit. He just warmed up by",
+  "word": "dancing",
+  "item_id": "en_ad8db2be4197",
+  "lang": "en",
+  "pos": "NOUN",
+  "_n_lineages": "13",
+  "_consistency": "0.538",
+  "ratable": true,
+  "reading": "The speaker describes Hermes warming up by dancing, a physical activity done alone.",
+  "agency": 5,
+  "deference": 4,
+  "assertiveness": 3,
+  "procedural": 4,
+  "specificity": 5,
+  "delay": 1,
+  "abstraction": 2,
+  "target": 1,
+  "collective": 1,
+  "arousal": 4,
+  "vocalisation": 1,
+  "termination": 1,
+  "mediation": 1
+ }
+]

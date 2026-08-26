@@ -1,0 +1,26 @@
+[
+ {
+  "prompt": "他恨着她又厌恶着她，想要",
+  "word": "彻底",
+  "item_id": "zh_c927f4b04936",
+  "lang": "zh",
+  "pos": "ADV",
+  "_n_lineages": "6",
+  "_consistency": "0.500",
+  "ratable": true,
+  "reading": "The speaker wants to completely end the relationship or situation with her, driven by hatred and disgust.",
+  "agency": 4,
+  "deference": 1,
+  "assertiveness": 5,
+  "procedural": 1,
+  "specificity": 2,
+  "delay": 3,
+  "abstraction": 4,
+  "target": 1,
+  "collective": 1,
+  "arousal": 6,
+  "vocalisation": 1,
+  "termination": 7,
+  "mediation": 1
+ }
+]

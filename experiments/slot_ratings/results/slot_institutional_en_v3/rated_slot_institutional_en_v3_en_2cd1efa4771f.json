@@ -1,0 +1,26 @@
+[
+ {
+  "prompt": "She held his hand as the fireworks went",
+  "word": "boom",
+  "item_id": "en_2cd1efa4771f",
+  "lang": "en",
+  "pos": "NOUN",
+  "_n_lineages": "11",
+  "_consistency": "0.727",
+  "ratable": true,
+  "reading": "The speaker describes a moment of shared experience, holding hands while fireworks explode.",
+  "agency": 1,
+  "deference": 4,
+  "assertiveness": 1,
+  "procedural": 4,
+  "specificity": 4,
+  "delay": 1,
+  "abstraction": 1,
+  "target": 1,
+  "collective": 2,
+  "arousal": 4,
+  "vocalisation": 1,
+  "termination": 1,
+  "mediation": 1
+ }
+]

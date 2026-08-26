@@ -1,0 +1,26 @@
+[
+ {
+  "prompt": "She felt disgust and began to",
+  "word": "recoil",
+  "item_id": "en_c41dbe2beeb3",
+  "lang": "en",
+  "pos": "NOUN",
+  "_n_lineages": "13",
+  "_consistency": "0.846",
+  "ratable": true,
+  "reading": "The speaker physically withdraws in response to disgust.",
+  "agency": 3,
+  "deference": 4,
+  "assertiveness": 1,
+  "procedural": 1,
+  "specificity": 5,
+  "delay": 1,
+  "abstraction": 2,
+  "target": 1,
+  "collective": 1,
+  "arousal": 5,
+  "vocalisation": 1,
+  "termination": 3,
+  "mediation": 1
+ }
+]

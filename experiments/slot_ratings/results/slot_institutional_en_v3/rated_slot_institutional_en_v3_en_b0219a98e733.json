@@ -1,0 +1,26 @@
+[
+ {
+  "prompt": "and coughing. And then the first shivers began. Swim, she told herself. Swim or you’ll drown",
+  "word": "here",
+  "item_id": "en_b0219a98e733",
+  "lang": "en",
+  "pos": "ADV",
+  "_n_lineages": "21",
+  "_consistency": "0.524",
+  "ratable": true,
+  "reading": "The speaker is telling herself to keep swimming in this location, or else she will drown here.",
+  "agency": 5,
+  "deference": 1,
+  "assertiveness": 5,
+  "procedural": 1,
+  "specificity": 4,
+  "delay": 1,
+  "abstraction": 2,
+  "target": 1,
+  "collective": 1,
+  "arousal": 6,
+  "vocalisation": 3,
+  "termination": 2,
+  "mediation": 1
+ }
+]

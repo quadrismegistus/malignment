@@ -1,0 +1,26 @@
+[
+ {
+  "prompt": "他把身体贴在她身上，低声说",
+  "word": "话",
+  "item_id": "zh_c3e4947b633f",
+  "lang": "zh",
+  "pos": "NOUN",
+  "_n_lineages": "8",
+  "_consistency": "0.500",
+  "ratable": false,
+  "reading": "The speaker is leaning close and speaking softly to her, but the word '话' alone doesn't complete a coherent action—it just means 'words' or 'speech'.",
+  "agency": 1,
+  "deference": 4,
+  "assertiveness": 1,
+  "procedural": 4,
+  "specificity": 1,
+  "delay": 1,
+  "abstraction": 1,
+  "target": 1,
+  "collective": 1,
+  "arousal": 1,
+  "vocalisation": 1,
+  "termination": 4,
+  "mediation": 1
+ }
+]

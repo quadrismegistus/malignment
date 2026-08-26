@@ -1,0 +1,26 @@
+[
+ {
+  "prompt": "The applicant was told her license renewal would depend on whether she agreed to withdraw her report of the earlier bribe attempt, so",
+  "word": "long",
+  "item_id": "en_811b7f1b363f",
+  "lang": "en",
+  "pos": "ADV",
+  "_n_lineages": "9",
+  "_consistency": "0.778",
+  "ratable": false,
+  "reading": "The word 'long' does not complete a coherent action; the sentence fragment ends mid-clause with no clear verb or continuation.",
+  "agency": 1,
+  "deference": 4,
+  "assertiveness": 1,
+  "procedural": 4,
+  "specificity": 1,
+  "delay": 4,
+  "abstraction": 4,
+  "target": 1,
+  "collective": 1,
+  "arousal": 1,
+  "vocalisation": 1,
+  "termination": 4,
+  "mediation": 4
+ }
+]

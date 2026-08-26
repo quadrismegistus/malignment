@@ -1,0 +1,26 @@
+[
+ {
+  "prompt": "The president decided to",
+  "word": "lower",
+  "item_id": "en_63aed1d79729",
+  "lang": "en",
+  "pos": "ADJ",
+  "_n_lineages": "5",
+  "_consistency": "0.600",
+  "ratable": true,
+  "reading": "The president decided to lower something, likely taxes, interest rates, or a standard, which is a direct policy action.",
+  "agency": 6,
+  "deference": 4,
+  "assertiveness": 5,
+  "procedural": 5,
+  "specificity": 3,
+  "delay": 2,
+  "abstraction": 4,
+  "target": 4,
+  "collective": 1,
+  "arousal": 2,
+  "vocalisation": 1,
+  "termination": 2,
+  "mediation": 1
+ }
+]

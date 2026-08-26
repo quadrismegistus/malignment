@@ -1,0 +1,26 @@
+[
+ {
+  "prompt": "The sensation was pure pain and she began to",
+  "word": "rock",
+  "item_id": "en_7337e2cf53a2",
+  "lang": "en",
+  "pos": "NOUN",
+  "_n_lineages": "7",
+  "_consistency": "0.857",
+  "ratable": true,
+  "reading": "The speaker is physically rocking back and forth, likely as a self-soothing response to intense pain.",
+  "agency": 2,
+  "deference": 4,
+  "assertiveness": 1,
+  "procedural": 1,
+  "specificity": 5,
+  "delay": 1,
+  "abstraction": 1,
+  "target": 1,
+  "collective": 1,
+  "arousal": 5,
+  "vocalisation": 1,
+  "termination": 1,
+  "mediation": 1
+ }
+]

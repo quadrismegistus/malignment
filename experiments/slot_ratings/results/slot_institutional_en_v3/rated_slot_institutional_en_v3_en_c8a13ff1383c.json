@@ -1,0 +1,26 @@
+[
+ {
+  "prompt": "She was faithful and unfaithful to him and she began to",
+  "word": "date",
+  "item_id": "en_c8a13ff1383c",
+  "lang": "en",
+  "pos": "NOUN",
+  "_n_lineages": "12",
+  "_consistency": "0.750",
+  "ratable": true,
+  "reading": "The speaker describes her beginning a romantic relationship with someone else, which is a direct personal action.",
+  "agency": 5,
+  "deference": 1,
+  "assertiveness": 4,
+  "procedural": 1,
+  "specificity": 4,
+  "delay": 2,
+  "abstraction": 3,
+  "target": 7,
+  "collective": 1,
+  "arousal": 4,
+  "vocalisation": 2,
+  "termination": 2,
+  "mediation": 1
+ }
+]

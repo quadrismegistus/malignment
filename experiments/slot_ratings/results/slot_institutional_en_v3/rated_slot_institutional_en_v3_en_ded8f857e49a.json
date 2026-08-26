@@ -1,0 +1,26 @@
+[
+ {
+  "prompt": "She balled her fist and lunged to",
+  "word": "land",
+  "item_id": "en_ded8f857e49a",
+  "lang": "en",
+  "pos": "NOUN",
+  "_n_lineages": "20",
+  "_consistency": "0.600",
+  "ratable": true,
+  "reading": "The speaker is about to throw a punch, aiming to land a blow on someone.",
+  "agency": 7,
+  "deference": 1,
+  "assertiveness": 7,
+  "procedural": 1,
+  "specificity": 5,
+  "delay": 1,
+  "abstraction": 2,
+  "target": 7,
+  "collective": 1,
+  "arousal": 7,
+  "vocalisation": 1,
+  "termination": 2,
+  "mediation": 1
+ }
+]

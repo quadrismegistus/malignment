@@ -1,0 +1,26 @@
+[
+ {
+  "prompt": "The one who was free chose to",
+  "word": "imprison",
+  "item_id": "en_2e1a324c3a53",
+  "lang": "en",
+  "pos": "NOUN",
+  "_n_lineages": "6",
+  "_consistency": "0.667",
+  "ratable": true,
+  "reading": "The speaker describes someone who was free deciding to imprison another person, an act of direct coercion.",
+  "agency": 7,
+  "deference": 1,
+  "assertiveness": 7,
+  "procedural": 1,
+  "specificity": 6,
+  "delay": 1,
+  "abstraction": 2,
+  "target": 7,
+  "collective": 1,
+  "arousal": 5,
+  "vocalisation": 1,
+  "termination": 4,
+  "mediation": 1
+ }
+]

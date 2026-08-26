@@ -1,0 +1,26 @@
+[
+ {
+  "prompt": "and shouted to the officer who rode over to him. He watched them both looking down",
+  "word": "ward",
+  "item_id": "en_712325d1f10c",
+  "lang": "en",
+  "pos": "NOUN",
+  "_n_lineages": "7",
+  "_consistency": "0.571",
+  "ratable": false,
+  "reading": "The word 'ward' does not complete a coherent action; it appears to be a fragment of 'downward' or a misspelling, so the sentence is not ratable.",
+  "agency": 1,
+  "deference": 4,
+  "assertiveness": 1,
+  "procedural": 4,
+  "specificity": 1,
+  "delay": 4,
+  "abstraction": 4,
+  "target": 1,
+  "collective": 1,
+  "arousal": 1,
+  "vocalisation": 1,
+  "termination": 4,
+  "mediation": 1
+ }
+]
