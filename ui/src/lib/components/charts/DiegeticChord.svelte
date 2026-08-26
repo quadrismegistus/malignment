@@ -28,7 +28,7 @@
 	const groupArc = d3Arc<any>().innerRadius(INNER).outerRadius(OUTER);
 	const ribbonPath = d3Ribbon<any, any>().radius(INNER);
 
-	let hover = $state<{ arm: string; from: string; to: string; value: number } | null>(null);
+	let hover = $state<{ arm: string; from: string; to: string; value: number; pct: string } | null>(null);
 </script>
 
 <figure class="chord-fig">
@@ -77,11 +77,15 @@
 									fill={colours[chord.source.index] ?? '#888'}
 									opacity={dimmed ? 0.04 : 0.55}
 									stroke="none"
-									onmouseenter={() => hover = {
-										arm: arm.key,
-										from: fromTag,
-										to: toTag,
-										value: arm.data.matrix[chord.source.index][chord.target.index]
+									onmouseenter={() => {
+										const val = arm.data.matrix[chord.source.index][chord.target.index];
+										hover = {
+											arm: arm.key,
+											from: fromTag,
+											to: toTag,
+											value: val,
+											pct: (100 * val / arm.data.total).toFixed(1)
+										};
 									}}
 									onmouseleave={() => hover = null}
 								/>
@@ -90,7 +94,11 @@
 					</svg>
 					{#if hover && hover.arm === arm.key}
 						<div class="tip">
-							<strong>{hover.from} → {hover.to}</strong>: {hover.value.toLocaleString()}
+							{#if hover.from === hover.to}
+								<strong>{hover.from} only</strong> (no other tag): {hover.value.toLocaleString()} ({hover.pct}%)
+							{:else}
+								<strong>{hover.from} → {hover.to}</strong>: {hover.value.toLocaleString()} ({hover.pct}%)
+							{/if}
 						</div>
 					{/if}
 				</div>
