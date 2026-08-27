@@ -165,6 +165,7 @@
 	let slopesXf = $state<any>(null);
 	let slopesLoading = $state(false);
 	let chartTab = $state<'slopes' | 'slopes_xf' | 'dots'>('slopes');
+	let slopeHover = $state<string | null>(null);
 
 	function open(p: string) {
 		selected = p;
@@ -731,11 +732,11 @@
 			{@const activeSlopes = chartTab === 'slopes_xf' ? slopesXf : slopes}
 			{#if (chartTab === 'slopes' || chartTab === 'slopes_xf') && activeSlopes && activeSlopes.levels?.length}
 				{@const W = 560}
-				{@const H = 280}
-				{@const padT = 18}
-				{@const padB = 30}
-				{@const padL = 58}
-				{@const padR = 100}
+				{@const H = 260}
+				{@const padT = 14}
+				{@const padB = 26}
+				{@const padL = 54}
+				{@const padR = 96}
 				{@const top = Math.max(...activeSlopes.levels.map((l) => l.hi), 0.001)}
 				{@const floor = 0.0005}
 				{@const logTop = Math.log10(top)}
@@ -777,31 +778,37 @@
 						{@const base = activeSlopes.levels.find((l) => l.word === w && l.position === 0)}
 						{@const aligned = activeSlopes.levels.find((l) => l.word === w && l.position === 1)}
 						{@const wd = diffMap.get(w) ?? 0}
-						{@const isTopFaller = w === faller}
-						{@const isTopRiser = w === riser}
+						{@const isTop = w === faller || w === riser}
 						{@const col = wd < 0 ? '#e15759' : '#4e79a7'}
-						{@const opac = (isTopFaller || isTopRiser) ? 0.95 : 0.35}
-						{@const sw = (isTopFaller || isTopRiser) ? 2.5 : 1.2}
+						{@const dimmed = slopeHover !== null && slopeHover !== w}
+						{@const opac = dimmed ? 0.08 : isTop ? 0.95 : 0.35}
+						{@const sw = dimmed ? 0.8 : isTop ? 2.5 : 1.2}
 						{#if base && aligned}
 							<line x1={x0} y1={y(base.central)} x2={x1} y2={y(aligned.central)}
-								stroke={col} stroke-width={sw} opacity={opac} />
+								stroke={col} stroke-width={slopeHover === w ? 3 : sw} opacity={slopeHover === w ? 1 : opac}
+								onmouseenter={() => slopeHover = w} onmouseleave={() => slopeHover = null}
+								style="cursor: pointer" />
 							<line x1={x0} x2={x0} y1={y(base.lo)} y2={y(base.hi)}
 								stroke={col} stroke-width="1" opacity={opac * 0.7} />
 							<line x1={x1} x2={x1} y1={y(aligned.lo)} y2={y(aligned.hi)}
 								stroke={col} stroke-width="1" opacity={opac * 0.7} />
-							<circle cx={x0} cy={y(base.central)} r={(isTopFaller || isTopRiser) ? 3 : 2}
-								fill={col} opacity={opac} />
-							<circle cx={x1} cy={y(aligned.central)} r={(isTopFaller || isTopRiser) ? 3 : 2}
-								fill={col} opacity={opac} />
+							<circle cx={x0} cy={y(base.central)} r={isTop ? 3 : 2}
+								fill={col} opacity={slopeHover === w ? 1 : opac} />
+							<circle cx={x1} cy={y(aligned.central)} r={isTop ? 3 : 2}
+								fill={col} opacity={slopeHover === w ? 1 : opac} />
 						{/if}
 					{/each}
 					{#each endLabels as l}
 						{@const ld = diffMap.get(l.word) ?? 0}
 						{@const isTop = l.word === faller || l.word === riser}
+						{@const ldimmed = slopeHover !== null && slopeHover !== l.word}
 						<text x={x1 + 6} y={l.ly + 3} font-size="9"
 							fill={ld < 0 ? '#e15759' : '#4e79a7'}
-							opacity={isTop ? 1 : 0.5}
-							font-weight={isTop ? 'bold' : 'normal'}
+							opacity={ldimmed ? 0.1 : isTop ? 1 : 0.5}
+							font-weight={(isTop || slopeHover === l.word) ? 'bold' : 'normal'}
+							onmouseenter={() => slopeHover = l.word}
+							onmouseleave={() => slopeHover = null}
+							style="cursor: pointer"
 						>{l.word}</text>
 					{/each}
 				</svg>
