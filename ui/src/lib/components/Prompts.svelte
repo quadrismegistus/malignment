@@ -162,8 +162,9 @@
 	});
 
 	let slopes = $state<any>(null);
+	let slopesXf = $state<any>(null);
 	let slopesLoading = $state(false);
-	let chartTab = $state<'slopes' | 'dots'>('slopes');
+	let chartTab = $state<'slopes' | 'slopes_xf' | 'dots'>('slopes');
 
 	function open(p: string) {
 		selected = p;
@@ -181,6 +182,10 @@
 			.then((r) => (slopes = r))
 			.catch(() => (slopes = null))
 			.finally(() => (slopesLoading = false));
+		api
+			.promptSlopes(p, 12, 'crossframe')
+			.then((r) => (slopesXf = r))
+			.catch(() => (slopesXf = null));
 	}
 
 	let epView = $derived.by(() => {
@@ -707,11 +712,15 @@
 			{/if}
 
 			{@const hasSlopes = slopes && slopes.levels?.length}
+			{@const hasSlopesXf = slopesXf && slopesXf.levels?.length}
 			{@const hasDots = epView.length > 1}
-			{#if hasSlopes || hasDots}
+			{#if hasSlopes || hasSlopesXf || hasDots}
 				<div class="chart-tabs">
 					{#if hasSlopes}
 						<button class:active={chartTab === 'slopes'} onclick={() => chartTab = 'slopes'}>slopegraph</button>
+					{/if}
+					{#if hasSlopesXf}
+						<button class:active={chartTab === 'slopes_xf'} onclick={() => chartTab = 'slopes_xf'}>slopegraph (framed)</button>
 					{/if}
 					{#if hasDots}
 						<button class:active={chartTab === 'dots'} onclick={() => chartTab = 'dots'}>movement by lineage</button>
@@ -719,14 +728,15 @@
 				</div>
 			{/if}
 
-			{#if chartTab === 'slopes' && slopes && slopes.levels?.length}
+			{@const activeSlopes = chartTab === 'slopes_xf' ? slopesXf : slopes}
+			{#if (chartTab === 'slopes' || chartTab === 'slopes_xf') && activeSlopes && activeSlopes.levels?.length}
 				{@const W = 560}
 				{@const H = 280}
 				{@const padT = 18}
 				{@const padB = 30}
 				{@const padL = 58}
 				{@const padR = 100}
-				{@const top = Math.max(...slopes.levels.map((l) => l.hi), 0.001)}
+				{@const top = Math.max(...activeSlopes.levels.map((l) => l.hi), 0.001)}
 				{@const floor = 0.0005}
 				{@const logTop = Math.log10(top)}
 				{@const logFloor = Math.log10(floor)}
@@ -736,10 +746,10 @@
 				}}
 				{@const x0 = padL}
 				{@const x1 = W - padR}
-				{@const faller = slopes.diffs[0]?.word}
-				{@const riser = slopes.diffs[slopes.diffs.length - 1]?.word}
+				{@const faller = activeSlopes.diffs[0]?.word}
+				{@const riser = activeSlopes.diffs[activeSlopes.diffs.length - 1]?.word}
 				{@const endLabels = (() => {
-					const ends = slopes.levels
+					const ends = activeSlopes.levels
 						.filter((l) => l.position === 1)
 						.map((l) => ({ word: l.word, v: l.central,
 							role: l.word === faller ? 'faller' : l.word === riser ? 'riser' : 'other' }))
@@ -753,7 +763,7 @@
 						return { ...e, ly };
 					});
 				})()}
-				<h3>slopegraph <span class="muted">{slopes.selection}, {slopes.n_units} lineages, median with 95% CI</span></h3>
+				<h3>slopegraph <span class="muted">{activeSlopes.selection}, {activeSlopes.n_units} lineages, median with 95% CI</span></h3>
 				{@const logTicks = [0.001, 0.003, 0.01, 0.03, 0.1, 0.3].filter((t) => t >= floor && t <= top * 1.1)}
 				<svg class="slopegraph" viewBox="0 0 {W} {H}" preserveAspectRatio="xMidYMid meet">
 					<text x={x0} y={H - 8} font-size="10" fill="#888">base</text>
@@ -762,13 +772,16 @@
 						<line x1={x0} x2={x1} y1={y(tick)} y2={y(tick)} stroke="#444" stroke-width="0.3" />
 						<text x={x0 - 6} y={y(tick) + 3} font-size="7" fill="#888" text-anchor="end">{tick < 0.01 ? tick.toFixed(3) : tick.toFixed(2)}</text>
 					{/each}
-					{#each slopes.words as w}
-						{@const base = slopes.levels.find((l) => l.word === w && l.position === 0)}
-						{@const aligned = slopes.levels.find((l) => l.word === w && l.position === 1)}
-						{@const role = w === faller ? 'faller' : w === riser ? 'riser' : 'other'}
-						{@const col = role === 'faller' ? '#e15759' : role === 'riser' ? '#4e79a7' : '#999'}
-						{@const opac = role === 'other' ? 0.4 : 0.9}
-						{@const sw = role === 'other' ? 1 : 2}
+					{@const diffMap = new Map(activeSlopes.diffs.map((d) => [d.word, d.d]))}
+					{#each activeSlopes.words as w}
+						{@const base = activeSlopes.levels.find((l) => l.word === w && l.position === 0)}
+						{@const aligned = activeSlopes.levels.find((l) => l.word === w && l.position === 1)}
+						{@const wd = diffMap.get(w) ?? 0}
+						{@const isTopFaller = w === faller}
+						{@const isTopRiser = w === riser}
+						{@const col = wd < 0 ? '#e15759' : '#4e79a7'}
+						{@const opac = (isTopFaller || isTopRiser) ? 0.95 : 0.35}
+						{@const sw = (isTopFaller || isTopRiser) ? 2.5 : 1.2}
 						{#if base && aligned}
 							<line x1={x0} y1={y(base.central)} x2={x1} y2={y(aligned.central)}
 								stroke={col} stroke-width={sw} opacity={opac} />
@@ -783,16 +796,19 @@
 						{/if}
 					{/each}
 					{#each endLabels as l}
+						{@const ld = diffMap.get(l.word) ?? 0}
+						{@const isTop = l.word === faller || l.word === riser}
 						<text x={x1 + 6} y={l.ly + 3} font-size="9"
-							fill={l.role === 'faller' ? '#e15759' : l.role === 'riser' ? '#4e79a7' : '#888'}
-							font-weight={l.role === 'other' ? 'normal' : 'bold'}
+							fill={ld < 0 ? '#e15759' : '#4e79a7'}
+							opacity={isTop ? 1 : 0.5}
+							font-weight={isTop ? 'bold' : 'normal'}
 						>{l.word}</text>
 					{/each}
 				</svg>
-				{#if slopes.diffs.length >= 2}
+				{#if activeSlopes.diffs.length >= 2}
 					<p class="muted small">
-						largest faller <b style="color:#e15759">{faller}</b> {slopes.diffs[0].d > 0 ? '+' : ''}{n(slopes.diffs[0].d, 4)} [{n(slopes.diffs[0].lo, 4)}, {n(slopes.diffs[0].hi, 4)}]
-						· largest riser <b style="color:#4e79a7">{riser}</b> +{n(slopes.diffs[slopes.diffs.length-1].d, 4)} [{n(slopes.diffs[slopes.diffs.length-1].lo, 4)}, {n(slopes.diffs[slopes.diffs.length-1].hi, 4)}]
+						largest faller <b style="color:#e15759">{faller}</b> {activeSlopes.diffs[0].d > 0 ? '+' : ''}{n(activeSlopes.diffs[0].d, 4)} [{n(activeSlopes.diffs[0].lo, 4)}, {n(activeSlopes.diffs[0].hi, 4)}]
+						· largest riser <b style="color:#4e79a7">{riser}</b> +{n(activeSlopes.diffs[activeSlopes.diffs.length-1].d, 4)} [{n(activeSlopes.diffs[activeSlopes.diffs.length-1].lo, 4)}, {n(activeSlopes.diffs[activeSlopes.diffs.length-1].hi, 4)}]
 						· intervals on the paired within-lineage difference
 					</p>
 				{/if}

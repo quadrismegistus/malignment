@@ -1808,22 +1808,35 @@ class Handler(BaseHTTPRequestHandler):
             if text not in {r["prompt"] for r in rows}:
                 raise KeyError("no such prompt")
             top = _int(one("top"), 12, 1, 50)
+            frame = one("frame", "raw")
             from . import ch, roster
             import numpy as np
             import pandas as pd
             ep, _ = roster.endpoints()
             esc = text.replace("\\", "\\\\").replace("'", "\\'")
-            models = sorted({m for pair in ep.items() for m in pair})
-            inlist = ",".join("'" + m.replace("'", "\\'") + "'" for m in models)
-            got = ch.query(
-                "SELECT model, word, p FROM {db}.twp_words_v4_best "
-                "WHERE prompt = '" + esc + "' AND model IN (" + inlist + ")")
+            base_models = sorted(ep.keys())
+            aligned_models = sorted(ep.values())
+            if frame == "crossframe":
+                base_inlist = ",".join("'" + m.replace("'", "\\'") + "'" for m in base_models)
+                aligned_inlist = ",".join("'" + m.replace("'", "\\'") + "'" for m in aligned_models)
+                got_base = ch.query(
+                    "SELECT model, word, p FROM {db}.twp_words_v4_best "
+                    "WHERE prompt = '" + esc + "' AND model IN (" + base_inlist + ")")
+                got_aligned = ch.query(
+                    "SELECT model, word, p FROM {db}.twp_words_v4 "
+                    "WHERE prompt = '" + esc + "' AND frame = 'prefill' "
+                    "AND system_mode = 'empty' "
+                    "AND model IN (" + aligned_inlist + ")")
+                got = got_base + got_aligned
+            else:
+                models = sorted({m for pair in ep.items() for m in pair})
+                inlist = ",".join("'" + m.replace("'", "\\'") + "'" for m in models)
+                got = ch.query(
+                    "SELECT model, word, p FROM {db}.twp_words_v4_best "
+                    "WHERE prompt = '" + esc + "' AND model IN (" + inlist + ")")
             by = {}
             for r in got:
                 by.setdefault(r["model"], {})[r["word"]] = float(r["p"])
-            # build per-word per-arm arrays
-            base_models = sorted(ep.keys())
-            aligned_models = sorted(ep.values())
             # select top movers: top N/2 risers + top N/2 fallers by median delta
             import statistics as _st
             word_deltas = {}
