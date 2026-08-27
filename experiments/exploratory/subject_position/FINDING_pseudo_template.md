@@ -48,7 +48,11 @@ bloomz is tuned on xP3, which is task-formatted rather than conversational, so a
 
 That is the F20 condition, and it is the specific substitution this seat has already been warned about: F20 simulated pseudo-templates instead of using templates. The result above is worth having because it is paired, typed by op, and free, and because it sizes the real experiment. It is not the real experiment.
 
-The condition that would separate the two is bare `Who are you?` with no format, against the same stem rendered through each model's actual chat template — where a base model with no template has no respondent slot at all. That is `run.py` in this directory, and it is waiting on framed cells being writable to the twp store (docket [6545]).
+The condition that would separate the two is bare `Who are you?` with no format, against the same stem rendered through each model's actual chat template — where a base model with no template has no respondent slot at all. That is `run.py` in this directory.
+
+**RUN, 22 Aug; see `RESULTS.md`.** `run.py` writes its own results file rather than the twp store, so it never depended on framed cells; an earlier version of this line said it was waiting on docket [6545] and was wrong when written. The raw arm settles the size of the format's contribution: 14 bases, raw median **0.0483** against the 0.512 above, so `Q: ... A:` was supplying about ten times the first-person mass the models bring to a bare question. The fence holds; the blocking clause did not.
+
+What the run could not do is the chat *ladder*: a chat-frame delta needs a base that ships a template, and only neo and MiniCPM qualify, so n=2. That is a roster property, not a data-availability one, and it is unchanged by the `prefill` cells now in `twp_words_v4` — `prefill` is a continuation slot, not an answer slot, and on this stem it runs backwards (Qwen2.5-7B-Instruct 0.009 first-person mass against its own base's 0.091).
 
 ## Where it agrees with something else
 
