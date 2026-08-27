@@ -763,8 +763,9 @@
 						return { ...e, ly };
 					});
 				})()}
-				<h3>slopegraph <span class="muted">{activeSlopes.selection}, {activeSlopes.n_units} lineages, median with 95% CI</span></h3>
+				{@const diffMap = new Map(activeSlopes.diffs.map((d) => [d.word, d.d]))}
 				{@const logTicks = [0.001, 0.003, 0.01, 0.03, 0.1, 0.3].filter((t) => t >= floor && t <= top * 1.1)}
+				<h3>slopegraph <span class="muted">{activeSlopes.selection}, {activeSlopes.n_units} lineages, median with 95% CI</span></h3>
 				<svg class="slopegraph" viewBox="0 0 {W} {H}" preserveAspectRatio="xMidYMid meet">
 					<text x={x0} y={H - 8} font-size="10" fill="#888">base</text>
 					<text x={x1} y={H - 8} font-size="10" fill="#888" text-anchor="end">aligned</text>
@@ -772,7 +773,6 @@
 						<line x1={x0} x2={x1} y1={y(tick)} y2={y(tick)} stroke="#444" stroke-width="0.3" />
 						<text x={x0 - 6} y={y(tick) + 3} font-size="7" fill="#888" text-anchor="end">{tick < 0.01 ? tick.toFixed(3) : tick.toFixed(2)}</text>
 					{/each}
-					{@const diffMap = new Map(activeSlopes.diffs.map((d) => [d.word, d.d]))}
 					{#each activeSlopes.words as w}
 						{@const base = activeSlopes.levels.find((l) => l.word === w && l.position === 0)}
 						{@const aligned = activeSlopes.levels.find((l) => l.word === w && l.position === 1)}
