@@ -91,6 +91,53 @@ COLS = ["model", "arm", "base", "prompt_id", "language", "subdomain", "group_id"
 NUM = re.compile(r"\s*([\d,\.]*\d)\s*([KkMm])?")
 
 
+def unbreak_olmo():
+    """Let the six OLMo checkpoints load. Returns the classes it patched.
+
+    transformers 5.4.0 declares `tie_word_embeddings: int = False` on the OLMo
+    configs -- annotated `int`, defaulted to a `bool` -- and huggingface_hub
+    1.28.0 validates the field by exact type, so every allenai OLMo config
+    raises `expected int, got bool (value: False)`. It is an upstream typo
+    meeting a strict validator, not a fact about the checkpoints, and `bool` is
+    a subclass of `int` so nothing downstream reads a different value.
+
+    It cost three lineage pairs -- OLMo-2-0425-1B, OLMoE-1B-7B-0125 and Olmo-3
+    -- of the family this campaign's ladder work is built on, all of them
+    already in local cache, so leaving them out would have been a silent
+    narrowing of the population rather than a limit anyone chose.
+
+    **Patching `__annotations__` alone does NOT work** and was tried first:
+    `StrictDataclass` captures field types at class-decoration time, so the
+    live type sits on `__dataclass_fields__[name].type` and the annotation is
+    read too early to matter. Both are set here; the field is the one that
+    counts.
+
+    Scoped to the four OLMo config classes, imported by module path. A sweep
+    over `dir(transformers)` was the first attempt and is wrong: attribute
+    access triggers the lazy import of every module in the package, including
+    image processors that raise on a torchvision-less install.
+    """
+    done = []
+    mods = [("olmo2", "Olmo2Config"), ("olmo3", "Olmo3Config"),
+            ("olmoe", "OlmoeConfig"), ("olmo", "OlmoConfig")]
+    for mod, cls in mods:
+        try:
+            m = __import__("transformers.models.%s.configuration_%s" % (mod, mod),
+                           fromlist=[cls])
+            C = getattr(m, cls)
+            f = getattr(C, "__dataclass_fields__", {}).get("tie_word_embeddings")
+        except Exception:
+            continue
+        if f is not None and getattr(f, "type", None) is int:
+            f.type = bool
+            try:
+                C.__annotations__["tie_word_embeddings"] = bool
+            except Exception:
+                pass
+            done.append(cls)
+    return done
+
+
 def prompts():
     from malignment.prompts import Prompts
     ps = [p for p in Prompts.all()
@@ -169,8 +216,12 @@ def main(argv=None):
         return
 
     from malignment import Checkpoint
+    patched = unbreak_olmo()
+    if patched:
+        print("patched for load: %s" % ", ".join(patched))
     os.makedirs(RESULTS, exist_ok=True)
     t0 = time.time()
+    fails = []
     for mi, (mid, arm, base) in enumerate(todo, 1):
         safe = mid.replace("/", "__").replace("@", "__at__")
         out = os.path.join(RESULTS, safe + ".csv")
@@ -183,7 +234,22 @@ def main(argv=None):
             continue
         #: the load is skipped entirely when every draw is already stored --
         #: which is the whole point of consulting the cache before loading.
-        ld = ck.load() if need else None
+        #:
+        #: AND A FAILURE HERE MUST NOT END THE SWEEP. The first run of this file
+        #: had no guard and died at model 23 of 56 on
+        #: `allenai/OLMo-2-0425-1B` -- `tie_word_embeddings` typed `int` against
+        #: a `bool` in a strict hub dataclass, which is an environment fault and
+        #: not a fact about the checkpoint. Six hours of completed work survived
+        #: only because the stash had it; nothing about the design earned that.
+        #: One unloadable checkpoint costs its own cell, never the run.
+        try:
+            ld = ck.load() if need else None
+        except Exception as e:
+            fails.append((mid, str(e).split("\n")[0][:160]))
+            print("  [%d/%d] %-46s LOAD FAILED %s"
+                  % (mi, len(todo), mid[:46], str(e).split("\n")[0][:70]),
+                  flush=True)
+            continue
         rows = []
         try:
             for p in ps:
@@ -191,6 +257,14 @@ def main(argv=None):
                                   template=False,
                                   decoder={"max_new_tokens": MAX_NEW})
                 rows += [row(mid, arm, base, p, i, g) for i, g in enumerate(got)]
+        except Exception as e:
+            #: a model that loads and then fails mid-battery leaves NO csv, so
+            #: the next run retries it rather than reading a short one as done.
+            fails.append((mid, str(e).split("\n")[0][:160]))
+            print("  [%d/%d] %-46s GENERATE FAILED %s"
+                  % (mi, len(todo), mid[:46], str(e).split("\n")[0][:70]),
+                  flush=True)
+            continue
         finally:
             if ld is not None:
                 del ld
@@ -207,7 +281,14 @@ def main(argv=None):
         print("  [%d/%d] %-46s %d rows  (%d prompts generated, %.1f min elapsed)"
               % (mi, len(todo), mid[:46], len(rows), len(need),
                  (time.time() - t0) / 60), flush=True)
+    #: STATED, not left to whoever counts the CSVs. A sweep that ends without
+    #: naming what it dropped reads as complete coverage, and the shards on
+    #: disk cannot distinguish "never attempted" from "attempted and failed".
     print("-> %s  (%.1f min)" % (RESULTS, (time.time() - t0) / 60))
+    print("%d of %d models produced a shard; %d FAILED"
+          % (len(todo) - len(fails), len(todo), len(fails)))
+    for mid, err in fails:
+        print("   FAILED %-46s %s" % (mid[:46], err))
 
 
 if __name__ == "__main__":
