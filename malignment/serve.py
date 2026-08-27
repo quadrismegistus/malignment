@@ -1725,21 +1725,21 @@ class Handler(BaseHTTPRequestHandler):
                 "mc.js_total AS js_total, mc.departed AS departed, "
                 "mc.arrived AS arrived, mc.n_fall AS n_fall, mc.n_rise AS n_rise, "
                 "mc.resid_base AS resid_base, mc.resid_aligned AS resid_aligned "
-                "FROM {db}.movement_cells mc INNER JOIN {db}.endpoints e "
+                "FROM {db}.movement_cells_v4 mc INNER JOIN {db}.endpoints e "
                 "ON e.base = mc.base AND e.endpoint = mc.aligned "
                 "WHERE mc.rule = 'canonical' AND mc.prompt = '" + esc + "' "
                 "ORDER BY js_total DESC")
             movers = ch.query(
                 "SELECT word, sum(delta) AS d, count() AS n "
-                "FROM {db}.movement m INNER JOIN {db}.endpoints e "
+                "FROM {db}.movement_v4 m INNER JOIN {db}.endpoints e "
                 "ON e.base = m.base AND e.endpoint = m.aligned "
-                "WHERE m.rule = 'canonical' AND m.prompt = '" + esc + "' "
+                "WHERE m.rule = 'canonical' AND m.frame_base = '' AND m.frame_aligned = '' AND m.prompt = '" + esc + "' "
                 "GROUP BY word ORDER BY d DESC LIMIT 8")
             fallers = ch.query(
                 "SELECT word, sum(delta) AS d, count() AS n "
-                "FROM {db}.movement m INNER JOIN {db}.endpoints e "
+                "FROM {db}.movement_v4 m INNER JOIN {db}.endpoints e "
                 "ON e.base = m.base AND e.endpoint = m.aligned "
-                "WHERE m.rule = 'canonical' AND m.prompt = '" + esc + "' "
+                "WHERE m.rule = 'canonical' AND m.frame_base = '' AND m.frame_aligned = '' AND m.prompt = '" + esc + "' "
                 "GROUP BY word ORDER BY d ASC LIMIT 8")
             #: THE PARTNER, if this frame is half of a declared contrast. The
             #: `prompts` table carries `pair_id`/`pair_role`, so the partner is
@@ -1787,8 +1787,8 @@ class Handler(BaseHTTPRequestHandler):
                     "the pairs measured at this prompt." % (base, aligned))
             e = lambda x: x.replace("\\", "\\\\").replace("'", "\\'")
             words = ch.query(
-                "SELECT word, p_base, p_aligned, delta, cls FROM {db}.movement "
-                "WHERE rule = 'canonical' AND prompt = '" + e(text) + "' "
+                "SELECT word, p_base, p_aligned, delta, cls FROM {db}.movement_v4 "
+                "WHERE rule = 'canonical' AND frame_base = '' AND frame_aligned = '' AND prompt = '" + e(text) + "' "
                 "AND base = '" + e(base) + "' AND aligned = '" + e(aligned) + "' "
                 "ORDER BY delta ASC")
             #: THE RESIDUALS TRAVEL WITH THE WORDS. Both arms are truncated at
@@ -1797,7 +1797,7 @@ class Handler(BaseHTTPRequestHandler):
             #: the columns as summing to 1. They do not, and the gap is the
             #: aperture this campaign keeps paying attention to.
             cells = ch.query(
-                "SELECT model, total, n_words FROM {db}.twp_cells WHERE prompt = '"
+                "SELECT model, total FROM {db}.twp_cells_v4_best WHERE prompt = '"
                 + e(text) + "' AND model IN ('" + e(base) + "','" + e(aligned) + "')")
             resid = {c["model"]: c for c in cells}
             return {"prompt": text, "base": base, "aligned": aligned,
