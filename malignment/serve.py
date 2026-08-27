@@ -555,28 +555,37 @@ def _cjk_mask_status():
 
 #: ── PROMPTS: the frames, and how much each one moves.
 #:
-#: **THE ARITHMETIC IS IN `views.py`, NOT HERE.** `prompt_movement` and
-#: `prompt_coverage` are VIEWS; this selects from them and joins the metadata.
-#: The module rule holds: the server is not deriving a median, it is reading one
-#: a view defines, and the view is versioned in a file with the rest of them.
-#:
-#: **CACHED BECAUSE IT IS MEASURED SLOW, NOT BECAUSE IT FELT SLOW.** The rollup
-#: is 13.9 s over 4,484 prompts and 400,267 cells. `views.py` says materialise
-#: only on a measured reason -- that is one, and a MATERIALISED TABLE was still
-#: the wrong answer: it needs a refresh discipline, and a stale one is invisible.
-#: This repo lost a day to exactly that when `{db}.pairs` went stale and every
-#: row count stayed plausible. A cache with a TTL and a `computed_at` the panel
-#: shows is the version whose staleness is on screen.
+#: **READ FROM A PRE-COMPUTED PARQUET, NOT FROM CLICKHOUSE.** The rollup query
+#: takes ~90s over v4 views. `scripts/produce_prompt_rollup.py` runs it once,
+#: writes ~/malignment-data/prompt_rollup.parquet (0.3 MB), and this reads it
+#: on startup. Re-run the producer after any ingest that changes the population.
+#: `computed_at` from the file's metadata is shown on the panel so staleness is
+#: visible. Falls back to CH if the parquet is missing.
 _PROMPTS = {"at": 0.0, "rows": None, "computed_at": None, "undeclared": None}
-_PROMPTS_TTL = 900
+_PROMPTS_ROLLUP = os.path.join(
+    os.environ.get("MALIGNMENT_DATA", os.path.expanduser("~/malignment-data")),
+    "prompt_rollup.parquet")
 
 
 def _prompt_rows():
+    if _PROMPTS["rows"] is not None:
+        return _PROMPTS["rows"], _PROMPTS["computed_at"]
+    if os.path.exists(_PROMPTS_ROLLUP):
+        import pandas as pd, pyarrow.parquet as pq
+        table = pq.read_table(_PROMPTS_ROLLUP)
+        meta = table.schema.metadata or {}
+        computed_at = meta.get(b"computed_at", b"").decode() or "unknown"
+        undeclared = int(meta.get(b"n_measured_undeclared", b"0").decode() or 0)
+        df = table.to_pandas()
+        rows = df.where(df.notnull(), None).to_dict("records")
+        _PROMPTS["rows"] = rows
+        _PROMPTS["computed_at"] = computed_at
+        _PROMPTS["undeclared"] = undeclared
+        return rows, computed_at
+    #: FALLBACK: query CH directly if the parquet is missing.
     from . import ch
-    now = _monotonic()
-    if _PROMPTS["rows"] is None or now - _PROMPTS["at"] > _PROMPTS_TTL:
-        import datetime
-        rows = ch.query("""
+    import datetime
+    rows = ch.query("""
 SELECT p.prompt AS prompt, p.prompt_id AS prompt_id, p.domain AS domain,
        p.subdomain AS subdomain, p.family AS family, p.language AS language,
        p.contrast_type AS contrast_type, p.pair_id AS pair_id,
@@ -597,16 +606,11 @@ LEFT JOIN (SELECT * FROM {db}.prompt_movement_v4_crossframe
            WHERE rule = 'canonical' AND system_mode_aligned = 'empty') xf
        ON xf.prompt = p.prompt
 """)
-        #: **DECLARED AGAINST MEASURED, COUNTED.** The `prompts` table declares
-        #: 3,120; `twp_words` holds 4,484 distinct, so ~1,760 measured prompts
-        #: are not in the roster's table. A panel that showed only the declared
-        #: ones without saying so would present a 3,120-row table as the corpus.
-        _PROMPTS["undeclared"] = ch.scalar(
-            "SELECT count() FROM (SELECT DISTINCT prompt FROM {db}.twp_words "
-            "WHERE prompt NOT IN (SELECT prompt FROM {db}.prompts))", 0)
-        _PROMPTS["rows"] = rows
-        _PROMPTS["at"] = now
-        _PROMPTS["computed_at"] = datetime.datetime.now().isoformat(timespec="seconds")
+    _PROMPTS["undeclared"] = ch.scalar(
+        "SELECT count() FROM (SELECT DISTINCT prompt FROM {db}.twp_words "
+        "WHERE prompt NOT IN (SELECT prompt FROM {db}.prompts))", 0)
+    _PROMPTS["rows"] = rows
+    _PROMPTS["computed_at"] = datetime.datetime.now().isoformat(timespec="seconds")
     return _PROMPTS["rows"], _PROMPTS["computed_at"]
 
 
