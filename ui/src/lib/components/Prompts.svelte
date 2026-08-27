@@ -174,8 +174,15 @@
 
 	let epView = $derived.by(() => {
 		if (!profile) return [];
-		const out = profile.endpoints.slice();
-		out.sort((a, b) => {
+		const xfByPair = new Map<string, any>();
+		for (const x of profile.xf_endpoints ?? []) {
+			xfByPair.set(x.base + '>' + x.aligned, x);
+		}
+		const out = profile.endpoints.map((e: any) => {
+			const xf = xfByPair.get(e.base + '>' + e.aligned);
+			return { ...e, xf_js_total: xf?.js_total ?? null, xf_departed: xf?.departed ?? null, xf_arrived: xf?.arrived ?? null };
+		});
+		out.sort((a: any, b: any) => {
 			const x = (a as Record<string, unknown>)[epSort];
 			const y = (b as Record<string, unknown>)[epSort];
 			const c = typeof x === 'number' ? (x as number) - (y as number) : String(x).localeCompare(String(y));
@@ -463,7 +470,11 @@
 			<button class="ghost" onclick={() => { pair = null; pw = null; selected = null; profile = null; }}>← all prompts</button>
 		</div>
 		<h2 class="pt">{short(pair.base)} → {short(pair.aligned)}</h2>
-		<p class="muted small">{selected}</p>
+		<div class="frame-toggle">
+			<button class:active={pairFrame === 'raw'} onclick={() => { pairFrame = 'raw'; openPair(pair.base, pair.aligned); }}>raw → raw</button>
+			<button class:active={pairFrame === 'crossframe'} onclick={() => { pairFrame = 'crossframe'; openPair(pair.base, pair.aligned); }}>raw → framed</button>
+		</div>
+		<p class="muted small">{selected}{pairFrame === 'crossframe' ? ' (cross-frame, system_mode=empty)' : ''}</p>
 		{#if pwLoading}
 			<p class="muted">reading…</p>
 		{:else if pw}
@@ -698,7 +709,7 @@
 				<table>
 					<thead>
 						<tr>
-							{#each [['base', 'base'], ['aligned', 'aligned'], ['relation', 'relation'], ['js_total', 'movement'], ['departed', 'fallen'], ['arrived', 'risen'], ['n_fall', 'n fell'], ['n_rise', 'n rose'], ['resid_base', 'resid base'], ['resid_aligned', 'resid aligned']] as [k, l] (k)}
+							{#each [['base', 'base'], ['aligned', 'aligned'], ['relation', 'relation'], ['js_total', 'movement'], ['departed', 'fallen'], ['arrived', 'risen'], ['n_fall', 'n fell'], ['n_rise', 'n rose'], ['resid_base', 'resid base'], ['resid_aligned', 'resid aligned'], ['xf_js_total', 'xf movement']] as [k, l] (k)}
 								<th class:on={epSort === k} class:num={k !== 'base' && k !== 'aligned' && k !== 'relation'}>
 									<button onclick={() => epSortBy(k)}>
 										{l}{#if epSort === k}<span class="dir">{epDesc ? '▾' : '▴'}</span>{/if}
@@ -732,41 +743,13 @@
 								<td class="num">{e.n_rise}</td>
 								<td class="num">{n(e.resid_base, 3)}</td>
 								<td class="num">{n(e.resid_aligned, 3)}</td>
+								<td class="num">{e.xf_js_total ? n(e.xf_js_total) : ''}</td>
 							</tr>
 						{/each}
 					</tbody>
 				</table>
 			</div>
 
-			{#if profile.xf_endpoints?.length}
-				<h3>
-					cross-frame endpoints <span class="muted">{profile.xf_endpoints.length} pairs, raw base → framed aligned (system_mode=empty)</span>
-				</h3>
-				<div class="tablewrap">
-					<table>
-						<thead>
-							<tr>
-								<th>base</th><th>aligned</th>
-								<th class="num">movement</th><th class="num">fallen</th><th class="num">risen</th>
-								<th class="num">n fell</th><th class="num">n rose</th>
-							</tr>
-						</thead>
-						<tbody>
-							{#each profile.xf_endpoints as e (e.base + e.aligned)}
-								<tr>
-									<td title={e.base}>{short(e.base)}</td>
-									<td title={e.aligned}>{short(e.aligned)}</td>
-									<td class="num">{n(e.js_total)}</td>
-									<td class="num">{n(e.departed)}</td>
-									<td class="num">{n(e.arrived)}</td>
-									<td class="num">{e.n_fall}</td>
-									<td class="num">{e.n_rise}</td>
-								</tr>
-							{/each}
-						</tbody>
-					</table>
-				</div>
-			{/if}
 		{/if}
 	{/if}
 </div>
