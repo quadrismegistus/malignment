@@ -1824,12 +1824,23 @@ class Handler(BaseHTTPRequestHandler):
             # build per-word per-arm arrays
             base_models = sorted(ep.keys())
             aligned_models = sorted(ep.values())
-            # select top words by base mass
-            base_mass = {}
+            # select top movers: top N/2 risers + top N/2 fallers by median delta
+            import statistics as _st
+            word_deltas = {}
             for bm in base_models:
-                for w, p in (by.get(bm) or {}).items():
-                    base_mass[w] = base_mass.get(w, 0) + p
-            words_sel = sorted(base_mass, key=lambda w: -base_mass[w])[:top]
+                am = ep[bm]
+                if bm not in by or am not in by:
+                    continue
+                for w in set(list((by.get(bm) or {}).keys()) + list((by.get(am) or {}).keys())):
+                    pb = (by.get(bm) or {}).get(w, 0)
+                    pa = (by.get(am) or {}).get(w, 0)
+                    word_deltas.setdefault(w, []).append(pa - pb)
+            word_med = {w: _st.median(ds) for w, ds in word_deltas.items() if len(ds) >= 3}
+            half = max(top // 2, 1)
+            by_delta = sorted(word_med, key=lambda w: word_med[w])
+            fallers = by_delta[:half]
+            risers = by_delta[-half:]
+            words_sel = list(dict.fromkeys(fallers + risers))
             n_units = 0
             unit_rows = []
             for bm in base_models:
@@ -1874,7 +1885,7 @@ class Handler(BaseHTTPRequestHandler):
                               "lo": round(lo, 6), "hi": round(hi, 6)})
             diffs.sort(key=lambda x: x["d"])
             return {"prompt": text, "n_units": n_units,
-                    "words": words_sel, "selection": "top %d by base mass" % top,
+                    "words": words_sel, "selection": "top %d movers (%d fallers + %d risers)" % (len(words_sel), len(fallers), len(risers)),
                     "levels": levels, "diffs": diffs,
                     "rung_labels": ["base", "aligned"]}
         if path == "/pair_words":
