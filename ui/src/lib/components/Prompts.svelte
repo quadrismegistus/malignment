@@ -738,35 +738,35 @@
 				</table>
 			</div>
 
-ttt{#if profile.xf_endpoints?.length}
-tttt<h3>
-tttttcross-frame endpoints <span class="muted">{profile.xf_endpoints.length} pairs, raw base → framed aligned (system_mode=empty)</span>
-tttt</h3>
-tttt<div class="tablewrap">
-ttttt<table>
-tttttt<thead>
-ttttttt<tr>
-tttttttt<th>base</th><th>aligned</th>
-tttttttt<th class="num">movement</th><th class="num">fallen</th><th class="num">risen</th>
-tttttttt<th class="num">n fell</th><th class="num">n rose</th>
-ttttttt</tr>
-tttttt</thead>
-tttttt<tbody>
-ttttttt{#each profile.xf_endpoints as e (e.base + e.aligned)}
-tttttttt<tr>
-ttttttttt<td title={e.base}>{short(e.base)}</td>
-ttttttttt<td title={e.aligned}>{short(e.aligned)}</td>
-ttttttttt<td class="num">{n(e.js_total)}</td>
-ttttttttt<td class="num">{n(e.departed)}</td>
-ttttttttt<td class="num">{n(e.arrived)}</td>
-ttttttttt<td class="num">{e.n_fall}</td>
-ttttttttt<td class="num">{e.n_rise}</td>
-tttttttt</tr>
-ttttttt{/each}
-tttttt</tbody>
-ttttt</table>
-tttt</div>
-ttt{/if}
+			{#if profile.xf_endpoints?.length}
+				<h3>
+					cross-frame endpoints <span class="muted">{profile.xf_endpoints.length} pairs, raw base → framed aligned (system_mode=empty)</span>
+				</h3>
+				<div class="tablewrap">
+					<table>
+						<thead>
+							<tr>
+								<th>base</th><th>aligned</th>
+								<th class="num">movement</th><th class="num">fallen</th><th class="num">risen</th>
+								<th class="num">n fell</th><th class="num">n rose</th>
+							</tr>
+						</thead>
+						<tbody>
+							{#each profile.xf_endpoints as e (e.base + e.aligned)}
+								<tr>
+									<td title={e.base}>{short(e.base)}</td>
+									<td title={e.aligned}>{short(e.aligned)}</td>
+									<td class="num">{n(e.js_total)}</td>
+									<td class="num">{n(e.departed)}</td>
+									<td class="num">{n(e.arrived)}</td>
+									<td class="num">{e.n_fall}</td>
+									<td class="num">{e.n_rise}</td>
+								</tr>
+							{/each}
+						</tbody>
+					</table>
+				</div>
+			{/if}
 		{/if}
 	{/if}
 </div>
