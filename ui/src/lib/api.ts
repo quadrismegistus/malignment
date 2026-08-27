@@ -434,10 +434,11 @@ export const api = {
 			rows: PromptRow[];
 		}>('/prompts'),
 	prompt: (text: string) => get<PromptProfile>(`/prompt?text=${encodeURIComponent(text)}`),
-	pairWords: (text: string, base: string, aligned: string) =>
+	pairWords: (text: string, base: string, aligned: string, frame?: string) =>
 		get<PairWords>(
 			`/pair_words?text=${encodeURIComponent(text)}&base=${encodeURIComponent(base)}` +
-				`&aligned=${encodeURIComponent(aligned)}`
+				`&aligned=${encodeURIComponent(aligned)}` +
+				(frame ? `&frame=${encodeURIComponent(frame)}` : '')
 		),
 	plots: () => get<{ plots: PlotSpec[] }>('/plots'),
 	//: Filtered SERVER-SIDE over a cached set, in Python, never with a LIKE —

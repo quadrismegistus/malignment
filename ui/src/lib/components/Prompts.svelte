@@ -201,6 +201,7 @@
 	let pair = $state<{ base: string; aligned: string } | null>(null);
 	let pw = $state<PairWords | null>(null);
 	let pwLoading = $state(false);
+tlet pairFrame = $state<string>("raw");
 	let wSort = $state<'word' | 'p_base' | 'p_aligned' | 'delta' | 'absdelta' | 'cls'>('delta');
 	let wDesc = $state(false);
 
@@ -211,7 +212,7 @@
 		wSort = 'delta';
 		wDesc = false;
 		api
-			.pairWords(selected as string, base, aligned)
+			.pairWords(selected as string, base, aligned, pairFrame === "crossframe" ? "crossframe" : undefined)
 			.then((r) => (pw = r))
 			.catch((e) => (error = e instanceof Error ? e.message : String(e)))
 			.finally(() => (pwLoading = false));
@@ -650,7 +651,7 @@
 				</div>
 			{/if}
 
-			<h3>words <span class="muted">{profile.movers_note}</span></h3>
+			<h3>words — raw→raw <span class="muted">{profile.movers_note}</span></h3>
 			<div class="movers">
 				<div>
 					<span class="lbl rise">risen</span>
@@ -665,6 +666,23 @@
 					{/each}
 				</div>
 			</div>
+			{#if profile.xf_top_risers?.length || profile.xf_top_fallers?.length}
+				<h3>words — cross-frame <span class="muted">raw base → framed aligned (system_mode=empty)</span></h3>
+				<div class="movers">
+					<div>
+						<span class="lbl rise">risen</span>
+						{#each profile.xf_top_risers ?? [] as w (w.word)}
+							<span class="w">{w.word} <b>{w.d > 0 ? '+' : ''}{n(w.d, 3)}</b></span>
+						{/each}
+					</div>
+					<div>
+						<span class="lbl fall">fallen</span>
+						{#each profile.xf_top_fallers ?? [] as w (w.word)}
+							<span class="w">{w.word} <b>{n(w.d, 3)}</b></span>
+						{/each}
+					</div>
+				</div>
+			{/if}
 
 			<h3>
 				endpoints <span class="muted">{profile.endpoints.length} declared pairs measured here</span>
@@ -719,6 +737,36 @@
 					</tbody>
 				</table>
 			</div>
+
+ttt{#if profile.xf_endpoints?.length}
+tttt<h3>
+tttttcross-frame endpoints <span class="muted">{profile.xf_endpoints.length} pairs, raw base → framed aligned (system_mode=empty)</span>
+tttt</h3>
+tttt<div class="tablewrap">
+ttttt<table>
+tttttt<thead>
+ttttttt<tr>
+tttttttt<th>base</th><th>aligned</th>
+tttttttt<th class="num">movement</th><th class="num">fallen</th><th class="num">risen</th>
+tttttttt<th class="num">n fell</th><th class="num">n rose</th>
+ttttttt</tr>
+tttttt</thead>
+tttttt<tbody>
+ttttttt{#each profile.xf_endpoints as e (e.base + e.aligned)}
+tttttttt<tr>
+ttttttttt<td title={e.base}>{short(e.base)}</td>
+ttttttttt<td title={e.aligned}>{short(e.aligned)}</td>
+ttttttttt<td class="num">{n(e.js_total)}</td>
+ttttttttt<td class="num">{n(e.departed)}</td>
+ttttttttt<td class="num">{n(e.arrived)}</td>
+ttttttttt<td class="num">{e.n_fall}</td>
+ttttttttt<td class="num">{e.n_rise}</td>
+tttttttt</tr>
+ttttttt{/each}
+tttttt</tbody>
+ttttt</table>
+tttt</div>
+ttt{/if}
 		{/if}
 	{/if}
 </div>
@@ -809,5 +857,15 @@
 		margin-left: 6px; font-size: 9px; padding: 1px 4px; border-radius: 3px;
 		border: 1px solid var(--amber, #b8860b); color: var(--amber, #b8860b);
 		font-family: var(--mono); cursor: help;
+	}
+
+	.frame-toggle { display: flex; gap: 2px; margin: 4px 0; }
+	.frame-toggle button {
+		background: var(--panel-2, #333); border: 1px solid var(--rule, #555);
+		border-radius: 4px; padding: 2px 10px; cursor: pointer;
+		font-size: 0.75rem; color: var(--text-3);
+	}
+	.frame-toggle button.active {
+		background: var(--blue, #4e79a7); color: #fff; border-color: var(--blue);
 	}
 </style>
