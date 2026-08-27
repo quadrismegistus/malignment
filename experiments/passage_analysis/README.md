@@ -39,6 +39,11 @@ Nowhere near quotable. Exactly the shape a site-conditional page-grain effect wo
 
 ## Questions here
 
+**Eleven folders. One has run nothing, and it is the only one open.** This list was
+wrong in two directions before 2026-08-27: it omitted four folders entirely, two of
+which carry headline findings, and it described two others as un-run when both had
+run. Statuses below were read from each folder's own README, not inherited.
+
     interiority_in_passages/    COMPLETE. Does alignment shift passages toward
                                 interior state? It does not change HOW inner life
                                 is represented, it changes HOW MUCH there is.
@@ -58,23 +63,61 @@ Nowhere near quotable. Exactly the shape a site-conditional page-grain effect wo
                                 nats/word drop, against +0.025 for level. Selection,
                                 not combination -- Jakobson's axes as an arithmetic
                                 partition that sums exactly.
-    drift_geometry/             PORTED, new analysis not yet run. What the
-                                geometric drift metrics can mean (total_drift is
-                                order-INVARIANT and 92% noise per passage;
-                                directedness IS sentence count, rho -0.923), and
-                                whether mean_drift tracks what a reader calls
-                                staying in the scene.
-    predicting_aligned_text/    OPEN, and NOT blocked by the fleet. Can the arm be
-                                predicted from a page, and can NAMED scales do it?
-                                Its corpus is gen_sequences, not twp, so it does
-                                not wait on lineage coverage the way the
+    drift_geometry/             RUN 2026-08-20. What the geometric drift metrics can
+                                mean, and do they track what a reader calls staying
+                                in the scene? THEY DO: against interiority's blind
+                                coding, `total_drift` separates HOLDS from SHIFTS at
+                                27/27 pairs, p=1.5e-08, and 29/29 where there is no
+                                length difference. The four audit defects stand and
+                                the construct is vindicated -- see below, the "92%
+                                noise" figure does NOT apply to this folder.
+    syntagmatic_damage/         RUN. When a model is forced to utter a word alignment
+                                demoted, what happens to the sentence around it? Nine
+                                archived measurements synthesised, then re-run: the
+                                archived nulls were WINDOW-LIMITED. At a 30-token
+                                window with probability controlled, movement predicts
+                                downstream surprisal in the ALIGNED ARM ONLY. One gap
+                                still open -- no true third-party scorer has ever read
+                                a forced passage.
+    surprisal_matrix/           COMPLETE. The same text scored by several observers
+                                (self H, lineage partner X, external reference Q).
+                                RH's question: does alignment reduce entropy only from
+                                the model's own POV? Self falls furthest -- H -0.1814
+                                at 0/20 up, Q -0.1433, outsider's excess +0.0392 at
+                                19/20, p=4.0e-05. About 22% of alignment's
+                                self-narrowing does not transfer to an outsider. A
+                                retry of F18's "private language", run before the seat
+                                recognised it as one.
+    passage_norms/             COMPLETE. Does the word-level norm signature survive
+                                to the page? Ten keys replicate at q<.05 on both
+                                corpora with the same sign; sign agreement 94/110
+                                (85%) against 50% chance, no key CONTRADICTED. Aligned
+                                prose carries more inner states, emotion, positive
+                                framing and passivity; fewer people named by role,
+                                fewer quantities, less bodily harm. One movement:
+                                inward and away from the body, the named person and
+                                the number.
+    jakobson_space/            AXES BUILT, anchor placed. What do F15 and F16's axes
+                                look like rebuilt on OUR corpus? All three built;
+                                the external axis twice (BLT bytes, then deepseek
+                                tokens -- the latter is the one to use). Carries
+                                `alignment_smooths.md`: 42 of 46 contrasts lower,
+                                median -0.2274 bits/byte, p=5.1e-09, aligned models
+                                collapsing onto 1.135 against base's 1.389.
+    novel_arc/                 RUN. Where does LLM fiction sit in the formal sweep of
+                                literary history? Alignment rewinds abstraction about
+                                fifty-six years (base ~1973, aligned ~1917, API ~1903
+                                on the chicago curve) and overshoots interiority
+                                entirely -- the aligned model sits above every period
+                                in the human range. RH's 1880-1920 prediction was
+                                recorded in PREDICTION.md before the curve existed.
+    predicting_aligned_text/    OPEN -- THE ONLY ONE. Nothing has been run here; its
+                                14 files are the archive's verbatim copy-in,
+                                sha256-verified 20 of 20. Can the arm be predicted
+                                from a page, and can NAMED scales do it? NOT blocked:
+                                its corpus is gen_sequences, not twp, so it does not
+                                wait on lineage coverage the way the
                                 distribution-grain work does.
-    syntagmatic_damage/         PORTED, not re-run. When a model is forced to utter a
-                                word alignment demoted, what happens to the sentence
-                                around it? Nine archived measurements synthesised:
-                                alignment changes SELECTION and leaves COMBINATION
-                                alone. One gap named -- no true third-party scorer has
-                                ever read a forced passage.
 
 ## The tension worth keeping visible
 
@@ -103,10 +146,56 @@ Neither supersedes the other and the audit in `drift_geometry/` does NOT reach
 interiority's H3 -- a coder reading in order is not noise-limited, has no
 directedness and no truncation, and is already aggregated to the lineage pair.
 
-**They may converge, which is the interesting part.** Interiority finds alignment
-raises `drift = HOLDS` (+4.726pp, 14/17 pairs); the audit notes in passing that
-drift FALLS under alignment. Less dispersion and more holding are the same claim
-from two instruments. Testing that is what `drift_geometry/` is for.
+**They converge, and this has now been measured rather than hoped for.** Interiority
+finds alignment raises `drift = HOLDS` (+4.726pp, 14/17 pairs); the audit noted in
+passing that drift FALLS under alignment. `drift_geometry/` ran the join on
+2026-08-20 against the coded classes -- 5,808 narrative passages over 27 lineage
+pairs, held on `n_sents`, tested within arm so the arm cannot manufacture the
+association:
+
+    metric          diff     boot 95% CI      per-pair   sign p
+    mean_drift   +0.0208  [+0.014,+0.028]      24/27    4.9e-05
+    total_drift  +0.0315  [+0.025,+0.040]      27/27     1.5e-08
+
+Less dispersion and more holding were the same claim from two instruments, and the
+geometry agrees with a blind reader at kappa 0.904 across every lineage pair.
+
+**Two riders that a citation of the audit alone would get wrong.** First, the "92%
+noise" figure (ICC 0.082) was measured with `paraphrase-multilingual-MiniLM-L12-v2`
+on the F15 population and is a property of the *(corpus, embedder, truncation)*
+triple, not of the metric; on `bge-m3` over `f11_l2` -- the configuration this
+subject actually uses -- reliability is four to six times that, so the headline does
+not apply to anything measured here. Second, the audit's preference for `mean_drift`
+over `total_drift` is now unsupported: against the only external criterion available,
+`total_drift` separates the classes most consistently, despite being the metric the
+audit criticised hardest. Order-invariance and per-passage noisiness are both still
+real; they simply do not stop a group mean from separating.
+
+## WHAT IS STILL UNPORTED FROM THE ARCHIVE
+
+The M06 passage-grain findings are ported or inherited by citation, with two
+exceptions, checked by grepping every finding name against this whole subject on
+2026-08-27.
+
+**`AB_surface_and_clauses.md` is `status: current` and is referenced NOWHERE here.**
+It is a real result and it belongs to this subject by grain:
+
+> aligned prose is LESS lexically diverse (a registered hypothesis REVERSED, p .003,
+> surviving its own conditioning table) and packs MORE dependent clauses per 1,000
+> words into SHORTER clauses (p .002 / p .028) while every per-sentence ratio sits
+> flat -- **compressed subordination, exactly the surface the per-sentence
+> denominators cannot see.** Sentence length itself: not supported.
+
+197,186 passages over 42 pairs after the hardened prose/non-degenerate/English
+stratum. Its own rider: single analysis pass, no cross-seat audit. It sits beside
+`passage_norms/`'s "inward and away from the body" and `novel_arc/`'s abstraction
+rewind and has never been read against either.
+
+**`opening_matched.md` is WITHDRAWN at construction level** ([5811]) and is correctly
+left behind. The forced word conditions the generation but appears in NEITHER the
+prompt NOR the scored text, so forced rows are scored on a continuation carrying one
+more word of context than undisturbed rows. Nothing in it is a result. It is named
+here so that nobody ports it later on the strength of its title.
 
 ## One shape showing up at both grains
 

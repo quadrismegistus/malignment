@@ -5,7 +5,7 @@ role: finding
 seat: lacan
 topics: [surprisal, alignment, blt, cross-lingual, F15]
 producers: [build_population.py, population.py, smoothing.py]
-description: "Alignment lowers BLT bits-per-byte and compresses its spread: 42 of 46 contrasts, p=5.1e-09, on a fixed byte-level scorer across 94 models and two scripts. Survives degeneracy, script and fluency controls, each of which SHARPENS it. One model is the exception -- Llama-3.1-8B-Instruct is the highest-surprisal aligned model of 45. No human anchor yet, so the claim is model-relative."
+description: "Alignment lowers BLT bits-per-byte and compresses its spread: 42 of 46 contrasts, p=5.1e-09, on a fixed byte-level scorer across 94 models and two scripts. Survives degeneracy, script and fluency controls, each of which SHARPENS it. One model is the exception -- Llama-3.1-8B-Instruct is the highest-surprisal aligned model of 45. Every level here is MODEL-RELATIVE: the human anchor was built and placed 2026-08-21 but on a different scorer, population and language, so it does not transfer to these numbers -- see the fence in the body."
 ---
 # Alignment smooths, and compresses
 

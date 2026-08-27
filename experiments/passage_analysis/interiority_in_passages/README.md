@@ -1,3 +1,12 @@
+---
+subject: interiority_in_passages
+question: Does alignment shift passages toward interior state?
+status: |
+  COMPLETE. It does not change HOW inner life is represented, it changes HOW MUCH
+  there is. H1 +0.224, 16/17 pairs, p=0.00015.
+grain: page
+---
+
 # interiority_in_passages
 
 **id:** interiority_in_passages **status:** COMPLETE. 26 lineage pairs coded,

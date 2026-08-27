@@ -1,3 +1,13 @@
+---
+subject: surprisal_matrix
+question: Does alignment reduce entropy for an external observer, or only from the model's own point of view?
+status: |
+  RUN, 20 lineage pairs. Both fall and not equally: self H -0.1814 (0/20 up),
+  external Q -0.1433, outsider's excess Q-H +0.0392 (19/20, p=4.0e-05). A RETRY
+  of F18, run before the seat recognised it as one.
+grain: page
+---
+
 # surprisal_matrix
 
 **The same text, scored by several observers.** Named for the object rather than

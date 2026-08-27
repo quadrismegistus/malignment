@@ -1,3 +1,13 @@
+---
+subject: passage_norms
+question: Does the word-level norm signature survive to the page?
+status: |
+  RUN. Ten keys replicate at q<.05 on both corpora with the same sign; sign
+  agreement 94/110 (85%), no key CONTRADICTED. See STATUS at the foot of this
+  file -- an earlier header said "nothing run", contradicting this same document.
+grain: page
+---
+
 # passage_norms
 
 **Does the word-level signature survive to the page?** M06's Plan C
