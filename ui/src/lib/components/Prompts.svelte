@@ -789,9 +789,9 @@
 								stroke={col} stroke-width="1" opacity={opac * 0.7} />
 							<line x1={x1} x2={x1} y1={y(aligned.lo)} y2={y(aligned.hi)}
 								stroke={col} stroke-width="1" opacity={opac * 0.7} />
-							<circle cx={x0} cy={y(base.central)} r={role === 'other' ? 2 : 3}
+							<circle cx={x0} cy={y(base.central)} r={(isTopFaller || isTopRiser) ? 3 : 2}
 								fill={col} opacity={opac} />
-							<circle cx={x1} cy={y(aligned.central)} r={role === 'other' ? 2 : 3}
+							<circle cx={x1} cy={y(aligned.central)} r={(isTopFaller || isTopRiser) ? 3 : 2}
 								fill={col} opacity={opac} />
 						{/if}
 					{/each}
