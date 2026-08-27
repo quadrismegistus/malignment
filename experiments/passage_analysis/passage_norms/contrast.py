@@ -51,6 +51,26 @@ import argparse, glob, collections, math, os, statistics, sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.abspath(os.path.join(HERE, "..", "..", "..")))
 
+#: SHARDED CORPORA LIVE OUTSIDE THE CHECKOUT. `norms_ch` is 94 parquets and
+#: 237 MB -- data, not source -- so it sits under the same root and in the same
+#: one-directory-per-experiment shape as `novel_arc/` and `drift_geometry/`
+#: already use. `norms_quadrants.parquet` is 7.5 MB and stays in `results/`.
+DATA = os.environ.get("MALIGNMENT_DATA", os.path.expanduser("~/malignment-data"))
+
+
+def _shard_dir(corpus):
+    """The data root, falling back to the pre-move in-repo path.
+
+    The fallback is not politeness: a checkout that still has its shards under
+    `results/` would otherwise read NOTHING and report `no shards`, which is a
+    legible failure -- but one that looks identical to a corpus that was never
+    built, and the two want opposite responses.
+    """
+    new = os.path.join(DATA, "passage_norms", "norms_%s" % corpus)
+    return new if os.path.isdir(new) else os.path.join(HERE, "results",
+                                                       "norms_%s" % corpus)
+
+
 #: named in advance, in the folder README, before any of this ran
 REGISTERED = {
     "brysbaert_concreteness": "H1 alignment reduces concreteness (down)",
@@ -151,7 +171,7 @@ def analyse(corpus, a, pq, roster, excl=()):
         return set(ks)
 
     fp = os.path.join(HERE, "results", "norms_%s.parquet" % corpus)
-    dp = os.path.join(HERE, "results", "norms_%s" % corpus)
+    dp = _shard_dir(corpus)
     per = collections.defaultdict(lambda: collections.defaultdict(list))
     keyset, n, nsh = set(), 0, 0
     #: a SHARDED corpus is one parquet per model, reduced one shard at a time.

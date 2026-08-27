@@ -50,6 +50,10 @@ import argparse, collections, csv, os, sys, time
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.abspath(os.path.join(HERE, "..", "..", "..")))
 JAK = os.path.abspath(os.path.join(HERE, "..", "jakobson_space"))
+#: 94 shards, 237 MB. Data, not source -- same root and shape as `novel_arc/`
+#: and `drift_geometry/`. `contrast.py` resolves the same path and falls back
+#: to the pre-move `results/norms_ch/` if a checkout still has it there.
+DATA = os.environ.get("MALIGNMENT_DATA", os.path.expanduser("~/malignment-data"))
 
 #: passage-length corpora only. See the docstring on beam_fc.
 CH_CORPORA = ("passage", "f11_l2", "y", "passage_run2")
@@ -198,7 +202,7 @@ def _run_ch(a, t0, pa, pq):
     for base, members in lin.items():
         for m in members:
             arm[m] = "base" if m == base else "aligned"
-    outdir = a.out or os.path.join(HERE, "results", "norms_ch")
+    outdir = a.out or os.path.join(DATA, "passage_norms", "norms_ch")
     os.makedirs(outdir, exist_ok=True)
     models = ch_models()
     print("%d models, %s passages total" % (len(models),

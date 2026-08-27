@@ -56,7 +56,9 @@ pairs with both arms.
 
 **Corpus B, `ch`** -- 490,882 passages from `malign_logits.gen_sequences` over
 `passage`, `f11_l2`, `y`, `passage_run2`. No narrative filter, ~47 lineage pairs,
-written one parquet shard per model under `results/norms_ch/`.
+written one parquet shard per model under
+`$MALIGNMENT_DATA/passage_norms/norms_ch/` (default `~/malignment-data/`), NOT
+under `results/` -- 94 shards, 237 MB, moved out of the checkout 2026-08-27.
 
 **Corpus B IS FREE GENERATION ONLY, and this is the load-bearing filter.**
 `gen_sequences` mixes free continuations with FORCED-WORD generations, in which
@@ -233,9 +235,16 @@ was empty and either skipped finished work or re-run it.
 What actually exists:
 
     producers   measure.py, contrast.py
-    results     results/norms_ch/            per-model parquets
-                results/norms_quadrants.parquet
+    results     $MALIGNMENT_DATA/passage_norms/norms_ch/   94 per-model parquets,
+                                                          237 MB, OUTSIDE the
+                                                          checkout since 2026-08-27
+                results/norms_quadrants.parquet           7.5 MB, stays in repo
                 results/norms_ch.withdrawn_mixed_forced_word   (withdrawn, kept)
+
+`contrast.py --corpus ch` reads the data root and falls back to the old
+`results/norms_ch/` if a checkout still has it there, so the move is not a
+flag day. Verified after moving: 262,408 passages, 524 columns, 94 shards, 47
+lineage pairs -- the same corpus this file reports on above.
 
     reported    10 keys replicate at q<.05 on BOTH corpora with the same sign
                 sign agreement 94/110 (85%) against 50% chance
