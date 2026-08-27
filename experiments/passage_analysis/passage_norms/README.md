@@ -239,7 +239,11 @@ What actually exists:
                                                           237 MB, OUTSIDE the
                                                           checkout since 2026-08-27
                 results/norms_quadrants.parquet           7.5 MB, stays in repo
-                results/norms_ch.withdrawn_mixed_forced_word   (withdrawn, kept)
+                $MALIGNMENT_DATA/passage_norms/norms_ch.withdrawn_mixed_forced_word
+                                                          94 parquets, 237 MB,
+                                                          withdrawn but KEPT --
+                                                          moved beside the live
+                                                          corpus 2026-08-27
 
 `contrast.py --corpus ch` reads the data root and falls back to the old
 `results/norms_ch/` if a checkout still has it there, so the move is not a
@@ -258,4 +262,12 @@ its own document, and nothing more is claimed.
 
 The `.withdrawn_mixed_forced_word` directory is a withdrawal kept beside the
 result rather than deleted; anyone reading the numbers should know why it is
-there before quoting them.
+there before quoting them. It moved with the live corpus on 2026-08-27 and is
+still adjacent to it, at
+`$MALIGNMENT_DATA/passage_norms/norms_ch.withdrawn_mixed_forced_word` -- 94
+parquets, 248,598,029 bytes, against the live corpus's 248,574,022. **The two
+are within 0.01% of each other in size and differ only in which row survived
+the dedup**, which is exactly why the withdrawal is kept rather than deleted:
+nothing about the artifact's shape or size distinguishes the defective corpus
+from the sound one, and a reader who found only the numbers would have no way
+to tell that a first version of them was withdrawn.
