@@ -1799,6 +1799,84 @@ class Handler(BaseHTTPRequestHandler):
                     "movers_note": "delta summed over endpoint pairs "
                                    "measured at this prompt (%d raw, %d cross-frame)"
                                    % (len(per), len(xf_per))}
+        if path == "/prompt/slopes":
+            #: THE SLOPEGRAPH DATA for inline LayerChart rendering.
+            #: Per-word median probability at base and aligned, with bootstrap
+            #: CIs. Queries twp_words_v4_best (v4, frame='') directly.
+            rows, _ = _prompt_rows()
+            text = one("text", "")
+            if text not in {r["prompt"] for r in rows}:
+                raise KeyError("no such prompt")
+            top = _int(one("top"), 12, 1, 50)
+            from . import ch, roster
+            import numpy as np
+            import pandas as pd
+            ep, _ = roster.endpoints()
+            esc = text.replace("\\", "\\\\").replace("'", "\\'")
+            models = sorted({m for pair in ep.items() for m in pair})
+            inlist = ",".join("'" + m.replace("'", "\\'") + "'" for m in models)
+            got = ch.query(
+                "SELECT model, word, p FROM {db}.twp_words_v4_best "
+                "WHERE prompt = '" + esc + "' AND model IN (" + inlist + ")")
+            by = {}
+            for r in got:
+                by.setdefault(r["model"], {})[r["word"]] = float(r["p"])
+            # build per-word per-arm arrays
+            base_models = sorted(ep.keys())
+            aligned_models = sorted(ep.values())
+            # select top words by base mass
+            base_mass = {}
+            for bm in base_models:
+                for w, p in (by.get(bm) or {}).items():
+                    base_mass[w] = base_mass.get(w, 0) + p
+            words_sel = sorted(base_mass, key=lambda w: -base_mass[w])[:top]
+            n_units = 0
+            unit_rows = []
+            for bm in base_models:
+                am = ep[bm]
+                if bm not in by or am not in by:
+                    continue
+                n_units += 1
+                for w in words_sel:
+                    unit_rows.append({"unit": bm, "word": w, "position": 0,
+                                      "p": (by[bm].get(w) or 0.0005)})
+                    unit_rows.append({"unit": bm, "word": w, "position": 1,
+                                      "p": (by[am].get(w) or 0.0005)})
+            rng = np.random.default_rng(20260817)
+            df = pd.DataFrame(unit_rows)
+            levels = []
+            for (w, pos), g in df.groupby(["word", "position"], sort=False):
+                v = g["p"].values
+                central = float(np.median(v))
+                if len(v) >= 3:
+                    draws = np.median(rng.choice(v, size=(2000, len(v)), replace=True), axis=1)
+                    lo, hi = float(np.percentile(draws, 2.5)), float(np.percentile(draws, 97.5))
+                else:
+                    lo, hi = central, central
+                levels.append({"word": w, "position": int(pos),
+                               "central": round(central, 6),
+                               "lo": round(lo, 6), "hi": round(hi, 6), "n": len(v)})
+            # paired differences
+            a = df[df.position == 0].set_index(["unit", "word"])["p"]
+            b = df[df.position == 1].set_index(["unit", "word"])["p"]
+            d = (b - a).dropna().reset_index()
+            d.columns = ["unit", "word", "d"]
+            diffs = []
+            for w, g in d.groupby("word", sort=False):
+                vs = g["d"].values
+                md = float(np.median(vs))
+                if len(vs) >= 3:
+                    draws = np.median(rng.choice(vs, size=(2000, len(vs)), replace=True), axis=1)
+                    lo, hi = float(np.percentile(draws, 2.5)), float(np.percentile(draws, 97.5))
+                else:
+                    lo, hi = md, md
+                diffs.append({"word": w, "d": round(md, 6),
+                              "lo": round(lo, 6), "hi": round(hi, 6)})
+            diffs.sort(key=lambda x: x["d"])
+            return {"prompt": text, "n_units": n_units,
+                    "words": words_sel, "selection": "top %d by base mass" % top,
+                    "levels": levels, "diffs": diffs,
+                    "rung_labels": ["base", "aligned"]}
         if path == "/pair_words":
             #: Every word this pair puts at this prompt, both arms and the
             #: delta. The grain `{db}.movement` already stores, so nothing is
