@@ -695,6 +695,29 @@
 				</div>
 			{/if}
 
+			{#if epView.length > 1}
+				{@const maxJs = Math.max(...epView.map((e) => Math.max(e.js_total ?? 0, e.xf_js_total ?? 0)), 0.01)}
+				{@const dotW = 500}
+				{@const dotH = Math.max(80, epView.length * 8 + 30)}
+				{@const dotX = (v) => 40 + (v / maxJs) * (dotW - 80)}
+				{@const sorted = epView.slice().sort((a, b) => (b.js_total ?? 0) - (a.js_total ?? 0))}
+				<h3>movement by lineage <span class="muted">blue = raw→raw, red = cross-frame</span></h3>
+				<svg viewBox="0 0 {dotW} {dotH}" class="dotstrip" preserveAspectRatio="xMidYMid meet">
+					<line x1={dotX(0)} x2={dotX(0)} y1="14" y2={dotH - 12} stroke="#555" stroke-width="0.5" />
+					<text x={dotX(0)} y="10" text-anchor="middle" font-size="8" fill="#888">0</text>
+					<text x={dotX(maxJs)} y="10" text-anchor="middle" font-size="8" fill="#888">{maxJs.toFixed(2)}</text>
+					{#each sorted as e, i}
+						{@const y = 20 + i * ((dotH - 34) / Math.max(sorted.length - 1, 1))}
+						{#if e.xf_js_total}
+							<line x1={dotX(e.js_total)} x2={dotX(e.xf_js_total)} y1={y} y2={y}
+								stroke="#e1575944" stroke-width="1" />
+							<circle cx={dotX(e.xf_js_total)} cy={y} r="2.5" fill="#e15759" opacity="0.6" />
+						{/if}
+						<circle cx={dotX(e.js_total)} cy={y} r="2.5" fill="#4e79a7" opacity="0.7" />
+					{/each}
+				</svg>
+			{/if}
+
 			<h3>
 				endpoints <span class="muted">{profile.endpoints.length} declared pairs measured here</span>
 				{#if promptIsCJK && cjkKnown && affectedArms.length}
@@ -848,6 +871,7 @@
 		border-radius: 4px; padding: 2px 10px; cursor: pointer;
 		font-size: 0.75rem; color: var(--text-3);
 	}
+	.dotstrip { display: block; width: 100%; max-width: 500px; margin: 4px 0 8px; }
 	.frame-toggle button.active {
 		background: var(--blue, #4e79a7); color: #fff; border-color: var(--blue);
 	}
