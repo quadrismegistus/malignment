@@ -727,7 +727,13 @@
 				{@const padL = 58}
 				{@const padR = 100}
 				{@const top = Math.max(...slopes.levels.map((l) => l.hi), 0.001)}
-				{@const y = (v) => padT + (1 - v / top) * (H - padT - padB)}
+				{@const floor = 0.0005}
+				{@const logTop = Math.log10(top)}
+				{@const logFloor = Math.log10(floor)}
+				{@const y = (v) => {
+					const lv = Math.log10(Math.max(v, floor));
+					return padT + (logTop - lv) / (logTop - logFloor) * (H - padT - padB);
+				}}
 				{@const x0 = padL}
 				{@const x1 = W - padR}
 				{@const faller = slopes.diffs[0]?.word}
@@ -748,12 +754,14 @@
 					});
 				})()}
 				<h3>slopegraph <span class="muted">{slopes.selection}, {slopes.n_units} lineages, median with 95% CI</span></h3>
+				{@const logTicks = [0.001, 0.003, 0.01, 0.03, 0.1, 0.3].filter((t) => t >= floor && t <= top * 1.1)}
 				<svg class="slopegraph" viewBox="0 0 {W} {H}" preserveAspectRatio="xMidYMid meet">
-					<line x1={x0} x2={x1} y1={y(0)} y2={y(0)} stroke="#555" stroke-width="0.5" />
 					<text x={x0} y={H - 8} font-size="10" fill="#888">base</text>
 					<text x={x1} y={H - 8} font-size="10" fill="#888" text-anchor="end">aligned</text>
-					<text x={x0 - 6} y={y(top) + 4} font-size="8" fill="#888" text-anchor="end">{top.toFixed(3)}</text>
-					<text x={x0 - 6} y={y(0) + 4} font-size="8" fill="#888" text-anchor="end">0</text>
+					{#each logTicks as tick}
+						<line x1={x0} x2={x1} y1={y(tick)} y2={y(tick)} stroke="#444" stroke-width="0.3" />
+						<text x={x0 - 6} y={y(tick) + 3} font-size="7" fill="#888" text-anchor="end">{tick < 0.01 ? tick.toFixed(3) : tick.toFixed(2)}</text>
+					{/each}
 					{#each slopes.words as w}
 						{@const base = slopes.levels.find((l) => l.word === w && l.position === 0)}
 						{@const aligned = slopes.levels.find((l) => l.word === w && l.position === 1)}
