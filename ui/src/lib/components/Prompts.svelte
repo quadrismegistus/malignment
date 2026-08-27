@@ -163,6 +163,7 @@
 
 	let slopes = $state<any>(null);
 	let slopesLoading = $state(false);
+	let chartTab = $state<'slopes' | 'dots'>('slopes');
 
 	function open(p: string) {
 		selected = p;
@@ -705,7 +706,20 @@
 				</div>
 			{/if}
 
-			{#if slopes && slopes.levels?.length}
+			{@const hasSlopes = slopes && slopes.levels?.length}
+			{@const hasDots = epView.length > 1}
+			{#if hasSlopes || hasDots}
+				<div class="chart-tabs">
+					{#if hasSlopes}
+						<button class:active={chartTab === 'slopes'} onclick={() => chartTab = 'slopes'}>slopegraph</button>
+					{/if}
+					{#if hasDots}
+						<button class:active={chartTab === 'dots'} onclick={() => chartTab = 'dots'}>movement by lineage</button>
+					{/if}
+				</div>
+			{/if}
+
+			{#if chartTab === 'slopes' && slopes && slopes.levels?.length}
 				{@const W = 560}
 				{@const H = 280}
 				{@const padT = 18}
@@ -776,7 +790,7 @@
 				{/if}
 			{/if}
 
-			{#if epView.length > 1}
+			{#if chartTab === 'dots' && epView.length > 1}
 				{@const maxJs = Math.max(...epView.map((e) => Math.max(e.js_total ?? 0, e.xf_js_total ?? 0)), 0.01)}
 				{@const dotW = 500}
 				{@const dotH = Math.max(80, epView.length * 8 + 30)}
@@ -951,6 +965,16 @@
 		background: var(--panel-2, #333); border: 1px solid var(--rule, #555);
 		border-radius: 4px; padding: 2px 10px; cursor: pointer;
 		font-size: 0.75rem; color: var(--text-3);
+	}
+	.chart-tabs { display: flex; gap: 2px; margin: 8px 0 4px; }
+	.chart-tabs button {
+		background: var(--panel-2, #333); border: 1px solid var(--rule, #555);
+		border-radius: 4px 4px 0 0; padding: 3px 12px; cursor: pointer;
+		font-size: 0.75rem; color: var(--text-3);
+	}
+	.chart-tabs button.active {
+		background: var(--panel, #1a1a2e); border-bottom-color: transparent;
+		color: var(--text); font-weight: 600;
 	}
 	.slopegraph { display: block; width: 100%; max-width: 560px; margin: 4px 0 8px; }
 	.dotstrip { display: block; width: 100%; max-width: 500px; margin: 4px 0 8px; }
