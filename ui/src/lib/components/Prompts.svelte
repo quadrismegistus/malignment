@@ -99,10 +99,12 @@
 		{ key: 'source', label: 'source' },
 		{ key: 'n_models', label: 'models', num: true, help: 'checkpoints with a twp cell at this prompt' },
 		{ key: 'n_pairs', label: 'pairs', num: true, help: 'declared endpoint pairs measured here — the denominator of every median in this row' },
-		{ key: 'js_median', label: 'movement', num: true, help: 'median JS divergence base→endpoint across those pairs' },
-		{ key: 'departed_median', label: 'fallen', num: true, help: 'median mass leaving the words that fell' },
-		{ key: 'arrived_median', label: 'risen', num: true, help: 'median mass arriving at the words that rose' },
-		{ key: 'net_median', label: 'net', num: true, help: 'median (arrived − departed)' }
+		{ key: 'js_median', label: 'movement', num: true, help: 'median JS divergence base→endpoint, raw→raw' },
+		{ key: 'departed_median', label: 'fallen', num: true, help: 'median mass leaving the words that fell (raw→raw)' },
+		{ key: 'arrived_median', label: 'risen', num: true, help: 'median mass arriving at the words that rose (raw→raw)' },
+		{ key: 'net_median', label: 'net', num: true, help: 'median (arrived − departed), raw→raw' },
+		{ key: 'xf_js_median', label: 'xf movement', num: true, help: 'median JS divergence raw-base → framed-aligned (system_mode=empty)' },
+		{ key: 'xf_net_median', label: 'xf net', num: true, help: 'median (arrived − departed), cross-frame' }
 	];
 
 	function sortBy(k: keyof PromptRow) {

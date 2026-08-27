@@ -585,11 +585,17 @@ SELECT p.prompt AS prompt, p.prompt_id AS prompt_id, p.domain AS domain,
        cov.n_models AS n_models, cov.resid_median AS resid_median,
        pm.n_pairs AS n_pairs, pm.js_median AS js_median,
        pm.departed_median AS departed_median, pm.arrived_median AS arrived_median,
-       pm.net_median AS net_median
+       pm.net_median AS net_median,
+       xf.n_pairs AS xf_n_pairs, xf.js_median AS xf_js_median,
+       xf.departed_median AS xf_departed_median, xf.arrived_median AS xf_arrived_median,
+       xf.net_median AS xf_net_median
 FROM {db}.prompts p
 LEFT JOIN {db}.prompt_coverage_v4 cov ON cov.prompt = p.prompt
 LEFT JOIN (SELECT * FROM {db}.prompt_movement_v4 WHERE rule = 'canonical') pm
        ON pm.prompt = p.prompt
+LEFT JOIN (SELECT * FROM {db}.prompt_movement_v4_crossframe
+           WHERE rule = 'canonical' AND system_mode_aligned = 'empty') xf
+       ON xf.prompt = p.prompt
 """)
         #: **DECLARED AGAINST MEASURED, COUNTED.** The `prompts` table declares
         #: 3,120; `twp_words` holds 4,484 distinct, so ~1,760 measured prompts
