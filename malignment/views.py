@@ -121,12 +121,18 @@ _JSTERM = ("0.5 * (if({p} > 0, {p} * log2(2 * {p} / ({p} + {q})), 0)"
 #: while `tail` was decremented. So the residual is derived from the components,
 #: `tail + drop + open + mojibake`, which `conservation` pins to exactly
 #: 1 - sum(words). See `_movement_views` for the measurements.
-def _movement_views(sfx, mv, cells):
+def _movement_views(sfx, mv, cells, frame_where="", cells_base=None,
+                    cells_aligned=None, extra_select="", extra_group=""):
     """The four movement rollups for one rule version.
 
     sfx    "" or "_v4"          -- appended to every view name
     mv     movement table       -- `movement` or `movement_v4`
     cells  residual SUBQUERY    -- must yield (model, prompt, total)
+    frame_where                 -- optional WHERE clause on the movement table,
+                                   e.g. "AND m.frame_base='' AND m.frame_aligned=''"
+    cells_base / cells_aligned  -- if the two arms need different residual queries
+                                   (cross-frame: base is raw, aligned is framed)
+    extra_group                 -- additional GROUP BY columns, e.g. ", system_mode_aligned"
 
     ## `cells` IS A SUBQUERY AND NOT A TABLE NAME, BECAUSE v4 CANNOT USE `total`
 
@@ -141,6 +147,10 @@ def _movement_views(sfx, mv, cells):
     1.0 on both passes with 0 violations in 820,246 cells, so tail+drop+open+
     mojibake is the residual and deriving it is exact, not a repair.
     """
+    if cells_base is None:
+        cells_base = cells
+    if cells_aligned is None:
+        cells_aligned = cells
     return {
     #: `relation` and `depth` JOIN from `{db}.pairs` rather than being read off
     #: `movement`. They describe the EDGE, not the measurement, and storing them
@@ -151,7 +161,7 @@ def _movement_views(sfx, mv, cells):
     "movement_cells" + sfx: ("""
 CREATE OR REPLACE VIEW {db}.movement_cells""" + sfx + """ AS
 SELECT m.base AS base, m.aligned AS aligned, pr.relation AS relation,
-       pr.depth AS depth, m.rule AS rule, m.prompt AS prompt,
+       pr.depth AS depth, m.rule AS rule, m.prompt AS prompt,""" + extra_select + """
        countIf(m.cls = 'faller')                        AS n_fall,
        countIf(m.cls = 'riser')                         AS n_rise,
        countIf(m.cls = 'still')                         AS n_still,
@@ -169,11 +179,12 @@ SELECT m.base AS base, m.aligned AS aligned, pr.relation AS relation,
 FROM {db}.""" + mv + """ m
 INNER JOIN {db}.pairs pr
         ON pr.base = m.base AND pr.aligned = m.aligned
-INNER JOIN (""" + cells + """) rp
+INNER JOIN (""" + cells_base + """) rp
         ON rp.model = m.base    AND rp.prompt = m.prompt
-INNER JOIN (""" + cells + """) rq
+INNER JOIN (""" + cells_aligned + """) rq
         ON rq.model = m.aligned AND rq.prompt = m.prompt
-GROUP BY base, aligned, relation, depth, rule, prompt
+WHERE 1=1 """ + frame_where + """
+GROUP BY base, aligned, relation, depth, rule, prompt""" + extra_group + """
 """) % {"t": _JSTERM.format(p="m.p_base", q="m.p_aligned"),
         "r": _JSTERM.format(p="any(rp.total)", q="any(rq.total)")},
 
@@ -196,7 +207,8 @@ GROUP BY base, aligned, relation, depth, rule, prompt
     "prompt_movement" + sfx: """
 CREATE OR REPLACE VIEW {db}.prompt_movement""" + sfx + """ AS
 SELECT mc.prompt                       AS prompt,
-       mc.rule                         AS rule,
+       mc.rule                         AS rule,""" + ("""
+       mc.system_mode_aligned          AS system_mode_aligned,""" if extra_group else "") + """
        count()                         AS n_pairs,
        median(mc.js_total)             AS js_median,
        median(mc.departed)             AS departed_median,
@@ -209,7 +221,7 @@ SELECT mc.prompt                       AS prompt,
 FROM {db}.movement_cells""" + sfx + """ mc
 INNER JOIN {db}.endpoints e
         ON e.base = mc.base AND e.endpoint = mc.aligned
-GROUP BY prompt, rule
+GROUP BY prompt, rule""" + extra_group + """
 """,
 
     #: How many checkpoints have a twp cell at this prompt. **NOT the same as
@@ -241,7 +253,7 @@ SELECT base, aligned, relation, depth, rule,
        avg(arrived)                  AS arrived_mean,
        avg(resid_delta)              AS resid_delta_mean
 FROM {db}.movement_cells""" + sfx + """
-GROUP BY base, aligned, relation, depth, rule
+GROUP BY base, aligned, relation, depth, rule""" + extra_group + """
 """,
     }
 
@@ -254,11 +266,35 @@ VIEWS.update(_movement_views(
     "SELECT model, prompt, total FROM {db}.twp_cells"))
 #: v4 derives the residual from the components rather than reading `total`,
 #: which is stale on a merged cell. Same argMax tuple as `_arm` and `_best`.
-VIEWS.update(_movement_views(
-    "_v4", "movement_v4",
+#:
+#: **RAW->RAW ONLY.** movement_v4 holds both raw->raw and raw->framed rows.
+#: Without a frame filter, movement_cells_v4 pooled them — the frame defect one
+#: level up. Fixed 2026-08-27: the base views filter to frame_base='' AND
+#: frame_aligned=''; the cross-frame views below carry the framed edges.
+_V4_CELLS_RAW = (
     "SELECT model, prompt, "
     "argMax(tail + drop + open + mojibake, (topup, prompt_cache, mtime)) AS total "
-    "FROM {db}.twp_cells_v4 GROUP BY model, prompt"))
+    "FROM {db}.twp_cells_v4 WHERE frame='' GROUP BY model, prompt")
+_V4_CELLS_FRAMED = (
+    "SELECT model, prompt, "
+    "argMax(tail + drop + open + mojibake, (topup, prompt_cache, mtime)) AS total "
+    "FROM {db}.twp_cells_v4 WHERE frame='prefill' GROUP BY model, prompt")
+VIEWS.update(_movement_views(
+    "_v4", "movement_v4", _V4_CELLS_RAW,
+    frame_where="AND m.frame_base='' AND m.frame_aligned=''"))
+#: ── CROSS-FRAME: raw base -> framed aligned (2026-08-27, [6562]).
+#:
+#: The base arm is raw (frame=''), the aligned arm is framed (frame='prefill').
+#: `system_mode_aligned` travels in the GROUP BY because [6557] ruled the two
+#: system_mode values non-poolable. The cell-level view reads `movement_v4`
+#: directly with the cross-frame filter; the residual subqueries use the
+#: correct frame for each arm.
+VIEWS.update(_movement_views(
+    "_v4_crossframe", "movement_v4", _V4_CELLS_RAW,
+    frame_where="AND m.frame_base='' AND m.frame_aligned='prefill'",
+    cells_base=_V4_CELLS_RAW, cells_aligned=_V4_CELLS_FRAMED,
+    extra_select="\n       m.system_mode_aligned AS system_mode_aligned,",
+    extra_group=", system_mode_aligned"))
 VIEWS.update({
 
     #: **THESE TWO EXISTED ONLY IN THE LIVE DATABASE UNTIL 2026-08-21.** Four
