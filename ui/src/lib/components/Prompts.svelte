@@ -437,6 +437,8 @@
 								<td class="num">{n(r.departed_median)}</td>
 								<td class="num">{n(r.arrived_median)}</td>
 								<td class="num">{n(r.net_median)}</td>
+											<td class="num">{r.xf_js_median ? n(r.xf_js_median) : ''}</td>
+											<td class="num">{r.xf_net_median ? n(r.xf_net_median) : ''}</td>
 							</tr>
 						{/each}
 					</tbody>
