@@ -1758,14 +1758,47 @@ class Handler(BaseHTTPRequestHandler):
                                        "arrived_median", "n_pairs", "n_models")}
                     for r in rows
                     if r.get("pair_id") == meta["pair_id"] and r["prompt"] != text]
+            #: CROSS-FRAME ENDPOINTS for the same prompt, if any exist.
+            xf_per = ch.query(
+                "SELECT mc.base AS base, mc.aligned AS aligned, "
+                "mc.system_mode_aligned AS system_mode, "
+                "mc.js_total AS js_total, mc.departed AS departed, "
+                "mc.arrived AS arrived, mc.n_fall AS n_fall, mc.n_rise AS n_rise, "
+                "mc.resid_base AS resid_base, mc.resid_aligned AS resid_aligned "
+                "FROM {db}.movement_cells_v4_crossframe mc "
+                "INNER JOIN {db}.endpoints e "
+                "ON e.base = mc.base AND e.endpoint = mc.aligned "
+                "WHERE mc.rule = 'canonical' "
+                "AND mc.system_mode_aligned = 'empty' "
+                "AND mc.prompt = '" + esc + "' "
+                "ORDER BY js_total DESC")
+            xf_movers = ch.query(
+                "SELECT word, sum(delta) AS d, count() AS n "
+                "FROM {db}.movement_v4 m INNER JOIN {db}.endpoints e "
+                "ON e.base = m.base AND e.endpoint = m.aligned "
+                "WHERE m.rule = 'canonical' AND m.frame_base = '' "
+                "AND m.frame_aligned = 'prefill' "
+                "AND m.system_mode_aligned = 'empty' "
+                "AND m.prompt = '" + esc + "' "
+                "GROUP BY word ORDER BY d DESC LIMIT 8")
+            xf_fallers = ch.query(
+                "SELECT word, sum(delta) AS d, count() AS n "
+                "FROM {db}.movement_v4 m INNER JOIN {db}.endpoints e "
+                "ON e.base = m.base AND e.endpoint = m.aligned "
+                "WHERE m.rule = 'canonical' AND m.frame_base = '' "
+                "AND m.frame_aligned = 'prefill' "
+                "AND m.system_mode_aligned = 'empty' "
+                "AND m.prompt = '" + esc + "' "
+                "GROUP BY word ORDER BY d ASC LIMIT 8")
             return {"prompt": text, "meta": meta, "endpoints": per,
                     "top_risers": movers, "top_fallers": fallers,
                     "partners": partners,
-                    #: Summed across endpoints, so it is a total and not a rate.
-                    #: Said here because a reader will otherwise take it for a
-                    #: per-pair number the same size as `departed_median`.
-                    "movers_note": "delta summed over the %d endpoint pairs "
-                                   "measured at this prompt" % len(per)}
+                    "xf_endpoints": xf_per,
+                    "xf_top_risers": xf_movers,
+                    "xf_top_fallers": xf_fallers,
+                    "movers_note": "delta summed over endpoint pairs "
+                                   "measured at this prompt (%d raw, %d cross-frame)"
+                                   % (len(per), len(xf_per))}
         if path == "/pair_words":
             #: Every word this pair puts at this prompt, both arms and the
             #: delta. The grain `{db}.movement` already stores, so nothing is
@@ -1790,9 +1823,14 @@ class Handler(BaseHTTPRequestHandler):
                     "%r -> %r is not a declared endpoint pair. Ask /prompt for "
                     "the pairs measured at this prompt." % (base, aligned))
             e = lambda x: x.replace("\\", "\\\\").replace("'", "\\'")
+            frame = one("frame", "raw")
+            if frame == "crossframe":
+                frame_filter = "AND frame_base = '' AND frame_aligned = 'prefill' AND system_mode_aligned = 'empty' "
+            else:
+                frame_filter = "AND frame_base = '' AND frame_aligned = '' "
             words = ch.query(
                 "SELECT word, p_base, p_aligned, delta, cls FROM {db}.movement_v4 "
-                "WHERE rule = 'canonical' AND frame_base = '' AND frame_aligned = '' AND prompt = '" + e(text) + "' "
+                "WHERE rule = 'canonical' " + frame_filter + "AND prompt = '" + e(text) + "' "
                 "AND base = '" + e(base) + "' AND aligned = '" + e(aligned) + "' "
                 "ORDER BY delta ASC")
             #: THE RESIDUALS TRAVEL WITH THE WORDS. Both arms are truncated at
