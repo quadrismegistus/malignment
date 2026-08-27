@@ -161,15 +161,25 @@
 		return out;
 	});
 
+	let slopes = $state<any>(null);
+	let slopesLoading = $state(false);
+
 	function open(p: string) {
 		selected = p;
 		profile = null;
+		slopes = null;
 		profileLoading = true;
+		slopesLoading = true;
 		api
 			.prompt(p)
 			.then((r) => (profile = r))
 			.catch((e) => (error = e instanceof Error ? e.message : String(e)))
 			.finally(() => (profileLoading = false));
+		api
+			.promptSlopes(p, 12)
+			.then((r) => (slopes = r))
+			.catch(() => (slopes = null))
+			.finally(() => (slopesLoading = false));
 	}
 
 	let epView = $derived.by(() => {
@@ -695,6 +705,77 @@
 				</div>
 			{/if}
 
+			{#if slopes && slopes.levels?.length}
+				{@const W = 560}
+				{@const H = 280}
+				{@const padT = 18}
+				{@const padB = 30}
+				{@const padL = 58}
+				{@const padR = 100}
+				{@const top = Math.max(...slopes.levels.map((l) => l.hi), 0.001)}
+				{@const y = (v) => padT + (1 - v / top) * (H - padT - padB)}
+				{@const x0 = padL}
+				{@const x1 = W - padR}
+				{@const faller = slopes.diffs[0]?.word}
+				{@const riser = slopes.diffs[slopes.diffs.length - 1]?.word}
+				{@const endLabels = (() => {
+					const ends = slopes.levels
+						.filter((l) => l.position === 1)
+						.map((l) => ({ word: l.word, v: l.central,
+							role: l.word === faller ? 'faller' : l.word === riser ? 'riser' : 'other' }))
+						.sort((a, b) => b.v - a.v);
+					const gap = 12;
+					let prev = -1e9;
+					return ends.map((e) => {
+						let ly = y(e.v);
+						if (ly - prev < gap) ly = prev + gap;
+						prev = ly;
+						return { ...e, ly };
+					});
+				})()}
+				<h3>slopegraph <span class="muted">{slopes.selection}, {slopes.n_units} lineages, median with 95% CI</span></h3>
+				<svg class="slopegraph" viewBox="0 0 {W} {H}" preserveAspectRatio="xMidYMid meet">
+					<line x1={x0} x2={x1} y1={y(0)} y2={y(0)} stroke="#555" stroke-width="0.5" />
+					<text x={x0} y={H - 8} font-size="10" fill="#888">base</text>
+					<text x={x1} y={H - 8} font-size="10" fill="#888" text-anchor="end">aligned</text>
+					<text x={x0 - 6} y={y(top) + 4} font-size="8" fill="#888" text-anchor="end">{top.toFixed(3)}</text>
+					<text x={x0 - 6} y={y(0) + 4} font-size="8" fill="#888" text-anchor="end">0</text>
+					{#each slopes.words as w}
+						{@const base = slopes.levels.find((l) => l.word === w && l.position === 0)}
+						{@const aligned = slopes.levels.find((l) => l.word === w && l.position === 1)}
+						{@const role = w === faller ? 'faller' : w === riser ? 'riser' : 'other'}
+						{@const col = role === 'faller' ? '#e15759' : role === 'riser' ? '#4e79a7' : '#999'}
+						{@const opac = role === 'other' ? 0.4 : 0.9}
+						{@const sw = role === 'other' ? 1 : 2}
+						{#if base && aligned}
+							<line x1={x0} y1={y(base.central)} x2={x1} y2={y(aligned.central)}
+								stroke={col} stroke-width={sw} opacity={opac} />
+							<line x1={x0} x2={x0} y1={y(base.lo)} y2={y(base.hi)}
+								stroke={col} stroke-width="1" opacity={opac * 0.7} />
+							<line x1={x1} x2={x1} y1={y(aligned.lo)} y2={y(aligned.hi)}
+								stroke={col} stroke-width="1" opacity={opac * 0.7} />
+							<circle cx={x0} cy={y(base.central)} r={role === 'other' ? 2 : 3}
+								fill={col} opacity={opac} />
+							<circle cx={x1} cy={y(aligned.central)} r={role === 'other' ? 2 : 3}
+								fill={col} opacity={opac} />
+						{/if}
+					{/each}
+					{#each endLabels as l}
+						<text x={x1 + 6} y={l.ly + 3} font-size="9"
+							fill={l.role === 'faller' ? '#e15759' : l.role === 'riser' ? '#4e79a7' : '#888'}
+							font-weight={l.role === 'other' ? 'normal' : 'bold'}
+						>{l.word}</text>
+					{/each}
+				</svg>
+				{#if slopes.diffs.length >= 2}
+					<p class="muted small">
+						largest faller <b style="color:#e15759">{faller}</b> {slopes.diffs[0].d > 0 ? '+' : ''}{n(slopes.diffs[0].d, 4)} [{n(slopes.diffs[0].lo, 4)}, {n(slopes.diffs[0].hi, 4)}]
+						· largest riser <b style="color:#4e79a7">{riser}</b> +{n(slopes.diffs[slopes.diffs.length-1].d, 4)} [{n(slopes.diffs[slopes.diffs.length-1].lo, 4)}, {n(slopes.diffs[slopes.diffs.length-1].hi, 4)}]
+						· intervals on the paired within-lineage difference
+					</p>
+				{/if}
+			{/if}
+
 			{#if epView.length > 1}
 				{@const maxJs = Math.max(...epView.map((e) => Math.max(e.js_total ?? 0, e.xf_js_total ?? 0)), 0.01)}
 				{@const dotW = 500}
@@ -871,6 +952,7 @@
 		border-radius: 4px; padding: 2px 10px; cursor: pointer;
 		font-size: 0.75rem; color: var(--text-3);
 	}
+	.slopegraph { display: block; width: 100%; max-width: 560px; margin: 4px 0 8px; }
 	.dotstrip { display: block; width: 100%; max-width: 500px; margin: 4px 0 8px; }
 	.frame-toggle button.active {
 		background: var(--blue, #4e79a7); color: #fff; border-color: var(--blue);

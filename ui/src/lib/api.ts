@@ -434,6 +434,8 @@ export const api = {
 			rows: PromptRow[];
 		}>('/prompts'),
 	prompt: (text: string) => get<PromptProfile>(`/prompt?text=${encodeURIComponent(text)}`),
+	promptSlopes: (text: string, top?: number) =>
+		get<any>(`/prompt/slopes?text=${encodeURIComponent(text)}&top=${top ?? 12}`),
 	pairWords: (text: string, base: string, aligned: string, frame?: string) =>
 		get<PairWords>(
 			`/pair_words?text=${encodeURIComponent(text)}&base=${encodeURIComponent(base)}` +
