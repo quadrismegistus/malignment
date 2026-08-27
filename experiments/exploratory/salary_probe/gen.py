@@ -1,8 +1,16 @@
 """Sample the salary distribution across every locally-cached endpoint pair.
 
-    .venv/bin/python -u .../gen.py --plan          scope, loads nothing
-    .venv/bin/python -u .../gen.py                 run
-    .venv/bin/python -u .../gen.py --models a b    just these
+    .venv/bin/python       -u .../gen.py --plan       scope, loads nothing
+    .venv/bin/python       -u .../gen.py              the 50 `.venv` models
+    .venv-tf457/bin/python -u .../gen.py              the 6 `.venv-tf457` ones
+    .venv/bin/python       -u .../gen.py --models a b just these
+
+**RUN IT ONCE PER VENV, as `subject_position/run.py` is run once per profile.**
+`scripts/venvs.py` partitions the roster by the `transformers` specifier each
+node declares, and this sweep straddles the partition: 50 of the 56 models are
+`.venv` (>=5), and the six allenai OLMo checkpoints declare `>=4.57,<5` and are
+`.venv-tf457`. Each invocation skips what the other owns and says so; the cache
+means the second pass costs only its own six models.
 
 Replaces the two-lineage pilot behind `numeric_boundary/results/beam.csv`. The
 pilot is PARKED for a reason this run is built to remove: 360M and 500M
@@ -91,51 +99,35 @@ COLS = ["model", "arm", "base", "prompt_id", "language", "subdomain", "group_id"
 NUM = re.compile(r"\s*([\d,\.]*\d)\s*([KkMm])?")
 
 
-def unbreak_olmo():
-    """Let the six OLMo checkpoints load. Returns the classes it patched.
+def wrong_venv(mid):
+    """The venv this checkpoint DECLARES, if it is not the one we are running.
 
-    transformers 5.4.0 declares `tie_word_embeddings: int = False` on the OLMo
-    configs -- annotated `int`, defaulted to a `bool` -- and huggingface_hub
-    1.28.0 validates the field by exact type, so every allenai OLMo config
-    raises `expected int, got bool (value: False)`. It is an upstream typo
-    meeting a strict validator, not a fact about the checkpoints, and `bool` is
-    a subclass of `int` so nothing downstream reads a different value.
+    **THE ROSTER ALREADY DECIDES THIS AND IT IS NOT A BUG TO ROUTE AROUND.**
+    `scripts/venvs.py` groups every node by the `transformers` specifier it
+    declares, and the six allenai OLMo checkpoints here declare `>=4.57,<5`, so
+    they belong to `.venv-tf457` and cannot run under `.venv`'s 5.4.0.
 
-    It cost three lineage pairs -- OLMo-2-0425-1B, OLMoE-1B-7B-0125 and Olmo-3
-    -- of the family this campaign's ladder work is built on, all of them
-    already in local cache, so leaving them out would have been a silent
-    narrowing of the population rather than a limit anyone chose.
+    Under 5.4.0 they fail with `Field 'tie_word_embeddings' expected int, got
+    bool` -- transformers 5.4.0 annotates the field `int` while defaulting it to
+    a bool, and huggingface_hub 1.28.0 validates by exact type. That error reads
+    like an upstream typo worth patching, and an earlier version of this file
+    patched it: it forced the field type to `bool` and all six configs then
+    loaded. **That fix was wrong.** It made a checkpoint load in an environment
+    its own declaration excludes, which buys a number that looks fine and cannot
+    be trusted -- the load error was the environment split working, not failing.
 
-    **Patching `__annotations__` alone does NOT work** and was tried first:
-    `StrictDataclass` captures field types at class-decoration time, so the
-    live type sits on `__dataclass_fields__[name].type` and the annotation is
-    read too early to matter. Both are set here; the field is the one that
-    counts.
-
-    Scoped to the four OLMo config classes, imported by module path. A sweep
-    over `dir(transformers)` was the first attempt and is wrong: attribute
-    access triggers the lazy import of every module in the package, including
-    image processors that raise on a torchvision-less install.
+    The split cost nothing here, which is worth recording: of the 23 models
+    completed before this was understood, ZERO declared another venv. The six
+    that failed were exactly the six declaring `tf457`.
     """
-    done = []
-    mods = [("olmo2", "Olmo2Config"), ("olmo3", "Olmo3Config"),
-            ("olmoe", "OlmoeConfig"), ("olmo", "OlmoConfig")]
-    for mod, cls in mods:
-        try:
-            m = __import__("transformers.models.%s.configuration_%s" % (mod, mod),
-                           fromlist=[cls])
-            C = getattr(m, cls)
-            f = getattr(C, "__dataclass_fields__", {}).get("tie_word_embeddings")
-        except Exception:
-            continue
-        if f is not None and getattr(f, "type", None) is int:
-            f.type = bool
-            try:
-                C.__annotations__["tie_word_embeddings"] = bool
-            except Exception:
-                pass
-            done.append(cls)
-    return done
+    sys.path.insert(0, os.path.join(HERE, "..", "..", "..", "scripts"))
+    from venvs import venv_for
+    try:
+        want = os.path.realpath(venv_for(mid))
+    except KeyError:
+        return None                      #: not a roster node; not our call
+    here = os.path.realpath(sys.prefix)
+    return None if want == here else want
 
 
 def prompts():
@@ -216,13 +208,21 @@ def main(argv=None):
         return
 
     from malignment import Checkpoint
-    patched = unbreak_olmo()
-    if patched:
-        print("patched for load: %s" % ", ".join(patched))
     os.makedirs(RESULTS, exist_ok=True)
     t0 = time.time()
     fails = []
+    elsewhere = []
     for mi, (mid, arm, base) in enumerate(todo, 1):
+        #: BEFORE ANY LOAD. A checkpoint that declares another interpreter is
+        #: not this invocation's work, and attempting it produces either a
+        #: crash or -- worse -- a number from an environment the roster
+        #: excludes.
+        other = wrong_venv(mid)
+        if other:
+            elsewhere.append((mid, other))
+            print("  [%d/%d] %-46s NEEDS %s"
+                  % (mi, len(todo), mid[:46], os.path.basename(other)), flush=True)
+            continue
         safe = mid.replace("/", "__").replace("@", "__at__")
         out = os.path.join(RESULTS, safe + ".csv")
         ck = Checkpoint(mid)
@@ -285,10 +285,17 @@ def main(argv=None):
     #: naming what it dropped reads as complete coverage, and the shards on
     #: disk cannot distinguish "never attempted" from "attempted and failed".
     print("-> %s  (%.1f min)" % (RESULTS, (time.time() - t0) / 60))
-    print("%d of %d models produced a shard; %d FAILED"
-          % (len(todo) - len(fails), len(todo), len(fails)))
+    print("%d of %d models produced a shard; %d FAILED, %d need another venv"
+          % (len(todo) - len(fails) - len(elsewhere), len(todo), len(fails),
+             len(elsewhere)))
     for mid, err in fails:
         print("   FAILED %-46s %s" % (mid[:46], err))
+    #: named with the command that finishes them, because a deferral nobody can
+    #: act on is indistinguishable from a drop.
+    for v in sorted({v for _, v in elsewhere}):
+        ms = [m for m, w in elsewhere if w == v]
+        print("   %d models need %s -- finish them with:" % (len(ms), v))
+        print("      %s/bin/python -u %s" % (v, os.path.abspath(__file__)))
 
 
 if __name__ == "__main__":
