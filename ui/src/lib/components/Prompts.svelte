@@ -201,7 +201,7 @@
 	let pair = $state<{ base: string; aligned: string } | null>(null);
 	let pw = $state<PairWords | null>(null);
 	let pwLoading = $state(false);
-tlet pairFrame = $state<string>("raw");
+	let pairFrame = $state<string>("raw");
 	let wSort = $state<'word' | 'p_base' | 'p_aligned' | 'delta' | 'absdelta' | 'cls'>('delta');
 	let wDesc = $state(false);
 
