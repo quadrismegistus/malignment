@@ -1700,7 +1700,7 @@ class Handler(BaseHTTPRequestHandler):
         if path == "/prompts":
             rows, computed = _prompt_rows()
             return {"n": len(rows), "computed_at": computed,
-                    "ttl_seconds": _PROMPTS_TTL,
+                    "ttl_seconds": 0,  # served from parquet, no TTL
                     #: Prompts with cells that this table does NOT declare. The
                     #: panel says so, because a declared-only table read as the
                     #: corpus is the population defect one level up.
