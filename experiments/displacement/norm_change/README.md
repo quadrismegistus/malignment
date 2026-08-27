@@ -636,3 +636,81 @@ half defines the dose.
 
 **Until that is run, results in this folder should be described as a lexical-proxy
 contrast, not a dose-response.**
+
+## THREE DOSES, AND WHAT SURVIVES ALL THREE
+
+The dose examined above is a global word lexicon and it is floor-bound. Two
+replacements were built and `dose.py` now runs any of them, each writing FULL tables
+under its own filename so no run can silently overwrite another:
+
+    --dose k_transgressiveness   global lexicon, ~2,700 prompts   (default)
+    --slot-dose                  loaded words tagged per prompt from a 200-word
+                                 union list, 1,944 prompts
+                                 (instrument_calibrations/dose_response)
+    --v6-dose                    base-arm mass on words at contextual v6_harm >= 4,
+                                 744 prompts, COSTS NOTHING -- the ratings exist
+
+All three are per (lineage, prompt): the tags are prompt-level in every case, but
+the MASS WEIGHTING is per lineage, because models put different probability on the
+loaded words. RH's point, and it is why a prompt-level rating still yields a
+lineage-varying dose.
+
+### THE CONVERGENCE, WHICH IS THE RESULT
+
+    levels          lexical vs slot     n=38   corr +0.948   sig both 24 (of 31/27)
+                    lexical vs v6_harm  n=38   corr +0.952   sig both 26 (of 31/27)
+                    slot    vs v6_harm  n=39   corr +0.862   sig both 20 (of 28/28)
+
+    significant under ALL THREE: 19 of 38, and all 19 agree in SIGN.
+      k_bodily_harm, k_charge, k_transgressiveness_z, k_valence_absz,
+      warriner_arousal, warriner_arousal_absz, and 13 more
+
+**Three doses built from three unrelated instruments** -- a type-level lexicon, an
+LLM tagging loaded completions, and contextual harm ratings made months earlier for
+another purpose -- **agree at +0.86 to +0.95 on which word-level norms respond, with
+no sign disagreement among the 19.** That makes the levels dose-response robust to
+how the dose is constructed, which no single run could establish.
+
+It also retires a suspicion raised earlier in this file: the floor-bound lexicon
+ranks prompts well enough to reproduce the answer, so its compression is a power
+problem and not a validity one.
+
+### DE-CONCRETISATION SURVIVES
+
+                              LEXICAL              SLOT               V6_HARM
+    brysbaert_concreteness  -0.0257 12/50 *   -0.0099 21/50     -0.0288 16/50 *
+    k_concreteness          -0.1023  9/50 *   -0.0417 21/50     -0.0529 13/50 *
+
+Same sign in all three, significant in two, and the v6 dose is INDEPENDENT of the
+lexical one -- different instrument, contextual rather than type-level. So the
+effect is not `k_transgressiveness` regressing against its own lexicon, which was
+the leading suspicion when the slot dose nulled it. The within-domain test points
+the same way: restricted to institutional prompts the lexical slope STRENGTHENS to
+-0.214, which is the opposite of what a between-domain artifact does.
+
+The slot dose is the outlier at exactly 21/50 on every variant, and it is the least
+trustworthy of the three -- see `dose_response/README.md` for its two failure modes.
+
+### WHAT DOES NOT SURVIVE
+
+    contextual   lexical vs v6_harm  corr +0.359   significant in all three: 2 of 34
+    fields       lexical vs slot     corr +0.508   77 of 267 targets FLIP SIGN
+
+The institutional and sexual slopes reported above rest on ONE dose. And `fields` was
+never testable in this form -- see the next section.
+
+### THE FIELDS TABLE IS MEASURING A CONSTANT
+
+A USAS field is categorical: a word carries it or does not, weight 1. So the
+"mass-weighted mean over rated words" is the mean of 1.0 over words whose value is
+1.0 -- **every field's level is exactly 1.000 in both arms**, and 69.1% of
+level-deltas are EXACTLY ZERO. The informative column was beside it all along:
+`base_cov`, the share of mass the field holds, whose deltas are 0.0% zero.
+
+    field    med level   p90 level   med coverage
+    I3.1-      1.00000     1.00000       0.003
+    T2+        1.00000     1.00000       0.010
+
+Every `fields` number in this folder regresses that constant. RH found it by asking
+why the slopes were so small. NOT YET FIXED: `contextual()` and the dose path need to
+read coverage rather than level, and the table rebuilt.

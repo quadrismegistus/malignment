@@ -78,6 +78,112 @@ def endpoint_pairs():
     return {"%s>%s" % (b, a) for b, a in ep.items()}
 
 
+def v6_dose_rows(cut):
+    """{(lang, lineage, prompt, "v6_harm_mass"): (dose, dose)} from EXISTING ratings.
+
+    `v6_harm` asks how much harm the action causes IN THIS SCENE, so `punched` scores
+    high in a slamming frame without a rater reaching for `strangled` -- which is the
+    anchoring the per-model tagging pass was going to buy. It is already on 1,935
+    prompts and costs nothing.
+
+    KNOWN LIMIT, and it is the same one every completion-based dose has: where the
+    transgression is in the SETUP the rating saturates. On `He raised the knife and
+    stabbed him in the ___` every body part scores harm 7 -- chest, face, head, eye --
+    because the stabbing has already happened, so the dose is 1.0000 and means only
+    "this frame is violent".
+    """
+    import csv as _csv
+    from malignment import fields as F
+    rated = {}
+    for pr in F.slot_prompts():
+        try:
+            d = F.contextual_norms(pr)
+        except Exception:
+            continue
+        hot = {w for w, v in d.items()
+               if isinstance(v.get("v6_harm"), (int, float)) and v["v6_harm"] >= cut}
+        if hot:
+            rated[pr] = hot
+    print("v6 dose: %d prompts carry words at v6_harm >= %d" % (len(rated), cut))
+    wl = os.path.expanduser("~/malignment-data/norm_change/words_long.csv.gz")
+    if not os.path.exists(wl):
+        return {}
+    _csv.field_size_limit(sys.maxsize)
+    tot = collections.Counter(); hit = collections.Counter()
+    with gzip.open(wl, "rt", encoding="utf-8") as fh:
+        for r in _csv.DictReader(fh, delimiter="\t"):
+            if r.get("lang") != "en":
+                continue
+            pr = r["prompt"]
+            if pr not in rated:
+                continue
+            try:
+                p = float(r["p_base"])
+            except (TypeError, ValueError):
+                continue
+            k = (r["base"] + ">" + r["aligned"], pr)
+            tot[k] += p
+            if r["word"] in rated[pr]:
+                hit[k] += p
+    out = {}
+    for k, t in tot.items():
+        if t > 0:
+            v = hit[k] / t
+            out[("en", k[0], k[1], "v6_harm_mass")] = (v, v)
+    print("v6 dose: %d (lineage, prompt) cells" % len(out))
+    return out
+
+
+def slot_dose_rows(lv):
+    """{(lang, lineage, prompt, "slot_loaded_mass"): (dose, dose)} from tags.csv.gz.
+
+    The dose is the BASE arm's mass on that prompt's loaded words, per lineage --
+    so a frame carrying a loaded option that a given base model rarely offers is
+    low-dose FOR THAT LINEAGE, which is the whole point of a per-(lineage, prompt)
+    predictor. `read()` returns (base, aligned); both slots carry the same value
+    here because a dose is a property of the base arm and nothing downstream reads
+    the second.
+    """
+    import csv as _csv
+    tagf = os.path.join(HERE, "..", "..", "instrument_calibrations",
+                        "dose_response", "tags.csv.gz")
+    if not os.path.exists(tagf):
+        return {}
+    loaded = collections.defaultdict(set)
+    with gzip.open(tagf, "rt", encoding="utf-8") as fh:
+        for r in _csv.DictReader(fh, delimiter="\t"):
+            loaded[r["prompt"]].add(r["word"])
+    print("slot dose: %d prompts carry loaded words" % len(loaded))
+    wl = os.path.expanduser("~/malignment-data/norm_change/words_long.csv.gz")
+    if not os.path.exists(wl):
+        print("no words_long -- cannot compute mass")
+        return {}
+    _csv.field_size_limit(sys.maxsize)
+    tot = collections.Counter(); hit = collections.Counter()
+    with gzip.open(wl, "rt", encoding="utf-8") as fh:
+        for r in _csv.DictReader(fh, delimiter="\t"):
+            if r.get("lang") != "en":
+                continue
+            pr = r["prompt"]
+            if pr not in loaded:
+                continue
+            try:
+                p = float(r["p_base"])
+            except (TypeError, ValueError):
+                continue
+            k = (r["base"] + ">" + r["aligned"], pr)
+            tot[k] += p
+            if r["word"] in loaded[pr]:
+                hit[k] += p
+    out = {}
+    for k, t in tot.items():
+        if t > 0:
+            v = hit[k] / t
+            out[("en", k[0], k[1], "slot_loaded_mass")] = (v, v)
+    print("slot dose: %d (lineage, prompt) cells" % len(out))
+    return out
+
+
 def binom(k, n):
     if not n:
         return float("nan")
@@ -257,6 +363,24 @@ def main(argv=None):
     ap = argparse.ArgumentParser()
     ap.add_argument("--lang", default=None, choices=("en", "zh"))
     ap.add_argument("--dose", default=DOSE_DEFAULT)
+    ap.add_argument("--v6-dose", action="store_true",
+                    help="dose = base-arm mass on words whose CONTEXTUAL v6_harm is "
+                         ">= --v6-cut, from ratings that already exist. The rating is "
+                         "per (prompt, word) so it is prompt-level, but the MASS "
+                         "WEIGHTING is per lineage -- models put different "
+                         "probability on those words -- so the dose still varies by "
+                         "lineage. Costs nothing: no new API calls.")
+    ap.add_argument("--v6-cut", type=int, default=4)
+    ap.add_argument("--slot-dose", action="store_true",
+                    help="use SLOT-LEVEL loaded mass instead of the global lexicon. "
+                         "`k_transgressiveness` cannot know which completion is "
+                         "loaded HERE: 63.4%% of prompts sit within 5%% of its floor "
+                         "and it ranks quid-pro-quo coercion below knife attacks. "
+                         "This reads instrument_calibrations/dose_response/"
+                         "tags.csv.gz -- per-prompt loaded words, gradient-validated "
+                         "against 255 hand-tagged prompts -- and computes the base "
+                         "arm's mass on them, the same construct displacement_axis "
+                         "uses. ENGLISH ONLY.")
     ap.add_argument("--table", default="both",
                     choices=("levels", "fields", "contextual", "both", "all"))
     ap.add_argument("--contextual", action="store_true",
@@ -269,6 +393,13 @@ def main(argv=None):
                          "chosen by whoever built the instrument and are not a "
                          "random sample of the corpus.")
     ap.add_argument("--top", type=int, default=20)
+    ap.add_argument("--out", default=None,
+                    help="write the FULL table (every target, not just --top) to "
+                         "this dir. THE DOSE NAME IS IN THE FILENAME: a slot-dose "
+                         "run must never overwrite a lexical-dose one, because the "
+                         "lexical numbers are what README.md reports and a silently "
+                         "replaced file is how a README comes to describe results "
+                         "that no longer exist.")
     ap.add_argument("--magnitude", action="store_true",
                     help="does MORE MASS MOVE where the base is transgressive?")
     a = ap.parse_args(argv)
@@ -293,10 +424,23 @@ def main(argv=None):
         return 1
     #: the dose ALWAYS comes from levels, even when the target is a field --
     #: transgressiveness is a continuous norm and has no field counterpart.
-    dose_rows = {k: v for k, v in lv.items() if k[3] == a.dose}
-    if not dose_rows:
-        print("dose scale %r not present in levels_long" % a.dose)
-        return 1
+    if a.v6_dose:
+        dose_rows = v6_dose_rows(a.v6_cut)
+        a.dose = "v6_harm_mass"
+        if not dose_rows:
+            print("no v6 dose -- are slot_ratings/results/v6 present?")
+            return 1
+    elif a.slot_dose:
+        dose_rows = slot_dose_rows(lv)
+        a.dose = "slot_loaded_mass"
+        if not dose_rows:
+            print("no slot dose -- run dose_response/run.py then consolidate.py")
+            return 1
+    else:
+        dose_rows = {k: v for k, v in lv.items() if k[3] == a.dose}
+        if not dose_rows:
+            print("dose scale %r not present in levels_long" % a.dose)
+            return 1
 
     #: THE SHARED PROMPT SET. Contextual ratings cover a subset of the corpus, so
     #: comparing a word-level slope computed on 2,245 prompts against a contextual
@@ -317,7 +461,14 @@ def main(argv=None):
         dose_rows = {k: v for k, v in dose_rows.items() if k[2] in keep_prompts}
 
     for name in tables:
-        tbl = lv if name == "levels" else read(name)
+        #: with --slot-dose the dose does NOT live in levels_long, so it must be
+        #: merged into EVERY table including levels -- otherwise levels tests
+        #: against a dose scale that is not there and reports 0 targets.
+        _ext = a.slot_dose or a.v6_dose
+        tbl = dict(lv) if (name == "levels" and _ext) else (
+            lv if name == "levels" else read(name))
+        if name == "levels" and _ext:
+            tbl.update(dose_rows)
         if tbl is None:
             print("no %s_long -- skipping" % name)
             continue
@@ -348,6 +499,18 @@ def main(argv=None):
                 mark = "  <-" if p < 0.05 else ""
                 print("  %-34s %+11.5f %5d %5d %5d %9.5f%s"
                       % (sc[:34], med, up, dn, n, p, mark))
+            if a.out:
+                import csv as _c
+                d_ = os.path.expanduser(a.out)
+                os.makedirs(d_, exist_ok=True)
+                fn = os.path.join(d_, "dose_%s__%s_%s.csv" % (a.dose, name, lang))
+                with open(fn, "w", newline="") as _fh:
+                    w_ = _c.writer(_fh)
+                    w_.writerow(["dose", "table", "lang", "target", "med_slope",
+                                 "up", "dn", "n", "p"])
+                    for p_, sc_, med_, up_, dn_, n_ in rows:
+                        w_.writerow([a.dose, name, lang, sc_, med_, up_, dn_, n_, p_])
+                print("   -> %s  (%d targets, FULL table)" % (os.path.basename(fn), len(rows)))
     print()
     print("A POSITIVE slope means: the more transgressive mass the BASE arm put")
     print("at a prompt, the MORE that target rose under alignment. The dose is")
