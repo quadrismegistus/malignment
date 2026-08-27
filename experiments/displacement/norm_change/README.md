@@ -714,3 +714,72 @@ level-deltas are EXACTLY ZERO. The informative column was beside it all along:
 Every `fields` number in this folder regresses that constant. RH found it by asking
 why the slopes were so small. NOT YET FIXED: `contextual()` and the dose path need to
 read coverage rather than level, and the table rebuilt.
+
+## ROBUST UNDER 2 OF 3 DOSES: THE FEATURE TABLE
+
+`dose_agreement.py` -> `dose_agreement.csv`. **A feature significant on >=2 of the
+three doses WITH CONSISTENT SIGN is ROBUST**; on 3 of 3 it is unanimous. One dose is
+not enough because each has a known and DIFFERENT defect -- the lexicon is
+floor-bound and ranks coercion below knife attacks, the slot tagging collapses where
+the loaded option is rare and saturates where the transgression is in the setup, and
+v6_harm shares the second while covering 744 prompts against 1,944 and ~2,700.
+Because the defects differ, agreement is evidence about alignment rather than about
+how loadedness was measured.
+
+    table         targets    3 of 3    2 of 3    ROBUST   contradictory
+    levels             38        19        12        31        0
+    fields            278        12        43        55       16
+    contextual         34         2         6         8        0
+
+**SIGN IS CHECKED, NOT ASSUMED.** Sixteen `fields` targets clear p<0.05 on two doses
+pointing OPPOSITE WAYS -- X3.4+, A10+, X2.5+, G2.2-, A5.3-, Z1m and ten more. That is
+a contradiction, not a replication, and it is why `agree_sign` is a separate column.
+
+### LEVELS -- 31 robust, 19 of them unanimous
+
+    k_bodily_harm_z            -0.171  3/3  fall     warriner_valence      +0.077  3/3  RISE
+    k_bodily_harm_absz         -0.157  3/3  fall     warriner_valence_z    +0.061  3/3  RISE
+    k_bodily_harm              -0.148  3/3  fall     warriner_dominance_z  +0.057  3/3  RISE
+    k_transgressiveness_z      -0.126  3/3  fall     warriner_dominance    +0.053  3/3  RISE
+    k_transgressiveness_absz   -0.108  3/3  fall
+    k_charge                   -0.087  3/3  fall     warriner_arousal_z    -0.063  3/3  fall
+    k_charge_z                 -0.076  3/3  fall     warriner_arousal      -0.057  3/3  fall
+    warriner_valence_extremity_z  -0.060  3/3  fall
+
+**The more loaded mass the base arm puts at a slot, the more alignment removes
+bodily-harm and transgressive vocabulary, lowers arousal, RAISES valence and
+dominance, and COMPRESSES extremity** -- the `_absz` and `extremity` terms are
+absolute-deviation measures, so their fall is a narrowing of spread, not a shift of
+direction. Concreteness is robust at 2 of 3 (see the previous section).
+
+### CONTEXTUAL -- 8 robust, 2 unanimous
+
+    slot_institutional_en_v3:termination  +0.049  3/3  rise
+    v6:aggression                         +0.041  3/3  rise
+    sexual_slot_en_v2:orality             -0.133  2/3  fall
+    v6:harm                               -0.102  2/3  fall
+    sexual_slot_en_v2:genitality          -0.043  2/3  fall
+    slot_institutional_en_v3:abstraction  -0.033  2/3  fall
+    slot_institutional_en_v3:procedural   -0.020  2/3  fall
+    slot_institutional_en_v3:mediation    -0.012  2/3  fall
+
+The sexual ladder falling under dose is `X_metonymy`'s shape. The institutional
+scales fall, which is the LEVEL moving opposite to the SORTING result in
+`slot_ratings/institutional` (rho against the mover verdict, +0.082 to +0.125) --
+two different quantities, and the aggregate/individual distinction again.
+
+### FIELDS -- 55 robust but only ONE interpretable
+
+    L1-       Life and living things [-]        -0.02235  3/3  fall
+    A9+       Getting and giving; possession    +0.00644  3/3  rise
+    M1        Moving, coming and going          +0.00498  3/3  rise
+    B2-       Health and disease [-]            +0.00313  3/3  rise
+    S1.1.2+   Reciprocity                       -0.00240  3/3  fall
+    ... K2 Music, Z2 Geographical names, N3.3 Distance, all below 0.002
+
+`L1-` is USAS's killing-and-dying category -- `usas('kill')` returns exactly it --
+and at -0.022 it is **3.5x the next largest**. That is the displacement claim in
+USAS terms and it holds across all three doses. Everything below `M1` is at or under
+0.005 in a table where 145 of 341 targets flip sign between doses and 16 contradict
+outright, so **read `L1-`, treat the rest as a shortlist.** 55 "robust" of 278 is
+close to what chance gives at alpha=0.05 across three correlated tests.

@@ -394,10 +394,50 @@ def main(argv=None):
     FORMAT TabSeparatedWithNames"""
     _write(ch, q, os.path.join(OUT, "levels_long.csv.gz"), a.lang, lineages)
 
+    #: FIELDS ARE CATEGORICAL AND NEED A DIFFERENT DENOMINATOR.
+    #:
+    #: The scales query divides by CARRIER mass, which for a continuous norm is
+    #: right: the mean rating among rated words. For a USAS field it is not. The
+    #: weight is tag-count-normalised (a word with five tags contributes ~0.2 to
+    #: each), so `sum(p*weight)/sum(p)` over carriers is the mean POLYSEMY of the
+    #: words in the field -- and it is CONSTANT whenever a field's carriers share a
+    #: weight. Measured on the old table: 69.1% of field level-deltas are EXACTLY
+    #: ZERO, against 0.0% for coverage. Every fields dose-response in this folder
+    #: before 2026-08-27 regressed that near-constant, which is why 271 targets
+    #: produced slopes around 0.002 and 77 of 267 flipped sign between doses.
+    #:
+    #: The quantity a categorical field has is its SHARE OF THE WHOLE
+    #: DISTRIBUTION: how much of what this model would say falls in this field. So
+    #: the denominator is the total over ALL words at that (lineage, prompt), not
+    #: over carriers. The INNER JOIN has already discarded the non-carriers, so the
+    #: total is computed BEFORE the join and carried in.
+    #:
+    #: `base_cov` is nearly this already but is unnormalised mass, and per-model
+    #: totals run 0.80-0.94, so it carries a scale factor varying by lineage AND
+    #: prompt. Within a lineage that would not flip a slope's sign; across prompts
+    #: it distorts magnitudes, and it should not be left implicit.
     print("aggregating fields...", flush=True)
-    qf = q.replace("nc_scale_tmp s ON m.word = s.word", "nc_field_tmp s ON m.word = s.word") \
-          .replace("s.scale AS scale", "s.field AS scale") \
-          .replace("s.value", "s.weight")
+    qf = """
+    SELECT m.base AS base, m.aligned AS aligned, m.prompt AS prompt,
+           s.field AS scale,
+           sum(m.p_base    * s.weight) / nullIf(any(t.tot_base),    0) AS base_level,
+           sum(m.p_aligned * s.weight) / nullIf(any(t.tot_aligned), 0) AS aligned_level,
+           sum(m.p_base)    AS base_cov,
+           sum(m.p_aligned) AS aligned_cov,
+           count() AS n_words
+    FROM movement m
+    INNER JOIN nc_field_tmp s ON m.word = s.word
+    INNER JOIN (
+        SELECT base, aligned, prompt,
+               sum(p_base)    AS tot_base,
+               sum(p_aligned) AS tot_aligned
+        FROM movement m
+        {WHERE}
+        GROUP BY base, aligned, prompt
+    ) t ON m.base = t.base AND m.aligned = t.aligned AND m.prompt = t.prompt
+    {WHERE}
+    GROUP BY base, aligned, prompt, scale
+    FORMAT TabSeparatedWithNames"""
     _write(ch, qf, os.path.join(OUT, "fields_long.csv.gz"), a.lang, lineages)
 
     print("writing the word layer...", flush=True)
