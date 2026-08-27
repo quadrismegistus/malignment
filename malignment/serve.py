@@ -587,8 +587,8 @@ SELECT p.prompt AS prompt, p.prompt_id AS prompt_id, p.domain AS domain,
        pm.departed_median AS departed_median, pm.arrived_median AS arrived_median,
        pm.net_median AS net_median
 FROM {db}.prompts p
-LEFT JOIN {db}.prompt_coverage cov ON cov.prompt = p.prompt
-LEFT JOIN (SELECT * FROM {db}.prompt_movement WHERE rule = 'canonical') pm
+LEFT JOIN {db}.prompt_coverage_v4 cov ON cov.prompt = p.prompt
+LEFT JOIN (SELECT * FROM {db}.prompt_movement_v4 WHERE rule = 'canonical') pm
        ON pm.prompt = p.prompt
 """)
         #: **DECLARED AGAINST MEASURED, COUNTED.** The `prompts` table declares
