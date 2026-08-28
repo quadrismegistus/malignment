@@ -206,16 +206,135 @@ def report(recs):
 def main(argv=None):
     ap = argparse.ArgumentParser()
     ap.add_argument("--verify", action="store_true")
+    ap.add_argument("--where", action="store_true",
+                    help="partition the excess: marked/unmarked/neutral/off/tail")
     ap.add_argument("--limit", type=int)
     ap.add_argument("--out", default=os.path.join(HERE, "results", "pole_null.json"))
     a = ap.parse_args(argv)
     if a.verify:
         return 0 if verify() else 1
+    if a.where:
+        recs = destinations(a.limit)
+        json.dump(recs, open(a.out.replace(".json", "_where.json"), "w"))
+        report_destinations(recs)
+        return
     recs = build(a.limit)
     os.makedirs(os.path.dirname(a.out), exist_ok=True)
     json.dump(recs, open(a.out, "w"))
     report(recs)
     print("\n-> %s" % a.out)
+
+
+
+
+# ---------------------------------------------------------------------------
+# WHERE DOES THE MASS GO? The zero-sum accounting.
+# ---------------------------------------------------------------------------
+
+def destinations(limit=None):
+    """Excess partitioned over five buckets, per cell. Sums to ~0 by construction.
+
+    The pole numbers say the marked pole loses and the unmarked pole sits at its
+    null, which leaves the question this answers: where did it go.
+
+    **OVER NON-FALLERS ONLY, AND THAT IS WHAT MAKES IT A PARTITION.** `sum(null)`
+    over non-fallers plus the tail equals R, and `sum(Q)` over the same set equals
+    R too, so the excesses cancel exactly. Including fallers would answer the
+    other question -- how much the marked pole lost -- and would not sum to zero.
+    `departed` is reported separately for that.
+
+    The buckets:
+
+        marked / unmarked   the cell's poles, unanimous-reduced
+        neutral             candidate words (>=1% in either arm, content, ADV
+                            stoplisted) that no split placed in a pole
+        off_candidate       words movement_v4 scores that never entered the
+                            candidate list -- function words, sub-1% words. NOT a
+                            residual: these are named and resolvable.
+        tail                the __TAIL__ residual. Mass the instrument cannot see
+                            inside at all.
+    """
+    rows = [json.loads(l) for l in open(OUT) if l.strip()]
+    by_pair = collections.defaultdict(list)
+    for r in rows:
+        by_pair[(r["base"], r["aligned"])].append(r)
+    out = []
+    for base, aligned in R.PAIRS:
+        g = by_pair.get((base, aligned), [])
+        if limit:
+            g = g[:limit]
+        if not g:
+            continue
+        inf = cell_inflation(base, aligned, [r["prompt"] for r in g])
+        cand = R.cells_bulk([r["prompt"] for r in g], base, aligned)
+        resid_a = {x["prompt"]: float(x["resid_aligned"]) for x in ch.query(
+            "SELECT prompt, resid_aligned FROM {db}.movement_cells_v4 "
+            "WHERE base=%s AND aligned=%s" % (_lit(base), _lit(aligned)))}
+        for r in g:
+            got, c = inf.get(r["prompt"]), cand.get(r["prompt"])
+            if not got or not c:
+                continue
+            fl, rb, d = got
+            ra = resid_a.get(r["prompt"], 0.0)
+            cw = set(c[0])
+            mk, un = set(r["naughty"]) & cw, set(r["nice"]) & cw
+            neu = cw - mk - un
+            off = set(d) - cw
+            nonf = {w for w, (pb, pa, cl) in d.items() if cl != "faller"}
+            exc = lambda S: sum(d[w][1] - d[w][0] * fl for w in (S & nonf) if w in d)
+            dep = sum(d[w][0] - d[w][1] for w, (pb, pa, cl) in d.items()
+                      if cl == "faller")
+            out.append(dict(
+                prompt=r["prompt"], base=base, inflation=fl,
+                marked=exc(mk), unmarked=exc(un), neutral=exc(neu),
+                off_candidate=exc(off), tail=ra - rb * fl,
+                departed=dep,
+                n_fall=sum(1 for _, (pb, pa, cl) in d.items() if cl == "faller")))
+        print("  %-18s %d cells" % (base.split("/")[-1], len(out)), flush=True)
+    return out
+
+
+def report_destinations(recs):
+    """**CONDITIONED, BECAUSE THE MEAN OVER EVERY CELL ANSWERS NOTHING.** Most
+    prompts have no charge and no reason for mass to move anywhere in particular;
+    averaging their excess in with the frames that do move reports the corpus's
+    composition, not a mechanism. The bands are on `departed` -- how much mass
+    actually left the fallers -- which is a property of the cell and not of any
+    pole, so it does not select on the quantity being partitioned."""
+    B = ("marked", "unmarked", "neutral", "off_candidate", "tail")
+    tot = [sum(x[b] for b in B) for x in recs]
+    print("\nZERO-SUM CHECK: the five buckets should cancel over non-fallers")
+    print("  mean %+.2e | max |sum| %.2e over %d cells" %
+          (st.mean(tot), max(abs(t) for t in tot), len(recs)))
+    print("\nWHERE THE REDISTRIBUTED MASS GOES, mean excess per cell")
+    for b in B:
+        v = [x[b] for x in recs]
+        print("  %-15s %+.4f   (positive on %d of %d cells)"
+              % (b, st.mean(v), sum(1 for x in v if x > 0), len(v)))
+    print("  %-15s %+.4f   <- mass that LEFT the fallers, not part of the sum"
+          % ("departed", st.mean([x["departed"] for x in recs])))
+    print("\nBY HOW MUCH MASS ACTUALLY LEFT THE FALLERS")
+    print("  %-16s %6s %8s %9s %9s %13s %8s"
+          % ("departed", "n", "marked", "unmarked", "neutral", "off_candidate", "tail"))
+    bands = [(0.0, 0.01, "< 0.01"), (0.01, 0.05, "0.01-0.05"),
+             (0.05, 0.15, "0.05-0.15"), (0.15, 0.30, "0.15-0.30"),
+             (0.30, 9.99, "> 0.30")]
+    for lo, hi, lab in bands:
+        v = [x for x in recs if lo <= x["departed"] < hi]
+        if not v:
+            continue
+        print("  %-16s %6d %+8.4f %+9.4f %+9.4f %+13.4f %+8.4f"
+              % (lab, len(v), *(st.mean([x[b] for x in v]) for b in B)))
+    print("\nBY LINEAGE")
+    print("  %-18s %8s %9s %9s %13s %8s %9s"
+          % ("", "marked", "unmarked", "neutral", "off_candidate", "tail", "departed"))
+    for base, _ in R.PAIRS:
+        v = [x for x in recs if x["base"] == base]
+        if not v:
+            continue
+        print("  %-18s %+8.4f %+9.4f %+9.4f %+13.4f %+8.4f %+9.4f"
+              % (base.split("/")[-1], *(st.mean([x[b] for x in v]) for b in B),
+                 st.mean([x["departed"] for x in v])))
 
 
 if __name__ == "__main__":
