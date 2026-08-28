@@ -644,7 +644,7 @@ def decompose(pre, post, rule=CANONICAL, residual_pre=0.0, residual_post=0.0):
 # One prompt across many units: the data behind a slopegraph
 # ---------------------------------------------------------------------------
 
-#: Corpus version this module reads; see `corpus.retable`. Default 3
+#: Corpus version this module reads; see `ch.retable`. Default 3
 #: because v4 covers 23 models against v3's full roster -- flipping it
 #: would shrink every result rather than announce anything.
 RULE_VERSION = 3
@@ -690,7 +690,6 @@ def contrast(prompt, units, top=12, words=None, select_at=0, min_units=1):
     truncation.
     """
     from . import ch
-    from . import corpus
     esc = lambda s: str(s).replace("\\", "\\\\").replace("'", "\\'")
     seq = [(str(name), [str(m) for m in rungs]) for name, rungs in units]
     if not seq:
@@ -709,7 +708,7 @@ def contrast(prompt, units, top=12, words=None, select_at=0, min_units=1):
 
     models = sorted({m for _, r in seq for m in r})
     inlist = ",".join("'" + esc(m) + "'" for m in models)
-    got = ch.query(corpus.retable(
+    got = ch.query(ch.retable(
         "SELECT model, word, p FROM {db}.twp_words WHERE prompt='"
         + esc(prompt) + "' AND model IN (" + inlist + ")", RULE_VERSION))
     by = {}
@@ -759,3 +758,268 @@ def contrast(prompt, units, top=12, words=None, select_at=0, min_units=1):
             "words": chosen, "selection": selection,
             "below_theta": below, "n_cells": len(rows)}
     return rows, meta
+
+
+# ---------------------------------------------------------------------------
+# Corpus accessors (moved from corpus.py)
+# ---------------------------------------------------------------------------
+
+_MOVEMENT_TABLE = {3: "movement", 4: "movement_v4"}
+_MOVEMENT_CELLS_TABLE = {3: "movement_cells", 4: "movement_cells_v4"}
+
+
+def _mvt(rule_version):
+    rv = int(rule_version)
+    if rv not in _MOVEMENT_TABLE:
+        raise ValueError("no movement table for rule_version=%r" % rule_version)
+    return _MOVEMENT_TABLE[rv]
+
+
+def measured_models(rule_version=4):
+    """Every model with cells in twp_words."""
+    from . import ch
+    wt = _BEST[int(rule_version)][0]
+    return {r["model"] for r in
+            ch.query("SELECT DISTINCT model FROM {db}.%s" % wt)}
+
+
+def measured_pairs(rule_version=4):
+    """Every (base, aligned) present in the movement table."""
+    from . import ch
+    return {(r["base"], r["aligned"]) for r in
+            ch.query("SELECT DISTINCT base, aligned FROM {db}.%s" % _mvt(rule_version))}
+
+
+def movement_rows(base, aligned, prompt=None, cls=None, min_abs_delta=None,
+                  limit=None, rule_version=4, frame=''):
+    """Precomputed word movement for a pair.
+
+        movement_rows("meta-llama/Llama-3.1-8B",
+                      "meta-llama/Llama-3.1-8B-Instruct", cls="faller")
+
+    `frame` applies to v4 only (v3 has no frame columns):
+      `''`     raw→raw movement (default)
+      `'prefill'`  raw→framed (cross-frame)
+      `None`   all frame combinations
+    """
+    from . import ch
+    from .ch import _lit
+    tbl = _mvt(rule_version)
+    where = ["base=%s" % _lit(base), "aligned=%s" % _lit(aligned)]
+    if prompt is not None:
+        where.append("prompt=%s" % _lit(prompt))
+    if cls is not None:
+        where.append("cls=%s" % _lit(cls))
+    if min_abs_delta is not None:
+        where.append("abs(delta) >= %f" % float(min_abs_delta))
+    if int(rule_version) == 4 and frame is not None:
+        if frame == '':
+            where.append("frame_base=''")
+            where.append("frame_aligned=''")
+        else:
+            where.append("frame_aligned=%s" % _lit(frame))
+    q = ("SELECT prompt, word, p_base, p_aligned, delta, cls FROM {db}.%s "
+         "WHERE %s ORDER BY abs(delta) DESC" % (tbl, " AND ".join(where)))
+    if limit:
+        q += " LIMIT %d" % int(limit)
+    return ch.query(q)
+
+
+def endpoint_movement(cls=None, min_abs_delta=None, prompt=None, limit=None,
+                      rule_version=4, frame=''):
+    """Movement across ALL declared base->endpoint pairs, in ONE query.
+
+        endpoint_movement(cls="faller", min_abs_delta=0.1, limit=50)
+
+    Same `frame` semantics as `movement_rows()`. The model population is
+    derived from `roster.endpoints()` each call.
+    """
+    from . import ch, roster
+    from .ch import _lit
+    tbl = _mvt(rule_version)
+    eps, unresolved = roster.endpoints()
+    if unresolved:
+        raise ValueError("%d lineages are unresolved: %s -- resolve before "
+                         "aggregating over 'the endpoints'"
+                         % (len(unresolved), sorted(unresolved)[:3]))
+    tup = ",".join("(%s,%s)" % (_lit(b), _lit(a)) for b, a in sorted(eps.items()))
+    where = ["(base, aligned) IN (%s)" % tup]
+    if cls is not None:
+        where.append("cls=%s" % _lit(cls))
+    if prompt is not None:
+        where.append("prompt=%s" % _lit(prompt))
+    if min_abs_delta is not None:
+        where.append("abs(delta) >= %f" % float(min_abs_delta))
+    if int(rule_version) == 4 and frame is not None:
+        if frame == '':
+            where.append("frame_base=''")
+            where.append("frame_aligned=''")
+        else:
+            where.append("frame_aligned=%s" % _lit(frame))
+    q = ("SELECT base, aligned, prompt, word, p_base, p_aligned, delta, cls "
+         "FROM {db}.%s WHERE %s ORDER BY abs(delta) DESC"
+         % (tbl, " AND ".join(where)))
+    if limit:
+        q += " LIMIT %d" % int(limit)
+    return ch.query(q)
+
+
+def movement_pairs_list(rule_version=4):
+    """[(base, aligned, n_rows)] present in the movement table, biggest first."""
+    from . import ch
+    return [(r["base"], r["aligned"], r["n"]) for r in ch.query(
+        "SELECT base, aligned, count() n FROM {db}.%s "
+        "GROUP BY base, aligned ORDER BY n DESC" % _mvt(rule_version))]
+
+
+# ---------------------------------------------------------------------------
+# Trap-bearing CH accessors — queries where a copy goes wrong silently
+# ---------------------------------------------------------------------------
+
+#: frame='' (raw) uses the `_best` views which merge topup and filter to raw.
+#: Any other frame value hits the raw table with a WHERE clause.
+_BEST = {
+    4: ("twp_words_v4_best", "twp_cells_v4_best"),
+    3: ("twp_words",         "twp_cells"),
+}
+
+
+def _resolve_words(rule_version, frame):
+    """(table, extra_where) for a words query."""
+    rv = int(rule_version)
+    if rv not in (3, 4):
+        raise ValueError("no tables for rule_version=%r" % rule_version)
+    if frame == '':
+        return _BEST[rv][0], []
+    from .ch import _tables, _lit as lit
+    wt, _ = _tables(rv)
+    where = ["frame=%s" % lit(frame)] if frame is not None else []
+    return wt, where
+
+
+def _resolve_cells(rule_version, frame):
+    """(table, extra_where) for a cells query."""
+    rv = int(rule_version)
+    if rv not in (3, 4):
+        raise ValueError("no tables for rule_version=%r" % rule_version)
+    if frame == '':
+        return _BEST[rv][1], []
+    from .ch import _tables, _lit as lit
+    _, ct = _tables(rv)
+    where = ["frame=%s" % lit(frame)] if frame is not None else []
+    return ct, where
+
+
+def words(model, prompt=None, prompts=None, rule_version=4, frame=''):
+    """Word distributions for a model.
+
+        words("allenai/OLMo-3-1025-7B", prompt="She wanted to")
+        words("allenai/OLMo-3-1025-7B", prompts=panel_prompts)
+        words("allenai/OLMo-3-1025-7B", frame='prefill')
+
+    `frame=''` (default) reads the `_best` view — topup merged, raw frame
+    only. `frame='prefill'` reads framed cells from the raw table.
+    `frame=None` reads all frames from the raw table.
+    """
+    from . import ch
+    from .ch import _lit
+    wt, where = _resolve_words(rule_version, frame)
+    where.append("model=%s" % _lit(model))
+    if prompt is not None:
+        where.append("prompt=%s" % _lit(prompt))
+    if prompts is not None:
+        ps = ",".join(_lit(p) for p in prompts)
+        where.append("prompt IN (%s)" % ps)
+    return ch.query("SELECT prompt, word, p FROM {db}.%s WHERE %s"
+                    % (wt, " AND ".join(where)))
+
+
+def words_multi(models, prompts, rule_version=4, frame=''):
+    """Word distributions for multiple models x prompts. One query.
+
+        d = words_multi(["model_a", "model_b"], ["prompt1", "prompt2"])
+        -> {prompt: {model: {word: p}}}
+
+    Same `frame` semantics as `words()`.
+    """
+    from . import ch
+    from .ch import _lit
+    wt, where = _resolve_words(rule_version, frame)
+    ms = ",".join(_lit(m) for m in models)
+    ps = ",".join(_lit(p) for p in prompts)
+    where.append("model IN (%s)" % ms)
+    where.append("prompt IN (%s)" % ps)
+    out = {}
+    for r in ch.query("SELECT prompt, model, word, p FROM {db}.%s "
+                      "WHERE %s" % (wt, " AND ".join(where))):
+        out.setdefault(r["prompt"], {}).setdefault(r["model"], {})[r["word"]] = r["p"]
+    return out
+
+
+def cells(model, prompts=None, rule_version=4, frame=''):
+    """Cell-level metadata for a model.
+
+        cells("allenai/OLMo-3-1025-7B")
+        cells("allenai/OLMo-3-1025-7B", frame='prefill')
+
+    Same `frame` semantics as `words()`.
+    """
+    from . import ch
+    from .ch import _lit
+    ct, where = _resolve_cells(rule_version, frame)
+    where.append("model=%s" % _lit(model))
+    if prompts is not None:
+        ps = ",".join(_lit(p) for p in prompts)
+        where.append("prompt IN (%s)" % ps)
+    cols = "prompt, total, tail, conservation" if frame == '' and int(rule_version) == 4 \
+        else "prompt, tail, `drop`, open, mojibake, n_words"
+    return ch.query("SELECT %s FROM {db}.%s WHERE %s"
+                    % (cols, ct, " AND ".join(where)))
+
+
+def movement_js(base=None, aligned=None, rule_version=4):
+    """Cell-level JS for movement pairs.
+
+        movement_js()                        # all pairs
+        movement_js("model_a", "model_b")    # one pair
+
+    Reads `movement_cells` (v3) or `movement_cells_v4` (v4).
+    No frame parameter — `movement_cells_v4` has no frame columns; frame
+    filtering is on the word-level `movement_v4` table via `movement_rows`.
+    """
+    from . import ch
+    from .ch import _lit
+    rv = int(rule_version)
+    tbl = _MOVEMENT_CELLS_TABLE.get(rv)
+    if tbl is None:
+        raise ValueError("no movement_cells table for rule_version=%r" % rule_version)
+    where = []
+    if base is not None:
+        where.append("base=%s" % _lit(base))
+    if aligned is not None:
+        where.append("aligned=%s" % _lit(aligned))
+    q = "SELECT base, aligned, prompt, js_total FROM {db}.%s" % tbl
+    if where:
+        q += " WHERE %s" % " AND ".join(where)
+    return ch.query(q)
+
+
+def words_endpoints(prompt=None, prompts=None, rule_version=4, frame=''):
+    """Word dists for all declared base->endpoint pairs, one query.
+
+        words_endpoints(prompt="She wanted to")
+        words_endpoints(prompts=panel_prompts)
+        words_endpoints(prompts=panel_prompts, frame='prefill')
+        -> {prompt: {model: {word: p}}}
+
+    The model population is derived from `roster.endpoints()` each call, so
+    it tracks the declaration rather than hardcoding a list.
+    """
+    from . import roster
+    eps, unresolved = roster.endpoints()
+    if unresolved:
+        raise ValueError("%d lineages are unresolved: %s"
+                         % (len(unresolved), sorted(unresolved)[:3]))
+    models = sorted({m for pair in eps.items() for m in pair})
+    ps = [prompt] if prompt else list(prompts)
+    return words_multi(models, ps, rule_version=rule_version, frame=frame)
