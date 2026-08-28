@@ -644,10 +644,8 @@ def decompose(pre, post, rule=CANONICAL, residual_pre=0.0, residual_post=0.0):
 # One prompt across many units: the data behind a slopegraph
 # ---------------------------------------------------------------------------
 
-#: Corpus version this module reads; see `ch.retable`. Default 3
-#: because v4 covers 23 models against v3's full roster -- flipping it
-#: would shrink every result rather than announce anything.
-RULE_VERSION = 3
+#: Corpus version this module reads. v4 is the full roster as of 2026-08-19.
+RULE_VERSION = 4
 
 #: **READS `twp_words`, NOT `movement`** (dario, 2026-08-17). `movement` is two
 #: columns by construction -- `p_base` and `p_aligned` -- so a CHAIN with four
@@ -708,9 +706,10 @@ def contrast(prompt, units, top=12, words=None, select_at=0, min_units=1):
 
     models = sorted({m for _, r in seq for m in r})
     inlist = ",".join("'" + esc(m) + "'" for m in models)
-    got = ch.query(ch.retable(
-        "SELECT model, word, p FROM {db}.twp_words WHERE prompt='"
-        + esc(prompt) + "' AND model IN (" + inlist + ")", RULE_VERSION))
+    wt, extra = _resolve_words(RULE_VERSION, '')
+    where = ["prompt='%s'" % esc(prompt), "model IN (%s)" % inlist] + extra
+    got = ch.query("SELECT model, word, p FROM {db}.%s WHERE %s"
+                   % (wt, " AND ".join(where)))
     by = {}
     for r in got:
         by.setdefault(r["model"], {})[r["word"]] = float(r["p"])
@@ -1002,6 +1001,96 @@ def movement_js(base=None, aligned=None, rule_version=4):
     if where:
         q += " WHERE %s" % " AND ".join(where)
     return ch.query(q)
+
+
+def pole_excess(base, aligned, prompt, pole_words, rule_version=4, frame=''):
+    """Null-corrected mass on a caller-supplied word set.
+
+        pole_excess("base_id", "aligned_id", "She wanted to",
+                    {"kill", "scream", "hit"})
+        -> {mass_base, mass_aligned, null, excess, inflation,
+            residual_share, n_fallers_in_set, n_words}
+
+    THE QUESTION: did alignment move mass onto/off these specific words beyond
+    what uniform renormalisation explains? `excess > 0` means the set gained
+    more than its share of the redistributed mass; `excess < 0` means it lost.
+
+    Uses the CANONICAL rule's faller/riser classification from movement_v4 to
+    compute inflation (R/S), then applies it to the caller's word set. Unlike
+    `decompose()`, this INCLUDES fallers in the set — a marked word that halved
+    IS the displacement event, and excluding it would answer a different question.
+    The result is therefore NOT zero-sum and the docstring says so.
+
+    The inflation follows `decompose()` (lines 619-621):
+        R = 1 - sum(p_aligned over fallers)         [includes residual implicitly]
+        S = sum(p_base over non-fallers) + resid_base  [includes residual explicitly]
+        inflation = R / S
+
+    The null for EVERY word in the set — including fallers — is `p_base * inflation`.
+    A faller's counterfactual is what renormalisation would give it, not its actual
+    aligned mass. Excess for a faller is therefore negative (it fell below even the
+    renormalisation expectation), which is the displacement event.
+    """
+    from . import ch
+    from .ch import _lit
+    tbl = _mvt(rule_version)
+    ctbl = _MOVEMENT_CELLS_TABLE[int(rule_version)]
+
+    frame_where = []
+    if int(rule_version) == 4 and frame is not None:
+        if frame == '':
+            frame_where.append("frame_base=''")
+            frame_where.append("frame_aligned=''")
+        else:
+            frame_where.append("frame_aligned=%s" % _lit(frame))
+    fw = (" AND " + " AND ".join(frame_where)) if frame_where else ""
+
+    pair_where = "base=%s AND aligned=%s AND prompt=%s" % (
+        _lit(base), _lit(aligned), _lit(prompt))
+
+    rows = ch.query(
+        "SELECT word, p_base, p_aligned, cls FROM {db}.%s WHERE %s%s"
+        % (tbl, pair_where, fw))
+    if not rows:
+        return None
+
+    cell_rows = ch.query(
+        "SELECT resid_base, resid_aligned FROM {db}.%s WHERE %s"
+        % (ctbl, pair_where))
+    resid_base = cell_rows[0]["resid_base"] if cell_rows else 0.0
+
+    fallers = set()
+    by_word = {}
+    for r in rows:
+        by_word[r["word"]] = (r["p_base"], r["p_aligned"], r["cls"])
+        if r["cls"] == "faller":
+            fallers.add(r["word"])
+
+    R = 1.0 - sum(pa for w, (pb, pa, c) in by_word.items() if w in fallers)
+    S = sum(pb for w, (pb, pa, c) in by_word.items() if w not in fallers) \
+        + resid_base
+    inflation = (R / S) if S > 0 else 1.0
+
+    pole = set(pole_words)
+    mass_base = sum(pb for w, (pb, pa, c) in by_word.items() if w in pole)
+    mass_aligned = sum(pa for w, (pb, pa, c) in by_word.items() if w in pole)
+    null_mass = sum(pb * inflation for w, (pb, pa, c) in by_word.items()
+                    if w in pole)
+    excess = mass_aligned - null_mass
+
+    total_mass = sum(pb for pb, _, _ in by_word.values()) + resid_base
+    residual_share = resid_base / total_mass if total_mass > 0 else 0.0
+
+    return {
+        "mass_base": mass_base,
+        "mass_aligned": mass_aligned,
+        "null": null_mass,
+        "excess": excess,
+        "inflation": inflation,
+        "residual_share": residual_share,
+        "n_fallers_in_set": len(pole & fallers),
+        "n_words": len(pole & set(by_word)),
+    }
 
 
 def words_endpoints(prompt=None, prompts=None, rule_version=4, frame=''):
