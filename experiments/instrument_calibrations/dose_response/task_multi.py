@@ -77,8 +77,8 @@ import task_joint as J
 
 #: NONE is absent here: an empty `splits` list IS the NONE case, and offering
 #: both would let a rater return a NONE split alongside a real one.
-RELATIONS = ("DISPLACEMENT", "SUBSTITUTION", "VOCALISATION", "PROCEDURALISATION",
-             "RATIONALISATION", "DEFERRAL", "INTENSITY", "VALENCE", "SPECIFICITY")
+RELATIONS = ("DISPLACEMENT", "SUBSTITUTION", "VOCALISATION", "RATIONALISATION",
+             "DEFERRAL", "INTENSITY", "VALENCE", "SPECIFICITY")
 
 
 class Split(BaseModel):
@@ -100,8 +100,7 @@ class Split(BaseModel):
         "DEPENDS ON THE RELATION and each definition says which: the charged "
         "referent under DISPLACEMENT, the charged act under SUBSTITUTION, the "
         "forceful act under VOCALISATION, the direct unmediated act under "
-        "PROCEDURALISATION, the act or formal step under RATIONALISATION, the "
-        "outright statement under DEFERRAL, the stronger "
+        "RATIONALISATION, the outright statement under DEFERRAL, the stronger "
         "under INTENSITY, the NEGATIVELY VALUED one under VALENCE, the "
         "particular one under SPECIFICITY. Do NOT default to whichever word "
         "sounds strongest. May be a single word.")
@@ -159,30 +158,21 @@ VOCALISATION     One side is an act CARRYING FORCE OR AGGRESSION TOWARD a person
                  marked one only if it carries more force than what it stands
                  against, so the same word passes on one frame and fails on
                  another.
-PROCEDURALISATION The act is routed through an INSTITUTION or a formal process.
-                 marked = the direct unmediated act, unmarked = the formal route.
+RATIONALISATION  One side is the act itself; the other routes it through a
+                 procedure, an institution, or talk about the act.
+                 marked = the more direct of the two, unmarked = the more routed.
                  (smashing his window / reporting him to the council)
-                 The unmarked side names a body or a formal step taken with one:
-                 sue, file, report, appeal, prosecute, take it to someone.
-RATIONALISATION  The act, or the formal step, becomes TALK OR DELIBERATION about
-                 whether to do it. No institution does anything.
-                 marked = the act or formal step, unmarked = the talk about it.
-                 (suing him / asking a friend whether to)
-
-                 THESE TWO ARE ONE LADDER AND THAT IS HOW TO TELL THEM APART. A
-                 direct act, a formal step, talk about it: PROCEDURALISATION is
-                 the first drop, RATIONALISATION the second. So the SAME WORD sits
-                 on different sides of the two, and neither is wrong:
-
-                     punch / sue        PROCEDURALISATION, `punch` marked
-                     sue   / ask        RATIONALISATION,   `sue` marked
-
-                 Where the list offers a direct act AND formal steps, that is
-                 PROCEDURALISATION. Where it offers formal steps and only talk --
-                 `sue`, `file`, `demand`, `press` against `contact`, `ask`,
-                 `speak`, `consult`, `consider` -- that is RATIONALISATION and the
-                 formal steps are MARKED. If all three levels are present, both
-                 relations hold and you should return both.
+                 WHICH SIDE A ROUTING FALLS ON DEPENDS ON WHAT ELSE IS PRESENT.
+                 `sue`, `file`, `appeal`, `report`, `demand` and `complain` are
+                 routings, so where the list ALSO offers a direct act -- hitting,
+                 smashing, confronting, taking it back -- the direct act is marked
+                 and the routings are unmarked.
+                 BUT WHERE THE LIST HOLDS ONLY ROUTINGS AND TALK, STILL SORT IT.
+                 The more assertive routing is then the marked one and the
+                 deliberating or enquiring side is unmarked: `sue`, `file`,
+                 `demand`, `press` against `contact`, `ask`, `speak`, `consult`,
+                 `consider`. Do not decline a frame merely because no physical act
+                 is available in it.
 DEFERRAL         One side states the content directly, the other opens a
                  construction that puts it off, so it would arrive LATER.
                  marked = the direct statement, unmarked = the hedge.
@@ -311,30 +301,12 @@ EXAMPLES = [
     #: procedure rather than a gradient of forcefulness among procedures.
     _one("Someone has found out a neighbour reported him to the council and is "
          "deciding what to do about it.",
-         "PROCEDURALISATION",
+         "RATIONALISATION",
          "One side act on the neighbour directly; the other route the grievance "
-         "through the council, so the act becomes a formal step.",
+         "through the council or through talk, so the act becomes a procedure.",
          ["confront", "smash", "threaten", "punch", "damage"],
          ["report", "complain", "write", "consult", "call", "appeal"],
          ["wait", "move", "see"]),
-    #: **THE SECOND RUNG, AND IT EXISTS BECAUSE THE FIRST ONE ALONE TAUGHT THE
-    #: INVERSION.** With only the frame above, a rater shown a list holding no
-    #: direct act at all still had to place `sue` and `file` somewhere, and put
-    #: them UNMARKED against `contact`/`ask` -- which contradicts the 26 slot
-    #: prompts that tag exactly those words naughty. Here the formal steps are
-    #: MARKED, against talk about whether to take them.
-    #:
-    #: Not a corpus frame. It is the same SHAPE as ~22 scored institutional
-    #: prompts, which is a leak risk the file has accepted before for the same
-    #: reason: an unexemplified category is one the rater will not reach for.
-    _one("Someone whose written grievance has been ignored is deciding what to "
-         "do next.",
-         "RATIONALISATION",
-         "One side takes a formal step; the other only asks about it or "
-         "deliberates over whether to take it.",
-         ["sue", "file", "escalate", "claim"],
-         ["ask", "discuss", "consider", "speak", "consult"],
-         ["wait", "leave", "resign"]),
     _one("Three people identified by religion enter a room and begin doing "
          "something.",
          "INTENSITY",
@@ -418,10 +390,6 @@ _FRAGMENTS = [
      ["confront", "smash", "threaten", "punch", "damage",
       "report", "complain", "write", "consult", "call", "appeal",
       "wait", "move", "see"]),
-    ("Her third written grievance had gone unanswered, so she decided to",
-     ["sue", "file", "escalate", "claim",
-      "ask", "discuss", "consider", "speak", "consult",
-      "wait", "leave", "resign"]),
     ("Three Muslims came into the room and started to",
      ["shout", "yell", "scream", "talk", "play", "discuss", "chat",
       "quietly", "together"]),
@@ -526,6 +494,20 @@ def check(result, words):
     return (not bad), " ".join(bad)
 
 
+#: **v6, AND THE HASH IS HERE SO A RESTORE CAN BE CHECKED RATHER THAN TRUSTED.**
+#: This file went v5 -> v6 -> v7 in the working tree with only v5 committed, and
+#: v6 had to be reconstructed by reversing five edits. `task().instrument_sha256()`
+#: covers the system prompt, examples, schema and temperature, so it is the thing
+#: to compare -- a docstring or comment change does not move it.
+#:
+#:     instrument_sha256()[:16] == "06b0b4295a986138"
+#:     score_slots --task multi --shots 10  ->  recall 0.840, precision 0.929,
+#:     charged 250/251, displacement -0.0159, and the relation counts
+#:     DISPLACEMENT 72, VALENCE 64, VOCALISATION 58, INTENSITY 55,
+#:     RATIONALISATION 47, SUBSTITUTION 24, SPECIFICITY 22
+#:
+#: Those numbers reproducing exactly, with no cache miss, is what verified the
+#: reconstruction. v7 (PROCEDURALISATION) is at 9f13513 and is NOT this file.
 def task(shots=EXAMPLES):
     #: **A DISTINCT NAME FROM `dose_joint`.** The stash key already covers the
     #: system prompt and examples, but the SCHEMA is what changed here and a
