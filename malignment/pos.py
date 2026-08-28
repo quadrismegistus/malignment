@@ -41,8 +41,19 @@ the same refusal `cache.py` makes about dtype. Without it a stash filled by
 """
 
 import os
+import re
 
 SPACY_MODEL = "en_core_web_sm"
+#: only the two languages this corpus contains. A third would need its own
+#: entry AND a detector that can tell it apart; `detect_lang` below is a
+#: two-way test, not a general one, and says so.
+LANG_MODEL = {"en": "en_core_web_sm", "zh": "zh_core_web_sm"}
+#: the same range `jakobson_space/population.py` uses for `cjk_share`.
+_CJK = re.compile(r"[\u3400-\u9fff]")
+_LAT = re.compile(r"[A-Za-z]")
+#: spaCy does not put spaces between Chinese tokens, and inserting one makes the
+#: tagger see a token boundary the language does not have.
+_JOIN = {"en": " ", "zh": ""}
 
 #: Repo-level, shared: displacement_axis, displacement_taxonomy and slot_ratings
 #: all want tags for the same (prompt, word) pairs. `data/` is gitignored
@@ -63,11 +74,43 @@ def get_nlp(model=SPACY_MODEL):
     return _NLP[model]
 
 
+def detect_lang(text):
+    """-> 'zh' or 'en'. A TWO-WAY test, not language identification.
+
+    This corpus is English and Chinese and nothing else, so the presence of CJK
+    is sufficient and no dependency is needed. `langdetect` would answer a
+    question nobody is asking and would misfire on the short, truncated stems
+    this is called with -- `She slowly took off her` is not a sentence.
+
+    Compared rather than thresholded: a zh prompt can carry Latin characters
+    (`女性教师年薪为$`) and an en prompt can carry none, so the test is which
+    script has MORE characters, which is stable at these lengths.
+    """
+    t = text or ""
+    return "zh" if len(_CJK.findall(t)) > len(_LAT.findall(t)) else "en"
+
+
 def tagger_id(nlp=None, model=SPACY_MODEL):
-    """Identity of the tagger that produced a POS, for the cache key."""
+    """Identity of the tagger that produced a POS, for the cache key.
+
+    **THE LANGUAGE IS IN THE KEY FOR EVERYTHING EXCEPT ENGLISH, AND THAT
+    ASYMMETRY IS DELIBERATE.** spaCy's `meta["name"]` drops the language prefix,
+    so `en_core_web_sm` and `zh_core_web_sm` BOTH report `core_web_sm` and both
+    resolved to `core_web_sm-3.8.0`. The cache key is (tagger, prompt, word), so
+    an English tag and a Chinese tag for one pair collided and whichever ran
+    first answered for both -- silently, since a tag is never absurd on its face.
+
+    Prefixing every id with its language would fix it and invalidate the whole
+    existing stash, which holds 2,751,990 pairs from `contextual_norms/
+    pos_pass.py`. English keeps its historical form and every other language
+    gets a prefix, so old English entries stay readable and no non-English tag
+    can ever land on one.
+    """
     nlp = nlp or get_nlp(model)
     meta = getattr(nlp, "meta", {}) or {}
-    return "%s-%s" % (meta.get("name") or model, meta.get("version") or "?")
+    name = "%s-%s" % (meta.get("name") or model, meta.get("version") or "?")
+    lang = meta.get("lang")
+    return name if (not lang or lang == "en") else "%s-%s" % (lang, name)
 
 
 def _stash():
@@ -92,12 +135,20 @@ def _stash():
     return _STASH["st"]
 
 
-def get_pos(words, prompt, nlp=None, stash=None):
+def get_pos(words, prompt, nlp=None, stash=None, lang=None):
     """Contextual POS for each word at the end of `prompt`. Returns {word: pos}.
 
     Only misses are tagged, so a warm stash costs no spaCy calls at all.
+
+    `lang` selects the pipeline: `None` DETECTS it from the prompt, which is
+    right for a mixed corpus and is why this is the default. Pass it explicitly
+    to override. An explicit `nlp` wins over both -- a caller who built the
+    pipeline knows what it is.
     """
     st = stash if stash is not None else _stash()
+    if nlp is None:
+        lang = lang or detect_lang(prompt)
+        nlp = get_nlp(LANG_MODEL.get(lang, SPACY_MODEL))
     tid = tagger_id(nlp)
 
     out, misses = {}, []
@@ -109,8 +160,9 @@ def get_pos(words, prompt, nlp=None, stash=None):
             out[w] = hit
     if misses:
         nlp = nlp or get_nlp()
+        join = _JOIN.get((getattr(nlp, "meta", {}) or {}).get("lang"), " ")
         for w in misses:
-            doc = nlp(prompt + " " + w)
+            doc = nlp(prompt + join + w)
             pos = doc[-1].pos_ if len(doc) > 0 else "X"
             st[{"tagger": tid, "prompt": prompt, "word": w}] = pos
             out[w] = pos
