@@ -1,7 +1,14 @@
 """Which frames displace, what falls, what arrives. The catalogue.
 
-    .venv/bin/python -u catalogue.py                 # top of the ranking
-    .venv/bin/python -u catalogue.py --all --out X   # full JSON
+    .venv/bin/python -u displacement_catalogue.py
+    .venv/bin/python -u displacement_catalogue.py --n 40
+
+**NOT NAMED `catalogue.py`.** It was, for about an hour, and that shadowed the
+`catalogue` PACKAGE that spacy depends on -- every module in this folder puts its
+own directory on `sys.path`, so `import spacy` anywhere downstream died with
+`AttributeError: module 'catalogue' has no attribute 'create'`, naming neither
+this file nor the collision. `pos.get_pos` is on the path of `rank.cells_bulk`,
+so that breaks candidate construction for the whole folder.
 
 THIS IS THE DELIVERABLE THE TAGGER WAS BUILT FOR, and the corpus statistics were
 never it. Pole sums mix two populations that move in opposite directions -- on
