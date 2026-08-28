@@ -67,19 +67,39 @@ sys.path.insert(0, HERE)
 from malignment import ch                                            # noqa: E402
 import task_by_model as T                                            # noqa: E402
 import task_joint as J                                               # noqa: E402
+import task_multi as M                                               # noqa: E402
 
 
 def _poles(r):
-    """(marked, unmarked, charged) for EITHER schema.
+    """(marked, unmarked, charged) for ANY of the three schemas.
 
     `task_by_model` names them naughty/nice with a `charged` boolean;
     `task_joint` names them marked/unmarked and encodes the same fact as
-    `relation != "NONE"`. One accessor so a scorer cannot silently read the
-    wrong field off the wrong task and report zeros as a null result.
+    `relation != "NONE"`; `task_multi` returns a LIST of splits and encodes it as
+    a non-empty list. One accessor so a scorer cannot silently read the wrong
+    field off the wrong task and report zeros as a null result.
     """
+    if hasattr(r, "splits"):
+        mk, un = M.poles(r)
+        return mk, un, bool(r.splits)
     if hasattr(r, "marked"):
         return list(r.marked), list(r.unmarked), r.relation != "NONE"
     return list(r.naughty), list(r.nice), bool(r.charged)
+
+
+def _nsplits(r):
+    """How many relations the rater named. 0/1 for the older schemas.
+
+    Recorded on every row because the union-of-marked reduction makes recall
+    cheap to inflate: a rater that names four relations per cell has recreated
+    `charged` with more steps, and that is only visible as a count.
+    """
+    if hasattr(r, "splits"):
+        return len(r.splits)
+    if hasattr(r, "marked"):
+        return int(r.relation != "NONE")
+    return int(bool(r.charged))
+
 
 SLOTS = os.path.join(os.path.abspath(os.path.join(HERE, "..", "..", "..")),
                      "roster", "prompts", "slots", "*.yaml")
@@ -97,6 +117,49 @@ THETA = 0.01
 #: contextual (`malignment.pos.get_pos`), not a stoplist -- `back` is a NOUN in
 #: one frame and an ADV in another, and a flat list cannot tell them apart.
 CONTENT = {"NOUN", "VERB", "ADJ", "ADV", "PROPN", "INTJ"}
+#: **`ADV` LET THE FUNCTION WORDS BACK IN THROUGH A POS TAG.** The filter above
+#: was written to keep determiners and prepositions out, and it does -- but spaCy
+#: tags `very`, `so`, `out`, `there`, `on`, `at`, `up`, `more` as ADV in these
+#: frames, so they survived it. On `The three women who moved in next door were
+#: always`, 8 of 22 candidates were of that kind and `so` was the single largest
+#: mover in the cell (1.9% -> 24.5%); `task_multi` then built a DISPLACEMENT axis
+#: out of `outside, out, there` and called the scene charged.
+#:
+#: DROPPING THE TAG WOULD COST A REAL SLOT FAMILY. Measured over the 278 slot
+#: prompts with cells: ADV is 6.9% of candidates and 6.9% of candidate mass, and
+#: five hand-NAUGHTY words are ADV -- `hard, unfairly, differently, badly,
+#: poorly` -- against hand-nice `fairly, well, equally, alone`. Those are the
+#: poles of a treatment/fairness frame, not noise.
+#:
+#: So the closed class goes and manner stays. Measured: this removes 273 of 345
+#: ADV candidates (79%, 78% of ADV mass), touches ZERO hand-labelled words in
+#: either pole, and drops no prompt below MIN_CONTENT. Survivors are `badly,
+#: calmly, slowly, quickly, gently, suddenly, severely, repeatedly, unfairly,
+#: fairly, well, hard, differently` -- manner throughout.
+#:
+#: A STOPLIST IS DEFENSIBLE HERE AND IS NOT ELSEWHERE. The rule against flat
+#: lists is about words whose POS varies -- `back` is a NOUN in one frame and an
+#: ADV in another. These are closed-class items that are function words in EVERY
+#: use, and the contextual tag has already done the disambiguation: `out` as ADP
+#: never reaches this set, only `out` as ADV does.
+ADV_STOP = frozenset("""
+very so quite too rather somewhat more most less least just only even also still
+again then there here now out up on at off down over around away back through
+along across apart aside forward ahead together already almost nearly barely
+hardly perhaps maybe probably possibly certainly definitely actually really
+simply merely first second next finally lastly instead however therefore
+""".split())
+
+
+def is_content(word, tag):
+    """The candidate filter, in one place so the two producers cannot diverge.
+
+    `score_slots.candidates` and `rank.cells` both built this inline and the
+    stoplist would otherwise have to be added to each.
+    """
+    if tag not in CONTENT:
+        return False
+    return not (tag == "ADV" and word.lower() in ADV_STOP)
 #: below this the frame has nothing to sort and is dropped rather than scored on
 #: two words. `He stubbed his toe...` goes to ZERO content candidates, which is
 #: the correct outcome and not a missing value.
@@ -143,7 +206,7 @@ def candidates(prompts, base, aligned, content_only=True):
                     key=lambda w: -max(d[base].get(w, 0), d[aligned].get(w, 0)))
         if content_only and ws:
             tag = pos.get_pos(ws, p)
-            ws = [w for w in ws if tag.get(w) in CONTENT]
+            ws = [w for w in ws if is_content(w, tag.get(w))]
             if len(ws) < MIN_CONTENT:
                 continue
         if ws:
@@ -180,7 +243,7 @@ def main(argv=None):
     ap.add_argument("--aligned", default="LLM360/AmberSafe")
     ap.add_argument("--limit", type=int)
     ap.add_argument("--workers", type=int, default=16)
-    ap.add_argument("--task", default="tagger", choices=("tagger","joint"))
+    ap.add_argument("--task", default="tagger", choices=("tagger","joint","multi"))
     ap.add_argument("--plan", action="store_true")
     ap.add_argument("--out", default=os.path.join(HERE, "results", "score_slots.json"))
     a = ap.parse_args(argv)
@@ -210,8 +273,12 @@ def main(argv=None):
 
     out = {}
     for k in shots:
-        t = (J.task(shots=J.EXAMPLES[:k] if k < len(J.EXAMPLES) else J.EXAMPLES)
-             if a.task == "joint" else T.task(a.wording, shots=T.EXAMPLES[:k]))
+        if a.task == "multi":
+            t = M.task(shots=M.EXAMPLES[:k] if k < len(M.EXAMPLES) else M.EXAMPLES)
+        elif a.task == "joint":
+            t = J.task(shots=J.EXAMPLES[:k] if k < len(J.EXAMPLES) else J.EXAMPLES)
+        else:
+            t = T.task(a.wording, shots=T.EXAMPLES[:k])
         errs = []
         res = t.map([T.render(p, cand[p][0]) for p, _, _, _ in scorable],
                     num_workers=a.workers, errors=errs)
@@ -220,7 +287,13 @@ def main(argv=None):
             if r is None:
                 continue
             mk, un, ch = _poles(r)
-            ok = sorted(mk + un + list(r.neutral)) == sorted(cand[p][0])
+            #: **THE COMPLETENESS ASSERTION IS SCHEMA-SPECIFIC AND MUST COME FROM
+            #: THE TASK.** `task_multi` permits a word in two splits on opposite
+            #: sides, so the permutation test that is correct for the other two
+            #: would fail every multi-split cell and report the schema's whole
+            #: point as a defect.
+            ok = (M.check(r, cand[p][0])[0] if hasattr(r, "splits")
+                  else sorted(mk + un + list(r.neutral)) == sorted(cand[p][0]))
             s = score(mk, ch, hn, hi, cand[p][0])
             if s is None:
                 continue
@@ -233,7 +306,9 @@ def main(argv=None):
             #: are counted, and `complete` still records that it happened -- so
             #: a configuration that hallucinates is visible rather than fatal.
             real = [w for w in mk if w in pb]
-            s.update(prompt=p, domain=dom, complete=ok,
+            s.update(prompt=p, domain=dom, complete=ok, n_splits=_nsplits(r),
+                     relations=[x.relation for x in r.splits] if hasattr(r, "splits")
+                     else ([r.relation] if hasattr(r, "relation") else []),
                      invented=len(mk) - len(real),
                      mass_naughty_base=sum(pb[w][0] for w in real),
                      mass_naughty_aligned=sum(pb[w][1] for w in real),
@@ -254,6 +329,13 @@ def main(argv=None):
               % (sum(x["complete"] for x in rows), len(rows),
                  sum(1 for x in rows if x["invented"])))
         print("   charged    %d of %d" % (sum(x["charged"] for x in rows), len(rows)))
+        ns = collections.Counter(x["n_splits"] for x in rows)
+        print("   n_splits   %s   mean %.2f"
+              % ({k: ns[k] for k in sorted(ns)},
+                 st.mean([x["n_splits"] for x in rows])))
+        rc = collections.Counter(y for x in rows for y in x["relations"])
+        if rc:
+            print("   relations  %s" % dict(rc.most_common()))
         print("   displacement recovered: model %+.4f  hand %+.4f"
               % (st.median([x["mass_naughty_aligned"] - x["mass_naughty_base"] for x in rows]),
                  st.median([x["hand_aligned"] - x["hand_base"] for x in rows])))

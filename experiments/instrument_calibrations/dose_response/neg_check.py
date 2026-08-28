@@ -52,20 +52,15 @@ from malignment import ch                                            # noqa: E40
 from malignment.prompts import Prompts                               # noqa: E402
 import task_by_model as T                                            # noqa: E402
 import task_joint as J                                               # noqa: E402
+import task_multi as M                                               # noqa: E402
 import score_slots as S                                              # noqa: E402
 
 
-def _poles(r):
-    """(marked, unmarked, charged) for EITHER schema.
-
-    `task_by_model` names them naughty/nice with a `charged` boolean;
-    `task_joint` names them marked/unmarked and encodes the same fact as
-    `relation != "NONE"`. One accessor so a scorer cannot silently read the
-    wrong field off the wrong task and report zeros as a null result.
-    """
-    if hasattr(r, "marked"):
-        return list(r.marked), list(r.unmarked), r.relation != "NONE"
-    return list(r.naughty), list(r.nice), bool(r.charged)
+#: ONE ACCESSOR, DEFINED ONCE. It was copied into both scorers and a schema was
+#: then added to only one of them; importing it means a fourth schema cannot be
+#: half-supported.
+_poles = S._poles
+_nsplits = S._nsplits
 
 
 def main(argv=None):
@@ -77,7 +72,7 @@ def main(argv=None):
     ap.add_argument("--aligned", default="LLM360/AmberSafe")
     ap.add_argument("--per-domain", type=int, default=60)
     ap.add_argument("--workers", type=int, default=24)
-    ap.add_argument("--task", default="tagger", choices=("tagger","joint"))
+    ap.add_argument("--task", default="tagger", choices=("tagger","joint","multi"))
     ap.add_argument("--plan", action="store_true")
     ap.add_argument("--out", default=os.path.join(HERE, "results", "neg_check.json"))
     a = ap.parse_args(argv)
@@ -111,8 +106,12 @@ def main(argv=None):
 
     out = {}
     for k in shots:
-        t = (J.task(shots=J.EXAMPLES[:k] if k < len(J.EXAMPLES) else J.EXAMPLES)
-             if a.task == "joint" else T.task(a.wording, shots=T.EXAMPLES[:k]))
+        if a.task == "multi":
+            t = M.task(shots=M.EXAMPLES[:k] if k < len(M.EXAMPLES) else M.EXAMPLES)
+        elif a.task == "joint":
+            t = J.task(shots=J.EXAMPLES[:k] if k < len(J.EXAMPLES) else J.EXAMPLES)
+        else:
+            t = T.task(a.wording, shots=T.EXAMPLES[:k])
         errs = []
         res = t.map([T.render(p, cand[p][0]) for p, _ in live],
                     num_workers=a.workers, errors=errs)
@@ -123,8 +122,13 @@ def main(argv=None):
             pb = cand[p][1]
             mk, un, ch = _poles(r)
             real = [w for w in mk if w in pb]
+            #: `task_multi` has no top-level `axis` -- it carries one per split.
+            #: Joining them keeps the field readable for spot checks without
+            #: pretending a multi-split cell had a single axis.
+            axis = (" | ".join("%s: %s" % (s.relation, s.axis) for s in r.splits)
+                    or r.reading) if hasattr(r, "splits") else r.axis
             rows.append(dict(prompt=p, domain=dom, charged=bool(ch),
-                             n_naughty=len(mk), axis=r.axis,
+                             n_naughty=len(mk), axis=axis, n_splits=_nsplits(r),
                              mass_base=sum(pb[w][0] for w in real),
                              mass_aligned=sum(pb[w][1] for w in real)))
         out["%s%d" % (a.wording, k)] = rows

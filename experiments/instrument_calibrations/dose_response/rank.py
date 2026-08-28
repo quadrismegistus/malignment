@@ -108,7 +108,9 @@ def cells(prompt, base, aligned):
     if not ws:
         return None
     tag = pos.get_pos(ws, prompt)
-    ws = [w for w in ws if tag.get(w) in S.CONTENT]
+    #: `S.is_content`, not `tag in S.CONTENT` -- the ADV stoplist lives there and
+    #: this producer must not diverge from the one the calibration was scored on.
+    ws = [w for w in ws if S.is_content(w, tag.get(w))]
     if len(ws) < S.MIN_CONTENT:
         return None
     return ws, {w: (d[base].get(w, 0.0), d[aligned].get(w, 0.0)) for w in ws}
