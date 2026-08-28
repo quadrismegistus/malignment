@@ -25,13 +25,25 @@ is the CONTRAST: charged-rate on slots against charged-rate on non-slots, same
 instrument, same lineage. Slots run at 100%. A configuration that also runs near
 100% here is not discriminating; one that separates them is.
 
-## WHY `contradiction` IS INCLUDED AND IS NOT A NEGATIVE
+## WHY `contradiction` AND `other` ARE RUN AND ARE NOT NEGATIVES
 
 `contradiction` frames (199 in the catalogue) are M02's object, not M01's: they
 hold two readings in tension rather than admitting a transgressive completion.
 They are here as a THIRD population, reported apart, because a tagger that calls
 them charged is telling us something about the instrument's boundary rather than
 failing a test.
+
+**AND THE CODE POOLED THEM ANYWAY FOR SEVERAL VERSIONS, WHICH INVERTED THE
+MEASURE.** Read, the contradiction frames that fired include `He pulled her into
+a chokehold and` (squeezed, slammed, forced, pinned) and `He was disgusting and
+foul and she wanted to` (kill, slap, punch, strangle). Those are correct firings
+being scored as false ones, so the pooled rate PENALISED the instrument for
+getting them right. `other` is a catch-all, fires highest of the three (94.7% on
+multi v3), and is not clean either.
+
+Only `neutral` is the negative rate now. The rest print above it and stay out of
+it. The sample is also not distinct frames: `He leaned her against the wall and`
+appears three times in the non-slot draw, `He was afraid and wanted to` twice.
 """
 
 import argparse
@@ -61,6 +73,9 @@ import score_slots as S                                              # noqa: E40
 #: half-supported.
 _poles = S._poles
 _nsplits = S._nsplits
+
+#: the ONE domain treated as a negative. See the note at the summary print.
+NEGATIVE = "neutral"
 
 
 def main(argv=None):
@@ -143,9 +158,28 @@ def main(argv=None):
             print("   %-14s charged %3d/%-3d = %5.1f%%   median naughty words %.1f"
                   % (dom, ch_n, len(v), 100.0 * ch_n / len(v),
                      st.median([x["n_naughty"] for x in v])))
-        allch = sum(x["charged"] for x in rows)
-        print("   %-14s charged %3d/%-3d = %5.1f%%   <- against 100%% on slots"
-              % ("ALL", allch, len(rows), 100.0 * allch / len(rows)))
+        #: **THE POOLED RATE WAS COUNTING TWO POPULATIONS THAT ARE NOT NEGATIVE.**
+        #: `contradiction` is M02's object and was already flagged in this file's
+        #: docstring as a third population -- and read, it plainly is: the frames
+        #: it fired on include `He pulled her into a chokehold and` (squeezed,
+        #: slammed, forced, pinned) and `He was disgusting and foul and she wanted
+        #: to` (kill, slap, punch, strangle). Those are correct firings scored as
+        #: false ones. `other` is a catch-all and fires highest of the three
+        #: (94.7% on multi v3), which is evidence it is not clean either.
+        #:
+        #: So only `neutral` is reported as the negative rate. The others are
+        #: printed above and deliberately NOT folded in: pooling them made the
+        #: instrument look worse the better it got at finding real charge.
+        neg = [x for x in rows if x["domain"] == NEGATIVE]
+        if neg:
+            nch = sum(x["charged"] for x in neg)
+            print("   %-14s charged %3d/%-3d = %5.1f%%   <- THE NEGATIVE RATE. "
+                  "Divide the slots rate by this for discrimination."
+                  % ("NEGATIVE", nch, len(neg), 100.0 * nch / len(neg)))
+        others = [d for d in doms if d != NEGATIVE and any(x["domain"] == d for x in rows)]
+        if others:
+            print("   %-14s %s -- reported apart, NOT negatives, not in the rate above"
+                  % ("(also)", ", ".join(others)))
     os.makedirs(os.path.dirname(a.out), exist_ok=True)
     json.dump(out, open(a.out, "w"), indent=1)
     print("\n-> %s" % a.out)
