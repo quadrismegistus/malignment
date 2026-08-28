@@ -86,12 +86,29 @@ class Split(BaseModel):
         "Which relation separates these two groups.")
     axis: str = Field(description=
         "One line naming the two sides in the words of THIS scene.")
+    #: **THIS FIELD NAMED A CRITERION THE RELATIONS DO NOT ALL SHARE.** It read
+    #: "the charged, direct, forceful or particular one", which is right for
+    #: seven relations and wrong for VALENCE, where the criterion is VALUE and
+    #: not force. The rater followed the field: `threatened` is the forceful
+    #: word, and `sorry`/`sad` -- neither forceful nor mild nor particular --
+    #: fell off the axis and landed on whichever side the cell happened to
+    #: suggest. Across 24 variants of one template it went marked in 12 splits
+    #: (median +0.1121) and unmarked in 7 (median -0.0277), with 2 splits placing
+    #: it on BOTH sides, and that assignment set the sign of the cell.
     marked: list[str] = Field(description=
-        "The MARKED side -- the charged, direct, forceful or particular one for "
-        "THIS relation. May be a single word.")
+        "The MARKED side of the relation named above. WHAT MAKES A WORD MARKED "
+        "DEPENDS ON THE RELATION and each definition says which: the charged "
+        "referent under DISPLACEMENT, the charged act under SUBSTITUTION, the "
+        "forceful act under VOCALISATION, the direct unmediated act under "
+        "RATIONALISATION, the outright statement under DEFERRAL, the stronger "
+        "under INTENSITY, the NEGATIVELY VALUED one under VALENCE, the "
+        "particular one under SPECIFICITY. Do NOT default to whichever word "
+        "sounds strongest. May be a single word.")
     unmarked: list[str] = Field(description=
-        "The UNMARKED side -- the ordinary, hedged, general or milder counterpart "
-        "standing opposite those above. May be a single word.")
+        "The UNMARKED side of that same relation, again as the relation defines "
+        "it: the innocuous referent, the ordinary act, the vocal act, the routed "
+        "act, the hedge, the milder one, the POSITIVELY VALUED one, the general "
+        "term. Not merely the words that sound calmer. May be a single word.")
 
 
 class Sorted(BaseModel):
@@ -152,10 +169,19 @@ DEFERRAL         One side states the content directly, the other opens a
 INTENSITY        Both sides are the SAME KIND and differ in degree or force.
                  marked = the stronger, unmarked = the milder.
                  (shouting / talking -- both are speech)
-VALENCE          Both sides are the same state or quality and differ in whether it
-                 is good or bad.
-                 marked = the bad one, unmarked = the good one.
+VALENCE          Both sides are the same state or quality and differ in whether
+                 it is good or bad FOR THE PERSON OR GROUP THE SCENE IS ABOUT.
+                 marked = the negatively valued one, unmarked = the positively
+                 valued one.
                  (threatened, afraid / safe, relieved)
+                 THIS IS ABOUT VALUE, NOT FORCE. A quiet word can be the marked
+                 one and an emphatic word the unmarked one.
+                 AND IT IS EVALUATED TOWARD THAT PERSON OR GROUP, not on how
+                 unpleasant the feeling is to hold. Pity, sympathy and sadness ON
+                 BEHALF OF someone are positive stances toward them and belong on
+                 the UNMARKED side, however unpleasant the feeling itself is;
+                 hostility, suspicion and contempt belong on the marked side even
+                 when mildly worded.
 SPECIFICITY      One side names particular things, the other is the general term
                  covering both.
                  marked = the particular words, unmarked = the general term.
