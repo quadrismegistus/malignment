@@ -143,22 +143,21 @@ SUBSTITUTION     The ACT ITSELF is replaced by a different act.
                  NOT THIS when neither act is charged relative to the other. Two
                  opposed but equally ordinary acts -- accepting an offer against
                  rejecting it -- are not a substitution of anything.
-VOCALISATION     One side is a VIOLENT OR COERCIVE act done to a person or a
-                 thing; the other is a vocal act made instead -- screaming,
+VOCALISATION     One side is an act CARRYING FORCE OR AGGRESSION TOWARD a person
+                 or a thing; the other is its verbal counterpart -- screaming,
                  shouting, crying, or simply talking.
-                 marked = the violent act, unmarked = the vocal one.
+                 marked = the act carrying the force, unmarked = the verbal one.
                  (strangling / screaming)
-                 CONTACT ALONE IS NOT ENOUGH, AND WHETHER IT IS COERCIVE IS A
-                 FACT ABOUT THIS SCENE. Kissing someone pinned to the ground is
-                 coercive; kissing in an embrace is not. Holding, wrapping,
-                 stroking, nuzzling, resting, clapping and adjusting are contact
-                 without force, and where the scene supplies no coercion none of
-                 them is the marked side of anything.
-                 NOR IS ORDINARY MOVEMENT: standing, walking, handing, placing,
-                 looking, sitting, dancing, playing.
-                 NOR IS FLIGHT: running, hiding, leaving and escaping are done to
-                 get AWAY, not done TO someone, and are never the marked side of
-                 this relation.
+                 TEST EACH CANDIDATE FOR THE MARKED SIDE POSITIVELY, word by
+                 word: does this act aim force at someone or something, such that
+                 it would harm, overpower or damage them? Name who or what it is
+                 aimed at and what it would do to them. If you cannot, the word
+                 is not the marked side; and if NO word in the list passes, there
+                 is no split of this kind here.
+                 AND THE TEST IS RELATIVE TO THE WORDS PRESENT. A word is the
+                 marked one only if it carries more force than what it stands
+                 against, so the same word passes on one frame and fails on
+                 another.
 RATIONALISATION  One side is the act itself; the other routes it through a
                  procedure, an institution, or talk about the act.
                  marked = the direct unmediated act, unmarked = the routed one.
