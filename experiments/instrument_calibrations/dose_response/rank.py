@@ -138,6 +138,52 @@ def cells(prompt, base, aligned):
     return ws, {w: (d[base].get(w, 0.0), d[aligned].get(w, 0.0)) for w in ws}
 
 
+def cells_bulk(prompt_list, base, aligned):
+    """{prompt: ([content words], {word: (p_base, p_aligned)})}, ONE query.
+
+    **`cells()` ISSUES ONE CLICKHOUSE QUERY PER PROMPT AND THAT IS 4 HOURS.**
+    Measured: 1.139 s/prompt, so 2,576 prompts x 5 lineages = 12,880 queries =
+    244 minutes of database before a single tag is written. The loop also prints
+    nothing, so the first run looked hung when it was working normally.
+
+    The selection is done in ClickHouse rather than by pulling everything: 3.25M
+    rows exist for one lineage across both arms, and only the words passing THETA
+    in EITHER arm are wanted -- plus those same words' values in the OTHER arm,
+    which is why the inner sub-select filters on (prompt, word) pairs rather than
+    on `p`. Filtering rows by `p >= THETA` directly would drop the other arm's
+    value for a word that is 4% in one arm and 0.2% in the other, and record it
+    as 0.0. That word is exactly the displacement case.
+
+    `cells()` is kept and `--per-prompt` still uses it, because this function is
+    verified against it rather than trusted.
+    """
+    keep = set(prompt_list)
+    inner = ("SELECT prompt, model, word, argMax(p,(topup,prompt_cache,mtime)) p "
+             "FROM twp_words_v4 WHERE frame='' AND model IN ('%s','%s') "
+             "GROUP BY prompt, model, word" % (base, aligned))
+    rows = ch.query(
+        "SELECT prompt, model, word, p FROM (%s) WHERE (prompt, word) IN "
+        "(SELECT prompt, word FROM (%s) WHERE p >= %s)" % (inner, inner, S.THETA))
+    by = collections.defaultdict(lambda: collections.defaultdict(dict))
+    for r in rows:
+        if r["prompt"] in keep:
+            by[r["prompt"]][r["model"]][r["word"]] = float(r["p"])
+    out = {}
+    for p, d in by.items():
+        if base not in d or aligned not in d:
+            continue
+        ws = sorted({w for m in (base, aligned) for w, v in d[m].items() if v >= S.THETA},
+                    key=lambda w: -max(d[base].get(w, 0), d[aligned].get(w, 0)))
+        if not ws:
+            continue
+        tag = pos.get_pos(ws, p)
+        ws = [w for w in ws if S.is_content(w, tag.get(w))]
+        if len(ws) < S.MIN_CONTENT:
+            continue
+        out[p] = (ws, {w: (d[base].get(w, 0.0), d[aligned].get(w, 0.0)) for w in ws})
+    return out
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser()
     ap.add_argument("--lang", default="en")
@@ -192,13 +238,9 @@ def main(argv=None):
               % (b.split("/")[-1], al.split("/")[-1], len(todo)), flush=True)
         if a.plan or not todo:
             continue
-        built, skipped = [], 0
-        for p in todo:
-            c = cells(p, b, al)
-            if c is None:
-                skipped += 1
-                continue
-            built.append((p, c))
+        got = cells_bulk(todo, b, al)
+        built = [(p, got[p]) for p in todo if p in got]
+        skipped = len(todo) - len(built)
         print("    built %d candidate lists, %d skipped (no cells or <%d content words)"
               % (len(built), skipped, S.MIN_CONTENT), flush=True)
         res = t.map([T.render(p, c[0]) for p, c in built], num_workers=a.workers)
