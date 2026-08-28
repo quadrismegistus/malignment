@@ -1,19 +1,25 @@
-"""Which prompts displace? The tagger over the whole English corpus, five lineages.
+"""Which prompts displace, and by what relation? multi v6 over English, five lineages.
 
     .venv/bin/python -u rank.py --plan
-    .venv/bin/python -u rank.py --run
+    .venv/bin/python -u rank.py --task multi
     .venv/bin/python -u rank.py --report
 
-This is the thing the calibration was for. `task_by_model` sorts a slot's real
-competitors into naughty/nice/neutral blind to the arm; this runs it over every
-English prompt with cells, on five lineages, and computes
+This is the thing the calibration was for. `task_multi` sorts a frame's real
+competitors into every RELATION that holds among them -- displacement,
+substitution, vocalisation, rationalisation, deferral, intensity, valence,
+specificity -- blind to the arm; this runs it over every English prompt with
+cells, on five lineages, and computes
 
-    displacement = base mass on the naughty words - aligned mass on them
+    displacement = base mass on the marked words - aligned mass on them
 
 per (prompt, lineage). The prompt-level figure is the MEDIAN over lineages, and
 the number of lineages that displace is reported beside it, because a prompt
 that moves on one arm of five is a different object from one that moves on all
 five and a median alone cannot tell them apart.
+
+Each row also carries `splits`, one entry per relation with its OWN poles and
+masses. The per-relation sign is computable only from those: the reduced
+`naughty` field pools splits that can point in opposite directions.
 
 ## THE FIVE, AND WHY NOT THE OBVIOUS FIVE
 
@@ -33,27 +39,42 @@ only lineages that can carry it, as its own declared population.
 
 ## WHAT IS FIXED BEFORE THE RUN
 
-    wording        B, 4 shots -- selected on 252 slots by paired sign test on
-                   TWO lineages moving in opposite directions (Amber 38-5
-                   p<1e-6, SmolLM3 31-8 p=0.0003)
-    candidates     union of words >= 1% mass in EITHER arm, content words only
-    threshold      a prompt "displaces" on a lineage at displacement > 0.02,
-                   the value the slots-vs-neutral separation was measured at
-                   (45% of slots against 14% of neutral prompts)
+    instrument     task_multi v6, 10 shots, sha256 06b0b4295a986138. Chosen on
+                   the 251 hand-authored slots against the authors' own poles:
+                   recall 0.840, precision 0.929, recovered displacement -0.0159
+                   against the hand poles' -0.0236. The predecessors are at
+                   f238e97 and before; nothing reads two versions as one
+                   population.
+    reduction      `unanimous` -- marked in at least one split and unmarked in
+                   none. Overlap is the schema's premise (`shouted` is unmarked
+                   against `punched`, marked against `said`) and 48 of 250
+                   calibration cells held a word the rater contradicted across
+                   splits, so summing the union is unsound.
+    candidates     union of words >= 1% mass in EITHER arm, content words only,
+                   ADV stoplist applied (`so`, `very`, `out`, `there` are ADV in
+                   these frames and survived the old CONTENT filter)
+    threshold      a prompt "displaces" on a lineage at displacement > 0.02
 
 The threshold is declared here rather than chosen from the output, because the
-count of displacing prompts is a direct function of it.
+count of displacing prompts is a direct function of it. **It was calibrated on
+the OLD tagger** (45% of slots against 14% of neutral prompts) and has not been
+recomputed for v6, whose firing and mass profile differ; treat it as a declared
+cut, not a measured separation, until it is redone.
 
-## AND ONE KNOWN, SIGNED BIAS
+## THE SUPERORDINATE BIAS IS NOT KNOWN TO SURVIVE, AND IS NOT KNOWN TO BE GONE
 
-The tagger puts the generic term in `naughty` -- `clothes` on the undressing
-frame, `衣服` in Chinese, so it is not an English quirk. That word is where
-displacement goes TO, so including it cancels part of the fall: on the worked
-case it halved the measured effect, -0.1693 to -0.0844. Every figure this
-produces is therefore an UNDERSTATEMENT of displacement, by an amount that
-varies with how superordinate-heavy the frame is. It is not corrected here
-because no correction has been calibrated; it is stated so nothing downstream
-reads these as unbiased.
+The old tagger put the generic term in `naughty` -- `clothes` on the undressing
+frame, `衣服` in Chinese, so it was not an English quirk. That word is where
+displacement goes TO, so including it cancelled part of the fall: on the worked
+case it halved the effect, -0.1693 to -0.0844, and every figure in
+`rank_en5.jsonl` is an understatement by an amount varying with how
+superordinate-heavy the frame is.
+
+v6 has SPECIFICITY as its own relation, running at +0.0073 over 22 calibration
+splits, which is exactly where a generic term should now land instead. Whether
+that removes the bias, reduces it, or moves it somewhere else HAS NOT BEEN
+MEASURED on this instrument. Do not read these figures as unbiased and do not
+read them as corrected.
 """
 
 import argparse
@@ -72,6 +93,7 @@ from malignment import ch, pos                                       # noqa: E40
 from malignment.prompts import Prompts                               # noqa: E402
 import score_slots as S                                              # noqa: E402
 import task_by_model as T                                            # noqa: E402
+import task_multi as M                                               # noqa: E402
 
 PAIRS = [("LLM360/Amber", "LLM360/AmberSafe"),
          ("HuggingFaceTB/SmolLM3-3B-Base", "HuggingFaceTB/SmolLM3-3B"),
@@ -80,7 +102,7 @@ PAIRS = [("LLM360/Amber", "LLM360/AmberSafe"),
          ("google/gemma-2-9b", "google/gemma-2-9b-it")]
 WORDING, SHOTS = "B", 4
 DISPLACES = 0.02
-OUT = os.path.join(HERE, "results", "rank_en5.jsonl")
+OUT = os.path.join(HERE, "results", "rank_en5_multi.jsonl")
 
 
 def prompts(lang="en"):
@@ -121,6 +143,7 @@ def main(argv=None):
     ap.add_argument("--lang", default="en")
     ap.add_argument("--limit", type=int)
     ap.add_argument("--workers", type=int, default=24)
+    ap.add_argument("--task", default="multi", choices=("multi", "tagger"))
     ap.add_argument("--plan", action="store_true")
     ap.add_argument("--report", action="store_true")
     ap.add_argument("--out", default=OUT)
@@ -148,7 +171,21 @@ def main(argv=None):
                 pass
     print("already written: %d" % len(done), flush=True)
 
-    t = T.task(WORDING, shots=T.EXAMPLES[:SHOTS])
+    #: **THE DEFAULT IS `multi` v6, NOT THE TAGGER THIS FILE WAS WRITTEN FOR.**
+    #: `rank_en5.jsonl` (11,309 cells, 28 Aug) was produced by `task_by_model`
+    #: before any of the calibration, and it carries that instrument's defects:
+    #: a marked pole defined negatively, which fills with ordinary words, and a
+    #: superordinate bias that signs every figure downward. It also has no
+    #: `relations` field, because that instrument returns no typology. Its
+    #: candidate lists are pre-ADV-stoplist as well, so `so`, `very`, `out` and
+    #: `there` are in them.
+    #:
+    #: v6 is chosen on the 251 hand-authored slots: recall 0.840, precision
+    #: 0.929, recovered displacement -0.0159 against the hand poles' -0.0236,
+    #: instrument_sha256 06b0b4295a986138. `--task tagger` reproduces the old
+    #: run for comparison; nothing reads the two as one population.
+    t = (M.task(shots=M.EXAMPLES) if a.task == "multi"
+         else T.task(WORDING, shots=T.EXAMPLES[:SHOTS]))
     for b, al in PAIRS:
         todo = [p for p in ps if (p, b) not in done]
         print("\n=== %s -> %s : %d to do"
@@ -169,15 +206,36 @@ def main(argv=None):
             for (p, (ws, m)), r in zip(built, res):
                 if r is None:
                     continue
-                real = [w for w in r.naughty if w in m]
-                fh.write(json.dumps(dict(
+                #: `S._poles` reduces EITHER schema. Under multi the default mode
+                #: is `unanimous`: a word marked in one split and unmarked in
+                #: another is dropped from both poles rather than assigned to
+                #: either, because markedness belongs to the pair and 48 of 250
+                #: calibration cells contained such a word.
+                mk, un, ch = S._poles(r)
+                real = [w for w in mk if w in m]
+                row = dict(
                     prompt=p, base=b, aligned=al, lang=a.lang,
-                    charged=bool(r.charged), n_cand=len(ws),
-                    naughty=r.naughty, nice=r.nice,
-                    invented=len(r.naughty) - len(real),
+                    charged=bool(ch), n_cand=len(ws),
+                    naughty=mk, nice=un,
+                    invented=len(mk) - len(real),
                     mass_base=sum(m[w][0] for w in real),
-                    mass_aligned=sum(m[w][1] for w in real),
-                    axis=r.axis), ensure_ascii=False) + "\n")
+                    mass_aligned=sum(m[w][1] for w in real))
+                if hasattr(r, "splits"):
+                    #: the typology, one entry per split, WITH its own poles and
+                    #: mass. The per-relation sign is only computable from these:
+                    #: the reduced `naughty` above pools splits that can point in
+                    #: opposite directions.
+                    row["relations"] = [s.relation for s in r.splits]
+                    row["splits"] = [dict(
+                        relation=s.relation, axis=s.axis,
+                        marked=list(s.marked), unmarked=list(s.unmarked),
+                        mass_base=sum(m[w][0] for w in s.marked if w in m),
+                        mass_aligned=sum(m[w][1] for w in s.marked if w in m))
+                        for s in r.splits]
+                    row["reading"] = r.reading
+                else:
+                    row["axis"] = r.axis
+                fh.write(json.dumps(row, ensure_ascii=False) + "\n")
         print("    wrote %d" % len(built), flush=True)
     report(a.out)
 
