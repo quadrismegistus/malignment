@@ -1,0 +1,789 @@
+{
+ "within": [
+  {
+   "model": "BSC-LT/salamandra-7b-instruct",
+   "arm": "aligned",
+   "n_prompts": 827,
+   "js": 0.06251253099739539,
+   "mass_raw": 0.8706180635676024,
+   "mass_frmd": 0.8828904245845449
+  },
+  {
+   "model": "HuggingFaceH4/mistral-7b-sft-beta",
+   "arm": "other",
+   "n_prompts": 840,
+   "js": 0.03847347690376172,
+   "mass_raw": 0.8506791491578038,
+   "mass_frmd": 0.8520754077804709
+  },
+  {
+   "model": "HuggingFaceH4/zephyr-7b-beta",
+   "arm": "other",
+   "n_prompts": 840,
+   "js": 0.11630553917929021,
+   "mass_raw": 0.8615437314705132,
+   "mass_frmd": 0.914147649832263
+  },
+  {
+   "model": "HuggingFaceTB/SmolLM2-360M-Instruct",
+   "arm": "aligned",
+   "n_prompts": 840,
+   "js": 0.07293967140887214,
+   "mass_raw": 0.8425926076955792,
+   "mass_frmd": 0.8402995491232497
+  },
+  {
+   "model": "NousResearch/Hermes-3-Llama-3.1-8B",
+   "arm": "other",
+   "n_prompts": 840,
+   "js": 0.11475817056169285,
+   "mass_raw": 0.9023082518902036,
+   "mass_frmd": 0.9026948688353634
+  },
+  {
+   "model": "NousResearch/Nous-Hermes-2-Mistral-7B-DPO",
+   "arm": "other",
+   "n_prompts": 840,
+   "js": 0.13188650892378959,
+   "mass_raw": 0.8944306289193875,
+   "mass_frmd": 0.8938258165006407
+  },
+  {
+   "model": "OpenLLM-France/Lucie-7B-Instruct-v1.1",
+   "arm": "aligned",
+   "n_prompts": 827,
+   "js": 0.09749177326936073,
+   "mass_raw": 0.8008235868882082,
+   "mass_frmd": 0.8326758743199031
+  },
+  {
+   "model": "Qwen/Qwen2.5-0.5B",
+   "arm": "base",
+   "n_prompts": 840,
+   "js": 0.0879365932874174,
+   "mass_raw": 0.7911169966949197,
+   "mass_frmd": 0.7520042495350001
+  },
+  {
+   "model": "Qwen/Qwen2.5-0.5B-Instruct",
+   "arm": "aligned",
+   "n_prompts": 840,
+   "js": 0.13656799217230975,
+   "mass_raw": 0.79359699859265,
+   "mass_frmd": 0.8699655893205911
+  },
+  {
+   "model": "Qwen/Qwen2.5-7B",
+   "arm": "base",
+   "n_prompts": 840,
+   "js": 0.0637513709954044,
+   "mass_raw": 0.8163628734821784,
+   "mass_frmd": 0.78850272685995
+  },
+  {
+   "model": "Qwen/Qwen2.5-7B-Instruct",
+   "arm": "aligned",
+   "n_prompts": 840,
+   "js": 0.19782221433092131,
+   "mass_raw": 0.8606086901861503,
+   "mass_frmd": 0.9285118575919498
+  },
+  {
+   "model": "Qwen/Qwen3-8B",
+   "arm": "aligned",
+   "n_prompts": 840,
+   "js": 0.09243608944814774,
+   "mass_raw": 0.8743627826612068,
+   "mass_frmd": 0.9150091566661815
+  },
+  {
+   "model": "Qwen/Qwen3-8B-Base",
+   "arm": "base",
+   "n_prompts": 840,
+   "js": 0.092534947522246,
+   "mass_raw": 0.8155967926878498,
+   "mass_frmd": 0.7715868261422745
+  },
+  {
+   "model": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+   "arm": "aligned",
+   "n_prompts": 840,
+   "js": 0.07630182076537464,
+   "mass_raw": 0.8368893307594076,
+   "mass_frmd": 0.853668157051453
+  },
+  {
+   "model": "Zyphra/Zamba2-7B-Instruct",
+   "arm": "aligned",
+   "n_prompts": 840,
+   "js": 0.05879911431654972,
+   "mass_raw": 0.8242550431417435,
+   "mass_frmd": 0.8375227831977626
+  },
+  {
+   "model": "allenai/Llama-3.1-Tulu-3-8B-DPO",
+   "arm": "other",
+   "n_prompts": 840,
+   "js": 0.1909762222444033,
+   "mass_raw": 0.9063343949703739,
+   "mass_frmd": 0.9177224354484392
+  },
+  {
+   "model": "allenai/Llama-3.1-Tulu-3-8B-SFT",
+   "arm": "other",
+   "n_prompts": 840,
+   "js": 0.0665514063201946,
+   "mass_raw": 0.8687687701283344,
+   "mass_frmd": 0.8456583093192076
+  },
+  {
+   "model": "allenai/Llama-3.1-Tulu-3-8B-SFT-no-math-data",
+   "arm": "other",
+   "n_prompts": 840,
+   "js": 0.06560715893945288,
+   "mass_raw": 0.8630732571914371,
+   "mass_frmd": 0.8434406701198087
+  },
+  {
+   "model": "allenai/Llama-3.1-Tulu-3-8B-SFT-no-persona-data",
+   "arm": "other",
+   "n_prompts": 840,
+   "js": 0.0653826412251991,
+   "mass_raw": 0.8612587269113943,
+   "mass_frmd": 0.8412443476547432
+  },
+  {
+   "model": "allenai/Llama-3.1-Tulu-3-8B-SFT-no-safety-data",
+   "arm": "other",
+   "n_prompts": 840,
+   "js": 0.06704518462304605,
+   "mass_raw": 0.8701937268774445,
+   "mass_frmd": 0.847324240662119
+  },
+  {
+   "model": "allenai/Llama-3.1-Tulu-3-8B-SFT-no-wildchat-data",
+   "arm": "other",
+   "n_prompts": 840,
+   "js": 0.07764228249292318,
+   "mass_raw": 0.8709292351298277,
+   "mass_frmd": 0.8520827087393507
+  },
+  {
+   "model": "allenai/Llama-3.1-Tulu-3.1-8B",
+   "arm": "other",
+   "n_prompts": 840,
+   "js": 0.17704807366274572,
+   "mass_raw": 0.8964277584902547,
+   "mass_frmd": 0.9053737970293585
+  },
+  {
+   "model": "allenai/OLMo-2-0425-1B-DPO",
+   "arm": "other",
+   "n_prompts": 840,
+   "js": 0.1307029512679806,
+   "mass_raw": 0.8518695328805066,
+   "mass_frmd": 0.8430086968742314
+  },
+  {
+   "model": "allenai/OLMo-2-0425-1B-Instruct",
+   "arm": "aligned",
+   "n_prompts": 840,
+   "js": 0.1286365241007102,
+   "mass_raw": 0.8512367407146276,
+   "mass_frmd": 0.8430782001742834
+  },
+  {
+   "model": "allenai/OLMo-2-0425-1B-SFT",
+   "arm": "other",
+   "n_prompts": 840,
+   "js": 0.08300840434566897,
+   "mass_raw": 0.8498783465125933,
+   "mass_frmd": 0.8222690835400002
+  },
+  {
+   "model": "allenai/OLMoE-1B-7B-0125-DPO",
+   "arm": "other",
+   "n_prompts": 840,
+   "js": 0.15515421611255453,
+   "mass_raw": 0.8869616825979962,
+   "mass_frmd": 0.8923263756433859
+  },
+  {
+   "model": "allenai/OLMoE-1B-7B-0125-Instruct",
+   "arm": "aligned",
+   "n_prompts": 840,
+   "js": 0.16086908538538977,
+   "mass_raw": 0.8964429036310579,
+   "mass_frmd": 0.902710508752872
+  },
+  {
+   "model": "allenai/OLMoE-1B-7B-0125-SFT",
+   "arm": "other",
+   "n_prompts": 840,
+   "js": 0.09962393722370283,
+   "mass_raw": 0.863357699070769,
+   "mass_frmd": 0.854933691255155
+  },
+  {
+   "model": "allenai/Olmo-3-7B-Instruct",
+   "arm": "aligned",
+   "n_prompts": 840,
+   "js": 0.16946331194208664,
+   "mass_raw": 0.8736396617319657,
+   "mass_frmd": 0.8733805861961961
+  },
+  {
+   "model": "allenai/Olmo-3-7B-Instruct-DPO",
+   "arm": "other",
+   "n_prompts": 840,
+   "js": 0.16330707615857198,
+   "mass_raw": 0.8663810926485414,
+   "mass_frmd": 0.864460319414732
+  },
+  {
+   "model": "allenai/Olmo-3-7B-Instruct-SFT",
+   "arm": "other",
+   "n_prompts": 840,
+   "js": 0.10173878638717349,
+   "mass_raw": 0.8504321285197958,
+   "mass_frmd": 0.8405251192232226
+  },
+  {
+   "model": "allenai/Olmo-3-7B-Think",
+   "arm": "other",
+   "n_prompts": 840,
+   "js": 0.13177427626014912,
+   "mass_raw": 0.8239429656402679,
+   "mass_frmd": 0.842514831258
+  },
+  {
+   "model": "allenai/Olmo-3-7B-Think-DPO",
+   "arm": "other",
+   "n_prompts": 840,
+   "js": 0.13167778612541345,
+   "mass_raw": 0.8101526267300199,
+   "mass_frmd": 0.8245634415315151
+  },
+  {
+   "model": "allenai/Olmo-3-7B-Think-SFT",
+   "arm": "other",
+   "n_prompts": 840,
+   "js": 0.10828066835181868,
+   "mass_raw": 0.8088566053978956,
+   "mass_frmd": 0.8157227363968749
+  },
+  {
+   "model": "allenai/Olmo-Hybrid-Instruct-DPO-7B",
+   "arm": "aligned",
+   "n_prompts": 840,
+   "js": 0.1190951139685962,
+   "mass_raw": 0.8398887828205459,
+   "mass_frmd": 0.8358949416262298
+  },
+  {
+   "model": "allenai/Olmo-Hybrid-Instruct-SFT-7B",
+   "arm": "other",
+   "n_prompts": 840,
+   "js": 0.0757593300175646,
+   "mass_raw": 0.8217224865166002,
+   "mass_frmd": 0.826481387361085
+  },
+  {
+   "model": "cognitivecomputations/Dolphin3.0-Llama3.1-8B",
+   "arm": "other",
+   "n_prompts": 840,
+   "js": 0.08644386847655872,
+   "mass_raw": 0.9178756862095716,
+   "mass_frmd": 0.8727775713538701
+  },
+  {
+   "model": "croissantllm/CroissantLLMChat-v0.1",
+   "arm": "aligned",
+   "n_prompts": 827,
+   "js": 0.08610681258782717,
+   "mass_raw": 0.8653828760510938,
+   "mass_frmd": 0.8759181109138021
+  },
+  {
+   "model": "deepseek-ai/deepseek-llm-7b-chat",
+   "arm": "aligned",
+   "n_prompts": 840,
+   "js": 0.11544721240695838,
+   "mass_raw": 0.8607076353859984,
+   "mass_frmd": 0.8833844158473649
+  },
+  {
+   "model": "huggyllama/llama-7b",
+   "arm": "base",
+   "n_prompts": 840,
+   "js": 0.04903024861410632,
+   "mass_raw": 0.8296513771450074,
+   "mass_frmd": 0.8077374567805452
+  },
+  {
+   "model": "ibm-granite/granite-3.0-8b-instruct",
+   "arm": "aligned",
+   "n_prompts": 840,
+   "js": 0.07723309021157046,
+   "mass_raw": 0.8801672750373828,
+   "mass_frmd": 0.8884730206511996
+  },
+  {
+   "model": "inceptionai/jais-family-6p7b-chat",
+   "arm": "aligned",
+   "n_prompts": 840,
+   "js": 0.19811554735663206,
+   "mass_raw": 0.8850246049916557,
+   "mass_frmd": 0.8960378040019366
+  },
+  {
+   "model": "internlm/internlm2-chat-7b",
+   "arm": "aligned",
+   "n_prompts": 840,
+   "js": 0.10052663120234104,
+   "mass_raw": 0.8446841177326073,
+   "mass_frmd": 0.8724258927263064
+  },
+  {
+   "model": "internlm/internlm2-chat-7b-sft",
+   "arm": "other",
+   "n_prompts": 840,
+   "js": 0.09988574030915813,
+   "mass_raw": 0.8601752541024097,
+   "mass_frmd": 0.8845009700607098
+  },
+  {
+   "model": "kakaocorp/kanana-1.5-8b-base",
+   "arm": "base",
+   "n_prompts": 840,
+   "js": 0.07208512413430257,
+   "mass_raw": 0.8205240786846238,
+   "mass_frmd": 0.7981981938962701
+  },
+  {
+   "model": "kakaocorp/kanana-1.5-8b-instruct-2505",
+   "arm": "aligned",
+   "n_prompts": 840,
+   "js": 0.2486416472601653,
+   "mass_raw": 0.8690093600337248,
+   "mass_frmd": 0.9323067769224231
+  },
+  {
+   "model": "kakaocorp/kanana-2-3b-instruct",
+   "arm": "aligned",
+   "n_prompts": 840,
+   "js": 0.1563078450901743,
+   "mass_raw": 0.8528250304203548,
+   "mass_frmd": 0.8936397361052206
+  },
+  {
+   "model": "llm-jp/llm-jp-3-7.2b-instruct2",
+   "arm": "other",
+   "n_prompts": 840,
+   "js": 0.07328458272722754,
+   "mass_raw": 0.8639581315549221,
+   "mass_frmd": 0.8767640679494861
+  },
+  {
+   "model": "llm-jp/llm-jp-3-7.2b-instruct3",
+   "arm": "aligned",
+   "n_prompts": 840,
+   "js": 0.08016636108305172,
+   "mass_raw": 0.87297218752349,
+   "mass_frmd": 0.8861219619017233
+  },
+  {
+   "model": "m-a-p/neo_7b",
+   "arm": "base",
+   "n_prompts": 840,
+   "js": 0.06452381607225513,
+   "mass_raw": 0.8152128862270696,
+   "mass_frmd": 0.78524655663421
+  },
+  {
+   "model": "m-a-p/neo_7b_instruct_v0.1",
+   "arm": "aligned",
+   "n_prompts": 840,
+   "js": 0.18859168228146453,
+   "mass_raw": 0.8711571758379129,
+   "mass_frmd": 0.901602422073349
+  },
+  {
+   "model": "m-a-p/neo_7b_sft_v0.1",
+   "arm": "other",
+   "n_prompts": 840,
+   "js": 0.16391719858304565,
+   "mass_raw": 0.8646836133009499,
+   "mass_frmd": 0.8964755462737651
+  },
+  {
+   "model": "mistralai/Mistral-7B-Instruct-v0.1",
+   "arm": "aligned",
+   "n_prompts": 840,
+   "js": 0.04693681387276355,
+   "mass_raw": 0.8856222672344347,
+   "mass_frmd": 0.8621154693058369
+  },
+  {
+   "model": "openbmb/MiniCPM5-1B",
+   "arm": "aligned",
+   "n_prompts": 840,
+   "js": 0.09786179746561924,
+   "mass_raw": 0.8232956773439999,
+   "mass_frmd": 0.8053253844449997
+  },
+  {
+   "model": "openbmb/MiniCPM5-1B-Base",
+   "arm": "base",
+   "n_prompts": 840,
+   "js": 0.10103494720224224,
+   "mass_raw": 0.8161644562378487,
+   "mass_frmd": 0.819897884707705
+  },
+  {
+   "model": "openbmb/MiniCPM5-1B-SFT",
+   "arm": "other",
+   "n_prompts": 840,
+   "js": 0.08925359965961904,
+   "mass_raw": 0.8138662450969101,
+   "mass_frmd": 0.7928948788750001
+  },
+  {
+   "model": "openchat/openchat-3.5-0106",
+   "arm": "other",
+   "n_prompts": 840,
+   "js": 0.10738202751880879,
+   "mass_raw": 0.85539998816653,
+   "mass_frmd": 0.8968820883094404
+  },
+  {
+   "model": "stabilityai/stablelm-2-1_6b-chat",
+   "arm": "aligned",
+   "n_prompts": 840,
+   "js": 0.16254355762683184,
+   "mass_raw": 0.9276864660192847,
+   "mass_frmd": 0.9240650644635533
+  },
+  {
+   "model": "stabilityai/stablelm-2-zephyr-1_6b",
+   "arm": "other",
+   "n_prompts": 840,
+   "js": 0.11986701966270638,
+   "mass_raw": 0.8895371220953872,
+   "mass_frmd": 0.8927008668049505
+  },
+  {
+   "model": "team-hatakeyama-phase2/Tanuki-8B-base-v1.0",
+   "arm": "base",
+   "n_prompts": 840,
+   "js": 0.09179899596191399,
+   "mass_raw": 0.825209344334653,
+   "mass_frmd": 0.82604332809845
+  },
+  {
+   "model": "teknium/OpenHermes-2.5-Mistral-7B",
+   "arm": "other",
+   "n_prompts": 840,
+   "js": 0.11102248134922976,
+   "mass_raw": 0.8957230528593005,
+   "mass_frmd": 0.8886772916142957
+  },
+  {
+   "model": "tiiuae/Falcon-H1-1.5B-Instruct",
+   "arm": "aligned",
+   "n_prompts": 840,
+   "js": 0.22055468466739134,
+   "mass_raw": 0.8837812460147039,
+   "mass_frmd": 0.9198904459779773
+  },
+  {
+   "model": "tiiuae/Falcon-H1-7B-Instruct",
+   "arm": "aligned",
+   "n_prompts": 840,
+   "js": 0.17615122501080344,
+   "mass_raw": 0.9158549027349776,
+   "mass_frmd": 0.9313789852098329
+  },
+  {
+   "model": "tiiuae/Falcon3-7B-Instruct",
+   "arm": "aligned",
+   "n_prompts": 840,
+   "js": 0.19904974025777905,
+   "mass_raw": 0.8750514980758198,
+   "mass_frmd": 0.9146376996293661
+  },
+  {
+   "model": "tiiuae/falcon-mamba-7b-instruct",
+   "arm": "aligned",
+   "n_prompts": 838,
+   "js": 0.053666883207182464,
+   "mass_raw": 0.8678629545558074,
+   "mass_frmd": 0.8517519101282325
+  },
+  {
+   "model": "weblab-GENIAC/Tanuki-8B-dpo-v1.0",
+   "arm": "aligned",
+   "n_prompts": 836,
+   "js": 0.12200890462269558,
+   "mass_raw": 0.8253184973345422,
+   "mass_frmd": 0.8741416973030798
+  }
+ ],
+ "two_by_two": [
+  {
+   "base": "Qwen/Qwen2.5-0.5B",
+   "aligned": "Qwen/Qwen2.5-0.5B-Instruct",
+   "n_prompts": 840,
+   "arm_raw": 0.03713361712777066,
+   "arm_framed": 0.13322971573125508,
+   "frame_base": 0.0879365932874174,
+   "frame_aligned": 0.13656799217230975,
+   "both": 0.16629214014213486
+  },
+  {
+   "base": "Qwen/Qwen2.5-7B",
+   "aligned": "Qwen/Qwen2.5-7B-Instruct",
+   "n_prompts": 840,
+   "arm_raw": 0.04614163704125954,
+   "arm_framed": 0.21943032386002176,
+   "frame_base": 0.0637513709954044,
+   "frame_aligned": 0.19782221433092131,
+   "both": 0.26010285527146304
+  },
+  {
+   "base": "Qwen/Qwen3-8B-Base",
+   "aligned": "Qwen/Qwen3-8B",
+   "n_prompts": 840,
+   "arm_raw": 0.11564985043604854,
+   "arm_framed": 0.1655804632406062,
+   "frame_base": 0.092534947522246,
+   "frame_aligned": 0.09243608944814774,
+   "both": 0.1969136854789643
+  },
+  {
+   "base": "kakaocorp/kanana-1.5-8b-base",
+   "aligned": "kakaocorp/kanana-1.5-8b-instruct-2505",
+   "n_prompts": 840,
+   "arm_raw": 0.14063579532418566,
+   "arm_framed": 0.3140299664911014,
+   "frame_base": 0.07208512413430257,
+   "frame_aligned": 0.2486416472601653,
+   "both": 0.3483077956506748
+  },
+  {
+   "base": "m-a-p/neo_7b",
+   "aligned": "m-a-p/neo_7b_instruct_v0.1",
+   "n_prompts": 840,
+   "arm_raw": 0.10725284107366356,
+   "arm_framed": 0.26495743472898947,
+   "frame_base": 0.06452381607225513,
+   "frame_aligned": 0.18859168228146453,
+   "both": 0.27589015488289526
+  },
+  {
+   "base": "openbmb/MiniCPM5-1B-Base",
+   "aligned": "openbmb/MiniCPM5-1B",
+   "n_prompts": 840,
+   "arm_raw": 0.1354981017720561,
+   "arm_framed": 0.18698692235519143,
+   "frame_base": 0.10103494720224224,
+   "frame_aligned": 0.09786179746561924,
+   "both": 0.18667615188151154
+  },
+  {
+   "base": "team-hatakeyama-phase2/Tanuki-8B-base-v1.0",
+   "aligned": "weblab-GENIAC/Tanuki-8B-dpo-v1.0",
+   "n_prompts": 836,
+   "arm_raw": 0.02355180405241285,
+   "arm_framed": 0.06603118577302389,
+   "frame_base": 0.09200745893974648,
+   "frame_aligned": 0.12200890462269558,
+   "both": 0.14554042023825053
+  }
+ ],
+ "admitted": [],
+ "crossframe": [
+  {
+   "base": "team-hatakeyama-phase2/Tanuki-8B-base-v1.0",
+   "aligned": "weblab-GENIAC/Tanuki-8B-dpo-v1.0",
+   "n_prompts": 836,
+   "raw_raw": 0.023700767797327098,
+   "raw_framed": 0.1486941292617305
+  },
+  {
+   "base": "BSC-LT/salamandra-7b",
+   "aligned": "BSC-LT/salamandra-7b-instruct",
+   "n_prompts": 827,
+   "raw_raw": 0.07299963713643315,
+   "raw_framed": 0.15176142927854594
+  },
+  {
+   "base": "Qwen/Qwen2.5-0.5B",
+   "aligned": "Qwen/Qwen2.5-0.5B-Instruct",
+   "n_prompts": 840,
+   "raw_raw": 0.037630937432666635,
+   "raw_framed": 0.17421905303501112
+  },
+  {
+   "base": "allenai/OLMoE-1B-7B-0125",
+   "aligned": "allenai/OLMoE-1B-7B-0125-Instruct",
+   "n_prompts": 840,
+   "raw_raw": 0.1195404578707942,
+   "raw_framed": 0.2502356043943018
+  },
+  {
+   "base": "mistralai/Mistral-7B-v0.1",
+   "aligned": "mistralai/Mistral-7B-Instruct-v0.1",
+   "n_prompts": 840,
+   "raw_raw": 0.09209286779077619,
+   "raw_framed": 0.16038079566673036
+  },
+  {
+   "base": "openbmb/MiniCPM5-1B-Base",
+   "aligned": "openbmb/MiniCPM5-1B",
+   "n_prompts": 840,
+   "raw_raw": 0.1395570936645419,
+   "raw_framed": 0.19170924677475248
+  },
+  {
+   "base": "ibm-granite/granite-3.0-8b-base",
+   "aligned": "ibm-granite/granite-3.0-8b-instruct",
+   "n_prompts": 840,
+   "raw_raw": 0.04828562675420335,
+   "raw_framed": 0.14676664776324294
+  },
+  {
+   "base": "Qwen/Qwen2.5-7B",
+   "aligned": "Qwen/Qwen2.5-7B-Instruct",
+   "n_prompts": 840,
+   "raw_raw": 0.0486095114967648,
+   "raw_framed": 0.2829190088329741
+  },
+  {
+   "base": "tiiuae/Falcon-H1-1.5B-Base",
+   "aligned": "tiiuae/Falcon-H1-1.5B-Instruct",
+   "n_prompts": 840,
+   "raw_raw": 0.10661165103307907,
+   "raw_framed": 0.35958132553787225
+  },
+  {
+   "base": "m-a-p/neo_7b",
+   "aligned": "m-a-p/neo_7b_instruct_v0.1",
+   "n_prompts": 840,
+   "raw_raw": 0.11232144516855502,
+   "raw_framed": 0.28888960770177163
+  },
+  {
+   "base": "tiiuae/Falcon3-7B-Base",
+   "aligned": "tiiuae/Falcon3-7B-Instruct",
+   "n_prompts": 840,
+   "raw_raw": 0.054464677233059915,
+   "raw_framed": 0.2906915140285631
+  },
+  {
+   "base": "HuggingFaceTB/SmolLM2-360M",
+   "aligned": "HuggingFaceTB/SmolLM2-360M-Instruct",
+   "n_prompts": 840,
+   "raw_raw": 0.05533569185232103,
+   "raw_framed": 0.13620973597073416
+  },
+  {
+   "base": "deepseek-ai/deepseek-llm-7b-base",
+   "aligned": "deepseek-ai/deepseek-llm-7b-chat",
+   "n_prompts": 840,
+   "raw_raw": 0.019350472970488097,
+   "raw_framed": 0.1484896577791759
+  },
+  {
+   "base": "OpenLLM-France/Lucie-7B",
+   "aligned": "OpenLLM-France/Lucie-7B-Instruct-v1.1",
+   "n_prompts": 827,
+   "raw_raw": 0.07665361760240257,
+   "raw_framed": 0.11877388506474514
+  },
+  {
+   "base": "croissantllm/CroissantLLMBase",
+   "aligned": "croissantllm/CroissantLLMChat-v0.1",
+   "n_prompts": 827,
+   "raw_raw": 0.0626757313583012,
+   "raw_framed": 0.159279607290591
+  },
+  {
+   "base": "kakaocorp/kanana-1.5-8b-base",
+   "aligned": "kakaocorp/kanana-1.5-8b-instruct-2505",
+   "n_prompts": 840,
+   "raw_raw": 0.15077090136664578,
+   "raw_framed": 0.3821579260642217
+  },
+  {
+   "base": "allenai/Olmo-3-1025-7B",
+   "aligned": "allenai/Olmo-3-7B-Instruct",
+   "n_prompts": 840,
+   "raw_raw": 0.17076191198671992,
+   "raw_framed": 0.2598718425294817
+  },
+  {
+   "base": "stabilityai/stablelm-2-1_6b",
+   "aligned": "stabilityai/stablelm-2-1_6b-chat",
+   "n_prompts": 840,
+   "raw_raw": 0.16584393858633295,
+   "raw_framed": 0.3410745534853416
+  },
+  {
+   "base": "allenai/OLMo-2-0425-1B",
+   "aligned": "allenai/OLMo-2-0425-1B-Instruct",
+   "n_prompts": 840,
+   "raw_raw": 0.16458075701924282,
+   "raw_framed": 0.2570783547623977
+  },
+  {
+   "base": "tiiuae/falcon-mamba-7b",
+   "aligned": "tiiuae/falcon-mamba-7b-instruct",
+   "n_prompts": 838,
+   "raw_raw": 0.03561141513830894,
+   "raw_framed": 0.08866308423311976
+  },
+  {
+   "base": "tiiuae/Falcon-H1-7B-Base",
+   "aligned": "tiiuae/Falcon-H1-7B-Instruct",
+   "n_prompts": 840,
+   "raw_raw": 0.10355406802180711,
+   "raw_framed": 0.2951181669254756
+  },
+  {
+   "base": "llm-jp/llm-jp-3-7.2b",
+   "aligned": "llm-jp/llm-jp-3-7.2b-instruct3",
+   "n_prompts": 840,
+   "raw_raw": 0.17752273439854793,
+   "raw_framed": 0.19964513666508582
+  },
+  {
+   "base": "TinyLlama/TinyLlama-1.1B-intermediate-step-1431k-3T",
+   "aligned": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+   "n_prompts": 840,
+   "raw_raw": 0.040146254806934435,
+   "raw_framed": 0.1469123642001105
+  },
+  {
+   "base": "kakaocorp/kanana-2-3b-base",
+   "aligned": "kakaocorp/kanana-2-3b-instruct",
+   "n_prompts": 840,
+   "raw_raw": 0.062070039750310516,
+   "raw_framed": 0.24845965545714432
+  },
+  {
+   "base": "allenai/Olmo-Hybrid-7B",
+   "aligned": "allenai/Olmo-Hybrid-Instruct-DPO-7B",
+   "n_prompts": 840,
+   "raw_raw": 0.07636295392810044,
+   "raw_framed": 0.19134756451259727
+  },
+  {
+   "base": "Qwen/Qwen3-8B-Base",
+   "aligned": "Qwen/Qwen3-8B",
+   "n_prompts": 840,
+   "raw_raw": 0.12218442462360274,
+   "raw_framed": 0.21255146585595436
+  }
+ ]
+}

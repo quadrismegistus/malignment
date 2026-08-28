@@ -334,3 +334,94 @@ The n=1 result this folder was built to test, on
 FRAGMENTS with no leading space, because an opening move is not a continuation.
 That much held. What did not hold was the reading of the Olmo reversal beside it,
 which is [4].
+
+---
+
+## THE SAME QUESTIONS ON THE STORE CORPUS, AT 78 MODELS -- 2026-08-28
+
+Producer `scripts/store_frame.py` -> `results/store_frame.json`. Everything
+above was measured on 22 hand-built stems across 9 roots. `twp_words_v4` now
+carries framed cells (`frame='prefill'`, 874 prompts, **78 models**), so the
+same question runs on the campaign's own corpus. 66 of those 78 enter the
+numbers below -- the other 12 are `system_mode='default'`, which [6557] rules
+non-poolable with `empty`. **840 of the 874 framed prompts
+also exist raw**, and every comparison below is restricted to that
+intersection per model, so no difference here can be a coverage difference.
+
+**The DECISION above is unchanged.** `raw` stays forced corpus-wide by
+definability and the four retired conditions stay retired. What the store adds
+is size, and one population the hand-built work could not have: **8 of the
+framed models are BASES**, so the frame can be priced with the weights held.
+
+### 13. FINDING 3 REPLICATES AT 26 LINEAGES, AND IT IS MOSTLY THE FRAME
+
+`raw base -> framed aligned` against `raw base -> raw aligned`, median JS over
+matched prompts, `system_mode='empty'`, endpoint pairs only:
+
+    cross-frame movement is LARGER in 26 of 26 lineages
+    median ratio 2.52x   range 1.12x to 7.67x
+
+Unanimous, against finding 3's 5 of 5. **But a cross-frame edge moves the
+weights AND the frame in one step**, so on its own it says nothing about
+alignment -- which is the reading it invites and which the next finding blocks.
+
+### 14. THE WRAPPER IS ~80% OF THE ARM, ON WEIGHTS NOBODY TOUCHED
+
+The 2x2 over the 7 pairs with all four cells. Each column changes ONE thing:
+
+                      ARM raw  ARM frmd  FRM base  FRM algn      BOTH
+    Qwen2.5-0.5B        0.0371    0.1332    0.0879    0.1366    0.1663
+    Qwen2.5-7B          0.0461    0.2194    0.0638    0.1978    0.2601
+    Qwen3-8B-Base       0.1156    0.1656    0.0925    0.0924    0.1969
+    kanana-1.5-8b-bas   0.1406    0.3140    0.0721    0.2486    0.3483
+    neo_7b              0.1073    0.2650    0.0645    0.1886    0.2759
+    MiniCPM5-1B-Base    0.1355    0.1870    0.1010    0.0979    0.1867
+    Tanuki-8B-base-v1   0.0236    0.0660    0.0920    0.1220    0.1455
+                        0.1073    0.1870    0.0879    0.1366    0.1969   MEDIAN
+
+**Putting a BASE model in its own chat template moves it 0.0879 -- 82% of what
+alignment moves it in raw (0.1073).** No weights changed. So `BOTH` at 0.1969 is
+roughly one arm effect plus one frame effect, and the frame half applies to a
+model nobody aligned.
+
+### 15. THE ARM IS 1.74x LARGER MEASURED INSIDE THE FRAME
+
+With the frame held constant on BOTH arms, the arm effect is 0.1870 against
+0.1073 in raw. This is the quantity a cross-frame edge is reaching for and
+cannot produce. It is finding 2 in JS rather than entropy -- *raw UNDERSTATES
+the arm contrast* -- and it rests on the same 7 lineages, so it corroborates
+finding 2 on an overlapping population rather than replicating it independently.
+
+### 16. THE FRAME EFFECT ALONE, ACROSS EVERY FRAMED MODEL
+
+Same weights, raw against its own template, median JS over matched prompts:
+
+    arm       n    median JS    admitted mass raw -> framed
+    base       8     0.0800        0.816 -> 0.793
+    aligned   29     0.1191        0.868 -> 0.883
+    other     29     0.1074        0.863 -> 0.855
+
+`other` is SFT and DPO rungs pooled and is not one population; it is reported
+because dropping it would hide that the intermediate rungs sit with the aligned
+arm rather than the base one.
+
+**The admitted-mass column is the degeneracy audit, and it is the reason these
+numbers are quotable.** RH's objection was that the framed bases might be
+producing junk under a template they never saw in training -- and under a
+QUESTION they demonstrably do: `Who are you?` on Qwen2.5-0.5B gives `ibraltar
+.012, ceği .010, iente .008`. If that were happening here the recorded WORDS
+would stay clean and the MASS would leave, so entropy over the survivors would
+look fine. It does not happen: every base holds 0.96-1.05x of its own raw mass.
+The twp stems are declarative fragments, which is the slot prefill is for; an
+identity question is not, and the two conditions must not be pooled.
+
+### WHAT THESE NUMBERS DO NOT COVER
+
+- **The 12 `default` models.** [6557] rules `empty` and `default` non-poolable;
+  everything here is `empty`.
+- **Chinese.** The framed corpus is 917 en against 13 zh, consistent with this
+  folder's own reason for excluding the `_zh` stems: `word_slot` keys on a
+  leading space or capital and cannot fire for CJK.
+- **Bases generally.** The 8 framed bases are the ones whose repos happen to
+  ship a chat template. That is a packaging fact, not a training fact, and
+  `roster.population('bases')` says 41 of 50 ship none.
