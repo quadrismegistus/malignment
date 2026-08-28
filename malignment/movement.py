@@ -1021,6 +1021,14 @@ def pole_excess(base, aligned, prompt, pole_words, rule_version=4, frame=''):
     IS the displacement event, and excluding it would answer a different question.
     The result is therefore NOT zero-sum and the docstring says so.
 
+    **DO NOT SUM EXCESS OVER ALL WORDS.** Inflation is calibrated on non-fallers
+    only, so applying it to fallers is a counterfactual: null for a faller exceeds
+    its actual aligned mass, and the sum of null over all words exceeds 1.0. This
+    is correct per-set (excess answers "did THIS set move beyond renormalisation")
+    but does not partition — summing excess over every word gives a large negative
+    number that is an artefact of the faller counterfactual, not a physical
+    quantity. Use `decompose()` for the partition.
+
     The inflation follows `decompose()` (lines 619-621):
         R = 1 - sum(p_aligned over fallers)         [includes residual implicitly]
         S = sum(p_base over non-fallers) + resid_base  [includes residual explicitly]
@@ -1091,6 +1099,86 @@ def pole_excess(base, aligned, prompt, pole_words, rule_version=4, frame=''):
         "n_fallers_in_set": len(pole & fallers),
         "n_words": len(pole & set(by_word)),
     }
+
+
+def pole_excess_bulk(base, aligned, poles, rule_version=4, frame=''):
+    """`pole_excess` for many prompts at once. TWO queries for the whole pair.
+
+        poles = {"She wanted to": {"kill", "scream"},
+                 "He raised his fist and": {"punched", "hit"}}
+        pole_excess_bulk(base, aligned, poles)
+        -> {prompt: {mass_base, mass_aligned, null, excess, inflation,
+                     residual_share, n_fallers_in_set, n_words}}
+
+    Same arithmetic and same return shape as `pole_excess`, one entry per prompt.
+    Prompts with no rows in `movement_v4` are absent from the result rather than
+    present with zeros -- a missing cell and an empty pole are different facts.
+
+    **WHY THIS EXISTS.** `pole_excess` issues two queries per call, and the caller
+    that motivated it needs 12,219 splits x 2 poles. Cell-at-a-time is the shape
+    ClickHouse is worst at -- this module records 192 ms/cell against 0.097 ms/cell
+    in bulk -- so a loop over `pole_excess` is ~49,000 queries where this is 2.
+
+    ADDED BESIDE `pole_excess` RATHER THAN REPLACING IT. The single-prompt form is
+    what `pole_null.py --verify` checks this against, and collapsing them would
+    remove the reference implementation the check depends on.
+    """
+    from . import ch
+    from .ch import _lit
+    tbl = _mvt(rule_version)
+    ctbl = _MOVEMENT_CELLS_TABLE[int(rule_version)]
+
+    frame_where = []
+    if int(rule_version) == 4 and frame is not None:
+        if frame == '':
+            frame_where.append("frame_base=''")
+            frame_where.append("frame_aligned=''")
+        else:
+            frame_where.append("frame_aligned=%s" % _lit(frame))
+    fw = (" AND " + " AND ".join(frame_where)) if frame_where else ""
+    pair = "base=%s AND aligned=%s" % (_lit(base), _lit(aligned))
+
+    #: NOT filtered by `prompt IN (...)`. `words_multi` serialises every prompt
+    #: into a literal list and at 2,576 prompts that silently loses one carrying
+    #: an em-dash; pulling the pair and filtering in Python cannot.
+    rows = ch.query("SELECT prompt, word, p_base, p_aligned, cls FROM {db}.%s "
+                    "WHERE %s%s" % (tbl, pair, fw))
+    cells = ch.query("SELECT prompt, resid_base FROM {db}.%s WHERE %s"
+                     % (ctbl, pair))
+    resid = {r["prompt"]: float(r["resid_base"]) for r in cells}
+
+    want = set(poles)
+    by = {}
+    for r in rows:
+        if r["prompt"] in want:
+            by.setdefault(r["prompt"], {})[r["word"]] = (
+                float(r["p_base"]), float(r["p_aligned"]), r["cls"])
+
+    out = {}
+    for prompt, by_word in by.items():
+        rb = resid.get(prompt, 0.0)
+        fallers = {w for w, (pb, pa, c) in by_word.items() if c == "faller"}
+        R = 1.0 - sum(pa for w, (pb, pa, c) in by_word.items() if w in fallers)
+        S = sum(pb for w, (pb, pa, c) in by_word.items() if w not in fallers) + rb
+        inflation = (R / S) if S > 0 else 1.0
+
+        pole = set(poles[prompt])
+        mass_base = sum(pb for w, (pb, pa, c) in by_word.items() if w in pole)
+        mass_aligned = sum(pa for w, (pb, pa, c) in by_word.items() if w in pole)
+        null_mass = sum(pb * inflation for w, (pb, pa, c) in by_word.items()
+                        if w in pole)
+        total_mass = sum(pb for pb, _, _ in by_word.values()) + rb
+        out[prompt] = {
+            "mass_base": mass_base,
+            "mass_aligned": mass_aligned,
+            "null": null_mass,
+            "excess": mass_aligned - null_mass,
+            "inflation": inflation,
+            "residual_share": rb / total_mass if total_mass > 0 else 0.0,
+            "n_fallers_in_set": len(pole & fallers),
+            "n_words": len(pole & set(by_word)),
+        }
+    return out
 
 
 def words_endpoints(prompt=None, prompts=None, rule_version=4, frame=''):
