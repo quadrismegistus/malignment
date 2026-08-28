@@ -66,6 +66,20 @@ sys.path.insert(0, HERE)
 
 from malignment import ch                                            # noqa: E402
 import task_by_model as T                                            # noqa: E402
+import task_joint as J                                               # noqa: E402
+
+
+def _poles(r):
+    """(marked, unmarked, charged) for EITHER schema.
+
+    `task_by_model` names them naughty/nice with a `charged` boolean;
+    `task_joint` names them marked/unmarked and encodes the same fact as
+    `relation != "NONE"`. One accessor so a scorer cannot silently read the
+    wrong field off the wrong task and report zeros as a null result.
+    """
+    if hasattr(r, "marked"):
+        return list(r.marked), list(r.unmarked), r.relation != "NONE"
+    return list(r.naughty), list(r.nice), bool(r.charged)
 
 SLOTS = os.path.join(os.path.abspath(os.path.join(HERE, "..", "..", "..")),
                      "roster", "prompts", "slots", "*.yaml")
@@ -137,7 +151,7 @@ def candidates(prompts, base, aligned, content_only=True):
     return out
 
 
-def score(res, hand_n, hand_i, words):
+def score(got_marked, charged, hand_n, hand_i, words):
     """-> dict, or None when nothing here can be scored.
 
     Restricted to the labelled intersection, and returns the denominators so a
@@ -147,14 +161,14 @@ def score(res, hand_n, hand_i, words):
     if not present_n:
         return None
     labelled = present_n | present_i
-    got_n = set(res.naughty)
+    got_n = set(got_marked)
     judged = got_n & labelled
     return dict(
         n_present=len(present_n), i_present=len(present_i),
         recall=len(got_n & present_n) / len(present_n),
         precision=(len(judged & present_n) / len(judged)) if judged else None,
         wrong_pole=len(got_n & present_i),
-        charged=bool(res.charged), n_naughty=len(res.naughty))
+        charged=bool(charged), n_naughty=len(got_marked))
 
 
 def main(argv=None):
@@ -166,6 +180,7 @@ def main(argv=None):
     ap.add_argument("--aligned", default="LLM360/AmberSafe")
     ap.add_argument("--limit", type=int)
     ap.add_argument("--workers", type=int, default=16)
+    ap.add_argument("--task", default="tagger", choices=("tagger","joint"))
     ap.add_argument("--plan", action="store_true")
     ap.add_argument("--out", default=os.path.join(HERE, "results", "score_slots.json"))
     a = ap.parse_args(argv)
@@ -195,7 +210,8 @@ def main(argv=None):
 
     out = {}
     for k in shots:
-        t = T.task(a.wording, shots=T.EXAMPLES[:k])
+        t = (J.task(shots=J.EXAMPLES[:k] if k < len(J.EXAMPLES) else J.EXAMPLES)
+             if a.task == "joint" else T.task(a.wording, shots=T.EXAMPLES[:k]))
         errs = []
         res = t.map([T.render(p, cand[p][0]) for p, _, _, _ in scorable],
                     num_workers=a.workers, errors=errs)
@@ -203,8 +219,9 @@ def main(argv=None):
         for (p, hn, hi, dom), r in zip(scorable, res):
             if r is None:
                 continue
-            ok, _ = T.check(r, cand[p][0])
-            s = score(r, hn, hi, cand[p][0])
+            mk, un, ch = _poles(r)
+            ok = sorted(mk + un + list(r.neutral)) == sorted(cand[p][0])
+            s = score(mk, ch, hn, hi, cand[p][0])
             if s is None:
                 continue
             pb = cand[p][1]
@@ -215,9 +232,9 @@ def main(argv=None):
             #: Masses are now summed over words that EXIST, the invented ones
             #: are counted, and `complete` still records that it happened -- so
             #: a configuration that hallucinates is visible rather than fatal.
-            real = [w for w in r.naughty if w in pb]
+            real = [w for w in mk if w in pb]
             s.update(prompt=p, domain=dom, complete=ok,
-                     invented=len(r.naughty) - len(real),
+                     invented=len(mk) - len(real),
                      mass_naughty_base=sum(pb[w][0] for w in real),
                      mass_naughty_aligned=sum(pb[w][1] for w in real),
                      hand_base=sum(pb[w][0] for w in hn if w in pb),
