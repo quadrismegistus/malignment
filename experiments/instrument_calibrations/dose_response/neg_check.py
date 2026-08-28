@@ -1,0 +1,134 @@
+"""Does the tagger manufacture an axis on frames that have none?
+
+    .venv/bin/python -u neg_check.py --plan
+    .venv/bin/python -u neg_check.py --shots 0 --shots 4 --shots 5
+
+**`score_slots.py` CANNOT ANSWER THIS AND ITS OWN NUMBERS SAY SO.** It scored
+`charged` at 252 of 252 and 260 of 260 -- not credulity, but construction: a
+slot IS a frame admitting both poles, so every item in it is a positive. What
+that harness measures is how well the rater sorts words on frames that displace.
+
+The question this folder exists to serve is WHICH PROMPTS DISPLACE, and a
+measure that fires on every prompt has no discrimination whatever its recall.
+So the negatives have to come from outside the slot files: catalogue prompts in
+domains that were never authored as slots.
+
+## THERE IS NO GROUND TRUTH HERE, AND THE RATE IS NOT AN ERROR RATE
+
+Nobody hand-labelled these as uncharged. `neutral` is a catalogue domain, not a
+verdict, and at least one member is arguably charged -- `He traced circles on
+the foggy window as she` drew `slept, lay, stared`, which is a real reading of a
+literary frame rather than an invention.
+
+So `charged=True` here is a FLAG, not a false positive, and the useful quantity
+is the CONTRAST: charged-rate on slots against charged-rate on non-slots, same
+instrument, same lineage. Slots run at 100%. A configuration that also runs near
+100% here is not discriminating; one that separates them is.
+
+## WHY `contradiction` IS INCLUDED AND IS NOT A NEGATIVE
+
+`contradiction` frames (199 in the catalogue) are M02's object, not M01's: they
+hold two readings in tension rather than admitting a transgressive completion.
+They are here as a THIRD population, reported apart, because a tagger that calls
+them charged is telling us something about the instrument's boundary rather than
+failing a test.
+"""
+
+import argparse
+import base64
+import collections
+import json
+import os
+import statistics as st
+import sys
+
+import yaml
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, os.path.abspath(os.path.join(HERE, "..", "..", "..")))
+sys.path.insert(0, HERE)
+
+from malignment import ch                                            # noqa: E402
+from malignment.prompts import Prompts                               # noqa: E402
+import task_by_model as T                                            # noqa: E402
+import score_slots as S                                              # noqa: E402
+
+
+def main(argv=None):
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--wording", default="B", choices=("A", "B"))
+    ap.add_argument("--shots", type=int, action="append")
+    ap.add_argument("--domains", default="neutral,contradiction,other")
+    ap.add_argument("--base", default="LLM360/Amber")
+    ap.add_argument("--aligned", default="LLM360/AmberSafe")
+    ap.add_argument("--per-domain", type=int, default=60)
+    ap.add_argument("--workers", type=int, default=24)
+    ap.add_argument("--plan", action="store_true")
+    ap.add_argument("--out", default=os.path.join(HERE, "results", "neg_check.json"))
+    a = ap.parse_args(argv)
+    shots = a.shots or [4]
+    doms = a.domains.split(",")
+
+    #: EXCLUDE ANYTHING THAT IS A SLOT. A prompt can carry a slot item and also
+    #: sit in the catalogue; scoring it as a negative would count a positive.
+    slot_prompts = {p for p, _, _, _ in S.items()}
+    by = collections.defaultdict(list)
+    for p in Prompts.all():
+        d = str(getattr(p, "domain", "") or "")
+        if d in doms and p.language == "en" and p.text not in slot_prompts:
+            by[d].append(p.text)
+    picked = []
+    for d in doms:
+        #: sorted then truncated, so the selection is reproducible and is not
+        #: whichever order the catalogue happened to yield.
+        for t in sorted(by[d])[:a.per_domain]:
+            picked.append((t, d))
+    print("non-slot candidates by domain: %s"
+          % {d: len(by[d]) for d in doms})
+
+    cand = S.candidates([t for t, _ in picked], a.base, a.aligned)
+    live = [(t, d) for t, d in picked if t in cand]
+    print("with cells on %s: %d of %d" % (a.base.split("/")[-1], len(live), len(picked)))
+    print("scoring %d prompts x %d configurations" % (len(live), len(shots)))
+    if a.plan:
+        print(dict(collections.Counter(d for _, d in live)))
+        return
+
+    out = {}
+    for k in shots:
+        t = T.task(a.wording, shots=T.EXAMPLES[:k])
+        errs = []
+        res = t.map([T.render(p, cand[p][0]) for p, _ in live],
+                    num_workers=a.workers, errors=errs)
+        rows = []
+        for (p, dom), r in zip(live, res):
+            if r is None:
+                continue
+            pb = cand[p][1]
+            real = [w for w in r.naughty if w in pb]
+            rows.append(dict(prompt=p, domain=dom, charged=bool(r.charged),
+                             n_naughty=len(r.naughty), axis=r.axis,
+                             mass_base=sum(pb[w][0] for w in real),
+                             mass_aligned=sum(pb[w][1] for w in real)))
+        out["%s%d" % (a.wording, k)] = rows
+        print()
+        print("=== wording %s, %d shots -- %d scored, %d errors ==="
+              % (a.wording, k, len(rows), len(errs)))
+        for dom in doms:
+            v = [x for x in rows if x["domain"] == dom]
+            if not v:
+                continue
+            ch_n = sum(x["charged"] for x in v)
+            print("   %-14s charged %3d/%-3d = %5.1f%%   median naughty words %.1f"
+                  % (dom, ch_n, len(v), 100.0 * ch_n / len(v),
+                     st.median([x["n_naughty"] for x in v])))
+        allch = sum(x["charged"] for x in rows)
+        print("   %-14s charged %3d/%-3d = %5.1f%%   <- against 100%% on slots"
+              % ("ALL", allch, len(rows), 100.0 * allch / len(rows)))
+    os.makedirs(os.path.dirname(a.out), exist_ok=True)
+    json.dump(out, open(a.out, "w"), indent=1)
+    print("\n-> %s" % a.out)
+
+
+if __name__ == "__main__":
+    main()
