@@ -422,3 +422,66 @@ gap that more compute closes.**
 one lineage. If it is general to aligned checkpoints, this registration needs a
 different slot design rather than a rerun. **That is the question to answer
 before unparking, and it is not answerable from here.**
+
+## AMENDMENT A4 — 2026-08-28. THE PARSER WAS THE INSTRUMENT, AND IT WAS WRONG IN THE ARM-ASYMMETRIC DIRECTION.
+
+**Declared after the 28-pair corpus was generated and before any hypothesis was
+scored on it, except where stated otherwise below.**
+
+### A4.1 The parse, which §3 treats as settled, had four defects
+
+`Measurement` names the truncation hazard (`36,00`) and stops there. Four more,
+all found by reading generations rather than by inspecting numbers:
+
+    10万 -> 10           万 is ten thousand. 2.96% of BASE rows carry it against
+                        1.41% of aligned, so the loss is ARM-ASYMMETRIC and
+                        worth 10,000x per row.
+    100，000 -> 100       U+FF0C fullwidth comma, not read as a separator.
+    28,541.97 -> None    cents fail "every group after a comma is 3 digits".
+    50,000 more -> 5e10  `([KkMm])?` matched the `m` of `more`; the row was then
+                        dropped as out-of-range, so the bug PRESENTED AS A
+                        WORKING CHECK.
+
+**What this cost.** Before the fixes, this corpus reported ALIGNMENT RAISES
+SALARIES at 13 of 16 lineages, p = 0.021. After, 16 of 28, p = 0.57. A result
+that would have been written as political economy was a reader understating the
+base arm.
+
+`run.py` now reads the CONTINUATION rather than the pre-extracted numeral,
+reports exclusions BY REASON, and excludes three classes of answer that are well
+formed but not on this scale: ranges, per-unit rates (`/月`, `每小时`, `per
+hour`), and answers dated before 1990. The 1990 cutoff is CHOSEN, not measured,
+and is the largest single exclusion (2,690 rows).
+
+### A4.2 `K` is a valid numeral format and is multiplied
+
+`55K` is fifty-five thousand. The pilot read it as 55. RH, 2026-08-27. Applied
+to both corpora; on the PARKED PILOT it changes nothing that S or C is judged
+on (2/4 and 1/2 either way, Q1 deltas shift by <0.01), which is recorded here so
+the pilot's numbers stand as published.
+
+### A4.3 S gains a second measure, and the registered one is kept beside it
+
+§5's rule -- both outer quintiles lose AND the centre gains -- scores 26/56
+(p = 0.69) on 28 pairs, while `sd(log)` scores 23/28 (p = 0.0009) and the IQR
+41/56 (p = 0.0007) on the same data.
+
+**This is not a rule rewritten to fit.** §5's own text, frozen at `2afe765`,
+already recorded that the criterion "returns a plausible verdict without testing
+what it claims", having passed a cell whose gain was 13x larger in Q4 than Q3. A
+distribution contracting onto its own centre moves quintile shares erratically,
+so the conjunction is neither necessary nor sufficient for the spread to fall.
+
+**Both are reported.** The registered criterion is the registered result. The
+scale-free spread is an amendment, declared here, and is the measure the
+hypothesis text ("narrows the range toward the middle") actually describes.
+
+### A4.4 What the 28 pairs say
+
+    S  sd(log) narrows     23/28  p=0.0009   25/28 p<0.0001 on plausible-only
+    C  class gap narrows    8/28  p=0.036    -- it WIDENS; registered direction
+                                                is REFUTED, not unsupported
+    G  |gap| narrows      144/280 p=0.68     -- flat
+       level rises         16/28  p=0.57     -- chance
+
+See `FINDING_narrowing.md`.

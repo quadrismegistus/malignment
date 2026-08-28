@@ -1,7 +1,26 @@
 # salary_probe — what does alignment do to a distribution over money?
 
-**id:** salary_probe **status:** PARKED after a two-lineage pilot. Registration
-frozen at `2afe765`, amendments A1-A3.
+**id:** salary_probe **status:** UNPARKED AND RUN, 28 lineage pairs, 84,000
+draws, 2026-08-28. Registration frozen at `2afe765`, amendments A1-A4.
+
+> **THE RESULT IS IN `FINDING_narrowing.md`. THIS FILE IS THE PILOT**, kept
+> because what it says about its own limits was right and is the reason the
+> larger run exists. Its numbers are NOT superseded -- they are a different,
+> smaller corpus -- but nothing here should be quoted as the answer.
+>
+>     S  sd(log) narrows    23/28  p=0.0009   -- holds, and strengthens under
+>                                                its own plausible-only control
+>     C  class gap narrows   8/28  p=0.036    -- it WIDENS. Registered direction
+>                                                REFUTED, not unsupported.
+>     G  |gap| narrows     144/280 p=0.68     -- flat
+>        level rises        16/28  p=0.57     -- chance
+>
+> The section below asks for "the same producer over lineages large enough that
+> the base arm is fluent in both languages, so a rising floor cannot be
+> incoherence being cleaned up". That is what was run. The rising floor turned
+> out to be neither incoherence nor a real rise: it was a parser understating
+> the base arm by 10,000x on Chinese `万`, 2.1x more often than the aligned arm.
+> See amendment A4.
 
 Three hypotheses, registered before any run: **S** the range narrows to the
 middle, **G** the gender gap closes, **C** the class gap closes. G and C are
