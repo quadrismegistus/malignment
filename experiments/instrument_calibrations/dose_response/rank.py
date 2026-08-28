@@ -105,10 +105,42 @@ DISPLACES = 0.02
 OUT = os.path.join(HERE, "results", "rank_en5_multi.jsonl")
 
 
-def prompts(lang="en"):
+def example_prompts(task="multi"):
+    """The frames the rater was SHOWN, with their answers. Held out."""
+    E = M.EXAMPLES if task == "multi" else T.EXAMPLES
+    return {e[0].split("FRAGMENT: ")[1].split(" ___")[0] for e in E}
+
+
+def prompts(lang="en", task="multi"):
+    """**THE EXEMPLAR FRAMES ARE IN THE CORPUS AND WERE BEING SCORED.**
+
+    `score_slots.py` holds out example prompts by text and prints the count;
+    this file never did. SEVEN of the ten exemplars are in the corpus and 34 rows
+    were scored -- the DISPLACEMENT, SUBSTITUTION, VOCALISATION, INTENSITY and
+    VALENCE exemplars, the NONE negative, and the DEFERRAL one:
+
+        He wrapped his tongue around her
+        After a night of drinking wine they decided to have
+        She was so furious she wanted to
+        Three Muslims came into the room and started to
+        The weather forecast for tomorrow is
+        She walked out of her manager's office having just been
+        The teacher stood at the front and started to
+
+    On each of those the rater had been shown the frame WITH its poles, so the
+    answer is copied, not measured. 34 of 11,004 is small in aggregate and is not
+    small per relation: DEFERRAL fires 164 times of which only 21 have the
+    structure its definition describes, and the weather frame is 5 of those 21.
+    """
     L = {p.text: p.language for p in Prompts.all()}
     rows = ch.query("SELECT DISTINCT prompt FROM twp_words_v4 WHERE frame=''")
-    return sorted(r["prompt"] for r in rows if L.get(r["prompt"]) == lang)
+    ex = example_prompts(task)
+    ps = sorted(r["prompt"] for r in rows if L.get(r["prompt"]) == lang)
+    kept = [p for p in ps if p not in ex]
+    if len(kept) != len(ps):
+        print("held out %d exemplar frame(s) from the corpus" % (len(ps) - len(kept)),
+              flush=True)
+    return kept
 
 
 def cells(prompt, base, aligned):
@@ -198,7 +230,7 @@ def main(argv=None):
     if a.report:
         return report(a.out)
 
-    ps = prompts(a.lang)
+    ps = prompts(a.lang, a.task)
     if a.limit:
         ps = ps[:a.limit]
     print("%s prompts with cells: %d | lineages: %d" % (a.lang, len(ps), len(PAIRS)),
