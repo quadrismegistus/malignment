@@ -330,7 +330,12 @@ def check(result, words):
     return False, "missing=%r extra=%r dupes=%r" % (missing[:6], extra[:6], dupes[:6])
 
 
-def task(shots=EXAMPLES):
+def task(shots=EXAMPLES, model="deepseek/deepseek-v4-flash"):
+    #: **THE MODEL IS A PARAMETER AND THE NAME DOES NOT CARRY IT.** `name` picks
+    #: the stash subdirectory and the key within it already covers the system
+    #: prompt, examples, schema and temperature -- and the model, so two models
+    #: cannot serve each other's hits. Keeping one name means a flash run and a
+    #: pro run of the same instrument sit in one place and can be compared.
     class _T(Task):
         name = "dose_charge"
         schema = Charge
@@ -338,7 +343,7 @@ def task(shots=EXAMPLES):
         examples = shots
         temperature = 0.0
         retries = 2
-        model = "deepseek/deepseek-v4-flash"
         cache_ttl = "168h"
         usage_log = True
+    _T.model = model
     return _T()
