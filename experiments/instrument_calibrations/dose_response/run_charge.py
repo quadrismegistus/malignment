@@ -68,6 +68,8 @@ def main(argv=None):
     ap.add_argument("--limit", type=int)
     ap.add_argument("--workers", type=int, default=32)
     ap.add_argument("--model", default=MODEL)
+    ap.add_argument("--all-pairs", action="store_true",
+                    help="every base->endpoint pair in the roster, not rank.PAIRS' five")
     ap.add_argument("--plan", action="store_true")
     ap.add_argument("--report", action="store_true")
     ap.add_argument("--out", default=OUT)
@@ -88,7 +90,7 @@ def main(argv=None):
     if a.limit:
         ps = ps[:a.limit]
     print("%s prompts: %d (held out %d shot frames) | lineages: %d | model %s"
-          % (a.lang, len(ps), len(ex), len(R.PAIRS), a.model), flush=True)
+          % (a.lang, len(ps), len(ex), 50 if a.all_pairs else len(R.PAIRS), a.model), flush=True)
 
     done = set()
     if os.path.exists(a.out):
@@ -100,8 +102,25 @@ def main(argv=None):
                 pass
     print("already written: %d" % len(done), flush=True)
 
+    #: **THE FIVE OR THE FIFTY.** rank.PAIRS is five lineages chosen as replicates
+    #: spanning measured behaviour. --all-pairs takes roster.endpoints(), which is
+    #: the declared population -- and the reason to want it is measured: pairwise
+    #: agreement between lineages on the response is rho ~0.15, so a per-prompt
+    #: estimate needs about 23 lineages to reach 0.8 reliability by
+    #: Spearman-Brown. Five is far too few for a per-prompt claim.
+    if a.all_pairs:
+        from malignment import roster
+        eps, unresolved = roster.endpoints()
+        if unresolved:
+            raise ValueError("%d lineages unresolved: %s" % (len(unresolved),
+                                                             sorted(unresolved)[:3]))
+        pairs = sorted(eps.items())
+    else:
+        pairs = R.PAIRS
+    print("pairs: %d" % len(pairs), flush=True)
+
     t = C.task(model=a.model)
-    for base, aligned in R.PAIRS:
+    for base, aligned in pairs:
         todo = [p for p in ps if (p, base) not in done]
         print("\n=== %s -> %s : %d to do"
               % (base.split("/")[-1], aligned.split("/")[-1], len(todo)), flush=True)
@@ -138,7 +157,7 @@ def report(path):
     if not os.path.exists(path):
         return print("nothing at %s" % path)
     rows = [json.loads(l) for l in open(path) if l.strip()]
-    ok = [r for r in rows if r["T_base"] is not None]
+    ok = [r for r in rows if r["T_base"] is not None and r["T_aligned"] is not None]
     print("\ncells: %d over %d prompts x %d lineages | complete %d"
           % (len(rows), len({r["prompt"] for r in rows}),
              len({r["base"] for r in rows}), sum(r["complete"] for r in rows)))
@@ -154,16 +173,17 @@ def report(path):
     by = collections.defaultdict(dict)
     for r in ok:
         by[r["prompt"]][r["base"]] = r["T_base"] - r["T_aligned"]
-    full = {p: v for p, v in by.items() if len(v) == len(R.PAIRS)}
-    print("\nprompts on all %d lineages: %d" % (len(R.PAIRS), len(full)))
+    npairs = len({r["base"] for r in ok})
+    full = {p: v for p, v in by.items() if len(v) == npairs}
+    print("\nprompts on all %d lineages: %d" % (npairs, len(full)))
     rank = sorted(((st.median(v.values()), sum(1 for x in v.values() if x > 0.5), p)
                    for p, v in full.items()), reverse=True)
     print("\nTOP 25 BY MEDIAN DISPLACEMENT (n = lineages above +0.5 rating points)")
     for med, n, p in rank[:25]:
-        print("   %+.3f  %d/%d  %r" % (med, n, len(R.PAIRS), p[:64]))
+        print("   %+.3f  %d/%d  %r" % (med, n, npairs, p[:64]))
     print("\nBOTTOM 10 (the marked mass got MORE charged)")
     for med, n, p in rank[-10:]:
-        print("   %+.3f  %d/%d  %r" % (med, n, len(R.PAIRS), p[:64]))
+        print("   %+.3f  %d/%d  %r" % (med, n, npairs, p[:64]))
 
 
 if __name__ == "__main__":
