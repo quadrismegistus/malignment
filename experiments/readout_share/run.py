@@ -71,6 +71,14 @@ BANDS = ((1.0, 2.0), (2.0, 3.0), (3.0, 4.0), (4.0, 7.0))
 #: the components are still reported for every pair, as differences.
 MIN_FULL = 0.15
 
+#: **THE SHAPE GATE, FROM H1.** A swapped readout is out of distribution for the
+#: other arm's residual stream, and the failure mode is a distribution of the
+#: wrong shape rather than an error. H1 excluded a pair whose cross-read was 5x
+#: sharper than its native read while keeping one that passed, so a swap reported
+#: without this number has an untested premise. Native perplexity over cross
+#: perplexity, worst of the two directions; 1.0 is identical shape.
+MAX_PPL_RATIO = 2.0
+
 
 def onset(gap, cov, floor):
     """F05's shape: the first ELIGIBLE layer with the final sign and >=50% of the
@@ -87,8 +95,53 @@ def onset(gap, cov, floor):
     return 1.0
 
 
+def common_vocab(pairs, AutoTokenizer):
+    """{prompt: set(words)} single-token in EVERY pair's tokenizer, on prompts
+    every pair holds.
+
+    **CROSS-MODEL SHARES ARE OTHERWISE COMPUTED OVER DIFFERENT POPULATIONS.** A
+    word is kept per model when that model spells it as one token after that
+    prompt, so Llama keeps `strangle` and CroissantLLM does not -- and the
+    dropped words are not a random 3%. Measured over 12,263 rated cells, words a
+    tokenizer splits average 0.47-0.82 HIGHER on scene than words it does not,
+    in all six tokenizers tested, and only 40% of scene>=6 cells survive the
+    intersection against 58% of cells overall. The exclusion selects against the
+    sharp tail, which is the tail the measure exists to see.
+
+    Within a pair this cancels -- both arms share a tokenizer, so all four cells
+    of the swap use one word set. It is the CROSS-PAIR ranking that is exposed,
+    and that ranking is where the Llama result lives.
+    """
+    toks = {}
+    for b, _ in pairs:
+        try:
+            toks[b] = AutoTokenizer.from_pretrained(b, trust_remote_code=True)
+        except Exception:
+            pass
+    plists = []
+    for b, _ in pairs:
+        try:
+            _, pl = lens.hidden(b)
+            plists.append(set(pl))
+        except Exception:
+            pass
+    shared = set.intersection(*plists) if plists else set()
+    out = {}
+    for p in shared:
+        sc = charge.scene(p)
+        if not sc:
+            continue
+        keep = None
+        for b, tk in toks.items():
+            _, k = lens.single_token(sc, tk, prompt=p)
+            keep = set(k) if keep is None else (keep & set(k))
+        if keep:
+            out[p] = keep
+    return out
+
+
 def pair(base, aligned, top, floor, torch, AutoTokenizer, device="cpu",
-         verify=False):
+         verify=False, common=None):
     """One pair's cells, or None with a reason."""
     HB, pl = lens.hidden(base)
     HA, pla = lens.hidden(aligned)
@@ -116,8 +169,12 @@ def pair(base, aligned, top, floor, torch, AutoTokenizer, device="cpu",
     #: **TOP-N BY DOSE SELECTS INTO THE SATURATED REGION** -- the highest-dose
     #: frames show essentially no response. When a subset IS wanted, it is a
     #: stratified draw across dose bands, not a head.
+    if common is not None:
+        rated = [p for p in rated if p in common]
     pick = charge.sample(top, strata=5, among=rated) if top else rated
     R = {p: charge.scene(p) for p in pick}
+    if common is not None:
+        R = {p: {w: v for w, v in R[p].items() if w in common[p]} for p in pick}
     dose = {p: charge.dose(p) for p in pick}
 
     #: **BUILT ONCE PER PAIR, NOT ONCE PER PROMPT.** Each `Readout` casts the
@@ -134,7 +191,7 @@ def pair(base, aligned, top, floor, torch, AutoTokenizer, device="cpu",
     cells = []
     for p in pick:
         i = pl.index(p)
-        ids, keep = lens.single_token(R[p], tok, vocab=vocab)
+        ids, keep = lens.single_token(R[p], tok, prompt=p, vocab=vocab)
         if len(keep) < 8:
             continue
         wt = torch.tensor([R[p][w] for w in keep])
@@ -185,10 +242,25 @@ def pair(base, aligned, top, floor, torch, AutoTokenizer, device="cpu",
                         % (base, device, t_bb[-1], vc, p[:40]))
                 print("     device check: %s %.6f vs cpu %.6f  (diff %.2e)"
                       % (device, t_bb[-1], vc, abs(vc - t_bb[-1])), flush=True)
+        #: **THE GATE H1 APPLIED AND THIS RUN DID NOT.** A swapped readout is out
+        #: of distribution for the other arm's stack, so the decomposition is
+        #: only interpretable while the cross-read keeps roughly the SHAPE of the
+        #: native one. H1 excluded Amber because its cross-read came out 5x
+        #: sharper. `ppl_ratio` is native perplexity over cross perplexity: 1.0
+        #: is identical shape, >1 means the swapped head is sharper.
+        e_bb, top_bb, _ = RB.shape_at(hb)
+        e_ba, top_ba, _ = RA.shape_at(hb)
+        e_aa, top_aa, _ = RA.shape_at(ha)
+        e_ab, top_ab, _ = RB.shape_at(ha)
         cells.append(dict(prompt=p, dose=dose[p], n_words=len(keep),
                           n_layers=len(t_bb) - 1, words=keep,
                           T_bb=t_bb, T_ba=t_ba, T_ab=t_ab, T_aa=t_aa,
-                          T_bw=t_bw, T_bn=t_bn, cov_b=cov_b, cov_a=cov_a))
+                          T_bw=t_bw, T_bn=t_bn, cov_b=cov_b, cov_a=cov_a,
+                          ent_bb=e_bb, ent_ba=e_ba, ent_aa=e_aa, ent_ab=e_ab,
+                          ppl_ratio_b=2.0 ** (e_bb - e_ba),
+                          ppl_ratio_a=2.0 ** (e_aa - e_ab),
+                          top1_same_b=int(top_bb == top_ba),
+                          top1_same_a=int(top_aa == top_ab)))
     if not cells:
         return None, "no cell reached 8 single-token rated words"
     dW = float((WA.float() - WB.float()).abs().mean()
@@ -210,6 +282,12 @@ def summarise(r, floor):
     #: a share is reported only where there is displacement to apportion AND the
     #: lens can read the output. Both gates are recorded, not just their product,
     #: so a reader can see which one excluded a pair.
+    #: the shape gate, at the grain the swap is read: the base-stack cross-read
+    #: is the one the READOUT share rests on, so it is the one that gates it.
+    ppl_b = st.median([c["ppl_ratio_b"] for c in r["cells"]])
+    ppl_a = st.median([c["ppl_ratio_a"] for c in r["cells"]])
+    worst = max(max(ppl_b, 1 / ppl_b), max(ppl_a, 1 / ppl_a))
+    in_dist = worst <= MAX_PPL_RATIO
     readable = cov > MIN_COVERAGE and full <= -MIN_FULL
     return dict(
         base=r["base"], aligned=r["aligned"], n_cells=len(r["cells"]),
@@ -219,6 +297,9 @@ def summarise(r, floor):
         state=last("T_ab") - last("T_bb"),
         unembed_only=last("T_bw") - last("T_bb"),
         norm_only=last("T_bn") - last("T_bb"),
+        ppl_ratio_b=ppl_b, ppl_ratio_a=ppl_a, shape_ok=int(in_dist),
+        top1_same_b=st.mean([c["top1_same_b"] for c in r["cells"]]),
+        top1_same_a=st.mean([c["top1_same_a"] for c in r["cells"]]),
         share_readable=int(readable),
         readout_share=(last("T_ba") - last("T_bb")) / full if readable else float("nan"),
         state_share=(last("T_ab") - last("T_bb")) / full if readable else float("nan"),
@@ -239,6 +320,10 @@ def main(argv=None):
     #: recorded case of MPS corrupting a different computation, so it is opt-in
     #: and `--verify-device` re-runs the first cell on CPU before trusting it.
     ap.add_argument("--device", default="cpu", choices=("cpu", "mps"))
+    ap.add_argument("--common", action="store_true",
+                    help="restrict to words single-token in EVERY pair's "
+                         "tokenizer, on prompts every pair holds -- the only "
+                         "footing on which cross-pair shares compare")
     ap.add_argument("--verify-device", action="store_true",
                     help="recompute the first pair's final-layer T on CPU and "
                          "abort if it disagrees by more than 1e-4")
@@ -248,12 +333,19 @@ def main(argv=None):
     eps, _ = roster.endpoints()
     todo = a.pairs or [b for b in sorted(eps) if b in man and eps[b] in man]
     print("pairs with both arms archived: %d" % len(todo))
+    common = None
+    if a.common:
+        common = common_vocab([(b, eps[b]) for b in todo], AutoTokenizer)
+        nw = sum(len(v) for v in common.values())
+        print("COMMON VOCABULARY: %d prompts, %d word-cells single-token in all "
+              "%d tokenizers" % (len(common), nw, len(todo)))
 
     out, skipped = [], []
     for b in todo:
         try:
             r, why = pair(b, eps[b], a.top, a.floor, torch, AutoTokenizer,
-                          device=a.device, verify=a.verify_device)
+                          device=a.device, verify=a.verify_device,
+                          common=common)
         except Exception as e:
             r, why = None, "%s: %s" % (type(e).__name__, str(e)[:60])
         if r is None:
@@ -264,10 +356,12 @@ def main(argv=None):
         out.append((r, s))
         pct = lambda k: ("%3.0f%%" % (100 * s[k])) if s["share_readable"] else "  --"  # noqa: E731
         print("  %-24s cov %.2f | dW %.3f | full %+.3f | readout %+.3f (%s) | "
-              "state %+.3f (%s) | onset %.2f"
+              "state %+.3f (%s) | onset %.2f | ppl %.2f/%.2f %s"
               % (b.split("/")[-1][:24], s["coverage"], s["dW"], s["full"],
                  s["readout"], pct("readout_share"),
-                 s["state"], pct("state_share"), s["onset"]), flush=True)
+                 s["state"], pct("state_share"), s["onset"],
+                 s["ppl_ratio_b"], s["ppl_ratio_a"],
+                 "OK " if s["shape_ok"] else "OUT-OF-DIST"), flush=True)
 
     os.makedirs(RESULTS, exist_ok=True)
     cols = list(out[0][1]) if out else []

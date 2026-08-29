@@ -1,7 +1,7 @@
 ---
 id: readout_share
 question: When alignment displaces a distribution, does it change the representation the model arrives at or the readout that turns it into words?
-status: RUN 2026-08-29 — the state carries it; Llama-3.1-8B is the lone counter-case at 88-91% readout, replicated in two dose bands
+status: RUN 2026-08-29 — the state carries it; Llama-3.1-8B is the lone counter-case at 88-99%, held across two dose bands, a common vocabulary, and the H1 shape gate. Superseded population pending: rerunning on the frozen 611.
 opened: 2026-08-29
 ---
 
@@ -83,6 +83,18 @@ pooled 39% readout / 54% state; median per pair 23% / 54%
 
 **The final normalisation contributes nothing anywhere.** `norm_only` is +0.000 summed across the qualifying pairs, and `unembed_only` reproduces the full readout swap to the third decimal in every case. Where the readout carries anything it is the unembedding matrix.
 
+## What this rebuilt, and what it is not in competition with
+
+**`twp_head_swap.py` already existed.** `malign-logits/scripts/twp_head_swap.py` runs the same four combinations — `S_b H_b`, `S_a H_a`, `S_a H_b`, `S_b H_a` — and was built at this seat's prompting (docket [5222].2). It measured `||dW_U||/||W_U|| = 6.56e-02` for Llama; this run independently gets 6.3e-02. **This directory did not search for it before rebuilding it**, which is recorded in A3 rather than quietly fixed.
+
+It also carries a gate this run did not originally implement. From H1: *"Where a head swap is used, it is only interpretable if the cross-read stays in distribution. Llama passes; Amber fails — its cross-read is 5x sharper than the true one."* That gate is now `lens.Readout.shape_at` and every pair passes it (perplexity ratios 0.57–1.84 against 5x for exclusion; Llama 1.12/0.97, among the closest to identical shape). The negative control matters as much as the result: it catches the input-embedding readout (15.13 bits against a native 5.01) and **passes a row-permuted unembedding with a ratio of exactly 1.00**, because entropy is permutation-invariant. It certifies shape, not meaning.
+
+**H1/H2 are not a rival result to this one, and I first reported them as if they were.** The patch holds the head, embeddings and final norm at base throughout — `twp_patch_weights.py`: *"THE HEAD AND EMBEDDINGS ARE HELD AT BASE THROUGHOUT"*; `twp_patch_depth.py`: *"the readout is held fixed by construction"*. **It cannot attribute anything to the readout.** Its "alignment is distributed through the stack, not concentrated at the readout" is a statement about where block effects sit, with the readout's contribution structurally excluded. The two instruments answer different questions.
+
+They also ran on **disjoint prompt sets**: H2's battery is 231 matched minimal pairs ("squeezed the rabbit in her grip" against "cradled"), this directory's sidecars are the `f11_` contradiction set. Zero overlap. So the apparent disagreement was an instrument blind to the readout, on different material.
+
+**The joinable prediction.** H1's patch recovers 6–16% from the last two blocks and 55–73% from everything below, leaving 11–39% unrecovered — and the readout is exactly what patching can never recover. If readout share is real it should predict per-pair patch under-recovery. Same pairs, two instruments, one falsifiable link. Not yet run; it needs this experiment on H2's prompts, which is what the frozen 611 is for.
+
 ## The depth result, and F05
 
 **Alignment is a final-layers operation in every pair.** Onset, F05's shape — the first layer at which the gap holds its final sign and reaches half its final magnitude — with a coverage floor of 0.20:
@@ -95,6 +107,8 @@ F05: SFT 0.92, DPO 0.96, RLVR 0.98
 ```
 
 **This is a replication of F05 on targets it did not use.** F05's revision (2026-07-01, 405,248 rows, 40 families) selected targets as data-driven movers — words chosen because they moved, which conditions on the outcome. `task_charge`'s ratings are blind to both arms. The onset comes out the same.
+
+**But F05 is itself corrected by H2**, and an earlier version of this README reported replicating it without saying so. H2 (23 pairs, 231 prompts) finds half the representational change accrued by ~60% of depth, `repr_L50/N` median 0.594, with only 21% of cells accruing in the last quarter — Llama at 0.625. That is a causal measure over blocks; the onset here is an observational measure of when the output distribution over rated words separates. Both can hold: a representation shifting gradually up the stack whose readable output difference nonetheless lands late. **Where the two are read as one claim, the causal one governs.**
 
 **And the depth axis is orthogonal to the share axis.** Llama (99% readout) and recurrentgemma (18%) both onset at 1.00; gemma (-14%) at 0.83, the earliest. Same timing, different substrate — late-and-readout and late-and-state are both available, at the same depth. F05 established when; this establishes that "when" does not determine "what on".
 
@@ -132,6 +146,16 @@ gemma-2-9b              0.43    0.71    0.79    0.83
 
 **Not powered.** 59 prompts per pair, of which 19 carry dose above 3, on three pairs clearing both gates. The within-pair band replication is the strongest thing here; three pairs is not a population.
 
+**Not free of the tokenizer.** A word enters `T` only where that model spells it as one token after that prompt, and **words a tokenizer splits average 0.47–0.82 higher on scene** — the exclusion selects against the marked tail. Within a pair it cancels (both arms share a tokenizer). Across pairs it does not, so the cross-model ranking was rerun on a **common vocabulary**: 3,576 word-cells single-token in all seven tokenizers, 59 shared prompts.
+
+| pair | per-model vocab | common vocab |
+|---|---|---|
+| Llama-3.1-8B | 99% | **89%** |
+| recurrentgemma-9b | 18% | **29%** |
+| CT-LLM-Base | 23% | **23%** |
+
+The ordering survives; Llama stays three-to-one clear. The common set equalises the bias rather than removing it — `strangle` is dropped for everyone — and only the chain rule recovers those words.
+
 **Not a claim that Llama is unusual as a model.** It is the counter-case *in this measure on these prompts*. The archive is 16 pairs of the roster's ~50, selected by whichever v2 run happened to write sidecars.
 
 ## Reproducing
@@ -150,5 +174,7 @@ Ratings come from `malignment/charge.py`, not from this directory; the run cross
 ## Amendments
 
 **A1, 2026-08-29.** The first version of this measurement ran on Llama-3.1-8B alone and reported 90% readout as the result. That is the outlier. Recorded here because the direction of the correction matters: a single pair gave a clean, theoretically attractive answer — repression at the point of utterance, the state untouched — and the population reversed it. The attractive reading survives for exactly one model.
+
+**A3, 2026-08-29.** This instrument was rebuilt without searching for `twp_head_swap.py`, which already implemented it, and it was reported for two turns without H1's cross-read-in-distribution gate. The gate, once implemented, passes for every pair — so nothing here is retracted for it — but the sequence is the finding: an instrument re-derived from scratch reproduced a prior figure to within 4% (`dW` 6.3e-02 against 6.56e-02) and neither the agreement nor the prior work was noticed until asked. `CAMPAIGN.md`'s method ledger exists for this.
 
 **A2, 2026-08-29.** The first full run used the six highest-dose prompts per pair and reported five qualifying pairs at 25% readout pooled. Expanding to all 59 rated prompts drops that to three qualifying pairs at 39% pooled. **Neither number was wrong and neither is the finding** — the per-pair shares are stable (Llama 88 to 99, recurrentgemma 17 to 18, CT-LLM 12 to 23) and what changed is how much uncharged material is averaged in. The band grain was added in response and supersedes both pooled figures. A top-N-by-dose selection is also a selection into the saturated region, so `--top` is now a dose-stratified draw.
