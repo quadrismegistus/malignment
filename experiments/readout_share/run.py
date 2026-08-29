@@ -35,10 +35,8 @@ import sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.abspath(os.path.join(HERE, "..", "..")))
 
-from malignment import lens, roster  # noqa: E402
+from malignment import charge, lens, roster  # noqa: E402
 
-DATA = os.environ.get("MALIGNMENT_DATA", os.path.expanduser("~/malignment-data"))
-CHARGE = os.path.join(DATA, "dose_response", "charge_en50_flash.jsonl")
 RESULTS = os.path.join(HERE, "results")
 
 #: the depths reported in the README's tables. Dense at the top because that is
@@ -62,22 +60,6 @@ MIN_COVERAGE = 0.30
 #: full effect is displacement of at least this size in the expected direction --
 #: the components are still reported for every pair, as differences.
 MIN_FULL = 0.15
-
-
-def ratings(prompts):
-    """{prompt: {word: mean scene rating}} averaged over every lineage that rated it.
-
-    Averaging over lineages makes the weight a property of the word-in-frame
-    rather than of one rater call.
-    """
-    want = set(prompts)
-    agg = collections.defaultdict(lambda: collections.defaultdict(list))
-    for line in open(CHARGE):
-        r = json.loads(line)
-        if r["prompt"] in want:
-            for w in r["words"]:
-                agg[r["prompt"]][w["word"]].append(w["scene"])
-    return {p: {w: sum(v) / len(v) for w, v in d.items()} for p, d in agg.items()}
 
 
 def onset(gap, cov, floor):
@@ -116,11 +98,16 @@ def pair(base, aligned, top, floor, torch, AutoTokenizer):
     vocab = WB.shape[0]
     gm = lens.is_gemma(base)
     tok = AutoTokenizer.from_pretrained(base, trust_remote_code=True)
-    R = ratings(pl)
-    dose = {p: (sum(d.values()) / len(d) if d else 0.0) for p, d in R.items()}
-    #: highest-dose prompts first. A trajectory on a frame with nothing charged
-    #: is a flat line and says nothing about where alignment acts.
-    pick = sorted(dose, key=lambda p: -dose[p])[:top]
+    #: every prompt in this sidecar that carries ratings. `top=0` means all of
+    #: them, which is the default: the sidecars hold 115 prompts, 59 are rated,
+    #: and there is no cost to using all 59 beyond compute.
+    rated = [p for p in pl if charge.dose(p) is not None]
+    #: **TOP-N BY DOSE SELECTS INTO THE SATURATED REGION** -- the highest-dose
+    #: frames show essentially no response. When a subset IS wanted, it is a
+    #: stratified draw across dose bands, not a head.
+    pick = charge.sample(top, strata=5, among=rated) if top else rated
+    R = {p: charge.scene(p) for p in pick}
+    dose = {p: charge.dose(p) for p in pick}
 
     #: the two arms' readouts, as (W, norm_w, norm_b, cfg) so a swap is one
     #: argument tuple rather than four positional arguments in the right order.
@@ -140,7 +127,9 @@ def pair(base, aligned, top, floor, torch, AutoTokenizer):
         hb = torch.from_numpy(HB[i])
         ha = torch.from_numpy(HA[i])
 
-        def T(h, rd):
+        last = {}
+
+        def T(h, rd, stash=None):
             W, nw, nb, cfg = rd
             P = lens.layer_probs(h, W, nw, nb, cfg, ids, gemma=gm, torch=torch)
             s = P.sum(-1)
@@ -148,14 +137,26 @@ def pair(base, aligned, top, floor, torch, AutoTokenizer):
             #: An unnormalised sum falls whenever the distribution concentrates
             #: anywhere else, so it would read every sharpening as displacement.
             v = (P * wt).sum(-1) / s
+            if stash is not None:
+                last[stash] = {w: float(P[-1][j]) for j, w in enumerate(keep)}
             return [float(x) for x in v], [float(x) for x in s]
 
-        t_bb, cov_b = T(hb, RB)
+        t_bb, cov_b = T(hb, RB, stash="bb")
         t_ba, _ = T(hb, RA)
         t_ab, _ = T(ha, RB)
         t_aa, cov_a = T(ha, RA)
         t_bw, _ = T(hb, BW)
         t_bn, _ = T(hb, BN)
+        #: **TWO IMPLEMENTATIONS OF ONE QUANTITY IS THE DEFECT, NOT THE CHECK.**
+        #: The loop above computes T over a tensor for speed; `charge.T` is the
+        #: definition other seats will call. They must agree, so the first cell
+        #: of every pair is computed both ways and the run stops if they do not.
+        if not cells:
+            ref, _ = charge.T(R[p], last["bb"])
+            if abs(ref - t_bb[-1]) > 1e-4:
+                raise AssertionError(
+                    "%s: tensor T %.6f != charge.T %.6f on %r"
+                    % (base, t_bb[-1], ref, p[:40]))
         cells.append(dict(prompt=p, dose=dose[p], n_words=len(keep),
                           n_layers=len(t_bb) - 1, words=keep,
                           T_bb=t_bb, T_ba=t_ba, T_ab=t_ab, T_aa=t_aa,
@@ -201,7 +202,9 @@ def main(argv=None):
     from transformers import AutoTokenizer
     ap = argparse.ArgumentParser()
     ap.add_argument("--pairs", nargs="*", help="base ids; default every archived pair")
-    ap.add_argument("--top", type=int, default=6, help="highest-dose prompts per pair")
+    ap.add_argument("--top", type=int, default=0,
+                    help="0 = every rated prompt in the sidecar; N = a "
+                         "dose-stratified draw of N")
     ap.add_argument("--floor", type=float, default=FLOOR, help="onset coverage floor")
     a = ap.parse_args(argv)
 
