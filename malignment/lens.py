@@ -195,31 +195,63 @@ def hidden(mid):
     return a.reshape((e["rows"],) + tuple(e["shape_per_row"])), e["prompts"]
 
 
-def layer_probs(h, W, nw, nb, cfg, ids, gemma=False, torch=None):
+class Readout:
+    """A prepared final norm + unembedding: `unembed(final_norm(h))` for any `h`.
+
+    **PREPARE ONCE PER READOUT, NOT ONCE PER CALL.** `W.float()` on gemma's
+    256000x3584 bfloat16 unembedding allocates a 3.7GB float32 copy. The
+    swap-experiment shape calls a readout six times per prompt across sixty
+    prompts, so doing the cast inside the call meant 354 such allocations per
+    pair -- which dominated the run and looks exactly like "the matmul is slow".
+
+    A readout is deliberately separable from the state it is applied to: that is
+    what makes swapping one model's readout onto another model's residual stream
+    a two-line operation rather than a special case.
+    """
+
+    def __init__(self, W, nw, nb, cfg, gemma=False, device="cpu", torch=None):
+        if torch is None:
+            import torch
+        self.torch = torch
+        self.device = device
+        self.Wt = W.float().t().to(device)
+        self.nw = nw.float().to(device) if nw is not None else None
+        self.nb = nb.float().to(device) if nb is not None else None
+        self.gemma = gemma
+        self.cap = cfg.get("final_logit_softcapping")
+        self.scale = cfg.get("logits_scaling")
+        self.vocab = int(W.shape[0])
+
+    def probs(self, h, ids):
+        """(n_layers+1, len(ids)) probabilities, one row per layer.
+
+        **ALL LAYERS IN ONE MATMUL.** `h` is `(n_layers+1, d_model)` and the
+        norms are per-row, so the whole stack is a single GEMM. Looping over
+        layers was 15x slower on CPU for no reason other than shape.
+
+        The softmax is over the FULL vocabulary before indexing, so `P.sum(-1)`
+        IS the coverage at each depth. Callers must read it rather than assume
+        it -- see the coverage note in the module docstring.
+        """
+        torch = self.torch
+        x = apply_norm(h.to(self.device), self.nw, self.nb, self.gemma, torch)
+        lg = x @ self.Wt
+        if self.scale:
+            lg = lg / self.scale
+        if self.cap:
+            lg = torch.tanh(lg / self.cap) * self.cap
+        return torch.softmax(lg, -1)[:, ids].to("cpu")
+
+
+def layer_probs(h, W, nw, nb, cfg, ids, gemma=False, torch=None, device="cpu"):
     """(n_layers+1, len(ids)) probabilities for `ids`, one row per layer.
 
-    `h` is one prompt's residual stream, `(n_layers+1, d_model)`. The softmax is
-    taken over the FULL vocabulary before indexing, so the returned rows sum to
-    the target words' share of total mass -- i.e. `P.sum(-1)` IS the coverage at
-    each depth, and callers should use it rather than assume it.
-
-    `W` may be a swapped-in unembedding from a different model, which is the
-    point: the readout and the state are separable here.
+    A one-shot convenience over `Readout`. **In a loop over prompts or over
+    swapped readouts, build a `Readout` once instead** -- this function prepares
+    the unembedding on every call, which is the cost described above.
     """
-    if torch is None:
-        import torch
-    Wt = W.float().t()
-    cap = cfg.get("final_logit_softcapping")
-    scale = cfg.get("logits_scaling")
-    rows = []
-    for L in range(h.shape[0]):
-        lg = apply_norm(h[L], nw, nb, gemma, torch) @ Wt
-        if scale:
-            lg = lg / scale
-        if cap:
-            lg = torch.tanh(lg / cap) * cap
-        rows.append(torch.softmax(lg, -1)[ids])
-    return torch.stack(rows)
+    return Readout(W, nw, nb, cfg, gemma=gemma, device=device,
+                   torch=torch).probs(h, ids)
 
 
 def single_token(words, tok, vocab=None):

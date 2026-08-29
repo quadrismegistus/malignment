@@ -17,6 +17,9 @@ from the normalisation's.
 
 WRITES
     results/by_pair.csv         one row per pair: shares, dW, onset
+    results/by_pair_band.csv    one row per (pair, dose band) -- THE GRAIN TO
+                                READ, because pooling charged frames with
+                                uncharged ones dilutes every effect
     results/by_pair_layer.csv   one row per (pair, prompt, layer): all four
                                 combinations plus coverage on both arms
     population.json             the pairs, prompts, words and sidecar bytes used
@@ -53,6 +56,13 @@ FLOOR = 0.20
 #: below this the pair's final-layer coverage is too low to read at all.
 MIN_COVERAGE = 0.30
 
+#: **A POOLED EFFECT OVER ALL PROMPTS IS MOSTLY A STATEMENT ABOUT UNCHARGED
+#: ONES.** Of the 59 rated prompts in the sidecars, the median dose is 2.11 and
+#: only ~13 sit above 3.45; averaging the charged with the uncharged shrank every
+#: pair's effect three- to fivefold and dropped five of seven below the gates.
+#: Fixed cuts, so a band means the same thing in every pair.
+BANDS = ((1.0, 2.0), (2.0, 3.0), (3.0, 4.0), (4.0, 7.0))
+
 #: **A SHARE OF A NEAR-ZERO EFFECT IS NOT A QUANTITY.** glm-4-9b-hf's full effect
 #: is -0.033 and its readout swap is -0.355, which divides out to a readout share
 #: of 1086%; granite's +0.073 gives 355%. Both are arithmetically correct and
@@ -77,7 +87,8 @@ def onset(gap, cov, floor):
     return 1.0
 
 
-def pair(base, aligned, top, floor, torch, AutoTokenizer):
+def pair(base, aligned, top, floor, torch, AutoTokenizer, device="cpu",
+         verify=False):
     """One pair's cells, or None with a reason."""
     HB, pl = lens.hidden(base)
     HA, pla = lens.hidden(aligned)
@@ -109,13 +120,16 @@ def pair(base, aligned, top, floor, torch, AutoTokenizer):
     R = {p: charge.scene(p) for p in pick}
     dose = {p: charge.dose(p) for p in pick}
 
-    #: the two arms' readouts, as (W, norm_w, norm_b, cfg) so a swap is one
-    #: argument tuple rather than four positional arguments in the right order.
-    RB = (WB, nwB, nbB, cB)
-    RA = (WA, nwA, nbA, cA)
+    #: **BUILT ONCE PER PAIR, NOT ONCE PER PROMPT.** Each `Readout` casts the
+    #: unembedding to float32 -- 3.7GB for gemma -- so constructing them inside
+    #: the prompt loop is the whole cost of the run.
+    mk = lambda W, nw, nb, cfg: lens.Readout(  # noqa: E731
+        W, nw, nb, cfg, gemma=gm, device=device, torch=torch)
+    RB = mk(WB, nwB, nbB, cB)
+    RA = mk(WA, nwA, nbA, cA)
     #: bw = base norm, ALIGNED unembedding. bn = ALIGNED norm, base unembedding.
-    BW = (WA, nwB, nbB, cA)
-    BN = (WB, nwA, nbA, cB)
+    BW = mk(WA, nwB, nbB, cA)
+    BN = mk(WB, nwA, nbA, cB)
 
     cells = []
     for p in pick:
@@ -130,8 +144,7 @@ def pair(base, aligned, top, floor, torch, AutoTokenizer):
         last = {}
 
         def T(h, rd, stash=None):
-            W, nw, nb, cfg = rd
-            P = lens.layer_probs(h, W, nw, nb, cfg, ids, gemma=gm, torch=torch)
+            P = rd.probs(h, ids)
             s = P.sum(-1)
             #: **NORMALISING BY THE COVERED MASS IS WHAT MAKES THIS COMPARABLE.**
             #: An unnormalised sum falls whenever the distribution concentrates
@@ -157,6 +170,21 @@ def pair(base, aligned, top, floor, torch, AutoTokenizer):
                 raise AssertionError(
                     "%s: tensor T %.6f != charge.T %.6f on %r"
                     % (base, t_bb[-1], ref, p[:40]))
+            #: **A DEVICE IS A JOINT LIKE ANY OTHER.** This repo has a recorded
+            #: case of MPS silently corrupting a different computation, so an
+            #: accelerated run is checked against CPU on real weights rather
+            #: than assumed equivalent because the arithmetic "should" match.
+            if verify and device != "cpu":
+                cpu_rb = lens.Readout(WB, nwB, nbB, cB, gemma=gm,
+                                      device="cpu", torch=torch)
+                Pc = cpu_rb.probs(hb, ids)
+                vc = float((Pc[-1] * wt).sum() / Pc[-1].sum())
+                if abs(vc - t_bb[-1]) > 1e-4:
+                    raise AssertionError(
+                        "%s: %s T %.6f != cpu T %.6f on %r"
+                        % (base, device, t_bb[-1], vc, p[:40]))
+                print("     device check: %s %.6f vs cpu %.6f  (diff %.2e)"
+                      % (device, t_bb[-1], vc, abs(vc - t_bb[-1])), flush=True)
         cells.append(dict(prompt=p, dose=dose[p], n_words=len(keep),
                           n_layers=len(t_bb) - 1, words=keep,
                           T_bb=t_bb, T_ba=t_ba, T_ab=t_ab, T_aa=t_aa,
@@ -206,6 +234,14 @@ def main(argv=None):
                     help="0 = every rated prompt in the sidecar; N = a "
                          "dose-stratified draw of N")
     ap.add_argument("--floor", type=float, default=FLOOR, help="onset coverage floor")
+    #: CPU is the default and is already fast enough (~1 min/pair). MPS is ~2.7x
+    #: faster and agrees to 1.2e-06 on probabilities, but this repo has a
+    #: recorded case of MPS corrupting a different computation, so it is opt-in
+    #: and `--verify-device` re-runs the first cell on CPU before trusting it.
+    ap.add_argument("--device", default="cpu", choices=("cpu", "mps"))
+    ap.add_argument("--verify-device", action="store_true",
+                    help="recompute the first pair's final-layer T on CPU and "
+                         "abort if it disagrees by more than 1e-4")
     a = ap.parse_args(argv)
 
     man = lens.manifest()
@@ -216,7 +252,8 @@ def main(argv=None):
     out, skipped = [], []
     for b in todo:
         try:
-            r, why = pair(b, eps[b], a.top, a.floor, torch, AutoTokenizer)
+            r, why = pair(b, eps[b], a.top, a.floor, torch, AutoTokenizer,
+                          device=a.device, verify=a.verify_device)
         except Exception as e:
             r, why = None, "%s: %s" % (type(e).__name__, str(e)[:60])
         if r is None:
@@ -239,6 +276,25 @@ def main(argv=None):
         w.writeheader()
         for _, s in out:
             w.writerow(s)
+    with open(os.path.join(RESULTS, "by_pair_band.csv"), "w", newline="") as f:
+        w = csv.writer(f)
+        w.writerow(["base", "aligned", "dose_lo", "dose_hi", "n_prompts",
+                    "coverage", "full", "readout", "state",
+                    "readout_share", "state_share"])
+        for r, _ in out:
+            for lo, hi in BANDS:
+                cs = [c for c in r["cells"] if lo <= c["dose"] < hi]
+                if not cs:
+                    continue
+                m = lambda k: st.mean([c[k][-1] for c in cs])  # noqa: E731
+                full = m("T_aa") - m("T_bb")
+                rd, sta = m("T_ba") - m("T_bb"), m("T_ab") - m("T_bb")
+                ok_ = full <= -MIN_FULL
+                w.writerow([r["base"], r["aligned"], lo, hi, len(cs),
+                            "%.4f" % st.median([c["cov_b"][-1] for c in cs]),
+                            "%.4f" % full, "%.4f" % rd, "%.4f" % sta]
+                           + (["%.4f" % (rd / full), "%.4f" % (sta / full)]
+                              if ok_ else ["", ""]))
     with open(os.path.join(RESULTS, "by_pair_layer.csv"), "w", newline="") as f:
         w = csv.writer(f)
         w.writerow(["base", "aligned", "prompt", "dose", "n_words", "layer",
@@ -259,9 +315,11 @@ def main(argv=None):
     #: read-only but not immutable, and a rerun that silently reads different
     #: states would otherwise be indistinguishable from one that did not.
     man_path = os.path.join(lens.ARCHIVE, "hidden_manifest.json")
+    ix = charge.index()
     pop = dict(
-        floor=a.floor, top=a.top, charge=os.path.basename(CHARGE),
-        charge_sha=hashlib.sha256(open(CHARGE, "rb").read()).hexdigest()[:16],
+        floor=a.floor, top=a.top, device=a.device,
+        charge=ix["source"], charge_sha=ix["source_sha"],
+        instrument_sha=ix["instrument_sha"],
         manifest_sha=hashlib.sha256(open(man_path, "rb").read()).hexdigest()[:16],
         archive=lens.ARCHIVE, skipped=[dict(base=b, why=w) for b, w in skipped],
         pairs=[dict(base=r["base"], aligned=r["aligned"], unembed=r["unembed"],
@@ -321,6 +379,25 @@ def main(argv=None):
                for fr in FRACTIONS]
         print("  %-22s %s" % (r["base"].split("/")[-1][:22],
                               "  ".join("%6.3f" % v for v in row)))
+
+    print("\nFULL EFFECT AND READOUT SHARE BY DOSE BAND")
+    print("  a pooled figure over all 59 prompts is mostly a statement about the")
+    print("  46 uncharged ones; the effect lives in the top band.")
+    print("  %-22s %s" % ("pair", "  ".join("%14s" % ("dose %.0f-%.0f" % b)
+                                            for b in BANDS)))
+    for r, _ in ok:
+        row = []
+        for lo, hi in BANDS:
+            cs = [c for c in r["cells"] if lo <= c["dose"] < hi]
+            if not cs:
+                row.append("%14s" % "-")
+                continue
+            m = lambda k: st.mean([c[k][-1] for c in cs])  # noqa: E731
+            full = m("T_aa") - m("T_bb")
+            sh = ("%3.0f%%" % (100 * (m("T_ba") - m("T_bb")) / full)
+                  if full <= -MIN_FULL else "  --")
+            row.append("%14s" % ("%+.2f n=%-2d %s" % (full, len(cs), sh)))
+        print("  %-22s %s" % (r["base"].split("/")[-1][:22], "  ".join(row)))
 
     print("\nONSET OF THE FULL EFFECT, BY COVERAGE FLOOR")
     print("  %-22s %s" % ("pair", "  ".join("%6s" % ("%.2f" % f)
