@@ -55,6 +55,18 @@ import rank as R                                                   # noqa: E402
 import task_charge as C                                            # noqa: E402
 
 MODEL = "deepseek/deepseek-v4-pro"
+#: **THE 50-LINEAGE OUTPUT LIVES OUTSIDE THE CHECKOUT.** charge_en50_flash.jsonl
+#: is ~170MB, and a git repo is not a data store; `passage_norms` moved 237MB out
+#: for the same reason. $MALIGNMENT_DATA, default ~/malignment-data.
+DATA = os.environ.get("MALIGNMENT_DATA", os.path.expanduser("~/malignment-data"))
+
+
+def out_path(name):
+    """Small outputs stay in results/; the big ones go to the data root."""
+    big = os.path.join(DATA, "dose_response", name)
+    return big if os.path.isdir(os.path.dirname(big)) else os.path.join(HERE, "results", name)
+
+
 OUT = os.path.join(HERE, "results", "charge_en5.jsonl")
 
 
