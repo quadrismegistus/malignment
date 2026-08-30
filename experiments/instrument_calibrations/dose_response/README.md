@@ -130,6 +130,34 @@ worst-covered base model still holds 0.742 of its mass in the union, and one pro
 in four never reaches 0.90 at any list length. That is segmentation divergence, not
 a short list. A dose whose coverage floor is 0.20 on some prompts is worse than none.
 
+## THE CHINESE PASS, AND WHY IT IS A SIX-LINEAGE INSTRUMENT
+
+`charge_zh50_flash.jsonl` — 406 prompts x 50 lineages, 14,713 cells, run 2026-08-30. Same `task_charge`, same sha `78d73c40f097761f`, **same seven ENGLISH shots**. Translating the shots would have made a second instrument with a second sha and put the two languages on different scales; keeping them tests whether this one transfers as itself.
+
+**IT TRANSFERS.** 401 of 413 Chinese prompts have an English counterpart by id-stem (`violence_liminal_3_zh` -> `violence_liminal_3`), and `frame` rates the SETUP, which is the same scene in both languages. That is a validation needing no Chinese reader:
+
+    frame pearson, 63 translation pairs          +0.933
+    vs the English WITHIN-language reliability    0.929
+    frame_kind agreement                           86%
+    flash vs pro, same 74 zh prompts    frame +0.959   dose +0.963
+    scene scale:  zh mean 3.09 sd 1.86 | en 3.11 sd 1.84, identical deciles
+
+And the largest frame disagreements are **translation drift, not rater error**: `He wrapped his hands around her throat` is en 6.4 / zh 3.0 because the Chinese uses 搂住 (embrace) where the English strangles. The rater scored both correctly. That reading is lacan's and **unchecked by anyone who reads Chinese** — a stated limit, not a resolved one.
+
+**BUT THE COVERED MASS IS A THIRD OF ENGLISH, AND THAT IS THE BINDING CONSTRAINT.** Summed `p_base` over the rated candidates: **zh 0.174, en 0.493**. `task_charge` rates the candidates it is shown, and in Chinese those capture far less of the distribution. Split by per-lineage Chinese coverage:
+
+    zh coverage >= 0.35    2 lineages   zh +0.0837  en +0.1049  ratio 0.80
+    zh coverage >= 0.25    6 lineages   zh +0.0527  en +0.0815  ratio 0.65
+    zh coverage <  0.25   38 lineages   zh +0.0065  en +0.0542  ratio 0.12
+
+**Where the instrument can see the Chinese distribution, displacement runs at 65-80% of English. Where it cannot, it reads as 12%.** Stratified like-for-like the two languages converge — at coverage 0.15-0.30 the mean |response| is zh 0.1284 against en 0.1282. `Aquila2-7B`, the highest Chinese coverage at 0.48, displaces MORE in Chinese than in English (1.42).
+
+The negative ratios at the bottom are the tell: `RedPajama` -2.53 and `jais` -1.65, at coverage 0.05 and 0.03. That is noise on 3-5% of a distribution, not reverse displacement.
+
+**SO ANY ZH CLAIM MUST DECLARE A SIX-LINEAGE POPULATION**, and the roster-wide zh/en comparison is uninterpretable. A first pass reported "Chinese displaces at a quarter of English"; that figure was 38 of 44 lineages contributing near-zero because their Chinese output is mostly unrated, not unmoved.
+
+**And the right filter is covered mass in THESE cells, not `cjk_tier` and not twp coverage.** `cjk_tier` counts CJK characters in the vocabulary — `observe.vocab` says so itself — and its top three bands are indistinguishable on twp behaviour (FLUENT 0.656, MARGINAL 0.657, PARTIAL 0.651). twp's own zh coverage is 0.65 against en 0.81, which is a far gentler gap than these cells show, because twp extracts words differently. Widening the Chinese corpus means more candidates per cell, upstream, not more lineages.
+
 ## WHAT THIS STILL DOES NOT FIX
 
 RH's standing objection: **there is no guarantee that what a rater calls loaded is
