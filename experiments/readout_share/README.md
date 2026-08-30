@@ -1,7 +1,7 @@
 ---
 id: readout_share
 question: When alignment displaces a distribution, does it change the representation the model arrives at or the readout that turns it into words?
-status: RUN 2026-08-29 — the state carries it; Llama-3.1-8B is the lone counter-case at 88-99%, held across two dose bands, a common vocabulary, and the H1 shape gate. Superseded population pending: rerunning on the frozen 611.
+status: RUN 2026-08-30 — readout and state contribute COMPARABLY (joint regression 0.59 vs 0.65, R2 0.75; 0.74 vs 0.77, R2 0.98 on clean pairs). The earlier "Llama is the lone readout counter-case" is WITHDRAWN — see A5.
 opened: 2026-08-29
 ---
 
@@ -52,36 +52,57 @@ Single-token vocabulary only. Receipts in `population.json`, including the charg
 
 ## Claim
 
-**Alignment predominantly changes the state, not the readout — and one model in five does the opposite.**
+**The readout and the state contribute comparably, and neither dominates. The split varies continuously across lineages rather than separating one counter-case from a rule.**
 
-The effect lives entirely in the charged frames, so the bands are the result and the pooled row is context:
-
-```
-                      dose 1-2        dose 2-3        dose 3-4        dose 4-7
-                       n=28            n=12            n=14            n=5
-gemma-2-9b           -0.01           -0.03           -0.01     --   -0.25  -14%
-recurrentgemma-9b    -0.04           -0.03           -0.41    14%   -1.56   16%
-CT-LLM-Base          -0.09           -0.09           -0.64    12%   -0.36   33%
-Llama-3.1-8B         -0.04           -0.13           -0.34    88%   -0.42   91%
-Falcon3-7B-Base      +0.01           +0.04           +0.27     --   +0.21    --
-```
-
-Below dose 3 nothing moves in any pair (-0.01 to -0.13 across 40 of the 59 prompts). Above it the effect appears and the shares become readable, and **the readout share is stable across the two charged bands within each pair** — Llama 88% then 91%, recurrentgemma 14% then 16%, on disjoint prompt sets. That is an internal replication of the split, which the earlier six-prompt run could not offer.
-
-Pooled over all 59 prompts, the three pairs clearing both gates give:
+The estimator is a regression across pairs, not a per-pair ratio. A ratio needs every pair to clear a floor on its own denominator, which excluded 24 of 32 pairs; a slope needs none of them to.
 
 ```
-                       cov      dW     full   readout        state       onset
-recurrentgemma-9b     0.97   0.030   -0.255   -0.045  18%   -0.138  54%   1.00
-CT-LLM-Base           0.90   0.037   -0.244   -0.055  23%   -0.184  75%   1.00
-Llama-3.1-8B          0.65   0.063   -0.162   -0.160  99%   -0.035  22%   1.00
+                              readout    state      R2     n
+full ~ readout                 +0.011              0.000   25
+full ~ state                              +0.321   0.361   25
+full ~ readout + state         +0.592    +0.653    0.747   25
 
-pooled 39% readout / 54% state; median per pair 23% / 54%
+dropping the 3 most extreme readout terms
+full ~ readout + state         +0.809    +0.670    0.849   22
+
+pairs where both terms share the sign of the effect
+full ~ readout + state         +0.744    +0.770    0.980    9
 ```
 
-**Llama-3.1-8B is the lone counter-case**, and it is not a coverage artefact: its two unembeddings differ by 6.3%, less than gemma's 11.0%, and its 88%/91% holds in both charged bands.
+**THE SIMPLE REGRESSIONS ARE SUPPRESSED AND MUST NOT BE QUOTED.** `corr(readout swap, state swap) = -0.706`: a pair with a large readout swap tends to have a state swap pushing back, so each term's relationship to the effect is masked when the other is omitted. Read alone, the readout looks inert (slope +0.011, R2 0.000); held against the state it carries a coefficient of the same size as the state's. Across all three specifications the pair is 0.59/0.65, 0.81/0.67, 0.74/0.77.
 
-**The final normalisation contributes nothing anywhere.** `norm_only` is +0.000 summed across the qualifying pairs, and `unembed_only` reproduces the full readout swap to the third decimal in every case. Where the readout carries anything it is the unembedding matrix.
+**And a per-pair share is only a quantity where the two terms agree in sign.** In 15 of 25 pairs they oppose and partly cancel, which is what produced shares of 509%, 470% and 293% — a large readout term offset by a large opposite state term, divided by whatever survived. Restricted to the 9 pairs where both push the same way:
+
+```
+llama-7b              full -0.073   readout -0.077  106%   state -0.025
+kanana-2-3b-base      full -0.153   readout -0.135   88%   state -0.028
+neo_7b                full -0.192   readout -0.148   77%   state -0.098
+deepseek-llm-7b-base  full -0.046   readout -0.034   74%   state -0.012
+Llama-3.1-8B          full -0.392   readout -0.281   72%   state -0.165
+kanana-1.5-8b-base    full -0.522   readout -0.264   51%   state -0.424
+CT-LLM-Base           full -0.142   readout -0.050   35%   state -0.086
+Lucie-7B              full -0.251   readout -0.033   13%   state -0.225
+TinyLlama-1.1B        full -0.083   readout -0.000    0%   state -0.078
+```
+
+A continuum from 0% to 106%, with **Llama fifth of nine at 72%**. Its readout swap in absolute terms is -0.281, **z = -0.71** against a mean of -0.091 and sd 0.268 — fifth of 25, exceeded by Olmo-Hybrid-7B (-0.661) and MiniCPM5-1B (-0.373). Nothing about it is unusual in size; its high ratio came from a moderate denominator.
+
+**The final normalisation still contributes nothing anywhere.** `unembed_only` reproduces the readout swap to the third decimal in every pair.
+
+## Population and selection
+
+Prompts are selected on **headroom, not dose**: `frame < 5 AND (dose - frame) > 0.5`, 102 of the frozen 611.
+
+**Dose is close to useless as a selector and the frame is why.** `corr(effect, dose) = -0.091` against `corr(effect, dose - frame) = -0.261`, and `-0.311` inside the unsaturated range. A frame already rated 6.4 has candidate words no more transgressive than the setup: headroom runs +0.38 at frame 2-3 down to **-0.05** at frame 6-7, so the highest-dosed prompts have nowhere to displace to. Effect peaks at frames 2-4 and falls away above 5 while dose climbs monotonically, which is why a linear fit across the whole range returns nothing.
+
+Simulated over the existing run, selection rules give:
+
+| rule | prompts | cov>0.30 | readable | median effect |
+|---|---|---|---|---|
+| all 611 | 593 | 21 | 1 | -0.025 |
+| dose >= 4 (what was frozen on) | 181 | 19 | 1 | -0.022 |
+| headroom > 0.3 | 197 | 21 | 6 | -0.052 |
+| frame<5 and headroom>0.5 | 102 | 25 | 8 | -0.085 |
 
 ## What this rebuilt, and what it is not in competition with
 
@@ -176,6 +197,14 @@ Ratings come from `malignment/charge.py`, not from this directory; the run cross
 **A1, 2026-08-29.** The first version of this measurement ran on Llama-3.1-8B alone and reported 90% readout as the result. That is the outlier. Recorded here because the direction of the correction matters: a single pair gave a clean, theoretically attractive answer — repression at the point of utterance, the state untouched — and the population reversed it. The attractive reading survives for exactly one model.
 
 **A3, 2026-08-29.** This instrument was rebuilt without searching for `twp_head_swap.py`, which already implemented it, and it was reported for two turns without H1's cross-read-in-distribution gate. The gate, once implemented, passes for every pair — so nothing here is retracted for it — but the sequence is the finding: an instrument re-derived from scratch reproduced a prior figure to within 4% (`dW` 6.3e-02 against 6.56e-02) and neither the agreement nor the prior work was noticed until asked. `CAMPAIGN.md`'s method ledger exists for this.
+
+**A5, 2026-08-30. THE HEADLINE IS WITHDRAWN.** Every previous version of this document said the state carries displacement and Llama-3.1-8B is a lone counter-case at 86-99% readout. Three compounding errors:
+
+- **The estimator.** A per-pair ratio, `readout / full`, on 15 of 25 pairs where the two terms have opposite signs and partly cancel. That is not a decomposition of anything, and it produced shares of 509%, 470% and 293% which read as findings.
+- **The comparison.** Llama's readout term is ordinary in absolute size, z = -0.71, fifth of 25. Its high ratio was a moderate denominator, not a large numerator.
+- **The prompts.** The f11 contradiction set that gave 88-99% is one narrow population; on headroom-selected prompts Llama is 72% and fifth of nine.
+
+RH caught the first two by asking whether the readout term was an absolute outlier or a small denominator. **The correction runs the same direction as my three previous ones on this question, which is the pattern worth recording**: each time the error inflated a clean, theoretically attractive result — repression at the point of utterance, the state untouched — and each check that broke it had to be prompted.
 
 **A4, 2026-08-30.** Run on the frozen 611 (40 pairs, `--store live`). **Llama replicates at 86% readout in the dose 3-4 band, n=154, coverage 0.65** — a different prompt population from the f11 set that gave 88-99%, so the counter-case is not a property of contradiction stems. `m-a-p/neo_7b`, measurable for the first time after the in-context tokenisation fix, is second at 58%; `kanana-1.5-8b-base` gives 49% and 36%.
 

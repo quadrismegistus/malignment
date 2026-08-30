@@ -540,6 +540,53 @@ def main(argv=None):
         print("  %-22s %s" % (r["base"].split("/")[-1][:22],
                               "  ".join("%6.3f" % v for v in row)))
 
+    #: **THE REGRESSION IS THE HEADLINE, NOT THE RATIO.** A per-pair share needs
+    #: each pair to clear a floor on its own denominator and is undefined where
+    #: the two components oppose; a slope across pairs needs neither. And the
+    #: SIMPLE slopes are suppressed -- the components correlate about -0.7, so
+    #: each masks the other when the other is omitted, which made the readout
+    #: look inert at slope +0.011 when its joint coefficient is +0.59.
+    if len(ok) >= 5:
+        Y = [s2["full"] for _, s2 in ok]
+        RD = [s2["readout"] for _, s2 in ok]
+        ST = [s2["state"] for _, s2 in ok]
+
+        def ols(y, xs):
+            n, k = len(y), len(xs)
+            X = [[1.0] + [x[i] for x in xs] for i in range(n)]
+            A = [[sum(X[r][i] * X[r][j] for r in range(n)) for j in range(k + 1)]
+                 + [sum(X[r][i] * y[r] for r in range(n))] for i in range(k + 1)]
+            for i in range(k + 1):
+                pv = max(range(i, k + 1), key=lambda r: abs(A[r][i]))
+                A[i], A[pv] = A[pv], A[i]
+                for r in range(k + 1):
+                    if r != i and A[i][i]:
+                        f = A[r][i] / A[i][i]
+                        for cc in range(i, k + 2):
+                            A[r][cc] -= f * A[i][cc]
+            b = [A[i][k + 1] / A[i][i] if A[i][i] else 0.0 for i in range(k + 1)]
+            yh = [sum(b[j] * X[r][j] for j in range(k + 1)) for r in range(n)]
+            my = st.mean(y)
+            ss = sum((v - my) ** 2 for v in y)
+            rs = sum((y[r] - yh[r]) ** 2 for r in range(n))
+            return b, (1 - rs / ss if ss else 0.0)
+
+        print("\nCONTRIBUTION ACROSS %d PAIRS (regression, not a per-pair ratio)" % len(ok))
+        b, r2 = ols(Y, [RD])
+        print("  full ~ readout           %+.3f            R2 %.3f   <- SUPPRESSED" % (b[1], r2))
+        b, r2 = ols(Y, [ST])
+        print("  full ~ state                      %+.3f   R2 %.3f   <- SUPPRESSED" % (b[1], r2))
+        b, r2 = ols(Y, [RD, ST])
+        print("  full ~ readout + state   %+.3f   %+.3f   R2 %.3f" % (b[1], b[2], r2))
+        mr, ms_ = st.mean(RD), st.mean(ST)
+        num = sum((a - mr) * (c - ms_) for a, c in zip(RD, ST))
+        den = (sum((a - mr) ** 2 for a in RD) * sum((c - ms_) ** 2 for c in ST)) ** 0.5
+        print("  corr(readout, state)     %+.3f   -- why the simple slopes mislead"
+              % (num / den if den else 0.0))
+        opp = sum(1 for a, c in zip(RD, ST) if (a < 0) != (c < 0))
+        print("  components OPPOSE in %d of %d pairs; a share is not defined there"
+              % (opp, len(ok)))
+
     print("\nFULL EFFECT AND READOUT SHARE BY DOSE BAND")
     print("  a pooled figure over all 59 prompts is mostly a statement about the")
     print("  46 uncharged ones; the effect lives in the top band.")
