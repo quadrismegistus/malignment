@@ -111,7 +111,19 @@ import random
 import statistics as st
 
 DATA = os.environ.get("MALIGNMENT_DATA", os.path.expanduser("~/malignment-data"))
-SOURCE = os.path.join(DATA, "dose_response", "charge_en50_flash.jsonl")
+#: **ONE INDEX OVER BOTH LANGUAGES, BECAUSE IT IS ONE INSTRUMENT.** The Chinese
+#: corpus was rated by the same `task_charge` with the same seven ENGLISH shots,
+#: deliberately: translating the shots would have made a second instrument with a
+#: second sha, and the two languages' ratings would no longer sit on one scale.
+#: Validated before the run -- on 63 translation pairs whose two sides describe
+#: the same scene, `frame` agrees at pearson +0.933, against the English
+#: within-language pairwise reliability of 0.929. Prompt text is the key and zh
+#: and en texts never collide.
+SOURCES = [
+    os.path.join(DATA, "dose_response", "charge_en50_flash.jsonl"),
+    os.path.join(DATA, "dose_response", "charge_zh50_flash.jsonl"),
+]
+SOURCE = SOURCES[0]                      # back-compat for callers that named it
 INDEX = os.path.join(DATA, "dose_response", "charge_index.json")
 INSTRUMENT_SHA = "78d73c40f097761f"
 SCALE = (1, 7)
@@ -119,16 +131,24 @@ SCALE = (1, 7)
 #: bumped whenever `_build` changes what it stores. **A SHA-VALID INDEX WITH AN
 #: OLD SHAPE IS THE WORSE FAILURE** -- the source has not changed, so a digest
 #: check passes and the new accessors raise KeyError on a cache that looks fresh.
-SCHEMA = 2
+SCHEMA = 3
 
 _IX = None
 
 
-def _digest(path):
+def sources():
+    """The source files that exist, in declared order."""
+    return [p for p in SOURCES if os.path.exists(p)]
+
+
+def _digest(paths=None):
+    """One digest over every source present, so adding a language invalidates."""
     h = hashlib.sha256()
-    with open(path, "rb") as f:
-        for b in iter(lambda: f.read(1 << 22), b""):
-            h.update(b)
+    for path in (paths if paths is not None else sources()):
+        h.update(os.path.basename(path).encode())
+        with open(path, "rb") as f:
+            for b in iter(lambda: f.read(1 << 22), b""):
+                h.update(b)
     return h.hexdigest()[:16]
 
 
@@ -149,24 +169,28 @@ def _build():
     offs = collections.defaultdict(dict)
     bases = set()
     n = 0
-    fh = open(SOURCE, "rb")
-    pos = 0
-    for raw in fh:
-        r = json.loads(raw)
-        p = r["prompt"]
-        offs[p][r["base"]] = pos
-        bases.add(r["base"])
-        pos += len(raw)
-        n += 1
-        if r.get("frame") is not None:
-            frame[p].append(r["frame"])
-        if r.get("frame_kind"):
-            fkind[p][r["frame_kind"]] += 1
-        if r.get("T_base") is not None and r.get("T_aligned") is not None:
-            resp[p][r["base"]] = r["T_base"] - r["T_aligned"]
-        for w in r["words"]:
-            scene[p][w["word"]].append(w["scene"])
-            kind[p][w["word"]][w["kind"]] += 1
+    lang = {}
+    #: offsets are (file index, byte offset) now that there is more than one
+    #: source -- a bare offset was only ever valid against a single file.
+    for fi, src in enumerate(sources()):
+        pos = 0
+        for raw in open(src, "rb"):
+            r = json.loads(raw)
+            p = r["prompt"]
+            offs[p][r["base"]] = [fi, pos]
+            bases.add(r["base"])
+            lang.setdefault(p, r.get("lang") or "en")
+            pos += len(raw)
+            n += 1
+            if r.get("frame") is not None:
+                frame[p].append(r["frame"])
+            if r.get("frame_kind"):
+                fkind[p][r["frame_kind"]] += 1
+            if r.get("T_base") is not None and r.get("T_aligned") is not None:
+                resp[p][r["base"]] = r["T_base"] - r["T_aligned"]
+            for w in r["words"]:
+                scene[p][w["word"]].append(w["scene"])
+                kind[p][w["word"]][w["kind"]] += 1
     out = {}
     for p in scene:
         sc = {w: sum(v) / len(v) for w, v in scene[p].items()}
@@ -180,8 +204,10 @@ def _build():
             #: lineages happened to rate it.
             dose=sum(sc.values()) / len(sc) if sc else None,
             response=resp.get(p, {}),
+            lang=lang.get(p, "en"),
         )
-    return dict(source=os.path.basename(SOURCE), source_sha=_digest(SOURCE),
+    return dict(sources=[os.path.basename(x) for x in sources()],
+                source=os.path.basename(SOURCE), source_sha=_digest(),
                 instrument_sha=INSTRUMENT_SHA, schema=SCHEMA, n_cells=n,
                 lineages=sorted(bases), prompts=out, offsets=dict(offs))
 
@@ -200,7 +226,7 @@ def index(rebuild=False):
     if os.path.exists(INDEX) and not rebuild:
         try:
             ix = json.load(open(INDEX))
-            if ix.get("source_sha") == _digest(SOURCE) and ix.get("schema") == SCHEMA:
+            if ix.get("source_sha") == _digest() and ix.get("schema") == SCHEMA:
                 _IX = ix
                 return _IX
         except (ValueError, KeyError):
@@ -216,9 +242,10 @@ def _p(prompt):
     return index()["prompts"].get(prompt)
 
 
-def prompts():
-    """Every prompt with ratings, sorted."""
-    return sorted(index()["prompts"])
+def prompts(lang=None):
+    """Every prompt with ratings, sorted. `lang="zh"` or `"en"` to restrict."""
+    ix = index()["prompts"]
+    return sorted(p for p, d in ix.items() if lang is None or d.get("lang") == lang)
 
 
 def dose(prompt):
@@ -376,6 +403,12 @@ def lineages():
     return list(index()["lineages"])
 
 
+def language(prompt):
+    """"en" or "zh" for a rated prompt, or None."""
+    d = _p(prompt)
+    return d.get("lang") if d else None
+
+
 def cell(prompt, base):
     """One annotated cell in full, or None. A seek plus one readline.
 
@@ -385,8 +418,9 @@ def cell(prompt, base):
     off = index()["offsets"].get(prompt, {}).get(base)
     if off is None:
         return None
-    with open(SOURCE, "rb") as f:
-        f.seek(off)
+    fi, pos = off if isinstance(off, (list, tuple)) else (0, off)
+    with open(sources()[fi], "rb") as f:
+        f.seek(pos)
         return json.loads(f.readline())
 
 
