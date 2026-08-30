@@ -88,6 +88,23 @@ import os
 #: The f11_l2 corpus decoder, field for field. Change this and generated
 #: passages stop being comparable with the store, so it is a module constant
 #: with a citation rather than a call-site default.
+#: **DO NOT SAMPLE ON MPS.** `experiments/mps_sampling` reproduces it:
+#: SmolLM2-360M-Instruct, prompt "It was a", `top_k=50` so the permitted set is
+#: exactly fifty ids -- at seed 159 MPS returns token 20341 (' nodded'), RANK
+#: 29,516, p=1.17e-08. Deterministic 5/5; CPU at the same seed returns a top-50
+#: token. It is NOT the filter: every method leaks the same token at the same
+#: 1/400 rate, including the `top_k` and `min_p` that are widely recommended as
+#: MPS-safe alternatives to `top_p`. It is the sampling step returning an
+#: out-of-range index for particular RNG states.
+#:
+#: At 1/400 per draw, P(at least one impossible token) is 47% at 256 tokens and
+#: **99% at 1900**. Next-token work is unaffected; long-form generation is
+#: essentially always affected. Forward-pass work -- twp, the logit lens, charge
+#: -- touches none of this.
+#:
+#: AND THE OBVIOUS CHECK CANNOT SEE IT: comparing `generate()` against
+#: `torch.multinomial` ON THE SAME DEVICE agrees exactly, because both call the
+#: same kernel. The referee has to be the other backend.
 DECODER = {"do_sample": True, "temperature": 1.0, "top_p": 1.0,
            #: **top_k=0 DISABLES IT, AND OMITTING IT DOES NOT.** transformers
            #: 5.4.0 applies an effective top_k=50 when the field is absent,
