@@ -221,6 +221,19 @@ def current_venv():
     return os.path.basename(os.path.dirname(os.path.dirname(sys.executable)))
 
 
+#: **A MODEL CAN OVERFLOW ITS OWN COMPUTE DTYPE AND SAY NOTHING.** `BAAI/Aquila2-7B`
+#: and `AquilaChat2-7B` run in float16 by `compute_dtype` and produce nan from
+#: layer 19 up, in 565 of 611 rows. Nothing raised: the file is the right size,
+#: the manifest is well-formed, and the defect surfaced only as `cov nan` in a
+#: downstream table. Any model listed here is dumped in the named dtype instead,
+#: and the manifest records what was actually used so the exception is visible
+#: rather than folded into the store.
+DTYPE_OVERRIDE = {
+    "BAAI/Aquila2-7B": "float32",
+    "BAAI/AquilaChat2-7B": "float32",
+}
+
+
 def dump(mid, prompts, batch=16):
     """(filename, manifest entry) for one model, loaded through the runner.
 
@@ -239,6 +252,9 @@ def dump(mid, prompts, batch=16):
     from .checkpoint import Checkpoint
     L = runners.load_for_twp(Checkpoint(mid))
     m, tok, dev = L.model, L.tok, L.dev
+    ov = DTYPE_OVERRIDE.get(mid)
+    if ov:
+        m = m.to(getattr(torch, ov))
     tok.padding_side = "left"
     if tok.pad_token is None:
         tok.pad_token = tok.eos_token
@@ -276,7 +292,7 @@ def dump(mid, prompts, batch=16):
     return fn, dict(file=fn, dtype="f32", rows=int(A.shape[0]),
                     rows_per_prompt=1,
                     shape_per_row=[int(A.shape[1]), int(A.shape[2])],
-                    compute_dtype=str(dt), device=str(dev),
+                    compute_dtype=str(dt), dtype_override=ov, device=str(dev),
                     loader_id=loader_id,
                     venv=current_venv())
 

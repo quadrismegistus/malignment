@@ -39,8 +39,19 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.abspath(os.path.join(HERE, "..", "..")))
 
 from malignment import charge, lens, roster  # noqa: E402
+from malignment.checkpoint import Checkpoint  # noqa: E402
 
 RESULTS = os.path.join(HERE, "results")
+
+#: **THE LAYER GRAIN DOES NOT GO IN GIT.** 40 pairs x 611 prompts x ~40 layers is
+#: 123MB, and the repo's size guard refuses it -- correctly: it is derived, it is
+#: regenerable from this script plus the frozen prompt list, and a large blob can
+#: only be removed from history by rewriting it. It goes where the states and
+#: generations already live, and `by_pair.csv` carries its sha so a reader can
+#: tell which run a local copy belongs to.
+BIG = os.path.join(os.environ.get("MALIGNMENT_DATA",
+                                  os.path.expanduser("~/malignment-data")),
+                   "readout_share")
 
 #: the depths reported in the README's tables. Dense at the top because that is
 #: the only region where the lens has mass to read -- see FLOOR.
@@ -63,6 +74,15 @@ MIN_COVERAGE = 0.30
 #: Fixed cuts, so a band means the same thing in every pair.
 BANDS = ((1.0, 2.0), (2.0, 3.0), (3.0, 4.0), (4.0, 7.0))
 
+#: **AND A MAGNITUDE FLOOR DOES NOT PROTECT A RATIO.** `BAAI/Aquila2-7B` clears
+#: MIN_FULL at -0.180 and still reports a readout share of -410%, because its
+#: readout swap runs the OPPOSITE way to its full effect. A denominator large
+#: enough to divide by says nothing about whether the numerator belongs to the
+#: same phenomenon: a component pointing against the effect it is meant to
+#: apportion is not a share of it, at any denominator. So a share is reported
+#: only where the component and the full effect agree in sign, and the component
+#: is still printed as a difference either way.
+#:
 #: **A SHARE OF A NEAR-ZERO EFFECT IS NOT A QUANTITY.** glm-4-9b-hf's full effect
 #: is -0.033 and its readout swap is -0.355, which divides out to a readout share
 #: of 1086%; granite's +0.073 gives 355%. Both are arithmetically correct and
@@ -95,7 +115,7 @@ def onset(gap, cov, floor):
     return 1.0
 
 
-def common_vocab(pairs, AutoTokenizer):
+def common_vocab(pairs, AutoTokenizer, store="live"):
     """{prompt: set(words)} single-token in EVERY pair's tokenizer, on prompts
     every pair holds.
 
@@ -115,13 +135,14 @@ def common_vocab(pairs, AutoTokenizer):
     toks = {}
     for b, _ in pairs:
         try:
-            toks[b] = AutoTokenizer.from_pretrained(b, trust_remote_code=True)
+            from malignment import twp as _twp
+            toks[b] = _twp.load_tokenizer(b, revision=Checkpoint(b).revision)[0]
         except Exception:
             pass
     plists = []
     for b, _ in pairs:
         try:
-            _, pl = lens.hidden(b)
+            _, pl = lens.hidden(b, store=store)
             plists.append(set(pl))
         except Exception:
             pass
@@ -141,10 +162,10 @@ def common_vocab(pairs, AutoTokenizer):
 
 
 def pair(base, aligned, top, floor, torch, AutoTokenizer, device="cpu",
-         verify=False, common=None):
+         verify=False, common=None, store="live"):
     """One pair's cells, or None with a reason."""
-    HB, pl = lens.hidden(base)
-    HA, pla = lens.hidden(aligned)
+    HB, pl = lens.hidden(base, store=store)
+    HA, pla = lens.hidden(aligned, store=store)
     if pl != pla:
         return None, "prompt lists differ"
     WB, nwB, nbB, usedB, cB = lens.head(base)
@@ -161,7 +182,14 @@ def pair(base, aligned, top, floor, torch, AutoTokenizer, device="cpu",
         WB, WA = WB[:n], WA[:n]
     vocab = WB.shape[0]
     gm = lens.is_gemma(base)
-    tok = AutoTokenizer.from_pretrained(base, trust_remote_code=True)
+    #: **THE TOKENIZER TAKES THE PIN TOO, OR THE PIN MAKES THINGS WORSE.**
+    #: `lens.head` resolves BAAI/Aquila2-7B to its pinned revision, vocab
+    #: 100,008; a bare `AutoTokenizer.from_pretrained` returns main's RE-TOKENISED
+    #: 143,973. Pinning the weights and not the tokenizer indexes ids up to
+    #: 143,972 into a 100,008-row unembedding -- which produced `nan`, not an
+    #: error. twp.load_tokenizer says exactly this and I read past it.
+    from malignment import twp as _twp
+    tok, _loader = _twp.load_tokenizer(base, revision=Checkpoint(base).revision)
     #: every prompt in this sidecar that carries ratings. `top=0` means all of
     #: them, which is the default: the sidecars hold 115 prompts, 59 are rated,
     #: and there is no cost to using all 59 beyond compute.
@@ -194,6 +222,13 @@ def pair(base, aligned, top, floor, torch, AutoTokenizer, device="cpu",
         ids, keep = lens.single_token(R[p], tok, prompt=p, vocab=vocab)
         if len(keep) < 8:
             continue
+        #: a token id at or above the unembedding's rows cannot be scored, and
+        #: indexing one yields nan rather than raising. `single_token(vocab=)`
+        #: already drops them; this asserts it held, because the failure it
+        #: guards against is silent and was live for two runs.
+        assert not ids or max(ids) < vocab, (
+            "%s: token id %d >= vocab %d -- tokenizer and unembedding disagree"
+            % (base, max(ids), vocab))
         wt = torch.tensor([R[p][w] for w in keep])
         hb = torch.from_numpy(HB[i])
         ha = torch.from_numpy(HA[i])
@@ -301,8 +336,15 @@ def summarise(r, floor):
         top1_same_b=st.mean([c["top1_same_b"] for c in r["cells"]]),
         top1_same_a=st.mean([c["top1_same_a"] for c in r["cells"]]),
         share_readable=int(readable),
-        readout_share=(last("T_ba") - last("T_bb")) / full if readable else float("nan"),
-        state_share=(last("T_ab") - last("T_bb")) / full if readable else float("nan"),
+        #: sign-agreement is per COMPONENT: a pair can have an apportionable
+        #: state term and an uninterpretable readout term, and collapsing that to
+        #: one flag would discard the readable half.
+        readout_share=((last("T_ba") - last("T_bb")) / full
+                       if readable and (last("T_ba") - last("T_bb")) < 0
+                       else float("nan")),
+        state_share=((last("T_ab") - last("T_bb")) / full
+                     if readable and (last("T_ab") - last("T_bb")) < 0
+                     else float("nan")),
         onset=st.median(ons) if ons else float("nan"), n_onset=len(ons))
 
 
@@ -320,6 +362,12 @@ def main(argv=None):
     #: recorded case of MPS corrupting a different computation, so it is opt-in
     #: and `--verify-device` re-runs the first cell on CPU before trusting it.
     ap.add_argument("--device", default="cpu", choices=("cpu", "mps"))
+    #: **NEVER BOTH STORES IN ONE RUN.** The live store is 611 frozen prompts;
+    #: the archive is the f11 contradiction set at 115, 62, 60 and 33 depending
+    #: on the pair. A run spanning them would put pairs measured on different
+    #: populations in one table, which is the defect the frozen list exists to
+    #: prevent and would be invisible in the output.
+    ap.add_argument("--store", default="live", choices=("live", "archive"))
     ap.add_argument("--common", action="store_true",
                     help="restrict to words single-token in EVERY pair's "
                          "tokenizer, on prompts every pair holds -- the only "
@@ -329,13 +377,14 @@ def main(argv=None):
                          "abort if it disagrees by more than 1e-4")
     a = ap.parse_args(argv)
 
-    man = lens.manifest()
+    man = lens.manifest(a.store)
     eps, _ = roster.endpoints()
     todo = a.pairs or [b for b in sorted(eps) if b in man and eps[b] in man]
-    print("pairs with both arms archived: %d" % len(todo))
+    print("store=%s | pairs with both arms present: %d" % (a.store, len(todo)))
     common = None
     if a.common:
-        common = common_vocab([(b, eps[b]) for b in todo], AutoTokenizer)
+        common = common_vocab([(b, eps[b]) for b in todo], AutoTokenizer,
+                              store=a.store)
         nw = sum(len(v) for v in common.values())
         print("COMMON VOCABULARY: %d prompts, %d word-cells single-token in all "
               "%d tokenizers" % (len(common), nw, len(todo)))
@@ -345,7 +394,7 @@ def main(argv=None):
         try:
             r, why = pair(b, eps[b], a.top, a.floor, torch, AutoTokenizer,
                           device=a.device, verify=a.verify_device,
-                          common=common)
+                          common=common, store=a.store)
         except Exception as e:
             r, why = None, "%s: %s" % (type(e).__name__, str(e)[:60])
         if r is None:
@@ -354,7 +403,7 @@ def main(argv=None):
             continue
         s = summarise(r, a.floor)
         out.append((r, s))
-        pct = lambda k: ("%3.0f%%" % (100 * s[k])) if s["share_readable"] else "  --"  # noqa: E731
+        pct = lambda k: ("%3.0f%%" % (100 * s[k])) if s[k] == s[k] else "  --"  # noqa: E731
         print("  %-24s cov %.2f | dW %.3f | full %+.3f | readout %+.3f (%s) | "
               "state %+.3f (%s) | onset %.2f | ppl %.2f/%.2f %s"
               % (b.split("/")[-1][:24], s["coverage"], s["dW"], s["full"],
@@ -383,13 +432,14 @@ def main(argv=None):
                 m = lambda k: st.mean([c[k][-1] for c in cs])  # noqa: E731
                 full = m("T_aa") - m("T_bb")
                 rd, sta = m("T_ba") - m("T_bb"), m("T_ab") - m("T_bb")
-                ok_ = full <= -MIN_FULL
+                ok_ = full <= -MIN_FULL and rd < 0
                 w.writerow([r["base"], r["aligned"], lo, hi, len(cs),
                             "%.4f" % st.median([c["cov_b"][-1] for c in cs]),
                             "%.4f" % full, "%.4f" % rd, "%.4f" % sta]
                            + (["%.4f" % (rd / full), "%.4f" % (sta / full)]
                               if ok_ else ["", ""]))
-    with open(os.path.join(RESULTS, "by_pair_layer.csv"), "w", newline="") as f:
+    os.makedirs(BIG, exist_ok=True)
+    with open(os.path.join(BIG, "by_pair_layer.csv"), "w", newline="") as f:
         w = csv.writer(f)
         w.writerow(["base", "aligned", "prompt", "dose", "n_words", "layer",
                     "frac", "T_bb", "T_ba", "T_ab", "T_aa", "T_bw", "T_bn",
@@ -411,18 +461,34 @@ def main(argv=None):
     man_path = os.path.join(lens.ARCHIVE, "hidden_manifest.json")
     ix = charge.index()
     pop = dict(
-        floor=a.floor, top=a.top, device=a.device,
+        floor=a.floor, top=a.top, device=a.device, store=a.store,
         charge=ix["source"], charge_sha=ix["source_sha"],
         instrument_sha=ix["instrument_sha"],
         manifest_sha=hashlib.sha256(open(man_path, "rb").read()).hexdigest()[:16],
-        archive=lens.ARCHIVE, skipped=[dict(base=b, why=w) for b, w in skipped],
+        archive=lens.ARCHIVE, prompts_sha=ix["source_sha"],
+        skipped=[dict(base=b, why=w) for b, w in skipped],
         pairs=[dict(base=r["base"], aligned=r["aligned"], unembed=r["unembed"],
                     vocab=r["vocab"], d_model=r["d_model"], dW=r["dW"],
                     n_layers=r["cells"][0]["n_layers"], cap=r["cap"],
                     scale=r["scale"],
-                    prompts=[dict(prompt=c["prompt"], dose=c["dose"],
-                                  n_words=c["n_words"], words=c["words"])
-                             for c in r["cells"]])
+                    #: counts and a digest, not the word lists themselves --
+                    #: embedding them made this receipt 21MB, which is a data
+                    #: file wearing a receipt's name. The digest still pins
+                    #: exactly which words were scored.
+                    n_prompts=len(r["cells"]),
+                    words_sha=hashlib.sha256(
+                        "\x00".join("%s|%s" % (c["prompt"], ",".join(c["words"]))
+                                    for c in r["cells"]).encode()
+                    ).hexdigest()[:16],
+                    #: NOT the prompt strings. The frozen list is one shared
+                    #: population by construction, so repeating it per pair is
+                    #: the same 611 strings 40 times; `prompts_sha` at the top
+                    #: level pins it, and a pair that used a SUBSET is caught by
+                    #: n_prompts differing.
+                    dose_range=[round(min(c["dose"] for c in r["cells"]), 3),
+                                round(max(c["dose"] for c in r["cells"]), 3)],
+                    n_words_median=sorted(c["n_words"] for c in r["cells"])[
+                        len(r["cells"]) // 2])
                for r, _ in out])
     json.dump(pop, open(os.path.join(HERE, "population.json"), "w"), indent=1)
 
@@ -507,7 +573,8 @@ def main(argv=None):
         print("  %-22s %s" % (r["base"].split("/")[-1][:22],
                               "  ".join("%6s" % x for x in row)))
     print("\n  F05 for comparison: SFT 0.92, DPO 0.96, RLVR 0.98")
-    print("\n-> results/by_pair.csv, results/by_pair_layer.csv, population.json")
+    print("\n-> results/by_pair.csv, results/by_pair_band.csv, population.json")
+    print("-> %s/by_pair_layer.csv  (derived, not in git)" % BIG)
 
 
 if __name__ == "__main__":
