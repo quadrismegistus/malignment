@@ -97,14 +97,16 @@ import os
 #: MPS-safe alternatives to `top_p`. It is the sampling step returning an
 #: out-of-range index for particular RNG states.
 #:
-#: At 1/400 per draw, P(at least one impossible token) is 47% at 256 tokens and
-#: **99% at 1900**. Next-token work is unaffected; long-form generation is
-#: essentially always affected. Forward-pass work -- twp, the logit lens, charge
-#: -- touches none of this.
+#: **THE DEFECT NEEDS EXACT ZEROS.** Model-free, 2000 draws on a 49,152 vector
+#: with fifty entries at 0.02: tail at exactly 0.0 gives mps 2/2000, tail at
+#: 1e-12 gives 0/2000. Every filter sets logits to -inf, which softmaxes to
+#: exactly zero, which is why they all leak identically -- and why the pinned
+#: `top_p=1.0, top_k=0` below is SAFE: it filters nothing.
 #:
-#: AND THE OBVIOUS CHECK CANNOT SEE IT: comparing `generate()` against
-#: `torch.multinomial` ON THE SAME DEVICE agrees exactly, because both call the
-#: same kernel. The referee has to be the other backend.
+#: At 1/400 per draw, P(at least one) is 47% at 256 tokens and 99% at 1900. So
+#: FILTERED long-form generation on mps is essentially always contaminated.
+#: Fix: sample on cpu, or floor the distribution instead of zeroing it.
+#: Forward-pass work -- twp, the logit lens, charge -- touches none of this.
 DECODER = {"do_sample": True, "temperature": 1.0, "top_p": 1.0,
            #: **top_k=0 DISABLES IT, AND OMITTING IT DOES NOT.** transformers
            #: 5.4.0 applies an effective top_k=50 when the field is absent,
