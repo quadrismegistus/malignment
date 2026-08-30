@@ -146,6 +146,40 @@ none             3627       0.901         0.105   0.995               +0.285
 
 **A withdrawal.** An earlier version of this section reported `sp(ceiling, readout) = -0.354` on 5 pairs as support for "the readout carries what patching cannot recover." On 17 pairs it is **-0.08**. That is the third time a 5-to-15-point correlation from this directory has collapsed under power, and it should be read as the standing caution rather than a fresh discovery each time.
 
+## Does alignment change what the model understands? No.
+
+The state carrying ~0.90 licenses "the aligned model arrives somewhere different" and NOT "the aligned model understands the scene differently" — the last-layer final-position state is saturated with next-token information, so the change may be wholly one of disposition.
+
+A 7-way linear probe on `frame_kind` (SEXUAL / VIOLENT / COERCIVE / DEGRADING / ILLICIT / OTHER / NONE), trained on **base** states and tested on the **aligned** states of held-out prompts:
+
+```
+pair              base CV    base -> aligned    chance     n
+Llama-3.1-8B        0.670              0.632     0.245   552
+Mistral-7B-v0.1     0.637              0.633     0.243   507
+CT-LLM-Base         0.594              0.579     0.250   539
+Lucie-7B            0.602              0.525     0.256   472
+gemma-2-9b          0.671              0.607     0.252   532
+```
+
+**Content transfers.** The same linear directions read the aligned state as well as the base state — Mistral 0.633 against 0.637. Alignment does not degrade the representation of what kind of scene it is.
+
+Causally, decomposing `d = h_a - h_b` onto the content subspace, onto the span of the rated words' own unembedding rows, and the remainder, then feeding `h_b + d_x` back through the base readout:
+
+```
+pair               n   full dT   content   readout     rest   dim c   dim w
+Llama-3.1-8B      66    -0.052     0.082     0.999   -0.123       7      74
+Mistral-7B-v0.1   67    -0.051     0.027     0.750    0.073       7      68
+CT-LLM-Base       66    +0.066     0.086     1.030   -0.067       7      66
+Lucie-7B          58    -0.110     0.063     0.979   -0.136       7      56
+gemma-2-9b        86    -0.123     0.136     1.002   -0.000       7      79
+```
+
+**The readout column is close to TAUTOLOGICAL and must not be quoted as a finding.** `d_rest` is orthogonal to every `W[w]` for the rated words, so by construction it cannot move their logits except through the softmax denominator and the RMSNorm nonlinearity. The ~1.0 says only that those indirect channels contribute nothing.
+
+**And the content column does not survive its null.** Against a random subspace of equal rank on the same cells, content gives **-0.034** where random gives **-0.001**, and two subsamples disagree in sign (+0.082 at n=66, -0.034 at n=22). No detectable contribution.
+
+What is solid: the delta is **enriched in content directions without acting through them** — 4.25% of `||d||^2` in a 7-of-4096-dimensional subspace against 0.17% expected at random, a 25x enrichment causing nothing measurable. Alignment moves the state along content-carrying directions, content stays readable, and the displacement comes from elsewhere.
+
 ## Population and selection
 
 Prompts are selected on **lift, not dose**: `frame < 5 AND lift > 0.5`, where `lift = dose - frame`, 102 of the frozen 611. Exposed as `charge.lift()`.
