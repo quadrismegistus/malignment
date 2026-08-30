@@ -89,11 +89,43 @@ A continuum from 0% to 106%, with **Llama fifth of nine at 72%**. Its readout sw
 
 **The final normalisation still contributes nothing anywhere.** `unembed_only` reproduces the readout swap to the third decimal in every pair.
 
+## Is the decomposition well-posed? Yes.
+
+A 2x2 swap gives four corners of a surface and cannot say whether the surface is flat, so the readout/state split had two readings a swap cannot separate: two distinct changes that compensate, or ONE change to the composed map projected onto two non-orthogonal axes, which would manufacture the -0.706 anti-correlation as an artifact. `run.py --interpolate` grids `T(h_b + a(h_a - h_b), W_b + b(W_a - W_b))` over a=b=0,0.25,0.5,0.75,1.
+
+**The surface is planar.** Median R2 fitting `T ~ a + b*alpha + c*beta` is **0.984**; adding `d*alpha*beta` buys **0.006**.
+
+```
+pair                 state only   readout      sum     joint   sub-additive
+Llama-3.1-8B             -0.165    -0.281   -0.446    -0.392        12%
+kanana-1.5-8b-base       -0.424    -0.264   -0.688    -0.522        24%
+Lucie-7B                 -0.225    -0.033   -0.258    -0.251         3%
+gemma-2-9b               -0.376    +0.060   -0.316    -0.229        28%
+neo_7b                   -0.098    -0.148   -0.247    -0.192        22%
+CT-LLM-Base              -0.086    -0.050   -0.136    -0.142        -4%
+
+median state -0.195, readout -0.099, ratio 2.0:1
+```
+
+So the axes ARE separable and the question has an answer per lineage. Within a pair the two changes are near-additive and mildly **redundant** — doing both achieves ~20% less than the sum, because they partly accomplish the same thing. That is overlap, not opposition, and it is a different phenomenon from the -0.706 anti-correlation, which is **across** lineages: different training runs allocate the work differently. Reading the between-pair fact as a within-pair mechanism was an error.
+
+**gemma-2-9b is the sharp case**: its readout swap is **+0.060**. Its aligned unembedding, applied to its own base state, makes the distribution *more* transgressive. All its displacement is in the state, with the readout pulling against it.
+
+## What this says about "superficial" and "downstream"
+
+**Against Weatherby's "downstream," on the literal reading.** RLHF "is downstream from the core model" (*Language Machines* p. 150) is a pipeline metaphor, and taken literally it predicts a transformation applied to the output of an unchanged core — a readout change with the representation intact. The median allocation is **2:1 toward the state**, on a surface flat enough (R2 0.984) that the decomposition is not too blurry to read. It does not touch his premise, which is true: GPT-2 had competence before RLHF. It complicates the inference from that premise to treating alignment as posterior.
+
+**H2 is the stronger evidence and this is corroborative**, from an instrument that can see what patching cannot: patching holds the readout at base by construction, so it can show alignment reaches deep but never that the readout is not where the rest lives.
+
+**Against LIMA, weakly, and it should not be leaned on.** The Superficial Alignment Hypothesis is about knowledge and capabilities versus "which subdistribution of formats" (Zhou et al., p. 2). A readout-localised effect would have looked like format; a state change is harder to call format. But "the final-layer residual differs" is not "knowledge and capabilities differ," and `west-base-beat-aligned`, `lin-urial-unlocking-spell` and `raghavendra-revisiting-superficial` are better aimed at that claim.
+
+**Worth recording: the withdrawn headline supported both.** 90% readout, a 6% perturbation of the final matrix, the thought untouched, is exactly what Weatherby and LIMA predict. The error ran against this paper's thesis, and it still took prompting to break.
+
 ## Population and selection
 
-Prompts are selected on **headroom, not dose**: `frame < 5 AND (dose - frame) > 0.5`, 102 of the frozen 611.
+Prompts are selected on **lift, not dose**: `frame < 5 AND lift > 0.5`, where `lift = dose - frame`, 102 of the frozen 611. Exposed as `charge.lift()`.
 
-**Dose is close to useless as a selector and the frame is why.** `corr(effect, dose) = -0.091` against `corr(effect, dose - frame) = -0.261`, and `-0.311` inside the unsaturated range. A frame already rated 6.4 has candidate words no more transgressive than the setup: headroom runs +0.38 at frame 2-3 down to **-0.05** at frame 6-7, so the highest-dosed prompts have nowhere to displace to. Effect peaks at frames 2-4 and falls away above 5 while dose climbs monotonically, which is why a linear fit across the whole range returns nothing.
+**Dose is close to useless as a selector and the frame is why.** `corr(effect, dose) = -0.091` against `corr(effect, lift) = -0.261`, and `-0.311` inside the unsaturated range. **Lift is not headroom**: `corr(lift, 7 - dose) = -0.004` and `corr(effect, 7 - dose) = +0.091`, so distance from the ceiling is a different quantity and an uninformative one. A frame already rated 6.4 has candidate words no more transgressive than the setup: headroom runs +0.38 at frame 2-3 down to **-0.05** at frame 6-7, so the highest-dosed prompts have nowhere to displace to. Effect peaks at frames 2-4 and falls away above 5 while dose climbs monotonically, which is why a linear fit across the whole range returns nothing.
 
 Simulated over the existing run, selection rules give:
 

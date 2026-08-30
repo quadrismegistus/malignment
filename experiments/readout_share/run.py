@@ -348,6 +348,107 @@ def summarise(r, floor):
         onset=st.median(ons) if ons else float("nan"), n_onset=len(ons))
 
 
+def interpolate(base, aligned, prompts, torch, AutoTokenizer, device="cpu",
+                grid=(0.0, 0.25, 0.5, 0.75, 1.0)):
+    """T on a grid of (alpha, beta): state alpha of the way to aligned, readout beta.
+
+    **THE SWAP IS THE FOUR CORNERS OF THIS SURFACE, AND THE CORNERS CANNOT SAY
+    WHETHER IT IS FLAT.** `T` is not additive over the two substitutions, so the
+    readout and state terms do not partition the effect and their interaction is
+    unidentified by a 2x2. The components correlate -0.706 across lineages, which
+    has two readings a 2x2 cannot separate: two distinct changes that compensate,
+    or ONE change to the composed map projected onto two non-orthogonal axes,
+    which would manufacture that anti-correlation as an artifact.
+
+    A grid identifies it. Fit `T ~ a + b*alpha + c*beta` and then add `d*alpha*beta`:
+    if the interaction buys little, the decomposition is well-posed and the
+    components are separately meaningful. If it buys a lot, the split is a
+    property of the joint map and "is alignment in the readout or the state" has
+    no answer of the form the question expects.
+    """
+    HB, pl = lens.hidden(base, store="live")
+    HA, _ = lens.hidden(aligned, store="live")
+    WB, nwB, nbB, _, cB = lens.head(base)
+    WA, nwA, nbA, _, cA = lens.head(aligned)
+    if WB.shape != WA.shape:
+        n = min(WB.shape[0], WA.shape[0])
+        WB, WA = WB[:n], WA[:n]
+    #: the config scalars are architecture, not weights, and interpolating them
+    #: would be interpolating a model family. Asserted equal rather than assumed.
+    if (cB.get("final_logit_softcapping") != cA.get("final_logit_softcapping")
+            or cB.get("logits_scaling") != cA.get("logits_scaling")):
+        return None, "config scalars differ between arms"
+    gm = lens.is_gemma(base)
+    from malignment import twp as _twp
+    tok, _ = _twp.load_tokenizer(base, revision=Checkpoint(base).revision)
+    idx = {p: i for i, p in enumerate(pl)}
+    cells = []
+    for p in prompts:
+        if p not in idx:
+            continue
+        sc = charge.scene(p)
+        ids, keep = lens.single_token(sc, tok, prompt=p, vocab=WB.shape[0])
+        if len(keep) < 8:
+            continue
+        cells.append((p, idx[p], ids,
+                      torch.tensor([sc[w] for w in keep])))
+    if len(cells) < 20:
+        return None, "only %d usable prompts" % len(cells)
+
+    WBf, WAf = WB.float(), WA.float()
+    out = collections.defaultdict(list)
+    for b in grid:
+        #: one readout resident at a time -- an interpolated unembedding is a
+        #: full-size float32 tensor (3.7GB for gemma) and five of them is not a
+        #: saving worth the swap risk.
+        Wi = WBf if b == 0.0 else (WAf if b == 1.0 else WBf + b * (WAf - WBf))
+        nwi = nwB if (nwB is None or nwA is None or b == 0.0) else (
+            nwA if b == 1.0 else nwB.float() + b * (nwA.float() - nwB.float()))
+        R = lens.Readout(Wi, nwi, nbB, cB, gemma=gm, device=device, torch=torch)
+        for a in grid:
+            for p, i, ids, wt in cells:
+                hb = torch.from_numpy(HB[i]).float()
+                h = hb if a == 0.0 else (torch.from_numpy(HA[i]).float() if a == 1.0
+                                         else hb + a * (torch.from_numpy(HA[i]).float() - hb))
+                P = R.probs(h, ids)[-1]
+                ssum = float(P.sum())
+                if ssum > 0:
+                    out[(a, b)].append(float((P * wt).sum() / ssum))
+        del R
+    return {k: st.mean(v) for k, v in out.items()}, None
+
+
+def fit_surface(T, grid):
+    """(additive R2, with-interaction R2, interaction coefficient, effect)."""
+    pts = [(a, b, T[(a, b)]) for a in grid for b in grid if (a, b) in T]
+    y = [z for _, _, z in pts]
+    my = st.mean(y)
+    ss = sum((v - my) ** 2 for v in y)
+
+    def ols(cols):
+        n, k = len(pts), len(cols)
+        X = [[1.0] + [c(a, b) for c in cols] for a, b, _ in pts]
+        A = [[sum(X[r][i] * X[r][j] for r in range(n)) for j in range(k + 1)]
+             + [sum(X[r][i] * y[r] for r in range(n))] for i in range(k + 1)]
+        for i in range(k + 1):
+            pv = max(range(i, k + 1), key=lambda r: abs(A[r][i]))
+            A[i], A[pv] = A[pv], A[i]
+            for r in range(k + 1):
+                if r != i and A[i][i]:
+                    f = A[r][i] / A[i][i]
+                    for cc in range(i, k + 2):
+                        A[r][cc] -= f * A[i][cc]
+        bb = [A[i][k + 1] / A[i][i] if A[i][i] else 0.0 for i in range(k + 1)]
+        yh = [sum(bb[j] * X[r][j] for j in range(k + 1)) for r in range(n)]
+        rs = sum((y[r] - yh[r]) ** 2 for r in range(n))
+        return bb, (1 - rs / ss if ss else 0.0)
+
+    _, r_add = ols([lambda a, b: a, lambda a, b: b])
+    bi, r_int = ols([lambda a, b: a, lambda a, b: b, lambda a, b: a * b])
+    lo, hi = min(grid), max(grid)
+    return r_add, r_int, bi[3], T[(hi, hi)] - T[(lo, lo)]
+
+
 def main(argv=None):
     import torch
     from transformers import AutoTokenizer
@@ -368,6 +469,10 @@ def main(argv=None):
     #: populations in one table, which is the defect the frozen list exists to
     #: prevent and would be invisible in the output.
     ap.add_argument("--store", default="live", choices=("live", "archive"))
+    ap.add_argument("--interpolate", action="store_true",
+                    help="grid over (state alpha, readout beta) instead of the "
+                         "2x2 corners -- identifies the interaction the swap "
+                         "cannot, see interpolate()")
     ap.add_argument("--common", action="store_true",
                     help="restrict to words single-token in EVERY pair's "
                          "tokenizer, on prompts every pair holds -- the only "
@@ -379,6 +484,55 @@ def main(argv=None):
 
     man = lens.manifest(a.store)
     eps, _ = roster.endpoints()
+    if a.interpolate:
+        GRID = (0.0, 0.25, 0.5, 0.75, 1.0)
+        #: headroom selection -- a flat surface over prompts with no room to
+        #: displace would be flat for a reason that has nothing to do with the
+        #: question.
+        sel = [p for p in charge.prompts()
+               if charge.frame(p) is not None and charge.frame(p) < 5
+               and (charge.dose(p) - charge.frame(p)) > 0.5]
+        todo_i = a.pairs or [b for b in sorted(eps) if b in man and eps[b] in man]
+        print("interpolation grid %dx%d | %d headroom prompts | %d pairs"
+              % (len(GRID), len(GRID), len(sel), len(todo_i)))
+        print("\n  %-24s %8s %9s %9s %9s %9s"
+              % ("pair", "effect", "R2 add", "R2 +int", "interact", "share"))
+        rows = []
+        for b in todo_i:
+            try:
+                T, why = interpolate(b, eps[b], sel, torch, AutoTokenizer,
+                                     device=a.device, grid=GRID)
+            except Exception as e:
+                T, why = None, "%s: %s" % (type(e).__name__, str(e)[:40])
+            if T is None:
+                print("  %-24s SKIPPED %s" % (b.split("/")[-1][:24], why), flush=True)
+                continue
+            r_add, r_int, inter, eff = fit_surface(T, GRID)
+            rows.append((b, r_add, r_int, inter, eff, T))
+            print("  %-24s %+8.3f %9.3f %9.3f %+9.3f %8.0f%%"
+                  % (b.split("/")[-1][:24], eff, r_add, r_int, inter,
+                     100 * inter / eff if eff else float("nan")), flush=True)
+        if rows:
+            os.makedirs(RESULTS, exist_ok=True)
+            with open(os.path.join(RESULTS, "interpolation.csv"), "w", newline="") as f:
+                w = csv.writer(f)
+                w.writerow(["base", "aligned", "alpha", "beta", "T"])
+                for bb, _, _, _, _, T in rows:
+                    for (al, be), v in sorted(T.items()):
+                        w.writerow([bb, eps[bb], al, be, "%.6f" % v])
+            print("\n  median R2 additive %.3f | with interaction %.3f | gain %.3f"
+                  % (st.median([r[1] for r in rows]), st.median([r[2] for r in rows]),
+                     st.median([r[2] - r[1] for r in rows])))
+            print("  interaction as %% of the full effect: median %.0f%%"
+                  % (100 * st.median([abs(r[3] / r[4]) for r in rows if r[4]])))
+            print("\n  T SURFACE, mean over pairs  (rows = state alpha, cols = readout beta)")
+            print("      %s" % "  ".join("b=%.2f" % g for g in GRID))
+            for al in GRID:
+                cells = [st.mean([r[5][(al, be)] for r in rows if (al, be) in r[5]])
+                         for be in GRID]
+                print("  a=%.2f %s" % (al, "  ".join("%6.3f" % v for v in cells)))
+            print("\n-> results/interpolation.csv")
+        return
     todo = a.pairs or [b for b in sorted(eps) if b in man and eps[b] in man]
     print("store=%s | pairs with both arms present: %d" % (a.store, len(todo)))
     common = None

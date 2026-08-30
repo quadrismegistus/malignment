@@ -3,6 +3,7 @@
     from malignment import charge
 
     charge.dose("He hated her deeply and wanted to")      -> 4.61
+    charge.lift(p)                                        -> dose - frame
     charge.scene(p)                                       -> {"kill": 6.4, ...}
     charge.T(charge.scene(p), {"kill": 0.03, "scream": 0.1})  -> (5.1, 0.13)
     charge.response(p)                                    -> {base_id: 0.084, ...}
@@ -64,10 +65,15 @@ T_aligned` for one pair on one prompt, and averaging it over prompts or over
 lineages throws away the thing that varies. `response()` returns the per-lineage
 dict, unaveraged, deliberately.
 
-**AND THE RESPONSE SATURATES.** Frames rated 5-7 carry the highest dose and show
-essentially zero response, replicated on both flash and pro. A dose-response plot
-over the full range is not monotone, and selecting the highest-dose prompts
-selects into the flat region. `sample(strata=)` exists because of this.
+**AND THE RESPONSE SATURATES, WHICH MAKES `dose` THE WRONG SELECTOR.** Frames
+rated 5-7 carry the highest dose and show essentially zero response. A
+dose-response plot over the full range is not monotone, and selecting the
+highest-dose prompts selects into the flat region: `corr(effect, dose) = -0.091`
+against `corr(effect, lift) = -0.261`, where lift is `dose - frame`. **Use
+`lift()` for anything asking whether alignment moves a distribution**; `dose` is
+the level of the scene, which is a different question. See `lift()` for the
+numbers and for why headroom (`7 - dose`) is not the same quantity and predicts
+nothing.
 
 ## T, AND WHY IT IS NORMALISED
 
@@ -242,6 +248,50 @@ def kinds(prompt):
     return dict(d["kind"]) if d else {}
 
 
+def lift(prompt):
+    """dose - frame: how much the candidate words add OVER their setup, or None.
+
+    **THIS IS THE DOSE ANY DISPLACEMENT WORK WANTS, NOT `dose()`.** Measured on
+    593 prompts x ~35 endpoint pairs against the displacement each prompt
+    produced:
+
+        corr(effect, dose)          -0.091      the level
+        corr(effect, dose - frame)  -0.261      the lift
+          ... within frames below 5 -0.311
+        corr(effect, 7 - dose)      +0.091      distance from the ceiling: nothing
+
+    `dose` is the level of the finished scene and it barely predicts anything,
+    because **the response saturates**: effect peaks at frames 2-4 and falls away
+    above 5 while dose climbs monotonically. A frame already rated 6.4 has
+    candidate words no more transgressive than the setup, so there is nothing for
+    alignment to displace. The lift collapses with it -- mean `dose - frame` runs
+    +0.38 at frame 2-3 to **-0.05** at frame 6-7 -- and it is the lift, not the
+    level, that tracks the outcome.
+
+    **AND LIFT IS NOT HEADROOM.** `corr(dose - frame, 7 - dose) = -0.004`: how
+    much room is left below the ceiling is a different quantity and an
+    uninformative one. Selecting on `7 - dose` selects on nothing.
+
+    Selecting a 611-prompt population on `dose >= 4` produced ONE readable pair
+    out of 32; `frame < 5 AND lift > 0.5` over the same measured prompts produced
+    eight. Use `dose` when the question is how charged a scene is; use `lift`
+    when the question is whether anything can move.
+    """
+    d = _p(prompt)
+    if not d or d["dose"] is None or d["frame"] is None:
+        return None
+    return d["dose"] - d["frame"]
+
+
+def lifts():
+    """{prompt: lift} for every prompt carrying both a dose and a frame."""
+    out = {}
+    for p, d in index()["prompts"].items():
+        if d["dose"] is not None and d["frame"] is not None:
+            out[p] = d["dose"] - d["frame"]
+    return out
+
+
 def frame(prompt):
     """The setup alone on the same 1-7 scale, so `scene - frame` is the increment."""
     d = _p(prompt)
@@ -406,8 +456,14 @@ def T(scene_map, probs):
     return num / cov, (cov / tot if tot else 0.0)
 
 
-def sample(n, strata=5, seed=0, among=None, min_words=8):
-    """`n` prompts spread evenly across `strata` equal-count dose bands.
+def sample(n, strata=5, seed=0, among=None, min_words=8, by="dose"):
+    """`n` prompts spread evenly across `strata` equal-count bands of `by`.
+
+    **`by="lift"` IS ALMOST ALWAYS WHAT DISPLACEMENT WORK WANTS.** The default
+    stays "dose" so existing callers are unchanged, but see `lift()`: selecting a
+    population on dose gave 1 readable pair of 32 where lift gave 8, on the same
+    measured prompts. If the question is whether alignment moves anything, band
+    on lift.
 
     **SELECTING THE TOP-N BY DOSE SELECTS INTO THE SATURATED REGION** -- frames
     rated 5-7 carry the highest dose and show essentially zero response. A
@@ -416,12 +472,15 @@ def sample(n, strata=5, seed=0, among=None, min_words=8):
     holds); `min_words` drops prompts with too few rated candidates to weight.
     """
     ix = index()["prompts"]
+    key = (lambda p: ix[p]["dose"] - ix[p]["frame"]) if by == "lift" else (
+        lambda p: ix[p]["dose"])
     pool = [p for p in (among if among is not None else ix)
             if p in ix and ix[p]["dose"] is not None
+            and (by != "lift" or ix[p]["frame"] is not None)
             and len(ix[p]["scene"]) >= min_words]
     if not pool:
         return []
-    pool.sort(key=lambda p: ix[p]["dose"])
+    pool.sort(key=key)
     rng = random.Random(seed)
     edges = [round(i * len(pool) / strata) for i in range(strata + 1)]
     bands = [pool[edges[i]:edges[i + 1]] for i in range(strata)]
@@ -430,7 +489,7 @@ def sample(n, strata=5, seed=0, among=None, min_words=8):
         b = bands[i % strata]
         if b:
             out.append(b.pop(rng.randrange(len(b))))
-    return sorted(set(out), key=lambda p: ix[p]["dose"])
+    return sorted(set(out), key=key)
 
 
 def stats():
