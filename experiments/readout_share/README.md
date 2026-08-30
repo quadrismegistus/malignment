@@ -121,6 +121,31 @@ So the axes ARE separable and the question has an answer per lineage. Within a p
 
 **Worth recording: the withdrawn headline supported both.** 90% readout, a 6% perturbation of the final matrix, the thought untouched, is exactly what Weatherby and LIMA predict. The error ran against this paper's thesis, and it still took prompting to break.
 
+## The H2 join: two instruments, one counterfactual
+
+H2's `ceiling` is recovery with ALL blocks aligned and the head held at base — structurally the same counterfactual as this experiment's state swap, reached by patching weights rather than by reading a stored state. Its metric is not `T`:
+
+    den = {i: la[i] - lb[i]}            over tokens where |la - lb| > 1e-3
+    rec(lp) = median_i (lp[i] - lb[i]) / den[i]
+
+the median per-token fraction of the base->aligned LOG-PROB gap a hybrid reproduces. `readout_share` recomputes exactly that on its four combinations, joined to H2 on `(pair, prompt)` — the frozen 611 includes H2's 231 for this reason. **3,627 cells, 17 pairs, 214 shared prompts.**
+
+```
+final-OOD cut   cells   state rec   readout rec     sum   sp(ceiling, state)
+none             3627       0.901         0.105   0.995               +0.285
+< 3.0            3163       0.897         0.100   0.993               +0.296
+< 2.0            2726       0.892         0.100   0.993               +0.303
+< 1.5            2180       0.895         0.096   0.995               +0.291
+```
+
+**THE DECOMPOSITION CLOSES.** State + readout = **0.99 of the log-prob gap**, unmoved by the denominator threshold (67-100% of tokens kept) or by gating on the cross-read. At the output, alignment is exhaustively a change to what arrives plus a change to what renders it, with no residual and no interaction worth naming. The state carries **~0.90**, the readout **~0.10**.
+
+**AND TWO INSTRUMENTS AGREE ON THE SAME COUNTERFACTUAL.** `sp(ceiling, state recovery) = +0.29-0.30` per cell, and the per-pair medians match: CT-LLM 0.886/0.887, Mistral 0.906/0.900, TinyLlama 0.917/0.905, Lucie 0.976/0.926, Llama 0.845/0.764. Different repos, different machinery, same number. Nothing in the campaign had a cross-instrument check for this.
+
+**The per-pair readout share is NOT recoverable from this design.** It runs -14.7 (Amber) to +1.33 (Yi) across 16 pairs; the extremes are ratio artifacts, and `|readout recovery|` correlates +0.297 with H2's final-layer cross-read OOD — the term explodes exactly where the cross-read is not interpretable. Gating on final-layer OOD does not rescue Amber, because H1's gate is per-layer worst-case and Amber fails that. The pooled cell-level median is the estimator that survives.
+
+**A withdrawal.** An earlier version of this section reported `sp(ceiling, readout) = -0.354` on 5 pairs as support for "the readout carries what patching cannot recover." On 17 pairs it is **-0.08**. That is the third time a 5-to-15-point correlation from this directory has collapsed under power, and it should be read as the standing caution rather than a fresh discovery each time.
+
 ## Population and selection
 
 Prompts are selected on **lift, not dose**: `frame < 5 AND lift > 0.5`, where `lift = dose - frame`, 102 of the frozen 611. Exposed as `charge.lift()`.

@@ -284,11 +284,68 @@ def lift(prompt):
 
 
 def lifts():
-    """{prompt: lift} for every prompt carrying both a dose and a frame."""
+    """{prompt: lift} for every prompt carrying both a dose and a frame.
+
+    This is the PROMPT-LEVEL lift — averaged over lineages. For per-lineage
+    lift (T_base - frame), use `lift_per_lineage()`.
+    """
     out = {}
     for p, d in index()["prompts"].items():
         if d["dose"] is not None and d["frame"] is not None:
             out[p] = d["dose"] - d["frame"]
+    return out
+
+
+def lift_per_lineage(prompt, base):
+    """T_base - frame for a specific (prompt, lineage) pair, or None.
+
+    **THIS IS THE PER-LINEAGE LIFT AND IT IS THE RIGHT PREDICTOR FOR
+    PER-LINEAGE DISPLACEMENT.** `lift()` averages dose over lineages, which
+    is valid because word scene ratings are reliable across lineages (0.929).
+    But `T_base` weights those ratings by the BASE ARM'S OWN MASS
+    DISTRIBUTION, which varies by model: two bases on the same prompt carry
+    different candidate words at different probabilities, so their
+    transgressiveness levels differ.
+
+    The prompt-level lift (dose - frame) predicts at r=-0.261 across lineages
+    pooled. The per-lineage lift uses each base arm's own T, which is the
+    quantity that should predict that lineage's response because it is what
+    alignment is actually displacing.
+
+    Returns `T_base - frame`, or None if either is missing.
+    """
+    c = cell(prompt, base)
+    if not c or c.get("T_base") is None:
+        return None
+    f = frame(prompt)
+    if f is None:
+        return None
+    return c["T_base"] - f
+
+
+def lifts_per_lineage(base=None):
+    """{(prompt, base): lift} for every annotated cell, or for one lineage.
+
+        lifts_per_lineage()                   # all 109k cells
+        lifts_per_lineage("allenai/OLMo-3-1025-7B")  # one lineage
+
+    Reads the source file directly (one pass) rather than seeking per cell.
+    """
+    import json as _json
+    out = {}
+    ix = index()
+    frames = {p: d["frame"] for p, d in ix["prompts"].items()
+              if d["frame"] is not None}
+    with open(SOURCE, "rb") as fh:
+        for raw in fh:
+            r = _json.loads(raw)
+            if base is not None and r["base"] != base:
+                continue
+            f = frames.get(r["prompt"])
+            tb = r.get("T_base")
+            if f is None or tb is None:
+                continue
+            out[(r["prompt"], r["base"])] = tb - f
     return out
 
 
