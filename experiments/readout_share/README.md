@@ -111,6 +111,25 @@ So the axes ARE separable and the question has an answer per lineage. Within a p
 
 **gemma-2-9b is the sharp case**: its readout swap is **+0.060**. Its aligned unembedding, applied to its own base state, makes the distribution *more* transgressive. All its displacement is in the state, with the readout pulling against it.
 
+## Is the metonymic slide state-carried or readout-carried? BOTH.
+
+malign [6568] measured, at the output, that when a transgressive word loses mass the freed mass lands preferentially on SAME-KIND words (VIOLENT->VIOLENT, SEXUAL->SEXUAL) rather than on neutral ones: 47 of 49 lineages, same-kind risers gaining 40% more than NONE risers (+0.0133 vs +0.0095) and carrying intermediate charge (scene 3.36 vs 2.23). That is the metonymic slide with the control it always lacked.
+
+The output composes state and readout. Running the same statistic under each swap separately, over lift-selected prompts (`frame < 5`, `lift > 0.3`) and cells with 12+ single-token rated words:
+
+```
+contrast    same-kind        NONE    ratio    n cells    pairs with ratio > 1
+full         +0.01265    +0.01000    1.26x       1991    20 of 24, median 1.20x
+state        +0.01799    +0.01456    1.24x       1703    18 of 24, median 1.27x
+readout      +0.00585    +0.00400    1.46x       1757    18 of 23, median 1.41x
+```
+
+**The same-kind preference is present in BOTH components, and marginally stronger in the readout.** The slide is not constituted upstream and then merely rendered — the unembedding has its own within-kind preference.
+
+**This is where the readout's small share becomes load-bearing.** It carries ~10% of the MAGNITUDE of displacement and as much of the STRUCTURE of the slide as the state does. A component can be a tenth of the effect and a full participant in its shape, and a decomposition that reports only magnitude will miss that.
+
+Two restraints on how far it goes. The effect here is **weaker than malign's** — 20/24 at 1.26x against their 47/49 at 1.40x — because this measures single-token rated words at the final layer where they measure the movement store's full word set; a weaker instrument on a subset, not a replication. And the readout's higher ratio sits on **smaller absolute gains** (+0.00585 against +0.01799), so it is a ratio over a third of the mass, which is the shape that broke the per-pair shares in A5.
+
 ## What this says about "superficial" and "downstream"
 
 **Against Weatherby's "downstream," on the literal reading.** RLHF "is downstream from the core model" (*Language Machines* p. 150) is a pipeline metaphor, and taken literally it predicts a transformation applied to the output of an unchanged core — a readout change with the representation intact. The median allocation is **2:1 toward the state**, on a surface flat enough (R2 0.984) that the decomposition is not too blurry to read. It does not touch his premise, which is true: GPT-2 had competence before RLHF. It complicates the inference from that premise to treating alignment as posterior.
@@ -288,6 +307,8 @@ Ratings come from `malignment/charge.py`, not from this directory; the run cross
 **A1, 2026-08-29.** The first version of this measurement ran on Llama-3.1-8B alone and reported 90% readout as the result. That is the outlier. Recorded here because the direction of the correction matters: a single pair gave a clean, theoretically attractive answer — repression at the point of utterance, the state untouched — and the population reversed it. The attractive reading survives for exactly one model.
 
 **A3, 2026-08-29.** This instrument was rebuilt without searching for `twp_head_swap.py`, which already implemented it, and it was reported for two turns without H1's cross-read-in-distribution gate. The gate, once implemented, passes for every pair — so nothing here is retracted for it — but the sequence is the finding: an instrument re-derived from scratch reproduced a prior figure to within 4% (`dW` 6.3e-02 against 6.56e-02) and neither the agreement nor the prior work was noticed until asked. `CAMPAIGN.md`'s method ledger exists for this.
+
+**A6, 2026-08-30.** *"The metonymic slide is constituted in the state, with the readout merely rendering it"* — proposed here, tested here, refuted here. The same-kind landing statistic is 1.24x under the state swap and 1.46x under the readout swap. Recorded because it is the first check this directory designed in order to CONFIRM something rather than to break something, and it broke it anyway; the seven before it were all prompted by RH.
 
 **A5, 2026-08-30. THE HEADLINE IS WITHDRAWN.** Every previous version of this document said the state carries displacement and Llama-3.1-8B is a lone counter-case at 86-99% readout. Three compounding errors:
 
