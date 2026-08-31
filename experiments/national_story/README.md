@@ -1,8 +1,22 @@
 # National stories: what alignment adds to a plot
 
 Producers: `run.py` (local HF), the vLLM fleet via `malignment.vllm_generate`.
-Instrument: `tropes.py`. Analysis: `analyse.py`. Prompts: `prompts_compare.jsonl`,
-`prompts_rettberg.jsonl`.
+
+    judge.py               is it a story at all -> judged_stories_v2.jsonl
+    code_story_conflict_v1 the annotation instrument (in malignment/tasks/)
+    conflict.py            runs it -> conflict_nocap.jsonl
+    tropes.py              the six Rettberg tropes, lexical, three voted sets
+    analyse.py             the lexical contrasts
+    contrast.py            paired arm table with lineage sign counts
+    tests.py               sign / signed-rank / paired t, LINEAGE as the unit
+    homogeneity.py         entropy and pairwise distance, world vs outcome
+    demonym_separation.py  within / between / overall by demonym
+    field_variance.py      the same, decomposed field by field
+    homogeneity_summary.py percent-change summary, arm and frame
+    export_db.py           -> conflict.sqlite for the web explorer
+
+Prompts: `prompts_compare.jsonl` (8 demonyms + a no-demonym control, raw and
+prefill), `prompts_rettberg.jsonl` (cell 2, never run at scale).
 
 Replicating Rettberg & Wigers (2025) -- 11,800 national stories from gpt-4o-mini,
 released CC0 -- with the arm they lack: base against aligned. Their second peer
@@ -236,6 +250,110 @@ n, after the base length effect that FLIPPED SIGN between n=3 and n=10 and the
 "aligned cannot stop" mechanism that regressed to nothing at 15 lineages. A
 single story is a hypothesis generator and never evidence.
 
+
+## HOMOGENEITY: ALIGNMENT MAKES THE SETTING MORE NATIONAL AND THE FEELING LESS
+
+Rettberg's central claim is homogeneity, and it has two halves that need
+different instruments: the Norwegian stories resemble EACH OTHER, and the
+Norwegian stories resemble the TURKISH ones. Pooled entropy answers only the
+first. A model whose nationalities became indistinguishable while each stayed
+internally varied would score UNCHANGED on a pooled measure.
+
+Measured as P(two stories give different answers) on each annotation field,
+decomposed into within-demonym, between-demonym and overall. 18 lineages, equal
+stories per demonym per arm, 300 resamples, raw frame.
+
+```
+                          OVERALL diversity     WITHIN demonym    DEMONYM SHARE
+field                    base aligne    %chg   u/d   base aligne    %chg   base aligne
+W mood                  0.606  0.509  -15.9%  6/12  0.588  0.505  -14.1%   2.7%   1.8%
+W community_constrains  0.203  0.111  -45.3%  4/14  0.204  0.112  -45.3%  -0.0%  -0.0% *
+W setting               0.777  0.702   -9.6%  1/17  0.755  0.637  -15.7%   3.1%  10.6% *
+W genre                 0.684  0.634   -7.2%  8/10  0.666  0.592  -11.1%   3.1%   7.3%
+W temporality           0.390  0.350  -10.5%  8/10  0.386  0.305  -21.0%   0.6%  13.6%
+W opponent              0.801  0.765   -4.5%  7/11  0.780  0.734   -6.0%   2.9%   4.7%
+W threat                0.467  0.440   -5.8%  7/11  0.431  0.359  -16.6%   9.4%  20.8%
+W tradition             0.424  0.411   -3.1%  8/10  0.415  0.376   -9.4%   2.8%   9.1%
+W elder_informant       0.314  0.355  +13.0% 10/7   0.311  0.332   +6.7%   0.7%   8.1%
+O opponent_fate         0.697  0.760   +9.0% 12/6   0.696  0.710   +1.9%  -0.3%   7.7%
+O ending                0.684  0.756  +10.7% 14/4   0.690  0.718   +4.2%  -1.0%   5.2% *
+O community_role        0.426  0.494  +15.9% 14/4   0.403  0.491  +21.8%   5.2%   0.4% *
+O conflict_mode         0.507  0.664  +31.1% 16/2   0.516  0.648  +25.5%  -1.5%   2.3% *
+O protagonist_change    0.369  0.514  +39.3% 14/4   0.358  0.504  +40.8%   3.0%   1.7% *
+O collective_action     0.235  0.353  +50.3% 15/3   0.224  0.347  +54.6%   2.6%   0.8% *
+O homecoming            0.102  0.166  +62.9% 13/3   0.095  0.159  +66.7%   3.6%   2.8% *
+O resolution_scale      0.344  0.600  +74.3% 16/2   0.346  0.593  +71.1%  -0.5%   1.0% *
+O resolution_means      0.379  0.672  +77.4% 18/0   0.378  0.661  +74.7%   0.5%   1.9% *
+O renewal               0.041  0.192 +367.6% 15/2   0.040  0.187 +372.2%   1.2%   1.5% *
+
+W = a field naming what the story IS. O = a field naming how it RESOLVES.
+* = overall change significant, Wilcoxon over lineages, p < 0.05.
+u/d = lineages where overall diversity rose / fell.
+```
+
+**The world/outcome split is in the data, not imposed on it.** Sorted by change,
+the ten most homogenising fields are all W and the ten most diversifying are all
+O, with the boundary falling exactly between. The grouping was written by reading
+what the fields mean; the numbers separate the same way without being told.
+
+**The two halves do not have the same evidential shape.** World homogenisation is
+consistent in direction but small per field -- only `community_constrains` and
+`setting` are individually significant, and mood at -15.9% is 6 up 12 down and
+does not reach significance alone. Outcome diversification is large field by
+field, 9 of 10 significant, `resolution_means` at 18 up 0 down. Grouped:
+
+```
+                       base  aligned  %change   lineages     p_wilcoxon
+WORLD    within       0.4603  0.4123   -10.4%   3 up 15 dn      0.024
+         overall      0.4713  0.4420    -6.2%   4 up 14 dn      0.060
+OUTCOME  within       0.3752  0.5016   +33.7%  16 up  2 dn    3.8e-05
+         overall      0.3784  0.5174   +36.7%  17 up  1 dn    1.5e-05
+```
+
+**But the outcome half is closer to one fact than to ten.** 64% of base stories
+sit at the null on `resolution_means`, `resolution_scale` AND
+`protagonist_change` simultaneously -- 1.69x what independence predicts -- and
+the average base story is at the null on 6.19 of the 10 outcome fields. "Nothing
+resolves" is a single absorbing state that locks most of the outcome space at
+once, so +36.7% is largely one binary fact counted ten times. Several of the
+largest numbers are also floor effects: `renewal` is 4% in base, so any variation
+at all is a 368% gain. That is alignment ADDING a behaviour, not diversifying one.
+
+**The demonym share is the column to read.** Nationality's share of the distance
+rises in almost every world field and it is exactly the national furniture --
+what threatens the place, when it is set, where it is, which tradition is
+invoked, whether an elder appears:
+
+```
+threat            9.4% -> 20.8%        mood   2.7% -> 1.8%
+temporality       0.6% -> 13.6%
+setting           3.1% -> 10.6%
+tradition         2.8% ->  9.1%
+elder_informant   0.7% ->  8.1%
+```
+
+And mood goes the other way. Nationality predicts the mood LESS after alignment,
+because every nationality gets the same affirming register.
+
+**So alignment does not homogenise the demonyms; it sharpens them.** Between /
+within separation rises from 0.0088 to 0.0264 pooled (aligned lower in 5 of 18,
+p_wilcoxon 0.018), and the ratio moves too (1.026 -> 1.062), so it is not a
+uniform scale-up. Base separation is essentially zero: base models barely
+condition on the nationality at all, which is what they do on the page -- a
+Norwegian-prompted SmolLM2 generation goes to a dead body and New York with no
+Norway in it.
+
+The honest size: the demonym accounts for about 2% of annotation distance in base
+and 6% in aligned. Alignment triples a small quantity. Anyone quoting "alignment
+sharpens national difference" has to carry the 7.5% ceiling with it.
+
+**The frame does none of this.** aligned raw -> aligned prefill moves every
+measure between -0.4% and +4.2%, no p_wilcoxon below 0.13, demonym share +0.34pp.
+Third independent way the frame contrast has come back empty on narrative
+content, against an arm contrast significant on 29 of 98 annotation values.
+
+**One sentence, if only one survives:** alignment makes the setting more national
+and the feeling less national.
 
 ## WHAT "PURE STORY" DOES AND DOES NOT MEAN (read this before quoting the filter)
 
