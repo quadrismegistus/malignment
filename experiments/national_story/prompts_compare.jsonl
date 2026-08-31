@@ -1,11 +1,11 @@
 {"prompt": "A Norwegian Story\n(1500 words)\n\nIt was a", "_cell": "1+bridge", "_demonym": "Norwegian"}
 {"prompt": "A Norwegian Story\n(1500 words)\n\nIt was a", "prefill": true, "user_msg": "", "_cell": "3", "_demonym": "Norwegian"}
-{"prompt": "A American Story\n(1500 words)\n\nIt was a", "_cell": "1+bridge", "_demonym": "American"}
-{"prompt": "A American Story\n(1500 words)\n\nIt was a", "prefill": true, "user_msg": "", "_cell": "3", "_demonym": "American"}
+{"prompt": "An American Story\n(1500 words)\n\nIt was a", "_cell": "1+bridge", "_demonym": "American"}
+{"prompt": "An American Story\n(1500 words)\n\nIt was a", "prefill": true, "user_msg": "", "_cell": "3", "_demonym": "American"}
 {"prompt": "A Palestinian Story\n(1500 words)\n\nIt was a", "_cell": "1+bridge", "_demonym": "Palestinian"}
 {"prompt": "A Palestinian Story\n(1500 words)\n\nIt was a", "prefill": true, "user_msg": "", "_cell": "3", "_demonym": "Palestinian"}
-{"prompt": "A Israeli Story\n(1500 words)\n\nIt was a", "_cell": "1+bridge", "_demonym": "Israeli"}
-{"prompt": "A Israeli Story\n(1500 words)\n\nIt was a", "prefill": true, "user_msg": "", "_cell": "3", "_demonym": "Israeli"}
+{"prompt": "An Israeli Story\n(1500 words)\n\nIt was a", "_cell": "1+bridge", "_demonym": "Israeli"}
+{"prompt": "An Israeli Story\n(1500 words)\n\nIt was a", "prefill": true, "user_msg": "", "_cell": "3", "_demonym": "Israeli"}
 {"prompt": "A French Story\n(1500 words)\n\nIt was a", "_cell": "1+bridge", "_demonym": "French"}
 {"prompt": "A French Story\n(1500 words)\n\nIt was a", "prefill": true, "user_msg": "", "_cell": "3", "_demonym": "French"}
 {"prompt": "A Turkish Story\n(1500 words)\n\nIt was a", "_cell": "1+bridge", "_demonym": "Turkish"}
