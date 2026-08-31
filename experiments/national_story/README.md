@@ -380,6 +380,45 @@ entirely.
 So the pure filter selects NARRATIVELY WELL-FORMED text and nothing else.
 Anywhere "pure stories" is quoted, that is the claim being made.
 
+## ISRAELI AND PALESTINIAN: AN AMPLIFICATION, NOT A CROSSOVER (a withdrawal)
+
+Rettberg's sharpest close reading is that her Palestinian stories have a clear
+systemic opponent -- "the opponent in PS_1 is clearly the Israeli military" --
+while her Israeli ones have vague individualised ones. We reproduce the
+asymmetry. An earlier version of this section said the BASE arm did the reverse,
+making it a crossover rather than an amplification. That is WITHDRAWN. It was
+measured on 29-41 stories per cell; at 125-226 the base difference reverses:
+
+                                        reported (n=29-41)   now (n=125-226)
+    base  opponent=institution  Israeli        24%               15.4%
+                            Palestinian        10%               23.2%
+
+Palestinian base stories have MORE named institutional opponents, not fewer, so
+alignment amplifies an asymmetry already present in the base arm.
+
+The aligned-arm asymmetry itself holds. Lineage-paired, raw frame, >=4 stories
+per arm per demonym, 9-12 lineages:
+
+    threat=external       Palestinian  51.2% -> 83.9%  +32.7  8 up 1 dn  p_w 0.012
+                          Israeli      22.9% -> 20.3%   -2.6  6 up 4 dn  n.s.
+    opponent=institution  Palestinian  26.9% -> 48.2%  +21.3  7 up 2 dn  p_w 0.039
+                          Israeli      16.0% ->  8.9%   -7.2  2 up 9 dn  p_sign 0.065
+    opponent=none         Israeli       7.6% -> 26.0%  +18.5  9 up 3 dn  p_w 0.016
+                          Palestinian   1.4% ->  4.9%   +3.5  2 up 1 dn  n.s.
+
+Alignment removes the opponent from Israeli stories and installs an external
+institutional one in Palestinian stories. Nine to twelve lineages clear the
+floor, so these are the weakest tests here and
+`opponent_specificity=named` for Palestinian (7 up 2 down, p_sign 0.18) is
+suggestive only.
+
+**Why the first version was wrong, since it will recur.** The crossover was the
+most striking pattern in the data. I checked it for one artifact -- whether a
+single lineage drove it -- found 7-0 and 6-0 lineage splits and stopped. Lineage
+unanimity says the DIRECTION is consistent across models; it says nothing about
+whether 29 stories estimate a RATE well. A real check that answers a different
+question than the one that matters is the recurring failure in this campaign.
+
 ## THE ALIGNED ISRAELI STORY IS THE SAME STORY ACROSS MODEL FAMILIES
 
     Qwen2.5-7B-Instruct   Mordechai, a retired teacher, is joined in a Jerusalem
