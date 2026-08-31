@@ -35,7 +35,7 @@ DATA = os.environ.get('MALIGNMENT_DATA', os.path.expanduser('~/malignment-data')
 #: moved out of the repo 2026-08-31: 51.7 MB, and it is generated data, not source.
 #: renamed off `judged_corpus_for_propp` because Propp was abandoned and the file
 #: is now the text source for every instrument here.
-CORPUS = os.path.join(DATA, 'national_story', 'judged_stories.jsonl')
+CORPUS = os.path.join(DATA, 'national_story', 'judged_stories_v2.jsonl')
 
 #: not stored as columns; they are re-derivable and would bloat every row
 SKIP = {'tropes'}
@@ -48,6 +48,65 @@ INDEXED = ('demonym', 'arm', 'frame', 'lineage', 'opponent',
            'protagonist_change', 'tradition', 'nostalgia', 'elder_informant',
            'supernatural', 'collective_action', 'renewal', 'small_community',
            'community_constrains', 'looks_complete')
+
+
+#: which annotation each span witnesses, so the UI can label a highlight without
+#: reverse-engineering the column name
+SPAN_OF = {
+    'opponent_span': 'opponent', 'fate_span': 'opponent_fate',
+    'conflict_span': 'conflict_mode', 'ending_span': 'ending',
+    'scale_span': 'resolution_scale', 'means_span': 'resolution_means',
+    'setting_span': 'setting', 'small_community_span': 'small_community',
+    'homecoming_span': 'homecoming', 'threat_span': 'threat',
+    'temporality_span': 'temporality', 'romance_span': 'romance',
+    'mood_span': 'mood', 'genre_span': 'genre',
+    'nostalgia_span': 'nostalgia', 'elder_informant_span': 'elder_informant',
+    'supernatural_span': 'supernatural',
+    'collective_action_span': 'collective_action', 'renewal_span': 'renewal',
+    'tradition_span': 'tradition', 'community_span': 'community_role',
+    'constrains_span': 'community_constrains',
+}
+
+
+def locate(text, span):
+    """-> (start, end) into the ORIGINAL text, or None.
+
+    The annotator quotes verbatim but reflows whitespace, so an exact find misses
+    a span that is genuinely present and merely rewrapped. Match on the
+    whitespace-collapsed form and carry an index map back to original offsets,
+    which is the same tolerance `check_spans` applies when it verifies them --
+    a highlight and a verification that disagree about what counts as present
+    would be worse than having no highlight at all.
+
+    Returns None for spans that do not verify. About 6% do not; they are the
+    annotator paraphrasing, and a UI must render them as unlocatable rather than
+    guess a range."""
+    if not text or not span:
+        return None
+    #: `'İ'.lower()` is TWO characters. Lowercasing while building a 1:1 index
+    #: map silently desynchronises it, and the Turkish stories in this corpus
+    #: made 54 of 12,165 offsets point at the wrong range while still looking
+    #: like successful matches. Fold only where folding preserves length; the
+    #: handful of characters that do not are matched case-sensitively instead,
+    #: which costs a rare miss and never a wrong offset.
+    fold = lambda c: c.lower() if len(c.lower()) == 1 else c
+    norm, idx, prev_ws = [], [], True
+    for i, ch in enumerate(text):
+        if ch.isspace():
+            if not prev_ws:
+                norm.append(' '); idx.append(i)
+            prev_ws = True
+        else:
+            norm.append(fold(ch)); idx.append(i)
+            prev_ws = False
+    hay = ''.join(norm)
+    needle = ''.join(fold(c) for c in ' '.join(span.split()))
+    if not needle:
+        return None
+    p = hay.find(needle)
+    if p < 0:
+        return None
+    return idx[p], idx[min(p + len(needle) - 1, len(idx) - 1)] + 1
 
 
 def sqltype(v):
@@ -133,6 +192,46 @@ def main(argv=None):
                    [rec.get(k) for k in names])
         n += 1
 
+    #: ONE ROW PER HIGHLIGHT. A UI wants (start, end, label) and should never
+    #: have to search the prose for a quoted string itself -- two searchers will
+    #: disagree on the first reflowed span. `located` is 0 when the annotator
+    #: paraphrased instead of quoting; render those as unlocatable, not as a
+    #: guessed range.
+    db.execute('''CREATE TABLE spans (
+        story_id TEXT, source TEXT, field TEXT, annotation TEXT, value TEXT,
+        start INTEGER, end INTEGER, located INTEGER, quote TEXT)''')
+    nsp = nloc = 0
+    for r in rows:
+        t = text.get(r['id'])
+        if t is None:
+            continue
+        body = t.get('text') or ''
+        for f, ann in SPAN_OF.items():
+            q = r.get(f)
+            if not q:
+                continue
+            loc = locate(body, q)
+            nsp += 1; nloc += loc is not None
+            db.execute('INSERT INTO spans VALUES (?,?,?,?,?,?,?,?,?)',
+                       (r['id'], 'conflict_v1', f, ann, str(r.get(ann)),
+                        loc[0] if loc else None, loc[1] if loc else None,
+                        int(loc is not None), q))
+        #: the story judge's own segmentation, same table, different source --
+        #: it marks WHERE a text stops being a story, which is the other thing
+        #: worth colouring
+        for seg in (t.get('judge_segments') or t.get('segments') or []):
+            q = seg.get('first_words')
+            if not q:
+                continue
+            loc = locate(body, q)
+            nsp += 1; nloc += loc is not None
+            db.execute('INSERT INTO spans VALUES (?,?,?,?,?,?,?,?,?)',
+                       (r['id'], 'judge_v1', 'segment', 'kind', seg.get('kind'),
+                        loc[0] if loc else None, loc[1] if loc else None,
+                        int(loc is not None), q))
+    db.execute('CREATE INDEX ix_spans_story ON spans (story_id)')
+    db.execute('CREATE INDEX ix_spans_ann ON spans (annotation)')
+
     for c in INDEXED:
         if c in cols:
             db.execute('CREATE INDEX "ix_%s" ON stories ("%s")' % (c, c))
@@ -142,8 +241,9 @@ def main(argv=None):
     db.execute('INSERT INTO stories_fts SELECT id, text FROM stories')
     db.commit()
 
-    print('%s: %d rows, %d columns, %.1f MB'
-          % (os.path.basename(out), n, len(names), os.path.getsize(out) / 1e6))
+    print('%s: %d stories, %d columns, %d spans (%.1f%% located), %.1f MB'
+          % (os.path.basename(out), n, len(names), nsp, 100 * nloc / max(1, nsp),
+             os.path.getsize(out) / 1e6))
     print('\nindexed for filtering: %s' % ', '.join(c for c in INDEXED if c in cols))
     print('\ntry:')
     print("  SELECT demonym, arm, substr(text,1,60) FROM stories")
