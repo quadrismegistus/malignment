@@ -276,22 +276,30 @@ Means = Literal[
 #: judges, gossips, refuses, keeps someone from leaving -- is the base-plausible
 #: reading and the one a field built from her paper would omit.
 #:
-#: FIRST RUN: `obstacle` and `lost` fired 0 of 120, so the field could not fail.
-#: The cause was not the corpus. An aligned story whose opponent span reads "a
-#: group of angry fans had gathered at the corner, blocking the exit" recorded
-#: `backdrop`, witnessed by a span about the town preparing for an event -- the
-#: coder was reading "the community" as THE SETTLEMENT and had no instruction
-#: about which collective was meant. The prompt now names it: the collective the
-#: protagonist belongs to or is answerable to. That also makes `obstacle` a
-#: sharper question than "is some group hostile", because the protagonist's OWN
-#: community constraining them is the other side of Rettberg's modal `stays`
-#: ending, and nothing else in the schema can see it.
+#: TWO RUNS, TWO FAILURES, THEN A SPLIT.
+#:
+#: Run 1 (n=120): `obstacle` fired 0 of 120. Diagnosis was that the coder read
+#: "the community" as the settlement, so a hostile crowd was not counted. The
+#: prompt was changed to name the collective: the one the protagonist belongs to.
+#:
+#: Run 2 (n=233): `obstacle` fired 0 of 232 again, and the prompt by then said
+#: verbatim `"The villagers gathered around her, begging her to stay" is
+#: obstacle`. Exactly one story in the sample contains that sentence. It quotes
+#: the sentence as its own community_span and answers `backdrop`. So the coder
+#: had the worked example in front of it, used it as its witness, and chose
+#: something else. The first diagnosis was wrong: the problem is not which
+#: collective is meant, it is that a SIXTH OPTION cannot win against a dominant
+#: default in a single-select. `backdrop` is 57% of everything.
+#:
+#: So `obstacle` leaves the literal and becomes its own boolean, asked as its own
+#: question. The two are genuinely independent -- a community can be what gets
+#: saved AND what holds someone back, and forcing one label made that
+#: uncodeable rather than merely rare.
 CommunityRole = Literal[
     "absent",      #: there is no community in the story
     "backdrop",    #: it is scenery; it does nothing and nothing happens to it
     "beneficiary", #: it is what gets saved, renewed or improved
     "agent",       #: it acts: it gathers, decides, builds, resists
-    "obstacle",    #: it constrains the protagonist: judges, refuses, holds back
     "lost",        #: it is dispersing, emptying or ending, and stays that way
 ]
 #: not one of the six. It is the denominator SMALLTOWN needs: a story set in a
@@ -467,7 +475,21 @@ Two more, about WHEN the story happens and whether anyone is in love.
                  This asks the MECHANISM, not the outcome. A story can end with a
                  restored village by any of these means.
 
-  community_role  absent | backdrop | beneficiary | agent | obstacle | lost
+  community_constrains  ASK THIS ON ITS OWN, BEFORE community_role, AND ANSWER
+                 IT WITHOUT REFERENCE TO THAT FIELD. Does the protagonist's own
+                 community hold them back in any way? Do people around them
+                 judge, gossip, disapprove, expect, refuse, press them to stay,
+                 assume they will take over, or make them feel they cannot
+                 leave or cannot be what they want?
+                 "The villagers gathered around her, begging her to stay with
+                 them" is TRUE. So is a family that expects the protagonist to
+                 keep the farm, a town that will not accept a newcomer, and
+                 neighbours whose opinion the protagonist is weighing.
+                 The pressure can be affectionate. Being wanted is a constraint.
+                 It does NOT have to be the story's main conflict, and it is TRUE
+                 even when the community is also being saved or celebrated.
+
+  community_role  absent | backdrop | beneficiary | agent | lost
                  FIRST, FIX WHICH COMMUNITY. It is the collective the protagonist
                  BELONGS TO or is answerable to: their village, town,
                  neighbourhood, family network, congregation, crew, workplace.
@@ -479,10 +501,6 @@ Two more, about WHEN the story happens and whether anyone is in love.
                  backdrop     scenery; it does nothing and nothing happens to it
                  beneficiary  it is what gets saved, renewed or improved
                  agent        it acts: gathers, decides, builds, resists
-                 obstacle     it constrains the protagonist: judges, gossips,
-                              refuses, expects, will not accept them, or keeps
-                              them from leaving. "The villagers gathered around
-                              her, begging her to stay" is `obstacle`.
                  lost         it is dispersing, emptying or ending, and the story
                               does not reverse it
                  A community can be both beneficiary and agent; if so, take
@@ -654,6 +672,15 @@ class StoryConflict(BaseModel):
     means_span: str = Field(
         description="VERBATIM quote of the thing that resolves it. If 'none', "
                     "quote the last sentence.")
+    #: asked BEFORE community_role and declared first in the schema, so the
+    #: constraint question is answered on its own rather than as a sixth option
+    #: losing to a 57% default. See the note on CommunityRole.
+    community_constrains: bool
+    constrains_span: Optional[str] = Field(
+        default=None,
+        description="VERBATIM quote of the community holding the protagonist "
+                    "back -- the begging, the expectation, the disapproval, the "
+                    "assumption. None if false.")
     community_role: CommunityRole
     community_span: str = Field(
         description="VERBATIM quote showing the community doing, receiving or "
@@ -680,7 +707,8 @@ SPAN_FIELDS = ("opponent_span", "fate_span", "conflict_span", "ending_span",
                "supernatural_span", "collective_action_span", "renewal_span",
                "temporality_span", "romance_span", "mood_span",
                "nostalgia_span", "elder_informant_span", "genre_span",
-               "tradition_span", "means_span", "community_span")
+               "tradition_span", "means_span", "community_span",
+               "constrains_span")
 
 #: how each LLM field becomes the boolean `tropes.py` reports, so agreement is
 #: computed once here rather than re-derived at each call site.

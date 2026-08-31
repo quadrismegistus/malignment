@@ -128,7 +128,7 @@ def main(argv=None):
                   'protagonist_change', 'setting', 'homecoming', 'threat',
                   'temporality', 'romance', 'mood', 'genre',
                   'nostalgia', 'elder_informant', 'resolution_means',
-                  'community_role', 'tradition'):
+                  'community_role', 'tradition', 'community_constrains'):
             F[(k, f)][getattr(o, f)] += 1
         #: present() returns ALL SIX keys with bool values, so `name in rx` is a
         #: key-membership test that is always True. It ran once that way and put
@@ -171,7 +171,7 @@ def main(argv=None):
               'resolution_scale', 'setting', 'homecoming', 'threat',
               'temporality', 'romance', 'mood', 'genre',
               'nostalgia', 'elder_informant', 'resolution_means',
-              'community_role', 'tradition'):
+              'community_role', 'tradition', 'community_constrains'):
         print('\n%s' % f.upper())
         for k in sorted(N):
             c = F[(k, f)]
