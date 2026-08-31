@@ -29,6 +29,20 @@ import re
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+#: the Llama-3.1-8B training-data ladder: base, SFT, four SFT ablations, DPO, and
+#: the production endpoint. The only set in this corpus that can ask WHICH
+#: training-data component produces an effect rather than whether alignment does.
+#: All eight exist in the RAW frame, which is what makes them comparable.
+PRESETS = {'ladder': [
+    'meta-llama/Llama-3.1-8B',
+    'allenai/Llama-3.1-Tulu-3-8B-SFT',
+    'allenai/Llama-3.1-Tulu-3-8B-SFT-no-math-data',
+    'allenai/Llama-3.1-Tulu-3-8B-SFT-no-persona-data',
+    'allenai/Llama-3.1-Tulu-3-8B-SFT-no-safety-data',
+    'allenai/Llama-3.1-Tulu-3-8B-SFT-no-wildchat-data',
+    'allenai/Llama-3.1-Tulu-3-8B-DPO',
+    'meta-llama/Llama-3.1-8B-Instruct',
+]}
 DATA = os.environ.get('MALIGNMENT_DATA', os.path.expanduser('~/malignment-data'))
 #: moved out of the repo 2026-08-31: 51.7 MB, and it is generated data, not source.
 #: renamed off `judged_corpus_for_propp` because Propp was abandoned and the file
@@ -48,7 +62,7 @@ def looks_complete(text):
     return bool(re.search(r'["\'”’)\]]*[.!?…]["\'”’)\]]*$', t))
 
 
-def collect(per_cell=2, min_words=200, max_words=2000):
+def collect(per_cell=2, min_words=200, max_words=2000, only=None):
     """-> [(row, text)], pure stories only, balanced across demonyms."""
     cells = collections.defaultdict(list)
     #: v1 of the corpus prefixed the judge fields (`judge_pure_story`), v2 does
@@ -68,6 +82,11 @@ def collect(per_cell=2, min_words=200, max_words=2000):
             continue
         n = r.get('n_words') or 0
         if not (min_words <= n <= max_words):
+            continue
+        #: `only` restricts to a named model set -- a ladder is a comparison
+        #: among specific checkpoints, and running it as its own unit keeps its
+        #: per-cell cap independent of whatever the rest of the roster needs.
+        if only is not None and r['model'] not in only:
             continue
         #: KEYED BY MODEL, NOT LINEAGE. A lineage can carry several aligned
         #: rungs -- Llama-3.1-8B has six Tulu-3 ablation checkpoints under it --
@@ -102,11 +121,18 @@ def main(argv=None):
     ap.add_argument('--workers', type=int, default=16)
     ap.add_argument('--smoke', type=int, default=0,
                     help='run only N texts and print every answer in full')
+    ap.add_argument('--models', help='comma-separated model ids, or a preset '
+                    'name from PRESETS, to restrict the run to')
     ap.add_argument('--dry', action='store_true')
     ap.add_argument('--out', default='conflict_results.jsonl')
     a = ap.parse_args(argv)
 
-    rows = collect(a.per_cell, a.min_words, a.max_words)
+    only = None
+    if a.models:
+        only = set(PRESETS.get(a.models, a.models.split(',')))
+        print('restricted to %d models%s' % (len(only),
+              ' (preset %r)' % a.models if a.models in PRESETS else ''))
+    rows = collect(a.per_cell, a.min_words, a.max_words, only)
     if a.smoke:
         step = max(1, len(rows) // a.smoke)
         rows = rows[::step][:a.smoke]
