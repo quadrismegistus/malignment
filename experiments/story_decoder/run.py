@@ -139,6 +139,27 @@ META = re.compile(r"\b(in conclusion|this story (explores|touches|highlights)|"
                   r"the themes|note:|disclaimer|here('s| is) a|symboliz(es|ing)|"
                   r"key takeaway)\b", re.I)
 LIST = re.compile(r"(^|\n)\s*(\d+\.|\*|-)\s+\S", re.M)
+#: **CORPUS DRIFT: the generation stops being a story and becomes a DIFFERENT
+#: DOCUMENT.** A base model finishes its story and continues into the
+#: instruction-tuning data it was pretrained on -- "Task: You are required to
+#: extract the main topic", then a summary of its own story, then an unrelated
+#: article about colour psychology, then an NFL prediction.
+#:
+#: Found by READING a full story whose scores were rep8 0.000, fn_en 0.404 and
+#: no escape flags -- i.e. clean on every existing measure. 680 of its 1,082
+#: words were not story, so every per-story statistic computed over it was
+#: computed over another document.
+#:
+#: Distinct from `escape_*`, which looks for the model addressing a USER. This
+#: is the model addressing nobody and simply continuing a corpus.
+#:
+#: Scanned over the WHOLE text, not the tail: the drift can begin at 35% and
+#: leave the majority of the generation outside the story.
+DRIFT = re.compile(r"(^|\n)\s*(Task\s*:|Instruction\s*:|Input\s*:|Output\s*:|"
+                   r"Q\s*:|Answer\s*:|Question\s*:|###\s|Explain the following|"
+                   r"Describe in one sentence|Write a (summary|short|brief)|"
+                   r"Summarize the|You are required to|Rewrite the|Translate the|"
+                   r"Read the (passage|text|article))", re.M)
 
 
 def ngram_repeat(words, n=8):
@@ -160,6 +181,9 @@ def measure(text):
     #: the LAST FIFTH, because escape is a thing that happens to an ending. A
     #: whole-text scan dilutes it below threshold on a 2,000-word story.
     tail = " ".join(w[max(0, int(len(w) * 0.8)):])
+    #: whole text, and record WHERE, because the fraction before the drift is
+    #: how much of the generation is usable
+    dm = DRIFT.search(text)
     lo = [x.lower().strip(".,!?;:'\"*-") for x in w]
     out = {
         "n_words": len(w),
@@ -172,6 +196,10 @@ def measure(text):
         "escape_second": bool(SECOND.search(tail)),
         "escape_meta": bool(META.search(tail)),
         "escape_list": bool(LIST.search(tail)),
+        "corpus_drift": bool(dm),
+        #: share of the generation that precedes the drift; 1.0 if none
+        "story_frac": (round(len(text[:dm.start()].split()) / max(1, len(w)), 4)
+                       if dm else 1.0),
     }
     for lang, fs in FN.items():
         out["fn_" + lang] = round(sum(x in fs for x in lo) / max(1, len(lo)), 4)
