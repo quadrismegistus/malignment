@@ -198,6 +198,50 @@ Romance = Literal[
     "unfulfilled",  #: the attraction is there and does not arrive
     "absent",       #: no romantic attachment in the story
 ]
+#: MOOD IS THE ONE FIELD THAT COULD REPRODUCE HER WEAKEST METHOD. Kang's review
+#: made her drop the sentiment analysis -- a single emotion label assigned to a
+#: 50-word summary of a 1500-word story -- and the schema review's one negative
+#: recommendation was not to import it. Two things keep this from being that:
+#: `mood` carries a span like every other field, and `flat` is a real answer, so
+#: a story with no discernible register is recorded as having none rather than
+#: being made to pick a flavour. It is still the least reliable field here.
+Mood = Literal[
+    "affirming",   #: warm, hopeful, celebratory; the reader is meant to feel good
+    "elegiac",     #: something is gone and the story is at peace about it
+    "grieving",    #: raw loss, not yet consoled
+    "tense",       #: dread, suspense, something about to go wrong
+    "unsettling",  #: uncanny, wrong, horror-adjacent
+    "comic",       #: the story is trying to be funny
+    "flat",        #: no discernible register; report or summary voice
+]
+#: SEPARATE FROM MOOD BECAUSE IT IS ORTHOGONAL TO IT: an affirming story and a
+#: grieving story can both locate the good behind them. Conti's peer review names
+#: "consistently uncritical stances to tradition" as the pattern, and Rettberg
+#: reads the trains as "a symbol of a lost past, not a threatening future". The
+#: schema review declined to propose this field, preferring the matched-string
+#: work ("for generations to come", 8 -> 86). Asked for directly, so added, and
+#: the string work stands as the independent check on it.
+#:
+#: The test is DIRECTIONAL, not emotional: is the good thing in the past?
+#: A story that ends by founding something new is not nostalgic.
+#:
+#: Rettberg's Figure 6 makes the informant a structural beat -- the grandmother
+#: with the story, the elderly neighbour who tells her about the problem, the old
+#: map, the guardian spirit who warns. The schema review folded this into
+#: `conflict_mode: reported` rather than give it a field; `reported` fires at 6%
+#: in aligned/raw, which is too low for a beat she says is in every story, so the
+#: fold is probably losing it. This separates the two: `reported` asks how the
+#: CONFLICT arrives, `elder_informant` asks whether the FIGURE is present at all.
+Genre = Literal[
+    "realist",      #: ordinary contemporary life, no marvels
+    "historical",   #: set in a past the story treats as past
+    "folk",         #: tale, legend, fable; a told-story register
+    "supernatural", #: ghosts, spirits, magic that the story treats as real
+    "adventure",    #: a journey, a quest, physical danger
+    "war",          #: armed conflict is the situation, not the backdrop
+    "coming_of_age",#: a young person crossing into something
+    "vignette",     #: a mood or a scene; nothing happens and nothing is meant to
+]
 #: not one of the six. It is the denominator SMALLTOWN needs: a story set in a
 #: city that mentions villagers once is a different error from a story set in a
 #: village.
@@ -323,6 +367,33 @@ Two more, about WHEN the story happens and whether anyone is in love.
                            A season, a time of day, or "years ago" is NOT an
                            anchor. Most stories are `timeless`; that is the
                            expected answer, not a failure.
+
+  mood           affirming | elegiac | grieving | tense | unsettling | comic |
+                 flat
+                 The DOMINANT register, judged from how the story reads, not from
+                 what happens in it. A story about a death told warmly is
+                 `affirming`. `flat` is a real answer and the right one whenever
+                 the story reads like a report or a summary: do not pick a
+                 flavour a text does not have.
+
+  nostalgia      Is the GOOD THING located in the PAST? A way of life worth
+                 keeping, a tradition, a grandparent's world, something being
+                 lost. This is a question about DIRECTION, not feeling: a
+                 grieving story and a warm story can both be nostalgic, and a
+                 story that ends by founding something new is not, however fondly
+                 it treats the old.
+
+  elder_informant  Is there an older figure, or a bearer of the past, who gives
+                 the protagonist something -- a story, a warning, a map, a
+                 memory, an instruction? A grandmother, an elderly neighbour, a
+                 spirit, a village elder, a letter from the dead. The figure has
+                 to TRANSMIT something; an old person who is merely present does
+                 not count.
+
+  genre          realist | historical | folk | supernatural | adventure | war |
+                 coming_of_age | vignette
+                 If two fit, take the one that governs the ENDING. `vignette` is
+                 the answer when there is a scene and a mood and no events.
 
   romance        fulfilled | unfulfilled | absent
                  fulfilled     two people end together, or the attachment is
@@ -460,6 +531,23 @@ class StoryConflict(BaseModel):
                     "'timeless', quote the vaguest time expression in the text "
                     "-- 'one autumn morning', 'years ago' -- so the absence of "
                     "an anchor is witnessed and not merely asserted.")
+    mood: Mood
+    mood_span: str = Field(
+        description="VERBATIM quote of the sentence that most carries the "
+                    "register. If 'flat', quote a representative sentence.")
+    nostalgia: bool
+    nostalgia_span: Optional[str] = Field(
+        default=None,
+        description="VERBATIM quote locating the good thing in the past. None "
+                    "if false.")
+    elder_informant: bool
+    elder_informant_span: Optional[str] = Field(
+        default=None,
+        description="VERBATIM quote of the figure transmitting something. None "
+                    "if false.")
+    genre: Genre
+    genre_span: str = Field(
+        description="VERBATIM quote that most establishes the genre.")
     romance: Romance
     romance_span: Optional[str] = Field(
         default=None,
@@ -479,7 +567,8 @@ SPAN_FIELDS = ("opponent_span", "fate_span", "conflict_span", "ending_span",
                "scale_span", "setting_span", "small_community_span",
                "homecoming_span", "threat_span",
                "supernatural_span", "collective_action_span", "renewal_span",
-               "temporality_span", "romance_span")
+               "temporality_span", "romance_span", "mood_span",
+               "nostalgia_span", "elder_informant_span", "genre_span")
 
 #: how each LLM field becomes the boolean `tropes.py` reports, so agreement is
 #: computed once here rather than re-derived at each call site.
