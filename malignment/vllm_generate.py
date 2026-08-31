@@ -108,12 +108,28 @@ def _build_llm(model_id, max_model_len=2048, tp=1, dtype="float16"):
                trust_remote_code=True, enforce_eager=False)
 
 
-def _free_llm(llm):
-    import gc, torch
+def _free_llm(llm, model_id=None):
+    """Explicit teardown — vLLM leaks KV reservation without it.
+
+    Also clears the HF cache for this model to free disk. On a 50 GB
+    container disk, two 7B models' weights (14 GB each) plus the vLLM
+    install (11 GB) fill the disk. Clearing after each model keeps it
+    under control. The next model re-downloads (~2 min on a fast link),
+    which is cheap against the generation time.
+    """
+    import gc, glob, os, shutil, torch
     del llm
     gc.collect()
     if torch.cuda.is_available():
         torch.cuda.empty_cache()
+    if model_id:
+        safe = model_id.replace("/", "--")
+        cache_dir = os.path.expanduser("~/.cache/huggingface/hub")
+        for d in glob.glob(os.path.join(cache_dir, "models--" + safe)):
+            try:
+                shutil.rmtree(d)
+            except Exception:
+                pass
 
 
 def _vllm_version():
@@ -356,7 +372,7 @@ def generate_model(model_id, conditions, n=10, seed=42, decoder=None,
         stash[k] = p._asdict()
         n_written += 1
 
-    _free_llm(llm)
+    _free_llm(llm, model_id=model_id)
     return n_written
 
 
