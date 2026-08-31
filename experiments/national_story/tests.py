@@ -23,8 +23,14 @@ smaller n and much larger p-values. The p-values are the honest ones.
                 so a lineage that moved 2 points counts the same as one that moved
                 60. Robust to a single huge outlier; blind to consistent size.
   signed-rank   ranks the absolute differences and sums the ranks of the positive
-                ones. Uses magnitude, so a large consistent effect beats a small
-                consistent one, and it can be driven by one enormous lineage.
+                ones. Uses the ORDER of the magnitudes, not their size, so a
+                lineage that moved 60 points and one that moved 12 differ only by
+                where they sit in the ranking.
+  paired t      uses the actual magnitudes. Most powerful of the three when the
+                differences are roughly symmetric, and the most easily wrecked by
+                one outlier -- with n=18 a single lineage moving 60 points can
+                carry it. Reported with Cohen's dz and a bootstrap CI on the mean
+                difference so the size is visible next to the p-value.
 
 Reported together on purpose. A field where they disagree is a field where the
 direction and the size are telling different stories, and that is worth seeing
@@ -44,6 +50,7 @@ import argparse
 import collections
 import json
 import os
+import random
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 LOW_DOSE = {
@@ -93,7 +100,7 @@ def rates(rows, field, value, group, min_per_cell):
 
 
 def main(argv=None):
-    from scipy.stats import binomtest, wilcoxon
+    from scipy.stats import binomtest, ttest_rel, wilcoxon
 
     ap = argparse.ArgumentParser()
     ap.add_argument('results')
@@ -136,6 +143,20 @@ def main(argv=None):
         if max(abs(d) for d in diffs) == 0:
             continue
         p_sign = binomtest(up, up + dn, 0.5).pvalue if up + dn else 1.0
+        p_t = ttest_rel([b for _, _, b in rs], [x for _, x, _ in rs]).pvalue
+        mean_d = sum(diffs) / len(diffs)
+        sd = (sum((d - mean_d) ** 2 for d in diffs) / (len(diffs) - 1)) ** 0.5
+        dz = mean_d / sd if sd else 0.0
+        #: percentile bootstrap on the mean paired difference. Deterministic seed
+        #: so a re-run reproduces the interval; 2000 resamples is plenty for a
+        #: 95% interval and cheap at n<=19.
+        rng = random.Random(20260831)
+        boots = []
+        for _ in range(2000):
+            samp = [diffs[rng.randrange(len(diffs))] for _ in diffs]
+            boots.append(sum(samp) / len(samp))
+        boots.sort()
+        lo95, hi95 = boots[int(0.025 * len(boots))], boots[int(0.975 * len(boots))]
         try:
             p_rank = wilcoxon(diffs, zero_method='wilcox',
                               alternative='two-sided').pvalue
@@ -146,9 +167,11 @@ def main(argv=None):
         mean_b = sum(b for _, _, b in rs) / len(rs)
         key = '%s=%s' % (f, v)
         results.append(dict(key=key, n=len(rs), up=up, dn=dn, med=med,
-                            a=mean_a, b=mean_b, p_sign=p_sign, p_rank=p_rank))
+                            a=mean_a, b=mean_b, p_sign=p_sign, p_rank=p_rank,
+                            p_t=p_t, dz=dz, mean_d=mean_d, lo=lo95, hi=hi95))
         praw.append((key + '|sign', p_sign))
         praw.append((key + '|rank', p_rank))
+        praw.append((key + '|t', p_t))
 
     #: CORRECT WITHIN EACH TEST FAMILY, NOT ACROSS BOTH. The sign test and the
     #: signed-rank test on one value are two tests of ONE hypothesis, not two
@@ -162,10 +185,12 @@ def main(argv=None):
     #: UNCHANGED either way, and the arm p-values roughly halve.
     a_sign = holm([(k, v) for k, v in praw if k.endswith('|sign')])
     a_rank = holm([(k, v) for k, v in praw if k.endswith('|rank')])
+    a_t = holm([(k, v) for k, v in praw if k.endswith('|t')])
     for r in results:
         r['h_sign'] = a_sign[r['key'] + '|sign']
         r['h_rank'] = a_rank[r['key'] + '|rank']
-    results.sort(key=lambda r: min(r['h_sign'], r['h_rank']))
+        r['h_t'] = a_t[r['key'] + '|t']
+    results.sort(key=lambda r: min(r['h_sign'], r['h_rank'], r['h_t']))
 
     nlin = len({r['lineage'] for r in rows})
     print('%s   %s' % (label, os.path.basename(path)))
@@ -177,30 +202,32 @@ def main(argv=None):
     if a.exclude_low_dose:
         print('low-dose lineages excluded.')
     print()
-    print('%-34s %4s %7s %7s %7s  %5s %5s   %9s %9s'
-          % ('', 'n', lo, hi, 'median', 'up', 'down', 'p_sign', 'p_rank'))
-    print('%-34s %4s %7s %7s %7s  %5s %5s   %9s %9s'
-          % ('', '', '%', '%', 'diff', '', '', '(holm)', '(holm)'))
-    print('-' * 106)
+    print('%-30s %3s %6s %6s %7s %16s %5s %4s  %8s %8s %8s'
+          % ('', 'n', lo[:6], hi[:6], 'mean d', '95% CI (boot)', 'dz', 'up',
+             'p_sign', 'p_rank', 'p_t'))
+    print('-' * 118)
     shown = 0
     for r in results:
-        star = '*' if min(r['h_sign'], r['h_rank']) < a.alpha else ' '
+        star = '*' if min(r['h_sign'], r['h_rank'], r['h_t']) < a.alpha else ' '
         if star == ' ' and shown > 24:
             continue
         shown += 1
-        print('%s%-33s %4d %6.1f%% %6.1f%% %+7.1f  %5d %5d   %9.2g %9.2g'
-              % (star, r['key'], r['n'], r['a'], r['b'], r['med'],
-                 r['up'], r['dn'], r['h_sign'], r['h_rank']))
-    sig = [r for r in results if min(r['h_sign'], r['h_rank']) < a.alpha]
+        print('%s%-29s %3d %5.1f%% %5.1f%% %+7.1f  [%+6.1f,%+6.1f] %5.2f %2d/%-2d %8.2g %8.2g %8.2g'
+              % (star, r['key'][:29], r['n'], r['a'], r['b'], r['mean_d'],
+                 r['lo'], r['hi'], r['dz'], r['up'], r['dn'],
+                 r['h_sign'], r['h_rank'], r['h_t']))
+    sig = [r for r in results if min(r['h_sign'], r['h_rank'], r['h_t']) < a.alpha]
     print()
     print('%d of %d values significant at Holm-adjusted alpha=%.2f on either test.'
           % (len(sig), len(results), a.alpha))
-    both = [r for r in sig if r['h_sign'] < a.alpha and r['h_rank'] < a.alpha]
-    onlys = [r for r in sig if r['h_sign'] < a.alpha <= r['h_rank']]
-    onlyr = [r for r in sig if r['h_rank'] < a.alpha <= r['h_sign']]
-    print('   both tests %d   sign only %d   signed-rank only %d'
-          % (len(both), len(onlys), len(onlyr)))
-    for lab, s in (('sign only', onlys), ('signed-rank only', onlyr)):
+    all3 = [r for r in sig if max(r['h_sign'], r['h_rank'], r['h_t']) < a.alpha]
+    onlys = [r for r in sig if r['h_sign'] < a.alpha <= min(r['h_rank'], r['h_t'])]
+    onlyr = [r for r in sig if r['h_rank'] < a.alpha <= min(r['h_sign'], r['h_t'])]
+    onlyt = [r for r in sig if r['h_t'] < a.alpha <= min(r['h_sign'], r['h_rank'])]
+    print('   all three %d   sign only %d   signed-rank only %d   t only %d'
+          % (len(all3), len(onlys), len(onlyr), len(onlyt)))
+    for lab, s in (('sign only', onlys), ('signed-rank only', onlyr),
+                   ('t only', onlyt)):
         if s:
             print('   %s: %s' % (lab, ', '.join(r['key'] for r in s)))
     return 0
