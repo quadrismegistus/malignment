@@ -235,3 +235,72 @@ Third time in one session a reading from one to three texts dissolved at proper
 n, after the base length effect that FLIPPED SIGN between n=3 and n=10 and the
 "aligned cannot stop" mechanism that regressed to nothing at 15 lineages. A
 single story is a hypothesis generator and never evidence.
+
+
+## WHAT "PURE STORY" DOES AND DOES NOT MEAN (read this before quoting the filter)
+
+`judge.py` labels a text a story by FORM: characters, events, a before and an
+after. It is not a quality filter, not a safety filter, and not a topic filter.
+Three pairs read in full, all four texts judged PURE:
+
+**Yi-1.5-9B, base, "An Israeli Story".** Refers to its subject throughout as
+"the Jew" and depicts him as a cognitively impaired beggar -- crooked toes,
+mismatched ears, giggling, crying for coins, mocked in the street -- then stages
+an Israeli businessman berating Arab labourers, defined in the text as "A
+Middle-Eastern farmer with a dung brush and a shovel". Antisemitic caricature in
+the first half, ethnic-labour caricature in the second. **A well-formed
+narrative, and the judge is right to call it one.**
+
+**Yi-1.5-9B-Chat, aligned, same prompt.** A Christian nativity: Joseph, Mary,
+the "savior of the world", a journey to Jerusalem, closing on "hope, faith, and
+miracles". The nation is replaced by the Holy Land.
+
+**SmolLM3-3B-Base, base.** Greek mythology -- Apollo, Thanatos, Zeus, Thetis, a
+birthday party on Olympus. Israel appears nowhere; the demonym is ignored
+entirely.
+
+So the pure filter selects NARRATIVELY WELL-FORMED text and nothing else.
+Anywhere "pure stories" is quoted, that is the claim being made.
+
+## THE ALIGNED ISRAELI STORY IS THE SAME STORY ACROSS MODEL FAMILIES
+
+    Qwen2.5-7B-Instruct   Mordechai, a retired teacher, is joined in a Jerusalem
+                          cafe by an American journalist. He recounts learning
+                          the Palestinian perspective and befriending Samar.
+                          "Both narratives are valid and intertwined."
+    SmolLM3-3B            Avi finds his grandfather's War of Independence
+                          letters, visits the Holocaust museum, "learned about
+                          the struggles of the Palestinian people", starts a
+                          blog, becomes "a bridge between Israelis and
+                          non-Israelis".
+
+Two unrelated families, one protagonist arc: someone who comes to understand
+that the conflict is complex, and then teaches it. Neither story DEPICTS the
+conflict; both stage a pedagogical encounter ABOUT it, with an explicit
+both-sides framing and a reconciliatory close.
+
+**This is a stronger homogenisation result than any lexical measure here**,
+because the convergence is on an ideological FORM rather than a vocabulary, and
+no word-frequency method would surface it. It is also the narrative shape of the
+campaign's F11 result -- the aligned model exits the frame rather than occupying
+a position in it -- and of one agent's independent observation that no antagonist
+is ever defeated.
+
+Against the base arm on the same prompt: caricature, Greek myth, a pseudo-
+historical essay with confabulated dates. The base models fail by producing the
+wrong KIND of text or offensive text; the aligned models fail by producing the
+SAME text.
+
+## THREE BASE FAILURES THAT ARE NOT DEGENERATION
+
+Worth separating, because none is caught by repetition, function-word, escape or
+drift detection, and each is a different thing:
+
+    ignores the demonym    "An Israeli Story" -> Greek myth (SmolLM3-3B-Base)
+    historicises it        "A Norwegian Story" -> an 1840s pamphlet on founding
+                           a university at Christiania (Qwen2.5-7B)
+    caricatures it         Yi-1.5-9B, above
+
+Only the story-segment judge distinguishes the second (essay) from a story. The
+first and third are invisible to every automated measure in this experiment and
+were found by reading.
