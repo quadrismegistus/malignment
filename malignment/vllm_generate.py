@@ -78,11 +78,18 @@ from .generate import DECODER, gen_key, _passage, frame_label, DEFAULT
 
 
 def _gpu_frac(model_gb):
-    """gpu_memory_utilization sized from card and model."""
+    """gpu_memory_utilization sized from card and model.
+
+    Needs weights + KV cache + activations inside the fraction. At
+    max_model_len=3500, the KV cache alone is ~2-4 GB for a 7B model.
+    The old formula was too conservative (0.67 for 9B on 24GB, leaving
+    no room for the cache). Floor at 0.85 — vLLM manages the split
+    between weights and cache internally.
+    """
     import torch
     total = torch.cuda.mem_get_info()[1] / 1e9
-    want = model_gb * 1.25 + 6.0
-    frac = max(0.30, min(0.90, want / total))
+    want = model_gb * 1.3 + 8.0
+    frac = max(0.85, min(0.92, want / total))
     return frac
 
 
