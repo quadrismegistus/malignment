@@ -275,6 +275,17 @@ Means = Literal[
 #: gets saved and what does the saving; a community that CONSTRAINS -- that
 #: judges, gossips, refuses, keeps someone from leaving -- is the base-plausible
 #: reading and the one a field built from her paper would omit.
+#:
+#: FIRST RUN: `obstacle` and `lost` fired 0 of 120, so the field could not fail.
+#: The cause was not the corpus. An aligned story whose opponent span reads "a
+#: group of angry fans had gathered at the corner, blocking the exit" recorded
+#: `backdrop`, witnessed by a span about the town preparing for an event -- the
+#: coder was reading "the community" as THE SETTLEMENT and had no instruction
+#: about which collective was meant. The prompt now names it: the collective the
+#: protagonist belongs to or is answerable to. That also makes `obstacle` a
+#: sharper question than "is some group hostile", because the protagonist's OWN
+#: community constraining them is the other side of Rettberg's modal `stays`
+#: ending, and nothing else in the schema can see it.
 CommunityRole = Literal[
     "absent",      #: there is no community in the story
     "backdrop",    #: it is scenery; it does nothing and nothing happens to it
@@ -457,15 +468,29 @@ Two more, about WHEN the story happens and whether anyone is in love.
                  restored village by any of these means.
 
   community_role  absent | backdrop | beneficiary | agent | obstacle | lost
-                 What is the community TO the story?
+                 FIRST, FIX WHICH COMMUNITY. It is the collective the protagonist
+                 BELONGS TO or is answerable to: their village, town,
+                 neighbourhood, family network, congregation, crew, workplace.
+                 Not any group that appears -- a hostile crowd the protagonist is
+                 no part of is an opponent, not their community. If the story has
+                 several, take the one the protagonist belongs to. If the
+                 protagonist belongs to none, answer `absent`.
+                 Then, what is that community TO the story?
                  backdrop     scenery; it does nothing and nothing happens to it
                  beneficiary  it is what gets saved, renewed or improved
                  agent        it acts: gathers, decides, builds, resists
                  obstacle     it constrains the protagonist: judges, gossips,
-                              refuses, keeps someone from leaving
-                 lost         it is dispersing, emptying or ending, and stays so
+                              refuses, expects, will not accept them, or keeps
+                              them from leaving. "The villagers gathered around
+                              her, begging her to stay" is `obstacle`.
+                 lost         it is dispersing, emptying or ending, and the story
+                              does not reverse it
                  A community can be both beneficiary and agent; if so, take
                  `agent`, which is the stronger claim.
+                 `backdrop` IS COMMON AND CORRECT for a community that is only
+                 described. Do not upgrade one because it is described warmly or
+                 at length, and do not downgrade one that acts in a single
+                 sentence.
 
   romance        fulfilled | unfulfilled | absent
                  fulfilled     two people end together, or the attachment is
