@@ -118,10 +118,23 @@ FN = {
 }
 
 EMOJI = re.compile("[\U0001F300-\U0001FAFF\U00002600-\U000027BF]")
-#: SECOND PERSON plus a QUESTION is the assistant tell. Either alone is ordinary
-#: in fiction (dialogue, free indirect address); together, at the end, is not.
-SECOND = re.compile(r"\b(you|your|you're|let me know|feel free|would you like|"
-                    r"i hope|i can help|if you'd like)\b", re.I)
+#: **BARE SECOND PERSON IS NOT A SIGNAL AND MUST BE SEPARATED FROM ONE.** An
+#: earlier version put `you|your` in the same alternation as `let me know`, and
+#: it fired on a BASE model's repetition loop -- "I will go with you to my
+#: father's house" -- reporting assistant escape in a checkpoint that has never
+#: been taught to address a user. Dialogue is full of the second person; what is
+#: diagnostic is the SERVICE FORMULA, which fiction does not contain.
+#: **EVERY FRAGMENT HERE MUST BE ONE FICTION CANNOT CONTAIN.** `happy to` fired
+#: on "was happy to have their father back" in a BASE model's folktale, and
+#: `anything else` would fire on "anything else in the room" -- both would report
+#: assistant escape in a checkpoint that has never addressed a user. A service
+#: formula is only diagnostic when it is complete: it is `happy to help`, not
+#: `happy to`. The looser the fragment, the more it measures narration.
+ADDRESS = re.compile(r"(let me know if|feel free to|would you like (me|to)|"
+                     r"i hope (you|this) (enjoy|like|help)|i can help|"
+                     r"if you'?d like|anything else (i|you) can|"
+                     r"hope (you|this) helps|happy to help|glad to help)", re.I)
+SECOND = re.compile(r"\b(you|your|you're)\b", re.I)
 META = re.compile(r"\b(in conclusion|this story (explores|touches|highlights)|"
                   r"the themes|note:|disclaimer|here('s| is) a|symboliz(es|ing)|"
                   r"key takeaway)\b", re.I)
@@ -153,6 +166,9 @@ def measure(text):
         "rep8": round(ngram_repeat(w), 4),
         "distinct3": round(distinct(w), 4),
         "escape_emoji": bool(EMOJI.search(tail)),
+        #: `escape_address` is the diagnostic one; `second` is kept only as
+        #: context and must never be summed into a verdict on its own.
+        "escape_address": bool(ADDRESS.search(tail)),
         "escape_second": bool(SECOND.search(tail)),
         "escape_meta": bool(META.search(tail)),
         "escape_list": bool(LIST.search(tail)),
