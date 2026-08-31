@@ -392,11 +392,18 @@ def generate_model(model_id, conditions, n=10, seed=42, decoder=None,
 
 def run(models, conditions, n=10, seed=42, decoder=None,
         max_new_tokens=1800, max_model_len=2048, tp=1, dtype="float16",
-        dry_run=False):
+        dry_run=False, prompts_file=None, subprocess_per_model=True):
     """Generate for every model in `models`. -> total passages written.
 
-    `conditions` is a list of dicts from `load_prompts()`, or a list of
-    prompt strings (converted to raw-frame conditions).
+    **SUBPROCESS PER MODEL.** vLLM leaks GPU memory between LLM() calls —
+    the KV cache reservation from model N survives _free_llm and the engine
+    init for model N+1 fails with "No available memory for cache blocks."
+    The only reliable way to reclaim 100% of GPU memory is to exit the
+    process. So each model runs as a subprocess calling this same CLI with
+    `--models <single_model>`. The subprocess loads vLLM, generates, writes
+    to the stash, and exits. Full GPU cleanup guaranteed.
+
+    Set `subprocess_per_model=False` to run in-process (for debugging).
     """
     if conditions and isinstance(conditions[0], str):
         conditions = [{"prompt": p, "system": "_DEFAULT_", "user": None,
@@ -407,6 +414,36 @@ def run(models, conditions, n=10, seed=42, decoder=None,
     if decoder:
         dec.update(decoder)
 
+    if subprocess_per_model and prompts_file:
+        import subprocess as sp
+        total = 0
+        for i, mid in enumerate(models, 1):
+            print("[%d/%d] %s" % (i, len(models), mid), flush=True)
+            cmd = [sys.executable, "-u", "-m", "malignment.vllm_generate",
+                   "--models", mid,
+                   "--prompts-file", prompts_file,
+                   "--n", str(n),
+                   "--temperature", str(dec.get("temperature", 1.0)),
+                   "--top-p", str(dec.get("top_p", 0.95)),
+                   "--max-new-tokens", str(max_new_tokens),
+                   "--max-model-len", str(max_model_len),
+                   "--seed", str(seed),
+                   "--tp", str(tp),
+                   "--dtype", dtype,
+                   "--no-subprocess"]
+            if dry_run:
+                cmd.append("--dry-run")
+            env = dict(os.environ)
+            env["VLLM_USE_V1"] = "0"
+            result = sp.run(cmd, env=env)
+            if result.returncode == 0:
+                print("    subprocess OK", flush=True)
+            else:
+                print("    subprocess FAILED (exit %d)" % result.returncode, flush=True)
+        print("\ndone across %d models (subprocess mode)" % len(models))
+        return 0
+
+    # in-process fallback
     total = 0
     for i, mid in enumerate(models, 1):
         print("[%d/%d] %s" % (i, len(models), mid), flush=True)
@@ -452,6 +489,8 @@ Or plain text (one prompt per line, all raw frame).
     ap.add_argument("--tp", type=int, default=1)
     ap.add_argument("--dtype", default="float16")
     ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument("--no-subprocess", action="store_true",
+                    help="run in-process (used by subprocess-per-model internally)")
     a = ap.parse_args(argv)
 
     if a.models_file:
@@ -472,7 +511,9 @@ Or plain text (one prompt per line, all raw frame).
     run(models, conditions, n=a.n, seed=a.seed,
         decoder={"temperature": a.temperature, "top_p": a.top_p},
         max_new_tokens=a.max_new_tokens, max_model_len=a.max_model_len,
-        tp=a.tp, dtype=a.dtype, dry_run=a.dry_run)
+        tp=a.tp, dtype=a.dtype, dry_run=a.dry_run,
+        prompts_file=a.prompts_file,
+        subprocess_per_model=not a.no_subprocess)
 
 
 if __name__ == "__main__":
