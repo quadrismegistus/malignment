@@ -337,18 +337,30 @@ def generate_model(model_id, conditions, n=10, seed=42, decoder=None,
                 if sys_text:
                     messages.append({"role": "system", "content": sys_text})
             if prefill:
-                messages.append({"role": "user", "content": user_msg})
-                messages.append({"role": "assistant", "content": prompt})
+                # build turns UP TO the assistant, get generation prompt,
+                # then concatenate the stem AFTER — keeping the turn OPEN.
+                # DO NOT pass the stem as an assistant message: that closes
+                # the turn with <|im_end|> and the model generates nothing.
+                messages.append({"role": "user", "content": user_msg or ""})
+                try:
+                    rendered = tok.apply_chat_template(
+                        messages, tokenize=False, add_generation_prompt=True)
+                    rendered = rendered + prompt
+                    vllm_texts.append(rendered)
+                    render_info.append((True, False))
+                    continue
+                except Exception:
+                    frame_refused = True
             else:
                 messages.append({"role": "user", "content": prompt})
-            try:
-                rendered = tok.apply_chat_template(
-                    messages, tokenize=False, add_generation_prompt=not prefill)
-                vllm_texts.append(rendered)
-                render_info.append((True, False))
-                continue
-            except Exception:
-                frame_refused = True
+                try:
+                    rendered = tok.apply_chat_template(
+                        messages, tokenize=False, add_generation_prompt=True)
+                    vllm_texts.append(rendered)
+                    render_info.append((True, False))
+                    continue
+                except Exception:
+                    frame_refused = True
         vllm_texts.append(prompt)
         render_info.append((False, frame_refused))
 
