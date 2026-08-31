@@ -114,8 +114,11 @@ def _build_llm(model_id, max_model_len=2048, tp=1, dtype="float16"):
     try:
         from transformers import AutoConfig
         cfg = AutoConfig.from_pretrained(model_id, trust_remote_code=True)
-        model_max = getattr(cfg, "max_position_embeddings", None)
-        if model_max and max_model_len > model_max:
+        model_max = (getattr(cfg, "max_position_embeddings", None)
+                     or getattr(cfg, "seq_length", None)
+                     or getattr(cfg, "n_positions", None)
+                     or getattr(cfg, "max_sequence_length", None))
+        if model_max and max_model_len > int(model_max):
             actual_len = int(model_max)
             print("  capped max_model_len %d -> %d (model's max_position_embeddings)"
                   % (max_model_len, actual_len), flush=True)
