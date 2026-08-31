@@ -33,7 +33,7 @@ DATA = os.environ.get('MALIGNMENT_DATA', os.path.expanduser('~/malignment-data')
 #: moved out of the repo 2026-08-31: 51.7 MB, and it is generated data, not source.
 #: renamed off `judged_corpus_for_propp` because Propp was abandoned and the file
 #: is now the text source for every instrument here.
-CORPUS = os.path.join(DATA, 'national_story', 'judged_stories.jsonl')
+CORPUS = os.path.join(DATA, 'national_story', 'judged_stories_v2.jsonl')
 
 
 def looks_complete(text):
@@ -51,14 +51,31 @@ def looks_complete(text):
 def collect(per_cell=2, min_words=200, max_words=2000):
     """-> [(row, text)], pure stories only, balanced across demonyms."""
     cells = collections.defaultdict(list)
+    #: v1 of the corpus prefixed the judge fields (`judge_pure_story`), v2 does
+    #: not (`pure_story`). Reading v2 with the v1 key returned 0 STORIES AND NO
+    #: ERROR -- a filter that matches nothing looks identical to a corpus with
+    #: nothing in it. Resolve the key once, up front, and refuse loudly if
+    #: neither is present rather than reporting an empty run as a result.
+    first = json.loads(open(CORPUS, encoding='utf-8').readline())
+    GATE = ('pure_story' if 'pure_story' in first else
+            'judge_pure_story' if 'judge_pure_story' in first else None)
+    if GATE is None:
+        raise SystemExit('%s carries neither `pure_story` nor `judge_pure_story`;'
+                         ' refusing to run a gate that cannot fire.' % CORPUS)
     for line in open(CORPUS, encoding='utf-8'):
         r = json.loads(line)
-        if not r.get('judge_pure_story'):
+        if not r.get(GATE):
             continue
         n = r.get('n_words') or 0
         if not (min_words <= n <= max_words):
             continue
-        cells[(r['lineage'], r['arm'], r['frame'])].append(r)
+        #: KEYED BY MODEL, NOT LINEAGE. A lineage can carry several aligned
+        #: rungs -- Llama-3.1-8B has six Tulu-3 ablation checkpoints under it --
+        #: and a lineage-keyed quota gives all of them ONE shared allocation,
+        #: sampled in whatever order the file happens to be in. The rungs then
+        #: appear at wildly uneven n or not at all, which is indistinguishable
+        #: from them not existing.
+        cells[(r['model'], r['arm'], r['frame'])].append(r)
     out = []
     for k, v in sorted(cells.items()):
         #: interleave demonyms so a per-cell cap cannot select on nationality --
@@ -146,7 +163,8 @@ def main(argv=None):
             T[(k, name)]['llm'] += llm
             T[(k, name)]['regex'] += reg
         fh.write(json.dumps(dict(
-            id=r['id'], lineage=r['lineage'], arm=r['arm'], frame=r['frame'],
+            id=r['id'], model=r['model'], lineage=r['lineage'],
+            arm=r['arm'], frame=r['frame'],
             demonym=r['demonym'], n_words=r['n_words'],
             looks_complete=looks_complete(r['text']),
             spans_ok=ok, spans_total=tot,
