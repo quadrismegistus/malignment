@@ -46,12 +46,25 @@ KEEP_FIRST, DROP_WHEN_DUP = '7802ca3c31ae', 'b1d15d1f291d'
 def collect(min_words=150, per_cell=3):
     """-> [(lineage, arm, frame, demonym, text)], balanced across demonyms."""
     from malignment import roster
-    pairs, _ = roster.endpoints()
-    arm = {m: 'base' for m in pairs}
-    arm.update({m: 'aligned' for m in pairs.values()})
-    lin = {}
-    for b, a in pairs.items():
-        lin[b] = b; lin[a] = b
+    #: `endpoints()` RETURNS ONE ALIGNED MODEL PER BASE. It is the right call for
+    #: a paired two-arm contrast and the wrong one for deciding what to judge:
+    #: 100 models against `lineages()`' 160, and the 60 it drops include every
+    #: intermediate rung. On this corpus that silently excluded 1,040 qualifying
+    #: generations from 10 models -- among them the whole Tulu-3 ablation family
+    #: (SFT, SFT-no-safety-data, SFT-no-wildchat-data, SFT-no-persona-data,
+    #: SFT-no-math-data, DPO), a training-data ladder on one base, which is worth
+    #: more than any of the endpoints it was dropped in favour of.
+    #:
+    #: This is a hazard this campaign has already paid for once. Judge on
+    #: `lineages()`; select endpoints downstream if a contrast needs them.
+    lin_members = roster.lineages()
+    arm, lin = {}, {}
+    for b, members in lin_members.items():
+        for m in members:
+            #: lineages() is NOT ordered base-first, so identify the base by key
+            #: equality rather than by position
+            arm[m] = 'base' if m == b else 'aligned'
+            lin[m] = b
     by_mp = collections.defaultdict(set)
     rows = []
     for f in sorted(glob.glob(STASH)):
