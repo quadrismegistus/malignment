@@ -108,9 +108,21 @@ def _build_llm(model_id, max_model_len=2048, tp=1, dtype="float16"):
     from vllm import LLM
     gb = _model_gb(model_id)
     frac = _gpu_frac(gb)
-    print("  vLLM: %s | ~%.0f GB | frac %.2f | dtype %s"
-          % (model_id, gb, frac, dtype), flush=True)
-    return LLM(model=model_id, dtype=dtype, max_model_len=max_model_len,
+    # cap max_model_len to what the model supports
+    actual_len = max_model_len
+    try:
+        from transformers import AutoConfig
+        cfg = AutoConfig.from_pretrained(model_id, trust_remote_code=True)
+        model_max = getattr(cfg, "max_position_embeddings", None)
+        if model_max and max_model_len > model_max:
+            actual_len = int(model_max)
+            print("  capped max_model_len %d -> %d (model's max_position_embeddings)"
+                  % (max_model_len, actual_len), flush=True)
+    except Exception:
+        pass
+    print("  vLLM: %s | ~%.0f GB | frac %.2f | dtype %s | ctx %d"
+          % (model_id, gb, frac, dtype, actual_len), flush=True)
+    return LLM(model=model_id, dtype=dtype, max_model_len=actual_len,
                gpu_memory_utilization=frac, tensor_parallel_size=tp,
                trust_remote_code=True, enforce_eager=False)
 
