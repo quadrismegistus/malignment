@@ -335,3 +335,6 @@ experiments/emergence/capacities/figures/
 
 # norm_change long tables live in ~/malignment-data/norm_change (3.0 GB)
 experiments/displacement/norm_change/results/
+
+# built artifact -- rebuild with experiments/national_story/export_db.py
+experiments/national_story/conflict.sqlite
