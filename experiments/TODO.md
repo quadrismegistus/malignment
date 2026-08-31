@@ -148,6 +148,59 @@ zero were indistinguishable.
 norm. None asks whether alignment changes the norm-to-frequency relationship,
 which is the confound `matched_nonmovers` now exists to control.
 
+## MISSING FROM THIS LIST ENTIRELY — `M01 P_unnamed_axis`, AND IT IS NOW THE
+## BEST-CORROBORATED WORD-LEVEL FINDING IN THE ARCHIVE (added 2026-08-31)
+
+Section 1 carries M01's C, E, D, K and O. **`P_unnamed_axis` is in none of the
+ten sections**, and it is the one that has since acquired outside evidence.
+
+    archive   `whispered` is the TOP RISER at BOTH rungs of the ladder
+              (M01 README: 2,182 prompts, 16 families, 8,108 word types,
+              word-grain Spearman +0.350)
+    archive   `whispered +0.41`, the largest ALIGNED coefficient on the most
+              stable direction in that campaign -- stability min cos 0.958,
+              median 0.994, where the movement axis fails its own 0.9 gate
+    archive   the word ALONE separates arms at AUC 0.858
+
+**The archive records the caveat that should have killed it**, and this is why
+the finding was worth re-doing rather than citing: the designed minimal pairs are
+59% verbs and outnumber the literary cells 14:1, so *"any claim about WHICH words
+carry the signature is a claim about this prompt mix."* Run on literary prompts
+alone, the POS ordering reverses.
+
+**That caveat is now discharged, by a different prompt population.** The
+`national_story` fleet generates free-form literary continuations from a
+paratext, nothing like a designed minimal pair. Measured 2026-08-31 over 18
+complete endpoint pairs:
+
+    whisper rate aligned > base in 14 of 18 lineages, median +14.6pp
+    (Olmo-3-1025-7B +49.9, OLMo-2-0425-1B +37.3, OLMoE +33.2, Teuken +31.2)
+
+**And it has an external corpus now, which no other finding here does.**
+Rettberg & Wigers (2025) released 11,800 stories from gpt-4o-mini across 236
+countries under CC0. Measured against it:
+
+    "whisper" in 87.2% of stories, and in >=50% of the stories of
+        225 of 236 COUNTRIES
+    "Whisper" in 33.1% of TITLES; "Whispering" is the title head-noun of 23.9%
+    'The Whispering Pines' appears verbatim 229 times
+
+Their paper reads this corpus for a PLOT skeleton and reports *heart* as its most
+frequent word. The most invariant thing in it is a word this campaign already
+measured as the top riser under alignment.
+
+**v3 re-do:** the direction itself, on the passage store rather than the slot
+store, with the prompt mix as a declared stratum rather than a caveat -- the
+archive's own POS reversal says the answer depends on it, so it should be a
+factor and not a footnote. `matched_nonmovers` is the frequency control the
+original lacked.
+
+**Why this one first, of everything in section 1:** it is the only finding in the
+archive with an independent replication on a different prompt population AND a
+third-party corpus to test against, and the third party published a cultural
+claim that the finding reframes. Everything else here needs new data to advance;
+this one has two sources already sitting on disk.
+
 ## OUTSTANDING, 2026-08-24 — four things this section did not record
 
 **1. WHEN AND WHETHER ARE DIFFERENT DESIGNS AND MUST NOT BE MERGED** (RH,
