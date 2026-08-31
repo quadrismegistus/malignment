@@ -232,6 +232,12 @@ Mood = Literal[
 #: in aligned/raw, which is too low for a beat she says is in every story, so the
 #: fold is probably losing it. This separates the two: `reported` asks how the
 #: CONFLICT arrives, `elder_informant` asks whether the FIGURE is present at all.
+#: `vignette` WAS REMOVED AFTER ONE RUN. It took 72% of base and 56% of aligned
+#: and left the field with nothing to say. At 1500 words, prefilled with "It was
+#: a", essentially every generation is one anecdote -- so "nothing happens" is a
+#: property of the FORM we imposed, not a genre the model chose, and offering it
+#: let the coder answer a question about length instead of about kind. Without
+#: it the coder has to judge the world the story assumes.
 Genre = Literal[
     "realist",      #: ordinary contemporary life, no marvels
     "historical",   #: set in a past the story treats as past
@@ -240,7 +246,42 @@ Genre = Literal[
     "adventure",    #: a journey, a quest, physical danger
     "war",          #: armed conflict is the situation, not the backdrop
     "coming_of_age",#: a young person crossing into something
-    "vignette",     #: a mood or a scene; nothing happens and nothing is meant to
+    "domestic",     #: a household, a family, a kitchen; the scale is one home
+]
+#: ## HER CENTRAL MECHANISM, WHICH NOTHING HERE WAS ASKING ABOUT
+#:
+#: Rettberg's stories resolve by REKINDLING A TRADITION -- a festival revived, a
+#: craft taken up again, a story passed on, an old practice restored. The schema
+#: review considered a field for this and rejected it, on the grounds that
+#: `ending: restoration` plus `bequest` plus the RENEWAL and SPIRIT regexes
+#: already covered enough of it.
+#:
+#: The first run refutes that reason. `restoration` fires at 4% in aligned/raw
+#: and 2% in base/raw. It is covering nothing. `bequest` at 20%/9% catches the
+#: handing-on but says nothing about WHAT is handed on or whether recovering it
+#: is what solved the problem.
+#:
+#: So: ask the mechanism directly, and separately from the outcome.
+Means = Literal[
+    "tradition",   #: an old practice, story, craft, festival or place is
+                   #: recovered, revived or honoured, and THAT is what works
+    "collective",  #: people acting together, without tradition being the point
+    "individual",  #: one person's effort, skill or decision
+    "understanding",#: nothing is done; someone comes to see differently
+    "external",    #: luck, an outsider, an institution, an act of nature
+    "none",        #: nothing resolves
+]
+#: `obstacle` is here so the field can fail. In Rettberg the community is what
+#: gets saved and what does the saving; a community that CONSTRAINS -- that
+#: judges, gossips, refuses, keeps someone from leaving -- is the base-plausible
+#: reading and the one a field built from her paper would omit.
+CommunityRole = Literal[
+    "absent",      #: there is no community in the story
+    "backdrop",    #: it is scenery; it does nothing and nothing happens to it
+    "beneficiary", #: it is what gets saved, renewed or improved
+    "agent",       #: it acts: it gathers, decides, builds, resists
+    "obstacle",    #: it constrains the protagonist: judges, refuses, holds back
+    "lost",        #: it is dispersing, emptying or ending, and stays that way
 ]
 #: not one of the six. It is the denominator SMALLTOWN needs: a story set in a
 #: city that mentions villagers once is a different error from a story set in a
@@ -391,9 +432,40 @@ Two more, about WHEN the story happens and whether anyone is in love.
                  not count.
 
   genre          realist | historical | folk | supernatural | adventure | war |
-                 coming_of_age | vignette
-                 If two fit, take the one that governs the ENDING. `vignette` is
-                 the answer when there is a scene and a mood and no events.
+                 coming_of_age | domestic
+                 If two fit, take the one that governs the ENDING. Most of these
+                 are short and little happens in them; that is not a genre. Judge
+                 by the WORLD the story assumes, not by how much plot it has.
+
+  tradition      Is there a named old practice, craft, festival, recipe, song,
+                 story, ritual or place-with-a-past in the story? Just present,
+                 whether or not anything is done with it.
+
+  resolution_means  tradition | collective | individual | understanding |
+                 external | none
+                 HOW the story's difficulty is resolved, if it is.
+                 tradition      an old practice, story, craft, festival or place
+                                is recovered, revived or honoured, and THAT is
+                                what works
+                 collective     people act together, without tradition being the
+                                point
+                 individual     one person's effort, skill or decision
+                 understanding  nothing is DONE; someone comes to see differently
+                 external       luck, an outsider, an institution, weather
+                 none           nothing resolves
+                 This asks the MECHANISM, not the outcome. A story can end with a
+                 restored village by any of these means.
+
+  community_role  absent | backdrop | beneficiary | agent | obstacle | lost
+                 What is the community TO the story?
+                 backdrop     scenery; it does nothing and nothing happens to it
+                 beneficiary  it is what gets saved, renewed or improved
+                 agent        it acts: gathers, decides, builds, resists
+                 obstacle     it constrains the protagonist: judges, gossips,
+                              refuses, keeps someone from leaving
+                 lost         it is dispersing, emptying or ending, and stays so
+                 A community can be both beneficiary and agent; if so, take
+                 `agent`, which is the stronger claim.
 
   romance        fulfilled | unfulfilled | absent
                  fulfilled     two people end together, or the attachment is
@@ -548,6 +620,20 @@ class StoryConflict(BaseModel):
     genre: Genre
     genre_span: str = Field(
         description="VERBATIM quote that most establishes the genre.")
+    tradition: bool
+    tradition_span: Optional[str] = Field(
+        default=None,
+        description="VERBATIM quote naming the practice, craft, festival, song, "
+                    "recipe, ritual or place-with-a-past. None if false.")
+    resolution_means: Means
+    means_span: str = Field(
+        description="VERBATIM quote of the thing that resolves it. If 'none', "
+                    "quote the last sentence.")
+    community_role: CommunityRole
+    community_span: str = Field(
+        description="VERBATIM quote showing the community doing, receiving or "
+                    "withholding. If 'absent', quote the story's most populated "
+                    "sentence.")
     romance: Romance
     romance_span: Optional[str] = Field(
         default=None,
@@ -568,7 +654,8 @@ SPAN_FIELDS = ("opponent_span", "fate_span", "conflict_span", "ending_span",
                "homecoming_span", "threat_span",
                "supernatural_span", "collective_action_span", "renewal_span",
                "temporality_span", "romance_span", "mood_span",
-               "nostalgia_span", "elder_informant_span", "genre_span")
+               "nostalgia_span", "elder_informant_span", "genre_span",
+               "tradition_span", "means_span", "community_span")
 
 #: how each LLM field becomes the boolean `tropes.py` reports, so agreement is
 #: computed once here rather than re-derived at each call site.

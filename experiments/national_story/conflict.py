@@ -127,7 +127,8 @@ def main(argv=None):
                   'conflict_mode', 'ending', 'resolution_scale',
                   'protagonist_change', 'setting', 'homecoming', 'threat',
                   'temporality', 'romance', 'mood', 'genre',
-                  'nostalgia', 'elder_informant'):
+                  'nostalgia', 'elder_informant', 'resolution_means',
+                  'community_role', 'tradition'):
             F[(k, f)][getattr(o, f)] += 1
         #: present() returns ALL SIX keys with bool values, so `name in rx` is a
         #: key-membership test that is always True. It ran once that way and put
@@ -169,7 +170,8 @@ def main(argv=None):
     for f in ('opponent', 'opponent_fate', 'conflict_mode', 'ending',
               'resolution_scale', 'setting', 'homecoming', 'threat',
               'temporality', 'romance', 'mood', 'genre',
-              'nostalgia', 'elder_informant'):
+              'nostalgia', 'elder_informant', 'resolution_means',
+              'community_role', 'tradition'):
         print('\n%s' % f.upper())
         for k in sorted(N):
             c = F[(k, f)]
