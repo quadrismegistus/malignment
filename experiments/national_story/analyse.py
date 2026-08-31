@@ -347,49 +347,75 @@ def norms_contrast(G, cap=20):
                                               st.mean(x[1] for x in cov[c])))
 
 
-def semantic_fields_contrast(G, cap=20, top=12):
-    """USAS / RID / General Inquirer category share, over content-word TYPES.
+def semantic_fields_contrast(G, cap=20, top=10):
+    """USAS / RID category share, BOTH over types and over tokens.
 
-    TYPES here, unlike `norms_contrast`: a field question is "which regions of
-    the lexicon does this story reach into", and forty repetitions of one word
-    reach into one region once. The two functions differ deliberately and the
-    reason is the question, not convenience.
+    ## WHY BOTH, AFTER GETTING IT WRONG ONCE
+
+    This reported TYPES only, justified as "which regions of the lexicon does a
+    story reach into". That is a question about BREADTH, and the question being
+    asked is about DENSITY -- and the two disagree on the direction of 35 of 136
+    categories (r=0.860 overall, so they agree broadly and part company exactly
+    where it matters).
+
+    `usas:Kin` is the case that decides it: 0.97x on types, 0.72x on tokens. Both
+    arms know the same family vocabulary; the base arm SAYS those words a third
+    more often. Reporting types alone made a real density effect look flat.
+
+    So both columns, and the disagreement flagged. A category up on types and
+    flat on tokens has broader vocabulary without more mentions; up on tokens and
+    flat on types is a few words repeated harder. Neither is the other.
     """
     from malignment import fields
     lins = _paired(G)
-    def cats(t):
+
+    def cats(t, mode):
         out = collections.Counter()
-        types = {w.lower() for w in fields.TOKEN.findall(t)}
-        for w in types:
+        toks = [w.lower() for w in fields.TOKEN.findall(t)]
+        items = set(toks) if mode == 'types' else toks
+        for w in items:
             for c in (fields.usas(w) or set()):
                 out['usas:' + c] += 1
             for c in (fields.rid(w) or set()):
                 out['rid:' + c] += 1
-        return out, max(1, len(types))
-    agg = {'base': collections.Counter(), 'aligned': collections.Counter()}
-    tot = {'base': 0, 'aligned': 0}
-    for L in lins:
-        for a in ('base', 'aligned'):
-            for t in texts(G, L, a)[:cap]:
-                c, n = cats(t)
-                agg[a].update(c)
-                tot[a] += n
-    print('\n== SEMANTIC FIELDS (share of content-word TYPES) ==')
-    print('%-34s %8s %8s %8s' % ('category', 'base', 'aligned', 'ratio'))
-    keys = {k for a in agg for k in agg[a]}
-    rows = []
-    for k in keys:
-        b = agg['base'][k] / max(1, tot['base'])
-        a = agg['aligned'][k] / max(1, tot['aligned'])
-        if b + a < 0.004:          #: too rare to read as anything but noise
+        return out, max(1, len(items))
+
+    R = {}
+    for mode in ('types', 'tokens'):
+        agg = {'base': collections.Counter(), 'aligned': collections.Counter()}
+        tot = {'base': 0, 'aligned': 0}
+        for L in lins:
+            for a in ('base', 'aligned'):
+                for t in texts(G, L, a)[:cap]:
+                    c, n = cats(t, mode)
+                    agg[a].update(c)
+                    tot[a] += n
+        R[mode] = {k: (agg['base'][k] / max(1, tot['base']),
+                       agg['aligned'][k] / max(1, tot['aligned']))
+                   for k in set(agg['base']) | set(agg['aligned'])}
+
+    #: a category too rare in EITHER aggregation is noise in both
+    keys = [k for k in R['types']
+            if sum(R['types'][k]) > 0.004 and sum(R['tokens'].get(k, (0, 0))) > 0.004]
+
+    def ratio(k, m):
+        b, a = R[m][k]
+        return a / b if b else float('inf')
+
+    rows = sorted(keys, key=lambda k: -ratio(k, 'tokens'))
+    print('\n== SEMANTIC FIELDS (aligned/base ratio) ==')
+    print('%-40s %9s %9s  %s' % ('category', 'types', 'tokens', 'disagree'))
+    for k in rows[:top] + [None] + rows[-top:]:
+        if k is None:
+            print('   ... %d categories between ...' % max(0, len(rows) - 2 * top))
             continue
-        rows.append((a / b if b else float('inf'), k, b, a))
-    rows.sort(reverse=True)
-    for r, k, b, a in rows[:top]:
-        print('%-34s %7.4f %8.4f %8.2fx' % (k, b, a, r))
-    print('   ... %d categories between ...' % max(0, len(rows) - 2 * top))
-    for r, k, b, a in rows[-top:]:
-        print('%-34s %7.4f %8.4f %8.2fx' % (k, b, a, r))
+        rt, rk = ratio(k, 'types'), ratio(k, 'tokens')
+        flag = '<<' if (rt > 1.15) != (rk > 1.15) or (rt < 0.87) != (rk < 0.87) else ''
+        print('%-40s %8.2fx %8.2fx  %s' % (k[:38], rt, rk, flag))
+    dis = sum(1 for k in keys if (ratio(k, 'types') > 1.15) != (ratio(k, 'tokens') > 1.15))
+    print('\n  direction disagreements: %d of %d categories' % (dis, len(keys)))
+    print('  types measures BREADTH of vocabulary, tokens measures DENSITY of')
+    print('  mention. Quote whichever the claim is about, and say which.')
 
 
 def main(argv=None):
