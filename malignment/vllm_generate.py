@@ -89,7 +89,7 @@ def _gpu_frac(model_gb):
     import torch
     total = torch.cuda.mem_get_info()[1] / 1e9
     want = model_gb * 1.3 + 8.0
-    frac = max(0.85, min(0.92, want / total))
+    frac = max(0.90, min(0.95, want / total))
     return frac
 
 
@@ -125,10 +125,17 @@ def _free_llm(llm, model_id=None):
     which is cheap against the generation time.
     """
     import gc, glob, os, shutil, torch
+    try:
+        llm.llm_engine.shutdown()
+    except Exception:
+        pass
     del llm
+    gc.collect()
     gc.collect()
     if torch.cuda.is_available():
         torch.cuda.empty_cache()
+        torch.cuda.ipc_collect()
+        torch.cuda.reset_peak_memory_stats()
     if model_id:
         safe = model_id.replace("/", "--")
         cache_dir = os.path.expanduser("~/.cache/huggingface/hub")
