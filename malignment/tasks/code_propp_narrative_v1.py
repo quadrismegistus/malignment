@@ -759,7 +759,8 @@ class ProppNarrativeTask(Task):
     # _propp_examples: the function sequences are his, only the spans were
     # inferred, and they are chosen against a measured defect (zero-shot
     # precision 0.47 against his schemes, from over-annotating roughly 2x).
-    examples = EXAMPLES
+    #: overridden to [] above; EXAMPLES kept importable for comparison runs
+    examples = []
     model = "claude-sonnet-5"
     temperature = 0.0
     # A dense tale can yield 25-30 functions, each carrying a quoted span
