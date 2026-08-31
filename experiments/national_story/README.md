@@ -115,3 +115,123 @@ move, so its null is the weakest claim here.
 similar across samples and would inflate the aligned arm's homogeneity, so it is
 dropped -- but it is dropped from one arm far more than the other. Re-run with
 `--keep-escapes` as a sensitivity check before quoting the homogeneity contrast.
+
+
+## SURPRISAL: ALIGNMENT MOVES A MODEL OUT OF THE HUMAN RANGE
+
+Every text clipped to 193 words, matching the human anchor's own construction --
+NOT a cost decision. `score.surprisal`'s `m` parameter does not bound the
+computation: it runs the model over the whole text and slices the result, so a
+2,000-token story goes through a 4,096-context reference regardless, and
+`if v.size < m: return None` silently drops anything shorter than m. At m=256
+that dropped 149 of 150 anchor passages and returned a confident mean over n=1.
+
+    RETTBERG gpt-4o-mini     2.49 bits/token
+    ours: aligned median     3.00
+    ------------------------------  every human corpus above this line
+    waking_narrative         3.30
+    dreams                   3.87
+    philosophy               3.92
+    ours: base median        4.18   <- inside the human range
+    literary_criticism       4.31
+    arxiv_abstracts          4.35
+    c20_fiction              4.37   <- most surprising text measured
+
+**Human short fiction is the least predictable text in the anchor**, above
+philosophy and above dream reports. Our BASE models sit inside the human range.
+Alignment moves them out of it: -0.87 bits/token, lower in 19 of 21 lineages.
+gpt-4o-mini is 1.88 bits below human fiction.
+
+The reference is `deepseek-llm-7b-base`, itself a base model, so it is worth
+asking whether it flatters base-model text. The direction argues against that: if
+it favoured text resembling its own output, HUMAN text would score lowest, and
+human text scores highest across all six corpora.
+
+Three-cell: ARM -1.154 bits (12/14), FRAME -0.191 (9/14). Putting the aligned
+model in its NATIVE prefill frame makes it MORE smooth, not less, so the raw
+frame is not penalising it.
+
+## DRIFT: THE SEMANTIC SPACE SHRINKS AND ORDER STOPS MATTERING
+
+Length-free metrics only -- `score.py` certifies three, and the cumulative ones
+grow with sentence count, which would manufacture an arm difference from the
+length difference.
+
+    mean_pairwise  aligned LOWER in 15 of 21, median -0.0387
+    mean_drift     aligned LOWER in 17 of 21, median -0.0183
+    ordering       aligned HIGHER in 14 of 21, median +0.0144
+
+`mean_pairwise` is the mean distance between any two sentences of one story:
+"does this story occupy a small semantic space". Alignment shrinks it.
+`ordering` is `mean_drift - mean_pairwise`, so MORE NEGATIVE means adjacent
+sentences are distinctively closer than distant ones. Base runs ~-0.069, aligned
+~-0.050: the distinction flattens. Everything is near everything and adjacency
+stops carrying structure.
+
+**Cohesion without progression, measured** -- Bajohr's surface narration, reached
+from sentence embeddings rather than from reading.
+
+## WHAT IS ACTUALLY RISING, WHICH THE TROPE LABELS CONCEALED
+
+Matched strings, clean raw stories (base n=2,224, aligned n=1,644 -- so aligned
+counts are UNDERSTATED by a third):
+
+    RENEWAL is one formula          base   aligned
+      "for generations to come"        8        86
+      "passed down through generations" 10      49
+      "generations to come"           10        40
+
+    SPIRIT is a REGISTER SHIFT, not more of the same
+      BASE     supernatural 30, magical 27, goddess 18, ghost 17, apparition 14
+      ALIGNED  ancestors 88, magical 61, ancient stone 60, ethereal 45,
+               folklore 31, guardian of the 29
+
+Base reaches for entities -- ghosts, goddesses, apparitions. Aligned reaches for
+heritage -- ancestors, folklore, guardians. The trope COUNT concealed this
+entirely; only the matched strings show it.
+
+## THE INSTRUMENT MEASURES LEXICAL SIGNATURE, NOT PLOT FUNCTION
+
+Read one aligned story in full and both its PRESENT verdicts rested on incidental
+mentions: SMALLTOWN fired 3/3 on "born in the small town of Rehovot", a
+birthplace in a biographical aside in a story set in a Jerusalem cafe; THREAT
+fired 2/3 on "displacement of Arabs" inside a conversation about history.
+
+**Three independent detectors agreeing does not make a measurement valid.**
+SPIRIT and RENEWAL were rejected on that story because the sets DISAGREED. SMALL-
+TOWN passed unanimously because all three operationalised it the same obvious way
+-- `small|little|quiet` beside `town|village` -- and a shared conceptual error is
+invisible to inter-rater agreement. Agreement protects against idiosyncratic
+error, not against the error everyone makes.
+
+The lexical shift is still a real finding (`small village` 189 against 88 on a
+third fewer stories). It is just not a finding about plot, and should be reported
+as vocabulary.
+
+## A REFUTED HYPOTHESIS, RECORDED BECAUSE THE READING WAS PERSUASIVE
+
+Reading one aligned Palestinian story -- an expository piece on al-Aqsa with NO
+named characters and NO events -- against one aligned Israeli story with three
+characters and dialogue, suggested that aligned models suppress character and
+incident for some demonyms. Rettberg note the same sets avoid the occupation, and
+their reviewer Conti attributes it to content filtering, from output alone.
+
+Measured with spaCy NER over 25 stories per (arm, frame, demonym):
+
+    ALIGNED/prefill   persons  dialogue  past_verbs
+      Israeli            3.85      2.03       87.32
+      Palestinian        4.07      3.01       86.82
+
+**More characters and more dialogue, not fewer.** The hypothesis is refuted and
+Conti's filtering claim is not supported through this route.
+
+What the measure does show is a demonym effect on ABSTRACTION -- American,
+Palestinian, Israeli and Nigerian run ~22-27 abstract nouns per 1,000 words
+against ~11-17 for Norwegian, Japanese, Turkish and French -- and it is present in
+the BASE arm too, so it is a property of the pretraining corpus rather than
+something alignment installs.
+
+Third time in one session a reading from one to three texts dissolved at proper
+n, after the base length effect that FLIPPED SIGN between n=3 and n=10 and the
+"aligned cannot stop" mechanism that regressed to nothing at 15 lineages. A
+single story is a hypothesis generator and never evidence.
