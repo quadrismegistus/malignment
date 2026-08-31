@@ -29,7 +29,11 @@ import re
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-CORPUS = os.path.join(HERE, 'judged_corpus_for_propp.jsonl')
+DATA = os.environ.get('MALIGNMENT_DATA', os.path.expanduser('~/malignment-data'))
+#: moved out of the repo 2026-08-31: 51.7 MB, and it is generated data, not source.
+#: renamed off `judged_corpus_for_propp` because Propp was abandoned and the file
+#: is now the text source for every instrument here.
+CORPUS = os.path.join(DATA, 'national_story', 'judged_stories.jsonl')
 
 
 def looks_complete(text):
