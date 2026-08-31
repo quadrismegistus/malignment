@@ -138,6 +138,50 @@ Scale = Literal[
     "local",      #: one family, street, village or building is different
     "systemic",   #: a law, an owner, a company, an army or a government changed
 ]
+#: ## ALL SIX RETTBERG TROPES, ASKED EXPLICITLY, SO THE INSTRUMENTS COMPARE
+#:
+#: `tropes.py` scores the same six lexically -- three independently authored
+#: regex sets, majority vote. Asking the reader the SAME six under the SAME names
+#: makes per-story agreement computable, which is the only way to find out where
+#: the regexes are wrong rather than merely noisy. There is already one known
+#: case: SMALLTOWN fired 3 of 3 unanimously on "born in the small town of
+#: Rehovot" in a story set in a Jerusalem cafe, because a regex has no span.
+#:
+#: There is a reason to expect the disagreement to be uneven. The two tropes that
+#: moved least in the regex contrast -- RETURN +0.4 (11 of 21 lineages) and
+#: THREAT +1.7 (12 of 21), against SMALLTOWN +11.3, SPIRIT +10.8, RENEWAL +15.9
+#: -- are exactly the two that are about what HAPPENS rather than what words
+#: appear. RETURN's set A includes a bare `childhood home`; SMALLTOWN's includes
+#: the single word `villagers`. That is a prediction the comparison can refute.
+#:
+#: RETURN and THREAT are typed rather than boolean because their categories are
+#: worth having anyway; `!= "none"` is the boolean for the comparison.
+Return_ = Literal[
+    "none",        #: the protagonist does not go anywhere they are from
+    "returns",     #: they come back to a place they are from, on the page
+    "had_returned",#: they have already come back when the story opens
+    "stays",       #: they are offered a way out and do not take it
+    "leaves",      #: they go, and the story does not bring them back
+]
+Threat = Literal[
+    "none",        #: nothing menaces the place or the community
+    "external",    #: outsiders, a company, a state, an army, a buyer
+    "economic",    #: the young leaving, the factory closing, the fishery failing
+    "environmental",  #: storm, flood, drought, fire, sea, illness
+    "internal",    #: division within the community itself
+    "cultural",    #: a way of life, a language or a memory being lost
+]
+#: not one of the six. It is the denominator SMALLTOWN needs: a story set in a
+#: city that mentions villagers once is a different error from a story set in a
+#: village.
+Setting = Literal[
+    "village",     #: named or described as a village, hamlet or small community
+    "small_town",  #: a town, explicitly small or functioning as one
+    "city",        #: a city, named or evident
+    "rural",       #: farm, coast, mountain or open country, no settlement centred
+    "mixed",       #: the story moves between a city and a smaller place
+    "unclear",     #: the text does not establish where this is
+]
 
 SYSTEM_PROMPT = """You describe the CONFLICT in a short story and what happens to it.
 
@@ -194,6 +238,52 @@ resolution_scale -- HOW FAR the resolution reaches. Judge what the text says
               that "became a beacon of hope" has changed one village.
   systemic    a law, an owner, a company, an army or a government changed
 
+Then six questions about what the story CONTAINS. Answer each on its own. They
+are not a checklist of what a good story has, and a story with none of them is
+an ordinary story.
+
+  setting        village | small_town | city | rural | mixed | unclear
+                 WHERE the story mainly takes place. If it moves between a city
+                 and a smaller place, that is `mixed`.
+
+  homecoming     none | returns | had_returned | stays | leaves
+                 Does the protagonist go back to somewhere they are from?
+                 returns       they come back, on the page
+                 had_returned  they have already come back when it opens
+                 stays         they are offered a way out and do not take it
+                 leaves        they go, and the story does not bring them back
+                 A story about someone who lives where they have always lived,
+                 with no leaving and no coming back, is `none`.
+
+  small_community  Does a village, hamlet, or small town APPEAR in the story at
+                 all, even in passing, even if the story is set elsewhere? This
+                 is a different question from `setting`, which asks where the
+                 story mainly takes place. A story set in open country whose
+                 characters pass through a village answers yes here and `rural`
+                 there.
+
+  threat         none | external | economic | environmental | internal | cultural
+                 Is the PLACE or the COMMUNITY menaced? Something that could
+                 change or end how people there live. A developer, a drought,
+                 the young leaving, a language dying, a boycott.
+                 NOT a danger to one character: a boy with an airgun, a robbery,
+                 an enemy who follows the protagonist. Those are conflict, and
+                 the opponent fields already record them. If the menace would
+                 stop mattering once the protagonist walked away, it is `none`.
+
+  supernatural   Is there a spirit, ghost, ancestor who acts, deity, folkloric
+                 creature, or an object with power? An ancestor merely
+                 remembered is NOT supernatural. An ancestor who speaks is.
+
+  collective_action  Do people act TOGETHER: a meeting, a festival organised, a
+                 petition, a protest, a rebuilding, a gathering called? One
+                 person helping another is not collective action.
+
+  renewal        Does the place or the community END BETTER than it was? A
+                 revival, a thriving, a tradition restored, hope returning. Only
+                 if the text says the PLACE changed, not if a character feels
+                 hopeful.
+
 Also:
   protagonist_change   none (ends as they began) | circumstance (situation, job
                        or place is different) | self (what they believe, want or
@@ -222,6 +312,11 @@ Rules, each a way to get this wrong:
     `expounded`. Answer `conflict_mode: none` ONLY if the story contains no
     difficulty of any kind, and then quote the flattest sentence you can find as
     the witness for that.
+  - THE DIFFICULTY NEED NOT BE THE PROTAGONIST'S. If a character tells the
+    protagonist about someone else's hardship, that is `reported`, not `none`.
+    If the protagonist watches a stranger struggle, that is `witnessed`. A story
+    in which a grandmother explains why a migrant family left their country has
+    a conflict, and its mode is `reported`.
   - JUDGE THE TEXT, NOT THE SUBJECT. A story set during a war in which nothing
     happens to anyone is not `enacted`.
   - `dissolved` IS NOT `converted`. Converted means the opponent changed.
@@ -278,6 +373,38 @@ class StoryConflict(BaseModel):
         description="none: ends as they began. circumstance: situation, job or "
                     "place is different. self: what they believe, want or can do "
                     "is different.")
+    #: the six, under the names `tropes.py` uses. Boolean for the comparison is
+    #: `!= 'none'` for the two typed ones and the flag itself for the four.
+    setting: Setting
+    setting_span: str = Field(
+        description="VERBATIM quote establishing where this takes place. If "
+                    "'unclear', quote the most place-like sentence there is.")
+    #: separate from `setting` because SMALLTOWN asks whether a small community
+    #: APPEARS and `setting` asks where the story mainly IS. Comparing the regex
+    #: against `setting` scored two disagreements that were the two instruments
+    #: answering different questions.
+    small_community: bool
+    small_community_span: Optional[str] = Field(
+        default=None, description="VERBATIM quote. None if false.")
+    homecoming: Return_
+    homecoming_span: str = Field(
+        description="VERBATIM quote of the going back, the staying or the "
+                    "leaving. If 'none', quote where the protagonist lives.")
+    threat: Threat
+    threat_span: str = Field(
+        description="VERBATIM quote of what menaces the place. If 'none', quote "
+                    "the most untroubled sentence about the place.")
+    supernatural: bool
+    supernatural_span: Optional[str] = Field(
+        default=None, description="VERBATIM quote. None if false.")
+    collective_action: bool
+    collective_action_span: Optional[str] = Field(
+        default=None, description="VERBATIM quote. None if false.")
+    renewal: bool
+    renewal_span: Optional[str] = Field(
+        default=None,
+        description="VERBATIM quote showing the PLACE ending better. None if "
+                    "false.")
 
 
 class StoryConflictTask(Task):
@@ -290,7 +417,20 @@ class StoryConflictTask(Task):
 
 
 SPAN_FIELDS = ("opponent_span", "fate_span", "conflict_span", "ending_span",
-               "scale_span")
+               "scale_span", "setting_span", "small_community_span",
+               "homecoming_span", "threat_span",
+               "supernatural_span", "collective_action_span", "renewal_span")
+
+#: how each LLM field becomes the boolean `tropes.py` reports, so agreement is
+#: computed once here rather than re-derived at each call site.
+TROPE_MAP = {
+    "SMALLTOWN": lambda r: r.small_community,
+    "RETURN":    lambda r: r.homecoming in ("returns", "had_returned"),
+    "THREAT":    lambda r: r.threat != "none",
+    "SPIRIT":    lambda r: r.supernatural,
+    "ORGANISE":  lambda r: r.collective_action,
+    "RENEWAL":   lambda r: r.renewal,
+}
 
 
 def check_spans(text, result):
