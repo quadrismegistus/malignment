@@ -64,6 +64,26 @@ OUTCOME = ('opponent_fate', 'conflict_mode', 'ending', 'resolution_scale',
 ALL = WORLD + OUTCOME
 
 
+def totals(by_dem, fields):
+    """-> (within, between, overall) mean Hamming distances.
+
+    `overall` is EVERY pair regardless of demonym, so it is the mix of the other
+    two weighted by how many pairs of each kind exist. Reporting all three lets a
+    reader see that a fall in `within` and a rise in `between` can leave
+    `overall` almost unmoved -- which is the shape of this result and the reason
+    a single homogeneity number is uninformative."""
+    r = separation(by_dem, fields)
+    if r is None:
+        return None
+    w, b, _ = r
+    rows = [x for g in by_dem.values() for x in g]
+    tot = pairs = 0
+    for i in range(len(rows)):
+        for j in range(i + 1, len(rows)):
+            tot += sum(1 for f in fields if rows[i][f] != rows[j][f]); pairs += 1
+    return w, b, tot / (pairs * len(fields))
+
+
 def separation(by_dem, fields):
     """-> (within, between, separation) over equal-size demonym groups."""
     dems = sorted(by_dem)
@@ -95,6 +115,10 @@ def main(argv=None):
                     help='stories sampled per demonym per arm')
     ap.add_argument('--min-demonyms', type=int, default=4)
     ap.add_argument('--draws', type=int, default=300)
+    ap.add_argument('--contrast', default='arm', choices=('arm', 'frame'),
+                    help='arm: base->aligned in raw. frame: aligned raw->prefill.')
+    ap.add_argument('--summary', action='store_true',
+                    help='compact percent-change table instead of per-lineage')
     a = ap.parse_args(argv)
 
     path = a.results if os.path.exists(a.results) else \
