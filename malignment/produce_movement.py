@@ -65,7 +65,6 @@ import collections
 import sys
 
 from . import ch
-from . import corpus
 from .movement import CANONICAL, LENS, DRAW, RESIDUAL_KEY, movement
 
 #: **THE RULE VERSION SELECTS THE SOURCE TABLES AND THE DESTINATION.** v4 cells
@@ -169,7 +168,7 @@ def _token_surface_models():
     """Models whose words are tokens not words — refused from movement."""
     bad = [r["model"] for r in ch.query(
         (r"""SELECT model FROM {db}.%s GROUP BY model"""
-         % corpus.TABLES[_RV["v"]][0]) + r"""
+         % ch.TABLES[_RV["v"]][0]) + r"""
             HAVING countIf(startsWith(word, '▁') OR startsWith(word, 'Ġ')
                            OR match(word, '^<0x[0-9A-Fa-f]{2}>$')) > 0""")]
     if bad:
@@ -196,7 +195,7 @@ def buildable():
         if r["op"] in DERIVING:
             par[r["child"]] = r["parent"]
             op[r["child"]] = r["op"]
-    _c = corpus.TABLES[_RV["v"]][1]
+    _c = ch.TABLES[_RV["v"]][1]
     have = {r["model"] for r in ch.query(
         "SELECT DISTINCT model FROM {db}.%s" % _c)}
     bad = _token_surface_models()

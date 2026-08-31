@@ -92,6 +92,48 @@ the Chinese anatomical slots -- and 111 already-rated en prompts were in that gr
 It also destroyed a diagnostic: restricting to prompts rated before any dose-based
 selection kept 2 of 1,815.
 
+## 5. WHY THE CEILING IS LOW: DIRECTION IS MOSTLY MODEL-SPECIFIC
+
+Added 2026-08-30. The existence test (`experiments/displacement/existence/`) shows
+higher-scene words lose more mass (40/50 lineages, p=2e-5). But scene as a
+predictor of DIRECTION (riser vs faller) returns AUC 0.52 — near chance. These
+are not contradictory: the first measures within-cell slopes; the second asks
+whether a word's absolute scene predicts its direction across cells.
+
+The reason is that **direction is not a property of the word or even of the
+word-in-context. It is mostly a property of the word-in-context-on-THIS-MODEL.**
+
+    level                         consistency     interpretation
+    word alone (all prompts+models)    0.35       word properties predict ~35%
+    word + prompt (across models)      0.47       in-context gets ~47%
+    word + prompt + model              1.00       deterministic
+
+Consistency = |mean direction| across the instances at that level, where 1.0 is
+unanimous and 0.0 is exactly 50/50. Measured on 68,252 (word, prompt) pairs with
+5+ lineages and 2,862 words with 20+ cells.
+
+**62% of (word, prompt) pairs are near-50/50 across lineages.** Only 9.7% are
+unanimous. "Kill" falls on OLMo and rises on Qwen for the same prompt.
+
+This decomposes the variance into thirds:
+
+- **~35% word-level.** Some words tend to fall regardless. Embeddings recover
+  18-21% of this, norms recover 7%. Neither is failing — they are measuring
+  different fractions of a signal that is only one-third word-level.
+- **~12% context-level.** The same word moves differently in different frames.
+  Scene ratings (in-context charge) should reach this, but as a single number
+  against embeddings' 300 dimensions it gets AUC 0.52.
+- **~53% model-specific.** How each alignment pipeline decided to treat this
+  word on this prompt. No word property can reach it; the right question here
+  is what MODEL property predicts direction — alignment training data, method,
+  scale.
+
+**P's unnamed axis is partly vocabulary (embeddings see it, norms don't) and
+partly not a vocabulary property at all.** The ctx_v6 contextual ratings reach
+the ceiling that word-level features cannot because they measure a (word ×
+prompt)-level property, adding the context third. But the model third is out
+of reach for any instrument that scores words rather than models.
+
 ## FENCES
 
 - **The `% headr` column is not quotable.** Increments are measured up from the

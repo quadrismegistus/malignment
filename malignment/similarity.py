@@ -119,7 +119,6 @@ import argparse
 import sys
 
 from . import ch
-from . import corpus
 
 #: Models needing this many cells to enter the panel. The bar and the resulting
 #: panel size are reported by --panel; they are not free parameters to tune until
@@ -145,11 +144,11 @@ RULE_VERSION = 3
 
 def build_panel():
     """(model, prompt, argmax word) over prompts EVERY qualifying model holds."""
-    n_models = ch.scalar(corpus.retable(
+    n_models = ch.scalar(ch.retable(
         "SELECT count() FROM (SELECT model FROM {db}.twp_words "
         "GROUP BY model HAVING uniqExact(prompt) >= %d)" % MIN_CELLS, RULE_VERSION))
     ch.execute("DROP TABLE IF EXISTS {db}.panel_argmax")
-    ch.execute(corpus.retable("""
+    ch.execute(ch.retable("""
 CREATE TABLE {db}.panel_argmax ENGINE = MergeTree ORDER BY (prompt, word) AS
 WITH big AS (SELECT model FROM {db}.twp_words GROUP BY model
              HAVING uniqExact(prompt) >= %d),
@@ -193,7 +192,7 @@ def js(a, b):
     The residual is an ARM of the comparison, not a footnote: without it this is a
     divergence between two truncations. `twp_cells.total` holds it.
     """
-    return ch.scalar(corpus.retable("""
+    return ch.scalar(ch.retable("""
 WITH panel AS (SELECT DISTINCT prompt FROM {db}.panel_argmax)
 SELECT avg(js) FROM (
   SELECT w.prompt AS prompt, sum(%s) + any(rterm) AS js FROM (
@@ -266,7 +265,7 @@ def markers():
     conservation (token probabilities sum to 1 too), invisible to row counts, and
     presents as an enormous alignment effect rather than as an error.
     """
-    rows = ch.query(corpus.retable("""
+    rows = ch.query(ch.retable("""
 SELECT model,
        countIf(startsWith(word, '%s')) AS sp,
        countIf(startsWith(word, '%s')) AS gpt2,

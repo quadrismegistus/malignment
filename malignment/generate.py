@@ -289,10 +289,16 @@ def render(loaded, text, system=DEFAULT, user=None, prefill=False,
     #: value most likely to be silently ignored was the one value never checked.
     #:
     #: Measured 2026-08-22 across the 80 prefill-able checkpoints: **10 templates
-    #: ignore a supplied system message entirely**, rendering byte-identical
-    #: output for DEFAULT, `""` and `" "`. They include BOTH Llama-3.1-Instruct
-    #: arms, SmolLM3-3B (which injects its own dated metadata block), Yi-1.5-Chat,
-    #: gemma-2-9b-it, falcon-7b-instruct and glm-4-9b-chat-hf.
+    #: render byte-identically for DEFAULT, "" and " "** — an empty or
+    #: whitespace-only system message has no effect. They include BOTH
+    #: Llama-3.1-Instruct arms (whose own Cutting Knowledge / Today Date block
+    #: always fires and an empty string appended to it changes no bytes),
+    #: SmolLM3-3B (which injects its own dated metadata block), Yi-1.5-Chat,
+    #: gemma-2-9b-it, falcon-7b-instruct and glm-4-9b-chat-hf. **Non-empty
+    #: system messages ARE honoured on these models** — this is about the
+    #: empty case only. CORRECTED 2026-08-30 re lacan [6573]: the prior
+    #: wording said "ignore a supplied system message entirely", which was
+    #: wider than what was tested (empty/whitespace only).
     #:
     #: Under the old guard every one of those returned `sys_ok=True` for
     #: `system=""`, so a cell would be STAMPED as an empty-system condition while

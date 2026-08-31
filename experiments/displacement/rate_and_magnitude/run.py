@@ -223,10 +223,94 @@ def measure(langs, min_prompts=MIN_PROMPTS):
 
 
 
+def measure_lift(min_prompts=MIN_PROMPTS):
+    """The same 9 outcomes regressed on PER-LINEAGE charge.lift_per_lineage.
+
+    **ENGLISH ONLY.** charge ratings are English, flash, 2,400 prompts. Chinese
+    has no charge ratings and is not run here.
+
+    **PER-LINEAGE LIFT = T_base - frame.** T_base weights scene ratings by the
+    base arm's OWN mass distribution, which varies by model — two bases on the
+    same prompt carry different words at different probabilities. The prompt-level
+    lift (dose - frame) averages over lineages; the per-lineage version is what
+    should predict each lineage's response because it is what alignment displaces.
+
+    Lacan's [6565] flags rate_and_magnitude's language inversion as the shape
+    most at risk on a saturating predictor. This re-run checks whether the
+    English results survive on lift.
+    """
+    from malignment import ch, charge
+    EP = endpoint_pairs()
+    print()
+    print("MAGNITUDE LIFT: same 9 outcomes regressed on per-lineage lift (en only)")
+    print("unit = the lineage; slope across prompts; %d endpoint pairs" % len(EP))
+    print("lift = T_base - frame (per lineage, not averaged)")
+
+    rows = ch.query(
+        "SELECT base, aligned, prompt, "
+        "sumIf(p_base - p_aligned, cls='faller') AS dep, "
+        "sumIf(p_aligned - p_base, cls='riser') AS arr, count() AS nm, "
+        "countIf(cls='faller') AS nf, countIf(cls='riser') AS nr, "
+        "sum(p_base) AS sb, sum(p_aligned) AS sa, "
+        "sumIf(p_base, cls='faller') AS fb "
+        "FROM movement WHERE cls != 'still' GROUP BY base, aligned, prompt")
+    mag = {}
+    base_of = {}
+    for r in rows:
+        lin = r["base"] + ">" + r["aligned"]
+        if lin in EP:
+            mag[(lin, r["prompt"])] = (float(r["dep"]), float(r["arr"]),
+                                       int(r["nm"]), int(r["nf"]), int(r["nr"]),
+                                       int(r["nf"]) - int(r["nr"]),
+                                       (float(r["dep"]) / int(r["nf"])) if int(r["nf"]) else None,
+                                       (float(r["arr"]) / int(r["nr"])) if int(r["nr"]) else None,
+                                       _tail_excess(float(r["sb"]), float(r["sa"]),
+                                                    float(r["dep"]), float(r["fb"])))
+            base_of[lin] = r["base"]
+
+    all_lifts = charge.lifts_per_lineage()
+    n_lift = 0
+    print()
+    print("  %-10s %4s %12s %8s %10s" % ("outcome", "n", "med slope", "up/dn", "p"))
+    for j, nm in ((0, "departed"), (1, "arrived"), (2, "n_movers"),
+                  (3, "n_fallers"), (4, "n_risers"), (5, "n_fall-n_rise"),
+                  (6, "mass/faller"), (7, "mass/riser"), (8, "tail_excess")):
+        by = collections.defaultdict(lambda: ([], []))
+        for (lin, pr), m in mag.items():
+            base = base_of.get(lin)
+            if not base:
+                continue
+            lft = all_lifts.get((pr, base))
+            if lft is None or m[j] is None:
+                continue
+            by[lin][0].append(lft)
+            by[lin][1].append(float(m[j]))
+            if j == 0:
+                n_lift += 1
+        sl = {}
+        for lin, (xs, ys) in by.items():
+            if len(xs) < min_prompts:
+                continue
+            s2 = slope(xs, ys)
+            if s2 is not None:
+                sl[lin] = s2
+        r = report(nm, sl)
+        if r:
+            p_, _t, med, up, dn, n = r
+            print("  %-10s %4d %+12.5f %4d/%-4d %10.6f%s"
+                  % (nm, n, med, up, dn, p_, "  <-" if p_ < 0.05 else ""))
+    print("\n  %d (lineage, prompt) pairs with per-lineage lift" % n_lift)
+    return 0
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser()
     ap.add_argument("--lang", default=None, choices=("en", "zh"))
+    ap.add_argument("--lift", action="store_true",
+                    help="re-run on charge.lift instead of k_transgressiveness (en only)")
     a = ap.parse_args(argv)
+    if a.lift:
+        return measure_lift()
     return measure([a.lang] if a.lang else ["en", "zh"])
 
 

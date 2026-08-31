@@ -1,0 +1,12 @@
+# Zamba2-7B
+Zyphra/Zamba2-7B
+Zyphra/Zamba2-7B-Instruct
+# Falcon-H1-1.5B-Base
+tiiuae/Falcon-H1-1.5B-Base
+tiiuae/Falcon-H1-1.5B-Instruct
+# Falcon-H1-7B-Base
+tiiuae/Falcon-H1-7B-Base
+tiiuae/Falcon-H1-7B-Instruct
+# falcon-mamba-7b
+tiiuae/falcon-mamba-7b
+tiiuae/falcon-mamba-7b-instruct

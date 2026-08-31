@@ -1,0 +1,30 @@
+# CT-LLM-Base
+m-a-p/CT-LLM-Base
+m-a-p/CT-LLM-SFT-DPO
+# neo_7b
+m-a-p/neo_7b
+m-a-p/neo_7b_instruct_v0.1
+# Llama-3.1-8B
+meta-llama/Llama-3.1-8B
+meta-llama/Llama-3.1-8B-Instruct
+# Mistral-7B-v0.1
+mistralai/Mistral-7B-v0.1
+mistralai/Mistral-7B-Instruct-v0.1
+# Teuken-7B-base-v0.6
+openGPT-X/Teuken-7B-base-v0.6
+openGPT-X/Teuken-7B-instruct-v0.6
+# MiniCPM5-1B-Base
+openbmb/MiniCPM5-1B-Base
+openbmb/MiniCPM5-1B
+# stablelm-2-1_6b
+stabilityai/stablelm-2-1_6b
+stabilityai/stablelm-2-1_6b-chat
+# Tanuki-8B-base-v1.0
+team-hatakeyama-phase2/Tanuki-8B-base-v1.0
+weblab-GENIAC/Tanuki-8B-dpo-v1.0
+# Falcon3-7B-Base
+tiiuae/Falcon3-7B-Base
+tiiuae/Falcon3-7B-Instruct
+# glm-4-9b-hf
+zai-org/glm-4-9b-hf
+zai-org/glm-4-9b-chat-hf

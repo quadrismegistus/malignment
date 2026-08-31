@@ -1,0 +1,45 @@
+# Aquila2-7B (tf457/tf457)
+BAAI/Aquila2-7B
+BAAI/AquilaChat2-7B
+# OLMo-2-0425-1B (tf457/tf457)
+allenai/OLMo-2-0425-1B
+allenai/OLMo-2-0425-1B-Instruct
+# OLMoE-1B-7B-0125 (tf457/tf457)
+allenai/OLMoE-1B-7B-0125
+allenai/OLMoE-1B-7B-0125-Instruct
+# Olmo-3-1025-7B (tf457/tf457)
+allenai/Olmo-3-1025-7B
+allenai/Olmo-3-7B-Instruct
+# Olmo-3-1125-32B (tf457/tf457)
+allenai/Olmo-3-1125-32B
+allenai/Olmo-3.1-32B-Instruct
+# Baichuan2-7B-Base (tf457/tf457)
+baichuan-inc/Baichuan2-7B-Base
+baichuan-inc/Baichuan2-7B-Chat
+# jais-family-6p7b (tf457/tf457)
+inceptionai/jais-family-6p7b
+inceptionai/jais-family-6p7b-chat
+# internlm2-base-7b (tf457/tf457)
+internlm/internlm2-base-7b
+internlm/internlm2-chat-7b
+# falcon-7b (tf457/tf457)
+tiiuae/falcon-7b
+tiiuae/falcon-7b-instruct
+# pythia-6.9b (default/torch26)
+EleutherAI/pythia-6.9b
+lomahony/eleuther-pythia6.9b-hh-dpo
+# rwkv-4-7b-pile (default/torch26)
+RWKV/rwkv-4-7b-pile
+RWKV/rwkv-raven-7b
+# CroissantLLMBase (torch26/default)
+croissantllm/CroissantLLMBase
+croissantllm/CroissantLLMChat-v0.1
+# deepseek-llm-7b-base (default/torch26)
+deepseek-ai/deepseek-llm-7b-base
+deepseek-ai/deepseek-llm-7b-chat
+# RedPajama-INCITE-Base-7B-v0.1 (torch26/default)
+togethercomputer/RedPajama-INCITE-Base-7B-v0.1
+togethercomputer/RedPajama-INCITE-7B-Chat
+# gemma-2-9b (bf16/bf16)
+google/gemma-2-9b
+google/gemma-2-9b-it

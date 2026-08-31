@@ -169,6 +169,61 @@ class Checkpoint:
             m = par[m]
         return m
 
+    # -- HF hub local paths --------------------------------------------------
+
+    def snapshot_dir(self):
+        """Local path to the HF hub snapshot for this checkpoint, or None.
+
+        Uses `try_to_load_from_cache` which resolves (repo, revision) to the
+        correct snapshot without globbing. This is the ONLY way to get a local
+        path that respects the revision pin — globbing picks by mtime or
+        alphabetical order and gets the wrong snapshot for any repo with
+        multiple refs (OLMo-3 has `main` and `stage1-step10000`).
+        """
+        from huggingface_hub import try_to_load_from_cache
+        for fname in ("config.json", "model.safetensors.index.json",
+                      "model.safetensors"):
+            path = try_to_load_from_cache(
+                self.repo, fname, revision=self.revision or None)
+            if path and path is not True:
+                return os.path.dirname(path)
+        return None
+
+    def shard_paths(self):
+        """Local paths to safetensors shards, in order. -> [path, ...]
+
+        Reads the index to enumerate shards rather than globbing, so it
+        returns exactly the shards for THIS revision.
+        """
+        snap = self.snapshot_dir()
+        if not snap:
+            return []
+        idx_path = os.path.join(snap, "model.safetensors.index.json")
+        if os.path.exists(idx_path):
+            import json
+            idx = json.load(open(idx_path))
+            shards = sorted(set(idx.get("weight_map", {}).values()))
+            return [os.path.join(snap, s) for s in shards]
+        single = os.path.join(snap, "model.safetensors")
+        if os.path.exists(single):
+            return [single]
+        return []
+
+    def weight_index(self):
+        """{param_name: shard_filename} from the safetensors index, or {}.
+
+        For partial reads: find which shard holds `lm_head.weight` or
+        `model.norm.weight` without loading the model.
+        """
+        snap = self.snapshot_dir()
+        if not snap:
+            return {}
+        idx_path = os.path.join(snap, "model.safetensors.index.json")
+        if not os.path.exists(idx_path):
+            return {}
+        import json
+        return json.load(open(idx_path)).get("weight_map", {})
+
     # -- the store -----------------------------------------------------------
 
     @property

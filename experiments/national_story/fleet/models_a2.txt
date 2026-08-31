@@ -1,0 +1,30 @@
+# TinyLlama-1.1B-intermediate-step-1431k-3T
+TinyLlama/TinyLlama-1.1B-intermediate-step-1431k-3T
+TinyLlama/TinyLlama-1.1B-Chat-v1.0
+# Olmo-Hybrid-7B
+allenai/Olmo-Hybrid-7B
+allenai/Olmo-Hybrid-Instruct-DPO-7B
+# bloom-7b1
+bigscience/bloom-7b1
+bigscience/bloomz-7b1
+# mpt-7b
+gl198976/mpt-7b
+gl198976/mpt-7b-instruct
+# recurrentgemma-9b
+google/recurrentgemma-9b
+google/recurrentgemma-9b-it
+# llama-7b
+huggyllama/llama-7b
+PKU-Alignment/beaver-7b-v1.0
+# granite-3.0-8b-base
+ibm-granite/granite-3.0-8b-base
+ibm-granite/granite-3.0-8b-instruct
+# kanana-1.5-8b-base
+kakaocorp/kanana-1.5-8b-base
+kakaocorp/kanana-1.5-8b-instruct-2505
+# kanana-2-3b-base
+kakaocorp/kanana-2-3b-base
+kakaocorp/kanana-2-3b-instruct
+# llm-jp-3-7.2b
+llm-jp/llm-jp-3-7.2b
+llm-jp/llm-jp-3-7.2b-instruct3

@@ -1,0 +1,30 @@
+# Yi-1.5-9B
+01-ai/Yi-1.5-9B
+01-ai/Yi-1.5-9B-Chat
+# salamandra-7b
+BSC-LT/salamandra-7b
+BSC-LT/salamandra-7b-instruct
+# pythia-2.8b
+EleutherAI/pythia-2.8b
+ContextualAI/archangel_sft-dpo_pythia2-8b
+# SmolLM2-360M
+HuggingFaceTB/SmolLM2-360M
+HuggingFaceTB/SmolLM2-360M-Instruct
+# SmolLM3-3B-Base
+HuggingFaceTB/SmolLM3-3B-Base
+HuggingFaceTB/SmolLM3-3B
+# Amber
+LLM360/Amber
+LLM360/AmberSafe
+# Lucie-7B
+OpenLLM-France/Lucie-7B
+OpenLLM-France/Lucie-7B-Instruct-v1.1
+# Qwen2.5-0.5B
+Qwen/Qwen2.5-0.5B
+Qwen/Qwen2.5-0.5B-Instruct
+# Qwen2.5-7B
+Qwen/Qwen2.5-7B
+Qwen/Qwen2.5-7B-Instruct
+# Qwen3-8B-Base
+Qwen/Qwen3-8B-Base
+Qwen/Qwen3-8B

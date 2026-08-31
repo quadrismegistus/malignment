@@ -123,12 +123,16 @@ def load(lang, want=None):
                     break
             if not ok:
                 continue
-            rows.append((v[ix["word"]], d, y, pb, x))
+            rows.append((v[ix["word"]], d, y, pb, x, v[ix["prompt"]]))
     return rows, feats
 
 
-def fit_eval(rows, feats, folds, seed=20260825):
-    """GroupKFold on word. -> {model: auc} over the pooled held-out predictions."""
+def fit_eval(rows, feats, folds, scene_vals=None, seed=20260825):
+    """GroupKFold on word. -> {model: auc} over the pooled held-out predictions.
+
+    `scene_vals`: optional array of per-row scene ratings. When present, adds
+    scene-only, named+scene, and scene+p models to the comparison.
+    """
     import numpy as np
     words = sorted({r[0] for r in rows})
     rng = np.random.default_rng(seed)
@@ -141,15 +145,18 @@ def fit_eval(rows, feats, folds, seed=20260825):
     w = [r[0] for r in rows]
     f = np.array([fold_of[x] for x in w])
 
-    #: a word's majority direction from its OTHER cells -- the reachable benchmark
     by = collections.defaultdict(lambda: [0, 0])
     for wi, yi in zip(w, y):
         by[wi][0] += yi
         by[wi][1] += 1
     emp = np.array([(by[wi][0] - yi) / max(1, by[wi][1] - 1) for wi, yi in zip(w, y)])
 
+    models = [("named", None), ("named_p", None), ("logp", None)]
+    if scene_vals is not None:
+        models += [("scene", None), ("named+scene", None), ("scene+p", None)]
+
     out = {}
-    preds = {k: np.zeros(len(y)) for k in ("named", "named_p", "logp")}
+    preds = {k: np.zeros(len(y)) for k, _ in models}
     for k in range(folds):
         tr, te = f != k, f == k
         if tr.sum() < 50 or te.sum() < 20:
@@ -158,11 +165,19 @@ def fit_eval(rows, feats, folds, seed=20260825):
         sd[sd == 0] = 1.0
         Z = (X - mu) / sd
         lp = np.log(np.clip(pb, 1e-12, None)).reshape(-1, 1)
-        Zp = np.hstack([Z, (lp - lp[tr].mean()) / (lp[tr].std() or 1.0)])
-        for name, M in (("named", Z), ("named_p", Zp),
-                        ("logp", (lp - lp[tr].mean()) / (lp[tr].std() or 1.0))):
+        lp_n = (lp - lp[tr].mean()) / (lp[tr].std() or 1.0)
+        Zp = np.hstack([Z, lp_n])
+
+        build = [("named", Z), ("named_p", Zp), ("logp", lp_n)]
+        if scene_vals is not None:
+            sc = scene_vals.reshape(-1, 1)
+            sc_n = (sc - sc[tr].mean()) / (sc[tr].std() or 1.0)
+            build += [("scene", sc_n),
+                      ("named+scene", np.hstack([Z, sc_n])),
+                      ("scene+p", np.hstack([sc_n, lp_n]))]
+
+        for name, M in build:
             A = np.hstack([M[tr], np.ones((tr.sum(), 1))])
-            #: ridge, because 17 correlated norms on a binary target overfit a fold
             beta = np.linalg.solve(A.T @ A + 1.0 * np.eye(A.shape[1]), A.T @ y[tr])
             preds[name][te] = np.hstack([M[te], np.ones((te.sum(), 1))]) @ beta
     for name, v in preds.items():
@@ -187,25 +202,71 @@ def main(argv=None):
                          "Warriner or Brysbaert columns at all -- without it a "
                          "cross-language difference is confounded with a 12-vs-7 "
                          "feature-set difference.")
+    ap.add_argument("--split-by", default="dose", choices=("dose", "lift"),
+                    help="dose = k_transgressiveness (the level); "
+                         "lift = charge.lift (dose - frame, the INCREMENT)")
+    ap.add_argument("--scene", action="store_true",
+                    help="add charge.scene as an in-context predictor alongside norms")
     a = ap.parse_args(argv)
 
     rows, feats = load(a.lang, a.features)
     if not rows:
         sys.exit("no rows for lang=%s" % a.lang)
     import numpy as np
-    dose = np.array([r[1] for r in rows])
-    cut = float(np.median(dose))
+
+    if a.split_by == "lift":
+        from malignment import charge
+        lifts = charge.lifts()
+        new_rows, split_vals = [], []
+        for r in rows:
+            lf = lifts.get(r[5])  # r[5] is prompt
+            if lf is not None:
+                new_rows.append(r)
+                split_vals.append(lf)
+        print("  %d of %d rows have lift values" % (len(new_rows), len(rows)))
+        rows = new_rows
+    else:
+        split_vals = [r[1] for r in rows]
+
+    dose_arr = np.array(split_vals)
+    cut = float(np.median(dose_arr))
+    split_label = "lift (dose - frame)" if a.split_by == "lift" else "dose (k_transgressiveness)"
     print("=" * 92)
-    print("P's QUESTION UNDER DOSE  --  lang=%s, %d moving cells, %d words, %d norms"
-          % (a.lang, len(rows), len({r[0] for r in rows}), len(feats)))
+    print("P's QUESTION UNDER %s  --  lang=%s, %d moving cells, %d words, %d norms"
+          % (a.split_by.upper(), a.lang, len(rows), len({r[0] for r in rows}), len(feats)))
     print("=" * 92)
-    print("  dose = base-arm k_transgressiveness; median split at %.4f" % cut)
+    print("  split = %s; median split at %.4f" % (split_label, cut))
     print("  features: %s" % ", ".join(feats))
 
-    lo = [r for r in rows if r[1] <= cut]
-    hi = [r for r in rows if r[1] > cut]
+    # --- scene ratings as in-context predictor ---
+    scene_map = {}
+    if a.scene:
+        from malignment import charge
+        for r in rows:
+            pr = r[5]  # prompt
+            if pr not in scene_map:
+                scene_map[pr] = charge.scene(pr)
 
-    #: THE SHARED-WORD SET -- the control. Without it this measures vocabulary.
+    def scene_array(part):
+        """Scene rating per row, or None if --scene not given."""
+        if not a.scene:
+            return None
+        import numpy as np
+        vals = []
+        for r in part:
+            sc = scene_map.get(r[5], {})
+            s = sc.get(r[0])  # r[0] = word
+            vals.append(s if s is not None else float("nan"))
+        arr = np.array(vals)
+        valid = ~np.isnan(arr)
+        if valid.sum() < len(arr) * 0.5:
+            return None
+        arr[~valid] = np.nanmean(arr)
+        return arr
+
+    lo = [r for r, v in zip(rows, split_vals) if v <= cut]
+    hi = [r for r, v in zip(rows, split_vals) if v > cut]
+
     cl = collections.Counter(r[0] for r in lo)
     ch_ = collections.Counter(r[0] for r in hi)
     shared = {w for w in cl if cl[w] >= a.min_cells and ch_[w] >= a.min_cells}
@@ -213,35 +274,56 @@ def main(argv=None):
     if len(shared) < 50:
         print("  TOO FEW for the primary test; lower --min-cells or widen the corpus")
 
+    has_scene = a.scene
     def block(title, L, H, note=""):
         print("\n" + "-" * 92)
         print("  %s%s" % (title, note))
         print("-" * 92)
-        print("  %-12s %10s %10s %10s   %s"
-              % ("stratum", "named", "named+p", "log p_base", "emp_word (reachable)"))
+        hdr = "  %-12s %10s %10s %10s" % ("stratum", "named", "named+p", "log p_base")
+        if has_scene:
+            hdr += " %10s %10s %10s" % ("scene", "named+sc", "scene+p")
+        hdr += "   %s" % "emp_word"
+        print(hdr)
         res = {}
-        for nm, part in (("LOW dose", L), ("HIGH dose", H)):
+        for nm, part in (("LOW", L), ("HIGH", H)):
             if len(part) < 200:
                 print("  %-12s  too few cells (%d)" % (nm, len(part)))
                 continue
-            r = fit_eval(part, feats, a.folds)
+            sv = scene_array(part)
+            r = fit_eval(part, feats, a.folds, scene_vals=sv)
             res[nm] = r
-            print("  %-12s %10.4f %10.4f %10.4f   %10.4f      n=%d, %d words, %.0f%% risers"
-                  % (nm, r["named"], r["named_p"], r["logp"], r["emp_word"],
-                     r["_n"], r["_words"], 100 * r["_pos"]))
+            line = "  %-12s %10.4f %10.4f %10.4f" % (nm, r["named"], r["named_p"], r["logp"])
+            if has_scene and "scene" in r:
+                line += " %10.4f %10.4f %10.4f" % (r["scene"], r["named+scene"], r["scene+p"])
+            line += "   %10.4f      n=%d, %d words" % (r["emp_word"], r["_n"], r["_words"])
+            print(line)
         if len(res) == 2:
-            l, h = res["LOW dose"], res["HIGH dose"]
-            print("\n  HIGH minus LOW      %+9.4f %+9.4f %+9.4f   %+10.4f"
-                  % (h["named"] - l["named"], h["named_p"] - l["named_p"],
-                     h["logp"] - l["logp"], h["emp_word"] - l["emp_word"]))
-            #: P's quantity: the share of the reachable headroom over log p that the
-            #: names recover. Computed per stratum so the two are comparable.
+            l, h = res["LOW"], res["HIGH"]
+            diff = "\n  HIGH-LOW          %+9.4f %+9.4f %+9.4f" % (
+                h["named"] - l["named"], h["named_p"] - l["named_p"],
+                h["logp"] - l["logp"])
+            if has_scene and "scene" in l:
+                diff += " %+9.4f %+9.4f %+9.4f" % (
+                    h.get("scene", 0) - l.get("scene", 0),
+                    h.get("named+scene", 0) - l.get("named+scene", 0),
+                    h.get("scene+p", 0) - l.get("scene+p", 0))
+            diff += "   %+10.4f" % (h["emp_word"] - l["emp_word"])
+            print(diff)
             for nm, r in (("LOW", l), ("HIGH", h)):
                 head = r["emp_word"] - r["logp"]
-                got = r["named_p"] - r["logp"]
-                print("  %-5s headroom over log p_base = %+.4f; named recovers %+.4f = %s"
-                      % (nm, head, got,
-                         ("%.0f%%" % (100 * got / head)) if abs(head) > 1e-6 else "n/a"))
+                got_named = r["named_p"] - r["logp"]
+                s = "  %-5s headroom = %+.4f; named %+.4f = %s" % (
+                    nm, head, got_named,
+                    ("%.0f%%" % (100 * got_named / head)) if abs(head) > 1e-6 else "n/a")
+                if has_scene and "scene+p" in r:
+                    got_scene = r["scene+p"] - r["logp"]
+                    got_both = r.get("named+scene", r["named_p"]) - r["logp"]
+                    s += "; scene %+.4f = %s; named+scene %+.4f = %s" % (
+                        got_scene,
+                        ("%.0f%%" % (100 * got_scene / head)) if abs(head) > 1e-6 else "n/a",
+                        got_both,
+                        ("%.0f%%" % (100 * got_both / head)) if abs(head) > 1e-6 else "n/a")
+                print(s)
         return res
 
     if len(shared) >= 50:

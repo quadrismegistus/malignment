@@ -211,3 +211,60 @@ def score_all(passages, m=None):
     score.surprisal(texts, m=m)
     score.drift(texts)
     return passages
+
+
+# ---------------------------------------------------------------------------
+# CH read accessors for gen_sequences
+# ---------------------------------------------------------------------------
+
+#: The corpora that hold free-generation passages. Forced-continuation rows
+#: (`forced_word != ''`) are a DIFFERENT instrument and must not be mixed in.
+PASSAGE_CORPORA = ("passage", "passage_framed")
+
+
+def passages(model, corpus=None, limit=None):
+    """Generated passages for a model from gen_sequences. Per-model chunking.
+
+        passages("allenai/OLMo-3-1025-7B")
+
+    **`forced_word=''` IS THE FILTER.** Without it, forced-continuation rows
+    contaminate free generations. This caused a 25.2% silent drop in one
+    experiment (syntagmatic_damage) when the key was wrong.
+
+    **`substringUTF8`, NOT `substring`.** The byte-based one cuts multibyte
+    characters in half and crashes the client with UnicodeDecodeError before
+    any row is read.
+
+    **PER-MODEL, NOT ALL AT ONCE.** The first version asked for all 1,523,368
+    rows at once and `ch.query` raised on an unterminated JSON line — about
+    1.6 GB of text through a single pipe. Per-model chunks are 40k rows at
+    the worst.
+    """
+    from . import ch
+    corpora = (corpus,) if corpus else PASSAGE_CORPORA
+    cs = ", ".join("'%s'" % c for c in corpora)
+    q = ("SELECT corpus, prompt, toString(sample_idx) AS sample_idx, text "
+         "FROM {db}.gen_sequences "
+         "WHERE corpus IN (%s) AND length(text) > 0 AND forced_word = '' "
+         "AND model = '%s'" % (cs, model.replace("'", "\\'")))
+    if limit:
+        q += " LIMIT %d" % int(limit)
+    return ch.query(q)
+
+
+def passage_stats(model, corpus=None):
+    """Aggregate stats for a model's passages.
+
+        passage_stats("allenai/OLMo-3-1025-7B")
+        -> {n, mean_tokens, median_tokens}
+    """
+    from . import ch
+    corpora = (corpus,) if corpus else PASSAGE_CORPORA
+    cs = ", ".join("'%s'" % c for c in corpora)
+    rows = ch.query(
+        "SELECT count() AS n, avg(n_tokens) AS mean_tokens, "
+        "median(n_tokens) AS median_tokens "
+        "FROM {db}.gen_sequences "
+        "WHERE corpus IN (%s) AND length(text) > 0 AND forced_word = '' "
+        "AND model = '%s'" % (cs, model.replace("'", "\\'")))
+    return rows[0] if rows else {"n": 0, "mean_tokens": 0, "median_tokens": 0}

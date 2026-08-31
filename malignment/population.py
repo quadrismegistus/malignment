@@ -41,7 +41,8 @@ RULE_VERSION = 3
 
 def population():
     """(bases, diagnostics). The rule from POPULATION.md, executed."""
-    from . import roster, ch
+    from . import roster
+    from . import ch
     d = roster.load()
     nodes = d.get("nodes") or {}
     edges = d.get("edges") or []
@@ -54,7 +55,7 @@ def population():
     #: it returns a different population, silently. v4 covers 23 models today
     #: against v3's full roster.
     have = {r["model"] for r in ch.query(
-        corpus.retable("SELECT DISTINCT model FROM {db}.twp_cells", RULE_VERSION))}
+        ch.retable("SELECT DISTINCT model FROM {db}.twp_cells", RULE_VERSION))}
     unmeasured = [m for m in cand if m not in have]
     bases = sorted(m for m in cand if m in have)
 
