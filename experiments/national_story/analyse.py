@@ -244,20 +244,179 @@ def homogeneity_contrast(G, cap=8):
     print('  Rettberg gpt-4o-mini: 0.116; our base median ~0.046 (16/16 below)')
 
 
+def narrativity_contrast(G, cap=25):
+    """Named characters, dialogue, narrated events, abstraction. Paired.
+
+    Built to test a hypothesis that came from reading ONE story: an aligned
+    Palestinian story with no characters and no events, beside an aligned
+    Israeli story with three characters and dialogue, suggested that aligned
+    models suppress incident for some demonyms. That is also what Rettberg's
+    reviewer Conti asserts about content filtering, from output alone.
+
+    **It refuted the hypothesis** -- Palestinian scored MORE characters and MORE
+    dialogue than Israeli in the same cell. Kept because the refutation is the
+    result, and because the reading was persuasive enough to need one.
+
+    `persons` counts DISTINCT spaCy PERSON entities, not mentions: a story that
+    repeats one name is not a story with many characters.
+    """
+    import re as _re
+    from malignment.pos import get_nlp
+    nlp = get_nlp()
+    ABSTR = _re.compile(r'\w+(tion|ment|ness|ity|ance|ence|ism|ship|hood)\b', _re.I)
+
+    def one(t):
+        d = nlp(t[:20000])                      #: spaCy's default max is 1e6; this
+        n = max(1, len([x for x in d if x.is_alpha]))   #: bounds cost, not correctness
+        return dict(
+            persons=1000 * len({e.text for e in d.ents if e.label_ == 'PERSON'}) / n,
+            dialogue=1000 * t.count('"') / 2 / max(1, len(t.split())),
+            past_verbs=1000 * sum(1 for x in d if x.tag_ == 'VBD') / n,
+            abstract=1000 * len(ABSTR.findall(t)) / max(1, len(t.split())))
+
+    lins = _paired(G)
+    F = ['persons', 'dialogue', 'past_verbs', 'abstract']
+    print('\n== NARRATIVITY (per 1,000 words; persons are DISTINCT names) ==')
+    print('%-30s %s' % ('lineage', '  '.join('%-15s' % f for f in F)))
+    d = {f: [] for f in F}
+    for L in lins:
+        line = '%-30s' % L.split('/')[-1][:28]
+        for f in F:
+            b = st.mean(one(t)[f] for t in texts(G, L, 'base')[:cap])
+            a = st.mean(one(t)[f] for t in texts(G, L, 'aligned')[:cap])
+            d[f].append(a - b)
+            line += '  %6.2f/%-6.2f' % (b, a)
+        print(line)
+    print()
+    for f in F:
+        _sign(d[f], f)
+
+
+def norms_contrast(G, cap=20):
+    """Every type-level norm in `fields.py`, aggregated over content TOKENS.
+
+    Warriner valence/arousal/dominance, Brysbaert concreteness, the k ratings
+    (vulgarity, transgressiveness, charge, register, bodily harm), Brooke
+    formality.
+
+    ## TWO DECLARED CHOICES, BECAUSE NEITHER IS THE OBVIOUS ONE
+
+    **Tokens, not types.** A norm mean over TYPES asks what vocabulary a story
+    draws on; over TOKENS it asks what the reader encounters. These differ most
+    exactly where this experiment looks -- a story repeating "village" forty
+    times has one type and forty encounters. Tokens is the reader's statistic and
+    the one reported; nothing stops a types version being added beside it.
+
+    **Coverage is printed and must be read.** Warriner covers ~69% of content
+    tokens and Brysbaert ~98%. A valence mean over 69% is a mean over the words
+    Warriner happens to contain, which skew concrete and common. If coverage
+    differs BETWEEN arms, the norm difference is partly a coverage difference,
+    which is why the columns sit next to each other rather than in a footnote.
+
+    ~1.3s per story, so `cap` is low by default.
+    """
+    from malignment import fields
+    lins = _paired(G)
+    KEYS = ['warriner_valence', 'warriner_arousal', 'warriner_dominance',
+            'brysbaert_concreteness', 'k_transgressiveness', 'k_charge',
+            'k_register_level', 'k_vulgarity', 'brooke_formality']
+    COV = ['warriner_coverage', 'brysbaert_coverage', 'k_coverage']
+    print('\n== TYPE-LEVEL NORMS (fields.py), over content TOKENS ==')
+    acc = {k: [] for k in KEYS}
+    cov = {c: [] for c in COV}
+    for L in lins:
+        vals = {}
+        for a in ('base', 'aligned'):
+            ns = [fields.norms(t) for t in texts(G, L, a)[:cap]]
+            ns = [n for n in ns if n and n.get('n_content')]
+            vals[a] = {k: st.mean(n[k] for n in ns if k in n) for k in KEYS + COV
+                       if any(k in n for n in ns)}
+        for k in KEYS:
+            if k in vals['base'] and k in vals['aligned']:
+                acc[k].append(vals['aligned'][k] - vals['base'][k])
+        for c in COV:
+            if c in vals['base'] and c in vals['aligned']:
+                cov[c].append((vals['base'][c], vals['aligned'][c]))
+    for k in KEYS:
+        if acc[k]:
+            _sign(acc[k], k)
+    print('  -- coverage (base / aligned), READ THIS BEFORE THE MEANS --')
+    for c in COV:
+        if cov[c]:
+            print('     %-24s %.3f / %.3f' % (c, st.mean(x[0] for x in cov[c]),
+                                              st.mean(x[1] for x in cov[c])))
+
+
+def semantic_fields_contrast(G, cap=20, top=12):
+    """USAS / RID / General Inquirer category share, over content-word TYPES.
+
+    TYPES here, unlike `norms_contrast`: a field question is "which regions of
+    the lexicon does this story reach into", and forty repetitions of one word
+    reach into one region once. The two functions differ deliberately and the
+    reason is the question, not convenience.
+    """
+    from malignment import fields
+    lins = _paired(G)
+    def cats(t):
+        out = collections.Counter()
+        types = {w.lower() for w in fields.TOKEN.findall(t)}
+        for w in types:
+            for c in (fields.usas(w) or set()):
+                out['usas:' + c] += 1
+            for c in (fields.rid(w) or set()):
+                out['rid:' + c] += 1
+        return out, max(1, len(types))
+    agg = {'base': collections.Counter(), 'aligned': collections.Counter()}
+    tot = {'base': 0, 'aligned': 0}
+    for L in lins:
+        for a in ('base', 'aligned'):
+            for t in texts(G, L, a)[:cap]:
+                c, n = cats(t)
+                agg[a].update(c)
+                tot[a] += n
+    print('\n== SEMANTIC FIELDS (share of content-word TYPES) ==')
+    print('%-34s %8s %8s %8s' % ('category', 'base', 'aligned', 'ratio'))
+    keys = {k for a in agg for k in agg[a]}
+    rows = []
+    for k in keys:
+        b = agg['base'][k] / max(1, tot['base'])
+        a = agg['aligned'][k] / max(1, tot['aligned'])
+        if b + a < 0.004:          #: too rare to read as anything but noise
+            continue
+        rows.append((a / b if b else float('inf'), k, b, a))
+    rows.sort(reverse=True)
+    for r, k, b, a in rows[:top]:
+        print('%-34s %7.4f %8.4f %8.2fx' % (k, b, a, r))
+    print('   ... %d categories between ...' % max(0, len(rows) - 2 * top))
+    for r, k, b, a in rows[-top:]:
+        print('%-34s %7.4f %8.4f %8.2fx' % (k, b, a, r))
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser()
     ap.add_argument('--min-words', type=int, default=150)
     ap.add_argument('--cap', type=int, default=40)
     ap.add_argument('--keep-escapes', action='store_true')
     ap.add_argument('--tropes', action='store_true')
+    ap.add_argument('--narrativity', action='store_true')
+    ap.add_argument('--norms', action='store_true')
+    ap.add_argument('--fields', action='store_true')
     a = ap.parse_args(argv)
     G = load_raw(min_words=a.min_words, drop_escapes=not a.keep_escapes)
     lins = _paired(G)
     print('%d complete lineages, %d texts (escapes %s)'
           % (len(lins), sum(len(v) for v in G.values()),
              'kept' if a.keep_escapes else 'dropped'))
-    tropes_contrast(G, cap=a.cap)
-    if not a.tropes:
+    only = a.tropes or a.narrativity or a.norms or a.fields
+    if a.tropes or not only:
+        tropes_contrast(G, cap=a.cap)
+    if a.narrativity:
+        narrativity_contrast(G)
+    if a.norms:
+        norms_contrast(G)
+    if a.fields:
+        semantic_fields_contrast(G)
+    if not only:
         whisper_contrast(G)
         homogeneity_contrast(G)
     return 0
