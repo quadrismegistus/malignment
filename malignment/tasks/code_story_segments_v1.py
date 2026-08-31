@@ -87,6 +87,10 @@ Rules, each a way to get this wrong:
     that is `description`, not `story`.
   - DO NOT SPLIT ON TOPIC. A story that moves to a new scene is still one story
     segment. Split only when the KIND of writing changes.
+  - MERGE ADJACENT SEGMENTS OF THE SAME KIND. If the text alternates between
+    two kinds many times, report the alternation as a few segments covering the
+    spans, not one segment per switch. More than about ten segments means you
+    are splitting on topic, not on kind.
   - IN ORDER, AND COVERING THE WHOLE TEXT. Segments run start to finish with no
     gaps. Most texts are ONE segment; do not invent transitions.
 
@@ -98,7 +102,12 @@ class Segment(BaseModel):
     first_words: str = Field(
         description="The first 6-10 words of this segment, copied VERBATIM "
                     "from the text. Checked against the input.")
+    #: DEFAULTED, not required. One text produced 102 segments and a single
+    #: missing `why` failed validation for the whole item, discarding a correct
+    #: segmentation over a missing annotation. The kind and the witness are the
+    #: measurement; the reason is commentary and must not be able to void it.
     why: str = Field(
+        default="",
         description="One clause naming what makes it this kind.")
 
 
