@@ -8,57 +8,55 @@ gpt-4o-mini, with the arm they lack: base against aligned. They have one aligned
 model and no counterfactual, which is why their second peer reviewer (Kang) can
 ask in print why the plot structure is there and the authors cannot answer.
 
-## THE HEADLINE: TEMPERATURE IS THE LEVER, top_p IS NOT
+## THE HEADLINE: THE TWO ARMS WANT OPPOSITE DECODERS
 
-Share of repeated 8-grams, n=5 per cell:
+Full 2x2 over temperature x top_p, 160 generations. USABLE means not salad
+(function-word share below 0.25), not looping (rep8 at or above 0.15), and no
+escape into assistant register.
 
-                        t0.8/p0.95   t0.8/p1.00   t1.0/p0.95
-    base     raw_plain       0.532        0.183        0.000
-    base     raw_count       0.466        0.559        0.099
-    aligned  raw_plain       0.075        0.166        0.008
-    aligned  raw_count       0.299        0.161        0.078
+                    t0.8/p1.0  t0.8/p.95  t1.0/p.95  t1.0/p1.0
+    base usable          2/10       2/10       8/10      10/10
+    base loop            8/10       8/10       2/10       0/10
+    base salad           0/10       0/10       0/10       0/10
 
-Raising temperature to 1.0 all but eliminates repetition IN BOTH ARMS.
+    aligned usable      26/30      24/30      24/30      11/30
+    aligned salad        0/30       0/30       3/30      17/30
+    aligned loop         4/30       5/30       1/30       1/30
 
-**`top_p=0.95` earns nothing, and mildly costs.** Holding temperature at 0.8,
-across all eight cells:
+    POOLED usable       28/40      26/40      32/40      21/40
 
-    more repetition at 0.95 in 6 of 8 cells
-    pooled median rep8   0.0129 @ p0.95    vs   0.0030 @ p1.00
-    escape               3/40             vs   2/40
-    eos                 26/40             vs  29/40
+**Base needs temperature 1.0 or it loops. Aligned needs top_p 0.95 at that
+temperature or it turns to salad.** Each parameter fixes one arm's failure and
+neither fixes both, so `t=1.0/p=0.95` is a compromise rather than an optimum --
+it is the best available at 80% usable, and it is still the worse setting for
+the aligned arm considered alone.
 
-Every axis points mildly against 0.95, which is the direction theory predicts --
-nucleus sampling concentrates mass and that is what promotes loops. Not
-significant (6 of 8 by sign test is p~0.29, and the two largest magnitudes go
-opposite ways), but it is the OPPOSITE of the stated rationale for including it,
-which was that it would fix the aligned arm's incoherence. It reduces neither
-escape nor non-termination.
+**top_p=0.95 does nothing at temperature 0.8** (more repetition in 6 of 8 cells,
+pooled median rep8 0.0129 against 0.0030) and everything at 1.0, where dropping
+it takes aligned salad from 3/30 to 17/30. An earlier version of this file
+concluded from the 0.8 contrast alone that top_p was inert. The cell that
+settles it, (1.0,1.0), was missing from the first sweep -- a hole in the design
+of this experiment, not in the run -- and was added on docket [6579].
 
-**AND THE DECODER THIS README RECOMMENDS SITS ON AN UNTESTED CELL.** The three
-decoders isolate `top_p` only at temperature 0.8, and temperature only at
-`top_p` 0.95. `(1.0, 1.0)` was never run, so `t=1.0/p=0.95` has never been
-compared against the setting that differs from it by the parameter now known to
-do nothing at 0.8. The counter-evidence is local and cross-machine: MPS at
-t=1.0/p=1.0 produced token salad at length, and that observation is NOT
-contaminated by the MPS defect, since the bug requires exact zeros and
-unfiltered sampling produces none. So 0.95 may do real work at 1.0 while doing
-nothing at 0.8, and this data cannot say. Asked on docket [6578]; 40
-generations settles it.
+## THE MEASURES DISAGREE BY CONSTRUCTION, AND MUST
 
-**This refutes the recommendation this experiment was built to confirm.** The
-plan was temperature 0.8, because it is Rettberg's setting, with `top_p=0.95`
-carrying coherence. 0.8 is what drives the base arm into loops. Running the
-roster on the planned setting would have produced a base arm made largely of
-repetition and, on the evidence of every other reading error in this pilot,
-reported it as a fact about base models.
+No single number separates the three failures. Validated against samples read by
+eye:
 
-The zero is real, not an empty-string artifact: generations of 352-2,652 words,
-`distinct3` 0.969-0.994, `rep16` also 0.000. The registers differ audibly.
+                     dist3         fn_en         rep8
+    good prose       0.881-0.969   0.408-0.443   0.000-0.016
+    repetition loop  0.432         0.555         0.478
+    token salad      0.997-0.998   0.098-0.162   0.000
 
-    t1.0  "...a cold, hard dread came over me as I"
-    t0.8  "...he was glad that the boy was so happy. He said that he had been
-           very foolish, and that"
+**Salad is maximally non-repetitive**, so rep8 and distinct3 score it PERFECT --
+the setting with the worst salad in this corpus (t1.0/p1.0, 17/30 aligned) has
+the lowest repetition of any cell. And the repetition loop carries the HIGHEST
+function-word share of anything measured, because a repeated clause is dense in
+function words. An analysis using either measure alone inverts.
+
+`distinct3` in particular has a healthy BAND and not a direction -- but the band
+is unreliable at the top, because long varied literary prose also scores 0.97+.
+Use `fn` for salad and `rep8` for loops; do not threshold `distinct3` alone.
 
 ## WHAT HELD
 
