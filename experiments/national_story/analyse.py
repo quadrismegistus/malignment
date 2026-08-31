@@ -122,7 +122,8 @@ def load_raw(min_words=150, drop_escapes=True):
             if (m['escape_address'] or m['escape_meta']
                     or m['escape_list'] or m['escape_emoji']):
                 continue
-        dm = re.match(r'An? (\w+) Story', r.get('prompt') or '')
+        #: optional so the no-demonym control cell is not silently dropped
+        dm = re.match(r'An? (?:(\w+) )?Story', r.get('prompt') or '')
         k = (lin[r['model']], arm[r['model']], dm.group(1) if dm else '?')
         h = hashlib.md5(t.encode()).hexdigest()
         if h in seen[k]:

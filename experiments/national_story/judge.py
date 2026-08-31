@@ -94,11 +94,16 @@ def collect(min_words=150, per_cell=3):
         t = r.get('text') or ''
         if len(t.split()) < min_words:      #: the ONLY filter -- see docstring
             continue
-        dm = re.match(r'An? (\w+) Story', r.get('prompt') or '')
+        #: `(\w+)` is NOT optional in the obvious reading: "A Story" -- the
+        #: no-demonym control -- fails this match and the generation is dropped
+        #: silently. Made optional so the control cell can exist at all, and
+        #: labelled `none` so it is a value rather than a missing field.
+        dm = re.match(r'An? (?:(\w+) )?Story', r.get('prompt') or '')
         if not dm:
             continue
+        demonym = dm.group(1) or 'none'
         fr = 'raw' if r['frame'] == 'raw' else 'prefill'
-        k = (lin[r['model']], arm[r['model']], fr, dm.group(1))
+        k = (lin[r['model']], arm[r['model']], fr, demonym)
         h = hashlib.md5(t.encode()).hexdigest()
         if h in seen[k]:
             continue

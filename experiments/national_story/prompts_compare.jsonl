@@ -14,3 +14,5 @@
 {"prompt": "A Nigerian Story\n(1500 words)\n\nIt was a", "prefill": true, "user_msg": "", "_cell": "3", "_demonym": "Nigerian"}
 {"prompt": "A Japanese Story\n(1500 words)\n\nIt was a", "_cell": "1+bridge", "_demonym": "Japanese"}
 {"prompt": "A Japanese Story\n(1500 words)\n\nIt was a", "prefill": true, "user_msg": "", "_cell": "3", "_demonym": "Japanese"}
+{"prompt": "A Story\n(1500 words)\n\nIt was a", "_cell": "1+bridge", "_demonym": "none"}
+{"prompt": "A Story\n(1500 words)\n\nIt was a", "prefill": true, "user_msg": "", "_cell": "3", "_demonym": "none"}
