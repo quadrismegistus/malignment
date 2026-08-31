@@ -18,9 +18,33 @@ Share of repeated 8-grams, n=5 per cell:
     aligned  raw_plain       0.075        0.166        0.008
     aligned  raw_count       0.299        0.161        0.078
 
-Raising temperature to 1.0 all but eliminates repetition IN BOTH ARMS. Holding
-temperature at 0.8 and moving `top_p` does nothing consistent -- base
-`raw_plain` gets WORSE and `raw_count` gets better.
+Raising temperature to 1.0 all but eliminates repetition IN BOTH ARMS.
+
+**`top_p=0.95` earns nothing, and mildly costs.** Holding temperature at 0.8,
+across all eight cells:
+
+    more repetition at 0.95 in 6 of 8 cells
+    pooled median rep8   0.0129 @ p0.95    vs   0.0030 @ p1.00
+    escape               3/40             vs   2/40
+    eos                 26/40             vs  29/40
+
+Every axis points mildly against 0.95, which is the direction theory predicts --
+nucleus sampling concentrates mass and that is what promotes loops. Not
+significant (6 of 8 by sign test is p~0.29, and the two largest magnitudes go
+opposite ways), but it is the OPPOSITE of the stated rationale for including it,
+which was that it would fix the aligned arm's incoherence. It reduces neither
+escape nor non-termination.
+
+**AND THE DECODER THIS README RECOMMENDS SITS ON AN UNTESTED CELL.** The three
+decoders isolate `top_p` only at temperature 0.8, and temperature only at
+`top_p` 0.95. `(1.0, 1.0)` was never run, so `t=1.0/p=0.95` has never been
+compared against the setting that differs from it by the parameter now known to
+do nothing at 0.8. The counter-evidence is local and cross-machine: MPS at
+t=1.0/p=1.0 produced token salad at length, and that observation is NOT
+contaminated by the MPS defect, since the bug requires exact zeros and
+unfiltered sampling produces none. So 0.95 may do real work at 1.0 while doing
+nothing at 0.8, and this data cannot say. Asked on docket [6578]; 40
+generations settles it.
 
 **This refutes the recommendation this experiment was built to confirm.** The
 plan was temperature 0.8, because it is Rettberg's setting, with `top_p=0.95`
