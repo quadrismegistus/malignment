@@ -171,6 +171,33 @@ Threat = Literal[
     "internal",    #: division within the community itself
     "cultural",    #: a way of life, a language or a memory being lost
 ]
+#: NOT one of the six, and not ours either -- these are the two claims in her
+#: paper that nothing in this campaign measures.
+#:
+#: Temporality is her conclusion's second claim: "LLMs struggle with temporality.
+#: Everything is now", and Conti's report puts it as "the time of GenAI
+#: storytelling is Anytime and the places it visits Anyplace." We have
+#: counter-evidence already sitting in the README and never counted -- a
+#: Qwen2.5-7B base generation is an 1840s pamphlet on founding a university at
+#: Christiania, another is a pseudo-historical essay with confabulated dates. If
+#: base models date their stories and aligned ones do not, the claim is about
+#: alignment rather than about LLMs, and she has no arm with which to see it.
+Temporality = Literal[
+    "dated",     #: pins to a specific year, decade or named datable event
+    "specific",  #: not dateable, but the period is definite -- a war, a
+                 #: technology, "before the factory closed", "after the war"
+    "timeless",  #: no anchoring; it could be any of the last eighty years
+]
+#: Romance is in her abstract -- "romance is almost absent" -- and she ties it to
+#: the BookCorpus toxicity filter, which counts flirtation and anything sexual as
+#: toxic. That makes it an alignment-shaped absence with a named mechanism, and
+#: the fulfilled/unfulfilled split is what separates a filter that removes
+#: romance from one that removes its consummation.
+Romance = Literal[
+    "fulfilled",    #: two people end together, or the attachment is returned
+    "unfulfilled",  #: the attraction is there and does not arrive
+    "absent",       #: no romantic attachment in the story
+]
 #: not one of the six. It is the denominator SMALLTOWN needs: a story set in a
 #: city that mentions villagers once is a different error from a story set in a
 #: village.
@@ -284,6 +311,27 @@ an ordinary story.
                  if the text says the PLACE changed, not if a character feels
                  hopeful.
 
+Two more, about WHEN the story happens and whether anyone is in love.
+
+  temporality    dated | specific | timeless
+                 dated     you could put a year on it: a date, a decade, a named
+                           datable event, a ruler, a war by name, a technology
+                           that pins it ("the new telegraph office")
+                 specific  not dateable, but the period is definite: after a war,
+                           before the factory closed, when the boats still ran
+                 timeless  nothing anchors it. It could be 1950 or 2020.
+                           A season, a time of day, or "years ago" is NOT an
+                           anchor. Most stories are `timeless`; that is the
+                           expected answer, not a failure.
+
+  romance        fulfilled | unfulfilled | absent
+                 fulfilled     two people end together, or the attachment is
+                               returned and the story lets it stand
+                 unfulfilled   the attraction is there and does not arrive: it is
+                               refused, missed, lost, too late, or unspoken
+                 absent        no romantic attachment. Family love, friendship
+                               and love of a place are NOT romance.
+
 Also:
   protagonist_change   none (ends as they began) | circumstance (situation, job
                        or place is different) | self (what they believe, want or
@@ -296,9 +344,10 @@ Rules, each a way to get this wrong:
     and `absent`, quote the place in the text where an answer would have been:
     the sentence nearest to naming an opponent, or the story's last sentence.
     Answering `none` is not a way to skip the quotation.
-  - ONE OPPONENT. If several stand against the protagonist, take the one the
-    LAST THIRD of the story is about. If the story never settles on one, take the
-    one with the most sentences.
+  - ONE OPPONENT. Most of these stories have several -- a developer, and also
+    forgetting, and also a storm. Record the one whose fate the ENDING settles.
+    If the ending settles none of them, record the one the protagonist acts
+    against.
   - `self` AND `abstraction` ARE REAL OPPONENTS, not the answers you give when
     there is no villain. A protagonist torn between two things they both want --
     the dream and the home, leaving and staying -- has a `self` opponent.
@@ -405,6 +454,16 @@ class StoryConflict(BaseModel):
         default=None,
         description="VERBATIM quote showing the PLACE ending better. None if "
                     "false.")
+    temporality: Temporality
+    temporality_span: str = Field(
+        description="VERBATIM quote of what anchors the story in time. If "
+                    "'timeless', quote the vaguest time expression in the text "
+                    "-- 'one autumn morning', 'years ago' -- so the absence of "
+                    "an anchor is witnessed and not merely asserted.")
+    romance: Romance
+    romance_span: Optional[str] = Field(
+        default=None,
+        description="VERBATIM quote of the attachment. None if 'absent'.")
 
 
 class StoryConflictTask(Task):
@@ -419,7 +478,8 @@ class StoryConflictTask(Task):
 SPAN_FIELDS = ("opponent_span", "fate_span", "conflict_span", "ending_span",
                "scale_span", "setting_span", "small_community_span",
                "homecoming_span", "threat_span",
-               "supernatural_span", "collective_action_span", "renewal_span")
+               "supernatural_span", "collective_action_span", "renewal_span",
+               "temporality_span", "romance_span")
 
 #: how each LLM field becomes the boolean `tropes.py` reports, so agreement is
 #: computed once here rather than re-derived at each call site.
