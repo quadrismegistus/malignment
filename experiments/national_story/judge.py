@@ -44,7 +44,7 @@ KEEP_FIRST, DROP_WHEN_DUP = '7802ca3c31ae', 'b1d15d1f291d'
 
 
 def collect(min_words=150, per_cell=3):
-    """-> [(lineage, arm, frame, demonym, text)], balanced across demonyms."""
+    """-> [(lineage, arm, frame, demonym, text, model)], demonym-balanced."""
     from malignment import roster
     #: `endpoints()` RETURNS ONE ALIGNED MODEL PER BASE. It is the right call for
     #: a paired two-arm contrast and the wrong one for deciding what to judge:
@@ -103,11 +103,16 @@ def collect(min_words=150, per_cell=3):
         if h in seen[k]:
             continue
         seen[k].add(h)
-        cells[k].append(t)
+        #: THE MODEL TRAVELS WITH THE TEXT. Cells are keyed by lineage, so
+        #: without this every rung of a lineage collapses into one `aligned`
+        #: bucket -- the six Tulu-3 ablations become indistinguishable from each
+        #: other and from Llama-3.1-8B-Instruct, which is the entire question
+        #: those checkpoints exist to answer.
+        cells[k].append((t, r['model']))
     out = []
     for k, v in sorted(cells.items()):
-        for t in v[:per_cell]:
-            out.append(k + (t,))
+        for t, m in v[:per_cell]:
+            out.append(k + (t, m))
     return out
 
 
@@ -121,12 +126,13 @@ def main(argv=None):
     a = ap.parse_args(argv)
 
     items = collect(a.min_words, a.per_cell)
-    cells = {(L, ar, fr) for L, ar, fr, _, _ in items}
-    print('%d texts, %d cells, %d lineages'
-          % (len(items), len(cells), len({L for L, _, _, _, _ in items})))
+    cells = {(L, ar, fr) for L, ar, fr, _, _, _ in items}
+    print('%d texts, %d cells, %d lineages, %d models'
+          % (len(items), len(cells), len({L for L, *_ in items}),
+             len({m for *_, m in items})))
     print('median words %.0f, total ~%.1fM words'
-          % (st.median(len(t.split()) for *_, t in items),
-             sum(len(t.split()) for *_, t in items) / 1e6))
+          % (st.median(len(t.split()) for *_, t, _m in items),
+             sum(len(t.split()) for *_, t, _m in items) / 1e6))
     if a.dry:
         return 0
 
@@ -137,14 +143,14 @@ def main(argv=None):
     #: the harness does `errors[i] = {...}`, so a bare [] raises IndexError on
     #: the FIRST failure and takes that item down with it. A dict indexes freely.
     errs = {}
-    res = task.map([t for *_, t in items], num_workers=a.workers,
+    res = task.map([t for *_, t, _m in items], num_workers=a.workers,
                    verbose=True, errors=errs)
 
     fh = open(a.out, 'w')
     ok_w = tot_w = 0
     G = collections.defaultdict(collections.Counter)
     N = collections.Counter()
-    for (L, ar, fr, dem, t), r in zip(items, res):
+    for (L, ar, fr, dem, t, mdl), r in zip(items, res):
         if r is None:
             N[(ar, fr)] += 0
             continue
@@ -154,11 +160,21 @@ def main(argv=None):
         G[(ar, fr)][r.overall] += 1
         if r.opens_as_story:
             G[(ar, fr)]['_opens_story'] += 1
+        #: id and text go IN THE FILE. The previous format wrote neither, so the
+        #: judged corpus had to be rebuilt by re-running collect() and zipping by
+        #: POSITION -- correct only while collect() is byte-stable, and silently
+        #: wrong the moment the stash grows. id is md5(text)[:12], which is what
+        #: the existing corpus uses, so the two remain joinable.
         fh.write(json.dumps(dict(
-            lineage=L, arm=ar, frame=fr, demonym=dem,
+            id=hashlib.md5(t.encode()).hexdigest()[:12],
+            model=mdl, lineage=L, arm=ar, frame=fr, demonym=dem,
             n_words=len(t.split()), overall=r.overall,
             opens_as_story=r.opens_as_story,
-            witnesses_ok=o, witnesses_total=tw,
+            #: `pure_story` is the gate every instrument downstream uses: the
+            #: whole text is narrative, not merely narrative at the top.
+            pure_story=(r.overall == 'story'
+                        and all(s.kind == 'story' for s in r.segments)),
+            witnesses_ok=o, witnesses_total=tw, text=t,
             segments=[dict(kind=s.kind, first_words=s.first_words, why=s.why)
                       for s in r.segments])) + '\n')
     fh.close()
