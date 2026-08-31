@@ -229,6 +229,43 @@ def main(argv=None):
                        (r['id'], 'judge_v1', 'segment', 'kind', seg.get('kind'),
                         loc[0] if loc else None, loc[1] if loc else None,
                         int(loc is not None), q))
+    #: A SELECTED TABLE MUST SAY SO. Every row here already passed the
+    #: pure-story gate, so there is no `pure_story` column to filter on and a
+    #: consumer serving all rows is correct -- but nothing in the file said that,
+    #: and a reader who cannot see a filter assumes there was none. The rates in
+    #: this table are conditional on a gate whose survival rate runs from 2% to
+    #: 95% by model, which is exactly the kind of thing that has to travel with
+    #: the data rather than in a message.
+    db.execute('CREATE TABLE meta (key TEXT PRIMARY KEY, value TEXT)')
+    for k, v in [
+        ('gate', 'pure_story: judge overall == story AND every segment == story'),
+        ('gate_applied', 'upstream, in conflict.py. EVERY row here is a pure '
+                         'story; there is no pure_story column and none is needed'),
+        ('gate_min_words', '200'),
+        ('gate_max_words', 'none (an earlier 2000-word cap was removed: it cut '
+                           '34.9% of base pure stories against 9.1% of aligned)'),
+        ('gate_survival_warning', 'the pure-story rate is NOT uniform -- 52% for '
+                                  'aligned/raw against 73% for aligned/prefill, '
+                                  'and 2% to 95% across models. Rates computed '
+                                  'over this table are conditional on it'),
+        ('frames', 'raw = bare paratext; prefill = same paratext inside a chat '
+                   'turn wrapper. ORTHOGONAL to arm; do not pool'),
+        ('arms', 'base = pretrained checkpoint; aligned = any post-trained '
+                 'member of the same lineage'),
+        ('model_vs_lineage', 'lineage is the BASE checkpoint; model is the '
+                             'actual one. One lineage carries several aligned '
+                             'rungs. Group by model when the rung matters'),
+        ('source_annotations', version),
+        ('source_corpus', os.path.basename(CORPUS)),
+        ('n_stories', str(n)),
+        ('n_spans', str(nsp)),
+        ('spans_located_pct', '%.1f' % (100 * nloc / max(1, nsp))),
+        ('span_located_0_means', 'the annotator paraphrased instead of quoting; '
+                                 'render as unhighlightable, never as a guessed '
+                                 'range'),
+    ]:
+        db.execute('INSERT INTO meta VALUES (?,?)', (k, v))
+
     db.execute('CREATE INDEX ix_spans_story ON spans (story_id)')
     db.execute('CREATE INDEX ix_spans_ann ON spans (annotation)')
 

@@ -111,6 +111,7 @@ def main(argv=None):
                     help='stories a lineage needs on BOTH sides to be counted')
     ap.add_argument('--exclude-low-dose', action='store_true')
     ap.add_argument('--alpha', type=float, default=0.05)
+    ap.add_argument('--json', help='also write every tested value to this path')
     a = ap.parse_args(argv)
 
     path = a.results if os.path.exists(a.results) else \
@@ -216,6 +217,46 @@ def main(argv=None):
               % (star, r['key'][:29], r['n'], r['a'], r['b'], r['mean_d'],
                  r['lo'], r['hi'], r['dz'], r['up'], r['dn'],
                  r['h_sign'], r['h_rank'], r['h_t']))
+    if a.json:
+        #: EVERY tested value, not only the significant ones. A consumer that
+        #: only receives the survivors cannot tell a null from a value that was
+        #: never tested, and will read absence as absence of effect.
+        outp = a.json if os.path.isabs(a.json) else os.path.join(HERE, a.json)
+        os.makedirs(os.path.dirname(outp), exist_ok=True)
+        payload = dict(
+            contrast=a.contrast, frame=('raw' if a.contrast == 'arm' else 'both'),
+            arm_a=lo, arm_b=hi, source=os.path.basename(path),
+            unit='lineage', min_stories_per_cell=a.min_per_cell,
+            n_values_tested=len(results),
+            correction='holm-bonferroni within each test family',
+            note=('p values are Holm-adjusted WITHIN this run. Adding a field '
+                  'changes every adjusted p, so they are only interpretable '
+                  'against this family. The unit is the LINEAGE: `up`+`down` is '
+                  'the number of lineages that moved, not stories.'),
+            values=[dict(field=r['key'].split('=')[0],
+                         value=r['key'].split('=', 1)[1],
+                         key=r['key'], n_lineages=r['n'],
+                         rate_a=round(r['a'], 3), rate_b=round(r['b'], 3),
+                         mean_diff=round(r['mean_d'], 3),
+                         ci_lo=round(r['lo'], 3), ci_hi=round(r['hi'], 3),
+                         dz=round(r['dz'], 3), up=r['up'], down=r['dn'],
+                         #: scipy hands back numpy floats and json.dump raises
+                         #: on them PARTWAY THROUGH, leaving a truncated file
+                         #: that looks written. Cast, and write atomically.
+                         p_sign_holm=float(r['h_sign']),
+                         p_wilcoxon_holm=float(r['h_rank']),
+                         p_t_holm=float(r['h_t']),
+                         significant=bool(min(r['h_sign'], r['h_rank'],
+                                              r['h_t']) < a.alpha),
+                         significant_all_three=bool(max(r['h_sign'], r['h_rank'],
+                                                        r['h_t']) < a.alpha))
+                    for r in results])
+        tmp = outp + '.tmp'
+        with open(tmp, 'w') as fh:
+            json.dump(payload, fh, indent=1)
+        os.replace(tmp, outp)           #: atomic; no half-written stats file
+        print('wrote %s (%d values)' % (outp, len(results)))
+
     sig = [r for r in results if min(r['h_sign'], r['h_rank'], r['h_t']) < a.alpha]
     print()
     print('%d of %d values significant at Holm-adjusted alpha=%.2f on either test.'
