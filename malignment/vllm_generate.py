@@ -72,6 +72,7 @@ import sys
 import time
 
 os.environ.setdefault("VLLM_USE_V1", "0")
+os.environ.setdefault("HF_HUB_ENABLE_HF_TRANSFER", "1")
 
 from . import generate as G
 from .generate import DECODER, gen_key, _passage, frame_label, DEFAULT
