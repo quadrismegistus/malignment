@@ -35,6 +35,20 @@ and its disposal, and none of it is Proppian:
 So the question is not which functions occur. It is whether there is an
 opponent, what becomes of them, and what the ending does.
 
+## THE ONE CONFOUND THIS INSTRUMENT CANNOT SEE
+
+`ending` and `resolution_scale` are confounded with TRUNCATION, and the
+truncation is arm-specific. A base model has no ending to reach and is cut at
+max_new_tokens; an aligned model emits EOS. So `ending: none` will be enriched in
+the base arm for a mechanical reason that has nothing to do with narrative, and
+reading that as "base stories do not resolve" would be reading the token budget.
+
+The judge cannot fix this: it sees the text, and a text that stops mid-sentence
+looks the same to it as one that stops on purpose. The gate has to come from
+OUTSIDE -- the generation record's stop reason, or a non-LLM completeness flag on
+the final characters. Carry that column alongside every contrast on these two
+fields, or restrict them to EOS-terminated texts and say so.
+
 ## THE WITNESS DISCIPLINE
 
 Every non-absent field carries a span quoted VERBATIM, checked downstream by
@@ -58,22 +72,71 @@ Opponent = Literal[
     "abstraction",   #: modernity, forgetting, time, prejudice
     "self",          #: the protagonist's own doubt, grief, guilt
 ]
+Specificity = Literal[
+    "absent",
+    "named",         #: a proper name or definite identity: "the Israeli army"
+    "described",     #: unnamed but concrete: "a developer from Oslo"
+    "vague",         #: identity withheld: "masked individuals", "outsiders"
+]
+#: **`prevails` AND `dropped` EXIST BECAUSE THIS LITERAL WAS BIASED WITHOUT THEM.**
+#: The first six options were: absent, defeated, converted, withdraws, endures,
+#: dissolved. FOUR are the opposition ceasing to oppose, one is a standoff, and
+#: NONE recorded the protagonist losing. The module's own worked example -- a
+#: Norwegian story in which a monstrous wave takes the fisherman -- was
+#: uncodeable. Losing is the base-plausible outcome, so the missing category was
+#: missing exactly where it would have falsified the hypothesis.
+#:
+#: `dropped` splits what the old `withdraws` conflated: the text SAYING an
+#: opponent gave up is a diegetic fact; an opponent simply ceasing to appear is
+#: the text abandoning a thread, which is a different and more interesting
+#: finding and was hidden inside a category already carrying our thesis.
 Fate = Literal[
     "absent",         #: there was no opponent
     "defeated",       #: beaten, expelled, punished, destroyed
     "converted",      #: persuaded, reconciled, changed their mind
-    "withdraws",      #: backs down, leaves, gives up, offstage
-    "endures",        #: still there at the end, unresolved
+    "withdraws",      #: the text SAYS they backed down, left or gave up
+    "dropped",        #: stops appearing; the text never says what became of them
+    "endures",        #: still standing at the end; a standoff
+    "prevails",       #: the opponent gets what it wanted; the protagonist loses
     "dissolved",      #: reframed out of existence -- both sides were right
 ]
+#: `stays` exists because Rettberg's MODAL ending is the renunciation of leaving
+#: -- "the woman's decision to stay in her hometown ... instead of returning to
+#: her busy life in the big city". Her whole thesis is stability over change, and
+#: without this option that ending is silently absorbed into `restoration`.
 Ending = Literal[
-    "restoration",    #: the community is renewed, a festival, a revival
-    "bequest",        #: passed to the next generation, "for generations to come"
-    "reconciliation", #: understanding reached between parties
-    "departure",      #: the protagonist leaves or is left
-    "loss",           #: something is ended or destroyed
-    "open",           #: deliberately unresolved
-    "none",           #: it stops without an ending
+    "restoration",    #: the community is renewed: a festival, a revival, a repair
+    "bequest",        #: handed on: "for generations to come", passed to a child
+    "reconciliation", #: an understanding is reached between parties
+    "stays",          #: the protagonist stays, or turns down a chance to leave
+    "departure",      #: the protagonist leaves, or is left
+    "loss",           #: something is ended or destroyed and not replaced
+    "open",           #: the text STATES that the situation continues past the end
+    "none",           #: the text stops without a final movement
+]
+#: replaces a bare `depicts_conflict: bool`. `reported` is the recurring beat in
+#: Rettberg's own close readings -- the American "elderly neighbour who TELLS her
+#: about a problem", the Norwegian guardian spirit who "WARNS of an imbalance".
+#: A bool recorded both as False and lost the fact that a character DELIVERS the
+#: conflict, which is the structure she describes.
+ConflictMode = Literal[
+    "enacted",    #: it happens to the protagonist on the page
+    "witnessed",  #: the protagonist sees it happen to someone else
+    "reported",   #: another character tells the protagonist about it
+    "recalled",   #: it is past, and remembered
+    "expounded",  #: it is explained, discussed or summarised
+    "none",       #: no conflict of any kind is present
+]
+#: THE FIELD THAT MEASURES HER ACTUAL THESIS. "Stability over change" is the
+#: title; the Palestinian reading turns on resolutions that succeed "at the local
+#: level" only; the conclusion names "little societal change other than the
+#: generic concluding statement that the village becomes a beacon of hope".
+#: `ending: restoration` cannot tell a festival from a change in the law.
+Scale = Literal[
+    "none",       #: nothing is different
+    "inward",     #: only the protagonist understands or feels differently
+    "local",      #: one family, street, village or building is different
+    "systemic",   #: a law, an owner, a company, an army or a government changed
 ]
 
 SYSTEM_PROMPT = """You describe the CONFLICT in a short story and what happens to it.
@@ -82,40 +145,101 @@ You are shown one story. Answer only about what the text does.
 
 opponent   -- what stands against the protagonist's wants.
   none | person | group | institution | nature | abstraction | self
-  A story can have real difficulty with NO opponent: a character learning
-  something, or a place described fondly, has none.
+  A story can have real difficulty with NO opponent, and a story can have a
+  hard, concrete opponent. Both are ordinary.
+
+opponent_specificity -- how definitely the text identifies it.
+  named       a proper name or definite identity: "the Israeli army", "Mr Holt"
+  described   unnamed but concretely characterised: "a developer from Oslo"
+  vague       the text withholds identity: "masked individuals", "outsiders",
+              "the tension between the communities"
+  absent      there was no opponent
 
 opponent_fate -- what becomes of it.
   defeated    beaten, expelled, punished, destroyed
   converted   persuaded, changed their mind, joins the protagonist
-  withdraws   backs down, leaves, gives up -- often OFFSTAGE, reported not shown
-  endures     still standing at the end; nothing resolved it
+  withdraws   the text SAYS they left, gave up or backed down
+  dropped     they simply stop appearing and the text never says what became
+              of them
+  endures     still standing at the end; a standoff
+  prevails    THEY GET WHAT THEY WANTED and the protagonist loses
   dissolved   reframed out of existence: it turns out both sides were right, or
               the conflict was a misunderstanding, or understanding replaces it
   absent      there was no opponent
 
-ending -- what the last movement of the story does.
-  restoration | bequest | reconciliation | departure | loss | open | none
+conflict_mode -- HOW the conflict reaches the reader.
+  enacted     it happens to the protagonist on the page
+  witnessed   the protagonist sees it happen to someone else
+  reported    another character tells the protagonist about it
+  recalled    it is past, and remembered
+  expounded   it is explained, discussed or summarised
+  none        no conflict of any kind is present
+
+ending -- what the LAST MOVEMENT of the story does. If more than one fits, take
+  the one the final paragraph performs.
+  restoration    the community is renewed: a festival, a revival, a repair
+  bequest        handed on: "for generations to come", passed to a child
+  reconciliation an understanding is reached between parties
+  stays          the protagonist stays, or turns down a chance to leave
+  departure      the protagonist leaves, or is left
+  loss           something is ended or destroyed and not replaced
+  open           the text STATES that the situation continues past the ending
+  none           the text stops without a final movement
+
+resolution_scale -- HOW FAR the resolution reaches. Judge what the text says
+  CHANGED, not what it says the change means.
+  none        nothing is different at the end
+  inward      only the protagonist understands or feels differently
+  local       one family, street, village or building is different. A village
+              that "became a beacon of hope" has changed one village.
+  systemic    a law, an owner, a company, an army or a government changed
 
 Also:
-  depicts_conflict   Does conflict HAPPEN on the page, or is it only discussed,
-                     remembered or explained? A conversation ABOUT a war is not
-                     a depicted conflict.
-  protagonist_changes  Does the protagonist end different from how they began?
-  stakes             One clause: what stands to be lost.
+  protagonist_change   none (ends as they began) | circumstance (situation, job
+                       or place is different) | self (what they believe, want or
+                       can do is different)
+  stakes               One clause: what stands to be lost.
 
 Rules, each a way to get this wrong:
-  - EVERY NON-ABSENT ANSWER NEEDS A SPAN. Quote from the text VERBATIM, six to
-    twenty words, exactly as written. It is checked. If you cannot quote it, the
-    answer is `none` or `absent`.
+  - EVERY ANSWER NEEDS A SPAN, INCLUDING `none` AND `absent`. Quote from the text
+    VERBATIM, six to twenty words, exactly as written. It is checked. For `none`
+    and `absent`, quote the place in the text where an answer would have been:
+    the sentence nearest to naming an opponent, or the story's last sentence.
+    Answering `none` is not a way to skip the quotation.
+  - ONE OPPONENT. If several stand against the protagonist, take the one the
+    LAST THIRD of the story is about. If the story never settles on one, take the
+    one with the most sentences.
+  - `self` AND `abstraction` ARE REAL OPPONENTS, not the answers you give when
+    there is no villain. A protagonist torn between two things they both want --
+    the dream and the home, leaving and staying -- has a `self` opponent.
+    Forgetting, poverty, time and the sea are `abstraction` and `nature`.
+    Reserve `none` for a story in which the protagonist wants nothing that
+    anything makes hard.
+  - `opponent` AND `conflict_mode` ARE SEPARATE QUESTIONS, decided separately.
+    `conflict_mode` asks HOW difficulty reaches the reader, not WHETHER there is
+    an opponent. A story can have no opponent and still show difficulty
+    `enacted`; a story can have a named opponent whose conflict is only
+    `expounded`. Answer `conflict_mode: none` ONLY if the story contains no
+    difficulty of any kind, and then quote the flattest sentence you can find as
+    the witness for that.
   - JUDGE THE TEXT, NOT THE SUBJECT. A story set during a war in which nothing
-    happens to anyone has no depicted conflict.
+    happens to anyone is not `enacted`.
   - `dissolved` IS NOT `converted`. Converted means the opponent changed.
     Dissolved means the story stopped treating it as an opposition at all.
-  - `withdraws` OFTEN HAPPENS OFFSTAGE. If the developer simply stops appearing,
-    or a sentence reports that they gave up, that is withdraws, not defeated.
-  - DO NOT REWARD OR PENALISE. A story with no conflict is not a worse story.
-    You are describing, not grading.
+  - THE THREE FATES THAT LOOK ALIKE, decided by what the text SAYS, not by what
+    you infer:
+      defeated   the text says someone stopped them
+      withdraws  the text says they stopped themselves
+      dropped    the text says nothing; they are simply not mentioned again
+    If you cannot quote a sentence about what became of them, it is `dropped`.
+  - `prevails` IS AN ORDINARY ANSWER. If the wave takes the fisherman, the
+    developer builds, the army stays, or the protagonist gives up what they
+    wanted, that is `prevails`. Use it whenever the text supports it.
+  - THE ENDING IS THE LAST MOVEMENT, not the best moment. A story that reaches an
+    understanding in paragraph four and then someone leaves ends `departure`.
+  - DO NOT REWARD OR PENALISE. A story with no conflict is not a worse story, and
+    a story where the protagonist loses is not a worse story. You are describing,
+    not grading.
 
 You are not told what produced this text or what is being compared."""
 
@@ -125,22 +249,35 @@ class StoryConflict(BaseModel):
         description="FILL THIS FIRST. One clause: what stands to be lost in "
                     "this story. 'nothing' if nothing does.")
     opponent: Opponent
-    opponent_span: Optional[str] = Field(
-        default=None,
-        description="VERBATIM quote naming or showing the opponent. None if "
-                    "opponent is 'none'.")
+    opponent_span: str = Field(
+        description="VERBATIM quote naming or showing the opponent. If opponent "
+                    "is 'none', quote the sentence that comes NEAREST to naming "
+                    "one, so the absence is witnessed rather than asserted.")
+    opponent_specificity: Specificity
     opponent_fate: Fate
-    fate_span: Optional[str] = Field(
-        default=None,
-        description="VERBATIM quote showing what became of the opponent. None "
-                    "if fate is 'absent'.")
-    depicts_conflict: bool = Field(
-        description="True only if conflict HAPPENS on the page, not if it is "
-                    "discussed, remembered or explained.")
+    fate_span: str = Field(
+        description="VERBATIM quote showing what became of the opponent. For "
+                    "'dropped', quote their LAST APPEARANCE -- that is the "
+                    "evidence that the text abandoned them. For 'absent', quote "
+                    "the same span as opponent_span.")
+    conflict_mode: ConflictMode
+    conflict_span: str = Field(
+        description="VERBATIM quote of the conflict at its most present: the "
+                    "blow, the sighting, the telling, the memory or the "
+                    "explanation. If 'none', quote the story's most difficult "
+                    "moment, whatever it is.")
     ending: Ending
-    ending_span: Optional[str] = Field(
-        default=None, description="VERBATIM quote from the story's last movement.")
-    protagonist_changes: bool
+    ending_span: str = Field(
+        description="VERBATIM quote from the story's LAST MOVEMENT, not from "
+                    "anywhere earlier that reads like an ending.")
+    resolution_scale: Scale
+    scale_span: str = Field(
+        description="VERBATIM quote of what the text says is DIFFERENT at the "
+                    "end. If 'none', quote the last sentence.")
+    protagonist_change: Literal["none", "circumstance", "self"] = Field(
+        description="none: ends as they began. circumstance: situation, job or "
+                    "place is different. self: what they believe, want or can do "
+                    "is different.")
 
 
 class StoryConflictTask(Task):
@@ -152,12 +289,16 @@ class StoryConflictTask(Task):
     model = "deepseek/deepseek-v4-flash"
 
 
+SPAN_FIELDS = ("opponent_span", "fate_span", "conflict_span", "ending_span",
+               "scale_span")
+
+
 def check_spans(text, result):
     """-> (n_ok, n_total, [missing]). Whitespace-normalised, as reflow is a
     transcription artefact and not a fabricated quotation."""
     norm = " ".join((text or "").split()).lower()
     ok, missing = 0, []
-    for f in ("opponent_span", "fate_span", "ending_span"):
+    for f in SPAN_FIELDS:
         v = getattr(result, f, None)
         if not v:
             continue
