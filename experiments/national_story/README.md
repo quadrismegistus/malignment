@@ -140,21 +140,38 @@ computation: it runs the model over the whole text and slices the result, so a
 `if v.size < m: return None` silently drops anything shorter than m. At m=256
 that dropped 149 of 150 anchor passages and returned a confident mean over n=1.
 
-    RETTBERG gpt-4o-mini     2.49 bits/token
-    ours: aligned median     3.00
+    RETTBERG gpt-4o-mini     2.454 bits/token   n=437, her whole released set
+    ours: aligned/prefill    2.520              within 0.07 of her
+    ours: aligned/raw        2.838
     ------------------------------  every human corpus above this line
-    waking_narrative         3.30
-    dreams                   3.87
-    philosophy               3.92
-    ours: base median        4.18   <- inside the human range
-    literary_criticism       4.31
-    arxiv_abstracts          4.35
-    c20_fiction              4.37   <- most surprising text measured
+    waking_narrative         3.300
+    dreams                   3.870
+    philosophy               3.920
+    ours: base/raw           3.965   <- inside the human range
+    literary_criticism       4.310
+    arxiv_abstracts          4.350
+    c20_fiction              4.370   <- most surprising text measured
+
+Superseded numbers: an earlier version of this section read 2.49 / 3.00 / 4.18
+from a smaller regex-filtered sample. The table above is every pure story,
+5,941 texts including hers, and the arm contrast is stronger on it, not weaker.
 
 **Human short fiction is the least predictable text in the anchor**, above
 philosophy and above dream reports. Our BASE models sit inside the human range.
-Alignment moves them out of it: -0.87 bits/token, lower in 19 of 21 lineages.
-gpt-4o-mini is 1.88 bits below human fiction.
+Alignment moves them out of it:
+
+    lineage-paired, raw frame, 28 lineages
+    base 4.022 -> aligned 3.077        -0.946 bits/token
+    aligned LOWER in 27 of 28
+    p_sign 2.2e-07   p_wilcoxon 2.2e-08   p_t 1.1e-08
+
+gpt-4o-mini is 1.92 bits below human short fiction. The one lineage that moves
+the other way is Qwen2.5-0.5B, at +0.098.
+
+THE LADDER IS MONOTONE HERE TOO -- Llama-3.1-8B, raw frame:
+base 3.783, SFT-no-safety 3.253, SFT 3.032, SFT-no-wildchat 3.007, DPO 2.694,
+production Instruct 2.071. Every training stage lowers it and the endpoint is
+1.71 bits below its own base.
 
 The reference is `deepseek-llm-7b-base`, itself a base model, so it is worth
 asking whether it flatters base-model text. The direction argues against that: if
@@ -171,9 +188,24 @@ Length-free metrics only -- `score.py` certifies three, and the cumulative ones
 grow with sentence count, which would manufacture an arm difference from the
 length difference.
 
-    mean_pairwise  aligned LOWER in 15 of 21, median -0.0387
-    mean_drift     aligned LOWER in 17 of 21, median -0.0183
-    ordering       aligned HIGHER in 14 of 21, median +0.0144
+    28 lineages, paired, raw frame, every pure story
+    mean_pairwise   0.5179 -> 0.4899  -0.0280  LOWER in 25 of 28  p_w 1.9e-06
+    mean_drift      0.4597 -> 0.4374  -0.0223  LOWER in 23 of 28  p_w 1.5e-05
+    ordering       -0.0580 -> -0.0500 +0.0080 HIGHER in 21 of 28  p_w 0.0022
+
+    (superseded: 15 of 21, 17 of 21, 14 of 21 on the regex-filtered sample)
+
+AND RETTBERG DOES NOT EXTEND THIS ORDERING, WHICH SHE EXTENDS EVERYWHERE ELSE.
+Her mean_pairwise is 0.5047 -- ABOVE both our aligned cells and within 0.012 of
+our BASE. On surprisal she is the extreme point, 1.5 bits below our base and
+below every human corpus. On semantic dispersion she is not. Her sentences are
+individually easy to predict and still spread across a wide space.
+
+So SMOOTH and NARROW are separable, our aligned models compress both, and
+gpt-4o-mini compresses only the first. `alignment smooths` and `the semantic
+space shrinks` are not two views of one thing. Hold it loosely until cell 2
+exists: her frame and decoder differ from every cell of ours, and mean_pairwise
+may respond differently to an instruction prompt than to a paratext continuation.
 
 `mean_pairwise` is the mean distance between any two sentences of one story:
 "does this story occupy a small semantic space". Alignment shrinks it.
@@ -354,6 +386,88 @@ content, against an arm contrast significant on 29 of 98 annotation values.
 
 **One sentence, if only one survives:** alignment makes the setting more national
 and the feeling less national.
+
+## THE DEMONYM IMPORTS A THREAT, AND THE PACKAGE COMES WITH IT
+
+The no-demonym control -- `A Story\n(1500 words)\n\nIt was a`, everything else
+byte-identical -- ran on 101 models after being absent from the whole experiment.
+998 annotated. Paired WITHIN MODEL, aligned/prefill, 35 models with >=5 in both:
+
+    setting=city             45.6% -> 18.3%  -27.3   1 up 34 dn  p_w 1.2e-10
+    tradition                51.3% -> 32.4%  -18.9   6 up 29 dn  p_w 9.7e-06
+    nostalgia                41.1% -> 25.4%  -15.7   6 up 29 dn  p_w 0.00039
+    threat=none              76.6% -> 87.3%  +10.8  30 up  5 dn  p_w 2.1e-05
+    protagonist_change=self  56.8% -> 66.5%   +9.7  24 up 11 dn  p_w 0.016
+    mood=affirming           72.4% -> 63.4%   -9.0  10 up 24 dn  p_w 0.011
+    setting=village          20.4% -> 11.6%   -8.9   7 up 27 dn  p_w 0.00050
+    collective_action        24.1% -> 17.5%   -6.6  10 up 25 dn  p_w 0.0013
+
+**The demonym imports a threat.** `threat=none` is 87.3% without a nationality
+and 76.6% with, 30 models up and 5 down. Naming a nation summons something to be
+threatened by, and moves the story outward: without one the resolution is more
+inward (+7.0) and the protagonist changes in themselves more (+9.7).
+
+**And the village-and-tradition package is demonym-CONTINGENT in our models.**
+Remove the nationality and tradition, nostalgia, collective action and the
+affirming mood all fall with it.
+
+## HER CONTROL SAYS THE OPPOSITE, AND THE DIFFERENCE IS DOSE
+
+Her release contains the control she never reported: directory `XX`,
+Country_Name `Default`, prompt "Write a 1500 word potential story.", 50 stories.
+
+                        OURS control/demonym    HERS Default/demonym
+      tradition             32.4% / 51.3%          97.9% / 87.7%
+      renewal               11.8% / 15.7%          70.2% / 72.1%
+      mood=affirming        67.0% / 75.4%          97.9% / 98.5%
+      setting=village       11.8% / 20.1%          21.3% / 69.7%
+
+In hers ONLY the village moves; everything else is demonym-independent. The
+likeliest reading is ceiling rather than contradiction -- her tradition is 87.7
+and 97.9, her affirming 98.5 and 97.9, with no room to fall, against our 51 and
+32. She is far enough along the axis that the DEFAULT story is already the
+village story; our models still have to be asked for a nationality to write it.
+
+## RETTBERG'S OWN CORPUS THROUGH THIS INSTRUMENT
+
+437 of her stories annotated, our eight demonyms plus her control.
+
+                              RETTBERG   our aligned   our base
+      mood=affirming             98.4%        73.7%      13.2%
+      protagonist_change=self    98.4%        56.9%      25.2%
+      resolution_scale=local     68.9%        19.7%       5.0%
+      renewal                    71.9%        14.7%       2.3%
+      small_community            93.6%        46.6%      38.3%
+      tradition                  88.8%        51.7%      33.2%
+      ending=loss                 0.5%         2.0%       9.0%
+      opponent_fate=prevails      1.1%         3.3%      12.9%
+
+Not one field breaks the ordering. Her own readings are confirmed by an
+instrument built without them in view: resolution_scale is local 69%, inward 28%,
+SYSTEMIC 2%.
+
+THREE DIFFERENCES ARE CONFOUNDED WITH THE MODEL and this is NOT evidence about
+alignment dose: her prompt is an instruction where ours is a paratext
+continuation, t=0.8 against 1.0, and hers is a chat completion nearest our
+prefill cell. Cell 2 -- our models under her exact three conditions -- has never
+been run and is the only way to separate them. `prompts_rettberg.jsonl` holds
+those nine prompts.
+
+## THE STAGE ORDERING REPLICATES IN FOUR FAMILIES
+
+base -> SFT -> DPO -> production, raw frame:
+
+                       Olmo-3        OLMoE        Mistral      Llama-3.1-8B
+      mood=affirming 3 32 39 67    3 55 79 85   14 78 59 79    9 66 95 89
+      mood=unsettl. 68 26 11  2   27  8  0  0   42  3  8  1   32  5  1  0
+      resol.=none   86 52 49 25   65 39 23 28   75 22 38 44   74 40 31 17
+      protag=self   19 39 61 83   19 45 70 51   31 69 63 66   33 54 74 83
+
+`unsettling` is monotone down in all four; `affirming` runs 3-14% at base to
+67-89% at production in all four. What replicates is the STAGE ORDERING. None of
+the three new families carries data ablations, so the WildChat component claim
+still rests on Llama alone. Mistral is least clean and is the one family whose
+SFT and DPO rungs come from different third parties rather than one pipeline.
 
 ## WHAT "PURE STORY" DOES AND DOES NOT MEAN (read this before quoting the filter)
 
