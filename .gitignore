@@ -340,3 +340,9 @@ experiments/displacement/norm_change/results/
 experiments/national_story/*.jsonl
 !experiments/national_story/prompts_*.jsonl
 experiments/national_story/results/story_*.jsonl
+# conflict.sqlite is a SYMLINK to the data dir, with a machine-specific absolute
+# target -- committing it would hand everyone else a broken path. Recreate with
+#   ln -sfn ~/malignment-data/national_story/conflict.sqlite \
+#           experiments/national_story/conflict.sqlite
+# or just rebuild: python experiments/national_story/export_db.py
+experiments/national_story/conflict.sqlite
