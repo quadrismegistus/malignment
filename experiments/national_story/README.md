@@ -446,12 +446,81 @@ Not one field breaks the ordering. Her own readings are confirmed by an
 instrument built without them in view: resolution_scale is local 69%, inward 28%,
 SYSTEMIC 2%.
 
-THREE DIFFERENCES ARE CONFOUNDED WITH THE MODEL and this is NOT evidence about
-alignment dose: her prompt is an instruction where ours is a paratext
-continuation, t=0.8 against 1.0, and hers is a chat completion nearest our
-prefill cell. Cell 2 -- our models under her exact three conditions -- has never
-been run and is the only way to separate them. `prompts_rettberg.jsonl` holds
-those nine prompts.
+Three differences are confounded with the model there -- her prompt is an
+instruction where ours is a paratext continuation, t=0.8 against 1.0, and hers is
+a chat completion. CELL 2 HAS NOW BEEN RUN and separates them: 48 aligned models
+under her exact three conditions, `frame='rettberg'`.
+
+## CELL 2: HER PROMPT AND A COMPETENT MODEL REPRODUCE HER CORPUS
+
+                     base/raw  algn/raw  algn/pre  CELL 2   gpt-4o-mini
+    n                    1346      2538      2425     2367       390
+    renewal               2.3%     11.4%     15.7%    42.1%     72.1%
+    resolution=local      4.8%     16.1%     20.9%    44.2%     69.5%
+    setting=village      12.6%     16.3%     20.2%    41.0%     69.7%
+    small_community      38.3%     41.5%     48.0%    68.7%     93.8%
+    mood=affirming       12.7%     62.5%     75.5%    81.7%     98.5%
+
+Pooled, cell 2 sits about halfway. That average is misleading: the per-model gap
+from her ranges from 8 to 59 points and is largely SCALE (r = -0.55 with
+parameter count; under 2B mean gap 42.0, 2-8B 29.4, 8B and up 16.8). Among the
+big models it is a replication:
+
+    Qwen2.5-7B-Instruct      renewal 67.8 (her 72.1), local 71.2 (her 69.5),
+                             affirming 100.0 (her 98.5)      gap 8.2
+    Llama-3.1-Tulu-3-8B-DPO  renewal 83.3, local 82.1        gap 8.8  (OVERSHOOTS)
+
+**The village-and-tradition story is not a property of gpt-4o-mini.** It is what
+an instruction-prompted aligned model of sufficient capability writes when asked
+for a national story, and our paratext prompt was suppressing about half of it.
+
+Paired within model, prefill -> cell 2, 34 models, only prompt and decoder change:
+renewal +24.9 (32 up 2 dn, p_w 1.2e-09), local +22.0 (31/3), small_community
++20.3 (30/4), village +18.5 (28/6).
+
+TWO FIELDS GO THE OTHER WAY AND COST US SOMETHING. Under her setup our models
+have FEWER opponent=none (38.4 -> 25.6) and MORE conflict_mode=enacted (37.8 ->
+48.3). Her instruction prompt puts conflict BACK that our paratext prompt
+removes. So "alignment removes the opponent" is partly a fact about asking a
+model to continue "It was a" rather than asking it for a story. The ARM contrast
+is untouched -- base/raw against aligned/raw holds prompt, decoder and frame
+fixed -- but the reading that gpt-4o-mini shows "more alignment" is not.
+
+## SMOOTHING AND THE VILLAGE ARE DIFFERENT PHENOMENA
+
+Cell 2 separates two levers that her corpus had welded together.
+
+                          raw -> prefill    prefill -> rettberg
+    surprisal (bits)          -0.43              -0.03
+    renewal (points)           +1.3             +24.9
+    resolution=local           +4.8             +22.0
+
+**Surprisal answers to the chat wrapper. The village package answers to the
+instruction prompt.** They move independently. "Alignment smooths the text" and
+"alignment installs the village story" are not one finding seen twice.
+
+On surprisal cell 2 IS her: 2.383 against her 2.428, with individual models
+inside 0.004 bits (Tulu-3-SFT 2.432, neo_7b_instruct 2.442). Median over the
+>=7B cell-2 models 2.381. No residual "gpt-4o-mini is uniquely smooth".
+
+## THE ONE PLACE SHE IS GENUINELY UNLIKE US, AND CELL 2 MAKES IT WORSE
+
+                      surprisal  mean_pairwise
+    our base/raw          3.971         0.5169
+    our aligned/raw       2.846         0.4871
+    our aligned/prefill   2.417         0.4828
+    OUR CELL 2            2.383         0.4707
+    HER gpt-4o-mini       2.428         0.5051
+
+Her mean_pairwise is ABOVE every cell of ours, and cell 2 moves the WRONG WAY --
+0.4707, lower than our prefill, further from her. Her prompt and decoder do not
+produce her semantic spread, they reduce it. Median over the >=7B cell-2 models
+is 0.4695 and only ONE of 25 reaches her value.
+
+So she is the smoothest text in the experiment AND occupies more semantic space
+than any aligned cell we have. Smooth and narrow come apart in her and stay
+welded in ours. This was flagged as needing cell 2 before it could be trusted;
+cell 2 strengthened it instead of dissolving it.
 
 ## THE STAGE ORDERING REPLICATES IN FOUR FAMILIES
 
