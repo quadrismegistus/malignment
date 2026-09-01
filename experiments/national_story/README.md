@@ -160,10 +160,10 @@ from a smaller regex-filtered sample. The table above is every pure story,
 philosophy and above dream reports. Our BASE models sit inside the human range.
 Alignment moves them out of it:
 
-    lineage-paired, raw frame, 28 lineages
-    base 4.022 -> aligned 3.077        -0.946 bits/token
-    aligned LOWER in 27 of 28
-    p_sign 2.2e-07   p_wilcoxon 2.2e-08   p_t 1.1e-08
+    lineage-paired, raw frame, 31 lineages
+    base 4.014 -> aligned 3.054        -0.961 bits/token
+    aligned LOWER in 30 of 31
+    p_wilcoxon 2.8e-09
 
 gpt-4o-mini is 1.92 bits below human short fiction. The one lineage that moves
 the other way is Qwen2.5-0.5B, at +0.098.
@@ -188,12 +188,14 @@ Length-free metrics only -- `score.py` certifies three, and the cumulative ones
 grow with sentence count, which would manufacture an arm difference from the
 length difference.
 
-    28 lineages, paired, raw frame, every pure story
-    mean_pairwise   0.5179 -> 0.4899  -0.0280  LOWER in 25 of 28  p_w 1.9e-06
-    mean_drift      0.4597 -> 0.4374  -0.0223  LOWER in 23 of 28  p_w 1.5e-05
-    ordering       -0.0580 -> -0.0500 +0.0080 HIGHER in 21 of 28  p_w 0.0022
+    31 lineages, paired, raw frame, every pure story
+    mean_pairwise   0.5165 -> 0.4879  -0.0286  LOWER in 27 of 31  p_w 1.9e-07
+    mean_drift      0.4581 -> 0.4372  -0.0209  LOWER in 24 of 31  p_w 5.6e-05
+    ordering       -0.0582 -> -0.0499 +0.0084 HIGHER in 23 of 31  p_w 3.1e-04
 
-    (superseded: 15 of 21, 17 of 21, 14 of 21 on the regex-filtered sample)
+    (superseded twice: 15/21, 17/21, 14/21 on the regex-filtered sample, then
+    25/28, 23/28, 21/28 at the intermediate scale. Every restatement has been
+    sharper than the one before.)
 
 AND RETTBERG DOES NOT EXTEND THIS ORDERING, WHICH SHE EXTENDS EVERYWHERE ELSE.
 Her mean_pairwise is 0.5047 -- ABOVE both our aligned cells and within 0.012 of
