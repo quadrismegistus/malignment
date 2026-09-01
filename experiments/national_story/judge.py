@@ -75,13 +75,39 @@ def collect(min_words=150, per_cell=3):
             except Exception:
                 continue
             d = r.get('decoder') or {}
-            if (d.get('max_new_tokens') or 0) < 1000 or d.get('top_p') != 0.95:
+            if (d.get('max_new_tokens') or 0) < 1000:
                 continue
-            if r.get('frame') not in ('raw', 'prefill_sysdefault'):
+            #: FOUR CONDITIONS, DERIVED EXPLICITLY. Two decoders and three
+            #: frames exist in the stash and the wrong pairing is silently
+            #: droppable: cell 2 is t=0.8/p=1.0 in `chat_sysempty`, so the old
+            #: filter (`top_p != 0.95` and frame in raw|prefill) excluded every
+            #: one of its 4,323 generations TWICE over and would have reported a
+            #: clean run on a corpus that did not contain them.
+            #:
+            #:   raw          our paratext, t=1.0/p=0.95, no template
+            #:   prefill      our paratext, t=1.0/p=0.95, chat wrapper
+            #:   rettberg     HER instruction prompt, t=0.8/p=1.0, chat
+            #:   rettberg_raw the same prompt and decoder that FELL BACK to raw
+            #:                because the model has no chat template -- 900 rows,
+            #:                and a fourth condition rather than a defect: it
+            #:                separates her prompt+decoder from her frame
+            t, tp = d.get('temperature'), d.get('top_p')
+            fr_raw = r.get('frame')
+            if tp == 0.95 and t == 1.0 and fr_raw == 'raw':
+                fr = 'raw'
+            elif tp == 0.95 and t == 1.0 and fr_raw == 'prefill_sysdefault':
+                fr = 'prefill'
+            elif tp == 1.0 and t == 0.8 and fr_raw in ('chat_sysempty',
+                                                       'chat_sysdefault'):
+                fr = 'rettberg'
+            elif tp == 1.0 and t == 0.8 and fr_raw == 'raw':
+                fr = 'rettberg_raw'
+            else:
                 continue
             if arm.get(r['model']) is None:
                 continue
             r['_p'] = prod
+            r['_fr'] = fr
             by_mp[r['model']].add(prod)
             rows.append(r)
     dup = {m for m, ps in by_mp.items()
@@ -98,12 +124,15 @@ def collect(min_words=150, per_cell=3):
         #: no-demonym control -- fails this match and the generation is dropped
         #: silently. Made optional so the control cell can exist at all, and
         #: labelled `none` so it is a value rather than a missing field.
-        dm = re.match(r'An? (?:(\w+) )?Story', r.get('prompt') or '')
+        #: two prompt shapes now: ours "A Norwegian Story" and hers
+        #: "Write a 1500 word potential Norwegian story."
+        pr = r.get('prompt') or ''
+        dm = (re.match(r'An? (?:(\w+) )?Story', pr) or
+              re.match(r'Write a 1500 word potential (?:(\w+) )?story\.', pr))
         if not dm:
             continue
         demonym = dm.group(1) or 'none'
-        fr = 'raw' if r['frame'] == 'raw' else 'prefill'
-        k = (lin[r['model']], arm[r['model']], fr, demonym)
+        k = (lin[r['model']], arm[r['model']], r['_fr'], demonym)
         h = hashlib.md5(t.encode()).hexdigest()
         if h in seen[k]:
             continue
