@@ -44,6 +44,10 @@ import os
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+#: annotations go to the data dir with everything else generated
+DATA_DIR = os.path.join(
+    os.environ.get('MALIGNMENT_DATA', os.path.expanduser('~/malignment-data')),
+    'national_story')
 GPT = os.path.expanduser('~/Downloads/dataverse_files/gpt-stories')
 OURS = {'US': 'American', 'FR': 'French', 'IL': 'Israeli', 'JP': 'Japanese',
         'NG': 'Nigerian', 'NO': 'Norwegian', 'PS': 'Palestinian',
@@ -99,7 +103,7 @@ def main(argv=None):
                    verbose=True, errors=errs)
 
     ok = tot = 0
-    fh = open(os.path.join(HERE, a.out), 'w')
+    fh = open(os.path.join(DATA_DIR, a.out), 'w')
     for r, o in zip(rows, res):
         if o is None:
             continue
@@ -116,7 +120,7 @@ def main(argv=None):
     fh.close()
     print('\nspans verified: %d/%d (%.1f%%)   errors: %d'
           % (ok, tot, 100 * ok / max(1, tot), len(errs)))
-    print('wrote %s' % a.out)
+    print('wrote %s' % os.path.join(DATA_DIR, a.out))
     return 0
 
 

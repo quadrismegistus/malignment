@@ -47,7 +47,8 @@ DATA = os.environ.get('MALIGNMENT_DATA', os.path.expanduser('~/malignment-data')
 #: moved out of the repo 2026-08-31: 51.7 MB, and it is generated data, not source.
 #: renamed off `judged_corpus_for_propp` because Propp was abandoned and the file
 #: is now the text source for every instrument here.
-CORPUS = os.path.join(DATA, 'national_story', 'judged_stories_v2.jsonl')
+DATA_DIR = os.path.join(DATA, 'national_story')
+CORPUS = os.path.join(DATA_DIR, 'judged_stories_v2.jsonl')
 
 
 def looks_complete(text):
@@ -162,7 +163,12 @@ def main(argv=None):
     #: per-trope 2x2 against the regexes: (llm, regex) -> count
     AGREE = collections.defaultdict(collections.Counter)
     T = collections.defaultdict(collections.Counter)
-    fh = open(os.path.join(HERE, a.out), 'w')
+    #: WRITE TO THE DATA DIR, not the checkout. This wrote to HERE after the
+    #: generated files were moved out, so a run silently produced a second,
+    #: newer copy inside the (now gitignored) repo directory while every reader
+    #: went on resolving the STALE one in the data dir. Nothing errored.
+    out_path = a.out if os.path.isabs(a.out) else os.path.join(DATA_DIR, a.out)
+    fh = open(out_path, 'w')
     for r, o in zip(rows, res):
         if o is None:
             continue
@@ -246,7 +252,7 @@ def main(argv=None):
                                      100 * T[(k, name)]['llm'] / N[k],
                                      100 * T[(k, name)]['regex'] / N[k])
             for k in sorted(N) if N[k])))
-    print('\nwrote %s' % a.out)
+    print('\nwrote %s' % out_path)
     return 0
 
 

@@ -33,7 +33,8 @@ import time
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 DATA = os.environ.get('MALIGNMENT_DATA', os.path.expanduser('~/malignment-data'))
-CORPUS = os.path.join(DATA, 'national_story', 'judged_stories_v2.jsonl')
+DATA_DIR = os.path.join(DATA, 'national_story')
+CORPUS = os.path.join(DATA_DIR, 'judged_stories_v2.jsonl')
 RETT = os.path.join(HERE, 'rettberg_conflict.jsonl')
 KEEP = ('mean_drift', 'mean_pairwise', 'ordering', 'n_sents')
 
@@ -81,10 +82,13 @@ def main(argv=None):
     rows = load(a.limit)
     c = collections.Counter(r['source'] for r in rows)
     print('%d texts: %s' % (len(rows), dict(c)))
-    os.makedirs(os.path.join(HERE, 'results'), exist_ok=True)
+    #: outputs go to the DATA DIR, not the checkout -- these are 2-3 MB files
+    #: regenerated wholesale. Writing them to HERE after the move produced a
+    #: newer copy in the repo that no reader resolved.
+    os.makedirs(DATA_DIR, exist_ok=True)
 
     for what in (('surprisal', 'drift') if a.what == 'both' else (a.what,)):
-        out = os.path.join(HERE, 'results', 'story_%s.jsonl' % what)
+        out = os.path.join(DATA_DIR, 'story_%s.jsonl' % what)
         done = set()
         if os.path.exists(out):
             done = {json.loads(l)['id'] for l in open(out)}
