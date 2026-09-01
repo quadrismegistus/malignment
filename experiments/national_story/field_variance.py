@@ -34,6 +34,22 @@ import os
 import random
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+#: generated annotation files live OUTSIDE the checkout, in
+#: $MALIGNMENT_DATA/national_story. `resolve` keeps CLI usage identical --
+#: `--results conflict_nocap.jsonl` still works -- by looking in the cwd, then
+#: the data dir, then here. They were moved out because they are outputs, not
+#: source: conflict_nocap.jsonl alone is 30 MB and changes wholesale every run.
+DATA = os.path.join(
+    os.environ.get('MALIGNMENT_DATA', os.path.expanduser('~/malignment-data')),
+    'national_story')
+
+
+def resolve(name):
+    for c in (name, os.path.join(DATA, name), os.path.join(HERE, name)):
+        if os.path.exists(c):
+            return c
+    return os.path.join(DATA, name)
+
 FIELDS = ('mood', 'setting', 'genre', 'temporality', 'opponent',
           'opponent_specificity', 'threat', 'romance', 'small_community',
           'supernatural', 'tradition', 'nostalgia', 'elder_informant',
@@ -77,8 +93,7 @@ def main(argv=None):
     ap.add_argument('--draws', type=int, default=300)
     a = ap.parse_args(argv)
 
-    path = a.results if os.path.exists(a.results) else \
-        os.path.join(HERE, a.results)
+    path = resolve(a.results)
     rows = [json.loads(l) for l in open(path, encoding='utf-8')]
     if a.contrast == 'arm':
         la, lb = 'base', 'aligned'

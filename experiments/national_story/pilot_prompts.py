@@ -172,14 +172,22 @@ def main(argv=None):
     ap.add_argument("--out", default="pilot_prompts.jsonl")
     ap.add_argument("--temp", type=float, default=1.0)
     ap.add_argument("--set", default="main",
-                    choices=("main", "prefill", "all", "raw"))
+                    choices=("main", "prefill", "all", "raw", "compare"))
     a = ap.parse_args(argv)
     #: `raw` is the only set a BASE checkpoint can take -- the chat and prefill
     #: conditions need a chat template and FrameRefused is the correct answer,
     #: not a result. So a base arm is comparable to the aligned arm on R1-R3 and
     #: on nothing else, which is a property of the design and not a shortfall.
     conds = {"main": CONDS, "prefill": PREFILL, "all": CONDS + PREFILL,
-             "raw": [c for c in CONDS if c[0].startswith("R")]}[a.set]
+             "raw": [c for c in CONDS if c[0].startswith("R")],
+             #: the two cells of the intended comparison plus the BRIDGE. R3 and
+             #: P6 carry byte-identical paratext -- P6's prefill IS R3's prompt --
+             #: so R3-base against P6-aligned differs in the turn wrapper and the
+             #: arm together. R3-ALIGNED is what separates them: it is the only
+             #: place the wrapper's own effect can be measured, since P6-base
+             #: cannot exist (no chat template on a base checkpoint).
+             "compare": [c for c in CONDS if c[0].startswith("R3")]
+                        + [c for c in PREFILL if c[0].startswith("P6")]}[a.set]
 
     from malignment import Checkpoint, generate as G
 

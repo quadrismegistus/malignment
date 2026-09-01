@@ -54,6 +54,22 @@ import os
 import random
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+#: generated annotation files live OUTSIDE the checkout, in
+#: $MALIGNMENT_DATA/national_story. `resolve` keeps CLI usage identical --
+#: `--results conflict_nocap.jsonl` still works -- by looking in the cwd, then
+#: the data dir, then here. They were moved out because they are outputs, not
+#: source: conflict_nocap.jsonl alone is 30 MB and changes wholesale every run.
+DATA = os.path.join(
+    os.environ.get('MALIGNMENT_DATA', os.path.expanduser('~/malignment-data')),
+    'national_story')
+
+
+def resolve(name):
+    for c in (name, os.path.join(DATA, name), os.path.join(HERE, name)):
+        if os.path.exists(c):
+            return c
+    return os.path.join(DATA, name)
+
 #: THE 24 FIELDS SPLIT INTO TWO GROUPS THAT MOVE IN OPPOSITE DIRECTIONS, and
 #: pooling them averages a real effect against its opposite. The split is not by
 #: how concentrated the base arm is -- the correlation between base modal share
@@ -136,8 +152,7 @@ def main(argv=None):
                     choices=('split', 'all', 'world', 'outcome'))
     a = ap.parse_args(argv)
 
-    path = a.results if os.path.exists(a.results) else \
-        os.path.join(HERE, a.results)
+    path = resolve(a.results)
     rows = [json.loads(l) for l in open(path, encoding='utf-8')
             if json.loads(l)['frame'] == a.frame]
     by = collections.defaultdict(lambda: {'base': [], 'aligned': []})

@@ -127,7 +127,13 @@ def main(argv=None):
                     help='schema_version label; defaults to the results filename')
     a = ap.parse_args(argv)
 
-    rp = a.results if os.path.exists(a.results) else os.path.join(HERE, a.results)
+    #: annotation inputs and the 232 MB sqlite both live in the data dir now
+    def _resolve(n):
+        for c in (n, os.path.join(DATA, 'national_story', n), os.path.join(HERE, n)):
+            if os.path.exists(c):
+                return c
+        return os.path.join(DATA, 'national_story', n)
+    rp = _resolve(a.results)
     rows = [json.loads(l) for l in open(rp, encoding='utf-8')]
     version = a.version or os.path.basename(rp)
     want = {r['id'] for r in rows}
@@ -157,7 +163,7 @@ def main(argv=None):
         cols['llm_' + t] = 'INTEGER'
         cols['rx_' + t] = 'INTEGER'
 
-    out = a.out if os.path.isabs(a.out) else os.path.join(HERE, a.out)
+    out = a.out if os.path.isabs(a.out) else os.path.join(DATA, 'national_story', a.out)
     if os.path.exists(out):
         os.remove(out)
     db = sqlite3.connect(out)
