@@ -577,7 +577,7 @@ def _prompt_rows():
         computed_at = meta.get(b"computed_at", b"").decode() or "unknown"
         undeclared = int(meta.get(b"n_measured_undeclared", b"0").decode() or 0)
         df = table.to_pandas()
-        rows = df.where(df.notnull(), None).to_dict("records")
+        rows = df.astype(object).where(df.notnull(), None).to_dict("records")
         _PROMPTS["rows"] = rows
         _PROMPTS["computed_at"] = computed_at
         _PROMPTS["undeclared"] = undeclared
@@ -1866,6 +1866,10 @@ class Handler(BaseHTTPRequestHandler):
                                       "p": (by[bm].get(w) or 0.0005)})
                     unit_rows.append({"unit": bm, "word": w, "position": 1,
                                       "p": (by[am].get(w) or 0.0005)})
+            if not unit_rows:
+                return {"prompt": text, "n_units": 0,
+                        "words": [], "levels": [], "diffs": [],
+                        "selection": "no data"}
             rng = np.random.default_rng(20260817)
             df = pd.DataFrame(unit_rows)
             levels = []
@@ -1897,10 +1901,23 @@ class Handler(BaseHTTPRequestHandler):
                 diffs.append({"word": w, "d": round(md, 6),
                               "lo": round(lo, 6), "hi": round(hi, 6)})
             diffs.sort(key=lambda x: x["d"])
+            from malignment import charge as _charge
+            sc = _charge.scene(text)
+            kd = _charge.kinds(text)
+            charge_pts = []
+            for w, med in word_med.items():
+                s = sc.get(w)
+                if s is not None:
+                    charge_pts.append({"word": w, "scene": round(s, 2),
+                                       "delta": round(med, 6),
+                                       "kind": kd.get(w, "")})
+            charge_pts.sort(key=lambda x: x["scene"])
             return {"prompt": text, "n_units": n_units,
                     "words": words_sel, "selection": "top %d movers (%d fallers + %d risers)" % (len(words_sel), len(fallers), len(risers)),
                     "levels": levels, "diffs": diffs,
-                    "rung_labels": ["base", "aligned"]}
+                    "rung_labels": ["base", "aligned"],
+                    "charge": charge_pts,
+                    "frame": _charge.frame(text)}
         if path == "/pair_words":
             #: Every word this pair puts at this prompt, both arms and the
             #: delta. The grain `{db}.movement` already stores, so nothing is
@@ -1944,8 +1961,16 @@ class Handler(BaseHTTPRequestHandler):
                 "SELECT model, total FROM {db}.twp_cells_v4_best WHERE prompt = '"
                 + e(text) + "' AND model IN ('" + e(base) + "','" + e(aligned) + "')")
             resid = {c["model"]: c for c in cells}
+            from malignment import charge as _charge
+            cw = _charge.words(text, base)
+            cs = _charge.scene(text) if not cw else None
+            for w in words:
+                r = cw.get(w["word"]) if cw else None
+                w["scene"] = r["scene"] if r else (cs or {}).get(w["word"])
+                w["kind"] = r["kind"] if r else (_charge.kinds(text).get(w["word"]) if not cw else None)
             return {"prompt": text, "base": base, "aligned": aligned,
                     "n_words": len(words), "words": words,
+                    "frame": _charge.frame(text),
                     "residual_base": (resid.get(base) or {}).get("total"),
                     "residual_aligned": (resid.get(aligned) or {}).get("total"),
                     "sum_p_base": sum(w["p_base"] for w in words),
@@ -2178,6 +2203,201 @@ class Handler(BaseHTTPRequestHandler):
             if isinstance(payload, dict):
                 payload = dict(payload, cached=bool(was_hit))
             return payload
+        if path == "/story/ladder":
+            import sqlite3
+            dbpath = os.path.join(EXPERIMENTS, "passage_analysis", "national_story", "conflict.sqlite")
+            if not os.path.exists(dbpath):
+                raise FileNotFoundError("conflict.sqlite not found")
+            db = sqlite3.connect(dbpath)
+            cur = db.cursor()
+            ladders = {
+                "Llama-3.1-8B": [
+                    ("base", "meta-llama/Llama-3.1-8B"),
+                    ("SFT", "allenai/Llama-3.1-Tulu-3-8B-SFT"),
+                    ("DPO", "allenai/Llama-3.1-Tulu-3-8B-DPO"),
+                    ("Instruct", "meta-llama/Llama-3.1-8B-Instruct"),
+                ],
+                "OLMo-3": [
+                    ("base", "allenai/Olmo-3-1025-7B"),
+                    ("SFT", "allenai/Olmo-3-7B-Instruct-SFT"),
+                    ("DPO", "allenai/Olmo-3-7B-Instruct-DPO"),
+                    ("Instruct", "allenai/Olmo-3-7B-Instruct"),
+                ],
+                "OLMoE": [
+                    ("base", "allenai/OLMoE-1B-7B-0125"),
+                    ("SFT", "allenai/OLMoE-1B-7B-0125-SFT"),
+                    ("DPO", "allenai/OLMoE-1B-7B-0125-DPO"),
+                    ("Instruct", "allenai/OLMoE-1B-7B-0125-Instruct"),
+                ],
+                "Mistral": [
+                    ("base", "mistralai/Mistral-7B-v0.1"),
+                    ("SFT", "HuggingFaceH4/mistral-7b-sft-beta"),
+                    ("DPO", "NousResearch/Nous-Hermes-2-Mistral-7B-DPO"),
+                    ("Instruct", "mistralai/Mistral-7B-Instruct-v0.1"),
+                ],
+            }
+            cats = ["mood", "opponent", "opponent_fate", "conflict_mode",
+                    "ending", "resolution_scale", "protagonist_change",
+                    "genre", "setting"]
+            bools = ["tradition", "nostalgia", "renewal", "small_community",
+                     "collective_action", "elder_informant"]
+            frame = one("frame", "raw")
+            out_ladders = {}
+            for family, rungs in ladders.items():
+                fam_data = []
+                for rung_label, model_id in rungs:
+                    n = cur.execute(
+                        "SELECT count(*) FROM stories WHERE model=? AND frame=?",
+                        (model_id, frame)).fetchone()[0]
+                    rates = {"_n": n, "_rung": rung_label, "_model": model_id}
+                    if n > 0:
+                        for col in cats:
+                            vals = cur.execute(
+                                "SELECT %s, count(*) FROM stories "
+                                "WHERE model=? AND frame=? GROUP BY %s"
+                                % (col, col), (model_id, frame)).fetchall()
+                            for v, c in vals:
+                                if v:
+                                    rates[col + "=" + v] = round(c / n, 4)
+                        for col in bools:
+                            c = cur.execute(
+                                "SELECT sum(%s) FROM stories WHERE model=? AND frame=?"
+                                % col, (model_id, frame)).fetchone()[0] or 0
+                            rates[col] = round(c / n, 4)
+                    fam_data.append(rates)
+                out_ladders[family] = fam_data
+            return {"ladders": out_ladders, "frame": frame,
+                    "rungs": ["base", "SFT", "DPO", "Instruct"]}
+        if path == "/story/panel":
+            ppath = os.path.join(EXPERIMENTS, "passage_analysis", "national_story", "results",
+                                 "panel_stats.json")
+            if not os.path.exists(ppath):
+                raise FileNotFoundError("panel_stats.json not found")
+            return json.load(open(ppath))
+        if path == "/story/rates":
+            import sqlite3
+            dbpath = os.path.join(EXPERIMENTS, "passage_analysis", "national_story", "conflict.sqlite")
+            if not os.path.exists(dbpath):
+                raise FileNotFoundError("conflict.sqlite not found")
+            db = sqlite3.connect(dbpath)
+            frame = one("frame", "raw")
+            cats = ["opponent", "opponent_fate", "mood", "genre", "setting",
+                    "conflict_mode", "ending", "resolution_scale",
+                    "resolution_means", "protagonist_change", "homecoming",
+                    "threat", "temporality", "romance", "community_role",
+                    "opponent_specificity"]
+            bools = ["tradition", "nostalgia", "elder_informant", "supernatural",
+                     "collective_action", "renewal", "small_community",
+                     "community_constrains"]
+            cur = db.cursor()
+            cur.execute(
+                "SELECT lineage, arm, count(*) FROM stories "
+                "WHERE frame = ? GROUP BY lineage, arm HAVING count(*) >= 5",
+                (frame,))
+            valid = {}
+            for lin, arm, n in cur.fetchall():
+                valid.setdefault(lin, {})[arm] = n
+            both = {lin for lin, arms in valid.items()
+                    if "base" in arms and "aligned" in arms}
+            facets = []
+            for col in cats:
+                vals = [r[0] for r in cur.execute(
+                    "SELECT DISTINCT %s FROM stories WHERE %s IS NOT NULL "
+                    "ORDER BY %s" % (col, col, col)).fetchall()]
+                for val in vals:
+                    lines = []
+                    for lin in sorted(both):
+                        for arm in ["base", "aligned"]:
+                            n = valid[lin][arm]
+                            cnt = cur.execute(
+                                "SELECT count(*) FROM stories WHERE lineage=? "
+                                "AND arm=? AND frame=? AND %s=?" % col,
+                                (lin, arm, frame, val)).fetchone()[0]
+                            lines.append({"lineage": lin, "arm": arm,
+                                          "rate": round(cnt / n, 4)})
+                    facets.append({"field": col, "value": val, "lines": lines})
+            for col in bools:
+                lines = []
+                for lin in sorted(both):
+                    for arm in ["base", "aligned"]:
+                        n = valid[lin][arm]
+                        cnt = cur.execute(
+                            "SELECT sum(%s) FROM stories WHERE lineage=? "
+                            "AND arm=? AND frame=?" % col,
+                            (lin, arm, frame)).fetchone()[0] or 0
+                        lines.append({"lineage": lin, "arm": arm,
+                                      "rate": round(cnt / n, 4)})
+                facets.append({"field": col, "value": "true", "lines": lines})
+            stats_path = os.path.join(EXPERIMENTS, "passage_analysis", "national_story", "results",
+                                      "annotation_stats_arm.json")
+            stats_map = {}
+            if os.path.exists(stats_path):
+                sd = json.load(open(stats_path))
+                for v in sd.get("values", []):
+                    stats_map[v["key"]] = {
+                        "p_sign": v.get("p_sign_holm"),
+                        "p_wilcoxon": v.get("p_wilcoxon_holm"),
+                        "p_t": v.get("p_t_holm"),
+                        "significant": v.get("significant"),
+                        "sig_all": v.get("significant_all_three"),
+                        "mean_diff": v.get("mean_diff"),
+                        "ci_lo": v.get("ci_lo"),
+                        "ci_hi": v.get("ci_hi"),
+                        "dz": v.get("dz"),
+                    }
+            for f in facets:
+                key = f["field"] + "=" + f["value"]
+                f["stats"] = stats_map.get(key)
+            return {"frame": frame, "n_lineages": len(both),
+                    "n_base": sum(valid[l].get("base", 0) for l in both),
+                    "n_aligned": sum(valid[l].get("aligned", 0) for l in both),
+                    "facets": facets}
+        if path == "/stories":
+            import sqlite3
+            dbpath = os.path.join(EXPERIMENTS, "passage_analysis", "national_story", "conflict.sqlite")
+            if not os.path.exists(dbpath):
+                raise FileNotFoundError("conflict.sqlite not found; run export_db.py")
+            db = sqlite3.connect(dbpath)
+            db.row_factory = sqlite3.Row
+            cur = db.cursor()
+            cols = [r[1] for r in cur.execute("PRAGMA table_info(stories)").fetchall()
+                    if r[1] != "text"]
+            arm = one("arm", "")
+            frame = one("frame", "")
+            demonym = one("demonym", "")
+            where, params = [], []
+            if arm:
+                where.append("arm = ?"); params.append(arm)
+            if frame:
+                where.append("frame = ?"); params.append(frame)
+            if demonym:
+                where.append("demonym = ?"); params.append(demonym)
+            wc = (" WHERE " + " AND ".join(where)) if where else ""
+            rows = cur.execute(
+                "SELECT %s FROM stories%s ORDER BY lineage, arm, frame"
+                % (", ".join(cols), wc), params).fetchall()
+            return {"n": len(rows),
+                    "columns": cols,
+                    "rows": [dict(r) for r in rows]}
+        if path == "/story":
+            import sqlite3
+            dbpath = os.path.join(EXPERIMENTS, "passage_analysis", "national_story", "conflict.sqlite")
+            if not os.path.exists(dbpath):
+                raise FileNotFoundError("conflict.sqlite not found")
+            sid = one("id", "")
+            if not sid:
+                raise KeyError("pass ?id=<story_id>")
+            db = sqlite3.connect(dbpath)
+            db.row_factory = sqlite3.Row
+            cur = db.cursor()
+            row = cur.execute("SELECT * FROM stories WHERE id = ?", (sid,)).fetchone()
+            if not row:
+                raise KeyError("no story with id %r" % sid)
+            story = dict(row)
+            spans = [dict(r) for r in cur.execute(
+                "SELECT * FROM spans WHERE story_id = ? AND located = 1 "
+                "ORDER BY start", (sid,)).fetchall()]
+            return {"story": story, "spans": spans}
         return None                                     # -> static
 
     # -- helpers -----------------------------------------------------------
