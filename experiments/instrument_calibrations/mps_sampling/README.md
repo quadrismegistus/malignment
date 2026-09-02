@@ -85,4 +85,4 @@ Separating the two needs a correct sampler. Named here rather than answered, bec
 
 ## The second MPS defect
 
-There is another, and neither folder cross-referenced the other until now: **MPS corrupts embeddings of short Chinese strings**, recorded in `../frame_prefill/README.md` and `../../readout_share/README.md`. Same backend, different op, same rule -- CPU is the referee.
+There is another, and neither folder cross-referenced the other until now: **MPS corrupts embeddings of short Chinese strings**, recorded in `../frame_prefill/README.md` and `../../displacement/readout_share/README.md`. Same backend, different op, same rule -- CPU is the referee.

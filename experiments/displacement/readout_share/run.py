@@ -36,7 +36,14 @@ import statistics as st
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(0, os.path.abspath(os.path.join(HERE, "..", "..")))
+#: NOT dirname-dirname. That encodes this file's depth, and it moved from
+#: experiments/<question> to experiments/displacement/<question> on 2026-09-02.
+#: The old form would not have RAISED -- malignment is installed in the venv, so
+#: a bad sys.path insert is silently ignored and the failure only surfaces on a
+#: machine where it is not installed. repo_root walks up from the package itself
+#: and refuses rather than returning a plausible path.
+from malignment.paths import repo_root  # noqa: E402
+sys.path.insert(0, repo_root())
 
 from malignment import charge, lens, roster  # noqa: E402
 from malignment.checkpoint import Checkpoint  # noqa: E402

@@ -133,14 +133,16 @@ to read this file cannot tell which of these sentences are live.
     28  displacement/displacement_taxonomy
     21  displacement/displacement_axis
     20  instrument_calibrations/dose_response
-    17  national_story
+    17  passage_analysis/national_story
     17  emergence/capacities
     16  slot_ratings/institutional
 
 RH: *"we said just run.py / 1 producer but it turned out impractical for many
 experiments."* The counts agree with him. `national_story` at 17 is not an
 outlier, it is FIFTH, and the folders above it are the campaign's most productive
-ones. A rule that the best work breaks hardest is a rule describing something
+ones -- including `jakobson_space`, which at 41 producers already sits INSIDE a
+subject, so "too many producers to be a question" is an objection the layout
+already overrules in practice. A rule that the best work breaks hardest is a rule describing something
 other than quality.
 
 What the rule was actually defending is still real and is worth separating from
@@ -160,20 +162,44 @@ The rule was a response to `meta/M01_displacement`, which was created empty and
 absorbed everything nearby. That failure is real, and so is the cost RH is
 naming: the top level currently mixes subjects (`displacement`,
 `passage_analysis`, `slot_ratings`, `division_of_labour`, `emergence`) with
-single questions (`national_story`, `readout_share`,
-`posttraining_corpus_analysis`) and with class axes
+single questions (`posttraining_corpus_analysis`) and with class axes
 (`instrument_calibrations`, `exploratory`), and nothing in a directory listing
 says which kind a name is. `serve.py` walks that listing.
 
-Two moves were made under it on 2026-09-02 and both were uncontroversial because
-they were CLASS moves, not promotions: `story_decoder` and `mps_sampling` into
-`instrument_calibrations/`. The contested case is `national_story`, which is
-subject-shaped already and would become a subject inside a subject if moved into
-`passage_analysis/` without being split first.
+**Four moves were made on 2026-09-02, all RH's, and the top level went from 12
+directories to 8:**
 
-Note also `malignment/serve.py` hardcodes `EXPERIMENTS/national_story/` at six
-lines (2208, 2272, 2279, 2331, 2357, 2384). Any layout change has a serve.py cost
-and it is small and known rather than open-ended.
+    story_decoder    -> instrument_calibrations/    class move
+    mps_sampling     -> instrument_calibrations/    class move, README written
+    national_story   -> passage_analysis/           by grain: the text-grain subject
+    readout_share    -> displacement/               by scope, and the subject's
+                                                    question was extended to cover it
+
+The first two were uncontroversial: they are class moves rather than promotions.
+The second two are the substantive ones. `national_story` went in despite being
+subject-shaped (17 producers, five separable questions) because the destination
+already holds a 41-producer folder, so the objection did not survive contact with
+the tree. `readout_share` went to `displacement` because that subject's stated
+scope -- "measuring THE MOVEMENT ITSELF" -- is the only one it falls inside, and
+the scope line was extended to name the where-in-the-model clause rather than the
+folder being filed under a question that excluded it.
+
+**Each move was checked for the depth hazard first, and each time there was
+one.** `displacement/README.md` records that the previous regroup silently broke
+sixteen producers computing the root as `dirname(dirname(HERE))`. Three such
+paths in `national_story`, one in `readout_share`, all now on
+`malignment.paths.repo_root()`, all exercised at BOTH depths so that the answer
+could be seen not to change. The `.gitignore` had the same disease from the other
+side: every `national_story` rule was path-anchored, all of them stopped matching
+at once, and git offered the machine-specific sqlite symlink as a new file to
+track. Rewritten unanchored.
+
+**The remaining cost is the web UI.** `malignment/serve.py` hardcodes
+`EXPERIMENTS/national_story/` at six lines (2208, 2272, 2279, 2331, 2357, 2384)
+and is not repaired here -- it carries another seat's uncommitted work, and RH is
+handing it to Dario. If it resolves an experiment id to a path instead of
+assuming top level, the layout stops being a UI constraint at all, which is the
+part of RH's objection that is fixable in code rather than by argument.
 
 ## Scratch work
 
