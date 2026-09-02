@@ -443,7 +443,7 @@ def run(models, conditions, n=10, seed=42, decoder=None,
         dec.update(decoder)
 
     if subprocess_per_model and prompts_file:
-        import subprocess as sp
+        import glob, shutil, subprocess as sp
         total = 0
         for i, mid in enumerate(models, 1):
             print("[%d/%d] %s" % (i, len(models), mid), flush=True)
@@ -468,6 +468,13 @@ def run(models, conditions, n=10, seed=42, decoder=None,
                 print("    subprocess OK", flush=True)
             else:
                 print("    subprocess FAILED (exit %d)" % result.returncode, flush=True)
+            safe = mid.replace("/", "--")
+            cache_dir = os.path.expanduser("~/.cache/huggingface/hub")
+            for d in glob.glob(os.path.join(cache_dir, "models--" + safe)):
+                try:
+                    shutil.rmtree(d)
+                except Exception:
+                    pass
         print("\ndone across %d models (subprocess mode)" % len(models))
         return 0
 
