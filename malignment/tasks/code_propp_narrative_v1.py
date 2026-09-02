@@ -605,40 +605,57 @@ class ProppFunctionInstance(BaseModel):
 
 
 class ProppAnnotation(BaseModel):
-    is_tale_structured: bool = Field(
+    """Annotate the functions. There is no question about whether this is a tale.
+
+    `is_tale_structured` is removed rather than reworded. It survived three
+    attempts to defuse it -- rewriting the prose rule, rewriting its field
+    description, and moving it from first to last in the field order -- because
+    the gate was never any particular wording. Asking a model to decide whether
+    a scheme applies, before or after, makes the annotation answerable to that
+    decision.
+
+    What remains is a vocabulary of functions and a requirement to anchor each
+    one to a span. Whether the whole composes into a tale is a question for the
+    analysis, from `n_moves` and the function sequence, not for the annotator.
+    """
+    functions: list[ProppFunctionInstance] = Field(
         description=(
-            "True if this text is organised as a tale in Propp's sense — a "
-            "villainy or lack that sets a plot in motion and is worked "
-            "through to a resolution. False for texts that are not: "
-            "character sketches, mood pieces, essays, anecdotes without a "
-            "complication, most modern literary short fiction. Answer this "
-            "on the text in front of you, not on what it resembles. A false "
-            "answer here is an ordinary and expected outcome, and `functions` "
-            "should then usually be empty or nearly so — do NOT manufacture "
-            "functions to fill the list."
+            "ANSWER THIS FIRST, before judging the text as a whole. Every "
+            "function you can anchor to a span, in the order they appear in "
+            "the TEXT. A departure is a departure whether or not the whole is "
+            "a tale, so do not withhold a function because the text is modern, "
+            "realist, or unresolved. May legitimately be empty when the text "
+            "contains no anchorable function. The same function may recur -- "
+            "Propp's tales treble the donor sequence -- so list each occurrence "
+            "with its own span. Do not pad and do not withhold."
         )
     )
     n_moves: int = Field(
         description=(
-            "How many distinct moves the text contains. 0 if it is not tale-"
-            "structured, 1 for the ordinary single-move tale."
+            "How many distinct moves the annotated functions form: a move runs "
+            "from a villainy or lack through to its resolution. 0 when the "
+            "functions do not compose into one, which is common and is not a "
+            "reason to drop them."
         )
     )
-    functions: list[ProppFunctionInstance] = Field(
-        description=(
-            "The functions found, listed in the order they appear in the "
-            "TEXT (the order of the telling). May be empty. The same function "
-            "may appear more than once — Propp's tales repeat functions, and "
-            "the donor sequence is classically trebled — so list each "
-            "occurrence separately with its own span."
-        )
-    )
+    #: REMOVED. The question itself was the gate, and no amount of rewording
+    #: the description or reordering the fields dissolved it -- the model was
+    #: still being asked to decide whether the scheme applied at all, and
+    #: answering that question suppressed the annotation.
+    #:
+    # is_tale_structured: bool = Field(
+    #     description=(
+    #         "True if the text is organised as a tale in Propp's sense -- a "
+    #         "villainy or lack that sets a plot in motion and is worked "
+    #         "through to a resolution."
+    #     )
+    # )
     overall_note: str = Field(
         description=(
             "One to three sentences on the text's structure as a whole: the "
             "shape of the move or moves, anything that resisted the scheme, "
-            "and why. If the text is not tale-structured, say what it is "
-            "instead."
+            "and why. If the functions do not compose into a plot, say what "
+            "the text is doing instead."
         )
     )
 
@@ -694,17 +711,14 @@ RULES
    branded (J) BETWEEN the struggle (H) and the victory (I). The letters
    are counter-intuitive and are easy to transpose.
 
-6. ANNOTATE WHAT IS PRESENT. JUDGE THE WHOLE SEPARATELY. Propp drew this
-   scheme from Russian wondertales, but narratology has applied these
-   functions far beyond them, and a departure is a departure in a story set
-   in a modern city. So do BOTH of these, independently:
-     - record every function you can anchor to a span, whatever the text is;
-     - set is_tale_structured true only for a text actually built as a tale,
-       with a villainy or lack driving it to a resolution.
-   A text may legitimately have five functions and is_tale_structured false.
-   That is the normal case for modern short fiction and is not a contradiction.
-   Do not pad, and do not withhold. An empty answer is legitimate only when
-   the text really contains no anchorable function.
+6. ANNOTATE WHAT IS PRESENT. YOU ARE NOT ASKED WHETHER THIS IS A TALE.
+   Propp drew this scheme from Russian wondertales, but narratology has
+   applied these functions far beyond them, and a departure is a departure
+   in a story set in a modern city. Record every function you can anchor to
+   a span, whatever kind of text this is. Do not withhold a function because
+   the story is modern, realist, unresolved, or unlike a folktale. Do not pad
+   either: an empty answer is right when the text really contains no
+   anchorable function.
 
 7. Where a span is a poor fit that you assigned anyway, say so in its note.
    A recorded doubt is more useful than a confident label.
