@@ -68,7 +68,7 @@ def slope(xs, ys):
     return sum((x - mx) * (y - my) for x, y in zip(xs, ys)) / sxx
 
 
-def measure():
+def measure(save=None):
     import statistics as st
     from malignment import ch, charge, roster
 
@@ -281,6 +281,7 @@ def measure():
                   (2, 7, "2+ (very high)")]
     print("  %-16s %5s %6s %8s %10s %10s"
           % ("band", "cells", "lins", "neg/pos", "p", "med slope"))
+    lift_results = []
     for lo, hi, label in lift_bands:
         band_prompts = {p for p, lf in all_lifts.items() if lo <= lf < hi}
         band_slopes = collections.defaultdict(list)
@@ -315,6 +316,31 @@ def measure():
         print("  %-16s %5d %6d %4d/%-4d %10.6f %+10.6f%s"
               % (label, band_cells, bt, bn, bp, bp_val, bm,
                  "  <-" if bp_val < 0.05 else ""))
+        lift_results.append({
+            "band": label, "lo": lo, "hi": hi,
+            "n_cells": band_cells, "n_lineages": bt,
+            "neg": bn, "pos": bp, "p": bp_val,
+            "med_slope": bm,
+            "per_lineage": [{"lineage": lin, "slope": round(v, 8)}
+                            for lin, v in sorted(band_meds.items())],
+        })
+
+    if save:
+        import json
+        out = {
+            "overall": {
+                "neg": neg, "pos": pos, "p": p,
+                "med_slope": grand_med,
+                "n_cells": n_cells_rated, "n_words": n_words_rated,
+                "per_lineage": [{"lineage": lin, "slope": round(v, 8)}
+                                for lin, v in sorted(med_slopes.items())],
+            },
+            "by_lift": lift_results,
+        }
+        os.makedirs(os.path.dirname(os.path.abspath(save)), exist_ok=True)
+        with open(save, "w") as f:
+            json.dump(out, f, indent=1)
+        print("\nwrote %s" % save)
 
     return 0
 
@@ -322,8 +348,10 @@ def measure():
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.parse_args(argv)
-    return measure()
+    ap.add_argument("--save", default=None,
+                    help="write per-lineage results to this JSON file")
+    a = ap.parse_args(argv)
+    return measure(save=a.save)
 
 
 if __name__ == "__main__":
