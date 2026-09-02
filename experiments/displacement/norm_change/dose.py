@@ -78,6 +78,34 @@ def endpoint_pairs():
     return {"%s>%s" % (b, a) for b, a in ep.items()}
 
 
+def lift_dose_rows():
+    """{(lang, lineage, prompt, "lift"): (dose, dose)} from charge.lift_per_lineage.
+
+    The dose is T_base - frame for a specific (prompt, base) pair: how much
+    more transgressive this model's candidates are than the setup alone. Per
+    lacan [6565], this predicts displacement 3x better than the level (r=-0.261
+    vs -0.091) because the level saturates above frame 5.
+
+    ENGLISH ONLY: charge ratings cover 2,400 English prompts.
+    """
+    from malignment import charge, roster
+    ep, _ = roster.endpoints()
+    ep_set = {"%s>%s" % (b, a) for b, a in ep.items()}
+    base_to_aligned = dict(ep)
+    lpl = charge.lifts_per_lineage()
+    out = {}
+    for (pr, base), v in lpl.items():
+        aligned = base_to_aligned.get(base)
+        if aligned is None:
+            continue
+        lin = "%s>%s" % (base, aligned)
+        if lin not in ep_set:
+            continue
+        out[("en", lin, pr, "lift")] = (v, v)
+    print("lift dose: %d (lineage, prompt) cells" % len(out))
+    return out
+
+
 def v6_dose_rows(cut):
     """{(lang, lineage, prompt, "v6_harm_mass"): (dose, dose)} from EXISTING ratings.
 
@@ -371,6 +399,14 @@ def main(argv=None):
                          "probability on those words -- so the dose still varies by "
                          "lineage. Costs nothing: no new API calls.")
     ap.add_argument("--v6-cut", type=int, default=4)
+    ap.add_argument("--lift-dose", action="store_true",
+                    help="dose = per-lineage lift (T_base - frame) from "
+                         "charge.lift_per_lineage(). This is the dose displacement "
+                         "work wants (lacan [6565]): how much more transgressive "
+                         "the candidate words are THAN THE SETUP ALONE, weighted "
+                         "by this base arm's own mass distribution. Predicts "
+                         "displacement 3x better than the level (r=-0.261 vs "
+                         "-0.091). ENGLISH ONLY, 2,400 prompts.")
     ap.add_argument("--slot-dose", action="store_true",
                     help="use SLOT-LEVEL loaded mass instead of the global lexicon. "
                          "`k_transgressiveness` cannot know which completion is "
@@ -424,7 +460,13 @@ def main(argv=None):
         return 1
     #: the dose ALWAYS comes from levels, even when the target is a field --
     #: transgressiveness is a continuous norm and has no field counterpart.
-    if a.v6_dose:
+    if a.lift_dose:
+        dose_rows = lift_dose_rows()
+        a.dose = "lift"
+        if not dose_rows:
+            print("no lift dose -- is charge_en50_flash.jsonl present?")
+            return 1
+    elif a.v6_dose:
         dose_rows = v6_dose_rows(a.v6_cut)
         a.dose = "v6_harm_mass"
         if not dose_rows:
@@ -464,7 +506,7 @@ def main(argv=None):
         #: with --slot-dose the dose does NOT live in levels_long, so it must be
         #: merged into EVERY table including levels -- otherwise levels tests
         #: against a dose scale that is not there and reports 0 targets.
-        _ext = a.slot_dose or a.v6_dose
+        _ext = a.lift_dose or a.slot_dose or a.v6_dose
         tbl = dict(lv) if (name == "levels" and _ext) else (
             lv if name == "levels" else read(name))
         if name == "levels" and _ext:

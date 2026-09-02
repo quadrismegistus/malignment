@@ -1,7 +1,7 @@
 ---
 subject: norm_change
-status: FIRST RESULT, corrected 2026-08-24. 50 endpoint lineages, en and zh separately.
-headline: Register rises and valence rises in BOTH languages. Concreteness falls in Chinese only.
+status: FIRST RESULT, corrected 2026-08-24. Lift dose added 2026-08-30 (lacan [6565]).
+headline: Register rises and valence rises in BOTH languages. Concreteness falls in Chinese only. Lift dose reorders the top: arousal over bodily harm.
 data: ~/malignment-data/norm_change (3.0 GB, outside the checkout)
 ---
 
@@ -644,6 +644,8 @@ replacements were built and `dose.py` now runs any of them, each writing FULL ta
 under its own filename so no run can silently overwrite another:
 
     --dose k_transgressiveness   global lexicon, ~2,700 prompts   (default)
+    --lift-dose                  per-lineage T_base - frame, 2,400 en prompts
+                                 (charge.lift_per_lineage(), ENGLISH ONLY)
     --slot-dose                  loaded words tagged per prompt from a 200-word
                                  union list, 1,944 prompts
                                  (instrument_calibrations/dose_response)
@@ -783,3 +785,120 @@ USAS terms and it holds across all three doses. Everything below `M1` is at or u
 0.005 in a table where 145 of 341 targets flip sign between doses and 16 contradict
 outright, so **read `L1-`, treat the rest as a shortlist.** 55 "robust" of 278 is
 close to what chance gives at alpha=0.05 across three correlated tests.
+
+
+## LIFT DOSE (2026-08-30, responding to lacan [6565])
+
+### THE DOSE EVERY PREVIOUS RUN USED WAS THE WRONG QUANTITY
+
+`dose.py --lift-dose`. The predictor is `T_base - frame` per (lineage, prompt):
+how much more transgressive this base arm's candidate words are than the setup
+alone, from `charge.lift_per_lineage()` (commit `d58815a`). Lacan measured the
+problem: `dose` (the level) barely predicts displacement (r = -0.091) because **the
+response saturates** above frame 5. `lift` (dose minus frame) predicts 3x better
+(r = -0.261).
+
+The saturation is visible in the data: mean lift runs +0.38 at frames 2-3 and
+-0.05 at frames 6-7. A frame already rated 6.4 has candidate words no more
+transgressive than the setup, so there is nothing for alignment to displace. The
+previous three doses (k_transgressiveness, slot, v6_harm) are all levels, and all
+three select into the saturated region at the high end.
+
+**LIFT IS NOT HEADROOM.** `corr(dose - frame, 7 - dose) = -0.004`. How much room
+is left below the ceiling is orthogonal to how much the words add over the setup.
+
+Results: `results/dose_lift__levels_en.csv`, `results/dose_lift__fields_en.csv`.
+Chinese is empty -- charge ratings cover 2,400 English prompts only.
+
+    python -u dose.py --lift-dose --top 25 --out results
+
+### English levels, 32 of 39 significant
+
+    target                               med slope    up    dn     n         p
+    warriner_arousal_absz                 -0.02230     6    44    50   <1e-7    fall
+    warriner_valence_extremity_absz       -0.02163     6    44    50   <1e-7    fall
+    k_transgressiveness                   -0.03503     7    43    50   <1e-6    fall
+    k_vulgarity                           -0.00717     8    42    50   <1e-5    fall
+    warriner_dominance                    +0.02563    42     8    50   <1e-5    RISE
+    k_bodily_harm                         -0.04933    10    40    50   2e-5     fall
+    k_valence_absz                        -0.02132    10    40    50   2e-5     fall
+    k_charge                              -0.03312    11    39    50   9e-5     fall
+    k_valence                             +0.01479    39    11    50   9e-5     RISE
+    warriner_valence                      +0.03206    39    11    50   9e-5     RISE
+    k_concreteness                        -0.02734    12    38    50   3e-4     fall
+    warriner_arousal                      -0.03115    12    38    50   3e-4     fall
+    k_register_level                      +0.00267    34    16    50   0.015    rise
+
+**THE TOP OF THE TABLE CHANGED.** Under the level dose, `k_bodily_harm` led.
+Under lift, `warriner_arousal` is the strongest signal (44/50 negative), and the
+entire arousal/extremity cluster rises above the specific-harm scales. That is a
+content change, not just a power change: lift selects into the region where the
+response actually varies, and what varies most there is arousal reduction, not
+bodily-harm suppression specifically.
+
+The structure from the earlier section holds -- fallers are transgressiveness,
+harm, arousal, vulgarity, concreteness; risers are dominance, valence, register
+-- but the **relative ordering within each group** is different, and the ordering
+is the claim.
+
+### English fields, 82 of 339 significant
+
+    target                               med slope    up    dn     n         p
+    L1-   Life and living things [-]      -0.01051     6    44    50   <1e-7    fall
+    A9+   Getting and giving; possession  +0.00343    42     8    50   <1e-5    RISE
+    A4.1  Discourse markers               +0.00081    41     9    50   <1e-5    rise
+    Q2.2  Speech acts                     +0.00166    41     9    50   <1e-5    RISE
+    N3.5  Measurement                     -0.00008     9    40    49   <1e-5    fall
+    N3.2+ Weighing and measuring          -0.00048    10    40    50   2e-5     fall
+    Z5    Grammatical bin                 +0.00229    40    10    50   2e-5     rise
+    A15+  Safety                          +0.00047    39    11    50   9e-5     RISE
+    H4    Residence                       -0.00038    11    39    50   9e-5     fall
+    O4.6- Obligation [-]                  -0.00146    11    39    50   9e-5     fall
+    G3    Warfare, defence and the army   -0.00149    12    38    50   3e-4     fall
+    A9-   Getting/giving [-]              -0.00071    12    38    50   3e-4     fall
+    X2.1  Thought, mental object          -0.00047    12    38    50   3e-4     fall
+
+`L1-` (killing/dying) leads again, the same as under the three level doses. `Q2.2`
+(speech acts) rises at p < 1e-5, the same direction as the level dose and now
+cleaner. `A15+` (safety) appears for the first time as a significant riser.
+
+**The pattern at field level: where candidate words add transgressiveness over
+the setup, alignment strips action vocabulary (speech acts, warfare, obligation,
+bodily processes) and replaces it with procedural, hedging, and safety language.**
+That is the same shape as the level result and the same shape as the individual-word
+examples in the previous section. The field decomposition says which semantic
+domains the displacement lands in.
+
+### WHAT LIFT ADDS OVER THE PREVIOUS THREE DOSES
+
+1. **A predictor that matches the construct.** Lift is what alignment can
+   displace, not how transgressive the finished scene is. The difference is the
+   saturation: a frame at 6.4 scores high on every level dose and zero on lift,
+   because there is nothing for alignment to move.
+
+2. **Arousal over bodily harm.** The reordering is diagnostic. Under lift, the
+   strongest response is a reduction in AROUSAL (words that activate the reader),
+   not in bodily-harm vocabulary specifically. Alignment responds to the
+   affective charge of the candidates more than to their semantic content.
+
+3. **Coverage of the mechanism.** Lift is per-lineage (`T_base - frame`), so
+   it is weighted by THIS model's mass distribution. Two bases on the same
+   prompt carry different candidate words at different probabilities, and their
+   lifts differ. That variation is signal, not noise, and the level dose
+   averaged it away.
+
+### WHAT LIFT LOSES
+
+Chinese. Charge ratings are English-only (2,400 prompts, 50 lineages). The
+level dose runs on `levels_long.csv.gz` which covers 416 Chinese prompts and 47
+Chinese lineages, and the Chinese results in the earlier sections of this file
+(concreteness falling, register rising) rest on it. Until charge ratings cover
+Chinese, the lift dose is English-only and the level dose remains the Chinese
+instrument.
+
+### NOT YET DONE
+
+The three-dose agreement table (`dose_agreement.py`) has not been re-run with
+lift as a fourth dose. That is the next step: the 19 unanimous targets from the
+three level doses should be checked against lift, and lift-specific targets (like
+`warriner_arousal_absz` at 44/50) should be checked against the three levels.
