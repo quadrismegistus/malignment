@@ -23,8 +23,15 @@
   `n_pairs` is the most available mistake this table offers.
 -->
 <script lang="ts">
+	import { page } from '$app/state';
+	import { replaceState } from '$app/navigation';
 	import { api } from '$lib/api';
 	import type { PromptRow, PromptProfile, PairWords } from '$lib/api';
+
+	function promptToSlug(t: string) { return t.replace(/ /g, '_'); }
+	function slugToPrompt(s: string) { return s.replace(/_/g, ' '); }
+	function modelToSlug(m: string) { return m.replace(/\//g, '__'); }
+	function slugToModel(s: string) { return s.replace(/__/g, '/'); }
 
 	let rows = $state<PromptRow[]>([]);
 	let computedAt = $state('');
@@ -104,7 +111,13 @@
 		{ key: 'arrived_median', label: 'risen', num: true, help: 'median mass arriving at the words that rose (raw→raw)' },
 		{ key: 'net_median', label: 'net', num: true, help: 'median (arrived − departed), raw→raw' },
 		{ key: 'xf_js_median', label: 'xf movement', num: true, help: 'median JS divergence raw-base → framed-aligned (system_mode=empty)' },
-		{ key: 'xf_net_median', label: 'xf net', num: true, help: 'median (arrived − departed), cross-frame' }
+		{ key: 'xf_net_median', label: 'xf net', num: true, help: 'median (arrived − departed), cross-frame' },
+		{ key: 'dose_k_transgr', label: 'dose k', num: true, help: 'median base-arm k_transgressiveness across endpoint lineages' },
+		{ key: 'dose_v6_harm', label: 'dose v6', num: true, help: 'median base-arm mass on contextually harmful words (v6_harm >= 4)' },
+		{ key: 'dose_slot_loaded', label: 'dose slot', num: true, help: 'median base-arm mass on slot-level loaded words' },
+		{ key: 'dose_charge', label: 'charge', num: true, help: 'annotated scene transgressiveness (1-7 scale), from task_charge' },
+		{ key: 'dose_frame', label: 'frame', num: true, help: 'annotated frame transgressiveness (1-7 scale) -- the setup alone' },
+		{ key: 'dose_increment', label: 'incr', num: true, help: 'charge - frame: extra transgressiveness the candidate words add beyond the setup' }
 	];
 
 	function sortBy(k: keyof PromptRow) {
@@ -164,15 +177,18 @@
 	let slopes = $state<any>(null);
 	let slopesXf = $state<any>(null);
 	let slopesLoading = $state(false);
-	let chartTab = $state<'slopes' | 'slopes_xf' | 'dots'>('slopes');
+	let chartTab = $state<'slopes' | 'slopes_xf' | 'dots' | 'charge'>('slopes');
 	let slopeHover = $state<string | null>(null);
 
-	function open(p: string) {
+	function open(p: string, skipUrl = false) {
 		selected = p;
+		pair = null;
+		pw = null;
 		profile = null;
 		slopes = null;
 		profileLoading = true;
 		slopesLoading = true;
+		if (!skipUrl) replaceState('/prompts/' + promptToSlug(p), {});
 		api
 			.prompt(p)
 			.then((r) => (profile = r))
@@ -229,12 +245,15 @@
 	let wSort = $state<'word' | 'p_base' | 'p_aligned' | 'delta' | 'absdelta' | 'cls'>('delta');
 	let wDesc = $state(false);
 
-	function openPair(base: string, aligned: string) {
+	function openPair(base: string, aligned: string, skipUrl = false) {
 		pair = { base, aligned };
 		pw = null;
 		pwLoading = true;
 		wSort = 'delta';
 		wDesc = false;
+		if (!skipUrl && selected) {
+			replaceState('/prompts/' + promptToSlug(selected) + '/' + modelToSlug(base), {});
+		}
 		api
 			.pairWords(selected as string, base, aligned, pairFrame === "crossframe" ? "crossframe" : undefined)
 			.then((r) => (pw = r))
@@ -250,6 +269,34 @@
 			wDesc = k !== 'delta' && k !== 'word' && k !== 'cls';
 		}
 	}
+
+	//: ── URL-DRIVEN STATE ─────────────────────────────────────────────────
+	//:
+	//:     /prompts                                          list
+	//:     /prompts/He_picked_up_the_knife_and               prompt detail
+	//:     /prompts/He_picked_up_the_knife_and/Amber__AmberSafe   pair view
+	//:
+	//: Spaces → underscores in prompts; slashes → double underscores in
+	//: model ids. `replaceState` so clicks within the panel do not litter
+	//: browser history.
+	let pendingBaseSlug: string | null = null;
+	{
+		const segs = page.url.pathname.split('/').filter(Boolean);
+		if (segs[0] === 'prompts' && segs[1]) {
+			const initPrompt = slugToPrompt(decodeURIComponent(segs[1]));
+			open(initPrompt, true);
+			if (segs[2]) pendingBaseSlug = decodeURIComponent(segs[2]);
+		}
+	}
+	$effect(() => {
+		if (pendingBaseSlug && profile) {
+			const baseModel = slugToModel(pendingBaseSlug);
+			const ep = profile.endpoints?.find((e: any) => e.base === baseModel);
+			if (ep) openPair(ep.base, ep.aligned, true);
+			pendingBaseSlug = null;
+		}
+	});
+
 	let wView = $derived.by(() => {
 		if (!pw) return [];
 		const out = pw.words.map((w) => ({ ...w, absdelta: Math.abs(w.delta) }));
@@ -280,7 +327,7 @@
 	//: draws the largest movers by |delta| and says how many of how many. A
 	//: figure showing a subset without naming it is the defect this repo keeps
 	//: booking.
-	let showPlot = $state(true);
+	let pairChartTab = $state<'slope' | 'charge' | 'flow' | 'arrows'>('slope');
 	let plotN = $state(25);
 	let hoverW = $state<string | null>(null);
 
@@ -290,13 +337,17 @@
 			.map((w) => ({ ...w, absdelta: Math.abs(w.delta) }))
 			.sort((a, b) => b.absdelta - a.absdelta)
 			.slice(0, plotN);
-		//: The scale spans BOTH arms of the drawn words, so a line cannot leave
-		//: the panel and the two columns share one axis. Zero is kept as the
-		//: floor rather than clipped: a word going to exactly 0 is the result.
-		const top = Math.max(...picked.flatMap((w) => [w.p_base, w.p_aligned]), 1e-9);
+		const top = Math.max(...picked.flatMap((w) => [w.p_base, w.p_aligned]), 0.001);
+		const floor = 0.0005;
+		const logTop = Math.log10(top);
+		const logFloor = Math.log10(floor);
 		const H = 260, W = 560, padT = 14, padB = 26, padL = 54, padR = 96;
-		const y = (v: number) => padT + (1 - v / top) * (H - padT - padB);
+		const y = (v: number) => {
+			const lv = Math.log10(Math.max(v, floor));
+			return padT + (logTop - lv) / (logTop - logFloor) * (H - padT - padB);
+		};
 		const x0 = padL, x1 = W - padR;
+		const logTicks = [0.001, 0.003, 0.01, 0.03, 0.1, 0.3].filter((t) => t >= floor && t <= top * 1.1);
 		//: Label collision is handled the same way the plotnine version does it:
 		//: push apart in DATA SPACE from the top, moving text and leaving points.
 		const ends = picked
@@ -310,7 +361,7 @@
 			prev = ly;
 			return { ...e, ly };
 		});
-		return { picked, top, H, W, x0, x1, y, labels };
+		return { picked, top, floor, H, W, x0, x1, y, labels, logTicks };
 	});
 
 	//: ── NUMERIC SURFACES ARE TRUNCATED, AND THE ORDERING IS NOT THE ORDERING.
@@ -464,6 +515,12 @@
 								<td class="num">{n(r.net_median)}</td>
 											<td class="num">{r.xf_js_median ? n(r.xf_js_median) : ''}</td>
 											<td class="num">{r.xf_net_median ? n(r.xf_net_median) : ''}</td>
+											<td class="num">{r.dose_k_transgr != null ? n(r.dose_k_transgr, 2) : ''}</td>
+											<td class="num">{r.dose_v6_harm != null ? n(r.dose_v6_harm) : ''}</td>
+											<td class="num">{r.dose_slot_loaded != null ? n(r.dose_slot_loaded) : ''}</td>
+											<td class="num">{r.dose_charge != null ? n(r.dose_charge, 2) : ''}</td>
+											<td class="num">{r.dose_frame != null ? n(r.dose_frame, 2) : ''}</td>
+											<td class="num">{r.dose_increment != null ? n(r.dose_increment, 2) : ''}</td>
 							</tr>
 						{/each}
 					</tbody>
@@ -483,8 +540,8 @@
 		{/if}
 	{:else if pair}
 		<div class="bar">
-			<button class="ghost" onclick={() => { pair = null; pw = null; }}>← {selected}</button>
-			<button class="ghost" onclick={() => { pair = null; pw = null; selected = null; profile = null; }}>← all prompts</button>
+			<button class="ghost" onclick={() => { pair = null; pw = null; replaceState('/prompts/' + promptToSlug(selected!), {}); }}>← {selected}</button>
+			<button class="ghost" onclick={() => { pair = null; pw = null; selected = null; profile = null; replaceState('/prompts', {}); }}>← all prompts</button>
 		</div>
 		<h2 class="pt">{short(pair.base)} → {short(pair.aligned)}</h2>
 		<div class="frame-toggle">
@@ -564,35 +621,41 @@
 					v3. See docket [6430], [6440], [6449].
 				</p>
 			{/if}
-			{#if plot}
-				<div class="plotbar">
-					<button class="ghost" onclick={() => (showPlot = !showPlot)}
-						>{showPlot ? 'hide' : 'show'} slopegraph</button
-					>
-					{#if showPlot}
-						<label class="nsel"
-							>largest
-							<select bind:value={plotN}>
-								{#each [10, 25, 50, 100] as k (k)}<option value={k}>{k}</option>{/each}
-							</select>
-							movers of {pw.n_words}</label
-						>
-						<span class="muted"
-							>one pair, one observation — not the median-across-lineages figure in Plots</span
-						>
+			{#if plot || pw}
+				<div class="chart-tabs">
+					{#if plot}
+						<button class:active={pairChartTab === 'slope'} onclick={() => pairChartTab = 'slope'}>slopegraph</button>
+					{/if}
+					{#if pw?.words?.some((w) => w.scene != null)}
+						<button class:active={pairChartTab === 'charge'} onclick={() => pairChartTab = 'charge'}>charge scatter</button>
+						<button class:active={pairChartTab === 'flow'} onclick={() => pairChartTab = 'flow'}>displacement flow</button>
+						<button class:active={pairChartTab === 'arrows'} onclick={() => pairChartTab = 'arrows'}>word arrows</button>
 					{/if}
 				</div>
 			{/if}
-			{#if plot && showPlot}
+			{#if pairChartTab === 'slope' && plot}
+				<div class="plotbar">
+					<label class="nsel"
+						>largest
+						<select bind:value={plotN}>
+							{#each [10, 25, 50, 100] as k (k)}<option value={k}>{k}</option>{/each}
+						</select>
+						movers of {pw.n_words}</label
+					>
+					<span class="muted"
+						>one pair, one observation — not the median-across-lineages figure in Plots</span
+					>
+				</div>
+			{/if}
+			{#if pairChartTab === 'slope' && plot}
 				<svg class="slope" viewBox="0 0 {plot.W} {plot.H}" role="img"
 					aria-label="slopegraph of the largest movers">
-					<line x1={plot.x0} y1={plot.y(0)} x2={plot.x1} y2={plot.y(0)} class="axis" />
 					<text x={plot.x0} y={plot.H - 8} class="ax">{short(pw.base)}</text>
 					<text x={plot.x1} y={plot.H - 8} class="ax" text-anchor="end">{short(pw.aligned)}</text>
-					<text x={plot.x0 - 6} y={plot.y(plot.top) + 4} class="ax" text-anchor="end"
-						>{plot.top.toFixed(3)}</text
-					>
-					<text x={plot.x0 - 6} y={plot.y(0) + 4} class="ax" text-anchor="end">0</text>
+					{#each plot.logTicks as tick}
+						<line x1={plot.x0} x2={plot.x1} y1={plot.y(tick)} y2={plot.y(tick)} stroke="#444" stroke-width="0.3" />
+						<text x={plot.x0 - 6} y={plot.y(tick) + 3} class="ax" text-anchor="end">{tick}</text>
+					{/each}
 					{#each plot.picked as w (w.word)}
 						<line
 							x1={plot.x0} y1={plot.y(w.p_base)} x2={plot.x1} y2={plot.y(w.p_aligned)}
@@ -615,6 +678,218 @@
 						>
 					{/each}
 				</svg>
+			{/if}
+
+			{#if pairChartTab === 'charge' && pw?.words?.some((w) => w.scene != null)}
+				{@const rated = pw.words.filter((w) => w.scene != null)}
+				{@const cW = 560}
+				{@const cH = 320}
+				{@const cPadT = 20}
+				{@const cPadB = 36}
+				{@const cPadL = 60}
+				{@const cPadR = 16}
+				{@const yMin = Math.min(...rated.map((w) => w.delta))}
+				{@const yMax = Math.max(...rated.map((w) => w.delta))}
+				{@const yPad = Math.max((yMax - yMin) * 0.08, 0.0005)}
+				{@const cx = (v) => cPadL + ((v - 1) / 6) * (cW - cPadL - cPadR)}
+				{@const cy = (v) => cPadT + (1 - (v - (yMin - yPad)) / ((yMax + yPad) - (yMin - yPad))) * (cH - cPadT - cPadB)}
+				{@const KINDS = { SEXUAL: '#c44e52', VIOLENT: '#e15759', DEGRADING: '#f28e2b', COERCIVE: '#b07aa1', ILLICIT: '#9c755f', NONE: '#76b7b2', OTHER: '#888' }}
+				{@const _xs = rated.map((w) => w.scene)}
+				{@const _ys = rated.map((w) => w.delta)}
+				{@const _n = _xs.length}
+				{@const _mx = _xs.reduce((a, b) => a + b, 0) / _n}
+				{@const _my = _ys.reduce((a, b) => a + b, 0) / _n}
+				{@const _sxx = _xs.reduce((a, x) => a + (x - _mx) ** 2, 0)}
+				{@const _sxy = _xs.reduce((a, x, i) => a + (x - _mx) * (_ys[i] - _my), 0)}
+				{@const slope = _sxx > 0 ? _sxy / _sxx : 0}
+				{@const intercept = _my - slope * _mx}
+				{@const _rank = (arr) => { const s = arr.map((v, i) => [v, i]).sort((a, b) => a[0] - b[0]); const r = new Array(arr.length); s.forEach(([, i], k) => r[i] = k); return r; }}
+				{@const _rx = _rank(_xs)}
+				{@const _ry = _rank(_ys)}
+				{@const _rmx = _rx.reduce((a, b) => a + b, 0) / _n}
+				{@const _rmy = _ry.reduce((a, b) => a + b, 0) / _n}
+				{@const _d2 = _rx.reduce((a, x, i) => a + (x - _rx[i]) ** 2, 0)}
+				{@const _rsxx = _rx.reduce((a, x) => a + (x - _rmx) ** 2, 0)}
+				{@const _rsyy = _ry.reduce((a, y) => a + (y - _rmy) ** 2, 0)}
+				{@const _rsxy = _rx.reduce((a, x, i) => a + (x - _rmx) * (_ry[i] - _rmy), 0)}
+				{@const spearman = (_rsxx > 0 && _rsyy > 0) ? _rsxy / Math.sqrt(_rsxx * _rsyy) : 0}
+				<h3>charge scatter <span class="muted">{rated.length} rated of {pw.n_words} words{pw.frame != null ? ` · frame ${pw.frame.toFixed(1)}` : ''} · r<sub>s</sub> = {spearman.toFixed(3)}</span></h3>
+				<svg class="slopegraph" viewBox="0 0 {cW} {cH}" preserveAspectRatio="xMidYMid meet">
+					{#if yMin <= 0 && yMax >= 0}
+						<line x1={cPadL} x2={cW - cPadR} y1={cy(0)} y2={cy(0)} stroke="#666" stroke-width="0.5" />
+					{/if}
+					{#each [1, 2, 3, 4, 5, 6, 7] as tick}
+						<line x1={cx(tick)} x2={cx(tick)} y1={cPadT} y2={cH - cPadB} stroke="#333" stroke-width="0.3" />
+						<text x={cx(tick)} y={cH - cPadB + 12} text-anchor="middle" font-size="9" fill="#888">{tick}</text>
+					{/each}
+					{#each (() => { const range = (yMax + yPad) - (yMin - yPad); const raw = range / 5; const mag = Math.pow(10, Math.floor(Math.log10(raw))); const step = [1, 2, 5, 10].map(m => m * mag).find(c => c >= raw) ?? raw; const start = Math.ceil((yMin - yPad) / step) * step; return Array.from({ length: Math.ceil(((yMax + yPad) - start) / step) + 1 }, (_, i) => start + i * step); })() as tick}
+						<line x1={cPadL} x2={cW - cPadR} y1={cy(tick)} y2={cy(tick)} stroke="#333" stroke-width="0.3" />
+						<text x={cPadL - 4} y={cy(tick) + 3} text-anchor="end" font-size="8" fill="#888">{tick === 0 ? '0' : (tick > 0 ? '+' : '') + tick.toFixed(4)}</text>
+					{/each}
+					<line x1={cx(1)} y1={cy(intercept + slope)} x2={cx(7)} y2={cy(intercept + slope * 7)} stroke="#aaa" stroke-width="1" stroke-dasharray="4,3" opacity="0.6" />
+					<text x={cx(4)} y={cH - 4} text-anchor="middle" font-size="9" fill="#888">scene charge (1-7)</text>
+					<text x="12" y={cy((yMin + yMax) / 2)} text-anchor="middle" font-size="9" fill="#888" transform="rotate(-90,12,{cy((yMin + yMax) / 2)})">delta (aligned - base)</text>
+					{#each rated as w}
+						<text x={cx(w.scene)} y={cy(w.delta) + 3} text-anchor="middle"
+							font-size={hoverW === w.word ? '10' : '8'} font-family="var(--mono)"
+							fill={KINDS[w.kind] ?? '#888'}
+							opacity={hoverW === null ? 0.8 : hoverW === w.word ? 1 : 0.25}
+							font-weight={hoverW === w.word ? 'bold' : 'normal'}
+							onmouseenter={() => (hoverW = w.word)}
+							onmouseleave={() => (hoverW = null)}
+							style="cursor:default">{w.word}</text>
+					{/each}
+					{#each rated.filter((w) => hoverW === w.word) as w}
+						<text x={cx(w.scene)} y={cy(w.delta) - 8} text-anchor="middle" font-size="9" fill="#ccc">
+							{(w.kind ?? '').toLowerCase()} · {w.delta > 0 ? '+' : ''}{w.delta.toFixed(5)}
+						</text>
+					{/each}
+				</svg>
+				<p class="muted small">
+					{#each Object.entries(KINDS) as [k, c]}
+						<span style="color:{c}">{k.toLowerCase()}</span>{' '}
+					{/each}
+				</p>
+			{/if}
+
+			{#if pairChartTab === 'flow' && pw?.words?.some((w) => w.kind != null)}
+				{@const KINDS = { SEXUAL: '#c44e52', VIOLENT: '#e15759', DEGRADING: '#f28e2b', COERCIVE: '#b07aa1', ILLICIT: '#9c755f', NONE: '#76b7b2', OTHER: '#888' }}
+				{@const CLS_COL = { faller: '#e15759', riser: '#4e79a7', still: '#888' }}
+				{@const rated = pw.words.filter((w) => w.kind != null)}
+				{@const kinds = [...new Set(rated.map((w) => w.kind))].sort((a, b) => a === 'NONE' ? 1 : b === 'NONE' ? -1 : a.localeCompare(b))}
+				{@const clsOrder = ['faller', 'still', 'riser']}
+				{@const nodes = (() => {
+					const n = [];
+					kinds.forEach((k) => n.push({ id: 'base_' + k, label: k, col: 0 }));
+					clsOrder.forEach((c) => n.push({ id: 'cls_' + c, label: c, col: 1 }));
+					kinds.forEach((k) => n.push({ id: 'aligned_' + k, label: k, col: 2 }));
+					return n;
+				})()}
+				{@const links = (() => {
+					const byFlow = new Map();
+					for (const w of rated) {
+						const src = 'base_' + w.kind;
+						const mid = 'cls_' + w.cls;
+						const tgt = 'aligned_' + w.kind;
+						const k1 = src + '>' + mid;
+						const k2 = mid + '>' + tgt;
+						byFlow.set(k1, (byFlow.get(k1) ?? 0) + Math.max(w.p_base, 0.0001));
+						byFlow.set(k2, (byFlow.get(k2) ?? 0) + Math.max(w.p_aligned, 0.0001));
+					}
+					return [...byFlow.entries()].map(([k, v]) => {
+						const [s, t] = k.split('>');
+						return { source: s, target: t, value: v };
+					}).filter((l) => l.value > 0.0005);
+				})()}
+				{@const sankeyData = (() => {
+					const nodeIdx = new Map(nodes.map((n, i) => [n.id, i]));
+					const sNodes = nodes.map((n) => ({ ...n }));
+					const sLinks = links.map((l) => ({
+						source: nodeIdx.get(l.source) ?? 0,
+						target: nodeIdx.get(l.target) ?? 0,
+						value: l.value
+					}));
+					return { nodes: sNodes, links: sLinks };
+				})()}
+				<h3>displacement flow <span class="muted">{rated.length} rated words{pw.frame != null ? ` · frame ${pw.frame.toFixed(1)}` : ''}</span></h3>
+				<p class="muted small">kind in base → faller / still / riser → kind in aligned · link width = probability mass</p>
+				{#await import('d3-sankey') then d3s}
+					{@const layout = d3s.sankey()
+						.nodeId((d) => d.id)
+						.nodeWidth(14)
+						.nodePadding(8)
+						.nodeAlign(d3s.sankeyJustify)
+						.extent([[0, 0], [700, 340]])
+						(JSON.parse(JSON.stringify(sankeyData)))}
+					{@const pathGen = d3s.sankeyLinkHorizontal()}
+					<svg class="slopegraph" viewBox="0 0 700 340" preserveAspectRatio="xMidYMid meet">
+						{#each layout.links as link}
+							<path d={pathGen(link)} fill="none"
+								stroke={KINDS[nodes[link.source.index]?.label] ?? CLS_COL[nodes[link.source.index]?.label] ?? '#666'}
+								stroke-width={Math.max(link.width, 0.5)}
+								opacity={hoverW ? (hoverW === nodes[link.source.index]?.label || hoverW === nodes[link.target.index]?.label ? 0.6 : 0.08) : 0.35}
+								onmouseenter={() => hoverW = nodes[link.source.index]?.label}
+								onmouseleave={() => hoverW = null}
+								style="cursor:default" />
+						{/each}
+						{#each layout.nodes as node}
+							<rect x={node.x0} y={node.y0} width={node.x1 - node.x0} height={Math.max(node.y1 - node.y0, 1)}
+								fill={KINDS[node.label] ?? CLS_COL[node.label] ?? '#666'}
+								opacity={hoverW ? (hoverW === node.label ? 1 : 0.3) : 0.8}
+								onmouseenter={() => hoverW = node.label}
+								onmouseleave={() => hoverW = null}
+								style="cursor:default" />
+							<text x={node.col === 0 ? node.x0 - 4 : node.col === 2 ? node.x1 + 4 : (node.x0 + node.x1) / 2}
+								y={(node.y0 + node.y1) / 2 + 3}
+								text-anchor={node.col === 0 ? 'end' : node.col === 2 ? 'start' : 'middle'}
+								font-size="9" fill="#ccc">{node.label.toLowerCase()}</text>
+						{/each}
+						<text x="0" y="-4" font-size="9" fill="#888" text-anchor="start">base kind</text>
+						<text x="350" y="-4" font-size="9" fill="#888" text-anchor="middle">movement</text>
+						<text x="700" y="-4" font-size="9" fill="#888" text-anchor="end">aligned kind</text>
+					</svg>
+				{/await}
+			{/if}
+
+			{#if pairChartTab === 'arrows' && pw?.words?.length}
+				{@const KINDS = { SEXUAL: '#c44e52', VIOLENT: '#e15759', DEGRADING: '#f28e2b', COERCIVE: '#b07aa1', ILLICIT: '#9c755f', NONE: '#76b7b2', OTHER: '#888' }}
+				{@const topN = 30}
+				{@const sorted = pw.words
+					.map((w) => ({ ...w, absdelta: Math.abs(w.delta) }))
+					.sort((a, b) => b.absdelta - a.absdelta)
+					.slice(0, topN)}
+				{@const maxP = Math.max(...sorted.flatMap((w) => [w.p_base, w.p_aligned]), 0.001)}
+				{@const aW = 560}
+				{@const rowH = 16}
+				{@const labelW = 80}
+				{@const aH = sorted.length * rowH + 30}
+				{@const ax = (v) => labelW + (v / maxP) * (aW - labelW - 10)}
+				<h3>word arrows <span class="muted">top {sorted.length} movers of {pw.n_words}</span></h3>
+				<svg class="slopegraph" viewBox="0 0 {aW} {aH}" preserveAspectRatio="xMidYMid meet">
+					<defs>
+						<marker id="arr-r" viewBox="0 0 6 6" refX="5" refY="3" markerWidth="4" markerHeight="4" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#4e79a7"/></marker>
+						<marker id="arr-l" viewBox="0 0 6 6" refX="1" refY="3" markerWidth="4" markerHeight="4" orient="auto"><path d="M6,0 L0,3 L6,6 Z" fill="#e15759"/></marker>
+					</defs>
+					{#each [0, maxP / 4, maxP / 2, 3 * maxP / 4, maxP] as tick}
+						<line x1={ax(tick)} x2={ax(tick)} y1="0" y2={aH - 18} stroke="#333" stroke-width="0.3" />
+						<text x={ax(tick)} y={aH - 6} text-anchor="middle" font-size="7" fill="#888">{tick < 0.001 ? '0' : tick.toFixed(3)}</text>
+					{/each}
+					{#each sorted as w, i}
+						{@const y = i * rowH + 8}
+						{@const col = KINDS[w.kind] ?? '#888'}
+						{@const falling = w.delta < 0}
+						<text x={labelW - 4} y={y + 4} text-anchor="end" font-size="8" font-family="var(--mono)"
+							fill={col}
+							opacity={hoverW === null ? 0.9 : hoverW === w.word ? 1 : 0.2}
+							onmouseenter={() => hoverW = w.word}
+							onmouseleave={() => hoverW = null}
+							style="cursor:default">{w.word}</text>
+						<line
+							x1={ax(Math.min(w.p_base, w.p_aligned))}
+							y1={y}
+							x2={ax(Math.max(w.p_base, w.p_aligned))}
+							y2={y}
+							stroke={falling ? '#e15759' : '#4e79a7'}
+							stroke-width={hoverW === w.word ? 2.5 : 1.5}
+							opacity={hoverW === null ? 0.7 : hoverW === w.word ? 1 : 0.1}
+							marker-end={falling ? '' : 'url(#arr-r)'}
+							marker-start={falling ? 'url(#arr-l)' : ''}
+							onmouseenter={() => hoverW = w.word}
+							onmouseleave={() => hoverW = null}
+							style="cursor:default"
+						/>
+						<circle cx={ax(w.p_base)} cy={y} r="2" fill="#888"
+							opacity={hoverW === null ? 0.5 : hoverW === w.word ? 1 : 0.1} />
+						<circle cx={ax(w.p_aligned)} cy={y} r="2" fill={falling ? '#e15759' : '#4e79a7'}
+							opacity={hoverW === null ? 0.7 : hoverW === w.word ? 1 : 0.1} />
+						{#if hoverW === w.word}
+							<text x={ax(Math.max(w.p_base, w.p_aligned)) + 6} y={y + 3} font-size="8" fill="#ccc">
+								{w.p_base.toFixed(4)} → {w.p_aligned.toFixed(4)} ({w.delta > 0 ? '+' : ''}{w.delta.toFixed(4)}) {(w.kind ?? '').toLowerCase()}
+							</text>
+						{/if}
+					{/each}
+				</svg>
+				<p class="muted small">grey dot = base · colored dot + arrow = aligned · <span style="color:#e15759">red</span> falling · <span style="color:#4e79a7">blue</span> rising</p>
 			{/if}
 
 			<div class="tablewrap">
@@ -647,7 +922,7 @@
 		{/if}
 	{:else}
 		<div class="bar">
-			<button class="ghost" onclick={() => { selected = null; profile = null; }}>← all prompts</button>
+			<button class="ghost" onclick={() => { selected = null; profile = null; replaceState('/prompts', {}); }}>← all prompts</button>
 		</div>
 		{#if profileLoading}
 			<p class="muted">reading…</p>
@@ -667,7 +942,7 @@
 					<table>
 						<thead><tr><th>prompt</th><th>role</th><th class="num">pairs</th><th class="num">movement</th><th class="num">fallen</th><th class="num">risen</th></tr></thead>
 						<tbody>
-							{#each profile.partners as p (p.prompt)}
+							{#each profile.partners as p, i (p.prompt_id ?? i)}
 								<tr onclick={() => open(p.prompt)}>
 									<td class="p">{p.prompt}</td><td>{p.pair_role ?? ''}</td>
 									<td class="num">{p.n_pairs ?? '—'}</td><td class="num">{n(p.js_median)}</td>
@@ -725,6 +1000,9 @@
 					{/if}
 					{#if hasDots}
 						<button class:active={chartTab === 'dots'} onclick={() => chartTab = 'dots'}>movement by lineage</button>
+					{/if}
+					{#if slopes?.charge?.length}
+						<button class:active={chartTab === 'charge'} onclick={() => chartTab = 'charge'}>charge scatter</button>
 					{/if}
 				</div>
 			{/if}
@@ -819,6 +1097,77 @@
 						· intervals on the paired within-lineage difference
 					</p>
 				{/if}
+			{/if}
+
+			{#if chartTab === 'charge' && slopes?.charge?.length}
+				{@const pts = slopes.charge}
+				{@const cW = 560}
+				{@const cH = 320}
+				{@const cPadT = 20}
+				{@const cPadB = 36}
+				{@const cPadL = 60}
+				{@const cPadR = 16}
+				{@const yMin = Math.min(...pts.map((p) => p.delta))}
+				{@const yMax = Math.max(...pts.map((p) => p.delta))}
+				{@const yPad = Math.max((yMax - yMin) * 0.08, 0.0005)}
+				{@const cx = (v) => cPadL + ((v - 1) / 6) * (cW - cPadL - cPadR)}
+				{@const cy = (v) => cPadT + (1 - (v - (yMin - yPad)) / ((yMax + yPad) - (yMin - yPad))) * (cH - cPadT - cPadB)}
+				{@const KINDS = { SEXUAL: '#c44e52', VIOLENT: '#e15759', DEGRADING: '#f28e2b', COERCIVE: '#b07aa1', ILLICIT: '#9c755f', NONE: '#76b7b2', OTHER: '#888' }}
+				{@const _xs = pts.map((p) => p.scene)}
+				{@const _ys = pts.map((p) => p.delta)}
+				{@const _n = _xs.length}
+				{@const _mx = _xs.reduce((a, b) => a + b, 0) / _n}
+				{@const _my = _ys.reduce((a, b) => a + b, 0) / _n}
+				{@const _sxx = _xs.reduce((a, x) => a + (x - _mx) ** 2, 0)}
+				{@const _sxy = _xs.reduce((a, x, i) => a + (x - _mx) * (_ys[i] - _my), 0)}
+				{@const slope = _sxx > 0 ? _sxy / _sxx : 0}
+				{@const intercept = _my - slope * _mx}
+				{@const _rank = (arr) => { const s = arr.map((v, i) => [v, i]).sort((a, b) => a[0] - b[0]); const r = new Array(arr.length); s.forEach(([, i], k) => r[i] = k); return r; }}
+				{@const _rx = _rank(_xs)}
+				{@const _ry = _rank(_ys)}
+				{@const _rmx = _rx.reduce((a, b) => a + b, 0) / _n}
+				{@const _rmy = _ry.reduce((a, b) => a + b, 0) / _n}
+				{@const _rsxx = _rx.reduce((a, x) => a + (x - _rmx) ** 2, 0)}
+				{@const _rsyy = _ry.reduce((a, y) => a + (y - _rmy) ** 2, 0)}
+				{@const _rsxy = _rx.reduce((a, x, i) => a + (x - _rmx) * (_ry[i] - _rmy), 0)}
+				{@const spearman = (_rsxx > 0 && _rsyy > 0) ? _rsxy / Math.sqrt(_rsxx * _rsyy) : 0}
+				<h3>charge scatter <span class="muted">{pts.length} rated words, {slopes.n_units} lineages{slopes.frame != null ? ` · frame ${slopes.frame.toFixed(1)}` : ''} · r<sub>s</sub> = {spearman.toFixed(3)}</span></h3>
+				<svg class="slopegraph" viewBox="0 0 {cW} {cH}" preserveAspectRatio="xMidYMid meet">
+					{#if yMin <= 0 && yMax >= 0}
+						<line x1={cPadL} x2={cW - cPadR} y1={cy(0)} y2={cy(0)} stroke="#666" stroke-width="0.5" />
+					{/if}
+					{#each [1, 2, 3, 4, 5, 6, 7] as tick}
+						<line x1={cx(tick)} x2={cx(tick)} y1={cPadT} y2={cH - cPadB} stroke="#333" stroke-width="0.3" />
+						<text x={cx(tick)} y={cH - cPadB + 12} text-anchor="middle" font-size="9" fill="#888">{tick}</text>
+					{/each}
+					{#each (() => { const range = (yMax + yPad) - (yMin - yPad); const raw = range / 5; const mag = Math.pow(10, Math.floor(Math.log10(raw))); const step = [1, 2, 5, 10].map(m => m * mag).find(c => c >= raw) ?? raw; const start = Math.ceil((yMin - yPad) / step) * step; return Array.from({ length: Math.ceil(((yMax + yPad) - start) / step) + 1 }, (_, i) => start + i * step); })() as tick}
+						<line x1={cPadL} x2={cW - cPadR} y1={cy(tick)} y2={cy(tick)} stroke="#333" stroke-width="0.3" />
+						<text x={cPadL - 4} y={cy(tick) + 3} text-anchor="end" font-size="8" fill="#888">{tick === 0 ? '0' : (tick > 0 ? '+' : '') + tick.toFixed(4)}</text>
+					{/each}
+					<line x1={cx(1)} y1={cy(intercept + slope)} x2={cx(7)} y2={cy(intercept + slope * 7)} stroke="#aaa" stroke-width="1" stroke-dasharray="4,3" opacity="0.6" />
+					<text x={cx(4)} y={cH - 4} text-anchor="middle" font-size="9" fill="#888">scene charge (1-7)</text>
+					<text x="12" y={cy((yMin + yMax) / 2)} text-anchor="middle" font-size="9" fill="#888" transform="rotate(-90,12,{cy((yMin + yMax) / 2)})">median delta (aligned - base)</text>
+					{#each pts as p}
+						<text x={cx(p.scene)} y={cy(p.delta) + 3} text-anchor="middle"
+							font-size={slopeHover === p.word ? '10' : '8'} font-family="var(--mono)"
+							fill={KINDS[p.kind] ?? '#888'}
+							opacity={slopeHover === null ? 0.8 : slopeHover === p.word ? 1 : 0.25}
+							font-weight={slopeHover === p.word ? 'bold' : 'normal'}
+							onmouseenter={() => (slopeHover = p.word)}
+							onmouseleave={() => (slopeHover = null)}
+							style="cursor:default">{p.word}</text>
+					{/each}
+					{#each pts.filter((p) => slopeHover === p.word) as p}
+						<text x={cx(p.scene)} y={cy(p.delta) - 8} text-anchor="middle" font-size="9" fill="#ccc">
+							{p.kind.toLowerCase()} · {p.delta > 0 ? '+' : ''}{p.delta.toFixed(4)}
+						</text>
+					{/each}
+				</svg>
+				<p class="muted small">
+					{#each Object.entries(KINDS) as [k, c]}
+						<span style="color:{c}">{k.toLowerCase()}</span>{' '}
+					{/each}
+				</p>
 			{/if}
 
 			{#if chartTab === 'dots' && epView.length > 1}
@@ -1007,7 +1356,7 @@
 		background: var(--panel, #1a1a2e); border-bottom-color: transparent;
 		color: var(--text); font-weight: 600;
 	}
-	.slopegraph { display: block; width: 100%; max-width: 560px; margin: 4px 0 8px; }
+	.slopegraph { display: block; width: 100%; max-width: 900px; margin: 4px 0 8px; }
 	.dotstrip { display: block; width: 100%; max-width: 500px; margin: 4px 0 8px; }
 	.frame-toggle button.active {
 		background: var(--blue, #4e79a7); color: #fff; border-color: var(--blue);

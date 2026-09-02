@@ -79,6 +79,14 @@ export interface PromptRow {
 	departed_median: number | null;
 	arrived_median: number | null;
 	net_median: number | null;
+	xf_js_median: number | null;
+	xf_net_median: number | null;
+	dose_k_transgr: number | null;
+	dose_v6_harm: number | null;
+	dose_slot_loaded: number | null;
+	dose_charge: number | null;
+	dose_frame: number | null;
+	dose_increment: number | null;
 }
 
 export interface PromptProfile {
