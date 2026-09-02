@@ -76,10 +76,23 @@
 		//: READ FROM PATH FIRST, THEN QUERY PARAMS. Path takes precedence because
 		//: it is what the app now writes; query params are kept so old links work.
 		const segs = page.url.pathname.split('/').filter(Boolean);
-		const q = (segs.length >= 2 && segs[0] === 'experiments' ? segs[1] : null)
-			?? page.url.searchParams.get('q');
-		const p = (segs.length >= 3 && segs[0] === 'experiments' ? segs.slice(2).join('/') : null)
-			?? page.url.searchParams.get('p');
+		let q: string | null = null;
+		let p: string | null = null;
+		if (segs.length >= 2 && segs[0] === 'experiments') {
+			const rest = segs.slice(1);
+			const ids = new Set(index?.questions.map((x) => x.id) ?? []);
+			const subs = new Set(Object.keys(index?.subjects ?? {}));
+			for (let n = rest.length; n >= 1; n--) {
+				const candidate = rest.slice(0, n).join('/');
+				if (ids.has(candidate) || subs.has(candidate)) {
+					q = subs.has(candidate) && !ids.has(candidate) ? 'subject:' + candidate : candidate;
+					p = n < rest.length ? rest.slice(n).join('/') : null;
+					break;
+				}
+			}
+		}
+		q ??= page.url.searchParams.get('q');
+		p ??= page.url.searchParams.get('p');
 		if (q?.startsWith('subject:')) {
 			openSubject(q.slice(8));
 			return;

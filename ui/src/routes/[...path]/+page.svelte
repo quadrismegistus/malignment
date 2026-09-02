@@ -31,13 +31,15 @@
 	import SlotExplorer from '$lib/components/SlotExplorer.svelte';
 	import Plots from '$lib/components/Plots.svelte';
 	import Prompts from '$lib/components/Prompts.svelte';
+	import Stories from '$lib/components/Stories.svelte';
 
 	const SECTIONS = [
 		{ id: 'experiments', label: 'Experiments', sub: 'the register and its questions' },
 		{ id: 'roster', label: 'Roster', sub: 'which models am I comparing' },
 		{ id: 'prompts', label: 'Prompts', sub: 'the frames and how much each moves' },
 		{ id: 'slot', label: 'Slot', sub: 'what the model wants to say' },
-		{ id: 'plots', label: 'Plots', sub: 'registered figures, run on demand' }
+		{ id: 'plots', label: 'Plots', sub: 'registered figures, run on demand' },
+		{ id: 'stories', label: 'Stories', sub: 'national stories, base vs aligned' }
 	] as const;
 
 	//: THE URL IS THE STATE, so a panel can be sent to someone (RH). Path
@@ -178,6 +180,8 @@
 			<Plots />
 		{:else if section === 'prompts'}
 			<Prompts />
+		{:else if section === 'stories'}
+			<Stories />
 		{/if}
 	</main>
 </div>
