@@ -42,7 +42,7 @@
 		title: string;
 		subtitle?: string;
 		nodes: Node[];
-		links: { source: string; target: string; cross?: boolean }[];
+		links: { source: string; target: string; cross?: boolean; weak?: boolean }[];
 		groups: { key: string; label: string; colour: string }[];
 	};
 	let { art }: { art: Art } = $props();
@@ -84,10 +84,16 @@
 	});
 
 	const forces = $derived({
+		//: A WEAK LINK IS DRAWN AND EXERTS NO FORCE. It is a component sitting in
+		//: one rater's relation and a DIFFERENT rater's, where those two relations
+		//: share fewer than k components -- so the picture should show the two
+		//: relations touching without letting one component weld them into one
+		//: cluster. Dropping it would make the graph agree with the threshold by
+		//: hiding what the threshold is a judgement about.
 		link: forceLink(view.links)
 			.id((d: any) => d.id)
-			.distance(34)
-			.strength(0.4),
+			.distance((l: any) => (l.weak ? 90 : 34))
+			.strength((l: any) => (l.weak ? 0 : 0.4)),
 		charge: forceManyBody().strength(-70),
 		collide: forceCollide().radius((d: any) => (d.kind === 'op' ? 18 : 6)),
 		center: forceCenter(w / 2, H / 2),
@@ -172,6 +178,9 @@
 			</button>
 		{/each}
 		<span class="count dim">{unplaced.size} unplaced</span>
+		<span class="count dim"
+			>{art.links.filter((l) => l.weak).length} weak bridges (below k=3, drawn without pull)</span
+		>
 	</div>
 
 	<div class="stage">
@@ -207,6 +216,7 @@
 											y2={l.y2}
 											class="edge"
 											class:cross={view.links[i]?.cross}
+											class:weak={view.links[i]?.weak}
 										/>
 									{/each}
 									{#each nodes as n (n.id)}
@@ -406,6 +416,14 @@
 		stroke: #ffd43b;
 		stroke-opacity: 0.5;
 		stroke-width: 1;
+	}
+	/* Below the threshold: two relations touch here, but not enough to be one.
+	   Faint and dotted so it reads as contact rather than as structure. */
+	.edge.weak {
+		stroke: #5c6472;
+		stroke-opacity: 0.22;
+		stroke-width: 0.6;
+		stroke-dasharray: 1.5 3;
 	}
 	circle {
 		cursor: pointer;

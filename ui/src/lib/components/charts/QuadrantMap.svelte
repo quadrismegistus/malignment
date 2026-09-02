@@ -109,9 +109,27 @@
 	//: until it clears the one above by `LGAP`. Six anchors, so a greedy pass is
 	//: exact enough and, unlike a force layout, gives the same answer every time.
 	const LGAP = 13;
+	const allAnchors = $derived.by(() => {
+		const p = art.points;
+		if (!p?.x?.length) return art.anchors ?? [];
+		const out: { label: string; colour: string; x: number; y: number }[] = [];
+		for (const c of art.cats ?? []) {
+			const idx = art.cats.indexOf(c);
+			const xs: number[] = [], ys: number[] = [];
+			for (let j = 0; j < p.x.length; j++) {
+				if (p.cat[j] === idx) { xs.push(p.x[j]); ys.push(p.y[j]); }
+			}
+			if (xs.length < 3) continue;
+			out.push({ label: c.label, colour: c.colour,
+				x: xs.reduce((a, b) => a + b, 0) / xs.length,
+				y: ys.reduce((a, b) => a + b, 0) / ys.length });
+		}
+		return out;
+	});
 	const decluttered = $derived.by(() => {
 		if (!plotW) return [];
-		const out = (art.anchors ?? [])
+		const all = allAnchors;
+		const out = all
 			.map((a) => ({ ...a, dx: px(a.x), dy: py(a.y), ly: py(a.y) }))
 			.sort((m, n) => m.dy - n.dy);
 		for (let i = 1; i < out.length; i++)
@@ -476,7 +494,7 @@
 				<defs>
 					<marker id="qm-head" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="5"
 						markerHeight="5" orient="auto-start-reverse">
-						<path d="M0,0 L8,4 L0,8 z" fill="#ffd43b" />
+						<path d="M0,0 L8,4 L0,8 z" fill="#ffd43b" opacity="0.4" />
 					</marker>
 				</defs>
 				{#each art.arrows ?? [] as a (a.label)}
@@ -828,7 +846,7 @@
 	.moves line {
 		stroke: #ffd43b;
 		stroke-width: 1.6;
-		stroke-opacity: 0.85;
+		stroke-opacity: 0.4;
 		pointer-events: stroke;
 	}
 	.moves .anchor text {

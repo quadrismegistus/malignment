@@ -11,6 +11,8 @@ import NormAcquisition from './NormAcquisition.svelte';
 import NovelArc from './NovelArc.svelte';
 import DiegeticSankey from './DiegeticSankey.svelte';
 import DiegeticChord from './DiegeticChord.svelte';
+import DisplacementFlow from './DisplacementFlow.svelte';
+import DisplacementSlopes from './DisplacementSlopes.svelte';
 
 /**
  * chart type -> component, keyed by the `chart` field a producer writes into its
@@ -37,5 +39,7 @@ export const CHARTS: Record<string, Component<any>> = {
 	norm_acquisition: NormAcquisition,
 	novel_arc: NovelArc,
 	diegetic_sankey: DiegeticSankey,
-	diegetic_chord: DiegeticChord
+	diegetic_chord: DiegeticChord,
+	displacement_flow: DisplacementFlow,
+	displacement_slopes: DisplacementSlopes
 };
