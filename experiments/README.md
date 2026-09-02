@@ -115,6 +115,66 @@ afterwards — amendments append with a date and a reason. A pre-registration
 editable after seeing the result is a post-hoc rationalisation with better
 typography.
 
+## TWO OF THE RULES ABOVE ARE NOT BEING FOLLOWED, AND RH HAS SAID SO
+
+**Recorded 2026-09-02, unresolved, RH's.** Neither is amended here, because the
+replacement is his call and a rule rewritten by whoever last tripped over it is
+not a rule. But leaving them stated as though they held would be worse: a rule
+everything violates teaches that the rules are decorative, and the next person
+to read this file cannot tell which of these sentences are live.
+
+**ONE PRODUCER PER DIRECTORY -- violated in 30 directories of 52.**
+
+    >1 producer   30
+     1 producer   22   (21 of them named run.py, so the NAMING rule holds
+                        wherever the count rule does)
+
+    41  passage_analysis/jakobson_space
+    28  displacement/displacement_taxonomy
+    21  displacement/displacement_axis
+    20  instrument_calibrations/dose_response
+    17  national_story
+    17  emergence/capacities
+    16  slot_ratings/institutional
+
+RH: *"we said just run.py / 1 producer but it turned out impractical for many
+experiments."* The counts agree with him. `national_story` at 17 is not an
+outlier, it is FIFTH, and the folders above it are the campaign's most productive
+ones. A rule that the best work breaks hardest is a rule describing something
+other than quality.
+
+What the rule was actually defending is still real and is worth separating from
+its mechanism: v2's 250 scripts for 32 findings, where `k_`x47 and `x_`x36 meant
+nothing to anyone and no script could be traced to a claim. **The failure was
+untraceable proliferation, not plurality.** `jakobson_space`'s 41 producers each
+have a name that says what they do and a README section that cites them; M01's
+250 did not. A rule keyed to the count cannot tell those apart, and this one
+does not.
+
+**FLAT AT TOP LEVEL UNTIL A SECOND QUESTION ARRIVES -- RH does not want it.**
+
+RH: *"I know we initially said experiments should initially be top level but for
+web UI reasons and organisational reasons I dont like it. Not sure what to do."*
+
+The rule was a response to `meta/M01_displacement`, which was created empty and
+absorbed everything nearby. That failure is real, and so is the cost RH is
+naming: the top level currently mixes subjects (`displacement`,
+`passage_analysis`, `slot_ratings`, `division_of_labour`, `emergence`) with
+single questions (`national_story`, `readout_share`,
+`posttraining_corpus_analysis`) and with class axes
+(`instrument_calibrations`, `exploratory`), and nothing in a directory listing
+says which kind a name is. `serve.py` walks that listing.
+
+Two moves were made under it on 2026-09-02 and both were uncontroversial because
+they were CLASS moves, not promotions: `story_decoder` and `mps_sampling` into
+`instrument_calibrations/`. The contested case is `national_story`, which is
+subject-shaped already and would become a subject inside a subject if moved into
+`passage_analysis/` without being split first.
+
+Note also `malignment/serve.py` hardcodes `EXPERIMENTS/national_story/` at six
+lines (2208, 2272, 2279, 2331, 2357, 2384). Any layout change has a serve.py cost
+and it is small and known rather than open-ended.
+
 ## Scratch work
 
 Does not live here. Use the session scratchpad or a gitignored `sandbox/`. The

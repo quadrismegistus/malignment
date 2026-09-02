@@ -70,8 +70,12 @@ STOP = set("the a an and or but of to in on at for with from by as is was were "
 
 def _measure():
     #: story_decoder/run.py, by PATH: this directory has a run.py of its own and
-    #: it shadows that one on sys.path.
-    p = os.path.join(HERE, '..', 'story_decoder', 'run.py')
+    #: it shadows that one on sys.path. story_decoder moved under
+    #: instrument_calibrations/ on 2026-09-02; this is the only reference to it
+    #: that was a PATH rather than a citation, so it is the only one that could
+    #: have broken silently at import time rather than misleading a reader.
+    p = os.path.join(HERE, '..', 'instrument_calibrations', 'story_decoder',
+                     'run.py')
     spec = importlib.util.spec_from_file_location('sd_run', p)
     m = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(m)

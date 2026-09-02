@@ -5,7 +5,8 @@
 
 ## WHY THESE PARAMETERS
 
-`top_p=1.0, top_k=0` is the ONLY MPS-safe sampler (see experiments/mps_sampling:
+`top_p=1.0, top_k=0` is the ONLY MPS-safe sampler (see
+experiments/instrument_calibrations/mps_sampling:
 every filter zeroes logits, and MPS samples exact zeros at ~1/400 per draw, which
 is 99% of a 1900-token generation). Unfiltered sampling draws the true tail --
 4 in 300 beyond rank 5000 -- so text quality here is a FLOOR, not an estimate.

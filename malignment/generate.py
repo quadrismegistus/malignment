@@ -88,7 +88,8 @@ import os
 #: The f11_l2 corpus decoder, field for field. Change this and generated
 #: passages stop being comparable with the store, so it is a module constant
 #: with a citation rather than a call-site default.
-#: **DO NOT SAMPLE ON MPS.** `experiments/mps_sampling` reproduces it:
+#: **DO NOT SAMPLE ON MPS.** `experiments/instrument_calibrations/mps_sampling`
+#: reproduces it:
 #: SmolLM2-360M-Instruct, prompt "It was a", `top_k=50` so the permitted set is
 #: exactly fifty ids -- at seed 159 MPS returns token 20341 (' nodded'), RANK
 #: 29,516, p=1.17e-08. Deterministic 5/5; CPU at the same seed returns a top-50

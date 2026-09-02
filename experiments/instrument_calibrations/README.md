@@ -19,6 +19,26 @@ nearby."* It is a CLASS axis, not the `<subject>/<question>` axis.
 | `sex_violence_lexicon` | the 1,063-word blind-rated lexicon. Five construction rules, one admission gate. Says nothing about what alignment does. | **ADMITTED**, sha `d542e7e2bb86bd00` |
 | `displacement_reference` | how far training moves a model, per phase, per token — the *compared to what* the project never had | **BUILT** |
 | `prompt_openness` | which of the 482 generated prompts leave the event to be invented and which name it. Two blind coders, agreement 0.909. Says nothing about what alignment does; it partitions the substrate any scene-kind question has to run on. | **BUILT**; 666 of 679 prompts resolved by two coders plus an anchored third on all 68 ties. **The subject-matter independence check FAILS at p=0.042, and the design cannot say whether that is coder leakage or transgressive prompts genuinely narrowing the continuation.** Any use conditioning on `pair_role` inherits it |
+| `story_decoder` | which decoder and frame let BOTH arms write a story. Fixes `t=1.0/p=0.95` for `national_story`. Moved here from top level 2026-09-02. **Unlike everything else in this table it DOES say something about what alignment does** -- see the note below | **RUN**, 160 generations, docket [6576] |
+| `mps_sampling` | MPS samples tokens the filter forbade, at ~1/400 per draw, and only when the distribution contains exact zeros. Sets a hard constraint every generation experiment inherits. Moved here from top level 2026-09-02, and given the README it never had | **RUN**; `top_k`/`min_p`, the published MPS-safe workarounds, measured and NOT safe |
+
+## `story_decoder` is the one member that makes a claim about alignment
+
+The rest of this table earns its place by saying nothing about what alignment
+does -- that is the whole criterion, and `prompt_openness`'s entry states it
+outright. `story_decoder` does not meet it. Its headline is **the two arms want
+opposite decoders**: base loops below `t=1.0`, aligned turns to salad at
+`p=1.0`, so `t=1.0/p=0.95` is a compromise and not an optimum, and it is still
+the worse setting for the aligned arm considered alone. That is a finding about
+what alignment does to the shape of the distribution, not a construction rule.
+
+It is filed here anyway, on the other half of the criterion: it registers no
+hypothesis, has no row in the hypothesis register, and would not want one. Its
+function is to fix a parameter for another experiment.
+
+**Recorded rather than smoothed over**, because the cheap thing would have been
+to let it inherit the container's blanket disclaimer, and then the one entry
+that carries an arm result would be the one entry a reader was told to ignore.
 
 ## Candidates, not yet built
 

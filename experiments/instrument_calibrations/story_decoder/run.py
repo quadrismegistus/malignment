@@ -42,7 +42,7 @@ repeats more under the shared setting, that is a fact about base models under it
 and every filter (`top_p`, `top_k`, `min_p`) produces exact zeros via `-inf` into
 softmax. Over 1,900 tokens that is a 99% chance of at least one impossible token.
 `top_p=1.0` is the only safe local setting and is exactly the one under test, so
-the question is unanswerable on that hardware. See `experiments/mps_sampling`.
+the question is unanswerable on that hardware. See `../mps_sampling`.
 
 ## WHAT IT RECORDS, AND WHY NOT A VERDICT
 
