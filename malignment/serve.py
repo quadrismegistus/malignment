@@ -350,7 +350,13 @@ def _walk_experiments():
         produced = os.path.isdir(rdir) and any(
             not n.startswith(".")
             for _r, _d, _f in os.walk(rdir) for n in _f)
-        if not ({"run.py", "registration.md", "plot.py"} & fs) and not produced:
+        has_figures = os.path.isdir(os.path.join(dirpath, "figures")) and any(
+            not n.startswith(".") for n in os.listdir(os.path.join(dirpath, "figures"))
+            if os.path.isfile(os.path.join(dirpath, "figures", n)))
+        has_code = any(f.endswith(".py") for f in filenames)
+        has_readme = "README.md" in fs
+        if not ({"run.py", "registration.md", "plot.py"} & fs) and not produced \
+                and not (has_figures and has_readme) and not (has_code and has_readme):
             continue
         results, undocumented, captions = [], [], {}
         if os.path.isdir(rdir):

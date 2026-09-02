@@ -105,6 +105,25 @@
 		});
 	});
 
+	function interceptMdLinks(e: MouseEvent) {
+		const a = (e.target as HTMLElement)?.closest?.('a');
+		if (!a) return;
+		const href = a.getAttribute('href');
+		if (!href || href.startsWith('http') || href.startsWith('#') || href.startsWith('/')) return;
+		const resolved = selected
+			? selected.replace(/^subject:/, '') + '/' + href.replace(/\.md$/, '').replace(/^\.\//, '')
+			: href.replace(/\.md$/, '').replace(/^\.\//, '');
+		const ids = new Set(index?.questions.map((q) => q.id) ?? []);
+		const subs = new Set(Object.keys(index?.subjects ?? {}));
+		if (ids.has(resolved)) {
+			e.preventDefault();
+			open(resolved);
+		} else if (subs.has(resolved)) {
+			e.preventDefault();
+			openSubject(resolved);
+		}
+	}
+
 	//: A SUBJECT OPENS ITS README AND NOTHING ELSE. It is held in `detail` with a
 	//: `subject:` prefix so the existing selection highlight and URL sync work
 	//: unchanged, and with empty results/figures so the tiers below render as
@@ -435,7 +454,11 @@
 					<span class="muted">the file opens with the directory conventions</span>
 				{/if}
 			</div>
-			<Markdown src={index?.register_md ?? null} />
+			<!-- svelte-ignore a11y_click_events_have_key_events -->
+			<!-- svelte-ignore a11y_no_static_element_interactions -->
+			<div onclick={interceptMdLinks}>
+				<Markdown src={index?.register_md ?? null} />
+			</div>
 		{:else if detail}
 			<header>
 				<h2>{detail.name}</h2>
@@ -611,7 +634,11 @@
 			{:else if loading}
 				<p class="muted">reading…</p>
 			{:else if pane === 'readme'}
-				<Markdown src={detail.readme_md} />
+				<!-- svelte-ignore a11y_click_events_have_key_events -->
+				<!-- svelte-ignore a11y_no_static_element_interactions -->
+				<div onclick={interceptMdLinks}>
+					<Markdown src={detail.readme_md} />
+				</div>
 			{:else if pane === 'registration'}
 				<!--
 				  A REGISTRATION IS FROZEN AND THE PANEL SAYS SO. It is the one
