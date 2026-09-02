@@ -33,6 +33,18 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.abspath(os.path.join(HERE, "..", "..", "..")))
 sys.path.insert(0, HERE)
 
+#: the DEFAULT dose. `--dose` overrides it, because the two doses this campaign
+#: uses do not live in the same place and rank prompts differently:
+#:
+#:   k_transgressiveness   a per-PROMPT level, read from levels_long.csv.gz
+#:   lift                  T_base - frame, per (prompt, LINEAGE), from
+#:                         charge.lifts_per_lineage(). English only -- charge
+#:                         ratings cover 2,400 English prompts.
+#:
+#: `dose.py` records why the second exists: lift predicts displacement 3x better
+#: than the level (r=-0.261 against -0.091) because the level SATURATES above
+#: frame 5. So the top decile by level and the top decile by lift are not the
+#: same prompts, and an example drawn from one is not an example of the other.
 DOSE = "k_transgressiveness"
 
 
@@ -47,6 +59,10 @@ def main(argv=None):
     ap.add_argument("--lang", default="en", choices=("en", "zh"))
     ap.add_argument("--rank", type=int, default=0, help="which top-dose prompt")
     ap.add_argument("--top", type=int, default=12)
+    ap.add_argument("--dose", default=DOSE,
+                    help="scale used to RANK prompts. Any scale in "
+                         "levels_long, or 'lift' for the per-lineage lift dose "
+                         "(en only).")
     a = ap.parse_args(argv)
     if not (a.scale or a.usas):
         ap.print_help()
@@ -78,14 +94,31 @@ def main(argv=None):
     #: did not finish. The dose is already computed and stored -- the base_level
     #: of k_transgressiveness per (lineage, prompt) -- so ranking is a read.
     import gzip
+    import statistics as st
     LONG = os.path.expanduser("~/malignment-data/norm_change/levels_long.csv.gz")
     agg_d = collections.defaultdict(list)
-    with gzip.open(LONG, "rt", encoding="utf-8") as fh:
+    if a.dose == "lift":
+        #: NOT in levels_long -- it is computed per (prompt, base) rather than
+        #: stored per (lineage, prompt, scale), so it is read from its own
+        #: source. Aggregated to the prompt the same way as a stored scale:
+        #: median over lineages, minimum five, so one lineage cannot nominate a
+        #: prompt.
+        if a.lang != "en":
+            print("lift dose is ENGLISH ONLY -- charge covers 2,400 en prompts")
+            return 1
+        from malignment import charge, roster
+        ep, _ = roster.endpoints()
+        for (pr, base), v in charge.lifts_per_lineage().items():
+            al = ep.get(base)
+            if al and "%s>%s" % (base, al) in EP:
+                agg_d[pr].append(float(v))
+    else:
+      with gzip.open(LONG, "rt", encoding="utf-8") as fh:
         head = fh.readline().rstrip("\n").split("\t")
         ix = {k: i for i, k in enumerate(head)}
         for line in fh:
             v = line.rstrip("\n").split("\t")
-            if len(v) != len(head) or v[ix["scale"]] != DOSE:
+            if len(v) != len(head) or v[ix["scale"]] != a.dose:
                 continue
             if v[ix["lang"]] != a.lang:
                 continue
@@ -95,7 +128,30 @@ def main(argv=None):
                 agg_d[v[ix["prompt"]]].append(float(v[ix["base_level"]]))
             except ValueError:
                 continue
-    import statistics as st
+    if not agg_d:
+        print("no prompts carry dose %r in %s -- is it a scale in levels_long?"
+              % (a.dose, a.lang))
+        return 1
+
+    #: **RANK ONLY OVER PROMPTS `movement` CAN ACTUALLY SERVE.** The dose and the
+    #: word table are two populations and they are not the same one: 2,400
+    #: prompts carry a lift dose, 4,482 are in `movement`, and the OVERLAP is
+    #: 2,126 -- so 274 lift-dosed prompts have no words to show.
+    #:
+    #: The top-ranked prompt by lift is one of them. Without this filter the
+    #: command prints a prompt, a dose, and "no rated words at this prompt", and
+    #: the only way forward is walking `--rank` by hand until one lands. That is
+    #: not a missing feature; it is an example selected by which prompts happen
+    #: to be in a second table, which is a selection rule nobody declared.
+    have = {r["prompt"] for r in ch.query("SELECT DISTINCT prompt FROM movement")}
+    before = len(agg_d)
+    agg_d = {k: v for k, v in agg_d.items() if k in have}
+    if before != len(agg_d):
+        print("dose %s: %d prompts, %d also in movement (%d dropped)"
+              % (a.dose, before, len(agg_d), before - len(agg_d)))
+    if not agg_d:
+        print("no dosed prompt is in movement -- the two populations are disjoint")
+        return 1
     scored = sorted(((st.median(v), pr) for pr, v in agg_d.items() if len(v) >= 5),
                     reverse=True)
     if not scored:
@@ -104,8 +160,8 @@ def main(argv=None):
     dose, prompt = scored[min(a.rank, len(scored) - 1)]
     print()
     print("=" * 78)
-    print("PROMPT (rank %d of %d by base transgressive level %.3f)"
-          % (a.rank + 1, len(scored), dose))
+    print("PROMPT (rank %d of %d by median %s = %.3f over >=5 lineages)"
+          % (a.rank + 1, len(scored), a.dose, dose))
     print("=" * 78)
     print("  %r" % prompt[:200])
 
