@@ -109,27 +109,41 @@ def ols(xs, ys):
     return sum((x - mx) * (y - my) for x, y in zip(xs, ys)) / sxx
 
 
-def load(run):
+def load(run, use_lift=False):
     """-> rows with dN/sd/nullabs per scale plus the dose, joined and checked."""
     d = os.path.join(HERE, "results", run)
     dose_of = {}
+    lift_of = {}
     with open(os.path.join(d, "cells.jsonl")) as fh:
         for line in fh:
             r = json.loads(line)
             dose_of[(r["base"], r["endpoint"], r["item_id"])] = r.get(DOSE)
+    if use_lift:
+        from malignment import charge
+        lpl = charge.lifts_per_lineage()
+        prompts_by_item = {}
+        with open(os.path.join(d, "cells.jsonl")) as fh:
+            for line in fh:
+                r = json.loads(line)
+                prompts_by_item[r["item_id"]] = r.get("prompt", "")
     rows, missing = [], 0
     with open(os.path.join(d, "long", "mass_cells.csv")) as fh:
         for r in csv.DictReader(fh):
             k = (r["base"], r["endpoint"], r["item"])
-            v = dose_of.get(k)
+            if use_lift:
+                pr = prompts_by_item.get(r["item"], r.get("prompt", ""))
+                v = lpl.get((pr, r["base"]))
+            else:
+                v = dose_of.get(k)
             if v is None:
                 missing += 1
                 continue
             r["_dose"] = float(v)
             r["_lin"] = "%s>%s" % (r["base"], r["endpoint"])
             rows.append(r)
+    dose_name = "lift (T_base - frame)" if use_lift else DOSE
     if missing:
-        print("WARNING: %d cells had no %s and were dropped" % (missing, DOSE))
+        print("WARNING: %d cells had no %s and were dropped" % (missing, dose_name))
 
     #: mass_cells is written post-dedupe; assert it rather than trust it, since
     #: a triplicated prompt would inflate every per-lineage median silently.
@@ -262,12 +276,17 @@ def main(argv=None):
     ap = argparse.ArgumentParser()
     ap.add_argument("--run", default="pilot3")
     ap.add_argument("--domain", default=None)
+    ap.add_argument("--lift-dose", action="store_true",
+                    help="use per-lineage lift (T_base - frame) from charge instead "
+                         "of base_naughty_mass. Lacan [6565]: lift predicts 3x better.")
     ap.add_argument("--out", default=None, help="dir for the long CSV")
     a = ap.parse_args(argv)
 
-    rows = load(a.run)
+    rows = load(a.run, use_lift=a.lift_dose)
+    dose_name = "lift (T_base - frame)" if a.lift_dose else DOSE
     print("%d cells joined, gate sd >= %.2f, ties excluded, min %d signed units"
           % (len(rows), GATE, MIN_UNITS))
+    print("DOSE: %s" % dose_name)
     nlin = len({r["_lin"] for r in rows})
     print("FLOOR: with %d lineages a sign test cannot go below p = %.2g\n"
           % (nlin, 2.0 * 0.5 ** nlin))

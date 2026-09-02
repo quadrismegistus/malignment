@@ -186,3 +186,204 @@ the two largest positive naming gains in the table.
   reproducible while the store holds still; the population is discovered, so a later
   ingest gives a different one.
 - **The per-domain tables are exploratory**, 48 cells, uncorrected, both signs.
+
+
+## 3. LIFT DOSE REVERSES THE NAMING-GAIN NULL (2026-08-30, lacan [6565])
+
+`python -u lineage_dose.py --run pilot4 --lift-dose`
+
+The dose above is `base_naughty_mass` -- sum of base-arm probability on
+hand-tagged "naughty" words, median 5 words per item, partly a regression on how
+much vocabulary the tagger wrote down. Lacan's [6565] showed that
+`charge.lift_per_lineage()` -- T_base minus frame, per (prompt, base) -- predicts
+displacement 3x better than the level (r = -0.261 vs -0.091), because the level
+saturates above frame 5.
+
+98% of pilot4's cells carry a lift value (12,490 of 12,750). 194 dropped, all
+from prompts outside the 2,400 charge-rated English set.
+
+### THE NAMING GAIN FLIPPED
+
+    DOSE = base_naughty_mass (old)
+      |dN| / shuffled |dN|, LOW-dose half    +0.131  42/50   p=1.2e-6
+      |dN| / shuffled |dN|, HIGH-dose half   +0.139  45/50   p=4.2e-9
+      GAIN, high minus low                   +0.015  27/50   p=0.67     NULL
+
+    DOSE = lift (T_base - frame)
+      |dN| / shuffled |dN|, LOW-dose half    +0.116  44/50   p=3.2e-8
+      |dN| / shuffled |dN|, HIGH-dose half   +0.175  47/50   p=3.7e-11
+      GAIN, high minus low                   +0.060  34/50   p=0.015    SIGNIFICANT
+
+**Named dimensions beat their own permutation by MORE where the candidate words
+add transgressiveness over the setup.** The headline from section 2 -- "naming
+works, and it does not work better under load" -- was a property of the dose, not
+of the data. The naughty-mass dose split the population at the wrong place
+(median 5 hand-tagged words, partly floor), and lift splits it at the right
+place (how much this model's distribution exceeds the frame).
+
+The gain is not large (0.060 median, 34/50 lineages positive). But the old null
+was the single strongest argument that the rate and nameability of displacement
+were independent functions of dose, and it no longer holds.
+
+### MUNDANITY IS NOW THE STRONGEST DOSE SLOPE
+
+Pooled over all domains:
+
+                            base_naughty_mass         lift
+    mundanity               +0.247  41/50  5.6e-6    +0.055  45/50  4.2e-9
+    harm                    -0.473  15/50  0.0066     -0.090   6/50  3.2e-8
+    directedness            -0.427  11/50  9e-5       -0.078   7/50  2.1e-7
+    fit                     -0.094  12/50  3.1e-4     -0.013   9/50  5.6e-6
+    superego                        --                -0.052   9/50  5.6e-6
+    deliberation                    --                -0.012  12/50  3.1e-4
+
+The median slopes are smaller under lift because the predictor has a wider range
+(lift spans -1.0 to +1.9 vs naughty-mass's 0 to 0.38), so the per-unit-dose
+effect is compressed. **The SIGN COUNTS are larger**: mundanity 45/50 vs 41/50,
+harm 6/50 vs 15/50. The signal-to-noise improved.
+
+**`superego` and `deliberation` are now significant pooled**, at p=5.6e-6 and
+3.1e-4. Both are negative: more lift, less superego-like and less deliberate
+language. Neither reached significance under naughty-mass.
+
+### PER-DOMAIN HIGHLIGHTS
+
+**Identity harm** gains significance on the dose slope (14/50, p=0.0026) and has
+the largest naming gain in any cell (0.610, 40/50, p=2.4e-5). Lift separates
+what naughty-mass could not: how much the model's own candidates add, weighed by
+this base arm's probabilities.
+
+**Identity deliberation** shows the largest naming gain of any domain-scale pair
+(+0.564, 37/50, p=0.00094), up from the old dose's +0.865 at 37/50 where the
+sign count was the same. The hedged-deliberation-harm cluster in identity is
+consistently the locus of dose-dependent naming.
+
+**Sexual mundanity** is the strongest per-domain dose slope (+0.053, 39/50,
+p=9e-5). In sexual frames, the more the candidates exceed the setup, the further
+alignment moves toward the ordinary.
+
+**Violence fit** has a negative dose slope under lift (-0.021, 11/50, p=9e-5)
+AND a negative naming gain (-0.220, 9/50, p=5.6e-6). Fit is applied as a
+constant -- it rises everywhere and rises LESS under load, and the named
+dimension accounts for LESS of the travel where load is high. That is the same
+shape as under the old dose and the only scale where both quantities are
+significant and negative.
+
+### WHAT THIS CHANGES IN THE READING
+
+1. **The naming-gain null is withdrawn.** Under lift, gain is positive and
+   significant at p=0.015. The rate and nameability of displacement are NOT
+   independent functions of dose -- they co-vary, weakly but reliably.
+
+2. **The "naming works everywhere alike" claim weakens but does not vanish.**
+   Both halves still beat their permutation, and the gain (0.06) is a tenth of
+   the baseline (0.12-0.18). So naming works in both halves, and works somewhat
+   better in the high-lift half.
+
+3. **mundanity's three-quantity significance (marginal, dose, naming gain)
+   strengthens.** It was the one scale positive on all three under the old dose
+   and it remains so under lift, now at 45/50 (p=4.2e-9) on the dose slope.
+
+### WHAT THIS DOES NOT CHANGE
+
+The mass-direction finding (25 of 48 hold under both units) is unaffected --
+those are marginal results that do not depend on how dose is measured. The
+translation table (which directions survive the change of unit) is also
+unaffected.
+
+
+## 4. CHARGE SCENE AS A MAGNITUDE PREDICTOR: NO (2026-08-30)
+
+`loo_all.py --run pilot4 --charge-only`. Does the contextual charge continuum
+(1-7 per word per prompt, from `charge.scene`) predict HOW FAR a word moves,
+not just which way?
+
+### The question and why it was worth asking
+
+`charge.scene` is the first predictor in this folder that is (a) contextual --
+a word's rating depends on the frame it appears in -- and (b) continuous -- not
+a category or a binary pole membership. The naming-gain result in section 3
+shows the named dimensions account for MORE of the displacement under high lift.
+If that "more" comes from the scene continuum specifically, it could close the
+gap with bge.
+
+Additionally, `charge.cell(prompt, base)` gives per-lineage scene ratings -- each
+base arm's own annotation of each word. That is a per-(prompt, word, model)
+quantity, which is exactly the within-site variation that Findings P's ICC of
+0.131 says carries 82-87% of the magnitude variance.
+
+### Three versions tested
+
+    charge           cross-lineage mean scene (1 col, same for all folds)
+    scene_perlin     per-lineage scene (1 col, varies by held-out fold --
+                     training uses mean of n-1 lineages' ratings, test uses
+                     the held-out lineage's own ratings)
+    bge_pc1          first PC of bge-m3 embedding (1 col, the matched control)
+
+### Result
+
+    CHARGE SCENE (1 column), 249 frames, 50 lineages
+
+                                        median R2    % of benchmark
+    emp_mean (benchmark)                0.0674       100%
+    charge (cross-lineage, 1 col)      -0.0026        -4%
+    bge_pc1 (1 col)                    -0.0025        -4%
+    scene_perlin (per-lineage, 1 col)  -0.0079       -12%
+    bge_pc10 (10 cols)                  0.0200        30%
+
+**One column predicts nothing on magnitude**, regardless of whether it is charge,
+bge_pc1, or anything else. This is structural: predicting which of 82 words
+moves further from one number per word is underdetermined.
+
+**Per-lineage scene is worse than the cross-lineage mean.** Each per-lineage
+rating is one rater's judgment on one base arm's candidates. The cross-lineage
+mean denoises by averaging over 50 raters, but even the denoised version scores
+zero. The per-lineage version adds noise that ridge regression cannot absorb.
+
+### In ensemble
+
+    CHARGE + V6 + INST (166 frames, identical words)
+
+                                        median R2    % of benchmark
+    emp_mean                            0.0582       100%
+    v6+inst (25 cols)                   0.0373        64%
+    bge_pc26 (26 cols)                  0.0458        79%
+    scene_perlin+named (26 cols)        0.0321        55%     WORSE than named alone
+    scene_perlin+bge (11 cols)          0.0223        38%     WORSE than bge alone
+    scene_perlin+all (36 cols)          0.0364        63%     WORSE than named+bge
+    charge+v6+inst (27 cols)            0.0373        64%     NO GAIN over v6+inst
+
+**Adding scene to any ensemble degrades or does not help.** The scene column is
+collinear with the v6 decomposition (it is a composite of those scales) and adds
+noise without adding information the decomposition does not already carry. The
+per-lineage version is worse because it adds noise on top of collinearity.
+
+### What this means for the direction/magnitude split
+
+The finding from Findings P holds at full roster with a new instrument:
+
+> **There is a word-level direction alignment sorts on, it is not in our
+> descriptive vocabulary, and the unnamed residual outpredicts every name we
+> have tried.**
+
+Charge is a BETTER name for direction than any previous one -- it is contextual,
+continuous, and it correctly predicts which words fall (high-scene) and which
+rise (low-scene). But direction and magnitude are different objects, and
+magnitude is where the embeddings win. The gap between named scales (62% of
+benchmark) and bge (73%) is not a gap in how transgressiveness is measured; it
+is a gap in what kind of information predicts how far mass travels.
+
+The embedding encodes distributional neighborhood structure -- how many similar
+words are nearby to absorb mass -- which is a magnitude-relevant property that
+no single charge number can carry. The ICC result says the same thing from the
+other direction: 82-87% of the fall/rise variance is within a word across sites,
+which means what determines how far a word moves is its local competitive
+environment, not its rating on any scale.
+
+### Also fixed: `_build` indentation bug
+
+The multi-source refactor (commit `d58815a`) placed the per-cell aggregation
+loop body outside the inner `for raw in open(src, "rb")` loop. The index was
+built from only the last cell of each source file: 2 prompts instead of 2,793.
+Fixed here. The lift and dose results earlier in this file were computed from
+`lifts_per_lineage()`, which reads the JSONL directly and was unaffected.

@@ -92,6 +92,11 @@ def main(argv=None):
     ap.add_argument("--run", default=RUN, help="run directory under results/")
     ap.add_argument("--min-lineages", type=int, default=10)
     ap.add_argument("--min-words", type=int, default=30)
+    ap.add_argument("--stratify-lift", action="store_true",
+                    help="split frames at median lift and report high/low separately")
+    ap.add_argument("--charge-only", action="store_true",
+                    help="run charge.scene (1 column) as the predictor, with and "
+                         "without the other instruments")
     a = ap.parse_args(argv)
     global RES
     RES = os.path.join(HERE, "results", a.run)
@@ -107,9 +112,23 @@ def main(argv=None):
     S6 = sorted({s for p in v6.values() for w in p.values() for s in w})
     inst, SI = load_inst()
     sex = load_sex()
+    from malignment import charge as _charge
+    charge_scene = {}
+    for p in _charge.prompts():
+        sc = _charge.scene(p)
+        if sc:
+            charge_scene[p] = sc
+    charge_per_lin = {}
+    with open(_charge.SOURCE) as _fh:
+        for _line in _fh:
+            _r = json.loads(_line)
+            _ws = {w["word"]: w["scene"] for w in _r.get("words", [])}
+            if _ws:
+                charge_per_lin[(_r["prompt"], _r["base"])] = _ws
     print("instruments: v6 %d scales / %d frames | inst %d scales / %d frames "
-          "| sexual %d scales / %d frames\n"
-          % (len(S6), len(v6), len(SI), len(inst), len(S2), len(sex)))
+          "| sexual %d scales / %d frames | charge %d frames\n"
+          % (len(S6), len(v6), len(SI), len(inst), len(S2), len(sex),
+             len(charge_scene)))
 
     dp = collections.defaultdict(lambda: collections.defaultdict(dict))
     pb = collections.defaultdict(lambda: collections.defaultdict(dict))
@@ -129,21 +148,24 @@ def main(argv=None):
         return np.c_[np.ones(len(Xt)), Xt] @ b
 
     import dedupe
-    KEEP = dedupe.report(prompt_of, dedupe.keep(prompt_of))
+    KEEP_ALL = dedupe.report(prompt_of, dedupe.keep(prompt_of))
+    _keep = [KEEP_ALL]
 
     def run(need, label):
         """LOO over frames carrying every instrument in `need`, identical words."""
         rows = []
         for item, lins in dp.items():
-            if item not in KEEP:
+            if item not in _keep[0]:
                 continue
             p = prompt_of.get(item)
             if not p or len(lins) < a.min_lineages:
                 continue
-            src = {"v6": v6.get(p), "inst": inst.get(p), "sex": sex.get(p)}
+            cs = charge_scene.get(p)
+            src = {"v6": v6.get(p), "inst": inst.get(p), "sex": sex.get(p),
+                   "charge": {w: {"scene": v} for w, v in cs.items()} if cs else None}
             if any(not src[k] for k in need):
                 continue
-            SC = {"v6": S6, "inst": SI, "sex": S2}
+            SC = {"v6": S6, "inst": SI, "sex": S2, "charge": ["scene"]}
             ok = []
             for w in sorted({w for l in lins for w in lins[l]}):
                 if all(w in src[k] and all(s in src[k][w] for s in SC[k])
@@ -166,9 +188,17 @@ def main(argv=None):
             allnamed = np.concatenate([X[k] for k in need], 1)
             if len(need) > 1:
                 blocks["+".join(need)] = allnamed
-            #: the embedding, on THESE words, at two sizes: its own default and
-            #: one matched to the named column count, so a win cannot be a win on
-            #: free parameters alone
+
+            SL = np.full((len(L), len(ok)), np.nan)
+            for r_, l in enumerate(L):
+                base_id = l.split(" -> ")[0] if " -> " in l else l
+                cpl = charge_per_lin.get((p, base_id), {})
+                for w_i, w in enumerate(ok):
+                    s = cpl.get(w)
+                    if s is not None:
+                        SL[r_, w_i] = s
+            has_scene = np.isfinite(SL).any()
+
             try:
                 E = SA.embed_cached(p, ok)
             except Exception:
@@ -204,6 +234,30 @@ def main(argv=None):
                     pred[nm].append(fitpred(M[good], ytr[good], M[keep]))
                     pred[nm + "+p"].append(
                         fitpred(np.c_[M, lp][good], ytr[good], np.c_[M, lp][keep]))
+                if has_scene:
+                    with np.errstate(invalid="ignore"):
+                        sl_tr = np.nanmean(SL[tr], 0)
+                        sl_te = SL[i].copy()
+                    sl_med = np.nanmedian(sl_tr[np.isfinite(sl_tr)]) if np.isfinite(sl_tr).any() else 3.0
+                    sl_tr = np.where(np.isfinite(sl_tr), sl_tr, sl_med).reshape(-1, 1)
+                    sl_te = np.where(np.isfinite(sl_te), sl_te, sl_med).reshape(-1, 1)
+                    pred["scene_perlin"].append(
+                        fitpred(sl_tr[good], ytr[good], sl_te[keep]))
+                    pred["scene_perlin+p"].append(
+                        fitpred(np.c_[sl_tr, lp][good], ytr[good],
+                                np.c_[sl_te, lp][keep]))
+                    pred["scene_perlin+named"].append(
+                        fitpred(np.c_[sl_tr, allnamed][good], ytr[good],
+                                np.c_[sl_te, allnamed][keep]))
+                    if E is not None:
+                        pred["scene_perlin+bge"].append(
+                            fitpred(np.c_[sl_tr, blocks["bge_pc10"]][good],
+                                    ytr[good],
+                                    np.c_[sl_te, blocks["bge_pc10"]][keep]))
+                        pred["scene_perlin+all"].append(
+                            fitpred(np.c_[sl_tr, allnamed, blocks["bge_pc10"]][good],
+                                    ytr[good],
+                                    np.c_[sl_te, allnamed, blocks["bge_pc10"]][keep]))
             if len(actual) < 5:
                 continue
             y = np.concatenate(actual)
@@ -265,13 +319,46 @@ def main(argv=None):
         return rows
 
     out = {}
-    out["v6_inst"] = run(["v6", "inst"], "V6 + INSTITUTIONAL")
-    out["all3"] = run(["v6", "inst", "sex"], "V6 + INSTITUTIONAL + SEXUAL")
-    out["v6_sex"] = run(["v6", "sex"], "V6 + SEXUAL")
+    if a.charge_only:
+        out["charge"] = run(["charge"], "CHARGE SCENE (1 column)")
+        out["charge_v6"] = run(["charge", "v6"], "CHARGE + V6")
+        out["charge_v6_inst"] = run(["charge", "v6", "inst"], "CHARGE + V6 + INST")
+    else:
+        out["v6_inst"] = run(["v6", "inst"], "V6 + INSTITUTIONAL")
+        out["all3"] = run(["v6", "inst", "sex"], "V6 + INSTITUTIONAL + SEXUAL")
+        out["v6_sex"] = run(["v6", "sex"], "V6 + SEXUAL")
     json.dump(dict(_what="leave-one-lineage-out with the three instruments, "
                          "identical words within each comparison", **out),
               open(os.path.join(RES, "loo_all.json"), "w"), indent=1)
     print("-> results/%s/loo_all.json" % a.run)
+
+    if a.stratify_lift:
+        import statistics as st
+        from malignment import charge
+        lifts = charge.lifts()
+        item_lift = {}
+        for item in KEEP_ALL:
+            p = prompt_of.get(item)
+            if p and p in lifts:
+                item_lift[item] = lifts[p]
+        med = st.median(item_lift.values())
+        lo_items = {i for i, v in item_lift.items() if v <= med}
+        hi_items = {i for i, v in item_lift.items() if v > med}
+        print("\n" + "=" * 80)
+        print("STRATIFIED BY LIFT (median = %.3f)" % med)
+        print("  low-lift: %d frames   high-lift: %d frames"
+              % (len(lo_items), len(hi_items)))
+        print("=" * 80)
+
+        _keep[0] = lo_items
+        print("\n--- LOW LIFT (lift <= %.3f) ---\n" % med)
+        run(["v6", "inst"], "V6 + INSTITUTIONAL, LOW LIFT")
+
+        _keep[0] = hi_items
+        print("\n--- HIGH LIFT (lift > %.3f) ---\n" % med)
+        run(["v6", "inst"], "V6 + INSTITUTIONAL, HIGH LIFT")
+
+        _keep[0] = KEEP_ALL
 
 
 if __name__ == "__main__":

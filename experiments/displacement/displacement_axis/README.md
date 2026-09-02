@@ -658,6 +658,50 @@ Nothing is knife-edge and effect sizes rise monotonically as the gate tightens, 
 - **`variance_repeated.json` and `sexual_scales.json` were produced under the broken scoring** and are NOT comparable to the loo numbers. They are emitted in the long CSVs tagged `analysis='half_split_SUPERSEDED'` so a join cannot mix them silently, and their `% ceiling` column is deleted rather than caveated.
 - **24 prompts carry three item_ids each**, differing only in declared pole set, with byte-identical movement (`dedupe.check` verifies: 48 copy-pairs, 0 differ). All 72 sit in identity. Every analysis here calls `dedupe.keep()` FIRST. The pre-dedupe identity profile had `mundanity` at +0.097 and `makes_worse` at -0.071; both flip sign once the triplicates stop being counted three times.
 
+## Lift dose: naming DOES work better under load (2026-08-30, lacan [6565])
+
+`lineage_dose.py --run pilot4 --lift-dose`. Full results in `LINEAGE_AND_DOSE.md`
+section 3.
+
+The dose used throughout this file and in `LINEAGE_AND_DOSE.md` sections 1-2 is
+`base_naughty_mass`: the base arm's probability on hand-tagged "naughty" words,
+median 5 per item. Lacan's [6565] introduced `charge.lift_per_lineage()` --
+T_base minus frame, the per-lineage version of how much the candidate words add
+over the setup -- and showed it predicts displacement 3x better (r = -0.261 vs
+-0.091) because the level saturates.
+
+### The naming-gain null reverses
+
+                                          base_naughty_mass     lift
+    naming gain (high - low)              +0.015  27/50  0.67   +0.060  34/50  0.015
+
+**Under lift, named dimensions beat their own permutation by MORE where the
+candidate words add transgressiveness over the setup.** The null reported in
+`LINEAGE_AND_DOSE.md` section 2 -- "naming works, and it does not work better
+under load" -- was a property of the dose construct, not of the data.
+
+### Mundanity strengthens, superego and deliberation emerge
+
+                                          base_naughty_mass     lift
+    mundanity (pooled)                    +0.247  41/50  6e-6   +0.055  45/50  4e-9
+    harm (pooled)                         -0.473  15/50  .007   -0.090   6/50  3e-8
+    superego (pooled)                           --              -0.052   9/50  6e-6
+    deliberation (pooled)                       --              -0.012  12/50  3e-4
+
+Mundanity remains the only scale positive and significant on all three quantities
+(marginal, dose slope, naming gain). Superego and deliberation reach significance
+for the first time: more lift, less superego-like and less deliberate language.
+
+### What this changes
+
+The "conditional" section above (displacement rate 2% to 38% across quartiles)
+is about WHETHER mass moves and uses `base_naughty_mass`, which is the right
+quantity for that question. The naming-gain question -- does a named scale
+account for MORE of the travel under load -- is about what the movement IS, and
+lift is the right dose for it because it measures what alignment has to work
+with. The two questions keep their own doses.
+
+
 ## Fences
 
 - **Corpus-level only.** No single frame supports a displacement claim; 13 of 287 items clear a 95% bar against the per-item null.
