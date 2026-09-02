@@ -1,6 +1,6 @@
 ---
 id: syntagmatic_damage
-status: RUN. The archived nulls were window-limited. With a 30-token window and probability controlled, movement predicts downstream surprisal in the ALIGNED arm only.
+status: RUN, and the third-party fork closed on one reader. The archived nulls were window-limited. With a 30-token window and probability controlled, movement predicts downstream surprisal in the ALIGNED arm only, peaking at [5,10) and null at the joint. deepseek scored the same 40,984 passages twice, with and without the joint, and does not see it -- a CONSISTENCY null (17/24 and 17/25), not a magnitude one. A second reference model is the open step.
 question: When a model is forced to utter a word alignment demoted, what happens to the sentence around it?
 ---
 
@@ -292,7 +292,18 @@ effect is the fork this folder already names, and it is now a sharper question:
 not "is the demoted word costly" but "does the clause after it read as
 disturbed to someone who never trained on either arm".
 
-# THE GAP, AND IT IS ONE GAP
+# THE GAP -- CLOSED ON ONE READER 2026-08-24, AND THIS SECTION DID NOT SAY SO
+
+**Everything below was written before the deepseek pass and was left standing when
+that pass landed** (commit 3b772cf added 35 lines above and retracted nothing here).
+It says deepseek has never scored a forced passage; deepseek scored 40,984 of them
+over 42 lineages, twice, and the result is the section immediately above this one.
+Read the two together: the fork below is the right fork and it has been taken once.
+
+What survives unchanged is the SECOND half of it -- one reader is not a property of
+text, so "the charge is in the TEXT" versus "the charge is a RELATION between a model
+and its own parent" is still undecided, and a second reference model is what decides
+it. The first half, the sizing, is spent.
 
 **Every reference position used so far is inside the lineage or is GPT-2.**
 
@@ -302,9 +313,14 @@ model scoring its own pair's texts; there is no universal third party in it.
 `f15` F3b used GPT-2 deliberately, as *"the only reference still independent of
 the roster -- Pythia joined it"*, and GPT-2 is a 2019 124M model.
 
-**Deepseek has never scored a forced passage.** `~/malignment-data/ref_pool/`
-carries 13,124 deepseek-scored passages -- 3,000 human anchor, 5,687 model
-narrative, 4,437 wrapper -- and no `forced_word` field.
+**~~Deepseek has never scored a forced passage.~~ STRUCK 2026-09-02 -- it has,
+40,984 of them, see above.** What was true when this was written:
+`~/malignment-data/ref_pool/` carried 13,124 deepseek-scored passages -- 3,000
+human anchor, 5,687 model narrative, 4,437 wrapper -- and no `forced_word` field.
+The forced pass writes to `results/reference_ids.jsonl` and
+`results/reference_ctx_ids.jsonl` instead, which is why a reader checking
+`ref_pool/` for it would still find nothing and conclude, wrongly, that it never
+ran.
 
 **What a third-party pass would settle, and it is a real fork:**
 
@@ -326,7 +342,8 @@ neither is currently distinguishable.
     producer    `jakobson_space/ref_surprisal.py` writes the shard format
                 the reference pool already uses
 
-Not started. Sizing is the next step, not the run.
+~~Not started. Sizing is the next step, not the run.~~ **STRUCK: run 2026-08-24 by
+`reference.py --run` / `--run-ctx`.** What is not started is the SECOND reader.
 
 # WHAT MUST NOT BE CLAIMED FROM WHAT IS HERE
 

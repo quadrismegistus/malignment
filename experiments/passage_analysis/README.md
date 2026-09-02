@@ -62,7 +62,13 @@ run. Statuses below were read from each folder's own README, not inherited.
                                 composition, near-entirely: -1.310 of a -1.285
                                 nats/word drop, against +0.025 for level. Selection,
                                 not combination -- Jakobson's axes as an arithmetic
-                                partition that sums exactly.
+                                partition that sums exactly. Carries a WITHDRAWAL
+                                worth inheriting: "displaced words cost more" is
+                                true, significant and NOT evidence of displacement,
+                                because the 71.7% of tokens M01 never measured are
+                                costlier still. Repaired by comparing fallers to
+                                RISERS on a fixed text: +0.347 base-generated
+                                (34/35), +0.443 aligned (35/35).
     drift_geometry/             RUN 2026-08-20. What the geometric drift metrics can
                                 mean, and do they track what a reader calls staying
                                 in the scene? THEY DO: against interiority's blind
@@ -76,9 +82,23 @@ run. Statuses below were read from each folder's own README, not inherited.
                                 archived measurements synthesised, then re-run: the
                                 archived nulls were WINDOW-LIMITED. At a 30-token
                                 window with probability controlled, movement predicts
-                                downstream surprisal in the ALIGNED ARM ONLY. One gap
-                                still open -- no true third-party scorer has ever read
-                                a forced passage.
+                                downstream surprisal in the ALIGNED ARM ONLY --
+                                peaking at [5,10) (-0.542, 37 of 42 lineages,
+                                p<1e-5) and NULL at the joint, which is why every
+                                10-token instrument in the archive missed it.
+                                THE THIRD-PARTY FORK IS NOW CLOSED ON ONE READER,
+                                and this line said it was open until 2026-09-02:
+                                deepseek scored the same 40,984 passages twice, once
+                                on the continuation alone and once on
+                                `prompt + forced_word + continuation`, and does NOT
+                                see it -- -0.303 (17/24, p=0.35) and -0.441 (17/25,
+                                p=0.28). A CONSISTENCY null, not a magnitude one:
+                                the reference median is four fifths of the self
+                                coefficient and what collapses is agreement across
+                                lineages, 37 of 42 sharing the sign on self against
+                                25 of 42 on the reference. One reader is not a
+                                property of text; a second reference model is the
+                                next step.
     surprisal_matrix/           COMPLETE. The same text scored by several observers
                                 (self H, lineage partner X, external reference Q).
                                 RH's question: does alignment reduce entropy only from
@@ -87,8 +107,11 @@ run. Statuses below were read from each folder's own README, not inherited.
                                 19/20, p=4.0e-05. About 22% of alignment's
                                 self-narrowing does not transfer to an outsider. A
                                 retry of F18's "private language", run before the seat
-                                recognised it as one.
-    passage_norms/             COMPLETE. Does the word-level norm signature survive
+                                recognised it as one. One reading WITHDRAWN: the
+                                excess-form off-diagonal is null (-0.0304, 12/16,
+                                p=0.57), and a null asymmetry is evidence AGAINST
+                                simple nesting, not for it.
+    passage_norms/             RUN, not complete. Does the word-level norm signature survive
                                 to the page? Ten keys replicate at q<.05 on both
                                 corpora with the same sign; sign agreement 94/110
                                 (85%) against 50% chance, no key CONTRADICTED. Aligned
@@ -96,14 +119,54 @@ run. Statuses below were read from each folder's own README, not inherited.
                                 framing and passivity; fewer people named by role,
                                 fewer quantities, less bodily harm. One movement:
                                 inward and away from the body, the named person and
-                                the number.
-    jakobson_space/            AXES BUILT, anchor placed. What do F15 and F16's axes
+                                the number. Add abstraction-and-analysis vocabulary
+                                to that list (`gi_enltot` +0.0165/+0.0101,
+                                `gi_enloth` +0.0093/+0.0081). **H5 IS REGISTERED AND
+                                UN-RUN.** RID secondary-process thinking -- RH's, and
+                                the hypothesis closest to the project's Freudian
+                                frame -- is declared in that file's header block and
+                                has no result anywhere in it. The folder's own status
+                                line says RUN; this list said COMPLETE until
+                                2026-09-02.
+    jakobson_space/            AXES BUILT, anchor placed -- and it now carries four
+                                findings rather than a status, which this list did
+                                not say until 2026-09-02. What do F15 and F16's axes
                                 look like rebuilt on OUR corpus? All three built;
                                 the external axis twice (BLT bytes, then deepseek
-                                tokens -- the latter is the one to use). Carries
-                                `alignment_smooths.md`: 42 of 46 contrasts lower,
-                                median -0.2274 bits/byte, p=5.1e-09, aligned models
-                                collapsing onto 1.135 against base's 1.389.
+                                tokens -- the latter is the one to use).
+                                  THE ANCHOR, which its README calls the finding the
+                                folder now carries: alignment moves a model DOWN a
+                                human range it already sat inside. 24 of 24 lineages
+                                on surprisal, 23 of 24 on drift; base 4.4958 ->
+                                aligned 3.7298 bits/token against a human spread of
+                                4.4543 (literary criticism) to 3.2884 (waking
+                                narrative) -- 65% of that distance. Base is FIRST in
+                                surprisal and THIRD in drift: locally unpredictable,
+                                globally static, which a single entropy number hides.
+                                  FOUR MANIPULATIONS, each divided by its own axis's
+                                passage-level sd so they can be compared at all:
+                                alignment -1.214 surprisal / -0.585 drift, size
+                                (1.7B->10.3B) -1.105 / -0.161, chat wrapper -0.734 /
+                                -0.864, API-minus-aligned -0.123 / +0.196. **The
+                                WRAPPER is the largest single drift effect in the
+                                table, larger than alignment's**, and it cannot
+                                explain the API models' drift because it points the
+                                other way -- four times the size of the difference it
+                                would have to produce, in the wrong direction.
+                                  OGDEN: alignment is the REVERSE of simplification,
+                                and this is the only direction here that somebody
+                                else defined. Restricting Mansfield, Hemingway and
+                                Andersen to 850 words RAISES surprisal +0.7804 on 47
+                                of 47 pairs against alignment's -0.8435 -- nearly
+                                equal and opposite. Drift was predicted lower and
+                                measured NULL, refuted by its own `n_sents` control.
+                                Effective n is nearer 3 than 47.
+                                  Also `alignment_smooths.md`, still `status: draft`:
+                                42 of 46 contrasts lower, median -0.2274 bits/byte,
+                                p=5.1e-09, aligned models collapsing onto 1.135
+                                against base's 1.389. Model-relative levels only --
+                                the anchor above is a different scorer, population
+                                and language and does not transfer to them.
     novel_arc/                 RUN. Where does LLM fiction sit in the formal sweep of
                                 literary history? Alignment rewinds abstraction about
                                 fifty-six years (base ~1973, aligned ~1917, API ~1903
@@ -112,8 +175,9 @@ run. Statuses below were read from each folder's own README, not inherited.
                                 in the human range. RH's 1880-1920 prediction was
                                 recorded in PREDICTION.md before the curve existed.
     predicting_aligned_text/    OPEN -- THE ONLY ONE. Nothing has been run here; its
-                                14 files are the archive's verbatim copy-in,
-                                sha256-verified 20 of 20. Can the arm be predicted
+                                22 files are the archive's verbatim copy-in plus
+                                a PROVENANCE and this README, sha256-verified 20 of
+                                20. Can the arm be predicted
                                 from a page, and can NAMED scales do it? NOT blocked:
                                 its corpus is gen_sequences, not twp, so it does not
                                 wait on lineage coverage the way the
