@@ -80,7 +80,11 @@ import sys
 import time
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(0, os.path.abspath(os.path.join(HERE, "..", "..")))
+#: depth-independent: malignment.paths walks up from the package itself. The
+#: old dirname-dirname form was wrong at depth 2 and would NOT have raised --
+#: malignment is installed in the venv, so the bad insert is simply ignored.
+from malignment.paths import repo_root  # noqa: E402
+sys.path.insert(0, repo_root())
 
 from malignment import roster  # noqa: E402
 

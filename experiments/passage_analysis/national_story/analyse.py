@@ -74,8 +74,9 @@ def _measure():
     #: instrument_calibrations/ on 2026-09-02; this is the only reference to it
     #: that was a PATH rather than a citation, so it is the only one that could
     #: have broken silently at import time rather than misleading a reader.
-    p = os.path.join(HERE, '..', 'instrument_calibrations', 'story_decoder',
-                     'run.py')
+    from malignment.paths import repo_root
+    p = os.path.join(repo_root(), 'experiments', 'instrument_calibrations',
+                     'story_decoder', 'run.py')
     spec = importlib.util.spec_from_file_location('sd_run', p)
     m = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(m)

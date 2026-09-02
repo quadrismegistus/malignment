@@ -337,12 +337,18 @@ experiments/emergence/capacities/figures/
 experiments/displacement/norm_change/results/
 
 # national_story generated data lives in $MALIGNMENT_DATA/national_story
-experiments/national_story/*.jsonl
-!experiments/national_story/prompts_*.jsonl
-experiments/national_story/results/story_*.jsonl
+# PATH-ANCHORED RULES BREAK WHEN THE EXPERIMENT MOVES, AND THEY BREAK TOWARD
+# COMMITTING. national_story moved to passage_analysis/ on 2026-09-02 and every
+# rule below stopped matching at once -- git then offered the 183k-span sqlite
+# SYMLINK as a new file to track, which is the direction a stale ignore always
+# fails in. Written unanchored so the next move is free.
+**/national_story/*.jsonl
+!**/national_story/prompts_*.jsonl
+**/national_story/results/story_*.jsonl
 # conflict.sqlite is a SYMLINK to the data dir, with a machine-specific absolute
-# target -- committing it would hand everyone else a broken path. Recreate with
+# target -- committing it would hand everyone else a broken path, and the other
+# machine's user is `ryan`, not `rj416`. Recreate with
 #   ln -sfn ~/malignment-data/national_story/conflict.sqlite \
-#           experiments/national_story/conflict.sqlite
-# or just rebuild: python experiments/national_story/export_db.py
-experiments/national_story/conflict.sqlite
+#           experiments/passage_analysis/national_story/conflict.sqlite
+# or just rebuild: python experiments/passage_analysis/national_story/export_db.py
+**/national_story/conflict.sqlite

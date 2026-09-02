@@ -27,8 +27,13 @@ mixing two quantities.
 import json
 import os
 
+from malignment.paths import repo_root
+
 HERE = os.path.dirname(os.path.abspath(__file__))
-ROOT = os.path.abspath(os.path.join(HERE, '..', '..'))
+#: NOT dirname(dirname(HERE)). That encodes this folder's depth, and this file
+#: builds a real path into another experiment with it -- so at the wrong depth
+#: the norms row just reports MISSING and the panel silently loses a family.
+ROOT = repo_root()
 SOURCES = [
     ('annotation', 'arm', os.path.join(HERE, 'results/annotation_stats_arm.json')),
     ('annotation', 'frame', os.path.join(HERE, 'results/annotation_stats_frame.json')),

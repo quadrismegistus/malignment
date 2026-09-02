@@ -39,7 +39,7 @@ Nowhere near quotable. Exactly the shape a site-conditional page-grain effect wo
 
 ## Questions here
 
-**Eleven folders. One has run nothing, and it is the only one open.** This list was
+**Twelve folders. One has run nothing, and it is the only one open.** This list was
 wrong in two directions before 2026-08-27: it omitted four folders entirely, two of
 which carry headline findings, and it described two others as un-run when both had
 run. Statuses below were read from each folder's own README, not inherited.
@@ -182,6 +182,26 @@ run. Statuses below were read from each folder's own README, not inherited.
                                 its corpus is gen_sequences, not twp, so it does not
                                 wait on lineage coverage the way the
                                 distribution-grain work does.
+    national_story/             RUN. Moved here from top level 2026-09-02; it is
+                                the only member that GENERATES its own corpus
+                                rather than reading one. Replicating Rettberg &
+                                Wigers (2025) -- 11,800 national stories from
+                                gpt-4o-mini -- with the arm they lack, base
+                                against aligned, which is why their own second
+                                reviewer can ask in print why the plot structure
+                                is there and the paper cannot answer.
+                                ALIGNMENT INSTALLS THE RESOLUTION, NOT THE
+                                PROBLEM. And on the two axes this subject shares
+                                with `jakobson_space`, at final scale over 31
+                                lineages: surprisal -0.961 (aligned LOWER in
+                                30/31) and every drift measure down with it.
+                                **It is subject-shaped, not question-shaped** --
+                                17 producers over five separable questions
+                                (is-it-a-story, conflict annotation, homogeneity,
+                                the Rettberg replication, surprisal/drift). It is
+                                one entry here because nobody has split it, not
+                                because it is one question. See the layout note
+                                in `experiments/README.md`.
 
 ## The tension worth keeping visible
 
