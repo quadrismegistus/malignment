@@ -1,6 +1,9 @@
 ---
 id: register_shift
 status: RUN. G NOT SUPPORTED, G1 supported, G2 REVERSED. Producer `run.py`, rows in `results/by_lineage.csv`.
+kind: question
+headline: "This is substitution WITHIN the low register, not movement up it."
+grain: distribution
 question: Does alignment shift REGISTER -- vulgar to clinical, plain to euphemistic -- rather than only lowering transgressive mass?
 ---
 

@@ -1,3 +1,11 @@
+---
+kind: question
+id: hh_rlhf_lexical
+status: "RUN, EXPLORATORY. The registered test was run before it was authorised, and reading the texts afterwards showed it measures something other than what it registered. Not a test of the hypothesis."
+headline: "hh-rlhf's chosen/rejected axis is largely ENGAGE versus DEFLECT, and its direction INVERTS between the two arms."
+grain: corpus
+---
+
 # hh-rlhf — is preference lexically predictable?
 
 **id:** hh_rlhf_lexical **status:** EXPLORATORY. The registered test was run

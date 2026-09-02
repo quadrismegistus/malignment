@@ -1,3 +1,9 @@
+---
+kind: question
+status: "RUN. Primary run; PKU does NOT replicate. Aspect decomposition UNDECIDED by its own rule. Registration 4ca8323, A1."
+headline: "68.4% against 43.9% is the other side of chance, not a smaller version of the same effect."
+---
+
 # UltraFeedback — does the disclaimer finding generalise?
 
 **id:** ultrafeedback_disclaimer **status:** primary run; PKU does NOT replicate.

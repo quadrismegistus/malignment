@@ -1,3 +1,8 @@
+---
+kind: subject
+status: "OPEN, created 2026-08-16"
+headline: "Registrations for things that CANNOT FAIL."
+---
 # instrument_calibrations/
 
 **Registrations for things that CANNOT FAIL.** An instrument registration

@@ -1,3 +1,8 @@
+---
+kind: calibration
+status: BUILT
+headline: "How far training moves a model, per phase, per token."
+---
 # displacement_reference
 
 **How far training moves a model, per phase, per token.** Not a hypothesis;

@@ -1,3 +1,11 @@
+---
+id: numeric_boundary
+kind: calibration
+question: "May the boundary rule read context?"
+status: "RUN. Stage 1 (tokenizers) RUN, plus the beam and depth arms. Stages 2-3 need weights and are not run. FINDING 1 SUPERSEDED BY THE IMPLEMENTATION 2026-08-17: the numeric rule was REJECTED."
+headline: "One question with two signs. v3's boundary classifier makes opposite errors on two character classes, and they are the same question about whether a boundary decision may look at what surrounds it."
+---
+
 # numeric_boundary — may the boundary rule read context?
 
 **One question with two signs.** v3's boundary classifier makes opposite errors on

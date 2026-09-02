@@ -1,3 +1,8 @@
+---
+kind: calibration
+status: BUILT - exploratory, not promoted to a declared question
+headline: Most of the displacement is already done by SFT. The preference step continues it and does not cause it. ... Reported here as what the picture shows on one prompt, not as a finding
+---
 # prompt_slopes
 
 One prompt, every lineage: what the models put at the blank, before and after.

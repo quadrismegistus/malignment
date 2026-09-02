@@ -1,3 +1,8 @@
+---
+kind: question
+status: RUN, 2026-08-16
+headline: A is SUPPORTED. B is NOT. They are reported separately and are not summarised into one verdict
+---
 # removal_rates
 
 **Question.** Which alignment stage *removes* sexual vocabulary, and which removes violent vocabulary — each measured against blind-rated neutral words, and never against each other?

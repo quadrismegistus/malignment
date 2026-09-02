@@ -1,3 +1,8 @@
+---
+kind: calibration
+status: RUN
+headline: "Is the API-versus-open contrast an artifact of how the two arms were generated?"
+---
 # generation_provenance
 
 **Is the API-versus-open contrast an artifact of how the two arms were

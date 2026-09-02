@@ -1,3 +1,8 @@
+---
+kind: calibration
+status: "COMPLETE, 2026-08-21: the question it was built for is answered"
+headline: "What the deployment frame does to the word slot."
+---
 # frame_prefill
 
 **What the deployment frame does to the word slot.** An instrument calibration,

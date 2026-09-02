@@ -1,3 +1,10 @@
+---
+kind: subject
+status: OPEN
+headline: NONE STATED
+grain: corpus
+---
+
 # posttraining_corpus_analysis
 
 **The subject, not a question.** This directory indexes its questions and holds

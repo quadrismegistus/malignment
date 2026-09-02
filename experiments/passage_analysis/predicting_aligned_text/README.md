@@ -1,8 +1,11 @@
 ---
+kind: question
 subject: predicting_aligned_text
 question: Can the arm be predicted from a page, and can named scales do it?
-status: not started
-blocked_on: nothing. The corpus is reachable (ClickHouse malign_logits.gen_sequences).
+status: NOT STARTED
+headline: NONE STATED
+grain: page
+blocked_on: "nothing. The corpus is reachable (ClickHouse malign_logits.gen_sequences)."
 inherited: |
   The archive's producers, inputs and results are copied in verbatim at
   malign-logits 5c4b5ce6, sha256-verified 20 of 20. See PROVENANCE.md.

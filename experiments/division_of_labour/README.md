@@ -1,6 +1,9 @@
 ---
 subject: division_of_labour
 question: Which alignment stage carries the displacement, and what does that depend on?
+kind: subject
+status: OPEN - three questions; two RUN 2026-08-16, one REGISTERING
+headline: A SUBJECT, not an experiment. It holds questions; it holds no code, no data and no claims of its own.
 ---
 
 # Division of labour
@@ -27,7 +30,7 @@ storing `relation`.
 |---|---|---|
 | [`sft_share/`](sft_share/) | RUN 2026-08-16 | SFT carries most of the displacement; the split by branch is large; content-dependence not supported |
 | [`lexical_domains/`](lexical_domains/) | RUN 2026-08-16 | the same content-dependence question at word level, via a blind-built lexicon — not supported **as tested**, and the operationalisation was afterwards found wrong |
-| [`removal_rates/`](removal_rates/) | REGISTERING | which stage *removes* sexual, and which removes violent, each measured against blind-rated neutral vocabulary and never against each other |
+| [`removal_rates/`](removal_rates/) | RUN 2026-08-16 | which stage *removes* sexual, and which removes violent, each measured against blind-rated neutral vocabulary and never against each other |
 
 ## Open, arising from `sft_share`
 

@@ -1,6 +1,8 @@
 ---
 subject: contextual_norms
-status: Chinese arm opened; comparability characterised, not established
+kind: calibration
+status: "RUN, Chinese arm opened; comparability characterised, not established"
+headline: "This folder commissions the ratings; it does not analyse them."
 ---
 
 # Contextual norms: the POS pass, the rating manifest, and the Chinese arm

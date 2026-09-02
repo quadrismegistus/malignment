@@ -3,7 +3,9 @@ stub: true
 stub_written_by: dario, 2026-08-21, from the folder's own files
 type: subject
 question: (container) work that has not been promoted to a declared question
-status: holds three questions
+status: OPEN - stub; holds three questions
+kind: subject
+headline: A SUBJECT, not an experiment. It holds questions; it holds no code, no data and no claims of its own
 ---
 
 # exploratory
@@ -25,7 +27,9 @@ for itself. Anything shared between its questions belongs in `malignment/`.
                          first-person mass under alignment while raw prose
                          lowers it, and the two have never been tested against
                          each other.
-    salary_probe/        arrived 2026-08-24 from `displacement/`. PARKED after
+    salary_probe/        arrived 2026-08-24 from `displacement/`. UNPARKED AND RUN
+                         2026-08-28 (28 pairs, 84,000 draws); this line said PARKED
+                         until 2026-09-02. Its BODY still reads as the pilot. After
                          a two-lineage pilot. It sat beside three live
                          displacement questions while never having been
                          promoted to a declared one.

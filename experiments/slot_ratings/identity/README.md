@@ -1,3 +1,10 @@
+---
+kind: question
+status: "RUN. The identity panel is 20 lineages on the room sweep, the thinnest of the three studies; several results are worth rerunning at the full 50-pair roster."
+headline: "Alignment equalises the groups on how harmful their slot distribution is, and sharpens them on identity-typed content."
+grain: word
+---
+
 # identity: both instruments across the three identity frames
 
 What the slot roster calls the identity domain is three frames, each run over the

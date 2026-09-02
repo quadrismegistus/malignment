@@ -1,6 +1,8 @@
 ---
 subject: emergence
-status: PORTED. All three intermediate tables regenerable from CH in bulk. Findings E-G ported with md5-identical outputs. Findings A-D read the regenerated parquets; their figure producers are not yet ported.
+status: BUILT - PORTED. All three intermediate tables regenerable from CH in bulk. Findings E-G ported with md5-identical outputs. Findings A-D read the regenerated parquets; their figure producers are not yet ported.
+kind: subject
+headline: NONE STATED
 ---
 
 # emergence

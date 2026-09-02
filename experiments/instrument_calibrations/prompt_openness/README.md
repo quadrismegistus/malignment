@@ -1,3 +1,11 @@
+---
+id: prompt_openness
+kind: calibration
+question: "Which of our prompts leave the scene to be invented?"
+status: "RUN. 482 prompts, two blind coders, agreement 0.909. CONSOLIDATED PARTITION, both populations, all three adjudications: 666 of 679 resolved."
+headline: "QUINTUPLETS is unanimously OPEN on 173 prompts; the M01 minimal pairs are 81-90% CLOSED. The asserted split holds."
+---
+
 # prompt_openness — which of our prompts leave the scene to be invented?
 
 **id:** prompt_openness **status:** run. 482 prompts, two blind coders,

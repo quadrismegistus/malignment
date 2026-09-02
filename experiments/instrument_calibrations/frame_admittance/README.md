@@ -1,5 +1,6 @@
 ---
 question: Does a frame admit a transgressive continuation at all, before anyone pays to pole-tag it?
+kind: calibration
 status: RUN and WRITTEN UP, 2026-08-24. Triage sound; premise half superseded by the slot corpus.
 headline: 76% of sexual frames admit nothing; violence forecloses only 13%.
 disposition: Not closed. Pole-tagging EXISTS (roster/prompts/slots, 327 items, used by displacement_axis) but covers ~0% of these rosters. If it is pointed here, this ranking becomes a selection rule.

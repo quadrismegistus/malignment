@@ -1,3 +1,8 @@
+---
+kind: question
+status: OPEN. Four measurements made, one thesis sharpened and not yet tested
+headline: The position is installed at SFT, and it is frame-bound
+---
 # subject_position
 
 **id:** subject_position **status:** OPEN. Four measurements made, one thesis

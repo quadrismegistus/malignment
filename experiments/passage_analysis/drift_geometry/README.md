@@ -1,7 +1,8 @@
 ---
+kind: question
 subject: drift_geometry
 question: What can the geometric drift metrics mean, and do they track what a reader calls staying in the scene?
-status: ported and RUN 2026-08-20
+status: RUN 2026-08-20 (ported)
 grain: page
 requires: |
   stanza (>=1.14) plus its `en` tokenize model, and sentence-transformers for
@@ -14,6 +15,7 @@ requires: |
   A clone can import the package and run no experiment. Recorded here rather than
   patched, because hand-editing requirements.txt would be undone by the next
   regeneration and would hide the real gap.
+headline: "the metrics track the coded judgment"
 ---
 
 # drift_geometry

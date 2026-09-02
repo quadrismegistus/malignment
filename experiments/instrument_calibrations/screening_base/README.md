@@ -1,3 +1,11 @@
+---
+id: screening_base
+kind: calibration
+question: "Which released checkpoints are near the middle of the roster for transgressive-vocabulary mass, and are therefore reasonable models to screen slot frames with?"
+status: "RUN, 2026-08-16. 56 UNTREATED models, 2,189-prompt panel, lexicon sha `d542e7e2bb86bd00`. 14 candidates."
+headline: "A set, not a winner. 15 of 58 untreated models sit within 25 percentile points of median on *all three* statistics."
+---
+
 # screening_base
 
 **Question.** Which released checkpoints are near the middle of the roster for transgressive-vocabulary mass, and are therefore reasonable models to screen slot frames with?

@@ -1,7 +1,9 @@
 ---
+kind: question
 id: syntagmatic_damage
-status: RUN, and the third-party fork closed on one reader. The archived nulls were window-limited. With a 30-token window and probability controlled, movement predicts downstream surprisal in the ALIGNED arm only, peaking at [5,10) and null at the joint. deepseek scored the same 40,984 passages twice, with and without the joint, and does not see it -- a CONSISTENCY null (17/24 and 17/25), not a magnitude one. A second reference model is the open step.
+status: "RUN, and the third-party fork closed on one reader. The archived nulls were window-limited. With a 30-token window and probability controlled, movement predicts downstream surprisal in the ALIGNED arm only, peaking at [5,10) and null at the joint. deepseek scored the same 40,984 passages twice, with and without the joint, and does not see it -- a CONSISTENCY null (17/24 and 17/25), not a magnitude one. A second reference model is the open step."
 question: When a model is forced to utter a word alignment demoted, what happens to the sentence around it?
+headline: "Alignment installs a standing disposition about WHICH word to reach for."
 ---
 
 # syntagmatic_damage

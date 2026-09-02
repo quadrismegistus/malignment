@@ -1,7 +1,8 @@
 ---
 subject: norm_change
-status: FIRST RESULT, corrected 2026-08-24. Lift dose added 2026-08-30 (lacan [6565]).
-headline: Register rises and valence rises in BOTH languages. Concreteness falls in Chinese only. Lift dose reorders the top: arousal over bodily harm.
+status: "RUN. FIRST RESULT, corrected 2026-08-24. Lift dose added 2026-08-30 (lacan [6565])."
+kind: question
+headline: "Register rises and valence rises in BOTH languages. Concreteness falls in Chinese only. Lift dose reorders the top: arousal over bodily harm."
 data: ~/malignment-data/norm_change (3.0 GB, outside the checkout)
 ---
 

@@ -1,6 +1,7 @@
 ---
 subject: rate_and_magnitude
 status: RUN 2026-08-24. 50 endpoint lineages, en and zh separately.
+kind: question
 question: How MUCH mass moves under alignment, how OFTEN, and does either scale with the frame?
 headline: English moves more mass AND more words at transgressive prompts. Chinese moves MORE WORDS but LESS MASS.
 ---

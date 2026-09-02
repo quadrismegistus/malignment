@@ -3,6 +3,8 @@ id: DOL.sft_share
 question: Which alignment stage carries the displacement, and does the answer depend on content domain?
 status: RUN 2026-08-16 — H1 supported, H2 split, H3 NOT supported
 opened: 2026-08-16
+kind: question
+headline: SFT carries most of the displacement, and the content-dependent division of labour does not survive its own test.
 ---
 
 # Division of labour

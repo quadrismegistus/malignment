@@ -1,3 +1,11 @@
+---
+id: sex_violence_lexicon
+kind: calibration
+question: "Can a blind LLM panel build a sexual/violent lexicon that covers the transgressive vocabulary in the twp corpus -- including the low-frequency vulgar tail -- at a *measured* false-positive rate and a *measured* miss rate?"
+status: "BUILT AND ADMITTED, 2026-08-16. Lexicon sha `d542e7e2bb86bd00`, 1,063 words (394 sexual, 655 violent, 14 both). Cite by sha."
+headline: "The design worked, and the audit says where it does not."
+---
+
 # sex_violence_lexicon
 
 **Question.** Can a blind LLM panel build a sexual/violent lexicon that covers the transgressive vocabulary in the twp corpus — including the low-frequency vulgar tail — at a *measured* false-positive rate and a *measured* miss rate?

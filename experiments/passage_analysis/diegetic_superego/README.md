@@ -1,8 +1,10 @@
 ---
+kind: question
 subject: diegetic_superego
 question: When alignment moralises, does it leave the scene or stay inside it?
-status: complete (migrated 2026-08-20 from malign-logits M01)
+status: COMPLETE (migrated 2026-08-20 from malign-logits M01)
 grain: page
+headline: "Alignment's dominant response to sexual content is not refusal, deflection, or leaving the frame. It stays inside the fiction and attaches guilt, hesitation and moral comment to a scene it goes on writing."
 ---
 
 # diegetic_superego

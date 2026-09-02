@@ -1,3 +1,9 @@
+---
+kind: calibration
+status: RUN
+headline: "THE TWO ARMS WANT OPPOSITE DECODERS"
+---
+
 # Which decoder and frame let BOTH arms write a story?
 
 Producer: `run.py`. Data: `sweep.jsonl` (120 rows), run by malign on a rented

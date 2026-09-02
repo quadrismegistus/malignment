@@ -1,3 +1,11 @@
+---
+id: leak_bound
+kind: calibration
+question: "Is the unresolved-mass leak CORRELATED with the effect it could fake?"
+status: "RUN."
+headline: "So `41/50` is an AGGREGATE result and was never per-pair certified. The independence assumption the aggregate rests on is FALSE: the leak co-signs with the effect 96% of the time."
+---
+
 # leak_bound — is the unresolved-mass leak CORRELATED with the effect it could fake?
 
 `twp_v4.leak_bound` gives a per-cell worst case that registration N calls *"the

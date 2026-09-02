@@ -1,3 +1,8 @@
+---
+kind: calibration
+status: RUN
+headline: "A says the roster writes English. B is the one that found something broken."
+---
 # english_mass — is the roster writing English, and is the English any good
 
 Two instruments on one question, because the first one answers half of it.

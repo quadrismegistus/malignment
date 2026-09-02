@@ -1,4 +1,5 @@
 ---
+kind: question
 subject: novel_arc
 question: Where does LLM-generated fiction sit in the formal sweep of literary history?
 status: RUN. Both main effects measured; RH's registered 1880-1920 prediction resolved.
@@ -7,6 +8,7 @@ note: |
   `results/` is EMPTY BY DESIGN and this is not an un-run folder. Outputs live in
   `$MALIGNMENT_DATA/novel_arc/` because chadwyck is 128 MB and chicago 895 MB.
   Figures and the plotted data are in `figures/`.
+headline: "alignment rewinds literary history on abstraction and overshoots it entirely on interiority."
 ---
 
 # novel_arc

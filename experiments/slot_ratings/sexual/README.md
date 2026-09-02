@@ -1,3 +1,10 @@
+---
+kind: question
+status: "RUN, gender-swapped matched pairs only; the 50 sexual-domain frames themselves are not yet analysed."
+headline: "Alignment treats the two genders nearly identically."
+grain: word
+---
+
 # sexual/
 
 Started for the sexual domain (50 pilot3 frames). The first analysis here is the

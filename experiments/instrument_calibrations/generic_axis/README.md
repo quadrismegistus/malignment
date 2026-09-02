@@ -1,3 +1,8 @@
+---
+kind: calibration
+status: RUN
+headline: "A pooled lexical axis recovers about 89% of the reliability tagging buys. A single antonym pair is a lottery."
+---
 # Generic axis: is a bare minimum naughty/nice vector sufficient?
 
 The slot axis is built from the author's tags. Tagging is the expensive step in authoring an item, and it is the step that makes `s(w)` a property of `(item, word)` rather than of a word. This measures what a generic lexical antonym pair would buy or lose, over all 86 items of `round3_slots.yaml`.

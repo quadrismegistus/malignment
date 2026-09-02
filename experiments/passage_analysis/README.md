@@ -1,6 +1,12 @@
 ---
+kind: subject
 subject: passage_analysis
 question: What survives from the policy to the page?
+status: OPEN -- twelve questions, eleven run, one un-run
+headline: >-
+  Every other experiment measures a DISTRIBUTION; this subject measures TEXT.
+  A structure overwhelming in the distribution can be invisible on the page,
+  so a claim proved at one grain is a hypothesis at the other.
 ---
 
 # Passage analysis

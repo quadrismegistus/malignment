@@ -1,6 +1,9 @@
 ---
 subject: dose_response
-status: instrument built and gradient-validated; English corpus tagged
+kind: calibration
+status: "RUN, instrument built and gradient-validated; English corpus tagged"
+headline: "The difference is grain. Loadedness is a property of a WORD AT A SLOT."
+grain: word
 ---
 
 # A dose that knows which slot it is at

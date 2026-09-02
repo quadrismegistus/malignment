@@ -1,3 +1,8 @@
+---
+kind: question
+status: RUN, 2026-08-16. L1 NOT SUPPORTED AS TESTED — and the operationalisation is now known to be wrong.
+headline: L1 NOT SUPPORTED AS TESTED — and the operationalisation is now known to be wrong.
+---
 # lexical_domains
 
 **Question.** Is the division of labour content-dependent — does SFT do relatively more of the work on *sexual* words and the preference stage more on *violent* words — measured on the words themselves rather than on prompt-domain labels?

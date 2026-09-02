@@ -1,3 +1,9 @@
+---
+kind: question
+status: "COMPLETE except one control. Registration 1f35b01, amendments A1-A9. One instrument withdrawn for a failed control; one CLAIM withdrawn for a category error (A8-A9)."
+headline: "Where one response appends a disclaimer and the other does not, and BOTH responses are labelled unsafe, annotators judge the disclaiming one safer 68% of the time — with the advice unchanged."
+---
+
 # PKU-SafeRLHF — what does "safer" reward?
 
 **id:** pku_disclaimer **status:** COMPLETE except one control. Findings about

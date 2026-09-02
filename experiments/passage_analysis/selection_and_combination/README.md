@@ -1,8 +1,10 @@
 ---
+kind: question
 subject: selection_and_combination
 question: Does alignment change WHICH words appear, or what they COST in context?
-status: complete (migrated 2026-08-20 from malign-logits M06)
-grain: page, joined to the distribution grain
+status: "COMPLETE (migrated 2026-08-20 from malign-logits M06)"
+headline: "Alignment changes which signifiers appear. It does not change how the chain coheres."
+grain: "page, joined to the distribution grain"
 ---
 
 # selection_and_combination

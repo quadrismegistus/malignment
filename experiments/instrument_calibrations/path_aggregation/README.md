@@ -1,3 +1,11 @@
+---
+id: path_aggregation
+kind: calibration
+question: "Does enumerating every token path close the CJK gap?"
+status: "RUN 2026-08-17."
+headline: "No. NULL RESULT, and it redirects the question rather than answering it."
+---
+
 # path_aggregation — does enumerating every token path close the CJK gap?
 
 **No. NULL RESULT, and it redirects the question rather than answering it.**

@@ -1,3 +1,9 @@
+---
+kind: question
+status: RUN, 28 lineage pairs, 84,000 draws, 2026-08-28 - UNPARKED AND RUN; registration frozen at 2afe765, amendments A1-A4
+headline: THE RESULT IS IN `FINDING_narrowing.md`. THIS FILE IS THE PILOT, kept because what it says about its own limits was right and is the reason the larger run exists.
+grain: distribution
+---
 # salary_probe — what does alignment do to a distribution over money?
 
 **id:** salary_probe **status:** UNPARKED AND RUN, 28 lineage pairs, 84,000

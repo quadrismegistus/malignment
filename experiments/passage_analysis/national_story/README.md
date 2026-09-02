@@ -1,3 +1,9 @@
+---
+kind: question
+status: RUN
+headline: "ALIGNMENT INSTALLS THE RESOLUTION, NOT THE PROBLEM"
+---
+
 # National stories: what alignment adds to a plot
 
 Producers: `run.py` (local HF), the vLLM fleet via `malignment.vllm_generate`.
@@ -16,7 +22,8 @@ Producers: `run.py` (local HF), the vLLM fleet via `malignment.vllm_generate`.
     export_db.py           -> conflict.sqlite for the web explorer
 
 Prompts: `prompts_compare.jsonl` (8 demonyms + a no-demonym control, raw and
-prefill), `prompts_rettberg.jsonl` (cell 2, never run at scale).
+prefill), `prompts_rettberg.jsonl` (cell 2, RUN -- see the Rettberg section; this line
+said "never run at scale" until 2026-09-02, four sections above the results).
 
 Replicating Rettberg & Wigers (2025) -- 11,800 national stories from gpt-4o-mini,
 released CC0 -- with the arm they lack: base against aligned. Their second peer

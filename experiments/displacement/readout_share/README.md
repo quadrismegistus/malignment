@@ -2,6 +2,8 @@
 id: readout_share
 question: When alignment displaces a distribution, does it change the representation the model arrives at or the readout that turns it into words?
 status: RUN 2026-08-30 — readout and state contribute COMPARABLY (joint regression 0.59 vs 0.65, R2 0.75; 0.74 vs 0.77, R2 0.98 on clean pairs). The earlier "Llama is the lone readout counter-case" is WITHDRAWN — see A5.
+kind: question
+headline: "The readout and the state contribute comparably, and neither dominates."
 opened: 2026-08-29
 ---
 

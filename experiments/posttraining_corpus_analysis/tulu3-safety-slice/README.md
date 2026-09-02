@@ -2,7 +2,9 @@
 stub: true
 stub_written_by: dario, 2026-08-21, from the folder's own files
 question: What is IN the Tulu 3 safety slice, given that removing it cost nothing?
-status: REGISTERED, NOT RUN. Frozen 2026-08-18, before any data was downloaded.
+status: "REGISTERING. REGISTERED, NOT RUN. Frozen 2026-08-18, before any data was downloaded."
+kind: question
+headline: NONE STATED
 ---
 
 # tulu3-safety-slice

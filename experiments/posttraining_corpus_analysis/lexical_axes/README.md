@@ -1,3 +1,10 @@
+---
+kind: question
+id: lexical_axes
+status: "RUN. Step D run from run.py. RH's prediction (FAIL or NARROW PASS) CONFIRMED on the corrected vector. One claim withdrawn (A3). Registration 6625ec2, A1-A3."
+headline: "RH's pre-registered prediction -- FAIL or NARROW PASS -- holds on the corrected vector."
+---
+
 # lexical_axes — does the model's alignment axis predict corpus preference?
 
 **id:** lexical_axes **status:** step D run from `run.py`. **RH's prediction

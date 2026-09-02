@@ -1,6 +1,8 @@
 ---
 subject: displacement_axis
-status: direction settled; magnitude re-run at 50 lineages and REVERSED
+status: "RUN. direction settled; magnitude re-run at 50 lineages and REVERSED"
+kind: question
+headline: "DIRECTION holds. rho signatures unmoved, identity harm still 47/47 p=1.4e-14. MAGNITUDE reverses."
 why: |
   RESOLVED 2026-08-24. The block below was "awaiting more lineages"; pilot4 runs
   all 50 endpoint pairs (pilot3 ran 21, a DATA shortfall recorded in its own

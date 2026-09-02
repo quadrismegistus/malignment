@@ -1,3 +1,8 @@
+---
+kind: calibration
+status: RUN
+headline: "About one prompt in seven cannot be quoted on `dN` at all, because the two defensible conventions disagree about which way it moved."
+---
 # dn_convention — how often the two dN conventions disagree, over 50 pairs
 
     python run.py --scope     # panel, embedding cost, axis provenance

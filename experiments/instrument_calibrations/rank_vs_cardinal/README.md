@@ -1,3 +1,11 @@
+---
+id: rank_vs_cardinal
+kind: calibration
+question: "Is `dN` too sensitive to the axis, and does a rank version help?"
+status: "RUN."
+headline: "The pole set matters far more than the statistic. Whichever statistic you pick, the axis is where the variance is."
+---
+
 # Is `dN` too sensitive to the axis, and does a rank version help?
 
 `dN = sum dP(w)s(w)` consumes the axis's cardinal values, and `../generic_axis` measures those values agreeing with themselves at r = 0.828 under resampling of one author's own tags. So this puts three statistics side by side on a real declared pair and then perturbs the axis to see which of them moves.

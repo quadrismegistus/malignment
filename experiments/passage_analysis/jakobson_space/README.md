@@ -1,8 +1,10 @@
 ---
+kind: question
 subject: jakobson_space
 question: What do F15 and F16's axes look like when rebuilt on OUR corpus?
-status: all three axes BUILT; external axis twice (BLT bytes, then deepseek tokens); human anchor placed
+status: "RUN. all three axes BUILT; external axis twice (BLT bytes, then deepseek tokens); human anchor placed"
 grain: page
+headline: "Alignment moves a model down a human range it already sat inside."
 ---
 
 # jakobson_space

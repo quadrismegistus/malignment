@@ -1,6 +1,8 @@
 ---
 question: What KINDS of movement does alignment produce, and how are they distributed?
-status: DONE (for now). 46 site frames + 15 neutrals + 10 matched control pairs read blind at 12-50 lineages, 2 raters each. 89 site components grouped by three raters and confirmed in rating space (5 sources, all p<0.02). 101 paired components grouped separately; purity sits on the null (p 0.38-0.50). 175 site+neutral components grouped; purity separates (p<0.001) but by vocabulary distance, not by operation type. Ten canonical meta-relations catalogued in TAXONOMY.md.
+status: "COMPLETE (for now). 46 site frames + 15 neutrals + 10 matched control pairs read blind at 12-50 lineages, 2 raters each. 89 site components grouped by three raters and confirmed in rating space (5 sources, all p<0.02). 101 paired components grouped separately; purity sits on the null (p 0.38-0.50). 175 site+neutral components grouped; purity separates (p<0.001) but by vocabulary distance, not by operation type. Ten canonical meta-relations catalogued in TAXONOMY.md."
+kind: question
+headline: "the operations catalogued here are a property of alignment as such, not of alignment acting on transgressive content"
 ---
 
 # displacement_taxonomy

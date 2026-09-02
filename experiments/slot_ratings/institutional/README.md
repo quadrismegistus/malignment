@@ -1,3 +1,10 @@
+---
+kind: question
+status: "RUN, four corpora rated, arm A and arm B, 2026-08-19."
+headline: "Alignment moves institutional slots toward abstract, procedural, deferential, lower-arousal completions -- for BOTH speakers."
+grain: word
+---
+
 # institutional: what alignment does to a grievance
 
 **id:** slot_ratings/institutional **status:** three corpora rated, arm A and arm B, 2026-08-19.

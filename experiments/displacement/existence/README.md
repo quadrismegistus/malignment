@@ -1,6 +1,7 @@
 ---
 subject: existence
 status: RUN 2026-08-30. 50 endpoint lineages, English.
+kind: question
 question: Is alignment's reshaping of word probabilities content-selective, and is it displacement or suppression?
 headline: Displacement exists. Higher-T words lose more mass (40/50 lineages), and freed mass lands preferentially on same-kind words (47/49), not on neutral words.
 ---

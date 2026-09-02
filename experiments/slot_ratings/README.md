@@ -1,6 +1,9 @@
 ---
 subject: slot_ratings
-status: awaiting more lineages
+status: "OPEN, awaiting more lineages"
+kind: subject
+headline: "Pretraining lays down the field. Alignment operates on it rather than creating it."
+grain: word
 why: |
   The instruments are built and validated; what is thin is the panel they are read
   against. Per-lineage rho and its sign tests across frames are stable at the

@@ -1,3 +1,8 @@
+---
+kind: calibration
+status: "COMPLETE, MET"
+headline: "Does an analysis that ran in the archive re-run HERE and agree?"
+---
 # archive_agreement — the migration's own completion criterion
 
 **Does an analysis that ran in the archive re-run HERE and agree?** `MANIFEST.md`

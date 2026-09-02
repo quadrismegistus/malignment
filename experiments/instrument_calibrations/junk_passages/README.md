@@ -1,7 +1,9 @@
 ---
 id: junk_passages
-status: CALIBRATED. Three independent approaches land at 0.71-0.73 against coder-agreed validity, which is a ceiling in the LABEL rather than in the features. No detector admitted; the price list is the deliverable.
-question: Can a passage be screened as junk without paying for an LLM annotation?
+kind: calibration
+status: "RUN. CALIBRATED. Three independent approaches land at 0.71-0.73 against coder-agreed validity, which is a ceiling in the LABEL rather than in the features. No detector admitted; the price list is the deliverable. Section 2b SUPERSEDED 2026-08-23: the ceiling was not the label; a fourth approach clears it, AUC 0.768."
+question: "Can a passage be screened as junk without paying for an LLM annotation?"
+headline: "This calibrates the cheap screens against coder judgement, and they do not clear."
 ---
 
 # junk_passages

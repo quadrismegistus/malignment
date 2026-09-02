@@ -1,3 +1,10 @@
+---
+kind: calibration
+status: COMPLETE
+headline: "`term` IS NEAR-SATURATED FOR REAL WORDS and therefore carries almost no information about them."
+grain: word
+---
+
 # term_noise — how much of a word's `term` is diffuse boundary noise?
 
 `p(word) = mass x term`, with `term = row[b].sum()` over every boundary token.

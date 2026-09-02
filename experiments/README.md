@@ -1,213 +1,295 @@
-# experiments/
+# experiments/ -- what this campaign has found
 
-One directory per QUESTION. Not per theme, not per script.
+**The findings. The RULES are in [`LAYOUT.md`](LAYOUT.md).**
 
-    experiments/<question>/
-        README.md         the question, its id, the population, the claim, the status
-        registration.md   OPTIONAL -- see below. Frozen before the first run.
-        run.py            THE producer. Writes the result AT ITS GRAIN.
-        plot.py           reads the stored result and writes figures/.
-        population.json   generated receipt: the exact ids the result used
-        results/          one file per GRAIN, named for it:
-                            by_chain.csv, by_chain_domain.csv, ...
-        figures/          regenerable output
+Split on 2026-09-02 (RH). This file had grown two jobs -- how the directory is
+organised, and what the work found -- and the second is the one people come for.
+A reader after a result should not have to scroll past a hundred lines of filing
+convention to reach one.
 
-Only `README.md` and `run.py` are required.
+## HOW TO READ THIS FILE, AND WHY THE INDEX IS GENERATED
 
-## The rules, and what each one is a response to
+The index below is **derived**, by `index.py`, from each folder's own
+frontmatter. It is not written here and must not be edited here: the next
+`python index.py --write` reverts anything typed into it.
 
-**ONE PRODUCER PER DIRECTORY, named `run.py`. A variant is a FLAG, not a file.**
-v2's `meta/M01_displacement/scripts/` held 250 scripts for 32 findings — eight
-scripts per claim — and the letter prefixes accumulated `k_`×47, `x_`×36, `y_`×26.
-**A letter is a namespace, and namespaces fill.** Nobody can now say what `k`
-meant. If a thing is not a flag on the existing question, it is a different
-question and gets its own directory, which forces someone to name it.
+That is not fussiness. `LAYOUT.md` carries the rule this arrangement exists to
+keep -- **the finding lives in the question's README, and nowhere else** -- and
+RH wanted a summary of every finding in one place. Those are only compatible if
+the summary is a VIEW rather than a COPY.
 
-**A SECOND LEVEL ONLY WHEN A SUBJECT HAS TWO QUESTIONS, AND THE SUBJECT HOLDS
-NOTHING.** `experiments/<subject>/<question>/` is allowed once a second question
-genuinely exists — and the subject directory then contains a README that INDEXES
-its questions and nothing else: no code, no data, no claims. Anything shared
-between the questions goes in `malignment/`.
+**The drift rate is measured, not feared.** On 2026-09-02 an audit of
+`passage_analysis/README.md` -- a hand-written index of eleven folders, written
+by someone who had read all eleven -- found **four of the eleven entries wrong or
+stale** after about a week: a third-party result reported as an open gap, a
+folder marked COMPLETE whose own file said RUN, a four-finding folder summarised
+as a status line, and a file count off by eight. At 69 folders that rate makes a
+hand-written summary wrong on arrival.
 
-That constraint is the whole difference from `meta/M01_displacement`, which was
-created EMPTY, absorbed everything vaguely related, and reached 250 scripts for
-32 findings. **A container that exists before its contents will be filled by
-whatever is nearby.** So the first question of a subject lives flat, and the
-subject appears by promotion when the second arrives.
+So: **to change what this file says about a folder, edit that folder's
+`headline:` and re-run the generator.**
 
-**A REGISTRATION THAT CANNOT FAIL GOES IN `instrument_calibrations/`.** An
-instrument registration declares how something is BUILT; a hypothesis
-registration declares what would make a claim wrong. `sex_violence_lexicon` lived
-flat and was excluded from the table below by a sentence, which is a rule with
-nowhere to live. RH, 2026-08-16. The container arrived with two occupants, not
-empty.
+    python experiments/index.py --check    refuses if any folder cannot supply a row
+    python experiments/index.py --write    regenerates the block below
 
-**AND A FOLLOW-UP IS A NEW QUESTION, NEVER A ROUND.**
-`division_of_labour_round2` is `k_01`…`k_47` with better spelling: a variant
-nobody declared, whose relation to the first is knowable only by asking whoever
-ran it. A follow-up gets its own name, its own registration, and — if it was
-chosen because the first result disappointed — **a line saying so**, because a
-follow-up selected on a disappointing result is a specification search unless it
-is declared as one.
+`--check` fails rather than skipping. An index that quietly drops a folder looks
+complete and is not, and a reader cannot tell a folder with no finding from a
+folder with broken frontmatter. It also reports any directory holding a producer
+and no README at all -- the state `instrument_calibrations/frame_pilot` is in,
+and the state the first version of the checker could not see.
 
-**FLAT. NO NUMBERS.** `01_` encodes creation order, which git already knows, and
-invites `01a`/`01b` the first time a variant appears. Directories are named for
-their question because the question is the stable thing. A citable handle, if the
-paper needs one, is an `id:` field in the README — so renaming costs nothing.
+## The index
 
-**THE FINDING LIVES IN THE QUESTION'S README, AND NOWHERE ELSE.** A subject
-README indexes its questions with a status and a navigational gist; it must not
-restate their numbers. A number in two files is a number that will disagree with
-itself — the failure `movement` had when it stored `relation` beside the
-measurement, and the failure four archive artifacts had when they each defined
-"the population".
+<!-- INDEX:BEGIN -- generated by index.py, do not edit by hand -->
 
-**THERE IS NO `findings/`.** v1 kept 46 findings in a
-separate directory and **42 were cited by nothing**: a claim living apart from
-its producer has nothing keeping it true. Put the claim beside the code and a
-stale claim sits next to the code that contradicts it.
+### displacement
 
-**SHARED CODE GOES IN `malignment/`, NEVER COPIED BETWEEN EXPERIMENTS.** This is
-the rule that would have prevented most of those 250 scripts: they copied each
-other because there was no library to import from. Two experiments needing the
-same function is the signal it belongs in the package.
+*What does alignment do to a distribution -- how much moves, what kind of movement, along which dimension, and where in the model is it implemented?*
 
-**STORE THE GRAIN, NOT ONLY THE SUMMARY — BUT THE GRAIN DECIDES WHERE.**
-`RESULTS.md` asks for long form; it does not ask for a database. Two different
-things were being conflated:
+- **[`displacement_axis/`](displacement/displacement_axis/README.md)** -- `RUN. [...]`  
+  DIRECTION holds. rho signatures unmoved, identity harm still 47/47 p=1.4e-14. MAGNITUDE reverses.
+- **[`displacement_taxonomy/`](displacement/displacement_taxonomy/README.md)** -- `COMPLETE (for now). [...]`  
+  the operations catalogued here are a property of alignment as such, not of alignment acting on transgressive content
+- **[`existence/`](displacement/existence/README.md)** -- `RUN 2026-08-30. 50 endpoint lineages, English.`  
+  Displacement exists. Higher-T words lose more mass (40/50 lineages), and freed mass lands preferentially on same-kind words (47/49), not on neutral words.
+- **[`named_under_dose/`](displacement/named_under_dose/README.md)** -- `RUN, NULL. [...]`  
+  NONE STATED
+- **[`norm_change/`](displacement/norm_change/README.md)** -- `RUN. [...]`  
+  Register rises and valence rises in BOTH languages. Concreteness falls in Chinese only. Lift dose reorders the top: arousal over bodily harm.
+- **[`rate_and_magnitude/`](displacement/rate_and_magnitude/README.md)** -- `RUN 2026-08-24. 50 endpoint lineages, en and zh separately.`  
+  English moves more mass AND more words at transgressive prompts. Chinese moves MORE WORDS but LESS MASS.
+- **[`readout_share/`](displacement/readout_share/README.md)** -- `RUN 2026-08-30 — readout and state contribute COMPARABLY (joint regression 0.59 vs 0.65, R2 0.75; 0.74 vs 0.77, R2 0.98 on clean pairs). [...]`  
+  The readout and the state contribute comparably, and neither dominates.
+- **[`register_shift/`](displacement/register_shift/README.md)** -- `RUN. [...]`  
+  This is substitution WITHIN the low register, not movement up it.
 
-    SHARED MEASUREMENT      cells, movement -- millions of rows, read by many
-                            experiments -> ClickHouse
-    EXPERIMENT-LOCAL RESULT tens to hundreds of rows, read by this experiment
-                            and the paper -> `results.csv` here, tracked
+### passage_analysis
 
-Division of labour is ~20 chains. That is a CSV. Putting it in ClickHouse would
-add a table nobody else queries and a migration nobody wants. What is NOT
-acceptable either way is storing only the mean: the row per chain must exist, so
-the summary can be re-derived and disagreements can surface.
+*What survives from the policy to the page?*
 
-**ONE EXPERIMENT USUALLY HAS SEVERAL GRAINS, so `results/` holds one file per
-grain and THE FILENAME IS THE GRAIN**: `by_chain.csv`, `by_chain_domain.csv`,
-`by_lineage.csv`. Not `results_2.csv`, not `results_final.csv`.
+- **[`diegetic_superego/`](passage_analysis/diegetic_superego/README.md)** -- `COMPLETE (migrated 2026-08-20 from malign-logits M01)`  
+  Alignment's dominant response to sexual content is not refusal, deflection, or leaving the frame. It stays inside the fiction and attaches guilt, hesitation and moral comment to a scene it goes on writing.
+- **[`drift_geometry/`](passage_analysis/drift_geometry/README.md)** -- `RUN 2026-08-20 (ported)`  
+  the metrics track the coded judgment
+- **[`interiority_in_passages/`](passage_analysis/interiority_in_passages/README.md)** -- `COMPLETE. [...]`  
+  Alignment does not change how models represent inner life. It changes how much of it there is.
+- **[`jakobson_space/`](passage_analysis/jakobson_space/README.md)** -- `RUN. [...]`  
+  Alignment moves a model down a human range it already sat inside.
+- **[`national_story/`](passage_analysis/national_story/README.md)** -- `RUN`  
+  ALIGNMENT INSTALLS THE RESOLUTION, NOT THE PROBLEM
+- **[`novel_arc/`](passage_analysis/novel_arc/README.md)** -- `RUN. [...]`  
+  alignment rewinds literary history on abstraction and overshoots it entirely on interiority.
+- **[`passage_norms/`](passage_analysis/passage_norms/README.md)** -- `RUN. [...]`  
+  Ten keys replicate at q<.05 on both corpora with the same sign
+- **[`predicting_aligned_text/`](passage_analysis/predicting_aligned_text/README.md)** -- `NOT STARTED`  
+  NONE STATED
+- **[`second_order_naming/`](passage_analysis/second_order_naming/README.md)** -- `COMPLETE (migrated 2026-08-20 from malign-logits M02)`  
+  Alignment names the contradiction as a contradiction, and only the contradiction.
+- **[`selection_and_combination/`](passage_analysis/selection_and_combination/README.md)** -- `COMPLETE (migrated 2026-08-20 from malign-logits M06)`  
+  Alignment changes which signifiers appear. It does not change how the chain coheres.
+- **[`surprisal_matrix/`](passage_analysis/surprisal_matrix/README.md)** -- `RUN, 20 lineage pairs. [...]`  
+  Self-entropy falls further than external surprisal does, so the gap widens.
+- **[`syntagmatic_damage/`](passage_analysis/syntagmatic_damage/README.md)** -- `RUN, and the third-party fork closed on one reader. [...]`  
+  Alignment installs a standing disposition about WHICH word to reach for.
 
-That naming rule is what keeps a `results/` directory from becoming M01's 455
-files: **two files at the same grain is a defect, not a variant.** If
-`by_chain.csv` and `by_chain_v2.csv` both exist, one of them is stale and the
-question is which — exactly the ambiguity that made 455 files unusable. A new
-grain is a new name and is obvious; a new *version* of a grain overwrites, and
-git holds the history.
+### slot_ratings
 
-Figures follow the same rule: `plot.py` may write several, and a variant is a
-FLAG on it, never a second plotting script.
+- **[`identity/`](slot_ratings/identity/README.md)** -- `RUN. [...]`  
+  Alignment equalises the groups on how harmful their slot distribution is, and sharpens them on identity-typed content.
+- **[`institutional/`](slot_ratings/institutional/README.md)** -- `RUN, four corpora rated, arm A and arm B, 2026-08-19.`  
+  Alignment moves institutional slots toward abstract, procedural, deferential, lower-arousal completions -- for BOTH speakers.
+- **[`sexual/`](slot_ratings/sexual/README.md)** -- `RUN, gender-swapped matched pairs only; the 50 sexual-domain frames themselves are not yet analysed.`  
+  Alignment treats the two genders nearly identically.
 
-**A REGISTRATION IS FROZEN OR IT IS NOT A REGISTRATION** — but not every
-experiment needs one. It is required when the result has **a direction you would
-be disappointed by**, or when a different specification could give a different
-answer you would prefer. It is not required for descriptive work: counting what
-exists, mapping a corpus, listing a population. Forcing one onto a description is
-ceremony, and ceremony devalues the registrations that carry weight.
+### division_of_labour
 
-The tell, since "this one is just descriptive" is exactly what gets said to avoid
-registering: **if you can name an outcome you would rather see, register.**
+*Which alignment stage carries the displacement, and what does that depend on?*
 
-When there is one, it is committed before `run.py` is first run and never edited
-afterwards — amendments append with a date and a reason. A pre-registration
-editable after seeing the result is a post-hoc rationalisation with better
-typography.
+- **[`lexical_domains/`](division_of_labour/lexical_domains/README.md)** -- `RUN, 2026-08-16. L1 NOT SUPPORTED AS TESTED — and the operationalisation is now known to be wrong.`  
+  L1 NOT SUPPORTED AS TESTED — and the operationalisation is now known to be wrong.
+- **[`removal_rates/`](division_of_labour/removal_rates/README.md)** -- `RUN, 2026-08-16`  
+  A is SUPPORTED. B is NOT. They are reported separately and are not summarised into one verdict
+- **[`sft_share/`](division_of_labour/sft_share/README.md)** -- `RUN 2026-08-16 — H1 supported, H2 split, H3 NOT supported`  
+  SFT carries most of the displacement, and the content-dependent division of labour does not survive its own test.
 
-## TWO OF THE RULES ABOVE ARE NOT BEING FOLLOWED, AND RH HAS SAID SO
+### emergence
 
-**Recorded 2026-09-02, unresolved, RH's.** Neither is amended here, because the
-replacement is his call and a rule rewritten by whoever last tripped over it is
-not a rule. But leaving them stated as though they held would be worse: a rule
-everything violates teaches that the rules are decorative, and the next person
-to read this file cannot tell which of these sentences are live.
+- **[`capacities/`](emergence/capacities/README.md)** -- `PORTED from M05, 2026-08-24. Numbers recomputed by analyse.py, fleet not re-run.`  
+  Pretraining builds rhyme pull to 0.383; SFT erodes it to 0.262. DPO has one checkpoint.
 
-**ONE PRODUCER PER DIRECTORY -- violated in 30 directories of 52.**
+### posttraining_corpus_analysis
 
-    >1 producer   30
-     1 producer   22   (21 of them named run.py, so the NAMING rule holds
-                        wherever the count rule does)
+- **[`hh-rlhf/`](posttraining_corpus_analysis/hh-rlhf/README.md)** -- `RUN, EXPLORATORY. [...]`  
+  hh-rlhf's chosen/rejected axis is largely ENGAGE versus DEFLECT, and its direction INVERTS between the two arms.
+- **[`lexical_axes/`](posttraining_corpus_analysis/lexical_axes/README.md)** -- `RUN. [...]`  
+  RH's pre-registered prediction -- FAIL or NARROW PASS -- holds on the corrected vector.
+- **[`pku-safe-rlhf/`](posttraining_corpus_analysis/pku-safe-rlhf/README.md)** -- `COMPLETE except one control. [...]`  
+  Where one response appends a disclaimer and the other does not, and BOTH responses are labelled unsafe, annotators judge the disclaiming one safer 68% of the time — with the advice unchanged.
+- **[`tulu3-safety-slice/`](posttraining_corpus_analysis/tulu3-safety-slice/README.md)** -- `REGISTERING. [...]`  
+  NONE STATED
+- **[`ultrafeedback/`](posttraining_corpus_analysis/ultrafeedback/README.md)** -- `RUN. [...]`  
+  68.4% against 43.9% is the other side of chance, not a smaller version of the same effect.
 
-    41  passage_analysis/jakobson_space
-    28  displacement/displacement_taxonomy
-    21  displacement/displacement_axis
-    20  instrument_calibrations/dose_response
-    17  passage_analysis/national_story
-    17  emergence/capacities
-    16  slot_ratings/institutional
+### instrument_calibrations
 
-RH: *"we said just run.py / 1 producer but it turned out impractical for many
-experiments."* The counts agree with him. `national_story` at 17 is not an
-outlier, it is FIFTH, and the folders above it are the campaign's most productive
-ones -- including `jakobson_space`, which at 41 producers already sits INSIDE a
-subject, so "too many producers to be a question" is an objection the layout
-already overrules in practice. A rule that the best work breaks hardest is a rule describing something
-other than quality.
+- **[`archive_agreement/`](instrument_calibrations/archive_agreement/README.md)** -- `COMPLETE, MET`  
+  Does an analysis that ran in the archive re-run HERE and agree?
+- **[`contextual_norms/`](instrument_calibrations/contextual_norms/README.md)** -- `RUN, Chinese arm opened; comparability characterised, not established`  
+  This folder commissions the ratings; it does not analyse them.
+- **[`displacement_reference/`](instrument_calibrations/displacement_reference/README.md)** -- `BUILT`  
+  How far training moves a model, per phase, per token.
+- **[`dn_convention/`](instrument_calibrations/dn_convention/README.md)** -- `RUN`  
+  About one prompt in seven cannot be quoted on `dN` at all, because the two defensible conventions disagree about which way it moved.
+- **[`dose_response/`](instrument_calibrations/dose_response/README.md)** -- `RUN, instrument built and gradient-validated; English corpus tagged`  
+  The difference is grain. Loadedness is a property of a WORD AT A SLOT.
+- **[`english_mass/`](instrument_calibrations/english_mass/README.md)** -- `RUN`  
+  A says the roster writes English. B is the one that found something broken.
+- **[`frame_admittance/`](instrument_calibrations/frame_admittance/README.md)** -- `RUN and WRITTEN UP, 2026-08-24. Triage sound; premise half superseded by the slot corpus.`  
+  76% of sexual frames admit nothing; violence forecloses only 13%.
+- **[`frame_pilot/`](instrument_calibrations/frame_pilot/README.md)** -- `DESIGNED, NOT RUN. [...]`  
+  NONE STATED -- the design is registered, the pilot has not been run.
+- **[`frame_prefill/`](instrument_calibrations/frame_prefill/README.md)** -- `COMPLETE, 2026-08-21: the question it was built for is answered`  
+  What the deployment frame does to the word slot.
+- **[`generation_provenance/`](instrument_calibrations/generation_provenance/README.md)** -- `RUN`  
+  Is the API-versus-open contrast an artifact of how the two arms were generated?
+- **[`generic_axis/`](instrument_calibrations/generic_axis/README.md)** -- `RUN`  
+  A pooled lexical axis recovers about 89% of the reliability tagging buys. A single antonym pair is a lottery.
+- **[`junk_passages/`](instrument_calibrations/junk_passages/README.md)** -- `RUN. [...]`  
+  This calibrates the cheap screens against coder judgement, and they do not clear.
+- **[`leak_bound/`](instrument_calibrations/leak_bound/README.md)** -- `RUN.`  
+  So `41/50` is an AGGREGATE result and was never per-pair certified. The independence assumption the aggregate rests on is FALSE: the leak co-signs with the effect 96% of the time.
+- **[`mps_sampling/`](instrument_calibrations/mps_sampling/README.md)** -- `RUN. [...]`  
+  MPS returns out-of-range token indices when sampling. CPU does not. The defect needs EXACT ZEROS, so it is a property of FILTERED sampling and not of MPS sampling as such.
+- **[`numeric_boundary/`](instrument_calibrations/numeric_boundary/README.md)** -- `RUN. [...]`  
+  One question with two signs. v3's boundary classifier makes opposite errors on two character classes, and they are the same question about whether a boundary decision may look at what surrounds it.
+- **[`path_aggregation/`](instrument_calibrations/path_aggregation/README.md)** -- `RUN 2026-08-17.`  
+  No. NULL RESULT, and it redirects the question rather than answering it.
+- **[`prompt_openness/`](instrument_calibrations/prompt_openness/README.md)** -- `RUN. [...]`  
+  QUINTUPLETS is unanimously OPEN on 173 prompts; the M01 minimal pairs are 81-90% CLOSED. The asserted split holds.
+- **[`rank_vs_cardinal/`](instrument_calibrations/rank_vs_cardinal/README.md)** -- `RUN.`  
+  The pole set matters far more than the statistic. Whichever statistic you pick, the axis is where the variance is.
+- **[`screening_base/`](instrument_calibrations/screening_base/README.md)** -- `RUN, 2026-08-16. 56 UNTREATED models, 2,189-prompt panel, lexicon sha `d542e7e2bb86bd00`. [...]`  
+  A set, not a winner. 15 of 58 untreated models sit within 25 percentile points of median on *all three* statistics.
+- **[`sex_violence_lexicon/`](instrument_calibrations/sex_violence_lexicon/README.md)** -- `BUILT AND ADMITTED, 2026-08-16. Lexicon sha `d542e7e2bb86bd00`, 1,063 words (394 sexual, 655 violent, 14 both). [...]`  
+  The design worked, and the audit says where it does not.
+- **[`story_decoder/`](instrument_calibrations/story_decoder/README.md)** -- `RUN`  
+  THE TWO ARMS WANT OPPOSITE DECODERS
+- **[`term_noise/`](instrument_calibrations/term_noise/README.md)** -- `COMPLETE`  
+  `term` IS NEAR-SATURATED FOR REAL WORDS and therefore carries almost no information about them.
 
-What the rule was actually defending is still real and is worth separating from
-its mechanism: v2's 250 scripts for 32 findings, where `k_`x47 and `x_`x36 meant
-nothing to anyone and no script could be traced to a claim. **The failure was
-untraceable proliferation, not plurality.** `jakobson_space`'s 41 producers each
-have a name that says what they do and a README section that cites them; M01's
-250 did not. A rule keyed to the count cannot tell those apart, and this one
-does not.
+### exploratory
 
-**FLAT AT TOP LEVEL UNTIL A SECOND QUESTION ARRIVES -- RH does not want it.**
+*(container) work that has not been promoted to a declared question*
 
-RH: *"I know we initially said experiments should initially be top level but for
-web UI reasons and organisational reasons I dont like it. Not sure what to do."*
+- **[`prompt_slopes/`](exploratory/prompt_slopes/README.md)** -- `BUILT - exploratory, not promoted to a declared question`  
+  Most of the displacement is already done by SFT. The preference step continues it and does not cause it. ... Reported here as what the picture shows on one prompt, not as a finding
+- **[`salary_probe/`](exploratory/salary_probe/README.md)** -- `RUN, 28 lineage pairs, 84,000 draws, 2026-08-28 - UNPARKED AND RUN; registration frozen at 2afe765, amendments A1-A4`  
+  THE RESULT IS IN `FINDING_narrowing.md`. THIS FILE IS THE PILOT, kept because what it says about its own limits was right and is the reason the larger run exists.
+- **[`subject_position/`](exploratory/subject_position/README.md)** -- `OPEN. [...]`  
+  The position is installed at SFT, and it is frame-bound
 
-The rule was a response to `meta/M01_displacement`, which was created empty and
-absorbed everything nearby. That failure is real, and so is the cost RH is
-naming: the top level currently mixes subjects (`displacement`,
-`passage_analysis`, `slot_ratings`, `division_of_labour`, `emergence`) with
-single questions (`posttraining_corpus_analysis`) and with class axes
-(`instrument_calibrations`, `exploratory`), and nothing in a directory listing
-says which kind a name is. `serve.py` walks that listing.
+<!-- INDEX:END -->
 
-**Four moves were made on 2026-09-02, all RH's, and the top level went from 12
-directories to 8:**
+## WHAT THE CAMPAIGN HAS FOUND, ACROSS FOLDERS
 
-    story_decoder    -> instrument_calibrations/    class move
-    mps_sampling     -> instrument_calibrations/    class move, README written
-    national_story   -> passage_analysis/           by grain: the text-grain subject
-    readout_share    -> displacement/               by scope, and the subject's
-                                                    question was extended to cover it
+**This section is HAND-WRITTEN and is therefore the part of this file that can go
+stale.** Everything above it is generated. It is kept short and it points rather
+than restates, because a cross-folder synthesis is the one thing a generator
+cannot do -- and the one thing most likely to be quoted without its owner.
 
-The first two were uncontroversial: they are class moves rather than promotions.
-The second two are the substantive ones. `national_story` went in despite being
-subject-shaped (17 producers, five separable questions) because the destination
-already holds a 41-producer folder, so the objection did not survive contact with
-the tree. `readout_share` went to `displacement` because that subject's stated
-scope -- "measuring THE MOVEMENT ITSELF" -- is the only one it falls inside, and
-the scope line was extended to name the where-in-the-model clause rather than the
-folder being filed under a question that excluded it.
+**Alignment has a direction you can name and a magnitude you cannot.** Found
+twice, by different estimators at different grains, neither knowing about the
+other. `displacement/displacement_axis` at the distribution grain: direction is
+nameable (`harm` 44/47 frames), every named magnitude scale fails alone.
+`passage_analysis/selection_and_combination` from the page: direction predicts
+composition (`net_fall` 36/36), volatility does not (`pct_moved` 18/36, exact
+chance). Two instruments, two grains, one shape.
 
-**Each move was checked for the depth hazard first, and each time there was
-one.** `displacement/README.md` records that the previous regroup silently broke
-sixteen producers computing the root as `dirname(dirname(HERE))`. Three such
-paths in `national_story`, one in `readout_share`, all now on
-`malignment.paths.repo_root()`, all exercised at BOTH depths so that the answer
-could be seen not to change. The `.gitignore` had the same disease from the other
-side: every `national_story` rule was path-anchored, all of them stopped matching
-at once, and git offered the machine-specific sqlite symlink as a new file to
-track. Rewritten unanchored.
+**SFT does the cutting.** `division_of_labour/sft_share` H1, median share 0.819.
+The stage that carries displacement is the supervised one, not the preference
+one -- and `removal_rates` says the same for sexual vocabulary specifically while
+bounding the violence half to +-0.05.
 
-**The remaining cost is the web UI.** `malignment/serve.py` hardcodes
-`EXPERIMENTS/national_story/` at six lines (2208, 2272, 2279, 2331, 2357, 2384)
-and is not repaired here -- it carries another seat's uncommitted work, and RH is
-handing it to Dario. If it resolves an experiment id to a path instead of
-assuming top level, the layout stops being a UI constraint at all, which is the
-part of RH's objection that is fixable in code rather than by argument.
+**What alignment moves, it moves toward the interior and away from the body.**
+`passage_analysis/passage_norms` (ten keys, two corpora, inward and away from the
+named person and the number), `interiority_in_passages` (not how inner life is
+represented, how much of it there is), `novel_arc` (aligned prose sits above
+every period the novel ever reached on interiority, and rewinds abstraction about
+fifty-six years). Three instruments, one direction.
 
-## Scratch work
+**And it is not simplification.** `passage_analysis/jakobson_space` puts Ogden
+Basic English on the same axis -- the only direction here that somebody else
+defined -- and restricting three authors to 850 words RAISES surprisal on 47 of
+47 pairs, against alignment's fall. Nearly equal and opposite.
 
-Does not live here. Use the session scratchpad or a gitignored `sandbox/`. The
-reason v1 accumulated 477 scripts in `scripts/` is that there was nowhere else to
-put something you tried once. **This directory holds questions that have answers.**
+**The frame may be as big as the arm.** The same folder's four-manipulation table
+makes the chat wrapper the largest single drift effect measured, larger than
+alignment's own. `instrument_calibrations/frame_prefill` reports a base model in
+its own chat template moving 82% of what alignment moves it. If that holds, a
+good deal of what gets attributed to alignment is attributable to deployment.
+`frame_pilot` is the folder built to decide it, and it has not been run.
 
----
+## WHAT THIS PASS FOUND WRONG, 2026-09-02
+
+Normalising 65 READMEs surfaced a class of defect worth recording separately,
+because it is the same defect every time: **a document acquires a new result and
+the sentence elsewhere that the new result falsified is left standing.** Never
+the new writing. Always the old sentence somewhere else.
+
+**Verified directly against the files, and four of them corrected in this pass:**
+
+    displacement/README.md          advertised `8% to 40% headroom recovery` as
+                                    named_under_dose's gist. That folder's own
+                                    FINDINGS.md lists it among three earlier
+                                    versions that were confounded -- an
+                                    unoriented floor that INFLATED it 2.8x.
+                                    A retracted number, in an index. CORRECTED.
+    named_under_dose/README.md      still the design doc, status `building`,
+                                    sitting above a FINDINGS.md dated five days
+                                    later that reports the run NULL for
+                                    everything. CORRECTED.
+    division_of_labour/README.md    listed removal_rates as REGISTERING; the
+                                    folder says RUN 2026-08-16. CORRECTED.
+    exploratory/README.md           listed salary_probe as PARKED; the folder
+                                    says UNPARKED AND RUN 2026-08-28. CORRECTED.
+    passage_analysis/national_story its own producer list said cell 2 was
+                                    "never run at scale", four sections above the
+                                    section reporting cell 2's results. CORRECTED.
+    screening_base/README.md        the correction paragraph names
+                                    `Pharia-1-LLM-7B-control-hf` as wrongly
+                                    counted as untreated; it is still row 7 of
+                                    the candidate table. NOT corrected -- the
+                                    file also argues Pharia legitimately belongs,
+                                    so this needs its owner, not me.
+
+**The one that is a correctness dispute rather than bookkeeping**, and the reason
+this list is in the README rather than a commit message:
+
+    path_aggregation   "So it is not double counting." `expand` is implementing
+                       the declared rule.
+    numeric_boundary   "it stores `一个` twice", labelled DOUBLE-CREDITING and
+                       named as the cause of a real defect.
+
+Same surface, same token id 12831, opposite verdicts, and **neither file cites
+the other**. Only one can be right, and both are currently load-bearing.
+
+**Reported by the normalisation pass and NOT independently verified by me** --
+listed so they are findable, and marked so nobody quotes them as established:
+
+- `instrument_calibrations/README.md` indexes 5 of its 22 folders, and its
+  stated criterion ("says nothing about what alignment does") is reportedly
+  false for four or five members, not the one it names
+- `slot_ratings/institutional` header says three corpora, body reports four;
+  header names instrument v2, body uses v3's scales
+- `numeric_boundary`'s Status block says stages 2-3 were not run; three later
+  sections run them
+- `prompt_openness` carries a partition headed FINAL immediately above the round
+  that replaces it
+- `leak_bound` and `rank_vs_cardinal` quote the same floor as 13% and 12%
+- `salary_probe`'s header says RUN above a body that still says WHY THIS IS
+  PARKED and "these numbers must not be quoted as results"
+- `jakobson_space` carries at least six separable findings under one headline
+
 
 # THE HYPOTHESIS REGISTER
 
@@ -245,18 +327,6 @@ This table exists because separating instrument registrations from hypothesis re
 | **B** | VIOLENT vocabulary is preferentially removed by the preference stage | `division_of_labour/removal_rates` | **NOT SUPPORTED** — bounded to ±0.05; violence is SFT-dominated too |
 
 `sex_violence_lexicon` appears nowhere in this table **on purpose**: it registers no hypothesis. It declares one gate (controls >5% ⇒ the instrument is not admitted) and five construction/custody rules, and says nothing about what alignment does.
-
-## Why instrument and hypothesis registrations are kept apart
-
-A registration that makes no claim about the world cannot be tuned toward a finding, because there is no finding in it to aim at. Had L1 lived in the lexicon's registration, every judgment in building the instrument — which words to seed, how strict to make the raters, where to set the control ceiling — would have had a preferred answer sitting on the next page.
-
-The two also fail differently, and the difference is the point:
-
-    instrument registration   worst outcome: "the tool is too loose to use"
-    hypothesis registration   worst outcome: "the claim is false and is withdrawn"
-
-**But the separation has a cost and this table is the payment.** Update it in the same commit as any new registration.
-
 
 ## Withdrawn claims
 

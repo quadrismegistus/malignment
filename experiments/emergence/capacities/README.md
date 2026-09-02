@@ -1,4 +1,5 @@
 ---
+kind: question
 subject: capacities
 status: PORTED from M05, 2026-08-24. Numbers recomputed by analyse.py, fleet not re-run.
 headline: Pretraining builds rhyme pull to 0.383; SFT erodes it to 0.262. DPO has one checkpoint.

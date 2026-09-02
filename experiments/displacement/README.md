@@ -1,5 +1,8 @@
 ---
 type: subject
+kind: subject
+status: "OPEN. Eight questions; readout_share moved here from top level on 2026-09-02."
+headline: NONE STATED
 question: What does alignment do to a distribution -- how much moves, what kind of movement, along which dimension, and where in the model is it implemented?
 ---
 
@@ -28,7 +31,7 @@ the generated text (`passage_analysis`), check the instruments
 | [`displacement_axis/`](displacement_axis/) | direction settled; magnitude re-run at 50 and REVERSED | how MUCH mass moves, in which direction along author-declared pole axes. 60% nice-ward. Magnitude: named scales 62% of benchmark, bge 73%, nothing reaches it. Naming gain null REVERSES under lift dose (p=0.015). |
 | [`displacement_taxonomy/`](displacement_taxonomy/) | DONE | what KIND of movement, from blind coders. Ten canonical meta-relations. Operations are a property of alignment as such, not specific to transgression. |
 | [`norm_change/`](norm_change/) | RUN, corrected 2026-08-24, lift added 2026-08-30 | does alignment move the distribution along word norms and semantic fields? Register rises and valence rises in BOTH languages. Concreteness falls in Chinese only. Dose-response: lift reorders the top (arousal over bodily harm). Three doses agree on 19 targets with no sign disagreement. |
-| [`named_under_dose/`](named_under_dose/) | building | do named norms predict direction better under dose? Dose interaction: 8% to 40% headroom recovery. Softens to 20% to 34% under lift. |
+| [`named_under_dose/`](named_under_dose/) | RUN, NULL | do named norms predict direction better under dose? **They do not, for anything.** The `8% to 40% headroom recovery` this row advertised until 2026-09-02 is listed in the folder's own `FINDINGS.md` as an unoriented `log p_base` floor that inflated the headroom 2.8x. |
 | [`rate_and_magnitude/`](rate_and_magnitude/) | RUN 2026-08-24 | how MUCH mass moves and how OFTEN. English: both rate and magnitude rise with dose. Chinese: rate rises, magnitude INVERTS (dispersal). The two come apart by language. |
 | [`register_shift/`](register_shift/) | RUN 2026-08-24 | does alignment shift REGISTER? G NOT supported (30/50, p=0.203). G1 supported (what leaves is low-register). G2 REVERSED (what arrives is ALSO low-register, p=0.0003). |
 | [`readout_share/`](readout_share/) | RUN 2026-08-30 | **where** the movement is implemented: in the state that reaches the readout, or in the readout itself. Separable because the two arms share a tokenizer and hidden size, so a base residual stream can be pushed through its aligned sibling's unembedding. Both contribute COMPARABLY. An earlier "Llama is the lone readout counter-case" is WITHDRAWN. |

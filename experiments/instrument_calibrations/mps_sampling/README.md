@@ -1,7 +1,9 @@
 ---
 id: mps_sampling
-question: Does MPS sample tokens the filter forbade, and under what conditions?
-status: RUN. It does, at ~1/400 per draw, and ONLY when the distribution contains exact zeros -- which every filter creates. Unfiltered sampling is clean.
+kind: calibration
+question: "Does MPS sample tokens the filter forbade, and under what conditions?"
+status: "RUN. It does, at ~1/400 per draw, and ONLY when the distribution contains exact zeros -- which every filter creates. Unfiltered sampling is clean."
+headline: "MPS returns out-of-range token indices when sampling. CPU does not. The defect needs EXACT ZEROS, so it is a property of FILTERED sampling and not of MPS sampling as such."
 grain: apparatus
 ---
 

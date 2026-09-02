@@ -1,7 +1,9 @@
 ---
+kind: question
 subject: second_order_naming
 question: Does alignment name the contradiction as a contradiction?
-status: complete (migrated 2026-08-20 from malign-logits M02)
+status: "COMPLETE (migrated 2026-08-20 from malign-logits M02)"
+headline: "Alignment names the contradiction as a contradiction, and only the contradiction."
 grain: page
 ---
 

@@ -1,6 +1,9 @@
 ---
 subject: named_under_dose
-status: building
+status: "RUN, NULL. This README is still the DESIGN doc; the result is in FINDINGS.md (2026-08-30), five days later, and is null for everything."
+kind: question
+headline: NONE STATED
+grain: word
 question: |
   Findings P asked whether the named vocabulary predicts WHICH WAY alignment moves a
   word, held out by word, and answered no: 18 rated norms recovered 7% of the
