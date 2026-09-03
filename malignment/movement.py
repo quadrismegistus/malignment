@@ -790,7 +790,7 @@ def measured_pairs(rule_version=4):
 
 
 def movement_rows(base, aligned, prompt=None, cls=None, min_abs_delta=None,
-                  limit=None, rule_version=4, frame=''):
+                  limit=None, rule_version=4, frame='', clean_slot=False):
     """Precomputed word movement for a pair.
 
         movement_rows("meta-llama/Llama-3.1-8B",
@@ -817,6 +817,18 @@ def movement_rows(base, aligned, prompt=None, cls=None, min_abs_delta=None,
             where.append("frame_aligned=''")
         else:
             where.append("frame_aligned=%s" % _lit(frame))
+    if clean_slot:
+        #: a TRIPLE, not a pair: the same aligned model can be clean at one
+        #: system_mode and carry a persona at the other, so the mode is part of
+        #: what is being admitted.
+        trip = clean_frame_pairs(rule_version)
+        if not trip:
+            raise ValueError(
+                "clean_slot=True but no framed edge has an empty system slot -- "
+                "has produce_movement run since the last ingest?")
+        where.append("(base, aligned, system_mode_aligned) IN (%s)"
+                     % ",".join("(%s,%s,%s)" % (_lit(b), _lit(a), _lit(m))
+                                for b, a, m in trip))
     q = ("SELECT prompt, word, p_base, p_aligned, delta, cls FROM {db}.%s "
          "WHERE %s ORDER BY abs(delta) DESC" % (tbl, " AND ".join(where)))
     if limit:
@@ -825,7 +837,7 @@ def movement_rows(base, aligned, prompt=None, cls=None, min_abs_delta=None,
 
 
 def endpoint_movement(cls=None, min_abs_delta=None, prompt=None, limit=None,
-                      rule_version=4, frame=''):
+                      rule_version=4, frame='', clean_slot=False):
     """Movement across ALL declared base->endpoint pairs, in ONE query.
 
         endpoint_movement(cls="faller", min_abs_delta=0.1, limit=50)
@@ -855,12 +867,81 @@ def endpoint_movement(cls=None, min_abs_delta=None, prompt=None, limit=None,
             where.append("frame_aligned=''")
         else:
             where.append("frame_aligned=%s" % _lit(frame))
+    if clean_slot:
+        #: a TRIPLE, not a pair: the same aligned model can be clean at one
+        #: system_mode and carry a persona at the other, so the mode is part of
+        #: what is being admitted.
+        trip = clean_frame_pairs(rule_version)
+        if not trip:
+            raise ValueError(
+                "clean_slot=True but no framed edge has an empty system slot -- "
+                "has produce_movement run since the last ingest?")
+        where.append("(base, aligned, system_mode_aligned) IN (%s)"
+                     % ",".join("(%s,%s,%s)" % (_lit(b), _lit(a), _lit(m))
+                                for b, a, m in trip))
     q = ("SELECT base, aligned, prompt, word, p_base, p_aligned, delta, cls "
          "FROM {db}.%s WHERE %s ORDER BY abs(delta) DESC"
          % (tbl, " AND ".join(where)))
     if limit:
         q += " LIMIT %d" % int(limit)
     return ch.query(q)
+
+
+def clean_frame_pairs(rule_version=4):
+    """[(base, aligned, system_mode)] framed edges whose SYSTEM SLOT WAS EMPTY.
+
+        for b, a, m in clean_frame_pairs():
+            ...
+
+    ## WHY THIS IS NOT `system_mode == 'empty'`
+
+    `system_mode` records THE ARGUMENT PASSED to the producer. It does not record
+    the treatment the model received, and the two disagree in BOTH directions:
+
+        Qwen2.5-7B-Instruct   system_mode='empty'    renders a 151-char persona
+        gemma-2-9b-it         system_mode='default'  renders no system turn at all
+
+    So filtering on the label admits cells carrying a persona and discards cells
+    with a genuinely empty slot. The predicate has to be on what the template
+    RENDERED, which `roster/models/chat_renders.json` records per model
+    (`scripts/chat_renders.py`).
+
+    ## THE RULE
+
+    A framed edge is included iff the aligned model's system slot was empty IN
+    THE MODE THAT EDGE WAS BUILT UNDER -- `system_slot` for `default`,
+    `system_slot_empty` for `empty`.
+
+    **This count was re-derived in conversation eight times on 2026-09-03 and came
+    out differently almost every time** (29, 34, 47, 28, 35, 45, 24, 44) while the
+    underlying file never changed. It lives in code for that reason. Two wrong
+    rules, named so they are not reached for again:
+
+        `clean_via`                 what a model CAN do -- a property of the
+                                    MODEL, admits cells measured in the mode
+                                    that is not clean for it
+        `system_mode == clean_via`  too strict -- a model whose DEFAULT slot is
+                                    already empty is equally clean at `empty`
+
+    Both read a property of the model where the question is about the cell.
+    """
+    import json
+    import os
+    from . import ch
+    from .paths import repo_root
+    path = os.path.join(repo_root(), "roster", "models", "chat_renders.json")
+    rows = {r["model"]: r for r in
+            json.load(open(path, encoding="utf-8"))["models"]}
+    out = []
+    for x in ch.query(
+            "SELECT DISTINCT base, aligned, system_mode_aligned m FROM {db}.%s "
+            "WHERE frame_aligned='prefill'" % _mvt(rule_version)):
+        r = rows.get(x["aligned"]) or {}
+        slot = (r.get("system_slot") if x["m"] == "default"
+                else r.get("system_slot_empty"))
+        if slot == "":
+            out.append((x["base"], x["aligned"], x["m"]))
+    return sorted(out)
 
 
 def movement_pairs_list(rule_version=4):
