@@ -362,7 +362,7 @@
    "system_slot": "",
    "clean_default": true,
    "render_empty": "<|system|>\n</s>\n<|user|>\nHi.</s>\n<|assistant|>\n",
-   "system_slot_empty": "</s>",
+   "system_slot_empty": "",
    "clean_via": "default",
    "empty_system": "distinct",
    "venv": ".venv-tf457"

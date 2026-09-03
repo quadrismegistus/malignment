@@ -160,7 +160,15 @@ def classify(model_id, authored):
             if i < 0:
                 continue
             j = r.find(b, i + len(a))
-            return r[i + len(a):(j if j > 0 else len(r))].strip()
+            body = r[i + len(a):(j if j > 0 else len(r))]
+            #: STRIP SPECIAL TOKENS. TinyLlama closes its system block with the
+            #: EOS `</s>` INSIDE the block, so a raw slice returns '</s>' and the
+            #: slot reads as carrying text when it is empty. The tokens are
+            #: scaffold, not content.
+            for t in ("</s>", "<s>", "<|im_end|>", "<|eot_id|>", "<|end|>",
+                      "<end_of_turn>", "<|endoftext|>", "[/INST]"):
+                body = body.replace(t, "")
+            return body.strip()
         return ""
     body = slot_content(render)
     body_empty = slot_content(r_empty) if isinstance(r_empty, str) else None
