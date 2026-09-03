@@ -45,6 +45,27 @@ One user turn containing "Hi." Anything longer risks the template branching on
 content; anything shorter risks an empty-message special case. The question is
 what SCAFFOLD the model gets, not what it says about the content.
 
+## HOW TO USE IT, BECAUSE THE OBVIOUS TWO WAYS ARE BOTH WRONG
+
+To select framed cells whose SYSTEM SLOT WAS EMPTY, look up the slot for THE MODE
+THE CELL WAS STORED UNDER:
+
+    slot = row["system_slot"] if cell.system_mode == "default" \
+      else row["system_slot_empty"]
+    clean = (slot == "")
+
+**NOT `clean_via`.** That field says a model CAN be brought to a clean slot; it
+says nothing about the condition its stored cells were measured in. Counting it
+gave 45 pairs when 44 was the answer, and included models measured in the mode
+that is NOT clean for them.
+
+**NOT `system_mode == clean_via` either.** That is too strict in the other
+direction: a model whose DEFAULT slot is empty is equally clean measured at
+`empty`, and requiring the modes to match discarded 20 such pairs.
+
+The two failures are the same mistake -- reading a property of the MODEL where
+the question is about the CELL.
+
 ## TWO VENVS, BECAUSE NO SINGLE `transformers` LOADS THE ROSTER
 
 15 tokenizers refuse to load under the default venv -- every OLMo/OLMoE/Olmo-3
