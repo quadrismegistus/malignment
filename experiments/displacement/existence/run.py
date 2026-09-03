@@ -68,13 +68,38 @@ def slope(xs, ys):
     return sum((x - mx) * (y - my) for x, y in zip(xs, ys)) / sxx
 
 
-def measure(save=None):
+def measure(save=None, frame="raw", match_framed=False):
     import statistics as st
     from malignment import ch, charge, roster
 
     eps, unresolved = roster.endpoints()
     if unresolved:
         raise SystemExit("unresolved lineages: %s" % sorted(unresolved)[:3])
+
+    #: **THE FRAMED CONTRAST IS base_raw -> aligned_framed AND IS ASYMMETRIC.**
+    #: There is no framed base for 43 of 50 pairs -- most bases ship no chat
+    #: template -- so this is not "the same test inside the frame", it is the
+    #: deployed arm against the bare one. Read it as such.
+    #:
+    #: `clean_slot` is not optional here. `frame_aligned='prefill'` alone mixes
+    #: models whose system slot was EMPTY with models rendering a persona or a
+    #: date block, because `system_mode` records the argument passed and not the
+    #: treatment received. See `movement.clean_frame_pairs()`.
+    mode_of = {}
+    #: **THE COMPARISON NEEDS THE SAME PAIRS ON BOTH SIDES.** raw runs 50 and
+    #: framed runs 45, so a raw-vs-framed difference read off those two numbers
+    #: is partly population. `--match-framed` runs the RAW contrast restricted
+    #: to the framed pairs, which is the only version of raw that can be set
+    #: beside the framed result.
+    if match_framed:
+        from malignment import movement as M
+        keep = {(b, a) for b, a, _ in M.clean_frame_pairs() if eps.get(b) == a}
+        eps = {b: a for b, a in eps.items() if (b, a) in keep}
+    if frame != "raw":
+        from malignment import movement as M
+        mode_of = {(b, a): m for b, a, m in M.clean_frame_pairs()
+                   if eps.get(b) == a}
+        eps = {b: a for b, a in eps.items() if (b, a) in mode_of}
 
     ep_set = set()
     base_of = {}
@@ -84,7 +109,10 @@ def measure(save=None):
         base_of[key] = b
 
     print("EXISTENCE: does a word's transgressive charge predict its displacement?")
-    print("50 endpoint lineages, per-cell slope of delta ~ scene")
+    print("%d endpoint lineages, per-cell slope of delta ~ scene  [frame=%s]"
+          % (len(eps), frame))
+    if frame != "raw":
+        print("base_raw -> aligned_framed, clean system slot only")
     print()
 
     by_cell = collections.defaultdict(list)
@@ -94,8 +122,11 @@ def measure(save=None):
             "SELECT prompt, word, (p_aligned - p_base) AS delta "
             "FROM {db}.movement_v4 "
             "WHERE base='%s' AND aligned='%s' "
-            "AND frame_base = '' AND frame_aligned = ''"
-            % (b.replace("'", "\\'"), a.replace("'", "\\'")),
+            "AND frame_base = '' AND %s"
+            % (b.replace("'", "\\'"), a.replace("'", "\\'"),
+               "frame_aligned = ''" if frame == "raw" else
+               ("frame_aligned = 'prefill' AND system_mode_aligned = '%s'"
+                % mode_of[(b, a)])),
             limit_bytes=None)
         for r in rows:
             by_cell[(lin, r["prompt"])].append((r["word"], float(r["delta"])))
@@ -350,8 +381,17 @@ def main(argv=None):
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--save", default=None,
                     help="write per-lineage results to this JSON file")
+    ap.add_argument("--frame", default="raw", choices=("raw", "prefill"),
+                    help="raw: base_raw -> aligned_raw, 50 pairs. prefill: "
+                         "base_raw -> aligned_framed on the pairs whose system "
+                         "slot was empty as measured. The two are DIFFERENT "
+                         "populations and must not be compared without "
+                         "restricting raw to the framed pairs first.")
+    ap.add_argument("--match-framed", action="store_true",
+                    help="restrict to the pairs the framed run uses, so raw and "
+                         "prefill are the same population")
     a = ap.parse_args(argv)
-    return measure(save=a.save)
+    return measure(save=a.save, frame=a.frame, match_framed=a.match_framed)
 
 
 if __name__ == "__main__":
