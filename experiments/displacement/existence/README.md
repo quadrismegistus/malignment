@@ -3,7 +3,7 @@ subject: existence
 status: RUN 2026-08-30. 50 endpoint lineages, English.
 kind: question
 question: Is alignment's reshaping of word probabilities content-selective, and is it displacement or suppression?
-headline: Displacement exists. Higher-T words lose more mass (40/50 lineages), and freed mass lands preferentially on same-kind words (47/49), not on neutral words.
+headline: Displacement exists. Higher-T words lose more mass (43/50 lineages), and freed mass lands preferentially on same-kind words (47/49), not on neutral words. It survives the deployment frame and is 2.8x larger there.
 ---
 
 # existence
@@ -17,12 +17,18 @@ Alignment changes word probability distributions — JS > 0 between base and ali
 Within each cell (one prompt × one endpoint pair), every candidate word carries a scene rating (1-7, from `charge.py`) and a delta (p_aligned - p_base). The test: regress delta on scene within each cell.
 
     SLOPE OF delta ~ scene (within cell)
-    lineages with negative median slope:     40
-    lineages with positive median slope:     10
-    sign test p:                             0.000024
-    grand median slope:                      -0.000303
+    lineages with negative median slope:     43
+    lineages with positive median slope:      7
+    sign test p:                             2.1e-07
+    grand median slope:                      -0.000295
 
-**Higher-scene words lose more mass under alignment.** 40 of 50 lineages, p = 0.000024.
+**Higher-scene words lose more mass under alignment.** 43 of 50 lineages, p = 2.1e-07.
+
+**This block said 40/10 and p=0.000024 until 2026-09-03.** Those were the numbers
+of a run before the one that wrote `results/selectivity.json` on 31 Aug, and the
+prose was never brought forward with the artifact. Re-run to settle it rather
+than to choose between them: 43/7 exactly, reproducing the stored JSON to the
+digit. The direction never moved; the sign count and the p-value did.
 
 The faller/riser breakdown sharpens it:
 
@@ -55,6 +61,47 @@ The gradient is monotonic. As lift increases (words add more charge beyond the s
     1-2 (high)        2408   41/9      6e-6    -0.000614
 
 Selectivity scales with what the words contribute. Where they contribute nothing (lift < 0), alignment reshapes but not by content.
+
+## THE DEPLOYMENT FRAME: it survives, 2.8x larger
+
+`run.py --frame prefill`. The aligned arm measured inside its chat template
+rather than bare, against the same raw base -- `base_raw -> aligned_framed`.
+
+    same 45 pairs              RAW          FRAMED
+    lineages negative          39 / 45      41 / 45
+    grand median slope         -0.000276    -0.000780
+    sign test p                1e-6         < 1e-6
+
+**Content-selectivity is not an artifact of measuring the aligned arm bare.**
+Putting it in the frame a user actually meets strengthens the effect, in the same
+direction `instrument_calibrations/frame_prefill` finding 15 reports for the arm
+contrast at large, where raw understates by 1.74x.
+
+### Three things that make this readable, and none is optional
+
+**THE CONTRAST IS ASYMMETRIC.** 43 of 50 bases ship no chat template, so there is
+no framed base to compare against. This is not the same test conducted inside the
+frame; it is the DEPLOYED arm against the BARE one, and it changes two things at
+once by design, because in deployment they are never separate.
+
+**THE POPULATION IS 45, NOT 50, AND THE RAW COLUMN ABOVE IS RUN ON THE SAME 45.**
+`--match-framed` exists for exactly that: read against the 50-pair raw headline,
+a framed difference would be partly which labs ship a template. Two pairs are
+excluded because their system slot carries text no empty message can remove
+(SmolLM3-3B's metadata block, Llama-3.1-8B-Instruct's `Cutting Knowledge Date`),
+and three because they are unframed.
+
+**`frame_aligned='prefill'` ALONE IS NOT THE FILTER.** `system_mode` records the
+argument passed to the producer, not the treatment the model received, and the
+two disagree in both directions -- Qwen at `system_mode='empty'` still renders a
+151-character persona, gemma at `default` renders no system turn at all. The
+population comes from `movement.clean_frame_pairs()`, which reads what each
+template actually RENDERED into the system slot
+(`roster/models/chat_renders.json`).
+
+    results/selectivity_framed.json      the framed run
+    results/selectivity_raw_on45.json    raw on the same pairs
+    results/selectivity.json             the 50-pair raw headline, unchanged
 
 ## Part 2: displacement vs suppression (`adjacency.py`)
 
