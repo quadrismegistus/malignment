@@ -8,6 +8,11 @@
  ],
  "models": [
   {
+   "model": "01-ai/Yi-1.5-9B",
+   "template": null,
+   "source": "none"
+  },
+  {
    "model": "01-ai/Yi-1.5-9B-Chat",
    "source": "shipped",
    "render": "<|im_start|>user\nHi.<|im_end|>\n<|im_start|>assistant\n",
@@ -15,6 +20,16 @@
    "probe_sha": "e8ec67319788296d",
    "has_system_turn": false,
    "empty_system": "discarded",
+   "venv": ".venv-tf457"
+  },
+  {
+   "model": "BAAI/Aquila2-7B",
+   "source": "shipped",
+   "render": "<|begin_of_text|><|start_header_id|>user<|end_header_id|>\n\nHi.<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n",
+   "render_len": 119,
+   "probe_sha": "742032a3bcb830b4",
+   "has_system_turn": false,
+   "empty_system": "distinct",
    "venv": ".venv-tf457"
   },
   {
@@ -26,6 +41,11 @@
    "has_system_turn": false,
    "empty_system": "discarded",
    "venv": ".venv-tf457"
+  },
+  {
+   "model": "BSC-LT/salamandra-7b",
+   "template": null,
+   "source": "none"
   },
   {
    "model": "BSC-LT/salamandra-7b-instruct",
@@ -48,6 +68,16 @@
    "venv": ".venv-tf457"
   },
   {
+   "model": "EleutherAI/pythia-2.8b",
+   "template": null,
+   "source": "none"
+  },
+  {
+   "model": "EleutherAI/pythia-6.9b",
+   "template": null,
+   "source": "none"
+  },
+  {
    "model": "HuggingFaceH4/mistral-7b-sft-beta",
    "source": "shipped",
    "render": "<|user|>\nHi.</s>\n<|assistant|>\n",
@@ -66,6 +96,11 @@
    "has_system_turn": false,
    "empty_system": "distinct",
    "venv": ".venv-tf457"
+  },
+  {
+   "model": "HuggingFaceTB/SmolLM2-360M",
+   "template": null,
+   "source": "none"
   },
   {
    "model": "HuggingFaceTB/SmolLM2-360M-Instruct",
@@ -88,9 +123,29 @@
    "venv": ".venv-tf457"
   },
   {
+   "model": "HuggingFaceTB/SmolLM3-3B-Base",
+   "template": null,
+   "source": "none"
+  },
+  {
    "model": "HuggingFaceTB/SmolLM3-3B-checkpoints@it-soup-APO",
    "error": "HFValidationError",
    "error_detail": "Repo id must use alphanumeric chars, '-', '_' or '.'. The name cannot start or end with '-' or '.' and the maximum length is 96: 'HuggingFaceTB/SmolLM3-3B-check"
+  },
+  {
+   "model": "LLM360/Amber",
+   "template": null,
+   "source": "none"
+  },
+  {
+   "model": "LLM360/AmberSafe",
+   "source": "authored",
+   "render": "A chat between a curious user and an artificial intelligence assistant. The assistant gives helpful, detailed, and polite answers to the user's questions. USER: Hi. ASSISTANT:",
+   "render_len": 175,
+   "probe_sha": "b1717561922fdfe6",
+   "has_system_turn": false,
+   "empty_system": "discarded",
+   "venv": ".venv-tf457"
   },
   {
    "model": "NousResearch/Hermes-3-Llama-3.1-8B",
@@ -113,11 +168,26 @@
    "venv": ".venv-tf457"
   },
   {
+   "model": "OpenLLM-France/Lucie-7B",
+   "template": null,
+   "source": "none"
+  },
+  {
    "model": "OpenLLM-France/Lucie-7B-Instruct-v1.1",
    "source": "shipped",
    "render": "<s><|start_header_id|>user<|end_header_id|>\n\nHi.<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n",
    "render_len": 105,
    "probe_sha": "a6db5584239f78a1",
+   "has_system_turn": false,
+   "empty_system": "distinct",
+   "venv": ".venv-tf457"
+  },
+  {
+   "model": "PKU-Alignment/beaver-7b-v1.0",
+   "source": "authored",
+   "render": "BEGINNING OF CONVERSATION: USER: Hi. ASSISTANT:",
+   "render_len": 47,
+   "probe_sha": "30a3351ae2cc4421",
    "has_system_turn": false,
    "empty_system": "distinct",
    "venv": ".venv-tf457"
@@ -183,6 +253,21 @@
    "venv": ".venv-tf457"
   },
   {
+   "model": "RWKV/rwkv-4-7b-pile",
+   "template": null,
+   "source": "none"
+  },
+  {
+   "model": "RWKV/rwkv-raven-7b",
+   "source": "authored",
+   "render": "Bob: Hi.\n\nAlice:",
+   "render_len": 16,
+   "probe_sha": "50ff27d3c03dafcb",
+   "has_system_turn": false,
+   "empty_system": "discarded",
+   "venv": ".venv-tf457"
+  },
+  {
    "model": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
    "source": "shipped",
    "render": "<|user|>\nHi.</s>\n<|assistant|>\n",
@@ -191,6 +276,16 @@
    "has_system_turn": false,
    "empty_system": "distinct",
    "venv": ".venv-tf457"
+  },
+  {
+   "model": "TinyLlama/TinyLlama-1.1B-intermediate-step-1431k-3T",
+   "template": null,
+   "source": "none"
+  },
+  {
+   "model": "Zyphra/Zamba2-7B",
+   "template": null,
+   "source": "none"
   },
   {
    "model": "Zyphra/Zamba2-7B-Instruct",
@@ -273,6 +368,11 @@
    "venv": ".venv-tf457"
   },
   {
+   "model": "allenai/OLMo-2-0425-1B",
+   "template": null,
+   "source": "none"
+  },
+  {
    "model": "allenai/OLMo-2-0425-1B-DPO",
    "source": "shipped",
    "render": "<|endoftext|><|user|>\nHi.\n<|assistant|>\n",
@@ -303,6 +403,11 @@
    "venv": ".venv-tf457"
   },
   {
+   "model": "allenai/OLMoE-1B-7B-0125",
+   "template": null,
+   "source": "none"
+  },
+  {
    "model": "allenai/OLMoE-1B-7B-0125-DPO",
    "source": "shipped",
    "render": "|||IP_ADDRESS|||<|user|>\nHi.\n<|assistant|>\n",
@@ -331,6 +436,16 @@
    "has_system_turn": false,
    "empty_system": "distinct",
    "venv": ".venv-tf457"
+  },
+  {
+   "model": "allenai/Olmo-3-1025-7B",
+   "template": null,
+   "source": "none"
+  },
+  {
+   "model": "allenai/Olmo-3-1125-32B",
+   "template": null,
+   "source": "none"
   },
   {
    "model": "allenai/Olmo-3-7B-Instruct",
@@ -393,6 +508,21 @@
    "venv": ".venv-tf457"
   },
   {
+   "model": "allenai/Olmo-3.1-32B-Instruct",
+   "source": "shipped",
+   "render": "<|im_start|>system\nYou are Olmo, a helpful AI assistant built by Ai2. Your date cutoff is December 2024, and your model weights are available at https://huggingface.co/allenai. You do not currently have access to any functions. <functions></functions><|im_end|>\n<|im_start|>user\nHi.<|im_end|>\n<|im_start|>assistant\n",
+   "render_len": 315,
+   "probe_sha": "59c18da982109a53",
+   "has_system_turn": true,
+   "empty_system": "distinct",
+   "venv": ".venv-tf457"
+  },
+  {
+   "model": "allenai/Olmo-Hybrid-7B",
+   "template": null,
+   "source": "none"
+  },
+  {
    "model": "allenai/Olmo-Hybrid-Instruct-DPO-7B",
    "source": "shipped",
    "render": "<|im_start|>system\nYou are a helpful function-calling AI assistant. You do not currently have access to any functions. <functions></functions><|im_end|>\n<|im_start|>user\nHi.<|im_end|>\n<|im_start|>assistant\n",
@@ -413,6 +543,11 @@
    "venv": ".venv-tf457"
   },
   {
+   "model": "baichuan-inc/Baichuan2-7B-Base",
+   "template": null,
+   "source": "none"
+  },
+  {
    "model": "baichuan-inc/Baichuan2-7B-Chat",
    "source": "authored",
    "render": "<reserved_106>Hi.<reserved_107>",
@@ -421,6 +556,16 @@
    "has_system_turn": false,
    "empty_system": "discarded",
    "venv": ".venv-tf457"
+  },
+  {
+   "model": "bigscience/bloom-7b1",
+   "template": null,
+   "source": "none"
+  },
+  {
+   "model": "bigscience/bloomz-7b1",
+   "template": null,
+   "source": "none"
   },
   {
    "model": "cognitivecomputations/Dolphin3.0-Llama3.1-8B",
@@ -433,6 +578,11 @@
    "venv": ".venv-tf457"
   },
   {
+   "model": "croissantllm/CroissantLLMBase",
+   "template": null,
+   "source": "none"
+  },
+  {
    "model": "croissantllm/CroissantLLMChat-v0.1",
    "source": "shipped",
    "render": "<|im_start|>user\nHi.<|im_end|>\n<|im_start|>assistant\n",
@@ -441,6 +591,11 @@
    "has_system_turn": false,
    "empty_system": "distinct",
    "venv": ".venv-tf457"
+  },
+  {
+   "model": "deepseek-ai/deepseek-llm-7b-base",
+   "template": null,
+   "source": "none"
   },
   {
    "model": "deepseek-ai/deepseek-llm-7b-chat",
@@ -453,6 +608,26 @@
    "venv": ".venv-tf457"
   },
   {
+   "model": "gl198976/mpt-7b",
+   "template": null,
+   "source": "none"
+  },
+  {
+   "model": "gl198976/mpt-7b-instruct",
+   "source": "authored",
+   "render": "Below is an instruction that describes a task. Write a response that appropriately completes the request.\n### Instruction:\nHi.\n### Response:\n",
+   "render_len": 141,
+   "probe_sha": "ecb721f0350fe9c8",
+   "has_system_turn": false,
+   "empty_system": "discarded",
+   "venv": ".venv-tf457"
+  },
+  {
+   "model": "google/gemma-2-9b",
+   "template": null,
+   "source": "none"
+  },
+  {
    "model": "google/gemma-2-9b-it",
    "source": "shipped",
    "render": "<bos><start_of_turn>user\nHi.<end_of_turn>\n<start_of_turn>model\n",
@@ -461,6 +636,11 @@
    "has_system_turn": false,
    "empty_system": "refused:TemplateError",
    "venv": ".venv-tf457"
+  },
+  {
+   "model": "google/recurrentgemma-9b",
+   "template": null,
+   "source": "none"
   },
   {
    "model": "google/recurrentgemma-9b-it",
@@ -483,6 +663,11 @@
    "venv": ".venv-tf457"
   },
   {
+   "model": "ibm-granite/granite-3.0-8b-base",
+   "template": null,
+   "source": "none"
+  },
+  {
    "model": "ibm-granite/granite-3.0-8b-instruct",
    "source": "shipped",
    "render": "<|start_of_role|>user<|end_of_role|>Hi.<|end_of_text|>\n<|start_of_role|>assistant<|end_of_role|>",
@@ -493,6 +678,11 @@
    "venv": ".venv-tf457"
   },
   {
+   "model": "inceptionai/jais-family-6p7b",
+   "template": null,
+   "source": "none"
+  },
+  {
    "model": "inceptionai/jais-family-6p7b-chat",
    "source": "shipped",
    "render": "### Instruction: Your name is 'Jais', and you are named after Jebel Jais, the highest mountain in UAE. You were made by 'Inception' in the UAE. You are a helpful, respectful, and honest assistant. Always answer as helpfully as possible, while being safe. Complete the conversation below between [|Human|] and [|AI|]:\n### Input: [|Human|] Hi. \n[|AI|]\n### Response:",
@@ -501,6 +691,11 @@
    "has_system_turn": false,
    "empty_system": "distinct",
    "venv": ".venv-tf457"
+  },
+  {
+   "model": "internlm/internlm2-base-7b",
+   "template": null,
+   "source": "none"
   },
   {
    "model": "internlm/internlm2-chat-7b",
@@ -543,6 +738,11 @@
    "venv": ".venv-tf457"
   },
   {
+   "model": "kakaocorp/kanana-2-3b-base",
+   "template": null,
+   "source": "none"
+  },
+  {
    "model": "kakaocorp/kanana-2-3b-instruct",
    "source": "shipped",
    "render": "<|im_start|>user\nHi.<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
@@ -551,6 +751,11 @@
    "has_system_turn": false,
    "empty_system": "distinct",
    "venv": ".venv-tf457"
+  },
+  {
+   "model": "llm-jp/llm-jp-3-7.2b",
+   "template": null,
+   "source": "none"
   },
   {
    "model": "llm-jp/llm-jp-3-7.2b-instruct2",
@@ -571,6 +776,26 @@
    "has_system_turn": false,
    "empty_system": "distinct",
    "venv": ".venv-tf457"
+  },
+  {
+   "model": "lomahony/eleuther-pythia6.9b-hh-dpo",
+   "source": "authored",
+   "render": "\n\nHuman: Hi.\n\nAssistant:",
+   "render_len": 24,
+   "probe_sha": "5b36189c017a35ea",
+   "has_system_turn": false,
+   "empty_system": "discarded",
+   "venv": ".venv-tf457"
+  },
+  {
+   "model": "m-a-p/CT-LLM-Base",
+   "template": null,
+   "source": "none"
+  },
+  {
+   "model": "m-a-p/CT-LLM-SFT-DPO",
+   "template": null,
+   "source": "none"
   },
   {
    "model": "m-a-p/neo_7b",
@@ -603,6 +828,26 @@
    "venv": ".venv-tf457"
   },
   {
+   "model": "meta-llama/Llama-3.1-70B",
+   "template": null,
+   "source": "none"
+  },
+  {
+   "model": "meta-llama/Llama-3.1-70B-Instruct",
+   "source": "shipped",
+   "render": "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\nHi.<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n",
+   "render_len": 236,
+   "probe_sha": "f11f5ae09c006398",
+   "has_system_turn": true,
+   "empty_system": "discarded",
+   "venv": ".venv-tf457"
+  },
+  {
+   "model": "meta-llama/Llama-3.1-8B",
+   "template": null,
+   "source": "none"
+  },
+  {
    "model": "meta-llama/Llama-3.1-8B-Instruct",
    "source": "shipped",
    "render": "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\nHi.<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n",
@@ -621,6 +866,16 @@
    "has_system_turn": false,
    "empty_system": "distinct",
    "venv": ".venv-tf457"
+  },
+  {
+   "model": "mistralai/Mistral-7B-v0.1",
+   "template": null,
+   "source": "none"
+  },
+  {
+   "model": "openGPT-X/Teuken-7B-base-v0.6",
+   "template": null,
+   "source": "none"
   },
   {
    "model": "openGPT-X/Teuken-7B-instruct-v0.6",
@@ -673,6 +928,11 @@
    "venv": ".venv-tf457"
   },
   {
+   "model": "stabilityai/stablelm-2-1_6b",
+   "template": null,
+   "source": "none"
+  },
+  {
    "model": "stabilityai/stablelm-2-1_6b-chat",
    "source": "shipped",
    "render": "<|im_start|>system\nYou are a helpful assistant.<|im_end|>\n<|im_start|>user\nHi.<|im_end|>\n<|im_start|>assistant\n",
@@ -713,6 +973,11 @@
    "venv": ".venv-tf457"
   },
   {
+   "model": "tiiuae/Falcon-H1-1.5B-Base",
+   "template": null,
+   "source": "none"
+  },
+  {
    "model": "tiiuae/Falcon-H1-1.5B-Instruct",
    "source": "shipped",
    "render": "<|begin_of_text|><|im_start|>user\nHi.<|im_end|>\n<|im_start|>assistant\n",
@@ -721,6 +986,11 @@
    "has_system_turn": false,
    "empty_system": "distinct",
    "venv": ".venv-tf457"
+  },
+  {
+   "model": "tiiuae/Falcon-H1-7B-Base",
+   "template": null,
+   "source": "none"
   },
   {
    "model": "tiiuae/Falcon-H1-7B-Instruct",
@@ -733,6 +1003,11 @@
    "venv": ".venv-tf457"
   },
   {
+   "model": "tiiuae/Falcon3-7B-Base",
+   "template": null,
+   "source": "none"
+  },
+  {
    "model": "tiiuae/Falcon3-7B-Instruct",
    "source": "shipped",
    "render": "<|user|>\nHi.\n<|assistant|>\n",
@@ -741,6 +1016,11 @@
    "has_system_turn": false,
    "empty_system": "distinct",
    "venv": ".venv-tf457"
+  },
+  {
+   "model": "tiiuae/falcon-7b",
+   "template": null,
+   "source": "none"
   },
   {
    "model": "tiiuae/falcon-7b-instruct",
@@ -753,6 +1033,11 @@
    "venv": ".venv-tf457"
   },
   {
+   "model": "tiiuae/falcon-mamba-7b",
+   "template": null,
+   "source": "none"
+  },
+  {
    "model": "tiiuae/falcon-mamba-7b-instruct",
    "source": "shipped",
    "render": "<|begin_of_text|><|im_start|>user\nHi.<|im_end|>\n<|im_start|>assistant\n",
@@ -761,6 +1046,21 @@
    "has_system_turn": false,
    "empty_system": "distinct",
    "venv": ".venv-tf457"
+  },
+  {
+   "model": "togethercomputer/RedPajama-INCITE-7B-Chat",
+   "source": "authored",
+   "render": "<human>: Hi.\n<bot>:",
+   "render_len": 19,
+   "probe_sha": "05a380c39e035135",
+   "has_system_turn": false,
+   "empty_system": "discarded",
+   "venv": ".venv-tf457"
+  },
+  {
+   "model": "togethercomputer/RedPajama-INCITE-Base-7B-v0.1",
+   "template": null,
+   "source": "none"
   },
   {
    "model": "weblab-GENIAC/Tanuki-8B-dpo-v1.0",
@@ -781,6 +1081,11 @@
    "has_system_turn": false,
    "empty_system": "discarded",
    "venv": ".venv-tf457"
+  },
+  {
+   "model": "zai-org/glm-4-9b-hf",
+   "template": null,
+   "source": "none"
   }
  ]
 }
