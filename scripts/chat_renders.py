@@ -118,16 +118,47 @@ def classify(model_id, authored):
     except Exception as e:
         empty_state = "refused:%s" % type(e).__name__
         r_empty = None
-    low = render.lower()
+    #: **THE SLOT, NOT THE MARKER.** A first version tested for the string
+    #: "system" and called any render carrying it dirty. That conflates three
+    #: different things, and the middle one is the condition we want:
+    #:
+    #:   no system turn          gemma-2-9b-it  63ch   <start_of_turn>user
+    #:   EMPTY system turn       Olmo-3.1-32B   83ch   <|im_start|>system\n<|im_end|>
+    #:   system turn WITH TEXT   Olmo-3.1-32B  315ch   "You are Olmo, ... built by Ai2"
+    #:
+    #: The first two both put NOTHING in the system slot and are equally usable;
+    #: only the third is a treatment. Measuring "is the marker present" marked
+    #: Olmo's overridden render dirty and would have excluded a clean cell.
+    def slot_content(r):
+        """-> text sitting in the system slot, '' if the slot is absent or empty."""
+        for a, b in (("<|im_start|>system", "<|im_end|>"),
+                     ("<|start_header_id|>system<|end_header_id|>", "<|eot_id|>"),
+                     ("<<SYS>>", "<</SYS>>"),
+                     ("<|system|>", "<|"), ("### System:", "###")):
+            i = r.find(a)
+            if i < 0:
+                continue
+            j = r.find(b, i + len(a))
+            return r[i + len(a):(j if j > 0 else len(r))].strip()
+        return ""
+    body = slot_content(render)
+    body_empty = slot_content(r_empty) if isinstance(r_empty, str) else None
     return {
         "model": model_id,
         "source": src,
         "render": render,
         "render_len": len(render),
         "probe_sha": hashlib.sha256(render.encode("utf-8")).hexdigest()[:16],
-        #: THE PREDICATE. `<<SYS>>` is Llama-2's marker and contains no ascii
-        #: "system", so a substring test alone misses it.
-        "has_system_turn": ("system" in low) or ("<<SYS>>" in render),
+        #: kept for continuity, but it is the MARKER test and not the predicate
+        "has_system_turn": ("system" in render.lower()) or ("<<SYS>>" in render),
+        #: THE PREDICATE: is there TEXT in the system slot?
+        "system_slot": body,
+        "clean_default": not body,
+        "render_empty": r_empty if isinstance(r_empty, str) else None,
+        "system_slot_empty": body_empty,
+        #: can this model be BROUGHT to a clean slot, and how
+        "clean_via": ("default" if not body
+                      else ("empty" if body_empty == "" else None)),
         "empty_system": empty_state,
         "venv": os.path.basename(os.path.dirname(os.path.dirname(sys.executable))),
     }
