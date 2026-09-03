@@ -153,7 +153,14 @@ def texts(G, L, a):
     demonyms and none of the rest, and the trope rates move by several points
     depending only on dict order. Interleaving makes any prefix balanced.
     """
-    cells = [v for (l, arm_, dem), v in sorted(G.items()) if l == L and arm_ == a]
+    #: SORT KEY, not bare `sorted`. The no-demonym control keys its demonym as
+    #: None while every other cell keys a string, and tuple comparison raises
+    #: TypeError on str vs NoneType -- so adding the control broke every caller
+    #: of texts(), which is most of this file, at the first sort.
+    cells = [v for (l, arm_, dem), v in
+             sorted(G.items(), key=lambda kv: (kv[0][0], kv[0][1],
+                                               kv[0][2] or ""))
+             if l == L and arm_ == a]
     out = []
     for i in range(max((len(c) for c in cells), default=0)):
         for c in cells:
