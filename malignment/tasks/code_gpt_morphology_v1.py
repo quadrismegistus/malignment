@@ -96,6 +96,39 @@ class FunctionInstance(BaseModel):
             "function."))
 
 
+#: WHY TWO PROMPTS AND NOT ONE INVENTORY. Run flat, a sheet mixing Propp's two
+#: systems returns nothing for half of itself: on the Bergen inventory every one
+#: of the 22 persona/setting/threat entries scored 0% while 17 of 19 functions
+#: fired, in stories that plainly contain a curious girl, a small town and a
+#: family prohibition. The model was right and the inventory was wrong -- the
+#: prompt says "a function is a unit of action", and a persona is not one.
+#:
+#: So a FUNCTION is annotated in sequence ("what happens, in order") and a
+#: PRESENCE is annotated as inventory ("what is in this story"). Same schema,
+#: same span discipline, different question, because they are different
+#: questions and one prompt cannot ask both.
+def _presence_prompt(functions):
+    lines = "\n".join("  %-26s %s" % (fid, gloss) for fid, gloss in functions)
+    return (
+        "You catalogue what is PRESENT in a short story, against a fixed "
+        "inventory of characters, settings and threats. These are not events "
+        "and they have no order: you are asking what the story CONTAINS.\n\n"
+        "THE INVENTORY. Use these ids and no others:\n\n" + lines + "\n\n"
+        "RULES.\n"
+        "1. Emit every entry the story contains, each anchored to a VERBATIM "
+        "span copied character for character from the text.\n"
+        "2. A character counts if the story has one, whatever they are called. "
+        "A young female protagonist driven by curiosity IS a curious girl even "
+        "if the word 'curious' never appears -- anchor the span to where she is "
+        "introduced or characterised.\n"
+        "3. A setting counts if the story is set there, not merely if it is "
+        "mentioned in passing.\n"
+        "4. Emit each entry at most ONCE. This is a catalogue, not a count.\n"
+        "5. The list may legitimately be empty. Do NOT manufacture entries.\n"
+        "6. Do not judge whether the story fits the scheme. Catalogue what is "
+        "there.")
+
+
 def _system_prompt(functions):
     lines = "\n".join("  %-22s %s" % (fid, gloss) for fid, gloss in functions)
     return (
@@ -119,7 +152,7 @@ def _system_prompt(functions):
 
 
 def build(functions, model="deepseek/deepseek-v4-flash", temperature=0.0,
-          retries=2):
+          retries=2, mode="function"):
     """-> a Task subclass for THIS inventory. `functions` is [(id, gloss), ...].
 
     The inventory is hashed into `name`, so two lists are two instruments with
@@ -139,8 +172,14 @@ def build(functions, model="deepseek/deepseek-v4-flash", temperature=0.0,
             "function ids must be UPPER_SNAKE so they survive a round trip "
             "through the model and a CSV: %s" % ", ".join(bad))
 
+    if mode not in ("function", "presence"):
+        raise ValueError("mode must be 'function' or 'presence'")
+    #: the MODE is in the hash. The same inventory asked as a sequence and as a
+    #: catalogue are two measurements, and a cache keyed without it would serve
+    #: one as the other.
     sha = hashlib.sha256(
-        "\n".join("%s\t%s" % f for f in functions).encode()).hexdigest()[:12]
+        ("%s\n" % mode +
+         "\n".join("%s\t%s" % f for f in functions)).encode()).hexdigest()[:12]
 
     schema = create_model(
         "GPTMorphology",
@@ -167,12 +206,14 @@ def build(functions, model="deepseek/deepseek-v4-flash", temperature=0.0,
     return type("GPTMorphologyTask", (Task,), dict(
         name="gpt_morphology_v1_%s" % sha,
         schema=schema,
-        system_prompt=_system_prompt(functions),
+        system_prompt=(_system_prompt if mode == "function"
+                       else _presence_prompt)(functions),
         retries=retries,
         temperature=temperature,
         model=model,
         inventory=functions,
         inventory_sha=sha,
+        mode=mode,
     ))()
 
 

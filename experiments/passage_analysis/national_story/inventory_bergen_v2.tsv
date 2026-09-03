@@ -1,0 +1,56 @@
+# MORPHOLOGY OF THE GPT STORY -- v2
+# Column 1 = id, column 2 = gloss. FACET prefix keeps Propp's two systems apart:
+#   F_  function      what happens. These have an ORDER.
+#   P_  persona       who acts. No order.
+#   S_  setting       where. No order.
+#   T_  threat        what is wrong.
+# (room) = written at Bergen.  (added) = proposed from US_1 and IN_1.
+#
+# ---- INITIAL SITUATION ----
+F_PSYCHOLOGICAL_BLOCK	the protagonist cannot do the thing they are for: writer's block, lost voice, stalled work (room)
+F_CURIOSITY	the protagonist is moved by not-knowing; a question, a rumour, an unexplained thing (room)
+F_DESIRE_COUNTER_TO_TRADITION	someone wants what the community does not sanction: education, a marriage, leaving (room)
+F_WEIGHT_OF_LEGACY	an inheritance is felt as an obligation the protagonist has not met (added: Benny and his father's house and vocation)
+F_INHERITED_OBJECT	a physical thing passed down is carried, opened or used (added: the grandmother's journal, the father's coin)
+# ---- ASSISTANCE ----
+F_ELDER_GIVES_A_QUEST	an older figure names a task, a place or a direction (room)
+F_SUPERNATURAL_ENCOUNTERED	a non-human agency speaks, appears or acts (room: whispering pines)
+F_ANCIENT_TEXT	a written or remembered record is consulted (room)
+F_LOCAL_LEGEND_TOLD	a named local myth is recounted TO the protagonist as prior knowledge (added: the Maplewood Well, the Whispering Pines)
+F_TOKEN_OFFERED	something of the protagonist's is given up to obtain the outcome (added: the coin thrown into the well)
+# ---- THE MIDDLE: what the story does with its material ----
+F_EMBEDDED_TALE	a complete second story is told INSIDE the story, with its own characters (added: Arjun and Meera occupy a third of IN_1)
+F_VISION_OR_FLASHBACK	the protagonist is shown a scene from another time (added: both stories, and it is how both get their content)
+F_NATURE_SPEAKS	landscape or weather is given voice, memory or intention (added)
+F_INWARD_TURN	narration moves to feeling, memory or realisation (added: the single most frequent move in both)
+# ---- SOLUTION -- the row the sheet left empty ----
+F_STORY_IS_THE_SOLUTION	the problem is resolved BY telling, hearing or recording a story (added: both stories, and they share nothing else structurally)
+F_TRADITION_INSTITUTED	a NEW practice is founded and named as a tradition (added: Benny's storytelling event "became a cherished tradition")
+F_COMMUNITY_COMES_TOGETHER	the collective assembles and acts as one (room)
+F_DEPARTURE	the protagonist leaves the community for the wider world (added: Aanya leaves -- Rettberg's named India exception)
+F_LEGACY_SECURED	the ending projects forward: the outcome will last, be remembered, be passed on (added: "Years later", "And thus, Aanya's journey began")
+# ---- PERSONAE ----
+P_CURIOUS_GIRL	a young female protagonist characterised by curiosity (room)
+P_ASPIRING_ARTIST	writer, journalist, weaver, violinist, craftsman (room)
+P_TRADITIONAL_LABORER	logger, postman, railwayman, fisherman (room)
+P_TRAVELLER	one who has gone or will go (room)
+P_COMMUNITY_ORGANISER	an activist or convener (room)
+P_STUDENT_TEACHER	student, teacher or researcher (room)
+P_DEAD_FOREBEAR	a parent or grandparent, dead or absent, whose example is invoked (added: Arthur Turner, Aanya's grandmother)
+P_NAMED_MINOR_WITH_VIGNETTE	a townsperson named and given one story of their own (added: Mr Jenkins, Mrs Thompson, Sarah)
+P_DEVELOPERS	outside commercial interests (room)
+P_MALEVOLENT_SPIRIT	a hostile non-human agency (room)
+# ---- SETTINGS ----
+S_SMALL_TOWN	a village or small town, characteristically "nestled" (room)
+S_THE_CITY	the metropolis, to be left or gone to (room)
+S_FOREST_OR_GARDEN	woods, grove, garden, orchard (room)
+S_AUTUMN	the season is autumn, with leaves, harvest or turning colour (added: both stories open in autumn)
+# ---- THREATS ----
+T_NATURE_UNBALANCED	ecological disorder (room)
+T_DISEASE	illness in a person or the community (room)
+T_THE_SELF	the protagonist is their own obstacle (room)
+T_FORGETTING	tradition, balance or community is being lost to memory (room)
+T_MODERNITY	change as such, arriving from outside (room)
+T_INVADERS	an external human force (room)
+T_POLICE	state or official coercion (room)
+T_FAMILY_PROHIBITION	a family forbids a union or a path (added: Arjun's family; Meera's traditions)

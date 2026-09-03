@@ -186,8 +186,16 @@ def main(argv=None):
     from malignment.tasks.code_gpt_morphology_v1 import (
         build, check_spans, FUNCTIONS_SEED)
 
-    funcs = load_functions(a.functions) if a.functions else FUNCTIONS_SEED
-    task = build(funcs)
+    allf = load_functions(a.functions) if a.functions else FUNCTIONS_SEED
+    #: SPLIT BY FACET PREFIX. F_ is a sequence question, everything else is a
+    #: catalogue question, and asking them with one prompt scores the catalogue
+    #: half at zero -- measured, see the task module.
+    seq = [f for f in allf if f[0].startswith("F_")]
+    cat = [f for f in allf if not f[0].startswith("F_")]
+    if not seq:
+        seq, cat = allf, []
+    funcs = allf
+    task = build(seq)
     n = 3 if a.smoke else a.n
     only = set(x.strip() for x in a.demonyms.split(",")) if a.demonyms else None
     want = [x.strip() for x in a.ids.split(",")] if a.ids else None
@@ -215,6 +223,15 @@ def main(argv=None):
     #: result list is diagnosable rather than positional and opaque.
     errs = {}
     res = task.map([t for _, t in rows], num_workers=a.workers, errors=errs)
+    if cat:
+        ctask = build(cat, mode="presence")
+        cres = ctask.map([t for _, t in rows], num_workers=a.workers)
+        #: merge, so one table covers the whole sheet
+        for r, c in zip(res, cres):
+            if r is not None and c is not None:
+                r.functions = list(r.functions) + list(c.functions)
+        print("   (%d functions asked in sequence, %d catalogued as presence)"
+              % (len(seq), len(cat)))
     for i, ((label, text), r) in enumerate(zip(rows, res)):
         if r is None:
             print("  [%d/%d] %-10s FAILED: %s"
