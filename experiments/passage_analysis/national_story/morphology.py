@@ -113,7 +113,7 @@ def load_functions(path):
     return out
 
 
-def load_rettberg(n, seed, only=None):
+def load_rettberg(n, seed, only=None, ids=None):
     """-> [(label, text)] sampled ACROSS countries, not from the first few."""
     if not os.path.isdir(GPT):
         raise SystemExit("Rettberg corpus not at %s -- use --corpus ours" % GPT)
@@ -131,9 +131,23 @@ def load_rettberg(n, seed, only=None):
                 t = (r.get("Story") or "").strip()
                 if len(t.split()) < 150:
                     continue
+                if ids is not None:
+                    if (r.get("Story_ID") or "") not in ids:
+                        continue
+                    rows.append((r.get("Story_ID"), t))
+                    continue
                 if only and (r.get("Demonym") or "") not in only:
                     continue
                 rows.append((r.get("Demonym") or d, t))
+    if ids is not None:
+        #: NAMED stories, so order follows the request and nothing is dropped.
+        #: A silently-missing id would read as a story the model refused rather
+        #: than one that was never loaded, so absences are raised.
+        by_id = dict(rows)
+        missing = [i for i in ids if i not in by_id]
+        if missing:
+            raise SystemExit("no such Story_ID: %s" % ", ".join(missing))
+        return [(i, by_id[i]) for i in ids]
     #: shuffle BEFORE truncating, so a sample is not the alphabetically first
     #: countries -- Rettberg's own directories run AFG, ALB, DZA...
     random.Random(seed).shuffle(rows)
@@ -163,6 +177,8 @@ def main(argv=None):
     ap.add_argument("--demonyms", help="comma-separated, e.g. Norwegian,Nigerian. "
                                        "Rettberg holds exactly 50 per demonym.")
     ap.add_argument("--smoke", action="store_true", help="3 stories, verbose")
+    ap.add_argument("--ids", help="named Story_IDs, comma-separated, e.g. "
+                                  "US_1,IN_1. Implies verbose output.")
     ap.add_argument("--out", help="write per-story JSONL here")
     ap.add_argument("--workers", type=int, default=8)
     a = ap.parse_args(argv)
@@ -174,7 +190,8 @@ def main(argv=None):
     task = build(funcs)
     n = 3 if a.smoke else a.n
     only = set(x.strip() for x in a.demonyms.split(",")) if a.demonyms else None
-    rows = (load_rettberg(n, a.seed, only) if a.corpus == "rettberg"
+    want = [x.strip() for x in a.ids.split(",")] if a.ids else None
+    rows = (load_rettberg(n, a.seed, only, want) if a.corpus == "rettberg"
             else load_ours(n, a.seed, a.arms))
     if not rows:
         raise SystemExit("no stories loaded")
@@ -222,7 +239,7 @@ def main(argv=None):
             out_fh.write(json.dumps(dict(
                 label=label, functions=[f.model_dump() for f in r.functions],
                 notes=r.notes, span_ok=ok, span_total=tot)) + "\n")
-        if a.smoke:
+        if a.smoke or a.ids:
             print("  --- story %d (%s) ---" % (i + 1, label))
             for f in r.functions:
                 mark = "  " if (f.function, f.span) not in missing else "!!"
