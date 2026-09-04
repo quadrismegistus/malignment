@@ -267,20 +267,43 @@ suppression, decisively. That is a second reason the 47/2 is less diagnostic tha
 it reads, independent of the base-model one recorded above -- and unlike that
 one, this reverses rather than merely failing to discriminate.
 
-### AND THE FRAMED POPULATION IS MORE SATURATED THAN THE RAW ONE
+### THE POPULATION GETS MORE SATURATED AT EVERY STEP AWAY FROM RAW
 
 Qualifying cells by saturation band, as a share of each condition:
 
-                  raw            framed
-    lo          20%  (2,508)    12%   (619)
-    hi          45%  (5,589)    61% (3,143)
+    condition    cells      lo     mid      hi
+    raw         12,416     20%     35%     45%
+    framed       5,143     12%     27%     61%
+    self           537      4%     25%     71%
 
-The framed contrast keeps proportionally more of exactly the prompts where
-same-kind landing is strongest and drops the ones where it reverses. **So part of
-"unanimous under the frame" is composition, not amplification.** Read the 45/0
-and the widened same/none ratio with that attached: the framed arm supplies the
-same-kind/none-kind combination less often, and what it drops is not a random
-sample of the raw population.
+**This is monotone and it is not a coincidence.** Saturation tracks frame at
++0.826, the framed and self populations are filtered by `clean_frame_pairs`, and
+what survives that filter is disproportionately the charged, single-kind prompts
+where same-kind landing is close to arithmetic.
+
+So the strengthening across conditions -- raw 47/2, framed 45/0, self 79/0 --
+runs alongside a population shift toward the band where the effect is strongest,
+and away from the band where it reverses. **Part of "unanimous under the frame"
+is composition, not amplification.** The folder already records that qualifying
+cells halve under the frame (13,049 to 6,227); this says what leaves is not a
+random sample of what stays.
+
+SELF-EDGES CANNOT BE STRATIFIED. Only one cell clears the minimum:
+
+    hi   L-lo   8 lineages   290 cells   0.00911 vs 0.00530   8/0   p=0.0078
+
+Every other cell has under 8 lineages, and the `lo` band has 21 cells in total.
+`--frame self` is therefore a measurement taken almost entirely on saturated
+prompts, and the same-kind result there is not evidence about the mechanism so
+much as about which prompts survive the filter.
+
+**WHICH BEARS DIRECTLY ON THE 8/8 BASE RESULT ABOVE.** Part 1 reports base models
+reproducing same-kind landing perfectly, 8 of 8, and reads it as showing the
+pattern needs no aligned weights. That is measured on the self-edge population --
+4% low-saturation, 71% high. On saturated prompts a same-kind riser is most of
+what is available to rise. The 8/8 is still the right reason to discount the
+47/2, but the two findings now share one explanation rather than being
+independent checks on each other.
 
 ### THREE AGGREGATIONS, AND TWO OF THEM WERE WRONG
 
