@@ -897,6 +897,97 @@ Chinese lineages, and the Chinese results in the earlier sections of this file
 Chinese, the lift dose is English-only and the level dose remains the Chinese
 instrument.
 
+## THE DEPLOYMENT FRAME (2026-09-04): EVERYTHING GETS BIGGER, AND THE SLOT SCALES EXPLODE
+
+`run.py --rule-version 4 [--frame prefill]` and `dose.py` with the same flags.
+The aligned arm measured inside its chat template, against the same raw base --
+`base_raw -> aligned_framed`. Lift dose, three tables, shared prompt subset.
+
+**THE V3 RESULTS ABOVE ARE UNTOUCHED AND ARE A DIFFERENT SUBSTRATE.** RH's
+ruling: build the v4 tables alongside rather than restating numbers already
+reported off v3. v3 spans 153 pairs and 4,482 prompts; v4 spans 132 and 2,985
+while carrying more rows (merged topup cells). A v4 number is not a correction
+of a v3 one.
+
+    dose_lift__*.csv             v3, what the section above reports
+    dose_lift_v4__*.csv          v4 raw, MATCHED to the framed pairs
+    dose_lift_v4_framed__*.csv   v4 framed
+
+### Significant targets, same 45 lineages both columns
+
+    table         RAW/45              FRAMED/45
+    levels        28 of 42            29 of 42
+    fields       101 of 362          130 of 327
+    contextual    42 of 82            51 of 82
+
+### Levels: about 2x
+
+    target                        raw        framed    ratio
+    k_vulgarity_z            -0.03925      -0.08291     2.1x
+    k_transgressiveness_z    -0.03105      -0.07685     2.5x
+    k_bodily_harm_z          -0.04243      -0.07407     1.7x
+    k_transgressiveness      -0.02625      -0.06455     2.5x
+    k_concreteness           -0.02797      -0.06148     2.2x
+
+### Contextual: three to FOURTEEN times, and this is the result
+
+    target                                    raw       framed    ratio
+    sexual_slot_en_v2:genitality         -0.02268     -0.31143    13.7x
+    sexual_slot_en_v2:explicitness       -0.03579     -0.32785     9.2x
+    sexual_slot_en_v2:charge             -0.02694     -0.21935     8.1x
+    slot_institutional_en_v3:target      -0.02334     -0.17848     7.6x
+    slot_institutional_en_v3:agency      -0.02756     -0.16714     6.1x
+    slot_institutional_en_v3:assertive   -0.02488     -0.14978     6.0x
+    v6_wide:mundanity                    +0.04125     +0.14744     3.6x
+    v6_wide:directedness                 -0.05128     -0.15173     3.0x
+
+**The word-level norms amplify about twofold; the SLOT-RATED scales amplify
+three- to fourteenfold.** That gap is the finding, and it has a reading the
+folder can support: a contextual rating asks what a word does AT THIS SLOT, and
+the frame is a change to the slot. Word norms carry the same value wherever the
+word appears, so they can only register the frame indirectly, through which
+words move. The slot scales register it directly.
+
+Under the frame, `v6_wide:mundanity` RISES unanimously (45/0) while agency,
+target, assertiveness, specificity and abstraction all fall at 44/1. The framed
+aligned arm strips agency and specificity from the institutional slot and raises
+mundanity, and it does so in proportion to how much charge the base's candidates
+carried.
+
+### Two things that are NOT just a size change
+
+**The top of the levels ranking reorders.** Raw leads with `k_bodily_harm` and
+the warriner extremity measures; framed leads with `k_transgressiveness` itself.
+The v3 section above reports the lift dose reordering as *arousal over bodily
+harm* -- measured raw. Under the frame it is transgressiveness as such.
+
+**`k_register_level` RISES framed at 40/5 and is absent from raw's top band.**
+`register_shift`'s headline G is NOT supported at the endpoint (30/50, p=0.203).
+A register rise that appears only under dose AND only under the frame is a
+different claim from the one that folder tested, and is flagged here rather than
+folded in.
+
+### Fences
+
+**The contrast is ASYMMETRIC.** 43 of 50 bases ship no chat template, so there
+is no framed base. This is the DEPLOYED arm against the BARE one, two things
+changed at once by design, because in deployment they are never separate.
+
+**`--match-framed` is not optional.** The framed set covers 45 of the 50 pairs;
+raw at n=50 beside framed at n=45 differs partly by which labs ship a template.
+Both columns above are the same 45.
+
+**`frame_aligned='prefill'` alone is not the filter.** `system_mode` records the
+argument passed, not the treatment received -- Qwen at `empty` still renders a
+151-character persona, gemma at `default` renders no system turn at all. The
+population comes from `movement.clean_frame_pairs()`, which reads what each
+template actually rendered into the system slot.
+
+**Chinese is absent from every framed column.** Charge ratings are English-only,
+so the lift dose has no zh arm; `ZH / levels -- 0 targets tested` in both.
+
+**EXPLORATORY.** Nothing in this section was registered.
+
 ### NOT YET DONE
 
 The three-dose agreement table (`dose_agreement.py`) has not been re-run with
