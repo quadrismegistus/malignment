@@ -401,10 +401,64 @@ words, `still` included) reproduces the ordering exactly, no-wildchat largest at
 +0.0136 (t=7.6), a 6.4% rise in displaced total variation. Candidate-set sizes
 are 156.1-157.0 across the five, so it is not a wider field either.
 
+### PRIOR ART: WILDCHAT WAS ALREADY THE ODD ARM, AND THE READING ABOVE IS CONTESTED
+
+**This is not the first time WildChat has been singled out, and the section as
+first written did not say so.** `malign-logits`
+`meta/M01_displacement/findings/U_ladder.md` ran the same five checkpoints in
+August on DISPLACEMENT, and `findings/DISPLACEMENT_EVIDENCE.md` §197 states the
+result: faller Jaccard against full is `no-safety` 0.534, `no-math` 0.528,
+`no-persona` 0.522, **`no-wildchat` 0.340** -- and no-wildchat against each of
+the other three is 0.294-0.303 where they sit at 0.486-0.563 with each other.
+Two groups, no overlap. Its summary is **"magnitude normal, direction
+different."** The frame result here is a different quantity on a different edge,
+and it CONVERGES on the same arm. That is corroboration, and it should be quoted
+as the second observation of a known singularity, not the first of a new one.
+
+**Three things the prior work already settled**, which this section re-derived
+and should have cited:
+
+- **Volume is refuted, with counts.** Safety removes 110,983 and WildChat
+  100,000 -- an 11% difference at the two extremes -- while the two removals
+  three times larger (persona 284,919, math 334,252) change the operation least.
+- **`math` and `persona` OVERLAP.** 334,252 for math includes the three
+  personahub math sources (149,960 + 49,980 + 20,000). So `no-math` and
+  `no-persona` are not disjoint cuts, and the ambiguity flagged here is
+  answered rather than open.
+- **The slice definitions are sourced**: Tulu 3, arXiv 2411.15124 §4.1/4.3,
+  Tables 7 and 10.
+
+**AND THE INTERPRETATION OFFERED ABOVE WAS ALREADY TESTED AND FAILED, on the
+displacement quantity.** §197 anticipated exactly the "WildChat is real user
+prompts, so this is the operation depending on logged human wanting" reading and
+split it by domain: `no-wildchat`'s divergence is **flat** -- neutral 0.3656
+against transgressive 0.3235, a gap of -0.042 sitting mid-range of the other
+arms' -0.038 to -0.059. Its verdict: **"a generally unusual training run, not one
+that differs where desire is at stake."**
+
+So the `d dose` column here (-0.684, t=-2.8) is in TENSION with an established
+result, not merely unreplicated. It is a different outcome (fall-rise against
+continuous lift) on a different edge (the frame self-edge, not base -> aligned),
+so it is not directly refuted -- but the prose above, which reads it as WildChat
+teaching the model *when* address matters, is the same reading §197 killed.
+**Treat it as contested until the direct check runs.**
+
+THE CHECK THAT WOULD SETTLE IT: replicate §197's neutral-vs-transgressive split
+on the frame quantity here. If `no-wildchat`'s frame elevation is flat across
+that split the way its Jaccard divergence was, then this is the same generally
+unusual training run and the discrimination reading goes.
+
 ### What this cannot be
 
-**One family, one ablation set, no replication available.** Nobody else ships
-leave-one-out SFT checkpoints, so there is no second draw and none is coming.
+**One family, one ablation set, no replication available** -- also established
+prior, not here. U_ladder searched HuggingFace, arXiv and lab post-training docs
+and found no second suite meeting the bar, confirmed these five are the complete
+Tulu set (`-no-code-data`, `-no-if-data`, `-no-science-data` were probed for and
+do not exist), and recorded the status change from PENDING to **UNAVAILABLE**:
+the instrument does not exist in the open-weight ecosystem. Nearest miss is
+Meta's MobileLLM-Pro, which ran seven-domain leave-one-out ablations and released
+none of the ablated checkpoints.
+
 The 840 prompts give power WITHIN the comparison and no generality beyond it.
 
 This was also predicted in the wrong direction before it ran -- the guess was
