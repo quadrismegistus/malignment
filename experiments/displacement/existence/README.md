@@ -103,6 +103,80 @@ template actually RENDERED into the system slot
     results/selectivity_raw_on45.json    raw on the same pairs
     results/selectivity.json             the 50-pair raw headline, unchanged
 
+## THE FRAME WITH THE WEIGHTS HELD FIXED (`--frame self`)
+
+Self-edges: `base == aligned`, unframed against framed. Nothing changes but
+whether the prompt is wrapped in a chat template. 45 aligned models -- every one
+in the framed population, so this column spans the same models as the other two
+-- and 8 base models as the control.
+
+    contrast                        content-selective   same-kind landing
+    base_raw    -> aligned_raw       43/50   p=2e-7      42/44   p<1e-6
+    base_raw    -> aligned_framed    41/45   p<1e-6      45/45   p<1e-6
+    aligned_raw -> aligned_framed    40/45   p<1e-6      45/45   p<1e-6
+    base_raw    -> base_framed        4/4    p=1.000      8/8    p=0.0078
+
+### What the four rows say, without interpretation
+
+**Alignment displaces on its own** -- row 1, no frame anywhere.
+**The chat frame displaces too** -- row 3, no weight change anywhere.
+**But only on weights alignment has touched** -- row 4 is null on content.
+**Together they displace more** -- row 2, about 2.8x row 1.
+
+Neither effect is a weakened version of the other. If raw displacement were the
+same pattern at lower gain, per-word `delta` would correlate near 1 between the
+raw and framed conditions. It correlates at **median r = 0.574** over 20
+lineages (range 0.009 to 0.79), so about two thirds of the variance is not
+shared: the frame changes WHICH words move, not only how far.
+
+The precise form is an INTERACTION. The frame's effect on displacement is
+conditional on aligned weights; alignment's effect is present without the frame.
+
+### THE DISSOCIATION, which is the result
+
+    frame alone            content-selective?   same-kind landing?
+      aligned  n=45        40/45  p<1e-6        45/45  p<1e-6
+      base     n= 8         4/4   p=1.000        8/8   p=0.0078
+
+**Content-selectivity needs aligned weights. Same-kind landing does not.**
+
+Base models reproduce the same-kind pattern perfectly -- 8 of 8 -- while showing
+no content-selectivity whatever. Semantically adjacent words are substitutes in
+any language model, so any perturbation redistributes mass among them. Adjacency
+is a property of the LEXICON. What alignment supplies is the DIRECTION: that the
+words losing mass are the higher-charge ones.
+
+This qualifies Part 2 below. `47/49 same-kind` is real and is less diagnostic
+than it looks, because a base model under a template it never saw reproduces it
+without any alignment involved.
+
+### NEVER POOLED, and why the producer prints the split
+
+Pooled, content-selectivity reads 44/9 at p=1e-6 and would have been written up
+as "the frame displaces by content". The 8 base models were being carried by the
+45. RH ruled against pooling before the run; the arm split is printed by `run.py`
+and `adjacency.py` rather than left to whoever opens the JSON, because a pooled
+number that has assumed its own conclusion does not announce itself.
+
+### Fences on the control
+
+**n=8 is permanent.** A base self-edge needs a base with a chat template and only
+8 exist in the roster.
+
+**Those 8 are the strangest template cases there are.** Qwen ships base templates
+deliberately; `neo_7b` and `Tanuki-8B-base` carry templates byte-identical to
+their aligned siblings; `llama-7b` renders Llama-2 format on a Llama-1 model that
+never saw it. Three of eight arguably measure "the wrong template applied".
+
+**The cells are valid but narrower.** Checked, not assumed: `conservation` 1.0
+and `mojibake` ~0 on all 8, so no leakage or garbage. But every base loses 10-26%
+of its candidate words under the frame, so the control is a narrower distribution
+and not a clean null. Read it beside its own `n_words`.
+
+**So 4/4 is a WEAK null** -- consistent with no effect and with an effect too
+small to see at n=8. The 8/8 same-kind result is the stronger of the two control
+readings, since a unanimous sign test at n=8 is p=0.0078 on its own.
+
 ## Part 2: displacement vs suppression (`adjacency.py`)
 
 **Also run framed.** `adjacency.py --frame prefill` and `--match-framed`, the

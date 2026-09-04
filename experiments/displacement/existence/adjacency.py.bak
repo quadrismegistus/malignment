@@ -252,7 +252,7 @@ def main(argv=None):
     import argparse
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--frame", default="raw", choices=("raw", "prefill", "self"))
+    ap.add_argument("--frame", default="raw", choices=("raw", "prefill"))
     ap.add_argument("--match-framed", action="store_true",
                     help="run RAW on the framed population, so the two are the "
                          "same pairs and a difference is not partly which labs "
