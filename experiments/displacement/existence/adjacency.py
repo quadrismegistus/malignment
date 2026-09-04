@@ -86,6 +86,22 @@ def measure(frame="raw", match_framed=False):
             kinds_cache[prompt] = charge.kinds(prompt)
         return scenes_cache[prompt], kinds_cache[prompt]
 
+    #: STRATIFIED COPY, same code path. Part 1 of this folder stratifies by
+    #: dose and by lift; this test stratified by neither, and no reason was ever
+    #: recorded. Stratifying by saturation ALONE reported the low band as an
+    #: exact null (24/24) -- which turned out to be a reversal at low lift and a
+    #: recovery at high, averaged. Both cuts are taken together for that reason.
+    by_strat = collections.defaultdict(lambda: {"same": [], "none": [], "n": 0})
+    kinds_of = {}
+
+    def saturation(prompt, kd):
+        """share of a prompt's rated words carried by its top non-NONE kind."""
+        if len(kd) < 5:
+            return None
+        cc = collections.Counter(kd.values())
+        charged = [v for k, v in cc.items() if k != "NONE"]
+        return (max(charged) / sum(cc.values())) if charged else 0.0
+
     # per lineage: collect (same_kind_delta, none_kind_delta) pairs per cell
     by_lin = collections.defaultdict(lambda: {
         "same_deltas": [], "diff_deltas": [], "none_deltas": [],
@@ -95,6 +111,11 @@ def measure(frame="raw", match_framed=False):
 
     for b, a in sorted(eps.items()):
         lin = b + ">" + a
+        #: lift is keyed by (prompt, BASE) and exists only for the 50 endpoint
+        #: bases, English only. A prompt with no lift is dropped from the
+        #: stratified table and kept in the headline one.
+        lift_here = {q: float(v)
+                     for (q, _bb), v in charge.lifts_per_lineage(b).items()}
         rows = ch.query(
             "SELECT prompt, word, p_base, p_aligned, "
             "(p_aligned - p_base) AS delta, cls "
@@ -154,6 +175,17 @@ def measure(frame="raw", match_framed=False):
                 rec["same_scenes"].append(sum(same_sc) / len(same_sc))
                 rec["none_scenes"].append(sum(none_sc) / len(none_sc))
                 rec["n_cells"] += 1
+
+                sat = saturation(prompt, kd)
+                lf = lift_here.get(prompt)
+                if sat is not None and lf is not None:
+                    sb = "lo" if sat < 0.33 else ("mid" if sat < 0.66 else "hi")
+                    lb = "L-lo" if lf < 0.5 else ("L-mid" if lf < 1.2 else "L-hi")
+                    st_rec = by_strat[(lin, sb, lb)]
+                    st_rec["same"].append(sum(same) / len(same))
+                    st_rec["none"].append(sum(none) / len(none))
+                    st_rec["n"] += 1
+
                 if diff:
                     rec["diff_deltas"].append(sum(diff) / len(diff))
                     rec["diff_scenes"].append(sum(diff_sc) / len(diff_sc))
@@ -192,6 +224,39 @@ def measure(frame="raw", match_framed=False):
     print("  %-45s %d" % ("lineages where none-kind risers gain MORE:", none_wins))
     print("  %-45s %.6f" % ("sign test p:", p))
     print()
+    print("  SATURATION x LIFT. saturation = share of the prompt's rated words")
+    print("  in its top non-NONE kind; lift = charge.lift for that base.")
+    print("  Same per-cell means and per-lineage medians as the headline.")
+    print()
+    print("  %-5s %-6s %9s %8s %10s %10s %8s %9s"
+          % ("sat", "lift", "lineages", "cells", "same med", "none med",
+             "up/dn", "p"))
+    for sb in ("lo", "mid", "hi"):
+        for lb in ("L-lo", "L-mid", "L-hi"):
+            up = dn = 0
+            nc = 0
+            sm, nm = [], []
+            for (l2, s2, b2), r2 in by_strat.items():
+                if (s2, b2) != (sb, lb) or r2["n"] < 10:
+                    continue
+                nc += r2["n"]
+                ms, mn = st.median(r2["same"]), st.median(r2["none"])
+                sm.append(ms)
+                nm.append(mn)
+                if ms > mn:
+                    up += 1
+                elif mn > ms:
+                    dn += 1
+            t = up + dn
+            if t < 8:
+                print("  %-5s %-6s %9d %8d   (too few lineages to sign-test)"
+                      % (sb, lb, t, nc))
+                continue
+            print("  %-5s %-6s %9d %8d %10.5f %10.5f %8s %9.5f"
+                  % (sb, lb, t, nc, st.median(sm), st.median(nm),
+                     "%d/%d" % (up, dn), binom(min(up, dn), t)))
+        print()
+
     #: NEVER POOLED. The pooled row above mixes 45 aligned models with 8 base
     #: ones, and the base arm exists precisely to say whether the effect needs
     #: aligned weights. Pooled it cannot: a strong aligned signal carries a null

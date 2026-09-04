@@ -3,7 +3,7 @@ subject: existence
 status: RUN 2026-08-30. 50 endpoint lineages, English.
 kind: question
 question: Is alignment's reshaping of word probabilities content-selective, and is it displacement or suppression?
-headline: "Displacement exists. Higher-T words lose more mass (43/50 lineages). Freed mass lands preferentially on same-kind words (47/49) -- but it needs somewhere to go: where the scene is mostly neutral AND lift is low it REVERSES to none-kind (13/33). Eight of nine saturation-by-lift cells are same-kind or null. It holds under the deployment frame and is 2.8x larger there."
+headline: "Displacement exists. Higher-T words lose more mass (43/50 lineages). Freed mass lands preferentially on same-kind words (47/2) -- but ONLY where the prompt field is already charged: where the scene is mostly neutral it REVERSES to none-kind at every lift band (1/45, 9/35, 12/27). It holds under the deployment frame and is 2.8x larger there, though the framed population is itself more saturated."
 ---
 
 # existence
@@ -212,63 +212,99 @@ silently changes its denominator between two columns is the thing a reader would
 otherwise take as given.
 
 
-### THE SAME-KIND RESULT NEEDS EITHER SAME-KIND ABUNDANCE OR CHARGE
+### THE SAME-KIND RESULT REVERSES WHERE THE PROMPT'S FIELD IS MOSTLY NEUTRAL
 
-`saturation.py`. The population guard above requires that a cell have BOTH a
-same-kind and a none-kind riser, so a fully saturated prompt never enters the
-comparison. **But that is a test of PRESENCE, not BALANCE** -- a prompt with 60
-VIOLENT candidates and 3 NONE ones qualifies.
+**The population guard above tests PRESENCE, not BALANCE.** A cell qualifies if it
+has both a same-kind and a none-kind riser, which correctly excludes a fully
+saturated prompt -- but a prompt with 60 VIOLENT candidates and 3 NONE ones
+qualifies, and in it "same-kind wins" is nearly arithmetic.
 
-**AND `adjacency.py` SELECTS ON NEITHER DOSE NOR LIFT, where Part 1 above selects
-on both, with no reason recorded for the difference.** Crossing saturation (share
-of a prompt's rated words in its top non-NONE kind) with lift:
+**And this test selected on neither dose nor lift, where Part 1 above selects on
+both.** No reason for the difference was ever recorded. The stratification now
+lives inside `adjacency.py` rather than in a separate script, so it uses the same
+per-cell means and per-lineage medians as the headline and cannot drift from it.
 
-    sat   lift    lineages  cells   same med   none med   up/dn        p
-    lo    L-lo         46    1021    0.00775    0.00837   13/33   0.00453
-    lo    L-mid        44     737    0.00871    0.00825   25/19   0.45138
-    lo    L-hi         39     750    0.00862    0.00839   24/15   0.19959
+    saturation = share of a prompt's rated words carried by its top non-NONE kind
 
-    mid   L-lo         48    1719    0.00797    0.00751   32/16   0.02930
-    mid   L-mid        47    1404    0.00876    0.00755    40/7   0.00000
-    mid   L-hi         44    1196    0.00947    0.00785    39/5   0.00000
+RAW, `base_raw -> aligned_raw`. Headline for this population: **47/2**.
 
-    hi    L-lo         48    3759    0.00784    0.00651    45/3   0.00000
-    hi    L-mid        46    1444    0.00856    0.00633    46/0   0.00000
-    hi    L-hi         28     386    0.00872    0.00694    23/5   0.00091
+    sat  lift   lineages  cells   same med   none med   up/dn        p
+    lo   L-lo         46   1021    0.00838    0.01396    1/45   0.00000
+    lo   L-mid        44    737    0.01061    0.01481    9/35   0.00011
+    lo   L-hi         39    750    0.01123    0.01366   12/27   0.02370
+    mid  L-lo         48   1719    0.01177    0.00989   37/11   0.00022
+    mid  L-mid        47   1404    0.01550    0.01056    43/4   0.00000
+    mid  L-hi         44   1196    0.01620    0.01080    38/6   0.00000
+    hi   L-lo         48   3759    0.01262    0.00703    48/0   0.00000
+    hi   L-mid        46   1444    0.01469    0.00664    46/0   0.00000
+    hi   L-hi         28    386    0.01741    0.00792    27/1   0.00000
 
-**Eight of nine cells are same-kind or null. One corner is suppression.** Where
-the scene is mostly neutral AND the base is not reaching past its frame, freed
-mass goes to NONE-kind words -- 13/33, p=0.005, reversed. Add either ingredient
-and same-kind landing appears: within low saturation the effect runs
-monotonically with lift (13/33, 25/19, 24/15), and at mid and high saturation it
-holds at every lift band.
+FRAMED, `base_raw -> aligned_framed`, `--match-framed`. Headline: **45/0**.
 
-So freed mass does not simply seek same-kind targets. **It needs somewhere to go
--- either a field with same-kind material in it, or enough charge to be pushed.**
-Where neither holds, the behaviour is suppression. That is a second reason the
-47/49 is less diagnostic than it reads, independent of the base-model one
-recorded above.
+    sat  lift   lineages  cells   same med   none med   up/dn        p
+    lo   L-lo          7     83   (too few lineages to sign-test)
+    lo   L-mid        10    114    0.01251    0.02073     1/9   0.02148
+    lo   L-hi         27    422    0.01801    0.02227   11/16   0.44207
+    mid  L-lo         41    569    0.01895    0.01124    35/6   0.00000
+    mid  L-mid        28    348    0.02358    0.01376    23/5   0.00091
+    mid  L-hi         34    464    0.02199    0.01285    25/9   0.00904
+    hi   L-lo         45   2318    0.01604    0.00723    45/0   0.00000
+    hi   L-mid        44    759    0.01796    0.00767    44/0   0.00000
+    hi   L-hi          6     66   (too few lineages to sign-test)
 
-**A FIRST PASS HERE STRATIFIED BY SATURATION ALONE AND GOT THIS WRONG**, reporting
-the low-saturation band as an exact null (24/24) and concluding the effect was
-simply absent there. It is not absent; it is two opposite things averaged. The
-band is reversed at low lift and recovering at high, and pooling them cancelled.
+**The pooled 47/2 is a fact about prompts whose field is already charged.** Where
+the scene is mostly neutral the effect does not weaken, it REVERSES: raw 1/45 at
+low lift, 9/35 at mid, 12/27 at high -- all three bands, p from 1e-5 to 0.024.
+Framed reproduces it wherever the cell is thick enough to test (1/9, p=0.021).
 
-**This is not the dose cut in disguise.** `corr(saturation, frame) = +0.826`
-against `corr(saturation, lift) = -0.025`, so the two cuts are independent and
-nothing that selects on lift alone inherits the saturation structure.
+Lift MODERATES the reversal without flipping it: within low saturation the
+same/none gap closes monotonically as lift rises (1/45 to 9/35 to 12/27), so
+charge pushes toward same-kind landing but cannot produce it in a neutral field.
 
-AND THE SATURATION GRADIENT PROBABLY EXPLAINS THE RESPONSE SATURATION `charge.py`
-RECORDS. That file documents dose as the wrong selector because frames rated 5-7
-show essentially zero response, and `readout_share` §208 puts headroom at -0.05
-by frame 6-7. By frame band, the share of prompts that are >=75% one kind runs
-1%, 33%, 73%, 76%, **92%**. A prompt whose whole candidate field is one kind has
-nothing of another kind to move toward. Two descriptions of one fact, reached
-from opposite ends.
+So freed mass does not seek semantic neighbours. **It lands where the prompt has
+put the words.** Where same-kind material is scarce, the behaviour is
+suppression, decisively. That is a second reason the 47/2 is less diagnostic than
+it reads, independent of the base-model one recorded above -- and unlike that
+one, this reverses rather than merely failing to discriminate.
 
-EXPLORATORY. Not registered. Saturation bands are equal thirds, lift bands cut at
-0.5 and 1.2; neither was pre-declared, and nine cells make the single p of 0.0045
-about 0.04 after Bonferroni.
+### AND THE FRAMED POPULATION IS MORE SATURATED THAN THE RAW ONE
+
+Qualifying cells by saturation band, as a share of each condition:
+
+                  raw            framed
+    lo          20%  (2,508)    12%   (619)
+    hi          45%  (5,589)    61% (3,143)
+
+The framed contrast keeps proportionally more of exactly the prompts where
+same-kind landing is strongest and drops the ones where it reverses. **So part of
+"unanimous under the frame" is composition, not amplification.** Read the 45/0
+and the widened same/none ratio with that attached: the framed arm supplies the
+same-kind/none-kind combination less often, and what it drops is not a random
+sample of the raw population.
+
+### THREE AGGREGATIONS, AND TWO OF THEM WERE WRONG
+
+Recorded because they gave three different answers to one question and the first
+two were reported before the third was run:
+
+1. All raw edges in the store, median of per-cell medians. Low band 33/55
+   reversed. **Wrong population** -- 88 edges including ladder rungs and
+   transitive ones, which is pseudo-replication.
+2. Endpoint pairs, all deltas pooled per lineage. Low band 24/24, an exact null.
+   **Wrong aggregation** -- `adjacency.py` takes a MEAN per cell and a MEDIAN
+   over cells, and pooling cancelled the reversal against the recovery.
+3. Endpoint pairs, `adjacency.py`'s own accumulation. Low band 1/45, 9/35, 12/27.
+   **Reported.** It is the only one that shares a code path with the headline.
+
+The lesson is the one this folder keeps relearning: a summary statistic is an
+undeclared choice, and a re-implementation is a different instrument until it is
+checked against the original line by line.
+
+FENCES. Saturation bands are equal thirds, lift bands cut at 0.5 and 1.2; neither
+was pre-declared. Eighteen cells across the two tables, so single p-values near
+0.02 are not much after correction -- the 1/45 and the 48/0 do not need it.
+Lift is English-only, so the stratified tables drop Chinese cells the headline
+keeps. Self-edges are run separately. EXPLORATORY, not registered.
 
 Content-selectivity says alignment targets transgressive words. The next question is WHERE THE FREED MASS GOES. Three hypotheses:
 

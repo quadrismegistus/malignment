@@ -75,6 +75,28 @@ the level of the scene, which is a different question. See `lift()` for the
 numbers and for why headroom (`7 - dose`) is not the same quantity and predicts
 nothing.
 
+**AND HERE IS WHY IT SATURATES, which this file has only ever asserted.** The
+`kind` field of a highly-rated frame is nearly single-valued. Over 2,779 prompts,
+the share whose rated words are >=75% ONE non-NONE kind, by frame band:
+
+    frame 1-2    1%      median dominant-kind share 0.05
+    frame 2-3   33%                                 0.53
+    frame 3-4   73%                                 0.88
+    frame 4-5   76%                                 0.90
+    frame 5+    92%                                 0.99
+
+A frame rated 6 does not offer a violent word among neutral ones; it offers a
+field that is violent throughout. **There is nothing of another kind to move
+to** -- the same fact `readout_share` 208 reports from the other side as headroom
+running +0.38 at frame 2-3 down to -0.05 at frame 6-7.
+
+`corr(saturation, frame) = +0.826`, `corr(saturation, lift) = -0.025`. Saturation
+is a property of the SCENE and is orthogonal to lift, which is why `dose` selects
+into the dead region and `lift` does not. **Anything selecting on lift is clean
+of this; anything selecting on dose or frame is not.**
+`experiments/displacement/existence/adjacency.py` stratifies by it, and its
+same-kind landing result REVERSES in the low-saturation band at every lift level.
+
 ## T, AND WHY IT IS NORMALISED
 
     T = sum(scene_w * p_w) / sum(p_w)
