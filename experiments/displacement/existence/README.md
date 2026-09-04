@@ -123,6 +123,20 @@ way raw flip to same-kind.
 a none-kind riser, and the framed arm supplies that combination less often. So
 this is unanimity on half the data, not unanimity on more of it.
 
+**AND THE RAW COLUMN IS 44 LINEAGES, NOT 45.** `archangel_sft-dpo_pythia2-8b`
+has ONE qualifying cell raw and clears the threshold framed, so the
+`n_cells < 10` guard drops it from one column and keeps it in the other:
+
+    archangel_sft-dpo_pythia2-8b   raw n=1 cell   framed n>=10
+
+`--match-framed` matches the PAIRS and cannot match which lineages survive a
+per-lineage minimum, because that depends on how many cells each arm supplies.
+The 42+2 in the table sums to 44 for this reason and not because a lineage tied
+-- there are no exact ties in either column, checked. It is one lineage on one
+cell either way, so it moves nothing; it is recorded because a sign count that
+silently changes its denominator between two columns is the thing a reader would
+otherwise take as given.
+
 
 Content-selectivity says alignment targets transgressive words. The next question is WHERE THE FREED MASS GOES. Three hypotheses:
 
