@@ -897,7 +897,13 @@ Chinese lineages, and the Chinese results in the earlier sections of this file
 Chinese, the lift dose is English-only and the level dose remains the Chinese
 instrument.
 
-## THE DEPLOYMENT FRAME (2026-09-04): EVERYTHING GETS BIGGER, AND THE SLOT SCALES EXPLODE
+## DOSED, FRAMED (2026-09-04): EVERYTHING GETS BIGGER, AND THE SLOT SCALES EXPLODE
+
+**This section is the DOSE RESPONSE under the frame** -- the slope of
+(aligned - base) on the base's lift, per lineage. It is not the marginal arm
+contrast. The undosed framed comparison is a separate question and has its own
+section below; a target can be flat marginally and steep under dose, which is
+the split the three level doses were built to expose.
 
 `run.py --rule-version 4 [--frame prefill]` and `dose.py` with the same flags.
 The aligned arm measured inside its chat template, against the same raw base --
@@ -987,6 +993,51 @@ template actually rendered into the system slot.
 so the lift dose has no zh arm; `ZH / levels -- 0 targets tested` in both.
 
 **EXPLORATORY.** Nothing in this section was registered.
+
+## UNDOSED, FRAMED (2026-09-04): the MARGINAL contrast amplifies too
+
+`summary.py --rule-version 4 [--frame prefill] [--match-framed]`. Same 45 pairs
+both columns, English levels. MARGINAL is the median of (aligned - base) per
+lineage across prompts -- no dose term.
+
+    scale                     RAW marginal        FRAMED marginal     ratio
+    k_bodily_harm             -0.00326  p<1e-5    -0.00720  p<1e-5     2.2x
+    k_bodily_harm_z           -0.00353  p<1e-5    -0.00873  p<1e-5     2.5x
+    k_transgressiveness_absz  -0.00191  p<1e-5    -0.00665  p<1e-5     3.5x
+    k_concreteness            -0.01819  p=0.096   -0.02720  p=0.0025   crosses
+    warriner_arousal_absz     not in band         +0.01234  p=7e-5
+    k_register_level          +0.00580  p<1e-5    out of band
+
+**So it is not only the dose response that the frame magnifies.** The plain arm
+contrast is 2 to 3.5x larger on every shared scale, which matters because the
+dosed section could otherwise be read as the frame sharpening a conditional
+effect specifically. It sharpens both.
+
+### `k_concreteness` crosses the line
+
+    RAW     marginal p=0.096, dose p<1e-5   -> "DOSE ONLY, moves only where loaded"
+    FRAMED  marginal p=0.0025, dose p<1e-5  -> "both"
+
+De-concretisation is marginally invisible measured bare and visible measured
+deployed. The v3 sections above record concreteness as *not supported
+marginally in English* (p=0.119) and supported under dose -- that verdict is a
+property of the unframed measurement.
+
+### `k_register_level` answers a DIFFERENT question in each condition
+
+    RAW     marginal +0.0058 p<1e-5,  dose FLAT p=0.766  -> "moves everywhere alike"
+    FRAMED  out of the marginal band, dose +0.0188 at 40/5 (dosed section above)
+
+Raw says register rises everywhere and not with dose. Framed says it rises with
+dose and not marginally. **The two conditions disagree about which question
+register answers**, not merely about the size of one answer.
+
+That is the sharpest thing in either framed section, because
+`register_shift`'s headline G -- register rises at the twp endpoint -- is NOT
+supported (30/50, p=0.203), and G1 and G2 both concern where the rise sits
+rather than whether it happens. A dose-conditional register rise visible only
+under the deployment frame is a claim none of G/G1/G2 tested, and it should be
+registered as its own question rather than read as support for any of them.
 
 ### NOT YET DONE
 

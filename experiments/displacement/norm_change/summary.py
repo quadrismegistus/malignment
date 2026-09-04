@@ -25,6 +25,21 @@ model vote up to eleven times.
 
 import argparse, collections, gzip, math, os, sys
 
+#: **THE VARIANT AND THE POPULATION, SAME AS run.py AND dose.py.** run.py writes
+#: three sets side by side; without the suffix this reads v3 while the caller
+#: believes it asked for framed. And the framed set covers 45 of the 50 pairs,
+#: so an unmatched comparison differs partly by which labs ship a template.
+_SFX = {"v": ""}
+_MATCH = {"v": False}
+
+
+def _suffix(rule_version, frame):
+    if int(rule_version) == 3:
+        if frame != "raw":
+            raise SystemExit("--frame needs --rule-version 4")
+        return ""
+    return "_v4" if frame == "raw" else "_v4_framed"
+
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.abspath(os.path.join(HERE, "..", "..", "..")))
 sys.path.insert(0, HERE)
@@ -54,7 +69,7 @@ def signtest(vals):
 
 def load(name, endpoints, dose_scale=DOSE):
     """-> {(lang, scale): {lineage: [deltas]}}, {(lang,): {(lin,prompt): dose}}"""
-    p = os.path.join(DATA, "%s_long.csv.gz" % name)
+    p = os.path.join(DATA, "%s_long%s.csv.gz" % (name, _SFX["v"]))
     if not os.path.exists(p):
         return None, None
     deltas = collections.defaultdict(lambda: collections.defaultdict(list))
@@ -84,15 +99,35 @@ def load(name, endpoints, dose_scale=DOSE):
 
 def main(argv=None):
     ap = argparse.ArgumentParser()
+    ap.add_argument("--rule-version", type=int, default=3, choices=(3, 4),
+                    help="which *_long* set run.py wrote; 3 is the v3 artifact")
+    ap.add_argument("--frame", default="raw", choices=("raw", "prefill"),
+                    help="prefill requires --rule-version 4")
+    ap.add_argument("--match-framed", action="store_true",
+                    help="restrict to the pairs the framed set covers, so the "
+                         "two columns are the same population")
     ap.add_argument("--lang", default=None, choices=("en", "zh"))
     ap.add_argument("--table", default="both",
                     choices=("levels", "fields", "contextual", "both", "all"))
     ap.add_argument("--min-n", type=int, default=10)
     a = ap.parse_args(argv)
+    _SFX["v"] = _suffix(a.rule_version, a.frame)
+    if _SFX["v"]:
+        print("reading *_long%s.csv.gz" % _SFX["v"])
 
     from analyse import endpoint_pairs
     import statistics as st
     EP = endpoint_pairs()
+    if a.match_framed or a.frame != "raw":
+        #: **THE SAME 45 IN BOTH COLUMNS.** The framed set covers 45 of the 50
+        #: pairs, so n=50 beside n=45 differs partly by which labs ship a chat
+        #: template. Applied automatically for --frame prefill, since the framed
+        #: file cannot contain the other five anyway, and on request for raw.
+        from malignment import movement as M, roster
+        ep, _u = roster.endpoints()
+        keep = {"%s>%s" % (b, al) for b, al, _m in M.clean_frame_pairs()
+                if ep.get(b) == al}
+        EP = {e for e in EP if e in keep}
     print("MARGINAL vs DOSE, unit = lineage, %d endpoint pairs, ties excluded" % len(EP))
     print("dose predictor: base-arm %s, measured BEFORE alignment" % DOSE)
 
