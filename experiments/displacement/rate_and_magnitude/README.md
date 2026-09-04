@@ -1,9 +1,9 @@
 ---
 subject: rate_and_magnitude
-status: RUN 2026-08-24. 50 endpoint lineages, en and zh separately.
+status: "RUN 2026-08-24, 50 endpoint lineages en and zh. FRAMED, SELF-EDGES, LADDER and SFT ABLATIONS added 2026-09-04."
 kind: question
 question: How MUCH mass moves under alignment, how OFTEN, and does either scale with the frame?
-headline: English moves more mass AND more words at transgressive prompts. Chinese moves MORE WORDS but LESS MASS.
+headline: "English moves more mass AND more words at transgressive prompts; Chinese moves MORE WORDS but LESS MASS. On self-edges the arrival concentration is the FRAME's and the departure gradient is the WEIGHTS'. Along the Tulu ladder DPO raises how much moves (4/4) but not the dose response. Removing WildChat costs the model its aim at SEXUAL content (64/19, p<1e-4) -- it redirects displacement rather than shrinking it."
 ---
 
 # rate_and_magnitude

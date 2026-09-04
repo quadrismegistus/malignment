@@ -56,8 +56,8 @@ and the state the first version of the checker could not see.
   NONE STATED
 - **[`norm_change/`](displacement/norm_change/README.md)** -- `RUN. [...]`  
   Register rises and valence rises in BOTH languages. Concreteness falls in Chinese only. Lift dose reorders the top: arousal over bodily harm.
-- **[`rate_and_magnitude/`](displacement/rate_and_magnitude/README.md)** -- `RUN 2026-08-24. 50 endpoint lineages, en and zh separately.`  
-  English moves more mass AND more words at transgressive prompts. Chinese moves MORE WORDS but LESS MASS.
+- **[`rate_and_magnitude/`](displacement/rate_and_magnitude/README.md)** -- `RUN 2026-08-24, 50 endpoint lineages en and zh. [...]`  
+  English moves more mass AND more words at transgressive prompts; Chinese moves MORE WORDS but LESS MASS. On self-edges the arrival concentration is the FRAME's and the departure gradient is the WEIGHTS'. Along the Tulu ladder DPO raises how much moves (4/4) but not the dose response. Removing WildChat costs the model its aim at SEXUAL content (64/19, p<1e-4) -- it redirects displacement rather than shrinking it.
 - **[`readout_share/`](displacement/readout_share/README.md)** -- `RUN 2026-08-30 — readout and state contribute COMPARABLY (joint regression 0.59 vs 0.65, R2 0.75; 0.74 vs 0.77, R2 0.98 on clean pairs). [...]`  
   The readout and the state contribute comparably, and neither dominates.
 - **[`register_shift/`](displacement/register_shift/README.md)** -- `RUN. [...]`  
@@ -235,12 +235,33 @@ Basic English on the same axis -- the only direction here that somebody else
 defined -- and restricting three authors to 850 words RAISES surprisal on 47 of
 47 pairs, against alignment's fall. Nearly equal and opposite.
 
-**The frame may be as big as the arm.** The same folder's four-manipulation table
-makes the chat wrapper the largest single drift effect measured, larger than
-alignment's own. `instrument_calibrations/frame_prefill` reports a base model in
-its own chat template moving 82% of what alignment moves it. If that holds, a
-good deal of what gets attributed to alignment is attributable to deployment.
-`frame_pilot` is the folder built to decide it, and it has not been run.
+**The frame is a second displacing thing, and it needed aligned weights.**
+`jakobson_space`'s four-manipulation table made the chat wrapper the largest
+single drift effect measured, and `instrument_calibrations/frame_prefill` put a
+base model in its own chat template at 82% of what alignment moves it. **That is
+now decided, in `displacement/existence`, and the answer is not the deflationary
+one it looked like.** On the same 45 pairs: alignment displaces bare (43/50,
+p=2e-7); the chat frame displaces too, on weights nobody touched (40/45,
+p<1e-6); the two together displace about 2.8x alignment alone; **but the frame on
+a BASE model is null on content** (4/4, p=1.000). Content-selectivity needs
+aligned weights. So the deployment frame amplifies the operation rather than
+substituting for it, and the displacement findings are not an artifact of
+measuring the aligned arm out of its habitat. `norm_change` and
+`rate_and_magnitude` carry the same contrast; `register_shift` is the one folder
+that has not been asked.
+
+**What the training corpus aims displacement AT is separable from how much it
+moves.** The Tulu 3 SFT ablations are the only leave-one-out suite anybody has
+published, and the archive's `U_ladder` read them on magnitude: every slice costs
+10-12%, `no-safety` costs what `no-math` costs, so **safety data is not what
+produces displacement.** That stands. `displacement/rate_and_magnitude` asks the
+other question and gets a different answer: removing **WildChat** -- the only
+slice that is real logged user traffic -- costs the model its aim at SEXUAL
+content (64/19 prompts, p<1e-4, about 2.8x the next slice), redirecting
+displacement toward violent and coercive words rather than shrinking it. The
+safety corpus does this too, weaker but real (45/16, p=3e-4), which is the first
+place in the campaign it does anything. Math and persona do nothing (31/29,
+34/33). **One family, and no second suite exists in the open-weight world.**
 
 ## WHAT THIS PASS FOUND WRONG, 2026-09-02
 
