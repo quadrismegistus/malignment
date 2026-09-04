@@ -96,6 +96,20 @@ PROBE_EMPTY = [{"role": "system", "content": ""},
                {"role": "user", "content": "Hi."}]
 
 
+#: every key a CURRENT row must carry. A row missing one was written by an
+#: older schema and must be recomputed, not preserved.
+_REQUIRED = ("system_slot", "system_slot_empty", "clean_via", "render")
+
+
+def _current(row):
+    """-> True if this row was written by the present schema."""
+    if row.get("error"):
+        return True
+    if row.get("render") is None:
+        return True          #: legitimately has no template
+    return all(k in row for k in _REQUIRED)
+
+
 def _authored():
     if not os.path.exists(TPL):
         return {}
@@ -223,8 +237,14 @@ def main(argv=None):
         r = classify(m, authored)
         if r.get("error"):
             failed.append((m, r["error"]))
-            #: keep a GOOD earlier row rather than replacing it with a failure
-            if m in old and not old[m].get("error"):
+            #: keep a GOOD earlier row rather than replacing it with a failure --
+            #: but only if it is CURRENT. A row written before `system_slot`
+            #: existed has no error and no slot, and the first version of this
+            #: merge kept 29 of them, silently excluding every Tulu ablation and
+            #: both OLMo-2 stages from `clean_frame_pairs()` -- not because their
+            #: templates failed a test but because they lacked a FIELD.
+            if (m in old and not old[m].get("error")
+                    and _current(old[m])):
                 continue
         new[m] = r
 
