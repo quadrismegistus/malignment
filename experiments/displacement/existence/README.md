@@ -3,7 +3,7 @@ subject: existence
 status: RUN 2026-08-30. 50 endpoint lineages, English.
 kind: question
 question: Is alignment's reshaping of word probabilities content-selective, and is it displacement or suppression?
-headline: "Displacement exists. Higher-T words lose more mass (43/50 lineages). Freed mass lands preferentially on same-kind words (47/2) -- but ONLY where the prompt field is already charged: where the scene is mostly neutral it REVERSES to none-kind at every lift band (1/45, 9/35, 12/27). It holds under the deployment frame and is 2.8x larger there, though the framed population is itself more saturated."
+headline: "Displacement exists. Higher-T words lose more mass (43/50 lineages). Freed mass lands preferentially on same-kind words (47/2) -- but ONLY where the prompt field is already charged: where the scene is mostly neutral it REVERSES to none-kind at every lift band (1/45, 9/35, 12/27). It holds under the deployment frame and is 2.8x larger there."
 ---
 
 # existence
@@ -267,43 +267,51 @@ suppression, decisively. That is a second reason the 47/2 is less diagnostic tha
 it reads, independent of the base-model one recorded above -- and unlike that
 one, this reverses rather than merely failing to discriminate.
 
-### THE POPULATION GETS MORE SATURATED AT EVERY STEP AWAY FROM RAW
+### THE POPULATION DOES NOT SHIFT, AND AN EARLIER VERSION OF THIS SECTION SAID IT DID
 
-Qualifying cells by saturation band, as a share of each condition:
+Qualifying cells by saturation band, over the FULL populations:
 
-    condition    cells      lo     mid      hi
-    raw         12,416     20%     35%     45%
-    framed       5,143     12%     27%     61%
-    self           537      4%     25%     71%
+    condition   qualifying cells      lo     mid      hi
+    raw                   14,684     19%     35%     46%
+    framed                 6,227     19%     26%     55%
+    self                   9,114     19%     27%     54%
 
-**This is monotone and it is not a coincidence.** Saturation tracks frame at
-+0.826, the framed and self populations are filtered by `clean_frame_pairs`, and
-what survives that filter is disproportionately the charged, single-kind prompts
-where same-kind landing is close to arithmetic.
+**The low-saturation band -- the one where the effect reverses -- is 19% in all
+three conditions.** So the strengthening from raw 47/2 to framed 45/0 is NOT
+explained by the framed contrast shedding the band that runs the other way. There
+is a real mid-to-hi shift of about nine points, and it is much smaller than a
+composition account of the framed result would need.
 
-So the strengthening across conditions -- raw 47/2, framed 45/0, self 79/0 --
-runs alongside a population shift toward the band where the effect is strongest,
-and away from the band where it reverses. **Part of "unanimous under the frame"
-is composition, not amplification.** The folder already records that qualifying
-cells halve under the frame (13,049 to 6,227); this says what leaves is not a
-random sample of what stays.
+**A previous version of this section claimed lo fell 20% -> 12% -> 4% across the
+three conditions and concluded that part of "unanimous under the frame" was
+composition.** That was arithmetic over the printed TABLE ROWS, which include
+only lineage-by-stratum combinations holding at least ten cells. Summing a
+display is not a census: the self condition has 9,114 qualifying cells, not the
+537 that version quoted. The composition claim is WITHDRAWN.
 
-SELF-EDGES CANNOT BE STRATIFIED. Only one cell clears the minimum:
+### THE SELF-EDGE STRATIFIED TABLE IS THE BASE ARM ONLY
+
+`charge.lifts_per_lineage(b)` is keyed by `(prompt, base)` and covers exactly the
+50 endpoint BASES. On a self-edge `base == aligned`, so an aligned self-edge asks
+for the lift of an aligned model, which has no entry -- **and the whole aligned
+arm drops out of the stratified table silently**, leaving the 8 base-arm
+lineages. That is what the single surviving cell reports:
 
     hi   L-lo   8 lineages   290 cells   0.00911 vs 0.00530   8/0   p=0.0078
 
-Every other cell has under 8 lineages, and the `lo` band has 21 cells in total.
-`--frame self` is therefore a measurement taken almost entirely on saturated
-prompts, and the same-kind result there is not evidence about the mechanism so
-much as about which prompts survive the filter.
+Eight lineages, which is the base arm exactly. The unstratified self-edge
+headline (45 aligned / 0, 8 base / 0, never pooled) is unaffected -- it uses no
+lift. **Only the stratified view is restricted, and it does not announce it.**
+Stratifying aligned self-edges needs the lift of the lineage ROOT rather than of
+the model itself, which is the convention `data_ablations/ladder.py` already uses
+for intermediate checkpoints. NOT YET DONE.
 
-**WHICH BEARS DIRECTLY ON THE 8/8 BASE RESULT ABOVE.** Part 1 reports base models
-reproducing same-kind landing perfectly, 8 of 8, and reads it as showing the
-pattern needs no aligned weights. That is measured on the self-edge population --
-4% low-saturation, 71% high. On saturated prompts a same-kind riser is most of
-what is available to rise. The 8/8 is still the right reason to discount the
-47/2, but the two findings now share one explanation rather than being
-independent checks on each other.
+### A COUNT IN THIS FOLDER DOES NOT RECONCILE
+
+Part 2 above states qualifying cells falling "from 13,049 to 6,227". The framed
+number reproduces exactly; the raw one does not -- this run finds 14,684, and
+`adjacency.py`'s own riser-group line prints n=14,685. Recorded rather than
+silently corrected, because which of the two is stale has not been established.
 
 ### THREE AGGREGATIONS, AND TWO OF THEM WERE WRONG
 
