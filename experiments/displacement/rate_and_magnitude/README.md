@@ -254,3 +254,44 @@ easily manufacture.
 system slot rather than which argument was passed.
 
 EXPLORATORY. Nothing in this section was registered.
+
+## SELF-EDGES: the concentration is the FRAME's, the departure is the WEIGHTS'
+
+`run.py --frame self --arm ...`. base == aligned, unframed against framed:
+nothing changes but the template. `--arm` is required; 45 aligned and 8 base are
+never pooled.
+
+                     SELF aligned n=45         SELF base n=8
+    n_fallers    +0.96  30/15  p=0.036     +1.28  6/2  p=0.289
+    n_risers     -0.92  14/31  p=0.016     +0.06  4/4  p=1.000
+    arrived      +0.022  34/11  p=8e-4     -0.003  3/5  p=0.727
+    tail_excess  -0.017  10/35  p=2e-4     +0.001  4/4  p=1.000
+    departed     +0.001  24/21  p=0.766    +0.005  4/4  p=1.000
+    n_fall-n_rise +2.09  34/11  p=8e-4     +2.19  7/1  p=0.070   <- SEE BELOW
+
+**The concentration mechanism does not need the weight change.** `n_risers`
+reverses on the self-edge (14/31) exactly as it does in the full contrast, and
+`tail_excess` strengthens at 10/35. The template alone, on weights nobody
+touched during this measurement, already sheds risers under dose.
+
+**And it splits the full result in two.** `departed` is NULL on the aligned
+self-edge (24/21, p=0.766) while `arrived` is strong (34/11, p=8e-4). So in the
+`base_raw -> aligned_framed` contrast:
+
+    the DEPARTURE gradient comes from the weight change
+    the ARRIVAL concentration comes from the frame
+
+That is a cleaner decomposition than the full contrast can give, and it is the
+reason to build self-edges at all.
+
+### THE ONE ROW WHERE THE CONTROL IS EQUIVOCAL
+
+`n_fall-n_rise` is +2.19 at 7/1 on the base arm, p=0.070 -- same direction and
+similar magnitude to aligned's +2.09 at 34/11. It misses significance at n=8,
+but **7/1 is what a real effect looks like with eight lineages**, and this is the
+term the section above calls the cleanest statement of the mechanism.
+
+So the balance term may NOT be alignment-specific even though its two components
+are, and n=8 cannot settle it. Flagged rather than folded in: every other row of
+the control is flat (4/4 on three of them), and this one is not, which is exactly
+the row a clean story would want to overlook.
