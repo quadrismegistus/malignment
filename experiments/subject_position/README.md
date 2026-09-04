@@ -1,0 +1,66 @@
+---
+kind: subject
+status: OPEN - six questions, four measured, two open
+headline: A SUBJECT, not an experiment. It indexes its questions; it holds no code, no data and no claims of its own
+---
+# subject_position
+
+**A SUBJECT, not an experiment.** Per `experiments/LAYOUT.md`: a subject directory contains a README that indexes its questions and nothing else — no code, no data, no claims. Anything shared between the questions belongs in `malignment/`.
+
+Promoted from `exploratory/subject_position` on 2026-09-04, where one README carried five separable findings and five producers. The thesis and the tension below were written there and are reproduced here because they are what the questions are questions *about*; every number has moved to the question that owns it.
+
+## THE THESIS
+
+RH: SFT's primary job is to install a subject position — to turn a next-token predictor into a **respondent**, one that speaks in relation to an Other. The mundane observation behind it: a templateless base asked *"Who are you?"* continues the question; a templated aligned model answers it.
+
+F20 tried to settle this and substituted a `Q: ... A:` pseudo-template for the missing plain-completion arm. This subject exists because that substitution was never measured against the thing it stood in for — and because, once measured, it turned out to be the *fair* arm comparison rather than the degraded one.
+
+## THE QUESTIONS
+
+    pseudo_template/         What does the address supply, as against the model?
+                             MEASURED. Q:/A: gives 0.512 median first-person mass
+                             against 0.048 bare. The address supplies ten times
+                             what the models bring -- and is the only condition in
+                             which base and aligned receive an IDENTICAL address,
+                             because 11 of 14 bases ship no chat template.
+
+    installation_rung/       Which training rung installs the position?
+                             MEASURED. SFT: 30 rise / 5 fall, median +0.2296,
+                             p < 1e-4. DPO does not resolve. Predictions recorded
+                             before the run; P1 held, P2 split, P4 unresolved.
+
+    refusal_and_the_I/       Is the templated "I" a refusal phenomenon?
+                             MEASURED. Removing safety data costs nine tenths of
+                             the first person at a refusal prompt and GAINS a
+                             little at an identity prompt. The whole effect is
+                             +0.8051 templated and +0.0026 raw.
+
+    framed_identity/         What does the deployed model say when actually
+                             addressed? RUN, not yet written up. The one cell F20
+                             never filled: identity questions INSIDE the template.
+
+    frame_inversion/         Why do raw and chat move in OPPOSITE directions on
+                             the same models? OPEN, no producer.
+
+    referential_anchoring/   Does alignment anchor persons, or signification as
+                             such? OPEN, no producer. The F20x redo.
+
+## THE TENSION, WHICH IS WHY THE LAST TWO ARE OPEN
+
+Templated, alignment raises the first person enormously. **Raw, alignment lowers it.** On `neo`, whose rendered template is byte-identical at all three rungs:
+
+                            raw       chat
+    neo_7b                0.0214    0.1375
+    neo_7b_sft_v0.1       0.0090    0.4008
+    neo_7b_instruct_v0.1  0.0059    0.7759
+
+Meanwhile raw narrative interiority ROSE with alignment (+0.224, 16/17, `passage_analysis/interiority_in_passages`, generated with no template — verified in the producers, which pass raw strings and never call `apply_chat_template`).
+
+**So whatever the respondent training leaves in raw prose, it is not more first-person speech.** Outside the turn the model becomes *less* willing to say "I" while writing *more* inner life. Either those are separate effects of alignment, or the trace is in something other than the pronoun. `frame_inversion/` is that question.
+
+## WHAT SHOULD NOT BE CITED, WHATEVER QUESTION IT APPEARS UNDER
+
+- **The Tulu ablation ORDERING.** Spearman rho = **−0.10** between the pseudo-template and bare-chat conditions on the same five models. One checkpoint per ablation cannot separate an effect from a checkpoint. The no-safety CROSSOVER is within-model and does not rest on this; any ordering of the four ablations does.
+- **Any conversational-"I" claim.** First-token probability cannot see a mid-turn `I'd suggest`, which is where wildchat's contribution would live.
+- **P3**, withdrawn before any result was read: 11 of 14 bases ship no template, so a chat-frame base-to-SFT delta does not exist for most lineages.
+- **The F20 beam corpus** (556k beams) for anything passage-scale: 8 words, 28% distinct openings, 21% of a cell on one four-word opening. Its raw-mode "50% empty mass" is not reproduced by either the twp distributions or fresh generations.

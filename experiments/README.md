@@ -51,7 +51,7 @@ and the state the first version of the checker could not see.
 - **[`displacement_taxonomy/`](displacement/displacement_taxonomy/README.md)** -- `COMPLETE (for now). [...]`  
   the operations catalogued here are a property of alignment as such, not of alignment acting on transgressive content
 - **[`existence/`](displacement/existence/README.md)** -- `RUN 2026-08-30. 50 endpoint lineages, English.`  
-  Displacement exists. Higher-T words lose more mass (40/50 lineages), and freed mass lands preferentially on same-kind words (47/49), not on neutral words.
+  Displacement exists. Higher-T words lose more mass (43/50 lineages), and freed mass lands preferentially on same-kind words (47/49), not on neutral words. It survives the deployment frame and is 2.8x larger there.
 - **[`named_under_dose/`](displacement/named_under_dose/README.md)** -- `RUN, NULL. [...]`  
   NONE STATED
 - **[`norm_change/`](displacement/norm_change/README.md)** -- `RUN. [...]`  
@@ -185,8 +185,21 @@ and the state the first version of the checker could not see.
   Most of the displacement is already done by SFT. The preference step continues it and does not cause it. ... Reported here as what the picture shows on one prompt, not as a finding
 - **[`salary_probe/`](exploratory/salary_probe/README.md)** -- `RUN, 28 lineage pairs, 84,000 draws, 2026-08-28 - UNPARKED AND RUN; registration frozen at 2afe765, amendments A1-A4`  
   THE RESULT IS IN `FINDING_narrowing.md`. THIS FILE IS THE PILOT, kept because what it says about its own limits was right and is the reason the larger run exists.
-- **[`subject_position/`](exploratory/subject_position/README.md)** -- `OPEN. [...]`  
+
+### subject_position
+
+- **[`frame_inversion/`](subject_position/frame_inversion/README.md)** -- `OPEN. [...]`  
+  Raw and chat move in OPPOSITE directions on the same models, and nobody has tested them against each other
+- **[`framed_identity/`](subject_position/framed_identity/README.md)** -- `RUN, not yet written up. [...]`  
+  The one cell F20 never filled -- identity questions INSIDE the chat template
+- **[`installation_rung/`](subject_position/installation_rung/README.md)** -- `MEASURED. [...]`  
   The position is installed at SFT, and it is frame-bound
+- **[`pseudo_template/`](subject_position/pseudo_template/README.md)** -- `MEASURED. [...]`  
+  The address supplies ten times what the models bring -- and it is the FAIR arm comparison, not the degraded one
+- **[`referential_anchoring/`](subject_position/referential_anchoring/README.md)** -- `OPEN. [...]`  
+  Does alignment anchor PERSONS, or signification as such? The old corpus said the latter and the project wanted the former
+- **[`refusal_and_the_I/`](subject_position/refusal_and_the_I/README.md)** -- `MEASURED. [...]`  
+  The first person at the answer slot is a REFUSAL phenomenon, and it exists only inside the template
 
 <!-- INDEX:END -->
 
