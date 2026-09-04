@@ -37,15 +37,31 @@ def binom(k, n):
                for j in range(0, min(k, n - k) + 1)) / 2.0 ** n)
 
 
-def measure():
+def measure(frame="raw", match_framed=False):
     from malignment import ch, charge, roster
 
     eps, unresolved = roster.endpoints()
     if unresolved:
         raise SystemExit("unresolved lineages: %s" % sorted(unresolved)[:3])
 
+    #: same two flags as `run.py`, same reasons. The framed contrast is
+    #: base_raw -> aligned_framed and is ASYMMETRIC -- 43 of 50 bases ship no
+    #: chat template, so it is the deployed arm against the bare one.
+    #: `clean_slot` is not optional: `frame_aligned='prefill'` alone mixes empty
+    #: system slots with personas and date blocks, because `system_mode` records
+    #: the argument passed and not the treatment received.
+    mode_of = {}
+    if match_framed or frame != "raw":
+        from malignment import movement as M
+        mode_of = {(b, a): m for b, a, m in M.clean_frame_pairs()
+                   if eps.get(b) == a}
+        eps = {b: a for b, a in eps.items() if (b, a) in mode_of}
+
     print("ADJACENCY: does freed mass land on same-kind words (displacement)")
     print("           or scatter to unrelated words (diffusion/suppression)?")
+    print("           %d lineages  [frame=%s]" % (len(eps), frame))
+    if frame != "raw":
+        print("           base_raw -> aligned_framed, clean system slot only")
     print()
 
     scenes_cache = {}
@@ -70,8 +86,11 @@ def measure():
             "(p_aligned - p_base) AS delta, cls "
             "FROM {db}.movement_v4 "
             "WHERE base='%s' AND aligned='%s' "
-            "AND frame_base = '' AND frame_aligned = ''"
-            % (b.replace("'", "\\'"), a.replace("'", "\\'")),
+            "AND frame_base = '' AND %s"
+            % (b.replace("'", "\\'"), a.replace("'", "\\'"),
+               "frame_aligned = ''" if frame == "raw" else
+               ("frame_aligned = 'prefill' AND system_mode_aligned = '%s'"
+                % mode_of[(b, a)])),
             limit_bytes=None)
 
         cells = collections.defaultdict(list)
@@ -193,5 +212,18 @@ def measure():
     return 0
 
 
+def main(argv=None):
+    import argparse
+    ap = argparse.ArgumentParser(description=__doc__,
+                                 formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument("--frame", default="raw", choices=("raw", "prefill"))
+    ap.add_argument("--match-framed", action="store_true",
+                    help="run RAW on the framed population, so the two are the "
+                         "same pairs and a difference is not partly which labs "
+                         "ship a chat template")
+    a = ap.parse_args(argv)
+    return measure(frame=a.frame, match_framed=a.match_framed)
+
+
 if __name__ == "__main__":
-    sys.exit(measure())
+    sys.exit(main())

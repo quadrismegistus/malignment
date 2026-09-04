@@ -105,6 +105,25 @@ template actually RENDERED into the system slot
 
 ## Part 2: displacement vs suppression (`adjacency.py`)
 
+**Also run framed.** `adjacency.py --frame prefill` and `--match-framed`, the
+same two flags and the same three fences as Part 1 above:
+
+    same 45 pairs                 RAW          FRAMED
+    same-kind gains more          42 / 44      45 / 45
+    none-kind gains more           2            0
+    same-kind median delta        +0.013634    +0.017398
+    none-kind median delta        +0.009593    +0.010550
+    same/none ratio                1.42x        1.65x
+
+Unanimous under the frame, and the gap widens. Both lineages that ran the wrong
+way raw flip to same-kind.
+
+**Read the 45/45 with its denominator.** Qualifying cells fall from 13,049 to
+6,227, because a cell needs a rated non-NONE top faller AND both a same-kind and
+a none-kind riser, and the framed arm supplies that combination less often. So
+this is unanimity on half the data, not unanimity on more of it.
+
+
 Content-selectivity says alignment targets transgressive words. The next question is WHERE THE FREED MASS GOES. Three hypotheses:
 
 - **Displacement** (Freudian): mass redirects to semantically adjacent words in the same domain. "kill" → "scream" — same anger frame, lower charge. The drive is not extinguished; it finds an adjacent outlet the censor permits.
