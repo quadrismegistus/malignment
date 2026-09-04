@@ -295,3 +295,66 @@ So the balance term may NOT be alignment-specific even though its two components
 are, and n=8 cannot settle it. Flagged rather than folded in: every other row of
 the control is flat (4/4 on three of them), and this one is not, which is exactly
 the row a clean story would want to overlook.
+
+## THE LADDER: DPO RAISES THE LEVEL, IT DOES NOT CHANGE THE DOSE RESPONSE
+
+`ladder.py`. The section above shows the frame alone sheds risers and
+concentrates arrival on untouched weights. This asks where on the training
+ladder that responsiveness gets installed, over four families with intermediate
+checkpoints: Tulu-3 (plus its four SFT data ablations), OLMoE, OLMo-2, Olmo-3.
+
+No intermediate rung has its own lift -- `charge.lifts_per_lineage()` is keyed by
+(prompt, base) and covers exactly the 50 endpoint bases. Each rung is therefore
+dosed with **its own family's base lift**, the model it descends from, which is
+constant within a family and so cannot itself carry a stage difference.
+
+### What is real: the marginal step, 4/4 and large
+
+Paired within prompt, total movers under the frame, SFT -> DPO:
+
+    Tulu-3    20.1 -> 30.5    +10.37   t=30.2
+    OLMo-2    23.4 -> 30.4     +7.01   t=30.6
+    Olmo-3    25.0 -> 29.0     +3.94   t=19.3
+    OLMoE     24.5 -> 27.8     +3.29   t=15.5
+
+**Preference training makes the model move far more words under a chat frame**,
+in every family, and the Instruct rung sits on top of DPO rather than beyond it
+(OLMo-2 30.4/30.4, Olmo-3 29.0/28.7), which is what a released post-DPO model
+should do and is the cheapest available check that this is not noise.
+
+### What is NOT there: a DPO step in dose sensitivity
+
+The bare per-rung slopes need a control first. Total movers falls with lift in
+**all sixteen rungs** (t = -2.0 to -5.8): loaded prompts have fewer movable words
+to begin with. So a downward `n_fallers` or `n_risers` slope is mostly that
+population effect, and only `fall - rise` is free of it. An earlier pass that
+read those two columns separately was reading the population, not the rate.
+
+Taken within prompt, where the dose is identical rather than merely matched:
+
+    family      d ddiff    t    which channel
+    Tulu-3       -1.166  -2.6   risers  (+0.678, t=2.2); fallers null
+    OLMo-2       -0.634  -1.9   fallers (-0.665, t=-2.6); risers null
+    OLMoE        -0.275  -1.0   neither
+    Olmo-3       +0.628  +1.8   risers  (-0.848, t=-3.6), OPPOSITE SIGN
+
+Signs disagree, and where they agree the channel does not: Tulu moves through
+risers, OLMo-2 through fallers, Olmo-3 through risers the other way. Three
+families, three mechanisms. **The stage claim has n=4, not n~780** -- the
+prompts are the replicate within a family, the families are the replicate for
+anything said about SFT versus DPO.
+
+### The consequence for the section above
+
+The reversal this folder reports -- `n_risers` inverting under the frame -- is
+already at SFT and preference training leaves its dose structure alone. It is
+**not a DPO phenomenon.** DPO changes how much moves, not how movement answers
+to the prompt's charge, and those are separable quantities that a marginal
+measurement silently pools.
+
+One row worth keeping visible rather than folding in: Tulu `SFT-no-wildchat` is
++0.134 (t=0.4) where the other four SFT ablations sit at +0.62 to +0.82. One
+ablation in a noisy column, so nothing is claimed from it, but it is the only
+place in the ladder where an SFT data ablation looks unlike its siblings.
+
+EXPLORATORY. Nothing in this section was registered.
