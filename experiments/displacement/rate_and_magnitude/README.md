@@ -195,3 +195,62 @@ rungs and transitive pairs and would let one base model vote eleven times.
   concentrates is not established here.
 - **A rate/magnitude contradiction with M01.** Binary twin contrast against
   continuous slope, 33 pair-sites against 50 lineages. Different tests.
+
+## THE DEPLOYMENT FRAME (2026-09-04): THE RATE STRUCTURE INVERTS
+
+`run.py --rule-version 4 --frame prefill` against `--frame raw --match-framed`.
+Same 45 pairs, English, lift dose. `base_raw -> aligned_framed`.
+
+                       RAW/45                    FRAMED/45
+    departed      +0.01538  35/10  p=2e-4   +0.01520  28/17  p=0.135   -> NULL
+    arrived       +0.01123  35/10  p=2e-4   +0.03521  42/3   p<1e-6     3.1x
+    n_movers      +2.43     42/3   p<1e-6   +1.79     35/10  p=2e-4     smaller
+    n_fallers     +0.97     36/9   p=7e-5   +2.95     42/3   p<1e-6     3.1x
+    n_risers      +0.88     41/4   p<1e-6   -1.25     10/35  p=2e-4     REVERSES
+    n_fall-n_rise +0.06     23/22  p=1.000  +3.82     42/3   p<1e-6     null -> strong
+    mass/faller   +0.00011  25/20  p=0.551  -0.00230  11/34  p=8e-4     null -> neg
+    mass/riser    -0.00282  11/34  p=8e-4   +0.00310  33/12  p=2e-3     REVERSES
+    tail_excess   -0.00918  11/34  p=8e-4   -0.03152   3/42  p<1e-6     3.4x
+
+**THIS IS THE FIRST PLACE THE FRAME DOES SOMETHING OTHER THAN MAGNIFY.**
+`existence` and both `norm_change` tables showed framed as raw pointing the same
+way harder, 2x to 14x. Here the RATE structure inverts while the MAGNITUDE
+structure amplifies.
+
+### One mechanism, and the whole table is it
+
+Under the frame, dose drives CONCENTRATION rather than dispersal:
+
+  * more words give mass up (`n_fallers` 3.1x)
+  * FEWER words receive it (`n_risers` reverses, 41/4 up becomes 10/35)
+  * each receiver takes MORE (`mass/riser` reverses, negative becomes positive)
+  * less leaks to the tail (`tail_excess` 3.4x, 3/42)
+
+`n_fall-n_rise` states it most cleanly. Raw, a loaded prompt recruits fallers and
+risers in equal measure -- an exact null at 23/22, p=1.000. Framed, it recruits
+fallers and SHEDS risers, 42/3 at p<1e-6.
+
+### What this does to RM-3, and to the summary this folder has been carrying
+
+RM-3 -- freed mass lands on NAMEABLE words rather than the tail -- was unanimous
+raw. Framed it strengthens 3.4x to 3/42. That was predicted from the
+concentration reading before the row was read, which is the only reason it is
+worth anything as corroboration.
+
+**And "the frame amplifies alignment" is too coarse a summary and should stop
+being used.** It amplifies departure and concentration; it REVERSES dispersal.
+A folder quoting the amplification results without this one would be describing
+a uniform effect that is not uniform.
+
+### Fences
+
+`--match-framed` is not optional: the framed set covers 45 of the 50 pairs, and
+the reversal was checked against the matched raw column rather than the 50-pair
+one, precisely because a sign flip is what a population difference would most
+easily manufacture.
+
+`frame_aligned='prefill'` alone is not the filter -- the population is
+`movement.clean_frame_pairs()`, which reads what each template rendered into the
+system slot rather than which argument was passed.
+
+EXPLORATORY. Nothing in this section was registered.

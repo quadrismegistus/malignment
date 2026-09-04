@@ -55,7 +55,33 @@ DATA = os.path.expanduser("~/malignment-data/norm_change")
 MIN_PROMPTS = 25
 DOSE = "k_transgressiveness"
 
-from analyse import endpoint_pairs          # noqa: E402
+from analyse import endpoint_pairs as _endpoint_pairs_all   # noqa: E402
+
+
+def endpoint_pairs():
+    """The lineage roster for THIS run, narrowed by --frame and --arm.
+
+    `--frame prefill` restricts to the 45 pairs whose system slot was empty as
+    measured; `--frame self` returns the self-edge lineages for ONE arm, since
+    45 aligned and 8 base are never pooled.
+    """
+    from malignment import movement as M, roster
+    if _SFX["v"] == "_v4_self":
+        ep, _u = roster.endpoints()
+        al, ba = set(ep.values()), set(ep)
+        out = set()
+        for b, a, _m in M.clean_frame_pairs(self_edges="only"):
+            arm = "aligned" if b in al else ("base" if b in ba else "?")
+            if arm == _ARM["v"]:
+                out.add("%s>%s" % (b, a))
+        return out
+    EP = _endpoint_pairs_all()
+    if _SFX["v"] == "_v4_framed" or _MATCH["v"]:
+        ep, _u = roster.endpoints()
+        keep = {"%s>%s" % (b, a) for b, a, _m in M.clean_frame_pairs()
+                if ep.get(b) == a}
+        EP = {e for e in EP if e in keep}
+    return EP
 
 
 def binom(k, n):
@@ -157,7 +183,7 @@ def measure(langs, min_prompts=MIN_PROMPTS):
         #: is where diffusion would put the freed mass.
         "sum(p_base) AS sb, sum(p_aligned) AS sa, "
         "sumIf(p_base, cls='faller') AS fb "
-        "FROM movement WHERE cls != 'still' GROUP BY base, aligned, prompt")
+        "FROM rm_movement_src WHERE cls != 'still' GROUP BY base, aligned, prompt")
     mag = {}
     for r in rows:
         lin = r["base"] + ">" + r["aligned"]
@@ -176,7 +202,7 @@ def measure(langs, min_prompts=MIN_PROMPTS):
                                        _tail_excess(float(r["sb"]), float(r["sa"]),
                                                     float(r["dep"]), float(r["fb"])))
     dose = {}
-    with gzip.open(os.path.join(DATA, "levels_long.csv.gz"), "rt",
+    with gzip.open(os.path.join(DATA, "levels_long%s.csv.gz" % _SFX["v"]), "rt",
                    encoding="utf-8") as fh:
         head = fh.readline().rstrip("\n").split("\t")
         ix = {k: i for i, k in enumerate(head)}
@@ -253,7 +279,7 @@ def measure_lift(min_prompts=MIN_PROMPTS):
         "countIf(cls='faller') AS nf, countIf(cls='riser') AS nr, "
         "sum(p_base) AS sb, sum(p_aligned) AS sa, "
         "sumIf(p_base, cls='faller') AS fb "
-        "FROM movement WHERE cls != 'still' GROUP BY base, aligned, prompt")
+        "FROM rm_movement_src WHERE cls != 'still' GROUP BY base, aligned, prompt")
     mag = {}
     base_of = {}
     for r in rows:
@@ -303,12 +329,40 @@ def measure_lift(min_prompts=MIN_PROMPTS):
     return 0
 
 
+_SFX = {"v": ""}
+_ARM = {"v": None}
+_MATCH = {"v": False}
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser()
+    ap.add_argument("--rule-version", type=int, default=3, choices=(3, 4))
+    ap.add_argument("--frame", default="raw", choices=("raw", "prefill", "self"),
+                    help="prefill/self require --rule-version 4. The source is "
+                         "movement.source_view(), shared with norm_change so "
+                         "the clean-slot rule has one implementation.")
+    ap.add_argument("--match-framed", action="store_true",
+                    help="run RAW on the framed pairs, so the columns are the "
+                         "same population")
+    ap.add_argument("--arm", default=None, choices=("aligned", "base"),
+                    help="REQUIRED with --frame self. The arms are never pooled.")
     ap.add_argument("--lang", default=None, choices=("en", "zh"))
     ap.add_argument("--lift", action="store_true",
                     help="re-run on charge.lift instead of k_transgressiveness (en only)")
     a = ap.parse_args(argv)
+    from malignment import ch, movement as M
+    _SFX["v"] = M.source_view(ch, "rm_movement_src", a.rule_version, a.frame)
+    _ARM["v"] = a.arm
+    _MATCH["v"] = bool(a.match_framed)
+    if a.frame == "self" and not a.arm:
+        raise SystemExit(
+            "--frame self needs --arm aligned or --arm base. 45 aligned, 8 base.\n"
+            "  They are NOT pooled: the base arm says whether the effect needs\n"
+            "  aligned weights, and a pooled row cannot answer that.")
+    if _SFX["v"]:
+        print("source: rule_version=%d frame=%s -> levels_long%s.csv.gz%s"
+              % (a.rule_version, a.frame, _SFX["v"],
+                 ("  arm=%s" % a.arm) if a.arm else ""))
     if a.lift:
         return measure_lift()
     return measure([a.lang] if a.lang else ["en", "zh"])

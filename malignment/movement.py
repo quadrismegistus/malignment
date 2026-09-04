@@ -973,6 +973,61 @@ def clean_frame_pairs(rule_version=4, self_edges=False):
     return sorted(out)
 
 
+def source_view(ch, name, rule_version=4, frame="raw"):
+    """Point a VIEW at one frame condition. -> the filename suffix for outputs.
+
+        sfx = movement.source_view(ch, "nc_movement_src", 4, "prefill")
+        ...  # every query then reads FROM nc_movement_src
+
+    **A VIEW RATHER THAN EDITED QUERY STRINGS.** `norm_change/run.py` read
+    `FROM movement` at TEN sites and `rate_and_magnitude/run.py` at two more.
+    Rewriting a dozen SQL literals by hand is how a filter ends up on eleven of
+    them, so the identifier stays fixed and this repoints it.
+
+    Written here because it was about to be written twice. `frame`:
+
+        raw       both arms unframed              suffix ""      (v3)
+                  or frame_base='' AND frame_aligned=''  "_v4"
+        prefill   base_raw -> aligned_framed, CLEAN SLOT   "_v4_framed"
+        self      base == aligned, unframed -> framed      "_v4_self"
+
+    `prefill` and `self` restrict to `clean_frame_pairs()` -- NOT to
+    `frame_aligned='prefill'` alone, which mixes empty system slots with
+    personas because `system_mode` records the argument passed rather than the
+    treatment received.
+
+    **THE VIEW NAME IS THE CALLER'S AND IS FIXED PER PRODUCER**, so two runs of
+    one producer at once would clobber each other. Stated rather than guarded:
+    these producers take tens of minutes and nobody runs two.
+    """
+    from .ch import _lit
+    if int(rule_version) == 3:
+        if frame != "raw":
+            raise ValueError(
+                "frame=%r needs rule_version=4: the v3 `movement` table has no "
+                "frame columns." % frame)
+        body, sfx = "SELECT * FROM {db}.movement", ""
+    elif frame == "raw":
+        body = ("SELECT * FROM {db}.movement_v4 "
+                "WHERE frame_base='' AND frame_aligned=''")
+        sfx = "_v4"
+    elif frame in ("prefill", "self"):
+        only = "only" if frame == "self" else False
+        trip = ",".join("(%s,%s,%s)" % (_lit(b), _lit(a), _lit(m))
+                        for b, a, m in clean_frame_pairs(rule_version, only))
+        if not trip:
+            raise ValueError("no clean framed edges for frame=%r" % frame)
+        extra = " AND base = aligned" if frame == "self" else ""
+        body = ("SELECT * FROM {db}.movement_v4 WHERE frame_base='' "
+                "AND frame_aligned='prefill'%s "
+                "AND (base, aligned, system_mode_aligned) IN (%s)" % (extra, trip))
+        sfx = "_v4_self" if frame == "self" else "_v4_framed"
+    else:
+        raise ValueError("frame must be raw|prefill|self, got %r" % frame)
+    ch.execute("CREATE OR REPLACE VIEW {db}.%s AS %s" % (name, body))
+    return sfx
+
+
 def movement_pairs_list(rule_version=4, self_edges=False):
     """[(base, aligned, n_rows)] present in the movement table, biggest first.
 
