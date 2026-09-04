@@ -521,3 +521,58 @@ prediction being inverted is recorded because a result that had confirmed the
 guess would have been checked less hard than this one was.
 
 EXPLORATORY. Nothing in this section was registered.
+
+### HOW IT DIFFERS: the full mix targets SEXUAL content and no-wildchat does not
+
+`how_it_differs.py`. Jaccard is direction-blind, so the section above establishes
+THAT the divergence tracks charge without saying what is in it. Classifying the
+uniquely-shed words on high-lift unsaturated prompts (n=405) by the prompt's own
+per-word `kind` rating, unit = the prompt:
+
+    d = (# SEXUAL uniquely shed by FULL) - (# SEXUAL uniquely shed by ARM)
+
+    arm           n(d!=0)   mean d    up/dn        p
+    no-wildchat        83    0.437    64/19   0.0000
+    no-safety          61    0.156    45/16   0.0003
+    no-persona         67    0.040    34/33   1.0000
+    no-math            60    0.017    31/29   0.8974
+
+**Removing WildChat costs the model its aim at sexual content**, more than any
+other slice and by about 2.8x the next one. Removing the safety corpus does the
+same thing, weaker but real. Removing math or persona does nothing at all.
+
+The composition behind it, pooled: on high-lift prompts `no-wildchat`'s uniquely
+shed charged words are 21.8% SEXUAL against full's 39.0%, while its VIOLENT share
+runs 42.8% against full's 31.2%. **The displacement does not shrink; it
+redirects** -- away from sexual content and toward violent and coercive content.
+
+**AND THIS IS THE FIRST PLACE THE SAFETY CORPUS DOES ANYTHING.** `U_ladder`'s
+headline is that safety data is not what produces displacement, established on
+MAGNITUDE, where `no-safety` is the arm most like full. That stands. On the
+sexual-targeting question it does not: `no-safety` is 45/16, p=0.0003. The two
+are compatible because they are different quantities -- how much moves against
+what it is aimed at -- and the second was never asked before.
+
+### THE UNIT CORRECTION, and what the first pass got wrong
+
+Three aggregations were tried, in this order, and `how_it_differs.py` prints all
+three rather than the conclusion alone:
+
+1. **Pool all words.** `no-wildchat` SEXUAL odds ratio 0.44, z=-6.0; `no-math`
+   and `no-persona` significant in the OPPOSITE direction (OR 1.84, 1.79).
+   **Invalid** -- about 1,155 words treated as independent when they cluster in a
+   few prompts.
+2. **Per prompt, sexual SHARE, requiring >=3 charged words on both sides.**
+   Defined on 17 prompts of 405. p=0.25, underpowered.
+3. **Per prompt, the sexual COUNT difference.** Defined on every prompt, no
+   threshold. Reported above.
+
+**Aggregation 1 got two of the four arms backwards** -- it called `no-math` and
+`no-persona` significant reversals where the prompt-level test finds them dead
+null (31/29 and 34/33) -- and it called `no-safety` null (z=-0.5) where the
+prompt-level test finds it real. Only `no-wildchat` survived unchanged.
+
+FENCES. Post hoc: SEXUAL was not predicted, and the category analysis was
+exploratory throughout. Aggregation 3 was chosen after 1 and 2 had been run,
+which is a forking path even though it is the defensible unit on the merits. One
+family, no replication available. EXPLORATORY, unregistered.
