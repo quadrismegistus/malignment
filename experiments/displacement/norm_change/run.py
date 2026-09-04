@@ -58,6 +58,73 @@ DATA = os.path.join(os.path.expanduser(os.environ.get("LITMOD_DATA_DIR", "~")),
     os.path.expanduser("~/malignment-data/norm_change")
 OUT = DATA
 
+#: **A VIEW, NOT TEN EDITED QUERY STRINGS.** This file read `FROM movement` at
+#: ten sites -- the v3 table, which has NO frame columns, so a framed contrast
+#: was not a flag away, it was unreachable. Every site now reads
+#: `nc_movement_src`, a view this producer rewrites before each run. The queries
+#: are untouched apart from the identifier, which is the point: rewriting ten SQL
+#: strings by hand is how a filter ends up on nine of them.
+#:
+#: **v3 STAYS THE DEFAULT AND ITS ARTIFACT IS UNTOUCHED.** RH, 2026-09-04: build
+#: the v4 one alongside rather than restating results already reported off v3.
+#: The two are not the same substrate -- v3 spans 153 pairs and 4,482 prompts,
+#: v4 spans 132 and 2,985 while carrying more rows (merged topup cells) -- so a
+#: number from one is not a correction of the other.
+#:
+#: THE VIEW NAME IS FIXED, so two norm_change runs at once would clobber each
+#: other. Stated rather than guarded: this producer takes ~an hour and nobody
+#: runs two.
+_SUFFIX = {"v": ""}
+
+
+#: EVERY output path must carry the suffix. A run at --rule-version 4 wrote
+#: `levels_long_v4.csv.gz` correctly and then OVERWROTE the v3
+#: `fields_long.csv.gz` with partial v4 content, because two of the four
+#: `_write` calls had been given the suffix and two had not. The v3 artifact was
+#: destroyed and had to be rebuilt.
+#:
+#: Suffixing three of four paths is worse than suffixing none: none is a clean
+#: overwrite a reader expects, three of four is a directory where some files are
+#: v3 and some are v4 under names that do not say which.
+_OUTPUTS = ("levels_long", "fields_long", "words_long", "contextual_long")
+
+
+def _out(name):
+    """The path for one output, suffix applied. Use this, never os.path.join."""
+    if name not in _OUTPUTS:
+        raise ValueError("unregistered output %r -- add it to _OUTPUTS so it "
+                         "cannot miss the suffix" % name)
+    return os.path.join(OUT, "%s%s.csv.gz" % (name, _SUFFIX["v"]))
+
+
+def _set_source(ch, rule_version, frame):
+    """Point `nc_movement_src` at the right rows. -> the filename suffix."""
+    if int(rule_version) == 3:
+        if frame != "raw":
+            raise SystemExit(
+                "--frame needs --rule-version 4: the v3 `movement` table has no "
+                "frame columns, which is why this was unreachable before.")
+        body, sfx = "SELECT * FROM {db}.movement", ""
+    elif frame == "raw":
+        body = ("SELECT * FROM {db}.movement_v4 "
+                "WHERE frame_base='' AND frame_aligned=''")
+        sfx = "_v4"
+    else:
+        #: the clean-slot TRIPLE, not frame_aligned='prefill' alone --
+        #: `system_mode` records the argument passed, not the treatment
+        #: received, so the label admits personas and excludes empty slots.
+        from malignment import movement as M
+        from malignment.ch import _lit
+        trip = ",".join("(%s,%s,%s)" % (_lit(b), _lit(a), _lit(m))
+                        for b, a, m in M.clean_frame_pairs())
+        body = ("SELECT * FROM {db}.movement_v4 WHERE frame_base='' "
+                "AND frame_aligned='prefill' "
+                "AND (base, aligned, system_mode_aligned) IN (%s)" % trip)
+        sfx = "_v4_framed"
+    ch.execute("CREATE OR REPLACE VIEW {db}.nc_movement_src AS " + body)
+    _SUFFIX["v"] = sfx
+    return sfx
+
 CJK = re.compile(r"[一-鿿㐀-䶿]")
 
 #: The continuous scales, by the accessor that serves them. `norms` returns a
@@ -99,7 +166,7 @@ def _lang(prompt):
 
 def vocabulary(ch):
     """Every word in `movement`, with its language guessed from the word itself."""
-    rows = ch.query("SELECT DISTINCT word FROM movement")
+    rows = ch.query("SELECT DISTINCT word FROM nc_movement_src")
     return [r["word"] for r in rows]
 
 
@@ -204,7 +271,7 @@ def contextual_pos(ch, limit_lang=None):
     import spacy
     from malignment.pos import get_pos
     NLP = {"en": None, "zh": spacy.load("zh_core_web_sm")}
-    rows = ch.query("SELECT prompt, groupUniqArray(word) AS ws FROM movement "
+    rows = ch.query("SELECT prompt, groupUniqArray(word) AS ws FROM nc_movement_src "
                     "WHERE cls != 'still' GROUP BY prompt")
     out, n_en, n_zh = {}, 0, 0
     for i, r in enumerate(rows, 1):
@@ -251,7 +318,7 @@ def contextual(ch, a):
     """
     from malignment import fields as F
     idx = F._slot_index()
-    mp = {r["prompt"] for r in ch.query("SELECT DISTINCT prompt FROM movement")}
+    mp = {r["prompt"] for r in ch.query("SELECT DISTINCT prompt FROM nc_movement_src")}
     rows = []
     for (pr, w), byinst in idx.items():
         if pr not in mp:
@@ -279,7 +346,7 @@ def contextual(ch, a):
          [("prompt", "String"), ("word", "String"),
           ("scale", "String"), ("value", "Float64")])
     lineages = [(r["base"], r["aligned"]) for r in
-                ch.query("SELECT DISTINCT base, aligned FROM movement ORDER BY base, aligned")]
+                ch.query("SELECT DISTINCT base, aligned FROM nc_movement_src ORDER BY base, aligned")]
     q = """
     SELECT m.base AS base, m.aligned AS aligned, m.prompt AS prompt,
            c.scale AS scale,
@@ -288,12 +355,12 @@ def contextual(ch, a):
            sum(m.p_base)    AS base_cov,
            sum(m.p_aligned) AS aligned_cov,
            count() AS n_words
-    FROM movement m INNER JOIN nc_ctx_tmp c
+    FROM nc_movement_src m INNER JOIN nc_ctx_tmp c
       ON m.word = c.word AND m.prompt = c.prompt
     {WHERE}
     GROUP BY base, aligned, prompt, scale
     FORMAT TabSeparatedWithNames"""
-    _write(ch, q, os.path.join(OUT, "contextual_long.csv.gz"), a.lang, lineages)
+    _write(ch, q, _out("contextual_long"), a.lang, lineages)
     print()
     print("-> %s" % OUT)
     return 0
@@ -317,6 +384,13 @@ def main(argv=None):
     ap.add_argument("--plan", action="store_true")
     ap.add_argument("--run", action="store_true")
     ap.add_argument("--lang", default=None, choices=("en", "zh"))
+    ap.add_argument("--rule-version", type=int, default=3, choices=(3, 4),
+                    help="3 reads the v3 `movement` table and writes "
+                         "levels_long.csv.gz, unchanged. 4 reads movement_v4 and "
+                         "writes levels_long_v4*.csv.gz ALONGSIDE it.")
+    ap.add_argument("--frame", default="raw", choices=("raw", "prefill"),
+                    help="prefill requires --rule-version 4. base_raw -> "
+                         "aligned_framed, clean system slot only.")
     ap.add_argument("--contextual", action="store_true",
                     help="build contextual_long.csv.gz for H6/H7 and stop")
     a = ap.parse_args(argv)
@@ -325,6 +399,9 @@ def main(argv=None):
         return 0
 
     from malignment import ch
+    sfx = _set_source(ch, a.rule_version, a.frame)
+    print("source: rule_version=%d frame=%s -> levels_long%s.csv.gz"
+          % (a.rule_version, a.frame, sfx))
     os.makedirs(OUT, exist_ok=True)
 
     if a.contextual:
@@ -374,7 +451,7 @@ def main(argv=None):
           ("is_function", "UInt8"), ("freq", "Float64")])
 
     lineages = [(r["base"], r["aligned"]) for r in
-                ch.query("SELECT DISTINCT base, aligned FROM movement ORDER BY base, aligned")]
+                ch.query("SELECT DISTINCT base, aligned FROM nc_movement_src ORDER BY base, aligned")]
     print("chunking over %d lineages" % len(lineages), flush=True)
 
     #: THE MASS-WEIGHTING, in SQL. One row per (lineage, prompt, scale, arm),
@@ -388,11 +465,11 @@ def main(argv=None):
            sum(m.p_base)    AS base_cov,
            sum(m.p_aligned) AS aligned_cov,
            count() AS n_words
-    FROM movement m INNER JOIN nc_scale_tmp s ON m.word = s.word
+    FROM nc_movement_src m INNER JOIN nc_scale_tmp s ON m.word = s.word
     {WHERE}
     GROUP BY base, aligned, prompt, scale
     FORMAT TabSeparatedWithNames"""
-    _write(ch, q, os.path.join(OUT, "levels_long.csv.gz"), a.lang, lineages)
+    _write(ch, q, _out("levels_long"), a.lang, lineages)
 
     #: FIELDS ARE CATEGORICAL AND NEED A DIFFERENT DENOMINATOR.
     #:
@@ -425,20 +502,20 @@ def main(argv=None):
            sum(m.p_base)    AS base_cov,
            sum(m.p_aligned) AS aligned_cov,
            count() AS n_words
-    FROM movement m
+    FROM nc_movement_src m
     INNER JOIN nc_field_tmp s ON m.word = s.word
     INNER JOIN (
         SELECT base, aligned, prompt,
                sum(p_base)    AS tot_base,
                sum(p_aligned) AS tot_aligned
-        FROM movement m
+        FROM nc_movement_src m
         {WHERE}
         GROUP BY base, aligned, prompt
     ) t ON m.base = t.base AND m.aligned = t.aligned AND m.prompt = t.prompt
     {WHERE}
     GROUP BY base, aligned, prompt, scale
     FORMAT TabSeparatedWithNames"""
-    _write(ch, qf, os.path.join(OUT, "fields_long.csv.gz"), a.lang, lineages)
+    _write(ch, qf, _out("fields_long"), a.lang, lineages)
 
     print("writing the word layer...", flush=True)
     qw = """
@@ -446,11 +523,11 @@ def main(argv=None):
            m.word AS word, m.p_base AS p_base, m.p_aligned AS p_aligned,
            m.delta AS delta, m.cls AS cls,
            a.upos AS upos, a.is_function AS is_function, a.freq AS freq
-    FROM movement m INNER JOIN nc_attr_tmp a
+    FROM nc_movement_src m INNER JOIN nc_attr_tmp a
       ON m.word = a.word AND m.prompt = a.prompt
     {WHERE} AND m.cls != 'still'
     FORMAT TabSeparatedWithNames"""
-    _write(ch, qw, os.path.join(OUT, "words_long.csv.gz"), a.lang, lineages)
+    _write(ch, qw, _out("words_long"), a.lang, lineages)
 
     print()
     print("-> %s" % OUT)
