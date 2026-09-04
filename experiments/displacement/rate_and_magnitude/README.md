@@ -456,12 +456,51 @@ predicts three times better. The two are not symmetric evidence and the earlier
 version of this section, which treated §197 as decisive and marked the reading
 contested, over-deflated a result measured with the better instrument.
 
-WHAT REMAINS GENUINELY OPEN. §197 and this section measure different outcomes on
-different edges, so neither settles the other by itself. The check worth running
-is not §197's split repeated -- it inherits the saturation defect -- but its
-outcome (faller Jaccard divergence from full) recomputed against LIFT, on the
-raw edge, where a real content-specificity would show up in the quantity §197
-already found flat.
+### RUN: ON LIFT, §197's OWN OUTCOME IS NOT FLAT
+
+`jaccard_lift.py`. §197's outcome -- faller Jaccard against full on the raw
+base -> arm edge, no frames anywhere -- recomputed against LIFT instead of
+against the binary split. n = 1,839 prompts carrying a lift.
+
+    arm              mean J   d J / lift      t    197 reported
+    no-math          0.5736     +0.02348    2.6           0.528
+    no-persona       0.5704     +0.02280    2.5           0.522
+    no-safety        0.5655     -0.00394   -0.5           0.534
+    no-wildchat      0.3601     -0.01428   -1.6           0.340
+
+**The reproduction check passes.** Two groups with no overlap, 0.566-0.574
+against 0.360, the same structure §197 reported at 0.522-0.534 against 0.340.
+Absolute drift of about 0.04 is expected: different repo, different prompt pool
+(1,839 against 2,182).
+
+**And the paired contrast is significant where §197 was flat:**
+
+    J(no-wildchat) - mean J(other three), same prompt
+      n = 1,839   mean gap -0.2097
+      slope vs lift      -0.02839   t = -3.1
+      frame 2-4.99  n=1622  slope -0.03301   t = -3.4   UNSATURATED
+      frame 5+      n= 217  slope +0.04276   t =  1.2   saturated
+
+**The effect is in the unsaturated range and absent in the saturated one**, which
+is the signature saturation predicts and the reason §197's split could not see
+it: its "transgressive" arm was measuring in the frame 5+ cell, where this
+recomputation also finds nothing (t=1.2, wrong sign, n=217).
+
+So `no-wildchat` does not merely differ from the other arms. **It differs MORE
+where charge is higher**, on §197's own outcome. *"A generally unusual training
+run, not one that differs where desire is at stake"* does not hold on the better
+instrument.
+
+DENOMINATOR CONTROL, because Jaccard is a ratio. Union size is flat with lift for
+every arm (t -0.2 to 0.9) and full's own faller-set size is flat (t=0.3), so the
+slope is in the NUMERATOR: at higher lift `no-wildchat` shares fewer fallers with
+full (d|I| -0.11) while `no-math` and `no-persona` share more (+0.21, +0.24).
+
+TWO THINGS THIS IS NOT. The frame 2-4.99 cut is taken from `readout_share` §208
+rather than pre-registered here, so it is an external criterion applied post hoc,
+not a blind one. And no single arm's own slope reaches significance -- the result
+lives in the paired contrast, which is the better-powered test but also the one
+chosen after seeing the per-arm column.
 
 ### What this cannot be
 
