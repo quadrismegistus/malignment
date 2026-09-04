@@ -80,11 +80,33 @@ def endpoint_pairs():
     #: labs ship a chat template. `--match-framed` restricts raw to the framed
     #: pairs; without it the two columns are not comparable, which is the same
     #: trap `existence` hit.
+    if _SFX["v"] == "_v4_self":
+        #: SELF-EDGES: the lineage key is "X>X". Both arms live in one file and
+        #: are split by `self_arm()` at report time -- NEVER pooled, because the
+        #: base arm exists to say whether the effect needs aligned weights and a
+        #: pooled figure cannot answer that.
+        from malignment import movement as M
+        return {"%s>%s" % (b, a)
+                for b, a, _m in M.clean_frame_pairs(self_edges="only")}
     if _MATCH["v"]:
         from malignment import movement as M
         keep = {(b, a) for b, a, _m in M.clean_frame_pairs() if ep.get(b) == a}
         ep = {b: a for b, a in ep.items() if (b, a) in keep}
     return {"%s>%s" % (b, a) for b, a in ep.items()}
+
+
+def self_arm():
+    """{lineage: 'aligned'|'base'} for self-edges. {} otherwise."""
+    if _SFX["v"] != "_v4_self":
+        return {}
+    from malignment import movement as M, roster
+    ep, _u = roster.endpoints()
+    al, ba = set(ep.values()), set(ep)
+    out = {}
+    for b, a, _m in M.clean_frame_pairs(self_edges="only"):
+        out["%s>%s" % (b, a)] = ("aligned" if b in al
+                                 else ("base" if b in ba else "?"))
+    return out
 
 
 def lift_dose_rows():
@@ -240,7 +262,7 @@ def _suffix(rule_version, frame):
         if frame != "raw":
             raise SystemExit("--frame needs --rule-version 4")
         return ""
-    return "_v4" if frame == "raw" else "_v4_framed"
+    return {"raw": "_v4", "prefill": "_v4_framed", "self": "_v4_self"}[frame]
 
 
 def read(name, keep=None):
@@ -418,7 +440,7 @@ def main(argv=None):
     ap.add_argument("--rule-version", type=int, default=3, choices=(3, 4),
                     help="which levels_long* set run.py wrote. 3 is the v3 "
                          "artifact, unchanged.")
-    ap.add_argument("--frame", default="raw", choices=("raw", "prefill"),
+    ap.add_argument("--frame", default="raw", choices=("raw", "prefill", "self"),
                     help="prefill requires --rule-version 4")
     ap.add_argument("--match-framed", action="store_true",
                     help="restrict to the pairs the framed set covers, so raw "

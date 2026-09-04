@@ -109,6 +109,20 @@ def _set_source(ch, rule_version, frame):
         body = ("SELECT * FROM {db}.movement_v4 "
                 "WHERE frame_base='' AND frame_aligned=''")
         sfx = "_v4"
+    elif frame == "self":
+        #: **SELF-EDGES: the frame with the weights held fixed.** base ==
+        #: aligned, unframed against framed. 45 aligned models and 8 base ones
+        #: in ONE file -- the arms are split at analysis time by dose.py and
+        #: summary.py, since the long tables are keyed by lineage and both arms
+        #: belong to the same build.
+        from malignment import movement as M
+        from malignment.ch import _lit
+        trip = ",".join("(%s,%s,%s)" % (_lit(b), _lit(a), _lit(m))
+                        for b, a, m in M.clean_frame_pairs(self_edges="only"))
+        body = ("SELECT * FROM {db}.movement_v4 WHERE frame_base='' "
+                "AND frame_aligned='prefill' AND base = aligned "
+                "AND (base, aligned, system_mode_aligned) IN (%s)" % trip)
+        sfx = "_v4_self"
     else:
         #: the clean-slot TRIPLE, not frame_aligned='prefill' alone --
         #: `system_mode` records the argument passed, not the treatment
@@ -388,7 +402,7 @@ def main(argv=None):
                     help="3 reads the v3 `movement` table and writes "
                          "levels_long.csv.gz, unchanged. 4 reads movement_v4 and "
                          "writes levels_long_v4*.csv.gz ALONGSIDE it.")
-    ap.add_argument("--frame", default="raw", choices=("raw", "prefill"),
+    ap.add_argument("--frame", default="raw", choices=("raw", "prefill", "self"),
                     help="prefill requires --rule-version 4. base_raw -> "
                          "aligned_framed, clean system slot only.")
     ap.add_argument("--contextual", action="store_true",

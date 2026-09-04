@@ -38,7 +38,7 @@ def _suffix(rule_version, frame):
         if frame != "raw":
             raise SystemExit("--frame needs --rule-version 4")
         return ""
-    return "_v4" if frame == "raw" else "_v4_framed"
+    return {"raw": "_v4", "prefill": "_v4_framed", "self": "_v4_self"}[frame]
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.abspath(os.path.join(HERE, "..", "..", "..")))
@@ -101,8 +101,11 @@ def main(argv=None):
     ap = argparse.ArgumentParser()
     ap.add_argument("--rule-version", type=int, default=3, choices=(3, 4),
                     help="which *_long* set run.py wrote; 3 is the v3 artifact")
-    ap.add_argument("--frame", default="raw", choices=("raw", "prefill"),
+    ap.add_argument("--frame", default="raw", choices=("raw", "prefill", "self"),
                     help="prefill requires --rule-version 4")
+    ap.add_argument("--arm", default=None, choices=("aligned", "base"),
+                    help="REQUIRED with --frame self. The two arms are never "
+                         "pooled; see the refusal message.")
     ap.add_argument("--match-framed", action="store_true",
                     help="restrict to the pairs the framed set covers, so the "
                          "two columns are the same population")
@@ -118,7 +121,36 @@ def main(argv=None):
     from analyse import endpoint_pairs
     import statistics as st
     EP = endpoint_pairs()
-    if a.match_framed or a.frame != "raw":
+    ARM = {}
+    if a.frame == "self":
+        #: SELF-EDGES: both arms in one file, split at REPORT time. 45 aligned
+        #: and 8 base. Never pooled -- the base arm exists to say whether the
+        #: effect needs aligned weights, and a pooled row cannot answer that.
+        from malignment import movement as M, roster
+        ep0, _u0 = roster.endpoints()
+        al0, ba0 = set(ep0.values()), set(ep0)
+        EP = set()
+        for b, al, _m in M.clean_frame_pairs(self_edges="only"):
+            k = "%s>%s" % (b, al)
+            EP.add(k)
+            ARM[k] = "aligned" if b in al0 else ("base" if b in ba0 else "?")
+        #: **--arm IS REQUIRED HERE AND THAT IS DELIBERATE.** Pooling 45
+        #: aligned with 8 base defeats the only question the base arm answers --
+        #: whether the effect needs aligned weights. A default that pools is a
+        #: default that produces the wrong number silently, so there is no
+        #: default: the run refuses until an arm is named.
+        if not a.arm:
+            raise SystemExit(
+                "--frame self needs --arm aligned or --arm base.\n"
+                "  aligned %d | base %d. They are NOT pooled: the base arm "
+                "exists to say whether\n  the effect requires aligned weights, "
+                "and a pooled row cannot answer that."
+                % (sum(1 for v in ARM.values() if v == "aligned"),
+                   sum(1 for v in ARM.values() if v == "base")))
+        EP = {k for k in EP if ARM.get(k) == a.arm}
+        print("SELF-EDGE: model_raw -> model_framed, SAME WEIGHTS.  arm=%s n=%d"
+              % (a.arm, len(EP)))
+    elif a.match_framed or a.frame != "raw":
         #: **THE SAME 45 IN BOTH COLUMNS.** The framed set covers 45 of the 50
         #: pairs, so n=50 beside n=45 differs partly by which labs ship a chat
         #: template. Applied automatically for --frame prefill, since the framed

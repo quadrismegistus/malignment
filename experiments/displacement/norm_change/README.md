@@ -1039,6 +1039,47 @@ rather than whether it happens. A dose-conditional register rise visible only
 under the deployment frame is a claim none of G/G1/G2 tested, and it should be
 registered as its own question rather than read as support for any of them.
 
+## SELF-EDGES (2026-09-04): the frame alone, on the norm scales
+
+`run.py --rule-version 4 --frame self` then `summary.py --frame self --arm ...`.
+`base == aligned`, unframed against framed: nothing changes but the template.
+45 aligned models and 8 base ones, and **`--arm` is REQUIRED** -- the run refuses
+rather than defaulting, because a pooled row cannot answer the only question the
+base arm exists for.
+
+    ALIGNED n=45              MARGINAL           DOSE               verdict
+    k_transgressiveness_z    -0.00674 p<1e-5    -0.21524 p<1e-5    both
+    k_bodily_harm_z          -0.00245 p<1e-5    -0.12887 p<1e-5    both
+    brooke_formality         -0.00765 p<1e-5    +0.01935 p=0.036   both
+
+    BASE n=8                  MARGINAL           DOSE               verdict
+    brysbaert_concreteness   -0.00657 p=0.008   +0.01503 p=0.727   marginal only
+    brooke_formality_z       -0.00122 p=0.016   -0.00470 p=0.727   marginal only
+    k_vulgarity_z            +0.00000 p=0.125   -0.00143 p=1.000   --
+
+**Every dose effect in the base arm is null.** The smallest DOSE p is 0.289, and
+`k_transgressiveness` and `k_bodily_harm` do not appear at all. On the aligned
+arm both are significant at p<1e-5 on both columns.
+
+This reproduces `experiments/displacement/existence`'s dissociation on a
+different instrument: the frame's CONTENT-CONDITIONAL response requires aligned
+weights. What the base arm does show is a small marginal drift in concreteness
+and formality with no dose structure -- the template doing something generic to
+any model. That is the right shape for a control: not a flat zero, an effect
+without direction.
+
+### THE CONTROL IS BELOW THIS FOLDER'S OWN THRESHOLD
+
+`summary.py --min-n` defaults to 10 and the base arm has 8 lineages, so at the
+default **the base table is empty -- every scale filtered**. The rows above
+required `--min-n 8`.
+
+That is not a formality. The threshold exists because a sign test over fewer
+than ten lineages is weak, and the control is being read under it. A null in the
+base arm is therefore consistent with no effect AND with an effect this arm
+cannot resolve, and n=8 is permanent: a base self-edge needs a base with a chat
+template and only 8 exist in the roster.
+
 ### NOT YET DONE
 
 The three-dose agreement table (`dose_agreement.py`) has not been re-run with
