@@ -20,10 +20,26 @@ Declared because the third is the one reported and it was not the first:
   2. PER PROMPT, sexual SHARE of charged words, requiring >=3 charged words on
      both sides. Defined on 17 prompts of 405. Underpowered, p=0.25.
   3. PER PROMPT, the sexual COUNT difference. Defined on every prompt, no
-     threshold. This is what is reported.
+     threshold. **CONFOUNDED** -- full sheds 1.27 more words per prompt overall
+     (221/137, p<1e-4), so a raw count favours it in every category.
+  4. PER PROMPT, the sexual SHARE, requiring only >=1 word on each side rather
+     than >=3 charged words. n=295 of 405. **This is what is reported.**
 
-Aggregation 1 got two of four arms backwards, which is the reason this file
-prints all three rather than the conclusion alone.
+**AGGREGATION 3 IS THE ONE THAT GOT ARMS WRONG, NOT AGGREGATION 1.** On the
+normalised share, 1 and 4 agree on the DIRECTION for all four arms; 1's p-values
+are invalid because of the unit, but its signs were right the whole time. The
+count test manufactured a `no-safety` result that is null on the share, and
+erased the `no-math` / `no-persona` reversals that both other aggregations find.
+This file prints all of them, plus the per-category confound table, because the
+conclusion alone would hide that the reported effect is about a tenth the size
+the count test implied.
+
+AND THE `kind` LABEL IS CONTEXTUAL, NOT LEXICAL. Reading cells shows `said`,
+`spoke`, `told`, `asked` and `gave` rated SEXUAL inside a sexual scene. The
+rating is what the word DOES in its scene, so the claim this file supports is
+about words that advance a sexual reading IN CONTEXT -- not about a sexual
+lexicon. `division_of_labour/removal_rates` uses a blind-built lexical set and is
+the instrument for the lexical version of the question.
 
     python -m experiments.displacement.rate_and_magnitude.how_it_differs
 """
@@ -84,7 +100,44 @@ def main():
                      100 * c["ILLICIT"] / n, n))
         print()
 
-    print("THE REPORTED TEST (AGGREGATION 3). Unit = the prompt.")
+    print("CONFOUND TABLE: the same statistic for EVERY category and the total.")
+    print("If the excess were uniform set inflation, NONE would move too.\n")
+    print("%-12s %9s %9s %9s" % ("category", "mean d", "up/dn", "p"))
+    for cat in ("SEXUAL", "VIOLENT", "COERCIVE", "DEGRADING", "ILLICIT",
+                "NONE", "*TOTAL*"):
+        ds = []
+        for q in hi:
+            k = ix[q].get("kind") or {}
+            A = arms["no-wildchat"][q] - arms["full"][q]
+            F = arms["full"][q] - arms["no-wildchat"][q]
+            if cat == "*TOTAL*":
+                ds.append(len(F) - len(A))
+            else:
+                ds.append(sum(1 for w in F if k.get(w) == cat)
+                          - sum(1 for w in A if k.get(w) == cat))
+        up, dn, pv = sign_test(ds)
+        print("%-12s %9.3f %9s %9.4f"
+              % (cat, sum(ds) / len(ds), "%d/%d" % (up, dn), pv))
+
+    print("\nTHE REPORTED TEST (AGGREGATION 4): SEXUAL as a SHARE of each")
+    print("side's uniquely-shed set. Unit = the prompt. Normalised, so the")
+    print("1.27-word set-size excess above cannot produce it.\n")
+    print("%-12s %7s %10s %9s %9s" % ("arm", "n", "mean d", "up/dn", "p"))
+    for arm, _m in ABLATIONS:
+        ds = []
+        for q in hi:
+            k = ix[q].get("kind") or {}
+            A = list(arms[arm][q] - arms["full"][q])
+            F = list(arms["full"][q] - arms[arm][q])
+            if not A or not F:
+                continue
+            ds.append(sum(1 for w in F if k.get(w) == "SEXUAL") / len(F)
+                      - sum(1 for w in A if k.get(w) == "SEXUAL") / len(A))
+        up, dn, pv = sign_test(ds)
+        print("%-12s %7d %10.4f %9s %9.4f"
+              % (arm, len(ds), sum(ds) / len(ds), "%d/%d" % (up, dn), pv))
+
+    print("\nAGGREGATION 3, CONFOUNDED, kept visible. Unit = the prompt.")
     print("  d = (# SEXUAL uniquely shed by FULL) - (# SEXUAL uniquely shed by ARM)")
     print("  positive d = the full mix targets sexual content MORE than the arm\n")
     print("%-12s %8s %9s %9s %9s" % ("arm", "n(d!=0)", "mean d", "up/dn", "p"))

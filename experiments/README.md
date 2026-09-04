@@ -250,18 +250,20 @@ measuring the aligned arm out of its habitat. `norm_change` and
 `rate_and_magnitude` carry the same contrast; `register_shift` is the one folder
 that has not been asked.
 
-**What the training corpus aims displacement AT is separable from how much it
+**What the training corpus aims displacement AT may be separable from how much it
 moves.** The Tulu 3 SFT ablations are the only leave-one-out suite anybody has
 published, and the archive's `U_ladder` read them on magnitude: every slice costs
 10-12%, `no-safety` costs what `no-math` costs, so **safety data is not what
-produces displacement.** That stands. `displacement/rate_and_magnitude` asks the
-other question and gets a different answer: removing **WildChat** -- the only
-slice that is real logged user traffic -- costs the model its aim at SEXUAL
-content (64/19 prompts, p<1e-4, about 2.8x the next slice), redirecting
-displacement toward violent and coercive words rather than shrinking it. The
-safety corpus does this too, weaker but real (45/16, p=3e-4), which is the first
-place in the campaign it does anything. Math and persona do nothing (31/29,
-34/33). **One family, and no second suite exists in the open-weight world.**
+produces displacement.** That stands, unamended.
+`displacement/rate_and_magnitude` asks what the shed words ARE, and finds the
+sexual share of them tracking the sexual density of the mix that remains: removing
+**WildChat**, the one slice that is real logged user traffic, lowers it (+0.024,
+p=0.027); removing the two non-sexual bulk slices, math and persona, RAISES it
+(-0.092 and -0.086, p=0.003 and 0.001); removing safety does nothing. **Stated at
+low confidence**: 2 to 9 percentage points, one family, post hoc, and the first
+version of this result was a set-size artifact that a confound table killed. It
+makes a corpus prediction nobody has checked -- sexual density high in WildChat,
+low in math and persona -- and `posttraining_corpus_analysis` is where that goes.
 
 ## WHAT THIS PASS FOUND WRONG, 2026-09-02
 
