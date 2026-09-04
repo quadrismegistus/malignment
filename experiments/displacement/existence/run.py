@@ -91,11 +91,41 @@ def measure(save=None, frame="raw", match_framed=False):
     #: is partly population. `--match-framed` runs the RAW contrast restricted
     #: to the framed pairs, which is the only version of raw that can be set
     #: beside the framed result.
-    if match_framed:
+    self_arm = {}
+    if frame == "self":
+        #: **THE FRAME WITH THE WEIGHTS HELD FIXED.** base == aligned, unframed
+        #: against framed: does the TEMPLATE ALONE displace by content?
+        #:
+        #: Two arms, reported SEPARATELY and NEVER pooled. Aligned is 45 -- every
+        #: model in the framed population, so this column spans the same models
+        #: as the raw and framed columns. Base is 8 and that is permanent: a base
+        #: self-edge needs a base with a chat template and only 8 exist.
+        #:
+        #: **THE BASE ARM IS FOR DIRECTION, NEVER A RATIO.** Those 8 are the
+        #: strangest template cases in the roster -- Qwen ships base templates
+        #: deliberately, neo_7b and Tanuki carry templates byte-identical to
+        #: their aligned siblings, llama-7b renders Llama-2 format on a Llama-1
+        #: model that never saw it. Three of eight arguably measure "the wrong
+        #: template applied", which would inflate the control.
+        #:
+        #: The framed base cells are VALID -- conservation 1.0, mojibake ~0 on
+        #: all 8 -- but every base loses 10-26% of its candidate words under the
+        #: frame, so the control is a NARROWER distribution and not a clean
+        #: null. Read it beside its own n_words.
+        from malignment import movement as M
+        al = set(eps.values())
+        ba = set(eps)
+        mode_of = {(b, a): m for b, a, m in
+                   M.clean_frame_pairs(self_edges="only")}
+        eps = {}
+        for (b, a) in mode_of:
+            eps[b] = a
+            self_arm[b] = "aligned" if b in al else ("base" if b in ba else "?")
+    elif match_framed:
         from malignment import movement as M
         keep = {(b, a) for b, a, _ in M.clean_frame_pairs() if eps.get(b) == a}
         eps = {b: a for b, a in eps.items() if (b, a) in keep}
-    if frame != "raw":
+    if frame == "prefill":
         from malignment import movement as M
         mode_of = {(b, a): m for b, a, m in M.clean_frame_pairs()
                    if eps.get(b) == a}
@@ -109,9 +139,16 @@ def measure(save=None, frame="raw", match_framed=False):
         base_of[key] = b
 
     print("EXISTENCE: does a word's transgressive charge predict its displacement?")
-    print("%d endpoint lineages, per-cell slope of delta ~ scene  [frame=%s]"
-          % (len(eps), frame))
-    if frame != "raw":
+    print("%d %s, per-cell slope of delta ~ scene  [frame=%s]"
+          % (len(eps), "self-edges" if frame == "self" else "endpoint lineages",
+             frame))
+    if frame == "self":
+        import collections as _c
+        c = _c.Counter(self_arm.values())
+        print("SELF-EDGE: model_raw -> model_framed, SAME WEIGHTS."
+              "  aligned %d | base %d (control: direction only, n_words falls "
+              "10-26%% under the frame)" % (c.get("aligned", 0), c.get("base", 0)))
+    elif frame != "raw":
         print("base_raw -> aligned_framed, clean system slot only")
     print()
 
@@ -183,6 +220,27 @@ def measure(save=None, frame="raw", match_framed=False):
     print("  %-40s %.6f" % ("sign test p:", p))
     print("  %-40s %+.6f" % ("grand median slope:", grand_med))
     print()
+
+    #: **THE TWO SELF-EDGE ARMS ARE NEVER POOLED.** RH, 2026-09-04. The pooled
+    #: figure above mixes 45 aligned models with 8 base ones, and the whole point
+    #: of the base arm is to say whether content-selectivity under the frame is
+    #: specific to aligned weights. Pooled, it cannot: a strong aligned signal
+    #: carries a null base one to a significant total, which is the shape of an
+    #: answer that has assumed its own conclusion.
+    if self_arm:
+        print("  BY ARM -- reported separately, NEVER pooled")
+        for want in ("aligned", "base"):
+            vs = [v for lin, v in med_slopes.items()
+                  if self_arm.get(base_of.get(lin, ""), "?") == want]
+            if not vs:
+                continue
+            nn = sum(1 for v in vs if v < 0)
+            pp = sum(1 for v in vs if v > 0)
+            print("    %-8s n=%-3d %2d neg / %2d pos   p=%-9.6f med=%+.6f%s"
+                  % (want, len(vs), nn, pp, binom(min(nn, pp), nn + pp),
+                     st.median(vs),
+                     "   <- direction only, n=8 ceiling" if want == "base" else ""))
+        print()
 
     if neg > pos:
         print("  NEGATIVE: higher-scene words lose more mass under alignment.")
@@ -381,7 +439,7 @@ def main(argv=None):
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--save", default=None,
                     help="write per-lineage results to this JSON file")
-    ap.add_argument("--frame", default="raw", choices=("raw", "prefill"),
+    ap.add_argument("--frame", default="raw", choices=("raw", "prefill", "self"),
                     help="raw: base_raw -> aligned_raw, 50 pairs. prefill: "
                          "base_raw -> aligned_framed on the pairs whose system "
                          "slot was empty as measured. The two are DIFFERENT "

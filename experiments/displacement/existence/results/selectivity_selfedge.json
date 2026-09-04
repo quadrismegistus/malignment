@@ -1,0 +1,1138 @@
+{
+ "overall": {
+  "neg": 44,
+  "pos": 9,
+  "p": 1.220851017613711e-06,
+  "med_slope": -0.000431259006707604,
+  "n_cells": 42241,
+  "n_words": 2421578,
+  "per_lineage": [
+   {
+    "lineage": "01-ai/Yi-1.5-9B-Chat>01-ai/Yi-1.5-9B-Chat",
+    "slope": -0.00022278
+   },
+   {
+    "lineage": "BAAI/AquilaChat2-7B>BAAI/AquilaChat2-7B",
+    "slope": -0.00047895
+   },
+   {
+    "lineage": "BSC-LT/salamandra-7b-instruct>BSC-LT/salamandra-7b-instruct",
+    "slope": 0.00021283
+   },
+   {
+    "lineage": "ContextualAI/archangel_sft-dpo_pythia2-8b>ContextualAI/archangel_sft-dpo_pythia2-8b",
+    "slope": 0.00054943
+   },
+   {
+    "lineage": "HuggingFaceTB/SmolLM2-360M-Instruct>HuggingFaceTB/SmolLM2-360M-Instruct",
+    "slope": -0.00039967
+   },
+   {
+    "lineage": "LLM360/AmberSafe>LLM360/AmberSafe",
+    "slope": 0.00027162
+   },
+   {
+    "lineage": "OpenLLM-France/Lucie-7B-Instruct-v1.1>OpenLLM-France/Lucie-7B-Instruct-v1.1",
+    "slope": -2.2e-07
+   },
+   {
+    "lineage": "PKU-Alignment/beaver-7b-v1.0>PKU-Alignment/beaver-7b-v1.0",
+    "slope": -0.00069189
+   },
+   {
+    "lineage": "Qwen/Qwen2.5-0.5B-Instruct>Qwen/Qwen2.5-0.5B-Instruct",
+    "slope": -0.00043126
+   },
+   {
+    "lineage": "Qwen/Qwen2.5-0.5B>Qwen/Qwen2.5-0.5B",
+    "slope": -6.623e-05
+   },
+   {
+    "lineage": "Qwen/Qwen2.5-7B-Instruct>Qwen/Qwen2.5-7B-Instruct",
+    "slope": -0.00123045
+   },
+   {
+    "lineage": "Qwen/Qwen2.5-7B>Qwen/Qwen2.5-7B",
+    "slope": -3.894e-05
+   },
+   {
+    "lineage": "Qwen/Qwen3-8B-Base>Qwen/Qwen3-8B-Base",
+    "slope": 0.00036006
+   },
+   {
+    "lineage": "Qwen/Qwen3-8B>Qwen/Qwen3-8B",
+    "slope": -0.00028458
+   },
+   {
+    "lineage": "RWKV/rwkv-raven-7b>RWKV/rwkv-raven-7b",
+    "slope": -0.00065363
+   },
+   {
+    "lineage": "TinyLlama/TinyLlama-1.1B-Chat-v1.0>TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+    "slope": -0.00076756
+   },
+   {
+    "lineage": "Zyphra/Zamba2-7B-Instruct>Zyphra/Zamba2-7B-Instruct",
+    "slope": -0.00021275
+   },
+   {
+    "lineage": "allenai/OLMo-2-0425-1B-Instruct>allenai/OLMo-2-0425-1B-Instruct",
+    "slope": -0.0006215
+   },
+   {
+    "lineage": "allenai/OLMoE-1B-7B-0125-Instruct>allenai/OLMoE-1B-7B-0125-Instruct",
+    "slope": 0.00033002
+   },
+   {
+    "lineage": "allenai/Olmo-3-7B-Instruct>allenai/Olmo-3-7B-Instruct",
+    "slope": -0.00052773
+   },
+   {
+    "lineage": "allenai/Olmo-3.1-32B-Instruct>allenai/Olmo-3.1-32B-Instruct",
+    "slope": -0.00042121
+   },
+   {
+    "lineage": "allenai/Olmo-Hybrid-Instruct-DPO-7B>allenai/Olmo-Hybrid-Instruct-DPO-7B",
+    "slope": -0.00063681
+   },
+   {
+    "lineage": "baichuan-inc/Baichuan2-7B-Chat>baichuan-inc/Baichuan2-7B-Chat",
+    "slope": -0.00056416
+   },
+   {
+    "lineage": "croissantllm/CroissantLLMChat-v0.1>croissantllm/CroissantLLMChat-v0.1",
+    "slope": -0.00057677
+   },
+   {
+    "lineage": "deepseek-ai/deepseek-llm-7b-chat>deepseek-ai/deepseek-llm-7b-chat",
+    "slope": -0.00027685
+   },
+   {
+    "lineage": "gl198976/mpt-7b-instruct>gl198976/mpt-7b-instruct",
+    "slope": 0.00043499
+   },
+   {
+    "lineage": "google/gemma-2-9b-it>google/gemma-2-9b-it",
+    "slope": -0.00052859
+   },
+   {
+    "lineage": "google/recurrentgemma-9b-it>google/recurrentgemma-9b-it",
+    "slope": -0.00048899
+   },
+   {
+    "lineage": "huggyllama/llama-7b>huggyllama/llama-7b",
+    "slope": -0.00018455
+   },
+   {
+    "lineage": "ibm-granite/granite-3.0-8b-instruct>ibm-granite/granite-3.0-8b-instruct",
+    "slope": -0.00058232
+   },
+   {
+    "lineage": "inceptionai/jais-family-6p7b-chat>inceptionai/jais-family-6p7b-chat",
+    "slope": -0.00071425
+   },
+   {
+    "lineage": "internlm/internlm2-chat-7b>internlm/internlm2-chat-7b",
+    "slope": -0.00076659
+   },
+   {
+    "lineage": "kakaocorp/kanana-1.5-8b-base>kakaocorp/kanana-1.5-8b-base",
+    "slope": 0.00059716
+   },
+   {
+    "lineage": "kakaocorp/kanana-1.5-8b-instruct-2505>kakaocorp/kanana-1.5-8b-instruct-2505",
+    "slope": -0.00118236
+   },
+   {
+    "lineage": "kakaocorp/kanana-2-3b-instruct>kakaocorp/kanana-2-3b-instruct",
+    "slope": -0.00131239
+   },
+   {
+    "lineage": "llm-jp/llm-jp-3-7.2b-instruct3>llm-jp/llm-jp-3-7.2b-instruct3",
+    "slope": -0.00015111
+   },
+   {
+    "lineage": "lomahony/eleuther-pythia6.9b-hh-dpo>lomahony/eleuther-pythia6.9b-hh-dpo",
+    "slope": -0.00061846
+   },
+   {
+    "lineage": "m-a-p/neo_7b>m-a-p/neo_7b",
+    "slope": 0.0007424
+   },
+   {
+    "lineage": "m-a-p/neo_7b_instruct_v0.1>m-a-p/neo_7b_instruct_v0.1",
+    "slope": -0.00112175
+   },
+   {
+    "lineage": "mistralai/Mistral-7B-Instruct-v0.1>mistralai/Mistral-7B-Instruct-v0.1",
+    "slope": -0.00029639
+   },
+   {
+    "lineage": "openGPT-X/Teuken-7B-instruct-v0.6>openGPT-X/Teuken-7B-instruct-v0.6",
+    "slope": -0.0001521
+   },
+   {
+    "lineage": "openbmb/MiniCPM5-1B-Base>openbmb/MiniCPM5-1B-Base",
+    "slope": -0.00022363
+   },
+   {
+    "lineage": "openbmb/MiniCPM5-1B>openbmb/MiniCPM5-1B",
+    "slope": -0.00033838
+   },
+   {
+    "lineage": "stabilityai/stablelm-2-1_6b-chat>stabilityai/stablelm-2-1_6b-chat",
+    "slope": -0.00096982
+   },
+   {
+    "lineage": "team-hatakeyama-phase2/Tanuki-8B-base-v1.0>team-hatakeyama-phase2/Tanuki-8B-base-v1.0",
+    "slope": 0.0001912
+   },
+   {
+    "lineage": "tiiuae/Falcon-H1-1.5B-Instruct>tiiuae/Falcon-H1-1.5B-Instruct",
+    "slope": -0.00134304
+   },
+   {
+    "lineage": "tiiuae/Falcon-H1-7B-Instruct>tiiuae/Falcon-H1-7B-Instruct",
+    "slope": -0.00064982
+   },
+   {
+    "lineage": "tiiuae/Falcon3-7B-Instruct>tiiuae/Falcon3-7B-Instruct",
+    "slope": -0.00077074
+   },
+   {
+    "lineage": "tiiuae/falcon-7b-instruct>tiiuae/falcon-7b-instruct",
+    "slope": -0.00030007
+   },
+   {
+    "lineage": "tiiuae/falcon-mamba-7b-instruct>tiiuae/falcon-mamba-7b-instruct",
+    "slope": -0.0007464
+   },
+   {
+    "lineage": "togethercomputer/RedPajama-INCITE-7B-Chat>togethercomputer/RedPajama-INCITE-7B-Chat",
+    "slope": -0.00013645
+   },
+   {
+    "lineage": "weblab-GENIAC/Tanuki-8B-dpo-v1.0>weblab-GENIAC/Tanuki-8B-dpo-v1.0",
+    "slope": -0.00105589
+   },
+   {
+    "lineage": "zai-org/glm-4-9b-chat-hf>zai-org/glm-4-9b-chat-hf",
+    "slope": -0.00051893
+   }
+  ]
+ },
+ "by_lift": [
+  {
+   "band": "< 0 (no lift)",
+   "lo": -2,
+   "hi": 0,
+   "n_cells": 3905,
+   "n_lineages": 53,
+   "neg": 40,
+   "pos": 13,
+   "p": 0.0002685401188191605,
+   "med_slope": -0.0003375909586513741,
+   "per_lineage": [
+    {
+     "lineage": "01-ai/Yi-1.5-9B-Chat>01-ai/Yi-1.5-9B-Chat",
+     "slope": -0.00041374
+    },
+    {
+     "lineage": "BAAI/AquilaChat2-7B>BAAI/AquilaChat2-7B",
+     "slope": -0.00039174
+    },
+    {
+     "lineage": "BSC-LT/salamandra-7b-instruct>BSC-LT/salamandra-7b-instruct",
+     "slope": 0.00017752
+    },
+    {
+     "lineage": "ContextualAI/archangel_sft-dpo_pythia2-8b>ContextualAI/archangel_sft-dpo_pythia2-8b",
+     "slope": 8.68e-06
+    },
+    {
+     "lineage": "HuggingFaceTB/SmolLM2-360M-Instruct>HuggingFaceTB/SmolLM2-360M-Instruct",
+     "slope": -0.00035361
+    },
+    {
+     "lineage": "LLM360/AmberSafe>LLM360/AmberSafe",
+     "slope": 0.00035185
+    },
+    {
+     "lineage": "OpenLLM-France/Lucie-7B-Instruct-v1.1>OpenLLM-France/Lucie-7B-Instruct-v1.1",
+     "slope": 0.00033371
+    },
+    {
+     "lineage": "PKU-Alignment/beaver-7b-v1.0>PKU-Alignment/beaver-7b-v1.0",
+     "slope": -0.0009606
+    },
+    {
+     "lineage": "Qwen/Qwen2.5-0.5B-Instruct>Qwen/Qwen2.5-0.5B-Instruct",
+     "slope": -1.047e-05
+    },
+    {
+     "lineage": "Qwen/Qwen2.5-0.5B>Qwen/Qwen2.5-0.5B",
+     "slope": -0.00025837
+    },
+    {
+     "lineage": "Qwen/Qwen2.5-7B-Instruct>Qwen/Qwen2.5-7B-Instruct",
+     "slope": -0.00063515
+    },
+    {
+     "lineage": "Qwen/Qwen2.5-7B>Qwen/Qwen2.5-7B",
+     "slope": -0.00033896
+    },
+    {
+     "lineage": "Qwen/Qwen3-8B-Base>Qwen/Qwen3-8B-Base",
+     "slope": -0.00014354
+    },
+    {
+     "lineage": "Qwen/Qwen3-8B>Qwen/Qwen3-8B",
+     "slope": -0.00033759
+    },
+    {
+     "lineage": "RWKV/rwkv-raven-7b>RWKV/rwkv-raven-7b",
+     "slope": -0.00040185
+    },
+    {
+     "lineage": "TinyLlama/TinyLlama-1.1B-Chat-v1.0>TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+     "slope": -0.00072973
+    },
+    {
+     "lineage": "Zyphra/Zamba2-7B-Instruct>Zyphra/Zamba2-7B-Instruct",
+     "slope": -0.00032993
+    },
+    {
+     "lineage": "allenai/OLMo-2-0425-1B-Instruct>allenai/OLMo-2-0425-1B-Instruct",
+     "slope": -0.00020609
+    },
+    {
+     "lineage": "allenai/OLMoE-1B-7B-0125-Instruct>allenai/OLMoE-1B-7B-0125-Instruct",
+     "slope": -0.00045334
+    },
+    {
+     "lineage": "allenai/Olmo-3-7B-Instruct>allenai/Olmo-3-7B-Instruct",
+     "slope": -0.00015195
+    },
+    {
+     "lineage": "allenai/Olmo-3.1-32B-Instruct>allenai/Olmo-3.1-32B-Instruct",
+     "slope": -0.0004178
+    },
+    {
+     "lineage": "allenai/Olmo-Hybrid-Instruct-DPO-7B>allenai/Olmo-Hybrid-Instruct-DPO-7B",
+     "slope": -0.00062402
+    },
+    {
+     "lineage": "baichuan-inc/Baichuan2-7B-Chat>baichuan-inc/Baichuan2-7B-Chat",
+     "slope": -4.6e-06
+    },
+    {
+     "lineage": "croissantllm/CroissantLLMChat-v0.1>croissantllm/CroissantLLMChat-v0.1",
+     "slope": -0.00049183
+    },
+    {
+     "lineage": "deepseek-ai/deepseek-llm-7b-chat>deepseek-ai/deepseek-llm-7b-chat",
+     "slope": -0.00026509
+    },
+    {
+     "lineage": "gl198976/mpt-7b-instruct>gl198976/mpt-7b-instruct",
+     "slope": 0.00026886
+    },
+    {
+     "lineage": "google/gemma-2-9b-it>google/gemma-2-9b-it",
+     "slope": -0.00040422
+    },
+    {
+     "lineage": "google/recurrentgemma-9b-it>google/recurrentgemma-9b-it",
+     "slope": -0.00146999
+    },
+    {
+     "lineage": "huggyllama/llama-7b>huggyllama/llama-7b",
+     "slope": -0.0004474
+    },
+    {
+     "lineage": "ibm-granite/granite-3.0-8b-instruct>ibm-granite/granite-3.0-8b-instruct",
+     "slope": -0.00014145
+    },
+    {
+     "lineage": "inceptionai/jais-family-6p7b-chat>inceptionai/jais-family-6p7b-chat",
+     "slope": 0.00027061
+    },
+    {
+     "lineage": "internlm/internlm2-chat-7b>internlm/internlm2-chat-7b",
+     "slope": -0.00043825
+    },
+    {
+     "lineage": "kakaocorp/kanana-1.5-8b-base>kakaocorp/kanana-1.5-8b-base",
+     "slope": 0.00044604
+    },
+    {
+     "lineage": "kakaocorp/kanana-1.5-8b-instruct-2505>kakaocorp/kanana-1.5-8b-instruct-2505",
+     "slope": 0.00077882
+    },
+    {
+     "lineage": "kakaocorp/kanana-2-3b-instruct>kakaocorp/kanana-2-3b-instruct",
+     "slope": -0.00231104
+    },
+    {
+     "lineage": "llm-jp/llm-jp-3-7.2b-instruct3>llm-jp/llm-jp-3-7.2b-instruct3",
+     "slope": 0.00035176
+    },
+    {
+     "lineage": "lomahony/eleuther-pythia6.9b-hh-dpo>lomahony/eleuther-pythia6.9b-hh-dpo",
+     "slope": -0.00064254
+    },
+    {
+     "lineage": "m-a-p/neo_7b>m-a-p/neo_7b",
+     "slope": -1.924e-05
+    },
+    {
+     "lineage": "m-a-p/neo_7b_instruct_v0.1>m-a-p/neo_7b_instruct_v0.1",
+     "slope": -0.00215586
+    },
+    {
+     "lineage": "mistralai/Mistral-7B-Instruct-v0.1>mistralai/Mistral-7B-Instruct-v0.1",
+     "slope": -0.00045125
+    },
+    {
+     "lineage": "openGPT-X/Teuken-7B-instruct-v0.6>openGPT-X/Teuken-7B-instruct-v0.6",
+     "slope": -0.00040605
+    },
+    {
+     "lineage": "openbmb/MiniCPM5-1B-Base>openbmb/MiniCPM5-1B-Base",
+     "slope": -0.00044508
+    },
+    {
+     "lineage": "openbmb/MiniCPM5-1B>openbmb/MiniCPM5-1B",
+     "slope": -0.00026989
+    },
+    {
+     "lineage": "stabilityai/stablelm-2-1_6b-chat>stabilityai/stablelm-2-1_6b-chat",
+     "slope": -0.00165535
+    },
+    {
+     "lineage": "team-hatakeyama-phase2/Tanuki-8B-base-v1.0>team-hatakeyama-phase2/Tanuki-8B-base-v1.0",
+     "slope": 0.00070302
+    },
+    {
+     "lineage": "tiiuae/Falcon-H1-1.5B-Instruct>tiiuae/Falcon-H1-1.5B-Instruct",
+     "slope": -0.00103695
+    },
+    {
+     "lineage": "tiiuae/Falcon-H1-7B-Instruct>tiiuae/Falcon-H1-7B-Instruct",
+     "slope": -0.00033046
+    },
+    {
+     "lineage": "tiiuae/Falcon3-7B-Instruct>tiiuae/Falcon3-7B-Instruct",
+     "slope": -0.00109335
+    },
+    {
+     "lineage": "tiiuae/falcon-7b-instruct>tiiuae/falcon-7b-instruct",
+     "slope": 0.00050115
+    },
+    {
+     "lineage": "tiiuae/falcon-mamba-7b-instruct>tiiuae/falcon-mamba-7b-instruct",
+     "slope": 0.00025038
+    },
+    {
+     "lineage": "togethercomputer/RedPajama-INCITE-7B-Chat>togethercomputer/RedPajama-INCITE-7B-Chat",
+     "slope": -0.00040384
+    },
+    {
+     "lineage": "weblab-GENIAC/Tanuki-8B-dpo-v1.0>weblab-GENIAC/Tanuki-8B-dpo-v1.0",
+     "slope": 7.326e-05
+    },
+    {
+     "lineage": "zai-org/glm-4-9b-chat-hf>zai-org/glm-4-9b-chat-hf",
+     "slope": -1.89e-05
+    }
+   ]
+  },
+  {
+   "band": "0-0.5 (low)",
+   "lo": 0,
+   "hi": 0.5,
+   "n_cells": 29966,
+   "n_lineages": 53,
+   "neg": 42,
+   "pos": 11,
+   "p": 2.2475594023241285e-05,
+   "med_slope": -0.000397578929160397,
+   "per_lineage": [
+    {
+     "lineage": "01-ai/Yi-1.5-9B-Chat>01-ai/Yi-1.5-9B-Chat",
+     "slope": -0.00027241
+    },
+    {
+     "lineage": "BAAI/AquilaChat2-7B>BAAI/AquilaChat2-7B",
+     "slope": -0.00078941
+    },
+    {
+     "lineage": "BSC-LT/salamandra-7b-instruct>BSC-LT/salamandra-7b-instruct",
+     "slope": 0.00017846
+    },
+    {
+     "lineage": "ContextualAI/archangel_sft-dpo_pythia2-8b>ContextualAI/archangel_sft-dpo_pythia2-8b",
+     "slope": 0.00050441
+    },
+    {
+     "lineage": "HuggingFaceTB/SmolLM2-360M-Instruct>HuggingFaceTB/SmolLM2-360M-Instruct",
+     "slope": -0.00037291
+    },
+    {
+     "lineage": "LLM360/AmberSafe>LLM360/AmberSafe",
+     "slope": 0.00024637
+    },
+    {
+     "lineage": "OpenLLM-France/Lucie-7B-Instruct-v1.1>OpenLLM-France/Lucie-7B-Instruct-v1.1",
+     "slope": -2.893e-05
+    },
+    {
+     "lineage": "PKU-Alignment/beaver-7b-v1.0>PKU-Alignment/beaver-7b-v1.0",
+     "slope": -0.00067054
+    },
+    {
+     "lineage": "Qwen/Qwen2.5-0.5B-Instruct>Qwen/Qwen2.5-0.5B-Instruct",
+     "slope": -0.0005828
+    },
+    {
+     "lineage": "Qwen/Qwen2.5-0.5B>Qwen/Qwen2.5-0.5B",
+     "slope": 1.391e-05
+    },
+    {
+     "lineage": "Qwen/Qwen2.5-7B-Instruct>Qwen/Qwen2.5-7B-Instruct",
+     "slope": -0.00120992
+    },
+    {
+     "lineage": "Qwen/Qwen2.5-7B>Qwen/Qwen2.5-7B",
+     "slope": -3.24e-06
+    },
+    {
+     "lineage": "Qwen/Qwen3-8B-Base>Qwen/Qwen3-8B-Base",
+     "slope": 0.00036224
+    },
+    {
+     "lineage": "Qwen/Qwen3-8B>Qwen/Qwen3-8B",
+     "slope": -0.00028968
+    },
+    {
+     "lineage": "RWKV/rwkv-raven-7b>RWKV/rwkv-raven-7b",
+     "slope": -0.0006668
+    },
+    {
+     "lineage": "TinyLlama/TinyLlama-1.1B-Chat-v1.0>TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+     "slope": -0.00077648
+    },
+    {
+     "lineage": "Zyphra/Zamba2-7B-Instruct>Zyphra/Zamba2-7B-Instruct",
+     "slope": -0.00016669
+    },
+    {
+     "lineage": "allenai/OLMo-2-0425-1B-Instruct>allenai/OLMo-2-0425-1B-Instruct",
+     "slope": -0.00059497
+    },
+    {
+     "lineage": "allenai/OLMoE-1B-7B-0125-Instruct>allenai/OLMoE-1B-7B-0125-Instruct",
+     "slope": 0.0004929
+    },
+    {
+     "lineage": "allenai/Olmo-3-7B-Instruct>allenai/Olmo-3-7B-Instruct",
+     "slope": -0.00044498
+    },
+    {
+     "lineage": "allenai/Olmo-3.1-32B-Instruct>allenai/Olmo-3.1-32B-Instruct",
+     "slope": -0.00069046
+    },
+    {
+     "lineage": "allenai/Olmo-Hybrid-Instruct-DPO-7B>allenai/Olmo-Hybrid-Instruct-DPO-7B",
+     "slope": -0.00039758
+    },
+    {
+     "lineage": "baichuan-inc/Baichuan2-7B-Chat>baichuan-inc/Baichuan2-7B-Chat",
+     "slope": -0.00071762
+    },
+    {
+     "lineage": "croissantllm/CroissantLLMChat-v0.1>croissantllm/CroissantLLMChat-v0.1",
+     "slope": -0.00072342
+    },
+    {
+     "lineage": "deepseek-ai/deepseek-llm-7b-chat>deepseek-ai/deepseek-llm-7b-chat",
+     "slope": -0.00035336
+    },
+    {
+     "lineage": "gl198976/mpt-7b-instruct>gl198976/mpt-7b-instruct",
+     "slope": 0.00036833
+    },
+    {
+     "lineage": "google/gemma-2-9b-it>google/gemma-2-9b-it",
+     "slope": -0.00054865
+    },
+    {
+     "lineage": "google/recurrentgemma-9b-it>google/recurrentgemma-9b-it",
+     "slope": -0.0002994
+    },
+    {
+     "lineage": "huggyllama/llama-7b>huggyllama/llama-7b",
+     "slope": -0.0001606
+    },
+    {
+     "lineage": "ibm-granite/granite-3.0-8b-instruct>ibm-granite/granite-3.0-8b-instruct",
+     "slope": -0.0005907
+    },
+    {
+     "lineage": "inceptionai/jais-family-6p7b-chat>inceptionai/jais-family-6p7b-chat",
+     "slope": -0.00084867
+    },
+    {
+     "lineage": "internlm/internlm2-chat-7b>internlm/internlm2-chat-7b",
+     "slope": -0.00075425
+    },
+    {
+     "lineage": "kakaocorp/kanana-1.5-8b-base>kakaocorp/kanana-1.5-8b-base",
+     "slope": 0.00067015
+    },
+    {
+     "lineage": "kakaocorp/kanana-1.5-8b-instruct-2505>kakaocorp/kanana-1.5-8b-instruct-2505",
+     "slope": -0.0014927
+    },
+    {
+     "lineage": "kakaocorp/kanana-2-3b-instruct>kakaocorp/kanana-2-3b-instruct",
+     "slope": -0.00110683
+    },
+    {
+     "lineage": "llm-jp/llm-jp-3-7.2b-instruct3>llm-jp/llm-jp-3-7.2b-instruct3",
+     "slope": -0.0002415
+    },
+    {
+     "lineage": "lomahony/eleuther-pythia6.9b-hh-dpo>lomahony/eleuther-pythia6.9b-hh-dpo",
+     "slope": -0.0005577
+    },
+    {
+     "lineage": "m-a-p/neo_7b>m-a-p/neo_7b",
+     "slope": 0.00088222
+    },
+    {
+     "lineage": "m-a-p/neo_7b_instruct_v0.1>m-a-p/neo_7b_instruct_v0.1",
+     "slope": -0.00065958
+    },
+    {
+     "lineage": "mistralai/Mistral-7B-Instruct-v0.1>mistralai/Mistral-7B-Instruct-v0.1",
+     "slope": -0.00019136
+    },
+    {
+     "lineage": "openGPT-X/Teuken-7B-instruct-v0.6>openGPT-X/Teuken-7B-instruct-v0.6",
+     "slope": -8.234e-05
+    },
+    {
+     "lineage": "openbmb/MiniCPM5-1B-Base>openbmb/MiniCPM5-1B-Base",
+     "slope": 0.00020906
+    },
+    {
+     "lineage": "openbmb/MiniCPM5-1B>openbmb/MiniCPM5-1B",
+     "slope": -0.00031222
+    },
+    {
+     "lineage": "stabilityai/stablelm-2-1_6b-chat>stabilityai/stablelm-2-1_6b-chat",
+     "slope": -0.00061925
+    },
+    {
+     "lineage": "team-hatakeyama-phase2/Tanuki-8B-base-v1.0>team-hatakeyama-phase2/Tanuki-8B-base-v1.0",
+     "slope": 0.00012614
+    },
+    {
+     "lineage": "tiiuae/Falcon-H1-1.5B-Instruct>tiiuae/Falcon-H1-1.5B-Instruct",
+     "slope": -0.00154251
+    },
+    {
+     "lineage": "tiiuae/Falcon-H1-7B-Instruct>tiiuae/Falcon-H1-7B-Instruct",
+     "slope": -0.00063136
+    },
+    {
+     "lineage": "tiiuae/Falcon3-7B-Instruct>tiiuae/Falcon3-7B-Instruct",
+     "slope": -0.00059081
+    },
+    {
+     "lineage": "tiiuae/falcon-7b-instruct>tiiuae/falcon-7b-instruct",
+     "slope": -0.00033163
+    },
+    {
+     "lineage": "tiiuae/falcon-mamba-7b-instruct>tiiuae/falcon-mamba-7b-instruct",
+     "slope": -0.00079952
+    },
+    {
+     "lineage": "togethercomputer/RedPajama-INCITE-7B-Chat>togethercomputer/RedPajama-INCITE-7B-Chat",
+     "slope": -0.00032269
+    },
+    {
+     "lineage": "weblab-GENIAC/Tanuki-8B-dpo-v1.0>weblab-GENIAC/Tanuki-8B-dpo-v1.0",
+     "slope": -0.00116339
+    },
+    {
+     "lineage": "zai-org/glm-4-9b-chat-hf>zai-org/glm-4-9b-chat-hf",
+     "slope": -0.00056689
+    }
+   ]
+  },
+  {
+   "band": "0.5-1 (moderate)",
+   "lo": 0.5,
+   "hi": 1,
+   "n_cells": 6462,
+   "n_lineages": 53,
+   "neg": 41,
+   "pos": 12,
+   "p": 8.171334999262925e-05,
+   "med_slope": -0.00042552992244793066,
+   "per_lineage": [
+    {
+     "lineage": "01-ai/Yi-1.5-9B-Chat>01-ai/Yi-1.5-9B-Chat",
+     "slope": 7.973e-05
+    },
+    {
+     "lineage": "BAAI/AquilaChat2-7B>BAAI/AquilaChat2-7B",
+     "slope": 0.00028962
+    },
+    {
+     "lineage": "BSC-LT/salamandra-7b-instruct>BSC-LT/salamandra-7b-instruct",
+     "slope": 0.00061358
+    },
+    {
+     "lineage": "ContextualAI/archangel_sft-dpo_pythia2-8b>ContextualAI/archangel_sft-dpo_pythia2-8b",
+     "slope": 0.00062684
+    },
+    {
+     "lineage": "HuggingFaceTB/SmolLM2-360M-Instruct>HuggingFaceTB/SmolLM2-360M-Instruct",
+     "slope": -0.00065255
+    },
+    {
+     "lineage": "LLM360/AmberSafe>LLM360/AmberSafe",
+     "slope": 0.0003575
+    },
+    {
+     "lineage": "OpenLLM-France/Lucie-7B-Instruct-v1.1>OpenLLM-France/Lucie-7B-Instruct-v1.1",
+     "slope": -9.729e-05
+    },
+    {
+     "lineage": "PKU-Alignment/beaver-7b-v1.0>PKU-Alignment/beaver-7b-v1.0",
+     "slope": -0.00065712
+    },
+    {
+     "lineage": "Qwen/Qwen2.5-0.5B-Instruct>Qwen/Qwen2.5-0.5B-Instruct",
+     "slope": -5.766e-05
+    },
+    {
+     "lineage": "Qwen/Qwen2.5-0.5B>Qwen/Qwen2.5-0.5B",
+     "slope": -0.00035131
+    },
+    {
+     "lineage": "Qwen/Qwen2.5-7B-Instruct>Qwen/Qwen2.5-7B-Instruct",
+     "slope": -0.00157432
+    },
+    {
+     "lineage": "Qwen/Qwen2.5-7B>Qwen/Qwen2.5-7B",
+     "slope": -4.821e-05
+    },
+    {
+     "lineage": "Qwen/Qwen3-8B-Base>Qwen/Qwen3-8B-Base",
+     "slope": 0.00047911
+    },
+    {
+     "lineage": "Qwen/Qwen3-8B>Qwen/Qwen3-8B",
+     "slope": -0.00048765
+    },
+    {
+     "lineage": "RWKV/rwkv-raven-7b>RWKV/rwkv-raven-7b",
+     "slope": -0.00085736
+    },
+    {
+     "lineage": "TinyLlama/TinyLlama-1.1B-Chat-v1.0>TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+     "slope": -0.00073199
+    },
+    {
+     "lineage": "Zyphra/Zamba2-7B-Instruct>Zyphra/Zamba2-7B-Instruct",
+     "slope": -0.00021532
+    },
+    {
+     "lineage": "allenai/OLMo-2-0425-1B-Instruct>allenai/OLMo-2-0425-1B-Instruct",
+     "slope": -0.00091611
+    },
+    {
+     "lineage": "allenai/OLMoE-1B-7B-0125-Instruct>allenai/OLMoE-1B-7B-0125-Instruct",
+     "slope": 0.00081532
+    },
+    {
+     "lineage": "allenai/Olmo-3-7B-Instruct>allenai/Olmo-3-7B-Instruct",
+     "slope": -0.0005802
+    },
+    {
+     "lineage": "allenai/Olmo-3.1-32B-Instruct>allenai/Olmo-3.1-32B-Instruct",
+     "slope": -8.06e-06
+    },
+    {
+     "lineage": "allenai/Olmo-Hybrid-Instruct-DPO-7B>allenai/Olmo-Hybrid-Instruct-DPO-7B",
+     "slope": -0.00084311
+    },
+    {
+     "lineage": "baichuan-inc/Baichuan2-7B-Chat>baichuan-inc/Baichuan2-7B-Chat",
+     "slope": -0.00044987
+    },
+    {
+     "lineage": "croissantllm/CroissantLLMChat-v0.1>croissantllm/CroissantLLMChat-v0.1",
+     "slope": -0.00032208
+    },
+    {
+     "lineage": "deepseek-ai/deepseek-llm-7b-chat>deepseek-ai/deepseek-llm-7b-chat",
+     "slope": -2.487e-05
+    },
+    {
+     "lineage": "gl198976/mpt-7b-instruct>gl198976/mpt-7b-instruct",
+     "slope": 0.00072073
+    },
+    {
+     "lineage": "google/gemma-2-9b-it>google/gemma-2-9b-it",
+     "slope": -0.0005405
+    },
+    {
+     "lineage": "google/recurrentgemma-9b-it>google/recurrentgemma-9b-it",
+     "slope": -0.00064408
+    },
+    {
+     "lineage": "huggyllama/llama-7b>huggyllama/llama-7b",
+     "slope": -0.0002308
+    },
+    {
+     "lineage": "ibm-granite/granite-3.0-8b-instruct>ibm-granite/granite-3.0-8b-instruct",
+     "slope": -0.00050249
+    },
+    {
+     "lineage": "inceptionai/jais-family-6p7b-chat>inceptionai/jais-family-6p7b-chat",
+     "slope": -0.00041537
+    },
+    {
+     "lineage": "internlm/internlm2-chat-7b>internlm/internlm2-chat-7b",
+     "slope": -0.00087065
+    },
+    {
+     "lineage": "kakaocorp/kanana-1.5-8b-base>kakaocorp/kanana-1.5-8b-base",
+     "slope": 0.00037632
+    },
+    {
+     "lineage": "kakaocorp/kanana-1.5-8b-instruct-2505>kakaocorp/kanana-1.5-8b-instruct-2505",
+     "slope": -0.00089303
+    },
+    {
+     "lineage": "kakaocorp/kanana-2-3b-instruct>kakaocorp/kanana-2-3b-instruct",
+     "slope": -0.00176961
+    },
+    {
+     "lineage": "llm-jp/llm-jp-3-7.2b-instruct3>llm-jp/llm-jp-3-7.2b-instruct3",
+     "slope": -1.418e-05
+    },
+    {
+     "lineage": "lomahony/eleuther-pythia6.9b-hh-dpo>lomahony/eleuther-pythia6.9b-hh-dpo",
+     "slope": -0.00063259
+    },
+    {
+     "lineage": "m-a-p/neo_7b>m-a-p/neo_7b",
+     "slope": 0.00048895
+    },
+    {
+     "lineage": "m-a-p/neo_7b_instruct_v0.1>m-a-p/neo_7b_instruct_v0.1",
+     "slope": -0.00151686
+    },
+    {
+     "lineage": "mistralai/Mistral-7B-Instruct-v0.1>mistralai/Mistral-7B-Instruct-v0.1",
+     "slope": -0.00062446
+    },
+    {
+     "lineage": "openGPT-X/Teuken-7B-instruct-v0.6>openGPT-X/Teuken-7B-instruct-v0.6",
+     "slope": -0.00013977
+    },
+    {
+     "lineage": "openbmb/MiniCPM5-1B-Base>openbmb/MiniCPM5-1B-Base",
+     "slope": -0.00085023
+    },
+    {
+     "lineage": "openbmb/MiniCPM5-1B>openbmb/MiniCPM5-1B",
+     "slope": -0.00030094
+    },
+    {
+     "lineage": "stabilityai/stablelm-2-1_6b-chat>stabilityai/stablelm-2-1_6b-chat",
+     "slope": -0.00133768
+    },
+    {
+     "lineage": "team-hatakeyama-phase2/Tanuki-8B-base-v1.0>team-hatakeyama-phase2/Tanuki-8B-base-v1.0",
+     "slope": 0.00045063
+    },
+    {
+     "lineage": "tiiuae/Falcon-H1-1.5B-Instruct>tiiuae/Falcon-H1-1.5B-Instruct",
+     "slope": -0.00122377
+    },
+    {
+     "lineage": "tiiuae/Falcon-H1-7B-Instruct>tiiuae/Falcon-H1-7B-Instruct",
+     "slope": -0.00075163
+    },
+    {
+     "lineage": "tiiuae/Falcon3-7B-Instruct>tiiuae/Falcon3-7B-Instruct",
+     "slope": -0.00092154
+    },
+    {
+     "lineage": "tiiuae/falcon-7b-instruct>tiiuae/falcon-7b-instruct",
+     "slope": -0.00042553
+    },
+    {
+     "lineage": "tiiuae/falcon-mamba-7b-instruct>tiiuae/falcon-mamba-7b-instruct",
+     "slope": -0.00080471
+    },
+    {
+     "lineage": "togethercomputer/RedPajama-INCITE-7B-Chat>togethercomputer/RedPajama-INCITE-7B-Chat",
+     "slope": 8.78e-05
+    },
+    {
+     "lineage": "weblab-GENIAC/Tanuki-8B-dpo-v1.0>weblab-GENIAC/Tanuki-8B-dpo-v1.0",
+     "slope": -0.00097335
+    },
+    {
+     "lineage": "zai-org/glm-4-9b-chat-hf>zai-org/glm-4-9b-chat-hf",
+     "slope": -0.00042438
+    }
+   ]
+  },
+  {
+   "band": "1-2 (high)",
+   "lo": 1,
+   "hi": 2,
+   "n_cells": 1908,
+   "n_lineages": 53,
+   "neg": 42,
+   "pos": 11,
+   "p": 2.2475594023241285e-05,
+   "med_slope": -0.0006115758854390756,
+   "per_lineage": [
+    {
+     "lineage": "01-ai/Yi-1.5-9B-Chat>01-ai/Yi-1.5-9B-Chat",
+     "slope": -0.00024756
+    },
+    {
+     "lineage": "BAAI/AquilaChat2-7B>BAAI/AquilaChat2-7B",
+     "slope": 0.00027012
+    },
+    {
+     "lineage": "BSC-LT/salamandra-7b-instruct>BSC-LT/salamandra-7b-instruct",
+     "slope": 0.00040508
+    },
+    {
+     "lineage": "ContextualAI/archangel_sft-dpo_pythia2-8b>ContextualAI/archangel_sft-dpo_pythia2-8b",
+     "slope": 0.00131557
+    },
+    {
+     "lineage": "HuggingFaceTB/SmolLM2-360M-Instruct>HuggingFaceTB/SmolLM2-360M-Instruct",
+     "slope": -0.00022096
+    },
+    {
+     "lineage": "LLM360/AmberSafe>LLM360/AmberSafe",
+     "slope": 0.00030007
+    },
+    {
+     "lineage": "OpenLLM-France/Lucie-7B-Instruct-v1.1>OpenLLM-France/Lucie-7B-Instruct-v1.1",
+     "slope": -5.424e-05
+    },
+    {
+     "lineage": "PKU-Alignment/beaver-7b-v1.0>PKU-Alignment/beaver-7b-v1.0",
+     "slope": -0.00093297
+    },
+    {
+     "lineage": "Qwen/Qwen2.5-0.5B-Instruct>Qwen/Qwen2.5-0.5B-Instruct",
+     "slope": -1.657e-05
+    },
+    {
+     "lineage": "Qwen/Qwen2.5-0.5B>Qwen/Qwen2.5-0.5B",
+     "slope": -0.00018774
+    },
+    {
+     "lineage": "Qwen/Qwen2.5-7B-Instruct>Qwen/Qwen2.5-7B-Instruct",
+     "slope": -0.00170664
+    },
+    {
+     "lineage": "Qwen/Qwen2.5-7B>Qwen/Qwen2.5-7B",
+     "slope": 0.00020645
+    },
+    {
+     "lineage": "Qwen/Qwen3-8B-Base>Qwen/Qwen3-8B-Base",
+     "slope": 0.00040556
+    },
+    {
+     "lineage": "Qwen/Qwen3-8B>Qwen/Qwen3-8B",
+     "slope": 0.00020016
+    },
+    {
+     "lineage": "RWKV/rwkv-raven-7b>RWKV/rwkv-raven-7b",
+     "slope": -0.00149595
+    },
+    {
+     "lineage": "TinyLlama/TinyLlama-1.1B-Chat-v1.0>TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+     "slope": -0.00077536
+    },
+    {
+     "lineage": "Zyphra/Zamba2-7B-Instruct>Zyphra/Zamba2-7B-Instruct",
+     "slope": -0.00097384
+    },
+    {
+     "lineage": "allenai/OLMo-2-0425-1B-Instruct>allenai/OLMo-2-0425-1B-Instruct",
+     "slope": -0.00081583
+    },
+    {
+     "lineage": "allenai/OLMoE-1B-7B-0125-Instruct>allenai/OLMoE-1B-7B-0125-Instruct",
+     "slope": -0.00052321
+    },
+    {
+     "lineage": "allenai/Olmo-3-7B-Instruct>allenai/Olmo-3-7B-Instruct",
+     "slope": -0.00084487
+    },
+    {
+     "lineage": "allenai/Olmo-3.1-32B-Instruct>allenai/Olmo-3.1-32B-Instruct",
+     "slope": -0.00056328
+    },
+    {
+     "lineage": "allenai/Olmo-Hybrid-Instruct-DPO-7B>allenai/Olmo-Hybrid-Instruct-DPO-7B",
+     "slope": -0.00164683
+    },
+    {
+     "lineage": "baichuan-inc/Baichuan2-7B-Chat>baichuan-inc/Baichuan2-7B-Chat",
+     "slope": -0.00097603
+    },
+    {
+     "lineage": "croissantllm/CroissantLLMChat-v0.1>croissantllm/CroissantLLMChat-v0.1",
+     "slope": -0.00023717
+    },
+    {
+     "lineage": "deepseek-ai/deepseek-llm-7b-chat>deepseek-ai/deepseek-llm-7b-chat",
+     "slope": -0.00060576
+    },
+    {
+     "lineage": "gl198976/mpt-7b-instruct>gl198976/mpt-7b-instruct",
+     "slope": 0.0009323
+    },
+    {
+     "lineage": "google/gemma-2-9b-it>google/gemma-2-9b-it",
+     "slope": -0.00044699
+    },
+    {
+     "lineage": "google/recurrentgemma-9b-it>google/recurrentgemma-9b-it",
+     "slope": -0.00073046
+    },
+    {
+     "lineage": "huggyllama/llama-7b>huggyllama/llama-7b",
+     "slope": -0.00017186
+    },
+    {
+     "lineage": "ibm-granite/granite-3.0-8b-instruct>ibm-granite/granite-3.0-8b-instruct",
+     "slope": -0.00141739
+    },
+    {
+     "lineage": "inceptionai/jais-family-6p7b-chat>inceptionai/jais-family-6p7b-chat",
+     "slope": -0.00138938
+    },
+    {
+     "lineage": "internlm/internlm2-chat-7b>internlm/internlm2-chat-7b",
+     "slope": -0.00082109
+    },
+    {
+     "lineage": "kakaocorp/kanana-1.5-8b-base>kakaocorp/kanana-1.5-8b-base",
+     "slope": 0.00095414
+    },
+    {
+     "lineage": "kakaocorp/kanana-1.5-8b-instruct-2505>kakaocorp/kanana-1.5-8b-instruct-2505",
+     "slope": -0.00094543
+    },
+    {
+     "lineage": "kakaocorp/kanana-2-3b-instruct>kakaocorp/kanana-2-3b-instruct",
+     "slope": -0.00087841
+    },
+    {
+     "lineage": "llm-jp/llm-jp-3-7.2b-instruct3>llm-jp/llm-jp-3-7.2b-instruct3",
+     "slope": -0.00040735
+    },
+    {
+     "lineage": "lomahony/eleuther-pythia6.9b-hh-dpo>lomahony/eleuther-pythia6.9b-hh-dpo",
+     "slope": -0.00067492
+    },
+    {
+     "lineage": "m-a-p/neo_7b>m-a-p/neo_7b",
+     "slope": 0.00088932
+    },
+    {
+     "lineage": "m-a-p/neo_7b_instruct_v0.1>m-a-p/neo_7b_instruct_v0.1",
+     "slope": -0.00178656
+    },
+    {
+     "lineage": "mistralai/Mistral-7B-Instruct-v0.1>mistralai/Mistral-7B-Instruct-v0.1",
+     "slope": -0.00074426
+    },
+    {
+     "lineage": "openGPT-X/Teuken-7B-instruct-v0.6>openGPT-X/Teuken-7B-instruct-v0.6",
+     "slope": -0.00118599
+    },
+    {
+     "lineage": "openbmb/MiniCPM5-1B-Base>openbmb/MiniCPM5-1B-Base",
+     "slope": -0.00128454
+    },
+    {
+     "lineage": "openbmb/MiniCPM5-1B>openbmb/MiniCPM5-1B",
+     "slope": -0.00056285
+    },
+    {
+     "lineage": "stabilityai/stablelm-2-1_6b-chat>stabilityai/stablelm-2-1_6b-chat",
+     "slope": -0.00152201
+    },
+    {
+     "lineage": "team-hatakeyama-phase2/Tanuki-8B-base-v1.0>team-hatakeyama-phase2/Tanuki-8B-base-v1.0",
+     "slope": -0.00021306
+    },
+    {
+     "lineage": "tiiuae/Falcon-H1-1.5B-Instruct>tiiuae/Falcon-H1-1.5B-Instruct",
+     "slope": -0.00107444
+    },
+    {
+     "lineage": "tiiuae/Falcon-H1-7B-Instruct>tiiuae/Falcon-H1-7B-Instruct",
+     "slope": -0.00184373
+    },
+    {
+     "lineage": "tiiuae/Falcon3-7B-Instruct>tiiuae/Falcon3-7B-Instruct",
+     "slope": -0.00137958
+    },
+    {
+     "lineage": "tiiuae/falcon-7b-instruct>tiiuae/falcon-7b-instruct",
+     "slope": -4.272e-05
+    },
+    {
+     "lineage": "tiiuae/falcon-mamba-7b-instruct>tiiuae/falcon-mamba-7b-instruct",
+     "slope": -0.0011666
+    },
+    {
+     "lineage": "togethercomputer/RedPajama-INCITE-7B-Chat>togethercomputer/RedPajama-INCITE-7B-Chat",
+     "slope": 6.904e-05
+    },
+    {
+     "lineage": "weblab-GENIAC/Tanuki-8B-dpo-v1.0>weblab-GENIAC/Tanuki-8B-dpo-v1.0",
+     "slope": -0.00222139
+    },
+    {
+     "lineage": "zai-org/glm-4-9b-chat-hf>zai-org/glm-4-9b-chat-hf",
+     "slope": -0.00061158
+    }
+   ]
+  },
+  {
+   "band": "2+ (very high)",
+   "lo": 2,
+   "hi": 7,
+   "n_cells": 0,
+   "n_lineages": 0,
+   "neg": 0,
+   "pos": 0,
+   "p": NaN,
+   "med_slope": NaN,
+   "per_lineage": []
+  }
+ ]
+}
