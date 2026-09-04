@@ -358,3 +358,58 @@ ablation in a noisy column, so nothing is claimed from it, but it is the only
 place in the ladder where an SFT data ablation looks unlike its siblings.
 
 EXPLORATORY. Nothing in this section was registered.
+
+## WHICH SFT DATA: WILDCHAT MAKES THE FRAME EFFECT SMALLER AND SHARPER
+
+`ablation.py`. Tulu-3 ships four leave-one-out SFT checkpoints beside the
+full-mix one: same base, same recipe, one training source removed. Paired within
+prompt over the same 840 prompts, `full mix MINUS the ablated checkpoint`.
+
+    removed       d frame      t   d control      t    d dose      t    d mass      t
+    no-math        -0.183   -1.2      -1.752  -13.6    -0.195   -1.1   -0.0042   -3.2
+    no-persona     -0.501   -3.2      -1.711  -13.3    -0.113   -0.6   -0.0082   -6.4
+    no-safety       0.240    1.4      -1.427  -11.8    -0.038   -0.2    0.0019    1.3
+    no-wildchat     1.396    6.8      -0.842   -4.9    -0.684   -2.8    0.0136    7.6
+
+`frame` is self-edge movers; `control` is the same checkpoint's movers against
+its base with NO frame on either side; `dose` is the fall-rise lift slope;
+`mass` is threshold-free total variation.
+
+**The control is what makes this an experiment.** Every ablation LOWERS it, t
+-4.9 to -13.6: remove training data, the checkpoint moves less off its base.
+That is a uniform downward pressure with nothing to do with frames, and it is
+the null every column has to be read against.
+
+**Only WildChat splits the two columns.** Its removal drops the control like
+everyone else's and RAISES frame responsiveness (+1.40, t=6.8) -- the sole
+ablation whose frame column moves opposite its control. It is also the only one
+whose dose slope clearly falls (-0.684, t=-2.8; the other three are -0.04 to
+-0.20, all null).
+
+So WildChat, which is real logged user-assistant conversation, does not install
+responsiveness to the frame. **It installs the DISCRIMINATION in it.** Trained on
+it, the model revises less under the scene of address and the revision tracks how
+charged the site is. Trained without it, the model revises MORE and the revision
+stops tracking charge: bigger and blunter.
+
+### The threshold artifact is closed
+
+`n_tot` counts words over theta=0.001, fixed and identical across all five
+checkpoints, so a flatter checkpoint piles words near the threshold and inflates
+every count for no frame-related reason. Mass (sum|delta|/2 over ALL candidate
+words, `still` included) reproduces the ordering exactly, no-wildchat largest at
++0.0136 (t=7.6), a 6.4% rise in displaced total variation. Candidate-set sizes
+are 156.1-157.0 across the five, so it is not a wider field either.
+
+### What this cannot be
+
+**One family, one ablation set, no replication available.** Nobody else ships
+leave-one-out SFT checkpoints, so there is no second draw and none is coming.
+The 840 prompts give power WITHIN the comparison and no generality beyond it.
+
+This was also predicted in the wrong direction before it ran -- the guess was
+that removing user-chat data would LOWER frame responsiveness. It raises it. The
+prediction being inverted is recorded because a result that had confirmed the
+guess would have been checked less hard than this one was.
+
+EXPLORATORY. Nothing in this section was registered.
