@@ -154,6 +154,33 @@ VALID_FRAME_COMBOS = {
     ("prefill", "prefill"), # framed -> framed
 }
 
+#: **SELF-EDGES: THE FRAME WITH THE WEIGHTS HELD FIXED.** `base == aligned`,
+#: `frame_base=''`, `frame_aligned='prefill'` -- one model against itself,
+#: unframed against framed. Off by default and built with `--self-edges`.
+#:
+#: Every other contrast confounds the frame with something. `raw->framed` across
+#: an edge moves weights AND frame; `raw->raw` holds the frame at absent. This
+#: isolates it, and it is the only cell that can say what the template does on
+#: its own.
+#:
+#: **IT IS ALSO ITS OWN CONTROL, on the base arm.** `frame_prefill` finding 2
+#: measures the frame moving a base model by -0.019 and its aligned sibling by
+#: +1.279. So a large self-edge on aligned beside a small one on base is the
+#: frame effect being SPECIFIC TO ALIGNED WEIGHTS rather than a property of
+#: adding template tokens. Build both arms or the number cannot be read.
+#:
+#: **`cls` READS ODDLY HERE AND IS LEFT AS IS.** `faller`/`riser` are defined
+#: against a base arm, and the base here is the same model unframed. A faller is
+#: a word the model says LESS when addressed as an assistant. That is the right
+#: quantity and the wrong noun; renaming it per-combination would fork the
+#: vocabulary every consumer already reads. Documented rather than renamed.
+#:
+#: This widens what the table can express, and this file's own rule is that a
+#: schema permitting a nonsensical row eventually holds one ([6560]). The
+#: narrowing is `--self-edges` being opt-in and depth being recorded as 0, so a
+#: query that wants ancestry pairs can exclude them with `depth > 0`.
+SELF_EDGE_DEPTH = 0
+
 #: The graph, at the grain the views need it. Derived from `edges` every run, so
 #: it cannot drift from the roster: it has no independent existence to drift into.
 PAIRS_DDL = """
@@ -176,6 +203,9 @@ def _token_surface_models():
         for m in bad:
             print("     %s  -- re-measure; do not strip the marker" % m)
     return set(bad)
+
+
+_SELF = {"on": False}
 
 
 def buildable():
@@ -225,6 +255,14 @@ def buildable():
                                 "frame_base": "", "frame_aligned": "prefill"})
                     n_cross += 1
         print("  cross-frame pairs (raw->framed): %d" % n_cross)
+        if _SELF["on"]:
+            n_self = 0
+            for m in sorted(have & have_framed):
+                out.append({"base": m, "aligned": m, "relation": "frame",
+                            "depth": SELF_EDGE_DEPTH,
+                            "frame_base": "", "frame_aligned": "prefill"})
+                n_self += 1
+            print("  SELF-EDGES (raw->framed, same weights): %d" % n_self)
     return out
 
 
@@ -363,10 +401,14 @@ def main():
                          "movement_v4. The two tables are NOT comparable and are "
                          "kept separate for that reason.")
     ap.add_argument("--limit", type=int, default=None)
+    ap.add_argument("--self-edges", action="store_true",
+                    help="also build base==aligned raw->framed edges: the frame "
+                         "with the weights held fixed. depth=0, relation='frame'.")
     ap.add_argument("--all", action="store_true",
                     help="recompute every pair, not just missing ones")
     a = ap.parse_args()
     _RV["v"] = a.rule_version
+    _SELF["on"] = bool(getattr(a, "self_edges", False))
     rule = RULES[a.rule]
 
     edges = buildable()

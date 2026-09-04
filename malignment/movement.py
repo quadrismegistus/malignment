@@ -782,11 +782,18 @@ def measured_models(rule_version=4):
             ch.query("SELECT DISTINCT model FROM {db}.%s" % wt)}
 
 
-def measured_pairs(rule_version=4):
-    """Every (base, aligned) present in the movement table."""
+def measured_pairs(rule_version=4, self_edges=False):
+    """Every (base, aligned) present in the movement table.
+
+    Self-edges excluded by default, for the reason in `clean_frame_pairs`: they
+    are framed rows that are not a base->aligned contrast, and adding them
+    changed three accessors' return values without any caller changing.
+    """
     from . import ch
+    where = "" if self_edges else " WHERE base != aligned"
     return {(r["base"], r["aligned"]) for r in
-            ch.query("SELECT DISTINCT base, aligned FROM {db}.%s" % _mvt(rule_version))}
+            ch.query("SELECT DISTINCT base, aligned FROM {db}.%s%s"
+                     % (_mvt(rule_version), where))}
 
 
 def movement_rows(base, aligned, prompt=None, cls=None, min_abs_delta=None,
@@ -844,6 +851,13 @@ def endpoint_movement(cls=None, min_abs_delta=None, prompt=None, limit=None,
 
     Same `frame` semantics as `movement_rows()`. The model population is
     derived from `roster.endpoints()` each call.
+
+    **SELF-EDGES CANNOT REACH THIS.** `produce_movement --self-edges` writes
+    `base == aligned` rows, and a self-pair is never in `roster.endpoints()`, so
+    the `(base, aligned) IN (...)` restriction excludes them by construction
+    rather than by a filter someone has to remember. Stated because the sibling
+    accessors DID need an explicit default, and a reader checking one will want
+    to know why this one did not.
     """
     from . import ch, roster
     from .ch import _lit
@@ -887,8 +901,17 @@ def endpoint_movement(cls=None, min_abs_delta=None, prompt=None, limit=None,
     return ch.query(q)
 
 
-def clean_frame_pairs(rule_version=4):
+def clean_frame_pairs(rule_version=4, self_edges=False):
     """[(base, aligned, system_mode)] framed edges whose SYSTEM SLOT WAS EMPTY.
+
+    **SELF-EDGES ARE EXCLUDED BY DEFAULT.** `produce_movement --self-edges`
+    added `base == aligned` rows -- the frame with the weights held fixed -- and
+    they are framed rows, so this returned 63 the day before and 116 the day
+    after WITHOUT ANY CALLER CHANGING. Every framed result in `existence`,
+    `norm_change` and `summary.py` takes its population from here, so the
+    default has to be the thing those callers already meant.
+
+    `self_edges=True` asks for them; `self_edges="only"` asks for them alone.
 
         for b, a, m in clean_frame_pairs():
             ...
@@ -937,6 +960,12 @@ def clean_frame_pairs(rule_version=4):
             "SELECT DISTINCT base, aligned, system_mode_aligned m FROM {db}.%s "
             "WHERE frame_aligned='prefill'" % _mvt(rule_version)):
         r = rows.get(x["aligned"]) or {}
+        is_self = x["base"] == x["aligned"]
+        if self_edges == "only":
+            if not is_self:
+                continue
+        elif is_self and not self_edges:
+            continue
         slot = (r.get("system_slot") if x["m"] == "default"
                 else r.get("system_slot_empty"))
         if slot == "":
@@ -944,12 +973,18 @@ def clean_frame_pairs(rule_version=4):
     return sorted(out)
 
 
-def movement_pairs_list(rule_version=4):
-    """[(base, aligned, n_rows)] present in the movement table, biggest first."""
+def movement_pairs_list(rule_version=4, self_edges=False):
+    """[(base, aligned, n_rows)] present in the movement table, biggest first.
+
+    Self-edges (`base == aligned`, the frame with weights held fixed) are
+    EXCLUDED by default -- they are not a base->aligned contrast and every
+    existing caller counted pairs without them.
+    """
     from . import ch
+    where = "" if self_edges else " WHERE base != aligned"
     return [(r["base"], r["aligned"], r["n"]) for r in ch.query(
-        "SELECT base, aligned, count() n FROM {db}.%s "
-        "GROUP BY base, aligned ORDER BY n DESC" % _mvt(rule_version))]
+        "SELECT base, aligned, count() n FROM {db}.%s%s "
+        "GROUP BY base, aligned ORDER BY n DESC" % (_mvt(rule_version), where))]
 
 
 # ---------------------------------------------------------------------------
