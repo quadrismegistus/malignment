@@ -3,7 +3,7 @@ subject: existence
 status: RUN 2026-08-30. 50 endpoint lineages, English.
 kind: question
 question: Is alignment's reshaping of word probabilities content-selective, and is it displacement or suppression?
-headline: Displacement exists. Higher-T words lose more mass (43/50 lineages), and freed mass lands preferentially on same-kind words (47/49), not on neutral words. It survives the deployment frame and is 2.8x larger there.
+headline: "Displacement exists. Higher-T words lose more mass (43/50 lineages). Freed mass lands preferentially on same-kind words (47/49) -- but ONLY where the prompt's field is at least a third one kind; where the scene is mostly neutral that is exactly null (24/24). It holds under the deployment frame and is 2.8x larger there."
 ---
 
 # existence
@@ -211,6 +211,47 @@ cell either way, so it moves nothing; it is recorded because a sign count that
 silently changes its denominator between two columns is the thing a reader would
 otherwise take as given.
 
+
+### THE SAME-KIND RESULT IS CONDITIONAL ON WHAT THE PROMPT MAKES AVAILABLE
+
+`saturation.py`. The population guard above requires that a cell have BOTH a
+same-kind and a none-kind riser, so a fully saturated prompt never enters the
+comparison. **But that is a test of PRESENCE, not BALANCE** -- a prompt with 60
+VIOLENT candidates and 3 NONE ones qualifies. Stratifying the same comparison by
+`saturation`, the share of a prompt's rated words carried by its top non-NONE
+kind:
+
+    sat band       lineages   cells   same med   none med   up/dn        p
+    lo <0.33             48    2825    0.00797    0.00804   24/24   1.00000
+    mid .33-.66          49    5068    0.00828    0.00747    45/4   0.00000
+    hi >=0.66            49    6783    0.00789    0.00640    46/3   0.00000
+
+**Where the scene is mostly neutral, the effect is exactly absent** -- 24/24, and
+the two medians agree to three significant figures. It is absence rather than low
+power: 48 lineages and 2,825 cells is not a thin cell, and a real effect at the
+mid band's size would show at that n. Where the field is at least a third one
+kind, same-kind landing is strong and gets stronger.
+
+So freed mass does not seek same-kind targets. **It lands on whatever the prompt
+makes abundant**, and when same-kind material is scarce the behaviour is
+indistinguishable from suppression. That is a second reason the 47/49 is less
+diagnostic than it reads, independent of the first one recorded above (base
+models reproduce it 8/8 with no content-selectivity at all).
+
+**This is not the dose cut in disguise.** Saturation is a FRAME property:
+`corr(saturation, frame) = +0.826` against `corr(saturation, lift) = -0.025`.
+Selecting on lift does not select saturated prompts, so nothing that selects on
+lift inherits this.
+
+AND IT PROBABLY EXPLAINS THE RESPONSE SATURATION `charge.py` RECORDS. That file
+documents dose as the wrong selector because frames rated 5-7 show essentially
+zero response, and `readout_share` §208 puts headroom at -0.05 by frame 6-7. By
+frame band, the share of prompts that are >=75% one kind runs 1%, 33%, 73%, 76%,
+**92%**. A prompt whose whole candidate field is one kind has nothing of another
+kind to move toward. Two descriptions of one fact, reached from opposite ends.
+
+EXPLORATORY. Not registered. The saturation bands are equal-width thirds chosen
+before the numbers were read, but nothing about the cut was pre-declared.
 
 Content-selectivity says alignment targets transgressive words. The next question is WHERE THE FREED MASS GOES. Three hypotheses:
 
