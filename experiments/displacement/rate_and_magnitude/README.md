@@ -414,6 +414,8 @@ Two groups, no overlap. Its summary is **"magnitude normal, direction
 different."** The frame result here is a different quantity on a different edge,
 and it CONVERGES on the same arm. That is corroboration, and it should be quoted
 as the second observation of a known singularity, not the first of a new one.
+**What is new here is the frame edge and the lift-based dose column**, neither of
+which the August work had.
 
 **Three things the prior work already settled**, which this section re-derived
 and should have cited:
@@ -428,25 +430,38 @@ and should have cited:
 - **The slice definitions are sourced**: Tulu 3, arXiv 2411.15124 §4.1/4.3,
   Tables 7 and 10.
 
-**AND THE INTERPRETATION OFFERED ABOVE WAS ALREADY TESTED AND FAILED, on the
-displacement quantity.** §197 anticipated exactly the "WildChat is real user
-prompts, so this is the operation depending on logged human wanting" reading and
-split it by domain: `no-wildchat`'s divergence is **flat** -- neutral 0.3656
-against transgressive 0.3235, a gap of -0.042 sitting mid-range of the other
-arms' -0.038 to -0.059. Its verdict: **"a generally unusual training run, not one
-that differs where desire is at stake."**
+### §197 TESTED THE SAME READING AND ITS NULL IS THE WEAKER INSTRUMENT
 
-So the `d dose` column here (-0.684, t=-2.8) is in TENSION with an established
-result, not merely unreplicated. It is a different outcome (fall-rise against
-continuous lift) on a different edge (the frame self-edge, not base -> aligned),
-so it is not directly refuted -- but the prose above, which reads it as WildChat
-teaching the model *when* address matters, is the same reading §197 killed.
-**Treat it as contested until the direct check runs.**
+§197 anticipated the "WildChat is real user prompts, so this is the operation
+depending on logged human wanting" reading and split `no-wildchat`'s divergence
+by domain: **flat** -- neutral 0.3656 against transgressive 0.3235, a gap of
+-0.042 mid-range of the other arms' -0.038 to -0.059. Its verdict: *"a generally
+unusual training run, not one that differs where desire is at stake."*
 
-THE CHECK THAT WOULD SETTLE IT: replicate §197's neutral-vs-transgressive split
-on the frame quantity here. If `no-wildchat`'s frame elevation is flat across
-that split the way its Jaccard divergence was, then this is the same generally
-unusual training run and the discrimination reading goes.
+**That null rests on a binary neutral-vs-transgressive prompt contrast, which is
+a `dose`-level split, and `dose` is documented in this repo as the wrong
+selector** (`malignment/charge.py`, "THE RESPONSE SATURATES, WHICH MAKES `dose`
+THE WRONG SELECTOR"). Frames rated 5-7 carry the highest dose and show
+essentially zero response, so a "transgressive" arm selects INTO the flat region:
+`corr(effect, dose) = -0.091` against `corr(effect, lift) = -0.261`, and -0.311
+inside the unsaturated range. `readout_share` §208 has the mechanism -- headroom
+runs +0.38 at frame 2-3 down to **-0.05** at frame 6-7, so the most charged
+prompts have nowhere to displace to, and effect peaks at frames 2-4 while dose
+climbs monotonically.
+
+**A flat gap across that split is what saturation predicts whether or not
+content-discrimination exists.** So §197's null does not override the `d dose`
+column here (-0.684, t=-2.8), which is built on LIFT, the instrument that
+predicts three times better. The two are not symmetric evidence and the earlier
+version of this section, which treated §197 as decisive and marked the reading
+contested, over-deflated a result measured with the better instrument.
+
+WHAT REMAINS GENUINELY OPEN. §197 and this section measure different outcomes on
+different edges, so neither settles the other by itself. The check worth running
+is not §197's split repeated -- it inherits the saturation defect -- but its
+outcome (faller Jaccard divergence from full) recomputed against LIFT, on the
+raw edge, where a real content-specificity would show up in the quantity §197
+already found flat.
 
 ### What this cannot be
 
