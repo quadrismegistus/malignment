@@ -75,6 +75,15 @@ def endpoint_pairs():
     """
     from malignment import roster
     ep, _unresolved = roster.endpoints()
+    #: **MATCHED POPULATION.** The framed set covers 45 of these 50, so a raw
+    #: result at n=50 set beside a framed one at n=45 differs partly by which
+    #: labs ship a chat template. `--match-framed` restricts raw to the framed
+    #: pairs; without it the two columns are not comparable, which is the same
+    #: trap `existence` hit.
+    if _MATCH["v"]:
+        from malignment import movement as M
+        keep = {(b, a) for b, a, _m in M.clean_frame_pairs() if ep.get(b) == a}
+        ep = {b: a for b, a in ep.items() if (b, a) in keep}
     return {"%s>%s" % (b, a) for b, a in ep.items()}
 
 
@@ -133,7 +142,7 @@ def v6_dose_rows(cut):
         if hot:
             rated[pr] = hot
     print("v6 dose: %d prompts carry words at v6_harm >= %d" % (len(rated), cut))
-    wl = os.path.expanduser("~/malignment-data/norm_change/words_long.csv.gz")
+    wl = os.path.join(DATA, "words_long%s.csv.gz" % _SFX["v"])
     if not os.path.exists(wl):
         return {}
     _csv.field_size_limit(sys.maxsize)
@@ -182,7 +191,7 @@ def slot_dose_rows(lv):
         for r in _csv.DictReader(fh, delimiter="\t"):
             loaded[r["prompt"]].add(r["word"])
     print("slot dose: %d prompts carry loaded words" % len(loaded))
-    wl = os.path.expanduser("~/malignment-data/norm_change/words_long.csv.gz")
+    wl = os.path.join(DATA, "words_long%s.csv.gz" % _SFX["v"])
     if not os.path.exists(wl):
         print("no words_long -- cannot compute mass")
         return {}
@@ -218,9 +227,25 @@ def binom(k, n):
     return min(1.0, 2 * sum(math.comb(n, j) for j in range(0, min(k, n - k) + 1)) / 2.0 ** n)
 
 
+#: **THE SAME TWO FLAGS AS run.py, AND THE SAME SUFFIX.** run.py writes
+#: levels_long.csv.gz (v3), levels_long_v4.csv.gz and levels_long_v4_framed.csv.gz
+#: side by side; this reader has to be told which set to open or it silently
+#: analyses v3 while the caller believes it asked for framed.
+_SFX = {"v": ""}
+_MATCH = {"v": False}
+
+
+def _suffix(rule_version, frame):
+    if int(rule_version) == 3:
+        if frame != "raw":
+            raise SystemExit("--frame needs --rule-version 4")
+        return ""
+    return "_v4" if frame == "raw" else "_v4_framed"
+
+
 def read(name, keep=None):
     """{(lang, lineage, prompt, scale): (base, aligned)}, streamed."""
-    p = os.path.join(DATA, "%s_long.csv.gz" % name)
+    p = os.path.join(DATA, "%s_long%s.csv.gz" % (name, _SFX["v"]))
     if not os.path.exists(p):
         return None
     EP = endpoint_pairs()
@@ -337,14 +362,15 @@ def magnitude(a, langs):
         "SELECT base, aligned, prompt, "
         "sumIf(p_base - p_aligned, cls='faller') AS dep, "
         "sumIf(p_aligned - p_base, cls='riser') AS arr, count() AS nm "
-        "FROM movement WHERE cls != 'still' GROUP BY base, aligned, prompt")
+        "FROM %s WHERE cls != 'still' GROUP BY base, aligned, prompt"
+        % ("movement" if not _SFX["v"] else "nc_movement_src"))
     mag = {}
     for r in rows:
         lin = r["base"] + ">" + r["aligned"]
         if lin in EP:
             mag[(lin, r["prompt"])] = (float(r["dep"]), float(r["arr"]), int(r["nm"]))
     dose = {}
-    with gzip.open(os.path.join(DATA, "levels_long.csv.gz"), "rt",
+    with gzip.open(os.path.join(DATA, "levels_long%s.csv.gz" % _SFX["v"]), "rt",
                    encoding="utf-8") as fh:
         head = fh.readline().rstrip("\n").split("\t")
         ix = {k: i for i, k in enumerate(head)}
@@ -389,6 +415,14 @@ def magnitude(a, langs):
 
 def main(argv=None):
     ap = argparse.ArgumentParser()
+    ap.add_argument("--rule-version", type=int, default=3, choices=(3, 4),
+                    help="which levels_long* set run.py wrote. 3 is the v3 "
+                         "artifact, unchanged.")
+    ap.add_argument("--frame", default="raw", choices=("raw", "prefill"),
+                    help="prefill requires --rule-version 4")
+    ap.add_argument("--match-framed", action="store_true",
+                    help="restrict to the pairs the framed set covers, so raw "
+                         "and prefill are the same population")
     ap.add_argument("--lang", default=None, choices=("en", "zh"))
     ap.add_argument("--dose", default=DOSE_DEFAULT)
     ap.add_argument("--v6-dose", action="store_true",
@@ -439,6 +473,10 @@ def main(argv=None):
     ap.add_argument("--magnitude", action="store_true",
                     help="does MORE MASS MOVE where the base is transgressive?")
     a = ap.parse_args(argv)
+    _SFX["v"] = _suffix(a.rule_version, a.frame)
+    _MATCH["v"] = bool(a.match_framed)
+    if _SFX["v"]:
+        print("reading *_long%s.csv.gz" % _SFX["v"])
 
     langs = [a.lang] if a.lang else ["en", "zh"]
     if a.magnitude:
