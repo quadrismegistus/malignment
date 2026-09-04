@@ -583,7 +583,13 @@ def main(argv=None):
                 import csv as _c
                 d_ = os.path.expanduser(a.out)
                 os.makedirs(d_, exist_ok=True)
-                fn = os.path.join(d_, "dose_%s__%s_%s.csv" % (a.dose, name, lang))
+                #: **THE VARIANT IS IN THE FILENAME.** Without it, a framed run
+                #: overwrites the raw run and both overwrite the v3 results the
+                #: README cites -- done three times on 2026-09-04 before the
+                #: pattern was fixed rather than the instance. `results/` is
+                #: gitignored, so an overwrite here has no git copy to restore.
+                fn = os.path.join(d_, "dose_%s%s__%s_%s.csv"
+                                  % (a.dose, _SFX["v"], name, lang))
                 with open(fn, "w", newline="") as _fh:
                     w_ = _c.writer(_fh)
                     w_.writerow(["dose", "table", "lang", "target", "med_slope",
