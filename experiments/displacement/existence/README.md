@@ -3,7 +3,7 @@ subject: existence
 status: RUN 2026-08-30. 50 endpoint lineages, English.
 kind: question
 question: Is alignment's reshaping of word probabilities content-selective, and is it displacement or suppression?
-headline: "Displacement exists. Higher-T words lose more mass (43/50 lineages). Freed mass lands preferentially on same-kind words (47/49) -- but ONLY where the prompt's field is at least a third one kind; where the scene is mostly neutral that is exactly null (24/24). It holds under the deployment frame and is 2.8x larger there."
+headline: "Displacement exists. Higher-T words lose more mass (43/50 lineages). Freed mass lands preferentially on same-kind words (47/49) -- but it needs somewhere to go: where the scene is mostly neutral AND lift is low it REVERSES to none-kind (13/33). Eight of nine saturation-by-lift cells are same-kind or null. It holds under the deployment frame and is 2.8x larger there."
 ---
 
 # existence
@@ -212,46 +212,63 @@ silently changes its denominator between two columns is the thing a reader would
 otherwise take as given.
 
 
-### THE SAME-KIND RESULT IS CONDITIONAL ON WHAT THE PROMPT MAKES AVAILABLE
+### THE SAME-KIND RESULT NEEDS EITHER SAME-KIND ABUNDANCE OR CHARGE
 
 `saturation.py`. The population guard above requires that a cell have BOTH a
 same-kind and a none-kind riser, so a fully saturated prompt never enters the
 comparison. **But that is a test of PRESENCE, not BALANCE** -- a prompt with 60
-VIOLENT candidates and 3 NONE ones qualifies. Stratifying the same comparison by
-`saturation`, the share of a prompt's rated words carried by its top non-NONE
-kind:
+VIOLENT candidates and 3 NONE ones qualifies.
 
-    sat band       lineages   cells   same med   none med   up/dn        p
-    lo <0.33             48    2825    0.00797    0.00804   24/24   1.00000
-    mid .33-.66          49    5068    0.00828    0.00747    45/4   0.00000
-    hi >=0.66            49    6783    0.00789    0.00640    46/3   0.00000
+**AND `adjacency.py` SELECTS ON NEITHER DOSE NOR LIFT, where Part 1 above selects
+on both, with no reason recorded for the difference.** Crossing saturation (share
+of a prompt's rated words in its top non-NONE kind) with lift:
 
-**Where the scene is mostly neutral, the effect is exactly absent** -- 24/24, and
-the two medians agree to three significant figures. It is absence rather than low
-power: 48 lineages and 2,825 cells is not a thin cell, and a real effect at the
-mid band's size would show at that n. Where the field is at least a third one
-kind, same-kind landing is strong and gets stronger.
+    sat   lift    lineages  cells   same med   none med   up/dn        p
+    lo    L-lo         46    1021    0.00775    0.00837   13/33   0.00453
+    lo    L-mid        44     737    0.00871    0.00825   25/19   0.45138
+    lo    L-hi         39     750    0.00862    0.00839   24/15   0.19959
 
-So freed mass does not seek same-kind targets. **It lands on whatever the prompt
-makes abundant**, and when same-kind material is scarce the behaviour is
-indistinguishable from suppression. That is a second reason the 47/49 is less
-diagnostic than it reads, independent of the first one recorded above (base
-models reproduce it 8/8 with no content-selectivity at all).
+    mid   L-lo         48    1719    0.00797    0.00751   32/16   0.02930
+    mid   L-mid        47    1404    0.00876    0.00755    40/7   0.00000
+    mid   L-hi         44    1196    0.00947    0.00785    39/5   0.00000
 
-**This is not the dose cut in disguise.** Saturation is a FRAME property:
-`corr(saturation, frame) = +0.826` against `corr(saturation, lift) = -0.025`.
-Selecting on lift does not select saturated prompts, so nothing that selects on
-lift inherits this.
+    hi    L-lo         48    3759    0.00784    0.00651    45/3   0.00000
+    hi    L-mid        46    1444    0.00856    0.00633    46/0   0.00000
+    hi    L-hi         28     386    0.00872    0.00694    23/5   0.00091
 
-AND IT PROBABLY EXPLAINS THE RESPONSE SATURATION `charge.py` RECORDS. That file
-documents dose as the wrong selector because frames rated 5-7 show essentially
-zero response, and `readout_share` §208 puts headroom at -0.05 by frame 6-7. By
-frame band, the share of prompts that are >=75% one kind runs 1%, 33%, 73%, 76%,
-**92%**. A prompt whose whole candidate field is one kind has nothing of another
-kind to move toward. Two descriptions of one fact, reached from opposite ends.
+**Eight of nine cells are same-kind or null. One corner is suppression.** Where
+the scene is mostly neutral AND the base is not reaching past its frame, freed
+mass goes to NONE-kind words -- 13/33, p=0.005, reversed. Add either ingredient
+and same-kind landing appears: within low saturation the effect runs
+monotonically with lift (13/33, 25/19, 24/15), and at mid and high saturation it
+holds at every lift band.
 
-EXPLORATORY. Not registered. The saturation bands are equal-width thirds chosen
-before the numbers were read, but nothing about the cut was pre-declared.
+So freed mass does not simply seek same-kind targets. **It needs somewhere to go
+-- either a field with same-kind material in it, or enough charge to be pushed.**
+Where neither holds, the behaviour is suppression. That is a second reason the
+47/49 is less diagnostic than it reads, independent of the base-model one
+recorded above.
+
+**A FIRST PASS HERE STRATIFIED BY SATURATION ALONE AND GOT THIS WRONG**, reporting
+the low-saturation band as an exact null (24/24) and concluding the effect was
+simply absent there. It is not absent; it is two opposite things averaged. The
+band is reversed at low lift and recovering at high, and pooling them cancelled.
+
+**This is not the dose cut in disguise.** `corr(saturation, frame) = +0.826`
+against `corr(saturation, lift) = -0.025`, so the two cuts are independent and
+nothing that selects on lift alone inherits the saturation structure.
+
+AND THE SATURATION GRADIENT PROBABLY EXPLAINS THE RESPONSE SATURATION `charge.py`
+RECORDS. That file documents dose as the wrong selector because frames rated 5-7
+show essentially zero response, and `readout_share` §208 puts headroom at -0.05
+by frame 6-7. By frame band, the share of prompts that are >=75% one kind runs
+1%, 33%, 73%, 76%, **92%**. A prompt whose whole candidate field is one kind has
+nothing of another kind to move toward. Two descriptions of one fact, reached
+from opposite ends.
+
+EXPLORATORY. Not registered. Saturation bands are equal thirds, lift bands cut at
+0.5 and 1.2; neither was pre-declared, and nine cells make the single p of 0.0045
+about 0.04 after Bonferroni.
 
 Content-selectivity says alignment targets transgressive words. The next question is WHERE THE FREED MASS GOES. Three hypotheses:
 
