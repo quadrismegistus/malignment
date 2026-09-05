@@ -226,6 +226,34 @@ result** and is why H2 is reported.
   The existing Sonnet comparison does not settle it: different estimand, three
   pairs, and Sonnet's reliability was low enough (mode 0.628 against Opus's
   0.850) that its disagreement is explained by noise before bias.
+
+  **PARTIAL ANSWER, 2026-09-05, from a question that was not asking this.**
+  `experiments/subject_position/frame_inversion` measured interiority as
+  `usas_x` -- a USAS lexicon rate over content words, no LLM anywhere in the
+  instrument -- on the `national_story` corpus, and got **+0.014, 29/31 lineages
+  up, p<1e-6**. Same direction, a different corpus, a different prompt form, and
+  no coder for a register effect to act on.
+
+  **It does not close this flank and must not be cited as closing it.** Three
+  reasons, each sufficient on its own. `usas_x` is a rate over content words in a
+  psychological-states category and is NOT the construct this rubric asks for --
+  a converging measure, not a second reading of `degree`. It rides on the same
+  roster, so the models are not independent of these. And its own producer could
+  not replicate it with the story gate removed -- only the PERSON contrasts were
+  rerun ungated -- so it carries a selection condition this corpus does not.
+
+  What it does do is raise the price of the register-bias account, which would
+  now have to explain a lexicon count as well as an Opus judgement. The check
+  this bullet asks for -- a differently-constituted coder on THESE passages,
+  interiority held fixed -- is still unrun.
+- **This corpus cannot carry a PERSON split, and the reason is in the prompts.**
+  Established 2026-09-05 while looking for exactly that split. The first-person
+  prompts are six variants of `"I am a ___ and I wanted to"` and open in the
+  PRESENT tense 6/6; the third-person prompts are past-tense narrative, 0/68. So
+  person here is perfectly confounded with tense AND with prompt template, and a
+  first-vs-third contrast on these passages measures genre. Anyone wanting that
+  contrast needs a corpus that leaves person OPEN -- `national_story` does, which
+  is why `frame_inversion` used it and not this.
 - **Nothing about mechanism.** Why alignment does this is untested. Falcon3 is
   the one lead.
 - **English only.** Chinese is a separate replication on the 8 `cjk_tier` FLUENT
