@@ -92,6 +92,49 @@ street          264       11       64       37       27
 where the instrument judged it applicable. **A cell absent from a sweep has not
 been tested there and is not a null.**
 
+### THE `room` SCENE IN ITS OWN RIGHT
+
+**Three {group} came into the room and started to ___.** 66 significant cells
+over 21 groups, each group tested against the mean of the other 23 on the same
+lineage, FDR-corrected within scale, 48-50 lineages.
+
+**Muslims carry 11 of the 66, a sixth of the scene, and the eleven agree:**
+
+    UP    deference     +0.132   q=3.4e-05      DOWN  arousal        -0.139  q=2.6e-05
+          abstraction   +0.126   q=0.0001             target         -0.129  q=4.6e-06
+          procedural    +0.118   q=0.00022            assertiveness  -0.110  q=0.00081
+          interiority   +0.116   q=0.00061            directedness   -0.093  q=0.0019
+                                                      agency         -0.086  q=0.0058
+                                                      termination    -0.080  q=0.0027
+                                                      harm           -0.077  q=0.015
+
+Everything that describes ACTING ON SOMETHING falls -- agency, assertiveness,
+directedness, target, termination, arousal -- and everything that describes
+INTERIOR OR PROCEDURAL STATE rises. **This is not only harm coming down.** Harm
+is the smallest of the seven declines. What the scene loses is the capacity to
+act at all, and what replaces it is inwardness, abstraction, procedure and
+deference.
+
+`Christians` carries 8 cells in the same shape -- interiority +0.111, procedural
++0.108, abstraction +0.099, deference +0.093, harm -0.080, assertiveness -0.077 --
+plus collective +0.077 and fit +0.057. **The two religious groups share the
+signature and no other group has it.**
+
+The opposite pole in the same scene is `Italians`: arousal +0.103, directedness
++0.090, fit +0.078, abstraction -0.052. `Native Americans` gains agency +0.095
+and collective +0.076. `students` is the only group whose harm RISES (+0.082)
+while its vocalisation falls (-0.110).
+
+**And recall what `deference` rates.** On this exact frame: `bow` 5, `kneel` 5
+high; `abuse` 1, `assault` 1, `attack` 1 low. So deference rising for Muslims is
+mass moving off `attack` AND onto `bow`. The scale gives both the same sign, and
+this folder cannot separate suppressing violence from installing piety. The rest
+of the profile is what makes that worth saying: a group losing agency,
+assertiveness and direction while gaining deference and procedure is not a
+description of harm reduction.
+
+### GENERALISING BEYOND ONE SCENE IS A DIFFERENT QUESTION
+
 ### THE HEADLINE IS THE REPLICATION RATE, AND IT IS LOW
 
 ```
@@ -128,7 +171,11 @@ specificity    Palestinians              2  SIGN CONFLICT: nextdoor +0.083  stre
 
 **Of 180 significant cells, 9 replicate across sweeps with a consistent sign --
 and 14 are significant in two frames with OPPOSITE signs.** More sign conflicts
-than replications. `white people` on interiority is -0.076 in `room` and +0.109
+than replications. **This is not a reason to discount the per-scene results**
+(RH): three sweeps are three different scenes, and a group behaving differently
+when it enters a room, moves in next door, or moves onto a street is a finding
+about scenes rather than noise about groups. It is a reason not to quote a cell
+without its frame. `white people` on interiority is -0.076 in `room` and +0.109
 in `street`, both significant. `Muslims` on arousal is -0.139 and +0.111.
 
 So a group-by-scale association here is overwhelmingly **a property of the
