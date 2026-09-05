@@ -151,9 +151,19 @@ apart.
 
 **What rises is less transgressive, less charged, less about bodily harm, less
 aroused, and more positively valenced than what falls.** On human type norms, on
-model type norms, AND on the contextual scene rating -- three instruments of
-different provenance agreeing on sign. That is the "safer" half of the
-displacement claim, and it is the strongest form of it this campaign has.
+model type norms, AND on the contextual scene rating.
+
+**THIS TABLE IS NOT NEW AND IS THE WEAKER VERSION** (RH). `displacement/norm_change`
+already measures it, better: its quantity is the mass-weighted norm shift
+`sum(dp(w) * norm(w))`, and since `sum(dp) ~ 0` that is this table's
+riser-minus-faller difference multiplied by the moved mass. The two agree on
+sign wherever they overlap -- register rises (+0.0063 there, +0.078 here),
+valence rises (+0.0026 / +0.102), concreteness falls (-0.025 / -0.244) -- and
+norm_change runs it over **50 endpoint lineages** with a per-lineage sign test
+where this column has one checkpoint. **Cite norm_change for the norm result.**
+
+What this table is for is the ABLATION contrast below, which norm_change does not
+run, and the fields, which it does not scan.
 
 The type/contextual agreement matters: `scene` rates the same word differently
 per prompt, so its agreement with `k_transgressiveness` says the safety gradient
@@ -176,9 +186,17 @@ Share of moved mass, riser% minus faller%, full mix:
 `kill -> scream` stated as a field displacement, on a 1960s regex lexicon and a
 232-code tagset that know nothing about this project. **`displacement_taxonomy`'s
 relation 2, BLOW BECOMES UTTERANCE, measured distributionally for the first
-time.** `existence/adjacency.py` should be using this instrument rather than the
-six harm categories, and its low-saturation "reversal" is a strong candidate for
-this move misread.
+time.**
+
+**AND THE FIELDS, NOT THE NORMS, ARE WHAT `adjacency.py` NEEDS.** A net norm
+shift cannot answer adjacency's question: a distribution getting less
+transgressive is equally consistent with mass going to NEUTRAL words
+(suppression) and with mass going to same-field lower-charge words
+(displacement), and `norm_change` collapses exactly that distinction into one
+number. The field composition separates them, which is why the six harm
+categories and the norm scales both fail where this succeeds.
+`existence/adjacency.py`'s low-saturation "reversal" is a strong candidate for
+this move misread as suppression.
 
 Read RID's shares against 31% coverage. USAS at 74-76% is the better of the two
 here and says the same thing.
@@ -250,12 +268,19 @@ conditions. Its own caveat, kept: one checkpoint per ablation, so this is a
 reason to test rather than a result -- flagged because the effect is CATEGORICAL
 where a checkpoint artefact would move a rate.
 
-**It converges with this folder on what persona data does.** `ablation.py` finds
-`no-persona` the ablation that most LOWERS frame responsiveness (-0.501, t=-3.2),
-and `framed_identity` finds the persona corpus supplying the maker under a system
-prompt (+15.0pp, 13/15, p=0.007). Both say persona data installs the assistant's
-framed self-presentation -- the responsiveness to being addressed and the origin
-story told when addressed. Two seats, two instruments, one corpus slice.
+**WITHDRAWN, malign [6633].** This paragraph read `ablation.py`'s
+`no-persona` frame-responsiveness column (-0.501, t=-3.2) as converging with
+`framed_identity`'s "+15.0pp on names its maker, 13/15, p=0.007" and concluded
+that persona data installs the assistant's framed self-presentation. **The
++15.0pp was pooled over three different manipulations.** Split by what the
+template actually renders, the significant cell is the group where NO persona is
+present in either condition (n=10, -15.0pp, 0/9, p=0.004); the four models that
+do carry a persona give -25.0pp at 0/4, p=0.125, which four models cannot resolve
+either way. So that number is about the system slot EXISTING, not about what is
+in it, and there is no convergence to report.
+
+The between-arm result is untouched: all five Tulu arms sit in the same group and
+received the same manipulation, so `no-persona` naming Ai2 0 of 67 stands.
 
 Note the division: **WildChat removal changes which WORDS move; persona removal
 changes who the model says MADE it.** Different slices, different functions,
