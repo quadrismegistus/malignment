@@ -168,6 +168,30 @@ rating and touches no published number. The job list moves little because it is 
 UNION over pairs -- 2,957 words to 2,976, +19 -- so a 77% per-cell disagreement
 resolves to a 0.6% change in what gets rated.
 
+### THE MISSING WORDS WERE RATED, AND NOTHING MOVED
+
+`rate.py` run for real, 2026-09-05: **2,976 of 2,976 requested, 2,144 ratable, 0
+errors**; only 406 items reached the API, the rest were cached. New coverage:
+`zone_kind` genital 363 / oral 165 / breast 77 / anal 56, `referent_kind` action
+781 / body_part 687 / garment 234 / quality 322.
+
+Chain re-run on the updated ratings:
+
+    gender_pairs   72 numeric fields compared, 0 changed
+    layer3         54 compared, 36 changed in the fourth decimal, 0 STATUS CHANGES
+
+    scale            base gap BEFORE          base gap AFTER
+    explicitness     -0.772  0/50  1.8e-15    -0.756  0/50  1.8e-15
+    genitality       -0.747  0/50  1.8e-15    -0.738  0/50  1.8e-15
+    body_distance    +0.654 42/44  1.1e-10    +0.625 43/45  5.9e-11
+    orality          -0.035 15/50  0.0066     -0.028 17/50  0.033
+
+**Every conclusion in this folder is unchanged by the +19 words**, which is the
+expected result for a union-selected job list and is recorded because it is the
+check that would have caught the opposite. `body_distance` gained a lineage
+(44 -> 45) and `orality` weakened from p=0.0066 to p=0.033 while staying
+significant; nothing crossed.
+
 ONE THING THE SWITCH BROKE AND THE DRY RUN CAUGHT. `npairs` counted pairs
 PRESENT in the old path; the first version of this change counted pairs with a
 riser-or-faller and reported **49 lineage pairs where the old path reported 50**

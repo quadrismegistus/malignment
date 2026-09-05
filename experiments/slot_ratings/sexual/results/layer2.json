@@ -5,167 +5,167 @@
    "directional": [
     {
      "scale": "orality",
-     "base_gap": -0.0558643101369805,
-     "base_p": 0.601,
-     "aligned_gap": -0.054018636840740535,
+     "base_gap": -0.05684520422274475,
+     "base_p": 0.604,
+     "aligned_gap": -0.05489337249282203,
      "aligned_p": 0.613,
-     "delta_gap": 0.001845673296239962,
-     "delta_p": 0.865
+     "delta_gap": 0.0019518317299227182,
+     "delta_p": 0.87
     },
     {
      "scale": "tactility",
-     "base_gap": -0.18008730606880244,
-     "base_p": 0.302,
-     "aligned_gap": -0.19296293462706898,
-     "aligned_p": 0.244,
-     "delta_gap": -0.012875628558266558,
-     "delta_p": 0.653
-    },
-    {
-     "scale": "genitality",
-     "base_gap": -1.1326042647286965,
-     "base_p": 0.0,
-     "aligned_gap": -1.022406911138663,
-     "aligned_p": 0.0,
-     "delta_gap": 0.11019735359003331,
-     "delta_p": 0.169
-    },
-    {
-     "scale": "incorporation",
-     "base_gap": -0.31261669044452606,
-     "base_p": 0.126,
-     "aligned_gap": -0.28824912474144704,
-     "aligned_p": 0.126,
-     "delta_gap": 0.024367565703079,
-     "delta_p": 0.691
-    },
-    {
-     "scale": "body_distance",
-     "base_gap": 0.32220036341564573,
-     "base_p": 0.222,
-     "aligned_gap": 0.34721879712257736,
-     "aligned_p": 0.152,
-     "delta_gap": 0.025018433706931627,
+     "base_gap": -0.17817450643743704,
+     "base_p": 0.309,
+     "aligned_gap": -0.19133062698513031,
+     "aligned_p": 0.245,
+     "delta_gap": -0.01315612054769328,
      "delta_p": 0.655
     },
     {
+     "scale": "genitality",
+     "base_gap": -1.1203192504097945,
+     "base_p": 0.0,
+     "aligned_gap": -1.011221735349512,
+     "aligned_p": 0.0,
+     "delta_gap": 0.10909751506028241,
+     "delta_p": 0.161
+    },
+    {
+     "scale": "incorporation",
+     "base_gap": -0.3118843354340207,
+     "base_p": 0.126,
+     "aligned_gap": -0.2876121017587412,
+     "aligned_p": 0.126,
+     "delta_gap": 0.02427223367527953,
+     "delta_p": 0.692
+    },
+    {
+     "scale": "body_distance",
+     "base_gap": 0.3203395282169487,
+     "base_p": 0.224,
+     "aligned_gap": 0.34672007481652206,
+     "aligned_p": 0.151,
+     "delta_gap": 0.026380546599573368,
+     "delta_p": 0.634
+    },
+    {
      "scale": "exposure",
-     "base_gap": 0.18924564738051045,
+     "base_gap": 0.18721320041030332,
      "base_p": 0.658,
-     "aligned_gap": 0.16408743463735545,
+     "aligned_gap": 0.16137641142865553,
      "aligned_p": 0.66,
-     "delta_gap": -0.02515821274315498,
-     "delta_p": 0.401
+     "delta_gap": -0.025836788981647794,
+     "delta_p": 0.385
     },
     {
      "scale": "charge",
-     "base_gap": -0.06366350498946188,
-     "base_p": 0.736,
-     "aligned_gap": -0.08419105072551297,
-     "aligned_p": 0.614,
-     "delta_gap": -0.0205275457360511,
-     "delta_p": 0.691
+     "base_gap": -0.06001787015425338,
+     "base_p": 0.749,
+     "aligned_gap": -0.08232178508246644,
+     "aligned_p": 0.623,
+     "delta_gap": -0.022303914928213067,
+     "delta_p": 0.666
     },
     {
      "scale": "euphemism",
-     "base_gap": -0.10834591273000518,
-     "base_p": 0.287,
-     "aligned_gap": -0.12520886030024378,
-     "aligned_p": 0.125,
-     "delta_gap": -0.016862947570238603,
-     "delta_p": 0.729
+     "base_gap": -0.10549219218265711,
+     "base_p": 0.294,
+     "aligned_gap": -0.12200005645571486,
+     "aligned_p": 0.133,
+     "delta_gap": -0.01650786427305776,
+     "delta_p": 0.728
     },
     {
      "scale": "explicitness",
-     "base_gap": -0.2863174240070508,
-     "base_p": 0.232,
-     "aligned_gap": -0.34115959015299846,
-     "aligned_p": 0.135,
-     "delta_gap": -0.054842166145947634,
-     "delta_p": 0.492
+     "base_gap": -0.2832378382219225,
+     "base_p": 0.233,
+     "aligned_gap": -0.34040672005825884,
+     "aligned_p": 0.133,
+     "delta_gap": -0.05716888183633634,
+     "delta_p": 0.458
     }
    ],
    "nondirectional": [
     {
      "scale": "orality",
-     "base_gap": -0.03491725386231226,
-     "base_p": 0.397,
-     "aligned_gap": -0.06582921017450231,
-     "aligned_p": 0.472,
-     "delta_gap": -0.030911956312190056,
-     "delta_p": 0.442
+     "base_gap": -0.027570943457911532,
+     "base_p": 0.413,
+     "aligned_gap": -0.05636467017331079,
+     "aligned_p": 0.467,
+     "delta_gap": -0.02879372671539926,
+     "delta_p": 0.46
     },
     {
      "scale": "tactility",
-     "base_gap": -0.21873162417730335,
+     "base_gap": -0.22202683439539692,
      "base_p": 0.082,
-     "aligned_gap": -0.24720357183673883,
+     "aligned_gap": -0.2496236015601842,
      "aligned_p": 0.082,
-     "delta_gap": -0.028471947659435483,
-     "delta_p": 0.522
+     "delta_gap": -0.02759676716478729,
+     "delta_p": 0.545
     },
     {
      "scale": "genitality",
-     "base_gap": -0.7470178172855627,
+     "base_gap": -0.7381278513531918,
      "base_p": 0.051,
-     "aligned_gap": -0.7457665822812878,
+     "aligned_gap": -0.7390955598219224,
      "aligned_p": 0.069,
-     "delta_gap": 0.001251235004274968,
-     "delta_p": 0.907
+     "delta_gap": -0.0009677084687306259,
+     "delta_p": 1.0
     },
     {
      "scale": "incorporation",
-     "base_gap": -0.1273279174567249,
-     "base_p": 0.197,
-     "aligned_gap": -0.12164526381460256,
-     "aligned_p": 0.271,
-     "delta_gap": 0.005682653642122335,
-     "delta_p": 0.637
+     "base_gap": -0.12213819622409344,
+     "base_p": 0.154,
+     "aligned_gap": -0.11594994629254113,
+     "aligned_p": 0.258,
+     "delta_gap": 0.006188249931552314,
+     "delta_p": 0.606
     },
     {
      "scale": "body_distance",
-     "base_gap": 0.6317422959883143,
-     "base_p": 0.0050025012506253125,
-     "aligned_gap": 0.7385397711447288,
-     "aligned_p": 0.0050025012506253125,
-     "delta_gap": 0.10679747515641451,
-     "delta_p": 0.28114057028514255
+     "base_gap": 0.6112892814487864,
+     "base_p": 0.001,
+     "aligned_gap": 0.7150651930837468,
+     "aligned_p": 0.001,
+     "delta_gap": 0.10377591163496047,
+     "delta_p": 0.263
     },
     {
      "scale": "exposure",
-     "base_gap": 0.11992667440240781,
-     "base_p": 0.082,
-     "aligned_gap": 0.12481034046955944,
-     "aligned_p": 0.082,
-     "delta_gap": 0.004883666067151614,
+     "base_gap": 0.11923956825419298,
+     "base_p": 0.048,
+     "aligned_gap": 0.12434180072221396,
+     "aligned_p": 0.054,
+     "delta_gap": 0.005102232468020979,
      "delta_p": 1.0
     },
     {
      "scale": "charge",
-     "base_gap": -0.3718711215119271,
+     "base_gap": -0.3610974097055933,
      "base_p": 0.0,
-     "aligned_gap": -0.3690088492297681,
+     "aligned_gap": -0.3601160638009545,
      "aligned_p": 0.0,
-     "delta_gap": 0.00286227228215899,
-     "delta_p": 0.946
+     "delta_gap": 0.00098134590463877,
+     "delta_p": 0.963
     },
     {
      "scale": "euphemism",
-     "base_gap": 0.18742674934217501,
+     "base_gap": 0.1857449973440218,
      "base_p": 0.0,
-     "aligned_gap": 0.15280684604936248,
+     "aligned_gap": 0.15151283608210822,
      "aligned_p": 0.0,
-     "delta_gap": -0.034619903292812525,
-     "delta_p": 0.028
+     "delta_gap": -0.034232161261913606,
+     "delta_p": 0.033
     },
     {
      "scale": "explicitness",
-     "base_gap": -0.7723175148907354,
+     "base_gap": -0.7560762887226857,
      "base_p": 0.0,
-     "aligned_gap": -0.8251604206702832,
+     "aligned_gap": -0.8118661473201952,
      "aligned_p": 0.0,
-     "delta_gap": -0.052842905779547776,
-     "delta_p": 0.407
+     "delta_gap": -0.05578985859750956,
+     "delta_p": 0.377
     }
    ]
   },
@@ -173,167 +173,167 @@
    "directional": [
     {
      "scale": "orality",
-     "base_gap": -0.04664746692067592,
-     "base_p": 0.597,
-     "aligned_gap": -0.04719436318031425,
-     "aligned_p": 0.593,
-     "delta_gap": -0.0005468962596383325,
-     "delta_p": 0.947
+     "base_gap": -0.04275358254511336,
+     "base_p": 0.618,
+     "aligned_gap": -0.047231243658247726,
+     "aligned_p": 0.587,
+     "delta_gap": -0.004477661113134365,
+     "delta_p": 0.77
     },
     {
      "scale": "tactility",
-     "base_gap": -0.15054018547956421,
-     "base_p": 0.402,
-     "aligned_gap": -0.1513655309354985,
-     "aligned_p": 0.333,
-     "delta_gap": -0.0008253454559343139,
-     "delta_p": 0.913
+     "base_gap": -0.14718291224976499,
+     "base_p": 0.41,
+     "aligned_gap": -0.14641891189692144,
+     "aligned_p": 0.344,
+     "delta_gap": 0.000764000352843535,
+     "delta_p": 1.0
     },
     {
      "scale": "genitality",
-     "base_gap": -0.7698911766785165,
+     "base_gap": -0.9024697854473192,
      "base_p": 0.0,
-     "aligned_gap": -0.733139976688749,
+     "aligned_gap": -0.8394676704357215,
      "aligned_p": 0.0,
-     "delta_gap": 0.036751199989767454,
-     "delta_p": 0.551
+     "delta_gap": 0.06300211501159772,
+     "delta_p": 0.443
     },
     {
      "scale": "incorporation",
-     "base_gap": -0.3299213108463363,
+     "base_gap": -0.33005947120076157,
      "base_p": 0.0,
-     "aligned_gap": -0.30626618086502966,
+     "aligned_gap": -0.30511757046442994,
      "aligned_p": 0.0,
-     "delta_gap": 0.02365512998130666,
-     "delta_p": 0.777
+     "delta_gap": 0.02494190073633161,
+     "delta_p": 0.75
     },
     {
      "scale": "body_distance",
-     "base_gap": 0.12951102083625574,
-     "base_p": 0.697,
-     "aligned_gap": 0.18595203237533303,
-     "aligned_p": 0.509,
-     "delta_gap": 0.05644101153907729,
-     "delta_p": 0.298
+     "base_gap": 0.2031418940251021,
+     "base_p": 0.451,
+     "aligned_gap": 0.23819027371997636,
+     "aligned_p": 0.33,
+     "delta_gap": 0.03504837969487428,
+     "delta_p": 0.489
     },
     {
      "scale": "exposure",
-     "base_gap": 0.20728416154087365,
-     "base_p": 0.651,
-     "aligned_gap": 0.17864667713299734,
-     "aligned_p": 0.451,
-     "delta_gap": -0.028637484407876307,
-     "delta_p": 0.476
+     "base_gap": 0.14353086311825095,
+     "base_p": 0.593,
+     "aligned_gap": 0.13996109830003017,
+     "aligned_p": 0.371,
+     "delta_gap": -0.0035697648182207624,
+     "delta_p": 0.878
     },
     {
      "scale": "charge",
-     "base_gap": 0.1356351466808207,
-     "base_p": 0.536,
-     "aligned_gap": 0.08112445523455633,
-     "aligned_p": 0.638,
-     "delta_gap": -0.054510691446264345,
-     "delta_p": 0.379
+     "base_gap": 0.06871795894651327,
+     "base_p": 0.698,
+     "aligned_gap": 0.03287378399732959,
+     "aligned_p": 0.797,
+     "delta_gap": -0.035844174949183676,
+     "delta_p": 0.502
     },
     {
      "scale": "euphemism",
-     "base_gap": -0.18521938348345754,
-     "base_p": 0.034,
-     "aligned_gap": -0.14607519979527114,
-     "aligned_p": 0.044,
-     "delta_gap": 0.03914418368818642,
-     "delta_p": 0.311
+     "base_gap": -0.18133868113810503,
+     "base_p": 0.002,
+     "aligned_gap": -0.17221582179474967,
+     "aligned_p": 0.001,
+     "delta_gap": 0.009122859343355372,
+     "delta_p": 0.797
     },
     {
      "scale": "explicitness",
-     "base_gap": -0.05607026542445112,
-     "base_p": 0.785,
-     "aligned_gap": -0.16595560780312135,
-     "aligned_p": 0.408,
-     "delta_gap": -0.10988534237867022,
-     "delta_p": 0.082
+     "base_gap": -0.17897526106236672,
+     "base_p": 0.369,
+     "aligned_gap": -0.2558116432987153,
+     "aligned_p": 0.194,
+     "delta_gap": -0.0768363822363486,
+     "delta_p": 0.281
     }
    ],
    "nondirectional": [
     {
      "scale": "orality",
-     "base_gap": -0.04935839860973163,
-     "base_p": 0.45,
-     "aligned_gap": -0.07480148245325,
-     "aligned_p": 0.54,
-     "delta_gap": -0.025443083843518365,
-     "delta_p": 0.482
+     "base_gap": -0.05215856065491233,
+     "base_p": 0.427,
+     "aligned_gap": -0.07705473550285734,
+     "aligned_p": 0.528,
+     "delta_gap": -0.024896174847945006,
+     "delta_p": 0.502
     },
     {
      "scale": "tactility",
-     "base_gap": -0.2623139693165904,
+     "base_gap": -0.2593612587181948,
      "base_p": 0.082,
-     "aligned_gap": -0.2904458578306065,
+     "aligned_gap": -0.28866298878203,
      "aligned_p": 0.082,
-     "delta_gap": -0.028131888514016077,
-     "delta_p": 0.536
+     "delta_gap": -0.029301730063835196,
+     "delta_p": 0.475
     },
     {
      "scale": "genitality",
-     "base_gap": -0.6931627549904074,
+     "base_gap": -0.6928445705791936,
      "base_p": 0.068,
-     "aligned_gap": -0.7085777464525361,
+     "aligned_gap": -0.7077717929321087,
      "aligned_p": 0.071,
-     "delta_gap": -0.015414991462128753,
-     "delta_p": 0.927
+     "delta_gap": -0.014927222352915132,
+     "delta_p": 0.928
     },
     {
      "scale": "incorporation",
-     "base_gap": -0.12192122280373337,
-     "base_p": 0.296,
-     "aligned_gap": -0.11486076173653183,
-     "aligned_p": 0.464,
-     "delta_gap": 0.0070604610672015435,
-     "delta_p": 0.64
+     "base_gap": -0.12151055467571903,
+     "base_p": 0.289,
+     "aligned_gap": -0.11509554469957864,
+     "aligned_p": 0.457,
+     "delta_gap": 0.006415009976140393,
+     "delta_p": 0.627
     },
     {
      "scale": "body_distance",
-     "base_gap": 0.5801498977414485,
+     "base_gap": 0.572928904235855,
      "base_p": 0.007021063189568706,
-     "aligned_gap": 0.7389204666125652,
+     "aligned_gap": 0.7111885022239203,
      "aligned_p": 0.007021063189568706,
-     "delta_gap": 0.1587705688711166,
-     "delta_p": 0.13640922768304914
+     "delta_gap": 0.13825959798806528,
+     "delta_p": 0.18856569709127383
     },
     {
      "scale": "exposure",
-     "base_gap": 0.1412652757291973,
+     "base_gap": 0.1368123623907402,
      "base_p": 0.082,
-     "aligned_gap": 0.1431640471265167,
+     "aligned_gap": 0.13976594990568234,
      "aligned_p": 0.082,
-     "delta_gap": 0.0018987713973193795,
+     "delta_gap": 0.002953587514942114,
      "delta_p": 1.0
     },
     {
      "scale": "charge",
-     "base_gap": -0.2626799996104923,
-     "base_p": 0.096,
-     "aligned_gap": -0.27906482703652,
-     "aligned_p": 0.078,
-     "delta_gap": -0.01638482742602769,
-     "delta_p": 0.73
+     "base_gap": -0.2695209750093039,
+     "base_p": 0.08,
+     "aligned_gap": -0.2852667849386407,
+     "aligned_p": 0.073,
+     "delta_gap": -0.0157458099293368,
+     "delta_p": 0.745
     },
     {
      "scale": "euphemism",
-     "base_gap": 0.18607657262460228,
+     "base_gap": 0.185690600412021,
      "base_p": 0.0,
-     "aligned_gap": 0.15055319707586823,
+     "aligned_gap": 0.1504889920454071,
      "aligned_p": 0.0,
-     "delta_gap": -0.03552337554873407,
-     "delta_p": 0.02
+     "delta_gap": -0.035201608366613894,
+     "delta_p": 0.025
     },
     {
      "scale": "explicitness",
-     "base_gap": -0.6782392927978522,
+     "base_gap": -0.6803646526470085,
      "base_p": 0.002,
-     "aligned_gap": -0.7601471712275115,
+     "aligned_gap": -0.7622000791184572,
      "aligned_p": 0.0,
-     "delta_gap": -0.08190787842965921,
-     "delta_p": 0.218
+     "delta_gap": -0.08183542647144876,
+     "delta_p": 0.203
     }
    ]
   }
