@@ -313,6 +313,63 @@ number reproduces exactly; the raw one does not -- this run finds 14,684, and
 `adjacency.py`'s own riser-group line prints n=14,685. Recorded rather than
 silently corrected, because which of the two is stale has not been established.
 
+### WHERE THE DISPLACEMENT CLAIM STANDS: THE TWO HALVES SEPARATE
+
+"Mass falls to a semantically adjacent but SAFER word" is two claims, and they
+are supported in different, non-overlapping regimes.
+
+**SAFER** -- scene rating of the top faller minus the mass-weighted scene of the
+risers. Continuous, and testable WITHIN a saturated prompt, since a violent field
+still runs `strangle` 7.00 down to `run` 1.95:
+
+    sat   lineages   cells   median diff    up/dn        p
+    lo          49    6450       +1.6087     49/0   0.000000
+    mid         49    9670       +0.4144     49/0   0.000000
+    hi          40   46655       -0.0019    14/26   0.081
+
+**ADJACENT** -- the same-kind test above: unanimous at hi, reversed at lo.
+
+**So the composite sentence is never demonstrated in one place by this
+instrument.** Where landing is same-kind it is not safer; where it is safer it is
+not same-kind.
+
+### AND THE KIND TAXONOMY IS THE WRONG INSTRUMENT FOR "ADJACENT"
+
+`kind` sorts by HOW BAD, not by WHAT ABOUT. The campaign's own paradigm case of
+displacement fails its test: on `She was so angry she wanted to`, `kill` is
+VIOLENT at 6.98 and `scream` is NONE at 2.54, so **"kill -> scream" is CROSS-kind
+here and scores as suppression.** Six harm categories cannot represent semantic
+adjacency, and `displacement_taxonomy` exists because they cannot.
+
+That folder's ten blind-coded relations contain both regimes -- **1. LATERAL SWAP
+INSIDE ONE REGISTER** (same kind, "no change in register, harm, or aggression",
+flat on all scales but directedness) and **2. BLOW BECOMES UTTERANCE** (physical
+displaced by vocal, harm -1.20). The correspondence to the hi and lo bands is
+close enough to be worth stating and IT WAS TESTED AND DID NOT HOLD.
+
+### THE RISERS ARE THE SAME WORDS IN BOTH BANDS
+
+Rated risers only, 20 endpoint pairs, top 12 by mass:
+
+    lo   found, said, began, placed, have, handed, whispered, looked, made, watched, took, asked
+    hi   said, found, have, take, whispered, began, watched, took, left, pulled, made, walked
+
+Share of rated riser mass going to a fixed 36-word vocalisation list: **lo 7.5%,
+mid 8.7%, hi 8.1%.** Flat. So the low band is NOT "blow becomes utterance", and
+the mapping above is withdrawn as a hypothesis that failed its first test.
+
+**What the two lists show instead is that the destination barely depends on the
+field.** The same generic narrative verbs absorb the mass either way. That argues
+against routing-to-a-semantic-neighbour and toward something closer to
+`TAXONOMY.md` relation 7, BLEACHED CONTINUATION -- though nothing here tests that
+relation directly and it should not be quoted as if it did.
+
+**What this leaves standing.** The SAFER half is solid and large where the field
+is not already saturated (49/0 at +1.61). The ADJACENT half, as operationalised
+by harm category, is a fact about field composition rather than about routing.
+The right instrument for adjacency is `displacement_taxonomy`'s coded relations
+or an embedding distance, neither of which this folder uses.
+
 ### THREE AGGREGATIONS, AND TWO OF THEM WERE WRONG
 
 Recorded because they gave three different answers to one question and the first
