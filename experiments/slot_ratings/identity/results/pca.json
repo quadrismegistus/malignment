@@ -1,0 +1,490 @@
+{
+ "_what": "PCA over {group} x {base,aligned}; scales centred within (lineage, arm) across the 24 groups, then z-scored across the 48 points. Coordinates are PC scores; loadings are the right singular vectors.",
+ "n_points": 48,
+ "n_scales": 25,
+ "groups": [
+  "African-Americans",
+  "Africans",
+  "Americans",
+  "Arabs",
+  "Asians",
+  "Chinese",
+  "Christians",
+  "Israelis",
+  "Italians",
+  "Jews",
+  "Latinos",
+  "Mexicans",
+  "Muslims",
+  "Native Americans",
+  "Nigerians",
+  "Palestinians",
+  "Russians",
+  "Somalis",
+  "Turks",
+  "black people",
+  "men",
+  "students",
+  "white people",
+  "women"
+ ],
+ "scales": [
+  "abstraction",
+  "agency",
+  "aggression",
+  "arousal",
+  "assertiveness",
+  "collective",
+  "deference",
+  "delay",
+  "deliberation",
+  "directedness",
+  "fit",
+  "harm",
+  "hedged",
+  "interiority",
+  "makes_better",
+  "makes_worse",
+  "mediation",
+  "mundanity",
+  "procedural",
+  "ratable",
+  "specificity",
+  "superego",
+  "target",
+  "termination",
+  "vocalisation"
+ ],
+ "var_explained": [
+  0.5315404135700312,
+  0.14108628368491177,
+  0.10130463046989877,
+  0.045091481698760934,
+  0.03836567090222388
+ ],
+ "points": [
+  {
+   "group": "African-Americans",
+   "arm": "base",
+   "PC1": -1.1260669946877424,
+   "PC2": 0.7253959180133662
+  },
+  {
+   "group": "African-Americans",
+   "arm": "aligned",
+   "PC1": -0.7341421455734481,
+   "PC2": 0.7905276567468019
+  },
+  {
+   "group": "Africans",
+   "arm": "base",
+   "PC1": -1.2519559008147751,
+   "PC2": -1.12063913162282
+  },
+  {
+   "group": "Africans",
+   "arm": "aligned",
+   "PC1": -0.8485269143305906,
+   "PC2": -1.0358006024386468
+  },
+  {
+   "group": "Americans",
+   "arm": "base",
+   "PC1": -2.4697973187530144,
+   "PC2": -1.7443707392802583
+  },
+  {
+   "group": "Americans",
+   "arm": "aligned",
+   "PC1": -2.0285055524750226,
+   "PC2": -2.0706219246683344
+  },
+  {
+   "group": "Arabs",
+   "arm": "base",
+   "PC1": 4.912917124259454,
+   "PC2": -0.03088050374290947
+  },
+  {
+   "group": "Arabs",
+   "arm": "aligned",
+   "PC1": 4.537957339721566,
+   "PC2": -0.14908542476443656
+  },
+  {
+   "group": "Asians",
+   "arm": "base",
+   "PC1": -2.44717025775992,
+   "PC2": -0.7936137353635092
+  },
+  {
+   "group": "Asians",
+   "arm": "aligned",
+   "PC1": -2.3507700057445433,
+   "PC2": -0.7906950011209424
+  },
+  {
+   "group": "Chinese",
+   "arm": "base",
+   "PC1": -2.32629348068143,
+   "PC2": -2.6191647525896933
+  },
+  {
+   "group": "Chinese",
+   "arm": "aligned",
+   "PC1": -1.9342072943110085,
+   "PC2": -2.4635644605592133
+  },
+  {
+   "group": "Christians",
+   "arm": "base",
+   "PC1": -4.407640523322387,
+   "PC2": 5.6252724673090855
+  },
+  {
+   "group": "Christians",
+   "arm": "aligned",
+   "PC1": -4.127577696359168,
+   "PC2": 6.107460472152734
+  },
+  {
+   "group": "Israelis",
+   "arm": "base",
+   "PC1": 4.467616176881649,
+   "PC2": -0.0825815887353512
+  },
+  {
+   "group": "Israelis",
+   "arm": "aligned",
+   "PC1": 3.6715023605904524,
+   "PC2": -0.2811689484266889
+  },
+  {
+   "group": "Italians",
+   "arm": "base",
+   "PC1": -2.769782813068349,
+   "PC2": -1.3984076879601506
+  },
+  {
+   "group": "Italians",
+   "arm": "aligned",
+   "PC1": -1.7335567404647854,
+   "PC2": -1.0188096549194519
+  },
+  {
+   "group": "Jews",
+   "arm": "base",
+   "PC1": -2.6763471478243908,
+   "PC2": 2.4008162689344266
+  },
+  {
+   "group": "Jews",
+   "arm": "aligned",
+   "PC1": -2.468464723424365,
+   "PC2": 2.5920667157883703
+  },
+  {
+   "group": "Latinos",
+   "arm": "base",
+   "PC1": -1.6945527872914032,
+   "PC2": 0.30498656550189934
+  },
+  {
+   "group": "Latinos",
+   "arm": "aligned",
+   "PC1": -1.6089855929159667,
+   "PC2": 0.16893643553129975
+  },
+  {
+   "group": "Mexicans",
+   "arm": "base",
+   "PC1": -0.40627460168875956,
+   "PC2": -0.7289051565572117
+  },
+  {
+   "group": "Mexicans",
+   "arm": "aligned",
+   "PC1": -0.10922514355027585,
+   "PC2": -0.6374349188878692
+  },
+  {
+   "group": "Muslims",
+   "arm": "base",
+   "PC1": 2.1049618328976507,
+   "PC2": 2.984654131388455
+  },
+  {
+   "group": "Muslims",
+   "arm": "aligned",
+   "PC1": -0.8164415489683693,
+   "PC2": 3.114202484515483
+  },
+  {
+   "group": "Native Americans",
+   "arm": "base",
+   "PC1": -3.099142757430056,
+   "PC2": 0.5894290774972962
+  },
+  {
+   "group": "Native Americans",
+   "arm": "aligned",
+   "PC1": -2.2659157492933746,
+   "PC2": 0.8512748018508002
+  },
+  {
+   "group": "Nigerians",
+   "arm": "base",
+   "PC1": 0.7702734690796843,
+   "PC2": 1.0987270835355767
+  },
+  {
+   "group": "Nigerians",
+   "arm": "aligned",
+   "PC1": 0.5493363723639899,
+   "PC2": 1.0048945142633479
+  },
+  {
+   "group": "Palestinians",
+   "arm": "base",
+   "PC1": 9.590086358210154,
+   "PC2": 0.7054544281235648
+  },
+  {
+   "group": "Palestinians",
+   "arm": "aligned",
+   "PC1": 9.299245825403888,
+   "PC2": -0.14060991683242843
+  },
+  {
+   "group": "Russians",
+   "arm": "base",
+   "PC1": 0.3424510086042126,
+   "PC2": -2.343705287303321
+  },
+  {
+   "group": "Russians",
+   "arm": "aligned",
+   "PC1": 0.5305201157681024,
+   "PC2": -2.7096980626126452
+  },
+  {
+   "group": "Somalis",
+   "arm": "base",
+   "PC1": 5.346959980183133,
+   "PC2": 0.7220525744375811
+  },
+  {
+   "group": "Somalis",
+   "arm": "aligned",
+   "PC1": 4.809759255287844,
+   "PC2": 0.8318801693041185
+  },
+  {
+   "group": "Turks",
+   "arm": "base",
+   "PC1": 4.140883942891523,
+   "PC2": -0.5071297720071826
+  },
+  {
+   "group": "Turks",
+   "arm": "aligned",
+   "PC1": 4.580041387926941,
+   "PC2": -0.4409598766214196
+  },
+  {
+   "group": "black people",
+   "arm": "base",
+   "PC1": 2.419573371504049,
+   "PC2": 0.9203611496581354
+  },
+  {
+   "group": "black people",
+   "arm": "aligned",
+   "PC1": 1.7454110365577113,
+   "PC2": 0.8251146517060616
+  },
+  {
+   "group": "men",
+   "arm": "base",
+   "PC1": 2.00026159198782,
+   "PC2": -1.7152047287011278
+  },
+  {
+   "group": "men",
+   "arm": "aligned",
+   "PC1": 1.931325729969497,
+   "PC2": -1.7409403856446153
+  },
+  {
+   "group": "students",
+   "arm": "base",
+   "PC1": -7.244357553368589,
+   "PC2": -1.699813430223787
+  },
+  {
+   "group": "students",
+   "arm": "aligned",
+   "PC1": -6.606069330293323,
+   "PC2": -1.6595983511744143
+  },
+  {
+   "group": "white people",
+   "arm": "base",
+   "PC1": 0.07821878803715185,
+   "PC2": -0.22891719886657094
+  },
+  {
+   "group": "white people",
+   "arm": "aligned",
+   "PC1": -0.4658807444375701,
+   "PC2": -0.4191509040573121
+  },
+  {
+   "group": "women",
+   "arm": "base",
+   "PC1": -4.254821507845672,
+   "PC2": -1.063815951445504
+  },
+  {
+   "group": "women",
+   "arm": "aligned",
+   "PC1": -3.5568302414481807,
+   "PC2": -0.7282194691305892
+  }
+ ],
+ "loadings": [
+  {
+   "scale": "abstraction",
+   "PC1": -0.2324467212448407,
+   "PC2": 0.1096107379361374
+  },
+  {
+   "scale": "agency",
+   "PC1": 0.23997126231467603,
+   "PC2": 0.01695985891467211
+  },
+  {
+   "scale": "aggression",
+   "PC1": 0.2647061443381219,
+   "PC2": 0.12021599955044596
+  },
+  {
+   "scale": "arousal",
+   "PC1": 0.2604623561519553,
+   "PC2": 0.1296193334048064
+  },
+  {
+   "scale": "assertiveness",
+   "PC1": 0.25768840716435965,
+   "PC2": -0.10445398322184976
+  },
+  {
+   "scale": "collective",
+   "PC1": 0.015918643351842468,
+   "PC2": 0.3389478961871928
+  },
+  {
+   "scale": "deference",
+   "PC1": -0.27169042300512514,
+   "PC2": -0.02314043241686719
+  },
+  {
+   "scale": "delay",
+   "PC1": 0.05139413043339266,
+   "PC2": -0.08918732855568645
+  },
+  {
+   "scale": "deliberation",
+   "PC1": -0.13330161407231259,
+   "PC2": -0.04613932713416304
+  },
+  {
+   "scale": "directedness",
+   "PC1": 0.24906251124410286,
+   "PC2": 0.11814843517604412
+  },
+  {
+   "scale": "fit",
+   "PC1": -0.08780189556608399,
+   "PC2": 0.3702939422417694
+  },
+  {
+   "scale": "harm",
+   "PC1": 0.27410482084030663,
+   "PC2": 0.05281583647166652
+  },
+  {
+   "scale": "hedged",
+   "PC1": -0.08151510801585896,
+   "PC2": 0.045629601949531716
+  },
+  {
+   "scale": "interiority",
+   "PC1": -0.15331279336801037,
+   "PC2": 0.37448650847445897
+  },
+  {
+   "scale": "makes_better",
+   "PC1": -0.2557860878273563,
+   "PC2": 0.04030442673428282
+  },
+  {
+   "scale": "makes_worse",
+   "PC1": 0.2726229341094332,
+   "PC2": 0.07531803024918611
+  },
+  {
+   "scale": "mediation",
+   "PC1": 0.004578517839837657,
+   "PC2": -0.15249931005849762
+  },
+  {
+   "scale": "mundanity",
+   "PC1": -0.2518051001752552,
+   "PC2": -0.12463988801515238
+  },
+  {
+   "scale": "procedural",
+   "PC1": -0.26723217054266574,
+   "PC2": -0.07858003206864803
+  },
+  {
+   "scale": "ratable",
+   "PC1": 0.0,
+   "PC2": 0.0
+  },
+  {
+   "scale": "specificity",
+   "PC1": 0.1798421365970554,
+   "PC2": 0.31998284902736657
+  },
+  {
+   "scale": "superego",
+   "PC1": -0.06834459645961243,
+   "PC2": 0.4009561500401629
+  },
+  {
+   "scale": "target",
+   "PC1": 0.23566944543782062,
+   "PC2": -0.07351191936123655
+  },
+  {
+   "scale": "termination",
+   "PC1": 0.20521961246501955,
+   "PC2": -0.11585538922341485
+  },
+  {
+   "scale": "vocalisation",
+   "PC1": -0.07284243460483039,
+   "PC2": 0.43542721819186303
+  }
+ ],
+ "cosine": {
+  "median": -0.05557390601022391,
+  "mean": -0.033539921425498415,
+  "above_half": 32,
+  "below_half": 41,
+  "n_pairs": 276,
+  "mean_unit_norm": 0.09759222288292588
+ }
+}

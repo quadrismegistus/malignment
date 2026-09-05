@@ -112,6 +112,19 @@ in the same model and arm -- without that, PC1 is which model you are.
 **PC1 is a harm-versus-deference axis and it carries over half the variance.**
 PC2 is interiority and self-regulation.
 
+![PCA biplot](figures/pca_biplot.png)
+
+`--plot` writes `figures/pca_biplot.png` from `results/pca.json` and recomputes
+nothing, per `../plot.py`'s rule. Red triangles are base, blue circles aligned,
+one blue arrow per group; grey arrows are the 12 largest scale loadings and their
+length is cosmetic (the factor is printed on the figure so an arrow length is
+never read as a coordinate).
+
+**THE PC1 DIRECTION WAS CHECKED AGAINST THE DATA, NOT ASSUMED.** The first
+version of this figure labelled the axis with harm on the LEFT. `harm` loads
++0.27 and Palestinians -- the highest-harm group -- sits at +9.6, so positive PC1
+is the harm end and a reader would have read the axis backwards.
+
 ### THE FIELD IS IN THE BASE, AND PC2 SEPARATES RELIGION
 
 PC1, base arm, most positive first: Palestinians +9.6, Somalis +5.4, Arabs +4.9,
