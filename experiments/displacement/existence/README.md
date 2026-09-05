@@ -359,6 +359,58 @@ quantity and the dissociation between them is not established here.
 
 EXPLORATORY. Not registered. The USAS grain cut is the only control run on it.
 
+### WHICH FIELDS SUBSTITUTE FOR WHICH: IT IS A FUNNEL, NOT A MATRIX
+
+`field_matrix.py`. Having established that mass leaves the faller's field, this
+asks where it goes. **The baseline is the entire question.** Against a global
+base rate the diagonal dominates -- body->body x8.2, food->food x14.6,
+architecture->architecture x19.7 -- and that is prompt composition, not routing: a
+body-scene prompt offers mostly body words, so its fallers and risers are both
+body words. Baselined instead on **the base distribution's own mass over that
+cell's candidates**, the ratio asks whether mass went somewhere MORE than the
+prompt's own vocabulary made likely, and **the diagonal disappears from every
+row**.
+
+    faller domain          cells   strongest destinations (x availability)
+    Z grammar/names        27797   X 1.40  E 1.37  Q 1.22  S 1.18
+    A general/abstract     21104   Q 1.38  X 1.33  S 1.27  E 1.24
+    M movement             17104   B 1.26  Q 1.22  X 1.20  S 1.13
+    Q linguistic acts       9728   B 1.27  X 1.27  S 1.15  T 1.14
+    X psychological         5184   K 1.67  S 1.36  Q 1.31  T 1.13
+    S social                4970   Q 1.38  K 1.26  E 1.24  X 1.23
+    B the body              3459   Q 1.22  X 1.20  T 1.11  Z 1.07
+    E emotion               2843   K 1.52  Q 1.29  T 1.18  X 1.13
+    L life & living         1996   Q 1.85  K 1.27  T 1.23  B 1.21
+    I money                 1738   Q 1.40  X 1.37  T 1.13  B 1.11
+    G govt & public         1455   Q 1.37  X 1.24  T 1.15  B 1.14
+    Y science                785   X 1.43  O 1.36  E 1.29  Q 1.21
+
+**The destination barely depends on the origin.** Over 18 source domains:
+
+    in the top 5 destinations of...        is the strongest destination for...
+      Q linguistic acts   17 of 18           Q linguistic acts   7
+      X psychological     16 of 18           K entertainment     5
+      S social            13 of 18           X psychological     3
+
+Whatever the mass was, it moves toward **speech, mental states and social
+action**. That is why the conditional test finds it leaving its own field: it is
+not being routed to a neighbour, it is being routed to one destination.
+
+**The sharpest single cell is the one the campaign has been describing all
+along.** `L life & living` -- the domain holding `kill`, `strangle`, `die` --
+goes to `Q linguistic acts` at **x1.85**, the highest ratio in the table. That is
+`kill -> scream` with the availability confound removed.
+
+It is also the same shape `norm_change` reports marginally (*"alignment strips
+action vocabulary and replaces it with procedural, hedging, and safety
+language"*), the same shape as `displacement_taxonomy`'s relation 2 BLOW BECOMES
+UTTERANCE and relation 9 COMMENT INSTEAD OF ACT, and the same shape as the
+observation that the top risers are the same generic verbs in every saturation
+band. Four routes, one direction.
+
+EXPLORATORY. Not registered. Rows below 500 weighted cells are not printed, and
+`P education`, `C arts` and `W world` never reach it.
+
 ### WHERE THE DISPLACEMENT CLAIM STANDS: THE TWO HALVES SEPARATE
 
 "Mass falls to a semantically adjacent but SAFER word" is two claims, and they
