@@ -80,6 +80,19 @@ version.**
 
 ## WHAT LANDED
 
+**AND `displacement/register_shift` GETS THE OPPOSITE ANSWER ON THE SAME
+INSTRUMENT.** That folder is a registered test of the same scale, same unit
+(`roster.endpoints()`, n=50), same statistic and same edge, and its G is 30/50 at
+p=0.203, NOT SUPPORTED, with the change bounded to [-0.0410, +0.0247]. **The
+difference is that this folder computes a level per (lineage, PROMPT) and
+combines across prompts, while register_shift pools mass across prompts.** Its own
+off-spec note records 44/50 rises under per-prompt aggregation, which is where H2
+sits. Neither is wrong -- pooled asks about the mass at stake, per-prompt asks
+about the typical prompt -- but **H2 should be quoted as "register rises at the
+typical prompt", not as "register rises"**, and register_shift's G1/G2
+decomposition (both what leaves AND what arrives sit below the mean: substitution
+WITHIN the low register) is a finding this folder does not produce.
+
 **H2 REGISTER RISES IN BOTH LANGUAGES, and it is the strongest result here.**
 45 of 49 signed English lineages, 38 of 43 Chinese, p<1e-5 both. On
 `k_register_level`, the instrument built for it.

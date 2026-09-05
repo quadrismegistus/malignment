@@ -60,6 +60,47 @@ Note this is the same shape R2 predicted for VIOLENCE -- "substitute within
 register (plain->plain) rather than across it" -- arriving as the whole-vocabulary
 result rather than as a domain contrast. R2 itself is not tested here.
 
+## THE DISAGREEMENT WITH `norm_change`, AND ITS CAUSE
+
+**`displacement/norm_change` H2 reports `k_register_level` RISING at 45 up / 4 dn,
+p<1e-5 -- its strongest result and its headline -- where this folder's G is 30/50
+at p=0.203, NOT SUPPORTED.** Neither folder cited the other until 2026-09-05.
+
+It is not the lexicon (both `k_register_level`), not the unit (both
+`roster.endpoints()`, n=50), not the statistic (both a level shift of the
+mass-weighted mean), and not the edge (both base -> endpoint). **It is how prompts
+are combined WITHIN a lineage.**
+
+    norm_change      computes a level per (base, aligned, PROMPT) -- its SQL
+                     groups by prompt -- then combines across prompts
+    register_shift   pools mass across prompts, so high-mass prompts dominate
+
+**This folder already measured the gap without knowing it was a disagreement.**
+Its own off-spec note records that *"aggregating medians over prompts rather than
+pooling mass, gave 44/50 rises"* against the frozen spec's 30/50 -- and
+norm_change's 45/4 sits on top of that 44/50. The off-spec run also changed the
+edge, so the attribution is not airtight; norm_change uses endpoints, which
+removes that difference and leaves aggregation as the remaining one.
+
+**NEITHER IS WRONG. They are different populations.** Pooled mass asks whether
+the average word the model would emit rises in register, weighting by the mass
+actually at stake. Per-prompt asks whether register rises at the typical prompt,
+counting a prompt where three words hold all the mass the same as one with sixty
+live candidates.
+
+**What each licenses.** norm_change's H2 licenses "register rises at the typical
+prompt". This folder's G bounds the pooled quantity to [-0.0410, +0.0247] and
+licenses nothing about a rise. And the G1/G2 decomposition is unaffected by the
+disagreement -- it is a within-arm comparison that norm_change does not run at
+all.
+
+**A NOTE ON WHAT THIS FOLDER FORBADE.** The text above says the 44/50 *"is not a
+second result and must not be quoted as one"*. That instruction is about running
+it here off-spec. norm_change's H2 is the same quantity arrived at independently,
+registered separately, on the correct endpoint population -- so it is quotable as
+norm_change's result. What must not happen is either number being cited as
+settling the other.
+
 # THE GRAIN DISAGREEMENT, WHICH IS THE INTERESTING PART
 
 The same instrument on generated PASSAGES gives the opposite answer.
