@@ -167,7 +167,9 @@ already measures it, better: its quantity is the mass-weighted norm shift
 `sum(dp(w) * norm(w))`, and since `sum(dp) ~ 0` that is this table's
 riser-minus-faller difference multiplied by the moved mass. The two agree on
 sign wherever they overlap -- register rises (+0.0063 there, +0.078 here),
-valence rises (+0.0026 / +0.102), concreteness falls (-0.025 / -0.244) -- and
+valence rises (+0.0026 / +0.102), concreteness falls (-0.025 / -0.244, and see
+CONCRETENESS IN ONE PLACE below: norm_change's -0.025 is its MARGINAL figure and
+is null; the agreement is with its DOSE figure) -- and
 norm_change runs it over **50 endpoint lineages** with a per-lineage sign test
 where this column has one checkpoint. **Cite norm_change for the norm result.**
 
@@ -362,6 +364,42 @@ That is a real dissociation and it is also the shape a multiple-comparisons
 artifact takes. Eleven scales x four arms x three edges is 132 cells; at p<0.01
 about one is expected by chance and there are more than that, but no correction
 has been applied and none of these were predicted.
+
+### CONCRETENESS IN ONE PLACE
+
+It is the folder's one replicating ablation effect and it was spread over four
+sections, so it is stated once here:
+
+    English, marginal, 50 lineages       -0.0248  19/31   p=0.119   NOT supported
+    English, under DOSE                  -0.1105          p=1e-5    supported
+    English, under LIFT                  -0.0273  12/38   p=3e-4    supported
+    Chinese, marginal                    -0.0325   8/40   p<1e-5    supported
+    Chinese, under dose                  +0.0049          p=0.56    NOT supported
+    ------------------------------------------------------------------------
+    Tulu-3 SFT full mix, raw, pooled     -0.2440  889/1149 p<1e-4   this folder
+    removing WildChat, raw               -0.1637*                   FURTHER down
+    removing WildChat, framed            -0.1945*                   FURTHER down
+    removing WildChat, self              -0.1525*                   FURTHER down
+
+**Concreteness falls under alignment at CHARGED sites in English, and everywhere
+in Chinese** -- `norm_change`'s split, on each language's own instrument. The
+Tulu full mix shows the fall pooled, which is what a dose-only effect looks like
+when loaded and unloaded prompts are averaged together. **Removing WildChat
+pushes it further down on every edge**, and that is the only ablation effect in
+this folder that has survived every condition it has been put through.
+
+So WildChat keeps the landing CONCRETE against a de-concretizing pressure that
+gets stronger with charge. Read with the sensory reading: the same cut lowers RID
+`sensation` (-2.12 raw, -2.57 framed, -2.06 self), and `norm_change` has sensory
+RISING under alignment (`X3.2 Sensory: Sound` +0.01789, 112/41, p<1e-5, *"which
+is what a scream IS"*). Concrete and perceptual are one direction here, and
+WildChat is what supplies it.
+
+**THE FULL-MIX BASELINE FLIPS SIGN WITH THE FRAME AND THE ARM EFFECT DOES NOT.**
+Raw the full mix falls (-0.244); framed and self it RISES (+0.033, +0.120).
+`no-wildchat` is negative on all three regardless. So "does alignment
+de-concretize" depends on whether the template is there; "does WildChat keep the
+landing concrete" does not.
 
 ### Fences on this section
 
