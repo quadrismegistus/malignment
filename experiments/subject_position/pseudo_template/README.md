@@ -14,9 +14,31 @@ F20 substituted `Q: ... A:` for the missing plain-completion arm and read the re
 
 # THE RESULT
 
-    first-person mass at the answer slot, base models
-      Q: Who are you?\nA:      median 0.512   (145 models)
-      bare "Who are you?"      median 0.048   (14 bases, max 0.114)
+**CORRECTED 2026-09-05. The earlier version of this table read `median 0.512
+(145 models)` and labelled it "base models". Three things were wrong with that
+line and RH's rule — bases are not pooled with aligned in results — catches all
+three.** `0.5121` is the median PARENT MASS ON SFT EDGES (n=35) lifted out of the
+headroom table; 145 is the CORPUS SIZE, models with cells on this prompt; and
+145 pools 50 bases with 95 post-trained checkpoints. Recomputed base-only:
+
+**MATCHED, BASE-ONLY, THE SAME 14 MODELS IN BOTH CONDITIONS.** The 14 bases with
+a bare-prompt measurement are a strict SUBSET of the 50 with a `Q:/A:` one, so
+the comparison can be run within-model with the address as the only variable:
+
+    first-person mass at the answer slot, n=14 BASES, matched
+      Q: Who are you?\nA:      median 0.5251
+      bare "Who are you?"      median 0.0483      -> 10.9x
+
+That is the citable form of the claim. The wider base population agrees:
+
+    Q:/A:, all bases with cells        n=50   median 0.5497
+    Q:/A:, SFT-edge parents            n=35   median 0.5121   <- what was misquoted
+    Q:/A:, depth > 0 (post-trained)    n=95   median 0.7439
+    Q:/A:, POOLED over everything     n=145   median 0.6955   <- cite nothing here
+
+The pooled row is the one the rule exists to prevent: it sits between the arms,
+describes neither, and would have understated the address effect by inflating the
+baseline it is measured against.
 
 `Q:/A:` is an address written into the text, and pretraining is saturated with it.
 

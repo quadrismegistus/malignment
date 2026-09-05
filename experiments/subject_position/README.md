@@ -18,11 +18,11 @@ F20 tried to settle this and substituted a `Q: ... A:` pseudo-template for the m
 ## THE QUESTIONS
 
     pseudo_template/         What does the address supply, as against the model?
-                             MEASURED. Q:/A: gives 0.512 median first-person mass
-                             against 0.048 bare. The address supplies ten times
-                             what the models bring -- and is the only condition in
-                             which base and aligned receive an IDENTICAL address,
-                             because 11 of 14 bases ship no chat template.
+                             MEASURED. Matched base-only, n=14: Q:/A: gives
+                             0.5251 median first-person mass against 0.0483
+                             bare -- 10.9x. It is also the only condition in
+                             which base and aligned receive an IDENTICAL
+                             address, because most bases ship no chat template.
 
     installation_rung/       Which training rung installs the position?
                              MEASURED. SFT: 30 rise / 5 fall, median +0.2296,
@@ -61,6 +61,34 @@ Templated, alignment raises the first person enormously. **Raw, alignment lowers
 Meanwhile raw narrative interiority ROSE with alignment (+0.224, 16/17, `passage_analysis/interiority_in_passages`, generated with no template — verified in the producers, which pass raw strings and never call `apply_chat_template`).
 
 **So whatever the respondent training leaves in raw prose, it is not more first-person speech.** Outside the turn the model becomes *less* willing to say "I" while writing *more* inner life. Either those are separate effects of alignment, or the trace is in something other than the pronoun. `frame_inversion/` is that question.
+
+## THE STANDING RULE: BASES ARE NOT POOLED WITH ALIGNED IN RESULTS
+
+RH, 2026-09-05. Every statistic in this subject is either **base-only**,
+**aligned-only**, or an explicit **paired contrast between them**. A median over
+a set that mixes arms describes neither and is never the answer to a question
+anyone asked.
+
+It bit twice on the day the rule was written, both in `pseudo_template/`:
+
+- A line read `median 0.512 (145 models)` under the heading "base models". `145`
+  is the CORPUS — models with cells on that prompt — and pools 50 bases with 95
+  post-trained checkpoints. `0.512` was not a base median at all; it was the
+  median parent mass on SFT edges (n=35), lifted out of a headroom table.
+  Base-only over all 50 is **0.5497**; matched to the 14 bases that also have a
+  bare-prompt cell it is **0.5251**, and that matched figure is the citable one
+  because the address is then the only variable. Pooled is 0.6955, which would
+  have understated the address effect by inflating its own baseline.
+
+- In `framed_identity/`, F20x's base rate was printed as a parenthetical beneath
+  a table of templated ALIGNED rates. Nothing was pooled, but the adjacency
+  invited the one comparison that is unreadable: base-untemplated against
+  aligned-templated moves the arm AND the frame together. It now prints as a 2x2
+  with the base-templated cell shown as **NO SUCH CELL**, which is the truth —
+  41 of 50 roster bases ship no chat template, so it cannot be run.
+
+**A base and an aligned model may sit in one table only when the table shows
+which is which and one variable separates them.**
 
 ## WHAT SHOULD NOT BE CITED, WHATEVER QUESTION IT APPEARS UNDER
 

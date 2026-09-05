@@ -5,18 +5,28 @@
 
 ## THE THREE THINGS THIS SEPARATES
 
-**1. TEMPLATED vs UNTEMPLATED.** The registered comparison. `f20x_annotations`
-coded the same four questions at the `Q: {q}\nA:` rung and found the median
-ALIGNED model claiming a HUMAN identity 43.3% of the time on "Who are you?".
-Here the same models are inside their own templates. The unit is the MODEL and
-the comparison is unpaired at the row level -- the two corpora have different n
-per cell and different seeds -- so it is reported as a rate per model with the
-model as the unit of a sign test, never as a pooled row-level percentage.
+**1. TEMPLATED vs UNTEMPLATED, WITHIN THE ALIGNED ARM.** The registered
+comparison. `f20x_annotations` coded the same four questions at the `Q: {q}\nA:`
+rung and found the median ALIGNED model claiming a HUMAN identity 43.3% of the
+time on "Who are you?". Here the same models are inside their own templates.
+
+**NO BASE MODEL APPEARS IN THIS FILE, AND BASES ARE NEVER POOLED WITH ALIGNED
+ANYWHERE IN IT** (RH's rule, 2026-09-05). 41 of 50 roster bases ship no chat
+template, so the base-templated cell cannot be run at all. The 2x2 is printed
+with that cell shown as absent, precisely so nobody reads the DIAGONAL --
+base-untemplated against aligned-templated moves the arm and the frame at once
+and means nothing.
+
+The unit is the MODEL and the comparison is unpaired at the row level -- the two
+corpora have different n per cell and different seeds -- so it is reported as a
+rate per model, never as a pooled row-level percentage.
 
 **2. EMPTY vs DEFAULT.** Within-model, fully paired: the same model, question,
 temperature and sample index under an empty system block and under its shipped
-one. `empty - default` is the size of the PERSONA's contribution to the model's
-self-report, and it is the reason `system` was made a factor rather than fixed.
+one. **STRATIFIED, NOT POOLED** -- see `load_regimes` below. The `system` factor
+was introduced to size the PERSONA's contribution, but the two arguments produce
+three different treatments and only four of the seventeen models get the one the
+factor was named for.
 
 **3. WHAT THE FIRST PERSON PREDICATES.** `identity_kind` is the F20x field
 verbatim, so its five levels are comparable across the two corpora. `names_maker`
@@ -200,10 +210,26 @@ def main(argv=None):
                   % (qid, syscond, 100 * median(ai), 100 * median(hu),
                      100 * median(no), 100 * median(de)))
     print()
-    print("  F20x UNTEMPLATED, same four questions, 29 lineages, aligned arm:")
-    print("      who      ai 43.3%%   human 43.3%%   (base: ai 0.0%%)")
-    print("  The templated rate above is the comparison. Not paired at the row")
-    print("  level -- different n, different seeds -- so read the MODEL medians.")
+    #: THE 2x2, DRAWN SO THE MISSING CELL IS VISIBLE. Printing F20x's base rate
+    #: as a bare parenthetical under a table of TEMPLATED ALIGNED rates invites
+    #: exactly one comparison nobody may make -- base-untemplated against
+    #: aligned-templated moves the arm and the frame at once. RH's rule: bases
+    #: are not pooled with aligned in results. Neither are they set beside them
+    #: across a second moving variable.
+    print("  THE 2x2, AND THE CELL THAT DOES NOT EXIST  ('Who are you?', ai_system)")
+    print()
+    print("                     untemplated (F20x)      templated (here)")
+    print("    base                    0.0%                  NO SUCH CELL")
+    print("    aligned                43.3%                 95.0% / 97.5%")
+    print()
+    print("  41 of 50 roster bases ship no chat template, so base-templated is")
+    print("  not missing by choice and cannot be run. READ ONLY ALONG THE EDGES:")
+    print("    down the untemplated column   base vs aligned, one variable, F20x's own")
+    print("    across the aligned row        untemplated vs templated, one variable, THIS")
+    print("  The diagonal moves both and means nothing.")
+    print()
+    print("  The aligned row is also unpaired at the ROW level -- different n,")
+    print("  different seeds -- so it is read as MODEL medians, not pooled rates.")
     print()
 
     # ---- 2. EMPTY vs DEFAULT, STRATIFIED BY WHAT THE MANIPULATION IS ----
