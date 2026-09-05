@@ -1,9 +1,9 @@
 ---
 subject: existence
-status: RUN 2026-08-30. 50 endpoint lineages, English.
+status: "RUN 2026-08-30, 50 endpoint lineages, English. Saturation x lift stratification, the conditional FIELD test and the field matrix added 2026-09-05; those sections are EXPLORATORY and unregistered."
 kind: question
 question: Is alignment's reshaping of word probabilities content-selective, and is it displacement or suppression?
-headline: "Displacement exists. Higher-T words lose more mass (43/50 lineages). Freed mass lands preferentially on same-kind words (47/2) -- but ONLY where the prompt field is already charged: where the scene is mostly neutral it REVERSES to none-kind at every lift band (1/45, 9/35, 12/27). It holds under the deployment frame and is 2.8x larger there."
+headline: "Displacement exists: higher-T words lose more mass (43/50 lineages), and it holds under the deployment frame 2.8x larger. Where the mass GOES is not adjacency. On USAS fields it LEAVES the faller's own field (10/38 fine, 10/39 coarse) for a classified word rather than an unclassified one (38/7), and the destination barely depends on the origin -- linguistic acts is in the top 5 for 17 of 18 source domains. Under lift the funnel narrows toward speech (37/11) and away from social action (11/36). The same-kind result (47/2) holds only where the prompt field is already charged and REVERSES where the scene is neutral (1/45, 9/35, 12/27)."
 ---
 
 # existence
