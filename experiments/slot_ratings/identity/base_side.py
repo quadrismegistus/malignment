@@ -41,28 +41,56 @@ sys.path.insert(0, HERE)
 from analyse import sweep_prompts, ratings          # noqa: E402
 
 
+def _pairs(meta, roster_pairs, use_pilot):
+    """The lineage panel for one prompt.
+
+    **THE PANEL WAS 20 BECAUSE OF A FILE, NOT BECAUSE OF THE DATA.** `meta["cells"]`
+    comes from the rating-pilot JSONL that `analyse.sweep_prompts()` reads, so the
+    panel was whatever pairs happened to be in that pilot. This producer never
+    consulted `roster.endpoints()`, and the folder's status line said it was
+    "awaiting more lineages" while all 50 endpoint pairs already had both arms
+    present for every room prompt.
+
+    Checked before switching: the 30 pairs the pilot omitted carry the SAME rating
+    coverage as the 20 it kept -- median 80 rated words against 80, rated mass
+    83.4% against 83.6%, and 0 of 1,440 arms fail the >=10-word floor. So no new
+    `llm.Task` rating run is needed; the ratings are keyed by (prompt, word) and
+    the room prompts are unchanged.
+
+    `--pilot` reproduces the published 20-lineage numbers.
+    """
+    if use_pilot:
+        return [(c["base"], c["endpoint"]) for c in meta["cells"]]
+    return sorted(roster_pairs.items())
+
+
 def main():
-    from malignment import vectors as V
+    import argparse
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--pilot", action="store_true",
+                    help="use the rating-pilot cell list (the published 20 pairs)")
+    args = ap.parse_args()
+    from malignment import vectors as V, roster
     from scipy import stats
     S = {p: m for p, m in sweep_prompts().items() if m["sweep"] == "room"}
     R = ratings()
+    RP = roster.endpoints()[0]
     scales = sorted({k for v in R.values() for k in v})
     print("room frames: %d groups" % len(S))
 
     rows = []
     for p, meta in sorted(S.items(), key=lambda t: t[1]["group"]):
-        ms = sorted({c["base"] for c in meta["cells"]}
-                    | {c["endpoint"] for c in meta["cells"]})
+        pairs = _pairs(meta, RP, args.pilot)
+        ms = sorted({b for b, _ in pairs} | {e for _, e in pairs})
         q = V.rows("SELECT model, groupArray(word) AS ws, groupArray(p) AS ps "
                    "FROM twp_words_v4_best WHERE prompt={p:String} "
                    "AND model IN {ms:Array(String)} GROUP BY model", p=p, ms=ms)
         store = {r["model"]: dict(zip(r["ws"], r["ps"])) for r in q}
-        for c in meta["cells"]:
-            pb, pa = store.get(c["base"]), store.get(c["endpoint"])
+        for cb, ce in pairs:
+            pb, pa = store.get(cb), store.get(ce)
             if not pb or not pa:
                 continue
-            rec = dict(group=meta["group"],
-                       lineage=c["base"] + " -> " + c["endpoint"])
+            rec = dict(group=meta["group"], lineage=cb + " -> " + ce)
             for arm, dist in (("base", pb), ("aligned", pa)):
                 for s in scales:
                     ws = [w for w in dist if R.get((p, w), {}).get(s) is not None]

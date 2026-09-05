@@ -94,8 +94,8 @@ and the state the first version of the checker could not see.
 
 ### slot_ratings
 
-- **[`identity/`](slot_ratings/identity/README.md)** -- `RUN. [...]`  
-  Alignment equalises the groups on how harmful their slot distribution is, and sharpens them on identity-typed content.
+- **[`identity/`](slot_ratings/identity/README.md)** -- `RUN at 50 lineages (2026-09-05). [...]`  
+  Alignment SHARPENS the groups on identity-typed content -- interiority expands at 13/50, p=0.00094, and vocalisation joins it at 17/50, p=0.0328. The equalises-on-harm clause is directional only: 32/50, p=0.0649 per lineage at the full panel, and it rests on a pooled statistic rather than the sign test.
 - **[`institutional/`](slot_ratings/institutional/README.md)** -- `RUN, four corpora rated, arm A and arm B, 2026-08-19.`  
   Alignment moves institutional slots toward abstract, procedural, deferential, lower-arousal completions -- for BOTH speakers.
 - **[`sexual/`](slot_ratings/sexual/README.md)** -- `RUN, gender-swapped matched pairs only; the 50 sexual-domain frames themselves are not yet analysed.`  
