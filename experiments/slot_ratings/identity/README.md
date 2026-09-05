@@ -92,6 +92,72 @@ street          264       11       64       37       27
 where the instrument judged it applicable. **A cell absent from a sweep has not
 been tested there and is not a null.**
 
+## PCA: THERE IS NO COMMON ALIGNMENT DIRECTION (`pca.py`)
+
+RH's design: one point per {group} x {base, aligned}, the 25 slot scales as
+features. Each scale is centred WITHIN (lineage, arm) across the 24 groups before
+averaging over lineages, so a coordinate is a group's deviation from the other 23
+in the same model and arm -- without that, PC1 is which model you are.
+
+    48 points, 25 scales.  PC1 53.2%   PC2 14.1%   PC3 10.1%   (top3 77.4%)
+
+    PC1   negative  deference -0.27  procedural -0.27  makes_better -0.26
+                    mundanity -0.25  abstraction -0.23
+          positive  harm +0.27  makes_worse +0.27  aggression +0.26
+                    arousal +0.26  assertiveness +0.26
+
+    PC2   positive  vocalisation +0.44  superego +0.40  interiority +0.37
+                    fit +0.37  collective +0.34
+
+**PC1 is a harm-versus-deference axis and it carries over half the variance.**
+PC2 is interiority and self-regulation.
+
+### THE FIELD IS IN THE BASE, AND PC2 SEPARATES RELIGION
+
+PC1, base arm, most positive first: Palestinians +9.6, Somalis +5.4, Arabs +4.9,
+Israelis +4.5, Turks +4.1 ... then students -7.2, Christians -4.4, women -4.3,
+Native Americans -3.1, Italians -2.8. **That ordering is the PRETRAINED field**,
+and it is this subject's headline arriving from a different instrument.
+
+On PC2 the top three are Christians +5.6, Muslims +3.0, Jews +2.4 -- **the three
+religious groups, separated in the BASE arm before any alignment.**
+
+### THE 24 DISPLACEMENTS DO NOT AGREE
+
+Every group appears twice, so each has a base->aligned vector. If alignment
+applied ONE operation to identity terms those would point the same way:
+
+    median pairwise cosine   -0.056        mean  -0.034
+    pairs above +0.5         32 of 276     below -0.5:  41
+    norm of the mean unit displacement     0.098      (1.0 = identical)
+
+**They are uncorrelated, with marginally more pairs pointing apart than
+together.** There is no common alignment direction in norm space. Alignment does
+not do one thing to identity terms; it does a different thing to each.
+
+That is the same fact the dispersion table reports as expansion on five scales
+and none compressing, and the same fact the cross-sweep table reports as 14 sign
+conflicts against 9 replications. **Three instruments, one result.**
+
+### AND ONE GROUP MOVES FAR MORE THAN ANY OTHER
+
+    group             PC1 base -> aligned    |move in PC1-PC2|
+    Muslims             +2.10  ->  -0.82           2.92
+    Italians            -2.77  ->  -1.73           1.10
+    Palestinians        +9.59  ->  +9.30           0.89
+    Native Americans    -3.10  ->  -2.27           0.87
+    ...
+    Asians              -2.45  ->  -2.35           0.10
+    men                 +2.00  ->  +1.93           0.07
+
+**Muslims moves 2.7x the next group, almost entirely along PC1** -- from the
+harm/assertiveness end toward the deference/procedural end. That is the `room`
+profile in one number, on an axis derived without reference to it.
+
+Note what does NOT move: `Palestinians` sits at +9.6, the extreme of the
+pretrained harm axis, and alignment shifts it 0.89. The largest position in the
+base is nearly untouched; the large mover is mid-field.
+
 ### THE `room` SCENE IN ITS OWN RIGHT
 
 **Three {group} came into the room and started to ___.** 66 significant cells
