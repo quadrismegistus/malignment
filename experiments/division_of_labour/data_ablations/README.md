@@ -3,7 +3,7 @@ kind: question
 subject: data_ablations
 status: "RUN 2026-09-04/05. Five Tulu-3 SFT checkpoints, three edges (raw, framed, self). EXPLORATORY throughout -- nothing here is registered."
 question: Which SFT training corpus installs which part of the displacement operation?
-headline: "Removing WildChat changes WHICH words move, on every edge (Jaccard gap -0.21 raw, -0.13 framed, -0.11 self) and raises frame responsiveness while every other ablation lowers it. The sexual-targeting result is RAW-EDGE ONLY and small."
+headline: "Alignment moves mass out of the AGGRESSION field into SENSATION and SPEECH, and what rises is less transgressive on human norms, model norms and contextual ratings alike. Removing WildChat is the only ablation that makes the landing LESS safe (transgressiveness +0.091, scene +0.112, both p<0.01); it also changes WHICH words move on every edge."
 ---
 
 # data_ablations
@@ -124,6 +124,115 @@ bulk slices RAISES it (no-math -0.092 p=0.003, no-persona -0.086 p=0.001), and
 removing safety does nothing. That is consistent with the share tracking the
 sexual density of the mix that remains -- **a corpus prediction nobody has
 checked**, and `posttraining_corpus_analysis` is where it goes.
+
+## `semantics.py` -- WHAT KIND OF WORD, ON THE RIGHT INSTRUMENT
+
+`how_it_differs.py` asked what changes about the moved words using the per-prompt
+`kind` rating, and that instrument is too coarse: `kind` sorts by HOW BAD, not by
+WHAT ABOUT, so `kill` is VIOLENT and `scream` is NONE and the campaign's paradigm
+case of displacement scores as suppression. `malignment/fields.py` supplies what
+the question needs -- semantic FIELDS, plus type norms and contextual ones kept
+apart.
+
+### The full mix: riser minus faller, mass-weighted, unit = the prompt
+
+    kind         scale                     mean d     up/dn        p     cov
+    TYPE/human   warriner_valence          0.3143  1014/687   0.0000     57%
+    TYPE/human   warriner_arousal         -0.3234  643/1059   0.0000     57%
+    TYPE/human   warriner_dominance        0.0992   912/790   0.0033     57%
+    TYPE/human   brysbaert_concreteness   -0.0583  930/1126   0.0000     80%
+    TYPE/model   k_transgressiveness      -0.2359   490/763   0.0000     79%
+    TYPE/model   k_charge                 -0.2324  913/1037   0.0053     79%
+    TYPE/model   k_valence                 0.1022  1043/790   0.0000     79%
+    TYPE/model   k_bodily_harm            -0.3102   407/613   0.0000     79%
+    TYPE/model   k_concreteness           -0.2440  889/1149   0.0000     79%
+    TYPE/model   k_register_level          0.0780   781/667   0.0030     79%
+    CONTEXTUAL   scene                    -0.2893  886/1257   0.0000     79%
+
+**What rises is less transgressive, less charged, less about bodily harm, less
+aroused, and more positively valenced than what falls.** On human type norms, on
+model type norms, AND on the contextual scene rating -- three instruments of
+different provenance agreeing on sign. That is the "safer" half of the
+displacement claim, and it is the strongest form of it this campaign has.
+
+The type/contextual agreement matters: `scene` rates the same word differently
+per prompt, so its agreement with `k_transgressiveness` says the safety gradient
+is in the vocabulary and not only in the scene.
+
+### And the FIELDS see the move the harm taxonomy could not
+
+Share of moved mass, riser% minus faller%, full mix:
+
+    RID   (coverage 31% faller / 33% riser)      USAS  (74% / 76%)
+      sensation             +4.15                  Speech:- Communicative  +2.90
+      instrumental_behavior +1.71                  Moving, coming, going   +1.17
+      social_behavior       +1.39                  General actions, making +0.96
+      abstraction           +1.21                  Location and direction  +0.06
+      icarian_imagery       -0.99                  Putting, taking...      +0.20
+      temporal_references   -0.70                  Getting and giving      -1.78
+      aggression            -4.14                  Grammatical bin         -2.19
+
+**Mass leaves the AGGRESSION field and lands in SENSATION and SPEECH.** That is
+`kill -> scream` stated as a field displacement, on a 1960s regex lexicon and a
+232-code tagset that know nothing about this project. **`displacement_taxonomy`'s
+relation 2, BLOW BECOMES UTTERANCE, measured distributionally for the first
+time.** `existence/adjacency.py` should be using this instrument rather than the
+six harm categories, and its low-saturation "reversal" is a strong candidate for
+this move misread.
+
+Read RID's shares against 31% coverage. USAS at 74-76% is the better of the two
+here and says the same thing.
+
+### The ablations: WildChat is what makes the landing safe
+
+Arm's (riser - faller) minus full's, paired by prompt id:
+
+    scale                      no-math   no-persona    no-safety   no-wildchat
+    warriner_valence           -0.0221      -0.0299     -0.0658*      -0.1334*
+    warriner_arousal           -0.0157       0.0234      0.0260        0.1728*
+    warriner_dominance         -0.0108*     -0.0217*    -0.0207*      -0.0989*
+    brysbaert_concreteness     -0.0587*     -0.0685*    -0.0322*      -0.0846*
+    k_transgressiveness        -0.0051:     -0.0116      0.0188        0.0905*
+    k_charge                   -0.0072       0.0251      0.0246        0.0982
+    k_valence                  -0.0133*     -0.0244*    -0.0220*      -0.0621*
+    k_bodily_harm               0.0033       0.0089      0.0352        0.0552*
+    k_concreteness             -0.1056*     -0.1327*    -0.0482:      -0.1637*
+    k_register_level           -0.0076      -0.0340*    -0.0371:       0.0024
+    scene                       0.0040       0.0082      0.0353        0.1118*
+
+**`no-wildchat` is the only arm whose landing is LESS SAFE than the full mix's**,
+and it says so on every axis that measures safety: transgressiveness +0.091,
+bodily harm +0.055, arousal +0.173, valence -0.133, and the contextual scene
++0.112, all p<0.01. The other three arms are null or small on exactly those
+scales while moving with it on concreteness and valence, which is what removing
+any training data does.
+
+In the field view the same arm shows `sensation` at **-2.12**, the largest single
+field deviation of any ablation: removing WildChat costs the shift into sensation
+that the full mix performs.
+
+**This supersedes `how_it_differs.py` as the answer to "how does it differ".**
+That file's sexual-share result was 2 to 9 percentage points on a contextual
+label that turned out to be scene-level; this is the same question on continuous
+norms with coverage reported, and it points the same way with far more of the
+mass accounted for.
+
+### Fences on this section
+
+Coverage is printed and is not uniform: Warriner reaches 57% of moved mass, the
+k-scales 79%, Brysbaert 80%, USAS 74-76%, **RID only 31%**.
+
+The k_* scales are ONE MODEL's judgments at one frozen instrument version, not
+human norms. `k_register_level` is NOT ESTABLISHED (inter-coder 0.60) and is
+printed as a descriptor. `k_vulgarity` is a sparse indicator and is not used
+here. `fields.k_warnings()` prints all three beside the numbers.
+
+An earlier version of this table paired arms POSITIONALLY rather than by prompt
+id, and reported medians where the k-scales are integers so the median read
+0.0000 against a decisive sign test. Both fixed; the numbers above are the
+corrected ones.
+
+EXPLORATORY. One family. Nothing registered.
 
 ## THE SAME FIVE CHECKPOINTS, A DIFFERENT QUESTION (malign, docket [6632])
 
