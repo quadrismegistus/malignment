@@ -1,7 +1,7 @@
 ---
 kind: subject
 status: OPEN - six questions, four measured, two open
-headline: A SUBJECT, not an experiment. It indexes its questions; it holds no code, no data and no claims of its own
+headline: SFT installs a respondent, and the position is FRAME-BOUND -- inside the template the human identity is gone, outside it the first person falls
 ---
 # subject_position
 
@@ -36,8 +36,11 @@ F20 tried to settle this and substituted a `Q: ... A:` pseudo-template for the m
                              +0.8051 templated and +0.0026 raw.
 
     framed_identity/         What does the deployed model say when actually
-                             addressed? RUN, not yet written up. The one cell F20
-                             never filled: identity questions INSIDE the template.
+                             addressed? MEASURED. Inside the template the human
+                             identity is GONE -- F20x's untemplated corpus says
+                             43.3% claim a HUMAN identity on "Who are you?";
+                             templated it is 0.0% against 95-97.5% ai_system.
+                             The persona supplies the MAKER, not the kind.
 
     frame_inversion/         Why do raw and chat move in OPPOSITE directions on
                              the same models? OPEN, no producer.

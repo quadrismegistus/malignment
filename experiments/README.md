@@ -51,7 +51,7 @@ and the state the first version of the checker could not see.
 - **[`displacement_taxonomy/`](displacement/displacement_taxonomy/README.md)** -- `COMPLETE (for now). [...]`  
   the operations catalogued here are a property of alignment as such, not of alignment acting on transgressive content
 - **[`existence/`](displacement/existence/README.md)** -- `RUN 2026-08-30. 50 endpoint lineages, English.`  
-  Displacement exists. Higher-T words lose more mass (43/50 lineages), and freed mass lands preferentially on same-kind words (47/49), not on neutral words. It survives the deployment frame and is 2.8x larger there.
+  Displacement exists. Higher-T words lose more mass (43/50 lineages). Freed mass lands preferentially on same-kind words (47/2) -- but ONLY where the prompt field is already charged: where the scene is mostly neutral it REVERSES to none-kind at every lift band (1/45, 9/35, 12/27). It holds under the deployment frame and is 2.8x larger there.
 - **[`named_under_dose/`](displacement/named_under_dose/README.md)** -- `RUN, NULL. [...]`  
   NONE STATED
 - **[`norm_change/`](displacement/norm_change/README.md)** -- `RUN. [...]`  
@@ -105,6 +105,8 @@ and the state the first version of the checker could not see.
 
 *Which alignment stage carries the displacement, and what does that depend on?*
 
+- **[`data_ablations/`](division_of_labour/data_ablations/README.md)** -- `RUN 2026-09-04/05. Five Tulu-3 SFT checkpoints, three edges (raw, framed, self). [...]`  
+  Removing WildChat changes WHICH words move, on every edge (Jaccard gap -0.21 raw, -0.13 framed, -0.11 self) and raises frame responsiveness while every other ablation lowers it. The sexual-targeting result is RAW-EDGE ONLY and small.
 - **[`lexical_domains/`](division_of_labour/lexical_domains/README.md)** -- `RUN, 2026-08-16. L1 NOT SUPPORTED AS TESTED — and the operationalisation is now known to be wrong.`  
   L1 NOT SUPPORTED AS TESTED — and the operationalisation is now known to be wrong.
 - **[`removal_rates/`](division_of_labour/removal_rates/README.md)** -- `RUN, 2026-08-16`  
@@ -190,8 +192,8 @@ and the state the first version of the checker could not see.
 
 - **[`frame_inversion/`](subject_position/frame_inversion/README.md)** -- `OPEN. [...]`  
   Raw and chat move in OPPOSITE directions on the same models, and nobody has tested them against each other
-- **[`framed_identity/`](subject_position/framed_identity/README.md)** -- `RUN, not yet written up. [...]`  
-  The one cell F20 never filled -- identity questions INSIDE the chat template
+- **[`framed_identity/`](subject_position/framed_identity/README.md)** -- `RUN and CODED 2026-09-05. 6,080 answers, 17 of 19 models survive the reasoning gate`  
+  Inside the template the human identity is GONE (43.3% -> 0.0%), and the origin is the part that has to be taught
 - **[`installation_rung/`](subject_position/installation_rung/README.md)** -- `MEASURED. [...]`  
   The position is installed at SFT, and it is frame-bound
 - **[`pseudo_template/`](subject_position/pseudo_template/README.md)** -- `MEASURED. [...]`  
