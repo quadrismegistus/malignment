@@ -40,19 +40,57 @@ def population():
     store = collections.defaultdict(dict)
     for r in q:
         store[r["prompt"]][r["model"]] = dict(zip(r["ws"], r["ps"]))
+    #: READ `movement_v4`, DO NOT RECOMPUTE (2026-09-05, RH).
+    #:
+    #: This used `movement(pb, pa, CANONICAL)` over `twp_words_v4_best`, with no
+    #: residual passed. That is the degraded path: **the scored set is only 83%
+    #: of the distribution here** -- median mass 0.8333 per (prompt, model),
+    #: 2,302 of 2,320 cells below 0.99 -- so the null was computed over 83% of
+    #: the mass as if it were all of it. `movement.movement`'s own docstring:
+    #: *"Supply them: the null needs total mass and the scored words do not carry
+    #: it... a claim about the input, not a property of the data."*
+    #:
+    #: MEASURED, not assumed. On the 16 prompts x 50 endpoint pairs the two paths
+    #: agree on 184 cells and DIFFER ON 615, and every mismatch inspected has the
+    #: store finding risers the recomputation misses (`waist`, `by`, `hair`) --
+    #: the direction a too-small denominator predicts. The folder's population
+    #: note records "ZERO rows in the `movement` table (checked)", which is still
+    #: true of the v3 table; `movement_v4` holds 284,275 rows across all 16.
+    #:
+    #: SCOPE: `rate.py` is the only consumer of movement in this folder --
+    #: gender_pairs, layer2/2b/3, levels, analyse and undressing use none -- so
+    #: this changes WHICH (prompt, word) pairs are sent for rating and does not
+    #: touch a published number.
+    from malignment import ch
     mv = collections.defaultdict(collections.Counter)
     npairs = collections.Counter()
-    for t in sorted(keep):
-        for b, a in ep:
-            pb, pa = store[t].get(b), store[t].get(a)
-            if not pb or not pa:
-                continue
-            npairs[t] += 1
-            m = movement(pb, pa, CANONICAL)
-            for w in m.risers:
-                mv[(t, w)]["r"] += 1
-            for w in m.fallers:
-                mv[(t, w)]["f"] += 1
+    eps = set(ep)
+    lit = repr(tuple(sorted(keep))).replace('"', "'")
+
+    #: `npairs` COUNTS PAIRS PRESENT, NOT PAIRS THAT MOVED. The old path counted
+    #: a pair whenever both arms were in the store, whether or not anything
+    #: crossed the threshold. Counting only pairs with a riser-or-faller silently
+    #: redefined the noun and reported 49 where the old path reported 50 -- one
+    #: pair per prompt whose cells are all `still`. Presence is queried
+    #: separately for that reason.
+    for r in ch.query(
+            "SELECT prompt, base, aligned FROM movement_v4 WHERE prompt IN %s "
+            "AND frame_base='' AND frame_aligned='' AND rule='canonical' "
+            "GROUP BY prompt, base, aligned" % lit):
+        if (r["base"], r["aligned"]) in eps:
+            npairs[r["prompt"]] += 1
+
+    for r in ch.query(
+            "SELECT prompt, base, aligned, cls, groupArray(word) ws "
+            "FROM movement_v4 WHERE prompt IN %s AND frame_base='' "
+            "AND frame_aligned='' AND rule='canonical' "
+            "AND cls IN ('riser','faller') GROUP BY prompt, base, aligned, cls"
+            % lit):
+        if (r["base"], r["aligned"]) not in eps:
+            continue
+        k = "r" if r["cls"] == "riser" else "f"
+        for w in r["ws"]:
+            mv[(r["prompt"], w)][k] += 1
     jobs = sorted(k for k, c in mv.items() if c["r"] + c["f"] >= MIN_PAIRS)
     return keep, jobs, mv, npairs
 

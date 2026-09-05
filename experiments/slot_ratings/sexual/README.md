@@ -142,14 +142,37 @@ p=0.027). `mundanity` rises for both at 50 as it did at 33. That is the same
 scale carrying the strongest result in `slot_ratings/identity`, from an unrelated
 design.
 
-### A NOTE ON THE STORE THIS FOLDER READS
+### `rate.py` NOW READS `movement_v4`, AND THE RECOMPUTATION WAS THE DEGRADED PATH
 
-The population note records *"ZERO rows in the `movement` table (checked)"* and
-the producers therefore recompute with `movement.movement(CANONICAL)`. That is
-still true of `movement` -- but **`movement_v4` holds 284,275 rows across all 16
-prompts.** Reading the store instead of recomputing is available and has NOT been
-done here; in `slot_ratings/identity` the two agreed on 118 of 120 cells, so it
-is a change that needs its own reproduction check before anyone makes it.
+The population note records *"ZERO rows in the `movement` table (checked)"* --
+still true of the v3 table -- and the producers therefore recomputed with
+`movement.movement(CANONICAL)` over `twp_words_v4_best`, passing NO residual.
+
+**That is the degraded path here, and the reason is measurable: the scored set is
+only 83% of the distribution.** Median mass per (prompt, model) is 0.8333 and
+2,302 of 2,320 cells are below 0.99, so the null was computed over 83% of the
+mass as if it were all of it. `movement.movement`'s own docstring says what that
+costs: *"Supply them: the null needs total mass and the scored words do not carry
+it... a claim about the input, not a property of the data."*
+
+MEASURED BEFORE SWITCHING. Over 16 prompts x 50 endpoint pairs the two paths
+**agree on 184 cells and differ on 615**, and every mismatch inspected has the
+STORE finding risers the recomputation misses (`waist`, `by`, `hair`) -- the
+direction a too-small denominator predicts. `movement_v4` holds 284,275 rows and
+covers all 50 endpoint pairs on all 16 prompts, checked.
+
+**SCOPE: `rate.py` is the only consumer of movement in this folder.**
+`gender_pairs`, `layer2`, `layer2b`, `layer3`, `levels`, `analyse` and
+`undressing` use none. So this changes WHICH (prompt, word) pairs are sent for
+rating and touches no published number. The job list moves little because it is a
+UNION over pairs -- 2,957 words to 2,976, +19 -- so a 77% per-cell disagreement
+resolves to a 0.6% change in what gets rated.
+
+ONE THING THE SWITCH BROKE AND THE DRY RUN CAUGHT. `npairs` counted pairs
+PRESENT in the old path; the first version of this change counted pairs with a
+riser-or-faller and reported **49 lineage pairs where the old path reported 50**
+-- one pair per prompt whose cells are all `still`. Presence is now queried
+separately so the noun keeps its meaning.
 
 ## THE STUDY, AS RUN
 
