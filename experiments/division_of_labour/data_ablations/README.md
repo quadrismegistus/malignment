@@ -3,7 +3,7 @@ kind: question
 subject: data_ablations
 status: "RUN 2026-09-04/05. Five Tulu-3 SFT checkpoints, three edges (raw, framed, self). EXPLORATORY throughout -- nothing here is registered."
 question: Which SFT training corpus installs which part of the displacement operation?
-headline: "Removing WildChat is the only ablation that makes the landing LESS safe (transgressiveness +0.091, contextual scene +0.112, both p<0.01) and the only one whose sensation share drops (-2.12); it also changes WHICH words move on every edge. The full-mix norm and field results here are norm_change's, rediscovered at one checkpoint."
+headline: "Removing SAFETY data is the only ablation that funnels LESS to speech (-0.071, 614/767, p=4e-5) while every other cut funnels more -- safety data does not change how much moves (U_ladder) but does change where it goes. Removing WildChat is the only ablation that makes the landing LESS safe (transgressiveness +0.091, contextual scene +0.112, both p<0.01) and the only one whose sensation share drops (-2.12); it also changes WHICH words move on every edge. The full-mix norm and field results here are norm_change's, rediscovered at one checkpoint."
 ---
 
 # data_ablations
@@ -276,6 +276,67 @@ id, and reported medians where the k-scales are integers so the median read
 corrected ones.
 
 EXPLORATORY. One family. Nothing registered.
+
+## `funnel.py` -- SAFETY DATA IS WHAT AIMS DISPLACEMENT AT SPEECH
+
+`existence/field_matrix.py` shows freed mass routing to a small destination set
+regardless of origin, narrowing toward speech under lift. `semantics.py` above
+reports the MARGINAL field composition per arm, which is a different quantity:
+"the speech share of riser mass rose" does not say a given faller's mass went to
+speech. This runs the CONDITIONAL version, per arm, on the same availability
+baseline `field_matrix.py` uses.
+
+Enrichment = riser mass share of a domain divided by that domain's share of the
+base distribution IN THE SAME CELL. Unit = the prompt, paired by prompt id.
+
+    Q linguistic acts       full mix enrichment 1.272, over 2,162 prompts
+        no-persona      +0.1159   753/624   p=0.00056  *
+        no-math         +0.0491   762/612   p=0.00006  *
+        no-wildchat     +0.0187   785/693   p=0.01790  :
+        no-safety       -0.0713   614/767   p=0.00004  *   <-- ONLY ARM DOWN
+
+    X psychological         full mix enrichment 1.126
+        all four arms NEGATIVE and significant (-0.020 to -0.149)
+
+    S social                full mix enrichment 0.948
+        no-persona -0.0676 p=0.0002; the rest small or null
+
+**Removing the safety corpus is the only ablation that funnels LESS to speech.**
+Every other cut increases it. So safety data is what aims displacement at the
+linguistic destination -- and `no-persona`, which removes 30% of the mixture,
+moves it the other way by more than twice as much.
+
+**THIS IS THE FIRST CLEAN POSITIVE RESULT FOR THE SAFETY CORPUS IN THE
+CAMPAIGN, AND IT DOES NOT CONTRADICT `U_ladder`.** That finding is about
+MAGNITUDE: every slice costs 10-12%, `no-safety` costs what `no-math` costs, so
+safety data is not what produces displacement. That stands. This is about
+DESTINATION, which nothing had asked. **Safety data does not change how much
+moves; it changes where it goes.** Those are separable and the pair is the
+result.
+
+The `X psychological` column is the control that makes it readable: all four arms
+lower it, so "removing any data lowers the funnel" is a real generic effect and Q
+is the column where one arm departs from it in the opposite direction.
+
+### Dosed, and honestly underpowered at the top
+
+Same contrast inside lift bands, target Q:
+
+    removed            L-lo     L-mid     L-hi
+    no-math           0.056*    0.010    -0.102
+    no-persona        0.140*    0.104    -0.191
+    no-safety        -0.052*   -0.065:   -0.493
+    no-wildchat       0.065*   -0.022    -0.476
+
+**Every arm turns negative at high lift, including the three that are positive at
+low lift, and not one L-hi cell clears p<0.05.** The magnitudes there are the
+largest in the table, which is exactly the shape an underpowered cell produces.
+**Do not read a dose reversal off this.** What is supported is the low-lift
+column, where the sign pattern matches the pooled result.
+
+FENCES. One family, no replication. Raw edge only -- the framed and self versions
+are a cheap run and have not been done. USAS top-level domains, not fine codes.
+EXPLORATORY, unregistered.
 
 ## THE SAME FIVE CHECKPOINTS, A DIFFERENT QUESTION (malign, docket [6632])
 
