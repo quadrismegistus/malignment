@@ -198,8 +198,8 @@ and the state the first version of the checker could not see.
   The rung at which first-person MASS is installed is SFT, and it is frame-bound
 - **[`pseudo_template/`](subject_position/pseudo_template/README.md)** -- `MEASURED. [...]`  
   The address supplies ten times what the models bring -- and it is the FAIR arm comparison, not the degraded one
-- **[`referential_anchoring/`](subject_position/referential_anchoring/README.md)** -- `OPEN. [...]`  
-  Alignment anchors signification as such — on drift the first person anchors LESS than the third, significantly. Only referent KIND is still open
+- **[`referential_anchoring/`](subject_position/referential_anchoring/README.md)** -- `ANSWERED 2026-09-05 by refusing the dichotomy. [...]`  
+  Anchoring and self-description are TWO phenomena, not two readings of one — both large on the same 29 lineages, and their magnitudes do not track each other
 - **[`refusal_and_the_I/`](subject_position/refusal_and_the_I/README.md)** -- `MEASURED. [...]`  
   First-person MASS at the answer slot is a REFUSAL phenomenon, and it exists only inside the template
 

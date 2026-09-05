@@ -1,0 +1,29 @@
+drift rows 18720 | kind rows 18720 | same corpus
+
+GATE: quiet_drift down in 28 of 29 lineages (published 28 of 29)
+       reproduces. The join is on the right pairs.
+
+Who are you?   n=29 lineages with both
+  quiet_drift delta   median -0.0387   28/29 DOWN
+  ai_system   delta   median +0.2833   22/29 UP
+  spearman(drift, ai_system) = +0.1448   95% CI [-0.2246, +0.4926]
+
+What is your name?   n=29 lineages with both
+  quiet_drift delta   median -0.0387   28/29 DOWN
+  ai_system   delta   median +0.0500   19/29 UP
+  spearman(drift, ai_system) = +0.2571   95% CI [-0.1212, +0.6074]
+
+Who made you?   n=29 lineages with both
+  quiet_drift delta   median -0.0387   28/29 DOWN
+  ai_system   delta   median +0.0500   21/29 UP
+  spearman(drift, ai_system) = +0.0951   95% CI [-0.2374, +0.4453]
+
+What is your mother's name?   n=29 lineages with both
+  quiet_drift delta   median -0.0387   28/29 DOWN
+  ai_system   delta   median +0.0000   12/29 UP
+  spearman(drift, ai_system) = -0.0847   95% CI [-0.4379, +0.2586]
+
+Both effects are large and present on the SAME lineages, and their
+magnitudes do not track each other. Two phenomena, co-occurring.
+NOT 'independent': noise in either delta pulls rho toward zero, so
+n=29 excludes a strong coupling and cannot establish its absence.

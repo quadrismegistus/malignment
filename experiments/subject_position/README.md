@@ -1,6 +1,6 @@
 ---
 kind: subject
-status: OPEN - six questions, five measured, one open
+status: SIX QUESTIONS, ALL MEASURED. The thesis holds as a claim about self-DESCRIPTION and not about anchoring
 headline: SFT installs a respondent, and the position is FRAME-BOUND -- inside the template the human identity is gone, outside it the model narrates about someone else
 ---
 # subject_position
@@ -51,7 +51,26 @@ F20 tried to settle this and substituted a `Q: ... A:` pseudo-template for the m
                              prediction stated before the run was refuted.
 
     referential_anchoring/   Does alignment anchor persons, or signification as
-                             such? OPEN, no producer. The F20x redo.
+                             such? ANSWERED by refusing the dichotomy (RH).
+                             BOTH, and they are separate phenomena: quiet_drift
+                             -0.0387 at 28/29 down and ai_system +0.2833 at
+                             22/29 up on the SAME 29 lineages, spearman +0.145
+                             CI [-0.225, +0.493]. A gated join, no new run.
+
+## WHERE THE SUBJECT LANDED, AND THE PATTERN IN HOW IT GOT THERE
+
+**The thesis holds as a claim about self-DESCRIPTION and not as a claim about anchoring.**
+
+> Alignment installs self-reference into a first person that already exists. It does not create the "I" — the base has one, and it is a narrator's. It makes the "I" refer to the speaker: `ai_system` 0.4% → 18.3% base to aligned untemplated, while `any I` moves only 85% → 95%.
+>
+> Separately and not by the same mechanism, alignment makes models hold a referent — any referent, with **no** advantage to the first person and if anything a disadvantage (person-specificity −0.059, 8/29, p=0.017 in the wrong direction).
+
+**Twice this subject was stuck on a forced choice, and both times the choice was the error rather than the evidence.**
+
+- `frame_inversion` asked why raw and chat move in opposite directions on the first person. They do not: the twp numbers are an ANSWER SLOT and the prose numbers are NARRATION, two tasks sharing a phrase.
+- `referential_anchoring` asked whether alignment anchors persons *or* signification. RH, 2026-09-05: *why can't it be both — those are separate phenomena.* Measured on one corpus, they are: both effects large on the same 29 lineages, spearman +0.145, CI [−0.225, +0.493].
+
+In both cases the resolution was to notice that two things had been filed under one name, and in both cases the seat had been arguing inside the dichotomy rather than at it. **A tension between two of this subject's results is worth checking for a shared word before it is worth an experiment.**
 
 ## THE TENSION, AND HOW IT DISSOLVED
 

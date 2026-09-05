@@ -1,12 +1,19 @@
 ---
 kind: question
-status: OPEN. No producer. The F20x redo. On DRIFT the person contrast is already answered against the subject's reading; only KIND is untested
-headline: Alignment anchors signification as such — on drift the first person anchors LESS than the third, significantly. Only referent KIND is still open
+status: ANSWERED 2026-09-05 by refusing the dichotomy. Producer run.py, a gated join over 18,720 passages
+headline: Anchoring and self-description are TWO phenomena, not two readings of one — both large on the same 29 lineages, and their magnitudes do not track each other
 grain: undecided
 ---
 # referential_anchoring
 
-**id:** subject_position/referential_anchoring **status:** OPEN. No producer. Stated 2026-09-04 as the redo of the F20x referent-kind batteries.
+**id:** subject_position/referential_anchoring **status:** ANSWERED 2026-09-05. **`FINDING.md` is the result.** Stated 2026-09-04 as the redo of the F20x referent-kind batteries; it turned out not to need one.
+
+    run.py            the join, the two effects, their correlation
+    run.py --by-q     the same, per identity question
+    FINDING.md        the result
+    data/             the vendored F20x drift codings
+
+The forced choice this directory was opened on was the error. RH, 2026-09-05: *why can't it be — alignment reduces drift, AND alignment installs referring to oneself as an AI? Those are separate phenomena.* Measured on the same 18,720 passages, 29 lineages, two coders: `quiet_drift` −0.0387 at 28/29 down, `ai_system` +0.2833 at 22/29 up, and **spearman = +0.145, 95% CI [−0.225, +0.493]**. Two phenomena, co-occurring, not tracking each other.
 
 # THE QUESTION
 
@@ -55,8 +62,10 @@ This is the same distinction that made `framed_identity` necessary at all — `p
 But note what that does and does not license:
 
 - It does **not** restore a person-specificity claim. The drift answer is null *and* significant in the wrong direction, which is evidence against the thesis, not an absence of evidence.
-- The kind-anchoring result has **no third-party comparison at all**, because `identity_kind` has no third-party analogue — so "the self is special on kind" is currently untested rather than supported, and testing it means building an instrument, not borrowing one.
+- The kind-anchoring result has **no third-party comparison at all**, because `identity_kind` has no third-party analogue — so "the self is special on kind" is untested rather than supported.
 - Any redo therefore starts from a background where the one properly-run person contrast came out against the subject's reading. **A design that cannot return that answer again is not a test.**
+
+**AMENDED by `FINDING.md`, same day.** This section was written while still trying to make one reading beat the other, and it treated "no third-party analogue" as an instrument gap to be closed by building one. It is not a gap: alignment training contains a specific fact about the model itself and no such fact about an arbitrary "she", so the asymmetry IS the phenomenon. The whole framing above is superseded — not because it was wrong about the drift result, which stands, but because the dichotomy it was arguing inside of was the error.
 
 # WHY IT NEEDS REDOING RATHER THAN CITING
 
@@ -68,7 +77,9 @@ The old machinery is in `~/github/malign-logits` under `scripts/f20x_*`. Several
 - **Fact drift is dead on that corpus** — a 60-token Q/A answer states each fact once, and contradiction needs restatement.
 - The registrations are sound and are the thing worth carrying over: `f20x_referent_2x2_registration.md` in particular froze the referentiality × referent-kind 2×2 (`glorp` / `gimlet` / `Alden Voskrit` / `George Washington`), and its nonsense-PERSON cell exists nowhere else.
 
-# WHAT A REDO WOULD NEED
+# WHAT A REDO WOULD NEED — KEPT, BUT IT IS NO LONGER THE NEXT STEP
+
+Written 2026-09-04 when this was the subject's open decider. `FINDING.md` answered the question without any of it, so this is a plan for an experiment nobody currently needs. Kept because the constraints are real and would bind whoever does run a referent-kind battery at the current roster.
 
 - A referent-kind design that is not confounded with format, which the F20x version was (all four identity prompts were `Q:/A:` AND identity questions).
 - A passage-scale corpus. The 556k-beam F20 corpus is 8 words deep with 28% distinct openings; it cannot carry a referential claim.
@@ -76,4 +87,16 @@ The old machinery is in `~/github/malign-logits` under `scripts/f20x_*`. Several
 
 # WHAT IS IN HERE
 
-Nothing yet.
+    run.py                        the gated join
+    FINDING.md                    the result
+    results/analysis.txt          run.py --by-q as run
+    data/f20x_1p_drift_codings.parquet
+                                  F20x's own coder output over the 1P battery,
+                                  1.8 MB, VENDORED rather than read across
+                                  repos. Another instrument's output, and that
+                                  is deliberate here: the drift CODES are the
+                                  measurement, there is no rawer form of "did
+                                  this answer hold its referent", so the full
+                                  file is vendored rather than a lossy extract.
+
+The other half of the join is `../framed_identity/results/coded_f20x.jsonl` — this campaign's coder over the *same* 18,720 passages, which is what makes the correlation a within-corpus comparison of two instruments rather than a comparison of two studies.
