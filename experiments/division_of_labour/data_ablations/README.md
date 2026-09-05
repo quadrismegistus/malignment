@@ -307,9 +307,33 @@ nothing here explains it.
       CONTEXTUAL scene  +0.1118*   +0.0245     -0.0495      raw only
 
 **The WildChat "less safe landing" result is RAW-EDGE ONLY**, exactly like the
-safety speech funnel. What replicates on all three edges is a different thing:
-removing WildChat makes what rises markedly LESS CONCRETE, on the model scale,
-the human scale, and the RID sensation field. Three instruments, three edges.
+safety speech funnel. **ONE ablation effect replicates on all three edges**, and
+it is not a safety one: removing WildChat makes what rises less CONCRETE and less
+SENSORY -- `k_concreteness`, Brysbaert and RID `sensation` are three readings of
+one finding, not three findings. The full mix converts acts into concrete
+perceptual events (`scream`, `gasp`, `feel`); without WildChat it lands on more
+abstract vocabulary instead.
+
+**AND THE FULL-MIX CONCRETENESS COLUMN MUST NOT BE QUOTED AGAINST
+`norm_change`** (RH). That folder tests the same thing at the LINEAGE level over
+50 endpoints and finds it NOT SUPPORTED in English -- `k_concreteness` -0.0248 at
+19/31, p=0.119; `brysbaert_concreteness` -0.0028 at 21/27, p=0.471. Same
+direction, opposite verdict, and the difference is the unit: its replicate is the
+lineage, this file's is the prompt inside ONE checkpoint. **A p<1e-4 over 2,000
+prompts in one model is not evidence about models.** For "does alignment reduce
+concreteness in English", norm_change's null is the answer.
+
+The ABLATION row is a different question and the prompt is the right unit for it:
+it compares two checkpoints on the same prompts, and no lineage replication
+exists to average over -- there is one checkpoint per arm and no second suite in
+the world. So the ablation contrast stands on its own terms while the full-mix
+baseline above it does not travel.
+
+**And the sensation direction agrees with `norm_change` rather than contradicting
+it.** That folder has `X3.2 Sensory: Sound` at +0.01789, 112/41, p<1e-5, glossed
+there as *"which is what a scream IS"*. Sensory RISES under alignment; this file
+finds the full mix rising into it (+4.15) and `no-wildchat` rising into it less
+(-2.12). Removing WildChat reduces a shift both instruments agree exists.
 
 **AND FRAMED, THE LESS-SAFE ARM IS `no-safety`, NOT `no-wildchat`:**
 
