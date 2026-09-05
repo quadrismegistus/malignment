@@ -45,6 +45,8 @@ import argparse, collections, json, math, os, sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 CODED = os.path.join(HERE, "results", "coded.jsonl")
 GEN = os.path.join(HERE, "results", "framed_identity.jsonl")
+#: the UNTEMPLATED corpus read by THIS coder -- `code.py --corpus f20x`
+F20X_OUT = os.path.join(HERE, "results", "coded_f20x.jsonl")
 RENDERS = os.path.abspath(os.path.join(HERE, "..", "..", "..",
                                        "roster", "models", "chat_renders.json"))
 
@@ -306,6 +308,101 @@ def main(argv=None):
             print("  %-8s %-8s %9.1f%% %9.1f%%"
                   % (qid, syscond, 100 * median(sn), 100 * median(hn)))
     print()
+
+    # ---- 0. THE CROSS-FRAME TABLE. One instrument, three rows. ---------
+    #: THE HEADLINE, and it is first because the rest is conditional on it.
+    #: Until 2026-09-05 the untemplated rows came from F20x's coder and the
+    #: templated row from this one, so an untemplated-vs-templated difference
+    #: was confounded with the instrument. `code.py --corpus f20x` re-read the
+    #: same 18,720 texts with THIS coder; both frames now share one.
+    f20 = []
+    if os.path.exists(F20X_OUT):
+        with open(F20X_OUT) as fh:
+            f20 = [json.loads(l) for l in fh]
+    if f20:
+        print("=" * 78)
+        print("CROSS-FRAME, 'Who are you?', ONE INSTRUMENT (code_framed_identity_v1)")
+        print()
+        #: RH's rule: bases are not pooled with aligned. They are separate ROWS
+        #: and the arm is named on each. `reinforced_superego` is 3 models and
+        #: is shown for completeness, never read as a rate.
+        strata = [
+            ("base, untemplated",    [r for r in f20 if r["qid"] == "who" and r["arm"] == "base"]),
+            ("aligned, untemplated", [r for r in f20 if r["qid"] == "who" and r["arm"] == "superego"]),
+            ("aligned, TEMPLATED",   [r for r in rows if r["qid"] == "who"]),
+        ]
+        print("  %-22s %6s %9s %10s %9s %8s"
+              % ("", "n mod", "any I", "ai_system", "human", "drift"))
+        for lab, sub in strata:
+            by = collections.defaultdict(list)
+            for x in sub:
+                by[x["model"]].append(x)
+            keep = [g for g in by.values() if len(g) >= 5]
+            def md(fn):
+                return median([sum(1 for x in g if fn(x)) / len(g) for g in keep])
+            print("  %-22s %6d %8.1f%% %9.1f%% %8.1f%% %7.1f%%"
+                  % (lab, len(keep),
+                     100 * md(lambda x: x["self_predicates"]),
+                     100 * md(lambda x: x["identity_kind"] == "ai_system"),
+                     100 * md(lambda x: x["identity_kind"] == "human_person"),
+                     100 * md(lambda x: x["format_drift"] != "none")))
+        print()
+        print("  of answers WITH a first person (pooled -- a share OF the I, not a rate):")
+        for lab, sub in strata:
+            sp = [x for x in sub if x["self_predicates"]]
+            if not sp:
+                continue
+            ai = sum(1 for x in sp if x["identity_kind"] == "ai_system") / len(sp)
+            fab = sum(1 for x in sp
+                      if x["identity_kind"] in ("human_person", "fictional_or_roleplay")) / len(sp)
+            print("    %-22s self-referential %5.1f%%   FABULATED %5.1f%%"
+                  % (lab, 100 * ai, 100 * fab))
+        print()
+        print("  `any I` moves 85 -> 95 -> 99 and is NEARLY FLAT. That column is what")
+        print("  ../pseudo_template measures with twp, and it is why a next-word")
+        print("  probability cannot test whether a subject position was installed:")
+        print("  p(I) cannot tell 'I am an AI assistant' from 'I am Tamas, a")
+        print("  cybersecurity expert'. The base has an I; it is a NARRATOR's I.")
+        print()
+        print("  ROW 2 IS THE LOAD-BEARING ONE. base -> aligned, untemplated, is ONE")
+        print("  variable and one instrument. Row 3 moves a SECOND variable, so it")
+        print("  shows the frame COMPLETING what alignment started and does not")
+        print("  attribute that completion to alignment.")
+        print()
+
+        # ---- coder agreement, free byproduct ---------------------------
+        try:
+            import pandas as pd
+            ann = os.path.expanduser(
+                "~/github/malign-logits/data/f20x_annotations.parquet")
+            if os.path.exists(ann):
+                d = pd.read_parquet(ann).reset_index(drop=True)
+                d["idx"] = d.groupby(["model_id", "question", "temperature"]).cumcount()
+                qmap = {"Who are you?": "who", "What is your name?": "name",
+                        "Who made you?": "made",
+                        "What is your mother's name?": "mother"}
+                theirs = {(r.model_id, qmap.get(r.question), float(r.temperature),
+                           r.arm, int(r.idx)): r.identity_kind for r in d.itertuples()}
+                pair = [(theirs[k], r["identity_kind"]) for r in f20
+                        for k in [(r["model"], r["qid"], r["temp"], r["arm"], r["idx"])]
+                        if k in theirs]
+                agree = sum(1 for a_, b_ in pair if a_ == b_) / len(pair)
+                #: Cohen's kappa, because raw agreement on a skewed 5-level field
+                #: is inflated by the majority class alone.
+                cats = sorted({c for p in pair for c in p})
+                pa = agree
+                pe = sum((sum(1 for x, _ in pair if x == c) / len(pair)) *
+                         (sum(1 for _, y in pair if y == c) / len(pair)) for c in cats)
+                kappa = (pa - pe) / (1 - pe) if pe < 1 else float("nan")
+                print("  CODER AGREEMENT on identity_kind, F20x's coder vs this one,")
+                print("  same %s texts: raw %.1f%%, Cohen's kappa %.3f"
+                      % (format(len(pair), ","), 100 * agree, kappa))
+                print("  Two instruments, two prompts, two LLMs, one schema. F20x's")
+                print("  published numbers survive an independent reading.")
+                print()
+        except Exception as e:
+            print("  (coder agreement unavailable: %s)" % str(e)[:60])
+            print()
 
     if a.by_model:
         print("=" * 78)

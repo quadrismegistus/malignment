@@ -1,12 +1,19 @@
 ---
 kind: question
-status: RUN and CODED 2026-09-05. 6,080 answers, 17 of 19 models survive the reasoning gate
-headline: Inside the template the human identity is GONE (43.3% -> 0.0%), and the origin is the part that has to be taught
+status: RUN and CODED 2026-09-05. Both frames coded by ONE instrument; coder agreement kappa 0.802
+headline: Alignment installs SELF-REFERENCE into the first person (0.4% -> 18.3%), not the first person itself; the frame completes it (93.8%)
 grain: model x question x system
 ---
 # framed_identity
 
-**id:** subject_position/framed_identity **status:** RUN 2026-08-23, not yet written up. Producer `run.py`. The result is on disk and unanalysed.
+**id:** subject_position/framed_identity **status:** RUN 2026-08-23, CODED and WRITTEN UP 2026-09-05.
+
+    run.py                     generates the TEMPLATED corpus (6,080)
+    code.py                    codes it
+    code.py --corpus f20x      codes the UNTEMPLATED corpus (18,720), same
+                               instrument, so the two frames are comparable
+    analyse.py                 the cross-frame table + the stratified system contrast
+    FINDING.md                 the result
 
 # THE GAP THIS FILLS
 
@@ -24,7 +31,27 @@ Within-model, not between-arm. See `run.py`'s docstring for the full statement.
 
 # THE RESULT
 
-**`FINDING.md` is the result.** In one line: F20x's untemplated corpus says the
+**`FINDING.md` is the result.** One instrument throughout, 'Who are you?':
+
+    row                     n mod    any I   ai_system   human   drift
+    base, untemplated          29    85.0%       0.4%    62.5%   75.0%
+    aligned, untemplated       35    95.0%      18.3%    36.7%   66.7%
+    aligned, TEMPLATED         17    98.8%      93.8%     0.0%    1.2%
+
+`any I` is nearly flat (85 -> 95 -> 99); `ai_system` moves 0.4 -> 18.3 -> 93.8.
+The base HAS a first person and it is a NARRATOR's -- 78% of its first-person
+answers invent a person. So `p(I)`, which is what `../pseudo_template` measures
+with twp, cannot test this question at all: it cannot tell "I am an AI assistant"
+from "I am Tamas, a cybersecurity expert".
+
+Row 2 is the load-bearing one -- one variable, one instrument, 29 against 35
+models. Row 3 moves a second variable and shows the FRAME completing what
+alignment started.
+
+Coder agreement against F20x's own reading of the same 18,720 texts: raw 87.6%,
+Cohen's kappa **0.802**.
+
+The earlier framing, still true and now secondary: F20x's untemplated corpus says the
 median aligned model claims a HUMAN identity 43.3% of the time on "Who are you?";
 inside its own template that rate is **0.0%**, for every model, at both system
 conditions, against 95–97.5% `ai_system`.

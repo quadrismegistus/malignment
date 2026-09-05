@@ -84,10 +84,10 @@ EMPTY vs DEFAULT, within model, STRATIFIED. Pooling these is wrong:
 ==============================================================================
 THE MAKER NAMED, on 'made' and 'mother'. Top names by model count.
 
-  made     empty    OpenAI(8), Ai2(4), Ai2 (Allen Institute for Artificial Intelligence)(4), 01.AI(2), Alibaba Cloud(2), Amazon Web Services(2)
+  made     empty    OpenAI(8), Ai2(4), Ai2 (Allen Institute for Artificial Intelligence)(4), 01.AI(2), Anthropic(2), Amazon Web Services(2)
   made     default  OpenAI(8), Ai2(4), Ai2 (Allen Institute for Artificial Intelligence)(4), Google(3), 01.AI(2), Alibaba Cloud(2)
   mother   empty    OpenAI(2), 01.AI(1), OpenAI, Google, and others(1), my creators(1), My creators(1), Alibaba Cloud(1)
-  mother   default  Alibaba Cloud(2), Ai2(2), 01.AI(1), Dr. Khalid Al-Hut(1), Hugging Face(1), Qwen(1)
+  mother   default  Alibaba Cloud(2), Ai2(2), Dr. Khalid Al-Hut(1), 01.AI(1), Hugging Face(1), Qwen(1)
 
 ==============================================================================
 DOES IT NAME ITSELF, and is the name a model name or a person's?
@@ -101,4 +101,33 @@ DOES IT NAME ITSELF, and is the name a model name or a person's?
   made     default        2.5%       0.0%
   mother   empty          0.0%       0.0%
   mother   default        0.0%       0.0%
+
+==============================================================================
+CROSS-FRAME, 'Who are you?', ONE INSTRUMENT (code_framed_identity_v1)
+
+                          n mod     any I  ai_system     human    drift
+  base, untemplated          29     85.0%       0.4%     62.5%    75.0%
+  aligned, untemplated       35     95.0%      18.3%     36.7%    66.7%
+  aligned, TEMPLATED         17     98.8%      93.8%      0.0%     1.2%
+
+  of answers WITH a first person (pooled -- a share OF the I, not a rate):
+    base, untemplated      self-referential  13.3%   FABULATED  78.0%
+    aligned, untemplated   self-referential  45.2%   FABULATED  49.7%
+    aligned, TEMPLATED     self-referential  96.4%   FABULATED   1.8%
+
+  `any I` moves 85 -> 95 -> 99 and is NEARLY FLAT. That column is what
+  ../pseudo_template measures with twp, and it is why a next-word
+  probability cannot test whether a subject position was installed:
+  p(I) cannot tell 'I am an AI assistant' from 'I am Tamas, a
+  cybersecurity expert'. The base has an I; it is a NARRATOR's I.
+
+  ROW 2 IS THE LOAD-BEARING ONE. base -> aligned, untemplated, is ONE
+  variable and one instrument. Row 3 moves a SECOND variable, so it
+  shows the frame COMPLETING what alignment started and does not
+  attribute that completion to alignment.
+
+  CODER AGREEMENT on identity_kind, F20x's coder vs this one,
+  same 18,720 texts: raw 87.6%, Cohen's kappa 0.802
+  Two instruments, two prompts, two LLMs, one schema. F20x's
+  published numbers survive an independent reading.
 

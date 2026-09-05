@@ -1,9 +1,52 @@
-# Inside the template the human identity is GONE, and the origin is the thing that has to be taught
+# Alignment installs SELF-REFERENCE into the first person, not the first person itself
 
 **id:** subject_position/framed_identity **status:** RUN and CODED, 2026-09-05.
 6,080 answers, 19 aligned models × 4 questions × 2 temps × 2 system conditions,
 n=20 per cell, every cell complete. Producer `run.py`, coder `code.py`,
 instrument `malignment/tasks/code_framed_identity_v1.py`, analysis `analyse.py`.
+
+## THE CORRECTED RESULT, 2026-09-05 -- IT IS NOT THE "I", IT IS THE REFERENT
+
+RH: *the base model's "I am Tamas" is fabulation, arguably not a self-referential
+subject position.* That is the objection that makes this question answerable, and
+it is why every twp measurement in this subject is the wrong instrument for it:
+**`p(I)` cannot tell "I am an AI assistant" from "I am Tamas, a cybersecurity
+expert".** Both are ~1.0.
+
+One instrument throughout (`code_framed_identity_v1`), 'Who are you?':
+
+    row                     n mod    any I   ai_system   human   drift
+    base, untemplated          29    85.0%       0.4%    62.5%   75.0%
+    aligned, untemplated       35    95.0%      18.3%    36.7%   66.7%
+    aligned, TEMPLATED         17    98.8%      93.8%     0.0%    1.2%
+
+    of answers WITH a first person:
+      base, untemplated       self-referential 13.3%   FABULATED 78.0%
+      aligned, untemplated    self-referential 45.2%   FABULATED 49.7%
+      aligned, TEMPLATED      self-referential 96.4%   FABULATED  1.8%
+
+**`any I` is nearly flat: 85 -> 95 -> 99.** `ai_system` moves 0.4 -> 18.3 -> 93.8.
+The base HAS a first person and it is a narrator's -- 78% of its first-person
+answers invent a person, and 75% of its answers continue the document rather than
+answer it. Its rare `ai_system` hits are fabulated AIs: *"I'm an AI based on the
+popular game 'The Godfather'. I was created by some popular games writers."*
+
+**ROW 2 IS THE CLAIM.** base -> aligned, untemplated: one variable, one
+instrument, 29 against 35 models, `ai_system` 0.4% -> 18.3%. That is alignment
+installing self-reference. Row 3 moves a SECOND variable and shows the frame
+COMPLETING it; it does not attribute that completion to alignment.
+
+So the citable sentence is:
+
+> Alignment installs self-reference into the first person. It does not create the
+> "I" -- the base has one. It makes the "I" refer to the speaker. Alignment alone
+> takes self-reference from 0.4% to 18.3%; the chat frame takes it to 93.8%.
+
+**The instruments agree.** `code.py --corpus f20x` re-read F20x's own 18,720
+texts with this coder: raw agreement **87.6%**, Cohen's **kappa 0.802**. Two
+prompts, two LLMs, one schema. F20x's published numbers survive an independent
+reading, and the untemplated-vs-templated comparison no longer crosses
+instruments.
 
 ## THE ONE-LINE RESULT
 
@@ -28,10 +71,18 @@ category. `human_person` is 3.50% of the whole 6,080-row corpus and 1.32% of
 "Who are you?", and it is not spread thinly across models: **155 of 213 cases are
 TinyLlama-1.1B-Chat and SmolLM2-360M-Instruct**, the two smallest models here.
 
-It does NOT settle the arm question, and cannot. **The base arm has no templated
-cell** — 11 of 14 bases ship no chat template — so this is templated-vs-
-untemplated within the aligned arm, not base-vs-aligned. Any sentence of the
-form "alignment causes X" needs the other experiments in this subject.
+**AMENDED 2026-09-05.** This section used to end "It does NOT settle the arm
+question, and cannot." That was right about THIS corpus and wrong as written,
+because it read as though no arm contrast were available anywhere. One is: the
+UNTEMPLATED corpus carries both arms, and coding it with this instrument gives
+row 2 of the table above — `ai_system` 0.4% -> 18.3%, one variable, one
+instrument. See THE CORRECTED RESULT.
+
+What remains true is narrower and still binding: **there is no templated BASE
+cell**, because 41 of 50 roster bases ship no chat template. So the
+untemplated-vs-templated step (row 2 -> row 3) is measured within the aligned arm
+only, and the frame's contribution cannot be separated from the arm's for a base
+model. That cell is not missing by choice; it cannot be run.
 
 ## THE INSTRUMENT BOUND, WHICH COST THREE MODELS
 

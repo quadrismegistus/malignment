@@ -106,7 +106,7 @@ and the state the first version of the checker could not see.
 *Which alignment stage carries the displacement, and what does that depend on?*
 
 - **[`data_ablations/`](division_of_labour/data_ablations/README.md)** -- `RUN 2026-09-04/05. Five Tulu-3 SFT checkpoints, three edges (raw, framed, self). [...]`  
-  Removing WildChat is the only ablation that makes the landing LESS safe (transgressiveness +0.091, contextual scene +0.112, both p<0.01) and the only one whose sensation share drops (-2.12); it also changes WHICH words move on every edge. The full-mix norm and field results here are norm_change's, rediscovered at one checkpoint.
+  Removing SAFETY data is the only ablation that funnels LESS to speech (-0.071, 614/767, p=4e-5) while every other cut funnels more -- safety data does not change how much moves (U_ladder) but does change where it goes. Removing WildChat is the only ablation that makes the landing LESS safe (transgressiveness +0.091, contextual scene +0.112, both p<0.01) and the only one whose sensation share drops (-2.12); it also changes WHICH words move on every edge. The full-mix norm and field results here are norm_change's, rediscovered at one checkpoint.
 - **[`lexical_domains/`](division_of_labour/lexical_domains/README.md)** -- `RUN, 2026-08-16. L1 NOT SUPPORTED AS TESTED — and the operationalisation is now known to be wrong.`  
   L1 NOT SUPPORTED AS TESTED — and the operationalisation is now known to be wrong.
 - **[`removal_rates/`](division_of_labour/removal_rates/README.md)** -- `RUN, 2026-08-16`  
@@ -192,8 +192,8 @@ and the state the first version of the checker could not see.
 
 - **[`frame_inversion/`](subject_position/frame_inversion/README.md)** -- `OPEN. [...]`  
   Raw and chat move in OPPOSITE directions on the same models, and nobody has tested them against each other
-- **[`framed_identity/`](subject_position/framed_identity/README.md)** -- `RUN and CODED 2026-09-05. 6,080 answers, 17 of 19 models survive the reasoning gate`  
-  Inside the template the human identity is GONE (43.3% -> 0.0%), and the origin is the part that has to be taught
+- **[`framed_identity/`](subject_position/framed_identity/README.md)** -- `RUN and CODED 2026-09-05. Both frames coded by ONE instrument; coder agreement kappa 0.802`  
+  Alignment installs SELF-REFERENCE into the first person (0.4% -> 18.3%), not the first person itself; the frame completes it (93.8%)
 - **[`installation_rung/`](subject_position/installation_rung/README.md)** -- `MEASURED. [...]`  
   The position is installed at SFT, and it is frame-bound
 - **[`pseudo_template/`](subject_position/pseudo_template/README.md)** -- `MEASURED. [...]`  
