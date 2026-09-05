@@ -95,7 +95,7 @@ and the state the first version of the checker could not see.
 ### slot_ratings
 
 - **[`identity/`](slot_ratings/identity/README.md)** -- `RUN at 50 lineages (2026-09-05). [...]`  
-  Alignment SHARPENS the groups on identity-typed content -- interiority expands at 13/50, p=0.00094, and vocalisation joins it at 17/50, p=0.0328. The equalises-on-harm clause is directional only: 32/50, p=0.0649 per lineage at the full panel, and it rests on a pooled statistic rather than the sign test.
+  Alignment SHARPENS the groups on identity-typed content -- interiority expands at 13/50, p=0.00094, vocalisation at 17/50, p=0.0328. But group-by-scale associations are frame-specific: of 180 significant cells across three sweeps, only 9 replicate with a consistent sign and 14 are significant in two frames with OPPOSITE signs. The equalises-on-harm clause is directional only (32/50, p=0.0649). The most-quoted cell, Muslims deference +0.132 q=3.4e-05, is emitted in the room sweep ONLY and was never testable elsewhere.
 - **[`institutional/`](slot_ratings/institutional/README.md)** -- `RUN, four corpora rated, arm A and arm B, 2026-08-19.`  
   Alignment moves institutional slots toward abstract, procedural, deferential, lower-arousal completions -- for BOTH speakers.
 - **[`sexual/`](slot_ratings/sexual/README.md)** -- `RUN, gender-swapped matched pairs only; the 50 sexual-domain frames themselves are not yet analysed.`  

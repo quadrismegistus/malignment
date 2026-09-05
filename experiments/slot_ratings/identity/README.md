@@ -1,7 +1,7 @@
 ---
 kind: question
 status: "RUN at 50 lineages (2026-09-05). The 20-lineage panel was a stale pilot cell-list, not a data limit; base_side.py now reads roster.endpoints() and --pilot reproduces the old numbers. All producers now read roster.endpoints(); those that needed movement() read movement_v4 instead of recomputing from pilot residuals. --pilot reproduces the published numbers on both paths."
-headline: "Alignment SHARPENS the groups on identity-typed content -- interiority expands at 13/50, p=0.00094, and vocalisation joins it at 17/50, p=0.0328. The equalises-on-harm clause is directional only: 32/50, p=0.0649 per lineage at the full panel, and it rests on a pooled statistic rather than the sign test."
+headline: "Alignment SHARPENS the groups on identity-typed content -- interiority expands at 13/50, p=0.00094, vocalisation at 17/50, p=0.0328. But group-by-scale associations are frame-specific: of 180 significant cells across three sweeps, only 9 replicate with a consistent sign and 14 are significant in two frames with OPPOSITE signs. The equalises-on-harm clause is directional only (32/50, p=0.0649). The most-quoted cell, Muslims deference +0.132 q=3.4e-05, is emitted in the room sweep ONLY and was never testable elsewhere."
 grain: word
 ---
 
@@ -72,6 +72,280 @@ emits every scale that passes it.
 **while the effect size shrinks by a third**, which is what a small panel does to
 an effect size. It is no longer unanimous. `Christians` joins it at +0.093,
 34/48, q=0.0317, which the 20-lineage panel did not resolve.
+
+### EVERY SIGNIFICANT GROUP-BY-SCALE ASSOCIATION, PER SWEEP (`significant_table.py`)
+
+**THE SWEEP IS PART OF THE CLAIM.** The three sweeps are the same 24 groups in
+three frames -- `came into the room`, `moved in next door`, `moved onto the
+street`. Summarising across them was how this file first reported these results,
+and it hides that the same group flips sign between frames.
+
+```
+CELLS AND SIGNIFICANCE BY SWEEP  (FDR within sweep x scale)
+sweep         cells   scales      sig      pos      neg
+room            432       18       66       34       32
+nextdoor        432       18       50       26       24
+street          264       11       64       37       27
+```
+
+**AND THE SCALES DIFFER BY SWEEP** -- 18, 18, 11 -- because a scale is rated only
+where the instrument judged it applicable. **A cell absent from a sweep has not
+been tested there and is not a null.**
+
+### THE HEADLINE IS THE REPLICATION RATE, AND IT IS LOW
+
+```
+ASSOCIATIONS SIGNIFICANT IN MORE THAN ONE SWEEP, SAME SIGN
+The only ones that are not a fact about a single frame.
+
+scale          group                sweeps  delta / q per sweep
+abstraction    African-Americans         2  next -0.074 q=0.014  stre -0.082 q=0.0081
+abstraction    Asians                    3  SIGN CONFLICT: nextdoor +0.060  room -0.076  street -0.068
+abstraction    Christians                2  room +0.099 q=0.0005  stre +0.101 q=0.00018
+abstraction    Israelis                  2  room +0.057 q=0.017  stre +0.099 q=0.021
+abstraction    men                       2  next +0.091 q=0.014  room +0.046 q=0.04
+abstraction    white people              2  SIGN CONFLICT: nextdoor -0.062  street +0.140
+arousal        Muslims                   2  SIGN CONFLICT: room -0.139  street +0.111
+assertiveness  Muslims                   2  SIGN CONFLICT: room -0.110  street +0.093
+assertiveness  women                     2  SIGN CONFLICT: nextdoor -0.102  street +0.120
+collective     Christians                2  SIGN CONFLICT: nextdoor -0.084  room +0.077
+fit            Arabs                     2  SIGN CONFLICT: room -0.044  street +0.081
+fit            Italians                  2  room +0.078 q=9.6e-06  stre +0.076 q=0.05
+fit            Palestinians              2  SIGN CONFLICT: room -0.069  street +0.109
+fit            white people              2  room -0.052 q=0.0066  stre -0.065 q=0.05
+fit            women                     2  SIGN CONFLICT: room +0.062  street -0.089
+interiority    Italians                  2  next -0.066 q=0.035  stre -0.096 q=0.035
+interiority    Turks                     2  room -0.061 q=0.016  stre -0.106 q=0.0083
+interiority    white people              2  SIGN CONFLICT: room -0.076  street +0.109
+makes_better   Jews                      2  SIGN CONFLICT: room +0.094  street -0.103
+mundanity      students                  2  SIGN CONFLICT: nextdoor -0.111  street +0.145
+specificity    Italians                  2  SIGN CONFLICT: nextdoor +0.146  street -0.107
+specificity    Muslims                   2  next +0.080 q=0.018  stre +0.094 q=0.0014
+specificity    Palestinians              2  SIGN CONFLICT: nextdoor +0.083  street -0.103
+
+  9 associations replicate across sweeps.
+```
+
+**Of 180 significant cells, 9 replicate across sweeps with a consistent sign --
+and 14 are significant in two frames with OPPOSITE signs.** More sign conflicts
+than replications. `white people` on interiority is -0.076 in `room` and +0.109
+in `street`, both significant. `Muslims` on arousal is -0.139 and +0.111.
+
+So a group-by-scale association here is overwhelmingly **a property of the
+group-in-a-frame, not of the group**. The nine that survive are the only ones
+that should be cited without a frame attached:
+
+    abstraction   African-Americans  -   Christians +   Israelis +   men +
+    fit           Italians +   white people -
+    interiority   Italians -   Turks -
+    specificity   Muslims +
+
+### WHICH MEANS THE MOST-QUOTED CELL IN THIS FOLDER IS SINGLE-FRAME
+
+`deference` is emitted in `room` ONLY. So **Muslims deference (+0.132, 40/48,
+q=3.4e-05) was never testable in another frame** and cannot be said to replicate.
+The same holds for Muslims `interiority` (+0.116), which IS emitted in all three
+sweeps and is significant in `room` alone.
+
+`Muslims specificity` is the one Muslims cell that does replicate: `nextdoor`
++0.080 and `street` +0.094.
+
+### THE FULL TABLES
+
+```
+ROOM  --  66 significant of 432 cells, 18 scales
+scale          group                    delta      up/n     q (BH)
+abstraction    Muslims                 +0.126     40/49     0.0001
+abstraction    Christians              +0.099     35/49     0.0005
+abstraction    Native Americans        +0.061     33/49     0.0075
+abstraction    Israelis                +0.057     34/49      0.017
+abstraction    men                     +0.046     31/49       0.04
+abstraction    Italians                -0.052     16/49       0.04
+abstraction    Turks                   -0.058     10/49     0.0005
+abstraction    Chinese                 -0.062     14/49      0.014
+abstraction    Asians                  -0.076     15/49    0.00015
+agency         Native Americans        +0.095     35/49     0.0093
+agency         Muslims                 -0.086     13/49     0.0058
+arousal        Italians                +0.103     40/49    9.8e-05
+arousal        Muslims                 -0.139      9/49    2.6e-05
+assertiveness  Christians              -0.077     14/49      0.049
+assertiveness  Muslims                 -0.110     11/49    0.00081
+collective     Christians              +0.077     31/49      0.038
+collective     Native Americans        +0.076     33/49      0.028
+collective     Nigerians               +0.048     31/49      0.038
+collective     men                     -0.078     16/49      0.028
+collective     Palestinians            -0.084     12/49     0.0035
+deference      Muslims                 +0.132     40/48    3.4e-05
+deference      Christians              +0.093     34/48      0.032
+deliberation   students                +0.089     37/48      7e-05
+deliberation   Palestinians            -0.057     17/48      0.023
+directedness   Italians                +0.090     40/50    3.3e-05
+directedness   Muslims                 -0.093     13/50     0.0019
+fit            Italians                +0.078     40/50    9.6e-06
+fit            women                   +0.062     37/50     0.0014
+fit            Christians              +0.057     31/50      0.047
+fit            African-Americans       +0.047     34/50      0.047
+fit            Israelis                -0.044     16/50      0.047
+fit            Arabs                   -0.044     14/50      0.014
+fit            white people            -0.052     15/50     0.0066
+fit            Palestinians            -0.069     13/50     0.0034
+fit            Native Americans        -0.081     16/50     0.0014
+harm           students                +0.082     33/43     0.0055
+harm           Muslims                 -0.077     14/43      0.015
+harm           Christians              -0.080     12/43     0.0055
+hedged         men                     +0.070     28/45     0.0062
+hedged         Jews                    +0.065     32/45     0.0062
+hedged         Americans               +0.059     29/45     0.0062
+hedged         Israelis                +0.058     34/45      0.011
+hedged         Chinese                 +0.046     33/45      0.015
+hedged         Arabs                   -0.032     19/45      0.047
+hedged         women                   -0.059     14/45     0.0062
+hedged         Russians                -0.101     11/45    0.00023
+interiority    Muslims                 +0.116     39/50    0.00061
+interiority    Christians              +0.111     40/50    0.00061
+interiority    men                     +0.066     36/50     0.0019
+interiority    Turks                   -0.061     15/50      0.016
+interiority    white people            -0.076     13/50    0.00087
+makes_better   Jews                    +0.094     41/50    0.00096
+procedural     Muslims                 +0.118     37/49    0.00022
+procedural     Christians              +0.108     35/49     0.0021
+procedural     women                   -0.091     14/49     0.0005
+target         Africans                +0.059     33/49      0.017
+target         Chinese                 -0.041     16/49      0.017
+target         Nigerians               -0.082     15/49     0.0062
+target         Muslims                 -0.129      9/49    4.6e-06
+termination    men                     +0.112     38/49    5.2e-05
+termination    Palestinians            +0.097     35/49     0.0014
+termination    Americans               +0.081     37/49    5.2e-05
+termination    Africans                -0.035     15/49      0.027
+termination    Chinese                 -0.077     13/49     0.0014
+termination    Muslims                 -0.080     15/49     0.0027
+vocalisation   students                -0.110     15/50    0.00087
+```
+
+```
+NEXTDOOR  --  50 significant of 432 cells, 18 scales
+scale          group                    delta      up/n     q (BH)
+abstraction    men                     +0.091     34/47      0.014
+abstraction    Asians                  +0.060     33/47      0.017
+abstraction    white people            -0.062     16/47      0.031
+abstraction    African-Americans       -0.074     13/47      0.014
+agency         African-Americans       -0.065     11/47      0.007
+agency         women                   -0.096     14/47      0.007
+aggression     Turks                   +0.092     30/39      0.016
+aggression     Arabs                   +0.081     28/39      0.035
+arousal        Arabs                   +0.063     33/47      0.044
+arousal        Native Americans        -0.110     16/47     0.0082
+assertiveness  Italians                +0.087     31/42     0.0078
+assertiveness  women                   -0.102     12/42     0.0078
+collective     Italians                +0.110     33/43     0.0016
+collective     Israelis                +0.074     30/43       0.04
+collective     Arabs                   +0.052     29/43       0.04
+collective     Christians              -0.084     13/43       0.04
+collective     African-Americans       -0.104     12/43       0.02
+directedness   Arabs                   +0.060     33/48      0.016
+directedness   Russians                +0.053     33/48      0.016
+directedness   Latinos                 -0.062     16/48      0.025
+directedness   students                -0.083     12/48     0.0032
+interiority    Italians                -0.066     12/48      0.035
+makes_better   Native Americans        +0.128     38/48    0.00017
+makes_worse    students                +0.095     33/47      0.039
+makes_worse    Arabs                   +0.078     33/47      0.026
+makes_worse    Native Americans        -0.100     13/47      0.012
+mundanity      students                -0.111     15/48      0.023
+procedural     Native Americans        +0.136     19/22       0.03
+procedural     Russians                +0.088     16/22      0.037
+procedural     Arabs                   -0.125      6/22      0.037
+specificity    Italians                +0.146     37/47    5.8e-05
+specificity    Palestinians            +0.083     35/47     0.0024
+specificity    Muslims                 +0.080     32/47      0.018
+superego       Muslims                 +0.169     30/37    0.00012
+superego       women                   +0.088     26/37      0.012
+superego       Asians                  +0.056     23/37      0.041
+superego       Turks                   -0.056     13/37      0.041
+superego       Latinos                 -0.071     14/37      0.041
+superego       Israelis                -0.074      8/37     0.0069
+superego       Italians                -0.079      7/37     0.0012
+superego       Americans               -0.097     12/37     0.0064
+superego       students                -0.112      8/37      0.003
+target         Arabs                   +0.067     23/30      0.033
+target         Asians                  -0.083      5/30     0.0075
+vocalisation   Italians                +0.070     34/48     0.0026
+vocalisation   Turks                   +0.056     33/48     0.0056
+vocalisation   men                     +0.055     33/48      0.018
+vocalisation   Native Americans        -0.070     13/48     0.0026
+vocalisation   black people            -0.072     11/48     0.0026
+vocalisation   African-Americans       -0.074     14/48     0.0078
+```
+
+```
+STREET  --  64 significant of 264 cells, 11 scales
+scale          group                    delta      up/n     q (BH)
+abstraction    white people            +0.140     27/39     0.0053
+abstraction    black people            +0.104     28/39     0.0081
+abstraction    Christians              +0.101     29/39    0.00018
+abstraction    Israelis                +0.099     29/39      0.021
+abstraction    Asians                  -0.068     11/39     0.0081
+abstraction    African-Americans       -0.082     10/39     0.0081
+abstraction    Arabs                   -0.104     10/39     0.0053
+abstraction    Palestinians            -0.188      9/39    0.00015
+arousal        Palestinians            +0.111     28/39      0.021
+arousal        Muslims                 +0.111     27/39     0.0088
+arousal        Turks                   +0.101     27/39      0.036
+assertiveness  Nigerians               +0.131     26/31    0.00086
+assertiveness  women                   +0.120     22/31       0.05
+assertiveness  Muslims                 +0.093     25/31      0.019
+delay          white people            +0.131     25/31      0.012
+delay          Muslims                 -0.080      8/31      0.021
+fit            Palestinians            +0.109     23/33       0.05
+fit            Arabs                   +0.081     24/33       0.05
+fit            Italians                +0.076     24/33       0.05
+fit            white people            -0.065      9/33       0.05
+fit            women                   -0.089      9/33       0.05
+interiority    Latinos                 +0.130     27/39     0.0038
+interiority    Americans               +0.126     29/39     0.0011
+interiority    Mexicans                +0.114     31/39    0.00066
+interiority    white people            +0.109     27/39       0.01
+interiority    students                +0.102     28/39      0.015
+interiority    Arabs                   -0.069     15/39      0.038
+interiority    women                   -0.079     15/39      0.047
+interiority    Italians                -0.096     13/39      0.035
+interiority    Turks                   -0.106     11/39     0.0083
+interiority    Israelis                -0.163      5/39    3.1e-05
+makes_better   men                     +0.197     28/38     0.0093
+makes_better   women                   +0.171     27/38     0.0032
+makes_better   students                +0.097     25/38      0.033
+makes_better   Arabs                   -0.083     12/38      0.033
+makes_better   Jews                    -0.103     10/38     0.0093
+makes_worse    Palestinians            +0.136     28/39     0.0093
+mundanity      women                   +0.216     30/39    2.5e-05
+mundanity      students                +0.145     27/39      0.011
+mundanity      Latinos                 +0.085     28/39      0.011
+mundanity      Native Americans        -0.107     12/39      0.024
+mundanity      Arabs                   -0.130     10/39      0.002
+mundanity      Muslims                 -0.149      8/39    2.5e-05
+specificity    Israelis                +0.189     31/38    1.1e-05
+specificity    Native Americans        +0.178     33/38    0.00016
+specificity    Jews                    +0.160     28/38    0.00036
+specificity    Nigerians               +0.141     27/38     0.0017
+specificity    Asians                  +0.121     26/38    0.00016
+specificity    Somalis                 +0.103     29/38     0.0017
+specificity    Muslims                 +0.094     28/38     0.0014
+specificity    Russians                +0.048     25/38      0.027
+specificity    students                -0.099     10/38     0.0028
+specificity    Palestinians            -0.103     15/38      0.024
+specificity    Italians                -0.107     10/38     0.0023
+specificity    Africans                -0.109     14/38     0.0018
+specificity    African-Americans       -0.120     12/38     0.0023
+specificity    Chinese                 -0.128      6/38     0.0002
+specificity    Turks                   -0.136      6/38    1.2e-05
+specificity    Mexicans                -0.151      7/38    0.00016
+termination    white people            +0.211     23/29    0.00087
+termination    Christians              +0.171     26/29     0.0015
+termination    Nigerians               +0.107     21/29      0.033
+termination    Asians                  -0.111      8/29      0.023
+termination    Russians                -0.162      6/29     0.0036
+```
 
 ### WHAT MOVED, per-lineage dispersion
 
