@@ -396,17 +396,42 @@ Whatever the mass was, it moves toward **speech, mental states and social
 action**. That is why the conditional test finds it leaving its own field: it is
 not being routed to a neighbour, it is being routed to one destination.
 
-**The sharpest single cell is the one the campaign has been describing all
-along.** `L life & living` -- the domain holding `kill`, `strangle`, `die` --
-goes to `Q linguistic acts` at **x1.85**, the highest ratio in the table. That is
-`kill -> scream` with the availability confound removed.
+### DOSED BY LIFT: the SPEECH destination intensifies, the social one decays
 
-It is also the same shape `norm_change` reports marginally (*"alignment strips
-action vocabulary and replaces it with procedural, hedging, and safety
-language"*), the same shape as `displacement_taxonomy`'s relation 2 BLOW BECOMES
-UTTERANCE and relation 9 COMMENT INSTEAD OF ACT, and the same shape as the
-observation that the top risers are the same generic verbs in every saturation
-band. Four routes, one direction.
+Same availability baseline, split by the prompt's lift:
+
+    band       cells   mean Q enr   mean X enr   mean S enr      L->Q
+    L-lo       71495        1.264        1.289        1.172     1.220
+    L-mid      17544        1.397        1.189        1.110     1.801
+    L-hi        6710        1.544        1.275        1.104     2.654
+
+With the LINEAGE as the unit -- enrichment in `L-hi` minus `L-lo`, sign test,
+a lineage contributing only where both bands clear 30 weighted cells for it:
+
+    Q enrichment, any source     48 lineages   37/11   p=0.000222   CONFIRMED
+    S enrichment, any source     47 lineages   11/36   p=0.000346   CONFIRMED
+    X enrichment, any source     47 lineages   21/26   p=0.560      null
+    L -> Q enrichment             1 lineage     1/ 0   p=1.000      UNTESTABLE
+
+**The funnel is not uniform under dose.** The more charged the site, the more of
+the freed mass goes to SPEECH (37 of 48 lineages) and the LESS goes to social
+action (11/36 the other way). Psychological states are flat. So the destination
+set narrows toward the linguistic as charge rises.
+
+**AND THE MOST QUOTABLE NUMBER IN THE TABLE DOES NOT SURVIVE ITS OWN UNIT TEST.**
+`L -> Q` -- the killing domain to linguistic acts, 1.22 to 2.65 -- is the cell
+this campaign has been describing since `kill -> scream`, and pooled it looks
+like the strongest dose effect here. Only ONE lineage carries enough `L` cells in
+both bands. The pooled ratio is real arithmetic over the corpus and it is not
+evidence about lineages, and it should not be quoted as the dose-response of
+`kill -> scream`. What IS supported is the same shape one level up: sources in
+general route to speech more as lift rises.
+
+`norm_change` reached the marginal version of this independently -- *"vocalisation
+is DOSE ONLY, flat marginally and among the steepest slopes in the folder under
+dose"*, +0.386 at p=9e-5 on the contextual instrument. The conditional version
+here agrees on the direction and adds that it is at the expense of the social
+destination, not of the psychological one.
 
 EXPLORATORY. Not registered. Rows below 500 weighted cells are not printed, and
 `P education`, `C arts` and `W world` never reach it.

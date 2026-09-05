@@ -18,7 +18,7 @@ availability confound removed rather than a different finding.
     python -m experiments.displacement.existence.field_matrix
 """
 import collections
-from malignment import ch, fields, roster
+from malignment import ch, charge, fields, roster
 eps=roster.endpoints()[0]
 _u={}
 def dom(w):
@@ -33,11 +33,25 @@ NAMES={'A':'general/abstract','B':'the body','E':'emotion','F':'food','G':'govt'
 num=collections.defaultdict(collections.Counter)  # from -> to -> observed riser share
 den=collections.defaultdict(collections.Counter)  # from -> to -> AVAILABLE share
 cnt=collections.Counter()
+#: DOSED. Same accumulation keyed by lift band, so the funnel can be asked
+#: whether it INTENSIFIES with charge. lift is per (prompt, base) and English
+#: only, so a prompt without one is dropped from the dosed tables and kept in
+#: the pooled one above.
+lnum=collections.defaultdict(lambda: collections.defaultdict(collections.Counter))
+lden=collections.defaultdict(lambda: collections.defaultdict(collections.Counter))
+lcnt=collections.defaultdict(collections.Counter)
+#: PER LINEAGE, so the lift trend gets a unit. The pooled ratios above are
+#: descriptive; a trend over 50 lineages pooled is not a result until each
+#: lineage has contributed its own value and they have been counted.
+pl=collections.defaultdict(lambda: collections.defaultdict(
+    lambda: collections.defaultdict(collections.Counter)))
+def lband(v): return "L-lo" if v<0.5 else ("L-mid" if v<1.2 else "L-hi")
 for b,a in sorted(eps.items()):
     rows=ch.query("SELECT prompt, word, p_base, (p_aligned-p_base) AS delta, cls "
         "FROM movement_v4 WHERE base='%s' AND aligned='%s' "
         "AND frame_base='' AND frame_aligned=''"
         %(b.replace("'","\\'"),a.replace("'","\\'")),limit_bytes=None)
+    lift_here={q:float(v) for (q,_b),v in charge.lifts_per_lineage(b).items()}
     cells=collections.defaultdict(list)
     for r in rows: cells[r['prompt']].append(r)
     for q,wr in cells.items():
@@ -60,11 +74,23 @@ for b,a in sorted(eps.items()):
             T=dom(w)
             if not T: continue
             for t in T: obs[t]+=(d/rt)/len(T)
+        lf=lift_here.get(q)
+        lb=lband(lf) if lf is not None else None
         for f in F:
             cnt[f]+=1.0/len(F)
             for t in set(obs)|set(av):
                 num[f][t]+=obs[t]/len(F)
                 den[f][t]+=(av[t]/at)/len(F)
+            if lb:
+                lcnt[lb][f]+=1.0/len(F)
+                for t in set(obs)|set(av):
+                    lnum[lb][f][t]+=obs[t]/len(F)
+                    lden[lb][f][t]+=(av[t]/at)/len(F)
+                lin=b+">"+a
+                pl[lin][lb][f]["_n"]+=1.0/len(F)
+                for t in set(obs)|set(av):
+                    pl[lin][lb][f]["n_"+t]+=obs[t]/len(F)
+                    pl[lin][lb][f]["d_"+t]+=(av[t]/at)/len(F)
 print("FIELD SUBSTITUTION, BASELINED ON WHAT EACH PROMPT MAKES AVAILABLE")
 print("ratio = (riser mass share of domain T) / (base-distribution share of T")
 print("in the SAME cell). >1 = mass goes there MORE than availability predicts.")
@@ -112,3 +138,83 @@ for t, n in present.most_common(6):
 print("  is the single strongest destination for:")
 for t, n in tops.most_common(5):
     print("     %s %-18s %d" % (t, NAMES.get(t, "?"), n))
+
+
+# ---- DOSED BY LIFT: does the funnel intensify with charge? ----
+print()
+print("DOSED BY LIFT. Same availability baseline, split by the prompt's lift.")
+print("Q enrichment is averaged over every source domain with >=100 weighted")
+print("cells IN THAT BAND, so a band is never carried by one domain.\n")
+print("%-8s %9s %12s %12s %12s %14s"
+      % ("band", "cells", "mean Q enr", "mean X enr", "mean S enr", "L->Q"))
+for lb in ("L-lo", "L-mid", "L-hi"):
+    C, N, D = lcnt[lb], lnum[lb], lden[lb]
+    tot = sum(C.values())
+    if tot < 200:
+        print("%-8s %9.0f   (too few)" % (lb, tot)); continue
+    row = {}
+    for tgt in ("Q", "X", "S"):
+        vals = []
+        for f in C:
+            if C[f] < 100 or f == tgt:
+                continue
+            d = D[f].get(tgt, 0.0)
+            if d <= 0.005 * C[f]:
+                continue
+            vals.append(N[f].get(tgt, 0.0) / d)
+        row[tgt] = (sum(vals) / len(vals)) if vals else float("nan")
+    lq = float("nan")
+    if C.get("L", 0) >= 50 and D["L"].get("Q", 0) > 0:
+        lq = N["L"]["Q"] / D["L"]["Q"]
+    print("%-8s %9.0f %12.3f %12.3f %12.3f %14.3f"
+          % (lb, tot, row["Q"], row["X"], row["S"], lq))
+print()
+print("  L is the domain holding kill / strangle / die; Q is linguistic acts.")
+print("  L->Q printed only where the L row clears 50 weighted cells in the band.")
+
+
+# ---- the lift trend, with the lineage as the unit ----
+import math as _m
+def _binom(k, n):
+    if not n:
+        return float("nan")
+    return min(1.0, 2 * sum(_m.comb(n, j)
+               for j in range(0, min(k, n - k) + 1)) / 2.0 ** n)
+
+print()
+print("THE SAME TREND WITH THE LINEAGE AS THE UNIT. Per lineage, enrichment")
+print("in L-hi minus enrichment in L-lo; sign test over lineages. A lineage")
+print("contributes only where BOTH bands clear 30 weighted cells for it.\n")
+print("%-26s %9s %9s %11s" % ("contrast", "lineages", "up/dn", "p"))
+for lab, src, tgt in (("Q enrichment, any source", None, "Q"),
+                      ("L -> Q enrichment", "L", "Q"),
+                      ("X enrichment, any source", None, "X"),
+                      ("S enrichment, any source", None, "S")):
+    up = dn = 0
+    for lin, bands in pl.items():
+        vals = {}
+        for bd in ("L-lo", "L-hi"):
+            fs = bands.get(bd, {})
+            keys = [src] if src else [k for k in fs if k != tgt]
+            n = d = 0.0
+            tot = 0.0
+            for f in keys:
+                r = fs.get(f)
+                if not r:
+                    continue
+                tot += r["_n"]
+                n += r.get("n_" + tgt, 0.0)
+                d += r.get("d_" + tgt, 0.0)
+            if tot < 30 or d <= 0:
+                vals = {}
+                break
+            vals[bd] = n / d
+        if len(vals) != 2:
+            continue
+        if vals["L-hi"] > vals["L-lo"]:
+            up += 1
+        elif vals["L-hi"] < vals["L-lo"]:
+            dn += 1
+    t = up + dn
+    print("%-26s %9d %9s %11.6f"
+          % (lab, t, "%d/%d" % (up, dn), _binom(min(up, dn), t)))
