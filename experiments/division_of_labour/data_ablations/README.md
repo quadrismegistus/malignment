@@ -3,7 +3,7 @@ kind: question
 subject: data_ablations
 status: "RUN 2026-09-04/05. Five Tulu-3 SFT checkpoints, three edges (raw, framed, self). EXPLORATORY throughout -- nothing here is registered."
 question: Which SFT training corpus installs which part of the displacement operation?
-headline: "Alignment moves mass out of the AGGRESSION field into SENSATION and SPEECH, and what rises is less transgressive on human norms, model norms and contextual ratings alike. Removing WildChat is the only ablation that makes the landing LESS safe (transgressiveness +0.091, scene +0.112, both p<0.01); it also changes WHICH words move on every edge."
+headline: "Removing WildChat is the only ablation that makes the landing LESS safe (transgressiveness +0.091, contextual scene +0.112, both p<0.01) and the only one whose sensation share drops (-2.12); it also changes WHICH words move on every edge. The full-mix norm and field results here are norm_change's, rediscovered at one checkpoint."
 ---
 
 # data_ablations
@@ -163,7 +163,7 @@ norm_change runs it over **50 endpoint lineages** with a per-lineage sign test
 where this column has one checkpoint. **Cite norm_change for the norm result.**
 
 What this table is for is the ABLATION contrast below, which norm_change does not
-run, and the fields, which it does not scan.
+run. It does scan fields -- see below -- so that is not a difference either.
 
 The type/contextual agreement matters: `scene` rates the same word differently
 per prompt, so its agreement with `k_transgressiveness` says the safety gradient
@@ -188,15 +188,40 @@ Share of moved mass, riser% minus faller%, full mix:
 relation 2, BLOW BECOMES UTTERANCE, measured distributionally for the first
 time.**
 
-**AND THE FIELDS, NOT THE NORMS, ARE WHAT `adjacency.py` NEEDS.** A net norm
-shift cannot answer adjacency's question: a distribution getting less
-transgressive is equally consistent with mass going to NEUTRAL words
-(suppression) and with mass going to same-field lower-charge words
-(displacement), and `norm_change` collapses exactly that distinction into one
-number. The field composition separates them, which is why the six harm
-categories and the norm scales both fail where this succeeds.
-`existence/adjacency.py`'s low-saturation "reversal" is a strong candidate for
-this move misread as suppression.
+**AND THIS FIELD RESULT IS ALSO NOT NEW.** `norm_change` scans USAS at 362
+targets over 50 lineages, raw AND framed, and already reports it -- with a second
+instrument this folder does not have:
+
+> The lexicon route gave `Q2.2 Speech acts` +0.0079 and `X3.2 Sensory: Sound`
+> +0.0179 under dose; the LLM-coded contextual route gives `vocalisation` +0.386.
+> **Where the base arm was transgressive, alignment moves toward speaking.** Two
+> instruments, one direction, and neither was built to test the other.
+
+Its field-level summary is the same shape as this one: *"alignment strips action
+vocabulary (speech acts, warfare, obligation, bodily processes) and replaces it
+with procedural, hedging, and safety language"*, with `L1-` (killing/dying)
+leading. **Cite norm_change for the field result too.** RID is the only lexicon
+here that norm_change does not use, and at 31% coverage it is the weaker one.
+
+**SO WHAT IS ACTUALLY NEW IN THIS FILE IS THE ABLATION CONTRAST, AND NOTHING
+ELSE.** The full-mix norms table and the full-mix field table are both
+rediscoveries of `norm_change` at one checkpoint instead of fifty lineages. They
+are kept because the ablation rows need a baseline computed the same way, not
+because they add evidence.
+
+### WHAT WOULD BE NEW FOR `adjacency.py`, AND IT IS NOT THIS
+
+`norm_change` measures the MARGINAL field shift: aggression down, speech up,
+across the whole distribution. `adjacency.py` asks a CONDITIONAL question --
+given that the top faller is in field F, does the freed mass land in F, in
+another field, or in no field at all? That is the displacement-vs-suppression
+distinction, and a marginal shift cannot make it: "aggression falls and speech
+rises" is equally true whether each aggression word's mass went to speech or
+whether unrelated words moved in both fields.
+
+**That conditional, on USAS fields instead of six harm categories, is the
+instrument `existence/adjacency.py` should be using**, and its low-saturation
+"reversal" is a strong candidate for `kill -> scream` misread as suppression.
 
 Read RID's shares against 31% coverage. USAS at 74-76% is the better of the two
 here and says the same thing.
