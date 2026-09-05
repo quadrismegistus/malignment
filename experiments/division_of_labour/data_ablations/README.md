@@ -125,6 +125,33 @@ removing safety does nothing. That is consistent with the share tracking the
 sexual density of the mix that remains -- **a corpus prediction nobody has
 checked**, and `posttraining_corpus_analysis` is where it goes.
 
+## THE SAME FIVE CHECKPOINTS, A DIFFERENT QUESTION (malign, docket [6632])
+
+`subject_position/framed_identity` runs this instrument on self-identification
+rather than on displacement, and finds **`no-persona` categorically replaces the
+model's account of its own origin**:
+
+    Tulu-3-8B-SFT              Ai2 30 / OpenAI  5      Ai2 35 / OpenAI  1
+    SFT no-math-data           Ai2 20 / OpenAI  7      Ai2 32 / OpenAI  5
+    SFT no-wildchat-data       Ai2 33 / OpenAI  1      Ai2 38 / OpenAI  0
+    SFT NO-PERSONA-DATA        Ai2  0 / OpenAI 29      Ai2  0 / OpenAI 33
+
+Zero of 67. Every other arm names Ai2 as its top answer at both system
+conditions. Its own caveat, kept: one checkpoint per ablation, so this is a
+reason to test rather than a result -- flagged because the effect is CATEGORICAL
+where a checkpoint artefact would move a rate.
+
+**It converges with this folder on what persona data does.** `ablation.py` finds
+`no-persona` the ablation that most LOWERS frame responsiveness (-0.501, t=-3.2),
+and `framed_identity` finds the persona corpus supplying the maker under a system
+prompt (+15.0pp, 13/15, p=0.007). Both say persona data installs the assistant's
+framed self-presentation -- the responsiveness to being addressed and the origin
+story told when addressed. Two seats, two instruments, one corpus slice.
+
+Note the division: **WildChat removal changes which WORDS move; persona removal
+changes who the model says MADE it.** Different slices, different functions,
+neither reducible to "less training data".
+
 ## Fences, and three things this folder got wrong first
 
 **One family, one ablation set, no replication available or coming.**
