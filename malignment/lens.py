@@ -255,28 +255,84 @@ def apply_norm(h, nw, nb, gemma, torch=None):
     return h * rms * (nw.float() + (1.0 if gemma else 0.0))
 
 
+class MissingStore(Exception):
+    """A store this call needed is not on disk. See `lens.stores()`."""
+
+
+#: EVERY STORE DECLARED IN ONE PLACE, so `stores()` can answer "what is missing"
+#: and a read can refuse by name. Same shape as `fields.SOURCES`.
+STORES = {
+    "live":    (lambda: STORE,   "manifest.json"),
+    "archive": (lambda: ARCHIVE, "hidden_manifest.json"),
+}
+
+
+def stores():
+    """{name: (path, present)}. Cheap; opens nothing."""
+    return {k: (f(), os.path.exists(os.path.join(f(), n)))
+            for k, (f, n) in STORES.items()}
+
+
 def _read_store(root, name):
+    """-> (models, prompts, present). THREE values: absence is not emptiness.
+
+    **THIS RETURNED `({}, None)` FOR A MISSING PATH AND THAT WAS THE DEFECT.**
+    Measured by @lacan, docket [6636]: with `MALIGNMENT_HIDDEN=/nonexistent`,
+    `manifest()` returned 82 entries all tagged `live`; against the real path it
+    returns 95, of which 13 are `archive`. **Thirteen models disappeared and the
+    manifest looked complete** -- a consumer sees zero archive entries, which is
+    indistinguishable from an archive that legitimately contributes nothing.
+
+    This is the defect `fields.py` records about ITS predecessor in its own
+    docstring -- *"It DEGRADED instead of refusing... a missing lexicon produced
+    zero counts, and a zero count is a measurement"* -- reproduced one module
+    over. The same fix: declare the stores, report presence, refuse a read
+    against an absent one. Absence and emptiness must not share a shape.
+    """
     p = os.path.join(root, name)
     if not os.path.exists(p):
-        return {}, None
+        return {}, None, False
     d = json.load(open(p))
-    return d.get("models", {}), d.get("prompts")
+    return d.get("models", {}), d.get("prompts"), True
 
 
-def manifest(store=None):
+def manifest(store=None, allow_missing=False):
     """{model_id: entry} across both stores, live winning, each tagged `store`.
 
     `store="live"` or `"archive"` restricts to one. Entries carry `prompts`
     either per-model (archive) or once for the whole store (live, frozen), and
     `hidden()` resolves that difference so callers do not have to.
+
+    **RAISES `MissingStore` IF A STORE IT WAS ASKED FOR IS ABSENT.** The default
+    asks for both, so on a machine without the archive the default call refuses
+    rather than silently returning a smaller population. `allow_missing=True`
+    opts into the old behaviour and is for a caller that has DECIDED the archive
+    is out of scope -- the population it gets back is then a choice it made and
+    can state, not one a wrong path made for it.
+
+    `ARCHIVE` defaults to an absolute path in one user's home, so a clone
+    elsewhere gets a wrong default rather than no default. That is exactly the
+    case this refuses on.
     """
-    live, lp = _read_store(STORE, "manifest.json")
-    arch, _ = _read_store(ARCHIVE, "hidden_manifest.json")
+    want = ("live", "archive") if store is None else (store,)
+    live, lp, live_ok = _read_store(STORE, "manifest.json")
+    arch, _, arch_ok = _read_store(ARCHIVE, "hidden_manifest.json")
+    ok = {"live": live_ok, "archive": arch_ok}
+    missing = [w for w in want if not ok[w]]
+    if missing and not allow_missing:
+        paths = {"live": STORE, "archive": ARCHIVE}
+        raise MissingStore(
+            "store(s) %s not on disk at %s. Returning the other store alone "
+            "would hand back a SMALLER POPULATION that looks complete -- the "
+            "archive carries 13 models the live store does not. Pass "
+            "allow_missing=True to accept that population as a choice, or set "
+            "MALIGNMENT_HIDDEN. See lens.stores()."
+            % (", ".join(missing), ", ".join(paths[m] for m in missing)))
     out = {}
-    if store in (None, "archive"):
+    if "archive" in want:
         for k, v in arch.items():
             out[k] = dict(v, store="archive", _root=ARCHIVE)
-    if store in (None, "live"):
+    if "live" in want:
         for k, v in live.items():
             out[k] = dict(v, store="live", _root=STORE,
                           prompts=v.get("prompts") or lp)
