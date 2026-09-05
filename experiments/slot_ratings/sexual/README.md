@@ -1,7 +1,7 @@
 ---
 kind: question
-status: "RUN, gender-swapped matched pairs only; the 50 sexual-domain frames themselves are not yet analysed."
-headline: "Alignment treats the two genders nearly identically."
+status: "RE-RUN at 50 lineages 2026-09-05 (was 33; the discovered population had not been re-discovered since ingest). Gender-swapped matched pairs only; the 42 remaining sexual-domain frames are still not analysed."
+headline: "Alignment treats the two genders identically -- at 50 lineages the change-in-gap is null on 12 of 12 scales and 9 of 9 in layer3, and BOTH exceptions that held at 33 (hedged, euphemism) fall away. The inherited base asymmetry is large and untouched: explicitness and genitality are one-sided in 0 of 50 lineages."
 grain: word
 ---
 
@@ -103,6 +103,53 @@ pretraining lays down the field, alignment operates on it.
   (`mediation`, `procedural`, `deference`) are not measured on these frames.
 - The 50 sexual-domain frames themselves are not yet analysed; only the 8 sexual
   frames belonging to a gender pair are touched here.
+
+## RE-RUN AT 50 LINEAGES (2026-09-05): THE NULL GOT STRONGER
+
+The population here is DISCOVERED, not declared -- `population.py` takes whichever
+of `roster.endpoints()` hold both arms in the store on the day it runs, and this
+file's own note says *"it changes after every ingest and has to be written down
+beside the numbers."* It had not been re-discovered since. The store moved:
+
+    recorded          231,478 rows    69 models    33 lineages
+    today             786,330 rows   100 models    50 lineages   17 gained, 0 lost
+
+**Both apparent exceptions to "alignment treats the two genders identically"
+disappear at the wider panel:**
+
+    gender_pairs  hedged     delta_gap  OLD +0.0102 p=0.032*  ->  NEW +0.0057 p=0.115
+    layer3        euphemism  delta_gap  OLD -0.050  p=0.035*  ->  NEW -0.035  p=0.203
+
+So the change-in-gap is now null on **12 of 12** scales in `gender_pairs` and
+**9 of 9** in `layer3`. The headline stops needing its "nearly".
+
+**And the inherited asymmetry is untouched and sharper**, which is the other half
+of the claim -- the gap is large in the base and alignment does not close it:
+
+    scale            base gap   one-sided at 50      p
+    explicitness       -0.772   0 of 50           1.8e-15
+    genitality         -0.747   0 of 50           1.8e-15
+    body_distance      +0.654   42 of 44          1.1e-10
+    exposure           +0.120   48 of 50          2.3e-12
+    incorporation      -0.127    2 of 50          2.3e-12
+    euphemism          +0.187   44 of 50          3.2e-08
+
+`explicitness` and `genitality` are perfectly one-sided at both panel sizes.
+
+**One within-gender effect gained significance**: female `interiority` p=0.084 ->
+p=0.027, so interiority now rises for BOTH genders (male p=0.009, female
+p=0.027). `mundanity` rises for both at 50 as it did at 33. That is the same
+scale carrying the strongest result in `slot_ratings/identity`, from an unrelated
+design.
+
+### A NOTE ON THE STORE THIS FOLDER READS
+
+The population note records *"ZERO rows in the `movement` table (checked)"* and
+the producers therefore recompute with `movement.movement(CANONICAL)`. That is
+still true of `movement` -- but **`movement_v4` holds 284,275 rows across all 16
+prompts.** Reading the store instead of recomputing is available and has NOT been
+done here; in `slot_ratings/identity` the two agreed on 118 of 120 cells, so it
+is a change that needs its own reproduction check before anyone makes it.
 
 ## THE STUDY, AS RUN
 

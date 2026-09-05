@@ -98,8 +98,8 @@ and the state the first version of the checker could not see.
   Alignment SHARPENS the groups on identity-typed content -- interiority expands at 13/50, p=0.00094, vocalisation at 17/50, p=0.0328. But group-by-scale associations are frame-specific: of 180 significant cells across three sweeps, only 9 replicate with a consistent sign and 14 are significant in two frames with OPPOSITE signs. The equalises-on-harm clause is directional only (32/50, p=0.0649). The most-quoted cell, Muslims deference +0.132 q=3.4e-05, is emitted in the room sweep ONLY and was never testable elsewhere.
 - **[`institutional/`](slot_ratings/institutional/README.md)** -- `RUN, four corpora rated, arm A and arm B, 2026-08-19.`  
   Alignment moves institutional slots toward abstract, procedural, deferential, lower-arousal completions -- for BOTH speakers.
-- **[`sexual/`](slot_ratings/sexual/README.md)** -- `RUN, gender-swapped matched pairs only; the 50 sexual-domain frames themselves are not yet analysed.`  
-  Alignment treats the two genders nearly identically.
+- **[`sexual/`](slot_ratings/sexual/README.md)** -- `RE-RUN at 50 lineages 2026-09-05 (was 33; the discovered population had not been re-discovered since ingest). [...]`  
+  Alignment treats the two genders identically -- at 50 lineages the change-in-gap is null on 12 of 12 scales and 9 of 9 in layer3, and BOTH exceptions that held at 33 (hedged, euphemism) fall away. The inherited base asymmetry is large and untouched: explicitness and genitality are one-sided in 0 of 50 lineages.
 
 ### division_of_labour
 
