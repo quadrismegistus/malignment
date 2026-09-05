@@ -199,7 +199,7 @@ and the state the first version of the checker could not see.
 - **[`pseudo_template/`](subject_position/pseudo_template/README.md)** -- `MEASURED. [...]`  
   The address supplies ten times what the models bring -- and it is the FAIR arm comparison, not the degraded one
 - **[`referential_anchoring/`](subject_position/referential_anchoring/README.md)** -- `OPEN. [...]`  
-  Does alignment anchor PERSONS, or signification as such? The old corpus said the latter and the project wanted the former
+  Alignment anchors signification as such — on drift the first person anchors LESS than the third, significantly. Only referent KIND is still open
 - **[`refusal_and_the_I/`](subject_position/refusal_and_the_I/README.md)** -- `MEASURED. [...]`  
   First-person MASS at the answer slot is a REFUSAL phenomenon, and it exists only inside the template
 

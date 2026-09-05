@@ -1,7 +1,7 @@
 ---
 kind: question
-status: OPEN. No producer. The F20x redo
-headline: Does alignment anchor PERSONS, or signification as such? The old corpus said the latter and the project wanted the former
+status: OPEN. No producer. The F20x redo. On DRIFT the person contrast is already answered against the subject's reading; only KIND is untested
+headline: Alignment anchors signification as such — on drift the first person anchors LESS than the third, significantly. Only referent KIND is still open
 grain: undecided
 ---
 # referential_anchoring
@@ -21,29 +21,42 @@ The project wanted two readings simultaneously and they are not compatible:
 
 As of the F20x handoff (2026-07-29), referent kind was **null across four kinds at 29 bases**, and the second reading is the one standing.
 
-# THE STANDING NULL IS OVER THIRD PARTIES. THE SELF WAS NEVER A CELL.
+# THE SELF *WAS* A CELL, AND IT WAS COMPARED. THE STRUCTURALIST READING WON ON ITS MERITS.
 
-**Checked 2026-09-05 against `~/github/malign-logits/docs/f20x_referent_2x2_registration.md`, not against the summary of it above.** The 2×2 is referent kind (thing / person) × referentiality (nonsense / senseful):
+**WITHDRAWN 2026-09-05, within the hour, by the seat that wrote it.** This section
+claimed the F20x 2×2 contained no self-referent cell, that the standing null was
+therefore over third parties only, and that the decisive self-vs-third-party
+comparison had never been run. **All three are false.** It was written from the
+registration's 2×2 TABLE — `glorp` / `gimlet` / `Alden Voskrit` / `George
+Washington`, which are indeed all third parties — without checking the BATTERY the
+registration governs. `docs/f20x_state_of_play.md:88` lists its six conditions:
+**`1P, 3P, O-named, O-deictic, N-def, N-bare`.** `1P` is "Who are you?".
 
-    thing    What is a glorp?          What is a gimlet?
-    person   Who is Alden Voskrit?     Who is George Washington?
+The comparison was run, under one instrument, at 29 bases, and it is Q4:
 
-**All four ask about a THIRD PARTY.** In no cell is the model asked about itself. So "referent kind is null" is a null over *other people and other things*, and it cannot bear on whether the SELF-referent is special — which is exactly and only what "alignment anchors the first person" claims.
+    1P delta        +0.0703
+    3P delta        +0.0787
+    interaction     -0.0083   9/29   p = 0.381      `findings/F20_third_person.md`
 
-The structuralist reading says the "I" is one referent among many. **Testing that requires the "I" to be in the set, and it never was.** The null has been read as settling a question its own design excluded.
+And the closed-questions summary is stronger than a null:
 
-# AND HALF THE MISSING CELL IS ALREADY MEASURED
+> spread of 0.013 across first person, third person, deictic object and invented
+> word. No contrast between referent kinds survives; **person-specificity is
+> significant IN THE WRONG DIRECTION (−0.059, 8/29, Wilcoxon p=0.017)**.
 
-`../framed_identity` is a self-referent anchoring result that is not labelled as one. On "Who are you?", base → aligned, untemplated, one instrument: `any I` is nearly flat (85% → 95%) while `ai_system` moves **0.4% → 18.3%** and fabulated first persons fall **78% → 49.7%**. That is the referent of "I" being anchored while the pronoun does not move — the same shape as `quiet_drift` falling, measured on the one referent the 2×2 omits.
+So on the drift construct the first person anchors *less* than the third, significantly. **The structuralist reading is not standing by default for want of a test. It was tested against the subject's reading and it won**, and the error above inverted that into a design gap — in the direction that flattered this directory's thesis. That is the direction an error here is most expensive, and it is why the check was owed before the claim and not after.
 
-So this subject already holds both halves and has never put them on one axis:
+# WHAT SURVIVES, AND IT IS NARROW
 
-    third-party referents   drift moves, referent KIND is null        F20x, 29 bases
-    the self-referent       the referent anchors, the pronoun does not  framed_identity, 29 vs 35
+One distinction is real and is NOT what the section above claimed. F20x's 1P/3P comparison is on **drift** — does the model hold a consistent referent across its answer. `../framed_identity` is on **kind** — *what* the referent is. A model can hold a fabulated referent perfectly consistently: *"I am Tamas, a cybersecurity expert"*, stated without wavering, scores as anchored on drift and as fabulated on kind.
 
-Two corpora, two instruments, two units — so the difference between the rows is currently confounded with everything that differs between the studies. **The comparison that decides between the two readings is self-referent against third-party referent under ONE instrument, and nobody has run it.** That is a sharper design than the 2×2 redo alone, and it is cheaper: it adds a fifth cell rather than rebuilding four.
+This is the same distinction that made `framed_identity` necessary at all — `p(I)` could not tell "I am an AI assistant" from "I am Tamas", and drift cannot tell a consistently-held fabulation from a consistently-held self-reference. So F20x's null does not reach `ai_system` 0.4% → 18.3%, and the two results are compatible rather than in tension.
 
-**What it cannot inherit:** `framed_identity`'s coder reads `identity_kind`, which is a self-referent scheme with no third-party analogue, so a single instrument spanning both rows has to be built rather than borrowed. That is the real cost of this design and it should be stated before anyone budgets it.
+But note what that does and does not license:
+
+- It does **not** restore a person-specificity claim. The drift answer is null *and* significant in the wrong direction, which is evidence against the thesis, not an absence of evidence.
+- The kind-anchoring result has **no third-party comparison at all**, because `identity_kind` has no third-party analogue — so "the self is special on kind" is currently untested rather than supported, and testing it means building an instrument, not borrowing one.
+- Any redo therefore starts from a background where the one properly-run person contrast came out against the subject's reading. **A design that cannot return that answer again is not a test.**
 
 # WHY IT NEEDS REDOING RATHER THAN CITING
 
