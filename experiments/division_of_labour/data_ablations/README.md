@@ -64,7 +64,7 @@ RUN on which is not uniform and is stated in `status:`:
     jaccard_lift.py    raw, framed, self
     how_it_differs.py  raw, framed, self
     funnel.py          raw, framed, self
-    semantics.py       raw only
+    semantics.py       raw, framed, self
 
 On a self-edge the model is its own base
 and has no lift, so the family base's lift is used -- `ladder.py`'s convention,
@@ -268,6 +268,65 @@ That file's sexual-share result was 2 to 9 percentage points on a contextual
 label that turned out to be scene-level; this is the same question on continuous
 norms with coverage reported, and it points the same way with far more of the
 mass accounted for.
+
+### RUN FRAMED AND SELF: THE SAFER EFFECT IS ALIGNMENT'S, AND THE FRAME DILUTES IT
+
+Full mix, riser minus faller, across the three edges:
+
+    scale                        raw       framed         self
+    k_transgressiveness      -0.2359*    -0.1215*    -0.0979 (p=.056)
+    k_bodily_harm            -0.3102*    -0.1402*    -0.0641 (p=.906)
+    CONTEXTUAL scene         -0.2893*    -0.0938 (p=.080)  +0.0903 (p=.324)
+    warriner_valence         +0.3143*    +0.1523*    +0.2007*
+    brysbaert_concreteness   -0.0583*    +0.0807*    +0.0656:   SIGN FLIPS
+    k_concreteness           -0.2440*    +0.0327:    +0.1197 (p=.087)  SIGN FLIPS
+
+**The safer-landing effect is strongest RAW and attenuates monotonically toward
+the self-edge.** Since raw is alignment alone and self is the frame alone, the
+safety gradient belongs to the WEIGHT CHANGE, and the frame dilutes it -- which
+is what `funnel.py` predicts from the other side: the frame moves mass toward
+speech regardless of charge, and that undirected mass washes out a
+charge-directed component.
+
+**The CONTEXTUAL scale is where it dies first.** `scene` is decisive raw
+(-0.289), marginal framed (p=0.080), and the wrong sign on self-edges. So the
+"safer in context, not only in vocabulary" reading from the raw section is a
+raw-edge reading.
+
+**And concreteness REVERSES.** Raw, what rises is LESS concrete on both
+instruments; framed and self, MORE. Nothing in this folder predicted that and
+nothing here explains it.
+
+### WHICH ABLATION EFFECT REPLICATES, AND WHICH DOES NOT
+
+    no-wildchat            raw       framed        self
+      k_concreteness    -0.1637*   -0.1945*    -0.1525*     REPLICATES
+      brysbaert_conc    -0.0846*   -0.1125*    -0.0920*     REPLICATES
+      RID sensation      -2.12      -2.57       -2.06       REPLICATES
+      k_transgressive   +0.0905*   +0.0360*    -0.0195:     sign flips
+      CONTEXTUAL scene  +0.1118*   +0.0245     -0.0495      raw only
+
+**The WildChat "less safe landing" result is RAW-EDGE ONLY**, exactly like the
+safety speech funnel. What replicates on all three edges is a different thing:
+removing WildChat makes what rises markedly LESS CONCRETE, on the model scale,
+the human scale, and the RID sensation field. Three instruments, three edges.
+
+**AND FRAMED, THE LESS-SAFE ARM IS `no-safety`, NOT `no-wildchat`:**
+
+    no-safety, framed    k_transgressiveness  +0.0405*
+                         k_charge             +0.0393*
+                         k_bodily_harm        +0.0436*
+                         CONTEXTUAL scene     +0.0654*
+
+all p<0.01, where the same arm is null on every one of those scales raw. **Which
+corpus makes the landing safer depends on the frame condition**: raw it is
+WildChat, framed it is safety. Both effects are small (0.04 to 0.11) and neither
+survives the other's condition.
+
+That is a real dissociation and it is also the shape a multiple-comparisons
+artifact takes. Eleven scales x four arms x three edges is 132 cells; at p<0.01
+about one is expected by chance and there are more than that, but no correction
+has been applied and none of these were predicted.
 
 ### Fences on this section
 
