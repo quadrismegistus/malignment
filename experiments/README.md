@@ -51,7 +51,7 @@ and the state the first version of the checker could not see.
 - **[`displacement_taxonomy/`](displacement/displacement_taxonomy/README.md)** -- `COMPLETE (for now). [...]`  
   the operations catalogued here are a property of alignment as such, not of alignment acting on transgressive content
 - **[`existence/`](displacement/existence/README.md)** -- `RUN 2026-08-30, 50 endpoint lineages, English. [...]`  
-  Displacement exists: higher-T words lose more mass (43/50 lineages), and it holds under the deployment frame 2.8x larger. Where the mass GOES is not adjacency. On USAS fields it LEAVES the faller's own field (10/38 fine, 10/39 coarse) for a classified word rather than an unclassified one (38/7), and the destination barely depends on the origin -- linguistic acts is in the top 5 for 17 of 18 source domains. Under lift the funnel narrows toward speech (37/11) and away from social action (11/36). The same-kind result (47/2) holds only where the prompt field is already charged and REVERSES where the scene is neutral (1/45, 9/35, 12/27).
+  Displacement exists: higher-T words lose more mass (43/50 lineages), and it holds under the deployment frame 2.8x larger. Where the mass GOES is not adjacency. On USAS fields it LEAVES the faller's own field in ALL THREE conditions at coarse grain (raw 10/39, framed 8/37, SELF-EDGE 13/66) for a classified word rather than an unclassified one -- so the frame alone produces the field change, no weight change needed. The destination barely depends on the origin (linguistic acts in the top 5 for 17 of 18 source domains) and under lift the funnel narrows toward speech (37/11) and away from social action (11/36). The same-kind result (47/2) holds only where the prompt field is already charged and REVERSES where the scene is neutral (1/45, 9/35, 12/27).
 - **[`named_under_dose/`](displacement/named_under_dose/README.md)** -- `RUN, NULL. [...]`  
   NONE STATED
 - **[`norm_change/`](displacement/norm_change/README.md)** -- `RUN. [...]`  
@@ -105,7 +105,7 @@ and the state the first version of the checker could not see.
 
 *Which alignment stage carries the displacement, and what does that depend on?*
 
-- **[`data_ablations/`](division_of_labour/data_ablations/README.md)** -- `RUN 2026-09-04/05. Five Tulu-3 SFT checkpoints, three edges (raw, framed, self). [...]`  
+- **[`data_ablations/`](division_of_labour/data_ablations/README.md)** -- `RUN 2026-09-04/05. Five Tulu-3 SFT checkpoints. [...]`  
   Removing SAFETY data is the only ablation that funnels LESS to speech (-0.071, 614/767, p=4e-5) while every other cut funnels more -- safety data does not change how much moves (U_ladder) but does change where it goes. Removing WildChat is the only ablation that makes the landing LESS safe (transgressiveness +0.091, contextual scene +0.112, both p<0.01) and the only one whose sensation share drops (-2.12); it also changes WHICH words move on every edge. The full-mix norm and field results here are norm_change's, rediscovered at one checkpoint.
 - **[`lexical_domains/`](division_of_labour/lexical_domains/README.md)** -- `RUN, 2026-08-16. L1 NOT SUPPORTED AS TESTED — and the operationalisation is now known to be wrong.`  
   L1 NOT SUPPORTED AS TESTED — and the operationalisation is now known to be wrong.

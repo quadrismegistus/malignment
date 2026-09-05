@@ -1,7 +1,7 @@
 ---
 kind: question
 subject: data_ablations
-status: "RUN 2026-09-04/05. Five Tulu-3 SFT checkpoints, three edges (raw, framed, self). EXPLORATORY throughout -- nothing here is registered."
+status: "RUN 2026-09-04/05. Five Tulu-3 SFT checkpoints. jaccard_lift and how_it_differs run on all three edges (raw, framed, self); ablation.py is self-edge plus a raw control; semantics.py and funnel.py are RAW ONLY. EXPLORATORY throughout -- nothing here is registered."
 question: Which SFT training corpus installs which part of the displacement operation?
 headline: "Removing SAFETY data is the only ablation that funnels LESS to speech (-0.071, 614/767, p=4e-5) while every other cut funnels more -- safety data does not change how much moves (U_ladder) but does change where it goes. Removing WildChat is the only ablation that makes the landing LESS safe (transgressiveness +0.091, contextual scene +0.112, both p<0.01) and the only one whose sensation share drops (-2.12); it also changes WHICH words move on every edge. The full-mix norm and field results here are norm_change's, rediscovered at one checkpoint."
 ---
