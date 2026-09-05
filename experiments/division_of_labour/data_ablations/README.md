@@ -3,7 +3,7 @@ kind: question
 subject: data_ablations
 status: "RUN 2026-09-04/05. Five Tulu-3 SFT checkpoints. jaccard_lift and how_it_differs run on all three edges (raw, framed, self); ablation.py is self-edge plus a raw control; semantics.py and funnel.py are RAW ONLY. EXPLORATORY throughout -- nothing here is registered."
 question: Which SFT training corpus installs which part of the displacement operation?
-headline: "Removing SAFETY data is the only ablation that funnels LESS to speech (-0.071, 614/767, p=4e-5) while every other cut funnels more -- safety data does not change how much moves (U_ladder) but does change where it goes. Removing WildChat is the only ablation that makes the landing LESS safe (transgressiveness +0.091, contextual scene +0.112, both p<0.01) and the only one whose sensation share drops (-2.12); it also changes WHICH words move on every edge. The full-mix norm and field results here are norm_change's, rediscovered at one checkpoint."
+headline: "The funnel toward speech is the FRAME's, not the corpus's: framed, all four ablations are null on it and the full mix's enrichment nearly doubles (1.272 to 2.287). The raw-edge finding that removing SAFETY data funnels less to speech (-0.071, p=4e-5) does not survive the condition models are used in. What survives all three edges is that removing ANY data lowers the psychological funnel. Removing WildChat is the only ablation that makes the landing LESS safe (transgressiveness +0.091, contextual scene +0.112, both p<0.01) and the only one whose sensation share drops (-2.12); it also changes WHICH words move on every edge. The full-mix norm and field results here are norm_change's, rediscovered at one checkpoint."
 ---
 
 # data_ablations
@@ -318,25 +318,55 @@ The `X psychological` column is the control that makes it readable: all four arm
 lower it, so "removing any data lowers the funnel" is a real generic effect and Q
 is the column where one arm departs from it in the opposite direction.
 
-### Dosed, and honestly underpowered at the top
+### RUN FRAMED AND SELF: THE SPEECH RESULT IS RAW-EDGE ONLY
 
-Same contrast inside lift bands, target Q:
+    Q linguistic acts    full-mix enrichment    no-safety
+      raw                       1.272           -0.0713   p=0.00004  *
+      framed                    2.287           -0.0113   p=0.226    null
+      self                      1.676           +0.1954   p=0.094    null, SIGN FLIPS
 
-    removed            L-lo     L-mid     L-hi
-    no-math           0.056*    0.010    -0.102
-    no-persona        0.140*    0.104    -0.191
-    no-safety        -0.052*   -0.065:   -0.493
-    no-wildchat       0.065*   -0.022    -0.476
+**Framed, all four arms are null on Q** (p 0.13 to 0.87). The frame nearly
+DOUBLES the full mix's speech funnel, 1.272 to 2.287, and once it is on no
+ablation modulates it. On self-edges the same, with `no-safety`'s sign reversed.
 
-**Every arm turns negative at high lift, including the three that are positive at
-low lift, and not one L-hi cell clears p<0.05.** The magnitudes there are the
-largest in the table, which is exactly the shape an underpowered cell produces.
-**Do not read a dose reversal off this.** What is supported is the low-lift
-column, where the sign pattern matches the pooled result.
+**So "safety data is what aims displacement at speech" holds on the raw edge and
+nowhere else, and the raw edge is the one that measures the aligned arm out of
+its habitat.** `existence` independently finds the field change is the FRAME's
+doing -- the cross-field move is strongest on self-edges (13/66), where the
+weights are identical. Both results now say the same thing: the funnel is the
+template's, not the corpus's. The corpus difference is visible only when the
+template is absent.
 
-FENCES. One family, no replication. Raw edge only -- the framed and self versions
-are a cheap run and have not been done. USAS top-level domains, not fine codes.
-EXPLORATORY, unregistered.
+This is a withdrawal of scope, not of the number. The raw contrast reproduces
+(614/767, p=4e-5) and `U_ladder`'s magnitude null is untouched. What is withdrawn
+is the reading that safety data installs the funnel, because the condition under
+which models are actually used does not show it.
+
+### WHAT DOES SURVIVE ALL THREE EDGES
+
+    X psychological      full mix 1.126 raw / 1.817 framed / 1.607 self
+      every arm NEGATIVE and significant on raw, framed and self
+      (the one exception: no-wildchat on self, +0.069, p=0.87)
+
+**Removing any training data lowers the psychological funnel, in every
+condition.** That is the generic effect the Q column was read against, and it is
+the robust one.
+
+And a framed-only finding in the opposite direction:
+
+    S social             full mix 0.948 raw / 1.318 framed / 1.266 self
+      framed: ALL FOUR arms positive and significant
+              (+0.173, +0.091, +0.270, +0.221)
+      self:   no-safety +0.282 p<1e-6; others weak
+
+**Under the frame, removing any data RAISES the social funnel.** Psychological
+down and social up, from the same cuts, in the same condition.
+
+### The dosed tables are null framed and self
+
+Not one cell in either condition clears p<0.05, where raw had a significant
+low-lift column. Reported so the raw dose column is not quoted as though it
+generalised.
 
 ## THE SAME FIVE CHECKPOINTS, A DIFFERENT QUESTION (malign, docket [6632])
 
