@@ -359,6 +359,36 @@ quantity and the dissociation between them is not established here.
 
 EXPLORATORY. Not registered. The USAS grain cut is the only control run on it.
 
+### ALL THREE EDGES, AND THE FRAME ALONE PRODUCES IT
+
+`adjacency.py --frame prefill --match-framed` and `--frame self`:
+
+                              raw              framed            self
+    FINE   same vs DIFF   10/38  p=6e-5    18/27  p=0.23     19/60  p=4e-6
+           same vs NO     38/7   p=3e-6    22/7   p=0.008     5/4   n=9
+    COARSE same vs DIFF   10/39  p=4e-5     8/37  p=1.5e-5   13/66  p<1e-6
+           same vs NO     41/5   p<1e-6    37/7   p=5e-6     44/22  p=0.009
+    cells                 3,964 / 8,461   2,048 / 5,   2,598 / 6,268
+
+**Mass leaves the faller's own field in EVERY condition at coarse grain**, and
+the self-edge -- where the weights are identical and only the template changes --
+gives the strongest result of the three (13/66, 79 lineages). **So the cross-field
+move does not need the weight change.** That parallels the decomposition this
+folder already reports for the frame: the arrival concentration is the frame's,
+the departure gradient is the weights'. The field CHANGE belongs with the
+arrival, not the departure.
+
+**ONE CELL DOES NOT REPLICATE AND IT IS THE ONE THE RAW CONCLUSION LEANED ON.**
+Raw, fine and coarse agreed (10/38 and 10/39), and that agreement was the whole
+argument that the cross-field result is not a grain artifact. Framed they
+diverge: fine is null at 18/27 while coarse is decisive at 8/37. The framed fine
+population is the thinnest of the six (2,048 cells), so this may be power rather
+than a real grain effect, **and nothing here decides which.** The coarse claim is
+the one to quote across conditions; the fine one is raw-and-self only.
+
+The `same vs NO-field` row on the self-edge at fine grain has 9 lineages and is
+not a result either way.
+
 ### WHICH FIELDS SUBSTITUTE FOR WHICH: IT IS A FUNNEL, NOT A MATRIX
 
 `field_matrix.py`. Having established that mass leaves the faller's field, this
