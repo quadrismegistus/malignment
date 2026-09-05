@@ -314,20 +314,31 @@ one finding, not three findings. The full mix converts acts into concrete
 perceptual events (`scream`, `gasp`, `feel`); without WildChat it lands on more
 abstract vocabulary instead.
 
-**AND THE FULL-MIX CONCRETENESS COLUMN MUST NOT BE QUOTED AGAINST
-`norm_change`** (RH). That folder tests the same thing at the LINEAGE level over
-50 endpoints and finds it NOT SUPPORTED in English -- `k_concreteness` -0.0248 at
-19/31, p=0.119; `brysbaert_concreteness` -0.0028 at 21/27, p=0.471. Same
-direction, opposite verdict, and the difference is the unit: its replicate is the
-lineage, this file's is the prompt inside ONE checkpoint. **A p<1e-4 over 2,000
-prompts in one model is not evidence about models.** For "does alignment reduce
-concreteness in English", norm_change's null is the answer.
+**AND `norm_change` AGREES ON CONCRETENESS -- an earlier version of this
+paragraph said it did not** (RH). It quoted that folder's MARGINAL table
+(`k_concreteness` -0.0248 at 19/31 p=0.119, `brysbaert` -0.0042 p=0.471, both
+"not supported") and stopped, walking past a section headed *"THE DOSE-RESPONSE,
+WHICH RECOVERS WHAT THE MARGINAL MEANS HID"*. Under dose:
+
+    k_concreteness            marginal -0.0248 p=0.119   dose -0.1105 p=1e-5   DOSE ONLY
+    brysbaert_concreteness    marginal -0.0042 p=0.471   dose -0.0291 p=3e-4   DOSE ONLY
+    under LIFT specifically   k_concreteness -0.02734, 12 up / 38 dn, p=3e-4
+
+Its own words: **"concreteness does fall, but only at transgressive prompts."**
+And the language split is the finding: *"MARGINAL ONLY in Chinese and DOSE ONLY
+in English -- Chinese de-concretizes everywhere; English does it only under
+transgressive load."*
+
+So the full-mix -0.244 here is CONSISTENT with norm_change, not in tension with
+it. This file pools loaded and unloaded prompts inside one checkpoint, and an
+average fall is what a dose-only effect produces when you pool over dose.
+norm_change remains the better instrument -- 50 lineages against one checkpoint,
+and it separates the dose from the margin where this does not.
 
 The ABLATION row is a different question and the prompt is the right unit for it:
 it compares two checkpoints on the same prompts, and no lineage replication
-exists to average over -- there is one checkpoint per arm and no second suite in
-the world. So the ablation contrast stands on its own terms while the full-mix
-baseline above it does not travel.
+exists to average over -- one checkpoint per arm, and no second suite in the
+world.
 
 **And the sensation direction agrees with `norm_change` rather than contradicting
 it.** That folder has `X3.2 Sensory: Sound` at +0.01789, 112/41, p<1e-5, glossed
