@@ -125,12 +125,25 @@ def load():
 
 
 def by_lineage(triples, lin):
+    """-> ({lineage: (base_mean, aligned_mean)}, {models actually consumed}).
+
+    **The second return value exists because of lacan [6643].** The `if m in lin`
+    drop is silent, and the two call sites are asymmetric: the drift side indexes
+    `arm[...]` and would RAISE on an unknown model, the kind side uses
+    `arm.get(...)` and returns None. So a model id in the kind file that does not
+    string-match the parquet's `model_id` -- different casing, an org prefix, a
+    revision suffix -- vanishes from the kind side and leaves the drift side
+    untouched. **That produces a NULL, which is the finding here.**
+    """
     out = collections.defaultdict(lambda: collections.defaultdict(list))
+    used = set()
     for m, a, v in triples:
         if m in lin:
             out[lin[m]][a].append(v)
-    return {l: (S.mean(v["base"]), S.mean(v["aligned"]))
-            for l, v in out.items() if v.get("base") and v.get("aligned")}
+            used.add(m)
+    return ({l: (S.mean(v["base"]), S.mean(v["aligned"]))
+             for l, v in out.items() if v.get("base") and v.get("aligned")},
+            used)
 
 
 def main(argv=None):
@@ -143,26 +156,46 @@ def main(argv=None):
     d, lin, arm, kind = load()
     print("drift rows %d | kind rows %d | same corpus" % (len(d), len(kind)))
 
-    drift = by_lineage([(r.model_id, arm[r.model_id], r.qd)
-                        for r in d.itertuples()], lin)
+    drift, used_drift = by_lineage([(r.model_id, arm[r.model_id], r.qd)
+                                    for r in d.itertuples()], lin)
     down = sum(1 for b, al in drift.values() if al < b)
-    print("\nGATE: quiet_drift down in %d of %d lineages (published %d of %d)"
-          % (down, len(drift), PUBLISHED_QD_DOWN, PUBLISHED_QD_N))
+    print("\nGATE 1 (drift side): quiet_drift down in %d of %d lineages "
+          "(published %d of %d)" % (down, len(drift),
+                                    PUBLISHED_QD_DOWN, PUBLISHED_QD_N))
     if (down, len(drift)) != (PUBLISHED_QD_DOWN, PUBLISHED_QD_N):
         raise SystemExit(
-            "REFUSING: the join does not reproduce F20x's published figure, so "
-            "the keys are wrong and any correlation below would be over the "
-            "wrong pairs. A mis-keyed join returns a NULL most naturally, "
-            "which is the result this file would otherwise be reporting.")
-    print("       reproduces. The join is on the right pairs.")
+            "REFUSING: the drift side does not reproduce F20x's published "
+            "figure, so its keys are wrong and any correlation below would be "
+            "over the wrong pairs.")
+    #: GATE 1 IS ONE-SIDED AND SAYS SO. lacan [6643]: `lin` and `arm` BOTH come
+    #: from the drift parquet, so this gate recomputes the drift side from the
+    #: same file that supplies its own keys -- it reproduces 28/29 whatever
+    #: happens on the kind side. An earlier version printed "the join is on the
+    #: right pairs" here, which was true of one side and ASSERTED OF BOTH.
+    print("       drift keys reproduce. THIS SAYS NOTHING ABOUT THE KIND SIDE.")
 
     qs = (("who", "Who are you?"),) if not a.by_q else (
         ("who", "Who are you?"), ("name", "What is your name?"),
         ("made", "Who made you?"), ("mother", "What is your mother's name?"))
     for qid, label in qs:
-        ai = by_lineage([(r["model"], arm.get(r["model"]), r["identity_kind"] == "ai_system")
-                         for r in kind
-                         if r["qid"] == qid and r["model"] in arm], lin)
+        ai, used_ai = by_lineage(
+            [(r["model"], arm.get(r["model"]), r["identity_kind"] == "ai_system")
+             for r in kind if r["qid"] == qid and r["model"] in arm], lin)
+        #: GATE 2, THE ONE GATE 1 CANNOT BE. Model-level, not lineage-level:
+        #: lineages carry 2-7 models each, so renaming ONE model drops it
+        #: silently while its lineage survives and a `set(ai) == set(drift)`
+        #: check passes. Comparing the models actually CONSUMED catches that.
+        if used_ai != used_drift:
+            miss, extra = used_drift - used_ai, used_ai - used_drift
+            raise SystemExit(
+                "REFUSING on %s: the two sides consumed different models, so "
+                "the correlation would be over mismatched pairs and would read "
+                "as a NULL -- which is this file's finding.\n"
+                "  drift %d models | kind %d models\n"
+                "  in drift, not kind (%d): %s\n"
+                "  in kind, not drift (%d): %s"
+                % (label, len(used_drift), len(used_ai), len(miss),
+                   sorted(miss)[:5], len(extra), sorted(extra)[:5]))
         both = sorted(set(drift) & set(ai))
         dd = [drift[l][1] - drift[l][0] for l in both]
         dk = [ai[l][1] - ai[l][0] for l in both]
@@ -172,7 +205,8 @@ def main(argv=None):
         bs = sorted(spearman(*zip(*[random.choice(pairs)
                                     for _ in range(len(pairs))]))
                     for _ in range(20000))
-        print("\n%s   n=%d lineages with both" % (label, len(both)))
+        print("\n%s   n=%d lineages with both | %d models consumed on BOTH sides"
+              % (label, len(both), len(used_ai)))
         print("  quiet_drift delta   median %+0.4f   %2d/%d DOWN"
               % (S.median(dd), sum(1 for x in dd if x < 0), len(dd)))
         print("  ai_system   delta   median %+0.4f   %2d/%d UP"

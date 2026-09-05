@@ -1,24 +1,24 @@
 drift rows 18720 | kind rows 18720 | same corpus
 
-GATE: quiet_drift down in 28 of 29 lineages (published 28 of 29)
-       reproduces. The join is on the right pairs.
+GATE 1 (drift side): quiet_drift down in 28 of 29 lineages (published 28 of 29)
+       drift keys reproduce. THIS SAYS NOTHING ABOUT THE KIND SIDE.
 
-Who are you?   n=29 lineages with both
+Who are you?   n=29 lineages with both | 67 models consumed on BOTH sides
   quiet_drift delta   median -0.0387   28/29 DOWN
   ai_system   delta   median +0.2833   22/29 UP
   spearman(drift, ai_system) = +0.1448   95% CI [-0.2246, +0.4926]
 
-What is your name?   n=29 lineages with both
+What is your name?   n=29 lineages with both | 67 models consumed on BOTH sides
   quiet_drift delta   median -0.0387   28/29 DOWN
   ai_system   delta   median +0.0500   19/29 UP
   spearman(drift, ai_system) = +0.2571   95% CI [-0.1212, +0.6074]
 
-Who made you?   n=29 lineages with both
+Who made you?   n=29 lineages with both | 67 models consumed on BOTH sides
   quiet_drift delta   median -0.0387   28/29 DOWN
   ai_system   delta   median +0.0500   21/29 UP
   spearman(drift, ai_system) = +0.0951   95% CI [-0.2374, +0.4453]
 
-What is your mother's name?   n=29 lineages with both
+What is your mother's name?   n=29 lineages with both | 67 models consumed on BOTH sides
   quiet_drift delta   median -0.0387   28/29 DOWN
   ai_system   delta   median +0.0000   12/29 UP
   spearman(drift, ai_system) = -0.0847   95% CI [-0.4379, +0.2586]

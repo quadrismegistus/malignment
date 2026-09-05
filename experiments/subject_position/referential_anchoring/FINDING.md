@@ -34,11 +34,36 @@ Both effects are large, both are present on the same lineages, and their magnitu
 
 **Both deltas are `aligned − base` and share no common term** — base drift and base `ai_system` are different quantities — so the regression-to-the-mean artefact that killed `interiority_in_passages`' convergence claim, where `delta` put `base` on both sides, cannot arise here.
 
-## THE JOIN IS GATED ON A PUBLISHED NUMBER, AND THE GATE WAS WATCHED FIRING
+## THE JOIN IS GATED TWICE, AND THE FIRST GATE WAS NOT ENOUGH
 
-F20x published `quiet_drift` falling in **28 of 29 distinct base models**. `run.py` recomputes that from the vendored codings and **refuses to report anything if it does not reproduce**. It reproduces exactly.
+**A mis-keyed join returns a null most naturally** — precisely the result this file reports — so the gating is the load-bearing part of the finding, not decoration.
 
-This gate is not decoration. **A mis-keyed join returns a null most naturally** — which is precisely the result this file would otherwise be reporting, and it would look like the finding. Mutation-tested by swapping the arm labels: the gate reports 1 of 29 and refuses.
+**GATE 1, drift side.** F20x published `quiet_drift` falling in **28 of 29 distinct base models**. `run.py` recomputes it from the vendored codings and refuses if it does not reproduce. It reproduces exactly.
+
+**GATE 1 IS ONE-SIDED, AND THE FIRST VERSION OF THIS FILE CLAIMED OTHERWISE.** lacan, docket [6643], on being asked to attack exactly this: `lin` and `arm` **both come from the drift parquet**, so Gate 1 recomputes the drift side from the same file that supplies its own keys. It reproduces 28/29 *whatever happens on the kind side*. The line it printed — *"reproduces. The join is on the right pairs"* — was true of one side and asserted of both.
+
+The hole is nameable and the two call sites are asymmetric:
+
+    drift   by_lineage([(r.model_id,  arm[r.model_id],   ...)])   raises on unknown
+    kind    by_lineage([(r["model"],  arm.get(r["model"]), ...)])   -> None, silent
+
+and `by_lineage` then drops on `if m in lin` without saying so. A model id in `coded_f20x.jsonl` that does not string-match the parquet's `model_id` — different casing, an org prefix, a revision suffix — vanishes from the kind side and leaves the drift side untouched. **The original mutation test swapped arm labels, which breaks the drift computation, so it fired for the wrong reason and could not reach this class at all.**
+
+**GATE 2, model level, which is the one Gate 1 cannot be.** The two sides must have consumed the *same models*, and the run prints the count.
+
+**It is model-level and not lineage-level, and that distinction was measured rather than reasoned.** lacan proposed `assert set(ai) == set(drift)` and a test that renames one kind-side model expecting the lineage count to drop to 28. It does not: lineages here carry **2 to 7 models each**, so renaming one model drops it while its lineage survives. Under the exact perturbation:
+
+    lacan-proposed   set(ai) == set(drift)    True     29 vs 29 lineages   MISSES IT
+    model level      used_ai == used_drift    False    66 vs 67 models     CATCHES IT
+
+So the proposed fix would have passed its own proposed test while remaining blind to the class it was written for. The diagnosis was right and the remedy was one level too coarse.
+
+**Both gates watched, on the perturbation that matters** — a key change on the kind side alone:
+
+    GATE 1   still passes, 28 of 29        <- blind, exactly as predicted
+    GATE 2   refuses, naming the model     <- 67 drift models against 66 kind
+
+On the real data: 67 models consumed on both sides, zero dropped, 29 lineages each side. **The null is not a join artefact — and that is now established by a check rather than by the id conventions happening to match.**
 
 ## WHAT THIS SETTLES
 
