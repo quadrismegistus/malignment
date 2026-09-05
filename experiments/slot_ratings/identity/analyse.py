@@ -88,7 +88,14 @@ def ratings():
 
 
 def main():
+    import argparse
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--pilot", action="store_true",
+                    help="use displacement_axis pilot3 cells (the published 20 pairs)")
+    args = ap.parse_args()
+    use_pilot = args.pilot
     from malignment import vectors as V
+    from malignment import ch as ch_mod
     from malignment.movement import movement, CANONICAL
     from scipy import stats
     S = sweep_prompts()
@@ -99,9 +106,47 @@ def main():
     scales = sorted({k for v in R.values() for k in v})
     print("scales available: %d  %s" % (len(scales), scales))
 
+    #: PAIRS: the roster, not the pilot cell list.
+    #:
+    #: This producer used `meta["cells"]` -- displacement_axis's pilot3 -- which
+    #: holds 21 pairs, 20 of them on room prompts, so the panel was 20 because of
+    #: another folder's pilot population.
+    #:
+    #: It called `movement()` on raw word dicts, which needs residuals the store
+    #: does not carry (`twp_words_v4_best` has 0 rows for `__TAIL__`), and those
+    #: residuals live only in the pilot cells. That looked like a hard blocker.
+    #:
+    #: **IT IS NOT: `movement_v4` ALREADY HOLDS THE COMPUTED RISERS AND FALLERS**
+    #: for all 50 endpoint pairs on all 24 room prompts (217,547 rows), under
+    #: `rule='canonical'` -- the same rule this file passes. And `movement()` is
+    #: used here for nothing but `set(m.risers)` and `set(m.fallers)`, which is
+    #: exactly the `cls` column. Reading the store needs no residual because the
+    #: null was computed when the row was produced.
+    #:
+    #: `--pilot` reproduces the published numbers off the old path.
+    from malignment import roster
+    RP = sorted(roster.endpoints()[0].items())
+
+    def _sets(prompt, pairs):
+        """{(base, aligned): (risers, fallers)} from movement_v4."""
+        lit = repr(tuple(prompt for prompt in [prompt])).replace('"', "'")
+        out = collections.defaultdict(lambda: (set(), set()))
+        q = ("SELECT base, aligned, cls, groupArray(word) ws FROM movement_v4 "
+             "WHERE prompt IN %s AND frame_base='' AND frame_aligned='' "
+             "AND rule='canonical' AND cls IN ('riser','faller') "
+             "GROUP BY base, aligned, cls" % lit)
+        for r in ch_mod.query(q):
+            k = (r["base"], r["aligned"])
+            rs, fs = out[k]
+            (rs if r["cls"] == "riser" else fs).update(r["ws"])
+            out[k] = (rs, fs)
+        return out
+
     rows, words = [], []
     for p, meta in S.items():
-        mine = meta["cells"]
+        mine = meta["cells"] if use_pilot else [
+            dict(base=b, endpoint=e) for b, e in RP]
+        msets = None if use_pilot else _sets(p, RP)
         ms = sorted({c["base"] for c in mine} | {c["endpoint"] for c in mine})
         q = V.rows("SELECT model, groupArray(word) AS ws, groupArray(p) AS ps "
                    "FROM twp_words_v4_best WHERE prompt={p:String} "
@@ -112,9 +157,15 @@ def main():
             pb, pa = store.get(c["base"]), store.get(c["endpoint"])
             if not pb or not pa:
                 continue
-            m = movement(pb, pa, CANONICAL, residual_pre=c.get("residual_base"),
-                         residual_post=c.get("residual_endpoint"))
-            rs, fs = set(m.risers), set(m.fallers)
+            if use_pilot:
+                m = movement(pb, pa, CANONICAL,
+                             residual_pre=c.get("residual_base"),
+                             residual_post=c.get("residual_endpoint"))
+                rs, fs = set(m.risers), set(m.fallers)
+            else:
+                rs, fs = msets.get((c["base"], c["endpoint"]), (set(), set()))
+                if not rs and not fs:
+                    continue
             elig = [w for w, v in pb.items() if v >= MIN_PROB]
             for w in elig:
                 seen[w] += 1

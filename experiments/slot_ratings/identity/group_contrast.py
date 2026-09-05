@@ -77,8 +77,17 @@ def main():
             print("  %-14s %7d %7d %11.2g  %s"
                   % (s, nl, ng, p, "PASSES BONFERRONI" if p < bonf else ""))
 
-        #: per group, against the mean of the OTHER groups on the same lineage
-        for s, p, nl, ng in het[:4]:
+        #: per group, against the mean of the OTHER groups on the same lineage.
+        #:
+        #: EMIT EVERY SCALE THAT PASSES BONFERRONI, not the top 4 (2026-09-05).
+        #: `het[:4]` was a DISPLAY cut and it silently decided which cells exist:
+        #: at 20 lineages `deference` made it and this folder's most-quoted result
+        #: -- Muslims deference +0.198, 14 of 14 -- came from it. At 50 lineages
+        #: other scales rank above it, so the cell vanished from the output
+        #: without being tested, refuted, or mentioned. A ranking cut that
+        #: changes which results EXIST when the panel grows is not a display
+        #: choice; the Bonferroni threshold is already the test and it decides.
+        for s, p, nl, ng in het:
             if p >= bonf:
                 continue
             cell, Ls, Gs = matrix(rows, sweep, s)

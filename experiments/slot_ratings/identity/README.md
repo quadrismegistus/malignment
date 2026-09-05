@@ -1,6 +1,6 @@
 ---
 kind: question
-status: "RUN at 50 lineages (2026-09-05). The 20-lineage panel was a stale pilot cell-list, not a data limit; base_side.py now reads roster.endpoints() and --pilot reproduces the old numbers. Sections fed by producers that call movement() are BLOCKED at 20 -- residuals live only in displacement_axis pilot3, which holds 21 pairs; see the section on where the line falls."
+status: "RUN at 50 lineages (2026-09-05). The 20-lineage panel was a stale pilot cell-list, not a data limit; base_side.py now reads roster.endpoints() and --pilot reproduces the old numbers. All producers now read roster.endpoints(); those that needed movement() read movement_v4 instead of recomputing from pilot residuals. --pilot reproduces the published numbers on both paths."
 headline: "Alignment SHARPENS the groups on identity-typed content -- interiority expands at 13/50, p=0.00094, and vocalisation joins it at 17/50, p=0.0328. The equalises-on-harm clause is directional only: 32/50, p=0.0649 per lineage at the full panel, and it rests on a pooled statistic rather than the sign test."
 grain: word
 ---
@@ -31,41 +31,47 @@ This is `valid is not current` for the third time in this campaign. `norm_change
 had the inverse -- n=153 counting rungs as lineages -- and this one used 20 where
 50 existed.
 
-### HALF THIS FOLDER CAN GO TO 50 AND HALF CANNOT, AND HERE IS THE LINE
+### THE WHOLE FOLDER IS AT 50. AN EARLIER VERSION OF THIS SECTION SAID HALF COULD NOT BE.
 
-    EXTENDED TO 50    base_side.py  per_lineage.py  base_checks.py  group_pairs.py
-    STILL AT 20/21    analyse.py  group_contrast.py  instruments.py
-                      examples.py  group_words.py
+**That was wrong and RH caught it.** The claim was that `analyse.py` and its
+consumers were blocked because they call `movement()`, which needs residuals that
+`twp_words_v4_best` does not carry (0 rows for `__TAIL__`) and that live only in
+`displacement_axis`'s pilot3 -- 21 pairs, 20 of them on room prompts.
 
-**The line is whether the producer calls `movement()`.** Those that do need
-`residual_pre`/`residual_post`, and `malignment/movement.py` is explicit about
-what happens without them:
+**`movement_v4` already holds the computed risers and fallers.** 217,547 rows for
+all 50 endpoint pairs on all 24 room prompts, under `rule='canonical'`, the same
+rule this folder passes. `analyse.py` used `movement()` for nothing but
+`set(m.risers)` and `set(m.fallers)`, which is exactly the `cls` column, and
+reading the store needs no residual because the null was computed when the row
+was produced.
 
-> Supply them: the null needs total mass and the scored words do not carry it.
-> Omitted... the null is computed over the scored set alone and `exact_null` is
-> False -- **which is a claim about the input, not a property of the data.**
+REPRODUCTION CHECK, before the swap was trusted: on the 20 shared pairs the store
+path and the pilot path agree on **118 of 120 cells**, 0 missing. The two
+disagreements are single marginal words that pass the null one way and not the
+other. **Not exact, and reported as not exact.** `--pilot` on both `analyse.py`
+and `base_side.py` reproduces the published numbers.
 
-Running new pairs without residuals would give them a DIFFERENT NULL from the
-existing 20, which is a confound between old and new panel members -- the thing
-ruled out for rating coverage above.
+### AND A DISPLAY CUT WAS DECIDING WHICH RESULTS EXIST
 
-**The residuals are not in the store.** `twp_words_v4_best` carries **0 rows**
-for `__TAIL__`. They exist only in
-`displacement/displacement_axis/results/pilot3/cells.jsonl`, and that file holds
-**21 distinct (base, endpoint) pairs**, 20 of them on room prompts. The 30
-missing pairs are not in it for any prompt.
+`group_contrast.py` emitted per-group tables for `het[:4]` -- the top four scales
+by Friedman p, per sweep. At 20 lineages `deference` made that cut and produced
+this folder's most-quoted result. At 50 other scales rank above it, and **the
+Muslims deference cell vanished from the output without being tested, refuted, or
+mentioned.**
 
-**So the 20-lineage panel was inherited from another folder's pilot population,
-and that is the real reason it was 20.** Extending the second half means running
-`displacement_axis`'s pilot3 producer on 30 new pairs -- at minimum 30 x 24 = 720
-new room cells -- not editing a pair list.
+A ranking cut that changes which results EXIST when the panel grows is not a
+display choice. The Bonferroni threshold is already the test, so the producer now
+emits every scale that passes it.
 
-`base_side.py` and its three consumers were extensible precisely because they
-compute mass-weighted `E[scale]` directly and never call `movement()`.
+### THE MUSLIMS DEFERENCE CELL AT THE FULL PANEL
 
-**WHAT IS STILL AT THE SMALL PANEL, and should be read as such**: the Muslims
-`deference` cell at 14 of 14 lineages, the specificity results at 9-14, and the
-across-group statistics of sections 7 and 11.
+    published, 20-lineage panel    +0.198   14/14   q=0.0029
+    full roster, 48 usable         +0.132   40/48   q=3.42e-05
+
+**It survives and is far better powered** -- q falls two orders of magnitude --
+**while the effect size shrinks by a third**, which is what a small panel does to
+an effect size. It is no longer unanimous. `Christians` joins it at +0.093,
+34/48, q=0.0317, which the 20-lineage panel did not resolve.
 
 ### WHAT MOVED, per-lineage dispersion
 
