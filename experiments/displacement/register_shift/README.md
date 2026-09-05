@@ -1,6 +1,6 @@
 ---
 id: register_shift
-status: RUN. G NOT SUPPORTED, G1 supported, G2 REVERSED. Producer `run.py`, rows in `results/by_lineage.csv`.
+status: "RUN. G NOT SUPPORTED, G1 supported, G2 REVERSED. Lift-stratified check added 2026-09-05 (descriptive, outside the registration): G null at every dose, G2 still below the base mean everywhere, G1 decaying to null at high lift."
 kind: question
 headline: "This is substitution WITHIN the low register, not movement up it."
 grain: distribution
@@ -59,6 +59,57 @@ even license that, at this edge and this grain.
 Note this is the same shape R2 predicted for VIOLENCE -- "substitute within
 register (plain->plain) rather than across it" -- arriving as the whole-vocabulary
 result rather than as a domain contrast. R2 itself is not tested here.
+
+## LIFT-STRATIFIED (2026-09-05): G IS NULL AT EVERY DOSE, AND G1 DECAYS WITH IT
+
+`run.py --lift`. DESCRIPTIVE, outside the registration, bands not pre-declared,
+English only because charge ratings are. The frozen numbers are untouched.
+
+The reason to run it: `norm_change` shows this same scale behaving differently
+under different doses -- MARGINAL ONLY on the level dose (+0.0025, p=0.67) but
+rising under LIFT at 34/16, p=0.015, and 40/5 framed. So G's null here might have
+been a marginal-only null on a quantity that moves under load, which is the shape
+that caught `DISPLACEMENT_EVIDENCE` §197.
+
+    band     n     MDE          G        p    SIGNATURE        p
+    L-lo    50   33/50   +0.00240   0.4799     +0.01184   0.4799
+    L-mid   50   33/50   +0.00126   0.8877     +0.00755   0.6718
+    L-hi    50   33/50   -0.00132   0.8877     -0.00242   1.0000
+
+    band     n  G1 removed        p   G2 arrived        p
+    L-lo    50    -0.01554   0.0000     -0.00519   0.1189
+    L-mid   50    -0.01319   0.0009     -0.00391   0.4799
+    L-hi    50    -0.00542   0.4799     -0.01166   0.6718
+
+**IT IS NOT A MARGINAL-ONLY NULL.** G is null in all three bands and its point
+estimate goes NEGATIVE at high lift. The headline stands with a dose check behind
+it, and the disagreement with `norm_change` localises entirely in the
+aggregation -- pooled mass against per-prompt -- with no dose component.
+
+MDE stays 33/50 in every band because the bands split PROMPTS WITHIN a lineage,
+not lineages; the unit is untouched and no power is lost.
+
+**AND THE EUPHEMISM PREDICTION IS NOT RESCUED AT HIGH CHARGE.** G2 is null in
+every band and negative in all three point estimates. The registration predicted
+arriving mass above the base mean; it is below it everywhere, loaded or not. That
+was the most plausible way this run could have overturned the frozen reversal and
+it did not.
+
+### G1 DECAYS WITH LIFT, WHICH IS NEW
+
+    what LEAVES, vs the base mean    L-lo -0.01554 p<1e-4
+                                     L-mid -0.01319 p=0.0009
+                                     L-hi  -0.00542 p=0.48
+
+**"What leaves is low-register" is a LOW-LIFT phenomenon.** At charged sites the
+removed mass sits at the base mean rather than below it -- alignment is not
+register-selective about what it takes there. Which is readable: at a loaded
+prompt the transgressive candidates run from clinical to vulgar, so removal
+cannot be picking on register.
+
+**THE TREND ITSELF IS NOT TESTED.** Three bands are reported separately and the
+monotone decay is eyeballed across them; a per-lineage slope of G1 against lift
+would be the test and has not been run. Cite the three bands, not the trend.
 
 ## THE DISAGREEMENT WITH `norm_change`, AND ITS CAUSE
 
