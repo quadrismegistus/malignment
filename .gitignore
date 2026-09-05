@@ -287,6 +287,13 @@ sandbox/
 # regenerable from rating_items.json + seed (run.py --stage assemble)
 experiments/sex_violence_lexicon/results/blocks/
 
+# a spaCy parse of 7,876 national_story rows, 1.1 MB, keyed on the story's own
+# row id. Regenerable by `run.py --rebuild`, which is the test above that makes
+# it a cache and not data. The three analysis_*.txt beside it ARE tracked: they
+# are the run, and a result nobody can read without a 15-minute reparse first is
+# a result nobody checks.
+experiments/subject_position/frame_inversion/results/cache.jsonl
+
 # ── the app ────────────────────────────────────────────────────────────────
 ui/node_modules/
 ui/.svelte-kit/

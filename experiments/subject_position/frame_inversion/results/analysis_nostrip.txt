@@ -1,0 +1,45 @@
+7876 stories | dialogue KEPT | the strip reclassifies 93 (1.2%)
+   raw      base      1549
+   raw      aligned   3071
+   prefill  base       328
+   prefill  aligned   2928
+
+==========================================================================
+1. THE ARM, frame='raw'. base -> aligned.
+
+  first-person narration rate        n=31  median -0.10556   7 up/24 dn  p=0.003327  CI [-0.15620, -0.05897]
+  interiority (usas_x), 1st person   n=17  median +0.01247  12 up/ 5 dn  p=0.143463  CI [-0.00421, +0.02872]
+  interiority (usas_x), 3rd person   n=30  median +0.01744  30 up/ 0 dn  p=0.000000  CI [+0.01106, +0.02416]
+
+==========================================================================
+2. THE FRAME, arm='aligned'. raw -> prefill (chat wrapper).
+   ALIGNED ONLY: base ships no chat template, so there is no base
+   cell to contrast and none is constructed.
+
+  first-person narration rate        n=27  median -0.04874   7 up/20 dn  p=0.019157  CI [-0.09911, -0.00174]
+  interiority (usas_x)               n=27  median +0.00142  16 up/11 dn  p=0.442068  CI [-0.00098, +0.00493]
+
+==========================================================================
+3. THE INTERACTION. Is alignment's interiority gain LARGER in 3rd?
+
+  1st-person gain                    n=17  median +0.01247  12 up/ 5 dn  p=0.143463  CI [-0.00421, +0.02872]
+  3rd-person gain                    n=17  median +0.01356  17 up/ 0 dn  p=0.000015  CI [+0.00998, +0.02481]
+  INTERACTION (3rd) - (1st)          n=17  median +0.00644  10 up/ 7 dn  p=0.629059  CI [-0.00139, +0.00973]
+
+  THE NULL AS A BOUND: the interaction is within [-0.10, +0.72] x the
+  3rd-person main effect. That EXCLUDES the first-person gain
+  being absent. It does NOT exclude the 3rd-person gain being
+  moderately larger, so 'equally' overstates what n=17 resolves.
+
+  A PREDICTION WAS MADE HERE BEFORE THIS RAN AND IT WAS WRONG.
+  Stated 2026-09-05, before any of this ran: the interiority gain
+  would be THIRD-person -- characters, not the speaker -- so that
+  what generalises from being trained to answer an Other is a
+  capacity to represent inner states and not a habit of saying I.
+  Both persons gain, and the 1st-person CI excludes zero. What
+  moves with person is how often the model narrates as one at all.
+
+  AND THE 1st-PERSON CELL IS THE FRAGILE ONE. Run --no-strip: it
+  goes p=0.049 -> p=0.143 on a 1.2% reclassification. The 3rd-person
+  gain and the flat interaction hold under both settings; the
+  refutation rests on those and not on the fragile cell.

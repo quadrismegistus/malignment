@@ -1,7 +1,7 @@
 ---
 kind: subject
-status: OPEN - six questions, four measured, two open
-headline: SFT installs a respondent, and the position is FRAME-BOUND -- inside the template the human identity is gone, outside it the first person falls
+status: OPEN - six questions, five measured, one open
+headline: SFT installs a respondent, and the position is FRAME-BOUND -- inside the template the human identity is gone, outside it the model narrates about someone else
 ---
 # subject_position
 
@@ -44,12 +44,16 @@ F20 tried to settle this and substituted a `Q: ... A:` pseudo-template for the m
                              the persona reading was WITHDRAWN 2026-09-05.
 
     frame_inversion/         Why do raw and chat move in OPPOSITE directions on
-                             the same models? OPEN, no producer.
+                             the same models? MEASURED. THEY DO NOT -- the
+                             tension was between two TASKS. In narration BOTH
+                             alignment and the frame push toward the third
+                             person; only alignment raises interiority. A
+                             prediction stated before the run was refuted.
 
     referential_anchoring/   Does alignment anchor persons, or signification as
                              such? OPEN, no producer. The F20x redo.
 
-## THE TENSION, WHICH IS WHY THE LAST TWO ARE OPEN
+## THE TENSION, AND HOW IT DISSOLVED
 
 Templated, alignment raises the first person enormously. **Raw, alignment lowers it.** On `neo`, whose rendered template is byte-identical at all three rungs:
 
@@ -60,7 +64,17 @@ Templated, alignment raises the first person enormously. **Raw, alignment lowers
 
 Meanwhile raw narrative interiority ROSE with alignment (+0.224, 16/17, `passage_analysis/interiority_in_passages`, generated with no template — verified in the producers, which pass raw strings and never call `apply_chat_template`).
 
-**So whatever the respondent training leaves in raw prose, it is not more first-person speech.** Outside the turn the model becomes *less* willing to say "I" while writing *more* inner life. Either those are separate effects of alignment, or the trace is in something other than the pronoun. `frame_inversion/` is that question.
+**So whatever the respondent training leaves in raw prose, it is not more first-person speech.** Outside the turn the model becomes *less* willing to say "I" while writing *more* inner life. Either those are separate effects of alignment, or the trace is in something other than the pronoun.
+
+**RESOLVED 2026-09-05 by `frame_inversion/`, and the tension was never between two frames.** The numbers above are `p(I)` at an answer slot on IDENTITY QUESTIONS; the interiority result is NARRATION. A model asked about itself says "I"; a model asked for a story writes "he". Measured on one corpus that carries both frames and leaves person open (`national_story`), the chat frame **also** lowers first-person narration — so raw and chat do not oppose each other at all, and the apparent inversion was two different tasks read off one axis because both were called "first person".
+
+                                  ARM  base->aligned, raw     FRAME  raw->prefill, aligned
+    first-person narration rate    -0.101  24/31 dn p=.0033   -0.043  22/27 dn p=.0015
+    interiority (usas_x)           +0.014  29/31 up p<1e-6    +0.001  16/11    p=.44
+
+The first reading — separate effects — survives and is stronger than stated: they are not *coincidentally* separate, they respond to **different variables**. The second — that the interiority gain would be third-person — was **refuted**; both persons gain.
+
+**This does not support or damage the thesis**, because narration is not self-reference. It removes an *objection*: the raw first-person decline looked like counter-evidence and is not. The claim the thesis rests on is `framed_identity/`'s base→aligned untemplated row, `ai_system` 0.4% → 18.3%.
 
 ## THE STANDING RULE: BASES ARE NOT POOLED WITH ALIGNED IN RESULTS
 
@@ -96,4 +110,6 @@ which is which and one variable separates them.**
 - **Any conversational-"I" claim.** First-token probability cannot see a mid-turn `I'd suggest`, which is where wildchat's contribution would live.
 - **P3**, withdrawn before any result was read: 11 of 14 bases ship no template, so a chat-frame base-to-SFT delta does not exist for most lineages.
 - **The F20 beam corpus** (556k beams) for anything passage-scale: 8 words, 28% distinct openings, 21% of a cell on one four-word opening. Its raw-mode "50% empty mass" is not reproduced by either the twp distributions or fresh generations.
+- **"Alignment raises narrative interiority equally in both persons."** The interaction is bounded within `[-0.38, +0.60] ×` the third-person main effect at n=17 — enough to exclude the first-person gain being *absent*, not enough to call them equal. Say *both persons gain*. And the first-person cell itself is p=0.049 stripped against p=0.143 unstripped, so cite it as directional only.
+- **Any `frame_inversion/` interiority result as gate-independent.** Only the PERSON contrasts were replicated on the ungated stash; `usas_x` is a spaCy parse and stayed conditional on the pure-story gate, which admits 52% of aligned/raw against 73% of aligned/prefill.
 - **Any pooled `system=""` vs `system=DEFAULT` contrast.** Added 2026-09-05 after `framed_identity` posted one and withdrew it. The two arguments produce THREE different treatments, and which one a model gets is a property of its template, not of the call: a persona is blanked (4 of 17 models here), an empty block is inserted where there was no system turn (10), or the template drops the empty system and the two render BYTE-IDENTICALLY (3). Pooling them mixes a manipulation with its own null. Classify on the RENDER — `roster/models/chat_renders.json`, `render != render_empty` — and report the identical group as the null it is. Note that `clean_via` in the same file answers a *different* question (can a clean slot be reached, and how) and does not separate the last two.

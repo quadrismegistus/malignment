@@ -1,0 +1,11 @@
+15990 generations, NO GATE | dialogue STRIPPED
+   raw      base      5090
+   raw      aligned   6250
+   prefill  base       660
+   prefill  aligned   3990
+
+first-person narration rate. INTERIORITY IS NOT HERE -- usas_x
+is a spaCy parse and this population is twice the gated one.
+
+  ARM   base->aligned, raw           n=39  median -0.08333  10 up/29 dn  p=0.003378  CI [-0.14143, -0.03333]
+  FRAME raw->prefill, aligned        n=30  median -0.05556   5 up/25 dn  p=0.000325  CI [-0.07222, -0.01111]
