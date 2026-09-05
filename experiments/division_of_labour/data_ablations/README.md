@@ -51,13 +51,22 @@ against persona data's authored exercises with numbered parts and checkable
 constraints ("exactly 5 sentences, include the keywords quiet, community,
 ocean").
 
-## Three producers, three edges
+## Five producers, and which edges each has been run on
 
     raw       base_raw -> arm_raw          2,981 prompts
     framed    base_raw -> arm_framed         840, clean-slot population
     self      arm_raw -> arm_framed          840, base == aligned
 
-All five checkpoints carry all three. On a self-edge the model is its own base
+All five checkpoints carry all three edges in the store. Which producer has been
+RUN on which is not uniform and is stated in `status:`:
+
+    ablation.py        self-edge with a raw control
+    jaccard_lift.py    raw, framed, self
+    how_it_differs.py  raw, framed, self
+    funnel.py          raw, framed, self
+    semantics.py       raw only
+
+On a self-edge the model is its own base
 and has no lift, so the family base's lift is used -- `ladder.py`'s convention,
 constant across arms, so it cannot manufacture an arm difference.
 
@@ -277,7 +286,7 @@ corrected ones.
 
 EXPLORATORY. One family. Nothing registered.
 
-## `funnel.py` -- SAFETY DATA IS WHAT AIMS DISPLACEMENT AT SPEECH
+## `funnel.py` -- THE SPEECH FUNNEL IS THE FRAME'S, NOT THE CORPUS'S
 
 `existence/field_matrix.py` shows freed mass routing to a small destination set
 regardless of origin, narrowing toward speech under lift. `semantics.py` above
@@ -301,13 +310,13 @@ base distribution IN THE SAME CELL. Unit = the prompt, paired by prompt id.
     S social                full mix enrichment 0.948
         no-persona -0.0676 p=0.0002; the rest small or null
 
-**Removing the safety corpus is the only ablation that funnels LESS to speech.**
-Every other cut increases it. So safety data is what aims displacement at the
-linguistic destination -- and `no-persona`, which removes 30% of the mixture,
-moves it the other way by more than twice as much.
+**Removing the safety corpus is the only ablation that funnels LESS to speech**
+-- ON THE RAW EDGE. Every other cut increases it. **Read this table with the
+framed and self results below, which withdraw its scope**: framed, all four arms
+are null, and this contrast does not hold in the condition models are used in.
 
-**THIS IS THE FIRST CLEAN POSITIVE RESULT FOR THE SAFETY CORPUS IN THE
-CAMPAIGN, AND IT DOES NOT CONTRADICT `U_ladder`.** That finding is about
+**IT WOULD HAVE BEEN THE FIRST CLEAN POSITIVE RESULT FOR THE SAFETY CORPUS IN
+THE CAMPAIGN, AND IT DOES NOT CONTRADICT `U_ladder`.** That finding is about
 MAGNITUDE: every slice costs 10-12%, `no-safety` costs what `no-math` costs, so
 safety data is not what produces displacement. That stands. This is about
 DESTINATION, which nothing had asked. **Safety data does not change how much
