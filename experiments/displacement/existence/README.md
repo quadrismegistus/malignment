@@ -367,8 +367,12 @@ relation directly and it should not be quoted as if it did.
 **What this leaves standing.** The SAFER half is solid and large where the field
 is not already saturated (49/0 at +1.61). The ADJACENT half, as operationalised
 by harm category, is a fact about field composition rather than about routing.
-The right instrument for adjacency is `displacement_taxonomy`'s coded relations
-or an embedding distance, neither of which this folder uses.
+The right instrument for adjacency is `displacement_taxonomy`'s coded relations.
+**NOT an embedding distance** (RH): `scream` is not near `kill` in embedding
+space however well the substitution reads, because the adjacency at work is
+scenic and narrative -- same situation, same affect, different act -- and
+distributional similarity does not encode it. Both the harm taxonomy and
+embedding distance fail the paradigm case, in opposite directions.
 
 ### THREE AGGREGATIONS, AND TWO OF THEM WERE WRONG
 
