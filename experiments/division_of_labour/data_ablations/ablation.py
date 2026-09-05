@@ -39,7 +39,7 @@ that threshold and every count inflates for a reason that has nothing to do
 with frames. Mass is sum|delta|/2 over ALL candidate words including `still`
 ones -- the total variation the frame displaces, with no threshold in it.
 
-    python -m experiments.displacement.rate_and_magnitude.ablation
+    python -m experiments.division_of_labour.data_ablations.ablation
 """
 import math
 

@@ -41,7 +41,9 @@ about words that advance a sexual reading IN CONTEXT -- not about a sexual
 lexicon. `division_of_labour/removal_rates` uses a blind-built lexical set and is
 the instrument for the lexical version of the question.
 
-    python -m experiments.displacement.rate_and_magnitude.how_it_differs
+    python -m experiments.division_of_labour.data_ablations.how_it_differs
+    python -m experiments.division_of_labour.data_ablations.how_it_differs --edge framed
+    python -m experiments.division_of_labour.data_ablations.how_it_differs --edge self
 """
 import collections
 import math
@@ -62,12 +64,12 @@ def sign_test(ds):
     return up, dn, min(1.0, 2 * sum(math.comb(t, i) for i in range(k + 1)) / 2 ** t)
 
 
-def main():
+def main(edge="raw"):
     ix = charge.index()["prompts"]
     lift = {p: float(v) for (p, b), v in charge.lifts_per_lineage(BASE).items()}
-    arms = {"full": fallers(FULL)}
+    arms = {"full": fallers(FULL, edge)}
     for name, m in ABLATIONS:
-        arms[name] = fallers(m)
+        arms[name] = fallers(m, edge)
     shared = set(arms["full"])
     for name in arms:
         shared &= set(arms[name])
@@ -76,7 +78,8 @@ def main():
                   and ix[p].get("frame") is not None and ix[p]["frame"] < 5)
     hi = sorted(pool, key=lambda p: -lift[p])[:len(pool) // 4]
 
-    print("HIGH-LIFT UNSATURATED PROMPTS: n = %d of %d\n" % (len(hi), len(pool)))
+    print("HIGH-LIFT UNSATURATED PROMPTS: n = %d of %d   [edge=%s]\n"
+          % (len(hi), len(pool), edge))
     print("CATEGORY COMPOSITION, charged words only, pooled (AGGREGATION 1).")
     print("Shown for the shape; the test on it is invalid -- see the docstring.")
     print("%-12s %-5s %7s %8s %10s %9s %8s %6s"
@@ -157,4 +160,8 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    import sys
+    e = "raw"
+    if "--edge" in sys.argv:
+        e = sys.argv[sys.argv.index("--edge") + 1]
+    main(e)

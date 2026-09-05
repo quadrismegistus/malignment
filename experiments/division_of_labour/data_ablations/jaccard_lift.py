@@ -28,7 +28,19 @@ the better instrument, it will not.
 The mean Jaccard column is the check that this is the same measurement 197 made:
 it should land near 0.34 for no-wildchat and 0.52-0.53 for the others.
 
-    python -m experiments.displacement.rate_and_magnitude.jaccard_lift
+THREE EDGES. `--edge raw` is `base_raw -> arm_raw`, the original. `--edge framed`
+is `base_raw -> arm_framed` on the clean-slot population. `--edge self` is
+`arm_raw -> arm_framed` with base == aligned: the frame alone, on weights nobody
+touched, which asks whether the training corpus changed what the TEMPLATE moves.
+
+On self-edges the model is its own base and has no lift of its own, so the
+family base's lift is used -- the same convention `ladder.py` uses for
+intermediate checkpoints, and it is constant across arms so it cannot carry an
+arm difference.
+
+    python -m experiments.division_of_labour.data_ablations.jaccard_lift
+    python -m experiments.division_of_labour.data_ablations.jaccard_lift --edge framed
+    python -m experiments.division_of_labour.data_ablations.jaccard_lift --edge self
 """
 import math
 
@@ -57,12 +69,45 @@ def ols_t(xs, ys):
     return b, b / math.sqrt(rss / (n - 2) / sxx)
 
 
-def fallers(model):
-    """{prompt: frozenset(words that lost mass)} on the RAW base -> model edge."""
+_MODES = None
+
+
+def _framed_mode(model):
+    """system_mode the clean-slot rule assigns this pair. See framed_population.py."""
+    global _MODES
+    if _MODES is None:
+        from malignment import movement
+        _MODES = {(b, a): m for b, a, m in movement.clean_frame_pairs()}
+    m = _MODES.get((BASE, model))
+    if m is None:
+        raise SystemExit("%s is not in the clean-slot framed population" % model)
+    return m
+
+
+def edge_where(model, edge):
+    """SQL predicate selecting one edge for one arm.
+
+    NOT `frame_aligned='prefill'` alone for the framed edge: `system_mode`
+    records the argument passed, not the treatment received, so the mode has to
+    come from `clean_frame_pairs`.
+    """
+    if edge == "raw":
+        return ("base=%s AND aligned=%s AND frame_base='' AND frame_aligned=''"
+                % (_lit(BASE), _lit(model)))
+    if edge == "framed":
+        return ("base=%s AND aligned=%s AND frame_base='' "
+                "AND frame_aligned='prefill' AND system_mode_aligned=%s"
+                % (_lit(BASE), _lit(model), _lit(_framed_mode(model))))
+    if edge == "self":
+        return ("base=%s AND aligned=%s AND base=aligned" % (_lit(model), _lit(model)))
+    raise SystemExit("unknown edge: %s" % edge)
+
+
+def fallers(model, edge="raw"):
+    """{prompt: frozenset(words that lost mass)} on the requested edge."""
     rows = ch.query(
-        "SELECT prompt, groupArray(word) ws FROM movement_v4 "
-        "WHERE base=%s AND aligned=%s AND frame_base='' AND frame_aligned='' "
-        "AND cls='faller' GROUP BY prompt" % (_lit(BASE), _lit(model)))
+        "SELECT prompt, groupArray(word) ws FROM movement_v4 WHERE %s "
+        "AND cls='faller' GROUP BY prompt" % edge_where(model, edge))
     return {r["prompt"]: frozenset(r["ws"]) for r in rows}
 
 
@@ -71,19 +116,22 @@ def jac(a, b):
     return len(a & b) / len(u) if u else None
 
 
-def main():
+def main(edge="raw"):
+    #: BASE's lift for every edge, self included: on a self-edge the model is its
+    #: own base and has no lift entry, and the family base's lift is constant
+    #: across arms so it cannot manufacture an arm difference.
     lift = {p: float(v) for (p, b), v in charge.lifts_per_lineage(BASE).items()}
-    arms = {"full": fallers(FULL)}
+    arms = {"full": fallers(FULL, edge)}
     for name, m in ABLATIONS:
-        arms[name] = fallers(m)
+        arms[name] = fallers(m, edge)
 
     shared = set(arms["full"])
     for name in arms:
         shared &= set(arms[name])
     shared = sorted(p for p in shared if p in lift)
 
-    print("197's OUTCOME, RECOMPUTED AGAINST LIFT")
-    print("faller Jaccard vs full, raw base -> arm edge, no frames.")
+    print("197's OUTCOME, RECOMPUTED AGAINST LIFT   [edge=%s]" % edge)
+    print("faller Jaccard vs full.")
     print("n = %d prompts carrying a lift\n" % len(shared))
 
     print("%-12s %10s %12s %8s   %s"
@@ -147,4 +195,8 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    import sys
+    e = "raw"
+    if "--edge" in sys.argv:
+        e = sys.argv[sys.argv.index("--edge") + 1]
+    main(e)
