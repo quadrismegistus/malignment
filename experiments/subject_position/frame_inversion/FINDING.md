@@ -50,6 +50,31 @@ The opening README named the nearest test as a query against `passage_analysis/i
 
 `prefill` has base rows for 7 lineages and both frames for 6, because base checkpoints ship no chat template. **There is no base-in-a-frame cell and none was constructed.** Bases are not pooled with aligned anywhere in this experiment — the subject's standing rule. This is the same structural gap `framed_identity` hit from the other direction, and for the same reason.
 
+## THE OBJECTION TO SECTION 2, RAISED BY ANOTHER SEAT AND ANSWERED
+
+lacan, docket [6639], within the hour of the result being posted: **`prefill` is not "same paratext plus a wrapper" for every model.** The corpus label is `prefill_sysdefault`, meaning the template's *own default system prompt renders*. For 9 of the 43 aligned models here that is a persona, a date block, or a metadata header:
+
+    salamandra-7b-instruct   "You are Salamandra, a language model developed by..."
+    Qwen2.5-0.5B / 7B        "You are Qwen, created by Alibaba Cloud..."
+    SmolLM2-360M-Instruct    "You are a helpful AI assistant named SmolLM..."
+    SmolLM3-3B               "## Metadata\n\nKnowledge Cutoff Date: June 2025..."
+    Llama-3.1-8B-Instruct    "Cutting Knowledge Date: December 2023\nToday Date..."
+    neo_7b_sft / _instruct   "You are a helpful, respectful and honest assistant..."
+    stablelm-2-1_6b-chat     "You are a helpful assistant."
+
+A persona is **second person, addressed, and names a non-narrator role** — a plausible direct cause of third-person drift in a story task. It is present in some cells and absent in others, and it varies by model, so it is confounded with lineage in a lineage-paired sign test. This is the same distinction `framed_identity` had to make, arriving from the other side.
+
+Split on `system_slot` — what the template *actually renders*, not `system_mode` (the argument passed) and not `clean_via` (a property of the model):
+
+    first-person narration, raw -> prefill
+      ALL (as published)           n=27  -0.04330  22/27 dn  p=0.0015
+      CLEAN SLOT, wrapper only     n=20  -0.05174  17/20 dn  p=0.0026
+      PERSONA, wrapper + persona   n=8   -0.03951   6/8  dn  p=0.289
+
+**The effect is if anything LARGER where no persona exists in either cell.** The persona group has the same sign and a similar magnitude and cannot reach significance at n=8 — so it is not pulling the result, and it is not evidence against a persona contribution either. **Section 2 measures a wrapper.**
+
+The two rows are **not a partition** of the 27: they are model-level subsets re-paired at lineage level, so a lineage carrying both kinds of aligned model appears in both. `tiiuae/Falcon3-1B-Instruct` has no row in `chat_renders.json` and is in neither.
+
 ## THE TWO WAYS THIS COULD HAVE BEEN AN ARTEFACT, BOTH CHECKED
 
 **1. The pure-story gate is asymmetric across exactly the cells the frame contrast compares.** `conflict.sqlite` holds pure stories only, and the corpus's own `meta` table warns that survival is 52% for aligned/raw against 73% for aligned/prefill. Non-story text is plausibly first-person (*"I'll write you a story about..."*), so the gate could in principle manufacture the entire frame result.

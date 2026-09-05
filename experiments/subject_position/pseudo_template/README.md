@@ -1,12 +1,23 @@
 ---
 kind: question
-status: MEASURED. 145 models, from the twp store
+status: MEASURED. 145-model corpus; the citable figure is n=14 matched BASES. Measures first-person MASS and cannot see who the "I" refers to
 headline: The address supplies ten times what the models bring -- and it is the FAIR arm comparison, not the degraded one
 grain: model
 ---
 # pseudo_template
 
 **id:** subject_position/pseudo_template **status:** MEASURED. Producer `run.py`, 145 models, read from the twp store. Finding in `FINDING.md`.
+
+> **INSTRUMENT BOUND, added 2026-09-05 from `../framed_identity`.** Everything
+> here is `p(I)` at one position. **It cannot distinguish "I am an AI assistant"
+> from "I am Tamas, a cybersecurity expert" — both are ~1.0.** So this question
+> measures how much first-person MASS an address supplies, and is not evidence
+> about the subject position, self-reference, or whether the "I" refers to the
+> speaker at all. On this instrument the subject's thesis reads as REFUTED — 34
+> of 50 bases already exceed 0.5 when addressed at `Q:/A:`, so alignment would
+> be "installing" something already present. Coded for KIND on overlapping
+> models it is supported (`ai_system` 0.4% → 18.3%, base to aligned). **Do not
+> cite this question for the thesis in either direction.**
 
 # THE QUESTION
 

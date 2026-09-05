@@ -1,12 +1,21 @@
 ---
 kind: question
-status: MEASURED. 4 models x 4 prompt classes x 2 frames, plus a 1.1M-turn corpus scan
-headline: The first person at the answer slot is a REFUSAL phenomenon, and it exists only inside the template
+status: MEASURED. 4 models x 4 prompt classes x 2 frames, plus a 1.1M-turn corpus scan. Measures first-person MASS, not self-reference
+headline: First-person MASS at the answer slot is a REFUSAL phenomenon, and it exists only inside the template
 grain: model x prompt_class x frame
 ---
 # refusal_and_the_I
 
 **id:** subject_position/refusal_and_the_I **status:** MEASURED. Producer `run.py` (4 models × 4 prompt classes × 2 frames). Finding in `FINDING.md`.
+
+> **INSTRUMENT BOUND, added 2026-09-05 from `../framed_identity`.** This measures
+> `p(I)` at one position. **It cannot distinguish "I am an AI assistant" from
+> "I am Tamas, a cybersecurity expert" — both are ~1.0.** The refusal result is
+> about first-person **mass** and is unaffected: a refusal *is* first-person
+> mass, and the safety-ablation contrast is within-model. What this cannot
+> support is any claim that the refusal "I" is a self-referential subject
+> position rather than a register the model enters. That is a separate question
+> and this instrument is blind to it.
 
 # THE QUESTION
 

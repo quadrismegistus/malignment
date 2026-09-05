@@ -164,13 +164,13 @@ def build_cache():
             "%s not found. It is a symlink into ~/malignment-data and is built "
             "by experiments/passage_analysis/national_story/export_db.py" % DB)
     c = sqlite3.connect(DB)
-    rows = list(c.execute("SELECT id, lineage, arm, frame, text FROM stories "
-                          "WHERE frame IN ('raw','prefill')"))
+    rows = list(c.execute("SELECT id, model, lineage, arm, frame, text FROM "
+                          "stories WHERE frame IN ('raw','prefill')"))
     os.makedirs(os.path.dirname(CACHE), exist_ok=True)
     with open(CACHE, "w", encoding="utf-8") as fh:
-        for i, (sid, lin, arm, frame, text) in enumerate(rows):
+        for i, (sid, model, lin, arm, frame, text) in enumerate(rows):
             fh.write(json.dumps(dict(
-                id=sid, lin=lin, arm=arm, frame=frame,
+                id=sid, model=model, lin=lin, arm=arm, frame=frame,
                 p_strip=person(text, True), p_keep=person(text, False),
                 x=fields.count(text).get("usas_x", 0.0))) + "\n")
             if i % 250 == 0:
@@ -188,6 +188,34 @@ def load(strip=True, rebuild=False):
             d["p"] = d["p_strip" if strip else "p_keep"]
             out.append(d)
     return out
+
+
+RENDERS = os.path.abspath(os.path.join(
+    HERE, "..", "..", "..", "roster", "models", "chat_renders.json"))
+
+
+def system_slots():
+    """-> {model: True if its template renders a NON-EMPTY system slot}.
+
+    **`prefill` is not "wrapper only" for every model, and that is lacan's
+    objection to section 2 (docket [6639]).** The corpus frame label is
+    `prefill_sysdefault`: the template's OWN default system prompt renders. For
+    9 of the 43 aligned models here that is a persona, a date block or a
+    metadata header -- *"You are Qwen, created by Alibaba Cloud"* -- which is
+    second person, addressed, and names a non-narrator role. That is a
+    plausible direct cause of third-person drift in a story task, it is present
+    in some cells and absent in others, and it varies BY MODEL, so it is
+    confounded with lineage in a lineage-paired sign test.
+
+    `system_slot` is the predicate: what the template ACTUALLY RENDERS. Not
+    `system_mode`, which records the argument passed and disagrees with the
+    treatment received in both directions. Not `clean_via`, which is a property
+    of the model rather than of this contrast.
+    """
+    with open(RENDERS) as fh:
+        rows = json.load(fh)["models"]
+    return {r["model"]: bool((r.get("system_slot") or "").strip())
+            for r in rows}
 
 
 #: the generation stash, read exactly as `national_story/judge.py` reads it --
@@ -333,11 +361,31 @@ def main(argv=None):
     print("   cell to contrast and none is constructed.")
     print()
     report("first-person narration rate",
-           paired(al, "frame", "raw", "prefill", lambda r: r["p"] == "1st"),
-           "raw", "prefill")
+           paired(al, "frame", "raw", "prefill", lambda r: r["p"] == "1st"))
     report("interiority (usas_x)",
-           paired(al, "frame", "raw", "prefill", lambda r: r["x"]),
-           "raw", "prefill")
+           paired(al, "frame", "raw", "prefill", lambda r: r["x"]))
+    print()
+    print("   SPLIT ON WHAT THE TEMPLATE ACTUALLY RENDERS INTO THE SYSTEM SLOT.")
+    print("   `prefill` is `prefill_sysdefault`, so for some models it is the")
+    print("   wrapper PLUS a persona -- and a persona is second person and names")
+    print("   a non-narrator role, which is a rival cause of third-person drift.")
+    print()
+    slot = system_slots()
+    have = {r["model"] for r in al if r["frame"] == "prefill"}
+    unknown = sorted(m for m in have if m not in slot)
+    for lab, keep in (("CLEAN SLOT -- wrapper only",
+                       lambda m: slot.get(m) is False),
+                      ("PERSONA -- wrapper + persona",
+                       lambda m: slot.get(m) is True)):
+        report(lab, paired([r for r in al if keep(r["model"])], "frame",
+                           "raw", "prefill", lambda r: r["p"] == "1st"))
+    print()
+    print("   THE TWO ROWS ARE NOT A PARTITION OF THE 27. They are model-level")
+    print("   subsets re-paired at the LINEAGE level, and a lineage carrying")
+    print("   both kinds of aligned model appears in both.")
+    if unknown:
+        print("   NOT IN chat_renders.json, so in neither row: %s"
+              % ", ".join(unknown))
     print()
 
     print("=" * 74)

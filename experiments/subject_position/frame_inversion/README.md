@@ -59,6 +59,19 @@ This README used to name the nearest test as a query against the interiority cor
 
 `national_story` leaves person **open**: `"A {Demonym} Story\n(1500 words)\n\nIt was a"` is past tense, narrative, and names no person, so the person is the model's own choice and therefore a thing that can move. It also already carried four frames, so the frame contrast needed no generation.
 
+# THE OBJECTION TO THE FRAME CONTRAST, ANSWERED
+
+lacan [6639]: `prefill` is `prefill_sysdefault`, so the template's own default system prompt renders — and for 9 of 43 aligned models that is a persona or a metadata header (*"You are Qwen, created by Alibaba Cloud"*). A persona is second person, addressed, and names a non-narrator role: a rival cause of third-person drift, present in some cells and absent in others, and varying by model, so **confounded with lineage in a lineage-paired sign test**.
+
+Split on `system_slot` — what the template actually renders:
+
+    first-person narration, raw -> prefill
+      ALL (as published)           n=27  -0.04330  22/27 dn  p=0.0015
+      CLEAN SLOT, wrapper only     n=20  -0.05174  17/20 dn  p=0.0026
+      PERSONA, wrapper + persona   n=8   -0.03951   6/8  dn  p=0.289
+
+**Larger where no persona exists in either cell.** The frame contrast measures a wrapper. The two rows are not a partition — model-level subsets re-paired at lineage level, so a lineage with both kinds appears in both.
+
 # THE TWO ARTEFACT ROUTES, BOTH CLOSED
 
 - **The pure-story gate is asymmetric** across exactly the cells the frame contrast compares — 52% survival for aligned/raw against 73% for aligned/prefill, per the corpus's own `meta` table. `--ungated` reruns the person contrasts over the raw stash with no judge and no word floor, 15,990 generations against 7,876: both effects survive, larger n, same sign. **Interiority was NOT replicated ungated** — `usas_x` is a spaCy parse and that population is hours — so every interiority number here stays conditional on the gate. Open flank, stated.

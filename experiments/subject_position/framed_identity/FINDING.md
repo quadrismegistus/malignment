@@ -210,8 +210,15 @@ creates. This says what the concentration converges ON, once the address is the
 real one: a single kind (`ai_system`, 95–98%), with the human predicate not
 merely rarer but absent.
 
-It does not touch `frame_inversion/`. That question is about RAW prose, and
-nothing here is raw.
+**AMENDED 2026-09-05.** This used to end "It does not touch `frame_inversion/`.
+That question is about RAW prose, and nothing here is raw." The second sentence
+is still true and the first is now backwards: `frame_inversion` ran, found that
+raw and chat never opposed each other, and **defers to this finding's row 2 for
+the thesis** — `ai_system` 0.4% -> 18.3%, base to aligned, untemplated, one
+instrument. Its result is that narration is not self-reference, so the raw
+first-person *decline* is not counter-evidence to anything here. The two
+questions turned out to be about the same distinction, seen from a task where
+the model speaks as itself and a task where it does not.
 
 ## WHAT SHOULD NOT BE CITED FROM THIS
 

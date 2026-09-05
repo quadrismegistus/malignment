@@ -190,18 +190,18 @@ and the state the first version of the checker could not see.
 
 ### subject_position
 
-- **[`frame_inversion/`](subject_position/frame_inversion/README.md)** -- `OPEN. [...]`  
-  Raw and chat move in OPPOSITE directions on the same models, and nobody has tested them against each other
+- **[`frame_inversion/`](subject_position/frame_inversion/README.md)** -- `RUN 2026-09-05. Person replicated ungated at n=15,990; interiority still conditional on the story gate`  
+  There is no inversion — person and interiority are two effects, and the chat frame moves only one of them
 - **[`framed_identity/`](subject_position/framed_identity/README.md)** -- `RUN and CODED 2026-09-05. Both frames coded by ONE instrument; coder agreement kappa 0.802`  
   Alignment installs SELF-REFERENCE into the first person (0.4% -> 18.3%), not the first person itself; the frame completes it (93.8%)
 - **[`installation_rung/`](subject_position/installation_rung/README.md)** -- `MEASURED. [...]`  
-  The position is installed at SFT, and it is frame-bound
+  The rung at which first-person MASS is installed is SFT, and it is frame-bound
 - **[`pseudo_template/`](subject_position/pseudo_template/README.md)** -- `MEASURED. [...]`  
   The address supplies ten times what the models bring -- and it is the FAIR arm comparison, not the degraded one
 - **[`referential_anchoring/`](subject_position/referential_anchoring/README.md)** -- `OPEN. [...]`  
   Does alignment anchor PERSONS, or signification as such? The old corpus said the latter and the project wanted the former
 - **[`refusal_and_the_I/`](subject_position/refusal_and_the_I/README.md)** -- `MEASURED. [...]`  
-  The first person at the answer slot is a REFUSAL phenomenon, and it exists only inside the template
+  First-person MASS at the answer slot is a REFUSAL phenomenon, and it exists only inside the template
 
 <!-- INDEX:END -->
 

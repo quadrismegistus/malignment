@@ -1,12 +1,20 @@
 ---
 kind: question
-status: MEASURED. 43 nodes, 82 typed forward edges. P1 held, P2 split, P4 unresolved
-headline: The position is installed at SFT, and it is frame-bound
+status: MEASURED. 43 nodes, 82 typed forward edges. P1 held, P2 split, P4 unresolved. Measures first-person MASS, not self-reference
+headline: The rung at which first-person MASS is installed is SFT, and it is frame-bound
 grain: edge
 ---
 # installation_rung
 
-**id:** subject_position/installation_rung **status:** MEASURED. Producers `run.py` (43 nodes, both frames, bare stem), `build_table.py`, `analyse.py`. Predictions in `PREDICTIONS.md` recorded before the run; outcomes in `RESULTS.md`.
+**id:** subject_position/installation_rung **status:** MEASURED. Producers `run.py` (43 nodes, both frames, bare stem), `build_table.py`, `analyse.py`. Predictions in `PREDICTIONS.md` recorded before the run; outcomes in `RESULTS.md`. **There is no `FINDING.md` here** — `RESULTS.md` carries the outcomes against the recorded predictions, and the subject index cites it directly.
+
+> **INSTRUMENT BOUND, added 2026-09-05 from `../framed_identity`.** This measures
+> `p(I)` at one position. **It cannot distinguish "I am an AI assistant" from
+> "I am Tamas, a cybersecurity expert" — both are ~1.0.** So what is shown to be
+> installed at SFT is first-person **mass**, not self-reference and not a subject
+> position. The two come apart: coded for KIND, `any I` is nearly flat across the
+> arm (85% → 95%) while `ai_system` moves 0.4% → 18.3%. Cite this for **which
+> rung moves the mass**; do not cite it for what the "I" refers to.
 
 # THE QUESTION
 

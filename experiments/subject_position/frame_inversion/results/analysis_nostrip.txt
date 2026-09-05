@@ -19,6 +19,19 @@
   first-person narration rate        n=27  median -0.04874   7 up/20 dn  p=0.019157  CI [-0.09911, -0.00174]
   interiority (usas_x)               n=27  median +0.00142  16 up/11 dn  p=0.442068  CI [-0.00098, +0.00493]
 
+   SPLIT ON WHAT THE TEMPLATE ACTUALLY RENDERS INTO THE SYSTEM SLOT.
+   `prefill` is `prefill_sysdefault`, so for some models it is the
+   wrapper PLUS a persona -- and a persona is second person and names
+   a non-narrator role, which is a rival cause of third-person drift.
+
+  CLEAN SLOT -- wrapper only         n=20  median -0.05446   4 up/16 dn  p=0.011818  CI [-0.10009, -0.00795]
+  PERSONA -- wrapper + persona       n=8   median -0.02564   3 up/ 5 dn  p=0.726562  CI [-0.13577, +0.05686]
+
+   THE TWO ROWS ARE NOT A PARTITION OF THE 27. They are model-level
+   subsets re-paired at the LINEAGE level, and a lineage carrying
+   both kinds of aligned model appears in both.
+   NOT IN chat_renders.json, so in neither row: tiiuae/Falcon3-1B-Instruct
+
 ==========================================================================
 3. THE INTERACTION. Is alignment's interiority gain LARGER in 3rd?
 

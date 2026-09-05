@@ -104,6 +104,16 @@ It bit twice on the day the rule was written, both in `pseudo_template/`:
 **A base and an aligned model may sit in one table only when the table shows
 which is which and one variable separates them.**
 
+## THE INSTRUMENT BOUND: p(I) CANNOT TEST THE THESIS
+
+RH, 2026-09-05, on the `framed_identity` numbers: *the base model's "I am Tamas" / an invented human is fabulation, arguably not a self-referential subject position.*
+
+**That objection condemns an instrument three of these questions are built on.** `pseudo_template`, `installation_rung` and `refusal_and_the_I` all measure a next-word probability — twp, one position. **`p(I)` cannot tell "I am an AI assistant" from "I am Tamas, a cybersecurity expert". Both are ~1.0.**
+
+On that instrument the thesis reads as REFUTED: 34 of 50 bases already put >0.5 on the first person when addressed at `Q:/A:`, so alignment would be "installing" something already present. Coded for KIND instead, it is supported — `any I` is nearly flat across the arm (85% → 95%) while `ai_system` moves **0.4% → 18.3%**.
+
+So the three twp questions measure **how much first-person mass an address or a rung supplies**, which is a real quantity and their results stand as answers to that. None of them is evidence about self-reference. The scope sentence is now in each of their READMEs; it was added there rather than only here because a claim cited from a question's own folder never passes through this index.
+
 ## WHAT SHOULD NOT BE CITED, WHATEVER QUESTION IT APPEARS UNDER
 
 - **The Tulu ablation ORDERING.** Spearman rho = **−0.10** between the pseudo-template and bare-chat conditions on the same five models. One checkpoint per ablation cannot separate an effect from a checkpoint. The no-safety CROSSOVER is within-model and does not rest on this; any ordering of the four ablations does.
