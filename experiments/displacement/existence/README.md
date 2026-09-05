@@ -313,6 +313,52 @@ number reproduces exactly; the raw one does not -- this run finds 14,684, and
 `adjacency.py`'s own riser-group line prints n=14,685. Recorded rather than
 silently corrected, because which of the two is stale has not been established.
 
+### THE CONDITIONAL FIELD TEST: MASS LEAVES THE FIELD IT CAME FROM
+
+`adjacency.py` now runs the same comparison on USAS semantic fields as well as on
+`kind`. **Conditioning on the top faller's own field is the part `norm_change`
+cannot supply**: that folder gives the MARGINAL shift over 50 lineages (aggression
+down, speech and sensation up, raw and framed), and a marginal shift cannot
+distinguish "each aggression word's mass went to speech" from "unrelated words
+moved in both fields". That distinction is displacement against suppression.
+
+    comparison                          lineages   up/dn          p
+    -- FINE (232 USAS codes)
+       same-field vs DIFF-field              48    10/38   0.000062
+       same-field vs NO-field                45    38/ 7   0.000003
+       cells: 3,964 across 49 lineages
+    -- COARSE (21 top-level domains)
+       same-field vs DIFF-field              49    10/39   0.000038
+       same-field vs NO-field                46    41/ 5   0.000000
+       cells: 8,461 across 50 lineages
+
+**Freed mass leaves the faller's own semantic field and lands in a different one
+-- but in a CLASSIFIED word, not an unclassified one.** Both halves are decisive
+and they point opposite ways, which is what makes the result informative: this is
+neither adjacency nor scatter. It is directed substitution ACROSS fields.
+
+**THE GRAIN IS CONTROLLED.** USAS has 232 fine codes against `kind`'s six, so a
+cross-field result could be nothing but resolution. At the top-level letter --
+21 domains, comparable in coarseness to the harm taxonomy -- the answer is
+unchanged (10/39 against 10/38). The move is a fact about the movement, not about
+the ruler.
+
+**What this does to "semantically adjacent but safer".** The SAFER half stands
+(49/0 at +1.61 where the field is not saturated). The ADJACENT half does not
+survive in the field sense: mass does not stay in the domain it left. What
+`kill -> scream` names is a domain CHANGE -- "Life and living things [-]" to
+"Speech acts" -- with the scene and the affect preserved and the act replaced.
+`displacement_taxonomy`'s relation 2 is the right description and "adjacency" is
+the wrong word for it.
+
+**Do not read this against the 47/2 same-kind result as a contradiction.** The
+two tests select different populations -- one needs a non-NONE top faller with
+both same-kind and none-kind risers, the other a field-carrying top faller with
+both same-field and diff-field risers -- so they are not two measurements of one
+quantity and the dissociation between them is not established here.
+
+EXPLORATORY. Not registered. The USAS grain cut is the only control run on it.
+
 ### WHERE THE DISPLACEMENT CLAIM STANDS: THE TWO HALVES SEPARATE
 
 "Mass falls to a semantically adjacent but SAFER word" is two claims, and they

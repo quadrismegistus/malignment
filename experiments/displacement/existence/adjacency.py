@@ -38,7 +38,7 @@ def binom(k, n):
 
 
 def measure(frame="raw", match_framed=False):
-    from malignment import ch, charge, roster
+    from malignment import ch, charge, fields, roster
 
     eps, unresolved = roster.endpoints()
     if unresolved:
@@ -93,6 +93,42 @@ def measure(frame="raw", match_framed=False):
     #: recovery at high, averaged. Both cuts are taken together for that reason.
     by_strat = collections.defaultdict(lambda: {"same": [], "none": [], "n": 0})
     kinds_of = {}
+
+    #: THE CONDITIONAL FIELD TEST. `norm_change` already gives the MARGINAL
+    #: field shift over 50 lineages, raw and framed -- aggression down, speech
+    #: and sensation up. A marginal shift cannot answer THIS question: "speech
+    #: rises and aggression falls" is equally true whether each aggression
+    #: word's mass went to speech, or whether unrelated words moved in both
+    #: fields. Conditioning on the top faller's own field separates them, and
+    #: that separation is displacement against suppression.
+    #:
+    #: USAS rather than `kind` because `kind` sorts by HOW BAD, not WHAT ABOUT:
+    #: `kill` is VIOLENT and `scream` is NONE, so the campaign's paradigm case
+    #: of displacement scores as CROSS-kind and reads as suppression. USAS puts
+    #: `strangle` in "Life and living things [-]" and `scream` in "Speech acts",
+    #: which is a field CHANGE rather than a category violation.
+    by_field = collections.defaultdict(
+        lambda: {"same": [], "diff": [], "none": [], "n": 0})
+    by_field_c = collections.defaultdict(
+        lambda: {"same": [], "diff": [], "none": [], "n": 0})
+    _usas = {}
+
+    def usas_of(w, coarse=False):
+        """Fine USAS codes, or their top-level letter.
+
+        THE GRAIN IS THE CONTROL. USAS has 232 base codes against `kind`'s six,
+        so "different field" at fine grain may be nothing but resolution. The
+        top-level letter (~21 domains) is comparable in coarseness to the harm
+        taxonomy, and running both says whether a cross-field result is a fact
+        about the move or about the ruler.
+        """
+        if w not in _usas:
+            try:
+                _usas[w] = frozenset(fields.usas(w, names=False) or ())
+            except Exception:
+                _usas[w] = frozenset()
+        f = _usas[w]
+        return frozenset(c[0] for c in f if c) if coarse else f
 
     def saturation(prompt, kd):
         """share of a prompt's rated words carried by its top non-NONE kind."""
@@ -176,6 +212,29 @@ def measure(frame="raw", match_framed=False):
                 rec["none_scenes"].append(sum(none_sc) / len(none_sc))
                 rec["n_cells"] += 1
 
+                #: field groups for the SAME cell, so the two tests share a
+                #: population and any difference between them is the instrument
+                #: rather than the selection.
+                for coarse, store in ((False, by_field), (True, by_field_c)):
+                    ff = usas_of(top_faller[0], coarse)
+                    if not ff:
+                        continue
+                    fsame, fdiff, fnone = [], [], []
+                    for w, d in risers:
+                        rf = usas_of(w, coarse)
+                        if not rf:
+                            fnone.append(d)
+                        elif rf & ff:
+                            fsame.append(d)
+                        else:
+                            fdiff.append(d)
+                    if fsame and fdiff:
+                        fr = store[lin]
+                        fr["same"].append(sum(fsame) / len(fsame))
+                        fr["diff"].append(sum(fdiff) / len(fdiff))
+                        fr["none"].append(sum(fnone) / len(fnone) if fnone else None)
+                        fr["n"] += 1
+
                 sat = saturation(prompt, kd)
                 lf = lift_here.get(prompt)
                 if sat is not None and lf is not None:
@@ -224,6 +283,36 @@ def measure(frame="raw", match_framed=False):
     print("  %-45s %d" % ("lineages where none-kind risers gain MORE:", none_wins))
     print("  %-45s %.6f" % ("sign test p:", p))
     print()
+    print("  CONDITIONAL FIELD TEST (USAS). Given the top faller's own field,")
+    print("  where does the freed mass land? Cells need a field-carrying top")
+    print("  faller AND both a same-field and a diff-field riser.")
+    print()
+    print("  %-46s %s" % ("comparison", "lineages   up/dn        p"))
+    for grain, store in (("FINE (232 codes)", by_field),
+                         ("COARSE (21 top-level domains)", by_field_c)):
+      print("  -- %s" % grain)
+      for lab, a, b in (("same-field vs DIFF-field", "same", "diff"),
+                        ("same-field vs NO-field", "same", "none")):
+        up = dn = 0
+        for lin, r2 in sorted(store.items()):
+            if r2["n"] < 10:
+                continue
+            xs = [(x, y) for x, y in zip(r2[a], r2[b])
+                  if x is not None and y is not None]
+            if len(xs) < 10:
+                continue
+            ma, mb = st.median([x for x, _ in xs]), st.median([y for _, y in xs])
+            if ma > mb:
+                up += 1
+            elif mb > ma:
+                dn += 1
+        t = up + dn
+        print("     %-43s %5d  %6s  %9.6f"
+              % (lab, t, "%d/%d" % (up, dn), binom(min(up, dn), t)))
+      print("     cells: %d across %d lineages"
+            % (sum(r["n"] for r in store.values()), len(store)))
+    print()
+
     print("  SATURATION x LIFT. saturation = share of the prompt's rated words")
     print("  in its top non-NONE kind; lift = charge.lift for that base.")
     print("  Same per-cell means and per-lineage medians as the headline.")
