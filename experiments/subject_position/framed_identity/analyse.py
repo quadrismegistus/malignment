@@ -35,6 +35,44 @@ import argparse, collections, json, math, os, sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 CODED = os.path.join(HERE, "results", "coded.jsonl")
 GEN = os.path.join(HERE, "results", "framed_identity.jsonl")
+RENDERS = os.path.abspath(os.path.join(HERE, "..", "..", "..",
+                                       "roster", "models", "chat_renders.json"))
+
+#: EMPTY-vs-DEFAULT IS THREE DIFFERENT MANIPULATIONS AND POOLING THEM IS WRONG.
+#: Corrected 2026-09-05 after RH pointed at `chat_renders.json`; the first run of
+#: this file pooled all 17 models, got `names its maker` +15.0pp / 13-of-15 /
+#: p=0.007 on the name question, and read it as THE PERSONA SUPPLIES THE MAKER.
+#: Stratified, the significant cell is the one with NO PERSONA IN EITHER CELL.
+#:
+#: `clean_via` is the roster's own field and answers a DIFFERENT question -- can
+#: this model be brought to a clean slot, and how -- which is what a framed twp
+#: run needs. It does not separate the ten models where inserting an empty block
+#: changes the render from the two whose template DROPS an empty system turn
+#: entirely (Yi-1.5-9B-Chat, glm-4-9b-chat-hf), and both are `clean_via=default`.
+#: The predicate for a CONTRAST is `render != render_empty`, from the same file.
+def load_regimes():
+    """-> {model_id: 'persona' | 'empty_added' | 'identical'}
+
+    persona      default ships a persona, empty blanks it. The manipulation the
+                 `system` factor was introduced for.
+    empty_added  default has no system turn; empty INSERTS an empty one. The
+                 bytes differ and no persona is involved in either cell.
+    identical    the two render byte-identically. NO MANIPULATION -- any delta
+                 here is sampling noise and is the null this file needs.
+    """
+    with open(RENDERS) as fh:
+        d = json.load(fh)
+    out = {}
+    for r in d["models"]:
+        if r.get("render") is None:
+            continue
+        if r["render"] == r.get("render_empty"):
+            out[r["model"]] = "identical"
+        elif str(r.get("system_slot", "") or "").strip():
+            out[r["model"]] = "persona"
+        else:
+            out[r["model"]] = "empty_added"
+    return out
 
 #: REASONING MODELS ARE INSTRUMENT-LIMITED AT 60 TOKENS, and dropping them is
 #: not a judgement about them. SmolLM3-3B and Qwen3-8B open `<think>` on 100% of
@@ -168,34 +206,45 @@ def main(argv=None):
     print("  level -- different n, different seeds -- so read the MODEL medians.")
     print()
 
-    # ---- 2. THE PERSONA'S CONTRIBUTION ---------------------------------
+    # ---- 2. EMPTY vs DEFAULT, STRATIFIED BY WHAT THE MANIPULATION IS ----
     print("=" * 78)
-    print("EMPTY vs DEFAULT, within model. The gap IS the persona's contribution.")
+    print("EMPTY vs DEFAULT, within model, STRATIFIED. Pooling these is wrong:")
+    print("  persona      default ships a persona, empty blanks it")
+    print("  empty_added  default has NO system turn; empty inserts an empty one")
+    print("  identical    byte-identical renders. NO manipulation -- this is the null")
     print()
-    print("  %-8s %-24s %8s %8s %8s %6s" % ("question", "field", "empty", "default", "delta", "n up/dn"))
+    reg = load_regimes()
+    by_reg = collections.Counter(reg.get(m, "unknown") for m in models)
+    print("  models per regime: %s" % dict(by_reg))
+    print()
+    print("  %-8s %-18s %-12s %3s %8s %8s %8s %7s" %
+          ("question", "field", "regime", "n", "empty", "default", "delta", "p"))
     for qid in QUESTIONS:
         for label, pred in (("names its maker", lambda r: r["names_maker"]),
-                            ("calls itself AI", lambda r: r["calls_self_ai"]),
-                            ("claims human role", lambda r: r["claims_human_role"])):
-            deltas, e_all, d_all = [], [], []
-            for m in models:
-                ce, cd = idx[(m, qid, "empty")], idx[(m, qid, "default")]
-                if not ce or not cd:
+                            ("calls itself AI", lambda r: r["calls_self_ai"])):
+            for rg in ("persona", "empty_added", "identical"):
+                ms = [m for m in models if reg.get(m) == rg]
+                deltas, e_all, d_all = [], [], []
+                for m in ms:
+                    ce, cd = idx[(m, qid, "empty")], idx[(m, qid, "default")]
+                    if not ce or not cd:
+                        continue
+                    re_, rd = rate(ce, pred), rate(cd, pred)
+                    e_all.append(re_); d_all.append(rd)
+                    deltas.append(re_ - rd)
+                if not deltas:
                     continue
-                re_, rd = rate(ce, pred), rate(cd, pred)
-                e_all.append(re_); d_all.append(rd)
-                deltas.append(re_ - rd)
-            up = sum(1 for d in deltas if d > 0)
-            dn = sum(1 for d in deltas if d < 0)
-            p = binom(min(up, dn), up + dn)
-            star = " *" if p < 0.05 else ""
-            print("  %-8s %-24s %7.1f%% %7.1f%% %+7.1f%% %3d/%-3d p=%.3f%s"
-                  % (qid, label, 100 * median(e_all), 100 * median(d_all),
-                     100 * median(deltas), up, dn, p, star))
-    print()
-    print("  A model whose shipped persona NAMES ITS LAB answers the identity")
-    print("  question by reading its prompt. That is what a negative delta on")
-    print("  'names its maker' means, and it is why the two cells exist.")
+                up = sum(1 for d in deltas if d > 0)
+                dn = sum(1 for d in deltas if d < 0)
+                p = binom(min(up, dn), up + dn)
+                star = " *" if p < 0.05 else ""
+                print("  %-8s %-18s %-12s %3d %7.1f%% %7.1f%% %+7.1f%% %6.3f %d/%d%s"
+                      % (qid, label, rg, len(deltas), 100 * median(e_all),
+                         100 * median(d_all), 100 * median(deltas), p, up, dn, star))
+            print()
+    print("  READ THE `identical` ROW AS THE NULL. It is the same condition")
+    print("  measured twice; any delta in it is what sampling noise looks like")
+    print("  at this n, and no other row means anything without it.")
     print()
 
     # ---- 3. WHO IT SAYS MADE IT ----------------------------------------

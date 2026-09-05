@@ -106,7 +106,7 @@ and the state the first version of the checker could not see.
 *Which alignment stage carries the displacement, and what does that depend on?*
 
 - **[`data_ablations/`](division_of_labour/data_ablations/README.md)** -- `RUN 2026-09-04/05. Five Tulu-3 SFT checkpoints, three edges (raw, framed, self). [...]`  
-  Removing WildChat changes WHICH words move, on every edge (Jaccard gap -0.21 raw, -0.13 framed, -0.11 self) and raises frame responsiveness while every other ablation lowers it. The sexual-targeting result is RAW-EDGE ONLY and small.
+  Alignment moves mass out of the AGGRESSION field into SENSATION and SPEECH, and what rises is less transgressive on human norms, model norms and contextual ratings alike. Removing WildChat is the only ablation that makes the landing LESS safe (transgressiveness +0.091, scene +0.112, both p<0.01); it also changes WHICH words move on every edge.
 - **[`lexical_domains/`](division_of_labour/lexical_domains/README.md)** -- `RUN, 2026-08-16. L1 NOT SUPPORTED AS TESTED — and the operationalisation is now known to be wrong.`  
   L1 NOT SUPPORTED AS TESTED — and the operationalisation is now known to be wrong.
 - **[`removal_rates/`](division_of_labour/removal_rates/README.md)** -- `RUN, 2026-08-16`  

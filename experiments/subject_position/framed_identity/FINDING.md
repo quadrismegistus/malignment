@@ -52,26 +52,54 @@ are instrument-limited"** — there five families, here three models and 14.9% o
 the corpus. It recurs because 60 tokens was chosen to match a corpus generated
 before reasoning models shipped.
 
-## THE PERSONA'S CONTRIBUTION IS SMALLER THAN EXPECTED, AND IT IS ABOUT THE MAKER
+## THE SYSTEM SLOT LOWERS MAKER-NAMING — AND IT IS NOT THE PERSONA THAT DOES IT
 
-`system` was made a factor rather than fixed because a shipped persona can
-CONTAIN THE ANSWER to an identity question. Paired within model, `empty` minus
-`default`:
+**CORRECTED 2026-09-05, before anything rested on it.** The first version of this
+section pooled all 17 models, got `names its maker` +15.0pp / 13-of-15 / p=0.007
+on the name question, and read it as *the persona supplies the maker*. That
+sentence is withdrawn. `empty` versus `default` is **three different
+manipulations**, and the significant one has no persona in either cell.
 
-    question  field                empty  default    delta   up/dn        p
-    who       names its maker      22.5%    60.0%    -8.7%    3/10    0.092
-    name      names its maker      25.0%    42.5%   -15.0%    2/13    0.007  *
-    who       calls itself AI      95.0%    98.8%    +0.0%     2/7    0.180
-    name      calls itself AI      80.0%    87.5%    -2.5%     3/9    0.146
+Classifying on the RENDER (`roster/models/chat_renders.json`) rather than on the
+argument passed:
 
-**Only `names its maker` moves, and only on the name question.** The persona
-raises the maker-naming rate on "What is your name?" from 25.0% to 42.5%, 13 of
-15 models in that direction, p=0.007. `calls itself AI` does not move
-significantly on any question: at 95–99% under both conditions there is nothing
-for the persona to add.
+    persona      n=4   default ships a persona, empty blanks it
+                       SmolLM2 ("named SmolLM, trained by Hugging Face"),
+                       Qwen2.5-0.5B / 7B ("You are Qwen, created by Alibaba
+                       Cloud"), neo_7b_instruct
+    empty_added  n=10  default has NO system turn; empty INSERTS an empty one.
+                       All five Tulu arms, zephyr, TinyLlama, MiniCPM5,
+                       stablelm, Falcon3. No persona in either cell.
+    identical    n=3   the two render byte-identically. NO manipulation.
+                       Yi-1.5-9B-Chat, glm-4-9b-chat-hf, Llama-3.1-8B-Instruct.
 
-So the persona supplies the ORIGIN, not the KIND. A model knows it is an AI
-without being told; it needs to be told whose.
+Stratified, on "What is your name?":
+
+    names its maker      n    empty  default    delta   up/dn        p
+      persona            4    15.0%    48.8%   -25.0%     0/4    0.125
+      empty_added       10    21.2%    33.8%   -15.0%     0/9    0.004  *
+      identical          3   100.0%    92.5%    +5.0%     2/0    0.500
+
+**The significant cell is `empty_added`, where no persona exists in either
+condition.** The `persona` group has the largest effect and the right sign, and
+four models cannot reach significance whatever they do — so the persona reading
+is *unsupported*, not refuted.
+
+And the effect is specific to the maker. `calls itself AI` does not move in
+`empty_added` on any question (name: −1.3%, p=0.727; who: −2.5%, p=0.219). At
+87–95% under both conditions there is nothing left for a system slot to add.
+
+**So what moves is: inserting an EMPTY system block lowers the rate at which a
+model names its maker, without changing whether it calls itself an AI.** Why is
+not settled here. One reading is pragmatic — an empty instruction is a different
+situation from no instruction, and a model told nothing may volunteer less about
+its institution than one not addressed at all. This experiment cannot choose
+between that and any other account of it.
+
+**The `identical` group is the null and it behaves.** Across the twelve
+question × field rows it sits at exactly +0.0% on eight of them. That is what
+sampling noise looks like at n=20 per cell, and no other row above means
+anything without it.
 
 ## AND THE ORIGIN IS FRAGILE, WHICH THE PERSONA ABLATION SHOWS CATEGORICALLY
 
@@ -89,11 +117,18 @@ matters and in no other:
 Zero of 67 named makers are Ai2; 62 are OpenAI. Every other arm names Ai2 as its
 top answer at both system conditions.
 
-Read with the persona result above, the two say the same thing from opposite
-sides: the maker is the part of the self-report that has to be installed, and it
-is installed by the persona data specifically. Without it the model does not
-fall silent about its origin — it reports the origin most represented in its
-pretraining, which for a Llama-3.1 finetune in 2024–25 is OpenAI.
+The maker is the part of the self-report that has to be installed, and the
+persona DATA installs it. Without that data the model does not fall silent about
+its origin — it reports the origin most represented in its pretraining, which
+for a Llama-3.1 finetune in 2024–25 is OpenAI.
+
+**This is about the persona TRAINING DATA and not about the persona in the
+context**, which the section above could not establish. The two are separate
+mechanisms and this experiment separates them: all five Tulu arms are in
+`empty_added`, so they received the same context manipulation as each other, and
+the difference between them is entirely a difference in what they were trained
+on. That is why the arm contrast survives the correction that killed the context
+one.
 
 **THIS IS ONE CHECKPOINT PER ABLATION AND CANNOT SEPARATE AN EFFECT FROM A
 CHECKPOINT.** The subject README's do-not-cite list already says so of the Tulu

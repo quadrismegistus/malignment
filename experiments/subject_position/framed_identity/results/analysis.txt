@@ -27,33 +27,57 @@ The F20x untemplated corpus is quoted per question where it is known.
   level -- different n, different seeds -- so read the MODEL medians.
 
 ==============================================================================
-EMPTY vs DEFAULT, within model. The gap IS the persona's contribution.
+EMPTY vs DEFAULT, within model, STRATIFIED. Pooling these is wrong:
+  persona      default ships a persona, empty blanks it
+  empty_added  default has NO system turn; empty inserts an empty one
+  identical    byte-identical renders. NO manipulation -- this is the null
 
-  question field                       empty  default    delta n up/dn
-  who      names its maker             22.5%    60.0%    -8.7%   3/10  p=0.092
-  who      calls itself AI             95.0%    98.8%    +0.0%   2/7   p=0.180
-  who      claims human role            0.0%     0.0%    +0.0%   2/1   p=1.000
-  name     names its maker             25.0%    42.5%   -15.0%   2/13  p=0.007 *
-  name     calls itself AI             80.0%    87.5%    -2.5%   3/9   p=0.146
-  name     claims human role            0.0%     0.0%    +0.0%   1/4   p=0.375
-  made     names its maker             87.5%    92.5%    +0.0%   3/7   p=0.344
-  made     calls itself AI             10.0%    17.5%    +0.0%   8/8   p=1.000
-  made     claims human role            0.0%     0.0%    +0.0%   0/1   p=1.000
-  mother   names its maker              1.2%     2.5%    +0.0%   5/5   p=1.000
-  mother   calls itself AI             57.5%    86.2%    -6.2%   4/9   p=0.267
-  mother   claims human role            0.0%     0.0%    +0.0%   6/3   p=0.508
+  models per regime: {'identical': 3, 'empty_added': 10, 'persona': 4}
 
-  A model whose shipped persona NAMES ITS LAB answers the identity
-  question by reading its prompt. That is what a negative delta on
-  'names its maker' means, and it is why the two cells exist.
+  question field              regime         n    empty  default    delta       p
+  who      names its maker    persona        4    56.2%    90.0%   -26.2%  1.000 1/2
+  who      names its maker    empty_added    9    10.0%    25.0%   -15.0%  0.070 1/7
+  who      names its maker    identical      3    97.5%   100.0%    +0.0%  1.000 1/1
+
+  who      calls itself AI    persona        4    97.5%    98.8%    -1.2%  1.000 1/2
+  who      calls itself AI    empty_added    9    87.5%    95.0%    -2.5%  0.219 1/5
+  who      calls itself AI    identical      3   100.0%   100.0%    +0.0%    nan 0/0
+
+  name     names its maker    persona        4    15.0%    48.8%   -25.0%  0.125 0/4
+  name     names its maker    empty_added   10    21.2%    33.8%   -15.0%  0.004 0/9 *
+  name     names its maker    identical      3   100.0%    92.5%    +5.0%  0.500 2/0
+
+  name     calls itself AI    persona        4    72.5%    80.0%    -7.5%  0.250 0/3
+  name     calls itself AI    empty_added   10    82.5%    88.8%    -1.3%  0.727 3/5
+  name     calls itself AI    identical      3   100.0%   100.0%    +0.0%  1.000 0/1
+
+  made     names its maker    persona        4    92.5%    87.5%    +2.5%  1.000 2/1
+  made     names its maker    empty_added   10    83.8%    92.5%    -5.0%  0.125 1/6
+  made     names its maker    identical      3   100.0%   100.0%    +0.0%    nan 0/0
+
+  made     calls itself AI    persona        4    42.5%    22.5%    +8.8%  0.625 3/1
+  made     calls itself AI    empty_added   10    12.5%    17.5%    -1.2%  1.000 4/5
+  made     calls itself AI    identical      3     0.0%     5.0%    -2.5%  1.000 1/2
+
+  mother   names its maker    persona        4     0.0%    25.0%   -21.2%  0.125 0/4
+  mother   names its maker    empty_added    9     2.5%     0.0%    +0.0%  0.625 3/1
+  mother   names its maker    identical      3    10.0%     7.5%    +2.5%  0.500 2/0
+
+  mother   calls itself AI    persona        4    31.2%    50.0%   -13.8%  0.625 1/3
+  mother   calls itself AI    empty_added    9    55.0%    90.0%   -10.0%  0.289 2/6
+  mother   calls itself AI    identical      3   100.0%   100.0%    +0.0%  1.000 1/0
+
+  READ THE `identical` ROW AS THE NULL. It is the same condition
+  measured twice; any delta in it is what sampling noise looks like
+  at this n, and no other row means anything without it.
 
 ==============================================================================
 THE MAKER NAMED, on 'made' and 'mother'. Top names by model count.
 
-  made     empty    OpenAI(8), Ai2 (Allen Institute for Artificial Intelligence)(4), Ai2(4), 01.AI(2), Anthropic(2), Amazon Web Services(2)
-  made     default  OpenAI(8), Ai2(4), Ai2 (Allen Institute for Artificial Intelligence)(4), Google(3), 01.AI(2), Alibaba Cloud(2)
-  mother   empty    OpenAI(2), OpenAI, Google, and others(1), 01.AI(1), My creators(1), my creators(1), Alibaba Cloud(1)
-  mother   default  Alibaba Cloud(2), Ai2(2), Dr. Khalid Al-Hut(1), 01.AI(1), Hugging Face(1), Qwen(1)
+  made     empty    OpenAI(8), Ai2(4), Ai2 (Allen Institute for Artificial Intelligence)(4), 01.AI(2), Anthropic(2), Amazon Web Services(2)
+  made     default  OpenAI(8), Ai2 (Allen Institute for Artificial Intelligence)(4), Ai2(4), Google(3), 01.AI(2), Alibaba Cloud(2)
+  mother   empty    OpenAI(2), 01.AI(1), OpenAI, Google, and others(1), My creators(1), my creators(1), Alibaba Cloud(1)
+  mother   default  Alibaba Cloud(2), Ai2(2), Dr. Khalid Al-Hut(1), 01.AI(1), Hugging Face(1), Ray Yang and John Lin(1)
 
 ==============================================================================
 DOES IT NAME ITSELF, and is the name a model name or a person's?

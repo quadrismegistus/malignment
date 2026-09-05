@@ -31,10 +31,13 @@ conditions, against 95–97.5% `ai_system`.
 
 Two secondary results, both about the ORIGIN rather than the kind:
 
-- **The persona supplies the maker, not the kind.** Paired within model, the only
-  field that moves between `system=""` and `system=DEFAULT` is `names its maker`
-  (+15.0pp on the name question, 13/15, p=0.007). `calls itself AI` sits at
-  95–99% under both and has nothing left to gain.
+- **An empty system slot lowers maker-naming, and it is not the persona doing
+  it.** `empty` vs `default` is three different manipulations and pooling them is
+  wrong — corrected 2026-09-05. Stratified on the RENDER, the significant cell is
+  `empty_added` (no persona in either condition): −15.0pp on the name question,
+  0/9, p=0.004. The `persona` group has the larger effect (−25.0pp) and the right
+  sign but n=4 cannot reach significance. `calls itself AI` does not move.
+  The byte-identical group is a working null: +0.0% on 8 of 12 rows.
 - **Removing the persona data REPLACES the origin rather than weakening it.**
   `Tulu-3-SFT-no-persona-data` names Ai2 **0 times out of 67** and OpenAI 62;
   every other Tulu arm names Ai2 as its top answer. One checkpoint per ablation,

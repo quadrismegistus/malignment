@@ -40,7 +40,8 @@ F20 tried to settle this and substituted a `Q: ... A:` pseudo-template for the m
                              identity is GONE -- F20x's untemplated corpus says
                              43.3% claim a HUMAN identity on "Who are you?";
                              templated it is 0.0% against 95-97.5% ai_system.
-                             The persona supplies the MAKER, not the kind.
+                             An empty system slot lowers maker-naming;
+                             the persona reading was WITHDRAWN 2026-09-05.
 
     frame_inversion/         Why do raw and chat move in OPPOSITE directions on
                              the same models? OPEN, no producer.
@@ -67,3 +68,4 @@ Meanwhile raw narrative interiority ROSE with alignment (+0.224, 16/17, `passage
 - **Any conversational-"I" claim.** First-token probability cannot see a mid-turn `I'd suggest`, which is where wildchat's contribution would live.
 - **P3**, withdrawn before any result was read: 11 of 14 bases ship no template, so a chat-frame base-to-SFT delta does not exist for most lineages.
 - **The F20 beam corpus** (556k beams) for anything passage-scale: 8 words, 28% distinct openings, 21% of a cell on one four-word opening. Its raw-mode "50% empty mass" is not reproduced by either the twp distributions or fresh generations.
+- **Any pooled `system=""` vs `system=DEFAULT` contrast.** Added 2026-09-05 after `framed_identity` posted one and withdrew it. The two arguments produce THREE different treatments, and which one a model gets is a property of its template, not of the call: a persona is blanked (4 of 17 models here), an empty block is inserted where there was no system turn (10), or the template drops the empty system and the two render BYTE-IDENTICALLY (3). Pooling them mixes a manipulation with its own null. Classify on the RENDER — `roster/models/chat_renders.json`, `render != render_empty` — and report the identical group as the null it is. Note that `clean_via` in the same file answers a *different* question (can a clean slot be reached, and how) and does not separate the last two.
