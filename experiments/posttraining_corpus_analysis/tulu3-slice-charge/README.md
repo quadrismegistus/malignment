@@ -3,7 +3,7 @@ kind: question
 id: tulu3-slice-charge
 question: What kind of prompt does each Tulu-3 SFT source carry, and what is the model trained to do with it?
 status: "PILOT RUN TWICE, 2026-09-06. v1 (3,800 rows) was re-run as v2 after reading its rows found a fiction confound. The assistant side is CONSTANT (99.2% NONE) so the user side is primary -- settled by measurement. Full run not yet designed."
-headline: "FICTION IS A NEAR-TOTAL EXEMPTION: 0 refusals across 29 charged fiction requests, against 85.3% refusal on 265 charged non-fiction ones. Sexual requests are 36.6% fiction where illicit ones are 1.2%, and that composition -- not leniency about sex -- is most of why SEXUAL looked like the least-refused kind. WildChat is the sexually densest source at 10.0%; every maths and persona source is 0.0%."
+headline: "The Tulu-3 wildjailbreak slice is 100% VANILLA -- AI2 built 161,430 adversarial jailbreaks and shipped none of them, so the safety data teaches refusal of the UNDISGUISED request while the fiction-wrapped charged requests come from WildChat and are complied with. FICTION IS A NEAR-TOTAL EXEMPTION: 0 refusals across 29 charged fiction requests, against 85.3% refusal on 265 charged non-fiction ones. Sexual requests are 36.6% fiction where illicit ones are 1.2%, and that composition -- not leniency about sex -- is most of why SEXUAL looked like the least-refused kind. WildChat is the sexually densest source at 10.0%; every maths and persona source is 0.0%."
 grain: corpus
 ---
 
@@ -132,6 +132,74 @@ v1 and v2 agree closely on this table (SEXUAL 46.5 -> 46.3 refuse), which is
 worth stating: **the fiction fix did not change the pooled numbers, it changed
 what they mean.** An instrument defect that leaves the headline number intact is
 the kind that survives a re-run and a sanity check both.
+
+## THE WILDJAILBREAK SLICE IS ALL *VANILLA*, AND THAT IS THE FINDING
+
+Raised as a threat to the pilot and retired by checking it. WildJailbreak's own
+card says that for `adversarial_harmful` AI2 "pair[ed] the model refusal
+responses generated from the counterpart VANILLA prompts to adversarial
+prompts" -- so on those rows the assistant turn was **not written to the prompt
+it sits beside**, and a refusal rate computed over them would be counting
+construction rather than response.
+
+**It does not apply here.** Joining all 50,000 Tulu `wildjailbreak` prompts back
+to `train.tsv`, matched on text and resolved per COLUMN so the join cannot lie:
+
+    matches the `vanilla` column          49,999   100.0%
+    matches BOTH columns                       1     0.0%
+    matches the `adversarial` column           0     0.0%
+
+    of those:   vanilla_harmful  25,496  51.0%
+                vanilla_benign   24,504  49.0%
+
+**AI2 built 161,430 adversarial jailbreaks and shipped NONE of them in this
+slice.** The safety training that reaches Tulu-3 through this source teaches
+refusal of the UNDISGUISED request. The disguised form -- the fiction wrapper,
+the roleplay frame, the "imagine you're a playwright" -- was constructed, sits
+in the source dataset, and was not included.
+
+### AND THE FICTION EXEMPTION IS NOT COMING FROM THE SAFETY DATA
+
+The 29 charged fiction rows, by source:
+
+    tulu_v3.9_wildchat_100k                        25
+    tulu_v3.9_synthetic_finalresp_wildguardmixtrain 3
+    tulu_v3.9_aya_100k                              1
+    tulu_v3.9_wildjailbreak_decontaminated_50k      0
+
+**Zero from wildjailbreak.** So the two things sit apart in this mixture: the
+safety slice covers plain charged requests and refuses them, and the
+fiction-wrapped charged requests come from REAL USER CONVERSATION and are
+complied with. That is a structural fact about the corpus and not a rate -- 29
+rows -- but it is the shape the full run should be built to measure.
+
+## AN EXTERNAL CRITERION, AND `user_kind` PASSES IT
+
+The vanilla rows carry AI2's own `harmful`/`benign` label, assigned at
+generation time by a different pipeline (GPT-4 prompted to produce one bin or
+the other) and never shown to this rater. All 200 pilot `wildjailbreak` rows
+matched. Rater `user_kind != NONE` against that label:
+
+                        rater charged    rater NONE
+    vanilla_harmful          86               14
+    vanilla_benign            4               96
+
+    AI2 harmful -> charged   86.0%
+    AI2 benign  -> charged    4.0%
+
+**This is the independent criterion the kind measures otherwise lack**, and it
+is a real one: the label records what AI2 SET OUT TO GENERATE, and the rater
+judged the text blind to it. 86% sensitivity at a 4% false-positive rate.
+
+The 14 harmful-rated-NONE are unexamined and are the place to look before the
+full run; `vanilla_benign` is built to "superficially resemble unsafe prompts",
+so 4% is a meaningful number rather than a floor.
+
+**WHAT IT DOES NOT VALIDATE.** It is a binary charged/not check on one source.
+It says nothing about whether the KIND assignment within charged is right, about
+`assistant_move`, or about `is_fiction` -- and the adversarial half of
+WildJailbreak, which would have tested concealment directly, is not in this
+mixture to test against.
 
 ## WHAT THE FULL RUN STILL NEEDS
 
