@@ -54,8 +54,10 @@ SCALES = ["orality", "tactility", "genitality", "incorporation", "body_distance"
           "exposure", "charge", "euphemism", "explicitness"]
 
 
-def load():
-    d = json.load(open(os.path.join(OUT, "rated_gender_pairs_v2.json")))["rows"]
+def load(edge="raw"):
+    sfx = "" if edge == "raw" else "_" + edge
+    d = json.load(open(os.path.join(OUT,
+                                    "rated_gender_pairs_v2%s.json" % sfx)))["rows"]
     R = {}
     for r in d:
         if r["ratable"] and not r["is_modifier"]:
@@ -63,22 +65,41 @@ def load():
     return R
 
 
-def masses(prompts):
-    """p_base and p_aligned per (prompt, lineage, word), from twp_words_v4_best."""
-    from malignment import roster, vectors as V
-    ep = sorted(roster.endpoints()[0].items())
-    ms = sorted({x for p in ep for x in p})
-    q = V.rows("SELECT prompt, model, groupArray(word) AS ws, groupArray(p) AS ps "
-               "FROM twp_words_v4_best WHERE prompt IN {ts:Array(String)} "
-               "AND model IN {ms:Array(String)} GROUP BY prompt, model",
-               ts=sorted(prompts), ms=ms)
+def masses(prompts, edge="raw"):
+    """p_base and p_aligned per (prompt, lineage, word), for one edge.
+
+    **THE BASE SIDE IS RAW ON ALL THREE EDGES AND THE ALIGNED SIDE IS NOT**, so
+    the two sides come from different tables and `store` is keyed by
+    (model, frame). On a `self` edge one model is BOTH sides: a model-keyed
+    store would serve it the raw distribution twice and every level difference
+    would come out at zero, which reads as a clean null rather than as a bug.
+
+    A framed side reads `twp_words_v4` at `frame='prefill'`; `_best` is raw-only.
+    """
+    from malignment import movement as Mv, vectors as V
+    ep = [(b, a) for b, a, _ in Mv.endpoint_edges(edge)]
+    fa = '' if edge == "raw" else 'prefill'
     store = collections.defaultdict(dict)
-    for r in q:
-        store[r["prompt"]][r["model"]] = dict(zip(r["ws"], r["ps"]))
+    for side, fr in ((0, ''), (1, fa)):
+        ms = sorted({x[side] for x in ep})
+        if fr == '':
+            q = V.rows(
+                "SELECT prompt, model, groupArray(word) AS ws, groupArray(p) AS ps "
+                "FROM twp_words_v4_best WHERE prompt IN {ts:Array(String)} "
+                "AND model IN {ms:Array(String)} GROUP BY prompt, model",
+                ts=sorted(prompts), ms=ms)
+        else:
+            q = V.rows(
+                "SELECT prompt, model, groupArray(word) AS ws, groupArray(p) AS ps "
+                "FROM twp_words_v4 WHERE prompt IN {ts:Array(String)} "
+                "AND model IN {ms:Array(String)} AND frame={fr:String} "
+                "GROUP BY prompt, model", ts=sorted(prompts), ms=ms, fr=fr)
+        for r in q:
+            store[r["prompt"]][(r["model"], fr)] = dict(zip(r["ws"], r["ps"]))
     out = {}
     for t in prompts:
         for b, a in ep:
-            pb, pa = store[t].get(b), store[t].get(a)
+            pb, pa = store[t].get((b, '')), store[t].get((a, fa))
             if pb and pa:
                 out[(t, b + " -> " + a)] = (pb, pa)
     return out
@@ -102,8 +123,17 @@ def boot(cells, f, seed=20260819):
 
 
 def main():
+    import argparse
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--edge", default="raw", choices=("raw", "framed", "self"),
+                    help="raw (50 endpoint pairs), framed (45), self (45). "
+                         "See movement.endpoint_edges.")
+    args = ap.parse_args()
+    edge = args.edge
+    sfx = "" if edge == "raw" else "_" + edge
+    print("EDGE: %s" % edge)
     from scipy import stats
-    R = load()
+    R = load(edge)
     prompts = sorted({k[0] for k in R})
     meta = {p: (R[(p, w)]["pair"], R[(p, w)]["gender"]) for p, w in R}
     pairs = sorted({v[0] for v in meta.values()})
@@ -157,7 +187,7 @@ def main():
                               p=w.pvalue, n_pairs=len(per)))
 
     # ---------------- 2. LEVEL: does the distribution SHIFT --------------------
-    M = masses(prompts)
+    M = masses(prompts, edge)
     print("\n" + "=" * 92)
     print("2. LEVEL -- mass-weighted E[scale|rated] per arm, per lineage\n")
     lv = collections.defaultdict(dict)
@@ -211,9 +241,10 @@ def main():
     json.dump(dict(_what="8 sexual gender matched pairs: rho (selection) and level "
                          "(mass shift), which are different quantities",
                    n_words=len(R), rho=saved_rho, level=saved_lv,
+                   edge=edge,
                    rho_by_prompt={"%s|%s" % k: v for k, v in rho.items()}),
-              open(os.path.join(OUT, "analyse.json"), "w"), indent=1)
-    print("\n-> results/analyse.json")
+              open(os.path.join(OUT, "analyse%s.json" % sfx), "w"), indent=1)
+    print("\n-> results/analyse%s.json" % sfx)
 
 
 if __name__ == "__main__":

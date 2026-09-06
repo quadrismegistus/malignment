@@ -124,6 +124,50 @@ and the sentence elsewhere that the result falsified is left standing.
   cannot be: the design's unit is the matched pair. They are covered by the
   slot-domain run as a main-effect population with the frame as the unit.
 
+## THE GENDER NULL HOLDS ON BOTH FRAMED EDGES (2026-09-06)
+
+`rate.py --edge {framed,self}` then `analyse.py --edge ...`. The edges are
+`movement.endpoint_edges`: raw is the 50 declared endpoints, framed is
+base_raw->aligned_framed (45), self is aligned_raw->aligned_framed (45), the
+frame with the weights held fixed.
+
+Rho, mean over prompts, with the gender difference and its sign-test p:
+
+    scale            RAW            FRAMED         SELF          gender-diff p
+                                                                raw  fram  self
+    charge         -0.222 / -0.198  -0.246/-0.205  -0.156/-0.142  .64  .25  .55
+    explicitness   -0.187 / -0.140  -0.207/-0.153  -0.106/-0.081  .64  .31  .64
+    exposure       -0.159 / -0.157  -0.313/-0.215  -0.237/-0.115  1.0  .13  .13
+    genitality     -0.106 / -0.130  -0.123/-0.126  -0.085/-0.082  1.0  .84  .95
+    tactility      -0.102 / -0.107  -0.079/-0.128  -0.051/-0.056  .74  .039 1.0
+    body_distance  +0.268 / +0.220  +0.319/+0.225  +0.198/+0.165  .38  .078 .69
+    euphemism      +0.159 / +0.134  +0.093/+0.057  -0.024/-0.051  .46  .46  .84
+
+**The folder's headline holds on every edge.** The selection direction is the
+same on all three -- charge, explicitness, exposure and genitality fall,
+body_distance rises -- and the gender difference is null throughout. `tactility`
+on the framed edge (p=0.039) and `genitality`'s level difference on the framed
+edge (p=0.033) are the only cells under 0.05 across 9 scales x 3 edges on rho
+plus the level tests, which is the rate to expect from the number of tests. They
+are not being reported as exceptions.
+
+Two things that do move, neither of them the gender axis:
+
+- **`exposure` roughly doubles under the frame**, -0.159 raw to -0.313 framed.
+  4 pairs, not 8 -- the scale is only rated where the instrument judged it
+  applicable, so this is the smallest cell in the table.
+- **`euphemism` changes sign on `self`**, +0.159 raw to -0.024. That edge has a
+  different baseline (the aligned model, not the base model), so it is a
+  different contrast rather than a contradiction.
+
+`rate.py` needs no probability lookup -- jobs come from `cls` and there is no
+MIN_PROB gate -- but `analyse.masses()` does, and its store is keyed by
+(model, frame): on a self-edge one model is both sides, and a model-keyed store
+would have served the raw distribution twice and returned every level difference
+as exactly zero, which reads as a clean null rather than as a bug.
+
+    results/rated_gender_pairs_v2_{framed,self}.json, analyse_{framed,self}.json
+
 ## RE-RUN AT 50 LINEAGES (2026-09-05): THE NULL GOT STRONGER
 
 The population here is DISCOVERED, not declared -- `population.py` takes whichever
