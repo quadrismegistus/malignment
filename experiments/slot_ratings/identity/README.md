@@ -92,6 +92,73 @@ street          264       11       64       37       27
 where the instrument judged it applicable. **A cell absent from a sweep has not
 been tested there and is not a null.**
 
+## THE GROUP STRUCTURE SURVIVES THE DEPLOYMENT FRAME (2026-09-06)
+
+`analyse.py --edge {framed,self}`, then `group_contrast.py --edge ...` and
+`significant_table.py --edge ...`. The edges are `movement.endpoint_edges`:
+
+    raw      base_raw    -> aligned_raw       50 pairs   alignment
+    framed   base_raw    -> aligned_framed    45         alignment AND the frame
+    self     aligned_raw -> aligned_framed    45         the frame ALONE
+
+Taking the 66 group-by-scale cells significant on the raw `room` sweep and asking
+what the other two edges say about those same cells:
+
+    edge      cells   significant    of the 66 raw-significant room cells
+                                     same sign      also significant
+    raw        1128    180 (16.0%)        --              --
+    framed     1319    401 (30.4%)      64/66            54
+    self        960    189 (19.7%)      57/66            32
+
+The largest raw cells, all three edges:
+
+    scale          group              raw       framed     self
+    arousal        Muslims         -0.139 *   -0.182 *   -0.203 *
+    deference      Muslims         +0.132 *   +0.142 *   +0.133 *
+    target         Muslims         -0.129 *   -0.086 *   -0.096 *
+    abstraction    Muslims         +0.126 *   +0.205 *   +0.183 *
+    procedural     Muslims         +0.118 *   +0.150 *   +0.177 *
+    interiority    Muslims         +0.116 *   +0.145 *   +0.102 *
+    termination    men             +0.112 *   +0.152 *   +0.124 *
+    assertiveness  Muslims         -0.110 *   -0.142 *   -0.148 *
+    arousal        Italians        +0.103 *   +0.206 *   +0.208 *
+    hedged         Russians        -0.101 *   -0.141 *   -0.147 *
+    interiority    Christians      +0.111 *   +0.084 *   +0.040
+    vocalisation   students        -0.110 *   -0.058     -0.028
+
+**`Muslims` / `deference` is +0.132 raw, +0.142 framed, +0.133 self.** This
+folder's most-quoted cell is the same size on all three edges, including the one
+where the base model never appears.
+
+**THIS IS THE OPPOSITE OF WHAT THE POV STUDY DID.** `slot_ratings/institutional`
+ran the same three edges the same day and six of its eight raw-significant scales
+went non-significant on `framed`. The two folders are not measuring the same kind
+of thing: the POV study asks whether a gap between two prompt positions survives,
+and this one asks whether a group differs from the other 23 measured on the same
+lineage. A per-lineage group contrast holds the frame constant across the groups
+being compared, so a frame that moves every group together cannot produce or
+destroy it. That is a structural reason to expect the difference and it was NOT
+predicted before the run.
+
+### WHAT THE FRAME DOES DO HERE
+
+It raises the significance rate, 16.0% to 30.4%, and most deltas get larger --
+`arousal`/`Italians` doubles, +0.103 to +0.206. Two candidate causes are not
+separated: the frame could sharpen the group differences, or the framed edge's
+verdict mix could simply give the rho more to work with (in the POV folder the
+same frame moved a third of flat words into the faller class). **The cell count
+also differs, 1128 vs 1319, because a scale is only rated where the instrument
+judged it applicable**, so the rates are over different denominators and the
+comparison is between proportions of different populations.
+
+The `self` edge is the weaker of the two -- 32 of 66 still significant against
+54 -- which is consistent with it being the smaller manipulation, but its base
+side is the aligned model rather than the base model, so it is a different
+baseline and not a dose.
+
+    results/group_rho_{framed,self}.json, group_contrast_{framed,self}.json,
+    group_words_{framed,self}.json
+
 ## PCA: THERE IS NO COMMON ALIGNMENT DIRECTION (`pca.py`)
 
 RH's design: one point per {group} x {base, aligned}, the 25 slot scales as

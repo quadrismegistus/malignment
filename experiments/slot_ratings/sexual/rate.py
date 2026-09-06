@@ -26,20 +26,24 @@ OUT = os.path.join(HERE, "results")
 MIN_PAIRS = 1
 
 
-def population():
-    from malignment import roster, vectors as V
-    from malignment.movement import movement, CANONICAL
+def population(edge="raw"):
+    """Jobs and per-word rise/fall counts on one edge.
+
+    `edge` is `movement.endpoint_edges`: raw (50 declared endpoints), framed
+    (45, base_raw->aligned_framed) or self (45, aligned_raw->aligned_framed,
+    the frame with the weights held fixed).
+
+    **THIS FILE NEEDS NO WORD-PROBABILITY LOOKUP.** Jobs come from `cls` in
+    `movement_v4` and there is no MIN_PROB gate, so unlike `run_slotpov` and
+    `identity/analyse` there is no distribution to read per side and no
+    (model, frame) store to key correctly. A `store` built from
+    `twp_words_v4_best` sat here unused, left from the recompute path the note
+    below retired; it is gone rather than carried into the edge change.
+    """
+    from malignment import movement as Mv, roster
     from gender_pairs import PAIRS, DROP
     keep = {t: v for t, v in PAIRS.items() if v[0] not in DROP}
-    ep = sorted(roster.endpoints()[0].items())
-    ms = sorted({x for p in ep for x in p})
-    q = V.rows("SELECT prompt, model, groupArray(word) AS ws, groupArray(p) AS ps "
-               "FROM twp_words_v4_best WHERE prompt IN {ts:Array(String)} "
-               "AND model IN {ms:Array(String)} GROUP BY prompt, model",
-               ts=sorted(keep), ms=ms)
-    store = collections.defaultdict(dict)
-    for r in q:
-        store[r["prompt"]][r["model"]] = dict(zip(r["ws"], r["ps"]))
+    ep = [(b, a) for b, a, _ in Mv.endpoint_edges(edge)]
     #: READ `movement_v4`, DO NOT RECOMPUTE (2026-09-05, RH).
     #:
     #: This used `movement(pb, pa, CANONICAL)` over `twp_words_v4_best`, with no
@@ -66,6 +70,8 @@ def population():
     npairs = collections.Counter()
     eps = set(ep)
     lit = repr(tuple(sorted(keep))).replace('"', "'")
+    #: the roster restriction AND the clean-slot rule are both in here
+    where = Mv.endpoint_edge_where(edge)
 
     #: `npairs` COUNTS PAIRS PRESENT, NOT PAIRS THAT MOVED. The old path counted
     #: a pair whenever both arms were in the store, whether or not anything
@@ -75,17 +81,16 @@ def population():
     #: separately for that reason.
     for r in ch.query(
             "SELECT prompt, base, aligned FROM movement_v4 WHERE prompt IN %s "
-            "AND frame_base='' AND frame_aligned='' AND rule='canonical' "
-            "GROUP BY prompt, base, aligned" % lit):
+            "AND rule='canonical' AND %s "
+            "GROUP BY prompt, base, aligned" % (lit, where)):
         if (r["base"], r["aligned"]) in eps:
             npairs[r["prompt"]] += 1
 
     for r in ch.query(
             "SELECT prompt, base, aligned, cls, groupArray(word) ws "
-            "FROM movement_v4 WHERE prompt IN %s AND frame_base='' "
-            "AND frame_aligned='' AND rule='canonical' "
-            "AND cls IN ('riser','faller') GROUP BY prompt, base, aligned, cls"
-            % lit):
+            "FROM movement_v4 WHERE prompt IN %s AND rule='canonical' "
+            "AND cls IN ('riser','faller') AND %s "
+            "GROUP BY prompt, base, aligned, cls" % (lit, where)):
         if (r["base"], r["aligned"]) not in eps:
             continue
         k = "r" if r["cls"] == "riser" else "f"
@@ -98,8 +103,12 @@ def population():
 def main(argv=None):
     ap = argparse.ArgumentParser()
     ap.add_argument("--dry", action="store_true")
+    #: THE EDGE IS IN THE FILENAME.
+    ap.add_argument("--edge", default="raw", choices=("raw", "framed", "self"),
+                    help="raw (50 endpoint pairs), framed (45), self (45)")
     a = ap.parse_args(argv)
-    keep, jobs, mv, npairs = population()
+    sfx = "" if a.edge == "raw" else "_" + a.edge
+    keep, jobs, mv, npairs = population(a.edge)
     print("8 pairs, %d prompts, %d lineage pairs each"
           % (len(keep), sorted(set(npairs.values()))[0]))
     print("words moving in >= %d pairs: %d   cost ~$%.3f"
@@ -109,7 +118,7 @@ def main(argv=None):
     if a.dry:
         return
     os.makedirs(OUT, exist_ok=True)
-    path = os.path.join(OUT, "rated_gender_pairs_v2.json")
+    path = os.path.join(OUT, "rated_gender_pairs_v2%s.json" % sfx)
     from task import SexualSlotEN, SCALES_SEX, render
     t = SexualSlotEN()
     errs = {}

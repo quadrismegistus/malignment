@@ -148,6 +148,81 @@ magnitudes -- and `procedural` is non-significant under both, which is what the
 section below rests on. But **a marginal cell can change status with the
 instrument version alone**, and neither of these two should be quoted without it.
 
+### THE POV ASYMMETRY IS A PROPERTY OF THE RAW EDGE (2026-09-06)
+
+`run_slotpov.py --edge {framed,self}` runs the same instrument on the two edges
+that carry the deployment frame (`movement.endpoint_edges`):
+
+    raw      base_raw    -> aligned_raw       50 pairs   alignment
+    framed   base_raw    -> aligned_framed    45         alignment AND the frame
+    self     aligned_raw -> aligned_framed    45         the frame ALONE
+
+Arm A, gap = rho(individual) - rho(institutional), as above:
+
+    scale            RAW (50)            FRAMED (45)        SELF (45)
+    agency         +0.097  4.5e-06     +0.007  0.57      -0.041  0.16
+    assertiveness  +0.120  8.8e-07     +0.035  0.069     -0.039  0.28
+    arousal        +0.084  2.7e-06     -0.014  0.80      -0.058  0.028
+    target         +0.107  3.5e-05     +0.047  0.025     -0.022  0.38
+    specificity    +0.084  6.0e-06     +0.050  0.0069    +0.039  0.091
+    deference      -0.100  2.7e-05     -0.018  0.44      +0.062  0.012
+    vocalisation   +0.043  0.018       -0.008  0.84      -0.088  8.1e-05
+    procedural     -0.032  0.15        +0.011  0.52      +0.045  0.069
+
+**Six of the eight raw-significant scales are not significant on the framed
+edge**, and the two that survive are about half their raw size. Nothing here
+contradicts the raw result; it says the asymmetry is a fact about the edge the
+study was run on.
+
+**THE SELF COLUMN IS NOT A REFUTATION AND ITS SIGNS ARE NOT REVERSALS.** It has
+a different baseline: raw asks what alignment does starting from the base model,
+`self` asks what the frame does starting from the aligned one. Two contrasts with
+different reference distributions can disagree in sign without either being
+wrong, and reading `deference` -0.100 -> +0.062 as an inversion would be reading
+across that change of baseline. What can be said is narrower: under the frame
+alone, the individual's slot is where deference rises faster, and the
+institution's is where vocalisation does.
+
+**Only `vocalisation` on `self` survives Bonferroni over the 11 scales**
+(0.05/11 = 0.0045). `specificity` framed at 0.0069 and `deference` self at 0.012
+do not. Three edges x 11 scales is 33 tests and this table is the whole family.
+
+WHAT IT IS NOT:
+
+- **Not degenerate variance.** 539 of 540 framed cells still carry both verdict
+  classes, so rho is not being computed over a constant vector.
+- **Not the `_best` topup merge.** `twp_words_v4_best` and `twp_words_v4` at
+  `frame=''` are identical in all 540 cells for these 12 prompts.
+- **Not a shrinking eligible set.** Arm A gates on the BASE side, which is raw on
+  all three edges.
+
+What DOES change is the verdict mix. The frame concentrates the distribution --
+median 129 words per cell raw, 81 framed, smaller in 530 of 540 cells -- and that
+lands almost entirely on the flat words:
+
+    edge      riser   faller    flat
+    raw       16.5%    33.8%   49.7%
+    framed    16.3%    50.0%   33.6%
+    self      19.6%    31.7%   48.6%
+
+Risers hold at about a sixth on every edge; the frame moves a third of the flat
+words into the faller class. A faller on the framed edge is therefore mostly a
+word the frame's concentration pushed down rather than one alignment selected
+against, which is the most plausible reason the scale correlations wash out. That
+is an interpretation of the mechanism, not a measurement of it -- it predicts
+that the collapse should track the per-cell concentration, and that has not been
+tested.
+
+**ARM B IS NOT COMPARABLE ACROSS EDGES.** It gates on words absent from base and
+present in aligned, so it gates on the concentrated distribution itself. Its
+populations are 596 / 698 / 618 words and are not the same object. Do not read
+an arm B change across edges as an effect of the frame.
+
+`slot_ratings/identity` was run on the same three edges the same day and behaves
+the OPPOSITE way: 64 of its 66 raw-significant room cells keep their sign on the
+framed edge and 54 stay significant. So the frame is not flattening every slot
+result -- see that folder's README.
+
 ### SLOT POV RE-RUN AT 50 LINEAGES (2026-09-06): EVERY SIGN HOLDS
 
 The `SLOT POV` column above is **12 lineages** because `run_slotpov.population()`
