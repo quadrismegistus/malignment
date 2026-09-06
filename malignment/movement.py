@@ -973,6 +973,78 @@ def clean_frame_pairs(rule_version=4, self_edges=False):
     return sorted(out)
 
 
+#: The three edges a contrast over the declared roster can take. Named here so
+#: the string is one vocabulary and not six, after `jaccard_lift.edge_where`
+#: grew a per-model copy of it.
+EDGES = ("raw", "framed", "self")
+
+
+def endpoint_edges(edge="raw", rule_version=4):
+    """[(base, aligned, system_mode_aligned)] for ONE of the three edges.
+
+        raw     base_raw    -> aligned_raw       50, every declared endpoint
+        framed  base_raw    -> aligned_framed    45, the clean-slot subset
+        self    aligned_raw -> aligned_framed    45, the frame with WEIGHTS FIXED
+
+    `system_mode_aligned` is None on `raw`, where the frame is absent and the
+    mode does not select anything.
+
+    ## THE TWO FRAMED EDGES ANSWER DIFFERENT QUESTIONS
+
+    `framed` moves the weights AND adds the frame, so it carries alignment and
+    deployment together. `self` holds one model fixed and adds only the frame,
+    which is why it can say what the frame does on its own. A study that reports
+    `framed` without `self` cannot separate them.
+
+    **The populations are 45 and 45 but they are not the same 45**: `framed` is
+    keyed on the BASE of an endpoint pair, `self` on the ALIGNED model. Both are
+    smaller than the 50 raw endpoints because `clean_frame_pairs` admits only
+    edges whose system slot was empty as measured -- see its docstring for the
+    rule and for the two wrong versions of it.
+
+    Self-edges are excluded from `endpoint_movement()` BY CONSTRUCTION, which is
+    why they need this accessor rather than a keyword there.
+    """
+    if edge not in EDGES:
+        raise ValueError("unknown edge %r; expected one of %s" % (edge, EDGES))
+    from . import roster
+    eps, unresolved = roster.endpoints()
+    if unresolved:
+        raise ValueError("%d lineages are unresolved: %s -- resolve before "
+                         "aggregating over 'the endpoints'"
+                         % (len(unresolved), sorted(unresolved)[:3]))
+    if edge == "raw":
+        return [(b, a, None) for b, a in sorted(eps.items())]
+    if edge == "framed":
+        return sorted((b, a, m) for b, a, m in clean_frame_pairs(rule_version)
+                      if eps.get(b) == a)
+    aligned = set(eps.values())
+    return sorted((b, a, m) for b, a, m
+                  in clean_frame_pairs(rule_version, self_edges="only")
+                  if b in aligned)
+
+
+def endpoint_edge_where(edge="raw", rule_version=4):
+    """SQL over `movement_v4` selecting exactly `endpoint_edges(edge)`.
+
+        w = endpoint_edge_where("framed")
+        ch.query("SELECT ... FROM {db}.movement_v4 WHERE %s AND cls='riser'" % w)
+
+    The framed predicate is a TRIPLE and not `frame_aligned='prefill'` alone:
+    `system_mode` records the argument passed, not the treatment received, so
+    the mode is part of what is being admitted.
+    """
+    from .ch import _lit
+    trip = endpoint_edges(edge, rule_version)
+    if edge == "raw":
+        return ("frame_base='' AND frame_aligned='' AND (base, aligned) IN (%s)"
+                % ",".join("(%s,%s)" % (_lit(b), _lit(a)) for b, a, _ in trip))
+    return ("frame_base='' AND frame_aligned='prefill' "
+            "AND (base, aligned, system_mode_aligned) IN (%s)"
+            % ",".join("(%s,%s,%s)" % (_lit(b), _lit(a), _lit(m))
+                       for b, a, m in trip))
+
+
 def source_view(ch, name, rule_version=4, frame="raw"):
     """Point a VIEW at one frame condition. -> the filename suffix for outputs.
 

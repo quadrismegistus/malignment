@@ -80,7 +80,7 @@ def pairs():
     return out
 
 
-def population(prompts, arm="A", min_pairs=3, pilot=False):
+def population(prompts, arm="A", min_pairs=3, pilot=False, edge="raw"):
     """Words and per-pair verdicts for each prompt.
 
     ## THE PANEL CAME FROM A PILOT CELL LIST AND NOW COMES FROM THE ROSTER
@@ -99,8 +99,41 @@ def population(prompts, arm="A", min_pairs=3, pilot=False):
     panel is `roster.endpoints()`.
 
     `pilot=True` reproduces the published 21-pair numbers.
+
+    ## THE THREE EDGES
+
+    `edge` selects which contrast the verdicts describe, via
+    `movement.endpoint_edges`:
+
+        raw     base_raw    -> aligned_raw       50 pairs
+        framed  base_raw    -> aligned_framed    45, alignment AND deployment
+        self    aligned_raw -> aligned_framed    45, the frame ALONE
+
+    **The base side is raw on all three**, so the gate reads a different table
+    per side and `store` is keyed by `(model, frame)` rather than by model: on a
+    self-edge one model is BOTH sides and a model-keyed store would silently
+    serve the raw distribution to both.
+
+    A framed side reads `twp_words_v4` at `frame='prefill'`, NOT the `_best`
+    view, which is raw-only. `_best` merges topup cells, so in general a framed
+    side could carry fewer words for reasons unrelated to the frame -- but for
+    THESE 12 prompts it does not: `_best` and `twp_words_v4` at `frame=''` are
+    identical in all 540 cells (2026-09-06), so the shrink IS the frame.
+
+        median words per cell    raw 129    framed 81    (530/540 smaller)
+
+    **That shrink lands on the two arms differently.** Arm A gates on the BASE
+    side, which is raw on all three edges, so its population is comparable
+    across them. Arm B gates on the ALIGNED side -- words absent from base and
+    present in aligned -- so it is gated on the concentrated distribution and
+    its population is NOT the same object across edges. Read an arm B change
+    across edges as confounded with vocabulary size unless that is checked.
+
+    `min_pairs` is applied to whichever population is asked for and the two
+    framed edges are 45, not 50: do not compare a count here against a raw count
+    without saying which edge produced it.
     """
-    from malignment import roster, vectors as V
+    from malignment import movement as Mv, roster, vectors as V
     from malignment.movement import movement, CANONICAL
     from malignment.pos import get_pos
     cells = [json.loads(l) for l in open(CELLS, encoding="utf-8")]
@@ -110,19 +143,22 @@ def population(prompts, arm="A", min_pairs=3, pilot=False):
 
     #: risers/fallers per (prompt, base, aligned), read once for every prompt
     mv = collections.defaultdict(lambda: (set(), set()))
+    #: the frame each SIDE is read at. Base is raw on every edge.
+    fa = '' if edge == "raw" else 'prefill'
     if not pilot:
-        eps = roster.endpoints()[0]
+        edges = [(b, a) for b, a, _ in Mv.endpoint_edges(edge)]
+        #: the roster restriction and the clean-slot rule both live in the
+        #: predicate, so no python-side `eps.get(base) != aligned` filter here.
         #: `V.rows` not `ch.query`: it binds parameters, and a prompt here can
         #: carry an apostrophe. See `vectors.rows`'s own warning about TSV
         #: escaping and hand-built literals.
         for r in V.rows(
                 "SELECT prompt, base, aligned, cls, groupArray(word) ws "
                 "FROM movement_v4 WHERE prompt IN {ps:Array(String)} "
-                "AND frame_base='' AND frame_aligned='' AND rule='canonical' "
-                "AND cls IN ('riser','faller') GROUP BY prompt, base, aligned, cls",
+                "AND rule='canonical' AND cls IN ('riser','faller') AND %s "
+                "GROUP BY prompt, base, aligned, cls"
+                % Mv.endpoint_edge_where(edge),
                 ps=list(prompts)):
-            if eps.get(r["base"]) != r["aligned"]:
-                continue
             k = (r["prompt"], r["base"], r["aligned"])
             rs, fs = mv[k]
             (rs if r["cls"] == "riser" else fs).update(r["ws"])
@@ -135,19 +171,30 @@ def population(prompts, arm="A", min_pairs=3, pilot=False):
             if not mine:
                 out[p] = dict(words=[], verdicts={}); continue
         else:
-            mine = [dict(base=b, endpoint=e) for b, e in sorted(eps.items())
+            mine = [dict(base=b, endpoint=e) for b, e in edges
                     if (p, b, e) in mv]
             if not mine:
                 out[p] = dict(words=[], verdicts={}); continue
-        ms = sorted({c["base"] for c in mine} | {c["endpoint"] for c in mine})
-        rows = V.rows("SELECT model, groupArray(word) AS ws, groupArray(p) AS ps "
-                      "FROM twp_words_v4_best WHERE prompt={p:String} "
-                      "AND model IN {ms:Array(String)} GROUP BY model", p=p, ms=ms)
-        store = {r["model"]: dict(zip(r["ws"], r["ps"])) for r in rows}
+        store = {}
+        for side, fr in (("base", ''), ("endpoint", fa)):
+            ms = sorted({c[side] for c in mine})
+            if fr == '':
+                rows = V.rows(
+                    "SELECT model, groupArray(word) AS ws, groupArray(p) AS ps "
+                    "FROM twp_words_v4_best WHERE prompt={p:String} "
+                    "AND model IN {ms:Array(String)} GROUP BY model", p=p, ms=ms)
+            else:
+                rows = V.rows(
+                    "SELECT model, groupArray(word) AS ws, groupArray(p) AS ps "
+                    "FROM twp_words_v4 WHERE prompt={p:String} "
+                    "AND model IN {ms:Array(String)} AND frame={fr:String} "
+                    "GROUP BY model", p=p, ms=ms, fr=fr)
+            for r in rows:
+                store[(r["model"], fr)] = dict(zip(r["ws"], r["ps"]))
         vd = {}
         n = collections.Counter()
         for c in mine:
-            pb, pa = store.get(c["base"]), store.get(c["endpoint"])
+            pb, pa = store.get((c["base"], '')), store.get((c["endpoint"], fa))
             if not pb or not pa:
                 continue
             if pilot:
@@ -193,7 +240,16 @@ def main(argv=None):
     ap.add_argument("--pilot", action="store_true",
                     help="use the pilot3 cell list (reproduces the published "
                          "21-pair numbers) instead of roster.endpoints()")
+    #: THE EDGE IS IN THE FILENAME. `movers.jsonl` was overwritten by a run on a
+    #: different panel on 2026-09-06 because the output path did not name it,
+    #: and a rated file whose edge is not in its name is indistinguishable from
+    #: the raw one it sits beside.
+    ap.add_argument("--edge", default="raw", choices=("raw", "framed", "self"),
+                    help="raw: base->aligned unframed (50 pairs). "
+                         "framed: base_raw->aligned_framed (45). "
+                         "self: aligned_raw->aligned_framed, the frame alone (45)")
     a = ap.parse_args(argv)
+    sfx = "" if a.edge == "raw" else "_" + a.edge
     import os as _os
     _V3 = _os.environ.get("INST_V3")
     if _V3:
@@ -206,11 +262,11 @@ def main(argv=None):
     print("institutional perspective pairs: %d" % len(ps))
     allp = [i["prompt"] for _, v in ps for i in v]
     for arm in ("A", "B"):
-        pop = population(allp, arm=arm, pilot=a.pilot)
+        pop = population(allp, arm=arm, pilot=a.pilot, edge=a.edge)
         jobs = [(p, w) for p in allp for w in pop[p]["words"]]
         pairs_seen = len({k for p in allp for k in pop[p]["verdicts"]})
-        print("\narm %s: %d words over %d prompts, %d endpoint pairs%s"
-              % (arm, len(jobs), len(allp), pairs_seen,
+        print("\narm %s: %d words over %d prompts, %d %s edges%s"
+              % (arm, len(jobs), len(allp), pairs_seen, a.edge,
                  "   [PILOT]" if a.pilot else ""))
         if a.dry or not jobs:
             continue
@@ -227,7 +283,8 @@ def main(argv=None):
         os.makedirs(RESULTS, exist_ok=True)
         json.dump({"arm": arm, "pairs": [(ms, [dict(i, ratings=rat.get(i["prompt"], {}))
                                                for i in v]) for ms, v in ps]},
-                  open(os.path.join(RESULTS, "rated_%s_arm%s.json" % (task.name, arm)), "w"), indent=1)
+                  open(os.path.join(RESULTS, "rated_%s_arm%s%s.json"
+                                    % (task.name, arm, sfx)), "w"), indent=1)
         per = collections.defaultdict(lambda: collections.defaultdict(list))
         for ms, v in ps:
             for i in v:
