@@ -49,11 +49,20 @@ edges: |
   destroy it. The POV study instead asks whether a gap between two prompt
   positions survives, and the frame moves those two positions.
 
-  WHAT THE FRAME DOES TO THE DATA: it concentrates the distribution (median 129
-  words per cell raw, 81 framed) and that lands on the FLAT words -- risers hold
-  near a sixth on every edge while fallers go 34% -> 50%. Measured, not assumed:
-  twp_words_v4_best and twp_words_v4 at frame='' are identical in all 540 POV
-  cells, so this is the frame and not the topup merge.
+  WHAT THE FRAME DOES TO THE DATA: it concentrates the distribution and that
+  lands on the FLAT words -- risers hold near a sixth on every edge while fallers
+  go 34% -> 50%.
+
+  THE FRAMED CELLS WERE NEVER TOPPED UP (frame='prefill' is pass-1 only) and the
+  raw ones are, so a raw-vs-framed WORD COUNT is not like for like. Pass-1 on
+  both sides the median is 108 -> 87, not the 129 -> 81 first written here.
+
+  It does not reach the verdicts, and the check that shows so is not a word
+  count: CLASSIFICATION IS INVARIANT TO TOPUP. The faller test is the ratio
+  Q < 0.5*P, satisfied by a sub-theta Q whether stored small or absent (0 of
+  7,550 raw fallers would flip), and a topped-up P is sub-theta by construction
+  so it cannot make a riser eligible. Topup REMOVES false risers -- 2,604 words
+  clear delta only if their base probability is taken as 0.
 
   A GATE ON THE ALIGNED SIDE IS NOT COMPARABLE ACROSS EDGES. run_slotpov arm A
   gates on the base side (raw on all three) and is; arm B gates on the aligned

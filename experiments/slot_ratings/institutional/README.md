@@ -191,14 +191,35 @@ WHAT IT IS NOT:
 
 - **Not degenerate variance.** 539 of 540 framed cells still carry both verdict
   classes, so rho is not being computed over a constant vector.
-- **Not the `_best` topup merge.** `twp_words_v4_best` and `twp_words_v4` at
-  `frame=''` are identical in all 540 cells for these 12 prompts.
+- **Not topup, but the first version of this bullet did not show that.** It said
+  `twp_words_v4_best` and `twp_words_v4` at `frame=''` are identical in all 540
+  cells. That comparison is real and it CANNOT DETECT TOPUP: `topup` is a column
+  in `twp_words_v4`, so both sides of it already contain the topup rows. These
+  prompts are in fact heavily topped up -- 313,578 topup rows against 203,136
+  pass-1, 92,001 topped-up words over 3,435 cells -- and the framed cells have
+  NONE, `frame='prefill'` being pass-1 only.
+
+  **What actually rules it out is that CLASSIFICATION IS INVARIANT TO TOPUP.**
+  The faller test is a ratio, `Q < 0.5*P`, and a sub-theta `Q` satisfies it
+  whether it is recorded as a small number or as absent: of the 7,550 raw fallers
+  whose `p_aligned` is sub-theta, **7,550 already satisfy `Q < 0.5*P` and 0 would
+  flip**. Topup cannot create a riser either, since a topped-up `P` is sub-theta
+  by construction and eligibility is `max(P,Q) > min_prob`. What it does do is
+  remove false risers -- 2,604 words here clear delta only if their base
+  probability is taken as 0 rather than as the value topup measured.
+
+  So the `p_aligned=0` share (raw 0.0%, framed 45.6%) is a STORAGE difference,
+  not a classification one: topup equalises the word set within a lineage, so a
+  raw faller always has a measured aligned value and a framed one does not.
 - **Not a shrinking eligible set.** Arm A gates on the BASE side, which is raw on
   all three edges.
 
-What DOES change is the verdict mix. The frame concentrates the distribution --
-median 129 words per cell raw, 81 framed, smaller in 530 of 540 cells -- and that
-lands almost entirely on the flat words:
+What DOES change is the verdict mix. The frame concentrates the distribution and
+that lands almost entirely on the flat words. **The size of the concentration was
+overstated when this section was written**: "median 129 words per cell raw, 81
+framed" put a topped-up raw side against a framed side that was never topped up.
+Like for like, pass-1 only on both, it is **108 -> 87**. The direction holds and
+roughly half the apparent magnitude was the topup asymmetry.
 
     edge      riser   faller    flat
     raw       16.5%    33.8%   49.7%

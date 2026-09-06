@@ -115,12 +115,20 @@ def population(prompts, arm="A", min_pairs=3, pilot=False, edge="raw"):
     serve the raw distribution to both.
 
     A framed side reads `twp_words_v4` at `frame='prefill'`, NOT the `_best`
-    view, which is raw-only. `_best` merges topup cells, so in general a framed
-    side could carry fewer words for reasons unrelated to the frame -- but for
-    THESE 12 prompts it does not: `_best` and `twp_words_v4` at `frame=''` are
-    identical in all 540 cells (2026-09-06), so the shrink IS the frame.
+    view, which is raw-only.
 
-        median words per cell    raw 129    framed 81    (530/540 smaller)
+    **THE FRAMED CELLS WERE NEVER TOPPED UP** -- `frame='prefill'` is pass-1
+    only -- while the raw side is heavily topped up, so a raw-vs-framed word
+    COUNT is not like for like. Pass-1 on both sides:
+
+        median words per cell    raw 108    framed 87
+
+    This does not reach the verdicts. Classification is invariant to topup: the
+    faller test is the ratio `Q < 0.5*P`, which a sub-theta `Q` satisfies whether
+    stored as a small number or as absent (0 of 7,550 would flip), and a
+    topped-up `P` is sub-theta by construction so it cannot make a riser
+    eligible. See the README section "THE POV ASYMMETRY IS A PROPERTY OF THE RAW
+    EDGE".
 
     **That shrink lands on the two arms differently.** Arm A gates on the BASE
     side, which is raw on all three edges, so its population is comparable
