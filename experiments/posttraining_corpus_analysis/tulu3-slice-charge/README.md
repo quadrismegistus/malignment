@@ -1,0 +1,135 @@
+---
+kind: question
+id: tulu3-slice-charge
+question: What kind of prompt does each Tulu-3 SFT source carry, and what is the model trained to do with it?
+status: "PILOT RUN 2026-09-06, 3,800 rows, 200 per source x 19 sources. The assistant side is CONSTANT (99.05% NONE) so the user side is primary -- settled by measurement, not by argument. Full run not yet designed."
+headline: "SEXUAL is the least-refused charged kind and the most partially-complied-with, and this holds WITHIN a single source as well as across the corpus. WildChat is the sexually densest source at 10.0%; every maths and persona source is 0.0%. The density half of data_ablations' prediction survives its first check."
+grain: corpus
+---
+
+# tulu3-slice-charge
+
+**What this is.** `division_of_labour/data_ablations/how_it_differs.py` left a
+corpus prediction: the sexual share of what a model sheds tracks THE SEXUAL
+DENSITY OF THE MIX THAT REMAINS. Removing WildChat raises the share (+0.024),
+removing maths and persona lower it (-0.092 p=0.003, -0.086 p=0.001), removing
+safety does nothing. Its own note said `posttraining_corpus_analysis` is where
+that goes. This is that.
+
+**The question widened in the asking** (RH, 2026-09-06). Not density alone:
+**how often does each source teach the model to behave well for a given KIND of
+prompt** -- the kind composition of the user turns, and the assistant's move
+conditional on that kind. A source can be charged and complied with, or charged
+and refused, and those are different corpora.
+
+    task.py    the rater. Why not sexual/task.py and not fields.py, in its
+               docstring. KIND is IMPORTED from task_charge, not copied.
+    pilot.py   200 rows per source x 19 sources, seed 20260906
+
+## THE PILOT'S DECISIVE QUESTION, ANSWERED: THE ASSISTANT SIDE IS CONSTANT
+
+    assistant_kind    NONE 3764, SEXUAL 13, VIOLENT 12, OTHER 6, DEGRADING 4,
+                      ILLICIT 1
+    NOT-NONE          36 of 3800 = 0.95%
+    assistant_charge  1 in 3,764 of 3,800
+
+**So `assistant_kind` cannot carry an ordinal test and the user side is
+primary.** This was an open design question -- SFT computes loss on the
+assistant turn, which is a real argument for making it primary -- and it is
+settled by measurement rather than by the argument. The 14-row smoke test
+suggested it; the pilot establishes it.
+
+## USER KIND COMPOSITION: THE DYNAMIC RANGE IS ENORMOUS
+
+Charged share of user turns, pilot n=200 per source:
+
+    wildguardmixtrain_50k        59.0%      wildchat_100k          21.0%
+    wildjailbreak_50k            46.0%      coconot_converted      18.0%
+    aya_100k                      1.5%      no_robots               2.0%
+    ALL FIVE personahub sources   0.0%      all four maths sources <=0.5%
+    codealpaca, sciriff, table_gpt, flan_v2, hard_coded  <=0.5%
+
+**And the density prediction survives its first check.** SEXUAL specifically:
+
+    wildchat_100k                10.0%     <- the densest source in the mixture
+    wildguardmixtrain_50k         7.0%
+    wildjailbreak_50k             2.0%
+    coconot_converted             0.5%
+    every maths source            0.0%
+    every persona source          0.0%
+
+WildChat densest, maths and persona at zero, safety intermediate. That is the
+order `data_ablations` predicted from the MODEL side, recovered from the corpus
+with no models involved.
+
+## WHAT IS TRAINED, GIVEN THE KIND OF PROMPT
+
+Assistant move conditional on user kind, pooled over sources:
+
+    user_kind        n   COMPLY  PARTIAL   REFUSE  CORRECT
+    SEXUAL          43    32.6%    18.6%    46.5%     2.3%
+    VIOLENT         27    25.9%     7.4%    66.7%     0.0%
+    DEGRADING       58     3.4%     1.7%    93.1%     1.7%
+    COERCIVE        16    12.5%     0.0%    87.5%     0.0%
+    ILLICIT         74     2.7%     2.7%    93.2%     1.4%
+    OTHER           81    12.3%     3.7%    76.5%     7.4%
+    NONE          3501    86.5%     2.6%     2.5%     8.3%
+
+**SEXUAL is the least-refused charged kind by a wide margin, and the most
+partially-complied-with.**
+
+### AND IT IS NOT A COMPOSITION ARTIFACT -- CHECKED BEFORE IT WAS REPORTED
+
+The pooled table mixes sources, and the sexual rows are concentrated in the
+source that refuses least: 20 of 43 are WildChat, which refuses 25% and complies
+50%. So the pooled figure had to be checked within a source before it meant
+anything. `wildguardmixtrain`, one source, composition held constant:
+
+    SEXUAL      14    64% refuse    14% comply    21% partial
+    VIOLENT     17    88%            6%            6%
+    DEGRADING   18    94%            0%            0%
+    COERCIVE    10    90%           10%            0%
+    ILLICIT     35    91%            0%            6%
+    OTHER       24    88%            0%            4%
+
+**SEXUAL sits at 64% where every other charged kind sits at 88-94%, inside one
+source.** The direction is the pooled one and composition amplifies rather than
+creates it.
+
+**n=14. THIS IS A PILOT AND THAT CELL IS NINE REFUSALS OF FOURTEEN.** The
+within-source contrast is indicative and is not significant on its own; what it
+does is tell the full run what to be powered for. Do not quote 64% against 88%
+as a result.
+
+## WHAT THE FULL RUN STILL NEEDS
+
+- **Power for the kind x move contrast within source**, which is the finding
+  above and the thing the pilot cannot settle. The charged cells are what is
+  scarce -- 200 rows of a maths source buys nothing, 200 of wildguardmix buys
+  118 charged rows.
+- **The echo control.** `task.render_assistant_only` exists and has NOT been
+  run. On a declared subsample, rate the assistant turn with the request
+  withheld. If it agrees with the in-context rating everywhere, the assistant
+  column is echoing the prompt. It matters less now that the assistant column
+  is known to be constant, but the constancy itself is what the control would
+  verify is real rather than an artifact of showing the rater the request.
+- **Source -> slice, pinned against the paper.** SAFETY is pinned by arithmetic:
+  coconot 10,983 + wildjailbreak 50,000 + wildguardmix 50,000 = 110,983 = 11.8%,
+  the registration's figure exactly. **MATHS AND PERSONA ARE NOT PINNED AND
+  THEY OVERLAP** -- five personahub sources total 284,919 rows and three are
+  maths, including `personahub_math_v5_regen_149960` at 16%, the largest source
+  in the mixture and plausibly inside BOTH ablations. If it is, `no-math`
+  (-0.092) and `no-persona` (-0.086) removed largely the same rows, which
+  accounts for their near-identical model-side effects better than two
+  independent slices agreeing does.
+
+## LIMITS ALREADY STANDING
+
+- **The units are not the model side's units.** There, `kind` is a property of a
+  WORD IN A SCENE; here it is a property of a MESSAGE. The test is ORDINAL over
+  sources, not a matching of values.
+- **First turn only.** A multi-turn row is rated on its opening exchange.
+- **4,000 characters per side.** A long benign preamble to a transgressive
+  request would be mis-rated and that rate is not measured.
+- **A pilot is not a result.** Every rate here has an interval nobody has
+  computed.
