@@ -6,7 +6,7 @@ grain: undecided (rung x site, prompts as the replicate within one lineage)
 ---
 # tuning_order
 
-**id:** emergence/tuning_order **status:** OPEN. Commissioned by the laptop TM drafting session, 2026-09-06. **No producer, no registration frozen.** This file records the commission, what verifying its data found, and the three decisions that have to be made before anything runs.
+**id:** emergence/tuning_order **status:** OPEN. Commissioned by the laptop TM drafting session, 2026-09-06. **No producer, no registration frozen.** This file records the commission, what verifying its data found, and the design as settled with RH on 2026-09-06. **One decision remains open: the onset criterion.**
 
 # THE QUESTION
 
@@ -88,7 +88,7 @@ The reflex is: v4 differs from v3 only on byte-level CJK, this is an English pan
 
 - **Prompts are the replicate within one lineage**, so nothing here is about "SFT in general".
 - **The dN convention and the leak rulings apply** — report levels, or both conventions.
-- **The neutral control is not optional.** F04 had none.
+- **A control is not optional** (F04 had none) — but it is a **LOW-LIFT STRATUM, not a `neutral` label**. RH, 2026-09-06: lift/dose is the axis. The categorical label gives 8 prompts; lift gives 70 at ≤0 and 191 at dose 1–2, and the low-lift set spans dose 1.00–7.00, so the label is wrong in both directions.
 - **"said rises" is tested as a domain funnel** (existence's Q enrichment), not as one word.
 
 # WHAT IS IN HERE
