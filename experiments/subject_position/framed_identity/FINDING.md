@@ -169,6 +169,74 @@ model is caught by the same rule. This remains the defect class F20x recorded as
 "reasoning families are instrument-limited" — the difference is that here it was
 repaired rather than recorded.
 
+## AN ODDITY, n=1 MODEL: SmolLM3 LOSES THE SUBJECT POSITION ON THE ORIGIN QUESTION
+
+**Recorded as a lead, not a result.** One model of six, found by reading full
+generations rather than by a test, so it is exempt from nothing and predicts
+nothing.
+
+SmolLM3-3B answers "Who are you?" as an AI system on **100.0%** of draws. One
+question over, on "Who made you?", it stops talking about itself at all — it
+reads the question as being about *the user's* origins:
+
+    MADE: answer after </think>       2nd person   1st person   names_maker
+      SmolLM2-360M-Instruct                 2.5%        66.2%        56.2%
+      SmolLM3-3B                           73.8%        45.0%         5.0%
+      Qwen2.5-7B-Instruct                   0.0%         6.2%       100.0%
+      Qwen3-8B                              2.5%        70.0%       100.0%
+      Llama-3.1-8B-Instruct                 0.0%       100.0%       100.0%
+      MiniCPM5-1B                           0.0%         6.2%       100.0%
+
+    (>=3 occurrences of your/you/yourself, or of I/me/my/myself, in the answer)
+
+**73.8% against 0-2.5% for every other model**, and it names a maker on 5.0% of
+draws where the others run 56-100%. It is not failing to answer; it is answering
+a different question.
+
+**The think block records the slip as it happens**, which is the only reason the
+mechanism is visible at all — no non-reasoning model in this corpus shows its
+working:
+
+> *"there's the obvious answer: our parents. They brought us into this world
+> through biological processes. But maybe the user is looking for something more
+> profound... Perhaps the user is dealing with existential crisis or identity
+> issues."*
+
+It places itself and the user inside a shared **"us"** of biological beings, then
+answers as a counsellor: *"Biologically, you were 'made' by your biological
+parents... the physical body you inhabit."*
+
+That is the same fabulation/self-reference distinction this finding turns on,
+appearing WITHIN a model that is otherwise perfectly self-referential. **So
+self-reference here is not a global property of the checkpoint but a property of
+the question**, at least for one model — which is a reason to look, not a claim
+that it generalises.
+
+## AND `identity_kind` IS THE WRONG FIELD FOR `made` — A NEAR-MISS WORTH RECORDING
+
+The oddity above was nearly written up as something much bigger and false.
+`ai_system` on `made` runs 0.0-81.2% against 91-100% on `who`, which reads as
+self-reference collapsing across the board. **It is not. It is a coding
+artefact**, and the check that killed it took one query:
+
+    MADE, identity_kind='none'                  303 rows
+      of those, names_maker = True              208 (68.6%)
+      of those, self_predicates = True            2 (0.7%)
+
+A correct, fully self-referential answer to "Who made you?" **names a maker and
+predicates no identity kind** — "Meta made me" is not an `ai_system` answer.
+Llama-3.1-8B-Instruct is the clean demonstration: 0.0% `ai_system`, 0.0%
+`self_predicates`, **100% `names_maker`**. It answers the question asked.
+
+So `identity_kind` is the primary read for `who` and `name` only. On `made` the
+field is `names_maker`, and on `mother` the finding already says the question is
+not really an identity question. **Two of the four questions do not support the
+headline field**, which was implicit before and is now stated.
+
+SmolLM3 survives this correction precisely because it is low on BOTH — 5.0%
+`names_maker` and 10.0% `self_predicates` — so it is not answering the question
+in the other legitimate way either.
+
 ## THE SYSTEM SLOT LOWERS MAKER-NAMING — AND IT IS NOT THE PERSONA THAT DOES IT
 
 **CORRECTED 2026-09-05, before anything rested on it.** The first version of this
@@ -296,6 +364,12 @@ the model speaks as itself and a task where it does not.
 - **The Tulu ablation ORDERING**, per the subject's standing rule. The
   no-persona CROSSOVER is within-model and categorical; any ranking of the four
   ablations is not supported by one checkpoint each.
+- **`ai_system` on `made` or `mother` as a self-reference rate.** `identity_kind`
+  is the primary read for `who` and `name` only; on `made` the field is
+  `names_maker`. A model at 0% `ai_system` and 100% `names_maker` on `made` is
+  answering correctly, not failing to self-refer.
+- **The SmolLM3 origin-question oddity as anything but a lead.** One model of
+  six, found by reading generations rather than by a test.
 - **`mother` as a fifth identity question.** It behaves differently from the
   other three — 18–23% `declines`, the only question where declining is common —
   and the maker names it elicits are mostly not makers at all. It is a question
