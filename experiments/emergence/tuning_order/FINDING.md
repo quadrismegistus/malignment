@@ -74,6 +74,57 @@ version of this file wrote "rho=0.038" in a position where it read as a p-value.
 So charge does not modulate the ordering at either grain: not the prompt's
 overall lift, not the faller word's own increment.
 
+## WHY CHARGE DOES NOT MODULATE: THE FALLERS ARE NOT MORE CHARGED THAN THE RISERS
+
+RH, 2026-09-06: *"can we look at examples of NONE and SEXUAL falling and rising
+at the same times to make sense of the transgressiveness null."* The examples
+explain it, and the explanation undercuts the framing rather than qualifying it.
+
+**Matched on timing, a charged and an uncharged faller are the same event:**
+
+    SEXUAL  fuck   "He was beautiful and ugly and she wanted to"   0.0114 -> 0 @2000
+    NONE    plead  "She was guilty and she began to"               0.0149 -> 0 @2000
+
+`plead` is not transgressive. It is MARKED — low-frequency, literary — and it
+collapses exactly as `fuck` does, with both prompts' risers being generic
+cognitive verbs (`think`/`realize`/`explain`, `see`/`understand`). The operation
+looks like marked vocabulary out, generic vocabulary in, with transgression one
+case of markedness rather than a category of its own.
+
+**And on explicitly sexual prompts the movement is often WITHIN the sexual
+field, not out of it:**
+
+    "She knelt down in front of him and began to suck his"
+      F manhood  0.0121 -> 0.0057        the euphemism FALLS
+      R shaft    0.0141 -> 0.0211        the anatomical word RISES
+      R erect    0.0064 -> 0.0211
+
+    "She slowly took off her"
+      F top      0.0246 -> 0.0013
+      R scarf / socks / silk             other garments
+
+That is register shift, not repression — and in the first case toward the
+blunter word.
+
+**Measured over the whole panel, the assumption the question rests on is false:**
+
+    per prompt, mean lift of fallers against risers    n=412
+      faller median +0.000    riser median +0.000    DIFFERENCE +0.000
+
+    prompts WITH a sexual faller                      n=38
+      faller +1.000  riser +0.354  DIFF +0.360  27/11  p=0.014
+      and 25 of the 38 (66%) ALSO HAVE A SEXUAL RISER
+
+**Fallers are not, in general, more charged than risers.** So Q2 and Q3 were not
+underpowered: they asked whether a property that does not differ between the two
+classes predicts the gap between them. A null was the only available answer.
+
+This bounds what the whole question can claim. **"Displacement" presumes a charged
+word leaving and a less charged one arriving.** On this panel that holds only on
+the sexual subset, weakly (+0.36 of a 1-7 scale), and even there two-thirds of
+prompts have a sexual riser. The timing result is real and large; calling it
+displacement is a separate claim that this panel does not support.
+
 ## DISCOVERED: THE FALLER IS AMPLIFIED BEFORE IT IS REPRESSED
 
     149 of 505 fallers (29.5%) move UP at step 1000 before falling.
@@ -172,3 +223,4 @@ specific displacement pairs mostly do not.
 - **A charge modulation at either grain.** Word level rho=+0.0384 (p=0.090); prompt level rho=+0.0001 (p=0.998), terciles differing by 15 steps on 5,341. State the bound as a fraction, not as a p.
 - **F04's exhibits.** `fuck -> kiss` is refuted, `kill -> scream` holds only on the anger prompts, `kill -> said` is untestable here. Only the GENERAL claim replicates.
 - **The Q1 AUC numbers for anything.** Kept above as a record of what the selection cost.
+- **The timing result as DISPLACEMENT.** Fallers and risers have the same median charge (+0.000 both). The two-phase timing is established; that mass moves from charged to uncharged words is NOT, except weakly on the sexual subset where 66% of prompts have a sexual riser anyway.
