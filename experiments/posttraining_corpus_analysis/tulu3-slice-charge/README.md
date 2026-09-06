@@ -2,7 +2,7 @@
 kind: question
 id: tulu3-slice-charge
 question: What kind of prompt does each Tulu-3 SFT source carry, and what is the model trained to do with it?
-status: "PILOT RUN TWICE, 2026-09-06. v1 (3,800 rows) was re-run as v2 after reading its rows found a fiction confound. The assistant side is CONSTANT (99.2% NONE) so the user side is primary -- settled by measurement. Full run not yet designed."
+status: "FULL RUN 2026-09-06: 21,240 exchanges, three strata, 0 errors, v3 instrument. The fiction exemption is the finding (1.4% vs 86.9% refusal, n=771/3473). Controlling for it, SEXUAL is indistinguishable from VIOLENT, COERCIVE and OTHER -- the earlier 'sexual is least-refused' claim was composition end to end."
 headline: "The Tulu-3 wildjailbreak slice is 100% VANILLA -- AI2 built 161,430 adversarial jailbreaks and shipped none of them, so the safety data teaches refusal of the UNDISGUISED request while the fiction-wrapped charged requests come from WildChat and are complied with. FICTION IS A NEAR-TOTAL EXEMPTION: 0 refusals across 29 charged fiction requests, against 85.3% refusal on 265 charged non-fiction ones. Sexual requests are 36.6% fiction where illicit ones are 1.2%, and that composition -- not leniency about sex -- is most of why SEXUAL looked like the least-refused kind. WildChat is the sexually densest source at 10.0%; every maths and persona source is 0.0%."
 grain: corpus
 ---
@@ -259,6 +259,79 @@ measures concealment in the REQUEST, which is rare in this mixture -- the
 adversarial rows are not in it (see the section above). `assistant_reading` is
 the weakest of the three: with gap ~0 on most rows, NA is the correct answer,
 so it only does work in the thin slice where a gap exists.
+
+## THE FULL RUN (2026-09-06): 21,240 EXCHANGES, THREE STRATA, 0 ERRORS
+
+`run.py`. A 500 x 19 representative stratum, +6,000 WildChat, +2,000 from each
+of the three safety sources. **Composition below is STRATUM A ONLY**; the
+conditional tables use all strata, which enrichment permits.
+
+### COMPOSITION HOLDS AT 500/SOURCE
+
+    source                          charged    SEXUAL
+    wildguardmixtrain                 62.4%      7.0%
+    wildjailbreak                     44.8%      2.4%
+    wildchat                          17.4%      9.4%   <- densest, as predicted
+    coconot                           17.0%      1.0%
+    every other source                <=2.2%      0.0%
+
+**WildChat is the sexually densest source and every maths, code and persona
+source is 0.0%.** That is `data_ablations`' prediction, made from the model
+side, holding at 500 rows per source.
+
+### THE FICTION EXEMPTION, AT n=771 INSTEAD OF n=29
+
+    charged prompts        n     COMPLY  PARTIAL   REFUSE
+    fiction              771      87.0%    11.5%     1.4%
+    non-fiction         3473       6.2%     5.8%    86.9%
+
+**1.4% against 86.9%.** The pilot's 0-of-29 was not a small-sample accident.
+
+### AND CONTROLLING FOR IT, THE KIND EFFECT LARGELY DISAPPEARS
+
+    NON-FICTION ONLY     n    COMPLY  PARTIAL   REFUSE
+    DEGRADING          675      2.2%     0.6%    95.1%
+    ILLICIT            988      5.2%     4.7%    89.9%
+    COERCIVE           232      5.6%    10.3%    83.2%
+    SEXUAL             415      7.2%     9.6%    82.9%
+    VIOLENT            269     13.4%     3.7%    81.8%
+    OTHER              894      7.7%     8.8%    81.7%
+
+**SEXUAL at 82.9% is indistinguishable from VIOLENT (81.8%), COERCIVE (83.2%)
+and OTHER (81.7%).** Only DEGRADING and ILLICIT stand above the pack. So the v1
+headline -- "sexual is the least-refused charged kind", pooled at 46.1% -- was
+composition end to end, and the residual kind effect the v2 section called
+"~20 points, not established" is now measured at n=415 and is about 7 points
+against the middle of the field.
+
+**The corpus is lenient about FICTION. It is not lenient about sex.**
+
+### THE TWO DIMENSIONS STAY SEPARATE AT SCALE
+
+    EMPTIED RESPONSE    charged + COMPLY: 885, assistant NONE in 252 (28%)
+    CONCEALED REQUEST   implied > literal: 642 of 21,240 (3.02%)
+    BOTH                51
+
+252 and 642, overlapping in 51. The pilot's 3-of-19 was not noise: an emptied
+response and a disguised request are different objects. **The emptied share
+also fell from 49% to 28% at scale**, which is what a pilot cell of 19 is worth.
+
+### AND THE CONCEALMENT MEASURE CROSS-VALIDATES THE VANILLA FINDING
+
+`implied > literal` rate, stratum A, by source:
+
+    wildguardmixtrain      81 / 500   16.2%
+    wildchat               18 / 500    3.6%
+    coconot                 1 / 500    0.2%
+    wildjailbreak           0 / 500    0.0%
+
+**Zero in wildjailbreak.** That slice was shown to be 100% `vanilla` by joining
+its 50,000 prompts back to `train.tsv` on text -- a completely different method
+-- and the rater, blind to that, finds no concealed requests in it. Two
+independent routes to the same fact.
+
+The concealment that IS in this mixture is `wildguardmixtrain`'s, at 16.2%, and
+that is the source the one clear in-corpus example came from.
 
 ## WHAT THE FULL RUN STILL NEEDS
 
