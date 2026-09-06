@@ -149,6 +149,80 @@ the sexual subset, weakly (+0.36 of a 1-7 scale), and even there two-thirds of
 prompts have a sexual riser. The timing result is real and large; calling it
 displacement is a separate claim that this panel does not support.
 
+## THE AXIS: WHICH FALLERS LEAVE FIRST — AND WHY THE EARLIER NULLS WERE INSTRUMENT-BOUND
+
+RH, 2026-09-06: *"specific bodily vocabulary falling to abstract proceduralised
+psychologised vocabulary is what we've discovered of alignment generally across
+lineages — so here we're rediscovering it within SFT checkpoint time."*
+
+**This is a different quantity from Q2/Q3 and does not overturn them.** Those
+asked whether charge predicts the LAG BETWEEN fallers and risers. This asks, among
+FALLERS, which leave first — a graded ordering within one class. Producer
+`axis.py`; negative rho means the higher the scale, the EARLIER the word leaves.
+
+    TYPE-LEVEL (fields.norms)          v6 CONTEXTUAL              INSTITUTIONAL v3
+    k_charge            -0.122 *       v6_fit          -0.102 *   assertiveness -0.081 *
+    warriner_valence    +0.108 *       v6_makes_worse  -0.081 *   arousal       -0.079 *
+    warriner_arousal    -0.093 *       v6_directedness -0.074 *   target        -0.073 *
+    k_transgressiveness -0.078 *       v6_vocalisation -0.053 *   specificity   -0.070 *
+    brysbaert_concrete  -0.062 *       v6_aggression   -0.053 *   agency        -0.055 *
+    k_bodily_harm       -0.054 *       v6_mundanity    +0.051 *   vocalisation  -0.051 *
+    k_vulgarity         -0.033 *       v6_harm         -0.034 *
+      n = 4,462-8,478                    n = 5,003                  n = 3,847
+
+**Charged, aggressive, concrete, harmful, apt, specific words leave EARLY.
+Mundane, abstract, positive words leave LATE.** Read across the three, never
+down one: no single |rho| exceeds 0.16, and the evidence is that instruments
+sharing no machinery name one axis.
+
+Nulls worth keeping: `v6_superego` (-0.013), `v6_interiority` (+0.011) and
+`v6_deliberation` (-0.002) do NOT order the fallers, so this is not a general
+"psychological words behave differently" effect.
+
+### AND THIS EXPLAINS THE Q2/Q3 NULLS AS AN INSTRUMENT BOUND
+
+Type-level `k_charge` orders faller timing at **-0.122**. `charge.py`'s
+contextual `scene`/`lift` — the registered instrument — gives **+0.038**, on the
+same words. The difference is a ceiling, and it is exact:
+
+    "She knelt down in front of him and began to suck his"   frame = 7 (max)
+
+    word      euphemism  explicitness  genitality        movement
+    dick          1           7            7         0.0855 -> 0.0020
+    cock          1           7            7         0.4321 -> 0.5100
+    shaft         5           7            7         0.0141 -> 0.0207
+    member        6           7            7         0.0098 -> 0.0229
+
+`scene` rates the completed act, so on a frame-7 prompt **every** candidate
+scores 7 and `lift = scene - frame` is exactly 0 for all of them. The instrument
+sees `dick` and `shaft` as identical while the model treats them as opposites.
+Measured corpus-wide: at frame=7, 100% of words have lift 0 (9 prompts, 117
+words); the effect is total there and narrow overall.
+
+**Only `sexual_v2_euphemism` discriminates**, and it runs with the movement —
+direct terms (1-2) fall, periphrastic (5-6) rise. `explicitness` and
+`genitality` are pinned at 7 exactly as `scene` is.
+
+So Q2 and Q3 are not evidence that charge is irrelevant to SFT timing. They are
+evidence that the registered instrument is saturated on the prompts where charge
+varies most. **The bound is on the instrument, not on the world**, and it is why
+this section uses type-level and v6 scales instead.
+
+### WHAT IS TRIVIAL HERE AND WHAT IS NOT
+
+**Trivial:** that words falling across lineage endpoints also fall on this
+ladder. The ladder IS base->aligned decomposed into 43 steps, so the trajectory
+necessarily lies along the endpoint displacement. An earlier draft of this
+section tested M03's `say -> consider` and `pushed -> whispered` pairs and
+reported their ordering as a recapitulation; that was circular. `say` is a faller
+here (42 of 48) and `consider` a riser (62 of 63), so their +2,235-step gap is
+the general faller-before-riser effect and nothing more. Restricted to prompts
+where both are the SAME class it is n=3 and reverses.
+
+**Not trivial:** that the axis orders the fallers among THEMSELVES in time. That
+is not entailed by the endpoint difference, and it is what the table above
+measures.
+
 ## DISCOVERED: THE FALLER IS AMPLIFIED BEFORE IT IS REPRESSED
 
     149 of 505 fallers (29.5%) move UP at step 1000 before falling.
@@ -244,6 +318,8 @@ specific displacement pairs mostly do not.
 - **Anything about SFT in general.** n=1 lineage, graded C — the store holds exactly one SFT ladder.
 - **Anything about DPO or RLVR.** This ladder is SFT only, which matters because the campaign's existing work puts violence repression at DPO.
 - **The timing result as a DECLARED finding.** The registered statistic was AUC; `t_move` is the discovered arm and supersedes it on merit, not on registration.
+- **This section's rho values individually.** None exceeds 0.16; the claim is the agreement across three unrelated instruments, not any one row.
+- **Q2/Q3 as evidence that charge is irrelevant.** They used a saturated instrument. Type-level charge orders faller timing at -0.122.
 - **A charge modulation at either grain.** Word level rho=+0.0384 (p=0.090); prompt level rho=+0.0001 (p=0.998), terciles differing by 15 steps on 5,341. State the bound as a fraction, not as a p.
 - **F04's exhibits.** `fuck -> kiss` is refuted, `kill -> scream` holds only on the anger prompts, `kill -> said` is untestable here. Only the GENERAL claim replicates.
 - **The Q1 AUC numbers for anything.** Kept above as a record of what the selection cost.

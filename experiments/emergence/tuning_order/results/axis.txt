@@ -1,0 +1,74 @@
+NEGATIVE rho = the higher the scale, the EARLIER the word leaves.
+fallers: 8478
+
+TYPE-LEVEL  fields.norms -- context-free, every word
+  scale                                n        rho          p
+  k_charge                          6674    -0.1216    0.00000 *
+  warriner_valence                  4462    +0.1075    0.00000 *
+  warriner_arousal                  4462    -0.0929    0.00000 *
+  k_transgressiveness               6674    -0.0778    0.00000 *
+  brysbaert_concreteness            6653    -0.0616    0.00000 *
+  k_bodily_harm                     6674    -0.0541    0.00001 *
+  n_content                         8478    -0.0512    0.00000 *
+  k_valence                         6674    +0.0501    0.00004 *
+  warriner_dominance                4462    +0.0428    0.00421 *
+  brooke_formality                  1217    -0.0369    0.19782
+  k_vulgarity                       6674    -0.0331    0.00687 *
+  k_concreteness                    6674    -0.0298    0.01481 *
+  warriner_valence_extremity        4462    -0.0289    0.05360
+  k_register_level                  6674    +0.0092    0.45327
+  n_tokens                          8478    +0.0035    0.75036
+
+CONTEXTUAL  v6 -- rated in the frame
+  5761 fallers rated
+  scale                                n        rho          p
+  v6_fit                            5003    -0.1024    0.00000 *
+  v6_makes_worse                    5003    -0.0806    0.00000 *
+  v6_directedness                   5003    -0.0744    0.00000 *
+  v6_vocalisation                   5003    -0.0532    0.00017 *
+  v6_aggression                     5003    -0.0529    0.00018 *
+  v6_mundanity                      5003    +0.0508    0.00032 *
+  v6_harm                           5003    -0.0345    0.01465 *
+  v6_makes_better                   5003    +0.0283    0.04505 *
+  v6_hedged                         5003    +0.0172    0.22440
+  v6_superego                       5003    -0.0125    0.37596
+  v6_interiority                    5003    +0.0107    0.44734
+  v6_deliberation                   5003    -0.0018    0.90046
+
+CONTEXTUAL  slot_institutional_en_v3 -- rated in the frame
+  5761 fallers rated
+  scale                                n        rho          p
+  slot_institutional_en_v3_assertiveness    3847    -0.0806    0.00000 *
+  slot_institutional_en_v3_arousal    3847    -0.0787    0.00000 *
+  slot_institutional_en_v3_target    3847    -0.0730    0.00001 *
+  slot_institutional_en_v3_specificity    3847    -0.0703    0.00001 *
+  slot_institutional_en_v3_agency    3847    -0.0547    0.00068 *
+  slot_institutional_en_v3_vocalisation    3847    -0.0511    0.00152 *
+  slot_institutional_en_v3_mediation    3847    -0.0510    0.00154 *
+  slot_institutional_en_v3_collective    3847    -0.0274    0.08910
+  slot_institutional_en_v3_procedural    3847    -0.0192    0.23297
+  slot_institutional_en_v3_abstraction    3847    +0.0179    0.26819
+  slot_institutional_en_v3_termination    3847    +0.0133    0.41087
+  slot_institutional_en_v3_delay    3847    -0.0114    0.47782
+  slot_institutional_en_v3_deference    3847    +0.0015    0.92813
+
+CONTEXTUAL  slot_institutional_en_v2 -- rated in the frame
+  5761 fallers rated
+  scale                                n        rho          p
+  slot_institutional_en_v2_specificity     486    -0.1580    0.00043 *
+  slot_institutional_en_v2_abstraction     486    +0.1433    0.00144 *
+  slot_institutional_en_v2_agency     486    -0.1277    0.00462 *
+  slot_institutional_en_v2_assertiveness     486    -0.1127    0.01260 *
+  slot_institutional_en_v2_delay     486    +0.0894    0.04818 *
+  slot_institutional_en_v2_arousal     486    -0.0833    0.06603
+  slot_institutional_en_v2_collective     486    +0.0506    0.26532
+  slot_institutional_en_v2_target     486    -0.0459    0.31173
+  slot_institutional_en_v2_deference     486    +0.0277    0.54282
+  slot_institutional_en_v2_vocalisation     486    +0.0084    0.85420
+  slot_institutional_en_v2_procedural     486    +0.0070    0.87715
+
+READ ACROSS THE THREE, NOT DOWN ONE.
+No single |rho| exceeds 0.16. The evidence is that instruments sharing
+no machinery name one axis: charged / aggressive / concrete / harmful /
+apt / specific words leave EARLY; mundane / abstract / positive words
+leave LATE.
