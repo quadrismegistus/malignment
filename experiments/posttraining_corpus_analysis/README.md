@@ -33,7 +33,8 @@ something the optimisation produces from data that does not look like a word lis
 |---|---|---|
 | [`hh-rlhf`](hh-rlhf/) | Anthropic/hh-rlhf, 160,800 pairs | CLOSED, exploratory — the axis is engage-vs-deflect |
 | [`pku-safe-rlhf`](pku-safe-rlhf/) | PKU-SafeRLHF, 73,907 pairs | worked out; one control outstanding |
-| [`tulu3-safety-slice`](tulu3-safety-slice/) | coconot + wildguardmix + wildjailbreak, 110,983 prompts | registered, data not yet downloaded |
+| [`tulu3-safety-slice`](tulu3-safety-slice/) | coconot + wildguardmix + wildjailbreak, 110,983 prompts | registered; **its one confirmatory arm has no valid population** (A1: the slice holds no pairwise preference data). Data downloaded 2026-08-18. Its content question is answered in `tulu3-slice-charge` |
+| [`tulu3-slice-charge`](tulu3-slice-charge/) | allenai/tulu-3-sft-mixture, 939,343 rows, all 19 sources | **RUN 2026-09-06, 21,240 exchanges.** The mixture is lenient about FICTION, not about sex: 1.4% refusal on charged fiction against 86.9% otherwise |
 
 **PKU is the one that matters, because it is the only cached corpus that TRAINED
 MODELS WE MEASURE**: `beaver-7b-v1.0` (a declared lineage off `llama-7b`),

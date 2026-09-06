@@ -3,7 +3,7 @@ kind: question
 id: tulu3-slice-charge
 question: What kind of prompt does each Tulu-3 SFT source carry, and what is the model trained to do with it?
 status: "FULL RUN 2026-09-06: 21,240 exchanges, three strata, 0 errors, v3 instrument. The fiction exemption is the finding (1.4% vs 86.9% refusal, n=771/3473). Controlling for it, SEXUAL is indistinguishable from VIOLENT, COERCIVE and OTHER -- the earlier 'sexual is least-refused' claim was composition end to end."
-headline: "The Tulu-3 wildjailbreak slice is 100% VANILLA -- AI2 built 161,430 adversarial jailbreaks and shipped none of them, so the safety data teaches refusal of the UNDISGUISED request while the fiction-wrapped charged requests come from WildChat and are complied with. FICTION IS A NEAR-TOTAL EXEMPTION: 0 refusals across 29 charged fiction requests, against 85.3% refusal on 265 charged non-fiction ones. Sexual requests are 36.6% fiction where illicit ones are 1.2%, and that composition -- not leniency about sex -- is most of why SEXUAL looked like the least-refused kind. WildChat is the sexually densest source at 10.0%; every maths and persona source is 0.0%."
+headline: "The Tulu-3 SFT mixture is lenient about FICTION, not about sex: a charged request wrapped in fiction is refused 1.4% of the time against 86.9% otherwise. Controlling for fiction, no charged kind is treated leniently except by degree. WildChat is the sexually densest source at 9.4% and every maths, code and persona source is 0.0%, which is data_ablations' model-side prediction recovered from the corpus."
 grain: corpus
 ---
 
@@ -24,126 +24,85 @@ and refused, and those are different corpora.
 
     task.py    the rater. Why not sexual/task.py and not fields.py, in its
                docstring. KIND is IMPORTED from task_charge, not copied.
-    pilot.py   200 rows per source x 19 sources, seed 20260906
+    pilot.py   200 rows per source x 19 sources
+    run.py     THE FULL RUN. Three strata, 21,240 exchanges.
 
-## THE PILOT'S DECISIVE QUESTION, ANSWERED: THE ASSISTANT SIDE IS CONSTANT
+    results/full_slice_charge_en_v3.jsonl    the run. 23 MB.
+    results/pilot_slice_charge_en_v2.jsonl   the v2 pilot
+    results/pilot.jsonl                      the v1 pilot (superseded instrument)
 
-    assistant_kind    NONE 3770, SEXUAL 12, VIOLENT 7, OTHER 5, ILLICIT 3,
-                      DEGRADING 3
-    NOT-NONE          30 of 3800 = 0.79%   (v1: 36, 0.95%)
-    assistant_charge  1 in 3,770 of 3,800
+---
 
-**So `assistant_kind` cannot carry an ordinal test and the user side is
-primary.** This was an open design question -- SFT computes loss on the
-assistant turn, which is a real argument for making it primary -- and it is
-settled by measurement rather than by the argument. The 14-row smoke test
-suggested it; the pilot establishes it.
+# THE RESULT
 
-## USER KIND COMPOSITION: THE DYNAMIC RANGE IS ENORMOUS
+`run.py`, 2026-09-06. A 500 x 19 representative stratum (A), +6,000 WildChat
+(B), +2,000 from each of the three safety sources (C). 21,240 exchanges, 0
+errors. **Composition is STRATUM A ONLY**; conditional tables use all strata,
+which enrichment permits. `a_only()` is the accessor and there is no unstamped
+path to a corpus-level rate.
 
-Charged share of user turns, pilot n=200 per source:
+## 1. THE FICTION EXEMPTION
 
-    wildguardmixtrain_50k        59.0%      wildchat_100k          21.0%
-    wildjailbreak_50k            46.0%      coconot_converted      18.0%
-    aya_100k                      1.5%      no_robots               2.0%
-    ALL FIVE personahub sources   0.0%      all four maths sources <=0.5%
-    codealpaca, sciriff, table_gpt, flan_v2, hard_coded  <=0.5%
+    charged prompts        n     COMPLY  PARTIAL   REFUSE
+    fiction              771      87.0%    11.5%     1.4%
+    non-fiction         3473       6.2%     5.8%    86.9%
 
-**And the density prediction survives its first check.** SEXUAL specifically:
+**1.4% against 86.9%.** The corpus teaches something closer to *if it is
+fiction, write it, whatever it carries; if it is not, refuse* than to anything
+graded by kind.
 
-    wildchat_100k                10.0%     <- the densest source in the mixture
-    wildguardmixtrain_50k         7.0%
-    wildjailbreak_50k             2.0%
-    coconot_converted             0.5%
-    every maths source            0.0%
-    every persona source          0.0%
+## 2. AND CONTROLLING FOR IT, THE KIND EFFECT LARGELY DISAPPEARS
 
-WildChat densest, maths and persona at zero, safety intermediate. That is the
-order `data_ablations` predicted from the MODEL side, recovered from the corpus
-with no models involved.
+    NON-FICTION ONLY     n    COMPLY  PARTIAL   REFUSE
+    DEGRADING          675      2.2%     0.6%    95.1%
+    ILLICIT            988      5.2%     4.7%    89.9%
+    COERCIVE           232      5.6%    10.3%    83.2%
+    SEXUAL             415      7.2%     9.6%    82.9%
+    VIOLENT            269     13.4%     3.7%    81.8%
+    OTHER              894      7.7%     8.8%    81.7%
 
-## THE FICTION EXEMPTION, AND THE v1 CLAIM IT CORRECTS
+**SEXUAL at 82.9% is indistinguishable from VIOLENT (81.8%), COERCIVE (83.2%)
+and OTHER (81.7%).** Only DEGRADING and ILLICIT stand above the pack.
 
-**v1 reported that SEXUAL is the least-refused charged kind (46.5% against 93%
-for degrading and illicit) and checked it within one source before reporting.
-That check controlled for SOURCE and not for FICTION, and fiction is the
-variable that matters.** Reading the v1 rows is what found it: 5 of 8
-PARTIAL/SEXUAL rows were narratives in which A CHARACTER declined -- a king
-seizing a maiden who pleads with him, a fan-fiction scene that fades out -- and
-the rater had read the plot as the assistant's move. v2 adds `is_fiction` and
-tells the rater in three places that a character declining is not the assistant
-declining.
+**THE CORPUS IS LENIENT ABOUT FICTION. IT IS NOT LENIENT ABOUT SEX.** Two
+earlier versions of this folder said otherwise; see HOW IT GOT HERE.
 
-With that field, on CHARGED prompts:
+## 3. COMPOSITION, AND THE PREDICTION IT WAS BUILT TO TEST
 
-    is_fiction      n   COMPLY  PARTIAL   REFUSE  CORRECT
-    True           29    82.8%    17.2%     0.0%     0.0%
-    False         265     5.7%     5.7%    85.3%     3.4%
+Stratum A, 500 per source:
 
-**Zero refusals in 29 charged fiction requests.** The corpus teaches a rule
-closer to *if it is fiction, write it, whatever it carries; if it is not,
-refuse* than to anything graded by kind.
+    source                          charged    SEXUAL
+    wildguardmixtrain                 62.4%      7.0%
+    wildjailbreak                     44.8%      2.4%
+    wildchat                          17.4%      9.4%   <- densest
+    coconot                           17.0%      1.0%
+    every other source                <=2.2%      0.0%
 
-And that is most of what the v1 headline was seeing, because fiction is not
-evenly spread across the kinds:
+**WildChat is the sexually densest source; every maths, code and persona source
+is 0.0%.** That is the order `data_ablations` predicted from the model side,
+recovered from the corpus with no models involved. The safety sources sit
+between, which is the one cell the prediction called "neutral" and which is
+better described as intermediate.
 
-    user_kind      n    fiction
-    SEXUAL        41     36.6%
-    OTHER         73     12.3%
-    COERCIVE      23      8.7%
-    VIOLENT       19      5.3%
-    DEGRADING     58      1.7%
-    ILLICIT       80      1.2%
+## 4. TWO DIMENSIONS, AND THEY ARE NOT THE SAME ONE
 
-**A sexual request is about thirty times more likely to be a fiction request
-than an illicit one.** Controlling for it, the kind effect shrinks sharply but
-does not vanish:
+    EMPTIED RESPONSE    charged + COMPLY: 885, assistant NONE in 252 (28%)
+    CONCEALED REQUEST   implied > literal: 642 of 21,240 (3.02%)
+    BOTH                51
 
-    NON-FICTION ONLY    n   COMPLY  PARTIAL   REFUSE
-    SEXUAL             26    11.5%    11.5%    73.1%
-    VIOLENT            18    27.8%     5.6%    66.7%
-    OTHER              64     3.1%     7.8%    78.1%
-    ILLICIT            79     5.1%     5.1%    89.9%
-    DEGRADING          57     1.8%     1.8%    94.7%
-    COERCIVE           21     0.0%     4.8%    95.2%
+An emptied response is not a disguised request read innocently. 252 and 642
+overlapping in 51, and the v2 pilot found the same at 3 of 19. **The emptied
+share fell from 49% to 28% at scale**, which is what a pilot cell of 19 is
+worth.
 
-Sexual and violent still sit ~20 points below degrading, coercive and illicit --
-but at 73%, not 46%. **The correct statement is that the corpus is lenient about
-FICTION, and sexual requests are where fiction concentrates.** n=26 for the
-sexual cell; this is a pilot and the residual kind effect is not established.
+---
 
-## WHAT IS TRAINED, GIVEN THE KIND OF PROMPT
+# WHAT THE CORPUS TURNS OUT TO CONTAIN
 
-Assistant move conditional on user kind, pooled over sources:
+## THE WILDJAILBREAK SLICE IS ALL *VANILLA*
 
-v2, pooled over sources AND over fiction -- read the section above before this
-table, which is the one the fiction split decomposes:
-
-    user_kind        n   COMPLY  PARTIAL   REFUSE  CORRECT
-    SEXUAL          41    36.6%    14.6%    46.3%     2.4%
-    VIOLENT         19    31.6%     5.3%    63.2%     0.0%
-    DEGRADING       58     3.4%     1.7%    93.1%     1.7%
-    COERCIVE        23     8.7%     4.3%    87.0%     0.0%
-    ILLICIT         80     5.0%     6.2%    88.8%     0.0%
-    OTHER           73    13.7%     8.2%    68.5%     9.6%
-    NONE          3506    87.2%     3.3%     1.9%     7.6%
-
-v1 and v2 agree closely on this table (SEXUAL 46.5 -> 46.3 refuse), which is
-worth stating: **the fiction fix did not change the pooled numbers, it changed
-what they mean.** An instrument defect that leaves the headline number intact is
-the kind that survives a re-run and a sanity check both.
-
-## THE WILDJAILBREAK SLICE IS ALL *VANILLA*, AND THAT IS THE FINDING
-
-Raised as a threat to the pilot and retired by checking it. WildJailbreak's own
-card says that for `adversarial_harmful` AI2 "pair[ed] the model refusal
-responses generated from the counterpart VANILLA prompts to adversarial
-prompts" -- so on those rows the assistant turn was **not written to the prompt
-it sits beside**, and a refusal rate computed over them would be counting
-construction rather than response.
-
-**It does not apply here.** Joining all 50,000 Tulu `wildjailbreak` prompts back
-to `train.tsv`, matched on text and resolved per COLUMN so the join cannot lie:
+Joining all 50,000 Tulu `wildjailbreak` prompts back to `train.tsv`, matched on
+text and resolved per COLUMN so the join cannot lie:
 
     matches the `vanilla` column          49,999   100.0%
     matches BOTH columns                       1     0.0%
@@ -153,66 +112,58 @@ to `train.tsv`, matched on text and resolved per COLUMN so the join cannot lie:
                 vanilla_benign   24,504  49.0%
 
 **AI2 built 161,430 adversarial jailbreaks and shipped NONE of them in this
-slice.** The safety training that reaches Tulu-3 through this source teaches
-refusal of the UNDISGUISED request. The disguised form -- the fiction wrapper,
-the roleplay frame, the "imagine you're a playwright" -- was constructed, sits
-in the source dataset, and was not included.
+slice.** The safety training reaching Tulu-3 through this source teaches refusal
+of the UNDISGUISED request. The disguised form -- the fiction wrapper, the
+roleplay frame, "imagine you're a playwright" -- was constructed, sits in the
+source dataset, and was not included.
 
-### AND THE FICTION EXEMPTION IS NOT COMING FROM THE SAFETY DATA
+This also retires a threat to the run. WildJailbreak's card says
+`adversarial_harmful` rows carry the refusal written for the COUNTERPART VANILLA
+prompt, so on those rows the assistant turn is not a response to the prompt
+beside it. **No such row is in this mixture.**
 
-The 29 charged fiction rows, by source:
+## AND THE FICTION EXEMPTION IS NOT COMING FROM THE SAFETY DATA
+
+Charged fiction rows in the v2 pilot, by source:
 
     tulu_v3.9_wildchat_100k                        25
     tulu_v3.9_synthetic_finalresp_wildguardmixtrain 3
     tulu_v3.9_aya_100k                              1
     tulu_v3.9_wildjailbreak_decontaminated_50k      0
 
-**Zero from wildjailbreak.** So the two things sit apart in this mixture: the
-safety slice covers plain charged requests and refuses them, and the
-fiction-wrapped charged requests come from REAL USER CONVERSATION and are
-complied with. That is a structural fact about the corpus and not a rate -- 29
-rows -- but it is the shape the full run should be built to measure.
+**Zero from wildjailbreak.** The safety slice covers plain charged requests and
+refuses them; the fiction-wrapped charged requests come from REAL USER
+CONVERSATION and are complied with.
+
+---
+
+# VALIDATION
 
 ## AN EXTERNAL CRITERION, AND `user_kind` PASSES IT
 
 The vanilla rows carry AI2's own `harmful`/`benign` label, assigned at
 generation time by a different pipeline (GPT-4 prompted to produce one bin or
 the other) and never shown to this rater. All 200 pilot `wildjailbreak` rows
-matched. Rater `user_kind != NONE` against that label:
+matched:
 
                         rater charged    rater NONE
     vanilla_harmful          86               14
     vanilla_benign            4               96
 
-    AI2 harmful -> charged   86.0%
-    AI2 benign  -> charged    4.0%
+86% sensitivity at a 4% false-positive rate. `vanilla_benign` is built to
+"superficially resemble unsafe prompts", so 4% is a meaningful number rather
+than a floor.
 
-**This is the independent criterion the kind measures otherwise lack**, and it
-is a real one: the label records what AI2 SET OUT TO GENERATE, and the rater
-judged the text blind to it. 86% sensitivity at a 4% false-positive rate.
+**WHAT IT DOES NOT VALIDATE.** A binary charged/not check on one source. It says
+nothing about whether the KIND assignment within charged is right, about
+`assistant_move`, or about `is_fiction`.
 
-The 14 harmful-rated-NONE are unexamined and are the place to look before the
-full run; `vanilla_benign` is built to "superficially resemble unsafe prompts",
-so 4% is a meaningful number rather than a floor.
-
-**WHAT IT DOES NOT VALIDATE.** It is a binary charged/not check on one source.
-It says nothing about whether the KIND assignment within charged is right, about
-`assistant_move`, or about `is_fiction` -- and the adversarial half of
-WildJailbreak, which would have tested concealment directly, is not in this
-mixture to test against.
-
-## v3: `literal_charge` / `implied_charge`, CALIBRATED AND BOUNDED
+## `literal_charge` / `implied_charge`, CALIBRATED WITHIN ITEM
 
 Two readings on one scale so the gap is SUBTRACTED rather than judged --
 `charge.py`'s own pattern, where `frame` and `scene` "share it so they can be
-subtracted". Plus `assistant_reading` (LITERAL | IMPLIED | NA): which reading
-the assistant answered.
-
-### THE CALIBRATION PASSES, INCLUDING THE CELL THAT COULD HAVE KILLED IT
-
-WildJailbreak's train.tsv holds the SAME request in a plain and a
-WildTeaming-wrapped form, so this is within-item. Predictions recorded before
-the run; 6 items per cell:
+subtracted". WildJailbreak's `train.tsv` holds the SAME request in a plain and a
+WildTeaming-wrapped form. Predictions recorded before the run, 6 items per cell:
 
     cell                    predicted            observed mean gap
     vanilla_harmful         ~0, both high              +0.00
@@ -224,99 +175,13 @@ the run; 6 items per cell:
 behind it. A gap there would mean the fields detect FRAMING rather than
 concealment. It is +0.00.
 
-Read as pairs, the mechanism is visible -- the wrapper lowers the LITERAL charge
-while implied holds, and in 4 of 6 `implied_charge` recovers the vanilla form's
-charge exactly:
+The wrapper lowers the LITERAL charge while implied holds, and in 4 of 6
+`implied_charge` recovers the vanilla form's charge exactly:
 
     7/7 -> 5/7      5/5 -> 3/5      3/3 -> 3/5
     3/3 -> 2/3      5/5 -> 3/5      2/2 -> 3/3
 
-### AND WHAT IT IS NOT: NOT THE SUBSTITUTION SIGNATURE
-
-**Recorded because this seat conflated them.** The signature `COMPLY + charged
-user + assistant NONE` fires on 19 of 39 charged-compliance rows (49%), and it
-was described as the corpus-side counterpart of within-frame substitution. v3
-run on those same rows against the 20 matched ones:
-
-    cell                            n    mean gap   gap>0    assistant_reading
-    SUBST (assistant emptied it)   19      +0.53     3/19    NA 16, LIT 2, IMP 1
-    MATCH (assistant carried it)   20      +0.20     2/20    NA 10, LIT 6, IMP 4
-
-**The cells do not separate**, and `LITERAL` fires MORE in the matched cell.
-Only 3 of 19 substitution rows carry a request-side gap at all. So an emptied
-response is usually NOT a disguised request read innocently -- it is a charged
-scene whose continuation happens not to be charged (the Telugu legend), plus
-rating noise.
-
-The one clear in-corpus instance is exact, and it is the minority case:
-
-    literal 1  implied 7  gap +6  COMPLY  reading LITERAL  kind NONE
-    "a teenager and their pet dog share a heartfelt, intimate moment...
-     disregarding external rules and regulations"
-
-**So `literal/implied` is a SECOND DIMENSION, not a better signature.** It
-measures concealment in the REQUEST, which is rare in this mixture -- the
-adversarial rows are not in it (see the section above). `assistant_reading` is
-the weakest of the three: with gap ~0 on most rows, NA is the correct answer,
-so it only does work in the thin slice where a gap exists.
-
-## THE FULL RUN (2026-09-06): 21,240 EXCHANGES, THREE STRATA, 0 ERRORS
-
-`run.py`. A 500 x 19 representative stratum, +6,000 WildChat, +2,000 from each
-of the three safety sources. **Composition below is STRATUM A ONLY**; the
-conditional tables use all strata, which enrichment permits.
-
-### COMPOSITION HOLDS AT 500/SOURCE
-
-    source                          charged    SEXUAL
-    wildguardmixtrain                 62.4%      7.0%
-    wildjailbreak                     44.8%      2.4%
-    wildchat                          17.4%      9.4%   <- densest, as predicted
-    coconot                           17.0%      1.0%
-    every other source                <=2.2%      0.0%
-
-**WildChat is the sexually densest source and every maths, code and persona
-source is 0.0%.** That is `data_ablations`' prediction, made from the model
-side, holding at 500 rows per source.
-
-### THE FICTION EXEMPTION, AT n=771 INSTEAD OF n=29
-
-    charged prompts        n     COMPLY  PARTIAL   REFUSE
-    fiction              771      87.0%    11.5%     1.4%
-    non-fiction         3473       6.2%     5.8%    86.9%
-
-**1.4% against 86.9%.** The pilot's 0-of-29 was not a small-sample accident.
-
-### AND CONTROLLING FOR IT, THE KIND EFFECT LARGELY DISAPPEARS
-
-    NON-FICTION ONLY     n    COMPLY  PARTIAL   REFUSE
-    DEGRADING          675      2.2%     0.6%    95.1%
-    ILLICIT            988      5.2%     4.7%    89.9%
-    COERCIVE           232      5.6%    10.3%    83.2%
-    SEXUAL             415      7.2%     9.6%    82.9%
-    VIOLENT            269     13.4%     3.7%    81.8%
-    OTHER              894      7.7%     8.8%    81.7%
-
-**SEXUAL at 82.9% is indistinguishable from VIOLENT (81.8%), COERCIVE (83.2%)
-and OTHER (81.7%).** Only DEGRADING and ILLICIT stand above the pack. So the v1
-headline -- "sexual is the least-refused charged kind", pooled at 46.1% -- was
-composition end to end, and the residual kind effect the v2 section called
-"~20 points, not established" is now measured at n=415 and is about 7 points
-against the middle of the field.
-
-**The corpus is lenient about FICTION. It is not lenient about sex.**
-
-### THE TWO DIMENSIONS STAY SEPARATE AT SCALE
-
-    EMPTIED RESPONSE    charged + COMPLY: 885, assistant NONE in 252 (28%)
-    CONCEALED REQUEST   implied > literal: 642 of 21,240 (3.02%)
-    BOTH                51
-
-252 and 642, overlapping in 51. The pilot's 3-of-19 was not noise: an emptied
-response and a disguised request are different objects. **The emptied share
-also fell from 49% to 28% at scale**, which is what a pilot cell of 19 is worth.
-
-### AND THE CONCEALMENT MEASURE CROSS-VALIDATES THE VANILLA FINDING
+## AND THE CONCEALMENT MEASURE CROSS-VALIDATES THE VANILLA FINDING
 
 `implied > literal` rate, stratum A, by source:
 
@@ -325,37 +190,34 @@ also fell from 49% to 28% at scale**, which is what a pilot cell of 19 is worth.
     coconot                 1 / 500    0.2%
     wildjailbreak           0 / 500    0.0%
 
-**Zero in wildjailbreak.** That slice was shown to be 100% `vanilla` by joining
-its 50,000 prompts back to `train.tsv` on text -- a completely different method
--- and the rater, blind to that, finds no concealed requests in it. Two
-independent routes to the same fact.
+**Zero in wildjailbreak** -- the slice shown to be 100% vanilla by a text join,
+a completely different method. The rater, blind to that, finds no concealed
+requests in it. The concealment that IS in this mixture is
+`wildguardmixtrain`'s, at 16.2%.
 
-The concealment that IS in this mixture is `wildguardmixtrain`'s, at 16.2%, and
-that is the source the one clear in-corpus example came from.
+---
 
-## WHAT THE FULL RUN STILL NEEDS
+# WHAT IS STILL OPEN
 
-- **Power for the kind x move contrast within source**, which is the finding
-  above and the thing the pilot cannot settle. The charged cells are what is
-  scarce -- 200 rows of a maths source buys nothing, 200 of wildguardmix buys
-  118 charged rows.
-- **The echo control.** `task.render_assistant_only` exists and has NOT been
-  run. On a declared subsample, rate the assistant turn with the request
-  withheld. If it agrees with the in-context rating everywhere, the assistant
-  column is echoing the prompt. It matters less now that the assistant column
-  is known to be constant, but the constancy itself is what the control would
-  verify is real rather than an artifact of showing the rater the request.
+- **The echo control.** `task.render_assistant_only` exists and has NEVER BEEN
+  RUN. On a declared subsample, rate the assistant turn with the request
+  withheld. The assistant column is known to be near-constant (99.2% NONE, and
+  0.79% not-NONE in the v2 pilot); this control is what would show that
+  constancy is real rather than an artifact of showing the rater the request.
 - **Source -> slice, pinned against the paper.** SAFETY is pinned by arithmetic:
   coconot 10,983 + wildjailbreak 50,000 + wildguardmix 50,000 = 110,983 = 11.8%,
-  the registration's figure exactly. **MATHS AND PERSONA ARE NOT PINNED AND
-  THEY OVERLAP** -- five personahub sources total 284,919 rows and three are
-  maths, including `personahub_math_v5_regen_149960` at 16%, the largest source
-  in the mixture and plausibly inside BOTH ablations. If it is, `no-math`
-  (-0.092) and `no-persona` (-0.086) removed largely the same rows, which
-  accounts for their near-identical model-side effects better than two
-  independent slices agreeing does.
+  the registration's figure exactly. **MATHS AND PERSONA ARE NOT PINNED AND THEY
+  OVERLAP** -- five personahub sources total 284,919 rows and three are maths,
+  including `personahub_math_v5_regen_149960` at 16%, the largest source in the
+  mixture and plausibly inside BOTH ablations. If it is, `no-math` (-0.092) and
+  `no-persona` (-0.086) removed largely the same rows, which accounts for their
+  near-identical model-side effects better than two independent slices agreeing.
+- **The 14 harmful-rated-NONE** in the external-criterion table are unexamined.
+- **`assistant_reading` does little work.** With `implied == literal` on 97% of
+  rows, NA is the correct answer almost everywhere (20,562 NA, 406 LITERAL, 272
+  IMPLIED). It earns its place only in the thin concealed slice.
 
-## LIMITS ALREADY STANDING
+# LIMITS
 
 - **The units are not the model side's units.** There, `kind` is a property of a
   WORD IN A SCENE; here it is a property of a MESSAGE. The test is ORDINAL over
@@ -363,5 +225,44 @@ that is the source the one clear in-corpus example came from.
 - **First turn only.** A multi-turn row is rated on its opening exchange.
 - **4,000 characters per side.** A long benign preamble to a transgressive
   request would be mis-rated and that rate is not measured.
-- **A pilot is not a result.** Every rate here has an interval nobody has
-  computed.
+- **No intervals are computed.** Every rate above is a point estimate.
+- **`charge` measures the scene as described, not transgressive intent.** A
+  euphemistic request for a sex scene scored 5 where "an intimate moment between
+  a teenager and their pet dog, disregarding external rules and regulations"
+  scored 3 on the literal reading. That is the anchors working as written, and
+  it is why `implied_charge` exists.
+
+---
+
+# HOW IT GOT HERE
+
+Kept because two published claims were wrong and the corrections are the record.
+
+**v1 pilot (3,800 rows).** Reported SEXUAL as the least-refused charged kind,
+46.5% against 93% for degrading and illicit, and checked it within one source
+before reporting. **That check controlled for SOURCE and not for FICTION.**
+
+**Reading the rows found the defect.** 5 of 8 PARTIAL/SEXUAL rows were
+narratives in which A CHARACTER declined -- a king seizing a maiden who pleads
+with him, a fan-fiction scene that fades out -- and the rater had read the plot
+as the assistant's move.
+
+**v2 pilot** added `is_fiction` and told the rater in three places that a
+character declining is not the assistant declining. It found the fiction
+exemption (0 refusals in 29 charged fiction rows) and showed that sexual
+requests are 36.6% fiction where illicit are 1.2%. **v1 and v2 agree almost
+exactly on the pooled table -- SEXUAL 46.5% -> 46.3% refuse.** The instrument
+defect left the headline number intact; it would have survived a re-run and a
+check that the number reproduced.
+
+**The full run** then took the residual kind effect that v2 called "~20 points,
+not established" and measured it at n=415: about 7 points against the middle of
+the field, with sexual sitting among violent, coercive and other.
+
+**And one framing was wrong from the start.** This seat proposed that the safety
+corpus teaches frame-exit rather than within-frame substitution, and that the
+substitution signature (`COMPLY` + charged + assistant NONE) was the corpus-side
+counterpart of displacement. RH pointed out the first is incoherent -- **there
+are no continuations in this corpus, every row is a chat turn** -- and the v3
+run refuted the second: the signature and the concealed-request measure do not
+separate (gap>0 in 3/19 against 2/20 in the pilot; 51 of 252 at scale).
