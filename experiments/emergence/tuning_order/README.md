@@ -1,6 +1,6 @@
 ---
 kind: question
-status: OPEN, NOT REGISTERED. Design settled 2026-09-06 on RH's three questions; ONE item open (the onset criterion). No new twp needed
+status: REGISTERED and FROZEN 2026-09-06, area-based onset. Data built (18.3M movement_rungs rows, 424 charge cells). Analysis not yet run
 headline: Does the faller fall before the riser? Sites fixed at the ladder endpoint, lift as a continuous moderator, fields.py primary for word charge
 grain: undecided (rung x site, prompts as the replicate within one lineage)
 ---
@@ -54,7 +54,7 @@ The reflex is: v4 differs from v3 only on byte-level CJK, this is an English pan
 > 2. Is this always the case, or **specifically at high-lift prompts?**
 > 3. Is this the case for **any** faller/riser, or specifically for **charged words?**
 
-`REGISTRATION_DRAFT.md` is the design. In short: sites are the faller/riser pairs at base → `Think-SFT@step43000`, derived once and tracked back across all 43 rungs — which is what makes "what counts as a site" a settled question rather than an open one. Lift enters as a continuous prompt-level regressor over 470 rated prompts, never as a word selector. `fields.py` is primary for Q3 because `charge.py` covers 73.4% of fallers against 60.8% of risers, and that asymmetry lands on the arrival side.
+`REGISTRATION.md` is the design, frozen. In short: sites are the faller/riser pairs at base → `Think-SFT@step43000`, derived once and tracked back across all 43 rungs — which is what makes "what counts as a site" a settled question rather than an open one. Lift enters as a continuous prompt-level regressor over 470 rated prompts, never as a word selector. `fields.py` is primary for Q3 because `charge.py` covers 73.4% of fallers against 60.8% of risers, and that asymmetry lands on the arrival side.
 
 **No new twp is needed.** The cells and words for all 43 rungs exist; what is missing is the derived movement rows, which is CPU over stored data.
 
@@ -93,7 +93,16 @@ The reflex is: v4 differs from v3 only on byte-level CJK, this is an English pan
 
 # WHAT IS IN HERE
 
-    README.md               this
-    REGISTRATION_DRAFT.md   the design, unfrozen, with both directions stated
+    README.md         this
+    REGISTRATION.md   the design, FROZEN 2026-09-06, with both directions stated
+    charge_edge.py    task_charge over base -> Think-SFT (424 cells, run)
+    rung_movement.py  -> the movement_rungs table (18.3M rows, run)
+    results/          the annotation and the build log
 
-Nothing has been run.
+**The registration is a SOFT border.** RH, 2026-09-06: *"we will not let
+registration stop us from analysing whatever we find even if off registration --
+I don't believe in that for humanities work."* Its function is to keep DECLARED
+and DISCOVERED separable, not to forbid the second. Anything not declared gets
+labelled as discovered when reported.
+
+Data is built. The analysis has not been run.

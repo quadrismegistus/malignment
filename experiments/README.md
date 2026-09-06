@@ -118,7 +118,7 @@ and the state the first version of the checker could not see.
 
 - **[`capacities/`](emergence/capacities/README.md)** -- `PORTED from M05, 2026-08-24. Numbers recomputed by analyse.py, fleet not re-run.`  
   Pretraining builds rhyme pull to 0.383; SFT erodes it to 0.262. DPO has one checkpoint.
-- **[`tuning_order/`](emergence/tuning_order/README.md)** -- `OPEN, NOT REGISTERED. [...]`  
+- **[`tuning_order/`](emergence/tuning_order/README.md)** -- `REGISTERED and FROZEN 2026-09-06, area-based onset. [...]`  
   Does the faller fall before the riser? Sites fixed at the ladder endpoint, lift as a continuous moderator, fields.py primary for word charge
 
 ### posttraining_corpus_analysis
@@ -131,6 +131,8 @@ and the state the first version of the checker could not see.
   Where one response appends a disclaimer and the other does not, and BOTH responses are labelled unsafe, annotators judge the disclaiming one safer 68% of the time — with the advice unchanged.
 - **[`tulu3-safety-slice/`](posttraining_corpus_analysis/tulu3-safety-slice/README.md)** -- `REGISTERING. [...]`  
   NONE STATED
+- **[`tulu3-slice-charge/`](posttraining_corpus_analysis/tulu3-slice-charge/README.md)** -- `PILOT RUN 2026-09-06, 3,800 rows, 200 per source x 19 sources. [...]`  
+  SEXUAL is the least-refused charged kind and the most partially-complied-with, and this holds WITHIN a single source as well as across the corpus. WildChat is the sexually densest source at 10.0%; every maths and persona source is 0.0%. The density half of data_ablations' prediction survives its first check.
 - **[`ultrafeedback/`](posttraining_corpus_analysis/ultrafeedback/README.md)** -- `RUN. [...]`  
   68.4% against 43.9% is the other side of chance, not a smaller version of the same effect.
 
