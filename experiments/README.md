@@ -118,8 +118,8 @@ and the state the first version of the checker could not see.
 
 - **[`capacities/`](emergence/capacities/README.md)** -- `PORTED from M05, 2026-08-24. Numbers recomputed by analyse.py, fleet not re-run.`  
   Pretraining builds rhyme pull to 0.383; SFT erodes it to 0.262. DPO has one checkpoint.
-- **[`tuning_order/`](emergence/tuning_order/README.md)** -- `RUN 2026-09-06, all three registered arms. [...]`  
-  What leaves, leaves early; what arrives, arrives late — 506 of 507 prompts, regardless of content. F04's general claim replicates; its exhibits mostly do not
+- **[`tuning_order/`](emergence/tuning_order/README.md)** -- `RUN 2026-09-06. All three registered arms plus four discovered ones. [...]`  
+  What leaves, leaves early and what arrives arrives late (506 of 507 prompts) — and among the leavers, the charged and concrete go first
 
 ### posttraining_corpus_analysis
 
@@ -131,8 +131,8 @@ and the state the first version of the checker could not see.
   Where one response appends a disclaimer and the other does not, and BOTH responses are labelled unsafe, annotators judge the disclaiming one safer 68% of the time — with the advice unchanged.
 - **[`tulu3-safety-slice/`](posttraining_corpus_analysis/tulu3-safety-slice/README.md)** -- `REGISTERING. [...]`  
   NONE STATED
-- **[`tulu3-slice-charge/`](posttraining_corpus_analysis/tulu3-slice-charge/README.md)** -- `PILOT RUN TWICE, 2026-09-06. v1 (3,800 rows) was re-run as v2 after reading its rows found a fiction confound. [...]`  
-  The Tulu-3 wildjailbreak slice is 100% VANILLA -- AI2 built 161,430 adversarial jailbreaks and shipped none of them, so the safety data teaches refusal of the UNDISGUISED request while the fiction-wrapped charged requests come from WildChat and are complied with. FICTION IS A NEAR-TOTAL EXEMPTION: 0 refusals across 29 charged fiction requests, against 85.3% refusal on 265 charged non-fiction ones. Sexual requests are 36.6% fiction where illicit ones are 1.2%, and that composition -- not leniency about sex -- is most of why SEXUAL looked like the least-refused kind. WildChat is the sexually densest source at 10.0%; every maths and persona source is 0.0%.
+- **[`tulu3-slice-charge/`](posttraining_corpus_analysis/tulu3-slice-charge/README.md)** -- `FULL RUN 2026-09-06: 21,240 exchanges, three strata, 0 errors, v3 instrument. [...]`  
+  The Tulu-3 SFT mixture is lenient about FICTION, not about sex: a charged request wrapped in fiction is refused 1.4% of the time against 86.9% otherwise. Controlling for fiction, no charged kind is treated leniently except by degree. WildChat is the sexually densest source at 9.4% and every maths, code and persona source is 0.0%, which is data_ablations' model-side prediction recovered from the corpus.
 - **[`ultrafeedback/`](posttraining_corpus_analysis/ultrafeedback/README.md)** -- `RUN. [...]`  
   68.4% against 43.9% is the other side of chance, not a smaller version of the same effect.
 
