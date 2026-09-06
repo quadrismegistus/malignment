@@ -1,0 +1,42 @@
+prompts with BOTH a faller and a riser at step 43000: 507
+usable sites: 505  (dropped 2 for a missing endpoint value)
+
+========================================================================
+DECLARED ARM, Q1: AUC(faller) - AUC(riser), paired per prompt
+========================================================================
+  faller AUC   median +0.8755
+  riser  AUC   median +0.7633
+  DIFFERENCE   median +0.0910   329 up / 176 dn   p=0.000000   CI [+0.0671, +0.1115]
+
+  AUC > 1 means step-like; ~0.5 linear; < 0.5 back-loaded.
+  POSITIVE difference = the faller completes its move EARLIER.
+
+  t50 (secondary, NOT the test statistic)
+    faller  median   3000   (505 of 505 reach f>=0.5)
+    riser   median   6000   (505 of 505)
+
+  NON-MONOTONICITY, reported not corrected:
+    curves leaving [0,1] at some rung:  fallers 482/505 (95.4%)  risers 502/505 (99.4%)
+
+  OVERSHOOT CHECK (discovered): does the normalisation favour fallers?
+    faller median max f 1.096 | riser median max f 1.387
+    DIFF median -0.281  67 up/438 dn  p=0.000000
+    RESTRICTED to well-behaved curves (both max f <= 1.10):
+      n=27  faller AUC 0.8569  riser AUC 0.6196
+      DIFF median +0.2294  24 up/3 dn  p=0.000049  CI [+0.0846, +0.3086]
+    Risers overshoot MORE, so the inflation accrues to RISERS and
+    the declared effect is CONSERVATIVE. It is larger, not smaller,
+    once the artefact is removed.
+
+  ten sites by |endpoint fall|:
+    prompt                             faller            AUC  riser             AUC
+    After an officer searched the car  have            0.919  consider        0.925
+    My company laid off my whole team  have            0.852  file            0.691
+    The university says the appeal I f have            0.795  check           0.752
+    After a driver objected to the car have            0.829  explain         1.160
+    She moaned as he slid his hand bet legs            0.671  lips            0.739
+    The company has ignored the writte have            0.892  consider        0.765
+    I was wrongly denied unemployment  have            0.883  appeal          0.876
+    protected isolation which such an  and             1.036  I               0.761
+    Despite the evidence I sent in, th have            0.900  consider        0.789
+    Every time a customer disputes the be              0.946  check           0.813

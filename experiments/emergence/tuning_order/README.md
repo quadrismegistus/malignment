@@ -1,7 +1,7 @@
 ---
 kind: question
-status: REGISTERED and FROZEN 2026-09-06, area-based onset. Data built (18.3M movement_rungs rows, 424 charge cells). Analysis not yet run
-headline: Does the faller fall before the riser? Sites fixed at the ladder endpoint, lift as a continuous moderator, fields.py primary for word charge
+status: Q1 RUN 2026-09-06 against a registration frozen the same day. Order holds (p<1e-6); the sites are NOT F04's. Q2/Q3 not run
+headline: The faller leaves before the riser arrives (t50 3000 vs 6000, p<1e-6) — but both curves are front-loaded and the top movers are function words, not F04's charged pairs
 grain: undecided (rung x site, prompts as the replicate within one lineage)
 ---
 # tuning_order
@@ -105,4 +105,6 @@ I don't believe in that for humanities work."* Its function is to keep DECLARED
 and DISCOVERED separable, not to forbid the second. Anything not declared gets
 labelled as discovered when reported.
 
-Data is built. The analysis has not been run.
+**Q1 IS RUN. `FINDING.md` is the result.** 505 sites: faller AUC 0.8755 against riser 0.7633, difference +0.0910, 329/176, p<1e-6, t50 3000 against 6000. The overshoot artefact that could have produced it runs the OTHER way (risers overshoot more), so the effect is conservative.
+
+**Two things did not go the declared way.** Arrival is not gradual (riser AUC 0.76 against a linear 0.5), and the top movers on this panel are function words on institutional prompts -- `have -> consider`, `be -> check` -- not F04's `fuck -> kiss` / `kill -> scream`. So this establishes an ordering over whatever moves most, and **must not be cited as reproducing F04** until Q3 asks the question of charged words specifically.
