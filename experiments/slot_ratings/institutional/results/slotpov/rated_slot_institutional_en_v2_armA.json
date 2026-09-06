@@ -107,6 +107,45 @@
      "saved_at": "2026-08-18T14:04:13",
      "position": "indiv",
      "ratings": {
+      "abandon": {
+       "agency": 3,
+       "deference": 6,
+       "assertiveness": 1,
+       "procedural": 4,
+       "specificity": 3,
+       "delay": 1,
+       "abstraction": 2,
+       "target": 1,
+       "collective": 4,
+       "arousal": 2,
+       "vocalisation": 1
+      },
+      "act": {
+       "agency": 5,
+       "deference": 2,
+       "assertiveness": 5,
+       "procedural": 2,
+       "specificity": 1,
+       "delay": 2,
+       "abstraction": 7,
+       "target": 4,
+       "collective": 7,
+       "arousal": 5,
+       "vocalisation": 3
+      },
+      "assemble": {
+       "agency": 6,
+       "deference": 1,
+       "assertiveness": 6,
+       "procedural": 1,
+       "specificity": 4,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 1,
+       "collective": 7,
+       "arousal": 5,
+       "vocalisation": 1
+      },
       "attack": {
        "agency": 7,
        "deference": 1,
@@ -145,6 +184,19 @@
        "collective": 7,
        "arousal": 6,
        "vocalisation": 1
+      },
+      "blockade": {
+       "agency": 6,
+       "deference": 1,
+       "assertiveness": 6,
+       "procedural": 1,
+       "specificity": 5,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 4,
+       "collective": 7,
+       "arousal": 6,
+       "vocalisation": 2
       },
       "break": {
        "agency": 6,
@@ -211,6 +263,19 @@
        "arousal": 5,
        "vocalisation": 1
       },
+      "chant": {
+       "agency": 5,
+       "deference": 2,
+       "assertiveness": 5,
+       "procedural": 2,
+       "specificity": 4,
+       "delay": 1,
+       "abstraction": 2,
+       "target": 4,
+       "collective": 7,
+       "arousal": 5,
+       "vocalisation": 7
+      },
       "clear": {
        "agency": 5,
        "deference": 7,
@@ -236,6 +301,32 @@
        "collective": 5,
        "arousal": 5,
        "vocalisation": 1
+      },
+      "comply": {
+       "agency": 2,
+       "deference": 7,
+       "assertiveness": 1,
+       "procedural": 7,
+       "specificity": 3,
+       "delay": 1,
+       "abstraction": 3,
+       "target": 1,
+       "collective": 4,
+       "arousal": 1,
+       "vocalisation": 1
+      },
+      "confront": {
+       "agency": 6,
+       "deference": 1,
+       "assertiveness": 7,
+       "procedural": 1,
+       "specificity": 4,
+       "delay": 1,
+       "abstraction": 2,
+       "target": 7,
+       "collective": 5,
+       "arousal": 6,
+       "vocalisation": 6
       },
       "continue": {
        "agency": 5,
@@ -263,6 +354,19 @@
        "arousal": 4,
        "vocalisation": 1
       },
+      "defend": {
+       "agency": 6,
+       "deference": 1,
+       "assertiveness": 6,
+       "procedural": 1,
+       "specificity": 4,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 4,
+       "collective": 6,
+       "arousal": 6,
+       "vocalisation": 3
+      },
       "defy": {
        "agency": 6,
        "deference": 1,
@@ -289,6 +393,32 @@
        "arousal": 5,
        "vocalisation": 4
       },
+      "disband": {
+       "agency": 4,
+       "deference": 6,
+       "assertiveness": 1,
+       "procedural": 5,
+       "specificity": 5,
+       "delay": 1,
+       "abstraction": 3,
+       "target": 1,
+       "collective": 4,
+       "arousal": 2,
+       "vocalisation": 1
+      },
+      "disobey": {
+       "agency": 6,
+       "deference": 1,
+       "assertiveness": 6,
+       "procedural": 1,
+       "specificity": 4,
+       "delay": 1,
+       "abstraction": 3,
+       "target": 4,
+       "collective": 6,
+       "arousal": 6,
+       "vocalisation": 2
+      },
       "disperse": {
        "agency": 3,
        "deference": 7,
@@ -300,6 +430,19 @@
        "target": 1,
        "collective": 5,
        "arousal": 2,
+       "vocalisation": 1
+      },
+      "encircle": {
+       "agency": 6,
+       "deference": 1,
+       "assertiveness": 6,
+       "procedural": 1,
+       "specificity": 5,
+       "delay": 1,
+       "abstraction": 3,
+       "target": 4,
+       "collective": 7,
+       "arousal": 5,
        "vocalisation": 1
       },
       "end": {
@@ -315,6 +458,19 @@
        "arousal": 2,
        "vocalisation": 1
       },
+      "engage": {
+       "agency": 5,
+       "deference": 3,
+       "assertiveness": 5,
+       "procedural": 3,
+       "specificity": 3,
+       "delay": 2,
+       "abstraction": 5,
+       "target": 4,
+       "collective": 5,
+       "arousal": 5,
+       "vocalisation": 4
+      },
       "enter": {
        "agency": 6,
        "deference": 1,
@@ -326,6 +482,19 @@
        "target": 4,
        "collective": 7,
        "arousal": 6,
+       "vocalisation": 1
+      },
+      "evacuate": {
+       "agency": 3,
+       "deference": 6,
+       "assertiveness": 1,
+       "procedural": 5,
+       "specificity": 4,
+       "delay": 1,
+       "abstraction": 2,
+       "target": 1,
+       "collective": 4,
+       "arousal": 2,
        "vocalisation": 1
       },
       "fight": {
@@ -484,6 +653,19 @@
        "arousal": 4,
        "vocalisation": 1
       },
+      "kneel": {
+       "agency": 5,
+       "deference": 2,
+       "assertiveness": 4,
+       "procedural": 2,
+       "specificity": 5,
+       "delay": 1,
+       "abstraction": 2,
+       "target": 1,
+       "collective": 5,
+       "arousal": 4,
+       "vocalisation": 1
+      },
       "lay": {
        "agency": 4,
        "deference": 2,
@@ -508,6 +690,32 @@
        "target": 1,
        "collective": 4,
        "arousal": 2,
+       "vocalisation": 1
+      },
+      "lie": {
+       "agency": 5,
+       "deference": 2,
+       "assertiveness": 5,
+       "procedural": 2,
+       "specificity": 6,
+       "delay": 1,
+       "abstraction": 2,
+       "target": 1,
+       "collective": 5,
+       "arousal": 4,
+       "vocalisation": 1
+      },
+      "link": {
+       "agency": 5,
+       "deference": 2,
+       "assertiveness": 5,
+       "procedural": 2,
+       "specificity": 4,
+       "delay": 1,
+       "abstraction": 3,
+       "target": 1,
+       "collective": 7,
+       "arousal": 5,
        "vocalisation": 1
       },
       "meet": {
@@ -536,6 +744,19 @@
        "arousal": 2,
        "vocalisation": 1
       },
+      "obey": {
+       "agency": 2,
+       "deference": 7,
+       "assertiveness": 1,
+       "procedural": 7,
+       "specificity": 3,
+       "delay": 1,
+       "abstraction": 3,
+       "target": 4,
+       "collective": 4,
+       "arousal": 1,
+       "vocalisation": 1
+      },
       "occupy": {
        "agency": 6,
        "deference": 1,
@@ -562,6 +783,19 @@
        "arousal": 5,
        "vocalisation": 3
       },
+      "pack": {
+       "agency": 4,
+       "deference": 6,
+       "assertiveness": 2,
+       "procedural": 4,
+       "specificity": 4,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 1,
+       "collective": 4,
+       "arousal": 2,
+       "vocalisation": 1
+      },
       "peacefully": {
        "agency": 4,
        "deference": 4,
@@ -573,6 +807,19 @@
        "target": 1,
        "collective": 5,
        "arousal": 2,
+       "vocalisation": 2
+      },
+      "play": {
+       "agency": 4,
+       "deference": 2,
+       "assertiveness": 3,
+       "procedural": 2,
+       "specificity": 2,
+       "delay": 1,
+       "abstraction": 3,
+       "target": 1,
+       "collective": 4,
+       "arousal": 3,
        "vocalisation": 2
       },
       "proceed": {
@@ -613,6 +860,19 @@
        "collective": 7,
        "arousal": 6,
        "vocalisation": 3
+      },
+      "rally": {
+       "agency": 5,
+       "deference": 2,
+       "assertiveness": 5,
+       "procedural": 2,
+       "specificity": 4,
+       "delay": 3,
+       "abstraction": 4,
+       "target": 4,
+       "collective": 7,
+       "arousal": 5,
+       "vocalisation": 4
       },
       "regroup": {
        "agency": 5,
@@ -679,6 +939,19 @@
        "arousal": 6,
        "vocalisation": 3
       },
+      "respond": {
+       "agency": 4,
+       "deference": 3,
+       "assertiveness": 4,
+       "procedural": 3,
+       "specificity": 2,
+       "delay": 3,
+       "abstraction": 5,
+       "target": 4,
+       "collective": 5,
+       "arousal": 4,
+       "vocalisation": 4
+      },
       "retreat": {
        "agency": 3,
        "deference": 6,
@@ -718,6 +991,19 @@
        "arousal": 5,
        "vocalisation": 1
       },
+      "scatter": {
+       "agency": 3,
+       "deference": 6,
+       "assertiveness": 1,
+       "procedural": 4,
+       "specificity": 4,
+       "delay": 1,
+       "abstraction": 2,
+       "target": 1,
+       "collective": 5,
+       "arousal": 3,
+       "vocalisation": 1
+      },
       "set": {
        "agency": 6,
        "deference": 1,
@@ -730,6 +1016,32 @@
        "collective": 6,
        "arousal": 5,
        "vocalisation": 1
+      },
+      "shift": {
+       "agency": 4,
+       "deference": 4,
+       "assertiveness": 3,
+       "procedural": 4,
+       "specificity": 3,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 1,
+       "collective": 5,
+       "arousal": 3,
+       "vocalisation": 1
+      },
+      "show": {
+       "agency": 5,
+       "deference": 2,
+       "assertiveness": 5,
+       "procedural": 2,
+       "specificity": 3,
+       "delay": 2,
+       "abstraction": 4,
+       "target": 4,
+       "collective": 6,
+       "arousal": 5,
+       "vocalisation": 3
       },
       "sing": {
        "agency": 5,
@@ -755,6 +1067,19 @@
        "target": 1,
        "collective": 5,
        "arousal": 4,
+       "vocalisation": 1
+      },
+      "sleep": {
+       "agency": 4,
+       "deference": 1,
+       "assertiveness": 4,
+       "procedural": 1,
+       "specificity": 5,
+       "delay": 1,
+       "abstraction": 2,
+       "target": 1,
+       "collective": 5,
+       "arousal": 2,
        "vocalisation": 1
       },
       "split": {
@@ -882,6 +1207,19 @@
        "specificity": 2,
        "delay": 2,
        "abstraction": 2,
+       "target": 1,
+       "collective": 4,
+       "arousal": 2,
+       "vocalisation": 1
+      },
+      "vacate": {
+       "agency": 2,
+       "deference": 7,
+       "assertiveness": 1,
+       "procedural": 5,
+       "specificity": 4,
+       "delay": 1,
+       "abstraction": 3,
        "target": 1,
        "collective": 4,
        "arousal": 2,
@@ -1050,6 +1388,19 @@
        "arousal": 2,
        "vocalisation": 2
       },
+      "announce": {
+       "agency": 5,
+       "deference": 5,
+       "assertiveness": 4,
+       "procedural": 5,
+       "specificity": 3,
+       "delay": 2,
+       "abstraction": 4,
+       "target": 4,
+       "collective": 2,
+       "arousal": 3,
+       "vocalisation": 7
+      },
       "arrest": {
        "agency": 6,
        "deference": 6,
@@ -1076,6 +1427,19 @@
        "arousal": 2,
        "vocalisation": 7
       },
+      "attack": {
+       "agency": 7,
+       "deference": 1,
+       "assertiveness": 7,
+       "procedural": 1,
+       "specificity": 4,
+       "delay": 1,
+       "abstraction": 2,
+       "target": 7,
+       "collective": 5,
+       "arousal": 7,
+       "vocalisation": 2
+      },
       "beat": {
        "agency": 7,
        "deference": 1,
@@ -1088,6 +1452,19 @@
        "collective": 4,
        "arousal": 7,
        "vocalisation": 1
+      },
+      "blow": {
+       "agency": 5,
+       "deference": 4,
+       "assertiveness": 5,
+       "procedural": 3,
+       "specificity": 3,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 4,
+       "collective": 2,
+       "arousal": 5,
+       "vocalisation": 5
       },
       "break": {
        "agency": 6,
@@ -1115,6 +1492,19 @@
        "arousal": 3,
        "vocalisation": 1
       },
+      "burn": {
+       "agency": 7,
+       "deference": 1,
+       "assertiveness": 7,
+       "procedural": 1,
+       "specificity": 4,
+       "delay": 1,
+       "abstraction": 2,
+       "target": 4,
+       "collective": 4,
+       "arousal": 7,
+       "vocalisation": 1
+      },
       "call": {
        "agency": 4,
        "deference": 5,
@@ -1127,6 +1517,19 @@
        "collective": 2,
        "arousal": 3,
        "vocalisation": 7
+      },
+      "cancel": {
+       "agency": 5,
+       "deference": 4,
+       "assertiveness": 5,
+       "procedural": 5,
+       "specificity": 3,
+       "delay": 2,
+       "abstraction": 4,
+       "target": 4,
+       "collective": 2,
+       "arousal": 3,
+       "vocalisation": 2
       },
       "carry": {
        "agency": 4,
@@ -1154,6 +1557,19 @@
        "arousal": 7,
        "vocalisation": 2
       },
+      "check": {
+       "agency": 4,
+       "deference": 5,
+       "assertiveness": 3,
+       "procedural": 6,
+       "specificity": 3,
+       "delay": 2,
+       "abstraction": 4,
+       "target": 4,
+       "collective": 2,
+       "arousal": 2,
+       "vocalisation": 2
+      },
       "clear": {
        "agency": 6,
        "deference": 4,
@@ -1177,6 +1593,19 @@
        "abstraction": 3,
        "target": 4,
        "collective": 2,
+       "arousal": 3,
+       "vocalisation": 2
+      },
+      "conduct": {
+       "agency": 5,
+       "deference": 5,
+       "assertiveness": 4,
+       "procedural": 6,
+       "specificity": 3,
+       "delay": 2,
+       "abstraction": 6,
+       "target": 4,
+       "collective": 4,
        "arousal": 3,
        "vocalisation": 2
       },
@@ -1206,6 +1635,19 @@
        "arousal": 4,
        "vocalisation": 1
       },
+      "delay": {
+       "agency": 2,
+       "deference": 4,
+       "assertiveness": 1,
+       "procedural": 4,
+       "specificity": 2,
+       "delay": 7,
+       "abstraction": 3,
+       "target": 1,
+       "collective": 1,
+       "arousal": 1,
+       "vocalisation": 1
+      },
       "detain": {
        "agency": 6,
        "deference": 6,
@@ -1231,6 +1673,32 @@
        "collective": 4,
        "arousal": 4,
        "vocalisation": 3
+      },
+      "divide": {
+       "agency": 6,
+       "deference": 5,
+       "assertiveness": 5,
+       "procedural": 5,
+       "specificity": 4,
+       "delay": 1,
+       "abstraction": 3,
+       "target": 4,
+       "collective": 4,
+       "arousal": 4,
+       "vocalisation": 3
+      },
+      "drag": {
+       "agency": 6,
+       "deference": 4,
+       "assertiveness": 6,
+       "procedural": 2,
+       "specificity": 5,
+       "delay": 1,
+       "abstraction": 2,
+       "target": 7,
+       "collective": 2,
+       "arousal": 6,
+       "vocalisation": 1
       },
       "drive": {
        "agency": 5,
@@ -1258,6 +1726,19 @@
        "arousal": 3,
        "vocalisation": 2
       },
+      "enter": {
+       "agency": 5,
+       "deference": 5,
+       "assertiveness": 4,
+       "procedural": 5,
+       "specificity": 3,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 4,
+       "collective": 5,
+       "arousal": 3,
+       "vocalisation": 1
+      },
       "escort": {
        "agency": 5,
        "deference": 6,
@@ -1270,6 +1751,45 @@
        "collective": 3,
        "arousal": 3,
        "vocalisation": 2
+      },
+      "evacuate": {
+       "agency": 6,
+       "deference": 5,
+       "assertiveness": 6,
+       "procedural": 5,
+       "specificity": 5,
+       "delay": 1,
+       "abstraction": 3,
+       "target": 4,
+       "collective": 4,
+       "arousal": 5,
+       "vocalisation": 4
+      },
+      "extend": {
+       "agency": 5,
+       "deference": 4,
+       "assertiveness": 4,
+       "procedural": 6,
+       "specificity": 3,
+       "delay": 2,
+       "abstraction": 5,
+       "target": 4,
+       "collective": 4,
+       "arousal": 3,
+       "vocalisation": 2
+      },
+      "find": {
+       "agency": 4,
+       "deference": 4,
+       "assertiveness": 3,
+       "procedural": 4,
+       "specificity": 2,
+       "delay": 3,
+       "abstraction": 5,
+       "target": 3,
+       "collective": 2,
+       "arousal": 2,
+       "vocalisation": 1
       },
       "finish": {
        "agency": 5,
@@ -1308,6 +1828,32 @@
        "target": 4,
        "collective": 5,
        "arousal": 6,
+       "vocalisation": 2
+      },
+      "form": {
+       "agency": 5,
+       "deference": 4,
+       "assertiveness": 4,
+       "procedural": 5,
+       "specificity": 3,
+       "delay": 2,
+       "abstraction": 4,
+       "target": 4,
+       "collective": 6,
+       "arousal": 3,
+       "vocalisation": 1
+      },
+      "gather": {
+       "agency": 5,
+       "deference": 4,
+       "assertiveness": 4,
+       "procedural": 5,
+       "specificity": 3,
+       "delay": 2,
+       "abstraction": 4,
+       "target": 4,
+       "collective": 5,
+       "arousal": 3,
        "vocalisation": 2
       },
       "give": {
@@ -1362,6 +1908,19 @@
        "arousal": 2,
        "vocalisation": 1
       },
+      "invite": {
+       "agency": 4,
+       "deference": 4,
+       "assertiveness": 3,
+       "procedural": 5,
+       "specificity": 3,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 4,
+       "collective": 2,
+       "arousal": 2,
+       "vocalisation": 5
+      },
       "join": {
        "agency": 4,
        "deference": 3,
@@ -1386,6 +1945,19 @@
        "target": 1,
        "collective": 4,
        "arousal": 2,
+       "vocalisation": 1
+      },
+      "kill": {
+       "agency": 7,
+       "deference": 1,
+       "assertiveness": 7,
+       "procedural": 1,
+       "specificity": 5,
+       "delay": 1,
+       "abstraction": 2,
+       "target": 7,
+       "collective": 1,
+       "arousal": 7,
        "vocalisation": 1
       },
       "lead": {
@@ -1479,6 +2051,32 @@
        "arousal": 4,
        "vocalisation": 7
       },
+      "patrol": {
+       "agency": 5,
+       "deference": 6,
+       "assertiveness": 3,
+       "procedural": 7,
+       "specificity": 4,
+       "delay": 1,
+       "abstraction": 3,
+       "target": 4,
+       "collective": 4,
+       "arousal": 2,
+       "vocalisation": 1
+      },
+      "post": {
+       "agency": 5,
+       "deference": 5,
+       "assertiveness": 4,
+       "procedural": 6,
+       "specificity": 3,
+       "delay": 2,
+       "abstraction": 4,
+       "target": 4,
+       "collective": 3,
+       "arousal": 3,
+       "vocalisation": 2
+      },
       "postpone": {
        "agency": 2,
        "deference": 4,
@@ -1491,6 +2089,19 @@
        "collective": 1,
        "arousal": 1,
        "vocalisation": 1
+      },
+      "proceed": {
+       "agency": 5,
+       "deference": 6,
+       "assertiveness": 4,
+       "procedural": 6,
+       "specificity": 2,
+       "delay": 2,
+       "abstraction": 6,
+       "target": 4,
+       "collective": 4,
+       "arousal": 3,
+       "vocalisation": 2
       },
       "push": {
        "agency": 6,
@@ -1505,6 +2116,19 @@
        "arousal": 6,
        "vocalisation": 1
       },
+      "read": {
+       "agency": 5,
+       "deference": 6,
+       "assertiveness": 4,
+       "procedural": 6,
+       "specificity": 3,
+       "delay": 1,
+       "abstraction": 3,
+       "target": 4,
+       "collective": 4,
+       "arousal": 2,
+       "vocalisation": 7
+      },
       "release": {
        "agency": 5,
        "deference": 4,
@@ -1516,6 +2140,19 @@
        "target": 4,
        "collective": 2,
        "arousal": 3,
+       "vocalisation": 1
+      },
+      "remain": {
+       "agency": 2,
+       "deference": 5,
+       "assertiveness": 2,
+       "procedural": 4,
+       "specificity": 2,
+       "delay": 5,
+       "abstraction": 3,
+       "target": 1,
+       "collective": 2,
+       "arousal": 2,
        "vocalisation": 1
       },
       "remove": {
@@ -1570,6 +2207,19 @@
        "arousal": 3,
        "vocalisation": 1
       },
+      "seize": {
+       "agency": 6,
+       "deference": 5,
+       "assertiveness": 6,
+       "procedural": 5,
+       "specificity": 4,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 4,
+       "collective": 2,
+       "arousal": 5,
+       "vocalisation": 1
+      },
       "send": {
        "agency": 5,
        "deference": 5,
@@ -1596,6 +2246,19 @@
        "arousal": 7,
        "vocalisation": 1
       },
+      "show": {
+       "agency": 5,
+       "deference": 4,
+       "assertiveness": 5,
+       "procedural": 4,
+       "specificity": 2,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 4,
+       "collective": 5,
+       "arousal": 4,
+       "vocalisation": 2
+      },
       "shut": {
        "agency": 5,
        "deference": 5,
@@ -1606,6 +2269,58 @@
        "abstraction": 3,
        "target": 4,
        "collective": 4,
+       "arousal": 4,
+       "vocalisation": 2
+      },
+      "sit": {
+       "agency": 2,
+       "deference": 4,
+       "assertiveness": 1,
+       "procedural": 4,
+       "specificity": 2,
+       "delay": 1,
+       "abstraction": 1,
+       "target": 1,
+       "collective": 1,
+       "arousal": 1,
+       "vocalisation": 1
+      },
+      "sleep": {
+       "agency": 2,
+       "deference": 4,
+       "assertiveness": 1,
+       "procedural": 1,
+       "specificity": 3,
+       "delay": 1,
+       "abstraction": 2,
+       "target": 1,
+       "collective": 1,
+       "arousal": 1,
+       "vocalisation": 1
+      },
+      "split": {
+       "agency": 5,
+       "deference": 4,
+       "assertiveness": 5,
+       "procedural": 4,
+       "specificity": 4,
+       "delay": 1,
+       "abstraction": 3,
+       "target": 4,
+       "collective": 3,
+       "arousal": 4,
+       "vocalisation": 3
+      },
+      "stage": {
+       "agency": 5,
+       "deference": 4,
+       "assertiveness": 5,
+       "procedural": 4,
+       "specificity": 3,
+       "delay": 2,
+       "abstraction": 5,
+       "target": 4,
+       "collective": 5,
        "arousal": 4,
        "vocalisation": 2
       },
@@ -1699,6 +2414,19 @@
        "collective": 1,
        "arousal": 1,
        "vocalisation": 1
+      },
+      "wake": {
+       "agency": 5,
+       "deference": 4,
+       "assertiveness": 4,
+       "procedural": 4,
+       "specificity": 4,
+       "delay": 1,
+       "abstraction": 2,
+       "target": 7,
+       "collective": 1,
+       "arousal": 3,
+       "vocalisation": 4
       },
       "walk": {
        "agency": 4,
@@ -1844,6 +2572,32 @@
        "arousal": 2,
        "vocalisation": 1
       },
+      "adjust": {
+       "agency": 4,
+       "deference": 4,
+       "assertiveness": 3,
+       "procedural": 5,
+       "specificity": 2,
+       "delay": 3,
+       "abstraction": 6,
+       "target": 4,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 1
+      },
+      "admit": {
+       "agency": 4,
+       "deference": 5,
+       "assertiveness": 3,
+       "procedural": 6,
+       "specificity": 4,
+       "delay": 3,
+       "abstraction": 4,
+       "target": 4,
+       "collective": 4,
+       "arousal": 2,
+       "vocalisation": 2
+      },
       "allow": {
        "agency": 4,
        "deference": 6,
@@ -1854,6 +2608,19 @@
        "abstraction": 5,
        "target": 4,
        "collective": 1,
+       "arousal": 2,
+       "vocalisation": 2
+      },
+      "apply": {
+       "agency": 4,
+       "deference": 6,
+       "assertiveness": 3,
+       "procedural": 6,
+       "specificity": 3,
+       "delay": 3,
+       "abstraction": 6,
+       "target": 4,
+       "collective": 4,
        "arousal": 2,
        "vocalisation": 2
       },
@@ -1869,6 +2636,19 @@
        "collective": 1,
        "arousal": 2,
        "vocalisation": 6
+      },
+      "assess": {
+       "agency": 4,
+       "deference": 5,
+       "assertiveness": 2,
+       "procedural": 6,
+       "specificity": 4,
+       "delay": 4,
+       "abstraction": 7,
+       "target": 4,
+       "collective": 1,
+       "arousal": 1,
+       "vocalisation": 1
       },
       "assign": {
        "agency": 4,
@@ -1908,6 +2688,32 @@
        "collective": 4,
        "arousal": 3,
        "vocalisation": 2
+      },
+      "bar": {
+       "agency": 5,
+       "deference": 7,
+       "assertiveness": 5,
+       "procedural": 6,
+       "specificity": 4,
+       "delay": 3,
+       "abstraction": 4,
+       "target": 4,
+       "collective": 4,
+       "arousal": 3,
+       "vocalisation": 2
+      },
+      "calculate": {
+       "agency": 3,
+       "deference": 5,
+       "assertiveness": 2,
+       "procedural": 6,
+       "specificity": 2,
+       "delay": 4,
+       "abstraction": 7,
+       "target": 4,
+       "collective": 1,
+       "arousal": 1,
+       "vocalisation": 1
       },
       "call": {
        "agency": 4,
@@ -1974,6 +2780,32 @@
        "arousal": 3,
        "vocalisation": 2
       },
+      "count": {
+       "agency": 4,
+       "deference": 6,
+       "assertiveness": 3,
+       "procedural": 6,
+       "specificity": 4,
+       "delay": 3,
+       "abstraction": 4,
+       "target": 4,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 1
+      },
+      "cover": {
+       "agency": 4,
+       "deference": 5,
+       "assertiveness": 3,
+       "procedural": 6,
+       "specificity": 3,
+       "delay": 3,
+       "abstraction": 5,
+       "target": 4,
+       "collective": 2,
+       "arousal": 2,
+       "vocalisation": 2
+      },
       "cut": {
        "agency": 5,
        "deference": 5,
@@ -1987,6 +2819,45 @@
        "arousal": 3,
        "vocalisation": 1
       },
+      "deduct": {
+       "agency": 5,
+       "deference": 6,
+       "assertiveness": 4,
+       "procedural": 6,
+       "specificity": 4,
+       "delay": 3,
+       "abstraction": 4,
+       "target": 4,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 1
+      },
+      "defer": {
+       "agency": 2,
+       "deference": 5,
+       "assertiveness": 2,
+       "procedural": 5,
+       "specificity": 3,
+       "delay": 7,
+       "abstraction": 4,
+       "target": 4,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 1
+      },
+      "delay": {
+       "agency": 2,
+       "deference": 5,
+       "assertiveness": 2,
+       "procedural": 5,
+       "specificity": 2,
+       "delay": 7,
+       "abstraction": 4,
+       "target": 1,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 1
+      },
       "deny": {
        "agency": 5,
        "deference": 6,
@@ -1997,6 +2868,19 @@
        "abstraction": 4,
        "target": 4,
        "collective": 4,
+       "arousal": 3,
+       "vocalisation": 2
+      },
+      "discharge": {
+       "agency": 5,
+       "deference": 6,
+       "assertiveness": 5,
+       "procedural": 6,
+       "specificity": 5,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 4,
+       "collective": 1,
        "arousal": 3,
        "vocalisation": 2
       },
@@ -2091,6 +2975,19 @@
        "arousal": 3,
        "vocalisation": 2
       },
+      "exempt": {
+       "agency": 4,
+       "deference": 6,
+       "assertiveness": 3,
+       "procedural": 6,
+       "specificity": 4,
+       "delay": 3,
+       "abstraction": 5,
+       "target": 4,
+       "collective": 4,
+       "arousal": 2,
+       "vocalisation": 2
+      },
       "expel": {
        "agency": 5,
        "deference": 7,
@@ -2130,6 +3027,58 @@
        "arousal": 3,
        "vocalisation": 2
       },
+      "fine": {
+       "agency": 5,
+       "deference": 7,
+       "assertiveness": 5,
+       "procedural": 7,
+       "specificity": 5,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 4,
+       "collective": 4,
+       "arousal": 3,
+       "vocalisation": 2
+      },
+      "fire": {
+       "agency": 5,
+       "deference": 6,
+       "assertiveness": 5,
+       "procedural": 5,
+       "specificity": 5,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 7,
+       "collective": 4,
+       "arousal": 4,
+       "vocalisation": 2
+      },
+      "flunk": {
+       "agency": 5,
+       "deference": 6,
+       "assertiveness": 4,
+       "procedural": 6,
+       "specificity": 5,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 4,
+       "collective": 4,
+       "arousal": 3,
+       "vocalisation": 2
+      },
+      "forfeit": {
+       "agency": 4,
+       "deference": 4,
+       "assertiveness": 3,
+       "procedural": 5,
+       "specificity": 3,
+       "delay": 2,
+       "abstraction": 4,
+       "target": 4,
+       "collective": 4,
+       "arousal": 2,
+       "vocalisation": 1
+      },
       "give": {
        "agency": 4,
        "deference": 5,
@@ -2143,6 +3092,19 @@
        "arousal": 2,
        "vocalisation": 2
       },
+      "grade": {
+       "agency": 4,
+       "deference": 6,
+       "assertiveness": 3,
+       "procedural": 6,
+       "specificity": 4,
+       "delay": 3,
+       "abstraction": 5,
+       "target": 4,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 1
+      },
       "grant": {
        "agency": 4,
        "deference": 6,
@@ -2151,6 +3113,19 @@
        "specificity": 3,
        "delay": 3,
        "abstraction": 5,
+       "target": 4,
+       "collective": 4,
+       "arousal": 2,
+       "vocalisation": 2
+      },
+      "help": {
+       "agency": 4,
+       "deference": 4,
+       "assertiveness": 3,
+       "procedural": 5,
+       "specificity": 2,
+       "delay": 3,
+       "abstraction": 6,
        "target": 4,
        "collective": 4,
        "arousal": 2,
@@ -2181,6 +3156,45 @@
        "collective": 4,
        "arousal": 3,
        "vocalisation": 2
+      },
+      "include": {
+       "agency": 4,
+       "deference": 5,
+       "assertiveness": 3,
+       "procedural": 5,
+       "specificity": 2,
+       "delay": 3,
+       "abstraction": 5,
+       "target": 4,
+       "collective": 2,
+       "arousal": 2,
+       "vocalisation": 2
+      },
+      "increase": {
+       "agency": 4,
+       "deference": 4,
+       "assertiveness": 4,
+       "procedural": 6,
+       "specificity": 2,
+       "delay": 3,
+       "abstraction": 5,
+       "target": 4,
+       "collective": 4,
+       "arousal": 2,
+       "vocalisation": 2
+      },
+      "investigate": {
+       "agency": 4,
+       "deference": 5,
+       "assertiveness": 3,
+       "procedural": 6,
+       "specificity": 4,
+       "delay": 4,
+       "abstraction": 7,
+       "target": 4,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 1
       },
       "issue": {
        "agency": 5,
@@ -2312,6 +3326,19 @@
        "arousal": 2,
        "vocalisation": 1
       },
+      "penalize": {
+       "agency": 5,
+       "deference": 6,
+       "assertiveness": 5,
+       "procedural": 6,
+       "specificity": 4,
+       "delay": 3,
+       "abstraction": 5,
+       "target": 4,
+       "collective": 4,
+       "arousal": 3,
+       "vocalisation": 2
+      },
       "place": {
        "agency": 5,
        "deference": 6,
@@ -2364,6 +3391,19 @@
        "arousal": 3,
        "vocalisation": 1
       },
+      "punish": {
+       "agency": 5,
+       "deference": 7,
+       "assertiveness": 5,
+       "procedural": 6,
+       "specificity": 4,
+       "delay": 3,
+       "abstraction": 4,
+       "target": 7,
+       "collective": 4,
+       "arousal": 4,
+       "vocalisation": 2
+      },
       "put": {
        "agency": 4,
        "deference": 6,
@@ -2390,6 +3430,32 @@
        "arousal": 2,
        "vocalisation": 1
       },
+      "refer": {
+       "agency": 4,
+       "deference": 6,
+       "assertiveness": 3,
+       "procedural": 7,
+       "specificity": 4,
+       "delay": 3,
+       "abstraction": 5,
+       "target": 4,
+       "collective": 2,
+       "arousal": 2,
+       "vocalisation": 2
+      },
+      "refund": {
+       "agency": 4,
+       "deference": 4,
+       "assertiveness": 3,
+       "procedural": 6,
+       "specificity": 4,
+       "delay": 3,
+       "abstraction": 3,
+       "target": 4,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 1
+      },
       "refuse": {
        "agency": 5,
        "deference": 5,
@@ -2400,6 +3466,32 @@
        "abstraction": 4,
        "target": 4,
        "collective": 4,
+       "arousal": 3,
+       "vocalisation": 2
+      },
+      "reject": {
+       "agency": 5,
+       "deference": 7,
+       "assertiveness": 5,
+       "procedural": 6,
+       "specificity": 4,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 4,
+       "collective": 4,
+       "arousal": 3,
+       "vocalisation": 2
+      },
+      "release": {
+       "agency": 5,
+       "deference": 5,
+       "assertiveness": 5,
+       "procedural": 6,
+       "specificity": 4,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 4,
+       "collective": 1,
        "arousal": 3,
        "vocalisation": 2
       },
@@ -2468,6 +3560,45 @@
        "arousal": 2,
        "vocalisation": 2
       },
+      "rescind": {
+       "agency": 5,
+       "deference": 6,
+       "assertiveness": 5,
+       "procedural": 6,
+       "specificity": 5,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 4,
+       "collective": 4,
+       "arousal": 3,
+       "vocalisation": 2
+      },
+      "retake": {
+       "agency": 3,
+       "deference": 6,
+       "assertiveness": 3,
+       "procedural": 6,
+       "specificity": 4,
+       "delay": 4,
+       "abstraction": 3,
+       "target": 4,
+       "collective": 2,
+       "arousal": 2,
+       "vocalisation": 2
+      },
+      "review": {
+       "agency": 4,
+       "deference": 5,
+       "assertiveness": 3,
+       "procedural": 6,
+       "specificity": 4,
+       "delay": 4,
+       "abstraction": 7,
+       "target": 4,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 1
+      },
       "revoke": {
        "agency": 5,
        "deference": 6,
@@ -2478,6 +3609,32 @@
        "abstraction": 3,
        "target": 4,
        "collective": 4,
+       "arousal": 3,
+       "vocalisation": 2
+      },
+      "sack": {
+       "agency": 5,
+       "deference": 6,
+       "assertiveness": 5,
+       "procedural": 5,
+       "specificity": 5,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 4,
+       "collective": 4,
+       "arousal": 4,
+       "vocalisation": 2
+      },
+      "scrap": {
+       "agency": 5,
+       "deference": 5,
+       "assertiveness": 4,
+       "procedural": 5,
+       "specificity": 4,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 4,
+       "collective": 2,
        "arousal": 3,
        "vocalisation": 2
       },
@@ -2637,6 +3794,45 @@
        "arousal": 2,
        "vocalisation": 2
       },
+      "try": {
+       "agency": 3,
+       "deference": 4,
+       "assertiveness": 3,
+       "procedural": 4,
+       "specificity": 1,
+       "delay": 4,
+       "abstraction": 6,
+       "target": 4,
+       "collective": 4,
+       "arousal": 2,
+       "vocalisation": 2
+      },
+      "turn": {
+       "agency": 5,
+       "deference": 6,
+       "assertiveness": 5,
+       "procedural": 6,
+       "specificity": 3,
+       "delay": 2,
+       "abstraction": 4,
+       "target": 4,
+       "collective": 4,
+       "arousal": 3,
+       "vocalisation": 2
+      },
+      "wait": {
+       "agency": 1,
+       "deference": 4,
+       "assertiveness": 1,
+       "procedural": 4,
+       "specificity": 1,
+       "delay": 7,
+       "abstraction": 3,
+       "target": 1,
+       "collective": 1,
+       "arousal": 1,
+       "vocalisation": 1
+      },
       "waive": {
        "agency": 4,
        "deference": 6,
@@ -2791,6 +3987,32 @@
      "saved_at": "2026-08-18T14:03:01",
      "position": "indiv",
      "ratings": {
+      "accept": {
+       "agency": 1,
+       "deference": 7,
+       "assertiveness": 1,
+       "procedural": 4,
+       "specificity": 2,
+       "delay": 1,
+       "abstraction": 3,
+       "target": 1,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 1
+      },
+      "act": {
+       "agency": 4,
+       "deference": 3,
+       "assertiveness": 4,
+       "procedural": 4,
+       "specificity": 1,
+       "delay": 2,
+       "abstraction": 7,
+       "target": 1,
+       "collective": 1,
+       "arousal": 4,
+       "vocalisation": 1
+      },
       "appeal": {
        "agency": 5,
        "deference": 6,
@@ -2817,6 +4039,19 @@
        "arousal": 2,
        "vocalisation": 2
       },
+      "approach": {
+       "agency": 5,
+       "deference": 4,
+       "assertiveness": 4,
+       "procedural": 5,
+       "specificity": 3,
+       "delay": 2,
+       "abstraction": 4,
+       "target": 5,
+       "collective": 1,
+       "arousal": 3,
+       "vocalisation": 4
+      },
       "ask": {
        "agency": 4,
        "deference": 6,
@@ -2841,6 +4076,19 @@
        "target": 4,
        "collective": 1,
        "arousal": 2,
+       "vocalisation": 1
+      },
+      "break": {
+       "agency": 6,
+       "deference": 1,
+       "assertiveness": 6,
+       "procedural": 1,
+       "specificity": 3,
+       "delay": 1,
+       "abstraction": 2,
+       "target": 1,
+       "collective": 1,
+       "arousal": 6,
        "vocalisation": 1
       },
       "bring": {
@@ -2869,6 +4117,19 @@
        "arousal": 4,
        "vocalisation": 7
       },
+      "cancel": {
+       "agency": 5,
+       "deference": 2,
+       "assertiveness": 4,
+       "procedural": 2,
+       "specificity": 3,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 4,
+       "collective": 1,
+       "arousal": 4,
+       "vocalisation": 1
+      },
       "challenge": {
        "agency": 6,
        "deference": 2,
@@ -2893,6 +4154,32 @@
        "target": 1,
        "collective": 1,
        "arousal": 3,
+       "vocalisation": 1
+      },
+      "claim": {
+       "agency": 5,
+       "deference": 4,
+       "assertiveness": 5,
+       "procedural": 6,
+       "specificity": 4,
+       "delay": 3,
+       "abstraction": 4,
+       "target": 4,
+       "collective": 1,
+       "arousal": 3,
+       "vocalisation": 2
+      },
+      "commit": {
+       "agency": 5,
+       "deference": 1,
+       "assertiveness": 5,
+       "procedural": 1,
+       "specificity": 1,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 1,
+       "collective": 1,
+       "arousal": 6,
        "vocalisation": 1
       },
       "complain": {
@@ -2921,6 +4208,19 @@
        "arousal": 2,
        "vocalisation": 1
       },
+      "contact": {
+       "agency": 4,
+       "deference": 4,
+       "assertiveness": 3,
+       "procedural": 5,
+       "specificity": 3,
+       "delay": 2,
+       "abstraction": 4,
+       "target": 4,
+       "collective": 1,
+       "arousal": 3,
+       "vocalisation": 5
+      },
       "continue": {
        "agency": 4,
        "deference": 4,
@@ -2932,6 +4232,19 @@
        "target": 1,
        "collective": 1,
        "arousal": 3,
+       "vocalisation": 1
+      },
+      "cut": {
+       "agency": 5,
+       "deference": 2,
+       "assertiveness": 4,
+       "procedural": 1,
+       "specificity": 3,
+       "delay": 2,
+       "abstraction": 4,
+       "target": 1,
+       "collective": 1,
+       "arousal": 4,
        "vocalisation": 1
       },
       "drop": {
@@ -2985,6 +4298,19 @@
        "collective": 1,
        "arousal": 2,
        "vocalisation": 1
+      },
+      "enter": {
+       "agency": 5,
+       "deference": 3,
+       "assertiveness": 5,
+       "procedural": 5,
+       "specificity": 3,
+       "delay": 2,
+       "abstraction": 4,
+       "target": 4,
+       "collective": 1,
+       "arousal": 4,
+       "vocalisation": 2
       },
       "fight": {
        "agency": 6,
@@ -3077,6 +4403,19 @@
        "arousal": 3,
        "vocalisation": 1
       },
+      "hit": {
+       "agency": 7,
+       "deference": 1,
+       "assertiveness": 7,
+       "procedural": 1,
+       "specificity": 4,
+       "delay": 1,
+       "abstraction": 1,
+       "target": 7,
+       "collective": 1,
+       "arousal": 7,
+       "vocalisation": 1
+      },
       "join": {
        "agency": 5,
        "deference": 4,
@@ -3101,6 +4440,19 @@
        "target": 1,
        "collective": 1,
        "arousal": 2,
+       "vocalisation": 1
+      },
+      "kill": {
+       "agency": 7,
+       "deference": 1,
+       "assertiveness": 7,
+       "procedural": 1,
+       "specificity": 4,
+       "delay": 1,
+       "abstraction": 1,
+       "target": 4,
+       "collective": 1,
+       "arousal": 7,
        "vocalisation": 1
       },
       "launch": {
@@ -3141,6 +4493,19 @@
        "collective": 1,
        "arousal": 4,
        "vocalisation": 1
+      },
+      "lodge": {
+       "agency": 6,
+       "deference": 4,
+       "assertiveness": 5,
+       "procedural": 7,
+       "specificity": 5,
+       "delay": 2,
+       "abstraction": 4,
+       "target": 4,
+       "collective": 1,
+       "arousal": 4,
+       "vocalisation": 2
       },
       "look": {
        "agency": 3,
@@ -3194,6 +4559,32 @@
        "arousal": 2,
        "vocalisation": 1
       },
+      "petition": {
+       "agency": 5,
+       "deference": 5,
+       "assertiveness": 4,
+       "procedural": 7,
+       "specificity": 5,
+       "delay": 3,
+       "abstraction": 4,
+       "target": 4,
+       "collective": 1,
+       "arousal": 3,
+       "vocalisation": 3
+      },
+      "press": {
+       "agency": 6,
+       "deference": 2,
+       "assertiveness": 6,
+       "procedural": 5,
+       "specificity": 4,
+       "delay": 2,
+       "abstraction": 4,
+       "target": 4,
+       "collective": 1,
+       "arousal": 5,
+       "vocalisation": 3
+      },
       "protest": {
        "agency": 6,
        "deference": 2,
@@ -3231,6 +4622,45 @@
        "target": 1,
        "collective": 1,
        "arousal": 5,
+       "vocalisation": 1
+      },
+      "raise": {
+       "agency": 5,
+       "deference": 4,
+       "assertiveness": 5,
+       "procedural": 5,
+       "specificity": 3,
+       "delay": 2,
+       "abstraction": 4,
+       "target": 4,
+       "collective": 1,
+       "arousal": 4,
+       "vocalisation": 4
+      },
+      "report": {
+       "agency": 5,
+       "deference": 4,
+       "assertiveness": 5,
+       "procedural": 6,
+       "specificity": 4,
+       "delay": 2,
+       "abstraction": 4,
+       "target": 4,
+       "collective": 1,
+       "arousal": 4,
+       "vocalisation": 3
+      },
+      "resign": {
+       "agency": 5,
+       "deference": 1,
+       "assertiveness": 4,
+       "procedural": 2,
+       "specificity": 5,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 1,
+       "collective": 1,
+       "arousal": 4,
        "vocalisation": 1
       },
       "return": {
@@ -3298,6 +4728,45 @@
        "arousal": 3,
        "vocalisation": 1
       },
+      "send": {
+       "agency": 5,
+       "deference": 4,
+       "assertiveness": 4,
+       "procedural": 5,
+       "specificity": 3,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 4,
+       "collective": 1,
+       "arousal": 3,
+       "vocalisation": 3
+      },
+      "settle": {
+       "agency": 4,
+       "deference": 5,
+       "assertiveness": 2,
+       "procedural": 5,
+       "specificity": 3,
+       "delay": 3,
+       "abstraction": 4,
+       "target": 4,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 2
+      },
+      "sign": {
+       "agency": 5,
+       "deference": 3,
+       "assertiveness": 5,
+       "procedural": 4,
+       "specificity": 3,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 4,
+       "collective": 3,
+       "arousal": 3,
+       "vocalisation": 1
+      },
       "sit": {
        "agency": 4,
        "deference": 2,
@@ -3310,6 +4779,45 @@
        "collective": 1,
        "arousal": 4,
        "vocalisation": 1
+      },
+      "skip": {
+       "agency": 4,
+       "deference": 3,
+       "assertiveness": 3,
+       "procedural": 2,
+       "specificity": 3,
+       "delay": 1,
+       "abstraction": 2,
+       "target": 1,
+       "collective": 1,
+       "arousal": 3,
+       "vocalisation": 1
+      },
+      "speak": {
+       "agency": 5,
+       "deference": 3,
+       "assertiveness": 5,
+       "procedural": 4,
+       "specificity": 3,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 4,
+       "collective": 1,
+       "arousal": 4,
+       "vocalisation": 7
+      },
+      "stage": {
+       "agency": 6,
+       "deference": 1,
+       "assertiveness": 6,
+       "procedural": 2,
+       "specificity": 4,
+       "delay": 2,
+       "abstraction": 4,
+       "target": 4,
+       "collective": 5,
+       "arousal": 6,
+       "vocalisation": 4
       },
       "start": {
        "agency": 4,
@@ -3349,6 +4857,19 @@
        "collective": 1,
        "arousal": 2,
        "vocalisation": 1
+      },
+      "strike": {
+       "agency": 6,
+       "deference": 1,
+       "assertiveness": 6,
+       "procedural": 1,
+       "specificity": 5,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 4,
+       "collective": 7,
+       "arousal": 6,
+       "vocalisation": 3
       },
       "study": {
        "agency": 4,
@@ -3402,6 +4923,32 @@
        "arousal": 2,
        "vocalisation": 2
       },
+      "tell": {
+       "agency": 5,
+       "deference": 3,
+       "assertiveness": 5,
+       "procedural": 3,
+       "specificity": 3,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 7,
+       "collective": 1,
+       "arousal": 4,
+       "vocalisation": 7
+      },
+      "train": {
+       "agency": 5,
+       "deference": 4,
+       "assertiveness": 3,
+       "procedural": 4,
+       "specificity": 3,
+       "delay": 3,
+       "abstraction": 5,
+       "target": 1,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 1
+      },
       "transfer": {
        "agency": 5,
        "deference": 4,
@@ -3413,6 +4960,19 @@
        "target": 4,
        "collective": 1,
        "arousal": 2,
+       "vocalisation": 1
+      },
+      "travel": {
+       "agency": 4,
+       "deference": 4,
+       "assertiveness": 2,
+       "procedural": 1,
+       "specificity": 3,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 1,
+       "collective": 1,
+       "arousal": 3,
        "vocalisation": 1
       },
       "try": {
@@ -3579,6 +5139,32 @@
      "saved_at": "2026-08-18T14:00:03",
      "position": "indiv",
      "ratings": {
+      "act": {
+       "agency": 4,
+       "deference": 4,
+       "assertiveness": 4,
+       "procedural": 4,
+       "specificity": 1,
+       "delay": 3,
+       "abstraction": 7,
+       "target": 1,
+       "collective": 1,
+       "arousal": 3,
+       "vocalisation": 1
+      },
+      "answer": {
+       "agency": 4,
+       "deference": 4,
+       "assertiveness": 3,
+       "procedural": 5,
+       "specificity": 3,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 4,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 5
+      },
       "appeal": {
        "agency": 5,
        "deference": 5,
@@ -3617,6 +5203,32 @@
        "collective": 1,
        "arousal": 2,
        "vocalisation": 5
+      },
+      "avoid": {
+       "agency": 2,
+       "deference": 3,
+       "assertiveness": 1,
+       "procedural": 2,
+       "specificity": 2,
+       "delay": 5,
+       "abstraction": 3,
+       "target": 1,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 1
+      },
+      "borrow": {
+       "agency": 5,
+       "deference": 4,
+       "assertiveness": 3,
+       "procedural": 4,
+       "specificity": 4,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 1,
+       "collective": 1,
+       "arousal": 3,
+       "vocalisation": 2
       },
       "bring": {
        "agency": 5,
@@ -3683,6 +5295,19 @@
        "arousal": 2,
        "vocalisation": 2
       },
+      "clear": {
+       "agency": 5,
+       "deference": 5,
+       "assertiveness": 3,
+       "procedural": 6,
+       "specificity": 4,
+       "delay": 2,
+       "abstraction": 4,
+       "target": 4,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 1
+      },
       "confront": {
        "agency": 7,
        "deference": 2,
@@ -3695,6 +5320,19 @@
        "collective": 1,
        "arousal": 6,
        "vocalisation": 6
+      },
+      "consult": {
+       "agency": 4,
+       "deference": 4,
+       "assertiveness": 3,
+       "procedural": 5,
+       "specificity": 3,
+       "delay": 3,
+       "abstraction": 5,
+       "target": 4,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 4
       },
       "contact": {
        "agency": 5,
@@ -3769,6 +5407,32 @@
        "specificity": 5,
        "delay": 2,
        "abstraction": 4,
+       "target": 4,
+       "collective": 1,
+       "arousal": 3,
+       "vocalisation": 2
+      },
+      "follow": {
+       "agency": 2,
+       "deference": 6,
+       "assertiveness": 2,
+       "procedural": 6,
+       "specificity": 2,
+       "delay": 3,
+       "abstraction": 4,
+       "target": 4,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 1
+      },
+      "handle": {
+       "agency": 5,
+       "deference": 4,
+       "assertiveness": 4,
+       "procedural": 5,
+       "specificity": 3,
+       "delay": 2,
+       "abstraction": 5,
        "target": 4,
        "collective": 1,
        "arousal": 3,
@@ -3852,6 +5516,32 @@
        "arousal": 2,
        "vocalisation": 1
       },
+      "mail": {
+       "agency": 5,
+       "deference": 4,
+       "assertiveness": 4,
+       "procedural": 6,
+       "specificity": 4,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 4,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 1
+      },
+      "meet": {
+       "agency": 4,
+       "deference": 4,
+       "assertiveness": 4,
+       "procedural": 5,
+       "specificity": 3,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 5,
+       "collective": 1,
+       "arousal": 3,
+       "vocalisation": 5
+      },
       "move": {
        "agency": 5,
        "deference": 1,
@@ -3891,6 +5581,19 @@
        "arousal": 2,
        "vocalisation": 1
       },
+      "post": {
+       "agency": 5,
+       "deference": 2,
+       "assertiveness": 5,
+       "procedural": 2,
+       "specificity": 3,
+       "delay": 2,
+       "abstraction": 2,
+       "target": 4,
+       "collective": 1,
+       "arousal": 5,
+       "vocalisation": 3
+      },
       "pursue": {
        "agency": 5,
        "deference": 4,
@@ -3917,6 +5620,45 @@
        "arousal": 2,
        "vocalisation": 4
       },
+      "repay": {
+       "agency": 5,
+       "deference": 6,
+       "assertiveness": 3,
+       "procedural": 6,
+       "specificity": 4,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 4,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 1
+      },
+      "report": {
+       "agency": 6,
+       "deference": 2,
+       "assertiveness": 6,
+       "procedural": 6,
+       "specificity": 4,
+       "delay": 2,
+       "abstraction": 4,
+       "target": 4,
+       "collective": 1,
+       "arousal": 4,
+       "vocalisation": 3
+      },
+      "research": {
+       "agency": 4,
+       "deference": 4,
+       "assertiveness": 2,
+       "procedural": 5,
+       "specificity": 3,
+       "delay": 6,
+       "abstraction": 6,
+       "target": 4,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 1
+      },
       "respond": {
        "agency": 4,
        "deference": 4,
@@ -3929,6 +5671,19 @@
        "collective": 1,
        "arousal": 2,
        "vocalisation": 4
+      },
+      "run": {
+       "agency": 3,
+       "deference": 1,
+       "assertiveness": 2,
+       "procedural": 1,
+       "specificity": 2,
+       "delay": 1,
+       "abstraction": 2,
+       "target": 1,
+       "collective": 1,
+       "arousal": 5,
+       "vocalisation": 1
       },
       "see": {
        "agency": 4,
@@ -3995,6 +5750,19 @@
        "arousal": 2,
        "vocalisation": 2
       },
+      "show": {
+       "agency": 4,
+       "deference": 4,
+       "assertiveness": 3,
+       "procedural": 5,
+       "specificity": 2,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 4,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 1
+      },
       "skip": {
        "agency": 4,
        "deference": 1,
@@ -4020,6 +5788,19 @@
        "collective": 1,
        "arousal": 3,
        "vocalisation": 7
+      },
+      "stay": {
+       "agency": 1,
+       "deference": 4,
+       "assertiveness": 1,
+       "procedural": 4,
+       "specificity": 1,
+       "delay": 7,
+       "abstraction": 3,
+       "target": 1,
+       "collective": 1,
+       "arousal": 1,
+       "vocalisation": 1
       },
       "sue": {
        "agency": 7,
@@ -4059,6 +5840,19 @@
        "collective": 1,
        "arousal": 4,
        "vocalisation": 7
+      },
+      "track": {
+       "agency": 4,
+       "deference": 4,
+       "assertiveness": 3,
+       "procedural": 5,
+       "specificity": 4,
+       "delay": 2,
+       "abstraction": 5,
+       "target": 4,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 1
       },
       "visit": {
        "agency": 5,
@@ -4212,6 +6006,19 @@
      "saved_at": "2026-08-18T14:00:24",
      "position": "inst",
      "ratings": {
+      "accept": {
+       "agency": 4,
+       "deference": 4,
+       "assertiveness": 3,
+       "procedural": 6,
+       "specificity": 3,
+       "delay": 3,
+       "abstraction": 4,
+       "target": 4,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 2
+      },
       "add": {
        "agency": 4,
        "deference": 4,
@@ -4224,6 +6031,19 @@
        "collective": 1,
        "arousal": 2,
        "vocalisation": 1
+      },
+      "admit": {
+       "agency": 5,
+       "deference": 4,
+       "assertiveness": 3,
+       "procedural": 5,
+       "specificity": 4,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 4,
+       "collective": 2,
+       "arousal": 2,
+       "vocalisation": 2
       },
       "apply": {
        "agency": 5,
@@ -4251,6 +6071,19 @@
        "arousal": 2,
        "vocalisation": 6
       },
+      "attach": {
+       "agency": 6,
+       "deference": 5,
+       "assertiveness": 6,
+       "procedural": 6,
+       "specificity": 5,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 4,
+       "collective": 1,
+       "arousal": 4,
+       "vocalisation": 1
+      },
       "auction": {
        "agency": 5,
        "deference": 4,
@@ -4264,6 +6097,19 @@
        "arousal": 3,
        "vocalisation": 1
       },
+      "begin": {
+       "agency": 4,
+       "deference": 4,
+       "assertiveness": 3,
+       "procedural": 5,
+       "specificity": 2,
+       "delay": 2,
+       "abstraction": 6,
+       "target": 4,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 1
+      },
       "bill": {
        "agency": 4,
        "deference": 4,
@@ -4275,6 +6121,19 @@
        "target": 4,
        "collective": 1,
        "arousal": 2,
+       "vocalisation": 2
+      },
+      "boot": {
+       "agency": 5,
+       "deference": 5,
+       "assertiveness": 5,
+       "procedural": 4,
+       "specificity": 4,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 7,
+       "collective": 1,
+       "arousal": 4,
        "vocalisation": 2
       },
       "bring": {
@@ -4311,6 +6170,19 @@
        "specificity": 4,
        "delay": 2,
        "abstraction": 3,
+       "target": 4,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 1
+      },
+      "change": {
+       "agency": 4,
+       "deference": 4,
+       "assertiveness": 3,
+       "procedural": 5,
+       "specificity": 2,
+       "delay": 3,
+       "abstraction": 6,
        "target": 4,
        "collective": 1,
        "arousal": 2,
@@ -4355,6 +6227,19 @@
        "arousal": 2,
        "vocalisation": 2
       },
+      "confiscate": {
+       "agency": 5,
+       "deference": 7,
+       "assertiveness": 6,
+       "procedural": 6,
+       "specificity": 5,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 4,
+       "collective": 1,
+       "arousal": 4,
+       "vocalisation": 1
+      },
       "contact": {
        "agency": 4,
        "deference": 4,
@@ -4394,6 +6279,32 @@
        "arousal": 3,
        "vocalisation": 1
       },
+      "declare": {
+       "agency": 5,
+       "deference": 5,
+       "assertiveness": 4,
+       "procedural": 6,
+       "specificity": 3,
+       "delay": 2,
+       "abstraction": 5,
+       "target": 4,
+       "collective": 2,
+       "arousal": 2,
+       "vocalisation": 4
+      },
+      "deduct": {
+       "agency": 5,
+       "deference": 7,
+       "assertiveness": 5,
+       "procedural": 7,
+       "specificity": 4,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 4,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 1
+      },
       "deny": {
        "agency": 5,
        "deference": 5,
@@ -4418,6 +6329,45 @@
        "target": 4,
        "collective": 1,
        "arousal": 3,
+       "vocalisation": 1
+      },
+      "disconnect": {
+       "agency": 5,
+       "deference": 7,
+       "assertiveness": 5,
+       "procedural": 7,
+       "specificity": 5,
+       "delay": 1,
+       "abstraction": 3,
+       "target": 4,
+       "collective": 1,
+       "arousal": 3,
+       "vocalisation": 1
+      },
+      "discontinue": {
+       "agency": 5,
+       "deference": 5,
+       "assertiveness": 5,
+       "procedural": 6,
+       "specificity": 4,
+       "delay": 2,
+       "abstraction": 4,
+       "target": 4,
+       "collective": 1,
+       "arousal": 3,
+       "vocalisation": 1
+      },
+      "dismiss": {
+       "agency": 5,
+       "deference": 4,
+       "assertiveness": 3,
+       "procedural": 6,
+       "specificity": 5,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 4,
+       "collective": 1,
+       "arousal": 2,
        "vocalisation": 1
       },
       "drop": {
@@ -4459,6 +6409,19 @@
        "arousal": 6,
        "vocalisation": 2
       },
+      "extend": {
+       "agency": 4,
+       "deference": 4,
+       "assertiveness": 3,
+       "procedural": 6,
+       "specificity": 4,
+       "delay": 5,
+       "abstraction": 4,
+       "target": 4,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 2
+      },
       "file": {
        "agency": 5,
        "deference": 6,
@@ -4470,6 +6433,19 @@
        "target": 4,
        "collective": 1,
        "arousal": 2,
+       "vocalisation": 1
+      },
+      "fine": {
+       "agency": 5,
+       "deference": 7,
+       "assertiveness": 5,
+       "procedural": 7,
+       "specificity": 5,
+       "delay": 1,
+       "abstraction": 3,
+       "target": 4,
+       "collective": 1,
+       "arousal": 3,
        "vocalisation": 1
       },
       "fire": {
@@ -4484,6 +6460,19 @@
        "collective": 2,
        "arousal": 5,
        "vocalisation": 2
+      },
+      "follow": {
+       "agency": 5,
+       "deference": 4,
+       "assertiveness": 4,
+       "procedural": 6,
+       "specificity": 3,
+       "delay": 3,
+       "abstraction": 4,
+       "target": 4,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 1
       },
       "force": {
        "agency": 6,
@@ -4509,6 +6498,45 @@
        "target": 4,
        "collective": 1,
        "arousal": 5,
+       "vocalisation": 1
+      },
+      "forego": {
+       "agency": 4,
+       "deference": 4,
+       "assertiveness": 2,
+       "procedural": 5,
+       "specificity": 3,
+       "delay": 3,
+       "abstraction": 4,
+       "target": 4,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 1
+      },
+      "forgive": {
+       "agency": 5,
+       "deference": 5,
+       "assertiveness": 3,
+       "procedural": 6,
+       "specificity": 5,
+       "delay": 2,
+       "abstraction": 4,
+       "target": 4,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 1
+      },
+      "freeze": {
+       "agency": 4,
+       "deference": 4,
+       "assertiveness": 4,
+       "procedural": 6,
+       "specificity": 4,
+       "delay": 3,
+       "abstraction": 4,
+       "target": 4,
+       "collective": 1,
+       "arousal": 2,
        "vocalisation": 1
       },
       "garnish": {
@@ -4537,6 +6565,32 @@
        "arousal": 2,
        "vocalisation": 1
       },
+      "hand": {
+       "agency": 5,
+       "deference": 5,
+       "assertiveness": 4,
+       "procedural": 6,
+       "specificity": 4,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 4,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 1
+      },
+      "help": {
+       "agency": 4,
+       "deference": 4,
+       "assertiveness": 3,
+       "procedural": 5,
+       "specificity": 2,
+       "delay": 3,
+       "abstraction": 5,
+       "target": 4,
+       "collective": 4,
+       "arousal": 2,
+       "vocalisation": 2
+      },
       "hire": {
        "agency": 5,
        "deference": 5,
@@ -4558,6 +6612,32 @@
        "specificity": 3,
        "delay": 6,
        "abstraction": 4,
+       "target": 4,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 1
+      },
+      "impose": {
+       "agency": 5,
+       "deference": 7,
+       "assertiveness": 5,
+       "procedural": 6,
+       "specificity": 3,
+       "delay": 2,
+       "abstraction": 5,
+       "target": 4,
+       "collective": 4,
+       "arousal": 3,
+       "vocalisation": 2
+      },
+      "initiate": {
+       "agency": 5,
+       "deference": 6,
+       "assertiveness": 4,
+       "procedural": 7,
+       "specificity": 4,
+       "delay": 2,
+       "abstraction": 6,
        "target": 4,
        "collective": 1,
        "arousal": 2,
@@ -4602,6 +6682,45 @@
        "arousal": 2,
        "vocalisation": 1
       },
+      "notify": {
+       "agency": 4,
+       "deference": 4,
+       "assertiveness": 3,
+       "procedural": 6,
+       "specificity": 3,
+       "delay": 3,
+       "abstraction": 4,
+       "target": 4,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 3
+      },
+      "offer": {
+       "agency": 4,
+       "deference": 4,
+       "assertiveness": 3,
+       "procedural": 6,
+       "specificity": 3,
+       "delay": 3,
+       "abstraction": 5,
+       "target": 4,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 3
+      },
+      "pass": {
+       "agency": 4,
+       "deference": 4,
+       "assertiveness": 3,
+       "procedural": 6,
+       "specificity": 3,
+       "delay": 2,
+       "abstraction": 4,
+       "target": 4,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 1
+      },
       "pay": {
        "agency": 5,
        "deference": 4,
@@ -4610,6 +6729,58 @@
        "specificity": 4,
        "delay": 2,
        "abstraction": 3,
+       "target": 4,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 1
+      },
+      "postpone": {
+       "agency": 4,
+       "deference": 4,
+       "assertiveness": 2,
+       "procedural": 5,
+       "specificity": 3,
+       "delay": 7,
+       "abstraction": 4,
+       "target": 4,
+       "collective": 1,
+       "arousal": 1,
+       "vocalisation": 1
+      },
+      "press": {
+       "agency": 5,
+       "deference": 5,
+       "assertiveness": 5,
+       "procedural": 6,
+       "specificity": 4,
+       "delay": 2,
+       "abstraction": 4,
+       "target": 4,
+       "collective": 1,
+       "arousal": 3,
+       "vocalisation": 2
+      },
+      "proceed": {
+       "agency": 5,
+       "deference": 6,
+       "assertiveness": 4,
+       "procedural": 7,
+       "specificity": 3,
+       "delay": 2,
+       "abstraction": 5,
+       "target": 4,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 1
+      },
+      "provide": {
+       "agency": 4,
+       "deference": 4,
+       "assertiveness": 3,
+       "procedural": 5,
+       "specificity": 2,
+       "delay": 3,
+       "abstraction": 5,
        "target": 4,
        "collective": 1,
        "arousal": 2,
@@ -4641,6 +6812,58 @@
        "arousal": 3,
        "vocalisation": 2
       },
+      "raise": {
+       "agency": 5,
+       "deference": 4,
+       "assertiveness": 4,
+       "procedural": 5,
+       "specificity": 4,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 4,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 1
+      },
+      "recoup": {
+       "agency": 5,
+       "deference": 5,
+       "assertiveness": 5,
+       "procedural": 6,
+       "specificity": 4,
+       "delay": 3,
+       "abstraction": 4,
+       "target": 4,
+       "collective": 1,
+       "arousal": 3,
+       "vocalisation": 2
+      },
+      "reduce": {
+       "agency": 5,
+       "deference": 4,
+       "assertiveness": 3,
+       "procedural": 6,
+       "specificity": 4,
+       "delay": 3,
+       "abstraction": 4,
+       "target": 4,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 1
+      },
+      "refer": {
+       "agency": 5,
+       "deference": 5,
+       "assertiveness": 4,
+       "procedural": 7,
+       "specificity": 4,
+       "delay": 3,
+       "abstraction": 4,
+       "target": 4,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 2
+      },
       "refuse": {
        "agency": 5,
        "deference": 5,
@@ -4653,6 +6876,19 @@
        "collective": 1,
        "arousal": 3,
        "vocalisation": 2
+      },
+      "reimburse": {
+       "agency": 4,
+       "deference": 4,
+       "assertiveness": 3,
+       "procedural": 6,
+       "specificity": 5,
+       "delay": 3,
+       "abstraction": 3,
+       "target": 4,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 1
       },
       "release": {
        "agency": 4,
@@ -4706,6 +6942,32 @@
        "arousal": 5,
        "vocalisation": 1
       },
+      "return": {
+       "agency": 4,
+       "deference": 4,
+       "assertiveness": 3,
+       "procedural": 6,
+       "specificity": 4,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 4,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 2
+      },
+      "revoke": {
+       "agency": 5,
+       "deference": 7,
+       "assertiveness": 5,
+       "procedural": 6,
+       "specificity": 4,
+       "delay": 2,
+       "abstraction": 4,
+       "target": 4,
+       "collective": 1,
+       "arousal": 3,
+       "vocalisation": 2
+      },
       "seek": {
        "agency": 5,
        "deference": 5,
@@ -4757,6 +7019,32 @@
        "collective": 2,
        "arousal": 2,
        "vocalisation": 2
+      },
+      "settle": {
+       "agency": 5,
+       "deference": 4,
+       "assertiveness": 3,
+       "procedural": 6,
+       "specificity": 4,
+       "delay": 3,
+       "abstraction": 4,
+       "target": 4,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 2
+      },
+      "ship": {
+       "agency": 5,
+       "deference": 4,
+       "assertiveness": 4,
+       "procedural": 5,
+       "specificity": 5,
+       "delay": 2,
+       "abstraction": 2,
+       "target": 4,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 1
       },
       "shut": {
        "agency": 5,
@@ -4914,6 +7202,19 @@
        "arousal": 3,
        "vocalisation": 1
       },
+      "wait": {
+       "agency": 1,
+       "deference": 4,
+       "assertiveness": 1,
+       "procedural": 4,
+       "specificity": 1,
+       "delay": 7,
+       "abstraction": 3,
+       "target": 1,
+       "collective": 1,
+       "arousal": 1,
+       "vocalisation": 1
+      },
       "waive": {
        "agency": 5,
        "deference": 4,
@@ -4922,6 +7223,19 @@
        "specificity": 5,
        "delay": 2,
        "abstraction": 3,
+       "target": 4,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 1
+      },
+      "withdraw": {
+       "agency": 4,
+       "deference": 4,
+       "assertiveness": 3,
+       "procedural": 5,
+       "specificity": 3,
+       "delay": 2,
+       "abstraction": 4,
        "target": 4,
        "collective": 1,
        "arousal": 2,
@@ -5045,6 +7359,19 @@
      "saved_at": "2026-08-18T13:53:45",
      "position": "indiv",
      "ratings": {
+      "apply": {
+       "agency": 5,
+       "deference": 4,
+       "assertiveness": 3,
+       "procedural": 6,
+       "specificity": 4,
+       "delay": 3,
+       "abstraction": 4,
+       "target": 4,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 2
+      },
       "arrive": {
        "agency": 4,
        "deference": 6,
@@ -5069,6 +7396,19 @@
        "target": 5,
        "collective": 1,
        "arousal": 3,
+       "vocalisation": 6
+      },
+      "blow": {
+       "agency": 5,
+       "deference": 1,
+       "assertiveness": 6,
+       "procedural": 1,
+       "specificity": 3,
+       "delay": 1,
+       "abstraction": 2,
+       "target": 1,
+       "collective": 1,
+       "arousal": 7,
        "vocalisation": 6
       },
       "break": {
@@ -5162,6 +7502,45 @@
        "arousal": 2,
        "vocalisation": 1
       },
+      "complain": {
+       "agency": 5,
+       "deference": 4,
+       "assertiveness": 5,
+       "procedural": 4,
+       "specificity": 3,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 4,
+       "collective": 1,
+       "arousal": 4,
+       "vocalisation": 6
+      },
+      "confront": {
+       "agency": 7,
+       "deference": 2,
+       "assertiveness": 7,
+       "procedural": 2,
+       "specificity": 4,
+       "delay": 1,
+       "abstraction": 2,
+       "target": 7,
+       "collective": 1,
+       "arousal": 6,
+       "vocalisation": 6
+      },
+      "ditch": {
+       "agency": 6,
+       "deference": 1,
+       "assertiveness": 5,
+       "procedural": 1,
+       "specificity": 4,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 1,
+       "collective": 1,
+       "arousal": 5,
+       "vocalisation": 1
+      },
       "drive": {
        "agency": 4,
        "deference": 4,
@@ -5199,6 +7578,58 @@
        "target": 1,
        "collective": 1,
        "arousal": 1,
+       "vocalisation": 1
+      },
+      "fight": {
+       "agency": 6,
+       "deference": 2,
+       "assertiveness": 7,
+       "procedural": 2,
+       "specificity": 3,
+       "delay": 2,
+       "abstraction": 4,
+       "target": 4,
+       "collective": 1,
+       "arousal": 6,
+       "vocalisation": 4
+      },
+      "file": {
+       "agency": 5,
+       "deference": 6,
+       "assertiveness": 4,
+       "procedural": 7,
+       "specificity": 6,
+       "delay": 3,
+       "abstraction": 5,
+       "target": 4,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 2
+      },
+      "forego": {
+       "agency": 2,
+       "deference": 6,
+       "assertiveness": 1,
+       "procedural": 4,
+       "specificity": 3,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 1,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 1
+      },
+      "forgo": {
+       "agency": 3,
+       "deference": 5,
+       "assertiveness": 2,
+       "procedural": 4,
+       "specificity": 2,
+       "delay": 3,
+       "abstraction": 4,
+       "target": 1,
+       "collective": 1,
+       "arousal": 2,
        "vocalisation": 1
       },
       "go": {
@@ -5279,6 +7710,19 @@
        "arousal": 1,
        "vocalisation": 1
       },
+      "kill": {
+       "agency": 7,
+       "deference": 1,
+       "assertiveness": 7,
+       "procedural": 1,
+       "specificity": 5,
+       "delay": 2,
+       "abstraction": 2,
+       "target": 7,
+       "collective": 1,
+       "arousal": 7,
+       "vocalisation": 1
+      },
       "leave": {
        "agency": 6,
        "deference": 1,
@@ -5318,6 +7762,58 @@
        "arousal": 4,
        "vocalisation": 1
       },
+      "pack": {
+       "agency": 6,
+       "deference": 1,
+       "assertiveness": 5,
+       "procedural": 1,
+       "specificity": 5,
+       "delay": 1,
+       "abstraction": 2,
+       "target": 1,
+       "collective": 1,
+       "arousal": 5,
+       "vocalisation": 1
+      },
+      "phone": {
+       "agency": 5,
+       "deference": 4,
+       "assertiveness": 4,
+       "procedural": 5,
+       "specificity": 4,
+       "delay": 1,
+       "abstraction": 2,
+       "target": 4,
+       "collective": 1,
+       "arousal": 3,
+       "vocalisation": 7
+      },
+      "protest": {
+       "agency": 5,
+       "deference": 3,
+       "assertiveness": 6,
+       "procedural": 4,
+       "specificity": 3,
+       "delay": 2,
+       "abstraction": 4,
+       "target": 4,
+       "collective": 2,
+       "arousal": 5,
+       "vocalisation": 6
+      },
+      "punch": {
+       "agency": 7,
+       "deference": 1,
+       "assertiveness": 7,
+       "procedural": 1,
+       "specificity": 7,
+       "delay": 1,
+       "abstraction": 1,
+       "target": 7,
+       "collective": 1,
+       "arousal": 7,
+       "vocalisation": 1
+      },
       "quit": {
        "agency": 6,
        "deference": 1,
@@ -5330,6 +7826,19 @@
        "collective": 1,
        "arousal": 5,
        "vocalisation": 1
+      },
+      "report": {
+       "agency": 5,
+       "deference": 5,
+       "assertiveness": 4,
+       "procedural": 6,
+       "specificity": 4,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 4,
+       "collective": 1,
+       "arousal": 3,
+       "vocalisation": 4
       },
       "resign": {
        "agency": 6,
@@ -5474,6 +7983,19 @@
        "arousal": 4,
        "vocalisation": 1
       },
+      "speak": {
+       "agency": 5,
+       "deference": 4,
+       "assertiveness": 5,
+       "procedural": 4,
+       "specificity": 3,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 5,
+       "collective": 1,
+       "arousal": 4,
+       "vocalisation": 7
+      },
       "speed": {
        "agency": 5,
        "deference": 4,
@@ -5486,6 +8008,19 @@
        "collective": 1,
        "arousal": 4,
        "vocalisation": 1
+      },
+      "stand": {
+       "agency": 5,
+       "deference": 2,
+       "assertiveness": 6,
+       "procedural": 2,
+       "specificity": 3,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 4,
+       "collective": 1,
+       "arousal": 5,
+       "vocalisation": 3
       },
       "stay": {
        "agency": 1,
@@ -5526,6 +8061,32 @@
        "arousal": 2,
        "vocalisation": 1
       },
+      "strike": {
+       "agency": 6,
+       "deference": 1,
+       "assertiveness": 7,
+       "procedural": 1,
+       "specificity": 5,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 4,
+       "collective": 7,
+       "arousal": 6,
+       "vocalisation": 3
+      },
+      "sue": {
+       "agency": 6,
+       "deference": 1,
+       "assertiveness": 7,
+       "procedural": 1,
+       "specificity": 5,
+       "delay": 3,
+       "abstraction": 3,
+       "target": 4,
+       "collective": 1,
+       "arousal": 6,
+       "vocalisation": 2
+      },
       "talk": {
        "agency": 4,
        "deference": 4,
@@ -5551,6 +8112,19 @@
        "collective": 1,
        "arousal": 4,
        "vocalisation": 7
+      },
+      "throw": {
+       "agency": 5,
+       "deference": 1,
+       "assertiveness": 5,
+       "procedural": 1,
+       "specificity": 3,
+       "delay": 1,
+       "abstraction": 2,
+       "target": 1,
+       "collective": 1,
+       "arousal": 7,
+       "vocalisation": 1
       },
       "visit": {
        "agency": 5,
@@ -5707,6 +8281,19 @@
      "saved_at": "2026-08-18T13:53:54",
      "position": "inst",
      "ratings": {
+      "add": {
+       "agency": 5,
+       "deference": 5,
+       "assertiveness": 4,
+       "procedural": 6,
+       "specificity": 3,
+       "delay": 2,
+       "abstraction": 4,
+       "target": 4,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 1
+      },
       "allow": {
        "agency": 3,
        "deference": 4,
@@ -5732,6 +8319,19 @@
        "collective": 1,
        "arousal": 2,
        "vocalisation": 7
+      },
+      "assign": {
+       "agency": 5,
+       "deference": 5,
+       "assertiveness": 5,
+       "procedural": 5,
+       "specificity": 3,
+       "delay": 2,
+       "abstraction": 4,
+       "target": 4,
+       "collective": 1,
+       "arousal": 3,
+       "vocalisation": 2
       },
       "call": {
        "agency": 5,
@@ -5772,6 +8372,19 @@
        "arousal": 2,
        "vocalisation": 1
       },
+      "charge": {
+       "agency": 6,
+       "deference": 4,
+       "assertiveness": 6,
+       "procedural": 4,
+       "specificity": 4,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 7,
+       "collective": 1,
+       "arousal": 5,
+       "vocalisation": 4
+      },
       "check": {
        "agency": 4,
        "deference": 4,
@@ -5784,6 +8397,19 @@
        "collective": 1,
        "arousal": 2,
        "vocalisation": 1
+      },
+      "chew": {
+       "agency": 5,
+       "deference": 4,
+       "assertiveness": 6,
+       "procedural": 2,
+       "specificity": 4,
+       "delay": 1,
+       "abstraction": 2,
+       "target": 7,
+       "collective": 1,
+       "arousal": 6,
+       "vocalisation": 7
       },
       "close": {
        "agency": 4,
@@ -5823,6 +8449,45 @@
        "collective": 1,
        "arousal": 4,
        "vocalisation": 1
+      },
+      "deduct": {
+       "agency": 5,
+       "deference": 5,
+       "assertiveness": 5,
+       "procedural": 6,
+       "specificity": 5,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 4,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 1
+      },
+      "delay": {
+       "agency": 2,
+       "deference": 4,
+       "assertiveness": 2,
+       "procedural": 4,
+       "specificity": 2,
+       "delay": 7,
+       "abstraction": 4,
+       "target": 1,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 1
+      },
+      "discharge": {
+       "agency": 6,
+       "deference": 4,
+       "assertiveness": 6,
+       "procedural": 5,
+       "specificity": 5,
+       "delay": 1,
+       "abstraction": 3,
+       "target": 7,
+       "collective": 1,
+       "arousal": 4,
+       "vocalisation": 2
       },
       "discipline": {
        "agency": 6,
@@ -5889,6 +8554,19 @@
        "arousal": 5,
        "vocalisation": 2
       },
+      "follow": {
+       "agency": 4,
+       "deference": 4,
+       "assertiveness": 3,
+       "procedural": 3,
+       "specificity": 2,
+       "delay": 2,
+       "abstraction": 2,
+       "target": 7,
+       "collective": 1,
+       "arousal": 3,
+       "vocalisation": 1
+      },
       "give": {
        "agency": 5,
        "deference": 4,
@@ -5902,6 +8580,19 @@
        "arousal": 3,
        "vocalisation": 4
       },
+      "hire": {
+       "agency": 5,
+       "deference": 4,
+       "assertiveness": 4,
+       "procedural": 5,
+       "specificity": 4,
+       "delay": 3,
+       "abstraction": 4,
+       "target": 4,
+       "collective": 2,
+       "arousal": 2,
+       "vocalisation": 1
+      },
       "ignore": {
        "agency": 2,
        "deference": 4,
@@ -5914,6 +8605,19 @@
        "collective": 1,
        "arousal": 1,
        "vocalisation": 1
+      },
+      "issue": {
+       "agency": 5,
+       "deference": 6,
+       "assertiveness": 5,
+       "procedural": 7,
+       "specificity": 4,
+       "delay": 2,
+       "abstraction": 4,
+       "target": 4,
+       "collective": 1,
+       "arousal": 3,
+       "vocalisation": 2
       },
       "keep": {
        "agency": 4,
@@ -5941,6 +8645,19 @@
        "arousal": 6,
        "vocalisation": 2
       },
+      "lay": {
+       "agency": 6,
+       "deference": 2,
+       "assertiveness": 6,
+       "procedural": 2,
+       "specificity": 3,
+       "delay": 1,
+       "abstraction": 2,
+       "target": 7,
+       "collective": 1,
+       "arousal": 5,
+       "vocalisation": 6
+      },
       "leave": {
        "agency": 5,
        "deference": 3,
@@ -5953,6 +8670,32 @@
        "collective": 1,
        "arousal": 4,
        "vocalisation": 1
+      },
+      "lock": {
+       "agency": 6,
+       "deference": 2,
+       "assertiveness": 6,
+       "procedural": 1,
+       "specificity": 5,
+       "delay": 1,
+       "abstraction": 2,
+       "target": 4,
+       "collective": 1,
+       "arousal": 5,
+       "vocalisation": 1
+      },
+      "meet": {
+       "agency": 5,
+       "deference": 4,
+       "assertiveness": 4,
+       "procedural": 5,
+       "specificity": 3,
+       "delay": 2,
+       "abstraction": 4,
+       "target": 7,
+       "collective": 1,
+       "arousal": 3,
+       "vocalisation": 6
       },
       "offer": {
        "agency": 4,
@@ -5979,6 +8722,19 @@
        "collective": 1,
        "arousal": 3,
        "vocalisation": 6
+      },
+      "postpone": {
+       "agency": 2,
+       "deference": 4,
+       "assertiveness": 1,
+       "procedural": 4,
+       "specificity": 2,
+       "delay": 7,
+       "abstraction": 3,
+       "target": 1,
+       "collective": 1,
+       "arousal": 1,
+       "vocalisation": 1
       },
       "pull": {
        "agency": 5,
@@ -6019,6 +8775,58 @@
        "arousal": 2,
        "vocalisation": 1
       },
+      "reduce": {
+       "agency": 5,
+       "deference": 5,
+       "assertiveness": 5,
+       "procedural": 5,
+       "specificity": 3,
+       "delay": 2,
+       "abstraction": 5,
+       "target": 4,
+       "collective": 1,
+       "arousal": 3,
+       "vocalisation": 1
+      },
+      "remind": {
+       "agency": 4,
+       "deference": 4,
+       "assertiveness": 3,
+       "procedural": 5,
+       "specificity": 4,
+       "delay": 1,
+       "abstraction": 3,
+       "target": 7,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 6
+      },
+      "remove": {
+       "agency": 6,
+       "deference": 4,
+       "assertiveness": 6,
+       "procedural": 4,
+       "specificity": 4,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 4,
+       "collective": 1,
+       "arousal": 4,
+       "vocalisation": 1
+      },
+      "replace": {
+       "agency": 6,
+       "deference": 4,
+       "assertiveness": 6,
+       "procedural": 5,
+       "specificity": 5,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 7,
+       "collective": 1,
+       "arousal": 4,
+       "vocalisation": 2
+      },
       "reprimand": {
        "agency": 6,
        "deference": 5,
@@ -6031,6 +8839,19 @@
        "collective": 1,
        "arousal": 4,
        "vocalisation": 6
+      },
+      "run": {
+       "agency": 5,
+       "deference": 5,
+       "assertiveness": 4,
+       "procedural": 6,
+       "specificity": 3,
+       "delay": 2,
+       "abstraction": 5,
+       "target": 4,
+       "collective": 1,
+       "arousal": 3,
+       "vocalisation": 2
       },
       "sack": {
        "agency": 6,
@@ -6105,6 +8926,19 @@
        "specificity": 2,
        "delay": 2,
        "abstraction": 2,
+       "target": 1,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 1
+      },
+      "skip": {
+       "agency": 3,
+       "deference": 4,
+       "assertiveness": 2,
+       "procedural": 4,
+       "specificity": 3,
+       "delay": 1,
+       "abstraction": 3,
        "target": 1,
        "collective": 1,
        "arousal": 2,
@@ -6361,6 +9195,19 @@
      "saved_at": "2026-08-18T13:58:07",
      "position": "indiv",
      "ratings": {
+      "act": {
+       "agency": 5,
+       "deference": 3,
+       "assertiveness": 4,
+       "procedural": 4,
+       "specificity": 1,
+       "delay": 2,
+       "abstraction": 7,
+       "target": 4,
+       "collective": 1,
+       "arousal": 4,
+       "vocalisation": 1
+      },
       "appeal": {
        "agency": 5,
        "deference": 5,
@@ -6386,6 +9233,19 @@
        "collective": 1,
        "arousal": 2,
        "vocalisation": 6
+      },
+      "bill": {
+       "agency": 6,
+       "deference": 2,
+       "assertiveness": 6,
+       "procedural": 3,
+       "specificity": 5,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 4,
+       "collective": 1,
+       "arousal": 4,
+       "vocalisation": 2
       },
       "break": {
        "agency": 6,
@@ -6478,6 +9338,32 @@
        "arousal": 2,
        "vocalisation": 1
       },
+      "claim": {
+       "agency": 5,
+       "deference": 3,
+       "assertiveness": 5,
+       "procedural": 4,
+       "specificity": 3,
+       "delay": 2,
+       "abstraction": 4,
+       "target": 4,
+       "collective": 1,
+       "arousal": 4,
+       "vocalisation": 5
+      },
+      "collect": {
+       "agency": 5,
+       "deference": 4,
+       "assertiveness": 4,
+       "procedural": 5,
+       "specificity": 3,
+       "delay": 2,
+       "abstraction": 4,
+       "target": 4,
+       "collective": 1,
+       "arousal": 3,
+       "vocalisation": 1
+      },
       "complain": {
        "agency": 4,
        "deference": 4,
@@ -6503,6 +9389,19 @@
        "collective": 1,
        "arousal": 6,
        "vocalisation": 6
+      },
+      "consult": {
+       "agency": 4,
+       "deference": 5,
+       "assertiveness": 3,
+       "procedural": 6,
+       "specificity": 3,
+       "delay": 3,
+       "abstraction": 5,
+       "target": 4,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 4
       },
       "contact": {
        "agency": 4,
@@ -6542,6 +9441,32 @@
        "collective": 1,
        "arousal": 4,
        "vocalisation": 1
+      },
+      "deduct": {
+       "agency": 6,
+       "deference": 2,
+       "assertiveness": 6,
+       "procedural": 3,
+       "specificity": 5,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 4,
+       "collective": 1,
+       "arousal": 4,
+       "vocalisation": 1
+      },
+      "demand": {
+       "agency": 6,
+       "deference": 2,
+       "assertiveness": 7,
+       "procedural": 3,
+       "specificity": 3,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 7,
+       "collective": 1,
+       "arousal": 6,
+       "vocalisation": 6
       },
       "dispute": {
        "agency": 5,
@@ -6673,6 +9598,19 @@
        "arousal": 2,
        "vocalisation": 1
       },
+      "install": {
+       "agency": 5,
+       "deference": 4,
+       "assertiveness": 4,
+       "procedural": 4,
+       "specificity": 3,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 1,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 1
+      },
       "investigate": {
        "agency": 4,
        "deference": 4,
@@ -6685,6 +9623,19 @@
        "collective": 1,
        "arousal": 2,
        "vocalisation": 1
+      },
+      "kick": {
+       "agency": 5,
+       "deference": 2,
+       "assertiveness": 6,
+       "procedural": 2,
+       "specificity": 3,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 4,
+       "collective": 1,
+       "arousal": 6,
+       "vocalisation": 5
       },
       "leave": {
        "agency": 5,
@@ -6725,6 +9676,32 @@
        "arousal": 3,
        "vocalisation": 1
       },
+      "negotiate": {
+       "agency": 5,
+       "deference": 4,
+       "assertiveness": 4,
+       "procedural": 6,
+       "specificity": 4,
+       "delay": 3,
+       "abstraction": 5,
+       "target": 4,
+       "collective": 1,
+       "arousal": 3,
+       "vocalisation": 5
+      },
+      "pack": {
+       "agency": 6,
+       "deference": 1,
+       "assertiveness": 4,
+       "procedural": 1,
+       "specificity": 5,
+       "delay": 2,
+       "abstraction": 2,
+       "target": 1,
+       "collective": 1,
+       "arousal": 4,
+       "vocalisation": 1
+      },
       "pay": {
        "agency": 4,
        "deference": 7,
@@ -6737,6 +9714,32 @@
        "collective": 1,
        "arousal": 2,
        "vocalisation": 1
+      },
+      "press": {
+       "agency": 6,
+       "deference": 2,
+       "assertiveness": 6,
+       "procedural": 5,
+       "specificity": 4,
+       "delay": 2,
+       "abstraction": 4,
+       "target": 4,
+       "collective": 1,
+       "arousal": 5,
+       "vocalisation": 3
+      },
+      "protest": {
+       "agency": 5,
+       "deference": 2,
+       "assertiveness": 6,
+       "procedural": 3,
+       "specificity": 3,
+       "delay": 2,
+       "abstraction": 4,
+       "target": 4,
+       "collective": 2,
+       "arousal": 6,
+       "vocalisation": 6
       },
       "pursue": {
        "agency": 6,
@@ -6764,6 +9767,32 @@
        "arousal": 5,
        "vocalisation": 1
       },
+      "raise": {
+       "agency": 5,
+       "deference": 3,
+       "assertiveness": 5,
+       "procedural": 4,
+       "specificity": 3,
+       "delay": 2,
+       "abstraction": 4,
+       "target": 4,
+       "collective": 1,
+       "arousal": 4,
+       "vocalisation": 5
+      },
+      "record": {
+       "agency": 5,
+       "deference": 4,
+       "assertiveness": 3,
+       "procedural": 6,
+       "specificity": 4,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 4,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 1
+      },
       "refuse": {
        "agency": 5,
        "deference": 2,
@@ -6777,6 +9806,19 @@
        "arousal": 4,
        "vocalisation": 3
       },
+      "repair": {
+       "agency": 6,
+       "deference": 1,
+       "assertiveness": 4,
+       "procedural": 1,
+       "specificity": 4,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 1,
+       "collective": 1,
+       "arousal": 3,
+       "vocalisation": 1
+      },
       "report": {
        "agency": 6,
        "deference": 4,
@@ -6789,6 +9831,32 @@
        "collective": 1,
        "arousal": 4,
        "vocalisation": 4
+      },
+      "respond": {
+       "agency": 4,
+       "deference": 4,
+       "assertiveness": 4,
+       "procedural": 5,
+       "specificity": 2,
+       "delay": 2,
+       "abstraction": 4,
+       "target": 4,
+       "collective": 1,
+       "arousal": 3,
+       "vocalisation": 5
+      },
+      "retaliate": {
+       "agency": 6,
+       "deference": 1,
+       "assertiveness": 6,
+       "procedural": 1,
+       "specificity": 3,
+       "delay": 3,
+       "abstraction": 4,
+       "target": 4,
+       "collective": 1,
+       "arousal": 6,
+       "vocalisation": 3
       },
       "return": {
        "agency": 5,
@@ -6959,6 +10027,45 @@
        "arousal": 5,
        "vocalisation": 2
       },
+      "switch": {
+       "agency": 5,
+       "deference": 3,
+       "assertiveness": 4,
+       "procedural": 4,
+       "specificity": 3,
+       "delay": 2,
+       "abstraction": 4,
+       "target": 4,
+       "collective": 1,
+       "arousal": 3,
+       "vocalisation": 1
+      },
+      "talk": {
+       "agency": 4,
+       "deference": 4,
+       "assertiveness": 4,
+       "procedural": 4,
+       "specificity": 2,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 7,
+       "collective": 1,
+       "arousal": 3,
+       "vocalisation": 7
+      },
+      "teach": {
+       "agency": 5,
+       "deference": 2,
+       "assertiveness": 6,
+       "procedural": 2,
+       "specificity": 3,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 7,
+       "collective": 1,
+       "arousal": 5,
+       "vocalisation": 3
+      },
       "tell": {
        "agency": 5,
        "deference": 3,
@@ -6983,6 +10090,32 @@
        "target": 4,
        "collective": 1,
        "arousal": 4,
+       "vocalisation": 1
+      },
+      "visit": {
+       "agency": 5,
+       "deference": 4,
+       "assertiveness": 4,
+       "procedural": 4,
+       "specificity": 4,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 7,
+       "collective": 1,
+       "arousal": 3,
+       "vocalisation": 4
+      },
+      "wait": {
+       "agency": 1,
+       "deference": 6,
+       "assertiveness": 1,
+       "procedural": 5,
+       "specificity": 1,
+       "delay": 7,
+       "abstraction": 3,
+       "target": 1,
+       "collective": 1,
+       "arousal": 1,
        "vocalisation": 1
       },
       "walk": {
@@ -7115,6 +10248,19 @@
      "saved_at": "2026-08-18T13:58:33",
      "position": "inst",
      "ratings": {
+      "act": {
+       "agency": 5,
+       "deference": 4,
+       "assertiveness": 4,
+       "procedural": 4,
+       "specificity": 2,
+       "delay": 2,
+       "abstraction": 6,
+       "target": 4,
+       "collective": 1,
+       "arousal": 3,
+       "vocalisation": 2
+      },
       "add": {
        "agency": 5,
        "deference": 2,
@@ -7166,6 +10312,19 @@
        "collective": 1,
        "arousal": 2,
        "vocalisation": 6
+      },
+      "break": {
+       "agency": 6,
+       "deference": 1,
+       "assertiveness": 6,
+       "procedural": 1,
+       "specificity": 3,
+       "delay": 1,
+       "abstraction": 3,
+       "target": 4,
+       "collective": 1,
+       "arousal": 5,
+       "vocalisation": 1
       },
       "bring": {
        "agency": 5,
@@ -7232,6 +10391,19 @@
        "arousal": 2,
        "vocalisation": 1
       },
+      "claim": {
+       "agency": 5,
+       "deference": 4,
+       "assertiveness": 5,
+       "procedural": 6,
+       "specificity": 4,
+       "delay": 2,
+       "abstraction": 4,
+       "target": 4,
+       "collective": 1,
+       "arousal": 3,
+       "vocalisation": 2
+      },
       "close": {
        "agency": 5,
        "deference": 4,
@@ -7271,6 +10443,32 @@
        "arousal": 2,
        "vocalisation": 1
       },
+      "commence": {
+       "agency": 5,
+       "deference": 4,
+       "assertiveness": 5,
+       "procedural": 6,
+       "specificity": 3,
+       "delay": 2,
+       "abstraction": 5,
+       "target": 4,
+       "collective": 1,
+       "arousal": 3,
+       "vocalisation": 2
+      },
+      "consult": {
+       "agency": 4,
+       "deference": 5,
+       "assertiveness": 2,
+       "procedural": 6,
+       "specificity": 3,
+       "delay": 4,
+       "abstraction": 5,
+       "target": 4,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 3
+      },
       "contact": {
        "agency": 4,
        "deference": 4,
@@ -7308,6 +10506,32 @@
        "target": 4,
        "collective": 1,
        "arousal": 3,
+       "vocalisation": 1
+      },
+      "demolish": {
+       "agency": 7,
+       "deference": 1,
+       "assertiveness": 7,
+       "procedural": 1,
+       "specificity": 6,
+       "delay": 2,
+       "abstraction": 2,
+       "target": 4,
+       "collective": 1,
+       "arousal": 7,
+       "vocalisation": 1
+      },
+      "employ": {
+       "agency": 5,
+       "deference": 4,
+       "assertiveness": 4,
+       "procedural": 5,
+       "specificity": 3,
+       "delay": 3,
+       "abstraction": 4,
+       "target": 4,
+       "collective": 2,
+       "arousal": 2,
        "vocalisation": 1
       },
       "end": {
@@ -7349,6 +10573,32 @@
        "arousal": 3,
        "vocalisation": 4
       },
+      "enter": {
+       "agency": 4,
+       "deference": 4,
+       "assertiveness": 3,
+       "procedural": 5,
+       "specificity": 2,
+       "delay": 2,
+       "abstraction": 4,
+       "target": 4,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 1
+      },
+      "escalate": {
+       "agency": 5,
+       "deference": 4,
+       "assertiveness": 6,
+       "procedural": 6,
+       "specificity": 4,
+       "delay": 2,
+       "abstraction": 5,
+       "target": 4,
+       "collective": 1,
+       "arousal": 4,
+       "vocalisation": 3
+      },
       "evict": {
        "agency": 6,
        "deference": 4,
@@ -7361,6 +10611,19 @@
        "collective": 1,
        "arousal": 5,
        "vocalisation": 2
+      },
+      "fight": {
+       "agency": 6,
+       "deference": 2,
+       "assertiveness": 6,
+       "procedural": 2,
+       "specificity": 3,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 7,
+       "collective": 1,
+       "arousal": 6,
+       "vocalisation": 5
       },
       "file": {
        "agency": 6,
@@ -7375,6 +10638,19 @@
        "arousal": 3,
        "vocalisation": 2
       },
+      "fire": {
+       "agency": 6,
+       "deference": 1,
+       "assertiveness": 7,
+       "procedural": 1,
+       "specificity": 5,
+       "delay": 1,
+       "abstraction": 2,
+       "target": 7,
+       "collective": 1,
+       "arousal": 6,
+       "vocalisation": 5
+      },
       "fix": {
        "agency": 6,
        "deference": 3,
@@ -7387,6 +10663,45 @@
        "collective": 1,
        "arousal": 3,
        "vocalisation": 1
+      },
+      "follow": {
+       "agency": 4,
+       "deference": 6,
+       "assertiveness": 2,
+       "procedural": 7,
+       "specificity": 3,
+       "delay": 3,
+       "abstraction": 5,
+       "target": 4,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 1
+      },
+      "force": {
+       "agency": 6,
+       "deference": 2,
+       "assertiveness": 7,
+       "procedural": 3,
+       "specificity": 3,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 7,
+       "collective": 1,
+       "arousal": 6,
+       "vocalisation": 3
+      },
+      "foreclose": {
+       "agency": 6,
+       "deference": 2,
+       "assertiveness": 7,
+       "procedural": 5,
+       "specificity": 5,
+       "delay": 3,
+       "abstraction": 3,
+       "target": 4,
+       "collective": 1,
+       "arousal": 5,
+       "vocalisation": 2
       },
       "give": {
        "agency": 3,
@@ -7414,6 +10729,19 @@
        "arousal": 3,
        "vocalisation": 2
       },
+      "ignore": {
+       "agency": 4,
+       "deference": 1,
+       "assertiveness": 5,
+       "procedural": 1,
+       "specificity": 3,
+       "delay": 1,
+       "abstraction": 3,
+       "target": 4,
+       "collective": 1,
+       "arousal": 3,
+       "vocalisation": 1
+      },
       "increase": {
        "agency": 5,
        "deference": 1,
@@ -7425,6 +10753,32 @@
        "target": 4,
        "collective": 1,
        "arousal": 4,
+       "vocalisation": 1
+      },
+      "initiate": {
+       "agency": 6,
+       "deference": 4,
+       "assertiveness": 5,
+       "procedural": 7,
+       "specificity": 4,
+       "delay": 2,
+       "abstraction": 5,
+       "target": 4,
+       "collective": 1,
+       "arousal": 3,
+       "vocalisation": 2
+      },
+      "inspect": {
+       "agency": 5,
+       "deference": 4,
+       "assertiveness": 3,
+       "procedural": 6,
+       "specificity": 4,
+       "delay": 2,
+       "abstraction": 4,
+       "target": 4,
+       "collective": 1,
+       "arousal": 2,
        "vocalisation": 1
       },
       "install": {
@@ -7439,6 +10793,45 @@
        "collective": 1,
        "arousal": 2,
        "vocalisation": 1
+      },
+      "instruct": {
+       "agency": 5,
+       "deference": 4,
+       "assertiveness": 5,
+       "procedural": 6,
+       "specificity": 4,
+       "delay": 2,
+       "abstraction": 4,
+       "target": 4,
+       "collective": 1,
+       "arousal": 3,
+       "vocalisation": 3
+      },
+      "investigate": {
+       "agency": 4,
+       "deference": 4,
+       "assertiveness": 3,
+       "procedural": 5,
+       "specificity": 3,
+       "delay": 4,
+       "abstraction": 6,
+       "target": 4,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 1
+      },
+      "involve": {
+       "agency": 4,
+       "deference": 4,
+       "assertiveness": 3,
+       "procedural": 5,
+       "specificity": 3,
+       "delay": 2,
+       "abstraction": 4,
+       "target": 4,
+       "collective": 3,
+       "arousal": 3,
+       "vocalisation": 2
       },
       "issue": {
        "agency": 5,
@@ -7464,6 +10857,19 @@
        "target": 1,
        "collective": 1,
        "arousal": 2,
+       "vocalisation": 1
+      },
+      "kick": {
+       "agency": 7,
+       "deference": 1,
+       "assertiveness": 7,
+       "procedural": 1,
+       "specificity": 5,
+       "delay": 1,
+       "abstraction": 2,
+       "target": 7,
+       "collective": 1,
+       "arousal": 6,
        "vocalisation": 1
       },
       "leave": {
@@ -7492,6 +10898,71 @@
        "arousal": 2,
        "vocalisation": 1
       },
+      "lock": {
+       "agency": 6,
+       "deference": 1,
+       "assertiveness": 6,
+       "procedural": 1,
+       "specificity": 5,
+       "delay": 1,
+       "abstraction": 2,
+       "target": 7,
+       "collective": 1,
+       "arousal": 5,
+       "vocalisation": 1
+      },
+      "look": {
+       "agency": 3,
+       "deference": 4,
+       "assertiveness": 2,
+       "procedural": 4,
+       "specificity": 2,
+       "delay": 3,
+       "abstraction": 4,
+       "target": 1,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 1
+      },
+      "meet": {
+       "agency": 4,
+       "deference": 4,
+       "assertiveness": 3,
+       "procedural": 5,
+       "specificity": 3,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 7,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 6
+      },
+      "obtain": {
+       "agency": 4,
+       "deference": 5,
+       "assertiveness": 3,
+       "procedural": 6,
+       "specificity": 2,
+       "delay": 3,
+       "abstraction": 5,
+       "target": 4,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 1
+      },
+      "offer": {
+       "agency": 4,
+       "deference": 4,
+       "assertiveness": 3,
+       "procedural": 5,
+       "specificity": 3,
+       "delay": 2,
+       "abstraction": 4,
+       "target": 5,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 4
+      },
       "pay": {
        "agency": 4,
        "deference": 4,
@@ -7505,6 +10976,19 @@
        "arousal": 2,
        "vocalisation": 1
       },
+      "press": {
+       "agency": 6,
+       "deference": 2,
+       "assertiveness": 6,
+       "procedural": 3,
+       "specificity": 4,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 6,
+       "collective": 1,
+       "arousal": 5,
+       "vocalisation": 4
+      },
       "proceed": {
        "agency": 5,
        "deference": 4,
@@ -7517,6 +11001,19 @@
        "collective": 1,
        "arousal": 2,
        "vocalisation": 1
+      },
+      "provide": {
+       "agency": 4,
+       "deference": 4,
+       "assertiveness": 3,
+       "procedural": 5,
+       "specificity": 2,
+       "delay": 3,
+       "abstraction": 5,
+       "target": 4,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 2
       },
       "pursue": {
        "agency": 5,
@@ -7556,6 +11053,19 @@
        "collective": 1,
        "arousal": 3,
        "vocalisation": 2
+      },
+      "reduce": {
+       "agency": 5,
+       "deference": 3,
+       "assertiveness": 3,
+       "procedural": 4,
+       "specificity": 4,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 4,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 1
       },
       "refer": {
        "agency": 4,
@@ -7609,6 +11119,45 @@
        "arousal": 3,
        "vocalisation": 1
       },
+      "report": {
+       "agency": 5,
+       "deference": 4,
+       "assertiveness": 5,
+       "procedural": 6,
+       "specificity": 4,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 4,
+       "collective": 1,
+       "arousal": 3,
+       "vocalisation": 3
+      },
+      "repossess": {
+       "agency": 6,
+       "deference": 4,
+       "assertiveness": 6,
+       "procedural": 5,
+       "specificity": 5,
+       "delay": 4,
+       "abstraction": 4,
+       "target": 4,
+       "collective": 1,
+       "arousal": 5,
+       "vocalisation": 2
+      },
+      "return": {
+       "agency": 4,
+       "deference": 4,
+       "assertiveness": 3,
+       "procedural": 4,
+       "specificity": 2,
+       "delay": 3,
+       "abstraction": 3,
+       "target": 4,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 2
+      },
       "seek": {
        "agency": 5,
        "deference": 5,
@@ -7621,6 +11170,19 @@
        "collective": 1,
        "arousal": 3,
        "vocalisation": 2
+      },
+      "seize": {
+       "agency": 6,
+       "deference": 1,
+       "assertiveness": 6,
+       "procedural": 1,
+       "specificity": 4,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 4,
+       "collective": 1,
+       "arousal": 5,
+       "vocalisation": 1
       },
       "sell": {
        "agency": 5,
@@ -7687,6 +11249,19 @@
        "arousal": 3,
        "vocalisation": 3
       },
+      "shut": {
+       "agency": 6,
+       "deference": 1,
+       "assertiveness": 6,
+       "procedural": 1,
+       "specificity": 4,
+       "delay": 1,
+       "abstraction": 2,
+       "target": 4,
+       "collective": 1,
+       "arousal": 5,
+       "vocalisation": 1
+      },
       "start": {
        "agency": 4,
        "deference": 4,
@@ -7712,6 +11287,19 @@
        "collective": 1,
        "arousal": 2,
        "vocalisation": 1
+      },
+      "submit": {
+       "agency": 5,
+       "deference": 5,
+       "assertiveness": 3,
+       "procedural": 6,
+       "specificity": 3,
+       "delay": 2,
+       "abstraction": 4,
+       "target": 4,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 2
       },
       "sue": {
        "agency": 7,
@@ -7739,6 +11327,19 @@
        "arousal": 3,
        "vocalisation": 1
       },
+      "tell": {
+       "agency": 5,
+       "deference": 3,
+       "assertiveness": 5,
+       "procedural": 3,
+       "specificity": 3,
+       "delay": 2,
+       "abstraction": 2,
+       "target": 7,
+       "collective": 1,
+       "arousal": 4,
+       "vocalisation": 7
+      },
       "terminate": {
        "agency": 6,
        "deference": 1,
@@ -7751,6 +11352,19 @@
        "collective": 1,
        "arousal": 5,
        "vocalisation": 2
+      },
+      "throw": {
+       "agency": 6,
+       "deference": 1,
+       "assertiveness": 7,
+       "procedural": 1,
+       "specificity": 3,
+       "delay": 1,
+       "abstraction": 2,
+       "target": 4,
+       "collective": 1,
+       "arousal": 6,
+       "vocalisation": 1
       },
       "use": {
        "agency": 4,
@@ -7789,6 +11403,19 @@
        "target": 1,
        "collective": 1,
        "arousal": 1,
+       "vocalisation": 1
+      },
+      "withdraw": {
+       "agency": 3,
+       "deference": 4,
+       "assertiveness": 2,
+       "procedural": 3,
+       "specificity": 3,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 1,
+       "collective": 1,
+       "arousal": 2,
        "vocalisation": 1
       },
       "withhold": {
@@ -7974,6 +11601,19 @@
        "arousal": 2,
        "vocalisation": 2
       },
+      "approach": {
+       "agency": 5,
+       "deference": 4,
+       "assertiveness": 4,
+       "procedural": 5,
+       "specificity": 3,
+       "delay": 2,
+       "abstraction": 4,
+       "target": 4,
+       "collective": 1,
+       "arousal": 3,
+       "vocalisation": 4
+      },
       "ask": {
        "agency": 4,
        "deference": 6,
@@ -7999,6 +11639,32 @@
        "collective": 1,
        "arousal": 3,
        "vocalisation": 2
+      },
+      "attend": {
+       "agency": 4,
+       "deference": 6,
+       "assertiveness": 3,
+       "procedural": 6,
+       "specificity": 3,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 4,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 1
+      },
+      "board": {
+       "agency": 6,
+       "deference": 1,
+       "assertiveness": 5,
+       "procedural": 1,
+       "specificity": 5,
+       "delay": 1,
+       "abstraction": 2,
+       "target": 1,
+       "collective": 1,
+       "arousal": 5,
+       "vocalisation": 1
       },
       "break": {
        "agency": 6,
@@ -8039,6 +11705,19 @@
        "arousal": 3,
        "vocalisation": 7
       },
+      "cancel": {
+       "agency": 5,
+       "deference": 4,
+       "assertiveness": 3,
+       "procedural": 4,
+       "specificity": 4,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 1,
+       "collective": 1,
+       "arousal": 3,
+       "vocalisation": 1
+      },
       "challenge": {
        "agency": 5,
        "deference": 3,
@@ -8052,6 +11731,19 @@
        "arousal": 4,
        "vocalisation": 3
       },
+      "claim": {
+       "agency": 5,
+       "deference": 3,
+       "assertiveness": 5,
+       "procedural": 6,
+       "specificity": 4,
+       "delay": 2,
+       "abstraction": 4,
+       "target": 4,
+       "collective": 1,
+       "arousal": 3,
+       "vocalisation": 2
+      },
       "commit": {
        "agency": 5,
        "deference": 1,
@@ -8063,6 +11755,32 @@
        "target": 1,
        "collective": 1,
        "arousal": 6,
+       "vocalisation": 1
+      },
+      "contact": {
+       "agency": 4,
+       "deference": 4,
+       "assertiveness": 3,
+       "procedural": 5,
+       "specificity": 3,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 4,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 5
+      },
+      "continue": {
+       "agency": 4,
+       "deference": 5,
+       "assertiveness": 3,
+       "procedural": 6,
+       "specificity": 2,
+       "delay": 3,
+       "abstraction": 5,
+       "target": 4,
+       "collective": 1,
+       "arousal": 3,
        "vocalisation": 1
       },
       "cross": {
@@ -8078,6 +11796,45 @@
        "arousal": 5,
        "vocalisation": 1
       },
+      "defy": {
+       "agency": 6,
+       "deference": 1,
+       "assertiveness": 6,
+       "procedural": 2,
+       "specificity": 3,
+       "delay": 2,
+       "abstraction": 4,
+       "target": 4,
+       "collective": 1,
+       "arousal": 5,
+       "vocalisation": 2
+      },
+      "drive": {
+       "agency": 6,
+       "deference": 1,
+       "assertiveness": 5,
+       "procedural": 1,
+       "specificity": 5,
+       "delay": 1,
+       "abstraction": 2,
+       "target": 1,
+       "collective": 1,
+       "arousal": 5,
+       "vocalisation": 1
+      },
+      "embark": {
+       "agency": 4,
+       "deference": 4,
+       "assertiveness": 3,
+       "procedural": 5,
+       "specificity": 2,
+       "delay": 3,
+       "abstraction": 6,
+       "target": 4,
+       "collective": 1,
+       "arousal": 3,
+       "vocalisation": 1
+      },
       "emigrate": {
        "agency": 6,
        "deference": 1,
@@ -8089,6 +11846,19 @@
        "target": 1,
        "collective": 1,
        "arousal": 4,
+       "vocalisation": 1
+      },
+      "end": {
+       "agency": 5,
+       "deference": 1,
+       "assertiveness": 3,
+       "procedural": 1,
+       "specificity": 2,
+       "delay": 1,
+       "abstraction": 2,
+       "target": 1,
+       "collective": 1,
+       "arousal": 7,
        "vocalisation": 1
       },
       "enter": {
@@ -8247,6 +12017,32 @@
        "arousal": 3,
        "vocalisation": 2
       },
+      "ignore": {
+       "agency": 5,
+       "deference": 1,
+       "assertiveness": 5,
+       "procedural": 1,
+       "specificity": 3,
+       "delay": 1,
+       "abstraction": 3,
+       "target": 4,
+       "collective": 1,
+       "arousal": 4,
+       "vocalisation": 1
+      },
+      "illegally": {
+       "agency": 6,
+       "deference": 1,
+       "assertiveness": 5,
+       "procedural": 1,
+       "specificity": 2,
+       "delay": 2,
+       "abstraction": 4,
+       "target": 1,
+       "collective": 1,
+       "arousal": 5,
+       "vocalisation": 1
+      },
       "join": {
        "agency": 4,
        "deference": 4,
@@ -8258,6 +12054,32 @@
        "target": 4,
        "collective": 6,
        "arousal": 3,
+       "vocalisation": 1
+      },
+      "jump": {
+       "agency": 5,
+       "deference": 1,
+       "assertiveness": 1,
+       "procedural": 1,
+       "specificity": 5,
+       "delay": 1,
+       "abstraction": 1,
+       "target": 1,
+       "collective": 1,
+       "arousal": 7,
+       "vocalisation": 1
+      },
+      "kill": {
+       "agency": 7,
+       "deference": 1,
+       "assertiveness": 7,
+       "procedural": 1,
+       "specificity": 4,
+       "delay": 2,
+       "abstraction": 2,
+       "target": 7,
+       "collective": 1,
+       "arousal": 7,
        "vocalisation": 1
       },
       "launch": {
@@ -8286,6 +12108,19 @@
        "arousal": 4,
        "vocalisation": 1
       },
+      "lodge": {
+       "agency": 6,
+       "deference": 6,
+       "assertiveness": 4,
+       "procedural": 7,
+       "specificity": 5,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 4,
+       "collective": 1,
+       "arousal": 3,
+       "vocalisation": 2
+      },
       "look": {
        "agency": 2,
        "deference": 4,
@@ -8299,6 +12134,19 @@
        "arousal": 2,
        "vocalisation": 1
       },
+      "marry": {
+       "agency": 5,
+       "deference": 4,
+       "assertiveness": 3,
+       "procedural": 4,
+       "specificity": 5,
+       "delay": 3,
+       "abstraction": 3,
+       "target": 1,
+       "collective": 2,
+       "arousal": 3,
+       "vocalisation": 2
+      },
       "move": {
        "agency": 5,
        "deference": 1,
@@ -8307,6 +12155,19 @@
        "specificity": 4,
        "delay": 2,
        "abstraction": 3,
+       "target": 1,
+       "collective": 1,
+       "arousal": 3,
+       "vocalisation": 1
+      },
+      "pack": {
+       "agency": 5,
+       "deference": 1,
+       "assertiveness": 3,
+       "procedural": 1,
+       "specificity": 5,
+       "delay": 1,
+       "abstraction": 2,
        "target": 1,
        "collective": 1,
        "arousal": 3,
@@ -8325,6 +12186,19 @@
        "arousal": 3,
        "vocalisation": 1
       },
+      "petition": {
+       "agency": 5,
+       "deference": 6,
+       "assertiveness": 4,
+       "procedural": 7,
+       "specificity": 5,
+       "delay": 3,
+       "abstraction": 4,
+       "target": 4,
+       "collective": 1,
+       "arousal": 3,
+       "vocalisation": 2
+      },
       "protest": {
        "agency": 5,
        "deference": 2,
@@ -8338,6 +12212,32 @@
        "arousal": 6,
        "vocalisation": 5
       },
+      "pursue": {
+       "agency": 5,
+       "deference": 5,
+       "assertiveness": 4,
+       "procedural": 6,
+       "specificity": 4,
+       "delay": 3,
+       "abstraction": 6,
+       "target": 4,
+       "collective": 1,
+       "arousal": 3,
+       "vocalisation": 2
+      },
+      "quit": {
+       "agency": 5,
+       "deference": 1,
+       "assertiveness": 3,
+       "procedural": 1,
+       "specificity": 4,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 1,
+       "collective": 1,
+       "arousal": 4,
+       "vocalisation": 1
+      },
       "remain": {
        "agency": 1,
        "deference": 4,
@@ -8349,6 +12249,19 @@
        "target": 1,
        "collective": 1,
        "arousal": 2,
+       "vocalisation": 1
+      },
+      "resign": {
+       "agency": 5,
+       "deference": 1,
+       "assertiveness": 3,
+       "procedural": 1,
+       "specificity": 5,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 1,
+       "collective": 1,
+       "arousal": 4,
        "vocalisation": 1
       },
       "return": {
@@ -8390,6 +12303,32 @@
        "arousal": 5,
        "vocalisation": 1
       },
+      "sail": {
+       "agency": 6,
+       "deference": 1,
+       "assertiveness": 5,
+       "procedural": 1,
+       "specificity": 5,
+       "delay": 2,
+       "abstraction": 2,
+       "target": 1,
+       "collective": 1,
+       "arousal": 5,
+       "vocalisation": 1
+      },
+      "see": {
+       "agency": 4,
+       "deference": 4,
+       "assertiveness": 3,
+       "procedural": 5,
+       "specificity": 2,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 4,
+       "collective": 1,
+       "arousal": 3,
+       "vocalisation": 4
+      },
       "seek": {
        "agency": 5,
        "deference": 5,
@@ -8402,6 +12341,19 @@
        "collective": 1,
        "arousal": 3,
        "vocalisation": 2
+      },
+      "sell": {
+       "agency": 5,
+       "deference": 4,
+       "assertiveness": 3,
+       "procedural": 4,
+       "specificity": 3,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 1,
+       "collective": 1,
+       "arousal": 3,
+       "vocalisation": 1
       },
       "send": {
        "agency": 5,
@@ -8429,6 +12381,32 @@
        "arousal": 2,
        "vocalisation": 1
       },
+      "skip": {
+       "agency": 3,
+       "deference": 2,
+       "assertiveness": 2,
+       "procedural": 1,
+       "specificity": 2,
+       "delay": 2,
+       "abstraction": 4,
+       "target": 1,
+       "collective": 1,
+       "arousal": 3,
+       "vocalisation": 1
+      },
+      "smuggle": {
+       "agency": 7,
+       "deference": 1,
+       "assertiveness": 5,
+       "procedural": 1,
+       "specificity": 4,
+       "delay": 1,
+       "abstraction": 2,
+       "target": 1,
+       "collective": 1,
+       "arousal": 6,
+       "vocalisation": 1
+      },
       "sneak": {
        "agency": 6,
        "deference": 1,
@@ -8442,6 +12420,19 @@
        "arousal": 4,
        "vocalisation": 1
       },
+      "speak": {
+       "agency": 5,
+       "deference": 3,
+       "assertiveness": 5,
+       "procedural": 3,
+       "specificity": 3,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 4,
+       "collective": 1,
+       "arousal": 4,
+       "vocalisation": 7
+      },
       "spend": {
        "agency": 4,
        "deference": 4,
@@ -8454,6 +12445,19 @@
        "collective": 1,
        "arousal": 2,
        "vocalisation": 1
+      },
+      "stage": {
+       "agency": 6,
+       "deference": 1,
+       "assertiveness": 6,
+       "procedural": 1,
+       "specificity": 4,
+       "delay": 2,
+       "abstraction": 4,
+       "target": 4,
+       "collective": 6,
+       "arousal": 6,
+       "vocalisation": 4
       },
       "start": {
        "agency": 4,
@@ -8481,6 +12485,45 @@
        "arousal": 4,
        "vocalisation": 1
       },
+      "stop": {
+       "agency": 2,
+       "deference": 6,
+       "assertiveness": 1,
+       "procedural": 4,
+       "specificity": 2,
+       "delay": 1,
+       "abstraction": 3,
+       "target": 1,
+       "collective": 1,
+       "arousal": 3,
+       "vocalisation": 1
+      },
+      "study": {
+       "agency": 3,
+       "deference": 5,
+       "assertiveness": 2,
+       "procedural": 5,
+       "specificity": 2,
+       "delay": 6,
+       "abstraction": 5,
+       "target": 1,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 1
+      },
+      "submit": {
+       "agency": 5,
+       "deference": 6,
+       "assertiveness": 3,
+       "procedural": 7,
+       "specificity": 4,
+       "delay": 3,
+       "abstraction": 4,
+       "target": 4,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 2
+      },
       "sue": {
        "agency": 6,
        "deference": 1,
@@ -8493,6 +12536,19 @@
        "collective": 1,
        "arousal": 5,
        "vocalisation": 2
+      },
+      "swim": {
+       "agency": 5,
+       "deference": 1,
+       "assertiveness": 4,
+       "procedural": 1,
+       "specificity": 5,
+       "delay": 2,
+       "abstraction": 2,
+       "target": 1,
+       "collective": 1,
+       "arousal": 5,
+       "vocalisation": 1
       },
       "take": {
        "agency": 4,
@@ -8571,6 +12627,19 @@
        "collective": 1,
        "arousal": 4,
        "vocalisation": 1
+      },
+      "withdraw": {
+       "agency": 3,
+       "deference": 5,
+       "assertiveness": 2,
+       "procedural": 5,
+       "specificity": 4,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 1,
+       "collective": 1,
+       "arousal": 3,
+       "vocalisation": 2
       },
       "work": {
        "agency": 5,
@@ -8744,6 +12813,19 @@
        "arousal": 1,
        "vocalisation": 1
       },
+      "appeal": {
+       "agency": 5,
+       "deference": 5,
+       "assertiveness": 4,
+       "procedural": 7,
+       "specificity": 5,
+       "delay": 3,
+       "abstraction": 4,
+       "target": 4,
+       "collective": 1,
+       "arousal": 3,
+       "vocalisation": 2
+      },
       "apply": {
        "agency": 4,
        "deference": 7,
@@ -8809,6 +12891,19 @@
        "arousal": 3,
        "vocalisation": 1
       },
+      "bar": {
+       "agency": 5,
+       "deference": 7,
+       "assertiveness": 6,
+       "procedural": 7,
+       "specificity": 5,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 4,
+       "collective": 1,
+       "arousal": 3,
+       "vocalisation": 1
+      },
       "block": {
        "agency": 5,
        "deference": 7,
@@ -8868,6 +12963,32 @@
        "procedural": 7,
        "specificity": 2,
        "delay": 4,
+       "abstraction": 6,
+       "target": 4,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 1
+      },
+      "challenge": {
+       "agency": 5,
+       "deference": 7,
+       "assertiveness": 5,
+       "procedural": 6,
+       "specificity": 4,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 4,
+       "collective": 1,
+       "arousal": 3,
+       "vocalisation": 2
+      },
+      "change": {
+       "agency": 4,
+       "deference": 7,
+       "assertiveness": 3,
+       "procedural": 6,
+       "specificity": 2,
+       "delay": 3,
        "abstraction": 6,
        "target": 4,
        "collective": 1,
@@ -8939,6 +13060,32 @@
        "arousal": 1,
        "vocalisation": 1
       },
+      "consult": {
+       "agency": 4,
+       "deference": 6,
+       "assertiveness": 3,
+       "procedural": 7,
+       "specificity": 4,
+       "delay": 5,
+       "abstraction": 5,
+       "target": 4,
+       "collective": 3,
+       "arousal": 2,
+       "vocalisation": 3
+      },
+      "contact": {
+       "agency": 4,
+       "deference": 5,
+       "assertiveness": 3,
+       "procedural": 6,
+       "specificity": 3,
+       "delay": 3,
+       "abstraction": 4,
+       "target": 5,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 5
+      },
       "cut": {
        "agency": 5,
        "deference": 7,
@@ -8964,6 +13111,19 @@
        "collective": 1,
        "arousal": 2,
        "vocalisation": 2
+      },
+      "defer": {
+       "agency": 4,
+       "deference": 7,
+       "assertiveness": 1,
+       "procedural": 7,
+       "specificity": 4,
+       "delay": 7,
+       "abstraction": 4,
+       "target": 4,
+       "collective": 1,
+       "arousal": 1,
+       "vocalisation": 1
       },
       "delay": {
        "agency": 3,
@@ -9030,6 +13190,19 @@
        "arousal": 3,
        "vocalisation": 1
       },
+      "drop": {
+       "agency": 5,
+       "deference": 7,
+       "assertiveness": 4,
+       "procedural": 6,
+       "specificity": 4,
+       "delay": 1,
+       "abstraction": 3,
+       "target": 4,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 1
+      },
       "examine": {
        "agency": 4,
        "deference": 7,
@@ -9043,6 +13216,19 @@
        "arousal": 2,
        "vocalisation": 1
       },
+      "expedite": {
+       "agency": 5,
+       "deference": 7,
+       "assertiveness": 3,
+       "procedural": 7,
+       "specificity": 5,
+       "delay": 2,
+       "abstraction": 5,
+       "target": 4,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 1
+      },
       "extend": {
        "agency": 5,
        "deference": 7,
@@ -9050,6 +13236,45 @@
        "procedural": 7,
        "specificity": 4,
        "delay": 3,
+       "abstraction": 4,
+       "target": 4,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 1
+      },
+      "fast-track": {
+       "agency": 5,
+       "deference": 7,
+       "assertiveness": 3,
+       "procedural": 7,
+       "specificity": 5,
+       "delay": 1,
+       "abstraction": 4,
+       "target": 4,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 1
+      },
+      "follow": {
+       "agency": 4,
+       "deference": 7,
+       "assertiveness": 3,
+       "procedural": 7,
+       "specificity": 2,
+       "delay": 3,
+       "abstraction": 6,
+       "target": 4,
+       "collective": 1,
+       "arousal": 1,
+       "vocalisation": 1
+      },
+      "freeze": {
+       "agency": 5,
+       "deference": 7,
+       "assertiveness": 4,
+       "procedural": 7,
+       "specificity": 5,
+       "delay": 7,
        "abstraction": 4,
        "target": 4,
        "collective": 1,
@@ -9082,6 +13307,19 @@
        "arousal": 2,
        "vocalisation": 1
       },
+      "grill": {
+       "agency": 6,
+       "deference": 7,
+       "assertiveness": 6,
+       "procedural": 6,
+       "specificity": 5,
+       "delay": 1,
+       "abstraction": 3,
+       "target": 7,
+       "collective": 1,
+       "arousal": 5,
+       "vocalisation": 7
+      },
       "hold": {
        "agency": 4,
        "deference": 7,
@@ -9090,6 +13328,19 @@
        "specificity": 4,
        "delay": 7,
        "abstraction": 4,
+       "target": 4,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 1
+      },
+      "ignore": {
+       "agency": 5,
+       "deference": 7,
+       "assertiveness": 4,
+       "procedural": 3,
+       "specificity": 3,
+       "delay": 1,
+       "abstraction": 3,
        "target": 4,
        "collective": 1,
        "arousal": 2,
@@ -9118,6 +13369,32 @@
        "abstraction": 6,
        "target": 4,
        "collective": 1,
+       "arousal": 2,
+       "vocalisation": 1
+      },
+      "interrogate": {
+       "agency": 5,
+       "deference": 7,
+       "assertiveness": 5,
+       "procedural": 6,
+       "specificity": 5,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 7,
+       "collective": 1,
+       "arousal": 4,
+       "vocalisation": 7
+      },
+      "intervene": {
+       "agency": 5,
+       "deference": 7,
+       "assertiveness": 4,
+       "procedural": 7,
+       "specificity": 3,
+       "delay": 2,
+       "abstraction": 5,
+       "target": 4,
+       "collective": 4,
        "arousal": 2,
        "vocalisation": 1
       },
@@ -9186,6 +13463,32 @@
        "arousal": 2,
        "vocalisation": 1
       },
+      "kick": {
+       "agency": 5,
+       "deference": 7,
+       "assertiveness": 5,
+       "procedural": 6,
+       "specificity": 4,
+       "delay": 1,
+       "abstraction": 3,
+       "target": 4,
+       "collective": 1,
+       "arousal": 3,
+       "vocalisation": 1
+      },
+      "launch": {
+       "agency": 5,
+       "deference": 7,
+       "assertiveness": 4,
+       "procedural": 7,
+       "specificity": 4,
+       "delay": 3,
+       "abstraction": 5,
+       "target": 4,
+       "collective": 4,
+       "arousal": 3,
+       "vocalisation": 2
+      },
       "let": {
        "agency": 4,
        "deference": 7,
@@ -9238,6 +13541,19 @@
        "arousal": 2,
        "vocalisation": 2
       },
+      "open": {
+       "agency": 5,
+       "deference": 7,
+       "assertiveness": 4,
+       "procedural": 7,
+       "specificity": 3,
+       "delay": 2,
+       "abstraction": 5,
+       "target": 4,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 1
+      },
       "place": {
        "agency": 4,
        "deference": 7,
@@ -9246,6 +13562,19 @@
        "specificity": 3,
        "delay": 4,
        "abstraction": 5,
+       "target": 4,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 1
+      },
+      "postpone": {
+       "agency": 4,
+       "deference": 7,
+       "assertiveness": 3,
+       "procedural": 7,
+       "specificity": 4,
+       "delay": 7,
+       "abstraction": 4,
        "target": 4,
        "collective": 1,
        "arousal": 2,
@@ -9264,6 +13593,32 @@
        "arousal": 1,
        "vocalisation": 1
       },
+      "prosecute": {
+       "agency": 6,
+       "deference": 7,
+       "assertiveness": 6,
+       "procedural": 7,
+       "specificity": 6,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 7,
+       "collective": 2,
+       "arousal": 5,
+       "vocalisation": 2
+      },
+      "provide": {
+       "agency": 4,
+       "deference": 7,
+       "assertiveness": 3,
+       "procedural": 7,
+       "specificity": 2,
+       "delay": 4,
+       "abstraction": 5,
+       "target": 4,
+       "collective": 1,
+       "arousal": 1,
+       "vocalisation": 2
+      },
       "pull": {
        "agency": 5,
        "deference": 7,
@@ -9277,6 +13632,19 @@
        "arousal": 3,
        "vocalisation": 1
       },
+      "push": {
+       "agency": 5,
+       "deference": 7,
+       "assertiveness": 4,
+       "procedural": 6,
+       "specificity": 3,
+       "delay": 2,
+       "abstraction": 4,
+       "target": 4,
+       "collective": 1,
+       "arousal": 3,
+       "vocalisation": 2
+      },
       "question": {
        "agency": 5,
        "deference": 6,
@@ -9289,6 +13657,19 @@
        "collective": 1,
        "arousal": 3,
        "vocalisation": 6
+      },
+      "reconsider": {
+       "agency": 4,
+       "deference": 7,
+       "assertiveness": 2,
+       "procedural": 7,
+       "specificity": 4,
+       "delay": 5,
+       "abstraction": 6,
+       "target": 4,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 1
       },
       "refer": {
        "agency": 4,
@@ -9328,6 +13709,19 @@
        "collective": 1,
        "arousal": 2,
        "vocalisation": 2
+      },
+      "release": {
+       "agency": 5,
+       "deference": 7,
+       "assertiveness": 3,
+       "procedural": 7,
+       "specificity": 3,
+       "delay": 2,
+       "abstraction": 3,
+       "target": 4,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 1
       },
       "remove": {
        "agency": 5,
@@ -9407,6 +13801,19 @@
        "arousal": 2,
        "vocalisation": 1
       },
+      "scrutinize": {
+       "agency": 4,
+       "deference": 7,
+       "assertiveness": 3,
+       "procedural": 7,
+       "specificity": 4,
+       "delay": 3,
+       "abstraction": 6,
+       "target": 4,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 1
+      },
       "see": {
        "agency": 4,
        "deference": 7,
@@ -9459,6 +13866,19 @@
        "arousal": 2,
        "vocalisation": 1
       },
+      "speed": {
+       "agency": 5,
+       "deference": 7,
+       "assertiveness": 3,
+       "procedural": 7,
+       "specificity": 3,
+       "delay": 1,
+       "abstraction": 5,
+       "target": 4,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 1
+      },
       "start": {
        "agency": 4,
        "deference": 7,
@@ -9483,6 +13903,19 @@
        "target": 4,
        "collective": 1,
        "arousal": 2,
+       "vocalisation": 1
+      },
+      "strip": {
+       "agency": 6,
+       "deference": 7,
+       "assertiveness": 6,
+       "procedural": 7,
+       "specificity": 4,
+       "delay": 1,
+       "abstraction": 3,
+       "target": 4,
+       "collective": 1,
+       "arousal": 4,
        "vocalisation": 1
       },
       "subject": {
@@ -9563,6 +13996,19 @@
        "arousal": 3,
        "vocalisation": 1
       },
+      "tighten": {
+       "agency": 5,
+       "deference": 7,
+       "assertiveness": 4,
+       "procedural": 7,
+       "specificity": 3,
+       "delay": 3,
+       "abstraction": 6,
+       "target": 4,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 1
+      },
       "treat": {
        "agency": 4,
        "deference": 7,
@@ -9589,6 +14035,32 @@
        "arousal": 2,
        "vocalisation": 1
       },
+      "up": {
+       "agency": 5,
+       "deference": 7,
+       "assertiveness": 4,
+       "procedural": 7,
+       "specificity": 3,
+       "delay": 2,
+       "abstraction": 5,
+       "target": 4,
+       "collective": 1,
+       "arousal": 3,
+       "vocalisation": 1
+      },
+      "visit": {
+       "agency": 5,
+       "deference": 5,
+       "assertiveness": 4,
+       "procedural": 6,
+       "specificity": 4,
+       "delay": 3,
+       "abstraction": 3,
+       "target": 7,
+       "collective": 2,
+       "arousal": 2,
+       "vocalisation": 3
+      },
       "wait": {
        "agency": 1,
        "deference": 6,
@@ -9600,6 +14072,32 @@
        "target": 1,
        "collective": 1,
        "arousal": 1,
+       "vocalisation": 1
+      },
+      "waive": {
+       "agency": 5,
+       "deference": 7,
+       "assertiveness": 3,
+       "procedural": 7,
+       "specificity": 4,
+       "delay": 2,
+       "abstraction": 4,
+       "target": 4,
+       "collective": 1,
+       "arousal": 2,
+       "vocalisation": 2
+      },
+      "withdraw": {
+       "agency": 5,
+       "deference": 7,
+       "assertiveness": 4,
+       "procedural": 7,
+       "specificity": 4,
+       "delay": 1,
+       "abstraction": 3,
+       "target": 4,
+       "collective": 1,
+       "arousal": 2,
        "vocalisation": 1
       }
      }

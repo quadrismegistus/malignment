@@ -99,6 +99,41 @@ usually move the same way at different rates.
     deference      -0.057  p=0.021     -0.128  p=0.021       -0.009  n.s.
     procedural     -0.036  n.s.        -0.052  n.s.          +0.016  n.s.
 
+### SLOT POV RE-RUN AT 50 LINEAGES (2026-09-06): EVERY SIGN HOLDS
+
+The `SLOT POV` column above is **12 lineages** because `run_slotpov.population()`
+took its panel from `displacement_axis/results/pilot3/cells.jsonl` -- 21 endpoint
+pairs, of which 12 cleared the per-lineage gate. That folder's README calls
+21-of-50 a DATA SHORTFALL, not a design. The residuals in those cells were the
+obstacle to widening it; `movement_v4` removes it, because its rows were
+classified when the null had the full distribution. `--pilot` reproduces the
+published numbers.
+
+                     PUBLISHED (12 lin)      RE-RUN (50 lin)
+    assertiveness   +0.156  p=0.007        +0.120  40/50  p=8.8e-07
+    target          +0.101  p=0.052        +0.107  39/50  p=3.5e-05
+    deference       -0.128  p=0.021        -0.100  11/50  p=2.7e-05
+    agency          +0.133  p=0.002        +0.097  36/50  p=4.5e-06
+    arousal         +0.138  p=0.002        +0.084  41/50  p=2.7e-06
+    specificity     +0.100  p=0.003        +0.084  39/50  p=6.0e-06
+    procedural      -0.052  n.s.           -0.032  20/50  p=0.15
+    vocalisation    (not reported)         +0.043  32/50  p=0.018
+
+**All seven published signs hold, every effect size shrinks modestly, and every
+p-value improves by two to four orders of magnitude.** The shrink is the standard
+small-panel overestimate -- the same pattern `slot_ratings/identity` showed when
+its Muslims `deference` cell went +0.198 at n=14 to +0.132 at n=48.
+
+`target` was the weakest published cell at p=0.052 and is now p=3.5e-05.
+`vocalisation` is significant at the wider panel and was not in the published
+table. `procedural` remains the one scale that is not significant either way,
+which is the observation the section above rests on.
+
+**ARM B IS STILL 5 LINEAGES AND THE PANEL FIX DOES NOT REACH IT.** Its gate needs
+words absent from the base arm and present in the aligned one, over >=3 of only 12
+prompts; 596 words is too thin to clear it. That is a frame-count and gate limit,
+not a panel one.
+
 **The individual's options become more agentic, assertive, specific and aroused; the
 institution's become more deferential.** Seven signs, both corpora, larger in the slot pairs.
 
