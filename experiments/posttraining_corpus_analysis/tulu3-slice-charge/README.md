@@ -2,8 +2,8 @@
 kind: question
 id: tulu3-slice-charge
 question: What kind of prompt does each Tulu-3 SFT source carry, and what is the model trained to do with it?
-status: "PILOT RUN 2026-09-06, 3,800 rows, 200 per source x 19 sources. The assistant side is CONSTANT (99.05% NONE) so the user side is primary -- settled by measurement, not by argument. Full run not yet designed."
-headline: "SEXUAL is the least-refused charged kind and the most partially-complied-with, and this holds WITHIN a single source as well as across the corpus. WildChat is the sexually densest source at 10.0%; every maths and persona source is 0.0%. The density half of data_ablations' prediction survives its first check."
+status: "PILOT RUN TWICE, 2026-09-06. v1 (3,800 rows) was re-run as v2 after reading its rows found a fiction confound. The assistant side is CONSTANT (99.2% NONE) so the user side is primary -- settled by measurement. Full run not yet designed."
+headline: "FICTION IS A NEAR-TOTAL EXEMPTION: 0 refusals across 29 charged fiction requests, against 85.3% refusal on 265 charged non-fiction ones. Sexual requests are 36.6% fiction where illicit ones are 1.2%, and that composition -- not leniency about sex -- is most of why SEXUAL looked like the least-refused kind. WildChat is the sexually densest source at 10.0%; every maths and persona source is 0.0%."
 grain: corpus
 ---
 
@@ -28,10 +28,10 @@ and refused, and those are different corpora.
 
 ## THE PILOT'S DECISIVE QUESTION, ANSWERED: THE ASSISTANT SIDE IS CONSTANT
 
-    assistant_kind    NONE 3764, SEXUAL 13, VIOLENT 12, OTHER 6, DEGRADING 4,
-                      ILLICIT 1
-    NOT-NONE          36 of 3800 = 0.95%
-    assistant_charge  1 in 3,764 of 3,800
+    assistant_kind    NONE 3770, SEXUAL 12, VIOLENT 7, OTHER 5, ILLICIT 3,
+                      DEGRADING 3
+    NOT-NONE          30 of 3800 = 0.79%   (v1: 36, 0.95%)
+    assistant_charge  1 in 3,770 of 3,800
 
 **So `assistant_kind` cannot carry an ordinal test and the user side is
 primary.** This was an open design question -- SFT computes loss on the
@@ -62,44 +62,76 @@ WildChat densest, maths and persona at zero, safety intermediate. That is the
 order `data_ablations` predicted from the MODEL side, recovered from the corpus
 with no models involved.
 
+## THE FICTION EXEMPTION, AND THE v1 CLAIM IT CORRECTS
+
+**v1 reported that SEXUAL is the least-refused charged kind (46.5% against 93%
+for degrading and illicit) and checked it within one source before reporting.
+That check controlled for SOURCE and not for FICTION, and fiction is the
+variable that matters.** Reading the v1 rows is what found it: 5 of 8
+PARTIAL/SEXUAL rows were narratives in which A CHARACTER declined -- a king
+seizing a maiden who pleads with him, a fan-fiction scene that fades out -- and
+the rater had read the plot as the assistant's move. v2 adds `is_fiction` and
+tells the rater in three places that a character declining is not the assistant
+declining.
+
+With that field, on CHARGED prompts:
+
+    is_fiction      n   COMPLY  PARTIAL   REFUSE  CORRECT
+    True           29    82.8%    17.2%     0.0%     0.0%
+    False         265     5.7%     5.7%    85.3%     3.4%
+
+**Zero refusals in 29 charged fiction requests.** The corpus teaches a rule
+closer to *if it is fiction, write it, whatever it carries; if it is not,
+refuse* than to anything graded by kind.
+
+And that is most of what the v1 headline was seeing, because fiction is not
+evenly spread across the kinds:
+
+    user_kind      n    fiction
+    SEXUAL        41     36.6%
+    OTHER         73     12.3%
+    COERCIVE      23      8.7%
+    VIOLENT       19      5.3%
+    DEGRADING     58      1.7%
+    ILLICIT       80      1.2%
+
+**A sexual request is about thirty times more likely to be a fiction request
+than an illicit one.** Controlling for it, the kind effect shrinks sharply but
+does not vanish:
+
+    NON-FICTION ONLY    n   COMPLY  PARTIAL   REFUSE
+    SEXUAL             26    11.5%    11.5%    73.1%
+    VIOLENT            18    27.8%     5.6%    66.7%
+    OTHER              64     3.1%     7.8%    78.1%
+    ILLICIT            79     5.1%     5.1%    89.9%
+    DEGRADING          57     1.8%     1.8%    94.7%
+    COERCIVE           21     0.0%     4.8%    95.2%
+
+Sexual and violent still sit ~20 points below degrading, coercive and illicit --
+but at 73%, not 46%. **The correct statement is that the corpus is lenient about
+FICTION, and sexual requests are where fiction concentrates.** n=26 for the
+sexual cell; this is a pilot and the residual kind effect is not established.
+
 ## WHAT IS TRAINED, GIVEN THE KIND OF PROMPT
 
 Assistant move conditional on user kind, pooled over sources:
 
+v2, pooled over sources AND over fiction -- read the section above before this
+table, which is the one the fiction split decomposes:
+
     user_kind        n   COMPLY  PARTIAL   REFUSE  CORRECT
-    SEXUAL          43    32.6%    18.6%    46.5%     2.3%
-    VIOLENT         27    25.9%     7.4%    66.7%     0.0%
+    SEXUAL          41    36.6%    14.6%    46.3%     2.4%
+    VIOLENT         19    31.6%     5.3%    63.2%     0.0%
     DEGRADING       58     3.4%     1.7%    93.1%     1.7%
-    COERCIVE        16    12.5%     0.0%    87.5%     0.0%
-    ILLICIT         74     2.7%     2.7%    93.2%     1.4%
-    OTHER           81    12.3%     3.7%    76.5%     7.4%
-    NONE          3501    86.5%     2.6%     2.5%     8.3%
+    COERCIVE        23     8.7%     4.3%    87.0%     0.0%
+    ILLICIT         80     5.0%     6.2%    88.8%     0.0%
+    OTHER           73    13.7%     8.2%    68.5%     9.6%
+    NONE          3506    87.2%     3.3%     1.9%     7.6%
 
-**SEXUAL is the least-refused charged kind by a wide margin, and the most
-partially-complied-with.**
-
-### AND IT IS NOT A COMPOSITION ARTIFACT -- CHECKED BEFORE IT WAS REPORTED
-
-The pooled table mixes sources, and the sexual rows are concentrated in the
-source that refuses least: 20 of 43 are WildChat, which refuses 25% and complies
-50%. So the pooled figure had to be checked within a source before it meant
-anything. `wildguardmixtrain`, one source, composition held constant:
-
-    SEXUAL      14    64% refuse    14% comply    21% partial
-    VIOLENT     17    88%            6%            6%
-    DEGRADING   18    94%            0%            0%
-    COERCIVE    10    90%           10%            0%
-    ILLICIT     35    91%            0%            6%
-    OTHER       24    88%            0%            4%
-
-**SEXUAL sits at 64% where every other charged kind sits at 88-94%, inside one
-source.** The direction is the pooled one and composition amplifies rather than
-creates it.
-
-**n=14. THIS IS A PILOT AND THAT CELL IS NINE REFUSALS OF FOURTEEN.** The
-within-source contrast is indicative and is not significant on its own; what it
-does is tell the full run what to be powered for. Do not quote 64% against 88%
-as a result.
+v1 and v2 agree closely on this table (SEXUAL 46.5 -> 46.3 refuse), which is
+worth stating: **the fiction fix did not change the pooled numbers, it changed
+what they mean.** An instrument defect that leaves the headline number intact is
+the kind that survives a re-run and a sanity check both.
 
 ## WHAT THE FULL RUN STILL NEEDS
 

@@ -135,6 +135,30 @@ def report(recs):
         print("%-12s %6d %s" % (k, len(v),
                                 " ".join("%7.1f%%" % (100 * c[m] / len(v)) for m in MOVES)))
 
+    print("\n%s\nFICTION, AND THE v1 CONFOUND IT EXISTS TO CATCH" % ("=" * 100))
+    fic = [r for r in recs if r.get("is_fiction")]
+    print("  fiction rows: %d of %d (%.1f%%)" % (len(fic), len(recs),
+                                                 100 * len(fic) / max(len(recs), 1)))
+    print("\n  move | fiction, on CHARGED prompts -- in v1, 5 of 8 PARTIAL/SEXUAL")
+    print("  rows were narratives where a CHARACTER declined, not the assistant.")
+    print("  %-10s %6s %s" % ("fiction", "n", " ".join("%8s" % m for m in MOVES)))
+    for f in (True, False):
+        v = [r for r in recs if bool(r.get("is_fiction")) is f and r["user_kind"] != "NONE"]
+        if not v:
+            continue
+        c = collections.Counter(r["assistant_move"] for r in v)
+        print("  %-10s %6d %s" % (f, len(v),
+                                  " ".join("%7.1f%%" % (100 * c[m] / len(v)) for m in MOVES)))
+    print("\n  SEXUAL prompts only:")
+    print("  %-10s %6s %s" % ("fiction", "n", " ".join("%8s" % m for m in MOVES)))
+    for f in (True, False):
+        v = [r for r in recs if bool(r.get("is_fiction")) is f and r["user_kind"] == "SEXUAL"]
+        if not v:
+            continue
+        c = collections.Counter(r["assistant_move"] for r in v)
+        print("  %-10s %6d %s" % (f, len(v),
+                                  " ".join("%7.1f%%" % (100 * c[m] / len(v)) for m in MOVES)))
+
     print("\n%s\nREFUSAL RATE ON CHARGED PROMPTS, BY SOURCE" % ("=" * 100))
     print("%-58s %7s %9s %9s" % ("source", "charged", "refuse", "comply"))
     for src in sorted(by):
@@ -153,7 +177,11 @@ def main(argv=None):
     ap.add_argument("--report-only", action="store_true",
                     help="re-print the tables from results/pilot.jsonl")
     a = ap.parse_args(argv)
-    path = os.path.join(OUT, "pilot.jsonl")
+    #: THE INSTRUMENT VERSION IS IN THE FILENAME. v1 and v2 differ on
+    #: `assistant_move` and v2 adds `is_fiction`; one file holding both would
+    #: be two instruments under one name.
+    import task as _T
+    path = os.path.join(OUT, "pilot_%s.jsonl" % _T.SliceChargeEN.name)
 
     if a.report_only:
         report([json.loads(l) for l in open(path, encoding="utf-8")])
@@ -182,12 +210,13 @@ def main(argv=None):
                          reading=r.reading, user_kind=r.user_kind,
                          user_charge=r.user_charge, assistant_move=r.assistant_move,
                          assistant_kind=r.assistant_kind,
-                         assistant_charge=r.assistant_charge))
+                         assistant_charge=r.assistant_charge,
+                         is_fiction=bool(r.is_fiction)))
     os.makedirs(OUT, exist_ok=True)
     with open(path, "w", encoding="utf-8") as fh:
         for r in recs:
             fh.write(json.dumps(r) + "\n")
-    print("-> results/pilot.jsonl (%d rows)" % len(recs))
+    print("-> %s (%d rows)" % (os.path.basename(path), len(recs)))
     report(recs)
     return 0
 
