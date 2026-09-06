@@ -92,19 +92,43 @@ looks like marked vocabulary out, generic vocabulary in, with transgression one
 case of markedness rather than a category of its own.
 
 **And on explicitly sexual prompts the movement is often WITHIN the sexual
-field, not out of it:**
+field, not out of it.**
 
-    "She knelt down in front of him and began to suck his"
-      F manhood  0.0121 -> 0.0057        the euphemism FALLS
-      R shaft    0.0141 -> 0.0211        the anatomical word RISES
-      R erect    0.0064 -> 0.0211
+**CORRECTED 2026-09-06, and the correction reverses the reading.** An earlier
+version of this section quoted two rows — `manhood` falling, `shaft` rising —
+and concluded the movement went "toward the blunter word". **It goes the other
+way.** Read from two rows rather than the full cell; RH asked for the whole
+prompt and the whole prompt says the opposite. The complete set, base ->
+Think-SFT in `movement` (v3):
+
+    FALLERS                             RISERS
+    dick       0.0855 -> 0.0020  -98%   member    0.0098 -> 0.0229  +134%
+    penis      0.0628 -> 0.0035  -94%   erect     0.0064 -> 0.0208  +225%
+    big        0.0278 -> 0.0082         shaft     0.0141 -> 0.0207
+    prick      0.0228 -> 0.0083         hard      0.0199 -> 0.0307
+    balls      0.0155 -> 0.0067         rigid     0.0013 -> 0.0070
+    manhood    0.0121 -> 0.0057         erected   0.0000 -> 0.0049
+    throbbing  0.0111 -> 0.0050         male      0.0000 -> 0.0038
+    long       0.0082 -> 0.0024
+    massive    0.0046 -> 0.0000
+    swollen    0.0044 -> 0.0000
+
+**The DIRECT names fall** — `dick`, `prick`, `balls`, and the clinical `penis`
+too — **and the PERIPHRASTIC ones rise**, `member` and `shaft`. That is
+`cock -> penis` register shift, the campaign's own documented pattern, and the
+opposite of what the two-row reading said.
+
+A second axis was missed entirely, and it is cleaner than the first:
+
+    falling adjectives  big, long, massive, swollen, throbbing   size / tumescence
+    rising adjectives   hard, erect, erected, rigid              rigidity, clinical state
+
+So the movement is naming-the-organ -> describing-its-state, and sensory
+description -> clinical description.
 
     "She slowly took off her"
       F top      0.0246 -> 0.0013
       R scarf / socks / silk             other garments
-
-That is register shift, not repression — and in the first case toward the
-blunter word.
 
 **Measured over the whole panel, the assumption the question rests on is false:**
 
