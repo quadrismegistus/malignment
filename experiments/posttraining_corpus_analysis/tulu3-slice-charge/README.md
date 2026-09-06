@@ -204,14 +204,43 @@ requests in it. The concealment that IS in this mixture is
   withheld. The assistant column is known to be near-constant (99.2% NONE, and
   0.79% not-NONE in the v2 pilot); this control is what would show that
   constancy is real rather than an artifact of showing the rater the request.
-- **Source -> slice, pinned against the paper.** SAFETY is pinned by arithmetic:
-  coconot 10,983 + wildjailbreak 50,000 + wildguardmix 50,000 = 110,983 = 11.8%,
-  the registration's figure exactly. **MATHS AND PERSONA ARE NOT PINNED AND THEY
-  OVERLAP** -- five personahub sources total 284,919 rows and three are maths,
-  including `personahub_math_v5_regen_149960` at 16%, the largest source in the
-  mixture and plausibly inside BOTH ablations. If it is, `no-math` (-0.092) and
-  `no-persona` (-0.086) removed largely the same rows, which accounts for their
-  near-identical model-side effects better than two independent slices agreeing.
+- **Source -> slice: SAFETY is pinned, MATHS AND PERSONA CANNOT BE, and that is
+  now a checked conclusion rather than an outstanding task (2026-09-06).**
+
+  Safety is pinned by arithmetic: coconot 10,983 + wildjailbreak 50,000 +
+  wildguardmix 50,000 = 110,983 = 11.8%, the registration's figure exactly.
+
+  For maths and persona, three routes were tried and all three are closed:
+
+      published ablation mixtures   DO NOT EXIST. `allenai/tulu-3-sft-mixture`
+                                    has no -no-math / -no-persona variant to diff
+      the ablation model repos      carry weights, config.json and
+                                    generation_config.json. No training spec.
+                                    The cards are stubs, all four byte-identical
+                                    (md5 39727e7063aa6976a8c044d325155bd1)
+      the paper (2411.15124v5)      Tables 10 and 32 give RESULTS. Neither they
+                                    nor the prose lists which datasets each
+                                    ablation removed
+
+  **And the paper's prose and its own numbers disagree.** The prose says *"our
+  new Persona datasets were built to target specific skills: mathematics, coding,
+  and instruction following... performance on HumanEval(+), GSM8K, MATH, and
+  IFEval drop after removing our Persona datasets"* -- which would put
+  `personahub_math_v5_regen_149960` (16% of the mixture) inside BOTH ablations.
+  Table 10 does not show that:
+
+                       GSM8K   MATH   IFEval   HumanEval
+      Tulu 3 8B SFT     76.2   31.5     72.8        86.2
+      w/o Persona       76.8   30.1     53.6        84.5   <- GSM8K RISES
+      w/o Math          64.1   23.5     70.6        86.0
+
+  GSM8K rises when persona data is removed, and MATH falls 1.4 where removing
+  maths costs 8.0. Not decisive -- the effect could be non-linear -- but not the
+  pattern the prose asserts.
+
+  **SO: whenever `no-math` (-0.092) and `no-persona` (-0.086) are cited together,
+  say they may not be independent manipulations.** The remaining route is asking
+  AI2; there is no public document that settles it.
 - **The 14 harmful-rated-NONE** in the external-criterion table are unexamined.
 - **`assistant_reading` does little work.** With `implied == literal` on 97% of
   rows, NA is the correct answer almost everywhere (20,562 NA, 406 LITERAL, 272
