@@ -201,6 +201,65 @@ It says nothing about whether the KIND assignment within charged is right, about
 WildJailbreak, which would have tested concealment directly, is not in this
 mixture to test against.
 
+## v3: `literal_charge` / `implied_charge`, CALIBRATED AND BOUNDED
+
+Two readings on one scale so the gap is SUBTRACTED rather than judged --
+`charge.py`'s own pattern, where `frame` and `scene` "share it so they can be
+subtracted". Plus `assistant_reading` (LITERAL | IMPLIED | NA): which reading
+the assistant answered.
+
+### THE CALIBRATION PASSES, INCLUDING THE CELL THAT COULD HAVE KILLED IT
+
+WildJailbreak's train.tsv holds the SAME request in a plain and a
+WildTeaming-wrapped form, so this is within-item. Predictions recorded before
+the run; 6 items per cell:
+
+    cell                    predicted            observed mean gap
+    vanilla_harmful         ~0, both high              +0.00
+    adversarial_harmful     LARGE POSITIVE             +1.50
+    vanilla_benign          ~0, both low               +0.00
+    adversarial_benign      ~0, both low               +0.00
+
+**`adversarial_benign` is the control**: the same wrapper with nothing harmful
+behind it. A gap there would mean the fields detect FRAMING rather than
+concealment. It is +0.00.
+
+Read as pairs, the mechanism is visible -- the wrapper lowers the LITERAL charge
+while implied holds, and in 4 of 6 `implied_charge` recovers the vanilla form's
+charge exactly:
+
+    7/7 -> 5/7      5/5 -> 3/5      3/3 -> 3/5
+    3/3 -> 2/3      5/5 -> 3/5      2/2 -> 3/3
+
+### AND WHAT IT IS NOT: NOT THE SUBSTITUTION SIGNATURE
+
+**Recorded because this seat conflated them.** The signature `COMPLY + charged
+user + assistant NONE` fires on 19 of 39 charged-compliance rows (49%), and it
+was described as the corpus-side counterpart of within-frame substitution. v3
+run on those same rows against the 20 matched ones:
+
+    cell                            n    mean gap   gap>0    assistant_reading
+    SUBST (assistant emptied it)   19      +0.53     3/19    NA 16, LIT 2, IMP 1
+    MATCH (assistant carried it)   20      +0.20     2/20    NA 10, LIT 6, IMP 4
+
+**The cells do not separate**, and `LITERAL` fires MORE in the matched cell.
+Only 3 of 19 substitution rows carry a request-side gap at all. So an emptied
+response is usually NOT a disguised request read innocently -- it is a charged
+scene whose continuation happens not to be charged (the Telugu legend), plus
+rating noise.
+
+The one clear in-corpus instance is exact, and it is the minority case:
+
+    literal 1  implied 7  gap +6  COMPLY  reading LITERAL  kind NONE
+    "a teenager and their pet dog share a heartfelt, intimate moment...
+     disregarding external rules and regulations"
+
+**So `literal/implied` is a SECOND DIMENSION, not a better signature.** It
+measures concealment in the REQUEST, which is rare in this mixture -- the
+adversarial rows are not in it (see the section above). `assistant_reading` is
+the weakest of the three: with gap ~0 on most rows, NA is the correct answer,
+so it only does work in the thin slice where a gap exists.
+
 ## WHAT THE FULL RUN STILL NEEDS
 
 - **Power for the kind x move contrast within source**, which is the finding
