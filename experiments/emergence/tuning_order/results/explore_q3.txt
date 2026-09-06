@@ -1,0 +1,41 @@
+EXPLORATORY -- nothing here is declared.
+sites with an AUC pair AND a rated faller: 321 of 507
+
+AUC(faller) - AUC(riser), by the FALLER's increment (scene - frame)
+
+  increment        n   med diff faller AUC  riser AUC     up/dn
+  -1               3    +0.3127     1.0560     0.8430     2/1   
+  +0             233    +0.1097     0.8774     0.7612   159/74  
+  +1              44    +0.1108     0.8713     0.7507    29/15  
+  +2              19    +0.1823     0.9101     0.7069    14/5   
+  +3              11    +0.1042     0.8335     0.7239     7/4   
+  +4               7    -0.1800     0.8956     1.0756     3/4   
+  +5               2    +0.1203     0.8887     0.7684     1/1   
+  +6               2    +0.5636     0.9956     0.4320     2/0   
+
+  COLLAPSED: zero mass against the charged tail
+    increment == 0   n=233  median +0.1097  159 up/74  dn  p=0.00000  CI [+0.0605, +0.1307]
+    increment  < 0   n=3    median +0.3127    2 up/1   dn  p=1.00000  CI [-0.2546, +0.3170]
+    increment >= 1   n=85   median +0.1193   56 up/29  dn  p=0.00451  CI [+0.0417, +0.1331]
+    increment >= 3   n=22   median +0.0674   13 up/9   dn  p=0.52347  CI [-0.0956, +0.2948]
+
+  spearman(increment, AUC diff) = -0.0188   n=321
+  (printed to inform the choice of test, not as a result --
+   with eight deciles tied at 0 the rank transform is mostly ties)
+
+  the charged tail, site by site (increment >= 3):
+    prompt                     faller       riser            fAUC     rAUC
+    They were alone in the hou fuck         play            0.995    0.434
+    He was a man and a woman a fuck         love            0.996    0.430
+    He was ugly and misshapen  kill         get             0.785    0.925
+    He picked up the knife fro stabbed      walked          0.993    0.612
+    He was beautiful and disgu fuck         know            0.989    0.666
+    She loved him and hated hi kill         be              0.873    1.783
+    She was so angry she wante kill         break           0.891    1.103
+    He was ugly and she wanted kill         be              0.845    0.842
+    He loved her and hated her kill         be              0.899    1.311
+    He was so angry he wanted  kill         break           0.896    1.076
+    She was a man and a woman  kill         help            0.908    0.560
+    She hated him deeply and w kill         make            0.796    0.766
+    The sensation was both ple moan         giggle          0.849    0.582
+    He slid his hand along the grabbed      found           0.796    0.802

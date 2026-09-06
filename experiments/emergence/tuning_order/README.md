@@ -1,7 +1,7 @@
 ---
 kind: question
-status: Q1 RUN 2026-09-06 against a registration frozen the same day. Order holds (p<1e-6); the sites are NOT F04's. Q2/Q3 not run
-headline: The faller leaves before the riser arrives (t50 3000 vs 6000, p<1e-6) — but both curves are front-loaded and the top movers are function words, not F04's charged pairs
+status: Q1 and Q3 RUN 2026-09-06. Order holds but is NOT charge-specific; 29.5% of fallers are AMPLIFIED before falling. Q2 not run
+headline: The faller leaves before the riser generally, not because it is charged — and 29.5% of fallers are AMPLIFIED at step 1000 before they fall, which F04 missed
 grain: undecided (rung x site, prompts as the replicate within one lineage)
 ---
 # tuning_order

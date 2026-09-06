@@ -118,8 +118,8 @@ and the state the first version of the checker could not see.
 
 - **[`capacities/`](emergence/capacities/README.md)** -- `PORTED from M05, 2026-08-24. Numbers recomputed by analyse.py, fleet not re-run.`  
   Pretraining builds rhyme pull to 0.383; SFT erodes it to 0.262. DPO has one checkpoint.
-- **[`tuning_order/`](emergence/tuning_order/README.md)** -- `Q1 RUN 2026-09-06 against a registration frozen the same day. [...]`  
-  The faller leaves before the riser arrives (t50 3000 vs 6000, p<1e-6) — but both curves are front-loaded and the top movers are function words, not F04's charged pairs
+- **[`tuning_order/`](emergence/tuning_order/README.md)** -- `Q1 and Q3 RUN 2026-09-06. Order holds but is NOT charge-specific; 29.5% of fallers are AMPLIFIED before falling. [...]`  
+  The faller leaves before the riser generally, not because it is charged — and 29.5% of fallers are AMPLIFIED at step 1000 before they fall, which F04 missed
 
 ### posttraining_corpus_analysis
 
