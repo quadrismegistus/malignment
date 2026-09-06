@@ -59,8 +59,18 @@ CELLS = os.path.join(REPO, "experiments", "displacement", "displacement_axis",
 CONTENT_POS = ("NOUN", "VERB", "ADJ", "ADV")
 
 
-def population(prompt=None, item_id=None):
-    """Per-word CANONICAL rise/fall over ELIGIBLE pairs, plus contextual POS."""
+def population(prompt=None, item_id=None, pilot=False):
+    """Per-word CANONICAL rise/fall over ELIGIBLE pairs, plus contextual POS.
+
+    **THE PANEL WAS 21 PAIRS BECAUSE IT CAME FROM A PILOT CELL LIST** --
+    `displacement_axis/results/pilot3/cells.jsonl`, whose own README calls
+    21-of-50 a DATA SHORTFALL rather than a design. The residuals in those cells
+    were the obstacle to widening it, since `movement()` needs total mass and
+    `twp_words_v4_best` carries only the scored set; `movement_v4` removes it,
+    because its rows were classified when the null had the full distribution.
+
+    `pilot=True` reproduces the published 21-pair numbers.
+    """
     sys.path.insert(0, REPO)
     from malignment import vectors as V
     from malignment.movement import movement, CANONICAL
@@ -74,6 +84,28 @@ def population(prompt=None, item_id=None):
     if not mine:
         raise SystemExit("no cells for %r" % (item_id or prompt))
     prompt = mine[0]["prompt"]
+
+    _v4 = {}
+    if not pilot:
+        from malignment import roster
+        eps = roster.endpoints()[0]
+        for r in V.rows(
+                "SELECT base, aligned, cls, groupArray(word) ws FROM movement_v4 "
+                "WHERE prompt={p:String} AND frame_base='' AND frame_aligned='' "
+                "AND rule='canonical' AND cls IN ('riser','faller') "
+                "GROUP BY base, aligned, cls", p=prompt):
+            if eps.get(r["base"]) != r["aligned"]:
+                continue
+            rs, fs = _v4.setdefault((r["base"], r["aligned"]), (set(), set()))
+            (rs if r["cls"] == "riser" else fs).update(r["ws"])
+        if _v4:
+            #: carry every non-pair field from the pilot cell forward -- `item_id`
+            #: at least is read downstream, and synthesising a bare {base,endpoint}
+            #: dropped it.
+            _tmpl = {k: v for k, v in mine[0].items()
+                     if k not in ("base", "endpoint", "residual_base",
+                                  "residual_endpoint")}
+            mine = [dict(_tmpl, base=b, endpoint=e) for b, e in sorted(_v4)]
 
     models = sorted({c["base"] for c in mine} | {c["endpoint"] for c in mine})
     #: `_best`, NOT `twp_words_v4`. The raw table carries pass-1 and merged rows
@@ -108,14 +140,18 @@ def population(prompt=None, item_id=None):
         pb, pa = store.get(c["base"]), store.get(c["endpoint"])
         if not pb or not pa:
             continue
-        m = movement(pb, pa, CANONICAL,
-                     residual_pre=c.get("residual_base"),
-                     residual_post=c.get("residual_endpoint"))
+        if pilot or not _v4:
+            m = movement(pb, pa, CANONICAL,
+                         residual_pre=c.get("residual_base"),
+                         residual_post=c.get("residual_endpoint"))
+            _rs, _fs = set(m.risers), set(m.fallers)
+        else:
+            _rs, _fs = _v4[(c["base"], c["endpoint"])]
         for w in set(pb) | set(pa):
             present[w] += 1
             if pb.get(w, 0.0) >= CANONICAL.min_prob:
                 elig[w] += 1
-        rs, fs = set(m.risers), set(m.fallers)
+        rs, fs = _rs, _fs
         for w in rs | fs:
             if pb.get(w, 0.0) < CANONICAL.min_prob:
                 continue          # not eligible in THIS pair; its net is censored

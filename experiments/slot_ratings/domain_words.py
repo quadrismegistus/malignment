@@ -20,12 +20,47 @@ CELLS = os.path.join(REPO, "experiments", "displacement", "displacement_axis",
 MIN_PROB = 0.003
 
 
+
+#: SHARED FIX, 2026-09-06 (RH). Every producer in this tree took its lineage
+#: panel from `displacement_axis/results/pilot3/cells.jsonl`, which ran **21 of
+#: the 50 endpoint pairs** -- a DATA SHORTFALL that folder records in its own
+#: README, not a design. The residuals in those cells were the reason nobody
+#: could widen it: `movement()` needs total mass and `twp_words_v4_best` carries
+#: only the scored set. `movement_v4` removes the obstacle, because its rows were
+#: classified when the null had the full distribution.
+#:
+#: `movers.py` in `displacement_axis` CANNOT take this fix: it needs `m.excess`
+#: and `m.diagnostics`, and the store has neither.
+def _v4_sets(prompts):
+    """{(prompt, base, aligned): (risers, fallers)} for the endpoint roster."""
+    import collections as _c
+    from malignment import roster, vectors as _V
+    eps = roster.endpoints()[0]
+    out = _c.defaultdict(lambda: (set(), set()))
+    for r in _V.rows(
+            "SELECT prompt, base, aligned, cls, groupArray(word) ws "
+            "FROM movement_v4 WHERE prompt IN {ps:Array(String)} "
+            "AND frame_base='' AND frame_aligned='' AND rule='canonical' "
+            "AND cls IN ('riser','faller') GROUP BY prompt, base, aligned, cls",
+            ps=list(prompts)):
+        if eps.get(r["base"]) != r["aligned"]:
+            continue
+        k = (r["prompt"], r["base"], r["aligned"])
+        rs, fs = out[k]
+        (rs if r["cls"] == "riser" else fs).update(r["ws"])
+        out[k] = (rs, fs)
+    return out, eps
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser()
     ap.add_argument("--domain", nargs="+",
                     default=["sexual", "violence", "identity", "institutional"])
     ap.add_argument("--min-seen", type=int, default=30)
     ap.add_argument("--top", type=int, default=28)
+    ap.add_argument("--pilot", action="store_true",
+                    help="use the pilot3 cell list (21 pairs, reproduces the "
+                         "published numbers) instead of roster.endpoints()")
     a = ap.parse_args(argv)
     from malignment import vectors as V
     from malignment.movement import movement, CANONICAL
@@ -38,8 +73,16 @@ def main(argv=None):
     for dom in a.domain:
         items = [i for i, v in byitem.items() if v[0].get("domain") == dom]
         rise = collections.Counter(); fall = collections.Counter(); seen = collections.Counter()
+        _V4, _EPS = _v4_sets([byitem[i][0]["prompt"] for i in items])
         for iid in items:
             mine = byitem[iid]
+            _p0 = mine[0]["prompt"]
+            if not a.pilot:
+                mine = [dict(base=b, endpoint=e, prompt=_p0)
+                        for b, e in sorted(_EPS.items())
+                        if (_p0, b, e) in _V4]
+                if not mine:
+                    continue
             ms = sorted({c["base"] for c in mine} | {c["endpoint"] for c in mine})
             rows = V.rows("SELECT model, groupArray(word) AS ws, groupArray(p) AS ps "
                           "FROM twp_words_v4_best WHERE prompt={p:String} "
@@ -50,10 +93,13 @@ def main(argv=None):
                 pb, pa = store.get(c["base"]), store.get(c["endpoint"])
                 if not pb or not pa:
                     continue
-                m = movement(pb, pa, CANONICAL,
-                             residual_pre=c.get("residual_base"),
-                             residual_post=c.get("residual_endpoint"))
-                rs, fs = set(m.risers), set(m.fallers)
+                if a.pilot:
+                    m = movement(pb, pa, CANONICAL,
+                                 residual_pre=c.get("residual_base"),
+                                 residual_post=c.get("residual_endpoint"))
+                    rs, fs = set(m.risers), set(m.fallers)
+                else:
+                    rs, fs = _V4[(_p0, c["base"], c["endpoint"])]
                 for w, p in pb.items():
                     if p < MIN_PROB:
                         continue

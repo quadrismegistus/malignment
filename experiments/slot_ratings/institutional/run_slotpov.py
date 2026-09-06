@@ -176,7 +176,24 @@ def population(prompts, arm="A", min_pairs=3, pilot=False):
     return out
 
 
-def main():
+def main(argv=None):
+    #: `--dry` EXISTS BECAUSE ITS ABSENCE COST AN ARTIFACT (2026-09-06).
+    #: This file had NO argument parsing at all, so `run_slotpov.py --dry` was
+    #: neither honoured nor rejected -- it ran for real and overwrote both
+    #: `rated_slot_institutional_en_v2_arm{A,B}.json`, which had to be restored
+    #: from git. `run_slotdomain.py` in the same folder DOES take `--dry` and
+    #: shares this module's `population()`, which is exactly why the flag was
+    #: assumed to work here. An unimplemented flag is indistinguishable from an
+    #: implemented one until you check the file mtime.
+    import argparse
+    ap = argparse.ArgumentParser(description="institutional instrument over the "
+                                             "6 POV-paired slot frames")
+    ap.add_argument("--dry", action="store_true",
+                    help="report the job size and WRITE NOTHING")
+    ap.add_argument("--pilot", action="store_true",
+                    help="use the pilot3 cell list (reproduces the published "
+                         "21-pair numbers) instead of roster.endpoints()")
+    a = ap.parse_args(argv)
     import os as _os
     _V3 = _os.environ.get("INST_V3")
     if _V3:
@@ -189,10 +206,13 @@ def main():
     print("institutional perspective pairs: %d" % len(ps))
     allp = [i["prompt"] for _, v in ps for i in v]
     for arm in ("A", "B"):
-        pop = population(allp, arm=arm)
+        pop = population(allp, arm=arm, pilot=a.pilot)
         jobs = [(p, w) for p in allp for w in pop[p]["words"]]
-        print("\narm %s: %d words over %d prompts" % (arm, len(jobs), len(allp)))
-        if not jobs:
+        pairs_seen = len({k for p in allp for k in pop[p]["verdicts"]})
+        print("\narm %s: %d words over %d prompts, %d endpoint pairs%s"
+              % (arm, len(jobs), len(allp), pairs_seen,
+                 "   [PILOT]" if a.pilot else ""))
+        if a.dry or not jobs:
             continue
         task = InstitutionalSupplementEN()
         errs = {}
