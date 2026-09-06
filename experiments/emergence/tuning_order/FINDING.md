@@ -223,11 +223,90 @@ where both are the SAME class it is n=3 and reverses.
 is not entailed by the endpoint difference, and it is what the table above
 measures.
 
-## DISCOVERED: THE FALLER IS AMPLIFIED BEFORE IT IS REPRESSED
+## DISCOVERED: A ONE-TIME EXCURSION AT THE FIRST TRANSITION
 
-    149 of 505 fallers (29.5%) move UP at step 1000 before falling.
+**This claim has shrunk twice under testing and the history is kept, because the
+first version is what a reader would otherwise cite.**
 
-Flat across charge (32% at lift 0, 34% at >=1). On `kill` it is stark — 9 of 13 sites — and it is why `kill` looked like arrival-first under the AUC statistic. F04 saw the later recovery ("bouncing back by 20000") but **missed the amplification**, which is the larger part of the shape.
+    v1  "149 of 505 fallers (29.5%) move UP at step 1000 before falling"
+        -- no null, no localisation. OVERSTATED.
+    v2  the rate is barely asymmetric; the MAGNITUDE is
+    v3  and it happens at ONE transition and never recurs
+
+### The null it did not have: risers do it too
+
+    moves the WRONG way at step 1000
+      fallers rising first    149 of 505 = 29.5%
+      risers dipping first    114 of 504 = 22.6%
+      rate asymmetry 6.9pp    z=2.49  p=0.013
+
+**So 29.5% is mostly baseline volatility.** A word's mass wobbles; nearly a
+quarter of risers dip before rising. The rate difference is real but modest.
+
+### What IS asymmetric is the SIZE of the excursion
+
+Excursion measured as `|d(1000)| / |total movement|`:
+
+    fallers median 0.158  p90 0.507
+    risers  median 0.052  p90 0.369
+
+    paired within prompt (faller excursion - riser excursion)
+      n=504  median +0.1211  376 up/128 dn   p<1e-6
+      restricted to prompts where BOTH go wrong way
+      n=42   median +0.1214   32 up/10 dn    p=0.00094
+
+**When a faller goes the wrong way it goes about three times further**, and that
+survives conditioning on both words misbehaving — so it is not the rate
+difference in disguise.
+
+### And it happens ONCE, at the only transition that crosses a regime boundary
+
+Wrong-way share at each rung transition, increments >= 0.001:
+
+    transition        fallers   risers
+    base -> 1000       28.7%     20.3%    <- the only asymmetric one
+    1000 -> 2000       24.2%     23.7%
+    2000 -> 3000       32.2%     34.1%    risers higher
+    4000 -> 5000       37.9%     41.0%    risers higher
+    6000 -> 7000       37.3%     46.8%    risers higher
+    20000 -> 21000     52.2%     50.3%
+
+**Never recurs.** At every later transition the two classes misbehave equally
+and often risers more. The rising baseline (24% -> ~50%) is increasing noise as
+late-training movements shrink.
+
+So the claim is: **the first 1,000 steps of SFT move a substantial share of
+eventual fallers in the wrong direction, at ~3x the riser baseline, once.**
+
+### THE TEST THAT COULD STILL KILL IT, AND WHY THE OBVIOUS VERSION IS WRONG
+
+`base -> 1000` is the only transition crossing from a pretrained model into a
+fine-tuned one, so the excursion may be about **regime change** rather than about
+fine-tuning.
+
+The obvious control -- run the same on the pretraining ladder's first rung --
+does not work. RH, 2026-09-06: *"the first rung of pretraining is still learning
+how to speak."* At `stage1-step1000` the model barely has syntax (M05 puts syntax
+at 128-256, reasoning at 3000, discourse at 80000), so it is not comparable to
+fine-tuning a fluent model.
+
+**The control that does work is already in the store.** `allenai/Olmo-3-1025-7B`
+carries 43 rungs including **stage3 at 1000-step spacing on a fully-trained
+model** -- same spacing, same fluency, different operation. That gives three
+regime entries and a within-stage baseline:
+
+    stage1-final -> stage2-step1000     pretraining mixture change
+    stage2-final -> stage3-step1000     annealing
+    Olmo-3-1025-7B -> Think-SFT@1000    fine-tuning     28.7% vs 20.3%
+    twelve within-stage3 transitions    the flat baseline
+
+    all three entries show it   -> regime change, not fine-tuning
+    only SFT shows it           -> fine-tuning specifically
+    within-stage3 shows it too  -> it is what 1000-step spacing looks like
+
+NOT RUN. It needs one `rung_movement.py` pass on the other ladder and no new twp.
+`stage1-step10000` is broken (212 rows / 3 prompts against 2,272 elsewhere) and
+must be excluded rather than read as a gap.
 
 ## WHAT THE SELECTION COST: THE DECLARED ARM WAS A WEAK INSTRUMENT
 
@@ -322,5 +401,7 @@ specific displacement pairs mostly do not.
 - **Q2/Q3 as evidence that charge is irrelevant.** They used a saturated instrument. Type-level charge orders faller timing at -0.122.
 - **A charge modulation at either grain.** Word level rho=+0.0384 (p=0.090); prompt level rho=+0.0001 (p=0.998), terciles differing by 15 steps on 5,341. State the bound as a fraction, not as a p.
 - **F04's exhibits.** `fuck -> kiss` is refuted, `kill -> scream` holds only on the anger prompts, `kill -> said` is untestable here. Only the GENERAL claim replicates.
+- **"29.5% of fallers amplify" as a finding.** It is 29.5% against a 22.6% riser baseline, and the rate asymmetry is 6.9pp. The magnitude asymmetry is the result; the rate is nearly the null.
+- **The excursion as a property of SFT time.** It occurs at ONE transition, the one crossing into fine-tuning, and never recurs. Whether it is about fine-tuning or about regime change is untested.
 - **The Q1 AUC numbers for anything.** Kept above as a record of what the selection cost.
 - **The timing result as DISPLACEMENT.** Fallers and risers have the same median charge (+0.000 both). The two-phase timing is established; that mass moves from charged to uncharged words is NOT, except weakly on the sexual subset where 66% of prompts have a sexual riser anyway.
