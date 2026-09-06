@@ -99,6 +99,55 @@ usually move the same way at different rates.
     deference      -0.057  p=0.021     -0.128  p=0.021       -0.009  n.s.
     procedural     -0.036  n.s.        -0.052  n.s.          +0.016  n.s.
 
+### THE POV STUDY ON THE v3 INSTRUMENT (2026-09-06): `mediation` AND `termination`
+
+The POV study runs the **v2** instrument, 11 scales. `mediation` and `termination`
+are v3-only (`SCALES_INST_V3 = SCALES_INST + ["termination", "mediation"]`), so
+they had never been measured on these frames at all. `INST_V3=1` runs v3 and
+writes `rated_slot_institutional_en_v3_arm{A,B}.json`, leaving the v2 artifact
+intact.
+
+    scale           indiv     inst      gap   pairs up   wilcoxon
+    mediation      +0.133   +0.068   +0.065     38/50     0.0011 *
+    termination    -0.059   -0.040   -0.019     22/50     0.29
+
+**Both new scales reproduce `bundle_ishould`'s DIRECTION on an independent
+population.** That study, pooling F21 and M03 over the 52 prompts ending
+`"I should"` at 50 lineages, has `mediation` +0.236 individual / +0.125
+institution and `termination` -0.156 / -0.112. Here both parties are again routed
+through a channel and both are again less willing to end the relationship. Two
+corpora, two grammatical sites -- `"I should"` against `"so X decided to"` -- one
+direction on both scales.
+
+**`mediation` also carries a significant POV GAP: +0.065, 38/50, p=0.0011.** The
+individual is routed through a channel MORE than the institution is. That is the
+same asymmetry the seven v2 scales show, on a scale that had not been tested for
+it.
+
+`termination`'s gap is not significant (22/50, p=0.29) even though both sides
+move: the effect is real and shared, and the POSITIONS do not differ on it.
+
+**COUNT THIS AGAINST THE ELEVEN ALREADY TESTED.** The POV contrast had 11 scales;
+these are the twelfth and thirteenth, and one of them is significant. Stated
+before the run rather than after: two more scales is two more chances for a gap,
+and `mediation`'s p=0.0011 should be read in that light rather than as a fresh
+discovery.
+
+### AND TWO v2 SCALES FLIP SIGNIFICANCE AT v3
+
+Same frames, same panel, same lineages -- only the instrument differs, 13 scales
+rated together instead of 11:
+
+    scale           v2 gap                  v3 gap
+    abstraction    +0.029  30/50  0.11     +0.040  30/50  0.045 *
+    vocalisation   +0.043  32/50  0.018 *  +0.017  26/50  0.44
+
+The seven scales carrying the asymmetry are unaffected -- `agency`, `deference`,
+`assertiveness`, `specificity`, `target`, `arousal` all hold with similar
+magnitudes -- and `procedural` is non-significant under both, which is what the
+section below rests on. But **a marginal cell can change status with the
+instrument version alone**, and neither of these two should be quoted without it.
+
 ### SLOT POV RE-RUN AT 50 LINEAGES (2026-09-06): EVERY SIGN HOLDS
 
 The `SLOT POV` column above is **12 lineages** because `run_slotpov.population()`
