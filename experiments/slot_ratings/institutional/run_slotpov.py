@@ -80,19 +80,65 @@ def pairs():
     return out
 
 
-def population(prompts, arm="A", min_pairs=3):
-    from malignment import vectors as V
+def population(prompts, arm="A", min_pairs=3, pilot=False):
+    """Words and per-pair verdicts for each prompt.
+
+    ## THE PANEL CAME FROM A PILOT CELL LIST AND NOW COMES FROM THE ROSTER
+
+    This read `CELLS` -- `displacement_axis/results/pilot3/cells.jsonl` -- for
+    both the model list AND the residuals, so the panel was **21 endpoint pairs**
+    wherever the pilot happened to run. `displacement_axis`'s own README calls
+    that a DATA SHORTFALL, not a design: *"EVERY NUMBER BELOW IS pilot3, WHICH
+    RAN 21 OF THE 50 ENDPOINT PAIRS."* The same shortfall reached
+    `slot_ratings/identity` (fixed 2026-09-05) and `slot_ratings/sexual`.
+
+    The residuals were the obstacle -- `movement()` needs total mass and
+    `twp_words_v4_best` carries only the scored set -- and **`movement_v4` removes
+    it**, because its rows were classified when the null had the full
+    distribution. So the risers and fallers are READ, not recomputed, and the
+    panel is `roster.endpoints()`.
+
+    `pilot=True` reproduces the published 21-pair numbers.
+    """
+    from malignment import roster, vectors as V
     from malignment.movement import movement, CANONICAL
     from malignment.pos import get_pos
     cells = [json.loads(l) for l in open(CELLS, encoding="utf-8")]
     byp = collections.defaultdict(list)
     for c in cells:
         byp[c["prompt"]].append(c)
+
+    #: risers/fallers per (prompt, base, aligned), read once for every prompt
+    mv = collections.defaultdict(lambda: (set(), set()))
+    if not pilot:
+        eps = roster.endpoints()[0]
+        #: `V.rows` not `ch.query`: it binds parameters, and a prompt here can
+        #: carry an apostrophe. See `vectors.rows`'s own warning about TSV
+        #: escaping and hand-built literals.
+        for r in V.rows(
+                "SELECT prompt, base, aligned, cls, groupArray(word) ws "
+                "FROM movement_v4 WHERE prompt IN {ps:Array(String)} "
+                "AND frame_base='' AND frame_aligned='' AND rule='canonical' "
+                "AND cls IN ('riser','faller') GROUP BY prompt, base, aligned, cls",
+                ps=list(prompts)):
+            if eps.get(r["base"]) != r["aligned"]:
+                continue
+            k = (r["prompt"], r["base"], r["aligned"])
+            rs, fs = mv[k]
+            (rs if r["cls"] == "riser" else fs).update(r["ws"])
+            mv[k] = (rs, fs)
+
     out = {}
     for p in prompts:
         mine = byp.get(p) or []
-        if not mine:
-            out[p] = dict(words=[], verdicts={}); continue
+        if pilot:
+            if not mine:
+                out[p] = dict(words=[], verdicts={}); continue
+        else:
+            mine = [dict(base=b, endpoint=e) for b, e in sorted(eps.items())
+                    if (p, b, e) in mv]
+            if not mine:
+                out[p] = dict(words=[], verdicts={}); continue
         ms = sorted({c["base"] for c in mine} | {c["endpoint"] for c in mine})
         rows = V.rows("SELECT model, groupArray(word) AS ws, groupArray(p) AS ps "
                       "FROM twp_words_v4_best WHERE prompt={p:String} "
@@ -104,10 +150,13 @@ def population(prompts, arm="A", min_pairs=3):
             pb, pa = store.get(c["base"]), store.get(c["endpoint"])
             if not pb or not pa:
                 continue
-            m = movement(pb, pa, CANONICAL,
-                         residual_pre=c.get("residual_base"),
-                         residual_post=c.get("residual_endpoint"))
-            rs, fs = set(m.risers), set(m.fallers)
+            if pilot:
+                m = movement(pb, pa, CANONICAL,
+                             residual_pre=c.get("residual_base"),
+                             residual_post=c.get("residual_endpoint"))
+                rs, fs = set(m.risers), set(m.fallers)
+            else:
+                rs, fs = mv[(p, c["base"], c["endpoint"])]
             keep = {}
             for w, pv in pb.items():
                 ok = (pv >= MIN_PROB) if arm == "A" else (
