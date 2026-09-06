@@ -297,6 +297,42 @@ When fallers lose mass, every surviving word's probability rises **mechanically*
 
 **Effect size goes from 1.6% of the pole gap to 10.1%. The sign rate does not move: 63.5% against 62.7%.** That is the expected shape and worth stating plainly, because an early 300-cell preview showed 73.5% and 20.5% and I reported it as a thirteen-fold gain. Those first 300 cells are the first items in file order, not a sample. **The still words were diluting MAGNITUDE, not obscuring DIRECTION** -- a diluted average keeps its sign, so no consistency was ever hidden in them.
 
+### RE-RUN AT 50 LINEAGES (2026-09-06): THE CROSSING IS A PROPERTY OF THE 21
+
+This folder's own header says **"EVERY NUMBER BELOW IS pilot3, WHICH RAN 21 OF
+THE 50 ENDPOINT PAIRS"** and calls it a DATA SHORTFALL. `movers.py` now takes
+`--pilot` (both old sources), `--pilot-panel` (old panel, corrected residuals)
+and the default (both corrected), so the two corrections are separable.
+
+                            cells   s_fall   s_rise   travel   disp s_fall
+    PUBLISHED pilot/pilot   5,261  -0.0210  -0.0595  -0.0359     +0.0575
+    PILOT PANEL + store res 5,268  -0.0212  -0.0600  -0.0362     +0.0575
+    ROSTER + store res     11,926  -0.0093  -0.0361  -0.0196     +0.0010
+
+    travel negative   63.5% z=+19.6  ->  58.0% z=+17.4
+    travel / pole gap        10.1%   ->   5.6%
+
+**THE RESIDUAL CORRECTION CHANGES NOTHING AND THE PANEL CHANGES EVERYTHING.**
+The pilot cells carry the producer's stale `total` -- `ingest.py` documents it as
+the PASS-1 residual, wrong on 350,453 of 385,855 topup cells, and measured here
+it agrees with `twp_cells_v4.total` on 26 of 26 non-topup cells and **73 of 774
+topup ones**. So the input was wrong on 91% of cells and the output moves in the
+fourth decimal. Recorded because it was flagged as a correctness finding before
+it was measured, and the measurement says it does not matter HERE. It is still
+the wrong input, and `movement()` needs a right one; it simply buys nothing on
+this statistic.
+
+**What the panel buys is the headline.** `travel` halves as a fraction of the
+pole gap, the sign rate falls from 63.5% to 58.0% while staying decisive
+(z=+17.4 on 11,926 cells), and the displacement cells stop crossing: mass leaves
+at **+0.0010**, the midpoint, rather than +0.0575 on the transgressive side.
+
+**So "displacement cells cross" is a property of the 21 pilot lineages.** At 50
+the mass still travels toward the permitted pole -- that direction survives at
+every panel size and is what this folder establishes -- but it does not start on
+the far side of the midpoint. The sentence below was the measurement to quote for
+the phenomenon and it should now be quoted with its panel attached.
+
 **Displacement cells cross.** Mass leaves at +0.058, on the transgressive side of the midpoint, and arrives at -0.081, on the permitted side. 14.6% of the pole gap. That is the phenomenon in one line, and it is the measurement to quote for it.
 
 **Churn is nice-to-nicer, and this is the reading that reproduces.** Mass leaves at -0.035 and arrives at -0.070, both permitted, moving further in. An earlier draft of this README quoted -0.038 and -0.059 from a hand pass, then REMOVED them as unreproducible. They were approximately right; they failed to reproduce because they were being recomputed by hand instead of through `movement.py`, not because the reading was wrong. Restored here with a producer behind it.

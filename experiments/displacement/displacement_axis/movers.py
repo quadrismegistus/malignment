@@ -84,6 +84,12 @@ def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--run", default="pilot3")
     ap.add_argument("--limit", type=int, default=None, help="first N cells, for a quick look")
+    ap.add_argument("--pilot", action="store_true",
+                    help="use the run's 21-pair cell list and ITS residuals "
+                         "(reproduces the published numbers)")
+    ap.add_argument("--pilot-panel", action="store_true",
+                    help="pilot's 21-pair cell list but STORE residuals -- "
+                         "isolates the residual correction from the panel widening")
     ap.add_argument("--pairs", type=int, default=4000,
                     help="max item pairs sampled for the consistency figure")
     a = ap.parse_args(argv)
@@ -102,6 +108,63 @@ def main(argv=None):
 
     items = {d["item_id"]: d for _, p in corpora() for d in read_items(p)}
     prompts = sorted({c["prompt"] for c in cells})
+
+    #: PANEL AND RESIDUALS, BOTH FROM THE STORE (2026-09-06, RH).
+    #:
+    #: This read the run's `cells.jsonl` for the pair list AND for
+    #: `residual_base`/`residual_endpoint`. Both were wrong, in different ways:
+    #:
+    #:  PANEL      pilot3 ran 21 of the 50 endpoint pairs, which this folder's
+    #:             own README already calls a DATA SHORTFALL.
+    #:  RESIDUALS  the pilot cells carry the producer's `total`, which
+    #:             `ingest.py` documents as STALE on topup cells -- it holds the
+    #:             PASS-1 residual because the topup path decremented `tail` and
+    #:             never rebuilt the summary, "wrong on 350,453 of 385,855 topup
+    #:             cells". Measured against `twp_cells_v4.total`, which ingest
+    #:             REBUILDS as tail+drop+open+mojibake: agreement is 26 of 26 on
+    #:             non-topup cells and 73 of 774 on topup ones, and the stale
+    #:             value is systematically LARGER, which is what a pre-topup
+    #:             residual has to be.
+    #:
+    #: `movement()` is still called rather than reading `movement_v4`, because
+    #: this file needs `m.excess` and `m.diagnostics` and the store persists
+    #: neither. So the residual has to be correct, not merely present.
+    #:
+    #: `--pilot` reproduces the published numbers off both old sources.
+    #: THE TWO CORRECTIONS ARE SEPARABLE AND MUST BE, because they landed
+    #: together and the folder's headline moved a long way. `--pilot` is both old
+    #: sources, `--pilot-panel` is the old panel with corrected residuals, and
+    #: the default is both corrected. The difference between the middle and the
+    #: ends is what each correction bought.
+    resid = {}
+    if not a.pilot:
+        from malignment import roster
+        eps = roster.endpoints()[0]
+        for r in V.rows("SELECT model, prompt, total FROM twp_cells_v4 "
+                        "WHERE frame='' AND rule_version=4 "
+                        "AND prompt IN {ps:Array(String)}", ps=prompts):
+            resid[(r["model"], r["prompt"])] = float(r["total"])
+        seen = {(c["base"], c["endpoint"]) for c in cells}
+        wider = [dict(c, base=b, endpoint=e)
+                 for c in cells for b, e in [(c["base"], c["endpoint"])]]
+        by_prompt = collections.defaultdict(list)
+        for c in cells:
+            by_prompt[c["prompt"]].append(c)
+        wider = []
+        for pr, cs in by_prompt.items():
+            tmpl = {k: v for k, v in cs[0].items()
+                    if k not in ("base", "endpoint", "residual_base",
+                                 "residual_endpoint")}
+            for b, e in sorted(eps.items()):
+                if (b, pr) in resid and (e, pr) in resid:
+                    wider.append(dict(tmpl, base=b, endpoint=e))
+        if wider and not a.pilot_panel:
+            print("panel: %d cells -> %d (roster.endpoints, residuals from "
+                  "twp_cells_v4.total)" % (len(cells), len(wider)), flush=True)
+            cells = wider
+        elif a.pilot_panel:
+            print("panel: %d cells (PILOT list), residuals from "
+                  "twp_cells_v4.total" % len(cells), flush=True)
     rows = V.rows("SELECT prompt, model, groupArray(word) AS ws, groupArray(p) AS ps "
                   "FROM %s WHERE prompt IN {ps:Array(String)} GROUP BY prompt, model"
                   % TABLE, ps=prompts)
@@ -142,9 +205,15 @@ def main(argv=None):
             pbm, pam = per.get(c["base"]), per.get(c["endpoint"])
             if pbm is None or pam is None:
                 continue
+            if a.pilot:
+                _rp, _rq = c.get("residual_base"), c.get("residual_endpoint")
+            else:
+                _rp = resid.get((c["base"], d["prompt"]))
+                _rq = resid.get((c["endpoint"], d["prompt"]))
+                if _rp is None or _rq is None:
+                    continue
             m = movement(pbm, pam, CANONICAL,
-                         residual_pre=c.get("residual_base"),
-                         residual_post=c.get("residual_endpoint"))
+                         residual_pre=_rp, residual_post=_rq)
             fall = [(S[w], -m.delta[w]) for w in m.fallers
                     if w in S and m.delta.get(w, 0.0) < 0]
             rise_x = [(S[w], m.excess[w]) for w in m.risers
@@ -196,7 +265,15 @@ def main(argv=None):
             if done % 500 == 0:
                 print("  %d cells" % done, flush=True)
 
-    path = os.path.join(rundir, "movers.jsonl")
+    #: THE OUTPUT NAME CARRIES THE PANEL. A roster run must not overwrite the
+    #: pilot's artifact: the two are different populations answering the same
+    #: question, and the pilot one is what every published number was computed
+    #: from. The first version of this change wrote `movers.jsonl` from a
+    #: `--limit 400` roster run straight over the pilot's 21-pair output, which
+    #: had to be restored from git.
+    path = os.path.join(rundir, "movers.jsonl" if a.pilot
+                        else "movers_pilotpanel.jsonl" if a.pilot_panel
+                        else "movers_roster.jsonl")
     with open(path, "w", encoding="utf-8") as f:
         for r in out:
             f.write(json.dumps(r) + "\n")
