@@ -92,8 +92,16 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--pilot", action="store_true",
                     help="use displacement_axis pilot3 cells (the published 20 pairs)")
+    #: THE EDGE IS IN THE FILENAME. An edge run that wrote to the raw path would
+    #: be indistinguishable from the raw result sitting beside it.
+    ap.add_argument("--edge", default="raw", choices=("raw", "framed", "self"),
+                    help="raw: base->aligned unframed (50). "
+                         "framed: base_raw->aligned_framed (45). "
+                         "self: aligned_raw->aligned_framed, the frame alone (45)")
     args = ap.parse_args()
     use_pilot = args.pilot
+    edge = args.edge
+    sfx = "" if edge == "raw" else "_" + edge
     from malignment import vectors as V
     from malignment import ch as ch_mod
     from malignment.movement import movement, CANONICAL
@@ -124,17 +132,29 @@ def main():
     #: null was computed when the row was produced.
     #:
     #: `--pilot` reproduces the published numbers off the old path.
-    from malignment import roster
-    RP = sorted(roster.endpoints()[0].items())
+    #: `edge` picks which contrast the verdicts describe. See
+    #: `movement.endpoint_edges`: raw is the 50 declared endpoints, framed is
+    #: base_raw->aligned_framed (45), self is aligned_raw->aligned_framed (45),
+    #: the frame with the weights held fixed.
+    #:
+    #: **`elig` GATES ON THE BASE SIDE, WHICH IS RAW ON ALL THREE EDGES**, so the
+    #: eligible population is the same object across them and a shift in the
+    #: aggregate is not a shift in what was eligible. That is a property of this
+    #: file's gate, not of the edges: `run_slotpov`'s arm B gates on the aligned
+    #: side and does NOT have it.
+    from malignment import movement as Mv, roster
+    RP = [(b, a) for b, a, _ in Mv.endpoint_edges(edge)]
+    #: the frame each SIDE is read at. Base is raw on every edge.
+    FA = '' if edge == "raw" else 'prefill'
 
     def _sets(prompt, pairs):
-        """{(base, aligned): (risers, fallers)} from movement_v4."""
+        """{(base, aligned): (risers, fallers)} from movement_v4, on `edge`."""
         lit = repr(tuple(prompt for prompt in [prompt])).replace('"', "'")
         out = collections.defaultdict(lambda: (set(), set()))
         q = ("SELECT base, aligned, cls, groupArray(word) ws FROM movement_v4 "
-             "WHERE prompt IN %s AND frame_base='' AND frame_aligned='' "
-             "AND rule='canonical' AND cls IN ('riser','faller') "
-             "GROUP BY base, aligned, cls" % lit)
+             "WHERE prompt IN %s AND rule='canonical' "
+             "AND cls IN ('riser','faller') AND %s "
+             "GROUP BY base, aligned, cls" % (lit, Mv.endpoint_edge_where(edge)))
         for r in ch_mod.query(q):
             k = (r["base"], r["aligned"])
             rs, fs = out[k]
@@ -147,14 +167,25 @@ def main():
         mine = meta["cells"] if use_pilot else [
             dict(base=b, endpoint=e) for b, e in RP]
         msets = None if use_pilot else _sets(p, RP)
-        ms = sorted({c["base"] for c in mine} | {c["endpoint"] for c in mine})
-        q = V.rows("SELECT model, groupArray(word) AS ws, groupArray(p) AS ps "
-                   "FROM twp_words_v4_best WHERE prompt={p:String} "
-                   "AND model IN {ms:Array(String)} GROUP BY model", p=p, ms=ms)
-        store = {r["model"]: dict(zip(r["ws"], r["ps"])) for r in q}
+        store = {}
+        for side, fr in (("base", ''), ("endpoint", FA)):
+            ms = sorted({c[side] for c in mine})
+            if fr == '':
+                q = V.rows(
+                    "SELECT model, groupArray(word) AS ws, groupArray(p) AS ps "
+                    "FROM twp_words_v4_best WHERE prompt={p:String} "
+                    "AND model IN {ms:Array(String)} GROUP BY model", p=p, ms=ms)
+            else:
+                q = V.rows(
+                    "SELECT model, groupArray(word) AS ws, groupArray(p) AS ps "
+                    "FROM twp_words_v4 WHERE prompt={p:String} "
+                    "AND model IN {ms:Array(String)} AND frame={fr:String} "
+                    "GROUP BY model", p=p, ms=ms, fr=fr)
+            for r in q:
+                store[(r["model"], fr)] = dict(zip(r["ws"], r["ps"]))
         agg = collections.Counter(); seen = collections.Counter()
         for c in mine:
-            pb, pa = store.get(c["base"]), store.get(c["endpoint"])
+            pb, pa = store.get((c["base"], '')), store.get((c["endpoint"], FA))
             if not pb or not pa:
                 continue
             if use_pilot:
@@ -204,12 +235,13 @@ def main():
                                   net=agg[w] / seen[w], seen=seen[w]))
     os.makedirs(OUT, exist_ok=True)
     json.dump(dict(_what="per (group, sweep, lineage) rho for every scale from both "
-                         "instruments; prompts deduped", rows=rows),
-              open(os.path.join(OUT, "group_rho.json"), "w"))
+                         "instruments; prompts deduped", edge=edge, rows=rows),
+              open(os.path.join(OUT, "group_rho%s.json" % sfx), "w"))
     json.dump(dict(_what="per (group, sweep, word) net rise/fall rate, no scales",
-                   rows=words), open(os.path.join(OUT, "group_words.json"), "w"))
-    print("\n-> results/group_rho.json (%d rows), group_words.json (%d rows)"
-          % (len(rows), len(words)))
+                   edge=edge, rows=words),
+              open(os.path.join(OUT, "group_words%s.json" % sfx), "w"))
+    print("\n-> results/group_rho%s.json (%d rows), group_words%s.json (%d rows)"
+          % (sfx, len(rows), sfx, len(words)))
 
     for sweep_name in ("room", "nextdoor", "street"):
         report(rows, scales, sweep_name)

@@ -30,8 +30,10 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 SWEEPS = ("room", "nextdoor", "street")
 
 
-def load():
-    d = json.load(open(os.path.join(HERE, "results", "group_contrast.json")))
+def load(edge="raw"):
+    sfx = "" if edge == "raw" else "_" + edge
+    d = json.load(open(os.path.join(HERE, "results",
+                                    "group_contrast%s.json" % sfx)))
     rows = []
 
     def walk(o, sw=None):
@@ -49,7 +51,12 @@ def load():
 
 
 def main():
-    rows = load()
+    import argparse
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--edge", default="raw", choices=("raw", "framed", "self"))
+    args = ap.parse_args()
+    print("EDGE: %s" % args.edge)
+    rows = load(args.edge)
     by = collections.defaultdict(list)
     for r in rows:
         by[r["sweep"]].append(r)

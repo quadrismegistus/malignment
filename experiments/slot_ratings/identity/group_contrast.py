@@ -36,8 +36,10 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, "results")
 
 
-def load():
-    rows = json.load(open(os.path.join(OUT, "group_rho.json")))["rows"]
+def load(edge="raw"):
+    """Rows for one edge. See `movement.endpoint_edges` for what the edges are."""
+    sfx = "" if edge == "raw" else "_" + edge
+    rows = json.load(open(os.path.join(OUT, "group_rho%s.json" % sfx)))["rows"]
     meta = ("group", "sweep", "lineage", "n")
     scales = sorted({k for r in rows for k in r
                      if k not in meta and not k.startswith("n_")})
@@ -55,8 +57,15 @@ def matrix(rows, sweep, field):
 
 
 def main():
+    import argparse
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--edge", default="raw", choices=("raw", "framed", "self"),
+                    help="which edge's group_rho to contrast; the output "
+                         "filename carries it")
+    args = ap.parse_args()
+    sfx = "" if args.edge == "raw" else "_" + args.edge
     from scipy import stats
-    rows, scales = load()
+    rows, scales = load(args.edge)
     saved = []
     for sweep in ("room", "nextdoor", "street"):
         print("\n" + "=" * 78)
@@ -126,9 +135,10 @@ def main():
 
     json.dump(dict(_what="per (sweep, scale, group) deviation from the mean of the "
                          "other groups on the same lineage; BH-corrected over groups",
-                   rows=saved), open(os.path.join(OUT, "group_contrast.json"), "w"),
+                   edge=args.edge, rows=saved),
+              open(os.path.join(OUT, "group_contrast%s.json" % sfx), "w"),
               indent=1)
-    print("\n-> results/group_contrast.json (%d rows)" % len(saved))
+    print("\n-> results/group_contrast%s.json (%d rows)" % (sfx, len(saved)))
 
 
 if __name__ == "__main__":
