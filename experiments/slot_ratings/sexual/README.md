@@ -95,14 +95,34 @@ pretraining lays down the field, alignment operates on it.
 
 ## Caveats
 
-- 11 pairs and 33 lineages: modest power, and small true differences would not be
-  detected. A null here bounds the effect rather than excluding it.
+**STALE UNTIL 2026-09-06 -- this section said "11 pairs and 33 lineages" after
+the panel had gone to 50 and the kept-set count to 8.** Corrected, and recorded
+because it is the defect this campaign names: a document acquires a new result
+and the sentence elsewhere that the result falsified is left standing.
+
+- **8 kept pairs and 50 lineages.** Modest power on the PAIR axis, which is the
+  binding one -- a null bounds the effect rather than excluding it. The lineage
+  axis is no longer the constraint.
 - The gender contrast averages over five role types (object, agent, target,
-  experiencer, patient). With 11 pairs there is no room to test role by gender.
-- v6 only. The institutional scales that carried the sharpest results elsewhere
-  (`mediation`, `procedural`, `deference`) are not measured on these frames.
-- The 50 sexual-domain frames themselves are not yet analysed; only the 8 sexual
-  frames belonging to a gender pair are touched here.
+  experiencer, patient). With 8 pairs there is no room to test role by gender.
+- **GENDER HERE IS THE SLOT-OWNER'S, and the grammatical subject flips with it.**
+  `PAIRS` labels a prompt by whose the slot is -- `He grabbed her ___` is
+  *female* because the slot takes her body part, `He put her mouth to his ___` is
+  *male*. `layer2b` rules out ACTANT gender as a rival variable (it is the same
+  variable relabelled: the sign is predicted exactly by whether the actant label
+  flips against the slot-owner label). **It does not rule out the SUBJECT
+  PRONOUN**, which flips together with the slot-owner in every `object` set, so
+  a frame-driven effect aligned with slot-ownership is not separable here.
+  Separating it needs a prompt holding the subject fixed while the possessive
+  flips, and none of the 8 sets provides one.
+- v6 only for the PAIR study. The institutional scales (`mediation`,
+  `procedural`, `deference`) are now RATED on all 50 sexual frames by
+  `institutional/run_slotdomain.py --domain sexual`, but not yet ANALYSED: that
+  producer's population comes from the pilot cell list and clears only 4
+  lineages. See the section below.
+- The 42 sexual frames outside a gender pair are not part of THIS study and
+  cannot be: the design's unit is the matched pair. They are covered by the
+  slot-domain run as a main-effect population with the frame as the unit.
 
 ## RE-RUN AT 50 LINEAGES (2026-09-05): THE NULL GOT STRONGER
 
@@ -197,6 +217,42 @@ PRESENT in the old path; the first version of this change counted pairs with a
 riser-or-faller and reported **49 lineage pairs where the old path reported 50**
 -- one pair per prompt whose cells are all `still`. Presence is now queried
 separately so the noun keeps its meaning.
+
+## ALL 50 SEXUAL FRAMES ARE NOW RATED ON THE v3 INSTITUTIONAL INSTRUMENT
+
+`institutional/run_slotdomain.py --domain sexual`, 2026-09-06. This closes the
+caveat that `mediation`, `procedural` and `deference` -- the scales carrying the
+sharpest results in `slot_ratings/identity` -- were not measured on these frames,
+and it reaches all 50 sexual frames rather than the 8 with a gender partner.
+
+    arm A   50 frames   2,387 rated words
+    arm B   50 frames     362 rated words
+    -> institutional/results/slotdomain/rated_sexual_slot_institutional_en_v3_arm{A,B}.json
+
+**THE RATINGS ARE USABLE. THE ANALYSIS OVER THEM IS NOT, AT n=4.** Every scale
+printed `(only 4 lineages)`. The cause is the defect this campaign has now hit in
+three folders:
+
+    sexual frames                                   50
+    pairs the analysis USED (pilot3 cell list)      21
+    endpoint pairs the STORE holds on those frames  50 of 50
+
+`run_slotdomain` imports `population` from `run_slotpov`, which takes its models
+from `CELLS` -- `displacement_axis/results/pilot3/cells.jsonl` -- exactly as
+`identity/base_side.py` did before 2026-09-05. It also calls `movement()` with no
+residual, the degraded path this folder's own `rate.py` was moved off for the
+same reason. Of the 21 pilot pairs only 4 clear the per-lineage gate (>=3 frames
+with >=10 rated words and a non-constant verdict).
+
+**NOT FIXED HERE, DELIBERATELY.** `population()` is imported by BOTH
+`run_slotpov` (institutional's 6-frame POV study) and `run_slotdomain`, so
+repointing it at `roster.endpoints()` and `movement_v4` would move
+`slot_ratings/institutional`'s published numbers as a side effect. That is
+edit-inside on another question's artifact. The fix is the same one `identity`
+took and it belongs to whoever owns that folder, with its own reproduction check.
+
+**So the deliverable here is the RATINGS, not a result.** Nothing in this README
+rests on the n=4 table and no number from it is quoted.
 
 ## THE STUDY, AS RUN
 
