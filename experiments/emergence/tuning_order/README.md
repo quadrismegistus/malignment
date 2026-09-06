@@ -1,7 +1,7 @@
 ---
 kind: question
-status: OPEN, NOT REGISTERED. Data verified and it does not say what the commission assumed — the ladder is rule_version 3, on a byte-level tokenizer, where v3 and v4 provably differ
-headline: When a fixed base is specified by SFT, does the faller's departure install before the riser's arrival? Commissioned 2026-09-06; the rule-version fork must be settled before it can run
+status: OPEN, NOT REGISTERED. Design settled 2026-09-06 on RH's three questions; ONE item open (the onset criterion). No new twp needed
+headline: Does the faller fall before the riser? Sites fixed at the ladder endpoint, lift as a continuous moderator, fields.py primary for word charge
 grain: undecided (rung x site, prompts as the replicate within one lineage)
 ---
 # tuning_order
@@ -48,7 +48,17 @@ The reflex is: v4 differs from v3 only on byte-level CJK, this is an English pan
 
 (The criterion in that work is `sum|dp| == 0.0` — exact, because the question was whether cells can be REUSED and reuse needs exact. It establishes that byte-level Latin cells DIFFER; it does not report by how much, so it does not by itself say the difference matters for this measure.)
 
-# THE THREE DECISIONS, WHICH ARE RH's
+# THE DESIGN, SETTLED 2026-09-06 — RH's THREE QUESTIONS
+
+> 1. For the faller/risers at Olmo base → aligned, **does the faller fall before the riser?**
+> 2. Is this always the case, or **specifically at high-lift prompts?**
+> 3. Is this the case for **any** faller/riser, or specifically for **charged words?**
+
+`REGISTRATION_DRAFT.md` is the design. In short: sites are the faller/riser pairs at base → `Think-SFT@step43000`, derived once and tracked back across all 43 rungs — which is what makes "what counts as a site" a settled question rather than an open one. Lift enters as a continuous prompt-level regressor over 470 rated prompts, never as a word selector. `fields.py` is primary for Q3 because `charge.py` covers 73.4% of fallers against 60.8% of risers, and that asymmetry lands on the arrival side.
+
+**No new twp is needed.** The cells and words for all 43 rungs exist; what is missing is the derived movement rows, which is CPU over stored data.
+
+# THE OLD DECISION LIST, KEPT FOR THE RULE-VERSION NOTE
 
 **1. The rule version.** Three options, and I recommend (c).
 

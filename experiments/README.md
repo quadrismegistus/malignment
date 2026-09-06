@@ -119,7 +119,7 @@ and the state the first version of the checker could not see.
 - **[`capacities/`](emergence/capacities/README.md)** -- `PORTED from M05, 2026-08-24. Numbers recomputed by analyse.py, fleet not re-run.`  
   Pretraining builds rhyme pull to 0.383; SFT erodes it to 0.262. DPO has one checkpoint.
 - **[`tuning_order/`](emergence/tuning_order/README.md)** -- `OPEN, NOT REGISTERED. [...]`  
-  When a fixed base is specified by SFT, does the faller's departure install before the riser's arrival? Commissioned 2026-09-06; the rule-version fork must be settled before it can run
+  Does the faller fall before the riser? Sites fixed at the ladder endpoint, lift as a continuous moderator, fields.py primary for word charge
 
 ### posttraining_corpus_analysis
 
