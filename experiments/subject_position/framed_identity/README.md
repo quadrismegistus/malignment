@@ -1,7 +1,7 @@
 ---
 kind: question
-status: RUN and CODED 2026-09-05. Both frames coded by ONE instrument; coder agreement kappa 0.802
-headline: Alignment installs SELF-REFERENCE into the first person (0.4% -> 18.3%), not the first person itself; the frame completes it (93.8%)
+status: RUN and CODED 2026-09-05; reasoning models RECOVERED 2026-09-06 (17 -> 19). One instrument, kappa 0.802
+headline: Alignment installs SELF-REFERENCE into the first person (0.4% -> 18.3%), not the first person itself; the frame completes it (98.8%)
 grain: model x question x system
 ---
 # framed_identity
@@ -36,9 +36,9 @@ Within-model, not between-arm. See `run.py`'s docstring for the full statement.
     row                     n mod    any I   ai_system   human   drift
     base, untemplated          29    85.0%       0.4%    62.5%   75.0%
     aligned, untemplated       35    95.0%      18.3%    36.7%   66.7%
-    aligned, TEMPLATED         17    98.8%      93.8%     0.0%    1.2%
+    aligned, TEMPLATED         19    98.8%      98.8%     0.0%    1.2%
 
-`any I` is nearly flat (85 -> 95 -> 99); `ai_system` moves 0.4 -> 18.3 -> 93.8.
+`any I` is nearly flat (85 -> 95 -> 99); `ai_system` moves 0.4 -> 18.3 -> 98.8.
 The base HAS a first person and it is a NARRATOR's -- 78% of its first-person
 answers invent a person. So `p(I)`, which is what `../pseudo_template` measures
 with twp, cannot test this question at all: it cannot tell "I am an AI assistant"
@@ -71,12 +71,27 @@ Two secondary results, both about the ORIGIN rather than the kind:
   so this is a reason to test, not a result — but the effect is categorical where
   a checkpoint artefact would move a rate.
 
-# THE INSTRUMENT BOUND
+# THE INSTRUMENT BOUND — FIXED 2026-09-06
 
-**903 answers (14.9%) are truncated mid-`<think>` at MAX_NEW=60.** SmolLM3-3B and
-Qwen3-8B are dropped entirely (0 usable draws); MiniCPM5-1B keeps 57 of 320. The
-gate is on the text, not a model list. This is the same defect class F20x
-recorded as "reasoning families are instrument-limited".
+`MAX_NEW=60` truncated 903 answers (14.9%) mid-`<think>` and destroyed the three
+reasoning models. Regenerated at 1024 (`run.py --group recovery --max-new 1024`):
+
+    SmolLM3-3B    0 usable -> 320/320 usable, 100.0% ai_system
+    Qwen3-8B      0 usable -> 320/320 usable, 100.0% ai_system
+    MiniCPM5-1B  57 usable -> 319/320 usable, 100.0% ai_system
+
+**They were never lower; they were cut off before answering.** Row 3 is 19 models
+rather than 17 and its rate moved 93.8% -> 98.8%.
+
+Three things make the recovered rows usable and all three are in `FINDING.md`:
+the budget is in the row and in the resume key (a different budget is a different
+condition); the coded SURFACE is the first 60 tokens after `</think>`, matching
+what every other row was coded on, checked by coding all 1,920 rows BOTH ways at
+95.2% agreement; and a **budget control** on three non-reasoning models moves at
+most 2.5pp, which is what licenses using them together.
+
+The gate is still on the TEXT, not a model list, so a future reasoning model is
+caught by the same rule.
 
 # WHAT IS IN HERE
 

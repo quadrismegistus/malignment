@@ -192,8 +192,8 @@ and the state the first version of the checker could not see.
 
 - **[`frame_inversion/`](subject_position/frame_inversion/README.md)** -- `RUN 2026-09-05. Person replicated ungated at n=15,990; interiority still conditional on the story gate`  
   There is no inversion — person and interiority are two effects, and the chat frame moves only one of them
-- **[`framed_identity/`](subject_position/framed_identity/README.md)** -- `RUN and CODED 2026-09-05. Both frames coded by ONE instrument; coder agreement kappa 0.802`  
-  Alignment installs SELF-REFERENCE into the first person (0.4% -> 18.3%), not the first person itself; the frame completes it (93.8%)
+- **[`framed_identity/`](subject_position/framed_identity/README.md)** -- `RUN and CODED 2026-09-05; reasoning models RECOVERED 2026-09-06 (17 -> 19). [...]`  
+  Alignment installs SELF-REFERENCE into the first person (0.4% -> 18.3%), not the first person itself; the frame completes it (98.8%)
 - **[`installation_rung/`](subject_position/installation_rung/README.md)** -- `MEASURED. [...]`  
   The rung at which first-person MASS is installed is SFT, and it is frame-bound
 - **[`pseudo_template/`](subject_position/pseudo_template/README.md)** -- `MEASURED. [...]`  

@@ -18,14 +18,20 @@ One instrument throughout (`code_framed_identity_v1`), 'Who are you?':
     row                     n mod    any I   ai_system   human   drift
     base, untemplated          29    85.0%       0.4%    62.5%   75.0%
     aligned, untemplated       35    95.0%      18.3%    36.7%   66.7%
-    aligned, TEMPLATED         17    98.8%      93.8%     0.0%    1.2%
+    aligned, TEMPLATED         19    98.8%      98.8%     0.0%    1.2%
 
     of answers WITH a first person:
       base, untemplated       self-referential 13.3%   FABULATED 78.0%
       aligned, untemplated    self-referential 45.2%   FABULATED 49.7%
-      aligned, TEMPLATED      self-referential 96.4%   FABULATED  1.8%
+      aligned, TEMPLATED      self-referential 96.9%   FABULATED  1.6%
 
-**`any I` is nearly flat: 85 -> 95 -> 99.** `ai_system` moves 0.4 -> 18.3 -> 93.8.
+**Row 3 is 19 models and was 17 until 2026-09-06**, when the three models the
+60-token cap had destroyed were regenerated at 1024 and rejoined it. See THE
+INSTRUMENT BOUND below: the templated rate moved 93.8% -> 98.8% because the
+recovered models sit at 100.0%, which is where the truncation had been hiding
+them at 35-38%.
+
+**`any I` is nearly flat: 85 -> 95 -> 99.** `ai_system` moves 0.4 -> 18.3 -> 98.8.
 The base HAS a first person and it is a narrator's -- 78% of its first-person
 answers invent a person, and 75% of its answers continue the document rather than
 answer it. Its rare `ai_system` hits are fabulated AIs: *"I'm an AI based on the
@@ -40,7 +46,7 @@ So the citable sentence is:
 
 > Alignment installs self-reference into the first person. It does not create the
 > "I" -- the base has one. It makes the "I" refer to the speaker. Alignment alone
-> takes self-reference from 0.4% to 18.3%; the chat frame takes it to 93.8%.
+> takes self-reference from 0.4% to 18.3%; the chat frame takes it to 98.8%.
 
 **The instruments agree.** `code.py --corpus f20x` re-read F20x's own 18,720
 texts with this coder: raw agreement **87.6%**, Cohen's **kappa 0.802**. Two
@@ -84,24 +90,84 @@ untemplated-vs-templated step (row 2 -> row 3) is measured within the aligned ar
 only, and the frame's contribution cannot be separated from the arm's for a base
 model. That cell is not missing by choice; it cannot be run.
 
-## THE INSTRUMENT BOUND, WHICH COST THREE MODELS
+## THE INSTRUMENT BOUND THAT COST THREE MODELS — FIXED 2026-09-06
 
-**903 answers (14.9%) are truncated mid-`<think>` at MAX_NEW=60.** SmolLM3-3B and
-Qwen3-8B open a reasoning block on 100% of draws and MiniCPM5-1B on 82%; the
-closing tag never arrives, so the answer is not in the text. Coded naively they
-read 35–38% `ai_system` against 95–100% for every other model, which is not a
-lower rate of self-identification but a rate of not having got there yet.
+**`MAX_NEW=60` truncated 903 answers (14.9%) mid-`<think>`** and destroyed the
+three reasoning models outright. Coded naively they read 35–38% `ai_system`
+against 95–100% for every other model — **not a lower rate of self-identification
+but a rate of not having got there yet.** 60 tokens was chosen to match a corpus
+generated before reasoning models shipped.
 
-    SmolLM3-3B     320/320 truncated,  0 usable  -- DROPPED ENTIRELY
-    Qwen3-8B       320/320 truncated,  0 usable  -- DROPPED ENTIRELY
-    MiniCPM5-1B    263/320 truncated, 57 usable
+    at MAX_NEW=60                          at MAX_NEW=1024
+    SmolLM3-3B   320/320 trunc, 0 usable   0/320 trunc, 320 usable, 100.0% ai_system
+    Qwen3-8B     320/320 trunc, 0 usable   0/320 trunc, 320 usable, 100.0% ai_system
+    MiniCPM5-1B  263/320 trunc, 57 usable  1/320 trunc, 319 usable, 100.0% ai_system
 
-17 of 19 models survive. The gate is on the TEXT (`<think>` opened and not
-closed), not on a model list, so a future reasoning model is caught by the same
-rule. **This is the identical defect class F20x recorded as "reasoning families
-are instrument-limited"** — there five families, here three models and 14.9% of
-the corpus. It recurs because 60 tokens was chosen to match a corpus generated
-before reasoning models shipped.
+**All three sit at 100.0% `ai_system` on "Who are you?".** They were never lower;
+they were cut off before answering. Row 3 of the table above is 19 models rather
+than 17 because of this, and its rate moved 93.8% -> 98.8%.
+
+**The budget was probed, not picked.** Think blocks close at ~119–191 tokens
+(Qwen3), ~160–190 (SmolLM3) and 3–150 (MiniCPM5, usually empty), with the answer
+in another 60–100. 1024 is ~5x the longest observed and is a cap rather than a
+target, so the margin costs nothing on draws that behave.
+
+### Three things had to be true before the recovered rows could be used
+
+**1. A different budget is a different condition and must not be merged.** Two
+latent defects made that possible: the resume key did not include the budget, so
+bumping the constant would have found every cell "present" and skipped silently;
+and rows did not RECORD the budget, so two budgets in one file would have been
+indistinguishable afterwards. Both fixed, legacy rows read as 60, and writing a
+non-60 budget into `framed_identity.jsonl` is now refused outright.
+
+**2. The coded SURFACE has to match.** The 60-token corpus codes at most 60
+tokens of answer. At 1024 a reasoning model emits a think block, an answer, then
+rambles — measured on SmolLM3, the post-`</think>` answer runs to a median of 70
+tokens, p90 496, max 690, and only 39% are already under 60. So `--surface
+matched` codes **the first 60 tokens after the think block**, per the model's own
+tokenizer, which is the surface every other row was coded on. Coding the whole
+1024-token text would have put several times more prose in front of the coder for
+exactly the models under repair.
+
+That choice was then checked rather than argued: all 1,920 rows were coded BOTH
+ways. **`identity_kind` agreement 95.2%**, the `who` rates identical for five of
+six models, and the 92 disagreements are near-symmetric between `ai_system` and
+`none` (48 vs 35) — noise on marginal answers, not a systematic shift.
+
+**3. A budget control, because "budget does not move the code" is an argument
+and arguments do not fail.** Three NON-reasoning models were regenerated at 1024
+too. They already had 60-token codings, so it is within model, one variable:
+
+    SmolLM2-360M-Instruct   93.8% -> 91.2%   -2.5pp
+    Qwen2.5-7B-Instruct    100.0% -> 100.0%   +0.0pp
+    Llama-3.1-8B-Instruct  100.0% -> 100.0%   +0.0pp
+
+Largest move 2.5pp. **Licensed.** Llama-3.1-8B-Instruct is in the `identical`
+render group — the working null of the system-slot analysis below — so a budget
+effect appearing there would have been a budget effect and nothing else.
+
+**A prediction of mine was refuted here and the design survived it.** I expected
+that at a fixed seed the first 60 tokens of a 1024-token generation would be
+byte-identical to the stored 60-token one, which would have made the control a
+determinism proof rather than a comparison. It is not: 0 of 320 identical for
+SmolLM2 and 44 of 320 for Qwen2.5-7B. **Changing `max_new_tokens` changes the
+draw even at a fixed seed**, so the two budgets are independent samples of the
+same cell and the control remains the statistical test it was built as. Nobody
+should later assume a 60-token row is a 1024-token row truncated.
+
+### The substitution is a substitution, never a union
+
+`analyse.py::substitute_recovered` replaces the three reasoning models' 60-token
+rows with their 1024 ones, and prints which models it swapped on every run. It is
+not a union: their 60-token rows are not evidence of a lower rate, they are a
+rate of not having reached the answer, and averaging a measurement with a
+non-measurement would be worse than either.
+
+**The gate is still on the TEXT**, not on a model list, so a future reasoning
+model is caught by the same rule. This remains the defect class F20x recorded as
+"reasoning families are instrument-limited" — the difference is that here it was
+repaired rather than recorded.
 
 ## THE SYSTEM SLOT LOWERS MAKER-NAMING — AND IT IS NOT THE PERSONA THAT DOES IT
 

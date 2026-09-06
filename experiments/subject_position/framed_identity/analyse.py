@@ -47,6 +47,29 @@ CODED = os.path.join(HERE, "results", "coded.jsonl")
 GEN = os.path.join(HERE, "results", "framed_identity.jsonl")
 #: the UNTEMPLATED corpus read by THIS coder -- `code.py --corpus f20x`
 F20X_OUT = os.path.join(HERE, "results", "coded_f20x.jsonl")
+#: **THE GROUPS ARE IMPORTED FROM THE PRODUCER, NOT RE-DERIVED HERE.** The first
+#: version of this section decided "is this a control?" with the heuristic
+#: `has 60-token rows AND all rows usable`, which put MiniCPM5-1B -- a REASONING
+#: model, one of the three this recovery exists for -- into the control table.
+#: Its 60-token rate is computed over the ~57 draws that happened to finish
+#: early, a SELECTED subsample rather than a rate, so it both misreported the
+#: recovery and flattered the control it had no business being in.
+#: the max_new=1024 recovery: the 3 models 60 tokens destroyed + 3 controls
+RECOVERY_GEN = os.path.join(HERE, "results", "framed_identity_mn1024.jsonl")
+RECOVERY_OUT = os.path.join(HERE, "results", "coded_mn1024.jsonl")
+
+
+def _groups():
+    """REASONING / BUDGET_CONTROL, imported from the producer that declares them."""
+    import importlib.util
+    spec = importlib.util.spec_from_file_location(
+        "_fi_run", os.path.join(HERE, "run.py"))
+    m = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(m)
+    return m.REASONING, m.BUDGET_CONTROL
+
+
+REASONING, BUDGET_CONTROL = _groups()
 RENDERS = os.path.abspath(os.path.join(HERE, "..", "..", "..",
                                        "roster", "models", "chat_renders.json"))
 
@@ -138,6 +161,34 @@ def load():
             r["truncated_think"] = is_truncated_think(gen.get(k))
             rows.append(r)
     return rows
+
+
+def substitute_recovered(rows):
+    """Swap the 3 reasoning models' UNUSABLE 60-token rows for their 1024 ones.
+
+    **This is the merge the budget control licenses, and it is not silent.** It
+    replaces rows only for `REASONING`, only where a coded 1024 row exists, and
+    only at `surface='matched'` -- the first 60 tokens after the think block,
+    which is the surface every other row in the corpus was coded on.
+
+    It is a SUBSTITUTION and never a union: the 60-token rows for these three
+    models are not evidence of a lower self-identification rate, they are a rate
+    of not having reached the answer, so keeping both would average a
+    measurement with a non-measurement.
+    """
+    if not os.path.exists(RECOVERY_OUT):
+        return rows, []
+    rec = []
+    with open(RECOVERY_OUT) as fh:
+        for line in fh:
+            r = json.loads(line)
+            if r.get("surface") == "matched" and r["model"] in REASONING:
+                rec.append(r)
+    if not rec:
+        return rows, []
+    swapped = sorted({r["model"] for r in rec})
+    kept = [r for r in rows if r["model"] not in swapped]
+    return kept + rec, swapped
 
 
 def rate(rows, pred):
@@ -320,16 +371,25 @@ def main(argv=None):
         with open(F20X_OUT) as fh:
             f20 = [json.loads(l) for l in fh]
     if f20:
+        tmpl, swapped = substitute_recovered(rows)
         print("=" * 78)
         print("CROSS-FRAME, 'Who are you?', ONE INSTRUMENT (code_framed_identity_v1)")
         print()
+        if swapped:
+            print("  TEMPLATED row uses max_new=1024 for %d reasoning models,"
+                  % len(swapped))
+            print("  whose 60-token rows contain no answer. Licensed by the")
+            print("  budget control below (largest control move 2.5pp).")
+            for m in swapped:
+                print("     substituted: %s" % m)
+            print()
         #: RH's rule: bases are not pooled with aligned. They are separate ROWS
         #: and the arm is named on each. `reinforced_superego` is 3 models and
         #: is shown for completeness, never read as a rate.
         strata = [
             ("base, untemplated",    [r for r in f20 if r["qid"] == "who" and r["arm"] == "base"]),
             ("aligned, untemplated", [r for r in f20 if r["qid"] == "who" and r["arm"] == "superego"]),
-            ("aligned, TEMPLATED",   [r for r in rows if r["qid"] == "who"]),
+            ("aligned, TEMPLATED",   [r for r in tmpl if r["qid"] == "who"]),
         ]
         print("  %-22s %6s %9s %10s %9s %8s"
               % ("", "n mod", "any I", "ai_system", "human", "drift"))
@@ -413,6 +473,71 @@ def main(argv=None):
             e = rate(idx[(m, "who", "empty")], lambda r: r["identity_kind"] == "ai_system")
             d = rate(idx[(m, "who", "default")], lambda r: r["identity_kind"] == "ai_system")
             print("  %-44s %7.1f%% %7.1f%%" % (m.split("/")[-1][:44], 100 * e, 100 * d))
+    #: ---------------------------------------------------------------------
+    #: THE BUDGET RECOVERY. Optional section, gated on the file existing --
+    #: same pattern as the cross-frame block above.
+    rec = []
+    if os.path.exists(RECOVERY_OUT):
+        rgen = {}
+        with open(RECOVERY_GEN) as fh:
+            for line in fh:
+                d = json.loads(line)
+                if d.get("idx", -1) >= 0:
+                    rgen[(d["model"], d["qid"], d["temp"], d["system"],
+                          d["idx"])] = d["text"]
+        with open(RECOVERY_OUT) as fh:
+            for line in fh:
+                r = json.loads(line)
+                r["truncated_think"] = is_truncated_think(rgen.get(
+                    (r["model"], r["qid"], r["temp"], r["system"], r["idx"])))
+                rec.append(r)
+    if rec:
+        print()
+        print("=" * 78)
+        print("BUDGET RECOVERY at max_new=1024 (60 destroyed 3 models)")
+        print()
+        tr = sum(1 for r in rec if r["truncated_think"])
+        print("  still truncated mid-<think> at 1024: %d of %d (%.1f%%)"
+              % (tr, len(rec), 100 * tr / len(rec)))
+        print()
+        #: THE CONTROL FIRST. It is what licenses reading the recovered rows
+        #: beside 60-token rows at all, so it is reported before them.
+        print("  BUDGET CONTROL -- non-reasoning models, 'who', ai_system rate")
+        print("  Same models, same cells, ONE variable. If these move, the")
+        print("  recovered models are NOT comparable to the 60-token table.")
+        print()
+        print("  %-40s %9s %9s %8s" % ("model", "mn=60", "mn=1024", "delta"))
+        ctl = []
+        for m in BUDGET_CONTROL:
+            old = [r for r in rows if r["model"] == m and r["qid"] == "who"]
+            new = [r for r in rec if r["model"] == m and r["qid"] == "who"
+                   and not r["truncated_think"]]
+            if not old or not new:
+                continue
+            a_ = rate(old, lambda r: r["identity_kind"] == "ai_system")
+            b_ = rate(new, lambda r: r["identity_kind"] == "ai_system")
+            ctl.append((m, a_, b_))
+            print("  %-40s %8.1f%% %8.1f%% %+7.1fpp"
+                  % (m.split("/")[-1][:40], 100 * a_, 100 * b_, 100 * (b_ - a_)))
+        if ctl:
+            worst = max(abs(b - a) for _, a, b in ctl)
+            print()
+            print("  largest move: %+.1fpp over %d control models"
+                  % (100 * worst, len(ctl)))
+            print("  %s" % ("LICENSED: budget does not move identity_kind here."
+                            if worst < 0.10 else
+                            "NOT LICENSED: budget moves the code. Do NOT mix."))
+        print()
+        print("  RECOVERED -- the three 60 tokens destroyed, 'who'")
+        print()
+        print("  %-40s %7s %9s %9s" % ("model", "usable", "ai_system", "human"))
+        for m in REASONING:
+            new = [r for r in rec if r["model"] == m and r["qid"] == "who"]
+            keep = [r for r in new if not r["truncated_think"]]
+            print("  %-40s %4d/%-3d %8.1f%% %8.1f%%"
+                  % (m.split("/")[-1][:40], len(keep), len(new),
+                     100 * rate(keep, lambda r: r["identity_kind"] == "ai_system"),
+                     100 * rate(keep, lambda r: r["identity_kind"] == "human_person")))
     return 0
 
 

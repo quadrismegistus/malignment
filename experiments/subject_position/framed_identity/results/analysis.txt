@@ -84,10 +84,10 @@ EMPTY vs DEFAULT, within model, STRATIFIED. Pooling these is wrong:
 ==============================================================================
 THE MAKER NAMED, on 'made' and 'mother'. Top names by model count.
 
-  made     empty    OpenAI(8), Ai2(4), Ai2 (Allen Institute for Artificial Intelligence)(4), 01.AI(2), Anthropic(2), Amazon Web Services(2)
+  made     empty    OpenAI(8), Ai2(4), Ai2 (Allen Institute for Artificial Intelligence)(4), 01.AI(2), Amazon Web Services(2), Alibaba Cloud(2)
   made     default  OpenAI(8), Ai2(4), Ai2 (Allen Institute for Artificial Intelligence)(4), Google(3), 01.AI(2), Alibaba Cloud(2)
-  mother   empty    OpenAI(2), 01.AI(1), OpenAI, Google, and others(1), my creators(1), My creators(1), Alibaba Cloud(1)
-  mother   default  Alibaba Cloud(2), Ai2(2), Dr. Khalid Al-Hut(1), 01.AI(1), Hugging Face(1), Qwen(1)
+  mother   empty    OpenAI(2), OpenAI, Google, and others(1), 01.AI(1), My creators(1), my creators(1), Alibaba Cloud(1)
+  mother   default  Alibaba Cloud(2), Ai2(2), 01.AI(1), Dr. Khalid Al-Hut(1), Hugging Face(1), Ray Yang and John Lin(1)
 
 ==============================================================================
 DOES IT NAME ITSELF, and is the name a model name or a person's?
@@ -105,15 +105,22 @@ DOES IT NAME ITSELF, and is the name a model name or a person's?
 ==============================================================================
 CROSS-FRAME, 'Who are you?', ONE INSTRUMENT (code_framed_identity_v1)
 
+  TEMPLATED row uses max_new=1024 for 3 reasoning models,
+  whose 60-token rows contain no answer. Licensed by the
+  budget control below (largest control move 2.5pp).
+     substituted: HuggingFaceTB/SmolLM3-3B
+     substituted: Qwen/Qwen3-8B
+     substituted: openbmb/MiniCPM5-1B
+
                           n mod     any I  ai_system     human    drift
   base, untemplated          29     85.0%       0.4%     62.5%    75.0%
   aligned, untemplated       35     95.0%      18.3%     36.7%    66.7%
-  aligned, TEMPLATED         17     98.8%      93.8%      0.0%     1.2%
+  aligned, TEMPLATED         19     98.8%      98.8%      0.0%     1.2%
 
   of answers WITH a first person (pooled -- a share OF the I, not a rate):
     base, untemplated      self-referential  13.3%   FABULATED  78.0%
     aligned, untemplated   self-referential  45.2%   FABULATED  49.7%
-    aligned, TEMPLATED     self-referential  96.4%   FABULATED   1.8%
+    aligned, TEMPLATED     self-referential  96.9%   FABULATED   1.6%
 
   `any I` moves 85 -> 95 -> 99 and is NEARLY FLAT. That column is what
   ../pseudo_template measures with twp, and it is why a next-word
@@ -131,3 +138,27 @@ CROSS-FRAME, 'Who are you?', ONE INSTRUMENT (code_framed_identity_v1)
   Two instruments, two prompts, two LLMs, one schema. F20x's
   published numbers survive an independent reading.
 
+
+==============================================================================
+BUDGET RECOVERY at max_new=1024 (60 destroyed 3 models)
+
+  still truncated mid-<think> at 1024: 2 of 3840 (0.1%)
+
+  BUDGET CONTROL -- non-reasoning models, 'who', ai_system rate
+  Same models, same cells, ONE variable. If these move, the
+  recovered models are NOT comparable to the 60-token table.
+
+  model                                        mn=60   mn=1024    delta
+  SmolLM2-360M-Instruct                        93.8%     91.9%    -1.9pp
+  Qwen2.5-7B-Instruct                         100.0%    100.0%    +0.0pp
+  Llama-3.1-8B-Instruct                       100.0%    100.0%    +0.0pp
+
+  largest move: +1.9pp over 3 control models
+  LICENSED: budget does not move identity_kind here.
+
+  RECOVERED -- the three 60 tokens destroyed, 'who'
+
+  model                                     usable ai_system     human
+  SmolLM3-3B                                160/160    100.0%      0.0%
+  Qwen3-8B                                  160/160    100.0%      0.0%
+  MiniCPM5-1B                               160/160    100.0%      0.0%

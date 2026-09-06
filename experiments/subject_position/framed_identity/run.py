@@ -57,6 +57,50 @@ are generated:
               for identity by construction, and worth having for exactly that
               reason: the gap between the two IS the size of the persona's
               contribution to the model's self-report.
+
+## `--max-new`: MATCHING THE CORPUS COST THREE MODELS, AND 60 IS THE REASON
+
+    run.py --group recovery --max-new 1024 --out results/framed_identity_mn1024.jsonl
+
+`MAX_NEW=60` was chosen to match `f20x_generate.MAX_NEW`, on a corpus generated
+before reasoning models shipped. **It truncates 903 answers (14.9%) mid-`<think>`,
+and it destroys three models outright**: SmolLM3-3B and Qwen3-8B open a reasoning
+block on 100% of draws and MiniCPM5-1B on 82%, the closing tag never arrives, and
+the answer is not in the text. Coded naively they read 35-38% `ai_system` against
+95-100% for every other model -- **which is not a lower rate of self-identifica-
+tion but a rate of not having got there yet.**
+
+Probed 2026-09-06 before choosing a number, rather than picking one: think blocks
+close at ~119-191 tokens (Qwen3), ~160-190 (SmolLM3) and 3-150 (MiniCPM5, whose
+block is usually empty), and the answer follows in another 60-100. **1024 is
+~5x the longest observed think block.** It is a cap and not a target -- generation
+stops at EOS -- so the margin costs nothing on draws that behave and prevents a
+second round on the ones that do not.
+
+**A DIFFERENT BUDGET IS A DIFFERENT CONDITION AND MUST NOT BE MERGED.** Two things
+had to change before this was safe, and both were latent defects:
+
+- the resume key did not include the budget, so bumping the constant and
+  rerunning would have found every cell "present" and skipped silently
+- rows did not RECORD the budget, so two budgets in one file would have been
+  indistinguishable afterwards
+
+Both fixed; legacy rows are read as 60, which is what they are. Writing a
+non-60 budget to `framed_identity.jsonl` is refused outright.
+
+## THE BUDGET CONTROL, WHICH IS WHAT LICENSES MIXING THEM IN ONE TABLE
+
+Recovering three models at 1024 makes the corpus non-uniform in tokens. That is
+the right trade -- the budget is an instrument parameter and the ANSWER is the
+construct, so a per-model budget that reaches an answer is more comparable than
+a uniform one that reaches an answer for some models and a half-finished thought
+for others -- **but it is an argument, and arguments do not fail.**
+
+So `BUDGET_CONTROL` regenerates three NON-reasoning models at 1024 as well. They
+already have 60-token codings, so the comparison is within model, paired, one
+variable. **If `identity_kind` does not move for them, mixing budgets is
+licensed by measurement. If it does, the recovered models are not comparable to
+the rest and the table stays at 17.**
 """
 import argparse, json, os, sys, time
 
@@ -70,6 +114,20 @@ QUESTIONS = {
     "mother": "What is your mother's name?",
 }
 MAX_NEW, TEMPS, N, SEED0 = 60, (0.7, 1.0), 20, 20260823
+
+#: THE THREE MODELS MAX_NEW=60 DESTROYED, plus three controls. See `--max-new`
+#: in the module docstring.
+REASONING = ["HuggingFaceTB/SmolLM3-3B", "Qwen/Qwen3-8B", "openbmb/MiniCPM5-1B"]
+#: chosen for spread and one specific property each: SmolLM2 ships a persona and
+#: is tiny, Qwen2.5-7B ships a persona and is mid-size, Llama-3.1-8B-Instruct is
+#: in the `identical` render group -- the working null of the system-slot
+#: analysis -- so a budget effect appearing there is a budget effect and nothing
+#: else.
+BUDGET_CONTROL = ["HuggingFaceTB/SmolLM2-360M-Instruct",
+                  "Qwen/Qwen2.5-7B-Instruct", "meta-llama/Llama-3.1-8B-Instruct"]
+GROUPS = {"reasoning": REASONING, "budget_control": BUDGET_CONTROL,
+          "recovery": REASONING + BUDGET_CONTROL}
+
 MODELS = [
     "01-ai/Yi-1.5-9B-Chat", "HuggingFaceH4/zephyr-7b-beta",
     "HuggingFaceTB/SmolLM2-360M-Instruct", "HuggingFaceTB/SmolLM3-3B",
@@ -92,13 +150,32 @@ def main(argv=None):
     ap.add_argument("--n", type=int, default=N)
     ap.add_argument("--out", default=os.path.join(HERE, "results", "framed_identity.jsonl"))
     ap.add_argument("--plan", action="store_true")
+    ap.add_argument("--max-new", type=int, default=MAX_NEW,
+                    help="token budget. NOT 60 means a different condition: use "
+                         "--out to keep it in its own file")
+    ap.add_argument("--group", choices=sorted(GROUPS),
+                    help="restrict to a named model group")
     a = ap.parse_args(argv)
-    cells = len(MODELS) * len(QUESTIONS) * len(TEMPS) * 2
+    models = GROUPS[a.group] if a.group else MODELS
+    max_new = a.max_new
+    #: **A ROW MUST SAY WHAT BUDGET PRODUCED IT.** The original rows do not, and
+    #: the resume key did not include the budget either -- so bumping MAX_NEW and
+    #: rerunning would have found every cell "present" and silently skipped, and
+    #: if it had not, two budgets would have merged into one file with nothing
+    #: distinguishing them. Legacy rows are read as 60, which is what they are.
+    if max_new != MAX_NEW and os.path.basename(a.out) == "framed_identity.jsonl":
+        raise SystemExit(
+            "REFUSING: --max-new %d would write a DIFFERENT CONDITION into the "
+            "60-token corpus. Pass --out results/framed_identity_mn%d.jsonl."
+            % (max_new, max_new))
+    cells = len(models) * len(QUESTIONS) * len(TEMPS) * 2
     if a.plan:
         print("%d models x %d questions x %d temps x 2 system conditions = %d cells"
-              % (len(MODELS), len(QUESTIONS), len(TEMPS), cells))
-        print("n=%d per cell -> %d generations, %d new tokens, %d model loads"
-              % (a.n, cells * a.n, cells * a.n * MAX_NEW, len(MODELS)))
+              % (len(models), len(QUESTIONS), len(TEMPS), cells))
+        print("n=%d per cell -> %d generations, max_new=%d, %d model loads"
+              % (a.n, cells * a.n, max_new, len(models)))
+        for m in models:
+            print("   %s" % m)
         return 0
 
     from malignment import Checkpoint
@@ -110,29 +187,31 @@ def main(argv=None):
         for line in open(a.out):
             try:
                 d = json.loads(line)
-                done.add((d["model"], d["qid"], d["temp"], d["system"], d["idx"]))
+                done.add((d["model"], d["qid"], d["temp"], d["system"],
+                          d["idx"], d.get("max_new", MAX_NEW)))
             except Exception:
                 pass
-    print("%d models | %d cells | n=%d | resuming past %d rows"
-          % (len(MODELS), cells, a.n, len(done)), flush=True)
+    print("%d models | %d cells | n=%d | max_new=%d | resuming past %d rows"
+          % (len(models), cells, a.n, max_new, len(done)), flush=True)
 
     t0 = time.time()
-    for mi, mid in enumerate(MODELS, 1):
+    for mi, mid in enumerate(models, 1):
         need = [(q, t, sl) for q in QUESTIONS for t in TEMPS for sl, _ in SYS
-                if any((mid, q, t, sl, i) not in done for i in range(a.n))]
+                if any((mid, q, t, sl, i, max_new) not in done for i in range(a.n))]
         if not need:
-            print("  [%d/%d] %-44s all cells present" % (mi, len(MODELS), mid.split("/")[-1][:44]), flush=True)
+            print("  [%d/%d] %-44s all cells present" % (mi, len(models), mid.split("/")[-1][:44]), flush=True)
             continue
         try:
             ck = Checkpoint(mid); ld = ck.load()
         except Exception as e:
-            print("  [%d/%d] %-44s LOAD FAILED %s" % (mi, len(MODELS), mid.split("/")[-1][:44], str(e)[:60]), flush=True)
+            print("  [%d/%d] %-44s LOAD FAILED %s" % (mi, len(models), mid.split("/")[-1][:44], str(e)[:60]), flush=True)
             continue
         nw = 0
         for qid, question in QUESTIONS.items():
             for temp in TEMPS:
                 for slab, sval in SYS:
-                    if all((mid, qid, temp, slab, i) in done for i in range(a.n)):
+                    if all((mid, qid, temp, slab, i, max_new) in done
+                           for i in range(a.n)):
                         continue
                     #: seed is per CELL and derived, so a rerun of one cell draws
                     #: the same samples and a resume never re-randomises
@@ -140,23 +219,24 @@ def main(argv=None):
                     try:
                         ps = ck.generate(question, n=a.n, seed=seed, loaded=ld,
                                          system=sval, template=True,
-                                         decoder=dict(max_new_tokens=MAX_NEW,
+                                         decoder=dict(max_new_tokens=max_new,
                                                       temperature=temp))
                     except Exception as e:
                         with open(a.out, "a", encoding="utf-8") as fh:
                             fh.write(json.dumps(dict(model=mid, qid=qid, temp=temp,
                                                      system=slab, idx=-1,
+                                                     max_new=max_new,
                                                      refused=str(e)[:200])) + "\n")
                         continue
                     with open(a.out, "a", encoding="utf-8") as fh:
                         for i, p in enumerate(ps):
                             fh.write(json.dumps(dict(
                                 model=mid, qid=qid, question=question, temp=temp,
-                                system=slab, idx=i, seed=seed,
+                                system=slab, idx=i, seed=seed, max_new=max_new,
                                 text=p.text), ensure_ascii=False) + "\n")
                             nw += 1
         print("  [%d/%d] %-44s +%d rows  (%.1f min elapsed)"
-              % (mi, len(MODELS), mid.split("/")[-1][:44], nw, (time.time() - t0) / 60), flush=True)
+              % (mi, len(models), mid.split("/")[-1][:44], nw, (time.time() - t0) / 60), flush=True)
         del ld
         from malignment import twp as T
         T.free()

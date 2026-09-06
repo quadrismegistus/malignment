@@ -81,6 +81,44 @@ KEY = ("model", "qid", "temp", "system", "idx")
 #: pooled with the aligned ones. Same shape, different columns.
 F20X_KEY = ("model", "qid", "temp", "arm", "idx")
 
+#: THE RECOVERY CORPUS: the same design at max_new=1024, for the three models
+#: 60 tokens destroyed plus three non-reasoning controls. `max_new` is IN THE
+#: KEY because it is what distinguishes this corpus from `framed`; without it a
+#: resume could not tell a 60-token row from a 1024-token one for the same cell,
+#: and the budget control compares exactly those two.
+RECOVERY = os.path.join(HERE, "results", "framed_identity_mn1024.jsonl")
+RECOVERY_OUT = os.path.join(HERE, "results", "coded_mn1024.jsonl")
+RECOVERY_KEY = ("model", "qid", "temp", "system", "idx", "max_new", "surface")
+
+#: THE SURFACE, WHICH HAD TO BE CHOSEN BEFORE 1,920 CODER CALLS AND NOT AFTER.
+#:
+#: The 60-token corpus codes AT MOST 60 tokens of answer -- that is what the cap
+#: does. At max_new=1024 a reasoning model emits a think block, then an answer,
+#: then rambles. Measured on SmolLM3's 320 rows: the post-`</think>` answer runs
+#: to a median of 70 tokens, p90 496, max 690, and only 39% are already under 60.
+#:
+#: So coding the WHOLE 1024-token text would code several times more prose for
+#: the recovered models than for every model they are compared against -- the
+#: same class of mismatch this recovery exists to remove. `matched` takes the
+#: first 60 tokens AFTER the think block, per the model's OWN tokenizer, which
+#: is the surface every other row in the corpus was coded on.
+#:
+#: `full` is kept and run on a subsample, because "truncating there does not
+#: change the code" is an argument and arguments do not fail. See --surface.
+SURFACE_NTOK = 60
+_TOK = {}
+
+
+def answer_surface(text, model, ntok=SURFACE_NTOK):
+    """-> the text after `</think>`, cut to `ntok` of THIS model's tokens."""
+    t = (text or "").split("</think>")[-1].strip()
+    if model not in _TOK:
+        from transformers import AutoTokenizer
+        _TOK[model] = AutoTokenizer.from_pretrained(model, trust_remote_code=True)
+    tk = _TOK[model]
+    ids = tk.encode(t, add_special_tokens=False)
+    return t if len(ids) <= ntok else tk.decode(ids[:ntok])
+
 
 def load_f20x():
     """-> rows in this file's own shape, from the vendored generations parquet."""
@@ -99,9 +137,9 @@ def load_f20x():
     return out
 
 
-def load_generations():
+def load_generations(path=GEN):
     rows = []
-    with open(GEN) as fh:
+    with open(path) as fh:
         for line in fh:
             d = json.loads(line)
             #: idx == -1 is a cell-level refusal record, not a generation
@@ -126,15 +164,27 @@ def load_done(out_path=OUT, key=KEY):
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--corpus", choices=("framed", "f20x"), default="framed")
+    ap.add_argument("--corpus", choices=("framed", "f20x", "recovery"),
+                    default="framed")
+    ap.add_argument("--surface", choices=("matched", "full"), default="matched",
+                    help="recovery only. matched = first %d tokens after "
+                         "</think>, the surface the rest of the corpus was "
+                         "coded on. full = the whole 1024-token text."
+                         % SURFACE_NTOK)
     ap.add_argument("--dry", action="store_true")
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--workers", type=int, default=8)
     a = ap.parse_args(argv)
 
-    key = F20X_KEY if a.corpus == "f20x" else KEY
-    out_path = F20X_OUT if a.corpus == "f20x" else OUT
-    rows = load_f20x() if a.corpus == "f20x" else load_generations()
+    key = {"f20x": F20X_KEY, "recovery": RECOVERY_KEY}.get(a.corpus, KEY)
+    out_path = {"f20x": F20X_OUT, "recovery": RECOVERY_OUT}.get(a.corpus, OUT)
+    rows = (load_f20x() if a.corpus == "f20x"
+            else load_generations(RECOVERY if a.corpus == "recovery" else GEN))
+    if a.corpus == "recovery":
+        for r in rows:
+            r["surface"] = a.surface
+            if a.surface == "matched":
+                r["text"] = answer_surface(r["text"], r["model"])
     done = load_done(out_path, key)
     todo = [r for r in rows if tuple(r[k] for k in key) not in done]
     if a.limit:
