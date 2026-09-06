@@ -1,4 +1,15 @@
-"""Does the chat frame move the word distribution, and does it depend on alignment stage?
+"""SUPERSEDED 2026-09-06 -- READ README.md BEFORE RUNNING THIS.
+
+The question in the line below is ANSWERED, in
+`experiments/subject_position/installation_rung`: the rung is SFT (n=35, 30
+rise, median +0.2296, p<1e-4) and the base arm is categorical rather than a
+rate -- 11 of 14 bases refuse the chat frame outright. Running this pilot to
+find that out would be buying an answer twice. The design commitments are kept
+because a successor with a NEUTRAL CONTROL and the lexicon-free distribution
+measures is still unwritten; the question in the docstring is not that
+successor's question.
+
+Does the chat frame move the word distribution, and does it depend on alignment stage?
 
     python run.py --scan     the design, nothing measured
     python run.py --run

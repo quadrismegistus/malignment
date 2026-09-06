@@ -2,12 +2,64 @@
 kind: calibration
 id: frame_pilot
 question: Does the chat frame move the word distribution, and does it depend on alignment stage?
-status: DESIGNED, NOT RUN. `run.py` exists and `results/` does not; nothing here has been measured.
-headline: NONE STATED -- the design is registered, the pilot has not been run.
+status: "SUPERSEDED, NOT RUN. The question was answered elsewhere while this folder waited: subject_position/installation_rung has the rung (SFT) and the base arm (11 of 14 bases refuse the frame outright). Do not run this to find out; read that."
+headline: "The question this pilot registered is answered in subject_position/installation_rung. This folder is a design record, not an opportunity."
 grain: distribution
 ---
 
 # frame_pilot
+
+## SUPERSEDED (2026-09-06). READ THIS BEFORE RUNNING ANYTHING HERE.
+
+**The question below was answered elsewhere while this folder sat unrun, and
+nothing in it said so.** Its `status` read `DESIGNED, NOT RUN`, which reads as an
+opportunity, and this seat pitched running it on that basis. Where the answers
+actually are:
+
+    subject_position/installation_rung   WHICH RUNG, and the base arm.
+                                         43 nodes, 82 typed forward edges,
+                                         predictions recorded before the run:
+                                         sft n=35, 30 rise, median +0.2296,
+                                         p<1e-4; instruct +0.2662 p=0.0007;
+                                         dpo +0.0579 p=0.077 (not resolved).
+                                         And the categorical one: 11 OF 14 BASES
+                                         REFUSE THE CHAT FRAME OUTRIGHT.
+    subject_position/pseudo_template     the address supplies ten times what the
+                                         models bring; the FAIR arm comparison.
+    instrument_calibrations/frame_prefill  what the frame does to the word slot;
+                                         finding 15, the 1.74x and the 82%.
+    passage_analysis/jakobson_space      the same at PAGE grain: a continuation
+                                         wrapper moves a model 80% as far as
+                                         alignment did.
+
+**`installation_rung` answers this folder's motivating observation better than
+this design would have.** The n=1 note below is "base entropy barely moves under
+framing while aligned collapses about 3 bits". The real answer is not a smaller
+rate, it is categorical: most bases have no mechanism for being asked. A pilot
+measuring how far the frame moves a base model is measuring a distance across a
+gap that, for 11 of 14 of them, is not a distance at all.
+
+**And the rung question is answered at SFT** -- which was the rung this seat
+argued the Olmo ladder could not see, having checked that no Olmo BASE rung is
+framed in `twp_words_v4` (22 Olmo/Tulu models carry `frame='prefill'`, all of
+them SFT/DPO/Instruct/Think). That check was correct and the conclusion drawn
+from it was not, because `installation_rung` does not go through `twp_words_v4`.
+
+WHAT IS STILL UNCLAIMED HERE, if anyone wants it:
+
+- The **neutral control** (205 declared neutral prompts from `corpus.domains()`)
+  against the frame. `installation_rung` measures `p(I)` at one position, not a
+  whole-distribution move on neutral versus transgressive material.
+- The **lexicon-free distribution measures** (entropy, tail mass, support size,
+  JS between conditions) as a family. Pieces of this exist -- `slot_ratings`
+  measured median support 129 -> 81 words per cell under the frame on 540
+  aligned cells, 2026-09-06 -- but not as a declared sweep with the control.
+
+Neither is the question in the frontmatter, and neither is worth buying on the
+strength of that question. **The design commitments below are still good** and
+are kept for whoever writes the successor.
+
+---
 
 **Nothing has been measured.** `run.py` was written 2026-08-22 and never run: there is no `results/` directory here and no `$MALIGNMENT_DATA/frame_pilot`. This README exists because the folder had a producer and no written claim, which `index.py --check` now refuses -- and which it could not previously even see, since the first version of that checker only walked directories that already had a README.
 
@@ -66,4 +118,7 @@ Selection is declared and blind to the outcome: stable-hash order within each do
 
 Measured on ONE prompt before this folder existed: base entropy barely moves under framing (5.20 to 5.12, 5.52 to 5.30, 5.57 to 5.84 on three base arms) while aligned arms collapse about 3 bits (kanana-instruct 4.33 to 1.37). **n=1 prompt, no control, no ladder.** That observation is what this pilot exists to test properly, and it is recorded here as the motivation rather than as evidence.
 
-Related and separate: `../frame_prefill/` and the wrapper row in `../../passage_analysis/jakobson_space/` -- which measures a continuation wrapper moving a model 80% as far as alignment did, at the PAGE grain rather than this one.
+Related and separate: `../../subject_position/installation_rung/` (which
+answers the question above -- see the superseded note at the top),
+`../../subject_position/pseudo_template/`, `../frame_prefill/` and the wrapper
+row in `../../passage_analysis/jakobson_space/` -- which measures a continuation wrapper moving a model 80% as far as alignment did, at the PAGE grain rather than this one.
