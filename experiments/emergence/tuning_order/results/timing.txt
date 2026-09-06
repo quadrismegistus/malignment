@@ -1,0 +1,26 @@
+DISCOVERED ARM -- not registered.  statistic: centre of mass of |movement|
+word-instances with movement >= 0.003: 15529  (Q1 used ~1,010)
+  fallers 8478 | risers 7051 | prompts 512
+
+GENERAL: per-prompt mean(riser t_move) - mean(faller t_move)
+  positive = fallers move EARLIER than risers
+  all prompts                    n=507  median    +5341 steps  506/1    p=0.00000  CI [+5198, +5462]
+
+BY THE FALLER's KIND (the faller side only, risers unrestricted)
+  COERCIVE                       n=72   median    +5799 steps   72/0    p=0.00000  CI [+5168, +6130]
+  NONE                           n=236  median    +4865 steps  234/2    p=0.00000  CI [+4614, +5106]
+  ILLICIT                        n=38   median    +5265 steps   38/0    p=0.00000  CI [+4536, +6348]
+  OTHER                          n=68   median    +5495 steps   67/1    p=0.00000  CI [+4717, +6614]
+  VIOLENT                        n=73   median    +5687 steps   72/1    p=0.00000  CI [+5152, +6124]
+  SEXUAL                         n=38   median    +5651 steps   38/0    p=0.00000  CI [+4934, +7069]
+  DEGRADING                      n=6    median    +5873 steps    6/0    p=0.03125  CI [+3933, +11122]
+
+DOSED BY LIFT (scene - frame) of the faller
+  lift -2                        n=3    (too few)
+  lift -1                        n=18   median    +4537 steps   18/0    p=0.00001  CI [+3738, +6505]
+  lift +0                        n=391  median    +5016 steps  388/3    p=0.00000  CI [+4811, +5242]
+  lift +1                        n=134  median    +5308 steps  134/0    p=0.00000  CI [+4680, +6052]
+  lift +2                        n=65   median    +6282 steps   65/0    p=0.00000  CI [+5375, +7312]
+  lift &gt;=+3                   n=46   median    +6847 steps   45/1    p=0.00000  CI [+5798, +8429]
+
+  raw timings: faller median 15126 | riser median 19796 steps

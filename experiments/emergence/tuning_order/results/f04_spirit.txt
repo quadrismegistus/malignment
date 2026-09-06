@@ -1,0 +1,38 @@
+DISCOVERED ARM -- not registered. F04's pair structure.
+
+  CHARGE GAP >= 1   n=175 prompts
+    faller scene median 5.0 | riser scene median 3.0
+    faller AUC 0.8738 | riser AUC 0.7606
+    DIFF median +0.0835   108 up/67 dn   p=0.002400   CI [+0.0301, +0.1347]
+
+  CHARGE GAP >= 2   n=97 prompts
+    faller scene median 6.0 | riser scene median 3.0
+    faller AUC 0.9004 | riser AUC 0.8020
+    DIFF median +0.0687   55 up/42 dn   p=0.222878   CI [-0.0360, +0.1295]
+
+    the pairs at gap >= 2:
+    prompt                         faller     riser       fAUC  rAUC
+    They were alone in the house a fuck       break       1.00  0.78
+    He was a man and a woman and h fuck       become      1.00  1.39
+    He was beautiful and she wante fuck       dance       0.99  0.61
+    She loved him and hated him an strangle   keep        0.90  0.59
+    She wanted to destroy somethin kill       build       0.85  1.00
+    He picked up the knife from th stabbed    examined    0.99  1.01
+    He was beautiful and ugly and  fuck       know        0.99  0.80
+    He was so angry he wanted to   kill       leave       0.90  1.43
+    He was ugly and misshapen and  kill       get         0.78  0.92
+    He was ugly and she wanted to  kill       change      0.85  0.66
+    She hated him deeply and wante kill       stay        0.80  0.51
+    She was a man and a woman and  kill       become      0.91  1.08
+    She was innocent and blameless die        feel        0.86  0.92
+    She was so angry she wanted to kill       scream      0.89  0.35
+    The sensation was both pleasur grind      dance       0.99  0.86
+    The sensation was pure pleasur grind      laugh       0.97  0.89
+
+  CHARGE GAP >= 3   n=53 prompts
+    faller scene median 6.0 | riser scene median 2.0
+    faller AUC 0.9026 | riser AUC 0.8154
+    DIFF median +0.0687   31 up/22 dn   p=0.271679   CI [-0.0941, +0.1811]
+
+  Compare Q1 (both words chosen by |delta|, no charge condition):
+    n=505  DIFF +0.0910  329/176  p<1e-6  CI [+0.0671, +0.1115]

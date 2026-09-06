@@ -1,7 +1,7 @@
 ---
 kind: question
-status: Q1 and Q3 RUN 2026-09-06. Order holds but is NOT charge-specific; 29.5% of fallers are AMPLIFIED before falling. Q2 not run
-headline: The faller leaves before the riser generally, not because it is charged — and 29.5% of fallers are AMPLIFIED at step 1000 before they fall, which F04 missed
+status: RUN 2026-09-06. Fallers move ~4,800 steps before risers in 506 of 507 prompts, survives three controls, and is NOT charge-specific. Q2 not run
+headline: What leaves, leaves early; what arrives, arrives late — 506 of 507 prompts, regardless of content. F04's general claim replicates; its exhibits mostly do not
 grain: undecided (rung x site, prompts as the replicate within one lineage)
 ---
 # tuning_order

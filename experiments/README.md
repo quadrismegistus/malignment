@@ -118,8 +118,8 @@ and the state the first version of the checker could not see.
 
 - **[`capacities/`](emergence/capacities/README.md)** -- `PORTED from M05, 2026-08-24. Numbers recomputed by analyse.py, fleet not re-run.`  
   Pretraining builds rhyme pull to 0.383; SFT erodes it to 0.262. DPO has one checkpoint.
-- **[`tuning_order/`](emergence/tuning_order/README.md)** -- `Q1 and Q3 RUN 2026-09-06. Order holds but is NOT charge-specific; 29.5% of fallers are AMPLIFIED before falling. [...]`  
-  The faller leaves before the riser generally, not because it is charged — and 29.5% of fallers are AMPLIFIED at step 1000 before they fall, which F04 missed
+- **[`tuning_order/`](emergence/tuning_order/README.md)** -- `RUN 2026-09-06. Fallers move ~4,800 steps before risers in 506 of 507 prompts, survives three controls, and is NOT charge-specific. [...]`  
+  What leaves, leaves early; what arrives, arrives late — 506 of 507 prompts, regardless of content. F04's general claim replicates; its exhibits mostly do not
 
 ### posttraining_corpus_analysis
 
@@ -132,7 +132,7 @@ and the state the first version of the checker could not see.
 - **[`tulu3-safety-slice/`](posttraining_corpus_analysis/tulu3-safety-slice/README.md)** -- `REGISTERING. [...]`  
   NONE STATED
 - **[`tulu3-slice-charge/`](posttraining_corpus_analysis/tulu3-slice-charge/README.md)** -- `PILOT RUN TWICE, 2026-09-06. v1 (3,800 rows) was re-run as v2 after reading its rows found a fiction confound. [...]`  
-  FICTION IS A NEAR-TOTAL EXEMPTION: 0 refusals across 29 charged fiction requests, against 85.3% refusal on 265 charged non-fiction ones. Sexual requests are 36.6% fiction where illicit ones are 1.2%, and that composition -- not leniency about sex -- is most of why SEXUAL looked like the least-refused kind. WildChat is the sexually densest source at 10.0%; every maths and persona source is 0.0%.
+  The Tulu-3 wildjailbreak slice is 100% VANILLA -- AI2 built 161,430 adversarial jailbreaks and shipped none of them, so the safety data teaches refusal of the UNDISGUISED request while the fiction-wrapped charged requests come from WildChat and are complied with. FICTION IS A NEAR-TOTAL EXEMPTION: 0 refusals across 29 charged fiction requests, against 85.3% refusal on 265 charged non-fiction ones. Sexual requests are 36.6% fiction where illicit ones are 1.2%, and that composition -- not leniency about sex -- is most of why SEXUAL looked like the least-refused kind. WildChat is the sexually densest source at 10.0%; every maths and persona source is 0.0%.
 - **[`ultrafeedback/`](posttraining_corpus_analysis/ultrafeedback/README.md)** -- `RUN. [...]`  
   68.4% against 43.9% is the other side of chance, not a smaller version of the same effect.
 
