@@ -19,6 +19,46 @@ why: |
   "Can the movement be NAMED?"). Treat magnitude claims from this layer as provisional
   until the panel grows; treat direction claims as standing.
 blocked_on: more base->aligned lineages in twp_words_v4 / movement
+edges: |
+  ALL THREE QUESTIONS NOW RUN ON THREE EDGES (2026-09-06), via
+  movement.endpoint_edges / endpoint_edge_where:
+
+      raw      base_raw    -> aligned_raw       50   alignment
+      framed   base_raw    -> aligned_framed    45   alignment AND the frame
+      self     aligned_raw -> aligned_framed    45   the frame ALONE
+
+  Every producer takes --edge and every output filename carries it. The
+  populations are 45 and 45 but not the same 45: framed is keyed on the BASE of
+  an endpoint pair, self on the ALIGNED model, and both are the clean-slot subset
+  (clean_frame_pairs, see its docstring for the rule and the two wrong versions).
+
+  THE THREE QUESTIONS ANSWER THE FRAME DIFFERENTLY AND THAT IS THE RESULT:
+
+      identity     group structure SURVIVES. 64 of 66 raw-significant room cells
+                   keep their sign on framed, 54 stay significant.
+                   Muslims/deference +0.132 raw, +0.142 framed, +0.133 self.
+      POV          the asymmetry DOES NOT. 6 of 8 raw-significant scales go
+                   non-significant on framed; only vocalisation/self survives
+                   Bonferroni over the 33 tests.
+      sexual       the gender null HOLDS on all three, and so does the selection
+                   direction.
+
+  A structural reason to expect identity vs POV, recorded as NOT predicted before
+  the run: a per-lineage group contrast holds the frame constant across the groups
+  being compared, so a frame that moves every group together cannot produce or
+  destroy it. The POV study instead asks whether a gap between two prompt
+  positions survives, and the frame moves those two positions.
+
+  WHAT THE FRAME DOES TO THE DATA: it concentrates the distribution (median 129
+  words per cell raw, 81 framed) and that lands on the FLAT words -- risers hold
+  near a sixth on every edge while fallers go 34% -> 50%. Measured, not assumed:
+  twp_words_v4_best and twp_words_v4 at frame='' are identical in all 540 POV
+  cells, so this is the frame and not the topup merge.
+
+  A GATE ON THE ALIGNED SIDE IS NOT COMPARABLE ACROSS EDGES. run_slotpov arm A
+  gates on the base side (raw on all three) and is; arm B gates on the aligned
+  side, so it gates on the concentrated distribution itself and its populations
+  are not the same object.
 todo:
   - name: no identity-specific or violence-specific instrument
     what: |
