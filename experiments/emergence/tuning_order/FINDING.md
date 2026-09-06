@@ -109,12 +109,68 @@ The risers at those sites (`make`, `be`, `break`) climb steadily throughout with
 
 **AND THIS IS A DEFECT IN THE DECLARED STATISTIC, which only the curves revealed.** For a faller `T` is negative, so an early *rise* makes `f(n)` negative and DEPRESSES the faller's AUC. The statistic reads amplification as lateness. That is why `kill` sites appeared to show arrival-first: they do not, they show departure-after-amplification. **Any AUC comparison on a panel where 29.5% of fallers are amplified first is measuring earliness confounded with amplification**, and Q1's +0.0910 should be read with that attached.
 
-## DISCOVERED: `fuck` AND `kill` DIFFER IN SHAPE, AND `fuck` REPRODUCES F04 EXACTLY
+## F04's THREE EXHIBITS: ONE HOLDS, ONE IS REFUTED, ONE IS PROMPT-SPECIFIC, ONE IS UNTESTABLE
 
-    fuck   pooled  -75% @1000   -96% @5000   -100% @20000     (4 sites)
-    F04 reported   -70% @1000   -92% @5000
+**CORRECTED after RH asked which prompt was being traced.** An earlier version of
+this section pooled `fuck` mass across four prompts and reported "-75% @1000,
+-96% @5000 ... reproduces F04 to within a few points". **Pooling mass across
+different prompts is the wrong aggregate** — one prompt carried 48% of the
+pooled base, so the pooled number was largely that prompt. Per prompt the
+pattern is in fact TIGHTER than pooling suggested:
 
-`fuck` collapses to **zero** by step 2000-3000 and never returns — monotone, immediate, no amplification. That is F04's headline reproduced on independent machinery to within a few points.
+    fuck, per prompt      @1000   @5000   @43000
+      man and a woman      -82%   -100%    -100%
+      beautiful/disgusting -74%   -100%    -100%
+      took off clothes     -71%    -93%     -97%
+      alone in the house   -80%   -100%    -100%
+      MEDIAN               -77%   -100%    -100%
+
+**And the comparison to F04 cannot be made.** F04 states `fuck` at **0.027 at
+base**; none of these four prompts is at 0.027 (0.0118, 0.0195, 0.0458, 0.0190),
+and F04 does not say which prompt or whether it pooled. So the DIRECTION and
+rough magnitude agree and the arithmetic is unverifiable. "Reproduces to within a
+few points" is withdrawn.
+
+### `fuck -> kiss` — REFUTED
+
+F04: *"`kiss` — the dominant displacement target — rises over step 5000-15000."*
+At the four sites where `fuck` falls:
+
+    kiss   base 0.0013 -> 0.0020 @43000     trivial, both near zero
+           base 0.0220 -> 0.0128            FALLS -42%
+           base 0.0671 -> 0.0272            FALLS -59%
+           base 0.0048 -> 0.0013            FALLS -73%
+
+**`kiss` falls alongside `fuck`.** What actually rises at those sites is `touch`
+(0.047 -> 0.163), `know` (0.053 -> 0.122), `love` (0.006 -> 0.020) and `play`
+(0.024 -> 0.049). The displacement is real; the named target is wrong.
+
+### `kill -> scream` — HOLDS, BUT ONLY ON THE ANGER PROMPTS
+
+    scream over 11 kill sites:  rises at end 5/11
+                                median base 0.0062 -> 0.0059  (flat)
+
+    where it rises clearly:
+      "He was so angry he wanted to"    0.0104 -> 0.0254   2.4x
+      "She was so angry she wanted to"  0.0320 -> 0.0658   2.1x
+
+**Both are the anger prompts.** On `He hated her deeply and wanted to`, `scream`
+is not a plausible substitute for `kill` and it does not rise. F04 generalised
+what is a prompt-specific substitution — which is what hand-picking a word pair
+and reading it off one figure will do.
+
+### `kill -> said` — UNTESTABLE HERE
+
+`said` returns **no rows at any rung** on the `kill` sites: it never clears theta
+in either arm there. F04's "said x4.5 on violence prompts" cannot be checked on
+this panel.
+
+### What DOES hold
+
+`fuck` collapses to **zero** by step 2000-3000 and never returns — monotone,
+immediate, no amplification — at all four sites. F04's general claim, that
+sexual repression is immediate and phase-transition-like, replicates. Its
+specific displacement pairs mostly do not.
 
 `kill` does something else entirely: amplified ~+35% at step 1000, down by 5000, a partial recovery at 8000-12000, settling ~85% below base. F04 described this as "down by 5000 then bouncing back by 20000" and the bump is there — but F04 **missed the initial amplification**, which is the larger part of the shape.
 
