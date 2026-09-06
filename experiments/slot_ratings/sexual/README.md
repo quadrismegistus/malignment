@@ -168,6 +168,21 @@ as exactly zero, which reads as a clean null rather than as a bug.
 
     results/rated_gender_pairs_v2_{framed,self}.json, analyse_{framed,self}.json
 
+### AND THE RAW `analyse.json` WAS ONE COMMIT STALE
+
+Running `--edge raw` to get the comparison column rewrote `results/analyse.json`
+and it changed: **n_words 1730 -> 1958**, `tactility` from -0.153/-0.183 at 7
+pairs to -0.102/-0.107 at 8. Nothing here corrupted it. It was last written in
+`42af2b9` and its input, `rated_gender_pairs_v2.json`, was re-rated afterwards in
+`407e4e7` ("rate the words the movement_v4 switch added"). The rating step ran
+and the analysis step did not, so the file on disk described a job list that no
+longer existed.
+
+No prose in this folder quoted the stale values -- checked -- and the raw column
+in the table above is the regenerated run. The general form is worth the line:
+**a producer's committed output can outlive its input silently**, because
+re-rating and re-analysing are two commands and only the first one was run.
+
 ## RE-RUN AT 50 LINEAGES (2026-09-05): THE NULL GOT STRONGER
 
 The population here is DISCOVERED, not declared -- `population.py` takes whichever
