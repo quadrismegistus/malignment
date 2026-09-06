@@ -89,6 +89,53 @@ Sites come from base → `Think-SFT@step43000` under `CANONICAL` (`min_prob=0.00
 
 Divergence between the two instruments is informative, not a problem.
 
+## 5a. AMENDMENT, 2026-09-06 — Q3's INSTRUMENT. `fields.py` DROPPED.
+
+**The frozen §5 is preserved above and is superseded by this. RH's call, same
+day, after Q1 ran and before Q3 ran.**
+
+§5 made `fields.py` primary *because* `charge.py` covered only 73.4% of fallers
+and 60.8% of risers. **That reasoning was about the OLD annotation on the
+Instruct edge**, and it no longer applies: `charge_edge.py` annotated THIS edge,
+and the residual gap is not a coverage failure. Measured — the 102 top-fallers
+that are unrated are:
+
+    was 20, be 17, A 13, he 11, the 6, she 6, and 2, they 2, ...
+
+**Function words, every one**, excluded by the content filter before rating
+rather than missed by the rater. Over the words the question is about, the
+annotation is effectively complete.
+
+So the ground for a second instrument is gone, and RH: *"I don't want to add
+another instrument."* `fields.py` is dropped from Q3 entirely. That also removes
+a defect it would have introduced: type-level arousal rates `cry` at 5.45 and
+would have admitted 24 `cry` sites to the charged panel, where in context `cry`
+scores an increment of **0.0**. Loadedness is a property of a word AT A SLOT.
+
+**AND NO CATEGORICAL FILTER.** An earlier proposal of mine was `kind != NONE`.
+RH: *"why filter on kind?"* — correctly, because it repeats one step later the
+error §4 had just corrected: `kind` is a label the same rater assigns alongside
+`scene`, so filtering on it discards the degree information and reintroduces
+exactly the category grain that `domain='neutral'` was rejected for.
+
+**The Q3 moderator is `scene(w) - frame`, the faller's own increment over its
+setup** — word-level lift, the same construct as Q2's prompt-level `charge.lift`,
+unaggregated. It behaves:
+
+    kill +4.0 (n=27)   fuck +4.5 (n=8)   die +2.0   scream +1.0
+    cry   0.0 (n=35)   marry 0.0         have 0.0   said 0.0    check 0.0
+
+**A BOUND ON IT, STATED BEFORE THE TEST IS CHOSEN.** The increment is heavily
+zero-inflated: n=6,884, median 0, and EIGHT of ten deciles sit at exactly 0. So
+"continuous regressor" overstates it -- this is a large null mass with a thin
+charged tail, and a linear fit would be driven by the tail while reporting a
+slope as though it described the whole. The test must be rank-based or must
+report the zero mass and the tail separately. **Which of those is not yet
+decided and is not decided here.**
+
+Panel sizes are small in the tail: `kill` 27 sites, `fuck` 8. Per-word effects
+there are individual prompts, not populations.
+
 ## 6. THE DATA, AS FROZEN
 
     movement_rungs      18,304,726 rows, 0 refused
