@@ -118,6 +118,8 @@ and the state the first version of the checker could not see.
 
 - **[`capacities/`](emergence/capacities/README.md)** -- `PORTED from M05, 2026-08-24. Numbers recomputed by analyse.py, fleet not re-run.`  
   Pretraining builds rhyme pull to 0.383; SFT erodes it to 0.262. DPO has one checkpoint.
+- **[`tuning_order/`](emergence/tuning_order/README.md)** -- `OPEN, NOT REGISTERED. [...]`  
+  When a fixed base is specified by SFT, does the faller's departure install before the riser's arrival? Commissioned 2026-09-06; the rule-version fork must be settled before it can run
 
 ### posttraining_corpus_analysis
 
@@ -148,8 +150,8 @@ and the state the first version of the checker could not see.
   A says the roster writes English. B is the one that found something broken.
 - **[`frame_admittance/`](instrument_calibrations/frame_admittance/README.md)** -- `RUN and WRITTEN UP, 2026-08-24. Triage sound; premise half superseded by the slot corpus.`  
   76% of sexual frames admit nothing; violence forecloses only 13%.
-- **[`frame_pilot/`](instrument_calibrations/frame_pilot/README.md)** -- `DESIGNED, NOT RUN. [...]`  
-  NONE STATED -- the design is registered, the pilot has not been run.
+- **[`frame_pilot/`](instrument_calibrations/frame_pilot/README.md)** -- `SUPERSEDED, NOT RUN. [...]`  
+  The question this pilot registered is answered in subject_position/installation_rung. This folder is a design record, not an opportunity.
 - **[`frame_prefill/`](instrument_calibrations/frame_prefill/README.md)** -- `COMPLETE, 2026-08-21: the question it was built for is answered`  
   What the deployment frame does to the word slot.
 - **[`generation_provenance/`](instrument_calibrations/generation_provenance/README.md)** -- `RUN`  
