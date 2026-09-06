@@ -1,0 +1,14 @@
+Q2 -- DECLARED ARM. Prompt-level charge.lift as a moderator.
+
+  TIMING lag (steps)
+    n=469   spearman rho +0.0001   t=0.00   p=0.998
+    low-lift tercile  n=157  median +5341
+    high-lift tercile n=157  median +5356
+    DIFFERENCE +15 steps = 0.3% of the 5341-step effect.
+    **Quote the bound as that fraction, never as p=0.998.**
+
+  DECLARED AUC lag
+    n=467   spearman rho +0.0430   t=0.93   p=0.354
+    low-lift tercile  n=156  median +0.07756
+    high-lift tercile n=156  median +0.1012
+

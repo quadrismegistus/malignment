@@ -1,6 +1,6 @@
 ---
 kind: question
-status: RUN 2026-09-06. Fallers move ~4,800 steps before risers in 506 of 507 prompts, survives three controls, and is NOT charge-specific. Q2 not run
+status: RUN 2026-09-06, all three registered arms. Fallers lead risers by ~5,300 steps in 506 of 507 prompts; charge modulates it by 0.3%
 headline: What leaves, leaves early; what arrives, arrives late — 506 of 507 prompts, regardless of content. F04's general claim replicates; its exhibits mostly do not
 grain: undecided (rung x site, prompts as the replicate within one lineage)
 ---

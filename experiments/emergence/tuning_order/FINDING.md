@@ -1,6 +1,6 @@
 # What leaves, leaves early; what arrives, arrives late — regardless of content
 
-**id:** emergence/tuning_order **status:** RUN 2026-09-06 against `REGISTRATION.md` frozen the same day at `6c238ff` (amended §5a). Producers `analyse.py`, `explore_q3.py`, `f04_spirit.py`, `curves_fk.py`, `timing.py`; outputs under `results/`. **Q2 not run.**
+**id:** emergence/tuning_order **status:** RUN 2026-09-06 against `REGISTRATION.md` frozen the same day at `6c238ff` (amended §5a). Producers `analyse.py`, `explore_q3.py`, `f04_spirit.py`, `curves_fk.py`, `timing.py`, `q2.py`; outputs under `results/`. **All three registered arms run.**
 
 ## THE RESULT
 
@@ -44,6 +44,35 @@ Not the floor, not starting mass, not magnitude.
 So the commission's hoped-for reading does not survive. It wanted the ordering to BE the temporal signature of repression: a charged word barred, a substitute arriving later. What is here is that **SFT reorganises its distribution in two phases regardless of content** — what leaves, leaves early; what arrives, arrives late. Transgression rides on a general mechanism rather than having one of its own.
 
 That is a stronger claim than the commission asked for, and a different one.
+
+## ALL THREE REGISTERED ARMS ARE NOW RUN, AND TWO OF THEM ARE NULLS
+
+    Q1  does the faller move before the riser          HOLDS (weak instrument;
+                                                       the timing arm supersedes)
+    Q2  prompt-level lift as a moderator               NULL, tightly bounded
+    Q3  the faller's own charge as a moderator         NULL
+
+**Q2, and it is a bound rather than an absence of evidence:**
+
+    prompt-level charge.lift vs the TIMING lag
+      n=469   spearman rho +0.0001   p=0.998
+      low-lift tercile   +5,341 steps
+      high-lift tercile  +5,356 steps        difference 15 steps
+
+    the same on the declared AUC lag
+      n=467   spearman rho +0.0430   p=0.354
+
+**15 steps on a 5,341-step effect is 0.3%.** At n=469 that constrains any
+prompt-level charge modulation to under about 1% of the phenomenon's size. Quote
+it as that fraction, never as "p=0.998".
+
+**Q3, stated the same way**, and correcting a shorthand that misled: the
+word-level figure is `rho = +0.0384` — an EFFECT SIZE near zero — and its
+significance is separately `p = 0.090`. Both fail, independently. An earlier
+version of this file wrote "rho=0.038" in a position where it read as a p-value.
+
+So charge does not modulate the ordering at either grain: not the prompt's
+overall lift, not the faller word's own increment.
 
 ## DISCOVERED: THE FALLER IS AMPLIFIED BEFORE IT IS REPRESSED
 
@@ -140,6 +169,6 @@ specific displacement pairs mostly do not.
 - **Anything about SFT in general.** n=1 lineage, graded C — the store holds exactly one SFT ladder.
 - **Anything about DPO or RLVR.** This ladder is SFT only, which matters because the campaign's existing work puts violence repression at DPO.
 - **The timing result as a DECLARED finding.** The registered statistic was AUC; `t_move` is the discovered arm and supersedes it on merit, not on registration.
-- **A charge modulation.** rho=0.038 at word level. Say there is none established.
+- **A charge modulation at either grain.** Word level rho=+0.0384 (p=0.090); prompt level rho=+0.0001 (p=0.998), terciles differing by 15 steps on 5,341. State the bound as a fraction, not as a p.
 - **F04's exhibits.** `fuck -> kiss` is refuted, `kill -> scream` holds only on the anger prompts, `kill -> said` is untestable here. Only the GENERAL claim replicates.
 - **The Q1 AUC numbers for anything.** Kept above as a record of what the selection cost.
