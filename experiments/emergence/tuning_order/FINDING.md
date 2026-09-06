@@ -196,8 +196,36 @@ same words. The difference is a ceiling, and it is exact:
 `scene` rates the completed act, so on a frame-7 prompt **every** candidate
 scores 7 and `lift = scene - frame` is exactly 0 for all of them. The instrument
 sees `dick` and `shaft` as identical while the model treats them as opposites.
-Measured corpus-wide: at frame=7, 100% of words have lift 0 (9 prompts, 117
-words); the effect is total there and narrow overall.
+**AMENDED 2026-09-06 by lacan [6646], who checked it rather than agreeing.** The
+mechanism reproduces exactly — within-prompt sd(scene) collapses to 0.166 at
+frame>=6.9 against 0.850 at its peak (frame 3-4) — but I had BOTH the scope and
+the end of the scale wrong.
+
+**Scope: it is a VIOLENT-frame problem corpus-wide, not a sexual one.** Of 31
+saturated prompts in 2,806, **28 are VIOLENT and 3 SEXUAL**; every other kind is
+0.0%. Within-kind, VIOLENT saturates at 6.7% and SEXUAL at 2.5%. My worked
+example above is SEXUAL and is not representative of where this bites.
+
+**And there is a FLOOR I did not name, which for THIS panel is the dominant
+problem.** sd is depressed at the bottom too — nothing charged to tell apart —
+and 42% of the annotation sits at frame 1-2. On the tuning_order panel
+specifically:
+
+    frame band   prompts   sd(scene)
+    1-2            241  (57%)   0.263    <- the FLOOR, and most of this panel
+    3-4            128  (30%)   0.570    <- peak resolution
+    5-6             46  (11%)   0.405
+    7                9   (2%)   0.000    <- the ceiling this section was built on
+
+**`lift` has least resolution at BOTH extremes and most in the middle.** So a
+dose-response treating lift as linear in charge assumes a monotone resolution
+the instrument does not have — which is a better account of the Q2/Q3 nulls than
+the ceiling was, and it is lacan's, not mine.
+
+The ceiling claim stands as bounded (9 frame-7 prompts, total there). What is
+withdrawn is the EMPHASIS: this panel's nulls are floor-bound far more than
+ceiling-bound, and the sexual example is the least representative case I could
+have chosen.
 
 **Only `sexual_v2_euphemism` discriminates**, and it runs with the movement —
 direct terms (1-2) fall, periphrastic (5-6) rise. `explicitness` and
