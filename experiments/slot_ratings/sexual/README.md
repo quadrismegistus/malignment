@@ -229,30 +229,53 @@ and it reaches all 50 sexual frames rather than the 8 with a gender partner.
     arm B   50 frames     362 rated words
     -> institutional/results/slotdomain/rated_sexual_slot_institutional_en_v3_arm{A,B}.json
 
-**THE RATINGS ARE USABLE. THE ANALYSIS OVER THEM IS NOT, AT n=4.** Every scale
-printed `(only 4 lineages)`. The cause is the defect this campaign has now hit in
-three folders:
+**AND THE ANALYSIS NOW RUNS AT 50 LINEAGES.** It first reported `(only 4
+lineages)` on every scale, because `run_slotdomain` imports `population` from
+`run_slotpov`, which took its panel from `displacement_axis/results/pilot3/
+cells.jsonl` -- 21 pairs, 4 clearing the gate. Repointed at `roster.endpoints()`
+and `movement_v4` (`c5537f2`), verified against `--pilot`.
 
-    sexual frames                                   50
-    pairs the analysis USED (pilot3 cell list)      21
-    endpoint pairs the STORE holds on those frames  50 of 50
+    ARM A, main effect, unit = lineage, rho vs signed verdict
 
-`run_slotdomain` imports `population` from `run_slotpov`, which takes its models
-from `CELLS` -- `displacement_axis/results/pilot3/cells.jsonl` -- exactly as
-`identity/base_side.py` did before 2026-09-05. It also calls `movement()` with no
-residual, the degraded path this folder's own `rate.py` was moved off for the
-same reason. Of the 21 pilot pairs only 4 clear the per-lineage gate (>=3 frames
-with >=10 rated words and a non-constant verdict).
+    arousal         -0.099   10/50   4.6e-07 *      procedural    +0.090  41/50  3.1e-08 *
+    assertiveness   -0.087    8/50   3.6e-08 *      deference     +0.079  41/50  2.0e-07 *
+    mediation       -0.076   14/48   4.2e-05 *      abstraction   +0.037  38/50  1.8e-05 *
+    agency          -0.057    9/50   8.8e-07 *
+    specificity     -0.053   10/50   9.9e-06 *      vocalisation  -0.018  18/50  0.16
+    target          -0.043   11/50   3.7e-07 *      delay         +0.009  26/50  0.074
+    termination     -0.022   20/50   0.0083 *       collective    +0.001  27/50  0.52
 
-**NOT FIXED HERE, DELIBERATELY.** `population()` is imported by BOTH
-`run_slotpov` (institutional's 6-frame POV study) and `run_slotdomain`, so
-repointing it at `roster.endpoints()` and `movement_v4` would move
-`slot_ratings/institutional`'s published numbers as a side effect. That is
-edit-inside on another question's artifact. The fix is the same one `identity`
-took and it belongs to whoever owns that folder, with its own reproduction check.
+**Ten of thirteen scales significant. Everything describing ACTING ON SOMETHING
+falls -- arousal, assertiveness, agency, specificity, target, termination -- and
+everything describing PROCEDURE OR DEFERENCE rises.**
 
-**So the deliverable here is the RATINGS, not a result.** Nothing in this README
-rests on the n=4 table and no number from it is quoted.
+### THIS IS THE `identity` PROFILE, ON SEXUAL FRAMES
+
+`slot_ratings/identity`'s `room` scene gives Muslims and Christians a signature
+of exactly this shape: `deference`, `procedural`, `abstraction` and `interiority`
+UP; `arousal`, `target`, `assertiveness`, `agency`, `termination` DOWN. **Six of
+those seven scales move the same way here, as a MAIN EFFECT over the whole sexual
+domain, with no identity term involved.**
+
+So the profile is not something alignment does to religious identity groups. It
+is what alignment does at a charged frame, and the identity result is that
+profile showing up hardest where the frame is a religious one. Two folders, two
+designs, one shape -- and neither was built to test the other.
+
+**`mediation` at -0.076 is the one scale this adds that `identity` does not
+measure**, and it moves with the acting-on-something cluster rather than the
+procedural one.
+
+**ARM B IS FLAT.** 41 lineages, nothing below p=0.18. Arm B asks about words
+ABSENT from the base and present in the aligned arm -- material alignment
+introduces rather than redistributes -- and on these frames it introduces nothing
+with a consistent profile. That is a real null on a different question, not a
+power failure: 41 lineages carried it.
+
+FENCES. This is a main-effect run on 50 frames with the FRAME as the unit; the
+gender-pair study above has the PAIR as its unit and neither substitutes for the
+other. The ratings are one model at one instrument version. Nothing here is
+registered.
 
 ## THE STUDY, AS RUN
 
