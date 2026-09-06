@@ -1,10 +1,17 @@
 ---
 subject: slot_ratings
-status: "OPEN, awaiting more lineages"
+status: "OPEN. The panel is NO LONGER the constraint -- all three questions ran at 20-33 lineages because their producers took the panel from a pilot cell list, not from the data; repointed at roster.endpoints() and movement_v4 on 2026-09-05/06 and all three now run at 50."
 kind: subject
 headline: "Pretraining lays down the field. Alignment operates on it rather than creating it."
 grain: word
 why: |
+  THE PANEL WAS NEVER THIN IN THE DATA (2026-09-06). Every question here read its
+  lineage list from displacement_axis/results/pilot3/cells.jsonl -- 21 endpoint
+  pairs -- while the store held all 50 for the same prompts. identity ran at 20,
+  sexual at 33, the slot POV study at 12. All three are now at 50. What follows
+  was written when that was believed to be a data limit and is kept for the rest
+  of its argument.
+
   The instruments are built and validated; what is thin is the panel they are read
   against. Per-lineage rho and its sign tests across frames are stable at the
   current n, but anything phrased as prediction or variance explained is bounded by
