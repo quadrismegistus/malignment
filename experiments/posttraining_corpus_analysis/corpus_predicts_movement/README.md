@@ -2,7 +2,7 @@
 kind: question
 id: corpus_predicts_movement
 question: Does the direction a preference corpus rewards predict the direction alignment actually moved the model it trained?
-status: "RUN 2026-09-07, both channels. The per-word transfer is the result: a PKU-learned word score predicts alignment movement in 47 of 49 lineages PKU NEVER TOUCHED (p=4.4e-12) and predicts the PKU-trained model least well (percentile 10), which is not movement magnitude (checked). The direction is generic to alignment, not transmitted from this corpus."
+status: "RUN 2026-09-07. A PKU-derived word score predicts alignment movement broadly and least in the model PKU trained; what carries it is PROCEDURAL NARRATION, not safety. WHERE it is installed is NOT SETTLED: pythia pretraining is flat and llama SFT moves +0.106, but Olmo-3 pretraining moves +0.049 and its whole SFT run is flat (p=1). The pretraining section's claim is withdrawn as stated."
 headline: "A PKU-derived word score predicts alignment movement in 43-46 of 49 lineages PKU never touched and least in the one it trained. But what carries it is PROCEDURAL NARRATION (then, took, put, called, left), not safety: the refusal register is absent from the slots measured (sorry 6/900, advisable 0/900). PKU's unsafe side is how-to instructions, so the score is substantially a score for instructional language."
 grain: lineage
 ---
@@ -445,6 +445,62 @@ family the alignment edges come from -- so "pretraining is flat" is n=1 and a
 cross-family assumption. The PKU score is one instrument. And a flat NET across
 142k steps is consistent with movement that cancels; the segment rows are shown
 for that reason rather than summarised away.
+
+## OLMO OVERTURNS THE PYTHIA READING (`olmo_ladders.py`, 2026-09-07)
+
+The Pythia section above concludes that posttraining installs the direction and
+pretraining does not. **Its own BOUNDS say Pythia is not the family the
+alignment edges came from, and that bound turns out to be the whole story.**
+
+RH: Olmo has both ladders. Same weights lineage, same tokenizer, prompts
+intersected across all rungs (400 of the 2,272 shared):
+
+    edge                               n    med rho     up/dn         p
+    PRETRAIN stage1 (1k -> 1.41M)    392    +0.0493   233/159   0.00022
+    BASE -> SFT step43000            341    +0.0000   170/170         1
+    BASE -> SFT step1000             325    -0.0301   148/176      0.13
+    SFT step1000 -> step43000        344    +0.0016   172/169      0.91
+    BASE -> Think end                338    +0.0017   172/165      0.74
+
+**In Olmo-3 the direction is built during PRETRAINING and posttraining does
+nothing to it.** That is the opposite of the Pythia result and it is measured
+inside one family, so it carries no cross-family assumption.
+
+**A design error was fixed on the way.** The first run compared SFT step1000 to
+step43000 -- WITHIN the SFT run -- and read the flat result as "posttraining
+does nothing". `llama-7b -> alpaca-7b` is base-to-SFT-endpoint, so the
+comparable edge is `stage3-step11921 -> SFT step43000`. It is also flat
+(+0.0000, p=1), so the conclusion survives, but it did not follow from what was
+first computed.
+
+### THE STATE, WHICH IS TWO FAMILIES DISAGREEING
+
+    pythia-6.9b   pretraining step1000 -> 143000     -0.0021  p=0.88   FLAT
+    llama-7b      SFT (base -> alpaca-7b)            +0.1058           MOVES
+    Olmo-3        pretraining stage1                 +0.0493  p=2e-4   MOVES
+    Olmo-3        base -> SFT endpoint               +0.0000  p=1      FLAT
+
+**So "where the direction is installed" is not settled and depends on the
+family.** The claim in the Pythia section -- *"posttraining installs a
+convergent direction that pretraining did not lay down"* -- IS WITHDRAWN as
+stated. It holds for the llama/Pythia generation and fails for Olmo-3.
+
+### THE HYPOTHESIS THIS SUGGESTS, WHICH IS NOT TESTED
+
+Pythia is 2023 on the Pile; Olmo-3 is 2025 on a corpus that contains far more
+instruction-like and assistant-register text. If the register is now IN
+pretraining data, a modern model arrives at posttraining already at the
+destination and SFT has nothing left to move on this axis, while a 2023 base
+does not and its SFT moves it a lot.
+
+**That is a story about corpora changing across model generations and NOTHING
+here tests it.** It would need the axis measured on pretraining corpora
+directly, not on models. Recorded as the obvious next question and not as a
+finding.
+
+One thing it is NOT: Olmo's annealing stage. If curated instruction data late in
+pretraining were doing the work, `stage1 -> stage3` would carry it. That edge is
+-0.0040, p=0.74. **The movement is in stage1, the main pretraining run.**
 
 ## WHAT THIS ANSWERS, AND WHAT IT DOES NOT
 
