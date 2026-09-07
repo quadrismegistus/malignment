@@ -61,8 +61,33 @@ MIN_COUNT = 20
 MIN_WORDS = 8
 
 
-def scores():
-    """{word: log-odds of the safer side}, plus the fitted-coefficient check."""
+def scores(mode="mixed"):
+    """{word: z-scored log-odds}. THE TARGET IS A CHOICE AND IT MATTERS.
+
+    RH, 2026-09-07: *"Why are we predicting labelled UNSAFE?"* The first run
+    used `pooled`, and **44.2% of PKU pairs have BOTH responses labelled
+    unsafe**, so on nearly half the data `safer_response_id` picks the LESS BAD
+    harmful response, which is still harmful. Another 41.2% are both-safe,
+    where the preference is style rather than safety. **Only 14.6% of pairs are
+    the regime where "safer" separates safe from unsafe.**
+
+        pooled    safer_response_id over all 73,907 pairs. What Safe RLHF
+                  actually optimises, so defensible as the training signal --
+                  but 85% of it is within-safety-class comparison.
+        mixed     THE CLEAN TARGET, and the default. The 10,813 pairs where
+                  exactly one response is labelled safe. Both answer the SAME
+                  PROMPT, so topic is controlled by construction.
+        absolute  is_response_N_safe over all 147,814 responses. **TRIED AND
+                  REJECTED**: safe and unsafe responses answer DIFFERENT
+                  prompts, so it learns topic. Its top "safe" words are
+                  `waste, animal, food, energy, pet, environmental` -- the
+                  subject matter of benign questions, not a stance. Kept
+                  selectable so the defect can be reproduced, never as default.
+
+    pooled and mixed correlate +0.739 and share their top words; absolute
+    correlates only +0.565 with pooled. The transfer result is the same under
+    pooled and mixed and BIGGER under mixed.
+    """
     import numpy as np
     import run as PKU
     assert hasattr(PKU, "k_ranks"), "imported the wrong run.py -- see did.py"
@@ -70,11 +95,20 @@ def scores():
     n = len(d["prompt"])
     good, bad = collections.Counter(), collections.Counter()
     for i in range(n):
-        s = d["safer_response_id"][i]
-        A = PKU.TOKEN.findall(d["response_0"][i].lower())
-        B = PKU.TOKEN.findall(d["response_1"][i].lower())
-        (good if s == 0 else bad).update(A)
-        (good if s == 1 else bad).update(B)
+        s0, s1 = d["is_response_0_safe"][i], d["is_response_1_safe"][i]
+        if mode == "absolute":
+            for c, ok in ((0, s0), (1, s1)):
+                (good if ok else bad).update(
+                    PKU.TOKEN.findall(d["response_%d" % c][i].lower()))
+            continue
+        if mode == "mixed":
+            if s0 == s1:
+                continue
+            g, b = (0, 1) if s0 else (1, 0)
+        else:
+            g = d["safer_response_id"][i]; b = 1 - g
+        good.update(PKU.TOKEN.findall(d["response_%d" % g][i].lower()))
+        bad.update(PKU.TOKEN.findall(d["response_%d" % b][i].lower()))
     vocab = [w for w in set(good) | set(bad)
              if good[w] + bad[w] >= MIN_COUNT]
     tg, tb = sum(good[w] for w in vocab), sum(bad[w] for w in vocab)
@@ -150,11 +184,15 @@ def sign_test(vals):
 def main(argv=None):
     ap = argparse.ArgumentParser()
     ap.add_argument("--score-only", action="store_true")
+    ap.add_argument("--score", default="mixed", choices=("mixed", "pooled", "absolute"),
+                    help="see scores(). mixed is the clean target and the default; "
+                         "absolute is topic-confounded and kept only to reproduce it")
     ap.add_argument("--prompts", type=int, default=900)
     a = ap.parse_args(argv)
     import numpy as np
-    lo, good, bad = scores()
-    print("per-word PKU log-odds over %d words (min count %d)" % (len(lo), MIN_COUNT))
+    lo, good, bad = scores(a.score)
+    print("per-word PKU log-odds, target=%s, %d words (min count %d)"
+          % (a.score, len(lo), MIN_COUNT))
     top = sorted(lo, key=lambda w: -lo[w])[:14]
     bot = sorted(lo, key=lambda w: lo[w])[:14]
     print("  SAFER side  : %s" % ", ".join(top))
@@ -203,10 +241,12 @@ def main(argv=None):
           % (t, below, len(cm), 100.0 * below / max(len(cm), 1)))
     print("  PLACEBO %+.4f" % res["PLACEBO"]["med"])
     os.makedirs(OUT, exist_ok=True)
-    json.dump(dict(rungs=res, control=[(m, b_, a_) for m, b_, a_ in meds],
+    fn = "word_transfer_%s.json" % a.score
+    json.dump(dict(score=a.score, rungs=res,
+                   control=[(m, b_, a_) for m, b_, a_ in meds],
                    n_words=len(lo), n_prompts=len(prompts)),
-              open(os.path.join(OUT, "word_transfer.json"), "w"), indent=1)
-    print("\n-> results/word_transfer.json")
+              open(os.path.join(OUT, fn), "w"), indent=1)
+    print("\n-> results/%s" % fn)
     return 0
 
 

@@ -283,6 +283,53 @@ the highest in the low-magnitude group. **A model tuned on a DIFFERENT preferenc
 corpus scores eight times higher on PKU's own direction than the model PKU
 trained.**
 
+## THE TARGET WAS WRONG AND THE CORRECTION MAKES IT BIGGER
+
+RH, 2026-09-07: *"Why are we predicting labelled UNSAFE?"* The first run scored
+on `safer_response_id` pooled over all 73,907 pairs, and that is a RELATIVE
+preference:
+
+    both UNSAFE   32,656   44.2%   "safer" = the LESS BAD harmful response
+    both safe     30,438   41.2%   "safer" = style, not safety
+    mixed         10,813   14.6%   "safer" = the safe one
+
+**85% of the signal was within-safety-class comparison**, which is why reading
+the passages found harmful compliances on the "safer" side -- a cyberbullying
+manual scoring on `consent` because it says *"without their consent"*, a drug
+distribution plan scoring on `illegal`.
+
+Three targets were built and compared (`--score`):
+
+    A pooled    cannot, serious, not, advisable, unfortunately, legal, sorry
+    B absolute  waste, i, local, animal, health, food, energy, medical, pet
+    C mixed     cannot, is, not, illegal, unfortunately, serious, instead, sorry
+
+    corr  A vs C +0.739 | A vs B +0.565 | B vs C +0.650
+
+**B, the obvious fix, is the worst of the three.** Pooling responses by their
+absolute label compares answers to DIFFERENT PROMPTS, so it learns subject
+matter: pets, recycling, food, energy. It is kept selectable only so that defect
+can be reproduced.
+
+**C is the clean target and is now the default**: the two responses answer the
+SAME prompt and exactly one is labelled safe, so topic is controlled by
+construction.
+
+### THE RESULT UNDER THE CLEAN TARGET
+
+    rung           n    med rho      up/dn           p
+    PLACEBO      890    +0.0690   662/228     9.8e-50
+    TREATED      889    +0.0191   507/382     3.1e-05
+    SPAN         890    +0.0690   648/242     1.7e-43
+
+    CONTROL  49 lineages, median-of-medians +0.0612, 46 up / 3 dn, p=7e-11
+             TREATED is above 5 of 49 -- percentile 10, unchanged
+
+Every effect grows (placebo +0.0390 -> +0.0690, control median +0.0497 ->
++0.0612) and the conclusion is unchanged: **the score predicts alignment
+movement broadly and predicts the PKU-trained model least well.** The
+mis-specified target was costing power, not manufacturing the result.
+
 ## WHAT THIS ANSWERS, AND WHAT IT DOES NOT
 
 **Answers RH's question for this trend: it is not an echo of the specific
