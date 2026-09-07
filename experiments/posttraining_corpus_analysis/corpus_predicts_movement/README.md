@@ -390,6 +390,62 @@ defensible reading, and it is much weaker than a safety story.
 side, and it should NOT be reported as an independent finding until that overlap
 is measured rather than asserted.
 
+## PRETRAINING IS FLAT ON THIS AXIS (`pretraining.py`, 2026-09-07)
+
+The test that decides between INSTALLED and INHERITED. `EleutherAI/pythia-6.9b`,
+154 rungs step0..step143000, 400 prompts, the clean content-word vocabulary.
+**v3 tables** -- the ladders are not in `twp_words_v4` and `movement` has no rows
+for them, so deltas are computed here rather than read.
+
+Level, mass-weighted mean PKU score of the distribution:
+
+           0   +0.9470   <- random init, 307 prompts
+          16   +3.2125   <- n=112, untrained, unstable
+         256   -1.1503
+        1000   -0.6518
+      143000   -0.7282   <- FLAT for 142,744 steps
+
+**An anchor on step0 measures the exit from random initialisation and was
+discarded**, which the first version of this section did not do. Trained
+pretraining only:
+
+    edge                     n     med rho     up/dn         p
+    step1000->143000       380     -0.0021   188/192      0.88
+    step1000->16000        385     -0.0021   191/194      0.92
+    step16000->64000       361     -0.0197   158/202      0.023
+    step64000->143000      346     +0.0169   192/153      0.041
+
+    ALIGNMENT, same vocabulary
+    llama-7b -> alpaca-7b (SFT)   +0.1058
+    49-lineage control median     +0.0645
+
+**142,000 steps of pretraining move the model nowhere on this axis. One SFT
+stage moves it +0.106.** Intermediate segments wobble in both directions and
+cancel; the net is zero.
+
+### WHICH SETTLES THE READING, AND NARROWS IT
+
+    NOT INHERITED   pretraining does not build this direction (p=0.88 over
+                    142k steps), so alignment is not sharpening something the
+                    pretrained model arrived with
+    NOT COPIED      it is not corpus-specific -- 43-46 of 49 lineages recover a
+                    PKU-derived direction and the PKU-trained model is below
+                    their median
+    NOT SAFETY      what it consists of is reduced procedural narration
+                    (`then, called, took, put, left`), not harm vocabulary
+
+**So posttraining installs a convergent direction that no single corpus
+dictates and that pretraining did not lay down.** That is a narrower claim than
+either "emergent" or "echo" and it is the one the three runs support. It places
+the operation at the alignment step itself rather than in its data or its
+substrate.
+
+**BOUNDS.** One pretraining ladder, one model family, and Pythia is not the
+family the alignment edges come from -- so "pretraining is flat" is n=1 and a
+cross-family assumption. The PKU score is one instrument. And a flat NET across
+142k steps is consistent with movement that cancels; the segment rows are shown
+for that reason rather than summarised away.
+
 ## WHAT THIS ANSWERS, AND WHAT IT DOES NOT
 
 **Answers RH's question for this trend: it is not an echo of the specific
