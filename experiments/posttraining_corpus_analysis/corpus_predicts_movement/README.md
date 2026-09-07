@@ -3,7 +3,7 @@ kind: question
 id: corpus_predicts_movement
 question: Does the direction a preference corpus rewards predict the direction alignment actually moved the model it trained?
 status: "RUN 2026-09-07, both channels. The per-word transfer is the result: a PKU-learned word score predicts alignment movement in 47 of 49 lineages PKU NEVER TOUCHED (p=4.4e-12) and predicts the PKU-trained model least well (percentile 10), which is not movement magnitude (checked). The direction is generic to alignment, not transmitted from this corpus."
-headline: "A direction learned from PKU is recovered by essentially every aligned model and LEAST by the one PKU trained -- a model tuned on a different preference corpus scores eight times higher on PKU's own direction. The refusal/disclaimer register is convergent across alignment procedures, not an echo of one dataset. Within the ladder the move sits at SFT, where U_ladder puts the cutting."
+headline: "A PKU-derived word score predicts alignment movement in 43-46 of 49 lineages PKU never touched and least in the one it trained. But what carries it is PROCEDURAL NARRATION (then, took, put, called, left), not safety: the refusal register is absent from the slots measured (sorry 6/900, advisable 0/900). PKU's unsafe side is how-to instructions, so the score is substantially a score for instructional language."
 grain: lineage
 ---
 
@@ -329,6 +329,66 @@ Every effect grows (placebo +0.0390 -> +0.0690, control median +0.0497 ->
 +0.0612) and the conclusion is unchanged: **the score predicts alignment
 movement broadly and predicts the PKU-trained model least well.** The
 mis-specified target was costing power, not manufacturing the result.
+
+## WHAT ACTUALLY CARRIES IT: NOT SAFETY, AND NOT REFUSAL
+
+RH, 2026-09-07: *"We don't have refusals in our data."* Correct, and it is
+decisive. Checked rather than argued -- how often the score's top SAFE words
+appear as continuations at all, over 900 prompts:
+
+    sorry        6 / 900        legal        1 / 900
+    advisable    0 / 900        instead     28 / 900
+
+**The refusal register is absent from the slots being measured**, so it cannot
+be what the correlation runs through. An earlier version of this section said
+the register "leaks into contexts where the speech act cannot occur". It does
+not, and that sentence was written from the score's extremes rather than from
+what carries it in the data.
+
+### THE FRAGMENTS WERE SUPPRESSING IT, NOT CREATING IT
+
+The vocabulary contained subword fragments -- `st`, `f`, `w`, `p`, `s` -- scored
+on their appearance as standalone tokens in PKU prose, which is meaningless.
+Removing them (len>=3, alphabetic) roughly DOUBLES every correlation:
+
+                        ALL      no fragments   content only
+    PLACEBO          +0.0690       +0.1277        +0.1058
+    TREATED          +0.0191       +0.0488        +0.0163
+    CONTROL median   +0.0612       +0.0820        +0.0645
+      lineages up     46/49         45/49          43/49
+    TREATED pctile       10            29             16
+
+**AND IT CORRECTS A CLAIM.** "TREATED is bottom-decile" was partly a fragment
+artifact. On the cleanest vocabulary it is percentile 29 -- still below the
+control median, but not what was written.
+
+### THE AXIS IS PROCEDURAL NARRATION
+
+Content words only, ranked by contribution to the correlation on
+`llama-7b -> beaver-7b`:
+
+    then, called, took, put, get, also, give, left, started, found,
+    make, later, hit, held, filled, quickly, carefully
+
+Nothing about harm; `hit` is the only faintly violent item. What they share is
+**concrete sequential action** -- the vocabulary of procedural narration.
+
+And that is the same axis on PKU's side, for a reason visible in the corpus: a
+harmful request gets a HOW-TO answer, so the unsafe side is instructional and
+sequential (`then`, `once`, `by`, `use`, `include`). A score built to separate
+safe from unsafe assistant responses is therefore SUBSTANTIALLY A SCORE FOR
+INSTRUCTIONAL LANGUAGE.
+
+**So the two sides line up on procedural register, not on harm.** That is the
+defensible reading, and it is much weaker than a safety story.
+
+### WHICH IS `norm_change`'s DE-CONCRETISATION, ARRIVED AT SIDEWAYS
+
+`then, took, put, called, left, hit` are concrete sequential acts, and
+`norm_change` already reports concreteness falling under dose (`k_concreteness`
+-0.1105, DOSE ONLY). This is plausibly the same effect reached from the corpus
+side, and it should NOT be reported as an independent finding until that overlap
+is measured rather than asserted.
 
 ## WHAT THIS ANSWERS, AND WHAT IT DOES NOT
 
