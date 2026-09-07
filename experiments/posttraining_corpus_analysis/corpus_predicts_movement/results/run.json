@@ -1,0 +1,323 @@
+{
+ "beta": {
+  "safer_response_id": {
+   "dims": [
+    "vulgarity",
+    "register_level",
+    "transgressiveness",
+    "charge",
+    "valence",
+    "bodily_harm",
+    "concreteness"
+   ],
+   "beta": [
+    -1.6584468912583787,
+    2.7352047367315637,
+    0.7577212563706286,
+    1.8559632625652263,
+    1.3715697963659832,
+    -1.3977033371936616,
+    -4.198474822509436
+   ],
+   "auc": 0.5810907656161067,
+   "null_mean": 0.49997860238326114,
+   "null_sd": 0.004127831463920603,
+   "n": 73907
+  },
+  "better_response_id": {
+   "dims": [
+    "vulgarity",
+    "register_level",
+    "transgressiveness",
+    "charge",
+    "valence",
+    "bodily_harm",
+    "concreteness"
+   ],
+   "beta": [
+    -0.7489097664620499,
+    2.607481125030324,
+    0.17585891934053272,
+    1.1768514267437165,
+    0.9946266697597712,
+    -1.002583691139642,
+    -2.5578096831448924
+   ],
+   "auc": 0.5491208975060211,
+   "null_mean": 0.49991817683201956,
+   "null_sd": 0.004142602981351019,
+   "n": 73907
+  }
+ },
+ "ladder": {
+  "PLACEBO": {
+   "median": -0.01523995189335483,
+   "n": 700,
+   "up": 329,
+   "dn": 371,
+   "p": 0.12116242310046937
+  },
+  "TREATED": {
+   "median": -0.007886359517726276,
+   "n": 700,
+   "up": 327,
+   "dn": 373,
+   "p": 0.08890099739373501
+  },
+  "SPAN": {
+   "median": -0.02416651267716138,
+   "n": 700,
+   "up": 326,
+   "dn": 374,
+   "p": 0.07558644877546422
+  }
+ },
+ "n_prompts": 700,
+ "control": [
+  [
+   -0.14909663161362868,
+   "tiiuae/Falcon-H1-7B-Base",
+   "tiiuae/Falcon-H1-7B-Instruct"
+  ],
+  [
+   -0.09781830090547955,
+   "google/recurrentgemma-9b",
+   "google/recurrentgemma-9b-it"
+  ],
+  [
+   -0.0906554738636272,
+   "tiiuae/Falcon-H1-1.5B-Base",
+   "tiiuae/Falcon-H1-1.5B-Instruct"
+  ],
+  [
+   -0.06024893622726224,
+   "google/gemma-2-9b",
+   "google/gemma-2-9b-it"
+  ],
+  [
+   -0.059242326253237665,
+   "TinyLlama/TinyLlama-1.1B-intermediate-step-1431k-3T",
+   "TinyLlama/TinyLlama-1.1B-Chat-v1.0"
+  ],
+  [
+   -0.0531746559304509,
+   "mistralai/Mistral-7B-v0.1",
+   "mistralai/Mistral-7B-Instruct-v0.1"
+  ],
+  [
+   -0.04962697611333861,
+   "LLM360/Amber",
+   "LLM360/AmberSafe"
+  ],
+  [
+   -0.04889820665302411,
+   "BAAI/Aquila2-7B",
+   "BAAI/AquilaChat2-7B"
+  ],
+  [
+   -0.04882950305912348,
+   "croissantllm/CroissantLLMBase",
+   "croissantllm/CroissantLLMChat-v0.1"
+  ],
+  [
+   -0.04064732084984585,
+   "HuggingFaceTB/SmolLM3-3B-Base",
+   "HuggingFaceTB/SmolLM3-3B"
+  ],
+  [
+   -0.03620061661752466,
+   "bigscience/bloom-7b1",
+   "bigscience/bloomz-7b1"
+  ],
+  [
+   -0.03604348708402834,
+   "internlm/internlm2-base-7b",
+   "internlm/internlm2-chat-7b"
+  ],
+  [
+   -0.02951434824227838,
+   "allenai/OLMoE-1B-7B-0125",
+   "allenai/OLMoE-1B-7B-0125-Instruct"
+  ],
+  [
+   -0.02536200888981368,
+   "BSC-LT/salamandra-7b",
+   "BSC-LT/salamandra-7b-instruct"
+  ],
+  [
+   -0.024373473368731156,
+   "HuggingFaceTB/SmolLM2-360M",
+   "HuggingFaceTB/SmolLM2-360M-Instruct"
+  ],
+  [
+   -0.010689261063581066,
+   "team-hatakeyama-phase2/Tanuki-8B-base-v1.0",
+   "weblab-GENIAC/Tanuki-8B-dpo-v1.0"
+  ],
+  [
+   -0.008963838688625572,
+   "allenai/Olmo-3-1125-32B",
+   "allenai/Olmo-3.1-32B-Instruct"
+  ],
+  [
+   -0.007193125678523327,
+   "RWKV/rwkv-4-7b-pile",
+   "RWKV/rwkv-raven-7b"
+  ],
+  [
+   -0.0064591306226408195,
+   "EleutherAI/pythia-2.8b",
+   "ContextualAI/archangel_sft-dpo_pythia2-8b"
+  ],
+  [
+   -0.006354616840627851,
+   "Zyphra/Zamba2-7B",
+   "Zyphra/Zamba2-7B-Instruct"
+  ],
+  [
+   -0.004411485912516372,
+   "llm-jp/llm-jp-3-7.2b",
+   "llm-jp/llm-jp-3-7.2b-instruct3"
+  ],
+  [
+   -0.003499618151421271,
+   "stabilityai/stablelm-2-1_6b",
+   "stabilityai/stablelm-2-1_6b-chat"
+  ],
+  [
+   -0.0033514332321993943,
+   "meta-llama/Llama-3.1-8B",
+   "meta-llama/Llama-3.1-8B-Instruct"
+  ],
+  [
+   -0.0007310925951705908,
+   "tiiuae/Falcon3-7B-Base",
+   "tiiuae/Falcon3-7B-Instruct"
+  ],
+  [
+   0.00015914563647377502,
+   "openbmb/MiniCPM5-1B-Base",
+   "openbmb/MiniCPM5-1B"
+  ],
+  [
+   0.0013272288398018667,
+   "01-ai/Yi-1.5-9B",
+   "01-ai/Yi-1.5-9B-Chat"
+  ],
+  [
+   0.0019513971722319532,
+   "allenai/Olmo-Hybrid-7B",
+   "allenai/Olmo-Hybrid-Instruct-DPO-7B"
+  ],
+  [
+   0.0044866577650377795,
+   "meta-llama/Llama-3.1-70B",
+   "meta-llama/Llama-3.1-70B-Instruct"
+  ],
+  [
+   0.004747540975535175,
+   "togethercomputer/RedPajama-INCITE-Base-7B-v0.1",
+   "togethercomputer/RedPajama-INCITE-7B-Chat"
+  ],
+  [
+   0.004942685968377016,
+   "allenai/OLMo-2-0425-1B",
+   "allenai/OLMo-2-0425-1B-Instruct"
+  ],
+  [
+   0.0077581160311844845,
+   "allenai/Olmo-3-1025-7B",
+   "allenai/Olmo-3-7B-Instruct"
+  ],
+  [
+   0.0103863196330466,
+   "tiiuae/falcon-mamba-7b",
+   "tiiuae/falcon-mamba-7b-instruct"
+  ],
+  [
+   0.012865777657832547,
+   "ibm-granite/granite-3.0-8b-base",
+   "ibm-granite/granite-3.0-8b-instruct"
+  ],
+  [
+   0.016756844447343367,
+   "tiiuae/falcon-7b",
+   "tiiuae/falcon-7b-instruct"
+  ],
+  [
+   0.022004869184692653,
+   "OpenLLM-France/Lucie-7B",
+   "OpenLLM-France/Lucie-7B-Instruct-v1.1"
+  ],
+  [
+   0.025568169752044755,
+   "Qwen/Qwen2.5-7B",
+   "Qwen/Qwen2.5-7B-Instruct"
+  ],
+  [
+   0.027165635889640178,
+   "m-a-p/CT-LLM-Base",
+   "m-a-p/CT-LLM-SFT-DPO"
+  ],
+  [
+   0.030810851728308844,
+   "deepseek-ai/deepseek-llm-7b-base",
+   "deepseek-ai/deepseek-llm-7b-chat"
+  ],
+  [
+   0.032863339651775174,
+   "Qwen/Qwen3-8B-Base",
+   "Qwen/Qwen3-8B"
+  ],
+  [
+   0.035090575159890974,
+   "EleutherAI/pythia-6.9b",
+   "lomahony/eleuther-pythia6.9b-hh-dpo"
+  ],
+  [
+   0.03600605650308371,
+   "gl198976/mpt-7b",
+   "gl198976/mpt-7b-instruct"
+  ],
+  [
+   0.03792337147129862,
+   "baichuan-inc/Baichuan2-7B-Base",
+   "baichuan-inc/Baichuan2-7B-Chat"
+  ],
+  [
+   0.03892058939917692,
+   "Qwen/Qwen2.5-0.5B",
+   "Qwen/Qwen2.5-0.5B-Instruct"
+  ],
+  [
+   0.04258944428423619,
+   "kakaocorp/kanana-2-3b-base",
+   "kakaocorp/kanana-2-3b-instruct"
+  ],
+  [
+   0.05935632302445818,
+   "inceptionai/jais-family-6p7b",
+   "inceptionai/jais-family-6p7b-chat"
+  ],
+  [
+   0.06992947735792429,
+   "zai-org/glm-4-9b-hf",
+   "zai-org/glm-4-9b-chat-hf"
+  ],
+  [
+   0.0920669142956293,
+   "m-a-p/neo_7b",
+   "m-a-p/neo_7b_instruct_v0.1"
+  ],
+  [
+   0.09271445461581065,
+   "openGPT-X/Teuken-7B-base-v0.6",
+   "openGPT-X/Teuken-7B-instruct-v0.6"
+  ],
+  [
+   0.5485620634993437,
+   "kakaocorp/kanana-1.5-8b-base",
+   "kakaocorp/kanana-1.5-8b-instruct-2505"
+  ]
+ ]
+}

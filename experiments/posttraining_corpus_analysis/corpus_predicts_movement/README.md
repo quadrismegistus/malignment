@@ -2,8 +2,8 @@
 kind: question
 id: corpus_predicts_movement
 question: Does the direction a preference corpus rewards predict the direction alignment actually moved the model it trained?
-status: "DESIGNED, NOT RUN, 2026-09-07. Nothing measured. The three rungs and both feature paths are verified present; see FEASIBILITY."
-headline: NONE STATED -- the design is written, nothing has been run.
+status: "RUN 2026-09-07. NULL: the norm-space direction PKU rewards does not predict how alignment moved the model PKU trained -- treated indistinguishable from a placebo stage and from 49 untouched lineages. BUT the channel is narrow: the 7 norm dims reach AUC 0.581 where unigram reaches 0.714, so the null bounds little."
+headline: "beta is real and length-independent (AUC 0.581 vs null 0.500) and its largest term is CONCRETENESS, which this folder predicted would be absent. The projection onto it is null at every rung. The ablation is the finding: unigram reaches 0.714, so PKU's preference signal is lexical rather than norm-shaped and the transfer ran through the wrong channel."
 grain: lineage
 ---
 
@@ -124,6 +124,99 @@ defect independently cost `displacement/displacement_axis` a full day.
 
 `randomise()` in the sibling folder is the null generator. Run it first, report
 real-minus-null, and never quote a raw AUC.
+
+---
+
+# THE RESULT (2026-09-07): NULL, AND THE CHANNEL IS TOO NARROW TO CLOSE IT
+
+## PHASE 1 -- BETA IS REAL, AND IT IS NOT LENGTH
+
+    safer_response_id, n=73,907 pairs, 70/30 split
+      AUC real 0.5811 | null mean 0.5000 sd 0.0041 | REAL MINUS NULL +0.0811
+
+The null was characterised first (200 label permutations) and the effect is ~20
+null-sds. The direction:
+
+    concreteness        -4.198        bodily_harm        -1.398
+    register_level      +2.735 [rep]  valence            +1.372
+    charge              +1.856        transgressiveness  +0.758
+    vulgarity           -1.658 [rep]
+
+`[rep]` = REPORTED ONLY, never evidence, per `../pku-safe-rlhf/`'s fence on
+`register_level` (IAA 0.597) and `vulgarity`.
+
+**And it is not the length confound**, which had to be checked because this
+README made length a covariate and then phase 1 fitted without it:
+
+    length only                  AUC 0.5651
+    K profile only               AUC 0.5811
+    K + length                   AUC 0.6040
+    K RESIDUALISED on length     AUC 0.5805    <- costs 0.0006
+
+Residualising K on length costs essentially nothing and the coefficients are
+unchanged, so beta is a length-independent direction.
+
+## THE PREDICTIONS, AND ONE IS REFUTED
+
+Recorded above before the run:
+
+- **"beta should load on `k_register_level`"** -- it does, +2.735, second
+  largest. But `register_level` is REPORTED-ONLY here, so this is an
+  observation and not a result. Scored as neither.
+- **"beta should NOT load on `k_concreteness`"** -- **REFUTED.**
+  `concreteness` is beta's LARGEST coefficient at -4.198, and the sign agrees
+  with `norm_change` (the corpus prefers less concrete; alignment reduces
+  concreteness under dose). On the corpus side concreteness is the most
+  echo-shaped dimension there is, and it is the one this file predicted would
+  be absent because `norm_change` classes it DOSE ONLY.
+
+## PHASE 2 AND 3 -- THE PROJECTION IS NULL
+
+700 prompts, projection of each stage's norm-profile movement onto beta:
+
+    stage      edge                                    n   median     up/dn      p
+    PLACEBO    llama-7b -> alpaca-7b-reproduced      700  -0.0152   329/371   0.12
+    TREATED    alpaca-7b-reproduced -> beaver-7b     700  -0.0079   327/373   0.089
+    SPAN       llama-7b -> beaver-7b-v1.0            700  -0.0242   326/374   0.076
+
+    PAIRED DiD, TREATED minus PLACEBO, per prompt
+      n=700  median +0.0074  mean +0.0004  367/333  sign p=0.212  Wilcoxon p=0.715
+
+    CONTROL   49 endpoint pairs PKU never touched
+      median-of-medians +0.0002, 25 up / 24 dn, p=1
+      TREATED sits at percentile 35 -- BELOW the median untouched lineage
+
+**The direction PKU rewards does not predict how alignment moved the model PKU
+trained.** The treated stage is not distinguishable from the placebo stage that
+never saw PKU, and it is not distinguishable from lineages PKU never touched.
+All three rungs drift slightly AGAINST beta and none significantly.
+
+## BUT THE CHANNEL IS TOO NARROW FOR THAT NULL TO CLOSE THE QUESTION
+
+    K-rank profile (7 dims)      AUC 0.5811
+    UNIGRAM tf-idf difference    AUC 0.7135
+
+**The ablation this README specified is the most important number here.** A bag
+of words recovers far more of PKU's preference structure than the seven norm
+dimensions do. So the corpus's signal is substantially LEXICAL and not
+norm-shaped, and the transfer was carried through a channel that explains a
+minority of it.
+
+**The correct reading is therefore narrow: the NORM-SPACE COMPONENT of PKU's
+preference direction does not reach the continuation distribution.** It is not
+"the corpus does not predict the movement", and it must not be quoted that way.
+A null through a channel this narrow bounds very little.
+
+## THE FOLLOW-UP THIS POINTS AT, NOT RUN
+
+Learn a **per-word log-odds** from PKU -- the unigram model's coefficients --
+and correlate it with the per-word `delta` in `movement_v4` on the same three
+rungs. That uses the 0.71 channel instead of the 0.58 one, and it matches grain
+exactly: a per-word corpus score against a per-word mass change. The word-level
+movement data is already there and needs no new rating.
+
+That is the version of this test worth believing, and this one is its
+underpowered first pass.
 
 ## WHAT THIS CANNOT ESTABLISH
 
