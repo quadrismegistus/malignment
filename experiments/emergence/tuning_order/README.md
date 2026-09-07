@@ -75,7 +75,9 @@ Per the registration's soft-border rule (§0) — RH: *"we will not let registra
 
 # STATED BOUNDS
 
-- **n=1 lineage, graded C.** Confirmed by query: the store holds exactly one SFT ladder; Olmo-3-base, Olmo-3-Think and Pythia-6.9b are all PRETRAINING ladders.
+- **n=1 lineage, graded C, and the obvious second ladder was checked and does not exist.** The store holds exactly one SFT step-ladder; Olmo-3-base, Olmo-3-Think and Pythia-6.9b are all PRETRAINING ladders. `TODO.md` nominates SmolLM3 as the likely second because it carries pretraining and post-training in one repo — **checked 2026-09-07 and it is not one.** Of its 133 branches, 118 are `stage*/step*` pretraining, 10 are `lc-*-step-*` long-context extension, and its post-training is **four named stage endpoints** (`it-mid-training`, `it-SFT`, `it-LC-expert`, `it-soup-APO`) with no intermediate SFT steps. So this bound is not liftable from that repo, and the search should not be repeated.
+
+  Two things SmolLM3 could still serve, neither pursued (RH, 2026-09-07: not worth it): the 10 `lc-*` rungs are continued training on a FLUENT model at 4,000-step spacing, which is the regime-entry control the amplification lead wants; and its four post-training endpoints are a finer stage trajectory than base/SFT/DPO on a recipe with **no DPO at all** (its card names APO).
 - **SFT only.** Nothing about DPO or RLVR — which matters, because the campaign's existing work puts violence repression at DPO.
 - **The timing result is the DISCOVERED arm.** The registered statistic was AUC; `timing.py` supersedes it on merit, not on registration.
 - **Two instruments disagree by 4× on magnitude** where they overlap (`specificity` −0.070 on v3's 430 prompts against −0.159 on v2's 60). Reported separately, not averaged, and not resolved.
