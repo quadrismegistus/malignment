@@ -2,8 +2,8 @@
 kind: question
 id: corpus_predicts_movement
 question: Does the direction a preference corpus rewards predict the direction alignment actually moved the model it trained?
-status: "RUN 2026-09-07. NULL: the norm-space direction PKU rewards does not predict how alignment moved the model PKU trained -- treated indistinguishable from a placebo stage and from 49 untouched lineages. BUT the channel is narrow: the 7 norm dims reach AUC 0.581 where unigram reaches 0.714, so the null bounds little."
-headline: "beta is real and length-independent (AUC 0.581 vs null 0.500) and its largest term is CONCRETENESS, which this folder predicted would be absent. The projection onto it is null at every rung. The ablation is the finding: unigram reaches 0.714, so PKU's preference signal is lexical rather than norm-shaped and the transfer ran through the wrong channel."
+status: "RUN 2026-09-07, both channels. The per-word transfer is the result: a PKU-learned word score predicts alignment movement in 47 of 49 lineages PKU NEVER TOUCHED (p=4.4e-12) and predicts the PKU-trained model least well (percentile 10), which is not movement magnitude (checked). The direction is generic to alignment, not transmitted from this corpus."
+headline: "A direction learned from PKU is recovered by essentially every aligned model and LEAST by the one PKU trained -- a model tuned on a different preference corpus scores eight times higher on PKU's own direction. The refusal/disclaimer register is convergent across alignment procedures, not an echo of one dataset. Within the ladder the move sits at SFT, where U_ladder puts the cutting."
 grain: lineage
 ---
 
@@ -217,6 +217,88 @@ movement data is already there and needs no new rating.
 
 That is the version of this test worth believing, and this one is its
 underpowered first pass.
+
+---
+
+# THE PER-WORD TRANSFER (2026-09-07): THE DIRECTION IS GENERIC, NOT TRANSMITTED
+
+`word_transfer.py`. The follow-up the section above specified, run: a word's PKU
+preference score against that same word's mass change in `movement_v4`. One
+grain, no profile averaging on either side, and the 0.71 channel instead of 0.58.
+
+## THE SCORE
+
+Z-scored log-odds of appearing in the SAFER response, 14,117 words at count>=20.
+**Raw log-odds was tried first and discarded**: its extremes were all rare
+technical nouns (`sumac`, `digitalis`, `hellebore` one way; `eyedropper`,
+`dichromate` the other), because a log-odds at count 20 is mostly sampling
+noise. Dividing by the standard error fixes it, and the result is legible:
+
+    SAFER : cannot, serious, is, not, advisable, unfortunately, we, instead,
+            legal, result, consequences, sorry, health, respect
+    OTHER : them, fake, using, false, then, use, include, by, trioxide,
+            accounts, tag, like, create, one
+
+That is the disclaimer register `../pku-safe-rlhf/` established, recovered
+independently at word grain.
+
+## THE RESULT
+
+Per-prompt Spearman between a word's PKU score and its delta, 900 prompts:
+
+    rung           n    med rho      up/dn           p   med resid
+    PLACEBO      890    +0.0390   595/295     4.5e-24     +0.0266
+    TREATED      890    +0.0155   506/384     4.9e-05     +0.0103
+    SPAN         890    +0.0419   604/285     4.1e-27     +0.0276
+
+    CONTROL   49 endpoint pairs PKU never touched
+      median-of-medians +0.0497, 47 up / 2 dn, p=4.4e-12
+      TREATED +0.0155 is above only 5 of 49 -- percentile 10
+
+**The PKU score predicts alignment movement almost everywhere, and predicts the
+PKU-trained model least well.** 47 of 49 lineages that never saw this corpus
+move in its direction. The one it actually trained sits in the bottom decile.
+
+`med resid` is the same statistic after regressing `log p_base` out of both
+sides: the effect keeps about two thirds of its size, so it is not word
+frequency read twice.
+
+## AND IT IS NOT THE MOVEMENT MAGNITUDE
+
+The TREATED rung is much the smallest move -- `sum|delta|` 743 against PLACEBO's
+1551, median |delta| 0.00023 against 0.00094 -- so its lower rho had to be
+checked against attenuation before anything was claimed:
+
+    Spearman(sum|delta|, rho) over the 49 controls = +0.159, p=0.275
+    controls with sum|delta| < 1200 (matched to TREATED's 743):
+        n=22, median rho +0.0496      TREATED +0.0155
+
+**Magnitude does not predict rho, and among magnitude-matched lineages TREATED
+is still far below the median.** The check strengthened the reading instead of
+dissolving it.
+
+One case makes the point on its own: `pythia-6.9b -> eleuther-pythia6.9b-hh-dpo`
+moves HALF as far as the treated rung (`sum|delta|` 376) and scores rho +0.1244,
+the highest in the low-magnitude group. **A model tuned on a DIFFERENT preference
+corpus scores eight times higher on PKU's own direction than the model PKU
+trained.**
+
+## WHAT THIS ANSWERS, AND WHAT IT DOES NOT
+
+**Answers RH's question for this trend: it is not an echo of the specific
+posttraining data.** A direction learned from PKU is recovered by essentially
+every aligned model in the roster, including 47 that never saw it. Whatever
+installs the refusal/disclaimer register is convergent across alignment
+procedures, not transmitted from one corpus.
+
+**It does NOT show the direction is uninherited from data in general.** The
+score is close to "disclaimer register versus instrumental register", which is
+plausibly what EVERY alignment corpus shares. "Not traceable to THIS corpus" and
+"not learned from data" are different claims and only the first is supported.
+
+**And within the ladder the move sits at SFT, not at the PKU stage** -- PLACEBO
++0.0390 against TREATED +0.0155, with SPAN (+0.0419) barely above PLACEBO. That
+is the same place `U_ladder` puts the cutting.
 
 ## WHAT THIS CANNOT ESTABLISH
 

@@ -1,0 +1,277 @@
+{
+ "rungs": {
+  "PLACEBO": {
+   "n": 890,
+   "med": 0.03903785961848742,
+   "up": 595,
+   "dn": 295,
+   "p": 4.5109042564417605e-24,
+   "med_resid": 0.026585016178030184
+  },
+  "TREATED": {
+   "n": 890,
+   "med": 0.015506094143748907,
+   "up": 506,
+   "dn": 384,
+   "p": 4.8688202935818613e-05,
+   "med_resid": 0.010268798509599109
+  },
+  "SPAN": {
+   "n": 890,
+   "med": 0.04191743541664924,
+   "up": 604,
+   "dn": 285,
+   "p": 4.112211687297836e-27,
+   "med_resid": 0.027614368874849422
+  }
+ },
+ "control": [
+  [
+   -0.04100545557740293,
+   "bigscience/bloom-7b1",
+   "bigscience/bloomz-7b1"
+  ],
+  [
+   -0.00831785964149168,
+   "gl198976/mpt-7b",
+   "gl198976/mpt-7b-instruct"
+  ],
+  [
+   0.0003343330500918791,
+   "BAAI/Aquila2-7B",
+   "BAAI/AquilaChat2-7B"
+  ],
+  [
+   0.0006776668529217284,
+   "EleutherAI/pythia-2.8b",
+   "ContextualAI/archangel_sft-dpo_pythia2-8b"
+  ],
+  [
+   0.011211679713409778,
+   "m-a-p/CT-LLM-Base",
+   "m-a-p/CT-LLM-SFT-DPO"
+  ],
+  [
+   0.01563970620574394,
+   "inceptionai/jais-family-6p7b",
+   "inceptionai/jais-family-6p7b-chat"
+  ],
+  [
+   0.018418060490774133,
+   "RWKV/rwkv-4-7b-pile",
+   "RWKV/rwkv-raven-7b"
+  ],
+  [
+   0.022989034332941645,
+   "openbmb/MiniCPM5-1B-Base",
+   "openbmb/MiniCPM5-1B"
+  ],
+  [
+   0.02756921578856391,
+   "togethercomputer/RedPajama-INCITE-Base-7B-v0.1",
+   "togethercomputer/RedPajama-INCITE-7B-Chat"
+  ],
+  [
+   0.032968628939405845,
+   "allenai/Olmo-3-1025-7B",
+   "allenai/Olmo-3-7B-Instruct"
+  ],
+  [
+   0.035158444450918966,
+   "zai-org/glm-4-9b-hf",
+   "zai-org/glm-4-9b-chat-hf"
+  ],
+  [
+   0.03545603588844275,
+   "internlm/internlm2-base-7b",
+   "internlm/internlm2-chat-7b"
+  ],
+  [
+   0.0372800209279182,
+   "OpenLLM-France/Lucie-7B",
+   "OpenLLM-France/Lucie-7B-Instruct-v1.1"
+  ],
+  [
+   0.0377565982404692,
+   "mistralai/Mistral-7B-v0.1",
+   "mistralai/Mistral-7B-Instruct-v0.1"
+  ],
+  [
+   0.0378994230087224,
+   "01-ai/Yi-1.5-9B",
+   "01-ai/Yi-1.5-9B-Chat"
+  ],
+  [
+   0.03848148055652502,
+   "Zyphra/Zamba2-7B",
+   "Zyphra/Zamba2-7B-Instruct"
+  ],
+  [
+   0.038570931393563226,
+   "tiiuae/falcon-7b",
+   "tiiuae/falcon-7b-instruct"
+  ],
+  [
+   0.03960691570489344,
+   "HuggingFaceTB/SmolLM2-360M",
+   "HuggingFaceTB/SmolLM2-360M-Instruct"
+  ],
+  [
+   0.04082894999832355,
+   "ibm-granite/granite-3.0-8b-base",
+   "ibm-granite/granite-3.0-8b-instruct"
+  ],
+  [
+   0.04115197315161345,
+   "allenai/Olmo-3-1125-32B",
+   "allenai/Olmo-3.1-32B-Instruct"
+  ],
+  [
+   0.04537934833013772,
+   "BSC-LT/salamandra-7b",
+   "BSC-LT/salamandra-7b-instruct"
+  ],
+  [
+   0.0463709144314768,
+   "tiiuae/falcon-mamba-7b",
+   "tiiuae/falcon-mamba-7b-instruct"
+  ],
+  [
+   0.04792187040970178,
+   "openGPT-X/Teuken-7B-base-v0.6",
+   "openGPT-X/Teuken-7B-instruct-v0.6"
+  ],
+  [
+   0.04961620348037894,
+   "HuggingFaceTB/SmolLM3-3B-Base",
+   "HuggingFaceTB/SmolLM3-3B"
+  ],
+  [
+   0.049666115883051795,
+   "team-hatakeyama-phase2/Tanuki-8B-base-v1.0",
+   "weblab-GENIAC/Tanuki-8B-dpo-v1.0"
+  ],
+  [
+   0.05199562830993138,
+   "tiiuae/Falcon-H1-7B-Base",
+   "tiiuae/Falcon-H1-7B-Instruct"
+  ],
+  [
+   0.05365580499900394,
+   "kakaocorp/kanana-2-3b-base",
+   "kakaocorp/kanana-2-3b-instruct"
+  ],
+  [
+   0.05601766409475672,
+   "TinyLlama/TinyLlama-1.1B-intermediate-step-1431k-3T",
+   "TinyLlama/TinyLlama-1.1B-Chat-v1.0"
+  ],
+  [
+   0.056777677767776764,
+   "Qwen/Qwen2.5-7B",
+   "Qwen/Qwen2.5-7B-Instruct"
+  ],
+  [
+   0.06069227121858701,
+   "Qwen/Qwen3-8B-Base",
+   "Qwen/Qwen3-8B"
+  ],
+  [
+   0.06297095223650542,
+   "Qwen/Qwen2.5-0.5B",
+   "Qwen/Qwen2.5-0.5B-Instruct"
+  ],
+  [
+   0.06609201033816506,
+   "allenai/Olmo-Hybrid-7B",
+   "allenai/Olmo-Hybrid-Instruct-DPO-7B"
+  ],
+  [
+   0.06755109964721288,
+   "baichuan-inc/Baichuan2-7B-Base",
+   "baichuan-inc/Baichuan2-7B-Chat"
+  ],
+  [
+   0.06956521739130435,
+   "deepseek-ai/deepseek-llm-7b-base",
+   "deepseek-ai/deepseek-llm-7b-chat"
+  ],
+  [
+   0.07065422246016867,
+   "llm-jp/llm-jp-3-7.2b",
+   "llm-jp/llm-jp-3-7.2b-instruct3"
+  ],
+  [
+   0.07508151353389514,
+   "tiiuae/Falcon3-7B-Base",
+   "tiiuae/Falcon3-7B-Instruct"
+  ],
+  [
+   0.07660861747662946,
+   "croissantllm/CroissantLLMBase",
+   "croissantllm/CroissantLLMChat-v0.1"
+  ],
+  [
+   0.08015673588920383,
+   "meta-llama/Llama-3.1-70B",
+   "meta-llama/Llama-3.1-70B-Instruct"
+  ],
+  [
+   0.08418339663591969,
+   "meta-llama/Llama-3.1-8B",
+   "meta-llama/Llama-3.1-8B-Instruct"
+  ],
+  [
+   0.08460339047046284,
+   "tiiuae/Falcon-H1-1.5B-Base",
+   "tiiuae/Falcon-H1-1.5B-Instruct"
+  ],
+  [
+   0.0879302458441888,
+   "stabilityai/stablelm-2-1_6b",
+   "stabilityai/stablelm-2-1_6b-chat"
+  ],
+  [
+   0.09095980615026558,
+   "m-a-p/neo_7b",
+   "m-a-p/neo_7b_instruct_v0.1"
+  ],
+  [
+   0.09509696901684332,
+   "LLM360/Amber",
+   "LLM360/AmberSafe"
+  ],
+  [
+   0.0955762434766525,
+   "google/recurrentgemma-9b",
+   "google/recurrentgemma-9b-it"
+  ],
+  [
+   0.10798222255328943,
+   "allenai/OLMo-2-0425-1B",
+   "allenai/OLMo-2-0425-1B-Instruct"
+  ],
+  [
+   0.12319214235112114,
+   "allenai/OLMoE-1B-7B-0125",
+   "allenai/OLMoE-1B-7B-0125-Instruct"
+  ],
+  [
+   0.1243940357942346,
+   "EleutherAI/pythia-6.9b",
+   "lomahony/eleuther-pythia6.9b-hh-dpo"
+  ],
+  [
+   0.1259421969706856,
+   "google/gemma-2-9b",
+   "google/gemma-2-9b-it"
+  ],
+  [
+   0.15843356275719228,
+   "kakaocorp/kanana-1.5-8b-base",
+   "kakaocorp/kanana-1.5-8b-instruct-2505"
+  ]
+ ],
+ "n_words": 14117,
+ "n_prompts": 900
+}
