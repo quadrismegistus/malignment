@@ -1,0 +1,19 @@
+M05-A's CRITERION, reproduced on tuning_order's sites
+  sites 507 | faller never persistently falls 0 | riser never rises 0
+  paired lag  n=505  median +0 steps  157 up/348 dn  p=0.0000  CI [+0, +0]
+  M05-A reported: n=44, median 0, p=0.97 (34 never fall, 41 never rise)
+  -> THE MEDIAN LAG OF 0 REPRODUCES.
+
+WHY: the criterion has almost no resolution at this spacing
+  fallers  n=505  fire at step 1000: 276 (55%)  median 1000  p90 9000
+  risers   n=505  fire at step 1000: 288 (57%)  median 1000  p90 16000
+  A word crossing below base at 1000 and doing most of its falling at
+  20,000 is scored onset=1000. It times the SIGN, not the MASS.
+
+SAME SITES, t_move (centre of mass of |movement|)
+  faller median 14987 | riser median 19674 | gap +4686 steps
+
+VERDICT: M05-A's AGGREGATE reading survives -- what falls completes,
+what rises does not, and keeps rising past the arm. What does not
+survive is the inference from the paired p=0.97 to 'no fall-then-rise
+sequence': that p is computed on a statistic with no resolution here.

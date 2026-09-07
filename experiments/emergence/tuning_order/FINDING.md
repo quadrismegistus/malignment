@@ -420,6 +420,55 @@ specific displacement pairs mostly do not.
 `kill` does something else entirely: amplified ~+35% at step 1000, down by 5000, a partial recovery at 8000-12000, settling ~85% below base. F04 described this as "down by 5000 then bouncing back by 20000" and the bump is there — but F04 **missed the initial amplification**, which is the larger part of the shape.
 
 **So the two words F04 treated as one phenomenon are two phenomena.** n=4 and n=13 — individual prompts, not populations, and this is a lead rather than a result.
+## CROSS-SEAT AUDIT: M05-A ASKED THIS FIRST, AND ITS PAIRED NULL DOES NOT SURVIVE
+
+**`meta/M05_emergence/findings/A_acquisition.md` asked F04's question on this
+same 43-rung ladder three weeks earlier** — its own words: *"the registered
+primary, F04's question at 43-rung power: does repression precede displacement
+within the SFT run?"* It is grade C and states *"no cross-seat audit yet"*.
+`experiments/TODO.md` ranks that audit as the highest-value item in its list.
+Producer `audit_m05a.py`.
+
+**The commission that produced this question asserted the snapshot held no
+SFT-ladder acquisition curve. That was wrong**, and `tuning_order` re-ran work
+that existed — landing on the right target by accident.
+
+    M05-A     paired per-site, persistent-sign onsets: median lag 0,
+              Wilcoxon p=0.97, n=44 with both onsets (34 never persistently
+              fall, 41 never persistently rise)
+    here      t_move: faller 15,126, riser 19,796, +5,341 steps, 506 of 507
+
+**Their criterion reproduces their null on our data.** Ported from
+`m05_onsets.py` — *"first rung where (p − base) takes the predicted sign and
+keeps it"* — it returns **median lag +0** on our 505 sites. So neither result is
+an arithmetic mistake, and the disagreement is locatable:
+
+    PERSISTENT-SIGN ONSET, our sites
+      fallers  fire at step 1000: 276 of 505 (55%)   median onset 1000
+      risers   fire at step 1000: 288 of 505 (57%)   median onset 1000
+
+**The criterion fires at the FIRST RUNG for the majority, so the paired lag is 0
+by construction.** A word that crosses below base at step 1000 and does most of
+its falling at step 20,000 is scored onset=1000. It times **when the sign
+settles**, not when the mass moves. On the same sites `t_move` gives faller
+14,987 against riser 19,674.
+
+**Note the two failure modes are separable, and the second is the one that
+matters.** On M05-A's own population the criterion additionally discarded 75 of
+~105 sites; on ours it discards **zero** — our sites are endpoint-defined under
+CANONICAL, so a faller has fallen by step 43,000 by construction — and it *still*
+returns lag 0. So the null does not depend on the discards.
+
+**M05-A's aggregate reading survives and we agree with it.** Its Result 1 —
+fallers reach onset at SFT step 27,000 while risers never clear the base envelope
+within the arm and keep rising through DPO and RLVR — is the same direction as
+ours, and its gloss (*"the substitute does not arrive after the prohibition — it
+never stops arriving"*) is untouched.
+
+**What does not survive is the inference from p=0.97 to "there is no
+fall-then-rise sequence at site grain."** That p is computed on a statistic with
+no resolution at this ladder's spacing.
+
 ## WHAT SHOULD NOT BE CITED
 
 - **Anything about SFT in general.** n=1 lineage, graded C — the store holds exactly one SFT ladder.
@@ -431,5 +480,6 @@ specific displacement pairs mostly do not.
 - **F04's exhibits.** `fuck -> kiss` is refuted, `kill -> scream` holds only on the anger prompts, `kill -> said` is untestable here. Only the GENERAL claim replicates.
 - **"29.5% of fallers amplify" as a finding.** It is 29.5% against a 22.6% riser baseline, and the rate asymmetry is 6.9pp. The magnitude asymmetry is the result; the rate is nearly the null.
 - **The excursion as a property of SFT time.** It occurs at ONE transition, the one crossing into fine-tuning, and never recurs. Whether it is about fine-tuning or about regime change is untested.
+- **M05-A's paired per-site null (p=0.97) as evidence against a fall-then-rise sequence.** Its criterion fires at the first rung for ~55% of sites; the lag is 0 by construction. Its AGGREGATE result is unaffected and we agree with it.
 - **The Q1 AUC numbers for anything.** Kept above as a record of what the selection cost.
 - **The timing result as DISPLACEMENT.** Fallers and risers have the same median charge (+0.000 both). The two-phase timing is established; that mass moves from charged to uncharged words is NOT, except weakly on the sexual subset where 66% of prompts have a sexual riser anyway.
