@@ -244,6 +244,11 @@ independently at word grain.
 
 ## THE RESULT
 
+**THESE ARE THE POOLED-TARGET, ALL-VOCABULARY NUMBERS AND THEY ARE SUPERSEDED
+TWICE BELOW** -- first by the target correction, then by stripping subword
+fragments. The current figures are 43-45 of 49 with larger correlations. Kept
+because the two corrections are only legible against what they corrected.
+
 Per-prompt Spearman between a word's PKU score and its delta, 900 prompts:
 
     rung           n    med rho      up/dn           p   med resid
@@ -390,7 +395,10 @@ defensible reading, and it is much weaker than a safety story.
 side, and it should NOT be reported as an independent finding until that overlap
 is measured rather than asserted.
 
-## PRETRAINING IS FLAT ON THIS AXIS (`pretraining.py`, 2026-09-07)
+## PYTHIA'S PRETRAINING IS FLAT ON THIS AXIS (`pretraining.py`, 2026-09-07)
+
+**SCOPE: PYTHIA ONLY. Olmo-3's pretraining is NOT flat** -- see the Olmo
+section below, which overturns the conclusion this section draws.
 
 The test that decides between INSTALLED and INHERITED. `EleutherAI/pythia-6.9b`,
 154 rungs step0..step143000, 400 prompts, the clean content-word vocabulary.
@@ -423,28 +431,31 @@ pretraining only:
 stage moves it +0.106.** Intermediate segments wobble in both directions and
 cancel; the net is zero.
 
-### WHICH SETTLES THE READING, AND NARROWS IT
+### WHAT THIS SECTION CONCLUDED, AND WHY IT IS WITHDRAWN
 
-    NOT INHERITED   pretraining does not build this direction (p=0.88 over
-                    142k steps), so alignment is not sharpening something the
-                    pretrained model arrived with
-    NOT COPIED      it is not corpus-specific -- 43-46 of 49 lineages recover a
-                    PKU-derived direction and the PKU-trained model is below
-                    their median
-    NOT SAFETY      what it consists of is reduced procedural narration
-                    (`then, called, took, put, left`), not harm vocabulary
+**KEPT AS WRITTEN AND STRUCK, because the withdrawal is the record.** On Pythia
+alone this section concluded:
 
-**So posttraining installs a convergent direction that no single corpus
-dictates and that pretraining did not lay down.** That is a narrower claim than
-either "emergent" or "echo" and it is the one the three runs support. It places
-the operation at the alignment step itself rather than in its data or its
-substrate.
+> *"So posttraining installs a convergent direction that no single corpus
+> dictates and that pretraining did not lay down... It places the operation at
+> the alignment step itself rather than in its data or its substrate."*
 
-**BOUNDS.** One pretraining ladder, one model family, and Pythia is not the
-family the alignment edges come from -- so "pretraining is flat" is n=1 and a
-cross-family assumption. The PKU score is one instrument. And a flat NET across
-142k steps is consistent with movement that cancels; the segment rows are shown
-for that reason rather than summarised away.
+Its own BOUNDS paragraph said the weakness: *"Pythia is not the family the
+alignment edges come from -- so 'pretraining is flat' is n=1 and a cross-family
+assumption."* **The bound was stated and then reasoned past within the hour.**
+`olmo_ladders.py` measured both phases inside ONE family and found Olmo-3's
+pretraining moving +0.0493 (p=2e-4) with its whole SFT run flat (p=1).
+
+**WITHDRAWN: "pretraining did not lay it down".** Two of the three legs stand
+and are unaffected by the Olmo run:
+
+    NOT COPIED   not corpus-specific -- 43-46 of 49 lineages recover a
+                 PKU-derived direction and the PKU-trained model is below
+                 their median
+    NOT SAFETY   what it consists of is reduced procedural narration
+                 (`then, called, took, put, left`), not harm vocabulary
+
+The third leg -- WHERE it is installed -- is open and family-dependent.
 
 ## OLMO OVERTURNS THE PYTHIA READING (`olmo_ladders.py`, 2026-09-07)
 
@@ -504,20 +515,27 @@ pretraining were doing the work, `stage1 -> stage3` would carry it. That edge is
 
 ## WHAT THIS ANSWERS, AND WHAT IT DOES NOT
 
-**Answers RH's question for this trend: it is not an echo of the specific
-posttraining data.** A direction learned from PKU is recovered by essentially
-every aligned model in the roster, including 47 that never saw it. Whatever
-installs the refusal/disclaimer register is convergent across alignment
-procedures, not transmitted from one corpus.
+**Answers RH's question for this trend: it is not an echo of the SPECIFIC
+posttraining data.** A direction learned from PKU is recovered by 43 to 45 of
+the 49 aligned lineages that never saw it, and the PKU-trained model sits below
+their median. Whatever produces it is convergent across alignment procedures
+rather than transmitted from one corpus.
 
-**It does NOT show the direction is uninherited from data in general.** The
-score is close to "disclaimer register versus instrumental register", which is
-plausibly what EVERY alignment corpus shares. "Not traceable to THIS corpus" and
-"not learned from data" are different claims and only the first is supported.
+**It is NOT the refusal register.** An earlier version of this section said so.
+The score's refusal vocabulary barely occurs in the slots measured (`sorry`
+6/900 prompts, `advisable` 0/900), and what carries the correlation is
+procedural narration. The corpus side is instructional because a harmful
+request gets a HOW-TO answer, so the score is substantially a score for
+instructional language and the two sides meet on register, not on harm.
 
-**And within the ladder the move sits at SFT, not at the PKU stage** -- PLACEBO
-+0.0390 against TREATED +0.0155, with SPAN (+0.0419) barely above PLACEBO. That
-is the same place `U_ladder` puts the cutting.
+**It does NOT show the direction is uninherited from data in general.** "Not
+traceable to THIS corpus" and "not learned from data" are different claims and
+only the first is supported.
+
+**And WHERE it is installed is unsettled.** On the llama ladder the move is at
+SFT -- placebo +0.1058 against treated +0.0163 on the clean vocabulary, the same
+place `U_ladder` puts the cutting. On Olmo-3 the move is in PRETRAINING and the
+SFT run is flat. Two families, two answers; see the Olmo section.
 
 ## WHAT THIS CANNOT ESTABLISH
 
