@@ -123,14 +123,16 @@ and the state the first version of the checker could not see.
 
 ### posttraining_corpus_analysis
 
+- **[`corpus_predicts_movement/`](posttraining_corpus_analysis/corpus_predicts_movement/README.md)** -- `RUN 2026-09-07. A PKU-derived word score predicts alignment movement broadly and least in the model PKU trained; what carries it is PROCEDURAL NARRATION, not [...]`  
+  A PKU-derived word score predicts alignment movement in 43-46 of 49 lineages PKU never touched and least in the one it trained. But what carries it is PROCEDURAL NARRATION (then, took, put, called, left), not safety: the refusal register is absent from the slots measured (sorry 6/900, advisable 0/900). PKU's unsafe side is how-to instructions, so the score is substantially a score for instructional language.
 - **[`hh-rlhf/`](posttraining_corpus_analysis/hh-rlhf/README.md)** -- `RUN, EXPLORATORY. [...]`  
   hh-rlhf's chosen/rejected axis is largely ENGAGE versus DEFLECT, and its direction INVERTS between the two arms.
 - **[`lexical_axes/`](posttraining_corpus_analysis/lexical_axes/README.md)** -- `RUN. [...]`  
   RH's pre-registered prediction -- FAIL or NARROW PASS -- holds on the corrected vector.
 - **[`pku-safe-rlhf/`](posttraining_corpus_analysis/pku-safe-rlhf/README.md)** -- `COMPLETE except one control. [...]`  
   Where one response appends a disclaimer and the other does not, and BOTH responses are labelled unsafe, annotators judge the disclaiming one safer 68% of the time — with the advice unchanged.
-- **[`tulu3-safety-slice/`](posttraining_corpus_analysis/tulu3-safety-slice/README.md)** -- `REGISTERING. [...]`  
-  NONE STATED
+- **[`tulu3-safety-slice/`](posttraining_corpus_analysis/tulu3-safety-slice/README.md)** -- `REGISTERED, NOT RUN, AND ITS ONE CONFIRMATORY ARM HAS NO VALID POPULATION (amendment A1): the slice holds no pairwise preference data, so PKU's disclaimer test [...]`  
+  The confirmatory arm died on availability, not on a verdict. What the slice contains was measured next door: wildjailbreak ships 100% VANILLA prompts (AI2 built 161,430 adversarial jailbreaks and included none), and the mixture's leniency is about FICTION rather than about any kind of content.
 - **[`tulu3-slice-charge/`](posttraining_corpus_analysis/tulu3-slice-charge/README.md)** -- `FULL RUN 2026-09-06: 21,240 exchanges, three strata, 0 errors, v3 instrument. [...]`  
   The Tulu-3 SFT mixture is lenient about FICTION, not about sex: a charged request wrapped in fiction is refused 1.4% of the time against 86.9% otherwise. Controlling for fiction, no charged kind is treated leniently except by degree. WildChat is the sexually densest source at 9.4% and every maths, code and persona source is 0.0%, which is data_ablations' model-side prediction recovered from the corpus.
 - **[`ultrafeedback/`](posttraining_corpus_analysis/ultrafeedback/README.md)** -- `RUN. [...]`  

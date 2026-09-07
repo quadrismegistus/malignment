@@ -2,9 +2,9 @@
 stub: true
 stub_written_by: dario, 2026-08-21, from the folder's own files
 question: What is IN the Tulu 3 safety slice, given that removing it cost nothing?
-status: "REGISTERING. REGISTERED, NOT RUN. Frozen 2026-08-18, before any data was downloaded."
+status: "REGISTERED, NOT RUN, AND ITS ONE CONFIRMATORY ARM HAS NO VALID POPULATION (amendment A1): the slice holds no pairwise preference data, so PKU's disclaimer test cannot be run here at all. Data downloaded 2026-08-18. The CONTENT question it exists for was answered elsewhere on 2026-09-06 -- see ../tulu3-slice-charge/."
 kind: question
-headline: NONE STATED
+headline: "The confirmatory arm died on availability, not on a verdict. What the slice contains was measured next door: wildjailbreak ships 100% VANILLA prompts (AI2 built 161,430 adversarial jailbreaks and included none), and the mixture's leniency is about FICTION rather than about any kind of content."
 ---
 
 # tulu3-safety-slice
