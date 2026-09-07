@@ -1,7 +1,7 @@
 ---
 kind: question
-status: RUN 2026-09-06. All three registered arms plus four discovered ones. Registration frozen at 6c238ff, amended §5a
-headline: What leaves, leaves early and what arrives arrives late (506 of 507 prompts) — and among the leavers, the charged and concrete go first
+status: RUN 2026-09-06/07. Three registered arms, five discovered ones, and a cross-seat audit that overturns M05-A's paired null. Registration frozen at 6c238ff, amended §5a
+headline: What leaves, leaves early and what arrives arrives late (506 of 507 prompts), the charged and concrete leaving first — and M05-A asked this first, its aggregate standing and its p=0.97 not
 grain: rung x word, prompts as the replicate within one lineage
 ---
 # tuning_order
@@ -70,6 +70,8 @@ Per the registration's soft-border rule (§0) — RH: *"we will not let registra
     f04_spirit.py      F04's pair structure (charged faller, uncharged riser)
     curves_fk.py       per-word trajectories for fuck and kill
     examples_kind.py   matched NONE / SEXUAL cases
+    audit_m05a.py      cross-seat audit of M05-A: reproduces its null with its
+                       own criterion, then locates it
 
     results/           every producer's output as run
 
@@ -81,4 +83,5 @@ Per the registration's soft-border rule (§0) — RH: *"we will not let registra
 - **SFT only.** Nothing about DPO or RLVR — which matters, because the campaign's existing work puts violence repression at DPO.
 - **The timing result is the DISCOVERED arm.** The registered statistic was AUC; `timing.py` supersedes it on merit, not on registration.
 - **Two instruments disagree by 4× on magnitude** where they overlap (`specificity` −0.070 on v3's 430 prompts against −0.159 on v2's 60). Reported separately, not averaged, and not resolved.
+- **M05-A `A_acquisition` asked this question first**, on this ladder, three weeks earlier. `audit_m05a.py` reproduces its paired null with its own criterion and locates it as a resolution artefact — the criterion fires at the first rung for ~55% of sites. **Its aggregate reading survives and is corroborated here**; only the inference from p=0.97 to "no fall-then-rise sequence" does not. Disposition is the registrar's.
 - **The `scene` ceiling is a finding about `charge.py`**, which other experiments depend on. Bounded here to the 9 frame-7 prompts where it is total; whether it bites elsewhere is not this question's to assert.
