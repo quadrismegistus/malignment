@@ -2438,3 +2438,189 @@ provenance_notes:
     - deepseek-ai/DeepSeek-R1-Distill-Qwen-7B
     - microsoft/Phi-4-reasoning-plus
     - microsoft/phi-4-reasoning
+
+# ---------------------------------------------------------------------------
+# ORG -> LAB AND COUNTRY.  AUTHORED, added 2026-09-08.
+#
+# WHY THIS BLOCK EXISTS.  `country` was carried on the NODE and reached 43 of
+# 160 entries in the year after the file was written.  The fact is a property of
+# the ORG (46 of them, 34 with base models), so node grain made it a chore
+# nobody finished and gave nothing that could report itself incomplete.  RH,
+# 2026-09-08: "we've asked agents to identify country like 3 times so far, do we
+# need to do it again."  The answer was no -- not at that grain.
+#
+# THE NODE-LEVEL `country:` KEYS ARE LEFT IN PLACE AND ARE NOW REDUNDANT.  They
+# were checked against this block and conflict on none of the 12 orgs that
+# carried one.  Read country from here; a node key is a fossil, not an override.
+#
+# THREE ENTRIES ARE RULINGS, NOT LOOKUPS (RH, 2026-09-08):
+#   LLM360      [US, AE]     Petuum (Pittsburgh) and MBZUAI (Abu Dhabi) jointly
+#   RWKV        [none]       a community project with no national home
+#   bigscience  [FR, none]   multinational workshop, HF-led, trained on French
+#                            public infrastructure; France by compute, stateless
+#                            by membership
+#
+# `none` IS A VALUE, NOT A MISSING FIELD -- a decided fact about a stateless
+# producer.  `unknown` is the missing one.  Anything counting countries must
+# exclude `none` or say that it did not: the census is 10 COUNTRIES, and 11 is
+# only reachable by counting `none` as one, which it is not.
+#
+# TWO ORGS ARE MIRRORS AND ARE NOT LABS.  `huggyllama` re-uploads Meta's LLaMA-1
+# (Meta is separately present as `meta-llama`); `gl198976` mirrors MosaicML's
+# MPT, whose own repo is gone -- so MosaicML is a real lab appearing ONLY under a
+# personal account.  34 org strings, 33 LABS.  `Alchan` is the same kind of
+# account for mpt-7b-chat.  See `provenance_notes.org_renames` for
+# THUDM -> zai-org: org strings are not stable identities over time.
+#
+# GATE: `scripts/model_census.py --check` fails if a BASE-BEARING org is absent
+# or `unknown`.  Orgs appearing only as aligned checkpoints may be `unknown`,
+# because no census claim rests on them.
+orgs:
+  "01-ai":
+    lab: "01.AI"
+    country: ["CN"]
+  "Alchan":
+    lab: "unknown"
+    country: ["unknown"]
+    note: "mirror account for mpt-7b-chat; not a lab"
+  "Aleph-Alpha":
+    lab: "Aleph Alpha"
+    country: ["DE"]
+  "BAAI":
+    lab: "Beijing Academy of AI"
+    country: ["CN"]
+  "BSC-LT":
+    lab: "Barcelona Supercomputing Center"
+    country: ["ES"]
+  "ContextualAI":
+    lab: "Contextual AI"
+    country: ["US"]
+  "EleutherAI":
+    lab: "EleutherAI"
+    country: ["US"]
+  "HuggingFaceH4":
+    lab: "Hugging Face"
+    country: ["US"]
+  "HuggingFaceTB":
+    lab: "Hugging Face"
+    country: ["US"]
+  "LLM360":
+    lab: "Petuum / MBZUAI"
+    country: ["US", "AE"]
+    note: "RULING - joint, both recorded"
+  "NousResearch":
+    lab: "Nous Research"
+    country: ["US"]
+  "OpenLLM-France":
+    lab: "OpenLLM France"
+    country: ["FR"]
+  "PKU-Alignment":
+    lab: "Peking University"
+    country: ["CN"]
+  "Qwen":
+    lab: "Alibaba"
+    country: ["CN"]
+  "RWKV":
+    lab: "RWKV community"
+    country: ["none"]
+    note: "RULING - no national home"
+  "TinyLlama":
+    lab: "SUTD StatNLP"
+    country: ["SG"]
+  "Zyphra":
+    lab: "Zyphra"
+    country: ["US"]
+  "allenai":
+    lab: "Allen Institute for AI"
+    country: ["US"]
+  "baichuan-inc":
+    lab: "Baichuan"
+    country: ["CN"]
+  "bigscience":
+    lab: "BigScience workshop"
+    country: ["FR", "none"]
+    note: "RULING - FR by compute, stateless by membership"
+  "cognitivecomputations":
+    lab: "Cognitive Computations"
+    country: ["unknown"]
+    note: "community account; no base model in the roster"
+  "croissantllm":
+    lab: "CroissantLLM"
+    country: ["FR"]
+  "deepseek-ai":
+    lab: "DeepSeek"
+    country: ["CN"]
+  "gl198976":
+    lab: "MosaicML"
+    country: ["US"]
+    note: "MIRROR of MosaicML's MPT; the mosaicml repo is gone"
+  "google":
+    lab: "Google"
+    country: ["US"]
+  "huggyllama":
+    lab: "Meta"
+    country: ["US"]
+    note: "MIRROR of Meta's LLaMA-1; collapses into meta-llama"
+  "ibm-granite":
+    lab: "IBM"
+    country: ["US"]
+  "inceptionai":
+    lab: "Inception / G42"
+    country: ["AE"]
+  "internlm":
+    lab: "Shanghai AI Laboratory"
+    country: ["CN"]
+  "kakaocorp":
+    lab: "Kakao"
+    country: ["KR"]
+  "llm-jp":
+    lab: "LLM-jp"
+    country: ["JP"]
+  "lomahony":
+    lab: "unknown"
+    country: ["unknown"]
+    note: "personal academic account; no base model in the roster"
+  "m-a-p":
+    lab: "M-A-P"
+    country: ["CN"]
+  "meta-llama":
+    lab: "Meta"
+    country: ["US"]
+  "microsoft":
+    lab: "Microsoft"
+    country: ["US"]
+  "mistralai":
+    lab: "Mistral AI"
+    country: ["FR"]
+  "openGPT-X":
+    lab: "OpenGPT-X"
+    country: ["DE"]
+  "openbmb":
+    lab: "ModelBest / OpenBMB"
+    country: ["CN"]
+  "openchat":
+    lab: "OpenChat"
+    country: ["unknown"]
+    note: "community account; no base model in the roster"
+  "stabilityai":
+    lab: "Stability AI"
+    country: ["UK"]
+  "team-hatakeyama-phase2":
+    lab: "Hatakeyama team (GENIAC)"
+    country: ["JP"]
+  "teknium":
+    lab: "unknown"
+    country: ["unknown"]
+    note: "personal account; no base model in the roster"
+  "tiiuae":
+    lab: "Technology Innovation Institute"
+    country: ["AE"]
+  "togethercomputer":
+    lab: "Together AI"
+    country: ["US"]
+  "weblab-GENIAC":
+    lab: "U-Tokyo weblab (GENIAC)"
+    country: ["JP"]
+  "zai-org":
+    lab: "Zhipu AI"
+    country: ["CN"]
