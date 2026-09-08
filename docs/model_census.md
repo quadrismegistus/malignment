@@ -78,11 +78,22 @@ producers (RWKV, and BigScience's membership half).
 
 ## WHAT THIS DOES NOT SETTLE
 
-**Architecture.** `model_type` over the 50 bases gives **17 distinct**
-(llama 19, gpt_neox 3, qwen2 2, qwen3 2, then singletons), and 11 configs
-need `trust_remote_code` to read at all. A four-way taxonomy — dense / MoE
-/ SSM-hybrid / RNN — is defensible but nobody has authored it, so **do not
-write "four architectures" until it exists**; it is not derivable today.
+**Architecture — a proposal, not a retrieval.** Fetching `config.json`
+directly reads all 50 with no code execution and gives **26 distinct**
+`model_type`. A four-way grouping partitions them exactly:
+
+    dense transformer     42   llama 19, gpt_neox 3, qwen2/3 4, olmo2/3 3
+    attention/SSM hybrid   4   Falcon-H1 x2, Zamba2, Olmo-Hybrid
+    recurrent / SSM-only   3   falcon-mamba, recurrentgemma, rwkv
+    mixture-of-experts     1   OLMoE
+
+Each non-dense case is evidenced in its own config (`hybrid_layer_ids`,
+`attn_layer_indices`, `layer_types`, `state_size`, `num_experts_per_tok`),
+not inferred from names. **But `architecture_class` is not a roster field**,
+so writing "four architectures" asserts a taxonomy nobody has authored —
+and one of the four classes is a single model. Two boundaries are arguable:
+`falcon-mamba` is pure SSM sitting beside an RNN, and MoE is a SPARSITY
+property on a different axis from attention mechanism.
 
 ## WHY THIS FILE EXISTS
 

@@ -49,11 +49,30 @@ the roster names it TODAY.
 
 ## WHAT THIS FILE DOES NOT SETTLE
 
-**Architecture.** `model_type` from the configs gives **17 distinct** over the 50
-bases (llama 19, gpt_neox 3, qwen2 2, qwen3 2, then singletons), with 11
-unreadable without `trust_remote_code`. Any coarser count — dense / MoE /
-SSM-hybrid / RNN would be four — is a taxonomy nobody has authored, and it is not
-invented here.
+**Architecture.** CORRECTED 2026-09-08: an earlier version of this line said
+"17 distinct, 11 unreadable without `trust_remote_code`". Both were wrong. 17 was
+the count over the 39 configs `AutoConfig` would load; fetching `config.json`
+directly reads **all 50 with no code execution**, and gives **26 distinct
+model_type**.
+
+A four-way taxonomy IS supported by the configs, and partitions the 50 exactly:
+
+    dense transformer     42   llama 19, gpt_neox 3, qwen2/3 4, olmo2/3 3, +13
+    attention/SSM hybrid   4   Falcon-H1 x2, Zamba2, Olmo-Hybrid
+    recurrent / SSM-only   3   falcon-mamba, recurrentgemma, rwkv
+    mixture-of-experts     1   OLMoE
+
+Each non-dense case is evidenced in its own config, not inferred from its name:
+`hybrid_layer_ids`/`mamba_d_state` (Zamba2), `attn_layer_indices`/`mamba_d_ssm`
+(Falcon-H1), `layer_types`/`linear_conv_kernel_dim` (Olmo-Hybrid), `state_size`
+with no attention (falcon-mamba), `num_experts_per_tok` (OLMoE).
+
+**IT IS STILL NOT WRITTEN DOWN, AND TWO BOUNDARIES ARE ARGUABLE.** `falcon-mamba`
+is pure SSM and sits here beside an RNN and a linear-recurrence model; and MoE is
+a SPARSITY property, a different axis from attention mechanism, so a purist
+taxonomy is two axes rather than one with four values. **`architecture_class` is
+not a roster field**, so this grouping is a proposal, not a retrieval — and one
+of its four classes is a single model.
 """
 import argparse, collections, os, sys
 
@@ -153,11 +172,22 @@ def render(z):
     a("")
     a("## WHAT THIS DOES NOT SETTLE")
     a("")
-    a("**Architecture.** `model_type` over the 50 bases gives **17 distinct**")
-    a("(llama 19, gpt_neox 3, qwen2 2, qwen3 2, then singletons), and 11 configs")
-    a("need `trust_remote_code` to read at all. A four-way taxonomy — dense / MoE")
-    a("/ SSM-hybrid / RNN — is defensible but nobody has authored it, so **do not")
-    a("write \"four architectures\" until it exists**; it is not derivable today.")
+    a("**Architecture — a proposal, not a retrieval.** Fetching `config.json`")
+    a("directly reads all 50 with no code execution and gives **26 distinct**")
+    a("`model_type`. A four-way grouping partitions them exactly:")
+    a("")
+    a("    dense transformer     42   llama 19, gpt_neox 3, qwen2/3 4, olmo2/3 3")
+    a("    attention/SSM hybrid   4   Falcon-H1 x2, Zamba2, Olmo-Hybrid")
+    a("    recurrent / SSM-only   3   falcon-mamba, recurrentgemma, rwkv")
+    a("    mixture-of-experts     1   OLMoE")
+    a("")
+    a("Each non-dense case is evidenced in its own config (`hybrid_layer_ids`,")
+    a("`attn_layer_indices`, `layer_types`, `state_size`, `num_experts_per_tok`),")
+    a("not inferred from names. **But `architecture_class` is not a roster field**,")
+    a("so writing \"four architectures\" asserts a taxonomy nobody has authored —")
+    a("and one of the four classes is a single model. Two boundaries are arguable:")
+    a("`falcon-mamba` is pure SSM sitting beside an RNN, and MoE is a SPARSITY")
+    a("property on a different axis from attention mechanism.")
     a("")
     a("## WHY THIS FILE EXISTS")
     a("")
