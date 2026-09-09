@@ -2,7 +2,7 @@
 kind: question
 id: hua_raley_2026
 question: Do Hua and Raley's claims about the KL tether hold against the twp corpus?
-status: "RUN 2026-09-09. Three claims tested, one recorded UNREACHABLE. The asymmetry claim is REFUTED with its sign reversed: arrivals outnumber collapses about 2:1."
+status: "RUN 2026-09-09. CLAIM 1 refuted with its sign reversed and that is the whole amendment. CLAIM 2 partly supported -- the KL tether is not necessary. CLAIM 3 (fn19) is their pre-emption: half unreachable by construction, the other half needs generation at the displacement sites, which does not exist. Chasing it was drift and the record is kept so it is not repeated."
 headline: "Alignment raises a rare continuation to dominance MORE often than it drops a dominant one to nothing -- 2,210 arrivals against 1,149 collapses across the same two orders of magnitude. The essay's formal claim contradicts its own main text and its own footnote 19, and it does not need it."
 grain: claim
 ---
@@ -17,6 +17,24 @@ Preprint, July 2026, forthcoming *MFS Modern Fiction Studies* Spring-Summer 2027
     asymmetry.py      CLAIM 1, the symmetric collapse/arrival count
     conservatism.py   CLAIM 2, entropy and effective support per stage
     archangel.py      CLAIM 2's clean design: one base, five objectives
+
+## WHAT THIS FOLDER IS FOR, AND WHERE IT STOPS
+
+**The amendment is CLAIM 1 and it is complete.** The KL asymmetry is refuted
+with its sign reversed, and two conceptual slides do the rest: the prohibition
+is on a null set, and "what the archive has never said" is not "what the base
+model never entertained". Nothing else is needed to write it.
+
+**CLAIM 3 (fn19) IS THEIR PRE-EMPTION AND CHASING IT WAS DRIFT.** fn19 concedes
+our point and moves to different ground -- accessibility and
+classification-as-defect. Our reply to that ground is already the displacement
+finding: the mass relocates nameably and their vocabulary has nowhere to put it.
+That is a theoretical move, not an empirical gap.
+
+This seat spent four rounds building an instrument for it and revised its
+reachability verdict three times on the way (RH, 2026-09-09: *"I dont know what
+we're chasing exactly"*). **The record of that is kept in CLAIM 3 so it is not
+repeated, not because the measurements are wanted.**
 
 ---
 
@@ -252,6 +270,98 @@ retain nonzero probability mass**. The first cannot hold with the other two.
 work for you and costs you fn19."** The fn19 position -- that the bind is
 infrastructural and classificatory rather than mathematical -- survives our
 measurement intact. fn7 does not, and the essay states its own refutation twice.
+
+### WHAT WE HOLD, AND WHY IT STILL DOES NOT SETTLE fn19(a)
+
+Recorded because the search for a way to answer it went four rounds and the
+next context should not repeat it.
+
+**THE GENERATION CORPUS IS REAL AND SUBSTANTIAL.** `$MALIGNMENT_DATA/generations`,
+118,549 records over 111 models, produced by `malignment/generate.py`:
+
+    temp  top_p  max_new   records   models  prompts
+    1.0   0.95     3000     16,310      107        9   long, NUCLEUS TRUNCATED
+    1.0   1.0        16     84,000       56       30
+    1.0   1.0       256      3,475       45        3
+    1.0   0.95      256        300        3        1   \
+    1.0   0.9       256        300        3        1    > calibration sweep
+    1.0   0.7       256        300        3        1   /
+
+38 of 50 endpoint pairs have BOTH arms in the top_p 0.95 corpus.
+
+**AND IT CANNOT ANSWER THE QUESTION, FOR A REASON THAT SHOULD HAVE BEEN CHECKED
+FIRST.** The 9 generation prompts are all `"A [National] Story (1500 words) It
+was a"`. The displacement sites are twp slot prompts. The overlap is **ZERO**:
+
+    story prompts present in twp_words_v4_best   0 of 2
+    movement_v4 rows on any '1500 words' prompt  0
+
+So "do the displaced substitutes survive truncation" has no join to make. It
+would need new generation AT the displacement sites.
+
+**THE MECHANISM IS ALREADY QUANTIFIED IN THE REPO**, in `generate.py`'s decoder
+note, and this is the number worth citing:
+
+> "The nucleus at top_p 0.95/0.9/0.7 is 436/223/53 tokens" -- while untruncated
+> sampling reaches "rank 7090".
+
+Nucleus sampling at 0.9 admits 223 tokens from a distribution whose draws
+otherwise reach rank 7090. **Hua and Raley's "rendered effectively inaccessible
+in practice" is not hand-waving; it is roughly a thirty-fold cut in reachable
+support, and it is theirs to keep.**
+
+### AND "IN PRACTICE" HAS NO SINGLE VALUE
+
+Which is the more interesting fact, and it cuts TOWARD them rather than against:
+
+- **Major API defaults are untruncated** -- temperature 1.0 with `top_p` unset,
+  i.e. 1.0. If the default path does not truncate, the nucleus is not doing the
+  excluding.
+- **Products are not APIs** and do not publish their inference settings.
+- **Serving stacks disagree silently, and our own repo documents it.**
+  transformers 5.4.0 applies an effective `top_k=50` when the field is absent
+  while the checkpoint config, `GenerationConfig()` and the merged
+  `model.generation_config.top_k` ALL report `None`; vLLM replaces the config
+  and defaults top_k disabled. Same nominal settings, one truncates at rank 50
+  and the other reaches rank 7090.
+
+**So the effective aperture is set by an undocumented default nobody chose,
+differs between serving paths, and is invisible to the user.** That is closer
+to their audit-culture argument than a clean top_p story would be.
+
+### DOES `temp=1, top_p=1` REFLECT THE DISTRIBUTION?
+
+Mostly, with three caveats and one non-caveat:
+
+    top_k          NO, unless explicitly disabled. See above. This is the one
+                   that actually bit.
+    precision      fp16/bf16 represent the far tail poorly and the multinomial
+                   inherits it.
+    MPS            only under FILTERING -- the defect needs exact zeros, which
+                   only -inf filters create. `top_p=1.0, top_k=0` is safe.
+    our own store  `twp_words` is word-level, path-accumulated, theta-floored.
+                   It is a DERIVED object, not the model's next-token
+                   distribution, so any comparison to generated text has a seam.
+
+**AND ONE ARGUMENT TRIED AND WITHDRAWN.** This seat proposed that finite
+sampling from a heavy-tailed distribution is itself the exclusion -- a p=1e-4
+continuation appearing once in 10,000 draws -- and called it a repair of fn19's
+mechanism. RH: *"That's just a fact about sampling though? Of course low prob
+words will be rare."* Correct, and the framing was worse than trivial: if
+inaccessibility reduces to *rare things are rare*, nothing about it is cultural
+or infrastructural, and the essay dissolves rather than gets supported.
+
+**The version with content is about alignment, not about probability:**
+
+    effective support (1/sum p^2), median over 800 prompts
+       llama-7b        42.1
+       alpaca (SFT)    14.1
+       beaver (RLHF)    9.0
+
+Not "the tail is thin" but **the same slot going from about 42 live options to
+about 9** -- roughly a quarter of the distinct continuations at any sample
+budget. `alignment_smooths` says it corpus-wide: aligned models collapsing onto
+1.135 bits/byte across 42 of 46 lineages.
 
 ### AND THE ONE THING OUR DATA ADDS TO fn19
 

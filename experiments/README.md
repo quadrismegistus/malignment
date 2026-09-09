@@ -196,7 +196,7 @@ and the state the first version of the checker could not see.
 
 ### lit_review
 
-- **[`hua_raley_2026/`](lit_review/hua_raley_2026/README.md)** -- `RUN 2026-09-09. Three claims tested, one recorded UNREACHABLE. [...]`  
+- **[`hua_raley_2026/`](lit_review/hua_raley_2026/README.md)** -- `RUN 2026-09-09. CLAIM 1 refuted with its sign reversed and that is the whole amendment. [...]`  
   Alignment raises a rare continuation to dominance MORE often than it drops a dominant one to nothing -- 2,210 arrivals against 1,149 collapses across the same two orders of magnitude. The essay's formal claim contradicts its own main text and its own footnote 19, and it does not need it.
 
 ### subject_position
