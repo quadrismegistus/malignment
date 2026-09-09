@@ -197,11 +197,49 @@ and no distribution-level result is a reply to it. Logged, not converted, per
 the subject's standing fence.
 
 **(a) ACCESSIBILITY -- "how the stack renders that mass effectively inaccessible
-in practice" -- is PARTLY REACHABLE and was wrongly filed as unreachable in the
-first version of this entry.** "Effectively inaccessible" can be operationalised:
-what share of the mass that moves sits above a nucleus cutoff at standard
-decoding settings? We hold the full scored distribution, so that is computable.
-NOT RUN, and it is the obvious next producer here.
+in practice" -- IS NOT REACHABLE FROM WHAT WE HOLD, and this entry has now said
+three different things about it.** Recorded in full because the third position
+is only trustworthy if the first two are visible:
+
+    v1  filed the whole footnote UNREACHABLE
+    v2  "half of it is reachable -- compute the share of moved mass above a
+        nucleus cutoff, we hold the distribution"
+    v3  NO. Nucleus sampling operates on the TOKEN distribution at each step;
+        ours are distributions over WORDS. (RH, 2026-09-09.)
+
+The gap is not cosmetic and it lands on exactly the words at issue:
+
+    kill      ['kill']                 1 token
+    strangle  ['str', 'angle']         2
+    scream    ['sc', 'ream']           2
+    paranoia  ['par', 'ano', 'ia']     3
+
+**`kill` and `strangle` are on opposite sides of the token boundary, and they
+are the two words this campaign's displacement finding is built on.** `kill`'s
+word probability IS its token probability, so a nucleus applies. `strangle`
+begins with `str` -- a prefix shared with strange, strategy, strong, street --
+which sits inside any nucleus, so **the word is generable even when its
+word-level probability is low**. A top-p computed over our word distribution
+would call it excluded, wrongly.
+
+And the workaround inherits the same bias. Restricting to single-token words
+keeps `kill`, `murder`, `beat` and drops `strangle`, `scream`, `punish`,
+`paranoia`: it retains the common words and discards the substitutes, which is
+backwards for a question about whether substitutes are reachable. Rarer words
+are likelier to be multi-token, and those are fn19's whole population.
+
+**THE DISTRIBUTIONAL VERSION ALREADY EXISTS AND IS THE BETTER INSTRUMENT.**
+`displacement/rate_and_magnitude`'s `tail_excess` asks whether freed mass
+"re-lands on nameable substitute words or disperses into the unresolved tail",
+against a proportional-renormalisation null:
+
+    en   tail_excess   -0.00875   12/38   p=3e-4
+    zh   tail_excess   +0.01633   38/9    p=2.5e-5
+
+In English the more transgressive the base prompt, the LESS freed mass goes to
+the tail -- it re-lands on nameable words. Chinese runs the other way. That
+speaks to fn19 without needing a decoding threshold at all, and it already
+carries its null.
 
 ### BUT IT IS ALSO THE ESSAY DISAGREEING WITH ITSELF, AND THAT IS USABLE
 
