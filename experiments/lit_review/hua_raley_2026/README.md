@@ -10,7 +10,13 @@ grain: claim
 # Hua and Raley, "Optimization Is Not All You Need" (2026)
 
 Preprint, July 2026, forthcoming *MFS Modern Fiction Studies* Spring-Summer 2027.
-`arXiv:2607.11977v2`. Producers: `asymmetry.py`.
+`arXiv:2607.11977v2`.
+
+**Every table below has a producer and none of the numbers are transcribed.**
+
+    asymmetry.py      CLAIM 1, the symmetric collapse/arrival count
+    conservatism.py   CLAIM 2, entropy and effective support per stage
+    archangel.py      CLAIM 2's clean design: one base, five objectives
 
 ---
 
