@@ -127,12 +127,39 @@ entropy and support numbers were computed.** (RH caught it.)
 Effective support is computed over the SCORED set, which is theta-truncated, so
 these are "within what we score" and not absolute. And this is one ladder.
 
-The clean test exists and is out of reach for a different reason: the
+The clean test exists and has not been run. The
 `ContextualAI/archangel_*_pythia2-8b` set has sft, sft-ppo (EXPLICIT KL),
 sft-dpo, sft-kto and sft-slic (NO KL) on one base with one data mixture -- the
-exact design. **The models barely move on our prompts**: 29 fallers on
-base->SFT against 50,861 for llama->alpaca, and 0 to 11 fallers on each
-posttraining step. Too quiet to discriminate.
+exact design.
+
+**A FIRST PASS SAID "0 to 11 FALLERS, TOO QUIET TO DISCRIMINATE" AND THAT WAS A
+RULE-GATED COUNT READ AS A MOVEMENT MEASURE.** CANONICAL requires
+`p_aligned < 0.5*p_base` AND `p_base >= 0.003`, so at these magnitudes almost
+nothing halves and the faller count reports the threshold, not the movement.
+The distribution does move:
+
+    step          max|d|   p99.9|d|   |d|>0.05   |d|>0.01
+    base->SFT     0.1343    0.03113        116       2615
+    base->PPO     0.1487    0.04145        166       2974
+    SFT->KTO      0.0761    0.01611         13       1089
+    SFT->SLiC     0.0660    0.01254          5        780
+    SFT->DPO      0.0474    0.00988          0        493
+    SFT->PPO      0.0312    0.00814          0        268
+
+    llama->alpaca 0.8669    0.23960       4553      24209   <- for scale
+
+**About 10 to 30 times smaller than a full SFT, and not zero.** The posttraining
+ordering at `|d|>0.01` is KTO 1089 > SLiC 780 > DPO 493 > PPO 268: the only
+EXPLICIT KL moves least, which is weakly what the tether predicts, but KTO
+carries an implicit KL and moves most, so it does not separate cleanly.
+
+A comparison built on effect sizes rather than rule-gated counts is possible and
+is NOT RUN. It would be n=1 base.
+
+And one row worth keeping: the largest moves on `base->PPO` include `sex`
+0.357 -> 0.476 and `beat` 0.479 -> 0.592 ("The mob dragged him into the street
+and be..."). RLHF raising those is not what a pure suppression story predicts,
+and it is two cells, not a finding.
 
 ---
 
@@ -154,12 +181,21 @@ Section 6, and its footnote 19:
 > essay is not the mathematical elimination of deviation, but its cultural and
 > infrastructural recoding as defect."
 
-### RECORDED UNREACHABLE
+### RECORDED UNREACHABLE -- BUT ONLY HALF OF IT
 
-This is a claim about decoding, interface, deployment and reception. **Our
-instrument measures the policy at one slot and cannot reach any of it**, and the
-subject's standing fence says such a claim is logged, not converted into one we
-can answer. A distribution-level result is not a reply to it.
+fn19 asks two things and they have different status here.
+
+**(b) CLASSIFICATION -- "how it classifies its realization when it occurs" --
+is genuinely out of reach.** That is about reception and institutional framing,
+and no distribution-level result is a reply to it. Logged, not converted, per
+the subject's standing fence.
+
+**(a) ACCESSIBILITY -- "how the stack renders that mass effectively inaccessible
+in practice" -- is PARTLY REACHABLE and was wrongly filed as unreachable in the
+first version of this entry.** "Effectively inaccessible" can be operationalised:
+what share of the mass that moves sits above a nucleus cutoff at standard
+decoding settings? We hold the full scored distribution, so that is computable.
+NOT RUN, and it is the obvious next producer here.
 
 ### BUT IT IS ALSO THE ESSAY DISAGREEING WITH ITSELF, AND THAT IS USABLE
 
