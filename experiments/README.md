@@ -198,6 +198,8 @@ and the state the first version of the checker could not see.
 
 - **[`hua_raley_2026/`](lit_review/hua_raley_2026/README.md)** -- `RUN 2026-09-09/10. Five claims. [...]`  
   Alignment raises a rare continuation to dominance MORE often than it drops a dominant one to nothing -- 2,210 arrivals against 1,149 collapses. And TWICE the essay locates the operation in RLHF because that is where its theory lives, while the measurement puts it at SFT: the untethered stage produces the larger support collapse (42->14 vs 14->9), and SFT already carries 82% of the sharpening attributed to preference tuning.
+- **[`ren_sutherland_2025/`](lit_review/ren_sutherland_2025/README.md)** -- `RUN 2026-09-10. NO, at endpoint grain. [...]`  
+  The deflationary rival to F01 does not hold at endpoint grain. If displaced mass went to whatever was already winning, the semantic chain would be a gradient artifact -- it does not, and the reading note's own reconciliation (that gainers are already high-probability) fails too.
 
 ### subject_position
 
