@@ -2,8 +2,8 @@
 kind: question
 id: hua_raley_2026
 question: Do Hua and Raley's claims about the KL tether hold against the twp corpus?
-status: "RUN 2026-09-09. CLAIM 1 refuted with its sign reversed and that is the whole amendment. CLAIM 2 partly supported -- the KL tether is not necessary. CLAIM 3 (fn19) is their pre-emption: half unreachable by construction, the other half needs generation at the displacement sites, which does not exist. Chasing it was drift and the record is kept so it is not repeated."
-headline: "Alignment raises a rare continuation to dominance MORE often than it drops a dominant one to nothing -- 2,210 arrivals against 1,149 collapses across the same two orders of magnitude. The essay's formal claim contradicts its own main text and its own footnote 19, and it does not need it."
+status: "RUN 2026-09-09/10. Five claims. CLAIM 1 refuted with its sign reversed. CLAIMS 2 and 5 are the same error twice -- real phenomenon, wrong stage, both attributed to RLHF and both largely done by SFT. CLAIM 4 partly holds but 'flat' is wrong: arousal falls and valence RISES. CLAIM 3 (fn19) is their pre-emption and chasing it was drift."
+headline: "Alignment raises a rare continuation to dominance MORE often than it drops a dominant one to nothing -- 2,210 arrivals against 1,149 collapses. And TWICE the essay locates the operation in RLHF because that is where its theory lives, while the measurement puts it at SFT: the untethered stage produces the larger support collapse (42->14 vs 14->9), and SFT already carries 82% of the sharpening attributed to preference tuning."
 grain: claim
 ---
 
@@ -408,3 +408,114 @@ anywhere to put the mass that leaves. **It does not leave: it relocates**, and
 the relocation has a direction that can be named -- which is what this
 campaign's displacement work measures. That is an addition to fn19 rather than
 an objection to it.
+
+
+---
+
+## CLAIM 4 -- "AFFECTIVELY FLAT" -- PARTLY, AND THE MISMATCH IS THE POINT
+
+### The claim, quoted
+
+Section 2:
+
+> "a mathematically 'safe' output is one that takes no creative or conceptual
+> risk, defaulting to the most statistically secure and **affectively flat**
+> formulations -- call it reward model prosody."
+
+### What bears on it
+
+`displacement/norm_change` measures valence and arousal on every endpoint pair,
+marginally and under dose. "Flat" predicts movement toward the NEUTRAL point on
+both.
+
+### The measurement
+
+    warriner_arousal        -0.0185 marginal p<1e-5   -0.0773 dose p=9e-5
+    warriner_valence        +0.0102 marginal p=0.029  +0.1200 dose p=2e-5
+    warriner_valence_absz   -0.0077 marginal p=0.015           (extremity NARROWS)
+
+**PARTLY SUPPORTED, AND "FLAT" IS THE WRONG WORD.** Arousal falls and extremity
+narrows, which is their claim. But **valence RISES**, and a rise is a direction,
+not a flattening. Flat would predict valence toward neutral; it goes up.
+
+**The shape is quieter AND TILTED POSITIVE** -- less activating, less extreme,
+more pleasant. That is closer to mood management than to deadening, and the
+distinction matters for their argument: a flattened output has had something
+removed, a tilted one has had something CHOSEN. Their essay wants the first
+(foreclosure, variance suppressed) and the data shows the second at the valence
+axis. (RH, 2026-09-10, correcting this entry's first version, which read the
+three numbers as a clean confirmation.)
+
+---
+
+## CLAIM 5 -- "PREFERENCE TUNING SHARPENS THE DISTRIBUTION" -- WRONG STAGE
+
+### The claim, quoted
+
+Section 2:
+
+> "**Preference tuning** measurably sharpens the distribution itself, collapsing
+> the diversity of generations into a narrow band of sanctioned continuations
+> [Kirk et al., 2024], and the newer reasoning regimes orient generation toward
+> the single response a checker will accept."
+
+### What bears on it
+
+`division_of_labour/sft_share` asks exactly this: on lineages with separately
+released stages, how much of the displacement is already present at the SFT
+checkpoint, BEFORE any preference tuning.
+
+### The measurement
+
+    H1 SUPPORTED.  Median share 0.819, 16 of 18 chains above 0.50, p=0.0013
+
+> "At the SFT checkpoint a model is already ~82% of the way to where its
+> preference-tuned endpoint sits."
+
+**The collapse is real and the attribution is wrong. Roughly 82% of it has
+happened before preference tuning begins.**
+
+And the share is branch-specific, so no single number should be quoted:
+
+    Olmo-3-7B-Instruct-DPO   0.773
+    Olmo-3-7B-Think-DPO      0.950
+
+Same base, same lab, two products, 18 points apart.
+
+### THIS IS THE SAME ERROR AS CLAIM 2, AND THAT IS THE PATTERN WORTH WRITING
+
+CLAIM 2: the conservatism is attributed to the KL tether; the untethered SFT
+stage produces the larger collapse of effective support (42 -> 14 against
+14 -> 9). CLAIM 5: the sharpening is attributed to preference tuning; SFT
+carries 82% of it.
+
+**Twice the essay locates the operation in RLHF because that is where its theory
+lives -- KL divergence, scalar reward, annotator preference -- and twice the
+measurement puts it at supervised fine-tuning, which has none of that
+apparatus.** That is a single amendment rather than two, and it is friendly: the
+phenomenon they describe is real, and it starts earlier and with less machinery
+than their account requires.
+
+---
+
+## MEASURED AND NOT PURSUED: THE PROSODY ORNAMENTS
+
+Their section 2 also names specific house-style markers -- "the em dash and the
+emphatic triad... the cadence of sycophantic encouragement ('let's dive in')".
+Counted on 34 endpoint pairs with both arms in the top_p 0.95 generation corpus,
+>20k words each:
+
+    EM DASHES    aligned higher in 11 of 34   median -0.212 per 1k words
+    TRIADS       aligned higher in 31 of 34   median +0.994 per 1k
+    SYCOPHANCY   14 of 34, median 0.0000
+
+The triad holds. The em dash does NOT hold generally -- alignment reduces it in
+two thirds of lineages -- but rises sharply in recent ones (Olmo-3 +6.9/1k,
+OLMo-2 +2.7, OLMoE +1.6, SmolLM2 +0.9, Qwen3 +0.7), which suggests a datable
+house style rather than a property of alignment.
+
+**NOT PURSUED (RH, 2026-09-10) and recorded so it is not re-run.** Two fences if
+anyone does: the triad regex `\w+, \w+,? and \w+` catches ordinary
+three-item lists, so it measures coordinate structures and not rhetorical
+triads; and the sycophancy row is NOT A NULL -- these are narrative story
+prompts where "let's dive in" has no occasion to occur.
