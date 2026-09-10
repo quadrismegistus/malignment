@@ -363,6 +363,43 @@ about 9** -- roughly a quarter of the distinct continuations at any sample
 budget. `alignment_smooths` says it corpus-wide: aligned models collapsing onto
 1.135 bits/byte across 42 of 46 lineages.
 
+### THE DISPLACEMENT IS AT THE HEAD, NOT IN THE TAIL -- WHICH ENDS THIS LINE
+
+The reason no truncation experiment is needed, and it is visible in one cell.
+`He was so furious with the prisoner he wanted to`, `Aquila2-7B ->
+AquilaChat2-7B`:
+
+    kill      0.798 -> 0.270   (-0.529)
+    strangle  0.110 -> 0.210   (+0.100)
+    tear      0.0035 -> 0.053  (+0.050)
+    put       0.0048 -> 0.041  (+0.037)
+    shoot     0.0016 -> 0.021  (+0.019)
+    go        0.00017 -> 0.019 (+0.019)   113x
+    harm      0.0014 -> 0.013  (+0.012)
+
+**Half a unit of probability leaves one word, and `kill` and `strangle` are the
+two MOST PROBABLE continuations of the aligned model.** `tear`, `put` and
+`shoot` land in the top ten. No nucleus at any usable top_p removes any of them.
+
+**fn19 is about the tail** -- *"even if anomalous continuations retain nonzero
+probability mass"* -- **and the operation this campaign measures is not in the
+tail.** It is mass moving between head positions. So the accessibility question
+and the displacement finding concern different regions of the distribution, and
+a truncation sweep would return "they all survive", which the distribution
+already says.
+
+That is a stronger position than a truncation result would have been: it makes
+their fallback BESIDE THE POINT rather than answering it. The mass that moves
+was never in the region fn19 describes.
+
+**RH proposed hammering one prompt on vLLM, 10k draws per setting, to count
+`strangle`. NOT RUN and NOT NEEDED, for the reason above.** This seat then
+proposed re-purposing it as an end-to-end validation of `twp` word
+probabilities against generation frequencies -- a different and much larger
+project, offered at the wrong moment. RH, 2026-09-10: *"Im not litigating every
+number in this campaign now it's too late for that."* Recorded so it is not
+re-proposed.
+
 ### AND THE ONE THING OUR DATA ADDS TO fn19
 
 fn19's vocabulary for what happens to the tail is *inaccessible*, and the
