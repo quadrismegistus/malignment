@@ -310,24 +310,86 @@ otherwise reach rank 7090. **Hua and Raley's "rendered effectively inaccessible
 in practice" is not hand-waving; it is roughly a thirty-fold cut in reachable
 support, and it is theirs to keep.**
 
-### AND "IN PRACTICE" HAS NO SINGLE VALUE
+### AND "IN PRACTICE" HAS NO SINGLE VALUE -- SURVEYED 2026-09-10
 
-Which is the more interesting fact, and it cuts TOWARD them rather than against:
+**PROVENANCE: a research pass over primary documentation, not our own
+measurement.** Every row traces to a vendor doc or a source file; the gaps and
+the unverified rows are kept because they are part of the finding. Where a
+value could not be sourced it is marked, not inferred.
 
-- **Major API defaults are untruncated** -- temperature 1.0 with `top_p` unset,
-  i.e. 1.0. If the default path does not truncate, the nucleus is not doing the
-  excluding.
-- **Products are not APIs** and do not publish their inference settings.
-- **Serving stacks disagree silently, and our own repo documents it.**
-  transformers 5.4.0 applies an effective `top_k=50` when the field is absent
-  while the checkpoint config, `GenerationConfig()` and the merged
-  `model.generation_config.top_k` ALL report `None`; vLLM replaces the config
-  and defaults top_k disabled. Same nominal settings, one truncates at rank 50
-  and the other reaches rank 7090.
+    provider / stack           temp    top_p   top_k    truncating?
+    OpenAI Chat/Responses      1       1       n/a      NO
+    OpenAI reasoning line      1       1       n/a      NO (locked, not cut)
+    Anthropic Messages         1.0     unset   unset    NO when omitted
+    DeepSeek                   1.0     1.0     n/a      NO
+    Google Gemini              per-model, not published as a constant
+    Mistral / xAI              no fixed default published
+    Cohere Chat v1/v2          0.3     0.75    0        YES
+    vLLM SamplingParams        1.0     1.0     0        NO
+    HF TGI                     1.0     1.0     0        NO
+    HF transformers            1.0     1.0     50       greedy by default;
+                                                        top_k rides in with
+                                                        do_sample=True
+    llama.cpp                  0.80    0.95    40       YES, and min_p=0.05
+                                                        on top -- THREE stacked
+    Ollama                     0.8     0.9     40       YES
 
-**So the effective aperture is set by an undocumented default nobody chose,
-differs between serving paths, and is invisible to the user.** That is closer
-to their audit-culture argument than a clean top_p story would be.
+**The split is not random: it falls along throughput-serving-library versus
+local/consumer tool.** vLLM and TGI sample from the full distribution; llama.cpp
+compounds three truncation mechanisms before temperature is even applied. A
+reader who assumes "I set temperature, so I am sampling the distribution" is
+right on one and wrong on the other.
+
+**AND CONSUMER PRODUCTS PUBLISH NOTHING.** ChatGPT, Claude.ai, the Gemini app
+and Copilot were each checked -- vendor help centres, developer blogs, release
+notes -- and none discloses numeric sampling parameters for its production
+surface. **This is a confirmed absence, not an unsearched gap.** Copilot's
+Bing-era "Precise / Balanced / Creative" toggle is the sharpest instance: a
+named, qualitative control over an undisclosed number, never mapped by
+Microsoft. Any numeric mapping circulating online is speculation.
+
+**AND SAMPLING IS BEING WITHDRAWN AS A USER-FACING CONTROL.** OpenAI's reasoning
+line fixes temperature and top_p at 1 and rejects other values; Google's Gemini
+3.x general-use line IGNORES temperature/top-K/top-P and returns 400 on adjacent
+parameters. Three independent search threads found the same pattern, which is
+why the shape of it is worth reporting even where individual rows are shaky.
+
+**This is the strongest external support for their argument that we found**, and
+it is not about nucleus size at all: the aperture is set by an undocumented
+default nobody chose, differs between serving paths, is invisible to the user,
+and is now being removed from the user's hands entirely. That is the
+audit-culture claim arriving as an API change.
+
+### THREE ROWS THAT MUST NOT BE CITED WITHOUT CHECKING
+
+- **The post-Opus-4.6 Anthropic lockdown** -- that temperature must be 1.0,
+  top_p >= 0.99, and top_k is rejected outright -- rests on ONE live undated
+  docs page plus one non-authoritative blog. It is also past this seat's
+  training cutoff, so it cannot be corroborated from knowledge. If it holds it
+  is the cleanest single instance of the essay's argument, which is exactly why
+  it needs verifying first.
+- **Historical OpenAI defaults.** Whether temp=1 / top_p=1 has been the default
+  since launch is UNSOURCED: the Wayback Machine returned 503 throughout the
+  session.
+- **Gemini's numeric per-model defaults.** The docs say each model carries its
+  own, retrievable only by a live `models.get` call. No static table exists.
+
+### AND A SHIP-VERSUS-RECOMMEND GAP WORTH ONE SENTENCE
+
+`generation_config.json` and the model card are different documents by different
+authors, and they disagree:
+
+    Gemma-2-9b-it   ships NO sampling fields -- silently greedy -- while a
+                    Google staffer recommends temp 1.0 / top_p 0.95 / top_k 64
+                    in an official HF discussion thread
+    Qwen3-8B        ships only ONE of the two regimes its own card documents
+    DeepSeek-V3     has no generation_config.json at all (404)
+    Llama 3.x/4     ship 0.6 / 0.9, matching Meta's reference code exactly
+
+**The config is what runs; the card is what is meant.** For an essay about a
+regime that "executes the office of judgment with no capacity for judging",
+a default that silently contradicts its own documentation is a better exhibit
+than any nucleus number.
 
 ### DOES `temp=1, top_p=1` REFLECT THE DISTRIBUTION?
 
