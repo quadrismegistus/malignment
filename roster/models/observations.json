@@ -192,6 +192,20 @@
    "transformers": "5.16.1",
    "note": "rented CUDA box. Derived from the cells that actually ran in it.",
    "source": "derived by record_successes.py from twp_cells_v4"
+  },
+  "cloud_cuda_tf5151": {
+   "device": "cuda",
+   "torch": "2.6.0+cu126",
+   "transformers": "5.15.1",
+   "note": "rented CUDA box. Derived from the cells that actually ran in it.",
+   "source": "derived by record_successes.py from twp_cells_v4"
+  },
+  "local_mps_tf5151": {
+   "device": "mps",
+   "torch": "2.13.0",
+   "transformers": "5.15.1",
+   "note": "MPS (this Mac). Derived from the cells that actually ran in it.",
+   "source": "derived by record_successes.py from twp_cells_v4"
   }
  },
  "observations": [
@@ -3155,6 +3169,41 @@
    "outcome": "load_ok",
    "cause": "",
    "fix": "DERIVED FROM THE CORPUS, not hand-observed: 874 cells in twp_cells_v4 on device `cuda`, transformers 5.16.1 / torch 2.8.0+cu128, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "HuggingFaceTB/SmolLM2-360M",
+   "environment": "cloud_cuda_tf5151",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 1,574 cells in twp_cells_v4 on device `cuda`, transformers 5.15.1 / torch 2.6.0+cu126, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "HuggingFaceTB/SmolLM2-360M",
+   "environment": "local_mps_tf5151",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 6 cells in twp_cells_v4 on device `mps`, transformers 5.15.1 / torch 2.13.0, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "LLM360/AmberSafe",
+   "environment": "cloud_cuda130_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 874 cells in twp_cells_v4 on device `cuda`, transformers 5.4.0 / torch 2.13.0+cu130, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "PKU-Alignment/beaver-7b-v1.0",
+   "environment": "cloud_cuda130_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 874 cells in twp_cells_v4 on device `cuda`, transformers 5.4.0 / torch 2.13.0+cu130, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "togethercomputer/RedPajama-INCITE-7B-Chat",
+   "environment": "cloud_cuda130_tf540",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 874 cells in twp_cells_v4 on device `cuda`, transformers 5.4.0 / torch 2.13.0+cu130, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
   }
  ],
  "engine_support": {

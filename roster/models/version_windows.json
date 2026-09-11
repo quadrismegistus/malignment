@@ -965,11 +965,37 @@
    "torch": {
     "points": [
      {
+      "version": "2.6.0+cu126",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda_tf5151",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     },
+     {
       "version": "2.11.0",
       "verdicts": {
        "works": [
         {
          "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     },
+     {
+      "version": "2.13.0",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "local_mps_tf5151",
          "outcome": "load_ok",
          "cause": null
         }
@@ -988,6 +1014,24 @@
        "works": [
         {
          "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     },
+     {
+      "version": "5.15.1",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda_tf5151",
+         "outcome": "load_ok",
+         "cause": null
+        },
+        {
+         "environment": "local_mps_tf5151",
          "outcome": "load_ok",
          "cause": null
         }
@@ -1365,6 +1409,19 @@
        ]
       },
       "verdict": "works"
+     },
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
      }
     ],
     "hole": false
@@ -1377,6 +1434,11 @@
        "works": [
         {
          "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        },
+        {
+         "environment": "cloud_cuda130_tf540",
          "outcome": "load_ok",
          "cause": null
         }
@@ -1637,6 +1699,19 @@
        ]
       },
       "verdict": "works"
+     },
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
      }
     ],
     "hole": false
@@ -1649,6 +1724,11 @@
        "works": [
         {
          "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        },
+        {
+         "environment": "cloud_cuda130_tf540",
          "outcome": "load_ok",
          "cause": null
         }
@@ -8029,6 +8109,19 @@
        ]
       },
       "verdict": "works"
+     },
+     {
+      "version": "2.13.0+cu130",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "cloud_cuda130_tf540",
+         "outcome": "load_ok",
+         "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
      }
     ],
     "hole": false
@@ -8041,6 +8134,11 @@
        "works": [
         {
          "environment": "local_mps",
+         "outcome": "load_ok",
+         "cause": null
+        },
+        {
+         "environment": "cloud_cuda130_tf540",
          "outcome": "load_ok",
          "cause": null
         }
