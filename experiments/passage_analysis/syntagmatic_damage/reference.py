@@ -89,6 +89,12 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ARCHIVE = os.path.expanduser("~/github/malign-logits")
 ARMS_JSON = os.path.join(ARCHIVE, "data/forced_arms_46reps_drmatch.json")
 OUT = os.path.join(HERE, "results")
+
+
+def _sfx(a=None):
+    """'' for the aligned arm, '_base' otherwise. The aligned files keep their
+    names: they are cited by this folder's README and by the finding."""
+    return "" if a is None or getattr(a, "arm", "aligned") == "aligned" else "_base"
 sys.path.insert(0, os.path.abspath(os.path.join(HERE, "..", "..", "..")))
 
 WORD_BIN = (4, 8)          # words; the token [5,10) peak at ~1.3 tok/word
@@ -142,7 +148,12 @@ def select(a):
     rng = random.Random(a.seed)
     picked = []
     for pr in pairs:
-        al = pr.split(">")[1]
+        #: WHICH SIDE OF THE LINEAGE IS SCORED. The roles (faller, riser,
+        #: matched, riser_matched) were chosen against the PAIR, so both arms
+        #: were forced to utter the same words at the same probabilities --
+        #: which is exactly what makes a base-arm read comparable to this one.
+        al = (pr.split(">")[1] if getattr(a, "arm", "aligned") == "aligned"
+              else pr.split(">")[0])
         #: text comes back BASE64. ch.query parses JSONEachRow by splitting the
         #: response with Python's splitlines(), which breaks on \x0b \x0c \x1c
         #: \x1d \x1e \x85 U+2028 U+2029 -- none of which ClickHouse escapes. A
@@ -232,7 +243,7 @@ def ctx_rows():
     from `sha(text)`, so the two runs cannot collide in the store.
     """
     from malignment import score
-    rows = selected()
+    rows = selected(a)
     idx = score._index("surprisal")
     out, missing = [], 0
     for r in rows:
@@ -255,14 +266,14 @@ def binom(k, n):
                 / 2.0 ** n) if n else float("nan"))
 
 
-def selected():
+def selected(a=None):
     """The rows this producer chose, from its own ids.jsonl. -> [dict]
 
     Deduped on the FULL cell tuple and not on `sha`. The file opens in append
     mode so a second --run doubles it, and one passage TEXT can legitimately
     belong to two cells -- deduping on sha alone would silently drop a real row.
     """
-    p = os.path.join(OUT, "reference_ids.jsonl")
+    p = os.path.join(OUT, "reference_ids%s.jsonl" % _sfx(a))
     if not os.path.exists(p):
         print("no %s -- run --run first" % p)
         return []
@@ -290,7 +301,7 @@ def analyse(a):
     import numpy as np
     from malignment import score
 
-    rows = selected()
+    rows = selected(a)
     if not rows:
         return 1
     idx = score._index("surprisal")
@@ -499,6 +510,20 @@ def analyse_ctx(a):
 
 def main(argv=None):
     ap = argparse.ArgumentParser()
+    ap.add_argument("--arm", default="aligned", choices=("aligned", "base"),
+                    help="WHICH ARM'S forced passages to score. Default aligned, "
+                         "which is what this folder's finding needed and the only "
+                         "arm the 2026-08 pass covered (40,984 rows, 0 base). "
+                         "`base` exists for the ARCHITECTURE question: a base "
+                         "model forced to utter an improbable word, read by a "
+                         "fixed third-party scorer, asks whether the chain "
+                         "RE-STABILISES. Re-stabilising after a shock is a MEMORY "
+                         "operation -- attention can re-read the imposed word at "
+                         "every later position, a recurrent state must carry it -- "
+                         "so it is the one place attention should matter where "
+                         "selection does not. Outputs are arm-suffixed and the "
+                         "aligned files keep their names, so nothing already "
+                         "written moves."),
     ap.add_argument("--per-pair", type=int, default=1000)
     ap.add_argument("--seed", type=int, default=20260823)
     ap.add_argument("--plan", action="store_true")
@@ -528,11 +553,11 @@ def main(argv=None):
         if a.plan:
             json.dump(dict(n=len(rows), words=words, per_pair=a.per_pair, seed=a.seed,
                            by_role=dict(collections.Counter(r["role"] for r in rows))),
-                      open(os.path.join(OUT, "reference_plan.json"), "w"), indent=1)
-            print("-> results/reference_plan.json   (nothing scored)")
+                      open(os.path.join(OUT, "reference_plan%s.json" % _sfx(a)), "w"), indent=1)
+            print("-> results/reference_plan%s.json   (nothing scored)" % _sfx(a))
             return 0
         from malignment import score
-        idp = os.path.join(OUT, "reference_ids.jsonl")
+        idp = os.path.join(OUT, "reference_ids%s.jsonl" % _sfx(a))
         with open(idp, "a", encoding="utf-8") as fh:
             for r in rows:
                 fh.write(json.dumps(dict(sha=score.sha(r["text"]), pair=r["pair"],
