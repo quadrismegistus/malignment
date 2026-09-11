@@ -38,6 +38,29 @@ Base models are alike. Aligned models are not. Whatever else alignment does, at 
 
 Across the 50 bases, `falcon-mamba-7b` -- which computes no attention of any kind -- is the **median model of the census**, rank 25 of 50. `rwkv-4-7b-pile` is more central than the average transformer. The most central model on both norm measures is a Mamba hybrid. Whatever separates these fifty base models from one another, **it is not whether they compute attention.**
 
+## CORPUS DOMINATES, AND THAT IS A POSITIVE RESULT RATHER THAN A NULL
+
+The twelve most similar base pairs of 1,225:
+
+     1  0.273  pythia-6.9b            rwkv-4-7b-pile
+     2  0.282  Olmo-3-1025-7B         Olmo-Hybrid-7B          same vendor
+     3  0.282  granite-3.0-8b-base    Falcon-H1-7B-Base
+     4  0.282  rwkv-4-7b-pile         jais-family-6p7b
+     5  0.286  Olmo-Hybrid-7B         Falcon-H1-7B-Base
+     7  0.288  gemma-2-9b             recurrentgemma-9b       same vendor
+        0.407  roster median
+        1.017  roster max
+
+**The most similar pair in the census is a transformer and an RNN.** They share no architecture and no weights. They share the Pile.
+
+`malignment/similarity.py` reached that same pair by a different route and uses it as its measured ceiling for "similar because of data" -- *"a transformer and an RNN, no shared weights, both trained on the Pile. Anything at or below that is corpus, not lineage"* -- established on argmax agreement and JS over full distributions. This instrument is contextual-norm centroids over rated slots, and it returns the same pair at rank 1 of 1,225. Two unrelated measurements, one answer.
+
+**All three attested same-corpus/different-architecture pairs are in the top 7**: pythia/rwkv at 1, AI2's controlled attention swap at 2, gemma-2/recurrentgemma at 7. Hold the corpus and change the architecture -- including changing it to no attention at all -- and the result is among the most similar pairs there are.
+
+So the folder's finding is not "we failed to detect architecture". It is that **corpus determines what a base model will put in a slot and architecture does not register**, with three controls and a second instrument agreeing.
+
+**WHERE THIS IS STILL THIN.** Everything in this file reads one window: which words a model puts in a slot, profiled by charge, norms and overlap. Four instruments that share a window are weaker than four independent ones. `rhyme_pull` is unrun and is the one test designed to catch what these cannot -- a formal equivalence class rather than a semantic profile. And n on the attention-free side is one pure SSM and one RNN.
+
 ## WHAT WAS WITHDRAWN, AND WHY IT MATTERS THAT IT WAS
 
 An earlier version of this file led with "the architecture shows up at the cut, not in the language", on the Olmo-3 / Olmo-Hybrid gap growing from 0.28 at base to 0.62 at SFT under attested-identical post-training data. **That is withdrawn.** Calibrated against the two populations above:
