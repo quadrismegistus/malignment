@@ -37,6 +37,28 @@ Base models are alike. Aligned models are not. Whatever else alignment does, at 
 
 Across the 50 bases, `falcon-mamba-7b` -- which computes no attention of any kind -- is the **median model of the census**, rank 25 of 50. `rwkv-4-7b-pile` is more central than the average transformer. The most central model on both norm measures is a Mamba hybrid. Whatever separates these fifty base models from one another, **it is not whether they compute attention.**
 
+## THE SAME ANSWER AT A SECOND GRAIN: what the models actually WROTE
+
+    python run.py --grain page
+
+RH's point, 2026-09-11: **the base arm of a delta instrument is a level, and a level is architecture-comparable.** `passage_analysis/selection_and_combination` computes aligned-minus-base, so it holds per-lineage BASE measurements, and `f_b` is each base model's word-frequency distribution over its own passages. That is what a model actually wrote, against this folder's slot grain of what it would assign probability to. Five architecture lineages are in it -- two pure SSMs, a Mamba hybrid, Griffin and the MoE -- better coverage than any other passage artifact.
+
+    drop top-1000 function words, 35 lineages, 2,918 word types
+    same vendor, SAME block    n=  6  median 0.4995
+    same vendor, DIFF block    n=  9  median 0.6163
+    different vendor           n=580  median 0.4210
+
+**Same vendor with DIFFERENT architectures is more alike than same vendor with the SAME one.** The two pure SSMs score 0.5331 to each other, BELOW the same-vendor-different-block median, because `Falcon3-Mamba` shares a training generation with the dense `Falcon3` family while `falcon-mamba` is the earlier run:
+
+    Falcon3-10B-Base   Falcon3-7B-Base         0.7625   dense / dense
+    Falcon3-10B-Base   Falcon3-Mamba-7B-Base   0.7013   dense / ssm
+    Falcon3-7B-Base    Falcon3-Mamba-7B-Base   0.6305   dense / ssm
+    falcon-mamba-7b    Falcon3-Mamba-7B-Base   0.5331   ssm   / ssm
+
+Training generation and corpus dominate; architecture does not register. Same answer as the slot grain, reached from what the models write rather than from what they would choose.
+
+**TWO TRAPS, BOTH NEARLY REPORTED.** On raw frequencies every pair scores ~0.99, because a word-frequency vector is function words -- the first version read that as models being alike, and `--drop-head` exists because of it. And after dropping them the SSM-to-SSM cosine rose above the dense baseline (0.5331 against 0.4337), which looked like architecture clustering until the vendor control was run. `recurrentgemma-9b` is excluded rather than rescued: 98.3% of its passages are degenerate repetition loops, so its vocabulary vector is "she".
+
 ## CORPUS DOMINATES, AND THAT IS A POSITIVE RESULT RATHER THAN A NULL
 
 

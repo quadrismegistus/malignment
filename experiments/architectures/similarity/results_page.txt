@@ -1,0 +1,12 @@
+PAGE GRAIN: base-arm word frequencies, 35 lineages, 2918 word types after dropping the top 1000
+
+   same vendor, SAME block    n=  6  median 0.4995
+   same vendor, DIFF block    n=  9  median 0.6163
+   different vendor           n=580  median 0.4210
+
+**SAME VENDOR WITH DIFFERENT ARCHITECTURES IS MORE ALIKE THAN SAME
+VENDOR WITH THE SAME ONE.** Training generation and corpus dominate;
+architecture does not register. The two pure SSMs score 0.5331 to each
+other, BELOW the same-vendor-different-block median, because
+Falcon3-Mamba shares a training generation with the dense Falcon3
+family and falcon-mamba is the earlier run.

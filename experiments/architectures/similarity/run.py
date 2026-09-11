@@ -26,7 +26,7 @@ point of carrying all four:
             n_eligible, n_present, ratable) are movement outcomes and are
             excluded for the same reason.
 """
-import random, itertools, collections, statistics as st, json
+import os, random, itertools, collections, statistics as st, json
 import numpy as np
 from malignment import fields as F, movement as M, roster
 THETA = 0.001
@@ -40,7 +40,68 @@ _ap = argparse.ArgumentParser(description=__doc__,
 _ap.add_argument("--arm", default="base", choices=("base", "aligned"),
                  help="which side of the 50 endpoint pairs to compare pairwise")
 _ap.add_argument("--prompts", type=int, default=200)
+_ap.add_argument("--grain", default="slot", choices=("slot", "page"),
+                 help="slot: what a model would PUT in a slot, from twp. "
+                      "page: what it actually WROTE, from the base-arm word "
+                      "frequencies in passage_analysis/selection_and_combination. "
+                      "Same question at two grains, so a flag and not a folder.")
+_ap.add_argument("--drop-head", type=int, default=1000,
+                 help="page grain only: drop the N most frequent word types "
+                      "before the cosine. NOT cosmetic -- on raw frequencies "
+                      "every pair scores ~0.99 because the vector is function "
+                      "words, and the first version of this read that as models "
+                      "being alike.")
 ARGS = _ap.parse_args()
+if ARGS.grain == "page":
+    import numpy as _np
+    import itertools as _it
+    import statistics as _st
+    #: THE BASE ARM OF A DELTA INSTRUMENT IS A LEVEL. RH's point, 2026-09-11:
+    #: `selection_and_combination` computes aligned-minus-base, so it HOLDS
+    #: per-lineage base measurements, and a base measurement is comparable
+    #: across architectures. `f_b` is the base model's word-frequency
+    #: distribution over its own passages -- what it actually WROTE, against
+    #: the slot grain's what-it-would-assign-probability-to.
+    _P = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(
+        os.path.abspath(__file__)))), "passage_analysis",
+        "selection_and_combination", "results", "mediation_corr_words.parquet")
+    _d = __import__("pandas").read_parquet(_P)
+    _d["base"] = _d["pair"].str.split(">").str[0]
+    _piv = _d.pivot_table(index="word", columns="base", values="f_b", fill_value=0.0)
+    #: recurrentgemma-9b is dropped, not rescued: 98.3% of its passages are
+    #: degenerate (repetition loops), so its vocabulary vector is "she".
+    _piv = _piv.drop(columns=["google/recurrentgemma-9b"], errors="ignore")
+    _tot = _piv.sum(axis=1).sort_values(ascending=False)
+    _sub = _piv.drop(index=_tot.index[:ARGS.drop_head]) if ARGS.drop_head else _piv
+    _ms = list(_sub.columns)
+    _V = _sub.values.astype(float)
+    _nz = _np.linalg.norm(_V, axis=0, keepdims=True)
+    _nz[_nz == 0] = 1
+    _C = (_V / _nz).T @ (_V / _nz)
+    _ix = {m: i for i, m in enumerate(_ms)}
+    _ar = {m: roster.architecture(m) for m in _ms}
+    print("PAGE GRAIN: base-arm word frequencies, %d lineages, %d word types "
+          "after dropping the top %d\n" % (len(_ms), len(_sub), ARGS.drop_head))
+    _v = lambda m: m.split("/")[0]                                  # noqa: E731
+    _g = {"same vendor, SAME block": [], "same vendor, DIFF block": [],
+          "different vendor": []}
+    for _a, _b in _it.combinations(_ms, 2):
+        _c = _C[_ix[_a], _ix[_b]]
+        _k = ("same vendor, SAME block" if _v(_a) == _v(_b) and _ar[_a][1] == _ar[_b][1]
+              else "same vendor, DIFF block" if _v(_a) == _v(_b) else "different vendor")
+        _g[_k].append(_c)
+    for _k, _vv in _g.items():
+        print("   %-26s n=%3d  median %.4f" % (_k, len(_vv), _st.median(_vv) if _vv else float("nan")))
+    print()
+    print("**SAME VENDOR WITH DIFFERENT ARCHITECTURES IS MORE ALIKE THAN SAME")
+    print("VENDOR WITH THE SAME ONE.** Training generation and corpus dominate;")
+    print("architecture does not register. The two pure SSMs score %.4f to each"
+          % _C[_ix.get("tiiuae/falcon-mamba-7b", 0), _ix.get("tiiuae/Falcon3-Mamba-7B-Base", 0)])
+    print("other, BELOW the same-vendor-different-block median, because")
+    print("Falcon3-Mamba shares a training generation with the dense Falcon3")
+    print("family and falcon-mamba is the earlier run.")
+    raise SystemExit(0)
+
 eps, _ = roster.endpoints()
 #: endpoints() is keyed by base, so both arms are 50 DISTINCT models and
 #: neither side can double-count a model with two siblings.
