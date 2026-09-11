@@ -298,6 +298,51 @@ boxes:
     pin_reasons:
       torch>=2.6: transformers refuses .bin checkpoints under torch<2.6 (CVE-driven torch.load policy). Thirteen models failed to load in the July grid on exactly this and it read as a model problem, not an environment one. See project_torch_bin_floor.
     provides_vram_gb: 48
+
+  rhyme4090:
+    description: "1x RTX 4090 24 GB for the rhyme_pull fleet. Consumer card, no kernels. Pair with rhyme4090_ssm for the SSM/hybrid shard."
+    image: vllm/vllm-openai:latest
+    gpu_name: RTX_4090
+    num_gpus: 1
+    min_gpu_ram: 23
+    disk_gb: 250
+    min_inet_down_mbps: 1000
+    min_reliability: 0.95
+    cuda_max_good: 12.4
+    pins:
+    - torch>=2.6
+    pin_reasons:
+      torch>=2.6: "transformers refuses .bin checkpoints under torch<2.6 (CVE-driven torch.load policy). Thirteen models failed to load in the July grid on exactly this and it read as a model problem, not an environment one. See project_torch_bin_floor."
+    provides_vram_gb: 24
+    why: "MEASURED, NOT ARGUED, AND THE ROSTER ALREADY SAID SO. `sizing.steps` declares max_params_b 9 -> vram_gb 24, gpus 1, which is every model in the architecture population. The twp corpus was largely produced on this class of card: 44 rate observations on RTX 4090, 48 on Quadro RTX 8000, 17 on RTX 6000 Ada, 5 on an A100. The worst VRAM case here, google/recurrentgemma-9b (9B, 256,000 vocab), wrote 2,983 cells on a 4090, and Zyphra/Zamba2-7B ran on one WITH the mamba kernels. Priced 2026-09-11 with `vastai search offers`: 1x RTX_4090 rentable, reliability>0.95, disk>250 gives 12 offers at a $0.348 floor and $0.429 p25, against A100_SXM4 on the same filters at $0.629 floor / $0.889 median. Half the price for a job that never touches 80 GB."
+    why_inet: "1000, NOT default's 2000, and the cut is measured rather than assumed: on 4090s inet_down>2000 takes the pool from 12 offers to 4 and the floor from $0.348 to $0.561. The whole 100-model population is ~150 GB of weights, ~20 min at 1 Gbps. The runbook's download-starvation failure is a per-HOST pathology (three boxes on machine 56458, 1-7 MB of HF cache after 45 min) and a bandwidth FLOOR does not catch it -- the discriminator is whether ~/.cache/huggingface GROWS."
+
+  rhyme4090_ssm:
+    description: "rhyme4090 plus the selective-scan kernels, for falcon-mamba, both Falcon-H1, and Zamba2."
+    image: vllm/vllm-openai:latest
+    gpu_name: RTX_4090
+    num_gpus: 1
+    min_gpu_ram: 23
+    disk_gb: 250
+    min_inet_down_mbps: 1000
+    min_reliability: 0.95
+    cuda_max_good: 12.4
+    pins:
+    - torch>=2.6
+    - mamba-ssm
+    - causal-conv1d
+    - transformers==4.57.1
+    pin_reasons:
+      mamba-ssm: "the fused selective-scan kernel. Installs ONLY with --no-build-isolation: its setup.py imports torch and pip's isolated build env has none. A finding that says 'install the kernels' without that is not runnable as written."
+      causal-conv1d: "the fused depthwise conv; same story"
+      transformers==4.57.1: "ZAMBA2 WILL NOT LOAD ON transformers 5.x AND THE ERROR NAMES NEITHER THE VERSION NOR THE MODEL'S REAL PROBLEM. On 5.14.1 (what the vllm image ships, 2026-08-10) Zyphra/Zamba2-7B fails at load with `There is an issue with your definition of tie_weights_keys for ^layers.6.shared_transformer:...` -- a v5 weight-tying validation that Zamba2's config predates: it declares transformers_version 4.49.0.dev0. Pinning 4.57.1 loads it and it scores at 1.23 p/s. 4.57 is also the floor CLAUDE.md records for OLMo 3, so it is the highest version known to satisfy both. **AND THE KERNEL WARNING LIES ON A FAILED LOAD.** While Zamba2 was failing, the log carried 'The fast path is not available because one of (selective_state_update, selective_scan_fn, causal_conv1d_fn, causal_conv1d_update, mamba_inner_fn) is None' -- the very string this profile tells you to check for. The kernels were fine: all five entry points imported, is_mamba_ssm_available() and is_causal_conv1d_available() both returned True, and once a model actually loaded the warning was ABSENT. So a fast-path warning emitted DURING a failed load is not evidence about the kernels, and reading it as such sends you to rebuild kernels that work. Check it on a load that SUCCEEDED."
+      torch>=2.6: "transformers refuses .bin checkpoints under torch<2.6 (CVE-driven torch.load policy). Thirteen models failed to load in the July grid on exactly this and it read as a model problem, not an environment one. See project_torch_bin_floor."
+    provides_vram_gb: 24
+    torch_cuda_arch_list: '8.9'
+    why_arch: "**8.9, NOT THE RUNBOOK'S 8.0.** TORCH_CUDA_ARCH_LIST=8.0 is Ampere; `cards: RTX 4090` in this same file says compute_capability 8.9, arch ada. Kernels built for 8.0 on a 4090 do not load and transformers falls back SILENTLY -- the failure this profile's own 19.3x measurement describes. Verify by the ABSENCE of 'the fast path is not available' on a load that SUCCEEDED; is_mamba_ssm_available() returns True throughout that failure."
+    why: "MEASURED, NOT ARGUED, AND THE ROSTER ALREADY SAID SO. `sizing.steps` declares max_params_b 9 -> vram_gb 24, gpus 1, which is every model in the architecture population. The twp corpus was largely produced on this class of card: 44 rate observations on RTX 4090, 48 on Quadro RTX 8000, 17 on RTX 6000 Ada, 5 on an A100. The worst VRAM case here, google/recurrentgemma-9b (9B, 256,000 vocab), wrote 2,983 cells on a 4090, and Zyphra/Zamba2-7B ran on one WITH the mamba kernels. Priced 2026-09-11 with `vastai search offers`: 1x RTX_4090 rentable, reliability>0.95, disk>250 gives 12 offers at a $0.348 floor and $0.429 p25, against A100_SXM4 on the same filters at $0.629 floor / $0.889 median. Half the price for a job that never touches 80 GB."
+    why_inet: "1000, NOT default's 2000, and the cut is measured rather than assumed: on 4090s inet_down>2000 takes the pool from 12 offers to 4 and the floor from $0.348 to $0.561. The whole 100-model population is ~150 GB of weights, ~20 min at 1 Gbps. The runbook's download-starvation failure is a per-HOST pathology (three boxes on machine 56458, 1-7 MB of HF cache after 45 min) and a bandwidth FLOOR does not catch it -- the discriminator is whether ~/.cache/huggingface GROWS."
+
 engine_recovery:
   _why: "architecture -> box that can host it, for architectures vLLM REMOVED or never supported. Keyed on ARCHITECTURE because that is the fact's shape: BaichuanForCausalLM went after 0.23.0 and every Baichuan went with it."
   AquilaForCausalLM: vllm022_a100
