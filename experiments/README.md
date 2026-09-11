@@ -116,6 +116,8 @@ and the state the first version of the checker could not see.
 
 ### emergence
 
+- **[`acquisition_reversal/`](emergence/acquisition_reversal/README.md)** -- `DESIGNED, NOT RUN, 2026-09-11. The join is verified (one lineage, 2,272/2,272 shared prompts, both rule_version 3) and a crude first look points in the [...]`  
+  NONE STATED -- the design is written, nothing has been run.
 - **[`capacities/`](emergence/capacities/README.md)** -- `PORTED from M05, 2026-08-24. Numbers recomputed by analyse.py, fleet not re-run.`  
   Pretraining builds rhyme pull to 0.383; SFT erodes it to 0.262. DPO has one checkpoint.
 - **[`tuning_order/`](emergence/tuning_order/README.md)** -- `RUN 2026-09-06/07. Three registered arms, five discovered ones, and a cross-seat audit that overturns M05-A's paired null. [...]`  
