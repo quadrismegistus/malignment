@@ -17,36 +17,43 @@ RH's ask, via @lacan: cost and wall-clock, number of prompts, which models, and 
 
                           base only        + aligned arm (THE DELTA DESIGN)
     route A (plain twp)   5.02 GPU-h       10.34 GPU-h
-                          $5.27            $10.86
-    route B (+ closure)   $11-16           $23-33          <- RECOMMENDED
+                          $5.24            $10.79
+    route B (+ closure)   $5.64            $11.62          <- RECOMMENDED
     wall clock            ~6.5 h, one box  ~9-11 h, one box
-    prompts               1,633 per model, the whole missing slot manifest
+    prompts               ~1,621 per model, the whole missing slot manifest
     models                11 base to run (1 done) + 12 aligned
     contrasts             all three coverable, on either arm
 
-**Do not sample.** RH's ask allows one ("a sample is fine, the pilot used 12 primers plus 8 unrhymed"). The full manifest is 1,633 prompts per model at a median 0.62 s/cell, which is **twenty minutes of A100 time per model**. A 20-primer sample would save about $4.80 and cost the within-poem pairing that the whole design rests on. Sampling here is a false economy by roughly two orders of magnitude.
+    CORRECTED 2026-09-11, section 11. Route B was priced at 2-3x and is
+    MEASURED at +9%. And the coverage table in section 1 was built on an
+    unescaped TSV read; Olmo-3's 502 should be 1,786.
 
-**The decision that is RH's, not mine, is §4: whether to run the plain twp route (cheap, reuses `verse_capacity.py` unchanged, and inherits a confound RH personally caught and refused in August) or the closure route (2-3x the cost, needs the rider that never ran, and is the design RH actually approved).**
+**Do not sample.** RH's ask allows one ("a sample is fine, the pilot used 12 primers plus 8 unrhymed"). The full manifest is ~1,621 prompts per model at a median 0.62 s/cell, which is **twenty minutes of A100 time per model**. A 20-primer sample would save about $4.80 and cost the within-poem pairing that the whole design rests on. Sampling here is a false economy by roughly two orders of magnitude.
+
+**§4 framed the route as RH's decision on a cost trade-off. §11 removes the trade-off: the closure rider is measured at +9%, not the 2-3x stated there.** The design question stands and the price difference does not.
 
 ## 1. WHAT IS ACTUALLY MISSING — verified, not inherited
 
 @lacan's count reproduces and then sharpens. Against `source='raw/verse_fleet_merged'`, 11 of 12 are absent and only `allenai/Olmo-3-1025-7B` has all 1,786. But `verse_capacity.py`'s own read discipline selects **by the manifest's prompt set across all sources**, because the fleet's overlap rows sit under older labels — so the source filter is the wrong check. Run properly (manifest contexts intersected against every source in `twp_words`):
 
-    model                        prompts in store   of the 1,786 manifest contexts
-    allenai/Olmo-3-1025-7B                  4,428      502   (1,786 under the fleet label)
-    allenai/Olmo-Hybrid-7B                  2,663      154
-    allenai/OLMoE-1B-7B-0125                2,663      154
-    RWKV/rwkv-4-7b-pile                     2,663      154
-    tiiuae/Falcon3-7B-Base                  2,663      154
-    tiiuae/Falcon-H1-1.5B-Base              2,653      154
-    tiiuae/falcon-mamba-7b                  2,647      153
-    tiiuae/Falcon-H1-7B-Base                2,647      153
-    google/recurrentgemma-9b                2,647      153
-    google/gemma-2-9b                       2,647      153
-    Zyphra/Zamba2-7B                        2,579      148
-    tiiuae/falcon-7b                        2,578      148
+    model                        of the 1,786 manifest contexts    to measure
+    allenai/Olmo-3-1025-7B                    1,786                       0
+    tiiuae/Falcon-H1-1.5B-Base                  166                   1,620
+    RWKV/rwkv-4-7b-pile                         166                   1,620
+    allenai/Olmo-Hybrid-7B                      166                   1,620
+    allenai/OLMoE-1B-7B-0125                    166                   1,620
+    tiiuae/Falcon3-7B-Base                      166                   1,620
+    tiiuae/falcon-mamba-7b                      165                   1,621
+    tiiuae/Falcon-H1-7B-Base                    165                   1,621
+    google/recurrentgemma-9b                    165                   1,621
+    google/gemma-2-9b                           165                   1,621
+    Zyphra/Zamba2-7B                            160                   1,626
+    tiiuae/falcon-7b                            160                   1,626
+                                                        TOTAL        17,836
 
-**The ~153 each already holds are entirely `prose` and `battery` calibration slots** — contexts that happen to coincide with the general 2,983-prompt battery. Checked on `falcon-mamba-7b`: 61 battery + 92 prose, and **zero** of any verse slot. So the absence is total where it matters and the overlap is free calibration, which is the good version of this news: the battery slots that price the single-token bias arrive already measured.
+CORRECTED 2026-09-11 — an earlier version of this table read 502 for Olmo-3 and ~153 for the rest. See §11: the intersection was taken against `ch.raw()` TSV output without unescaping, so every multi-line context and every apostrophe failed to match. `FORMAT JSONEachRow` is the route that works.
+
+**The ~165 each already holds are entirely `prose` and `battery` calibration slots** — contexts that happen to coincide with the general 2,983-prompt battery. Checked on `falcon-mamba-7b`: 61 battery + 92 prose, and **zero** of any verse slot. So the absence is total where it matters and the overlap is free calibration, which is the good version of this news: the battery slots that price the single-token bias arrive already measured.
 
     per-model work   1,633 contexts
     missing by slot  called 178 | near 178 | end1 178 | end2 59 | end3 119
@@ -258,3 +265,60 @@ Point 3 is amended, before any cell: the prediction **requires both arms and is 
 That is right and this section was wrong to frame the two as alternatives. It also supplies the reason I only gestured at: **every number in the folder is a base→aligned delta** — `existence` regresses `(p_aligned - p_base)` on scene, `norm_change` regresses `(aligned - base)` on the base dose — so a base capacity has no grain in common with any of them.
 
 **The live figure for RH is therefore the delta design**, $10.86 on route A and $23-33 on route B, not the base-only $5.27 / $11-16 that §0 led with before this amendment.
+
+## 11. CORRECTIONS 2026-09-11, AND THE POPULATION QUESTION
+
+Three things, on RH's questions (runpod / population / boxes / card). Two are corrections to this file.
+
+### (a) THE CLOSURE RIDER IS +9%, NOT 2-3x. MEASURED.
+
+§4 priced it at 2-3x on the assumption that each of the pilot's `TOP_K = 40` candidates costs a forward. Wrong on both counts: `verse_fleet_producer.closure_rider` batches, and it rides `N_RIDER_CLASS = 8` plus the actual word — **nine rows in ONE forward**, not forty.
+
+Measured locally, SmolLM2-360M on MPS, over 12 real verse slots from the manifest:
+
+    expand() forward calls   median 3   (range 2..6)   -- the beam is SHALLOW here
+    words per cell           median 140
+    expand()                 0.677 s
+    closure rider            0.062 s    (9 rows, one batched forward)
+    -----------------------------------------------------------------
+    RIDER                    +9%        0.677 -> 0.739 s per slot
+
+**The beam is the cost and it is only 2-6 passes at these contexts**, so one more batched forward is noise. Scope: one small model, one device, 12 slots; both terms are batched forwards over the same context, so the ratio should carry, but it is not measured at 7B on CUDA.
+
+**So the route decision is now free.** Route B costs $5.64 against route A's $5.24 on the 12 bases, and $11.62 against $10.79 on the delta design. §0 and §4 are updated; the design argument in §4 is unaffected and is the whole argument.
+
+### (b) THE COVERAGE TABLE IN §1 WAS BUILT ON AN UNESCAPED READ
+
+`ch.raw()` returns TabSeparated, which escapes newlines and quotes. I intersected the manifest's contexts against those strings directly, so **every multi-line verse context failed to match**, and Olmo-3 — which has the complete set — scored 502 of 1,786. `ch.json` is the stdlib module, not a helper; the route that works is `FORMAT JSONEachRow`.
+
+Corrected: Olmo-3 has **1,786 of 1,786**, the other eleven have 160-166 each, and the fleet is **17,836 cells**, not 11 x 1,633 = 17,963. The cost moves by under 1%. **What did not move by under 1% is the Olmo-3 row, which was wrong by 3.6x in a table whose column header said what it was counting.** The lesson is the campaign's own: a filter between the producer and the corpus is invisible from both ends, and here the filter was the transport encoding.
+
+### (c) THE POPULATION. Four are defensible and they cost very differently.
+
+`roster.population()` names them; there is no `endpoint_lineages`. Priced the same way, route B, corrected coverage:
+
+    population                             models    cells     GPU-h        $
+    12 architecture bases                      12   17,836       5.4     5.64
+    + their aligned arm (the delta design)     24   37,303      11.1    11.62
+    all bases + all endpoints ("50 x 2")      100  158,795      30.2    31.67
+    every declared node                       160  252,575      45.3    47.57
+
+Rate provenance holds up at every size: at n=160, **120 measured / 36 transferred / 0 guessed**.
+
+**The verse fleet was NOT a breadth population and this is the thing to know before choosing.** Its 250 files are five repos' checkpoint ladders — `pythia-6.9b` x 155 rungs, `Olmo-3-1025-7B` x 43, `Olmo-3-7B-Think-SFT` x 44, `Olmo-3-7B-Think` x 7, `Think-DPO` x 1. It answered `plan_rhyme.md`'s question 1, WHEN rhyme installs, by depth in one lineage. The architecture question is question 2's shape and needs breadth. **They share the prompts and nothing else**, so this is a new population on an old manifest, not an extension of the fleet.
+
+Given that, `all bases + all endpoints` at **$31.67** is the one I would argue for over the 24. Not because the architecture contest needs it — it does not, 24 answers that — but because it makes `rhyme_pull` a roster-wide instrument on the same footing as `existence` and `norm_change`, both of which run on 50 and 45 pairs. At n=100 the architecture models stop being eight positions asserted against a median computed on a different instrument and become eight positions in this instrument's own distribution. That is the pre-commitment's point 4 — the route out is models — bought for $20.
+
+**`every declared node` at $47.57 is not worth the extra $16 here**, because the extra 60 are intermediates and ablations that answer a within-lineage question this instrument is not being pointed at.
+
+### (d) BOXES AND CARD
+
+**Yes, separate boxes, but fewer than five.** The 12 split across five environments (`ssm`, `default`+`fla`, `default`, `tf457`, `bf16`) and `scripts/venvs.py` derives the venv per model, so venv differences are free on one machine. The real cut is **kernels**: the `ssm` box compiles `mamba-ssm` + `causal-conv1d` from source (~30 min), and Olmo-Hybrid needs `flash-linear-attention` instead. Two boxes is the natural shape at n=12 or 24 — one with the mamba kernels, one without — and at n=100 shard by lineage per `scripts/fleet_shards.py`, whose measured finding is that all 50 endpoint lineages need exactly one venv each and that beyond ~12 boxes the wall clock stops moving.
+
+**A 4090 is enough, and it is measured rather than argued.** The corpus was largely produced on consumer and workstation cards — 44 observations on RTX 4090, 48 on Quadro RTX 8000, 17 on RTX 6000 Ada, and only 5 on an A100. Specifically: `recurrentgemma-9b`, the worst VRAM case here at 9B with a **256,000** vocab, wrote 2,983 cells on an RTX 4090; `Zamba2-7B` ran on a 4090 **with** the mamba kernels; `falcon-7b` and `Olmo-3-1025-7B` likewise. The one caveat is compile target: the runbook's kernel build pins `TORCH_CUDA_ARCH_LIST=8.0`, which is Ampere — a 4090 is 8.9 and needs `8.9`, or the kernels build for the wrong card.
+
+On runpod, live catalogue read 2026-09-11: **RTX 4090 $0.34/hr, A40 $0.35 (48 GB), L40S $0.79 (48 GB), A100 SXM 80 GB $1.39**, all stock `Low`. At $0.34 the 4090 is **4x cheaper than the A100 this spec priced at $1.05**, so every figure above is an upper bound: the delta design is **$3.76 on 4090s**, and all-bases-plus-all-endpoints is **$10.26**. If a 4090's 24 GB is tight for the two 9B models, the A40 at 48 GB is a cent dearer. **Nothing here needs an A100.**
+
+### (e) RUNPOD: THE PRODUCER PORTS, THE ORCHESTRATION DOES NOT
+
+`verse_fleet_producer.py`, `scripts/queue_v4.py` and `scripts/topup_lineage.py` are torch + transformers and care about nothing below them. What is vast-specific is the renting: `scripts/fleet_launch.py` takes vast offers, `malign cloud` wraps the vast CLI, and `data/cloud_profiles.json` describes machine shapes in vast's vocabulary (`gpu_name`, `min_reliability`, `cuda_max_good`, `min_inet_down_mbps`). Those are a provisioning layer to rewrite, not a measurement layer. **The preflight and the casualty discipline in `docs/cloud_runbook.md` are about what the box does after it exists and transfer unchanged** — including §2.13, and including the rule that the discriminator for a stalled box is HF cache growth rather than "instance running", which is the rental and not the work.
