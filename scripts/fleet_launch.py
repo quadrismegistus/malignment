@@ -826,9 +826,17 @@ def execute(b, models, roots, venv, a):
     elif _ssm:
         print("  provision   %d model(s) declare profile ssm -> installing mamba "
               "kernels: %s" % (len(_ssm), ", ".join(x.split("/")[-1] for x in _ssm)))
+    _wheel = (cloud.box(a.box_profile) or {}).get("torch_wheel") or ""
+    if _wheel:
+        print("  provision   torch wheel %s (profile declares it; the image's "
+              "build may not run on this driver)" % _wheel)
     r = cloud.ssh_run(st, PROVISION % {
-        "venv": venv, "want": want,
+        "venv": venv, "want": want, "torch_wheel": _wheel,
         "ssm": (SSM_KERNELS % {"venv": venv}) if _ssm else ""})
+    if r.returncode == 6:
+        _billing(cloud, iid, "torch cannot see the GPU (rc=6)")
+        raise SystemExit("  provision FAILED: torch cannot see this box's GPU. "
+                         "If the profile has no `torch_wheel`, add one.")
     if r.returncode == 5:
         #: Kernels absent. OURS, not the host's -- never blocklist for it.
         _billing(cloud, iid, "SSM kernels failed to install (rc=5)")
@@ -1217,6 +1225,19 @@ fi
 # transformers. Install through uv, targeting the venv's interpreter, exactly as
 # venvs.py does.
 uv pip install -q --python ./%(venv)s/bin/python -e .
+# **THE IMAGE'S TORCH MAY NOT RUN ON THIS BOX'S DRIVER, AND IT FAILS SILENTLY
+# INTO CPU.** Measured on the first 4090 rental, box 50609302, 2026-09-11: the
+# vllm image ships torch 2.14.0+cu130, driver 565.77 supports CUDA 12.6, and the
+# forward-compatibility layer that would bridge that is DATACENTER-ONLY. On a
+# GeForce card `torch.cuda.is_available()` is False with "Error 804: forward
+# compatibility was attempted on non supported HW" while `device_count()` says 1,
+# so the model loads on CPU and bills at GPU rates -- 2816%% CPU, GPU 0%%.
+# `torch_wheel` on the box profile names the index to install from instead.
+if [ -n "%(torch_wheel)s" ]; then
+  uv pip install -q --python ./%(venv)s/bin/python \
+      --index-url https://download.pytorch.org/whl/%(torch_wheel)s 'torch==2.6.*' \
+    || echo "could not install the %(torch_wheel)s torch wheel"
+fi
 # **AND THE PIN IS ASSERTED, NOT ANNOUNCED.** A build that prints a version
 # nobody compares is how 5.15.0 ran for an hour under a name meaning 4.57.1.
 # The expected value is this checkout's OWN venv, so the box matches the machine
@@ -1239,6 +1260,19 @@ if want and mm(got) != mm(want):
     print("VENV MISMATCH: %(venv)s has transformers", got,
           "but this roster declares", want)
     sys.exit(4)
+#: **THIS LINE ALREADY PRINTED `cuda` AND NOTHING COMPARED IT.** That is the
+#: same defect the transformers pin above was given a gate for -- "asserted, not
+#: announced" -- and it cost 25 minutes of a 4090 running the whole model on CPU
+#: while every other signal read healthy. A box rented for a GPU that cannot see
+#: one is not a slow box, it is a wrong box, and it should die here rather than
+#: after the weights download.
+if not torch.cuda.is_available():
+    print("NO CUDA: torch", torch.__version__, "cannot see this box's GPU.",
+          "device_count", torch.cuda.device_count(),
+          "-- error 804 means the image's CUDA build is newer than the driver",
+          "and forward compat is datacenter-only. Set `torch_wheel` on the box",
+          "profile (cu126 for a 565 driver).")
+    sys.exit(6)
 print("VENV OK: transformers", got, "on the", mm(want) or "?", "line")
 VEOF
 %(ssm)s
