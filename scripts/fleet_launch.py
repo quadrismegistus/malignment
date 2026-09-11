@@ -1233,6 +1233,16 @@ uv pip install -q --python ./%(venv)s/bin/python -e .
 # compatibility was attempted on non supported HW" while `device_count()` says 1,
 # so the model loads on CPU and bills at GPU rates -- 2816%% CPU, GPU 0%%.
 # `torch_wheel` on the box profile names the index to install from instead.
+# **AND THE COMPAT SHIM MUST GO, WHICH THE WHEEL ALONE DOES NOT FIX.** Measured
+# across two boxes the same day: on driver 565 the image's cu130 torch cannot run
+# at all and cu126 is the fix; on driver 570 cu126 installs fine and CUDA is STILL
+# False with error 804 until /usr/local/cuda*/compat is moved aside. Both matter
+# and which one binds depends on the driver, so do both. Forward compat is a
+# DATACENTER feature; on a GeForce card the shim can only fail.
+for d in /usr/local/cuda*/compat; do
+  [ -e "$d" ] && mv "$d" "${d}.off" 2>/dev/null || true
+done
+ldconfig 2>/dev/null || true
 if [ -n "%(torch_wheel)s" ]; then
   uv pip install -q --python ./%(venv)s/bin/python \
       --index-url https://download.pytorch.org/whl/%(torch_wheel)s 'torch==2.6.*' \
