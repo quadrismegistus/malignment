@@ -147,6 +147,33 @@ The percentages are almost exactly swapped. **Dropping an entire data source bar
 
 **The control that would separate them is not in the roster**: same architecture, genuinely different pretraining run, same post-training data, same scale. The nearest available is `Llama-3.1-8B` and `OLMo-2-0425-1B` both under Tulu-3 -- two dense transformers, different pretraining, one recipe -- confounded by 8B against 1B, and it needs the OLMo-2 arm's mixture checked in `attestations.json` rather than inferred from the lab. **Until that is filled in, the defensible sentence is the weaker one: models that start apart respond to identical alignment data in different directions.** Not "architecture mediates alignment."
 
+## HIS TURF, ANSWERED: the attention-free models are not distinctive
+
+All 50 endpoint BASES, pairwise, 1,225 pairs, 200 v6-rated prompts, words above the twp theta of 0.001. If attention realized something distinctive about language, models lacking it should sit APART from the transformer cloud. Each model's median distance to the other 49, and its rank among 50 (rank 1 = most central):
+
+    model                    attn           block     ctxD  rank     typeD  rank
+    Falcon-H1-7B-Base        full+ssm       hybrid   0.363   3/50    0.274   4/50
+    rwkv-4-7b-pile           linear         dense    0.376  12/50    0.286  16/50
+    Olmo-Hybrid-7B           full+linear    hybrid   0.378  14/50    0.287  17/50
+    falcon-mamba-7b          none           ssm      0.397  25/50    0.294  23/50
+    Falcon-H1-1.5B-Base      full+ssm       hybrid   0.406  30/50    0.295  26/50
+    Zamba2-7B                full+ssm       hybrid   0.407  32/50    0.294  22/50
+    recurrentgemma-9b        local+linear   hybrid   0.407  33/50    0.326  41/50
+    OLMoE-1B-7B-0125         full           moe      0.418  36/50    0.309  32/50
+    -- roster median --                              0.398           0.295
+
+**`falcon-mamba-7b`, which computes no attention of any kind, is the median model of the census**: rank 25 of 50 on contextual norms, 23 of 50 on type norms, 29 of 50 on vocabulary overlap. `rwkv-4-7b-pile` is MORE central than the average transformer. The most central model on both norm measures is `Falcon-H1-7B-Base`, a Mamba hybrid, which is more typical of this roster than most of the dense transformers in it.
+
+The ranks also disagree across measures -- `Falcon-H1-7B-Base` is 3rd on contextual norms and 46th on Jaccard -- which is what no signal looks like rather than a weak one.
+
+**This is the folder's answer to Weatherby and it is a negative.** The instrument is the same one that cleanly separates an SFT step from a DPO step and reads +0.930 when two runs really do the same thing. Pointed at base models, it finds that removing attention entirely moves a model to the middle of the distribution. Whatever distinguishes these 50 base models from each other, it is not whether they compute attention.
+
+**The scale that makes this readable.** Base models are all much closer to each other than `Olmo-3` is to its own SFT checkpoint: the median distance between any two of the 50 bases is 0.407, while `olmo3 base->SFT` is 0.513. One alignment step moves a model further than the entire spread of architectures, vendors, scales and corpora at base. (`hybrid base->SFT` at 0.323 does not clear that bar, so this is not uniform, but the comparison holds for the larger of the two.)
+
+**What it does NOT show.** This is not the poetic function. It is the general claim -- does architecture make a detectable difference to how a base model distributes mass over a slot -- and the answer is no, at this grain, on these measures. A model could still lack rhyme pull while sitting at the centre of a norm-profile cloud, which is exactly what `rhyme_pull`'s base arm would test and why that fleet is still the direct test. What this removes is the ground under "computation and language share form as a demonstrable technical fact": the demonstrable difference is not where the architecture is.
+
+**AND IT SITS AGAINST THE CROSS-STAGE RESULT, WHICH IS THE INTERESTING PART.** Architecture is undetectable at base and decisive under alignment: the same SFT data moves two architectures nearly orthogonally (+0.233) where the ceiling is +0.930. **The architecture shows up at the cut, not in the language.** That puts the live fact on the operation's side of the contest rather than on the mechanism's, which is this project's thesis arriving from a direction it did not plan.
+
 ## Where the metadata comes from
 
 `roster/models/models.yaml` has no architecture field, and it is AUTHORED (hand-edited, no script writes it), so this folder does not add one. What it does have is `env.profile: ssm`, an environment requirement (mamba-ssm and causal-conv1d kernels) carrying its own `why`, which picks out the SSM and hybrid families exactly. The rest comes from `roster/models/attestations.json`, whose `notes` carry sourced architecture prose at `confidence: high`.
