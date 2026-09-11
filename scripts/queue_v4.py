@@ -64,6 +64,9 @@ def main():
                          "same thing -- see docs/prefill.md.")
     ap.add_argument("--user-msg", default=None,
                     help="pass through: the user turn before a prefill stem")
+    ap.add_argument("--closure-file", default=None,
+                    help="passed through to run_v4 --closure-file for every "
+                         "model in the queue.")
     ap.add_argument("--prompts-file", default=None,
                     help="pass through: one prompt per line. Without it each "
                          "model measures the pairing population, which is not "
@@ -172,6 +175,8 @@ def main():
                 _extra += ["--user-msg", a.user_msg]
             if a.prompts_file:
                 _extra += ["--prompts-file", a.prompts_file]
+            if a.closure_file:
+                _extra += ["--closure-file", a.closure_file]
             r = subprocess.run([py, "-u", os.path.join(ROOT, "scripts", "run_v4.py"),
                                 "--model", m, "--cache"]
                                + (["--only", a.only] if a.only else []) + _extra,

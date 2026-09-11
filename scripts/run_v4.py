@@ -36,6 +36,7 @@ cached and an uncached cell are different measurements of one prompt and both ar
 kept. Do not mix them inside one corpus.
 """
 import argparse
+import json
 import os
 import sys
 
@@ -93,6 +94,19 @@ def main():
     ap.add_argument("--from-stash", action="store_true",
                     help="pass 2 builds its union from the local stash, for a box "
                          "with no ClickHouse")
+    ap.add_argument("--prompts-json", default=None,
+                    help="a JSON array of prompt strings. USE THIS FOR ANY "
+                         "PROMPT CONTAINING A NEWLINE -- --prompts-file is one "
+                         "per line and cannot hold one. Declares its own "
+                         "population, so prompts outside Prompts.all() are "
+                         "measured rather than refused; the count is printed.")
+    ap.add_argument("--closure-file", default=None,
+                    help="a JSON array of context strings at "
+                         "which to ALSO measure line closure. The verse slot "
+                         "manifest's contexts. PLAIN STRINGS -- nothing "
+                         "phonological runs here; the rime classes are applied "
+                         "offline. Costs a measured +27%% on the cells it fires "
+                         "on and nothing on the rest.")
     ap.add_argument("--prompts-file", default=None,
                     help="explicit prompt list, one per line, EXACT text. Takes "
                          "precedence over --only. Added for dario's frame-level "
@@ -148,7 +162,25 @@ def main():
     #: Kept as a flag rather than a reordering because "which prompts did this
     #: run cover" must stay answerable, and a silent priority sort makes a
     #: partial run indistinguishable from a complete one.
-    if a.prompts_file:
+    if a.prompts_json:
+        #: **A LINE-PER-PROMPT FILE CANNOT CARRY A MULTI-LINE PROMPT**, and the
+        #: verse slot manifest is 1,608 multi-line contexts out of 1,786. Found
+        #: locally 2026-09-11 before any box: escaping the newline makes the
+        #: string arrive as a literal backslash-n, which is a DIFFERENT PROMPT
+        #: that measures cleanly and joins nothing -- the same class of defect
+        #: as reading ClickHouse TSV without unescaping, one transport along.
+        #:
+        #: The `--prompts-file` refusal below is deliberate and stays: a list
+        #: that half-resolves is a request the caller did not make. This route
+        #: DECLARES its population instead of being checked against the shared
+        #: one, because injecting 1,786 verse prefixes into `Prompts.all()`
+        #: would move every other consumer's denominator.
+        prompts = list(json.load(open(a.prompts_json, encoding="utf-8")))
+        _all = {p.text for p in Prompts.all()}
+        print("  prompts   %d from %s (%d outside Prompts.all(), declared)"
+              % (len(prompts), os.path.basename(a.prompts_json),
+                 sum(1 for t in prompts if t not in _all)), flush=True)
+    elif a.prompts_file:
         want = [l.rstrip("\n") for l in open(a.prompts_file, encoding="utf-8") if l.strip()]
         allp = {p.text for p in Prompts.all()}
         prompts = [t for t in want if t in allp]
@@ -186,10 +218,22 @@ def main():
                                        limit=a.limit, prompts=prompts,
                                        from_stash=a.from_stash)
         from malignment.generate import DEFAULT
+        #: `closure_at` is a SET OF PROMPTS, not a flag: the rider is meaningless
+        #: at a prompt that is not a line-final slot, and it costs +27% where it
+        #: fires. Reading it here rather than deriving it on the box keeps the
+        #: box free of the manifest's semantics -- it gets strings.
+        _cl = None
+        if a.closure_file:
+            #: JSON for the same reason as --prompts-json: these strings
+            #: contain newlines, and an escaped one is a different string.
+            _cl = set(json.load(open(a.closure_file, encoding="utf-8")))
+            print("  closure   %d context(s); %d of this run's %d prompts match"
+                  % (len(_cl), sum(1 for x in prompts if x in _cl), len(prompts)),
+                  flush=True)
         return ck.run_twp(prompts, rules=V4.ADOPTED, limit=a.limit,
                           frame=a.frame,
                           system=DEFAULT if a.system is None else a.system,
-                          user_msg=a.user_msg)
+                          user_msg=a.user_msg, closure_at=_cl)
     finally:
         sys.stdout = tee.stream
         tee.close()
