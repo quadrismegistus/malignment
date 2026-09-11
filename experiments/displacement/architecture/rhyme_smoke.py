@@ -45,6 +45,33 @@ for:
    The `.f16` tier is the counter-example: collected, paid for, and holding zero
    live readers because nothing downstream could reach it.
 
+## HOW CLOSURE WAS STORED BEFORE: NOWHERE AT FLEET SCALE, AND ALWAYS DERIVED
+
+Checked, not recalled. Three artifacts exist and none stores the primitive:
+
+    rhyme_pull_pilot.parquet        96 x 14   per (model, poem): line_closure,
+                                              rhyme_raw, rhyme_given_closure,
+                                              nonpartner_*, p_actual
+    verse_fleet_smoke.parquet       27 x 14   per (poem, slot):
+                                              close_given_class, p_close_actual
+    verse_fleet_smoke_words.parquet 2082 x 4  id_human, slot, surface, prob
+                                              -- NO closure column at all
+    the 250-file fleet              ZERO      no p_close, no close_given_class
+
+**Both precedents computed `c(w)` per word in memory and threw it away**, keeping
+only the ratio. That is the thing to change, and RH's instruction is the reason:
+
+- A stored ratio has the RIME CLASS baked into it, so computing it requires the
+  class vocabulary on the box. A stored per-word `p_close` does not, so the box
+  runs no phonology and the Mac makes every class decision offline.
+- **The rime key has already been revised once.** v1 fell back to syllable
+  SPELLING and shattered /ei/ into 'ay' / 'ey' / 'eigh'; v2 is phonemic. Any
+  per-cell ratio computed under v1 was unrecoverable without re-running the
+  model. Per-word closure is key-agnostic and survives the next revision too.
+- `line_closure` and `rhyme_given_closure` are both derivable from
+  (`rows`, `closure.words`, manifest). `close_given_class` is derivable from
+  them. The reverse holds for none of these.
+
 ## THE RIDER IS K=40, NOT K=9, AND THE DIFFERENCE IS THE DECOMPOSITION
 
 `verse_fleet_producer.closure_rider` rides `N_RIDER_CLASS = 8` plus the actual
@@ -118,12 +145,19 @@ def main(argv=None):
     ap.add_argument("--device", default=None)
     ap.add_argument("--n", type=int, default=18)
     ap.add_argument("--out", default=None)
+    ap.add_argument("--produce-only", action="store_true",
+                    help="write the jsonl and stop. THE BOX RUNS THIS. No prosodic.")
     a = ap.parse_args(argv)
 
     import torch
     from malign_logits import twp
     from transformers import AutoModelForCausalLM, AutoTokenizer
-    from verse_fleet_producer import closure_rider, newline_ids, rime_key
+    #: **NO PHONOLOGY ON THE BOX.** RH, 2026-09-11: *"Let's not run prosodic on
+    #: the cloud though right? We can do the prosodic analysis after we have the
+    #: data."* Right, and the K=40 design is what makes it possible: the rider
+    #: is the top 40 words BY MASS, so selecting it needs no rime class and the
+    #: box never imports prosodic. `rime_key` is imported inside `analyse()`.
+    from verse_fleet_producer import closure_rider, newline_ids
 
     dev = a.device or twp.pick_device()
     out = a.out or os.path.join(HERE, "results", "smoke.jsonl")
@@ -154,6 +188,10 @@ def main(argv=None):
         for r in recs:
             fh.write(json.dumps(r, ensure_ascii=False) + "\n")
     print("wrote %s: %d cells in %.1f s" % (out, len(recs), time.time() - t0))
+    if a.produce_only:
+        print("--produce-only: stopping before any phonology. "
+              "Run without it on the Mac to analyse.")
+        return 0
 
     # ---- the four assertions -------------------------------------------------
     print("\nASSERTIONS")
@@ -176,6 +214,7 @@ def main(argv=None):
           % (len(nprob), "PASS" if good else "FAIL"))
     ok &= good
 
+    from verse_fleet_producer import rime_key          # ANALYSIS ONLY -- prosodic
     #: **ASSERTION 0, ADDED AFTER THE FIRST SMOKE REPORTED PASS WITH EVERY
     #: CLASS SHARE AT 0.000.** `rime_key` swallows every exception and returns
     #: None, so a missing `prosodic` is indistinguishable from a model with no
