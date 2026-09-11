@@ -29,6 +29,11 @@
    "seen": "2026-08-27",
    "failures": 1,
    "symptom": "ssh silent for 6 min after create"
+  },
+  "60701": {
+   "seen": "2026-09-11",
+   "failures": 1,
+   "symptom": "CANNOT REACH PyPI. `uv pip install -e .` sat 31 min at 3.5% CPU with 3 packages in site-packages and 96 cores idle at load 10; site-packages static across 45 s and `curl files.pythonhosted.org` returned 0 B/s. Provisioning never finished, so no stage log and no cells. Discriminator is the runbook's: static is a state, growing is a race -- and the shape reads as a slow box, not a broken one, which is why it ran 45 min before anyone asked."
   }
  }
 }
