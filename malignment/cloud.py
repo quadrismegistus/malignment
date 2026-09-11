@@ -181,9 +181,22 @@ def destroy_verified(iid, tries=6, wait=5):
 
 
 def _blocked():
+    """Machine ids currently excluded from offers.
+
+    **`active: false` WITHDRAWS AN ENTRY WITHOUT DELETING IT**, because the two
+    are different acts: deleting loses why the machine was ever suspected, and
+    leaving it costs a host permanently. `blocklist()`'s own docstring already
+    argues for this -- "a machine bad today may be fine next month, and a
+    permanent blocklist silently shrinks the market" -- and this reader did not
+    implement it, so a withdrawal written into the file had no effect at all.
+    Found 2026-09-11 after four machines were blocklisted in one burst launch on
+    a symptom that then reproduced on healthy hosts.
+    """
     try:
         with open(BLOCKLIST, encoding="utf-8") as fh:
-            return set(json.load(fh).get("machines", {}))
+            ms = json.load(fh).get("machines", {})
+        return {m for m, v in ms.items()
+                if not (isinstance(v, dict) and v.get("active") is False)}
     except Exception:                                           # noqa: BLE001
         return set()
 

@@ -34,6 +34,34 @@
    "seen": "2026-09-11",
    "failures": 1,
    "symptom": "CANNOT REACH PyPI. `uv pip install -e .` sat 31 min at 3.5% CPU with 3 packages in site-packages and 96 cores idle at load 10; site-packages static across 45 s and `curl files.pythonhosted.org` returned 0 B/s. Provisioning never finished, so no stage log and no cells. Discriminator is the runbook's: static is a state, growing is a race -- and the shape reads as a slow box, not a broken one, which is why it ran 45 min before anyone asked."
+  },
+  "31849": {
+   "seen": "2026-09-11",
+   "failures": 1,
+   "symptom": "ssh silent for 6 min after create",
+   "withdrawn": "WITHDRAWN 2026-09-11, SAME DAY. Blocklisted on 'ssh silent for 6 min after create' during a burst launch of SIX boxes 4 seconds apart. All four had NO mapped 22/tcp port in the instance record when the launcher gave up, while the two that survived the same burst had real ports. Relaunched 60 s apart, three boxes sat at port=None for one 5-minute tick and ALL THREE had mapped ports and were running by the next -- so the port assignment completes, and 6 minutes is too short for a burst create rather than these hosts being bad. A wrongly blocklisted machine leaves the offer pool permanently, so the entry is withdrawn rather than left standing on a symptom that reproduced on healthy hosts.",
+   "active": false
+  },
+  "40477": {
+   "seen": "2026-09-11",
+   "failures": 1,
+   "symptom": "ssh silent for 6 min after create",
+   "withdrawn": "WITHDRAWN 2026-09-11, SAME DAY. Blocklisted on 'ssh silent for 6 min after create' during a burst launch of SIX boxes 4 seconds apart. All four had NO mapped 22/tcp port in the instance record when the launcher gave up, while the two that survived the same burst had real ports. Relaunched 60 s apart, three boxes sat at port=None for one 5-minute tick and ALL THREE had mapped ports and were running by the next -- so the port assignment completes, and 6 minutes is too short for a burst create rather than these hosts being bad. A wrongly blocklisted machine leaves the offer pool permanently, so the entry is withdrawn rather than left standing on a symptom that reproduced on healthy hosts.",
+   "active": false
+  },
+  "51613": {
+   "seen": "2026-09-11",
+   "failures": 1,
+   "symptom": "ssh silent for 6 min after create",
+   "withdrawn": "WITHDRAWN 2026-09-11, SAME DAY. Blocklisted on 'ssh silent for 6 min after create' during a burst launch of SIX boxes 4 seconds apart. All four had NO mapped 22/tcp port in the instance record when the launcher gave up, while the two that survived the same burst had real ports. Relaunched 60 s apart, three boxes sat at port=None for one 5-minute tick and ALL THREE had mapped ports and were running by the next -- so the port assignment completes, and 6 minutes is too short for a burst create rather than these hosts being bad. A wrongly blocklisted machine leaves the offer pool permanently, so the entry is withdrawn rather than left standing on a symptom that reproduced on healthy hosts.",
+   "active": false
+  },
+  "8232": {
+   "seen": "2026-09-11",
+   "failures": 1,
+   "symptom": "ssh silent for 6 min after create",
+   "withdrawn": "WITHDRAWN 2026-09-11, SAME DAY. Blocklisted on 'ssh silent for 6 min after create' during a burst launch of SIX boxes 4 seconds apart. All four had NO mapped 22/tcp port in the instance record when the launcher gave up, while the two that survived the same burst had real ports. Relaunched 60 s apart, three boxes sat at port=None for one 5-minute tick and ALL THREE had mapped ports and were running by the next -- so the port assignment completes, and 6 minutes is too short for a burst create rather than these hosts being bad. A wrongly blocklisted machine leaves the offer pool permanently, so the entry is withdrawn rather than left standing on a symptom that reproduced on healthy hosts.",
+   "active": false
   }
  }
 }
