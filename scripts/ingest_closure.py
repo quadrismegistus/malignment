@@ -91,10 +91,25 @@ DDL = """CREATE TABLE IF NOT EXISTS {db}.twp_closure (
 
 def records(pattern=None):
     """-> every stored record carrying a `closure` key, with its file's source."""
+    from malignment import ingest as _ING
     for path in sorted(glob.glob(pattern or STASH)):
-        #: the source label mirrors the words ingest: the producer directory
-        #: two levels up, which is how a box's output is told from a Mac's.
-        src = "raw/" + os.path.basename(os.path.dirname(os.path.dirname(path)))
+        #: **THE LABEL IS COMPUTED THE WAY `ingest.scan()` COMPUTES IT, NOT THE
+        #: WAY THAT READS WELL HERE.** An earlier version of this line built
+        #: "raw/<producer-dir>" -- which is legible, and wrong: the words ingest
+        #: labels the same file `malignment-data/twp/<model>/<producer>/
+        #: jsonl.hashstash.raw`, relative to its own root with that root's
+        #: prefix. Two tables carrying two source strings for ONE file cannot be
+        #: joined on source and quietly teach a reader a false partition, which
+        #: is the defect `scan()`'s own docstring warns about: the label "is part
+        #: of the data's identity -- it lands in the `source` column, so renaming
+        #: a directory re-partitions the store."
+        src = None
+        for _root, _prefix in _ING.ROOTS:
+            if os.path.abspath(path).startswith(os.path.abspath(_root)):
+                src = _prefix + (os.path.dirname(os.path.relpath(path, _root)) or ".")
+                break
+        if src is None:
+            continue
         mtime = os.path.getmtime(path)
         with open(path, encoding="utf-8") as fh:
             for line in fh:
