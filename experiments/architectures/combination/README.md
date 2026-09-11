@@ -45,7 +45,7 @@ Binning by length instead of fitting a slope reverses it:
     1200-2000       --     0      0      0.4543   51    926          --
     2000-9999       --     0      0      0.4535   38    811          --
 
-**Attention-free drift is LOWER wherever the two groups overlap, and the group vanishes above 1,200 words** because `falcon-mamba` writes 557 words median and produces none longer. Its slope had been fitted inside 200-1200 and compared against slopes fitted over 200-2500. **So this corpus does not test long-range coherence for an attention-free model; it tests a model that stops first.**
+**Attention-free drift is LOWER wherever the two groups overlap, and the group is absent from the long bins** -- but read that carefully. `falcon-mamba` writes 557 words median and **2 of its 57 raw generations exceed 1,200 words, the longest 2,362.** It is this file's `MIN_IN_BIN = 5` that drops them, not the model. An earlier version of this section said the model produced NONE, which is false, and the difference is the difference between a claim about a capability and a claim about a sample size. Its slope had been fitted inside 200-1200 and compared against slopes fitted over 200-2500. **So this corpus cannot MEASURE an attention-free model at length. That is not evidence that it fails at length.**
 
 Two further corrections the first pass needed. The unit is the MODEL, not the text, because one model contributing 900 texts to a bin would otherwise set that bin's median. And the split is by ATTENTION, not by block: the first pass counted `OLMoE` as non-dense when it is a mixture with FULL attention, which took the apparent n from one lineage to three.
 

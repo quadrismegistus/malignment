@@ -101,6 +101,7 @@ LINEAGES = [
 DRIFT = os.path.expanduser("~/malignment-data/national_story/story_drift.jsonl")
 #: uneven bins: the mass sits at 600-1200 and above 2000, and equal-width bins
 #: put 43 models in one and 4 in another.
+MIN_IN_BIN = 5   #: a model needs this many texts in a bin to contribute to it
 LEN_BINS = [(200, 600), (600, 1200), (1200, 2000), (2000, 10 ** 9)]
 
 
@@ -115,8 +116,10 @@ def long_context(a):
     an attention-free model losing the thread faster as length grows -- in the
     predicted direction, in the regime where the prediction says it should.
 
-    **It was RANGE RESTRICTION.** `falcon-mamba` writes 557 words median and has
-    ZERO generations over 1,200 words. Its slope was fitted inside 200-1200 and
+    **It was RANGE RESTRICTION.** `falcon-mamba` writes 557 words median, and
+    only 2 of its 57 raw generations exceed 1,200 words -- too few to estimate a
+    bin median, which is not the same as none. (An earlier version of this
+    docstring said ZERO, which is false: the longest is 2,362 words.) Its slope was fitted inside 200-1200 and
     compared against slopes fitted over 200-2500. Binning by length instead, and
     comparing only where both groups exist, reverses the sign: attention-free
     drift is LOWER in both bins it occupies.
@@ -166,7 +169,7 @@ def long_context(a):
         d = by[(lo, hi)]
         def side(want):
             g = [(st.median(v), len(v)) for m, v in d.items()
-                 if grp(m) == want and len(v) >= 5]
+                 if grp(m) == want and len(v) >= MIN_IN_BIN]
             return ((st.median([x for x, _ in g]), len(g), sum(n for _, n in g))
                     if g else (float("nan"), 0, 0))
         a1, a2, a3 = side("attention-free")
@@ -177,14 +180,18 @@ def long_context(a):
     print()
     for lo, hi in LEN_BINS:
         ms = [m.split("/")[-1] for m, v in by[(lo, hi)].items()
-              if grp(m) == "attention-free" and len(v) >= 5]
+              if grp(m) == "attention-free" and len(v) >= MIN_IN_BIN]
         print("   attention-free in %-10s %s"
               % ("%d-%d:" % (lo, hi if hi < 10 ** 8 else 9999), ms or "-- none --"))
     print()
     print("ATTENTION-FREE DRIFT IS LOWER WHERE THE TWO GROUPS OVERLAP, and the")
-    print("group vanishes above 1,200 words because falcon-mamba does not write")
-    print("that long. So this corpus does NOT test long-range coherence for an")
-    print("attention-free model: it tests a model that stops first.")
+    print("group is ABSENT from the long bins -- but read that carefully.")
+    print("falcon-mamba DOES write long: 2 of its 57 raw generations exceed")
+    print("1,200 words and the longest is 2,362. It is the MIN_IN_BIN filter")
+    print("above that drops them, not the model. 'Cannot write long' and 'writes")
+    print("long too rarely to estimate a bin median' are different claims and")
+    print("the first one is false. What this corpus cannot do is MEASURE an")
+    print("attention-free model at length; it is not evidence that none exists.")
     print()
     print("n IS ONE LINEAGE. Zamba2-7B is in national_story (23 and 27 raw rows)")
     print("but is a full+ssm HYBRID, and recurrentgemma-9b has ONE base row.")
