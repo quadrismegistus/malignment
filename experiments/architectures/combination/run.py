@@ -84,6 +84,64 @@ METRICS = ["mean_drift", "mean_pairwise", "bits_per_byte", "directedness", "orde
 INTERPRETABLE = 3
 
 
+#: BOTH ARMS of four non-dense lineages live here as SEPARATE model rows, which
+#: is why an arm pairing has to be declared rather than read off a column.
+LINEAGES = [
+    ("tiiuae/falcon-mamba-7b",        "tiiuae/falcon-mamba-7b-instruct"),
+    ("tiiuae/Falcon3-Mamba-7B-Base",  "tiiuae/Falcon3-Mamba-7B-Instruct"),
+    ("tiiuae/Falcon-H1-7B-Base",      "tiiuae/Falcon-H1-7B-Instruct"),
+    ("allenai/OLMoE-1B-7B-0125",      "allenai/OLMoE-1B-7B-0125-DPO"),
+    #: dense controls, same corpus, same slice
+    ("allenai/Olmo-3-1025-7B",        "allenai/Olmo-3-7B-Instruct"),
+    ("tiiuae/Falcon3-7B-Base",        "tiiuae/Falcon3-7B-Instruct"),
+    ("google/gemma-2-9b",             "google/gemma-2-9b-it"),
+]
+
+
+def build_pool(a):
+    """Write the deepseek input for this subject. Scored by ref_surprisal.py.
+
+    SHUFFLED AND SEEDED, copying `build_ref_pool.py`'s reason verbatim: a run
+    stopped early must be a SAMPLE and not a prefix. One file, so every model is
+    scored by one reference on one device in one pass.
+    """
+    import json
+    import random
+    import pandas as pd
+    d = pd.read_parquet(PARQUET, columns=["model", "arm", "prompt", "corpus",
+                                          "script", "n_sents", "text", "text_sha"])
+    want = [m for pair in LINEAGES for m in pair]
+    d = d[(d["model"].isin(want)) & (d["script"] == a.script)
+          & (d["corpus"] == a.corpus) & (d["n_sents"] >= a.min_sents)]
+    rows, rng = [], random.Random(20260911)
+    for m, g in d.groupby("model"):
+        take = g.sample(n=min(a.per_model, len(g)), random_state=20260911)
+        for r in take.itertuples():
+            rows.append({"id": "%s|%s" % (m, r.text_sha), "pool": "architecture",
+                         "model": m, "arm": r.arm, "prompt": r.prompt,
+                         "text_sha": r.text_sha, "text": r.text})
+    rng.shuffle(rows)
+    with open(a.build_pool, "w") as fh:
+        for r in rows:
+            fh.write(json.dumps(r) + "\n")
+    got = {}
+    for r in rows:
+        got[r["model"]] = got.get(r["model"], 0) + 1
+    print("wrote %d passages over %d models -> %s" % (len(rows), len(got), a.build_pool))
+    for m in sorted(got):
+        print("   %-36s %5d  %s" % (m.split("/")[-1][:36], got[m],
+                                    "/".join(roster_arch(m))))
+    print()
+    print("now:  python experiments/passage_analysis/jakobson_space/ref_surprisal.py \\")
+    print("          --input %s --out $MALIGNMENT_DATA/ref_pool/architecture" % a.build_pool)
+    return 0
+
+
+def roster_arch(m):
+    from malignment import roster
+    return roster.architecture(m)
+
+
 def spread(a):
     """Where do the attention-free models fall in the WHOLE distribution?
 
@@ -158,6 +216,17 @@ def main():
                          "held by >=90%% of what remains, so the comparison is "
                          "on a common core rather than each model's own mix.")
     ap.add_argument("--min-prompts", type=int, default=150)
+    ap.add_argument("--build-pool", metavar="OUT.jsonl", default=None,
+                    help="write a deepseek ref pool for THIS subject's models "
+                         "and stop. The jakobson deepseek axis cannot reach "
+                         "these architectures at any price -- its pool is gated "
+                         "on a 58-model blind narrative coding over f11_l2, and "
+                         "f11_l2 holds only 3 of this subject's models, all of "
+                         "them dense or MoE. So the pool is rebuilt here, "
+                         "self-contained: same scorer, same one-model-one-pass "
+                         "discipline, NOT joinable to two_axes.csv because the "
+                         "corpus and the coding differ.")
+    ap.add_argument("--per-model", type=int, default=400)
     ap.add_argument("--script", default="en",
                     help="ENGLISH ONLY BY DEFAULT (RH, 2026-09-11). The zh rows "
                          "go through a different pipeline entirely -- stanza-zh "
@@ -169,6 +238,8 @@ def main():
                          "and no reason at all to carry.")
     a = ap.parse_args()
 
+    if a.build_pool:
+        return build_pool(a)
     if a.spread:
         return spread(a)
     cols = ["model", "arm", "prompt", "corpus", "script", "n_sents"] + METRICS

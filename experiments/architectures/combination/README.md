@@ -76,6 +76,32 @@ Across-model spread against the median within-model IQR over prompts. **On a fir
 
 So the population is one pure SSM, one hybrid and one MoE against three dense transformers, and the best-controlled pair in the subject is the one the data cannot serve. **That is a limit on the null, not a null about architecture.**
 
+## Degeneracy, which RH raised and which lands in three places
+
+Some generated passages are simply degenerate -- repetition loops, near-empty output -- and a degenerate passage has low drift AND low surprisal for reasons that are about the generator's quality rather than its architecture.
+
+**1. The gross screen was already applied, and by luck rather than judgement.** `passages_std.parquet` is the STANDARDISED population: `jakobson_space/population.py:degenerate()` cuts a passage under 5 words, or with any single word above 30% of tokens, or any single character above 30%. Measured: the raw `passages.parquet` is **4.73% degenerate**, `passages_std.parquet` is **0.00%**, 11,515 rows dropped. The detector was checked against known cases before this was believed.
+
+**2. For the BASE comparison the screen is near-uniform, so the result above stands.** Drop rates: `Olmo-3` and both `gemma-2` arms 0.0%, `Falcon-H1` and `Falcon3-Mamba` 0.1%, `falcon-mamba-7b` 0.2%, `OLMoE` 0.4%.
+
+**3. For the DELTA design it is not, and this is the finding.** `falcon-mamba-7b-instruct` loses **3.4%** (83 of 2,429) -- an order of magnitude more than anything else, and it is the aligned arm of the pure SSM. Its survivors exclude its worst output, so a base-to-aligned delta for that lineage is computed on a differentially selected aligned arm and will flatter it. **Any delta on the falcon-mamba lineage has to carry that.**
+
+### Sub-threshold repetition, which the binary screen cannot see
+
+The screen cuts at 0.30; nothing below it is touched. Mean top-word share and type-token ratio over 800 sampled passages per model:
+
+    model                     top-word     TTR   share>0.15
+    gemma-2-9b-it               0.0592   0.716         0.0%
+    falcon-mamba-7b             0.0592   0.719         0.2%
+    Olmo-3-1025-7B              0.0611   0.711         0.5%
+    Falcon-H1-7B-Base           0.0617   0.717         0.2%
+    gemma-2-9b                  0.0639   0.670         0.2%
+    falcon-mamba-7b-instruct    0.0718   0.708         1.4%
+
+Flat across architectures, with the same exception: `falcon-mamba-7b-instruct` at 0.0718 and 1.4% of passages above 0.15, seven times the next.
+
+**And it qualifies the one positive claim this folder made.** `gemma-2-9b` has the LOWEST type-token ratio of the ten, 0.670 against 0.71-0.73 for everything else -- the most repeated vocabulary. It is also the model reported above as the one robust between-model effect on drift. Lower lexical variety mechanically depresses sentence-to-sentence drift, so **that effect may be a repetition artifact rather than a fact about combination**, and it should not be quoted as the latter without residualising drift on lexical variety.
+
 ## English only
 
 `script == "en"` is the default and not a parameter anyone should change casually. The zh rows carry a different sentence splitter (`stanza-zh` against `nltk-en`) and a different bge variant, so `n_sents` does not count the same object on both sides, and this campaign already holds that bits/char is not comparable across scripts. There are 48 of them against 99,738 in the base/passage slice. **Excluding them changed no conclusion** -- `falcon-mamba-7b` stayed at 17/37, and the fluency correlation moved from +0.734 to +0.726 -- which is the reason to record that the filter is on rather than to treat it as a result.
