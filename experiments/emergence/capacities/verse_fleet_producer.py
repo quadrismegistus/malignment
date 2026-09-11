@@ -206,14 +206,18 @@ def load_poems(n=3):
 
 # ── scoring ──────────────────────────────────────────────────────
 
-def newline_ids(tok, n):
-    ids = set()
-    for i, t in enumerate(tok.convert_ids_to_tokens(list(range(min(n, len(tok)))))):
-        if t and ("Ċ" in t or t.startswith("\n") or t == "<0x0A>"):
-            ids.add(i)
-    if tok.eos_token_id is not None:
-        ids.add(tok.eos_token_id)
-    return sorted(ids)
+#: **ONE IMPLEMENTATION, IN THE LIBRARY.** `newline_ids` and the closure rider
+#: were defined here and again in `rhyme_pull_pilot.py`, differing only in a
+#: tuple-vs-string membership test. They now live in `malignment.closure`, which
+#: the fleet producer in `runners.py` also uses, so a change to the newline
+#: family cannot reach one producer and not the other. Names kept bound because
+#: this file's call sites read well with them.
+from malignment.closure import newline_ids, p_close                # noqa: E402
+
+
+def closure_rider(model, tok, dev, context, rider_words, nl_ids, torch=None):
+    """Back-compat shim: `torch` is ignored, the library imports it itself."""
+    return p_close(model, tok, dev, context, rider_words, nl_ids)
 
 
 def expand_slot(model, tok, dev, context, bmask):

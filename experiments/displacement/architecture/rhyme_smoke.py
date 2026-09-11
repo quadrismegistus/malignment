@@ -113,6 +113,7 @@ import time
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, "..", "..", ".."))
+sys.path.insert(0, ROOT)
 sys.path.insert(0, os.path.join(ROOT, "experiments", "emergence", "capacities"))
 #: `malign_logits.twp` is the VERIFIED twp path ([5698]); it lives in the
 #: archive repo, which is not installed, so the path is added explicitly.
@@ -157,7 +158,7 @@ def main(argv=None):
     #: data."* Right, and the K=40 design is what makes it possible: the rider
     #: is the top 40 words BY MASS, so selecting it needs no rime class and the
     #: box never imports prosodic. `rime_key` is imported inside `analyse()`.
-    from verse_fleet_producer import closure_rider, newline_ids
+    from malignment.closure import newline_ids, rider
 
     dev = a.device or twp.pick_device()
     out = a.out or os.path.join(HERE, "results", "smoke.jsonl")
@@ -176,14 +177,14 @@ def main(argv=None):
         for k, m in words.items():
             s = k[0] if isinstance(k, tuple) else k
             surf[s] = surf.get(s, 0.0) + float(m)
-        top = [w for w, _ in sorted(surf.items(), key=lambda kv: -kv[1])[:K_RIDER]]
-        closes = closure_rider(model, tok, dev, c["context"], top, nl, torch)
+        cl = rider(model, tok, dev, c["context"], surf, nl, K_RIDER)
+        closes = cl["words"]
         rows = [{"word": w, "t1": -1, "p": p} for w, p in surf.items()]
         cons = sum(surf.values()) + res["total"]
         recs.append({"model": a.model, "prompt": c["context"], "theta": 0.001,
                      "device": dev, "rule_version": 3, "rows": rows,
                      "residual": res, "conservation": cons,
-                     "closure": {"k": K_RIDER, "nl_ids": len(nl), "words": closes}})
+                     "closure": cl})
     with open(out, "w", encoding="utf-8") as fh:
         for r in recs:
             fh.write(json.dumps(r, ensure_ascii=False) + "\n")

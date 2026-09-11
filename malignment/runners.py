@@ -504,7 +504,8 @@ class TWPRunner:
         self.ck = checkpoint
 
     def run(self, prompts, purge=False, limit=None, dict_path=None, verbose=True,
-            rules=None, frame=None, system=DEFAULT, user_msg="Hi."):
+            rules=None, frame=None, system=DEFAULT, user_msg="Hi.",
+            closure_at=None, closure_k=None):
         """`rules=None` is v3 and dispatches to `twp.expand` ITSELF.
 
         **`frame` MAKES THIS THE ONLY PATH THAT WRITES A FRAMED CELL**, and that
@@ -698,6 +699,8 @@ class TWPRunner:
         #: normal case here, not the exception, so the estimator has to survive
         #: it. RH asked whether this was handled; for the live path it was not.
         _marks = []
+        #: built once per model, not per cell: it scans the whole vocabulary.
+        _nl_ids = None
         for i, p in enumerate(bar, 1):
             _marks.append(time.time())
             rec = dict(stamp, model=ck.model_id, prompt=p)
@@ -782,6 +785,39 @@ class TWPRunner:
             #: averaging it into a table.
             rec.update(rows=rows, residual=res,
                        conservation=sum(w.values()) + res["total"])
+            #: **LINE CLOSURE RIDES THE SAME RECORD, ON THE DECLARED PROMPTS
+            #: ONLY.** `closure_at` is a set of context strings -- the verse
+            #: slot manifest's, shipped to a box as PLAIN STRINGS so nothing
+            #: phonological runs there (RH, 2026-09-11). It is a BODY key and
+            #: never a key field: `ingest.INSTRUMENT_FIELDS` does not contain
+            #: it, so `_key_body_agree` is untouched and the ingest's include
+            #: predicate (rule_version + rows + residual) ignores it. One
+            #: record, not two files -- closure cannot arrive without its cell.
+            #:
+            #: It is OFF unless asked for, because the rider costs a measured
+            #: +27% and means nothing at a prompt that is not a line-final slot.
+            if closure_at is not None and p in closure_at:
+                from . import closure as _CL
+                if _nl_ids is None:
+                    _nl_ids = _CL.newline_ids(tok, model.config.vocab_size)
+                #: expand keys are (surface, first_token) and one word is
+                #: reachable by several -- fold per SURFACE before ranking,
+                #: which is RH's catch and the same fold the rows above use.
+                _sm = {}
+                for (_s, _t), _m in w.items():
+                    _sm[_s] = _sm.get(_s, 0.0) + float(_m)
+                try:
+                    rec["closure"] = _CL.rider(model, tok, dev, p, _sm,
+                                               _nl_ids, closure_k)
+                except Exception as e:                          # noqa: BLE001
+                    #: **A FAILED RIDER MUST NOT COST THE CELL.** The word mass
+                    #: is the primary measurement and is already complete here;
+                    #: losing it because a second, optional forward raised would
+                    #: be the expensive half failing for the cheap one. Recorded
+                    #: on the record so the absence is a stated fact and not a
+                    #: silent gap a consumer reads as zero.
+                    rec["closure_error"] = "%s: %s" % (type(e).__name__,
+                                                       str(e)[:120])
             #: Body, never key -- see the render above. `rules is None` is the v3
             #: path, which cannot render and so has nothing to hash.
             if rules is not None and frame is not None:
