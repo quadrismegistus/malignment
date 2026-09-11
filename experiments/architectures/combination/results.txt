@@ -1,4 +1,4 @@
-SYNTAGMATIC axis, base arm, corpus=passage, n_sents>=3
+SYNTAGMATIC axis, base arm, corpus=passage, script=en, n_sents>=3
 6 models, 147 prompts held by ALL of them, 13287 passages
 
 model                  attn        block   mean_drif mean_pair bits_per_ directedn  ordering

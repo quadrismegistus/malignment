@@ -52,6 +52,14 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(HERE))))
 
 PARQUET = os.path.expanduser("~/malignment-data/jakobson_space/passages_std.parquet")
 #: length-free only. The first three clear their noise floor; the last two do not.
+#: `bits_per_byte` IS NOT THE MODEL'S OWN PERPLEXITY. It is an EXTERNAL
+#: referee's: `itazap/blt-1b-hf`, one byte-latent reference model scoring every
+#: row in this parquet, uniform across all 99,738. So it measures how
+#: conventional the GENERATED TEXT looks to a third party, not how confident the
+#: generator was. That is the right reading of the fluency correlation below:
+#: models whose output a reference model finds costly also wander more between
+#: sentences -- which is a statement about the text, not about either model's
+#: internal state.
 METRICS = ["mean_drift", "mean_pairwise", "bits_per_byte", "directedness", "ordering"]
 INTERPRETABLE = 3
 
@@ -67,9 +75,10 @@ def spread(a):
     from malignment import roster
     m3 = METRICS[:INTERPRETABLE]
     d = pd.read_parquet(PARQUET,
-                        columns=["model", "arm", "prompt", "corpus", "n_sents"] + m3)
+                        columns=["model", "arm", "prompt", "corpus", "script",
+                                 "n_sents"] + m3)
     d = d[(d["arm"] == a.arm) & (d["corpus"] == a.corpus)
-          & (d["n_sents"] >= a.min_sents)]
+          & (d["n_sents"] >= a.min_sents) & (d["script"] == a.script)]
     cov = d.groupby("model")["prompt"].nunique()
     models = sorted(cov[cov >= a.min_prompts].index)
     d = d[d["model"].isin(models)]
@@ -125,14 +134,23 @@ def main():
                          "held by >=90%% of what remains, so the comparison is "
                          "on a common core rather than each model's own mix.")
     ap.add_argument("--min-prompts", type=int, default=150)
+    ap.add_argument("--script", default="en",
+                    help="ENGLISH ONLY BY DEFAULT (RH, 2026-09-11). The zh rows "
+                         "go through a different pipeline entirely -- stanza-zh "
+                         "segmentation and the zh bge variant, against nltk-en -- "
+                         "so a sentence is not the same unit on both sides, and "
+                         "this campaign already holds that bits/char is not "
+                         "comparable across scripts. 48 of 99,786 rows in the "
+                         "base/passage set are zh: too few to matter to a median "
+                         "and no reason at all to carry.")
     a = ap.parse_args()
 
     if a.spread:
         return spread(a)
-    cols = ["model", "arm", "prompt", "corpus", "n_sents"] + METRICS
+    cols = ["model", "arm", "prompt", "corpus", "script", "n_sents"] + METRICS
     d = pd.read_parquet(PARQUET, columns=cols)
     d = d[(d["arm"] == a.arm) & (d["corpus"] == a.corpus)
-          & (d["n_sents"] >= a.min_sents)]
+          & (d["n_sents"] >= a.min_sents) & (d["script"] == a.script)]
     #: **THE POPULATION IS NAMED, NOT FILTERED.** Every non-dense architecture
     #: this parquet actually covers, plus dense controls. Taking "every model
     #: with >= 50 prompts" instead admits ~40 checkpoints, and requiring a
@@ -161,8 +179,8 @@ def main():
     have = d.groupby("prompt")["model"].nunique()
     keep = set(have[have == len(models)].index)
     d = d[d["prompt"].isin(keep)]
-    print("SYNTAGMATIC axis, %s arm, corpus=%s, n_sents>=%d"
-          % (a.arm, a.corpus, a.min_sents))
+    print("SYNTAGMATIC axis, %s arm, corpus=%s, script=%s, n_sents>=%d"
+          % (a.arm, a.corpus, a.script, a.min_sents))
     print("%d models, %d prompts held by ALL of them, %d passages\n"
           % (len(models), len(keep), len(d)))
     if not len(keep):
