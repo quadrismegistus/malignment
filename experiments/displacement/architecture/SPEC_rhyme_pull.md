@@ -2,7 +2,7 @@
 kind: spec
 status: SPEC ONLY, nothing run. Written 2026-09-11 on RH's ask relayed by @lacan. No box rented, no cell measured.
 question: Can the verse-slot instrument be extended across architectures, and what does it cost?
-headline: "$5.27 of compute, 5.0 GPU-hours, one box, half a working day wall-clock — and the full 1,633-prompt slot manifest is cheaper than the meeting about whether to sample it. All three matched contrasts are coverable. Two things in the framing are wrong: the `ssm` profile is ALREADY set for the four models that need it, and it does NOT cover Olmo-Hybrid, which needs `flash-linear-attention` instead."
+headline: "AMENDED by 22eb96d0 to the DELTA DESIGN ($10.86 route A / $23-33 route B, ~10 GPU-h): the recorded prediction is not testable on bases alone. Base-only was $5.27 of compute, 5.0 GPU-hours, one box, half a working day wall-clock — and the full 1,633-prompt slot manifest is cheaper than the meeting about whether to sample it. All three matched contrasts are coverable. Two things in the framing are wrong: the `ssm` profile is ALREADY set for the four models that need it, and it does NOT cover Olmo-Hybrid, which needs `flash-linear-attention` instead."
 ---
 
 # SPEC — rhyme_pull across architectures
@@ -11,11 +11,18 @@ RH's ask, via @lacan: cost and wall-clock, number of prompts, which models, and 
 
 ## 0. THE HEADLINE, AND THE ONE DESIGN DECISION THAT IS NOT MINE
 
-    compute          5.02 GPU-hours          $5.27 at $1.05/hr (A100 SXM4, vast)
-    wall clock       ~5-7 h on ONE box       ~3 h on three boxes
-    prompts          1,633 per model         the whole missing slot manifest
-    models           11 to run, 1 already done
-    contrasts        all three coverable
+    AMENDED 2026-09-11 by 22eb96d0 -- see section 10. The recorded
+    prediction needs BOTH ARMS, so the figure that matches it is the
+    delta design, not the base-only one. Both are priced.
+
+                          base only        + aligned arm (THE DELTA DESIGN)
+    route A (plain twp)   5.02 GPU-h       10.34 GPU-h
+                          $5.27            $10.86
+    route B (+ closure)   $11-16           $23-33          <- RECOMMENDED
+    wall clock            ~6.5 h, one box  ~9-11 h, one box
+    prompts               1,633 per model, the whole missing slot manifest
+    models                11 base to run (1 done) + 12 aligned
+    contrasts             all three coverable, on either arm
 
 **Do not sample.** RH's ask allows one ("a sample is fine, the pilot used 12 primers plus 8 unrhymed"). The full manifest is 1,633 prompts per model at a median 0.62 s/cell, which is **twenty minutes of A100 time per model**. A 20-primer sample would save about $4.80 and cost the within-poem pairing that the whole design rests on. Sampling here is a false economy by roughly two orders of magnitude.
 
@@ -241,3 +248,13 @@ None holds any verse slot either (each has the same ~150 prose/battery overlap),
 **Recommendation: (i), and it is not close.** The increment is $6 on route A and the pre-commitment's own point 4 — that the route out is models, not cells per model — argues for it directly: the aligned arm doubles the models without touching the n=2-per-contrast problem, but it is the difference between testing the recorded prediction and testing a different one.
 
 **This does not reopen the pre-commitment.** Points 1, 2 and 4 are untouched. Point 3 is untouched in substance; what it needs is a sentence naming the grain at which "the same ordering" is read, and that sentence is cheaper to write today than to argue about once there are numbers.
+
+### RESOLVED the same day, by `22eb96d0`
+
+Point 3 is amended, before any cell: the prediction **requires both arms and is not testable on bases alone.** The amendment is better than the choice this section offered, because it declines it — repair (ii) is not needed and repair (i) is not a replacement:
+
+> **Weatherby's claim is about the architecture**, so a base-only capacity read is the right test OF HIM. **The comparison with the charge instrument needs the delta.** The delta design answers both, because it contains the base arm.
+
+That is right and this section was wrong to frame the two as alternatives. It also supplies the reason I only gestured at: **every number in the folder is a base→aligned delta** — `existence` regresses `(p_aligned - p_base)` on scene, `norm_change` regresses `(aligned - base)` on the base dose — so a base capacity has no grain in common with any of them.
+
+**The live figure for RH is therefore the delta design**, $10.86 on route A and $23-33 on route B, not the base-only $5.27 / $11-16 that §0 led with before this amendment.
