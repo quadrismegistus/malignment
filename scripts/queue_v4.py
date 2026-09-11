@@ -70,6 +70,10 @@ def main():
     ap.add_argument("--closure-file", default=None,
                     help="passed through to run_v4 --closure-file for every "
                          "model in the queue.")
+    ap.add_argument("--prompts-json", default=None,
+                    help="JSON array of prompts, forwarded to run_v4 "
+                         "--prompts-json. REQUIRED instead of --prompts-file "
+                         "when any prompt contains a newline.")
     ap.add_argument("--prompts-file", default=None,
                     help="pass through: one prompt per line. Without it each "
                          "model measures the pairing population, which is not "
@@ -178,6 +182,8 @@ def main():
                 _extra += ["--user-msg", a.user_msg]
             if a.prompts_file:
                 _extra += ["--prompts-file", a.prompts_file]
+            if a.prompts_json:
+                _extra += ["--prompts-json", a.prompts_json]
             if a.closure_file:
                 _extra += ["--closure-file", a.closure_file]
             if a.purge:
