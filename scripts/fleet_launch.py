@@ -200,9 +200,27 @@ def main():
                          "breaks all three, every time.")
     ap.add_argument("--only", choices=["slots", "cjk", "latin"], default=None)
     ap.add_argument("--image", default=DEFAULT_IMAGE)
+    ap.add_argument("--prompts-json", default=None,
+                    help="JSON array of prompts, shipped to /root/prompts.json. "
+                         "REQUIRED instead of --prompts-file when any prompt "
+                         "contains a newline.")
+    ap.add_argument("--closure-file", default=None,
+                    help="JSON array of contexts at which to also measure line "
+                         "closure, shipped to /root/closure.json.")
+    ap.add_argument("--purge", action="store_true",
+                    help="delete each checkpoint's weights before the next "
+                         "download, so the box holds one at a time.")
     ap.add_argument("--disk", type=int, default=0,
                     help="GB of disk to rent. 0 = SIZED FROM THE SHARD: ~15 GB per "
-                         "7B checkpoint plus headroom, because nothing purges "
+                         "7B checkpoint plus headroom. WITH --purge THE BOX HOLDS "
+                         "ONE CHECKPOINT AT A TIME, so the shard total is the wrong "
+                         "sizer and one model plus headroom is the right one -- but "
+                         "this still sizes for the shard, deliberately: purge runs "
+                         "BEFORE each download and a box whose disk is sized to one "
+                         "model has no margin for a partial fetch that did not "
+                         "collect. Size for the shard, purge anyway, and the disk is "
+                         "slack rather than the thing that kills the run. Historical "
+                         "reason for the flat rule: nothing purged "
                          "weights between models and a 150 GB box died at model "
                          "11 of 11 with `No space left on device`.")
     ap.add_argument("--gb-per-model", type=float, default=15.0,
@@ -304,9 +322,18 @@ def main():
             _pf0 = os.path.abspath(os.path.expanduser(a.prompts_file))
             if os.path.exists(_pf0):
                 _n = sum(1 for ln in open(_pf0) if ln.strip())
+        #: `--prompts-json` declares the same thing in a format that can hold a
+        #: newline, so it satisfies this requirement identically. Without this
+        #: branch the sizer refuses a perfectly declared population for being
+        #: declared in the only format its prompts fit in.
+        if not _n and a.prompts_json:
+            _pj0 = os.path.abspath(os.path.expanduser(a.prompts_json))
+            if os.path.exists(_pj0):
+                _n = len(json.load(open(_pj0, encoding="utf-8")))
         if not _n:
             raise SystemExit(
-                "--models needs --prompts-file: without a declared prompt set "
+                "--models needs --prompts-file or --prompts-json: without a "
+                "declared prompt set "
                 "the per-model cell count is unknown and the shard cannot be "
                 "priced or its ETA reported.")
         b = {"models": models, "lineages": roots, "venv": venv,
@@ -671,6 +698,20 @@ def execute(b, models, roots, venv, a):
                              "refusing to launch a run whose every stage would "
                              "fail on a missing path" % pr.returncode)
         print("  prompts     %d shipped -> /root/prompts.txt" % _n)
+    #: Same pre-rental check as above: a path that does not exist must fail here,
+    #: not after the box is rented and the weights are pulled.
+    for _src, _dst, _lab in ((a.prompts_json, "/root/prompts.json", "prompts-json"),
+                             (a.closure_file, "/root/closure.json", "closure")):
+        if not _src:
+            continue
+        _p = os.path.abspath(os.path.expanduser(_src))
+        if not os.path.exists(_p):
+            raise SystemExit("  --%s %s does not exist" % (_lab, _p))
+        _cnt = len(json.load(open(_p, encoding="utf-8")))
+        _r = cloud.rsync(st, _p, _dst, is_file=True)
+        if _r.returncode:
+            raise SystemExit("  could not ship %s (rc=%d)" % (_lab, _r.returncode))
+        print("  %-10s %d shipped -> %s" % (_lab, _cnt, _dst))
     cloud.rsync(st, ROOT, "/root/malignment",
                 #: **`data/` HOLDS AN ASSET, NOT ONLY DATA.** Excluding it whole
                 #: shipped a box that died on
@@ -924,6 +965,21 @@ def execute(b, models, roots, venv, a):
         framed += " --user-msg %s" % _shlex.quote(a.user_msg)
     if a.prompts_file:
         framed += " --prompts-file %s" % _shlex.quote("/root/prompts.txt")
+    #: **A LINE-PER-PROMPT FILE CANNOT CARRY A MULTI-LINE PROMPT.** 1,232 of the
+    #: verse manifest's 1,786 contexts contain a newline, so they travel as JSON
+    #: or they arrive as a different prompt that measures cleanly and joins
+    #: nothing. Same shape as reading ClickHouse TSV without unescaping.
+    if a.prompts_json:
+        framed += " --prompts-json %s" % _shlex.quote("/root/prompts.json")
+    if a.closure_file:
+        framed += " --closure-file %s" % _shlex.quote("/root/closure.json")
+    #: **PURGE PER MODEL, BECAUSE NOTHING PURGED AND `--disk` PAID FOR IT.** The
+    #: disk sizer's own help says "~15 GB per 7B checkpoint plus headroom,
+    #: because nothing purges". With --purge a box holds ONE checkpoint, so a
+    #: 100-model population needs ~40 GB of headroom rather than ~1.5 TB. RH's
+    #: ask, 2026-09-11.
+    if a.purge:
+        framed += " --purge"
     for r_ in roots:
         mem = [m for m in _lin2.get(r_, []) if m in models and m not in _too_big]
         if not mem:

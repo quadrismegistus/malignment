@@ -94,6 +94,12 @@ def main():
     ap.add_argument("--from-stash", action="store_true",
                     help="pass 2 builds its union from the local stash, for a box "
                          "with no ClickHouse")
+    ap.add_argument("--purge", action="store_true",
+                    help="delete this model's HF cache BEFORE its download, so a "
+                         "long queue does not accumulate weights. `twp.purge_model` "
+                         "runs on every exit path including failure -- a model that "
+                         "OOMs at load is the least worth keeping and used to be the "
+                         "only one kept.")
     ap.add_argument("--prompts-json", default=None,
                     help="a JSON array of prompt strings. USE THIS FOR ANY "
                          "PROMPT CONTAINING A NEWLINE -- --prompts-file is one "
@@ -233,7 +239,8 @@ def main():
         return ck.run_twp(prompts, rules=V4.ADOPTED, limit=a.limit,
                           frame=a.frame,
                           system=DEFAULT if a.system is None else a.system,
-                          user_msg=a.user_msg, closure_at=_cl)
+                          user_msg=a.user_msg, closure_at=_cl,
+                          purge=a.purge)
     finally:
         sys.stdout = tee.stream
         tee.close()
