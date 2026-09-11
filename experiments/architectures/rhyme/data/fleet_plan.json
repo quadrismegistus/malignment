@@ -1,0 +1,185 @@
+{
+ "box1": {
+  "venv": ".venv",
+  "lineages": [
+   "allenai/Olmo-Hybrid-7B"
+  ],
+  "models": [
+   "allenai/Olmo-Hybrid-7B",
+   "allenai/Olmo-Hybrid-Instruct-DPO-7B"
+  ],
+  "hours": 7.5
+ },
+ "box2": {
+  "venv": ".venv",
+  "lineages": [
+   "tiiuae/falcon-mamba-7b",
+   "kakaocorp/kanana-2-3b-base",
+   "Qwen/Qwen3-8B-Base",
+   "deepseek-ai/deepseek-llm-7b-base",
+   "tiiuae/Falcon3-7B-Base",
+   "LLM360/Amber",
+   "m-a-p/CT-LLM-Base",
+   "TinyLlama/TinyLlama-1.1B-intermediate-step-1431k-3T"
+  ],
+  "models": [
+   "tiiuae/falcon-mamba-7b",
+   "tiiuae/falcon-mamba-7b-instruct",
+   "kakaocorp/kanana-2-3b-base",
+   "kakaocorp/kanana-2-3b-instruct",
+   "Qwen/Qwen3-8B",
+   "Qwen/Qwen3-8B-Base",
+   "deepseek-ai/deepseek-llm-7b-base",
+   "deepseek-ai/deepseek-llm-7b-chat",
+   "tiiuae/Falcon3-7B-Base",
+   "tiiuae/Falcon3-7B-Instruct",
+   "LLM360/Amber",
+   "LLM360/AmberSafe",
+   "m-a-p/CT-LLM-Base",
+   "m-a-p/CT-LLM-SFT-DPO",
+   "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+   "TinyLlama/TinyLlama-1.1B-intermediate-step-1431k-3T"
+  ],
+  "hours": 5.16
+ },
+ "box3": {
+  "venv": ".venv",
+  "lineages": [
+   "mistralai/Mistral-7B-v0.1",
+   "HuggingFaceTB/SmolLM3-3B-Base",
+   "kakaocorp/kanana-1.5-8b-base",
+   "m-a-p/neo_7b",
+   "openbmb/MiniCPM5-1B-Base",
+   "team-hatakeyama-phase2/Tanuki-8B-base-v1.0",
+   "EleutherAI/pythia-2.8b",
+   "OpenLLM-France/Lucie-7B",
+   "gl198976/mpt-7b"
+  ],
+  "models": [
+   "mistralai/Mistral-7B-Instruct-v0.1",
+   "mistralai/Mistral-7B-v0.1",
+   "HuggingFaceTB/SmolLM3-3B",
+   "HuggingFaceTB/SmolLM3-3B-Base",
+   "kakaocorp/kanana-1.5-8b-base",
+   "kakaocorp/kanana-1.5-8b-instruct-2505",
+   "m-a-p/neo_7b",
+   "m-a-p/neo_7b_instruct_v0.1",
+   "openbmb/MiniCPM5-1B",
+   "openbmb/MiniCPM5-1B-Base",
+   "team-hatakeyama-phase2/Tanuki-8B-base-v1.0",
+   "weblab-GENIAC/Tanuki-8B-dpo-v1.0",
+   "ContextualAI/archangel_sft-dpo_pythia2-8b",
+   "EleutherAI/pythia-2.8b",
+   "OpenLLM-France/Lucie-7B",
+   "OpenLLM-France/Lucie-7B-Instruct-v1.1",
+   "gl198976/mpt-7b",
+   "gl198976/mpt-7b-instruct"
+  ],
+  "hours": 5.01
+ },
+ "box4": {
+  "venv": ".venv",
+  "lineages": [
+   "google/recurrentgemma-9b",
+   "RWKV/rwkv-4-7b-pile",
+   "zai-org/glm-4-9b-hf",
+   "meta-llama/Llama-3.1-8B",
+   "Qwen/Qwen2.5-7B",
+   "01-ai/Yi-1.5-9B",
+   "stabilityai/stablelm-2-1_6b",
+   "huggyllama/llama-7b",
+   "croissantllm/CroissantLLMBase"
+  ],
+  "models": [
+   "google/recurrentgemma-9b",
+   "google/recurrentgemma-9b-it",
+   "RWKV/rwkv-4-7b-pile",
+   "RWKV/rwkv-raven-7b",
+   "zai-org/glm-4-9b-chat-hf",
+   "zai-org/glm-4-9b-hf",
+   "meta-llama/Llama-3.1-8B",
+   "meta-llama/Llama-3.1-8B-Instruct",
+   "Qwen/Qwen2.5-7B",
+   "Qwen/Qwen2.5-7B-Instruct",
+   "01-ai/Yi-1.5-9B",
+   "01-ai/Yi-1.5-9B-Chat",
+   "stabilityai/stablelm-2-1_6b",
+   "stabilityai/stablelm-2-1_6b-chat",
+   "PKU-Alignment/beaver-7b-v1.0",
+   "huggyllama/llama-7b",
+   "croissantllm/CroissantLLMBase",
+   "croissantllm/CroissantLLMChat-v0.1"
+  ],
+  "hours": 5.01
+ },
+ "box5": {
+  "venv": ".venv",
+  "lineages": [
+   "BSC-LT/salamandra-7b",
+   "openGPT-X/Teuken-7B-base-v0.6",
+   "google/gemma-2-9b",
+   "bigscience/bloom-7b1",
+   "llm-jp/llm-jp-3-7.2b",
+   "ibm-granite/granite-3.0-8b-base",
+   "HuggingFaceTB/SmolLM2-360M",
+   "EleutherAI/pythia-6.9b",
+   "togethercomputer/RedPajama-INCITE-Base-7B-v0.1",
+   "Qwen/Qwen2.5-0.5B"
+  ],
+  "models": [
+   "BSC-LT/salamandra-7b",
+   "BSC-LT/salamandra-7b-instruct",
+   "openGPT-X/Teuken-7B-base-v0.6",
+   "openGPT-X/Teuken-7B-instruct-v0.6",
+   "google/gemma-2-9b",
+   "google/gemma-2-9b-it",
+   "bigscience/bloom-7b1",
+   "bigscience/bloomz-7b1",
+   "llm-jp/llm-jp-3-7.2b",
+   "llm-jp/llm-jp-3-7.2b-instruct3",
+   "ibm-granite/granite-3.0-8b-base",
+   "ibm-granite/granite-3.0-8b-instruct",
+   "HuggingFaceTB/SmolLM2-360M",
+   "HuggingFaceTB/SmolLM2-360M-Instruct",
+   "EleutherAI/pythia-6.9b",
+   "lomahony/eleuther-pythia6.9b-hh-dpo",
+   "togethercomputer/RedPajama-INCITE-7B-Chat",
+   "togethercomputer/RedPajama-INCITE-Base-7B-v0.1",
+   "Qwen/Qwen2.5-0.5B",
+   "Qwen/Qwen2.5-0.5B-Instruct"
+  ],
+  "hours": 5.27
+ },
+ "box6": {
+  "venv": ".venv-tf457",
+  "lineages": [
+   "allenai/OLMoE-1B-7B-0125",
+   "baichuan-inc/Baichuan2-7B-Base",
+   "internlm/internlm2-base-7b",
+   "inceptionai/jais-family-6p7b",
+   "tiiuae/falcon-7b",
+   "allenai/Olmo-3-1025-7B",
+   "BAAI/Aquila2-7B",
+   "allenai/OLMo-2-0425-1B"
+  ],
+  "models": [
+   "allenai/OLMoE-1B-7B-0125",
+   "allenai/OLMoE-1B-7B-0125-Instruct",
+   "baichuan-inc/Baichuan2-7B-Base",
+   "baichuan-inc/Baichuan2-7B-Chat",
+   "internlm/internlm2-base-7b",
+   "internlm/internlm2-chat-7b",
+   "inceptionai/jais-family-6p7b",
+   "inceptionai/jais-family-6p7b-chat",
+   "tiiuae/falcon-7b",
+   "tiiuae/falcon-7b-instruct",
+   "allenai/Olmo-3-1025-7B",
+   "allenai/Olmo-3-7B-Instruct",
+   "BAAI/Aquila2-7B",
+   "BAAI/AquilaChat2-7B",
+   "allenai/OLMo-2-0425-1B",
+   "allenai/OLMo-2-0425-1B-Instruct"
+  ],
+  "hours": 7.09
+ }
+}
