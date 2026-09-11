@@ -1409,7 +1409,26 @@ def _await(cloud, st, models, iid, a):
         done = cloud.ssh_run(st, "ls /root/DONE /root/RECOVER_DONE 2>/dev/null"
                              ).returncode == 0
         failed = cloud.ssh_run(st, "ls /root/FAILED 2>/dev/null").returncode == 0
-        alive = cloud.ssh_run(st, "tmux has-session -t fleet 2>/dev/null").returncode == 0
+        #: **AN SSH FAILURE IS NOT A DEAD TMUX, AND THEY WANT OPPOSITE RESPONSES.**
+        #: This check runs OVER ssh, so a dropped connection returns non-zero
+        #: exactly like an absent session -- two states, one appearance, and the
+        #: alarming one is what got reported. Measured 2026-09-11: boxes 50623101
+        #: and 50630633 were both declared "tmux session gone with no DONE
+        #: sentinel" while `tmux ls` on each said `fleet: 1 windows` and both were
+        #: mid-model. Each was preceded by `incremental pull rc=255`, which is
+        #: ssh's own transport-failure code. Destroying on that verdict would
+        #: have thrown away two working boxes part-way through their shards.
+        #:
+        #: rc 255 is ssh saying IT failed; any other non-zero is the remote
+        #: command saying the session is gone. Treat the first as "unknown, retry
+        #: next tick" and only the second as death.
+        _t = cloud.ssh_run(st, "tmux has-session -t fleet 2>/dev/null")
+        if _t.returncode == 255:
+            print("     tmux check INCONCLUSIVE (ssh rc=255) -- holding, not a verdict",
+                  flush=True)
+            alive = True
+        else:
+            alive = _t.returncode == 0
         if n != last_n:
             last_n, last_change = n, time.time()
         #: **PULL WHILE IT RUNS, NOT ONLY AT THE END.** There was exactly one
