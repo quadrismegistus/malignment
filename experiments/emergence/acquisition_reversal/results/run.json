@@ -1,0 +1,9 @@
+{
+ "n_rungs": 43,
+ "n_prompts": 400,
+ "n_words": 41148,
+ "raw_median": -0.055032555615843734,
+ "partial_median": -0.05454545454545454,
+ "raw_n": 383,
+ "partial_n": 383
+}

@@ -2,8 +2,8 @@
 kind: question
 id: acquisition_reversal
 question: Is the order in which alignment removes words the reverse of the order in which pretraining acquired them?
-status: "DESIGNED, NOT RUN, 2026-09-11. The join is verified (one lineage, 2,272/2,272 shared prompts, both rule_version 3) and a crude first look points in the predicted direction. Three design hazards are recorded, one of which tuning_order's own audit already solved."
-headline: NONE STATED -- the design is written, nothing has been run.
+status: "RUN 2026-09-11. The prediction recorded before the run is MET: acquisition t_move and removal t_move correlate NEGATIVELY (median rho -0.0550, 235 of 383 prompts) and the sign survives partialling out log p (-0.0545). Small effect, consistently measured -- quote the rho with the 235/383, never the p-value alone."
+headline: "What pretraining acquired later, SFT removes earlier. Jakobson's regression hypothesis holds of the cut on one Olmo-3 lineage -- median rho -0.055 across 383 prompts, unchanged by a frequency control. The effect is weak and consistent, and it is an analogy to a law about phonology, not an application of it."
 grain: word
 ---
 
@@ -99,6 +99,47 @@ clothes.
 - **FAILS** if the correlation is null or positive once frequency is controlled.
 - **A positive result that vanishes under the frequency control is a NULL**, and
   is to be reported as one rather than as a weakened positive.
+
+---
+
+# THE RESULT (2026-09-11): IT HOLDS, AND IT IS SMALL
+
+`run.py`, 400 prompts, 43 pretraining rungs against 43 SFT rungs, 41,148 words
+carrying a `t_move` on both ladders.
+
+    raw                     n=383   median rho -0.0550   148 up / 235 dn   p=1.02e-05
+    log-p partialled out    n=383   median rho -0.0545   142 up / 241 dn   p=4.79e-07
+
+**The prediction recorded above is met.** The correlation between acquisition
+`t_move` and removal `t_move` is NEGATIVE -- words pretraining acquired later
+leave earlier under SFT -- and it holds in 235 of 383 prompts.
+
+**AND IT IS NOT FREQUENCY.** This was the hazard most likely to produce a false
+positive, and the control costs almost nothing: -0.0550 raw against -0.0545 with
+`log p` at the pretrained endpoint partialled out of both sides, with the sign
+test improving rather than degrading. The README's own rule -- a result that does
+not survive the control is a NULL -- does not fire.
+
+## THE SIZE IS THE CAVEAT, AND THE p-VALUE MUST NOT CARRY IT
+
+**Median rho -0.055, and 61% of prompts negative.** That is a weak correlation
+measured consistently across many replicates, and the p-value is a statement
+about the consistency, not the strength. Quote the rho and the 235/383 together
+or neither; `p=4.79e-07` on its own would misrepresent this by an order of
+magnitude.
+
+## WHAT THE CLOCK DOES, SINCE IT COULD HAVE INVERTED THE RESULT
+
+The pretraining stages restart their step numbering, so `stage2-step1000` comes
+AFTER `stage1-step1413814`. Placed on a cumulative clock:
+
+    stage1   23 rungs   cumulative        0 .. 1,413,814
+    stage2    7 rungs           1,414,814 .. 1,461,498
+    stage3   13 rungs           1,462,498 .. 1,473,419
+
+Monotone, no overlap. A raw step number would have put nearly all of stage2 and
+stage3 inside the first 3% of pretraining and inverted every late acquisition
+into an early one.
 
 ## WHAT THIS CANNOT ESTABLISH
 
