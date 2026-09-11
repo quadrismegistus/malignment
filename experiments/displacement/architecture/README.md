@@ -3,7 +3,7 @@ subject: displacement
 kind: question
 status: "RUN 2026-09-11. Three instruments: existence/norm_change per-lineage lookups (DELTA, and withdrawn as evidence about architecture), a 50-base pairwise similarity sweep on field, type-norm and contextual-norm measures (BASE, 1,225 pairs, 200 v6-rated prompts), and the Olmo-3 / Olmo-Hybrid ladders across stages where AI2's post-training data is attested identical. NOT REGISTERED; no between-group test is run, and n on the attention-free side is one pure SSM and one linear-attention model."
 question: Does the displacement operation, or anything else these models do, depend on the attention mechanism?
-headline: "ONE ALIGNMENT STEP MOVES A MODEL FURTHER THAN THE ENTIRE SPREAD OF ARCHITECTURES, VENDORS, SCALES AND CORPORA AT BASE: the median distance between any two of the 50 bases is 0.407, and Olmo-3 base to its own SFT checkpoint is 0.513. Architecture is undetectable at base -- falcon-mamba-7b, which computes no attention of any kind, is the MEDIAN model of the census at rank 25/50 -- and decisive under alignment, where the same attested-identical SFT mixture leaves two architectures as far apart at SFT on the framed edge as on the raw one (ctxD 0.622 vs 0.621). The move-DIRECTION claim was corrected the same day: cos +0.229 raw against +0.595 framed, so the original "nearly orthogonal" was substantially an off-template artifact, though both sit below a measured ceiling of +0.930. The architecture shows up at the cut, not in the language."
+headline: "ALIGNMENT MOVES MODELS APART: any two of the 50 bases sit 0.407 apart in contextual-norm space, any two of the 50 aligned endpoints 0.669, and all four measures agree (1,225 pairs each). Architecture is NOT detectable at base -- falcon-mamba-7b, which computes no attention of any kind, is the MEDIAN model of the census at rank 25/50 -- which is this folder's answer to Weatherby and a negative. The claim that architecture becomes decisive under alignment is WITHDRAWN 2026-09-11: the Olmo-3/Olmo-Hybrid gap grows 0.28 to 0.62, but that pair starts in the bottom 1% of base-base distances and ends at the 35th percentile of aligned-aligned ones, so it converged toward the crowd while the whole roster spread out."
 ---
 
 # architecture
@@ -15,29 +15,41 @@ Weatherby's *Language Machines* (2025) locates the poetic function in the transf
 That Griffin model is in this census. So is a model with no attention at all.
 
 
-## THE TWO ANSWERS, AND THE ONE SENTENCE
+## THE RESULT
 
-> **One alignment step moves a model further than the entire spread of architectures, vendors, scales and corpora at base.**
+> **Alignment moves models apart. Any two base models sit 0.407 apart; any two aligned models sit 0.669 apart.**
 
-The median distance between any two of the 50 endpoint bases is **0.407**. `Olmo-3-1025-7B` to its own SFT checkpoint is **0.513**. Same measure, same 200 prompts, same words. A model is further from what alignment makes of it than from fifty other models built by different labs, at different scales, on different corpora, out of different components. (`Olmo-Hybrid` moves 0.323 and does not clear that bar, so the sentence holds for the larger of the two steps and not for every step.)
+1,225 pairs in each population, 200 v6-rated prompts, words above the twp theta of 0.001, distance between mass-weighted centroids in z-scored contextual-norm space. **All four measures agree**, including the two that are not norm-based:
 
-The folder set out to test one claim and answered two questions, which point opposite ways:
+    measure              50 BASE      50 ALIGNED
+    contextual norms       0.407           0.669     further apart
+    type norms             0.304           0.481     further apart
+    Jaccard                0.566           0.411     less overlap
+    weighted Jaccard       0.513           0.337     less overlap
 
-    HIS TURF, at base        NEGATIVE. Architecture is not detectable.
-                             falcon-mamba-7b, no attention of any kind,
-                             is the MEDIAN model of 50 (rank 25/50), and
-                             rwkv-4-7b-pile is MORE central than the
-                             average transformer.
+Base models are alike. Aligned models are not. Whatever else alignment does, at the level of which words a model will put in a slot it is a DIFFERENTIATING operation, not a homogenising one -- which sits oddly beside this campaign's own finding that aligned models converge in fluency onto 1.135 bits/byte. Converging in how they say it, diverging in what they select.
 
-    OURS, at the cut         DECISIVE. The same attested-identical SFT
-                             mixture leaves the two architectures 0.62
-                             apart, and reading them in the frame they
-                             were TRAINED for does not shrink it
-                             (0.621 raw, 0.622 framed).
+    ARTIFACT CHECK, PARTIAL. Aligned cells are thinner: 89 words above
+    theta against the base's 108, so aligned centroids rest on ~18%
+    fewer words and are somewhat noisier. That contributes to the gap
+    and is unlikely to account for a 64% rise. Not fully discharged.
 
-**The architecture shows up at the cut, not in the language.** Whatever separates these fifty base models from one another, it is not whether they compute attention; but what a model is built from governs where alignment takes it. The live fact sits on the operation's side of the contest rather than on the mechanism's.
+## AND THE ANSWER TO WEATHERBY, WHICH IS A NEGATIVE
 
-Read the two answers in that order. The rest of this file is the instruments, in the order they were built rather than the order they matter.
+Across the 50 bases, `falcon-mamba-7b` -- which computes no attention of any kind -- is the **median model of the census**, rank 25 of 50. `rwkv-4-7b-pile` is more central than the average transformer. The most central model on both norm measures is a Mamba hybrid. Whatever separates these fifty base models from one another, **it is not whether they compute attention.**
+
+## WHAT WAS WITHDRAWN, AND WHY IT MATTERS THAT IT WAS
+
+An earlier version of this file led with "the architecture shows up at the cut, not in the language", on the Olmo-3 / Olmo-Hybrid gap growing from 0.28 at base to 0.62 at SFT under attested-identical post-training data. **That is withdrawn.** Calibrated against the two populations above:
+
+    the pair at base   0.28   bottom 1% of the 1,225 base-base distances
+    the pair at SFT    0.62   35th percentile of aligned-aligned
+
+The pair begins as one of the most similar in the entire census and ends **still more similar than typical**. It did not diverge from the crowd; the crowd spread out around it and the pair regressed toward the middle, which is what any extreme starting value does under a noisy population-wide transformation. The widening was real and it was not about architecture.
+
+The general form of the sentence had already failed a smaller check: of three base-to-SFT steps measured on this scale -- Llama-3.1-8B to Tulu-3-SFT at 0.223, Olmo-Hybrid at 0.323, Olmo-3 at 0.513 -- **only one exceeds the base-to-base median of 0.407**, so a claim that an alignment step outruns the whole spread of architectures generalised from the largest of three.
+
+**Both failures had the same shape**: a quantity read without the population it belongs to. The surviving claims in this file are the ones stated against 1,225 pairs.
 
 ## TWO TURFS, AND EVERY RESULT BELOW BELONGS TO ONE OF THEM
 
@@ -87,7 +99,9 @@ The ranks also disagree across measures -- `Falcon-H1-7B-Base` is 3rd on context
 
 **AND IT SITS AGAINST THE CROSS-STAGE RESULT, WHICH IS THE INTERESTING PART.** Architecture is undetectable at base and decisive under alignment: the same SFT data moves two architectures nearly orthogonally (+0.233) where the ceiling is +0.930. **The architecture shows up at the cut, not in the language.** That puts the live fact on the operation's side of the contest rather than on the mechanism's, which is this project's thesis arriving from a direction it did not plan.
 
-## THE SAME POST-TRAINING DATA MOVES THE TWO ARCHITECTURES APART
+## WITHDRAWN: the same post-training data moves the two architectures apart
+
+**THE SECTION BELOW IS SUPERSEDED. Read it as the record of a claim, not as a claim.** Its measurements stand; its interpretation does not. The gap it reports is real and robust to the framed edge, but calibrated against 1,225 aligned-aligned distances the pair turns out to sit at the 35th percentile after starting in the bottom 1%, so the widening is the roster's and not the architecture's. See the withdrawal at the top of this file. What survives from this section is the instrument work: the ceiling control at +0.930, the attested-identical Dolci mixtures, and the framed-edge correction.
 
 
 RH, 2026-09-11: does the architectural minimal pair sit closer than the ALIGNMENT minimal pair, and what happens to the architecture pair ACROSS STAGES, where the post-training data is the same?
