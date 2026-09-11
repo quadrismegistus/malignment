@@ -99,6 +99,156 @@ LINEAGES = [
 
 
 DRIFT = os.path.expanduser("~/malignment-data/national_story/story_drift.jsonl")
+NAME_BINS = [(400, 900), (900, 1600), (1600, 10 ** 9)]
+
+
+def _side(m):
+    from malignment import roster
+    at, bl = roster.architecture(m)
+    return None if (at, bl) == ("unknown", "unknown") else (
+        "attention-free" if at == "none" else "has attention")
+#: capitalised tokens that are not names. Not exhaustive and does not need to be:
+#: the same list applies to every model, so a miss is noise and not a bias.
+_STOP = set("""The A An And But Or So Then Now When While If As At In On To For Of With
+From By After Before Their His Her My Our Your It He She They We I You There Here This
+That These Those What Who Why How All One Two Three First Last Next Every Some Many
+God Lord Christ Jesus Bible Christian Christians Mr Mrs Miss Dr St Sir Lady
+Monday Tuesday Wednesday Thursday Friday Saturday Sunday January February March April
+May June July August September October November December""".split())
+
+
+def _names(text):  # noqa: C901
+    """Candidate character names: capitalised, mid-sentence, seen twice.
+
+    MID-SENTENCE is the whole gate. A sentence-initial capital is grammar, not a
+    name, and including them makes every text's 'cast' the first word of every
+    sentence. SEEN TWICE drops one-off capitalised nouns.
+    """
+    import collections as _c
+    import re
+    out = _c.Counter()
+    for sent in re.split(r"(?<=[.!?])\s+", text):
+        toks = sent.split()
+        for t in toks[1:]:                          # skip the sentence-initial
+            w = t.strip('.,;:!?"\'()[]\u2014\u2019s')
+            if len(w) > 2 and w[0].isupper() and w[1:].islower() and w not in _STOP:
+                out[w] += 1
+    return {w for w, n in out.items() if n >= 2}
+
+
+def names(a):
+    """Does an attention-free model lose its characters?
+
+    ## THE PREDICTION, RECORDED BEFORE THE RUN
+
+    Attention keeps every past token individually addressable; a recurrent state
+    compresses the past into a fixed-size vector. So what an attention-free model
+    should lose is EXACT RECALL OF ARBITRARY, HIGH-ENTROPY DETAIL. A character
+    name is the purest case: not reconstructible from context, must be carried
+    verbatim, and failure is visible. The GIST of a scene is low-entropy and can
+    survive compression -- which is why every semantic measure in this folder
+    came back null -- but a proper noun cannot.
+
+    **carryover** = of the names established in the first third, what share
+    reappear in the last third. Attention-free should be LOWER.
+
+    The relevant quantity is not distance but INTERFERENCE: a name introduced at
+    word 50 and needed at word 2,000 must survive 1,950 words written into the
+    same fixed state. Published SSM failures appear at thousands to tens of
+    thousands of tokens, so ~3,500 tokens is at the EDGE -- which is the reason
+    to measure rather than assume, in either direction.
+
+    ## WHAT A NULL HERE WOULD AND WOULD NOT MEAN
+
+    A null means the regime is still too short, OR that carryover is not the
+    thing compression costs. It would NOT mean the architectures are equivalent:
+    the literature's separations are at far greater lengths than 3K words.
+    """
+    import collections as _c
+    import statistics as st
+    import sys as _sys
+    _sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(
+        os.path.dirname(os.path.abspath(__file__)))),
+        "passage_analysis", "national_story"))
+    import analyse
+    from malignment import roster
+    G = analyse.load_raw()
+    rows = _c.defaultdict(list)
+    for (lin, arm, _dem), texts in G.items():
+        for t in texts:
+            w = t.split()
+            if len(w) < a.min_words:
+                continue
+            k = len(w) // 3
+            first, last = _names(" ".join(w[:k])), _names(" ".join(w[2 * k:]))
+            if len(first) < 2:
+                continue
+            rows[lin].append((len(first & last) / len(first), len(w), len(first)))
+    #: **BINNED BY LENGTH, because carryover is mostly a length statistic.**
+    #: The first version ranked models raw and put falcon-mamba ABOVE the median
+    #: at 0.367 -- but it writes 636 words median, and every other short-text
+    #: model scored 0.500 while the 2,300-word models scored 0.26-0.29. Raw
+    #: ranking measured output length.
+    binned = _c.defaultdict(lambda: _c.defaultdict(list))
+    for m, v in rows.items():
+        for c, w, _n in v:
+            for lo, hi in NAME_BINS:
+                if lo <= w < hi:
+                    binned[(lo, hi)][m].append(c)
+                    break
+    print("CARRYOVER AT MATCHED LENGTH. Unit = the model; a model needs %d texts"
+          % MIN_IN_BIN)
+    print("in a bin to appear in it.\n")
+    print("%-14s %21s %23s %9s" % ("length bin", "attention-free", "has attention", "gap"))
+    print("%-14s %10s %4s %6s %10s %4s %6s" % ("", "median", "mdl", "texts", "median", "mdl", "texts"))
+    for lo, hi in NAME_BINS:
+        d = binned[(lo, hi)]
+        def side(want):
+            g = [(st.median(vv), len(vv)) for mm, vv in d.items()
+                 if _side(mm) == want and len(vv) >= MIN_IN_BIN]
+            return ((st.median([x for x, _ in g]), len(g), sum(n for _, n in g))
+                    if g else (float("nan"), 0, 0))
+        a1, a2, a3 = side("attention-free")
+        b1, b2, b3 = side("has attention")
+        print("%-14s %10.3f %4d %6d %10.3f %4d %6d %+9.3f"
+              % ("%d-%d" % (lo, hi if hi < 10 ** 8 else 9999),
+                 a1, a2, a3, b1, b2, b3, a1 - b1))
+    print()
+    for lo, hi in NAME_BINS:
+        ms = [mm.split("/")[-1] for mm, vv in binned[(lo, hi)].items()
+              if _side(mm) == "attention-free" and len(vv) >= MIN_IN_BIN]
+        print("   attention-free in %-12s %s"
+              % ("%d-%d:" % (lo, hi if hi < 10 ** 8 else 9999), ms or "-- none --"))
+    print()
+    print("RAW RANKING BELOW, kept because it is the trap: carryover tracks")
+    print("LENGTH, so ranking models without binning ranks how long they write.\n")
+    print("CHARACTER-NAME CARRYOVER: of the names established in the first third,")
+    print("what share reappear in the last third. >= %d words, >= 2 names.\n" % a.min_words)
+    out = []
+    for m, v in rows.items():
+        if len(v) < 15:
+            continue
+        at, bl = roster.architecture(m)
+        if (at, bl) == ("unknown", "unknown"):
+            continue
+        out.append((st.median([c for c, _, _ in v]), m, at, bl, len(v),
+                    st.median([w for _, w, _ in v]), st.median([n for _, _, n in v])))
+    out.sort()
+    print("%-28s %-13s %-7s %9s %5s %7s %6s"
+          % ("model", "attn", "block", "carryover", "n", "words", "names"))
+    for c, m, at, bl, n, w, nm in out:
+        tag = "  <-" if at == "none" else ""
+        print("%-28s %-13s %-7s %9.3f %5d %7.0f %6.0f%s"
+              % (m.split("/")[-1][:28], at, bl, c, n, w, nm, tag))
+    if out:
+        print("\nmedian over %d models: %.3f" % (len(out), st.median([o[0] for o in out])))
+        af = [o[0] for o in out if o[2] == "none"]
+        ha = [o[0] for o in out if o[2] != "none"]
+        if af and ha:
+            print("attention-free %.3f (n=%d)   has attention %.3f (n=%d)   gap %+.3f"
+                  % (st.median(af), len(af), st.median(ha), len(ha),
+                     st.median(af) - st.median(ha)))
+    return 0
 #: uneven bins: the mass sits at 600-1200 and above 2000, and equal-width bins
 #: put 43 models in one and 4 in another.
 MIN_IN_BIN = 5   #: a model needs this many texts in a bin to contribute to it
@@ -356,6 +506,14 @@ def main():
     ap.add_argument("--min-sents", type=int, default=3)
     ap.add_argument("--models", default=None,
                     help="comma-separated override of the declared population")
+    ap.add_argument("--names", action="store_true",
+                    help="CHARACTER-NAME CARRYOVER: the sharpest formal probe "
+                         "of an attention-free model available without new "
+                         "generation. A name is arbitrary, high-entropy and not "
+                         "reconstructible from context, so it must be carried "
+                         "VERBATIM -- exactly what a fixed-size state should "
+                         "lose and attention should keep. Gist survives "
+                         "compression; a proper noun does not.")
     ap.add_argument("--long", action="store_true",
                     help="the LONG-CONTEXT regime, from national_story rather "
                          "than the passage corpus. Attention's distinctive "
@@ -371,6 +529,7 @@ def main():
                          "held by >=90%% of what remains, so the comparison is "
                          "on a common core rather than each model's own mix.")
     ap.add_argument("--min-prompts", type=int, default=150)
+    ap.add_argument("--min-words", type=int, default=400)
     ap.add_argument("--build-pool", metavar="OUT.jsonl", default=None,
                     help="write a deepseek ref pool for THIS subject's models "
                          "and stop. The jakobson deepseek axis cannot reach "
@@ -410,6 +569,8 @@ def main():
                          "and no reason at all to carry.")
     a = ap.parse_args()
 
+    if a.names:
+        return names(a)
     if a.long:
         return long_context(a)
     if a.score:

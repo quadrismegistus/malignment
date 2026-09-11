@@ -1,0 +1,59 @@
+CARRYOVER AT MATCHED LENGTH. Unit = the model; a model needs 5 texts
+in a bin to appear in it.
+
+length bin            attention-free           has attention       gap
+                   median  mdl  texts     median  mdl  texts
+400-900             0.500    1     54      0.500   28    577    +0.000
+900-1600            0.000    1      5      0.333   32    991    -0.333
+1600-9999           0.250    1      5      0.250   29   2341    +0.000
+
+   attention-free in 400-900:     ['falcon-mamba-7b']
+   attention-free in 900-1600:    ['falcon-mamba-7b']
+   attention-free in 1600-9999:   ['falcon-mamba-7b']
+
+RAW RANKING BELOW, kept because it is the trap: carryover tracks
+LENGTH, so ranking models without binning ranks how long they write.
+
+CHARACTER-NAME CARRYOVER: of the names established in the first third,
+what share reappear in the last third. >= 400 words, >= 2 names.
+
+model                        attn          block   carryover     n   words  names
+Zamba2-7B                    full+ssm      hybrid      0.000   116    2164      4
+Tanuki-8B-base-v1.0          full          dense       0.000    93    1750      4
+RedPajama-INCITE-Base-7B-v0. full          dense       0.000    74    2080      4
+bloom-7b1                    full          dense       0.095   118    2278      4
+CT-LLM-Base                  full          dense       0.111   149    2224      3
+CroissantLLMBase             full          dense       0.143    86    1478      4
+SmolLM2-360M                 full          dense       0.167   136    2239      5
+TinyLlama-1.1B-intermediate- full          dense       0.167    83    1357      3
+neo_7b                       full          dense       0.167   115    1739      4
+Qwen2.5-0.5B                 full          dense       0.182   119    2380      5
+Yi-1.5-9B                    full          dense       0.250   112    2144      4
+pythia-6.9b                  full          dense       0.250    81    1450      4
+SmolLM3-3B-Base              full          dense       0.250   146    2314      4
+llama-7b                     full          dense       0.250    91    1439      3
+granite-3.0-8b-base          full          dense       0.250   142    1908      4
+Lucie-7B                     full          dense       0.261   114    2336      4
+Qwen2.5-7B                   full          dense       0.270   134    2350      6
+glm-4-9b-hf                  full          dense       0.286   124    2496      5
+salamandra-7b                full          dense       0.333   144    2106      4
+pythia-2.8b                  full          dense       0.333   148    1548      4
+Amber                        full          dense       0.333    92    1184      3
+OLMoE-1B-7B-0125             full          moe         0.333   142    1354      3
+Olmo-3-1025-7B               full+local    dense       0.333   153    2142      4
+kanana-1.5-8b-base           full          dense       0.333   266    2482      4
+kanana-2-3b-base             full          dense       0.333   104    1880      3
+Llama-3.1-8B                 full          dense       0.333   139    2290      4
+stablelm-2-1_6b              full          dense       0.333   100    1314      4
+falcon-mamba-7b              none          ssm         0.367    64     636      3  <-
+OLMo-2-0425-1B               full          dense       0.400   106    1431      5
+Qwen3-8B-Base                full          dense       0.429   109    2461      4
+gemma-2-9b                   full          dense       0.500    46     787      3
+llm-jp-3-7.2b                full          dense       0.500    98     654      3
+Mistral-7B-v0.1              full          dense       0.500    93    1582      3
+Teuken-7B-base-v0.6          full          dense       0.500    28     726      2
+MiniCPM5-1B-Base             full          dense       0.500    71     967      3
+Falcon3-7B-Base              full          dense       0.500    69     613      2
+
+median over 36 models: 0.310
+attention-free 0.367 (n=1)   has attention 0.286 (n=35)   gap +0.081

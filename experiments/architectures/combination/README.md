@@ -128,6 +128,30 @@ Across-model spread against the median within-model IQR over prompts. **On a fir
 
 So the population is one pure SSM, one hybrid and one MoE against three dense transformers, and the best-controlled pair in the subject is the one the data cannot serve. **That is a limit on the null, not a null about architecture.**
 
+## CHARACTER-NAME CARRYOVER: the sharpest formal probe available, and it is null
+
+    python run.py --names
+
+**The prediction, recorded in the producer before the run.** Attention keeps every past token individually addressable; a recurrent state compresses the past into a fixed-size vector. So what an attention-free model should lose is EXACT RECALL OF ARBITRARY, HIGH-ENTROPY DETAIL -- and a character name is the purest case: not reconstructible from context, must be carried verbatim, failure visible. The GIST of a scene is low-entropy and survives compression, which is why every semantic measure in this folder came back null; a proper noun cannot.
+
+`carryover` = of the names established in a text's first third, what share reappear in its last third.
+
+    length bin        attention-free            has attention        gap
+                   median  mdl  texts     median  mdl  texts
+    400-900         0.500    1     54      0.500   28    577    +0.000
+    900-1600        0.000    1      5      0.333   32    991    -0.333
+    1600-9999       0.250    1      5      0.250   29   2341    +0.000
+
+**Null in the only bin with usable n.** The 400-900 bin has 54 attention-free texts and the gap is exactly zero. The -0.333 in the middle bin is the median of FIVE texts, as is the long bin, and if compression caused it the gap would GROW with length rather than appearing only in the middle and vanishing above it.
+
+**BINNING IS NOT OPTIONAL HERE AND THE RAW VERSION IS KEPT AS THE TRAP.** Ranked without binning, `falcon-mamba` scores 0.367 against a roster median of 0.310 -- ABOVE average, apparently better at holding its cast. But carryover is mostly a length statistic: every short-text model scores 0.500 and the 2,300-word models score 0.26-0.29. `falcon-mamba` writes 636 words median, so the raw ranking was measuring output length.
+
+### Is 3,000 words too short? Probably, and the reasoning is stateable
+
+The quantity that should matter is not distance but INTERFERENCE: a name introduced at word 50 and needed at word 2,000 must survive 1,950 words written into the same fixed state. Published SSM failures on exact recall appear at thousands to tens of thousands of tokens; ~3,500 tokens is at the edge of that, which was the reason to measure rather than assume. **A null here means the regime is still too short, or that carryover is not what compression costs. It does NOT mean the architectures are equivalent** -- the literature's separations are at lengths this corpus never reaches.
+
+**And n is one model in every bin.** `falcon-mamba-7b` is the only attention-free model in `national_story`. This is a probe with a stated prediction and a null result, not a test with power.
+
 ## A BLIND SPOT IN THE DEGENERACY SCREEN, found by reading one story
 
 `jakobson_space/population.py:degenerate()` fires when the most common WORD exceeds 30% of tokens, or the most common CHARACTER exceeds 30%. **It cannot see a repeated SENTENCE.** A passage that says "Joseph never let his circumstances determine his attitude" twenty-four times spreads across eight distinct words and trips neither rule.
