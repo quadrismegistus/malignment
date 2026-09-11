@@ -56,6 +56,58 @@ METRICS = ["mean_drift", "mean_pairwise", "bits_per_byte", "directedness", "orde
 INTERPRETABLE = 3
 
 
+def spread(a):
+    """Where do the attention-free models fall in the WHOLE distribution?
+
+    The 6-model paired set answers "are these six alike"; it cannot say whether
+    a rank is unusual, because six models have no distribution. This ranks every
+    base model with enough coverage on a common prompt core.
+    """
+    import pandas as pd
+    from malignment import roster
+    m3 = METRICS[:INTERPRETABLE]
+    d = pd.read_parquet(PARQUET,
+                        columns=["model", "arm", "prompt", "corpus", "n_sents"] + m3)
+    d = d[(d["arm"] == a.arm) & (d["corpus"] == a.corpus)
+          & (d["n_sents"] >= a.min_sents)]
+    cov = d.groupby("model")["prompt"].nunique()
+    models = sorted(cov[cov >= a.min_prompts].index)
+    d = d[d["model"].isin(models)]
+    share = d.groupby("prompt")["model"].nunique()
+    core = set(share[share >= int(len(models) * 0.9)].index)
+    d = d[d["prompt"].isin(core)]
+    print("%d models with >= %d prompts, %d common-core prompts, %d passages\n"
+          % (len(models), a.min_prompts, len(core), len(d)))
+    pm = d.groupby(["model", "prompt"])[m3].median().reset_index()
+    g = pm.groupby("model")[m3].median()
+    order = {c: list(g.sort_values(c).index) for c in m3}
+    print("%-26s %-11s %-7s %s" % ("model", "attn", "block",
+          " ".join("%9s %5s" % (c[:9], "rank") for c in m3)))
+    rows = [(m, roster.architecture(m)) for m in g.index]
+    nd = [(m, ab) for m, ab in rows if ab[1] != "dense"]
+    for m, (at, bl) in sorted(nd, key=lambda x: g.loc[x[0], m3[0]]):
+        print("%-26s %-11s %-7s %s" % (m.split("/")[-1][:26], at, bl,
+              " ".join("%9.4f %4d/%d" % (g.loc[m, c], order[c].index(m) + 1, len(g))
+                       for c in m3)))
+    print("%-26s %-11s %-7s %s" % ("-- median of all %d --" % len(g), "", "",
+          " ".join("%9.4f %5s" % (g[c].median(), "") for c in m3)))
+    print()
+    print("EXTREMES on %s, and every one of them is a DENSE transformer:" % m3[0])
+    srt = g.sort_values(m3[0])
+    for m in list(srt.index[:3]) + list(srt.index[-3:]):
+        at, bl = roster.architecture(m)
+        print("   %-28s %-11s %-7s %.4f" % (m.split("/")[-1][:28], at, bl, g.loc[m, m3[0]]))
+    print()
+    c = g[m3].corr(method="spearman")
+    print("AND THE AXIS IS LARGELY FLUENCY. Spearman across the %d models:" % len(g))
+    print("   drift ~ pairwise   %+.3f" % c.loc[m3[0], m3[1]])
+    print("   drift ~ bits/byte  %+.3f" % c.loc[m3[0], m3[2]])
+    print("A model that costs more bits per byte also drifts more between")
+    print("sentences, so this measure ranks models by fluency first. Architecture")
+    print("would have to change fluency to show up in it at all.")
+    return 0
+
+
 def main():
     import pandas as pd
     from malignment import roster
@@ -66,8 +118,17 @@ def main():
     ap.add_argument("--min-sents", type=int, default=3)
     ap.add_argument("--models", default=None,
                     help="comma-separated override of the declared population")
+    ap.add_argument("--spread", action="store_true",
+                    help="rank the non-dense models against EVERY model with "
+                         "enough coverage, instead of the 6-model paired set. "
+                         "Drops models under --min-prompts, then keeps prompts "
+                         "held by >=90%% of what remains, so the comparison is "
+                         "on a common core rather than each model's own mix.")
+    ap.add_argument("--min-prompts", type=int, default=150)
     a = ap.parse_args()
 
+    if a.spread:
+        return spread(a)
     cols = ["model", "arm", "prompt", "corpus", "n_sents"] + METRICS
     d = pd.read_parquet(PARQUET, columns=cols)
     d = d[(d["arm"] == a.arm) & (d["corpus"] == a.corpus)

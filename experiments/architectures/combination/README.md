@@ -3,7 +3,7 @@ subject: architectures
 kind: question
 status: "RUN 2026-09-11 by mining ~/malignment-data/jakobson_space/passages_std.parquet (358,633 passages, 92 models). No generation, no GPU. Base arm, corpus=passage, n_sents>=3, 6 models paired on 147 prompts held by all of them. NOT REGISTERED. The declared population is 6 models because the parquet covers only three non-dense architectures; recurrentgemma-9b is present but UNUSABLE at 38 rows and a median of one sentence."
 question: Does the syntagmatic axis -- how the chain coheres from sentence to sentence -- depend on the attention mechanism?
-headline: "NO, AND THIS IS THE ONE THAT SHOULD HAVE GONE THE OTHER WAY. Attention is a COMBINATION mechanism, so the syntagmatic axis is the one place this subject had a reason to expect a difference; the paradigmatic nulls elsewhere are cheap because selection lives in the softmax, which every model has. falcon-mamba-7b, computing no attention at all, sits mid-pack on every metric that clears its own noise (mean_drift 3/6, mean_pairwise 2/6, bits_per_byte 2/6). The one robust between-model effect is gemma-2-9b, a DENSE full-attention transformer, which every other model exceeds on mean_drift on 95-98% of 147 paired prompts. Two of the five metrics sit BELOW their own noise floor and are not interpreted."
+headline: "NO, AND THIS IS THE ONE THAT SHOULD HAVE GONE THE OTHER WAY. Ranked against the WHOLE spread (37 base models, 181 common-core prompts): the two pure-SSM models sit at 6/37 and 17/37 on sentence drift and 14/37 and 8/37 on cohesion, and BOTH ENDS of the range are dense full-attention transformers (gemma-2-9b lowest at 1/37, Amber highest at 37/37). Attention is a COMBINATION mechanism, so the syntagmatic axis is the one place this subject had a reason to expect a difference; the paradigmatic nulls elsewhere are cheap because selection lives in the softmax, which every model has. falcon-mamba-7b, computing no attention at all, sits mid-pack on every metric that clears its own noise (mean_drift 3/6, mean_pairwise 2/6, bits_per_byte 2/6). The one robust between-model effect is gemma-2-9b, a DENSE full-attention transformer, which every other model exceeds on mean_drift on 95-98% of 147 paired prompts. Two of the five metrics sit BELOW their own noise floor and are not interpreted."
 ---
 
 # combination
@@ -27,6 +27,27 @@ Every other question in this subject reads the paradigmatic axis: which word goe
     OLMoE-1B-7B-0125       full        moe       0.5003    0.5365     1.3268
 
 **`falcon-mamba-7b`, with no attention of any kind, is third of six on drift and second on cohesion -- inside the dense transformers, not beside them.** The model that stands out is `gemma-2-9b`, and every other model exceeds it on `mean_drift` on 95-98% of the 147 paired prompts. It is a dense transformer with full attention.
+
+## Where no-attention falls in the whole spread
+
+    python run.py --spread
+
+The six-model set answers "are these six alike"; it cannot say whether a rank is unusual, because six models have no distribution. This ranks every base model with >= 150 prompts on the prompts held by >= 90% of them: **37 models, 181 common-core prompts, 94,401 passages.**
+
+    model                      attn       block      drift  rank  pairwise  rank
+    Falcon3-Mamba-7B-Base      none       ssm       0.4920  6/37    0.5265  14/37
+    Falcon-H1-7B-Base          full+ssm   hybrid    0.4964 14/37    0.5240  10/37
+    falcon-mamba-7b            none       ssm       0.4975 17/37    0.5235   8/37
+    OLMoE-1B-7B-0125           full       moe       0.5003 24/37    0.5365  29/37
+    -- median of all 37 --                          0.4978          0.5291
+
+**Every extreme is a dense full-attention transformer.** Lowest drift: `gemma-2-9b` (1/37 on all three metrics), `Yi-1.5-9B`, `Qwen3-8B-Base`. Highest: `Amber` (37/37), `TinyLlama-1.1B`, `CroissantLLMBase`. The two attention-free models sit at 6 and 17 of 37, and `falcon-mamba-7b` is within two places of the median.
+
+### And the axis is mostly fluency, which is why it could not have shown architecture
+
+Spearman across the 37: `drift ~ pairwise` **+0.915**, `drift ~ bits/byte` **+0.734**. A model that costs more bits per byte also drifts more between sentences, and the extremes sort by vintage and capability -- gemma-2, Yi-1.5 and Qwen3 at one end, Amber, TinyLlama and CroissantLLM at the other.
+
+**So this instrument ranks models by fluency first, and architecture would have to change fluency to register in it at all.** That weakens the null rather than strengthening it: the syntagmatic prediction was not so much refuted as never given a clean test by this measure. A combination instrument that is orthogonal to fluency would be the thing to build, and `syntagmatic_damage` -- which forces a demoted word and asks what happens to the sentence -- is the nearest candidate in `passage_analysis`.
 
 ## Two metrics are below their own noise and are not read
 

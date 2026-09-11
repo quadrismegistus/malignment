@@ -1,0 +1,23 @@
+37 models with >= 150 prompts, 181 common-core prompts, 94401 passages
+
+model                      attn        block   mean_drif  rank mean_pair  rank bits_per_  rank
+Falcon3-Mamba-7B-Base      none        ssm        0.4920    6/37    0.5265   14/37    1.3565   15/37
+Falcon-H1-7B-Base          full+ssm    hybrid     0.4964   14/37    0.5240   10/37    1.3536   14/37
+falcon-mamba-7b            none        ssm        0.4975   17/37    0.5235    8/37    1.3004    4/37
+OLMoE-1B-7B-0125           full        moe        0.5003   24/37    0.5365   29/37    1.3335   11/37
+-- median of all 37 --                            0.4978          0.5291          1.3825      
+
+EXTREMES on mean_drift, and every one of them is a DENSE transformer:
+   gemma-2-9b                   full        dense   0.4637
+   Yi-1.5-9B                    full        dense   0.4871
+   Qwen3-8B-Base                full        dense   0.4890
+   CroissantLLMBase             full        dense   0.5173
+   TinyLlama-1.1B-intermediate- full        dense   0.5240
+   Amber                        full        dense   0.5299
+
+AND THE AXIS IS LARGELY FLUENCY. Spearman across the 37 models:
+   drift ~ pairwise   +0.915
+   drift ~ bits/byte  +0.734
+A model that costs more bits per byte also drifts more between
+sentences, so this measure ranks models by fluency first. Architecture
+would have to change fluency to show up in it at all.
