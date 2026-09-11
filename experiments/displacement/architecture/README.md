@@ -91,6 +91,37 @@ The third term, **contextual norm similarity**, is the part that would make this
     OUR TURF, held             existence, norm_change, both delta.
     OUR TURF, new              existence --arm base/aligned, a LEVEL.
 
+## THE SAME POST-TRAINING DATA MOVES THE TWO ARCHITECTURES APART
+
+RH, 2026-09-11: does the architectural minimal pair sit closer than the ALIGNMENT minimal pair, and what happens to the architecture pair ACROSS STAGES, where the post-training data is the same?
+
+AI2 shipped both ladders, so this is askable: `Olmo-3-1025-7B -> Instruct-SFT -> Instruct-DPO -> Instruct` beside `Olmo-Hybrid-7B -> Instruct-SFT-7B -> Instruct-DPO-7B`. **The post-training data is attested the same, not assumed**: both SFT cards declare `allenai/Dolci-Instruct-SFT`, and the `Dolci-Instruct-DPO` card states it "was used to preference tune Olmo 3 Instruct 7B".
+
+200 v6-rated prompts, words above the twp extraction theta of 0.001, `movement.words_multi` at rule_version 4. `ctxD` is the distance between mass-weighted centroids in z-scored contextual-norm space over all 12 v6 rating scales.
+
+    ARCHITECTURE GAP, olmo3 vs hybrid, BY STAGE
+    stage      Jacc    ctxD    ctxD on SHARED SUPPORT    median |A and B|
+    base       0.63   0.282                     0.265                  81
+    SFT        0.46   0.579                     0.490                  55
+    DPO        0.41   0.664                     0.557                  46
+
+    ALIGNMENT MOVES, within one architecture
+    olmo3   base->SFT  0.513     hybrid  base->SFT  0.323
+            SFT->DPO   0.183             SFT->DPO   0.090
+            DPO->RLVR  0.067
+
+**The architecture gap roughly doubles under the same SFT data**, and the shared-support column says that is not an artifact of the two vocabularies drifting apart: restricted to words both models hold above theta, it still goes 0.265 -> 0.490.
+
+**Two architectures given the same post-training data do not converge; they diverge.** `olmo3` travels 0.513 from base to SFT and `hybrid` travels 0.323 -- the dense model moves 1.6x further on identical data -- and they move apart rather than along.
+
+**This is the folder's strongest architecture evidence, and it is strong for the reason the delta was weak.** The objection to `existence` and `norm_change` is that alignment is the most architecture-independent stage, so convergent deltas across the roster mostly record convergent post-training. Here the recipe is not merely similar but the same mixture from one lab, held constant by attestation, and the outcome still depends on what it was applied to.
+
+**The answer to RH's question is that it changes with stage.** At base the architecture pair is CLOSER than one alignment step (0.282 against 0.323 and 0.513). After SFT the architecture gap (0.579) EXCEEDS either model's own journey from base. Alignment is the larger force at the start and the architectures end up further from each other than from where they began.
+
+**The stage near-points reproduce the cut on a new instrument.** `base->SFT` is 0.323 and 0.513; `SFT->DPO` is 0.090 and 0.183; `DPO->RLVR` is 0.067. The first step is three to seven times any later one, which is Findings U's "SFT does the cutting" arrived at from contextual norms rather than from movement rules.
+
+**Limits.** One architecture contrast, so n=1 and nothing here is a rate over architectures. 200 prompts. Aligned models are read on the RAW edge with no chat template, and this roster has aligned models that emit the assistant frame unbidden, which would inflate a base-to-aligned distance. And the DPO row carries a documented card defect: `attestations.json` flags Olmo-3's DPO card as declaring `Dolci-Think-DPO-7B`, templated from its Think sibling, against a `base_model` of Instruct-SFT -- 150k pairs against 260k. **The SFT row is the one where the data is cleanly the same, and it already carries the result.**
+
 ## Where the metadata comes from
 
 `roster/models/models.yaml` has no architecture field, and it is AUTHORED (hand-edited, no script writes it), so this folder does not add one. What it does have is `env.profile: ssm`, an environment requirement (mamba-ssm and causal-conv1d kernels) carrying its own `why`, which picks out the SSM and hybrid families exactly. The rest comes from `roster/models/attestations.json`, whose `notes` carry sourced architecture prose at `confidence: high`.
