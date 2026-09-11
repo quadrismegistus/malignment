@@ -28,6 +28,35 @@ Every other question in this subject reads the paradigmatic axis: which word goe
 
 **`falcon-mamba-7b`, with no attention of any kind, is third of six on drift and second on cohesion -- inside the dense transformers, not beside them.** The model that stands out is `gemma-2-9b`, and every other model exceeds it on `mean_drift` on 95-98% of the 147 paired prompts. It is a dense transformer with full attention.
 
+## ON THE CORRECT SURPRISAL AXIS: deepseek, scored here
+
+    python run.py --score      # deepseek via malignment.score, cached
+
+The jakobson deepseek axis cannot reach these architectures -- its pool is gated on a 58-model blind narrative coding over `f11_l2`, and `f11_l2` holds only three of this subject's models, all dense or MoE. So it was rebuilt here: 5,200 passages over 13 models, both arms, scored through `malignment.score.surprisal` so the result lands in the shared sha-keyed store (96,305 entries) rather than a private sidecar.
+
+    BASE arms, deepseek bits/token, M=50
+    gemma-2-9b            4.2818   full / dense
+    falcon-mamba-7b       4.7879   none / ssm
+    Falcon3-Mamba-7B      5.0093   none / ssm
+    OLMoE-1B-7B-0125      5.1042   full / moe
+    Falcon-H1-7B-Base     5.1387   full+ssm / hybrid
+    Falcon3-7B-Base       5.1773   full / dense
+    Olmo-3-1025-7B        5.2287   full+local / dense
+
+**Bracketed at both ends by dense transformers, with every non-dense model inside the range.** The same shape the drift axis gave, now on the campaign's own reference instead of the superseded byte-level one. Incidentally the arm effect reproduces F15: every aligned model sits 0.7 to 0.8 bits/token below its base, which is larger than the whole architecture spread.
+
+### THE PREFIX IS 50 BECAUSE M=200 SELECTS ON LENGTH
+
+`score.surprisal` returns None when a passage has FEWER than M scored tokens -- it drops the passage rather than shortening the window. So the prefix selects on length, and length differs by model. Measured retention over 400 sampled passages each:
+
+    model                      M=50  M=100  M=150  M=200
+    falcon-mamba-7b-instruct    96%    80%    67%    56%
+    OLMoE-1B-7B-0125-DPO        96%    87%    80%    74%
+    gemma-2-9b-it              100%   100%   100%   100%
+    falcon-mamba-7b             99%    94%    92%    89%
+
+**A 44-point differential at M=200, on the one model that has already failed two other screens** (3.4% to the degeneracy filter, 1.4% sub-threshold repetition). M=200 is right for `jakobson_space`, whose human corpora all clear it; it is wrong for a cross-MODEL comparison. At M=50 the spread is 4 points and overall retention goes 85.9% to 98.6%.
+
 ## Where no-attention falls in the whole spread
 
     python run.py --spread

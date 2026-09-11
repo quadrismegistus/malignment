@@ -98,6 +98,53 @@ LINEAGES = [
 ]
 
 
+def score_pool(a):
+    """Score this subject's passages through `malignment.score.surprisal`.
+
+    **NOT `ref_surprisal.py` standalone, and the difference is reuse.** Both run
+    the same model -- `score.REF` is `deepseek-ai/deepseek-llm-7b-base`, which is
+    jakobson's reference -- but `score.surprisal` keys on `sha(text)` against a
+    shared store that already holds 96,305 scored passages, skips anything
+    present, and makes what it adds available to every other question. The
+    standalone script writes a private sidecar keyed to one output directory.
+    The first version of this file ran the standalone one; 0 of its 5,200
+    passages were in the store, so nothing was duplicated, but nothing would
+    have been reusable either.
+
+    THE PREFIX IS 50, NOT jakobson's 200. A prefix mean is a length statistic
+    if taken over everything, which is why a fixed M exists -- but
+    `score.surprisal` DROPS a passage shorter than M rather than shortening the
+    window, so M selects on length and length differs by model. At M=200
+    `falcon-mamba-7b-instruct` retains 56% and `gemma-2-9b-it` 100%. See
+    --prefix.
+    """
+    import pandas as pd
+    from malignment import score
+    d = pd.read_parquet(PARQUET, columns=["model", "arm", "prompt", "corpus",
+                                          "script", "n_sents", "text", "text_sha"])
+    want = [m for pair in LINEAGES for m in pair]
+    d = d[(d["model"].isin(want)) & (d["script"] == a.script)
+          & (d["corpus"] == a.corpus) & (d["n_sents"] >= a.min_sents)]
+    #: a plain concat, not groupby.apply: apply drops the grouping column in
+    #: this pandas, and the sample is per model by construction anyway.
+    take = pd.concat([g.sample(n=min(a.per_model, len(g)), random_state=20260911)
+                      for _, g in d.groupby("model")], ignore_index=True)
+    texts = list(take["text"])
+    idx = score._index("surprisal")
+    todo = sum(1 for t in texts if score.sha(t) not in idx)
+    print("%d passages over %d models; %d already in the shared store, %d to score"
+          % (len(texts), take["model"].nunique(), len(texts) - todo, todo))
+    print("prefix M=%d" % a.prefix)
+    out = score.surprisal(texts, m=a.prefix)
+    take = take.assign(surprisal=out)
+    keep = take.dropna(subset=["surprisal"])
+    dst = os.path.join(HERE, "results_surprisal.csv")
+    keep[["model", "arm", "prompt", "text_sha", "n_sents", "surprisal"]].to_csv(dst, index=False)
+    print("scored %d of %d (None = fewer than M scored tokens), wrote %s"
+          % (len(keep), len(take), os.path.basename(dst)))
+    return 0
+
+
 def build_pool(a):
     """Write the deepseek input for this subject. Scored by ref_surprisal.py.
 
@@ -227,6 +274,23 @@ def main():
                          "discipline, NOT joinable to two_axes.csv because the "
                          "corpus and the coding differ.")
     ap.add_argument("--per-model", type=int, default=400)
+    ap.add_argument("--score", action="store_true",
+                    help="score this subject's passages with the reference model "
+                         "THROUGH malignment.score, so the result lands in the "
+                         "shared sha-keyed store (96,305 entries already) rather "
+                         "than a private sidecar. Same model as jakobson's pass, "
+                         "deepseek-llm-7b-base; nothing is rescored.")
+    ap.add_argument("--prefix", type=int, default=50,
+                    help="mean surprisal over the first M scored tokens. NOT "
+                         "jakobson's M=200, and the difference is a confound: "
+                         "score.surprisal returns None when a passage has FEWER "
+                         "than M tokens, so the prefix SELECTS ON LENGTH, and "
+                         "length varies by model. Measured retention at M=200: "
+                         "falcon-mamba-7b-instruct 56%%, gemma-2-9b-it 100%% -- a "
+                         "44-point differential on the one model that has already "
+                         "failed two other screens. At M=50 it is 96%% and 100%%. "
+                         "M=200 is right for jakobson, whose human corpora all "
+                         "clear it; it is wrong for a cross-MODEL comparison.")
     ap.add_argument("--script", default="en",
                     help="ENGLISH ONLY BY DEFAULT (RH, 2026-09-11). The zh rows "
                          "go through a different pipeline entirely -- stanza-zh "
@@ -238,6 +302,8 @@ def main():
                          "and no reason at all to carry.")
     a = ap.parse_args()
 
+    if a.score:
+        return score_pool(a)
     if a.build_pool:
         return build_pool(a)
     if a.spread:
