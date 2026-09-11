@@ -481,6 +481,19 @@ def main():
         _preview_extra += " --system %r" % a.system
     if a.prompts_file:
         _preview_extra += " --prompts-file /root/prompts.txt"
+    #: **A DRY RUN THAT DOES NOT SHOW WHAT WILL RUN IS NOT A DRY RUN.** This
+    #: preview and the real command at `framed` are two places that must agree,
+    #: and they silently did not: the preview showed neither --prompts-json nor
+    #: --closure-file nor --purge, so the line RH would read before spending
+    #: omitted the three flags that decide what gets measured and whether the
+    #: disk survives. Same shape as `_key_body_agree`'s defect -- two
+    #: descriptions of one run, only one of them checked.
+    if a.prompts_json:
+        _preview_extra += " --prompts-json /root/prompts.json"
+    if a.closure_file:
+        _preview_extra += " --closure-file /root/closure.json"
+    if a.purge:
+        _preview_extra += " --purge"
     steps = 2 if a.frame else 3
     print("  will run, PER LINEAGE (%s, then wipe the weights):"
           % ("pass 1 ONLY -- no topup under a frame" if a.frame
