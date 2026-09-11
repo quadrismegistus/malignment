@@ -185,6 +185,13 @@
    "transformers": "5.14.1",
    "note": "MPS (this Mac), scratch venv built to test one claim. NOT a declared roster venv -- `venvs.py` derives those from the roster, and an undeclared venv in-tree is drift.",
    "source": "scratchpad probe, scripts note in docs/environment_record.md"
+  },
+  "cloud_cuda_tf5161": {
+   "device": "cuda",
+   "torch": "2.8.0+cu128",
+   "transformers": "5.16.1",
+   "note": "rented CUDA box. Derived from the cells that actually ran in it.",
+   "source": "derived by record_successes.py from twp_cells_v4"
   }
  },
  "observations": [
@@ -3099,6 +3106,55 @@
    "outcome": "load_ok",
    "cause": "",
    "fix": "DERIVED FROM THE CORPUS, not hand-observed: 874 cells in twp_cells_v4 on device `cuda`, transformers 4.57.1 / torch 2.13.0+cu130, profile `tf457`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "LLM360/AmberSafe",
+   "environment": "cloud_cuda_tf5161",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 874 cells in twp_cells_v4 on device `cuda`, transformers 5.16.1 / torch 2.8.0+cu128, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "PKU-Alignment/beaver-7b-v1.0",
+   "environment": "cloud_cuda_tf5161",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 874 cells in twp_cells_v4 on device `cuda`, transformers 5.16.1 / torch 2.8.0+cu128, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "RWKV/rwkv-raven-7b",
+   "environment": "cloud_cuda_tf5161",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 874 cells in twp_cells_v4 on device `cuda`, transformers 5.16.1 / torch 2.8.0+cu128, profile `torch26`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "allenai/Olmo-3.1-32B-Instruct",
+   "environment": "cloud_cuda_tf5161",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 874 cells in twp_cells_v4 on device `cuda`, transformers 5.16.1 / torch 2.8.0+cu128, profile `tf457`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "gl198976/mpt-7b-instruct",
+   "environment": "cloud_cuda_tf5161",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 874 cells in twp_cells_v4 on device `cuda`, transformers 5.16.1 / torch 2.8.0+cu128, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "lomahony/eleuther-pythia6.9b-hh-dpo",
+   "environment": "cloud_cuda_tf5161",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 874 cells in twp_cells_v4 on device `cuda`, transformers 5.16.1 / torch 2.8.0+cu128, profile `torch26`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
+  },
+  {
+   "model_id": "togethercomputer/RedPajama-INCITE-7B-Chat",
+   "environment": "cloud_cuda_tf5161",
+   "outcome": "load_ok",
+   "cause": "",
+   "fix": "DERIVED FROM THE CORPUS, not hand-observed: 874 cells in twp_cells_v4 on device `cuda`, transformers 5.16.1 / torch 2.8.0+cu128, profile `default`, compute_dtype float16. Says the model loaded and produced output; says nothing about whether the output is correct."
   }
  ],
  "engine_support": {

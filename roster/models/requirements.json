@@ -737,7 +737,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 5
+   "n_observations": 6
   },
   {
    "model": "NousResearch/Hermes-3-Llama-3.1-8B",
@@ -899,7 +899,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 3
+   "n_observations": 4
   },
   {
    "model": "Qwen/Qwen2.5-0.5B",
@@ -1115,7 +1115,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 4
+   "n_observations": 5
   },
   {
    "model": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
@@ -1877,7 +1877,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 1
+   "n_observations": 2
   },
   {
    "model": "allenai/Olmo-3.1-32B-Instruct-DPO",
@@ -2390,7 +2390,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 3
+   "n_observations": 4
   },
   {
    "model": "google/gemma-2-9b",
@@ -2930,7 +2930,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 3
+   "n_observations": 4
   },
   {
    "model": "lomahony/eleuther-pythia6.9b-hh-sft",
@@ -4223,7 +4223,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 3
+   "n_observations": 4
   },
   {
    "model": "togethercomputer/RedPajama-INCITE-7B-Instruct",
