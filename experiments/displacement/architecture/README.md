@@ -12,7 +12,84 @@ headline: "The operation does not need attention, on BOTH instruments. falcon-ma
 
 Weatherby's *Language Machines* (2025) locates the poetic function in the transformer's attention mechanism: "the transformer architecture gives us quantitative aboutness" (161-62), and computation and language "share form" as "a demonstrable technical fact". The claim is architecture-specific by construction. He hedges it once, and the hedge is the testable part: attention is "probably just one way, we do not yet know of any others, to make this function computationally manipulable" (155), with a note pointing at Google's Griffin, "RNNs with local attention" (227n26).
 
-That Griffin model is in this census. So is a model with no attention at all. If alignment's content-selective displacement occurs without attention, then the mechanism Weatherby names is not what makes the operation possible, and the transformer demonstrates nothing about language that autoregression had not already.
+That Griffin model is in this census. So is a model with no attention at all.
+
+## TWO TURFS, AND EVERY RESULT BELOW BELONGS TO ONE OF THEM
+
+**This folder originally ran one question and reported it as two.** The correction, RH 2026-09-11, and it is the frame for everything here.
+
+    HIS TURF     a claim about the ARCHITECTURE: does the mechanism realize
+                 the poetic function? A property of a model, testable on a
+                 BASE model, with no reference to post-training at all.
+
+    OURS         a claim about the OPERATION: alignment displaces along a
+                 chain of permitted substitutes, and the wave misses it
+                 because it reads theory off the aligned surface. A
+                 base->aligned DELTA, and the delta is the point.
+
+`existence` and `norm_change` are delta instruments. `existence` regresses (p_aligned - p_base) on scene; `norm_change` regresses (aligned - base) on the base dose. **Neither speaks to a claim about an architecture**, and the sentence this README carried until today -- that the transformer "demonstrates nothing about language that autoregression had not already" -- did not follow from either and is withdrawn.
+
+**The delta is close to the worst place to look for an architecture effect,** which makes the null it produced much weaker than it first reads. Alignment is the most architecture-independent stage in the pipeline: broadly shared SFT mixtures, broadly shared DPO recipes, often the same public corpora. Convergent deltas across architectures are substantially evidence that post-training converged. This folder's own `norm_change` section says so without having been asked: agreement with the roster median tracks how much a model was ALIGNED, and the two dissenters are the two weakest movers. A quantity dominated by post-training cannot be informative about construction.
+
+So the folder now runs both arms, and labels which turf each result stands on. **What survives on our turf** is the original finding, unchanged and now correctly scoped: alignment's operation does not depend on the architecture it runs on. **What is needed on his** is a base-level capacity read, and the honest position is that this folder held none until today.
+
+## HIS TURF: what a direct test needs, and one route that is now closed
+
+**An embedding-based read of paradigmatic coherence was proposed on 2026-09-11 and killed the same hour, by RH's objection and then by measurement.** The proposal: embed the high-mass candidates at a base model's slot and ask whether they form a tight equivalence class, which would be selection projected onto combination, directly, on CPU, with no fleet. RH's objection: "kill and scream are not necessarily proximate."
+
+They are not. Measured on the two encoders this repo has already gated (`named_under_dose/embed.py`, whose gate exists because docket [459] once gate-checked bge-m3 on `prompt + " " + word` and the repo's rule is that a gate passed for one use is not evidence about another):
+
+    pair              GloVe    bge-m3
+    kill/scream       0.221     0.580
+    kill/laugh        0.242     0.568      <- NOT closer than the displacement pair
+    kill/help         0.411     0.626      <- CLOSER than the displacement pair
+    kill/murder       0.459     0.809
+    scream/shout      0.620     0.775
+
+**The canonical displacement pair is not a proximity relation either encoder can see.** In GloVe "scream" is farther from "kill" than "laugh" is.
+
+RH's second question, whether to embed `prompt + word` instead, was tested and makes it worse. The shared prefix dominates: pairwise cosine over eight candidates compresses from [0.535, 0.809] bare to [0.822, 0.987] in context, and the ordering does not improve -- kill/scream 0.894 ties kill/leave 0.894 and kill/help 0.890. Adding the prompt to every candidate makes every candidate similar.
+
+This is consistent with what `existence` already found by a different route: **where the mass goes is not adjacency.** The destination barely depends on the origin. So a semantic-proximity instrument was never going to see this operation, and a null from one would have been a fact about the encoder.
+
+### The lexicon route DOES work, and it is RH's, not the encoder's
+
+RH's counter-proposal, same day: build similarity from **field inclusion + type norm similarity + (possibly) contextual norm similarity**, using `malignment/fields.py`, which already holds USAS, RID, General Inquirer, WordNet supersenses, the `k_` ratings and the psycholinguistic norms. Probed immediately. Distance from `kill` in z-scored norm space over **arousal, valence, dominance, concreteness only -- no charge dimension, so nothing downstream of the transgressive hypothesis is in the metric**:
+
+    word        dist   USAS field                      field vs kill
+    attack      0.42   Calm/Violent/Angry [-]          different
+    murder      0.72   Life and living things [-]      SHARED
+    scream      1.09   Speech acts                     different
+    hurt        1.85   Health and disease [-]          different
+    shout       2.20   Sensory:- Sound [++]            different
+    laugh       3.71   Happy/sad: Happy [+]            different
+    help        4.50   Helping/hindering [+]           different
+
+**`scream` ranks third of twelve. `laugh` ranks ninth.** GloVe put `laugh` AHEAD of `scream` and `help` ahead of both. The norms rank the displacement pair correctly, on four ordinary psycholinguistic dimensions, with no encoder in the path.
+
+**The two terms must be reported separately and never summed.** Field inclusion does not track the relation at all: of the near neighbours only `murder` shares `kill`'s USAS field, and `scream` sits in "Speech acts". That is not the composite failing, it is the composite RESOLVING -- what displacement preserves is the norm profile (`kill` arousal 6.81, `scream` 6.74) and what it changes is the field. Summing the two into one similarity score would cancel exactly the structure the instrument exists to show, and it is the same structure `existence` reached independently: the mass LEAVES the faller's own field.
+
+**Two conditions before this is an instrument rather than a probe.** It is twelve hand-picked words and needs the gate `named_under_dose/embed.py` applies to encoders -- near-synonyms closer than unrelated pairs, on held-out pairs chosen first. And **coverage must be a gate, not a default**: `stab` has no norms on any of the four dimensions, and the first version of this probe ranked it as `kill`'s NEAREST neighbour at distance 0.00, because `nansum` over an all-NaN row returns zero. `fields.py`'s own docstring names that hazard and `named_under_dose` refuses it by dropping uncovered words. Complete cases only.
+
+The third term, **contextual norm similarity**, is the part that would make this context-sensitive without the prefix-domination that sank the embedding route, and it is denser than expected. Read through `fields.slot_prompts()` and `fields.contextual_norms(prompt, instrument="v6")` -- the general instrument only, not the institutional or sexual ones, which are separate constructs under their own directories:
+
+    prompts rated                2,188
+    (prompt, word) cells       114,524
+    words per prompt          median 60, max 113; 86% of prompts carry >= 10
+    WITHIN-SLOT PAIRS        3,878,463
+    overlap with movement_v4   2,188 of 2,188 -- EVERY rated prompt is in the
+                               raw edge, covering 73.3% of its 2,985 prompts
+
+**Twelve of the nineteen keys are ratings; seven are not, and putting them in a similarity metric would be circular.** `aggression, deliberation, directedness, fit, harm, hedged, interiority, makes_better, makes_worse, mundanity, superego, vocalisation` are what raters gave. `fall, rise, net, net_rate, n_eligible, n_present, ratable` are movement outcomes and bookkeeping that travel in the same dict -- they are the dependent variable, and a similarity built from them would predict displacement with displacement.
+
+**Which is also the argument for `rhyme_pull` as the direct test, and it is a positive argument rather than a fallback.** Jakobson's equivalence class does not have to be semantic. A rime class is a FORMAL equivalence relation, computed exactly from IPA rime keys in `rhyme_pull_pilot.py` -- final-stressed-syllable-onward, onsets stripped -- with no encoder in the path and therefore no encoder gate to fail. That is the sense in which it tests selection directly, and it is why `plan_rhyme.md` reached for prosodic rather than embeddings in the first place.
+
+    HIS TURF, available        rhyme_pull BASE arm. Unrun. The half of the
+                               delta design that tests Weatherby.
+    HIS TURF, closed           embedding paradigmatic coherence. Measured
+                               above; the encoders cannot see the relation.
+    OUR TURF, held             existence, norm_change, both delta.
+    OUR TURF, new              existence --arm base/aligned, a LEVEL.
 
 ## Where the metadata comes from
 

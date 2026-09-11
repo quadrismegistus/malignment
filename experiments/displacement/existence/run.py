@@ -68,7 +68,23 @@ def slope(xs, ys):
     return sum((x - mx) * (y - my) for x, y in zip(xs, ys)) / sxx
 
 
-def measure(save=None, frame="raw", match_framed=False):
+def measure(save=None, frame="raw", match_framed=False, arm="delta"):
+    """arm='delta' is the campaign's question: what does ALIGNMENT do.
+
+    arm='base' and arm='aligned' ask the LEVEL question instead -- does this
+    model, on its own, put more mass on higher-charge words? That is a property
+    of one model rather than of the operation, and it is the only form in which
+    this instrument can speak to a claim about an ARCHITECTURE, since a
+    base->aligned delta is dominated by post-training and post-training is the
+    most architecture-independent stage there is.
+
+    On a level the within-cell OLS slope is scale-dependent in a way it is not
+    on a delta: p sums to the cell's covered mass, which differs by model and by
+    prompt. So a level arm regresses the within-cell SHARE (p / sum p), and the
+    coefficient is 'share per unit of scene' rather than 'probability'. The two
+    arms are therefore NOT on a common scale and must never be printed in one
+    column.
+    """
     import statistics as st
     from malignment import ch, charge, roster
 
@@ -138,10 +154,22 @@ def measure(save=None, frame="raw", match_framed=False):
         ep_set.add(key)
         base_of[key] = b
 
-    print("EXISTENCE: does a word's transgressive charge predict its displacement?")
-    print("%d %s, per-cell slope of delta ~ scene  [frame=%s]"
+    #: **THE OUTPUT MUST NAME THE QUANTITY IT COMPUTED.** These lines were
+    #: written for the delta and printed verbatim under --arm base on the first
+    #: run, describing movement "under alignment" in a report where no aligned
+    #: model was read. A level arm and a delta arm answer different questions.
+    if arm == "delta":
+        print("EXISTENCE: does a word's transgressive charge predict its "
+              "displacement?")
+    else:
+        print("EXISTENCE --arm %s: does a word's transgressive charge predict "
+              "how much share THIS ONE MODEL gives it?" % arm)
+        print("A LEVEL, NOT THE OPERATION. No comparison across arms is made "
+              "and none is licensed: nothing here is on the delta's scale.")
+    print("%d %s, per-cell slope of %s ~ scene  [frame=%s]"
           % (len(eps), "self-edges" if frame == "self" else "endpoint lineages",
-             frame))
+             {"delta": "delta", "base": "base SHARE",
+              "aligned": "aligned SHARE"}[arm], frame))
     if frame == "self":
         import collections as _c
         c = _c.Counter(self_arm.values())
@@ -156,7 +184,9 @@ def measure(save=None, frame="raw", match_framed=False):
     for b, a in sorted(eps.items()):
         lin = b + ">" + a
         rows = ch.query(
-            "SELECT prompt, word, (p_aligned - p_base) AS delta "
+            "SELECT prompt, word, %s AS delta "
+            % {"delta": "(p_aligned - p_base)",
+               "base": "p_base", "aligned": "p_aligned"}[arm] +
             "FROM {db}.movement_v4 "
             "WHERE base='%s' AND aligned='%s' "
             "AND frame_base = '' AND %s"
@@ -192,6 +222,13 @@ def measure(save=None, frame="raw", match_framed=False):
                 ys.append(delta)
         if len(xs) < 3:
             continue
+        if arm != "delta":
+            #: SHARE, not probability -- see measure.__doc__. A delta is already
+            #: a difference of two quantities on one cell's scale; a level is not.
+            tot = sum(ys)
+            if tot <= 0:
+                continue
+            ys = [y / tot for y in ys]
         s = slope(xs, ys)
         if s is not None:
             slopes_by_lin[lin].append(s)
@@ -214,7 +251,9 @@ def measure(save=None, frame="raw", match_framed=False):
     p = binom(min(neg, pos), n)
     grand_med = st.median(list(med_slopes.values())) if med_slopes else float("nan")
 
-    print("  SLOPE OF delta ~ scene (within cell)")
+    print("  SLOPE OF %s ~ scene (within cell)"
+          % {"delta": "delta", "base": "base SHARE",
+             "aligned": "aligned SHARE"}[arm])
     print("  %-40s %s" % ("lineages with negative median slope:", neg))
     print("  %-40s %s" % ("lineages with positive median slope:", pos))
     print("  %-40s %.6f" % ("sign test p:", p))
@@ -243,16 +282,34 @@ def measure(save=None, frame="raw", match_framed=False):
         print()
 
     if neg > pos:
-        print("  NEGATIVE: higher-scene words lose more mass under alignment.")
-        print("  Displacement is content-selective.")
+        if arm == "delta":
+            print("  NEGATIVE: higher-scene words lose more mass under "
+                  "alignment.")
+            print("  Displacement is content-selective.")
+        else:
+            print("  NEGATIVE: within a cell, this model gives higher-scene "
+                  "words LESS share.")
+            print("  A property of the %s model's own distribution. It says "
+                  "NOTHING about" % arm)
+            print("  displacement, and it is not evidence for or against a "
+                  "content-selective operation.")
     elif pos > neg:
         print("  POSITIVE: higher-scene words GAIN mass — unexpected.")
     else:
         print("  NULL: no directional relationship between scene and delta.")
 
     # --- breakdown: fallers vs risers ---
+    #: FALLER/RISER IS A SIGN TEST ON THE DELTA. On a level arm every value is a
+    #: probability share and therefore positive, so the split degenerates to
+    #: "all risers, no fallers" -- which is what the first --arm base run
+    #: printed. Skipped rather than printed as a near-empty table.
+    if arm != "delta":
+        print()
+        print("  (faller/riser breakdown skipped: it splits on the sign of a "
+              "delta, and a level has none)")
     print()
-    print("  --- breakdown by faller/riser status ---")
+    if arm == "delta":
+        print("  --- breakdown by faller/riser status ---")
 
     for cls_label, cls_filter in [("fallers only", lambda d: d < 0),
                                   ("risers only", lambda d: d > 0)]:
@@ -448,8 +505,18 @@ def main(argv=None):
     ap.add_argument("--match-framed", action="store_true",
                     help="restrict to the pairs the framed run uses, so raw and "
                          "prefill are the same population")
+    ap.add_argument("--arm", default="delta", choices=("delta", "base", "aligned"),
+                    help="delta (default) is the campaign's question: what does "
+                         "ALIGNMENT do. base/aligned ask the LEVEL question -- "
+                         "does this ONE MODEL put more mass on higher-charge "
+                         "words -- which is the only form in which this "
+                         "instrument can address a claim about an ARCHITECTURE, "
+                         "a delta being dominated by post-training. Levels "
+                         "regress the within-cell SHARE and are NOT on the "
+                         "delta's scale.")
     a = ap.parse_args(argv)
-    return measure(save=a.save, frame=a.frame, match_framed=a.match_framed)
+    return measure(save=a.save, frame=a.frame, match_framed=a.match_framed,
+                   arm=a.arm)
 
 
 if __name__ == "__main__":
