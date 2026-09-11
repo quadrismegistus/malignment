@@ -21,10 +21,17 @@ claim: a hybrid carries `layer_types` or `hybrid_layer_ids`, an SSM carries
 claim that `env.profile: ssm` "picks out the SSM and hybrid families exactly".
 It does not. As a predictor of "non-dense block" over those 8:
 
-    hit 4    miss 3    false alarm 0
+    on the ATTENTION axis (block in ssm, hybrid)      miss 2 of 6
+    with SPARSITY folded in (block also moe)          miss 3 of 7
 
-The misses are `recurrentgemma-9b` (Griffin), `Olmo-Hybrid-7B` (Gated DeltaNet)
-and `OLMoE-1B-7B-0125` (mixture-of-experts), all on a non-`ssm` profile. It fails
+**THOSE TWO NUMBERS ARE NOT A DISCREPANCY AND MUST NOT BE RECONCILED LATER.**
+They are different denominators over two axes that the taxonomy keeps apart on
+purpose: `docs/model_census.md` says MoE is a SPARSITY property, a different
+axis from the attention mechanism. Score the attention axis and the misses are
+`recurrentgemma-9b` (Griffin) and `Olmo-Hybrid-7B` (Gated DeltaNet); fold in
+sparsity and `OLMoE-1B-7B-0125` joins them. The two-axis design earned its keep
+the first time it was used, and this note exists because the 2 and the 3 would
+otherwise read as one of them being wrong. It fails
 the other way too: `profile: ssm` holds `falcon-mamba` and `Falcon3-Mamba`, which
 are PURE SSM rather than hybrid, so the profile cannot separate the two classes
 it would have to separate. **`env.profile` is an ENVIRONMENT requirement** -- it

@@ -60,9 +60,10 @@ So the folder now runs both arms, and labels which turf each result stands on. *
 
 An earlier version of this section said `env.profile: ssm` "picks out the SSM and hybrid families exactly". **That was false, and its own table below contradicted it.** As a predictor of "non-dense block" over the eight cases then declared:
 
-    hit 4     miss 3     false alarm 0
+    on the ATTENTION axis (block in ssm, hybrid)      miss 2 of 6
+    with SPARSITY folded in (block also moe)          miss 3 of 7
 
-The misses are `recurrentgemma-9b` (Griffin), `Olmo-Hybrid-7B` (Gated DeltaNet) and `OLMoE-1B-7B-0125` (mixture), all on a non-`ssm` profile. It fails the other way too: `profile: ssm` holds `falcon-mamba` and `Falcon3-Mamba`, which are PURE SSM rather than hybrid, so the profile cannot separate the two classes it would have to separate. `env.profile` answers "does this need mamba-ssm and causal-conv1d kernels", and two different architectures share one answer.
+**Two denominators, not a discrepancy.** The taxonomy keeps the axes apart on purpose -- `docs/model_census.md`: MoE is a sparsity property, a different axis from the attention mechanism. On attention the misses are `recurrentgemma-9b` (Griffin) and `Olmo-Hybrid-7B` (Gated DeltaNet); fold in sparsity and `OLMoE-1B-7B-0125` joins them. Recorded this way so nobody later reads the 2 and the 3 as one of them being wrong. It fails the other way too: `profile: ssm` holds `falcon-mamba` and `Falcon3-Mamba`, which are PURE SSM rather than hybrid, so the profile cannot separate the two classes it would have to separate. `env.profile` answers "does this need mamba-ssm and causal-conv1d kernels", and two different architectures share one answer.
 
 **And the hand table forgot the arms nobody had looked at.** It declared bases only, so six checkpoints carrying `env.profile: ssm` -- `Zamba2-7B-Instruct`, both `Falcon-H1-*-Instruct`, both `Falcon3-Mamba-7B-*` and `falcon-mamba-7b-instruct` -- fell to its "unlisted means dense transformer" default. Nothing had stratified the aligned arm, so no published number was wrong; the defect was one analysis away. **`roster.architecture()` returns `unknown` for an unprobed model rather than `dense`**, which is the honest answer and the one that cannot silently absorb a sibling.
 

@@ -73,6 +73,15 @@ The two swaps are not the same manipulation in opposite directions. They remove 
                  -0.000498 -> -0.000114                 global removed
                                                         displacement DOWN
 
+**The configs evidence contrast 1 at LAYER GRANULARITY, and it is better controlled than "full vs full+linear" made it sound.** From `measurements.json` section `architecture`, which stores `layer_types` per checkpoint:
+
+    Olmo-3-1025-7B    32 layers   24 sliding_attention + 8 full_attention
+    Olmo-Hybrid-7B    32 layers   24 linear_attention  + 8 full_attention
+    full_attention slots          [3, 7, 11, 15, 19, 23, 27, 31] in BOTH
+    positions differing           24 of 32, every one sliding -> linear
+
+**A single-variable swap of the LOCAL mechanism, with the global-attention schedule held fixed.** The prose below was written from the paper's sentence and was right; the label above it was wrong, calling Olmo-3 plain `full` until the probe read `full+local` off its config. This is now asserted by two configs rather than by AI2's abstract. (@malign quantified it; verified here against the stored keys.)
+
 Read on the local/global axis rather than the presence/absence axis, **both contrasts point the same way**: global attention supports displacement, local attention does not, and removing local attention may even free capacity for it. `falcon-mamba-7b`, which has neither, sits low at -0.000124, and `rwkv-4-7b-pile`, which has neither, is the one non-displacer.
 
 **This is post hoc on two contrasts of one model each, generated after seeing the signs, and it is not a finding.** Across vendors it already breaks: `gemma-2-9b` has full global attention and is the strongest displacer here at -0.000498, while `Olmo-3-1025-7B` also has full global attention and sits at -0.000159, so vendor and corpus swamp it the moment the comparison leaves a matched pair. It is recorded because it is cheap to state, it is falsifiable, and `rhyme_pull` across these same models would test it: if global attention is what carries the operation, the same ordering should appear on the paradigmatic instrument. **It has to be written down before that fleet runs or it is worthless.**
