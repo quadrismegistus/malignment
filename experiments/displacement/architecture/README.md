@@ -3,7 +3,7 @@ subject: displacement
 kind: question
 status: "RUN 2026-09-11. Three instruments: existence/norm_change per-lineage lookups (DELTA, and withdrawn as evidence about architecture), a 50-base pairwise similarity sweep on field, type-norm and contextual-norm measures (BASE, 1,225 pairs, 200 v6-rated prompts), and the Olmo-3 / Olmo-Hybrid ladders across stages where AI2's post-training data is attested identical. NOT REGISTERED; no between-group test is run, and n on the attention-free side is one pure SSM and one linear-attention model."
 question: Does the displacement operation, or anything else these models do, depend on the attention mechanism?
-headline: "ONE ALIGNMENT STEP MOVES A MODEL FURTHER THAN THE ENTIRE SPREAD OF ARCHITECTURES, VENDORS, SCALES AND CORPORA AT BASE: the median distance between any two of the 50 bases is 0.407, and Olmo-3 base to its own SFT checkpoint is 0.513. Architecture is undetectable at base -- falcon-mamba-7b, which computes no attention of any kind, is the MEDIAN model of the census at rank 25/50 -- and decisive under alignment, where the same attested-identical SFT mixture moves two architectures nearly orthogonally (cos +0.233) against a measured ceiling of +0.930. The architecture shows up at the cut, not in the language."
+headline: "ONE ALIGNMENT STEP MOVES A MODEL FURTHER THAN THE ENTIRE SPREAD OF ARCHITECTURES, VENDORS, SCALES AND CORPORA AT BASE: the median distance between any two of the 50 bases is 0.407, and Olmo-3 base to its own SFT checkpoint is 0.513. Architecture is undetectable at base -- falcon-mamba-7b, which computes no attention of any kind, is the MEDIAN model of the census at rank 25/50 -- and decisive under alignment, where the same attested-identical SFT mixture leaves two architectures as far apart at SFT on the framed edge as on the raw one (ctxD 0.622 vs 0.621). The move-DIRECTION claim was corrected the same day: cos +0.229 raw against +0.595 framed, so the original "nearly orthogonal" was substantially an off-template artifact, though both sit below a measured ceiling of +0.930. The architecture shows up at the cut, not in the language."
 ---
 
 # architecture
@@ -30,9 +30,10 @@ The folder set out to test one claim and answered two questions, which point opp
                              average transformer.
 
     OURS, at the cut         DECISIVE. The same attested-identical SFT
-                             mixture moves two architectures nearly
-                             orthogonally, cos +0.233, against a
-                             measured ceiling of +0.930.
+                             mixture leaves the two architectures 0.62
+                             apart, and reading them in the frame they
+                             were TRAINED for does not shrink it
+                             (0.621 raw, 0.622 framed).
 
 **The architecture shows up at the cut, not in the language.** Whatever separates these fifty base models from one another, it is not whether they compute attention; but what a model is built from governs where alignment takes it. The live fact sits on the operation's side of the contest rather than on the mechanism's.
 
@@ -138,6 +139,24 @@ The moves are not parallel, the widening is not along the pre-existing gap, and 
     same data, DIFFERENT arch      median cos  +0.233   cos>0.9 on 12%, <0.5 on 58%
 
 The percentages are almost exactly swapped. **Dropping an entire data source barely rotates the move; changing what the data is applied to nearly orthogonalizes it.** The direction of an alignment move is set more by what you apply it to than by what you apply.
+
+### CORRECTION, same day: the framed edge, and what it took back
+
+RH pointed out that v4 carries framed cells for these checkpoints, so confound (3) below was closeable rather than merely nameable. Both aligned arms read on the `prefill` edge, 200 prompts drawn from the 763 that are both v6-rated and framed:
+
+    ARCHITECTURE GAP        raw ctxD   framed ctxD
+    at SFT                     0.621         0.622
+    at DPO                     0.660         0.731
+
+    cos(move_olmo3, move_hybrid), base_raw -> SFT
+    raw                       +0.229
+    framed                    +0.595
+
+**The GAP survives exactly** -- 0.621 against 0.622 -- and is larger framed at DPO. Read in the frame they were trained for, the two architectures are as far apart as off it. That measure is the cleaner one in any case, since both sides sit on the same edge.
+
+**The MOVE-DIRECTION claim does not survive and is struck.** "Nearly orthogonal" was substantially an artifact of reading aligned models off-template. What replaces it is a bracket, because neither end is clean: the raw number reads both aligned models off the template they were trained for, and the framed number is `base_raw -> SFT_framed`, so both move vectors carry the frame's own contribution -- a large component SHARED by both models, which mechanically inflates the cosine. The true value lies between +0.229 and +0.595, and both ends sit below the +0.930 ceiling, so the moves are not parallel; but the strong version is withdrawn.
+
+The headline sentence is untouched by this: it compares base-to-base distances against a base-to-SFT distance, all on the raw edge, and no framed quantity enters it.
 
 **WHERE THE OBJECTION SURVIVES, and it is not dismissed.** The five Llama arms share the same BASE WEIGHTS, not merely the same architecture. So the ceiling control holds the starting point exactly rather than approximately, and what is established is "same starting point, parallel moves" against "different starting point, divergent moves". Architecture is why these two start apart, so on this pair the architectural claim and the starting-point claim have the same evidence and cannot be separated.
 
@@ -310,7 +329,7 @@ RH's question, 2026-09-11. **Nothing below is measured.** These are candidate ex
 
 **2. "Same data" may not be "same optimization."** A lab that changes the attention mechanism commonly retunes the learning rate, the schedule, or the epoch count. `attestations.json` establishes the same Dolci mixtures; it does not establish the same hyperparameters, and nothing in this folder checked. If AI2 tuned the hybrid's SFT differently, the divergence is the tuning.
 
-**3. The raw-edge confound, specific to the aligned arm.** Post-trained models are read here with NO chat template, and this roster contains aligned models that emit the assistant frame unbidden (E-ASSIST-AMBIENT). If `Olmo-3-SFT` reaches for that frame more readily than `Olmo-Hybrid-SFT`, the measured gap is partly format compliance off-template rather than anything about alignment. Re-running the cross-stage comparison on the framed edge would settle it and the edges already exist.
+**3. The raw-edge confound, specific to the aligned arm. TESTED, and it splits.** Post-trained models were read with NO chat template, and this roster contains aligned models that emit the assistant frame unbidden (E-ASSIST-AMBIENT). Re-run on the `prefill` edge: the architecture GAP is unchanged (0.621 raw, 0.622 framed at SFT) so it is not a format-compliance artifact, but the move-DIRECTION cosine goes +0.229 to +0.595 and the "nearly orthogonal" claim was struck. See the correction above. **This rival is dead for the gap and was correct for the directions.**
 
 **4. Data volume overdetermines the base and underdetermines the cut.** Six orders of magnitude separate 5.9T pretraining tokens from ~2.15M SFT examples. If the pretraining objective on that much natural text admits essentially one good solution, every architecture is pushed into it and the architecture becomes a means rather than a difference -- which is what rank 25/50 for an attention-free model looks like. Post-training constrains far less, so the same gradient signal applied to different parameterizations is free to land in different places. On this account architecture was always present and only becomes VISIBLE when the data stops dictating the answer.
 
