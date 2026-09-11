@@ -19,7 +19,17 @@ It began as `displacement/architecture` and outgrew that in a day, in two ways t
     similarity      do the models differ by architecture AT ALL?              BASE + ALIGNED
     rhyme           does rhyme pull depend on attention?                      SPEC ONLY
 
-**The two delta questions are the weak ones and are kept for the record rather than for the claim.** Alignment is the most architecture-independent stage in the pipeline -- broadly shared SFT mixtures, broadly shared DPO recipes, often the same public corpora -- so a convergent delta across the roster substantially records convergent post-training. `similarity` asks at base, where the answer does not inherit that.
+### CORRECTED 2026-09-11: why the delta questions are weak, and it is not because they are deltas
+
+An earlier version of this file said deltas are weak *as such*, because alignment is the architecture-independent stage and a convergent delta records convergent post-training. RH pushed on it and that framing is close to backwards.
+
+**A DELTA DIFFERENCES OUT THE CORPUS.** Within a lineage, base and aligned share a pretraining corpus exactly. And corpus is the confound that has destroyed every level measure in this subject -- "corpus dominates, architecture does not register" is its main finding, reached twice, at the slot grain and the page grain. So a delta removes precisely the nuisance that swamps a level.
+
+The delta's own confound is that ALIGNMENT data varies across labs. That is controllable and we hold controls for it: the Dolci mixtures across the two Olmo ladders, Tulu-3 across the Llama arms.
+
+**So a delta with alignment data controlled is the only design here that removes the corpus confound**, and it is the best instrument in the subject rather than the worst. There is exactly one such contrast in the roster: `Olmo-3-1025-7B` against `Olmo-Hybrid-7B`, same lab, attested-identical Dolci SFT, a single-variable swap of the local attention mechanism.
+
+`displacement` and `norm_change` are weak for the narrower reason: **alignment data is NOT controlled across their 50 lineages.** That is a different criticism with a different remedy -- restrict to shared-mixture lineages -- and it is fixable, where "deltas are the wrong idea" would not have been.
 
 ## The contest
 
