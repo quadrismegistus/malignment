@@ -322,3 +322,42 @@ On runpod, live catalogue read 2026-09-11: **RTX 4090 $0.34/hr, A40 $0.35 (48 GB
 ### (e) RUNPOD: THE PRODUCER PORTS, THE ORCHESTRATION DOES NOT
 
 `verse_fleet_producer.py`, `scripts/queue_v4.py` and `scripts/topup_lineage.py` are torch + transformers and care about nothing below them. What is vast-specific is the renting: `scripts/fleet_launch.py` takes vast offers, `malign cloud` wraps the vast CLI, and `data/cloud_profiles.json` describes machine shapes in vast's vocabulary (`gpu_name`, `min_reliability`, `cuda_max_good`, `min_inet_down_mbps`). Those are a provisioning layer to rewrite, not a measurement layer. **The preflight and the casualty discipline in `docs/cloud_runbook.md` are about what the box does after it exists and transfer unchanged** — including §2.13, and including the rule that the discriminator for a stalled box is HF cache growth rather than "instance running", which is the rental and not the work.
+
+## 12. ONE RECORD TYPE, NOT TWO — RH's question, answered against the code
+
+**Normal `~/malignment-data/twp` records. One extra top-level key on the verse cells. No second file, no second producer, no second rsync.**
+
+    ~/malignment-data/twp/<org>__<model>/<host>/<hash>/...     unchanged layout
+    record   {model, prompt, theta, device, rule_version, rows, residual,
+              conservation, ...,                              <- normal, unchanged
+              "closure": {"k": 40, "nl_ids": N,
+                          "words": {w: p_close}}}             <- verse cells ONLY
+
+### Why one and not two
+
+- **Two files let closure arrive without its cell.** The `.f16` tier is this campaign's own example: 59 GiB collected, paid for, and holding zero live readers because nothing downstream could reach it. Inside one record they cannot separate.
+- **Two producers mean two stamps.** `ingest._key_body_agree` exists because `run_v4.py` built a stamp and then became a thin wrapper around `Runner`, whose stamp did not know those fields — 2,706 cells correctly keyed and filed as something else.
+- **The rsync already carries it.** `fleet_launch.py --pull-every` pulls `/root/malignment-data/twp` on a loop; closure is inside those files. A second path is a second thing to forget at 2h50m of a 3h shard.
+
+### Why it is safe, checked rather than assumed
+
+    ingest include predicate   needs rule_version + rows + residual; unknown
+                               top-level keys are ignored       (asserted in the smoke, 30/30)
+    _key_body_agree            compares only INSTRUMENT_FIELDS =
+                               rule_version, dict_sha, rules, prompt_cache,
+                               frame, system, system_set, user_msg
+                               -- `closure` is not one of them
+    the stash key              ck.key(p, rules, frame=..., ...) -- body keys
+                               do not enter it
+
+So **`ingest.py` needs no change at all** for the words. A second small ingester reads the same files for the `closure` key into the sidecar.
+
+### The producer change is one place
+
+`runners.run()` builds `rec = dict(stamp, model=..., prompt=p)`, expands, then `rec.update(rows=..., residual=..., conservation=...)` before `st[ck.key(...)] = rec`. Closure attaches at that same point: call `closure_rider` on the top-K surfaces and set `rec["closure"]`. Roughly six lines plus a flag to plumb through `run_v4.py` / `queue_v4.py`.
+
+**Gated on the verse manifest, not on every prompt.** The rider costs +27% and means nothing at a non-verse slot, so the box is shipped the manifest's 1,786 context strings as a plain list — **a list of strings, no phonology**, consistent with §11's gate.
+
+### The consequence a reader must not get wrong
+
+`twp_closure` is SPARSE against `twp_words` by design, on two axes: only verse cells carry it, and within a cell only the top K=40 surfaces do. The ~165 prose/battery contexts each model already holds were measured without it and stay that way. **So absence is not zero**, and `k_rider` travels on every row so a consumer can tell "not measured" from "measured at 0". That is the same failure the lineage-union topup pass exists to prevent — a word a sibling cleared and this model did not, which a consumer would otherwise impute as zero.
