@@ -52,14 +52,34 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(HERE))))
 
 PARQUET = os.path.expanduser("~/malignment-data/jakobson_space/passages_std.parquet")
 #: length-free only. The first three clear their noise floor; the last two do not.
-#: `bits_per_byte` IS NOT THE MODEL'S OWN PERPLEXITY. It is an EXTERNAL
-#: referee's: `itazap/blt-1b-hf`, one byte-latent reference model scoring every
-#: row in this parquet, uniform across all 99,738. So it measures how
-#: conventional the GENERATED TEXT looks to a third party, not how confident the
-#: generator was. That is the right reading of the fluency correlation below:
-#: models whose output a reference model finds costly also wander more between
-#: sentences -- which is a statement about the text, not about either model's
-#: internal state.
+#: **`bits_per_byte` IS THE SUPERSEDED EXTERNAL AXIS AND IS LABELLED, NOT READ
+#: AS "FLUENCY".** Two facts about it, both from
+#: `passage_analysis/jakobson_space/README.md`, which should have been read
+#: before this file was written:
+#:
+#:   1. It is not the generating model's perplexity. It is `itazap/blt-1b-hf`,
+#:      one byte-latent reference scoring every row uniformly -- an external
+#:      referee's opinion of the TEXT, not the generator's confidence.
+#:   2. **It is not the campaign's surprisal axis any more.** That README's
+#:      table reads "external BLT per BYTE: BUILT" and "external
+#:      deepseek-llm-7b-base per TOKEN: BUILT -- the one to use", under a
+#:      heading that says SUPERSEDED. BLT findings still stand on their own
+#:      axis (`alignment_smooths.md`, 42/46 lineages); it is simply not the
+#:      yardstick to reach for first.
+#:
+#: **THE DEEPSEEK AXIS CANNOT SERVE THIS QUESTION**, which is why the BLT
+#: column is still here. It lives in `results/two_axes.csv` and
+#: `results/quadrants.csv`, and of this subject's architecture set those hold
+#: only OLMoE-1B-7B-0125, Olmo-3-1025-7B and Falcon3-7B-Base -- one MoE and two
+#: dense transformers, no pure SSM, no hybrid, no Griffin, no RWKV. Worse for
+#: this question, `quadrants.csv` carries `drift_residual`, drift net of
+#: surprisal, which is exactly the fluency-orthogonal measure this folder wants
+#: and cannot use for lack of models.
+#:
+#: `ref_surprisal.py` scores arbitrary text with deepseek and is roundtrip
+#: guarded, so extending the axis to these passages is a compute job rather
+#: than a new instrument. Until that runs, every number below carrying
+#: `bits_per_byte` is a BLT-axis number and says so.
 METRICS = ["mean_drift", "mean_pairwise", "bits_per_byte", "directedness", "ordering"]
 INTERPRETABLE = 3
 
@@ -108,12 +128,16 @@ def spread(a):
         print("   %-28s %-11s %-7s %.4f" % (m.split("/")[-1][:28], at, bl, g.loc[m, m3[0]]))
     print()
     c = g[m3].corr(method="spearman")
-    print("AND THE AXIS IS LARGELY FLUENCY. Spearman across the %d models:" % len(g))
+    print("AND THE AXIS TRACKS THE BLT REFEREE (the SUPERSEDED external axis;")
+    print("deepseek is the campaign's, and covers 3 of this subject's models).")
+    print("Spearman across the %d models:" % len(g))
     print("   drift ~ pairwise   %+.3f" % c.loc[m3[0], m3[1]])
     print("   drift ~ bits/byte  %+.3f" % c.loc[m3[0], m3[2]])
-    print("A model that costs more bits per byte also drifts more between")
-    print("sentences, so this measure ranks models by fluency first. Architecture")
-    print("would have to change fluency to show up in it at all.")
+    print("A model whose text BLT finds costly also drifts more between")
+    print("sentences, so drift ranks models by an external quality judgement")
+    print("first. Architecture would have to move that to register at all.")
+    print("The clean test is quadrants.csv's drift_residual, drift NET of")
+    print("surprisal -- which exists, on deepseek, for 3 of these models.")
     return 0
 
 

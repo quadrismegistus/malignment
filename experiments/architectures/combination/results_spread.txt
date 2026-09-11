@@ -15,9 +15,13 @@ EXTREMES on mean_drift, and every one of them is a DENSE transformer:
    TinyLlama-1.1B-intermediate- full        dense   0.5240
    Amber                        full        dense   0.5299
 
-AND THE AXIS IS LARGELY FLUENCY. Spearman across the 37 models:
+AND THE AXIS TRACKS THE BLT REFEREE (the SUPERSEDED external axis;
+deepseek is the campaign's, and covers 3 of this subject's models).
+Spearman across the 37 models:
    drift ~ pairwise   +0.910
    drift ~ bits/byte  +0.726
-A model that costs more bits per byte also drifts more between
-sentences, so this measure ranks models by fluency first. Architecture
-would have to change fluency to show up in it at all.
+A model whose text BLT finds costly also drifts more between
+sentences, so drift ranks models by an external quality judgement
+first. Architecture would have to move that to register at all.
+The clean test is quadrants.csv's drift_residual, drift NET of
+surprisal -- which exists, on deepseek, for 3 of these models.

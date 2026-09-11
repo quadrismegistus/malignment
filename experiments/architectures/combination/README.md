@@ -1,7 +1,7 @@
 ---
 subject: architectures
 kind: question
-status: "RUN 2026-09-11, ENGLISH ONLY (script=en; the 48 zh rows in this slice go through stanza-zh segmentation and the zh bge variant, so a sentence is not the same unit -- excluding them moved nothing, falcon-mamba stayed 17/37 and the fluency correlation went +0.734 to +0.726). Mined from ~/malignment-data/jakobson_space/passages_std.parquet (358,633 passages, 92 models). No generation, no GPU. Base arm, corpus=passage, n_sents>=3, 6 models paired on 147 prompts held by all of them. NOT REGISTERED. The declared population is 6 models because the parquet covers only three non-dense architectures; recurrentgemma-9b is present but UNUSABLE at 38 rows and a median of one sentence."
+status: "RUN 2026-09-11 on the BLT axis, which is SUPERSEDED -- deepseek is the campaign's surprisal reference and covers only 3 of this subject's models, so the fluency-orthogonal drift_residual that would settle this question cannot be computed for the architectures it is about. ENGLISH ONLY (script=en; the 48 zh rows in this slice go through stanza-zh segmentation and the zh bge variant, so a sentence is not the same unit -- excluding them moved nothing, falcon-mamba stayed 17/37 and the fluency correlation went +0.734 to +0.726). Mined from ~/malignment-data/jakobson_space/passages_std.parquet (358,633 passages, 92 models). No generation, no GPU. Base arm, corpus=passage, n_sents>=3, 6 models paired on 147 prompts held by all of them. NOT REGISTERED. The declared population is 6 models because the parquet covers only three non-dense architectures; recurrentgemma-9b is present but UNUSABLE at 38 rows and a median of one sentence."
 question: Does the syntagmatic axis -- how the chain coheres from sentence to sentence -- depend on the attention mechanism?
 headline: "NO, AND THIS IS THE ONE THAT SHOULD HAVE GONE THE OTHER WAY. Ranked against the WHOLE spread (37 base models, 181 common-core prompts): the two pure-SSM models sit at 6/37 and 17/37 on sentence drift and 14/37 and 8/37 on cohesion, and BOTH ENDS of the range are dense full-attention transformers (gemma-2-9b lowest at 1/37, Amber highest at 37/37). Attention is a COMBINATION mechanism, so the syntagmatic axis is the one place this subject had a reason to expect a difference; the paradigmatic nulls elsewhere are cheap because selection lives in the softmax, which every model has. falcon-mamba-7b, computing no attention at all, sits mid-pack on every metric that clears its own noise (mean_drift 3/6, mean_pairwise 2/6, bits_per_byte 2/6). The one robust between-model effect is gemma-2-9b, a DENSE full-attention transformer, which every other model exceeds on mean_drift on 95-98% of 147 paired prompts. Two of the five metrics sit BELOW their own noise floor and are not interpreted."
 ---
@@ -43,17 +43,25 @@ The six-model set answers "are these six alike"; it cannot say whether a rank is
 
 **Every extreme is a dense full-attention transformer.** Lowest drift: `gemma-2-9b` (1/37 on all three metrics), `Yi-1.5-9B`, `internlm2-base-7b`. Highest: `Amber` (37/37), `TinyLlama-1.1B`, `CroissantLLMBase`. The two attention-free models sit at 6 and 17 of 37, and `falcon-mamba-7b` is within two places of the median.
 
-### Fluency of what? An external referee's, not the model's own
+### CORRECTED: which surprisal axis this is, and why it is the wrong one
 
-**`bits_per_byte` is not the generating model's perplexity.** It is `itazap/blt-1b-hf` -- one byte-latent reference model, uniform across all 99,738 rows in this slice -- scoring the generated text. So it measures **how conventional the output looks to a third party**, not how confident the generator was.
+**Two things, and the second is a correction RH had to make.**
 
-That is the right reading of the correlation below: models whose text a reference model finds costly also wander more between sentences. It is a statement about the text, not about either model's internal state, and it is why the extremes sort by vintage and capability.
+`bits_per_byte` is not the generating model's perplexity. It is `itazap/blt-1b-hf` -- one byte-latent reference scoring every row uniformly -- so it measures how conventional the output looks to a third party, not how confident the generator was.
 
-### And the axis is mostly fluency, which is why it could not have shown architecture
+**And it is not this campaign's surprisal axis.** `jakobson_space/README.md` says so in a table this folder should have read first: "external BLT per BYTE: BUILT" beside "external deepseek-llm-7b-base per TOKEN: **BUILT -- the one to use**", under a heading reading SUPERSEDED. BLT findings stand on their own axis (`alignment_smooths.md`, 42/46 lineages); it is simply not the yardstick to reach for.
+
+**The deepseek axis cannot serve this question, which is why the BLT column is still here.** It lives in `results/two_axes.csv` and `results/quadrants.csv`, and of this subject's architecture set those hold only `OLMoE-1B-7B-0125`, `Olmo-3-1025-7B` and `Falcon3-7B-Base` -- one MoE and two dense transformers. No pure SSM, no hybrid, no Griffin, no RWKV.
+
+**And the measure this folder asked for already exists, for models it does not have.** `quadrants.csv` carries `drift_residual` -- drift net of surprisal -- which is precisely the fluency-orthogonal combination measure the section below says someone should build. It is on the deepseek axis, over 65 models, two of which are in this subject's set.
+
+`ref_surprisal.py` scores arbitrary text with deepseek and is roundtrip-guarded, so extending the axis to these passages is a compute job rather than a new instrument. **Until it runs, every number here carrying `bits_per_byte` is a BLT-axis number.**
+
+### And drift tracks that referee, which is why it could not have shown architecture
 
 Spearman across the 37: `drift ~ pairwise` **+0.910**, `drift ~ bits/byte` **+0.726**. A model that costs more bits per byte also drifts more between sentences, and the extremes sort by vintage and capability -- gemma-2, Yi-1.5 and Qwen3 at one end, Amber, TinyLlama and CroissantLLM at the other.
 
-**So this instrument ranks models by fluency first, and architecture would have to change fluency to register in it at all.** That weakens the null rather than strengthening it: the syntagmatic prediction was not so much refuted as never given a clean test by this measure. A combination instrument that is orthogonal to fluency would be the thing to build, and `syntagmatic_damage` -- which forces a demoted word and asks what happens to the sentence -- is the nearest candidate in `passage_analysis`.
+**So drift ranks models by an external quality judgement first, and architecture would have to move that to register at all.** That weakens the null rather than strengthening it: the syntagmatic prediction was not so much refuted as never given a clean test here. The clean test is `drift_residual` above, and the blocker is model coverage on the deepseek axis, not a missing instrument.
 
 ## Two metrics are below their own noise and are not read
 
