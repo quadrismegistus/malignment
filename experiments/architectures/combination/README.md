@@ -128,6 +128,28 @@ Across-model spread against the median within-model IQR over prompts. **On a fir
 
 So the population is one pure SSM, one hybrid and one MoE against three dense transformers, and the best-controlled pair in the subject is the one the data cannot serve. **That is a limit on the null, not a null about architecture.**
 
+## A BLIND SPOT IN THE DEGENERACY SCREEN, found by reading one story
+
+`jakobson_space/population.py:degenerate()` fires when the most common WORD exceeds 30% of tokens, or the most common CHARACTER exceeds 30%. **It cannot see a repeated SENTENCE.** A passage that says "Joseph never let his circumstances determine his attitude" twenty-four times spreads across eight distinct words and trips neither rule.
+
+Found by reading `falcon-mamba-7b`'s longest `national_story` generation in full: 2,607 words that collapse into exactly that loop, and score 0.0% degenerate.
+
+**Why it matters for every drift number here.** Repeated sentences sit on top of each other in bge space, so a loop scores as MAXIMALLY coherent. Drift cannot distinguish holding a scene from saying one sentence over and over, and the screen that is supposed to remove the second does not.
+
+Measured over `national_story`, sentence repetition as `1 - distinct/total` over sentences above 25 characters:
+
+    model                      attn          block     med rep   %>0.2
+    glm-4-9b-hf                full          dense       0.015     25%
+    kanana-1.5-8b-base         full          dense       0.006     24%
+    Lucie-7B                   full          dense       0.000     18%
+    falcon-mamba-7b            none          ssm         0.000      2%
+    Olmo-3-1025-7B             full+local    dense       0.000      2%
+    -- median of 37 models --                            0.000      2%
+
+**AND THE HYPOTHESIS THIS WAS BUILT TO TEST IS REFUTED.** Having read a looping attention-free story, the obvious reading was that `falcon-mamba` reaches length BY looping, and that its low drift in the bins above was the signature of repetition rather than coherence. It is not: at 2% it sits exactly on the roster median, and the worst offenders by an order of magnitude are dense transformers. Looping at length is general. The only thing specific to `falcon-mamba` is that 15% of its 13 long generations exceed the threshold against 2% of all of them -- which is a statement about length, not about attention.
+
+The screen blind spot survives the refutation and is the finding here: it is not architecture-specific, it affects every drift number in this folder, and nothing in the campaign currently measures it.
+
 ## Degeneracy, which RH raised and which lands in three places
 
 Some generated passages are simply degenerate -- repetition loops, near-empty output -- and a degenerate passage has low drift AND low surprisal for reasons that are about the generator's quality rather than its architecture.
