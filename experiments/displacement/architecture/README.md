@@ -110,6 +110,19 @@ Read on the local/global axis rather than the presence/absence axis, **both cont
 
 **Taken together these do not support an architecture effect in either direction.** Two same-lab, same-data contrasts with opposite signs, over one observation each, is what no effect plus lineage-level noise looks like. The defensible claim is the negative one: the operation is not confined to full attention, and the sign of the architecture difference is not stable across the two cases where the confounds are actually controlled.
 
+## PRE-COMMITMENT, recorded 2026-09-11, before any rhyme_pull cell was measured
+
+Written now because it costs nothing now and cannot be recovered later. If the `rhyme_pull` fleet runs and contrast 1 and contrast 2 disagree in sign again, two readings are available and **they are not distinguishable after the fact**: that the charge instrument was too blunt, and that there is no architecture effect to find. `norm_change` has already produced the first pattern on a second construct, so the ambiguity is not hypothetical.
+
+The commitment, in advance:
+
+1. **A second sign disagreement is not instrument failure.** It is not grounds for a third instrument.
+2. **It is a BOUND, not a null.** It says any architecture effect is smaller than lineage-level variation at n=2 per contrast. It does not say architecture does not matter, and it must not be written up as if it did.
+3. **The local/global reading above is the prediction under test**, in the form stated there: if global attention carries the operation, `rhyme_pull` should order these models the same way charge-selectivity did. It was recorded before the fleet, and a version of it arrived at after seeing rhyme results is a different claim with no standing.
+4. **What would raise n** is the only route out, and it is models, not cells per model: more matched pairs where a lab swapped one attention mechanism and held the corpus. 178 poems per model does not make two models into more than two.
+
+Subject to RH; the spend and the route are his call, and this is recorded rather than decided.
+
 ## Limits, stated
 
 - **n on the side that matters is one and one.** One pure SSM, one linear-attention-only model. `run.py` runs no between-group test and this README makes no distributional claim about architecture classes. These are positions in a distribution of 50.
