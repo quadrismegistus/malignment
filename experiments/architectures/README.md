@@ -52,14 +52,27 @@ So the folder now runs both arms, and labels which turf each result stands on. *
 
 ## Where the metadata comes from
 
+**`measurements.json` section `architecture`, 158 checkpoints, written by `scripts/probe_architecture.py`, read through `roster.architecture()`.** @malign's ruling, 2026-09-11, and the reasoning is better than the version it replaced: that file's own `_about` says it holds "OBSERVED facts about checkpoints -- what inspection returned, never what anyone declared. `models.yaml` is the authored side; this is the found side." **An architecture is not authored.** It is read off `config.json`, which every repo publishes, which parses without executing anything, and which evidences its own claim -- `layer_types` for a hybrid, `state_size` for an SSM, `num_experts_per_tok` for a mixture.
 
-`roster/models/models.yaml` has no architecture field, and it is AUTHORED (hand-edited, no script writes it), so this folder does not add one. What it does have is `env.profile: ssm`, an environment requirement (mamba-ssm and causal-conv1d kernels) carrying its own `why`, which picks out the SSM and hybrid families exactly. The rest comes from `roster/models/attestations.json`, whose `notes` carry sourced architecture prose at `confidence: high`.
+**The labels are DERIVED at read time, not stored.** The four-way taxonomy is a proposal in `docs/model_census.md` rather than a ruling, so storing labels would ratify one by writing it down; deriving them means a ruling changes `roster.architecture()` and re-probes nothing.
 
-`run.py` declares the architecture of every departure from the default and cites the source inline. **The default is a dense transformer with full attention.** Nothing is coded as unknown.
+### CORRECTED: `env.profile` does not pick out these families, and this file said it did
 
-Two axes, because they cross:
+An earlier version of this section said `env.profile: ssm` "picks out the SSM and hybrid families exactly". **That was false, and its own table below contradicted it.** As a predictor of "non-dense block" over the eight cases then declared:
 
-    attn    full | full+linear | local+linear | full+ssm | linear | none
-    block   dense | moe | ssm | hybrid
+    hit 4     miss 3     false alarm 0
 
-`recurrentgemma` is local attention AND linear recurrence; `Olmo-Hybrid` is full attention AND linear attention. A single axis would have to collapse them into the same cell.
+The misses are `recurrentgemma-9b` (Griffin), `Olmo-Hybrid-7B` (Gated DeltaNet) and `OLMoE-1B-7B-0125` (mixture), all on a non-`ssm` profile. It fails the other way too: `profile: ssm` holds `falcon-mamba` and `Falcon3-Mamba`, which are PURE SSM rather than hybrid, so the profile cannot separate the two classes it would have to separate. `env.profile` answers "does this need mamba-ssm and causal-conv1d kernels", and two different architectures share one answer.
+
+**And the hand table forgot the arms nobody had looked at.** It declared bases only, so six checkpoints carrying `env.profile: ssm` -- `Zamba2-7B-Instruct`, both `Falcon-H1-*-Instruct`, both `Falcon3-Mamba-7B-*` and `falcon-mamba-7b-instruct` -- fell to its "unlisted means dense transformer" default. Nothing had stratified the aligned arm, so no published number was wrong; the defect was one analysis away. **`roster.architecture()` returns `unknown` for an unprobed model rather than `dense`**, which is the honest answer and the one that cannot silently absorb a sibling.
+
+Replacing the table also corrected a live label: `Olmo-3-1025-7B` was declared plain `full`, and its config declares `layer_types: ['full_attention', 'sliding_attention']`, so it is **`full+local`** -- which happens to be exactly the distinction the Olmo-Hybrid contrast turns on, since what AI2 replaced was the sliding-window half.
+
+### The census as found
+
+    full / dense           126        full+ssm / hybrid        6
+    full+local / dense      11        none / ssm               4
+    full / moe               4        full+linear / hybrid     3
+    local+linear / hybrid    2        linear / rnn             2
+
+Two checkpoints are unreadable (`SmolLM3-3B-checkpoints`, 404 on the raw endpoint) and are recorded as `unmeasured` rather than guessed.

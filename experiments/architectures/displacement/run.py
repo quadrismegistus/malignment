@@ -17,7 +17,7 @@ Griffin, "RNNs with local attention" (227n26).
 operation recurs without attention, the claim is architecture-general and the
 transformer demonstrates nothing that autoregression had not.
 
-## THE METADATA IS DECLARED HERE AND SOURCED
+## THE METADATA IS NOT DECLARED HERE ANY MORE
 
 `roster/models/models.yaml` carries no architecture field. What it carries is
 `env.profile`, an ENVIRONMENT requirement -- `ssm` means the model needs
@@ -26,7 +26,7 @@ hybrid families exactly, with its own `why`. The rest comes from
 `roster/models/attestations.json`, whose notes carry sourced architecture quotes
 at `confidence: high`. Both are cited per model below.
 
-**DEFAULT IS DENSE TRANSFORMER WITH FULL ATTENTION.** Only departures are coded.
+**NOTHING IS DEFAULTED.** An unprobed checkpoint reads `unknown`, not `dense`.
 
 ## TWO AXES, BECAUSE THEY CROSS
 
@@ -69,40 +69,31 @@ import sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(HERE))))
 
-#: DEPARTURES FROM (dense, full attention). Everything unlisted is the default.
-#: Each entry cites where the classification comes from.
-ARCH = {
-    "tiiuae/falcon-mamba-7b":
-        ("none", "ssm",
-         "models.yaml env.profile=ssm; Mamba SSM, no attention"),
-    "tiiuae/Falcon-H1-1.5B-Base":
-        ("full+ssm", "hybrid",
-         "models.yaml env.profile=ssm; attestation: Mamba-attention hybrid"),
-    "tiiuae/Falcon-H1-7B-Base":
-        ("full+ssm", "hybrid",
-         "models.yaml env.profile=ssm; 'NOT optional for hybrids' in its why"),
-    "Zyphra/Zamba2-7B":
-        ("full+ssm", "hybrid",
-         "models.yaml env.profile=ssm; attestation: 'Mamba1 blocks have been "
-         "replaced with Mamba2 blocks'"),
-    "RWKV/rwkv-4-7b-pile":
-        ("linear", "dense",
-         "attestation: RWKV-4. WKV operator is time-decaying channelwise "
-         "linear attention; no token-token dot product"),
-    "google/recurrentgemma-9b":
-        ("local+linear", "hybrid",
-         "attestation quotes the paper: 'The architecture is Griffin, not "
-         "Gemma's transformer'; Griffin = sliding-window attention + RG-LRU"),
-    "allenai/Olmo-Hybrid-7B":
-        ("full+linear", "hybrid",
-         "attestation quotes arXiv:2604.03444: 'largely comparable to Olmo 3 "
-         "7B but with the sliding window layers replaced by Gated DeltaNet "
-         "layers'"),
-    "allenai/OLMoE-1B-7B-0125":
-        ("full", "moe",
-         "OLMoE = OLMo Mixture-of-Experts, 1B active / 7B total"),
-}
-DEFAULT = ("full", "dense", "default: dense transformer, full attention")
+#: **NO LONGER DECLARED HERE.** Until 2026-09-11 this file carried a
+#: hand-written table of 8 models with "anything unlisted is a dense
+#: transformer" as its default. @malign's ruling, and it is the right one:
+#: architecture is a FOUND fact, not an authored one -- it is read off
+#: `config.json`, which every repo publishes and which evidences its own claim.
+#: It now lives in `measurements.json` section `architecture` (158 checkpoints,
+#: written by `scripts/probe_architecture.py`) with the labels DERIVED at read
+#: time by `roster.architecture()`, because the taxonomy is a proposal and
+#: storing labels would ratify it by writing it down.
+#:
+#: WHAT THE HAND TABLE GOT WRONG, both found by replacing it:
+#:   - six checkpoints carrying `env.profile: ssm` fell to the "unlisted means
+#:     dense" default, because only BASES had been declared. Nothing had
+#:     stratified the aligned arm yet, so nothing was wrong on paper.
+#:   - `Olmo-3-1025-7B` was called plain `full`; its config declares
+#:     `layer_types: ['full_attention', 'sliding_attention']`, so it is
+#:     `full+local`, which is the distinction the Olmo-Hybrid contrast turns on.
+from malignment import roster
+
+
+def arch(model):
+    """(attn, block, why) -- the third element now cites the instrument."""
+    at, bl = roster.architecture(model)
+    return at, bl, "config.json via measurements.json section architecture"
+
 
 CONTRASTS = [
     ("1 CONTROLLED BY DESIGN (AI2)", ["allenai/Olmo-3-1025-7B",
@@ -130,10 +121,6 @@ for _p in (SEL, NC):
 #: first dozen the targets are near-duplicates of each other (the _absz variant
 #: of a scale it already lists), so a larger K buys correlated votes, not power.
 N_TARGETS = 12
-
-
-def arch(model):
-    return ARCH.get(model, DEFAULT)
 
 
 def existence():
@@ -198,7 +185,8 @@ def main():
     print("grand: %d negative / %d positive, median %.6f\n"
           % (overall["neg"], overall["pos"], overall["med_slope"]))
 
-    nondefault = [b for b in slopes if b in ARCH]
+    nondefault = [b for b in slopes if roster.architecture(b)[1] != "dense"
+                  or roster.architecture(b)[0] != "full"]
     mags = magnitude(sorted(set(nondefault) | {b for _, g in CONTRASTS for b in g}))
     med_slope = st.median(slopes.values())
     med_mag = st.median(magnitude([b for b in list(slopes)[:12]]).values())

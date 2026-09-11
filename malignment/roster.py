@@ -640,6 +640,109 @@ def attestations():
     return _ATT
 
 
+MEASURED_PATH = os.path.join(ROOT, "roster", "models", "measurements.json")
+
+
+def measurements(section=None):
+    """The FOUND file, or {} if absent. `section` returns one section's models."""
+    global _MEAS
+    try:
+        _MEAS
+    except NameError:
+        try:
+            with open(MEASURED_PATH, encoding="utf-8") as fh:
+                _MEAS = json.load(fh)
+        except Exception:                                      # noqa: BLE001
+            _MEAS = {}
+    if section is None:
+        return _MEAS
+    return (_MEAS.get("sections", {}).get(section) or {}).get("models", {})
+
+
+#: The taxonomy is a PROPOSAL (docs/model_census.md), not a ruling, which is
+#: why it lives here and not in the stored section: changing it must not mean
+#: re-probing 160 repos. Two axes because they CROSS -- recurrentgemma is local
+#: attention AND linear recurrence, Olmo-Hybrid is full attention AND linear
+#: attention, and one axis would have to collapse them into one cell.
+#: model_type is itself a config key and sometimes the ONLY evidence: a Griffin
+#: config exposes no recurrence keys at all, so `recurrent_gemma` is the fact.
+#: Families whose mechanism cannot be read from keys are named here.
+_BY_TYPE = {
+    "recurrent_gemma": ("local+linear", "hybrid"),   # Griffin: sliding attn + RG-LRU
+    "rwkv": ("linear", "rnn"), "rwkv5": ("linear", "rnn"),
+    "rwkv6": ("linear", "rnn"), "rwkv7": ("linear", "rnn"),
+}
+_PURE_SSM = ("mamba", "mamba2", "falcon_mamba", "jamba_mamba")
+#: layer_types values that are NOT attention. A config listing
+#: ['full_attention', 'sliding_attention'] is a dense transformer interleaving
+#: two ATTENTION spans -- olmo3 and gemma2 both do it -- and calling that a
+#: hybrid was this accessor's first bug, mislabelling 11 checkpoints.
+_NOT_ATTN = ("linear", "mamba", "recurrent", "ssm", "deltanet", "rwkv")
+_HEAD_KEYS = ("num_attention_heads", "n_head", "n_heads", "num_heads")
+_RECUR_KEYS = ("state_size", "conv_kernel", "mamba_d_state", "mamba_d_ssm",
+               "n_mamba_heads", "linear_attn_config", "linear_num_key_heads",
+               "linear_conv_kernel_dim", "hybrid_layer_ids",
+               "hybrid_override_pattern", "attn_layer_indices")
+_MOE_KEYS = ("num_experts_per_tok", "num_local_experts", "n_routed_experts")
+
+
+def architecture(model, probe=None):
+    """(attn, block) for a checkpoint, DERIVED from its config.json keys.
+
+        roster.architecture("tiiuae/falcon-mamba-7b")   -> ('none', 'ssm')
+        roster.architecture("allenai/Olmo-3-1025-7B")   -> ('full+local', 'dense')
+
+    attn   full | full+local | full+linear | local+linear | full+ssm | linear | none
+    block  dense | moe | ssm | hybrid | rnn
+
+    Returns ('unknown', 'unknown') for a checkpoint the probe has not read, and
+    that is the honest answer: an unprobed model is not a dense transformer.
+    **This is the difference from the hand-declared table this replaces**, whose
+    "unlisted means dense" default silently classified six mamba-kernel models
+    as dense transformers because only bases had been declared.
+
+    The TAXONOMY IS A PROPOSAL (docs/model_census.md) and lives here rather than
+    in the stored section for that reason: ruling on it changes this function
+    and re-probes nothing.
+
+    `probe` overrides the stored section, so the probe script can show what the
+    labels WOULD be before writing anything.
+    """
+    src = probe if probe is not None else measurements("architecture")
+    cfg = src.get(model)
+    if not cfg or cfg.get("error"):
+        return ("unknown", "unknown")
+    mt = (cfg.get("model_type") or "").lower()
+    if mt in _BY_TYPE:
+        return _BY_TYPE[mt]
+    types = cfg.get("layer_types") if isinstance(cfg.get("layer_types"), list) else []
+    tl = [str(t).lower() for t in types]
+    heads = next((cfg[k] for k in _HEAD_KEYS if cfg.get(k)), None)
+    recur = any(k in cfg for k in _RECUR_KEYS) or mt.startswith(_PURE_SSM)
+    mixed = any(any(n in t for n in _NOT_ATTN) for t in tl)
+
+    if any(k in cfg for k in _MOE_KEYS):
+        block = "moe"
+    elif mixed or (recur and heads):
+        block = "hybrid"
+    elif recur:
+        block = "ssm"
+    else:
+        block = "dense"
+
+    if not heads:
+        attn = "none"
+    elif any("linear" in t or "deltanet" in t for t in tl):
+        attn = "full+linear"
+    elif recur:
+        attn = "full+ssm"
+    elif any("sliding" in t or "local" in t for t in tl):
+        attn = "full+local" if any("full" in t for t in tl) else "local"
+    else:
+        attn = "full"
+    return (attn, block)
+
+
 def endpoints(measured=None, attested=None, apply_rulings=True):
     """{base: endpoint} — one commodity-form endpoint per pretrained base.
 

@@ -6,11 +6,13 @@ model                          attn          block         slope     sum|d|
 Falcon-H1-1.5B-Base            full+ssm      hybrid    -0.000442       1566
 OLMoE-1B-7B-0125               full          moe       -0.000388       1686
 Olmo-Hybrid-7B                 full+linear   hybrid    -0.000257       1303
+Olmo-3-1025-7B                 full+local    dense     -0.000159       2045
 Zamba2-7B                      full+ssm      hybrid    -0.000152        477
 falcon-mamba-7b                none          ssm       -0.000124        948
 recurrentgemma-9b              local+linear  hybrid    -0.000114       1933
+Olmo-3-1125-32B                full+local    dense     -0.000092       1944
 Falcon-H1-7B-Base              full+ssm      hybrid    -0.000048       1596
-rwkv-4-7b-pile                 linear        dense     +0.000107        552
+rwkv-4-7b-pile                 linear        rnn       +0.000107        552
 -- roster median --                                    -0.000295       1185
 
 ==============================================================================
@@ -18,7 +20,7 @@ THE MATCHED CONTRASTS
 ==============================================================================
 
 1 CONTROLLED BY DESIGN (AI2)
-   Olmo-3-1025-7B               full          dense    -0.000159      2045
+   Olmo-3-1025-7B               full+local    dense    -0.000159      2045
    Olmo-Hybrid-7B               full+linear   hybrid   -0.000257      1303
 
 2 SAME PRETRAINING CORPUS
@@ -32,7 +34,7 @@ THE MATCHED CONTRASTS
    Falcon-H1-7B-Base            full+ssm      hybrid   -0.000048      1596
 
 4 DENSE vs MoE (AI2)
-   Olmo-3-1025-7B               full          dense    -0.000159      2045
+   Olmo-3-1025-7B               full+local    dense    -0.000159      2045
    OLMoE-1B-7B-0125             full          moe      -0.000388      1686
 
 ==============================================================================
@@ -44,11 +46,13 @@ model                          attn          block   agree
 Falcon-H1-1.5B-Base            full+ssm      hybrid  12/12
 OLMoE-1B-7B-0125               full          moe     12/12
 Olmo-Hybrid-7B                 full+linear   hybrid  11/12
+Olmo-3-1025-7B                 full+local    dense   12/12
 Zamba2-7B                      full+ssm      hybrid  9/12
 falcon-mamba-7b                none          ssm     12/12
 recurrentgemma-9b              local+linear  hybrid  11/12
+Olmo-3-1125-32B                full+local    dense   12/12
 Falcon-H1-7B-Base              full+ssm      hybrid  7/12
-rwkv-4-7b-pile                 linear        dense   6/12
+rwkv-4-7b-pile                 linear        rnn     6/12
 
 the roster itself, for scale:
    warriner_arousal_absz                  median  -0.02194   40/45 lineages agree

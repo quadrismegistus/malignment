@@ -1,5 +1,5 @@
 {
- "_about": "OBSERVED facts about checkpoints — what inspection returned, never what anyone declared. `roster/models/models.yaml` is the authored side; this is the found side; ClickHouse is the join.",
+ "_about": "OBSERVED facts about checkpoints \u2014 what inspection returned, never what anyone declared. `roster/models/models.yaml` is the authored side; this is the found side; ClickHouse is the join.",
  "_why_one_file": "The archive kept these in SIX artifacts (tokenizer_properties.json, weights_audit.csv, cjk_coverage.csv, bos_resolution.csv, tokenizer_roundtrip.csv, model_revisions.json), each independently defining 'the set of models', and they drifted: 32 sources declared against 51 on disk, a params audit reading a 9-day-old roster and measuring two thirds of it. One file with a stamped section per pass cannot half-update.",
  "_stamp_rule": "Every section carries `measured_at` and `n`. A measurement of a checkpoint is only true of that checkpoint AS IT STOOD; an unstamped observation cannot be told from a stale one.",
  "sections": {
@@ -5319,7 +5319,7 @@
      "sys_ok": 1,
      "sys_empty_ok": 1,
      "added_chars": 42,
-     "wrapper": "<｜begin▁of▁sentence｜>User: Hi.\n\nAssistant:"
+     "wrapper": "<\uff5cbegin\u2581of\u2581sentence\uff5c>User: Hi.\n\nAssistant:"
     },
     "gl198976/mpt-7b": {
      "verdict": "NO_TEMPLATE",
@@ -5443,7 +5443,7 @@
      "sys_ok": 0,
      "sys_empty_ok": 1,
      "added_chars": 26,
-     "wrapper": "<s>\n\n### 指示:\nHi.\n\n### 応答:\n"
+     "wrapper": "<s>\n\n### \u6307\u793a:\nHi.\n\n### \u5fdc\u7b54:\n"
     },
     "llm-jp/llm-jp-3-7.2b-instruct3": {
      "verdict": "OK",
@@ -5451,7 +5451,7 @@
      "sys_ok": 0,
      "sys_empty_ok": 1,
      "added_chars": 26,
-     "wrapper": "<s>\n\n### 指示:\nHi.\n\n### 応答:\n"
+     "wrapper": "<s>\n\n### \u6307\u793a:\nHi.\n\n### \u5fdc\u7b54:\n"
     },
     "lomahony/eleuther-pythia6.9b-hh-dpo": {
      "verdict": "NO_TEMPLATE",
@@ -5603,7 +5603,7 @@
      "sys_ok": 1,
      "sys_empty_ok": 1,
      "added_chars": 61,
-     "wrapper": "<s>以下は、タスクを説明する指示です。要求を適切に満たす応答を書きなさい。\n\n### 指示:\nHi.\n\n### 応答:\n"
+     "wrapper": "<s>\u4ee5\u4e0b\u306f\u3001\u30bf\u30b9\u30af\u3092\u8aac\u660e\u3059\u308b\u6307\u793a\u3067\u3059\u3002\u8981\u6c42\u3092\u9069\u5207\u306b\u6e80\u305f\u3059\u5fdc\u7b54\u3092\u66f8\u304d\u306a\u3055\u3044\u3002\n\n### \u6307\u793a:\nHi.\n\n### \u5fdc\u7b54:\n"
     },
     "teknium/OpenHermes-2.5-Mistral-7B": {
      "verdict": "OK",
@@ -5691,7 +5691,7 @@
      "sys_ok": 1,
      "sys_empty_ok": 1,
      "added_chars": 61,
-     "wrapper": "<s>以下は、タスクを説明する指示です。要求を適切に満たす応答を書きなさい。\n\n### 指示:\nHi.\n\n### 応答:\n"
+     "wrapper": "<s>\u4ee5\u4e0b\u306f\u3001\u30bf\u30b9\u30af\u3092\u8aac\u660e\u3059\u308b\u6307\u793a\u3067\u3059\u3002\u8981\u6c42\u3092\u9069\u5207\u306b\u6e80\u305f\u3059\u5fdc\u7b54\u3092\u66f8\u304d\u306a\u3055\u3044\u3002\n\n### \u6307\u793a:\nHi.\n\n### \u5fdc\u7b54:\n"
     },
     "zai-org/glm-4-9b-chat-hf": {
      "verdict": "OK",
@@ -8701,6 +8701,2250 @@
      },
      "architectures": "GlmForCausalLM"
     }
+   }
+  },
+  "architecture": {
+   "_why": "What each checkpoint is BUILT FROM, from config.json. The FOUND side of a fact `models.yaml` never asserts: that file carries `env.profile`, which is an ENVIRONMENT requirement (does this need mamba-ssm and causal-conv1d) and cannot stand in for an architecture -- measured over 8 declared cases it hit 4 and missed 3, and it cannot separate pure SSM from hybrid because both need the same kernels.",
+   "_instrument": "config.json via the HF raw endpoint, parsed as JSON. No code execution, no model load, no trust_remote_code. Keys kept are the ones that EVIDENCE a class: layer_types and hybrid_layer_ids for hybrids, state_size and conv_kernel for SSMs, num_experts_per_tok for mixtures. A key absent from a config is absent here; a missing key and a null value are different answers.",
+   "_labels_are_not_stored": "Deliberate. The attn/block taxonomy is a PROPOSAL in docs/model_census.md, not a ruling -- one class holds a single model and two boundaries are arguable -- so storing labels would ratify it by writing it down. `roster.architecture()` derives them at read time, so a ruling on the taxonomy changes one accessor and re-probes nothing.",
+   "measured_by": "scripts/probe_architecture.py",
+   "measured_at": "2026-09-11T16:59:07",
+   "n": 158,
+   "models": {
+    "01-ai/Yi-1.5-9B": {
+     "model_type": "llama",
+     "architectures": [
+      "LlamaForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_key_value_heads": 4,
+     "num_hidden_layers": 48
+    },
+    "01-ai/Yi-1.5-9B-Chat": {
+     "model_type": "llama",
+     "architectures": [
+      "LlamaForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_key_value_heads": 4,
+     "num_hidden_layers": 48
+    },
+    "Alchan/mpt-7b-chat": {
+     "model_type": "mpt",
+     "architectures": [
+      "MPTForCausalLM"
+     ],
+     "n_heads": 32,
+     "n_layers": 32
+    },
+    "Aleph-Alpha/Pharia-1-LLM-7B-control-aligned-hf": {
+     "model_type": "pharia-v1",
+     "architectures": [
+      "PhariaForCausalLM"
+     ],
+     "num_attention_heads": 36,
+     "num_key_value_heads": 4,
+     "num_hidden_layers": 27
+    },
+    "Aleph-Alpha/Pharia-1-LLM-7B-control-hf": {
+     "model_type": "pharia-v1",
+     "architectures": [
+      "PhariaForCausalLM"
+     ],
+     "num_attention_heads": 36,
+     "num_key_value_heads": 4,
+     "num_hidden_layers": 27
+    },
+    "BAAI/Aquila2-7B": {
+     "model_type": "aquila",
+     "architectures": [
+      "AquilaForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_key_value_heads": 32,
+     "num_hidden_layers": 32
+    },
+    "BAAI/AquilaChat2-7B": {
+     "model_type": "aquila",
+     "architectures": [
+      "AquilaForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_hidden_layers": 32
+    },
+    "BSC-LT/salamandra-7b": {
+     "model_type": "llama",
+     "architectures": [
+      "LlamaForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_key_value_heads": 8,
+     "num_hidden_layers": 32
+    },
+    "BSC-LT/salamandra-7b-instruct": {
+     "model_type": "llama",
+     "architectures": [
+      "LlamaForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_key_value_heads": 8,
+     "num_hidden_layers": 32
+    },
+    "ContextualAI/archangel_sft-dpo_pythia2-8b": {
+     "model_type": "gpt_neox",
+     "architectures": [
+      "GPTNeoXForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_hidden_layers": 32
+    },
+    "ContextualAI/archangel_sft-kto_pythia2-8b": {
+     "model_type": "gpt_neox",
+     "architectures": [
+      "GPTNeoXForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_hidden_layers": 32
+    },
+    "ContextualAI/archangel_sft-ppo_pythia2-8b": {
+     "model_type": "gpt_neox",
+     "architectures": [
+      "GPTNeoXForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_hidden_layers": 32
+    },
+    "ContextualAI/archangel_sft-slic_pythia2-8b": {
+     "model_type": "gpt_neox",
+     "architectures": [
+      "GPTNeoXForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_hidden_layers": 32
+    },
+    "ContextualAI/archangel_sft_pythia2-8b": {
+     "model_type": "gpt_neox",
+     "architectures": [
+      "GPTNeoXForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_hidden_layers": 32
+    },
+    "EleutherAI/pythia-2.8b": {
+     "model_type": "gpt_neox",
+     "architectures": [
+      "GPTNeoXForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_hidden_layers": 32
+    },
+    "EleutherAI/pythia-6.9b": {
+     "model_type": "gpt_neox",
+     "architectures": [
+      "GPTNeoXForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_hidden_layers": 32
+    },
+    "HuggingFaceH4/mistral-7b-sft-beta": {
+     "model_type": "mistral",
+     "architectures": [
+      "MistralForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_key_value_heads": 8,
+     "num_hidden_layers": 32,
+     "sliding_window": 4096
+    },
+    "HuggingFaceH4/zephyr-7b-beta": {
+     "model_type": "mistral",
+     "architectures": [
+      "MistralForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_key_value_heads": 8,
+     "num_hidden_layers": 32,
+     "sliding_window": 4096
+    },
+    "HuggingFaceTB/SmolLM2-360M": {
+     "model_type": "llama",
+     "architectures": [
+      "LlamaForCausalLM"
+     ],
+     "num_attention_heads": 15,
+     "num_key_value_heads": 5,
+     "num_hidden_layers": 32
+    },
+    "HuggingFaceTB/SmolLM2-360M-Instruct": {
+     "model_type": "llama",
+     "architectures": [
+      "LlamaForCausalLM"
+     ],
+     "num_attention_heads": 15,
+     "num_key_value_heads": 5,
+     "num_hidden_layers": 32
+    },
+    "HuggingFaceTB/SmolLM3-3B": {
+     "model_type": "smollm3",
+     "architectures": [
+      "SmolLM3ForCausalLM"
+     ],
+     "num_attention_heads": 16,
+     "num_key_value_heads": 4,
+     "num_hidden_layers": 36,
+     "sliding_window": null,
+     "use_sliding_window": false,
+     "layer_types": [
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention"
+     ]
+    },
+    "HuggingFaceTB/SmolLM3-3B-Base": {
+     "model_type": "smollm3",
+     "architectures": [
+      "SmolLM3ForCausalLM"
+     ],
+     "num_attention_heads": 16,
+     "num_key_value_heads": 4,
+     "num_hidden_layers": 36,
+     "sliding_window": null,
+     "use_sliding_window": false
+    },
+    "LLM360/Amber": {
+     "model_type": "llama",
+     "architectures": [
+      "LlamaForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_key_value_heads": 32,
+     "num_hidden_layers": 32
+    },
+    "LLM360/AmberChat": {
+     "model_type": "llama",
+     "architectures": [
+      "LlamaForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_key_value_heads": 32,
+     "num_hidden_layers": 32
+    },
+    "LLM360/AmberSafe": {
+     "model_type": "llama",
+     "architectures": [
+      "LlamaForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_key_value_heads": 32,
+     "num_hidden_layers": 32
+    },
+    "NousResearch/Hermes-3-Llama-3.1-8B": {
+     "model_type": "llama",
+     "architectures": [
+      "LlamaForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_key_value_heads": 8,
+     "num_hidden_layers": 32
+    },
+    "NousResearch/Nous-Hermes-2-Mistral-7B-DPO": {
+     "model_type": "mistral",
+     "architectures": [
+      "MistralForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_key_value_heads": 8,
+     "num_hidden_layers": 32,
+     "sliding_window": 4096
+    },
+    "OpenLLM-France/Lucie-7B": {
+     "model_type": "llama",
+     "architectures": [
+      "LlamaForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_key_value_heads": 8,
+     "num_hidden_layers": 32
+    },
+    "OpenLLM-France/Lucie-7B-Instruct-v1.1": {
+     "model_type": "llama",
+     "architectures": [
+      "LlamaForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_key_value_heads": 8,
+     "num_hidden_layers": 32
+    },
+    "PKU-Alignment/alpaca-7b-reproduced": {
+     "model_type": "llama",
+     "architectures": [
+      "LlamaForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_key_value_heads": 32,
+     "num_hidden_layers": 32
+    },
+    "PKU-Alignment/beaver-7b-v1.0": {
+     "model_type": "llama",
+     "architectures": [
+      "LlamaForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_key_value_heads": 32,
+     "num_hidden_layers": 32
+    },
+    "Qwen/Qwen2.5-0.5B": {
+     "model_type": "qwen2",
+     "architectures": [
+      "Qwen2ForCausalLM"
+     ],
+     "num_attention_heads": 14,
+     "num_key_value_heads": 2,
+     "num_hidden_layers": 24,
+     "sliding_window": 32768,
+     "use_sliding_window": false
+    },
+    "Qwen/Qwen2.5-0.5B-Instruct": {
+     "model_type": "qwen2",
+     "architectures": [
+      "Qwen2ForCausalLM"
+     ],
+     "num_attention_heads": 14,
+     "num_key_value_heads": 2,
+     "num_hidden_layers": 24,
+     "sliding_window": 32768,
+     "use_sliding_window": false
+    },
+    "Qwen/Qwen2.5-7B": {
+     "model_type": "qwen2",
+     "architectures": [
+      "Qwen2ForCausalLM"
+     ],
+     "num_attention_heads": 28,
+     "num_key_value_heads": 4,
+     "num_hidden_layers": 28,
+     "sliding_window": 131072,
+     "use_sliding_window": false
+    },
+    "Qwen/Qwen2.5-7B-Instruct": {
+     "model_type": "qwen2",
+     "architectures": [
+      "Qwen2ForCausalLM"
+     ],
+     "num_attention_heads": 28,
+     "num_key_value_heads": 4,
+     "num_hidden_layers": 28,
+     "sliding_window": 131072,
+     "use_sliding_window": false
+    },
+    "Qwen/Qwen3-8B": {
+     "model_type": "qwen3",
+     "architectures": [
+      "Qwen3ForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_key_value_heads": 8,
+     "num_hidden_layers": 36,
+     "sliding_window": null,
+     "use_sliding_window": false
+    },
+    "Qwen/Qwen3-8B-Base": {
+     "model_type": "qwen3",
+     "architectures": [
+      "Qwen3ForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_key_value_heads": 8,
+     "num_hidden_layers": 36,
+     "sliding_window": null,
+     "use_sliding_window": false
+    },
+    "RWKV/rwkv-4-7b-pile": {
+     "model_type": "rwkv",
+     "architectures": [
+      "RwkvForCausalLM"
+     ],
+     "num_hidden_layers": 32
+    },
+    "RWKV/rwkv-raven-7b": {
+     "model_type": "rwkv",
+     "architectures": [
+      "RwkvForCausalLM"
+     ],
+     "num_hidden_layers": 32
+    },
+    "TinyLlama/TinyLlama-1.1B-Chat-v1.0": {
+     "model_type": "llama",
+     "architectures": [
+      "LlamaForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_key_value_heads": 4,
+     "num_hidden_layers": 22
+    },
+    "TinyLlama/TinyLlama-1.1B-intermediate-step-1431k-3T": {
+     "model_type": "llama",
+     "architectures": [
+      "LlamaForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_key_value_heads": 4,
+     "num_hidden_layers": 22
+    },
+    "Zyphra/Zamba2-7B": {
+     "model_type": "zamba2",
+     "architectures": [
+      "Zamba2ForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_key_value_heads": 32,
+     "num_hidden_layers": 81,
+     "mamba_d_state": 64,
+     "mamba_d_conv": 4,
+     "mamba_expand": 2,
+     "hybrid_layer_ids": [
+      6,
+      11,
+      17,
+      23,
+      29,
+      35,
+      41,
+      47,
+      53,
+      59,
+      65,
+      71,
+      77
+     ],
+     "n_mamba_heads": 112
+    },
+    "Zyphra/Zamba2-7B-Instruct": {
+     "model_type": "zamba2",
+     "architectures": [
+      "Zamba2ForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_key_value_heads": 32,
+     "num_hidden_layers": 81,
+     "mamba_d_state": 64,
+     "mamba_d_conv": 4,
+     "mamba_expand": 2,
+     "hybrid_layer_ids": [
+      6,
+      11,
+      17,
+      23,
+      29,
+      35,
+      41,
+      47,
+      53,
+      59,
+      65,
+      71,
+      77
+     ],
+     "n_mamba_heads": 112
+    },
+    "allenai/Llama-3.1-Tulu-3-8B-DPO": {
+     "model_type": "llama",
+     "architectures": [
+      "LlamaForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_key_value_heads": 8,
+     "num_hidden_layers": 32
+    },
+    "allenai/Llama-3.1-Tulu-3-8B-SFT": {
+     "model_type": "llama",
+     "architectures": [
+      "LlamaForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_key_value_heads": 8,
+     "num_hidden_layers": 32
+    },
+    "allenai/Llama-3.1-Tulu-3-8B-SFT-no-math-data": {
+     "model_type": "llama",
+     "architectures": [
+      "LlamaForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_key_value_heads": 8,
+     "num_hidden_layers": 32
+    },
+    "allenai/Llama-3.1-Tulu-3-8B-SFT-no-persona-data": {
+     "model_type": "llama",
+     "architectures": [
+      "LlamaForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_key_value_heads": 8,
+     "num_hidden_layers": 32
+    },
+    "allenai/Llama-3.1-Tulu-3-8B-SFT-no-safety-data": {
+     "model_type": "llama",
+     "architectures": [
+      "LlamaForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_key_value_heads": 8,
+     "num_hidden_layers": 32
+    },
+    "allenai/Llama-3.1-Tulu-3-8B-SFT-no-wildchat-data": {
+     "model_type": "llama",
+     "architectures": [
+      "LlamaForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_key_value_heads": 8,
+     "num_hidden_layers": 32
+    },
+    "allenai/Llama-3.1-Tulu-3.1-8B": {
+     "model_type": "llama",
+     "architectures": [
+      "LlamaForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_key_value_heads": 8,
+     "num_hidden_layers": 32
+    },
+    "allenai/OLMo-2-0425-1B": {
+     "model_type": "olmo2",
+     "architectures": [
+      "Olmo2ForCausalLM"
+     ],
+     "num_attention_heads": 16,
+     "num_key_value_heads": 16,
+     "num_hidden_layers": 16
+    },
+    "allenai/OLMo-2-0425-1B-DPO": {
+     "model_type": "olmo2",
+     "architectures": [
+      "Olmo2ForCausalLM"
+     ],
+     "num_attention_heads": 16,
+     "num_key_value_heads": 16,
+     "num_hidden_layers": 16
+    },
+    "allenai/OLMo-2-0425-1B-Instruct": {
+     "model_type": "olmo2",
+     "architectures": [
+      "Olmo2ForCausalLM"
+     ],
+     "num_attention_heads": 16,
+     "num_key_value_heads": 16,
+     "num_hidden_layers": 16
+    },
+    "allenai/OLMo-2-0425-1B-SFT": {
+     "model_type": "olmo2",
+     "architectures": [
+      "Olmo2ForCausalLM"
+     ],
+     "num_attention_heads": 16,
+     "num_key_value_heads": 16,
+     "num_hidden_layers": 16
+    },
+    "allenai/OLMoE-1B-7B-0125": {
+     "model_type": "olmoe",
+     "architectures": [
+      "OlmoeForCausalLM"
+     ],
+     "num_attention_heads": 16,
+     "num_key_value_heads": 16,
+     "num_hidden_layers": 16,
+     "num_experts": 64,
+     "num_experts_per_tok": 8
+    },
+    "allenai/OLMoE-1B-7B-0125-DPO": {
+     "model_type": "olmoe",
+     "architectures": [
+      "OlmoeForCausalLM"
+     ],
+     "num_attention_heads": 16,
+     "num_key_value_heads": 16,
+     "num_hidden_layers": 16,
+     "num_experts": 64,
+     "num_experts_per_tok": 8
+    },
+    "allenai/OLMoE-1B-7B-0125-Instruct": {
+     "model_type": "olmoe",
+     "architectures": [
+      "OlmoeForCausalLM"
+     ],
+     "num_attention_heads": 16,
+     "num_key_value_heads": 16,
+     "num_hidden_layers": 16,
+     "num_experts": 64,
+     "num_experts_per_tok": 8
+    },
+    "allenai/OLMoE-1B-7B-0125-SFT": {
+     "model_type": "olmoe",
+     "architectures": [
+      "OlmoeForCausalLM"
+     ],
+     "num_attention_heads": 16,
+     "num_key_value_heads": 16,
+     "num_hidden_layers": 16,
+     "num_experts": 64,
+     "num_experts_per_tok": 8
+    },
+    "allenai/Olmo-3-1025-7B": {
+     "model_type": "olmo3",
+     "architectures": [
+      "Olmo3ForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_key_value_heads": 32,
+     "num_hidden_layers": 32,
+     "sliding_window": 4096,
+     "layer_types": [
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention"
+     ]
+    },
+    "allenai/Olmo-3-1125-32B": {
+     "model_type": "olmo3",
+     "architectures": [
+      "Olmo3ForCausalLM"
+     ],
+     "num_attention_heads": 40,
+     "num_key_value_heads": 8,
+     "num_hidden_layers": 64,
+     "sliding_window": 4096,
+     "layer_types": [
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention"
+     ]
+    },
+    "allenai/Olmo-3-7B-Instruct": {
+     "model_type": "olmo3",
+     "architectures": [
+      "Olmo3ForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_key_value_heads": 32,
+     "num_hidden_layers": 32,
+     "sliding_window": 4096,
+     "layer_types": [
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention"
+     ]
+    },
+    "allenai/Olmo-3-7B-Instruct-DPO": {
+     "model_type": "olmo3",
+     "architectures": [
+      "Olmo3ForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_key_value_heads": 32,
+     "num_hidden_layers": 32,
+     "sliding_window": 4096,
+     "layer_types": [
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention"
+     ]
+    },
+    "allenai/Olmo-3-7B-Instruct-SFT": {
+     "model_type": "olmo3",
+     "architectures": [
+      "Olmo3ForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_key_value_heads": 32,
+     "num_hidden_layers": 32,
+     "sliding_window": 4096,
+     "layer_types": [
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention"
+     ]
+    },
+    "allenai/Olmo-3-7B-Think": {
+     "model_type": "olmo3",
+     "architectures": [
+      "Olmo3ForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_key_value_heads": 32,
+     "num_hidden_layers": 32,
+     "sliding_window": 4096,
+     "layer_types": [
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention"
+     ]
+    },
+    "allenai/Olmo-3-7B-Think-DPO": {
+     "model_type": "olmo3",
+     "architectures": [
+      "Olmo3ForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_key_value_heads": 32,
+     "num_hidden_layers": 32,
+     "sliding_window": 4096,
+     "layer_types": [
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention"
+     ]
+    },
+    "allenai/Olmo-3-7B-Think-SFT": {
+     "model_type": "olmo3",
+     "architectures": [
+      "Olmo3ForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_key_value_heads": 32,
+     "num_hidden_layers": 32,
+     "sliding_window": 4096,
+     "layer_types": [
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention"
+     ]
+    },
+    "allenai/Olmo-3.1-32B-Instruct": {
+     "model_type": "olmo3",
+     "architectures": [
+      "Olmo3ForCausalLM"
+     ],
+     "num_attention_heads": 40,
+     "num_key_value_heads": 8,
+     "num_hidden_layers": 64,
+     "sliding_window": 4096,
+     "layer_types": [
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention"
+     ]
+    },
+    "allenai/Olmo-3.1-32B-Instruct-DPO": {
+     "model_type": "olmo3",
+     "architectures": [
+      "Olmo3ForCausalLM"
+     ],
+     "num_attention_heads": 40,
+     "num_key_value_heads": 8,
+     "num_hidden_layers": 64,
+     "sliding_window": 4096,
+     "layer_types": [
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention"
+     ]
+    },
+    "allenai/Olmo-3.1-32B-Instruct-SFT": {
+     "model_type": "olmo3",
+     "architectures": [
+      "Olmo3ForCausalLM"
+     ],
+     "num_attention_heads": 40,
+     "num_key_value_heads": 8,
+     "num_hidden_layers": 64,
+     "sliding_window": 4096,
+     "layer_types": [
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention"
+     ]
+    },
+    "allenai/Olmo-Hybrid-7B": {
+     "model_type": "olmo_hybrid",
+     "architectures": [
+      "OlmoHybridForCausalLM"
+     ],
+     "num_attention_heads": 30,
+     "num_key_value_heads": 30,
+     "num_hidden_layers": 32,
+     "layer_types": [
+      "linear_attention",
+      "linear_attention",
+      "linear_attention",
+      "full_attention",
+      "linear_attention",
+      "linear_attention",
+      "linear_attention",
+      "full_attention",
+      "linear_attention",
+      "linear_attention",
+      "linear_attention",
+      "full_attention",
+      "linear_attention",
+      "linear_attention",
+      "linear_attention",
+      "full_attention",
+      "linear_attention",
+      "linear_attention",
+      "linear_attention",
+      "full_attention",
+      "linear_attention",
+      "linear_attention",
+      "linear_attention",
+      "full_attention",
+      "linear_attention",
+      "linear_attention",
+      "linear_attention",
+      "full_attention",
+      "linear_attention",
+      "linear_attention",
+      "linear_attention",
+      "full_attention"
+     ],
+     "linear_num_key_heads": 30,
+     "linear_num_value_heads": 30,
+     "linear_conv_kernel_dim": 4
+    },
+    "allenai/Olmo-Hybrid-Instruct-DPO-7B": {
+     "model_type": "olmo_hybrid",
+     "architectures": [
+      "OlmoHybridForCausalLM"
+     ],
+     "num_attention_heads": 30,
+     "num_key_value_heads": 30,
+     "num_hidden_layers": 32,
+     "layer_types": [
+      "linear_attention",
+      "linear_attention",
+      "linear_attention",
+      "full_attention",
+      "linear_attention",
+      "linear_attention",
+      "linear_attention",
+      "full_attention",
+      "linear_attention",
+      "linear_attention",
+      "linear_attention",
+      "full_attention",
+      "linear_attention",
+      "linear_attention",
+      "linear_attention",
+      "full_attention",
+      "linear_attention",
+      "linear_attention",
+      "linear_attention",
+      "full_attention",
+      "linear_attention",
+      "linear_attention",
+      "linear_attention",
+      "full_attention",
+      "linear_attention",
+      "linear_attention",
+      "linear_attention",
+      "full_attention",
+      "linear_attention",
+      "linear_attention",
+      "linear_attention",
+      "full_attention"
+     ],
+     "linear_num_key_heads": 30,
+     "linear_num_value_heads": 30,
+     "linear_conv_kernel_dim": 4
+    },
+    "allenai/Olmo-Hybrid-Instruct-SFT-7B": {
+     "model_type": "olmo_hybrid",
+     "architectures": [
+      "OlmoHybridForCausalLM"
+     ],
+     "num_attention_heads": 30,
+     "num_key_value_heads": 30,
+     "num_hidden_layers": 32,
+     "layer_types": [
+      "linear_attention",
+      "linear_attention",
+      "linear_attention",
+      "full_attention",
+      "linear_attention",
+      "linear_attention",
+      "linear_attention",
+      "full_attention",
+      "linear_attention",
+      "linear_attention",
+      "linear_attention",
+      "full_attention",
+      "linear_attention",
+      "linear_attention",
+      "linear_attention",
+      "full_attention",
+      "linear_attention",
+      "linear_attention",
+      "linear_attention",
+      "full_attention",
+      "linear_attention",
+      "linear_attention",
+      "linear_attention",
+      "full_attention",
+      "linear_attention",
+      "linear_attention",
+      "linear_attention",
+      "full_attention",
+      "linear_attention",
+      "linear_attention",
+      "linear_attention",
+      "full_attention"
+     ],
+     "linear_num_key_heads": 30,
+     "linear_num_value_heads": 30,
+     "linear_conv_kernel_dim": 4
+    },
+    "baichuan-inc/Baichuan2-7B-Base": {
+     "model_type": "baichuan",
+     "architectures": [
+      "BaichuanForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_hidden_layers": 32
+    },
+    "baichuan-inc/Baichuan2-7B-Chat": {
+     "model_type": "baichuan",
+     "architectures": [
+      "BaichuanForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_hidden_layers": 32
+    },
+    "bigscience/bloom-7b1": {
+     "model_type": "bloom",
+     "architectures": [
+      "BloomForCausalLM"
+     ],
+     "n_head": 32,
+     "n_layer": 30
+    },
+    "bigscience/bloomz-7b1": {
+     "model_type": "bloom",
+     "architectures": [
+      "BloomForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "n_layer": 30
+    },
+    "cognitivecomputations/Dolphin3.0-Llama3.1-8B": {
+     "model_type": "llama",
+     "architectures": [
+      "LlamaForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_key_value_heads": 8,
+     "num_hidden_layers": 32
+    },
+    "cognitivecomputations/dolphin-2.6-mistral-7b-dpo": {
+     "model_type": "mistral",
+     "architectures": [
+      "MistralForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_key_value_heads": 8,
+     "num_hidden_layers": 32,
+     "sliding_window": null
+    },
+    "croissantllm/CroissantLLMBase": {
+     "model_type": "llama",
+     "architectures": [
+      "LlamaForCausalLM"
+     ],
+     "num_attention_heads": 16,
+     "num_key_value_heads": 16,
+     "num_hidden_layers": 24
+    },
+    "croissantllm/CroissantLLMChat-v0.1": {
+     "model_type": "llama",
+     "architectures": [
+      "LlamaForCausalLM"
+     ],
+     "num_attention_heads": 16,
+     "num_key_value_heads": 16,
+     "num_hidden_layers": 24
+    },
+    "deepseek-ai/DeepSeek-R1-Distill-Llama-8B": {
+     "model_type": "llama",
+     "architectures": [
+      "LlamaForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_key_value_heads": 8,
+     "num_hidden_layers": 32
+    },
+    "deepseek-ai/DeepSeek-R1-Distill-Qwen-7B": {
+     "model_type": "qwen2",
+     "architectures": [
+      "Qwen2ForCausalLM"
+     ],
+     "num_attention_heads": 28,
+     "num_key_value_heads": 4,
+     "num_hidden_layers": 28,
+     "sliding_window": 4096,
+     "use_sliding_window": false
+    },
+    "deepseek-ai/deepseek-llm-7b-base": {
+     "model_type": "llama",
+     "architectures": [
+      "LlamaForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_key_value_heads": 32,
+     "num_hidden_layers": 30
+    },
+    "deepseek-ai/deepseek-llm-7b-chat": {
+     "model_type": "llama",
+     "architectures": [
+      "LlamaForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_key_value_heads": 32,
+     "num_hidden_layers": 30
+    },
+    "gl198976/mpt-7b": {
+     "model_type": "mpt",
+     "architectures": [
+      "MPTForCausalLM"
+     ],
+     "n_heads": 32,
+     "n_layers": 32
+    },
+    "gl198976/mpt-7b-instruct": {
+     "model_type": "mpt",
+     "architectures": [
+      "MPTForCausalLM"
+     ],
+     "n_heads": 32,
+     "n_layers": 32
+    },
+    "google/gemma-2-9b": {
+     "model_type": "gemma2",
+     "architectures": [
+      "Gemma2ForCausalLM"
+     ],
+     "num_attention_heads": 16,
+     "num_key_value_heads": 8,
+     "num_hidden_layers": 42,
+     "sliding_window": 4096
+    },
+    "google/gemma-2-9b-it": {
+     "model_type": "gemma2",
+     "architectures": [
+      "Gemma2ForCausalLM"
+     ],
+     "num_attention_heads": 16,
+     "num_key_value_heads": 8,
+     "num_hidden_layers": 42,
+     "sliding_window": 4096
+    },
+    "google/recurrentgemma-9b": {
+     "model_type": "recurrent_gemma",
+     "architectures": [
+      "RecurrentGemmaForCausalLM"
+     ],
+     "num_attention_heads": 16,
+     "num_key_value_heads": 1,
+     "num_hidden_layers": 38
+    },
+    "google/recurrentgemma-9b-it": {
+     "model_type": "recurrent_gemma",
+     "architectures": [
+      "RecurrentGemmaForCausalLM"
+     ],
+     "num_attention_heads": 16,
+     "num_key_value_heads": 1,
+     "num_hidden_layers": 38
+    },
+    "huggyllama/llama-7b": {
+     "model_type": "llama",
+     "architectures": [
+      "LlamaForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_hidden_layers": 32
+    },
+    "ibm-granite/granite-3.0-8b-base": {
+     "model_type": "granite",
+     "architectures": [
+      "GraniteForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_key_value_heads": 8,
+     "num_hidden_layers": 40
+    },
+    "ibm-granite/granite-3.0-8b-instruct": {
+     "model_type": "granite",
+     "architectures": [
+      "GraniteForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_key_value_heads": 8,
+     "num_hidden_layers": 40
+    },
+    "inceptionai/jais-family-6p7b": {
+     "model_type": "jais",
+     "architectures": [
+      "JAISLMHeadModel"
+     ],
+     "n_head": 32,
+     "n_layer": 32
+    },
+    "inceptionai/jais-family-6p7b-chat": {
+     "model_type": "jais",
+     "architectures": [
+      "JAISLMHeadModel"
+     ],
+     "n_head": 32,
+     "n_layer": 32
+    },
+    "internlm/internlm2-base-7b": {
+     "model_type": "internlm2",
+     "architectures": [
+      "InternLM2ForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_key_value_heads": 8,
+     "num_hidden_layers": 32
+    },
+    "internlm/internlm2-chat-7b": {
+     "model_type": "internlm2",
+     "architectures": [
+      "InternLM2ForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_key_value_heads": 8,
+     "num_hidden_layers": 32,
+     "attn_implementation": "eager"
+    },
+    "internlm/internlm2-chat-7b-sft": {
+     "model_type": "internlm2",
+     "architectures": [
+      "InternLM2ForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_key_value_heads": 8,
+     "num_hidden_layers": 32,
+     "attn_implementation": "eager"
+    },
+    "kakaocorp/kanana-1.5-8b-base": {
+     "model_type": "llama",
+     "architectures": [
+      "LlamaForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_key_value_heads": 8,
+     "num_hidden_layers": 32
+    },
+    "kakaocorp/kanana-1.5-8b-instruct-2505": {
+     "model_type": "llama",
+     "architectures": [
+      "LlamaForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_key_value_heads": 8,
+     "num_hidden_layers": 32
+    },
+    "kakaocorp/kanana-2-3b-base": {
+     "model_type": "qwen3",
+     "architectures": [
+      "Qwen3ForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_key_value_heads": 8,
+     "num_hidden_layers": 32,
+     "sliding_window": null,
+     "use_sliding_window": false,
+     "layer_types": [
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention"
+     ]
+    },
+    "kakaocorp/kanana-2-3b-instruct": {
+     "model_type": "qwen3",
+     "architectures": [
+      "Qwen3ForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_key_value_heads": 8,
+     "num_hidden_layers": 32,
+     "sliding_window": null,
+     "use_sliding_window": false,
+     "layer_types": [
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention",
+      "full_attention"
+     ]
+    },
+    "llm-jp/llm-jp-3-7.2b": {
+     "model_type": "llama",
+     "architectures": [
+      "LlamaForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_key_value_heads": 32,
+     "num_hidden_layers": 32
+    },
+    "llm-jp/llm-jp-3-7.2b-instruct2": {
+     "model_type": "llama",
+     "architectures": [
+      "LlamaForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_key_value_heads": 32,
+     "num_hidden_layers": 32
+    },
+    "llm-jp/llm-jp-3-7.2b-instruct3": {
+     "model_type": "llama",
+     "architectures": [
+      "LlamaForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_key_value_heads": 32,
+     "num_hidden_layers": 32
+    },
+    "lomahony/eleuther-pythia6.9b-hh-dpo": {
+     "model_type": "gpt_neox",
+     "architectures": [
+      "GPTNeoXForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_hidden_layers": 32
+    },
+    "lomahony/eleuther-pythia6.9b-hh-sft": {
+     "model_type": "gpt_neox",
+     "architectures": [
+      "GPTNeoXForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_hidden_layers": 32
+    },
+    "m-a-p/CT-LLM-Base": {
+     "model_type": "llama",
+     "architectures": [
+      "LlamaForCausalLM"
+     ],
+     "num_attention_heads": 16,
+     "num_key_value_heads": 16,
+     "num_hidden_layers": 32
+    },
+    "m-a-p/CT-LLM-SFT": {
+     "model_type": "llama",
+     "architectures": [
+      "LlamaForCausalLM"
+     ],
+     "num_attention_heads": 16,
+     "num_key_value_heads": 16,
+     "num_hidden_layers": 32
+    },
+    "m-a-p/CT-LLM-SFT-DPO": {
+     "model_type": "llama",
+     "architectures": [
+      "LlamaForCausalLM"
+     ],
+     "num_attention_heads": 16,
+     "num_key_value_heads": 16,
+     "num_hidden_layers": 32
+    },
+    "m-a-p/neo_7b": {
+     "model_type": "llama",
+     "architectures": [
+      "LlamaForCausalLM"
+     ],
+     "num_attention_heads": 16,
+     "num_key_value_heads": 16,
+     "num_hidden_layers": 28
+    },
+    "m-a-p/neo_7b_instruct_v0.1": {
+     "model_type": "llama",
+     "architectures": [
+      "LlamaForCausalLM"
+     ],
+     "num_attention_heads": 16,
+     "num_key_value_heads": 16,
+     "num_hidden_layers": 28
+    },
+    "m-a-p/neo_7b_sft_v0.1": {
+     "model_type": "llama",
+     "architectures": [
+      "LlamaForCausalLM"
+     ],
+     "num_attention_heads": 16,
+     "num_key_value_heads": 16,
+     "num_hidden_layers": 28
+    },
+    "meta-llama/Llama-3.1-70B": {
+     "model_type": "llama",
+     "architectures": [
+      "LlamaForCausalLM"
+     ],
+     "num_attention_heads": 64,
+     "num_key_value_heads": 8,
+     "num_hidden_layers": 80
+    },
+    "meta-llama/Llama-3.1-70B-Instruct": {
+     "model_type": "llama",
+     "architectures": [
+      "LlamaForCausalLM"
+     ],
+     "num_attention_heads": 64,
+     "num_key_value_heads": 8,
+     "num_hidden_layers": 80
+    },
+    "meta-llama/Llama-3.1-8B": {
+     "model_type": "llama",
+     "architectures": [
+      "LlamaForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_key_value_heads": 8,
+     "num_hidden_layers": 32
+    },
+    "meta-llama/Llama-3.1-8B-Instruct": {
+     "model_type": "llama",
+     "architectures": [
+      "LlamaForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_key_value_heads": 8,
+     "num_hidden_layers": 32
+    },
+    "microsoft/Phi-4-reasoning-plus": {
+     "model_type": "phi3",
+     "architectures": [
+      "Phi3ForCausalLM"
+     ],
+     "num_attention_heads": 40,
+     "num_key_value_heads": 10,
+     "num_hidden_layers": 40,
+     "sliding_window": null
+    },
+    "microsoft/phi-4": {
+     "model_type": "phi3",
+     "architectures": [
+      "Phi3ForCausalLM"
+     ],
+     "num_attention_heads": 40,
+     "num_key_value_heads": 10,
+     "num_hidden_layers": 40,
+     "sliding_window": null
+    },
+    "microsoft/phi-4-reasoning": {
+     "model_type": "phi3",
+     "architectures": [
+      "Phi3ForCausalLM"
+     ],
+     "num_attention_heads": 40,
+     "num_key_value_heads": 10,
+     "num_hidden_layers": 40,
+     "sliding_window": null
+    },
+    "mistralai/Mistral-7B-Instruct-v0.1": {
+     "model_type": "mistral",
+     "architectures": [
+      "MistralForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_key_value_heads": 8,
+     "num_hidden_layers": 32,
+     "sliding_window": 4096
+    },
+    "mistralai/Mistral-7B-v0.1": {
+     "model_type": "mistral",
+     "architectures": [
+      "MistralForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_key_value_heads": 8,
+     "num_hidden_layers": 32,
+     "sliding_window": 4096
+    },
+    "openGPT-X/Teuken-7B-base-v0.6": {
+     "model_type": "llama",
+     "architectures": [
+      "LlamaForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_key_value_heads": 2,
+     "num_hidden_layers": 32
+    },
+    "openGPT-X/Teuken-7B-instruct-commercial-v0.4": {
+     "model_type": "llama",
+     "architectures": [
+      "LlamaForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_key_value_heads": 2,
+     "num_hidden_layers": 32
+    },
+    "openGPT-X/Teuken-7B-instruct-v0.6": {
+     "model_type": "llama",
+     "architectures": [
+      "LlamaForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_key_value_heads": 2,
+     "num_hidden_layers": 32
+    },
+    "openbmb/MiniCPM5-1B": {
+     "model_type": "llama",
+     "architectures": [
+      "LlamaForCausalLM"
+     ],
+     "num_attention_heads": 16,
+     "num_key_value_heads": 2,
+     "num_hidden_layers": 24
+    },
+    "openbmb/MiniCPM5-1B-Base": {
+     "model_type": "llama",
+     "architectures": [
+      "LlamaForCausalLM"
+     ],
+     "num_attention_heads": 16,
+     "num_key_value_heads": 2,
+     "num_hidden_layers": 24
+    },
+    "openbmb/MiniCPM5-1B-SFT": {
+     "model_type": "llama",
+     "architectures": [
+      "LlamaForCausalLM"
+     ],
+     "num_attention_heads": 16,
+     "num_key_value_heads": 2,
+     "num_hidden_layers": 24
+    },
+    "openchat/openchat-3.5-0106": {
+     "model_type": "mistral",
+     "architectures": [
+      "MistralForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_key_value_heads": 8,
+     "num_hidden_layers": 32,
+     "sliding_window": 4096
+    },
+    "stabilityai/stablelm-2-1_6b": {
+     "model_type": "stablelm",
+     "architectures": [
+      "StableLmForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_key_value_heads": 32,
+     "num_hidden_layers": 24
+    },
+    "stabilityai/stablelm-2-1_6b-chat": {
+     "model_type": "stablelm",
+     "architectures": [
+      "StableLmForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_key_value_heads": 32,
+     "num_hidden_layers": 24
+    },
+    "stabilityai/stablelm-2-zephyr-1_6b": {
+     "model_type": "stablelm",
+     "architectures": [
+      "StableLmForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_key_value_heads": 32,
+     "num_hidden_layers": 24
+    },
+    "team-hatakeyama-phase2/Tanuki-8B-base-v1.0": {
+     "model_type": "llama",
+     "architectures": [
+      "LlamaForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_key_value_heads": 8,
+     "num_hidden_layers": 32
+    },
+    "teknium/OpenHermes-2.5-Mistral-7B": {
+     "model_type": "mistral",
+     "architectures": [
+      "MistralForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_key_value_heads": 8,
+     "num_hidden_layers": 32,
+     "sliding_window": 4096
+    },
+    "tiiuae/Falcon-H1-1.5B-Base": {
+     "model_type": "falcon_h1",
+     "architectures": [
+      "FalconH1ForCausalLM"
+     ],
+     "num_attention_heads": 8,
+     "num_key_value_heads": 2,
+     "num_hidden_layers": 24,
+     "attn_layer_indices": null,
+     "mamba_d_state": 256,
+     "mamba_d_conv": 4,
+     "mamba_expand": 2,
+     "mamba_n_heads": 48,
+     "mamba_d_ssm": 3072
+    },
+    "tiiuae/Falcon-H1-1.5B-Instruct": {
+     "model_type": "falcon_h1",
+     "architectures": [
+      "FalconH1ForCausalLM"
+     ],
+     "num_attention_heads": 8,
+     "num_key_value_heads": 2,
+     "num_hidden_layers": 24,
+     "attn_layer_indices": null,
+     "mamba_d_state": 256,
+     "mamba_d_conv": 4,
+     "mamba_expand": 2,
+     "mamba_n_heads": 48,
+     "mamba_d_ssm": 3072
+    },
+    "tiiuae/Falcon-H1-7B-Base": {
+     "model_type": "falcon_h1",
+     "architectures": [
+      "FalconH1ForCausalLM"
+     ],
+     "num_attention_heads": 12,
+     "num_key_value_heads": 2,
+     "num_hidden_layers": 44,
+     "attn_layer_indices": null,
+     "mamba_d_state": 256,
+     "mamba_d_conv": 4,
+     "mamba_expand": 2,
+     "mamba_n_heads": 24,
+     "mamba_d_ssm": 3072
+    },
+    "tiiuae/Falcon-H1-7B-Instruct": {
+     "model_type": "falcon_h1",
+     "architectures": [
+      "FalconH1ForCausalLM"
+     ],
+     "num_attention_heads": 12,
+     "num_key_value_heads": 2,
+     "num_hidden_layers": 44,
+     "attn_layer_indices": null,
+     "mamba_d_state": 256,
+     "mamba_d_conv": 4,
+     "mamba_expand": 2,
+     "mamba_n_heads": 24,
+     "mamba_d_ssm": 3072
+    },
+    "tiiuae/Falcon3-10B-Base": {
+     "model_type": "llama",
+     "architectures": [
+      "LlamaForCausalLM"
+     ],
+     "num_attention_heads": 12,
+     "num_key_value_heads": 4,
+     "num_hidden_layers": 40
+    },
+    "tiiuae/Falcon3-10B-Instruct": {
+     "model_type": "llama",
+     "architectures": [
+      "LlamaForCausalLM"
+     ],
+     "num_attention_heads": 12,
+     "num_key_value_heads": 4,
+     "num_hidden_layers": 40
+    },
+    "tiiuae/Falcon3-1B-Base": {
+     "model_type": "llama",
+     "architectures": [
+      "LlamaForCausalLM"
+     ],
+     "num_attention_heads": 8,
+     "num_key_value_heads": 4,
+     "num_hidden_layers": 18
+    },
+    "tiiuae/Falcon3-1B-Instruct": {
+     "model_type": "llama",
+     "architectures": [
+      "LlamaForCausalLM"
+     ],
+     "num_attention_heads": 8,
+     "num_key_value_heads": 4,
+     "num_hidden_layers": 18
+    },
+    "tiiuae/Falcon3-3B-Base": {
+     "model_type": "llama",
+     "architectures": [
+      "LlamaForCausalLM"
+     ],
+     "num_attention_heads": 12,
+     "num_key_value_heads": 4,
+     "num_hidden_layers": 22
+    },
+    "tiiuae/Falcon3-3B-Instruct": {
+     "model_type": "llama",
+     "architectures": [
+      "LlamaForCausalLM"
+     ],
+     "num_attention_heads": 12,
+     "num_key_value_heads": 4,
+     "num_hidden_layers": 22
+    },
+    "tiiuae/Falcon3-7B-Base": {
+     "model_type": "llama",
+     "architectures": [
+      "LlamaForCausalLM"
+     ],
+     "num_attention_heads": 12,
+     "num_key_value_heads": 4,
+     "num_hidden_layers": 28
+    },
+    "tiiuae/Falcon3-7B-Instruct": {
+     "model_type": "llama",
+     "architectures": [
+      "LlamaForCausalLM"
+     ],
+     "num_attention_heads": 12,
+     "num_key_value_heads": 4,
+     "num_hidden_layers": 28
+    },
+    "tiiuae/Falcon3-Mamba-7B-Base": {
+     "model_type": "falcon_mamba",
+     "architectures": [
+      "FalconMambaForCausalLM"
+     ],
+     "num_hidden_layers": 64,
+     "state_size": 16,
+     "conv_kernel": 4
+    },
+    "tiiuae/Falcon3-Mamba-7B-Instruct": {
+     "model_type": "falcon_mamba",
+     "architectures": [
+      "FalconMambaForCausalLM"
+     ],
+     "num_hidden_layers": 64,
+     "state_size": 16,
+     "conv_kernel": 4
+    },
+    "tiiuae/falcon-7b": {
+     "model_type": "falcon",
+     "architectures": [
+      "FalconForCausalLM"
+     ],
+     "num_attention_heads": 71,
+     "num_hidden_layers": 32
+    },
+    "tiiuae/falcon-7b-instruct": {
+     "model_type": "falcon",
+     "architectures": [
+      "FalconForCausalLM"
+     ],
+     "num_attention_heads": 71,
+     "num_hidden_layers": 32
+    },
+    "tiiuae/falcon-mamba-7b": {
+     "model_type": "falcon_mamba",
+     "architectures": [
+      "FalconMambaForCausalLM"
+     ],
+     "num_hidden_layers": 64,
+     "state_size": 16,
+     "conv_kernel": 4
+    },
+    "tiiuae/falcon-mamba-7b-instruct": {
+     "model_type": "falcon_mamba",
+     "architectures": [
+      "FalconMambaForCausalLM"
+     ],
+     "num_hidden_layers": 64,
+     "state_size": 16,
+     "conv_kernel": 4
+    },
+    "togethercomputer/RedPajama-INCITE-7B-Chat": {
+     "model_type": "gpt_neox",
+     "architectures": [
+      "GPTNeoXForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_hidden_layers": 32
+    },
+    "togethercomputer/RedPajama-INCITE-7B-Instruct": {
+     "model_type": "gpt_neox",
+     "architectures": [
+      "GPTNeoXForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_hidden_layers": 32
+    },
+    "togethercomputer/RedPajama-INCITE-Base-7B-v0.1": {
+     "model_type": "gpt_neox",
+     "architectures": [
+      "GPTNeoXForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_hidden_layers": 32
+    },
+    "weblab-GENIAC/Tanuki-8B-dpo-v1.0": {
+     "model_type": "llama",
+     "architectures": [
+      "LlamaForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_key_value_heads": 8,
+     "num_hidden_layers": 32
+    },
+    "zai-org/glm-4-9b-chat-hf": {
+     "model_type": "glm",
+     "architectures": [
+      "GlmForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_key_value_heads": 2,
+     "num_hidden_layers": 40
+    },
+    "zai-org/glm-4-9b-hf": {
+     "model_type": "glm",
+     "architectures": [
+      "GlmForCausalLM"
+     ],
+     "num_attention_heads": 32,
+     "num_key_value_heads": 2,
+     "num_hidden_layers": 40
+    }
+   },
+   "unmeasured": {
+    "HuggingFaceTB/SmolLM3-3B-checkpoints": "HTTPError: HTTP Error 404: Not Found",
+    "HuggingFaceTB/SmolLM3-3B-checkpoints@it-soup-APO": "HTTPError: HTTP Error 404: Not Found"
    }
   }
  }
