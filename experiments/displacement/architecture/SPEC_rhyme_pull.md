@@ -205,3 +205,39 @@ Two such twins exist (`Falcon-H1-7B-Base`, `Falcon-H1-7B-Instruct`). So `rate_fo
 **(b) A LOAD-DOMINATED SAMPLE THAT CLEARS `MIN_CELLS`.** `rate_for('allenai/Olmo-Hybrid-7B', 'cuda')` returns **10.796**, the median of the n=42 `fla`-fallback observation (19.2193) and the n=2,664 real one (2.3734). `MIN_CELLS = 25` was set to kill the OLMoE 3-cell defect and 42 clears it, so the fallback measurement enters as an equal vote. A planner budgeting this fleet from the library would price Olmo-Hybrid at 4.9 GPU-h instead of 1.14 — **alone more than this entire fleet.** This spec uses 2.3734.
 
 Neither is fixed here; both are one-line changes and the second is a judgement (raise `MIN_CELLS`, or weight by `n_cells`, or retract the n=42 row as a fallback measurement rather than a rate) that belongs to whoever owns `rates.py`.
+
+## 10. ADDENDUM 2026-09-11 — THE PRE-COMMITMENT NAMES A PREDICTION THIS FLEET CANNOT TEST
+
+Written after reading `dc463976` (the pre-commitment) and `51147165` (the local/global reading it pins). **Both are right to exist and this does not dispute either.** It reports a grain mismatch between the prediction and the fleet, found before the fleet ran, which is the only time it is cheap.
+
+**The prediction, as recorded:** *"if global attention is what carries the operation, the same ordering should appear on the paradigmatic instrument."* The ordering it refers to is `-0.000159 -> -0.000257` and `-0.000498 -> -0.000114` — **displacement**, a base→aligned delta in charge-selectivity.
+
+**The fleet, as specced in §1-§6, measures eleven BASE models.** There is no delta. `rhyme_pull` on a base model is a CAPACITY — does this model have rhyme pull — and a capacity has no ordering commensurable with a delta across an alignment edge. A base-only fleet returns a number for `gemma-2-9b` and a number for `recurrentgemma-9b`, and the difference between them is an architecture-plus-corpus fact about two base models, not the thing `-0.000498 -> -0.000114` measured.
+
+This is the campaign's own rule and `plan_rhyme.md` states it first, in its anti-conflation clause: *"No sentence reads them against each other without a declared bridge."* It was written about slot-pull versus sustained form; it applies unchanged here.
+
+**Two repairs, and they are not equivalent.**
+
+**(i) Add the aligned arm.** `roster.endpoints()` resolves an aligned endpoint for all twelve — checked, none is `unresolved`:
+
+    falcon-mamba-7b        -> falcon-mamba-7b-instruct      Zamba2-7B     -> Zamba2-7B-Instruct
+    Falcon-H1-1.5B-Base    -> Falcon-H1-1.5B-Instruct       rwkv-4-7b-pile-> rwkv-raven-7b
+    Falcon-H1-7B-Base      -> Falcon-H1-7B-Instruct         gemma-2-9b    -> gemma-2-9b-it
+    recurrentgemma-9b      -> recurrentgemma-9b-it          falcon-7b     -> falcon-7b-instruct
+    Olmo-Hybrid-7B         -> Olmo-Hybrid-Instruct-DPO-7B   Falcon3-7B    -> Falcon3-7B-Instruct
+    OLMoE-1B-7B-0125       -> OLMoE-1B-7B-0125-Instruct     Olmo-3-1025-7B-> Olmo-3-7B-Instruct
+
+None holds any verse slot either (each has the same ~150 prose/battery overlap), so each needs ~1,633. Priced the same way, eleven rates measured and `gemma-2-9b-it` transferred:
+
+    ALIGNED ARM   5.32 GPU-h   $5.59      route A
+                  ~$12-17                 route B
+
+**So the delta design is ~$11 on route A and ~$23-33 on route B, against $5.27 and $11-16 for base-only.** The increment buys the thing the prediction is about. `Olmo-3-7B-Instruct` is in this arm and must run even though its base is already done, for the same reason route B has to re-run the base: the delta needs both ends measured the same way.
+
+`Falcon-H1-7B-Instruct` is priced at **0.5550**, not the 0.310 `rate_for` returns — it carries the same appended-retraction defect as its base sibling (§9a), a struck 0.0659 medianed against the good rate. Both twins are the Falcon-H1 7B pair.
+
+**(ii) Restate the prediction at capacity grain.** Free, and it changes what is under test: *"global attention supports rhyme capacity"* is a claim about architecture, while *"global attention carries the operation"* is a claim about what alignment does. The second is the one the folder is about and the one Weatherby's sentence is about. Restating is legitimate, but it has to be done **now and explicitly**, because a prediction quietly reinterpreted to fit the arm that was affordable is exactly the standing the pre-commitment exists to protect.
+
+**Recommendation: (i), and it is not close.** The increment is $6 on route A and the pre-commitment's own point 4 — that the route out is models, not cells per model — argues for it directly: the aligned arm doubles the models without touching the n=2-per-contrast problem, but it is the difference between testing the recorded prediction and testing a different one.
+
+**This does not reopen the pre-commitment.** Points 1, 2 and 4 are untouched. Point 3 is untouched in substance; what it needs is a sentence naming the grain at which "the same ordering" is read, and that sentence is cheaper to write today than to argue about once there are numbers.
