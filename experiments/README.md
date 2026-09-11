@@ -46,8 +46,6 @@ and the state the first version of the checker could not see.
 
 *What does alignment do to a distribution -- how much moves, what kind of movement, along which dimension, and where in the model is it implemented?*
 
-- **[`architecture/`](displacement/architecture/README.md)** -- `RUN 2026-09-11 as a metadata lookup over existence/results/selectivity.json plus a direct sum|delta| recompute. [...]`  
-  The operation does not need attention. falcon-mamba-7b, which has none, displaces at -0.000124; recurrentgemma-9b, Griffin with local attention only, displaces at -0.000114. The two best-controlled contrasts DISAGREE in sign of difference: AI2's Olmo-Hybrid displaces MORE than its dense sibling (-0.000257 vs -0.000159), Google's recurrentgemma displaces LESS than its same-corpus sibling gemma-2-9b (-0.000114 vs -0.000498). The one non-displacer with an unusual architecture, rwkv-4-7b-pile (+0.000107), is confounded: it is also among the seven weakest movers overall (sum|delta| 552 against a roster median near 1,185).
 - **[`displacement_axis/`](displacement/displacement_axis/README.md)** -- `RUN. [...]`  
   DIRECTION holds. rho signatures unmoved, identity harm still 47/47 p=1.4e-14. MAGNITUDE reverses.
 - **[`displacement_taxonomy/`](displacement/displacement_taxonomy/README.md)** -- `COMPLETE (for now). [...]`  
@@ -197,6 +195,19 @@ and the state the first version of the checker could not see.
   Most of the displacement is already done by SFT. The preference step continues it and does not cause it. ... Reported here as what the picture shows on one prompt, not as a finding
 - **[`salary_probe/`](exploratory/salary_probe/README.md)** -- `RUN, 28 lineage pairs, 84,000 draws, 2026-08-28 - UNPARKED AND RUN; registration frozen at 2afe765, amendments A1-A4`  
   THE RESULT IS IN `FINDING_narrowing.md`. THIS FILE IS THE PILOT, kept because what it says about its own limits was right and is the reason the larger run exists.
+
+### architectures
+
+*Does the architecture a model is built from exert itself anywhere we can measure?*
+
+- **[`displacement/`](architectures/displacement/README.md)** -- `RUN 2026-09-11 as a lookup over displacement/existence/results/selectivity.json plus a direct sum|delta| recompute from movement_v4. NOT REGISTERED. [...]`  
+  Every architecture in the roster displaces except one, and the exception is confounded. falcon-mamba-7b has no attention and displaces at -0.000124; recurrentgemma-9b, Weatherby's own cited counter-architecture, at -0.000114. The two best-controlled contrasts DISAGREE in sign. rwkv-4-7b-pile (+0.000107) is the one non-displacer and is also among the seven weakest movers overall, so architecture is not identified against alignment strength here.
+- **[`norm_change/`](architectures/norm_change/README.md)** -- `RUN 2026-09-11 as a lookup over displacement/norm_change per-lineage dose slopes, which required adding dose.py --per-lineage that day (the aggregate CSV had [...]`  
+  It does not. falcon-mamba-7b, which computes no attention, agrees with the roster median on 12 of 12 top dose targets, where the roster agrees with itself on 38-40 of 45. The only two dissenters, rwkv-4-7b-pile (6/12, chance) and Falcon-H1-7B-Base (7/12), are also the two lowest |slope| in the existence table, so agreement tracks how much a model was ALIGNED rather than what it is built from.
+- **[`rhyme/`](architectures/rhyme/README.md)** -- `SPEC ONLY, nothing run. [...]`  
+  NOT RUN. This is the direct test of Weatherby's claim and the only one in this subject that reads a FORMAL equivalence class (IPA rime keys) rather than a semantic profile, so it is the one place the other three instruments cannot see. The verse instrument in emergence/capacities covers 250 CHECKPOINTS along two ladders (155 pythia, 95 olmo) and zero non-transformers; no lab ships progress checkpoints for a Mamba or an RWKV, so this is necessarily an ENDPOINT question and the spec prices all bases plus all endpoints.
+- **[`similarity/`](architectures/similarity/README.md)** -- `RUN 2026-09-11. 50 endpoint BASES and 50 ALIGNED endpoints, pairwise, 1,225 pairs each, 200 v6-rated prompts, words above the twp theta of 0.001. Four [...]`  
+  CORPUS DOMINATES AND ARCHITECTURE DOES NOT REGISTER. The most similar pair of 1,225 bases is pythia-6.9b and rwkv-4-7b-pile, a transformer and an RNN that share the Pile, and all three attested same-corpus/different-architecture pairs sit in the top 7. falcon-mamba-7b, which computes no attention of any kind, is the MEDIAN model of the census at rank 25/50. Separately: alignment moves models APART, base-base median 0.407 against aligned-aligned 0.669, on all four measures.
 
 ### lit_review
 

@@ -1,6 +1,6 @@
 """GATE: closure rides the REAL runner's record, on the declared prompts only.
 
-    uv run python experiments/displacement/architecture/tests/closure_rides_the_record.py
+    uv run python experiments/architectures/rhyme/tests/closure_rides_the_record.py
 
 The smoke builds its own record by hand, so it cannot tell you that
 `TWPRunner.run()` produces one. This runs the actual production path on four

@@ -115,8 +115,17 @@ CONTRASTS = [
     ("4 DENSE vs MoE (AI2)", ["allenai/Olmo-3-1025-7B",
                               "allenai/OLMoE-1B-7B-0125"]),
 ]
-SEL = os.path.join(HERE, "..", "existence", "results", "selectivity.json")
-NC = os.path.join(HERE, "..", "norm_change", "results")
+#: **THESE CROSS OUT OF THIS SUBJECT.** This question is a LOOKUP over two
+#: questions that live under `displacement/`, and after the 2026-09-11 move to
+#: `architectures/` the old `../existence` no longer resolves -- it pointed at a
+#: sibling and now points at nothing. Anchored on the experiments root instead,
+#: so a future move breaks loudly rather than silently reading an empty dir.
+EXP = os.path.dirname(os.path.dirname(HERE))
+SEL = os.path.join(EXP, "displacement", "existence", "results", "selectivity.json")
+NC = os.path.join(EXP, "displacement", "norm_change", "results")
+for _p in (SEL, NC):
+    if not os.path.exists(_p):
+        raise SystemExit("lookup source missing, did the tree move? %s" % _p)
 #: how many dose targets to carry. The aggregate is sorted by p, and past the
 #: first dozen the targets are near-duplicates of each other (the _absz variant
 #: of a scale it already lists), so a larger K buys correlated votes, not power.

@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 """SMOKE: the rhyme_pull fleet's producer shape, end to end, on one small model.
 
-    uv run python experiments/displacement/architecture/rhyme_smoke.py --n 18
-    uv run python experiments/displacement/architecture/rhyme_smoke.py --model X --device cuda
+    uv run python experiments/architectures/rhyme/rhyme_smoke.py --n 18
+    uv run python experiments/architectures/rhyme/rhyme_smoke.py --model X --device cuda
 
 RH, 2026-09-11: *"Start with 1 box and try everything on a small model to see if
 it works."* This is that, run LOCALLY FIRST because a local smoke costs nothing

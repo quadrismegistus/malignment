@@ -1,7 +1,7 @@
 ---
 type: subject
 kind: subject
-status: "OPEN. Eight questions; readout_share moved here from top level on 2026-09-02. Frame variants added to three of them, 2026-08-30 to 2026-09-04."
+status: "OPEN. Eight questions; readout_share moved here from top level on 2026-09-02, and `architecture` moved OUT to the `architectures` subject on 2026-09-11 -- rhyme pull is not a displacement question and that folder's headline came from a base-similarity sweep rather than from any displacement instrument. Frame variants added to three of them, 2026-08-30 to 2026-09-04."
 headline: "Alignment displaces on its own; the chat frame displaces too, on weights nobody touched; together about 2.8x. But content-selectivity needs aligned weights and the frame alone cannot produce it."
 question: What does alignment do to a distribution -- how much moves, what kind of movement, along which dimension, and where in the model is it implemented?
 ---

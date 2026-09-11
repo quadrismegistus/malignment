@@ -1,6 +1,6 @@
 """GATE: the box's produce path must run with `import prosodic` IMPOSSIBLE.
 
-    uv run python experiments/displacement/architecture/tests/no_prosodic_on_the_box.py
+    uv run python experiments/architectures/rhyme/tests/no_prosodic_on_the_box.py
 
 RH, 2026-09-11: *"Let's not run prosodic on the cloud though right? We can do the
 prosodic analysis after we have the data."*
@@ -34,6 +34,6 @@ def _blocked(name, *a, **k):
     return _real(name, *a, **k)
 builtins.__import__ = _blocked
 sys.argv = ["rhyme_smoke.py", "--n", "9", "--produce-only", "--out", "/tmp/box_path.jsonl"]
-sys.path.insert(0, "/Users/rj416/github/malignment/experiments/displacement/architecture")
+sys.path.insert(0, "/Users/rj416/github/malignment/experiments/architectures/displacement")
 import rhyme_smoke
 raise SystemExit(rhyme_smoke.main())
