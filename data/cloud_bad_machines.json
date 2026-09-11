@@ -69,6 +69,11 @@
    "symptom": "ssh silent for 6 min after create",
    "active": false,
    "withdrawn": "Same late-22/tcp-mapping symptom as the four withdrawn above; the launcher now re-reads the port map for 3 more minutes before blocklisting."
+  },
+  "11541": {
+   "seen": "2026-09-11",
+   "failures": 1,
+   "symptom": "BANDWIDTH DEGRADES UNDER LOAD, and it reads as a race the whole time. uv cache DID keep growing -- 1548 -> 2067 -> 2131 -> 2465 MB -- so the growing-is-a-race discriminator said healthy at every check, while the RATE fell 4.4 -> 1.4 -> 0.89 MB/s across 20 minutes and the venv never finished. The disqualifier is not that it stalled, it is that this box carried 20 models whose weights are ~300 GB: at 0.89 MB/s that is ~92 hours. Growth is the right test for STALLED; it is the wrong test for TOO SLOW TO FINISH, and those need different responses."
   }
  }
 }
