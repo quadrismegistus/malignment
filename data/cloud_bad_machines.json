@@ -62,6 +62,13 @@
    "symptom": "ssh silent for 6 min after create",
    "withdrawn": "WITHDRAWN 2026-09-11, SAME DAY. Blocklisted on 'ssh silent for 6 min after create' during a burst launch of SIX boxes 4 seconds apart. All four had NO mapped 22/tcp port in the instance record when the launcher gave up, while the two that survived the same burst had real ports. Relaunched 60 s apart, three boxes sat at port=None for one 5-minute tick and ALL THREE had mapped ports and were running by the next -- so the port assignment completes, and 6 minutes is too short for a burst create rather than these hosts being bad. A wrongly blocklisted machine leaves the offer pool permanently, so the entry is withdrawn rather than left standing on a symptom that reproduced on healthy hosts.",
    "active": false
+  },
+  "107366": {
+   "seen": "2026-09-11",
+   "failures": 1,
+   "symptom": "ssh silent for 6 min after create",
+   "active": false,
+   "withdrawn": "Same late-22/tcp-mapping symptom as the four withdrawn above; the launcher now re-reads the port map for 3 more minutes before blocklisting."
   }
  }
 }

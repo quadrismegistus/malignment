@@ -54,6 +54,7 @@ This one:
     hardcoding one venv for a queue is what broke Baichuan2 for an hour
 """
 import argparse
+import time
 import json
 import os
 import subprocess
@@ -670,7 +671,36 @@ def execute(b, models, roots, venv, a):
         print("  WARNING     no mapped 22/tcp port in the instance record -- the "
               "IP fallback will retry the PROXY port and cannot succeed on a box "
               "whose proxy is down.")
+    #: **RE-READ THE PORT MAP INSTEAD OF BLOCKLISTING THE HOST FOR NOT HAVING
+    #: ONE YET.** `_dp` was read ONCE, before the wait, and `verify_reachable`
+    #: never looks again -- so a box whose 22/tcp mapping vast.ai publishes a
+    #: minute late is probed only on the proxy, goes silent for six minutes, and
+    #: is blocklisted. The comment above already named the two responses,
+    #: "blocklist versus fix the caller", and the code did the first.
+    #:
+    #: MEASURED 2026-09-11: five boxes lost this way in one afternoon. Four were
+    #: relaunched 60 s apart, sat at port=None for one five-minute tick, and ALL
+    #: THREE that were still waiting had mapped ports and were running by the
+    #: next -- the symptom reproduced on healthy hosts, so the hosts were not the
+    #: problem. Their entries were withdrawn; see data/cloud_bad_machines.json.
     working = cloud.verify_reachable(host, port, alt_host=ip, alt_port=_dp)
+    if not working and not _dp:
+        for _try in range(6):
+            time.sleep(30)
+            try:
+                _inst = {str(i.get("id")): i for i in
+                         json.loads(cloud.vastai("show", "instances", "--raw") or "[]")}
+                _pm = ((_inst.get(str(iid)) or {}).get("ports") or {}).get("22/tcp") or []
+                _dp = int(_pm[0]["HostPort"]) if _pm else None
+            except Exception:                                    # noqa: BLE001
+                _dp = None
+            if not _dp:
+                continue
+            print("  routes      22/tcp mapped late -> direct %s:%s (after %d s)"
+                  % (ip, _dp, 30 * (_try + 1)))
+            working = cloud.verify_reachable(host, port, alt_host=ip, alt_port=_dp)
+            if working:
+                break
     if working:
         w_host, w_port = working
         if (w_host, w_port) != (host, port):
@@ -681,10 +711,11 @@ def execute(b, models, roots, venv, a):
         #: **A BOX THAT NEVER ANSWERS IS A STATE, NOT A RACE.** The runbook's
         #: rule, and the L2 fleet lost 3 of 14 to retrying one. Blocklist the
         #: MACHINE so the next offer query cannot hand it back, then stop.
-        cloud.blocklist(best.get("machine_id"), "ssh silent for 6 min after create")
+        cloud.blocklist(best.get("machine_id"),
+                        "ssh silent for 6 min, and for 3 more with the port map re-read every 30 s -- so not a late 22/tcp mapping")
         if cloud.destroy_verified(iid):
             cloud.state(forget=iid)
-            raise SystemExit("  UNREACHABLE after 6 min -- machine blocklisted, "
+            raise SystemExit("  UNREACHABLE after 9 min (port map re-read) -- blocklisted, "
                              "instance destroyed and CONFIRMED gone.")
         _billing(cloud, iid, "unreachable AND destroy did not take")
         raise SystemExit("  UNREACHABLE and still billing -- see above.")
