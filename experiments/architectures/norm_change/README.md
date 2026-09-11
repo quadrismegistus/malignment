@@ -31,3 +31,9 @@ Taking the top 12 targets by p and asking how often each model's slope has the s
 The roster itself agrees with its own median on 38 to 40 of 45 lineages per target, so 12/12 is the normal value and 6/12 is chance. **The model with no attention scores the maximum.**
 
 And the two dissenters are the two weakest movers. `rwkv-4-7b-pile` and `Falcon-H1-7B-Base` are also the two lowest `|slope|` in the existence table above. Two instruments, built on different constructs, pick out the same two models, and the property they share is not an architecture, it is how little alignment did to them. That is the confound stated once and then confirmed independently.
+
+## Running it
+
+    python run.py
+
+A lookup over `displacement/norm_change/results/dose_lift_v4__levels_en__by_lineage.csv`, which `dose.py --per-lineage` writes. Split out of `architectures/displacement/run.py` on 2026-09-11: the claim was stated here while the code lived next door, and the two also read different populations (45 matched pairs against 50), so one shared output invited quoting them as one table.

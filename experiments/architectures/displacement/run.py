@@ -130,34 +130,11 @@ def existence():
             for r in d["overall"]["per_lineage"]}, d["overall"]
 
 
-def norm_change(bases, table="levels"):
-    """Per-lineage dose slopes for the top targets. A LOOKUP, but a NEW one.
-
-    Until 2026-09-11 `norm_change` wrote only the aggregate -- one row per
-    target, already collapsed over lineages -- so no question could stratify
-    the roster without re-running the whole dose. `dose.py --per-lineage` now
-    writes the vector beside it. The population is the 45 MATCHED pairs, not
-    existence's 50: README.md line 995 says `--match-framed` is not optional
-    here, because raw at n=50 beside framed at n=45 differs partly by which
-    labs ship a chat template. All 12 models below are in the 45.
-
-    Returns (targets, {target: {base: slope}}, {target: roster_median}).
-    """
-    import csv
-    import statistics as st
-    agg = os.path.join(NC, "dose_lift_v4__%s_en.csv" % table)
-    per = os.path.join(NC, "dose_lift_v4__%s_en__by_lineage.csv" % table)
-    if not (os.path.exists(agg) and os.path.exists(per)):
-        return None, None, None
-    rows = list(csv.DictReader(open(agg)))
-    rows.sort(key=lambda r: float(r["p"]))
-    targets = [r["target"] for r in rows[:N_TARGETS]]
-    want, sl = set(targets), {t: {} for t in targets}
-    for r in csv.DictReader(open(per)):
-        if r["target"] in want:
-            sl[r["target"]][r["lineage"].split(">")[0]] = float(r["slope"])
-    med = {t: st.median(sl[t].values()) for t in targets if sl[t]}
-    return targets, sl, med
+#: THE norm_change LOOKUP MOVED to `architectures/norm_change/run.py` on
+#: 2026-09-11. It was computed here while the claim was stated in that folder's
+#: README, which is what one-producer-per-question exists to prevent. It also
+#: reads a DIFFERENT population -- 45 matched pairs against this file's 50 --
+#: so having the two in one output invited quoting them as one table.
 
 
 def magnitude(bases):
@@ -209,31 +186,9 @@ def main():
             at, bl, why = arch(b)
             print("   %-28s %-13s %-7s %+10.6f  %8.0f"
                   % (b.split("/")[-1][:28], at, bl, slopes[b], mags.get(b, 0)))
-    targets, nc, ncmed = norm_change(nondefault)
-    if targets is None:
-        print("\nnorm_change: no per-lineage CSV. Run, from norm_change/:")
-        print("  python dose.py --lift-dose --rule-version 4 --lang en \\")
-        print("      --table all --match-framed --per-lineage --out results")
-    else:
-        print("\n%s\nNORM_CHANGE dose slopes, top %d targets by p (45 matched pairs)"
-              % ("=" * 78, len(targets)))
-        print("%s\nagree = this model's slope has the SAME SIGN as the roster median"
-              % ("=" * 78,))
-        print("\n%-30s %-13s %-7s %s" % ("model", "attn", "block", "agree"))
-        for b in sorted(nondefault, key=lambda x: slopes[x]):
-            at, bl, _ = arch(b)
-            hit = [t for t in targets
-                   if b in nc[t] and nc[t][b] * ncmed[t] > 0]
-            has = [t for t in targets if b in nc[t]]
-            print("%-30s %-13s %-7s %d/%d"
-                  % (b.split("/")[-1][:30], at, bl, len(hit), len(has)))
-        print("\nthe roster itself, for scale:")
-        for t in targets[:6]:
-            v = nc[t]
-            agr = sum(1 for x in v.values() if x * ncmed[t] > 0)
-            print("   %-38s median %+9.5f   %d/%d lineages agree"
-                  % (t[:38], ncmed[t], agr, len(v)))
-
+    print("\nnorm_change by architecture is a SEPARATE QUESTION and a separate")
+    print("population (45 matched pairs, not these 50): see")
+    print("  experiments/architectures/norm_change/run.py")
     print("\nNO BETWEEN-GROUP TEST IS RUN: one pure SSM and one linear-attention")
     print("model in the roster. These are positions in a distribution of 50.")
     print("\nAND THE TWO DISSENTERS ARE THE TWO WEAKEST MOVERS. rwkv-4-7b-pile")
