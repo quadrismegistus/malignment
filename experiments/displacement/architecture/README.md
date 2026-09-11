@@ -122,6 +122,31 @@ AI2 shipped both ladders, so this is askable: `Olmo-3-1025-7B -> Instruct-SFT ->
 
 **Limits.** One architecture contrast, so n=1 and nothing here is a rate over architectures. 200 prompts. Aligned models are read on the RAW edge with no chat template, and this roster has aligned models that emit the assistant frame unbidden, which would inflate a base-to-aligned distance. And the DPO row carries a documented card defect: `attestations.json` flags Olmo-3's DPO card as declaring `Dolci-Think-DPO-7B`, templated from its Think sibling, against a `base_model` of Instruct-SFT -- 150k pairs against 260k. **The SFT row is the one where the data is cleanly the same, and it already carries the result.**
 
+### Is the widening just compounding? RH's objection, tested
+
+RH: "bases are not identical, so even the same alignment data/method is shifting probabilities similarly but ending further from where they started." That null is specific enough to test. Compounding requires the two models to move the SAME WAY at different magnitudes, and it predicts the widening happens ALONG the difference that already existed.
+
+    cos(move_olmo3, move_hybrid), base->SFT      +0.233   IQR [-0.480, +0.734]
+       prompts with cos > 0.9                       12%
+       prompts with cos < 0.5                       58%
+    cos(base gap, difference of the two moves)   -0.112
+    |difference of moves| 0.551 vs base gap 0.281, larger on 80% of prompts
+
+The moves are not parallel, the widening is not along the pre-existing gap, and the two models' responses to identical data differ by more than they differed to begin with.
+
+**The low cosine is not the instrument's noise floor.** The obvious objection is that per-prompt centroids over 50 to 80 words are too noisy to register any true alignment. But the SMALLER step agrees MORE: `SFT->DPO` moves only 0.195 and 0.092 yet scores +0.511, against `base->SFT`'s 0.524 and 0.338 at +0.233. If noise dominated, the smaller-signal step would score lower.
+
+**And the ceiling is measured, not assumed.** One base (`meta-llama/Llama-3.1-8B`), one architecture, five Tulu-3 SFT arms each missing a different data source (`no-math`, `no-persona`, `no-safety`, `no-wildchat`, and the full mixture), 1,910 pair-prompt comparisons:
+
+    same base, DIFFERENT data      median cos  +0.930   cos>0.9 on 57%, <0.5 on 15%
+    same data, DIFFERENT arch      median cos  +0.233   cos>0.9 on 12%, <0.5 on 58%
+
+The percentages are almost exactly swapped. **Dropping an entire data source barely rotates the move; changing what the data is applied to nearly orthogonalizes it.** The direction of an alignment move is set more by what you apply it to than by what you apply.
+
+**WHERE THE OBJECTION SURVIVES, and it is not dismissed.** The five Llama arms share the same BASE WEIGHTS, not merely the same architecture. So the ceiling control holds the starting point exactly rather than approximately, and what is established is "same starting point, parallel moves" against "different starting point, divergent moves". Architecture is why these two start apart, so on this pair the architectural claim and the starting-point claim have the same evidence and cannot be separated.
+
+**The control that would separate them is not in the roster**: same architecture, genuinely different pretraining run, same post-training data, same scale. The nearest available is `Llama-3.1-8B` and `OLMo-2-0425-1B` both under Tulu-3 -- two dense transformers, different pretraining, one recipe -- confounded by 8B against 1B, and it needs the OLMo-2 arm's mixture checked in `attestations.json` rather than inferred from the lab. **Until that is filled in, the defensible sentence is the weaker one: models that start apart respond to identical alignment data in different directions.** Not "architecture mediates alignment."
+
 ## Where the metadata comes from
 
 `roster/models/models.yaml` has no architecture field, and it is AUTHORED (hand-edited, no script writes it), so this folder does not add one. What it does have is `env.profile: ssm`, an environment requirement (mamba-ssm and causal-conv1d kernels) carrying its own `why`, which picks out the SSM and hybrid families exactly. The rest comes from `roster/models/attestations.json`, whose `notes` carry sourced architecture prose at `confidence: high`.
