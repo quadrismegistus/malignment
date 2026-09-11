@@ -31,6 +31,26 @@ The delta's own confound is that ALIGNMENT data varies across labs. That is cont
 
 `displacement` and `norm_change` are weak for the narrower reason: **alignment data is NOT controlled across their 50 lineages.** That is a different criticism with a different remedy -- restrict to shared-mixture lineages -- and it is fixable, where "deltas are the wrong idea" would not have been.
 
+## THE NULL LEDGER: every place architecture has been looked for and not found
+
+**Recorded as data points, because a null is only worth something if the population it was sought in is written down.** Each row is a distinct instrument, not a re-run of one.
+
+    instrument                grain / regime                 n on the thin side      result
+    similarity --arm base     slot probabilities, 50 models  1 pure SSM, 1 RNN       falcon-mamba rank 25/50, MEDIAN of the census
+    similarity --arm aligned  slot probabilities, 50 models  same                    aligned models spread 0.407 -> 0.669, no arch signal
+    similarity --grain page   page vocabulary, 35 lineages   2 SSM, 1 hybrid, Griffin same vendor DIFF block beats same vendor SAME block
+    combination               page drift, 188 words          1 SSM, 1 hybrid, 1 MoE  falcon-mamba 3/6; whole range spanned by dense
+    combination --spread      page drift, 37 models          2 SSM, 1 hybrid, 1 MoE  SSMs at 6/37 and 17/37; both extremes dense
+    combination --score       deepseek surprisal, 13 models  2 SSM, 1 hybrid, 1 MoE  non-dense inside the dense range
+    combination --long        page drift, 1,503 words        1 LINEAGE               attention-free drift LOWER where they overlap,
+                                                                                     and ABSENT above 1,200 words
+    displacement              charge delta, 50 lineages      1 SSM, 1 RNN, hybrids   all displace but rwkv, which is confounded
+    norm_change               norm delta, 45 lineages        same                    falcon-mamba 12/12 with the roster median
+
+**`--long` is the one that should have found something and is the most informative null**, because it is the only instrument in the regime where attention's actual technical advantage -- exact long-range recall -- is exercised. It found nothing, and the reason is worth the row: `falcon-mamba` produces NO generations over 1,200 words, so the regime cannot be entered with the models the roster has. That is a fact about coverage, not about architecture, and it is why the row says what it says rather than "no effect".
+
+**What is NOT in this ledger**, and therefore not tested: needle-in-a-haystack retrieval, many-shot in-context learning, exact copying. That is where the published literature does separate these architectures, and this subject has no instrument in it.
+
 ## The contest
 
 Weatherby's *Language Machines* (2025) locates the poetic function in the transformer's attention mechanism: "the transformer architecture gives us quantitative aboutness" (161-62), and computation and language "share form" as "a demonstrable technical fact". The claim is architecture-specific by construction. He hedges it once, and the hedge is the testable part: attention is "probably just one way, we do not yet know of any others, to make this function computationally manipulable" (155), with a note pointing at Google's Griffin, "RNNs with local attention" (227n26).
