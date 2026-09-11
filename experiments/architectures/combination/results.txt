@@ -1,0 +1,28 @@
+SYNTAGMATIC axis, base arm, corpus=passage, n_sents>=3
+6 models, 147 prompts held by ALL of them, 13287 passages
+
+model                  attn        block   mean_drif mean_pair bits_per_ directedn  ordering
+gemma-2-9b             full        dense      0.4642    0.4987    1.1233    0.1409   -0.0317
+Falcon3-7B-Base        full        dense      0.4953    0.5290    1.3996    0.1195   -0.0323
+falcon-mamba-7b        none        ssm        0.4968    0.5234    1.2990    0.1119   -0.0269
+Falcon-H1-7B-Base      full+ssm    hybrid     0.4969    0.5245    1.3529    0.1305   -0.0272
+Olmo-3-1025-7B         full+local  dense      0.5001    0.5318    1.4019    0.1299   -0.0273
+OLMoE-1B-7B-0125       full        moe        0.5003    0.5365    1.3268    0.1426   -0.0345
+
+DOES THE SPREAD CLEAR THE NOISE IT SITS IN?
+   mean_drift     across 0.0361   within-model IQR 0.0204   ratio 1.77
+   mean_pairwise  across 0.0378   within-model IQR 0.0194   ratio 1.95
+   bits_per_byte  across 0.2786   within-model IQR 0.0943   ratio 2.96
+   directedness   across 0.0307   within-model IQR 0.0325   ratio 0.95   <- BELOW NOISE, not interpreted
+   ordering       across 0.0076   within-model IQR 0.0114   ratio 0.66   <- BELOW NOISE, not interpreted
+
+PAIRED on prompt: how often does each model exceed gemma-2-9b on mean_drift?
+   OLMoE-1B-7B-0125         144/147  (98%)
+   Olmo-3-1025-7B           141/147  (96%)
+   Falcon-H1-7B-Base        139/147  (95%)
+   Falcon3-7B-Base          141/147  (96%)
+   falcon-mamba-7b          143/147  (97%)
+
+THE ONE ROBUST BETWEEN-MODEL EFFECT IS A DENSE FULL-ATTENTION MODEL,
+and the attention-free model sits mid-pack on every metric that
+clears its own noise. The prediction in the docstring failed.
