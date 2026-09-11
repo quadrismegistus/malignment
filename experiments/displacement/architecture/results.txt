@@ -35,9 +35,33 @@ THE MATCHED CONTRASTS
    Olmo-3-1025-7B               full          dense    -0.000159      2045
    OLMoE-1B-7B-0125             full          moe      -0.000388      1686
 
+==============================================================================
+NORM_CHANGE dose slopes, top 12 targets by p (45 matched pairs)
+==============================================================================
+agree = this model's slope has the SAME SIGN as the roster median
+
+model                          attn          block   agree
+Falcon-H1-1.5B-Base            full+ssm      hybrid  12/12
+OLMoE-1B-7B-0125               full          moe     12/12
+Olmo-Hybrid-7B                 full+linear   hybrid  11/12
+Zamba2-7B                      full+ssm      hybrid  9/12
+falcon-mamba-7b                none          ssm     12/12
+recurrentgemma-9b              local+linear  hybrid  11/12
+Falcon-H1-7B-Base              full+ssm      hybrid  7/12
+rwkv-4-7b-pile                 linear        dense   6/12
+
+the roster itself, for scale:
+   warriner_arousal_absz                  median  -0.02194   40/45 lineages agree
+   k_bodily_harm                          median  -0.03693   38/45 lineages agree
+   k_bodily_harm_absz                     median  -0.04093   38/45 lineages agree
+   k_bodily_harm_z                        median  -0.04243   38/45 lineages agree
+   k_vulgarity                            median  -0.01316   38/45 lineages agree
+   k_vulgarity_absz                       median  -0.03872   38/45 lineages agree
+
 NO BETWEEN-GROUP TEST IS RUN: one pure SSM and one linear-attention
 model in the roster. These are positions in a distribution of 50.
 
-norm_change: per-lineage dose slopes are NOT on disk -- its CSVs are
-already aggregated over lineages. Stratifying it needs that producer
-to emit a per-lineage column. NOT DONE HERE.
+AND THE TWO DISSENTERS ARE THE TWO WEAKEST MOVERS. rwkv-4-7b-pile
+(6/12, chance) and Falcon-H1-7B-Base (7/12) are also the two lowest
+|slope| in the existence table above. Agreement with the roster tracks
+how much a model was aligned, not what it is built from.
