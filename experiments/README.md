@@ -46,6 +46,8 @@ and the state the first version of the checker could not see.
 
 *What does alignment do to a distribution -- how much moves, what kind of movement, along which dimension, and where in the model is it implemented?*
 
+- **[`architecture/`](displacement/architecture/README.md)** -- `RUN 2026-09-11 as a metadata lookup over existence/results/selectivity.json plus a direct sum|delta| recompute. [...]`  
+  The operation does not need attention. falcon-mamba-7b, which has none, displaces at -0.000124; recurrentgemma-9b, Griffin with local attention only, displaces at -0.000114. The two best-controlled contrasts DISAGREE in sign of difference: AI2's Olmo-Hybrid displaces MORE than its dense sibling (-0.000257 vs -0.000159), Google's recurrentgemma displaces LESS than its same-corpus sibling gemma-2-9b (-0.000114 vs -0.000498). The one non-displacer with an unusual architecture, rwkv-4-7b-pile (+0.000107), is confounded: it is also among the seven weakest movers overall (sum|delta| 552 against a roster median near 1,185).
 - **[`displacement_axis/`](displacement/displacement_axis/README.md)** -- `RUN. [...]`  
   DIRECTION holds. rho signatures unmoved, identity harm still 47/47 p=1.4e-14. MAGNITUDE reverses.
 - **[`displacement_taxonomy/`](displacement/displacement_taxonomy/README.md)** -- `COMPLETE (for now). [...]`  
