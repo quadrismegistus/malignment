@@ -28,6 +28,29 @@ Every other question in this subject reads the paradigmatic axis: which word goe
 
 **`falcon-mamba-7b`, with no attention of any kind, is third of six on drift and second on cohesion -- inside the dense transformers, not beside them.** The model that stands out is `gemma-2-9b`, and every other model exceeds it on `mean_drift` on 95-98% of the 147 paired prompts. It is a dense transformer with full attention.
 
+## THE LONG-CONTEXT REGIME, AND THE SIGNAL THAT WAS RANGE RESTRICTION
+
+    python run.py --long
+
+**Why this regime exists as a separate question.** Attention's distinctive technical contribution is exact long-range recall: it keeps every past position and can re-read any of them, where a recurrent state keeps a fixed-size summary. The passage corpus is 188 words median -- far too short to exercise that, which is a reason to expect the nulls above rather than to be surprised by them. `national_story` generations are **1,503 words median, eight times longer**, and `story_drift.jsonl` already carries drift on them.
+
+**THE FIRST PASS FOUND A SIGNAL AND IT WAS AN ARTIFACT. Kept, because it is the warning.** Regressing `mean_drift` on `n_words` per model put the attention-free models at the top: `falcon-mamba-7b-instruct` had the HIGHEST slope of 56 models, +0.0866 against a roster median of +0.0007. In the predicted direction, in the regime where the prediction says it should appear, and it survived a first artifact check (short-output models have higher slopes generally at Spearman -0.229, but length-matched dense models sat at +0.0057 against non-dense +0.0224).
+
+Binning by length instead of fitting a slope reverses it:
+
+    length bin      attention-free           has attention          gap
+                 median  mdl  texts      median  mdl  texts
+    200-600      0.4247    2     80      0.4353   43    882      -0.0106
+    600-1200     0.4372    2     52      0.4413   63   1666      -0.0041
+    1200-2000       --     0      0      0.4543   51    926          --
+    2000-9999       --     0      0      0.4535   38    811          --
+
+**Attention-free drift is LOWER wherever the two groups overlap, and the group vanishes above 1,200 words** because `falcon-mamba` writes 557 words median and produces none longer. Its slope had been fitted inside 200-1200 and compared against slopes fitted over 200-2500. **So this corpus does not test long-range coherence for an attention-free model; it tests a model that stops first.**
+
+Two further corrections the first pass needed. The unit is the MODEL, not the text, because one model contributing 900 texts to a bin would otherwise set that bin's median. And the split is by ATTENTION, not by block: the first pass counted `OLMoE` as non-dense when it is a mixture with FULL attention, which took the apparent n from one lineage to three.
+
+**n is one lineage.** `Zamba2-7B` is in `national_story` (23 and 27 raw rows) but is a `full+ssm` hybrid; `recurrentgemma-9b` has ONE base row. The corpus that could have answered this does not contain the models it needs.
+
 ## ON THE CORRECT SURPRISAL AXIS: deepseek, scored here
 
     python run.py --score      # deepseek via malignment.score, cached

@@ -98,6 +98,99 @@ LINEAGES = [
 ]
 
 
+DRIFT = os.path.expanduser("~/malignment-data/national_story/story_drift.jsonl")
+#: uneven bins: the mass sits at 600-1200 and above 2000, and equal-width bins
+#: put 43 models in one and 4 in another.
+LEN_BINS = [(200, 600), (600, 1200), (1200, 2000), (2000, 10 ** 9)]
+
+
+def long_context(a):
+    """Does drift depend on attention WHERE LENGTH COULD EXERCISE IT?
+
+    ## THE SLOPE VERSION OF THIS WAS WRONG AND IS KEPT AS THE WARNING
+
+    The first pass regressed `mean_drift` on `n_words` per model and found the
+    attention-free models at the top: `falcon-mamba-7b-instruct` had the highest
+    slope of 56 models, +0.0866 against a roster median of +0.0007, which read as
+    an attention-free model losing the thread faster as length grows -- in the
+    predicted direction, in the regime where the prediction says it should.
+
+    **It was RANGE RESTRICTION.** `falcon-mamba` writes 557 words median and has
+    ZERO generations over 1,200 words. Its slope was fitted inside 200-1200 and
+    compared against slopes fitted over 200-2500. Binning by length instead, and
+    comparing only where both groups exist, reverses the sign: attention-free
+    drift is LOWER in both bins it occupies.
+
+    ## THE UNIT IS THE MODEL, NOT THE TEXT
+
+    A model contributing 900 texts to a bin would otherwise set that bin's
+    median. Each model reduces to one number per bin, and a model needs 5 texts
+    in a bin to appear in it.
+
+    ## AND SPLIT BY ATTENTION, NOT BY BLOCK
+
+    The first pass grouped by block type and counted `OLMoE` as non-dense. OLMoE
+    is a MIXTURE WITH FULL ATTENTION and cannot bear on this question at all;
+    including it took the apparent n from one lineage to three.
+    """
+    import collections
+    import json
+    import statistics as st
+    from malignment import roster
+    rows = [json.loads(l) for l in open(DRIFT)]
+    r = [x for x in rows if x.get("frame") == "raw"
+         and isinstance(x.get("mean_drift"), (int, float))
+         and (x.get("n_words") or 0) >= LEN_BINS[0][0]]
+
+    def grp(m):
+        at, bl = roster.architecture(m)
+        return None if (at, bl) == ("unknown", "unknown") else (
+            "attention-free" if at == "none" else "has attention")
+    by = collections.defaultdict(lambda: collections.defaultdict(list))
+    for x in r:
+        g = grp(x["model"])
+        if g is None:
+            continue
+        for lo, hi in LEN_BINS:
+            if lo <= x["n_words"] < hi:
+                by[(lo, hi)][x["model"]].append(x["mean_drift"])
+                break
+    print("LONG CONTEXT: national_story, raw frame, %d generations, %d models"
+          % (len(r), len({x["model"] for x in r})))
+    print("median length %d words, against %d for the passage corpus\n"
+          % (st.median([x["n_words"] for x in r]), 188))
+    print("%-12s %22s %22s %9s" % ("length bin", "attention-free", "has attention", "gap"))
+    print("%-12s %9s %5s %6s %9s %5s %6s" % ("", "median", "mdl", "texts",
+                                             "median", "mdl", "texts"))
+    for lo, hi in LEN_BINS:
+        d = by[(lo, hi)]
+        def side(want):
+            g = [(st.median(v), len(v)) for m, v in d.items()
+                 if grp(m) == want and len(v) >= 5]
+            return ((st.median([x for x, _ in g]), len(g), sum(n for _, n in g))
+                    if g else (float("nan"), 0, 0))
+        a1, a2, a3 = side("attention-free")
+        b1, b2, b3 = side("has attention")
+        lab = "%d-%d" % (lo, hi if hi < 10 ** 8 else 9999)
+        print("%-12s %9.4f %5d %6d %9.4f %5d %6d  %+9.4f"
+              % (lab, a1, a2, a3, b1, b2, b3, a1 - b1))
+    print()
+    for lo, hi in LEN_BINS:
+        ms = [m.split("/")[-1] for m, v in by[(lo, hi)].items()
+              if grp(m) == "attention-free" and len(v) >= 5]
+        print("   attention-free in %-10s %s"
+              % ("%d-%d:" % (lo, hi if hi < 10 ** 8 else 9999), ms or "-- none --"))
+    print()
+    print("ATTENTION-FREE DRIFT IS LOWER WHERE THE TWO GROUPS OVERLAP, and the")
+    print("group vanishes above 1,200 words because falcon-mamba does not write")
+    print("that long. So this corpus does NOT test long-range coherence for an")
+    print("attention-free model: it tests a model that stops first.")
+    print()
+    print("n IS ONE LINEAGE. Zamba2-7B is in national_story (23 and 27 raw rows)")
+    print("but is a full+ssm HYBRID, and recurrentgemma-9b has ONE base row.")
+    return 0
+
+
 def score_pool(a):
     """Score this subject's passages through `malignment.score.surprisal`.
 
@@ -256,6 +349,14 @@ def main():
     ap.add_argument("--min-sents", type=int, default=3)
     ap.add_argument("--models", default=None,
                     help="comma-separated override of the declared population")
+    ap.add_argument("--long", action="store_true",
+                    help="the LONG-CONTEXT regime, from national_story rather "
+                         "than the passage corpus. Attention's distinctive "
+                         "technical contribution is exact long-range recall, and "
+                         "the passage corpus is 188 words median -- far too short "
+                         "to exercise it. national_story generations are 1,503 "
+                         "median, eight times longer, and story_drift.jsonl "
+                         "already carries drift on them.")
     ap.add_argument("--spread", action="store_true",
                     help="rank the non-dense models against EVERY model with "
                          "enough coverage, instead of the 6-model paired set. "
@@ -302,6 +403,8 @@ def main():
                          "and no reason at all to carry.")
     a = ap.parse_args()
 
+    if a.long:
+        return long_context(a)
     if a.score:
         return score_pool(a)
     if a.build_pool:

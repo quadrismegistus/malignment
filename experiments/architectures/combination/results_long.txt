@@ -1,0 +1,22 @@
+LONG CONTEXT: national_story, raw frame, 4627 generations, 101 models
+median length 1004 words, against 188 for the passage corpus
+
+length bin           attention-free          has attention       gap
+                median   mdl  texts    median   mdl  texts
+200-600         0.4247     2     80    0.4353    43    882    -0.0106
+600-1200        0.4372     2     52    0.4413    63   1666    -0.0041
+1200-2000          nan     0      0    0.4543    51    926       +nan
+2000-9999          nan     0      0    0.4535    38    811       +nan
+
+   attention-free in 200-600:   ['falcon-mamba-7b-instruct', 'falcon-mamba-7b']
+   attention-free in 600-1200:  ['falcon-mamba-7b-instruct', 'falcon-mamba-7b']
+   attention-free in 1200-2000: -- none --
+   attention-free in 2000-9999: -- none --
+
+ATTENTION-FREE DRIFT IS LOWER WHERE THE TWO GROUPS OVERLAP, and the
+group vanishes above 1,200 words because falcon-mamba does not write
+that long. So this corpus does NOT test long-range coherence for an
+attention-free model: it tests a model that stops first.
+
+n IS ONE LINEAGE. Zamba2-7B is in national_story (23 and 27 raw rows)
+but is a full+ssm HYBRID, and recurrentgemma-9b has ONE base row.
