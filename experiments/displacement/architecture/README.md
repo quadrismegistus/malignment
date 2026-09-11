@@ -76,7 +76,7 @@ And the two dissenters are the two weakest movers. `rwkv-4-7b-pile` and `Falcon-
        gemma-2-9b         full          dense    -0.000498    2261
        recurrentgemma-9b  local+linear  hybrid   -0.000114    1933
 
-    3  ONE VENDOR, THREE BLOCK TYPES (TII, all ~7B)
+    3  ONE VENDOR, FOUR CORPORA (TII, all ~7B) -- WEAK, NOT A CONTROL
        falcon-7b          full          dense    -0.000266    1292
        Falcon3-7B-Base    full          dense    -0.000158    1109
        falcon-mamba-7b    none          ssm      -0.000124     948
@@ -88,7 +88,25 @@ And the two dissenters are the two weakest movers. `rwkv-4-7b-pile` and `Falcon-
 
 Contrast 1 is the best control in the roster and it is not ours. AI2 built Olmo Hybrid as a controlled experiment: "we train Olmo Hybrid, a 7B-parameter model largely comparable to Olmo 3 7B but with the sliding window layers replaced by Gated DeltaNet layers", demonstrating the benefit of hybrid models "in a controlled, large-scale setting" (arXiv:2604.03444, Merrill et al., 3 Apr 2026, quoted in `attestations.json`). Same lab, same three-stage pipeline, same data mix, 5.50T against 5.93T tokens. The declared architectural difference is the attention mechanism and nothing else. **Replacing attention layers with linear-attention layers made displacement stronger, not weaker.**
 
+**Contrast 3 is not the vendor control it looks like, and should not be reported as one.** One lab is not one corpus, and the attestations say so: `falcon-7b` is RefinedWeb-English and RefinedWeb-French; `Falcon3-7B-Base` is a single 14T-token run over "web, code, STEM, and curated high-quality and multilingual data"; `falcon-mamba-7b` is 5.8T with "carefully selected data mixtures"; `Falcon-H1` is different again. Four models from one lab, four corpora. It is weaker than contrast 1 and weaker than contrast 2.
+
 Contrast 2 is attested as sharing a corpus ("RecurrentGemma uses the same training data and data processing as used by the Gemma model family"; "The architecture is Griffin, not Gemma's transformer") and goes the other way by a factor of four.
+
+### A reading that makes the two contrasts agree, POST HOC and unregistered
+
+The two swaps are not the same manipulation in opposite directions. They remove different halves of the attention mechanism.
+
+    contrast 1   Olmo-Hybrid KEEPS full attention and loses its SLIDING-WINDOW
+                 layers (replaced by Gated DeltaNet).   local removed
+                 -0.000159 -> -0.000257                 displacement UP
+    contrast 2   recurrentgemma is Griffin: sliding-window attention plus
+                 RG-LRU, so it has local attention and NO global attention.
+                 -0.000498 -> -0.000114                 global removed
+                                                        displacement DOWN
+
+Read on the local/global axis rather than the presence/absence axis, **both contrasts point the same way**: global attention supports displacement, local attention does not, and removing local attention may even free capacity for it. `falcon-mamba-7b`, which has neither, sits low at -0.000124, and `rwkv-4-7b-pile`, which has neither, is the one non-displacer.
+
+**This is post hoc on two contrasts of one model each, generated after seeing the signs, and it is not a finding.** Across vendors it already breaks: `gemma-2-9b` has full global attention and is the strongest displacer here at -0.000498, while `Olmo-3-1025-7B` also has full global attention and sits at -0.000159, so vendor and corpus swamp it the moment the comparison leaves a matched pair. It is recorded because it is cheap to state, it is falsifiable, and `rhyme_pull` across these same models would test it: if global attention is what carries the operation, the same ordering should appear on the paradigmatic instrument. **It has to be written down before that fleet runs or it is worthless.**
 
 **Taken together these do not support an architecture effect in either direction.** Two same-lab, same-data contrasts with opposite signs, over one observation each, is what no effect plus lineage-level noise looks like. The defensible claim is the negative one: the operation is not confined to full attention, and the sign of the architecture difference is not stable across the two cases where the confounds are actually controlled.
 
