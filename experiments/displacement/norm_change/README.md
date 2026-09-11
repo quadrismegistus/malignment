@@ -928,9 +928,23 @@ reported off v3. v3 spans 153 pairs and 4,482 prompts; v4 spans 132 and 2,985
 while carrying more rows (merged topup cells). A v4 number is not a correction
 of a v3 one.
 
-    dose_lift__*.csv             v3, what the section above reports
-    dose_lift_v4__*.csv          v4 raw, MATCHED to the framed pairs
-    dose_lift_v4_framed__*.csv   v4 framed
+    dose_lift__*.csv                 v3, what the section above reports
+    dose_lift_v4__*.csv              v4 raw, MATCHED to the framed pairs
+    dose_lift_v4_framed__*.csv       v4 framed
+    dose_*__*__by_lineage.csv        the UNAGGREGATED vector, `--per-lineage`
+
+`--per-lineage` (added 2026-09-11) writes a companion file holding one row per
+(target, lineage) instead of the sign-test summary: `dose, table, lang, target,
+lineage, slope, n_prompts, match_framed`. The aggregate above is already
+collapsed over lineages, so without it nothing downstream can split the roster
+by architecture, family or scale without re-running the whole dose, which is
+what `displacement/architecture` needed. Only targets that passed the sign test
+appear, so the two files cover the same targets, and the aggregate is
+byte-identical with and without the flag (checked on all three v4 tables).
+
+`match_framed` is a COLUMN because it is not in the filename and it changes the
+population, 45 pairs against 50. The aggregate's own schema is cited above and
+was left alone.
 
 ### Significant targets, same 45 lineages both columns
 

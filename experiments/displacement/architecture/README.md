@@ -1,9 +1,9 @@
 ---
 subject: displacement
 kind: question
-status: "RUN 2026-09-11 as a metadata lookup over existence/results/selectivity.json plus a direct sum|delta| recompute. Architecture metadata is declared in run.py and sourced per model to roster/models/models.yaml (env.profile) and roster/models/attestations.json. NOT REGISTERED: n is one pure SSM and one linear-attention-only model, and no between-group test is run. norm_change is NOT covered, its CSVs are already aggregated over lineages."
+status: "RUN 2026-09-11 over existence/results/selectivity.json, a direct sum|delta| recompute, and norm_change per-lineage dose slopes. norm_change was covered the same day by adding dose.py --per-lineage, which emits the vector the aggregate CSV had been collapsing. Architecture metadata is declared in run.py and sourced per model to roster/models/models.yaml (env.profile) and roster/models/attestations.json. NOT REGISTERED: n is one pure SSM and one linear-attention-only model, and no between-group test is run."
 question: Does displacement depend on the attention mechanism, or does it occur in models that compute attention differently or not at all?
-headline: "The operation does not need attention. falcon-mamba-7b, which has none, displaces at -0.000124; recurrentgemma-9b, Griffin with local attention only, displaces at -0.000114. The two best-controlled contrasts DISAGREE in sign of difference: AI2's Olmo-Hybrid displaces MORE than its dense sibling (-0.000257 vs -0.000159), Google's recurrentgemma displaces LESS than its same-corpus sibling gemma-2-9b (-0.000114 vs -0.000498). The one non-displacer with an unusual architecture, rwkv-4-7b-pile (+0.000107), is confounded: it is also among the seven weakest movers overall (sum|delta| 552 against a roster median near 1,185)."
+headline: "The operation does not need attention, on BOTH instruments. falcon-mamba-7b, which has none, displaces at -0.000124 and agrees with the roster median on 12 of 12 norm_change dose targets. recurrentgemma-9b, Weatherby's own cited counter-architecture, displaces at -0.000114 and agrees 11/12. The two best-controlled contrasts DISAGREE in sign: AI2's Olmo-Hybrid displaces MORE than its dense sibling (-0.000257 vs -0.000159), Google's recurrentgemma LESS than its same-corpus sibling gemma-2-9b (-0.000114 vs -0.000498). The only two dissenters on norm_change, rwkv-4-7b-pile (6/12, chance) and Falcon-H1-7B-Base (7/12), are also the two lowest |slope| in the existence table, so agreement tracks how much a model was aligned rather than what it is built from."
 ---
 
 # architecture
@@ -46,6 +46,26 @@ Content-selectivity slope from `existence` (negative means higher-charge words l
 
 `rwkv-4-7b-pile` is the only non-displacer among the eight. RWKV-4's WKV operator is time-decaying channel-wise linear attention with no token-token dot product ([A Survey of RWKV](https://arxiv.org/html/2412.14847v1)), so it would be the clean case for an attention requirement if the reading held. It does not hold: rwkv-raven-7b is one of seven non-displacing lineages whose median `sum|delta|` is 878 against 1,265 for a sample of twelve displacers. The seven barely move at all. A model that was hardly aligned cannot show a content-selective alignment effect, and architecture is not identified against alignment strength here.
 
+## The second instrument agrees
+
+`norm_change` asks a different question of the same roster: does the base arm's transgressive lift predict what alignment moves along word norms? Until 2026-09-11 it wrote only the aggregate, one row per target already collapsed over lineages, so no question could stratify it. `dose.py --per-lineage` now writes the vector beside it (the aggregate files are byte-identical under the same flags, checked).
+
+Taking the top 12 targets by p and asking how often each model's slope has the same sign as the roster median:
+
+    model                    attn           block     agree
+    Falcon-H1-1.5B-Base      full+ssm       hybrid    12/12
+    OLMoE-1B-7B-0125         full           moe       12/12
+    falcon-mamba-7b          none           ssm       12/12
+    Olmo-Hybrid-7B           full+linear    hybrid    11/12
+    recurrentgemma-9b        local+linear   hybrid    11/12
+    Zamba2-7B                full+ssm       hybrid     9/12
+    Falcon-H1-7B-Base        full+ssm       hybrid     7/12
+    rwkv-4-7b-pile           linear         dense      6/12
+
+The roster itself agrees with its own median on 38 to 40 of 45 lineages per target, so 12/12 is the normal value and 6/12 is chance. **The model with no attention scores the maximum.**
+
+And the two dissenters are the two weakest movers. `rwkv-4-7b-pile` and `Falcon-H1-7B-Base` are also the two lowest `|slope|` in the existence table above. Two instruments, built on different constructs, pick out the same two models, and the property they share is not an architecture, it is how little alignment did to them. That is the confound stated once and then confirmed independently.
+
 ## The matched contrasts, and why they disagree
 
     1  CONTROLLED BY DESIGN (AI2)
@@ -77,7 +97,7 @@ Contrast 2 is attested as sharing a corpus ("RecurrentGemma uses the same traini
 - **n on the side that matters is one and one.** One pure SSM, one linear-attention-only model. `run.py` runs no between-group test and this README makes no distributional claim about architecture classes. These are positions in a distribution of 50.
 - **Everywhere except contrasts 1 and 2, architecture is confounded with vendor, scale, vintage, and corpus.** That is why those two lead.
 - **Alignment strength varies across the roster by a factor of four** and is not controlled here. The `sum|delta|` column is reported beside every slope for exactly this reason.
-- **`norm_change` is not covered.** Its CSVs (`dose,table,lang,target,med_slope,up,dn,n,p`) are already aggregated over lineages, so stratifying it by architecture requires its producer to emit a per-lineage column. Not done.
+- **`norm_change` runs on 45 pairs, not existence's 50.** Its README (line 995) makes `--match-framed` non-optional, because raw at n=50 beside framed at n=45 differs partly by which labs ship a chat template. All 12 architecture models are in the 45, so nothing here is lost to it, but the two instruments are not quite the same population.
 - **`rate_and_magnitude` writes no results file**, so `sum|delta|` is recomputed directly from `movement_v4` here rather than looked up.
 - `rhyme_pull` would be the sharpest test of the Jakobson claim specifically, since it measures the paradigmatic axis directly rather than charge-selectivity. It is a pilot, not a producer, and was not run here.
 

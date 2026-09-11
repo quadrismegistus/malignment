@@ -323,7 +323,14 @@ def index_by_scale(tbl, lang):
 
 
 def dose_response(idx, dose_scale, target_scale):
-    """{lineage: slope of (aligned-base on target) on (base level of dose)}."""
+    """{lineage: (slope, n_prompts)} for (aligned-base on target) ~ base dose.
+
+    Returns the PER-LINEAGE slopes, not a summary. `report` collapses them to
+    the sign test; `--per-lineage` writes them out unaggregated so a downstream
+    question can stratify the roster (by architecture, family, scale) without
+    re-running the whole dose. The aggregate CSV cannot be stratified after the
+    fact -- that is why this returns the vector.
+    """
     by = collections.defaultdict(lambda: ([], []))
     doses = {k: v[0] for k, v in idx.get(dose_scale, {}).items()}
     for (lin, pr), (b, a) in idx.get(target_scale, {}).items():
@@ -338,7 +345,7 @@ def dose_response(idx, dose_scale, target_scale):
             continue
         s = slope(xs, ys)
         if s is not None:
-            out[lin] = s
+            out[lin] = (s, len(xs))
     return out
 
 
@@ -492,6 +499,10 @@ def main(argv=None):
                          "lexical numbers are what README.md reports and a silently "
                          "replaced file is how a README comes to describe results "
                          "that no longer exist.")
+    ap.add_argument("--per-lineage", action="store_true",
+                    help="also write dose_*__by_lineage.csv: one row per "
+                         "(target, lineage), unaggregated. Needed by any "
+                         "question that stratifies the roster.")
     ap.add_argument("--magnitude", action="store_true",
                     help="does MORE MASS MOVE where the base is transgressive?")
     a = ap.parse_args(argv)
@@ -584,12 +595,16 @@ def main(argv=None):
         for lang in langs:
             idx = index_by_scale(tbl, lang)
             scales = sorted(set(idx) - {a.dose})
-            rows = []
+            rows, per_lin = [], []
             for sc in scales:
-                sl = dose_response(idx, a.dose, sc)
+                full = dose_response(idx, a.dose, sc)
+                sl = {k: v[0] for k, v in full.items()}
                 r = report(sc, sl)
                 if r:
                     rows.append(r)
+                    for lin_ in sorted(full):
+                        s_, n_ = full[lin_]
+                        per_lin.append((sc, lin_, s_, n_))
             rows.sort()
             print()
             print("=" * 78)
@@ -619,6 +634,29 @@ def main(argv=None):
                     for p_, sc_, med_, up_, dn_, n_ in rows:
                         w_.writerow([a.dose, name, lang, sc_, med_, up_, dn_, n_, p_])
                 print("   -> %s  (%d targets, FULL table)" % (os.path.basename(fn), len(rows)))
+                #: THE UNAGGREGATED VECTOR. The file above is already collapsed
+                #: over lineages, so nothing downstream can split the roster by
+                #: architecture, family or scale without re-running the dose.
+                #: Only the targets that passed `report` appear, so the two files
+                #: cover the same targets.
+                if a.per_lineage:
+                    fl = os.path.join(d_, "dose_%s%s__%s_%s__by_lineage.csv"
+                                      % (a.dose, _SFX["v"], name, lang))
+                    with open(fl, "w", newline="") as _fh:
+                        w_ = _c.writer(_fh)
+                        #: match_framed is a column because it is NOT in the
+                        #: filename and it changes the POPULATION (45 pairs vs
+                        #: 50). The aggregate CSV's schema is cited in README.md
+                        #: and is left alone; this file is new, so it can be
+                        #: self-describing from the start.
+                        w_.writerow(["dose", "table", "lang", "target",
+                                     "lineage", "slope", "n_prompts",
+                                     "match_framed"])
+                        for sc_, lin_, s_, n_ in per_lin:
+                            w_.writerow([a.dose, name, lang, sc_, lin_, s_, n_,
+                                         int(_MATCH["v"])])
+                    print("   -> %s  (%d lineage rows)"
+                          % (os.path.basename(fl), len(per_lin)))
     print()
     print("A POSITIVE slope means: the more transgressive mass the BASE arm put")
     print("at a prompt, the MORE that target rose under alignment. The dose is")
