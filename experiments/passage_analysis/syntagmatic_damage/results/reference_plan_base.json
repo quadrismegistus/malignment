@@ -1,0 +1,12 @@
+{
+ "n": 41666,
+ "words": 7158054,
+ "per_pair": 1000,
+ "seed": 20260823,
+ "by_role": {
+  "faller": 10440,
+  "riser": 10425,
+  "matched": 10423,
+  "riser_matched": 10378
+ }
+}
