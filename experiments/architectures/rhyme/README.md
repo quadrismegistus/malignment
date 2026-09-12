@@ -1,7 +1,7 @@
 ---
 subject: architectures
 kind: question
-status: "RUN 2026-09-12. @malign's fleet: 94 models, 5,325,818 distinct closure keys over 1,786 prompts, all three matched contrasts complete on BOTH arms, ~$19.70. Analysis producer `run.py` written here; `called` slot, 177 of 180 cells usable after dropping cells whose target and non-partner rime classes overlap. THE REGISTERED PREDICTION FAILED AS WRITTEN and the ranking it asked for was confounded -- see below; that is a defect in the pre-commitment, not a result."
+status: "RUN 2026-09-12. @malign's fleet: 94 models, 5,325,818 distinct closure keys over 1,786 prompts, all three matched contrasts complete on BOTH arms, ~$19.70. 48 of 50 endpoint lineages covered -- the 32B and 70B arms are uncovered BY CHOICE (24 GB cards; big80/twogpu exist) and all five missing checkpoints are DENSE, so no claim here needs them. Analysis producer `run.py` written here; `called` slot, 177 of 180 cells usable, 41 lineages with both arms clearing --min-cells. THE REGISTERED PREDICTION FAILED AS WRITTEN and the ranking it asked for was confounded -- that is a defect in the pre-commitment, not a result."
 question: Does rhyme pull -- probability mass on the scheme partner's rime class -- depend on the attention mechanism?
 headline: "ON THE ONE INSTRUMENT THAT READS A FORMAL EQUIVALENCE CLASS, MODELS WITHOUT ATTENTION ARE NOT DEFICIENT. Base-arm rhyme pull: granite-3.0-8b 0.086, Mistral-7B 0.071, Zamba2-7B (hybrid) 0.067, gemma-2-9b 0.066, falcon-mamba-7b (NO ATTENTION) 0.031 -- which exceeds Olmo-Hybrid 0.026 and Olmo-3 0.015, both of which have attention. And under alignment falcon-mamba shows the LARGEST relative GAIN of any lineage clearing the floor (+1.448), against a fleet where most models lose rhyme pull. The registered prediction -- that the Olmo-3/Olmo-Hybrid pair would show the smallest |delta| because it holds global attention constant -- FAILS literally (ranks 30 and 35 of 41), and the |delta| ranking it asked for is confounded by baseline, since a model with no rhyme pull has nothing to lose. Scale-free, the pair sits at -0.500 and -0.520, adjacent; that is the prediction's substance but it is a POST HOC repair of a statistic chosen before the data existed."
 ---
@@ -24,6 +24,19 @@ headline: "ON THE ONE INSTRUMENT THAT READS A FORMAL EQUIVALENCE CLASS, MODELS W
     Falcon-H1-7B-Base        full+ssm/hybrid     0.00803
 
 **`falcon-mamba-7b`, which computes no attention of any kind, has MORE rhyme pull than `Olmo-3-1025-7B` and `Olmo-Hybrid-7B`, both of which have it.** A Mamba-attention hybrid sits third of the whole fleet. This is the instrument built to read Jakobson's axis of selection in the one form the poetic function names, on IPA rime keys with no encoder in the path, and it does not separate the architectures.
+
+**Why the rime keys could be revised without re-renting anything, and whose call that was.** The classes are applied OFFLINE, on the Mac, with the paper-pinned `prosodic`; nothing phonological ran on a box. That split is **RH's** -- "don't run prosodic on the cloud" -- and it has already paid once: a v1 rime key fell back to syllable SPELLING and shattered /ei/ into ay/ey/eigh, and fixing it cost an afternoon rather than a re-rent. The fleet stores the PRIMITIVE (`p_close`, `k_rider`, `n_scored`) and not a ratio, which is @malign's, and is why `line_closure`, `rhyme_given_closure` and `close_given_class` are all derivable here without touching a GPU.
+
+### The population, stated precisely, because three numbers are in play
+
+    94 models        in the closure table
+    48 of 50         endpoint lineages covered by the fleet
+    41 lineages      enter the delta table here: both arms present AND
+                     clearing --min-cells
+
+**The two uncovered lineages are @malign's choice and not a limit**: `Olmo-3-1125-32B` and `Llama-3.1-70B` need 64.5 and 141.1 GB and he ran 24 GB cards; `big80`/`twogpu` profiles exist and it is a few dollars. `internlm2` failed at load on a destroyed box and its reason is unrecorded.
+
+**No claim here needs them.** All five missing checkpoints are DENSE -- `Olmo-3-1125-32B` and `Olmo-3.1-32B-Instruct` are `full+local/dense`, both Llama-3.1-70B arms are `full/dense`, `internlm2-base-7b` is `full/dense`. They would extend the dense range and add nothing to the architecture contrast, which turns on whether attention-free and hybrid models are deficient. If a LATER claim wants the full 50 for a different reason -- a scale effect, say -- the dollars are available and the finding here does not wait on them.
 
 ### The registered prediction failed, and the failure is partly mine
 
