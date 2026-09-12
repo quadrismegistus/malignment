@@ -1,0 +1,187 @@
+slot=called: 180 cells, 177 usable after dropping overlapping classes
+1219040 (model, prompt, word) rows, 94 models
+
+model                          attn          block         pull      given  cells
+gemma-2-9b-it                  full          dense      0.15123     0.5058    177  aligned
+granite-3.0-8b-base            full          dense      0.08612     0.1925    177  base
+falcon-mamba-7b-instruct       none          ssm        0.07585     0.1281    177  aligned
+Mistral-7B-v0.1                full          dense      0.07070     0.1339    177  base
+Zamba2-7B                      full+ssm      hybrid     0.06733     0.0897    177  base
+gemma-2-9b                     full          dense      0.06630     0.1799    177  base
+granite-3.0-8b-instruct        full          dense      0.06259     0.1523    177  aligned
+Zamba2-7B-Instruct             full+ssm      hybrid     0.05926     0.1082    177  aligned
+Qwen3-8B-Base                  full          dense      0.03791     0.0909    177  base
+OLMoE-1B-7B-0125               full          moe        0.03287     0.0850    176  base
+falcon-mamba-7b                none          ssm        0.03098     0.1048    177  base
+OLMoE-1B-7B-0125-Instruct      full          moe        0.02710     0.0624    176  aligned
+Olmo-Hybrid-7B                 full+linear   hybrid     0.02586     0.0642    177  base
+neo_7b                         full          dense      0.02540     0.0319    177  base
+Llama-3.1-8B-Instruct          full          dense      0.02500     0.0755    177  aligned
+Llama-3.1-8B                   full          dense      0.02355     0.0742    177  base
+kanana-1.5-8b-base             full          dense      0.02246     0.0677    177  base
+jais-family-6p7b               full          dense      0.02220     0.0398    177  base
+deepseek-llm-7b-chat           full          dense      0.02062     0.0432    177  aligned
+deepseek-llm-7b-base           full          dense      0.01871     0.0384    177  base
+Mistral-7B-Instruct-v0.1       full          dense      0.01867     0.0503    177  aligned
+glm-4-9b-hf                    full          dense      0.01855     0.0304    177  base
+Olmo-3-1025-7B                 full+local    dense      0.01549     0.0538    177  base
+SmolLM3-3B-Base                full          dense      0.01380     0.0480    177  base
+Olmo-Hybrid-Instruct-DPO-7B    full+linear   hybrid     0.01243     0.0488    177  aligned
+falcon-7b                      full          dense      0.01199     0.0449    177  base
+kanana-1.5-8b-instruct-2505    full          dense      0.01124     0.0846    177  aligned
+Baichuan2-7B-Base              full          dense      0.01066     0.0329    177  base
+SmolLM3-3B                     full          dense      0.01043     0.0286    177  aligned
+Yi-1.5-9B                      full          dense      0.00992     0.0253    177  base
+Qwen2.5-7B                     full          dense      0.00948     0.0342    177  base
+Qwen2.5-7B-Instruct            full          dense      0.00913     0.0231    177  aligned
+neo_7b_instruct_v0.1           full          dense      0.00805     0.0215    177  aligned
+Falcon-H1-7B-Base              full+ssm      hybrid     0.00803     0.0305    177  base
+llama-7b                       full          dense      0.00781     0.0129    177  base
+jais-family-6p7b-chat          full          dense      0.00780     0.0113    177  aligned
+Teuken-7B-base-v0.6            full          dense      0.00776     0.0232    177  base
+Olmo-3-7B-Instruct             full+local    dense      0.00775     0.0139    177  aligned
+Baichuan2-7B-Chat              full          dense      0.00771     0.0171    177  aligned
+Teuken-7B-instruct-v0.6        full          dense      0.00753     0.0118    177  aligned
+salamandra-7b-instruct         full          dense      0.00752     0.0172    177  aligned
+salamandra-7b                  full          dense      0.00638     0.0158    177  base
+OLMo-2-0425-1B                 full          dense      0.00612     0.0286    177  base
+Falcon3-7B-Base                full          dense      0.00593     0.0244    177  base
+Falcon-H1-7B-Instruct          full+ssm      hybrid     0.00557     0.0089    177  aligned
+Qwen3-8B                       full          dense      0.00524     0.0273    177  aligned
+Lucie-7B                       full          dense      0.00499     0.0238    177  base
+Yi-1.5-9B-Chat                 full          dense      0.00453     0.0133    177  aligned
+rwkv-raven-7b                  linear        rnn        0.00446     0.0080    177  aligned
+kanana-2-3b-instruct           full          dense      0.00438     0.0177    177  aligned
+Amber                          full          dense      0.00438     0.0158    177  base
+kanana-2-3b-base               full          dense      0.00416     0.0157    177  base
+rwkv-4-7b-pile                 linear        rnn        0.00387     0.0080    177  base
+llm-jp-3-7.2b                  full          dense      0.00366     0.0104    177  base
+stablelm-2-1_6b                full          dense      0.00353     0.0187    177  base
+pythia-6.9b                    full          dense      0.00325     0.0118    177  base
+mpt-7b                         full          dense      0.00318     0.0069    177  base
+Falcon3-7B-Instruct            full          dense      0.00314     0.0091    177  aligned
+Tanuki-8B-dpo-v1.0             full          dense      0.00311     0.0062    177  aligned
+Tanuki-8B-base-v1.0            full          dense      0.00307     0.0062    177  base
+mpt-7b-instruct                full          dense      0.00303     0.0072    177  aligned
+falcon-7b-instruct             full          dense      0.00288     0.0149    177  aligned
+OLMo-2-0425-1B-Instruct        full          dense      0.00276     0.0077    177  aligned
+pythia-2.8b                    full          dense      0.00275     0.0079    177  base
+RedPajama-INCITE-Base-7B-v0.1  full          dense      0.00272     0.0064    177  base
+TinyLlama-1.1B-Chat-v1.0       full          dense      0.00268     0.0080    177  aligned
+AmberSafe                      full          dense      0.00268     0.0093    177  aligned
+bloomz-7b1                     full          dense      0.00259     0.0064    177  aligned
+archangel_sft-dpo_pythia2-8b   full          dense      0.00249     0.0063    177  aligned
+bloom-7b1                      full          dense      0.00248     0.0116    177  base
+llm-jp-3-7.2b-instruct3        full          dense      0.00245     0.0087    177  aligned
+CroissantLLMBase               full          dense      0.00230     0.0079    175  base
+eleuther-pythia6.9b-hh-dpo     full          dense      0.00230     0.0078    177  aligned
+TinyLlama-1.1B-intermediate-st full          dense      0.00222     0.0014    177  base
+SmolLM2-360M                   full          dense      0.00214     0.0038    177  base
+stablelm-2-1_6b-chat           full          dense      0.00201     0.0056    177  aligned
+CT-LLM-Base                    full          dense      0.00187     0.0042    177  base
+MiniCPM5-1B-Base               full          dense      0.00163     0.0028    177  base
+Falcon-H1-1.5B-Base            full+ssm      hybrid     0.00161     0.0097    177  base
+Lucie-7B-Instruct-v1.1         full          dense      0.00155     0.0153    177  aligned
+Qwen2.5-0.5B                   full          dense      0.00152     0.0010    177  base
+beaver-7b-v1.0                 full          dense      0.00147     0.0072    177  aligned
+MiniCPM5-1B                    full          dense      0.00124     0.0018    177  aligned
+AquilaChat2-7B                 full          dense      0.00122     0.0064    177  aligned
+Falcon-H1-1.5B-Instruct        full+ssm      hybrid     0.00113     0.0008    177  aligned
+CroissantLLMChat-v0.1          full          dense      0.00108     0.0004    175  aligned
+recurrentgemma-9b-it           local+linear  hybrid     0.00106     0.0066    177  aligned
+SmolLM2-360M-Instruct          full          dense      0.00102     0.0056    177  aligned
+recurrentgemma-9b              local+linear  hybrid     0.00096     0.0123    177  base
+Qwen2.5-0.5B-Instruct          full          dense      0.00084     0.0001    177  aligned
+glm-4-9b-chat-hf               full          dense      0.00002     0.0002    177  aligned
+CT-LLM-SFT-DPO                 full          dense      0.00000     0.0003    177  aligned
+RedPajama-INCITE-7B-Chat       full          dense      0.00000     0.0000    177  aligned
+Aquila2-7B                     full          dense      0.00000     0.0000    177  base
+
+THE REGISTERED CONTRAST, base -> aligned DELTA per lineage:
+lineage                            architecture           base    aligned      delta
+Yi-1.5-9B                          full/dense          0.00992    0.00453   -0.00540
+Aquila2-7B                         full/dense          0.00000    0.00122   +0.00122
+salamandra-7b                      full/dense          0.00638    0.00752   +0.00113
+pythia-2.8b                        full/dense          0.00275    0.00249   -0.00027
+pythia-6.9b                        full/dense          0.00325    0.00230   -0.00096
+SmolLM2-360M                       full/dense          0.00214    0.00102   -0.00112
+SmolLM3-3B-Base                    full/dense          0.01380    0.01043   -0.00337
+Amber                              full/dense          0.00438    0.00268   -0.00171
+Lucie-7B                           full/dense          0.00499    0.00155   -0.00344
+Qwen2.5-0.5B                       full/dense          0.00152    0.00084   -0.00068
+Qwen2.5-7B                         full/dense          0.00948    0.00913   -0.00035
+Qwen3-8B-Base                      full/dense          0.03791    0.00524   -0.03267
+rwkv-4-7b-pile                     linear/rnn          0.00387    0.00446   +0.00059
+TinyLlama-1.1B-intermediate-step-1 full/dense          0.00222    0.00268   +0.00045
+Zamba2-7B                          full+ssm/hybrid     0.06733    0.05926   -0.00807
+OLMo-2-0425-1B                     full/dense          0.00612    0.00276   -0.00336
+OLMoE-1B-7B-0125                   full/moe            0.03287    0.02710   -0.00577
+Olmo-3-1025-7B                     full+local/dense    0.01549    0.00775   -0.00774
+Olmo-Hybrid-7B                     full+linear/hybrid    0.02586    0.01243   -0.01343
+Baichuan2-7B-Base                  full/dense          0.01066    0.00771   -0.00295
+bloom-7b1                          full/dense          0.00248    0.00259   +0.00010
+CroissantLLMBase                   full/dense          0.00230    0.00108   -0.00122
+deepseek-llm-7b-base               full/dense          0.01871    0.02062   +0.00191
+mpt-7b                             full/dense          0.00318    0.00303   -0.00015
+gemma-2-9b                         full/dense          0.06630    0.15123   +0.08492
+recurrentgemma-9b                  local+linear/hybrid    0.00096    0.00106   +0.00011
+llama-7b                           full/dense          0.00781    0.00147   -0.00634
+granite-3.0-8b-base                full/dense          0.08612    0.06259   -0.02353
+jais-family-6p7b                   full/dense          0.02220    0.00780   -0.01440
+kanana-1.5-8b-base                 full/dense          0.02246    0.01124   -0.01122
+kanana-2-3b-base                   full/dense          0.00416    0.00438   +0.00022
+llm-jp-3-7.2b                      full/dense          0.00366    0.00245   -0.00120
+CT-LLM-Base                        full/dense          0.00187    0.00000   -0.00187
+neo_7b                             full/dense          0.02540    0.00805   -0.01735
+Llama-3.1-8B                       full/dense          0.02355    0.02500   +0.00145
+Mistral-7B-v0.1                    full/dense          0.07070    0.01867   -0.05204
+Teuken-7B-base-v0.6                full/dense          0.00776    0.00753   -0.00024
+MiniCPM5-1B-Base                   full/dense          0.00163    0.00124   -0.00039
+stablelm-2-1_6b                    full/dense          0.00353    0.00201   -0.00152
+Tanuki-8B-base-v1.0                full/dense          0.00307    0.00311   +0.00004
+Falcon-H1-1.5B-Base                full+ssm/hybrid     0.00161    0.00113   -0.00048
+Falcon-H1-7B-Base                  full+ssm/hybrid     0.00803    0.00557   -0.00246
+Falcon3-7B-Base                    full/dense          0.00593    0.00314   -0.00279
+falcon-7b                          full/dense          0.01199    0.00288   -0.00911
+falcon-mamba-7b                    none/ssm            0.03098    0.07585   +0.04487
+RedPajama-INCITE-Base-7B-v0.1      full/dense          0.00272    0.00000   -0.00272
+glm-4-9b-hf                        full/dense          0.01855    0.00002   -0.01853
+
+THE PRE-COMMITMENT, READ LITERALLY. It said Olmo-3/Olmo-Hybrid should
+show the SMALLEST |delta| of any contrast. Smallest first:
+   Tanuki-8B-base-v1.0              full/dense       +0.00004
+   bloom-7b1                        full/dense       +0.00010
+   recurrentgemma-9b                local+linear/hybrid +0.00011
+   mpt-7b                           full/dense       -0.00015
+   kanana-2-3b-base                 full/dense       +0.00022
+   Teuken-7B-base-v0.6              full/dense       -0.00024
+   ... Olmo-3-1025-7B               rank 35 of 47
+   ... Olmo-Hybrid-7B               rank 39 of 47
+
+**IT FAILS, AND THE RANKING IT ASKED FOR IS CONFOUNDED.** |delta|
+tracks BASELINE: a model with no rhyme pull has nothing to lose, so
+the top of that list is models whose base pull is ~0.002-0.003.
+Ranking by raw |delta| rewards having no rhyme pull at all. That is
+a defect in the pre-commitment as written, not a result.
+
+POST HOC REPAIR, LABELLED AS ONE: relative delta, and only for
+lineages whose BASE pull clears 0.010, so the ratio has a denominator.
+   lineage                          architecture      rel delta       base
+   Llama-3.1-8B                     full/dense           +0.061    0.02355
+   deepseek-llm-7b-base             full/dense           +0.102    0.01871
+   Zamba2-7B                        full+ssm/hybrid      -0.120    0.06733
+   OLMoE-1B-7B-0125                 full/moe             -0.175    0.03287
+   SmolLM3-3B-Base                  full/dense           -0.244    0.01380
+   granite-3.0-8b-base              full/dense           -0.273    0.08612
+   Baichuan2-7B-Base                full/dense           -0.277    0.01066
+   kanana-1.5-8b-base               full/dense           -0.500    0.02246
+   Olmo-3-1025-7B                   full+local/dense     -0.500    0.01549
+   Olmo-Hybrid-7B                   full+linear/hybrid     -0.520    0.02586
+   jais-family-6p7b                 full/dense           -0.649    0.02220
+   neo_7b                           full/dense           -0.683    0.02540
+   Mistral-7B-v0.1                  full/dense           -0.736    0.07070
+   falcon-7b                        full/dense           -0.760    0.01199
+   Qwen3-8B-Base                    full/dense           -0.862    0.03791
+   glm-4-9b-hf                      full/dense           -0.999    0.01855
+   gemma-2-9b                       full/dense           +1.281    0.06630
+   falcon-mamba-7b                  none/ssm             +1.448    0.03098
