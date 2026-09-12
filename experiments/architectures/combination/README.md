@@ -1,9 +1,9 @@
 ---
 subject: architectures
 kind: question
-status: "RUN 2026-09-11 on the BLT axis, which is SUPERSEDED -- deepseek is the campaign's surprisal reference and covers only 3 of this subject's models, so the fluency-orthogonal drift_residual that would settle this question cannot be computed for the architectures it is about. ENGLISH ONLY (script=en; the 48 zh rows in this slice go through stanza-zh segmentation and the zh bge variant, so a sentence is not the same unit -- excluding them moved nothing, falcon-mamba stayed 17/37 and the fluency correlation went +0.734 to +0.726). Mined from ~/malignment-data/jakobson_space/passages_std.parquet (358,633 passages, 92 models). No generation, no GPU. Base arm, corpus=passage, n_sents>=3, 6 models paired on 147 prompts held by all of them. NOT REGISTERED. The declared population is 6 models because the parquet covers only three non-dense architectures; recurrentgemma-9b is present but UNUSABLE at 38 rows and a median of one sentence."
+status: "RUN 2026-09-11/12, five probes, all producers in run.py. (1) page drift over the 188-word passage corpus, 6 models paired then 37 ranked; (2) --score, deepseek surprisal scored HERE for 13 models because the jakobson deepseek axis reaches only 3 of this subject's models; (3) --long, the 1,503-word national_story regime; (4) --names, character-name carryover; (5) --repair, recovery after a forced word, over the 41,666 base-arm rows scored by syntagmatic_damage/reference.py --arm base. ENGLISH ONLY throughout. NOT REGISTERED, and n on the attention-free side is 1-2 models in every probe."
 question: Does the syntagmatic axis -- how the chain coheres from sentence to sentence -- depend on the attention mechanism?
-headline: "NO, AND THIS IS THE ONE THAT SHOULD HAVE GONE THE OTHER WAY. Ranked against the WHOLE spread (37 base models, 181 common-core prompts): the two pure-SSM models sit at 6/37 and 17/37 on sentence drift and 14/37 and 8/37 on cohesion, and BOTH ENDS of the range are dense full-attention transformers (gemma-2-9b lowest at 1/37, Amber highest at 37/37). Attention is a COMBINATION mechanism, so the syntagmatic axis is the one place this subject had a reason to expect a difference; the paradigmatic nulls elsewhere are cheap because selection lives in the softmax, which every model has. falcon-mamba-7b, computing no attention at all, sits mid-pack on every metric that clears its own noise (mean_drift 3/6, mean_pairwise 2/6, bits_per_byte 2/6). The one robust between-model effect is gemma-2-9b, a DENSE full-attention transformer, which every other model exceeds on mean_drift on 95-98% of 147 paired prompts. Two of the five metrics sit BELOW their own noise floor and are not interpreted."
+headline: "NO, ON FIVE INSTRUMENTS, AND TWO OF THEM SHOULD HAVE GONE THE OTHER WAY. Attention is a COMBINATION mechanism and selection lives in the softmax that every model has, so the syntagmatic axis is where this subject had a reason to expect a difference. Drift: falcon-mamba 17/37, both ends of the range dense full-attention transformers. deepseek surprisal: non-dense inside the dense range. The two sharpest probes carried PREDICTIONS WRITTEN BEFORE THE RUN and both failed -- character-name carryover, which should expose a compressed state losing arbitrary high-entropy detail, is +0.000 in the only length bin with usable n; and recovery after a forced word, which should cost an attention-free model more ADJACENT to the imposition, instead runs NEGATIVE and largest FAR from it, the opposite shape. Each null is bounded in the text: 1-2 attention-free models, impositions of median q 0.0092 that may be a nudge rather than a perturbation, and a long-context regime the roster cannot enter."
 ---
 
 # combination
@@ -238,8 +238,20 @@ Flat across architectures, with the same exception: `falcon-mamba-7b-instruct` a
 
 ## Running it
 
-    python run.py
-    python run.py --corpus f11_l2 --min-sents 2
-    python run.py --models a,b,c
+    python run.py                       page drift, the declared 6-model paired set
+    python run.py --spread              the same, ranked against all 37 models
+    python run.py --long                the 1,503-word national_story regime
+    python run.py --names               character-name carryover
+    python run.py --repair              recovery after a forced word
+    python run.py --score               deepseek surprisal, via the shared store
+    python run.py --build-pool OUT      write the scoring input and stop
 
-Pure read of an existing parquet.
+    --corpus --script --arm --min-sents --min-words --min-prompts --models
+    --per-model --prefix                population and threshold controls
+
+Everything but `--score` is a read. `--score` loads deepseek, and is idempotent:
+the store is content-addressed, so a second run scores nothing.
+
+**`--repair` depends on data produced elsewhere**: the 41,666 base-arm rows from
+`passage_analysis/syntagmatic_damage/reference.py --arm base`, which was run for
+THIS question -- the 2026-08 deepseek pass had covered the aligned arm only.
