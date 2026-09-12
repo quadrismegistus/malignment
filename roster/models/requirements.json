@@ -35,7 +35,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 3
+   "n_observations": 4
   },
   {
    "model": "01-ai/Yi-1.5-9B-Chat",
@@ -62,7 +62,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 4
+   "n_observations": 5
   },
   {
    "model": "Alchan/mpt-7b-chat",
@@ -170,7 +170,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 3
+   "n_observations": 4
   },
   {
    "model": "BAAI/AquilaChat2-7B",
@@ -197,7 +197,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 2
+   "n_observations": 3
   },
   {
    "model": "BSC-LT/salamandra-7b",
@@ -224,7 +224,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 3
+   "n_observations": 4
   },
   {
    "model": "BSC-LT/salamandra-7b-instruct",
@@ -251,7 +251,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 3
+   "n_observations": 4
   },
   {
    "model": "ContextualAI/archangel_sft-dpo_pythia2-8b",
@@ -278,7 +278,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 3
+   "n_observations": 4
   },
   {
    "model": "ContextualAI/archangel_sft-kto_pythia2-8b",
@@ -413,7 +413,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 3
+   "n_observations": 4
   },
   {
    "model": "EleutherAI/pythia-6.9b",
@@ -440,7 +440,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 3
+   "n_observations": 4
   },
   {
    "model": "HuggingFaceH4/mistral-7b-sft-beta",
@@ -548,7 +548,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 4
+   "n_observations": 5
   },
   {
    "model": "HuggingFaceTB/SmolLM3-3B",
@@ -575,7 +575,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 4
+   "n_observations": 5
   },
   {
    "model": "HuggingFaceTB/SmolLM3-3B-Base",
@@ -602,7 +602,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 3
+   "n_observations": 4
   },
   {
    "model": "HuggingFaceTB/SmolLM3-3B-checkpoints",
@@ -683,7 +683,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 3
+   "n_observations": 4
   },
   {
    "model": "LLM360/AmberChat",
@@ -737,7 +737,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 7
+   "n_observations": 8
   },
   {
    "model": "NousResearch/Hermes-3-Llama-3.1-8B",
@@ -818,7 +818,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 3
+   "n_observations": 4
   },
   {
    "model": "OpenLLM-France/Lucie-7B-Instruct-v1.1",
@@ -845,7 +845,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 3
+   "n_observations": 4
   },
   {
    "model": "PKU-Alignment/alpaca-7b-reproduced",
@@ -899,7 +899,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 5
+   "n_observations": 6
   },
   {
    "model": "Qwen/Qwen2.5-0.5B",
@@ -926,7 +926,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 4
+   "n_observations": 5
   },
   {
    "model": "Qwen/Qwen2.5-0.5B-Instruct",
@@ -953,7 +953,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 3
+   "n_observations": 4
   },
   {
    "model": "Qwen/Qwen2.5-7B",
@@ -980,7 +980,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 3
+   "n_observations": 4
   },
   {
    "model": "Qwen/Qwen2.5-7B-Instruct",
@@ -1007,7 +1007,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 3
+   "n_observations": 4
   },
   {
    "model": "Qwen/Qwen3-8B",
@@ -1034,7 +1034,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 3
+   "n_observations": 4
   },
   {
    "model": "Qwen/Qwen3-8B-Base",
@@ -1061,7 +1061,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 3
+   "n_observations": 4
   },
   {
    "model": "RWKV/rwkv-4-7b-pile",
@@ -1088,7 +1088,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 4
+   "n_observations": 5
   },
   {
    "model": "RWKV/rwkv-raven-7b",
@@ -1115,7 +1115,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 5
+   "n_observations": 6
   },
   {
    "model": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
@@ -1142,7 +1142,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 3
+   "n_observations": 4
   },
   {
    "model": "TinyLlama/TinyLlama-1.1B-intermediate-step-1431k-3T",
@@ -1169,7 +1169,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 3
+   "n_observations": 4
   },
   {
    "model": "Zyphra/Zamba2-7B",
@@ -1445,7 +1445,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 5
+   "n_observations": 6
   },
   {
    "model": "allenai/OLMo-2-0425-1B-DPO",
@@ -1499,7 +1499,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 4
+   "n_observations": 5
   },
   {
    "model": "allenai/OLMo-2-0425-1B-SFT",
@@ -1607,7 +1607,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 4
+   "n_observations": 5
   },
   {
    "model": "allenai/OLMoE-1B-7B-0125-SFT",
@@ -1661,7 +1661,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 4
+   "n_observations": 5
   },
   {
    "model": "allenai/Olmo-3-1125-32B",
@@ -1715,7 +1715,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 4
+   "n_observations": 5
   },
   {
    "model": "allenai/Olmo-3-7B-Instruct-DPO",
@@ -1958,7 +1958,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 4
+   "n_observations": 5
   },
   {
    "model": "allenai/Olmo-Hybrid-Instruct-DPO-7B",
@@ -1985,7 +1985,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 1
+   "n_observations": 2
   },
   {
    "model": "allenai/Olmo-Hybrid-Instruct-SFT-7B",
@@ -2039,7 +2039,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 4
+   "n_observations": 5
   },
   {
    "model": "baichuan-inc/Baichuan2-7B-Chat",
@@ -2066,7 +2066,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 4
+   "n_observations": 5
   },
   {
    "model": "bigscience/bloom-7b1",
@@ -2093,7 +2093,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 3
+   "n_observations": 4
   },
   {
    "model": "bigscience/bloomz-7b1",
@@ -2120,7 +2120,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 3
+   "n_observations": 4
   },
   {
    "model": "cognitivecomputations/Dolphin3.0-Llama3.1-8B",
@@ -2363,7 +2363,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 3
+   "n_observations": 4
   },
   {
    "model": "gl198976/mpt-7b-instruct",
@@ -2390,7 +2390,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 4
+   "n_observations": 5
   },
   {
    "model": "google/gemma-2-9b",
@@ -2417,7 +2417,7 @@
    "needs_hf_token": true,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 3
+   "n_observations": 4
   },
   {
    "model": "google/gemma-2-9b-it",
@@ -2444,7 +2444,7 @@
    "needs_hf_token": true,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 4
+   "n_observations": 5
   },
   {
    "model": "google/recurrentgemma-9b",
@@ -2471,7 +2471,7 @@
    "needs_hf_token": true,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 2
+   "n_observations": 3
   },
   {
    "model": "google/recurrentgemma-9b-it",
@@ -2498,7 +2498,7 @@
    "needs_hf_token": true,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 2
+   "n_observations": 3
   },
   {
    "model": "huggyllama/llama-7b",
@@ -2525,7 +2525,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 4
+   "n_observations": 5
   },
   {
    "model": "ibm-granite/granite-3.0-8b-base",
@@ -2552,7 +2552,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 3
+   "n_observations": 4
   },
   {
    "model": "ibm-granite/granite-3.0-8b-instruct",
@@ -2579,7 +2579,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 3
+   "n_observations": 4
   },
   {
    "model": "inceptionai/jais-family-6p7b",
@@ -2606,7 +2606,7 @@
    "needs_hf_token": true,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 1
+   "n_observations": 2
   },
   {
    "model": "inceptionai/jais-family-6p7b-chat",
@@ -2633,7 +2633,7 @@
    "needs_hf_token": true,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 2
+   "n_observations": 3
   },
   {
    "model": "internlm/internlm2-base-7b",
@@ -2741,7 +2741,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 3
+   "n_observations": 4
   },
   {
    "model": "kakaocorp/kanana-1.5-8b-instruct-2505",
@@ -2768,7 +2768,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 2
+   "n_observations": 3
   },
   {
    "model": "kakaocorp/kanana-2-3b-base",
@@ -2795,7 +2795,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 1
+   "n_observations": 2
   },
   {
    "model": "kakaocorp/kanana-2-3b-instruct",
@@ -2822,7 +2822,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 1
+   "n_observations": 2
   },
   {
    "model": "llm-jp/llm-jp-3-7.2b",
@@ -2849,7 +2849,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 2
+   "n_observations": 3
   },
   {
    "model": "llm-jp/llm-jp-3-7.2b-instruct2",
@@ -2903,7 +2903,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 3
+   "n_observations": 4
   },
   {
    "model": "lomahony/eleuther-pythia6.9b-hh-dpo",
@@ -2930,7 +2930,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 4
+   "n_observations": 5
   },
   {
    "model": "lomahony/eleuther-pythia6.9b-hh-sft",
@@ -2984,7 +2984,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 2
+   "n_observations": 3
   },
   {
    "model": "m-a-p/CT-LLM-SFT",
@@ -3038,7 +3038,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 2
+   "n_observations": 3
   },
   {
    "model": "m-a-p/neo_7b",
@@ -3065,7 +3065,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 3
+   "n_observations": 4
   },
   {
    "model": "m-a-p/neo_7b_instruct_v0.1",
@@ -3092,7 +3092,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 3
+   "n_observations": 4
   },
   {
    "model": "m-a-p/neo_7b_sft_v0.1",
@@ -3200,7 +3200,7 @@
    "needs_hf_token": true,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 3
+   "n_observations": 4
   },
   {
    "model": "meta-llama/Llama-3.1-8B-Instruct",
@@ -3227,7 +3227,7 @@
    "needs_hf_token": true,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 4
+   "n_observations": 5
   },
   {
    "model": "microsoft/Phi-4-reasoning-plus",
@@ -3335,7 +3335,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 2
+   "n_observations": 3
   },
   {
    "model": "mistralai/Mistral-7B-v0.1",
@@ -3362,7 +3362,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 3
+   "n_observations": 4
   },
   {
    "model": "openGPT-X/Teuken-7B-base-v0.6",
@@ -3443,7 +3443,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 2
+   "n_observations": 3
   },
   {
    "model": "openbmb/MiniCPM5-1B",
@@ -3470,7 +3470,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 3
+   "n_observations": 4
   },
   {
    "model": "openbmb/MiniCPM5-1B-Base",
@@ -3497,7 +3497,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 3
+   "n_observations": 4
   },
   {
    "model": "openbmb/MiniCPM5-1B-SFT",
@@ -3578,7 +3578,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 4
+   "n_observations": 5
   },
   {
    "model": "stabilityai/stablelm-2-1_6b-chat",
@@ -3605,7 +3605,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 4
+   "n_observations": 5
   },
   {
    "model": "stabilityai/stablelm-2-zephyr-1_6b",
@@ -3659,7 +3659,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 2
+   "n_observations": 3
   },
   {
    "model": "teknium/OpenHermes-2.5-Mistral-7B",
@@ -3995,7 +3995,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 3
+   "n_observations": 4
   },
   {
    "model": "tiiuae/Falcon3-7B-Instruct",
@@ -4022,7 +4022,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 3
+   "n_observations": 4
   },
   {
    "model": "tiiuae/Falcon3-Mamba-7B-Base",
@@ -4109,7 +4109,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 1
+   "n_observations": 2
   },
   {
    "model": "tiiuae/falcon-7b-instruct",
@@ -4136,7 +4136,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 2
+   "n_observations": 3
   },
   {
    "model": "tiiuae/falcon-mamba-7b",
@@ -4166,7 +4166,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 2
+   "n_observations": 3
   },
   {
    "model": "tiiuae/falcon-mamba-7b-instruct",
@@ -4196,7 +4196,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 3
+   "n_observations": 4
   },
   {
    "model": "togethercomputer/RedPajama-INCITE-7B-Chat",
@@ -4223,7 +4223,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 5
+   "n_observations": 6
   },
   {
    "model": "togethercomputer/RedPajama-INCITE-7B-Instruct",
@@ -4277,7 +4277,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 3
+   "n_observations": 4
   },
   {
    "model": "weblab-GENIAC/Tanuki-8B-dpo-v1.0",
@@ -4304,7 +4304,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 2
+   "n_observations": 3
   },
   {
    "model": "zai-org/glm-4-9b-chat-hf",
@@ -4331,7 +4331,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 4
+   "n_observations": 5
   },
   {
    "model": "zai-org/glm-4-9b-hf",
@@ -4358,7 +4358,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 3
+   "n_observations": 4
   }
  ]
 }
