@@ -1,7 +1,7 @@
 ---
 kind: question
 id: syntagmatic_damage
-status: "RUN, and the third-party fork closed on one reader. The archived nulls were window-limited. With a 30-token window and probability controlled, movement predicts downstream surprisal in the ALIGNED arm only, peaking at [5,10) and null at the joint. deepseek scored the same 40,984 passages twice, with and without the joint, and does not see it -- a CONSISTENCY null (17/24 and 17/25), not a magnitude one. A second reference model is the open step."
+status: "RUN, and the third-party fork closed on one reader. The archived nulls were window-limited. With a 30-token window and probability controlled, movement predicts downstream surprisal in the ALIGNED arm only, peaking at [5,10) and null at the joint. deepseek scored the same 40,984 passages twice, with and without the joint, and does not see it -- a CONSISTENCY null (17/24 and 17/25), not a magnitude one. A second reference model is the open step. BASE ARM ADDED 2026-09-12: reference.py gains --arm {aligned,base} and the base arm is now scored too, 41,664 of 41,666 over 42 lineages, same reader and same one-pass discipline; the 2026-08 pass had covered ZERO base rows. Outputs are arm-suffixed and the aligned files keep their names."
 question: When a model is forced to utter a word alignment demoted, what happens to the sentence around it?
 headline: "Alignment installs a standing disposition about WHICH word to reach for."
 ---
@@ -26,6 +26,35 @@ disposition is legible wherever the word appears, it is paid at the moment of
 utterance, and it does not propagate into the chain.**
 
 Selection is changed; combination is not. Both halves are measured.
+
+## THE BASE ARM, ADDED 2026-09-12 AND NOT FOR THIS FOLDER'S QUESTION
+
+`reference.py --arm {aligned,base}`. The 2026-08 deepseek pass covered the
+ALIGNED arm only -- 40,984 rows, zero base -- which follows from this folder's
+own finding, since the effect is in the aligned arm. `--arm base` now plans and
+scores the other side: **41,664 of 41,666 passages over 42 lineages**, the same
+third-party reader, the same one-model-one-device-one-pass discipline, shuffled
+and seeded so a run stopped early is a sample and not a prefix.
+
+`select()` had hardcoded `pr.split(">")[1]`. The arm is now chosen, and the
+roles (`faller`, `riser`, `matched`, `riser_matched`) were defined against the
+PAIR, so both arms were forced to utter the same words at the same
+probabilities -- which is what makes a base read comparable to the aligned one.
+Outputs are arm-suffixed (`reference_ids_base.jsonl`, `reference_plan_base.json`)
+and the aligned files keep their names, so nothing already written moved.
+
+**WHY IT WAS SCORED, WHICH IS NOT THIS FOLDER'S QUESTION.** It was asked for by
+`experiments/architectures`: a base model forced to utter an improbable word,
+read by a FIXED external scorer, asks whether the chain RE-STABILISES. That is a
+MEMORY operation -- attention can re-read the imposed word at every later
+position, a recurrent state must carry it forward compressed -- so it is the one
+probe in that subject that touches what attention is actually for, rather than
+the selection the softmax does in every architecture alike. The stratification
+by architecture is NOT built; only the scoring is done.
+
+`--arm base --analyse` runs and reports this folder's own regression on the base
+side. Read it against `run.py`'s self-surprisal table with the same care the
+section below asks for: the two are different readers, not two runs.
 
 ## 1. The passage effect is composition, not level
 
