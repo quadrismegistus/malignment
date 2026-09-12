@@ -1199,7 +1199,7 @@
    "needs_hf_token": true,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 3
+   "n_observations": 4
   },
   {
    "model": "Zyphra/Zamba2-7B-Instruct",
@@ -1229,7 +1229,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 3
+   "n_observations": 4
   },
   {
    "model": "allenai/Llama-3.1-Tulu-3-8B-DPO",
@@ -3716,7 +3716,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 3
+   "n_observations": 4
   },
   {
    "model": "tiiuae/Falcon-H1-1.5B-Instruct",
@@ -3746,7 +3746,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 2
+   "n_observations": 3
   },
   {
    "model": "tiiuae/Falcon-H1-7B-Base",
@@ -3776,7 +3776,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 1
+   "n_observations": 2
   },
   {
    "model": "tiiuae/Falcon-H1-7B-Instruct",
@@ -3806,7 +3806,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 1
+   "n_observations": 2
   },
   {
    "model": "tiiuae/Falcon3-10B-Base",
