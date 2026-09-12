@@ -62,10 +62,35 @@ either. **The post-hoc adjacency reading WEAKENED**, from -0.500/-0.520 to
 -0.539/-0.617, which is the right direction for a reading that was never load-
 bearing.
 
-Separately, that file's `_meta` reports `n_words_in: 27242` while the union of
-`key_to_words` is **21,031**: 6,211 input words produced no rime key at all.
-After folding, the remaining invisible mass is mostly single letters and
-tokenisation debris.
+### HOW THE RIME VOCABULARY WAS BUILT, since the coverage question turns on it
+
+`verse_fleet_producer.py:rime_vocab()` reads the `k_ratings` English list, keeps
+only `re.fullmatch(r"[a-z']+", w)`, and calls the pinned-prosodic `rime_key` on
+the survivors. Decomposed:
+
+    27,242  k_ratings entries
+     6,201  dropped by the REGEX
+              3,768  capitalised / mixed-case Latin (ABC, API, AOC, AED)
+              2,276  control characters, digits, punctuation
+                157  CJK
+    21,041  pass the regex
+    21,031  got a rime key    <- prosodic failed on TEN
+
+**The gap is the regex, not prosodic.** Ten strings defeated it, all fragments:
+`http`, `https`, `sch`, `squ`, `surv`, `theres`.
+
+**And the capitalised losses are ACRONYMS, not words.** `Love` was never in the
+vocabulary as a separate entry -- `k_ratings` is lowercase-normalised, so only
+`love` is there. `rime_key` lowercases as its first line, so the pipeline always
+intended lowercase forms and the vocabulary cannot hold capitalised variants.
+Case-folding the CANDIDATE is therefore the fix consistent with how the file was
+built, not a patch over it.
+
+`_meta`'s `n_words_in: 27242` counts the input BEFORE the regex, which is why it
+never equalled the 21,031 union. A labelling artifact, not a data defect.
+
+What stays genuinely unanalysable after folding: acronyms, control characters,
+CJK, and those ten. None of them are rhyme candidates.
 
 ### CORRECTION 2026-09-12: I published fabricated ranks
 
