@@ -184,6 +184,59 @@ The measurement code lives in `emergence/capacities/verse_capacity.py` and is re
 
 `SPEC_rhyme_pull.md` is the costing. `rhyme_smoke.py` and `tests/` are @malign's producer-shape gates and they pass.
 
+## SHOULD THE RIME KEYS BE REGENERATED? YES, AND IT WOULD NOT MOVE THIS RESULT
+
+RH's question, once the case fix was in. Both halves matter and they point
+opposite ways.
+
+**Worth doing.** After case-folding, **5.2% of slot mass over all verse slots is
+still unkeyed, and it is 97.6% plain alphabetic words** -- not debris. The
+heaviest are the verse lexicon itself:
+
+    thine  gale  dew  thee  morn  damnation  springs  pane
+    flows  doom  eternity  Maker  June  blows  lingers  rains
+
+Archaisms, nature vocabulary, and -- the part that actually damages a class --
+**INFLECTED FORMS**. `rains`, `springs`, `flows`, `blows` all rhyme. If `flow` is
+keyed and `flows` is not, the `-oʊz` class is incomplete exactly at a line end.
+`k_ratings` is a psycholinguistic ratings list and was never a verse lexicon; the
+classes inherit that.
+
+**And the job is small.** Mass-ordered, the top **10,000** unkeyed words take the
+unkeyed share from 5.2% to **0.21%**; the top 5,000 recovers 91% of it. Against
+the original build's 21,041 words that is an afternoon of `prosodic` on the Mac
+and no cloud, per the rule that put it there.
+
+**It would not move this result.** The residual is differential but not against
+the group the finding is about:
+
+    unkeyed share per model   median 5.7%   range 3.1% to 9.1%
+    attention-free / linear   5.6%, 5.7%, 7.0%, 7.0%
+
+They straddle the median and both extremes are dense transformers. **Contrast the
+case bug, which WAS differential against them** (+11.9 points recovered for
+`falcon-mamba` against +7.2 for `Lucie-7B-Instruct`) -- that one had to be fixed
+before any number meant anything. This one is tidying.
+
+**One caveat on how a regeneration is scoped.** Choosing the vocabulary BY
+OBSERVED MASS means the classes are built from what these models proposed. That
+is sound within this fleet and would be circular against a different model set. A
+frozen independent list -- CMUdict -- avoids it, at the cost of running prosodic
+over rather more than 10,000 words.
+
+## Running it
+
+    python run.py                    rhyme pull at the `called` slot, both arms
+    python run.py --slot end1        any manifest slot
+    python run.py --closure          line closure, ENDS against MIDS
+    --floor        minimum base pull to enter the relative-delta table
+    --min-cells    a guard that has never fired: every model carries 176-177
+                   of the 177 usable cells
+
+A read of `twp_words_v4` and `twp_closure` plus two JSON files. No GPU, and
+nothing phonological runs -- the rime classes were built offline and are consumed
+here as a lookup.
+
 ## PRE-COMMITMENT, recorded 2026-09-11, before any rhyme_pull cell was measured
 
 
