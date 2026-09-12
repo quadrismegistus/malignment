@@ -1509,30 +1509,30 @@ def _await(cloud, st, models, iid, a):
 #: special, and their measured rates (2.4-6.0 s/cell) confirm it. My own guess by
 #: name said 15 models; the roster says 10, and the roster is right.
 SSM_KERNELS = """
-echo "SSM shard: installing mamba kernels (this COMPILES and is slow)"
-# **`--system-certs`, AND THE OUTPUT IS KEPT.** Without it uv rejects a host that
-# intercepts TLS -- `invalid peer certificate: UnknownIssuer` on
-# files.pythonhosted.org, which is the same machine-level interference as the HF
-# proxy that killed an earlier box, and invisible to the HF assert because
-# huggingface_hub uses SYSTEM certs while uv bundles its own trust store.
+# **THE KERNELS ARE A DOWNLOAD, NOT A BUILD, AND THE BUILD WAS THE WHOLE BUG.**
+# Rewritten 2026-09-12. This block used to compile causal-conv1d and mamba-ssm
+# from source with --no-build-isolation, TORCH_CUDA_ARCH_LIST and MAX_JOBS, and
+# it FAILED ON BOTH CARDS on 2026-09-11 -- `RuntimeError: Error compiling
+# objects for extension` on an A100, and a mixed-venv ImportError on a 4090.
+# I concluded the consumer card could not carry the kernels and routed SSM work
+# back to the A100. THAT WAS THE WRONG CAUSE.
 #
-# The first version ended `|| echo "returned non-zero"` and ran with `-q`, so the
-# failure arrived as "SSM KERNELS MISSING" with the REASON discarded. A guard that
-# hides why it fired costs a whole round trip to a live box to recover.
-# **`TORCH_CUDA_ARCH_LIST` AND `MAX_JOBS` ARE LOAD-BEARING.** Without them the
-# build either fails outright (no arch list -> compilation error on some images)
-# or uses one core and takes hours instead of minutes. The arch list is read from
-# the card at provision time; MAX_JOBS uses all cores because the build is CPU-
-# bound (CUDA kernel compilation is nvcc, which is single-threaded per TU but
-# pip launches one per source file). On 96 cores this takes ~15 min; on 1 core
-# it takes the ~4 hours that made someone say "kernels give no speedup" because
-# they never installed.
-ARCH=$(nvidia-smi --query-gpu=compute_cap --format=csv,noheader | head -1 | tr -d '[:space:]')
-export TORCH_CUDA_ARCH_LIST="${ARCH}"
-export MAX_JOBS=$(nproc)
-echo "  TORCH_CUDA_ARCH_LIST=$ARCH  MAX_JOBS=$MAX_JOBS"
-uv pip install --system-certs --python ./%(venv)s/bin/python \
-    --no-build-isolation causal-conv1d mamba-ssm 2>&1 | tail -25
+# state-spaces/mamba v2.3.2.post1 and Dao-AILab/causal-conv1d v1.7.0 both ship
+# PREBUILT WHEELS for torch 2.6-2.10 x cu11/12/13 x py3.10-3.13. The image ships
+# torch 2.14, for which NO WHEEL EXISTS, so pip silently fell back to compiling
+# -- and the compile is what broke. Nothing about the GPU was ever involved.
+#
+# We already install torch 2.6.0+cu126 on these boxes (`torch_wheel: cu126`, the
+# forward-compat fix), so the matching wheel exists and installs in seconds.
+# cu12+ wheels are cxx11abiTRUE only, so there is no ABI choice to get wrong.
+echo "SSM shard: installing PREBUILT mamba kernels (no compile)"
+PYTAG=$(./%(venv)s/bin/python -c "import sys;print(f'cp{sys.version_info.major}{sys.version_info.minor}')")
+TORCHMM=$(./%(venv)s/bin/python -c "import torch;print('.'.join(torch.__version__.split('+')[0].split('.')[:2]))")
+CUMAJ=$(./%(venv)s/bin/python -c "import torch;print((torch.version.cuda or '12').split('.')[0])")
+echo "  wheel tags: torch${TORCHMM} cu${CUMAJ} ${PYTAG}"
+MS="https://github.com/state-spaces/mamba/releases/download/v2.3.2.post1/mamba_ssm-2.3.2.post1+cu${CUMAJ}torch${TORCHMM}cxx11abiTRUE-${PYTAG}-${PYTAG}-linux_x86_64.whl"
+CC="https://github.com/Dao-AILab/causal-conv1d/releases/download/v1.7.0/causal_conv1d-1.7.0+cu${CUMAJ}torch${TORCHMM}cxx11abiTRUE-${PYTAG}-${PYTAG}-linux_x86_64.whl"
+uv pip install --system-certs --python ./%(venv)s/bin/python "$CC" "$MS" 2>&1 | tail -12
 ./%(venv)s/bin/python - <<'KEOF'
 import importlib.util, sys
 missing = [m for m in ("mamba_ssm", "causal_conv1d")
@@ -1543,9 +1543,18 @@ if missing:
     # doing nothing for six days. A wrong answer would be caught; this would not.
     print("SSM KERNELS MISSING:", missing)
     sys.exit(5)
+#: **AND IMPORT THEM, BECAUSE find_spec ONLY PROVES THE FILE IS THERE.** A wheel
+#: built for a different torch installs happily and dies at import -- which is
+#: exactly how the 4090 attempt failed, on `undefined symbol: ncclCommResume`.
+try:
+    import mamba_ssm, causal_conv1d                          # noqa: F401
+except Exception as e:                                       # noqa: BLE001
+    print("SSM KERNELS PRESENT BUT WILL NOT IMPORT:", type(e).__name__, str(e)[:160])
+    sys.exit(5)
 print("SSM KERNELS OK")
 KEOF
 """
+
 
 
 def _reqs():
