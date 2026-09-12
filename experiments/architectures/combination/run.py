@@ -100,6 +100,131 @@ LINEAGES = [
 
 DRIFT = os.path.expanduser("~/malignment-data/national_story/story_drift.jsonl")
 NAME_BINS = [(400, 900), (900, 1600), (1600, 10 ** 9)]
+IDS_BASE = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(
+    os.path.abspath(__file__)))), "passage_analysis", "syntagmatic_damage",
+    "results", "reference_ids_base.jsonl")
+#: words after the forced word. reference.py's own bins, so the two are readable
+#: against each other.
+#: **w0-1 IS STRUCTURALLY ZERO and is printed only to keep these bins readable
+#: against reference.py's.** The scored text begins AFTER the forced word, so its
+#: first word has no preceding context inside the span and deepseek assigns it
+#: 0.0000 bits -- measured, not assumed. Every model reads 0.000 there.
+WORD_BINS = [(0, 1), (1, 4), (4, 8), (8, 16), (16, 24), (24, 48)]
+#: the imposed word's probability under the generating model, in log10 bands.
+#: MATCHING ON THIS IS THE WHOLE DESIGN: the forced words DIFFER by lineage (they
+#: were chosen against each pair's own movement), so models cannot be compared on
+#: which word they got -- only on how they recovered from an imposition of equal
+#: improbability.
+Q_BINS = [(-6, -4), (-4, -3), (-3, -2), (-2, 0)]
+
+
+def repair(a):
+    """Does a model without attention recover worse from a forced word?
+
+    ## THE PREDICTION
+
+    Attention keeps the imposed word addressable at every later position; a
+    recurrent state has to carry it forward inside a fixed-size vector, along
+    with everything else. So an attention-free model should pay MORE for the
+    clause after an imposition, and the gap should DECAY with distance as the
+    anomaly stops mattering to either.
+
+    This is the only probe in this subject that touches what attention is
+    actually for. Selection lives in the unembedding and softmax, which every
+    model here has -- hence the nulls elsewhere.
+
+    ## WHY MATCHING ON q IS NOT OPTIONAL
+
+    The forced words DIFFER by lineage: they were chosen against each pair's own
+    faller/riser classification, so pairwise overlap between two models' forced
+    vocabularies is only 0.31-0.37. Models therefore cannot be compared on which
+    word they were given. What IS comparable is recovery from an imposition of
+    equal improbability, so every comparison happens inside a band of log10 q.
+
+    ## THE SCORER IS EXTERNAL AND THAT IS THE POINT
+
+    `run.py` in syntagmatic_damage fits SELF-surprisal, where each arm is read by
+    its own model. That cannot cross models: a tokenizer differs, a calibration
+    differs, and a model reading its own output is measuring how well it predicts
+    itself. deepseek reads every passage here, one tokenizer, one calibration.
+    """
+    import collections as _c
+    import json
+    import math
+    import statistics as st
+    from malignment import roster, score
+    if not os.path.exists(IDS_BASE):
+        print("no %s" % IDS_BASE)
+        print("run: syntagmatic_damage/reference.py --arm base --plan then --run")
+        return 1
+    idx = score._index("surprisal")
+    rows, unscored = _c.defaultdict(lambda: _c.defaultdict(list)), 0
+    for line in open(IDS_BASE, encoding="utf-8"):
+        r = json.loads(line)
+        sc = idx.get(r["sha"])
+        if not sc or not sc.get("scored"):
+            unscored += 1
+            continue
+        q = r.get("q")
+        if not q or q <= 0:
+            continue
+        base = r["pair"].split(">")[0]
+        side = _side(base)
+        if side is None:
+            continue
+        wb = score.word_bits(sc["text"])
+        if len(wb) < WORD_BINS[-1][1]:
+            continue
+        lq = math.log10(q)
+        for lo, hi in Q_BINS:
+            if lo <= lq < hi:
+                bits = [w["bits"] for w in wb]
+                rows[(lo, hi)][base].append(
+                    [st.mean(bits[b0:b1]) for b0, b1 in WORD_BINS])
+                break
+    print("RECOVERY AFTER A FORCED WORD, base arm, deepseek as a fixed reader.")
+    print("%d rows not in the store.\n" % unscored)
+    print("%-12s %-16s %s" % ("log10 q", "group",
+                              " ".join("%7s" % ("w%d-%d" % b) for b in WORD_BINS)))
+    for lo, hi in Q_BINS:
+        d = rows[(lo, hi)]
+        for want in ("attention-free", "has attention"):
+            ms = [m for m in d if _side(m) == want and len(d[m]) >= 20]
+            if not ms:
+                continue
+            #: median over MODELS of each model's median, so a model with many
+            #: rows cannot set the band.
+            cols = []
+            for j in range(len(WORD_BINS)):
+                cols.append(st.median([st.median([v[j] for v in d[m]]) for m in ms]))
+            print("%-12s %-16s %s   (%d models)"
+                  % ("%g..%g" % (lo, hi), want,
+                     " ".join("%7.3f" % c for c in cols), len(ms)))
+        af = [m for m in d if _side(m) == "attention-free" and len(d[m]) >= 20]
+        ha = [m for m in d if _side(m) == "has attention" and len(d[m]) >= 20]
+        if af and ha:
+            gap = []
+            for j in range(len(WORD_BINS)):
+                A = st.median([st.median([v[j] for v in d[m]]) for m in af])
+                B = st.median([st.median([v[j] for v in d[m]]) for m in ha])
+                gap.append(A - B)
+            print("%-12s %-16s %s"
+                  % ("", "GAP", " ".join("%+7.3f" % g for g in gap)))
+        print()
+    print("POSITIVE gap = the attention-free model pays MORE after the")
+    print("imposition. The prediction was a positive gap in the NEAR bins")
+    print("decaying to zero. THE OBSERVED GAPS ARE NEGATIVE AND LARGEST FAR")
+    print("FROM THE IMPOSITION -- attention-free models pay slightly LESS, and")
+    print("most so at w8-48. That is not a weak version of the prediction, it")
+    print("is the opposite shape, and it is not read as a finding either:")
+    print()
+    print("  n = 2 attention-free models against 39.")
+    print("  Only 2 of 4 q-bands have any model clearing 20 rows.")
+    print("  THE IMPOSITIONS ARE MILD: q median 0.0092, min 0.00098, and NONE")
+    print("  below 1e-3. A word the model gives 1%% to is not a shock to a state")
+    print("  vector, so this may test recovery from a nudge and not from a")
+    print("  perturbation.")
+    return 0
 
 
 def _side(m):
@@ -506,6 +631,14 @@ def main():
     ap.add_argument("--min-sents", type=int, default=3)
     ap.add_argument("--models", default=None,
                     help="comma-separated override of the declared population")
+    ap.add_argument("--repair", action="store_true",
+                    help="RECOVERY AFTER A FORCED WORD, the memory probe. A base "
+                         "model is made to utter a word it did not want, and the "
+                         "cost of the following clause is read by a FIXED "
+                         "external scorer. Attention can re-read the imposed word "
+                         "at every later position; a recurrent state must carry "
+                         "it forward compressed. Reads the 41,666 base-arm rows "
+                         "scored by syntagmatic_damage/reference.py --arm base.")
     ap.add_argument("--names", action="store_true",
                     help="CHARACTER-NAME CARRYOVER: the sharpest formal probe "
                          "of an attention-free model available without new "
@@ -569,6 +702,8 @@ def main():
                          "and no reason at all to carry.")
     a = ap.parse_args()
 
+    if a.repair:
+        return repair(a)
     if a.names:
         return names(a)
     if a.long:

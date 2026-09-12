@@ -128,6 +128,34 @@ Across-model spread against the median within-model IQR over prompts. **On a fir
 
 So the population is one pure SSM, one hybrid and one MoE against three dense transformers, and the best-controlled pair in the subject is the one the data cannot serve. **That is a limit on the null, not a null about architecture.**
 
+## RECOVERY AFTER A FORCED WORD: the memory probe, and the gap runs backwards
+
+    python run.py --repair
+
+**The one probe in this subject that touches what attention is actually for.** A base model is made to utter a word it did not want; the cost of the following clause is read by a FIXED external scorer. Attention can re-read the imposed word at every later position, a recurrent state must carry it forward compressed, so an attention-free model should pay MORE -- and the gap should DECAY with distance as the anomaly stops mattering to either.
+
+Reads the 41,666 base-arm rows scored by `syntagmatic_damage/reference.py --arm base`, which was run for this question: the 2026-08 deepseek pass had covered the aligned arm only, 40,984 rows and zero base.
+
+    log10 q   group             w0-1    w1-4    w4-8   w8-16  w16-24  w24-48
+    -3..-2    attention-free   0.000   8.600   6.971   6.111   6.020   5.851   (2 models)
+    -3..-2    has attention    0.000   8.610   7.108   6.437   6.211   6.111   (39 models)
+              GAP             +0.000  -0.010  -0.138  -0.326  -0.191  -0.260
+    -2..0     attention-free   0.000   8.508   6.986   6.240   5.683   5.775   (2 models)
+    -2..0     has attention    0.000   8.584   6.970   6.422   6.111   6.036   (39 models)
+              GAP             +0.000  -0.076  +0.016  -0.181  -0.428  -0.261
+
+**The gaps are NEGATIVE and largest FAR from the imposition.** Attention-free models pay slightly less, and most so at w8-48. That is not a weak version of the prediction; it is the opposite shape, since the mechanism predicts a cost that is largest adjacent to the imposed word and fades.
+
+**It is not read as a finding in that direction either**, for three stated reasons:
+
+- **n = 2 attention-free models against 39.**
+- **Only 2 of 4 q-bands** have any model clearing 20 rows.
+- **THE IMPOSITIONS ARE MILD.** Measured over 20,000 rows: q median **0.0092**, min 0.00098, and **none below 1e-3**. A word the model already gives 1% to is not a shock to a state vector. This may be testing recovery from a nudge rather than from a perturbation, which is exactly the regime where a fixed-size state loses nothing.
+
+**And `w0-1` is structurally zero**, measured not assumed: the scored text begins AFTER the forced word, so its first word has no preceding context inside the span and deepseek assigns it 0.0000 bits. The bin is kept only so these are readable against `reference.py`'s.
+
+**Why matching on q is not optional here.** The forced words DIFFER by lineage -- chosen against each pair's own faller/riser classification, with pairwise overlap between two models' forced vocabularies of only 0.31-0.37. Models cannot be compared on which word they were given, only on recovery from an imposition of equal improbability.
+
 ## CHARACTER-NAME CARRYOVER: the sharpest formal probe available, and it is null
 
     python run.py --names

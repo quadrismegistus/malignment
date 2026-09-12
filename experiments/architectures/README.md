@@ -45,6 +45,8 @@ The delta's own confound is that ALIGNMENT data varies across labs. That is cont
     combination --long        page drift, 1,503 words        1 LINEAGE               attention-free drift LOWER where they overlap;
                                                                                      too few long texts to estimate a bin above 1,200
     combination --names       character-name carryover       1 MODEL                 gap +0.000 in the only bin with usable n
+    combination --repair      recovery after a forced word   2 MODELS                gap NEGATIVE and largest FAR from the
+                                                                                     imposition, the opposite of the prediction
     displacement              charge delta, 50 lineages      1 SSM, 1 RNN, hybrids   all displace but rwkv, which is confounded
     norm_change               norm delta, 45 lineages        same                    falcon-mamba 12/12 with the roster median
 
