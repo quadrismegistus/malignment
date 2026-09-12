@@ -12,6 +12,37 @@ headline: "Displacement exists: higher-T words lose more mass (43/50 lineages), 
 
 Alignment changes word probability distributions — JS > 0 between base and aligned for every pair. That is not a finding; it would be surprising if it didn't. The question is whether the change is SELECTIVE BY CONTENT: do words that carry more transgressive charge lose more mass? And if so, where does the freed mass go?
 
+## `--arm`: the DELTA is this folder's question, the LEVELS answer a different one
+
+    python run.py                  # --arm delta, the campaign's question
+    python run.py --arm base       # what THIS ONE MODEL gives higher-charge words
+    python run.py --arm aligned
+
+Added 2026-09-11 for `experiments/architectures`, which needed a level rather
+than a difference: **a base->aligned delta is dominated by post-training, and
+post-training is the most architecture-independent stage there is**, so a delta
+cannot say much about what a model is built from. A level can.
+
+Three things about the level arms, all of them in the producer's docstring too:
+
+- **They regress the within-cell SHARE, not the probability.** A delta is already
+  a difference of two quantities on one cell's scale; a level is not, and `p`
+  sums to a covered mass that differs by model and by prompt. The coefficient is
+  "share per unit of scene". **The two arms are therefore NOT on a common scale
+  and must never be printed in one column.**
+- **The faller/riser breakdown is skipped on a level**, because it splits on the
+  sign of a delta and every share is positive. The first `--arm base` run
+  printed it anyway and duly reported 0 fallers and 50 risers.
+- **The output names the quantity it computed.** Those prose lines were written
+  for the delta and the first level run printed them verbatim -- "higher-scene
+  words lose more mass under alignment", in a report where no aligned model was
+  read.
+
+The base arm's own result is close to a truism and is recorded as one: all 50
+base models give higher-charge words less within-cell share, median -0.001344.
+Transgressive words are rarer, so any model puts less mass on them. What is
+usable is the SPREAD across models, not the sign.
+
 ## Part 1: content-selectivity (`run.py`)
 
 Within each cell (one prompt × one endpoint pair), every candidate word carries a scene rating (1-7, from `charge.py`) and a delta (p_aligned - p_base). The test: regress delta on scene within each cell.
