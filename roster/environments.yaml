@@ -159,6 +159,22 @@ boxes:
     pins:
     - torch>=2.6
     provides_vram_gb: 80
+  ssm40:
+    description: "One A100 40GB plus the selective-scan kernels. For SSM/hybrid shards whose LARGEST model fits in 40 GB -- today that is Falcon-H1 x4 and Zamba2 x2, the biggest of which is ~15 GB in bf16."
+    image: vllm/vllm-openai:latest
+    gpu_name: A100_SXM4
+    num_gpus: 1
+    min_gpu_ram: 39
+    disk_gb: 150
+    min_inet_down_mbps: 1000
+    min_reliability: 0.95
+    cuda_max_good: 12.4
+    torch_wheel: cu126
+    provides_vram_gb: 40
+    pins: [torch>=2.6]
+    why: "**A SEPARATE ENTRY RATHER THAN LOWERING `ssm`, ON PURPOSE.** boxes.ssm pins min_gpu_ram 79 because it has always carried the WHOLE roster, 32B arms included; relaxing it there would silently admit a 40 GB card for work that needs 80 and the failure would arrive as an OOM after the download. This entry says the narrower thing: 40 GB is enough WHEN THE SHARD'S LARGEST MODEL FITS. Priced 2026-09-12: the only rentable A100s were a 40 GB at $0.735/hr and an 80 GB at $2.002/hr with 19 GB of disk, against RTX 4090 at $2.001 and H100 SXM at $2.202 -- so for a 66 GB, six-model shard this is about a quarter the price of anything else eligible. Card eligibility is compute capability >= 8.0, because Falcon-H1 requires bf16: fp16 returned all-NaN logits on 2,583/2,583 prompts. A100 is 8.0 exactly."
+    why_torch_wheel: "mamba-ssm v2.3.2.post1 and causal-conv1d v1.7.0 ship prebuilt wheels for torch 2.6-2.10 only. The image ships 2.14, so without this pin nothing matches and pip compiles instead -- which is what failed on both an A100 and a 4090 on 2026-09-11."
+
   ssm:
     description: "**BROKEN AS OF 2026-09-11 AND THE CAUSE IS NOT THE CARD.** Box 50619307, 1x A100 SXM4, the card this profile was written for: `causal-conv1d` and `mamba-ssm` both failed with `RuntimeError: Error compiling objects for extension` from torch's ninja wrapper, and the provision assert refused (rc=5) rather than running ~200x slow. A 4090 failed differently the same day, so BOTH cards are blocked and the common factor is the IMAGE. **THE PROFILE'S LAST SUCCESS WAS AUGUST AND THE IMAGE HAS MOVED UNDER IT**: vllm/vllm-openai:latest now ships torch 2.14.0+cu130, against roughly 2.5-2.6 when Zamba2 was measured here at 0.956 s/cell. mamba-ssm 2.3.2.post1 does not build against 2.14. NOTE ALSO that provisioning pinned transformers 5.15.1 here while this profile declares 4.57.1 -- `want` is read from the LOCAL .venv of that name, not from the roster, so an `ssm` box does not get the transformers this entry asks for. That is a second defect and it is not the one that failed the build. FIX DIRECTION, UNTESTED: pin an image or a torch that mamba-ssm builds against, and build the venv against that index FROM THE START rather than downgrading in place -- an in-place downgrade leaves torch metadata and torch/lib/*.so from different versions, which is how the 4090 attempt died on `undefined symbol: ncclCommResume`. ---- PRIOR DESCRIPTION FOLLOWS ---- For SSM/Mamba AND hybrid (Falcon-H1) models. **THE KERNELS ARE NOT OPTIONAL FOR HYBRIDS: MEASURED 19.3x ON Falcon-H1-7B, 2026-08-03** (0.0670 -> 1.2933 cells/s on the twp loop, A100, bf16; 21.4 h -> 1.1 h for 5,166 cells). CORRECTION TO THIS FIELD'S PREVIOUS TEXT, which said kernels gave NO speedup and reasoned that twp re-runs the full sequence per tree node so the scan kernel is not binding. THE MEASUREMENT BEHIND THAT WAS SOUND AND THE GENERALISATION WAS NOT: it was taken on Falcon3-Mamba-7B, a PURE SSM (0.62-0.64 with kernels vs 0.61-0.72 without), and was quoted twice to predict no speedup for Falcon-H1, a HYBRID. Wrong by 19x. **A PRIOR TESTED ON ONE MEMBER OF A CLASS IS NOT A FACT ABOUT THE CLASS** -- pure-SSM and attention/SSM-hybrid have different binding costs. The pure-SSM null still stands for pure SSMs. ALSO REQUIRED FOR Falcon-H1: compute in bfloat16, NOT float16 -- fp16 overflows the SSM scan and yields all-NaN logits on prompts >=13 tokens (1/12 finite at fp16, 12/12 at bf16). TII's own docs: 'always use torch.bfloat16 instead of torch.float16'. Declare it per model as `compute_dtype` in the grid spec; storage stays f16. BUILD NOTE: no prebuilt wheels for cu130/torch2.11/py3.12, so both kernels compile from source. Use TORCH_CUDA_ARCH_LIST=8.0 MAX_JOBS=48 and --no-build-isolation (mamba-ssm's setup.py imports torch, which pip's isolated build env lacks). ~30 min on 128 cores. VERIFY IN USE, NOT MERELY INSTALLED: transformers falls back SILENTLY, so the check is that the log's 'fast path is not available' warning is ABSENT. ALSO PINS transformers==4.57.1 FOR ZAMBA2 -- see pin_reasons; the image's own 5.14.1 cannot load it at all, and the failure presents as a kernel problem."
     image: vllm/vllm-openai:latest
@@ -166,7 +182,7 @@ boxes:
     num_gpus: 1
     min_gpu_ram: 79
     disk_gb: 150
-    min_inet_down_mbps: 3000
+    min_inet_down_mbps: 1000
     min_reliability: 0.95
     cuda_max_good: 12.4
     pins:
@@ -179,6 +195,9 @@ boxes:
       causal-conv1d: the fused depthwise conv; same story
       transformers==4.57.1: "ZAMBA2 WILL NOT LOAD ON transformers 5.x AND THE ERROR NAMES NEITHER THE VERSION NOR THE MODEL'S REAL PROBLEM. On 5.14.1 (what the vllm image ships, 2026-08-10) Zyphra/Zamba2-7B fails at load with `There is an issue with your definition of tie_weights_keys for ^layers.6.shared_transformer:...` -- a v5 weight-tying validation that Zamba2's config predates: it declares transformers_version 4.49.0.dev0. Pinning 4.57.1 loads it and it scores at 1.23 p/s. 4.57 is also the floor CLAUDE.md records for OLMo 3, so it is the highest version known to satisfy both. **AND THE KERNEL WARNING LIES ON A FAILED LOAD.** While Zamba2 was failing, the log carried 'The fast path is not available because one of (selective_state_update, selective_scan_fn, causal_conv1d_fn, causal_conv1d_update, mamba_inner_fn) is None' -- the very string this profile tells you to check for. The kernels were fine: all five entry points imported, is_mamba_ssm_available() and is_causal_conv1d_available() both returned True, and once a model actually loaded the warning was ABSENT. So a fast-path warning emitted DURING a failed load is not evidence about the kernels, and reading it as such sends you to rebuild kernels that work. Check it on a load that SUCCEEDED."
     provides_vram_gb: 80
+    torch_wheel: cu126
+    why_torch_wheel: "REQUIRED FOR THE KERNELS, added 2026-09-12. mamba-ssm v2.3.2.post1 and causal-conv1d v1.7.0 publish prebuilt wheels for torch 2.6-2.10 ONLY; the image ships torch 2.14, so without this pin no wheel matches and pip falls back to compiling -- which is exactly what failed on THIS profile's A100 on 2026-09-11 with `RuntimeError: Error compiling objects for extension`, and on a 4090 the same day. The card was never the variable; the torch version was."
+    why_inet: "LOWERED 3000 -> 1000, 2026-09-12. The 3000 floor was sized for a full roster and it excluded an A100 at 1859 Mbps and $0.735/hr while every admitted alternative cost $4-15 total. The SSM/hybrid shard is SIX models, ~66 GB, about five minutes at 1.8 Gbps. A floor tuned for a 300 GB job is the wrong instrument for a 66 GB one. The 2026-08-02 note above still stands for big rosters -- this is a scope correction, not a repeal."
   dense:
     description: 'Cheapest 48GB-class card on a fast link, 150GB disk. NO gpu_name filter -- selection is by CAPABILITY (VRAM, link, disk), because the dense roster is one forward pass per prompt and the bill is DOWNLOAD. Peak disk is one model + margin: purge_model fires BEFORE each download and on every exit path including failure.'
     image: vllm/vllm-openai:latest
