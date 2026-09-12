@@ -3,7 +3,7 @@ subject: architectures
 kind: question
 status: "RUN 2026-09-12. @malign's fleet: 94 models, 5,325,818 distinct closure keys over 1,786 prompts, all three matched contrasts complete on BOTH arms, ~$19.70. 48 of 50 endpoint lineages covered -- the 32B and 70B arms are uncovered BY CHOICE (24 GB cards; big80/twogpu exist) and all five missing checkpoints are DENSE, so no claim here needs them. Analysis producer `run.py` written here; `called` slot, 177 of 180 cells usable, 47 lineages with both arms present. THE REGISTERED PREDICTION FAILED AS WRITTEN and the ranking it asked for was confounded -- that is a defect in the pre-commitment, not a result."
 question: Does rhyme pull -- probability mass on the scheme partner's rime class -- depend on the attention mechanism?
-headline: "ON THE ONE INSTRUMENT THAT READS A FORMAL EQUIVALENCE CLASS, MODELS WITHOUT ATTENTION ARE NOT DEFICIENT. Base-arm rhyme pull: granite-3.0-8b 0.086, Mistral-7B 0.071, Zamba2-7B (hybrid) 0.067, gemma-2-9b 0.066, falcon-mamba-7b (NO ATTENTION) 0.031 -- which exceeds Olmo-Hybrid 0.026 and Olmo-3 0.015, both of which have attention. And under alignment falcon-mamba shows the LARGEST relative GAIN of any lineage clearing the floor (+1.448), against a fleet where most models lose rhyme pull. The registered prediction -- that the Olmo-3/Olmo-Hybrid pair would show the smallest |delta| because it holds global attention constant -- FAILS literally (ranks 35 and 39 of 47), and the |delta| ranking it asked for is confounded by baseline, since a model with no rhyme pull has nothing to lose. Scale-free, the pair sits at -0.500 and -0.520, adjacent; that is the prediction's substance but it is a POST HOC repair of a statistic chosen before the data existed."
+headline: "ON THE ONE INSTRUMENT THAT READS A FORMAL EQUIVALENCE CLASS, A MODEL WITH NO ATTENTION IS NOT DEFICIENT. Base-arm rhyme pull, case-folded: gemma-2-9b 0.238, Mistral-7B 0.181, granite-3.0-8b 0.162, Zamba2-7B (hybrid) 0.098, falcon-mamba-7b (NO ATTENTION) 0.079 -- roughly TWICE Olmo-Hybrid 0.041 and three times Olmo-3 0.024, both of which have attention. But the attention-reduced models SPLIT: rwkv-4-7b-pile 0.0057 and recurrentgemma-9b 0.0018 sit near the floor, and both are independently confounded (rwkv among the seven weakest movers in the roster, recurrentgemma 98.3% degenerate on passages). So this does not show attention is irrelevant -- it shows the one well-behaved attention-free model matches or beats attention-bearing peers. The registered prediction FAILS (ranks 33 and 41 of 47) and the |delta| ranking it asked for is confounded by baseline. TWO CORRECTIONS ARE RECORDED IN THIS FILE: I published fabricated ranks, and the first run silently dropped ~10% of slot mass to a case mismatch."
 ---
 
 # rhyme
@@ -12,16 +12,19 @@ headline: "ON THE ONE INSTRUMENT THAT READS A FORMAL EQUIVALENCE CLASS, MODELS W
 
 **Base-arm rhyme pull** -- target-class mass minus a matched non-partner class, `called` slot, 177 cells:
 
-    granite-3.0-8b-base      full/dense          0.08612
-    Mistral-7B-v0.1          full/dense          0.07070
-    Zamba2-7B                full+ssm/hybrid     0.06733
-    gemma-2-9b               full/dense          0.06630
-    Qwen3-8B-Base            full/dense          0.03791
-    OLMoE-1B-7B-0125         full/moe            0.03287
-    falcon-mamba-7b          none/ssm            0.03098   <- NO ATTENTION
-    Olmo-Hybrid-7B           full+linear/hybrid  0.02586
-    Olmo-3-1025-7B           full+local/dense    0.01549
-    Falcon-H1-7B-Base        full+ssm/hybrid     0.00803
+    gemma-2-9b               full/dense          0.23757
+    Mistral-7B-v0.1          full/dense          0.18076
+    granite-3.0-8b-base      full/dense          0.16229
+    Zamba2-7B                full+ssm/hybrid     0.09816
+    falcon-mamba-7b          none/ssm            0.07866   <- NO ATTENTION
+    Llama-3.1-8B             full/dense          0.07161
+    Qwen3-8B-Base            full/dense          0.06824
+    OLMoE-1B-7B-0125         full/moe            0.05631
+    Olmo-Hybrid-7B           full+linear/hybrid  0.04066
+    Olmo-3-1025-7B           full+local/dense    0.02369
+    Falcon-H1-7B-Base        full+ssm/hybrid     0.01646
+    rwkv-4-7b-pile           linear/rnn          0.00565
+    recurrentgemma-9b        local+linear/hybrid 0.00177
 
 **`falcon-mamba-7b`, which computes no attention of any kind, has MORE rhyme pull than `Olmo-3-1025-7B` and `Olmo-Hybrid-7B`, both of which have it.** A Mamba-attention hybrid sits third of the whole fleet. This is the instrument built to read Jakobson's axis of selection in the one form the poetic function names, on IPA rime keys with no encoder in the path, and it does not separate the architectures.
 
@@ -38,6 +41,31 @@ headline: "ON THE ONE INSTRUMENT THAT READS A FORMAL EQUIVALENCE CLASS, MODELS W
 **The two uncovered lineages are @malign's choice and not a limit**: `Olmo-3-1125-32B` and `Llama-3.1-70B` need 64.5 and 141.1 GB and he ran 24 GB cards; `big80`/`twogpu` profiles exist and it is a few dollars. `internlm2` failed at load on a destroyed box and its reason is unrecorded.
 
 **No claim here needs them.** All five missing checkpoints are DENSE -- `Olmo-3-1125-32B` and `Olmo-3.1-32B-Instruct` are `full+local/dense`, both Llama-3.1-70B arms are `full/dense`, `internlm2-base-7b` is `full/dense`. They would extend the dense range and add nothing to the architecture contrast, which turns on whether attention-free and hybrid models are deficient. If a LATER claim wants the full 50 for a different reason -- a scale effect, say -- the dollars are available and the finding here does not wait on them.
+
+### CORRECTION 2026-09-12 (2): the first run dropped ~10% of slot mass to CASE
+
+`rime_class_vocab_v2.json` is entirely lowercase. The first version of this
+producer matched candidates as-is, so `Love`, `Night` and `God` were invisible
+while `love`, `night` and `god` were not -- **and at a line-end slot in verse a
+capitalised candidate is ordinary.**
+
+Measured: median **84.7%** of slot mass was in-vocabulary before the fix and
+**94.3%** after case-folding, +9.9 points. **The gain is DIFFERENTIAL, 7.0 to
+12.1 points across models**, so the unfolded measure was partly reading how often
+a model capitalises. Every number first published from this folder was wrong --
+`gemma-2-9b` 0.066 became 0.238, `falcon-mamba` 0.031 became 0.079 -- and the top
+of the table reordered.
+
+**The claim survived and strengthened**: case-folded, `falcon-mamba` is about
+twice `Olmo-Hybrid` and three times `Olmo-3`, where before it was barely above
+either. **The post-hoc adjacency reading WEAKENED**, from -0.500/-0.520 to
+-0.539/-0.617, which is the right direction for a reading that was never load-
+bearing.
+
+Separately, that file's `_meta` reports `n_words_in: 27242` while the union of
+`key_to_words` is **21,031**: 6,211 input words produced no rime key at all.
+After folding, the remaining invisible mass is mostly single letters and
+tokenisation debris.
 
 ### CORRECTION 2026-09-12: I published fabricated ranks
 
@@ -62,7 +90,7 @@ changes the population.
 
 It said: `Olmo-3` and `Olmo-Hybrid` share a 32-layer schedule with `full_attention` at identical positions and differ only in what fills the other 24 slots, so **if global attention carries the operation that pair should move LEAST on rhyme pull of any contrast in the fleet.**
 
-Literally, it fails: their |delta| ranks 35th and 39th of 47 lineages.
+Literally, it fails: their |delta| ranks 33rd and 41st of 47 lineages.
 
 **And the ranking it asked for is confounded.** |delta| tracks BASELINE -- `Tanuki-8B` has base pull 0.003 and `CT-LLM` 0.002, so their deltas are near zero for want of anything to lose, and they top the smallest-|delta| list. **Ranking by raw |delta| rewards having no rhyme pull at all.** That is a defect in how I wrote the pre-commitment, visible only once the data existed, and it is recorded here rather than quietly replaced.
 
@@ -70,16 +98,13 @@ Literally, it fails: their |delta| ranks 35th and 39th of 47 lineages.
 
 Relative delta, for lineages whose base pull clears 0.01 so the ratio has a denominator:
 
-    falcon-mamba-7b      none/ssm            +1.448   <- largest GAIN in the fleet
-    gemma-2-9b           full/dense          +1.281
-    Zamba2-7B            full+ssm/hybrid     -0.120
-    OLMoE-1B-7B-0125     full/moe            -0.175
-    Olmo-3-1025-7B       full+local/dense    -0.500
-    Olmo-Hybrid-7B       full+linear/hybrid  -0.520
-    Mistral-7B-v0.1      full/dense          -0.736
-    glm-4-9b-hf          full/dense          -0.999
+    gemma-2-9b           full/dense          +1.121   <- only large GAIN
+    Olmo-3-1025-7B       full+local/dense    -0.539
+    Olmo-Hybrid-7B       full+linear/hybrid  -0.617
+    Mistral-7B-v0.1      full/dense          -0.854
+    glm-4-9b-hf          full/dense          -0.963
 
-`Olmo-3` and `Olmo-Hybrid` sit adjacent at -0.500 and -0.520, which IS the prediction's substance -- hold global attention constant and the pair behaves alike. **But adjacency in a sorted list of 18 is weak evidence, and this statistic was chosen after seeing that the registered one was confounded.** It does not carry the weight the pre-commitment was meant to carry.
+`Olmo-3` and `Olmo-Hybrid` sit at -0.539 and -0.617, which is loosely the prediction's substance -- hold global attention constant and the pair behaves alike. **But adjacency in a sorted list of 18 is weak evidence, and this statistic was chosen after seeing that the registered one was confounded.** It does not carry the weight the pre-commitment was meant to carry.
 
 **The finding that does not depend on any of that**: most of the fleet LOSES rhyme pull under alignment, which reproduces the known erosion; the two largest relative GAINS are `falcon-mamba` and `gemma-2-9b`, an attention-free model and a dense transformer. Whatever alignment does to rhyme pull, it is not sorted by architecture.
 

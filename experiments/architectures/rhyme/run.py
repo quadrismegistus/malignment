@@ -130,10 +130,19 @@ def main():
         p = float(r["p"] or 0.0)
         pc = float(r["pc"] or 0.0)
         v = acc[r["model"]][r["prompt"]]
-        if r["word"] in tw:
+        #: **CASE-FOLD THE CANDIDATE.** `rime_class_vocab_v2.json` is entirely
+        #: lowercase, so `Love`, `Night` and `God` were invisible while `love`,
+        #: `night` and `god` were not -- and at a LINE-END slot in verse a
+        #: capitalised candidate is ordinary. Measured before the fix: median
+        #: 84.7% of slot mass was in-vocabulary, 94.3% after folding, a gain of
+        #: +9.9 points -- and the gain is DIFFERENTIAL, 7.0 to 12.1 points across
+        #: models, so the unfolded measure was partly reading how often a model
+        #: capitalises. Case is phonologically irrelevant to a rime class.
+        w = r["word"] if r["word"] in tw or r["word"] in nw else r["word"].lower()
+        if w in tw:
             v[0] += p
             v[2] += p * pc
-        elif r["word"] in nw:
+        elif w in nw:
             v[1] += p
         v[3] += p * pc
     out = {}
