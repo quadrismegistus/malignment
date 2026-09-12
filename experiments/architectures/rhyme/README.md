@@ -62,6 +62,50 @@ either. **The post-hoc adjacency reading WEAKENED**, from -0.500/-0.520 to
 -0.539/-0.617, which is the right direction for a reading that was never load-
 bearing.
 
+## LINE CLOSURE: the other half of route B, and it dissociates
+
+    python run.py --closure
+
+`line_closure` = mass-weighted p(the line ends here), at slots where a line DOES
+end (`called`, `end1`) against mid-line slots where it does not (`mid2`, `near`).
+**The contrast is the measure, not the level**: a model that emits newlines
+freely scores high everywhere.
+
+    model                     attn                  ENDS     MIDS   contrast
+    Olmo-Hybrid-7B            full+linear/hybrid  0.2184   0.0264   +0.1920
+    Olmo-3-1025-7B            full+local/dense    0.1767   0.0213   +0.1554
+    Zamba2-7B                 full+ssm/hybrid     0.0374   0.0053   +0.0321
+    rwkv-4-7b-pile            linear/rnn          0.0312   0.0046   +0.0267
+    recurrentgemma-9b         local+linear/hybrid 0.0301   0.0052   +0.0250
+    gemma-2-9b                full/dense          0.0301   0.0055   +0.0246
+    falcon-mamba-7b           none/ssm            0.0238   0.0032   +0.0206
+    -- roster median, 94 --                                         +0.0218
+
+**THE SHARPEST FORM OF THE PREDICTION, AND IT FAILS.** Knowing a line ends is
+METRICAL and therefore a MEMORY operation -- the model must carry position since
+the last break -- where picking a rime class reads the output distribution. That
+made closure the one place in this whole subject where attention should matter
+and rime class should not. Attention-free and linear-only models score **+0.0235**
+against attention-bearing **+0.0218**, and `rwkv` and `recurrentgemma` both EXCEED
+`gemma-2-9b`.
+
+### And the dissociation, which is what route B was bought for
+
+`rwkv-4-7b-pile` sits near the FLOOR on rhyme pull (0.0057) and ABOVE the median
+on closure (+0.0267). **Its failure to rhyme is not a metrical failure.** It
+knows where the line ends and still does not concentrate on the rime class.
+
+That is exactly the confound RH caught in `plan_rhyme.md` before any cell was
+measured -- *"a non-rhyming slot distribution may mean the model does not know
+THE LINE ENDS THERE, not that it cannot rhyme"* -- and for `rwkv` the answer is
+that it does know. Route A could not have separated these and nothing else in
+the campaign can.
+
+**The registered pair is top-tier on closure and in the wrong order for the
+prediction**: `Olmo-Hybrid` +0.1920 against `Olmo-3` +0.1554, so replacing the
+sliding-window layers with linear attention left metrical closure slightly
+BETTER, not worse.
+
 ### HOW THE RIME VOCABULARY WAS BUILT, since the coverage question turns on it
 
 `verse_fleet_producer.py:rime_vocab()` reads the `k_ratings` English list, keeps

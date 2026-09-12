@@ -76,11 +76,84 @@ RIME = os.path.join(CAP, "rime_class_vocab_v2.json")
 FLOOR = 0.01
 
 
+def closure(a):
+    """Does the model know the line ends HERE, and does that need attention?
+
+    `line_closure` = sum(p * p_close) / sum(p) over a cell: the mass-weighted
+    probability that the next thing is a line break. Computed at `called` and
+    `end1`, where a line DOES end, against `mid2` and `near`, where it does not.
+
+    **The contrast is the measure, not the level.** A model that emits newlines
+    freely scores high everywhere; what says it has metre is the DIFFERENCE.
+    """
+    from malignment import roster, vectors as V
+    man = json.load(open(MANIFEST))["cells"]
+    byslot = collections.defaultdict(set)
+    for c in man:
+        byslot[c.get("slot")].add(c["context"])
+    ENDS, MIDS = ("called", "end1"), ("mid2", "near")
+    want = sorted(set().union(*[byslot[s] for s in ENDS + MIDS]))
+    slot_of = {}
+    for s in ENDS + MIDS:
+        for ctx in byslot[s]:
+            slot_of.setdefault(ctx, s)
+    rows = V.rows("SELECT w.model AS model, w.prompt AS prompt, "
+                  "sum(w.p * c.pc) AS wpc, sum(w.p) AS wp "
+                  "FROM (SELECT model, prompt, word, max(p) AS p FROM twp_words_v4 "
+                  "      WHERE prompt IN {ps:Array(String)} AND frame='' "
+                  "      GROUP BY model, prompt, word) w "
+                  "INNER JOIN (SELECT model, prompt, word, any(p_close) AS pc "
+                  "            FROM twp_closure GROUP BY model, prompt, word) c "
+                  "  ON c.model=w.model AND c.prompt=w.prompt AND c.word=w.word "
+                  "GROUP BY w.model, w.prompt", ps=want)
+    acc = collections.defaultdict(lambda: collections.defaultdict(list))
+    for r in rows:
+        wp = float(r["wp"] or 0.0)
+        if wp <= 0:
+            continue
+        acc[r["model"]][slot_of[r["prompt"]]].append(float(r["wpc"] or 0.0) / wp)
+    print("LINE CLOSURE: mass-weighted p(the line ends here).")
+    print("ENDS = called, end1.  MIDS = mid2, near.  The CONTRAST is the measure.\n")
+    out = []
+    for m, bys in acc.items():
+        e = [x for s in ENDS for x in bys.get(s, [])]
+        d = [x for s in MIDS for x in bys.get(s, [])]
+        if len(e) < 50 or len(d) < 50:
+            continue
+        at, bl = roster.architecture(m)
+        if (at, bl) == ("unknown", "unknown"):
+            continue
+        out.append((st.median(e) - st.median(d), st.median(e), st.median(d), m, at, bl))
+    out.sort(reverse=True)
+    print("%-30s %-13s %-7s %9s %9s %9s" % ("model", "attn", "block", "ENDS", "MIDS", "contrast"))
+    for c, e, d, m, at, bl in out[:10] + out[-8:]:
+        tag = "  <-" if at in ("none", "linear") else ""
+        print("%-30s %-13s %-7s %9.4f %9.4f %+9.4f%s"
+              % (m.split("/")[-1][:30], at, bl, e, d, c, tag))
+    print()
+    print("median contrast over %d models: %+.4f" % (len(out), st.median([o[0] for o in out])))
+    af = [o[0] for o in out if o[4] in ("none", "linear")]
+    ha = [o[0] for o in out if o[4] not in ("none", "linear")]
+    if af and ha:
+        print("attention-free/linear-only %+.4f (n=%d)   attention-bearing %+.4f (n=%d)"
+              % (st.median(af), len(af), st.median(ha), len(ha)))
+    return 0
+
+
 def main():
     from malignment import roster, vectors as V
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--slot", default="called")
+    ap.add_argument("--closure", action="store_true",
+                    help="LINE CLOSURE instead of rhyme pull: mass-weighted "
+                         "p(the line ends here), at a slot where it SHOULD end "
+                         "against mid-line slots where it should not. Knowing a "
+                         "line ends is a METRICAL and therefore a MEMORY "
+                         "operation -- the model must carry position since the "
+                         "last break -- where picking a rime class is the output "
+                         "distribution. If attention matters anywhere in this "
+                         "subject it should be here, not in the pull.")
     ap.add_argument("--min-cells", type=int, default=30)
     ap.add_argument("--floor", type=float, default=0.01,
                     help="minimum BASE pull for a lineage to enter the relative-"
@@ -90,6 +163,8 @@ def main():
 
     global FLOOR
     FLOOR = a.floor
+    if a.closure:
+        return closure(a)
     cells = [c for c in json.load(open(MANIFEST))["cells"] if c.get("slot") == a.slot]
     k2w = json.load(open(RIME))["key_to_words"]
     #: (prompt -> target words, nonpartner words). A cell whose two classes
