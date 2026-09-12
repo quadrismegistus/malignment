@@ -1276,9 +1276,16 @@ done
 ldconfig 2>/dev/null || true
 if [ -n "%(torch_wheel)s" ]; then
   uv pip install -q --python ./%(venv)s/bin/python \
-      --index-url https://download.pytorch.org/whl/%(torch_wheel)s 'torch==2.6.*' \
+      --index-url https://download.pytorch.org/whl/%(torch_wheel)s 'torch==2.8.*' \
     || echo "could not install the %(torch_wheel)s torch wheel"
 fi
+# **THE WHOLE STACK MUST AGREE ON ONE TORCH, AND 2.6 IS NOT THE ONE.** Measured
+# 2026-09-12 by walking it: torch 2.6 ships triton 3.2, which lacks
+# `triton.set_allocator` that mamba_ssm calls; triton 3.3 supplies it but then
+# wants `torch.float4_e2m1fn_x2`, which arrives only in torch 2.8. So 2.8 is the
+# lowest version where torch, its own triton, and the kernels are consistent --
+# and mamba/causal-conv1d publish wheels through 2.10, so it is inside the
+# supported band rather than at its edge.
 # **AND THE PIN IS ASSERTED, NOT ANNOUNCED.** A build that prints a version
 # nobody compares is how 5.15.0 ran for an hour under a name meaning 4.57.1.
 # The expected value is this checkout's OWN venv, so the box matches the machine
@@ -1532,7 +1539,14 @@ CUMAJ=$(./%(venv)s/bin/python -c "import torch;print((torch.version.cuda or '12'
 echo "  wheel tags: torch${TORCHMM} cu${CUMAJ} ${PYTAG}"
 MS="https://github.com/state-spaces/mamba/releases/download/v2.3.2.post1/mamba_ssm-2.3.2.post1+cu${CUMAJ}torch${TORCHMM}cxx11abiTRUE-${PYTAG}-${PYTAG}-linux_x86_64.whl"
 CC="https://github.com/Dao-AILab/causal-conv1d/releases/download/v1.7.0/causal_conv1d-1.7.0+cu${CUMAJ}torch${TORCHMM}cxx11abiTRUE-${PYTAG}-${PYTAG}-linux_x86_64.whl"
-uv pip install --system-certs --python ./%(venv)s/bin/python "$CC" "$MS" 2>&1 | tail -12
+# **`--no-deps` IS LOAD-BEARING AND ITS ABSENCE UNDOES THE PIN.** Both wheels
+# declare `Requires-Dist: torch` with NO upper bound, so without this uv
+# "helpfully" upgrades torch to the newest release -- measured 2026-09-12: it
+# pulled 2.6.0+cu126 straight back to 2.14.0, leaving a kernel .so built against
+# a torch that is no longer installed, which fails at import with `undefined
+# symbol`. The only real dependency these wheels have is the torch they were
+# built against, and we install that deliberately one step earlier.
+uv pip install --system-certs --no-deps --python ./%(venv)s/bin/python "$CC" "$MS" 2>&1 | tail -12
 ./%(venv)s/bin/python - <<'KEOF'
 import importlib.util, sys
 missing = [m for m in ("mamba_ssm", "causal_conv1d")
