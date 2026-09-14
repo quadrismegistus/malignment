@@ -79,6 +79,63 @@ def _resolved_env():
     return {"python": sys.version.split()[0], "executable": sys.executable,
             "packages": dict(sorted(pkgs.items()))}
 
+
+def _declared_vs_resolved(model_id, pkgs):
+    """The PIN beside the RESOLVED version, per declared package. -> dict
+
+    lacan's rule, 2026-09-14: *a pin plus the resolved version is a diff; a pin
+    alone is still a claim.* `roster/models/requirements.json` says what a
+    checkpoint needs; this says what the interpreter actually has, and whether
+    the two agree. Neither half is worth much without the other -- a manifest
+    nothing checks is folklore, and a freeze with nothing to check it against
+    is 160 lines nobody reads.
+
+    `overridden_from` rides through untouched when the roster carries it, so a
+    reader can tell a pin that was CHOSEN for this model from a default it
+    INHERITED from its profile. Absent today; this does not synthesise one,
+    because a fabricated provenance is worse than a missing one.
+
+    Specifiers are PEP 440 and already compound in the roster (`>=4.57,<5`), so
+    nothing here needs a grammar of its own.
+    """
+    out = {}
+    try:
+        import json as _j
+        from packaging.specifiers import SpecifierSet
+        from packaging.version import Version
+        #: located from the PACKAGE, not from this file's path: run_v4.py is
+        #: invoked from several working directories and a relative walk up from
+        #: __file__ broke the moment the fleet ran it from /root/malignment.
+        import malignment as _m
+        _root = os.path.dirname(os.path.dirname(os.path.abspath(_m.__file__)))
+        rq = _j.load(open(os.path.join(_root, "roster", "models",
+                                       "requirements.json")))
+        row = next((r for r in rq["requirements"] if r["model"] == model_id), None)
+        if row is None:
+            return {"_note": "no requirements row for %s" % model_id}
+        #: `packages` is lacan's additive field and is read if present. The two
+        #: that exist TODAY are checked the same way, so this mechanism is not
+        #: waiting on a schema change to start being useful.
+        want = {k: v for k, v in (row.get("packages") or {}).items()}
+        for k in ("transformers", "torch"):
+            if row.get(k):
+                want.setdefault(k, row[k])
+        for name, spec in sorted(want.items()):
+            got = pkgs.get(name.lower())
+            rec = {"specifier": spec, "resolved": got,
+                   "overridden_from": row.get("overridden_from")}
+            try:
+                rec["satisfied"] = (
+                    bool(got) and Version(got) in SpecifierSet(spec))
+            except Exception:                                   # noqa: BLE001
+                #: UNKNOWN, never True. An unparseable version is the state a
+                #: silent pass would hide.
+                rec["satisfied"] = None
+            out[name] = rec
+    except Exception as e:                                      # noqa: BLE001
+        out["_error"] = "%s: %s" % (type(e).__name__, e)
+    return out
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--model", required=True)
@@ -189,8 +246,23 @@ def main():
     #: not only failing ones: a failed box's freeze is only legible against a
     #: working box's, and the working one is the half nobody thinks to keep.
     try:
-        json.dump(_resolved_env(),
-                  open(os.path.join(logdir, "ENV.json"), "w"), indent=1)
+        _env = _resolved_env()
+        _env["declared"] = _declared_vs_resolved(a.model, _env["packages"])
+        json.dump(_env, open(os.path.join(logdir, "ENV.json"), "w"), indent=1)
+        #: **SAY IT IN THE LOG, NOT ONLY IN THE SIDECAR.** A mismatch buried in
+        #: a 160-package JSON is a mismatch nobody reads; this is the line a
+        #: `tail -f` shows and the line the next person greps for. It does NOT
+        #: refuse: the corpus outranks the record, a declared window can be
+        #: stale, and a run_v4 that exits on a version string can lose a whole
+        #: shard to a wrong manifest. Refusal belongs at PROVISION time, before
+        #: the weights are downloaded -- `preflight_env.py --assert-venv`.
+        for _n, _r in sorted(_env["declared"].items()):
+            if _r.get("satisfied") is False:
+                print("  REQUIREMENT MISMATCH %s: roster wants %s, venv has %s"
+                      % (_n, _r["specifier"], _r["resolved"]), flush=True)
+            elif _r.get("satisfied") is None and not _n.startswith("_"):
+                print("  REQUIREMENT UNCHECKABLE %s: wants %s, venv has %r"
+                      % (_n, _r.get("specifier"), _r.get("resolved")), flush=True)
     except Exception:                                           # noqa: BLE001
         pass
     #: **THE POPULATION IS NOT ONE THING AND ITS PARTS ARE NOT WORTH THE SAME.**

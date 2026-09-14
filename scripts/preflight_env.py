@@ -289,13 +289,102 @@ def gated(models, timeout=8):
     return out
 
 
+
+def assert_venv(models, strict=False):
+    """Does the interpreter a model will ACTUALLY run on satisfy its pin?
+
+    **THE REFUSAL BELONGS HERE, BEFORE THE SPEND.** `run_v4.py` records a
+    mismatch into `ENV.json` and prints one line, deliberately: the corpus
+    outranks the record, a declared window can be stale, and a producer that
+    exits on a version string can lose a whole shard to a wrong manifest. But a
+    box that has already pulled 15 GB is a box nobody kills over a version
+    string either -- so the check that REFUSES has to run while refusing is
+    still cheap, which is here.
+
+    lacan, 2026-09-14: *a pin plus the resolved version is a diff; a pin alone
+    is still a claim.* This is the assertion half. It resolves each distinct
+    venv ONCE by asking that interpreter what it has -- not by importing into
+    this one, which would answer for the wrong environment and look identical.
+
+    It reads `packages` if the roster carries it and falls back to the two
+    fields that exist today, so it is useful before that schema lands.
+    """
+    import subprocess
+    from packaging.specifiers import SpecifierSet
+    from packaging.version import Version
+    rq = json.load(open(os.path.join(ROOT, "roster", "models",
+                                     "requirements.json")))
+    rows = {r["model"]: r for r in rq["requirements"]}
+    freeze = {}
+    out, bad = [], 0
+    for m in models:
+        row = rows.get(m)
+        if not row:
+            continue
+        venv = venv_for(m)
+        py = os.path.join(venv, "bin", "python")
+        if venv not in freeze:
+            #: ASK THE INTERPRETER. Importing here would report THIS venv's
+            #: versions under another venv's name -- a wrong answer wearing a
+            #: right answer's shape, which is the defect this file exists for.
+            try:
+                r = subprocess.run(
+                    [py, "-c", "import json,importlib.metadata as m;"
+                     "print(json.dumps({(d.metadata['Name'] or '').lower(): "
+                     "d.version for d in m.distributions()}))"],
+                    capture_output=True, text=True, timeout=60)
+                freeze[venv] = json.loads(r.stdout) if r.returncode == 0 else None
+            except Exception:                                   # noqa: BLE001
+                freeze[venv] = None
+        have = freeze[venv]
+        if have is None:
+            out.append(("UNREADABLE", m, os.path.basename(venv), "", ""))
+            bad += 1
+            continue
+        want = dict(row.get("packages") or {})
+        for k in ("transformers", "torch"):
+            if row.get(k):
+                want.setdefault(k, row[k])
+        for name, spec in sorted(want.items()):
+            got = have.get(name.lower())
+            try:
+                ok = bool(got) and Version(got) in SpecifierSet(spec)
+            except Exception:                                   # noqa: BLE001
+                ok = None
+            if ok is not True:
+                out.append(("MISMATCH" if got else "ABSENT", m,
+                            os.path.basename(venv), name,
+                            "wants %s, has %s" % (spec, got)))
+                bad += 1
+    print("\nVENV ASSERTION -- the pin against the interpreter it will run on")
+    print("%-10s %-42s %-14s %-14s %s"
+          % ("verdict", "model", "venv", "package", "detail"))
+    if not out:
+        print("  all %d model(s) satisfy every declared specifier" % len(models))
+    for v, m, ve, n, d in out[:60]:
+        print("%-10s %-42s %-14s %-14s %s" % (v, m[:42], ve, n, d))
+    if len(out) > 60:
+        print("  ... %d more" % (len(out) - 60))
+    return 1 if (bad and strict) else 0
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--models", nargs="*")
     ap.add_argument("--target", choices=["local", "cloud"], default="local")
     ap.add_argument("--strict", action="store_true",
                     help="exit 1 if any BLOCKER survives")
+    ap.add_argument("--assert-venv", action="store_true",
+                    help="resolve each model's venv and check the LIVE "
+                         "installed versions against its declared specifier. "
+                         "The refusal that belongs BEFORE the spend: run_v4 "
+                         "only records a mismatch, because a producer that "
+                         "exits on a version string can lose a shard to a "
+                         "stale manifest. With --strict this exits 1.")
     a = ap.parse_args()
+
+    if a.assert_venv:
+        r = roster.load()
+        return assert_venv(a.models or sorted(r["nodes"]), strict=a.strict)
 
     obs = {}
     for o in _observations():
