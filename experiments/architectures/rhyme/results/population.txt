@@ -1,0 +1,55 @@
+THE RHYME PULL POPULATION -- three numbers, side by side so they cannot
+be quoted for each other. Manifest: 1786 verse contexts.
+
+    models with any closure row          94
+    endpoint lineages, BOTH arms         47   <- the unit of inference
+    endpoint lineages, base arm present  47
+    endpoint lineages declared           50
+
+THE ARM CROSS-TAB. `48 covered minus 1 that lost its aligned arm` requires
+the second cell to be non-empty. It is not.
+
+    both arms present                    47
+    base present, ALIGNED ABSENT         0
+    aligned present, base absent         0
+    neither arm                          3
+        allenai/Olmo-3-1125-32B                    BOTH arms absent
+        internlm/internlm2-base-7b                 BOTH arms absent
+        meta-llama/Llama-3.1-70B                   BOTH arms absent
+
+THINNEST AND FATTEST MODELS, by distinct verse contexts carrying closure.
+The floor is 1606, about 9x the largest number in the `176 or 177 cells`
+claim, so that claim is not counting this quantity.
+
+    google/recurrentgemma-9b                         1606  of 1786
+    google/gemma-2-9b                                1607  of 1786
+    google/recurrentgemma-9b-it                      1607  of 1786
+    croissantllm/CroissantLLMChat-v0.1               1608  of 1786
+    google/gemma-2-9b-it                             1608  of 1786
+    togethercomputer/RedPajama-INCITE-7B-Chat        1610  of 1786
+    ...                                               ...
+    Zyphra/Zamba2-7B                                 1786  of 1786
+    Zyphra/Zamba2-7B-Instruct                        1786  of 1786
+
+MIN-CELLS SWEEP. No useful setting exists, which is why the clause was
+struck rather than tuned.
+
+    min cells   models  lineages
+           1       94        47
+         500       94        47
+        1000       94        47
+        1500       94        47
+        1600       94        47
+        1700        6         3
+        1786        2         1
+
+ATTEMPT-COVERAGE vs DATA-COVERAGE. Of the 3 absent lineages, two were
+never shipped -- they are the only models above 9B and no 24 GB card in
+the fleet would hold them -- and one was shipped and failed at load,
+returning `exit=0, skipped: 0`. An attempt-census counts that one as
+covered and this table does not, so the two censuses differ by exactly
+the model whose failure was silent:
+
+    allenai/Olmo-3-1125-32B                      never shipped -- above the card
+    internlm/internlm2-base-7b                   shipped, failed at load (silent)
+    meta-llama/Llama-3.1-70B                     never shipped -- above the card
