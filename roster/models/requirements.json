@@ -2660,7 +2660,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 3
+   "n_observations": 4
   },
   {
    "model": "internlm/internlm2-chat-7b",
@@ -2687,7 +2687,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 3
+   "n_observations": 4
   },
   {
    "model": "internlm/internlm2-chat-7b-sft",

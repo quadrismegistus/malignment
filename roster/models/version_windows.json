@@ -6695,6 +6695,19 @@
    "torch": {
     "points": [
      {
+      "version": "2.6.0+cu126",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "cloud_cuda_tf4571",
+         "outcome": "load_failed",
+         "cause": "Died in the TOKENIZER/CONFIG stage of the rhyme fleet, producer f6fe32703174, 2026-09-11 21:05. BOUNDED BY THE LOG, not guessed: run_v4.log's last line is `device cuda | dict_sha b"
+        }
+       ]
+      },
+      "verdict": "fails"
+     },
+     {
       "version": "2.13.0+cu130",
       "verdicts": {
        "fails": [
@@ -6741,9 +6754,16 @@
          "outcome": "ok",
          "cause": "sentencepiece 0.2.2 fails internlm2's SentencePiece->fast conversion outright: 'Converting from SentencePiece and Tiktoken failed'. THE ERROR NAMES transformers' converter, so the "
         }
+       ],
+       "fails": [
+        {
+         "environment": "cloud_cuda_tf4571",
+         "outcome": "load_failed",
+         "cause": "Died in the TOKENIZER/CONFIG stage of the rhyme fleet, producer f6fe32703174, 2026-09-11 21:05. BOUNDED BY THE LOG, not guessed: run_v4.log's last line is `device cuda | dict_sha b"
+        }
        ]
       },
-      "verdict": "works"
+      "verdict": "mixed"
      },
      {
       "version": "4.57.6",
@@ -6778,6 +6798,19 @@
   "internlm/internlm2-chat-7b": {
    "torch": {
     "points": [
+     {
+      "version": "2.6.0+cu126",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "cloud_cuda_tf4571",
+         "outcome": "load_failed",
+         "cause": "Died in the TOKENIZER/CONFIG stage of the rhyme fleet, producer f6fe32703174, 2026-09-11 21:05. BOUNDED BY THE LOG, not guessed: run_v4.log's last line is `device cuda | dict_sha b"
+        }
+       ]
+      },
+      "verdict": "fails"
+     },
      {
       "version": "2.13.0+cu130",
       "verdicts": {
@@ -6825,9 +6858,16 @@
          "outcome": "ok",
          "cause": "sentencepiece 0.2.2 fails internlm2's SentencePiece->fast conversion outright: 'Converting from SentencePiece and Tiktoken failed'. THE ERROR NAMES transformers' converter, so the "
         }
+       ],
+       "fails": [
+        {
+         "environment": "cloud_cuda_tf4571",
+         "outcome": "load_failed",
+         "cause": "Died in the TOKENIZER/CONFIG stage of the rhyme fleet, producer f6fe32703174, 2026-09-11 21:05. BOUNDED BY THE LOG, not guessed: run_v4.log's last line is `device cuda | dict_sha b"
+        }
        ]
       },
-      "verdict": "works"
+      "verdict": "mixed"
      },
      {
       "version": "4.57.6",

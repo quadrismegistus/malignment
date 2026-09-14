@@ -38,6 +38,8 @@ kept. Do not mix them inside one corpus.
 import argparse
 import json
 import os
+import time
+import traceback
 import sys
 
 from malignment import twp as T
@@ -241,6 +243,35 @@ def main():
                           system=DEFAULT if a.system is None else a.system,
                           user_msg=a.user_msg, closure_at=_cl,
                           purge=a.purge)
+    except BaseException as e:
+        #: **THE FAILURE MUST LAND IN THE LOG THAT RSYNCS.** `_Tee` wraps
+        #: STDOUT only, and a traceback goes to STDERR -- which `queue_v4` then
+        #: captures into its own pipe and prints two lines of to the box's
+        #: ephemeral stage log. So the one artifact that travels off the box,
+        #: `twp/<model>/<producer>/run_v4.log`, recorded the ATTEMPT and never
+        #: the OUTCOME: both internlm2 arms stop dead after
+        #: `device cuda | dict_sha ...` on 2026-09-11, with the cause reachable
+        #: only on a machine that was destroyed an hour later.
+        #:
+        #: Restoring stdout in `finally` and letting the interpreter print the
+        #: traceback does NOT fix it: by then the tee is closed. It has to be
+        #: caught and written HERE.
+        print("\n  *** FAILED %s: %s: %s" % (a.model, type(e).__name__, e),
+              flush=True)
+        traceback.print_exc(file=sys.stdout)
+        #: And a MACHINE-READABLE sidecar beside it, because a census asking
+        #: "which models did this box fail on" should not have to parse prose.
+        #: Absence of a cell is not evidence of absence of an attempt, and this
+        #: is the file that tells them apart.
+        try:
+            json.dump({"model": a.model, "producer": PRODUCER,
+                       "when": time.strftime("%Y-%m-%dT%H:%M:%S"),
+                       "error": type(e).__name__, "message": str(e)[:2000],
+                       "traceback": traceback.format_exc()[-4000:]},
+                      open(os.path.join(logdir, "FAILED.json"), "w"), indent=1)
+        except Exception:
+            pass                      # never let the recorder mask the failure
+        raise
     finally:
         sys.stdout = tee.stream
         tee.close()
