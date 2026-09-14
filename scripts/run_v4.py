@@ -48,6 +48,37 @@ from malignment.checkpoint import Checkpoint
 from malignment.prompts import Prompts
 
 
+
+def _resolved_env():
+    """EVERY installed distribution, RESOLVED, not the constraint we asked for.
+
+    **The corpus records resolved versions for exactly two packages and only on
+    the success path.** `runners.run` stamps `transformers_version` and
+    `torch_version` by reading `__version__` off the live interpreter -- which
+    is the right thing -- but it builds that stamp AFTER `load_for_twp`
+    returns, and it rides on the CELL. A model that dies at load writes no
+    cells, so a failed run records no versions at all: internlm2's environment
+    on 2026-09-11 had to be attributed from SIBLING models on the same box.
+
+    And two packages is the wrong number. The package that broke internlm2 is
+    `sentencepiece`, which no column, no stamp and no manifest field names.
+    **The relevant package is by definition the one nobody thought to list**,
+    so this takes the whole freeze rather than a curated set: a few KB, written
+    beside the data, and a later failure becomes a DIFF against a working run
+    instead of an argument about what the box probably had.
+    """
+    import importlib.metadata as _md
+    pkgs = {}
+    for dist in _md.distributions():
+        try:
+            nm = dist.metadata["Name"]
+        except Exception:                                       # noqa: BLE001
+            continue
+        if nm:
+            pkgs[nm.lower()] = dist.version
+    return {"python": sys.version.split()[0], "executable": sys.executable,
+            "packages": dict(sorted(pkgs.items()))}
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--model", required=True)
@@ -154,6 +185,14 @@ def main():
     os.makedirs(os.path.dirname(ck.stash(PRODUCER).path), exist_ok=True)
     tee = _Tee(os.path.join(logdir, "run_v4.log"))
     sys.stdout = tee
+    #: **BOTH SIDES OF THE DIFF, OR IT IS NOT A DIFF.** Written on every run,
+    #: not only failing ones: a failed box's freeze is only legible against a
+    #: working box's, and the working one is the half nobody thinks to keep.
+    try:
+        json.dump(_resolved_env(),
+                  open(os.path.join(logdir, "ENV.json"), "w"), indent=1)
+    except Exception:                                           # noqa: BLE001
+        pass
     #: **THE POPULATION IS NOT ONE THING AND ITS PARTS ARE NOT WORTH THE SAME.**
     #: Measured 2026-08-18 over 81 models:
     #:
@@ -267,7 +306,11 @@ def main():
             json.dump({"model": a.model, "producer": PRODUCER,
                        "when": time.strftime("%Y-%m-%dT%H:%M:%S"),
                        "error": type(e).__name__, "message": str(e)[:2000],
-                       "traceback": traceback.format_exc()[-4000:]},
+                       "traceback": traceback.format_exc()[-4000:],
+                       #: the RESOLVED environment at the moment it died --
+                       #: the thing the cell stamp cannot carry, because a
+                       #: failed run has no cell to carry it on
+                       "env": _resolved_env()},
                       open(os.path.join(logdir, "FAILED.json"), "w"), indent=1)
         except Exception:
             pass                      # never let the recorder mask the failure
