@@ -352,9 +352,13 @@ def assert_venv(models, strict=False):
             except Exception:                                   # noqa: BLE001
                 ok = None
             if ok is not True:
+                #: a BARE requirement ('' in models.yaml) means "required,
+                #: any version". Printing an empty specifier reads as "nothing
+                #: declared", which inverts it.
                 out.append(("MISMATCH" if got else "ABSENT", m,
                             os.path.basename(venv), name,
-                            "wants %s, has %s" % (spec, got)))
+                            "wants %s, has %s"
+                            % (spec or "any version", got or "NOTHING")))
                 bad += 1
     print("\nVENV ASSERTION -- the pin against the interpreter it will run on")
     print("%-10s %-42s %-14s %-14s %s"

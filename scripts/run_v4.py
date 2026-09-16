@@ -122,7 +122,13 @@ def _declared_vs_resolved(model_id, pkgs):
                 want.setdefault(k, row[k])
         for name, spec in sorted(want.items()):
             got = pkgs.get(name.lower())
-            rec = {"specifier": spec, "resolved": got,
+            #: **A BARE REQUIREMENT IS A REAL REQUIREMENT, NOT A MISSING
+            #: VALUE.** `einops: ''` in models.yaml means "required, any
+            #: version" -- but an empty `specifier` in a JSON record reads as
+            #: "nothing declared", which is the opposite. `required` is
+            #: therefore always True for anything in this block, and the
+            #: specifier is rendered `*` when it is bare. lacan, 2026-09-14.
+            rec = {"specifier": spec or "*", "required": True, "resolved": got,
                    "overridden_from": row.get("overridden_from")}
             try:
                 rec["satisfied"] = (
@@ -258,8 +264,11 @@ def main():
         #: the weights are downloaded -- `preflight_env.py --assert-venv`.
         for _n, _r in sorted(_env["declared"].items()):
             if _r.get("satisfied") is False:
-                print("  REQUIREMENT MISMATCH %s: roster wants %s, venv has %s"
-                      % (_n, _r["specifier"], _r["resolved"]), flush=True)
+                print("  REQUIREMENT %s %s: roster wants %s, venv has %s"
+                      % ("ABSENT" if not _r["resolved"] else "MISMATCH", _n,
+                         "any version" if _r["specifier"] == "*"
+                         else _r["specifier"],
+                         _r["resolved"] or "NOTHING"), flush=True)
             elif _r.get("satisfied") is None and not _n.startswith("_"):
                 print("  REQUIREMENT UNCHECKABLE %s: wants %s, venv has %r"
                       % (_n, _r.get("specifier"), _r.get("resolved")), flush=True)

@@ -658,7 +658,8 @@ RULE_VERSION = 4
 #: rerun. The panel's whole point is that a prompt can be asked about now.
 
 
-def contrast(prompt, units, top=12, words=None, select_at=0, min_units=1):
+def contrast(prompt, units, top=12, words=None, select_at=0, min_units=1,
+             select_union=False, select_pooled=False):
     """Per-word probability at ONE prompt across the rungs of each unit.
 
         units = [("olmo", ["allenai/OLMo-2-1124-7B", "...-Instruct"]), ...]
@@ -673,7 +674,12 @@ def contrast(prompt, units, top=12, words=None, select_at=0, min_units=1):
         unit  position  model  word  p
 
     **WORD SELECTION IS DECLARED AND BLIND TO MOVEMENT.** The default is the
-    top-N by mass at `select_at`, which is position 0 -- the base. A rule that
+    top-N by mass at `select_at`, which is position 0 -- the base.
+    `select_union=True` takes the top-N at EVERY rung and unions them, which is
+    still blind to movement (each rung is ranked by its own mass, never by the
+    difference) but can show a word that ARRIVES rather than only words the
+    base already had. It returns between N and N x rungs words, so a caller
+    must read the count off `meta["words"]` rather than assuming N. A rule that
     picked words because they moved would condition every later interval on the
     selection, and the archive's `plot_prompt_words.py` says so in the subtitle
     for exactly this reason. Passing `words` explicitly is allowed and is
@@ -735,12 +741,53 @@ def contrast(prompt, units, top=12, words=None, select_at=0, min_units=1):
     else:
         #: Summed across units at the SELECTION RUNG, so the choice is a property
         #: of the population rather than of whichever unit happens to be first.
-        tot = {}
-        for _, rungs in present:
-            for w, p in by[rungs[select_at]].items():
-                tot[w] = tot.get(w, 0.0) + p
-        chosen = [w for w, _ in sorted(tot.items(), key=lambda kv: -kv[1])[:top]]
-        selection = "top %d by mass at position %d" % (top, select_at)
+        def _topn(pos, n):
+            tot = {}
+            for _, rungs in present:
+                for w, p in by[rungs[pos]].items():
+                    tot[w] = tot.get(w, 0.0) + p
+            return [w for w, _ in sorted(tot.items(), key=lambda kv: -kv[1])[:n]]
+
+        if select_pooled:
+            #: **TOP N BY POOLED MASS ACROSS EVERY RUNG.** Sum first, rank once.
+            #: The union of per-rung top-Ns is the obvious alternative and it
+            #: MISBEHAVES AT SMALL N in a way that matters for a figure: where
+            #: the arms agree on their leaders -- measured on `She was so angry
+            #: she wanted to`, both arms lead with kill, scream, hit -- the
+            #: union of two top-3s is 3 words, not 6, and the near-flat words
+            #: that make a mover legible AS a mover are exactly what drops out.
+            #: Pooling gives a stable N regardless of how much the arms agree.
+            #: Still blind to movement: a word is ranked by its total mass,
+            #: never by the difference between rungs.
+            tot = {}
+            for _, rungs in present:
+                for pos in range(n_rungs):
+                    for w, p in by[rungs[pos]].items():
+                        tot[w] = tot.get(w, 0.0) + p
+            chosen = [w for w, _ in sorted(tot.items(), key=lambda kv: -kv[1])[:top]]
+            selection = ("top %d by POOLED mass across %d rungs"
+                         % (top, n_rungs))
+        elif select_union:
+            #: **TOP N AT EVERY RUNG, UNIONED.** Selecting only at the base
+            #: cannot show a word that ARRIVES: anything the aligned arm puts
+            #: mass on but the base did not is invisible, which is the half of
+            #: the movement this figure exists to show. The union is still
+            #: BLIND TO MOVEMENT -- it ranks by mass within each rung and never
+            #: by the difference -- so it does not condition the intervals the
+            #: way picking movers would. What it does change is the COUNT: the
+            #: result is between N and N x rungs words, so the figure must
+            #: report how many it actually got rather than implying N.
+            seen, chosen = set(), []
+            for pos in range(n_rungs):
+                for w in _topn(pos, top):
+                    if w not in seen:
+                        seen.add(w)
+                        chosen.append(w)
+            selection = ("union of top %d by mass at each of %d rungs -> %d words"
+                         % (top, n_rungs, len(chosen)))
+        else:
+            chosen = _topn(select_at, top)
+            selection = "top %d by mass at position %d" % (top, select_at)
 
     rows, below = [], 0
     for name, rungs in present:
