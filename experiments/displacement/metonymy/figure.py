@@ -273,6 +273,22 @@ ORPHANS = {40: "belt", 43: "bra", 54: "glasses", 55: "glasses", 56: "glasses"}
 #: layering it was published with.
 LAYER_SWAP = {"robe": "jacket", "jacket": "robe"}
 
+#: The source drew a boot on the left foot and a shoe on the right, so the two
+#: feet are not interchangeable. Remove `boots` and one foot goes bare. When
+#: that happens, mirror the shoe across the body's axis and give it to `shoes`
+#: as well, so the figure keeps a pair. Nothing about the measurement changes:
+#: both shapes carry one word's one number.
+HER_AXIS = 410.0
+SHOE_LINE = 36                # 1-indexed in the source, the her-panel shoe
+
+#: The body strokes are drawn at the weight of a garment, so at 4.5 the arms
+#: read as a filled dark layer rather than a limb. Thinned by line, not
+#: globally, because the legs sit inside trousers and want their weight.
+THIN = {14: 2.4, 15: 2.4}     # the two arms
+#: and the garments' own outlines, lifted off the fill so the nesting reads as
+#: depth rather than as six drawn boxes.
+BORDER_OPACITY = 0.45
+
 MODES = {
     #: (max, what the shading means, the two panel subtitles, the two pole
     #: labels on the legend, the tick values)
@@ -312,6 +328,24 @@ def _first_x(line):
     m = (re.search(r'[ML] ([\d.]+) ', line) or re.search(r'x="([-\d.]+)"', line)
          or re.search(r'cx="([\d.]+)"', line))
     return float(m.group(1)) if m else None
+
+
+def _mirror_d(d, axis):
+    """Reflect an absolute-coordinate path about a vertical line.
+
+    Every command in this drawing takes x y pairs -- M, L and Q -- so the
+    parse is: a letter resets the phase, then numbers alternate x, y.
+    """
+    out, phase = [], 0
+    for tok in d.split():
+        if re.match(r'^[A-Za-z]$', tok):
+            out.append(tok)
+            phase = 0
+            continue
+        v = float(tok)
+        out.append("%g" % ((2 * axis - v) if phase % 2 == 0 else v))
+        phase += 1
+    return " ".join(out)
 
 
 def build_two_body(mode, scale="D", min_move=0.0, layer_swap=True):
@@ -372,6 +406,35 @@ def build_two_body(mode, scale="D", min_move=0.0, layer_swap=True):
             fills[_l2[i]] = word
     for ln, word in ORPHANS.items():
         fills[lines[ln - 1]] = word
+
+    #: thin the body strokes, and lift the garment outlines off their fills.
+    #: Both edits change the line text and `fills` is keyed BY line text, so
+    #: the membership test has to be taken ONCE, before either map is rebuilt.
+    #: Rebuilding `fills` first and `her_draw` second silently unmaps every
+    #: garment -- the draw lines then miss the softened keys and paint white.
+    garment_lines = frozenset(fills)
+    thin_by_line = {lines[ln - 1]: w for ln, w in THIN.items()}
+    soften = ('stroke="#26262b"',
+              'stroke="#26262b" stroke-opacity="%g"' % BORDER_OPACITY)
+
+    def restyle(l):
+        if l in thin_by_line:
+            return re.sub(r'stroke-width="[\d.]+"',
+                          'stroke-width="%g"' % thin_by_line[l], l)
+        return l.replace(*soften) if l in garment_lines else l
+
+    fills = {restyle(k): v for k, v in fills.items()}
+    her_draw = [restyle(l) for l in her_draw]
+
+    #: give her a second shoe when the boot that filled the other foot is gone
+    shoe = next((l for l in her_draw if fills.get(l) == "shoes"), None)
+    if shoe is not None and not kept("boots"):
+        twin = re.sub(r'd="([^"]+)"',
+                      lambda mo: 'd="%s"' % _mirror_d(mo.group(1), HER_AXIS),
+                      shoe)
+        her_draw = her_draw[:her_draw.index(shoe)] + [twin] + \
+            her_draw[her_draw.index(shoe):]
+        fills[twin] = "shoes"
     if layer_swap:
         for line, w in list(fills.items()):
             if w in LAYER_SWAP:
