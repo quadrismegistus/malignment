@@ -125,6 +125,14 @@ The drawing is ported and its geometry carries the argument -- each garment is d
 
 None of them changes the shape. `blouse`, `cap`, `helmet` and `trousers` are the four a redrawing would be worth doing for, and all four fall, which is the direction the existing drawing already shows for their layer.
 
+## Two orderings, and they are not the same question
+
+`run.py` emits both. `median_delta_pp` is MAGNITUDE; `fall_rate` and `rise_rate` are CONSISTENCY, the share of the lineages carrying a word in which it moves that way. A word can top the magnitude table on a minority of lineages moving a lot: `clothes` has the second-largest median fall in the her-frame and falls in only 29 of 50, while `skirt` falls in 41 and ranks sixth.
+
+**The two rankings come apart, and not symmetrically.** The most consistent her-frame FALLERS are small movers (`belt` 88% at -0.083, `panties` 85% at -0.190) and the biggest fallers are inconsistent. The most consistent RISERS are the biggest risers: `shoes` rises in 70% of its lineages at +2.650 and `glasses` in 68% at +1.092, and they lead both tables. So the return is large and agreed, while the withdrawal is either large or agreed but rarely both.
+
+**`--nouns` is not a garment filter.** The contextual POS prefilter (`survey.candidates()`, run at the end of each frame) removes the 109 adjectives -- `black`, `white`, `leather`, `wet` -- which is why they appear in the unfiltered word table and in NO survey scale. It does not remove `night`, `head`, `hair`, `hand` or `sweat`, which tag NOUN in frame and top the consistency table; the survey's GATE is what removes those, and the veto-passed worn set (181 words) is the filter that gets to garments. All three are available: the raw table, `--nouns`, and the `scored_veto` column in `results/scales.csv`.
+
 ### Is the drawing a fair picture of the slot?
 
 Two different answers, and they should be quoted separately.

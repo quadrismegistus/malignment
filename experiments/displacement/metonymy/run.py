@@ -126,6 +126,22 @@ def scale(name="D"):
     return out
 
 
+def _candidate_nouns():
+    """The `survey.candidates()` set, read back off the survey's own output.
+
+    The POS prefilter is CONTEXTUAL and runs at the end of each frame. It
+    removes 109 adjectives -- `black`, `leather`, `wet` -- cleanly, and it does
+    NOT remove fragments, which is why the survey also carries a NOT_A_WORD
+    gate. This producer's word table is deliberately unfiltered; `--nouns`
+    applies the same restriction so the two can be read side by side.
+    """
+    path = os.path.join(HERE, "results", "scales.csv")
+    if not os.path.exists(path):
+        return frozenset()
+    return frozenset(r["word"].lower()
+                     for r in csv.DictReader(open(path, encoding="utf-8")))
+
+
 def _spearman(x, y):
     from scipy.stats import spearmanr
     r = spearmanr(x, y)
@@ -156,6 +172,13 @@ def main(argv=None):
                     help="a word needs this many CARRYING lineages before it "
                          "enters the word-level test. Its statistic is the "
                          "median delta over exactly those lineages.")
+    ap.add_argument("--nouns", action="store_true",
+                    help="restrict the word table to `survey.candidates()`, "
+                         "the contextual-POS NOUN/PROPN set. The survey is "
+                         "administered over that set and the word table is "
+                         "NOT -- so `black`, `white` and `leather` appear in "
+                         "the table and are absent from every survey scale. "
+                         "The membership is read back off results/scales.csv.")
     ap.add_argument("--min-lineages", type=int, default=2,
                     help="a word must move in this many lineages to be listed. "
                          "RECURRENCE, not magnitude: the registration's own "
@@ -163,11 +186,15 @@ def main(argv=None):
                          "DOES wants words many models move, at any size.")
     a = ap.parse_args(argv)
 
-    a.csv = a.csv or os.path.join(HERE, "results", "words_%s.csv" % a.scale)
+    a.csv = a.csv or os.path.join(HERE, "results", "words%s_%s.csv"
+                                  % ("_nouns" if a.nouns else "", a.scale))
     a.pairs = a.pairs or os.path.join(HERE, "results", "pairs_%s.csv" % a.scale)
 
     from malignment import ch, roster
     B = scale(a.scale)
+    NOUNS = _candidate_nouns()
+    if a.nouns and not NOUNS:
+        raise SystemExit("--nouns needs results/scales.csv; run survey.py first")
     eps, unresolved = roster.endpoints()
     if unresolved:
         raise SystemExit("unresolved lineages: %s" % sorted(unresolved)[:3])
@@ -231,11 +258,21 @@ def main(argv=None):
         for w, (up, dn, net) in sorted(rf.items(), key=lambda kv: -(kv[1][0] - kv[1][1])):
             if up + dn < a.min_lineages:
                 continue
+            if a.nouns and w.lower() not in NOUNS:
+                continue
             ds = deltas[w]
             word_rows.append({
                 "scene": a.scene, "prompt": prompt, "word": w,
                 "n_rise": up, "n_fall": dn, "net": up - dn,
                 "n_carriers": len(ds),
+                #: CONSISTENCY, not magnitude: the share of the lineages that
+                #: carry the word in which it falls. A word can top the median
+                #: table on a minority of lineages moving a lot -- `clothes`
+                #: falls in 29 of 50 and `skirt` in 41 -- so the two orderings
+                #: are different questions and neither subsumes the other.
+                "fall_rate": "%.4f" % (dn / float(len(ds))),
+                "rise_rate": "%.4f" % (up / float(len(ds))),
+                "noun": int(w.lower() in NOUNS),
                 "median_delta_pp": "%+.5f" % st.median(ds),
                 "mean_delta_pp": "%+.5f" % st.fmean(ds),
                 "median_p_base_pct": "%.5f" % st.median(levels[w][0]),
