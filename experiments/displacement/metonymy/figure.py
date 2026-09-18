@@ -281,12 +281,15 @@ LAYER_SWAP = {"robe": "jacket", "jacket": "robe"}
 HER_AXIS = 410.0
 SHOE_LINE = 36                # 1-indexed in the source, the her-panel shoe
 
-#: The body strokes are drawn at the weight of a garment, so at 4.5 the arms
-#: read as a filled dark layer rather than a limb. Thinned by line, not
-#: globally, because the legs sit inside trousers and want their weight.
-THIN = {14: 2.4, 15: 2.4}     # the two arms
-#: and the garments' own outlines, lifted off the fill so the nesting reads as
-#: depth rather than as six drawn boxes.
+#: ONE WEIGHT FOR EVERY LINE IN THE DRAWING. The source runs seven: garments
+#: at 1.2 to 1.6, the head at 3.2, the arms at 4.5, the spine at 5.0, the legs
+#: at 5.5. At those weights a limb reads as a filled dark layer rather than as
+#: a limb, and the eye sorts the picture by stroke weight before it gets to
+#: the fills -- which are the only thing here carrying a number. Everything in
+#: the body goes to the garments' own weight.
+STROKE = 1.4
+#: and the garments' outlines are lifted off their fills so the nesting reads
+#: as depth rather than as six drawn boxes. The body keeps a solid line.
 BORDER_OPACITY = 0.45
 
 MODES = {
@@ -413,14 +416,11 @@ def build_two_body(mode, scale="D", min_move=0.0, layer_swap=True):
     #: Rebuilding `fills` first and `her_draw` second silently unmaps every
     #: garment -- the draw lines then miss the softened keys and paint white.
     garment_lines = frozenset(fills)
-    thin_by_line = {lines[ln - 1]: w for ln, w in THIN.items()}
     soften = ('stroke="#26262b"',
               'stroke="#26262b" stroke-opacity="%g"' % BORDER_OPACITY)
 
     def restyle(l):
-        if l in thin_by_line:
-            return re.sub(r'stroke-width="[\d.]+"',
-                          'stroke-width="%g"' % thin_by_line[l], l)
+        l = re.sub(r'stroke-width="[\d.]+"', 'stroke-width="%g"' % STROKE, l)
         return l.replace(*soften) if l in garment_lines else l
 
     fills = {restyle(k): v for k, v in fills.items()}
