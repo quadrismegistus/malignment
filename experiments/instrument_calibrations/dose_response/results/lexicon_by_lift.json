@@ -1,0 +1,761 @@
+{
+ "lex_cut": 5,
+ "factors": {
+  "any3": {
+   "describes": "max(k_charge, k_transgressiveness, k_bodily_harm) >= 5",
+   "median_drift": 1.1878587726631404,
+   "cells": [
+    {
+     "content": "low",
+     "band": "lift <= 0",
+     "n_lineages": 50,
+     "median_ratio": 1.1858247339037746,
+     "median_relative": 1.0068868503372266,
+     "falls_relative": 17,
+     "base_mass": 33004.958291858704,
+     "rows": 1379814,
+     "share_of_base_mass": 0.7849712968743738
+    },
+    {
+     "content": "low",
+     "band": "lift 1-2",
+     "n_lineages": 50,
+     "median_ratio": 1.2219928064891885,
+     "median_relative": 1.0290435789189363,
+     "falls_relative": 19,
+     "base_mass": 6196.900945805803,
+     "rows": 237430,
+     "share_of_base_mass": 0.14738359397445772
+    },
+    {
+     "content": "low",
+     "band": "lift >= 3",
+     "n_lineages": 50,
+     "median_ratio": 0.9653607860223419,
+     "median_relative": 0.8256090293507792,
+     "falls_relative": 45,
+     "base_mass": 809.5151474750297,
+     "rows": 25611,
+     "share_of_base_mass": 0.019253051300163856
+    },
+    {
+     "content": "high",
+     "band": "lift <= 0",
+     "n_lineages": 50,
+     "median_ratio": 1.115563889553783,
+     "median_relative": 0.9738031709292654,
+     "falls_relative": 30,
+     "base_mass": 501.34651494677587,
+     "rows": 15628,
+     "share_of_base_mass": 0.011923742503813223
+    },
+    {
+     "content": "high",
+     "band": "lift 1-2",
+     "n_lineages": 50,
+     "median_ratio": 1.035635471656681,
+     "median_relative": 0.9016158570736396,
+     "falls_relative": 37,
+     "base_mass": 894.3177855706567,
+     "rows": 28368,
+     "share_of_base_mass": 0.021269949373951536
+    },
+    {
+     "content": "high",
+     "band": "lift >= 3",
+     "n_lineages": 50,
+     "median_ratio": 0.8635980125882652,
+     "median_relative": 0.711459934076547,
+     "falls_relative": 44,
+     "base_mass": 639.0315633814288,
+     "rows": 17224,
+     "share_of_base_mass": 0.015198365973239638
+    }
+   ],
+   "contrasts": [
+    {
+     "test": "A: high / low  within lift <= 0",
+     "asks": "at a FIXED lift, does more content cost mass?",
+     "median": 0.9668279927032777,
+     "below_1": 31,
+     "n_lineages": 50,
+     "p_sign": 0.11892045255943628
+    },
+    {
+     "test": "A: high / low  within lift 1-2",
+     "asks": "at a FIXED lift, does more content cost mass?",
+     "median": 0.8859341743313585,
+     "below_1": 40,
+     "n_lineages": 50,
+     "p_sign": 2.3861331676755526e-05
+    },
+    {
+     "test": "A: high / low  within lift >= 3",
+     "asks": "at a FIXED lift, does more content cost mass?",
+     "median": 0.8860375374299763,
+     "below_1": 38,
+     "n_lineages": 50,
+     "p_sign": 0.00030586400160359517
+    },
+    {
+     "test": "B: lift>=3 / lift<=0  within low",
+     "asks": "at FIXED content, does more lift cost mass?",
+     "median": 0.8043812209537624,
+     "below_1": 45,
+     "n_lineages": 50,
+     "p_sign": 4.209852022540872e-09
+    },
+    {
+     "test": "B: lift>=3 / lift<=0  within high",
+     "asks": "at FIXED content, does more lift cost mass?",
+     "median": 0.7198672679896156,
+     "below_1": 44,
+     "n_lineages": 50,
+     "p_sign": 3.243740565039843e-08
+    },
+    {
+     "test": "C: INTERACTION",
+     "asks": "is the lift effect DIFFERENT at high content? 1.000 = two independent filters",
+     "median": 0.9059727128161457,
+     "below_1": 39,
+     "n_lineages": 50,
+     "p_sign": 9.021490107130603e-05
+    }
+   ]
+  },
+  "bodily_harm": {
+   "describes": "max(k_bodily_harm) >= 5",
+   "median_drift": 1.1878587726631413,
+   "cells": [
+    {
+     "content": "low",
+     "band": "lift <= 0",
+     "n_lineages": 50,
+     "median_ratio": 1.1871769460736052,
+     "median_relative": 1.0075749368991949,
+     "falls_relative": 14,
+     "base_mass": 33256.44739678257,
+     "rows": 1390009,
+     "share_of_base_mass": 0.7909525717815008
+    },
+    {
+     "content": "low",
+     "band": "lift 1-2",
+     "n_lineages": 50,
+     "median_ratio": 1.2215548544160084,
+     "median_relative": 1.0356151058889294,
+     "falls_relative": 20,
+     "base_mass": 6531.172105742413,
+     "rows": 251160,
+     "share_of_base_mass": 0.15533371054793835
+    },
+    {
+     "content": "low",
+     "band": "lift >= 3",
+     "n_lineages": 50,
+     "median_ratio": 0.9680400328603619,
+     "median_relative": 0.8020776525619658,
+     "falls_relative": 45,
+     "base_mass": 941.4751293360582,
+     "rows": 30368,
+     "share_of_base_mass": 0.02239151301797556
+    },
+    {
+     "content": "high",
+     "band": "lift <= 0",
+     "n_lineages": 50,
+     "median_ratio": 0.9930448189378664,
+     "median_relative": 0.8542753375941625,
+     "falls_relative": 40,
+     "base_mass": 249.85741002290715,
+     "rows": 5433,
+     "share_of_base_mass": 0.005942467596686314
+    },
+    {
+     "content": "high",
+     "band": "lift 1-2",
+     "n_lineages": 50,
+     "median_ratio": 0.9624242708767732,
+     "median_relative": 0.8309581630426699,
+     "falls_relative": 41,
+     "base_mass": 560.0466256340476,
+     "rows": 14638,
+     "share_of_base_mass": 0.013319832800470954
+    },
+    {
+     "content": "high",
+     "band": "lift >= 3",
+     "n_lineages": 50,
+     "median_ratio": 0.8055513052495497,
+     "median_relative": 0.673529425955877,
+     "falls_relative": 46,
+     "base_mass": 507.0715815204001,
+     "rows": 12467,
+     "share_of_base_mass": 0.012059904255427936
+    }
+   ],
+   "contrasts": [
+    {
+     "test": "A: high / low  within lift <= 0",
+     "asks": "at a FIXED lift, does more content cost mass?",
+     "median": 0.8408143763015464,
+     "below_1": 39,
+     "n_lineages": 50,
+     "p_sign": 9.021490107130603e-05
+    },
+    {
+     "test": "A: high / low  within lift 1-2",
+     "asks": "at a FIXED lift, does more content cost mass?",
+     "median": 0.8086172199318011,
+     "below_1": 40,
+     "n_lineages": 50,
+     "p_sign": 2.3861331676755526e-05
+    },
+    {
+     "test": "A: high / low  within lift >= 3",
+     "asks": "at a FIXED lift, does more content cost mass?",
+     "median": 0.8180281983015105,
+     "below_1": 38,
+     "n_lineages": 50,
+     "p_sign": 0.00030586400160359517
+    },
+    {
+     "test": "B: lift>=3 / lift<=0  within low",
+     "asks": "at FIXED content, does more lift cost mass?",
+     "median": 0.7875788448777575,
+     "below_1": 44,
+     "n_lineages": 50,
+     "p_sign": 3.243740565039843e-08
+    },
+    {
+     "test": "B: lift>=3 / lift<=0  within high",
+     "asks": "at FIXED content, does more lift cost mass?",
+     "median": 0.7964773509107032,
+     "below_1": 43,
+     "n_lineages": 50,
+     "p_sign": 2.098677427397888e-07
+    },
+    {
+     "test": "C: INTERACTION",
+     "asks": "is the lift effect DIFFERENT at high content? 1.000 = two independent filters",
+     "median": 0.9798806129089171,
+     "below_1": 26,
+     "n_lineages": 50,
+     "p_sign": 0.887724827340783
+    }
+   ]
+  },
+  "charge": {
+   "describes": "max(k_charge) >= 5",
+   "median_drift": 1.1878587726631418,
+   "cells": [
+    {
+     "content": "low",
+     "band": "lift <= 0",
+     "n_lineages": 50,
+     "median_ratio": 1.1855761497340969,
+     "median_relative": 1.0057881610161812,
+     "falls_relative": 19,
+     "base_mass": 33224.32461875863,
+     "rows": 1385280,
+     "share_of_base_mass": 0.7901885817621318
+    },
+    {
+     "content": "low",
+     "band": "lift 1-2",
+     "n_lineages": 50,
+     "median_ratio": 1.2139730891523661,
+     "median_relative": 1.0208137011039482,
+     "falls_relative": 21,
+     "base_mass": 6609.257686156392,
+     "rows": 250541,
+     "share_of_base_mass": 0.1571908539135722
+    },
+    {
+     "content": "low",
+     "band": "lift >= 3",
+     "n_lineages": 50,
+     "median_ratio": 0.9522259722756452,
+     "median_relative": 0.8166405610728797,
+     "falls_relative": 46,
+     "base_mass": 1026.1595518269175,
+     "rows": 32183,
+     "share_of_base_mass": 0.024405599518551573
+    },
+    {
+     "content": "high",
+     "band": "lift <= 0",
+     "n_lineages": 50,
+     "median_ratio": 1.2033091660093076,
+     "median_relative": 1.0377958632677853,
+     "falls_relative": 19,
+     "base_mass": 281.98018804686785,
+     "rows": 10162,
+     "share_of_base_mass": 0.00670645761605549
+    },
+    {
+     "content": "high",
+     "band": "lift 1-2",
+     "n_lineages": 50,
+     "median_ratio": 1.0465736467294149,
+     "median_relative": 0.9105642286868475,
+     "falls_relative": 36,
+     "base_mass": 481.96104522007136,
+     "rows": 15257,
+     "share_of_base_mass": 0.011462689434837105
+    },
+    {
+     "content": "high",
+     "band": "lift >= 3",
+     "n_lineages": 50,
+     "median_ratio": 0.7731988981125153,
+     "median_relative": 0.6492976270596216,
+     "falls_relative": 44,
+     "base_mass": 422.38715902954084,
+     "rows": 10652,
+     "share_of_base_mass": 0.010045817754851912
+    }
+   ],
+   "contrasts": [
+    {
+     "test": "A: high / low  within lift <= 0",
+     "asks": "at a FIXED lift, does more content cost mass?",
+     "median": 1.0363492153151883,
+     "below_1": 19,
+     "n_lineages": 50,
+     "p_sign": 0.11892045255943628
+    },
+    {
+     "test": "A: high / low  within lift 1-2",
+     "asks": "at a FIXED lift, does more content cost mass?",
+     "median": 0.8940664922460739,
+     "below_1": 39,
+     "n_lineages": 50,
+     "p_sign": 9.021490107130603e-05
+    },
+    {
+     "test": "A: high / low  within lift >= 3",
+     "asks": "at a FIXED lift, does more content cost mass?",
+     "median": 0.8290022038289455,
+     "below_1": 41,
+     "n_lineages": 50,
+     "p_sign": 5.614100093254137e-06
+    },
+    {
+     "test": "B: lift>=3 / lift<=0  within low",
+     "asks": "at FIXED content, does more lift cost mass?",
+     "median": 0.8106300999803646,
+     "below_1": 46,
+     "n_lineages": 50,
+     "p_sign": 4.461782054931973e-10
+    },
+    {
+     "test": "B: lift>=3 / lift<=0  within high",
+     "asks": "at FIXED content, does more lift cost mass?",
+     "median": 0.5968560303993968,
+     "below_1": 45,
+     "n_lineages": 50,
+     "p_sign": 4.209852022540872e-09
+    },
+    {
+     "test": "C: INTERACTION",
+     "asks": "is the lift effect DIFFERENT at high content? 1.000 = two independent filters",
+     "median": 0.7785759251654952,
+     "below_1": 42,
+     "n_lineages": 50,
+     "p_sign": 1.163555804595262e-06
+    }
+   ]
+  },
+  "harm_or_transg": {
+   "describes": "max(k_transgressiveness, k_bodily_harm) >= 5",
+   "median_drift": 1.1878587726631415,
+   "cells": [
+    {
+     "content": "low",
+     "band": "lift <= 0",
+     "n_lineages": 50,
+     "median_ratio": 1.1872065520920154,
+     "median_relative": 1.0075688156706195,
+     "falls_relative": 14,
+     "base_mass": 33231.55563973828,
+     "rows": 1388551,
+     "share_of_base_mass": 0.7903605602832359
+    },
+    {
+     "content": "low",
+     "band": "lift 1-2",
+     "n_lineages": 50,
+     "median_ratio": 1.2257475895738186,
+     "median_relative": 1.0342093591849046,
+     "falls_relative": 20,
+     "base_mass": 6399.198012988533,
+     "rows": 245673,
+     "share_of_base_mass": 0.15219491322461662
+    },
+    {
+     "content": "low",
+     "band": "lift >= 3",
+     "n_lineages": 50,
+     "median_ratio": 0.9731432869832646,
+     "median_relative": 0.8145000695430461,
+     "falls_relative": 44,
+     "base_mass": 874.3064489241326,
+     "rows": 27285,
+     "share_of_base_mass": 0.020794011039453282
+    },
+    {
+     "content": "high",
+     "band": "lift <= 0",
+     "n_lineages": 50,
+     "median_ratio": 1.0091790388780524,
+     "median_relative": 0.8569873084371618,
+     "falls_relative": 39,
+     "base_mass": 274.7491670672036,
+     "rows": 6891,
+     "share_of_base_mass": 0.006534479094951499
+    },
+    {
+     "content": "high",
+     "band": "lift 1-2",
+     "n_lineages": 50,
+     "median_ratio": 1.0011682560528723,
+     "median_relative": 0.8603608451890719,
+     "falls_relative": 38,
+     "base_mass": 692.0207183879269,
+     "rows": 20125,
+     "share_of_base_mass": 0.016458630123792686
+    },
+    {
+     "content": "high",
+     "band": "lift >= 3",
+     "n_lineages": 50,
+     "median_ratio": 0.8178052716199056,
+     "median_relative": 0.7128796425776773,
+     "falls_relative": 46,
+     "base_mass": 574.2402619323258,
+     "rows": 15550,
+     "share_of_base_mass": 0.013657406233950217
+    }
+   ],
+   "contrasts": [
+    {
+     "test": "A: high / low  within lift <= 0",
+     "asks": "at a FIXED lift, does more content cost mass?",
+     "median": 0.8462156137894524,
+     "below_1": 38,
+     "n_lineages": 50,
+     "p_sign": 0.00030586400160359517
+    },
+    {
+     "test": "A: high / low  within lift 1-2",
+     "asks": "at a FIXED lift, does more content cost mass?",
+     "median": 0.8504726005132751,
+     "below_1": 38,
+     "n_lineages": 50,
+     "p_sign": 0.00030586400160359517
+    },
+    {
+     "test": "A: high / low  within lift >= 3",
+     "asks": "at a FIXED lift, does more content cost mass?",
+     "median": 0.867571364804976,
+     "below_1": 39,
+     "n_lineages": 50,
+     "p_sign": 9.021490107130603e-05
+    },
+    {
+     "test": "B: lift>=3 / lift<=0  within low",
+     "asks": "at FIXED content, does more lift cost mass?",
+     "median": 0.8010890192648843,
+     "below_1": 43,
+     "n_lineages": 50,
+     "p_sign": 2.098677427397888e-07
+    },
+    {
+     "test": "B: lift>=3 / lift<=0  within high",
+     "asks": "at FIXED content, does more lift cost mass?",
+     "median": 0.8156285464529709,
+     "below_1": 44,
+     "n_lineages": 50,
+     "p_sign": 3.243740565039843e-08
+    },
+    {
+     "test": "C: INTERACTION",
+     "asks": "is the lift effect DIFFERENT at high content? 1.000 = two independent filters",
+     "median": 0.9920095897205251,
+     "below_1": 26,
+     "n_lineages": 50,
+     "p_sign": 0.887724827340783
+    }
+   ]
+  },
+  "scene": {
+   "describes": "the completed scene's own 1-7 rating, frame not subtracted",
+   "median_drift": 1.187858772663141,
+   "cells": [
+    {
+     "content": "scene 1-2",
+     "band": "lift <= 0",
+     "n_lineages": 50,
+     "median_ratio": 1.1909353818511597,
+     "median_relative": 1.0068381852864396,
+     "falls_relative": 21,
+     "base_mass": 20107.033146612517,
+     "rows": 823139,
+     "share_of_base_mass": 0.47821432603615005
+    },
+    {
+     "content": "scene 1-2",
+     "band": "lift 1-2",
+     "n_lineages": 50,
+     "median_ratio": 1.2484656195021286,
+     "median_relative": 1.0597054867418958,
+     "falls_relative": 7,
+     "base_mass": 648.0780772213566,
+     "rows": 26670,
+     "share_of_base_mass": 0.01541352315169521
+    },
+    {
+     "content": "scene 3-4",
+     "band": "lift <= 0",
+     "n_lineages": 50,
+     "median_ratio": 1.162286182376148,
+     "median_relative": 1.0030553340470172,
+     "falls_relative": 25,
+     "base_mass": 9010.967659715327,
+     "rows": 384003,
+     "share_of_base_mass": 0.2143117681710435
+    },
+    {
+     "content": "scene 3-4",
+     "band": "lift 1-2",
+     "n_lineages": 50,
+     "median_ratio": 1.2027764300078756,
+     "median_relative": 1.038560026212638,
+     "falls_relative": 18,
+     "base_mass": 2909.850031003596,
+     "rows": 117634,
+     "share_of_base_mass": 0.06920623054113231
+    },
+    {
+     "content": "scene 3-4",
+     "band": "lift >= 3",
+     "n_lineages": 50,
+     "median_ratio": 0.9816926207506057,
+     "median_relative": 0.8533693956150323,
+     "falls_relative": 37,
+     "base_mass": 96.15617698756711,
+     "rows": 3075,
+     "share_of_base_mass": 0.002286924233775836
+    },
+    {
+     "content": "scene 5-7",
+     "band": "lift <= 0",
+     "n_lineages": 50,
+     "median_ratio": 1.2209852115208353,
+     "median_relative": 1.023149386958225,
+     "falls_relative": 10,
+     "base_mass": 4388.304000477629,
+     "rows": 188300,
+     "share_of_base_mass": 0.10436894517099349
+    },
+    {
+     "content": "scene 5-7",
+     "band": "lift 1-2",
+     "n_lineages": 50,
+     "median_ratio": 1.1533698921247069,
+     "median_relative": 0.9928558172695603,
+     "falls_relative": 27,
+     "base_mass": 3533.2906231515117,
+     "rows": 121494,
+     "share_of_base_mass": 0.08403378965558186
+    },
+    {
+     "content": "scene 5-7",
+     "band": "lift >= 3",
+     "n_lineages": 50,
+     "median_ratio": 0.9054428064210827,
+     "median_relative": 0.7493035888838164,
+     "falls_relative": 46,
+     "base_mass": 1352.3905338688915,
+     "rows": 39760,
+     "share_of_base_mass": 0.032164493039627665
+    }
+   ],
+   "contrasts": [
+    {
+     "test": "A: scene 5-7 / scene 1-2  within lift <= 0",
+     "asks": "at a FIXED lift, does more content cost mass?",
+     "median": 1.0234627171544588,
+     "below_1": 17,
+     "n_lineages": 50,
+     "p_sign": 0.032839137564268484
+    },
+    {
+     "test": "A: scene 5-7 / scene 1-2  within lift 1-2",
+     "asks": "at a FIXED lift, does more content cost mass?",
+     "median": 0.9102817299101817,
+     "below_1": 41,
+     "n_lineages": 50,
+     "p_sign": 5.614100093254137e-06
+    },
+    {
+     "test": "A: scene 5-7 / scene 1-2  within lift >= 3",
+     "asks": "at a FIXED lift, does more content cost mass?",
+     "n_lineages": 0,
+     "SKIPPED": "only 0 lineages carry both cells"
+    },
+    {
+     "test": "B: lift>=3 / lift<=0  within scene 1-2",
+     "asks": "at FIXED content, does more lift cost mass?",
+     "n_lineages": 0,
+     "SKIPPED": "only 0 lineages carry both cells"
+    },
+    {
+     "test": "B: lift>=3 / lift<=0  within scene 3-4",
+     "asks": "at FIXED content, does more lift cost mass?",
+     "median": 0.8627944079713585,
+     "below_1": 39,
+     "n_lineages": 50,
+     "p_sign": 9.021490107130603e-05
+    },
+    {
+     "test": "B: lift>=3 / lift<=0  within scene 5-7",
+     "asks": "at FIXED content, does more lift cost mass?",
+     "median": 0.7495997816787227,
+     "below_1": 45,
+     "n_lineages": 50,
+     "p_sign": 4.209852022540872e-09
+    },
+    {
+     "test": "C: INTERACTION",
+     "asks": "is the lift effect DIFFERENT at high content? 1.000 = two independent filters",
+     "n_lineages": 0,
+     "SKIPPED": "only 0 lineages carry both cells"
+    }
+   ]
+  },
+  "transgressiveness": {
+   "describes": "max(k_transgressiveness) >= 5",
+   "median_drift": 1.187858772663142,
+   "cells": [
+    {
+     "content": "low",
+     "band": "lift <= 0",
+     "n_lineages": 50,
+     "median_ratio": 1.186573780917191,
+     "median_relative": 1.0075309390515057,
+     "falls_relative": 16,
+     "base_mass": 33465.04864739401,
+     "rows": 1393071,
+     "share_of_base_mass": 0.7959138261716469
+    },
+    {
+     "content": "low",
+     "band": "lift 1-2",
+     "n_lineages": 50,
+     "median_ratio": 1.2121118273633815,
+     "median_relative": 1.0227473795224247,
+     "falls_relative": 23,
+     "base_mass": 6793.1816619093215,
+     "rows": 255706,
+     "share_of_base_mass": 0.16156519792868587
+    },
+    {
+     "content": "low",
+     "band": "lift >= 3",
+     "n_lineages": 50,
+     "median_ratio": 0.951191022207132,
+     "median_relative": 0.8055928863711062,
+     "falls_relative": 47,
+     "base_mass": 1064.0160578436307,
+     "rows": 32515,
+     "share_of_base_mass": 0.02530595728783868
+    },
+    {
+     "content": "high",
+     "band": "lift <= 0",
+     "n_lineages": 50,
+     "median_ratio": 1.09069632280075,
+     "median_relative": 0.9264271004694957,
+     "falls_relative": 33,
+     "base_mass": 41.25615941147536,
+     "rows": 2371,
+     "share_of_base_mass": 0.0009812132065402444
+    },
+    {
+     "content": "high",
+     "band": "lift 1-2",
+     "n_lineages": 50,
+     "median_ratio": 1.0066271051013915,
+     "median_relative": 0.8688182097670358,
+     "falls_relative": 36,
+     "base_mass": 298.0370694671414,
+     "rows": 10092,
+     "share_of_base_mass": 0.007088345419723439
+    },
+    {
+     "content": "high",
+     "band": "lift >= 3",
+     "n_lineages": 50,
+     "median_ratio": 0.7654776500558502,
+     "median_relative": 0.6636570644994919,
+     "falls_relative": 45,
+     "base_mass": 384.53065301282777,
+     "rows": 10320,
+     "share_of_base_mass": 0.009145459985564808
+    }
+   ],
+   "contrasts": [
+    {
+     "test": "A: high / low  within lift <= 0",
+     "asks": "at a FIXED lift, does more content cost mass?",
+     "median": 0.9228351697133395,
+     "below_1": 34,
+     "n_lineages": 50,
+     "p_sign": 0.015346677832630107
+    },
+    {
+     "test": "A: high / low  within lift 1-2",
+     "asks": "at a FIXED lift, does more content cost mass?",
+     "median": 0.8601022549474897,
+     "below_1": 40,
+     "n_lineages": 50,
+     "p_sign": 2.3861331676755526e-05
+    },
+    {
+     "test": "A: high / low  within lift >= 3",
+     "asks": "at a FIXED lift, does more content cost mass?",
+     "median": 0.8363833025528228,
+     "below_1": 43,
+     "n_lineages": 50,
+     "p_sign": 2.098677427397888e-07
+    },
+    {
+     "test": "B: lift>=3 / lift<=0  within low",
+     "asks": "at FIXED content, does more lift cost mass?",
+     "median": 0.7991402143412547,
+     "below_1": 47,
+     "n_lineages": 50,
+     "p_sign": 3.708322537931963e-11
+    },
+    {
+     "test": "B: lift>=3 / lift<=0  within high",
+     "asks": "at FIXED content, does more lift cost mass?",
+     "median": 0.6985221868282374,
+     "below_1": 46,
+     "n_lineages": 50,
+     "p_sign": 4.461782054931973e-10
+    },
+    {
+     "test": "C: INTERACTION",
+     "asks": "is the lift effect DIFFERENT at high content? 1.000 = two independent filters",
+     "median": 0.8941748777225994,
+     "below_1": 37,
+     "n_lineages": 50,
+     "p_sign": 0.000936222910851825
+    }
+   ]
+  }
+ }
+}

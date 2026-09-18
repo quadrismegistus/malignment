@@ -1,0 +1,137 @@
+{
+ "gate": 0.01,
+ "bins": [
+  "0.010-0.015",
+  "0.015-0.025",
+  "0.025-0.050",
+  "0.050+"
+ ],
+ "naive": [
+  {
+   "cathexis": "0.010-0.015",
+   "band": "lift <= 0",
+   "n_lineages": 50,
+   "median_r": -0.09498528282736042,
+   "rows": 413773
+  },
+  {
+   "cathexis": "0.010-0.015",
+   "band": "lift 1-2",
+   "n_lineages": 50,
+   "median_r": -0.1238179475090483,
+   "rows": 72751
+  },
+  {
+   "cathexis": "0.010-0.015",
+   "band": "lift >= 3",
+   "n_lineages": 50,
+   "median_r": -0.27090758123375447,
+   "rows": 11857
+  },
+  {
+   "cathexis": "0.015-0.025",
+   "band": "lift <= 0",
+   "n_lineages": 50,
+   "median_r": -0.0753099525295441,
+   "rows": 322118
+  },
+  {
+   "cathexis": "0.015-0.025",
+   "band": "lift 1-2",
+   "n_lineages": 50,
+   "median_r": -0.09955053165196798,
+   "rows": 61214
+  },
+  {
+   "cathexis": "0.015-0.025",
+   "band": "lift >= 3",
+   "n_lineages": 50,
+   "median_r": -0.270905805822664,
+   "rows": 9982
+  },
+  {
+   "cathexis": "0.025-0.050",
+   "band": "lift <= 0",
+   "n_lineages": 50,
+   "median_r": -0.05238222181458026,
+   "rows": 206660
+  },
+  {
+   "cathexis": "0.025-0.050",
+   "band": "lift 1-2",
+   "n_lineages": 50,
+   "median_r": -0.06360669526876167,
+   "rows": 43178
+  },
+  {
+   "cathexis": "0.025-0.050",
+   "band": "lift >= 3",
+   "n_lineages": 50,
+   "median_r": -0.260646328656267,
+   "rows": 7266
+  },
+  {
+   "cathexis": "0.050+",
+   "band": "lift <= 0",
+   "n_lineages": 50,
+   "median_r": -0.019576288149564323,
+   "rows": 115534
+  },
+  {
+   "cathexis": "0.050+",
+   "band": "lift 1-2",
+   "n_lineages": 50,
+   "median_r": -0.03592936341710794,
+   "rows": 28799
+  },
+  {
+   "cathexis": "0.050+",
+   "band": "lift >= 3",
+   "n_lineages": 50,
+   "median_r": -0.20599423250133497,
+   "rows": 6628
+  }
+ ],
+ "lift_effect": [
+  {
+   "test": "lift effect within 0.010-0.015",
+   "asks": "how much does a lift of 3+ cost, in log10 mass kept, at this level of investment?",
+   "median": -0.14130679058258538,
+   "below_0": 44,
+   "n_lineages": 50,
+   "p_sign": 3.243740565039843e-08
+  },
+  {
+   "test": "lift effect within 0.015-0.025",
+   "asks": "how much does a lift of 3+ cost, in log10 mass kept, at this level of investment?",
+   "median": -0.1480232176614646,
+   "below_0": 45,
+   "n_lineages": 50,
+   "p_sign": 4.209852022540872e-09
+  },
+  {
+   "test": "lift effect within 0.025-0.050",
+   "asks": "how much does a lift of 3+ cost, in log10 mass kept, at this level of investment?",
+   "median": -0.1472844478165485,
+   "below_0": 44,
+   "n_lineages": 50,
+   "p_sign": 3.243740565039843e-08
+  },
+  {
+   "test": "lift effect within 0.050+",
+   "asks": "how much does a lift of 3+ cost, in log10 mass kept, at this level of investment?",
+   "median": -0.17378493454588723,
+   "below_0": 47,
+   "n_lineages": 50,
+   "p_sign": 3.708322537931963e-11
+  }
+ ],
+ "difference": {
+  "test": "lift effect: lowest band MINUS highest band",
+  "asks": "is the lift effect SMALLER for lightly-invested words? negative = the lightly invested are punished MORE, positive = spared",
+  "median": 0.019053635545963767,
+  "below_0": 18,
+  "n_lineages": 50,
+  "p_sign": 0.06490864707227217
+ }
+}

@@ -1,0 +1,184 @@
+{
+ "anchor": "v6:harm",
+ "predictions": [
+  [
+   "DOWN -- the idea is repressed",
+   [
+    "v6:harm",
+    "v6:aggression",
+    "v6:directedness",
+    "v6:makes_worse",
+    "k_bodily_harm",
+    "k_transgressiveness"
+   ]
+  ],
+  [
+   "~ZERO -- the quota of affect is conserved",
+   [
+    "k_charge",
+    "warriner_arousal"
+   ]
+  ],
+  [
+   "UP -- transformed into affect and speech",
+   [
+    "v6:vocalisation",
+    "v6:interiority",
+    "v6:deliberation",
+    "v6:superego"
+   ]
+  ],
+  [
+   "PREDICTED UP BY ME, CAME BACK DOWN",
+   [
+    "v6:hedged"
+   ]
+  ],
+  [
+   "no prediction, reported for context",
+   [
+    "warriner_valence",
+    "warriner_dominance",
+    "k_valence",
+    "k_concreteness",
+    "k_register_level",
+    "v6:makes_better",
+    "v6:fit",
+    "v6:mundanity"
+   ]
+  ]
+ ],
+ "scales": {
+  "v6:harm": {
+   "median": -0.16348453568163845,
+   "below_0": 45,
+   "n_lineages": 50,
+   "p_sign": 4.209852022540872e-09
+  },
+  "v6:aggression": {
+   "median": 0.011082885298216438,
+   "below_0": 21,
+   "n_lineages": 50,
+   "p_sign": 0.3222363203575469
+  },
+  "v6:directedness": {
+   "median": -0.06743450906315851,
+   "below_0": 27,
+   "n_lineages": 50,
+   "p_sign": 0.6718110337653656
+  },
+  "v6:makes_worse": {
+   "median": -0.0485824578877847,
+   "below_0": 27,
+   "n_lineages": 50,
+   "p_sign": 0.6718110337653656
+  },
+  "k_bodily_harm": {
+   "median": -0.09840972437464934,
+   "below_0": 43,
+   "n_lineages": 50,
+   "p_sign": 2.098677427397888e-07
+  },
+  "k_transgressiveness": {
+   "median": -0.05808304234723838,
+   "below_0": 41,
+   "n_lineages": 50,
+   "p_sign": 5.614100093254137e-06
+  },
+  "k_charge": {
+   "median": 0.007242996740049912,
+   "below_0": 24,
+   "n_lineages": 50,
+   "p_sign": 0.887724827340783
+  },
+  "warriner_arousal": {
+   "median": -0.07262865514939065,
+   "below_0": 39,
+   "n_lineages": 50,
+   "p_sign": 9.021490107130603e-05
+  },
+  "v6:vocalisation": {
+   "median": 0.17766645639678713,
+   "below_0": 13,
+   "n_lineages": 50,
+   "p_sign": 0.000936222910851825
+  },
+  "v6:interiority": {
+   "median": 0.1135322380980317,
+   "below_0": 14,
+   "n_lineages": 50,
+   "p_sign": 0.0026021714567221466
+  },
+  "v6:deliberation": {
+   "median": 0.022182618761352857,
+   "below_0": 15,
+   "n_lineages": 50,
+   "p_sign": 0.006600447966810918
+  },
+  "v6:superego": {
+   "median": 0.009443223808233814,
+   "below_0": 19,
+   "n_lineages": 50,
+   "p_sign": 0.11892045255943628
+  },
+  "v6:hedged": {
+   "median": -0.11745775080686982,
+   "below_0": 36,
+   "n_lineages": 50,
+   "p_sign": 0.0026021714567221466
+  },
+  "warriner_valence": {
+   "median": 0.06962755237390628,
+   "below_0": 16,
+   "n_lineages": 50,
+   "p_sign": 0.015346677832630107
+  },
+  "warriner_dominance": {
+   "median": 0.0143650356788112,
+   "below_0": 24,
+   "n_lineages": 50,
+   "p_sign": 0.887724827340783
+  },
+  "k_valence": {
+   "median": 0.03833035230047899,
+   "below_0": 11,
+   "n_lineages": 50,
+   "p_sign": 9.021490107130603e-05
+  },
+  "k_concreteness": {
+   "median": 0.07061829004821218,
+   "below_0": 23,
+   "n_lineages": 50,
+   "p_sign": 0.6718110337653656
+  },
+  "k_register_level": {
+   "median": 0.025133273895894037,
+   "below_0": 16,
+   "n_lineages": 50,
+   "p_sign": 0.015346677832630107
+  },
+  "v6:makes_better": {
+   "median": 0.20867671252742515,
+   "below_0": 5,
+   "n_lineages": 50,
+   "p_sign": 4.209852022540872e-09
+  },
+  "v6:fit": {
+   "median": 0.3525545141962674,
+   "below_0": 9,
+   "n_lineages": 50,
+   "p_sign": 5.614100093254137e-06
+  },
+  "v6:mundanity": {
+   "median": 0.25173875271261204,
+   "below_0": 4,
+   "n_lineages": 50,
+   "p_sign": 4.461782054931973e-10
+  }
+ },
+ "conservation": {
+  "median_ratio": 1.966054091806273,
+  "n_lineages": 50,
+  "IS_NOT": "a test of conservation; see the comment at this line"
+ }
+}
