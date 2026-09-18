@@ -1,0 +1,401 @@
+{
+ "tol=0.5": {
+  "min_act": 4.0,
+  "n_lineages": 49,
+  "n_cells": 1849,
+  "quadrants": {
+   "SUBSTITUTE (full act, affect kept)": {
+    "below_1": 47,
+    "n_enr": 49,
+    "p_sign": 4.355626970209414e-12,
+    "median_share": 0.05691639934089873,
+    "median_available": 0.15666041275797374,
+    "median_enrichment": 0.37297488962028336,
+    "n_lineages": 49,
+    "words": [
+     "destroy",
+     "strangle",
+     "punch",
+     "fire",
+     "hurt",
+     "fight",
+     "lash",
+     "kill",
+     "strike",
+     "choke"
+    ]
+   },
+   "MILDER ACT (partial act, affect kept)": {
+    "below_1": 30,
+    "n_enr": 49,
+    "p_sign": 0.15240777196147803,
+    "median_share": 0.0652835805576378,
+    "median_available": 0.07112462006079028,
+    "median_enrichment": 0.844132852306405,
+    "n_lineages": 49,
+    "words": [
+     "suffer",
+     "hurt",
+     "destroy",
+     "fight",
+     "smash",
+     "hit",
+     "hell",
+     "confront",
+     "beat",
+     "strike"
+    ]
+   },
+   "DISPLACED AFFECT (no act, affect kept)": {
+    "below_1": 16,
+    "n_enr": 49,
+    "p_sign": 0.021294114141387155,
+    "median_share": 0.05257913196998153,
+    "median_available": 0.03511615343057806,
+    "median_enrichment": 1.4991718302672234,
+    "n_lineages": 49,
+    "words": [
+     "scream",
+     "cry",
+     "kiss",
+     "shout",
+     "crumple",
+     "love",
+     "shouted",
+     "slump",
+     "crumble",
+     "scare"
+    ]
+   },
+   "act kept, affect lost": {
+    "below_1": 39,
+    "n_enr": 49,
+    "p_sign": 3.845911694355664e-05,
+    "median_share": 0.09902498182948895,
+    "median_available": 0.13333333333333333,
+    "median_enrichment": 0.7532956146392085,
+    "n_lineages": 49,
+    "words": [
+     "break",
+     "hurt",
+     "hit",
+     "shoot",
+     "die",
+     "cut",
+     "punch",
+     "beat",
+     "destroy",
+     "pointed"
+    ]
+   },
+   "NEITHER -- content word": {
+    "below_1": 16,
+    "n_enr": 49,
+    "p_sign": 0.021294114141387155,
+    "median_share": 0.5751219867548261,
+    "median_available": 0.5361271676300579,
+    "median_enrichment": 1.0617260993603246,
+    "n_lineages": 49,
+    "words": [
+     "make",
+     "fall",
+     "take",
+     "see",
+     "leave",
+     "have",
+     "search",
+     "know",
+     "get",
+     "do"
+    ]
+   },
+   "NEITHER -- function word": {
+    "below_1": 8,
+    "n_enr": 49,
+    "p_sign": 1.9646537765538596e-06,
+    "median_share": 0.1065696468347346,
+    "median_available": 0.04985549132947977,
+    "median_enrichment": 2.040890895463348,
+    "n_lineages": 49,
+    "words": [
+     "be",
+     "the",
+     "was",
+     "her",
+     "any",
+     "to",
+     "he",
+     "a",
+     "in",
+     "it"
+    ]
+   }
+  }
+ },
+ "tol=1.0": {
+  "min_act": 4.0,
+  "n_lineages": 49,
+  "n_cells": 1849,
+  "quadrants": {
+   "SUBSTITUTE (full act, affect kept)": {
+    "below_1": 45,
+    "n_enr": 49,
+    "p_sign": 8.225455871979648e-10,
+    "median_share": 0.08020491653411183,
+    "median_available": 0.1842247433819557,
+    "median_enrichment": 0.39357539441058315,
+    "n_lineages": 49,
+    "words": [
+     "destroy",
+     "punch",
+     "strangle",
+     "hurt",
+     "fire",
+     "die",
+     "fight",
+     "strike",
+     "lash",
+     "kill"
+    ]
+   },
+   "MILDER ACT (partial act, affect kept)": {
+    "below_1": 29,
+    "n_enr": 49,
+    "p_sign": 0.2528697301676033,
+    "median_share": 0.08098847445415536,
+    "median_available": 0.08704453441295547,
+    "median_enrichment": 0.9560363593611212,
+    "n_lineages": 49,
+    "words": [
+     "suffer",
+     "hurt",
+     "hit",
+     "beat",
+     "destroy",
+     "smash",
+     "fight",
+     "confront",
+     "break",
+     "yell"
+    ]
+   },
+   "DISPLACED AFFECT (no act, affect kept)": {
+    "below_1": 17,
+    "n_enr": 49,
+    "p_sign": 0.04438416098714981,
+    "median_share": 0.07868615926087223,
+    "median_available": 0.07003257328990228,
+    "median_enrichment": 1.275658959041712,
+    "n_lineages": 49,
+    "words": [
+     "scream",
+     "crumple",
+     "cry",
+     "kiss",
+     "shout",
+     "feel",
+     "tear",
+     "love",
+     "slump",
+     "shouted"
+    ]
+   },
+   "act kept, affect lost": {
+    "below_1": 39,
+    "n_enr": 49,
+    "p_sign": 3.845911694355664e-05,
+    "median_share": 0.060941748135843424,
+    "median_available": 0.09170305676855896,
+    "median_enrichment": 0.6909481853397536,
+    "n_lineages": 49,
+    "words": [
+     "break",
+     "hurt",
+     "cut",
+     "shoot",
+     "hit",
+     "die",
+     "beat",
+     "harm",
+     "punch",
+     "carve"
+    ]
+   },
+   "NEITHER -- content word": {
+    "below_1": 17,
+    "n_enr": 49,
+    "p_sign": 0.04438416098714981,
+    "median_share": 0.5414245939213748,
+    "median_available": 0.50730282375852,
+    "median_enrichment": 1.0677203370205166,
+    "n_lineages": 49,
+    "words": [
+     "make",
+     "fall",
+     "take",
+     "see",
+     "leave",
+     "have",
+     "search",
+     "know",
+     "get",
+     "do"
+    ]
+   },
+   "NEITHER -- function word": {
+    "below_1": 8,
+    "n_enr": 49,
+    "p_sign": 1.9646537765538596e-06,
+    "median_share": 0.10656964683473462,
+    "median_available": 0.04985549132947977,
+    "median_enrichment": 2.040890895463348,
+    "n_lineages": 49,
+    "words": [
+     "be",
+     "the",
+     "was",
+     "her",
+     "any",
+     "to",
+     "he",
+     "a",
+     "in",
+     "it"
+    ]
+   }
+  }
+ },
+ "tol=1.5": {
+  "min_act": 4.0,
+  "n_lineages": 49,
+  "n_cells": 1849,
+  "quadrants": {
+   "SUBSTITUTE (full act, affect kept)": {
+    "below_1": 44,
+    "n_enr": 49,
+    "p_sign": 7.59715845788378e-09,
+    "median_share": 0.11344530273796428,
+    "median_available": 0.2268993839835729,
+    "median_enrichment": 0.4375840599603548,
+    "n_lineages": 49,
+    "words": [
+     "destroy",
+     "hurt",
+     "punch",
+     "strangle",
+     "fire",
+     "die",
+     "fight",
+     "beat",
+     "strike",
+     "lash"
+    ]
+   },
+   "MILDER ACT (partial act, affect kept)": {
+    "below_1": 29,
+    "n_enr": 49,
+    "p_sign": 0.2528697301676033,
+    "median_share": 0.0734731905228268,
+    "median_available": 0.08090614886731391,
+    "median_enrichment": 0.8960538611911432,
+    "n_lineages": 49,
+    "words": [
+     "suffer",
+     "hurt",
+     "break",
+     "hit",
+     "smash",
+     "fight",
+     "yell",
+     "hell",
+     "destroy",
+     "confront"
+    ]
+   },
+   "DISPLACED AFFECT (no act, affect kept)": {
+    "below_1": 14,
+    "n_enr": 49,
+    "p_sign": 0.003801654409748778,
+    "median_share": 0.14441879352272233,
+    "median_available": 0.11336032388663968,
+    "median_enrichment": 1.2694081945856812,
+    "n_lineages": 49,
+    "words": [
+     "scream",
+     "cry",
+     "crumple",
+     "feel",
+     "tear",
+     "kiss",
+     "have",
+     "shout",
+     "fall",
+     "be"
+    ]
+   },
+   "act kept, affect lost": {
+    "below_1": 38,
+    "n_enr": 49,
+    "p_sign": 0.00014197068519905542,
+    "median_share": 0.040352509969905935,
+    "median_available": 0.05890804597701149,
+    "median_enrichment": 0.6973682886101135,
+    "n_lineages": 49,
+    "words": [
+     "break",
+     "cut",
+     "shoot",
+     "hit",
+     "hurt",
+     "die",
+     "carve",
+     "harm",
+     "stroke",
+     "knock"
+    ]
+   },
+   "NEITHER -- content word": {
+    "below_1": 19,
+    "n_enr": 49,
+    "p_sign": 0.15240777196147803,
+    "median_share": 0.48857657712045927,
+    "median_available": 0.4568245125348189,
+    "median_enrichment": 1.0618402066764445,
+    "n_lineages": 49,
+    "words": [
+     "make",
+     "fall",
+     "take",
+     "see",
+     "leave",
+     "get",
+     "know",
+     "search",
+     "do",
+     "have"
+    ]
+   },
+   "NEITHER -- function word": {
+    "below_1": 7,
+    "n_enr": 49,
+    "p_sign": 3.6245783263666453e-07,
+    "median_share": 0.09968305333882849,
+    "median_available": 0.04868913857677903,
+    "median_enrichment": 2.070767054958395,
+    "n_lineages": 49,
+    "words": [
+     "be",
+     "the",
+     "was",
+     "her",
+     "any",
+     "to",
+     "he",
+     "a",
+     "in",
+     "it"
+    ]
+   }
+  }
+ }
+}
