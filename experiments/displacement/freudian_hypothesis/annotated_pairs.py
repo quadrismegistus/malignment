@@ -52,6 +52,7 @@ STASH = os.path.join(ROOT, "experiments", "displacement", "displacement_taxonomy
                      "results", "crosslineage_stash", "jsonl.hashstash.raw",
                      "data.jsonl")
 OUT = os.path.join(HERE, "results", "annotated_pairs.json")
+OUT_MASS = os.path.join(HERE, "results", "annotated_pairs_mass.json")
 
 #: every continuous norm the campaign carries, by grain. The v6 scales are
 #: CONTEXTUAL -- rated for a word at a prompt -- so they are looked up on
@@ -88,9 +89,40 @@ def operations():
 
 
 _CTX = {}
+_MASS = {}
 
 
-def norms_for(frame, words):
+def mass_for(frame):
+    """{aligned nick: (base {word:p}, aligned {word:p})} for one frame, or {}.
+
+    **RENORMALISED PER ARM, AS THE CODER'S TABLE WAS.** `crosslineage.tables()`
+    divides each arm by its own total before rendering, so the coder judged
+    shares of measured mass rather than raw probabilities. Weighting by anything
+    else would weight the words by a quantity the reader never saw.
+    """
+    if frame in _MASS:
+        return _MASS[frame]
+    from malignment import roster, vectors as V
+    ep, _ = roster.endpoints()
+    try:
+        rows = V.rows("SELECT model, groupArray(word) AS ws, groupArray(p) AS ps "
+                      "FROM twp_words_v4_best WHERE prompt={p:String} "
+                      "AND merged=1 GROUP BY model", p=frame)
+    except Exception:
+        _MASS[frame] = {}
+        return {}
+    W = {r["model"]: dict(zip(r["ws"], r["ps"])) for r in rows}
+    out = {}
+    for b, a in ep.items():
+        if b in W and a in W and sum(W[b].values()) and sum(W[a].values()):
+            tb, ta = sum(W[b].values()), sum(W[a].values())
+            out[a.split("/")[-1]] = ({w: p / tb for w, p in W[b].items()},
+                                     {w: p / ta for w, p in W[a].items()})
+    _MASS[frame] = out
+    return out
+
+
+def norms_for(frame, words, weights=None):
     """{scale: mean over the words that carry it}. Absent scales are omitted.
 
     `slot_ratings` is memoised per FRAME. Without it the lookup was rebuilt for
@@ -99,28 +131,44 @@ def norms_for(frame, words):
     """
     from malignment import fields as F
     acc = collections.defaultdict(list)
+    wt = collections.defaultdict(list)
     if frame not in _CTX:
         _CTX[frame] = F.slot_ratings(frame) if frame else {}
     ctx = _CTX[frame]
     for w in words:
+        u = 1.0 if weights is None else float(weights.get(w, 0.0))
         k = F.k(w)
         if k:
             for s in K_SCALES:
-                acc["k_" + s].append(float(k[s]))
+                acc["k_" + s].append(float(k[s])); wt["k_" + s].append(u)
         wn = F.word_norms(w)
         if wn:
             for s in W_SCALES:
                 if s in wn:
-                    acc[("brysbaert_concreteness" if s == "concreteness"
-                         else "warriner_" + s)].append(float(wn[s]))
+                    key = ("brysbaert_concreteness" if s == "concreteness"
+                           else "warriner_" + s)
+                    acc[key].append(float(wn[s])); wt[key].append(u)
         v6 = ((ctx.get(w) or {}).get("v6") if isinstance(ctx, dict) else None)
         if v6:
             for s, v in v6.items():
                 if s in NOT_NORMS or isinstance(v, bool) \
                         or not isinstance(v, (int, float)):
                     continue
-                acc["v6:" + s].append(float(v))
-    return {s: st.fmean(v) for s, v in acc.items() if v}
+                acc["v6:" + s].append(float(v)); wt["v6:" + s].append(u)
+    out = {}
+    for s, v in acc.items():
+        if not v:
+            continue
+        ws = wt[s]
+        tot = sum(ws)
+        #: a set whose words carry NO measured mass has no weighted mean, and
+        #: falling back to the unweighted one would silently mix the two
+        #: estimators inside one table
+        if weights is not None and tot <= 0:
+            continue
+        out[s] = (st.fmean(v) if weights is None
+                  else sum(x * y for x, y in zip(v, ws)) / tot)
+    return out
 
 
 def sign(vals):
@@ -132,7 +180,7 @@ def sign(vals):
             "p_sign": min(1.0, sum(comb(n, i) for i in range(k + 1)) * 2 / 2 ** n)}
 
 
-def collect():
+def collect(mass=False):
     """-> per-lineage mean contrast per norm, plus the same split by frame dose."""
     from malignment import charge
     dose = charge.doses()
@@ -146,7 +194,13 @@ def collect():
     cut_lo, cut_hi = dv[len(dv) // 3], dv[2 * len(dv) // 3]
     nop = ndose = 0
     for frame, lin, _name, a, b in operations():
-        na, nb_ = norms_for(frame, a), norms_for(frame, b)
+        if mass:
+            mm = mass_for(frame).get(lin)
+            if not mm:
+                continue
+            na, nb_ = norms_for(frame, a, mm[0]), norms_for(frame, b, mm[1])
+        else:
+            na, nb_ = norms_for(frame, a), norms_for(frame, b)
         shared = set(na) & set(nb_)
         if not shared or not lin:
             continue
@@ -201,6 +255,71 @@ def collect():
     return main, dosed, nop
 
 
+def examples(n=8, hold=0.25, drop=1.0, mass=False):
+    """Pairs where the affect survives the loss of the act, and where it does not.
+
+    **THE TWO CELLS FREUD'S ACCOUNT SEPARATES.** The idea's fate and the affect's
+    fate are independent in his scheme, so the interesting contrast is not
+    "big change / small change" but the CROSS: harm gone with the charge intact
+    is a transformation, harm gone with the charge gone is plain suppression.
+    `hold` is how close to zero counts as intact and `drop` how far counts as
+    lost; both are printed, because there is no principled cut and a reader
+    should see which one produced the list.
+    """
+    from malignment import charge
+    dose = charge.doses()
+    rows = []
+    for frame, lin, name, a, b in operations():
+        if mass:
+            mm = mass_for(frame).get(lin)
+            if not mm:
+                continue
+            na, nb_ = norms_for(frame, a, mm[0]), norms_for(frame, b, mm[1])
+        else:
+            na, nb_ = norms_for(frame, a), norms_for(frame, b)
+        if "k_charge" not in na or "k_charge" not in nb_:
+            continue
+        dc = nb_["k_charge"] - na["k_charge"]
+        dh = (nb_.get("k_bodily_harm", 0) - na.get("k_bodily_harm", 0))
+        rows.append({"frame": frame, "lin": lin, "name": name, "a": a, "b": b,
+                     "d_charge": dc, "d_harm": dh, "dose": dose.get(frame)})
+    #: only where an ACT was actually lost -- otherwise "charge held" is a
+    #: statement about two sets that never differed
+    #: **DEDUPED FOR DISPLAY ONLY.** A frame was read 2 to 16 times, so the same
+    #: (frame, lineage, A-set, B-set) recurs across readings and the list filled
+    #: with the same pair twice. The STATISTICS keep every reading -- a pair two
+    #: readers both found is more evidence, not one observation.
+    seen, uniq = set(), []
+    for r in rows:
+        k = (r["frame"], r["lin"], tuple(r["a"]), tuple(r["b"]))
+        if k in seen:
+            continue
+        seen.add(k)
+        uniq.append(r)
+    lost = [r for r in uniq if r["d_harm"] <= -drop]
+    held = sorted([r for r in lost if abs(r["d_charge"]) <= hold],
+                  key=lambda r: -abs(r["d_harm"]))
+    fell = sorted([r for r in lost if r["d_charge"] <= -drop],
+                  key=lambda r: r["d_charge"])
+    print("%s pairs (%s distinct); %s lose at least %.1f of bodily harm.\n"
+          "   of those: %s hold charge within +-%.2f, %s lose at least %.1f of it"
+          % (format(len(rows), ","), format(len(uniq), ","),
+             format(len(lost), ","), drop,
+             format(len(held), ","), hold, format(len(fell), ","), drop))
+    for lab, rs in (("THE ACT GOES, THE CHARGE STAYS", held),
+                    ("THE ACT GOES AND THE CHARGE GOES WITH IT", fell)):
+        print("\n=== %s\n" % lab)
+        for r in rs[:n]:
+            print("  %s   [%s, dose %s]"
+                  % (r["frame"][:58], r["lin"][:26],
+                     ("%.2f" % r["dose"]) if r["dose"] is not None else "-"))
+            print("    %s" % r["name"][:70])
+            print("    base    %s" % " ".join(r["a"][:10]))
+            print("    aligned %s" % " ".join(r["b"][:10]))
+            print("    harm %+.2f   charge %+.2f\n" % (r["d_harm"], r["d_charge"]))
+    return held, fell
+
+
 def check_orientation(limit=400):
     """Is `a_words` really the base side? Verified against twp, not assumed."""
     from malignment import corpus, roster
@@ -236,12 +355,19 @@ def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--dose", action="store_true")
+    ap.add_argument("--mass", action="store_true",
+                    help="weight each word by its share of its own arm's measured mass, as the coder's table showed it")
     ap.add_argument("--check-orientation", action="store_true")
+    ap.add_argument("--examples", action="store_true")
+    ap.add_argument("--n", type=int, default=8)
     ap.add_argument("--write", action="store_true")
     a = ap.parse_args(argv)
     if a.check_orientation:
         return check_orientation()
-    main_, dosed, nop = collect()
+    if a.examples:
+        examples(n=a.n, mass=a.mass)
+        return 0
+    main_, dosed, nop = collect(mass=a.mass)
     print("\nALIGNED MINUS BASE over %s annotated pairs, per lineage then median\n"
           % format(nop, ","))
     print("  %-26s %9s %10s %11s" % ("norm", "median", "below 0", "p"))
@@ -258,10 +384,12 @@ def main(argv=None):
                   % (s, r["at_low_dose"], r["at_high_dose"], r["median"],
                      r["below_0"], r["n"], r["p_sign"]))
     if a.write:
-        os.makedirs(os.path.dirname(OUT), exist_ok=True)
-        json.dump({"n_pairs": nop, "marginal": main_, "dosed": dosed},
-                  open(OUT, "w"), indent=1)
-        print("\nwrote %s" % OUT)
+        out = OUT_MASS if a.mass else OUT
+        os.makedirs(os.path.dirname(out), exist_ok=True)
+        json.dump({"n_pairs": nop, "weighted": bool(a.mass),
+                   "marginal": main_, "dosed": dosed},
+                  open(out, "w"), indent=1)
+        print("\nwrote %s" % out)
     return 0
 
 
