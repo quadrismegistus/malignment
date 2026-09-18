@@ -79,96 +79,85 @@ QUAD = ["SUBSTITUTE (full act, affect kept)",
         "NEITHER -- function word"]
 
 
-def cells():
-    """-> (lineage, [(word, delta, act, charge)]) per (prompt, lineage) cell."""
+def stream():
+    """-> (lineage, prompt, word, delta, act, charge, is_function), English, 50 pairs."""
     from malignment import fields as F
     from malignment import roster
     pairs = {(b, a) for b, a in roster.endpoints()[0].items()}
-    cur, key = [], None
     with gzip.open(SRC, "rt") as fh:
         for row in csv.DictReader(fh, delimiter="\t"):
             if row["lang"] != "en" or (row["base"], row["aligned"]) not in pairs:
                 continue
-            k2 = (row["base"], row["prompt"])
-            if k2 != key:
-                if cur:
-                    yield key[0], cur
-                cur, key = [], k2
             d = float(row["delta"])
             if d == 0:
                 continue
             kk = F.k(row["word"])
             if not kk:
                 continue
-            cur.append((row["word"], d,
-                        max(kk["bodily_harm"], kk["transgressiveness"]),
-                        float(kk["charge"]), row["is_function"] == "1"))
-    if cur:
-        yield key[0], cur
+            yield (row["base"], row["prompt"], row["word"], d,
+                   float(max(kk["bodily_harm"], kk["transgressiveness"])),
+                   float(kk["charge"]), row["is_function"] == "1")
 
 
 def compute(tol, min_act):
+    """Two passes: fix each cell's departing reference, then classify against it.
+
+    **THE FILE IS NOT SORTED BY CELL AND A SINGLE-PASS GROUPER IS WRONG.**
+    `words_long_v4` interleaves (base, prompt) -- 101,755 contiguous runs cover
+    66,241 distinct cells in the first 1.5M rows -- so grouping by consecutive
+    runs splits one cell into several fragments and gives each fragment its own
+    departing reference A and C. The first version of this file did exactly that.
+    Pass 1 therefore accumulates the reference over the WHOLE cell before pass 2
+    classifies anything against it. Only three floats per cell are held, so the
+    fix costs a second read and no memory.
+    """
     import statistics as st
-    #: lineage -> quadrant -> arriving mass
+    from math import comb
+    ref = collections.defaultdict(lambda: [0.0, 0.0, 0.0])
+    for lin, pr, _w, d, a, c, _f in stream():
+        if d < 0:
+            r = ref[(lin, pr)]
+            r[0] += -d
+            r[1] += -d * a
+            r[2] += -d * c
+    live = {}
+    for k, (m, wa, wc) in ref.items():
+        if m > 0 and wa / m >= min_act:
+            live[k] = (wa / m, wc / m)
+    print("%s cells carry departing mass; %s of them are charged (act >= %.1f)"
+          % (format(len(ref), ","), format(len(live), ","), min_act),
+          file=sys.stderr)
+
     acc = collections.defaultdict(collections.Counter)
     avail = collections.defaultdict(collections.Counter)
-    seen, used, skipped = set(), 0, 0
     ex = collections.Counter()
-    for lin, rows in cells():
-        dep = [(w, -d, a, c, f) for w, d, a, c, f in rows if d < 0]
-        arr = [(w, d, a, c, f) for w, d, a, c, f in rows if d > 0]
-        if not dep or not arr:
-            skipped += 1
+    seen, has_riser = set(), set()
+    for lin, pr, w, d, a, c, isfn in stream():
+        key = (lin, pr)
+        if key not in live:
             continue
-        dm = sum(x[1] for x in dep)
-        A = sum(x[1] * x[2] for x in dep) / dm
-        C = sum(x[1] * x[3] for x in dep) / dm
-        #: **THE CONDITIONAL IN THE SENTENCE, ENFORCED.** Where nothing charged
-        #: departed there is no "these acts" for a substitute to substitute for.
-        if A < min_act:
-            skipped += 1
-            continue
-        used += 1
-        seen.add(lin)
-        for w, d, a, c, isfn in arr:
-            keeps_aff = c >= C - tol
-            if a >= A - tol:
-                act = 2
-            elif a >= ACT_FLOOR:
-                act = 1
-            else:
-                act = 0
-            if keeps_aff:
-                q = QUAD[0] if act == 2 else QUAD[1] if act == 1 else QUAD[2]
-            elif act > 0:
-                q = QUAD[3]
-            else:
-                #: **FUNCTION WORDS SPLIT OUT RATHER THAN DROPPED.** They carry
-                #: real mass and belong in the denominator, but "the arriving
-                #: mass goes to `be` and `the`" and "it goes to ordinary content
-                #: words" are different claims about the argument and a single
-                #: NEITHER bucket says whichever the reader assumes.
-                q = QUAD[5] if isfn else QUAD[4]
+        A, C = live[key]
+        keeps_aff = c >= C - tol
+        act = 2 if a >= A - tol else (1 if a >= ACT_FLOOR else 0)
+        if keeps_aff:
+            q = QUAD[0] if act == 2 else QUAD[1] if act == 1 else QUAD[2]
+        elif act > 0:
+            q = QUAD[3]
+        else:
+            #: **FUNCTION WORDS SPLIT OUT RATHER THAN DROPPED.** They carry real
+            #: mass and belong in the denominator, but "the arriving mass goes to
+            #: `be` and `the`" and "it goes to ordinary content words" are
+            #: different claims and one bucket says whichever the reader assumes.
+            q = QUAD[5] if isfn else QUAD[4]
+        #: the null is this cell's own candidate list, each word counted ONCE
+        #: regardless of mass: the set alignment had to choose from
+        avail[lin][q] += 1
+        if d > 0:
             acc[lin][q] += d
             ex[(q, w)] += d
-        #: **WHAT WAS AVAILABLE, so a share can be read as a preference.** 54% of
-        #: the arriving mass landing on ordinary content words says nothing on
-        #: its own if ordinary content words are 54% of the candidate list. The
-        #: null is this cell's own candidates, counted once each regardless of
-        #: mass -- the set alignment had to choose from.
-        for w, d, a, c, isfn in rows:
-            keeps_aff = c >= C - tol
-            act = 2 if a >= A - tol else (1 if a >= ACT_FLOOR else 0)
-            if keeps_aff:
-                q = QUAD[0] if act == 2 else QUAD[1] if act == 1 else QUAD[2]
-            elif act > 0:
-                q = QUAD[3]
-            else:
-                q = QUAD[5] if isfn else QUAD[4]
-            avail[lin][q] += 1
-    print("%s cells used, %s skipped (no movement on one side, or the departing "
-          "mass was not charged)" % (format(used, ","), format(skipped, ",")),
-          file=sys.stderr)
+            has_riser.add(key)
+        seen.add(lin)
+
     out = {}
     for q in QUAD:
         shares, avs, enr = [], [], []
@@ -179,10 +168,6 @@ def compute(tol, min_act):
                 avs.append(avail[lin][q] / ta)
                 if avail[lin][q]:
                     enr.append((c[q] / t) / (avail[lin][q] / ta))
-        #: **AN ENRICHMENT RATIO IS A MEDIAN OF FIFTY, SO IT GETS A SIGN TEST.**
-        #: 1.28x across lineages that individually straddle 1 is not a
-        #: preference, and a table of ratios alone cannot tell the two apart.
-        from math import comb
         nn = len(enr)
         below = sum(1 for x in enr if x < 1.0)
         kk = min(below, nn - below)
@@ -195,7 +180,7 @@ def compute(tol, min_act):
                   "n_lineages": len(shares),
                   "words": [w for (qq, w), _m in ex.most_common()
                             if qq == q][:10]}
-    return out, len(seen), used
+    return out, len(seen), len(has_riser)
 
 
 def main(argv=None):

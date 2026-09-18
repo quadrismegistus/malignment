@@ -2,15 +2,15 @@
  "tol=0.5": {
   "min_act": 4.0,
   "n_lineages": 49,
-  "n_cells": 1849,
+  "n_cells": 1818,
   "quadrants": {
    "SUBSTITUTE (full act, affect kept)": {
     "below_1": 47,
     "n_enr": 49,
     "p_sign": 4.355626970209414e-12,
     "median_share": 0.05691639934089873,
-    "median_available": 0.15666041275797374,
-    "median_enrichment": 0.37297488962028336,
+    "median_available": 0.1552511415525114,
+    "median_enrichment": 0.3754539341101493,
     "n_lineages": 49,
     "words": [
      "destroy",
@@ -29,9 +29,9 @@
     "below_1": 30,
     "n_enr": 49,
     "p_sign": 0.15240777196147803,
-    "median_share": 0.0652835805576378,
-    "median_available": 0.07112462006079028,
-    "median_enrichment": 0.844132852306405,
+    "median_share": 0.05898956461438487,
+    "median_available": 0.07384615384615385,
+    "median_enrichment": 0.8532387159160353,
     "n_lineages": 49,
     "words": [
      "suffer",
@@ -50,9 +50,9 @@
     "below_1": 16,
     "n_enr": 49,
     "p_sign": 0.021294114141387155,
-    "median_share": 0.05257913196998153,
-    "median_available": 0.03511615343057806,
-    "median_enrichment": 1.4991718302672234,
+    "median_share": 0.052784605273210175,
+    "median_available": 0.03472599023331525,
+    "median_enrichment": 1.4850639192944795,
     "n_lineages": 49,
     "words": [
      "scream",
@@ -71,9 +71,9 @@
     "below_1": 39,
     "n_enr": 49,
     "p_sign": 3.845911694355664e-05,
-    "median_share": 0.09902498182948895,
-    "median_available": 0.13333333333333333,
-    "median_enrichment": 0.7532956146392085,
+    "median_share": 0.09898293853045323,
+    "median_available": 0.13146853146853146,
+    "median_enrichment": 0.752674211152832,
     "n_lineages": 49,
     "words": [
      "break",
@@ -89,12 +89,12 @@
     ]
    },
    "NEITHER -- content word": {
-    "below_1": 16,
+    "below_1": 17,
     "n_enr": 49,
-    "p_sign": 0.021294114141387155,
-    "median_share": 0.5751219867548261,
-    "median_available": 0.5361271676300579,
-    "median_enrichment": 1.0617260993603246,
+    "p_sign": 0.04438416098714981,
+    "median_share": 0.5754449238008427,
+    "median_available": 0.5362731152204836,
+    "median_enrichment": 1.0546492758410704,
     "n_lineages": 49,
     "words": [
      "make",
@@ -110,12 +110,12 @@
     ]
    },
    "NEITHER -- function word": {
-    "below_1": 8,
+    "below_1": 7,
     "n_enr": 49,
-    "p_sign": 1.9646537765538596e-06,
-    "median_share": 0.1065696468347346,
-    "median_available": 0.04985549132947977,
-    "median_enrichment": 2.040890895463348,
+    "p_sign": 3.6245783263666453e-07,
+    "median_share": 0.10197292685650834,
+    "median_available": 0.05010893246187364,
+    "median_enrichment": 2.022811040138586,
     "n_lineages": 49,
     "words": [
      "be",
@@ -125,8 +125,8 @@
      "any",
      "to",
      "he",
-     "a",
      "in",
+     "a",
      "it"
     ]
    }
@@ -135,15 +135,15 @@
  "tol=1.0": {
   "min_act": 4.0,
   "n_lineages": 49,
-  "n_cells": 1849,
+  "n_cells": 1818,
   "quadrants": {
    "SUBSTITUTE (full act, affect kept)": {
     "below_1": 45,
     "n_enr": 49,
     "p_sign": 8.225455871979648e-10,
-    "median_share": 0.08020491653411183,
-    "median_available": 0.1842247433819557,
-    "median_enrichment": 0.39357539441058315,
+    "median_share": 0.08053633326646029,
+    "median_available": 0.18393922951709168,
+    "median_enrichment": 0.3953928266989284,
     "n_lineages": 49,
     "words": [
      "destroy",
@@ -153,8 +153,8 @@
      "fire",
      "die",
      "fight",
-     "strike",
      "lash",
+     "strike",
      "kill"
     ]
    },
@@ -162,9 +162,9 @@
     "below_1": 29,
     "n_enr": 49,
     "p_sign": 0.2528697301676033,
-    "median_share": 0.08098847445415536,
-    "median_available": 0.08704453441295547,
-    "median_enrichment": 0.9560363593611212,
+    "median_share": 0.08075445574881153,
+    "median_available": 0.08662900188323917,
+    "median_enrichment": 0.9389416380285543,
     "n_lineages": 49,
     "words": [
      "suffer",
@@ -183,9 +183,9 @@
     "below_1": 17,
     "n_enr": 49,
     "p_sign": 0.04438416098714981,
-    "median_share": 0.07868615926087223,
+    "median_share": 0.07766908296921679,
     "median_available": 0.07003257328990228,
-    "median_enrichment": 1.275658959041712,
+    "median_enrichment": 1.2756589590417122,
     "n_lineages": 49,
     "words": [
      "scream",
@@ -204,8 +204,8 @@
     "below_1": 39,
     "n_enr": 49,
     "p_sign": 3.845911694355664e-05,
-    "median_share": 0.060941748135843424,
-    "median_available": 0.09170305676855896,
+    "median_share": 0.061194503585326875,
+    "median_available": 0.0913006029285099,
     "median_enrichment": 0.6909481853397536,
     "n_lineages": 49,
     "words": [
@@ -222,12 +222,12 @@
     ]
    },
    "NEITHER -- content word": {
-    "below_1": 17,
+    "below_1": 18,
     "n_enr": 49,
-    "p_sign": 0.04438416098714981,
+    "p_sign": 0.08543313315739454,
     "median_share": 0.5414245939213748,
     "median_available": 0.50730282375852,
-    "median_enrichment": 1.0677203370205166,
+    "median_enrichment": 1.0626077009155839,
     "n_lineages": 49,
     "words": [
      "make",
@@ -243,12 +243,12 @@
     ]
    },
    "NEITHER -- function word": {
-    "below_1": 8,
+    "below_1": 7,
     "n_enr": 49,
-    "p_sign": 1.9646537765538596e-06,
-    "median_share": 0.10656964683473462,
-    "median_available": 0.04985549132947977,
-    "median_enrichment": 2.040890895463348,
+    "p_sign": 3.6245783263666453e-07,
+    "median_share": 0.10197292685650831,
+    "median_available": 0.05010893246187364,
+    "median_enrichment": 2.022811040138586,
     "n_lineages": 49,
     "words": [
      "be",
@@ -258,8 +258,8 @@
      "any",
      "to",
      "he",
-     "a",
      "in",
+     "a",
      "it"
     ]
    }
@@ -268,15 +268,15 @@
  "tol=1.5": {
   "min_act": 4.0,
   "n_lineages": 49,
-  "n_cells": 1849,
+  "n_cells": 1818,
   "quadrants": {
    "SUBSTITUTE (full act, affect kept)": {
     "below_1": 44,
     "n_enr": 49,
     "p_sign": 7.59715845788378e-09,
-    "median_share": 0.11344530273796428,
-    "median_available": 0.2268993839835729,
-    "median_enrichment": 0.4375840599603548,
+    "median_share": 0.1174182719563164,
+    "median_available": 0.2267493356953056,
+    "median_enrichment": 0.48238224429981397,
     "n_lineages": 49,
     "words": [
      "destroy",
@@ -296,14 +296,14 @@
     "n_enr": 49,
     "p_sign": 0.2528697301676033,
     "median_share": 0.0734731905228268,
-    "median_available": 0.08090614886731391,
-    "median_enrichment": 0.8960538611911432,
+    "median_available": 0.08170212765957446,
+    "median_enrichment": 0.892775050686357,
     "n_lineages": 49,
     "words": [
      "suffer",
      "hurt",
-     "break",
      "hit",
+     "break",
      "smash",
      "fight",
      "yell",
@@ -316,9 +316,9 @@
     "below_1": 14,
     "n_enr": 49,
     "p_sign": 0.003801654409748778,
-    "median_share": 0.14441879352272233,
+    "median_share": 0.14847229923452904,
     "median_available": 0.11336032388663968,
-    "median_enrichment": 1.2694081945856812,
+    "median_enrichment": 1.2612507639698247,
     "n_lineages": 49,
     "words": [
      "scream",
@@ -337,9 +337,9 @@
     "below_1": 38,
     "n_enr": 49,
     "p_sign": 0.00014197068519905542,
-    "median_share": 0.040352509969905935,
-    "median_available": 0.05890804597701149,
-    "median_enrichment": 0.6973682886101135,
+    "median_share": 0.039307963945875345,
+    "median_available": 0.05813953488372093,
+    "median_enrichment": 0.7285769075646451,
     "n_lineages": 49,
     "words": [
      "break",
@@ -358,9 +358,9 @@
     "below_1": 19,
     "n_enr": 49,
     "p_sign": 0.15240777196147803,
-    "median_share": 0.48857657712045927,
-    "median_available": 0.4568245125348189,
-    "median_enrichment": 1.0618402066764445,
+    "median_share": 0.4931980629672007,
+    "median_available": 0.4578034682080925,
+    "median_enrichment": 1.0525805344976507,
     "n_lineages": 49,
     "words": [
      "make",
@@ -379,9 +379,9 @@
     "below_1": 7,
     "n_enr": 49,
     "p_sign": 3.6245783263666453e-07,
-    "median_share": 0.09968305333882849,
-    "median_available": 0.04868913857677903,
-    "median_enrichment": 2.070767054958395,
+    "median_share": 0.09806030229136685,
+    "median_available": 0.04655493482309125,
+    "median_enrichment": 2.035024931614667,
     "n_lineages": 49,
     "words": [
      "be",
@@ -391,8 +391,8 @@
      "any",
      "to",
      "he",
-     "a",
      "in",
+     "a",
      "it"
     ]
    }
