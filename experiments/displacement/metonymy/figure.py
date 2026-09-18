@@ -302,7 +302,10 @@ BORDER_OPACITY = 0.45
 #: about 0.5%, not from 0.9 to 0.5 of it.
 CI_AXIS = ("Fall in probability from base to aligned",
            "Rise in probability from base to aligned")
-CI_AXIS_SIZE = 17.0
+#: set like a garment label, and hung at half the gap it first sat at: the
+#: lowest ink in the drawing is the sole at y=809 and the axis was at 880.
+CI_AXIS_SIZE = 16.5
+CI_AXIS_Y = 845.0
 
 MODES = {
     #: (max, what the shading means, the two panel subtitles, the two pole
@@ -584,13 +587,13 @@ def build_two_body(mode, scale="D", min_move=0.0, layer_swap=True,
             #: no heading: the pseudo-axis at the foot names the direction,
             #: and CI sets the figure number and caption itself.
             axis = _boost_fonts(
-                '<text x="410.0" y="880" text-anchor="middle" font-size="%g" '
-                'fill="#16161a">%s</text>' % (CI_AXIS_SIZE, CI_AXIS[which]),
-                font_boost)
+                '<text x="410.0" y="%g" text-anchor="middle" font-size="%g" '
+                'font-weight="700" fill="#16161a">%s</text>'
+                % (CI_AXIS_Y, CI_AXIS_SIZE, CI_AXIS[which]), font_boost)
             g.append(axis)
             w_ = _label_width(axis)
             xs += [410.0 - w_ / 2 + dx, 410.0 + w_ / 2 + dx]
-            ys += [180.0, 892.0]
+            ys += [180.0, CI_AXIS_Y + 10.0]
         else:
             g.append('<text x="410.0" y="134" text-anchor="middle" '
                      'font-size="25" font-weight="700" fill="#16161a">%s</text>'
