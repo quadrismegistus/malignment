@@ -176,7 +176,7 @@ One ramp serves both bodies, so a fall and a rise of the same size print the sam
 
 **The format was measured off a printed issue, not taken on trust.** Weatherby and Justie, "Indexical AI", *Critical Inquiry* 48 (2022): 381-415, has seventeen figures. Trim is 6.58 x 9.58in, the body column 4.33 x 7.36in, and every full-measure figure in it is placed at 4.25 to 4.33in. **So 4.33in is the printed column and 4.8in is the submission ceiling, not the width anything appears at.** The tallest placed image is 6.14in, on a page of its own with its caption; a figure sharing a page with text gets 7.36in less whatever the caption takes, so **about 7.0in is the working maximum height**. Its own captions set at about 7.6pt and the small-caps FIGURE N at 5.7pt, which is where the 6pt floor comes from.
 
-`--ci-width` overrides the column. Everything below is at the measured 4.33. No title, caption or legend goes inside the image; the journal sets those and the garment labels carry the key anyway. The crop is MEASURED from the content rather than guessed, and the achieved figures are printed on every run so a bad estimate shows up instead of clipping silently.
+`--ci-width` overrides the column; the default stays 4.8, which is what the rest of the paper's figures are drawn to, and the table below gives both. No title, caption or legend goes inside the image; the journal sets those and the garment labels carry the key anyway. The crop is MEASURED from the content rather than guessed, and the achieved figures are printed on every run so a bad estimate shows up instead of clipping silently.
 
 **One box serves the pair.** The two arms label different garments, so cropping each to its own content would give two files at two scales, and a reader setting them side by side would get two different-sized bodies. The arm that is not being drawn is measured as well and discarded.
 
@@ -193,6 +193,10 @@ If the type lands below 6pt the producer scales every font up once and rebuilds.
 So the CI figures ship as a pair of files at one scale, and only the `movement` layout clears the floor at the printed column. `--ci-both` is kept because the question is worth being able to re-ask if the measure changes.
 
 **Stacking the two bodies vertically does not rescue it either.** Two panels are 740 x 1456 units, and at 4.33in wide that prints 8.52in tall against a 7.0in working maximum. Cropping every scrap of vertical white gets to about 1320 units, still over the 1196 the aspect allows.
+
+#### The unit, which the numbers do not announce
+
+**`-0.41` is 0.41 PERCENTAGE POINTS, not 41%.** `pants` holds about 0.92% of the slot at base and about 0.39% after alignment; the median per-lineage change is -0.41 points of probability, or -0.0041 as a proportion. Read as a percentage of `pants` itself the fall would be about 58%, which is a different and much larger number. The pseudo-axis says "Fall in probability from base to aligned" and does not name the unit, so the caption has to.
 
 ### `mass`: two distributions instead of a difference
 

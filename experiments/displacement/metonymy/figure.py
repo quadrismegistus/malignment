@@ -295,6 +295,15 @@ STROKE = 1.4
 #: value, for the same reason as one stroke weight.
 BORDER_OPACITY = 0.45
 
+#: The pseudo-axis that replaces the panel heading in CI mode. It names the
+#: direction, which is the only thing the heading was carrying once the
+#: legend went. NOT a percentage: -0.41 is 0.41 PERCENTAGE POINTS of the
+#: next-token distribution, so `pants` goes from about 0.9% of the slot to
+#: about 0.5%, not from 0.9 to 0.5 of it.
+CI_AXIS = ("Fall in probability from base to aligned",
+           "Rise in probability from base to aligned")
+CI_AXIS_SIZE = 17.0
+
 MODES = {
     #: (max, what the shading means, the two panel subtitles, the two pole
     #: labels on the legend, the tick values)
@@ -363,7 +372,9 @@ def _mirror_d(d, axis):
 #: its caption; a figure sharing a page with text has 7.36in less whatever
 #: the caption takes. Its own captions set at about 7.6pt and the small-caps
 #: FIGURE N at 5.7pt, which is why 6pt is the floor here.
-CI_WIDTH_IN = 4.33
+#: 4.8 is what the rest of this paper's figures are drawn to, so it stays the
+#: default; `--ci-width 4.33` prints at the measured column.
+CI_WIDTH_IN = 4.8
 CI_MAX_HEIGHT_IN = 7.0
 CI_MIN_PT = 6.0
 PT_PER_IN = 72.0
@@ -570,10 +581,16 @@ def build_two_body(mode, scale="D", min_move=0.0, layer_swap=True,
         head = ("base", "aligned")[which]
         g = ['<g transform="translate(%g,0)">' % dx] if dx else []
         if ci:
-            g.append(_boost_fonts(
-                '<text x="410.0" y="150" text-anchor="middle" font-size="21" '
-                'font-weight="700" fill="#16161a">%s</text>' % head, font_boost))
-            ys.append(132)
+            #: no heading: the pseudo-axis at the foot names the direction,
+            #: and CI sets the figure number and caption itself.
+            axis = _boost_fonts(
+                '<text x="410.0" y="880" text-anchor="middle" font-size="%g" '
+                'fill="#16161a">%s</text>' % (CI_AXIS_SIZE, CI_AXIS[which]),
+                font_boost)
+            g.append(axis)
+            w_ = _label_width(axis)
+            xs += [410.0 - w_ / 2 + dx, 410.0 + w_ / 2 + dx]
+            ys += [180.0, 892.0]
         else:
             g.append('<text x="410.0" y="134" text-anchor="middle" '
                      'font-size="25" font-weight="700" fill="#16161a">%s</text>'
@@ -582,7 +599,10 @@ def build_two_body(mode, scale="D", min_move=0.0, layer_swap=True,
                      'font-size="15" fill="#6b6862">%s</text>' % subtitles[which])
             ys.append(116)
         g += [paint(l, which) for l in her_draw
-              if fills.get(l) is None or kept(fills[l])]
+              if (fills.get(l) is None or kept(fills[l]))
+              #: the ground line is scenery; in CI it sits where the
+              #: pseudo-axis goes and reads as a rule under the figure.
+              and not (ci and 'stroke="#ded9d0"' in l)]
         for a, b in her_labels:
             block = label(a, b, which)
             g += block
@@ -595,7 +615,8 @@ def build_two_body(mode, scale="D", min_move=0.0, layer_swap=True,
             xs += [lo + dx, hi + dx]
             ys.append(float(re.search(r'y="([-\d.]+)"', txt).group(1)))
         xs += [183.5 + dx, 637.0 + dx]          # the body, swatch to swatch
-        ys.append(840.0)                        # the ground line
+        if not ci:
+            ys.append(840.0)                    # the ground line
         if dx:
             g.append("</g>")
         o += g

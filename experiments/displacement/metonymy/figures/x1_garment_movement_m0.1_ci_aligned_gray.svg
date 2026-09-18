@@ -1,7 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="39.8 122.0 740.4 728.0" width="4.33in" height="4.258in" font-family="Helvetica,Arial,sans-serif">
-<rect x="39.8" y="122.0" width="740.4" height="728.0" fill="#ffffff"/>
-<text x="410.0" y="150" text-anchor="middle" font-size="21" font-weight="700" fill="#16161a">aligned</text>
-<path d="M 195 824 Q 410 828 625 823" fill="none" stroke="#ded9d0" stroke-width="1.4" stroke-linecap="round"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="39.8 170.0 740.4 732.0" width="4.8in" height="4.746in" font-family="Helvetica,Arial,sans-serif">
+<rect x="39.8" y="170.0" width="740.4" height="732.0" fill="#ffffff"/>
+<text x="410.0" y="880" text-anchor="middle" font-size="17" fill="#16161a">Rise in probability from base to aligned</text>
 <path d="M 410.0 292.0 Q 410.6 306.1 410.0 322.0" fill="none" stroke="#26262b" stroke-opacity="0.45" stroke-width="1.4" stroke-linecap="round"/>
 <path d="M 410.0 330.0 Q 410.1 444.8 410.0 560.0" fill="none" stroke="#26262b" stroke-opacity="0.45" stroke-width="1.4" stroke-linecap="round"/>
 <path d="M 338.0 326.0 Q 323.5 396.6 309.0 468.0" fill="none" stroke="#26262b" stroke-opacity="0.45" stroke-width="1.4" stroke-linecap="round"/>
