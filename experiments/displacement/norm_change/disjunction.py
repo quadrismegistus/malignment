@@ -180,6 +180,31 @@ def compute(tol, min_act):
                   "n_lineages": len(shares),
                   "words": [w for (qq, w), _m in ex.most_common()
                             if qq == q][:10]}
+    #: **THE SENTENCE'S CLAIM IS RELATIVE AND SO IS THIS TEST.** "Displaced
+    #: affect RATHER THAN substitutes" does not require either route to beat its
+    #: own availability; it requires the affect route to beat the substitution
+    #: route. Testing each against 1.0 separately asks a harder question than
+    #: the argument asks, spends the power on two tests instead of one, and
+    #: leaves the answer hostage to `tol` -- which is exactly what happened.
+    #: This is one paired contrast per lineage, and the availability baseline
+    #: cancels nothing: it is carried into both sides and then differenced.
+    head = []
+    for lin in acc:
+        t, ta = sum(acc[lin].values()), sum(avail[lin].values())
+        if not t or not ta or not avail[lin][QUAD[0]] or not avail[lin][QUAD[2]]:
+            continue
+        sub = (acc[lin][QUAD[0]] / t) / (avail[lin][QUAD[0]] / ta)
+        aff = (acc[lin][QUAD[2]] / t) / (avail[lin][QUAD[2]] / ta)
+        if sub > 0:
+            head.append(aff / sub)
+    nn = len(head)
+    below = sum(1 for x in head if x < 1.0)
+    kk = min(below, nn - below)
+    out["_HEAD: affect route / substitution route"] = {
+        "median_enrichment": st.median(head), "below_1": below, "n_enr": nn,
+        "p_sign": min(1.0, sum(comb(nn, i) for i in range(kk + 1)) * 2 / 2 ** nn),
+        "median_share": None, "median_available": None, "n_lineages": nn,
+        "words": []}
     return out, len(seen), len(has_riser)
 
 
@@ -206,6 +231,11 @@ def main(argv=None):
                      ("%.2fx" % r["median_enrichment"])
                      if r["median_enrichment"] else "--",
                      r["below_1"], r["n_enr"], r["p_sign"]))
+        print()
+        h = res["_HEAD: affect route / substitution route"]
+        print("\n    HEADLINE -- the contrast the sentence actually makes:")
+        print("    affect route / substitution route   %.2fx   %d/%d below 1  p=%.2g"
+              % (h["median_enrichment"], h["below_1"], h["n_enr"], h["p_sign"]))
         print()
         for q in QUAD:
             print("      %-38s %s" % (q, ", ".join(res[q]["words"][:7])))

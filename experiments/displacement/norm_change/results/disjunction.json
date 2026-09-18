@@ -129,6 +129,16 @@
      "a",
      "it"
     ]
+   },
+   "_HEAD: affect route / substitution route": {
+    "median_enrichment": 3.7885921820460773,
+    "below_1": 4,
+    "n_enr": 49,
+    "p_sign": 8.225455871979648e-10,
+    "median_share": null,
+    "median_available": null,
+    "n_lineages": 49,
+    "words": []
    }
   }
  },
@@ -262,6 +272,16 @@
      "a",
      "it"
     ]
+   },
+   "_HEAD: affect route / substitution route": {
+    "median_enrichment": 3.0936826738703527,
+    "below_1": 4,
+    "n_enr": 49,
+    "p_sign": 8.225455871979648e-10,
+    "median_share": null,
+    "median_available": null,
+    "n_lineages": 49,
+    "words": []
    }
   }
  },
@@ -395,6 +415,16 @@
      "a",
      "it"
     ]
+   },
+   "_HEAD: affect route / substitution route": {
+    "median_enrichment": 2.6334972997316197,
+    "below_1": 5,
+    "n_enr": 49,
+    "p_sign": 7.59715845788378e-09,
+    "median_share": null,
+    "median_available": null,
+    "n_lineages": 49,
+    "words": []
    }
   }
  }
