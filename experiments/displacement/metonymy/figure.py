@@ -288,8 +288,11 @@ SHOE_LINE = 36                # 1-indexed in the source, the her-panel shoe
 #: the fills -- which are the only thing here carrying a number. Everything in
 #: the body goes to the garments' own weight.
 STROKE = 1.4
-#: and the garments' outlines are lifted off their fills so the nesting reads
-#: as depth rather than as six drawn boxes. The body keeps a solid line.
+#: and every line in the drawing is lifted off the page at one opacity --
+#: garments, head, arms, legs, the smile. The drawing is a coordinate system,
+#: not a subject: the only thing here carrying a number is the fill, and a
+#: solid black contour around a near-white garment competes with it. One
+#: value, for the same reason as one stroke weight.
 BORDER_OPACITY = 0.45
 
 MODES = {
@@ -415,19 +418,16 @@ def build_two_body(mode, scale="D", min_move=0.0, layer_swap=True):
     #: the membership test has to be taken ONCE, before either map is rebuilt.
     #: Rebuilding `fills` first and `her_draw` second silently unmaps every
     #: garment -- the draw lines then miss the softened keys and paint white.
-    garment_lines = frozenset(fills)
     soften = ('stroke="#26262b"',
               'stroke="#26262b" stroke-opacity="%g"' % BORDER_OPACITY)
 
     def restyle(l):
-        #: MEMBERSHIP FIRST, REWRITE SECOND. `garment_lines` holds the source
-        #: text; testing the rewritten line instead only matched the garments
-        #: whose stroke-width was already STROKE -- clothes, clothing, scarf,
-        #: gloves, panties and tie -- so those six printed with a softened
-        #: outline and every other garment with a solid one.
-        garment = l in garment_lines
+        #: Everything gets both, so there is no membership test left to get
+        #: wrong. The previous version tested the ALREADY-REWRITTEN line
+        #: against a set of source lines, which matched only the six garments
+        #: whose stroke-width was already STROKE.
         l = re.sub(r'stroke-width="[\d.]+"', 'stroke-width="%g"' % STROKE, l)
-        return l.replace(*soften) if garment else l
+        return l.replace(*soften)
 
     fills = {restyle(k): v for k, v in fills.items()}
     her_draw = [restyle(l) for l in her_draw]
