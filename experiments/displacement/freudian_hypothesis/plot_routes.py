@@ -65,6 +65,13 @@ def load(min_cand=80):
             r[2] += -d * c
     live = {k for k, (m, wa, _wc) in ref.items() if m > 0 and wa / m >= MIN_ACT}
     arr, dep, avail = collections.Counter(), collections.Counter(), collections.Counter()
+    #: **THE LANDMARK IS THE HEAVIEST WORD IN EITHER DIRECTION, not the heaviest
+    #: ARRIVING one.** A first version labelled each tile with its top arriving
+    #: word. At act 7 / affect 6 that is `kill` -- with an arriving mass of 1
+    #: against a departing mass of 67. The tile got named for the word whose
+    #: whole significance there is that it LEAVES, and the label read as a claim
+    #: about arrivals. The word names the POSITION; the two percentages say what
+    #: happens at it.
     top = collections.defaultdict(collections.Counter)
     for lin, pr, w, d, a, c, isfn in D.stream():
         #: function words have no act or affect to speak of and would put 10% of
@@ -73,9 +80,9 @@ def load(min_cand=80):
             continue
         k = (int(a), int(c))
         avail[k] += 1
+        top[k][w] += abs(d)
         if d > 0:
             arr[k] += d
-            top[k][w] += d
         else:
             dep[k] += -d
     A, V, Dm = sum(arr.values()), sum(avail.values()), sum(dep.values())
@@ -89,9 +96,14 @@ def load(min_cand=80):
                      "depart_share": 100 * dep[k] / Dm,
                      "arrive_share": 100 * arr[k] / A,
                      "word": top[k].most_common(1)[0][0] if top[k] else "",
-                     "label": "%s\n%.2fx · %.1f%%"
+                     #: OUT then IN, both as a share of their own side's
+                     #: total. The ratio is the shading; these two are the
+                     #: fact, and they need no explanation of a baseline.
+                     #: WORDS, NOT AN ARROW GLYPH. U+2192 is not in the
+                     #: publication font and rendered as a tofu box.
+                     "label": "%s\nout %.1f%%\nin %.1f%%"
                               % (top[k].most_common(1)[0][0] if top[k] else "",
-                                 e, 100 * arr[k] / A)})
+                                 100 * dep[k] / Dm, 100 * arr[k] / A)})
     return rows, len(live)
 
 
@@ -130,7 +142,7 @@ def draw(rows, out, top=None, pub=True):
     f["ink"] = ["#ffffff" if grey(v) < 0.55 else "#000000" for v in f["shade"]]
     p = (ggplot(f, aes("act", "affect"))
          + geom_tile(aes(fill="fill"), color="#ffffff", size=0.8)
-         + geom_text(aes(label="label", color="ink"), size=5.0, lineheight=0.95)
+         + geom_text(aes(label="label", color="ink"), size=4.8, lineheight=1.05)
          + scale_x_continuous(breaks=range(1, 8), limits=(0.4, 7.6),
                               expand=(0, 0))
          + scale_y_continuous(breaks=range(1, 8), limits=(0.4, 7.6),

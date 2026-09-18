@@ -38,7 +38,14 @@ Alignment does not choose between two channels; it **avoids** one (0.40x, BH 4.9
 
 ![Where the mass leaves from and where it will not go](figures/routes_pub.png)
 
-Each tile is one (act, affect) position. The number is arriving mass as a multiple of that position's share of the candidate lists; the percentage is its share of all arriving mass. Along the row at charge 6, affect held constant, the only thing that changes is whether an act is named: `kill` 0.09x, `scream` 4.33x.
+**It is about both sides, and each tile says so.** A tile is one (act, affect) position. `out` is that position's share of all DEPARTING mass, `in` its share of all ARRIVING mass; the shading is the ratio of `in` to what the position held in the candidate lists. The word names the position — the heaviest word there in either direction — not the behaviour.
+
+Read the row at charge 6, where the affect is held constant and the only thing that changes is whether an act is named:
+
+    kill     out 29.3%   in 0.3%
+    scream   out  0.3%   in 5.1%
+
+**A first version labelled each tile with its top ARRIVING word and printed only the ratio.** At act 7 / affect 6 the top arriving word is `kill` — with an arriving mass of 1 against a departing mass of 67. The tile was named for the word whose whole significance there is that it leaves, and the label read as a claim about arrivals. `out`/`in` replaced the ratio because two shares of their own totals need no explanation of a baseline.
 
 **A scatter of the individual words was drawn first and withdrawn.** It shaded the high-act corner to show it "empty" of arrivals. It is not empty — under-representation is a ratio, and 0.09x of a large availability is still ink. A figure whose argument is a blank region claims more than the measurement gives.
 
