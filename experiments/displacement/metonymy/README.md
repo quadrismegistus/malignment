@@ -192,6 +192,25 @@ If the type lands below 6pt the producer scales every font up once and rebuilds.
 
 So the CI figures ship as a pair of files at one scale, and only the `movement` layout clears the floor at the printed column. `--ci-both` is kept because the question is worth being able to re-ask if the measure changes.
 
+#### The house style, and where this figure departs from it
+
+`malignment.figure` holds the house publication constants in one place, and `prompt_slopes/plot.py` and `existence/channel_graph.py` both read it. This producer now reads it too, for the face:
+
+| | house | here |
+|---|---|---|
+| family | `pub_font()` -> **Helvetica** | **Helvetica**, via the same resolver |
+| size | `PUB_FONT_PT` = **9**, ONE size for every piece of text | **7.7 and 6.8**, two sizes |
+| width | `PUB_SIZE` = **4.8** in | 4.8 in |
+
+**The face is the same.** The mechanism differs and the difference favours this producer: in matplotlib a font it cannot find is not an error -- it substitutes DejaVu Sans and warns into a stream nobody reads, which is why the house has a resolver. An SVG `font-family` is a fallback CHAIN the renderer walks, so naming a stack is correct behaviour rather than a silent substitution, and the EPS converts type to outlines, freezing whatever this machine resolved.
+
+**The size is not.** Two departures, both deliberate and both printed on every run so they cannot be forgotten:
+
+- **Not 9pt.** 27 labels at 9pt put this figure at 5.6in wide against a 4.8in column. `channel_graph.py` records the same departure for the same reason: declare the size you actually print rather than declare the house size and ship something else.
+- **Not one size.** The word sits at 7.7pt and its number at 6.8pt, because the hierarchy is doing work -- the reader finds the garment first and reads the number second.
+
+Note also that `PUB_SIZE` takes the CI column as 4.8in on RH's own measurement, where the Weatherby and Justie issue measures 4.33in. 4.8 is kept because the rest of the paper's figures are drawn to it; `--ci-width 4.33` prints at the measured column, where the type falls to 6.1pt and still clears the floor.
+
 #### `--ci-export`
 
     python figure.py --two-body movement --min-move 0.1 --ci --ci-export

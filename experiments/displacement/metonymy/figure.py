@@ -388,6 +388,27 @@ CI_WIDTH_IN = 4.8
 CI_MAX_HEIGHT_IN = 7.0
 CI_MIN_PT = 6.0
 PT_PER_IN = 72.0
+#: THE HOUSE FACE, from `malignment.figure.pub_font()` -- the same resolver
+#: `prompt_slopes/plot.py` and `channel_graph.py` use, so all three figures
+#: set in one family. It resolves to Helvetica here.
+#:
+#: The MECHANISM differs and the difference is in this producer's favour. In
+#: matplotlib a name it cannot find is not an error: it substitutes DejaVu
+#: Sans and warns into a stream nobody reads, which is why the house has a
+#: resolver at all. An SVG `font-family` is a fallback CHAIN the renderer
+#: walks, so naming the stack is the correct behaviour rather than a silent
+#: substitution -- and the EPS converts the type to outlines, freezing
+#: whatever this machine resolved, which is what a printer wants.
+def font_stack():
+    try:
+        from malignment.figure import pub_font
+        head = pub_font()
+    except Exception:
+        head = "Helvetica"
+    rest = [f for f in ("Helvetica", "Arial", "sans-serif") if f != head]
+    return ",".join([head] + rest)
+
+
 #: Helvetica advance widths as a fraction of the em, averaged over mixed case.
 #: Good to a few percent, which is all the margin here needs; the achieved
 #: figures are printed so a wrong guess is visible rather than silent.
@@ -651,8 +672,9 @@ def build_two_body(mode, scale="D", min_move=0.0, layer_swap=True,
         bx0, bx1 = min(xs) - pad, max(xs) + pad
         by0, by1 = min(ys) - pad, max(ys) + pad
         s_ = CI_WIDTH_IN * PT_PER_IN / (bx1 - bx0)
-        smallest = min(float(m_) for m_ in
-                       re.findall(r'font-size="([\d.]+)"', "".join(o)))
+        seen = sorted({float(m_) for m_ in
+                       re.findall(r'font-size="([\d.]+)"', "".join(o))})
+        smallest = seen[0]
         #: ONE RETRY, never a loop. Bigger type widens the box, which shrinks
         #: the scale, so the fixed point is approached from below; a 3% margin
         #: clears it in one step for everything here. If it does not, the
@@ -663,6 +685,20 @@ def build_two_body(mode, scale="D", min_move=0.0, layer_swap=True,
         h_in = (by1 - by0) * s_ / PT_PER_IN
         if h_in > CI_MAX_HEIGHT_IN:
             print("   CI: %.2f in tall, over the %.2f in page" % (h_in, CI_MAX_HEIGHT_IN))
+        #: EVERY size, not just the smallest, and the house size beside them.
+        #: `malignment.figure` sets PUB_FONT_PT = 9 and ONE size for every
+        #: piece of text. This figure holds neither: 27 labels in 4.8in put
+        #: 9pt type at 5.6in wide, and the word/number hierarchy is doing
+        #: work. `channel_graph.py` records the same departure for the same
+        #: reason -- declare the size you actually print rather than declare
+        #: the house size and ship something else.
+        try:
+            from malignment.figure import PUB_FONT_PT as _house
+        except Exception:
+            _house = None
+        print("   CI: type at %s pt%s"
+              % ("/".join("%.1f" % (v * s_) for v in seen),
+                 "" if _house is None else "  (house is %g, one size)" % _house))
         print("   CI: viewBox %.0f x %.0f -> %.2f x %.2f in; smallest type "
               "%.1fpt%s%s" % (bx1 - bx0, by1 - by0, CI_WIDTH_IN,
                               (by1 - by0) * s_ / PT_PER_IN, smallest * s_,
@@ -672,16 +708,16 @@ def build_two_body(mode, scale="D", min_move=0.0, layer_swap=True,
                               else "  ** UNDER %gpt, WILL NOT FIT **" % CI_MIN_PT))
         head_ = ('<svg xmlns="http://www.w3.org/2000/svg" '
                  'viewBox="%.1f %.1f %.1f %.1f" width="%gin" height="%.3fin" '
-                 'font-family="Helvetica,Arial,sans-serif">'
+                 'font-family="%s">'
                  % (bx0, by0, bx1 - bx0, by1 - by0, CI_WIDTH_IN,
-                    (by1 - by0) * s_ / PT_PER_IN),
+                    (by1 - by0) * s_ / PT_PER_IN, font_stack()),
                  '<rect x="%.1f" y="%.1f" width="%.1f" height="%.1f" '
                  'fill="#ffffff"/>' % (bx0, by0, bx1 - bx0, by1 - by0))
         return "\n".join(head_ + tuple(o)) + "\n</svg>\n"
 
     o = ['<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 %d %d" width="%d" '
-         'height="%d" font-family="Helvetica,Arial,sans-serif">'
-         % (WIDTH, HEIGHT, WIDTH, HEIGHT),
+         'height="%d" font-family="%s">'
+         % (WIDTH, HEIGHT, WIDTH, HEIGHT, font_stack()),
          '<rect width="%d" height="%d" fill="#ffffff"/>' % (WIDTH, HEIGHT)] + o
 
     #: the legend, rebuilt: one white-to-black ramp on the same power scale,
