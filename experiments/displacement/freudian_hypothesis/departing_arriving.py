@@ -95,8 +95,17 @@ PREDICT = [
     ("DOWN -- the idea is repressed",
      ["v6:harm", "v6:aggression", "v6:directedness", "v6:makes_worse",
       "k_bodily_harm", "k_transgressiveness"]),
+    #: **`inst:arousal` IS THE ONE THAT DECIDES THIS ROW AND IT WAS MISSING.**
+    #: The first run of this file tested the conservation claim on `k_charge`
+    #: (a word rated ALONE) and `warriner_arousal` (a human norm, also out of
+    #: context), reported k_charge flat at 4% of |harm|, and concluded the quota
+    #: survives. `slot_institutional_en_v3` rates affective intensity IN THE
+    #: FRAME -- "how much emotional INTENSITY does the completion carry,
+    #: regardless of whether it is positive or negative" -- over 2,511 prompts,
+    #: and was simply never looked for. A claim about the quota of affect rested
+    #: on two type-level instruments while a contextual one sat in the corpus.
     ("~ZERO -- the quota of affect is conserved",
-     ["k_charge", "warriner_arousal"]),
+     ["k_charge", "warriner_arousal", "inst:arousal"]),
     ("UP -- transformed into affect and speech",
      ["v6:vocalisation", "v6:interiority", "v6:deliberation", "v6:superego"]),
     #: **`hedged` WAS MINE AND IT CAME BACK THE OTHER WAY.** I grouped it with
@@ -108,7 +117,9 @@ PREDICT = [
     ("PREDICTED UP BY ME, CAME BACK DOWN", ["v6:hedged"]),
     ("no prediction, reported for context",
      ["warriner_valence", "warriner_dominance", "k_valence", "k_concreteness",
-      "k_register_level", "v6:makes_better", "v6:fit", "v6:mundanity"]),
+      "k_register_level", "v6:makes_better", "v6:fit", "v6:mundanity",
+      "inst:procedural", "inst:agency", "inst:assertiveness",
+      "inst:abstraction", "inst:specificity", "inst:deference"]),
 ]
 SCALES = [s for _lab, ss in PREDICT for s in ss]
 #: the scale the nulls are quoted as a fraction OF -- the largest declared
@@ -122,11 +133,16 @@ def norms():
     idx = F._slot_index()
     ctx = {}
     for (pr, w), by in idx.items():
-        v6 = by.get("v6")
-        if v6:
-            ctx[(pr, w)] = {"v6:" + k: float(x) for k, x in v6.items()
-                            if isinstance(x, (int, float))
-                            and not isinstance(x, bool)}
+        d = {}
+        for inst, pfx in (("v6", "v6:"),
+                          ("slot_institutional_en_v3", "inst:")):
+            got = by.get(inst)
+            if not got:
+                continue
+            d.update({pfx + k: float(x) for k, x in got.items()
+                      if isinstance(x, (int, float)) and not isinstance(x, bool)})
+        if d:
+            ctx[(pr, w)] = d
     return F, ctx
 
 

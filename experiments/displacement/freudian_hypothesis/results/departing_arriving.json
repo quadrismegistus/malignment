@@ -16,7 +16,8 @@
    "~ZERO -- the quota of affect is conserved",
    [
     "k_charge",
-    "warriner_arousal"
+    "warriner_arousal",
+    "inst:arousal"
    ]
   ],
   [
@@ -44,7 +45,13 @@
     "k_register_level",
     "v6:makes_better",
     "v6:fit",
-    "v6:mundanity"
+    "v6:mundanity",
+    "inst:procedural",
+    "inst:agency",
+    "inst:assertiveness",
+    "inst:abstraction",
+    "inst:specificity",
+    "inst:deference"
    ]
   ]
  ],
@@ -96,6 +103,12 @@
    "below_0": 39,
    "n_lineages": 50,
    "p_sign": 9.021490107130603e-05
+  },
+  "inst:arousal": {
+   "median": -0.03726737842716443,
+   "below_0": 27,
+   "n_lineages": 50,
+   "p_sign": 0.6718110337653656
   },
   "v6:vocalisation": {
    "median": 0.17766645639678713,
@@ -174,6 +187,42 @@
    "below_0": 4,
    "n_lineages": 50,
    "p_sign": 4.461782054931973e-10
+  },
+  "inst:procedural": {
+   "median": 0.13673717958023768,
+   "below_0": 10,
+   "n_lineages": 50,
+   "p_sign": 2.3861331676755526e-05
+  },
+  "inst:agency": {
+   "median": 0.10441875693602376,
+   "below_0": 17,
+   "n_lineages": 50,
+   "p_sign": 0.032839137564268484
+  },
+  "inst:assertiveness": {
+   "median": -0.019975374697815296,
+   "below_0": 29,
+   "n_lineages": 50,
+   "p_sign": 0.3222363203575469
+  },
+  "inst:abstraction": {
+   "median": 0.11369870339783539,
+   "below_0": 19,
+   "n_lineages": 50,
+   "p_sign": 0.11892045255943628
+  },
+  "inst:specificity": {
+   "median": 0.13489122038613055,
+   "below_0": 17,
+   "n_lineages": 50,
+   "p_sign": 0.032839137564268484
+  },
+  "inst:deference": {
+   "median": 0.10768019976512666,
+   "below_0": 8,
+   "n_lineages": 50,
+   "p_sign": 1.163555804595262e-06
   }
  },
  "conservation": {
