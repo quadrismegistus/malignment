@@ -1,0 +1,4 @@
+# TIFFs are 7.6 MB each and `figure.py --ci --ci-export` regenerates them
+# from the committed SVG in one command, so the repo keeps the source and
+# the two small derived formats and not the one that would dominate it.
+*.tif

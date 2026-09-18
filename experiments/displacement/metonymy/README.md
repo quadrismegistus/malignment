@@ -192,6 +192,16 @@ If the type lands below 6pt the producer scales every font up once and rebuilds.
 
 So the CI figures ship as a pair of files at one scale, and only the `movement` layout clears the floor at the printed column. `--ci-both` is kept because the question is worth being able to re-ask if the measure changes.
 
+#### `--ci-export`
+
+    python figure.py --two-body movement --min-move 0.1 --ci --ci-export
+
+Writes `.png`, `.tif` and `.eps` beside each `.svg`, all at one size: **1440 x 1352 px at 300 dpi = 4.800 x 4.507 in**, EPS box 345.600 x 324.432 pt. The EPS is vector with the type converted to paths, so it is the one to send if the journal will take it.
+
+Two things the export has to do that the tools do not do by themselves. `rsvg-convert -d 300 -p 300` sets the RENDER dpi and still writes 72 into the PNG's `pHYs` chunk, which is the number a production desk reads, so the pixel width is pinned instead and the dpi written afterwards with `sips`. And cairo rounds `%%BoundingBox` up to whole points and emits no `%%HiResBoundingBox`, so a placed EPS would be up to a point wider than the figure; the exact box is added by hand.
+
+The TIFFs are 7.6 MB each and are not committed; the SVG is, and one command regenerates them.
+
 **Stacking the two bodies vertically does not rescue it either.** Two panels are 740 x 1456 units, and at 4.33in wide that prints 8.52in tall against a 7.0in working maximum. Cropping every scrap of vertical white gets to about 1320 units, still over the 1196 the aspect allows.
 
 #### The unit, which the numbers do not announce

@@ -741,6 +741,65 @@ def build_two_body(mode, scale="D", min_move=0.0, layer_swap=True,
     return "\n".join(o) + "\n"
 
 
+#: Raster export resolution. A journal asking for 300dpi line art means the
+#: PIXEL grid, not the render scale, so the width is pinned in pixels and the
+#: dpi written into the file afterwards -- `rsvg-convert -d/-p` sets the
+#: render DPI and still writes 72 into the pHYs chunk, which is what a
+#: production desk reads.
+EXPORT_DPI = 300
+
+
+def export(svg_path, dpi=EXPORT_DPI):
+    """Write .png, .tif and .eps beside an SVG, all at one size. -> [paths]
+
+    EPS comes out of rsvg as vector, so it is the one to send if the journal
+    will take it. Cairo rounds `%%BoundingBox` up to whole points and writes
+    no `%%HiResBoundingBox`, so the exact box is added here; without it a
+    placed EPS is up to a point wider than the figure.
+    """
+    import shutil
+    import subprocess
+    for tool in ("rsvg-convert", "sips"):
+        if not shutil.which(tool):
+            raise SystemExit("export needs %s on PATH" % tool)
+
+    head = open(svg_path, encoding="utf-8").read(400)
+    w_in = float(re.search(r'width="([\d.]+)in"', head).group(1))
+    h_in = float(re.search(r'height="([\d.]+)in"', head).group(1))
+    px = int(round(w_in * dpi))
+    stem = os.path.splitext(svg_path)[0]
+    png, tif, eps = stem + ".png", stem + ".tif", stem + ".eps"
+
+    subprocess.run(["rsvg-convert", "-w", str(px), "-f", "png",
+                    svg_path, "-o", png], check=True)
+    for f in (png,):
+        subprocess.run(["sips", "-s", "dpiWidth", str(dpi),
+                        "-s", "dpiHeight", str(dpi), f],
+                       check=True, capture_output=True)
+    subprocess.run(["sips", "-s", "format", "tiff", png, "--out", tif],
+                   check=True, capture_output=True)
+    subprocess.run(["sips", "-s", "dpiWidth", str(dpi),
+                    "-s", "dpiHeight", str(dpi), tif],
+                   check=True, capture_output=True)
+    subprocess.run(["rsvg-convert", "-f", "eps", svg_path, "-o", eps],
+                   check=True)
+
+    #: the exact bounding box, in points, beside the integer one cairo wrote
+    body = open(eps, encoding="latin-1").read()
+    hi = "%%%%HiResBoundingBox: 0 0 %.3f %.3f\n" % (w_in * 72.0, h_in * 72.0)
+    body = body.replace("%%PageBoundingBox:", hi + "%%PageBoundingBox:", 1)
+    open(eps, "w", encoding="latin-1").write(body)
+
+    out = subprocess.run(["sips", "-g", "pixelWidth", "-g", "pixelHeight", png],
+                         capture_output=True, text=True).stdout
+    wpx = int(re.search(r"pixelWidth: (\d+)", out).group(1))
+    hpx = int(re.search(r"pixelHeight: (\d+)", out).group(1))
+    print("   export %d x %d px at %ddpi = %.3f x %.3f in; eps %.1f x %.1f pt"
+          % (wpx, hpx, dpi, wpx / float(dpi), hpx / float(dpi),
+             w_in * 72.0, h_in * 72.0))
+    return [png, tif, eps]
+
+
 def audit(scale="D", top=8):
     """Which scored words does the drawing leave out, and how far do they move?"""
     import run as producer
@@ -796,6 +855,9 @@ def main(argv=None):
                     help="override the column width in inches. 4.33 is the "
                          "measured CI body column; 4.8 is the submission "
                          "ceiling.")
+    ap.add_argument("--ci-export", action="store_true",
+                    help="with --ci, also write .png, .tif and .eps beside "
+                         "each .svg at %ddpi, all at one size." % EXPORT_DPI)
     ap.add_argument("--ci-both", action="store_true",
                     help="with --ci, both arms in one %gin file. Prints the "
                          "achieved type size, which is the whole question."
@@ -830,6 +892,9 @@ def main(argv=None):
                 fh.write(build_two_body(mode, a.scale, a.min_move,
                                         not a.no_layer_swap, a.ci, arms))
             print("-> %s" % path)
+            if a.ci and a.ci_export:
+                for q in export(path):
+                    print("-> %s" % q)
         return 0
     jobs = []
     if not a.gray_only:
