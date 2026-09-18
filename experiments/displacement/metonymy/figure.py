@@ -300,8 +300,15 @@ BORDER_OPACITY = 0.45
 #: legend went. NOT a percentage: -0.41 is 0.41 PERCENTAGE POINTS of the
 #: next-token distribution, so `pants` goes from about 0.9% of the slot to
 #: about 0.5%, not from 0.9 to 0.5 of it.
-CI_AXIS = ("Fall in probability from base to aligned",
-           "Rise in probability from base to aligned")
+#: The unit is named on the axis and nowhere else. `-0.41` is 0.41 PERCENTAGE
+#: POINTS of the next-token distribution -- `pants` goes from about 0.92% of
+#: the slot to about 0.39% -- and writing it `-0.41%` would not imply points,
+#: it would read either as a relative fall of 0.41% (the real one is about
+#: 58%) or as an absolute 0.41% (which is close enough to where `pants` lands
+#: that the misreading survives). Naming it on the axis costs the label
+#: column nothing.
+CI_AXIS = ("Fall in probability from base to aligned (percentage points)",
+           "Rise in probability from base to aligned (percentage points)")
 #: set like a garment label, and hung at half the gap it first sat at: the
 #: lowest ink in the drawing is the sole at y=809 and the axis was at 880.
 CI_AXIS_SIZE = 16.5

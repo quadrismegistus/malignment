@@ -196,7 +196,7 @@ So the CI figures ship as a pair of files at one scale, and only the `movement` 
 
 #### The unit, which the numbers do not announce
 
-**`-0.41` is 0.41 PERCENTAGE POINTS, not 41%.** `pants` holds about 0.92% of the slot at base and about 0.39% after alignment; the median per-lineage change is -0.41 points of probability, or -0.0041 as a proportion. Read as a percentage of `pants` itself the fall would be about 58%, which is a different and much larger number. The pseudo-axis says "Fall in probability from base to aligned" and does not name the unit, so the caption has to.
+**`-0.41` is 0.41 PERCENTAGE POINTS, not 41%.** `pants` holds about 0.92% of the slot at base and about 0.39% after alignment; the median per-lineage change is -0.41 points of probability, or -0.0041 as a proportion. Read as a percentage of `pants` itself the fall would be about 58%, which is a different and much larger number. The axis names the unit -- "Fall in probability from base to aligned (percentage points)" -- and nothing else does. Writing the numbers as `-0.41%` would NOT imply points: a reader takes it either as a relative fall of 0.41% (the real one is about 58%) or as an absolute 0.41%, which is close enough to where `pants` lands that the misreading survives contact with the figure.
 
 ### `mass`: two distributions instead of a difference
 
