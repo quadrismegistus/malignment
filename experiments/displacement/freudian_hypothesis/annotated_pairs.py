@@ -320,6 +320,94 @@ def examples(n=8, hold=0.25, drop=1.0, mass=False):
     return held, fell
 
 
+DEPOSIT = os.path.expanduser("~/malignment-data/dose_response/charge_en50_flash.jsonl")
+
+
+def scene_index(frames):
+    """{(frame, word): mean scene}, plus {frame: frame rating}, from task_charge.
+
+    The completed-scene rating is IN CONTEXT: `kissed` after "pinned his roommate
+    to the floor and" is a scene at 6.14 where the word alone rates 3. That gap
+    is the quantity this comparison exists to measure.
+    """
+    want = set(frames)
+    acc = collections.defaultdict(list)
+    fr = collections.defaultdict(list)
+    for line in open(DEPOSIT, encoding="utf-8"):
+        d = json.loads(line)
+        if d["prompt"] not in want:
+            continue
+        fr[d["prompt"]].append(d["frame"])
+        for w in d["words"]:
+            acc[(d["prompt"], w["word"])].append(w["scene"])
+    return ({k: st.fmean(v) for k, v in acc.items()},
+            {k: st.fmean(v) for k, v in fr.items()})
+
+
+def affect_compare():
+    """Does the type-level charge agree with the in-context scene? -> prints
+
+    **THE SAME ERROR IN A NEW PLACE, WHICH IS WHY THIS RUNS AT ALL.** This file's
+    affect axis is `k_charge`, rated on the word ALONE. On `raped -> kissed` at
+    "He pinned his roommate to the floor and" it reports a 4-point collapse while
+    the completed scene falls 0.86, because the frame carries the charge and the
+    word only modifies it. If that generalises, today's "the affect is not
+    conserved on the annotated pairs" is the type-level instrument talking.
+
+    **`scene` IS NOT AN AFFECT MEASURE EITHER** -- it asks how transgressive the
+    completed scene is, which is content in context, not affective quantity. It
+    is the only IN-CONTEXT quantity the corpus has, so it can show that a
+    type-level reading misses what the frame preserves; it cannot stand in for
+    the affect. No contextual measure of affective intensity exists here.
+    """
+    from malignment import fields as F
+    pairs = list(operations())
+    idx, frates = scene_index({f for f, _l, _n, _a, _b in pairs})
+    print("scene ratings for %s (frame, word) keys over %d frames"
+          % (format(len(idx), ","), len(frates)), file=sys.stderr)
+
+    def mean(fn, frame, ws):
+        v = [fn(frame, w) for w in ws]
+        v = [x for x in v if x is not None]
+        return st.fmean(v) if v else None
+
+    kf = lambda _f, w: (lambda k: float(k["charge"]) if k else None)(F.k(w))
+    sf = lambda f, w: idx.get((f, w))
+    per = collections.defaultdict(lambda: ([], []))
+    both = []
+    for frame, lin, _n, a, b in pairs:
+        ka, kb = mean(kf, frame, a), mean(kf, frame, b)
+        sa, sb = mean(sf, frame, a), mean(sf, frame, b)
+        if None in (ka, kb, sa, sb) or not lin:
+            continue
+        dk, ds = kb - ka, sb - sa
+        both.append((dk, ds))
+        per[lin][0].append(dk)
+        per[lin][1].append(ds)
+    n = len(both)
+    mk, ms = st.fmean(x for x, _ in both), st.fmean(y for _, y in both)
+    sk, ss = st.pstdev([x for x, _ in both]), st.pstdev([y for _, y in both])
+    r = (sum((x - mk) * (y - ms) for x, y in both) / n / (sk * ss)) if sk and ss else 0
+    agree = sum(1 for x, y in both if (x > 0) == (y > 0))
+    kneg_spos = sum(1 for x, y in both if x < 0 and y >= 0)
+    print("\n%s pairs carry BOTH a type charge and an in-context scene\n"
+          % format(n, ","))
+    print("   mean delta, type-level k_charge     %+.4f" % mk)
+    print("   mean delta, in-context scene        %+.4f" % ms)
+    print("   pearson r between them              %+.3f" % r)
+    print("   agree in sign                       %.1f%%" % (100 * agree / n))
+    print("   k_charge FALLS while the scene does NOT: %s pairs (%.1f%%)"
+          % (format(kneg_spos, ","), 100 * kneg_spos / n))
+    dk = [st.fmean(v[0]) for v in per.values()]
+    ds = [st.fmean(v[1]) for v in per.values()]
+    print("\n   per lineage, median over %d lineages:" % len(per))
+    print("      k_charge  %+.4f   (%d of %d below 0)"
+          % (st.median(dk), sum(1 for x in dk if x < 0), len(dk)))
+    print("      scene     %+.4f   (%d of %d below 0)"
+          % (st.median(ds), sum(1 for x in ds if x < 0), len(ds)))
+    return 0
+
+
 def check_orientation(limit=400):
     """Is `a_words` really the base side? Verified against twp, not assumed."""
     from malignment import corpus, roster
@@ -359,11 +447,14 @@ def main(argv=None):
                     help="weight each word by its share of its own arm's measured mass, as the coder's table showed it")
     ap.add_argument("--check-orientation", action="store_true")
     ap.add_argument("--examples", action="store_true")
+    ap.add_argument("--affect-compare", action="store_true")
     ap.add_argument("--n", type=int, default=8)
     ap.add_argument("--write", action="store_true")
     a = ap.parse_args(argv)
     if a.check_orientation:
         return check_orientation()
+    if a.affect_compare:
+        return affect_compare()
     if a.examples:
         examples(n=a.n, mass=a.mass)
         return 0
