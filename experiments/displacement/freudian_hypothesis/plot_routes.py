@@ -112,6 +112,49 @@ def load(min_cand=80):
     return rows, len(live)
 
 
+def words_table(min_cand=80, n=5):
+    """The vocabulary at each (act, affect) position. -> text
+
+    **THE LANDMARK IN THE FIGURE IS ONE WORD AND THAT IS TOO FEW TO JUDGE A
+    POSITION BY.** A tile named `commit` or `fire` tells a reader almost nothing
+    about what the rating pair 4/3 or 5/5 actually contains, and a position is
+    only interpretable if its neighbours can be told apart from it. Words are
+    ranked by TOTAL mass moved in either direction, because the question is what
+    lives at this position, not which way it went; the arrow marks which way
+    each one in fact went, so the two are not conflated.
+    """
+    import disjunction as D
+    ref = collections.defaultdict(lambda: [0.0, 0.0, 0.0])
+    for lin, pr, _w, d, a, c, _f in D.stream():
+        if d < 0:
+            r = ref[(lin, pr)]
+            r[0] += -d
+            r[1] += -d * a
+            r[2] += -d * c
+    live = {k for k, (m, wa, _wc) in ref.items() if m > 0 and wa / m >= MIN_ACT}
+    both = collections.defaultdict(collections.Counter)
+    net = collections.defaultdict(collections.Counter)
+    avail = collections.Counter()
+    for lin, pr, w, d, a, c, isfn in D.stream():
+        if (lin, pr) not in live or isfn:
+            continue
+        k = (int(a), int(c))
+        avail[k] += 1
+        both[k][w] += abs(d)
+        net[k][w] += d
+    L = ["ACT AFFECT   words at this position, heaviest first "
+         "(+ gains mass, - loses)", ""]
+    for k in sorted(avail, key=lambda k: (-k[1], -k[0])):
+        if avail[k] < min_cand:
+            continue
+        ws = [w for w, _m in both[k].most_common(n)]
+        L.append(" %d    %d      %s"
+                 % (k[0], k[1],
+                    "   ".join("%s%s" % ("+" if net[k][w] > 0 else "-", w)
+                               for w in ws)))
+    return "\n".join(L)
+
+
 def draw(rows, out, shade_by="enrich", top=None, pub=True):
     """A 7x7 field of the measured quantity, with a landmark word per tile.
 
@@ -185,8 +228,13 @@ def main(argv=None):
     ap.add_argument("--shade", default="enrich",
                     choices=("enrich", "in", "out"),
                     help="what the grey ramp encodes; the filename records it")
+    ap.add_argument("--words", action="store_true",
+                    help="print the vocabulary at each position and stop")
     ap.add_argument("--out", default=None)
     a = ap.parse_args(argv)
+    if a.words:
+        print(words_table())
+        return 0
     rows, ncell = load()
     print("%d populated tiles over %s charged cells"
           % (len(rows), format(ncell, ",")))
