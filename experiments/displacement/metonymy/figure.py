@@ -253,6 +253,26 @@ SHIFT = 875.0            # how far right the aligned body sits
 WIDTH, HEIGHT = 1760, 1100
 MID = 880.0
 
+#: Drawing pieces that carry no swatch of their own and so match no word by
+#: fill, but belong to one: the belt's buckle, the bra's centre seam, the
+#: spectacle bridge and its two temples. They matter only when a garment can
+#: be REMOVED -- otherwise they are painted white and nobody notices. Keyed by
+#: 1-indexed line in the source, her panel only, which is the only panel the
+#: two-body layouts draw.
+ORPHANS = {40: "belt", 43: "bra", 54: "glasses", 55: "glasses", 56: "glasses"}
+
+#: A CORRECTION TO THE DRAWING, not to the data. The source nests the torso
+#: outward as top, shirt, sweater, jacket, robe, coat -- which puts a robe
+#: OUTSIDE a jacket. A robe is indoor and sits nearer the skin; a jacket is
+#: outerwear. Swapping which word owns which shape fixes the ordering without
+#: touching a single coordinate: the label that points at the outer shape now
+#: reads `jacket` and the one that points at the inner reads `robe`.
+#:
+#: Applied in the two-body layouts only. `build()` is a faithful recolour of
+#: the published X.1 and is left alone, so the figure of record keeps the
+#: layering it was published with.
+LAYER_SWAP = {"robe": "jacket", "jacket": "robe"}
+
 MODES = {
     #: (max, what the shading means, the two panel subtitles, the two pole
     #: labels on the legend, the tick values)
@@ -294,11 +314,19 @@ def _first_x(line):
     return float(m.group(1)) if m else None
 
 
-def build_two_body(mode, scale="D"):
-    """Two her-frame bodies, base and aligned, greyscale. See MODES."""
+def build_two_body(mode, scale="D", min_move=0.0, layer_swap=True):
+    """Two her-frame bodies, base and aligned, greyscale. See MODES.
+
+    `min_move` drops a garment whose |median Δ| falls below it -- from the
+    drawing as well as from the labels, pieces and all, so the layer goes
+    rather than being left blank. `layer_swap` applies `LAYER_SWAP`.
+    """
     lines = open(SOURCE, encoding="utf-8").read().splitlines()
     m = masses(scale)
     top, meaning, subtitles, poles, ticks, unit = MODES[mode]
+
+    def kept(word):
+        return word in m and abs(m[word][2]) >= min_move
 
     def value(word, which):
         """What the shading encodes for this word on this side."""
@@ -335,12 +363,19 @@ def build_two_body(mode, scale="D"):
                 and (_first_x(l) or 0) < 800]
 
     #: fill lookup: a garment line's colour is its word's colour, matched the
-    #: same way `read_source` does, with the same one override.
+    #: same way `read_source` does, with the same one override, plus the
+    #: pieces that carry no fill of their own.
     _l2, _sw, bodymap = read_source()
     fills = {}
     for i, (panel, word) in bodymap.items():
         if panel == "her":
             fills[_l2[i]] = word
+    for ln, word in ORPHANS.items():
+        fills[lines[ln - 1]] = word
+    if layer_swap:
+        for line, w in list(fills.items()):
+            if w in LAYER_SWAP:
+                fills[line] = LAYER_SWAP[w]
 
     def paint(line, which):
         w = fills.get(line)
@@ -353,11 +388,18 @@ def build_two_body(mode, scale="D"):
     def label(a, b, which):
         word = re.search(r'font-weight="700">([^<]+)</tspan>',
                          lines[a + 3]).group(1).lower()
-        if not shown(word, which):
+        if layer_swap:
+            word = LAYER_SWAP.get(word, word)
+        if not kept(word) or not shown(word, which):
             return []
         out = []
         for i in range(a, b):
             l = lines[i]
+            if "<tspan" in l:
+                #: the swap renames the label as well as the shape, which is
+                #: the whole of it: the leader still points where it pointed.
+                l = re.sub(r'(<tspan font-weight="700">)[^<]+(</tspan>)',
+                           r'\g<1>%s\g<2>' % word, l)
             if 'width="17" height="17"' in l:
                 l = re.sub(r'fill="#[0-9a-f]{6}"',
                            'fill="%s"' % two_body_gray(value(word, which), mode),
@@ -408,7 +450,8 @@ def build_two_body(mode, scale="D"):
                  'font-weight="700" fill="#16161a">%s</text>' % head)
         g.append('<text x="410.0" y="158" text-anchor="middle" font-size="15" '
                  'fill="#6b6862">%s</text>' % subtitles[which])
-        g += [paint(l, which) for l in her_draw]
+        g += [paint(l, which) for l in her_draw
+              if fills.get(l) is None or kept(fills[l])]
         for a, b in her_labels:
             g += label(a, b, which)
         if dx:
@@ -448,17 +491,20 @@ def build_two_body(mode, scale="D"):
             "after alignment. Recomputed 2026-09-18 from the movement store, "
             "50 lineage-representative pairs, median per lineage."]
     else:
-        drawn = [w for _a, _b, w in blocks if (_first_x(lines[_a + 2]) or 0) < 800]
+        drawn = [w for _a, _b, w in blocks
+                 if (_first_x(lines[_a + 2]) or 0) < 800 and kept(w)]
         nf = sum(1 for w in drawn if m[w][2] < 0)
         nr = sum(1 for w in drawn if m[w][2] > 0)
         caption = [
             "One ramp, in percentage points of median Δ, serves both bodies, "
             "so a fall and a rise of the same size print the same grey. "
             "Stretched as (Δ)^%g." % MOVE_GAMMA,
-            "%d of the 27 garments fall and %d rise. The right body is emptier "
-            "because the withdrawal spreads over twenty garments while the "
-            "return concentrates on shoes (+2.65) and glasses (+1.09)."
-            % (nf, nr),
+            "%d of the %d garments shown fall and %d rise%s. The right body is "
+            "emptier because the withdrawal spreads over many garments while "
+            "the return concentrates on shoes (+2.65) and glasses (+1.09)."
+            % (nf, nf + nr, nr,
+               ("; garments moving less than %g pp are not drawn" % min_move)
+               if min_move else ""),
             "Recomputed 2026-09-18 from the movement store, 50 "
             "lineage-representative pairs, median per lineage."]
     for k, line in enumerate(caption):
@@ -511,6 +557,14 @@ def main(argv=None):
                          "and unlabelling what does not move that way.")
     ap.add_argument("--mass", action="store_true",
                     help="shorthand for --two-body mass")
+    ap.add_argument("--min-move", type=float, default=0.0,
+                    help="two-body only: drop a garment whose |median Δ| is "
+                         "below this, from the DRAWING as well as the labels. "
+                         "0.1 removes hat, tie, watch, belt, socks, heels and "
+                         "boots from the her frame.")
+    ap.add_argument("--no-layer-swap", action="store_true",
+                    help="two-body only: keep the published nesting, which "
+                         "puts the robe outside the jacket.")
     ap.add_argument("--gray-only", action="store_true")
     ap.add_argument("--color-only", action="store_true")
     ap.add_argument("--outdir", default=os.path.join(HERE, "figures"))
@@ -523,9 +577,11 @@ def main(argv=None):
     os.makedirs(a.outdir, exist_ok=True)
     mode = a.two_body or ("mass" if a.mass else None)
     if mode:
-        path = os.path.join(a.outdir, "x1_garment_%s_gray.svg" % mode)
+        tag = "" if not a.min_move else "_m%g" % a.min_move
+        path = os.path.join(a.outdir, "x1_garment_%s%s_gray.svg" % (mode, tag))
         with open(path, "w", encoding="utf-8") as fh:
-            fh.write(build_two_body(mode, a.scale))
+            fh.write(build_two_body(mode, a.scale, a.min_move,
+                                    not a.no_layer_swap))
         print("-> %s" % path)
         return 0
     jobs = []

@@ -161,6 +161,10 @@ X.1 shades a DIFFERENCE on one body. Both of these draw the her-frame body TWICE
 
 The left body is shaded by how far each garment FALLS, the right by how far it RISES, and a garment that does not move that way is left blank AND UNLABELLED on that side. **21 of the 27 garments fall and 6 rise**, so the right body comes out nearly bare: `coat` (+0.76), `gloves` (+0.32), `jacket` (+0.11), `boots` (+0.09), and the two that carry it, `shoes` (+2.65) and `glasses` (+1.09). Everything on the torso and everything under it is blank on that side.
 
+`--min-move` drops a garment whose |median Δ| is below it, from the DRAWING as well as the labels, pieces and all, so the layer goes rather than being left blank. At `--min-move 0.1` the her frame loses `hat` (-0.082), `tie` (-0.035), `watch` (-0.019), `belt` (-0.083), `socks` (-0.051), `heels` (-0.077) and `boots` (+0.092), leaving 20 garments of which 15 fall and 5 rise. Note that `boots` sits 0.008 under the cut and the source drew a boot on one foot and a shoe on the other, so at 0.1 the left foot goes bare.
+
+**`LAYER_SWAP` is a correction to the drawing, not to the data.** The source nests the torso outward as top, shirt, sweater, jacket, robe, coat, which puts a robe OUTSIDE a jacket. A robe is indoor and sits nearer the skin; a jacket is outerwear. The two-body layouts swap which word owns which shape, which fixes the ordering without touching a coordinate: the label pointing at the outer shape now reads `jacket` and the one pointing at the inner reads `robe`. `--no-layer-swap` keeps the published nesting. `build()` is a faithful recolour of X.1 and is left alone, so the figure of record keeps the layering it was published with.
+
 One ramp serves both bodies, so a fall and a rise of the same size print the same grey. That costs the falls their contrast -- the biggest fall is 0.55 pp against a biggest rise of 2.65 -- and **the asymmetry is the thing the layout exists to show**: the withdrawal spreads over twenty garments while the return concentrates on two. A per-body ramp would hide exactly that.
 
 ### `mass`: two distributions instead of a difference
