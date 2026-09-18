@@ -125,6 +125,35 @@ The drawing is ported and its geometry carries the argument -- each garment is d
 
 None of them changes the shape. `blouse`, `cap`, `helmet` and `trousers` are the four a redrawing would be worth doing for, and all four fall, which is the direction the existing drawing already shows for their layer.
 
+### Is the drawing a fair picture of the slot?
+
+Two different answers, and they should be quoted separately.
+
+**By mass, yes: the 27 drawn garments hold 47.4% of the slot's probability at base and 44.5% after alignment.** Nearly half of what the model does in that position is on the page.
+
+**By movement, less so: they hold 35% of the total |median Δ| across the 496 words that move (his: 31% of 422).** The rest is spread thin over hundreds of small words.
+
+**No big-moving garment noun is missing from the her-frame.** The top 12 movers are all drawn except two artifacts -- `____`, a blank-fill string at 3 carriers, and `fedora` at 2. The first genuinely missing word with real support is `blouse`, rank 15, |Δ| 0.241 over 49 carriers.
+
+Two things the drawing cannot show and a reader should know about:
+
+- **Modifiers fall too, and they are large.** `black` (-0.284), `white` (-0.242) and `long` (-0.154) all sit in the her-frame top 20, on 50 carriers each. They are not garments, so a garment picture has no slot for them, but they are not noise either.
+- **The his-frame is missing three high-carrier garments**: `cap` (-0.235, 50), `helmet` (-0.235, 50) and `trousers` (-0.170, 47). With `hat` at -0.482 that makes headgear a consistent faller in the male frame, which the drawing shows through one word instead of four.
+
+Nothing outside the drawing runs against the direction it shows. Of the undrawn words with 20 or more carriers, 9 rise in the her-frame and 8 in the his-frame, all of them by less than +0.12 pp, and the largest are `seatbelt`, `headphones`, `sneakers` and `headset` -- peripheral or carried things, which is the side the figure already puts the risers on.
+
+## The other layout: `--mass`
+
+    python figure.py --mass        # figures/x1_garment_mass_gray.svg
+
+X.1 shades a DIFFERENCE, which is the campaign's quantity but not a picture of either distribution. `--mass` draws the her-frame body twice, base on the left and aligned on the right, and shades each garment by the share of the slot it actually holds there; the difference survives as the signed number in the label, so nothing the original said is lost.
+
+One ramp serves both bodies. Shading each panel against its own maximum would make the two incomparable at a glance, which is the only thing this layout is for. The ramp is white to black on `(share/10%)**0.45`, because the slot spans 0.12% (`tie`) to 9.08% (`clothes`), a factor of 76.
+
+What the layout makes visible that X.1 does not: `shoes` goes 5.99% -> 9.30% and becomes the darkest thing on the page, while `clothes` goes 9.08% -> 6.23% and stops being it. The two bodies otherwise look alike, which is also true and is the reason the difference figure exists.
+
+What it hides: proportionally large moves at the pale end. `panties` loses 69% of its mass (0.54% -> 0.17%) and `underwear` 73% (0.24% -> 0.06%), and at that end of the ramp both still read as almost-white.
+
 **Greyscale is a different encoding, not a desaturation.** Converting RdBu to luminance maps the two ends to nearly the same mid-grey, so falls and rises would print identically. `--gray` runs a PIECEWISE monotone ramp -- falls take a pale band, rises a dark one, with a visible luminance step at zero -- and rewrites the legend and caption to say light and dark instead of red and blue. The sign survives the printer even where the magnitude does not.
 
 ## What this does not settle

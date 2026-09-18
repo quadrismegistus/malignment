@@ -196,10 +196,16 @@ def main(argv=None):
         #: entry per CARRYING cell. A cell where the word sits below the
         #: store's floor contributes nothing here -- it is absent, not zero.
         deltas = collections.defaultdict(list)
+        #: and the two LEVELS the delta is a difference of. The figure that
+        #: puts a base body beside an aligned one needs these and cannot
+        #: recover them from the delta.
+        levels = collections.defaultdict(lambda: ([], []))
         for _k, ws in cells.items():
             for w, pb, pa in ws:
                 d = pa - pb
                 deltas[w].append(100.0 * d)
+                levels[w][0].append(100.0 * pb)
+                levels[w][1].append(100.0 * pa)
                 if d > 0:
                     rf[w][0] += 1
                 elif d < 0:
@@ -232,6 +238,8 @@ def main(argv=None):
                 "n_carriers": len(ds),
                 "median_delta_pp": "%+.5f" % st.median(ds),
                 "mean_delta_pp": "%+.5f" % st.fmean(ds),
+                "median_p_base_pct": "%.5f" % st.median(levels[w][0]),
+                "median_p_aligned_pct": "%.5f" % st.median(levels[w][1]),
                 "net_mass": "%+.5f" % net,
                 "scale": a.scale, "out": B.get(w.lower(), ""),
                 "n_lineages": len(lin)})

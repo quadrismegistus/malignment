@@ -220,6 +220,183 @@ def build(scale="D", gray=False):
     return "\n".join(out) + "\n", touched, len(lines)
 
 
+
+# --------------------------------------------------------------------------
+# `--mass`: one frame, two bodies, levels instead of a difference
+# --------------------------------------------------------------------------
+#: The X.1 drawing shows a DIFFERENCE, which is the campaign's quantity but
+#: not a picture of either distribution. This mode draws the her-frame body
+#: twice, base on the left and aligned on the right, and shades each garment
+#: by the probability mass it actually holds there. The difference survives as
+#: the signed number in the label, so nothing the original said is lost.
+#:
+#: ONE RAMP SERVES BOTH BODIES. Shading each panel against its own maximum
+#: would make the two incomparable at a glance, which is the only thing this
+#: layout is for.
+MASS_MAX = 10.0          # percent; `clothes` at base is 9.08 and is the peak
+MASS_GAMMA = 0.45        # the slot spans 0.12% to 9.1%, a factor of 76
+MASS_PAPER, MASS_INK = 0.98, 0.07
+SHIFT = 875.0            # how far right the aligned body sits
+WIDTH, HEIGHT = 1760, 1100
+MID = 880.0
+
+
+def mass_gray(pct):
+    import matplotlib.colors as mc
+    g = min(1.0, max(0.0, pct / MASS_MAX)) ** MASS_GAMMA
+    v = MASS_PAPER + (MASS_INK - MASS_PAPER) * g
+    return mc.to_hex((v, v, v))
+
+
+def masses(scale="D", prompt="She slowly took off her"):
+    """{word: (base %, aligned %, Δ pp)} for the frame the figure draws."""
+    path = os.path.join(HERE, "results", "words_%s.csv" % scale)
+    out = {}
+    for r in csv.DictReader(open(path, encoding="utf-8")):
+        if r["prompt"] == prompt:
+            out[r["word"].lower()] = (float(r["median_p_base_pct"]),
+                                      float(r["median_p_aligned_pct"]),
+                                      float(r["median_delta_pp"]))
+    return out
+
+
+def _first_x(line):
+    m = (re.search(r'[ML] ([\d.]+) ', line) or re.search(r'x="([-\d.]+)"', line)
+         or re.search(r'cx="([\d.]+)"', line))
+    return float(m.group(1)) if m else None
+
+
+def build_mass(scale="D"):
+    """Two her-frame bodies, base and aligned, shaded by mass. Greyscale."""
+    lines = open(SOURCE, encoding="utf-8").read().splitlines()
+    m = masses(scale)
+
+    #: the source is one flat list; cut it at the legend, which is the first
+    #: swatch of the colour bar and everything after it.
+    legend_at = next(i for i, l in enumerate(lines) if 'y="886.0"' in l)
+
+    #: label blocks are four consecutive lines: leader, dot, swatch, text.
+    blocks, i = [], 0
+    while i < legend_at:
+        if re.match(r'<rect x="[\d.]+" y="[\d.]+" width="17" height="17"', lines[i]):
+            word = re.search(r'font-weight="700">([^<]+)</tspan>',
+                             lines[i + 1]).group(1).lower()
+            blocks.append((i - 2, i + 2, word))      # leader, dot, swatch, text
+            i += 2
+        i += 1
+    in_block = {i for a, b, _w in blocks for i in range(a, b)}
+
+    #: the drawing: everything between the divider and the first label block,
+    #: on the her side of the canvas.
+    her_draw = [l for i, l in enumerate(lines)
+                if i not in in_block and i > 8 and i < legend_at
+                and (l.startswith("<path") or l.startswith("<circle"))
+                and (_first_x(l) or 0) < 800]
+
+    #: fill lookup: a garment line's colour is its word's colour, matched the
+    #: same way `read_source` does, with the same one override.
+    _l2, swatches, bodymap = read_source()
+    fills = {}
+    for i, (panel, word) in bodymap.items():
+        if panel == "her":
+            fills[_l2[i]] = word
+
+    def paint(line, which):
+        w = fills.get(line)
+        if w is None or w not in m:
+            return line
+        return re.sub(r'fill="#[0-9a-f]{6}"',
+                      'fill="%s"' % mass_gray(m[w][which]), line, count=1)
+
+    def label(a, b, which):
+        out = []
+        word = None
+        for i in range(a, b):
+            l = lines[i]
+            if 'width="17" height="17"' in l:
+                word = re.search(r'font-weight="700">([^<]+)</tspan>',
+                                 lines[i + 1]).group(1).lower()
+                l = re.sub(r'fill="#[0-9a-f]{6}"',
+                           'fill="%s"' % mass_gray(m[word][which]), l, count=1)
+            elif "<tspan" in l:
+                pct, d = m[word][which], m[word][2]
+                #: `dx`, not two non-breaking spaces. The source figure used
+                #: nbsp and some renderers collapse it, which runs the word
+                #: into its own number.
+                tail = ('<tspan dx="7" font-size="14.5" fill="#4a4843" '
+                        'font-weight="700">%s%%</tspan>'
+                        '<tspan dx="7" font-size="14" fill="#8a867e" '
+                        'font-weight="600">%s</tspan>'
+                        % (("%.2f" % pct), ("%+.2f" % d).replace("-", "−")))
+                l = re.sub(r'<tspan font-size="15"[^>]*>&#160;&#160;[^<]+</tspan>',
+                           tail, l)
+            out.append(l)
+        return out
+
+    her_labels = [(a, b) for a, b, _w in blocks if (_first_x(lines[a + 2]) or 0) < 800]
+
+    o = ['<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 %d %d" width="%d" '
+         'height="%d" font-family="Helvetica,Arial,sans-serif">' % (WIDTH, HEIGHT, WIDTH, HEIGHT),
+         '<rect width="%d" height="%d" fill="#ffffff"/>' % (WIDTH, HEIGHT),
+         '<text x="%g" y="54" text-anchor="middle" font-size="36" font-weight="700" '
+         'fill="#16161a">Where the mass sits, before and after (X.1)</text>' % MID,
+         '<text x="%g" y="82" text-anchor="middle" font-size="16.5" fill="#6b6862">'
+         '“She slowly took off her ___”, 50 lineage pairs; darker = more of the '
+         'slot’s probability</text>' % MID,
+         '<path d="M %g 176 L %g 862" stroke="#e6e2da" stroke-width="1.4" '
+         'stroke-dasharray="3 8"/>' % (MID, MID)]
+
+    for which, label_txt, dx in ((0, "base", 0.0), (1, "aligned", SHIFT)):
+        g = ['<g transform="translate(%g,0)">' % dx] if dx else []
+        g.append('<text x="410.0" y="134" text-anchor="middle" font-size="25" '
+                 'font-weight="700" fill="#16161a">%s</text>' % label_txt)
+        g.append('<text x="410.0" y="158" text-anchor="middle" font-size="15" '
+                 'fill="#6b6862">%s</text>'
+                 % ("before alignment" if which == 0 else "after alignment"))
+        g += [paint(l, which) for l in her_draw]
+        for a, b in her_labels:
+            g += label(a, b, which)
+        if dx:
+            g.append("</g>")
+        o += g
+
+    #: the legend, rebuilt: one white-to-black ramp on the same power scale,
+    #: ticks at the values a reader would look for rather than at even steps.
+    x0, x1, y = MID - 230, MID + 230, 886.0
+    n = 230
+    for k in range(n):
+        x = x0 + (x1 - x0) * k / (n - 1.0)
+        pct = MASS_MAX * ((k / (n - 1.0)) ** (1.0 / MASS_GAMMA))
+        o.append('<rect x="%.2f" y="%g" width="%.2f" height="24.0" fill="%s"/>'
+                 % (x, y, (x1 - x0) / n + 0.7, mass_gray(pct)))
+    for pct in (0.1, 0.5, 1, 2, 5, 10):
+        t = (pct / MASS_MAX) ** MASS_GAMMA
+        x = x0 + (x1 - x0) * t
+        o.append('<path d="M %.1f 910.0 L %.1f 915.0" stroke="#26262b" '
+                 'stroke-width="1.1"/>' % (x, x))
+        o.append('<text x="%.1f" y="930.0" text-anchor="middle" font-size="13" '
+                 'fill="#4a4843">%s%%</text>'
+                 % (x, ("%g" % pct)))
+    o.append('<text x="%g" y="903" text-anchor="end" font-size="15" '
+             'font-weight="700" fill="#4a4843">rare in the slot</text>' % (x0 - 16))
+    o.append('<text x="%g" y="903" font-size="15" font-weight="700" '
+             'fill="#16161a">common in the slot</text>' % (x1 + 16))
+    o.append('<text x="%g" y="952" text-anchor="middle" font-size="15" '
+             'fill="#3a3934">Each garment shaded by the median share of the slot it '
+             'holds in that arm; one ramp serves both bodies, stretched as '
+             '(share)^%g so the thin end stays legible.</text>' % (MID, MASS_GAMMA))
+    o.append('<text x="%g" y="978" text-anchor="middle" font-size="15" '
+             'fill="#3a3934">Labels read: garment, its share of the slot in that '
+             'arm, and the signed change aligned − base in percentage points '
+             '(the same number on both sides).</text>' % MID)
+    o.append('<text x="%g" y="1012" text-anchor="middle" font-size="15" '
+             'fill="#4a4843">The 27 garments drawn hold 47.4%% of the slot at base '
+             'and 44.5%% after alignment. Recomputed 2026-09-18 from the movement '
+             'store, 50 lineage-representative pairs, median per lineage.</text>' % MID)
+    o.append("</svg>")
+    return "\n".join(o) + "\n"
+
+
 def audit(scale="D", top=8):
     """Which scored words does the drawing leave out, and how far do they move?"""
     import run as producer
@@ -254,6 +431,9 @@ def main(argv=None):
                     help="only picks which results/words_<scale>.csv to read; "
                          "the Δ column is the same in all of them.")
     ap.add_argument("--audit", action="store_true")
+    ap.add_argument("--mass", action="store_true",
+                    help="the other layout: her-frame only, base body beside "
+                         "aligned body, shaded by probability mass.")
     ap.add_argument("--gray-only", action="store_true")
     ap.add_argument("--color-only", action="store_true")
     ap.add_argument("--outdir", default=os.path.join(HERE, "figures"))
@@ -264,6 +444,12 @@ def main(argv=None):
         return 0
 
     os.makedirs(a.outdir, exist_ok=True)
+    if a.mass:
+        path = os.path.join(a.outdir, "x1_garment_mass_gray.svg")
+        with open(path, "w", encoding="utf-8") as fh:
+            fh.write(build_mass(a.scale))
+        print("-> %s" % path)
+        return 0
     jobs = []
     if not a.gray_only:
         jobs.append((False, "x1_garment_layers.svg"))
