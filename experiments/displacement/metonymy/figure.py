@@ -222,30 +222,58 @@ def build(scale="D", gray=False):
 
 
 # --------------------------------------------------------------------------
-# `--mass`: one frame, two bodies, levels instead of a difference
+# Two bodies, one frame: `--mass` and `--movement`
 # --------------------------------------------------------------------------
-#: The X.1 drawing shows a DIFFERENCE, which is the campaign's quantity but
-#: not a picture of either distribution. This mode draws the her-frame body
-#: twice, base on the left and aligned on the right, and shades each garment
-#: by the probability mass it actually holds there. The difference survives as
-#: the signed number in the label, so nothing the original said is lost.
+#: The X.1 drawing shades a DIFFERENCE on one body. Both modes here draw the
+#: her-frame body TWICE, base on the left and aligned on the right, and differ
+#: only in what the shading means.
 #:
-#: ONE RAMP SERVES BOTH BODIES. Shading each panel against its own maximum
-#: would make the two incomparable at a glance, which is the only thing this
-#: layout is for.
+#: `--mass`      each garment shaded by the share of the slot it holds in that
+#:               arm. A picture of two distributions; the difference survives
+#:               as the signed number in the label.
+#: `--movement`  the left body shaded by how far the garment FALLS, the right
+#:               by how far it RISES, and a garment that does not move that way
+#:               is left blank AND UNLABELLED on that side. So the left body
+#:               wears what alignment takes off and the right wears what it
+#:               puts on, and the emptiness of the right body is the finding
+#:               rather than a gap in the data.
+#:
+#: ONE RAMP SERVES BOTH BODIES in both modes. Shading each panel against its
+#: own maximum would make the two incomparable at a glance, which is the only
+#: thing this layout is for. In `--movement` that costs the falls their
+#: contrast -- the biggest fall is 0.55pp against a biggest rise of 2.65 --
+#: and that asymmetry is the thing the layout exists to show: the withdrawal
+#: is spread over twenty garments, the return concentrates on two.
 MASS_MAX = 10.0          # percent; `clothes` at base is 9.08 and is the peak
 MASS_GAMMA = 0.45        # the slot spans 0.12% to 9.1%, a factor of 76
+MOVE_MAX = 2.7           # pp; `shoes` rises 2.65 and is the peak
+MOVE_GAMMA = 0.45
 MASS_PAPER, MASS_INK = 0.98, 0.07
 SHIFT = 875.0            # how far right the aligned body sits
 WIDTH, HEIGHT = 1760, 1100
 MID = 880.0
 
+MODES = {
+    #: (max, what the shading means, the two panel subtitles, the two pole
+    #: labels on the legend, the tick values)
+    "mass": (MASS_MAX, "share of the slot",
+             ("before alignment", "after alignment"),
+             ("rare in the slot", "common in the slot"),
+             (0.1, 0.5, 1, 2, 5, 10), "%"),
+    "movement": (MOVE_MAX, "how far it moves",
+                 ("what alignment takes away", "what alignment adds"),
+                 ("barely moves", "moves most"),
+                 (0.05, 0.1, 0.25, 0.5, 1, 2), ""),
+}
 
-def mass_gray(pct):
+
+def two_body_gray(v, mode):
+    """v -> hex. 0 is paper in both modes, and in `movement` means 'not this way'."""
     import matplotlib.colors as mc
-    g = min(1.0, max(0.0, pct / MASS_MAX)) ** MASS_GAMMA
-    v = MASS_PAPER + (MASS_INK - MASS_PAPER) * g
-    return mc.to_hex((v, v, v))
+    top = MODES[mode][0]
+    g = min(1.0, max(0.0, v / top)) ** MASS_GAMMA
+    lo = 1.0 if mode == "movement" else MASS_PAPER
+    return mc.to_hex((lo + (MASS_INK - lo) * g,) * 3)
 
 
 def masses(scale="D", prompt="She slowly took off her"):
@@ -266,10 +294,23 @@ def _first_x(line):
     return float(m.group(1)) if m else None
 
 
-def build_mass(scale="D"):
-    """Two her-frame bodies, base and aligned, shaded by mass. Greyscale."""
+def build_two_body(mode, scale="D"):
+    """Two her-frame bodies, base and aligned, greyscale. See MODES."""
     lines = open(SOURCE, encoding="utf-8").read().splitlines()
     m = masses(scale)
+    top, meaning, subtitles, poles, ticks, unit = MODES[mode]
+
+    def value(word, which):
+        """What the shading encodes for this word on this side."""
+        base, aligned, d = m[word]
+        if mode == "mass":
+            return base if which == 0 else aligned
+        #: `movement`: the left body carries the falls, the right the rises,
+        #: and each is blank for the other's words.
+        return max(0.0, -d) if which == 0 else max(0.0, d)
+
+    def shown(word, which):
+        return mode == "mass" or value(word, which) > 0
 
     #: the source is one flat list; cut it at the legend, which is the first
     #: swatch of the colour bar and everything after it.
@@ -295,7 +336,7 @@ def build_mass(scale="D"):
 
     #: fill lookup: a garment line's colour is its word's colour, matched the
     #: same way `read_source` does, with the same one override.
-    _l2, swatches, bodymap = read_source()
+    _l2, _sw, bodymap = read_source()
     fills = {}
     for i, (panel, word) in bodymap.items():
         if panel == "her":
@@ -306,28 +347,37 @@ def build_mass(scale="D"):
         if w is None or w not in m:
             return line
         return re.sub(r'fill="#[0-9a-f]{6}"',
-                      'fill="%s"' % mass_gray(m[w][which]), line, count=1)
+                      'fill="%s"' % two_body_gray(value(w, which), mode),
+                      line, count=1)
 
     def label(a, b, which):
+        word = re.search(r'font-weight="700">([^<]+)</tspan>',
+                         lines[a + 3]).group(1).lower()
+        if not shown(word, which):
+            return []
         out = []
-        word = None
         for i in range(a, b):
             l = lines[i]
             if 'width="17" height="17"' in l:
-                word = re.search(r'font-weight="700">([^<]+)</tspan>',
-                                 lines[i + 1]).group(1).lower()
                 l = re.sub(r'fill="#[0-9a-f]{6}"',
-                           'fill="%s"' % mass_gray(m[word][which]), l, count=1)
+                           'fill="%s"' % two_body_gray(value(word, which), mode),
+                           l, count=1)
             elif "<tspan" in l:
-                pct, d = m[word][which], m[word][2]
-                #: `dx`, not two non-breaking spaces. The source figure used
-                #: nbsp and some renderers collapse it, which runs the word
-                #: into its own number.
-                tail = ('<tspan dx="7" font-size="14.5" fill="#4a4843" '
-                        'font-weight="700">%s%%</tspan>'
-                        '<tspan dx="7" font-size="14" fill="#8a867e" '
-                        'font-weight="600">%s</tspan>'
-                        % (("%.2f" % pct), ("%+.2f" % d).replace("-", "−")))
+                d = m[word][2]
+                if mode == "mass":
+                    #: `dx`, not two non-breaking spaces. The source used nbsp
+                    #: and some renderers collapse it, running the word into
+                    #: its own number.
+                    tail = ('<tspan dx="7" font-size="14.5" fill="#4a4843" '
+                            'font-weight="700">%.2f%%</tspan>'
+                            '<tspan dx="7" font-size="14" fill="#8a867e" '
+                            'font-weight="600">%s</tspan>'
+                            % (value(word, which),
+                               ("%+.2f" % d).replace("-", "−")))
+                else:
+                    tail = ('<tspan dx="7" font-size="14.5" fill="#4a4843" '
+                            'font-weight="700">%s</tspan>'
+                            % ("%+.2f" % d).replace("-", "−"))
                 l = re.sub(r'<tspan font-size="15"[^>]*>&#160;&#160;[^<]+</tspan>',
                            tail, l)
             out.append(l)
@@ -335,24 +385,29 @@ def build_mass(scale="D"):
 
     her_labels = [(a, b) for a, b, _w in blocks if (_first_x(lines[a + 2]) or 0) < 800]
 
+    title = ("Where the mass sits, before and after (X.1)" if mode == "mass"
+             else "What alignment takes off, and what it puts on (X.1)")
+    sub = ("darker = more of the slot’s probability" if mode == "mass"
+           else "left body shaded by how far each garment FALLS, right body by "
+                "how far it RISES; a garment that does not move that way is "
+                "left blank and unlabelled")
     o = ['<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 %d %d" width="%d" '
-         'height="%d" font-family="Helvetica,Arial,sans-serif">' % (WIDTH, HEIGHT, WIDTH, HEIGHT),
+         'height="%d" font-family="Helvetica,Arial,sans-serif">'
+         % (WIDTH, HEIGHT, WIDTH, HEIGHT),
          '<rect width="%d" height="%d" fill="#ffffff"/>' % (WIDTH, HEIGHT),
          '<text x="%g" y="54" text-anchor="middle" font-size="36" font-weight="700" '
-         'fill="#16161a">Where the mass sits, before and after (X.1)</text>' % MID,
+         'fill="#16161a">%s</text>' % (MID, title),
          '<text x="%g" y="82" text-anchor="middle" font-size="16.5" fill="#6b6862">'
-         '“She slowly took off her ___”, 50 lineage pairs; darker = more of the '
-         'slot’s probability</text>' % MID,
+         '“She slowly took off her ___”, 50 lineage pairs; %s</text>' % (MID, sub),
          '<path d="M %g 176 L %g 862" stroke="#e6e2da" stroke-width="1.4" '
          'stroke-dasharray="3 8"/>' % (MID, MID)]
 
-    for which, label_txt, dx in ((0, "base", 0.0), (1, "aligned", SHIFT)):
+    for which, head, dx in ((0, "base", 0.0), (1, "aligned", SHIFT)):
         g = ['<g transform="translate(%g,0)">' % dx] if dx else []
         g.append('<text x="410.0" y="134" text-anchor="middle" font-size="25" '
-                 'font-weight="700" fill="#16161a">%s</text>' % label_txt)
+                 'font-weight="700" fill="#16161a">%s</text>' % head)
         g.append('<text x="410.0" y="158" text-anchor="middle" font-size="15" '
-                 'fill="#6b6862">%s</text>'
-                 % ("before alignment" if which == 0 else "after alignment"))
+                 'fill="#6b6862">%s</text>' % subtitles[which])
         g += [paint(l, which) for l in her_draw]
         for a, b in her_labels:
             g += label(a, b, which)
@@ -366,33 +421,50 @@ def build_mass(scale="D"):
     n = 230
     for k in range(n):
         x = x0 + (x1 - x0) * k / (n - 1.0)
-        pct = MASS_MAX * ((k / (n - 1.0)) ** (1.0 / MASS_GAMMA))
         o.append('<rect x="%.2f" y="%g" width="%.2f" height="24.0" fill="%s"/>'
-                 % (x, y, (x1 - x0) / n + 0.7, mass_gray(pct)))
-    for pct in (0.1, 0.5, 1, 2, 5, 10):
-        t = (pct / MASS_MAX) ** MASS_GAMMA
-        x = x0 + (x1 - x0) * t
+                 % (x, y, (x1 - x0) / n + 0.7,
+                    two_body_gray(top * ((k / (n - 1.0)) ** (1.0 / MASS_GAMMA)),
+                                  mode)))
+    for v in ticks:
+        x = x0 + (x1 - x0) * (v / top) ** MASS_GAMMA
         o.append('<path d="M %.1f 910.0 L %.1f 915.0" stroke="#26262b" '
                  'stroke-width="1.1"/>' % (x, x))
         o.append('<text x="%.1f" y="930.0" text-anchor="middle" font-size="13" '
-                 'fill="#4a4843">%s%%</text>'
-                 % (x, ("%g" % pct)))
+                 'fill="#4a4843">%g%s</text>' % (x, v, unit))
     o.append('<text x="%g" y="903" text-anchor="end" font-size="15" '
-             'font-weight="700" fill="#4a4843">rare in the slot</text>' % (x0 - 16))
+             'font-weight="700" fill="#4a4843">%s</text>' % (x0 - 16, poles[0]))
     o.append('<text x="%g" y="903" font-size="15" font-weight="700" '
-             'fill="#16161a">common in the slot</text>' % (x1 + 16))
-    o.append('<text x="%g" y="952" text-anchor="middle" font-size="15" '
-             'fill="#3a3934">Each garment shaded by the median share of the slot it '
-             'holds in that arm; one ramp serves both bodies, stretched as '
-             '(share)^%g so the thin end stays legible.</text>' % (MID, MASS_GAMMA))
-    o.append('<text x="%g" y="978" text-anchor="middle" font-size="15" '
-             'fill="#3a3934">Labels read: garment, its share of the slot in that '
-             'arm, and the signed change aligned − base in percentage points '
-             '(the same number on both sides).</text>' % MID)
-    o.append('<text x="%g" y="1012" text-anchor="middle" font-size="15" '
-             'fill="#4a4843">The 27 garments drawn hold 47.4%% of the slot at base '
-             'and 44.5%% after alignment. Recomputed 2026-09-18 from the movement '
-             'store, 50 lineage-representative pairs, median per lineage.</text>' % MID)
+             'fill="#16161a">%s</text>' % (x1 + 16, poles[1]))
+
+    if mode == "mass":
+        caption = [
+            "Each garment shaded by the median share of the slot it holds in "
+            "that arm; one ramp serves both bodies, stretched as (share)^%g so "
+            "the thin end stays legible." % MASS_GAMMA,
+            "Labels read: garment, its share of the slot in that arm, and the "
+            "signed change aligned − base in percentage points (the same "
+            "number on both sides).",
+            "The 27 garments drawn hold 47.4% of the slot at base and 44.5% "
+            "after alignment. Recomputed 2026-09-18 from the movement store, "
+            "50 lineage-representative pairs, median per lineage."]
+    else:
+        drawn = [w for _a, _b, w in blocks if (_first_x(lines[_a + 2]) or 0) < 800]
+        nf = sum(1 for w in drawn if m[w][2] < 0)
+        nr = sum(1 for w in drawn if m[w][2] > 0)
+        caption = [
+            "One ramp, in percentage points of median Δ, serves both bodies, "
+            "so a fall and a rise of the same size print the same grey. "
+            "Stretched as (Δ)^%g." % MOVE_GAMMA,
+            "%d of the 27 garments fall and %d rise. The right body is emptier "
+            "because the withdrawal spreads over twenty garments while the "
+            "return concentrates on shoes (+2.65) and glasses (+1.09)."
+            % (nf, nr),
+            "Recomputed 2026-09-18 from the movement store, 50 "
+            "lineage-representative pairs, median per lineage."]
+    for k, line in enumerate(caption):
+        o.append('<text x="%g" y="%d" text-anchor="middle" font-size="15" '
+                 'fill="%s">%s</text>'
+                 % (MID, 952 + 26 * k, "#3a3934" if k < 2 else "#4a4843", line))
     o.append("</svg>")
     return "\n".join(o) + "\n"
 
@@ -431,9 +503,14 @@ def main(argv=None):
                     help="only picks which results/words_<scale>.csv to read; "
                          "the Δ column is the same in all of them.")
     ap.add_argument("--audit", action="store_true")
-    ap.add_argument("--mass", action="store_true",
+    ap.add_argument("--two-body", choices=sorted(MODES),
                     help="the other layout: her-frame only, base body beside "
-                         "aligned body, shaded by probability mass.")
+                         "aligned body. `mass` shades by share of the slot; "
+                         "`movement` shades the left by how far each garment "
+                         "falls and the right by how far it rises, blanking "
+                         "and unlabelling what does not move that way.")
+    ap.add_argument("--mass", action="store_true",
+                    help="shorthand for --two-body mass")
     ap.add_argument("--gray-only", action="store_true")
     ap.add_argument("--color-only", action="store_true")
     ap.add_argument("--outdir", default=os.path.join(HERE, "figures"))
@@ -444,10 +521,11 @@ def main(argv=None):
         return 0
 
     os.makedirs(a.outdir, exist_ok=True)
-    if a.mass:
-        path = os.path.join(a.outdir, "x1_garment_mass_gray.svg")
+    mode = a.two_body or ("mass" if a.mass else None)
+    if mode:
+        path = os.path.join(a.outdir, "x1_garment_%s_gray.svg" % mode)
         with open(path, "w", encoding="utf-8") as fh:
-            fh.write(build_mass(a.scale))
+            fh.write(build_two_body(mode, a.scale))
         print("-> %s" % path)
         return 0
     jobs = []

@@ -579,5 +579,5 @@
 <text x="1126" y="903" font-size="15" font-weight="700" fill="#16161a">common in the slot</text>
 <text x="880" y="952" text-anchor="middle" font-size="15" fill="#3a3934">Each garment shaded by the median share of the slot it holds in that arm; one ramp serves both bodies, stretched as (share)^0.45 so the thin end stays legible.</text>
 <text x="880" y="978" text-anchor="middle" font-size="15" fill="#3a3934">Labels read: garment, its share of the slot in that arm, and the signed change aligned − base in percentage points (the same number on both sides).</text>
-<text x="880" y="1012" text-anchor="middle" font-size="15" fill="#4a4843">The 27 garments drawn hold 47.4% of the slot at base and 44.5% after alignment. Recomputed 2026-09-18 from the movement store, 50 lineage-representative pairs, median per lineage.</text>
+<text x="880" y="1004" text-anchor="middle" font-size="15" fill="#4a4843">The 27 garments drawn hold 47.4% of the slot at base and 44.5% after alignment. Recomputed 2026-09-18 from the movement store, 50 lineage-representative pairs, median per lineage.</text>
 </svg>

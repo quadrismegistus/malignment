@@ -142,13 +142,24 @@ Two things the drawing cannot show and a reader should know about:
 
 Nothing outside the drawing runs against the direction it shows. Of the undrawn words with 20 or more carriers, 9 rise in the her-frame and 8 in the his-frame, all of them by less than +0.12 pp, and the largest are `seatbelt`, `headphones`, `sneakers` and `headset` -- peripheral or carried things, which is the side the figure already puts the risers on.
 
-## The other layout: `--mass`
+## The other layouts: `--two-body`
 
-    python figure.py --mass        # figures/x1_garment_mass_gray.svg
+    python figure.py --two-body mass        # figures/x1_garment_mass_gray.svg
+    python figure.py --two-body movement    # figures/x1_garment_movement_gray.svg
 
-X.1 shades a DIFFERENCE, which is the campaign's quantity but not a picture of either distribution. `--mass` draws the her-frame body twice, base on the left and aligned on the right, and shades each garment by the share of the slot it actually holds there; the difference survives as the signed number in the label, so nothing the original said is lost.
+X.1 shades a DIFFERENCE on one body. Both of these draw the her-frame body TWICE, base on the left and aligned on the right, and differ only in what the shading means.
 
-One ramp serves both bodies. Shading each panel against its own maximum would make the two incomparable at a glance, which is the only thing this layout is for. The ramp is white to black on `(share/10%)**0.45`, because the slot spans 0.12% (`tie`) to 9.08% (`clothes`), a factor of 76.
+### `movement`: the left body wears what alignment takes off
+
+The left body is shaded by how far each garment FALLS, the right by how far it RISES, and a garment that does not move that way is left blank AND UNLABELLED on that side. **21 of the 27 garments fall and 6 rise**, so the right body comes out nearly bare: `coat` (+0.76), `gloves` (+0.32), `jacket` (+0.11), `boots` (+0.09), and the two that carry it, `shoes` (+2.65) and `glasses` (+1.09). Everything on the torso and everything under it is blank on that side.
+
+One ramp serves both bodies, so a fall and a rise of the same size print the same grey. That costs the falls their contrast -- the biggest fall is 0.55 pp against a biggest rise of 2.65 -- and **the asymmetry is the thing the layout exists to show**: the withdrawal spreads over twenty garments while the return concentrates on two. A per-body ramp would hide exactly that.
+
+### `mass`: two distributions instead of a difference
+
+Shades each garment by the share of the slot it actually holds in that arm; the difference survives as the signed number in the label, so nothing the original said is lost.
+
+The ramp is white to black on `(share/10%)**0.45`, because the slot spans 0.12% (`tie`) to 9.08% (`clothes`), a factor of 76.
 
 What the layout makes visible that X.1 does not: `shoes` goes 5.99% -> 9.30% and becomes the darkest thing on the page, while `clothes` goes 9.08% -> 6.23% and stops being it. The two bodies otherwise look alike, which is also true and is the reason the difference figure exists.
 
