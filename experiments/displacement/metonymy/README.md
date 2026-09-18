@@ -169,6 +169,27 @@ Two drawing fixes travel with the two-body layouts. **`STROKE` puts every line i
 
 One ramp serves both bodies, so a fall and a rise of the same size print the same grey. That costs the falls their contrast -- the biggest fall is 0.55 pp against a biggest rise of 2.65 -- and **the asymmetry is the thing the layout exists to show**: the withdrawal spreads over twenty garments while the return concentrates on two. A per-body ramp would hide exactly that.
 
+### `--ci`: the format the journal will take
+
+    python figure.py --two-body movement --min-move 0.1 --ci        # two files
+    python figure.py --two-body movement --min-move 0.1 --ci --ci-both
+
+4.8 inches of column, nothing below 6pt, and no title, caption or legend inside the image; the journal sets those and the garment labels carry the key anyway. The crop is MEASURED from the content rather than guessed, and the achieved figures are printed on every run so a bad estimate shows up instead of clipping silently.
+
+**One box serves the pair.** The two arms label different garments, so cropping each to its own content would give two files at two scales, and a reader setting them side by side would get two different-sized bodies. The arm that is not being drawn is measured as well and discarded.
+
+If the type lands below 6pt the producer scales every font up once and rebuilds. Bigger type widens the box, which shrinks the scale, so the fixed point is approached from below and a 3% margin clears it in one step; if it still does not, the run says `WILL NOT FIT` rather than shipping 5.9pt.
+
+**Both bodies in one 4.8in figure does not fit, and that is a measurement, not an opinion.** The width is set by the label text, not by the drawing, and two bodies means two label columns:
+
+| | box | achieved | |
+|---|---|---|---|
+| `movement`, one arm | 740 x 728 | 4.80 x 4.72 in, **6.8pt** | fits |
+| `mass`, one arm | 832 x 728 | 4.80 x 4.20 in, **6.1pt** | fits, type up 4% |
+| `movement`, both arms | 1826 x 728 | 4.80 x 1.91 in, **5.4pt** | fails, even with type up 97% |
+
+So the CI figures ship as a pair of files at one scale. `--ci-both` is kept because the question is worth being able to re-ask if the column width changes.
+
 ### `mass`: two distributions instead of a difference
 
 Shades each garment by the share of the slot it actually holds in that arm; the difference survives as the signed number in the label, so nothing the original said is lost.

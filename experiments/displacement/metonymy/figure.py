@@ -354,7 +354,47 @@ def _mirror_d(d, axis):
     return " ".join(out)
 
 
-def build_two_body(mode, scale="D", min_move=0.0, layer_swap=True):
+#: Critical Inquiry: 4.8 inches of column, nothing smaller than 6pt, and no
+#: title, caption or legend inside the image -- the journal sets those.
+CI_WIDTH_IN = 4.8
+CI_MIN_PT = 6.0
+PT_PER_IN = 72.0
+#: Helvetica advance widths as a fraction of the em, averaged over mixed case.
+#: Good to a few percent, which is all the margin here needs; the achieved
+#: figures are printed so a wrong guess is visible rather than silent.
+EM_BOLD, EM_PLAIN = 0.58, 0.55
+
+
+def _label_width(text_line):
+    """Rough rendered width, in user units, of one label's <text> element.
+
+    A tspan with no `font-size` inherits the parent <text>'s, so the parent
+    has to be read. Hardcoding 16.5 here was right until CI mode started
+    scaling the type, at which point the word was measured at half its
+    rendered width and the crop clipped the first and last labels.
+    """
+    parent = re.search(r'<text[^>]*font-size="([\d.]+)"', text_line)
+    parent = float(parent.group(1)) if parent else 16.5
+    w = 0.0
+    for size, weight, body in re.findall(
+            r'<tspan(?:[^>]*font-size="([\d.]+)")?([^>]*)>([^<]*)</tspan>',
+            text_line):
+        size = float(size) if size else parent
+        em = EM_BOLD if 'font-weight="700"' in weight else EM_PLAIN
+        w += len(body.replace("&#160;", " ")) * em * size
+        w += 7.0 if 'dx="7"' in weight else 0.0
+    return w
+
+
+def _boost_fonts(line, k):
+    if k == 1.0:
+        return line
+    return re.sub(r'font-size="([\d.]+)"',
+                  lambda m_: 'font-size="%.4g"' % (float(m_.group(1)) * k), line)
+
+
+def build_two_body(mode, scale="D", min_move=0.0, layer_swap=True,
+                   ci=False, arms=(0, 1), font_boost=1.0):
     """Two her-frame bodies, base and aligned, greyscale. See MODES.
 
     `min_move` drops a garment whose |median Δ| falls below it -- from the
@@ -491,6 +531,7 @@ def build_two_body(mode, scale="D", min_move=0.0, layer_swap=True):
                             % ("%+.2f" % d).replace("-", "−"))
                 l = re.sub(r'<tspan font-size="15"[^>]*>&#160;&#160;[^<]+</tspan>',
                            tail, l)
+                l = _boost_fonts(l, font_boost)
             out.append(l)
         return out
 
@@ -502,30 +543,104 @@ def build_two_body(mode, scale="D", min_move=0.0, layer_swap=True):
            else "left body shaded by how far each garment FALLS, right body by "
                 "how far it RISES; a garment that does not move that way is "
                 "left blank and unlabelled")
-    o = ['<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 %d %d" width="%d" '
-         'height="%d" font-family="Helvetica,Arial,sans-serif">'
-         % (WIDTH, HEIGHT, WIDTH, HEIGHT),
-         '<rect width="%d" height="%d" fill="#ffffff"/>' % (WIDTH, HEIGHT),
-         '<text x="%g" y="54" text-anchor="middle" font-size="36" font-weight="700" '
-         'fill="#16161a">%s</text>' % (MID, title),
-         '<text x="%g" y="82" text-anchor="middle" font-size="16.5" fill="#6b6862">'
-         '“She slowly took off her ___”, 50 lineage pairs; %s</text>' % (MID, sub),
-         '<path d="M %g 176 L %g 862" stroke="#e6e2da" stroke-width="1.4" '
-         'stroke-dasharray="3 8"/>' % (MID, MID)]
+    o = []
+    if not ci:
+        o += ['<text x="%g" y="54" text-anchor="middle" font-size="36" '
+              'font-weight="700" fill="#16161a">%s</text>' % (MID, title),
+              '<text x="%g" y="82" text-anchor="middle" font-size="16.5" '
+              'fill="#6b6862">“She slowly took off her ___”, 50 lineage pairs; '
+              '%s</text>' % (MID, sub),
+              '<path d="M %g 176 L %g 862" stroke="#e6e2da" stroke-width="1.4" '
+              'stroke-dasharray="3 8"/>' % (MID, MID)]
 
-    for which, head, dx in ((0, "base", 0.0), (1, "aligned", SHIFT)):
+    #: content extent, tracked as the parts go in, so the CI crop is measured
+    #: rather than guessed. `_label_width` is an estimate; the achieved font
+    #: size is printed so a bad one shows up instead of clipping silently.
+    xs, ys = [], []
+    placed = [(w, SHIFT if len(arms) > 1 and w == 1 else 0.0) for w in arms]
+    for which, dx in placed:
+        head = ("base", "aligned")[which]
         g = ['<g transform="translate(%g,0)">' % dx] if dx else []
-        g.append('<text x="410.0" y="134" text-anchor="middle" font-size="25" '
-                 'font-weight="700" fill="#16161a">%s</text>' % head)
-        g.append('<text x="410.0" y="158" text-anchor="middle" font-size="15" '
-                 'fill="#6b6862">%s</text>' % subtitles[which])
+        if ci:
+            g.append(_boost_fonts(
+                '<text x="410.0" y="150" text-anchor="middle" font-size="21" '
+                'font-weight="700" fill="#16161a">%s</text>' % head, font_boost))
+            ys.append(132)
+        else:
+            g.append('<text x="410.0" y="134" text-anchor="middle" '
+                     'font-size="25" font-weight="700" fill="#16161a">%s</text>'
+                     % head)
+            g.append('<text x="410.0" y="158" text-anchor="middle" '
+                     'font-size="15" fill="#6b6862">%s</text>' % subtitles[which])
+            ys.append(116)
         g += [paint(l, which) for l in her_draw
               if fills.get(l) is None or kept(fills[l])]
         for a, b in her_labels:
-            g += label(a, b, which)
+            block = label(a, b, which)
+            g += block
+            if not block:
+                continue
+            txt = block[-1]
+            tx = float(re.search(r'<text x="([-\d.]+)"', txt).group(1))
+            w = _label_width(txt)
+            lo, hi = ((tx - w, tx) if 'text-anchor="end"' in txt else (tx, tx + w))
+            xs += [lo + dx, hi + dx]
+            ys.append(float(re.search(r'y="([-\d.]+)"', txt).group(1)))
+        xs += [183.5 + dx, 637.0 + dx]          # the body, swatch to swatch
+        ys.append(840.0)                        # the ground line
         if dx:
             g.append("</g>")
         o += g
+
+    if ci and len(arms) == 1:
+        #: ONE BOX FOR THE PAIR. The two arms label different garments, so
+        #: cropping each to its own content gives two files at two scales, and
+        #: a reader setting them side by side gets two different-sized bodies.
+        #: Measure the arm that is not being drawn as well, and discard it.
+        for a, b in her_labels:
+            block = label(a, b, 1 - arms[0])
+            if not block:
+                continue
+            txt = block[-1]
+            tx = float(re.search(r'<text x="([-\d.]+)"', txt).group(1))
+            w = _label_width(txt)
+            xs += ([tx - w, tx] if 'text-anchor="end"' in txt else [tx, tx + w])
+            ys.append(float(re.search(r'y="([-\d.]+)"', txt).group(1)))
+
+    if ci:
+        pad = 10.0
+        bx0, bx1 = min(xs) - pad, max(xs) + pad
+        by0, by1 = min(ys) - pad, max(ys) + pad
+        s_ = CI_WIDTH_IN * PT_PER_IN / (bx1 - bx0)
+        smallest = min(float(m_) for m_ in
+                       re.findall(r'font-size="([\d.]+)"', "".join(o)))
+        #: ONE RETRY, never a loop. Bigger type widens the box, which shrinks
+        #: the scale, so the fixed point is approached from below; a 3% margin
+        #: clears it in one step for everything here. If it does not, the
+        #: figure says so rather than shipping 5.9pt.
+        if smallest * s_ < CI_MIN_PT and font_boost == 1.0:
+            return build_two_body(mode, scale, min_move, layer_swap, ci, arms,
+                                  CI_MIN_PT / (smallest * s_) * 1.03)
+        print("   CI: viewBox %.0f x %.0f -> %.2f x %.2f in; smallest type "
+              "%.1fpt%s%s" % (bx1 - bx0, by1 - by0, CI_WIDTH_IN,
+                              (by1 - by0) * s_ / PT_PER_IN, smallest * s_,
+                              "" if font_boost == 1.0
+                              else "  (type up %.0f%%)" % (100 * font_boost - 100),
+                              "" if smallest * s_ >= CI_MIN_PT
+                              else "  ** UNDER %gpt, WILL NOT FIT **" % CI_MIN_PT))
+        head_ = ('<svg xmlns="http://www.w3.org/2000/svg" '
+                 'viewBox="%.1f %.1f %.1f %.1f" width="%gin" height="%.3fin" '
+                 'font-family="Helvetica,Arial,sans-serif">'
+                 % (bx0, by0, bx1 - bx0, by1 - by0, CI_WIDTH_IN,
+                    (by1 - by0) * s_ / PT_PER_IN),
+                 '<rect x="%.1f" y="%.1f" width="%.1f" height="%.1f" '
+                 'fill="#ffffff"/>' % (bx0, by0, bx1 - bx0, by1 - by0))
+        return "\n".join(head_ + tuple(o)) + "\n</svg>\n"
+
+    o = ['<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 %d %d" width="%d" '
+         'height="%d" font-family="Helvetica,Arial,sans-serif">'
+         % (WIDTH, HEIGHT, WIDTH, HEIGHT),
+         '<rect width="%d" height="%d" fill="#ffffff"/>' % (WIDTH, HEIGHT)] + o
 
     #: the legend, rebuilt: one white-to-black ramp on the same power scale,
     #: ticks at the values a reader would look for rather than at even steps.
@@ -631,6 +746,14 @@ def main(argv=None):
                          "below this, from the DRAWING as well as the labels. "
                          "0.1 removes hat, tie, watch, belt, socks, heels and "
                          "boots from the her frame.")
+    ap.add_argument("--ci", action="store_true",
+                    help="Critical Inquiry format: %gin wide, no title, no "
+                         "caption, no legend, cropped to the content. Writes "
+                         "one file per arm unless --ci-both." % CI_WIDTH_IN)
+    ap.add_argument("--ci-both", action="store_true",
+                    help="with --ci, both arms in one %gin file. Prints the "
+                         "achieved type size, which is the whole question."
+                         % CI_WIDTH_IN)
     ap.add_argument("--no-layer-swap", action="store_true",
                     help="two-body only: keep the published nesting, which "
                          "puts the robe outside the jacket.")
@@ -647,11 +770,19 @@ def main(argv=None):
     mode = a.two_body or ("mass" if a.mass else None)
     if mode:
         tag = "" if not a.min_move else "_m%g" % a.min_move
-        path = os.path.join(a.outdir, "x1_garment_%s%s_gray.svg" % (mode, tag))
-        with open(path, "w", encoding="utf-8") as fh:
-            fh.write(build_two_body(mode, a.scale, a.min_move,
-                                    not a.no_layer_swap))
-        print("-> %s" % path)
+        if not a.ci:
+            jobs = [((0, 1), "")]
+        elif a.ci_both:
+            jobs = [((0, 1), "_ci")]
+        else:
+            jobs = [((0,), "_ci_base"), ((1,), "_ci_aligned")]
+        for arms, suffix in jobs:
+            path = os.path.join(a.outdir, "x1_garment_%s%s%s_gray.svg"
+                                % (mode, tag, suffix))
+            with open(path, "w", encoding="utf-8") as fh:
+                fh.write(build_two_body(mode, a.scale, a.min_move,
+                                        not a.no_layer_swap, a.ci, arms))
+            print("-> %s" % path)
         return 0
     jobs = []
     if not a.gray_only:
