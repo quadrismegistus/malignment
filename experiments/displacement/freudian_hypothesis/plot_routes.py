@@ -93,6 +93,11 @@ def load(min_cand=80):
         e = (arr[k] / A) / (n / V) if arr[k] else 0.0
         rows.append({"act": k[0], "affect": k[1],
                      "enrich": e, "log2": math.log2(e) if e > 0 else -4.0,
+                     #: log of the DESTINATION share. Raw share is useless as a
+                     #: ramp -- one tile holds 47.7% and the rest share the
+                     #: remainder, so a linear scale paints 27 tiles the same.
+                     "log_in": math.log10(100 * arr[k] / A) if arr[k] else -2.0,
+                     "log_out": math.log10(100 * dep[k] / Dm) if dep[k] else -2.0,
                      "depart_share": 100 * dep[k] / Dm,
                      "arrive_share": 100 * arr[k] / A,
                      "word": top[k].most_common(1)[0][0] if top[k] else "",
@@ -107,7 +112,7 @@ def load(min_cand=80):
     return rows, len(live)
 
 
-def draw(rows, out, top=None, pub=True):
+def draw(rows, out, shade_by="enrich", top=None, pub=True):
     """A 7x7 field of the measured quantity, with a landmark word per tile.
 
     **A SCATTER OF THE WORDS WAS DRAWN FIRST AND WITHDRAWN.** It put every word
@@ -127,15 +132,31 @@ def draw(rows, out, top=None, pub=True):
     f = pd.DataFrame(rows)
     #: **CLAMPED AND STATED.** log2 enrichment runs -5.6 to +2.1; letting the
     #: ramp span that puts every tile but two in the middle third of the ink.
-    f["shade"] = f["log2"].clip(-2.0, 2.0)
+    #: **THREE THINGS THIS COULD SHADE, AND THEY ARE DIFFERENT QUESTIONS.**
+    #:   enrich  in / availability -- where mass is STEERED, net of what was on
+    #:           offer. `scream` wins. Answers "does alignment prefer this?"
+    #:   in      share of arriving mass -- where mass actually ENDS UP. `make`
+    #:           wins with 47.7%. Answers "where does it go?"
+    #:   out     share of departing mass -- where it comes FROM. `kill` wins.
+    #: The paragraph's claim is about destination, so `in` is the literal
+    #: answer and `enrich` the interesting one; neither is a substitute for the
+    #: other and the filename says which was drawn.
+    col = {"enrich": "log2", "in": "log_in", "out": "log_out"}[shade_by]
+    lim = (-2.0, 2.0) if shade_by == "enrich" else (-2.0, 1.7)
+    f["shade"] = f[col].clip(*lim)
     #: **THE FILL IS COMPUTED HERE, NOT LEFT TO A SCALE.** A first version set
     #: the text colour from a threshold on `shade` and let plotnine interpolate
     #: the fill; the two disagreed and light tiles came out with white text on
     #: them. Interpolating once, in Python, makes the ink a function of the
     #: exact grey that is drawn rather than of a guess about it.
-    lo, hi = 0.14, 0.93          # CI halftone band, 86% ink down to 7%
+    #: **MORE INK = MORE OF WHATEVER IS SHADED.** RH, reading the first
+    #: version: "dark reads as more active". It did the opposite -- `make`, the
+    #: destination of 47.7% of the arriving mass, came out nearly white while
+    #: `killed`, where almost nothing arrives, was solid black. Ink now runs
+    #: WITH the quantity, so a dark tile is a busy one on every mode.
+    hi, lo = 0.14, 0.93          # CI halftone band, 86% ink down to 7%
     def grey(v):
-        t = (v + 2.0) / 4.0
+        t = (v - lim[0]) / (lim[1] - lim[0])
         return lo + t * (hi - lo)
     f["fill"] = ["#%02x%02x%02x" % ((int(round(grey(v) * 255)),) * 3)
                  for v in f["shade"]]
@@ -161,7 +182,10 @@ def main(argv=None):
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--pub", action="store_true", default=True)
     ap.add_argument("--top", type=int, default=22)
-    ap.add_argument("--out", default=os.path.join(FIGS, "routes_pub.png"))
+    ap.add_argument("--shade", default="enrich",
+                    choices=("enrich", "in", "out"),
+                    help="what the grey ramp encodes; the filename records it")
+    ap.add_argument("--out", default=None)
     a = ap.parse_args(argv)
     rows, ncell = load()
     print("%d populated tiles over %s charged cells"
@@ -172,7 +196,9 @@ def main(argv=None):
     for r in sorted(rows, key=lambda r: r["enrich"])[:4]:
         print("   act %d affect %d  %.2fx  %s" % (r["act"], r["affect"],
                                                   r["enrich"], r["word"]))
-    print("wrote %s" % ", ".join(draw(rows, a.out)))
+    out = a.out or os.path.join(
+        FIGS, "routes_%s_pub.png" % a.shade)
+    print("wrote %s" % ", ".join(draw(rows, out, shade_by=a.shade)))
     return 0
 
 
