@@ -420,8 +420,14 @@ def build_two_body(mode, scale="D", min_move=0.0, layer_swap=True):
               'stroke="#26262b" stroke-opacity="%g"' % BORDER_OPACITY)
 
     def restyle(l):
+        #: MEMBERSHIP FIRST, REWRITE SECOND. `garment_lines` holds the source
+        #: text; testing the rewritten line instead only matched the garments
+        #: whose stroke-width was already STROKE -- clothes, clothing, scarf,
+        #: gloves, panties and tie -- so those six printed with a softened
+        #: outline and every other garment with a solid one.
+        garment = l in garment_lines
         l = re.sub(r'stroke-width="[\d.]+"', 'stroke-width="%g"' % STROKE, l)
-        return l.replace(*soften) if l in garment_lines else l
+        return l.replace(*soften) if garment else l
 
     fills = {restyle(k): v for k, v in fills.items()}
     her_draw = [restyle(l) for l in her_draw]
