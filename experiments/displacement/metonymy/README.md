@@ -174,7 +174,9 @@ One ramp serves both bodies, so a fall and a rise of the same size print the sam
     python figure.py --two-body movement --min-move 0.1 --ci        # two files
     python figure.py --two-body movement --min-move 0.1 --ci --ci-both
 
-4.8 inches of column, nothing below 6pt, and no title, caption or legend inside the image; the journal sets those and the garment labels carry the key anyway. The crop is MEASURED from the content rather than guessed, and the achieved figures are printed on every run so a bad estimate shows up instead of clipping silently.
+**The format was measured off a printed issue, not taken on trust.** Weatherby and Justie, "Indexical AI", *Critical Inquiry* 48 (2022): 381-415, has seventeen figures. Trim is 6.58 x 9.58in, the body column 4.33 x 7.36in, and every full-measure figure in it is placed at 4.25 to 4.33in. **So 4.33in is the printed column and 4.8in is the submission ceiling, not the width anything appears at.** The tallest placed image is 6.14in, on a page of its own with its caption; a figure sharing a page with text gets 7.36in less whatever the caption takes, so **about 7.0in is the working maximum height**. Its own captions set at about 7.6pt and the small-caps FIGURE N at 5.7pt, which is where the 6pt floor comes from.
+
+`--ci-width` overrides the column. Everything below is at the measured 4.33. No title, caption or legend goes inside the image; the journal sets those and the garment labels carry the key anyway. The crop is MEASURED from the content rather than guessed, and the achieved figures are printed on every run so a bad estimate shows up instead of clipping silently.
 
 **One box serves the pair.** The two arms label different garments, so cropping each to its own content would give two files at two scales, and a reader setting them side by side would get two different-sized bodies. The arm that is not being drawn is measured as well and discarded.
 
@@ -182,13 +184,15 @@ If the type lands below 6pt the producer scales every font up once and rebuilds.
 
 **Both bodies in one 4.8in figure does not fit, and that is a measurement, not an opinion.** The width is set by the label text, not by the drawing, and two bodies means two label columns:
 
-| | box | achieved | |
+| | box | at 4.33in | at 4.80in |
 |---|---|---|---|
-| `movement`, one arm | 740 x 728 | 4.80 x 4.72 in, **6.8pt** | fits |
-| `mass`, one arm | 832 x 728 | 4.80 x 4.20 in, **6.1pt** | fits, type up 4% |
-| `movement`, both arms | 1826 x 728 | 4.80 x 1.91 in, **5.4pt** | fails, even with type up 97% |
+| `movement`, one arm | 740 x 728 | 4.33 x 4.26 in, **6.1pt**, fits | 4.80 x 4.72 in, 6.8pt, fits |
+| `mass`, one arm | 832-870 x 728 | 3.62 in, 5.8pt, **fails** | 4.20 in, 6.1pt, fits |
+| `movement`, both arms | 1877 x 728 | 1.68 in, 5.3pt, **fails** | 1.91 in, 5.4pt, **fails** |
 
-So the CI figures ship as a pair of files at one scale. `--ci-both` is kept because the question is worth being able to re-ask if the column width changes.
+So the CI figures ship as a pair of files at one scale, and only the `movement` layout clears the floor at the printed column. `--ci-both` is kept because the question is worth being able to re-ask if the measure changes.
+
+**Stacking the two bodies vertically does not rescue it either.** Two panels are 740 x 1456 units, and at 4.33in wide that prints 8.52in tall against a 7.0in working maximum. Cropping every scrap of vertical white gets to about 1320 units, still over the 1196 the aspect allows.
 
 ### `mass`: two distributions instead of a difference
 

@@ -354,9 +354,17 @@ def _mirror_d(d, axis):
     return " ".join(out)
 
 
-#: Critical Inquiry: 4.8 inches of column, nothing smaller than 6pt, and no
-#: title, caption or legend inside the image -- the journal sets those.
-CI_WIDTH_IN = 4.8
+#: Critical Inquiry, measured off a printed issue rather than taken on trust
+#: (Weatherby and Justie, "Indexical AI", CI 48:381-415, 2022). Trim is
+#: 6.58 x 9.58in, the body column 4.33 x 7.36in, and EVERY full-measure
+#: figure in that article is placed at 4.25 to 4.33in -- so 4.33 is the real
+#: column and 4.8 is the submission ceiling, not the printed width. The
+#: tallest placed image in the article is 6.14in, on a page of its own with
+#: its caption; a figure sharing a page with text has 7.36in less whatever
+#: the caption takes. Its own captions set at about 7.6pt and the small-caps
+#: FIGURE N at 5.7pt, which is why 6pt is the floor here.
+CI_WIDTH_IN = 4.33
+CI_MAX_HEIGHT_IN = 7.0
 CI_MIN_PT = 6.0
 PT_PER_IN = 72.0
 #: Helvetica advance widths as a fraction of the em, averaged over mixed case.
@@ -621,6 +629,9 @@ def build_two_body(mode, scale="D", min_move=0.0, layer_swap=True,
         if smallest * s_ < CI_MIN_PT and font_boost == 1.0:
             return build_two_body(mode, scale, min_move, layer_swap, ci, arms,
                                   CI_MIN_PT / (smallest * s_) * 1.03)
+        h_in = (by1 - by0) * s_ / PT_PER_IN
+        if h_in > CI_MAX_HEIGHT_IN:
+            print("   CI: %.2f in tall, over the %.2f in page" % (h_in, CI_MAX_HEIGHT_IN))
         print("   CI: viewBox %.0f x %.0f -> %.2f x %.2f in; smallest type "
               "%.1fpt%s%s" % (bx1 - bx0, by1 - by0, CI_WIDTH_IN,
                               (by1 - by0) * s_ / PT_PER_IN, smallest * s_,
@@ -750,6 +761,10 @@ def main(argv=None):
                     help="Critical Inquiry format: %gin wide, no title, no "
                          "caption, no legend, cropped to the content. Writes "
                          "one file per arm unless --ci-both." % CI_WIDTH_IN)
+    ap.add_argument("--ci-width", type=float, default=CI_WIDTH_IN,
+                    help="override the column width in inches. 4.33 is the "
+                         "measured CI body column; 4.8 is the submission "
+                         "ceiling.")
     ap.add_argument("--ci-both", action="store_true",
                     help="with --ci, both arms in one %gin file. Prints the "
                          "achieved type size, which is the whole question."
@@ -767,6 +782,7 @@ def main(argv=None):
         return 0
 
     os.makedirs(a.outdir, exist_ok=True)
+    globals()["CI_WIDTH_IN"] = a.ci_width
     mode = a.two_body or ("mass" if a.mass else None)
     if mode:
         tag = "" if not a.min_move else "_m%g" % a.min_move

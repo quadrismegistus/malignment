@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="-84.3 122.0 1825.9 728.0" width="4.8in" height="1.914in" font-family="Helvetica,Arial,sans-serif">
-<rect x="-84.3" y="122.0" width="1825.9" height="728.0" fill="#ffffff"/>
-<text x="410.0" y="150" text-anchor="middle" font-size="41.34" font-weight="700" fill="#16161a">base</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-111.7 122.0 1876.7 728.0" width="4.33in" height="1.680in" font-family="Helvetica,Arial,sans-serif">
+<rect x="-111.7" y="122.0" width="1876.7" height="728.0" fill="#ffffff"/>
+<text x="410.0" y="150" text-anchor="middle" font-size="45.83" font-weight="700" fill="#16161a">base</text>
 <path d="M 195 824 Q 410 828 625 823" fill="none" stroke="#ded9d0" stroke-width="1.4" stroke-linecap="round"/>
 <path d="M 410.0 292.0 Q 410.6 306.1 410.0 322.0" fill="none" stroke="#26262b" stroke-opacity="0.45" stroke-width="1.4" stroke-linecap="round"/>
 <path d="M 410.0 330.0 Q 410.1 444.8 410.0 560.0" fill="none" stroke="#26262b" stroke-opacity="0.45" stroke-width="1.4" stroke-linecap="round"/>
@@ -48,65 +48,65 @@
 <path d="M 618.5 275.0 L 606.0 275.0 L 580.0 258.0" fill="none" stroke="#a8a49b" stroke-width="0.9" stroke-linejoin="round"/>
 <circle cx="580.0" cy="258.0" r="2.2" fill="#77746c"/>
 <rect x="619.5" y="266.5" width="17" height="17" rx="3.5" fill="#bbbbbb" stroke="#26262b" stroke-width="1.2"/>
-<text x="642.0" y="280.5" text-anchor="start" font-size="32.48" fill="#1d1d20"><tspan font-weight="700">clothing</tspan><tspan dx="7" font-size="28.54" fill="#4a4843" font-weight="700">−0.17</tspan></text>
+<text x="642.0" y="280.5" text-anchor="start" font-size="36.01" fill="#1d1d20"><tspan font-weight="700">clothing</tspan><tspan dx="7" font-size="31.64" fill="#4a4843" font-weight="700">−0.17</tspan></text>
 <path d="M 201.5 264.0 L 214.0 264.0 L 238.0 264.0" fill="none" stroke="#a8a49b" stroke-width="0.9" stroke-linejoin="round"/>
 <circle cx="238.0" cy="264.0" r="2.2" fill="#77746c"/>
 <rect x="183.5" y="255.5" width="17" height="17" rx="3.5" fill="#8b8b8b" stroke="#26262b" stroke-width="1.2"/>
-<text x="178.0" y="269.5" text-anchor="end" font-size="32.48" fill="#1d1d20"><tspan font-weight="700">clothes</tspan><tspan dx="7" font-size="28.54" fill="#4a4843" font-weight="700">−0.55</tspan></text>
+<text x="178.0" y="269.5" text-anchor="end" font-size="36.01" fill="#1d1d20"><tspan font-weight="700">clothes</tspan><tspan dx="7" font-size="31.64" fill="#4a4843" font-weight="700">−0.55</tspan></text>
 <path d="M 201.5 304.0 L 214.0 304.0 L 377.0 304.0" fill="none" stroke="#a8a49b" stroke-width="0.9" stroke-linejoin="round"/>
 <circle cx="377.0" cy="304.0" r="2.2" fill="#77746c"/>
 <rect x="183.5" y="295.5" width="17" height="17" rx="3.5" fill="#c7c7c7" stroke="#26262b" stroke-width="1.2"/>
-<text x="178.0" y="309.5" text-anchor="end" font-size="32.48" fill="#1d1d20"><tspan font-weight="700">scarf</tspan><tspan dx="7" font-size="28.54" fill="#4a4843" font-weight="700">−0.11</tspan></text>
+<text x="178.0" y="309.5" text-anchor="end" font-size="36.01" fill="#1d1d20"><tspan font-weight="700">scarf</tspan><tspan dx="7" font-size="31.64" fill="#4a4843" font-weight="700">−0.11</tspan></text>
 <path d="M 201.5 382.0 L 214.0 382.0 L 376.0 358.0" fill="none" stroke="#a8a49b" stroke-width="0.9" stroke-linejoin="round"/>
 <circle cx="376.0" cy="358.0" r="2.2" fill="#77746c"/>
 <rect x="183.5" y="373.5" width="17" height="17" rx="3.5" fill="#b6b6b6" stroke="#26262b" stroke-width="1.2"/>
-<text x="178.0" y="387.5" text-anchor="end" font-size="32.48" fill="#1d1d20"><tspan font-weight="700">bra</tspan><tspan dx="7" font-size="28.54" fill="#4a4843" font-weight="700">−0.19</tspan></text>
+<text x="178.0" y="387.5" text-anchor="end" font-size="36.01" fill="#1d1d20"><tspan font-weight="700">bra</tspan><tspan dx="7" font-size="31.64" fill="#4a4843" font-weight="700">−0.19</tspan></text>
 <path d="M 201.5 412.0 L 214.0 412.0 L 358.8 398.0" fill="none" stroke="#a8a49b" stroke-width="0.9" stroke-linejoin="round"/>
 <circle cx="358.8" cy="398.0" r="2.2" fill="#77746c"/>
 <rect x="183.5" y="403.5" width="17" height="17" rx="3.5" fill="#9e9e9e" stroke="#26262b" stroke-width="1.2"/>
-<text x="178.0" y="417.5" text-anchor="end" font-size="32.48" fill="#1d1d20"><tspan font-weight="700">robe</tspan><tspan dx="7" font-size="28.54" fill="#4a4843" font-weight="700">−0.37</tspan></text>
+<text x="178.0" y="417.5" text-anchor="end" font-size="36.01" fill="#1d1d20"><tspan font-weight="700">robe</tspan><tspan dx="7" font-size="31.64" fill="#4a4843" font-weight="700">−0.37</tspan></text>
 <path d="M 618.5 416.0 L 606.0 416.0 L 450.3 416.0" fill="none" stroke="#a8a49b" stroke-width="0.9" stroke-linejoin="round"/>
 <circle cx="450.3" cy="416.0" r="2.2" fill="#77746c"/>
 <rect x="619.5" y="407.5" width="17" height="17" rx="3.5" fill="#b4b4b4" stroke="#26262b" stroke-width="1.2"/>
-<text x="642.0" y="421.5" text-anchor="start" font-size="32.48" fill="#1d1d20"><tspan font-weight="700">sweater</tspan><tspan dx="7" font-size="28.54" fill="#4a4843" font-weight="700">−0.21</tspan></text>
+<text x="642.0" y="421.5" text-anchor="start" font-size="36.01" fill="#1d1d20"><tspan font-weight="700">sweater</tspan><tspan dx="7" font-size="31.64" fill="#4a4843" font-weight="700">−0.21</tspan></text>
 <path d="M 201.5 442.0 L 214.0 442.0 L 380.8 434.0" fill="none" stroke="#a8a49b" stroke-width="0.9" stroke-linejoin="round"/>
 <circle cx="380.8" cy="434.0" r="2.2" fill="#77746c"/>
 <rect x="183.5" y="433.5" width="17" height="17" rx="3.5" fill="#8b8b8b" stroke="#26262b" stroke-width="1.2"/>
-<text x="178.0" y="447.5" text-anchor="end" font-size="32.48" fill="#1d1d20"><tspan font-weight="700">shirt</tspan><tspan dx="7" font-size="28.54" fill="#4a4843" font-weight="700">−0.55</tspan></text>
+<text x="178.0" y="447.5" text-anchor="end" font-size="36.01" fill="#1d1d20"><tspan font-weight="700">shirt</tspan><tspan dx="7" font-size="31.64" fill="#4a4843" font-weight="700">−0.55</tspan></text>
 <path d="M 201.5 472.0 L 214.0 472.0 L 390.7 436.0" fill="none" stroke="#a8a49b" stroke-width="0.9" stroke-linejoin="round"/>
 <circle cx="390.7" cy="436.0" r="2.2" fill="#77746c"/>
 <rect x="183.5" y="463.5" width="17" height="17" rx="3.5" fill="#b1b1b1" stroke="#26262b" stroke-width="1.2"/>
-<text x="178.0" y="477.5" text-anchor="end" font-size="32.48" fill="#1d1d20"><tspan font-weight="700">top</tspan><tspan dx="7" font-size="28.54" fill="#4a4843" font-weight="700">−0.23</tspan></text>
+<text x="178.0" y="477.5" text-anchor="end" font-size="36.01" fill="#1d1d20"><tspan font-weight="700">top</tspan><tspan dx="7" font-size="31.64" fill="#4a4843" font-weight="700">−0.23</tspan></text>
 <path d="M 201.5 532.0 L 214.0 532.0 L 383.0 498.0" fill="none" stroke="#a8a49b" stroke-width="0.9" stroke-linejoin="round"/>
 <circle cx="383.0" cy="498.0" r="2.2" fill="#77746c"/>
 <rect x="183.5" y="523.5" width="17" height="17" rx="3.5" fill="#b7b7b7" stroke="#26262b" stroke-width="1.2"/>
-<text x="178.0" y="537.5" text-anchor="end" font-size="32.48" fill="#1d1d20"><tspan font-weight="700">panties</tspan><tspan dx="7" font-size="28.54" fill="#4a4843" font-weight="700">−0.19</tspan></text>
+<text x="178.0" y="537.5" text-anchor="end" font-size="36.01" fill="#1d1d20"><tspan font-weight="700">panties</tspan><tspan dx="7" font-size="31.64" fill="#4a4843" font-weight="700">−0.19</tspan></text>
 <path d="M 618.5 536.0 L 606.0 536.0 L 425.0 508.0" fill="none" stroke="#a8a49b" stroke-width="0.9" stroke-linejoin="round"/>
 <circle cx="425.0" cy="508.0" r="2.2" fill="#77746c"/>
 <rect x="619.5" y="527.5" width="17" height="17" rx="3.5" fill="#bdbdbd" stroke="#26262b" stroke-width="1.2"/>
-<text x="642.0" y="541.5" text-anchor="start" font-size="32.48" fill="#1d1d20"><tspan font-weight="700">underwear</tspan><tspan dx="7" font-size="28.54" fill="#4a4843" font-weight="700">−0.16</tspan></text>
+<text x="642.0" y="541.5" text-anchor="start" font-size="36.01" fill="#1d1d20"><tspan font-weight="700">underwear</tspan><tspan dx="7" font-size="31.64" fill="#4a4843" font-weight="700">−0.16</tspan></text>
 <path d="M 618.5 566.0 L 606.0 566.0 L 472.0 558.0" fill="none" stroke="#a8a49b" stroke-width="0.9" stroke-linejoin="round"/>
 <circle cx="472.0" cy="558.0" r="2.2" fill="#77746c"/>
 <rect x="619.5" y="557.5" width="17" height="17" rx="3.5" fill="#a9a9a9" stroke="#26262b" stroke-width="1.2"/>
-<text x="642.0" y="571.5" text-anchor="start" font-size="32.48" fill="#1d1d20"><tspan font-weight="700">skirt</tspan><tspan dx="7" font-size="28.54" fill="#4a4843" font-weight="700">−0.29</tspan></text>
+<text x="642.0" y="571.5" text-anchor="start" font-size="36.01" fill="#1d1d20"><tspan font-weight="700">skirt</tspan><tspan dx="7" font-size="31.64" fill="#4a4843" font-weight="700">−0.29</tspan></text>
 <path d="M 201.5 606.0 L 214.0 606.0 L 326.0 606.0" fill="none" stroke="#a8a49b" stroke-width="0.9" stroke-linejoin="round"/>
 <circle cx="326.0" cy="606.0" r="2.2" fill="#77746c"/>
 <rect x="183.5" y="597.5" width="17" height="17" rx="3.5" fill="#8b8b8b" stroke="#26262b" stroke-width="1.2"/>
-<text x="178.0" y="611.5" text-anchor="end" font-size="32.48" fill="#1d1d20"><tspan font-weight="700">dress</tspan><tspan dx="7" font-size="28.54" fill="#4a4843" font-weight="700">−0.55</tspan></text>
+<text x="178.0" y="611.5" text-anchor="end" font-size="36.01" fill="#1d1d20"><tspan font-weight="700">dress</tspan><tspan dx="7" font-size="31.64" fill="#4a4843" font-weight="700">−0.55</tspan></text>
 <path d="M 201.5 648.0 L 214.0 648.0 L 354.7 648.0" fill="none" stroke="#a8a49b" stroke-width="0.9" stroke-linejoin="round"/>
 <circle cx="354.7" cy="648.0" r="2.2" fill="#77746c"/>
 <rect x="183.5" y="639.5" width="17" height="17" rx="3.5" fill="#999999" stroke="#26262b" stroke-width="1.2"/>
-<text x="178.0" y="653.5" text-anchor="end" font-size="32.48" fill="#1d1d20"><tspan font-weight="700">pants</tspan><tspan dx="7" font-size="28.54" fill="#4a4843" font-weight="700">−0.41</tspan></text>
+<text x="178.0" y="653.5" text-anchor="end" font-size="36.01" fill="#1d1d20"><tspan font-weight="700">pants</tspan><tspan dx="7" font-size="31.64" fill="#4a4843" font-weight="700">−0.41</tspan></text>
 <path d="M 618.5 664.0 L 606.0 664.0 L 457.9 664.0" fill="none" stroke="#a8a49b" stroke-width="0.9" stroke-linejoin="round"/>
 <circle cx="457.9" cy="664.0" r="2.2" fill="#77746c"/>
 <rect x="619.5" y="655.5" width="17" height="17" rx="3.5" fill="#c2c2c2" stroke="#26262b" stroke-width="1.2"/>
-<text x="642.0" y="669.5" text-anchor="start" font-size="32.48" fill="#1d1d20"><tspan font-weight="700">jeans</tspan><tspan dx="7" font-size="28.54" fill="#4a4843" font-weight="700">−0.13</tspan></text>
+<text x="642.0" y="669.5" text-anchor="start" font-size="36.01" fill="#1d1d20"><tspan font-weight="700">jeans</tspan><tspan dx="7" font-size="31.64" fill="#4a4843" font-weight="700">−0.13</tspan></text>
 <path d="M 201.5 700.0 L 214.0 700.0 L 367.8 700.0" fill="none" stroke="#a8a49b" stroke-width="0.9" stroke-linejoin="round"/>
 <circle cx="367.8" cy="700.0" r="2.2" fill="#77746c"/>
 <rect x="183.5" y="691.5" width="17" height="17" rx="3.5" fill="#c8c8c8" stroke="#26262b" stroke-width="1.2"/>
-<text x="178.0" y="705.5" text-anchor="end" font-size="32.48" fill="#1d1d20"><tspan font-weight="700">stockings</tspan><tspan dx="7" font-size="28.54" fill="#4a4843" font-weight="700">−0.11</tspan></text>
+<text x="178.0" y="705.5" text-anchor="end" font-size="36.01" fill="#1d1d20"><tspan font-weight="700">stockings</tspan><tspan dx="7" font-size="31.64" fill="#4a4843" font-weight="700">−0.11</tspan></text>
 <g transform="translate(875,0)">
-<text x="410.0" y="150" text-anchor="middle" font-size="41.34" font-weight="700" fill="#16161a">aligned</text>
+<text x="410.0" y="150" text-anchor="middle" font-size="45.83" font-weight="700" fill="#16161a">aligned</text>
 <path d="M 195 824 Q 410 828 625 823" fill="none" stroke="#ded9d0" stroke-width="1.4" stroke-linecap="round"/>
 <path d="M 410.0 292.0 Q 410.6 306.1 410.0 322.0" fill="none" stroke="#26262b" stroke-opacity="0.45" stroke-width="1.4" stroke-linecap="round"/>
 <path d="M 410.0 330.0 Q 410.1 444.8 410.0 560.0" fill="none" stroke="#26262b" stroke-opacity="0.45" stroke-width="1.4" stroke-linecap="round"/>
@@ -154,22 +154,22 @@
 <path d="M 618.5 245.0 L 606.0 245.0 L 440.0 245.0" fill="none" stroke="#a8a49b" stroke-width="0.9" stroke-linejoin="round"/>
 <circle cx="440.0" cy="245.0" r="2.2" fill="#77746c"/>
 <rect x="619.5" y="236.5" width="17" height="17" rx="3.5" fill="#616161" stroke="#26262b" stroke-width="1.2"/>
-<text x="642.0" y="250.5" text-anchor="start" font-size="32.48" fill="#1d1d20"><tspan font-weight="700">glasses</tspan><tspan dx="7" font-size="28.54" fill="#4a4843" font-weight="700">+1.09</tspan></text>
+<text x="642.0" y="250.5" text-anchor="start" font-size="36.01" fill="#1d1d20"><tspan font-weight="700">glasses</tspan><tspan dx="7" font-size="31.64" fill="#4a4843" font-weight="700">+1.09</tspan></text>
 <path d="M 201.5 352.0 L 214.0 352.0 L 336.5 352.0" fill="none" stroke="#a8a49b" stroke-width="0.9" stroke-linejoin="round"/>
 <circle cx="336.5" cy="352.0" r="2.2" fill="#77746c"/>
 <rect x="183.5" y="343.5" width="17" height="17" rx="3.5" fill="#797979" stroke="#26262b" stroke-width="1.2"/>
-<text x="178.0" y="357.5" text-anchor="end" font-size="32.48" fill="#1d1d20"><tspan font-weight="700">coat</tspan><tspan dx="7" font-size="28.54" fill="#4a4843" font-weight="700">+0.76</tspan></text>
+<text x="178.0" y="357.5" text-anchor="end" font-size="36.01" fill="#1d1d20"><tspan font-weight="700">coat</tspan><tspan dx="7" font-size="31.64" fill="#4a4843" font-weight="700">+0.76</tspan></text>
 <path d="M 618.5 374.0 L 606.0 374.0 L 472.5 374.0" fill="none" stroke="#a8a49b" stroke-width="0.9" stroke-linejoin="round"/>
 <circle cx="472.5" cy="374.0" r="2.2" fill="#77746c"/>
 <rect x="619.5" y="365.5" width="17" height="17" rx="3.5" fill="#c7c7c7" stroke="#26262b" stroke-width="1.2"/>
-<text x="642.0" y="379.5" text-anchor="start" font-size="32.48" fill="#1d1d20"><tspan font-weight="700">jacket</tspan><tspan dx="7" font-size="28.54" fill="#4a4843" font-weight="700">+0.11</tspan></text>
+<text x="642.0" y="379.5" text-anchor="start" font-size="36.01" fill="#1d1d20"><tspan font-weight="700">jacket</tspan><tspan dx="7" font-size="31.64" fill="#4a4843" font-weight="700">+0.11</tspan></text>
 <path d="M 201.5 502.0 L 214.0 502.0 L 293.0 488.0" fill="none" stroke="#a8a49b" stroke-width="0.9" stroke-linejoin="round"/>
 <circle cx="293.0" cy="488.0" r="2.2" fill="#77746c"/>
 <rect x="183.5" y="493.5" width="17" height="17" rx="3.5" fill="#a4a4a4" stroke="#26262b" stroke-width="1.2"/>
-<text x="178.0" y="507.5" text-anchor="end" font-size="32.48" fill="#1d1d20"><tspan font-weight="700">gloves</tspan><tspan dx="7" font-size="28.54" fill="#4a4843" font-weight="700">+0.32</tspan></text>
+<text x="178.0" y="507.5" text-anchor="end" font-size="36.01" fill="#1d1d20"><tspan font-weight="700">gloves</tspan><tspan dx="7" font-size="31.64" fill="#4a4843" font-weight="700">+0.32</tspan></text>
 <path d="M 618.5 802.0 L 606.0 802.0 L 488.9 802.0" fill="none" stroke="#a8a49b" stroke-width="0.9" stroke-linejoin="round"/>
 <circle cx="488.9" cy="802.0" r="2.2" fill="#77746c"/>
 <rect x="619.5" y="793.5" width="17" height="17" rx="3.5" fill="#141414" stroke="#26262b" stroke-width="1.2"/>
-<text x="642.0" y="807.5" text-anchor="start" font-size="32.48" fill="#1d1d20"><tspan font-weight="700">shoes</tspan><tspan dx="7" font-size="28.54" fill="#4a4843" font-weight="700">+2.65</tspan></text>
+<text x="642.0" y="807.5" text-anchor="start" font-size="36.01" fill="#1d1d20"><tspan font-weight="700">shoes</tspan><tspan dx="7" font-size="31.64" fill="#4a4843" font-weight="700">+2.65</tspan></text>
 </g>
 </svg>
