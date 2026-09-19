@@ -152,32 +152,83 @@ def pooled(prompt, min_lineages=MIN_LINEAGES, top=40):
             {w: tuple(sup[w]) for w in keep}, n, meta.get("below_theta", 0))
 
 
-def render(prompt, min_lineages=MIN_LINEAGES, support=True):
-    """The two-column table for one pooled frame. -> (text, n_lineages) or None"""
-    import run as R
+def table(pre, post, sup, top=12):
+    """The consistency-led table. -> (text, n_withheld)
+
+    ## WHY NOT `run._table_two_column`, WHICH THIS FILE USED YESTERDAY
+
+    That renderer places and orders by MASS, and its docstring gives the reason
+    its two rules must agree: "filtering on one quantity and sorting on another
+    makes a column whose own ordering contradicts its heading."
+
+    Pooled, mass is the wrong quantity, and it is wrong in a measurable way.
+    Correlation between |rank move| and lineage agreement, over three frames:
+    -0.02, +0.11, +0.14. They are ORTHOGONAL, and they order different words:
+    ranked by mass loss "She was so angry" gives kill, go, beat; ranked by
+    falling lineages it gives shoot, beat, kill -- and `shoot` falls in 45 of 50
+    while moving from rank 36 to 41, invisible under mass. Meanwhile `kill`
+    moves ONE position while 44 of 50 lineages push it down, because a pooled
+    rank is the rank of a MEAN and the mean flattens when lineages disagree
+    about absolute order.
+
+    So membership and order are both AGREEMENT here, which is the same rule the
+    original states, applied to the quantity that now carries the signal. The
+    headings say so: a column headed by mass whose rows are sorted by agreement
+    is the defect that rule exists to prevent.
+
+    ## RANK IS KEPT, DEMOTED
+
+    At r ~ 0 it is independent information, not redundancy: `balls` (41/45, rank
+    24 -> 43) and `big` (40/49, rank 26 -> 29) are both near-unanimous and only
+    one is a large movement. Dropping it would lose that.
+
+    ## AND STILL NO PROBABILITIES
+
+    `_table_two_column` withholds them on measured grounds -- percentages
+    produced 155 uses of the mass vocabulary over 29 cells against 2 under
+    ranks. A count of LINEAGES is not a percentage; it is a count of models,
+    which is this campaign's unit of independence everywhere else.
+    """
+    rb = {w: i + 1 for i, w in enumerate(sorted(pre, key=lambda w: -pre[w]))}
+    ra = {w: i + 1 for i, w in enumerate(sorted(post, key=lambda w: -post[w]))}
+    fall, rise, tied = [], [], 0
+    for w, (f, r) in sup.items():
+        if f == r:
+            #: **A TIE IS NOT A DIRECTION.** Half the lineages each way is the
+            #: one case where a pooled column would be inventing a sign, so it
+            #: is counted and dropped rather than assigned.
+            tied += 1
+            continue
+        (fall if f > r else rise).append(w)
+
+    def block(ws, head, idx):
+        ws = sorted(ws, key=lambda w: (-sup[w][idx], -(sup[w][0] + sup[w][1]), w))
+        out = ["%-16s %10s   %s" % (head, "lineages", "rank")]
+        for w in ws[:top]:
+            f, r = sup[w]
+            a = "%3d" % rb[w] if w in rb else "  -"
+            b = "%3d" % ra[w] if w in ra else "  -"
+            d = ("%+5d" % (rb[w] - ra[w])) if (w in rb and w in ra) else "    -"
+            out.append("  %-14s %6d/%-3d   %s -> %s %s"
+                       % (w, sup[w][idx], f + r, a, b, d))
+        return "\n".join(out)
+
+    txt = "%s\n\n%s" % (block(fall, "FALLS IN MOST", 0),
+                        block(rise, "RISES IN MOST", 1))
+    if tied:
+        txt += ("\n\n%d word(s) omitted: the lineages split evenly on which way "
+                "they move." % tied)
+    return txt, tied
+
+
+def render(prompt, min_lineages=MIN_LINEAGES, top=12):
+    """The consistency table for one pooled frame. -> (text, n_units) or None"""
     got = pooled(prompt, min_lineages)
     if not got:
         return None
     pre, post, sup, n, _bt = got
-    text, data = R._table_two_column(pre, post, rows=True)
-    if not support:
-        return text, n
-    #: **THE SUPPORT COLUMN IS AN ADDITION TO THE INSTRUMENT, NOT PART OF IT.**
-    #: `_table_two_column` shows positions and withholds probabilities on the
-    #: measured ground that percentages produced 155 uses of the mass vocabulary
-    #: over 29 cells against 2 under ranks. A count of LINEAGES is not a
-    #: probability and does not reintroduce that, but it is new, so it is
-    #: appended to the existing line rather than changing the layout, and the
-    #: header says what it is.
-    out = []
-    for line in text.split("\n"):
-        m = re.match(r"^  (\S+)\s", line)
-        if m and m.group(1) in sup:
-            f, r = sup[m.group(1)]
-            out.append("%s   %d/%d" % (line, max(f, r), f + r))
-        else:
-            out.append(line)
-    return "\n".join(out), n
+    text, _tied = table(pre, post, sup, top)
+    return text, n
 
 
 def main(argv=None):
@@ -198,23 +249,27 @@ def main(argv=None):
             raise SystemExit("no pooled arms for %r" % hit[0])
         text, n = got
         print("%s ___\n\n%s" % (hit[0], text))
-        print("\n(%d lineages; the trailing figure is how many of the lineages "
-              "that move the word\n move it the way its column says)" % n)
+        print("\n(%d lineages. `lineages` is how many of those in which the word "
+              "moves at all\n move it the way its column says; `rank` is its "
+              "position in each pooled arm.)" % n)
         return 0
     if a.export:
         L = ["# %d frames, pooled over the endpoint lineages" % len(fs), "",
              "Each table is ONE sentence with the fifty base->aligned pairs "
-             "pooled: each arm normalised within its own lineage, then averaged. "
-             "Words are placed and ordered by MASS, and the numbers shown are "
-             "POSITIONS in each arm -- `12 -> 3  +9` is a word lying 12th under "
-             "one condition and 3rd under the other.",
+             "pooled. A word is placed by WHICH WAY MOST LINEAGES MOVE IT and "
+             "ordered by how many agree.",
              "",
-             "The trailing `n/m` is roster support: of the m lineages in which "
-             "the word moves at all, n move it the way its column says. A word "
-             "at `33/33` is unanimous; one at `22/33` has eleven lineages "
-             "running it the other way.",
+             "`lineages` is n/m: of the m lineages in which the word moves at "
+             "all, n move it the way its column says. 44/50 is near-unanimous; "
+             "27/50 means twenty-three lineages run it the other way.",
              "",
-             "Words moving in fewer than %d lineages are omitted, and runs of "
+             "`rank` is the word's position in each pooled arm, and it is "
+             "independent of agreement -- a word can be near-unanimous and "
+             "barely move (`kill 44/50, 1 -> 2`) or move far on less agreement "
+             "(`shout 31/50, 25 -> 14`).",
+             "",
+             "Words moving in fewer than %d lineages are omitted, words whose "
+             "lineages split evenly are counted and omitted, and runs of "
              "underscores are stripped before pooling." % a.min_lineages,
              "", "---", ""]
         kept = 0
