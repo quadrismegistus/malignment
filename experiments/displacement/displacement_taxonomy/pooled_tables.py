@@ -152,7 +152,7 @@ def pooled(prompt, min_lineages=MIN_LINEAGES, top=40):
             {w: tuple(sup[w]) for w in keep}, n, meta.get("below_theta", 0))
 
 
-def table(pre, post, sup, top=12):
+def table(pre, post, sup, top=12, blind=None):
     """The consistency-led table. -> (text, n_withheld)
 
     ## WHY NOT `run._table_two_column`, WHICH THIS FILE USED YESTERDAY
@@ -201,33 +201,56 @@ def table(pre, post, sup, top=12):
             continue
         (fall if f > r else rise).append(w)
 
-    def block(ws, head, idx):
+    def block(ws, head, idx, flip=False):
+        #: **THE SIGNED RANK DELTA LEAKS THE DIRECTION THE LABELS HIDE.** With
+        #: the columns relabelled A and B, `+11` still says "rose" because the
+        #: arrow runs pre -> post whatever the heading. Under `blind` the rank
+        #: pair is reported in the order the COLUMNS are presented, so the arrow
+        #: means "in this condition -> in the other" and carries no arm.
+        lo, hi = (ra, rb) if flip else (rb, ra)
         ws = sorted(ws, key=lambda w: (-sup[w][idx], -(sup[w][0] + sup[w][1]), w))
         out = ["%-16s %10s   %s" % (head, "lineages", "rank")]
         for w in ws[:top]:
             f, r = sup[w]
-            a = "%3d" % rb[w] if w in rb else "  -"
-            b = "%3d" % ra[w] if w in ra else "  -"
-            d = ("%+5d" % (rb[w] - ra[w])) if (w in rb and w in ra) else "    -"
+            a = "%3d" % lo[w] if w in lo else "  -"
+            b = "%3d" % hi[w] if w in hi else "  -"
+            d = ("%+5d" % (lo[w] - hi[w])) if (w in lo and w in hi) else "    -"
             out.append("  %-14s %6d/%-3d   %s -> %s %s"
                        % (w, sup[w][idx], f + r, a, b, d))
         return "\n".join(out)
 
-    txt = "%s\n\n%s" % (block(fall, "FALLS IN MOST", 0),
-                        block(rise, "RISES IN MOST", 1))
+    #: **THE BLIND IS RESTORED BY RELABELLING, NOT LOST TO THE RENDERING.**
+    #: A first version headed the columns FALLS and RISES, which hands a rater
+    #: the direction and breaks `PROTOCOL_naming.md`: "Name the relation, not
+    #: the instances. A construct pinned to a direction is pinned to a fact
+    #: about which lineages we happen to have." The columns carry no direction
+    #: in themselves, so `blind` labels them A and B and flips which is which
+    #: per frame on a seeded coin. The agreement count survives the flip intact
+    #: -- "44 of the 50 move it the way its column says" reads the same either
+    #: way round -- so the evidence is kept and the direction is not.
+    if blind is None:
+        txt = "%s\n\n%s" % (block(fall, "FALLS IN MOST", 0),
+                            block(rise, "RISES IN MOST", 1))
+    else:
+        #: when the RISE column is presented first, its ranks are reported
+        #: post -> pre so that both columns read "this condition -> the other"
+        first, second = ((fall, 0, False), (rise, 1, True)) if blind \
+            else ((rise, 1, True), (fall, 0, False))
+        txt = "%s\n\n%s" % (block(first[0], "GROUP A", first[1], first[2]),
+                            block(second[0], "GROUP B", second[1], second[2]))
     if tied:
         txt += ("\n\n%d word(s) omitted: the lineages split evenly on which way "
                 "they move." % tied)
     return txt, tied
 
 
-def render(prompt, min_lineages=MIN_LINEAGES, top=12):
+def render(prompt, min_lineages=MIN_LINEAGES, top=12, blind=None):
     """The consistency table for one pooled frame. -> (text, n_units) or None"""
     got = pooled(prompt, min_lineages)
     if not got:
         return None
     pre, post, sup, n, _bt = got
-    text, _tied = table(pre, post, sup, top)
+    text, _tied = table(pre, post, sup, top, blind)
     return text, n
 
 
@@ -237,6 +260,7 @@ def main(argv=None):
     ap.add_argument("--frame", default=None, help="prefix of one frame")
     ap.add_argument("--min-lineages", type=int, default=MIN_LINEAGES)
     ap.add_argument("--export", action="store_true")
+    ap.add_argument("--seed", type=int, default=20260920)
     ap.add_argument("--out", default=OUT)
     a = ap.parse_args(argv)
     fs = frames()
@@ -254,32 +278,67 @@ def main(argv=None):
               "position in each pooled arm.)" % n)
         return 0
     if a.export:
-        L = ["# %d frames, pooled over the endpoint lineages" % len(fs), "",
-             "Each table is ONE sentence with the fifty base->aligned pairs "
-             "pooled. A word is placed by WHICH WAY MOST LINEAGES MOVE IT and "
-             "ordered by how many agree.",
+        import random
+        rnd = random.Random(a.seed)
+        L = ["# %d sentences" % len(fs), "",
+             "Below are measurements of how word probabilities moved in fifty "
+             "pairs of language models, each pair trained under two conditions, "
+             "A and B. Each entry is ONE sentence with a blank, and the words "
+             "that move at that blank.",
              "",
-             "`lineages` is n/m: of the m lineages in which the word moves at "
-             "all, n move it the way its column says. 44/50 is near-unanimous; "
-             "27/50 means twenty-three lineages run it the other way.",
+             "**You are not told which condition is which**, and the two groups "
+             "are labelled arbitrarily per sentence. The relation you name must "
+             "read the same either way round: say what separates the two groups, "
+             "never which direction anything moved.",
              "",
-             "`rank` is the word's position in each pooled arm, and it is "
-             "independent of agreement -- a word can be near-unanimous and "
-             "barely move (`kill 44/50, 1 -> 2`) or move far on less agreement "
-             "(`shout 31/50, 25 -> 14`).",
+             "`lineages` is n/m: of the m model pairs in which the word moves at "
+             "all, n move it toward that word's own group. 44/50 is near "
+             "unanimous; 27/50 means twenty-three pairs move it the other way. "
+             "**This is the evidence.** Say which words you are relying on and "
+             "how strongly they are attested.",
              "",
-             "Words moving in fewer than %d lineages are omitted, words whose "
-             "lineages split evenly are counted and omitted, and runs of "
-             "underscores are stripped before pooling." % a.min_lineages,
+             "`rank` is the word's position among the words at that blank, in "
+             "its own condition and then in the other. It is MAGNITUDE, not "
+             "evidence, and the two are independent: a word can be near "
+             "unanimous and barely move position (`kill 44/50, 1 -> 2`) or move "
+             "far on much less agreement (`shout 31/50, 14 -> 25`). Do not read "
+             "a small rank move as a weak finding.",
+             "", "## Your job", "",
+             "For each sentence, say what relation holds between its two groups.",
+             "",
+             "Name the RELATION, not the two lists. `Both groups are verbs of "
+             "contact` describes them; `the act is aimed at a person in one "
+             "group and at an object in the other` relates them. Two groups "
+             "drawn from the same subject matter will look alike, and separating "
+             "a shared SUBJECT from a shared MOVEMENT is most of the work here.",
+             "",
+             "For each sentence give:",
+             "",
+             "    id          the sentence's id",
+             "    name        a short label for the relation itself",
+             "    statement   one or two sentences stating the movement in",
+             "                general terms, at a level someone who had not seen",
+             "                this sentence could still apply",
+             "    evidence    which words you relied on and how well attested",
+             "    confidence  high, medium or low -- low where the two groups",
+             "                have no relation you can state, which is a real",
+             "                and useful answer",
+             "",
+             "Order is randomised (seed %d); ids are stable across seeds." % a.seed,
+             "",
+             "Words moving in fewer than %d pairs are omitted, words whose pairs "
+             "split evenly are counted and omitted, and runs of underscores are "
+             "stripped before pooling." % a.min_lineages,
              "", "---", ""]
         kept = 0
         for f in fs:
-            got = render(f, a.min_lineages)
+            got = render(f, a.min_lineages, blind=rnd.random() < 0.5)
             if not got:
                 continue
             kept += 1
             text, n = got
-            L += ["## %s ___" % f, "", "```", text, "```", ""]
+            L += ["**S%03d**" % kept, "", "> %s ___" % f, "",
+                  "```", text, "```", ""]
         txt = "\n".join(L)
         os.makedirs(os.path.dirname(a.out), exist_ok=True)
         open(a.out, "w").write(txt)
