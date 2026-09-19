@@ -86,34 +86,58 @@ def frames():
     return sorted(seen)
 
 
-def pooled(prompt, min_lineages=MIN_LINEAGES):
-    """(pre, post, support) for one frame over the 50 endpoints. -> tuple
+def pooled(prompt, min_lineages=MIN_LINEAGES, top=40):
+    """(pre, post, support, n_units, n_below_theta) for one frame. -> tuple
 
-    `support[w]` is (lineages where it falls, lineages where it moves at all) --
-    the evidence the per-lineage design used to make a reader look for, reduced
-    to a number and printed beside the word.
+    ## SOURCED FROM `movement.contrast`, NOT FROM A HAND-WRITTEN QUERY
+
+    A first version copied `crosslineage.tables()`'s query, `merged=1` included.
+    That is a PROVENANCE filter -- `merged` is `max(topup)`, so it means "a topup
+    exists for this cell" -- and on "She was so angry she wanted to" it silently
+    cut the roster from 50 endpoint pairs to 43. Six of the seven lost pairs have
+    no topup on EITHER arm, so they were internally consistent and measured; they
+    were dropped for having been measured once rather than twice. `crosslineage`
+    at least names the exclusion in its output; this reported "43 lineages" and
+    left a reader to assume that was the roster. RH: use movement.py.
+
+    `movement.contrast` returns all 50, and two of its properties matter here:
+    selection is DECLARED and blind to movement (`select_union` ranks each rung
+    by its own mass, never by the difference), and a word missing from a rung
+    comes back as a measured ZERO with `below_theta` counting how many -- "below
+    theta" means smaller than 0.001, not absent, and a table that cannot tell
+    those apart draws a truncation at the floor.
+
+    `support[w]` is (falls, rises) over the units where the word moves at all --
+    the evidence the per-lineage design made a reader look for, reduced to a
+    number and printed beside the word.
     """
-    from malignment import roster, vectors as V
+    from malignment import roster, movement as M
     ep, _ = roster.endpoints()
-    rows = V.rows("SELECT model, groupArray(word) AS ws, groupArray(p) AS ps "
-                  "FROM twp_words_v4_best WHERE prompt={p:String} "
-                  "AND merged=1 GROUP BY model", p=prompt)
-    W = {}
+    units = [(a.split("/")[-1], [b, a]) for b, a in sorted(ep.items())]
+    rows, meta = M.contrast(prompt, units, top=top, select_union=True)
+    by = collections.defaultdict(dict)
     for r in rows:
-        d = {w: p for w, p in zip(r["ws"], r["ps"]) if not BLANK.match(w)}
-        t = sum(d.values())
-        if t > 0:
-            W[r["model"]] = {w: p / t for w, p in d.items()}
+        if BLANK.match(r["word"]):
+            continue
+        by[r["unit"]][(r["position"], r["word"])] = r["p"]
     pre = collections.defaultdict(float)
     post = collections.defaultdict(float)
     sup = collections.defaultdict(lambda: [0, 0])
     n = 0
-    for b, a in ep.items():
-        if b not in W or a not in W:
+    for unit, d in by.items():
+        #: **NORMALISED WITHIN THE UNIT BEFORE POOLING**, as
+        #: `crosslineage.tables` does before rendering: a lineage that happens to
+        #: put more total mass on the selected words would otherwise weigh more
+        #: in the mean for that reason alone.
+        tb = sum(v for (pos, _w), v in d.items() if pos == 0)
+        ta = sum(v for (pos, _w), v in d.items() if pos == 1)
+        if tb <= 0 or ta <= 0:
             continue
         n += 1
-        for w in set(W[b]) | set(W[a]):
-            x, y = W[b].get(w, 0.0), W[a].get(w, 0.0)
+        ws = {w for _pos, w in d}
+        for w in ws:
+            x = d.get((0, w), 0.0) / tb
+            y = d.get((1, w), 0.0) / ta
             pre[w] += x
             post[w] += y
             if x != y:
@@ -125,7 +149,7 @@ def pooled(prompt, min_lineages=MIN_LINEAGES):
     keep = {w for w in sup if sum(sup[w]) >= min_lineages}
     return ({w: v for w, v in pre.items() if w in keep},
             {w: v for w, v in post.items() if w in keep},
-            {w: tuple(sup[w]) for w in keep}, n)
+            {w: tuple(sup[w]) for w in keep}, n, meta.get("below_theta", 0))
 
 
 def render(prompt, min_lineages=MIN_LINEAGES, support=True):
@@ -134,7 +158,7 @@ def render(prompt, min_lineages=MIN_LINEAGES, support=True):
     got = pooled(prompt, min_lineages)
     if not got:
         return None
-    pre, post, sup, n = got
+    pre, post, sup, n, _bt = got
     text, data = R._table_two_column(pre, post, rows=True)
     if not support:
         return text, n
