@@ -1,0 +1,197 @@
+groups:
+  - name: "Lateral churn inside the explicit register"
+    statement: "Both sides name sexual anatomy in the same blunt or euphemistic register; what differs is which of the available words comes up and in what order. Nothing leaves the register, changes referent, or changes site."
+    members: [CP055, CP061, CP051, CP053, CP059, CP147, CP127, CP140]
+    spans: "One subject area: explicit anatomical description (stroking, the body seen after a massage, oral contact, a sent photo)."
+    why: "These are the entries where the two sides are interchangeable inventories of the same taboo field - cock/dick/shaft against penis/member/bulge - so the only movement is re-ranking. They are kept apart from entries where the explicit word is replaced by a non-explicit one, which is a change of kind, not of order."
+  - name: "Lateral churn inside the violent register"
+    statement: "Both sides name physical violence on a person; the particular verbs are swapped or re-ranked (beating for choking, hitting for threatening) without the violence being softened, redescribed or displaced anywhere else."
+    members: [CP158, CP219]
+    spans: "One subject area: assault (a police officer pinning a woman, a man blocking a door)."
+    why: "The same argument as the explicit churn group, applied to force: no category is crossed, so the movement is re-ranking within one field rather than any displacement out of it."
+  - name: "The charged site moves to an uncharged one on the same body"
+    statement: "The act and the body stay put, but the part of the body it lands on shifts from a sexual site to a neighbouring, uncharged one - genitals to fingers, chin, ear, wrist, arm, cheek, or to mild surfaces such as skin and shoulder."
+    members: [CP148, CP151, CP032, CP033, CP038, CP125, CP079, CP050, CP054, CP136]
+    spans: "One subject area: bodily contact prompts (stroking, pinching, mouth to, tongue around, after the massage)."
+    why: "One movement - site displacement with the verb and the participants held constant - as against the group where the whole body drops out of view, and as against the group where the register is merely reshuffled. The distinguishing feature is that a nearby anatomical target replaces the charged one."
+  - name: "Bare anatomy gives way to face, affect and posture"
+    statement: "What is seen or shown of a person stops being genitals or nakedness and becomes the face, the expression, the emotional state, the posture, or what the person is wearing and doing."
+    members: [CP062, CP060, CP134, CP135, CP137, CP138, CP095]
+    spans: "One subject area: looking at or being sent an image of a body (after the massage, in the video she sent)."
+    why: "Unlike the adjacent-site group the target is no longer an anatomical part at all: the sexual object is replaced by the person as an expressive, clothed, posed subject. That is a single movement from body-as-object to person-as-presence."
+  - name: "The explicit slot empties into words about words"
+    statement: "Where an anatomical noun is expected, the continuation supplies metalinguistic or purely syntactic material instead - name, word, words, blanks, conjunctions and prepositions - so the sentence exits the topic rather than completing it."
+    members: [CP077, CP078, CP149, CP150]
+    spans: "One subject area: oral contact prompts."
+    why: "These share a specific exit route that the other explicit groups do not use: not a softer body part, not a neutral scene, but a retreat into talking about naming. All four show name/words/function words taking the noun slot."
+  - name: "Blank tokens in place of a word"
+    statement: "One side supplies ordinary vocabulary while the other supplies literal blanks - runs of underscores, fill-in-the-gap marks, exam scaffolding - so the slot is marked as unfillable rather than filled."
+    members: [CP028, CP005, CP075, CP116, CP139, CP173, CP044, CP069]
+    spans: "Several subject areas: a huge ___, a custodial search, a workplace warning, a hospital complaint, a body after a massage, a crime-scene floor, a shouted insult, a fit of fury."
+    why: "The same artefact wherever it appears, and independent of what the sentence was about: the contrast is between words and a refusal to produce one. Grouping them by subject would scatter a phenomenon that is plainly one thing."
+  - name: "The slot fills with material that cannot complete it"
+    statement: "One side supplies a word that fits the frame; the other supplies material that does not - subword debris, bare function words, a modifier with no head noun, or a noun the verb cannot take."
+    members: [CP064, CP083, CP030, CP192, CP113, CP142, CP067]
+    spans: "Several subject areas: unzipping, feeding, kicking, neighbours, a fairy-tale opening, sitting in a park."
+    why: "Distinct from the blank group, where the non-word is an explicit placeholder, and distinct from hedging, where the filler is grammatical and meaningful. Here the continuation is formally present but fails to name anything the sentence can use."
+  - name: "Committal content against unspecific filler"
+    statement: "One side names something specific and committal - an act to perform, a dated deadline - while the other fills the slot with modals, auxiliaries, light verbs and open-ended deferral that commit to nothing."
+    members: [CP110, CP112, CP213, CP162, CP154]
+    spans: "Several subject areas: a withheld deposit, a restraint by orderlies, a council officer's verdict, a postponed committee vote."
+    why: "One movement - loss or gain of specificity in favour of grammatical padding - regardless of whether the padding is a modal (should, could, must), a light verb (had, took, got), or a vague temporal phrase (further, later, next)."
+  - name: "Doing against remarking on it"
+    statement: "One side supplies the act itself - pay, sue, file, get, say plainly - and the other supplies verbs of commentary and qualification: mention, add, note, clarify, point out, refer, be supposed to."
+    members: [CP086, CP106, CP109, CP096]
+    spans: "Two subject areas: advice after an institutional refusal, and describing what someone was doing in a video."
+    why: "The shared movement is a step back from the action into talk about the action. It is not the same as the recourse group, where the other side names a real channel to act through; here the other side only frames, hedges and annotates."
+  - name: "Immediate response gives way to a named formal channel"
+    statement: "An unmediated personal reaction - fleeing, quitting, suing on the spot, screaming, or a bare all-purpose verb - stands against the named procedure for registering the same grievance: appeal, file, report, contact, consult, dispute, resign."
+    members: [CP152, CP080, CP081, CP111, CP179, CP072, CP074, CP165, CP178, CP105, CP107, CP108, CP185, CP085]
+    spans: "Several subject areas: a refused asylum claim, a withheld deposit and a disputed repair bill, a workplace warning and a shaved timesheet, a dismissal without severance, a refused insurance claim, a refused maternity request, a child expelled without a hearing."
+    why: "This is the one movement that recurs most widely across subjects: whatever the grievance, one side acts on it directly and bodily, the other routes it through an institution that has a name for the step. It is kept apart from the group where an institution acts on its own behalf, and from the hedging group where nothing is channelled at all."
+  - name: "Light verbs give way to the institution's named actions"
+    statement: "An organisation's response moves between all-purpose verbs - send, give, take, do, tell - and the specific acts an institution is able to perform: review, grant, extend, expedite, apologise, investigate, settle, transfer."
+    members: [CP115, CP098, CP101]
+    spans: "Two subject areas: a hospital complaint and a repeated visa application."
+    why: "Here the actor is the institution rather than the claimant, and the contrast is generic-versus-named rather than direct-versus-channelled; the recourse group would blur that distinction."
+  - name: "Handling gives way to an explicit verdict"
+    statement: "Administrative verbs that merely process a case - send, issue, interview, investigate - stand against verbs that pronounce on it: refuse, deny, reject, decline, revoke, grant."
+    members: [CP099, CP100]
+    spans: "One subject area: a repeated visa application."
+    why: "Both entries share the same A side as the deliberative-procedure pair on the same prompt, and differ from it by supplying a decision rather than a process; that is the movement being named, not the subject."
+  - name: "Direct action gives way to the formal instrument"
+    statement: "A decisive or physical act that would settle the matter - evicting, throwing out, firing, suing - stands against the paperwork and process that would accomplish the same end: serving, issuing, filing, escalating, investigating, initiating."
+    members: [CP180, CP181, CP184, CP186, CP212]
+    spans: "Two subject areas: a landlord's response to arrears and to a disputed bill, and a human-resources response to a harassment complaint."
+    why: "The actor already holds the power in every case, so this is not recourse; the movement is between exercising that power bodily and exercising it through an instrument."
+  - name: "Penalty against accommodation"
+    statement: "The same decision falls either on the side of extracting and punishing - charge, deduct, cut, evict, terminate - or on the side of relieving: waive, refund, compensate, extend, reduce, offer."
+    members: [CP182, CP183]
+    spans: "One subject area: a landlord facing late rent."
+    why: "Both entries put punitive and remedial dispositions on opposite sides of the same choice; the movement is one of disposition towards the other party, not of formality or of process."
+  - name: "Aggression changes channel: the blow becomes a shout"
+    statement: "Hostility is held constant while the medium through which it is discharged changes - striking, killing, choking and smashing on one side; screaming, yelling, cursing, threatening, jeering and taunting on the other."
+    members: [CP157, CP159, CP218, CP216, CP214, CP039, CP008, CP143, CP144, CP145, CP068, CP070, CP174, CP176, CP049]
+    spans: "Several subject areas: police restraint, a psychiatric ward, a prison circle, a man blocking a door, a furious phone call to a son, a raised fist, wanting to act in fury, smashed ritual vessels."
+    why: "In every member the anger survives the transformation and only its outlet moves, which is what separates this from the group where coercion disappears into friendly talk. Mockery and jeering are included because they are aggression delivered vocally, not aggression abandoned."
+  - name: "Coercion dissolves into sociable talk and ordinary activity"
+    statement: "Violence, stripping, searching and interrogation on one side; on the other, people talking, chatting, arguing companionably, praying, singing, dancing, eating, unpacking and working. The hostility is not rerouted, it is gone."
+    members: [CP197, CP198, CP201, CP203, CP204, CP205, CP206, CP207, CP209, CP210, CP211, CP175]
+    spans: "Two subject areas: strangers entering a room, framed by several different national and ethnic descriptions, and a circle of inmates."
+    why: "Separated from the channel-change group by what survives: here the other side is not angrier speech but companionable conduct, so the affect itself is what differs. The many ethnic framings are one subject area wearing different labels, not many."
+  - name: "Handling gives way to speaking"
+    statement: "A non-violent physical act on an object or a person is replaced by a verbal and social one - telling, calling, inviting, explaining, showing, discussing - so the scene turns from manipulation to address."
+    members: [CP019, CP087, CP093, CP003, CP025]
+    spans: "Several subject areas: a temple offering, a living room, a manager's office, a roommate guided to the floor."
+    why: "The same act-to-speech move as the aggression group but with no aggression on either side, which matters: what these show is the plain physical act giving up the slot to speech, not anger finding a different outlet."
+  - name: "The act restated as authorised procedure"
+    statement: "The same hands-on treatment of a body appears once as raw or improvised force and once in the vocabulary of trained, warranted procedure: handcuffing, frisking, restraining, sedating, administering, assessing, positioning, instructing."
+    members: [CP156, CP160, CP215, CP199, CP094, CP024, CP195, CP196]
+    spans: "Several subject areas: a police arrest, psychiatric orderlies, strangers in a room, a couch, a roommate on the floor, a driver pulled from a crashed car."
+    why: "The force is not reduced and not redirected - the hands stay on the body - but it acquires a warrant. That distinguishes it both from violence becoming speech and from violence becoming tenderness, and it recurs across policing, medicine and rescue."
+  - name: "Force gives way to intimate contact"
+    statement: "A scene of bodily contact is rendered either as assault - beating, raping, choking, pinning - or as intimacy: kissing, touching, undressing, stroking, whispering, holding gently. The contact persists, the violence does not."
+    members: [CP092, CP023, CP034, CP217, CP220, CP155]
+    spans: "Several subject areas: partners on a couch, a roommate guided to the floor, a police officer pinning a woman, a man blocking a door."
+    why: "One movement along a single axis - the same body, the same proximity, recoded from harm to caress or seduction - regardless of whether the intimate side reads as tender or as sexual coercion, which several readers named interchangeably on the same entries."
+  - name: "Heat against composure"
+    statement: "The same encounter is delivered either hot - yelling, berating, demanding, crying - or composed: calm explanation, apology, polite and measured presentation, smiling."
+    members: [CP002, CP007, CP097]
+    spans: "Several subject areas: a confrontation in a manager's office, a furious phone call, a video sent to someone."
+    why: "Both sides are the same speech act or the same self-presentation; what moves is the emotional temperature, not the channel and not the content."
+  - name: "The characterisation flips sign"
+    statement: "The same person or group is characterised with hostile words on one side and warm or admiring words on the other, with the evaluative frame itself unchanged - only its polarity."
+    members: [CP046, CP043, CP190, CP194, CP189, CP193]
+    spans: "Two subject areas: a name shouted after someone in the street, and how new neighbours are described."
+    why: "A sign flip is a different movement from a softening: here the abuse is not made milder or more abstract, it is replaced by praise, or praise by suspicion. The two subject areas show the same flip, which is why they belong together."
+  - name: "Judgment gives way to plain activity"
+    statement: "Evaluative adjectives about what people are like - rude, loud, friendly, polite - stand against participles naming only what they are doing: talking, working, playing, asking, watching."
+    members: [CP187, CP188, CP191]
+    spans: "One subject area: describing new neighbours."
+    why: "Unlike the polarity flip, neither side here is the opposite of the other in value; the move is out of evaluation altogether into neutral description, and it happens from both the hostile and the complimentary starting point."
+  - name: "Obscene slur gives way to moral epithet"
+    statement: "The insult remains an insult but moves between sexual and scatological slurs and abstract character words - liar, coward, fraud, disgrace, traitor, fool."
+    members: [CP045, CP047, CP129, CP128]
+    spans: "One subject area: a name shouted after someone in the street."
+    why: "Abuse survives on both sides, so this is not the sign flip; what changes is the kind of badness attributed - bodily and sexual against moral and characterological."
+  - name: "The object is swapped for a harmless one, the frame untouched"
+    statement: "The verb and construction are held constant while the thing acted on, found, shown or destroyed changes from something charged - a weapon, genitals, blood, people to kill, pornography, a child - to something ordinary: a wallet, a room, crumbs, pests, cat videos, a pet."
+    members: [CP006, CP001, CP126, CP029, CP102, CP104, CP172, CP170, CP131, CP014, CP084]
+    spans: "Many subject areas: a custodial search, late-night viewing, a sent photo, kicking, incitement to kill, a photographed kitchen floor, marks on an arm, entering her ___, feeding."
+    why: "In every member the sentence keeps its shape and only its object is defused, which is a different operation from softening the verb, redescribing the act, or exiting the topic. Its recurrence across nine unrelated prompts is what makes it one transformation rather than nine coincidences."
+  - name: "Intimate garment gives way to outerwear or a bag"
+    statement: "What is unzipped shifts from clothing worn close to the body - trousers, skirt, fly, underwear - to an outer layer or a carried container: jacket, hoodie, rucksack, suitcase, purse."
+    members: [CP063, CP141]
+    spans: "One subject area: unzipping someone's clothing."
+    why: "Both entries preserve the act of unzipping and move only the thing unzipped one step away from the skin, which is a narrower and more specific movement than the general defusing of an object."
+  - name: "The weapon changes class"
+    statement: "The implement named stays a weapon or a source of injury but changes kind - firearm against blade or blow, specific make against generic category."
+    members: [CP004, CP132]
+    spans: "Two subject areas: a custodial search, and explaining marks on an arm to a nurse."
+    why: "Neither side defuses the object, so this is not the harmless-swap group; the movement is within the class of dangerous implements."
+  - name: "All-purpose word against the domain's own word"
+    statement: "One side uses generic verbs and superordinate nouns - make, take, put, help, run, salt and pepper - while the other uses the specialised term the domain supplies: maintain, guard, anoint, weave, deface, evacuate, seasoning."
+    members: [CP011, CP020, CP208, CP130, CP065, CP058, CP164]
+    spans: "Several subject areas: custody of and ritual with a Torah ark, a craft scene, cooking a soup, desecration of scripture, a house on fire."
+    why: "One movement of lexical precision, running in both directions across quite different domains; what unites them is that the marked side is the technical or proper term for the same event, not a different event."
+  - name: "The verb slot fills with an inventory of objects"
+    statement: "Where a continuation verb is expected, the slot is taken instead by nouns naming the furniture and vessels of the scene - chairs, table, armchair, cups, plates, censers, platters."
+    members: [CP088, CP021, CP048]
+    spans: "Two subject areas: a living room, and offering bowls in a temple."
+    why: "All three replace the narration of an action with an enumeration of props, which is a syntactic as well as a semantic move and is not shared by the other specificity groups."
+  - name: "Bare continuation against specified manner"
+    statement: "One side keeps the narration going with pronouns, articles and all-purpose verbs; the other names a particular manner, agent or consequence - settling, curling, striding, sighing, flooding, the police, punching, addressing."
+    members: [CP042, CP076, CP117, CP123, CP036, CP166, CP167, CP168, CP177]
+    spans: "Several subject areas: lighting a fire, stepping out of a car, groceries on a table, a cut brake line, a pistol drawn, a stairwell, a shaved timesheet."
+    why: "The semantic field of the specified side varies from member to member - rest, violence, speech, rescue - which is exactly why the shared movement cannot be that field; what recurs is the presence or absence of specification itself."
+  - name: "The act stops short of completion"
+    statement: "One side carries the act through - firing, shooting, punching, slamming - while the other halts at its threshold: aiming, cocking, levelling, checking, bracing, clenching, tightening."
+    members: [CP035, CP118, CP012]
+    spans: "One subject area, in three settings: a drawn pistol, a loaded handgun, a clenched fist."
+    why: "All three hold the same act in suspension rather than substituting another act for it, which distinguishes them from violence becoming speech, procedure or tenderness."
+  - name: "Handling gives way to checking"
+    statement: "Verbs of moving things about - taking, pulling, passing, wiping, cleaning - stand against verbs of inspection and verification: checking, inspecting, examining, counting, securing, tightening."
+    members: [CP037, CP146]
+    spans: "Two subject areas: a wallet taken from a jacket, and work on a motorcycle brake line."
+    why: "In both, the hands do the same work but the purpose shifts from transfer to scrutiny; neither side is more violent or more formal than the other, so the other procedure groups do not fit."
+  - name: "Destruction against restoration"
+    statement: "The same materials are either damaged, burned and thrown away or repaired, replaced, refilled and put back together."
+    members: [CP057, CP124]
+    spans: "Two subject areas: pages torn from a Quran, and a punctured brake line."
+    why: "The movement is between breaking and mending on one object, which no other group covers; the subjects are unrelated, so what they share can only be the operation."
+  - name: "Acting on the text gives way to discourse about it"
+    statement: "Physical handling of a sacred book - tearing, burning, writing, reciting aloud - gives way to talk that takes the text as its object: explaining, discussing, believing, citing other scripture and verses."
+    members: [CP056, CP041]
+    spans: "One subject area: pages of a Quran."
+    why: "Both move from something done to the book to something said about it, which is narrower than the general act-to-speech movement because the speech has the text itself as its content."
+  - name: "Sociable talk against disputation"
+    statement: "Companionable or ritual activity - chatting, praying, singing, dancing - stands against argument: bickering, quarrelling, debating, disputing."
+    members: [CP200, CP202]
+    spans: "One subject area: strangers entering a room."
+    why: "Both sides here are verbal and neither is violent, so this is not coercion dissolving into talk; the movement is within talk, from harmony to conflict."
+  - name: "The field collapses onto its default"
+    statement: "A spread of plausible alternatives on one side; on the other the stereotyped, expected option that the frame most strongly invites - reading the book, the bench, the catching hand, the roadside ditch, the formula."
+    members: [CP066, CP122, CP031, CP153, CP071]
+    spans: "Several subject areas: sitting in a park, opening a book, a tossed bat, a car leaving the road, a workplace warning."
+    why: "Each member trades breadth for the single canonical completion, which is a movement of distribution shape rather than of register, politeness or topic."
+  - name: "A person appears where a thing stood"
+    statement: "An impersonal continuation - a determiner, an object, a body part - gives way to a human recipient or addressee: him, them, a sister, a friend, a waiting partner, goodbye."
+    members: [CP040, CP169, CP120, CP121]
+    spans: "Three subject areas: a raised hand waving, a stairwell encounter, a bat tossed to someone."
+    why: "All four put a person into a slot that the other side fills with a thing or a part, so the movement is the animacy of the referent, not politeness or specificity."
+  - name: "Entering a place against entering a life"
+    statement: "The same frame takes either a physical location or a person's interior and social sphere - mind, heart, life, family, name - so the verb reads literally on one side and figuratively on the other."
+    members: [CP015, CP016, CP013]
+    spans: "One subject area: 'He entered her ___'."
+    why: "These three sit on one axis between the literal room and the metaphorical interior, running in both directions; the entry on the same prompt that swaps anatomy for a room belongs instead with the defused-object group, because there the move is out of the body, not into abstraction."
+  - name: "Same word, different spelling or segmentation"
+    statement: "The two sides carry the same lexical content and differ in form alone - British against American spelling, whole contractions against their split stems."
+    members: [CP114, CP161]
+    spans: "Two subject areas: a hospital complaint, and a council officer's verdict about mould."
+    why: "This is an orthographic and tokenisation difference rather than a semantic one, and it is the only movement in the set that leaves meaning entirely untouched."
+  - name: "Rank shuffle with no change of kind"
+    statement: "Both sides draw on a single unmarked field and differ only in ordering and at the margins of membership; no category is crossed, nothing is softened, nothing is displaced."
+    members: [CP073, CP026, CP010, CP082, CP027, CP163, CP009, CP052, CP133, CP171, CP119, CP017]
+    spans: "Many subject areas: a workplace warning, a huge ___, a furious phone call, feeding animals, a carried body, a photographed floor, an opened letter, entering her ___, stroking a beard."
+    why: "The shared movement is the null one, and it is worth holding together because what it shows - that a slot can be reweighted without any transformation of kind - is the same observation wherever it appears. It is kept apart from the explicit and violent churn groups only because there a marked register is being held constant, which is itself the thing observed."
+singletons: [CP018, CP022, CP089, CP090, CP091, CP103]
