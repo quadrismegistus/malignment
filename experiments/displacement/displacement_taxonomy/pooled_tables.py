@@ -69,10 +69,34 @@ sys.path.insert(0, ROOT)
 sys.path.insert(0, HERE)
 OUT = os.path.join(HERE, "results", "pooled_frames.md")
 BLANK = re.compile(r"^_+$")
-#: a word moving in fewer lineages than this is a near-singleton whose pooled
-#: rank is an accident of two or three models; `A(2/3)` and `place(1/2)` came
-#: back in the first sample and are what this exists to remove
-MIN_LINEAGES = 5
+#: **SELECT ON AGREEMENT, NOT ON MOVEMENT.** The first version filtered on how
+#: many lineages move a word AT ALL, which is inert: any non-zero delta counts,
+#: so nearly every word moves in nearly every lineage and the floor admitted
+#: 116 words at a median frame. What carries the evidence is how many move it
+#: the SAME WAY. At 35 of 50 -- seven lineages in ten -- the median frame gives
+#: 17 words and the 90th percentile 39, which is the range the per-lineage
+#: tables and the 907 file both sat in, reached by a stated rule rather than by
+#: a display cap.
+#:
+#: **BUT A SYMMETRIC FLOOR CANNOT BE SET HIGH, BECAUSE THE SIDES ARE NOT
+#: SYMMETRIC.** Falling is far more agreed than rising. Median words per side
+#: over sixteen frames: at a floor of 25, 56 falls against 9 rises; at 30, 33
+#: against 3; at 35, 17 against 0, and fifteen of the sixteen frames have fewer
+#: than three risers at all. A floor tuned to the falling side empties the
+#: rising one and leaves nothing to relate. So the floor sits at 25 -- half the
+#: roster -- and the asymmetry is carried by the AGREEMENT COLUMN, where a
+#: reader sees `scream 43/50` beside `hurt 29/50` and can weigh them, rather
+#: than by a row count that would hide it as absence.
+MIN_AGREE = 15
+#: **THE CANDIDATE POOL, WHICH WAS SILENTLY THE BINDING CONSTRAINT.** `top=40`
+#: was a default written with no reasoning behind it, and it was doing the
+#: selecting: it returned 45 words per frame, of which 44 cleared a floor of 5,
+#: so the floor was inert. Raising the pool to 200 leaves 93-141 words clearing
+#: a floor of 20 on the same frames -- well-attested movement that `top=40`
+#: discarded before any filter could see it. The pool is now large enough that
+#: the FLOOR decides, which is the only defensible arrangement: one stated rule
+#: doing the selection rather than an unstated number upstream of it.
+POOL = 200
 
 
 def frames():
@@ -86,171 +110,130 @@ def frames():
     return sorted(seen)
 
 
-def pooled(prompt, min_lineages=MIN_LINEAGES, top=40):
-    """(pre, post, support, n_units, n_below_theta) for one frame. -> tuple
+def pooled(prompt, min_agree=MIN_AGREE, top=POOL):
+    """(faller/riser/still counts per word) for one frame. -> tuple
 
-    ## SOURCED FROM `movement.contrast`, NOT FROM A HAND-WRITTEN QUERY
+    ## COUNTS THE CANONICAL CLASSIFICATION, NOT THE SIGN OF A DELTA
 
-    A first version copied `crosslineage.tables()`'s query, `merged=1` included.
-    That is a PROVENANCE filter -- `merged` is `max(topup)`, so it means "a topup
-    exists for this cell" -- and on "She was so angry she wanted to" it silently
-    cut the roster from 50 endpoint pairs to 43. Six of the seven lost pairs have
-    no topup on EITHER arm, so they were internally consistent and measured; they
-    were dropped for having been measured once rather than twice. `crosslineage`
-    at least names the exclusion in its output; this reported "43 lineages" and
-    left a reader to assume that was the roster. RH: use movement.py.
+    A first version pooled the arms and counted the SIGN of each lineage's
+    normalised change. `movement.py` says in as many words why that is wrong:
 
-    `movement.contrast` returns all 50, and two of its properties matter here:
-    selection is DECLARED and blind to movement (`select_union` ranks each rung
-    by its own mass, never by the difference), and a word missing from a rung
-    comes back as a measured ZERO with `below_theta` counting how many -- "below
-    theta" means smaller than 0.001, not absent, and a table that cannot tell
-    those apart draws a truncation at the floor.
+        Without the last line a "riser" is any word that went up, and every word
+        goes up a little when a faller's mass is removed. The null is what
+        separates redistribution from bookkeeping.
 
-    `support[w]` is (falls, rises) over the units where the word moves at all --
-    the evidence the per-lineage design made a reader look for, reduced to a
-    number and printed beside the word.
+    The CANONICAL rule tests a riser against the RENORMALISATION NULL -- `Q >
+    P * (R/S)`, more than the mass freed by the fallers explains -- and requires
+    a minimum probability and a minimum move on both sides. Sign-counting has
+    none of that, and the damage was not subtle. On "She was so angry she wanted
+    to" the canonical classes give `kill` 28 faller / 3 riser / 19 STILL where
+    sign-counting said 45 of 50 move it down: ten to twenty-five lineages per
+    word do not meaningfully move it at all, and every one was being counted.
+
+    **AND IT MANUFACTURED A FINDING.** Sign-counting made falling look far more
+    agreed than rising -- median 56 falls against 9 rises per frame -- and that
+    asymmetry is exactly what diffuse renormalisation produces: real fallers are
+    concentrated and agree, bookkeeping risers are spread thin over many words
+    and each one's count is small. Under the canonical rule the sides are even,
+    and `scream` at 39 risers is the largest count in EITHER direction.
+
+    ASYMMETRY THAT IS REAL AND MUST BE CARRIED: risers are tested against the
+    null and FALLERS ARE NOT. `movement.py`: "Nothing downstream may describe
+    fallers as 'beyond renormalisation' -- they are not tested for it, and a
+    word can halve purely because mass left the system elsewhere."
+
+    `still` is reported rather than dropped. A word unmoved in 26 of 50 lineages
+    is a different fact from one moved in all of them, and a denominator that
+    hides it turns "half the roster did nothing" into silence.
     """
-    from malignment import roster, movement as M
-    ep, _ = roster.endpoints()
-    units = [(a.split("/")[-1], [b, a]) for b, a in sorted(ep.items())]
-    rows, meta = M.contrast(prompt, units, top=top, select_union=True)
-    by = collections.defaultdict(dict)
+    from malignment import movement as M
+    rows = M.endpoint_movement(prompt=prompt, rule_version=4)
+    cnt = collections.defaultdict(lambda: collections.Counter())
+    pairs = set()
     for r in rows:
-        if BLANK.match(r["word"]):
+        w = r["word"]
+        if BLANK.match(w):
             continue
-        by[r["unit"]][(r["position"], r["word"])] = r["p"]
-    pre = collections.defaultdict(float)
-    post = collections.defaultdict(float)
-    sup = collections.defaultdict(lambda: [0, 0])
-    n = 0
-    for unit, d in by.items():
-        #: **NORMALISED WITHIN THE UNIT BEFORE POOLING**, as
-        #: `crosslineage.tables` does before rendering: a lineage that happens to
-        #: put more total mass on the selected words would otherwise weigh more
-        #: in the mean for that reason alone.
-        tb = sum(v for (pos, _w), v in d.items() if pos == 0)
-        ta = sum(v for (pos, _w), v in d.items() if pos == 1)
-        if tb <= 0 or ta <= 0:
-            continue
-        n += 1
-        ws = {w for _pos, w in d}
-        for w in ws:
-            x = d.get((0, w), 0.0) / tb
-            y = d.get((1, w), 0.0) / ta
-            pre[w] += x
-            post[w] += y
-            if x != y:
-                sup[w][0 if y < x else 1] += 1
-    if not n:
+        pairs.add((r["base"], r["aligned"]))
+        cnt[w][r.get("cls")] += 1
+    if not pairs:
         return None
-    pre = {w: v / n for w, v in pre.items()}
-    post = {w: v / n for w, v in post.items()}
-    keep = {w for w in sup if sum(sup[w]) >= min_lineages}
-    return ({w: v for w, v in pre.items() if w in keep},
-            {w: v for w, v in post.items() if w in keep},
-            {w: tuple(sup[w]) for w in keep}, n, meta.get("below_theta", 0))
+    keep = {w: (c.get("faller", 0), c.get("riser", 0), c.get("still", 0))
+            for w, c in cnt.items()
+            if max(c.get("faller", 0), c.get("riser", 0)) >= min_agree}
+    return keep, len(pairs)
 
 
-def table(pre, post, sup, top=12, blind=None):
-    """The consistency-led table. -> (text, n_withheld)
+def table(counts, top=20, blind=None):
+    """The classified table. -> (text, n_tied)
 
-    ## WHY NOT `run._table_two_column`, WHICH THIS FILE USED YESTERDAY
+    ## THREE COUNTS AND NO RANK
 
-    That renderer places and orders by MASS, and its docstring gives the reason
-    its two rules must agree: "filtering on one quantity and sorting on another
-    makes a column whose own ordering contradicts its heading."
+    An earlier version led with pooled RANK and then with the sign-count. Rank
+    is gone because it needed pooled probabilities, which are a second source
+    and a weaker one: correlation between |rank move| and agreement was ~0, and
+    a pooled rank is the rank of a MEAN, which flattens when lineages disagree
+    about absolute order -- `kill` moved ONE position while most of the roster
+    demoted it.
 
-    Pooled, mass is the wrong quantity, and it is wrong in a measurable way.
-    Correlation between |rank move| and lineage agreement, over three frames:
-    -0.02, +0.11, +0.14. They are ORTHOGONAL, and they order different words:
-    ranked by mass loss "She was so angry" gives kill, go, beat; ranked by
-    falling lineages it gives shoot, beat, kill -- and `shoot` falls in 45 of 50
-    while moving from rank 36 to 41, invisible under mass. Meanwhile `kill`
-    moves ONE position while 44 of 50 lineages push it down, because a pooled
-    rank is the rank of a MEAN and the mean flattens when lineages disagree
-    about absolute order.
+    The three counts are the whole table and are self-contained. `28 / 3 / 19`
+    says twenty-eight lineages demote the word, three promote it, nineteen leave
+    it where it was. A reader can weigh that without a second quantity, and
+    nothing here is a probability, so the measured objection to percentages --
+    155 uses of the mass vocabulary over 29 cells against 2 under ranks -- does
+    not arise.
 
-    So membership and order are both AGREEMENT here, which is the same rule the
-    original states, applied to the quantity that now carries the signal. The
-    headings say so: a column headed by mass whose rows are sorted by agreement
-    is the defect that rule exists to prevent.
+    ## BLINDED BY SWAPPING TWO COLUMNS
 
-    ## RANK IS KEPT, DEMOTED
-
-    At r ~ 0 it is independent information, not redundancy: `balls` (41/45, rank
-    24 -> 43) and `big` (40/49, rank 26 -> 29) are both near-unanimous and only
-    one is a large movement. Dropping it would lose that.
-
-    ## AND STILL NO PROBABILITIES
-
-    `_table_two_column` withholds them on measured grounds -- percentages
-    produced 155 uses of the mass vocabulary over 29 cells against 2 under
-    ranks. A count of LINEAGES is not a percentage; it is a count of models,
-    which is this campaign's unit of independence everywhere else.
+    `this` and `other` are the counts for the column's own direction and the
+    opposite one. Swapping them and the group labels is the whole blind: no
+    arrow, no sign, nothing that says which condition is the aligned arm.
+    `still` is invariant under the swap, which is one way to see that it carries
+    no direction.
     """
-    rb = {w: i + 1 for i, w in enumerate(sorted(pre, key=lambda w: -pre[w]))}
-    ra = {w: i + 1 for i, w in enumerate(sorted(post, key=lambda w: -post[w]))}
     fall, rise, tied = [], [], 0
-    for w, (f, r) in sup.items():
+    for w, (f, r, _s) in counts.items():
         if f == r:
-            #: **A TIE IS NOT A DIRECTION.** Half the lineages each way is the
-            #: one case where a pooled column would be inventing a sign, so it
-            #: is counted and dropped rather than assigned.
             tied += 1
             continue
         (fall if f > r else rise).append(w)
+    cut = {}
 
-    def block(ws, head, idx, flip=False):
-        #: **THE SIGNED RANK DELTA LEAKS THE DIRECTION THE LABELS HIDE.** With
-        #: the columns relabelled A and B, `+11` still says "rose" because the
-        #: arrow runs pre -> post whatever the heading. Under `blind` the rank
-        #: pair is reported in the order the COLUMNS are presented, so the arrow
-        #: means "in this condition -> in the other" and carries no arm.
-        lo, hi = (ra, rb) if flip else (rb, ra)
-        ws = sorted(ws, key=lambda w: (-sup[w][idx], -(sup[w][0] + sup[w][1]), w))
-        out = ["%-16s %10s   %s" % (head, "lineages", "rank")]
+    def block(ws, head, idx):
+        ws = sorted(ws, key=lambda w: (-counts[w][idx], counts[w][2], w))
+        cut[head] = (len(ws), max(0, len(ws) - top))
+        out = ["%-16s %6s %6s %6s" % (head, "this", "other", "still")]
         for w in ws[:top]:
-            f, r = sup[w]
-            a = "%3d" % lo[w] if w in lo else "  -"
-            b = "%3d" % hi[w] if w in hi else "  -"
-            d = ("%+5d" % (lo[w] - hi[w])) if (w in lo and w in hi) else "    -"
-            out.append("  %-14s %6d/%-3d   %s -> %s %s"
-                       % (w, sup[w][idx], f + r, a, b, d))
+            c = counts[w]
+            out.append("  %-14s %6d %6d %6d"
+                       % (w, c[idx], c[1 - idx], c[2]))
         return "\n".join(out)
 
-    #: **THE BLIND IS RESTORED BY RELABELLING, NOT LOST TO THE RENDERING.**
-    #: A first version headed the columns FALLS and RISES, which hands a rater
-    #: the direction and breaks `PROTOCOL_naming.md`: "Name the relation, not
-    #: the instances. A construct pinned to a direction is pinned to a fact
-    #: about which lineages we happen to have." The columns carry no direction
-    #: in themselves, so `blind` labels them A and B and flips which is which
-    #: per frame on a seeded coin. The agreement count survives the flip intact
-    #: -- "44 of the 50 move it the way its column says" reads the same either
-    #: way round -- so the evidence is kept and the direction is not.
     if blind is None:
         txt = "%s\n\n%s" % (block(fall, "FALLS IN MOST", 0),
                             block(rise, "RISES IN MOST", 1))
     else:
-        #: when the RISE column is presented first, its ranks are reported
-        #: post -> pre so that both columns read "this condition -> the other"
-        first, second = ((fall, 0, False), (rise, 1, True)) if blind \
-            else ((rise, 1, True), (fall, 0, False))
-        txt = "%s\n\n%s" % (block(first[0], "GROUP A", first[1], first[2]),
-                            block(second[0], "GROUP B", second[1], second[2]))
+        first, second = ((fall, 0), (rise, 1)) if blind else ((rise, 1), (fall, 0))
+        txt = "%s\n\n%s" % (block(first[0], "GROUP A", first[1]),
+                            block(second[0], "GROUP B", second[1]))
+    note = ["words clearing the threshold: %s"
+            % ", ".join("%s %d" % (h.split()[0].lower().rstrip(":"), n)
+                        for h, (n, _c) in cut.items())]
+    extra = sum(c for _n, c in cut.values())
+    if extra:
+        note.append("%d not shown" % extra)
     if tied:
-        txt += ("\n\n%d word(s) omitted: the lineages split evenly on which way "
-                "they move." % tied)
-    return txt, tied
+        note.append("%d omitted for an even split" % tied)
+    return txt + "\n\n" + "; ".join(note) + ".", tied
 
 
-def render(prompt, min_lineages=MIN_LINEAGES, top=12, blind=None):
-    """The consistency table for one pooled frame. -> (text, n_units) or None"""
-    got = pooled(prompt, min_lineages)
+def render(prompt, min_agree=MIN_AGREE, top=20, blind=None):
+    """The classified table for one frame. -> (text, n_pairs) or None"""
+    got = pooled(prompt, min_agree)
     if not got:
         return None
-    pre, post, sup, n, _bt = got
-    text, _tied = table(pre, post, sup, top, blind)
+    counts, n = got
+    text, _tied = table(counts, top, blind)
     return text, n
 
 
@@ -258,7 +241,9 @@ def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--frame", default=None, help="prefix of one frame")
-    ap.add_argument("--min-lineages", type=int, default=MIN_LINEAGES)
+    ap.add_argument("--min-agree", type=int, default=MIN_AGREE)
+    ap.add_argument("--top", type=int, default=20,
+                    help="rows shown per column; the remainder is counted in the table")
     ap.add_argument("--export", action="store_true")
     ap.add_argument("--seed", type=int, default=20260920)
     ap.add_argument("--out", default=OUT)
@@ -268,14 +253,14 @@ def main(argv=None):
         hit = [f for f in fs if f.lower().startswith(a.frame.lower())]
         if len(hit) != 1:
             raise SystemExit("%d frames match %r" % (len(hit), a.frame))
-        got = render(hit[0], a.min_lineages)
+        got = render(hit[0], a.min_agree, a.top)
         if not got:
             raise SystemExit("no pooled arms for %r" % hit[0])
         text, n = got
         print("%s ___\n\n%s" % (hit[0], text))
-        print("\n(%d lineages. `lineages` is how many of those in which the word "
-              "moves at all\n move it the way its column says; `rank` is its "
-              "position in each pooled arm.)" % n)
+        print("\n(%d lineage pairs. `this` is how many classify the word the way "
+              "its column says,\n `other` how many classify it the opposite way, "
+              "`still` how many leave it unmoved.)" % n)
         return 0
     if a.export:
         import random
@@ -291,18 +276,20 @@ def main(argv=None):
              "read the same either way round: say what separates the two groups, "
              "never which direction anything moved.",
              "",
-             "`lineages` is n/m: of the m model pairs in which the word moves at "
-             "all, n move it toward that word's own group. 44/50 is near "
-             "unanimous; 27/50 means twenty-three pairs move it the other way. "
-             "**This is the evidence.** Say which words you are relying on and "
-             "how strongly they are attested.",
+             "For each word, `this` is how many of the fifty pairs move it "
+             "toward that word's own group, `other` how many move it toward the "
+             "other group, and `still` how many leave it unmoved. **These "
+             "counts are the evidence.** A word at 28/3/19 is moved one way by "
+             "twenty-eight pairs and the other way by three; one at 18/13/19 is "
+             "nearly a coin toss. Say which words you are relying on and how "
+             "well attested they are.",
              "",
-             "`rank` is the word's position among the words at that blank, in "
-             "its own condition and then in the other. It is MAGNITUDE, not "
-             "evidence, and the two are independent: a word can be near "
-             "unanimous and barely move position (`kill 44/50, 1 -> 2`) or move "
-             "far on much less agreement (`shout 31/50, 14 -> 25`). Do not read "
-             "a small rank move as a weak finding.",
+             "A word counts as moved only if it passes a minimum probability, "
+             "moves by more than a threshold, and -- on the side that gains -- "
+             "gains MORE than the mass freed by the words that lost can "
+             "explain. Without that last test every word gains a little "
+             "whenever a common word loses, and the table fills with "
+             "bookkeeping.",
              "", "## Your job", "",
              "For each sentence, say what relation holds between its two groups.",
              "",
@@ -332,7 +319,7 @@ def main(argv=None):
              "", "---", ""]
         kept = 0
         for f in fs:
-            got = render(f, a.min_lineages, blind=rnd.random() < 0.5)
+            got = render(f, a.min_agree, a.top, blind=rnd.random() < 0.5)
             if not got:
                 continue
             kept += 1
