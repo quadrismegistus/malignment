@@ -1,0 +1,197 @@
+groups:
+  - name: "Deed becomes utterance"
+    statement: "The physical act in the slot is replaced by a speech act or communicative gesture: striking, smashing, handling, entering and restraining stand against shouting, telling, taunting, chatting, pointing and explaining. Tone is not part of the movement; the utterance may be hostile, neutral or warm."
+    members: [CP039, CP049, CP174, CP176, CP157, CP159, CP218, CP216, CP214, CP093, CP168, CP019, CP087, CP025, CP003]
+    spans: "several: raised fist, smashed offering bowls, prison inmates, cop restraint, blocked door, orderlies, partner on couch, landlord on stairwell, filled offering bowls, cushions on couch, roommate on floor, manager's office"
+    why: "In every member one side is a bodily deed and the other side is vocal or gestural; the deed is violent in some prompts and mundane in others, and the utterance ranges from jeering to guidance, but that variation is subject matter, not movement. CP003 has the sides reversed and is admitted under the direction-neutral rule."
+  - name: "Self-help gives way to formal process"
+    statement: "Whatever the party would do on its own initiative, whether evicting, suing, quitting, screaming, firing, or nothing in particular, gives way to the vocabulary of formal channels: file, serve, issue, appeal, contact, consult, report, investigate, negotiate."
+    members: [CP181, CP184, CP180, CP186, CP212, CP105, CP111, CP179, CP165, CP178, CP108, CP107, CP185, CP085]
+    spans: "several: landlord and late rent, landlord and repairs, HR complaint, maternity leave, kept deposit, shaved timesheet, insurance refusal, school expulsion, firing without severance"
+    why: "The destination is the same in every member, the institutional procedure that stands between the party and its grievance; the starting point varies from physical self-help to outburst to generic modals, and that variation is what the prompts differ on, not what the transformation does."
+  - name: "Coercion gives way to conviviality"
+    statement: "Hostile physical action on others, beating, stripping, searching, interrogating, stands against sociable group activity: talking, chatting, discussing, singing, dancing, praying, playing. The whole scene changes valence, not merely its modality."
+    members: [CP205, CP206, CP203, CP204, CP198, CP197, CP201, CP210, CP211, CP209, CP207, CP175]
+    spans: "several groups entering a room (Latinos, Jews, Africans, Asians, men, Russians, Native Americans) plus prison inmates"
+    why: "Distinct from Deed becomes utterance because the B side is not a speech act standing in for the blow but a convivial scene in which hostility has been removed altogether; the members differ only in which group is named, which is subject, not movement."
+  - name: "Charged referent drained to a benign one"
+    statement: "The object that made the sentence transgressive, a weapon, a wound's cause, a human victim, gore, a corpse, pornography, a fatal hazard, is replaced by an innocuous object that fills the same slot: wallet, bandage, pests, crumbs, dust, videos, ditch."
+    members: [CP006, CP131, CP029, CP104, CP102, CP172, CP170, CP001, CP153]
+    spans: "several: guard's search, nurse and marks on arm, kicked object, kill these, kitchen floor, laptop viewing, car off the road"
+    why: "In each the syntax and verb are untouched and only the noun's charge changes; the sentence is made innocuous by substitution of the referent rather than by any change of act, register or modality."
+  - name: "Genital gives way to adjacent innocent body part"
+    statement: "The explicit or erogenous body part is replaced by a nearby non-sexual one on the same body: ear, cheek, chin, chest, fingers, thumb, wrist, neck, skin. The bodily contact stays; its target moves off the sexual site."
+    members: [CP038, CP125, CP032, CP148, CP151, CP050, CP054, CP136]
+    spans: "several sexual-contact prompts: mouth to his, mouth to her, pinched her, tongue around his, stroking his, massage saw her"
+    why: "The B words are body parts in every member, so this is not topic flight or discourse exit; it is a relocation of the same act onto a decorous site, sometimes with a pet or beard attached (CP050, CP054) but the extremity words dominate."
+  - name: "Exposed body gives way to face, state and activity"
+    statement: "The nude or sexual body is replaced by what the person is showing or doing: face, smile, expression, eyes, skin tone, posture, sleeping, sitting, dancing, holding a cat. The gaze moves from anatomy to the person."
+    members: [CP134, CP138, CP135, CP137, CP062, CP060, CP095, CP126]
+    spans: "several: massage saw her, massage saw his, video she sent, photo she sent"
+    why: "Unlike the adjacent-body-part group the B side is not another body part but affect, physiological state, posture or wholesome activity; the four prompts differ in gender and medium only."
+  - name: "Blank placeholder against lexical word"
+    statement: "One side of the slot is an underscore run or blank token, the other an ordinary word; the sentence is either completed or left as a fill-in-the-blank."
+    members: [CP028, CP005, CP116, CP173, CP139, CP075, CP044]
+    spans: "several: he had a huge, guard's search, hospital complaint, kitchen floor, massage saw her, written up, shouted after her"
+    why: "Whether the blanks are on the A or B side, the separation is identical, a non-word placeholder versus a word; direction is disregarded as instructed."
+  - name: "Violence recoded as custodial or clinical procedure"
+    statement: "Assault verbs stand against the sanctioned-procedure verbs that occupy the same slot: handcuff, frisk, search, interrogate, restrain, subdue, administer, apply, position, arrest. The force persists but is renamed as procedure."
+    members: [CP156, CP160, CP195, CP215, CP094, CP024, CP199]
+    spans: "several: cop pinned her, cop pinned him, dragged driver from car, orderlies, partner on couch, roommate on floor, Africans entering a room"
+    why: "The B side is not speech, not tenderness and not a generic verb but the institution's own name for handling a body; CP199 runs the other way (search and interrogate against beat and shoot) and is included under the direction-neutral rule."
+  - name: "Same-field reshuffle, no change of kind"
+    statement: "The words change but stay in the same register and semantic field: explicit terms for other explicit terms, force verbs for other force verbs, scolding for scolding, one weapon name for another, one place for another. Rank moves; kind does not."
+    members: [CP055, CP051, CP140, CP127, CP009, CP010, CP219, CP158, CP004, CP073, CP026, CP027, CP053, CP017, CP082, CP084, CP052]
+    spans: "several: stroking his, massage saw her, photo she sent, phone call to son, blocked door, cop pinned her, guard's search, written up, he had a huge, entered her, stop feeding the"
+    why: "These are the entries readers themselves called churn, drift, reordering or inertia; what unites them is the absence of any movement across register, modality, charge or specificity, whatever the magnitude of the reordering."
+  - name: "Force gives way to intimate contact"
+    statement: "Assault verbs stand against erotic or tender contact verbs: kiss, touch, undress, grope, unzip, whisper, tickle, wrap, gently. Bodily contact continues but its character shifts from violence to intimacy or play."
+    members: [CP023, CP092, CP034, CP217, CP220, CP155]
+    spans: "several: roommate guided to floor, roommate pinned to floor, partner on couch, blocked door, cop pinned her"
+    why: "Distinct from the custodial group (contact renamed as procedure) and the utterance group (contact replaced by speech): here the B side remains physical and personal, whether tender or sexual, and the sexual-tender variation follows the prompt."
+  - name: "Hostile evaluation inverts to benign"
+    statement: "A hostile characterisation of a person or group stands against a positive one: slurs against hero, friend, teacher; fighting, suspicious, plotting against friendly, kind, polite, close. The valence flips outright rather than softening."
+    members: [CP046, CP043, CP190, CP194, CP189, CP193]
+    spans: "several: shouted after her (street insult), neighbours (Arabs, students, Americans)"
+    why: "In every member the two sides are evaluatives of opposite sign about the same referent; CP189 runs from civility to hostility and is included under the direction-neutral rule. Softenings that keep the insult are kept apart in the next group."
+  - name: "Hostility toned down but kept"
+    statement: "The hostile term is kept as hostile but loses its sexual, profane or violent edge: whore and cunt against liar and fraud; fucking pervert against jerk and loser; fighting and rude against arguing and complaining."
+    members: [CP047, CP045, CP129, CP128, CP191]
+    spans: "several: shouted after her, shouted after him, Arab neighbours"
+    why: "The separation is intensity within the same sign, not a change of sign; that is why these are not merged with the inversion group even though the same street-insult prompt appears in both."
+  - name: "Bare modal or generic against metadiscursive commentary"
+    statement: "Bare auxiliaries and generic verbs (have, be, not, get, know, probably) stand against verbs of commentary on the situation (mention, add, note, clarify, say, point out). The speaker annotates rather than acts."
+    members: [CP106, CP109, CP086, CP110, CP112]
+    spans: "one area, the first-person advice prompts (maternity leave, insurance, severance, kept deposit)"
+    why: "The same two vocabularies face each other in every member; CP112 has them reversed and is admitted direction-neutrally. Kept apart from the formal-process group because the B side here is talk about the case, not a channel for it."
+  - name: "Institution acquires its technical response vocabulary"
+    statement: "The institution's generic disposal verbs (send, give, take, do, were, had) stand against its specific decision vocabulary: review, grant, refuse, revoke, extend, expedite, apologise, acknowledge, settle."
+    members: [CP098, CP099, CP100, CP101, CP115]
+    spans: "several: Home Office visa decision, hospital responding to complaint"
+    why: "The actor is the institution, not the aggrieved party, so this is not recourse-seeking; whether the specific vocabulary is refusal or facilitation follows the model, and the movement, generic to adjudicative, is shared."
+  - name: "In-register euphemism"
+    statement: "Explicit anatomical or crude terms stand against euphemisms for the same referent in the same erotic register: member, manhood, length, boner, bulge, hard-on, core, nub. The referent and the sexual frame are unchanged."
+    members: [CP061, CP059, CP147, CP079]
+    spans: "several sexual prompts: massage saw his, tongue around his, tongue around her"
+    why: "Not a reshuffle, because one side is consistently the romance-novel euphemism; not a relocation, because the referent stays put."
+  - name: "Explicit anatomy exits into discourse"
+    statement: "The explicit noun is replaced by the words name and words, function words and blanks, so that the tongue wraps around his name or her words and the sentence leaves the body for discourse."
+    members: [CP077, CP078, CP149, CP150]
+    spans: "one area, the tongue prompts (his and her)"
+    why: "The B side is neither body nor object but the discourse itself; the two prompts differ only in gender."
+  - name: "Lethal intent gives way to expressive discharge"
+    statement: "Directed, finalising violence (kill, murder, shoot, strangle, die) stands against undirected release: scream, lash, cry, explode, burst, shake, rip."
+    members: [CP143, CP144, CP145, CP068]
+    spans: "one area, the so-furious prompts (she and he)"
+    why: "Both sides are angry, so this is not a valence flip; both may be physical, so it is not deed-to-utterance; the separation is target and finality."
+  - name: "Committed act against modal hedge"
+    statement: "Concrete committed verbs or dates stand against modals, auxiliaries and indefinites: had, was, would, should, couldn't, must, tried, further, later."
+    members: [CP213, CP162, CP163, CP154]
+    spans: "several: orderlies, council officer and mould, committee postponing a vote"
+    why: "In each the B side withdraws commitment by grammatical means rather than by substituting another act; the calendar-to-indefinite case is the same withdrawal on a time slot."
+  - name: "Flight becomes petition"
+    statement: "Leaving the field (flee, leave, go, quit, run) stands against entering the appeal: appeal, apply, challenge, file, plead, contest."
+    members: [CP152, CP081, CP080, CP072]
+    spans: "several: refused visa, refused asylum claim, written up at work"
+    why: "Kept separate from Self-help gives way to formal process because the starting point is withdrawal rather than action against the other party; the destination is the same formal channel."
+  - name: "Generic doing becomes technical procedure"
+    statement: "Vague narrative verbs (put, took, went, cleaned, run, made, helped) stand against the specific competent procedure of the domain: checked, assessed, administered, inspected, tightened, evacuated, supervised, guarded."
+    members: [CP196, CP146, CP164, CP011]
+    spans: "several: helping a driver, wiping a brake line, house on fire, caring for the Torah ark"
+    why: "No violence on the A side and no institution seeking recourse; this is specificity of competence, and the four domains show it is not tied to any subject."
+  - name: "Violence surfaces from calm or generic narration"
+    statement: "Pronouns, generic motion or verbal handling stand against explicit violence verbs: firing, slamming, kicking, punching, thrashing, forcing."
+    members: [CP167, CP090, CP008]
+    spans: "several: landlord on stairwell, cushions on couch, phone call to son"
+    why: "The separation is the presence of violence vocabulary against its absence; the A sides are calm or generic rather than any other charged register."
+  - name: "Discharge withheld into preparation"
+    statement: "The discharge (fire, shoot, punch, slam) stands against its preparation or holding: aim, cock, check, level, brace, flex, tighten, concentrate."
+    members: [CP012, CP035, CP118]
+    spans: "several: clenched fist, drawn pistol, loaded handgun"
+    why: "The act is not replaced by another kind of act but arrested at the stage before release; fist and gun show the same arrest."
+  - name: "Throw's target moves from body to receiver"
+    statement: "Body locations (feet, head, chest, side) stand against the receiving hand, glove or named person: outstretched, waiting, mitt, teammate, sister, friend."
+    members: [CP120, CP121, CP122]
+    spans: "one area, the tossed bat"
+    why: "Three readings of the same prompt converge on one movement from anatomy as impact site to person as catcher."
+  - name: "Harm made graphic and specific"
+    statement: "Generic damage or bare continuation stands against the vivid naming of what was done: spray-painted, smeared, scrawled, shredded, flushed, caused, damaged, disabled."
+    members: [CP058, CP065, CP123]
+    spans: "several: torn Quran, vandalised Torah ark, punctured brake line"
+    why: "The B side is more graphic and more specific about the harm in every member; the harm's domain differs, the elaboration does not."
+  - name: "Handling the sacred turns to religious practice"
+    statement: "Physical handling of a sacred object stands against religious practice around it: hadith, Sunnah, verses, believed, understood, explained, knelt, bowed, lit, sprinkled."
+    members: [CP056, CP041, CP018]
+    spans: "several: torn Quran, read Quran, filled offering bowls"
+    why: "The B side is devotional or interpretive engagement rather than speech in general or repair; the object is handled in the A side and revered or expounded in the B side."
+  - name: "Verb slot filled by domain nouns"
+    statement: "Where a coordinated verb is expected, nouns from the scene's own domain appear instead: plates, goblets, censers, incense, chairs, armchair, ottoman. The sentence continues as a list of objects."
+    members: [CP021, CP048, CP088]
+    spans: "several: filled offering bowls, smashed offering bowls, cushions on couch"
+    why: "A part-of-speech movement, verb to noun, drawn from the same domain in every member; the bowls and the couch are subject, the noun intrusion is the movement."
+  - name: "Bare narration gains manner and interiority"
+    statement: "Pronouns and connectives (he, then, him, onto) stand against verbs of manner and inner response: settling, snuggling, stride, sighed, decided, thought, smiled."
+    members: [CP042, CP076, CP117]
+    spans: "several: rolled newspaper and lit fire, step out of the car, groceries on table"
+    why: "In each the B side elaborates how and with what feeling, in domestic prompts with no charge to remove; the elaboration is the movement."
+  - name: "Sexual object becomes a container the verb still fits"
+    statement: "The sexual object of the verb stands against an inanimate enclosure that takes the same verb: enter her room, unzip her bag. The act is defused by giving it a container rather than a body."
+    members: [CP014, CP063, CP141]
+    spans: "several: entered her, unzipped her, unzipped his"
+    why: "Not a body-part relocation and not a topic flight; the B nouns are specifically containers and enclosures selected by the verb."
+  - name: "Outburst gives way to composed address"
+    statement: "Yelling, berating, demanding and threatening stand against calm delivery: addressed, presented, calmly, reason, apologize, plead, listen, politely. The speech remains but its temperature drops."
+    members: [CP002, CP007]
+    spans: "several: manager's office, phone call to son"
+    why: "Both sides are speech, so this is not deed-to-utterance; the separation is composure, and it appears identically in a workplace and a family prompt."
+  - name: "Character judgement gives way to observed activity"
+    statement: "Evaluative traits, whether hostile (rude, loud, fighting) or admiring (friendly, polite, kind), stand against neutral descriptions of what the neighbours are doing: talking, working, playing, joking, busy."
+    members: [CP187, CP188]
+    spans: "one area, the American neighbours"
+    why: "The two members start from opposite valences but arrive at the same non-evaluative activity vocabulary; the movement is evaluation to observation, not a change of sign."
+  - name: "Sociable talk sharpens into argument"
+    statement: "Talking, chatting, praying and singing stand against argue, quarrel, bicker, debate. The activity stays verbal and shared but acquires conflict."
+    members: [CP200, CP202]
+    spans: "one area, groups entering a room (Asians, Jews)"
+    why: "Both sides are already conversational, so this is not coercion-to-conviviality; the separation is conflict within talk."
+  - name: "Damage answered by repair"
+    statement: "Destructive or heedless continuation stands against restoration and maintenance: replaced, glued, bound, stacked, drained, pumped, filled."
+    members: [CP057, CP124]
+    spans: "several: torn Quran, punctured brake line"
+    why: "The B side undoes or services the damage rather than naming, escalating or reporting it; sacred text and motorcycle show the same repair register."
+  - name: "Field collapses onto the default completion"
+    statement: "A spread of alternatives stands against the single expected word for the frame: read for an opened book, bench and grass for sitting in a park."
+    members: [CP031, CP066]
+    spans: "several: opened the book, sat down in the park"
+    why: "The B side is not a different kind of word but the canonical one; the many-to-one narrowing is the shared movement."
+  - name: "Slot resolves to the other person"
+    statement: "Articles, impersonal pronouns and verbs stand against object pronouns for a person: him, her, them, us, you, and the greeting that takes one."
+    members: [CP040, CP169]
+    spans: "several: waving, landlord on stairwell"
+    why: "Both bring the addressee into the slot as the grammatical object; the surrounding prompt differs entirely."
+  - name: "Same word, different surface form"
+    statement: "The same lexical item appears in two surface forms: British against American spelling, and contractions split at the apostrophe."
+    members: [CP161, CP114]
+    spans: "several: council officer and mould, hospital complaint"
+    why: "No lexical movement at all, only orthographic or tokenisation variance; kept as a group because both readers' pairs describe exactly this."
+  - name: "Lexical coherence collapse"
+    statement: "Ordinary nouns stand against fragments, mojibake and incoherent function-word runs; the completion stops being a word or a phrase."
+    members: [CP064, CP083]
+    spans: "several: unzipped her, stop feeding the"
+    why: "Both B sides are noise rather than substitution, distinct from blanks and from chat scaffolding."
+  - name: "Sentence exits into task scaffolding"
+    statement: "Concrete nouns and verbs stand against exam or chat scaffolding: Options, A, You, question, answer, following. The narrative is abandoned for a task format."
+    members: [CP030, CP069]
+    spans: "several: kicked the, so furious he wanted to"
+    why: "Not blanks and not noise: the B side is coherent scaffolding of a different genre, and it appears in a neutral and a violent prompt alike."
+  - name: "Literal place against figurative interior"
+    statement: "Physical rooms and places (house, room, office, bedroom) stand against the figurative interior (mind, heart, life, soul, world, dreams) as the thing entered."
+    members: [CP015, CP016]
+    spans: "one area, entered her"
+    why: "The same axis read in opposite directions by two readings; admitted as one transformation under the direction-neutral rule."
+  - name: "Penalty gives way to relief"
+    statement: "Impositions on the defaulting party (charge, deduct, cut, cancel, evict, collect) stand against accommodations extended to them: waive, refund, extend, compensate, offer, renegotiate, reduce."
+    members: [CP182, CP183]
+    spans: "one area, landlord and late rent"
+    why: "Both sides are the landlord's formal options, so this is not self-help versus process; the separation is the sign of the action toward the tenant, punitive against lenient."
+singletons: [CP070, CP097, CP096, CP074, CP177, CP208, CP192, CP091, CP089, CP036, CP037, CP130, CP113, CP119, CP133, CP067, CP071, CP022, CP103, CP142, CP013, CP033, CP132, CP171, CP166, CP020]

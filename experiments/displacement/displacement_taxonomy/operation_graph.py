@@ -141,7 +141,15 @@ def op_components(G, OPS, k=2):
         sh = mods[a] & mods[b]
         if len(sh) >= k:
             Q.add_edge(a, b, shared=len(sh))
-    comps = sorted(nx.connected_components(Q), key=len, reverse=True)
+    #: **SETS ITERATE IN HASH ORDER AND PYTHON RANDOMISES IT PER PROCESS.**
+    #: `connected_components` yields sets, so sorting them by length alone left
+    #: ties broken differently on every run -- and everything downstream that
+    #: numbers components (`export_909.py --components`) then produced a
+    #: DIFFERENT CP id for the same content each time. Six agent groupings are
+    #: keyed to those ids. Sorting each component's members and breaking ties on
+    #: the sorted tuple makes the numbering a function of the data.
+    comps = [sorted(c) for c in nx.connected_components(Q)]
+    comps = sorted(comps, key=lambda c: (-len(c), c))
     #: the pairs k EXCLUDED, so the threshold's cost is visible rather than
     #: implied -- these are the joins that would have existed at k=1.
     cut = [(a, b, len(mods[a] & mods[b])) for a, b in itertools.combinations(sorted(OPS), 2)

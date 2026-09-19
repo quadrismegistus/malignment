@@ -54,12 +54,33 @@ import argparse, collections, json, os, sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 AG = os.path.join(HERE, "results", "agent_groupings")
-FILES = {"gpt6-astra-high": "gpt6-astra-high_transformation_groups.json",
-         "opus5-max": "opus5-max_transformation_groups.json"}
+
+#: **TWO GRAINS, AND THEY ARE NOT COMPARABLE TO EACH OTHER.** The first two runs
+#: partitioned the 907 raw OPERATIONS; the six below partitioned the 220
+#: corroborated COMPONENTS. An ARI between a 907-item partition and a 220-item
+#: one is undefined, so `--grain` selects a population and nothing crosses.
+OPS_RUNS = {"gpt6-astra-high": "gpt6-astra-high_transformation_groups.json",
+            "opus5-max": "opus5-max_transformation_groups.json"}
+#: model x effort on ONE file with ONE instruction -- the only clean contrast in
+#: the set. `opus-agent` was run through the Agent tool, which exposes no effort
+#: setting, so it is the session default rather than a named tier; the rest went
+#: through workflows, where `effort` is a parameter.
+COMP_RUNS = {"opus high*": "opus-agent_components_groups.yaml",
+             "opus xhigh": "opus-xhigh_components_groups.yaml",
+             "opus max": "opus-max_components_groups.yaml",
+             "fable high": "fable-high_components_groups.yaml",
+             "fable xhigh": "fable-xhigh_components_groups.yaml",
+             "fable max": "fable-max_components_groups.yaml"}
+FILES = dict(OPS_RUNS)
 
 
-def load(which):
-    return json.load(open(os.path.join(AG, FILES[which])))
+def load(which, table=None):
+    f = (table or FILES)[which]
+    path = os.path.join(AG, f)
+    if f.endswith(".yaml"):
+        import yaml
+        return yaml.safe_load(open(path))
+    return json.load(open(path))
 
 
 def labels(d):
@@ -103,13 +124,133 @@ def frames():
     return {r["id"]: r["frame"] for r in E.rows()}
 
 
+def component_context():
+    """-> (CP -> frame, CP -> k=3 relation, CP -> domain, the domain pool)
+
+    **THE JOIN TO THE TAXONOMY IS PARTIAL AND SHRINKS THE TEST TO A FIFTH.**
+    `crossframe_ops.json` holds 89 components frozen over 35 frames; these 220
+    are rebuilt over all 96. Matching on (frame, shared operation name) carries
+    ~52, of which ~44 sit in a k=3 cluster. Every "vs the ten" number is on
+    those 44 and on nothing else.
+    """
+    import export_909 as E, dose_relations as DR
+    comps = {c["id"]: c for c in E.components()}
+    fr = {k: v["frame"] for k, v in comps.items()}
+    froz = json.load(open(os.path.join(HERE, "results", "crossframe_ops.json")))
+    cp2c = {}
+    for c in froz:
+        names = {e[1] for e in c["names"]}
+        for cid, v in comps.items():
+            if v["frame"] == c["prompt"] and names & set(v["names"]):
+                cp2c[cid] = c["id"]
+    home = {}
+    for _i, (name, cids, _h, _r) in enumerate(DR.clusters()):
+        for cid in cids:
+            home[cid] = name
+    rel = {cp: home[c] for cp, c in cp2c.items() if c in home}
+    import csv
+    dom = {}
+    for r in csv.DictReader(open(os.path.join(HERE, "results", "word_groups.csv"))):
+        dom[r["prompt"]] = r["domain"]
+    for x in froz:
+        dom.setdefault(x["prompt"], x.get("domain"))
+    d_of = {c: dom[fr[c]] for c in comps if dom.get(fr.get(c))}
+    return fr, rel, d_of
+
+
+def spanning(groups, d_of, fr, seed=0):
+    """(groups spanning >1 domain, groups testable, chance rate). -> tuple
+
+    **THE NULL IS SIZE-MATCHED.** A partition into many small groups spans fewer
+    domains than one into few large ones for arithmetic reasons alone, so the
+    raw percentage cannot be compared across runs. The shuffle preserves each
+    group's size and reassigns domains, which is the only way 23% and 50% are
+    the same kind of number.
+    """
+    import random
+    tot = mul = 0
+    sizes = []
+    for g in groups:
+        ds = [d_of.get(m) for m in g["members"]]
+        ds = [x for x in ds if x]
+        if len(ds) < 2:
+            continue
+        tot += 1
+        sizes.append(len(ds))
+        if len(set(ds)) > 1:
+            mul += 1
+    pool = list(d_of.values())
+    rnd = random.Random(seed)
+    nul = 0.0
+    for _ in range(300):
+        rnd.shuffle(pool)
+        p = k = 0
+        for sz in sizes:
+            if len(set(pool[k:k + sz])) > 1:
+                p += 1
+            k += sz
+        nul += p / len(sizes)
+    return mul, tot, nul / 300
+
+
+def components_table():
+    from sklearn.metrics import adjusted_rand_score as ari
+    fr, rel, d_of = component_context()
+    sh = sorted(rel)
+    #: **THE AGENT GROUPINGS ARE KEYED TO THE SHIPPED FILE'S NUMBERING.** That
+    #: file was written before `op_components` was made deterministic, and 78 of
+    #: 220 CP ids moved when it was. Regenerating the export instead of
+    #: remapping would have silently re-pointed six agent runs at different
+    #: content. All 220 resolve by (names, frame), and the map is stored beside
+    #: the groupings rather than recomputed, so a future rebuild that changes
+    #: numbering again is a diff rather than a silent shift.
+    remap = json.load(open(os.path.join(AG, "cp_id_shipped_to_canonical.json")))
+    def relabel(m):
+        return {remap.get(k, k): v for k, v in m.items()}
+    L = {k: (load(k, COMP_RUNS), relabel(labels(load(k, COMP_RUNS))))
+         for k in COMP_RUNS}
+    print("\n220 CORROBORATED COMPONENTS -- one file, one instruction, "
+          "model x effort\n")
+    print("  %-12s %7s %7s %7s %11s %12s %8s"
+          % ("run", "groups", "singl", "max n", "ARI vs ten", "spans dom", "chance"))
+    for k in COMP_RUNS:
+        d, m = L[k]
+        sz = sorted((len(g["members"]) for g in d["groups"]), reverse=True)
+        mul, tot, nul = spanning(d["groups"], d_of, fr)
+        print("  %-12s %7d %7d %7d %+11.3f %7d/%-4d %7.0f%%"
+              % (k, len(d["groups"]), len(d.get("singletons") or []), sz[0],
+                 ari([m[i] for i in sh], [rel[i] for i in sh]),
+                 mul, tot, 100 * nul))
+    print("\n  * `opus high` ran through the Agent tool, which exposes no "
+          "effort setting;\n    it is the session default, not a named tier.")
+    print("  ARI vs the ten is on %d components -- the only ones that join the "
+          "frozen 89." % len(sh))
+    ids = sorted(fr)
+    ks = list(COMP_RUNS)
+    print("\n  PAIRWISE ARI over all 220\n")
+    print("  %-12s" % "" + " ".join("%11s" % k for k in ks))
+    for a in ks:
+        row = []
+        for b in ks:
+            row.append("      --   " if a == b else
+                       "%+11.3f" % ari([L[a][1][i] for i in ids],
+                                       [L[b][1][i] for i in ids]))
+        print("  %-12s" % a + " ".join(row))
+
+
 def main(argv=None):
     from sklearn.metrics import adjusted_rand_score as ari
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--min-frames", type=int, default=4)
     ap.add_argument("--names", action="store_true")
+    ap.add_argument("--grain", default="operations",
+                    choices=("operations", "components"),
+                    help="which population; the two are not comparable")
     a = ap.parse_args(argv)
+    if a.grain == "components":
+        components_table()
+        return 0
     fr = frames()
     rel, o2c = op_to_relation()
     parts = {k: load(k) for k in FILES}
