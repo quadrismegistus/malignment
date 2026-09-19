@@ -162,7 +162,7 @@ def emit(out="annotator_metagraph", k=K, metric="jaccard", jac=JAC):
     from malignment.chartdata import graph, write
     cat, comps = load()
     dom = domains()
-    cl = clusters(cat, k, a.metric, a.jac)
+    cl = clusters(cat, k, metric, jac)
     home = {}
     for i, c in enumerate(cl):
         for x in c:
@@ -252,16 +252,30 @@ def main(argv=None):
         print("wrote %s" % emit(k=a.k, metric=a.metric, jac=a.jac))
         return 0
     if a.sweep:
-        print("  %s %9s %9s %12s %13s %12s" %
-              ("k", "clusters", ">=2 cats", "all 6", "largest(ops)", "ops covered"))
-        for k in range(1, 8):
-            cl = clusters(cat, k, a.metric, a.jac)
+        #: **SWEEP THE PARAMETER THE METRIC ACTUALLY USES.** A first version
+        #: swept `k` regardless, so under the jaccard default every row came out
+        #: identical -- a table that looks like a stability result and is the
+        #: same number printed seven times.
+        vals = ([0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8] if a.metric == "jaccard"
+                else [1, 2, 3, 4, 5, 6, 7])
+        print("  metric = %s\n" % a.metric)
+        print("  %-6s %9s %8s %10s %13s %12s"
+              % ("thresh", "clusters", "all 6", "chaining", "largest(ops)",
+                 "ops covered"))
+        for v in vals:
+            cl = (clusters(cat, a.k, "jaccard", v) if a.metric == "jaccard"
+                  else clusters(cat, v, "count", a.jac))
             six = sum(1 for c in cl if len({cat[x]["annotator"] for x in c}) == 6)
+            #: chaining is the criterion the default was chosen on, so it
+            #: belongs in the sweep rather than in a comment about the sweep
+            ch = sum(1 for c in cl
+                     if max(collections.Counter(
+                         cat[x]["annotator"] for x in c).values()) > 1)
             cov = set().union(*[cat[x]["ops"] for c in cl for x in c]) if cl else set()
             big = max((len(set().union(*[cat[x]["ops"] for x in c])) for c in cl),
                       default=0)
-            print("  %d %9d %9d %12d %13d %9d/%d"
-                  % (k, len(cl), len(cl), six, big, len(cov), len(comps)))
+            print("  %-6s %9d %8d %10d %13d %9d/%d"
+                  % (v, len(cl), six, ch, big, len(cov), len(comps)))
         return 0
     cl = clusters(cat, a.k, a.metric, a.jac)
     if a.cluster is not None:
