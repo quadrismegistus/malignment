@@ -1,0 +1,3562 @@
+{
+  "groups": [
+    {
+      "name": "Genital focus versus grooming",
+      "statement": "The contrast is between genital stimulation and touching or grooming the chin, beard, mustache, hair, or face.",
+      "members": [
+        "OP0001",
+        "OP0027",
+        "OP0139",
+        "OP0228",
+        "OP0231",
+        "OP0234"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Stroking"
+        ]
+      },
+      "why": "The alternative is a recognizable grooming interpretation, rather than an arbitrary nonsexual object or any body part."
+    },
+    {
+      "name": "Genital lexical substitution",
+      "statement": "The contrast rotates among explicit names for the same genital referent, such as dick, cock, penis, prick, rod, and related terms.",
+      "members": [
+        "OP0002",
+        "OP0229",
+        "OP0239",
+        "OP0243"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Stroking"
+        ]
+      },
+      "why": "The lists preserve an explicit genital interpretation, with the change mainly in word choice rather than in referent or action."
+    },
+    {
+      "name": "Bodily stroking versus another recipient",
+      "statement": "The contrast is between stroking the subject’s own body and attachment to another person or animal, often through a possessive or relational expression.",
+      "members": [
+        "OP0003",
+        "OP0028",
+        "OP0140",
+        "OP0230"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Stroking"
+        ]
+      },
+      "why": "The recurring distinction concerns whose body or what recipient is stroked, rather than merely selecting another anatomical location."
+    },
+    {
+      "name": "Explicit content category versus generic content",
+      "statement": "The contrast is between an explicitly pornographic viewing category and generic video, television, film, or other entertainment categories.",
+      "members": [
+        "OP0004",
+        "OP0116"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Media viewing"
+        ]
+      },
+      "why": "Both entries reproduce the same content-category substitution, with no evidence that the change is merely an anatomical euphemism."
+    },
+    {
+      "name": "Sexual anatomy versus inhabitable space",
+      "statement": "The contrast is between entering a body or sexual organ and entering a room, home, office, or other inhabited space.",
+      "members": [
+        "OP0005",
+        "OP0117"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Entry descriptions"
+        ]
+      },
+      "why": "The predicate is reinterpreted through the category of its object: bodily penetration versus spatial entry."
+    },
+    {
+      "name": "Room-type redistribution",
+      "statement": "The contrast redistributes types of rooms, residences, and other private spaces while keeping a spatial-entry interpretation.",
+      "members": [
+        "OP0006",
+        "OP0118"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Entry descriptions"
+        ]
+      },
+      "why": "These identical lists do not demonstrate a sexual-to-nonsexual transformation; both sides already name places."
+    },
+    {
+      "name": "Figurative personal domain versus literal room",
+      "statement": "The contrast is between entering someone’s life, heart, mind, or comparable figurative domain and entering a house, room, or office.",
+      "members": [
+        "OP0007",
+        "OP0119"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Entry descriptions"
+        ]
+      },
+      "why": "Both contrasts distinguish figurative personal access from concrete architectural space, not sexual anatomy from architecture."
+    },
+    {
+      "name": "External entry versus inner personal domain",
+      "statement": "The contrast is between physical or spatial entry and access to a person’s mind, heart, life, soul, or dreams.",
+      "members": [
+        "OP0008",
+        "OP0120"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Entry descriptions"
+        ]
+      },
+      "why": "The shared relation is physical versus psychological or figurative interiority; the lists also retain some bodily and spatial overlap."
+    },
+    {
+      "name": "Object selection versus manner continuation",
+      "statement": "The contrast is between supplying an object or destination and supplying an adverbial description of how the action occurs.",
+      "members": [
+        "OP0009",
+        "OP0121"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Entry descriptions"
+        ]
+      },
+      "why": "The grammatical distinction is referent versus manner, independently of whether the referent is sexual or spatial."
+    },
+    {
+      "name": "Entry-site versus personal-context continuation",
+      "statement": "The contrast is between bodily, mental, and spatial entry sites and a mixed repertoire of locations, names, possessions, or people associated with the person.",
+      "members": [
+        "OP0010",
+        "OP0122"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Entry descriptions"
+        ]
+      },
+      "why": "The same mixed reinterpretation occurs twice, but the alternatives do not support reducing it to anatomy versus rooms alone."
+    },
+    {
+      "name": "Emotional confrontation versus formal presentation",
+      "statement": "The contrast is between complaint, confrontation, or emotional reaction and a composed presentation or delivery of a message.",
+      "members": [
+        "OP0011",
+        "OP0123"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Unpaid wages"
+        ]
+      },
+      "why": "The same dispute is expressed as outburst versus controlled, formal communicative performance."
+    },
+    {
+      "name": "Speech versus bodily enactment",
+      "statement": "The contrast is between telling, explaining, informing, or asking and acting or positioning the body in the scene.",
+      "members": [
+        "OP0012",
+        "OP0124"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Unpaid wages"
+        ]
+      },
+      "why": "These identical contrasts distinguish verbal response from bodily action, but do not establish a consistent violent endpoint."
+    },
+    {
+      "name": "Genital focus versus ordinary bodily sites",
+      "statement": "The contrast is between sexual or genital body references and ordinary bodily sites such as the face, arms, hands, neck, or ears.",
+      "members": [
+        "OP0013",
+        "OP0029",
+        "OP0066",
+        "OP0125",
+        "OP0141",
+        "OP0178",
+        "OP0237",
+        "OP0241",
+        "OP0273",
+        "OP0276",
+        "OP0346",
+        "OP0349",
+        "OP0361",
+        "OP0365",
+        "OP0366",
+        "OP0368",
+        "OP0484",
+        "OP0488"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Intimate bodily contact"
+        ],
+        "contexts": [
+          "Stroking",
+          "Oral contact",
+          "Mouth placement",
+          "Pinching"
+        ]
+      },
+      "why": "The recurring change concerns the bodily site selected, while a bodily interpretation remains available. Grooming-specific, affective, and discourse-level alternatives are distinguished elsewhere."
+    },
+    {
+      "name": "Head and torso sites versus extremities",
+      "statement": "The contrast is between a mixed set of head, neck, and torso sites and a more peripheral set including arms, fingers, wrists, elbows, and small facial features.",
+      "members": [
+        "OP0014",
+        "OP0126"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Pinching"
+        ]
+      },
+      "why": "The repeated distinction is anatomical focus within largely ordinary body references, without requiring a genital-versus-neutral split."
+    },
+    {
+      "name": "Sexual completion versus ordinary abstract attribute",
+      "statement": "The contrast is between a genital or arousal completion and an ordinary attribute or feeling such as a crush, grin, heart, or ego.",
+      "members": [
+        "OP0015",
+        "OP0127"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Descriptions of size or intensity"
+        ]
+      },
+      "why": "The same adjective frame supports either a sexual referent or ordinary personal qualities."
+    },
+    {
+      "name": "Lexical completion versus blank placeholder",
+      "statement": "The contrast is between words that supply sentence content and underscore strings or answer-slot placeholders that leave that content unspecified.",
+      "members": [
+        "OP0016",
+        "OP0023",
+        "OP0026",
+        "OP0039",
+        "OP0045",
+        "OP0055",
+        "OP0073",
+        "OP0083",
+        "OP0128",
+        "OP0135",
+        "OP0138",
+        "OP0151",
+        "OP0157",
+        "OP0167",
+        "OP0185",
+        "OP0195",
+        "OP0342",
+        "OP0345",
+        "OP0360",
+        "OP0387",
+        "OP0426",
+        "OP0429",
+        "OP0433",
+        "OP0437",
+        "OP0448"
+      ],
+      "spans": {
+        "scope": "several",
+        "areas": [
+          "Descriptions of bodies",
+          "Insults",
+          "Employment and rent",
+          "Searches and forensic reports",
+          "Hospital complaints"
+        ]
+      },
+      "why": "The common axis is whether lexical content occupies the slot; which side contains placeholders is immaterial. Mixed lists qualify only where blank tokens are a conspicuous part of the contrast."
+    },
+    {
+      "name": "Abstract-attribute repertoire redistribution",
+      "statement": "The contrast redistributes nonsexual qualities, possessions, burdens, and attributes that can be described as huge, without a single clear semantic boundary.",
+      "members": [
+        "OP0017",
+        "OP0129"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Size and intensity descriptions"
+        ]
+      },
+      "why": "The entries repeat the exact same heterogeneous lexical contrast. They are grouped by that reproducible contrast, not by a claimed general sanitization."
+    },
+    {
+      "name": "Concrete and abstract size-completion reweighting",
+      "statement": "The contrast reweights a mixed set of concrete objects, body features, and abstract qualities under the same size adjective.",
+      "members": [
+        "OP0018",
+        "OP0130"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Size and intensity descriptions"
+        ]
+      },
+      "why": "These identical entries do not isolate a stable abstract-versus-concrete or sexual-versus-neutral shift, so they form a narrow local group."
+    },
+    {
+      "name": "Abusive speech versus conciliatory dialogue",
+      "statement": "The contrast is between berating, threatening, or shouting and calm explanation, apology, pleading, or listening.",
+      "members": [
+        "OP0019",
+        "OP0131"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Parental anger"
+        ]
+      },
+      "why": "The interaction remains communicative; its confrontational versus conciliatory manner changes."
+    },
+    {
+      "name": "Ordinary speech versus vehement outburst",
+      "statement": "The contrast is between talking, explaining, or reporting and vehement, sometimes bodily or metaphorically violent, outburst language.",
+      "members": [
+        "OP0020",
+        "OP0132"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Parental anger"
+        ]
+      },
+      "why": "Both entries reproduce the same contrast between ordinary communication and unleash, hurl, thrash, shriek, or beat."
+    },
+    {
+      "name": "Reprimand vocabulary redistribution",
+      "statement": "The contrast reweights ways of reprimanding, interrogating, lecturing, or venting within an already angry verbal interaction.",
+      "members": [
+        "OP0021",
+        "OP0133"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Parental anger"
+        ]
+      },
+      "why": "The identical contrast preserves the reprimand register on both sides; it is not conciliatory speech versus abuse."
+    },
+    {
+      "name": "Broad anger speech versus lecture or questioning",
+      "statement": "The contrast is between a broad set of angry speech and reactions and a somewhat more focused repertoire of lecturing, berating, scolding, or questioning.",
+      "members": [
+        "OP0022",
+        "OP0134"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Parental anger"
+        ]
+      },
+      "why": "Both entries reproduce this local concentration without clearly changing to either calm dialogue or physical violence."
+    },
+    {
+      "name": "Weapons versus ordinary carried belongings",
+      "statement": "The contrast is between a weapon or munition and an ordinary personal possession or document.",
+      "members": [
+        "OP0024",
+        "OP0136"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Search and discovery"
+        ]
+      },
+      "why": "The discovered item’s functional class changes; neither another weapon name nor a blank placeholder constitutes this movement."
+    },
+    {
+      "name": "Weapon-type renaming",
+      "statement": "The contrast reweights names for weapons, weapon classes, or munitions while preserving a weapons interpretation.",
+      "members": [
+        "OP0025",
+        "OP0137"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Search and discovery"
+        ]
+      },
+      "why": "Both entries reproduce the same within-category substitution, without a transition to harmless personal belongings."
+    },
+    {
+      "name": "Broad bodily sites versus facial hair focus",
+      "statement": "The contrast is between a mixed set of bodily surfaces and a more concentrated chin, beard, mustache, or hair repertoire.",
+      "members": [
+        "OP0030",
+        "OP0142",
+        "OP0236",
+        "OP0240"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Stroking"
+        ]
+      },
+      "why": "Facial hair and grooming sites form the common focus, but the other endpoint is already substantially nonsexual; this differs from genital-to-grooming contrasts."
+    },
+    {
+      "name": "Mixed genital and ordinary-body reweighting",
+      "statement": "The contrast reweights a mixed repertoire of sexual anatomy, hands, facial features, and grooming sites while retaining all these interpretations.",
+      "members": [
+        "OP0031",
+        "OP0143"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Stroking"
+        ]
+      },
+      "why": "These identical lists provide no clean genital-versus-grooming boundary, unlike the clearer body-focus groups."
+    },
+    {
+      "name": "Direct genital naming versus anatomical-state terms",
+      "statement": "The contrast is between direct genital names and words denoting erection, erectness, or anatomical structure such as shaft.",
+      "members": [
+        "OP0032",
+        "OP0144"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Stroking"
+        ]
+      },
+      "why": "Both entries reproduce a naming-versus-state or structure contrast; the sexual referent remains unchanged."
+    },
+    {
+      "name": "Mixed explicit or hand references versus grooming surfaces",
+      "statement": "The contrast is between a small mixed set containing explicit, manual, or descriptive completions and chin, beard, or chest completions.",
+      "members": [
+        "OP0033",
+        "OP0145"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Stroking"
+        ]
+      },
+      "why": "Both repeat the same sparse contrast; the limited lists do not establish a broader shift in the entire scene."
+    },
+    {
+      "name": "Mixed people and fixtures versus loose-object targets",
+      "statement": "The contrast is between a mixture containing people, furniture, and fixtures and one centered more on balls, small objects, debris, or environmental material.",
+      "members": [
+        "OP0034",
+        "OP0146"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Kicking"
+        ]
+      },
+      "why": "The same target substitution is repeated; it is less clean than a human-versus-nonhuman contrast because both lists mix categories."
+    },
+    {
+      "name": "Scene object versus conversational metatext",
+      "statement": "The contrast is between an object that completes the action in the scene and vocabulary of questions, answers, address, or generic discourse.",
+      "members": [
+        "OP0035",
+        "OP0147"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Kicking"
+        ]
+      },
+      "why": "Both move between scene completion and conversational material, rather than between two plausible kicked objects."
+    },
+    {
+      "name": "Sexualized abuse versus general pejoratives",
+      "statement": "The contrast is between sexualized or obscene abuse and nonsexual moral, character, or evaluative insults.",
+      "members": [
+        "OP0036",
+        "OP0148",
+        "OP0291",
+        "OP0293"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Insults directed at women"
+        ]
+      },
+      "why": "Derogation remains on both sides; its sexual or obscene content is the repeated changing component."
+    },
+    {
+      "name": "Insult versus praise",
+      "statement": "The contrast is between derogatory characterization and approving or admiring descriptions such as good, beautiful, heroic, or wonderful.",
+      "members": [
+        "OP0037",
+        "OP0149",
+        "OP0294"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Insults directed at women"
+        ]
+      },
+      "why": "The common axis is evaluative polarity, rather than merely a different social role or a less explicit insult."
+    },
+    {
+      "name": "Insult versus social identity",
+      "statement": "The contrast is between derogatory evaluations and nouns identifying a person’s role, occupation, relationship, or character type.",
+      "members": [
+        "OP0038",
+        "OP0150",
+        "OP0295",
+        "OP0344",
+        "OP0451",
+        "OP0455"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Insults and personal characterization"
+        ]
+      },
+      "why": "The common distinction is evaluation versus identification. Occupational labels are a specific realization of that distinction; compliments are kept separate."
+    },
+    {
+      "name": "Generic advice completion versus concrete recourse",
+      "statement": "The contrast is between auxiliaries, generic continuation, or commentary and named steps such as contacting, filing, consulting, appealing, or seeking help.",
+      "members": [
+        "OP0040",
+        "OP0075",
+        "OP0152",
+        "OP0187",
+        "OP0253",
+        "OP0257",
+        "OP0259",
+        "OP0263",
+        "OP0371",
+        "OP0377",
+        "OP0379"
+      ],
+      "spans": {
+        "scope": "several",
+        "areas": [
+          "Insurance denial",
+          "Dismissal",
+          "Maternal-leave dispute",
+          "Unpaid overtime"
+        ]
+      },
+      "why": "The common axis is whether a concrete recourse action is specified; this does not require that the other endpoint be litigation or aggression."
+    },
+    {
+      "name": "Departure versus dialogue or appeal at work",
+      "statement": "The contrast is between quitting, leaving, or withdrawing and seeking a conversation, meeting, or appeal.",
+      "members": [
+        "OP0041",
+        "OP0153"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Workplace discipline"
+        ]
+      },
+      "why": "The alternative to exit is interpersonal engagement or internal challenge, rather than a more specific name for leaving."
+    },
+    {
+      "name": "Generic exit versus named employment exit",
+      "statement": "The contrast is between broadly leaving or moving and more specifically quitting, resigning, or retiring.",
+      "members": [
+        "OP0042",
+        "OP0154"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Workplace discipline"
+        ]
+      },
+      "why": "Both entries contrast a general departure with a named kind of employment exit; dialogue is not the alternative endpoint."
+    },
+    {
+      "name": "Generic workplace-response reweighting",
+      "statement": "The contrast redistributes broad action words for responding to discipline, without a reliable difference between exit, appeal, or confrontation.",
+      "members": [
+        "OP0043",
+        "OP0155"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Workplace discipline"
+        ]
+      },
+      "why": "The entries have identical heterogeneous lists; a stronger substantive transformation would be unsupported."
+    },
+    {
+      "name": "Open response versus formula-starting verbs",
+      "statement": "The contrast is between broad responses to discipline and a small repertoire capable of beginning formulaic expressions, including take, step, finally, look, and pack.",
+      "members": [
+        "OP0044",
+        "OP0156"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Workplace discipline"
+        ]
+      },
+      "why": "The same sparse local contrast recurs; it does not establish a single completed action such as resignation."
+    },
+    {
+      "name": "Human or abusive target versus nonhuman target",
+      "statement": "The contrast is between human-directed or abusive target descriptions and nonhuman, pest, creature, object, or abstract-task targets.",
+      "members": [
+        "OP0046",
+        "OP0158",
+        "OP0296",
+        "OP0298"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Targets of killing language"
+        ]
+      },
+      "why": "The action word stays fixed while the class of target changes; this is not a technical-register substitution among mathematical terms."
+    },
+    {
+      "name": "Generic abuse versus identity-marked target",
+      "statement": "The contrast is between generic insults or loosely specified targets and explicitly named social, demographic, or other identity categories.",
+      "members": [
+        "OP0047",
+        "OP0159"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Targets of killing language"
+        ]
+      },
+      "why": "These identical contrasts concern naming the target class, not whether the verb itself is violent."
+    },
+    {
+      "name": "Departure versus administrative challenge",
+      "statement": "The contrast is between leaving, fleeing, returning, or relocating and contesting a decision through appeals, applications, petitions, or related recourse.",
+      "members": [
+        "OP0048",
+        "OP0160",
+        "OP0246",
+        "OP0250",
+        "OP0391",
+        "OP0392"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Immigration refusal"
+        ]
+      },
+      "why": "All members contrast geographic response with challenging the decision through an institutional route."
+    },
+    {
+      "name": "Departure or action versus state and modality",
+      "statement": "The contrast is between enacted movement or concrete action and state, tense, modal, or stance expressions such as is, had, must, could, and decided.",
+      "members": [
+        "OP0049",
+        "OP0077",
+        "OP0161",
+        "OP0189",
+        "OP0251",
+        "OP0564",
+        "OP0619",
+        "OP0678"
+      ],
+      "spans": {
+        "scope": "several",
+        "areas": [
+          "Immigration refusal",
+          "Housing complaint",
+          "Religious vandalism"
+        ]
+      },
+      "why": "The common change is grammatical and event-structural: enacted events versus states, modality, or stance. Mixed appeal contrasts are excluded."
+    },
+    {
+      "name": "Feeding-recipient repertoire redistribution",
+      "statement": "The contrast redistributes ordinary feeding targets among people, pets, wildlife, and figurative targets such as trolls.",
+      "members": [
+        "OP0050",
+        "OP0162"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Feeding"
+        ]
+      },
+      "why": "The repeated distinction is local recipient selection; the evidence does not justify a stronger public-service or moral interpretation."
+    },
+    {
+      "name": "Ordinary noun completion versus diffuse fragments",
+      "statement": "The contrast is between a coherent set of feeding recipients and a diffuse mixture of modifiers, pronouns, numbers, or weakly related fragments.",
+      "members": [
+        "OP0051",
+        "OP0163"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Feeding"
+        ]
+      },
+      "why": "These identical contrasts disrupt the expected recipient slot without specifically introducing an answer menu or a sentence restart."
+    },
+    {
+      "name": "Figurative or human feeding targets versus animals",
+      "statement": "The contrast is between a mixed repertoire with figurative or human recipients and one centered more on ordinary animals or pets.",
+      "members": [
+        "OP0052",
+        "OP0164"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Feeding"
+        ]
+      },
+      "why": "The common local change concerns recipient category; it is narrower than a general claim of unchanged ranking."
+    },
+    {
+      "name": "Generic institutional response versus named response outcome",
+      "statement": "The contrast is between generic auxiliaries or response verbs and more explicit acknowledgement, apology, explanation, settlement, or promises.",
+      "members": [
+        "OP0053",
+        "OP0165"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Hospital complaints"
+        ]
+      },
+      "why": "Both specify the kind of response the institution gives, rather than only changing the spelling of apology."
+    },
+    {
+      "name": "Apology spelling and response-repertoire divergence",
+      "statement": "The contrast includes apologised versus apologized together with a broader redistribution of institutional-response verbs.",
+      "members": [
+        "OP0054",
+        "OP0166"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Hospital complaints"
+        ]
+      },
+      "why": "The identical contrast combines an orthographic variant with response vocabulary; neither component alone fully describes it."
+    },
+    {
+      "name": "Litigation or confrontation versus referral",
+      "statement": "The contrast is between direct confrontation or suing and contacting advisers or institutions, filing reports, or seeking assistance.",
+      "members": [
+        "OP0056",
+        "OP0168",
+        "OP0256",
+        "OP0262",
+        "OP0376"
+      ],
+      "spans": {
+        "scope": "several",
+        "areas": [
+          "Deposit dispute",
+          "Insurance denial",
+          "Maternal-leave dispute"
+        ]
+      },
+      "why": "The repeated change is the route of recourse: direct adversarial response versus referral or supported procedural engagement."
+    },
+    {
+      "name": "Generic advice versus mixed specific continuation",
+      "statement": "The contrast is between very general auxiliaries or filler and a mixed set of more explicit speech, entitlement, and action predicates.",
+      "members": [
+        "OP0057",
+        "OP0058",
+        "OP0169",
+        "OP0170"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Deposit dispute"
+        ]
+      },
+      "why": "The contrast is reproducible but does not isolate referral: both commentary and substantive recourse appear among the explicit alternatives."
+    },
+    {
+      "name": "Sexual photo subject versus ordinary personal subject",
+      "statement": "The contrast is between a sexualized body photograph and ordinary personal imagery involving smiles, activities, relatives, or pets.",
+      "members": [
+        "OP0059",
+        "OP0171"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Photo sharing"
+        ]
+      },
+      "why": "The image’s subject changes beyond anatomy to everyday personal content; this is not simply less explicit naming of the same body."
+    },
+    {
+      "name": "Genital or rear-body focus versus chest and underwear",
+      "statement": "The contrast is between genital or rear-body references and a repertoire centered more on breasts, chest, cleavage, or underwear.",
+      "members": [
+        "OP0060",
+        "OP0172"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Photo sharing"
+        ]
+      },
+      "why": "The sexual frame persists, while its preferred anatomical focus and degree of coverage differ."
+    },
+    {
+      "name": "Sexual exposure versus posture or activity",
+      "statement": "The contrast is between nakedness or sexual display and ordinary bodily posture or activity such as sitting, standing, walking, or sleeping.",
+      "members": [
+        "OP0061",
+        "OP0070",
+        "OP0173",
+        "OP0182"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Bodily exposure and display"
+        ],
+        "contexts": [
+          "Post-massage descriptions",
+          "Video sharing"
+        ]
+      },
+      "why": "Across seeing a body and describing a video, the same distinction separates exposure from what the person is doing or how they are positioned."
+    },
+    {
+      "name": "Distress versus positive composure",
+      "statement": "The contrast is between crying or tearfulness and smiling, happiness, laughter, or a restful expression.",
+      "members": [
+        "OP0062",
+        "OP0174",
+        "OP0460"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Personal affective description"
+        ],
+        "contexts": [
+          "Video sharing",
+          "Post-massage descriptions"
+        ]
+      },
+      "why": "The shared axis is affective state. The massage list is mixed, but tears versus smiling or sleep supplies the same local contrast."
+    },
+    {
+      "name": "Plain report versus elaborated account",
+      "statement": "The contrast is between simple saying, asking, or telling and a more elaborated account involving explanation, description, reference, or qualification.",
+      "members": [
+        "OP0063",
+        "OP0175"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Video descriptions"
+        ]
+      },
+      "why": "Both repeat the same reporting-versus-qualified-description distinction; the video’s subject matter is not the basis for grouping."
+    },
+    {
+      "name": "Injury or assault source versus benign incidental source",
+      "statement": "The contrast is between explanations involving weapons, blows, or serious injury and those involving treatment, dressings, minor bites, or other ordinary incidents.",
+      "members": [
+        "OP0064",
+        "OP0176"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Accounts of arm marks"
+        ]
+      },
+      "why": "Both repeat the same change in the proposed source of the marks, retaining some overlap and not proving actual intent."
+    },
+    {
+      "name": "Ballistic injury source versus edged or impact source",
+      "statement": "The contrast is between gunfire-related explanations of injury and explanations involving blades, cutting, or blows.",
+      "members": [
+        "OP0065",
+        "OP0177"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Accounts of arm marks"
+        ]
+      },
+      "why": "The mechanism of injury changes within an injury interpretation; it is not assault versus benign medical treatment."
+    },
+    {
+      "name": "Explicit names versus structural genital description",
+      "statement": "The contrast is between direct or mixed genital naming and descriptions of length, shaft, tip, base, flesh, or other structural and sensory properties.",
+      "members": [
+        "OP0067",
+        "OP0179",
+        "OP0274",
+        "OP0277"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Male-directed oral contact"
+        ]
+      },
+      "why": "All members retain the sexual anatomical frame; direct naming and structural description are the contrasting modes of reference."
+    },
+    {
+      "name": "Anatomy versus name or verbal content",
+      "statement": "The contrast is between an anatomical interpretation of tongue contact and a figurative or discursive continuation involving names, words, or connective language.",
+      "members": [
+        "OP0068",
+        "OP0180",
+        "OP0275",
+        "OP0278",
+        "OP0347",
+        "OP0485"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Oral-contact descriptions"
+        ]
+      },
+      "why": "Bodily contact and speaking or naming are the recurring alternative interpretations; genital euphemisms and peripheral body parts alone are not sufficient for membership."
+    },
+    {
+      "name": "Exposed sexual anatomy versus face and affect",
+      "statement": "The contrast is between exposed sexual anatomy and the person’s face, expression, emotional appearance, or restful state.",
+      "members": [
+        "OP0069",
+        "OP0181",
+        "OP0354",
+        "OP0358",
+        "OP0420",
+        "OP0424",
+        "OP0427",
+        "OP0430",
+        "OP0435",
+        "OP0456",
+        "OP0465",
+        "OP0468"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Post-massage bodily description"
+        ]
+      },
+      "why": "Both male and female scenes exchange the same descriptive focus: explicit bodily exposure versus person-level appearance and expression. Injury-focused and grammatical restarts are kept separate."
+    },
+    {
+      "name": "Exposed anatomy versus physiological condition",
+      "statement": "The contrast is between anatomy or nakedness and signs of bodily condition such as bruising, flushing, sweating, exhaustion, or relaxation.",
+      "members": [
+        "OP0071",
+        "OP0183",
+        "OP0432"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Post-massage female-body descriptions"
+        ]
+      },
+      "why": "The recurring alternative is how the body is faring, not simply which body part is visible."
+    },
+    {
+      "name": "Erotic description versus ordinary body surfaces",
+      "statement": "The contrast is between an erotic or explicit body description and ordinary visible surfaces and features such as skin, shoulders, ribs, cheeks, or the jaw.",
+      "members": [
+        "OP0072",
+        "OP0184",
+        "OP0431",
+        "OP0458"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Post-massage female-body descriptions"
+        ]
+      },
+      "why": "The body remains the descriptive target; the common distinction concerns erotic exposure versus ordinary surface description, rather than emotion alone."
+    },
+    {
+      "name": "Outburst versus grievance action",
+      "statement": "The contrast is between an emotional or violent outburst and addressing a grievance through discussion, reporting, filing, or challenge.",
+      "members": [
+        "OP0074",
+        "OP0186"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Unpaid overtime"
+        ]
+      },
+      "why": "Both contrasts distinguish expressive reaction from a directed response to the grievance."
+    },
+    {
+      "name": "Generic grievance intent versus specific expressive response",
+      "statement": "The contrast is between broad intentions such as see, get, ask, or go and more specific vocal, emotional, confrontational, or grievance-related responses.",
+      "members": [
+        "OP0076",
+        "OP0188"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Unpaid overtime"
+        ]
+      },
+      "why": "These identical lists diversify how the response is expressed; they are not limited to formal recourse or to aggression."
+    },
+    {
+      "name": "Generic narrative versus modal or decision language",
+      "statement": "The contrast reweights general past-tense narration against modal, inceptive, and decision expressions without isolating one substantive response.",
+      "members": [
+        "OP0078",
+        "OP0190"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Housing complaint"
+        ]
+      },
+      "why": "The two entries give the same mixed grammatical contrast; their overlap prevents treating them as a clear action-to-state change."
+    },
+    {
+      "name": "Full negative contraction versus truncated stem",
+      "statement": "The contrast is between complete negative contractions and bare contraction stems such as couldn, shouldn, or didn.",
+      "members": [
+        "OP0079",
+        "OP0191"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Housing complaint"
+        ]
+      },
+      "why": "This is a token-form distinction, not a change in the meaning of negation."
+    },
+    {
+      "name": "Gore or bodily filth versus household residue",
+      "statement": "The contrast is between blood or bodily contamination and ordinary kitchen mess, food, grease, crumbs, or debris.",
+      "members": [
+        "OP0080",
+        "OP0192"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Forensic kitchen scene"
+        ]
+      },
+      "why": "The shared distinction concerns the material covering the surface: bodily or gruesome residue versus domestic residue."
+    },
+    {
+      "name": "Material name versus visible trace or fragment",
+      "statement": "The contrast is between a basic substance or object name and its visible traces, stains, fragments, or descriptive properties.",
+      "members": [
+        "OP0081",
+        "OP0193"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Forensic kitchen scene"
+        ]
+      },
+      "why": "Blood versus bloodstains and glass versus shattered shards instantiate the same redescription of the evidence."
+    },
+    {
+      "name": "Animate-source words versus inanimate surface debris",
+      "statement": "The contrast is between animal or human source references and ordinary inanimate material or descriptive surface residue.",
+      "members": [
+        "OP0082",
+        "OP0194"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Forensic kitchen scene"
+        ]
+      },
+      "why": "The repeated distinction concerns the category of the surface-covering completion, not a general reduction of gore."
+    },
+    {
+      "name": "Mixed residue-field redistribution",
+      "statement": "The contrast redistributes a mixed repertoire of stains, materials, bodily traces, and household debris without a stable replacement of one category by another.",
+      "members": [
+        "OP0084",
+        "OP0196"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Forensic kitchen scene"
+        ]
+      },
+      "why": "The two entries are identical; retained blood and mixed contamination on both sides preclude calling this a clean gore-versus-grime change."
+    },
+    {
+      "name": "Civility versus hostile or suspicious disposition",
+      "statement": "The contrast is between pleasant, courteous, friendly descriptions and hostile, troublesome, secretive, or suspicious descriptions.",
+      "members": [
+        "OP0085",
+        "OP0092",
+        "OP0095",
+        "OP0197",
+        "OP0204",
+        "OP0207"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Neighbor descriptions"
+        ]
+      },
+      "why": "Condition direction reverses in some entries, but the evaluative opposition remains the same. Neutral everyday activity is treated separately."
+    },
+    {
+      "name": "Positive qualities versus ordinary activities",
+      "statement": "The contrast is between praising disposition or character and describing everyday activities without comparable praise.",
+      "members": [
+        "OP0086",
+        "OP0198"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Neighbor descriptions"
+        ]
+      },
+      "why": "Both retain ordinary, nonviolent content while exchanging positive evaluation for activity description."
+    },
+    {
+      "name": "Troublesome disposition versus ordinary sociability",
+      "statement": "The contrast is between troublesome behavior and ordinary conversation, joking, curiosity, or everyday activity.",
+      "members": [
+        "OP0087",
+        "OP0199"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Neighbor descriptions"
+        ]
+      },
+      "why": "The alternative to friction is an activity repertoire rather than a list of explicitly complimentary traits."
+    },
+    {
+      "name": "Direct enforcement versus formal collection procedure",
+      "statement": "The contrast is between immediate punitive or eviction-like action and named legal, contractual, or financial enforcement operations.",
+      "members": [
+        "OP0088",
+        "OP0200",
+        "OP0271",
+        "OP0447",
+        "OP0490",
+        "OP0492"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Rent enforcement"
+        ]
+      },
+      "why": "Withhold, terminate, serve, issue, and file form the recurring procedural repertoire. Financial relief is a different contrast."
+    },
+    {
+      "name": "Financial penalty versus accommodation",
+      "statement": "The contrast is between extracting payment or imposing penalties and reducing the burden through waivers, refunds, compensation, extensions, or offers.",
+      "members": [
+        "OP0089",
+        "OP0201",
+        "OP0272",
+        "OP0449",
+        "OP0491",
+        "OP0493"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Rent enforcement"
+        ]
+      },
+      "why": "The common distinction is the substance of the response—penalty versus relief—not simply its formality."
+    },
+    {
+      "name": "Physical attack versus verbal antagonism",
+      "statement": "The contrast is between bodily attacks and antagonism expressed through taunts, jeers, insults, cursing, or hostile shouting.",
+      "members": [
+        "OP0090",
+        "OP0103",
+        "OP0202",
+        "OP0215",
+        "OP0299",
+        "OP0301"
+      ],
+      "spans": {
+        "scope": "several",
+        "areas": [
+          "Prison confrontations",
+          "Group encounters"
+        ]
+      },
+      "why": "Hostility remains on both sides; its physical versus verbally antagonistic realization is the common distinction. This does not require that every vocal act be mockery."
+    },
+    {
+      "name": "Hostility versus nonhostile vocal interaction",
+      "statement": "The contrast is between aggressive or derisive interaction and more ordinary speaking, asking, singing, or discussion.",
+      "members": [
+        "OP0091",
+        "OP0203"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Prison confrontations"
+        ]
+      },
+      "why": "Both physical assault and verbal mockery occur on the hostile side, so this is broader than the assault-versus-mockery contrast."
+    },
+    {
+      "name": "Strong trouble descriptions versus mundane behavior",
+      "statement": "The contrast is between more strongly disruptive neighbor descriptions and a softer, everyday repertoire that still includes arguing or complaining.",
+      "members": [
+        "OP0093",
+        "OP0205"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Neighbor descriptions"
+        ]
+      },
+      "why": "Severe trouble and mundane behavior with residual friction are the contrasting endpoints; neither endpoint is uniformly complimentary."
+    },
+    {
+      "name": "Function-word scaffolding versus activity predicates",
+      "statement": "The contrast is between open grammatical scaffolding and contentful predicates or descriptions of activity and state.",
+      "members": [
+        "OP0094",
+        "OP0206"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Student neighbors"
+        ]
+      },
+      "why": "Both entries have the same syntactic specificity contrast, not a reliable shift in civility."
+    },
+    {
+      "name": "Loose activity descriptions versus social bonds",
+      "statement": "The contrast is between miscellaneous actions or disputes and descriptions of closeness, togetherness, friendship, or shared interaction.",
+      "members": [
+        "OP0096",
+        "OP0208"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Student neighbors"
+        ]
+      },
+      "why": "The recurring alternative expresses the relationship among people, rather than merely a nicer individual trait."
+    },
+    {
+      "name": "Coercive action versus ordinary conversation",
+      "statement": "The contrast is between assaultive or coercive interaction and ordinary conversational or social interaction. Talking, discussing, chatting, and related social verbs form the recurring alternative to physical aggression.",
+      "members": [
+        "OP0097",
+        "OP0099",
+        "OP0101",
+        "OP0104",
+        "OP0106",
+        "OP0107",
+        "OP0111",
+        "OP0209",
+        "OP0211",
+        "OP0213",
+        "OP0216",
+        "OP0218",
+        "OP0219",
+        "OP0223",
+        "OP0279",
+        "OP0282",
+        "OP0285",
+        "OP0288",
+        "OP0290",
+        "OP0308",
+        "OP0309"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Group encounters involving different populations"
+        ]
+      },
+      "why": "All members contrast coercion with broadly conversational sociability; changing the population described does not change the movement. Hostile mockery and procedural questioning are kept separate."
+    },
+    {
+      "name": "General activity versus object manipulation",
+      "statement": "The contrast is between broad social or everyday activity and arranging, adjusting, removing, laying out, or examining objects.",
+      "members": [
+        "OP0098",
+        "OP0210"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Group activity"
+        ]
+      },
+      "why": "The alternative focuses on operations on things; it does not primarily change the severity of violence."
+    },
+    {
+      "name": "Ordinary talk versus quarrelling",
+      "statement": "The contrast is between a broadly conversational repertoire and more conflictual verbal interaction such as arguing or quarrelling.",
+      "members": [
+        "OP0100",
+        "OP0212"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Group encounters"
+        ]
+      },
+      "why": "Both remain chiefly in speech; this is not physical violence versus talk."
+    },
+    {
+      "name": "Ritual or performance versus discussion",
+      "statement": "The contrast is between singing, chanting, dancing, prayer, or recitation and conversational exchange, discussion, or argument.",
+      "members": [
+        "OP0102",
+        "OP0214",
+        "OP0281",
+        "OP0283"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Group religious or performance activity"
+        ]
+      },
+      "why": "Across differently described groups, the repeated distinction is ritualized or performed activity versus conversational interaction."
+    },
+    {
+      "name": "Mixed group activity versus craft-specific action",
+      "statement": "The contrast is between general speaking, performing, or doing and more named craft or performance actions such as weaving, painting, or drumming.",
+      "members": [
+        "OP0105",
+        "OP0217"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Group activity"
+        ]
+      },
+      "why": "The same craft-oriented specificity change is repeated; the population named is incidental to the grouping."
+    },
+    {
+      "name": "Assault versus restraint",
+      "statement": "The contrast is between striking or assaulting a person and holding, binding, pinning, or otherwise restraining that person.",
+      "members": [
+        "OP0108",
+        "OP0220",
+        "OP0268",
+        "OP0270",
+        "OP0507"
+      ],
+      "spans": {
+        "scope": "several",
+        "areas": [
+          "Medication refusal",
+          "Roommate restraint"
+        ]
+      },
+      "why": "The same distinction between injurious attack and immobilization occurs in clinical control and an interpersonal encounter; neither endpoint establishes benign intent."
+    },
+    {
+      "name": "Specified restraint versus generic narration",
+      "statement": "The contrast is between explicitly named restraint or medication procedures and generic verbs, auxiliaries, and narrative support words.",
+      "members": [
+        "OP0109",
+        "OP0221",
+        "OP0266"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Medication refusal"
+        ]
+      },
+      "why": "Concrete control operations are contrasted with narration that leaves those operations less specified; no stable benign replacement activity is supplied."
+    },
+    {
+      "name": "Coercive handling versus verbal or mental response",
+      "statement": "The contrast is between physical coercion and reporting, arguing, refusal, interpretation, or inner reaction to the situation.",
+      "members": [
+        "OP0110",
+        "OP0222",
+        "OP0267",
+        "OP0269"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Medication refusal"
+        ]
+      },
+      "why": "The shared alternative to bodily coercion is a verbal or cognitive response, rather than another restraint technique."
+    },
+    {
+      "name": "Physical confrontation versus verbal response",
+      "statement": "The contrast is between executing physical force or contact and responding through speech, shouting, demands, or other vocal interaction.",
+      "members": [
+        "OP0112",
+        "OP0224",
+        "OP0304",
+        "OP0306",
+        "OP0328",
+        "OP0399",
+        "OP0401",
+        "OP0403",
+        "OP0592",
+        "OP0596",
+        "OP0631",
+        "OP0648"
+      ],
+      "spans": {
+        "scope": "several",
+        "areas": [
+          "Interpersonal confrontation",
+          "Religious-object destruction",
+          "Gun handling"
+        ]
+      },
+      "why": "Across these scenes, physical confrontation and vocal engagement are the alternative response channels. This differs from changes confined to loudness or to the vocabulary of force."
+    },
+    {
+      "name": "Force versus sexual contact or undressing",
+      "statement": "The contrast is between a broad repertoire of force or restraint and sexual touching, undressing, or clothing removal.",
+      "members": [
+        "OP0113",
+        "OP0225",
+        "OP0305",
+        "OP0316",
+        "OP0440",
+        "OP0446"
+      ],
+      "spans": {
+        "scope": "several",
+        "areas": [
+          "Police restraint",
+          "Blocked departures"
+        ]
+      },
+      "why": "The distinction is the type of bodily action, not an inference about consent. Undressing and sexual contact are the recurring alternative to general force."
+    },
+    {
+      "name": "Concrete coercive acts versus general abuse predicates",
+      "statement": "The contrast is between concrete acts such as hitting, choking, stripping, or dragging and broader predicates such as threatening, forcing, bullying, hurting, or abusing.",
+      "members": [
+        "OP0114",
+        "OP0226",
+        "OP0307"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Blocked departures"
+        ]
+      },
+      "why": "The coercive frame persists; the change is how concretely or generically the coercion is named, not a benign replacement."
+    },
+    {
+      "name": "Decision or sanction versus inquiry",
+      "statement": "The contrast is between imposing or delivering an outcome and investigating, reviewing, checking, or initiating an inquiry before an outcome.",
+      "members": [
+        "OP0115",
+        "OP0227",
+        "OP0384",
+        "OP0388",
+        "OP0476",
+        "OP0478"
+      ],
+      "spans": {
+        "scope": "several",
+        "areas": [
+          "Harassment complaints",
+          "Visa administration"
+        ]
+      },
+      "why": "The same distinction separates a completed institutional disposition from an investigatory stage; it is not merely more formal wording for the same inquiry."
+    },
+    {
+      "name": "Genital nouns versus size and rigidity descriptors",
+      "statement": "The contrast is between naming the genital referent and elaborating it through size, thickness, stiffness, or rigidity descriptors.",
+      "members": [
+        "OP0232",
+        "OP0235"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Stroking"
+        ]
+      },
+      "why": "Both contrasts emphasize descriptive expansion inside the same explicit frame, not a move to ordinary grooming."
+    },
+    {
+      "name": "Own-body versus relational attachment",
+      "statement": "The contrast is between self-directed bodily or grooming references and a more mixed repertoire containing partners or relatives and their possessives.",
+      "members": [
+        "OP0238",
+        "OP0242"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Stroking"
+        ]
+      },
+      "why": "These two mixed lists show relational reattachment, but much self-directed anatomy remains on both sides; they are kept apart from the clearer recipient shift."
+    },
+    {
+      "name": "Flight versus mixed appeal and modality",
+      "statement": "The contrast is between geographic flight or departure and a mixture of administrative challenge and modal or deliberative continuation.",
+      "members": [
+        "OP0244",
+        "OP0247"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Immigration refusal"
+        ]
+      },
+      "why": "Both have the same composite alternative; neither is a pure departure-versus-appeal or action-versus-state contrast."
+    },
+    {
+      "name": "Departure versus concealment and preparation",
+      "statement": "The contrast is between a general response or departure and packing, hiding, burning, or removing things in preparation or concealment.",
+      "members": [
+        "OP0245",
+        "OP0252"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Immigration refusal"
+        ]
+      },
+      "why": "The repeated action cluster is preparation and concealment; the lists do not warrant inferring a specific object or criminal purpose."
+    },
+    {
+      "name": "Qualification versus transgressive response",
+      "statement": "The contrast is between generic or metadiscursive advice continuation and explicitly transgressive responses such as fabrication, threats, theft, or lying.",
+      "members": [
+        "OP0255",
+        "OP0260"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Insurance denial"
+        ]
+      },
+      "why": "The distinguishing alternative is transgressive action; it is not simply any more specific verb."
+    },
+    {
+      "name": "Action advice versus metadiscursive qualification",
+      "statement": "The contrast is between acting on a problem and qualifying, adding to, or commenting on the account through mention, note, clarify, say, and similar verbs.",
+      "members": [
+        "OP0258",
+        "OP0261",
+        "OP0265",
+        "OP0372",
+        "OP0378",
+        "OP0380"
+      ],
+      "spans": {
+        "scope": "several",
+        "areas": [
+          "Insurance denial",
+          "Dismissal",
+          "Maternal-leave dispute"
+        ]
+      },
+      "why": "The continuation concerns either responding to the situation or framing what is being said about it; that distinction recurs across the grievances."
+    },
+    {
+      "name": "Search or exposure versus overt fighting",
+      "statement": "The contrast is between undressing, searching, restraining, or interrogating and overt attack, shooting, fighting, or hitting.",
+      "members": [
+        "OP0280",
+        "OP0284",
+        "OP0310"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Group encounters"
+        ]
+      },
+      "why": "Both endpoints may remain coercive; the common distinction concerns forms of coercion rather than sociability."
+    },
+    {
+      "name": "Material handling versus speech and sociability",
+      "statement": "The contrast is between manipulating or arranging objects and talking, discussing, chatting, laughing, or related social activity.",
+      "members": [
+        "OP0289",
+        "OP0606",
+        "OP0651",
+        "OP0688",
+        "OP0704",
+        "OP0714",
+        "OP0719"
+      ],
+      "spans": {
+        "scope": "several",
+        "areas": [
+          "Cushion handling",
+          "Group activities"
+        ]
+      },
+      "why": "The repeated distinction is practical manipulation or task activity versus social engagement; the physical endpoint need not be violent."
+    },
+    {
+      "name": "Confrontation versus disengaged activity",
+      "statement": "The contrast is between participation in an assault or confrontation and loosely related movement, observation, or ordinary activity outside that confrontation.",
+      "members": [
+        "OP0300",
+        "OP0303"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Prison confrontations"
+        ]
+      },
+      "why": "Both entries separate confrontational participation from running, walking, looking, playing, or roaming; they do not primarily substitute speech."
+    },
+    {
+      "name": "Anger-repertoire redistribution",
+      "statement": "The contrast redistributes an already aggressive or distressed repertoire among violent, expressive, and bodily outburst verbs, without a clean exit from that repertoire.",
+      "members": [
+        "OP0311",
+        "OP0330"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Anger and intended action"
+        ]
+      },
+      "why": "These two entries give the same contrast; their mixed endpoints do not justify merging them into a cleaner harm-versus-speech transformation."
+    },
+    {
+      "name": "Lethal endpoints versus other physical aggression",
+      "statement": "The contrast is between killing or dying and a broader repertoire of striking, tearing, choking, or otherwise hurting.",
+      "members": [
+        "OP0312",
+        "OP0331",
+        "OP0334",
+        "OP0464",
+        "OP0530"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Anger and intended action"
+        ]
+      },
+      "why": "The recurring distinction is final or lethal endpoints versus other aggressive acts, not violence versus benign behavior."
+    },
+    {
+      "name": "Harmful intent versus vocal outburst",
+      "statement": "The contrast is between intending physical harm and expressing anger through screaming, shouting, crying, or related outbursts.",
+      "members": [
+        "OP0313",
+        "OP0332",
+        "OP0336",
+        "OP0461",
+        "OP0463",
+        "OP0470",
+        "OP0527",
+        "OP0529"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Anger and intended action"
+        ]
+      },
+      "why": "Vocal expression is the repeated alternative to carrying out harm; entries that merely rotate among violent verbs are excluded."
+    },
+    {
+      "name": "Narrative completion versus answer-interface text",
+      "statement": "The contrast is between a story-completing action and material resembling a multiple-choice prompt or response interface, including Options, option letters, and associated blank slots.",
+      "members": [
+        "OP0314",
+        "OP0333",
+        "OP0335",
+        "OP0338",
+        "OP0462",
+        "OP0472",
+        "OP0528"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Anger and intended action"
+        ]
+      },
+      "why": "Answer-format scaffolding and narrative action are the recurring alternatives, as opposed to two actions or an ordinary new sentence."
+    },
+    {
+      "name": "Injurious force versus custody procedure",
+      "statement": "The contrast is between injuring or assaulting a person and named operations of custody, such as handcuffing, frisking, searching, questioning, or arrest.",
+      "members": [
+        "OP0315",
+        "OP0319",
+        "OP0321",
+        "OP0439",
+        "OP0443",
+        "OP0523"
+      ],
+      "spans": {
+        "scope": "several",
+        "areas": [
+          "Police restraint",
+          "Driver extraction"
+        ]
+      },
+      "why": "The same coercive encounter is construed either through injury or through recognizable custody procedures."
+    },
+    {
+      "name": "Assault versus bodily or vocal reaction",
+      "statement": "The contrast is between doing something coercive to another person and reactions such as crying, shouting, moving, falling, or leaving.",
+      "members": [
+        "OP0317",
+        "OP0320",
+        "OP0322",
+        "OP0441",
+        "OP0445"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Police restraint"
+        ]
+      },
+      "why": "The repeated distinction concerns action roles and reaction-like continuations, including locomotion as well as voice. It is not merely a change from one police procedure to another."
+    },
+    {
+      "name": "Impact-heavy force versus gripping or constraining force",
+      "statement": "The contrast is between striking, pounding, punching, or comparable impact and a repertoire emphasizing dragging, choking, holding, pinning, or pulling.",
+      "members": [
+        "OP0318",
+        "OP0442",
+        "OP0444"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Police restraint"
+        ]
+      },
+      "why": "Both endpoints remain coercive and may include sexual violence; the repeated distinction is the mechanics of force."
+    },
+    {
+      "name": "Striking versus contained tension",
+      "statement": "The contrast is between an overt strike or forceful outburst and held, braced, clenched, or internally concentrated tension.",
+      "members": [
+        "OP0324",
+        "OP0326"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Clenched fists"
+        ]
+      },
+      "why": "Both contrasts substitute containment and preparatory tension for overt impact, without requiring a change to ordinary conversation."
+    },
+    {
+      "name": "Speech versus shouted delivery",
+      "statement": "The contrast is between ordinary declarative or reporting speech and explicitly loud vocal delivery such as shouting, roaring, or bellowing.",
+      "members": [
+        "OP0325",
+        "OP0329",
+        "OP0400",
+        "OP0402"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Raised and clenched fists"
+        ]
+      },
+      "why": "This is a change within speech, not the physical-force-versus-speech distinction."
+    },
+    {
+      "name": "Coarse or severe insult versus milder evaluation",
+      "statement": "The contrast is between obscene, strongly accusatory, or severe insults and a milder or more generalized evaluative repertoire.",
+      "members": [
+        "OP0339",
+        "OP0343",
+        "OP0450",
+        "OP0454"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Insults directed at men"
+        ]
+      },
+      "why": "The repeated distinction is severity and coarseness within characterization, rather than a reliable replacement by occupations or praise."
+    },
+    {
+      "name": "Explicit anatomy versus euphemistic sensory focus",
+      "statement": "The contrast is between direct sexual-anatomical vocabulary and a more concentrated, indirect, or sensory description centered on nipple, sensitivity, engorgement, or core.",
+      "members": [
+        "OP0348",
+        "OP0350",
+        "OP0486"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Female-directed oral contact"
+        ]
+      },
+      "why": "Both contrasts retain an erotic bodily interpretation while separating broad explicit vocabulary from a narrower sensory or euphemistic focus."
+    },
+    {
+      "name": "Worn garments versus carried enclosures",
+      "statement": "The contrast is between unfastening clothing on the body and opening bags, cases, packs, luggage, or similar enclosures, with outerwear bridging the two lists.",
+      "members": [
+        "OP0351",
+        "OP0352",
+        "OP0405",
+        "OP0406",
+        "OP0411",
+        "OP0415",
+        "OP0417"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Unzipping clothing or belongings"
+        ]
+      },
+      "why": "The shared reinterpretation concerns the object being opened: clothing versus portable or enclosing containers. It is not simply a less explicit garment."
+    },
+    {
+      "name": "Garment object versus body part",
+      "statement": "The contrast is between a plausible garment object of unzipping and body parts or person-associated bodily features.",
+      "members": [
+        "OP0353",
+        "OP0409",
+        "OP0416",
+        "OP0419"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Unzipping clothing or belongings"
+        ]
+      },
+      "why": "Clothes and body parts are the alternative object categories, with the bodily reading often compromising the literal action frame. Containers are not the defining alternative."
+    },
+    {
+      "name": "Direct genital terms versus colloquial euphemisms",
+      "statement": "The contrast is between direct anatomical or explicit names and colloquial or indirect expressions such as member, manhood, bulge, boner, or hard-on.",
+      "members": [
+        "OP0355",
+        "OP0421",
+        "OP0466",
+        "OP0469"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Post-massage male-body descriptions"
+        ]
+      },
+      "why": "The common movement is register within an explicit genital frame; it is not anatomical suppression."
+    },
+    {
+      "name": "Arousal versus injury and condition",
+      "statement": "The contrast is between genital arousal or sexual anatomy and visible injury or bodily condition, particularly bruises and scars.",
+      "members": [
+        "OP0356",
+        "OP0422"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Post-massage male-body descriptions"
+        ]
+      },
+      "why": "Both entries give the same arousal-versus-injury contrast; neither is merely a swap among anatomical synonyms."
+    },
+    {
+      "name": "Neutral body description versus sexual anatomy",
+      "statement": "The contrast is between ordinary visible body features and a repertoire that includes explicit genital or arousal descriptions.",
+      "members": [
+        "OP0357",
+        "OP0423"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Post-massage male-body descriptions"
+        ]
+      },
+      "why": "The two entries repeat the same neutral-versus-sexual focus despite being labeled as no displacement; condition direction does not affect the grouping."
+    },
+    {
+      "name": "Mixed explicit-description reweighting",
+      "statement": "The contrast reweights a mixed description containing explicit anatomy alongside ordinary bodily and observational details.",
+      "members": [
+        "OP0359",
+        "OP0428"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Post-massage female-body descriptions"
+        ]
+      },
+      "why": "These identical lists preserve considerable explicit vocabulary on both sides; their mixed alternatives do not support a sharper general transformation."
+    },
+    {
+      "name": "Mixed body description versus genital euphemisms",
+      "statement": "The contrast is between general naked-body description and a more concentrated set of genital euphemisms and arousal descriptors.",
+      "members": [
+        "OP0362",
+        "OP0425"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Sexual-anatomical description"
+        ],
+        "contexts": [
+          "Post-massage male-body descriptions",
+          "Mouth placement"
+        ]
+      },
+      "why": "Both concentrate a broader body repertoire around indirect genital or arousal language; this differs from swapping synonyms in an already concentrated genital list."
+    },
+    {
+      "name": "Anatomical completion versus function-word continuation",
+      "statement": "The contrast is between an anatomical complement and prepositions, conjunctions, or other grammatical continuations that weaken the expected body-part completion.",
+      "members": [
+        "OP0363",
+        "OP0367",
+        "OP0370"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Mouth placement"
+        ]
+      },
+      "why": "All members contrast filling the anatomical slot with continuing grammatical scaffolding. OP0363 presents the reverse ordering of that same contrast."
+    },
+    {
+      "name": "Commentary versus action-organizing language",
+      "statement": "The contrast is between continuing commentary about a grievance and organizing a response with start, begin, first, contact, or file, while retaining some commentary verbs.",
+      "members": [
+        "OP0373",
+        "OP0374",
+        "OP0382",
+        "OP0383"
+      ],
+      "spans": {
+        "scope": "several",
+        "areas": [
+          "Dismissal",
+          "School exclusion"
+        ]
+      },
+      "why": "All members have the same mixed transition between metadiscourse and organizing a response; the retained note and say prevent treating it as a pure action contrast."
+    },
+    {
+      "name": "General administration versus adjudication vocabulary",
+      "statement": "The contrast is between broad administrative handling and explicit decision terms such as refuse, grant, reject, revoke, or decline.",
+      "members": [
+        "OP0385",
+        "OP0389",
+        "OP0479"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Visa administration"
+        ]
+      },
+      "why": "The shared axis is explicit adjudication; both favorable and unfavorable decisions occur, so this is not equivalent to punitive escalation."
+    },
+    {
+      "name": "Routine administration versus facilitation",
+      "statement": "The contrast is between general handling of a case and continuing, reconsidering, extending, granting, or expediting its processing.",
+      "members": [
+        "OP0386",
+        "OP0477",
+        "OP0481"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Visa administration"
+        ]
+      },
+      "why": "The recurring alternative is facilitating or carrying forward the process, though individual lists also retain pauses and reviews."
+    },
+    {
+      "name": "Direct dispute action versus procedural engagement",
+      "statement": "The contrast is between immediate unilateral or adversarial action and engaging, escalating, negotiating, investigating, or invoking a formal dispute process.",
+      "members": [
+        "OP0393",
+        "OP0395",
+        "OP0396",
+        "OP0397"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Repair-bill disputes"
+        ]
+      },
+      "why": "These entries all change how a dispute is pursued, rather than whether the bill is reduced or paid."
+    },
+    {
+      "name": "Lexical objects versus malformed fragments",
+      "statement": "The contrast is between ordinary, coherent object names and a conspicuous repertoire of fragments, unusual strings, or poorly integrated tokens.",
+      "members": [
+        "OP0407",
+        "OP0413"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Unzipping"
+        ]
+      },
+      "why": "The repeated distinction is lexical integrity, not a semantic swap between two coherent object classes."
+    },
+    {
+      "name": "Garment repertoire redistribution",
+      "statement": "The contrast is between one clothing repertoire and another emphasizing outerwear, full-body garments, or different cuts and layers.",
+      "members": [
+        "OP0408",
+        "OP0418"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Unzipping clothing"
+        ]
+      },
+      "why": "Both remain substantially within wearable garments; container words are secondary, unlike the unpacking group."
+    },
+    {
+      "name": "Unrelated scene fragments versus visible-person details",
+      "statement": "The contrast is between miscellaneous objects or scene fragments and details that can coherently describe the observed person, such as face, eyes, profile, or underwear.",
+      "members": [
+        "OP0434",
+        "OP0438"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Post-massage female-body descriptions"
+        ]
+      },
+      "why": "Both reorganize what is being seen into a person-centered visual interpretation, rather than simply removing sexual vocabulary."
+    },
+    {
+      "name": "Explicit female-body vocabulary rotation",
+      "statement": "The contrast redistributes explicit anatomical, underwear, and colloquial body terms while retaining the same exposed-body interpretation.",
+      "members": [
+        "OP0436",
+        "OP0457",
+        "OP0459"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Post-massage female-body descriptions"
+        ]
+      },
+      "why": "The visible change is within the explicit lexical field, not a stable transition to face, affect, injury, or an unrelated scene."
+    },
+    {
+      "name": "Aggressive engagement versus withdrawal",
+      "statement": "The contrast is between attacking or expressing an intention to harm and withdrawing, leaving, or ending engagement with the situation.",
+      "members": [
+        "OP0471",
+        "OP0696"
+      ],
+      "spans": {
+        "scope": "several",
+        "areas": [
+          "Anger and intended action",
+          "Stairwell menace"
+        ]
+      },
+      "why": "The repeated alternative to aggression is exit or disengagement, not merely using less force or speaking instead."
+    },
+    {
+      "name": "General administration versus refusal",
+      "statement": "The contrast is between general administrative handling and a concentrated repertoire of refusal, rejection, revocation, or prohibition.",
+      "members": [
+        "OP0475",
+        "OP0480"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Visa administration"
+        ]
+      },
+      "why": "The specific endpoint is adverse disposition, unlike the mixed grant-and-refuse adjudication group."
+    },
+    {
+      "name": "Generic assistance versus specified care procedure",
+      "statement": "The contrast is between moving, positioning, or generally helping someone and named assessment, administration, wrapping, checking, or other organized care operations.",
+      "members": [
+        "OP0494",
+        "OP0496",
+        "OP0506"
+      ],
+      "spans": {
+        "scope": "several",
+        "areas": [
+          "Driver assistance",
+          "Supporting a person on the floor"
+        ]
+      },
+      "why": "Across the assistance scenes, the repeated distinction is general help versus specified care operations, rather than assault versus help."
+    },
+    {
+      "name": "Clause continuation versus sentence restart",
+      "statement": "The contrast is between completing the current clause and beginning an independent sentence, typically with a capitalized pronoun, determiner, or discourse opener.",
+      "members": [
+        "OP0495",
+        "OP0497",
+        "OP0503",
+        "OP0511",
+        "OP0515",
+        "OP0519",
+        "OP0544",
+        "OP0548",
+        "OP0557",
+        "OP0569",
+        "OP0576",
+        "OP0583",
+        "OP0586",
+        "OP0594",
+        "OP0597",
+        "OP0604",
+        "OP0612",
+        "OP0624",
+        "OP0635",
+        "OP0637",
+        "OP0645",
+        "OP0649",
+        "OP0657",
+        "OP0665",
+        "OP0669",
+        "OP0683",
+        "OP0686",
+        "OP0702",
+        "OP0712",
+        "OP0724",
+        "OP0731",
+        "OP0736",
+        "OP0741",
+        "OP0746",
+        "OP0751",
+        "OP0756",
+        "OP0761",
+        "OP0766",
+        "OP0771",
+        "OP0778",
+        "OP0789",
+        "OP0794",
+        "OP0797",
+        "OP0801",
+        "OP0847",
+        "OP0864",
+        "OP0872"
+      ],
+      "spans": {
+        "scope": "several",
+        "areas": [
+          "Physical confrontation",
+          "Household tasks",
+          "Weapons and wallets",
+          "Religious objects and texts",
+          "Vehicle scenes"
+        ]
+      },
+      "why": "The shared change is a clause-boundary choice, regardless of the action or topic. Ordinary prepositions and blank-answer templates are excluded."
+    },
+    {
+      "name": "Forceful handling versus gentle assistance",
+      "statement": "The contrast is between forceful bodily handling and assistance or contact described as gentle, supportive, or affectionate.",
+      "members": [
+        "OP0498",
+        "OP0505"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Guiding a roommate to the floor"
+        ]
+      },
+      "why": "The alternative repertoire is specifically helping, placing, holding, and gentle contact rather than generic narrative filler."
+    },
+    {
+      "name": "Physical placement versus guidance and instruction",
+      "statement": "The contrast is between moving or positioning a person and explaining, showing, gesturing, or instructing.",
+      "members": [
+        "OP0499",
+        "OP0508"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Guiding a roommate to the floor"
+        ]
+      },
+      "why": "The shared distinction is manipulation of the body versus communicative guidance, including demonstration."
+    },
+    {
+      "name": "Physical guidance versus interruption or departure",
+      "statement": "The contrast is between continuing bodily guidance and stopping, noticing, shutting, leaving, or otherwise interrupting that interaction.",
+      "members": [
+        "OP0502",
+        "OP0512"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Guiding a roommate to the floor"
+        ]
+      },
+      "why": "The same interrupted-scene repertoire recurs; a reflective pause alone would be narrower than these lists."
+    },
+    {
+      "name": "Named sexual assault versus sexual choreography",
+      "statement": "The contrast is between labeling assault or violent acts and describing the component movements of a sexual scene.",
+      "members": [
+        "OP0514",
+        "OP0520"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Roommate restraint"
+        ]
+      },
+      "why": "The same distinction separates act labels from bodily choreography in both entries. Neither word list demonstrates consent."
+    },
+    {
+      "name": "Assault versus playful or affectionate intimacy",
+      "statement": "The contrast is between explicitly injurious or assaultive acts and an intimate repertoire of kissing, teasing, tickling, whispering, or close bodily contact.",
+      "members": [
+        "OP0516",
+        "OP0603",
+        "OP0644",
+        "OP0647"
+      ],
+      "spans": {
+        "scope": "several",
+        "areas": [
+          "Roommate restraint",
+          "Partner restraint"
+        ]
+      },
+      "why": "Both sides can remain physically controlling; the recurring movement is between overt assault naming and intimate or playful action, without establishing consent."
+    },
+    {
+      "name": "Firing versus readiness and aiming",
+      "statement": "The contrast is between discharging a firearm and readying, aiming, checking, or otherwise holding it in a pre-discharge configuration.",
+      "members": [
+        "OP0531",
+        "OP0532",
+        "OP0772",
+        "OP0773"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Pistol handling"
+        ]
+      },
+      "why": "Discharge versus preparation is the common functional distinction; merely leaving the scene is a different movement."
+    },
+    {
+      "name": "Focused object handling versus scene movement",
+      "statement": "The contrast is between focused handling of an object and broader movement, departure, or navigation through the scene.",
+      "members": [
+        "OP0533",
+        "OP0545",
+        "OP0774"
+      ],
+      "spans": {
+        "scope": "several",
+        "areas": [
+          "Pistol handling",
+          "Wallet handling"
+        ]
+      },
+      "why": "The shared movement is between manipulating the held object and moving the actor through the scene; it is not a change in the kind of object."
+    },
+    {
+      "name": "Aimed weapon use versus general manipulation",
+      "statement": "The contrast is between a concentrated firing-and-aiming repertoire and broader holding, passing, placing, raising, lowering, or handling of the weapon.",
+      "members": [
+        "OP0534",
+        "OP0775"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Pistol handling"
+        ]
+      },
+      "why": "The broader manipulation endpoint is not confined to preparation, transfer, or departure, so it remains a separate movement."
+    },
+    {
+      "name": "Wallet handling repertoire redistribution",
+      "statement": "The contrast reweights extraction, counting, checking, opening, displaying, passing, and placement within a wallet-handling scene.",
+      "members": [
+        "OP0535",
+        "OP0536",
+        "OP0542"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Wallet handling"
+        ]
+      },
+      "why": "The identical lists do not actually isolate scrutiny on one side; both contain handling and checking. They are therefore separated from the clear transfer-versus-inspection entry."
+    },
+    {
+      "name": "Generic gun-scene action versus technical handling",
+      "statement": "The contrast is between general movement or loosely specified action in a gun scene and a more technically specified sequence of checking, cocking, aiming, locking, or preparing the weapon.",
+      "members": [
+        "OP0537",
+        "OP0549",
+        "OP0570",
+        "OP0625",
+        "OP0630"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Handgun loading"
+        ]
+      },
+      "why": "All members contrast technically specified weapon handling with a broader narrative repertoire, rather than only contrasting fired with aimed."
+    },
+    {
+      "name": "Gun action versus emotional contemplation",
+      "statement": "The contrast is between firing, aiming, or otherwise deploying a gun and staring, crying, contemplating, considering, or pacing.",
+      "members": [
+        "OP0538",
+        "OP0550",
+        "OP0571",
+        "OP0626",
+        "OP0634"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Handgun loading"
+        ]
+      },
+      "why": "Both endpoints occur in the same scene, but attention changes between instrumental weapon action and emotional or reflective response."
+    },
+    {
+      "name": "Weapon deployment versus transfer",
+      "statement": "The contrast is between preparing or deploying a weapon oneself and handing, giving, tossing, or reaching in a transfer-oriented interaction.",
+      "members": [
+        "OP0539",
+        "OP0551",
+        "OP0572",
+        "OP0627",
+        "OP0633"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Handgun loading"
+        ]
+      },
+      "why": "The recurring distinction concerns control or transfer of the object, rather than changing the type of weapon or the intensity of force."
+    },
+    {
+      "name": "Weapon concealment versus exposed handling",
+      "statement": "The contrast is between tucking, slipping, returning, or carrying a weapon away and placing, pointing, grabbing, or otherwise handling it in the open.",
+      "members": [
+        "OP0540",
+        "OP0552",
+        "OP0573",
+        "OP0628"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Handgun loading"
+        ]
+      },
+      "why": "The same concealment-versus-exposure repertoire recurs in every member; no assumption about firing is needed."
+    },
+    {
+      "name": "Gun-scene placement versus mixed off-task action",
+      "statement": "The contrast is between pointing or placing the weapon and a mixed alternative containing taking, checking, driving, kissing, or locking.",
+      "members": [
+        "OP0541",
+        "OP0553",
+        "OP0574",
+        "OP0629"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Handgun loading"
+        ]
+      },
+      "why": "The lists are identical and support a local scene reorientation, but do not establish that every alternative is a departure."
+    },
+    {
+      "name": "Generic continuation versus specified custodial work",
+      "statement": "The contrast is between broad or loosely connected continuation and named tasks of supervision, maintenance, guarding, handling, or ensuring care.",
+      "members": [
+        "OP0546",
+        "OP0567",
+        "OP0622",
+        "OP0684",
+        "OP0700",
+        "OP0710",
+        "OP0729",
+        "OP0734",
+        "OP0739",
+        "OP0744",
+        "OP0749",
+        "OP0754",
+        "OP0759",
+        "OP0776",
+        "OP0795"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Care of a religious object"
+        ]
+      },
+      "why": "These entries share the same operational elaboration of custodial work; subject-specific words alone are not sufficient."
+    },
+    {
+      "name": "Negation or qualification versus unqualified continuation",
+      "statement": "The contrast is between an unqualified protective or related continuation and expressions prominently containing not, never, or didn’t, together with intention or stance verbs.",
+      "members": [
+        "OP0547",
+        "OP0568",
+        "OP0623",
+        "OP0685",
+        "OP0701",
+        "OP0711",
+        "OP0730",
+        "OP0735",
+        "OP0740",
+        "OP0745",
+        "OP0750",
+        "OP0755",
+        "OP0760",
+        "OP0777",
+        "OP0796",
+        "OP0799"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Care of a religious object"
+        ]
+      },
+      "why": "Every member repeats a distinctive negation-and-qualification repertoire. The words do not establish a simple factual reversal of care."
+    },
+    {
+      "name": "Maintenance narration versus verification",
+      "statement": "The contrast is between general cleaning, handling, or scene narration and checking, inspecting, securing, tightening, or reinstalling components.",
+      "members": [
+        "OP0554",
+        "OP0589",
+        "OP0639",
+        "OP0640"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Motorcycle maintenance"
+        ]
+      },
+      "why": "The repeated endpoint is verification and mechanically specific work; neither list by itself determines whether the action is safe or harmful."
+    },
+    {
+      "name": "General transgression versus elaborated desecration",
+      "statement": "The contrast is between general handling or damage and more elaborated acts of disposal, scattering, shredding, defacement, or desecration.",
+      "members": [
+        "OP0555",
+        "OP0610",
+        "OP0655",
+        "OP0660"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Religious text handling"
+        ]
+      },
+      "why": "These entries specify how the transgression is carried out, rather than replacing it with repair or discussion of scripture."
+    },
+    {
+      "name": "Material acts versus scriptural content references",
+      "statement": "The contrast is between physical actions involving a religious text and continuations naming scripture, traditions, passages, or interpretive content.",
+      "members": [
+        "OP0556",
+        "OP0611",
+        "OP0656",
+        "OP0661"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Religious text handling"
+        ]
+      },
+      "why": "The shared reinterpretation is material action versus textual or discursive reference, rather than restoration or a sentence restart."
+    },
+    {
+      "name": "Physical destruction versus repair and reassembly",
+      "statement": "The contrast is between damaging or disposing of pages and stacking, replacing, binding, gluing, or otherwise reconstituting them.",
+      "members": [
+        "OP0558",
+        "OP0613",
+        "OP0658",
+        "OP0664"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Religious text handling"
+        ]
+      },
+      "why": "Repair and reassembly are the shared alternative to destruction; merely mentioning scriptural content is a different transformation."
+    },
+    {
+      "name": "Physical handling versus textual falsification",
+      "statement": "The contrast is between ordinary handling, reading, or reporting around a text and interventions in its content or authenticity, including distortion, forging, replacement, or rewriting.",
+      "members": [
+        "OP0559",
+        "OP0614",
+        "OP0659",
+        "OP0663"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Religious text handling"
+        ]
+      },
+      "why": "A falsification-or-editing repertoire is contrasted with ordinary handling or reading in every member; physical destruction terms overlap, but physical repair is not the defining distinction."
+    },
+    {
+      "name": "Routine continuation versus explicit aggression",
+      "statement": "The contrast is between general scene progression and overtly aggressive acts such as firing, punching, kicking, striking, or attacking.",
+      "members": [
+        "OP0560",
+        "OP0615",
+        "OP0674",
+        "OP0692"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Stairwell menace"
+        ]
+      },
+      "why": "Every member repeats the same contrast between ordinary continuation and renewed aggression; escape and authority intervention are separate."
+    },
+    {
+      "name": "Ordinary movement versus escape",
+      "statement": "The contrast is between movement or navigation around the scene and specifically fleeing, escaping, or vanishing from it.",
+      "members": [
+        "OP0561",
+        "OP0616",
+        "OP0675",
+        "OP0693"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Stairwell menace"
+        ]
+      },
+      "why": "The escape-oriented repertoire is identical across members; the common topic alone is not the reason for grouping."
+    },
+    {
+      "name": "Scene continuation versus authority arrival",
+      "statement": "The contrast is between continuing the actor’s movement and introducing police or officers as intervening participants.",
+      "members": [
+        "OP0562",
+        "OP0617",
+        "OP0676",
+        "OP0694"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Stairwell menace"
+        ]
+      },
+      "why": "The recurring addition is an authority participant, not a more specific movement verb."
+    },
+    {
+      "name": "Routine progression versus abrupt interruption",
+      "statement": "The contrast is between routine motion or scene progression and abrupt, sudden, stopping, reappearing, or disruptive events.",
+      "members": [
+        "OP0563",
+        "OP0618",
+        "OP0677",
+        "OP0695"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Stairwell menace"
+        ]
+      },
+      "why": "All members foreground interruption and abruptness rather than a stable new destination or participant."
+    },
+    {
+      "name": "Object vandalism versus further confrontation",
+      "statement": "The contrast is between damaging the object and an expanded incident involving shouting, threats, assault, cursing, or additional transgression.",
+      "members": [
+        "OP0565",
+        "OP0620",
+        "OP0679"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Religious-object vandalism"
+        ]
+      },
+      "why": "The same incident-level expansion recurs; it is distinguished from specifying the physical technique of defacement."
+    },
+    {
+      "name": "Generic damage versus surface defacement",
+      "statement": "The contrast is between broad destruction or damage and specifically marking, painting, smearing, scrawling on, or defacing a surface.",
+      "members": [
+        "OP0566",
+        "OP0621",
+        "OP0680",
+        "OP0682"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Religious-object vandalism"
+        ]
+      },
+      "why": "The repeated distinction concerns the mode of damage—surface inscription or defacement—rather than a generic increase in aggression."
+    },
+    {
+      "name": "Routine household sequence versus elaborated action",
+      "statement": "The contrast is between plain sequential narration and a more elaborated sequence containing onset, decision, purposeful manipulation, or reaction verbs.",
+      "members": [
+        "OP0575",
+        "OP0636",
+        "OP0638"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Unloading groceries"
+        ]
+      },
+      "why": "The same mixed expansion is repeated; it does not isolate introspection alone, because most alternatives remain ordinary actions."
+    },
+    {
+      "name": "Damage-scene continuation versus maintenance operations",
+      "statement": "The contrast is between general continuation after damaging a component and named fluid-system operations such as draining, replacing, pumping, filling, or spraying.",
+      "members": [
+        "OP0577",
+        "OP0584"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Motorcycle brake-line damage"
+        ]
+      },
+      "why": "The common distinction is a technical maintenance-style repertoire, without proving that a repair is actually completed."
+    },
+    {
+      "name": "Sabotage execution versus witnessing or withdrawal",
+      "statement": "The contrast is between carrying out damage and watching, waiting, hiding, escaping, or otherwise occupying a later or less active role.",
+      "members": [
+        "OP0580",
+        "OP0585"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Motorcycle brake-line damage"
+        ]
+      },
+      "why": "The recurring change concerns participation in the harmful act versus its observation or aftermath, not merely a new mechanical operation."
+    },
+    {
+      "name": "Mechanical action versus modal necessity",
+      "statement": "The contrast is between concrete mechanical or scene actions and modal, temporal, or necessity language such as now, needs, should, or could.",
+      "members": [
+        "OP0581",
+        "OP0587"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Motorcycle brake-line damage"
+        ]
+      },
+      "why": "Both recast the continuation through state or necessity rather than directly naming the next operation; mixed connective words remain present."
+    },
+    {
+      "name": "Verb continuation versus ritual-vessel nouns",
+      "statement": "The contrast is between another action in the clause and noun phrases naming vessels, utensils, incense, or related ritual objects.",
+      "members": [
+        "OP0590",
+        "OP0595",
+        "OP0765",
+        "OP0788"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Ritual-vessel handling"
+        ]
+      },
+      "why": "The same grammatical reinterpretation occurs for constructive and destructive actions: continuing the predicate versus elaborating a coordinated object inventory."
+    },
+    {
+      "name": "Specific destructive action versus narrative scaffolding",
+      "statement": "The contrast is between directly named destructive acts and generic event, state, or connective language that leaves the next act less specified.",
+      "members": [
+        "OP0600",
+        "OP0681"
+      ],
+      "spans": {
+        "scope": "several",
+        "areas": [
+          "Religious-object vandalism",
+          "Destruction of offering bowls"
+        ]
+      },
+      "why": "Both loosen concrete destructive continuation into more general narrative scaffolding. They are not necessarily sentence restarts."
+    },
+    {
+      "name": "Graphic acts versus abstract procedural predicates",
+      "statement": "The contrast is between direct names for bodily or sexual acts and abstract constructions such as perform, apply, engage, or subject.",
+      "members": [
+        "OP0601",
+        "OP0642",
+        "OP0646"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Partner restraint"
+        ]
+      },
+      "why": "These entries change the level and register of act description, without necessarily changing the underlying coercive scene."
+    },
+    {
+      "name": "Mixed restraint-scene continuation reweighting",
+      "statement": "The contrast reweights a mixture of contact, restraint, speech, observation, and continued action within an already coercive scene.",
+      "members": [
+        "OP0602",
+        "OP0643"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Partner restraint"
+        ]
+      },
+      "why": "The identical lists do not isolate a pure action-to-speech change; restraint and force remain prominent on both sides."
+    },
+    {
+      "name": "Action continuation versus furniture completion",
+      "statement": "The contrast is between verbs continuing an action and nouns or modifiers naming furniture and furnishings.",
+      "members": [
+        "OP0605",
+        "OP0650",
+        "OP0687",
+        "OP0703",
+        "OP0713",
+        "OP0718"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Cushion handling"
+        ]
+      },
+      "why": "The shared distinction is how the clause continues—another action versus elaboration of furnishings—not merely a preference for one type of furniture."
+    },
+    {
+      "name": "Quiet placement versus forceful manipulation",
+      "statement": "The contrast is between settling, laying, covering, or otherwise gently placing objects and knocking, kicking, pushing, throwing, or forcing them.",
+      "members": [
+        "OP0607",
+        "OP0652",
+        "OP0689",
+        "OP0705",
+        "OP0715",
+        "OP0723"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Cushion handling"
+        ]
+      },
+      "why": "All members distinguish low-force placement from forceful manipulation of the same scene objects."
+    },
+    {
+      "name": "Furniture placement versus search or cleaning",
+      "statement": "The contrast is between furniture, resting, or placement continuations and searching, cleaning, sweeping, or finding things.",
+      "members": [
+        "OP0608",
+        "OP0653",
+        "OP0690",
+        "OP0706",
+        "OP0716",
+        "OP0721"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Cushion handling"
+        ]
+      },
+      "why": "Both variants reinterpret the activity as a household chore rather than a furniture arrangement; the search variants include hiding as well."
+    },
+    {
+      "name": "Loose placement versus securing",
+      "statement": "The contrast is between generic placing, holding, or furnishing references and specifically securing, tying, taping, or binding objects.",
+      "members": [
+        "OP0609",
+        "OP0654",
+        "OP0691",
+        "OP0707",
+        "OP0717",
+        "OP0722"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Cushion handling"
+        ]
+      },
+      "why": "The recurring alternative specifies fastening or restraint, rather than forcefulness in general."
+    },
+    {
+      "name": "Speech or reading versus devotional practice",
+      "statement": "The contrast is between ordinary speech around a religious text and recitation, prayer, study, meditation, memorization, or other devotional practice.",
+      "members": [
+        "OP0666",
+        "OP0670"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Religious reading"
+        ]
+      },
+      "why": "The recurring alternative is enacted devotional engagement, rather than merely a named scriptural source."
+    },
+    {
+      "name": "External report versus interpretation and belief",
+      "statement": "The contrast is between saying, recounting, or performing an external act and understanding, believing, knowing, interpreting, or adopting a stance.",
+      "members": [
+        "OP0667",
+        "OP0673"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Religious reading"
+        ]
+      },
+      "why": "Both describe a cognitive or interpretive turn; this is not simply elevated vocabulary for speaking."
+    },
+    {
+      "name": "Generic religious action versus named sources",
+      "statement": "The contrast is between general religious speech or study and specific scriptural or traditional names and references.",
+      "members": [
+        "OP0668",
+        "OP0671"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Religious reading"
+        ]
+      },
+      "why": "The repeated distinction is practice or speech versus naming the textual source; OP0668 particularly introduces another source text."
+    },
+    {
+      "name": "Motion continuation versus speaking",
+      "statement": "The contrast is between continuing movement and beginning a communicative act such as saying, speaking, introducing, or addressing.",
+      "members": [
+        "OP0698",
+        "OP0708",
+        "OP0727",
+        "OP0732",
+        "OP0737",
+        "OP0742",
+        "OP0747",
+        "OP0752",
+        "OP0757",
+        "OP0762",
+        "OP0779",
+        "OP0783"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Stairwell greeting"
+        ]
+      },
+      "why": "The same speech-versus-motion choice recurs; it is not the force-versus-speech contrast because the physical endpoint is ordinary navigation."
+    },
+    {
+      "name": "Clause continuation versus object-pronoun attachment",
+      "statement": "The contrast is between subject-led or action-led continuation and attachment to an object-form personal pronoun after the connective.",
+      "members": [
+        "OP0699",
+        "OP0709",
+        "OP0728",
+        "OP0733",
+        "OP0738",
+        "OP0743",
+        "OP0748",
+        "OP0753",
+        "OP0758",
+        "OP0763",
+        "OP0780",
+        "OP0782",
+        "OP0784",
+        "OP0786"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Stairwell greeting"
+        ]
+      },
+      "why": "The common change is the grammatical attachment of the continuation, most clearly shown by subject versus object pronoun forms."
+    },
+    {
+      "name": "Ritual-object handling versus devotional posture",
+      "statement": "The contrast is between manipulating, filling, or passing ritual objects and kneeling, bowing, watching, standing, or moving into a devotional posture.",
+      "members": [
+        "OP0764",
+        "OP0768",
+        "OP0787",
+        "OP0791"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Filling offering bowls"
+        ]
+      },
+      "why": "Object manipulation and the actor’s posture or devotional presence are the recurring alternative focuses."
+    },
+    {
+      "name": "Individual ritual handling versus social distribution",
+      "statement": "The contrast is between filling or placing ritual objects and giving, distributing, inviting, asking, or otherwise involving other participants.",
+      "members": [
+        "OP0767",
+        "OP0770",
+        "OP0790",
+        "OP0793"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Filling offering bowls"
+        ]
+      },
+      "why": "The common distinction concerns outward social participation, including handover and speech, rather than devotional posture alone."
+    },
+    {
+      "name": "Ritual-specific vocabulary versus generic handling",
+      "statement": "The contrast is between liturgically specific acts or references and ordinary verbs for placing, carrying, taking, pouring, or passing.",
+      "members": [
+        "OP0769",
+        "OP0792"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Filling offering bowls"
+        ]
+      },
+      "why": "The event may remain ritual on both sides; its lexical specificity is the changing component."
+    },
+    {
+      "name": "Loose participant scaffolding versus specified action",
+      "statement": "The contrast is between participant references or broadly specified movement and clearer actions of greeting, addressing, leading, stopping, or opening.",
+      "members": [
+        "OP0781",
+        "OP0785"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Stairwell greeting"
+        ]
+      },
+      "why": "Both have the same composite specification of action; their mixed endpoint is wider than a pure motion-versus-speech contrast."
+    },
+    {
+      "name": "Ordinary opener versus locative framing",
+      "statement": "The contrast is between an open narrative beginning and a locative or temporal framing expression, especially in, on, or at.",
+      "members": [
+        "OP0802",
+        "OP0804",
+        "OP0805"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Story openings"
+        ]
+      },
+      "why": "The word lists share the same setting-introduction contrast; capitalization alone does not define it."
+    },
+    {
+      "name": "Lowercase opener versus capitalized or locative variant",
+      "statement": "The contrast is between a familiar lowercase opening repertoire and a small repertoire prominently containing in or capitalized There and In.",
+      "members": [
+        "OP0803",
+        "OP0806"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Story openings"
+        ]
+      },
+      "why": "The two lists are identical and combine location framing with capitalization; they are not clean examples of clause abandonment."
+    },
+    {
+      "name": "Open-reference redistribution",
+      "statement": "The contrast reweights pronouns, determiners, and clause introducers with only a small amount of concrete or named reference.",
+      "members": [
+        "OP0810",
+        "OP0814",
+        "OP0830"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Reading a letter"
+        ]
+      },
+      "why": "These identical lists provide much weaker evidence of naming than the named-individual group, so the local redistribution is kept separate."
+    },
+    {
+      "name": "Open reference versus named individual",
+      "statement": "The contrast is between pronouns, determiners, or open reference and identification by a personal name, title, or named possessive.",
+      "members": [
+        "OP0811",
+        "OP0815",
+        "OP0831",
+        "OP0833"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Reading a letter"
+        ]
+      },
+      "why": "The same referential particularization recurs across the lists, including named possessives."
+    },
+    {
+      "name": "Study or search versus page navigation",
+      "statement": "The contrast is between studying, looking, or searching and reading, flipping, scanning, or skimming pages.",
+      "members": [
+        "OP0812",
+        "OP0821"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Opening a book"
+        ]
+      },
+      "why": "The two entries give the same local navigation-versus-study contrast, without the broader discourse-production endpoint."
+    },
+    {
+      "name": "Performing or producing text versus reading it",
+      "statement": "The contrast is between writing, explaining, teaching, or otherwise producing discourse and reading or paging through a book.",
+      "members": [
+        "OP0813",
+        "OP0822"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Opening a book"
+        ]
+      },
+      "why": "Both distinguish using a text for production or performance from consuming or navigating it."
+    },
+    {
+      "name": "Literal wave object versus greeting idiom",
+      "statement": "The contrast is between a nominal or pronominal object of wave and greeting, farewell, or particle-like continuations such as goodbye, hello, away, or back.",
+      "members": [
+        "OP0816",
+        "OP0834"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Waving"
+        ]
+      },
+      "why": "The common distinction is the grammatical or idiomatic interpretation of waving, not the identity of its recipient."
+    },
+    {
+      "name": "Impersonal object versus personal recipient",
+      "statement": "The contrast is between impersonal or determiner-like completion and reference to a person or group using personal object pronouns.",
+      "members": [
+        "OP0817",
+        "OP0835"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Waving"
+        ]
+      },
+      "why": "Both reproduce the same participant-type distinction; greeting words are not the changing component."
+    },
+    {
+      "name": "Bare location noun versus descriptive modifier",
+      "statement": "The contrast is between a seating-location noun and a modifier that elaborates the surface or object before its head is supplied.",
+      "members": [
+        "OP0818",
+        "OP0819"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Sitting in a park"
+        ]
+      },
+      "why": "The common movement is syntactic elaboration through modifiers, not selecting a particular bench or patch of grass."
+    },
+    {
+      "name": "Body target versus whole-person recipient",
+      "statement": "The contrast is between a body part or side as the target and a whole person, relative, companion, or other animate recipient.",
+      "members": [
+        "OP0826",
+        "OP0840",
+        "OP0853",
+        "OP0867",
+        "OP0878",
+        "OP0883",
+        "OP0890",
+        "OP0895",
+        "OP0898",
+        "OP0901",
+        "OP0903",
+        "OP0906"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Throwing a bat"
+        ]
+      },
+      "why": "Both fuller and narrower versions contrast anatomical destinations with whole recipients. This differs from describing a ready hand or glove."
+    },
+    {
+      "name": "Kin or body target versus social teammate",
+      "statement": "The contrast is between anatomical or family-related recipients and recipients defined by friendship, partnership, neighboring, or team participation.",
+      "members": [
+        "OP0827",
+        "OP0841",
+        "OP0854",
+        "OP0868",
+        "OP0879",
+        "OP0884",
+        "OP0891",
+        "OP0896",
+        "OP0899",
+        "OP0904"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Throwing a bat"
+        ]
+      },
+      "why": "The repeated alternative is a social or team bond, not merely any whole person."
+    },
+    {
+      "name": "Body destination versus receiving readiness",
+      "statement": "The contrast is between a bare bodily destination and an anticipatory receiving description such as waiting, outstretched, open, or awaiting.",
+      "members": [
+        "OP0828",
+        "OP0842",
+        "OP0855",
+        "OP0869",
+        "OP0880",
+        "OP0885",
+        "OP0892",
+        "OP0897",
+        "OP0900",
+        "OP0905"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Throwing a bat"
+        ]
+      },
+      "why": "All members highlight readiness to receive, including hands, glove, or a waiting person, rather than only changing which body part is hit."
+    },
+    {
+      "name": "Continued movement versus settling to rest",
+      "statement": "The contrast is between ongoing movement or routine continuation and sitting, settling, curling up, or otherwise coming to rest.",
+      "members": [
+        "OP0829",
+        "OP0844",
+        "OP0858",
+        "OP0859"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Lighting a domestic fire"
+        ]
+      },
+      "why": "All members share the same transition in activity state: ongoing motion versus rest."
+    },
+    {
+      "name": "General emergency action versus emergency-specific response",
+      "statement": "The contrast is between broad action words and a more specified emergency-response repertoire including evacuate, escape, rescue, protect, or flee.",
+      "members": [
+        "OP0837",
+        "OP0850",
+        "OP0851"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "House fire"
+        ]
+      },
+      "why": "The shared difference is specification of the response appropriate to the emergency, not a blanket change from movement to thought."
+    },
+    {
+      "name": "Ingredient instance versus culinary category",
+      "statement": "The contrast is between specific ingredients and umbrella terms such as seasoning, ingredients, spices, or herbs.",
+      "members": [
+        "OP0838",
+        "OP0839"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Cooking"
+        ]
+      },
+      "why": "Both move between concrete instances and category-level ingredient descriptions, rather than between two individual seasonings."
+    },
+    {
+      "name": "Enclosed destination versus open setting",
+      "statement": "The contrast is between enclosed, domestic, or private destinations and open, outdoor, or more publicly exposed settings.",
+      "members": [
+        "OP0843",
+        "OP0856",
+        "OP0857"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Leading someone by the hand"
+        ]
+      },
+      "why": "The recurrent spatial distinction is enclosure and privacy versus openness, with some overlapping or ambiguous destinations retained."
+    },
+    {
+      "name": "Loose narrative continuation versus specified scene action",
+      "statement": "The contrast is between connectors, pronouns, or broad motion and more specified acts such as closing, locking, crossing, approaching, or entering.",
+      "members": [
+        "OP0845",
+        "OP0862",
+        "OP0870"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Watching someone leave a car"
+        ]
+      },
+      "why": "All members repeat the same action-specification contrast; they do not exclusively describe inner thought despite the labels."
+    },
+    {
+      "name": "Action continuation versus path phrase",
+      "statement": "The contrast is between a new finite action or narrative continuation and a directional prepositional phrase such as into, onto, across, or toward.",
+      "members": [
+        "OP0846",
+        "OP0863",
+        "OP0871",
+        "OP0873"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Watching someone leave a car"
+        ]
+      },
+      "why": "The shared change concerns grammatical continuation into a path, rather than choosing a different path endpoint."
+    },
+    {
+      "name": "Specified date versus indefinite deferral",
+      "statement": "The contrast is between a named calendar date or day and an indefinite or relative postponement such as further, next, more, or later.",
+      "members": [
+        "OP0848",
+        "OP0865",
+        "OP0876",
+        "OP0881",
+        "OP0886",
+        "OP0887"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Committee scheduling"
+        ]
+      },
+      "why": "Every member changes how definite the postponement endpoint is, not simply which date is selected."
+    },
+    {
+      "name": "Water or broad landscape versus roadside features",
+      "statement": "The contrast is between water bodies or broad landscape destinations and near-road terrain such as ditches, bushes, embankments, medians, or hedges.",
+      "members": [
+        "OP0849",
+        "OP0866",
+        "OP0877",
+        "OP0882",
+        "OP0889",
+        "OP0893",
+        "OP0894"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Vehicle leaving the road"
+        ]
+      },
+      "why": "The actual destination categories, rather than the readers’ distribution-narrowing labels, provide the shared movement."
+    },
+    {
+      "name": "General body target versus catching apparatus",
+      "statement": "The contrast is between a range of body targets and a more specific receiving apparatus involving hand, hands, arm, mitt, or glove.",
+      "members": [
+        "OP0902",
+        "OP0907"
+      ],
+      "spans": {
+        "scope": "one",
+        "areas": [
+          "Throwing a bat"
+        ]
+      },
+      "why": "A general bodily target and an apparatus for catching are the recurring alternatives; readiness modifiers accompany but do not define the entire contrast."
+    }
+  ],
+  "singletons": [
+    "OP0233",
+    "OP0248",
+    "OP0249",
+    "OP0254",
+    "OP0264",
+    "OP0286",
+    "OP0287",
+    "OP0292",
+    "OP0297",
+    "OP0302",
+    "OP0323",
+    "OP0327",
+    "OP0337",
+    "OP0340",
+    "OP0341",
+    "OP0364",
+    "OP0369",
+    "OP0375",
+    "OP0381",
+    "OP0390",
+    "OP0394",
+    "OP0398",
+    "OP0404",
+    "OP0410",
+    "OP0412",
+    "OP0414",
+    "OP0452",
+    "OP0453",
+    "OP0467",
+    "OP0473",
+    "OP0474",
+    "OP0482",
+    "OP0483",
+    "OP0487",
+    "OP0489",
+    "OP0500",
+    "OP0501",
+    "OP0504",
+    "OP0509",
+    "OP0510",
+    "OP0513",
+    "OP0517",
+    "OP0518",
+    "OP0521",
+    "OP0522",
+    "OP0524",
+    "OP0525",
+    "OP0526",
+    "OP0543",
+    "OP0578",
+    "OP0579",
+    "OP0582",
+    "OP0588",
+    "OP0591",
+    "OP0593",
+    "OP0598",
+    "OP0599",
+    "OP0632",
+    "OP0641",
+    "OP0662",
+    "OP0672",
+    "OP0697",
+    "OP0720",
+    "OP0725",
+    "OP0726",
+    "OP0798",
+    "OP0800",
+    "OP0807",
+    "OP0808",
+    "OP0809",
+    "OP0820",
+    "OP0823",
+    "OP0824",
+    "OP0825",
+    "OP0832",
+    "OP0836",
+    "OP0852",
+    "OP0860",
+    "OP0861",
+    "OP0874",
+    "OP0875",
+    "OP0888"
+  ]
+}
