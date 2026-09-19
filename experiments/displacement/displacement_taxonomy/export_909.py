@@ -58,6 +58,82 @@ OUT = os.path.join(HERE, "results", "operations_909_shuffled.md")
 CAP = 14
 
 
+def components(min_ops=2):
+    """Corroborated components: one per (frame, version), >= `min_ops` readings.
+
+    ## WHY THIS IS A DIFFERENT UNIT FROM `rows()`
+
+    `rows()` exports the 907 raw operations -- one reader's account at one
+    sentence. Most of them are near-duplicates of each other, because a frame
+    was read 2 to 16 times, and both agents spent most of their groups merging
+    those: 158 of gpt6's 200 and 62 of opus5's 107 sat inside a single frame.
+    That work is DEDUPLICATION and the corpus can do it without an agent.
+
+    A COMPONENT is the merge already made, on roster evidence rather than prose:
+    two operations join when they cite at least two of the same models
+    (`operation_graph.op_components`, k=2). `cross_frame.py:203` states the case
+    -- handing raw operations to a grouping pass asks it "to rediscover across
+    frames a merge already made WITHIN each frame on roster evidence, and to redo
+    it on prose, which is the weaker evidence of the two."
+
+    ## AND WHY ONLY THE CORROBORATED ONES
+
+    211 of 431 components hold a single operation: nobody else saw it, and it
+    passes through the merge untouched. Those are not components in any useful
+    sense, and including them would hand an agent the same deduplication problem
+    in a new costume. **220 of 431 survive.**
+
+    ## THE (frame, version) KEY IS NOT OPTIONAL
+
+    Stripped and unstripped readings of one sentence CANNOT pool: dropping blank
+    tokens redistributes mass and moves every rank below a blank, so a stripped
+    table is a different measurement of the same surface. Grouping on frame alone
+    would merge two measurements and the words would silently disagree.
+    """
+    import operation_graph as OG
+    g = collections.defaultdict(list)
+    for i, line in enumerate(open(STASH, encoding="utf-8")):
+        r = json.loads(line)
+        g[(r["__key__"]["frame_prompt"], r["__key__"].get("version"))].append(
+            ("r%03d" % i, r))
+    out, dropped = [], 0
+    for (frame, ver), pairs in sorted(g.items()):
+        G = OG.build(pairs)
+        OPS = {x for x in G if G.nodes[x].get("kind") == "op"}
+        if not OPS:
+            continue
+        info = {}
+        for tag, r in pairs:
+            for o in (r.get("operations") or []):
+                info["OP[%s] %s" % (tag, o["name"])] = o
+        comps, _c, _m = OG.op_components(G, OPS, 2)
+        for c in comps:
+            if len(c) < min_ops:
+                dropped += 1
+                continue
+            names, a, b = [], [], []
+            for node in sorted(c):
+                o = info.get(node)
+                if not o:
+                    continue
+                if o["name"] not in names:
+                    names.append(o["name"])
+                for m in (o.get("members") or []):
+                    for w in (m.get("a_words") or []):
+                        if w not in a:
+                            a.append(w)
+                    for w in (m.get("b_words") or []):
+                        if w not in b:
+                            b.append(w)
+            if names and a and b:
+                out.append({"id": "CP%03d" % (len(out) + 1), "frame": frame,
+                            "ver": ver, "name": " / ".join(names),
+                            "names": names, "n": len(c), "a": a, "b": b})
+    print("%d corroborated components (>=%d readings); %d single-reading "
+          "components dropped" % (len(out), min_ops, dropped), file=sys.stderr)
+    return out
+
+
 def rows():
     out = []
     for i, line in enumerate(open(STASH, encoding="utf-8")):
@@ -86,11 +162,15 @@ def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--seed", type=int, default=20260919)
-    ap.add_argument("--out", default=OUT)
+    ap.add_argument("--components", action="store_true",
+                    help="export corroborated COMPONENTS, not raw operations")
+    ap.add_argument("--out", default=None)
     a = ap.parse_args(argv)
-    rs = rows()
+    rs = components() if a.components else rows()
     #: ids assigned BEFORE the shuffle, so OP0001 is stable across seeds and two
     #: differently-ordered readings can be joined without re-deriving anything
+    out_path = a.out or (os.path.join(HERE, "results",
+        "components_corroborated_shuffled.md") if a.components else OUT)
     random.Random(a.seed).shuffle(rs)
     #: **907, NOT 909, AND THE FILE SAYS SO.** Two operations pool to an empty
     #: side -- the reader named a relation but cited words on one arm only -- so
@@ -115,16 +195,30 @@ def main(argv=None):
     #: relation, not the instances. A construct pinned to a direction is pinned
     #: to a fact about which lineages we happen to have." Which side rose is
     #: recoverable from the key afterwards and must not be annotatable.
-    L = ["# %d annotated relations" % len(rs), "",
-         "(Two of the 909 in the source pool to an empty side and are omitted.)",
-         "",
-         "Below are annotations of how word probabilities moved in language "
-         "models trained under two conditions, A and B. Each entry is one "
-         "reader's account of a single transformation seen at a single "
-         "sentence: a short name for it, the sentence, and the words it was "
-         "cited on. The A words are the ones more likely under one condition "
-         "and the B words more likely under the other.",
-         "",
+    head = (["# %d corroborated transformations" % len(rs), "",
+             "Below are annotations of how word probabilities moved in language "
+             "models trained under two conditions, A and B. Each entry is one "
+             "transformation that TWO OR MORE readers independently identified "
+             "at the same sentence, having each read it without sight of the "
+             "others. Where an entry carries several names separated by `/`, "
+             "those are the different names they gave the one transformation, "
+             "and all of their words are pooled below it.",
+             "",
+             "The A words are the ones more likely under one condition and the "
+             "B words more likely under the other.",
+             ""]
+            if a.components else
+            ["# %d annotated relations" % len(rs), "",
+             "(Two of the 909 in the source pool to an empty side and are "
+             "omitted.)", "",
+             "Below are annotations of how word probabilities moved in language "
+             "models trained under two conditions, A and B. Each entry is one "
+             "reader's account of a single transformation seen at a single "
+             "sentence: a short name for it, the sentence, and the words it was "
+             "cited on. The A words are the ones more likely under one condition "
+             "and the B words more likely under the other.",
+             ""])
+    L = head + [
          "**You are not told which condition is which.** The relation you name "
          "must read the same either way round: say what separates the two "
          "groups, never which direction anything moved.",
@@ -179,9 +273,9 @@ def main(argv=None):
                                   " ..." if len(r["b"]) > CAP else ""))
         L.append("")
     txt = "\n".join(L)
-    os.makedirs(os.path.dirname(a.out), exist_ok=True)
-    open(a.out, "w").write(txt)
-    print("%d operations -> %s" % (len(rs), a.out))
+    os.makedirs(os.path.dirname(out_path), exist_ok=True)
+    open(out_path, "w").write(txt)
+    print("%d entries -> %s" % (len(rs), out_path))
     print("  %s chars, ~%s tokens at 3.6 ch/tok"
           % (format(len(txt), ","), format(int(len(txt) / 3.6), ",")))
     print("  %d rest on one model; %d on two"
