@@ -52,6 +52,9 @@ sys.path.insert(0, HERE)
 AG = os.path.join(HERE, "results", "agent_groupings")
 REMAP = os.path.join(AG, "cp_id_shipped_to_canonical.json")
 K = 3
+#: the smallest threshold at which NO cluster holds two categories from one
+#: annotator -- see `clusters()`
+JAC = 0.6
 
 RUNS = {"opus high": "opus-agent", "opus xhigh": "opus-xhigh",
         "opus max": "opus-max", "fable high": "fable-high",
@@ -84,20 +87,63 @@ def load():
     return cat, comps
 
 
-def clusters(cat, k=K):
-    """Connected components of the category projection at threshold k. -> [set]"""
+def clusters(cat, k=K, metric="jaccard", jac=JAC):
+    """Connected components of the category projection. -> [sorted list]
+
+    ## A SHARED-COUNT THRESHOLD CHAINS, AND RH SPOTTED IT IN THE OUTPUT
+
+    The edge rule forbids joining two categories from ONE annotator -- they are
+    two things that run chose to keep apart, and merging them here would undo its
+    judgement with its own evidence. But connected components do it anyway by
+    transitivity: `fable high :: A` -- `opus high :: X` -- `fable high :: B`.
+
+    Measured at k=3: 8 of 20 clusters hold more than one category from some
+    annotator, and they are EXACTLY THE 8 LARGEST. 51 of 159 memberships are an
+    annotator's second-or-later category in one cluster. The small clusters were
+    clean all along; the big ones are blobs.
+
+    ## JACCARD AT 0.6 REMOVES IT STRUCTURALLY
+
+    Sweeping |A&B| / |A|B| over the same graph:
+
+        0.3  36 clusters, 23 all-six, 12 chaining
+        0.5  47           19           5
+        0.6  53           12           0   <- largest cluster is 6 cats
+        0.7  50            8           0
+
+    At 0.6 no cluster holds two categories from one annotator and the largest is
+    exactly six -- one per annotator. That is a structural guarantee rather than
+    a number that happened to come out clean, which is why it is the default.
+    The overlap coefficient |A&B| / min(|A|,|B|) was also tried and is useless
+    here: it collapses to 2 clusters at every threshold below 0.6, because a
+    small category inside a big one always scores 1.0.
+
+    ## WHAT THE STRICTNESS COSTS, AND WHY THAT IS ALSO A RESULT
+
+    The biggest relation drops out of the unanimous set. `Blow becomes voice` is
+    real, but Opus draws it as ONE category of 11-16 components and Fable splits
+    it into four of 3-15. Pairwise Jaccard is 0.57-0.73 within Opus and 0.24-0.43
+    across to Fable, so at 0.6 it clusters by FAMILY instead of reaching all six.
+    The k=3 rule hid that by fusing 19 categories into one 34-component blob.
+    Neither is wrong; `--metric count` keeps the loose reading available and the
+    two answer different questions.
+    """
     import networkx as nx
     Q = nx.Graph()
     Q.add_nodes_from(cat)
     for a, b in itertools.combinations(sorted(cat), 2):
-        #: DIFFERENT ANNOTATORS ONLY. Two categories from one run are two things
-        #: that run chose to keep apart, and joining them here would undo its
-        #: judgement with its own evidence.
-        if cat[a]["annotator"] != cat[b]["annotator"] \
-                and len(cat[a]["ops"] & cat[b]["ops"]) >= k:
+        if cat[a]["annotator"] == cat[b]["annotator"]:
+            continue
+        X, Y = cat[a]["ops"], cat[b]["ops"]
+        inter = len(X & Y)
+        if not inter:
+            continue
+        if (inter / len(X | Y) >= jac) if metric == "jaccard" else (inter >= k):
             Q.add_edge(a, b)
     out = [sorted(c) for c in nx.connected_components(Q) if len(c) >= 2]
-    return sorted(out, key=lambda c: (-len(set().union(*[cat[x]["ops"] for x in c])), c))
+    return sorted(out, key=lambda c: (-len({cat[x]["annotator"] for x in c}),
+                                      -len(set().union(*[cat[x]["ops"] for x in c])),
+                                      c))
 
 
 def domains():
@@ -111,12 +157,12 @@ def domains():
     return dom
 
 
-def emit(out="annotator_metagraph", k=K):
+def emit(out="annotator_metagraph", k=K, metric="jaccard", jac=JAC):
     """Write the artifact beside the first metagraph, not over it."""
     from malignment.chartdata import graph, write
     cat, comps = load()
     dom = domains()
-    cl = clusters(cat, k)
+    cl = clusters(cat, k, a.metric, a.jac)
     home = {}
     for i, c in enumerate(cl):
         for x in c:
@@ -194,19 +240,22 @@ def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--k", type=int, default=K)
+    ap.add_argument("--metric", default="jaccard",
+                    choices=("jaccard", "count"))
+    ap.add_argument("--jac", type=float, default=JAC)
     ap.add_argument("--sweep", action="store_true")
     ap.add_argument("--cluster", type=int, default=None)
     ap.add_argument("--emit", action="store_true")
     a = ap.parse_args(argv)
     cat, comps = load()
     if a.emit:
-        print("wrote %s" % emit(k=a.k))
+        print("wrote %s" % emit(k=a.k, metric=a.metric, jac=a.jac))
         return 0
     if a.sweep:
         print("  %s %9s %9s %12s %13s %12s" %
               ("k", "clusters", ">=2 cats", "all 6", "largest(ops)", "ops covered"))
         for k in range(1, 8):
-            cl = clusters(cat, k)
+            cl = clusters(cat, k, a.metric, a.jac)
             six = sum(1 for c in cl if len({cat[x]["annotator"] for x in c}) == 6)
             cov = set().union(*[cat[x]["ops"] for c in cl for x in c]) if cl else set()
             big = max((len(set().union(*[cat[x]["ops"] for x in c])) for c in cl),
@@ -214,7 +263,7 @@ def main(argv=None):
             print("  %d %9d %9d %12d %13d %9d/%d"
                   % (k, len(cl), len(cl), six, big, len(cov), len(comps)))
         return 0
-    cl = clusters(cat, a.k)
+    cl = clusters(cat, a.k, a.metric, a.jac)
     if a.cluster is not None:
         c = cl[a.cluster - 1]
         ops = set().union(*[cat[x]["ops"] for x in c])
