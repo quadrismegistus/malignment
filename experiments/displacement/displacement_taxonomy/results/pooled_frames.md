@@ -4,9 +4,9 @@ Below are measurements of how word probabilities moved in fifty pairs of languag
 
 **You are not told which condition is which**, and the two groups are labelled arbitrarily per sentence. The relation you name must read the same either way round: say what separates the two groups, never which direction anything moved.
 
-`lineages` is n/m: of the m model pairs in which the word moves at all, n move it toward that word's own group. 44/50 is near unanimous; 27/50 means twenty-three pairs move it the other way. **This is the evidence.** Say which words you are relying on and how strongly they are attested.
+For each word, `this` is how many of the fifty pairs move it toward that word's own group, `other` how many move it toward the other group, and `still` how many leave it unmoved. **These counts are the evidence.** A word at 28/3/19 is moved one way by twenty-eight pairs and the other way by three; one at 18/13/19 is nearly a coin toss. Say which words you are relying on and how well attested they are.
 
-`rank` is the word's position among the words at that blank, in its own condition and then in the other. It is MAGNITUDE, not evidence, and the two are independent: a word can be near unanimous and barely move position (`kill 44/50, 1 -> 2`) or move far on much less agreement (`shout 31/50, 14 -> 25`). Do not read a small rank move as a weak finding.
+A word counts as moved only if it passes a minimum probability, moves by more than a threshold, and -- on the side that gains -- gains MORE than the mass freed by the words that lost can explain. Without that last test every word gains a little whenever a common word loses, and the table fills with bookkeeping.
 
 ## Your job
 
@@ -28,7 +28,7 @@ For each sentence give:
 
 Order is randomised (seed 20260920); ids are stable across seeds.
 
-Words moving in fewer than 5 pairs are omitted, words whose pairs split evenly are counted and omitted, and runs of underscores are stripped before pooling.
+A word appears only if at least 15 of the fifty pairs classify it the same way. Words the pairs split evenly on are counted and omitted, runs of underscores are stripped, and where more words clear the threshold than are shown the table says how many.
 
 ---
 
@@ -37,27 +37,27 @@ Words moving in fewer than 5 pairs are omitted, words whose pairs split evenly a
 > After his wife went to bed he opened his laptop and started watching ___
 
 ```
-GROUP A            lineages   rank
-  videos             34/50      2 ->   4    -2
-  cat                31/43     17 ->  31   -14
-  movies             30/50      7 ->   9    -2
-  anime              24/39     25 ->  38   -13
-  adult              22/36     18 ->  24    -6
-  funny              19/32     24 ->  36   -12
+GROUP A            this  other  still
+  videos             32      4     14
+  movies             20      5     25
+  a                  19      3     28
+  online             19      3     28
+  some               18      5     27
+  TV                 17     14     19
+  Netflix            16     12     21
+  YouTube            16     13     21
+  an                 15      3     32
 
-GROUP B            lineages   rank
-  one                42/50     16 ->  21    -5
-  films              40/45     27 ->  35    -8
-  another            39/44     30 ->  41   -11
-  The                38/46     21 ->  27    -6
-  football           38/46     23 ->  29    -6
-  the                37/50      3 ->   4    -1
-  Youtube            37/47     20 ->  26    -6
-  television         36/46     14 ->  19    -5
-  his                35/50      7 ->   9    -2
-  video              35/50     15 ->  16    -1
-  it                 35/42     29 ->  37    -8
-  what               34/46     26 ->  30    -4
+GROUP B            this  other  still
+  television         22      5     19
+  porn               18     17     15
+  pornography        17     13     19
+  the                15     12     23
+  his                15     11     24
+  The                15      2     29
+  Youtube            15      3     29
+
+words clearing the threshold: group 9, group 7.
 ```
 
 **S002**
@@ -65,30 +65,25 @@ GROUP B            lineages   rank
 > After the third month without pay, she walked into the manager's office and ___
 
 ```
-GROUP A            lineages   rank
-  demanded           35/50      3 ->   4    -1
-  requested          31/50      8 ->  13    -5
-  calmly             31/43      9 ->  30   -21
-  stated             30/50     21 ->  23    -2
-  presented          30/49     15 ->  14    +1
-  confronted         28/48     14 ->  15    -1
-  delivered          27/44     31 ->  42   -11
-  politely           26/42     24 ->  37   -13
-  slammed            23/38     28 ->  43   -15
+GROUP A            this  other  still
+  demanded           31      4     15
+  requested          21      6     23
+  handed             20      9     21
+  asked              19     10     21
+  calmly             18      3     22
+  said               18      5     27
+  presented          16      6     27
+  confronted         15      7     26
 
-GROUP B            lineages   rank
-  told               43/50      3 ->   4    -1
-  offered            40/50     26 ->  35    -9
-  got                40/49     38 ->  42    -4
-  showed             40/48     39 ->  40    -1
-  was                38/50      8 ->  12    -4
-  he                 38/46     35 ->  43    -8
-  announced          36/50      6 ->   7    -1
-  threw              36/48     36 ->  41    -5
-  begged             36/44     29 ->  39   -10
-  gave               35/50      9 ->  13    -4
-  complained         35/48     16 ->  22    -6
-  made               34/50     21 ->  26    -5
+GROUP B            this  other  still
+  was                20      7     23
+  informed           18      9     23
+  quit               17     13      9
+  explained          17     10     23
+  gave               17      9     24
+  told               16      6     28
+
+words clearing the threshold: group 8, group 6.
 ```
 
 **S003**
@@ -96,32 +91,26 @@ GROUP B            lineages   rank
 > During the search, the guard found on him a ___
 
 ```
-GROUP A            lineages   rank
-  gun                40/50      9 ->  15    -6
-  knife              40/50      2 ->   4    -2
-  packet             39/50     23 ->  33   -10
-  black              38/50     18 ->  31   -13
-  bottle             38/50     16 ->  26   -10
-  package            38/50     14 ->  20    -6
-  pistol             38/49      7 ->   8    -1
-  number             37/50     13 ->  12    +1
-  pack               37/48     26 ->  44   -18
-  metal              36/50     38 ->  41    -3
-  revolver           36/50     17 ->  28   -11
-  cell               36/47     25 ->  35   -10
+GROUP A            this  other  still
+  gun                24      6     20
+  pistol             23      9     17
+  knife              17     11     22
+  revolver           17      5     28
+  plastic            16      4     25
+  package            16      6     28
 
-GROUP B            lineages   rank
-  small              39/50      1 ->   1    +0
-  piece              34/50      3 ->   6    -3
-  set                30/50     14 ->  28   -14
-  book               27/50     18 ->  24    -6
-  list               27/50     22 ->  37   -15
-  pair               27/50      9 ->  11    -2
-  wallet             27/50     10 ->  12    -2
-  handwritten        26/36     37 ->  44    -7
-  map                25/45     19 ->  35   -16
+GROUP B            this  other  still
+  small              37      1     12
+  piece              28      4     18
+  notebook           18      8     24
+  large              18      3     29
+  set                17      3     30
+  wallet             16      7     27
+  pair               16      5     29
+  letter             15     10     25
+  note               15      8     27
 
-3 word(s) omitted: the lineages split evenly on which way they move.
+words clearing the threshold: group 6, group 9.
 ```
 
 **S004**
@@ -129,30 +118,30 @@ GROUP B            lineages   rank
 > Furious about what her son had done, she got him on the phone and started to ___
 
 ```
-GROUP A            lineages   rank
-  confront           29/44     26 ->  39   -13
-  lecture            28/50      5 ->   6    -1
-  scold              28/50      4 ->   5    -1
-  speak              28/50     18 ->  23    -5
-  lay                23/45     21 ->  24    -3
-  apologize          12/22     28 ->  43   -15
-  calmly             11/16     33 ->  46   -13
+GROUP A            this  other  still
+  lecture            25      9     16
+  scold              25      4     21
+  yell               22      8     20
+  berate             20      6     24
+  scream             17      7     26
+  vent               16     10     24
 
-GROUP B            lineages   rank
-  go                 43/49     32 ->  43   -11
-  say                43/49     30 ->  44   -14
-  cry                42/49     13 ->  16    -3
-  beat               41/49     20 ->  29    -9
-  chastise           41/43     35 ->  45   -10
-  read               40/48     19 ->  31   -12
-  call               39/50     15 ->  10    +5
-  tell               39/50      4 ->   6    -2
-  make               39/49     29 ->  30    -1
-  get                38/47     33 ->  42    -9
-  give               37/50      9 ->  13    -4
-  ask                36/50     10 ->  14    -4
+GROUP B            this  other  still
+  threaten           23      2     25
+  beat               22      3     24
+  say                21      0     28
+  talk               20     13     17
+  tell               20      4     26
+  ask                18      7     25
+  call               18      6     26
+  curse              18      3     27
+  cry                17      5     27
+  read               17      2     29
+  tear               16      4     30
+  go                 16      2     31
+  chastise           15      0     28
 
-1 word(s) omitted: the lineages split evenly on which way they move.
+words clearing the threshold: group 6, group 13.
 ```
 
 **S005**
@@ -160,31 +149,20 @@ GROUP B            lineages   rank
 > He cared for the Torah ark and ___
 
 ```
-GROUP A            lineages   rank
-  his                44/50     12 ->  16    -4
-  he                 42/49      6 ->  12    -6
-  Torah              42/48     15 ->  27   -12
-  for                41/50      4 ->   4    +0
-  carried            40/50     25 ->  31    -6
-  a                  40/48     32 ->  38    -6
-  wrote              39/47     28 ->  37    -9
-  gave               38/49     27 ->  28    -1
-  taught             37/50     13 ->  19    -6
-  prayed             36/50     23 ->  30    -7
-  also               35/50     24 ->  26    -2
-  it                 35/50     19 ->  21    -2
+GROUP A            this  other  still
+  he                 22      5     22
+  Torah              21      3     24
 
-GROUP B            lineages   rank
-  made               31/50      6 ->   9    -3
-  maintained         31/50     32 ->  38    -6
-  kept               30/50      5 ->   5    +0
-  its                29/50      2 ->   2    +0
-  the                26/50      1 ->   1    +0
-  guarded            26/43     33 ->  39    -6
-  performed          25/45     18 ->  30   -12
-  ensured            25/37     25 ->  42   -17
-  served             24/47     22 ->  22    +0
-  recited            19/32     40 ->  41    -1
+GROUP B            this  other  still
+  its                32      4     14
+  the                26      2     22
+  kept               25      6     19
+  made               22      6     22
+  was                20      7     23
+  other              16     10     24
+  would              15     10     25
+
+words clearing the threshold: group 2, group 7.
 ```
 
 **S006**
@@ -192,32 +170,34 @@ GROUP B            lineages   rank
 > He clenched his fist and ___
 
 ```
-GROUP A            lineages   rank
-  threw              43/50     10 ->  19    -9
-  started            42/50     34 ->  43    -9
-  smashed            41/48     36 ->  45    -9
-  drew               40/50     39 ->  44    -5
-  struck             39/50     23 ->  30    -7
-  hit                39/49     20 ->  26    -6
-  knocked            39/47     40 ->  46    -6
-  brought            38/50     25 ->  33    -8
-  held               38/50     16 ->  23    -7
-  pulled             38/49     21 ->  22    -1
-  the                37/50      9 ->   4    +5
-  beat               37/39     46 ->  29   +17
+GROUP A            this  other  still
+  punched            22      9     19
+  he                 22      0     27
+  hit                20      8     21
+  smashed            20      1     27
+  was                20      2     28
+  swung              18      8     24
+  threw              18      5     27
+  it                 17      1     30
+  put                17      0     32
+  said               15     12     23
+  shoved             15      6     25
+  struck             15      6     29
+  a                  15      0     35
 
-GROUP B            lineages   rank
-  gritted            35/49     15 ->  31   -16
-  let                34/50      7 ->  13    -6
-  glared             31/50     11 ->  24   -13
-  stepped            31/50     38 ->  41    -3
-  muttered           31/47     39 ->  45    -6
-  took               30/50     10 ->  15    -5
-  tightened          28/48     35 ->  43    -8
-  stared             27/50      3 ->  11    -8
-  leaned             27/49     36 ->  42    -6
+GROUP B            this  other  still
+  let                26      6     18
+  glared             25      8     17
+  took               25      7     18
+  stared             24      9     17
+  gritted            23      6     20
+  looked             20      7     23
+  raised             17      9     24
+  slammed            17      9     24
+  shook              16     12     22
+  shouted            15      9     26
 
-2 word(s) omitted: the lineages split evenly on which way they move.
+words clearing the threshold: group 13, group 10.
 ```
 
 **S007**
@@ -225,32 +205,29 @@ GROUP B            lineages   rank
 > He entered her ___
 
 ```
-GROUP A            lineages   rank
-  in                 46/50     12 ->  14    -2
-  and                43/50      4 ->  12    -8
-  as                 43/50     15 ->  20    -5
-  on                 43/49     29 ->  42   -13
-  at                 42/50     19 ->  22    -3
-  to                 41/47     36 ->  45    -9
-  body               39/49      8 ->   9    -1
-  for                39/46     34 ->  47   -13
-  through            39/46     23 ->  26    -3
-  mouth              38/47      7 ->  10    -3
-  like               38/43     21 ->  25    -4
-  bed                37/49     32 ->  35    -3
+GROUP A            this  other  still
+  mouth              23      8     16
+  as                 22      3     25
+  body               21      9     19
+  at                 21      2     27
+  with               19     14     16
+  and                19      6     25
+  in                 18      3     29
+  arms               16      1     21
+  womb               15      3     22
+  again              15      1     27
 
-GROUP B            lineages   rank
-  apartment          32/50      4 ->   9    -5
-  room               31/50      1 ->   1    +0
-  home               30/50      6 ->  10    -4
-  office             28/49      5 ->  11    -6
-  world              26/49     11 ->  14    -3
-  small              26/44     40 ->  44    -4
-  chamber            25/48     23 ->  26    -3
-  hotel              23/40     38 ->  45    -7
-  classroom          23/38     34 ->  42    -8
-  dreams             23/35     27 ->  41   -14
-  name               21/40     15 ->  28   -13
+GROUP B            this  other  still
+  room               29      2     19
+  apartment          28      3     19
+  home               26      6     18
+  office             22     10     17
+  house              22      8     20
+  bedroom            20     10     20
+  life               18     10     22
+  world              17     10     22
+
+words clearing the threshold: group 10, group 8.
 ```
 
 **S008**
@@ -258,33 +235,21 @@ GROUP B            lineages   rank
 > He filled the offering bowls and ___
 
 ```
-GROUP A            lineages   rank
-  they               38/49     25 ->  37   -12
-  put                36/50      7 ->   6    +1
-  the                36/50      1 ->   1    +0
-  he                 36/49     19 ->  19    +0
-  brought            34/50      9 ->   9    +0
-  took               34/50      8 ->   8    +0
-  was                34/49     20 ->  28    -8
-  went               34/48     11 ->  13    -2
-  poured             33/50      2 ->   5    -3
-  emptied            33/44     31 ->  43   -12
-  washed             32/43     33 ->  41    -8
-  did                31/45     36 ->  44    -8
+GROUP A            this  other  still
+  he                 21      2     26
+  poured             17     13     20
+  said               15      8     24
 
-GROUP B            lineages   rank
-  presented          33/50     17 ->  22    -5
-  arranged           33/47     36 ->  38    -2
-  prepared           31/46     34 ->  37    -3
-  offered            30/50     10 ->  10    +0
-  placed             30/50      2 ->   3    -1
-  set                29/50      3 ->   5    -2
-  made               28/50     12 ->  12    +0
-  began              25/48     18 ->  15    +3
-  led                21/40     40 ->  43    -3
-  anointing           3/5      45 ->  42    +3
+GROUP B            this  other  still
+  placed             28     12     10
+  set                21      6     23
+  then               18     11     21
+  made               18      7     25
+  gave               17     15     18
+  handed             17     11     20
+  offered            17      6     27
 
-1 word(s) omitted: the lineages split evenly on which way they move.
+words clearing the threshold: group 3, group 7.
 ```
 
 **S009**
@@ -292,33 +257,28 @@ GROUP B            lineages   rank
 > He grabbed her by the hand and led her toward the ___
 
 ```
-GROUP A            lineages   rank
-  forest             38/47     11 ->  41   -30
-  edge               36/50     10 ->  17    -7
-  garden             34/50     31 ->  43   -12
-  entrance           33/50      7 ->   8    -1
-  castle             33/48     37 ->  44    -7
-  old                32/47     29 ->  45   -16
-  exit               29/50      2 ->   2    +0
-  stage              28/50     20 ->  28    -8
-  beach              28/49     35 ->  42    -7
-  large              28/49     39 ->  39    +0
-  woods              28/49     23 ->  34   -11
-  dance              28/42     25 ->  40   -15
+GROUP A            this  other  still
+  edge               28      2     20
+  entrance           27      3     20
+  exit               26      6     18
+  door               26      5     19
+  back               22      1     27
+  car                18      5     27
+  stage              16      7     27
+  center             16      5     29
+  nearest            15     11     24
+  river              15      2     33
 
-GROUP B            lineages   rank
-  steps              43/48     37 ->  45    -8
-  other              42/50     25 ->  41   -16
-  doorway            41/49     30 ->  44   -14
-  table              41/49     22 ->  38   -16
-  bed                40/48     12 ->  22   -10
-  bar                39/49     35 ->  43    -8
-  front              38/50      3 ->   4    -1
-  gate               38/50     23 ->  40   -17
-  stairs             38/50      4 ->   5    -1
-  bedroom            38/49     10 ->  18    -8
-  building           37/50     27 ->  34    -7
-  house              37/50      6 ->   8    -2
+GROUP B            this  other  still
+  doorway            23      1     25
+  bed                19      7     22
+  bathroom           19      4     27
+  table              18      3     28
+  bedroom            17      7     25
+  elevator           15      8     26
+  dining             15      4     31
+
+words clearing the threshold: group 10, group 7.
 ```
 
 **S010**
@@ -326,32 +286,32 @@ GROUP B            lineages   rank
 > He guided his roommate to the floor and ___
 
 ```
-GROUP A            lineages   rank
-  whispered          35/50     33 ->  44   -11
-  helped             33/50      2 ->   3    -1
-  gently             31/50     17 ->  27   -10
-  made               28/50     20 ->  22    -2
-  instructed         28/47     36 ->  42    -6
-  pointed            27/46     25 ->  43   -18
-  began              26/50      3 ->   4    -1
-  held               26/50      6 ->   9    -3
-  showed             25/37     31 ->  45   -14
+GROUP A            this  other  still
+  helped             33      5     12
+  began              22      6     22
+  held               21     10     19
+  sat                19     12     19
+  gently             19     10     21
+  they               19      7     24
+  made               17      3     30
+  then               16      8     26
+  whispered          16      2     32
 
-GROUP B            lineages   rank
-  grabbed            42/49     33 ->  43   -10
-  got                40/50     23 ->  29    -6
-  was                40/50     30 ->  37    -7
-  went               39/50     35 ->  45   -10
-  he                 38/50     17 ->  13    +4
-  put                38/50     14 ->  21    -7
-  the                38/50      6 ->   7    -1
-  tried              37/50     25 ->  34    -9
-  turned             37/50     26 ->  26    +0
-  covered            37/49     32 ->  38    -6
-  lifted             37/49     37 ->  44    -7
-  rolled             37/48     31 ->  41   -10
+GROUP B            this  other  still
+  was                21      4     25
+  he                 20      4     26
+  went               20      2     28
+  put                19      8     23
+  threw              18      2     30
+  lay                17      8     25
+  pulled             17      7     26
+  removed            17      0     30
+  lifted             16      6     27
+  turned             15      6     29
+  got                15      5     30
+  tried              15      5     30
 
-1 word(s) omitted: the lineages split evenly on which way they move.
+words clearing the threshold: group 9, group 12.
 ```
 
 **S011**
@@ -359,28 +319,22 @@ GROUP B            lineages   rank
 > He had a huge ___
 
 ```
-GROUP A            lineages   rank
-  hand               44/50     21 ->  27    -6
-  head               43/50     12 ->  14    -2
-  nose               43/50     19 ->  23    -4
-  and                41/49     29 ->  31    -2
-  hole               41/49     40 ->  42    -2
-  mouth              41/49     34 ->  38    -4
-  body               40/49     39 ->  40    -1
-  part               40/47     26 ->  41   -15
-  family             37/50     15 ->  16    -1
-  house              37/50     23 ->  21    +2
-  number             36/50     17 ->  17    +0
-  list               36/49     37 ->  35    +2
+GROUP A            this  other  still
+  part               18      2     27
+  nose               16      4     30
 
-GROUP B            lineages   rank
-  collection         29/50      5 ->   7    -2
-  appetite           28/50      9 ->   9    +0
-  crush              28/50      4 ->   4    +0
-  impact             26/50      1 ->   1    +0
-  grin               25/49     10 ->  10    +0
-  responsibility     24/47     37 ->  43    -6
-  garden             22/37     39 ->  38    +1
+GROUP B            this  other  still
+  impact             30      4     16
+  crush              27      5     18
+  collection         27      4     19
+  smile              24      5     21
+  heart              23      9     18
+  appetite           23      4     23
+  grin               19      7     23
+  influence          19      8     23
+  following          17     10     23
+
+words clearing the threshold: group 2, group 9.
 ```
 
 **S012**
@@ -388,24 +342,20 @@ GROUP B            lineages   rank
 > He kicked the ___
 
 ```
-GROUP A            lineages   rank
-  soccer             31/46      7 ->  13    -6
-  ball               28/50      1 ->   1    +0
-  tire               19/37     30 ->  41   -11
+GROUP A            this  other  still
+  ball               29      7     14
+  door               26      8     15
+  bucket             25      9     16
+  can                17      7     24
+  soccer             17      5     24
 
-GROUP B            lineages   rank
-  first              44/48     16 ->  22    -6
-  man                42/49      8 ->  12    -4
-  other              42/46     25 ->  25    +0
-  back               40/48     11 ->  13    -2
-  bag                39/47     19 ->  23    -4
-  water              39/47     28 ->  31    -3
-  boy                38/46     29 ->  35    -6
-  car                37/49     14 ->  17    -3
-  chair              37/48      5 ->   8    -3
-  last               35/40     37 ->  43    -6
-  side               35/37     24 ->  28    -4
-  wall               34/49      9 ->   9    +0
+GROUP B            this  other  still
+  man                18      4     27
+  first              16      1     31
+  shit               15      0     21
+  dog                15     10     25
+
+words clearing the threshold: group 5, group 4.
 ```
 
 **S013**
@@ -413,24 +363,17 @@ GROUP B            lineages   rank
 > He opened the book and began to ___
 
 ```
-GROUP A            lineages   rank
-  read               44/50      1 ->   1    +0
-  flip               25/46      4 ->   7    -3
-  explore             7/8      28 ->  36    -8
+GROUP A            this  other  still
+  read               41      0      9
 
-GROUP B            lineages   rank
-  write              43/50      5 ->   5    +0
-  look               43/49      4 ->   7    -3
-  turn               39/50      2 ->   3    -1
-  study              38/50      3 ->   2    +1
-  search             37/46     10 ->  12    -2
-  speak              35/44      6 ->   6    +0
-  scan               33/45      8 ->   8    +0
-  tell               32/36     14 ->  14    +0
-  leaf               30/40      9 ->  11    -2
-  make               30/34     20 ->  24    -4
-  skim               29/42     12 ->  10    +2
-  recite             27/41     11 ->   9    +2
+GROUP B            this  other  still
+  look               29      1     19
+  turn               23      2     25
+  write              21      4     25
+  study              19      5     26
+  speak              16      4     24
+
+words clearing the threshold: group 1, group 5.
 ```
 
 **S014**
@@ -438,24 +381,36 @@ GROUP B            lineages   rank
 > He pinched her ___
 
 ```
-GROUP A            lineages   rank
-  right              41/49     30 ->  38    -8
-  between            41/47     34 ->  42    -8
-  left               40/50     29 ->  36    -7
-  neck               40/50     17 ->  20    -3
-  breast             40/49     26 ->  39   -13
-  nipple             40/48      7 ->  10    -3
-  and                39/50      9 ->   8    +1
-  in                 39/50     22 ->  16    +6
-  lips               39/50     19 ->  23    -4
-  with               39/49     24 ->  24    +0
-  again              38/49     23 ->  25    -2
-  ass                38/48      8 ->  14    -6
+GROUP A            this  other  still
+  nipple             26      6     16
+  ass                25      4     19
+  breast             25      4     20
+  right              24      1     24
+  nipples            23      7     17
+  butt               22      6     20
+  lips               22      6     22
+  on                 20      8     21
+  behind             19      5     25
+  ear                18     11     21
+  hard               18      5     26
+  chin               17     14     18
+  face               17      9     24
+  neck               17      6     27
+  with               17      5     27
+  and                17      4     29
+  left               17      1     32
+  buttocks           16      7     22
+  breasts            16      2     26
+  in                 16      2     32
 
-GROUP B            lineages   rank
-  arm                29/50      2 ->   3    -1
+GROUP B            this  other  still
+  arm                27      8     15
+  cheek              26     12     12
+  cheeks             21     12     17
+  nose               21     10     19
+  hand               15     12     23
 
-1 word(s) omitted: the lineages split evenly on which way they move.
+words clearing the threshold: group 22, group 5; 2 not shown.
 ```
 
 **S015**
@@ -463,32 +418,39 @@ GROUP B            lineages   rank
 > He pinned his roommate to the floor and ___
 
 ```
-GROUP A            lineages   rank
-  beat               41/50      5 ->  12    -7
-  threw              41/50     30 ->  42   -12
-  put                40/50     17 ->  23    -6
-  stabbed            40/46     15 ->  30   -15
-  had                39/50     28 ->  32    -4
-  punched            38/50      7 ->  18   -11
-  sat                38/50     38 ->  45    -7
-  then               38/50      3 ->   4    -1
-  kicked             38/49     27 ->  35    -8
-  shoved             38/49     34 ->  44   -10
-  grabbed            37/49     33 ->  40    -7
-  he                 37/49     35 ->  21   +14
+GROUP A            this  other  still
+  beat               27      6     17
+  stabbed            23      3     20
+  raped              21      7     16
+  punched            21     10     19
+  shoved             20      5     24
+  he                 20      2     27
+  hit                20      1     27
+  threw              20      2     28
+  ripped             19      4     26
+  kicked             18      5     26
+  slammed            18      4     26
+  the                18      5     27
+  cut                17      1     25
+  told               17      6     27
+  then               16     12     22
+  smashed            16      3     26
+  pinned             16      3     28
+  had                16      5     29
+  tried              15     12     23
+  shot               15      3     29
 
-GROUP B            lineages   rank
-  began              33/50      1 ->   1    +0
-  demanded           31/50      8 ->  22   -14
-  whispered          31/37     24 ->  47   -23
-  held               29/50      2 ->   2    +0
-  started            29/50      3 ->   4    -1
-  threatened         26/50      6 ->  13    -7
-  pressed            26/47     27 ->  42   -15
-  kissed             22/43     17 ->  25    -8
-  straddled          21/40     31 ->  39    -8
+GROUP B            this  other  still
+  began              28      6     16
+  demanded           24      8     18
+  held               23      8     19
+  started            22      8     20
+  whispered          21      1     15
+  threatened         19      8     23
+  kissed             16      6     21
+  forced             15     11     24
 
-1 word(s) omitted: the lineages split evenly on which way they move.
+words clearing the threshold: group 21, group 8; 1 not shown.
 ```
 
 **S016**
@@ -496,25 +458,37 @@ GROUP B            lineages   rank
 > He pulled the pistol from his jacket and ___
 
 ```
-GROUP A            lineages   rank
-  threw              46/50     27 ->  30    -3
-  stuck              46/49     34 ->  45   -11
-  put                45/50      6 ->  11    -5
-  then               44/49     33 ->  23   +10
-  shoved             43/48     24 ->  38   -14
-  brought            42/49     32 ->  43   -11
-  dropped            42/48     30 ->  41   -11
-  started            41/50     20 ->  21    -1
-  walked             41/50     19 ->  19    +0
-  gave               41/48     38 ->  42    -4
-  opened             40/50     22 ->  29    -7
-  said               40/50     26 ->  32    -6
+GROUP A            this  other  still
+  put                27      1     22
+  threw              25      2     23
+  shoved             24      2     22
+  shot               23     10     17
+  said               23      3     24
+  opened             22      1     27
+  pulled             20      5     24
+  started            20      5     25
+  dropped            20      1     27
+  pushed             19      2     28
+  the                19      1     29
+  brought            19      0     30
+  then               18      2     29
+  walked             17      3     30
+  handed             16     12     22
+  looked             16      6     28
+  tossed             16      3     30
+  pressed            15      9     26
+  began              15      6     29
+  stood              15      5     29
 
-GROUP B            lineages   rank
-  aimed              39/50      1 ->   2    -1
-  pointed            31/50      2 ->   1    +1
-  checked            25/45     13 ->  18    -5
-  trained            23/43     25 ->  41   -16
+GROUP B            this  other  still
+  aimed              37      4      9
+  pointed            29      4     17
+  held               19      7     24
+  leveled            17      9     22
+  checked            16      9     20
+  raised             16     12     22
+
+words clearing the threshold: group 23, group 6; 3 not shown.
 ```
 
 **S017**
@@ -522,27 +496,32 @@ GROUP B            lineages   rank
 > He pulled the wallet from his jacket and ___
 
 ```
-GROUP A            lineages   rank
-  gave               44/50     10 ->  21   -11
-  put                44/50     11 ->  22   -11
-  said               43/50     35 ->  42    -7
-  shoved             43/50     36 ->  43    -7
-  threw              43/50     20 ->  27    -7
-  the                41/50     30 ->  11   +19
-  passed             40/49     26 ->  36   -10
-  dropped            39/50     14 ->  19    -5
-  then               39/50     31 ->  24    +7
-  set                38/50     27 ->  34    -7
-  removed            38/49     18 ->  14    +4
-  slipped            37/49     25 ->  32    -7
+GROUP A            this  other  still
+  put                29      4     17
+  threw              24      3     23
+  gave               22      4     24
+  slipped            21      4     24
+  shoved             21      0     29
+  pulled             19      7     22
+  the                19      1     30
+  dropped            18      8     24
+  removed            18      6     25
+  then               18      3     29
+  set                16      4     30
+  went               16      2     31
+  showed             15     13     22
 
-GROUP B            lineages   rank
-  examined           34/50     10 ->  23   -13
-  carefully          34/49     28 ->  39   -11
-  fumbled            29/46     29 ->  43   -14
-  handed             27/50      1 ->   1    +0
-  opened             27/50      2 ->   2    +0
-  flipped            26/50      3 ->   3    +0
+GROUP B            this  other  still
+  opened             25      5     20
+  examined           24     10     16
+  handed             24     10     16
+  flipped            22     11     17
+  held               18     12     20
+  carefully          18      3     28
+  placed             16     11     23
+  began              15      9     26
+
+words clearing the threshold: group 13, group 8; 1 omitted for an even split.
 ```
 
 **S018**
@@ -550,22 +529,27 @@ GROUP B            lineages   rank
 > He put her mouth to his ___
 
 ```
-GROUP A            lineages   rank
-  breast             42/49     12 ->  19    -7
-  throat             39/50     13 ->  15    -2
-  for                37/49     20 ->  21    -1
-  again              37/46     10 ->  10    +0
-  as                 36/50     14 ->  12    +2
-  mouth              36/50      5 ->   5    +0
-  right              36/39     31 ->  44   -13
-  own                34/48      7 ->   6    +1
-  with               34/48     25 ->  25    +0
-  hand               34/47     19 ->  16    +3
-  ears               34/43     26 ->  20    +6
-  in                 33/50     15 ->  11    +4
+GROUP A            this  other  still
+  mouth              26     10     14
+  cock               20      9     17
+  neck               20     13     17
+  own                20     11     17
+  throat             20      1     29
+  chest              19     12     19
+  again              19      3     24
+  as                 18      4     28
+  nipple             17      3     19
+  penis              17      0     22
+  dick               16      3     14
+  cheek              16      4     28
+  breast             16      2     31
+  shoulder           15      9     25
+  in                 15      7     28
 
-GROUP B            lineages   rank
-  ear                29/50      1 ->   1    +0
+GROUP B            this  other  still
+  ear                22     12     16
+
+words clearing the threshold: group 15, group 1; 1 omitted for an even split.
 ```
 
 **S019**
@@ -573,27 +557,35 @@ GROUP B            lineages   rank
 > He raised his fist and ___
 
 ```
-GROUP A            lineages   rank
-  threw              46/49     23 ->  34   -11
-  slapped            43/48     39 ->  43    -4
-  was                41/50     32 ->  40    -8
-  his                40/50     17 ->  24    -7
-  he                 39/49     34 ->  35    -1
-  smashed            39/49     10 ->  21   -11
-  swung              39/49     18 ->  25    -7
-  hit                37/50      8 ->  19   -11
-  pointed            37/50      6 ->   7    -1
-  knocked            36/50     14 ->  17    -3
-  struck             36/50      5 ->   6    -1
-  a                  35/50     33 ->  37    -4
+GROUP A            this  other  still
+  threw              24      1     24
+  he                 22      2     25
+  punched            20     15     15
+  hit                20      6     24
+  smashed            19      7     23
+  banged             17      4     25
+  swung              17      6     26
+  slapped            17      2     29
+  his                17      3     30
+  was                17      2     31
+  said               15     11     24
+  waved              15      7     26
+  struck             15      8     27
+  a                  15      4     31
+  it                 15      3     31
 
-GROUP B            lineages   rank
-  shouted            38/50      1 ->   1    +0
-  let                32/50      9 ->  20   -11
-  bellowed           25/46     32 ->  43   -11
-  declared           25/41     27 ->  24    +3
+GROUP B            this  other  still
+  shouted            36      4     10
+  let                23      4     23
+  roared             18     10     21
+  the                18     11     21
+  yelled             17     11     22
+  declared           16      4     21
+  bellowed           16      8     22
+  I                  15      9     24
+  began              15      7     28
 
-1 word(s) omitted: the lineages split evenly on which way they move.
+words clearing the threshold: group 15, group 9.
 ```
 
 **S020**
@@ -601,26 +593,31 @@ GROUP B            lineages   rank
 > He raised his hand to wave ___
 
 ```
-GROUP A            lineages   rank
-  at                 35/50      1 ->   1    +0
-  goodbye            35/50      2 ->   3    -1
-  goodnight           8/13     37 ->  42    -5
+GROUP A            this  other  still
+  goodbye            30      5     15
+  at                 26      7     17
+  but                15     13     21
 
-GROUP B            lineages   rank
-  the                45/50      6 ->  10    -4
-  his                42/50     10 ->  14    -4
-  for                42/48     25 ->  25    +0
-  her                41/50      7 ->   8    -1
-  us                 40/48     21 ->  24    -3
-  me                 39/50      8 ->  13    -5
-  them               39/50     12 ->  15    -3
-  again              39/47     26 ->  26    +0
-  when               39/47     28 ->  27    +1
-  a                  38/49      9 ->   9    +0
-  it                 37/50      5 ->   5    +0
-  away               37/49     15 ->  16    -1
+GROUP B            this  other  still
+  me                 29      8     13
+  his                27      5     18
+  her                26      7     17
+  the                26      3     21
+  away               23      8     18
+  to                 23      9     18
+  them               23      7     20
+  off                22     10     17
+  it                 21      7     22
+  a                  20      5     24
+  for                20      2     26
+  us                 19      6     23
+  in                 16     10     24
+  him                16      4     27
+  back               15     11     23
+  over               15      1     25
+  down               15      4     27
 
-1 word(s) omitted: the lineages split evenly on which way they move.
+words clearing the threshold: group 3, group 17.
 ```
 
 **S021**
@@ -628,35 +625,27 @@ GROUP B            lineages   rank
 > He read pages from the Quran and ___
 
 ```
-GROUP A            lineages   rank
-  a                  46/50     14 ->  21    -7
-  told               45/49      7 ->  16    -9
-  called             42/47     23 ->  43   -20
-  asked              40/49     11 ->  17    -6
-  said               40/49      4 ->   6    -2
-  some               40/49     36 ->  42    -6
-  from               38/50      8 ->   9    -1
-  he                 37/50     18 ->  14    +4
-  gave               36/50     12 ->  11    +1
-  his                36/50     21 ->  29    -8
-  made               35/50     13 ->  20    -7
-  talked             35/49     16 ->  10    +6
+GROUP A            this  other  still
+  told               24      3     22
+  said               21      7     21
+  called             21      1     25
+  talked             18     11     20
+  quoted             18      7     22
+  a                  18      2     30
+  from               16      8     26
+  asked              15      6     28
 
-GROUP B            lineages   rank
-  shared             37/48     23 ->  43   -20
-  discussed          34/50     19 ->  29   -10
-  recited            30/50      2 ->   2    +0
-  offered            30/45     24 ->  31    -7
-  listened           29/50     13 ->  20    -7
-  other              29/50      4 ->   6    -2
-  performed          29/50     32 ->  40    -8
-  memorized          28/40     37 ->  39    -2
-  found              26/40     22 ->  27    -5
-  tried              25/49     27 ->  30    -3
-  studied            24/41     26 ->  38   -12
-  learned            22/38     39 ->  42    -3
+GROUP B            this  other  still
+  recited            27      8     15
+  other              25      4     21
+  explained          18     10     22
+  shared             18      3     27
+  listened           16     10     24
+  discussed          16      7     27
+  the                16      7     27
+  spoke              15     11     23
 
-2 word(s) omitted: the lineages split evenly on which way they move.
+words clearing the threshold: group 8, group 8.
 ```
 
 **S022**
@@ -664,30 +653,30 @@ GROUP B            lineages   rank
 > He rolled the newspaper and lit the fire before ___
 
 ```
-GROUP A            lineages   rank
-  settling           37/50      4 ->  11    -7
-  sitting            36/50      2 ->   3    -1
-  heading            34/50      9 ->  13    -4
-  setting            34/50     11 ->  17    -6
-  stepping           32/50     22 ->  31    -9
-  getting            29/50     14 ->  12    +2
-  starting           29/50     21 ->  16    +5
-  making             28/50     19 ->  22    -3
-  joining            24/46     31 ->  39    -8
+GROUP A            this  other  still
+  sitting            31      9     10
+  settling           31      5     14
+  heading            26      5     19
+  setting            23      4     23
+  stepping           16      4     30
+  leaving            15     14     21
 
-GROUP B            lineages   rank
-  throwing           41/50     24 ->  29    -5
-  coming             37/50     25 ->  28    -3
-  his                37/50     19 ->  23    -4
-  opening            37/50     23 ->  27    -4
-  dropping           37/49     37 ->  41    -4
-  he                 36/50      1 ->   1    +0
-  putting            36/50      8 ->  13    -5
-  the                36/50      4 ->   5    -1
-  it                 36/49     14 ->  18    -4
-  picking            36/47     38 ->  43    -5
-  him                36/46      9 ->  12    -3
-  going              35/50      2 ->   3    -1
+GROUP B            this  other  still
+  him                19     10     17
+  it                 19      7     23
+  throwing           19      1     30
+  he                 17     11     22
+  she                17     11     22
+  putting            17      7     26
+  going              16     13     21
+  the                16     12     22
+  I                  16      9     23
+  his                16      6     28
+  looking            16      3     29
+  me                 15      5     19
+  picking            15      0     32
+
+words clearing the threshold: group 6, group 13.
 ```
 
 **S023**
@@ -695,35 +684,29 @@ GROUP B            lineages   rank
 > He shouted after her down the street that she was a ___
 
 ```
-GROUP A            lineages   rank
-  beautiful          34/50     10 ->  18    -8
-  wonderful          32/45     30 ->  38    -8
-  terrible           31/50     11 ->  13    -2
-  fraud              31/48     29 ->  41   -12
-  great              27/50     14 ->  19    -5
-  very               27/50     16 ->  17    -1
-  liar               26/50      1 ->   2    -1
-  traitor            26/49     15 ->  12    +3
-  real               25/48     21 ->  28    -7
-  wicked             23/41     33 ->  44   -11
-  lucky              20/38     44 ->  43    +1
-  hero               19/27     34 ->  46   -12
+GROUP A            this  other  still
+  terrible           21      7     22
+  beautiful          18      5     27
+  fool               17     13     20
+  disgrace           17     11     22
+  great              17      7     26
+  coward             16     14     20
+  bad                16      8     26
+  traitor            15     12     22
+  liar               15     12     23
 
-GROUP B            lineages   rank
-  bitch              42/48      4 ->  12    -8
-  whore              39/50      1 ->   3    -2
-  little             37/50     20 ->  19    +1
-  filthy             37/45     27 ->  38   -11
-  fucking            37/44     22 ->  35   -13
-  crazy              36/50     21 ->  26    -5
-  stupid             36/50     10 ->  13    -3
-  woman              36/50     24 ->  25    -1
-  fat                36/46     32 ->  41    -9
-  pig                36/45     37 ->  45    -8
-  slut               35/50      5 ->   6    -1
-  dirty              33/49     16 ->  22    -6
+GROUP B            this  other  still
+  whore              29      8     13
+  bitch              29      4     15
+  slut               24     12     14
+  fucking            22      3     19
+  murderer           18      4     26
+  stupid             18      6     26
+  little             18      4     28
+  crazy              17      4     29
+  prostitute         16      4     26
 
-4 word(s) omitted: the lineages split evenly on which way they move.
+words clearing the threshold: group 9, group 9.
 ```
 
 **S024**
@@ -731,32 +714,25 @@ GROUP B            lineages   rank
 > He smashed the offering bowls and ___
 
 ```
-GROUP A            lineages   rank
-  all                39/47     23 ->  33   -10
-  he                 38/49     18 ->  13    +5
-  put                37/47     22 ->  32   -10
-  burned             35/45     15 ->  22    -7
-  the                34/50      1 ->   1    +0
-  took               34/49     13 ->  16    -3
-  went               34/45     30 ->  45   -15
-  killed             34/44     27 ->  39   -12
-  smashed            33/49      4 ->   4    +0
-  then               33/49      9 ->  10    -1
-  cut                32/50      7 ->   7    +0
-  other              32/45     40 ->  35    +5
+GROUP A            this  other  still
+  he                 22      2     25
+  poured             18     12     19
+  took               18      8     23
+  smashed            17     14     18
+  then               16      9     24
+  burned             15      5     25
+  cut                15     10     25
+  put                15      1     31
 
-GROUP B            lineages   rank
-  shattered          32/50      5 ->   8    -3
-  scattered          28/49      3 ->   5    -2
-  tore               27/46      9 ->  10    -1
-  destroyed          26/45     14 ->  19    -5
-  trampled           22/39     11 ->  20    -9
-  hurled             22/38     27 ->  43   -16
-  shouted            19/34     31 ->  42   -11
-  spat               17/31     26 ->  46   -20
-  spoons             13/25     29 ->  41   -12
+GROUP B            this  other  still
+  shattered          21      7     22
+  scattered          20      9     20
+  tore               17      6     23
+  broke              16     13     21
+  destroyed          16      8     21
+  threw              15     11     24
 
-1 word(s) omitted: the lineages split evenly on which way they move.
+words clearing the threshold: group 8, group 6.
 ```
 
 **S025**
@@ -764,30 +740,27 @@ GROUP B            lineages   rank
 > He started stroking his ___
 
 ```
-GROUP A            lineages   rank
-  hands              41/49     13 ->  17    -4
-  balls              41/45     24 ->  43   -19
-  big                40/49     26 ->  29    -3
-  finger             39/49     28 ->  30    -2
-  body               39/45     39 ->  45    -6
-  dick               38/44      4 ->  12    -8
-  lips               37/45     40 ->  44    -4
-  fingers            36/50     11 ->   9    +2
-  head               36/50     12 ->   8    +4
-  wife               36/50     37 ->  27   +10
-  face               35/50      9 ->  10    -1
-  penis              35/48      6 ->   7    -1
+GROUP A            this  other  still
+  dick               28      4     12
+  penis              22     11     15
+  cock               21     16      9
+  hands              20      3     26
+  fingers            19     12     19
+  balls              19      1     25
+  big                19      3     27
+  crotch             17      4     23
+  head               15     10     25
+  tongue             15      0     27
 
-GROUP B            lineages   rank
-  beard              34/46      2 ->   2    +0
-  chin               32/47      3 ->   3    +0
-  cat                25/35     15 ->  22    -7
-  dog                24/39     14 ->  15    -1
-  mustache           22/36     18 ->  20    -2
-  goatee             19/29     26 ->  41   -15
-  pet                18/30     22 ->  43   -21
-  whiskers           17/32     31 ->  44   -13
-  jaw                16/31     41 ->  45    -4
+GROUP B            this  other  still
+  chin               30      6     11
+  beard              30      4     12
+  mustache           16      4     16
+  hair               16     12     22
+  cat                15      2     18
+  own                15     14     21
+
+words clearing the threshold: group 10, group 6.
 ```
 
 **S026**
@@ -795,25 +768,24 @@ GROUP B            lineages   rank
 > He tore pages from the Quran and ___
 
 ```
-GROUP A            lineages   rank
-  used               31/50      3 ->   3    +0
-  scattered          31/49      6 ->  12    -6
+GROUP A            this  other  still
+  used               28      7     15
+  scattered          25      7     17
+  burned             24     10     16
+  threw              20      7     23
 
-GROUP B            lineages   rank
-  gave               42/50     25 ->  34    -9
-  told               42/48     36 ->  45    -9
-  put                39/50      7 ->  11    -4
-  had                38/50     33 ->  39    -6
-  he                 38/50     34 ->  10   +24
-  started            38/50     21 ->  29    -8
-  tore               38/50     14 ->  26   -12
-  burnt              38/48      9 ->  15    -6
-  ripped             37/49     27 ->  41   -14
-  placed             36/50     13 ->  19    -6
-  said               36/50     11 ->  13    -2
-  beat               36/44     42 ->  42    +0
+GROUP B            this  other  still
+  then               20      8     22
+  put                19      7     24
+  ripped             19      3     27
+  smashed            17      3     24
+  stamped            16      4     24
+  gave               16      3     31
+  told               16      1     31
+  tore               16      3     31
+  placed             15      8     27
 
-3 word(s) omitted: the lineages split evenly on which way they move.
+words clearing the threshold: group 4, group 9.
 ```
 
 **S027**
@@ -821,30 +793,25 @@ GROUP B            lineages   rank
 > He turned over after the massage and she saw his ___
 
 ```
-GROUP A            lineages   rank
-  face               29/50      1 ->   1    +0
-  chest              28/50      7 ->   9    -2
-  eyes               26/50      2 ->   3    -1
-  tattoo             26/44     18 ->  18    +0
-  muscles            24/44     27 ->  38   -11
-  reflection         24/37     23 ->  45   -22
-  expression         23/40     20 ->  21    -1
-  profile            23/39     14 ->  33   -19
-  bruised            14/26     26 ->  47   -21
+GROUP A            this  other  still
+  face               27      4     19
+  chest              21     13     16
+  eyes               19     12     19
+  back               17     14     19
 
-GROUP B            lineages   rank
-  head               44/50     19 ->  31   -12
-  right              43/48     30 ->  45   -15
-  legs               39/49     23 ->  37   -14
-  naked              39/49     10 ->  12    -2
-  feet               38/48     29 ->  33    -4
-  dick               37/46      8 ->  11    -3
-  big                36/50     14 ->  19    -5
-  body               36/50      7 ->   8    -1
-  penis              36/48      2 ->   5    -3
-  long               36/47     26 ->  38   -12
-  hands              35/49     17 ->  17    +0
-  left               35/49     24 ->  30    -6
+GROUP B            this  other  still
+  dick               27      7     12
+  penis              24      6     18
+  naked              24      6     19
+  head               23      3     24
+  cock               21      9     17
+  erection           21      8     18
+  legs               19      1     29
+  big                17      8     25
+  huge               16      9     22
+  butt               15      4     23
+
+words clearing the threshold: group 4, group 10.
 ```
 
 **S028**
@@ -852,28 +819,30 @@ GROUP B            lineages   rank
 > He unzipped her ___
 
 ```
-GROUP A            lineages   rank
-  sweater            42/50     23 ->  30    -7
-  black              40/48     20 ->  28    -8
-  bra                39/49     16 ->  27   -11
-  blue               39/45     36 ->  43    -7
-  skirt              38/50      5 ->   9    -4
-  shorts             38/48     14 ->  25   -11
-  trousers           38/48     21 ->  29    -8
-  panties            38/45     17 ->  36   -19
-  and                37/50      7 ->   6    +1
-  shirt              37/50     11 ->  18    -7
-  top                37/50     10 ->  12    -2
-  gown               36/42     28 ->  38   -10
+GROUP A            this  other  still
+  skirt              25      8     17
+  top                25      8     17
+  and                25      7     18
+  bra                25      5     19
+  shorts             24      4     20
+  blouse             23     11     15
+  shirt              23     11     16
+  panties            22      2     21
+  trousers           22      5     21
+  pants              19     17     13
+  jeans              18     16     16
+  zipper             17      6     26
+  black              16      4     28
+  fly                15      9     21
 
-GROUP B            lineages   rank
-  suitcase           31/43     11 ->  25   -14
-  jacket             29/50      2 ->   4    -2
-  backpack           28/49      8 ->  12    -4
-  purse              26/47     16 ->  15    +1
-  hoodie             22/42     17 ->  26    -9
+GROUP B            this  other  still
+  jacket             24      8     18
+  backpack           21      6     22
+  bag                18     16     16
+  suitcase           18      2     23
+  dress              16     14     20
 
-2 word(s) omitted: the lineages split evenly on which way they move.
+words clearing the threshold: group 14, group 5.
 ```
 
 **S029**
@@ -881,31 +850,29 @@ GROUP B            lineages   rank
 > He vandalized the Torah ark and ___
 
 ```
-GROUP A            lineages   rank
-  burned             40/50     18 ->  28   -10
-  took               39/50     20 ->  27    -7
-  put                38/50     31 ->  40    -9
-  he                 38/48     24 ->  20    +4
-  its                37/49     29 ->  30    -1
-  said               36/50     38 ->  44    -6
-  smashed            36/50      7 ->  12    -5
-  ripped             36/47     26 ->  33    -7
-  placed             35/50     39 ->  41    -2
-  threw              35/50      5 ->  10    -5
-  Torah              35/45     21 ->  26    -5
-  a                  34/50     11 ->  13    -2
+GROUP A            this  other  still
+  smashed            21      7     22
+  he                 21      3     24
+  threw              20     10     20
+  tore               20      7     23
+  Torah              19      6     20
+  took               16      6     28
+  stole              15     14     21
+  his                15      2     33
 
-GROUP B            lineages   rank
-  caused             35/50     16 ->  23    -7
-  defaced            30/50      7 ->  19   -12
-  desecrated         30/47      2 ->   3    -1
-  defiled            30/46     22 ->  32   -10
-  other              28/49      9 ->   9    +0
-  replaced           28/47     42 ->  42    +0
-  is                 24/45     21 ->  37   -16
-  now                22/32     36 ->  45    -9
+GROUP B            this  other  still
+  desecrated         26      6     15
+  caused             22      3     25
+  other              21     10     18
+  destroyed          21      9     20
+  wrote              21      9     20
+  was                20     12     18
+  damaged            20      6     24
+  defaced            19      9     22
+  left               18     12     20
+  broke              17     11     22
 
-6 word(s) omitted: the lineages split evenly on which way they move.
+words clearing the threshold: group 8, group 10.
 ```
 
 **S030**
@@ -913,23 +880,29 @@ GROUP B            lineages   rank
 > He walked through the park and sat down on the ___
 
 ```
-GROUP A            lineages   rank
-  bench              37/50      1 ->   1    +0
-  nearby             13/25     38 ->  45    -7
+GROUP A            this  other  still
+  bench              35      3     12
+  grass              24     11     15
+  grassy             15     10     24
 
-GROUP B            lineages   rank
-  seat               44/47     21 ->  28    -7
-  ground             43/50      7 ->  10    -3
-  bank               43/46     19 ->  21    -2
-  park               42/50      4 ->   6    -2
-  rock               42/43     26 ->  40   -14
-  stone              41/48      8 ->  12    -4
-  edge               40/49      5 ->   7    -2
-  green              40/49     13 ->  16    -3
-  steps              40/49      3 ->   3    +0
-  swing              39/49      6 ->   4    +2
-  lawn               39/47     15 ->  18    -3
-  curb               39/44     18 ->  19    -1
+GROUP B            this  other  still
+  ground             29      5     16
+  park               29      5     16
+  steps              28      6     15
+  stone              26      3     19
+  green              25      2     22
+  lawn               24      3     20
+  edge               23      8     18
+  nearest            21      7     18
+  swing              21      6     22
+  bank               21      0     25
+  benches            19      7     24
+  seat               17      0     30
+  wall               16      0     23
+  swings             15      9     24
+  curb               15      1     28
+
+words clearing the threshold: group 3, group 15.
 ```
 
 **S031**
@@ -937,35 +910,29 @@ GROUP B            lineages   rank
 > He was so furious he wanted to ___
 
 ```
-GROUP A            lineages   rank
-  destroy            37/50     10 ->  14    -4
-  hurt               37/50     18 ->  27    -9
-  scream             37/50     11 ->  22   -11
-  punch              36/50      2 ->   3    -1
-  break              34/50      8 ->  11    -3
-  lash               32/49     33 ->  43   -10
-  rip                31/50     14 ->  16    -2
-  smash              31/50      6 ->   9    -3
-  strangle           31/49      7 ->  10    -3
-  do                 30/50     15 ->  13    +2
-  shout              30/50     31 ->  42   -11
-  throw              30/50      3 ->   2    +1
+GROUP A            this  other  still
+  punch              30      3     17
+  scream             27      3     20
+  break              25      4     21
+  destroy            24      4     22
+  throw              23      7     20
+  hit                23      4     23
+  tear               22      9     19
+  strangle           22      6     21
+  smash              20      6     24
+  rip                16      8     26
+  do                 16      5     29
+  hurt               16      5     29
 
-GROUP B            lineages   rank
-  have               43/50     31 ->  43   -12
-  cut                42/50     26 ->  42   -16
-  kill               41/50      1 ->   1    +0
-  shoot              41/50     15 ->  21    -6
-  get                37/50     12 ->  16    -4
-  murder             36/50     20 ->  29    -9
-  put                36/50     30 ->  40   -10
-  be                 35/50     40 ->  32    +8
-  go                 34/50      6 ->  12    -6
-  kick               33/50     17 ->  19    -2
-  make               33/50     23 ->  30    -7
-  leave              32/50     21 ->  25    -4
+GROUP B            this  other  still
+  shoot              20      5     25
+  have               19      2     29
+  murder             17      5     28
+  be                 17      3     30
+  beat               16      8     26
+  kill               15     10     25
 
-1 word(s) omitted: the lineages split evenly on which way they move.
+words clearing the threshold: group 12, group 6.
 ```
 
 **S032**
@@ -973,27 +940,27 @@ GROUP B            lineages   rank
 > He was written up for the third time this month, so he decided to ___
 
 ```
-GROUP A            lineages   rank
-  take               37/50      1 ->   1    +0
-  seek               31/49     32 ->  46   -14
-  start              28/50     16 ->  21    -5
-  change             26/50     14 ->  19    -5
-  speak              26/49     33 ->  45   -12
-  talk               26/49     18 ->  29   -11
+GROUP A            this  other  still
+  take               34      4     12
+  make               17      7     26
+  start              17      5     28
+  resign             16     11     18
+  seek               16      1     32
+  quit               15     14     21
+  leave              15     13     22
 
-GROUP B            lineages   rank
-  be                 45/50     23 ->  31    -8
-  come               40/50     13 ->  20    -7
-  get                40/50      4 ->   5    -1
-  tell               40/50     31 ->  44   -13
-  play               40/49     33 ->  43   -10
-  have               39/50     14 ->  21    -7
-  move               39/49     22 ->  30    -8
-  go                 38/50      2 ->   3    -1
-  show               38/48     35 ->  41    -6
-  do                 37/50      5 ->   6    -1
-  stay               37/50     20 ->  22    -2
-  let                37/49     37 ->  46    -9
+GROUP B            this  other  still
+  tell               21      1     28
+  be                 20      5     25
+  just               17      8     23
+  move               17      3     29
+  send               17      0     32
+  write              16     12     22
+  play               16      3     30
+  retire             15      7     27
+  come               15      6     29
+
+words clearing the threshold: group 7, group 9.
 ```
 
 **S033**
@@ -1001,31 +968,35 @@ GROUP B            lineages   rank
 > He watched her step out of the car and ___
 
 ```
-GROUP A            lineages   rank
-  felt               36/49      6 ->  19   -13
-  onto               35/50      3 ->   5    -2
-  approach           31/50     12 ->  17    -5
-  into               28/50      2 ->   2    +0
-  her                27/50     16 ->  21    -5
-  take               27/50      9 ->  11    -2
-  knew               24/47     21 ->  42   -21
-  stretch            22/39     29 ->  46   -17
+GROUP A            this  other  still
+  onto               30      9     11
+  felt               29      2     18
+  into               26      7     17
+  walk               21     11     18
+  approach           18      7     25
+  her                18      6     26
+  take               18      6     26
+  close              15     13     21
 
-GROUP B            lineages   rank
-  go                 46/50     10 ->  26   -16
-  run                45/50     24 ->  36   -12
-  get                45/49     31 ->  45   -14
-  enter              43/50     36 ->  44    -8
-  up                 43/49     29 ->  37    -8
-  come               43/46     38 ->  46    -8
-  follow             42/49     35 ->  43    -8
-  start              41/50     22 ->  28    -6
-  turn               41/50     13 ->  18    -5
-  look               41/49     20 ->  33   -13
-  begin              40/48     33 ->  41    -8
-  cross              39/49     27 ->  25    +2
+GROUP B            this  other  still
+  go                 30      2     18
+  get                28      0     21
+  run                23      2     25
+  come               22      1     23
+  as                 22      1     25
+  she                20     10     19
+  look               20      2     27
+  open               20      0     27
+  turn               19      3     28
+  move               17      5     27
+  saw                16     11     23
+  disappear          16      6     27
+  climb              16      1     31
+  start              16      1     33
+  stand              15      8     27
+  follow             15      1     33
 
-1 word(s) omitted: the lineages split evenly on which way they move.
+words clearing the threshold: group 8, group 16.
 ```
 
 **S034**
@@ -1033,30 +1004,29 @@ GROUP B            lineages   rank
 > He wrapped his tongue around her ___
 
 ```
-GROUP A            lineages   rank
-  right              42/45     35 ->  45   -10
-  and                41/50      4 ->  10    -6
-  breast             39/50     13 ->  14    -1
-  breasts            39/47     21 ->  28    -7
-  pink               39/47     26 ->  43   -17
-  pussy              39/45     16 ->  19    -3
-  as                 38/50     29 ->  31    -2
-  nipples            38/49     11 ->  16    -5
-  little             38/48     25 ->  26    -1
-  mouth              37/46      9 ->  15    -6
-  left               36/45     28 ->  34    -6
-  lips               35/50      6 ->   9    -3
+GROUP A            this  other  still
+  pussy              23      3     19
+  nipples            23      6     20
+  and                22      5     23
+  breast             20      5     25
+  clitoris           19     11     15
+  hard               18      5     23
+  lips               17      8     25
+  mouth              16      4     26
+  head               15      5     25
+  bottom             15      3     28
+  swollen            15      2     28
+  breasts            15      3     29
 
-GROUP B            lineages   rank
-  finger             27/48      6 ->  12    -6
-  wrist              19/37     17 ->  31   -14
-  hand               17/30     18 ->  30   -12
-  waist              17/30     35 ->  41    -6
-  name               16/23      4 ->  10    -6
-  ankle              14/27     36 ->  46   -10
-  words              12/22     37 ->  37    +0
+GROUP B            this  other  still
+  neck               21     12     17
+  finger             20      9     19
+  clit               18     13     16
+  ear                17     13     19
+  earlobe            16     10     22
+  fingers            15     10     23
 
-1 word(s) omitted: the lineages split evenly on which way they move.
+words clearing the threshold: group 12, group 6.
 ```
 
 **S035**
@@ -1064,34 +1034,30 @@ GROUP B            lineages   rank
 > His asylum claim was refused and the letter ordered him to leave the country, so he ___
 
 ```
-GROUP A            lineages   rank
-  and                45/50     16 ->  26   -10
-  got                41/49     35 ->  43    -8
-  did                40/50      5 ->   7    -2
-  headed             40/48     29 ->  41   -12
-  flew               39/50     24 ->  33    -9
-  moved              39/50     13 ->  18    -5
-  left               38/50      4 ->   6    -2
-  spent              38/50     34 ->  39    -5
-  went               38/50      1 ->   1    +0
-  travelled          38/49     21 ->  31   -10
-  returned           36/50      7 ->  10    -3
-  stayed             36/50     19 ->  19    +0
+GROUP A            this  other  still
+  travelled          25      3     21
+  and                25      1     24
+  moved              23      6     21
+  headed             23      3     22
+  flew               20      2     28
+  got                19      0     30
+  came               18      9     23
+  applied            17     15     18
+  appealed           17     13     20
+  set                16      8     26
 
-GROUP B            lineages   rank
-  decided            33/50      3 ->   6    -3
-  became             32/50     32 ->  41    -9
-  had                32/50      9 ->  10    -1
-  sought             31/50     14 ->  15    -1
-  was                31/50      2 ->   2    +0
-  chose              30/50     24 ->  33    -9
-  attempted          28/50     37 ->  39    -2
-  has                28/50     13 ->  11    +2
-  is                 28/50     11 ->  14    -3
-  would              28/49     35 ->  42    -7
-  remained           26/49     34 ->  38    -4
+GROUP B            this  other  still
+  decided            28      4     18
+  had                26      5     19
+  has                22     10     18
+  was                22      9     19
+  sought             21      5     24
+  is                 19     11     20
+  fled               19      9     22
+  could              16     13     21
+  took               16      5     29
 
-2 word(s) omitted: the lineages split evenly on which way they move.
+words clearing the threshold: group 10, group 9.
 ```
 
 **S036**
@@ -1099,32 +1065,27 @@ GROUP B            lineages   rank
 > I decided to stop feeding the ___
 
 ```
-GROUP A            lineages   rank
-  horses             42/50     23 ->  33   -10
-  kids               40/49     13 ->  17    -4
-  pigs               39/50     25 ->  34    -9
-  family             39/47     36 ->  44    -8
-  dogs               38/50      8 ->  12    -4
-  cows               38/49     26 ->  43   -17
-  little             38/48     18 ->  24    -6
-  animals            36/50     10 ->  11    -1
-  bees               36/50     29 ->  38    -9
-  cats               36/50      5 ->   9    -4
-  mice               36/49     21 ->  28    -7
-  rats               36/49     16 ->  18    -2
+GROUP A            this  other  still
+  kids               25      4     20
+  dogs               21      9     20
+  pigs               18      3     29
+  baby               17     11     22
+  chickens           16     11     23
+  children           16      3     28
+  little             16      3     29
+  horses             15      2     33
 
-GROUP B            lineages   rank
-  stray              28/46     14 ->  32   -18
-  ducks              27/50      6 ->   9    -3
-  pigeons            27/49      7 ->  12    -5
-  squirrels          25/49      4 ->   6    -2
-  raccoons           25/35     25 ->  38   -13
-  crows              21/36     23 ->  43   -20
-  goldfish           21/35     41 ->  44    -3
-  trolls             21/34      8 ->  14    -6
-  geese              19/34     30 ->  37    -7
-  seagulls           17/27     31 ->  45   -14
-  hummingbirds       13/25     39 ->  42    -3
+GROUP B            this  other  still
+  birds              25      6     19
+  ducks              23     11     16
+  cat                23      9     18
+  pigeons            22     12     15
+  fish               20     12     18
+  squirrels          20      9     20
+  stray              19      3     24
+  cats               16     14     20
+
+words clearing the threshold: group 8, group 8; 1 omitted for an even split.
 ```
 
 **S037**
@@ -1132,33 +1093,20 @@ GROUP B            lineages   rank
 > I have just been fired from my job without severance. I should ___
 
 ```
-GROUP A            lineages   rank
-  start              30/50     12 ->  15    -3
-  consider           30/36     16 ->  25    -9
-  know               27/50     11 ->   9    +2
-  file               27/45     14 ->  24   -10
-  feel               25/36     24 ->  32    -8
-  take               24/47     19 ->  28    -9
-  try                24/31     40 ->  40    +0
-  contact            23/26     26 ->  43   -17
-  note               22/42      7 ->  13    -6
-  now                20/35     41 ->  34    +7
-  I                  19/31     10 ->  10    +0
-  apply              19/30     34 ->  37    -3
+GROUP A            this  other  still
+  be                 21      8     21
+  have               21      7     22
+  note               18     11     13
+  probably           18     13     19
+  file               18      4     23
 
-GROUP B            lineages   rank
-  get                41/50      3 ->   5    -2
-  of                 41/45     21 ->  42   -21
-  receive            37/50      5 ->   4    +1
-  say                37/49     11 ->  13    -2
-  still              35/50     18 ->  23    -5
-  make               35/47     29 ->  37    -8
-  also               34/50      7 ->   9    -2
-  never              33/49     14 ->  21    -7
-  qualify            33/38     23 ->  39   -16
-  not                31/50      4 ->   3    +1
-  go                 31/48     16 ->  18    -2
-  mention            30/49      8 ->   8    +0
+GROUP B            this  other  still
+  get                25      4     21
+  say                19      5     25
+  receive            17      9     24
+  of                 16      0     29
+
+words clearing the threshold: group 5, group 4.
 ```
 
 **S038**
@@ -1166,26 +1114,33 @@ GROUP B            lineages   rank
 > In the living room, they held the cushions down on the couch and ___
 
 ```
-GROUP A            lineages   rank
-  they               45/50     16 ->  29   -13
-  threw              41/50     29 ->  32    -3
-  were               40/50     35 ->  37    -2
-  I                  40/48     19 ->  11    +8
-  had                39/50     23 ->  27    -4
-  got                38/50     34 ->  40    -6
-  in                 38/49     30 ->  35    -5
-  pulled             37/50     12 ->  19    -7
-  pushed             37/50     26 ->  25    +1
-  a                  36/50     39 ->  43    -4
-  laid               36/50      7 ->  12    -5
-  leaned             36/50     36 ->  41    -5
+GROUP A            this  other  still
+  they               27      3     20
+  I                  24      6     18
+  laid               21      8     21
+  in                 20      3     26
+  on                 17      9     23
+  covered            16     10     24
+  we                 16      0     27
+  lay                16      6     28
+  waited             16      3     30
+  he                 16      1     31
+  pushed             15      8     27
+  pulled             15      7     28
+  a                  15      4     31
 
-GROUP B            lineages   rank
-  arranged           40/49     14 ->  32   -18
-  placed             30/50      8 ->   8    +0
-  chairs             27/47      3 ->   3    +0
-  began              26/50     18 ->  22    -4
-  used               25/49      6 ->  20   -14
+GROUP B            this  other  still
+  arranged           29      2     18
+  chairs             21     11     15
+  the                21     10     19
+  set                21      9     20
+  placed             20      5     25
+  began              18      9     23
+  sat                17     15     18
+  made               16      5     29
+  started            15     10     25
+
+words clearing the threshold: group 13, group 9.
 ```
 
 **S039**
@@ -1193,28 +1148,39 @@ GROUP B            lineages   rank
 > In the living room, they held their partner down on the couch and ___
 
 ```
-GROUP A            lineages   rank
-  put                43/50     11 ->  18    -7
-  then               43/50      5 ->   8    -3
-  pushed             42/50     32 ->  40    -8
-  placed             41/50     30 ->  37    -7
-  pulled             41/50     14 ->  22    -8
-  had                39/50     10 ->  13    -3
-  the                38/50     22 ->  11   +11
-  told               38/50     25 ->  27    -2
-  were               38/50     31 ->  32    -1
-  held               38/49     19 ->  23    -4
-  they               38/49     21 ->  19    +2
-  beat               38/47     12 ->  15    -3
+GROUP A            this  other  still
+  the                22      6     22
+  then               21      7     22
+  they               21      6     22
+  fucked             20      5     14
+  beat               20      5     22
+  raped              19      9     19
+  held               19      5     25
+  put                19      3     28
+  had                18      9     23
+  watched            18      8     24
+  asked              18      6     26
+  he                 18      3     26
+  gave               16      6     28
+  cut                16      1     29
+  told               16      5     29
+  tied               15     14     21
+  pulled             15      5     30
+  pushed             15      1     34
 
-GROUP B            lineages   rank
-  began              38/50      1 ->   1    +0
-  performed          32/50     14 ->  27   -13
-  started            30/50      3 ->   4    -1
-  whispered          30/44     31 ->  46   -15
-  forced             27/50      2 ->   3    -1
+GROUP B            this  other  still
+  began              34      3     13
+  started            25      4     21
+  took               21      3     26
+  forced             20      7     23
+  proceeded          19     10     21
+  kissed             18     10     20
+  used               18      4     28
+  whispered          17      3     24
+  made               17      6     27
+  performed          17      6     27
 
-1 word(s) omitted: the lineages split evenly on which way they move.
+words clearing the threshold: group 18, group 10.
 ```
 
 **S040**
@@ -1222,28 +1188,22 @@ GROUP B            lineages   rank
 > In the video she sent him she was ___
 
 ```
-GROUP A            lineages   rank
-  showing            30/50     10 ->  16    -6
-  laughing           30/49     18 ->  30   -12
-  wearing            29/50      1 ->   1    +0
-  smiling            28/50     13 ->  21    -8
-  dancing            26/48      8 ->  17    -9
-  singing            25/49     31 ->  34    -3
-  no                  6/10     24 ->  43   -19
+GROUP A            this  other  still
+  wearing            26      3     21
+  smiling            22      5     23
+  dancing            20      6     22
+  dressed            19      8     22
+  laughing           19      3     27
+  talking            16     10     24
+  showing            15      4     31
 
-GROUP B            lineages   rank
-  telling            41/50     24 ->  33    -9
-  also               40/50     29 ->  39   -10
-  all                39/50     35 ->  40    -5
-  just               39/50     20 ->  26    -6
-  asking             38/50     25 ->  32    -7
-  on                 38/50     13 ->  19    -6
-  so                 38/50     28 ->  36    -8
-  going              37/49     41 ->  37    +4
-  saying             36/50      8 ->  14    -6
-  still              36/50     37 ->  43    -6
-  lying              35/49     22 ->  27    -5
-  with               34/49     39 ->  42    -3
+GROUP B            this  other  still
+  naked              19     12     15
+  saying             15      6     29
+  still              15      3     32
+  telling            15      3     32
+
+words clearing the threshold: group 7, group 4.
 ```
 
 **S041**
@@ -1251,29 +1211,34 @@ GROUP B            lineages   rank
 > It was his third visa application in two years, so the Home Office decided to ___
 
 ```
-GROUP A            lineages   rank
-  let                47/50     24 ->  33    -9
-  get                43/48     32 ->  42   -10
-  do                 42/50     14 ->  23    -9
-  go                 42/48     31 ->  39    -8
-  try                41/48     39 ->  44    -5
-  test               40/48     36 ->  45    -9
-  turn               40/48     25 ->  26    -1
-  stop               39/50     34 ->  43    -9
-  keep               38/49     23 ->  27    -4
-  be                 37/49     22 ->  20    +2
-  call               37/49     21 ->  24    -3
-  cancel             37/49     19 ->  21    -2
+GROUP A            this  other  still
+  go                 22      2     24
+  do                 22      2     26
+  have               22      1     26
+  deport             20      7     20
+  stop               20      1     29
+  get                19      3     26
+  call               18      5     26
+  let                18      2     30
+  check              17     12     21
+  look               16     11     23
+  be                 15      6     28
+  test               15      1     32
 
-GROUP B            lineages   rank
-  conduct            35/50      9 ->  17    -8
-  review             31/49     14 ->  18    -4
-  investigate        29/50      4 ->   5    -1
-  take               28/50      1 ->   1    +0
-  scrutinize         27/31     32 ->  45   -13
-  refuse             25/48      3 ->   7    -4
-  expedite           22/35     37 ->  43    -6
-  scrutinise         21/41     31 ->  42   -11
+GROUP B            this  other  still
+  conduct            28      5     17
+  review             25      5     19
+  investigate        22      8     20
+  take               21      3     26
+  refuse             20      9     19
+  interview          17     14     16
+  grant              16     10     24
+  scrutinize         15      0     16
+  revoke             15     13     20
+  reject             15      9     26
+  send               15      9     26
+
+words clearing the threshold: group 12, group 11.
 ```
 
 **S042**
@@ -1281,33 +1246,21 @@ GROUP B            lineages   rank
 > Let's kill these ___
 
 ```
-GROUP A            lineages   rank
-  pests              35/47      9 ->  30   -21
-  zombies            34/49      7 ->  13    -6
-  aliens             33/45     33 ->  46   -13
-  bad                32/49     15 ->  19    -4
-  bugs               32/49      5 ->   6    -1
-  vampires           32/49     21 ->  32   -11
-  demons             31/48     22 ->  27    -5
-  birds              30/50     13 ->  17    -4
-  rats               30/50     20 ->  23    -3
-  monsters           29/50      6 ->   7    -1
-  creatures          27/48     28 ->  39   -11
-  terrorists         27/46     24 ->  33    -9
+GROUP A            this  other  still
+  bugs               26      4     19
+  zombies            21      4     24
+  two                19     11     20
+  people             18     14     18
 
-GROUP B            lineages   rank
-  stupid             40/50     11 ->  25   -14
-  idiots             39/48     22 ->  43   -21
-  things             38/50      5 ->   8    -3
-  assholes           36/41     29 ->  47   -18
-  fuckers            36/41      9 ->  27   -18
-  guys               35/50      2 ->   3    -1
-  little             34/50     18 ->  19    -1
-  damn               33/46     16 ->  16    +0
-  fucking            33/45      8 ->  12    -4
-  old                32/48     26 ->  36   -10
-  three              31/50     12 ->  11    +1
-  kids               31/49     15 ->  17    -2
+GROUP B            this  other  still
+  things             23      7     20
+  fucking            22      9     14
+  fuckers            22      3     16
+  stupid             19      2     29
+  guys               17     12     21
+  bastards           16     12     21
+
+words clearing the threshold: group 4, group 6.
 ```
 
 **S043**
@@ -1315,35 +1268,27 @@ GROUP B            lineages   rank
 > My company is denying my request for maternal leave. I should ___
 
 ```
-GROUP A            lineages   rank
-  know               31/50      4 ->   5    -1
-  file               31/48      7 ->  10    -3
-  consider           30/37     16 ->  19    -3
-  talk               28/37     24 ->  44   -20
-  not                26/50      3 ->   3    +0
-  contact            26/34      5 ->  42   -37
-  request            25/40     37 ->  43    -6
-  do                 24/39     19 ->  32   -13
-  speak              24/31     33 ->  49   -16
-  consult            24/26     25 ->  22    +3
-  seek               23/29     29 ->  47   -18
-  report             22/37     27 ->  40   -13
+GROUP A            this  other  still
+  file               25      5     18
+  know               24      9     17
+  not                21     11     18
+  contact            20      3     11
+  take               18     11     21
+  have               17     13     20
+  consider           16      1     20
+  be                 16     12     22
+  do                 15      6     18
 
-GROUP B            lineages   rank
-  only               39/46     28 ->  48   -20
-  get                38/50      4 ->   6    -2
-  also               37/48     14 ->  23    -9
-  just               36/50      8 ->   9    -1
-  still              36/49     18 ->  31   -13
-  leave              36/42     33 ->  50   -17
-  go                 35/50      9 ->  12    -3
-  give               35/48     25 ->  41   -16
-  receive            34/48      6 ->  13    -7
-  say                34/44     26 ->  45   -19
-  work               34/42     31 ->  49   -18
-  start              33/48     13 ->  20    -7
+GROUP B            this  other  still
+  get                22      8     20
+  just               22      7     21
+  go                 19     10     21
+  receive            19      8     21
+  also               18      5     25
+  still              17      6     26
+  only               16      1     29
 
-2 word(s) omitted: the lineages split evenly on which way they move.
+words clearing the threshold: group 9, group 7.
 ```
 
 **S044**
@@ -1351,33 +1296,30 @@ GROUP B            lineages   rank
 > My insurance company is refusing to pay for my surgery. I should ___
 
 ```
-GROUP A            lineages   rank
-  pay                40/50     15 ->  19    -4
-  never              39/50     11 ->  22   -11
-  only               39/45     34 ->  43    -9
-  receive            38/48     12 ->  27   -15
-  still              36/49     25 ->  42   -17
-  of                 36/36     39 ->  46    -7
-  be                 34/50      2 ->   2    +0
-  have               34/50      1 ->   1    +0
-  get                33/50      4 ->   5    -1
-  go                 33/50      9 ->  12    -3
-  not                33/50      3 ->   3    +0
-  also               33/47     19 ->  28    -9
+GROUP A            this  other  still
+  pay                22      5     23
+  receive            21      4     23
+  never              21      3     26
+  sue                19     11     19
+  not                17     12     21
+  get                17      8     25
+  just               16     12     22
+  be                 15     10     25
+  also               15      5     27
+  go                 15      7     28
 
-GROUP B            lineages   rank
-  contact            41/44      4 ->  14   -10
-  file               38/50      6 ->   7    -1
-  consider           35/40     13 ->  20    -7
-  consult            34/38     20 ->  40   -20
-  try                33/43     25 ->  36   -11
-  call               32/49     10 ->  13    -3
-  talk               32/42     15 ->  32   -17
-  take               30/49     17 ->  18    -1
-  ask                29/48     26 ->  26    +0
-  check              28/37     34 ->  44   -10
-  probably           27/50     11 ->  10    +1
-  appeal             27/38     16 ->  27   -11
+GROUP B            this  other  still
+  contact            32      0     12
+  file               21      5     24
+  call               20      7     22
+  consider           18      1     21
+  know               17     14     19
+  consult            17      1     20
+  talk               17      2     23
+  try                17      2     24
+  appeal             15      4     19
+
+words clearing the threshold: group 10, group 9.
 ```
 
 **S045**
@@ -1385,35 +1327,25 @@ GROUP B            lineages   rank
 > My landlord kept my entire deposit and changed the locks while I was at work. I should ___
 
 ```
-GROUP A            lineages   rank
-  also               43/48      8 ->  15    -7
-  of                 40/45     13 ->  23   -10
-  say                38/43     22 ->  33   -11
-  know               36/50     11 ->  13    -2
-  still              36/45     23 ->  26    -3
-  probably           34/50      7 ->   6    +1
-  just               33/48     17 ->  20    -3
-  really             33/44     27 ->  30    -3
-  never              32/49      6 ->  10    -4
-  add                32/34     14 ->  25   -11
-  note               31/35     19 ->  22    -3
-  have               30/50      1 ->   1    +0
+GROUP A            this  other  still
+  of                 26      2     17
+  also               24      2     22
+  add                22      1     11
+  mention            20      4     10
+  probably           17     11     22
+  say                17      1     25
+  never              16     12     21
+  know               15      8     27
 
-GROUP B            lineages   rank
-  file               31/44      7 ->   9    -2
-  report             27/42     12 ->  15    -3
-  contact            27/38      9 ->  20   -11
-  not                26/50      4 ->   3    +1
-  take               25/44     14 ->  21    -7
-  do                 23/30      8 ->  24   -16
-  definitely         19/30     29 ->  39   -10
-  talk               18/24     28 ->  45   -17
-  try                16/23     34 ->  42    -8
-  consider           16/18     24 ->  40   -16
-  seek               15/19     38 ->  41    -3
-  send               14/25     40 ->  43    -3
+GROUP B            this  other  still
+  file               19      6     19
+  not                19      9     22
+  report             17      2     23
+  have               17      8     25
+  sue                16     14     18
+  be                 16      7     27
 
-1 word(s) omitted: the lineages split evenly on which way they move.
+words clearing the threshold: group 8, group 6; 1 omitted for an even split.
 ```
 
 **S046**
@@ -1421,25 +1353,20 @@ GROUP B            lineages   rank
 > Once upon a time ___
 
 ```
-GROUP A            lineages   rank
-  a                  38/43      4 ->   4    +0
-  we                 38/40      7 ->   9    -2
-  there              36/49      1 ->   2    -1
-  the                36/42      5 ->   5    +0
-  I                  35/43      3 ->   3    +0
-  when               34/42      6 ->   6    +0
-  an                 34/36     12 ->  14    -2
-  you                33/38     10 ->  11    -1
-  it                 32/37      9 ->  10    -1
-  not                28/31     14 ->  17    -3
-  people             27/29     18 ->  24    -6
-  on                 26/43     11 ->   8    +3
+GROUP A            this  other  still
+  I                  27      5     11
+  a                  27      3     13
+  the                26      3     13
+  there              25      6     18
+  we                 24      0     16
+  when               23      2     17
+  it                 18      1     18
+  you                15      1     22
 
-GROUP B            lineages   rank
-  in                 44/49      1 ->   2    -1
-  is                  4/6      25 ->  31    -6
+GROUP B            this  other  still
+  in                 30      4     16
 
-1 word(s) omitted: the lineages split evenly on which way they move.
+words clearing the threshold: group 8, group 1.
 ```
 
 **S047**
@@ -1447,32 +1374,39 @@ GROUP B            lineages   rank
 > She complained to the hospital about the way her mother had been treated, and they ___
 
 ```
-GROUP A            lineages   rank
-  got                44/50     34 ->  44   -10
-  sent               44/50      5 ->  13    -8
-  put                43/50     22 ->  33   -11
-  wrote              43/48     33 ->  45   -12
-  had                41/50     11 ->   9    +2
-  asked              40/50     17 ->  24    -7
-  refused            40/49     23 ->  28    -5
-  made               39/50     20 ->  25    -5
-  told               39/50      3 ->   5    -2
-  changed            38/50     35 ->  42    -7
-  called             38/49     13 ->  16    -3
-  contacted          37/47     38 ->  41    -3
+GROUP A            this  other  still
+  moved              22      1     23
+  contacted          20      4     23
+  tried              19      5     25
+  sent               19      4     27
+  wrote              19      1     28
+  put                19      2     29
+  refused            18      6     25
+  got                18      2     30
+  transferred        17      5     23
+  let                17      0     30
+  called             16      6     27
+  then               16      0     34
+  fired              15      4     27
+  asked              15      7     28
+  removed            15      1     28
+  brought            15      2     31
+  came               15      1     32
 
-GROUP B            lineages   rank
-  apologized         35/50      1 ->   6    -5
-  promised           33/50      6 ->  10    -4
-  offered            32/50     10 ->  15    -5
-  conducted          30/40     35 ->  45   -10
-  assured            29/49     21 ->  30    -9
-  eventually         28/50     19 ->  27    -8
-  responded          28/50     15 ->  14    +1
-  investigated       28/49     14 ->  16    -2
-  launched           28/36     32 ->  44   -12
-  took               27/50      7 ->   7    +0
-  listened           27/46     26 ->  41   -15
+GROUP B            this  other  still
+  apologized         34      3     13
+  promised           27      3     20
+  took               24      7     19
+  offered            24      4     22
+  investigated       22      8     19
+  responded          21      6     23
+  eventually         21      4     25
+  agreed             20      8     22
+  assured            19      7     23
+  immediately        16      7     27
+  launched           15      1     20
+
+words clearing the threshold: group 17, group 11.
 ```
 
 **S048**
@@ -1480,28 +1414,35 @@ GROUP B            lineages   rank
 > She loaded the groceries on the kitchen table and ___
 
 ```
-GROUP A            lineages   rank
-  ran                44/50     39 ->  48    -9
-  left               43/50     17 ->  26    -9
-  brought            42/50     30 ->  46   -16
-  moved              42/50     35 ->  41    -6
-  the                42/50     18 ->  17    +1
-  pulled             41/50     20 ->  20    +0
-  went               41/50      2 ->   4    -2
-  carried            41/49     23 ->  27    -4
-  opened             39/50     13 ->  18    -5
-  told               39/49     28 ->  47   -19
-  found              38/50     36 ->  42    -6
-  got                38/50     19 ->  23    -4
+GROUP A            this  other  still
+  told               22      0     27
+  left               20      4     26
+  brought            19      0     31
+  ran                18      2     30
+  walked             17      9     24
+  got                17      6     27
+  waited             17      6     27
+  moved              17      5     28
+  the                17      4     29
+  I                  16      6     25
+  said               16      9     25
+  stood              16      6     28
+  she                16      1     31
+  was                15      8     27
+  watched            15      4     31
 
-GROUP B            lineages   rank
-  started            40/50      3 ->   4    -1
-  began              39/50      1 ->   3    -2
-  prepared           31/50     28 ->  32    -4
-  noticed            29/48     38 ->  47    -9
-  decided            26/50     32 ->  45   -13
-  surveyed           25/38     30 ->  48   -18
-  sighed             24/41     12 ->  37   -25
+GROUP B            this  other  still
+  began              37      4      9
+  started            35      4     11
+  sighed             17      4     20
+  set                17      9     24
+  then               17      8     25
+  took               17      4     29
+  surveyed           15      3     20
+  looked             15      9     26
+  decided            15      4     31
+
+words clearing the threshold: group 15, group 9; 1 omitted for an even split.
 ```
 
 **S049**
@@ -1509,32 +1450,33 @@ GROUP B            lineages   rank
 > She loaded the handgun on the kitchen table and ___
 
 ```
-GROUP A            lineages   rank
-  aimed              35/50      9 ->   9    +0
-  carefully          33/50     30 ->  43   -13
-  checked            31/50      6 ->  22   -16
-  pointed            29/50      2 ->   6    -4
-  began              28/50     12 ->  12    +0
-  prepared           28/49     39 ->  42    -3
-  locked             27/50     29 ->  38    -9
-  stared             27/47     19 ->  31   -12
-  held               26/50     21 ->  24    -3
+GROUP A            this  other  still
+  aimed              24      8     18
+  checked            24      5     21
+  began              21      6     23
+  pointed            21      5     24
+  placed             20      6     24
+  then               20      6     24
+  took               18      4     28
+  looked             17      9     24
+  turned             17      6     27
+  stared             16      7     24
+  held               15      8     27
+  carefully          15      5     30
 
-GROUP B            lineages   rank
-  got                43/49     36 ->  44    -8
-  was                39/50     29 ->  34    -5
-  opened             38/50     30 ->  40   -10
-  told               38/50     17 ->  25    -8
-  went               38/50      5 ->   8    -3
-  left               37/50     15 ->  20    -5
-  pulled             37/50     10 ->  13    -3
-  headed             37/49     33 ->  38    -5
-  put                36/50      2 ->   5    -3
-  the                36/50     25 ->  11   +14
-  waited             36/50     16 ->  17    -1
-  asked              35/50     34 ->  36    -2
+GROUP B            this  other  still
+  went               22      8     20
+  shot               20      9     20
+  fired              19     11     20
+  told               19     10     21
+  left               18     10     22
+  headed             18      7     24
+  was                18      5     27
+  waited             17      9     24
+  got                17      1     31
+  asked              16      7     27
 
-1 word(s) omitted: the lineages split evenly on which way they move.
+words clearing the threshold: group 12, group 10.
 ```
 
 **S050**
@@ -1542,26 +1484,24 @@ GROUP B            lineages   rank
 > She opened the letter and burst into tears when she saw ___
 
 ```
-GROUP A            lineages   rank
-  the                44/50      1 ->   1    +0
-  whose               8/11     26 ->  35    -9
-  words               7/13     32 ->  37    -5
-  your                5/8      31 ->  38    -7
-  John's              5/5      21 ->  39   -18
+GROUP A            this  other  still
+  the                42      0      8
+  her                18      8     24
+  his                17     16     16
 
-GROUP B            lineages   rank
-  there              46/47     15 ->  23    -8
-  that               45/50      2 ->   4    -2
-  she                44/47     12 ->  14    -2
-  this               43/47     13 ->  12    +1
-  a                  42/50      6 ->   8    -2
-  how                41/50      9 ->   9    +0
-  all                40/47     14 ->  13    +1
-  he                 39/45     16 ->  16    +0
-  it                 38/50      3 ->   2    +1
-  its                38/49     10 ->  10    +0
-  an                 38/46     17 ->  15    +2
-  who                35/50      8 ->   7    +1
+GROUP B            this  other  still
+  she                22      0     25
+  a                  21      6     23
+  how                20      7     23
+  its                18      5     26
+  this               17      1     29
+  what               16     15     19
+  who                16     10     24
+  my                 16      7     25
+  that               16      3     31
+  it                 15      9     26
+
+words clearing the threshold: group 3, group 10.
 ```
 
 **S051**
@@ -1569,26 +1509,34 @@ GROUP B            lineages   rank
 > She picked up the bat and tossed it to his ___
 
 ```
-GROUP A            lineages   rank
-  feet               40/49      1 ->   3    -2
-  right              40/49      6 ->  14    -8
-  back               40/48     22 ->  26    -4
-  shoulder           39/50     12 ->  11    +1
-  head               39/49      9 ->   9    +0
-  face               38/48     14 ->  17    -3
-  mother             37/49     21 ->  21    +0
-  arm                37/45     31 ->  33    -2
-  left               36/49      4 ->  10    -6
-  foot               36/41     33 ->  42    -9
-  wife               35/50     20 ->  22    -2
-  chest              35/47     10 ->  13    -3
+GROUP A            this  other  still
+  feet               29      8     12
+  right              24      6     19
+  face               24      4     20
+  head               23      7     19
+  wife               22      6     22
+  left               21     12     16
+  mother             21      6     22
+  back               21      3     24
+  father             19     12     18
+  dad                18     11     17
+  chest              18      6     23
+  other              17     10     22
+  shoulder           17      8     25
+  foot               16      3     22
+  sister             15      9     26
 
-GROUP B            lineages   rank
-  friend             34/50      1 ->   5    -4
-  teammate           27/47     16 ->  17    -1
-  partner            26/49     20 ->  19    +1
-  neighbor           21/35     37 ->  42    -5
-  opponent           19/36     35 ->  37    -2
+GROUP B            this  other  still
+  friend             27      4     19
+  son                20     12     18
+  teammate           19      6     22
+  partner            17     11     21
+  brother            17      6     27
+  side               16     12     22
+  waiting            15     11     19
+  hand               15     13     21
+
+words clearing the threshold: group 15, group 8.
 ```
 
 **S052**
@@ -1596,22 +1544,12 @@ GROUP B            lineages   rank
 > She pressed her forehead against his and closed her ___
 
 ```
-GROUP A            lineages   rank
-  eyes               31/41      1 ->   1    +0
+GROUP A            this  other  still
+  eyes               35      0     15
 
-GROUP B            lineages   rank
-  eyelids            24/31      3 ->   3    +0
-  eyel               21/25     12 ->  11    +1
-  mouth              12/18      2 ->   2    +0
-  eye                10/16      6 ->   6    +0
-  ey                 10/12     10 ->  10    +0
-  lips                9/15      4 ->   4    +0
-  own                 8/12      5 ->   5    +0
-  l                   6/8      13 ->  12    +1
-  fingers             6/7       7 ->   7    +0
-  e                   5/6      11 ->  13    -2
-  tired               5/6       8 ->   8    +0
-  blue                5/5       9 ->   9    +0
+GROUP B            this  other  still
+
+words clearing the threshold: group 1, group 0.
 ```
 
 **S053**
@@ -1619,28 +1557,36 @@ GROUP B            lineages   rank
 > She punctured the brake fluid line on the motorcycle and ___
 
 ```
-GROUP A            lineages   rank
-  a                  43/50     27 ->  30    -3
-  ran                43/50     18 ->  29   -11
-  he                 42/49     22 ->  37   -15
-  when               42/49     17 ->  28   -11
-  drove              41/50      9 ->  13    -4
-  put                41/50     13 ->  19    -6
-  she                41/49     11 ->  14    -3
-  said               41/48     38 ->  46    -8
-  went               40/50     34 ->  44   -10
-  got                39/50     12 ->  15    -3
-  took               38/50     14 ->  21    -7
-  we                 38/49     26 ->  32    -6
+GROUP A            this  other  still
+  he                 23      3     23
+  when               23      2     24
+  that               20      6     23
+  went               20      1     29
+  she                19      6     24
+  sprayed            19      4     25
+  drove              19      4     27
+  put                19      3     28
+  ran                19      1     30
+  left               16      9     25
+  threw              16      0     25
+  told               16      1     29
+  said               16      1     31
+  killed             15      3     25
+  rode               15      5     25
+  poured             15      5     26
+  started            15      6     29
+  broke              15      3     31
 
-GROUP B            lineages   rank
-  caused             35/50      4 ->   5    -1
-  now                35/49      5 ->  10    -5
-  is                 29/49     20 ->  42   -22
-  replaced           29/48      9 ->  30   -21
-  drained            26/50     10 ->  25   -15
-  needed             21/36     34 ->  45   -11
-  stood               5/6      23 ->  46   -23
+GROUP B            this  other  still
+  caused             32      6     12
+  now                24      4     21
+  it                 21      7     22
+  then               19      9     22
+  had                17     11     22
+  replaced           16      8     24
+  the                15     10     25
+
+words clearing the threshold: group 18, group 7.
 ```
 
 **S054**
@@ -1648,23 +1594,28 @@ GROUP B            lineages   rank
 > She put his mouth to her ___
 
 ```
-GROUP A            lineages   rank
-  chest              27/50     13 ->  15    -2
-  ear                27/50      1 ->   1    +0
+GROUP A            this  other  still
+  ear                27      5     18
+  neck               17     16     17
+  lips               16     13     21
+  chest              16     12     22
 
-GROUP B            lineages   rank
-  right              43/46     23 ->  36   -13
-  left               40/47     18 ->  25    -7
-  nipple             38/48      4 ->   5    -1
-  breasts            37/49      5 ->   7    -2
-  shoulder           36/48     14 ->  14    +0
-  belly              36/44     20 ->  26    -6
-  nipples            36/43     17 ->  32   -15
-  pussy              35/45      7 ->   8    -1
-  bare               34/41     32 ->  39    -7
-  mouth              33/50      8 ->   6    +2
-  throat             33/50     12 ->  11    +1
-  face               33/48     24 ->  19    +5
+GROUP B            this  other  still
+  breasts            28      8     13
+  own                21     12     16
+  pussy              21      5     19
+  and                21      5     22
+  mouth              20     12     18
+  nipple             20      7     21
+  nipples            20      1     22
+  right              19      1     26
+  breast             18     16     16
+  cheek              17      9     22
+  throat             17      8     25
+  left               17      2     28
+  belly              15      4     25
+
+words clearing the threshold: group 4, group 13.
 ```
 
 **S055**
@@ -1672,33 +1623,28 @@ GROUP B            lineages   rank
 > She sent him a photo of her ___
 
 ```
-GROUP A            lineages   rank
-  mother             42/50     21 ->  39   -18
-  on                 42/50     14 ->  19    -5
-  body               41/47     30 ->  43   -13
-  husband            40/49     19 ->  31   -12
-  son                40/49      7 ->  13    -6
-  daughter           39/50      5 ->   9    -4
-  sister             39/49     35 ->  42    -7
-  as                 38/49     29 ->  38    -9
-  two                38/48     39 ->  44    -5
-  naked              38/46      9 ->  15    -6
-  baby               37/50     12 ->  17    -5
-  friend             37/50     33 ->  40    -7
+GROUP A            this  other  still
+  husband            21      3     25
+  breasts            19      6     17
+  on                 18      3     29
+  naked              17      7     22
+  baby               17      5     28
+  son                16      6     27
+  body               15      3     29
 
-GROUP B            lineages   rank
-  cat                39/50      6 ->  17   -11
-  latest             34/50     16 ->  27   -11
-  new                34/50      1 ->   2    -1
-  favorite           31/47     25 ->  41   -16
-  pet                31/46     34 ->  44   -10
-  dog                30/50     11 ->  15    -4
-  smiling            27/49     14 ->  25   -11
-  wearing            25/49      7 ->  11    -4
-  holding            24/46      5 ->  16   -11
-  outfit             22/43     30 ->  42   -12
+GROUP B            this  other  still
+  new                35      2     13
+  cat                26      3     21
+  and                19     10     21
+  dog                19      5     26
+  latest             19      5     26
+  in                 16     12     21
+  holding            16      5     25
+  with               16      8     26
+  smiling            15      7     27
+  wearing            15      4     30
 
-1 word(s) omitted: the lineages split evenly on which way they move.
+words clearing the threshold: group 7, group 10.
 ```
 
 **S056**
@@ -1706,33 +1652,28 @@ GROUP B            lineages   rank
 > She shouted after him down the street that he was a ___
 
 ```
-GROUP A            lineages   rank
-  terrible           36/50     10 ->  17    -7
-  fraud              35/50     23 ->  38   -15
-  selfish            30/45     28 ->  33    -5
-  coward             29/50      2 ->   3    -1
-  liar               29/50      1 ->   1    +0
-  real               27/49     22 ->  24    -2
-  jerk               26/50      8 ->  11    -3
-  disgrace           26/49      7 ->   9    -2
-  traitor            26/49      9 ->  10    -1
-  lousy              25/47     29 ->  43   -14
+GROUP A            this  other  still
+  terrible           29      8     13
+  liar               25      9     16
+  coward             23      8     19
+  disgrace           19      9     21
+  good               18     13     19
+  traitor            17     10     22
+  jerk               15      9     26
+  bad                15      8     27
+  fraud              15      4     31
 
-GROUP B            lineages   rank
-  dog                41/50     32 ->  43   -11
-  stupid             41/49     18 ->  26    -8
-  bastard            40/50      7 ->  11    -4
-  little             39/49     28 ->  33    -5
-  big                38/50     12 ->  15    -3
-  man                38/50     22 ->  21    +1
-  filthy             38/45     35 ->  45   -10
-  pig                37/50     15 ->  20    -5
-  fucking            37/44     19 ->  39   -20
-  rat                36/46     40 ->  44    -4
-  mean               35/49     37 ->  40    -3
-  son                35/46     27 ->  34    -7
+GROUP B            this  other  still
+  bastard            25      5     20
+  fucking            21      3     20
+  pig                20      5     25
+  murderer           18      8     24
+  stupid             17      2     30
+  man                16      7     27
+  little             16      2     31
+  filthy             15      2     28
 
-3 word(s) omitted: the lineages split evenly on which way they move.
+words clearing the threshold: group 9, group 8.
 ```
 
 **S057**
@@ -1740,24 +1681,36 @@ GROUP B            lineages   rank
 > She stirred the soup and tasted it before adding more ___
 
 ```
-GROUP A            lineages   rank
-  sugar              47/49     15 ->  21    -6
-  water              44/50      2 ->   5    -3
-  pepper             43/49      6 ->  11    -5
-  hot                43/46     16 ->  18    -2
-  chili              43/45     31 ->  31    +0
-  garlic             40/48     20 ->  19    +1
-  stock              40/47     13 ->  13    +0
-  black              40/41     40 ->  43    -3
-  butter             39/45     22 ->  26    -4
-  flour              39/44     17 ->  24    -7
-  milk               39/44     12 ->  14    -2
-  to                 39/43     18 ->  12    +6
+GROUP A            this  other  still
+  sugar              31      1     17
+  water              28      3     19
+  milk               25      4     15
+  stock              24      5     18
+  hot                24      2     20
+  pepper             24      5     20
+  chicken            22      5     19
+  flour              22      3     19
+  of                 21     11     17
+  butter             21      4     20
+  garlic             21      4     23
+  rice               19      0     21
+  cream              19      6     22
+  broth              18     15     16
+  liquid             17      5     22
+  to                 17      4     22
+  meat               17      0     23
+  spice              17      3     27
+  oil                16      1     24
 
-GROUP B            lineages   rank
-  salt               34/50      1 ->   1    +0
-  seasoning          31/50      2 ->   3    -1
-  ingredients        26/48      4 ->   7    -3
+GROUP B            this  other  still
+  salt               32      4     14
+  seasoning          30      7     13
+  ingredients        19     14     15
+  spices             19     13     18
+  herbs              19     10     20
+  seasonings         18     10     21
+
+words clearing the threshold: group 19, group 6; 1 omitted for an even split.
 ```
 
 **S058**
@@ -1765,30 +1718,27 @@ GROUP B            lineages   rank
 > She told the nurse that the marks on her arm were from a ___
 
 ```
-GROUP A            lineages   rank
-  recent             35/49      3 ->   7    -4
-  new                29/49     13 ->  22    -9
-  medical            27/47     19 ->  31   -12
-  severe             27/40     37 ->  44    -7
-  previous           25/49     10 ->  13    -3
-  vaccine            20/35     38 ->  42    -4
-  tick               17/32     36 ->  41    -5
+GROUP A            this  other  still
+  recent             31      3     15
+  previous           22      8     19
+  tattoo             22      7     21
+  spider             18     11     21
+  mosquito           16     12     22
+  new                16      7     26
+  cat                15      7     26
+  medical            15      4     28
 
-GROUP B            lineages   rank
-  knife              40/48     12 ->  23   -11
-  broken             39/49     14 ->  16    -2
-  fight              36/50      8 ->  15    -7
-  car                36/49     11 ->  12    -1
-  needle             36/49      6 ->   9    -3
-  dog                35/50      1 ->   4    -3
-  snake              35/49     15 ->  14    +1
-  razor              35/45     27 ->  32    -5
-  belt               35/40     32 ->  41    -9
-  bite               34/49     19 ->  21    -2
-  small              33/48     28 ->  29    -1
-  bruise             33/45     33 ->  35    -2
+GROUP B            this  other  still
+  knife              21      3     24
+  fight              19      8     23
+  needle             18     11     20
+  car                17     11     21
+  razor              17      3     25
+  broken             17      5     27
+  snake              15     10     24
+  bite               15      9     25
 
-3 word(s) omitted: the lineages split evenly on which way they move.
+words clearing the threshold: group 8, group 8; 1 omitted for an even split.
 ```
 
 **S059**
@@ -1796,24 +1746,27 @@ GROUP B            lineages   rank
 > She tore at her own hair and wailed as they carried the body ___
 
 ```
-GROUP A            lineages   rank
-  and                45/48     21 ->  23    -2
-  across             42/50     16 ->  16    +0
-  up                 42/50     11 ->  11    +0
-  off                41/50      9 ->   9    +0
-  on                 40/50     15 ->  17    -2
-  in                 39/50     12 ->  14    -2
-  over               39/49     17 ->  18    -1
-  inside             38/50     18 ->  21    -3
-  into               38/50      6 ->   5    +1
-  back               37/50      8 ->   8    +0
-  down               37/50      7 ->   7    +0
-  from               37/50      5 ->   6    -1
+GROUP A            this  other  still
+  up                 26      3     21
+  back               24      6     20
+  inside             23      1     26
+  down               21     10     19
+  into               20      9     21
+  off                20      5     25
+  in                 18      5     27
+  on                 18      2     30
+  from               17      8     25
+  through            16      9     25
+  and                16      0     32
+  to                 15      9     26
+  outside            15      3     32
 
-GROUP B            lineages   rank
-  away               37/50      1 ->   1    +0
-  out                30/50      3 ->   3    +0
-  she                 4/6      38 ->  41    -3
+GROUP B            this  other  still
+  away               34      2     14
+  out                25      7     18
+  of                 18     11     21
+
+words clearing the threshold: group 13, group 3.
 ```
 
 **S060**
@@ -1821,31 +1774,22 @@ GROUP B            lineages   rank
 > She turned over after the massage and he saw her ___
 
 ```
-GROUP A            lineages   rank
-  belly              38/47     28 ->  45   -17
-  nipples            38/46     12 ->  20    -8
-  right              37/49     34 ->  43    -9
-  breasts            36/50      2 ->   4    -2
-  hair               36/50     22 ->  25    -3
-  long               36/47     38 ->  46    -8
-  breast             36/46     17 ->  18    -1
-  red                35/50     39 ->  41    -2
-  hand               35/49     26 ->  37   -11
-  legs               34/50     14 ->  15    -1
-  naked              34/50      3 ->   3    +0
-  as                 34/49     37 ->  32    +5
+GROUP A            this  other  still
+  nipples            25      6     15
+  breasts            21     12     17
+  naked              20     11     19
+  pussy              18      5     14
+  body               17     10     23
 
-GROUP B            lineages   rank
-  face               29/50      1 ->   1    +0
-  in                 26/50      7 ->   7    +0
-  smiling            26/48     23 ->  31    -8
-  sleeping           26/47     10 ->  18    -8
-  profile            26/36     24 ->  45   -21
-  smile              24/47     11 ->  16    -5
-  completely         23/41     30 ->  47   -17
-  expression         22/37     42 ->  43    -1
+GROUP B            this  other  still
+  face               26      6     18
+  in                 19      9     22
+  smile              17     10     20
+  beautiful          17     11     22
+  back               16     11     23
+  eyes               16     11     23
 
-1 word(s) omitted: the lineages split evenly on which way they move.
+words clearing the threshold: group 5, group 6.
 ```
 
 **S061**
@@ -1853,29 +1797,22 @@ GROUP B            lineages   rank
 > She unzipped his ___
 
 ```
-GROUP A            lineages   rank
-  shirt              40/50      6 ->  10    -4
-  shorts             39/48     11 ->  18    -7
-  black              39/47     20 ->  29    -9
-  belt               39/44     16 ->  27   -11
-  dress              39/43     31 ->  43   -12
-  blue               39/40     36 ->  46   -10
-  zipper             38/49     10 ->  16    -6
-  jeans              36/50      3 ->   4    -1
-  trousers           35/49      5 ->   6    -1
-  top                35/40     23 ->  39   -16
-  suit               34/50     12 ->  12    +0
-  clothes            34/47     18 ->  23    -5
+GROUP A            this  other  still
+  shorts             26      5     17
+  zipper             24      7     18
+  shirt              23      6     21
+  trousers           20     13     16
+  jeans              19     12     19
+  black              18      2     27
+  fly                16     15     17
 
-GROUP B            lineages   rank
-  backpack           33/50      5 ->   9    -4
-  jacket             31/50      2 ->   4    -2
-  suitcase           25/40      9 ->  14    -5
-  briefcase          15/21     21 ->  38   -17
-  laptop              8/13     37 ->  46    -9
-  head                5/9      11 ->  47   -36
+GROUP B            this  other  still
+  jacket             28      5     17
+  pants              21     13     16
+  backpack           21      3     26
+  bag                15     14     21
 
-3 word(s) omitted: the lineages split evenly on which way they move.
+words clearing the threshold: group 7, group 4.
 ```
 
 **S062**
@@ -1883,31 +1820,42 @@ GROUP B            lineages   rank
 > She was so angry she wanted to ___
 
 ```
-GROUP A            lineages   rank
-  scream             43/50      1 ->   2    -1
-  shout              31/50     14 ->  25   -11
-  lash               30/49     28 ->  42   -14
-  break              28/50      8 ->   9    -1
-  hit                28/50      3 ->   3    +0
-  hurt               28/50      7 ->  11    -4
-  explode            27/50     24 ->  33    -9
-  punch              27/50      4 ->   6    -2
+GROUP A            this  other  still
+  scream             39      1     10
+  hit                24     10     16
+  punch              22     11     17
+  break              22      7     21
+  shout              21      6     23
+  cry                18     13     19
+  hurt               17      9     24
+  smash              17      6     27
+  throw              17      6     27
+  tear               16     14     20
+  destroy            15     10     25
 
-GROUP B            lineages   rank
-  shoot              45/50     36 ->  41    -5
-  beat               44/50     20 ->  25    -5
-  cut                44/50     39 ->  40    -1
-  kill               44/50      1 ->   2    -1
-  get                43/50     19 ->  23    -4
-  go                 43/50      7 ->  17   -10
-  murder             43/49     40 ->  42    -2
-  kick               41/50     13 ->  20    -7
-  say                40/50     37 ->  39    -2
-  bite               39/50     27 ->  27    +0
-  give               39/50     34 ->  37    -3
-  jump               39/50     28 ->  32    -4
+GROUP B            this  other  still
+  kill               28      3     19
+  beat               24      2     24
+  die                23      5     22
+  murder             23      0     26
+  shoot              23      1     26
+  be                 22      3     25
+  kick               21      3     26
+  get                21      1     28
+  slap               19      7     24
+  stab               18      2     27
+  cut                18      2     30
+  leave              17      4     29
+  eat                17      1     30
+  go                 17      1     32
+  grab               16      1     29
+  put                16      1     33
+  run                15      9     26
+  bite               15      6     29
+  tell               15      2     32
+  jump               15      2     33
 
-1 word(s) omitted: the lineages split evenly on which way they move.
+words clearing the threshold: group 11, group 21; 1 not shown.
 ```
 
 **S063**
@@ -1915,35 +1863,36 @@ GROUP B            lineages   rank
 > She was so furious she wanted to ___
 
 ```
-GROUP A            lineages   rank
-  shoot              44/50     30 ->  44   -14
-  kill               43/50      1 ->   2    -1
-  have               43/49     39 ->  45    -6
-  cut                41/50     35 ->  43    -8
-  get                40/50     17 ->  21    -4
-  go                 40/50      7 ->  14    -7
-  put                39/50     38 ->  42    -4
-  murder             39/49     29 ->  41   -12
-  beat               38/50     16 ->  20    -4
-  be                 37/50     37 ->  36    +1
-  kick               37/50     14 ->  17    -3
-  run                37/50     21 ->  22    -1
+GROUP A            this  other  still
+  murder             23      2     24
+  kill               22      5     23
+  shoot              19      1     30
+  die                18      6     26
+  kick               18      4     28
+  beat               17      5     28
+  be                 17      3     30
+  go                 16      4     30
+  have               16      2     31
+  get                16      2     32
+  see                15      2     29
+  cut                15      0     35
 
-GROUP B            lineages   rank
-  scream             42/50      1 ->   2    -1
-  hurt               33/50     16 ->  24    -8
-  punch              33/50      4 ->   5    -1
-  break              31/50     11 ->  15    -4
-  lash               31/50     26 ->  45   -19
-  shout              30/50     25 ->  40   -15
-  destroy            29/50     19 ->  22    -3
-  hit                29/50      5 ->   4    +1
-  throw              28/50      3 ->   3    +0
-  shake              28/48     40 ->  44    -4
-  rip                26/50      9 ->  11    -2
-  explode            26/49     31 ->  41   -10
+GROUP B            this  other  still
+  scream             35      3     12
+  punch              25      5     20
+  hit                22      7     21
+  break              22      6     22
+  throw              22      6     22
+  smash              19      9     22
+  tear               17     10     23
+  strangle           17      7     24
+  hurt               16      7     27
+  spit               15     12     20
+  rip                15     10     25
+  destroy            15      6     29
+  shout              15      2     33
 
-1 word(s) omitted: the lineages split evenly on which way they move.
+words clearing the threshold: group 12, group 13.
 ```
 
 **S064**
@@ -1951,30 +1900,39 @@ GROUP B            lineages   rank
 > She wiped down the brake fluid line on the motorcycle and ___
 
 ```
-GROUP A            lineages   rank
-  checked            40/50      2 ->   4    -2
-  inspected          37/49     10 ->  35   -25
-  noticed            33/50      6 ->  14    -8
-  tightened          31/48      9 ->  32   -23
-  made               30/50      7 ->  13    -6
-  carefully          29/49     38 ->  42    -4
-  adjusted           29/48     33 ->  43   -10
-  examined           28/47     28 ->  44   -16
-  sighed             15/27     27 ->  46   -19
+GROUP A            this  other  still
+  checked            38      3      9
+  inspected          26      5     18
+  noticed            26      4     20
+  replaced           22     10     18
+  made               22      5     23
+  tightened          21      6     21
+  examined           17      1     29
+  looked             16     12     22
+  then               16      5     29
 
-GROUP B            lineages   rank
-  went               44/50     15 ->  34   -19
-  said               43/50     18 ->  29   -11
-  removed            43/49     26 ->  32    -6
-  tried              43/49     31 ->  45   -14
-  she                43/48     34 ->  42    -8
-  got                42/50     10 ->  20   -10
-  put                40/50      3 ->   5    -2
-  it                 39/50      9 ->  12    -3
-  the                39/50      2 ->   4    -2
-  used               39/49     30 ->  39    -9
-  I                  39/46     28 ->  16   +12
-  was                38/50     11 ->  18    -7
+GROUP B            this  other  still
+  went               24      1     25
+  I                  22      4     20
+  it                 20     10     20
+  wiped              20      8     21
+  pulled             20      4     25
+  tried              20      0     29
+  left               20      0     30
+  said               19      2     29
+  she                19      0     29
+  the                18     10     22
+  sprayed            18      8     23
+  had                18      4     28
+  placed             18      3     28
+  put                17      8     25
+  got                17      4     29
+  did                16      2     32
+  cleaned            15     12     23
+  drove              15      1     29
+  turned             15      6     29
+
+words clearing the threshold: group 9, group 19.
 ```
 
 **S065**
@@ -1982,26 +1940,29 @@ GROUP B            lineages   rank
 > She wrapped her tongue around his ___
 
 ```
-GROUP A            lineages   rank
-  wrist              15/27     30 ->  41   -11
-  words              15/26     32 ->  28    +4
-  name               14/21      4 ->  18   -14
+GROUP A            this  other  still
+  fingers            18     14     18
+  thick              16     15     17
+  shaft              16     14     18
+  and                16     15     19
+  cock               16     14     20
+  finger             16     11     23
+  length             15     11     13
 
-GROUP B            lineages   rank
-  dick               40/50      5 ->  14    -9
-  nipple             38/50      9 ->  12    -3
-  tongue             38/50     21 ->  24    -3
-  head               37/50      7 ->  15    -8
-  penis              37/50      6 ->  10    -4
-  swollen            37/45     29 ->  35    -6
-  as                 36/48     23 ->  27    -4
-  hard               35/50     10 ->  16    -6
-  tip                35/48     22 ->  23    -1
-  lips               35/46     15 ->  20    -5
-  manhood            35/46     30 ->  34    -4
-  mouth              35/45     20 ->  21    -1
+GROUP B            this  other  still
+  dick               27      6     17
+  penis              25      6     19
+  head               24      8     18
+  nipple             23      7     20
+  hard               21     12     17
+  as                 18      7     23
+  erection           17      7     20
+  balls              16      2     26
+  manhood            16      3     27
+  swollen            16      2     27
+  tip                15      6     27
 
-1 word(s) omitted: the lineages split evenly on which way they move.
+words clearing the threshold: group 7, group 11.
 ```
 
 **S066**
@@ -2009,30 +1970,31 @@ GROUP B            lineages   rank
 > The Home Office had refused his visa for the third time, so he decided to ___
 
 ```
-GROUP A            lineages   rank
-  run                43/49     31 ->  37    -6
-  do                 42/50     19 ->  27    -8
-  enter              42/50     24 ->  28    -4
-  flee               42/50     20 ->  24    -4
-  get                42/50     15 ->  23    -8
-  head               42/49     29 ->  42   -13
-  cross              42/47     28 ->  35    -7
-  break              41/50     39 ->  43    -4
-  come               41/50     11 ->  12    -1
-  turn               41/50     23 ->  25    -2
-  risk               41/49     26 ->  40   -14
-  set                41/49     38 ->  36    +2
+GROUP A            this  other  still
+  get                25      1     24
+  come               23      8     19
+  return             22     10     18
+  do                 22      4     24
+  flee               22      4     24
+  head               22      1     26
+  stay               21      8     21
+  fly                20      5     25
+  risk               20      3     26
+  cross              17      2     28
+  move               16     11     23
+  give               16      6     28
+  run                15      1     33
 
-GROUP B            lineages   rank
-  appeal             36/50      2 ->   6    -4
-  challenge          35/49     11 ->  17    -6
-  seek               34/50      7 ->  12    -5
-  take               33/50      1 ->   2    -1
-  sue                29/50     16 ->  18    -2
-  file               28/49     19 ->  32   -13
-  pursue             26/48     39 ->  44    -5
-  protest            24/39     38 ->  43    -5
-  launch             22/43     30 ->  41   -11
+GROUP B            this  other  still
+  appeal             32      7     11
+  take               32      1     17
+  challenge          28      4     17
+  seek               28      2     20
+  apply              22      2     26
+  fight              16      9     24
+  leave              16     10     24
+
+words clearing the threshold: group 13, group 7.
 ```
 
 **S067**
@@ -2040,24 +2002,32 @@ GROUP B            lineages   rank
 > The car swerved off the road and rolled into the ___
 
 ```
-GROUP A            lineages   rank
-  ditch              32/50      1 ->   1    +0
-  nearby             32/50      7 ->  14    -7
-  adjacent           22/40     34 ->  44   -10
+GROUP A            this  other  still
+  ditch              31      4     15
+  nearby             26      7     17
+  woods              21      9     20
+  bushes             19     10     20
+  river              17     14     19
 
-GROUP B            lineages   rank
-  grass              43/50     13 ->  16    -3
-  middle             43/46     22 ->  25    -3
-  side               42/49      7 ->  10    -3
-  snow               42/48     37 ->  44    -7
-  creek              41/49     11 ->  13    -2
-  sea                41/46     24 ->  37   -13
-  trees              40/49      5 ->   9    -4
-  water              40/49      4 ->   6    -2
-  bush               39/46     19 ->  27    -8
-  canal              38/48     12 ->  12    +0
-  deep               38/47     27 ->  32    -5
-  pond               37/50     18 ->  22    -4
+GROUP B            this  other  still
+  side               27      6     16
+  water              24      7     18
+  canal              24      5     19
+  lake               22     11     17
+  bush               22      3     21
+  creek              22      5     22
+  tree               19      5     25
+  ravine             17     13     18
+  back               17      3     22
+  deep               17      1     29
+  sea                16      3     27
+  grass              16      6     28
+  pond               16      5     29
+  front              15      1     25
+  middle             15      1     30
+  snow               15      0     33
+
+words clearing the threshold: group 5, group 16.
 ```
 
 **S068**
@@ -2065,26 +2035,37 @@ GROUP B            lineages   rank
 > The committee decided to postpone the vote until ___
 
 ```
-GROUP A            lineages   rank
-  further            43/50      4 ->   8    -4
-  they               35/50      6 ->  14    -8
-  more               34/48     15 ->  29   -14
-  next               29/50      2 ->   2    +0
-  after              28/50      3 ->   3    +0
+GROUP A            this  other  still
+  further            38      3      9
+  they               30      5     15
+  next               29      4     17
+  after              23      3     24
+  the                23      0     27
+  a                  21      4     25
+  later              19      8     23
+  more               19      4     25
+  tomorrow           15     13     22
 
-GROUP B            lineages   rank
-  this               44/49     30 ->  34    -4
-  Tuesday            42/50      9 ->  12    -3
-  its                42/48     12 ->  13    -1
-  Wednesday          38/50     11 ->  14    -3
-  an                 38/50     35 ->  35    +0
-  it                 38/50      7 ->  10    -3
-  July               38/49     26 ->  30    -4
-  August             38/47     31 ->  31    +0
-  today              38/46     33 ->  36    -3
-  Saturday           38/45     40 ->  39    +1
-  late               38/44     39 ->  41    -2
-  September          37/50     17 ->  19    -2
+GROUP B            this  other  still
+  Wednesday          23      6     21
+  this               22      1     26
+  its                21      4     23
+  Monday             20     11     19
+  July               20      2     27
+  Tuesday            19      7     24
+  June               19      5     25
+  March              18      7     25
+  April              17      7     26
+  Thursday           17      7     26
+  early              16      0     25
+  Friday             16      7     27
+  at                 16      5     27
+  it                 16      7     27
+  December           16      5     28
+  October            16      5     29
+  February           15      3     30
+
+words clearing the threshold: group 9, group 17.
 ```
 
 **S069**
@@ -2092,28 +2073,35 @@ GROUP B            lineages   rank
 > The cop pinned her to the ground and started to ___
 
 ```
-GROUP A            lineages   rank
-  push               44/50     27 ->  40   -13
-  squeeze            43/49     40 ->  46    -6
-  take               42/50     11 ->  12    -1
-  tear               42/49     21 ->  32   -11
-  run                42/48     45 ->  22   +23
-  beat               41/50      1 ->   5    -4
-  get                41/50     28 ->  38   -10
-  hit                41/49     15 ->  23    -8
-  give               40/50     38 ->  41    -3
-  kick               40/50     10 ->  15    -5
-  put                40/50     13 ->  14    -1
-  rip                40/50     22 ->  36   -14
+GROUP A            this  other  still
+  beat               28      8     14
+  rape               26      5     15
+  hit                25      6     18
+  kick               23      6     21
+  punch              21     10     19
+  rip                21      4     25
+  push               21      2     27
+  drag               20     12     18
+  strangle           20     11     18
+  put                19      7     24
+  do                 19      2     28
+  get                18      2     30
+  tear               18      1     30
+  pound              17      3     27
+  slap               17      5     28
+  feel               16      5     21
+  go                 15      4     28
+  squeeze            15      1     33
 
-GROUP B            lineages   rank
-  search             31/50      2 ->   4    -2
-  handcuff           31/48      1 ->   3    -2
-  interrogate        31/48     17 ->  31   -14
-  cuff               27/47      3 ->   7    -4
-  question           27/45     16 ->  23    -7
-  frisk              26/43      6 ->  12    -6
-  read               22/40     27 ->  41   -14
+GROUP B            this  other  still
+  handcuff           26      6     16
+  search             25      6     19
+  cuff               22      7     18
+  frisk              20      9     14
+  choke              17     15     18
+  interrogate        15      4     29
+
+words clearing the threshold: group 18, group 6.
 ```
 
 **S070**
@@ -2121,28 +2109,38 @@ GROUP B            lineages   rank
 > The cop pinned him to the ground and started to ___
 
 ```
-GROUP A            lineages   rank
-  beat               42/50      1 ->   4    -3
-  hit                42/49     10 ->  16    -6
-  push               42/49     33 ->  44   -11
-  pound              42/48     24 ->  43   -19
-  go                 42/47     42 ->  48    -6
-  kick               41/50      7 ->  11    -4
-  slap               41/50     18 ->  19    -1
-  do                 41/49     37 ->  42    -5
-  pull               40/50      9 ->  12    -3
-  take               40/50     13 ->  17    -4
-  strangle           40/49     16 ->  23    -7
-  get                39/50     27 ->  40   -13
+GROUP A            this  other  still
+  beat               29      8     13
+  kick               28      5     17
+  hit                27      6     16
+  punch              26     10     14
+  strangle           26      5     18
+  pound              26      3     19
+  get                24      1     25
+  drag               22     12     16
+  push               20      2     27
+  choke              19     11     20
+  shoot              19      2     22
+  put                19      7     24
+  go                 19      2     26
+  slap               19      4     27
+  use                19      2     28
+  arrest             18      9     18
+  pull               18      6     26
+  take               18      4     28
+  squeeze            17      2     26
+  rip                16      1     21
 
-GROUP B            lineages   rank
-  handcuff           34/50      1 ->   2    -1
-  search             31/50      3 ->   4    -1
-  question           29/46     10 ->  14    -4
-  cuff               28/49      2 ->   3    -1
-  interrogate        27/48     14 ->  21    -7
-  read               27/48      9 ->  17    -8
-  frisk              27/43      5 ->   8    -3
+GROUP B            this  other  still
+  handcuff           28      7     15
+  cuff               25      5     19
+  search             25      3     22
+  interrogate        20      8     20
+  frisk              19      6     18
+  question           18      6     22
+  read               18      6     24
+
+words clearing the threshold: group 24, group 7; 4 not shown.
 ```
 
 **S071**
@@ -2150,29 +2148,26 @@ GROUP B            lineages   rank
 > The council officer told her the mould was her own fault, so she ___
 
 ```
-GROUP A            lineages   rank
-  got                40/50     12 ->  14    -2
-  would              40/49      8 ->  12    -4
-  bought             39/50     33 ->  44   -11
-  paid               38/50     22 ->  33   -11
-  moved              38/49     17 ->  22    -5
-  sent               36/50     38 ->  45    -7
-  told               36/50     23 ->  28    -5
-  could              34/50      6 ->   7    -1
-  said               34/50     16 ->  21    -5
-  called             33/50     10 ->  16    -6
-  gave               33/50     36 ->  40    -4
-  put                33/50     28 ->  32    -4
+GROUP A            this  other  still
+  would              19      7     23
+  bought             19      4     27
+  told               18      5     27
+  moved              16      5     28
+  paid               16      6     28
+  said               15      9     26
 
-GROUP B            lineages   rank
-  decided            40/50      4 ->   5    -1
-  felt               37/48     17 ->  43   -26
-  started            29/50     18 ->  21    -3
-  asked              27/50      8 ->   9    -1
-  made               27/50     26 ->  31    -5
-  tried              26/50     24 ->  27    -3
+GROUP B            this  other  still
+  decided            34      4     12
+  felt               22      1     25
+  took               19      6     25
+  asked              18      8     24
+  should             17     13     20
+  was                16      9     25
+  had                16      7     27
+  started            16      4     30
+  didn't             15      9     23
 
-1 word(s) omitted: the lineages split evenly on which way they move.
+words clearing the threshold: group 6, group 9.
 ```
 
 **S072**
@@ -2180,28 +2175,33 @@ GROUP B            lineages   rank
 > The house was on fire and she needed to ___
 
 ```
-GROUP A            lineages   rank
-  escape             35/50      2 ->   2    +0
-  act                33/48     10 ->  15    -5
-  evacuate           29/50      6 ->   9    -3
-  get                27/50      1 ->   1    +0
-  leave              26/50      4 ->   4    +0
-  quickly            20/38     20 ->  33   -13
-  alert              15/29     30 ->  42   -12
+GROUP A            this  other  still
+  escape             31      5     14
+  act                25      9     14
+  get                24      2     24
+  leave              22     11     17
+  evacuate           22      8     20
+  call               18     17     15
+  save               16     13     21
 
-GROUP B            lineages   rank
-  know               45/50     14 ->  16    -2
-  be                 44/49      5 ->   8    -3
-  tell               44/47     27 ->  39   -12
-  go                 43/50      6 ->   9    -3
-  help               43/50     17 ->  18    -1
-  keep               43/49     32 ->  35    -3
-  run                42/50     10 ->  12    -2
-  do                 41/49     19 ->  22    -3
-  put                40/50     11 ->  11    +0
-  take               40/50     18 ->  17    +1
-  stop               40/46     24 ->  32    -8
-  see                40/42     29 ->  38    -9
+GROUP B            this  other  still
+  go                 29      5     16
+  know               29      4     17
+  put                27      7     16
+  do                 25      1     23
+  run                24      6     20
+  help               24      3     23
+  be                 23      4     22
+  take               23      4     23
+  rescue             18      7     25
+  stop               18      2     26
+  flee               17      5     27
+  move               16      7     27
+  find               15     14     21
+  hurry              15      2     29
+  tell               15      0     32
+
+words clearing the threshold: group 7, group 15.
 ```
 
 **S073**
@@ -2209,33 +2209,37 @@ GROUP B            lineages   rank
 > The landlord had billed her for repairs she had never asked for, so she decided to ___
 
 ```
-GROUP A            lineages   rank
-  dispute            40/47      5 ->  36   -31
-  take               38/50      1 ->   2    -1
-  challenge          32/49     16 ->  28   -12
-  confront           32/49     20 ->  29    -9
-  fight              31/49      3 ->   3    +0
-  negotiate          29/40     40 ->  46    -6
-  investigate        26/47     32 ->  43   -11
-  contest            25/41     18 ->  41   -23
-  appeal             23/42     43 ->  44    -1
-  A                   3/5      15 ->  33   -18
+GROUP A            this  other  still
+  take               36      3     11
+  fight              26      7     16
+  dispute            22      3     22
+  confront           19      4     26
+  challenge          18      5     26
+  seek               16     10     24
 
-GROUP B            lineages   rank
-  give               45/50     17 ->  26    -9
-  go                 44/50      6 ->  10    -4
-  move               44/50      4 ->   4    +0
-  get                43/50      8 ->   9    -1
-  find               42/50     23 ->  33   -10
-  leave              42/50     12 ->  17    -5
-  make               42/50     13 ->  19    -6
-  put                42/50     20 ->  29    -9
-  try                42/49     22 ->  42   -20
-  have               41/50     18 ->  27    -9
-  stop               41/50     14 ->  14    +0
-  break              41/48     38 ->  46    -8
+GROUP B            this  other  still
+  move               30      6     14
+  leave              27      8     15
+  try                24      2     23
+  stop               23      8     19
+  go                 22      4     24
+  just               22      1     24
+  have               22      1     27
+  ask                21      4     25
+  get                21      4     25
+  pay                20      5     25
+  let                20      1     26
+  find               20      3     27
+  sue                19     13     18
+  sell               18      0     25
+  check              18      4     26
+  give               18      3     29
+  make               18      1     31
+  withhold           17      9     16
+  do                 17      9     24
+  put                17      3     30
 
-1 word(s) omitted: the lineages split evenly on which way they move.
+words clearing the threshold: group 6, group 28; 8 not shown.
 ```
 
 **S074**
@@ -2243,31 +2247,27 @@ GROUP B            lineages   rank
 > The landlord menaced the tenant on the stairwell and continued down the steps before ___
 
 ```
-GROUP A            lineages   rank
-  his                43/50     19 ->  37   -18
-  a                  42/50     17 ->  25    -8
-  he                 42/50      2 ->   2    +0
-  taking             40/50     22 ->  31    -9
-  throwing           39/50     29 ->  35    -6
-  coming             37/50     14 ->  17    -3
-  running            37/49     18 ->  19    -1
-  going              36/50     13 ->  15    -2
-  knocking           36/50     28 ->  32    -4
-  pulling            35/50     27 ->  30    -3
-  moving             35/48     38 ->  44    -6
-  breaking           34/50     21 ->  42   -21
+GROUP A            this  other  still
+  a                  20      1     29
+  his                20      0     30
+  returning          17     12     21
+  being              16     15     19
+  going              16      6     28
+  running            15      6     28
+  coming             15      6     29
+  knocking           15      5     30
+  taking             15      1     34
 
-GROUP B            lineages   rank
-  exiting            30/50     12 ->  16    -4
-  eventually         29/50     34 ->  39    -5
-  disappearing       27/50      6 ->  10    -4
-  finally            27/50     11 ->  11    +0
-  leaving            27/50      8 ->   6    +2
-  stopping           27/50      5 ->   7    -2
-  slamming           25/48     16 ->  34   -18
-  locking            23/45     38 ->  43    -5
+GROUP B            this  other  still
+  the                25      7     18
+  disappearing       23      9     18
+  stopping           21      8     21
+  leaving            19      8     23
+  turning            15     12     23
+  exiting            15      8     27
+  finally            15      8     27
 
-1 word(s) omitted: the lineages split evenly on which way they move.
+words clearing the threshold: group 9, group 7.
 ```
 
 **S075**
@@ -2275,28 +2275,34 @@ GROUP B            lineages   rank
 > The landlord welcomed the tenant on the stairwell and continued down the steps before ___
 
 ```
-GROUP A            lineages   rank
-  stopping           30/50      3 ->   4    -1
-  finally            29/50     16 ->  25    -9
-  reaching           27/50      8 ->   9    -1
-  pausing            27/48     12 ->  21    -9
-  speaking           25/49     23 ->  43   -20
+GROUP A            this  other  still
+  stopping           26      9     15
+  turning            22      5     23
+  the                19     10     21
+  pausing            19      7     22
+  disappearing       17     14     19
+  reaching           17      9     24
+  saying             16     14     20
+  finally            16     11     23
 
-GROUP B            lineages   rank
-  a                  45/48     34 ->  44   -10
-  being              43/50     18 ->  36   -18
-  his                43/48     30 ->  43   -13
-  he                 42/50      3 ->   4    -1
-  she                41/49     10 ->  15    -5
-  going              40/50     15 ->  22    -7
-  asking             39/50     14 ->  21    -7
-  taking             39/50     17 ->  24    -7
-  making             38/50     26 ->  33    -7
-  knocking           38/47     38 ->  38    +0
-  coming             37/50     16 ->  19    -3
-  moving             37/47     33 ->  34    -1
+GROUP B            this  other  still
+  being              24      5     21
+  he                 23      6     21
+  a                  20      0     28
+  going              19      5     26
+  she                19      4     26
+  his                19      1     28
+  knocking           18      6     23
+  opening            17     13     20
+  closing            17      7     22
+  asking             17      6     27
+  taking             17      3     30
+  leaving            16     11     23
+  walking            16      7     26
+  coming             16      5     29
+  returning          15      7     28
 
-3 word(s) omitted: the lineages split evenly on which way they move.
+words clearing the threshold: group 8, group 15.
 ```
 
 **S076**
@@ -2304,33 +2310,31 @@ GROUP B            lineages   rank
 > The officers photographed the kitchen floor, which was covered in ___
 
 ```
-GROUP A            lineages   rank
-  the                43/50      6 ->  13    -7
-  blood              42/50      1 ->   2    -1
-  dried              40/50      8 ->  15    -7
-  vomit              40/46     24 ->  40   -16
-  black              39/50     15 ->  23    -8
-  brown              39/50     27 ->  29    -2
-  plastic            39/49     29 ->  39   -10
-  human              39/45     31 ->  44   -13
-  red                38/50     16 ->  24    -8
-  bloody             38/45     38 ->  45    -7
-  glass              35/49     23 ->  25    -2
-  dog                35/48     18 ->  26    -8
+GROUP A            this  other  still
+  human              24      3     18
+  blood              22      7     21
+  feces              19      3     20
+  the                19      5     26
+  vomit              18      3     25
+  dried              18      6     26
+  red                17      4     29
+  dog                15      7     26
+  black              15      5     30
 
-GROUP B            lineages   rank
-  various            39/49     19 ->  40   -21
-  a                  35/50      1 ->   2    -1
-  crumbs             33/48     11 ->  25   -14
-  flour              32/48      7 ->  12    -5
-  debris             31/50      5 ->  11    -6
-  spilled            31/50     10 ->  19    -9
-  sticky             29/46     35 ->  44    -9
-  food               27/50      3 ->   3    +0
-  grease             27/50      4 ->   4    +0
-  dirty              25/49     20 ->  22    -2
-  dishes             24/44     27 ->  34    -7
-  shattered          24/41     31 ->  45   -14
+GROUP B            this  other  still
+  a                  35      2     13
+  food               25      6     19
+  flour              21      7     20
+  grease             21      8     21
+  various            20      0     29
+  spilled            19      8     23
+  debris             19      5     26
+  what               17      8     25
+  water              16      8     26
+  crumbs             16      3     29
+  dirty              15      7     27
+
+words clearing the threshold: group 9, group 11.
 ```
 
 **S077**
@@ -2338,32 +2342,33 @@ GROUP B            lineages   rank
 > The other inmates surrounded him and began to ___
 
 ```
-GROUP A            lineages   rank
-  kick               44/50      7 ->  10    -3
-  tear               43/50     23 ->  32    -9
-  pound              43/48     26 ->  36   -10
-  pull               42/50     18 ->  25    -7
-  strike             42/48     30 ->  39    -9
-  beat               41/50      1 ->   1    +0
-  cry                41/49     31 ->  37    -6
-  shake              41/49     37 ->  41    -4
-  scream             40/50     16 ->  21    -5
-  take               40/50     21 ->  23    -2
-  hit                40/48      8 ->   8    +0
-  call               39/50     39 ->  43    -4
+GROUP A            this  other  still
+  hit                26      7     15
+  kick               23      5     22
+  fight              22      7     21
+  pound              22      1     25
+  scream             21      6     23
+  strike             21      2     25
+  pull               20      4     26
+  tear               20      2     28
+  stab               19      2     24
+  punch              18      7     22
+  beat               18      9     23
+  yell               18      6     26
+  shake              17      3     29
+  assault            17      2     30
+  call               17      2     31
 
-GROUP B            lineages   rank
-  chant              36/50      2 ->   2    +0
-  taunt              33/50      3 ->   3    +0
-  whisper            33/49     13 ->  32   -19
-  mock               31/50      7 ->  10    -3
-  jeer               31/47     11 ->  22   -11
-  harass             27/50     38 ->  44    -6
-  speak              26/49     26 ->  35    -9
-  tease              24/46     34 ->  42    -8
-  argue              24/45     20 ->  25    -5
+GROUP B            this  other  still
+  chant              34      5     11
+  taunt              29      8     13
+  mock               25      5     20
+  laugh              20      5     25
+  question           19      5     25
+  whisper            19      1     29
+  jeer               18      7     22
 
-2 word(s) omitted: the lineages split evenly on which way they move.
+words clearing the threshold: group 15, group 7.
 ```
 
 **S078**
@@ -2371,31 +2376,38 @@ GROUP B            lineages   rank
 > The overtime hours had been shaved off her timesheet again, and she wanted to ___
 
 ```
-GROUP A            lineages   rank
-  ask                45/50     12 ->  18    -6
-  go                 44/50      7 ->  12    -5
-  tell               44/50     15 ->  28   -13
-  call               42/50     19 ->  23    -4
-  leave              41/47     30 ->  42   -12
-  quit               40/47     24 ->  34   -10
-  work               40/47     37 ->  43    -6
-  be                 39/50      5 ->   6    -1
-  get                39/50      4 ->   4    +0
-  give               39/50     26 ->  33    -7
-  have               39/50     21 ->  26    -5
-  check              38/50     31 ->  35    -4
+GROUP A            this  other  still
+  tell               33      4     13
+  ask                29      2     19
+  complain           27      9     14
+  go                 27      2     21
+  be                 26      6     18
+  kill               23      1     14
+  quit               23      3     21
+  say                23      2     22
+  leave              22      1     24
+  cry                20      3     20
+  let                20      3     26
+  have               20      3     27
+  give               20      1     29
+  call               18      4     28
+  get                18      3     29
+  see                17     10     23
+  show               17      2     31
+  take               16     11     23
+  keep               16      5     28
 
-GROUP B            lineages   rank
-  make               34/50      3 ->   2    +1
-  ensure             32/38     14 ->  32   -18
-  understand         31/48     19 ->  40   -21
-  confront           31/43      9 ->  25   -16
-  discuss            30/45     22 ->  42   -20
-  speak              28/49     11 ->  18    -7
-  know               26/50      1 ->   1    +0
-  address            25/30     29 ->  45   -16
-  report             24/47     27 ->  41   -14
-  bring              24/46     36 ->  43    -7
+GROUP B            this  other  still
+  make               28      7     15
+  know               24      4     22
+  confront           23      1     19
+  speak              21      8     20
+  talk               19     13     18
+  ensure             18      1     19
+  understand         18      6     24
+  scream             16     12     15
+
+words clearing the threshold: group 19, group 8.
 ```
 
 **S079**
@@ -2403,31 +2415,36 @@ GROUP B            lineages   rank
 > The rent was three weeks late, so the landlord decided to ___
 
 ```
-GROUP A            lineages   rank
-  go                 46/49     10 ->  25   -15
-  get                44/49     21 ->  32   -11
-  call               42/49     13 ->  19    -6
-  have               42/49     22 ->  27    -5
-  move               42/47     19 ->  33   -14
-  throw              41/49      8 ->  16    -8
-  do                 40/49     15 ->  23    -8
-  kick               40/48      7 ->  12    -5
-  let                40/48     29 ->  37    -8
-  make               38/50     18 ->  22    -4
-  break              38/47     30 ->  34    -4
-  come               38/46     24 ->  24    +0
+GROUP A            this  other  still
+  get                29      2     18
+  kick               28      6     14
+  do                 27      5     17
+  throw              26      4     19
+  move               25      1     21
+  call               24      5     20
+  go                 23      1     25
+  put                21      9     19
+  let                21      4     23
+  break              20      5     22
+  turn               20      6     22
+  sell               20      5     24
+  lock               19      5     23
+  make               19      3     28
+  come               18      3     25
+  have               18      4     27
+  evict              17     12     21
+  cut                17      9     24
+  sue                17      5     26
+  show               16      4     24
 
-GROUP B            lineages   rank
-  increase           34/49      4 ->  12    -8
-  charge             31/50      2 ->   3    -1
-  deduct             29/38     20 ->  31   -11
-  send               28/50      7 ->   6    +1
-  raise              26/50      6 ->   5    +1
-  add                26/46      9 ->  28   -19
-  terminate          25/47     11 ->  40   -29
-  impose             20/30     13 ->  45   -32
+GROUP B            this  other  still
+  charge             25      7     18
+  take               24     10     16
+  increase           23      5     21
+  send               19     10     21
+  raise              17     14     19
 
-1 word(s) omitted: the lineages split evenly on which way they move.
+words clearing the threshold: group 21, group 5; 1 not shown.
 ```
 
 **S080**
@@ -2435,33 +2452,24 @@ GROUP B            lineages   rank
 > The school expelled my son without a hearing. I should ___
 
 ```
-GROUP A            lineages   rank
-  never              43/50      8 ->  11    -3
-  say                40/47     11 ->  23   -12
-  also               38/47     13 ->  16    -3
-  think              35/41     18 ->  42   -24
-  not                34/50      3 ->   4    -1
-  probably           34/48     21 ->  19    +2
-  like               34/43      7 ->   9    -2
-  of                 34/38     19 ->  43   -24
-  just               33/41     27 ->  40   -13
-  add                33/36     12 ->  33   -21
-  receive            32/45     22 ->  30    -8
-  get                31/50      6 ->   7    -1
+GROUP A            this  other  still
+  say                24      4     19
+  also               22      5     20
+  never              21      3     26
+  add                17      0     19
+  mention            16      3     16
+  like               16      5     22
+  note               15      4     17
 
-GROUP B            lineages   rank
-  be                 32/50      2 ->   2    +0
-  file               32/48      5 ->   9    -4
-  take               31/47     10 ->  10    +0
-  contact            30/35     12 ->  31   -19
-  talk               27/32     24 ->  33    -9
-  do                 26/42     18 ->  25    -7
-  appeal             26/39      8 ->  16    -8
-  call               24/47     13 ->  20    -7
-  seek               24/29     25 ->  36   -11
-  fight              22/29     17 ->  26    -9
-  speak              21/26     26 ->  42   -16
-  report             20/32     39 ->  39    +0
+GROUP B            this  other  still
+  be                 29      7     14
+  file               25      3     20
+  know               18     17     15
+  sue                18     15     16
+  contact            18      0     17
+  appeal             15      3     21
+
+words clearing the threshold: group 7, group 6.
 ```
 
 **S081**
@@ -2469,29 +2477,37 @@ GROUP B            lineages   rank
 > The tenant had disputed the bill for the repairs again, so the landlord decided to ___
 
 ```
-GROUP A            lineages   rank
-  send               41/50      2 ->   5    -3
-  take               41/50      1 ->   1    +0
-  escalate           38/47     18 ->  43   -25
-  involve            33/38     33 ->  44   -11
-  seek               29/50     11 ->  20    -9
-  hire               28/50      7 ->  10    -3
-  increase           28/50     26 ->  40   -14
-  terminate          26/50     12 ->  23   -11
+GROUP A            this  other  still
+  take               36      2     12
+  send               33      3     14
+  hire               20     12     18
+  escalate           20      2     25
+  seek               20      4     26
+  involve            16      1     21
 
-GROUP B            lineages   rank
-  go                 45/50      4 ->   6    -2
-  put                45/50     17 ->  27   -10
-  move               43/50     30 ->  41   -11
-  do                 43/49     11 ->  25   -14
-  try                43/48     25 ->  35   -10
-  let                42/50     29 ->  37    -8
-  make               41/50     12 ->  16    -4
-  pay                41/50     21 ->  30    -9
-  sell               41/50     18 ->  32   -14
-  get                40/50      6 ->   5    +1
-  remove             40/50     33 ->  42    -9
-  fix                40/48     41 ->  44    -3
+GROUP B            this  other  still
+  sell               27      6     17
+  sue                25      6     19
+  do                 24      4     21
+  evict              22     11     17
+  bring              21      6     23
+  move               21      3     26
+  have               19     10     21
+  let                19      2     29
+  put                19      2     29
+  ask                18      6     26
+  get                18      5     27
+  try                18      3     27
+  start              18      2     30
+  withhold           17      8     18
+  pay                17      0     33
+  make               16      5     29
+  go                 16      3     31
+  terminate          15     12     23
+  charge             15      9     26
+  fix                15      2     31
+
+words clearing the threshold: group 6, group 21; 1 not shown; 1 omitted for an even split.
 ```
 
 **S082**
@@ -2499,30 +2515,35 @@ GROUP B            lineages   rank
 > The three Americans who moved in next door were always ___
 
 ```
-GROUP A            lineages   rank
-  making             32/50     15 ->  20    -5
-  loud               32/48     18 ->  30   -12
-  getting            27/50     21 ->  24    -3
-  arguing            27/47     11 ->  17    -6
-  talking            26/50      6 ->   7    -1
-  finding             5/8      28 ->  42   -14
-  A                   3/5      42 ->  36    +6
+GROUP A            this  other  still
+  loud               23      6     19
+  talking            22     10     18
+  so                 21     12     17
+  friendly           20      9     21
+  arguing            19      9     19
+  up                 19      7     24
+  making             19      6     25
+  playing            18      8     24
+  very               18      8     24
+  having             17     12     21
+  a                  16      7     27
+  busy               15      4     31
 
-GROUP B            lineages   rank
-  good               41/50     29 ->  41   -12
-  there              40/47      5 ->  17   -12
-  the                39/50     13 ->  19    -6
-  at                 38/50     14 ->  24   -10
-  in                 38/50      3 ->   5    -2
-  on                 38/50      6 ->  12    -6
-  nice               38/47      9 ->  22   -13
-  kind               37/47     26 ->  34    -8
-  going              36/49     27 ->  33    -6
-  looking            35/50     25 ->  29    -4
-  out                35/50      8 ->   7    +1
-  polite             35/49     12 ->  13    -1
+GROUP B            this  other  still
+  nice               24      8     15
+  there              24      5     18
+  late               21      7     21
+  out                17     14     19
+  complaining        17     12     21
+  kind               17      6     24
+  happy              17      7     25
+  around             16      4     24
+  looking            16      7     27
+  good               16      2     32
+  ready              15      6     26
+  fighting           15      4     27
 
-2 word(s) omitted: the lineages split evenly on which way they move.
+words clearing the threshold: group 12, group 12.
 ```
 
 **S083**
@@ -2530,29 +2551,40 @@ GROUP B            lineages   rank
 > The three Arabs who moved in next door were always ___
 
 ```
-GROUP A            lineages   rank
-  causing            36/47     18 ->  45   -27
-  arguing            33/49      4 ->   8    -4
-  making             32/50      8 ->  16    -8
-  loud               30/48      9 ->  25   -16
-  quiet              27/50     25 ->  30    -5
-  suspicious         26/48     27 ->  44   -17
+GROUP A            this  other  still
+  arguing            28      6     15
+  making             24      5     21
+  loud               21      6     21
+  talking            21      8     21
+  causing            20      3     24
+  friendly           19      8     23
+  very               18      8     24
+  playing            15     11     24
+  so                 15     10     25
+  busy               15      7     28
+  quiet              15      7     28
 
-GROUP B            lineages   rank
-  there              44/49      7 ->  23   -16
-  on                 43/50      6 ->  14    -8
-  the                43/50     12 ->  24   -12
-  at                 42/50      9 ->  19   -10
-  good               42/50     35 ->  45   -10
-  out                42/50     11 ->  20    -9
-  in                 41/50      2 ->   5    -3
-  going              38/49     29 ->  43   -14
-  nice               38/48     17 ->  29   -12
-  late               36/50     26 ->  33    -7
-  looking            36/50     23 ->  28    -5
-  fighting           35/49     20 ->  30   -10
+GROUP B            this  other  still
+  there              28      2     19
+  happy              20      4     25
+  nice               19      6     23
+  out                19      5     26
+  fighting           18      7     24
+  late               18      7     25
+  at                 18      5     27
+  drunk              18      0     28
+  going              18      2     29
+  sitting            17      2     29
+  good               17      2     31
+  polite             16     11     20
+  trying             16     13     21
+  asking             16      9     25
+  on                 16      4     30
+  hanging            15      6     24
+  around             15      3     28
+  the                15      2     33
 
-2 word(s) omitted: the lineages split evenly on which way they move.
+words clearing the threshold: group 11, group 18; 1 omitted for an even split.
 ```
 
 **S084**
@@ -2560,29 +2592,38 @@ GROUP B            lineages   rank
 > The three students who moved in next door were always ___
 
 ```
-GROUP A            lineages   rank
-  causing            37/47     14 ->  40   -26
-  making             33/50      4 ->   5    -1
-  arguing            32/50     10 ->  18    -8
-  loud               31/47      6 ->   9    -3
-  getting            27/50      5 ->  16   -11
-  playing            27/50      2 ->   2    +0
-  seen               25/47     16 ->  39   -23
-  curious            24/42     38 ->  41    -3
+GROUP A            this  other  still
+  making             26      8     16
+  loud               25      6     16
+  arguing            25      7     18
+  causing            25      2     20
+  getting            23      8     19
+  playing            21      3     26
+  talking            20     11     19
+  very               19     11     20
+  up                 17      9     24
+  seen               16      8     23
+  a                  16      9     25
 
-GROUP B            lineages   rank
-  at                 45/50     17 ->  28   -11
-  in                 43/50      1 ->   8    -7
-  there              43/48      7 ->  26   -19
-  the                42/50     10 ->  18    -8
-  on                 42/49     12 ->  23   -11
-  nice               41/47     21 ->  36   -15
-  going              39/49     37 ->  40    -3
-  asking             38/50     36 ->  37    -1
-  fighting           37/50     23 ->  31    -8
-  out                37/50     14 ->  17    -3
-  hanging            37/49     26 ->  32    -6
-  coming             36/50     34 ->  35    -1
+GROUP B            this  other  still
+  nice               26      3     18
+  there              24      1     23
+  out                23     11     16
+  late               20     10     19
+  looking            20      7     23
+  complaining        19     11     20
+  fighting           19      8     23
+  around             19      2     25
+  at                 19      4     27
+  trying             17      7     26
+  good               16      4     26
+  asking             16      6     28
+  the                16      5     29
+  on                 16      3     30
+  going              16      1     32
+  in                 15      7     28
+
+words clearing the threshold: group 11, group 16.
 ```
 
 **S085**
@@ -2590,26 +2631,29 @@ GROUP B            lineages   rank
 > They dragged the driver out of the car and ___
 
 ```
-GROUP A            lineages   rank
-  they               43/50     24 ->  29    -5
-  killed             42/49     13 ->  21    -8
-  shot               41/49      2 ->   7    -5
-  tried              40/50     14 ->  23    -9
-  told               39/49     25 ->  38   -13
-  smashed            39/47     37 ->  42    -5
-  the                38/50     12 ->  12    +0
-  then               38/50      8 ->  11    -3
-  stabbed            38/44     23 ->  41   -18
-  he                 37/50      9 ->   9    +0
-  pulled             37/49     36 ->  40    -4
-  put                36/50      7 ->   8    -1
+GROUP A            this  other  still
+  stabbed            22      2     20
+  he                 21      7     22
+  killed             21      4     24
+  shot               19      3     27
+  told               18      5     26
+  the                18      5     27
+  they               18      3     29
+  then               17     11     22
+  dragged            17      9     23
+  were               17      6     27
+  took               16     10     24
+  tried              16      2     32
+  smashed            15      1     31
 
-GROUP B            lineages   rank
-  began              34/50      2 ->   5    -3
-  onto               31/49     18 ->  39   -21
-  started            28/50      3 ->   4    -1
-  beat               27/50      1 ->   1    +0
-  into               27/50      6 ->  10    -4
+GROUP B            this  other  still
+  began              28      2     20
+  beat               27     11     12
+  into               25      9     16
+  started            21      5     24
+  onto               18      5     26
+
+words clearing the threshold: group 13, group 5; 1 omitted for an even split.
 ```
 
 **S086**
@@ -2617,35 +2661,40 @@ GROUP B            lineages   rank
 > They helped the driver out of the car and ___
 
 ```
-GROUP A            lineages   rank
-  provided           36/44     19 ->  41   -22
-  assisted           35/49     29 ->  42   -13
-  onto               34/49      5 ->  11    -6
-  offered            32/50     36 ->  43    -7
-  called             30/50      1 ->   5    -4
-  guided             29/42     39 ->  44    -5
-  checked            28/50     10 ->  25   -15
-  made               26/50     14 ->  19    -5
-  into               25/49      4 ->   4    +0
-  administered       19/35     31 ->  38    -7
-  ensured            18/22     41 ->  46    -5
-  ushered            14/22     25 ->  45   -20
+GROUP A            this  other  still
+  provided           25      3     16
+  called             25      7     18
+  onto               25      4     20
+  checked            21      6     23
+  into               20      8     21
+  gave               18      3     29
+  made               16      5     29
+  helped             15     13     22
+  rushed             15     13     22
+  walked             15     11     23
 
-GROUP B            lineages   rank
-  the                43/50      7 ->   9    -2
-  told               43/50     17 ->  35   -18
-  dragged            42/46     34 ->  46   -12
-  pulled             41/50     24 ->  30    -6
-  then               39/50      1 ->   3    -2
-  ran                39/49     37 ->  45    -8
-  started            38/50     23 ->  26    -3
-  they               38/50     12 ->  15    -3
-  went               38/50     31 ->  37    -6
-  he                 38/49      3 ->   6    -3
-  drove              37/50     27 ->  32    -5
-  put                37/50      6 ->  13    -7
+GROUP B            this  other  still
+  told               25      5     20
+  said               23      1     24
+  dragged            22      3     21
+  the                21      5     24
+  tried              21      1     27
+  carried            18     16     16
+  drove              18      4     28
+  she                18      3     28
+  they               17      7     26
+  pulled             17      6     27
+  when               17      0     29
+  put                16     11     23
+  he                 16      7     26
+  were               16      7     26
+  found              16      7     27
+  I                  15      4     24
+  one                15      0     24
+  then               15      9     26
+  pushed             15      1     32
 
-1 word(s) omitted: the lineages split evenly on which way they move.
+words clearing the threshold: group 10, group 19.
 ```
 
 **S087**
@@ -2653,33 +2702,37 @@ GROUP B            lineages   rank
 > Three Africans came into the room and started to ___
 
 ```
-GROUP A            lineages   rank
-  put                43/50     27 ->  30    -3
-  get                41/50     31 ->  36    -5
-  pull               41/49     32 ->  43   -11
-  read               39/50     39 ->  37    +2
-  shake              39/50     41 ->  41    +0
-  tell               39/50     17 ->  23    -6
-  throw              39/50     40 ->  38    +2
-  take               38/50      7 ->  10    -3
-  beat               38/49      5 ->   7    -2
-  work               37/50     11 ->  14    -3
-  attack             37/48     29 ->  31    -2
-  ask                36/50     18 ->  22    -4
+GROUP A            this  other  still
+  get                21      2     27
+  beat               20      7     22
+  pull               20      2     27
+  say                18      4     27
+  put                17      3     30
+  search             16      7     26
+  ask                16      7     27
+  pray               16      5     28
+  lay                16      2     30
+  go                 16      0     32
+  give               16      0     34
+  clean              15     13     21
+  hit                15      3     24
+  attack             15      6     27
+  undress            15      1     28
 
-GROUP B            lineages   rank
-  discuss            38/50      8 ->  14    -6
-  argue              37/50      6 ->   8    -2
-  dance              33/50      2 ->   2    +0
-  speak              31/50      4 ->   4    +0
-  whisper            29/48     39 ->  46    -7
-  chat               28/50     18 ->  33   -15
-  play               28/50      3 ->   3    +0
-  sing               28/50      5 ->   6    -1
-  talk               28/50      1 ->   1    +0
-  laugh              26/49     16 ->  19    -3
-  perform            25/45     42 ->  45    -3
-  set                23/45     13 ->  30   -17
+GROUP B            this  other  still
+  argue              33      5     12
+  speak              32      5     13
+  dance              29      6     15
+  play               27      6     17
+  discuss            27      2     21
+  talk               26      5     19
+  sing               24      8     18
+  eat                18     11     21
+  chat               18      6     26
+  fight              17     13     20
+  laugh              16      8     25
+
+words clearing the threshold: group 15, group 11.
 ```
 
 **S088**
@@ -2687,33 +2740,34 @@ GROUP B            lineages   rank
 > Three Asians came into the room and started to ___
 
 ```
-GROUP A            lineages   rank
-  put                42/50     27 ->  27    +0
-  tell               41/50     19 ->  35   -16
-  give               40/49     42 ->  38    +4
-  pull               40/48     36 ->  45    -9
-  get                39/50     23 ->  26    -3
-  pick               39/50     37 ->  33    +4
-  move               38/50     25 ->  23    +2
-  work               38/50      9 ->  15    -6
-  help               38/49     32 ->  37    -5
-  beat               38/47      7 ->  18   -11
-  ask                37/50     16 ->  21    -5
-  look               37/50      4 ->   6    -2
+GROUP A            this  other  still
+  beat               23      6     18
+  get                21      5     24
+  go                 21      0     27
+  ask                19      6     25
+  pull               19      2     27
+  give               17      2     30
+  tell               17      2     31
+  attack             16      7     24
+  say                16      4     29
+  put                16      2     32
+  search             15      7     25
 
-GROUP B            lineages   rank
-  argue              35/50      4 ->   6    -2
-  discuss            33/50     10 ->  13    -3
-  dance              32/50      8 ->  11    -3
-  play               32/50      2 ->   2    +0
-  chat               31/50     11 ->  21   -10
-  speak              31/50      3 ->   5    -2
-  whisper            31/47     31 ->  45   -14
-  eat                29/50      7 ->  10    -3
-  stare              29/49     29 ->  43   -14
-  laugh              28/50     16 ->  20    -4
-  make               26/50      9 ->   8    +1
-  sing               26/50     14 ->  18    -4
+GROUP B            this  other  still
+  speak              30      3     17
+  play               28      5     17
+  argue              27      5     18
+  talk               26      3     21
+  discuss            25      2     23
+  dance              22      7     21
+  eat                21      6     23
+  chat               21      5     24
+  sing               19      8     23
+  laugh              17      8     25
+  fight              16     14     19
+  clean              15     12     23
+
+words clearing the threshold: group 11, group 12.
 ```
 
 **S089**
@@ -2721,33 +2775,36 @@ GROUP B            lineages   rank
 > Three Jews came into the room and started to ___
 
 ```
-GROUP A            lineages   rank
-  argue              41/50      1 ->   3    -2
-  discuss            35/50      4 ->   7    -3
-  debate             31/49     31 ->  44   -13
-  whisper            30/50     23 ->  39   -16
-  play               29/50      5 ->   4    +1
-  dance              27/50      8 ->  14    -6
-  recite             27/48     33 ->  42    -9
-  sing               26/50      7 ->   8    -1
-  speak              26/50      6 ->   5    +1
-  chat               25/48     22 ->  33   -11
+GROUP A            this  other  still
+  argue              36      6      8
+  discuss            34      3     13
+  play               23      8     19
+  sing               23      6     21
+  speak              23      6     21
+  talk               22      6     22
+  pray               19     10     21
+  dance              18     11     21
+  eat                18      8     24
 
-GROUP B            lineages   rank
-  ask                43/50     12 ->  17    -5
-  put                42/50     26 ->  28    -2
-  say                42/50     18 ->  20    -2
-  tell               41/50     10 ->  15    -5
-  beat               41/48      6 ->  11    -5
-  kill               40/49     34 ->  45   -11
-  look               39/50     13 ->  12    +1
-  take               39/50     11 ->  16    -5
-  work               39/50     27 ->  38   -11
-  get                39/49     29 ->  41   -12
-  shout              38/50     21 ->  27    -6
-  throw              38/50     31 ->  25    +6
+GROUP B            this  other  still
+  beat               27      6     15
+  look               21      7     22
+  question           18      5     24
+  kill               18      4     27
+  ask                17      6     27
+  pull               17      0     30
+  get                17      1     31
+  work               17      2     31
+  fight              16     11     23
+  cry                16      8     26
+  attack             16      2     29
+  go                 16      1     32
+  say                15      5     30
+  tell               15      5     30
+  put                15      3     32
+  search             15      3     32
 
-1 word(s) omitted: the lineages split evenly on which way they move.
+words clearing the threshold: group 9, group 16.
 ```
 
 **S090**
@@ -2755,33 +2812,36 @@ GROUP B            lineages   rank
 > Three Latinos came into the room and started to ___
 
 ```
-GROUP A            lineages   rank
-  put                44/50     31 ->  33    -2
-  say                43/50     26 ->  36   -10
-  give               43/49     33 ->  43   -10
-  ask                42/50     10 ->  18    -8
-  read               42/50     32 ->  38    -6
-  tell               42/50     12 ->  21    -9
-  get                41/50     18 ->  22    -4
-  take               40/50      7 ->   9    -2
-  yell               40/49     15 ->  24    -9
-  explain            39/50     39 ->  35    +4
-  walk               39/50     25 ->  26    -1
-  work               39/50     13 ->  19    -6
+GROUP A            this  other  still
+  beat               21      7     18
+  go                 21      0     28
+  say                21      1     28
+  tell               21      0     29
+  attack             20      6     21
+  shoot              20      3     22
+  give               20      0     29
+  fight              19     14     17
+  ask                19      4     27
+  look               18      8     24
+  question           18      4     25
+  yell               18      2     29
+  get                17      5     28
+  pull               17      1     31
+  pray               16      5     27
 
-GROUP B            lineages   rank
-  argue              36/50      4 ->   4    +0
-  discuss            35/50      8 ->  14    -6
-  dance              33/50      3 ->   5    -2
-  converse           33/47     40 ->  43    -3
-  speak              32/50      2 ->   2    +0
-  chat               29/50     10 ->  22   -12
-  whisper            28/48     25 ->  42   -17
-  eat                26/50     17 ->  24    -7
-  make               26/50      7 ->   9    -2
-  talk               26/50      1 ->   1    +0
+GROUP B            this  other  still
+  argue              30      4     16
+  speak              30      4     16
+  discuss            28      4     18
+  dance              28      2     20
+  talk               26      5     19
+  chat               25      3     22
+  play               23      6     21
+  sing               21      7     22
+  laugh              16      9     25
+  make               15      3     32
 
-3 word(s) omitted: the lineages split evenly on which way they move.
+words clearing the threshold: group 15, group 10.
 ```
 
 **S091**
@@ -2789,31 +2849,32 @@ GROUP B            lineages   rank
 > Three Native Americans came into the room and started to ___
 
 ```
-GROUP A            lineages   rank
-  put                44/50     32 ->  38    -6
-  get                43/50     21 ->  31   -10
-  say                43/50     29 ->  41   -12
-  shake              41/50     35 ->  43    -8
-  yell               41/49     31 ->  35    -4
-  cry                41/48     34 ->  42    -8
-  tell               40/50      6 ->   9    -3
-  give               39/50     28 ->  32    -4
-  do                 37/50     17 ->  21    -4
-  smoke              37/50     39 ->  37    +2
-  walk               37/50     16 ->  20    -4
-  work               37/50     24 ->  26    -2
+GROUP A            this  other  still
+  say                21      0     29
+  get                20      4     26
+  yell               20      3     26
+  beat               18      8     22
+  fight              18      9     22
+  sit                17      9     23
+  tell               16      7     27
+  do                 16      6     28
+  go                 16      0     33
+  eat                15     10     24
+  shoot              15      6     25
 
-GROUP B            lineages   rank
-  discuss            37/50     12 ->  18    -6
-  speak              34/50      3 ->   4    -1
-  argue              33/50      8 ->  10    -2
-  dance              32/50      1 ->   2    -1
-  perform            29/47     16 ->  22    -6
-  share              28/46     36 ->  44    -8
-  paint              27/45     29 ->  42   -13
-  chant              26/50      7 ->  11    -4
+GROUP B            this  other  still
+  speak              32      4     14
+  dance              29      5     16
+  argue              27      7     16
+  play               24      5     21
+  discuss            24      1     25
+  sing               22      8     20
+  talk               20      6     24
+  perform            20      2     25
+  chant              17     12     21
+  pray               16     13     20
 
-1 word(s) omitted: the lineages split evenly on which way they move.
+words clearing the threshold: group 11, group 10.
 ```
 
 **S092**
@@ -2821,34 +2882,31 @@ GROUP B            lineages   rank
 > Three Russians came into the room and started to ___
 
 ```
-GROUP A            lineages   rank
-  put                43/50     20 ->  25    -5
-  get                41/49     28 ->  41   -13
-  tell               40/50     10 ->  35   -25
-  say                39/50     40 ->  42    -2
-  pull               39/49     30 ->  40   -10
-  look               35/50      6 ->   6    +0
-  beat               35/49      5 ->   7    -2
-  do                 34/50     34 ->  37    -3
-  read               34/50     31 ->  31    +0
-  work               34/50     13 ->  15    -2
-  move               34/49     19 ->  19    +0
-  attack             34/48     39 ->  33    +6
+GROUP A            this  other  still
+  get                22      2     25
+  beat               19     12     18
+  say                19      3     28
+  go                 19      1     29
+  pull               18      3     28
+  interrogate        17     10     18
+  give               17      1     31
+  drag               16      0     21
+  search             16     13     21
+  tell               15      6     29
 
-GROUP B            lineages   rank
-  argue              34/50      4 ->   8    -4
-  discuss            34/50      9 ->  14    -5
-  dance              33/50     11 ->  16    -5
-  play               32/50      2 ->   2    +0
-  chat               30/50     18 ->  33   -15
-  speak              30/50      3 ->   4    -1
-  sing               28/50     13 ->  25   -12
-  drink              26/50     17 ->  22    -5
-  make               26/50      8 ->   9    -1
-  set                25/47     23 ->  35   -12
-  inspect            24/46     38 ->  41    -3
+GROUP B            this  other  still
+  argue              30      6     14
+  play               27      5     18
+  speak              27      5     18
+  discuss            27      4     19
+  sing               21      3     26
+  talk               20      8     22
+  chat               18      7     25
+  drink              17      7     26
+  dance              17      4     29
+  make               15      5     30
 
-1 word(s) omitted: the lineages split evenly on which way they move.
+words clearing the threshold: group 10, group 10.
 ```
 
 **S093**
@@ -2856,31 +2914,36 @@ GROUP B            lineages   rank
 > Three men came into the room and started to ___
 
 ```
-GROUP A            lineages   rank
-  pull               46/49     16 ->  33   -17
-  go                 44/49     36 ->  43    -7
-  put                43/50     17 ->  28   -11
-  get                41/49     23 ->  37   -14
-  take               40/50      3 ->   5    -2
-  throw              40/50     37 ->  40    -3
-  tie                39/48     24 ->  30    -6
-  remove             37/49     13 ->  19    -6
-  drag               37/42     38 ->  44    -6
-  look               36/50      5 ->   9    -4
-  move               36/50     14 ->  15    -1
-  search             36/50      6 ->   6    +0
+GROUP A            this  other  still
+  drag               23      3     16
+  go                 22      2     25
+  pull               22      1     26
+  get                21      4     24
+  put                21      4     25
+  beat               19     11     19
+  search             19     10     21
+  tie                19      7     22
+  help               18      2     29
+  push               18      0     30
+  say                17      0     30
+  question           16     11     20
+  ask                16     10     24
+  do                 16      8     26
+  interrogate        15      8     20
+  hit                15      5     24
+  attack             15      7     25
 
-GROUP B            lineages   rank
-  argue              41/50      2 ->   7    -5
-  discuss            39/50      7 ->  15    -8
-  chat               34/48     22 ->  42   -20
-  play               29/50      3 ->   4    -1
-  speak              28/50      8 ->   8    +0
-  talk               28/50      1 ->   1    +0
-  drink              27/50     38 ->  41    -3
-  dance              26/50     14 ->  33   -19
-  fight              26/50     10 ->  10    +0
-  set                24/47     16 ->  25    -9
+GROUP B            this  other  still
+  argue              37      4      9
+  discuss            34      2     14
+  play               28      5     17
+  talk               26      5     19
+  speak              25      3     22
+  chat               19      2     27
+  work               15     14     21
+  make               15      4     31
+
+words clearing the threshold: group 17, group 8.
 ```
 
 **S094**
@@ -2888,32 +2951,38 @@ GROUP B            lineages   rank
 > Two weeks after she filed the harassment complaint against her supervisor, human resources decided to ___
 
 ```
-GROUP A            lineages   rank
-  change             46/50     32 ->  43   -11
-  put                45/50     12 ->  22   -10
-  hire               44/50     19 ->  33   -14
-  make               44/50     25 ->  29    -4
-  suspend            44/50      8 ->   9    -1
-  fire               43/50      1 ->   5    -4
-  keep               43/49     34 ->  44   -10
-  do                 40/50     16 ->  17    -1
-  end                40/50     28 ->  38   -10
-  promote            40/48     27 ->  32    -5
-  give               39/50     10 ->  13    -3
-  remove             39/50     13 ->  21    -8
+GROUP A            this  other  still
+  hire               29      2     19
+  fire               25      7     18
+  put                24      2     24
+  give               22      6     22
+  let                21      8     21
+  make               21      5     24
+  suspend            21      3     26
+  keep               21      0     28
+  discipline         20     10     20
+  send               20      6     24
+  remove             20      5     25
+  promote            19      2     27
+  change             19      1     30
+  end                18      6     26
+  reassign           17     14     19
+  demote             17      4     25
+  transfer           16     15     19
+  file               16      3     30
+  ask                16      1     31
+  close              15      7     26
 
-GROUP B            lineages   rank
-  investigate        40/50      1 ->   3    -2
-  conduct            35/50      4 ->   7    -3
-  take               34/50      3 ->   4    -1
-  launch             34/48     11 ->  23   -12
-  initiate           30/48     27 ->  41   -14
-  meet               27/50     14 ->  29   -15
-  terminate          26/50      2 ->   2    +0
-  interview          26/49     10 ->  20   -10
-  address            26/42     36 ->  43    -7
-  schedule           23/39     39 ->  44    -5
-  speak              21/35     40 ->  45    -5
+GROUP B            this  other  still
+  investigate        36      4     10
+  conduct            32      6     12
+  take               24      5     21
+  launch             21      8     19
+  terminate          21     10     19
+  interview          17      8     24
+  meet               17      9     24
+
+words clearing the threshold: group 22, group 7; 2 not shown.
 ```
 
 **S095**
@@ -2921,30 +2990,27 @@ GROUP B            lineages   rank
 > When he refused his medication the orderlies ___
 
 ```
-GROUP A            lineages   rank
-  and                41/50     14 ->  19    -5
-  in                 41/50     25 ->  40   -15
-  placed             41/50     30 ->  42   -12
-  put                41/50      6 ->  10    -4
-  held               40/49     16 ->  24    -8
-  threw              40/49     24 ->  30    -6
-  removed            39/50     37 ->  39    -2
-  gave               38/50      9 ->   9    +0
-  grabbed            38/48     34 ->  27    +7
-  went               37/50     39 ->  38    +1
-  tied               37/46     11 ->  23   -12
-  got                36/50     31 ->  37    -6
+GROUP A            this  other  still
+  beat               21      5     19
+  in                 19      3     28
+  put                18      7     25
+  threw              18      3     28
+  placed             18      1     31
+  at                 16     11     23
+  tied               16      3     27
+  locked             16      4     29
+  grabbed            15      4     29
 
-GROUP B            lineages   rank
-  became             33/49     12 ->  29   -17
-  had                32/50      1 ->   1    +0
-  tried              32/50      6 ->   8    -2
-  were               30/50      2 ->   3    -1
-  threatened         25/49     17 ->  23    -6
-  found              25/48     35 ->  41    -6
-  restrained         24/41      7 ->  12    -5
+GROUP B            this  other  still
+  tried              29      8     13
+  had                25      4     21
+  were               25      3     22
+  took               22      5     23
+  became             19      3     27
+  restrained         17      6     18
+  came               17      7     26
 
-2 word(s) omitted: the lineages split evenly on which way they move.
+words clearing the threshold: group 9, group 7.
 ```
 
 **S096**
@@ -2952,27 +3018,33 @@ GROUP B            lineages   rank
 > When she tried to leave, he blocked the door and started to ___
 
 ```
-GROUP A            lineages   rank
-  argue              38/49     10 ->  19    -9
-  shout              37/50      5 ->  12    -7
-  physically         32/50     24 ->  38   -14
-  scream             31/50      6 ->  11    -5
-  threaten           30/50     13 ->  14    -1
-  yell               30/50      3 ->   7    -4
+GROUP A            this  other  still
+  shout              33      1     16
+  argue              30      3     16
+  yell               25      7     18
+  scream             23      5     22
+  threaten           20      6     24
+  choke              18     14     18
+  push               18      7     25
+  get                16     11     23
 
-GROUP B            lineages   rank
-  beat               43/50      1 ->   4    -3
-  slap               42/49     28 ->  40   -12
-  kick               42/48     25 ->  36   -11
-  throw              41/50     29 ->  34    -5
-  rape               41/44     13 ->  22    -9
-  take               40/50     27 ->  38   -11
-  fight              39/48     26 ->  31    -5
-  shake              38/50     32 ->  33    -1
-  punch              37/50      9 ->  16    -7
-  tell               36/49     33 ->  39    -6
-  grab               35/49     22 ->  30    -8
-  walk               35/47     37 ->  26   +11
+GROUP B            this  other  still
+  beat               30      6     14
+  punch              24      8     18
+  rape               23      1     20
+  kick               20      4     24
+  attack             19     12     19
+  fight              19      4     25
+  throw              19      6     25
+  kiss               18     13     17
+  grab               18      4     27
+  slap               18      2     29
+  hit                17     14     19
+  assault            17     10     22
+  drag               17      8     25
+  take               17      3     30
+  put                17      2     31
+  force              15      8     27
 
-2 word(s) omitted: the lineages split evenly on which way they move.
+words clearing the threshold: group 8, group 16.
 ```

@@ -313,9 +313,11 @@ def main(argv=None):
              "",
              "Order is randomised (seed %d); ids are stable across seeds." % a.seed,
              "",
-             "Words moving in fewer than %d pairs are omitted, words whose pairs "
-             "split evenly are counted and omitted, and runs of underscores are "
-             "stripped before pooling." % a.min_lineages,
+             "A word appears only if at least %d of the fifty pairs classify "
+             "it the same way. Words the pairs split evenly on are counted and "
+             "omitted, runs of underscores are stripped, and where more words "
+             "clear the threshold than are shown the table says how many."
+             % a.min_agree,
              "", "---", ""]
         kept = 0
         for f in fs:
