@@ -97,16 +97,79 @@ def main(argv=None):
     #: there is nothing to relate and they are dropped rather than shown as a
     #: one-sided entry. A title carrying the round number would be wrong in the
     #: one place a reader cannot check it.
-    L = ["# %d operations, shuffled" % len(rs), "",
-         "(Two of the 909 in the stash pool to an empty side and are omitted.)",
+    #: **907, NOT 909, AND THE FILE SAYS SO.** Two operations pool to an empty
+    #: side -- the reader named a relation but cited words on one arm only -- so
+    #: there is nothing to relate and they are dropped rather than shown as a
+    #: one-sided entry. A title carrying the round number would be wrong in the
+    #: one place a reader cannot check it.
+    #:
+    #: **THE INSTRUCTION IS ADAPTED FROM `cross_frame.py:140-170`, NOT WRITTEN
+    #: FRESH.** That one has been used by three raters on the layer above and
+    #: already carries the two clauses that matter: separate a shared SUBJECT
+    #: from a shared MOVEMENT, and prefer many small groups because a wrong merge
+    #: destroys more than a missed one. Rewriting it would have changed the
+    #: instrument and the population at once.
+    #:
+    #: **DIRECTION IS WITHHELD.** A is the base arm throughout and B the aligned
+    #: one, and the reader is told neither -- `PROTOCOL_naming.md`: "Name the
+    #: relation, not the instances. A construct pinned to a direction is pinned
+    #: to a fact about which lineages we happen to have." Which side rose is
+    #: recoverable from the key afterwards and must not be annotatable.
+    L = ["# %d annotated relations" % len(rs), "",
+         "(Two of the 909 in the source pool to an empty side and are omitted.)",
          "",
-         "Each entry is one relation a reader identified at one sentence, with "
-         "the words it was cited on pooled across every model that showed it.",
-         "", "`n` is how many models. Order is randomised (seed %d); ids are "
-         "assigned before the shuffle and are stable." % a.seed, "",
-         "---", ""]
+         "Below are annotations of how word probabilities moved in language "
+         "models trained under two conditions, A and B. Each entry is one "
+         "reader's account of a single transformation seen at a single "
+         "sentence: a short name for it, the sentence, and the words it was "
+         "cited on. The A words are the ones more likely under one condition "
+         "and the B words more likely under the other.",
+         "",
+         "**You are not told which condition is which.** The relation you name "
+         "must read the same either way round: say what separates the two "
+         "groups, never which direction anything moved.",
+         "",
+         "## Your job",
+         "",
+         "Say which of these entries describe THE SAME transformation.",
+         "",
+         "Group them. A group is a set of entries naming one underlying "
+         "transformation, however differently they word it and whatever "
+         "material the reader was looking at. Two entries belong together only "
+         "if the MOVEMENT is the same. They do NOT belong together merely "
+         "because their words come from a similar subject area: entries drawn "
+         "from the same subject matter will look alike, and separating a shared "
+         "SUBJECT from a shared MOVEMENT is most of the work here. A "
+         "transformation appearing in several subject areas is more interesting "
+         "than one confined to a single area, so look for those in particular.",
+         "",
+         "For each group give:",
+         "",
+         "    name        a short label for the transformation itself",
+         "    statement   one or two sentences stating the movement in general",
+         "                terms, in your own words, at a level that covers every",
+         "                member",
+         "    members     the ids in it",
+         "    spans       whether its members are drawn from one subject area or",
+         "                several, and which",
+         "    why         what makes these one transformation and not several",
+         "",
+         "Then list, as `singletons`, the ids you could not place with anything.",
+         "",
+         "Every id must appear exactly once, in a group or in singletons. Be "
+         "willing to return many small groups: a wrong merge destroys more than "
+         "a missed one.",
+         "",
+         "Order is randomised (seed %d); ids are stable across seeds." % a.seed,
+         "",
+         "## Entries", "", "---", ""]
     for r in rs:
-        L.append("**%s** · %s · n=%d" % (r["id"], r["name"], r["n"]))
+        #: `n` dropped on RH's instruction. It is how many models showed the
+        #: operation, and a reader shown it can weight a 40-model entry over a
+        #: 1-model one -- which is evidence about PREVALENCE, not about what the
+        #: relation IS, and would import the aggregation this file exists to
+        #: bypass. It stays recoverable from the stash by id.
+        L.append("**%s** · %s" % (r["id"], r["name"]))
         L.append("")
         L.append("> %s ___" % r["frame"])
         L.append("")
