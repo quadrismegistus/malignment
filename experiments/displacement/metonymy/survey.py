@@ -295,14 +295,23 @@ def main(argv=None):
         #: nothing by it.
         #:
         #: **EITHER ARM MAY VETO.** A word is scorable only if BOTH accept it.
-        #: Measured at 479: jev called GARMENT on 40 words deepseek called
-        #: NOT_A_WORD, and deepseek did so on ZERO that jev refused -- the
-        #: disagreement is one-directional. Those 40 are BPE fragments
-        #: (`blaz`, `kimon`, `knick`, `legg`, `trou`, `underp`, `shir`), and
-        #: jev is completing them in frame and rating the completion. That is
-        #: exactly the failure this gate exists to catch, and a single-coder
-        #: gate did not catch it: `underp` scored 0.18 on exposure and sat in
-        #: the intimate cluster with a plausible number.
+        #:
+        #: COUNT DISAGREEMENTS ABOUT ADMISSION, NOT DISAGREEMENTS BEARING ONE
+        #: LABEL. An earlier version of this comment said "jev called GARMENT
+        #: on 40 words deepseek called NOT_A_WORD", which understates the
+        #: failure by more than half: at 479 there are 147 admission
+        #: disagreements, 58 where deepseek says NOT_A_WORD and 89 where it
+        #: says OTHER_NOUN, and inspection shows the 89 are the SAME failure
+        #: (`bel`, `bur`, `col`, `bathing`, `cowboy`, `cover`) routed to a
+        #: different category. There is no reason the labels a second coder
+        #: reaches for should partition a first coder's failure mode, so an
+        #: audit that tallies one gate category will understate itself.
+        #:
+        #: The direction is one-directional: ZERO of the 147 run the other
+        #: way. jev is completing fragments in frame and rating the
+        #: completion, which is exactly the failure this gate exists to catch,
+        #: and a single-coder gate did not catch it -- `underp` scored 0.18 on
+        #: exposure and sat in the intimate cluster with a plausible number.
         ok = ("GARMENT", "WORN_OR_CARRIED")
         r["scored"] = int(r["jev_gate"] in ok and r["txt_gate"] in ok)
         r["gate_agree"] = int(r["jev_gate"] == r["txt_gate"])
