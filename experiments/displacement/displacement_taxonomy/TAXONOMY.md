@@ -2,6 +2,20 @@
 
 Ten meta-relations survive k>=3 with all three raters on the frozen 89-component document. All ten are confirmed in rating space (norm_test, five sources, p 0.0002 to 0.013). Each is listed below with its rating-space signature, domain composition, and whether it crosses the site/control boundary in the matched-pair test.
 
+**THE TEN DO NOT REPRODUCE MECHANICALLY FROM THE STATED RULE (checked 2026-09-12, `dose_relations.py --clusters`).** The hub graph at `K_BRIDGE=3` gives **twelve** connected components with two or more hubs, and **eleven** if every cluster must carry a hub from all three raters. Reaching ten needs at least one further merge the threshold did not make: `Proceduralization` (14 members) and `Comment instead of act` (3) are separate clusters here, while relation 9 below folds them. Member counts also differ -- relation 5 is stated as 4 components and the two candidate clusters carry 7 and 5. The ten are a good vocabulary and were arrived at with a manual step that is not recorded in the threshold; treat the list below as the vocabulary and `--clusters` as the derivation.
+
+**AND EACH RELATION NOW CARRIES A DOSE**, from an instrument no rater saw: the mean `charge` completed-scene rating of the words that ROSE minus those that FELL, per model's own cell, in points of 1-7. Full table in `results/dose_relations.csv`.
+
+    Explicit part recedes to an ordinary one           -2.667      Same-register reshuffle          -0.167
+    Aggression dissolves into sociability              -2.652      Continuation becomes commentary  +0.000
+    Evaluation dropped / Abuse vacated                 -2.633      The authority's act as procedure +0.000
+    Blow becomes voice                                 -2.175      Turn toward the illicit          +0.755
+    Object swapped so the act is not transgressive     -2.167      Harsher member of the same kind  +1.083
+    Out of the sentence altogether                     -1.488
+    Content word yields to connective                  -1.250
+
+`Lateral swap inside one register` is the control that makes the rest readable: predicted flat on harm and register from the raters' own scales, it comes out at -0.167 median against +0.234 mean on an instrument they never saw. `Harsher member of the same kind` and `Turn toward the illicit` are the two positives, which is the REVERSAL pair this file already names.
+
 ## The main finding: not churn, but not specific to transgression either
 
 The vocabulary change alignment produces is **semantically loaded, not churn**. The groupings predict movement in contextual rating space that the raters never saw. But the operations are not a response to transgressive content: matched controls one word away produce the same shape and scale of operations, and the cross-frame relations formed by grouping them do not sort by role (purity 0.80 against null 0.80, p = 0.38-0.50 across three raters). The taxonomy is a taxonomy of what alignment does to narration generally. Transgressive sites are where the effects are noticed.

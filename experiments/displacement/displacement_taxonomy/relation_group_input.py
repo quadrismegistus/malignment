@@ -90,12 +90,56 @@ def propose_md(rows):
 
 
 def assign_md(rows):
-    """What an ASSIGN agent sees: the same, plus the oriented words."""
+    """What an AXIS agent sees: name + explanation, no words.
+
+    **THE AXIS AND THE POLE ARE NOW TWO AGENTS, NOT ONE** (RH). In run 1 the
+    assign stage saw the text AND the oriented words, and used the words: on
+    `force_of_handling` rows task 1's own names are "Continuation type:
+    transitive action vs. non-transitive response" and the like, and none
+    mentions force. So stage three was partly RE-CODING from the words rather
+    than grouping the named relations -- which is not what "group the named
+    relations" means, and it let one agent's reading of the words decide both
+    which axis a relation is on and which way it runs.
+
+    Split: this file places the relation on an axis from the NAMED CONTRAST
+    alone, and `pole_md`'s reader decides the direction from the WORDS alone,
+    never seeing the name. Neither can do the other's job.
+    """
     L = []
     for r in rows:
-        L.append("[%d] %s\n     %s\n     base: %s\n     aligned: %s"
-                 % (r["id"], r["name"], r["explanation"],
-                    ", ".join(r["base"]), ", ".join(r["aligned"])))
+        L.append("[%d] %s\n     %s" % (r["id"], r["name"], r["explanation"]))
+    return "\n".join(L)
+
+
+def flip(rid, seed=1):
+    """Is the BASE list shown second? SHA-256 of the id, so it is reproducible.
+
+    **THE POLE READER IS BLINDED TOO.** Telling it "base:" and "aligned:" hands
+    it a route to the answer that does not pass through the words: a model knows
+    what alignment training does, so "which pole is the aligned list on" can be
+    answered from prior belief and the words never consulted. It sees LIST 1 and
+    LIST 2 in an order drawn per relation, exactly as `pooled_relations`'
+    `blind_for` blinded the coder who wrote the names in the first place.
+
+    The direction is restored afterwards from this same function. The reader
+    supplies which pole LIST 1 sits on; the mapping is arithmetic.
+    """
+    import hashlib
+    h = hashlib.sha256(("%d|%d" % (seed, rid)).encode("utf-8")).hexdigest()
+    return int(h[:8], 16) % 2 == 1
+
+
+def pole_md(rows, seed=1):
+    """What a POLE agent sees: two unlabelled word lists and nothing else.
+
+    No name, no explanation, no frame, and no clue which list fell.
+    """
+    L = []
+    for r in rows:
+        one, two = (r["aligned"], r["base"]) if flip(r["id"], seed) \
+            else (r["base"], r["aligned"])
+        L.append("[%d]\n     LIST 1: %s\n     LIST 2: %s"
+                 % (r["id"], ", ".join(one), ", ".join(two)))
     return "\n".join(L)
 
 
@@ -142,6 +186,8 @@ def main(argv=None):
                  encoding="utf-8").write(propose_md(sh) + "\n")
             open(os.path.join(d, "assign_%02d.md" % k), "w",
                  encoding="utf-8").write(assign_md(sh) + "\n")
+            open(os.path.join(d, "pole_%02d.md" % k), "w",
+                 encoding="utf-8").write(pole_md(sh, a.seed) + "\n")
         print("  %d shards of ~%d -> %s" % (a.shards, len(rows) // a.shards, d))
     return 0
 

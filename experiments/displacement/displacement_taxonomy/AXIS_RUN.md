@@ -118,3 +118,49 @@ Mann-Whitney U=40.0, p=0.185
 **It survives the test, and the test cannot carry the sentence.** p=0.185 is a failure to detect a difference at n=6, not evidence of equality — the point estimate leans the *other* way (a random formal axis is proposed more often than a random semantic one only 32% of the time, against 50% under the null), and the medians are 7.5 against 9.0. **Absence of a detectable difference is not evidence of sameness**, least of all from six observations.
 
 So the safe version of the sentence is the one anchored on the individual case rather than on the distribution: **`dynamicity` was proposed by 13 of 16 readers and has no direction (26/27, q=1.00)**, while the axes that do have a direction include several proposed by fewer. That claim needs no test and says what the control is for.
+
+## Run 2 — the leak-fixed rerun (seed 1, 50 agents, 5.21M tokens, 39 min)
+
+Every fix from "What is wrong with it" applied at once, because RH ruled there would be no third run.
+
+| | run 1 | run 2 |
+|---|---|---|
+| propose sees | contrast text **plus** why it is anonymous, that a base/aligned direction exists, and a 20–40 target | contrast text only |
+| granularity band | in **both** the propose and consolidate prompts | consolidate only |
+| axis assigned from | text **and** oriented words, one agent | text alone |
+| pole assigned from | the same agent, with `base:`/`aligned:` labelled | a second agent, from two **unlabelled** lists in an order drawn per relation |
+| consolidators | 1 | 2, independent, on the same proposals |
+| propose returns | 6 example ids | the **full** id list |
+| axes | 28 | **38** (second consolidator: **37**) |
+
+**THE COUNT IS A PROPERTY OF THE PROPOSALS, NOT THE CONSOLIDATOR.** Two consolidators given the same 323 proposals returned 38 and 37. The prior six-way regrouping of this corpus spanned 28 to 200 and left open which half of that was the reader; this answers it for the merge step. The move from 28 to 38 between runs is the *proposals* changing, not the merge.
+
+**CROSS-RUN AGREEMENT IS LOW AND THAT IS THE HONEST HEADLINE: ARI 0.311, AMI 0.385** over all 2,466 relations. The two runs do not produce the same partition. What survives is not the partition but specific axes and their directions.
+
+### What replicated
+
+| run 2 axis | support | direction | q | run 1 |
+|---|---|---|---|---|
+| `inner_state_vs_outward_act` | 16/16 | outward act → inner state | 4.5e-29 | `interiority`, same direction |
+| `force_and_abruptness` | **16/16** | forceful → gentle | 1.9e-12 | `force_of_handling`, same |
+| `manner_vs_act` | 12/16 | unqualified → manner-specified | 1.1e-09 | `manner_specification`, same |
+| `content_vs_framing` | 15/16 | content word → connective | 1.1e-07 | `lexical_weight`, same |
+| `act_vs_outcome` | 6/16 | act → outcome | 3.1e-07 | `act_vs_outcome`, same |
+| `institutional_vs_personal` | 7/16 | personal → institutional | 1.7e-05 | `institutional_register`, same |
+| `speech_vs_physical_act` | **16/16** | physical → verbal | 0.0023 | `act_channel`, same |
+| `concrete_vs_abstract` | 5/16 | concrete → abstract | 0.021 | `concreteness`, same |
+| `sexual_or_transgressive_content` | 4/16 | transgressive → ordinary | 7.6e-06 | `explicitness_charge`, same |
+
+**`force_and_abruptness` IS NOW UNANIMOUS AT 16/16, AGAINST 13/16 UNDER THE LEAK.** The charged-content axis the leak was most suspected of manufacturing is proposed *more* often by readers told nothing about alignment. The same goes for `speech_vs_physical_act` (16/16) and `inner_state_vs_outward_act` (16/16).
+
+### What did not replicate
+
+**There is no harm axis.** Run 1's `harm_lethality` — 148/150, q=4.3e-40, the strongest direction in that run — has no counterpart here. The nearest are `force_and_abruptness` (which folds "damaging" into force) and `creation_vs_destruction` at n=10. Under the clean prompt no reader proposed lethality as a contrast in its own right. That is the single largest casualty of the leak fix, and it is the axis paper-claude had already refused to cite.
+
+**`argument_structure` loses its direction.** Run 1's `valency` was 53/69 at q=2e-05 and was in paper-claude's citation set until he demoted it to a note on a support threshold. Run 2: 36 against 54 the same way, q=0.11, **null**. His decision was right for a reason neither of us had — the axis does not hold up, not merely its support.
+
+**`explicitness_charge` survives as direction and collapses as support**, 8/16 → 4/16 with n falling 82 → 22.
+
+### The unclear rate more than tripled: 5.6% → 19.3%
+
+The pole reader no longer sees which list fell. 476 relations come back `unclear` against 139. That is the cost of blinding it, and it is evidence the labels were doing work: a reader told `base:`/`aligned:` answers where a blinded one declines. `co_member_of_same_field` is 41 unclear of 45 — the same-field reshuffle signature that `referent_substitution` carried in run 1, reproduced.

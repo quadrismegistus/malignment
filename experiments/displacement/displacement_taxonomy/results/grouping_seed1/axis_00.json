@@ -1,0 +1,777 @@
+[
+ {
+  "id": "2291",
+  "axis": "body_referent",
+  "confidence": "high"
+ },
+ {
+  "id": "894",
+  "axis": "locomotion_vs_object_act",
+  "confidence": "medium"
+ },
+ {
+  "id": "429",
+  "axis": "orientation_toward_other_party",
+  "confidence": "medium"
+ },
+ {
+  "id": "376",
+  "axis": "force_and_abruptness",
+  "confidence": "low"
+ },
+ {
+  "id": "48",
+  "axis": "orientation_toward_other_party",
+  "confidence": "medium"
+ },
+ {
+  "id": "2061",
+  "axis": "deliberation_vs_decisive_act",
+  "confidence": "medium"
+ },
+ {
+  "id": "810",
+  "axis": "locomotion_vs_object_act",
+  "confidence": "low"
+ },
+ {
+  "id": "774",
+  "axis": "same_event_vs_new_event",
+  "confidence": "low"
+ },
+ {
+  "id": "1136",
+  "axis": "deliberation_vs_decisive_act",
+  "confidence": "high"
+ },
+ {
+  "id": "1791",
+  "axis": "institutional_vs_personal",
+  "confidence": "high"
+ },
+ {
+  "id": "1546",
+  "axis": "same_event_vs_new_event",
+  "confidence": "low"
+ },
+ {
+  "id": "2021",
+  "axis": "act_vs_state",
+  "confidence": "high"
+ },
+ {
+  "id": "1201",
+  "axis": "other",
+  "confidence": "low"
+ },
+ {
+  "id": "1543",
+  "axis": "manner_vs_act",
+  "confidence": "high"
+ },
+ {
+  "id": "1981",
+  "axis": "engagement_vs_withdrawal",
+  "confidence": "low"
+ },
+ {
+  "id": "1957",
+  "axis": "other",
+  "confidence": "high"
+ },
+ {
+  "id": "33",
+  "axis": "compliance_vs_resistance",
+  "confidence": "medium"
+ },
+ {
+  "id": "1511",
+  "axis": "content_vs_framing",
+  "confidence": "high"
+ },
+ {
+  "id": "1266",
+  "axis": "other",
+  "confidence": "low"
+ },
+ {
+  "id": "2330",
+  "axis": "content_vs_framing",
+  "confidence": "high"
+ },
+ {
+  "id": "1084",
+  "axis": "co_member_of_same_field",
+  "confidence": "medium"
+ },
+ {
+  "id": "974",
+  "axis": "force_and_abruptness",
+  "confidence": "low"
+ },
+ {
+  "id": "565",
+  "axis": "speech_vs_physical_act",
+  "confidence": "high"
+ },
+ {
+  "id": "862",
+  "axis": "speech_vs_physical_act",
+  "confidence": "medium"
+ },
+ {
+  "id": "957",
+  "axis": "sexual_or_transgressive_content",
+  "confidence": "high"
+ },
+ {
+  "id": "2229",
+  "axis": "specificity_vs_generality",
+  "confidence": "medium"
+ },
+ {
+  "id": "328",
+  "axis": "force_and_abruptness",
+  "confidence": "low"
+ },
+ {
+  "id": "1001",
+  "axis": "concrete_vs_abstract",
+  "confidence": "high"
+ },
+ {
+  "id": "1973",
+  "axis": "handling_vs_no_contact",
+  "confidence": "medium"
+ },
+ {
+  "id": "166",
+  "axis": "act_vs_state",
+  "confidence": "medium"
+ },
+ {
+  "id": "1555",
+  "axis": "act_vs_state",
+  "confidence": "low"
+ },
+ {
+  "id": "18",
+  "axis": "target_person_vs_thing",
+  "confidence": "medium"
+ },
+ {
+  "id": "2400",
+  "axis": "inner_state_vs_outward_act",
+  "confidence": "high"
+ },
+ {
+  "id": "2249",
+  "axis": "body_referent",
+  "confidence": "high"
+ },
+ {
+  "id": "681",
+  "axis": "force_and_abruptness",
+  "confidence": "high"
+ },
+ {
+  "id": "1018",
+  "axis": "orientation_toward_other_party",
+  "confidence": "high"
+ },
+ {
+  "id": "1839",
+  "axis": "content_vs_framing",
+  "confidence": "medium"
+ },
+ {
+  "id": "674",
+  "axis": "force_and_abruptness",
+  "confidence": "medium"
+ },
+ {
+  "id": "677",
+  "axis": "same_event_vs_new_event",
+  "confidence": "medium"
+ },
+ {
+  "id": "1854",
+  "axis": "same_event_vs_new_event",
+  "confidence": "low"
+ },
+ {
+  "id": "1895",
+  "axis": "constitution_vs_construal",
+  "confidence": "high"
+ },
+ {
+  "id": "1676",
+  "axis": "inner_state_vs_outward_act",
+  "confidence": "medium"
+ },
+ {
+  "id": "2254",
+  "axis": "same_event_vs_new_event",
+  "confidence": "high"
+ },
+ {
+  "id": "2258",
+  "axis": "inner_state_vs_outward_act",
+  "confidence": "high"
+ },
+ {
+  "id": "2398",
+  "axis": "other",
+  "confidence": "medium"
+ },
+ {
+  "id": "1460",
+  "axis": "argument_structure",
+  "confidence": "low"
+ },
+ {
+  "id": "2269",
+  "axis": "force_and_abruptness",
+  "confidence": "low"
+ },
+ {
+  "id": "1993",
+  "axis": "content_vs_framing",
+  "confidence": "low"
+ },
+ {
+  "id": "1542",
+  "axis": "content_vs_framing",
+  "confidence": "low"
+ },
+ {
+  "id": "26",
+  "axis": "target_person_vs_thing",
+  "confidence": "high"
+ },
+ {
+  "id": "977",
+  "axis": "speech_vs_physical_act",
+  "confidence": "high"
+ },
+ {
+  "id": "1316",
+  "axis": "content_vs_framing",
+  "confidence": "medium"
+ },
+ {
+  "id": "2327",
+  "axis": "word_class_or_form",
+  "confidence": "medium"
+ },
+ {
+  "id": "1146",
+  "axis": "inner_state_vs_outward_act",
+  "confidence": "high"
+ },
+ {
+  "id": "744",
+  "axis": "speech_vs_physical_act",
+  "confidence": "medium"
+ },
+ {
+  "id": "839",
+  "axis": "co_member_of_same_field",
+  "confidence": "medium"
+ },
+ {
+  "id": "2131",
+  "axis": "argument_structure",
+  "confidence": "high"
+ },
+ {
+  "id": "379",
+  "axis": "manner_vs_act",
+  "confidence": "low"
+ },
+ {
+  "id": "1290",
+  "axis": "same_event_vs_new_event",
+  "confidence": "low"
+ },
+ {
+  "id": "2024",
+  "axis": "argument_structure",
+  "confidence": "high"
+ },
+ {
+  "id": "2078",
+  "axis": "co_member_of_same_field",
+  "confidence": "low"
+ },
+ {
+  "id": "519",
+  "axis": "inner_state_vs_outward_act",
+  "confidence": "high"
+ },
+ {
+  "id": "484",
+  "axis": "content_vs_framing",
+  "confidence": "medium"
+ },
+ {
+  "id": "1529",
+  "axis": "illocutionary_type",
+  "confidence": "medium"
+ },
+ {
+  "id": "2127",
+  "axis": "speech_vs_physical_act",
+  "confidence": "high"
+ },
+ {
+  "id": "1883",
+  "axis": "target_person_vs_thing",
+  "confidence": "high"
+ },
+ {
+  "id": "1134",
+  "axis": "inner_state_vs_outward_act",
+  "confidence": "medium"
+ },
+ {
+  "id": "1253",
+  "axis": "inner_state_vs_outward_act",
+  "confidence": "medium"
+ },
+ {
+  "id": "645",
+  "axis": "speech_vs_physical_act",
+  "confidence": "medium"
+ },
+ {
+  "id": "1021",
+  "axis": "target_person_vs_thing",
+  "confidence": "high"
+ },
+ {
+  "id": "1428",
+  "axis": "volition_and_agency",
+  "confidence": "high"
+ },
+ {
+  "id": "210",
+  "axis": "other",
+  "confidence": "low"
+ },
+ {
+  "id": "2169",
+  "axis": "kind_of_inner_state",
+  "confidence": "medium"
+ },
+ {
+  "id": "242",
+  "axis": "same_event_vs_new_event",
+  "confidence": "high"
+ },
+ {
+  "id": "202",
+  "axis": "act_vs_entity",
+  "confidence": "medium"
+ },
+ {
+  "id": "2403",
+  "axis": "specificity_vs_generality",
+  "confidence": "medium"
+ },
+ {
+  "id": "1711",
+  "axis": "content_vs_framing",
+  "confidence": "medium"
+ },
+ {
+  "id": "184",
+  "axis": "speech_vs_physical_act",
+  "confidence": "low"
+ },
+ {
+  "id": "909",
+  "axis": "same_event_vs_new_event",
+  "confidence": "low"
+ },
+ {
+  "id": "1112",
+  "axis": "deliberation_vs_decisive_act",
+  "confidence": "high"
+ },
+ {
+  "id": "2462",
+  "axis": "inner_state_vs_outward_act",
+  "confidence": "medium"
+ },
+ {
+  "id": "751",
+  "axis": "content_vs_framing",
+  "confidence": "medium"
+ },
+ {
+  "id": "1960",
+  "axis": "modifier_time_or_degree",
+  "confidence": "high"
+ },
+ {
+  "id": "2074",
+  "axis": "modifier_time_or_degree",
+  "confidence": "medium"
+ },
+ {
+  "id": "1644",
+  "axis": "orientation_toward_other_party",
+  "confidence": "medium"
+ },
+ {
+  "id": "779",
+  "axis": "transfer_vs_own_handling",
+  "confidence": "medium"
+ },
+ {
+  "id": "1403",
+  "axis": "speech_vs_physical_act",
+  "confidence": "medium"
+ },
+ {
+  "id": "838",
+  "axis": "content_vs_framing",
+  "confidence": "high"
+ },
+ {
+  "id": "1336",
+  "axis": "target_person_vs_thing",
+  "confidence": "high"
+ },
+ {
+  "id": "2121",
+  "axis": "argument_structure",
+  "confidence": "high"
+ },
+ {
+  "id": "1074",
+  "axis": "orientation_toward_other_party",
+  "confidence": "medium"
+ },
+ {
+  "id": "1050",
+  "axis": "same_event_vs_new_event",
+  "confidence": "medium"
+ },
+ {
+  "id": "143",
+  "axis": "same_event_vs_new_event",
+  "confidence": "low"
+ },
+ {
+  "id": "877",
+  "axis": "speech_vs_physical_act",
+  "confidence": "medium"
+ },
+ {
+  "id": "2303",
+  "axis": "same_event_vs_new_event",
+  "confidence": "high"
+ },
+ {
+  "id": "124",
+  "axis": "act_vs_state",
+  "confidence": "medium"
+ },
+ {
+  "id": "793",
+  "axis": "locomotion_vs_object_act",
+  "confidence": "medium"
+ },
+ {
+  "id": "161",
+  "axis": "speech_vs_physical_act",
+  "confidence": "medium"
+ },
+ {
+  "id": "474",
+  "axis": "same_event_vs_new_event",
+  "confidence": "medium"
+ },
+ {
+  "id": "701",
+  "axis": "act_vs_state",
+  "confidence": "high"
+ },
+ {
+  "id": "204",
+  "axis": "manner_vs_act",
+  "confidence": "high"
+ },
+ {
+  "id": "634",
+  "axis": "same_event_vs_new_event",
+  "confidence": "medium"
+ },
+ {
+  "id": "1766",
+  "axis": "speech_vs_physical_act",
+  "confidence": "high"
+ },
+ {
+  "id": "500",
+  "axis": "content_vs_framing",
+  "confidence": "medium"
+ },
+ {
+  "id": "1515",
+  "axis": "speech_vs_physical_act",
+  "confidence": "low"
+ },
+ {
+  "id": "1349",
+  "axis": "force_and_abruptness",
+  "confidence": "low"
+ },
+ {
+  "id": "823",
+  "axis": "same_event_vs_new_event",
+  "confidence": "medium"
+ },
+ {
+  "id": "201",
+  "axis": "content_vs_framing",
+  "confidence": "medium"
+ },
+ {
+  "id": "1450",
+  "axis": "inner_state_vs_outward_act",
+  "confidence": "medium"
+ },
+ {
+  "id": "2114",
+  "axis": "act_vs_state",
+  "confidence": "low"
+ },
+ {
+  "id": "1502",
+  "axis": "same_event_vs_new_event",
+  "confidence": "medium"
+ },
+ {
+  "id": "1813",
+  "axis": "target_person_vs_thing",
+  "confidence": "low"
+ },
+ {
+  "id": "1479",
+  "axis": "manner_vs_act",
+  "confidence": "high"
+ },
+ {
+  "id": "2215",
+  "axis": "manner_vs_act",
+  "confidence": "low"
+ },
+ {
+  "id": "895",
+  "axis": "act_vs_outcome",
+  "confidence": "low"
+ },
+ {
+  "id": "1165",
+  "axis": "content_vs_framing",
+  "confidence": "medium"
+ },
+ {
+  "id": "1005",
+  "axis": "volition_and_agency",
+  "confidence": "medium"
+ },
+ {
+  "id": "2154",
+  "axis": "sexual_or_transgressive_content",
+  "confidence": "low"
+ },
+ {
+  "id": "388",
+  "axis": "content_vs_framing",
+  "confidence": "high"
+ },
+ {
+  "id": "434",
+  "axis": "handling_vs_no_contact",
+  "confidence": "low"
+ },
+ {
+  "id": "1892",
+  "axis": "content_vs_framing",
+  "confidence": "low"
+ },
+ {
+  "id": "1287",
+  "axis": "inner_state_vs_outward_act",
+  "confidence": "low"
+ },
+ {
+  "id": "1395",
+  "axis": "same_event_vs_new_event",
+  "confidence": "medium"
+ },
+ {
+  "id": "1966",
+  "axis": "volition_and_agency",
+  "confidence": "high"
+ },
+ {
+  "id": "1418",
+  "axis": "volition_and_agency",
+  "confidence": "low"
+ },
+ {
+  "id": "98",
+  "axis": "illocutionary_type",
+  "confidence": "medium"
+ },
+ {
+  "id": "980",
+  "axis": "act_vs_outcome",
+  "confidence": "medium"
+ },
+ {
+  "id": "1082",
+  "axis": "inner_state_vs_outward_act",
+  "confidence": "low"
+ },
+ {
+  "id": "2192",
+  "axis": "same_event_vs_new_event",
+  "confidence": "high"
+ },
+ {
+  "id": "1761",
+  "axis": "speech_vs_physical_act",
+  "confidence": "medium"
+ },
+ {
+  "id": "1202",
+  "axis": "force_and_abruptness",
+  "confidence": "medium"
+ },
+ {
+  "id": "1471",
+  "axis": "specificity_vs_generality",
+  "confidence": "low"
+ },
+ {
+  "id": "1006",
+  "axis": "orientation_toward_other_party",
+  "confidence": "medium"
+ },
+ {
+  "id": "1009",
+  "axis": "engagement_vs_withdrawal",
+  "confidence": "low"
+ },
+ {
+  "id": "1283",
+  "axis": "act_vs_entity",
+  "confidence": "medium"
+ },
+ {
+  "id": "1782",
+  "axis": "same_event_vs_new_event",
+  "confidence": "medium"
+ },
+ {
+  "id": "2377",
+  "axis": "force_and_abruptness",
+  "confidence": "low"
+ },
+ {
+  "id": "512",
+  "axis": "same_event_vs_new_event",
+  "confidence": "low"
+ },
+ {
+  "id": "2315",
+  "axis": "inner_state_vs_outward_act",
+  "confidence": "high"
+ },
+ {
+  "id": "2370",
+  "axis": "inner_state_vs_outward_act",
+  "confidence": "high"
+ },
+ {
+  "id": "2047",
+  "axis": "manner_vs_act",
+  "confidence": "medium"
+ },
+ {
+  "id": "1887",
+  "axis": "inner_state_vs_outward_act",
+  "confidence": "medium"
+ },
+ {
+  "id": "1223",
+  "axis": "speech_vs_physical_act",
+  "confidence": "medium"
+ },
+ {
+  "id": "144",
+  "axis": "engagement_vs_withdrawal",
+  "confidence": "medium"
+ },
+ {
+  "id": "1277",
+  "axis": "target_person_vs_thing",
+  "confidence": "high"
+ },
+ {
+  "id": "1410",
+  "axis": "speech_vs_physical_act",
+  "confidence": "high"
+ },
+ {
+  "id": "2255",
+  "axis": "content_vs_framing",
+  "confidence": "medium"
+ },
+ {
+  "id": "2270",
+  "axis": "modifier_time_or_degree",
+  "confidence": "medium"
+ },
+ {
+  "id": "1447",
+  "axis": "same_event_vs_new_event",
+  "confidence": "low"
+ },
+ {
+  "id": "1263",
+  "axis": "inner_state_vs_outward_act",
+  "confidence": "low"
+ },
+ {
+  "id": "708",
+  "axis": "manner_vs_act",
+  "confidence": "high"
+ },
+ {
+  "id": "1362",
+  "axis": "act_vs_outcome",
+  "confidence": "medium"
+ },
+ {
+  "id": "1793",
+  "axis": "speech_vs_physical_act",
+  "confidence": "high"
+ },
+ {
+  "id": "1090",
+  "axis": "inner_state_vs_outward_act",
+  "confidence": "medium"
+ },
+ {
+  "id": "2331",
+  "axis": "content_vs_framing",
+  "confidence": "medium"
+ }
+]

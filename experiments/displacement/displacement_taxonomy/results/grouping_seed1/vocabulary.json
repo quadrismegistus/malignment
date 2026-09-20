@@ -1,0 +1,668 @@
+{
+ "axes": [
+  {
+   "id": "speech_vs_physical_act",
+   "name": "speech vs. physical act",
+   "pole_x": "speaking, vocalizing, or communicating",
+   "pole_y": "bodily, manual, or otherwise non-verbal action",
+   "definition": "One side fills the slot with an act of saying, telling, asking, writing or vocalizing; the other with a physical or practical act that involves no utterance.",
+   "merged_from": [
+    "s0:speech vs. physical action",
+    "s1:speech vs. physical act",
+    "s2:verbal vs. physical",
+    "s3:physical act vs. verbal act",
+    "s4:physical act vs. act of speech or perception",
+    "s5:speech vs. physical action",
+    "s6:speech vs physical action",
+    "s7:speech vs physical action",
+    "s8:action vs. speech",
+    "s9:speech vs. physical action",
+    "s10:speech vs. non-speech act",
+    "s11:action vs. speech",
+    "s12:speech vs. non-speech act",
+    "s13:speech vs. physical action",
+    "s14:speech vs. physical act",
+    "s15:Verbal vs. physical action"
+   ]
+  },
+  {
+   "id": "inner_state_vs_outward_act",
+   "name": "inner state vs. outward act",
+   "pole_x": "mental, perceptual, or affective event inside the subject",
+   "pole_y": "outwardly performed, observable act",
+   "definition": "One side names something thought, felt, perceived, realized, wanted or held as a stance; the other names an act carried out in the world, whether physical or spoken.",
+   "merged_from": [
+    "s0:overt action vs. mental state or stance",
+    "s1:outward act vs inner mental state",
+    "s2:outward act vs inner state",
+    "s3:outward act vs. inner state",
+    "s4:cognition vs. communication",
+    "s5:inner experience vs outward act",
+    "s6:inner state vs outward act",
+    "s7:inner event vs outward act",
+    "s8:overt act vs. inner state",
+    "s9:inner state vs. outward act",
+    "s10:inner event vs. outward act",
+    "s11:inner vs. outer",
+    "s12:inward act vs outward act",
+    "s13:inner state vs. overt act",
+    "s14:inner state vs. overt act",
+    "s15:Inner experience vs. outward action"
+   ]
+  },
+  {
+   "id": "kind_of_inner_state",
+   "name": "felt state vs. judgement",
+   "pole_x": "felt emotion, sensation, or desire",
+   "pole_y": "belief, knowledge, evaluation, or obligation",
+   "definition": "Within the inner domain, one side names something experienced as a feeling, want, or bodily sensation; the other names a thought, judgement, modal or deontic assessment that is not itself a felt reaction.",
+   "merged_from": [
+    "s1:volition vs cognition",
+    "s3:affect vs. evaluative stance",
+    "s4:cognitive stance vs. felt emotion",
+    "s5:felt emotion vs modal-existential assessment",
+    "s8:affective state vs. non-affective condition",
+    "s11:perception vs. cognition",
+    "s12:felt state vs non-affective word",
+    "s14:epistemic vs. volitional stance",
+    "s15:Constraint vs. danger"
+   ]
+  },
+  {
+   "id": "same_event_vs_new_event",
+   "name": "same event continued vs. new event",
+   "pole_x": "continuing, elaborating, or completing the act already underway",
+   "pole_y": "initiating a separate, subsequent act or event",
+   "definition": "One side stays inside the episode in play — extending it, specifying it further, carrying it to completion; the other begins a distinct action or moves the narrative on to the next event. Onset-versus-continuation readings sit here too.",
+   "merged_from": [
+    "s0:phase of the event",
+    "s1:same action continued vs new action",
+    "s2:sequence position",
+    "s3:phase of the act",
+    "s3:same act vs. new event",
+    "s4:narrative continuity",
+    "s5:same-event continuation vs new event",
+    "s6:continuation vs initiation",
+    "s7:continuation vs new event",
+    "s8:sequence continuation vs. new event or temporal marker",
+    "s9:same act continued vs. new act begun",
+    "s10:continuation vs. new act",
+    "s11:same act vs. new act",
+    "s12:same-act continuation vs next event",
+    "s13:same-event continuation vs new event or onset",
+    "s14:same event vs. new event",
+    "s15:Staying with the action at hand vs. moving on",
+    "s15:Bounded act vs. ongoing manner or phase"
+   ]
+  },
+  {
+   "id": "act_vs_outcome",
+   "name": "further act vs. outcome",
+   "pole_x": "another action or event that follows",
+   "pole_y": "the result, consequence, or state produced by what came before",
+   "definition": "One side supplies a fresh thing done; the other supplies what the preceding event produced — its effect, its finding, the condition it leaves.",
+   "merged_from": [
+    "s3:act vs. outcome",
+    "s6:further event vs resulting outcome",
+    "s8:further action vs. outcome",
+    "s9:outcome vs. further action",
+    "s10:result vs. independent event",
+    "s12:causing vs resulting",
+    "s13:resulting state vs. further action"
+   ]
+  },
+  {
+   "id": "act_vs_state",
+   "name": "dynamic act vs. state",
+   "pole_x": "a dynamic action, process, or event",
+   "pole_y": "a state, condition, posture, or stative construal",
+   "definition": "One side construes the slot as something happening or being done; the other as something that holds, obtains, is possessed, or is undergone.",
+   "merged_from": [
+    "s0:state vs. event",
+    "s1:action vs resulting state",
+    "s2:process vs product",
+    "s3:state vs. act",
+    "s3:having vs. doing",
+    "s4:action vs. state or outcome",
+    "s5:state or outcome vs action or event",
+    "s7:acting on an object vs undergoing a state",
+    "s8:dynamic event vs. state",
+    "s10:bounded act vs. ongoing state or activity",
+    "s11:event vs. state",
+    "s12:dynamic act vs state",
+    "s14:act vs. state",
+    "s15:Action vs. state or result"
+   ]
+  },
+  {
+   "id": "content_vs_framing",
+   "name": "named content vs. discourse framing",
+   "pole_x": "a contentful word naming an act, event, or thing",
+   "pole_y": "a connective, temporal marker, hedge, or framing device that names nothing",
+   "definition": "One side supplies lexical content; the other supplies sequencing, linking, stance or presentational material that advances or qualifies the clause without naming a new act.",
+   "merged_from": [
+    "s0:discourse marker vs. named event",
+    "s1:named event vs narrative sequencing",
+    "s2:naming vs framing",
+    "s3:naming an event vs. marking continuation",
+    "s3:naming the act vs. framing it",
+    "s4:content word vs. grammatical link",
+    "s5:content word vs discourse connective",
+    "s6:event vs discourse marker",
+    "s7:naming an act vs framing without one",
+    "s9:named action vs. sequencing marker",
+    "s10:contentful act vs. discourse marker",
+    "s11:naming vs. marking",
+    "s12:contentful word vs bleached marker",
+    "s13:function word vs contentful predicate",
+    "s13:content vs. stance",
+    "s14:content act vs. discourse marker",
+    "s15:Naming an event vs. managing the discourse"
+   ]
+  },
+  {
+   "id": "manner_vs_act",
+   "name": "manner vs. act named",
+   "pole_x": "specifies the manner, means, path, or style of the act",
+   "pole_y": "names the act, its content, or its result plainly",
+   "definition": "One side characterizes how (or by what means or along what path) something is done; the other simply names what is done without encoding manner.",
+   "merged_from": [
+    "s0:manner specified vs. act named",
+    "s1:manner-specified vs neutral",
+    "s2:what vs how",
+    "s3:manner specified vs. act bare",
+    "s4:manner vs. path",
+    "s5:manner vs. act",
+    "s6:manner specification",
+    "s7:manner vs act",
+    "s8:specific manner vs. generic event",
+    "s9:the act vs. its manner or degree",
+    "s12:manner-specifying vs neutral",
+    "s13:motion specification",
+    "s13:manner specified vs. act named plainly"
+   ]
+  },
+  {
+   "id": "modifier_time_or_degree",
+   "name": "modifier kind: time or degree vs. manner or quality",
+   "pole_x": "time, sequence, frequency, or degree",
+   "pole_y": "manner, quality, or place",
+   "definition": "Among words whose job is to modify rather than name, one side specifies when, how often, how long or how much; the other specifies how, of what kind, or where.",
+   "merged_from": [
+    "s0:degree vs. quality",
+    "s6:time reference",
+    "s8:modifier type: manner/quality vs. time or degree",
+    "s10:manner adverbial vs. temporal connective",
+    "s11:temporal extent",
+    "s14:temporal placement vs. manner",
+    "s15:Intensity of expression"
+   ]
+  },
+  {
+   "id": "argument_structure",
+   "name": "argument structure",
+   "pole_x": "stands alone in the frame (intransitive, bare, complete)",
+   "pole_y": "requires an object, particle, complement, or further clause",
+   "definition": "The two sides differ in what the slot's filler demands syntactically rather than in what it means: self-sufficient in the frame versus needing further material to be grammatical.",
+   "merged_from": [
+    "s0:transitivity",
+    "s0:frame fit",
+    "s1:transitivity",
+    "s1:syntactic fit of the filler",
+    "s2:syntactic frame",
+    "s3:transitivity",
+    "s4:transitivity",
+    "s5:transitivity",
+    "s6:transitivity",
+    "s8:transitivity",
+    "s9:transitivity / directedness at an object",
+    "s9:syntactic frame of the continuation",
+    "s11:argument structure",
+    "s12:syntactic fit in the slot",
+    "s13:syntactic frame",
+    "s14:argument structure",
+    "s15:Syntactic frame of the filler"
+   ]
+  },
+  {
+   "id": "word_class_or_form",
+   "name": "word class or inflectional form",
+   "pole_x": "one grammatical category or form",
+   "pole_y": "a different category or form of the same content",
+   "definition": "The two sides differ in the shape of the word — part of speech, tense, number, base versus compound or inflected — rather than in the kind of thing named.",
+   "merged_from": [
+    "s3:grammatical form of the filler",
+    "s4:word form of the same referent",
+    "s5:word class and inflectional form",
+    "s6:word form",
+    "s10:word class or syntactic frame",
+    "s11:grammatical form",
+    "s15:Word class of the filler",
+    "s15:Grammatical number"
+   ]
+  },
+  {
+   "id": "act_vs_entity",
+   "name": "act vs. entity",
+   "pole_x": "the doing — an action or its performance",
+   "pole_y": "the thing, participant, or content involved in it",
+   "definition": "One side names what is done; the other names a person, object, substance, or piece of content implicated in that doing.",
+   "merged_from": [
+    "s6:content vs act",
+    "s6:action vs participant",
+    "s8:act vs. entity",
+    "s10:act vs. thing",
+    "s10:wanted state vs. wanted entity",
+    "s11:action vs. entity"
+   ]
+  },
+  {
+   "id": "target_person_vs_thing",
+   "name": "target: person vs. thing",
+   "pole_x": "aimed at a person or specific addressee",
+   "pole_y": "aimed at an object, place, matter, institution, or diffuse audience",
+   "definition": "Both sides name a directed act, and they differ in what it takes as object or recipient — a human party versus a thing, location, task, or impersonal body.",
+   "merged_from": [
+    "s0:target of the action",
+    "s2:orientation of the act",
+    "s3:target of the act",
+    "s5:recipient vs place or purpose",
+    "s6:addressee of the act",
+    "s12:person-directed vs thing-directed or undirected",
+    "s13:person-directed vs. object-directed",
+    "s14:audience",
+    "s15:Target of the action",
+    "s15:Recipient vs. location"
+   ]
+  },
+  {
+   "id": "orientation_toward_other_party",
+   "name": "engaging another party vs. self-contained",
+   "pole_x": "engages the other party or the object already in play",
+   "pole_y": "self-directed, undirected, or aimed elsewhere",
+   "definition": "One side names an act that reaches out to a second party or to the thing at issue; the other names an act the subject performs on or for themself, on some other target, or with no target at all.",
+   "merged_from": [
+    "s0:self- vs. other-directed",
+    "s1:directed at another vs self-contained",
+    "s4:target of the action",
+    "s6:self-directed vs outward-directed",
+    "s7:directed at a target vs undirected",
+    "s8:target of the action",
+    "s9:other-directed vs. self-directed action",
+    "s10:directed at another party vs. not",
+    "s11:target of the act",
+    "s13:self-oriented vs. other-oriented",
+    "s13:targeted engagement vs. undirected or withdrawn response",
+    "s14:engagement of another party",
+    "s15:Self-directed vs. other-directed"
+   ]
+  },
+  {
+   "id": "engagement_vs_withdrawal",
+   "name": "staying with vs. leaving",
+   "pole_x": "remaining, approaching, retaining, or confronting",
+   "pole_y": "departing, sending away, deflecting, or breaking off",
+   "definition": "One side keeps the subject in contact with the place, person, or matter at hand — moving toward it, holding onto it, facing it; the other exits, expels, avoids, or takes a different course. Literal direction of travel and figurative engagement sit on the same axis.",
+   "merged_from": [
+    "s1:direction of motion",
+    "s2:direction of motion",
+    "s5:departure vs staying in place",
+    "s7:staying with the situation vs leaving it",
+    "s8:direct engagement vs. indirect or evasive response",
+    "s9:keeping/holding vs. sending away",
+    "s9:confronting the matter vs. taking another course",
+    "s11:retention vs. dispersal",
+    "s12:engagement vs disengagement",
+    "s13:approach vs. departure",
+    "s14:direction of travel"
+   ]
+  },
+  {
+   "id": "locomotion_vs_object_act",
+   "name": "own-body motion vs. non-motion or object act",
+   "pole_x": "the subject's own movement, travel, or posture",
+   "pole_y": "an act with no displacement, typically performed on an object",
+   "definition": "One side names the body going, leaving, or holding itself somehow; the other names an act that moves nothing of the subject — handling or affecting something external, or staying put.",
+   "merged_from": [
+    "s0:locomotion",
+    "s1:motion vs stasis",
+    "s4:own-body motion vs. object-directed action",
+    "s7:self-motion vs acting on an object",
+    "s8:physical relocation vs. non-locomotive action",
+    "s10:motion or posture vs. discrete act or change of state",
+    "s12:self-motion vs caused motion or transfer",
+    "s14:locomotion vs. goal-directed act"
+   ]
+  },
+  {
+   "id": "transfer_vs_own_handling",
+   "name": "transfer vs. handling it oneself",
+   "pole_x": "giving, handing, sending, or supplying to another",
+   "pole_y": "acting on, placing, or keeping the object oneself",
+   "definition": "One side passes the thing to a second party; the other manipulates or retains it without any transfer.",
+   "merged_from": [
+    "s1:transfer vs handling",
+    "s3:handling vs. transferring",
+    "s5:transfer vs other action",
+    "s7:transfer vs self-contained handling"
+   ]
+  },
+  {
+   "id": "handling_vs_no_contact",
+   "name": "hands-on handling vs. no contact",
+   "pole_x": "physically holds, manipulates, or touches the thing",
+   "pole_y": "acts without touching it — looking, using, or leaving it alone",
+   "definition": "One side makes bodily contact with the object or person and works on it; the other acts beside it, observes it, or engages it only in its proper function.",
+   "merged_from": [
+    "s6:handling vs non-handling",
+    "s8:bodily contact",
+    "s11:handling vs. use",
+    "s12:handling the object vs not handling it"
+   ]
+  },
+  {
+   "id": "force_and_abruptness",
+   "name": "force vs. restraint",
+   "pole_x": "forceful, violent, abrupt, or damaging",
+   "pole_y": "gentle, controlled, gradual, or non-damaging",
+   "definition": "Both sides name comparable acts, differing in the force, aggression, suddenness, or destructive impact involved — including whether a blow lands or stops short.",
+   "merged_from": [
+    "s0:harm",
+    "s0:force of handling",
+    "s1:force and violence",
+    "s2:force",
+    "s3:force of the act",
+    "s4:force of the physical act",
+    "s5:abruptness",
+    "s5:violence vs non-violence",
+    "s6:force vs non-force",
+    "s6:contact vs miss",
+    "s7:control vs unrestrained force",
+    "s8:force of handling",
+    "s8:aggression vs. non-aggression",
+    "s9:immediacy of the next event",
+    "s10:force vs. non-force",
+    "s11:force",
+    "s12:forceful act vs measured or procedural act",
+    "s13:force",
+    "s14:harm vs. non-harm",
+    "s15:Transgressive force vs. restraint"
+   ]
+  },
+  {
+   "id": "sexual_or_transgressive_content",
+   "name": "sexual or transgressive vs. ordinary",
+   "pole_x": "sexual, intimate, or otherwise transgressive",
+   "pole_y": "non-sexual, everyday, socially ordinary",
+   "definition": "One side names an act, body part, or referent carrying sexual or taboo charge in this context; the other names the same kind of thing without it.",
+   "merged_from": [
+    "s2:sexual explicitness",
+    "s3:transgressive vs. ordinary",
+    "s4:sexual charge",
+    "s5:sexual vs non-sexual",
+    "s7:intimate vs neutral"
+   ]
+  },
+  {
+   "id": "bluntness_vs_euphemism",
+   "name": "blunt vs. euphemistic naming",
+   "pole_x": "plain, explicit, colloquial naming",
+   "pole_y": "softened, euphemistic, formal, or oblique naming",
+   "definition": "Both sides reach the same referent, differing in how directly it is named — the blunt or charged word versus its covered, formal, or indirect counterpart.",
+   "merged_from": [
+    "s6:blunt vs euphemistic",
+    "s11:register",
+    "s13:explicitness"
+   ]
+  },
+  {
+   "id": "volition_and_agency",
+   "name": "deliberate act vs. involuntary or undergone event",
+   "pole_x": "chosen, agentive act by the subject",
+   "pole_y": "involuntary reaction, permitted event, or something that befalls them",
+   "definition": "One side names something the subject initiates and controls; the other an automatic bodily or emotional reaction, an event undergone, or another party's doing.",
+   "merged_from": [
+    "s0:volition",
+    "s1:involuntary reaction vs deliberate action",
+    "s2:agency",
+    "s3:whose action",
+    "s8:self-expression vs. outward-directed action",
+    "s10:agentive vs. undergone",
+    "s10:doing vs. allowing",
+    "s11:volition"
+   ]
+  },
+  {
+   "id": "deliberation_vs_decisive_act",
+   "name": "deliberating or asking vs. acting",
+   "pole_x": "weighing, inquiring, hedging, or holding a stance about what to do",
+   "pole_y": "naming and carrying out a concrete, decisive act",
+   "definition": "One side puts the next move in question, considers, defers, or adopts an attitude toward it; the other supplies the act itself. Interrogative-versus-declarative continuations belong here.",
+   "merged_from": [
+    "s1:attempt or deliberation vs execution or outcome",
+    "s3:interrogative vs. declarative",
+    "s4:action vs. mental stance",
+    "s4:named action vs. asking what to do",
+    "s5:direct action vs deliberation or stance",
+    "s6:action vs deliberation",
+    "s7:inquiry vs action",
+    "s10:question vs. assertion",
+    "s10:decisive act vs. procedural step",
+    "s11:act vs. stance",
+    "s11:interrogative vs. declarative",
+    "s12:question vs named act",
+    "s15:Deliberating or asking vs. acting"
+   ]
+  },
+  {
+   "id": "compliance_vs_resistance",
+   "name": "complying vs. resisting",
+   "pole_x": "accepting, committing, yielding, or complying",
+   "pole_y": "refusing, denying, contesting, or doubting",
+   "definition": "One side goes along with the proposition, demand, or other party; the other cancels, refuses, escalates against, or interrogates it.",
+   "merged_from": [
+    "s3:refusal vs. concession",
+    "s5:confrontation vs accommodation",
+    "s13:acceptance vs. scrutiny",
+    "s13:negation vs. affirmation"
+   ]
+  },
+  {
+   "id": "institutional_vs_personal",
+   "name": "institutional vs. personal action",
+   "pole_x": "formal, legal, procedural, or collective measure",
+   "pole_y": "direct, personal, immediate act",
+   "definition": "One side routes the response through an institution, authority, or organized procedure; the other acts on the situation directly and on one's own.",
+   "merged_from": [
+    "s0:institutional vs. direct",
+    "s1:institutional vs personal action",
+    "s2:formality of response",
+    "s3:institutional channel vs. personal action",
+    "s11:institutional vs. direct",
+    "s13:bodily act vs. institutional act",
+    "s14:institutional vs. personal",
+    "s15:Collective vs. individual"
+   ]
+  },
+  {
+   "id": "specificity_vs_generality",
+   "name": "specific vs. general",
+   "pole_x": "specific, marked, domain-particular term",
+   "pole_y": "broad, unmarked, all-purpose term",
+   "definition": "Both sides name things of the same kind, but one narrows to a particular sub-type, instance, or practice-specific act while the other is the plain general word that fits anywhere.",
+   "merged_from": [
+    "s0:generality",
+    "s2:specificity",
+    "s4:specific vs. generic",
+    "s6:specific vs general",
+    "s7:bounded specific vs broad general",
+    "s9:domain-specific vs. general-purpose action",
+    "s9:whole surface vs. delimited part",
+    "s10:specific vs. general wording",
+    "s11:grain",
+    "s12:generality of reference",
+    "s13:literal specific vs. generic figurative",
+    "s14:specificity",
+    "s14:aptness to the activity",
+    "s15:Specific vs. generic"
+   ]
+  },
+  {
+   "id": "concrete_vs_abstract",
+   "name": "concrete vs. abstract",
+   "pole_x": "tangible thing, person, or bounded physical event",
+   "pole_y": "abstract quality, attribute, degree, or condition",
+   "definition": "One side names something perceivable or physically locatable; the other a property, measure, institution, or state of affairs with no physical existence.",
+   "merged_from": [
+    "s0:abstractness",
+    "s1:body or person vs abstraction",
+    "s4:concrete thing vs condition or attribute",
+    "s7:concrete thing vs abstract quality",
+    "s8:concreteness",
+    "s10:concrete vs. abstract",
+    "s14:concreteness"
+   ]
+  },
+  {
+   "id": "body_referent",
+   "name": "which bodily referent",
+   "pole_x": "a specific, individuated, or intimate body part",
+   "pole_y": "a broad region, the whole person, or something worn or carried",
+   "definition": "Both sides name the bodily referent at issue, differing in which part is picked and how it is construed — anatomical part versus region, person, garment, or adjacent thing.",
+   "merged_from": [
+    "s1:specific body part vs general region",
+    "s2:attachment to the person",
+    "s3:body part vs. whole person",
+    "s6:body vs object",
+    "s8:body region",
+    "s10:body-part selection",
+    "s11:worn vs. carried",
+    "s11:body region",
+    "s14:body part literal vs. adjacent",
+    "s15:Body-part role"
+   ]
+  },
+  {
+   "id": "creation_vs_destruction",
+   "name": "creation vs. destruction",
+   "pole_x": "bringing into being, adding, or acquiring",
+   "pole_y": "ending, removing, or destroying",
+   "definition": "One side names an act that makes, starts, assembles, or obtains something; the other an act that takes it apart, sends it away, or ends it.",
+   "merged_from": [
+    "s1:acting on a thing vs bringing it into being",
+    "s8:creation/acquisition vs. removal/destruction",
+    "s11:creation vs. elimination",
+    "s13:ending life vs. sustaining it"
+   ]
+  },
+  {
+   "id": "ritual_vs_ordinary",
+   "name": "ritual vs. ordinary act",
+   "pole_x": "ceremonial, devotional, or formally marked act",
+   "pole_y": "ordinary practical action or material labour",
+   "definition": "One side names an act belonging to a ritual, sacred, or performance register; the other a mundane motion, transfer, or piece of work in the same setting.",
+   "merged_from": [
+    "s1:ceremonial vs practical act",
+    "s5:ritual vs ordinary action",
+    "s7:ritual performance vs ordinary act",
+    "s8:ritual act vs. material handling"
+   ]
+  },
+  {
+   "id": "evaluative_polarity",
+   "name": "evaluative polarity",
+   "pole_x": "negative, aversive, or condemnatory",
+   "pole_y": "positive, benign, or neutral",
+   "definition": "Both sides evaluate or characterize the same situation, differing in whether the evaluation is unfavourable or favourable.",
+   "merged_from": [
+    "s2:valence",
+    "s12:evaluative polarity"
+   ]
+  },
+  {
+   "id": "spatial_configuration",
+   "name": "spatial configuration",
+   "pole_x": "a bounded place, container, or surface reached",
+   "pole_y": "an open extent, path, medium, or region alongside",
+   "definition": "Both sides name the place or spatial relation filling the slot, differing in its kind — inside versus beside, bounded aperture versus open interior, built place versus open ground, goal versus path.",
+   "merged_from": [
+    "s1:place type",
+    "s3:containment vs. proximity",
+    "s8:spatial boundedness",
+    "s12:material vs bounded surface",
+    "s14:spatial relation"
+   ]
+  },
+  {
+   "id": "means_vs_end",
+   "name": "means vs. end",
+   "pole_x": "the instrument, method, or act used",
+   "pole_y": "the goal, outcome, or purpose it serves",
+   "definition": "One side names what is used or done as a means; the other the endpoint, purpose, or achievement it is done toward.",
+   "merged_from": [
+    "s5:means vs end",
+    "s13:means vs. end",
+    "s14:act vs. its means or participant"
+   ]
+  },
+  {
+   "id": "illocutionary_type",
+   "name": "illocutionary type",
+   "pole_x": "directing, demanding, or committing",
+   "pole_y": "reporting, informing, or merely uttering",
+   "definition": "Both sides are speech acts, differing in force: one imposes a demand, warning, or commitment on the exchange, the other conveys or asks without committing.",
+   "merged_from": [
+    "s1:commitment vs bare utterance",
+    "s2:illocutionary force",
+    "s8:informing vs. requesting"
+   ]
+  },
+  {
+   "id": "constitution_vs_construal",
+   "name": "constitution vs. construal",
+   "pole_x": "what the thing actually is or entails",
+   "pole_y": "how it appears, means, or comes across",
+   "definition": "One side states the intrinsic make-up or entailment of the situation; the other its appearance, social meaning, or seeming.",
+   "merged_from": [
+    "s3:appearance vs. actuality",
+    "s15:Constitution vs. construal"
+   ]
+  },
+  {
+   "id": "realis_vs_irrealis",
+   "name": "what is the case vs. what is wanted or required",
+   "pole_x": "report of a fact, a past act, or what is known",
+   "pole_y": "a want, need, obligation, or act still to be done",
+   "definition": "One side states what is or was the case; the other names what the subject wants, what circumstances require, or what remains to be carried out.",
+   "merged_from": [
+    "s7:past narration vs present state",
+    "s7:own act vs imposed necessity",
+    "s13:reported fact vs. wanted or intended outcome"
+   ]
+  },
+  {
+   "id": "co_member_of_same_field",
+   "name": "which member of the field",
+   "pole_x": "one member or facet of the referential domain",
+   "pole_y": "a different member or facet of the same domain",
+   "definition": "Both sides come from a single semantic field (address terms, penalties, materials, ingredients, gender of the person) and differ only in which member of it fills the slot, along no more general dimension.",
+   "merged_from": [
+    "s0:which member of the field",
+    "s2:gender",
+    "s13:base entity vs. added or specialized element"
+   ]
+  },
+  {
+   "id": "motion_geometry",
+   "name": "motion geometry",
+   "pole_x": "rotational, oscillating, or slicing motion",
+   "pole_y": "linear driving, piercing, or displacement",
+   "definition": "Both sides apply motion or force to the same target, differing in the geometry of the movement rather than its force or manner-quality.",
+   "merged_from": [
+    "s2:mode of force",
+    "s11:motion geometry"
+   ]
+  }
+ ],
+ "notes": "Scale check: the four axes every reader proposed (speech/physical, inner/outward, same-event/new-event, content/framing) plus act-vs-state, manner, argument structure, target and orientation carry the bulk of the 2,466 readings; the tail axes below ~n=10 per reader are kept only where two or more readers independently reached for them, or where the distinction has no home elsewhere.\n\nDeliberate splits that could be collapsed further if you want fewer axes: (a) `target_person_vs_thing` vs `orientation_toward_other_party` — one is what kind of object the act takes, the other whether a second party is engaged at all; four readers proposed both, which is why I kept them apart, but they will compete for the same readings. (b) `act_vs_state` vs `act_vs_outcome` — aspectual (dynamic/stative) against causal (act/its consequence); four readers proposed both, so the split is evidenced, but readers who proposed only one will have pooled them. (c) `argument_structure` vs `word_class_or_form` — complement demands against part-of-speech and inflection; several reader proposals (s10 \"word class or syntactic frame\", s15 \"Syntactic frame of the filler\") straddle both and I assigned by their stated emphasis. (d) `deliberation_vs_decisive_act` overlaps `inner_state_vs_outward_act` on stance readings; I kept it because its interrogative side (\"asking how to proceed\") is a speech act, not an inner state, and twelve readers named it separately.\n\nLoose fits I made rather than leave orphans: s9 \"immediacy of the next event\" went into `force_and_abruptness` on the abrupt/gradual pole, though it is really temporal; s4 \"manner vs. path\" went into `manner_vs_act` even though both its poles are specifications; s14 \"aptness to the activity\" went into `specificity_vs_generality` as domain-fit.\n\nCould not merge cleanly (2 proposals, left out): s1 \"additive vs restrictive continuation\" (both poles are connectives, so it sits under no pole pair I have — a discourse-relation-type axis would be needed, and one reader is thin evidence for it); s11 \"bodily mode\" (release/emission vs seizure/rigidity — a real contrast but both poles are involuntary bodily events, fitting neither force nor volition).\n\nWeakest axis in the set: `co_member_of_same_field`. Its poles are not nameable in the way the instruction asks — it is the residual category for contrasts that are lexical-field swaps with no general dimension. Keep it as a catch-all or drop it and let those readings fall to `specificity_vs_generality`.\n\nPossibly missing: nothing in the sixteen proposals distinguishes readings by the *frame* being completed (narrative continuation vs. dialogue vs. list), which several readers gesture at from different directions (s15 \"managing the discourse\", s3 \"grammatical form of the filler\", s10 \"word class or syntactic frame\"); if the corpus has that structure it is currently spread across three axes. Also absent: any axis about animacy of the *subject* rather than the object, and any axis about tense/temporal location of the whole clause as opposed to a modifier within it."
+}

@@ -1,0 +1,777 @@
+[
+ {
+  "id": "80",
+  "list1_pole": "unclear",
+  "confidence": "low"
+ },
+ {
+  "id": "1425",
+  "list1_pole": "unclear",
+  "confidence": "low"
+ },
+ {
+  "id": "1664",
+  "list1_pole": "y",
+  "confidence": "medium"
+ },
+ {
+  "id": "587",
+  "list1_pole": "y",
+  "confidence": "high"
+ },
+ {
+  "id": "372",
+  "list1_pole": "y",
+  "confidence": "medium"
+ },
+ {
+  "id": "1381",
+  "list1_pole": "y",
+  "confidence": "high"
+ },
+ {
+  "id": "632",
+  "list1_pole": "x",
+  "confidence": "medium"
+ },
+ {
+  "id": "2164",
+  "list1_pole": "x",
+  "confidence": "low"
+ },
+ {
+  "id": "320",
+  "list1_pole": "y",
+  "confidence": "high"
+ },
+ {
+  "id": "1373",
+  "list1_pole": "y",
+  "confidence": "medium"
+ },
+ {
+  "id": "2083",
+  "list1_pole": "unclear",
+  "confidence": "low"
+ },
+ {
+  "id": "1341",
+  "list1_pole": "x",
+  "confidence": "low"
+ },
+ {
+  "id": "1573",
+  "list1_pole": "y",
+  "confidence": "low"
+ },
+ {
+  "id": "2431",
+  "list1_pole": "x",
+  "confidence": "medium"
+ },
+ {
+  "id": "561",
+  "list1_pole": "unclear",
+  "confidence": "low"
+ },
+ {
+  "id": "1350",
+  "list1_pole": "x",
+  "confidence": "medium"
+ },
+ {
+  "id": "1401",
+  "list1_pole": "unclear",
+  "confidence": "low"
+ },
+ {
+  "id": "1838",
+  "list1_pole": "unclear",
+  "confidence": "low"
+ },
+ {
+  "id": "2076",
+  "list1_pole": "y",
+  "confidence": "medium"
+ },
+ {
+  "id": "1666",
+  "list1_pole": "x",
+  "confidence": "high"
+ },
+ {
+  "id": "380",
+  "list1_pole": "x",
+  "confidence": "medium"
+ },
+ {
+  "id": "1122",
+  "list1_pole": "x",
+  "confidence": "high"
+ },
+ {
+  "id": "250",
+  "list1_pole": "x",
+  "confidence": "low"
+ },
+ {
+  "id": "1798",
+  "list1_pole": "y",
+  "confidence": "medium"
+ },
+ {
+  "id": "1941",
+  "list1_pole": "y",
+  "confidence": "low"
+ },
+ {
+  "id": "426",
+  "list1_pole": "y",
+  "confidence": "medium"
+ },
+ {
+  "id": "1164",
+  "list1_pole": "y",
+  "confidence": "medium"
+ },
+ {
+  "id": "660",
+  "list1_pole": "y",
+  "confidence": "medium"
+ },
+ {
+  "id": "1519",
+  "list1_pole": "x",
+  "confidence": "low"
+ },
+ {
+  "id": "465",
+  "list1_pole": "x",
+  "confidence": "medium"
+ },
+ {
+  "id": "1228",
+  "list1_pole": "y",
+  "confidence": "medium"
+ },
+ {
+  "id": "882",
+  "list1_pole": "x",
+  "confidence": "high"
+ },
+ {
+  "id": "2008",
+  "list1_pole": "y",
+  "confidence": "low"
+ },
+ {
+  "id": "540",
+  "list1_pole": "x",
+  "confidence": "low"
+ },
+ {
+  "id": "1430",
+  "list1_pole": "y",
+  "confidence": "medium"
+ },
+ {
+  "id": "1322",
+  "list1_pole": "y",
+  "confidence": "low"
+ },
+ {
+  "id": "933",
+  "list1_pole": "unclear",
+  "confidence": "low"
+ },
+ {
+  "id": "1605",
+  "list1_pole": "x",
+  "confidence": "low"
+ },
+ {
+  "id": "1576",
+  "list1_pole": "y",
+  "confidence": "medium"
+ },
+ {
+  "id": "1113",
+  "list1_pole": "x",
+  "confidence": "medium"
+ },
+ {
+  "id": "1366",
+  "list1_pole": "y",
+  "confidence": "low"
+ },
+ {
+  "id": "1179",
+  "list1_pole": "x",
+  "confidence": "low"
+ },
+ {
+  "id": "1138",
+  "list1_pole": "x",
+  "confidence": "medium"
+ },
+ {
+  "id": "368",
+  "list1_pole": "x",
+  "confidence": "low"
+ },
+ {
+  "id": "609",
+  "list1_pole": "unclear",
+  "confidence": "low"
+ },
+ {
+  "id": "396",
+  "list1_pole": "y",
+  "confidence": "low"
+ },
+ {
+  "id": "2148",
+  "list1_pole": "y",
+  "confidence": "medium"
+ },
+ {
+  "id": "350",
+  "list1_pole": "x",
+  "confidence": "medium"
+ },
+ {
+  "id": "1663",
+  "list1_pole": "unclear",
+  "confidence": "low"
+ },
+ {
+  "id": "2150",
+  "list1_pole": "unclear",
+  "confidence": "low"
+ },
+ {
+  "id": "679",
+  "list1_pole": "x",
+  "confidence": "medium"
+ },
+ {
+  "id": "233",
+  "list1_pole": "x",
+  "confidence": "high"
+ },
+ {
+  "id": "927",
+  "list1_pole": "y",
+  "confidence": "medium"
+ },
+ {
+  "id": "349",
+  "list1_pole": "x",
+  "confidence": "high"
+ },
+ {
+  "id": "1864",
+  "list1_pole": "y",
+  "confidence": "low"
+ },
+ {
+  "id": "1687",
+  "list1_pole": "x",
+  "confidence": "medium"
+ },
+ {
+  "id": "1884",
+  "list1_pole": "y",
+  "confidence": "low"
+ },
+ {
+  "id": "1911",
+  "list1_pole": "x",
+  "confidence": "medium"
+ },
+ {
+  "id": "1231",
+  "list1_pole": "x",
+  "confidence": "low"
+ },
+ {
+  "id": "390",
+  "list1_pole": "x",
+  "confidence": "low"
+ },
+ {
+  "id": "900",
+  "list1_pole": "x",
+  "confidence": "medium"
+ },
+ {
+  "id": "1041",
+  "list1_pole": "y",
+  "confidence": "low"
+ },
+ {
+  "id": "1469",
+  "list1_pole": "y",
+  "confidence": "low"
+ },
+ {
+  "id": "1788",
+  "list1_pole": "x",
+  "confidence": "medium"
+ },
+ {
+  "id": "1764",
+  "list1_pole": "y",
+  "confidence": "low"
+ },
+ {
+  "id": "1347",
+  "list1_pole": "x",
+  "confidence": "low"
+ },
+ {
+  "id": "1085",
+  "list1_pole": "unclear",
+  "confidence": "low"
+ },
+ {
+  "id": "1823",
+  "list1_pole": "x",
+  "confidence": "medium"
+ },
+ {
+  "id": "436",
+  "list1_pole": "y",
+  "confidence": "low"
+ },
+ {
+  "id": "1668",
+  "list1_pole": "y",
+  "confidence": "medium"
+ },
+ {
+  "id": "1216",
+  "list1_pole": "unclear",
+  "confidence": "low"
+ },
+ {
+  "id": "2035",
+  "list1_pole": "unclear",
+  "confidence": "low"
+ },
+ {
+  "id": "2382",
+  "list1_pole": "x",
+  "confidence": "medium"
+ },
+ {
+  "id": "2456",
+  "list1_pole": "y",
+  "confidence": "medium"
+ },
+ {
+  "id": "1363",
+  "list1_pole": "x",
+  "confidence": "low"
+ },
+ {
+  "id": "687",
+  "list1_pole": "y",
+  "confidence": "low"
+ },
+ {
+  "id": "2153",
+  "list1_pole": "y",
+  "confidence": "medium"
+ },
+ {
+  "id": "1438",
+  "list1_pole": "unclear",
+  "confidence": "low"
+ },
+ {
+  "id": "1036",
+  "list1_pole": "x",
+  "confidence": "medium"
+ },
+ {
+  "id": "2070",
+  "list1_pole": "x",
+  "confidence": "low"
+ },
+ {
+  "id": "1261",
+  "list1_pole": "x",
+  "confidence": "low"
+ },
+ {
+  "id": "926",
+  "list1_pole": "x",
+  "confidence": "low"
+ },
+ {
+  "id": "149",
+  "list1_pole": "y",
+  "confidence": "high"
+ },
+ {
+  "id": "378",
+  "list1_pole": "unclear",
+  "confidence": "low"
+ },
+ {
+  "id": "1397",
+  "list1_pole": "unclear",
+  "confidence": "low"
+ },
+ {
+  "id": "745",
+  "list1_pole": "unclear",
+  "confidence": "low"
+ },
+ {
+  "id": "1977",
+  "list1_pole": "x",
+  "confidence": "low"
+ },
+ {
+  "id": "199",
+  "list1_pole": "x",
+  "confidence": "low"
+ },
+ {
+  "id": "265",
+  "list1_pole": "x",
+  "confidence": "low"
+ },
+ {
+  "id": "239",
+  "list1_pole": "x",
+  "confidence": "medium"
+ },
+ {
+  "id": "2176",
+  "list1_pole": "y",
+  "confidence": "medium"
+ },
+ {
+  "id": "1513",
+  "list1_pole": "x",
+  "confidence": "medium"
+ },
+ {
+  "id": "2341",
+  "list1_pole": "x",
+  "confidence": "high"
+ },
+ {
+  "id": "716",
+  "list1_pole": "y",
+  "confidence": "low"
+ },
+ {
+  "id": "393",
+  "list1_pole": "x",
+  "confidence": "medium"
+ },
+ {
+  "id": "1099",
+  "list1_pole": "x",
+  "confidence": "high"
+ },
+ {
+  "id": "1550",
+  "list1_pole": "y",
+  "confidence": "low"
+ },
+ {
+  "id": "2081",
+  "list1_pole": "y",
+  "confidence": "low"
+ },
+ {
+  "id": "1673",
+  "list1_pole": "x",
+  "confidence": "low"
+ },
+ {
+  "id": "1815",
+  "list1_pole": "unclear",
+  "confidence": "medium"
+ },
+ {
+  "id": "1803",
+  "list1_pole": "y",
+  "confidence": "medium"
+ },
+ {
+  "id": "739",
+  "list1_pole": "x",
+  "confidence": "medium"
+ },
+ {
+  "id": "339",
+  "list1_pole": "y",
+  "confidence": "low"
+ },
+ {
+  "id": "2383",
+  "list1_pole": "unclear",
+  "confidence": "low"
+ },
+ {
+  "id": "1248",
+  "list1_pole": "x",
+  "confidence": "medium"
+ },
+ {
+  "id": "1071",
+  "list1_pole": "x",
+  "confidence": "high"
+ },
+ {
+  "id": "190",
+  "list1_pole": "x",
+  "confidence": "low"
+ },
+ {
+  "id": "1716",
+  "list1_pole": "x",
+  "confidence": "low"
+ },
+ {
+  "id": "1634",
+  "list1_pole": "x",
+  "confidence": "low"
+ },
+ {
+  "id": "1963",
+  "list1_pole": "y",
+  "confidence": "medium"
+ },
+ {
+  "id": "1196",
+  "list1_pole": "unclear",
+  "confidence": "low"
+ },
+ {
+  "id": "348",
+  "list1_pole": "unclear",
+  "confidence": "low"
+ },
+ {
+  "id": "1225",
+  "list1_pole": "y",
+  "confidence": "medium"
+ },
+ {
+  "id": "2376",
+  "list1_pole": "x",
+  "confidence": "medium"
+ },
+ {
+  "id": "1870",
+  "list1_pole": "unclear",
+  "confidence": "low"
+ },
+ {
+  "id": "1897",
+  "list1_pole": "y",
+  "confidence": "medium"
+ },
+ {
+  "id": "731",
+  "list1_pole": "x",
+  "confidence": "low"
+ },
+ {
+  "id": "1110",
+  "list1_pole": "unclear",
+  "confidence": "low"
+ },
+ {
+  "id": "2450",
+  "list1_pole": "x",
+  "confidence": "low"
+ },
+ {
+  "id": "999",
+  "list1_pole": "x",
+  "confidence": "medium"
+ },
+ {
+  "id": "1742",
+  "list1_pole": "y",
+  "confidence": "medium"
+ },
+ {
+  "id": "522",
+  "list1_pole": "unclear",
+  "confidence": "low"
+ },
+ {
+  "id": "2018",
+  "list1_pole": "y",
+  "confidence": "medium"
+ },
+ {
+  "id": "1241",
+  "list1_pole": "y",
+  "confidence": "medium"
+ },
+ {
+  "id": "611",
+  "list1_pole": "x",
+  "confidence": "medium"
+ },
+ {
+  "id": "449",
+  "list1_pole": "x",
+  "confidence": "low"
+ },
+ {
+  "id": "2302",
+  "list1_pole": "x",
+  "confidence": "medium"
+ },
+ {
+  "id": "363",
+  "list1_pole": "y",
+  "confidence": "medium"
+ },
+ {
+  "id": "566",
+  "list1_pole": "y",
+  "confidence": "high"
+ },
+ {
+  "id": "1829",
+  "list1_pole": "unclear",
+  "confidence": "low"
+ },
+ {
+  "id": "437",
+  "list1_pole": "y",
+  "confidence": "low"
+ },
+ {
+  "id": "1191",
+  "list1_pole": "x",
+  "confidence": "low"
+ },
+ {
+  "id": "1240",
+  "list1_pole": "y",
+  "confidence": "low"
+ },
+ {
+  "id": "815",
+  "list1_pole": "unclear",
+  "confidence": "low"
+ },
+ {
+  "id": "1602",
+  "list1_pole": "y",
+  "confidence": "medium"
+ },
+ {
+  "id": "421",
+  "list1_pole": "x",
+  "confidence": "low"
+ },
+ {
+  "id": "1211",
+  "list1_pole": "x",
+  "confidence": "medium"
+ },
+ {
+  "id": "603",
+  "list1_pole": "y",
+  "confidence": "low"
+ },
+ {
+  "id": "2072",
+  "list1_pole": "unclear",
+  "confidence": "low"
+ },
+ {
+  "id": "1553",
+  "list1_pole": "y",
+  "confidence": "medium"
+ },
+ {
+  "id": "2064",
+  "list1_pole": "x",
+  "confidence": "high"
+ },
+ {
+  "id": "891",
+  "list1_pole": "y",
+  "confidence": "medium"
+ },
+ {
+  "id": "240",
+  "list1_pole": "y",
+  "confidence": "low"
+ },
+ {
+  "id": "599",
+  "list1_pole": "unclear",
+  "confidence": "medium"
+ },
+ {
+  "id": "96",
+  "list1_pole": "unclear",
+  "confidence": "low"
+ },
+ {
+  "id": "756",
+  "list1_pole": "y",
+  "confidence": "low"
+ },
+ {
+  "id": "725",
+  "list1_pole": "y",
+  "confidence": "medium"
+ },
+ {
+  "id": "2334",
+  "list1_pole": "y",
+  "confidence": "low"
+ },
+ {
+  "id": "2366",
+  "list1_pole": "y",
+  "confidence": "medium"
+ },
+ {
+  "id": "178",
+  "list1_pole": "y",
+  "confidence": "low"
+ },
+ {
+  "id": "1697",
+  "list1_pole": "y",
+  "confidence": "medium"
+ },
+ {
+  "id": "495",
+  "list1_pole": "unclear",
+  "confidence": "low"
+ },
+ {
+  "id": "908",
+  "list1_pole": "y",
+  "confidence": "medium"
+ },
+ {
+  "id": "1824",
+  "list1_pole": "y",
+  "confidence": "low"
+ },
+ {
+  "id": "550",
+  "list1_pole": "y",
+  "confidence": "low"
+ }
+]

@@ -95,6 +95,17 @@ Then, one level up -- the same question asked of the readings themselves:
                            Five sources, run separately. `--all`, `--shifts`.
     seam_test.py           is the procedure territory one relation or two?
                            `--per-scale` for which scales carry it.
+    dose_relations.py      the SECOND instrument the folder never had: what each
+                           meta-relation does to `charge`'s 1-7 completed-scene
+                           rating, using each model's OWN cell rather than the
+                           cross-lineage mean. Written 2026-09-12, after charge.py
+                           (29 Aug) post-dated the grouping work (21 Aug-2 Sep) --
+                           `charge` the module is imported nowhere else here.
+                           `--clusters` derives the meta-relations from the hub
+                           graph and prints the 12-vs-10 gap; `--landing` splits
+                           delta against the setup via `charge.lift_per_lineage`;
+                           `--example CID` shows one component's words and ratings.
+                           -> `results/dose_relations.csv`.
 
 ## Two standing cautions for anyone quoting from here
 

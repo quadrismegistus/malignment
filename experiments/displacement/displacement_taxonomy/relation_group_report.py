@@ -60,9 +60,39 @@ def load(seed=0):
     d = os.path.join(HERE, "results", "grouping_seed%d" % seed)
     vocab = json.load(open(os.path.join(d, "vocabulary.json"), encoding="utf-8"))
     got = []
-    for f in sorted(glob.glob(os.path.join(d, "assign_*.json"))):
-        j = json.load(open(f, encoding="utf-8"))
-        got.extend(j if isinstance(j, list) else j.get("assignments", j))
+    ax_files = sorted(glob.glob(os.path.join(d, "axis_*.json")))
+    if ax_files:
+        #: **THE TWO-STAGE LAYOUT, AND THE POLE COMES BACK BLINDED.** Run 2
+        #: splits the judgement: `axis_NN.json` places each relation from the
+        #: NAMED CONTRAST alone, `pole_NN.json` says which pole LIST 1 sits on
+        #: from the WORDS alone -- and which list was the base was drawn per
+        #: relation by `relation_group_input.flip`, so the pole reader could not
+        #: apply a prior about what alignment does. The direction is restored
+        #: here, by arithmetic, and nowhere else.
+        from relation_group_input import flip
+        #: **THE IDS COME BACK AS STRINGS FROM SOME SHARDS AND INTS FROM
+        #: OTHERS.** The schema says integer and the agents wrote what they
+        #: wrote; `flip` takes an int and raised on the first string it met.
+        #: Coerced at the boundary rather than trusted, because a join that
+        #: silently misses half its keys is the failure this file exists to
+        #: catch and it would have shown up as "missing 1,200".
+        poles = {}
+        for f in sorted(glob.glob(os.path.join(d, "pole_*.json"))):
+            for r in json.load(open(f, encoding="utf-8")):
+                poles[int(r["id"])] = r.get("list1_pole", "unclear")
+        for f in ax_files:
+            for r in json.load(open(f, encoding="utf-8")):
+                r = dict(r, id=int(r["id"]))
+                lp = poles.get(r["id"], "unclear")
+                #: base shown SECOND -> the pole LIST 1 sits on is the pole the
+                #: ALIGNED side sits on, so the base sits on the other one
+                bp = lp if not flip(r["id"], seed) else \
+                    {"x": "y", "y": "x"}.get(lp, "unclear")
+                got.append({"id": r["id"], "axis": r["axis"], "base_pole": bp})
+    else:
+        for f in sorted(glob.glob(os.path.join(d, "assign_*.json"))):
+            j = json.load(open(f, encoding="utf-8"))
+            got.extend(j if isinstance(j, list) else j.get("assignments", j))
     #: **VALIDATE AGAINST THE SOURCE, NOT AGAINST THE AGENTS' OWN REPORTS.**
     #: Every assign agent returned a note saying it had checked its own shard
     #: for missing ids, extras and duplicates. Sixteen self-reports of a clean
@@ -77,6 +107,51 @@ def load(seed=0):
         "bad_pole": sorted({a["base_pole"] for a in got} - {"x", "y", "unclear"}),
     }
     return rel, vocab, got, bad
+
+
+def _norm(s):
+    """Fold a proposal name to something two writers of it will agree on.
+
+    **THREE TIMES NOW A MATCHER ARTEFACT HAS PRODUCED WRONG SUPPORT COUNTS.**
+    Whole-string equality missed `Name: pole / pole` cited as `Name`; the fix
+    for that missed `vs.` cited as `vs`; and both times the wrong numbers were
+    quoted before anyone noticed, once into a collaborator's citation decision.
+    The lesson is not "add another case" -- it is that this comparison belongs
+    in the producer with a stated normalisation, not in an ad-hoc script per
+    question. Lowercase, drop the pole suffix after a colon, strip punctuation,
+    collapse whitespace.
+    """
+    s = s.strip().lower().split(":")[0]
+    s = re.sub(r"[.,;/()\-]", " ", s)
+    return re.sub(r"\s+", " ", s).strip()
+
+
+def support(seed, proposals):
+    """axis id -> how many propose shards independently named it.
+
+    `proposals` is {shard: [name]} from the run's journal. Each shard is a
+    random 1/16 of the corpus, so an axis present throughout should be named by
+    nearly all sixteen; this is the only replication a single run affords.
+    """
+    d = os.path.join(HERE, "results", "grouping_seed%d" % seed)
+    vocab = json.load(open(os.path.join(d, "vocabulary.json"), encoding="utf-8"))
+    idx = {k: {_norm(x) for x in v} for k, v in proposals.items()}
+    out, unresolved = {}, []
+    for ax in vocab["axes"]:
+        sh = set()
+        for m in ax.get("merged_from", []):
+            head, _, name = m.partition(":")
+            head = head.strip()
+            if not (head[:1] == "s" and head[1:].isdigit()):
+                unresolved.append((ax["id"], m))
+                continue
+            k = int(head[1:])
+            if k in idx and _norm(name) in idx[k]:
+                sh.add(k)
+            else:
+                unresolved.append((ax["id"], m))
+        out[ax["id"]] = len(sh)
+    return out, unresolved
 
 
 def binom_p(k, n):
