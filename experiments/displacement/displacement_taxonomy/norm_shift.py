@@ -231,9 +231,12 @@ def rows(path, weight=False, min_coverage=0.0, want_ctx=False):
             continue
         cb, ca, ccov = charge_sides(rec["frame"], base, aligned, wts)
         ctx = ctx_sides(rec["frame"], base, aligned, wts) if want_ctx else {}
-        out.append({"ctx": ctx, "charge_base": cb, "charge_aligned": ca, "charge_cov": ccov,
+        out.append({"ctx": ctx, "base_words": base, "aligned_words": aligned,
+                    "charge_base": cb, "charge_aligned": ca, "charge_cov": ccov,
                     "frame": rec["frame"], "name": rec["name"],
                     "confidence": rec["confidence"],
+                    "explanation": rec["explanation"],
+                    "n_covered": rec["n_covered"], "n_shown": rec["n_shown"],
                     "n_base": len(base), "n_aligned": len(aligned),
                     "coverage": rec["n_covered"] / max(1, rec["n_shown"]),
                     "base": nb, "aligned": na})
