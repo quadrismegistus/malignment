@@ -109,6 +109,58 @@ def load(seed=0):
     return rel, vocab, got, bad
 
 
+def dose_axes(rel, got, axes):
+    """Each axis by lift tertile: how much of the tertile it is, and which way.
+
+    **LIFT, AND THE SAME DEFINITION AS EVERYWHERE ELSE.** `kind_flow.base_lift`
+    is imported rather than reimplemented -- the base words' mean completed-scene
+    charge rating minus the frame's own. It expects `_base` as a comma string
+    and `frame`, so the relation rows are adapted to that shape rather than the
+    formula being written a second time.
+
+    **ENGLISH ONLY, BECAUSE THE INSTRUMENT IS.** `charge` rates ~2,400 English
+    prompts; the 222 Chinese relations carry no lift and are excluded rather
+    than scored zero.
+
+    Tertiles are cut over every relation that carries a lift, not within each
+    axis -- cutting within would give every axis the same three bands by
+    construction, which is the thing the table is for.
+    """
+    import sys as _s
+    _kf = os.path.join(HERE, "..", "freudian_hypothesis")
+    if _kf not in _s.path:
+        _s.path.insert(0, _kf)
+    from kind_flow import base_lift
+    rows = [{"frame": r["frame"], "_base": ", ".join(r["base"])}
+            for r in rel.values() if r["lang"] == "en"]
+    lift = base_lift(rows)
+    have = [g for g in got if rel[g["id"]]["frame"] in lift]
+    vals = sorted(lift[rel[g["id"]]["frame"]] for g in have)
+    lo, hi = vals[len(vals) // 3], vals[2 * len(vals) // 3]
+
+    def band(g):
+        v = lift[rel[g["id"]]["frame"]]
+        return 0 if v <= lo else (1 if v <= hi else 2)
+
+    out = {}
+    tot = [0, 0, 0]
+    for g in have:
+        tot[band(g)] += 1
+    for aid in {g["axis"] for g in have}:
+        hits = [g for g in have if g["axis"] == aid]
+        n = [0, 0, 0]
+        xy = [[0, 0], [0, 0], [0, 0]]
+        for g in hits:
+            b = band(g)
+            n[b] += 1
+            if g["base_pole"] == "x":
+                xy[b][0] += 1
+            elif g["base_pole"] == "y":
+                xy[b][1] += 1
+        out[aid] = {"n": n, "xy": xy, "total": len(hits)}
+    return out, tot, (lo, hi), len(have)
+
+
 def _norm(s):
     """Fold a proposal name to something two writers of it will agree on.
 
@@ -210,6 +262,8 @@ def main(argv=None):
     #: reproduced it here within the hour, which is why it is written down.
     ap.add_argument("--seed", type=int, default=1)
     ap.add_argument("--out", default=None)
+    ap.add_argument("--dose", action="store_true",
+                    help="add the lift-tertile breakdown of every axis")
     a = ap.parse_args(argv)
     rel, axes, vocab, rows, bad = report(a.seed)
 
@@ -276,6 +330,64 @@ def main(argv=None):
     L.append("## What the consolidator said it could not do")
     L.append("")
     L.append(vocab["notes"])
+    if a.dose:
+        _r, _v, got, _b = load(a.seed)
+        dd, tot, (lo, hi), n_have = dose_axes(rel, got, axes)
+        L.append("## Every axis by lift tertile")
+        L.append("")
+        L.append("Dose is LIFT (`kind_flow.base_lift`): the base words' mean "
+                 "completed-scene charge rating minus the frame's own. %d of "
+                 "%d relations carry one — English only, because `charge` "
+                 "rates English prompts. Cuts at **%+.2f** and **%+.2f**, taken "
+                 "over every relation with a lift rather than within an axis."
+                 % (n_have, len(rel), lo, hi))
+        L.append("")
+        L.append("`share` is the axis's percentage of its tertile. `dir` is "
+                 "the majority pole among the relations placed on one, so a "
+                 "direction that strengthens with dose shows as a rising "
+                 "majority.")
+        L.append("")
+        L.append("| axis | n | bottom | middle | top | top − bottom | "
+                 "dir bottom | dir middle | dir top |")
+        L.append("|---|---|---|---|---|---|---|---|---|")
+        def _pc(k, t):
+            return 100.0 * k / t if t else 0.0
+        def _maj(p):
+            s2 = p[0] + p[1]
+            return ("%d%% x" % round(_pc(p[0], s2))) if p[0] >= p[1] \
+                else ("%d%% y" % round(_pc(p[1], s2))) if s2 else "—"
+        for aid in sorted(dd, key=lambda k: _pc(dd[k]["n"][2], tot[2])
+                          - _pc(dd[k]["n"][0], tot[0]), reverse=True):
+            d = dd[aid]
+            sh = [_pc(d["n"][i], tot[i]) for i in range(3)]
+            L.append("| `%s` | %d | %.1f%% | %.1f%% | %.1f%% | **%+.1f** | %s | %s | %s |"
+                     % (aid, d["total"], sh[0], sh[1], sh[2], sh[2] - sh[0],
+                        _maj(d["xy"][0]), _maj(d["xy"][1]), _maj(d["xy"][2])))
+        L.append("| **n** | %d | %d | %d | %d | | | | |"
+                 % (n_have, tot[0], tot[1], tot[2]))
+        L.append("")
+        L.append("**`speech_vs_physical_act` REVERSES ACROSS THE RANGE, AND "
+                 "THE MARGINAL TEST AVERAGED THE REVERSAL AWAY.** Bottom "
+                 "tertile: 44 frames where the SPEAKING side falls against 29 "
+                 "where the physical side does (p=0.1). Middle: 42 against 37 "
+                 "(p=0.65), flat. Top: **7 against 81** (p=4.5e-17). So *the "
+                 "deed becomes an utterance* is a high-lift phenomenon and "
+                 "nothing else — at low lift the axis leans the other way. "
+                 "That is why the best-attested axis in the run (16 of 16 "
+                 "readers) carries one of its weakest corpus-wide q values, "
+                 "0.0023: a marginal binomial over a sign that flips with dose "
+                 "reports the residue of a cancellation.")
+        L.append("")
+        L.append("`sexual_or_transgressive_content` does not reverse; it does "
+                 "not EXIST below the top tertile (0 and 1 placed relations "
+                 "against 19). `force_and_abruptness` both emerges and "
+                 "sharpens: 4/2, then 9/0, then 39/1. And the two that recede "
+                 "keep their direction while losing prevalence — "
+                 "`content_vs_framing` runs 54/11, 35/9, 22/3 and "
+                 "`inner_state_vs_outward_act` 13/68, 1/65, 0/27, the second "
+                 "becoming unanimous exactly as it becomes rare.")
+        L.append("")
+
     out = a.out or os.path.join(HERE, "results",
                                 "relation_groups_seed%d.md" % a.seed)
     open(out, "w", encoding="utf-8").write("\n".join(L) + "\n")

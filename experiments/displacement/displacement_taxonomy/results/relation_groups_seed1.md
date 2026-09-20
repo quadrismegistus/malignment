@@ -441,3 +441,56 @@ Could not merge cleanly (2 proposals, left out): s1 "additive vs restrictive con
 Weakest axis in the set: `co_member_of_same_field`. Its poles are not nameable in the way the instruction asks — it is the residual category for contrasts that are lexical-field swaps with no general dimension. Keep it as a catch-all or drop it and let those readings fall to `specificity_vs_generality`.
 
 Possibly missing: nothing in the sixteen proposals distinguishes readings by the *frame* being completed (narrative continuation vs. dialogue vs. list), which several readers gesture at from different directions (s15 "managing the discourse", s3 "grammatical form of the filler", s10 "word class or syntactic frame"); if the corpus has that structure it is currently spread across three axes. Also absent: any axis about animacy of the *subject* rather than the object, and any axis about tense/temporal location of the whole clause as opposed to a modifier within it.
+## Every axis by lift tertile
+
+Dose is LIFT (`kind_flow.base_lift`): the base words' mean completed-scene charge rating minus the frame's own. 2225 of 2466 relations carry one — English only, because `charge` rates English prompts. Cuts at **+0.02** and **+0.34**, taken over every relation with a lift rather than within an axis.
+
+`share` is the axis's percentage of its tertile. `dir` is the majority pole among the relations placed on one, so a direction that strengthens with dose shows as a rising majority.
+
+| axis | n | bottom | middle | top | top − bottom | dir bottom | dir middle | dir top |
+|---|---|---|---|---|---|---|---|---|
+| `force_and_abruptness` | 65 | 1.3% | 1.8% | 5.7% | **+4.3** | 67% x | 100% x | 98% x |
+| `orientation_toward_other_party` | 93 | 2.0% | 4.6% | 5.9% | **+3.9** | 62% y | 74% y | 65% x |
+| `sexual_or_transgressive_content` | 22 | 0.0% | 0.1% | 2.8% | **+2.8** | 0% x | 100% x | 100% x |
+| `target_person_vs_thing` | 53 | 1.1% | 2.4% | 3.6% | **+2.6** | 86% x | 67% x | 67% x |
+| `body_referent` | 26 | 0.4% | 0.7% | 2.4% | **+2.0** | 100% y | 67% x | 92% x |
+| `speech_vs_physical_act` | 290 | 12.1% | 13.0% | 14.0% | **+1.9** | 60% x | 53% x | 92% y |
+| `engagement_vs_withdrawal` | 45 | 1.3% | 1.9% | 2.8% | **+1.5** | 78% x | 73% y | 56% y |
+| `handling_vs_no_contact` | 37 | 1.1% | 1.4% | 2.6% | **+1.5** | 62% y | 57% x | 71% x |
+| `concrete_vs_abstract` | 26 | 0.7% | 0.7% | 2.2% | **+1.5** | 100% x | 100% x | 77% x |
+| `act_vs_state` | 86 | 3.6% | 3.6% | 4.3% | **+0.7** | 71% x | 63% x | 64% x |
+| `co_member_of_same_field` | 40 | 2.2% | 0.5% | 2.7% | **+0.5** | 100% y | 0% x | 50% x |
+| `kind_of_inner_state` | 31 | 0.8% | 2.0% | 1.3% | **+0.5** | 75% y | 100% y | 100% y |
+| `evaluative_polarity` | 5 | 0.0% | 0.1% | 0.5% | **+0.5** | 0% x | 100% y | 100% x |
+| `means_vs_end` | 9 | 0.4% | 0.0% | 0.8% | **+0.4** | 67% x | 0% x | 67% x |
+| `bluntness_vs_euphemism` | 3 | 0.0% | 0.0% | 0.4% | **+0.4** | 0% x | 0% x | 100% x |
+| `compliance_vs_resistance` | 12 | 0.3% | 0.8% | 0.5% | **+0.3** | 100% y | 60% y | 50% x |
+| `volition_and_agency` | 39 | 1.6% | 1.9% | 1.8% | **+0.1** | 56% x | 82% x | 50% x |
+| `institutional_vs_personal` | 31 | 1.1% | 1.9% | 1.2% | **+0.1** | 88% y | 92% y | 89% y |
+| `spatial_configuration` | 14 | 0.5% | 0.7% | 0.7% | **+0.1** | 100% y | 80% x | 67% x |
+| `creation_vs_destruction` | 10 | 0.4% | 0.4% | 0.5% | **+0.1** | 100% y | 100% y | 100% y |
+| `motion_geometry` | 3 | 0.1% | 0.0% | 0.3% | **+0.1** | 100% y | 0% x | 100% y |
+| `act_vs_outcome` | 97 | 4.7% | 3.6% | 4.7% | **+0.0** | 81% x | 87% x | 81% x |
+| `other` | 46 | 2.2% | 1.9% | 2.2% | **+0.0** | 0% x | 0% x | 0% x |
+| `argument_structure` | 99 | 4.4% | 4.6% | 4.3% | **-0.1** | 61% y | 53% y | 72% y |
+| `specificity_vs_generality` | 40 | 2.2% | 1.2% | 2.0% | **-0.1** | 64% y | 67% y | 55% x |
+| `transfer_vs_own_handling` | 27 | 1.1% | 1.8% | 0.8% | **-0.3** | 67% y | 50% x | 67% y |
+| `modifier_time_or_degree` | 10 | 0.5% | 0.5% | 0.3% | **-0.3** | 100% x | 75% y | 100% x |
+| `illocutionary_type` | 10 | 0.4% | 0.8% | 0.1% | **-0.3** | 100% y | 80% y | 0% x |
+| `manner_vs_act` | 75 | 3.9% | 3.0% | 3.2% | **-0.7** | 91% y | 95% y | 77% y |
+| `constitution_vs_construal` | 7 | 0.7% | 0.3% | 0.0% | **-0.7** | 100% x | 100% y | 0% x |
+| `realis_vs_irrealis` | 17 | 0.9% | 1.2% | 0.1% | **-0.8** | 100% x | 100% x | 100% x |
+| `locomotion_vs_object_act` | 48 | 1.7% | 3.9% | 0.8% | **-0.9** | 78% y | 50% x | 83% y |
+| `ritual_vs_ordinary` | 16 | 1.1% | 1.1% | 0.0% | **-1.1** | 100% y | 88% y | 0% x |
+| `word_class_or_form` | 22 | 1.6% | 0.9% | 0.4% | **-1.2** | 60% y | 100% y | 50% x |
+| `act_vs_entity` | 28 | 1.6% | 1.9% | 0.3% | **-1.3** | 73% y | 50% x | 100% x |
+| `deliberation_vs_decisive_act` | 62 | 3.6% | 3.2% | 1.5% | **-2.1** | 56% y | 73% y | 82% y |
+| `same_event_vs_new_event` | 331 | 16.1% | 14.9% | 13.6% | **-2.5** | 68% y | 64% y | 64% y |
+| `inner_state_vs_outward_act` | 188 | 11.3% | 9.5% | 4.6% | **-6.7** | 84% y | 98% y | 100% y |
+| `content_vs_framing` | 162 | 10.9% | 7.2% | 3.8% | **-7.1** | 83% x | 80% x | 88% x |
+| **n** | 2225 | 744 | 740 | 741 | | | | |
+
+**`speech_vs_physical_act` REVERSES ACROSS THE RANGE, AND THE MARGINAL TEST AVERAGED THE REVERSAL AWAY.** Bottom tertile: 44 frames where the SPEAKING side falls against 29 where the physical side does (p=0.1). Middle: 42 against 37 (p=0.65), flat. Top: **7 against 81** (p=4.5e-17). So *the deed becomes an utterance* is a high-lift phenomenon and nothing else — at low lift the axis leans the other way. That is why the best-attested axis in the run (16 of 16 readers) carries one of its weakest corpus-wide q values, 0.0023: a marginal binomial over a sign that flips with dose reports the residue of a cancellation.
+
+`sexual_or_transgressive_content` does not reverse; it does not EXIST below the top tertile (0 and 1 placed relations against 19). `force_and_abruptness` both emerges and sharpens: 4/2, then 9/0, then 39/1. And the two that recede keep their direction while losing prevalence — `content_vs_framing` runs 54/11, 35/9, 22/3 and `inner_state_vs_outward_act` 13/68, 1/65, 0/27, the second becoming unanimous exactly as it becomes rare.
+
