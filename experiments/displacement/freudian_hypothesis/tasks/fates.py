@@ -644,6 +644,76 @@ def confirm(rows, quiet=False):
     return out
 
 
+def render_md(rows, conf, path, also=None):
+    """A coded run as readable markdown. -> writes path (and `also`)
+
+    Written by the producer, and both copies in one call, so a repo file and a
+    Dropbox file cannot drift into being different documents under one name.
+    """
+    L = ["# Fates coding — %d frames" % len(rows), "",
+         "Each frame coded on Freud's three fates (1915, \"Repression\"): what "
+         "becomes of the ACT, the QUOTA OF AFFECT, and the OBJECT. The coder is "
+         "shown two word groups and never told which is which; **GROUP A is the "
+         "base side and GROUP B the aligned side throughout**, and the "
+         "orientation below is applied after the call.",
+         "",
+         "Model: `%s` as served 2026-09-20 — the id the draft pinned "
+         "(`deepseek-v4-flash`) no longer resolves. NOT the coder that produced "
+         "the charge ratings or the relations." % MODEL,
+         "",
+         "`act` / `channel` / `affect` / `object` are `orient()`'s directional "
+         "codes; `relation` is what the earlier blind reader called the same "
+         "frame, for comparison only — the fates coder never saw it.",
+         "", "---", ""]
+    for r in rows:
+        o = r["orient"]
+        L.append("## %s ___" % r["frame"].rstrip())
+        L.append("")
+        L.append("| | words |")
+        L.append("|---|---|")
+        L.append("| **base** (GROUP A) | %s |" % ", ".join(r["raw"].get("_a", [])) if False
+                 else "| **base** (GROUP A) | %s |" % r.get("_base", ""))
+        L.append("| **aligned** (GROUP B) | %s |" % r.get("_aligned", ""))
+        L.append("")
+        L.append("| act | channel | affect | object | confidence |")
+        L.append("|---|---|---|---|---|")
+        L.append("| %s | `%s` | %s | %s | %s |"
+                 % (o["act"], o["channel"], o["affect"], o["object"], o["confidence"]))
+        L.append("")
+        L.append("> %s" % r["raw"]["why"].replace(chr(10), " "))
+        L.append("")
+        L.append("*Earlier blind reader called this:* %s" % r["relation"])
+        if r.get("defects"):
+            L.append("")
+            L.append("**format defects:** %s" % r["defects"])
+        L.append("")
+        L.append("---")
+        L.append("")
+    L.append("## Norm confirmation")
+    L.append("")
+    L.append("Predictions fixed by the code, not read off the result: "
+             "vocalisation should RISE where the channel ends `VOCAL_ACT`, "
+             "procedural where it ends `PROCEDURE`, harm should FALL where the "
+             "act is gone, and everything should be FLAT where the object is "
+             "`ADJACENT` — that last is the informative one.")
+    L.append("")
+    L.append("| coded pattern | scale | n | delta | others | verdict |")
+    L.append("|---|---|---|---|---|---|")
+    for c in conf:
+        if c.get("verdict") == "too few":
+            L.append("| %s | `%s` | %d | — | — | too few |"
+                     % (c["label"], c["scale"], c["n"]))
+        else:
+            L.append("| %s | `%s` | %d | %+.3f | %+.3f | %s |"
+                     % (c["label"], c["scale"], c["n"], c["mean"],
+                        c["mean_other"], c["verdict"]))
+    md = chr(10).join(L)
+    for q in [path] + ([also] if also else []):
+        os.makedirs(os.path.dirname(q), exist_ok=True)
+        open(q, "w", encoding="utf-8").write(md)
+        print("wrote %s" % q)
+
+
 def _main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -656,10 +726,15 @@ def _main(argv=None):
     ap.add_argument("--model", default=MODEL)
     ap.add_argument("--out", default=None)
     ap.add_argument("--confirm", default=None, metavar="JSONL")
+    ap.add_argument("--md", default=None, help="render a coded run as markdown")
+    ap.add_argument("--also", default=None, help="second copy of the markdown")
     a = ap.parse_args(argv)
 
     if a.confirm:
-        confirm([json.loads(l) for l in open(a.confirm, encoding="utf-8")])
+        rows = [json.loads(l) for l in open(a.confirm, encoding="utf-8")]
+        res = confirm(rows)
+        if a.md:
+            render_md(rows, res, a.md, also=a.also)
         return 0
 
     recs = population(frame=a.frame)
@@ -709,6 +784,8 @@ def _main(argv=None):
                      "a_is_base": r["a_is_base"],
                      "swapped_for_fixed_order": r.get("swapped_for_fixed_order", False),
                      "orient": o,
+                     "_base": ", ".join(r["words_a"]),
+                     "_aligned": ", ".join(r["words_b"]),
                      "raw": res.model_dump(), "defects": why})
     print("=" * 72)
     print("%d of %d clean" % (len(recs) - nbad, len(recs)))
