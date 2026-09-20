@@ -80,20 +80,28 @@ def section(r, other_name=None):
     L.append("| **base** | %s |" % ", ".join(r["base_words"]))
     L.append("| **aligned** | %s |" % ", ".join(r["aligned_words"]))
     L.append("")
-    L.append("| scale | base | aligned | delta |")
-    L.append("|---|---|---|---|")
+    #: **SORTED BY RAW DELTA, ASCENDING -- SO THE SCALES ARE NOT COMMENSURABLE
+    #: DOWN THE COLUMN.** Warriner runs 1-9, Brysbaert 1-5, the k_ and slot
+    #: scales 1-7, so a -0.50 is a larger move on concreteness than on valence
+    #: and the ordering does not know that. It ranks what LEAVES the base side
+    #: hardest within this frame, which is what the ordering is for; it is not
+    #: a ranking of effect size across scales.
+    rowsout = []
     if r["charge_base"] is not None:
-        L.append("| **charge, in frame** (`task_charge`) | %s | %s | %+.2f |"
-                 % (fmt(r["charge_base"]), fmt(r["charge_aligned"]),
-                    r["charge_aligned"] - r["charge_base"]))
+        rowsout.append((r["charge_aligned"] - r["charge_base"],
+                        "**charge, in frame** (`task_charge`)",
+                        r["charge_base"], r["charge_aligned"]))
     for k, lab in LEX:
         if k in r["base"] and k in r["aligned"]:
-            L.append("| %s | %s | %s | %+.2f |"
-                     % (lab, fmt(r["base"][k]), fmt(r["aligned"][k]),
-                        r["aligned"][k] - r["base"][k]))
+            rowsout.append((r["aligned"][k] - r["base"][k], lab,
+                            r["base"][k], r["aligned"][k]))
     for k in sorted(r.get("ctx", {})):
         b, a, _c = r["ctx"][k]
-        L.append("| `%s` | %s | %s | %+.2f |" % (k, fmt(b), fmt(a), a - b))
+        rowsout.append((a - b, "`%s`" % k, b, a))
+    L.append("| scale | base | aligned | delta |")
+    L.append("|---|---|---|---|")
+    for d, lab, b, a in sorted(rowsout, key=lambda x: (x[0], x[1])):
+        L.append("| %s | %s | %s | %+.2f |" % (lab, fmt(b), fmt(a), d))
     L.append("")
     L.append("> %s" % r["explanation"].replace("\n", " "))
     return "\n".join(L)
@@ -123,10 +131,16 @@ def build():
          "— not what alignment does to a whole arm. `covers N of M` is how much of "
          "the frame each relation reached.",
          "",
-         "Rows are: `task_charge` (a rating of the completed scene, in this frame), "
-         "then the type-level lexicons, then the contextual slot-rating batteries "
+         "Rows are `task_charge` (a rating of the completed scene, in this frame), "
+         "the type-level lexicons, and the contextual slot-rating batteries "
          "(`v6`, `slot_institutional_en_v3`, `sexual_v2`) whose raters also saw the "
          "frame. A scale is absent where neither side had a rated word.",
+         "",
+         "**Each table is sorted by delta, ascending** — what the base side holds "
+         "most and the aligned side least is at the top. The scales are not "
+         "commensurable down that column: Warriner runs 1–9, Brysbaert 1–5, the "
+         "`k_` and slot scales 1–7, so the ordering ranks what moves hardest "
+         "*within this frame*, not effect size across scales.",
          "",
          "---", ""]
     shown, missing = 0, []
