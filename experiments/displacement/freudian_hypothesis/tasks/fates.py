@@ -776,7 +776,7 @@ def patterns(rows):
     return out
 
 
-def dose_table(rows, bins=3, quiet=False):
+def dose_table(rows, bins=3, quiet=False, metric="frame"):
     """The fates against the FRAME'S OWN charge, `charge.dose`. -> dict
 
     **DOSE IS A PROPERTY OF THE PROMPT, NOT OF THE MOVEMENT.** `charge.dose` is
@@ -795,15 +795,42 @@ def dose_table(rows, bins=3, quiet=False):
     """
     import statistics
     from malignment import charge
-    #: `charge.dose` RETURNS None for an unrated frame rather than raising, so a
-    #: try/except does not filter it and the None reaches the sort. Absence is a
-    #: value here, not an exception.
+    #: **TWO DOSES, AND THEY ARE NOT THE SAME QUANTITY.**
+    #:
+    #:   `frame`      `charge.dose` -- the mean scene rating over the prompt's
+    #:                candidate words, UNWEIGHTED. How charged the vocabulary on
+    #:                offer is, irrespective of whether the model would say any
+    #:                of it.
+    #:   `base_mass`  the mean of `T_base` over the lineages -- `charge.T`, the
+    #:                rating weighted by the BASE ARM'S OWN PROBABILITY MASS. How
+    #:                much charge the base model actually puts in the slot.
+    #:
+    #: The second is the one that asks whether alignment acts where there is
+    #: something to remove. A frame can offer `kill` and `murder` as candidates
+    #: and have the base model spend almost no mass on them; unweighted dose
+    #: counts that frame as charged and mass-weighted dose does not.
+    #:
+    #: Both are fixed before alignment: `T_base` is the base arm, which is the
+    #: pre-alignment side. `T_aligned` is NOT used here and must not be -- it is
+    #: the thing the fates are describing.
     ds = {}
     for r in rows:
+        d = None
         try:
-            d = charge.dose(r["frame"])
+            if metric == "base_mass":
+                vals = []
+                for b in charge.lineages():
+                    tb, _ta = charge.arms(r["frame"], b)
+                    if isinstance(tb, (int, float)):
+                        vals.append(float(tb))
+                d = sum(vals) / len(vals) if vals else None
+            else:
+                d = charge.dose(r["frame"])
         except Exception:
             d = None
+        #: `charge.dose` RETURNS None for an unrated frame rather than raising,
+        #: so a try/except does not filter it and the None reaches the sort.
+        #: Absence is a value there, not an exception.
         if isinstance(d, (int, float)):
             ds[r["frame"]] = float(d)
     have = [r for r in rows if r["frame"] in ds]
@@ -822,8 +849,10 @@ def dose_table(rows, bins=3, quiet=False):
     pats = {lab: set(f) for lab, _n, _e, f in patterns(have)}
     out = {}
     if not quiet:
-        print("\nFATES BY FRAME DOSE (charge.dose -- the SETUP alone, rated "
-              "before any completion)")
+        print("\nFATES BY %s" % (
+            "BASE CHARGE MASS (mean T_base over the 50 lineages -- the rating "
+            "weighted by the base arm's own mass)" if metric == "base_mass"
+            else "FRAME DOSE (charge.dose -- the candidate vocabulary, unweighted)"))
         print("  %d of %d frames carry a dose; tertiles at <=%.2f, <=%.2f, <=%.2f"
               % (len(have), len(rows), *cuts[:3]))
         print()
@@ -875,8 +904,11 @@ def _main(argv=None):
     ap.add_argument("--out", default=None)
     ap.add_argument("--confirm", default=None, metavar="JSONL")
     ap.add_argument("--md", default=None, help="render a coded run as markdown")
-    ap.add_argument("--dose", action="store_true",
-                    help="cross the fates with the frame's own charge.dose")
+    ap.add_argument("--dose", nargs="?", const="frame", default=None,
+                    choices=("frame", "base_mass"),
+                    help="cross the fates with charge: `frame` is the unweighted "
+                         "candidate rating, `base_mass` the base arm's own "
+                         "mass-weighted charge")
     ap.add_argument("--also", default=None, help="second copy of the markdown")
     #: **THE FULL RUN SHOULD FLIP (paper-claude, 2026-09-20).** A fixed A=base
     #: order removes a trap in the tooling and costs the design its blindness:
@@ -894,7 +926,7 @@ def _main(argv=None):
         rows = [json.loads(l) for l in open(a.confirm, encoding="utf-8")]
         res = confirm(rows)
         if a.dose:
-            dose_table(rows)
+            dose_table(rows, metric=a.dose)
         if a.md:
             render_md(rows, res, a.md, also=a.also)
         return 0
