@@ -266,7 +266,10 @@ def main(argv=None):
     if a.csv:
         import csv
         with open(a.csv, "w", newline="", encoding="utf-8") as fh:
-            cols = ["frame", "name", "confidence", "coverage", "n_base", "n_aligned"]
+            #: charge is written too: it is the largest effect in the table
+            #: and a results file that omits it is not the result.
+            cols = ["frame", "name", "confidence", "coverage", "n_base",
+                    "n_aligned", "charge_base", "charge_aligned", "charge_cov"]
             w = csv.writer(fh)
             w.writerow(cols + ["base_" + s for s in SCALES]
                        + ["aligned_" + s for s in SCALES])
