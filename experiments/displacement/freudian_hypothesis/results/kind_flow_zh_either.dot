@@ -21,9 +21,7 @@ digraph kindflow {
   "B_THING" -> "A_THING" [label="mouth → room" arrowhead=none color="#737373" penwidth=1.09];
   "B_MENTAL_STATE" -> "A_MENTAL_STATE" [label="obliged → uneasy" arrowhead=none color="#737373" penwidth=0.85];
   "B_PHYSICAL_ACT" -> "A_PHYSICAL_ACT" [label="stabbed → pointed" arrowhead=none color="#737373" penwidth=0.79];
-  "A_THING" -> "F_KEPT" [label="头 → 球" color="#737373" fontcolor="#737373" penwidth=0.93 arrowsize=0.4 arrowhead=onormal];
-  "A_MENTAL_STATE" -> "F_KEPT" [label="死 → 去世" color="#737373" fontcolor="#737373" penwidth=0.74 arrowsize=0.4 arrowhead=onormal];
-  "A_PHYSICAL_ACT" -> "F_RECOLORED" [label="杀 → 摆脱" color="#737373" fontcolor="#737373" penwidth=0.67 arrowsize=0.4 arrowhead=onormal];
-  labelloc="b"; labeljust="l";
-  label=<<font point-size="7.65">145 frames; 77 dropped where the two label orders disagreed; edges significant on EITHER test:<br align="left"/>over-represented against a marginal-preserving shuffle (solid head) or one-way against its own<br align="left"/>transpose (open head); same-kind edges headless and testable only by the shuffle. `mixed` is<br align="left"/>the coder's ABSTENTION -- no one kind covers two thirds of that group's words -- not a kind;<br align="left"/>FUNCTION omitted; every arrow is labelled with one word pair from a frame that took it and<br align="left"/>every count is on a node. Column three is the 24 frames the coder found a feeling in: 11 more<br align="left"/>had none on either side and are not drawn. Onward arrows are each edge's largest fate plus any<br align="left"/>over-represented one, 7 frames in smaller flows omitted<br align="left"/></font>>;
+  "A_THING" -> "F_KEPT" [label="头 → 球" color="#737373" fontcolor="#595959" penwidth=0.93 arrowsize=0.4 arrowhead=onormal];
+  "A_MENTAL_STATE" -> "F_KEPT" [label="死 → 去世" color="#737373" fontcolor="#595959" penwidth=0.74 arrowsize=0.4 arrowhead=onormal];
+  "A_PHYSICAL_ACT" -> "F_RECOLORED" [label="杀 → 摆脱" color="#737373" fontcolor="#595959" penwidth=0.67 arrowsize=0.4 arrowhead=onormal];
 }

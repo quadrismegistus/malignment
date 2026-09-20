@@ -37,16 +37,14 @@ digraph kindflow {
   "B_MENTAL_STATE" -> "A_MENTAL_STATE" [label="obliged → uneasy" arrowhead=none color="#737373" penwidth=0.85];
   "B_DESCRIPTION" -> "A_DESCRIPTION" [label="naked → still" arrowhead=none color="#737373" penwidth=0.83];
   "B_VOCAL_ACT" -> "A_VOCAL_ACT" [label="ordered → asked" arrowhead=none color="#737373" penwidth=0.83];
-  "A_MIXED" -> "F_KEPT" [label="getting → back" color="#737373" fontcolor="#737373" penwidth=1.51 arrowsize=0.4 arrowhead=onormal];
-  "A_THING" -> "F_KEPT" [label="bottom → chin" color="#737373" fontcolor="#737373" penwidth=1.09 arrowsize=0.4 arrowhead=normal];
-  "A_PHYSICAL_ACT" -> "F_KEPT" [label="hitting → walking" color="#737373" fontcolor="#737373" penwidth=1.05 arrowsize=0.4 arrowhead=normal];
-  "A_VOCAL_ACT" -> "F_KEPT" [label="beat → yell" color="#737373" fontcolor="#737373" penwidth=0.97 arrowsize=0.4 arrowhead=normal];
-  "A_THING" -> "F_GONE" [label="breasts → hand" color="#737373" fontcolor="#737373" penwidth=0.94 arrowsize=0.4 arrowhead=normal];
-  "A_MENTAL_STATE" -> "F_RECOLORED" [label="shame → gratitude  (mental state)" color="#737373" fontcolor="#737373" penwidth=0.81 arrowsize=0.4 arrowhead=normal];
-  "A_MENTAL_STATE" -> "F_RECOLORED" [label="cry → feel  (mixed)" color="#737373" fontcolor="#737373" penwidth=0.76 arrowsize=0.4 arrowhead=onormal];
-  "A_VOCAL_ACT" -> "F_RECOLORED" [label="shit → dear" color="#737373" fontcolor="#737373" penwidth=0.67 arrowsize=0.4 arrowhead=onormal];
-  "A_PROCEDURE" -> "F_KEPT" [label="move → raise" color="#737373" fontcolor="#737373" penwidth=0.62 arrowsize=0.4 arrowhead=onormal];
-  "A_DESCRIPTION" -> "F_KEPT" [label="incessantly → loudly" color="#737373" fontcolor="#737373" penwidth=0.62 arrowsize=0.4 arrowhead=onormal];
-  labelloc="b"; labeljust="l";
-  label=<<font point-size="7.65">1251 frames; 387 dropped where the two label orders disagreed; edges significant on EITHER<br align="left"/>test: over-represented against a marginal-preserving shuffle (solid head) or one-way against<br align="left"/>its own transpose (open head); same-kind edges headless and testable only by the shuffle.<br align="left"/>`mixed` is the coder's ABSTENTION -- no one kind covers two thirds of that group's words -- not<br align="left"/>a kind; FUNCTION omitted; lift above +0.00 only (any positive lift); every arrow is labelled<br align="left"/>with one word pair from a frame that took it and every count is on a node. Column three is the<br align="left"/>206 frames the coder found a feeling in: 536 more had none on either side and are not drawn.<br align="left"/>Onward arrows are each edge's largest fate plus any over-represented one, 54 frames in smaller<br align="left"/>flows omitted<br align="left"/></font>>;
+  "A_MIXED" -> "F_KEPT" [label="getting → back" color="#737373" fontcolor="#595959" penwidth=1.51 arrowsize=0.4 arrowhead=onormal];
+  "A_THING" -> "F_KEPT" [label="bottom → chin" color="#737373" fontcolor="#595959" penwidth=1.09 arrowsize=0.4 arrowhead=normal];
+  "A_PHYSICAL_ACT" -> "F_KEPT" [label="hitting → walking" color="#737373" fontcolor="#595959" penwidth=1.05 arrowsize=0.4 arrowhead=normal];
+  "A_VOCAL_ACT" -> "F_KEPT" [label="beat → yell" color="#737373" fontcolor="#595959" penwidth=0.97 arrowsize=0.4 arrowhead=normal];
+  "A_THING" -> "F_GONE" [label="breasts → hand" color="#737373" fontcolor="#595959" penwidth=0.94 arrowsize=0.4 arrowhead=normal];
+  "A_MENTAL_STATE" -> "F_RECOLORED" [label="shame → gratitude  (mental state)" color="#737373" fontcolor="#595959" penwidth=0.81 arrowsize=0.4 arrowhead=normal];
+  "A_MENTAL_STATE" -> "F_RECOLORED" [label="cry → feel  (mixed)" color="#737373" fontcolor="#595959" penwidth=0.76 arrowsize=0.4 arrowhead=onormal];
+  "A_VOCAL_ACT" -> "F_RECOLORED" [label="shit → dear" color="#737373" fontcolor="#595959" penwidth=0.67 arrowsize=0.4 arrowhead=onormal];
+  "A_PROCEDURE" -> "F_KEPT" [label="move → raise" color="#737373" fontcolor="#595959" penwidth=0.62 arrowsize=0.4 arrowhead=onormal];
+  "A_DESCRIPTION" -> "F_KEPT" [label="incessantly → loudly" color="#737373" fontcolor="#595959" penwidth=0.62 arrowsize=0.4 arrowhead=onormal];
 }

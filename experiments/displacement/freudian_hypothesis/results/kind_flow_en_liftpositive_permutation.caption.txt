@@ -1,0 +1,1 @@
+1251 frames; 387 dropped where the two label orders disagreed; every cell against a marginal-preserving shuffle, q<0.05 BH over 20 cells; cells below chance and all MIXED cells omitted; lift above +0.00 only (any positive lift)

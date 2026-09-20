@@ -32,6 +32,4 @@ digraph kindflow {
   "B_MENTAL_STATE" -> "A_MENTAL_STATE" [label="obliged → uneasy" arrowhead=none color="#737373" penwidth=0.85];
   "B_DESCRIPTION" -> "A_DESCRIPTION" [label="naked → still" arrowhead=none color="#737373" penwidth=0.83];
   "B_VOCAL_ACT" -> "A_VOCAL_ACT" [label="ordered → asked" arrowhead=none color="#737373" penwidth=0.83];
-  labelloc="b"; labeljust="l";
-  label=<<font point-size="7.65">1251 frames; 387 dropped where the two label orders disagreed; every cell against a marginal-<br align="left"/>preserving shuffle, q&lt;0.05 BH over 20 cells; cells below chance and all MIXED cells omitted;<br align="left"/>lift above +0.00 only (any positive lift)<br align="left"/></font>>;
 }

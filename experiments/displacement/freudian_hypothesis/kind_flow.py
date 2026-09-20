@@ -406,6 +406,41 @@ def _width(n, top=646.0):
     return 0.5 + 3.0 * math.sqrt(min(n, top) / top)
 
 
+def corpus_affect(path, lang="en"):
+    """-> (coded, feeling somewhere, base-side feeling, survive, rate)
+
+    **THE FIGURE AND THE TEXT COUNT DIFFERENT POPULATIONS AND A READER CANNOT
+    SEE IT** (paper-claude). Three nested selections and one that is not nested
+    at all:
+
+        2,244  English frames coded
+        1,695  KIND agreed across the two label orders -- columns one and two
+          361  of those the coder found a feeling in
+          237  of those on one of the twelve DRAWN edges -- column three
+
+    while the survival rate in the text is on a different axis entirely: every
+    frame with a base-side feeling and an AGREED AFFECT field, whether or not
+    its kind agreed. So a reader who divides the figure's numbers expecting the
+    text's rate gets a different one, and nothing on the page says why.
+
+    They do agree once both are stated: 195 of the 222 base-side frames on a
+    drawn edge keep or change their feeling (87.8%), against 362 of 433 over the
+    corpus (83.6%). The caption names both denominators rather than hoping the
+    8% is not noticed.
+    """
+    import json
+    import re
+    cjk = re.compile(r"[一-鿿]")
+    rows = [json.loads(l) for l in open(path, encoding="utf-8")]
+    rows = [r for r in rows if bool(cjk.search(r["frame"])) == (lang == "zh")]
+    aff = [r["orient"]["affect"] for r in rows
+           if r["orient"].get("affect") not in (None, "NONE")]
+    base = [a for a in aff if a != "INTRODUCED"]
+    sv = sum(1 for a in base if a in ("KEPT", "RECOLORED"))
+    return (len(rows), len(aff), len(base), sv,
+            (100.0 * sv / len(base)) if base else 0.0)
+
+
 def _fate_flows(edges, triples):
     """-> (every fate over the drawn edges, the non-NONE flows, which of those
     get an arrow, how many frames are in the ones that do not).
@@ -439,7 +474,8 @@ def _fate_flows(edges, triples):
     return drawn_f, allflow, keepf, tail
 
 
-def emit(edges, fates, out, title_note, pub=True, triples=None):
+def emit(edges, fates, out, title_note, pub=True, triples=None,
+         caption_in_figure=False, denom=None):
     from malignment import figure as _fig
     fam, pt = _fig.pub_font(), _fig.PUB_FONT_PT
     bases = sorted({b for b, _a in edges})
@@ -713,8 +749,15 @@ def emit(edges, fates, out, title_note, pub=True, triples=None):
             if src_count[(a, f)] > 1:
                 lab = "%s  (%s)" % (lab, PLAIN.get(b, b))
             head = "normal" if issig else "onormal"
+            #: **THE LABEL IS DARKER THAN THE ARROW, AND THAT IS NOT AN
+            #: INCONSISTENCY.** `#737373` is 55% ink, nominally over the 80 lpi
+            #: floor, but 7 pt type at that value screens lighter than a 1 pt
+            #: rule at the same value does -- thin strokes lose ink to the
+            #: screen where a solid line does not (paper-claude). The rule stays
+            #: at `#737373` so the onward arrows still read as secondary to the
+            #: black kind edges; the TYPE goes to `#595959`, 65% ink.
             L.append('  "A_%s" -> "F_%s" [label="%s" color="#737373" '
-                     'fontcolor="#737373" penwidth=%.2f arrowsize=0.4 '
+                     'fontcolor="#595959" penwidth=%.2f arrowsize=0.4 '
                      'arrowhead=%s];' % (a, f, lab, _width(n), head))
     if triples is not None:
         title_note += ("; every arrow is labelled with one word pair from a "
@@ -725,16 +768,43 @@ def emit(edges, fates, out, title_note, pub=True, triples=None):
                        "plus any over-represented one, %d frames in smaller "
                        "flows omitted"
                        % (col3, n_none, tail))
-    L.append('  labelloc="b"; labeljust="l";')
-    #: wrapped narrower than the graph lays out, so the caption never drives the
-    #: plate width again; `align="left"` because the default centres each line
-    import textwrap
-    wrapped = '<br align="left"/>'.join(textwrap.wrap(title_note, 95)) + \
-              '<br align="left"/>'
-    L.append('  label=<<font point-size="%g">%s</font>>;' % (pt * 0.85, wrapped))
+        #: **EVERY DENOMINATOR THE FIGURE USES, NAMED.** Column three counts
+        #: frames on a DRAWN edge; the text's survival rate counts frames with
+        #: an agreed affect field whether or not their kind agreed. The two are
+        #: close and not equal, and a reader dividing one to get the other has
+        #: no way to find out why it does not come out.
+        if denom:
+            bs = col3 - drawn_f.get("INTRODUCED", 0)
+            sv = drawn_f.get("KEPT", 0) + drawn_f.get("RECOLORED", 0)
+            title_note += (". DENOMINATORS: of the %d base-side feelings on a "
+                           "drawn edge, %d are kept or changed (%.0f%%); the "
+                           "survival rate quoted in the text is %d of %d "
+                           "(%.0f%%) over every frame with a base-side feeling "
+                           "and an agreed affect field, kind agreement not "
+                           "required"
+                           % (bs, sv, 100.0 * sv / bs if bs else 0,
+                              denom[3], denom[2], denom[4]))
+    #: **THE CAPTION LEAVES THE PLATE (paper-claude).** CI sets captions on a
+    #: separate page, and graphviz was rendering this one in the default SERIF
+    #: while every label in the figure is sans -- two faces in one plate, which
+    #: the house style forbids. It is written beside the renders as
+    #: `<name>.caption.txt` instead, so the text is still produced by the
+    #: producer rather than retyped into the manuscript.
+    #:
+    #: `--caption-in-figure` keeps the old behaviour for reading a render on
+    #: screen, where a plate with no caption is a plate you cannot check.
+    if caption_in_figure:
+        L.append('  labelloc="b"; labeljust="l";')
+        #: wrapped narrower than the graph lays out, so the caption never drives
+        #: the plate width; `align="left"` because the default centres each line
+        import textwrap
+        wrapped = '<br align="left"/>'.join(textwrap.wrap(title_note, 95)) + \
+                  '<br align="left"/>'
+        L.append('  label=<<font point-size="%g">%s</font>>;'
+                 % (pt * 0.85, wrapped))
     L.append("}")
     open(out, "w", encoding="utf-8").write("\n".join(L) + "\n")
-    return out
+    return out, title_note
 
 
 def main(argv=None):
@@ -757,6 +827,14 @@ def main(argv=None):
                          "alignment produced")
     ap.add_argument("--out", default=None)
     ap.add_argument("--also", default=None, help="directory for a second copy")
+    ap.add_argument("--as-name", default=None,
+                    help="with --also: basename to copy under, e.g. "
+                         "fig-kind-flow-en (CI names plates, not runs)")
+    ap.add_argument("--caption-in-figure", action="store_true",
+                    help="draw the caption on the plate. Off by default: CI "
+                         "sets captions on a separate page and graphviz renders "
+                         "this one in a serif against the figure's sans. The "
+                         "text is always written to <name>.caption.txt")
     a = ap.parse_args(argv)
     rows = a.rows or os.path.join(HERE, "results", "fates_corpus_%s.jsonl" % a.lang)
     edges, fates, used, dropped, cut, ntest = load(rows, a.lang, a.high_lift,
@@ -806,12 +884,18 @@ def main(argv=None):
     if a.test == "either":
         from path_flow import paths as _paths
         trip, _nf, _nt, _c = _paths(rows, a.lang, a.high_lift, a.min_edge)
-    emit(edges, fates, out, note, triples=trip)
+    out, note = emit(edges, fates, out, note, triples=trip,
+                     caption_in_figure=a.caption_in_figure,
+                     denom=corpus_affect(rows, a.lang))
     print("%s: %d frames, %d edges, %d dropped%s"
           % (tag, used, len(edges), dropped,
              ", lift cut %+.2f" % cut if cut is not None else ""))
     print("  " + note)
-    outs = [out]
+    #: the caption travels with the plate as a file, because a caption retyped
+    #: into a manuscript is a caption that stops matching its figure
+    cap = out.replace(".dot", ".caption.txt")
+    open(cap, "w", encoding="utf-8").write(note.replace("&lt;", "<") + "\n")
+    outs = [out, cap]
     for fmt in ("pdf", "png"):
         p = out.replace(".dot", "." + fmt)
         #: **REMOVE THE TARGET FIRST.** A failed `dot` run left the PREVIOUS
@@ -828,12 +912,41 @@ def main(argv=None):
         else:
             outs.append(p)
             print("  wrote %s" % p)
+    #: **THE PRESS WANTS GRAYSCALE TIFF, AND A COLOUR PNG IS NOT ONE** even when
+    #: every pixel in it is gray: it carries three channels and an alpha, and
+    #: what the press separates is the file it is given. Converted from the
+    #: 300 ppi PNG with the resolution written into the TIFF header, LZW so it
+    #: is lossless.
+    png = out.replace(".dot", ".png")
+    tif = out.replace(".dot", ".tif")
+    if os.path.exists(tif):
+        os.remove(tif)
+    if os.path.exists(png):
+        try:
+            from PIL import Image
+            im = Image.open(png)
+            if im.mode in ("RGBA", "LA", "P"):
+                bg = Image.new("RGB", im.size, "white")
+                bg.paste(im, mask=im.convert("RGBA").split()[-1])
+                im = bg
+            im.convert("L").save(tif, compression="tiff_lzw", dpi=(300, 300))
+            outs.append(tif)
+            print("  wrote %s (grayscale, 300 ppi)" % tif)
+        except Exception as exc:
+            print("  TIFF FAILED: %s" % exc)
     if a.also:
         import shutil
         os.makedirs(a.also, exist_ok=True)
         for p in outs:
-            shutil.copy(p, a.also)
-        print("  copied %d files to %s" % (len(outs), a.also))
+            #: the plate is renamed on the way out, not in `results/`, so the
+            #: repo keeps the name that says which run produced it and the
+            #: manuscript gets the name the journal asked for
+            base = os.path.basename(p)
+            if a.as_name:
+                base = a.as_name + base[base.index("."):]
+            shutil.copy(p, os.path.join(a.also, base))
+        print("  copied %d files to %s%s"
+              % (len(outs), a.also, " as %s.*" % a.as_name if a.as_name else ""))
     return 0
 
 
