@@ -161,6 +161,12 @@ def main(argv=None):
     ap.add_argument("-k", type=int, default=6, help="clusters to cut at")
     ap.add_argument("--fig", default=None)
     ap.add_argument("--list", action="store_true", help="print the frames kept")
+    ap.add_argument("--dpi", type=int, default=300)
+    #: the producer writes both copies in one run, as `relation_sheet` does, so
+    #: a repo figure and a paper figure cannot drift into being different
+    #: pictures under one name
+    ap.add_argument("--also", default=None,
+                    help="write a second copy of the figure here")
     ap.add_argument("--md", default=None)
     a = ap.parse_args(argv)
     dfig, dmd = _paths(a.mode, a.strict)
@@ -271,8 +277,10 @@ def main(argv=None):
     ax.set_xlabel("Ward distance", fontsize=8)
     fig.tight_layout()
     os.makedirs(os.path.dirname(a.fig), exist_ok=True)
-    fig.savefig(a.fig, dpi=200)
-    print("wrote %s" % a.fig)
+    for path in [a.fig] + ([a.also] if a.also else []):
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+        fig.savefig(path, dpi=a.dpi)
+        print("wrote %s (%d dpi)" % (path, a.dpi))
 
     groups = collections.defaultdict(list)
     for i, r in enumerate(names):
