@@ -91,6 +91,50 @@ FATE = {"KEPT": "feeling kept", "RECOLORED": "feeling changed",
 #: says it is an abstention rather than a kind.
 DROP_KINDS = {"FUNCTION"}
 
+#: **THE THIRD COLUMN DROPS `NONE`, AND IT WAS A SINK.** `affect = "NONE"` is the
+#: coder saying neither side carries a feeling -- 1,043 of 1,404 agreed English
+#: frames, three quarters of the corpus. Drawn as a fate node it takes the widest
+#: arrow out of nearly every edge and flattens the four outcomes the column
+#: exists to show into a stripe at the bottom of the plate (paper-claude).
+#:
+#: **IT IS NOT A NULL RESULT AND IT IS NOT HIDDEN.** That most displacement
+#: happens on frames with no affect on either side is the Freudian hypothesis's
+#: own denominator, and it is the first number in every dose table in
+#: `fates_corpus_en.md`. The caption states how many frames it covers. What the
+#: column now shows is the conditional: GIVEN a feeling somewhere in the pair,
+#: where did it go.
+DROP_FATES = {"NONE"}
+
+#: **EXEMPLARS PICKED BY HAND (paper-claude), KEYED BY EDGE.** The automatic rule
+#: -- head of each agreement-ranked list, largest charge drop breaking ties --
+#: picks a pair that is typical of its GROUP, which is not the same as a pair
+#: that shows the EDGE. `mixed -> mental state` is a real cell of 95 frames and
+#: its automatic exemplar is whatever word the roster happened to agree on.
+#:
+#: These were chosen from `fates_corpus_en.jsonl` by a reader who had the sheet,
+#: one per edge, each from a frame coded on that edge with both words in that
+#: frame's own lists. **ALL THIRTEEN WERE CHECKED BACK AGAINST THE ROWS** before
+#: being wired: edge match, frame exists, `_base` contains the left word,
+#: `_aligned` the right. A hand-picked label that does not resolve to a frame is
+#: a fabricated example, and the check is cheap.
+#:
+#: Any edge not listed keeps the automatic rule.
+EXEMPLARS = {
+    ("PHYSICAL_ACT", "VOCAL_ACT"): ("kill", "scream"),
+    ("PHYSICAL_ACT", "MENTAL_STATE"): ("die", "suffer"),
+    ("PHYSICAL_ACT", "PHYSICAL_ACT"): ("stabbed", "pointed"),
+    ("VOCAL_ACT", "MENTAL_STATE"): ("say", "understand"),
+    ("VOCAL_ACT", "VOCAL_ACT"): ("ordered", "asked"),
+    ("VOCAL_ACT", "PROCEDURE"): ("mention", "file"),
+    ("THING", "THING"): ("mouth", "room"),
+    ("PROCEDURE", "PROCEDURE"): ("charge", "dismiss"),
+    ("MENTAL_STATE", "MENTAL_STATE"): ("obliged", "uneasy"),
+    ("DESCRIPTION", "DESCRIPTION"): ("naked", "still"),
+    ("MIXED", "PROCEDURE"): ("throw", "terminate"),
+    ("MIXED", "MENTAL_STATE"): ("safe", "uneasy"),
+    ("MIXED", "PHYSICAL_ACT"): ("beat", "held"),
+}
+
 #: **LINE STYLE IS RETIRED (RH).** It carried the edge's MODAL affect fate --
 #: solid gone, dashed kept/recoloured, dotted none/introduced -- which was
 #: defensible before column three existed and is not now. Three faults at once:
@@ -362,6 +406,39 @@ def _width(n, top=646.0):
     return 0.5 + 3.0 * math.sqrt(min(n, top) / top)
 
 
+def _fate_flows(edges, triples):
+    """-> (every fate over the drawn edges, the non-NONE flows, which of those
+    get an arrow, how many frames are in the ones that do not).
+
+    Hoisted out of `emit` because the fate NODES need the selection that the
+    fate ARROWS make, and they are written to the dot file first -- the node
+    was printing a total the arrows below it did not sum to.
+    """
+    drawn_f, allflow = collections.Counter(), collections.Counter()
+    if triples is None:
+        return drawn_f, allflow, set(), 0
+    for _k, e in edges.items():
+        drawn_f.update(e["fate"])
+    for (b, a), e in edges.items():
+        for f, v in e["fate"].items():
+            if f not in DROP_FATES:
+                allflow[(b, a, f)] += v
+    sig = {k for k in triples if (k[0], k[1]) in edges}
+    keepf, tail = set(), 0
+    for (b, a), e in edges.items():
+        fa = collections.Counter({f: v for f, v in e["fate"].items()
+                                  if f not in DROP_FATES})
+        top = fa.most_common(1)
+        if top:
+            keepf.add((b, a, top[0][0]))
+        for f, v in fa.items():
+            if (b, a, f) in sig:
+                keepf.add((b, a, f))
+            elif not top or f != top[0][0]:
+                tail += v
+    return drawn_f, allflow, keepf, tail
+
+
 def emit(edges, fates, out, title_note, pub=True, triples=None):
     from malignment import figure as _fig
     fam, pt = _fig.pub_font(), _fig.PUB_FONT_PT
@@ -373,9 +450,23 @@ def emit(edges, fates, out, title_note, pub=True, triples=None):
     #: the exact failure `malignment.figure` exists to prevent ("rendering at
     #: FINAL size is the point"). `size` is a maximum, so a sparse graph stays
     #: smaller rather than being stretched.
+    #: **THE CAPTION WAS SETTING THE FIGURE'S WIDTH, AND THAT IS WHY THE TYPE
+    #: WAS UNDER 4 POINTS.** The graph lays out at 6.0 by 5.2 inches; the
+    #: caption was one unwrapped line and graphviz made the drawing 29 INCHES
+    #: wide to hold it, so `size!` then scaled the whole plate down by a factor
+    #: of six and left the left two thirds empty -- paper-claude measured the
+    #: PNG at 1442 by 388 with an empty left third, which is this and nothing
+    #: else. `ratio=compress` could not help: the aspect ratio it was compressing
+    #: was already the caption's.
+    #:
+    #: So the caption wraps (graphviz has no auto-wrap; the breaks are inserted)
+    #: and `size` loses its `!`. A bare `size` is a CEILING -- shrink to fit,
+    #: never stretch -- so the plate is now 4.8 inches wide with 7 pt type, and
+    #: a future render that lays out smaller will stay at 9 pt rather than being
+    #: blown up to the margin.
     L = ['digraph kindflow {', '  rankdir=LR; splines=true; overlap=false;',
-         '  size="%g,%g!"; ratio=compress;' % (_fig.PUB_SIZE[0], _fig.PUB_SIZE[0] * 1.15),
-         '  bgcolor="white"; nodesep=0.14; ranksep=0.95;',
+         '  size="%g,%g";' % (_fig.PUB_SIZE[0], _fig.PUB_SIZE[0] * 1.15),
+         '  bgcolor="white"; nodesep=0.14; ranksep=0.50;',
          '  node [shape=box style="rounded" fontname="%s" fontsize=%g '
          'color="black" fontcolor="black" margin="0.06,0.035" penwidth=0.6];'
          % (fam, pt),
@@ -411,16 +502,40 @@ def emit(edges, fates, out, title_note, pub=True, triples=None):
     #: reader could not check against its own edges; the fix is the same each
     #: time, which is why it is now written down: a column's counts come from
     #: whatever the figure actually draws into it.
-    drawn_f = collections.Counter()
-    if triples is not None:
-        for _k, e in edges.items():
-            drawn_f.update(e["fate"])
-    elif False:
-        for _k, e in edges.items():
-            drawn_f.update(e["fate"])
+    #: **AND WHEN IT CANNOT SUM, IT SAYS SO ON THE NODE.** There are 29 non-NONE
+    #: flows and eleven of them are a single frame; drawing all of them puts the
+    #: right half back where RH stopped it. So the selection stays, and the node
+    #: carries BOTH numbers -- "155 (132 drawn)" -- because the alternative is
+    #: the choice this figure has already got wrong twice in both directions:
+    #: print the marginal and a reader adding the arrows finds it short, print
+    #: the drawn sum and the figure quietly understates the conditional that is
+    #: the whole point of the column.
+    drawn_f, allflow, keepf, tail = _fate_flows(edges, triples)
+    n_none = drawn_f.pop("NONE", 0)
+    shown_f = collections.Counter()
+    for (_b, _a, f), n in allflow.items():
+        if (_b, _a, f) in keepf:
+            shown_f[f] += n
+    #: **A FATE NODE WITH NO ARROW IS NOT DRAWN.** `feeling arrives 7 (0 drawn)`
+    #: stood alone in the top corner of the positive-lift render: it is never
+    #: any edge's largest fate and never clears the triple test, so the
+    #: selection leaves it with nothing pointing at it. This is the SAME defect
+    #: the paragraph above records ("a count for flows the figure had just
+    #: excluded") reappearing through a new route, which is why the rule is
+    #: enforced here rather than trusted: a node exists if an arrow reaches it.
+    #: Its frames join the omitted tail in the caption.
+    col3 = 0
     L.append("  { rank=same;")
     for f, n in drawn_f.most_common():
-        L.append("  " + node("F_" + f, FATE.get(f, f), n, f == "NONE"))
+        lab = FATE.get(f, f)
+        if not shown_f[f]:
+            tail += n
+            continue
+        col3 += n
+        if shown_f[f] != n:
+            L.append('  "F_%s" [label="%s\\n%d (%d drawn)"];' % (f, lab, n, shown_f[f]))
+        else:
+            L.append("  " + node("F_" + f, lab, n))
     L.append("  }")
     #: **THE LABEL IS ONE WORD PAIR.** It carried the count, the two-way affect
     #: split AND the pair -- three lines an edge, over sixteen edges, at 4.8
@@ -430,18 +545,21 @@ def emit(edges, fates, out, title_note, pub=True, triples=None):
     #: the first render printed the four characters u2192.
     used_pairs = set()
     for (b, a), e in sorted(edges.items(), key=lambda kv: -kv[1]["n"]):
-        top = e["fate"].most_common(1)[0][0]
         #: the exemplar with the LARGEST charge drop on this edge; ties fall to
         #: the alphabetical pair so the same run always names the same words
         #: **A PAIR IS USED ONCE.** `killed -> helped` landed on three edges in
         #: one render, which reads as one frame in three places. Different
         #: frames can share an exemplar; take the next-best instead.
-        ex = [x for x in sorted(e["ex"], key=lambda x: (-x[1], x[0]))
-              if x[0] not in used_pairs]
         lab = ""
-        if ex:
-            lab = "%s → %s" % ex[0][0]
-            used_pairs.add(ex[0][0])
+        if (b, a) in EXEMPLARS:
+            lab = "%s → %s" % EXEMPLARS[(b, a)]
+            used_pairs.add(EXEMPLARS[(b, a)])
+        else:
+            ex = [x for x in sorted(e["ex"], key=lambda x: (-x[1], x[0]))
+                  if x[0] not in used_pairs]
+            if ex:
+                lab = "%s → %s" % ex[0][0]
+                used_pairs.add(ex[0][0])
         #: **WIDTH CARRIES FREQUENCY (RH), AND `channel_graph`'s OBJECTION DOES
         #: NOT TRANSFER.** That file dropped width because `spec` spanned
         #: 0.55-1.28 pt, "a range no reader resolves on the page". Here the
@@ -535,11 +653,7 @@ def emit(edges, fates, out, title_note, pub=True, triples=None):
     #: real flow that is not over-represented.
     if triples is not None:
         sig = {k for k in triples if (k[0], k[1]) in edges}
-        allflow = collections.Counter()
-        for (b, a), e in edges.items():
-            for f, v in e["fate"].items():
-                allflow[(b, a, f)] += v
-        src_count = collections.Counter((k[1], k[2]) for k in allflow)
+        src_count = collections.Counter(k[1:] for k in keepf)
         #: **EVERY FLOW THAT MATTERS, NOT EVERY FLOW.** Drawing all of them gave
         #: 30 onward arrows, about twenty of them n=1 or 2, and the right half
         #: became unreadable at 4.8 inches -- paper-claude's principle
@@ -558,16 +672,6 @@ def emit(edges, fates, out, title_note, pub=True, triples=None):
         #: flow a reader would infer from the figure is the flow that actually
         #: dominates, and a significant-but-minor one is added rather than
         #: substituted. Everything else is tail, counted in the caption.
-        keepf, tail = set(), 0
-        for (b, a), e in edges.items():
-            top = e["fate"].most_common(1)
-            if top:
-                keepf.add((b, a, top[0][0]))
-            for f, v in e["fate"].items():
-                if (b, a, f) in sig:
-                    keepf.add((b, a, f))
-                elif not top or f != top[0][0]:
-                    tail += v
         for (b, a, f), n in sorted(allflow.items(), key=lambda kv: -kv[1]):
             if (b, a, f) not in keepf:
                 continue
@@ -583,12 +687,29 @@ def emit(edges, fates, out, title_note, pub=True, triples=None):
             #: side, largest charge drop breaking ties -- so an onward arrow
             #: shows a frame that actually took THAT path rather than one that
             #: merely ended at the same fate.
+            #: **EVERY ONWARD ARROW CARRIES A PAIR, NOT SOME OF THEM.** The
+            #: third column mixed `kill → scream` with bare `40` and `7
+            #: (voice)`, so one mark meant two things again -- the defect this
+            #: figure has now had with fill, with line style and with width
+            #: (paper-claude). His fix was counts everywhere; RH's standing
+            #: instruction on this column is word pairs, so it is pairs
+            #: everywhere. The counts are on the node each arrow reaches.
+            #:
+            #: A significant triple keeps `path_flow`'s own exemplar -- a frame
+            #: that took THAT path. The rest fall back to the frame on this edge
+            #: with that fate and the largest charge drop, which is the same
+            #: rule column one uses, and `used_pairs` keeps one pair to one
+            #: arrow across the whole figure.
             ex = tv.get("ex")
+            if not ex or tuple(ex) in used_pairs:
+                cand = sorted((x for x in edges[(b, a)]["exf"]
+                               if x[2] == f and x[0] not in used_pairs),
+                              key=lambda x: (-x[1], x[0]))
+                ex = cand[0][0] if cand else ex
+            if ex:
+                used_pairs.add(tuple(ex))
             issig = (b, a, f) in sig
-            #: only the over-represented flows get a word pair; labelling all
-            #: of them would put a dozen pairs in the right half and the
-            #: exemplar would stop marking anything
-            lab = ("%s → %s" % ex) if (issig and ex) else "%d" % n
+            lab = ("%s → %s" % tuple(ex)) if ex else "%d" % n
             if src_count[(a, f)] > 1:
                 lab = "%s  (%s)" % (lab, PLAIN.get(b, b))
             head = "normal" if issig else "onormal"
@@ -596,11 +717,21 @@ def emit(edges, fates, out, title_note, pub=True, triples=None):
                      'fontcolor="#737373" penwidth=%.2f arrowsize=0.4 '
                      'arrowhead=%s];' % (a, f, lab, _width(n), head))
     if triples is not None:
-        title_note += ("; onward arrows are each edge's largest fate plus any "
-                       "over-represented one, %d frames in smaller flows not "
-                       "drawn" % tail)
+        title_note += ("; every arrow is labelled with one word pair from a "
+                       "frame that took it and every count is on a node. "
+                       "Column three is the %d frames the coder found a "
+                       "feeling in: %d more had none on either side and are "
+                       "not drawn. Onward arrows are each edge's largest fate "
+                       "plus any over-represented one, %d frames in smaller "
+                       "flows omitted"
+                       % (col3, n_none, tail))
     L.append('  labelloc="b"; labeljust="l";')
-    L.append('  label=<<font point-size="%g">%s</font>>;' % (pt * 0.85, title_note))
+    #: wrapped narrower than the graph lays out, so the caption never drives the
+    #: plate width again; `align="left"` because the default centres each line
+    import textwrap
+    wrapped = '<br align="left"/>'.join(textwrap.wrap(title_note, 95)) + \
+              '<br align="left"/>'
+    L.append('  label=<<font point-size="%g">%s</font>>;' % (pt * 0.85, wrapped))
     L.append("}")
     open(out, "w", encoding="utf-8").write("\n".join(L) + "\n")
     return out

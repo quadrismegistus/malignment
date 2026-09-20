@@ -1,0 +1,52 @@
+digraph kindflow {
+  rankdir=LR; splines=true; overlap=false;
+  size="4.8,5.52";
+  bgcolor="white"; nodesep=0.14; ranksep=0.50;
+  node [shape=box style="rounded" fontname="Helvetica" fontsize=9 color="black" fontcolor="black" margin="0.06,0.035" penwidth=0.6];
+  edge [fontname="Helvetica" fontsize=7.2 color="#4d4d4d" penwidth=0.75 arrowsize=0.5];
+  { rank=same;
+    "B_MIXED" [label="mixed\n702" penwidth=0.35 color="#8c8c8c" fontcolor="#595959"];
+    "B_PHYSICAL_ACT" [label="physical act\n91"];
+    "B_THING" [label="thing\n82"];
+    "B_PROCEDURE" [label="procedure\n14"];
+    "B_MENTAL_STATE" [label="mental state\n9"];
+    "B_DESCRIPTION" [label="description\n8"];
+    "B_VOCAL_ACT" [label="voice\n8"];
+  }
+  { rank=same;
+    "A_MIXED" [label="mixed\n576" penwidth=0.35 color="#8c8c8c" fontcolor="#595959"];
+    "A_THING" [label="thing\n82"];
+    "A_MENTAL_STATE" [label="mental state\n81"];
+    "A_PROCEDURE" [label="procedure\n68"];
+    "A_PHYSICAL_ACT" [label="physical act\n65"];
+    "A_VOCAL_ACT" [label="voice\n34"];
+    "A_DESCRIPTION" [label="description\n8"];
+  }
+  { rank=same;
+  "F_KEPT" [label="feeling kept\n142 (138 drawn)"];
+  "F_RECOLORED" [label="feeling changed\n38 (14 drawn)"];
+  "F_GONE" [label="feeling gone\n26 (14 drawn)"];
+  }
+  "B_MIXED" -> "A_MIXED" [label="went → then" arrowhead=none color="#737373" penwidth=3.33];
+  "B_THING" -> "A_THING" [label="mouth → room" arrowhead=none color="#737373" penwidth=1.57];
+  "B_MIXED" -> "A_MENTAL_STATE" [label="safe → uneasy" arrowhead=vee color="#737373" penwidth=1.50];
+  "B_PHYSICAL_ACT" -> "A_PHYSICAL_ACT" [label="stabbed → pointed" arrowhead=none color="#737373" penwidth=1.45];
+  "B_MIXED" -> "A_PROCEDURE" [label="throw → terminate" arrowhead=vee color="#737373" penwidth=1.37];
+  "B_PHYSICAL_ACT" -> "A_VOCAL_ACT" [label="kill → scream" penwidth=1.10];
+  "B_PROCEDURE" -> "A_PROCEDURE" [label="charge → dismiss" arrowhead=none color="#737373" penwidth=0.94];
+  "B_MENTAL_STATE" -> "A_MENTAL_STATE" [label="obliged → uneasy" arrowhead=none color="#737373" penwidth=0.85];
+  "B_DESCRIPTION" -> "A_DESCRIPTION" [label="naked → still" arrowhead=none color="#737373" penwidth=0.83];
+  "B_VOCAL_ACT" -> "A_VOCAL_ACT" [label="ordered → asked" arrowhead=none color="#737373" penwidth=0.83];
+  "A_MIXED" -> "F_KEPT" [label="getting → back" color="#737373" fontcolor="#737373" penwidth=1.51 arrowsize=0.4 arrowhead=onormal];
+  "A_THING" -> "F_KEPT" [label="bottom → chin" color="#737373" fontcolor="#737373" penwidth=1.09 arrowsize=0.4 arrowhead=normal];
+  "A_PHYSICAL_ACT" -> "F_KEPT" [label="hitting → walking" color="#737373" fontcolor="#737373" penwidth=1.05 arrowsize=0.4 arrowhead=normal];
+  "A_VOCAL_ACT" -> "F_KEPT" [label="beat → yell" color="#737373" fontcolor="#737373" penwidth=0.97 arrowsize=0.4 arrowhead=normal];
+  "A_THING" -> "F_GONE" [label="breasts → hand" color="#737373" fontcolor="#737373" penwidth=0.94 arrowsize=0.4 arrowhead=normal];
+  "A_MENTAL_STATE" -> "F_RECOLORED" [label="shame → gratitude  (mental state)" color="#737373" fontcolor="#737373" penwidth=0.81 arrowsize=0.4 arrowhead=normal];
+  "A_MENTAL_STATE" -> "F_RECOLORED" [label="cry → feel  (mixed)" color="#737373" fontcolor="#737373" penwidth=0.76 arrowsize=0.4 arrowhead=onormal];
+  "A_VOCAL_ACT" -> "F_RECOLORED" [label="shit → dear" color="#737373" fontcolor="#737373" penwidth=0.67 arrowsize=0.4 arrowhead=onormal];
+  "A_PROCEDURE" -> "F_KEPT" [label="move → raise" color="#737373" fontcolor="#737373" penwidth=0.62 arrowsize=0.4 arrowhead=onormal];
+  "A_DESCRIPTION" -> "F_KEPT" [label="incessantly → loudly" color="#737373" fontcolor="#737373" penwidth=0.62 arrowsize=0.4 arrowhead=onormal];
+  labelloc="b"; labeljust="l";
+  label=<<font point-size="7.65">1251 frames; 387 dropped where the two label orders disagreed; edges significant on EITHER<br align="left"/>test: over-represented against a marginal-preserving shuffle (solid head) or one-way against<br align="left"/>its own transpose (open head); same-kind edges headless and testable only by the shuffle.<br align="left"/>`mixed` is the coder's ABSTENTION -- no one kind covers two thirds of that group's words -- not<br align="left"/>a kind; FUNCTION omitted; lift above +0.00 only (any positive lift); every arrow is labelled<br align="left"/>with one word pair from a frame that took it and every count is on a node. Column three is the<br align="left"/>206 frames the coder found a feeling in: 536 more had none on either side and are not drawn.<br align="left"/>Onward arrows are each edge's largest fate plus any over-represented one, 54 frames in smaller<br align="left"/>flows omitted<br align="left"/></font>>;
+}
