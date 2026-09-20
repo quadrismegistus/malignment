@@ -675,13 +675,13 @@ def draw_xy(rows, out_path, pub=False, label_all=False, square=True):
          #: dose and asked whether eighteen scales needed re-running under lift.
          #: They did not; the label did.
          #:
-         #: ONE WORD, NOT A CLAUSE. RH: do not complicate an already two-line
-         #: axis. `XLAB`'s "change per unit of lift" was the other candidate and
-         #: would have cost the signed reading the comment above exists to
-         #: protect. **THE PLATE IN THE ARTICLE IS NOT REGENERATED** -- it is
-         #: correct as drawn, and the lift clause goes in the ¶5C caption.
+         #: TWO WORDS, NOT A CLAUSE (RH). "lift" alone names the quantity only
+         #: to a reader who already knows this folder; "charge lift" says whose
+         #: lift it is and still fits the line. `XLAB`'s "change per unit of
+         #: lift" was the other candidate and would have cost the SIGNED reading
+         #: the comment above exists to protect.
          + labs(x="Dose slope (SDs)\n"
-                  "<-- Falls with lift  |  Rises with lift -->",
+                  "<-- Falls with charge lift  |  Rises with charge lift -->",
                 y="Marginal change (SDs)\n"
                   "<-- Falls with alignment  |  Rises with alignment -->"))
     #: ONE COLOUR, NO LEGEND. Lexicon-vs-rated is documented outside the
@@ -837,6 +837,18 @@ def main():
         a.pmax = 1.01
         a.top = 999
     if a.xy:
+        #: **`load_xy` DEFAULTS `panel="v6"` AND THE CLI OVERRODE IT WITH None.**
+        #: Running `--xy` without `--panel` silently drew SIX instruments at
+        #: once -- `v6`, `v6_wide`, `v6full` and `slot_rating_en_v6` are four
+        #: ids for the same panel, so "Mundanity" appeared FOUR TIMES on one
+        #: plate and the 18-scale figure came out with 11 points. It did not
+        #: raise; it produced a plausible figure of the wrong population, which
+        #: is the shape this repo pays for most often. A sensible default in a
+        #: function signature is not a default if the caller passes None over it.
+        if a.panel is None:
+            a.panel = "v6"
+            print("--panel not given: using v6 (four ids rate the same panel; "
+                  "drawing all of them counts one finding four times)")
         rows = load_xy(pmax=a.pmax, min_lin=a.min_signed, panel=a.panel,
                        gated=a.gated, sig=a.sig, alpha=a.alpha,
                        correct=a.correct)
