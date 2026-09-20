@@ -157,17 +157,9 @@ def load(path, lang="en", high_lift=False, min_edge=6, test="transpose",
     rows = [r for r in rows if bool(cjk.search(r["frame"])) == (lang == "zh")]
     cut = None
     if high_lift:
-        #: LIFT, not the scene level: `charge.lift`'s own docstring says "THIS
-        #: IS THE DOSE ANY DISPLACEMENT WORK WANTS, NOT dose()". Top tertile of
-        #: the base words' scene rating minus the frame's own.
-        lift = {}
-        for r in rows:
-            sc = charge.scene(r["frame"]) or {}
-            ws = [w.strip() for w in (r.get("_base") or "").split(",")]
-            v = [sc[w] for w in ws if w in sc]
-            d, l = charge.dose(r["frame"]), charge.lift(r["frame"])
-            if v and isinstance(d, (int, float)) and isinstance(l, (int, float)):
-                lift[r["frame"]] = sum(v) / len(v) - (d - l)
+        #: LIFT, not the scene level -- see `base_lift`, which is the single
+        #: definition of this dose and is also what `feeling_matrix.py` reads.
+        lift = base_lift(rows)
         #: **THREE CUTS, AND `positive` IS THE ONLY STATED ONE.** A tertile is a
         #: rank -- it moves if the corpus changes and it means nothing outside
         #: this file. `lift > 0` is a boundary with a reading: the base words
@@ -404,6 +396,31 @@ def _width(n, top=646.0):
     #: below which a rule can drop out of the plate.
     import math
     return 0.5 + 3.0 * math.sqrt(min(n, top) / top)
+
+
+def base_lift(rows):
+    """frame -> (mean scene rating of its BASE words) - (the frame's own rating).
+
+    **LIFT, NOT THE SCENE LEVEL.** `charge.lift`'s own docstring says "THIS IS
+    THE DOSE ANY DISPLACEMENT WORK WANTS, NOT dose()" -- corr(effect, dose) is
+    -0.091 against corr(effect, lift) -0.261. A frame already rated 6.4 whose
+    candidates are no more transgressive than itself is saturated, and level
+    cannot tell it from a frame with somewhere to fall.
+
+    Extracted from `load()` so `feeling_matrix.py` cannot drift into a second
+    definition of the same dose under the same name. Frames whose scene or
+    rating is missing are absent from the dict rather than scored 0.
+    """
+    from malignment import charge
+    out = {}
+    for r in rows:
+        sc = charge.scene(r["frame"]) or {}
+        ws = [w.strip() for w in (r.get("_base") or "").split(",")]
+        v = [sc[w] for w in ws if w in sc]
+        d, l = charge.dose(r["frame"]), charge.lift(r["frame"])
+        if v and isinstance(d, (int, float)) and isinstance(l, (int, float)):
+            out[r["frame"]] = sum(v) / len(v) - (d - l)
+    return out
 
 
 def corpus_affect(path, lang="en"):
