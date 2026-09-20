@@ -999,6 +999,33 @@ def dose_table(rows, bins=3, quiet=False, metric="frame", _return_ds=False):
                     if isinstance(tb, (int, float)):
                         vals.append(float(tb))
                 d = sum(vals) / len(vals) if vals else None
+            elif metric == "frame_lift":
+                #: **`charge.lift` IS THE DOSE DISPLACEMENT WORK WANTS AND ITS
+                #: OWN DOCSTRING SAYS SO** -- "THIS IS THE DOSE ANY DISPLACEMENT
+                #: WORK WANTS, NOT `dose()`": corr(effect, dose) = -0.091 against
+                #: corr(effect, lift) = -0.261, and -0.311 within frames below 5.
+                #: The response SATURATES. A setup already rated 6.4 has
+                #: candidate words no more transgressive than itself, so there is
+                #: nothing to displace, and mean lift runs +0.38 at frame 2-3 to
+                #: -0.05 at frame 6-7 while dose climbs monotonically.
+                #:
+                #: I dosed four different ways this afternoon and every one was a
+                #: LEVEL. RH asked why lift was not among them; the answer is
+                #: that I did not read the accessor I was calling.
+                d = charge.lift(r["frame"])
+            elif metric == "shown_base_lift":
+                #: the same subtraction at WORD grain: the scene rating of the
+                #: base words the fates coder actually read, minus the frame's
+                #: own rating. `frame = dose - lift`, both public, so no private
+                #: accessor is reached into.
+                sc = charge.scene(r["frame"]) or {}
+                ws = [w.strip() for w in (r.get("_base") or "").split(",")]
+                v = [sc[w] for w in ws if w in sc]
+                dd, lf = charge.dose(r["frame"]), charge.lift(r["frame"])
+                if v and isinstance(dd, (int, float)) and isinstance(lf, (int, float)):
+                    d = sum(v) / len(v) - (dd - lf)
+                else:
+                    d = None
             else:
                 d = charge.dose(r["frame"])
         except Exception:
@@ -1025,6 +1052,11 @@ def dose_table(rows, bins=3, quiet=False, metric="frame", _return_ds=False):
     out = {}
     if not quiet:
         print("\nFATES BY %s" % (
+            "LIFT (charge.lift = dose - frame: what the candidate words ADD "
+            "over their setup -- the dose charge.py says displacement work wants)"
+            if metric == "frame_lift" else
+            "LIFT ON THE BASE WORDS SHOWN (their scene rating minus the frame's)"
+            if metric == "shown_base_lift" else
             "THE WHOLE BASE COLUMN (mean charge.scene over every faller, "
             "before the relation reader selected)" if metric == "base_column" else
             "THE BASE WORDS THE ANNOTATOR SAW (mean charge.scene over exactly "
@@ -1538,7 +1570,8 @@ def _main(argv=None):
                     help="a READABLE sheet, four lines a frame")
     ap.add_argument("--limit", type=int, default=120)
     ap.add_argument("--dose", nargs="?", const="frame", default=None,
-                    choices=("frame", "base_mass", "shown_base", "base_column"),
+                    choices=("frame", "base_mass", "shown_base", "base_column",
+                             "frame_lift", "shown_base_lift"),
                     help="cross the fates with charge: `frame` is the unweighted "
                          "candidate rating, `base_mass` the base arm's own "
                          "mass-weighted charge, `shown_base` the mean "
