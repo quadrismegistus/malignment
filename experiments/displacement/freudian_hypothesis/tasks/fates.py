@@ -1070,6 +1070,87 @@ def dose_table(rows, bins=3, quiet=False, metric="frame", _return_ds=False):
     return ds if _return_ds else out
 
 
+def intensity_on_affect_frames(rows, ds=None, bins=3, lang="en"):
+    """Contextual arousal and harm on the SAME frames whose feeling survives.
+
+    **THIS EXISTS TO MAKE ONE SENTENCE REST ON ONE POPULATION.** The draft joins
+    a KIND-survives figure from this grain (83% of 427 affect-bearing frames) to
+    an INTENSITY-falls figure from the pair grain (contextual arousal -0.64 on
+    coder-linked substitutions). Those are different populations, not two views
+    of one, and the campaign has been burned by exactly that move: the quota of
+    affect reads -0.037 at arm grain and -0.637 at pair grain, seventeen-fold on
+    one scale.
+
+    Same instrument, same frames, base side against aligned side. If arousal
+    falls here while the kind survives here, the conjunction is one population
+    with one denominator. If it does not fall here, the sentence splits in two
+    and each carries its own -- the honest outcome, not a worse one.
+
+    `harm` is the ANCHOR. It has fallen on every population tried, so a run
+    where harm does not fall is a run whose word lists or orientation are wrong,
+    and it costs one column to know that.
+
+    zh uses `v6zh_*`; the institutional battery is keyed `slot_institutional_en_v3`
+    in both languages despite the `_en_` in its name.
+    """
+    import statistics
+    from malignment import fields as F
+    #: the signed-rank test lives in `norm_shift`, where the paired norm
+    #: comparisons already are. A second copy here is a statistic two files
+    #: would then have to agree about.
+    from norm_shift import wilcoxon as _wilcoxon
+    AROUSAL = "slot_institutional_en_v3_arousal"
+    HARM = "v6zh_harm" if lang == "zh" else "v6_harm"
+
+    def side(frame, words, key):
+        v = []
+        for w in words:
+            d = F.contextual_norms(frame, w) or {}
+            if isinstance(d.get(key), (int, float)):
+                v.append(d[key])
+        return statistics.mean(v) if v else None
+
+    keep = [r for r in rows
+            if (r.get("raw") or {}).get("a", {}).get("feeling") not in (None, "NONE")
+            and r["orient"].get("affect") is not None]
+    print("\nINTENSITY ON THE AFFECT-BEARING FRAMES (%s, n=%d) -- the same "
+          "population the survival rate describes" % (lang, len(keep)))
+    out = []
+    for r in keep:
+        b_w = [w.strip() for w in (r.get("_base") or "").split(",") if w.strip()]
+        a_w = [w.strip() for w in (r.get("_aligned") or "").split(",") if w.strip()]
+        rec = {"frame": r["frame"], "affect": r["orient"]["affect"]}
+        for lab, key in (("arousal", AROUSAL), ("harm", HARM)):
+            b, a = side(r["frame"], b_w, key), side(r["frame"], a_w, key)
+            rec[lab] = (a - b) if (b is not None and a is not None) else None
+        out.append(rec)
+    for lab in ("arousal", "harm"):
+        d = [x[lab] for x in out if x[lab] is not None]
+        if len(d) < 6:
+            print("  %-8s too few (%d of %d rated)" % (lab, len(d), len(keep)))
+            continue
+        _w, p, n = _wilcoxon(d)
+        print("  %-8s delta %+.3f   %d of %d negative   p=%s   (%d of %d rated)"
+              % (lab, statistics.mean(d), sum(1 for x in d if x < 0), n,
+                 ("%.2g" % p) if p is not None else "-", len(d), len(keep)))
+    if ds:
+        vals = sorted(ds[x["frame"]] for x in out if x["frame"] in ds)
+        if len(vals) >= bins:
+            cuts = [vals[int(len(vals) * (i + 1) / bins) - 1] for i in range(bins)]
+            print("  %-9s %13s %13s %13s" % ("by dose", "low", "mid", "high"))
+            for lab in ("arousal", "harm"):
+                cells = []
+                for i in range(bins):
+                    d = [x[lab] for x in out
+                         if x["frame"] in ds and x[lab] is not None
+                         and next((j for j, c in enumerate(cuts)
+                                   if ds[x["frame"]] <= c), bins - 1) == i]
+                    cells.append("%+.2f (n=%d)" % (statistics.mean(d), len(d))
+                                 if d else "--")
+                print("  %-9s %13s %13s %13s" % (lab, *cells))
+    return out
+
+
 def marginals(rows, ds=None, bins=3, top=8):
     """The four fields' distributions, overall and by dose tertile. -> dict
 
@@ -1357,6 +1438,7 @@ def _main(argv=None):
             ds = dose_table(rows, metric=a.dose, _return_ds=True)
             marginals(rows, ds)
             affect_cross(rows, ds)
+            intensity_on_affect_frames(rows, ds, lang=a.lang if a.lang != "all" else "en")
         else:
             marginals(rows)
         if a.md:
