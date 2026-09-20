@@ -659,7 +659,7 @@ RULE_VERSION = 4
 
 
 def contrast(prompt, units, top=12, words=None, select_at=0, min_units=1,
-             select_union=False, select_pooled=False):
+             select_union=False, select_pooled=False, plus_top=0):
     """Per-word probability at ONE prompt across the rungs of each unit.
 
         units = [("olmo", ["allenai/OLMo-2-1124-7B", "...-Instruct"]), ...]
@@ -736,7 +736,7 @@ def contrast(prompt, units, top=12, words=None, select_at=0, min_units=1,
                          % (len(present), len(seq), min_units,
                             ", ".join(d["unit"] for d in missing[:6])))
 
-    if words:
+    if words and not plus_top:
         chosen, selection = [str(w) for w in words], "curated"
     else:
         #: Summed across units at the SELECTION RUNG, so the choice is a property
@@ -748,6 +748,7 @@ def contrast(prompt, units, top=12, words=None, select_at=0, min_units=1,
                     tot[w] = tot.get(w, 0.0) + p
             return [w for w, _ in sorted(tot.items(), key=lambda kv: -kv[1])[:n]]
 
+        _want_n = int(top) + (len(words) if (words and plus_top) else 0)
         if select_pooled:
             #: **TOP N BY POOLED MASS ACROSS EVERY RUNG.** Sum first, rank once.
             #: The union of per-rung top-Ns is the obvious alternative and it
@@ -764,7 +765,7 @@ def contrast(prompt, units, top=12, words=None, select_at=0, min_units=1,
                 for pos in range(n_rungs):
                     for w, p in by[rungs[pos]].items():
                         tot[w] = tot.get(w, 0.0) + p
-            chosen = [w for w, _ in sorted(tot.items(), key=lambda kv: -kv[1])[:top]]
+            chosen = [w for w, _ in sorted(tot.items(), key=lambda kv: -kv[1])[:_want_n]]
             selection = ("top %d by POOLED mass across %d rungs"
                          % (top, n_rungs))
         elif select_union:
@@ -788,6 +789,25 @@ def contrast(prompt, units, top=12, words=None, select_at=0, min_units=1,
         else:
             chosen = _topn(select_at, top)
             selection = "top %d by mass at position %d" % (top, select_at)
+        if words and plus_top:
+            #: **NAMED PAIR + DECLARED TOP-N, DEDUPED. lacan's ask, [6654].**
+            #: A curated list is the right discipline for the words a claim
+            #: rests on, and on most prompts that pair IS the top of the
+            #: distribution -- so the figure comes back with two lines and no
+            #: context, and this file's own docstring says the flat words are
+            #: what make a mover legible AS a mover.
+            #:
+            #: The two halves keep DIFFERENT warrants and the label says so:
+            #: the named words are chosen by the caller and the rest are picked
+            #: by mass, blind to movement. Collapsing that into one word
+            #: ("curated") would hide that the context is still declared, and
+            #: into the other ("top N") would hide that two words were put
+            #: there on purpose.
+            named = [str(w) for w in words]
+            extra = [w for w in chosen if w not in set(named)][:int(plus_top)]
+            chosen = named + extra
+            selection = ("top %d by mass + %d named"
+                         % (len(extra), len(named)))
 
     rows, below = [], 0
     for name, rungs in present:
@@ -891,10 +911,25 @@ def movement_rows(base, aligned, prompt=None, cls=None, min_abs_delta=None,
 
 
 def endpoint_movement(cls=None, min_abs_delta=None, prompt=None, limit=None,
-                      rule_version=4, frame='', clean_slot=False):
+                      rule_version=4, frame='', clean_slot=False, prompts=None):
     """Movement across ALL declared base->endpoint pairs, in ONE query.
 
         endpoint_movement(cls="faller", min_abs_delta=0.1, limit=50)
+        endpoint_movement(prompts=batch)          # many prompts, ONE query
+
+    **`prompts` EXISTS BECAUSE `prompt` IS ONE ROUND TRIP EACH.** A consumer
+    building one table per prompt over the charge corpus (2,806 of them) pays
+    0.742 s apiece in a loop and 0.073 s apiece batched -- ten to one, 35
+    minutes against three and a half. About 0.28 s of each call is
+    `roster.endpoints()`, re-derived every time and identical every time.
+
+    Pass a LIST and group the returned rows by `prompt` yourself. Batch in the
+    low hundreds rather than all at once: 24 prompts already return 155k rows,
+    so the whole corpus in one query is roughly 18M and will not fit.
+
+    `prompt` and `prompts` are mutually exclusive. Giving both is a caller
+    confused about which population it wants, and is refused rather than
+    resolved by a precedence rule nobody would remember.
 
     Same `frame` semantics as `movement_rows()`. The model population is
     derived from `roster.endpoints()` each call.
@@ -918,8 +953,15 @@ def endpoint_movement(cls=None, min_abs_delta=None, prompt=None, limit=None,
     where = ["(base, aligned) IN (%s)" % tup]
     if cls is not None:
         where.append("cls=%s" % _lit(cls))
+    if prompt is not None and prompts is not None:
+        raise ValueError("pass `prompt` or `prompts`, not both")
     if prompt is not None:
         where.append("prompt=%s" % _lit(prompt))
+    if prompts is not None:
+        ps = list(prompts)
+        if not ps:
+            return []
+        where.append("prompt IN (%s)" % ",".join(_lit(p) for p in ps))
     if min_abs_delta is not None:
         where.append("abs(delta) >= %f" % float(min_abs_delta))
     if int(rule_version) == 4 and frame is not None:
