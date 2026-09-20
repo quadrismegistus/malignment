@@ -86,7 +86,7 @@ for p in (ROOT, EXP):
     if p not in sys.path:
         sys.path.insert(0, p)
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, model_validator
 from largeliterarymodels.task import Task
 
 import pooled_tables as PT
@@ -139,6 +139,51 @@ class FrameRelation(BaseModel):
     confidence: str = Field(
         description="high, medium or low. Low where you can see a difference "
                     "but cannot state what relates the two sides.")
+
+    @model_validator(mode="after")
+    def _columns_as_given(self, info):
+        """Refuse a word placed in the column it was not shown in.
+
+        **THE RETRY LOOP HAS ALWAYS ACTED ON THIS**; nothing said so. A
+        `model_validator` that raises is caught by `extract` and
+        `extract_imap`, which re-ask. Two things it could not do until
+        `largeliterarymodels` 63094cc: see the ITEM (the columns are a
+        property of the frame, not of the schema), and say what actually went
+        wrong -- the reprompt used to assert the JSON was malformed when it had
+        parsed fine, so the model reformatted instead of fixing the placement.
+
+        **NOT IN THE CACHE KEY, AND WARM HITS RE-VALIDATE.** That is the
+        library's design and the important half is the second: without it the
+        first run to cache a rejected answer would serve it free forever, and a
+        cache hit looks exactly like a pass.
+
+        Context absent -> no rule. A caller that forgets to pass it gets the
+        old behaviour rather than a spurious refusal, and `check()` still
+        catches the defect after the fact.
+        """
+        ctx = getattr(info, "context", None) or {}
+        A, B = ctx.get("A"), ctx.get("B")
+        if not A or not B:
+            return self
+        A, B = set(A), set(B)
+        bad = []
+        for w in self.words_a:
+            if w in B:
+                bad.append("%r appears in words_a but was shown in GROUP B" % w)
+            elif w not in A:
+                bad.append("%r appears in words_a but was never shown" % w)
+        for w in self.words_b:
+            if w in A:
+                bad.append("%r appears in words_b but was shown in GROUP A" % w)
+            elif w not in B:
+                bad.append("%r appears in words_b but was never shown" % w)
+        if not self.words_a or not self.words_b:
+            bad.append("both words_a and words_b must be non-empty")
+        if bad:
+            raise ValueError(
+                "; ".join(bad) + ". Keep every word in the column it was "
+                "printed in and state a relation that accommodates it.")
+        return self
 
 
 def blind_for(prompt, seed=SEED):
@@ -306,11 +351,28 @@ def main(argv=None):
         step = max(1, len(fs) // a.n)
         fs = fs[::step][:a.n]
 
-    items = []
+    #: **A FRAME WITH AN EMPTY COLUMN HAS NO RELATION TO NAME, AND ASKING WAS
+    #: MY DEFECT, NOT THE RATER'S.** `Once upon a time` clears the threshold
+    #: with one word (`there` 25/6/18) and nothing on the other side; so does
+    #: `...closed her` (`eyes` 35/0/15). Both raters correctly returned an
+    #: empty side and `check()` scored it as a format defect -- an impossible
+    #: question marked wrong when it was answered honestly. Skipped and
+    #: counted, never sent.
+    items, degenerate = [], []
     for f in fs:
         got = render(f, top=a.top, seed=a.seed, content=a.content_only)
-        if got:
-            items.append((f, got[0], got[1]))
+        if not got:
+            continue
+        g = shown(got[0])
+        if not g.get("A") or not g.get("B"):
+            degenerate.append((f, len(g.get("A", [])), len(g.get("B", []))))
+            continue
+        items.append((f, got[0], got[1]))
+    if degenerate:
+        print("skipped %d frame(s) with an empty column -- no relation to name:"
+              % len(degenerate))
+        for f, na, nb in degenerate:
+            print("   %-58s A=%d B=%d" % (f[:58], na, nb))
     if not items:
         raise SystemExit("no pooled arms")
 
@@ -325,8 +387,13 @@ def main(argv=None):
 
     t = task(a.model, content=a.content_only)
     errs = {}
+    #: One context per item, in the SAME ORDER as the prompts -- it is a
+    #: positional parallel to metadata_list, so a filter applied to one list
+    #: and not the other would silently validate item i against item j.
+    vctx = [shown(x[1]) for x in items]
     out = t.map([x[1] for x in items], errors=errs, num_workers=a.workers,
                 verbose=True,
+                validation_context_list=vctx,
                 metadata_list=[{"frame": x[0]} for x in items])
     nbad, recs, cov = 0, [], []
     for i, ((f, text, n), r) in enumerate(zip(items, out)):
