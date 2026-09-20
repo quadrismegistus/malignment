@@ -102,3 +102,19 @@ Everything else — `harm_lethality` and `explicitness_charge` included — wait
 ### A correction to these numbers, recorded because they were quoted before it
 
 The support counts I first circulated were understated by one or two throughout (`act_channel` 15 not 16, `valency` 9 not 11, `harm_lethality` 5 not 6). Several propose agents name an axis `Name: pole / pole` — *"Modality of act: speech / physical action"* — and the consolidator cites it as `s15:Modality of act`. A whole-string matcher reads every citation in that format as unresolved. The bug was caught for the fabrication check, which is how the 278-of-280 figure is right; the support counts were then quoted from the run *before* the fix. **Same defect, two passes, and the corrected pass only fixed the question I was asking at the time.**
+
+### `valency` resolved, and a check on the nulls sentence
+
+**paper-claude's decision, 20 Sep 2026:** `valency` gets no count in the body. It goes in a note as corroboration of the intransitive reading, phrased so its support is visible — *"readers of the relations, working from names alone, proposed an axis from object-taking to intransitive, and the base side sits on the object-taking pole in 53 of 69."* His reason: a rule bent the first time it is inconvenient is not a rule, and the directedness scale already carries the claim in the body. It can move up if a leak-fixed replicate raises it.
+
+**He also wants a stronger nulls sentence: that the readers proposed the formal axes as often as the semantic ones, and only the semantic ones have a direction.** The second half is exact. The first half is a distributional claim and was tested rather than assumed:
+
+```
+FORMAL (no direction)  n=6   median 7.5  mean 7.8   13, 8, 8, 7, 6, 5
+SEMANTIC (directed)    n=21  median 9.0  mean 10.0  16,16,16,15,15,14,13,11,11,9,9,8,8,8,8,8,7,6,5,4,3
+Mann-Whitney U=40.0, p=0.185
+```
+
+**It survives the test, and the test cannot carry the sentence.** p=0.185 is a failure to detect a difference at n=6, not evidence of equality — the point estimate leans the *other* way (a random formal axis is proposed more often than a random semantic one only 32% of the time, against 50% under the null), and the medians are 7.5 against 9.0. **Absence of a detectable difference is not evidence of sameness**, least of all from six observations.
+
+So the safe version of the sentence is the one anchored on the individual case rather than on the distribution: **`dynamicity` was proposed by 13 of 16 readers and has no direction (26/27, q=1.00)**, while the axes that do have a direction include several proposed by fewer. That claim needs no test and says what the control is for.
