@@ -96,13 +96,25 @@ Two arms see one item. `state_text()` is the single renderer, so the jev cache k
 
 jev accepts BPE fragments as garments and deepseek does not. 58 words jev placed in the worn set deepseek called NOT_A_WORD -- 40 of them jev called GARMENT outright (`blaz`, `kimon`, `knick`, `legg`, `trou`, `underp`, `shir`) -- and **zero** went the other way. A word enters the scale only if BOTH arms place it in the worn set:
 
-| scale | all 479 rows | the 181 that pass the veto |
-|---|---|---|
-| exposure | rho +0.339 | **+0.809** |
-| position | rho +0.405 | **+0.911** |
-| dressing | rho +0.347 | **+0.753** |
+| scale | all 479 rows | deepseek engaged, 322 | the 181 that pass the veto | the 141 it fails |
+|---|---|---|---|---|
+| exposure | +0.339 | **+0.427** | **+0.809** | +0.100 |
+| position | +0.405 | **+0.493** | **+0.911** | −0.014 |
+| dressing | +0.347 | **+0.505** | **+0.753** | +0.225 |
 
-The disagreement is a fragment problem, not a scale problem: on words both arms accept as things, the two coders agree at 0.75 to 0.91.
+**THE ALL-479 COLUMN IS NOT A BASELINE AND SHOULD NOT BE QUOTED AS ONE.** deepseek writes 0/0/0 on all three scores in 154 of its 157 NOT_A_WORD rows, 98%; jev never zeroes on any gate outcome. So a third of that column is one arm's refusal convention correlated against the other arm's real values. The baseline is the rows where deepseek actually answered, and the veto's lift is 0.43 to 0.51 up to 0.75 to 0.91, not 0.34 up to 0.91.
+
+The disagreement is a fragment problem, not a scale problem: on words both arms accept as things, the two coders agree at 0.75 to 0.91, and on the words the veto discards they agree at about zero.
+
+### What the veto costs, and what cannot be measured here
+
+Of the 298 words the veto discards, **147 (49%) go because the coders DISAGREED**, not because both said no. So half its cost is selection on inter-coder agreement rather than fragment removal.
+
+On this list that cost is near zero, because what it discards carries no signal: the 58 fragment disagreements agree at +0.055 / +0.051 / +0.036, and the 89 taxonomic ones at +0.173 / +0.084 / +0.279.
+
+**But the 89 are not clean words two coders read differently.** They are `bel`, `bur`, `col`, `bathing`, `cold`, `cowboy`, `body`, `cover`, `cloths`: jev reading a fragment or a modifier in-frame as a garment while deepseek routes it to OTHER_NOUN rather than NOT_A_WORD. The 58 and the 89 are one failure wearing two labels, 147 of 479, so the fragment story is larger than the headline number and not smaller.
+
+Which means **the cost of the veto is not measured here, rather than measured and found cheap.** This list holds no stratum of clean, gradable words that two coders merely disagree about, so it cannot say what the veto would discard on a corpus made of those. The list that makes the veto obviously worth running is the same list that makes its cost unmeasurable.
 
 **The pilot did not catch it, and that is a lesson about the pilot.** `PILOT` was built half fragments and half real words precisely to test this, with `bathro` against `bathrobe` named in the code as the check that mattered most. jev rejected all five fragments -- `bathro`, `apr`, `t`, `bl`, `g` -- and deepseek agreed on all ten items. Five for five, and the hazard appeared anyway at 479.
 
