@@ -1,0 +1,48 @@
+digraph kindflow {
+  rankdir=LR; splines=true; overlap=false;
+  size="4.8,5.52!"; ratio=compress;
+  bgcolor="white"; nodesep=0.14; ranksep=0.95;
+  node [shape=box style="rounded" fontname="Helvetica" fontsize=9 color="black" fontcolor="black" margin="0.06,0.035" penwidth=0.6];
+  edge [fontname="Helvetica" fontsize=7.2 color="#4d4d4d" penwidth=0.75 arrowsize=0.5];
+  { rank=same;
+    "B_MIXED" [label="mixed\n237" penwidth=0.35 color="#8c8c8c" fontcolor="#595959"];
+    "B_PHYSICAL_ACT" [label="physical act\n106"];
+    "B_THING" [label="thing\n48"];
+  }
+  { rank=same;
+    "A_MIXED" [label="mixed\n236" penwidth=0.35 color="#8c8c8c" fontcolor="#595959"];
+    "A_PHYSICAL_ACT" [label="physical act\n55"];
+    "A_THING" [label="thing\n48"];
+    "A_VOCAL_ACT" [label="voice\n31"];
+    "A_MENTAL_STATE" [label="mental state\n13"];
+    "A_PROCEDURE" [label="procedure\n8"];
+  }
+  { rank=same;
+    "F_NONE" [label="no feeling either side\n199" penwidth=0.35 color="#8c8c8c" fontcolor="#595959"];
+    "F_KEPT" [label="feeling kept\n133"];
+    "F_RECOLORED" [label="feeling changed\n52"];
+    "F_GONE" [label="feeling gone\n49"];
+    "F_INTRODUCED" [label="feeling arrives\n5"];
+  }
+  "B_MIXED" -> "A_MIXED" [label="183\nnone 112 / kept 48\nkill → dance" style=dotted];
+  "B_PHYSICAL_ACT" -> "A_MIXED" [label="53\nkept 18 / gone 15\nkilled → helped" style=dashed];
+  "B_THING" -> "A_THING" [label="48\nkept 18 / gone 14\nwomb → apartment" style=dashed];
+  "B_PHYSICAL_ACT" -> "A_PHYSICAL_ACT" [label="33\nkept 18 / none 10\nkilled → walked" style=dashed];
+  "B_MIXED" -> "A_PHYSICAL_ACT" [label="22\nnone 11 / kept 4\nbeat → carried" style=dotted];
+  "B_PHYSICAL_ACT" -> "A_VOCAL_ACT" [label="20\nkept 16 / gone 3\ntorture → speak" style=dashed];
+  "B_MIXED" -> "A_MENTAL_STATE" [label="13\nnone 7 / recolored 4\nfuck → live" style=dotted];
+  "B_MIXED" -> "A_VOCAL_ACT" [label="11\nnone 5 / kept 4\nbeat → pray" style=dotted];
+  "B_MIXED" -> "A_PROCEDURE" [label="8\nnone 7 / kept 1" style=dotted];
+  "A_MIXED" -> "F_NONE" [label="118" color="#b3b3b3" penwidth=0.5 arrowsize=0.4 style=dotted];
+  "A_MIXED" -> "F_KEPT" [label="66" color="#b3b3b3" penwidth=0.5 arrowsize=0.4 style=dashed];
+  "A_MIXED" -> "F_GONE" [label="20" color="#b3b3b3" penwidth=0.5 arrowsize=0.4 style=solid];
+  "A_MIXED" -> "F_RECOLORED" [label="29" color="#b3b3b3" penwidth=0.5 arrowsize=0.4 style=dashed];
+  "A_THING" -> "F_GONE" [label="14" color="#b3b3b3" penwidth=0.5 arrowsize=0.4 style=solid];
+  "A_THING" -> "F_KEPT" [label="18" color="#b3b3b3" penwidth=0.5 arrowsize=0.4 style=dashed];
+  "A_THING" -> "F_NONE" [label="13" color="#b3b3b3" penwidth=0.5 arrowsize=0.4 style=dotted];
+  "A_VOCAL_ACT" -> "F_KEPT" [label="20" color="#b3b3b3" penwidth=0.5 arrowsize=0.4 style=dashed];
+  "A_PHYSICAL_ACT" -> "F_NONE" [label="21" color="#b3b3b3" penwidth=0.5 arrowsize=0.4 style=dotted];
+  "A_PHYSICAL_ACT" -> "F_KEPT" [label="22" color="#b3b3b3" penwidth=0.5 arrowsize=0.4 style=dashed];
+  labelloc="b"; labeljust="l";
+  label=<<font point-size="7.65">438 frames; 303 dropped where the two label orders disagreed; edges with fewer than 6 frames omitted; top lift tertile only (cut +0.33)</font>>;
+}
