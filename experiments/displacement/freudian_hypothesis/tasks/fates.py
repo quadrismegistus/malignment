@@ -776,6 +776,92 @@ def patterns(rows):
     return out
 
 
+def dose_table(rows, bins=3, quiet=False):
+    """The fates against the FRAME'S OWN charge, `charge.dose`. -> dict
+
+    **DOSE IS A PROPERTY OF THE PROMPT, NOT OF THE MOVEMENT.** `charge.dose` is
+    `task_charge`'s rating of the SETUP ALONE -- what the fragment describes
+    before any word fills the blank -- averaged over the lineages that rated it
+    (pairwise reliability 0.929; at n=50, 0.998). So it is a covariate fixed
+    before alignment touches anything, and nothing here is circular: the fates
+    come from the word groups, the dose from the fragment.
+
+    The question it answers is the one the pattern counts raise. 74 of 93 frames
+    match none of the five patterns. If those are the LOW-dose frames, the five
+    describe what alignment does where there is something to do, and the
+    remainder is alignment doing little on frames that ask for little. If the
+    unmatched frames are spread evenly over dose, the five are simply a thin
+    description of the corpus.
+    """
+    import statistics
+    from malignment import charge
+    #: `charge.dose` RETURNS None for an unrated frame rather than raising, so a
+    #: try/except does not filter it and the None reaches the sort. Absence is a
+    #: value here, not an exception.
+    ds = {}
+    for r in rows:
+        try:
+            d = charge.dose(r["frame"])
+        except Exception:
+            d = None
+        if isinstance(d, (int, float)):
+            ds[r["frame"]] = float(d)
+    have = [r for r in rows if r["frame"] in ds]
+    if not have:
+        return {}
+    vals = sorted(ds[r["frame"]] for r in have)
+    cuts = [vals[int(len(vals) * (i + 1) / bins) - 1] for i in range(bins)]
+
+    def binof(r):
+        d = ds[r["frame"]]
+        for i, c in enumerate(cuts):
+            if d <= c:
+                return i
+        return bins - 1
+
+    pats = {lab: set(f) for lab, _n, _e, f in patterns(have)}
+    out = {}
+    if not quiet:
+        print("\nFATES BY FRAME DOSE (charge.dose -- the SETUP alone, rated "
+              "before any completion)")
+        print("  %d of %d frames carry a dose; tertiles at <=%.2f, <=%.2f, <=%.2f"
+              % (len(have), len(rows), *cuts[:3]))
+        print()
+        print("  %-14s %5s %7s %9s %9s %9s %9s"
+              % ("dose tertile", "n", "mean", "act GONE", "affect", "any", "no"))
+        print("  %-14s %5s %7s %9s %9s %9s %9s"
+              % ("", "", "dose", "/REPLACED", "GONE", "pattern", "pattern"))
+    for i in range(bins):
+        grp = [r for r in have if binof(r) == i]
+        if not grp:
+            continue
+        acts = [r for r in grp if r["orient"].get("act") is not None]
+        gone = sum(1 for r in acts if r["orient"]["act"] in ("GONE", "REPLACED"))
+        affs = [r for r in grp if r["orient"].get("affect") is not None]
+        agone = sum(1 for r in affs if r["orient"]["affect"] == "GONE")
+        anyp = sum(1 for r in grp if any(r["frame"] in v for v in pats.values()))
+        md = statistics.mean(ds[r["frame"]] for r in grp)
+        out[i] = dict(n=len(grp), dose=md, act_gone=gone, act_n=len(acts),
+                      affect_gone=agone, affect_n=len(affs), any_pattern=anyp)
+        if not quiet:
+            print("  %-14s %5d %7.2f %4d/%-4d %4d/%-4d %4d/%-4d %4d/%-4d"
+                  % ("%d (%s)" % (i + 1, ("low", "mid", "high")[i] if bins == 3 else ""),
+                     len(grp), md, gone, len(acts), agone, len(affs),
+                     anyp, len(grp), len(grp) - anyp, len(grp)))
+    if not quiet:
+        print()
+        print("  %-28s %5s %7s %7s" % ("pattern", "n", "mean", "vs rest"))
+        for lab, _n, _e, frames in patterns(have):
+            fs = [ds[f] for f in frames if f in ds]
+            if not fs:
+                continue
+            rest = [ds[r["frame"]] for r in have if r["frame"] not in set(frames)]
+            print("  %-28s %5d %7.2f %+7.2f"
+                  % (lab, len(fs), statistics.mean(fs),
+                     statistics.mean(fs) - statistics.mean(rest)))
+    return out
+
+
 def _main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -789,6 +875,8 @@ def _main(argv=None):
     ap.add_argument("--out", default=None)
     ap.add_argument("--confirm", default=None, metavar="JSONL")
     ap.add_argument("--md", default=None, help="render a coded run as markdown")
+    ap.add_argument("--dose", action="store_true",
+                    help="cross the fates with the frame's own charge.dose")
     ap.add_argument("--also", default=None, help="second copy of the markdown")
     #: **THE FULL RUN SHOULD FLIP (paper-claude, 2026-09-20).** A fixed A=base
     #: order removes a trap in the tooling and costs the design its blindness:
@@ -805,6 +893,8 @@ def _main(argv=None):
     if a.confirm:
         rows = [json.loads(l) for l in open(a.confirm, encoding="utf-8")]
         res = confirm(rows)
+        if a.dose:
+            dose_table(rows)
         if a.md:
             render_md(rows, res, a.md, also=a.also)
         return 0
