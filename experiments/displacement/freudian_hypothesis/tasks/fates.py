@@ -817,7 +817,24 @@ def dose_table(rows, bins=3, quiet=False, metric="frame"):
     for r in rows:
         d = None
         try:
-            if metric == "base_mass":
+            if metric == "shown_base":
+                #: **THE THIRD DOSE: WHAT THE FATES ANNOTATOR ACTUALLY READ.**
+                #: `charge.scene` rates every candidate word in the frame; this
+                #: averages it over ONLY the base-side words that went into the
+                #: call. The other two are properties of the frame and of the
+                #: base arm's whole distribution; this is a property of the
+                #: ITEM -- and the item is what produced the code being dosed.
+                #:
+                #: It is also the only one of the three that moves when the
+                #: RELATION reader's selection moves, since those word lists were
+                #: chosen for separability with any hedge-forcing word dropped.
+                #: So a correlation here is partly with what a reader found
+                #: separable, which the other two are immune to.
+                sc = charge.scene(r["frame"]) or {}
+                ws = [w.strip() for w in (r.get("_base") or "").split(",")]
+                vals = [sc[w] for w in ws if w in sc]
+                d = sum(vals) / len(vals) if vals else None
+            elif metric == "base_mass":
                 vals = []
                 for b in charge.lineages():
                     tb, _ta = charge.arms(r["frame"], b)
@@ -850,6 +867,8 @@ def dose_table(rows, bins=3, quiet=False, metric="frame"):
     out = {}
     if not quiet:
         print("\nFATES BY %s" % (
+            "THE BASE WORDS THE ANNOTATOR SAW (mean charge.scene over exactly "
+            "those words)" if metric == "shown_base" else
             "BASE CHARGE MASS (mean T_base over the 50 lineages -- the rating "
             "weighted by the base arm's own mass)" if metric == "base_mass"
             else "FRAME DOSE (charge.dose -- the candidate vocabulary, unweighted)"))
@@ -905,10 +924,12 @@ def _main(argv=None):
     ap.add_argument("--confirm", default=None, metavar="JSONL")
     ap.add_argument("--md", default=None, help="render a coded run as markdown")
     ap.add_argument("--dose", nargs="?", const="frame", default=None,
-                    choices=("frame", "base_mass"),
+                    choices=("frame", "base_mass", "shown_base"),
                     help="cross the fates with charge: `frame` is the unweighted "
                          "candidate rating, `base_mass` the base arm's own "
-                         "mass-weighted charge")
+                         "mass-weighted charge, `shown_base` the mean "
+                         "scene rating of the base words the fates annotator "
+                         "was actually shown")
     ap.add_argument("--also", default=None, help="second copy of the markdown")
     #: **THE FULL RUN SHOULD FLIP (paper-claude, 2026-09-20).** A fixed A=base
     #: order removes a trap in the tooling and costs the design its blindness:
