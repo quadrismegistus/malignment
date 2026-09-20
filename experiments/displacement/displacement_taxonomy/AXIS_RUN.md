@@ -1,4 +1,8 @@
-# The 28-axis run — what it was, what it found, and what is wrong with it
+# The axis runs — what they were, what they found, and what is wrong with them
+
+> **THE RUN OF RECORD IS SEED 1**, the leak-fixed rerun at the bottom of this file: 38 axes, 18 with a direction, the pole reader blinded to which list fell. Both producers now default to it. Seed 0 — the 28-axis run described first below — was run under three prompt leaks and is kept because the comparison between the two is itself a result, not because anything should be quoted from it.
+
+## Seed 0: the leaked run
 
 20 Sep 2026. A 33-agent Opus-high workflow over the 2,466 blind relation readings in `results/relations_charge_corpus.jsonl`. Producers: `relation_group_input.py`, `relation_group_report.py`. Output: `results/grouping_seed0/`, `results/relation_groups_seed0.md`. Commit `386af85e`.
 

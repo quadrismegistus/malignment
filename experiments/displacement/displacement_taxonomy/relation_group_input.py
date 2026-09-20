@@ -164,7 +164,9 @@ def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--shards", type=int, default=0)
-    ap.add_argument("--seed", type=int, default=0)
+    #: **SEED 1 IS THE RUN OF RECORD.** Seed 0 is the leaked run; see
+    #: `AXIS_RUN.md`. The default is the decision.
+    ap.add_argument("--seed", type=int, default=1)
     ap.add_argument("--lang", choices=("en", "zh", "both"), default="both")
     a = ap.parse_args(argv)
     rows = items()

@@ -199,7 +199,16 @@ def report(seed=0):
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--seed", type=int, default=0)
+    #: **SEED 1 IS THE RUN OF RECORD (RH).** Seed 0 is the LEAKED run: its
+    #: propose stage was told the corpus was alignment base-vs-aligned, that a
+    #: hidden direction existed, and what count to aim for. Seed 1 fixed all
+    #: three, split the axis judgement from the pole judgement, and blinded the
+    #: pole reader to which list fell. Both are kept -- the comparison between
+    #: them is a result -- but the DEFAULT is the decision, and a default
+    #: pointing at the leaked run while a document says otherwise is exactly
+    #: the failure `fate_compare.py` was corrected for this morning. I then
+    #: reproduced it here within the hour, which is why it is written down.
+    ap.add_argument("--seed", type=int, default=1)
     ap.add_argument("--out", default=None)
     a = ap.parse_args(argv)
     rel, axes, vocab, rows, bad = report(a.seed)
