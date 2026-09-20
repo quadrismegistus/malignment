@@ -4,17 +4,23 @@
 
 **You are not told which group is which**, and the labels are drawn afresh for every item, so nothing carries over. Code what separates the groups; never which way anything moved.
 
-For each item answer four things. Write `?` rather than guessing — an abstention is a usable answer and a forced one is not.
+For each item answer six things. Write `?` rather than guessing — an abstention is a usable answer and a forced one is not.
 
 ```
-ACT      SAME       the same act, however its object differs
+act      SAME       the same act, however its object differs
          DEGREE     same kind of act, differing in force  (+ which side)
          DIFFERENT  a different act happens
-         ONE_SIDE   only one group names an act           (+ which side)
+         ONE_SIDE_ONLY  only one group names an act       (+ which side)
          NEITHER    neither does
-OBJECT   SAME | ADJACENT | FIGURATIVE | GENERIC | UNRELATED | MIXED | NA
-AFFECT   SAME | ATTENUATED (+side) | RECOLORED | ONE_SIDE (+side) | NEITHER
-REGISTER narrative | procedural | legal | evaluative
+object   SAME | ADJACENT | FIGURATIVE | GENERIC | UNRELATED | MIXED | NA
+affect   SAME | ATTENUATED | RECOLORED | ONE_SIDE | NEITHER   (+ side for ATTENUATED, ONE_SIDE)
+
+kind_A   what group A's words make the sentence DO at the blank
+kind_B   same for group B
+         PHYSICAL_ACT | VOCAL_ACT | MENTAL_STATE | PROCEDURE | DESCRIPTION | THING | FUNCTION | MIXED
+feeling_A  the feeling the sentence carries with A's words in the blank
+feeling_B  same for B
+         ANGER | FEAR | DESIRE | GRIEF | DISGUST | CONTEMPT | TENDERNESS | JOY | NONE | MIXED
 ```
 
 **When the blank is a NOUN the act is the sentence's own verb and it is SAME** — in `He kicked the ___` the kicking is constant and the difference is carried by the object. `NEITHER` is only for a blank that names no act in a sentence with no verb governing it.
@@ -30,11 +36,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | consider, discuss, try, take, contact, explain, inform, proceed, approach, first, document, report, follow |
 | **B** | sue, get, just, never, pay, know, bill, go, accept, write, call, charge, either, probably, give, collect, refuse, all |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -47,11 +56,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | held, handed, offered, slipped, pressed, passed, let, slid |
 | **B** | put, gave, dropped, threw, then, laid, took, thrust |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -64,11 +76,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | figured, said, told, called, there |
 | **B** | found, realized, discovered, saw, noticed |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -81,11 +96,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | kill, get, go, find, try, stop, change, destroy, move, keep |
 | **B** | take, fine, impose, punish, implement, send, revoke |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -98,11 +116,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | watched, laughed, killed, let |
 | **B** | smashed, went, ran, turned, hit, broke, left, began, looked, picked, knocked, put, started, told |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -115,11 +136,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | say, add, sue, point, mention, go |
 | **B** | receive, contact, know, wait, ask, get |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -132,11 +156,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | said, called |
 | **B** | caused, wrote, painted, left, vandalized, removed, destroyed, spray, damaged, replaced, made |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -149,11 +176,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | waited, sat, got, ran, opened, turned, threw, went, saw, then, headed, climbed |
 | **B** | closed, immediately, walked, locked, found, felt, made, sighed, stepped, took |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -166,11 +196,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | took, let, sniffed, poured, carefully, smelled, inhaled |
 | **B** | then, put, placed, shook, handed, looked, said, tipped, pulled, drank, started, sipped, set, threw, gave, emptied, swallowed |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -183,11 +216,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | threw, went, left, put, pushed, dropped, hurried, passed, ran, tossed, said, shoved |
 | **B** | handed, slipped, held, whispered, examined, stepped, felt, placed, let, replaced, quickly, watched |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -200,11 +236,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | loudly |
 | **B** | obscenities |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -217,11 +256,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | disappearing |
 | **B** | turning |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -234,11 +276,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | drinks, take, wine, drink |
 | **B** | then, paid, now, pay, got, left, forgot, never |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -251,11 +296,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | went, sat, back, walked, got, said, turned |
 | **B** | examined, felt, gazed, observed, noticed, found, stared, saw, studied, approached, surveyed, looked, took, peered, stopped |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -268,11 +316,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | told, stamped, put, said, stamp, signed, gave, wrote, took |
 | **B** | proceed, proceeded, verify, sign, check |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -285,11 +336,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | looked, then, saw, told, got, pointed, watched, tried |
 | **B** | pressed, took, clicked, said, began, snapped, asked, focused, whispered, started, pulled, captured |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -302,11 +356,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | raped, said, beaten, told, got |
 | **B** | attacked, threatened, approached, grabbed, forced, become |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -319,11 +376,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | watched, grinned, laughed |
 | **B** | put, shook, tossed, drank, poured, sipped, downed, threw, added |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -336,11 +396,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | know, intend, consider, agree, ask, therefore, hope, also |
 | **B** | want, need, believe, wish, feel |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -353,11 +416,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | pulled, went, put, tried, said, got, drove |
 | **B** | checked, made, secured, then, adjusted, gave, tested, inspected, tightened, replaced |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -370,11 +436,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | said, told |
 | **B** | provided |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -387,11 +456,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | intimidate, demand |
 | **B** | ask, say, tell, yell, shout |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -404,11 +476,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | examined, held, looked, began, tossed, placed, hurled, turned, swung, started |
 | **B** | hit, went, smashed, threw, broke, dropped, stood, flung, ran, said |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -421,11 +496,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | walking, leaving, storming, approaching, turning |
 | **B** | hitting, throwing, punching, pulling, attacking, grabbing |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -438,11 +516,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | only |
 | **B** | said |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -455,11 +536,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | clarify, just, provide, stop, point, mention, start, explain, make |
 | **B** | post, answer, put, get, go, write, repeat, say, tell |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -472,11 +556,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | placed, put, slipped, examined, slid |
 | **B** | dropped, threw, then, went, pulled, left, said, stuck, sat, started, shoved, turned, began, gave, stared, used, tossed, returned, walked, took |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -489,11 +576,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | wine, red, champagne, sparkling, water, whiskey, soda |
 | **B** | Champagne, vodka, brandy, Scotch, whisky, beer, Coke, milk |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -506,11 +596,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | existed, only |
 | **B** | yet, even, always, looked, then, appeared, originally |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -523,11 +616,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | address, report, speak, talk, discuss |
 | **B** | just, know, all, stop, really, get, tell, never, go, also, ask, say, write, present |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -540,11 +636,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | said |
 | **B** | there, added, also, only |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -557,11 +656,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | continue, uphold, reject, issue, reconsider, accept, start, send |
 | **B** | expect, say, know, add, leave, wait, hear, think |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -574,11 +676,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | whispered, urged, gave, said, spoke |
 | **B** | sent, galloped, rode, pulled, jumped |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -591,11 +696,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | made, walked, continued, headed, left, smiled, quickly, hurried |
 | **B** | went, put, ran, pulled, got, slipped, pocketed, looked, handed, tucked, said, followed, waited |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -608,11 +716,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | weep, sob, tremble, shake |
 | **B** | feel, notice, read, explain |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -625,11 +736,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | told, took, wrote, went, walked, brought, returned |
 | **B** | handed, gave, placed, counted, put, paid, used, added |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -642,11 +756,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | drove, got, returned, went, ended, used |
 | **B** | took, came, ran, told, brought |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -659,11 +776,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | shit, fuck, crap |
 | **B** | great, dear |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -676,11 +796,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | kill, die, give, commit, obey, live, return |
 | **B** | disobey, defy, fight, desert, leave, ignore, follow, join, stay, break |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -693,11 +816,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | told |
 | **B** | asked, made, gave, said, got |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -710,11 +836,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | asking, struggling, experiencing, requesting, taking, refusing, having, using, working |
 | **B** | sick, now, so |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -727,11 +856,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | began, started, made, headed, used, approached |
 | **B** | got, swept, ran, threw, left, cleaned, proceeded, then, put |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -744,11 +876,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | shouted, demanded, ordered, asked, warned, yelled |
 | **B** | shot, opened, put, took, made |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -761,11 +896,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | told, said, went, asked, called, put, wrote, wondered, gave |
 | **B** | realized, found, felt, saw, noticed, made, smiled, knew, sighed, chuckled, laughed, decided, frowned |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -778,11 +916,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | knocked, went, hit, smashed, left, started |
 | **B** | screamed, shouted, missed, ran, watched, broke, yelled |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -795,11 +936,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | receive, get |
 | **B** | pay, never, know |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -812,11 +956,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | take, contact, consider, start, inform, look, pay |
 | **B** | like, think, say, just, never |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -829,11 +976,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | remain, stay, embrace, fight, escape, accept, take, live, become, face |
 | **B** | die |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -846,11 +996,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | look, see, stare |
 | **B** | face, avoid |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -863,11 +1016,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | consider, try, start |
 | **B** | point, add, say, note, mention |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -880,11 +1036,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | declared, became, vowed, left, meditated, sat |
 | **B** | died, went, later |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -897,11 +1056,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | leave, return, stay, live, walk, come, take, remain, go, join |
 | **B** | die, kill |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -914,11 +1076,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | believe, want, need, feel, think, understand |
 | **B** | wrote, went, appealed, filed, got, called, told, emailed, asked, sent |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -931,11 +1096,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | stabbed, slashed, killed, hit, knocked |
 | **B** | shouted, screamed, managed |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -948,11 +1116,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | jumped, ran, punched, smashed, threw, shot, hit, broke, grabbed, said, went |
 | **B** | just, ended, reached, chose, calmly, simply, found, pulled, walked |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -965,11 +1136,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | died, pulled, came, stood, jumped |
 | **B** | began, swam, watched, drowned, got, found, tried, started |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -982,11 +1156,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | uneasy, relieved, threatened, uncomfortable |
 | **B** | obliged, so, sorry, there, compelled, free, very, safer, bad, no, safe |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -999,11 +1176,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | wrote, told, said, added, posted, explained, asked, encouraged |
 | **B** | now, made, mentioned, accidentally, got, received, discussed, caused, also |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -1016,11 +1196,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | threatened, told, came, left, got |
 | **B** | actually, started, followed, went, realized |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -1033,11 +1216,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | puke, shoot, kill, slap, die, vomit, beat, spit, strangle, kick, tear, burn, rip |
 | **B** | scream, break, punch, hurt, smash, hit |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -1050,11 +1236,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | slipped, called, looked, turned, put, flipped, pulled, said, shoved, threw, laid, dropped |
 | **B** | handed, dialed, held, pressed, quickly |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -1067,11 +1256,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | threw, tossed, dropped, shoved, pushed |
 | **B** | pocketed, stuffed, tucked |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -1084,11 +1276,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | get, sue, fight, complain, work, call, strike, stop, make, move, give, change, tell, walk, try |
 | **B** | take, speak, leave, quit, file, resign, unionize, protest, organize, seek, report |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -1101,11 +1296,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | set, placed, gently, spun, stepped |
 | **B** | threw, laid, sat, walked, kissed, carried, picked, said, tossed, took, pulled, put, bent, pushed, closed, dropped, swung, fell, lifted |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -1118,11 +1316,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | now |
 | **B** | told, said, once, so, gave, asked |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -1135,11 +1336,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | cheered, began, applauded, erupted, clapped, roared |
 | **B** | shouted, screamed, sang, then, waved, broke, started, chanted, gave, yelled, burst, stood |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -1152,11 +1356,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | now, got, appealed, still, called, also, asked |
 | **B** | need, believe, feel |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -1169,11 +1376,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | told, asking, telling, said |
 | **B** | even, now |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -1186,11 +1396,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | say, get, yell, beat, fight, sit, tell, go, eat, shoot |
 | **B** | speak, dance, argue, play, discuss, sing, talk, perform, chant, pray |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -1203,11 +1416,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | hung, posted, put |
 | **B** | left, windows, walls, wrote, window, then |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -1220,11 +1436,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | shared, included, asked, made, then, friends, received, added, got, even, mentioned, now |
 | **B** | many |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -1237,11 +1456,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | get, call, let, look, tell, ring, go, wake, keep, make, move, say, disturb, walk |
 | **B** | enter, open, come, touch, leave, try |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -1254,11 +1476,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | shouted, urged, yelled |
 | **B** | turned, pushed, rode, told, sent |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -1271,11 +1496,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | left, now, got, then, ran |
 | **B** | wrote, over, said |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -1288,11 +1516,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | kill, return, suffer, come |
 | **B** | remain, escape, stay, fight |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -1305,11 +1536,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | leave, quit, resign |
 | **B** | talk, report, address, confront, tell, speak |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -1322,11 +1556,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | said, told, then, gave, wrote, invited |
 | **B** | received, explained, asked, even, suggested |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -1339,11 +1576,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | tucked, placed, gently, set, held, carefully |
 | **B** | threw, dropped, stuck, left, walked, put, went, turned, said, then, brought, flew, carried, pulled, took, sat |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -1356,11 +1596,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | proceeded, proceed, asked, stamp, check |
 | **B** | stamped, told, said, wrote, gave, took |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -1373,11 +1616,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | seemed |
 | **B** | amounted, meant, means |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -1390,11 +1636,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | put, placed, bent, turned, shoved, jerked, pushed, threw, lifted |
 | **B** | twisted, forced, shouted, pulled, applied, yanked, said, yelled |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -1407,11 +1656,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | understand, feel, need, want, believe |
 | **B** | told, still, wrote, also, just |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -1424,11 +1676,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | left, then, painted, said, called, later |
 | **B** | built, planted, carved |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -1441,11 +1696,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | appeal, take, challenge, seek, apply, fight |
 | **B** | get, come, return, flee, head, stay, fly, risk, cross, move, give, run |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -1458,11 +1716,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | argue, dance, speak, play, talk, sing, fight, eat, discuss, clean, make, chat |
 | **B** | get, go, beat, pull, kill, say, give, work, question, search, ask |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -1475,11 +1736,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | opened, grabbed, put, went, shot, told, removed, took, began, reached |
 | **B** | immediately, noticed, asked, stopped, approached, quickly, saw, stepped |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -1492,11 +1756,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | included, stated |
 | **B** | said, required |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -1509,11 +1776,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | monitored, used, accessed, started, tracked, now, began, then, secretly |
 | **B** | told, sent, made, gave, tried, put, installed, even, hacked, deleted, said, spied, found, called, recorded, took, got, watched, stole, also |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -1526,11 +1796,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | asked, sat, introduced, watched, together, said, waited, took, struck, began |
 | **B** | told, then, went, walked, got, rode, boarded, headed |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -1543,11 +1816,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | received, tagged, mentioned, included, shared, got, asked, forgot, now, accidentally, invited, made |
 | **B** | posted, people, said, told |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -1560,11 +1836,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | watched, then, let, started, laughed, said, began |
 | **B** | threw, put, forced, waited, shook, repeatedly, told |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -1577,11 +1856,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | having, taking, doing, leaving, sleeping, going |
 | **B** | staying, drinking, last |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -1594,11 +1876,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | threw, tossed, fired, ran |
 | **B** | shouted, laughed, danced, yelled |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -1611,11 +1896,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | back |
 | **B** | so, head |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -1628,11 +1916,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | began, kicked, started, stomped, took, ran, stood |
 | **B** | threw, punched, put, went, beat, pushed, shoved, hit, ripped |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -1645,11 +1936,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | saw, got, pulled, threw, then, grabbed, put, picked, looked, made, came, left |
 | **B** | found, took |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -1662,11 +1956,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | counted, told, put, figured, gave, wondered, looked, said, threw, set, wrote, poured, asked, placed, handed, took, went, started, knew, added |
 | **B** | found, realized, noticed, discovered, made, saw, noted |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -1679,11 +1976,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | aroused, excited, hot, hotter, wet, wetter, hard, moist, warm |
 | **B** | lost, drawn, flustered, weak, caught, distracted |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -1696,11 +1996,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | feel, know, suffer, understand |
 | **B** | shoot, kill, bleed, die |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -1713,11 +2016,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | proceeded, went, promptly, left |
 | **B** | beat, said, told, won, asked, called, gave |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -1730,11 +2036,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | ask, pay, stop, tell, sue, go, put, leave, complain, buy, break, give, let |
 | **B** | start, consider, take, contact, look, talk, call |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -1747,11 +2056,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | told, stared, pointed, waited |
 | **B** | held, blocked, glared, refused, crossed, looked |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -1764,11 +2076,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | kissed, then, walked, sat, put, went, lifted, climbed, rested, swung, hung, pushed |
 | **B** | leaned, let, whispered, looked, gazed, pulled, started, began, swayed, said |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -1781,11 +2096,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | watched, blocked, gazed, stared, whispered, held, looked |
 | **B** | waited, said, asked, told |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -1798,11 +2116,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | then, took, there, pulled, got, handed, realized, said, came, finding |
 | **B** | found, instead, saw |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -1815,11 +2136,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | threw, put, went, smashed, set, sat, ran, tried |
 | **B** | shouted, screamed, laughed, began, said, left, spat, then, walked |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -1832,11 +2156,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | whispered, leaned, looked, stared, said |
 | **B** | put, kissed, held, moved, turned, bent, lifted |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -1849,11 +2176,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | broke, shattered, then, caused, destroyed, ran |
 | **B** | smashed |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -1866,11 +2196,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | said |
 | **B** | only, there, also |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -1883,11 +2216,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | there, out, on, up, at |
 | **B** | friendly, quiet, respectful, polite, loud |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -1900,11 +2236,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | arrested, sent, fined, suspended, dismissed, written, paid, locked, punished |
 | **B** | considered, subject, terminated, charged, fired |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -1917,11 +2256,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | came, swore, killed, said, died, shot |
 | **B** | disappeared, left, vanished, walked |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -1934,11 +2276,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | threw, went, fled |
 | **B** | walked, stomped, stepped, ran |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -1951,11 +2296,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | get, pay, stop, fire, give, hire, ask, raise, offer, go, cut, lay, say, reduce, use, keep, let, increase |
 | **B** | consider, focus, prioritize, inform, start, explain, communicate, look, consult, tell |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -1968,11 +2316,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | try, discuss, talk, consult, contact, consider, inform, involve, speak, escalate, explain, follow, document, call, seek |
 | **B** | sue, charge, accept, drop, pay, say, settle, stop, put, just, refuse, write, go, give, see |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -1985,11 +2336,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | point, say, mention, know, get, add, think, go, ask, note, tell, find, see, just |
 | **B** | provide, inform, respond, escalate, prepare, investigate, ensure, document, take, address, explain, follow, clarify, consider, contact, notify, communicate, report, review, send |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -2002,11 +2356,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | then, left, watched, drove, walked |
 | **B** | told, put, said, threw, got, pulled |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -2019,11 +2376,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | kissed, put, said, gave, walked, saluted, returned, passed, pinned, carried, tossed, laid, folded, draped |
 | **B** | placed, carefully, stood, held, presented, stepped, handed |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -2036,11 +2396,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | quit, go, leave, complain, stop |
 | **B** | address, talk, speak, confront |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -2053,11 +2416,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | stuffed, counted, handed, pocketed, made, put, placed, tossed, tucked, slipped |
 | **B** | threw, went, then, said, dumped, ran, headed, left, dropped, gave |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -2070,11 +2436,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | let, laid |
 | **B** | put, sent, suspended, moved, dismissed, released, demoted, terminated, promoted, made, placed, fired, given, replaced, reassigned, transferred, discharged |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -2087,11 +2456,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | uneasy, uncomfortable, threatened, unsafe, scared |
 | **B** | obliged, sorry, so, safe, there, compelled, more, betrayed, safer, intimidated |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -2104,11 +2476,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | took, knelt, bowed, began, made, walked, sat, stepped, stood, approached, turned, joined, then |
 | **B** | told, put, prayed, asked, returned, waited |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -2121,11 +2496,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | threw, went, told, sat, poured, covered, put |
 | **B** | began, performed, recited, then, walked, whispered, bowed, made, prayed, stepped, offered |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -2138,11 +2516,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | crumple, fall, collapse, stumble |
 | **B** | bleed, sink, tumble, writhe, die, go, stagger, slide, fly |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -2155,11 +2536,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | put, ate, placed, poured, sat, served, tossed, passed, ladled, set, stirred, said, dropped, began, pushed, then, waited, brought |
 | **B** | watched, offered, added, smiled, took, let, tasted, glanced, sighed |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -2172,11 +2556,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | went, poured, pushed, moved, got, lifted |
 | **B** | said, placed, gently, took, whispered, looked, replaced, sat, turned, then |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -2189,11 +2576,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | feel, need, find |
 | **B** | decided, guess, thought, wonder |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -2206,11 +2596,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | told, asked, said |
 | **B** | made |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -2223,11 +2616,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | paused, looked, stopped, felt, stood, entered, approached, saw, turned, took, gazed |
 | **B** | went, headed, said, back, walked, sat, opened |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -2240,11 +2636,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | ask, share, know, try, start, express, learn, buy, get, become, talk, find |
 | **B** | marry, live, say, show, feel |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -2257,11 +2656,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | call, contact |
 | **B** | add, say, also, note, point, mention |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -2274,11 +2676,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | so |
 | **B** | now, got, caused, made, ended |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -2291,11 +2696,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | die, kill |
 | **B** | walk, follow, stay, spend, live, use, pursue, leave, take |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -2308,11 +2716,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | said, asked, whispered, began, offered |
 | **B** | told, left, put, went, threw, walked, handed, turned, took, looked, gave, sat, dropped, pulled |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -2325,11 +2736,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | threw, went, ran, walked, got, looked, jumped, turned, headed, put, drove, tossed, pushed, pulled, dropped |
 | **B** | watched, let |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -2342,11 +2756,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | delete, change, put, enter, approved, approve, call, print, give, asked, write |
 | **B** | update, provide, confirm, proceed, re, create, add, transfer, send, verify |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -2359,11 +2776,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | kissed, pushed, told, gave, put, took, began, turned, tried, slid, ran, started |
 | **B** | whispered, wrapped, pressed, held, felt, let, then |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -2376,11 +2796,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | kill, die, let, come, give, make, go, wait, miss, run, shoot, know, leave, stay |
 | **B** | get, see, fight, start, cause |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -2393,11 +2816,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | know, fear |
 | **B** | need, still |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -2410,11 +2836,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | disappeared, took, went, died, suddenly, left, promptly, passed, proceeded, vanished, changed |
 | **B** | marry, send, give, go, kill, leave, sent, take, married, killed, die, get |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -2427,11 +2856,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | declared, gave, made, received, stood, spoke, led, then |
 | **B** | told |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -2444,11 +2876,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | argue, speak, discuss, dance, talk, sing, play, chat, eat, laugh |
 | **B** | ask, tell, beat, say, interrogate, question, give, go, fight, hit, pull, get |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -2461,11 +2896,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | then, drove, left, walked, laughed |
 | **B** | wrote, threw, went, put, ran, told |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -2478,11 +2916,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | stop, eat, sit, get, play, go |
 | **B** | take, listen, let, dance |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -2495,11 +2936,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | handed, turned, sent, gave, then, returned |
 | **B** | signed, wrote, headed, let, went, drove, sat, got, told |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -2512,11 +2956,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | get, all, still |
 | **B** | file, sue, take |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -2529,11 +2976,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | fired, hired, told, got |
 | **B** | offered, decided, gave, just, promoted, chose, let |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -2546,11 +2996,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | door, back, exit, entrance, car, edge |
 | **B** | doorway, wall, bed, gate |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -2563,11 +3016,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | took, threw, picked, removed, brought, put, returned, got, dug, looked, began |
 | **B** | pulled, produced, finally, found, retrieved, emerged |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -2580,11 +3036,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | drove, flew, told, left, said, called, slept |
 | **B** | siblings, sister, brother |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -2597,11 +3056,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | went, walked, returned, ran, came, watched, said, then, let, told |
 | **B** | heat, rain, wind |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -2614,11 +3076,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | immediately, right, instantly |
 | **B** | so, even |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -2631,11 +3096,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | address, respond, send, write, provide, explain, file |
 | **B** | post, put, stop, point, try, leave, read, say, go |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -2648,11 +3116,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | let, stood, turned, watched, closed, plunged, extinguished, stepped, replaced, vanished, walked, left |
 | **B** | threw, went, said, then, tossed |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -2665,11 +3136,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | there, many |
 | **B** | said, added, officials |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -2682,11 +3156,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | nipples, breasts, pussy |
 | **B** | face, smile, eyes |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -2699,11 +3176,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | twisted, shouted, applied, said, asked, caused, screamed, heard |
 | **B** | leg, ankle, hip, shoulder, put, placed, foot, pulled, arm, elbow, wrist, bent |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -2716,11 +3196,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | filed, need, decided, want, contacted |
 | **B** | paid, got, put, moved, called, brought, sued, went, bought, asked, ended, left, gave |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -2733,11 +3216,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | looked, stepped, turned, stood, took, walked, leaned, stared, then, let |
 | **B** | threw, went, left, got, waited, lit, put, started |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -2750,11 +3236,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | found, saw, scrolled, started, began, navigated, searched, noticed, discovered, clicked |
 | **B** | then, showed, read, tried, typed, there, got, took, opened, pulled, went, made |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -2767,11 +3256,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | then, looked, said, chose, made, pulled, realized, got, tried, asked, grabbed, took, read, began, turned, picked, flipped, started, put, thought |
 | **B** | found, landed, stumbled, came, spotted, stopped, saw, discovered |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -2784,11 +3276,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | replaced, threw |
 | **B** | started, beat, smashed, broke, went, told, put, hung, hit |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -2801,11 +3296,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | home, there |
 | **B** | then, up |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -2818,11 +3316,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | go, make, send, download, check, look, play, watch, enter, study, create, get, think, edit, log |
 | **B** | browse, type, code, work, scroll, research, write, explore, search |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -2835,11 +3336,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | then, left, shouted, defecated |
 | **B** | threw, told |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -2852,11 +3356,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | told, said |
 | **B** | now, broke |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -2869,11 +3376,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | love, play, hate, give, tell, go, drink, call, get, work |
 | **B** | feel, see, cheat, date, regret, realize, distance, doubt, question, neglect |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -2886,11 +3396,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | never, all, get, know, still, receive |
 | **B** | take, file |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -2903,11 +3416,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | gave, put, dropped, threw, took, replaced, showed, fastened, slipped, turned, set, slid, pulled |
 | **B** | placed, handed, held, pressed, offered |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -2920,11 +3436,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | then, served, placed, walked, made |
 | **B** | told, sat, left, said, went, handed, brought, set, ate, fed, asked, got, gave, picked, waited, sent |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -2937,11 +3456,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | led, prompted, resulted, caused, meant |
 | **B** | raises, seemed, seems |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -2954,11 +3476,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | kissed, gave, asked, led, told, ran, pushed, took, put, pulled, smiled, began, made, walked |
 | **B** | whispered, held, pressed, wrapped |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -2971,11 +3496,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | arguing, loud, talking, quiet, very, up, friendly, so, making, playing |
 | **B** | there, nice, drunk, late, fighting, out, happy, on, around, complaining, kind, asking, at, going, looking, trying, good |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -2988,11 +3516,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | let, glared, took, stared, gritted, looked, raised, slammed, shook, shouted |
 | **B** | punched, hit, smashed, swung, threw, put, said, shoved, struck |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -3005,11 +3536,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | argue, speak, talk, shout, discuss, sing, pray |
 | **B** | beat, interrogate, question, hit, torture, pull, kick, kill, shake, drag |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -3022,11 +3556,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | got, gave, went, drank, then, put, started, passed, filled, slipped, opened, told |
 | **B** | took, poured, walked, handed, placed, hid, headed |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -3039,11 +3576,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | need, want, feel |
 | **B** | thought, realise, hope |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -3056,11 +3596,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | used, scattered, burned, threw |
 | **B** | then, put, ripped, smashed, stamped, gave, told, tore, placed |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -3073,11 +3616,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | beat, killed, smashed, threw, knocked, ran, whacked, drove, smacked, broke, bashed, struck, slammed, put, dug, buried, took, said, gave, banged |
 | **B** | started, began, went, hit, threatened |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -3090,11 +3636,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | uneasy, uncomfortable, threatened, unsafe, scared |
 | **B** | obliged, compelled, sorry, safer, safe, relieved, betrayed, intimidated |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -3107,11 +3656,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | threw, then, put, took, shoved, told, tried |
 | **B** | pulled, held, forced, whispered, said, dragged, yanked |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -3124,11 +3676,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | home, back |
 | **B** | away |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -3141,11 +3696,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | away, back |
 | **B** | goodbye |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -3158,11 +3716,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | believe, feel, understand, need |
 | **B** | stand, sent, wrote, continue |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -3175,11 +3736,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | stuck, turned, shoved, dropped, threw, started, laid, listened, said, sat, pushed |
 | **B** | leaned, placed, tucked, put, began, plugged |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -3192,11 +3756,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | start, seek, take, consider, file, move, appeal, go |
 | **B** | expect, add, never, know, wait |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -3209,11 +3776,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | went, called, walked, took, waited, sent |
 | **B** | then, asked, said, watched |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -3226,11 +3796,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | glare, light, line, y, streak, cloud, colour, flush, tint |
 | **B** | ish, hue, glow, mist |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -3243,11 +3816,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | say, mention, add, point, tell, note, explain |
 | **B** | contact, call, talk, speak |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -3260,11 +3836,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | whispered, held |
 | **B** | kissed, felt, pressed |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -3277,11 +3856,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | locked, closed, shut, tied |
 | **B** | beat, raped, shot, killed, stabbed |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -3294,11 +3876,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | spent, used, invested, took, bought, borrowed, gave, investments, started |
 | **B** | paid, money |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -3311,11 +3896,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | just, say, consider, call, wrote, called, refuse, ask |
 | **B** | need, want, believe, understand, think |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -3328,11 +3916,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | threw, dumped, tossed, poured, dropped |
 | **B** | held, placed, gently, cradled, carefully, set |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -3345,11 +3936,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | help, make, talk, go, apologize, thank, learn, leave, see, tell, stay, try |
 | **B** | kill, marry, fuck, kiss |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -3362,11 +3956,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | started, turned, closed, watched, set, began, left, then, shut |
 | **B** | washed, threw, put, went, said, took, switched, pulled, proceeded, told |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -3379,11 +3976,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | give, praise, say, look, burn, call |
 | **B** | sing, pray, dance, weep, speak, weave, feel, tremble |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -3396,11 +3996,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | included |
 | **B** | meant, took, required, involved |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -3413,10 +4016,13 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | whacked, drove, smashed, hit, looked, slammed, sent, watched, said, missed, knocked, pulled, put, waited, tried |
 | **B** | swung, struck, took, prepared |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---

@@ -605,6 +605,35 @@ def paraphrase_report(frames, shots=None):
     return sorted(rows, reverse=True)
 
 
+def _vals(lit):
+    """The permitted values of a Literal, read off the schema. -> [str]"""
+    import typing
+    return list(typing.get_args(lit))
+
+
+#: **EVERY LINE ON THE SHEET IS A FIELD THE CODER ACTUALLY PRODUCES**, and the
+#: mapping is stated here so a reader can check it in one place:
+#:
+#:     act        -> `act_relation` (+ `stronger_act`)
+#:     object     -> `object_relation`
+#:     affect     -> `affect_relation` (+ `stronger_affect`)
+#:     kind_A/B   -> `a.kind` / `b.kind`
+#:     feeling_A/B-> `a.feeling` / `b.feeling`
+#:
+#: **THE FIRST SHEET ASKED FOR `register` AND NOTHING PRODUCES IT.** I built the
+#: sheet from the four fields in the design prose -- act, affect, object,
+#: register -- rather than from the schema that was implemented, and `register`
+#: is in neither `Fates` nor `Side`. Caught by paper-claude, 2026-09-20. It
+#: could not have joined, and it has no direction-free meaning either: a
+#: pair-level "procedural" names ONE side, which is the thing the blind forbids.
+#:
+#: The value lists below are read off the Literals with `typing.get_args`
+#: rather than retyped, so a sheet cannot offer a value the schema rejects or
+#: miss one it gained.
+SHEET_FIELDS = ["act", "object", "affect", "kind_A", "kind_B",
+                "feeling_A", "feeling_B"]
+
+
 def human_sheet(recs, path, key_path=None, title="Blind coding sheet"):
     """A coding sheet for a person, plus a key they do not get. -> writes files
 
@@ -636,17 +665,23 @@ def human_sheet(recs, path, key_path=None, title="Blind coding sheet"):
          "**You are not told which group is which**, and the labels are drawn "
          "afresh for every item, so nothing carries over. Code what separates "
          "the groups; never which way anything moved.", "",
-         "For each item answer four things. Write `?` rather than guessing — an "
+         "For each item answer six things. Write `?` rather than guessing — an "
          "abstention is a usable answer and a forced one is not.", "",
          "```",
-         "ACT      SAME       the same act, however its object differs",
+         "act      SAME       the same act, however its object differs",
          "         DEGREE     same kind of act, differing in force  (+ which side)",
          "         DIFFERENT  a different act happens",
-         "         ONE_SIDE   only one group names an act           (+ which side)",
+         "         ONE_SIDE_ONLY  only one group names an act       (+ which side)",
          "         NEITHER    neither does",
-         "OBJECT   SAME | ADJACENT | FIGURATIVE | GENERIC | UNRELATED | MIXED | NA",
-         "AFFECT   SAME | ATTENUATED (+side) | RECOLORED | ONE_SIDE (+side) | NEITHER",
-         "REGISTER narrative | procedural | legal | evaluative",
+         "object   %s" % " | ".join(_vals(OBJECT_RELATION)),
+         "affect   %s" % " | ".join(_vals(AFFECT_RELATION)) + "   (+ side for ATTENUATED, ONE_SIDE)",
+         "",
+         "kind_A   what group A's words make the sentence DO at the blank",
+         "kind_B   same for group B",
+         "         %s" % " | ".join(_vals(KIND)),
+         "feeling_A  the feeling the sentence carries with A's words in the blank",
+         "feeling_B  same for B",
+         "         %s" % " | ".join(_vals(FEELING)),
          "```",
          "",
          "**When the blank is a NOUN the act is the sentence's own verb and it "
@@ -665,11 +700,9 @@ def human_sheet(recs, path, key_path=None, title="Blind coding sheet"):
         L.append("| **A** | %s |" % ", ".join(r["words_a"]))
         L.append("| **B** | %s |" % ", ".join(r["words_b"]))
         L.append("")
-        L.append("    act      =")
-        L.append("    object   =")
-        L.append("    affect   =")
-        L.append("    register =")
-        L.append("    note     =")
+        for f in SHEET_FIELDS:
+            L.append("    %-10s =" % f)
+        L.append("    %-10s =" % "note")
         L.append("")
         L.append("---")
         L.append("")

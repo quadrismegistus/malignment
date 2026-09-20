@@ -4,17 +4,23 @@
 
 **You are not told which group is which**, and the labels are drawn afresh for every item, so nothing carries over. Code what separates the groups; never which way anything moved.
 
-For each item answer four things. Write `?` rather than guessing — an abstention is a usable answer and a forced one is not.
+For each item answer six things. Write `?` rather than guessing — an abstention is a usable answer and a forced one is not.
 
 ```
-ACT      SAME       the same act, however its object differs
+act      SAME       the same act, however its object differs
          DEGREE     same kind of act, differing in force  (+ which side)
          DIFFERENT  a different act happens
-         ONE_SIDE   only one group names an act           (+ which side)
+         ONE_SIDE_ONLY  only one group names an act       (+ which side)
          NEITHER    neither does
-OBJECT   SAME | ADJACENT | FIGURATIVE | GENERIC | UNRELATED | MIXED | NA
-AFFECT   SAME | ATTENUATED (+side) | RECOLORED | ONE_SIDE (+side) | NEITHER
-REGISTER narrative | procedural | legal | evaluative
+object   SAME | ADJACENT | FIGURATIVE | GENERIC | UNRELATED | MIXED | NA
+affect   SAME | ATTENUATED | RECOLORED | ONE_SIDE | NEITHER   (+ side for ATTENUATED, ONE_SIDE)
+
+kind_A   what group A's words make the sentence DO at the blank
+kind_B   same for group B
+         PHYSICAL_ACT | VOCAL_ACT | MENTAL_STATE | PROCEDURE | DESCRIPTION | THING | FUNCTION | MIXED
+feeling_A  the feeling the sentence carries with A's words in the blank
+feeling_B  same for B
+         ANGER | FEAR | DESIRE | GRIEF | DISGUST | CONTEMPT | TENDERNESS | JOY | NONE | MIXED
 ```
 
 **When the blank is a NOUN the act is the sentence's own verb and it is SAME** — in `He kicked the ___` the kicking is constant and the difference is carried by the object. `NEITHER` is only for a blank that names no act in a sentence with no verb governing it.
@@ -30,11 +36,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | 有 |
 | **B** | 为, 知道, 一个, 给 |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -47,11 +56,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | 迅速, 慢慢 |
 | **B** | 就 |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -64,11 +76,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | 活, 醒, 见到 |
 | **B** | 回到, 离开, 醒来 |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -81,11 +96,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | 准备 |
 | **B** | 去, 知道, 看看, 做, 用 |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -98,11 +116,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | 失去, 变得 |
 | **B** | 去, 打, 哭, 死 |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -115,11 +136,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | 怎么办, 如何 |
 | **B** | 去, 怎样, 在, 要, 做, 找 |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -132,11 +156,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | 思考, 怀疑, 质疑 |
 | **B** | 想 |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -149,11 +176,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | 去, 木头 |
 | **B** | 栅栏 |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -166,11 +196,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | 如何, 采取, 考虑 |
 | **B** | 给, 削减, 减少, 为, 让, 用, 说, 在, 对, 使用, 告诉, 去 |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -183,11 +216,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | 死 |
 | **B** | 放弃, 逃跑 |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -200,11 +236,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | 给, 了解, 为, 帮助, 知道, 在, 告诉 |
 | **B** | 孩子, 儿子 |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -217,11 +256,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | 不 |
 | **B** | 用, 使用, 要, 开始 |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -234,11 +276,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | 就 |
 | **B** | 迅速 |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -251,11 +296,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | 成为, 在, 知道, 表达, 一个, 了解 |
 | **B** | 男人, 女人 |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -268,11 +316,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | 告诉, 让 |
 | **B** | 打 |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -285,11 +336,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | 远方, 城市, 天空, 远处 |
 | **B** | 窗外 |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -302,11 +356,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | 突然, 说 |
 | **B** | 就 |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -319,11 +376,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | 拥抱 |
 | **B** | 吻 |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -336,11 +396,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | 毁灭 |
 | **B** | 使用, 利用, 用, 采取, 采用 |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -353,11 +416,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | 说, 去, 感谢, 为, 找, 得到, 知道, 将, 接受, 写, 对, 离开, 感到, 给 |
 | **B** | 如何, 怎么办, 做, 怎样, 怎么, 采取 |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -370,11 +436,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | 就 |
 | **B** | 迅速, 开始 |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -387,11 +456,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | 就 |
 | **B** | 开始, 迅速 |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -404,11 +476,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | 毁灭, 要 |
 | **B** | 用, 利用, 使用 |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -421,11 +496,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | 采取, 关注, 如何, 制定 |
 | **B** | 知道, 有, 给, 赢得, 看到 |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -438,11 +516,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | 脸上, 身上, 肩膀 |
 | **B** | 屁股, 胳膊, 脑袋 |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -455,11 +536,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | 去 |
 | **B** | 找到, 休息, 快速, 在 |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -472,11 +556,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | 说 |
 | **B** | 怀疑, 感到 |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -489,11 +576,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | 死 |
 | **B** | 放弃, 逃跑, 自由, 自杀 |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -506,11 +596,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | 成为, 在, 了解, 一个, 知道 |
 | **B** | 男人, 爱 |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -523,11 +616,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | 巴黎 |
 | **B** | 法国 |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -540,11 +636,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | 又 |
 | **B** | 已经 |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -557,11 +656,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | 就, 说 |
 | **B** | 慢慢, 向, 开始 |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -574,11 +676,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | 手 |
 | **B** | 右手, 左手, 双手 |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -591,11 +696,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | 改变, 离开, 用 |
 | **B** | 知道 |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -608,11 +716,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | 怀疑, 思考 |
 | **B** | 相信 |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -625,11 +736,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | 成为 |
 | **B** | 女人, 男人 |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -642,11 +756,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | 开始 |
 | **B** | 就 |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -659,11 +776,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | 攻击 |
 | **B** | 捅, 砍 |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -676,11 +796,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | 腰部, 腰 |
 | **B** | 身上, 肩上, 胸 |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -693,11 +816,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | 就, 到, 去 |
 | **B** | 乘坐, 等待 |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -710,11 +836,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | 叛逆 |
 | **B** | 背叛 |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -727,11 +856,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | 知道, 去, 有, 给, 为, 得到, 让, 用, 说, 反对, 告诉, 要 |
 | **B** | 如何, 采取, 怎么办, 怎么, 怎样 |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -744,11 +876,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | 都 |
 | **B** | 跳 |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -761,11 +896,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | 知道 |
 | **B** | 报复, 找 |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -778,11 +916,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | 就 |
 | **B** | 迅速 |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -795,11 +936,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | 死 |
 | **B** | 无法 |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -812,11 +956,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | 就 |
 | **B** | 用 |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -829,11 +976,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | 脖子, 胸, 脸, 肩, 身体, 手, 肚子, 胳膊, 耳朵 |
 | **B** | 肩膀, 脸颊 |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -846,11 +996,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | 已, 又 |
 | **B** | 突然, 看到, 想起, 意识 |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -863,11 +1016,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | 说, 开始, 慢慢 |
 | **B** | 就, 把手 |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -880,11 +1036,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | 就, 说 |
 | **B** | 慢慢 |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -897,11 +1056,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | 想 |
 | **B** | 寻找 |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -914,11 +1076,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | 不 |
 | **B** | 服 |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -931,11 +1096,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | 去世, 死去, 离开 |
 | **B** | 死, 去, 死掉 |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -948,11 +1116,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | 胳膊, 双手, 左手, 右手 |
 | **B** | 手 |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -965,11 +1136,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | 外套 |
 | **B** | 内裤 |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -982,11 +1156,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | 调料, 盐, 香料, 料 |
 | **B** | 水, 醋 |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -999,11 +1176,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | 摆脱, 远离, 逃离 |
 | **B** | 杀 |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -1016,11 +1196,14 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | 眼睛, 脖子, 脑袋, 头, 心窝 |
 | **B** | 胸膛, 心脏, 胸部, 身体 |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
 
@@ -1033,10 +1216,13 @@ REGISTER narrative | procedural | legal | evaluative
 | **A** | 突然, 用力 |
 | **B** | 就, 往 |
 
-    act      =
-    object   =
-    affect   =
-    register =
-    note     =
+    act        =
+    object     =
+    affect     =
+    kind_A     =
+    kind_B     =
+    feeling_A  =
+    feeling_B  =
+    note       =
 
 ---
