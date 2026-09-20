@@ -60,3 +60,45 @@ The point of the split: the poles were named by readers who could not see which 
 ## The cheap fix
 
 One rerun with the motivation stripped from the propose prompt, the band stated only at consolidation, and `--seed 1`. If the 21 directions survive, they are the data. That is 33 more agents and about half an hour.
+
+## Shard support, and the citation rule
+
+Each propose shard is a random 1/16 of the corpus, so an axis genuinely present throughout should be proposed by nearly all sixteen readers. It is the closest thing this run has to a replicate.
+
+| shards | axes |
+|---|---|
+| 16 | `act_channel`, `interiority`, `lexical_weight` |
+| 15 | `event_continuity`, `target_of_act` |
+| 14 | `manner_specification` |
+| 13 | `dynamicity`, `force_of_handling` |
+| 11 | `valency`, `deliberation_vs_action` |
+| 9 | `institutional_register`, `granularity` |
+| 8 | `act_vs_outcome`, `syntactic_form_fit`, `orientation_self_other`, `explicitness_charge`, `volition`, `locomotion`, `object_disposition` |
+| 7 | `engagement_vs_withdrawal`, `affective_vs_cognitive` |
+| 6 | `entity_vs_event`, `harm_lethality`, `referent_substitution` |
+| 5 | `aspectual_phase`, `illocutionary_force` |
+| 4 | `concreteness` |
+| 3 | `domain_specificity` |
+
+**The strongest directions are not the best-supported.** `harm_lethality` is 148/150 at q=4.3e-40 and was proposed by 6 of 16; `explicitness_charge` is 82/82 and was proposed by 8. Not a contradiction — charged frames are a minority of the corpus, so a 154-relation slice may hold a handful — but the most quotable results rest on axes two thirds of the readers never named.
+
+**`dynamicity` is proposed by 13 of 16 and has no direction** (26/27, q=1.00). A well-attested null: thirteen readers independently saw the contrast and it turns out not to move. That is what makes the six formal nulls a control rather than an absence of evidence.
+
+### paper-claude's citation rule (his decision, 20 Sep 2026)
+
+Cite an axis in the article only where it **replicates an independent instrument** AND was **proposed by at least twelve of sixteen shards**. On that rule:
+
+| axis | shards | independent instrument |
+|---|---|---|
+| `act_channel` | 16 | `kind_flow`'s `PHYSICAL_ACT → VOCAL_ACT` |
+| `interiority` | 16 | V's finding at the word |
+| `lexical_weight` | 16 | bleaching, now named |
+| `valency` | **11** | RH's "the act becomes intransitive" |
+
+**`valency` fails his own threshold by one shard.** Flagged to him rather than decided here; it is a decision to take, not an oversight to inherit.
+
+Everything else — `harm_lethality` and `explicitness_charge` included — waits for a leak-fixed replicate before it is a count. That replicate is RH's spend to call.
+
+### A correction to these numbers, recorded because they were quoted before it
+
+The support counts I first circulated were understated by one or two throughout (`act_channel` 15 not 16, `valency` 9 not 11, `harm_lethality` 5 not 6). Several propose agents name an axis `Name: pole / pole` — *"Modality of act: speech / physical action"* — and the consolidator cites it as `s15:Modality of act`. A whole-string matcher reads every citation in that format as unresolved. The bug was caught for the fabrication check, which is how the 278-of-280 figure is right; the support counts were then quoted from the run *before* the fix. **Same defect, two passes, and the corrected pass only fixed the question I was asking at the time.**
