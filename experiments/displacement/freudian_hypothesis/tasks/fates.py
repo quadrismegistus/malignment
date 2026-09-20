@@ -736,7 +736,7 @@ CONFIRM = [
 ]
 
 
-def confirm(rows, quiet=False):
+def confirm(rows, quiet=False, path=None):
     """Check each coded pattern against the norms. -> list of result dicts
 
     `sign` +1 means the scale should RISE base->aligned on frames with that
@@ -745,7 +745,18 @@ def confirm(rows, quiet=False):
     """
     import statistics
     import norm_shift as NS
-    by = {r["frame"]: r for r in NS.rows(NS.CONTENT, want_ctx=True)}
+    #: **THE NORMS MUST COME FROM THE SAME RELATIONS THAT WERE CODED.** This
+    #: read `NS.CONTENT` -- the 93-frame battery -- whatever population the
+    #: coding used, so a corpus run of 2,244 English relations scored its
+    #: confirmation on the 90-frame overlap (n of 7, 9, 51, 8) and the Chinese
+    #: arm scored it on nothing at all (n=0 in every cell, silently reported as
+    #: "too few"). Second instance of the same defect in one afternoon: a
+    #: population read from two places, where only one of them was parameterised.
+    by = {r["frame"]: r for r in NS.rows(path or NS.CONTENT, want_ctx=True)}
+    missing = [r["frame"] for r in rows if r["frame"] not in by]
+    if missing and not quiet:
+        print("  (%d of %d coded frames carry no norms and are dropped from "
+              "the confirmation)" % (len(missing), len(rows)))
     out = []
     for label, pred, scale, sign in CONFIRM:
         hit, miss = [], []
@@ -753,7 +764,17 @@ def confirm(rows, quiet=False):
             r = by.get(row["frame"])
             if not r:
                 continue
-            v = r.get("ctx", {}).get(scale)
+            #: **THE SAME INSTRUMENT HAS A DIFFERENT KEY IN CHINESE.** The v6
+            #: battery arrives as `v6zh_*` on a zh frame and `v6_*` on an en
+            #: one, so a hardcoded `v6_vocalisation` matched NOTHING across 222
+            #: Chinese relations and every cell reported "too few" -- which
+            #: reads as absent data and was in fact a name I had not looked up.
+            #: Third time this campaign: the measurement exists and is filed
+            #: under the arm that commissioned it.
+            ctx = r.get("ctx", {})
+            v = ctx.get(scale)
+            if not v and scale.startswith("v6_"):
+                v = ctx.get("v6zh_" + scale[3:])
             if not v:
                 continue
             try:
@@ -1271,7 +1292,7 @@ def _main(argv=None):
 
     if a.confirm:
         rows = [json.loads(l) for l in open(a.confirm, encoding="utf-8")]
-        res = confirm(rows)
+        res = confirm(rows, path=a.relations)
         if a.dose:
             ds = dose_table(rows, metric=a.dose, _return_ds=True)
             affect_cross(rows, ds)
@@ -1334,9 +1355,19 @@ def _main(argv=None):
         #: and the note has to say so.
         import collections as _c
         t = task(model=a.model)
-        base_order = population(frame=a.frame, fixed=True)
+        #: **`path=a.relations` HERE TOO.** This second call defaulted to the
+        #: 93-frame battery while `recs` above came from whatever `--relations`
+        #: named, and the intersection is what got coded: a corpus run of 2,244
+        #: English relations silently produced 90. It did not raise, and the
+        #: output looked like a complete small run rather than a truncated large
+        #: one -- the whole cost of a population read from two places.
+        base_order = population(path=a.relations, frame=a.frame, fixed=True)
         keep = {r["frame"] for r in recs}
         base_order = [x for x in base_order if x["frame"] in keep]
+        if len(base_order) != len(recs):
+            raise SystemExit(
+                "both-orders population is %d but the selection is %d -- the "
+                "two population reads disagree" % (len(base_order), len(recs)))
         coded = {}
         for tag, flip in (("A=base", False), ("A=aligned", True)):
             items = [dict(r, words_a=r["words_b"], words_b=r["words_a"],
@@ -1404,9 +1435,9 @@ def _main(argv=None):
                 for row in rows:
                     fh.write(json.dumps(row, ensure_ascii=False) + chr(10))
             print("\nwrote %s (%d rows)" % (a.out, len(rows)))
-            confirm(rows)
+            confirm(rows, path=a.relations)
             if a.md:
-                render_md(rows, confirm(rows, quiet=True), a.md, also=a.also)
+                render_md(rows, confirm(rows, quiet=True, path=a.relations), a.md, also=a.also)
         return 0
 
     t = task(model=a.model)
@@ -1452,7 +1483,7 @@ def _main(argv=None):
             for row in rows:
                 fh.write(json.dumps(row, ensure_ascii=False) + chr(10))
         print("\nwrote %s (%d rows)" % (a.out, len(rows)))
-        confirm(rows)
+        confirm(rows, path=a.relations)
     return 0
 
 
