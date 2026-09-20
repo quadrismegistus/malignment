@@ -1070,6 +1070,129 @@ def dose_table(rows, bins=3, quiet=False, metric="frame", _return_ds=False):
     return ds if _return_ds else out
 
 
+def examples(rows, path, which="affect", limit=120, lang="en", words=14):
+    """A READABLE sheet: four lines a frame, not a page. -> writes path
+
+    `fates_corpus_en.md` is one page per frame over 2,244 frames and nobody can
+    read it. This is the same data at a density a person can scan: the sentence,
+    the two word lists base -> aligned, the four codes with the feelings named,
+    and the three numbers that matter.
+
+    `which`:
+      affect   frames whose BASE side carries a feeling -- the 469 the survival
+               rate describes. Sorted by feeling then by dose, so the anger
+               block, the desire block and the grief block read together.
+      charged  frames whose base words score highest on `charge.scene`. Sorted
+               by that, descending, so the top of the file is the most charged
+               thing the corpus contains.
+
+    **THE TWO SHEETS OVERLAP AND ARE NOT THE SAME SELECTION**, which is the
+    point of having both: charge is an anger-and-desire detector, so `charged`
+    over-represents those two feelings and drops tenderness and joy entirely,
+    while `affect` keeps them. A reader who looks only at `charged` will
+    conclude the corpus has two emotions in it.
+    """
+    import statistics
+    from malignment import charge, fields as F
+    AROUSAL = "slot_institutional_en_v3_arousal"
+    HARM = "v6zh_harm" if lang == "zh" else "v6_harm"
+
+    def feel(r, side):
+        return (r.get("raw") or {}).get(side, {}).get("feeling")
+
+    def mean_ctx(frame, ws, key):
+        v = [d[key] for d in (F.contextual_norms(frame, w) or {} for w in ws)
+             if isinstance(d.get(key), (int, float))]
+        return statistics.mean(v) if v else None
+
+    def dose_of(r):
+        sc = charge.scene(r["frame"]) or {}
+        ws = [w.strip() for w in (r.get("_base") or "").split(",") if w.strip()]
+        v = [sc[w] for w in ws if w in sc]
+        return statistics.mean(v) if v else None
+
+    sel = []
+    for r in rows:
+        d = dose_of(r)
+        if which == "affect" and feel(r, "a") in (None, "NONE"):
+            continue
+        if which == "charged" and d is None:
+            continue
+        sel.append((r, d))
+    if which == "affect":
+        #: **CAPPED PER FEELING, NOT TRUNCATED.** Feelings sort alphabetically
+        #: and ANGER is 187 of the 469, so a plain sort-and-cut at 140 returned
+        #: ANGER and nothing else -- a sheet whose whole point is that the
+        #: corpus holds more than two emotions, showing one. Each block takes an
+        #: equal share and a smaller block takes what it has.
+        import collections as _c
+        by = _c.defaultdict(list)
+        for r, d in sel:
+            by[feel(r, "a")].append((r, d))
+        names = sorted(by)
+        per = max(2, limit // max(1, len(names)))
+        out = []
+        for k in names:
+            out.extend(sorted(by[k], key=lambda x: -(x[1] or 0))[:per])
+        sel = sorted(out, key=lambda x: (feel(x[0], "a") or "", -(x[1] or 0)))
+    else:
+        sel.sort(key=lambda x: -(x[1] or 0))
+        sel = sel[:limit]
+
+    head = ({"affect": "Frames whose base side carries a feeling",
+             "charged": "Frames whose base words are most charged"}[which])
+    L = ["# %s — %s, %d of %d shown" % (head, lang, len(sel), len(rows)), "",
+         "`base -> aligned` is oriented after the reading and was never shown to "
+         "any rater. Codes are `orient()`'s, withheld (`--`) where the two "
+         "label orders disagreed. `charge` is `charge.scene` on the base words, "
+         "`arousal` the institutional scale, `harm` the v6 scale — each a mean "
+         "over the side's rated words, blank where none is rated.", ""]
+    if which == "charged":
+        L += ["**Charge is an anger-and-desire detector, not an affect "
+              "detector.** This selection over-represents those two feelings "
+              "and contains no tenderness or joy; the companion sheet for "
+              "`affect` keeps them.", ""]
+    L.append("---")
+    L.append("")
+    cur = None
+    for r, d in sel:
+        if which == "affect" and feel(r, "a") != cur:
+            cur = feel(r, "a")
+            L += ["", "## %s" % cur, ""]
+        o = r["orient"]
+        bw = [w.strip() for w in (r.get("_base") or "").split(",") if w.strip()]
+        aw = [w.strip() for w in (r.get("_aligned") or "").split(",") if w.strip()]
+        L.append("**%s ___**" % r["frame"].rstrip())
+        L.append("")
+        L.append("> %s  **→**  %s"
+                 % (", ".join(bw[:words]) + (" …" if len(bw) > words else ""),
+                    ", ".join(aw[:words]) + (" …" if len(aw) > words else "")))
+        L.append("")
+        L.append("`act %s` · `%s` · `affect %s` (%s → %s) · `object %s`"
+                 % (o.get("act") or "--", o.get("channel") or "--",
+                    o.get("affect") or "--", feel(r, "a"), feel(r, "b"),
+                    o.get("object") or "--"))
+        bits = []
+        if d is not None:
+            sc = charge.scene(r["frame"]) or {}
+            av = [sc[w] for w in aw if w in sc]
+            bits.append("charge %.1f → %s" % (d, ("%.1f" % statistics.mean(av))
+                                              if av else "–"))
+        for lab, key in (("arousal", AROUSAL), ("harm", HARM)):
+            b, a = mean_ctx(r["frame"], bw, key), mean_ctx(r["frame"], aw, key)
+            if b is not None and a is not None:
+                bits.append("%s %.1f → %.1f" % (lab, b, a))
+        if bits:
+            L.append("")
+            L.append("    " + "   ".join(bits))
+        L.append("")
+        L.append("*%s*" % r["relation"])
+        L.append("")
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    open(path, "w", encoding="utf-8").write(chr(10).join(L))
+    print("wrote %s (%d frames)" % (path, len(sel)))
+
+
 def intensity_on_affect_frames(rows, ds=None, bins=3, lang="en"):
     """Contextual arousal and harm on the SAME frames whose feeling survives.
 
@@ -1411,6 +1534,9 @@ def _main(argv=None):
     ap.add_argument("--out", default=None)
     ap.add_argument("--confirm", default=None, metavar="JSONL")
     ap.add_argument("--md", default=None, help="render a coded run as markdown")
+    ap.add_argument("--examples", choices=("affect", "charged"), default=None,
+                    help="a READABLE sheet, four lines a frame")
+    ap.add_argument("--limit", type=int, default=120)
     ap.add_argument("--dose", nargs="?", const="frame", default=None,
                     choices=("frame", "base_mass", "shown_base", "base_column"),
                     help="cross the fates with charge: `frame` is the unweighted "
@@ -1433,6 +1559,11 @@ def _main(argv=None):
 
     if a.confirm:
         rows = [json.loads(l) for l in open(a.confirm, encoding="utf-8")]
+        if a.examples:
+            examples(rows, a.md or ("results/examples_%s.md" % a.examples),
+                     which=a.examples, limit=a.limit,
+                     lang=a.lang if a.lang != "all" else "en")
+            return 0
         res = confirm(rows, path=a.relations)
         if a.dose:
             ds = dose_table(rows, metric=a.dose, _return_ds=True)
