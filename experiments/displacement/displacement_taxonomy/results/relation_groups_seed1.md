@@ -494,3 +494,49 @@ Dose is LIFT (`kind_flow.base_lift`): the base words' mean completed-scene charg
 
 `sexual_or_transgressive_content` does not reverse; it does not EXIST below the top tertile (0 and 1 placed relations against 19). `force_and_abruptness` both emerges and sharpens: 4/2, then 9/0, then 39/1. And the two that recede keep their direction while losing prevalence — `content_vs_framing` runs 54/11, 35/9, 22/3 and `inner_state_vs_outward_act` 13/68, 1/65, 0/27, the second becoming unanimous exactly as it becomes rare.
 
+## The same axes under four doses
+
+`Δ` is top tertile share minus bottom tertile share, in points. `top` is the majority pole in the top tertile with its exact binomial p. Sorted by the lift the rest of this folder uses.
+
+| axis | Δ shown_lift | Δ frame | Δ base_mass | Δ base_lift | top under base_lift |
+|---|---|---|---|---|---|
+| `force_and_abruptness` | +4.3 | +3.6 | +3.6 | +3.2 | 30 x of 33, p=1.4e-06 |
+| `orientation_toward_other_party` | +3.9 | -1.3 | -0.7 | +3.0 | 18 x of 31, p=0.47 |
+| `sexual_or_transgressive_content` | +2.8 | +0.4 | +1.5 | +2.5 | 17 x of 17, p=1.5e-05 |
+| `target_person_vs_thing` | +2.6 | +0.3 | +0.7 | +2.4 | 13 x of 16, p=0.021 |
+| `body_referent` | +2.0 | +0.6 | +1.1 | +1.9 | 10 x of 12, p=0.039 |
+| `speech_vs_physical_act` | +1.9 | +4.5 | +3.4 | +2.2 | 62 y of 79, p=3.6e-07 |
+| `engagement_vs_withdrawal` | +1.5 | +0.4 | +0.5 | -0.1 | 5 x of 10, p=1 |
+| `handling_vs_no_contact` | +1.5 | +0.8 | +0.9 | +1.9 | 12 x of 18, p=0.24 |
+| `concrete_vs_abstract` | +1.5 | -1.3 | -0.9 | +1.6 | 10 x of 13, p=0.092 |
+| `act_vs_state` | +0.7 | -4.2 | -3.5 | +0.0 | 13 x of 19, p=0.17 |
+| `co_member_of_same_field` | +0.5 | -1.6 | -1.3 | +0.9 | 1 x of 2, p=1 |
+| `kind_of_inner_state` | +0.5 | -1.9 | -0.3 | +1.2 | 19 y of 19, p=3.8e-06 |
+| `evaluative_polarity` | +0.5 | -0.5 | -0.4 | +0.4 | 1 x of 2, p=1 |
+| `means_vs_end` | +0.4 | +0.4 | +0.4 | +0.5 | 4 x of 5, p=0.38 |
+| `bluntness_vs_euphemism` | +0.4 | -0.3 | -0.1 | +0.3 | 2 x of 2, p=0.5 |
+| `compliance_vs_resistance` | +0.3 | +0.4 | +0.3 | -0.3 | 3 x of 3, p=0.25 |
+| `volition_and_agency` | +0.1 | +0.6 | +0.7 | +0.0 | 7 x of 10, p=0.34 |
+| `institutional_vs_personal` | +0.1 | +1.2 | +1.2 | +0.8 | 9 y of 11, p=0.065 |
+| `spatial_configuration` | +0.1 | +0.7 | +0.5 | +0.0 | 2 x of 3, p=1 |
+| `creation_vs_destruction` | +0.1 | +0.3 | +0.0 | -0.5 | 1 y of 1, p=1 |
+| `motion_geometry` | +0.1 | +0.0 | +0.1 | +0.3 | 2 y of 2, p=0.5 |
+| `act_vs_outcome` | +0.0 | +2.0 | +2.0 | +0.3 | 25 x of 28, p=2.7e-05 |
+| `other` | +0.0 | +0.6 | +0.5 | +0.3 | 0 x of 0, p=1 |
+| `argument_structure` | -0.1 | -1.8 | -1.9 | -0.7 | 21 y of 26, p=0.0025 |
+| `specificity_vs_generality` | -0.1 | -0.9 | -0.5 | +0.7 | 8 x of 16, p=1 |
+| `transfer_vs_own_handling` | -0.3 | +0.4 | +0.1 | -0.5 | 4 y of 7, p=1 |
+| `modifier_time_or_degree` | -0.3 | -1.3 | -1.2 | -0.7 | 2 x of 2, p=0.5 |
+| `illocutionary_type` | -0.3 | +0.1 | +0.1 | -0.4 | 0 x of 0, p=1 |
+| `manner_vs_act` | -0.7 | -0.2 | -0.1 | +0.4 | 16 y of 21, p=0.027 |
+| `constitution_vs_construal` | -0.7 | +0.5 | +0.3 | -0.8 | 0 x of 0, p=1 |
+| `realis_vs_irrealis` | -0.8 | -0.9 | -1.3 | -1.7 | 1 x of 1, p=1 |
+| `locomotion_vs_object_act` | -0.9 | +0.3 | +0.3 | -2.4 | 3 x of 4, p=0.62 |
+| `ritual_vs_ordinary` | -1.1 | -2.0 | -2.0 | -1.2 | 0 x of 0, p=1 |
+| `word_class_or_form` | -1.2 | -1.2 | -1.6 | -1.7 | 1 y of 1, p=1 |
+| `act_vs_entity` | -1.3 | -0.8 | -0.9 | -1.6 | 2 x of 2, p=0.5 |
+| `deliberation_vs_decisive_act` | -2.1 | +0.2 | -0.7 | -1.7 | 6 y of 7, p=0.12 |
+| `same_event_vs_new_event` | -2.5 | +4.5 | +3.3 | +1.9 | 60 y of 89, p=0.0013 |
+| `inner_state_vs_outward_act` | -6.7 | -4.6 | -6.0 | -7.6 | 26 y of 27, p=4.2e-07 |
+| `content_vs_framing` | -7.1 | +2.0 | +1.9 | -4.7 | 30 x of 35, p=2.2e-05 |
+

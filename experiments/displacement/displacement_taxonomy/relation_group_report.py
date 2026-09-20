@@ -109,7 +109,65 @@ def load(seed=0):
     return rel, vocab, got, bad
 
 
-def dose_axes(rel, got, axes):
+#: **FOUR DOSES, AND THEY ARE FOUR DIFFERENT QUANTITIES.**
+#:
+#:   shown_lift   the dose used everywhere else in this folder. Mean scene
+#:                rating of the base words THE READER WAS SHOWN, minus the
+#:                frame's own. UNWEIGHTED: a word the roster barely moved
+#:                counts as much as the one it always moves.
+#:   frame        the prompt alone on the same 1-7 scale, before any candidate.
+#:                `charge.frame`. The setup's own transgressiveness.
+#:   base_mass    `T_base`, the base arm's candidates weighted BY THEIR OWN
+#:                PROBABILITY MASS, averaged over the endpoint lineages. What
+#:                the base model actually puts mass on, not what a word list
+#:                says it could.
+#:   base_lift    `T_base - frame` per lineage, averaged. `charge` calls this
+#:                the right predictor for per-lineage displacement: r=-0.261
+#:                pooled, against -0.091 for the level.
+#:
+#: They are kept separate rather than reconciled because they disagree, and
+#: which one an axis responds to is the finding. `base_mass` and `frame` are
+#: LEVELS and saturate above frame 5; the two lifts are increments.
+DOSES = ("shown_lift", "frame", "base_mass", "base_lift")
+
+
+def dose_values(rel, which):
+    """{frame text -> dose}, English only. `charge` rates English prompts."""
+    import sys as _s
+    _kf = os.path.join(HERE, "..", "freudian_hypothesis")
+    if _kf not in _s.path:
+        _s.path.insert(0, _kf)
+    from malignment import charge
+    frames = {r["frame"] for r in rel.values() if r["lang"] == "en"}
+    if which == "shown_lift":
+        from kind_flow import base_lift
+        return base_lift([{"frame": r["frame"], "_base": ", ".join(r["base"])}
+                          for r in rel.values() if r["lang"] == "en"])
+    if which == "frame":
+        return {f: v for f in frames for v in [charge.frame(f)]
+                if isinstance(v, (int, float))}
+    #: per-lineage T_base, averaged over the endpoint lineages that rated this
+    #: prompt. `lifts_per_lineage()` is keyed (prompt, base) and returns
+    #: T_base - frame, so the level is recovered by adding the frame back --
+    #: one call rather than a second pass over 109k cells.
+    lpl = charge.lifts_per_lineage()
+    acc = {}
+    for (pr, _base), v in lpl.items():
+        if pr in frames and isinstance(v, (int, float)):
+            acc.setdefault(pr, []).append(v)
+    out = {}
+    for f, vs in acc.items():
+        m = sum(vs) / len(vs)
+        if which == "base_lift":
+            out[f] = m
+        else:
+            fr = charge.frame(f)
+            if isinstance(fr, (int, float)):
+                out[f] = m + fr
+    return out
+
+
+def dose_axes(rel, got, axes, which="shown_lift"):
     """Each axis by lift tertile: how much of the tertile it is, and which way.
 
     **LIFT, AND THE SAME DEFINITION AS EVERYWHERE ELSE.** `kind_flow.base_lift`
@@ -130,10 +188,7 @@ def dose_axes(rel, got, axes):
     _kf = os.path.join(HERE, "..", "freudian_hypothesis")
     if _kf not in _s.path:
         _s.path.insert(0, _kf)
-    from kind_flow import base_lift
-    rows = [{"frame": r["frame"], "_base": ", ".join(r["base"])}
-            for r in rel.values() if r["lang"] == "en"]
-    lift = base_lift(rows)
+    lift = dose_values(rel, which)
     have = [g for g in got if rel[g["id"]]["frame"] in lift]
     vals = sorted(lift[rel[g["id"]]["frame"]] for g in have)
     lo, hi = vals[len(vals) // 3], vals[2 * len(vals) // 3]
@@ -386,6 +441,51 @@ def main(argv=None):
                  "`content_vs_framing` runs 54/11, 35/9, 22/3 and "
                  "`inner_state_vs_outward_act` 13/68, 1/65, 0/27, the second "
                  "becoming unanimous exactly as it becomes rare.")
+        L.append("")
+
+    if a.dose:
+        #: **THE SAME AXES UNDER FOUR DOSES.** Which dose an axis responds to
+        #: is the finding, not a robustness check: `frame` and `base_mass` are
+        #: LEVELS and saturate, the two lifts are INCREMENTS, and `shown_lift`
+        #: weights the words a reader saw while `base_lift` weights the words
+        #: the base model actually put mass on.
+        L.append("## The same axes under four doses")
+        L.append("")
+        L.append("`Δ` is top tertile share minus bottom tertile share, in "
+                 "points. `top` is the majority pole in the top tertile with "
+                 "its exact binomial p. Sorted by the lift the rest of this "
+                 "folder uses.")
+        L.append("")
+        L.append("| axis | " + " | ".join("Δ %s" % d for d in DOSES)
+                 + " | top under base_lift |")
+        L.append("|---|" + "---|" * (len(DOSES) + 1))
+        tabs = {}
+        for w in DOSES:
+            tabs[w] = dose_axes(rel, got, axes, w)
+        base = tabs["shown_lift"][0]
+        order = sorted(base, key=lambda k: (
+            100.0 * base[k]["n"][2] / max(1, tabs["shown_lift"][1][2])
+            - 100.0 * base[k]["n"][0] / max(1, tabs["shown_lift"][1][0])),
+            reverse=True)
+        for aid in order:
+            cells = []
+            for w in DOSES:
+                dd, tot, _c, _n = tabs[w]
+                d = dd.get(aid)
+                if not d:
+                    cells.append("—")
+                    continue
+                cells.append("%+.1f" % (100.0 * d["n"][2] / max(1, tot[2])
+                                        - 100.0 * d["n"][0] / max(1, tot[0])))
+            dd, _t, _c, _n = tabs["base_lift"]
+            d = dd.get(aid)
+            if d:
+                x, y = d["xy"][2]
+                maj = ("%d x" % x) if x >= y else ("%d y" % y)
+                tail = "%s of %d, p=%.2g" % (maj, x + y, binom_p(max(x, y), x + y))
+            else:
+                tail = "—"
+            L.append("| `%s` | %s | %s |" % (aid, " | ".join(cells), tail))
         L.append("")
 
     out = a.out or os.path.join(HERE, "results",
