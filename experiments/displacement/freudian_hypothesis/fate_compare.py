@@ -160,8 +160,15 @@ def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--lang", choices=("en", "zh"), default="en")
+    #: **THE 4-SHOT RUN IS THE DIRECT RUN OF RECORD (paper-claude, 2026-09-20).**
+    #: Three of the seven shots have a corpus near-paraphrase at >=0.77, and the
+    #: ablated run agrees BETTER with the blind derived scheme (71.1% against
+    #: 68.4%) -- dropping them moved the coder toward what a reader without them
+    #: sees. The default is the decision: a default pointing at the 7-shot file
+    #: while a doc says the 4-shot one is of record is how a convention dies
+    #: crossing from prose into an artifact.
     ap.add_argument("--direct", default=os.path.join(HERE, "results",
-                                                     "freud_corpus.jsonl"))
+                                                     "freud_corpus_ablate.jsonl"))
     ap.add_argument("--min-cell", type=int, default=10)
     ap.add_argument("--out", default=None)
     a = ap.parse_args(argv)
