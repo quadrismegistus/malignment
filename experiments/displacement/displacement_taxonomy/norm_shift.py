@@ -95,6 +95,48 @@ def side_norms(words, weights=None):
         return None
 
 
+def charge_sides(frame, base, aligned, weights=None):
+    """Contextual task_charge for each side. -> (mean_base, mean_aligned, cov)
+
+    **A DIFFERENT INSTRUMENT FROM `k_charge`, NOT A SECOND READING OF IT.**
+    `fields.norms` gives the TYPE-LEVEL lexicon: what the word is worth on its
+    own. `charge.scene` gives what `task_charge` rated the COMPLETED SCENE --
+    the sentence once that word is in it, averaged over the lineages that rated
+    it. On "She was so angry she wanted to" the type-level scale is flat while
+    the contextual one puts `kill`/`murder`/`stab`/`shoot` at 6.98-7.00 against
+    `scream`/`shout`/`cry` at 1.98-2.54.
+
+    **`lift` ADDS NOTHING TO THE CONTRAST AND IS NOT REPORTED.** lift is
+    `scene - dose(frame)` and dose is constant within a frame, so the
+    between-side delta is identical for scene and lift. It changes the LEVEL,
+    never the difference, and reporting both would look like two results.
+    """
+    from malignment import charge
+    try:
+        sc = charge.scene(frame)
+    except Exception:
+        return None, None, 0.0
+    if not sc:
+        return None, None, 0.0
+    #: weighted the same way `side_norms` is -- a word is repeated by its
+    #: agreement count. Without this `--weight` returned the UNWEIGHTED charge
+    #: figure unchanged and read as a fourth independent specification when it
+    #: was the default one printed twice.
+    def vals(ws):
+        out = []
+        for w in ws:
+            if w in sc:
+                out.extend([sc[w]] * (max(1, int(weights.get(w, 1)))
+                                      if weights else 1))
+        return out
+    b, a = vals(base), vals(aligned)
+    cov = (sum(1 for w in base if w in sc) + sum(1 for w in aligned if w in sc)) \
+        / max(1, len(base) + len(aligned))
+    if not b or not a:
+        return None, None, cov
+    return statistics.mean(b), statistics.mean(a), cov
+
+
 def counts_for(frame):
     """{word: agreement count} for one frame. -> dict"""
     import pooled_tables as PT
@@ -122,7 +164,9 @@ def rows(path, weight=False, min_coverage=0.0):
         nb, na = side_norms(base, wts), side_norms(aligned, wts)
         if not nb or not na:
             continue
-        out.append({"frame": rec["frame"], "name": rec["name"],
+        cb, ca, ccov = charge_sides(rec["frame"], base, aligned, wts)
+        out.append({"charge_base": cb, "charge_aligned": ca, "charge_cov": ccov,
+                    "frame": rec["frame"], "name": rec["name"],
                     "confidence": rec["confidence"],
                     "n_base": len(base), "n_aligned": len(aligned),
                     "coverage": rec["n_covered"] / max(1, rec["n_shown"]),
@@ -174,6 +218,21 @@ def report(rs, label):
         print("%-26s %8.3f %8.3f %+8.3f %4d/%-4d %9s%s"
               % (s, b, a, statistics.mean(d), pos, n,
                  ("%.2g" % p) if p is not None else "-", star))
+    ch = [(r["charge_base"], r["charge_aligned"]) for r in rs
+          if r["charge_base"] is not None]
+    if len(ch) >= 6:
+        d = [a - b for b, a in ch]
+        _w, p, n = wilcoxon(d)
+        pos = sum(1 for x in d if x > 0)
+        star = "  <<<" if p is not None and p < 0.01 else ""
+        print("%-26s %8.3f %8.3f %+8.3f %4d/%-4d %9s%s"
+              % ("charge.scene (CONTEXTUAL)", statistics.mean(b for b, _a in ch),
+                 statistics.mean(a for _b, a in ch), statistics.mean(d),
+                 pos, n, ("%.2g" % p) if p is not None else "-", star))
+        print("%-26s %d of %d relations; %.0f%% of their words rated"
+              % ("", len(ch), len(rs),
+                 100 * statistics.mean(r["charge_cov"] for r in rs
+                                       if r["charge_base"] is not None)))
     print()
     print("%-26s %8s %8s %8s" % ("(lexicon coverage)", "base", "aligned", "delta"))
     for c in COVER:
