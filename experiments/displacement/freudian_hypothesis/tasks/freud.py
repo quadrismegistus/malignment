@@ -335,6 +335,19 @@ def main(argv=None):
     ap.add_argument("--model", default=MODEL)
     ap.add_argument("--workers", type=int, default=8)
     ap.add_argument("--show", action="store_true", help="render only, no spend")
+    #: **THE ABLATION, NOT A FIX.** Five of the seven shots have a corpus
+    #: near-paraphrase at >=0.72 and three are severe: DISPLACEMENT 0.85 ("He
+    #: slid his hand up her" against the corpus's "He slipped his hand under
+    #: her"), IDEALIZATION 0.79, ANXIETY 0.77 against the neighbours battery --
+    #: and the battery is 24 frames coded ANXIETY 24 of 24. A shot that
+    #: paraphrases a frame teaches that frame its own answer.
+    #:
+    #: Replacing them would mean AUTHORING worked examples for someone else's
+    #: instrument. Dropping them and rerunning MEASURES the contamination
+    #: instead, which is the stronger move: if the distribution holds without
+    #: the shot, the shot was not carrying it.
+    ap.add_argument("--drop-shots", default="",
+                    help="comma-separated shot indices to omit, e.g. 2,3,4")
     ap.add_argument("--out", default=None)
     a = ap.parse_args(argv)
 
@@ -381,7 +394,13 @@ def main(argv=None):
     #: `Task.map`, not `t(...)` -- a Task is not callable. The draft's own
     #: docstring shows `t.map([...], num_workers=16)`; I wrote the call from
     #: habit instead of from the two lines of usage at the top of the file.
-    t = task(model=a.model)
+    shots = EXAMPLES
+    if a.drop_shots:
+        drop = {int(x) for x in a.drop_shots.split(",") if x.strip() != ""}
+        shots = [x for i, x in enumerate(EXAMPLES) if i not in drop]
+        print("SHOTS: %d of %d (dropped %s)"
+              % (len(shots), len(EXAMPLES), sorted(drop)))
+    t = task(shots=shots, model=a.model)
     t0 = time.time()
     prompts = [render(r["frame"], r["words_a"], r["words_b"]) for r in recs]
     got = t.map(prompts, num_workers=a.workers)
@@ -391,6 +410,7 @@ def main(argv=None):
         if not ok:
             bad.append((r["frame"], why))
         out.append({"frame": r["frame"], "model": a.model,
+                    "n_shots": len(shots),
                     "a_is_base": r.get("a_is_base", True),
                     "_base": ", ".join(r["words_a"]),
                     "_aligned": ", ".join(r["words_b"]),
