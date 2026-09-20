@@ -244,7 +244,8 @@ def content_only(counts, prompt):
     return keep
 
 
-def render(prompt, min_agree=PT.MIN_AGREE, top=20, seed=SEED, content=False):
+def render(prompt, min_agree=PT.MIN_AGREE, top=20, seed=SEED, content=False,
+           counts=None):
     """The item one call sees. -> (text, n_pairs) or None
 
     `content=True` filters BETWEEN `pooled()` and `table()`, so the cap, the
@@ -252,19 +253,23 @@ def render(prompt, min_agree=PT.MIN_AGREE, top=20, seed=SEED, content=False):
     Legitimate at this point because the three counts per word are independent
     of which other words are displayed -- unlike the underscore rule, which is
     applied before normalisation because it redistributes mass.
+
+    `counts` is a pre-fetched `(counts, n_pairs)` from `PT.pooled_many`. Passing
+    it is the difference between one ClickHouse round trip per prompt and one
+    per 150, which over the 2,806-prompt charge corpus is 35 minutes against
+    four. It is the SAME tuple `pooled()` returns, verified equal on 30 prompts,
+    so the rendered table does not depend on which route supplied it.
     """
+    got0 = counts if counts is not None else PT.pooled(prompt, min_agree)
+    if not got0:
+        return None
+    cnt, n = got0
     if content:
-        got0 = PT.pooled(prompt, min_agree)
-        if not got0:
-            return None
-        cnt, n = got0
         cnt = content_only(cnt, prompt)
         if not cnt:
             return None
-        text, _t = PT.table(cnt, top, blind=blind_for(prompt, seed))
-        got = (text, n)
-    else:
-        got = PT.render(prompt, min_agree, top, blind=blind_for(prompt, seed))
+    text, _t = PT.table(cnt, top, blind=blind_for(prompt, seed))
+    got = (text, n)
     if not got:
         return None
     text, n = got
@@ -414,9 +419,22 @@ def main(argv=None):
     #: empty side and `check()` scored it as a format defect -- an impossible
     #: question marked wrong when it was answered honestly. Skipped and
     #: counted, never sent.
+    #: one query per 150 prompts instead of one per prompt: 7.7x, and the tables
+    #: are identical (0 of 30 differ, checked). Absent prompts are simply absent
+    #: from the dict and `render` falls through to None, as before.
+    import time as _t
+    _t0 = _t.time()
+    #: `PT.MIN_AGREE` and not a flag, because `render()` has no `--min-agree`
+    #: either and takes the same default. A prefetch at one floor feeding a
+    #: renderer at another would be a silent mismatch.
+    prefetch = PT.pooled_many(fs, PT.MIN_AGREE)
+    print("built %d pooled tables of %d prompts in %.0f s"
+          % (len(prefetch), len(fs), _t.time() - _t0))
+
     items, degenerate = [], []
     for f in fs:
-        got = render(f, top=a.top, seed=a.seed, content=a.content_only)
+        got = render(f, top=a.top, seed=a.seed, content=a.content_only,
+                     counts=prefetch.get(f))
         if not got:
             continue
         g = shown(got[0])
