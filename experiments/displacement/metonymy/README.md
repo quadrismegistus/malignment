@@ -104,6 +104,12 @@ jev accepts BPE fragments as garments and deepseek does not. 58 words jev placed
 
 The disagreement is a fragment problem, not a scale problem: on words both arms accept as things, the two coders agree at 0.75 to 0.91.
 
+**The pilot did not catch it, and that is a lesson about the pilot.** `PILOT` was built half fragments and half real words precisely to test this, with `bathro` against `bathrobe` named in the code as the check that mattered most. jev rejected all five fragments -- `bathro`, `apr`, `t`, `bl`, `g` -- and deepseek agreed on all ten items. Five for five, and the hazard appeared anyway at 479.
+
+What separates the two sets is not the kind of truncation, since `bathro` -> bathrobe and `legg` -> leggings are the same shape. It is where the string came from. **The pilot fragments are strings I typed; the run fragments are actual BPE tokens the model emitted in that slot with real probability mass**, so they carry a learned embedding and in-frame usage statistics that a hand-truncation does not. The gate passed the synthetic test and failed the real one. A hand-built fragment is not the same stimulus as a vocabulary fragment, and a gate validated on the former is not validated.
+
+**And the rate is a property of the item list, not of jev.** 58 of 479 is 12% of the items and 58 of 327 is 18% of what jev placed in the worn set, but the item list is drawn from a next-token vocabulary and is enriched for fragments by construction: jev itself called 98 of 479 NOT_A_WORD, 20%. A dictionary-derived list would give a different error rate. The DIRECTION generalises, zero reverse cases in 479; the magnitude does not.
+
 ## The figure
 
 `figures/x1_garment_layers.svg` and `figures/x1_garment_layers_gray.svg`, produced by `figure.py` from `results/words_D.csv`.
