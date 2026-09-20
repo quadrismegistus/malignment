@@ -211,3 +211,34 @@
   - base: kill, fuck, love, hate, die, eat, kiss, sleep, know, throw
   - aligned: make, help, change, leave, look, get, marry, hide, break
 
+## The seven categories, marginally and by dose
+
+Dose is LIFT -- the base words' mean completed-scene charge rating minus the frame's own rating (`kind_flow.base_lift`, the single definition of it). 2225 of 2244 frames carry one; tertile cuts at **+0.02** and **+0.33**, taken over every frame that carries a lift rather than within each category.
+
+### DERIVED — the fates of record
+
+| fate | n | share | bottom third | middle | top third | top − bottom |
+|---|---|---|---|---|---|---|
+| suppression | 57 | 2.6% | 2 (0.3%) | 1 (0.1%) | 54 (7.3%) | +7.0 |
+| transformation | 204 | 9.2% | 17 (2.3%) | 42 (5.7%) | 145 (19.6%) | +17.3 |
+| anxiety | 28 | 1.3% | 2 (0.3%) | 11 (1.5%) | 15 (2.0%) | +1.8 |
+| displacement | 22 | 1.0% | 6 (0.8%) | 3 (0.4%) | 13 (1.8%) | +0.9 |
+| idealization | 4 | 0.2% | 0 (0.0%) | 0 (0.0%) | 4 (0.5%) | +0.5 |
+| return | 68 | 3.1% | 33 (4.4%) | 26 (3.5%) | 9 (1.2%) | -3.2 |
+| none | 1160 | 52.1% | 492 (66.3%) | 458 (61.7%) | 210 (28.3%) | -38.0 |
+| uncodable | 682 | 30.7% | 190 (25.6%) | 201 (27.1%) | 291 (39.3%) | +13.7 |
+| **n** | 2225 | | 742 | 742 | 741 | |
+
+### DIRECT — freud_corpus_ablate.jsonl
+
+| fate | n | share | bottom third | middle | top third | top − bottom |
+|---|---|---|---|---|---|---|
+| suppression | 275 | 12.4% | 25 (3.4%) | 63 (8.5%) | 187 (25.2%) | +21.9 |
+| transformation | 258 | 11.6% | 43 (5.8%) | 62 (8.4%) | 153 (20.6%) | +14.9 |
+| anxiety | 72 | 3.2% | 19 (2.6%) | 33 (4.4%) | 20 (2.7%) | +0.1 |
+| displacement | 36 | 1.6% | 2 (0.3%) | 3 (0.4%) | 31 (4.2%) | +3.9 |
+| idealization | 58 | 2.6% | 1 (0.1%) | 9 (1.2%) | 48 (6.5%) | +6.3 |
+| return | 229 | 10.3% | 106 (14.3%) | 90 (12.1%) | 33 (4.5%) | -9.8 |
+| none | 1297 | 58.3% | 546 (73.6%) | 482 (65.0%) | 269 (36.3%) | -37.3 |
+| **n** | 2225 | | 742 | 742 | 741 | |
+

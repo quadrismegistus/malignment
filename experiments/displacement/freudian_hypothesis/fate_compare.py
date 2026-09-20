@@ -156,6 +156,41 @@ def kappa(rows):
     return ((obs - exp) / (1 - exp) if exp < 1 else 0.0), n
 
 
+def dose_table(rows, direct_rows):
+    """The seven categories marginally and in lift tertiles.
+
+    **LIFT, NOT THE SCENE LEVEL.** `kind_flow.base_lift` is the single
+    definition -- the base words' mean completed-scene rating minus the frame's
+    own. `charge.lift`'s docstring calls it the dose any displacement work
+    wants; corr(effect, lift) is -0.261 against -0.091 for level.
+
+    **THE TERTILES ARE CUT OVER ALL FRAMES THAT CARRY A LIFT, NOT WITHIN EACH
+    CATEGORY.** Cutting within a category would give every category the same
+    three bands by construction and destroy the only thing the table is for.
+    """
+    from kind_flow import base_lift
+    lift = base_lift(direct_rows)
+    have = [r for r in rows if r[0] in lift]
+    vals = sorted(lift[r[0]] for r in have)
+    if not vals:
+        return None
+    lo, hi = vals[len(vals) // 3], vals[2 * len(vals) // 3]
+
+    def band(f):
+        v = lift[f]
+        return 0 if v <= lo else (1 if v <= hi else 2)
+
+    out = {}
+    for which, idx in (("derived", 2), ("direct", 1)):
+        m = collections.Counter()
+        b = [collections.Counter(), collections.Counter(), collections.Counter()]
+        for r in have:
+            m[r[idx]] += 1
+            b[band(r[0])][r[idx]] += 1
+        out[which] = (m, b)
+    return out, (lo, hi), len(have), len(rows)
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -170,6 +205,9 @@ def main(argv=None):
     ap.add_argument("--direct", default=os.path.join(HERE, "results",
                                                      "freud_corpus_ablate.jsonl"))
     ap.add_argument("--min-cell", type=int, default=10)
+    ap.add_argument("--dose", action="store_true",
+                    help="add the marginal and lift-tertile breakdown of the "
+                         "seven categories")
     ap.add_argument("--out", default=None)
     a = ap.parse_args(argv)
     rows = load(a.direct, a.lang)
@@ -221,6 +259,49 @@ def main(argv=None):
             L.append("  - base: %s" % b[:110])
             L.append("  - aligned: %s" % al[:110])
         L.append("")
+
+    if a.dose:
+        dr = [json.loads(l) for l in open(a.direct, encoding="utf-8")]
+        dr = [r for r in dr
+              if bool(CJK.search(r["frame"])) == (a.lang == "zh")]
+        got = dose_table(rows, dr)
+        if got:
+            tabs, (lo, hi), n_have, n_all = got
+            L.append("## The seven categories, marginally and by dose")
+            L.append("")
+            L.append("Dose is LIFT -- the base words' mean completed-scene "
+                     "charge rating minus the frame's own rating "
+                     "(`kind_flow.base_lift`, the single definition of it). "
+                     "%d of %d frames carry one; tertile cuts at **%+.2f** and "
+                     "**%+.2f**, taken over every frame that carries a lift "
+                     "rather than within each category."
+                     % (n_have, n_all, lo, hi))
+            L.append("")
+            for which in ("derived", "direct"):
+                m, b = tabs[which]
+                tot = sum(m.values())
+                lab = ("DERIVED — the fates of record"
+                       if which == "derived"
+                       else "DIRECT — %s" % os.path.basename(a.direct))
+                L.append("### %s" % lab)
+                L.append("")
+                L.append("| fate | n | share | bottom third | middle | "
+                         "top third | top − bottom |")
+                L.append("|---|---|---|---|---|---|---|")
+                for f in NAMES + [UNC]:
+                    if not m.get(f):
+                        continue
+                    pc = [100.0 * b[i].get(f, 0) / max(1, sum(b[i].values()))
+                          for i in range(3)]
+                    L.append("| %s | %d | %.1f%% | %d (%.1f%%) | %d (%.1f%%) | "
+                             "%d (%.1f%%) | %+.1f |"
+                             % (f.lower(), m[f], 100.0 * m[f] / tot,
+                                b[0].get(f, 0), pc[0], b[1].get(f, 0), pc[1],
+                                b[2].get(f, 0), pc[2], pc[2] - pc[0]))
+                L.append("| **n** | %d | | %d | %d | %d | |"
+                         % (tot, sum(b[0].values()), sum(b[1].values()),
+                            sum(b[2].values())))
+                L.append("")
 
     out = a.out or os.path.join(HERE, "results", "fate_compare_%s.md" % a.lang)
     open(out, "w", encoding="utf-8").write("\n".join(L) + "\n")

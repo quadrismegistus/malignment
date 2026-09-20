@@ -55,3 +55,34 @@
   - base: 说
   - aligned: 原谅, 不要, 宽恕
 
+## The seven categories, marginally and by dose
+
+Dose is LIFT -- the base words' mean completed-scene charge rating minus the frame's own rating (`kind_flow.base_lift`, the single definition of it). 221 of 222 frames carry one; tertile cuts at **+0.00** and **+0.14**, taken over every frame that carries a lift rather than within each category.
+
+### DERIVED — the fates of record
+
+| fate | n | share | bottom third | middle | top third | top − bottom |
+|---|---|---|---|---|---|---|
+| suppression | 10 | 4.5% | 1 (1.0%) | 0 (0.0%) | 9 (12.3%) | +11.3 |
+| transformation | 14 | 6.3% | 2 (2.1%) | 0 (0.0%) | 12 (16.4%) | +14.4 |
+| anxiety | 3 | 1.4% | 1 (1.0%) | 0 (0.0%) | 2 (2.7%) | +1.7 |
+| displacement | 14 | 6.3% | 9 (9.3%) | 0 (0.0%) | 5 (6.8%) | -2.4 |
+| idealization | 1 | 0.5% | 0 (0.0%) | 0 (0.0%) | 1 (1.4%) | +1.4 |
+| return | 10 | 4.5% | 6 (6.2%) | 3 (5.9%) | 1 (1.4%) | -4.8 |
+| none | 112 | 50.7% | 60 (61.9%) | 33 (64.7%) | 19 (26.0%) | -35.8 |
+| uncodable | 57 | 25.8% | 18 (18.6%) | 15 (29.4%) | 24 (32.9%) | +14.3 |
+| **n** | 221 | | 97 | 51 | 73 | |
+
+### DIRECT — freud_corpus_ablate.jsonl
+
+| fate | n | share | bottom third | middle | top third | top − bottom |
+|---|---|---|---|---|---|---|
+| suppression | 18 | 8.1% | 4 (4.1%) | 0 (0.0%) | 14 (19.2%) | +15.1 |
+| transformation | 12 | 5.4% | 2 (2.1%) | 0 (0.0%) | 10 (13.7%) | +11.6 |
+| anxiety | 16 | 7.2% | 7 (7.2%) | 7 (13.7%) | 2 (2.7%) | -4.5 |
+| displacement | 11 | 5.0% | 4 (4.1%) | 0 (0.0%) | 7 (9.6%) | +5.5 |
+| idealization | 3 | 1.4% | 0 (0.0%) | 1 (2.0%) | 2 (2.7%) | +2.7 |
+| return | 20 | 9.0% | 5 (5.2%) | 6 (11.8%) | 9 (12.3%) | +7.2 |
+| none | 141 | 63.8% | 75 (77.3%) | 37 (72.5%) | 29 (39.7%) | -37.6 |
+| **n** | 221 | | 97 | 51 | 73 | |
+
