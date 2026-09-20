@@ -1,0 +1,926 @@
+[
+ {
+  "id": 1291,
+  "axis": "referent_substitution",
+  "base_pole": "unclear",
+  "confidence": 0.35
+ },
+ {
+  "id": 2303,
+  "axis": "lexical_weight",
+  "base_pole": "y",
+  "confidence": 0.8
+ },
+ {
+  "id": 2394,
+  "axis": "manner_specification",
+  "base_pole": "y",
+  "confidence": 0.6
+ },
+ {
+  "id": 279,
+  "axis": "referent_substitution",
+  "base_pole": "unclear",
+  "confidence": 0.35
+ },
+ {
+  "id": 1145,
+  "axis": "affective_vs_cognitive",
+  "base_pole": "y",
+  "confidence": 0.7
+ },
+ {
+  "id": 1795,
+  "axis": "harm_lethality",
+  "base_pole": "x",
+  "confidence": 0.5
+ },
+ {
+  "id": 1500,
+  "axis": "referent_substitution",
+  "base_pole": "unclear",
+  "confidence": 0.4
+ },
+ {
+  "id": 1579,
+  "axis": "harm_lethality",
+  "base_pole": "x",
+  "confidence": 0.9
+ },
+ {
+  "id": 615,
+  "axis": "object_disposition",
+  "base_pole": "x",
+  "confidence": 0.5
+ },
+ {
+  "id": 503,
+  "axis": "target_of_act",
+  "base_pole": "x",
+  "confidence": 0.45
+ },
+ {
+  "id": 1632,
+  "axis": "valency",
+  "base_pole": "y",
+  "confidence": 0.6
+ },
+ {
+  "id": 912,
+  "axis": "event_continuity",
+  "base_pole": "y",
+  "confidence": 0.5
+ },
+ {
+  "id": 1095,
+  "axis": "engagement_vs_withdrawal",
+  "base_pole": "y",
+  "confidence": 0.8
+ },
+ {
+  "id": 11,
+  "axis": "institutional_register",
+  "base_pole": "y",
+  "confidence": 0.6
+ },
+ {
+  "id": 2087,
+  "axis": "institutional_register",
+  "base_pole": "y",
+  "confidence": 0.55
+ },
+ {
+  "id": 2299,
+  "axis": "granularity",
+  "base_pole": "x",
+  "confidence": 0.6
+ },
+ {
+  "id": 1109,
+  "axis": "lexical_weight",
+  "base_pole": "x",
+  "confidence": 0.85
+ },
+ {
+  "id": 944,
+  "axis": "explicitness_charge",
+  "base_pole": "x",
+  "confidence": 0.55
+ },
+ {
+  "id": 2365,
+  "axis": "manner_specification",
+  "base_pole": "y",
+  "confidence": 0.8
+ },
+ {
+  "id": 893,
+  "axis": "force_of_handling",
+  "base_pole": "y",
+  "confidence": 0.5
+ },
+ {
+  "id": 1100,
+  "axis": "lexical_weight",
+  "base_pole": "y",
+  "confidence": 0.7
+ },
+ {
+  "id": 1081,
+  "axis": "engagement_vs_withdrawal",
+  "base_pole": "y",
+  "confidence": 0.6
+ },
+ {
+  "id": 1392,
+  "axis": "interiority",
+  "base_pole": "y",
+  "confidence": 0.45
+ },
+ {
+  "id": 2218,
+  "axis": "volition",
+  "base_pole": "x",
+  "confidence": 0.35
+ },
+ {
+  "id": 2193,
+  "axis": "deliberation_vs_action",
+  "base_pole": "y",
+  "confidence": 0.75
+ },
+ {
+  "id": 885,
+  "axis": "event_continuity",
+  "base_pole": "y",
+  "confidence": 0.5
+ },
+ {
+  "id": 124,
+  "axis": "dynamicity",
+  "base_pole": "x",
+  "confidence": 0.5
+ },
+ {
+  "id": 465,
+  "axis": "act_channel",
+  "base_pole": "y",
+  "confidence": 0.8
+ },
+ {
+  "id": 196,
+  "axis": "act_channel",
+  "base_pole": "y",
+  "confidence": 0.6
+ },
+ {
+  "id": 188,
+  "axis": "locomotion",
+  "base_pole": "x",
+  "confidence": 0.45
+ },
+ {
+  "id": 2033,
+  "axis": "dynamicity",
+  "base_pole": "y",
+  "confidence": 0.8
+ },
+ {
+  "id": 543,
+  "axis": "act_channel",
+  "base_pole": "x",
+  "confidence": 0.85
+ },
+ {
+  "id": 1859,
+  "axis": "harm_lethality",
+  "base_pole": "x",
+  "confidence": 0.9
+ },
+ {
+  "id": 1223,
+  "axis": "act_channel",
+  "base_pole": "y",
+  "confidence": 0.4
+ },
+ {
+  "id": 2356,
+  "axis": "lexical_weight",
+  "base_pole": "y",
+  "confidence": 0.8
+ },
+ {
+  "id": 1740,
+  "axis": "affective_vs_cognitive",
+  "base_pole": "y",
+  "confidence": 0.75
+ },
+ {
+  "id": 1696,
+  "axis": "valency",
+  "base_pole": "x",
+  "confidence": 0.55
+ },
+ {
+  "id": 1652,
+  "axis": "act_channel",
+  "base_pole": "x",
+  "confidence": 0.55
+ },
+ {
+  "id": 879,
+  "axis": "manner_specification",
+  "base_pole": "y",
+  "confidence": 0.75
+ },
+ {
+  "id": 557,
+  "axis": "force_of_handling",
+  "base_pole": "x",
+  "confidence": 0.8
+ },
+ {
+  "id": 213,
+  "axis": "event_continuity",
+  "base_pole": "y",
+  "confidence": 0.4
+ },
+ {
+  "id": 200,
+  "axis": "act_channel",
+  "base_pole": "y",
+  "confidence": 0.6
+ },
+ {
+  "id": 1726,
+  "axis": "interiority",
+  "base_pole": "y",
+  "confidence": 0.85
+ },
+ {
+  "id": 2342,
+  "axis": "harm_lethality",
+  "base_pole": "x",
+  "confidence": 0.9
+ },
+ {
+  "id": 258,
+  "axis": "referent_substitution",
+  "base_pole": "unclear",
+  "confidence": 0.35
+ },
+ {
+  "id": 1157,
+  "axis": "event_continuity",
+  "base_pole": "x",
+  "confidence": 0.55
+ },
+ {
+  "id": 2162,
+  "axis": "affective_vs_cognitive",
+  "base_pole": "y",
+  "confidence": 0.6
+ },
+ {
+  "id": 900,
+  "axis": "manner_specification",
+  "base_pole": "y",
+  "confidence": 0.55
+ },
+ {
+  "id": 1639,
+  "axis": "volition",
+  "base_pole": "x",
+  "confidence": 0.35
+ },
+ {
+  "id": 24,
+  "axis": "institutional_register",
+  "base_pole": "y",
+  "confidence": 0.6
+ },
+ {
+  "id": 1902,
+  "axis": "event_continuity",
+  "base_pole": "y",
+  "confidence": 0.35
+ },
+ {
+  "id": 268,
+  "axis": "act_channel",
+  "base_pole": "x",
+  "confidence": 0.8
+ },
+ {
+  "id": 1257,
+  "axis": "locomotion",
+  "base_pole": "x",
+  "confidence": 0.6
+ },
+ {
+  "id": 867,
+  "axis": "act_channel",
+  "base_pole": "x",
+  "confidence": 0.5
+ },
+ {
+  "id": 1940,
+  "axis": "lexical_weight",
+  "base_pole": "x",
+  "confidence": 0.75
+ },
+ {
+  "id": 423,
+  "axis": "act_vs_outcome",
+  "base_pole": "x",
+  "confidence": 0.35
+ },
+ {
+  "id": 370,
+  "axis": "act_channel",
+  "base_pole": "y",
+  "confidence": 0.35
+ },
+ {
+  "id": 1292,
+  "axis": "interiority",
+  "base_pole": "y",
+  "confidence": 0.75
+ },
+ {
+  "id": 831,
+  "axis": "dynamicity",
+  "base_pole": "x",
+  "confidence": 0.45
+ },
+ {
+  "id": 988,
+  "axis": "interiority",
+  "base_pole": "y",
+  "confidence": 0.45
+ },
+ {
+  "id": 2127,
+  "axis": "act_channel",
+  "base_pole": "y",
+  "confidence": 0.85
+ },
+ {
+  "id": 184,
+  "axis": "act_channel",
+  "base_pole": "x",
+  "confidence": 0.55
+ },
+ {
+  "id": 1202,
+  "axis": "force_of_handling",
+  "base_pole": "x",
+  "confidence": 0.85
+ },
+ {
+  "id": 1723,
+  "axis": "lexical_weight",
+  "base_pole": "x",
+  "confidence": 0.75
+ },
+ {
+  "id": 1417,
+  "axis": "interiority",
+  "base_pole": "y",
+  "confidence": 0.8
+ },
+ {
+  "id": 2323,
+  "axis": "manner_specification",
+  "base_pole": "y",
+  "confidence": 0.7
+ },
+ {
+  "id": 336,
+  "axis": "event_continuity",
+  "base_pole": "y",
+  "confidence": 0.5
+ },
+ {
+  "id": 398,
+  "axis": "volition",
+  "base_pole": "x",
+  "confidence": 0.35
+ },
+ {
+  "id": 1450,
+  "axis": "interiority",
+  "base_pole": "y",
+  "confidence": 0.65
+ },
+ {
+  "id": 225,
+  "axis": "act_vs_outcome",
+  "base_pole": "x",
+  "confidence": 0.4
+ },
+ {
+  "id": 1692,
+  "axis": "act_channel",
+  "base_pole": "y",
+  "confidence": 0.9
+ },
+ {
+  "id": 1551,
+  "axis": "orientation_self_other",
+  "base_pole": "y",
+  "confidence": 0.4
+ },
+ {
+  "id": 520,
+  "axis": "locomotion",
+  "base_pole": "x",
+  "confidence": 0.5
+ },
+ {
+  "id": 71,
+  "axis": "aspectual_phase",
+  "base_pole": "y",
+  "confidence": 0.4
+ },
+ {
+  "id": 2197,
+  "axis": "deliberation_vs_action",
+  "base_pole": "y",
+  "confidence": 0.85
+ },
+ {
+  "id": 1864,
+  "axis": "event_continuity",
+  "base_pole": "y",
+  "confidence": 0.55
+ },
+ {
+  "id": 799,
+  "axis": "harm_lethality",
+  "base_pole": "x",
+  "confidence": 0.6
+ },
+ {
+  "id": 733,
+  "axis": "harm_lethality",
+  "base_pole": "x",
+  "confidence": 0.45
+ },
+ {
+  "id": 125,
+  "axis": "institutional_register",
+  "base_pole": "y",
+  "confidence": 0.55
+ },
+ {
+  "id": 702,
+  "axis": "dynamicity",
+  "base_pole": "y",
+  "confidence": 0.55
+ },
+ {
+  "id": 1118,
+  "axis": "lexical_weight",
+  "base_pole": "y",
+  "confidence": 0.55
+ },
+ {
+  "id": 1020,
+  "axis": "orientation_self_other",
+  "base_pole": "x",
+  "confidence": 0.35
+ },
+ {
+  "id": 1045,
+  "axis": "act_channel",
+  "base_pole": "y",
+  "confidence": 0.85
+ },
+ {
+  "id": 2014,
+  "axis": "interiority",
+  "base_pole": "y",
+  "confidence": 0.7
+ },
+ {
+  "id": 1156,
+  "axis": "interiority",
+  "base_pole": "y",
+  "confidence": 0.5
+ },
+ {
+  "id": 353,
+  "axis": "interiority",
+  "base_pole": "y",
+  "confidence": 0.8
+ },
+ {
+  "id": 1108,
+  "axis": "deliberation_vs_action",
+  "base_pole": "y",
+  "confidence": 0.45
+ },
+ {
+  "id": 1144,
+  "axis": "deliberation_vs_action",
+  "base_pole": "y",
+  "confidence": 0.5
+ },
+ {
+  "id": 2052,
+  "axis": "lexical_weight",
+  "base_pole": "y",
+  "confidence": 0.55
+ },
+ {
+  "id": 639,
+  "axis": "interiority",
+  "base_pole": "y",
+  "confidence": 0.6
+ },
+ {
+  "id": 665,
+  "axis": "object_disposition",
+  "base_pole": "y",
+  "confidence": 0.6
+ },
+ {
+  "id": 454,
+  "axis": "force_of_handling",
+  "base_pole": "x",
+  "confidence": 0.9
+ },
+ {
+  "id": 1903,
+  "axis": "lexical_weight",
+  "base_pole": "x",
+  "confidence": 0.55
+ },
+ {
+  "id": 1993,
+  "axis": "harm_lethality",
+  "base_pole": "x",
+  "confidence": 0.3
+ },
+ {
+  "id": 1765,
+  "axis": "act_vs_outcome",
+  "base_pole": "y",
+  "confidence": 0.4
+ },
+ {
+  "id": 796,
+  "axis": "act_vs_outcome",
+  "base_pole": "x",
+  "confidence": 0.45
+ },
+ {
+  "id": 677,
+  "axis": "object_disposition",
+  "base_pole": "x",
+  "confidence": 0.35
+ },
+ {
+  "id": 1432,
+  "axis": "act_vs_outcome",
+  "base_pole": "x",
+  "confidence": 0.45
+ },
+ {
+  "id": 1078,
+  "axis": "interiority",
+  "base_pole": "y",
+  "confidence": 0.6
+ },
+ {
+  "id": 1009,
+  "axis": "locomotion",
+  "base_pole": "x",
+  "confidence": 0.45
+ },
+ {
+  "id": 958,
+  "axis": "concreteness",
+  "base_pole": "x",
+  "confidence": 0.65
+ },
+ {
+  "id": 1594,
+  "axis": "interiority",
+  "base_pole": "y",
+  "confidence": 0.85
+ },
+ {
+  "id": 849,
+  "axis": "object_disposition",
+  "base_pole": "y",
+  "confidence": 0.35
+ },
+ {
+  "id": 2130,
+  "axis": "act_channel",
+  "base_pole": "y",
+  "confidence": 0.85
+ },
+ {
+  "id": 83,
+  "axis": "institutional_register",
+  "base_pole": "y",
+  "confidence": 0.65
+ },
+ {
+  "id": 2139,
+  "axis": "act_channel",
+  "base_pole": "y",
+  "confidence": 0.8
+ },
+ {
+  "id": 1431,
+  "axis": "explicitness_charge",
+  "base_pole": "x",
+  "confidence": 0.55
+ },
+ {
+  "id": 2330,
+  "axis": "lexical_weight",
+  "base_pole": "y",
+  "confidence": 0.7
+ },
+ {
+  "id": 222,
+  "axis": "act_channel",
+  "base_pole": "x",
+  "confidence": 0.6
+ },
+ {
+  "id": 1083,
+  "axis": "engagement_vs_withdrawal",
+  "base_pole": "y",
+  "confidence": 0.7
+ },
+ {
+  "id": 613,
+  "axis": "force_of_handling",
+  "base_pole": "x",
+  "confidence": 0.55
+ },
+ {
+  "id": 1809,
+  "axis": "act_channel",
+  "base_pole": "x",
+  "confidence": 0.6
+ },
+ {
+  "id": 2463,
+  "axis": "affective_vs_cognitive",
+  "base_pole": "y",
+  "confidence": 0.6
+ },
+ {
+  "id": 1448,
+  "axis": "harm_lethality",
+  "base_pole": "x",
+  "confidence": 0.55
+ },
+ {
+  "id": 252,
+  "axis": "object_disposition",
+  "base_pole": "y",
+  "confidence": 0.85
+ },
+ {
+  "id": 364,
+  "axis": "event_continuity",
+  "base_pole": "x",
+  "confidence": 0.3
+ },
+ {
+  "id": 854,
+  "axis": "force_of_handling",
+  "base_pole": "x",
+  "confidence": 0.85
+ },
+ {
+  "id": 1159,
+  "axis": "lexical_weight",
+  "base_pole": "x",
+  "confidence": 0.5
+ },
+ {
+  "id": 2269,
+  "axis": "harm_lethality",
+  "base_pole": "x",
+  "confidence": 0.9
+ },
+ {
+  "id": 91,
+  "axis": "institutional_register",
+  "base_pole": "y",
+  "confidence": 0.5
+ },
+ {
+  "id": 1062,
+  "axis": "force_of_handling",
+  "base_pole": "x",
+  "confidence": 0.35
+ },
+ {
+  "id": 1461,
+  "axis": "act_channel",
+  "base_pole": "x",
+  "confidence": 0.45
+ },
+ {
+  "id": 1590,
+  "axis": "act_channel",
+  "base_pole": "y",
+  "confidence": 0.85
+ },
+ {
+  "id": 1996,
+  "axis": "force_of_handling",
+  "base_pole": "x",
+  "confidence": 0.5
+ },
+ {
+  "id": 167,
+  "axis": "interiority",
+  "base_pole": "y",
+  "confidence": 0.85
+ },
+ {
+  "id": 489,
+  "axis": "manner_specification",
+  "base_pole": "y",
+  "confidence": 0.5
+ },
+ {
+  "id": 1010,
+  "axis": "explicitness_charge",
+  "base_pole": "x",
+  "confidence": 0.6
+ },
+ {
+  "id": 956,
+  "axis": "harm_lethality",
+  "base_pole": "x",
+  "confidence": 0.9
+ },
+ {
+  "id": 1354,
+  "axis": "interiority",
+  "base_pole": "y",
+  "confidence": 0.8
+ },
+ {
+  "id": 2093,
+  "axis": "lexical_weight",
+  "base_pole": "y",
+  "confidence": 0.55
+ },
+ {
+  "id": 429,
+  "axis": "explicitness_charge",
+  "base_pole": "x",
+  "confidence": 0.55
+ },
+ {
+  "id": 1849,
+  "axis": "lexical_weight",
+  "base_pole": "x",
+  "confidence": 0.85
+ },
+ {
+  "id": 1187,
+  "axis": "target_of_act",
+  "base_pole": "x",
+  "confidence": 0.45
+ },
+ {
+  "id": 1236,
+  "axis": "lexical_weight",
+  "base_pole": "y",
+  "confidence": 0.75
+ },
+ {
+  "id": 1651,
+  "axis": "dynamicity",
+  "base_pole": "y",
+  "confidence": 0.4
+ },
+ {
+  "id": 671,
+  "axis": "harm_lethality",
+  "base_pole": "x",
+  "confidence": 0.7
+ },
+ {
+  "id": 730,
+  "axis": "engagement_vs_withdrawal",
+  "base_pole": "x",
+  "confidence": 0.7
+ },
+ {
+  "id": 1421,
+  "axis": "interiority",
+  "base_pole": "y",
+  "confidence": 0.85
+ },
+ {
+  "id": 487,
+  "axis": "force_of_handling",
+  "base_pole": "x",
+  "confidence": 0.4
+ },
+ {
+  "id": 204,
+  "axis": "force_of_handling",
+  "base_pole": "x",
+  "confidence": 0.5
+ },
+ {
+  "id": 1713,
+  "axis": "domain_specificity",
+  "base_pole": "x",
+  "confidence": 0.35
+ },
+ {
+  "id": 542,
+  "axis": "act_channel",
+  "base_pole": "x",
+  "confidence": 0.85
+ },
+ {
+  "id": 1591,
+  "axis": "interiority",
+  "base_pole": "y",
+  "confidence": 0.3
+ },
+ {
+  "id": 833,
+  "axis": "illocutionary_force",
+  "base_pole": "y",
+  "confidence": 0.45
+ },
+ {
+  "id": 294,
+  "axis": "event_continuity",
+  "base_pole": "x",
+  "confidence": 0.3
+ },
+ {
+  "id": 475,
+  "axis": "orientation_self_other",
+  "base_pole": "x",
+  "confidence": 0.4
+ },
+ {
+  "id": 2400,
+  "axis": "interiority",
+  "base_pole": "x",
+  "confidence": 0.6
+ },
+ {
+  "id": 1845,
+  "axis": "act_vs_outcome",
+  "base_pole": "x",
+  "confidence": 0.4
+ },
+ {
+  "id": 1951,
+  "axis": "locomotion",
+  "base_pole": "x",
+  "confidence": 0.55
+ },
+ {
+  "id": 2213,
+  "axis": "concreteness",
+  "base_pole": "x",
+  "confidence": 0.6
+ },
+ {
+  "id": 977,
+  "axis": "act_channel",
+  "base_pole": "y",
+  "confidence": 0.8
+ },
+ {
+  "id": 2135,
+  "axis": "act_channel",
+  "base_pole": "y",
+  "confidence": 0.85
+ },
+ {
+  "id": 2181,
+  "axis": "act_channel",
+  "base_pole": "y",
+  "confidence": 0.7
+ },
+ {
+  "id": 165,
+  "axis": "manner_specification",
+  "base_pole": "y",
+  "confidence": 0.6
+ }
+]
