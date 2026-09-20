@@ -1,0 +1,39 @@
+digraph pathflow {
+  rankdir=LR; splines=true; overlap=false;
+  size="4.8,4.56!"; ratio=compress;
+  bgcolor="white"; nodesep=0.16; ranksep=1.0;
+  node [shape=box style="rounded" fontname="Helvetica" fontsize=9 color="black" fontcolor="black" margin="0.06,0.035" penwidth=0.6];
+  edge [fontname="Helvetica" fontsize=7.2 color="#4d4d4d" arrowsize=0.5];
+  { rank=same;
+  "B_PHYSICAL_ACT" [label="physical act\n16"];
+  "B_THING" [label="thing\n14"];
+  "B_PROCEDURE" [label="procedure\n13"];
+  "B_VOCAL_ACT" [label="voice\n8"];
+  "B_MENTAL_STATE" [label="mental state\n7"];
+  }
+  { rank=same;
+  "M_VOCAL_ACT_PROCEDURE_NONE" [label="procedure"];
+  "M_THING_THING_GONE" [label="thing"];
+  "M_PROCEDURE_PROCEDURE_NONE" [label="procedure"];
+  "M_PHYSICAL_ACT_VOCAL_ACT_KEPT" [label="voice"];
+  "M_MENTAL_STATE_MENTAL_STATE_RECOLORED" [label="mental state"];
+  }
+  { rank=same;
+  "F_NONE" [label="no feeling either side\n21"];
+  "F_KEPT" [label="feeling kept\n16"];
+  "F_GONE" [label="feeling gone\n14"];
+  "F_RECOLORED" [label="feeling changed\n7"];
+  }
+  "B_PHYSICAL_ACT" -> "M_PHYSICAL_ACT_VOCAL_ACT_KEPT" [label="kill → scream" penwidth=2.50];
+  "M_PHYSICAL_ACT_VOCAL_ACT_KEPT" -> "F_KEPT" [label="16" penwidth=2.50];
+  "B_THING" -> "M_THING_THING_GONE" [label="mouth → room" penwidth=2.41];
+  "M_THING_THING_GONE" -> "F_GONE" [label="14" penwidth=2.41];
+  "B_PROCEDURE" -> "M_PROCEDURE_PROCEDURE_NONE" [label="sue → appeal" penwidth=2.36];
+  "M_PROCEDURE_PROCEDURE_NONE" -> "F_NONE" [label="13" penwidth=2.36];
+  "B_VOCAL_ACT" -> "M_VOCAL_ACT_PROCEDURE_NONE" [label="said → provided" penwidth=2.05];
+  "M_VOCAL_ACT_PROCEDURE_NONE" -> "F_NONE" [label="8" penwidth=2.05];
+  "B_MENTAL_STATE" -> "M_MENTAL_STATE_MENTAL_STATE_RECOLORED" [label="shame → gratitude" penwidth=1.97];
+  "M_MENTAL_STATE_MENTAL_STATE_RECOLORED" -> "F_RECOLORED" [label="7" penwidth=1.97];
+  labelloc="b"; labeljust="l";
+  label=<<font point-size="7.65">253 frames carrying all three fields with both kinds nameable; 12 paths testable at n&ge;6, 5 over-represented against a fate-shuffle at q&lt;0.05 BH (one-sided, 20,000 draws). MIXED and FUNCTION omitted</font>>;
+}

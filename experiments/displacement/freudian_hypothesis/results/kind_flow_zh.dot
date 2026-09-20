@@ -6,32 +6,20 @@ digraph kindflow {
   edge [fontname="Helvetica" fontsize=7.2 color="#4d4d4d" penwidth=0.75 arrowsize=0.5];
   { rank=same;
     "B_THING" [label="thing\n25"];
-    "B_FUNCTION" [label="function word\n21"];
-    "B_MENTAL_STATE" [label="mental state\n6"];
-    "B_PHYSICAL_ACT" [label="physical act\n5"];
-    "B_MIXED" [label="mixed\n1" penwidth=0.35 color="#8c8c8c" fontcolor="#595959"];
+    "B_MENTAL_STATE" [label="mental state\n9"];
   }
   { rank=same;
     "A_THING" [label="thing\n25"];
-    "A_FUNCTION" [label="function word\n21"];
-    "A_MENTAL_STATE" [label="mental state\n6"];
-    "A_PHYSICAL_ACT" [label="physical act\n5"];
-    "A_MIXED" [label="mixed\n1" penwidth=0.35 color="#8c8c8c" fontcolor="#595959"];
+    "A_MENTAL_STATE" [label="mental state\n9"];
   }
   { rank=same;
-    "F_NONE" [label="no feeling either side\n30" penwidth=0.35 color="#8c8c8c" fontcolor="#595959"];
-    "F_KEPT" [label="feeling kept\n22"];
-    "F_RECOLORED" [label="feeling changed\n5"];
+    "F_KEPT" [label="feeling kept\n17"];
+    "F_NONE" [label="no feeling either side\n10" penwidth=0.35 color="#8c8c8c" fontcolor="#595959"];
+    "F_RECOLORED" [label="feeling changed\n3"];
     "F_GONE" [label="feeling gone\n1"];
   }
-  "B_THING" -> "A_THING" [label="内裤 → 外套" style=dashed arrowhead=none color="#737373" penwidth=1.81];
-  "B_FUNCTION" -> "A_FUNCTION" [label="去 → 怎么办" style=dotted arrowhead=none color="#737373" penwidth=1.74];
-  "B_MENTAL_STATE" -> "A_MENTAL_STATE" [label="死 → 去世" style=dashed arrowhead=none color="#737373" penwidth=1.28];
-  "B_PHYSICAL_ACT" -> "A_PHYSICAL_ACT" [label="杀 → 摆脱" style=dashed arrowhead=none color="#737373" penwidth=1.22];
-  "B_MIXED" -> "A_MIXED" [label="杀死 → 找到" style=dashed arrowhead=none color="#737373" penwidth=0.78];
-  "A_THING" -> "F_NONE" [label="衣服 → 外套" color="#b3b3b3" fontcolor="#737373" penwidth=0.5 arrowsize=0.4 style=dotted];
-  "A_THING" -> "F_KEPT" [label="头 → 球" color="#b3b3b3" fontcolor="#737373" penwidth=0.5 arrowsize=0.4 style=dashed];
-  "A_FUNCTION" -> "F_NONE" [label="就 → 突然" color="#b3b3b3" fontcolor="#737373" penwidth=0.5 arrowsize=0.4 style=dotted];
+  "B_THING" -> "A_THING" [label="内裤 → 外套" arrowhead=none color="#737373" penwidth=1.81];
+  "B_MENTAL_STATE" -> "A_MENTAL_STATE" [label="看见 → 意识" arrowhead=none color="#737373" penwidth=1.43];
   labelloc="b"; labeljust="l";
-  label=<<font point-size="7.65">125 frames; 97 dropped where the two label orders disagreed; off-diagonal edges one-way at q&lt;0.05 (BH over 10 tested pairs); same-kind edges drawn arrowless and NOT tested</font>>;
+  label=<<font point-size="7.65">145 frames; 77 dropped where the two label orders disagreed; edges significant on EITHER test: over-represented against a marginal-preserving shuffle (solid head) or one-way against its own transpose (open head); same-kind edges headless and testable only by the shuffle. MIXED and FUNCTION omitted</font>>;
 }

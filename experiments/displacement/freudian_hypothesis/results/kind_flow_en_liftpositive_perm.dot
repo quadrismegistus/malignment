@@ -1,0 +1,39 @@
+digraph kindflow {
+  rankdir=LR; splines=true; overlap=false;
+  size="4.8,5.52!"; ratio=compress;
+  bgcolor="white"; nodesep=0.14; ranksep=0.95;
+  node [shape=box style="rounded" fontname="Helvetica" fontsize=9 color="black" fontcolor="black" margin="0.06,0.035" penwidth=0.6];
+  edge [fontname="Helvetica" fontsize=7.2 color="#4d4d4d" penwidth=0.75 arrowsize=0.5];
+  { rank=same;
+    "B_PHYSICAL_ACT" [label="physical act\n91"];
+    "B_THING" [label="thing\n82"];
+    "B_PROCEDURE" [label="procedure\n14"];
+    "B_MENTAL_STATE" [label="mental state\n9"];
+    "B_DESCRIPTION" [label="description\n8"];
+    "B_VOCAL_ACT" [label="voice\n8"];
+  }
+  { rank=same;
+    "A_THING" [label="thing\n82"];
+    "A_PHYSICAL_ACT" [label="physical act\n65"];
+    "A_VOCAL_ACT" [label="voice\n34"];
+    "A_PROCEDURE" [label="procedure\n14"];
+    "A_MENTAL_STATE" [label="mental state\n9"];
+    "A_DESCRIPTION" [label="description\n8"];
+  }
+  { rank=same;
+    "F_NONE" [label="no feeling either side\n73" penwidth=0.35 color="#8c8c8c" fontcolor="#595959"];
+    "F_KEPT" [label="feeling kept\n65"];
+    "F_GONE" [label="feeling gone\n20"];
+    "F_RECOLORED" [label="feeling changed\n15"];
+    "F_INTRODUCED" [label="feeling arrives\n2"];
+  }
+  "B_THING" -> "A_THING" [label="mouth → room" arrowhead=none color="#737373" penwidth=2.28];
+  "B_PHYSICAL_ACT" -> "A_PHYSICAL_ACT" [label="killed → released" arrowhead=none color="#737373" penwidth=2.18];
+  "B_PHYSICAL_ACT" -> "A_VOCAL_ACT" [label="kill → scream" penwidth=1.82];
+  "B_PROCEDURE" -> "A_PROCEDURE" [label="evict → take" arrowhead=none color="#737373" penwidth=1.59];
+  "B_MENTAL_STATE" -> "A_MENTAL_STATE" [label="having → staying" arrowhead=none color="#737373" penwidth=1.43];
+  "B_DESCRIPTION" -> "A_DESCRIPTION" [label="nude → still" arrowhead=none color="#737373" penwidth=1.38];
+  "B_VOCAL_ACT" -> "A_VOCAL_ACT" [label="shit → dear" arrowhead=none color="#737373" penwidth=1.38];
+  labelloc="b"; labeljust="l";
+  label=<<font point-size="7.65">1251 frames; 387 dropped where the two label orders disagreed; every cell against a marginal-preserving shuffle, q&lt;0.05 BH over 20 cells; cells below chance and all MIXED cells omitted; lift above +0.00 only (any positive lift)</font>>;
+}
