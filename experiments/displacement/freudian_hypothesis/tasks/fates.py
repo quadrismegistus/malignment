@@ -817,7 +817,29 @@ def dose_table(rows, bins=3, quiet=False, metric="frame"):
     for r in rows:
         d = None
         try:
-            if metric == "shown_base":
+            if metric == "base_column":
+                #: **THE SEPARATING TEST FOR `shown_base`.** Same instrument,
+                #: same side, but over EVERY word in the base column of the
+                #: pooled table -- before the relation reader selected from it.
+                #:
+                #: The reader's instruction does two things at once: it removes
+                #: chaff (`have`, `get`) AND it was told to find the CLEAREST
+                #: relation and drop any word that would force a hedge. If
+                #: `shown_base` and `base_column` agree, the selection was
+                #: chaff-removal and dosing on the reader's subset is dosing on
+                #: the relation. If `shown_base` runs systematically higher, the
+                #: selection kept the vivid words and the gradient it produces is
+                #: partly a gradient in what was selectable.
+                import pooled_tables as _PT
+                got = _PT.pooled(r["frame"])
+                sc = charge.scene(r["frame"]) or {}
+                if got:
+                    cnt = got[0]
+                    col = [w for w, (f_, ri, _s) in cnt.items()
+                           if f_ > ri and w in sc]
+                    vals = [sc[w] for w in col]
+                    d = sum(vals) / len(vals) if vals else None
+            elif metric == "shown_base":
                 #: **THE THIRD DOSE: WHAT THE FATES ANNOTATOR ACTUALLY READ.**
                 #: `charge.scene` rates every candidate word in the frame; this
                 #: averages it over ONLY the base-side words that went into the
@@ -867,6 +889,8 @@ def dose_table(rows, bins=3, quiet=False, metric="frame"):
     out = {}
     if not quiet:
         print("\nFATES BY %s" % (
+            "THE WHOLE BASE COLUMN (mean charge.scene over every faller, "
+            "before the relation reader selected)" if metric == "base_column" else
             "THE BASE WORDS THE ANNOTATOR SAW (mean charge.scene over exactly "
             "those words)" if metric == "shown_base" else
             "BASE CHARGE MASS (mean T_base over the 50 lineages -- the rating "
@@ -924,7 +948,7 @@ def _main(argv=None):
     ap.add_argument("--confirm", default=None, metavar="JSONL")
     ap.add_argument("--md", default=None, help="render a coded run as markdown")
     ap.add_argument("--dose", nargs="?", const="frame", default=None,
-                    choices=("frame", "base_mass", "shown_base"),
+                    choices=("frame", "base_mass", "shown_base", "base_column"),
                     help="cross the fates with charge: `frame` is the unweighted "
                          "candidate rating, `base_mass` the base arm's own "
                          "mass-weighted charge, `shown_base` the mean "
