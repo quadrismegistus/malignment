@@ -514,8 +514,21 @@ def emit(edges, fates, out, title_note, pub=True, triples=None):
         for (b, a, f), tv in sorted(triples.items(), key=lambda kv: -kv[1]["n"]):
             if (b, a) not in edges:
                 continue
-            lab = ("from %s  %d" % (PLAIN.get(b, b), tv["n"])
-                   if src_count[(a, f)] > 1 else "%d" % tv["n"])
+            #: **A WORD PAIR, NOT A COUNT (RH).** The onward arrows carried
+            #: bare numbers while every 1->2 arrow carried words, so half the
+            #: figure showed what a movement looks like and half asked the
+            #: reader to take it on arithmetic. The count is already on the node
+            #: the arrow reaches.
+            #:
+            #: The pair is the triple's own exemplar, from `path_flow`, chosen
+            #: by the same rule as everywhere else -- best-attested word on each
+            #: side, largest charge drop breaking ties -- so an onward arrow
+            #: shows a frame that actually took THAT path rather than one that
+            #: merely ended at the same fate.
+            ex = tv.get("ex")
+            lab = ("%s → %s" % ex) if ex else "%d" % tv["n"]
+            if src_count[(a, f)] > 1:
+                lab = "%s  (from %s)" % (lab, PLAIN.get(b, b))
             L.append('  "A_%s" -> "F_%s" [label="%s" color="#737373" '
                      'fontcolor="#737373" penwidth=%.2f arrowsize=0.4];'
                      % (a, f, lab, _width(tv["n"])))
@@ -552,9 +565,22 @@ def main(argv=None):
                                                    a.min_edge, a.test, a.lift_cut)
     if not edges:
         raise SystemExit("no edges clear --min-edge %d" % a.min_edge)
-    tag = "%s%s%s" % (a.lang,
-                      ("_lift" + a.lift_cut) if a.high_lift else "",
-                      "_perm" if a.test == "permutation" else "")
+    #: **THE TEST GOES IN THE FILENAME TOO, AND LEAVING IT OUT PUT THE WRONG
+    #: FIGURE IN THE PAPER.** The tag carried the language, the lift cut and a
+    #: `_perm` suffix, so `--test either` and `--test transpose` both wrote
+    #: `kind_flow_en`. A loop that ran the three variants in sequence ended on
+    #: `transpose`, which overwrote the `either` render, and that was what got
+    #: copied to Dropbox and committed -- a figure with MIXED, FUNCTION and
+    #: untested marginal arrows, captioned as the current one. Caught by RH
+    #: looking at the Dropbox copy.
+    #:
+    #: The rule this file already states for the lift variants ("a default name
+    #: shared by four runs is how a level-mode figure ends up captioned as a
+    #: delta-mode one") applied to the test dimension and was not extended to
+    #: it. Every dimension that changes the figure is now in the path.
+    tag = "%s%s_%s" % (a.lang,
+                       ("_lift" + a.lift_cut) if a.high_lift else "",
+                       a.test)
     out = a.out or os.path.join(HERE, "results", "kind_flow_%s.dot" % tag)
     note = ("%d frames; %d dropped where the two label orders disagreed; "
             "%s%s"
