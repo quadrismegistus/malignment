@@ -82,7 +82,14 @@ FATE = {"KEPT": "feeling kept", "RECOLORED": "feeling changed",
 #: in the positive-lift figure, and it is the third link of the chain the
 #: asymmetry test found -- deed to utterance to connective. It survives in the
 #: permutation table and in `fates_corpus_en.md`; only the figure declines it.
-DROP_KINDS = {"MIXED", "FUNCTION"}
+#: **`MIXED` IS BACK (RH, on paper-claude's point).** Omitting it removed the
+#: proceduralization story: `MIXED -> procedure` is 75 against `physical act ->
+#: procedure` 6, and `MIXED -> mental state` 95. The police pattern is rare in
+#: KIND terms at corpus scale precisely because institutional base lists are
+#: grab-bags the coder cannot give one kind -- that is a finding about the
+#: corpus, not a reason to hide the cell. It is drawn faint, and the caption
+#: says it is an abstention rather than a kind.
+DROP_KINDS = {"FUNCTION"}
 
 #: **LINE STYLE IS RETIRED (RH).** It carried the edge's MODAL affect fate --
 #: solid gone, dashed kept/recoloured, dotted none/introduced -- which was
@@ -345,8 +352,14 @@ def load(path, lang="en", high_lift=False, min_edge=6, test="transpose",
 #: encoding. Log-scaled because the counts run 1 to 645; floored at the
 #: journal's 0.5 pt, below which a rule can drop out of the plate.
 def _width(n, top=646.0):
+    #: **SQRT, NOT LOG.** On the log scale `description -> description` at 11
+    #: drew at 1.50 pt and `thing -> thing` at 103 at 2.37 -- 9.4 times the
+    #: count in 1.6 times the width, which a reader reads as "about the same"
+    #: (paper-claude). Sqrt is the standard area-perception scale and gives
+    #: 1.00 against 2.55 for the same pair. Floored at the journal's 0.5 pt,
+    #: below which a rule can drop out of the plate.
     import math
-    return 0.5 + 2.6 * (math.log10(n + 1) / math.log10(top))
+    return 0.5 + 3.0 * math.sqrt(min(n, top) / top)
 
 
 def emit(edges, fates, out, title_note, pub=True, triples=None):
@@ -399,11 +412,10 @@ def emit(edges, fates, out, title_note, pub=True, triples=None):
     #: time, which is why it is now written down: a column's counts come from
     #: whatever the figure actually draws into it.
     drawn_f = collections.Counter()
-    if triples:
-        for (b, a, f), tv in triples.items():
-            if (b, a) in edges:
-                drawn_f[f] += tv["n"]
-    else:
+    if triples is not None:
+        for _k, e in edges.items():
+            drawn_f.update(e["fate"])
+    elif False:
         for _k, e in edges.items():
             drawn_f.update(e["fate"])
     L.append("  { rank=same;")
@@ -508,12 +520,58 @@ def emit(edges, fates, out, title_note, pub=True, triples=None):
     #: It is LABELLED BY ITS SOURCE only where the middle node has more than one
     #: onward arrow to the same fate, which is where an unlabelled arrow would
     #: be ambiguous. RH: with so few, the label is usually unnecessary.
-    if triples:
-        src_count = collections.Counter((k[1], k[2]) for k in triples
-                                        if (k[0], k[1]) in edges)
-        for (b, a, f), tv in sorted(triples.items(), key=lambda kv: -kv[1]["n"]):
-            if (b, a) not in edges:
+    #: **EVERY FLOW IS DRAWN; SIGNIFICANCE IS THE HEAD, NOT THE EXISTENCE**
+    #: (paper-claude). Drawing only the significant onward link made the figure
+    #: assert the opposite of its own data: `thing -> thing` runs none 40, kept
+    #: 27, gone 14, and only GONE is over-represented -- so the reader saw one
+    #: arrow to "feeling gone" and concluded that moving the object loses the
+    #: feeling, when it is the THIRD outcome and the feeling is kept twice as
+    #: often. Significance says a flow is larger than chance predicts; it does
+    #: not say the flow is what usually happens, and an arrow that exists only
+    #: when significant conflates the two.
+    #:
+    #: So: an arrow for every fate a drawn edge produced, width by count, and a
+    #: filled head only where the triple clears the test. A hollow head is a
+    #: real flow that is not over-represented.
+    if triples is not None:
+        sig = {k for k in triples if (k[0], k[1]) in edges}
+        allflow = collections.Counter()
+        for (b, a), e in edges.items():
+            for f, v in e["fate"].items():
+                allflow[(b, a, f)] += v
+        src_count = collections.Counter((k[1], k[2]) for k in allflow)
+        #: **EVERY FLOW THAT MATTERS, NOT EVERY FLOW.** Drawing all of them gave
+        #: 30 onward arrows, about twenty of them n=1 or 2, and the right half
+        #: became unreadable at 4.8 inches -- paper-claude's principle
+        #: (significance is not prevalence) taken past the point where the
+        #: figure can carry it.
+        #:
+        #: Per 1->2 edge: the fates that together cover 90% of its frames, PLUS
+        #: any that clears the triple test however small. So the dominant flow
+        #: is always shown -- which is the fix -- and a significant-but-minor
+        #: one is never hidden. What is dropped is the tail, and the caption
+        #: says how much of it.
+        #: **THE DOMINANT FATE PER EDGE, PLUS ANY SIGNIFICANT ONE.** A 90%
+        #: coverage rule gave 22 onward arrows and, with MIXED restored, would
+        #: give well over thirty -- unreadable at 4.8 inches (RH). One arrow per
+        #: edge is the minimum that still answers paper-claude's objection: the
+        #: flow a reader would infer from the figure is the flow that actually
+        #: dominates, and a significant-but-minor one is added rather than
+        #: substituted. Everything else is tail, counted in the caption.
+        keepf, tail = set(), 0
+        for (b, a), e in edges.items():
+            top = e["fate"].most_common(1)
+            if top:
+                keepf.add((b, a, top[0][0]))
+            for f, v in e["fate"].items():
+                if (b, a, f) in sig:
+                    keepf.add((b, a, f))
+                elif not top or f != top[0][0]:
+                    tail += v
+        for (b, a, f), n in sorted(allflow.items(), key=lambda kv: -kv[1]):
+            if (b, a, f) not in keepf:
                 continue
+            tv = triples.get((b, a, f)) or {"n": n, "ex": None}
             #: **A WORD PAIR, NOT A COUNT (RH).** The onward arrows carried
             #: bare numbers while every 1->2 arrow carried words, so half the
             #: figure showed what a movement looks like and half asked the
@@ -526,12 +584,21 @@ def emit(edges, fates, out, title_note, pub=True, triples=None):
             #: shows a frame that actually took THAT path rather than one that
             #: merely ended at the same fate.
             ex = tv.get("ex")
-            lab = ("%s → %s" % ex) if ex else "%d" % tv["n"]
+            issig = (b, a, f) in sig
+            #: only the over-represented flows get a word pair; labelling all
+            #: of them would put a dozen pairs in the right half and the
+            #: exemplar would stop marking anything
+            lab = ("%s → %s" % ex) if (issig and ex) else "%d" % n
             if src_count[(a, f)] > 1:
-                lab = "%s  (from %s)" % (lab, PLAIN.get(b, b))
+                lab = "%s  (%s)" % (lab, PLAIN.get(b, b))
+            head = "normal" if issig else "onormal"
             L.append('  "A_%s" -> "F_%s" [label="%s" color="#737373" '
-                     'fontcolor="#737373" penwidth=%.2f arrowsize=0.4];'
-                     % (a, f, lab, _width(tv["n"])))
+                     'fontcolor="#737373" penwidth=%.2f arrowsize=0.4 '
+                     'arrowhead=%s];' % (a, f, lab, _width(n), head))
+    if triples is not None:
+        title_note += ("; onward arrows are each edge's largest fate plus any "
+                       "over-represented one, %d frames in smaller flows not "
+                       "drawn" % tail)
     L.append('  labelloc="b"; labeljust="l";')
     L.append('  label=<<font point-size="%g">%s</font>>;' % (pt * 0.85, title_note))
     L.append("}")
@@ -591,7 +658,9 @@ def main(argv=None):
                ("edges significant on EITHER test: over-represented against a "
                 "marginal-preserving shuffle (solid head) or one-way against "
                 "its own transpose (open head); same-kind edges headless and "
-                "testable only by the shuffle. MIXED and FUNCTION omitted" )
+                "testable only by the shuffle. `mixed` is the coder's "
+                "ABSTENTION -- no one kind covers two thirds of that group's "
+                "words -- not a kind; FUNCTION omitted" )
                if a.test == "either" else
                ("off-diagonal edges one-way at q&lt;0.05, BH over %d tested "
                 "pairs; same-kind edges arrowless and NOT tested" % ntest),
