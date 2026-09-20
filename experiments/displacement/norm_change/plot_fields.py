@@ -666,8 +666,22 @@ def draw_xy(rows, out_path, pub=False, label_all=False, square=True):
          #: strongly dose-responsive and the unresponsive scales sit in the
          #: MIDDLE, at zero. Bodily harm at -0.70 is not weakly charge-linked;
          #: it is suppressed in proportion to the charge present.
+         #: **"charge" NAMED THE INSTRUMENT AND WAS READ AS THE QUANTITY.** The
+         #: x axis is a slope per unit of LIFT -- the base candidates' charge
+         #: above the frame's own -- which `dose.py:lift_dose_rows` computes and
+         #: every row under `results/dose_lift_v4_cov20/` records in its `dose`
+         #: column. `charge` is the module that rates both. Nothing on the plate
+         #: says which, and paper-claude read "rises with charge" as the LEVEL
+         #: dose and asked whether eighteen scales needed re-running under lift.
+         #: They did not; the label did.
+         #:
+         #: ONE WORD, NOT A CLAUSE. RH: do not complicate an already two-line
+         #: axis. `XLAB`'s "change per unit of lift" was the other candidate and
+         #: would have cost the signed reading the comment above exists to
+         #: protect. **THE PLATE IN THE ARTICLE IS NOT REGENERATED** -- it is
+         #: correct as drawn, and the lift clause goes in the ¶5C caption.
          + labs(x="Dose slope (SDs)\n"
-                  "<-- Falls with charge  |  Rises with charge -->",
+                  "<-- Falls with lift  |  Rises with lift -->",
                 y="Marginal change (SDs)\n"
                   "<-- Falls with alignment  |  Rises with alignment -->"))
     #: ONE COLOUR, NO LEGEND. Lexicon-vs-rated is documented outside the
