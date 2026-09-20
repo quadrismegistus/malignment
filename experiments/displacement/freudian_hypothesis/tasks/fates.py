@@ -1009,10 +1009,103 @@ def affect_cross(rows, ds, bins=3, quiet=False):
     return out
 
 
+def stratified(recs, n, seed=20260920, bins=3, min_per_lang=0):
+    """A sample balanced over (language x dose tertile). -> [record]
+
+    **FOR A HUMAN TO CODE BLIND**, which is what makes the LLM coding citable:
+    the order-agreement rate says the instrument is self-consistent, and only a
+    human sample says it is right. Requested by paper-claude 2026-09-20 as the
+    number the essay cites beside the agreement.
+
+    **PROPORTIONAL BY DEFAULT, AND THAT IS NOT A LANGUAGE STRATIFICATION.**
+    The first version of this docstring said stratifying on language existed so
+    a coder would not be handed "about 18 Chinese frames and learn nothing about
+    that arm" -- and then drew proportionally, which gives exactly 18. On the
+    language axis, proportional IS the simple random draw; only the dose axis
+    was being stratified.
+
+    Both samples are worth having and they answer different questions, so the
+    choice is explicit rather than hidden in a default:
+
+      `min_per_lang=0`   proportional. The sample DESCRIBES the corpus, so a
+                         rate measured on it estimates the corpus rate. 180 en
+                         and 18 zh, and the zh figure supports nothing.
+      `min_per_lang=n`   floors the small arm. Each arm's rate is estimable
+                         SEPARATELY, and the pooled rate no longer describes the
+                         corpus -- which is fine here, because the arms were
+                         never to be pooled.
+
+    Tertiles are computed WITHIN each language, not globally: zh and en doses
+    are not on a common footing, and a global cut would put most of one arm in
+    one bin and call it a stratum.
+
+    `charge.dose` is None for an unrated frame; those go in their own bucket
+    rather than being dropped, since "no dose" is a stratum a coder should see.
+    """
+    import random
+    import re as _re
+    from malignment import charge
+    rnd = random.Random(seed)
+    cjk = _re.compile(r"[一-鿿]")
+    arms = {"zh": [], "en": []}
+    for r in recs:
+        arms["zh" if cjk.search(r["frame"]) else "en"].append(r)
+    out = []
+    for lang, group in arms.items():
+        if not group:
+            continue
+        #: proportional to the arm's share, so the sample describes the corpus,
+        #: unless a floor is asked for -- see the docstring on what that costs
+        want = max(1, round(n * len(group) / len(recs)))
+        if min_per_lang:
+            want = min(len(group), max(want, min_per_lang))
+        ds = {}
+        for r in group:
+            try:
+                d = charge.dose(r["frame"])
+            except Exception:
+                d = None
+            ds[r["frame"]] = d if isinstance(d, (int, float)) else None
+        rated = sorted((v for v in ds.values() if v is not None))
+        cuts = ([rated[int(len(rated) * (i + 1) / bins) - 1] for i in range(bins)]
+                if rated else [])
+        buckets = collections.defaultdict(list)
+        for r in group:
+            d = ds[r["frame"]]
+            if d is None:
+                buckets["none"].append(r)
+            else:
+                b = next((i for i, c in enumerate(cuts) if d <= c), bins - 1)
+                buckets[b].append(r)
+        per = max(1, want // max(1, len(buckets)))
+        for b in sorted(buckets, key=str):
+            pool = sorted(buckets[b], key=lambda r: r["frame"])
+            out.extend(rnd.sample(pool, min(per, len(pool))))
+    rnd.shuffle(out)
+    return out
+
+
 def _main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--frame", default=None)
+    #: the 93-frame battery is the default because every number in this file was
+    #: computed on it; the corpus is 2,466 relations and a different population,
+    #: never a bigger version of the same one
+    ap.add_argument("--relations", default=RELATIONS,
+                    help="the relation jsonl to code (default: the 93-frame "
+                         "battery; pass the corpus file for the 2,466)")
+    ap.add_argument("--lang", choices=("all", "en", "zh"), default="all",
+                    help="**NEVER POOL THE ARMS.** A zh relation rests on a "
+                         "median of 4 words against en's 16, so a combined "
+                         "marginal is dominated by en and misdescribes zh.")
+    ap.add_argument("--sample", type=int, default=0,
+                    help="stratified subsample by dose tertile x language")
+    ap.add_argument("--min-per-lang", type=int, default=0,
+                    help="floor each language in --sample. 0 (default) is "
+                         "proportional and DESCRIBES the corpus; a floor makes "
+                         "each arm separately estimable and the pooled rate no "
+                         "longer a corpus estimate")
     ap.add_argument("--show", action="store_true", help="render only, spend nothing")
     ap.add_argument("--smoke", action="store_true")
     ap.add_argument("--all", action="store_true")
@@ -1052,7 +1145,13 @@ def _main(argv=None):
             render_md(rows, res, a.md, also=a.also)
         return 0
 
-    recs = population(frame=a.frame, fixed=not a.flip)
+    recs = population(path=a.relations, frame=a.frame, fixed=not a.flip)
+    if a.lang != "all":
+        cjk = __import__("re").compile(r"[一-鿿]")
+        recs = [r for r in recs
+                if bool(cjk.search(r["frame"])) == (a.lang == "zh")]
+    if a.sample:
+        recs = stratified(recs, a.sample, min_per_lang=a.min_per_lang)
     if not recs:
         raise SystemExit("no frames match")
     if a.smoke:
