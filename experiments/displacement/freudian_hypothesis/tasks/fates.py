@@ -1070,6 +1070,66 @@ def dose_table(rows, bins=3, quiet=False, metric="frame", _return_ds=False):
     return ds if _return_ds else out
 
 
+def marginals(rows, ds=None, bins=3, top=8):
+    """The four fields' distributions, overall and by dose tertile. -> dict
+
+    **EACH FIELD IS COUNTED OVER ITS OWN AGREED SUBSET**, so the denominators
+    differ between fields and are printed on every line. A field withheld
+    because the two orders disagreed is not a category and is not a zero; it is
+    absent, and pretending otherwise would make `act` and `object` look like
+    they were measured on the same frames when object agrees 16 points less
+    often.
+
+    `ds` is the dose map from `dose_table(..., _return_ds=True)`. Without it
+    only the overall marginals are computed.
+    """
+    import collections as _c
+    FIELDS = ("act", "channel", "affect", "object")
+    out = {}
+    print("\nFIELD MARGINALS -- each over the frames whose two orders AGREED on "
+          "that field")
+    for f in FIELDS:
+        vals = [r["orient"][f] for r in rows if r["orient"].get(f) is not None]
+        c = _c.Counter(vals)
+        out[f] = c
+        print("\n  %s  (n=%d of %d, %.0f%% agreed)"
+              % (f.upper(), len(vals), len(rows), 100 * len(vals) / max(1, len(rows))))
+        for k, n in c.most_common(top):
+            print("     %-34s %5d  %4.1f%%" % (k, n, 100 * n / len(vals)))
+        if len(c) > top:
+            print("     %-34s %5d  %4.1f%%  (%d more values)"
+                  % ("...", sum(n for _k, n in c.most_common()[top:]),
+                     100 * sum(n for _k, n in c.most_common()[top:]) / len(vals),
+                     len(c) - top))
+    if not ds:
+        return out
+    have = [r for r in rows if r["frame"] in ds]
+    vals = sorted(ds[r["frame"]] for r in have)
+    cuts = [vals[int(len(vals) * (i + 1) / bins) - 1] for i in range(bins)]
+
+    def binof(r):
+        d = ds[r["frame"]]
+        return next((i for i, c in enumerate(cuts) if d <= c), bins - 1)
+
+    print("\nBY DOSE TERTILE -- the share of each field's AGREED frames taking "
+          "each value")
+    for f in FIELDS:
+        keys = [k for k, _n in out[f].most_common(6)]
+        print("\n  %s" % f.upper())
+        print("     %-32s %8s %8s %8s" % ("", "low", "mid", "high"))
+        cols = []
+        for i in range(bins):
+            grp = [r for r in have
+                   if binof(r) == i and r["orient"].get(f) is not None]
+            cols.append((_c.Counter(r["orient"][f] for r in grp), len(grp)))
+        for k in keys:
+            print("     %-32s %8s %8s %8s"
+                  % (k, *["%d (%.0f%%)" % (c[k], 100 * c[k] / max(1, n))
+                          for c, n in cols]))
+        print("     %-32s %8d %8d %8d" % ("n", *[n for _c2, n in cols]))
+    return out
+
+
 def affect_cross(rows, ds, bins=3, quiet=False):
     """affect SURVIVES vs GONE by dose tertile, among frames that HAD affect.
 
@@ -1295,7 +1355,10 @@ def _main(argv=None):
         res = confirm(rows, path=a.relations)
         if a.dose:
             ds = dose_table(rows, metric=a.dose, _return_ds=True)
+            marginals(rows, ds)
             affect_cross(rows, ds)
+        else:
+            marginals(rows)
         if a.md:
             render_md(rows, res, a.md, also=a.also)
         return 0
