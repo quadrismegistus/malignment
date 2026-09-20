@@ -71,6 +71,35 @@ SCALES = ["warriner_valence", "warriner_arousal", "warriner_dominance",
           "k_valence"]
 COVER = ["warriner_coverage", "brysbaert_coverage", "k_coverage"]
 
+#: **THESE ARE THE MOVEMENT, NOT A NORM, AND THEY SIT IN THE SAME DICT.**
+#: `contextual_norms` returns `v6_net`, `v6_rise`, `v6_fall` and the `v6_wide`
+#: equivalents beside the twelve actual scales. `net` IS `rise - fall` -- the
+#: thing this file is trying to explain. Leaving them in would "predict" the
+#: movement with the movement and produce the largest effect in the table.
+#: The same leak was found and fixed once already in `annotated_pairs.py`; it
+#: recurs because the keys look like every other key.
+#: **MATCHED ON SEGMENTS, BECAUSE endswith DID NOT WORK AND I WROTE IT FOR
+#: EXACTLY THIS.** The first version tested `k.endswith("_net")`; the key is
+#: `v6_net_rate`, which ends in `_rate`. It came through and ranked FIRST in
+#: the table at 56 of 56 relations, p=7.5e-11 -- perfect separation, which is
+#: what a leak looks like and what a norm never does.
+NOT_NORM_SEGMENTS = {"net", "rise", "fall", "ratable", "eligible", "present",
+                     "instruments"}
+
+
+def _is_norm(key):
+    return not (NOT_NORM_SEGMENTS & set(key.split("_")))
+
+#: asked for by name; `v6` and the institutional battery cover nearly every
+#: relation, the sexual one is scoped to the frames it was built for and is
+#: reported at a lower threshold rather than dropped
+#: **THESE ARE THE KEYS `contextual_norms` EMITS, NOT THE INSTRUMENT NAMES.**
+#: It shortens: `inst.replace("slot_rating_en_", "").replace("_slot_en_", "_")`,
+#: so `sexual_slot_en_v2` arrives as `sexual_v2`. Filtering on the instrument
+#: name matched nothing and I was one step from reporting that the sexual
+#: battery does not cover these frames. It does.
+CTX_INSTRUMENTS = ("v6", "slot_institutional_en_v3", "sexual_v2")
+
 
 def side_norms(words, weights=None):
     """Mean norms over a word list. -> dict or None
@@ -137,6 +166,42 @@ def charge_sides(frame, base, aligned, weights=None):
     return statistics.mean(b), statistics.mean(a), cov
 
 
+def ctx_sides(frame, base, aligned, weights=None):
+    """Contextual norms per scale, both sides. -> {scale: (mb, ma, cov)}
+
+    A rater saw the FRAME, so `scream` after "She wanted to" and `scream` after
+    "The kettle began to" are different ratings of the same word -- which is
+    the whole reason this is not `fields.norms`.
+    """
+    from malignment import fields as F
+    try:
+        cn = {w: F.contextual_norms(frame, w) for w in set(base) | set(aligned)}
+    except Exception:
+        return {}
+    keys = set()
+    for d in cn.values():
+        keys |= {k for k in d if _is_norm(k)}
+    keys = {k for k in keys if k.startswith(CTX_INSTRUMENTS)}
+    out = {}
+    for k in sorted(keys):
+        def vals(ws):
+            v = []
+            for w in ws:
+                d = cn.get(w) or {}
+                if k in d and isinstance(d[k], (int, float)):
+                    v.extend([d[k]] * (max(1, int(weights.get(w, 1)))
+                                       if weights else 1))
+            return v
+        b, a = vals(base), vals(aligned)
+        if not b or not a:
+            continue
+        nb = sum(1 for w in base if k in (cn.get(w) or {}))
+        na = sum(1 for w in aligned if k in (cn.get(w) or {}))
+        out[k] = (statistics.mean(b), statistics.mean(a),
+                  (nb + na) / max(1, len(base) + len(aligned)))
+    return out
+
+
 def counts_for(frame):
     """{word: agreement count} for one frame. -> dict"""
     import pooled_tables as PT
@@ -146,7 +211,7 @@ def counts_for(frame):
     return {w: max(f, r) for w, (f, r, _s) in got[0].items()}
 
 
-def rows(path, weight=False, min_coverage=0.0):
+def rows(path, weight=False, min_coverage=0.0, want_ctx=False):
     out = []
     for line in open(path, encoding="utf-8"):
         rec = json.loads(line)
@@ -165,7 +230,8 @@ def rows(path, weight=False, min_coverage=0.0):
         if not nb or not na:
             continue
         cb, ca, ccov = charge_sides(rec["frame"], base, aligned, wts)
-        out.append({"charge_base": cb, "charge_aligned": ca, "charge_cov": ccov,
+        ctx = ctx_sides(rec["frame"], base, aligned, wts) if want_ctx else {}
+        out.append({"ctx": ctx, "charge_base": cb, "charge_aligned": ca, "charge_cov": ccov,
                     "frame": rec["frame"], "name": rec["name"],
                     "confidence": rec["confidence"],
                     "n_base": len(base), "n_aligned": len(aligned),
@@ -199,7 +265,7 @@ def wilcoxon(d):
     return wp, p, n
 
 
-def report(rs, label):
+def report(rs, label="", min_rel=20):
     print("=" * 74)
     print("%s   %d relations, frame as the unit, delta = ALIGNED - BASE" % (label, len(rs)))
     print("=" * 74)
@@ -233,6 +299,30 @@ def report(rs, label):
               % ("", len(ch), len(rs),
                  100 * statistics.mean(r["charge_cov"] for r in rs
                                        if r["charge_base"] is not None)))
+    ctxkeys = collections.Counter()
+    for r in rs:
+        ctxkeys.update(r.get("ctx", {}).keys())
+    if ctxkeys:
+        print()
+        print("CONTEXTUAL -- a rater who saw the frame. delta = ALIGNED - BASE")
+        print("%-40s %7s %7s %7s %6s %9s %6s"
+              % ("instrument_scale", "base", "aligned", "delta", "n+/n", "p", "wcov"))
+        rowsout = []
+        for k, nk in ctxkeys.items():
+            d = [r["ctx"][k][1] - r["ctx"][k][0] for r in rs if k in r["ctx"]]
+            if len(d) < min_rel:
+                continue
+            _w, p, n = wilcoxon(d)
+            if p is None:
+                continue
+            rowsout.append((p, k, statistics.mean(r["ctx"][k][0] for r in rs if k in r["ctx"]),
+                            statistics.mean(r["ctx"][k][1] for r in rs if k in r["ctx"]),
+                            statistics.mean(d), sum(1 for x in d if x > 0), n,
+                            statistics.mean(r["ctx"][k][2] for r in rs if k in r["ctx"])))
+        for p, k, b, a, dm, pos, n, wc in sorted(rowsout):
+            star = "  <<<" if p < 0.01 else ""
+            print("%-40s %7.3f %7.3f %+7.3f %3d/%-3d %9.2g %5.0f%%%s"
+                  % (k, b, a, dm, pos, n, p, 100 * wc, star))
     print()
     print("%-26s %8s %8s %8s" % ("(lexicon coverage)", "base", "aligned", "delta"))
     for c in COVER:
@@ -256,12 +346,16 @@ def main(argv=None):
                     help="weight each word by how many lineages agree on it")
     ap.add_argument("--min-coverage", type=float, default=0.0)
     ap.add_argument("--csv", default=None)
+    ap.add_argument("--contextual", action="store_true",
+                    help="also compare on the slot-rating instruments")
+    ap.add_argument("--min-relations", type=int, default=20,
+                    help="a contextual scale needs this many relations")
     a = ap.parse_args(argv)
     path = ALLWORDS if a.all_words else CONTENT
-    rs = rows(path, a.weight, a.min_coverage)
+    rs = rows(path, a.weight, a.min_coverage, a.contextual)
     if not rs:
         raise SystemExit("no relations")
-    report(rs, "%s%s" % (os.path.basename(path),
+    report(rs, min_rel=a.min_relations, label="%s%s" % (os.path.basename(path),
                          "  [agreement-weighted]" if a.weight else ""))
     if a.csv:
         import csv
@@ -278,6 +372,22 @@ def main(argv=None):
                            + ["%.4f" % r["base"].get(s, float("nan")) for s in SCALES]
                            + ["%.4f" % r["aligned"].get(s, float("nan")) for s in SCALES])
         print("\nwrote %s (%d rows)" % (a.csv, len(rs)))
+        #: LONG format, one row per (frame, scale). Wide would be ~80 columns
+        #: of mostly-absent contextual scales; long keeps the absence visible
+        #: as a missing row rather than as an empty cell that reads as zero.
+        if any(r.get("ctx") for r in rs):
+            cp = a.csv.replace(".csv", "_contextual.csv")
+            with open(cp, "w", newline="", encoding="utf-8") as fh:
+                w = csv.writer(fh)
+                w.writerow(["frame", "name", "scale", "base", "aligned",
+                            "delta", "word_coverage"])
+                n = 0
+                for r in rs:
+                    for k, (b, al, cv) in sorted(r.get("ctx", {}).items()):
+                        w.writerow([r["frame"], r["name"], k, "%.4f" % b,
+                                    "%.4f" % al, "%.4f" % (al - b), "%.3f" % cv])
+                        n += 1
+            print("wrote %s (%d rows)" % (cp, n))
     return 0
 
 
