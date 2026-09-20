@@ -605,6 +605,88 @@ def paraphrase_report(frames, shots=None):
     return sorted(rows, reverse=True)
 
 
+def human_sheet(recs, path, key_path=None, title="Blind coding sheet"):
+    """A coding sheet for a person, plus a key they do not get. -> writes files
+
+    **BLIND MEANS THREE THINGS HERE, AND ONLY THE FIRST IS OBVIOUS.**
+
+      1. No direction. A and B are drawn per frame, as the design has it, so
+         the coder cannot learn a convention across items.
+      2. No sight of the model's codes, which is what makes the human number an
+         independent check rather than a rating of the machine's answer.
+      3. **No sight of the RELATION task 1 named.** That is a different
+         instrument on the same two word lists, and a coder shown "vocalisation
+         versus physical force" will code the four fields against that phrase
+         rather than against the words. The relation is in the key, for joining
+         afterwards, and not in the sheet.
+
+    The key carries the frame, the A/B draw and the relation, so a returned
+    sheet can be joined without the coder ever having held any of it.
+
+    **ENGLISH ONLY FOR RH** (paper-claude, 2026-09-20: RH does not read Chinese,
+    per his own note in the draft). The Chinese arm is a separate sheet for the
+    native speaker who verified the translations; if that time cannot be had,
+    the zh arm carries ORDER AGREEMENT ONLY and the note has to say so -- an
+    instrument checked only against itself is not checked.
+    """
+    import json as _j
+    L = ["# %s" % title, "",
+         "%d items. For each: the sentence, and the two groups of words that "
+         "move at the blank." % len(recs), "",
+         "**You are not told which group is which**, and the labels are drawn "
+         "afresh for every item, so nothing carries over. Code what separates "
+         "the groups; never which way anything moved.", "",
+         "For each item answer four things. Write `?` rather than guessing — an "
+         "abstention is a usable answer and a forced one is not.", "",
+         "```",
+         "ACT      SAME       the same act, however its object differs",
+         "         DEGREE     same kind of act, differing in force  (+ which side)",
+         "         DIFFERENT  a different act happens",
+         "         ONE_SIDE   only one group names an act           (+ which side)",
+         "         NEITHER    neither does",
+         "OBJECT   SAME | ADJACENT | FIGURATIVE | GENERIC | UNRELATED | MIXED | NA",
+         "AFFECT   SAME | ATTENUATED (+side) | RECOLORED | ONE_SIDE (+side) | NEITHER",
+         "REGISTER narrative | procedural | legal | evaluative",
+         "```",
+         "",
+         "**When the blank is a NOUN the act is the sentence's own verb and it "
+         "is SAME** — in `He kicked the ___` the kicking is constant and the "
+         "difference is carried by the object. `NEITHER` is only for a blank "
+         "that names no act in a sentence with no verb governing it.",
+         "", "---", ""]
+    key = []
+    for i, r in enumerate(recs, 1):
+        L.append("## %03d" % i)
+        L.append("")
+        L.append("> %s ___" % r["frame"].rstrip())
+        L.append("")
+        L.append("| | words |")
+        L.append("|---|---|")
+        L.append("| **A** | %s |" % ", ".join(r["words_a"]))
+        L.append("| **B** | %s |" % ", ".join(r["words_b"]))
+        L.append("")
+        L.append("    act      =")
+        L.append("    object   =")
+        L.append("    affect   =")
+        L.append("    register =")
+        L.append("    note     =")
+        L.append("")
+        L.append("---")
+        L.append("")
+        key.append({"id": "%03d" % i, "frame": r["frame"],
+                    "a_is_base": r["a_is_base"],
+                    "words_a": r["words_a"], "words_b": r["words_b"],
+                    "relation": r.get("name")})
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    open(path, "w", encoding="utf-8").write(chr(10).join(L))
+    print("wrote %s (%d items)" % (path, len(recs)))
+    if key_path:
+        with open(key_path, "w", encoding="utf-8") as fh:
+            for k in key:
+                fh.write(_j.dumps(k, ensure_ascii=False) + chr(10))
+        print("wrote %s (the key -- NOT for the coder)" % key_path)
+
+
 #: what `orient()`'s codes PREDICT on the instruments the sheet already carries.
 #: The point of the confirmation is that these were fixed by the hypothesis, not
 #: read off the result: a frame whose act becomes vocal must show vocalisation
@@ -1077,10 +1159,26 @@ def stratified(recs, n, seed=20260920, bins=3, min_per_lang=0):
             else:
                 b = next((i for i, c in enumerate(cuts) if d <= c), bins - 1)
                 buckets[b].append(r)
-        per = max(1, want // max(1, len(buckets)))
-        for b in sorted(buckets, key=str):
+        #: **THE REMAINDER IS DISTRIBUTED AND A SHORT BUCKET BORROWS.**
+        #: `want // len(buckets)` alone returned 198 for a request of 200 --
+        #: three dose buckets at 66 -- and a sampler that quietly delivers fewer
+        #: than asked is one whose n has to be re-read off the output every
+        #: time it is used.
+        names = sorted(buckets, key=str)
+        per = {b: want // len(names) for b in names}
+        for i in range(want - sum(per.values())):
+            per[names[i % len(names)]] += 1
+        short = 0
+        for b in names:
             pool = sorted(buckets[b], key=lambda r: r["frame"])
-            out.extend(rnd.sample(pool, min(per, len(pool))))
+            take = min(per[b], len(pool))
+            short += per[b] - take
+            out.extend(rnd.sample(pool, take))
+        if short:
+            taken = {r["frame"] for r in out}
+            rest = sorted((r for r in group if r["frame"] not in taken),
+                          key=lambda r: r["frame"])
+            out.extend(rnd.sample(rest, min(short, len(rest))))
     rnd.shuffle(out)
     return out
 
@@ -1101,6 +1199,9 @@ def _main(argv=None):
                          "marginal is dominated by en and misdescribes zh.")
     ap.add_argument("--sample", type=int, default=0,
                     help="stratified subsample by dose tertile x language")
+    ap.add_argument("--human-sheet", default=None, metavar="PATH",
+                    help="render a BLIND coding sheet for a person and stop; "
+                         "writes a key beside it that the coder does not get")
     ap.add_argument("--min-per-lang", type=int, default=0,
                     help="floor each language in --sample. 0 (default) is "
                          "proportional and DESCRIBES the corpus; a floor makes "
@@ -1152,6 +1253,24 @@ def _main(argv=None):
                 if bool(cjk.search(r["frame"])) == (a.lang == "zh")]
     if a.sample:
         recs = stratified(recs, a.sample, min_per_lang=a.min_per_lang)
+    if a.human_sheet:
+        #: **THE BLIND DRAW, NOT A=base.** A human sheet is the one place the
+        #: fixed display order must NOT be used: a coder given A=base on every
+        #: item can learn the convention across 200 of them, which is the
+        #: positional leak the per-frame draw exists to prevent.
+        recs = population(path=a.relations, frame=a.frame, fixed=False)
+        if a.lang != "all":
+            cjk = __import__("re").compile(r"[一-鿿]")
+            recs = [r for r in recs
+                    if bool(cjk.search(r["frame"])) == (a.lang == "zh")]
+        if a.sample:
+            recs = stratified(recs, a.sample, min_per_lang=a.min_per_lang)
+        human_sheet(recs, a.human_sheet,
+                    key_path=a.human_sheet.replace(".md", "_KEY.jsonl"),
+                    title="Blind coding sheet — %s, %d items"
+                          % ({"en": "English", "zh": "Chinese"}.get(a.lang, "both"),
+                             len(recs)))
+        return 0
     if not recs:
         raise SystemExit("no frames match")
     if a.smoke:

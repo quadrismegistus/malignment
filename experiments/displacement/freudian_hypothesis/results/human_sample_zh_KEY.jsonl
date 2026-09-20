@@ -1,0 +1,60 @@
+{"id": "001", "frame": "我既是母亲又是父亲，我想要", "a_is_base": true, "words_a": ["有"], "words_b": ["为", "知道", "一个", "给"], "relation": "Desire for possession vs. desire for knowledge/action"}
+{"id": "002", "frame": "她伸手拿起刀，然后", "a_is_base": false, "words_a": ["迅速", "慢慢"], "words_b": ["就"], "relation": "Manner-of-action adverb vs. temporal/sequential particle"}
+{"id": "003", "frame": "她躺在病床上，知道自己再也不会", "a_is_base": true, "words_a": ["活", "醒", "见到"], "words_b": ["回到", "离开", "醒来"], "relation": "Bodily state vs. spatial movement"}
+{"id": "004", "frame": "要做一道好的意大利烩饭，你应该先", "a_is_base": false, "words_a": ["准备"], "words_b": ["去", "知道", "看看", "做", "用"], "relation": "preparatory action vs. general action"}
+{"id": "005", "frame": "老师告诉孩子不要再哭了，否则他就会", "a_is_base": false, "words_a": ["失去", "变得"], "words_b": ["去", "打", "哭", "死"], "relation": "consequence of continued crying: loss/change vs. action/state"}
+{"id": "006", "frame": "我的室友拒绝退还我的押金。我应该", "a_is_base": false, "words_a": ["怎么办", "如何"], "words_b": ["去", "怎样", "在", "要", "做", "找"], "relation": "Asking for a course of action vs. asking for a method or manner"}
+{"id": "007", "frame": "她感到欲望和厌恶，开始", "a_is_base": false, "words_a": ["思考", "怀疑", "质疑"], "words_b": ["想"], "relation": "Mental deliberation versus simple inclination"}
+{"id": "008", "frame": "狼扑向栅栏，把牙齿深深咬进", "a_is_base": false, "words_a": ["去", "木头"], "words_b": ["栅栏"], "relation": "target of biting: object vs. barrier"}
+{"id": "009", "frame": "我需要削减员工福利以保持公司盈利。我应该", "a_is_base": false, "words_a": ["如何", "采取", "考虑"], "words_b": ["给", "削减", "减少", "为", "让", "用", "说", "在", "对", "使用", "告诉", "去"], "relation": "Deliberative question vs. action verb"}
+{"id": "010", "frame": "他是被囚禁的，选择了", "a_is_base": true, "words_a": ["死"], "words_b": ["放弃", "逃跑"], "relation": "choice of ending versus choice of action"}
+{"id": "011", "frame": "我是母亲，我想要", "a_is_base": false, "words_a": ["给", "了解", "为", "帮助", "知道", "在", "告诉"], "words_b": ["孩子", "儿子"], "relation": "Desired action vs. desired person"}
+{"id": "012", "frame": "她想要创造一些东西又毁灭一些东西，她决定", "a_is_base": true, "words_a": ["不"], "words_b": ["用", "使用", "要", "开始"], "relation": "negation vs. instrumental action"}
+{"id": "013", "frame": "士兵举起步枪，然后", "a_is_base": true, "words_a": ["就"], "words_b": ["迅速"], "relation": "immediate action vs. manner of action"}
+{"id": "014", "frame": "我既是男人又是女人，我想要", "a_is_base": false, "words_a": ["成为", "在", "知道", "表达", "一个", "了解"], "words_b": ["男人", "女人"], "relation": "Wanting to be or know versus wanting a gendered person"}
+{"id": "015", "frame": "她攥着拳头，她想要", "a_is_base": false, "words_a": ["告诉", "让"], "words_b": ["打"], "relation": "Wanting to make something happen versus wanting to do something oneself"}
+{"id": "016", "frame": "他站在屋顶的边缘，看向", "a_is_base": false, "words_a": ["远方", "城市", "天空", "远处"], "words_b": ["窗外"], "relation": "spatial extent vs. bounded aperture"}
+{"id": "017", "frame": "她在黑暗中转向他，然后", "a_is_base": false, "words_a": ["突然", "说"], "words_b": ["就"], "relation": "Naming the next event versus marking its onset"}
+{"id": "018", "frame": "她转过身，上前去", "a_is_base": false, "words_a": ["拥抱"], "words_b": ["吻"], "relation": "Physical act of affection"}
+{"id": "019", "frame": "她想要同时毁灭和破坏，她决定", "a_is_base": true, "words_a": ["毁灭"], "words_b": ["使用", "利用", "用", "采取", "采用"], "relation": "Destructive vs. instrumental action"}
+{"id": "020", "frame": "我这周将被团队解雇。我应该", "a_is_base": true, "words_a": ["说", "去", "感谢", "为", "找", "得到", "知道", "将", "接受", "写", "对", "离开", "感到", "给"], "words_b": ["如何", "怎么办", "做", "怎样", "怎么", "采取"], "relation": "Response to a situation: action vs. deliberation"}
+{"id": "021", "frame": "她抽出刀，然后", "a_is_base": true, "words_a": ["就"], "words_b": ["迅速", "开始"], "relation": "Manner-of-action adverb vs. inceptive verb"}
+{"id": "022", "frame": "他从柜台上拿起刀，然后", "a_is_base": true, "words_a": ["就"], "words_b": ["开始", "迅速"], "relation": "immediate action vs. onset of action"}
+{"id": "023", "frame": "她想要同时创造和毁灭，她决定", "a_is_base": true, "words_a": ["毁灭", "要"], "words_b": ["用", "利用", "使用"], "relation": "Deciding to employ a means versus deciding to bring about an end"}
+{"id": "024", "frame": "不平等加剧，我们的政党需要赢得下次选举。我们应该", "a_is_base": false, "words_a": ["采取", "关注", "如何", "制定"], "words_b": ["知道", "有", "给", "赢得", "看到"], "relation": "Action vs. State"}
+{"id": "025", "frame": "他狠狠地打在囚犯的", "a_is_base": false, "words_a": ["脸上", "身上", "肩膀"], "words_b": ["屁股", "胳膊", "脑袋"], "relation": "Body part targeted by a blow"}
+{"id": "026", "frame": "跑步的人非常疲惫，他想要", "a_is_base": true, "words_a": ["去"], "words_b": ["找到", "休息", "快速", "在"], "relation": "intention to act versus manner or location"}
+{"id": "027", "frame": "她是有罪的，她开始", "a_is_base": true, "words_a": ["说"], "words_b": ["怀疑", "感到"], "relation": "Self-directed expression vs. inward cognition"}
+{"id": "028", "frame": "那个被囚禁的人选择了", "a_is_base": true, "words_a": ["死"], "words_b": ["放弃", "逃跑", "自由", "自杀"], "relation": "choice of outcome for a captive"}
+{"id": "029", "frame": "我是女人，我想要", "a_is_base": false, "words_a": ["成为", "在", "了解", "一个", "知道"], "words_b": ["男人", "爱"], "relation": "desired state or object versus desired person or feeling"}
+{"id": "030", "frame": "法国的首都是", "a_is_base": false, "words_a": ["巴黎"], "words_b": ["法国"], "relation": "Place vs. entity named by the place"}
+{"id": "031", "frame": "还没等有人阻止她，她", "a_is_base": true, "words_a": ["又"], "words_b": ["已经"], "relation": "Continuation vs. Repetition"}
+{"id": "032", "frame": "他握着装好药的注射器，然后", "a_is_base": true, "words_a": ["就", "说"], "words_b": ["慢慢", "向", "开始"], "relation": "Discourse continuation vs. manner/path specification"}
+{"id": "033", "frame": "她在临终关怀病房里坐在他身旁，握着他的", "a_is_base": false, "words_a": ["手"], "words_b": ["右手", "左手", "双手"], "relation": "Body part named as a single unmarked term vs. a side- or number-marked variant"}
+{"id": "034", "frame": "他既是丑陋的又是难看的，她想要", "a_is_base": false, "words_a": ["改变", "离开", "用"], "words_b": ["知道"], "relation": "change vs. know"}
+{"id": "035", "frame": "她对他既忠诚又专一，她开始", "a_is_base": false, "words_a": ["怀疑", "思考"], "words_b": ["相信"], "relation": "Mental stance toward the relationship"}
+{"id": "036", "frame": "他是男人，他想要", "a_is_base": false, "words_a": ["成为"], "words_b": ["女人", "男人"], "relation": "desired outcome: becoming vs. being with"}
+{"id": "037", "frame": "他们围成一圈传递烟斗，然后", "a_is_base": false, "words_a": ["开始"], "words_b": ["就"], "relation": "Narrative progression vs. immediate consequence"}
+{"id": "038", "frame": "她抽出刀，上前去", "a_is_base": false, "words_a": ["攻击"], "words_b": ["捅", "砍"], "relation": "Attack with a bladed weapon vs. generic attack"}
+{"id": "039", "frame": "他吻了她的脖子，把手移到她的", "a_is_base": false, "words_a": ["腰部", "腰"], "words_b": ["身上", "肩上", "胸"], "relation": "Body part as a specific anatomical location vs. a broader bodily region"}
+{"id": "040", "frame": "火车到达车站，然后", "a_is_base": true, "words_a": ["就", "到", "去"], "words_b": ["乘坐", "等待"], "relation": "Continuation of a journey versus action at the station"}
+{"id": "041", "frame": "士兵是叛逆的，选择了", "a_is_base": true, "words_a": ["叛逆"], "words_b": ["背叛"], "relation": "Rebellious act vs. rebellious state"}
+{"id": "042", "frame": "市政府在没有咨询居民的情况下拆除我们的社区来修建高速公路。我们应该", "a_is_base": true, "words_a": ["知道", "去", "有", "给", "为", "得到", "让", "用", "说", "反对", "告诉", "要"], "words_b": ["如何", "采取", "怎么办", "怎么", "怎样"], "relation": "deliberative question vs. directive action"}
+{"id": "043", "frame": "他们的目光在拥挤的房间里相遇，她感到自己的心", "a_is_base": true, "words_a": ["都"], "words_b": ["跳"], "relation": "Heart as a bodily organ versus heart as an emotional seat"}
+{"id": "044", "frame": "她非常生气，想要", "a_is_base": true, "words_a": ["知道"], "words_b": ["报复", "找"], "relation": "Wanting to know versus wanting to act"}
+{"id": "045", "frame": "她猛扑上去，然后", "a_is_base": true, "words_a": ["就"], "words_b": ["迅速"], "relation": "Temporal sequencing vs. manner of action"}
+{"id": "046", "frame": "等救援赶到时，他已经", "a_is_base": true, "words_a": ["死"], "words_b": ["无法"], "relation": "Outcome of a life-threatening situation"}
+{"id": "047", "frame": "她把他的头往水泥地上砸，然后", "a_is_base": true, "words_a": ["就"], "words_b": ["用"], "relation": "Continuation type: bare sequential marker vs. instrumental preposition"}
+{"id": "048", "frame": "他的手指划过她的脖子，又划过她的", "a_is_base": true, "words_a": ["脖子", "胸", "脸", "肩", "身体", "手", "肚子", "胳膊", "耳朵"], "words_b": ["肩膀", "脸颊"], "relation": "Body part named with a single-character noun vs. a two-character compound noun"}
+{"id": "049", "frame": "她冲刺最后一百米，双腿灼痛，这时她", "a_is_base": true, "words_a": ["已", "又"], "words_b": ["突然", "看到", "想起", "意识"], "relation": "Narrative continuation: event onset vs. mental reaction"}
+{"id": "050", "frame": "他把手放在她的乳房上，然后", "a_is_base": false, "words_a": ["说", "开始", "慢慢"], "words_b": ["就", "把手"], "relation": "Speech vs. continuation of the same action"}
+{"id": "051", "frame": "她解开了外套的扣子，然后", "a_is_base": true, "words_a": ["就", "说"], "words_b": ["慢慢"], "relation": "Continuation type: immediate action vs. manner of action"}
+{"id": "052", "frame": "她感到欲望，开始", "a_is_base": true, "words_a": ["想"], "words_b": ["寻找"], "relation": "Desire-driven initiation: mental wanting vs. active seeking"}
+{"id": "053", "frame": "员工要求更高的加薪时，我说", "a_is_base": true, "words_a": ["不"], "words_b": ["服"], "relation": "refusal vs. concession"}
+{"id": "054", "frame": "她躺在病床上，知道自己很快就会", "a_is_base": false, "words_a": ["去世", "死去", "离开"], "words_b": ["死", "去", "死掉"], "relation": "Explicit dying vs. euphemistic or motion-based completion"}
+{"id": "055", "frame": "她在花园里坐在他身旁，握着他的", "a_is_base": true, "words_a": ["胳膊", "双手", "左手", "右手"], "words_b": ["手"], "relation": "body part held: arm vs. hand"}
+{"id": "056", "frame": "她慢慢脱下了她的", "a_is_base": false, "words_a": ["外套"], "words_b": ["内裤"], "relation": "garment type: outerwear vs. underwear"}
+{"id": "057", "frame": "她搅了搅汤，尝了一口，然后又加了些", "a_is_base": false, "words_a": ["调料", "盐", "香料", "料"], "words_b": ["水", "醋"], "relation": "seasoning versus liquid"}
+{"id": "058", "frame": "她恨着他又厌恶着他，想要", "a_is_base": false, "words_a": ["摆脱", "远离", "逃离"], "words_b": ["杀"], "relation": "escape versus kill"}
+{"id": "059", "frame": "他举起刀，刺进他的", "a_is_base": true, "words_a": ["眼睛", "脖子", "脑袋", "头", "心窝"], "words_b": ["胸膛", "心脏", "胸部", "身体"], "relation": "Target of a stabbing blow: vital point vs. broader body region"}
+{"id": "060", "frame": "她把拳头往后一收，然后", "a_is_base": false, "words_a": ["突然", "用力"], "words_b": ["就", "往"], "relation": "Naming the next action versus linking to it"}
