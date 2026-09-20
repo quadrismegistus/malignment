@@ -776,7 +776,7 @@ def patterns(rows):
     return out
 
 
-def dose_table(rows, bins=3, quiet=False, metric="frame"):
+def dose_table(rows, bins=3, quiet=False, metric="frame", _return_ds=False):
     """The fates against the FRAME'S OWN charge, `charge.dose`. -> dict
 
     **DOSE IS A PROPERTY OF THE PROMPT, NOT OF THE MOVEMENT.** `charge.dose` is
@@ -931,6 +931,81 @@ def dose_table(rows, bins=3, quiet=False, metric="frame"):
             print("  %-28s %5d %7.2f %+7.2f"
                   % (lab, len(fs), statistics.mean(fs),
                      statistics.mean(fs) - statistics.mean(rest)))
+    return ds if _return_ds else out
+
+
+def affect_cross(rows, ds, bins=3, quiet=False):
+    """affect SURVIVES vs GONE by dose tertile, among frames that HAD affect.
+
+    **THE DENOMINATOR IS THE WHOLE POINT** (paper-claude, 2026-09-20). A frame
+    whose base side carries no feeling cannot show `affect GONE`, and those
+    frames are not spread evenly over dose -- an uncharged frame is both
+    low-dose and feelingless for the same reason. Counting them in the
+    denominator makes the affect gradient partly a gradient in whether there was
+    any affect to lose.
+
+    So: restrict to frames whose BASE side carries a feeling, then cross
+    kept-or-recoloured against gone. `raw` holds the A=base coding, so
+    `raw["a"]["feeling"]` is the base side's -- not the flipped one.
+
+    Rows whose `affect` disagreed across the two orders are excluded, as
+    everywhere else: a withheld field is not a category.
+    """
+    import statistics
+    SURVIVES = ("KEPT", "RECOLORED", "ATTENUATED", "INTENSIFIED")
+    have = [r for r in rows if r["frame"] in ds
+            and r["orient"].get("affect") is not None]
+    vals = sorted(ds[r["frame"]] for r in have)
+    cuts = [vals[int(len(vals) * (i + 1) / bins) - 1] for i in range(bins)]
+
+    def binof(r):
+        d = ds[r["frame"]]
+        for i, c in enumerate(cuts):
+            if d <= c:
+                return i
+        return bins - 1
+
+    def feel(r):
+        return (r.get("raw") or {}).get("a", {}).get("feeling")
+
+    withf = [r for r in have if feel(r) not in (None, "NONE")]
+    out = {}
+    if not quiet:
+        print("\nAFFECT: SURVIVES vs GONE, among frames whose BASE side carries a feeling")
+        print("  %d of %d frames coded (affect agreed across orders); %d have a "
+              "feeling on the base side, %d do not"
+              % (len(have), len(rows), len(withf), len(have) - len(withf)))
+        print()
+        print("  %-12s %6s %8s %7s %7s %8s" % ("tertile", "n", "mean dose",
+                                               "survives", "gone", "gone %"))
+    for i in range(bins):
+        grp = [r for r in withf if binof(r) == i]
+        if not grp:
+            continue
+        sv = sum(1 for r in grp if r["orient"]["affect"] in SURVIVES)
+        gn = sum(1 for r in grp if r["orient"]["affect"] == "GONE")
+        out[i] = dict(n=len(grp), survives=sv, gone=gn,
+                      dose=statistics.mean(ds[r["frame"]] for r in grp))
+        if not quiet:
+            print("  %-12s %6d %8.2f %7d %7d %7s"
+                  % ("%d (%s)" % (i + 1, ("low", "mid", "high")[i]), len(grp),
+                     out[i]["dose"], sv, gn,
+                     "%.0f%%" % (100 * gn / (sv + gn)) if sv + gn else "--"))
+    if not quiet:
+        #: the comparison that makes the restriction worth doing: the same
+        #: gradient computed over EVERY frame, the number the restriction
+        #: replaces
+        print()
+        print("  for comparison, `affect GONE` over ALL coded frames "
+              "(the number this replaces):")
+        for i in range(bins):
+            grp = [r for r in have if binof(r) == i]
+            gn = sum(1 for r in grp if r["orient"]["affect"] == "GONE")
+            print("    %-12s %d of %d" % (("low", "mid", "high")[i], gn, len(grp)))
+        import collections as _c
+        print()
+        print("  base-side feeling among the %d with one: %s"
+              % (len(withf), dict(_c.Counter(feel(r) for r in withf).most_common(6))))
     return out
 
 
@@ -971,7 +1046,8 @@ def _main(argv=None):
         rows = [json.loads(l) for l in open(a.confirm, encoding="utf-8")]
         res = confirm(rows)
         if a.dose:
-            dose_table(rows, metric=a.dose)
+            ds = dose_table(rows, metric=a.dose, _return_ds=True)
+            affect_cross(rows, ds)
         if a.md:
             render_md(rows, res, a.md, also=a.also)
         return 0
