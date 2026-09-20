@@ -4,8 +4,10 @@
     python -m tasks.pooled_relations --frame "She was so angry" --model deepseek/deepseek-flash
     python -m tasks.pooled_relations --smoke --n 4 --model gpt-5.4
 
-Reads the tables `pooled_tables.py` renders -- fifty endpoint pairs pooled into
-one two-column table per frame -- and asks what separates the two columns.
+Reads the tables `pooled_tables.py` renders -- the endpoint pairs pooled into
+one two-column table per frame -- and asks what separates the two columns. Fifty
+pairs on an English frame, 45 to 47 on a Chinese one; the count is stated in
+every item rather than assumed anywhere.
 
 ## WORDS, NOT JUST A NAME
 
@@ -94,11 +96,11 @@ import pooled_tables as PT
 SEED = 20260920
 
 
-SYSTEM = """You are shown measurements of how word probabilities moved in fifty pairs of language models. Each pair was trained under two conditions, A and B. You are shown ONE sentence with a blank, and the words that move at that blank.
+SYSTEM = """You are shown measurements of how word probabilities moved in a number of PAIRS of language models -- the count is stated with each sentence. Each pair was trained under two conditions, A and B. You are shown ONE sentence with a blank, and the words that move at that blank.
 
 You are NOT told which condition is which, and the two groups are labelled arbitrarily. The relation you name must read the same either way round: say what separates the two groups, never which direction anything moved.
 
-For each word, `this` is how many of the fifty pairs move it toward that word's own group, `other` how many move it toward the other group, and `still` how many leave it unmoved. These counts are the evidence. A word at 28/3/19 is moved one way by twenty-eight pairs and the other way by three; one at 18/13/19 is nearly a coin toss.
+For each word, `this` is how many of those pairs move it toward that word's own group, `other` how many move it toward the other group, and `still` how many leave it unmoved. These counts are the evidence. A word at 28/3/19 is moved one way by twenty-eight pairs and the other way by three; one at 18/13/19 is nearly a coin toss.
 
 ## Your job
 
@@ -218,10 +220,23 @@ def content_only(counts, prompt):
     were naming -- those mostly survive it.
     """
     from malignment import fields as F
+    #: **THE TAGGER MUST BE TOLD THE LANGUAGE; IT DOES NOT REFUSE A STRING IT
+    #: CANNOT READ.** spaCy's English model returns a tag for anything, so at
+    #: `lang="en"` the Chinese frames came back `嘴角` X, `下巴` INTJ, `鼻子` ADV,
+    #: `脸上` INTJ -- all four nouns -- and one zh frame went 4 words to 1 kept,
+    #: keeping the wrong one. Nothing raised; the filter just returned a shorter
+    #: dict. `pos()` takes `lang` and at "zh" it gets all four right, plus `的`
+    #: PART and `和` CCONJ.
+    #:
+    #: `is_function_word(w, "zh")` is the WRONG route here even though it exists
+    #: and reads as the obvious one: its zh path goes through SUBTLEX-CH's
+    #: `Dominant.PoS` and calls `了`, an aspect particle, a content word.
+    import re as _re
+    lang = "zh" if _re.search(r"[一-鿿]", prompt) else "en"
     keep = {}
     for w, c in counts.items():
         try:
-            p = F.pos(w, "%s %s" % (prompt.rstrip(), w))
+            p = F.pos(w, "%s %s" % (prompt.rstrip(), w), lang=lang)
         except Exception:
             p = None
         if p in F.CONTENT_POS:
@@ -253,8 +268,14 @@ def render(prompt, min_agree=PT.MIN_AGREE, top=20, seed=SEED, content=False):
     if not got:
         return None
     text, n = got
-    return ("SENTENCE (stops mid-stream):\n    %s ___\n\n%s"
-            % (prompt.rstrip(), text)), n
+    #: **THE PAIR COUNT GOES IN THE ITEM, NOT THE SYSTEM PROMPT.** It used to
+    #: assert "fifty pairs". The English frames have 50 and the Chinese ones 45
+    #: to 47, so on every zh frame the rater was handed a denominator it was not
+    #: given -- while being instructed to weigh a word by how many pairs agree.
+    #: Stated per item now, where it is true.
+    return ("SENTENCE (stops mid-stream):\n    %s ___\n\n"
+            "Measured on %d model pairs.\n\n%s"
+            % (prompt.rstrip(), n, text)), n
 
 
 ROW = re.compile(r"^  ([^\s].*?)\s+(\d+)\s+(\d+)\s+(\d+)\s*$", re.M)
@@ -295,9 +316,39 @@ def check(text, r):
     return bad, sorted((A | B) - used)
 
 
+def frames_for(source="crosslineage", lang="all"):
+    """The population. -> [prompt]
+
+    **`PT.frames()` IS 96 FRAMES AND THAT IS A STASH, NOT A POPULATION.** It
+    reads the `crosslineage_stash` -- the frames a per-lineage rater was shown
+    in August -- so scaling to the corpus means changing the SOURCE, not raising
+    a limit. `charge` is every prompt `task_charge` rated: 2,806, of which 2,400
+    are English and 406 Chinese.
+
+    Chinese is selected by script rather than by `charge.language`, and the two
+    agree here (406 either way); script is used because it is checkable from the
+    prompt alone and does not depend on a field being populated.
+    """
+    if source == "crosslineage":
+        fs = PT.frames()
+    else:
+        from malignment import charge
+        fs = sorted(charge.doses())
+    if lang != "all":
+        import re as _re
+        cjk = _re.compile(r"[\u4e00-\u9fff]")
+        fs = [f for f in fs if bool(cjk.search(f)) == (lang == "zh")]
+    return fs
+
+
 def task(model=None, content=False):
     class _T(Task):
-        name = "pooled_relation_v2_content" if content else "pooled_relation_v2"
+        #: **v3: the system prompt and the item both changed.** v2 asserted
+        #: "fifty pairs" and put no count in the item. A new name rather than
+        #: reusing v2's stash, because a v2 hit and a v3 hit are answers to
+        #: different questions on the Chinese frames and to the same question
+        #: differently posed on the English ones.
+        name = "pooled_relation_v3_content" if content else "pooled_relation_v3"
         schema = FrameRelation
         system_prompt = SYSTEM
         temperature = 0.0
@@ -335,11 +386,16 @@ def main(argv=None):
     ap.add_argument("--workers", type=int, default=4)
     ap.add_argument("--out", default=None,
                     help="write one JSON record per frame here")
+    ap.add_argument("--source", choices=("crosslineage", "charge"),
+                    default="crosslineage",
+                    help="crosslineage = the 96 stashed frames; charge = every "
+                         "prompt task_charge rated (2806)")
+    ap.add_argument("--lang", choices=("all", "en", "zh"), default="all")
     ap.add_argument("--content-only", action="store_true",
                     help="drop closed-class words (in-frame spaCy POS)")
     a = ap.parse_args(argv)
 
-    fs = PT.frames()
+    fs = frames_for(a.source, a.lang)
     if a.frame:
         hit = [f for f in fs if f.lower().startswith(a.frame.lower())]
         if len(hit) != 1:
