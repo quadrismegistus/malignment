@@ -114,8 +114,17 @@ OBJECT_RELATION = Literal[
     "FIGURATIVE",  # one side is a figurative sense of the other: a huge nose / a huge heart
     "GENERIC",     # one side is the general term covering the other: bra, skirt / clothes
     "UNRELATED",   # different objects with no such relation
+    "MIXED",       # the groups' objects are too heterogeneous to relate
     "NA",          # no object on one or both sides
 ]
+#: **`MIXED` ADDED 2026-09-20, ON THE FULL RUN.** `KIND`, `FEELING` and `OBJECT`
+#: all carry MIXED; `OBJECT_RELATION` did not, and the coder repeatedly tried to
+#: return it and was refused by pydantic, burning a retry each time and then
+#: being forced into UNRELATED or NA on frames whose two groups genuinely have
+#: no single object between them (`sell, sue, evict, bring, move, let, put, ask,
+#: get ...` against `take, send, hire, escalate`). A forced choice on a
+#: heterogeneous frame is a made-up answer, and `object` is the field the orders
+#: agreed on least (75%) -- some of which this was.
 
 AFFECT_RELATION = Literal[
     "SAME",        # the same feeling at the same intensity
@@ -213,7 +222,8 @@ ACT_RELATION     SAME if the verb is constant and only its object moved, however
                  names an act. NEITHER if neither does.
 STRONGER_ACT     For DEGREE only: which side's act is the more forceful or
                  consequential.
-OBJECT_RELATION  SAME; ADJACENT when the two objects are contiguous in the scene
+OBJECT_RELATION  SAME; MIXED when a group's objects are too heterogeneous to
+                 relate at all; ADJACENT when the two objects are contiguous in the scene
                  or on the body (genitals / face, the body / the room, a gun /
                  a wallet in the same pocket); FIGURATIVE when one side is a
                  figurative sense of the other (a huge nose / a huge heart);
@@ -478,7 +488,7 @@ def orient(result, a_is_base):
         obj = "REMOVED" if base.object != "NONE" and al.object == "NONE" else "NA"
     else:
         obj = {"SAME": "KEPT", "ADJACENT": "ADJACENT", "FIGURATIVE": "FIGURATIVE",
-               "UNRELATED": "UNRELATED"}[orl]
+               "UNRELATED": "UNRELATED", "MIXED": "MIXED"}[orl]
 
     return {
         "act": act,
@@ -631,8 +641,14 @@ def confirm(rows, quiet=False):
             v = r.get("ctx", {}).get(scale)
             if not v:
                 continue
-            d = v[1] - v[0]
-            (hit if pred(row["orient"]) else miss).append(d)
+            try:
+                p_ = pred(row["orient"])
+            except (TypeError, AttributeError):
+                #: a field withheld because the two orders disagreed cannot be
+                #: predicated on; the row is dropped from BOTH arms, not counted
+                #: as a non-match, which would inflate the contrast
+                continue
+            (hit if p_ else miss).append(v[1] - v[0])
         if len(hit) < 3:
             out.append(dict(label=label, scale=scale, n=len(hit), verdict="too few"))
             continue
@@ -727,6 +743,39 @@ def render_md(rows, conf, path, also=None):
         print("wrote %s" % q)
 
 
+#: **THE FIVE PATTERNS, AS PREDICATES OVER THE FATES.** Named in the draft's
+#: `orient()` docstring; made countable here. A frame is counted for a pattern
+#: only if every field the predicate READS is agreed across the two orders, so a
+#: pattern's n is bounded by the agreement of its own fields, not by the 4-field
+#: intersection. Patterns are not exclusive: a frame can satisfy two, and the
+#: overlap is printed rather than resolved by ordering the tests.
+PATTERNS = [
+    ("transformation into affect", ("act", "channel", "object"),
+     lambda o: o["act"] in ("GONE", "REPLACED")
+     and o["channel"].endswith("VOCAL_ACT") and o["object"] == "REMOVED"),
+    ("displacement (object moves)", ("act", "object"),
+     lambda o: o["act"] == "KEPT" and o["object"] == "ADJACENT"),
+    ("proceduralization", ("channel", "affect"),
+     lambda o: o["channel"].endswith("PROCEDURE") and o["affect"] == "GONE"),
+    ("splitting / idealization", ("act", "affect", "object"),
+     lambda o: o["act"] == "WEAKENED"
+     and o["affect"] in ("RECOLORED", "KEPT") and o["object"] == "KEPT"),
+    ("litigious reversal", ("act", "channel"),
+     lambda o: o["channel"] == "VOCAL_ACT -> PROCEDURE" or o["act"] == "ESCALATED"),
+]
+
+
+def patterns(rows):
+    """-> [(label, n, n_eligible, [frames])]"""
+    out = []
+    for label, fields, pred in PATTERNS:
+        elig = [r for r in rows
+                if all(r["orient"].get(f) is not None for f in fields)]
+        hit = [r for r in elig if pred(r["orient"])]
+        out.append((label, len(hit), len(elig), [r["frame"] for r in hit]))
+    return out
+
+
 def _main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -779,39 +828,91 @@ def _main(argv=None):
         return 0
 
     if a.both_orders:
-        #: the SAME frames coded twice, once each way. `orient()` removes the
+        #: **EVERY FRAME IN BOTH ORDERS, NOT A SUBSET** (paper-claude,
+        #: 2026-09-20). It doubles a cheap call and gives each FIELD its own
+        #: agreement rate, which travels with the count. `orient()` removes the
         #: labelling, so the two codings should agree exactly; whatever does not
-        #: is the positional effect, measured rather than assumed.
+        #: is the positional effect.
+        #:
+        #: The headline counts then quote a field only where both orders agree,
+        #: and print the disagreement rate beside it. On the 8-frame smoke: act
+        #: 8/8, object 7/8, channel 7/8, affect 6/8 -- affect is the soft field
+        #: and the note has to say so.
         import collections as _c
         t = task(model=a.model)
-        fwd = population(frame=a.frame, fixed=True)
-        fwd = [x for x in fwd if x["frame"] in {r["frame"] for r in recs}]
-        outs = {}
+        base_order = population(frame=a.frame, fixed=True)
+        keep = {r["frame"] for r in recs}
+        base_order = [x for x in base_order if x["frame"] in keep]
+        coded = {}
         for tag, flip in (("A=base", False), ("A=aligned", True)):
             items = [dict(r, words_a=r["words_b"], words_b=r["words_a"],
-                          a_is_base=False) if flip else r for r in fwd]
+                          a_is_base=False) if flip else r for r in base_order]
             res = t.map([render(r["frame"], r["words_a"], r["words_b"])
                          for r in items], num_workers=a.workers, verbose=True,
                         metadata_list=[{"frame": r["frame"]} for r in items])
-            outs[tag] = {r["frame"]: (orient(x, a_is_base=r["a_is_base"])
-                                      if x else None)
-                         for r, x in zip(items, res)}
-        agree = _c.Counter()
-        print("\nORDER EFFECT -- same frames, A=base and A=aligned, oriented back")
-        for f in outs["A=base"]:
-            o1, o2 = outs["A=base"][f], outs["A=aligned"].get(f)
-            if not o1 or not o2:
+            coded[tag] = {r["frame"]: (r, x) for r, x in zip(items, res)}
+
+        FIELDS = ("act", "channel", "affect", "object")
+        rows, agree = [], _c.Counter()
+        for r in base_order:
+            f = r["frame"]
+            ra, xa = coded["A=base"][f]
+            rb, xb = coded["A=aligned"].get(f, (None, None))
+            if xa is None or xb is None:
                 continue
-            for k in ("act", "channel", "affect", "object"):
-                agree[(k, o1[k] == o2[k])] += 1
-            if any(o1[k] != o2[k] for k in ("act", "channel", "affect", "object")):
-                print("  %s" % f[:62])
-                for k in ("act", "channel", "affect", "object"):
-                    if o1[k] != o2[k]:
-                        print("     %-8s %-30s vs %s" % (k, o1[k], o2[k]))
-        for k in ("act", "channel", "affect", "object"):
+            oa = orient(xa, a_is_base=ra["a_is_base"])
+            ob = orient(xb, a_is_base=rb["a_is_base"])
+            ag = {k: oa[k] == ob[k] for k in FIELDS}
+            for k in FIELDS:
+                agree[(k, ag[k])] += 1
+            #: a field is None where the two orders disagree -- withheld rather
+            #: than picked, since picking one order is choosing the positional
+            #: effect's answer
+            cons = {k: (oa[k] if ag[k] else None) for k in FIELDS}
+            cons["confidence"] = oa["confidence"]
+            rows.append({"frame": f, "relation": r["name"], "orient": cons,
+                         "orient_a_base": oa, "orient_a_aligned": ob,
+                         "agree": ag,
+                         "_base": ", ".join(r["words_a"]),
+                         "_aligned": ", ".join(r["words_b"]),
+                         "raw": xa.model_dump(), "raw_flipped": xb.model_dump(),
+                         "defects": check(xa, r["words_a"], r["words_b"])[1]})
+
+        print("\nORDER AGREEMENT -- same frames coded A=base and A=aligned, both oriented back")
+        for k in FIELDS:
             y, n = agree[(k, True)], agree[(k, False)]
-            print("  %-8s agree %d of %d" % (k, y, y + n))
+            print("  %-8s agree %d of %d  (%.0f%%)" % (k, y, y + n, 100 * y / max(1, y + n)))
+        print("\nFATES, counted only where the two orders agree")
+        pat = _c.Counter()
+        for row in rows:
+            o = row["orient"]
+            if all(o[k] is not None for k in FIELDS):
+                pat[(o["act"], o["channel"], o["affect"], o["object"])] += 1
+        print("  %d of %d frames agree on all four fields" % (sum(pat.values()), len(rows)))
+        for k, n in pat.most_common(14):
+            print("  %2d  %-10s %-30s %-11s %s" % (n, k[0], k[1], k[2], k[3]))
+        print("\nTHE FIVE PATTERNS (a frame may satisfy more than one)")
+        seen = {}
+        for label, n, elig, frames in patterns(rows):
+            print("  %-28s %2d of %2d frames whose fields agree" % (label, n, elig))
+            for f in frames:
+                seen.setdefault(f, []).append(label)
+        dual = {f: v for f, v in seen.items() if len(v) > 1}
+        print("  %d frames matched by more than one pattern%s"
+              % (len(dual), (": " + "; ".join("%s [%s]" % (f[:34], ", ".join(v))
+                                              for f, v in list(dual.items())[:4]))
+                 if dual else ""))
+        print("  %d of %d frames matched by NO pattern"
+              % (len(rows) - len(seen), len(rows)))
+        if a.out and rows:
+            os.makedirs(os.path.dirname(a.out), exist_ok=True)
+            with open(a.out, "w", encoding="utf-8") as fh:
+                for row in rows:
+                    fh.write(json.dumps(row, ensure_ascii=False) + chr(10))
+            print("\nwrote %s (%d rows)" % (a.out, len(rows)))
+            confirm(rows)
+            if a.md:
+                render_md(rows, confirm(rows, quiet=True), a.md, also=a.also)
         return 0
 
     t = task(model=a.model)
