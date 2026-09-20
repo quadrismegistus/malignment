@@ -1102,6 +1102,164 @@ def dose_table(rows, bins=3, quiet=False, metric="frame", _return_ds=False):
     return ds if _return_ds else out
 
 
+def kind_permutation(rows, n_shuffle=20000, seed=20260920, min_n=6):
+    """Each cell against a marginal-preserving shuffle. -> {(b, a): (n, exp, q)}
+
+    **THE SECOND TEST, BECAUSE THE FIRST CANNOT TEST A SELF-EDGE.** The
+    asymmetry test compares `X -> Y` with `Y -> X`, which is undefined for
+    `X -> X` -- and self-edges are 858 of 1,404 English frames, including
+    `thing -> thing`, the displacement case. A test that structurally cannot
+    see 61% of the data needs a companion.
+
+    The null shuffles which ALIGNED kind pairs with which BASE kind across
+    frames, so both marginals are held exactly and only the association is
+    destroyed. A cell's p is the share of shuffles reaching its observed count
+    (two-sided, doubled), BH-adjusted over every cell tested.
+
+    **IT ANSWERS A DIFFERENT QUESTION AND THE TWO MUST NOT BE CONFLATED.**
+
+        transpose     of the frames that moved between X and Y, did more go
+                      one way? -- is the movement DIRECTED
+        permutation   given how often X is a base kind and Y an aligned kind at
+                      all, is X -> Y over-represented? -- is the pairing
+                      ASSOCIATED
+
+    A cell can pass one and fail the other, and neither is the truer test.
+    Conditioning on the marginals is also a real cost here, stated rather than
+    buried: the aligned column's distribution IS partly what alignment
+    produced, so holding it fixed removes the overall shift and tests only the
+    residual. That makes this the CONSERVATIVE test of the two for any claim
+    about what alignment does overall, and the only available one for a
+    self-edge.
+    """
+    import collections as _c
+    import random
+    obs = _c.Counter()
+    pairs = []
+    for r in rows:
+        ch = r["orient"].get("channel")
+        if not ch or " -> " not in ch:
+            continue
+        b, a = ch.split(" -> ", 1)
+        obs[(b, a)] += 1
+        pairs.append((b, a))
+    if not pairs:
+        return {}
+    bs = [b for b, _a in pairs]
+    as_ = [a for _b, a in pairs]
+    rnd = random.Random(seed)
+    ge = _c.Counter()
+    le = _c.Counter()
+    for _ in range(n_shuffle):
+        rnd.shuffle(as_)
+        c = _c.Counter(zip(bs, as_))
+        for k in obs:
+            v = c[k]
+            if v >= obs[k]:
+                ge[k] += 1
+            if v <= obs[k]:
+                le[k] += 1
+    tested = [k for k in obs if obs[k] >= min_n]
+    #: +1 in numerator and denominator: a permutation p can never be 0, and
+    #: reporting one as 0 claims more resolution than 20,000 shuffles have
+    raw = {k: min(1.0, 2 * min(ge[k] + 1, le[k] + 1) / (n_shuffle + 1.0))
+           for k in tested}
+    exp = {}
+    bc, ac = _c.Counter(bs), _c.Counter(as_)
+    n = len(pairs)
+    for k in tested:
+        exp[k] = bc[k[0]] * ac[k[1]] / n
+    order = sorted(tested, key=lambda k: raw[k])
+    M, q, prev = len(order), {}, 1.0
+    for rank, k in enumerate(reversed(order), 1):
+        prev = min(prev, raw[k] * M / (M - rank + 1))
+        q[k] = prev
+    return {k: (obs[k], exp[k], q[k]) for k in tested}
+
+
+def kind_matrix(rows, min_n=6):
+    """base kind -> aligned kind, with the asymmetry test. -> dict
+
+    **THE TEST IS X->Y AGAINST Y->X, NOT AGAINST INDEPENDENCE.** A chi-square on
+    the 8x8 would be dominated by the marginals -- MIXED is 45% of both sides
+    and the diagonal is large -- and would answer "are the two sides related",
+    which they obviously are. The question is whether alignment moves in a
+    DIRECTION, and the clean test for that is each off-diagonal cell against its
+    own transpose: of the frames that changed kind between PHYSICAL_ACT and
+    VOCAL_ACT, how many went one way.
+
+    That test is also the one the blind licenses. The labels were drawn per
+    frame and the orientation applied afterwards, so a count of X->Y and a count
+    of Y->X are measured under identical conditions; any excess is the movement
+    and not the instrument. A comparison against an independence null would
+    additionally assume the marginals are not themselves a product of alignment,
+    which is the thing under test.
+
+    Two-sided exact binomial at p=0.5. Only frames whose `channel` agreed across
+    both label orders are counted, so a withheld field is absent rather than a
+    zero.
+    """
+    import collections as _c
+    from math import comb
+    pairs = _c.Counter()
+    for r in rows:
+        ch = r["orient"].get("channel")
+        if not ch or " -> " not in ch:
+            continue
+        b, a = ch.split(" -> ", 1)
+        pairs[(b, a)] += 1
+    kinds = sorted({k for p in pairs for k in p})
+    n_tot = sum(pairs.values())
+    print("\nBASE KIND -> ALIGNED KIND  (n=%d frames whose channel agreed)" % n_tot)
+    print("  %-14s %s  %8s" % ("base \\ aligned",
+                               "".join("%9s" % k[:9] for k in kinds), "row n"))
+    for b in kinds:
+        row = [pairs[(b, a)] for a in kinds]
+        rn = sum(row)
+        print("  %-14s %s  %8d"
+              % (b[:14], "".join("%9s" % (("%d" % v) if v else "·") for v in row), rn))
+
+    def binom_p(k, n):
+        if n == 0:
+            return 1.0
+        lo = min(k, n - k)
+        tail = sum(comb(n, i) for i in range(0, lo + 1)) / (2.0 ** n)
+        return min(1.0, 2 * tail)
+
+    raw, seen = [], set()
+    for (b, a), n in sorted(pairs.items(), key=lambda kv: -kv[1]):
+        if b == a or (a, b) in seen:
+            continue
+        seen.add((b, a))
+        m = pairs[(a, b)]
+        if n + m < min_n:
+            continue
+        lead = "%s -> %s" % (b, a) if n >= m else "%s -> %s" % (a, b)
+        raw.append([lead, max(n, m), min(n, m), binom_p(max(n, m), n + m)])
+    #: **BH OVER THE WHOLE FAMILY, BECAUSE THIS IS A SWEEP AND NOT A HYPOTHESIS.**
+    #: Every off-diagonal pair above the size floor is tested, so quoting the
+    #: smallest p out of twenty-odd comparisons would be reaching for
+    #: significance. The campaign's own rule, and why the norm_change figure is
+    #: BH 0.05. The strong cells clear it comfortably; the marginal ones are
+    #: exactly the ones that should not be quoted.
+    order = sorted(range(len(raw)), key=lambda i: raw[i][3])
+    M = len(raw)
+    q, prev = {}, 1.0
+    for rank, i in enumerate(reversed(order), 1):
+        prev = min(prev, raw[i][3] * M / (M - rank + 1))
+        q[i] = prev
+    print("\n  DIRECTIONAL ASYMMETRY -- each off-diagonal cell against its own "
+          "transpose; %d tests, BH-adjusted" % M)
+    print("  %-30s %7s %7s %9s %9s" % ("X -> Y", "X->Y", "Y->X", "p", "q(BH)"))
+    out = []
+    for i in order:
+        lead, hi, lo, p = raw[i]
+        star = "  <<<" if q[i] < 0.05 else ""
+        print("  %-30s %7d %7d %9.2g %9.2g%s" % (lead, hi, lo, p, q[i], star))
+        out.append((lead, hi, lo, p, q[i]))
+    return out
+
+
 def examples(rows, path, which="affect", limit=120, lang="en", words=14):
     """A READABLE sheet: four lines a frame, not a page. -> writes path
 
@@ -1601,10 +1759,12 @@ def _main(argv=None):
         if a.dose:
             ds = dose_table(rows, metric=a.dose, _return_ds=True)
             marginals(rows, ds)
+            kind_matrix(rows)
             affect_cross(rows, ds)
             intensity_on_affect_frames(rows, ds, lang=a.lang if a.lang != "all" else "en")
         else:
             marginals(rows)
+            kind_matrix(rows)
         if a.md:
             render_md(rows, res, a.md, also=a.also)
         return 0
