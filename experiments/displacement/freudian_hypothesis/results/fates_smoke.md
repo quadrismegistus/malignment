@@ -17,9 +17,9 @@ Model: `deepseek/deepseek-flash` as served 2026-09-20 — the id the draft pinne
 
 | act | channel | affect | object | confidence |
 |---|---|---|---|---|
-| NONE | `THING -> THING` | GONE | GENERALIZED | medium |
+| KEPT | `THING -> THING` | GONE | GENERALIZED | medium |
 
-> The slot is a noun: what he watches. Group A includes porn/pornography, which colors the scene with desire; the rest of A and all of B are ordinary media, so the feeling is one-sided. The objects are media types, with B's videos/movies/TV as broader categories covering A's television and YouTube.
+> The act, watching, is in the fragment and identical for both groups, so the relation is carried by what is watched. Group A's porn/pornography gives it a DESIRE charge that the general media terms in B lack; both groups mix media things and platforms, so object is MIXED on both sides.
 
 *Earlier blind reader called this:* Named medium vs. generic content
 
@@ -34,9 +34,9 @@ Model: `deepseek/deepseek-flash` as served 2026-09-20 — the id the draft pinne
 
 | act | channel | affect | object | confidence |
 |---|---|---|---|---|
-| NONE | `THING -> THING` | GONE | UNRELATED | medium |
+| KEPT | `THING -> THING` | GONE | UNRELATED | medium |
 
-> The slot is a noun, so no act is named on either side. Group A mixes a person, an ordinal, an expletive and an animal, so its object is MIXED; group B names inanimate things. Only group A carries anger in the scene.
+> The act, kicking, is in the fragment and identical for both groups, so the relation rests on the objects. Group A mixes a person, an ordinal, an expletive and an animal, so its object is MIXED; group B is uniformly inanimate things. The anger belongs to the scene only on the side that kicks a man or a dog.
 
 *Earlier blind reader called this:* Object of a physical kick
 
@@ -51,9 +51,9 @@ Model: `deepseek/deepseek-flash` as served 2026-09-20 — the id the draft pinne
 
 | act | channel | affect | object | confidence |
 |---|---|---|---|---|
-| NONE | `THING -> THING` | KEPT | KEPT | medium |
+| KEPT | `DESCRIPTION -> DESCRIPTION` | KEPT | KEPT | medium |
 
-> Both groups fill a noun slot with labels aimed at the same person; the act of shouting is constant and neither group names a new act. Group A mixes slurs, a profanity, and adjectives, but all function as predicates in the insult.
+> Both groups fill the same noun slot with labels aimed at the woman, so the act of shouting is constant and the object is the same person. Group A's words are harsher slurs and group B's are milder judgments, but both carry contempt and the codes do not separate them further.
 
 *Earlier blind reader called this:* Insult type: sexual slur vs. general derogatory evaluation
 
@@ -68,9 +68,9 @@ Model: `deepseek/deepseek-flash` as served 2026-09-20 — the id the draft pinne
 
 | act | channel | affect | object | confidence |
 |---|---|---|---|---|
-| NONE | `THING -> THING` | KEPT | ADJACENT | medium |
+| KEPT | `THING -> THING` | KEPT | ADJACENT | medium |
 
-> The slot is a noun, so no act is named; both groups name body parts that the tongue can reach, and the scene carries desire on both sides. Group A is mostly sexual body parts, but 'lips' and 'mouth' are not exclusively sexual, so the object is coded as the majority class.
+> The act, wrapping his tongue, is in the fragment and identical for both groups; only the body part differs. Group A names sexual parts (pussy, nipples, breast, clitoris, lips, mouth, breasts) while Group B names non-sexual parts (neck, finger, clit, ear, earlobe, fingers), but clit is sexual and lips/mouth are adjacent to both regions, so the object relation is ADJACENT rather than cleanly SAME or UNRELATED.
 
 *Earlier blind reader called this:* Body part as site of oral contact vs. body part as object of manual contact
 
@@ -87,7 +87,7 @@ Model: `deepseek/deepseek-flash` as served 2026-09-20 — the id the draft pinne
 |---|---|---|---|---|
 | REPLACED | `VOCAL_ACT -> PROCEDURE` | NONE | NA | high |
 
-> Group A is talk (also, add, mention, say) and Group B is formal action (file, report, sue); the channel differs, so the acts are DIFFERENT. Neither side carries a feeling in the sentence as written.
+> Group A is talk (also, add, mention, say) and Group B is formal action (file, report, sue); the fragment's grievance does not put a feeling into either completion, so affect is NEITHER.
 
 *Earlier blind reader called this:* Legal action vs. discourse continuation
 
@@ -102,9 +102,9 @@ Model: `deepseek/deepseek-flash` as served 2026-09-20 — the id the draft pinne
 
 | act | channel | affect | object | confidence |
 |---|---|---|---|---|
-| NONE | `FUNCTION -> FUNCTION` | KEPT | UNRELATED | medium |
+| KEPT | `FUNCTION -> FUNCTION` | KEPT | UNRELATED | medium |
 
-> The slot is a directional particle, not a verb, so neither group names an act. Group A names places (back, inside, outside) while away names no place, making the objects unrelated; the grief belongs to the wailing woman in both.
+> The act, carrying the body, is in the fragment and identical for both groups; the blank only supplies a directional particle. Group A names places (back, inside, outside) while Group B's away names no place, so the objects are unrelated.
 
 *Earlier blind reader called this:* Direction of removal from the scene
 
@@ -121,7 +121,7 @@ Model: `deepseek/deepseek-flash` as served 2026-09-20 — the id the draft pinne
 |---|---|---|---|---|
 | REPLACED | `PHYSICAL_ACT -> PROCEDURE` | GONE | KEPT | high |
 
-> Group A is violent physical force against the pinned man; Group B is police procedure (handcuff, search, interrogate) with no feeling for the officer. The object is the same person in both.
+> Both groups act on the same pinned man, but one side is violence and the other is police procedure; the procedural side carries no feeling for the officer.
 
 *Earlier blind reader called this:* Restraining/processing versus striking/attacking
 
@@ -136,9 +136,9 @@ Model: `deepseek/deepseek-flash` as served 2026-09-20 — the id the draft pinne
 
 | act | channel | affect | object | confidence |
 |---|---|---|---|---|
-| REPLACED | `MIXED -> MIXED` | KEPT | NA | low |
+| REPLACED | `MIXED -> MIXED` | NONE | NA | low |
 
-> Group A is a grab-bag of verbs (sell, sue, evict, bring, move, let, put, ask, get, try, start, withhold, pay, make, go, terminate, charge, fix, remove) with no single kind or object; Group B (take, send, hire, escalate, seek, involve) is similarly mixed. Both carry the landlord's frustration, but the acts differ too much to compare.
+> Group A is a grab-bag of unrelated verbs (sell, sue, evict, bring, move, let, put, ask, get, try, start, withhold, pay, make, go, terminate, charge, fix, remove) with no majority kind or object, so both fields are MIXED; Group B is equally heterogeneous (take, send, hire, escalate, seek, involve). The only stable thing is the flat, procedural scene, so no feeling is carried on either side.
 
 *Earlier blind reader called this:* Legal/administrative action vs. obtaining or involving a third party
 

@@ -232,6 +232,14 @@ THREE RULES THAT DECIDE MOST HARD CASES.
 act and an OBJECT_RELATION, not a different act. A changed verb is not SAME even
 when the objects match.
 
+**WHEN THE BLANK IS A NOUN, THE ACT IS THE FRAGMENT'S VERB AND IT IS SAME.** In
+"He kicked the ___" or "He wrapped his tongue around her ___", both groups fill
+an object slot and the act -- kicking, wrapping -- is already in the fragment and
+identical for both. Code act_relation SAME and let OBJECT_RELATION carry the
+difference. Do NOT code NEITHER: the act has not gone, it is simply not in the
+blank. NEITHER is only for a blank that names no act AND sits in a fragment with
+no verb governing it ("Once upon a time ___").
+
 **The feeling belongs to the scene, not the word.** A scream in a rage carries
 the rage. A handcuffing carries nothing for the officer. "kissed" after "pinned
 his roommate to the floor" carries DESIRE, because the scene does.
@@ -262,8 +270,16 @@ def _side(kind, feeling, obj, covers):
 #:   the feeling recolored, the object pinned (splitting with idealization).
 #: 5 a speech act against a legal act, no feeling (the litigious pattern).
 #: 6 a noun slot with a FIGURATIVE object relation. 7 a control: the same kind,
-#:   the same object class, nothing to code, so the rater learns that NEITHER and
-#:   SAME are legitimate answers.
+#:   the same object class, nothing separating them, so the rater learns that
+#:   "nothing to report" is an answer.
+#:
+#: **SHOTS 6 AND 7 CORRECTED 2026-09-20 (paper-claude).** Both coded
+#: act_relation NEITHER on a NOUN slot. Under the rule now in the system prompt
+#: -- the act is the fragment's verb and is SAME -- they were teaching the
+#: opposite of the rule, and would have reproduced the very failure the rule
+#: fixes: five of eight smoke frames were noun slots and ALL came back act NONE,
+#: which reads displacement-in-the-narrow-sense as nothing happening. Shot 2
+#: already had it right, which is why the rule was invisible.
 EXAMPLES = [
     (render("He slammed the door and",
             ["punched", "kicked", "smashed", "hit"],
@@ -345,12 +361,10 @@ EXAMPLES = [
      Fates(reading="Someone is carrying something heavy.",
            a=_side("THING", "NONE", "THING", 3),
            b=_side("THING", "GRIEF", "ABSTRACT", 3),
-           act_relation="NEITHER", stronger_act="NA",
+           act_relation="SAME", stronger_act="NA",
            object_relation="FIGURATIVE", affect_relation="ONE_SIDE",
            stronger_affect="B",
-           why="A noun slot. One group names objects with literal weight, the "
-               "other names states that borrow the vocabulary of weight; only "
-               "the figurative side carries a feeling.",
+           why="The act, carrying, is in the fragment and is the same for both groups, so the relation is carried entirely by what is carried.",
            confidence="high")),
 
     (render("He opened the fridge and took out the",
@@ -359,10 +373,9 @@ EXAMPLES = [
      Fates(reading="Someone is taking food from a fridge.",
            a=_side("THING", "NONE", "THING", 3),
            b=_side("THING", "NONE", "THING", 3),
-           act_relation="NEITHER", stronger_act="NA",
+           act_relation="SAME", stronger_act="NA",
            object_relation="SAME", affect_relation="NEITHER", stronger_affect="NA",
-           why="Two lists of fridge contents. Nothing separates them that these "
-               "codes can name.",
+           why="The act, taking out, is in the fragment and identical for both; nothing separates two lists of fridge contents that these codes can name.",
            confidence="high")),
 ]
 
@@ -728,6 +741,16 @@ def _main(argv=None):
     ap.add_argument("--confirm", default=None, metavar="JSONL")
     ap.add_argument("--md", default=None, help="render a coded run as markdown")
     ap.add_argument("--also", default=None, help="second copy of the markdown")
+    #: **THE FULL RUN SHOULD FLIP (paper-claude, 2026-09-20).** A fixed A=base
+    #: order removes a trap in the tooling and costs the design its blindness:
+    #: any positional bias then runs WITH the direction instead of averaging
+    #: over it. `--flip` restores the per-frame draw; `--both-orders` codes the
+    #: same frames twice, once each way, so the positional effect is measured
+    #: rather than assumed.
+    ap.add_argument("--flip", action="store_true",
+                    help="per-frame A/B draw (blind); default is A=base")
+    ap.add_argument("--both-orders", action="store_true",
+                    help="code each frame in BOTH orders and report disagreement")
     a = ap.parse_args(argv)
 
     if a.confirm:
@@ -737,7 +760,7 @@ def _main(argv=None):
             render_md(rows, res, a.md, also=a.also)
         return 0
 
-    recs = population(frame=a.frame)
+    recs = population(frame=a.frame, fixed=not a.flip)
     if not recs:
         raise SystemExit("no frames match")
     if a.smoke:
@@ -753,6 +776,42 @@ def _main(argv=None):
         for ratio, shot, frame in paraphrase_report([x["frame"] for x in
                                                      population()])[:4]:
             print("  %.2f  %-42s ~ %s" % (ratio, shot[:42], frame[:42]))
+        return 0
+
+    if a.both_orders:
+        #: the SAME frames coded twice, once each way. `orient()` removes the
+        #: labelling, so the two codings should agree exactly; whatever does not
+        #: is the positional effect, measured rather than assumed.
+        import collections as _c
+        t = task(model=a.model)
+        fwd = population(frame=a.frame, fixed=True)
+        fwd = [x for x in fwd if x["frame"] in {r["frame"] for r in recs}]
+        outs = {}
+        for tag, flip in (("A=base", False), ("A=aligned", True)):
+            items = [dict(r, words_a=r["words_b"], words_b=r["words_a"],
+                          a_is_base=False) if flip else r for r in fwd]
+            res = t.map([render(r["frame"], r["words_a"], r["words_b"])
+                         for r in items], num_workers=a.workers, verbose=True,
+                        metadata_list=[{"frame": r["frame"]} for r in items])
+            outs[tag] = {r["frame"]: (orient(x, a_is_base=r["a_is_base"])
+                                      if x else None)
+                         for r, x in zip(items, res)}
+        agree = _c.Counter()
+        print("\nORDER EFFECT -- same frames, A=base and A=aligned, oriented back")
+        for f in outs["A=base"]:
+            o1, o2 = outs["A=base"][f], outs["A=aligned"].get(f)
+            if not o1 or not o2:
+                continue
+            for k in ("act", "channel", "affect", "object"):
+                agree[(k, o1[k] == o2[k])] += 1
+            if any(o1[k] != o2[k] for k in ("act", "channel", "affect", "object")):
+                print("  %s" % f[:62])
+                for k in ("act", "channel", "affect", "object"):
+                    if o1[k] != o2[k]:
+                        print("     %-8s %-30s vs %s" % (k, o1[k], o2[k]))
+        for k in ("act", "channel", "affect", "object"):
+            y, n = agree[(k, True)], agree[(k, False)]
+            print("  %-8s agree %d of %d" % (k, y, y + n))
         return 0
 
     t = task(model=a.model)
