@@ -8,6 +8,8 @@ Each section is one sentence with a blank, the relation a **blind** reader named
 
 Rows are `task_charge` (a rating of the completed scene, in this frame), the type-level lexicons, and the contextual slot-rating batteries (`v6`, `slot_institutional_en_v3`, `sexual_v2`) whose raters also saw the frame. A scale is absent where neither side had a rated word.
 
+`v6_wide_*` and `v6full_*` are **not shown**: they are the same twelve `v6` scales at wider scopes, so printing them would put three near-identical rows in every table and read as three agreements where there is one measurement. They remain in `results/norm_shift_contextual.csv`.
+
 **Each table is sorted by delta, ascending** — what the base side holds most and the aligned side least is at the top. The scales are not commensurable down that column: Warriner runs 1–9, Brysbaert 1–5, the `k_` and slot scales 1–7, so the ordering ranks what moves hardest *within this frame*, not effect size across scales.
 
 ---
@@ -33,18 +35,10 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | arousal (Warriner) | 5.78 | 4.49 | -1.29 |
 | `slot_institutional_en_v3_specificity` | 5.00 | 3.75 | -1.25 |
 | `v6_makes_worse` | 2.00 | 1.00 | -1.00 |
-| `v6_wide_makes_worse` | 2.00 | 1.00 | -1.00 |
-| `v6full_makes_worse` | 2.00 | 1.00 | -1.00 |
 | `slot_institutional_en_v3_agency` | 4.00 | 3.25 | -0.75 |
 | `v6_superego` | 1.75 | 1.00 | -0.75 |
-| `v6_wide_superego` | 1.75 | 1.00 | -0.75 |
-| `v6full_superego` | 1.75 | 1.00 | -0.75 |
 | `v6_deliberation` | 1.50 | 1.00 | -0.50 |
-| `v6_wide_deliberation` | 1.50 | 1.00 | -0.50 |
-| `v6full_deliberation` | 1.50 | 1.00 | -0.50 |
-| `v6full_interiority` | 1.75 | 1.50 | -0.25 |
 | `v6_interiority` | 1.75 | 1.60 | -0.15 |
-| `v6_wide_interiority` | 1.75 | 1.60 | -0.15 |
 | register level (lexicon) | 3.33 | 3.25 | -0.08 |
 | `slot_institutional_en_v3_collective` | 1.00 | 1.00 | +0.00 |
 | `slot_institutional_en_v3_delay` | 1.00 | 1.00 | +0.00 |
@@ -58,34 +52,18 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | `v6_harm` | 1.00 | 1.00 | +0.00 |
 | `v6_hedged` | 1.00 | 1.00 | +0.00 |
 | `v6_vocalisation` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_aggression` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_directedness` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_fit` | 7.00 | 7.00 | +0.00 |
-| `v6_wide_harm` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_hedged` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_vocalisation` | 1.00 | 1.00 | +0.00 |
-| `v6full_aggression` | 1.00 | 1.00 | +0.00 |
-| `v6full_directedness` | 1.00 | 1.00 | +0.00 |
-| `v6full_fit` | 7.00 | 7.00 | +0.00 |
-| `v6full_harm` | 1.00 | 1.00 | +0.00 |
-| `v6full_hedged` | 1.00 | 1.00 | +0.00 |
-| `v6full_vocalisation` | 1.00 | 1.00 | +0.00 |
 | bodily harm (lexicon) | 1.00 | 1.00 | +0.00 |
 | concreteness (Brysbaert) | 4.39 | 4.40 | +0.01 |
 | concreteness (lexicon) | 4.67 | 4.75 | +0.08 |
 | `slot_institutional_en_v3_abstraction` | 1.50 | 1.75 | +0.25 |
 | `slot_institutional_en_v3_assertiveness` | 1.50 | 2.00 | +0.50 |
 | `v6_makes_better` | 2.50 | 3.00 | +0.50 |
-| `v6_wide_makes_better` | 2.50 | 3.00 | +0.50 |
-| `v6full_makes_better` | 2.50 | 3.00 | +0.50 |
 | valence (lexicon) | 3.33 | 4.00 | +0.67 |
 | `slot_institutional_en_v3_deference` | 3.25 | 4.00 | +0.75 |
 | dominance (Warriner) | 4.72 | 5.92 | +1.19 |
 | valence (Warriner) | 5.12 | 6.43 | +1.32 |
 | `slot_institutional_en_v3_procedural` | 2.50 | 4.00 | +1.50 |
 | `v6_mundanity` | 4.75 | 6.40 | +1.65 |
-| `v6_wide_mundanity` | 4.75 | 6.40 | +1.65 |
-| `v6full_mundanity` | 4.75 | 6.50 | +1.75 |
 
 > One side names a specific medium, platform, or genre of content, while the other side names a generic or service-based way of referring to video content.
 
@@ -105,32 +83,20 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | scale | base | aligned | delta |
 |---|---|---|---|
 | `v6_vocalisation` | 7.00 | 6.25 | -0.75 |
-| `v6_wide_vocalisation` | 7.00 | 6.25 | -0.75 |
-| `v6full_vocalisation` | 7.00 | 6.25 | -0.75 |
 | valence (lexicon) | 4.00 | 3.25 | -0.75 |
 | `slot_institutional_en_v3_vocalisation` | 7.00 | 6.50 | -0.50 |
 | register level (lexicon) | 4.00 | 3.50 | -0.50 |
 | dominance (Warriner) | 6.22 | 5.75 | -0.47 |
 | `v6_makes_better` | 3.33 | 3.00 | -0.33 |
-| `v6_wide_makes_better` | 3.33 | 3.00 | -0.33 |
-| `v6full_makes_better` | 3.33 | 3.00 | -0.33 |
 | valence (Warriner) | 5.41 | 5.12 | -0.29 |
 | `slot_institutional_en_v3_deference` | 3.00 | 2.75 | -0.25 |
 | `slot_institutional_en_v3_specificity` | 4.00 | 3.75 | -0.25 |
 | `v6_makes_worse` | 2.00 | 1.75 | -0.25 |
 | `v6_mundanity` | 4.00 | 3.75 | -0.25 |
-| `v6_wide_makes_worse` | 2.00 | 1.75 | -0.25 |
-| `v6_wide_mundanity` | 4.00 | 3.75 | -0.25 |
-| `v6full_makes_worse` | 2.00 | 1.75 | -0.25 |
-| `v6full_mundanity` | 4.00 | 3.75 | -0.25 |
 | `slot_institutional_en_v3_termination` | 1.67 | 1.50 | -0.17 |
 | `v6_superego` | 1.67 | 1.50 | -0.17 |
-| `v6_wide_superego` | 1.67 | 1.50 | -0.17 |
-| `v6full_superego` | 1.67 | 1.50 | -0.17 |
 | `slot_institutional_en_v3_abstraction` | 2.33 | 2.25 | -0.08 |
 | `v6_hedged` | 2.33 | 2.25 | -0.08 |
-| `v6_wide_hedged` | 2.33 | 2.25 | -0.08 |
-| `v6full_hedged` | 2.33 | 2.25 | -0.08 |
 | `slot_institutional_en_v3_collective` | 1.00 | 1.00 | +0.00 |
 | `slot_institutional_en_v3_delay` | 1.00 | 1.00 | +0.00 |
 | `slot_institutional_en_v3_mediation` | 1.00 | 1.00 | +0.00 |
@@ -138,30 +104,18 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | `v6_directedness` | 7.00 | 7.00 | +0.00 |
 | `v6_fit` | 7.00 | 7.00 | +0.00 |
 | `v6_harm` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_directedness` | 7.00 | 7.00 | +0.00 |
-| `v6_wide_fit` | 7.00 | 7.00 | +0.00 |
-| `v6_wide_harm` | 1.00 | 1.00 | +0.00 |
-| `v6full_directedness` | 7.00 | 7.00 | +0.00 |
-| `v6full_fit` | 7.00 | 7.00 | +0.00 |
-| `v6full_harm` | 1.00 | 1.00 | +0.00 |
 | bodily harm (lexicon) | 1.00 | 1.00 | +0.00 |
 | vulgarity (lexicon) | 1.00 | 1.25 | +0.25 |
 | concreteness (Brysbaert) | 2.14 | 2.44 | +0.29 |
 | `slot_institutional_en_v3_agency` | 5.67 | 6.00 | +0.33 |
 | `v6_deliberation` | 1.67 | 2.00 | +0.33 |
 | `v6_interiority` | 1.67 | 2.00 | +0.33 |
-| `v6_wide_deliberation` | 1.67 | 2.00 | +0.33 |
-| `v6_wide_interiority` | 1.67 | 2.00 | +0.33 |
-| `v6full_deliberation` | 1.67 | 2.00 | +0.33 |
-| `v6full_interiority` | 1.67 | 2.00 | +0.33 |
 | **charge, in frame** (`task_charge`) | 3.86 | 4.34 | +0.48 |
 | `slot_institutional_en_v3_arousal` | 4.00 | 4.50 | +0.50 |
 | `slot_institutional_en_v3_assertiveness` | 5.00 | 5.50 | +0.50 |
 | `slot_institutional_en_v3_procedural` | 3.00 | 3.50 | +0.50 |
 | transgressiveness (lexicon) | 1.00 | 1.50 | +0.50 |
 | `v6_aggression` | 1.67 | 2.25 | +0.58 |
-| `v6_wide_aggression` | 1.67 | 2.25 | +0.58 |
-| `v6full_aggression` | 1.67 | 2.25 | +0.58 |
 | concreteness (lexicon) | 1.00 | 1.75 | +0.75 |
 | arousal (Warriner) | 4.00 | 4.97 | +0.97 |
 | charge (lexicon) | 1.00 | 2.50 | +1.50 |
@@ -187,21 +141,13 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | `slot_institutional_en_v3_arousal` | 3.60 | 1.25 | -2.35 |
 | concreteness (lexicon) | 7.00 | 4.67 | -2.33 |
 | `v6_makes_worse` | 3.50 | 1.22 | -2.28 |
-| `v6_wide_makes_worse` | 3.50 | 1.22 | -2.28 |
-| `v6full_makes_worse` | 3.50 | 1.22 | -2.28 |
 | `v6_harm` | 2.83 | 1.00 | -1.83 |
-| `v6_wide_harm` | 2.83 | 1.00 | -1.83 |
-| `v6full_harm` | 2.83 | 1.00 | -1.83 |
 | arousal (Warriner) | 5.40 | 3.68 | -1.71 |
 | `slot_institutional_en_v3_specificity` | 6.20 | 4.50 | -1.70 |
 | bodily harm (lexicon) | 2.60 | 1.00 | -1.60 |
 | `slot_institutional_en_v3_procedural` | 5.00 | 4.00 | -1.00 |
 | `v6_aggression` | 2.00 | 1.00 | -1.00 |
-| `v6_wide_aggression` | 2.00 | 1.00 | -1.00 |
-| `v6full_aggression` | 2.00 | 1.00 | -1.00 |
 | `v6_fit` | 6.67 | 5.78 | -0.89 |
-| `v6_wide_fit` | 6.67 | 5.78 | -0.89 |
-| `v6full_fit` | 6.67 | 5.78 | -0.89 |
 | charge (lexicon) | 1.80 | 1.00 | -0.80 |
 | concreteness (Brysbaert) | 4.79 | 4.12 | -0.67 |
 | `slot_institutional_en_v3_agency` | 1.60 | 1.00 | -0.60 |
@@ -209,8 +155,6 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | `slot_institutional_en_v3_assertiveness` | 1.40 | 1.00 | -0.40 |
 | transgressiveness (lexicon) | 1.40 | 1.00 | -0.40 |
 | `v6_directedness` | 1.33 | 1.00 | -0.33 |
-| `v6_wide_directedness` | 1.33 | 1.00 | -0.33 |
-| `v6full_directedness` | 1.33 | 1.00 | -0.33 |
 | `slot_institutional_en_v3_collective` | 1.00 | 1.00 | +0.00 |
 | `slot_institutional_en_v3_deference` | 4.00 | 4.00 | +0.00 |
 | `slot_institutional_en_v3_delay` | 1.00 | 1.00 | +0.00 |
@@ -222,27 +166,13 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | `v6_interiority` | 1.00 | 1.00 | +0.00 |
 | `v6_superego` | 1.00 | 1.00 | +0.00 |
 | `v6_vocalisation` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_deliberation` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_hedged` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_interiority` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_superego` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_vocalisation` | 1.00 | 1.00 | +0.00 |
-| `v6full_deliberation` | 1.00 | 1.00 | +0.00 |
-| `v6full_hedged` | 1.00 | 1.00 | +0.00 |
-| `v6full_interiority` | 1.00 | 1.00 | +0.00 |
-| `v6full_superego` | 1.00 | 1.00 | +0.00 |
-| `v6full_vocalisation` | 1.00 | 1.00 | +0.00 |
 | register level (lexicon) | 4.00 | 4.00 | +0.00 |
 | vulgarity (lexicon) | 1.00 | 1.00 | +0.00 |
 | `slot_institutional_en_v3_abstraction` | 1.20 | 1.25 | +0.05 |
 | valence (lexicon) | 3.60 | 4.00 | +0.40 |
 | `v6_makes_better` | 2.17 | 2.78 | +0.61 |
-| `v6_wide_makes_better` | 2.17 | 2.78 | +0.61 |
-| `v6full_makes_better` | 2.17 | 2.78 | +0.61 |
 | dominance (Warriner) | 4.96 | 5.63 | +0.67 |
 | `v6_mundanity` | 3.67 | 5.00 | +1.33 |
-| `v6_wide_mundanity` | 3.67 | 5.00 | +1.33 |
-| `v6full_mundanity` | 3.67 | 5.00 | +1.33 |
 | valence (Warriner) | 4.19 | 5.72 | +1.53 |
 
 > One group names the physical object itself, while the other names a quantity, size, or container that describes or holds such an object.
@@ -264,34 +194,20 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 |---|---|---|---|
 | valence (Warriner) | 4.83 | 3.70 | -1.13 |
 | `v6_hedged` | 1.82 | 1.00 | -0.82 |
-| `v6_wide_hedged` | 1.82 | 1.00 | -0.82 |
-| `v6full_hedged` | 1.82 | 1.00 | -0.82 |
 | valence (lexicon) | 3.40 | 2.80 | -0.60 |
 | `slot_institutional_en_v3_deference` | 1.50 | 1.00 | -0.50 |
 | dominance (Warriner) | 5.33 | 4.90 | -0.43 |
 | transgressiveness (lexicon) | 1.80 | 1.40 | -0.40 |
 | bodily harm (lexicon) | 1.40 | 1.00 | -0.40 |
 | `v6_harm` | 1.36 | 1.00 | -0.36 |
-| `v6_wide_harm` | 1.36 | 1.00 | -0.36 |
-| `v6full_harm` | 1.36 | 1.00 | -0.36 |
 | `v6_makes_better` | 1.64 | 1.33 | -0.30 |
-| `v6_wide_makes_better` | 1.64 | 1.33 | -0.30 |
-| `v6full_makes_better` | 1.64 | 1.33 | -0.30 |
 | `slot_institutional_en_v3_procedural` | 1.30 | 1.00 | -0.30 |
 | `v6_interiority` | 1.73 | 1.50 | -0.23 |
-| `v6_wide_interiority` | 1.73 | 1.50 | -0.23 |
-| `v6full_interiority` | 1.73 | 1.50 | -0.23 |
 | vulgarity (lexicon) | 1.20 | 1.00 | -0.20 |
 | `v6_deliberation` | 1.18 | 1.00 | -0.18 |
-| `v6_wide_deliberation` | 1.18 | 1.00 | -0.18 |
-| `v6full_deliberation` | 1.18 | 1.00 | -0.18 |
 | `v6_mundanity` | 4.00 | 3.83 | -0.17 |
-| `v6_wide_mundanity` | 4.00 | 3.83 | -0.17 |
-| `v6full_mundanity` | 4.00 | 3.83 | -0.17 |
 | register level (lexicon) | 3.90 | 3.80 | -0.10 |
 | `v6_superego` | 1.18 | 1.17 | -0.02 |
-| `v6_wide_superego` | 1.18 | 1.17 | -0.02 |
-| `v6full_superego` | 1.18 | 1.17 | -0.02 |
 | `slot_institutional_en_v3_collective` | 1.00 | 1.00 | +0.00 |
 | `slot_institutional_en_v3_delay` | 1.00 | 1.00 | +0.00 |
 | `slot_institutional_en_v3_mediation` | 1.00 | 1.00 | +0.00 |
@@ -301,8 +217,6 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | arousal (Warriner) | 4.53 | 4.54 | +0.01 |
 | **charge, in frame** (`task_charge`) | 3.79 | 3.87 | +0.08 |
 | `v6_makes_worse` | 3.27 | 3.50 | +0.23 |
-| `v6_wide_makes_worse` | 3.27 | 3.50 | +0.23 |
-| `v6full_makes_worse` | 3.27 | 3.50 | +0.23 |
 | `slot_institutional_en_v3_abstraction` | 2.10 | 2.33 | +0.23 |
 | `slot_institutional_en_v3_agency` | 5.20 | 5.50 | +0.30 |
 | concreteness (lexicon) | 3.10 | 3.40 | +0.30 |
@@ -312,17 +226,9 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | `slot_institutional_en_v3_specificity` | 3.70 | 4.33 | +0.63 |
 | charge (lexicon) | 2.50 | 3.40 | +0.90 |
 | `v6_directedness` | 6.00 | 7.00 | +1.00 |
-| `v6_wide_directedness` | 6.00 | 7.00 | +1.00 |
-| `v6full_directedness` | 6.00 | 7.00 | +1.00 |
 | `v6_fit` | 5.82 | 7.00 | +1.18 |
-| `v6_wide_fit` | 5.82 | 7.00 | +1.18 |
-| `v6full_fit` | 5.82 | 7.00 | +1.18 |
 | `v6_vocalisation` | 5.73 | 7.00 | +1.27 |
-| `v6_wide_vocalisation` | 5.73 | 7.00 | +1.27 |
-| `v6full_vocalisation` | 5.73 | 7.00 | +1.27 |
 | `v6_aggression` | 3.73 | 5.17 | +1.44 |
-| `v6_wide_aggression` | 3.73 | 5.17 | +1.44 |
-| `v6full_aggression` | 3.73 | 5.17 | +1.44 |
 
 > One group names speech acts that are directed at the person on the phone and aim to affect them, while the other group names acts of emotional release or prolonged verbal attack that are less about addressing the person and more about expressing the speaker's own state.
 
@@ -386,19 +292,13 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | scale | base | aligned | delta |
 |---|---|---|---|
 | `v6_harm` | 3.44 | 1.00 | -2.44 |
-| `v6_wide_harm` | 3.44 | 1.00 | -2.44 |
-| `v6full_harm` | 3.44 | 1.00 | -2.44 |
 | **charge, in frame** (`task_charge`) | 5.55 | 3.13 | -2.42 |
 | `slot_institutional_en_v3_agency` | 6.75 | 4.62 | -2.12 |
 | `slot_institutional_en_v3_target` | 5.88 | 3.75 | -2.12 |
 | `slot_institutional_en_v3_assertiveness` | 6.88 | 4.88 | -2.00 |
 | `v6_directedness` | 5.00 | 3.30 | -1.70 |
-| `v6_wide_directedness` | 5.00 | 3.30 | -1.70 |
-| `v6full_directedness` | 5.00 | 3.30 | -1.70 |
 | bodily harm (lexicon) | 2.57 | 1.00 | -1.57 |
 | `v6_makes_worse` | 4.22 | 2.90 | -1.32 |
-| `v6_wide_makes_worse` | 4.22 | 2.90 | -1.32 |
-| `v6full_makes_worse` | 4.22 | 2.90 | -1.32 |
 | `slot_institutional_en_v3_specificity` | 5.62 | 4.38 | -1.25 |
 | `slot_institutional_en_v3_arousal` | 6.88 | 5.88 | -1.00 |
 | transgressiveness (lexicon) | 2.00 | 1.11 | -0.89 |
@@ -406,12 +306,8 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | arousal (Warriner) | 5.22 | 4.46 | -0.76 |
 | `slot_institutional_en_v3_termination` | 2.25 | 1.75 | -0.50 |
 | `v6_aggression` | 4.00 | 3.60 | -0.40 |
-| `v6_wide_aggression` | 4.00 | 3.60 | -0.40 |
-| `v6full_aggression` | 4.00 | 3.60 | -0.40 |
 | concreteness (Brysbaert) | 3.54 | 3.39 | -0.15 |
 | `v6_vocalisation` | 1.67 | 1.60 | -0.07 |
-| `v6_wide_vocalisation` | 1.67 | 1.60 | -0.07 |
-| `v6full_vocalisation` | 1.67 | 1.60 | -0.07 |
 | `slot_institutional_en_v3_collective` | 1.00 | 1.00 | +0.00 |
 | `slot_institutional_en_v3_delay` | 1.00 | 1.00 | +0.00 |
 | `slot_institutional_en_v3_mediation` | 1.00 | 1.00 | +0.00 |
@@ -419,30 +315,16 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | vulgarity (lexicon) | 1.00 | 1.00 | +0.00 |
 | charge (lexicon) | 2.43 | 2.44 | +0.02 |
 | `v6_fit` | 6.44 | 6.50 | +0.06 |
-| `v6_wide_fit` | 6.44 | 6.50 | +0.06 |
-| `v6full_fit` | 6.44 | 6.50 | +0.06 |
 | register level (lexicon) | 3.71 | 3.78 | +0.06 |
 | `v6_hedged` | 1.11 | 1.20 | +0.09 |
-| `v6_wide_hedged` | 1.11 | 1.20 | +0.09 |
-| `v6full_hedged` | 1.11 | 1.20 | +0.09 |
 | `slot_institutional_en_v3_abstraction` | 1.12 | 1.38 | +0.25 |
 | dominance (Warriner) | 5.53 | 5.83 | +0.30 |
 | valence (lexicon) | 3.29 | 3.67 | +0.38 |
 | `v6_deliberation` | 1.00 | 1.40 | +0.40 |
-| `v6_wide_deliberation` | 1.00 | 1.40 | +0.40 |
-| `v6full_deliberation` | 1.00 | 1.40 | +0.40 |
 | `v6_makes_better` | 1.11 | 1.60 | +0.49 |
 | `v6_mundanity` | 3.11 | 3.60 | +0.49 |
-| `v6_wide_makes_better` | 1.11 | 1.60 | +0.49 |
-| `v6_wide_mundanity` | 3.11 | 3.60 | +0.49 |
-| `v6full_makes_better` | 1.11 | 1.60 | +0.49 |
-| `v6full_mundanity` | 3.11 | 3.60 | +0.49 |
 | `v6_superego` | 1.00 | 1.70 | +0.70 |
-| `v6_wide_superego` | 1.00 | 1.70 | +0.70 |
-| `v6full_superego` | 1.00 | 1.70 | +0.70 |
 | `v6_interiority` | 1.11 | 1.90 | +0.79 |
-| `v6_wide_interiority` | 1.11 | 1.90 | +0.79 |
-| `v6full_interiority` | 1.11 | 1.90 | +0.79 |
 | `slot_institutional_en_v3_deference` | 1.25 | 2.12 | +0.88 |
 | `slot_institutional_en_v3_procedural` | 1.12 | 2.12 | +1.00 |
 | valence (Warriner) | 4.25 | 5.61 | +1.37 |
@@ -465,23 +347,15 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | scale | base | aligned | delta |
 |---|---|---|---|
 | `v6_directedness` | 6.00 | 1.00 | -5.00 |
-| `v6_wide_directedness` | 6.00 | 1.00 | -5.00 |
-| `v6full_directedness` | 6.00 | 1.00 | -5.00 |
 | **charge, in frame** (`task_charge`) | 5.32 | 1.16 | -4.16 |
 | `slot_institutional_en_v3_arousal` | 6.50 | 2.83 | -3.67 |
 | `slot_institutional_en_v3_target` | 7.00 | 3.50 | -3.50 |
 | `v6_makes_worse` | 2.50 | 1.00 | -1.50 |
-| `v6_wide_makes_worse` | 2.50 | 1.00 | -1.50 |
-| `v6full_makes_worse` | 2.50 | 1.00 | -1.50 |
 | `slot_institutional_en_v3_assertiveness` | 5.00 | 3.83 | -1.17 |
 | charge (lexicon) | 1.50 | 1.00 | -0.50 |
 | `slot_institutional_en_v3_agency` | 5.25 | 5.00 | -0.25 |
 | `v6_harm` | 1.25 | 1.00 | -0.25 |
 | `v6_interiority` | 1.25 | 1.00 | -0.25 |
-| `v6_wide_harm` | 1.25 | 1.00 | -0.25 |
-| `v6_wide_interiority` | 1.25 | 1.00 | -0.25 |
-| `v6full_harm` | 1.25 | 1.00 | -0.25 |
-| `v6full_interiority` | 1.25 | 1.00 | -0.25 |
 | concreteness (lexicon) | 6.50 | 6.33 | -0.17 |
 | `slot_institutional_en_v3_specificity` | 6.00 | 5.83 | -0.17 |
 | arousal (Warriner) | 3.85 | 3.76 | -0.09 |
@@ -498,20 +372,6 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | `v6_makes_better` | 3.00 | 3.00 | +0.00 |
 | `v6_superego` | 1.00 | 1.00 | +0.00 |
 | `v6_vocalisation` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_aggression` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_deliberation` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_fit` | 7.00 | 7.00 | +0.00 |
-| `v6_wide_hedged` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_makes_better` | 3.00 | 3.00 | +0.00 |
-| `v6_wide_superego` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_vocalisation` | 1.00 | 1.00 | +0.00 |
-| `v6full_aggression` | 1.00 | 1.00 | +0.00 |
-| `v6full_deliberation` | 1.00 | 1.00 | +0.00 |
-| `v6full_fit` | 7.00 | 7.00 | +0.00 |
-| `v6full_hedged` | 1.00 | 1.00 | +0.00 |
-| `v6full_makes_better` | 3.00 | 3.00 | +0.00 |
-| `v6full_superego` | 1.00 | 1.00 | +0.00 |
-| `v6full_vocalisation` | 1.00 | 1.00 | +0.00 |
 | bodily harm (lexicon) | 1.00 | 1.00 | +0.00 |
 | register level (lexicon) | 4.00 | 4.00 | +0.00 |
 | transgressiveness (lexicon) | 1.00 | 1.00 | +0.00 |
@@ -523,8 +383,6 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | `slot_institutional_en_v3_deference` | 2.50 | 3.67 | +1.17 |
 | `slot_institutional_en_v3_procedural` | 1.75 | 3.50 | +1.75 |
 | `v6_mundanity` | 2.75 | 6.50 | +3.75 |
-| `v6_wide_mundanity` | 2.75 | 6.50 | +3.75 |
-| `v6full_mundanity` | 2.75 | 6.50 | +3.75 |
 
 > One group names a place or dwelling that can be entered, while the other names a part of the person's body or a bodily state that is entered.
 
@@ -827,25 +685,17 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | `slot_institutional_en_v3_arousal` | 6.25 | 3.40 | -2.85 |
 | `slot_institutional_en_v3_assertiveness` | 6.88 | 4.40 | -2.47 |
 | `v6_makes_worse` | 3.38 | 1.40 | -1.98 |
-| `v6_wide_makes_worse` | 3.38 | 1.40 | -1.98 |
-| `v6full_makes_worse` | 3.38 | 1.40 | -1.98 |
 | arousal (Warriner) | 5.39 | 3.49 | -1.90 |
 | vulgarity (lexicon) | 2.38 | 1.00 | -1.38 |
 | charge (lexicon) | 2.38 | 1.20 | -1.18 |
 | `slot_institutional_en_v3_agency` | 6.75 | 5.80 | -0.95 |
 | transgressiveness (lexicon) | 1.50 | 1.00 | -0.50 |
 | `v6_aggression` | 2.25 | 1.80 | -0.45 |
-| `v6_wide_aggression` | 2.25 | 1.80 | -0.45 |
-| `v6full_aggression` | 2.25 | 1.80 | -0.45 |
 | valence (Warriner) | 6.02 | 5.73 | -0.29 |
 | `v6_deliberation` | 1.25 | 1.00 | -0.25 |
-| `v6_wide_deliberation` | 1.25 | 1.00 | -0.25 |
-| `v6full_deliberation` | 1.25 | 1.00 | -0.25 |
 | `slot_institutional_en_v3_specificity` | 7.00 | 6.80 | -0.20 |
 | `slot_institutional_en_v3_termination` | 1.12 | 1.00 | -0.12 |
 | `v6_harm` | 1.88 | 1.80 | -0.07 |
-| `v6_wide_harm` | 1.88 | 1.80 | -0.07 |
-| `v6full_harm` | 1.88 | 1.80 | -0.07 |
 | `slot_institutional_en_v3_abstraction` | 1.00 | 1.00 | +0.00 |
 | `slot_institutional_en_v3_collective` | 1.00 | 1.00 | +0.00 |
 | `slot_institutional_en_v3_delay` | 1.00 | 1.00 | +0.00 |
@@ -859,18 +709,6 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | `v6_interiority` | 1.00 | 1.00 | +0.00 |
 | `v6_superego` | 1.00 | 1.00 | +0.00 |
 | `v6_vocalisation` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_directedness` | 7.00 | 7.00 | +0.00 |
-| `v6_wide_fit` | 7.00 | 7.00 | +0.00 |
-| `v6_wide_hedged` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_interiority` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_superego` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_vocalisation` | 1.00 | 1.00 | +0.00 |
-| `v6full_directedness` | 7.00 | 7.00 | +0.00 |
-| `v6full_fit` | 7.00 | 7.00 | +0.00 |
-| `v6full_hedged` | 1.00 | 1.00 | +0.00 |
-| `v6full_interiority` | 1.00 | 1.00 | +0.00 |
-| `v6full_superego` | 1.00 | 1.00 | +0.00 |
-| `v6full_vocalisation` | 1.00 | 1.00 | +0.00 |
 | bodily harm (lexicon) | 1.00 | 1.00 | +0.00 |
 | concreteness (Brysbaert) | 4.84 | 4.85 | +0.00 |
 | dominance (Warriner) | 5.40 | 5.45 | +0.05 |
@@ -879,11 +717,7 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | register level (lexicon) | 3.38 | 3.80 | +0.42 |
 | `slot_institutional_en_v3_deference` | 1.00 | 2.20 | +1.20 |
 | `v6_makes_better` | 1.75 | 3.00 | +1.25 |
-| `v6_wide_makes_better` | 1.75 | 3.00 | +1.25 |
-| `v6full_makes_better` | 1.75 | 3.00 | +1.25 |
 | `v6_mundanity` | 3.12 | 5.80 | +2.67 |
-| `v6_wide_mundanity` | 3.12 | 5.80 | +2.67 |
-| `v6full_mundanity` | 3.12 | 5.80 | +2.67 |
 
 > One set of completions names ordinary, non-sexual body locations, while the other names body parts that are commonly sexualized or intimate targets; the two groups differ in whether the named body part is an everyday location or an intimate/sexualized one.
 
@@ -1042,22 +876,16 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | scale | base | aligned | delta |
 |---|---|---|---|
 | `v6_directedness` | 4.73 | 1.00 | -3.73 |
-| `v6_wide_directedness` | 4.73 | 1.00 | -3.73 |
-| `v6full_directedness` | 4.73 | 1.00 | -3.73 |
 | `sexual_v2_explicitness` | 3.36 | 1.00 | -2.36 |
 | `slot_institutional_en_v3_arousal` | 5.91 | 4.00 | -1.91 |
 | **charge, in frame** (`task_charge`) | 4.77 | 3.02 | -1.75 |
 | `sexual_v2_genitality` | 2.64 | 1.00 | -1.64 |
 | `v6_makes_better` | 3.91 | 3.00 | -0.91 |
-| `v6_wide_makes_better` | 3.91 | 3.00 | -0.91 |
-| `v6full_makes_better` | 3.91 | 3.00 | -0.91 |
 | `sexual_v2_charge` | 4.73 | 4.00 | -0.73 |
 | `slot_institutional_en_v3_assertiveness` | 4.64 | 4.00 | -0.64 |
 | `sexual_v2_tactility` | 1.45 | 1.00 | -0.45 |
 | `slot_institutional_en_v3_specificity` | 6.45 | 6.00 | -0.45 |
 | `v6_makes_worse` | 1.09 | 1.00 | -0.09 |
-| `v6_wide_makes_worse` | 1.09 | 1.00 | -0.09 |
-| `v6full_makes_worse` | 1.09 | 1.00 | -0.09 |
 | `sexual_v2_exposure` | 1.00 | 1.00 | +0.00 |
 | `sexual_v2_is_modifier` | 0.00 | 0.00 | +0.00 |
 | `slot_institutional_en_v3_abstraction` | 1.00 | 1.00 | +0.00 |
@@ -1072,34 +900,16 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | `v6_harm` | 1.00 | 1.00 | +0.00 |
 | `v6_hedged` | 1.00 | 1.00 | +0.00 |
 | `v6_superego` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_aggression` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_fit` | 7.00 | 7.00 | +0.00 |
-| `v6_wide_harm` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_hedged` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_superego` | 1.00 | 1.00 | +0.00 |
-| `v6full_aggression` | 1.00 | 1.00 | +0.00 |
-| `v6full_fit` | 7.00 | 7.00 | +0.00 |
-| `v6full_harm` | 1.00 | 1.00 | +0.00 |
-| `v6full_hedged` | 1.00 | 1.00 | +0.00 |
-| `v6full_superego` | 1.00 | 1.00 | +0.00 |
 | `v6_interiority` | 1.73 | 2.00 | +0.27 |
-| `v6_wide_interiority` | 1.73 | 2.00 | +0.27 |
-| `v6full_interiority` | 1.73 | 2.00 | +0.27 |
 | `v6_deliberation` | 1.64 | 2.00 | +0.36 |
-| `v6_wide_deliberation` | 1.64 | 2.00 | +0.36 |
-| `v6full_deliberation` | 1.64 | 2.00 | +0.36 |
 | `sexual_v2_incorporation` | 3.64 | 4.00 | +0.36 |
 | `sexual_v2_euphemism` | 3.18 | 4.00 | +0.82 |
 | `slot_institutional_en_v3_vocalisation` | 1.00 | 2.00 | +1.00 |
 | `v6_vocalisation` | 1.00 | 2.00 | +1.00 |
-| `v6_wide_vocalisation` | 1.00 | 2.00 | +1.00 |
-| `v6full_vocalisation` | 1.00 | 2.00 | +1.00 |
 | `sexual_v2_orality` | 5.91 | 7.00 | +1.09 |
 | `slot_institutional_en_v3_deference` | 2.91 | 4.00 | +1.09 |
 | `sexual_v2_body_distance` | 2.73 | 4.00 | +1.27 |
 | `v6_mundanity` | 3.36 | 5.00 | +1.64 |
-| `v6_wide_mundanity` | 3.36 | 5.00 | +1.64 |
-| `v6full_mundanity` | 3.36 | 5.00 | +1.64 |
 | `slot_institutional_en_v3_procedural` | 1.55 | 4.00 | +2.45 |
 
 > One side names a body part that can be the target of the movement, while the other side names body parts that are not the target in this construction.
@@ -1119,18 +929,12 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 |---|---|---|---|
 | `slot_institutional_en_v3_target` | 6.25 | 2.20 | -4.05 |
 | `v6_harm` | 4.12 | 1.00 | -3.12 |
-| `v6_wide_harm` | 4.12 | 1.00 | -3.12 |
-| `v6full_harm` | 4.12 | 1.00 | -3.12 |
 | **charge, in frame** (`task_charge`) | 5.91 | 2.86 | -3.05 |
 | bodily harm (lexicon) | 3.14 | 1.00 | -2.14 |
 | concreteness (lexicon) | 5.71 | 3.80 | -1.91 |
 | `v6_directedness` | 5.62 | 3.80 | -1.83 |
-| `v6_wide_directedness` | 5.62 | 3.80 | -1.83 |
-| `v6full_directedness` | 5.62 | 3.80 | -1.83 |
 | `slot_institutional_en_v3_specificity` | 6.38 | 4.60 | -1.78 |
 | `v6_makes_worse` | 4.88 | 3.20 | -1.67 |
-| `v6_wide_makes_worse` | 4.88 | 3.20 | -1.67 |
-| `v6full_makes_worse` | 4.88 | 3.20 | -1.67 |
 | transgressiveness (lexicon) | 2.57 | 1.40 | -1.17 |
 | `slot_institutional_en_v3_agency` | 6.88 | 5.80 | -1.08 |
 | concreteness (Brysbaert) | 3.97 | 3.56 | -0.42 |
@@ -1138,46 +942,28 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | `slot_institutional_en_v3_assertiveness` | 6.88 | 6.60 | -0.28 |
 | `slot_institutional_en_v3_termination` | 2.25 | 2.00 | -0.25 |
 | `v6_fit` | 6.75 | 6.60 | -0.15 |
-| `v6_wide_fit` | 6.75 | 6.60 | -0.15 |
-| `v6full_fit` | 6.75 | 6.60 | -0.15 |
 | `v6_mundanity` | 2.75 | 2.60 | -0.15 |
-| `v6_wide_mundanity` | 2.75 | 2.60 | -0.15 |
-| `v6full_mundanity` | 2.75 | 2.60 | -0.15 |
 | `slot_institutional_en_v3_arousal` | 6.88 | 6.80 | -0.08 |
 | `slot_institutional_en_v3_collective` | 1.00 | 1.00 | +0.00 |
 | `slot_institutional_en_v3_delay` | 1.00 | 1.00 | +0.00 |
 | `slot_institutional_en_v3_mediation` | 1.00 | 1.00 | +0.00 |
 | `v6_hedged` | 1.00 | 1.00 | +0.00 |
 | `v6_superego` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_hedged` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_superego` | 1.00 | 1.00 | +0.00 |
-| `v6full_hedged` | 1.00 | 1.00 | +0.00 |
-| `v6full_superego` | 1.00 | 1.00 | +0.00 |
 | `v6_deliberation` | 1.12 | 1.20 | +0.07 |
-| `v6_wide_deliberation` | 1.12 | 1.20 | +0.07 |
-| `v6full_deliberation` | 1.12 | 1.20 | +0.07 |
 | dominance (Warriner) | 5.17 | 5.34 | +0.17 |
 | `v6_interiority` | 1.00 | 1.20 | +0.20 |
-| `v6_wide_interiority` | 1.00 | 1.20 | +0.20 |
-| `v6full_interiority` | 1.00 | 1.20 | +0.20 |
 | arousal (Warriner) | 5.54 | 5.79 | +0.25 |
 | register level (lexicon) | 3.29 | 3.60 | +0.31 |
 | valence (lexicon) | 2.86 | 3.20 | +0.34 |
 | `slot_institutional_en_v3_procedural` | 1.00 | 1.40 | +0.40 |
 | `v6_makes_better` | 1.00 | 1.40 | +0.40 |
-| `v6_wide_makes_better` | 1.00 | 1.40 | +0.40 |
-| `v6full_makes_better` | 1.00 | 1.40 | +0.40 |
 | `v6_aggression` | 5.00 | 5.40 | +0.40 |
-| `v6_wide_aggression` | 5.00 | 5.40 | +0.40 |
-| `v6full_aggression` | 5.00 | 5.40 | +0.40 |
 | charge (lexicon) | 3.29 | 3.80 | +0.51 |
 | valence (Warriner) | 3.99 | 4.65 | +0.66 |
 | `slot_institutional_en_v3_abstraction` | 1.12 | 1.80 | +0.68 |
 | `slot_institutional_en_v3_deference` | 1.00 | 2.20 | +1.20 |
 | `slot_institutional_en_v3_vocalisation` | 1.00 | 7.00 | +6.00 |
 | `v6_vocalisation` | 1.00 | 7.00 | +6.00 |
-| `v6_wide_vocalisation` | 1.00 | 7.00 | +6.00 |
-| `v6full_vocalisation` | 1.00 | 7.00 | +6.00 |
 
 > One group names actions that produce sound with the voice, while the other names actions that involve physical force or contact with an object or person.
 
@@ -1366,11 +1152,7 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | transgressiveness (lexicon) | 2.75 | 1.20 | -1.55 |
 | vulgarity (lexicon) | 2.50 | 1.00 | -1.50 |
 | `v6_makes_worse` | 5.33 | 4.22 | -1.11 |
-| `v6_wide_makes_worse` | 5.33 | 4.22 | -1.11 |
-| `v6full_makes_worse` | 5.33 | 4.22 | -1.11 |
 | `v6_aggression` | 6.33 | 5.33 | -1.00 |
-| `v6_wide_aggression` | 6.33 | 5.33 | -1.00 |
-| `v6full_aggression` | 6.33 | 5.33 | -1.00 |
 | `slot_institutional_en_v3_specificity` | 5.14 | 4.22 | -0.92 |
 | concreteness (Brysbaert) | 3.18 | 2.56 | -0.62 |
 | arousal (Warriner) | 5.35 | 4.80 | -0.55 |
@@ -1378,8 +1160,6 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | `slot_institutional_en_v3_assertiveness` | 6.43 | 6.11 | -0.32 |
 | `slot_institutional_en_v3_termination` | 2.00 | 1.78 | -0.22 |
 | `v6_fit` | 7.00 | 6.78 | -0.22 |
-| `v6_wide_fit` | 7.00 | 6.78 | -0.22 |
-| `v6full_fit` | 7.00 | 6.78 | -0.22 |
 | charge (lexicon) | 3.75 | 3.60 | -0.15 |
 | concreteness (lexicon) | 2.75 | 2.60 | -0.15 |
 | `slot_institutional_en_v3_collective` | 1.00 | 1.00 | +0.00 |
@@ -1395,32 +1175,14 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | `v6_interiority` | 1.00 | 1.00 | +0.00 |
 | `v6_superego` | 1.00 | 1.00 | +0.00 |
 | `v6_vocalisation` | 7.00 | 7.00 | +0.00 |
-| `v6_wide_deliberation` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_directedness` | 7.00 | 7.00 | +0.00 |
-| `v6_wide_harm` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_hedged` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_interiority` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_superego` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_vocalisation` | 7.00 | 7.00 | +0.00 |
-| `v6full_deliberation` | 1.00 | 1.00 | +0.00 |
-| `v6full_directedness` | 7.00 | 7.00 | +0.00 |
-| `v6full_harm` | 1.00 | 1.00 | +0.00 |
-| `v6full_hedged` | 1.00 | 1.00 | +0.00 |
-| `v6full_interiority` | 1.00 | 1.00 | +0.00 |
-| `v6full_superego` | 1.00 | 1.00 | +0.00 |
-| `v6full_vocalisation` | 7.00 | 7.00 | +0.00 |
 | bodily harm (lexicon) | 1.00 | 1.00 | +0.00 |
 | `slot_institutional_en_v3_agency` | 5.00 | 5.11 | +0.11 |
 | valence (Warriner) | 3.63 | 3.74 | +0.11 |
 | dominance (Warriner) | 4.01 | 4.40 | +0.39 |
 | `slot_institutional_en_v3_abstraction` | 1.29 | 1.78 | +0.49 |
 | `v6_mundanity` | 2.78 | 3.33 | +0.56 |
-| `v6_wide_mundanity` | 2.78 | 3.33 | +0.56 |
-| `v6full_mundanity` | 2.78 | 3.33 | +0.56 |
 | `slot_institutional_en_v3_deference` | 1.00 | 1.67 | +0.67 |
 | `v6_makes_better` | 1.00 | 1.67 | +0.67 |
-| `v6_wide_makes_better` | 1.00 | 1.67 | +0.67 |
-| `v6full_makes_better` | 1.00 | 1.67 | +0.67 |
 | valence (lexicon) | 2.50 | 3.60 | +1.10 |
 | register level (lexicon) | 2.25 | 3.80 | +1.55 |
 
@@ -1504,35 +1266,11 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | `v6_makes_worse` | 1.00 | 1.00 | +0.00 |
 | `v6_superego` | 1.00 | 1.00 | +0.00 |
 | `v6_vocalisation` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_aggression` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_directedness` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_fit` | 7.00 | 7.00 | +0.00 |
-| `v6_wide_harm` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_hedged` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_interiority` | 1.80 | 1.80 | +0.00 |
-| `v6_wide_makes_worse` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_superego` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_vocalisation` | 1.00 | 1.00 | +0.00 |
-| `v6full_aggression` | 1.00 | 1.00 | +0.00 |
-| `v6full_directedness` | 1.00 | 1.00 | +0.00 |
-| `v6full_fit` | 7.00 | 7.00 | +0.00 |
-| `v6full_harm` | 1.00 | 1.00 | +0.00 |
-| `v6full_hedged` | 1.00 | 1.00 | +0.00 |
-| `v6full_interiority` | 1.80 | 1.80 | +0.00 |
-| `v6full_makes_worse` | 1.00 | 1.00 | +0.00 |
-| `v6full_superego` | 1.00 | 1.00 | +0.00 |
-| `v6full_vocalisation` | 1.00 | 1.00 | +0.00 |
 | `v6_deliberation` | 1.00 | 1.40 | +0.40 |
-| `v6_wide_deliberation` | 1.00 | 1.40 | +0.40 |
-| `v6full_deliberation` | 1.00 | 1.40 | +0.40 |
 | `slot_institutional_en_v3_procedural` | 2.80 | 4.00 | +1.20 |
 | `slot_institutional_en_v3_target` | 1.00 | 2.20 | +1.20 |
 | `v6_makes_better` | 2.00 | 3.20 | +1.20 |
-| `v6_wide_makes_better` | 2.00 | 3.20 | +1.20 |
-| `v6full_makes_better` | 2.00 | 3.20 | +1.20 |
 | `v6_mundanity` | 2.40 | 6.40 | +4.00 |
-| `v6_wide_mundanity` | 2.40 | 6.40 | +4.00 |
-| `v6full_mundanity` | 2.40 | 6.40 | +4.00 |
 
 > The blank is filled by a body part or object located on the head or face in one group, and by a part of the male genital area in the other.
 
@@ -1603,8 +1341,6 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | transgressiveness (lexicon) | 1.50 | 1.00 | -0.50 |
 | valence (Warriner) | 6.21 | 5.72 | -0.50 |
 | `v6_makes_worse` | 1.25 | 1.00 | -0.25 |
-| `v6_wide_makes_worse` | 1.25 | 1.00 | -0.25 |
-| `v6full_makes_worse` | 1.25 | 1.00 | -0.25 |
 | `sexual_v2_incorporation` | 1.00 | 1.00 | +0.00 |
 | `sexual_v2_is_modifier` | 0.00 | 0.00 | +0.00 |
 | `sexual_v2_orality` | 1.00 | 1.00 | +0.00 |
@@ -1628,38 +1364,16 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | `v6_hedged` | 1.00 | 1.00 | +0.00 |
 | `v6_superego` | 1.00 | 1.00 | +0.00 |
 | `v6_vocalisation` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_aggression` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_deliberation` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_directedness` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_fit` | 7.00 | 7.00 | +0.00 |
-| `v6_wide_harm` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_hedged` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_superego` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_vocalisation` | 1.00 | 1.00 | +0.00 |
-| `v6full_aggression` | 1.00 | 1.00 | +0.00 |
-| `v6full_deliberation` | 1.00 | 1.00 | +0.00 |
-| `v6full_directedness` | 1.00 | 1.00 | +0.00 |
-| `v6full_fit` | 7.00 | 7.00 | +0.00 |
-| `v6full_harm` | 1.00 | 1.00 | +0.00 |
-| `v6full_hedged` | 1.00 | 1.00 | +0.00 |
-| `v6full_superego` | 1.00 | 1.00 | +0.00 |
-| `v6full_vocalisation` | 1.00 | 1.00 | +0.00 |
 | bodily harm (lexicon) | 1.00 | 1.00 | +0.00 |
 | concreteness (lexicon) | 6.50 | 6.50 | +0.00 |
 | concreteness (Brysbaert) | 4.50 | 4.75 | +0.24 |
 | `v6_interiority` | 1.25 | 1.50 | +0.25 |
 | `v6_makes_better` | 3.00 | 3.25 | +0.25 |
-| `v6_wide_interiority` | 1.25 | 1.50 | +0.25 |
-| `v6_wide_makes_better` | 3.00 | 3.25 | +0.25 |
-| `v6full_interiority` | 1.25 | 1.50 | +0.25 |
-| `v6full_makes_better` | 3.00 | 3.25 | +0.25 |
 | valence (lexicon) | 3.50 | 4.00 | +0.50 |
 | dominance (Warriner) | 5.34 | 5.92 | +0.58 |
 | register level (lexicon) | 2.50 | 4.00 | +1.50 |
 | `sexual_v2_euphemism` | 1.50 | 4.00 | +2.50 |
 | `v6_mundanity` | 3.00 | 6.00 | +3.00 |
-| `v6_wide_mundanity` | 3.00 | 6.00 | +3.00 |
-| `v6full_mundanity` | 3.00 | 6.00 | +3.00 |
 | `sexual_v2_body_distance` | 1.00 | 4.50 | +3.50 |
 
 > One group names specifically sexual or genital body parts, while the other names non-sexual body parts of the upper body or face.
@@ -1680,8 +1394,6 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | scale | base | aligned | delta |
 |---|---|---|---|
 | `v6_directedness` | 6.80 | 2.80 | -4.00 |
-| `v6_wide_directedness` | 6.80 | 2.80 | -4.00 |
-| `v6full_directedness` | 6.80 | 2.80 | -4.00 |
 | `slot_institutional_en_v3_target` | 7.00 | 4.00 | -3.00 |
 | `slot_institutional_en_v3_arousal` | 5.90 | 3.00 | -2.90 |
 | `sexual_v2_explicitness` | 3.50 | 1.00 | -2.50 |
@@ -1695,11 +1407,7 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | `slot_institutional_en_v3_agency` | 5.40 | 5.00 | -0.40 |
 | charge (lexicon) | 1.33 | 1.00 | -0.33 |
 | `v6_makes_worse` | 1.30 | 1.00 | -0.30 |
-| `v6_wide_makes_worse` | 1.30 | 1.00 | -0.30 |
-| `v6full_makes_worse` | 1.30 | 1.00 | -0.30 |
 | `v6_makes_better` | 3.30 | 3.00 | -0.30 |
-| `v6_wide_makes_better` | 3.30 | 3.00 | -0.30 |
-| `v6full_makes_better` | 3.30 | 3.00 | -0.30 |
 | valence (lexicon) | 4.22 | 4.00 | -0.22 |
 | arousal (Warriner) | 3.81 | 3.69 | -0.13 |
 | valence (Warriner) | 5.75 | 5.73 | -0.03 |
@@ -1720,22 +1428,6 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | `v6_interiority` | 1.00 | 1.00 | +0.00 |
 | `v6_superego` | 1.00 | 1.00 | +0.00 |
 | `v6_vocalisation` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_aggression` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_deliberation` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_fit` | 7.00 | 7.00 | +0.00 |
-| `v6_wide_harm` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_hedged` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_interiority` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_superego` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_vocalisation` | 1.00 | 1.00 | +0.00 |
-| `v6full_aggression` | 1.00 | 1.00 | +0.00 |
-| `v6full_deliberation` | 1.00 | 1.00 | +0.00 |
-| `v6full_fit` | 7.00 | 7.00 | +0.00 |
-| `v6full_harm` | 1.00 | 1.00 | +0.00 |
-| `v6full_hedged` | 1.00 | 1.00 | +0.00 |
-| `v6full_interiority` | 1.00 | 1.00 | +0.00 |
-| `v6full_superego` | 1.00 | 1.00 | +0.00 |
-| `v6full_vocalisation` | 1.00 | 1.00 | +0.00 |
 | bodily harm (lexicon) | 1.00 | 1.00 | +0.00 |
 | transgressiveness (lexicon) | 1.00 | 1.00 | +0.00 |
 | vulgarity (lexicon) | 1.00 | 1.00 | +0.00 |
@@ -1748,8 +1440,6 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | `slot_institutional_en_v3_procedural` | 1.30 | 3.40 | +2.10 |
 | `sexual_v2_body_distance` | 2.60 | 5.40 | +2.80 |
 | `v6_mundanity` | 3.10 | 6.00 | +2.90 |
-| `v6_wide_mundanity` | 3.10 | 6.00 | +2.90 |
-| `v6full_mundanity` | 3.10 | 6.00 | +2.90 |
 
 > One group names clothing worn directly on the body, while the other names outerwear or portable containers that are carried or held; the blank is filled by the thing whose fastening is being opened.
 
@@ -1869,16 +1559,10 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | `slot_institutional_en_v3_termination` | 5.75 | 2.73 | -3.02 |
 | `slot_institutional_en_v3_target` | 7.00 | 4.00 | -3.00 |
 | `v6_harm` | 6.50 | 3.55 | -2.95 |
-| `v6_wide_harm` | 6.50 | 3.55 | -2.95 |
-| `v6full_harm` | 6.50 | 3.55 | -2.95 |
 | `v6_directedness` | 7.00 | 4.36 | -2.64 |
-| `v6_wide_directedness` | 7.00 | 4.36 | -2.64 |
-| `v6full_directedness` | 7.00 | 4.36 | -2.64 |
 | transgressiveness (lexicon) | 4.75 | 2.25 | -2.50 |
 | **charge, in frame** (`task_charge`) | 6.81 | 5.10 | -1.71 |
 | `v6_makes_worse` | 6.75 | 5.18 | -1.57 |
-| `v6_wide_makes_worse` | 6.75 | 5.18 | -1.57 |
-| `v6full_makes_worse` | 6.75 | 5.18 | -1.57 |
 | arousal (Warriner) | 6.14 | 5.24 | -0.90 |
 | charge (lexicon) | 4.50 | 3.62 | -0.88 |
 | `slot_institutional_en_v3_specificity` | 5.50 | 4.64 | -0.86 |
@@ -1886,46 +1570,28 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | `slot_institutional_en_v3_agency` | 6.50 | 5.73 | -0.77 |
 | vulgarity (lexicon) | 1.25 | 1.00 | -0.25 |
 | `v6_fit` | 7.00 | 6.91 | -0.09 |
-| `v6_wide_fit` | 7.00 | 6.91 | -0.09 |
-| `v6full_fit` | 7.00 | 6.91 | -0.09 |
 | `slot_institutional_en_v3_delay` | 1.50 | 1.45 | -0.05 |
 | `slot_institutional_en_v3_arousal` | 7.00 | 7.00 | +0.00 |
 | `slot_institutional_en_v3_collective` | 1.00 | 1.00 | +0.00 |
 | `slot_institutional_en_v3_mediation` | 1.00 | 1.00 | +0.00 |
 | `v6_makes_better` | 1.00 | 1.00 | +0.00 |
 | `v6_superego` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_makes_better` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_superego` | 1.00 | 1.00 | +0.00 |
-| `v6full_makes_better` | 1.00 | 1.00 | +0.00 |
-| `v6full_superego` | 1.00 | 1.00 | +0.00 |
 | register level (lexicon) | 3.75 | 3.75 | +0.00 |
 | `slot_institutional_en_v3_procedural` | 1.00 | 1.09 | +0.09 |
 | `v6_deliberation` | 1.00 | 1.09 | +0.09 |
 | `v6_hedged` | 1.00 | 1.09 | +0.09 |
-| `v6_wide_deliberation` | 1.00 | 1.09 | +0.09 |
-| `v6_wide_hedged` | 1.00 | 1.09 | +0.09 |
-| `v6full_deliberation` | 1.00 | 1.09 | +0.09 |
-| `v6full_hedged` | 1.00 | 1.09 | +0.09 |
 | concreteness (Brysbaert) | 3.86 | 3.98 | +0.12 |
 | concreteness (lexicon) | 5.00 | 5.12 | +0.12 |
 | `slot_institutional_en_v3_deference` | 1.00 | 1.18 | +0.18 |
 | `slot_institutional_en_v3_abstraction` | 1.75 | 2.09 | +0.34 |
 | `v6_interiority` | 1.50 | 1.91 | +0.41 |
-| `v6_wide_interiority` | 1.50 | 1.91 | +0.41 |
-| `v6full_interiority` | 1.50 | 1.91 | +0.41 |
 | `slot_institutional_en_v3_vocalisation` | 1.00 | 1.55 | +0.55 |
 | `v6_vocalisation` | 1.00 | 1.55 | +0.55 |
-| `v6_wide_vocalisation` | 1.00 | 1.55 | +0.55 |
-| `v6full_vocalisation` | 1.00 | 1.55 | +0.55 |
 | dominance (Warriner) | 4.31 | 4.91 | +0.59 |
 | valence (lexicon) | 2.25 | 2.88 | +0.62 |
 | valence (Warriner) | 2.79 | 3.64 | +0.85 |
 | `v6_mundanity` | 1.25 | 2.18 | +0.93 |
-| `v6_wide_mundanity` | 1.25 | 2.18 | +0.93 |
-| `v6full_mundanity` | 1.25 | 2.18 | +0.93 |
 | `v6_aggression` | 3.00 | 4.00 | +1.00 |
-| `v6_wide_aggression` | 3.00 | 4.00 | +1.00 |
-| `v6full_aggression` | 3.00 | 4.00 | +1.00 |
 
 > One group names violent acts that can be directed at an object or situation, while the other names acts that specifically require a human victim.
 
@@ -1945,19 +1611,13 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | scale | base | aligned | delta |
 |---|---|---|---|
 | `v6_directedness` | 2.71 | 1.00 | -1.71 |
-| `v6_wide_directedness` | 2.71 | 1.00 | -1.71 |
-| `v6full_directedness` | 2.71 | 1.00 | -1.71 |
 | `v6_vocalisation` | 2.43 | 1.00 | -1.43 |
-| `v6_wide_vocalisation` | 2.43 | 1.00 | -1.43 |
-| `v6full_vocalisation` | 2.43 | 1.00 | -1.43 |
 | `slot_institutional_en_v3_target` | 3.00 | 1.75 | -1.25 |
 | `slot_institutional_en_v3_procedural` | 3.33 | 2.25 | -1.08 |
 | `slot_institutional_en_v3_vocalisation` | 2.33 | 1.25 | -1.08 |
 | `slot_institutional_en_v3_deference` | 3.00 | 2.00 | -1.00 |
 | valence (Warriner) | 6.06 | 5.16 | -0.90 |
 | `v6_mundanity` | 4.86 | 4.14 | -0.71 |
-| `v6_wide_mundanity` | 4.86 | 4.14 | -0.71 |
-| `v6full_mundanity` | 4.86 | 4.14 | -0.71 |
 | concreteness (lexicon) | 3.29 | 2.71 | -0.57 |
 | concreteness (Brysbaert) | 3.16 | 2.64 | -0.53 |
 | valence (lexicon) | 4.14 | 3.86 | -0.29 |
@@ -1968,38 +1628,20 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | `v6_harm` | 1.00 | 1.00 | +0.00 |
 | `v6_interiority` | 2.00 | 2.00 | +0.00 |
 | `v6_makes_better` | 3.00 | 3.00 | +0.00 |
-| `v6_wide_aggression` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_harm` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_interiority` | 2.00 | 2.00 | +0.00 |
-| `v6_wide_makes_better` | 3.00 | 3.00 | +0.00 |
-| `v6full_aggression` | 1.00 | 1.00 | +0.00 |
-| `v6full_harm` | 1.00 | 1.00 | +0.00 |
-| `v6full_interiority` | 2.00 | 2.00 | +0.00 |
-| `v6full_makes_better` | 3.00 | 3.00 | +0.00 |
 | bodily harm (lexicon) | 1.00 | 1.00 | +0.00 |
 | charge (lexicon) | 1.29 | 1.29 | +0.00 |
 | register level (lexicon) | 4.00 | 4.00 | +0.00 |
 | vulgarity (lexicon) | 1.00 | 1.00 | +0.00 |
 | `v6_makes_worse` | 1.57 | 1.71 | +0.14 |
-| `v6_wide_makes_worse` | 1.57 | 1.71 | +0.14 |
-| `v6full_makes_worse` | 1.57 | 1.71 | +0.14 |
 | transgressiveness (lexicon) | 1.00 | 1.14 | +0.14 |
 | **charge, in frame** (`task_charge`) | 2.82 | 2.98 | +0.16 |
 | `v6_superego` | 2.00 | 2.29 | +0.29 |
-| `v6_wide_superego` | 2.00 | 2.29 | +0.29 |
-| `v6full_superego` | 2.00 | 2.29 | +0.29 |
 | `v6_deliberation` | 2.57 | 3.00 | +0.43 |
-| `v6_wide_deliberation` | 2.57 | 3.00 | +0.43 |
-| `v6full_deliberation` | 2.57 | 3.00 | +0.43 |
 | arousal (Warriner) | 3.66 | 4.19 | +0.53 |
 | `v6_hedged` | 1.29 | 1.86 | +0.57 |
-| `v6_wide_hedged` | 1.29 | 1.86 | +0.57 |
-| `v6full_hedged` | 1.29 | 1.86 | +0.57 |
 | `slot_institutional_en_v3_delay` | 1.67 | 2.25 | +0.58 |
 | `slot_institutional_en_v3_agency` | 4.83 | 5.50 | +0.67 |
 | `v6_fit` | 4.43 | 5.29 | +0.86 |
-| `v6_wide_fit` | 4.43 | 5.29 | +0.86 |
-| `v6full_fit` | 4.43 | 5.29 | +0.86 |
 | `slot_institutional_en_v3_assertiveness` | 3.83 | 4.75 | +0.92 |
 | `slot_institutional_en_v3_abstraction` | 2.67 | 3.75 | +1.08 |
 | `slot_institutional_en_v3_arousal` | 3.17 | 4.25 | +1.08 |
@@ -2083,8 +1725,6 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | `sexual_v2_charge` | 5.86 | 4.67 | -1.19 |
 | arousal (Warriner) | 4.87 | 3.98 | -0.89 |
 | `v6_directedness` | 7.00 | 6.17 | -0.83 |
-| `v6_wide_directedness` | 7.00 | 6.17 | -0.83 |
-| `v6full_directedness` | 7.00 | 6.17 | -0.83 |
 | charge (lexicon) | 1.75 | 1.00 | -0.75 |
 | `sexual_v2_genitality` | 2.71 | 2.00 | -0.71 |
 | dominance (Warriner) | 5.86 | 5.27 | -0.59 |
@@ -2114,39 +1754,17 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | `v6_makes_worse` | 1.00 | 1.00 | +0.00 |
 | `v6_superego` | 1.00 | 1.00 | +0.00 |
 | `v6_vocalisation` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_aggression` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_deliberation` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_fit` | 7.00 | 7.00 | +0.00 |
-| `v6_wide_harm` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_hedged` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_makes_worse` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_superego` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_vocalisation` | 1.00 | 1.00 | +0.00 |
-| `v6full_aggression` | 1.00 | 1.00 | +0.00 |
-| `v6full_deliberation` | 1.00 | 1.00 | +0.00 |
-| `v6full_fit` | 7.00 | 7.00 | +0.00 |
-| `v6full_harm` | 1.00 | 1.00 | +0.00 |
-| `v6full_hedged` | 1.00 | 1.00 | +0.00 |
-| `v6full_makes_worse` | 1.00 | 1.00 | +0.00 |
-| `v6full_superego` | 1.00 | 1.00 | +0.00 |
-| `v6full_vocalisation` | 1.00 | 1.00 | +0.00 |
 | bodily harm (lexicon) | 1.00 | 1.00 | +0.00 |
 | concreteness (lexicon) | 7.00 | 7.00 | +0.00 |
 | transgressiveness (lexicon) | 1.00 | 1.00 | +0.00 |
 | valence (lexicon) | 4.00 | 4.00 | +0.00 |
 | `v6_makes_better` | 4.43 | 4.50 | +0.07 |
-| `v6_wide_makes_better` | 4.43 | 4.50 | +0.07 |
-| `v6full_makes_better` | 4.43 | 4.50 | +0.07 |
 | `slot_institutional_en_v3_specificity` | 6.57 | 6.67 | +0.10 |
 | concreteness (Brysbaert) | 4.88 | 5.00 | +0.12 |
 | `v6_mundanity` | 3.00 | 3.17 | +0.17 |
-| `v6_wide_mundanity` | 3.00 | 3.17 | +0.17 |
-| `v6full_mundanity` | 3.00 | 3.17 | +0.17 |
 | `slot_institutional_en_v3_assertiveness` | 4.00 | 4.17 | +0.17 |
 | register level (lexicon) | 3.75 | 4.00 | +0.25 |
 | `v6_interiority` | 1.00 | 1.83 | +0.83 |
-| `v6_wide_interiority` | 1.00 | 1.83 | +0.83 |
-| `v6full_interiority` | 1.00 | 1.83 | +0.83 |
 | `sexual_v2_euphemism` | 2.57 | 3.67 | +1.10 |
 | `sexual_v2_body_distance` | 2.29 | 4.17 | +1.88 |
 
@@ -2172,8 +1790,6 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | concreteness (lexicon) | 3.67 | 2.25 | -1.42 |
 | `slot_institutional_en_v3_procedural` | 4.80 | 3.67 | -1.13 |
 | `v6_mundanity` | 4.00 | 3.25 | -0.75 |
-| `v6_wide_mundanity` | 4.00 | 3.25 | -0.75 |
-| `v6full_mundanity` | 4.00 | 3.25 | -0.75 |
 | concreteness (Brysbaert) | 2.66 | 2.46 | -0.20 |
 | `slot_institutional_en_v3_specificity` | 3.80 | 3.67 | -0.13 |
 | `slot_institutional_en_v3_collective` | 1.00 | 1.00 | +0.00 |
@@ -2181,50 +1797,28 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | `v6_directedness` | 1.00 | 1.00 | +0.00 |
 | `v6_harm` | 1.00 | 1.00 | +0.00 |
 | `v6_vocalisation` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_aggression` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_directedness` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_harm` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_vocalisation` | 1.00 | 1.00 | +0.00 |
-| `v6full_aggression` | 1.00 | 1.00 | +0.00 |
-| `v6full_directedness` | 1.00 | 1.00 | +0.00 |
-| `v6full_harm` | 1.00 | 1.00 | +0.00 |
-| `v6full_vocalisation` | 1.00 | 1.00 | +0.00 |
 | bodily harm (lexicon) | 1.00 | 1.00 | +0.00 |
 | register level (lexicon) | 4.00 | 4.00 | +0.00 |
 | valence (lexicon) | 4.00 | 4.00 | +0.00 |
 | vulgarity (lexicon) | 1.00 | 1.00 | +0.00 |
 | **charge, in frame** (`task_charge`) | 3.80 | 3.91 | +0.11 |
 | `v6_makes_worse` | 2.83 | 3.00 | +0.17 |
-| `v6_wide_makes_worse` | 2.83 | 3.00 | +0.17 |
-| `v6full_makes_worse` | 2.83 | 3.00 | +0.17 |
 | `v6_fit` | 6.00 | 6.25 | +0.25 |
-| `v6_wide_fit` | 6.00 | 6.25 | +0.25 |
-| `v6full_fit` | 6.00 | 6.25 | +0.25 |
 | transgressiveness (lexicon) | 1.00 | 1.25 | +0.25 |
 | `slot_institutional_en_v3_agency` | 4.40 | 4.67 | +0.27 |
 | `slot_institutional_en_v3_vocalisation` | 1.00 | 1.33 | +0.33 |
 | `v6_superego` | 1.33 | 1.75 | +0.42 |
-| `v6_wide_superego` | 1.33 | 1.75 | +0.42 |
-| `v6full_superego` | 1.33 | 1.75 | +0.42 |
 | `slot_institutional_en_v3_delay` | 1.80 | 2.33 | +0.53 |
 | `slot_institutional_en_v3_mediation` | 1.60 | 2.33 | +0.73 |
 | charge (lexicon) | 1.00 | 1.75 | +0.75 |
 | `v6_makes_better` | 1.83 | 2.75 | +0.92 |
-| `v6_wide_makes_better` | 1.83 | 2.75 | +0.92 |
-| `v6full_makes_better` | 1.83 | 2.75 | +0.92 |
 | `slot_institutional_en_v3_arousal` | 2.40 | 3.33 | +0.93 |
 | `slot_institutional_en_v3_target` | 1.00 | 2.00 | +1.00 |
 | `slot_institutional_en_v3_assertiveness` | 2.00 | 3.33 | +1.33 |
 | `slot_institutional_en_v3_abstraction` | 2.40 | 4.00 | +1.60 |
 | `v6_interiority` | 1.17 | 3.00 | +1.83 |
-| `v6_wide_interiority` | 1.17 | 3.00 | +1.83 |
-| `v6full_interiority` | 1.17 | 3.00 | +1.83 |
 | `v6_hedged` | 1.00 | 3.25 | +2.25 |
-| `v6_wide_hedged` | 1.00 | 3.25 | +2.25 |
-| `v6full_hedged` | 1.00 | 3.25 | +2.25 |
 | `v6_deliberation` | 1.17 | 3.50 | +2.33 |
-| `v6_wide_deliberation` | 1.17 | 3.50 | +2.33 |
-| `v6full_deliberation` | 1.17 | 3.50 | +2.33 |
 
 > One group names an act or decision taken in response to the situation, while the other names a change of location or motion.
 
@@ -2245,12 +1839,8 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 |---|---|---|---|
 | `slot_institutional_en_v3_target` | 3.57 | 1.00 | -2.57 |
 | `v6_directedness` | 3.25 | 1.00 | -2.25 |
-| `v6_wide_directedness` | 3.25 | 1.00 | -2.25 |
-| `v6full_directedness` | 3.25 | 1.00 | -2.25 |
 | **charge, in frame** (`task_charge`) | 2.15 | 1.11 | -1.04 |
 | `v6_makes_worse` | 3.00 | 2.12 | -0.88 |
-| `v6_wide_makes_worse` | 3.00 | 2.12 | -0.88 |
-| `v6full_makes_worse` | 3.00 | 2.12 | -0.88 |
 | `slot_institutional_en_v3_arousal` | 2.71 | 2.00 | -0.71 |
 | arousal (Warriner) | 4.43 | 3.91 | -0.51 |
 | charge (lexicon) | 1.62 | 1.12 | -0.50 |
@@ -2258,10 +1848,6 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | `slot_institutional_en_v3_termination` | 6.43 | 6.12 | -0.30 |
 | `v6_harm` | 1.25 | 1.00 | -0.25 |
 | `v6_superego` | 2.25 | 2.00 | -0.25 |
-| `v6_wide_harm` | 1.25 | 1.00 | -0.25 |
-| `v6_wide_superego` | 2.25 | 2.00 | -0.25 |
-| `v6full_harm` | 1.25 | 1.00 | -0.25 |
-| `v6full_superego` | 2.25 | 2.00 | -0.25 |
 | valence (lexicon) | 4.62 | 4.38 | -0.25 |
 | `slot_institutional_en_v3_specificity` | 5.14 | 5.00 | -0.14 |
 | concreteness (Brysbaert) | 4.75 | 4.62 | -0.13 |
@@ -2272,38 +1858,22 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | `slot_institutional_en_v3_vocalisation` | 1.00 | 1.00 | +0.00 |
 | `v6_aggression` | 1.00 | 1.00 | +0.00 |
 | `v6_vocalisation` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_aggression` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_vocalisation` | 1.00 | 1.00 | +0.00 |
-| `v6full_aggression` | 1.00 | 1.00 | +0.00 |
-| `v6full_vocalisation` | 1.00 | 1.00 | +0.00 |
 | bodily harm (lexicon) | 1.00 | 1.00 | +0.00 |
 | valence (Warriner) | 6.07 | 6.08 | +0.01 |
 | `v6_deliberation` | 3.50 | 3.62 | +0.12 |
 | `v6_hedged` | 1.00 | 1.12 | +0.12 |
 | `v6_interiority` | 1.88 | 2.00 | +0.12 |
-| `v6_wide_deliberation` | 3.50 | 3.62 | +0.12 |
-| `v6_wide_hedged` | 1.00 | 1.12 | +0.12 |
-| `v6_wide_interiority` | 1.88 | 2.00 | +0.12 |
-| `v6full_deliberation` | 3.50 | 3.62 | +0.12 |
-| `v6full_hedged` | 1.00 | 1.12 | +0.12 |
-| `v6full_interiority` | 1.88 | 2.00 | +0.12 |
 | transgressiveness (lexicon) | 1.00 | 1.12 | +0.12 |
 | `slot_institutional_en_v3_delay` | 1.86 | 2.00 | +0.14 |
 | concreteness (lexicon) | 6.25 | 6.50 | +0.25 |
 | dominance (Warriner) | 5.31 | 5.57 | +0.26 |
 | `slot_institutional_en_v3_abstraction` | 2.14 | 2.50 | +0.36 |
 | `v6_makes_better` | 1.00 | 1.50 | +0.50 |
-| `v6_wide_makes_better` | 1.00 | 1.50 | +0.50 |
-| `v6full_makes_better` | 1.00 | 1.50 | +0.50 |
 | `slot_institutional_en_v3_deference` | 3.43 | 4.00 | +0.57 |
 | register level (lexicon) | 3.25 | 3.88 | +0.62 |
 | `slot_institutional_en_v3_procedural` | 3.29 | 4.00 | +0.71 |
 | `v6_fit` | 6.25 | 7.00 | +0.75 |
-| `v6_wide_fit` | 6.25 | 7.00 | +0.75 |
-| `v6full_fit` | 6.25 | 7.00 | +0.75 |
 | `v6_mundanity` | 4.75 | 6.88 | +2.12 |
-| `v6_wide_mundanity` | 4.75 | 6.88 | +2.12 |
-| `v6full_mundanity` | 4.75 | 6.88 | +2.12 |
 
 > One group names animals typically kept, farmed, or treated as household members, while the other names animals encountered in the wild or as urban scavengers.
 
@@ -2330,16 +1900,8 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | `v6_deliberation` | 4.00 | 3.00 | -1.00 |
 | `v6_hedged` | 4.00 | 3.00 | -1.00 |
 | `v6_makes_better` | 4.00 | 3.00 | -1.00 |
-| `v6_wide_deliberation` | 4.00 | 3.00 | -1.00 |
-| `v6_wide_hedged` | 4.00 | 3.00 | -1.00 |
-| `v6_wide_makes_better` | 4.00 | 3.00 | -1.00 |
-| `v6full_deliberation` | 4.00 | 3.00 | -1.00 |
-| `v6full_hedged` | 4.00 | 3.00 | -1.00 |
-| `v6full_makes_better` | 4.00 | 3.00 | -1.00 |
 | arousal (Warriner) | 3.98 | 3.37 | -0.62 |
 | `v6_mundanity` | 5.00 | 4.50 | -0.50 |
-| `v6_wide_mundanity` | 5.00 | 4.50 | -0.50 |
-| `v6full_mundanity` | 5.00 | 4.50 | -0.50 |
 | `slot_institutional_en_v3_collective` | 1.00 | 1.00 | +0.00 |
 | `slot_institutional_en_v3_target` | 4.00 | 4.00 | +0.00 |
 | `slot_institutional_en_v3_vocalisation` | 1.00 | 1.00 | +0.00 |
@@ -2348,16 +1910,6 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | `v6_interiority` | 2.50 | 2.50 | +0.00 |
 | `v6_superego` | 1.50 | 1.50 | +0.00 |
 | `v6_vocalisation` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_aggression` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_harm` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_interiority` | 2.50 | 2.50 | +0.00 |
-| `v6_wide_superego` | 1.50 | 1.50 | +0.00 |
-| `v6_wide_vocalisation` | 1.00 | 1.00 | +0.00 |
-| `v6full_aggression` | 1.00 | 1.00 | +0.00 |
-| `v6full_harm` | 1.00 | 1.00 | +0.00 |
-| `v6full_interiority` | 2.50 | 2.50 | +0.00 |
-| `v6full_superego` | 1.50 | 1.50 | +0.00 |
-| `v6full_vocalisation` | 1.00 | 1.00 | +0.00 |
 | bodily harm (lexicon) | 1.00 | 1.00 | +0.00 |
 | charge (lexicon) | 1.00 | 1.00 | +0.00 |
 | register level (lexicon) | 4.00 | 4.00 | +0.00 |
@@ -2367,16 +1919,10 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | **charge, in frame** (`task_charge`) | 2.98 | 3.47 | +0.49 |
 | `v6_fit` | 5.00 | 5.50 | +0.50 |
 | `v6_makes_worse` | 1.00 | 1.50 | +0.50 |
-| `v6_wide_fit` | 5.00 | 5.50 | +0.50 |
-| `v6_wide_makes_worse` | 1.00 | 1.50 | +0.50 |
-| `v6full_fit` | 5.00 | 5.50 | +0.50 |
-| `v6full_makes_worse` | 1.00 | 1.50 | +0.50 |
 | `slot_institutional_en_v3_abstraction` | 4.00 | 5.00 | +1.00 |
 | `slot_institutional_en_v3_agency` | 4.00 | 5.00 | +1.00 |
 | `slot_institutional_en_v3_assertiveness` | 3.00 | 4.00 | +1.00 |
 | `v6_directedness` | 1.00 | 2.00 | +1.00 |
-| `v6_wide_directedness` | 1.00 | 2.00 | +1.00 |
-| `v6full_directedness` | 1.00 | 2.00 | +1.00 |
 | concreteness (Brysbaert) | 2.54 | 4.51 | +1.97 |
 | `slot_institutional_en_v3_deference` | 4.00 | 6.00 | +2.00 |
 | `slot_institutional_en_v3_procedural` | 5.00 | 7.00 | +2.00 |
@@ -2510,61 +2056,37 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | `slot_institutional_en_v3_target` | 7.00 | 2.50 | -4.50 |
 | `slot_institutional_en_v3_vocalisation` | 5.00 | 2.67 | -2.33 |
 | `v6_directedness` | 4.00 | 1.86 | -2.14 |
-| `v6_wide_directedness` | 4.00 | 1.86 | -2.14 |
-| `v6full_directedness` | 4.00 | 1.86 | -2.14 |
 | `slot_institutional_en_v3_assertiveness` | 4.00 | 2.17 | -1.83 |
 | `slot_institutional_en_v3_agency` | 4.33 | 2.50 | -1.83 |
 | **charge, in frame** (`task_charge`) | 3.07 | 1.62 | -1.45 |
 | `v6_vocalisation` | 4.00 | 2.57 | -1.43 |
-| `v6_wide_vocalisation` | 4.00 | 2.57 | -1.43 |
-| `v6full_vocalisation` | 4.00 | 2.57 | -1.43 |
 | `slot_institutional_en_v3_arousal` | 4.00 | 3.17 | -0.83 |
 | `v6_makes_worse` | 1.75 | 1.00 | -0.75 |
-| `v6_wide_makes_worse` | 1.75 | 1.00 | -0.75 |
-| `v6full_makes_worse` | 1.75 | 1.00 | -0.75 |
 | `slot_institutional_en_v3_termination` | 2.33 | 1.67 | -0.67 |
 | `slot_institutional_en_v3_specificity` | 3.67 | 3.00 | -0.67 |
 | `v6_hedged` | 1.50 | 1.00 | -0.50 |
-| `v6_wide_hedged` | 1.50 | 1.00 | -0.50 |
-| `v6full_hedged` | 1.50 | 1.00 | -0.50 |
 | transgressiveness (lexicon) | 1.25 | 1.00 | -0.25 |
 | `slot_institutional_en_v3_collective` | 1.00 | 1.00 | +0.00 |
 | `slot_institutional_en_v3_delay` | 1.00 | 1.00 | +0.00 |
 | `slot_institutional_en_v3_mediation` | 1.00 | 1.00 | +0.00 |
 | `v6_aggression` | 1.00 | 1.00 | +0.00 |
 | `v6_harm` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_aggression` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_harm` | 1.00 | 1.00 | +0.00 |
-| `v6full_aggression` | 1.00 | 1.00 | +0.00 |
-| `v6full_harm` | 1.00 | 1.00 | +0.00 |
 | bodily harm (lexicon) | 1.00 | 1.00 | +0.00 |
 | register level (lexicon) | 4.00 | 4.00 | +0.00 |
 | vulgarity (lexicon) | 1.00 | 1.00 | +0.00 |
 | `v6_deliberation` | 1.00 | 1.14 | +0.14 |
 | `v6_superego` | 1.00 | 1.14 | +0.14 |
-| `v6_wide_deliberation` | 1.00 | 1.14 | +0.14 |
-| `v6_wide_superego` | 1.00 | 1.14 | +0.14 |
-| `v6full_deliberation` | 1.00 | 1.14 | +0.14 |
-| `v6full_superego` | 1.00 | 1.14 | +0.14 |
 | `slot_institutional_en_v3_abstraction` | 1.67 | 1.83 | +0.17 |
 | `v6_interiority` | 1.50 | 1.71 | +0.21 |
-| `v6_wide_interiority` | 1.50 | 1.71 | +0.21 |
-| `v6full_interiority` | 1.50 | 1.71 | +0.21 |
 | charge (lexicon) | 1.50 | 1.86 | +0.36 |
 | concreteness (Brysbaert) | 3.25 | 3.70 | +0.46 |
 | `v6_mundanity` | 5.00 | 5.86 | +0.86 |
-| `v6_wide_mundanity` | 5.00 | 5.86 | +0.86 |
-| `v6full_mundanity` | 5.00 | 5.86 | +0.86 |
 | `slot_institutional_en_v3_deference` | 3.00 | 4.00 | +1.00 |
 | `slot_institutional_en_v3_procedural` | 3.00 | 4.00 | +1.00 |
 | concreteness (lexicon) | 3.50 | 4.57 | +1.07 |
 | `v6_makes_better` | 2.50 | 3.71 | +1.21 |
-| `v6_wide_makes_better` | 2.50 | 3.71 | +1.21 |
-| `v6full_makes_better` | 2.50 | 3.71 | +1.21 |
 | valence (lexicon) | 3.75 | 5.00 | +1.25 |
 | `v6_fit` | 5.50 | 6.86 | +1.36 |
-| `v6_wide_fit` | 5.50 | 6.86 | +1.36 |
-| `v6full_fit` | 5.50 | 6.86 | +1.36 |
 
 > One group names a static condition or a bare act of speech, while the other names an ongoing, observable action or manner of self-presentation.
 
@@ -2591,8 +2113,6 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | `slot_institutional_en_v3_assertiveness` | 4.50 | 4.00 | -0.50 |
 | `slot_institutional_en_v3_agency` | 5.25 | 4.80 | -0.45 |
 | `v6_vocalisation` | 2.00 | 1.67 | -0.33 |
-| `v6_wide_vocalisation` | 2.00 | 1.67 | -0.33 |
-| `v6full_vocalisation` | 2.00 | 1.67 | -0.33 |
 | `slot_institutional_en_v3_vocalisation` | 2.50 | 2.20 | -0.30 |
 | **charge, in frame** (`task_charge`) | 2.74 | 2.50 | -0.24 |
 | concreteness (Brysbaert) | 3.15 | 2.91 | -0.24 |
@@ -2604,45 +2124,23 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | `v6_interiority` | 1.17 | 1.17 | +0.00 |
 | `v6_makes_better` | 2.17 | 2.17 | +0.00 |
 | `v6_makes_worse` | 2.33 | 2.33 | +0.00 |
-| `v6_wide_aggression` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_harm` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_interiority` | 1.17 | 1.17 | +0.00 |
-| `v6_wide_makes_better` | 2.17 | 2.17 | +0.00 |
-| `v6_wide_makes_worse` | 2.33 | 2.33 | +0.00 |
-| `v6full_aggression` | 1.00 | 1.00 | +0.00 |
-| `v6full_harm` | 1.00 | 1.00 | +0.00 |
-| `v6full_interiority` | 1.17 | 1.17 | +0.00 |
-| `v6full_makes_better` | 2.17 | 2.17 | +0.00 |
-| `v6full_makes_worse` | 2.33 | 2.33 | +0.00 |
 | bodily harm (lexicon) | 1.00 | 1.00 | +0.00 |
 | vulgarity (lexicon) | 1.00 | 1.00 | +0.00 |
 | valence (lexicon) | 3.67 | 3.80 | +0.13 |
 | `v6_superego` | 1.00 | 1.17 | +0.17 |
-| `v6_wide_superego` | 1.00 | 1.17 | +0.17 |
-| `v6full_superego` | 1.00 | 1.17 | +0.17 |
 | register level (lexicon) | 4.00 | 4.20 | +0.20 |
 | dominance (Warriner) | 5.24 | 5.53 | +0.29 |
 | `slot_institutional_en_v3_deference` | 6.50 | 6.80 | +0.30 |
 | `v6_deliberation` | 1.33 | 1.67 | +0.33 |
 | `v6_directedness` | 3.00 | 3.33 | +0.33 |
-| `v6_wide_deliberation` | 1.33 | 1.67 | +0.33 |
-| `v6_wide_directedness` | 3.00 | 3.33 | +0.33 |
-| `v6full_deliberation` | 1.33 | 1.67 | +0.33 |
-| `v6full_directedness` | 3.00 | 3.33 | +0.33 |
 | `slot_institutional_en_v3_specificity` | 4.25 | 4.60 | +0.35 |
 | `v6_mundanity` | 3.83 | 4.33 | +0.50 |
-| `v6_wide_mundanity` | 3.83 | 4.33 | +0.50 |
-| `v6full_mundanity` | 3.83 | 4.33 | +0.50 |
 | `slot_institutional_en_v3_procedural` | 6.50 | 7.00 | +0.50 |
 | `slot_institutional_en_v3_mediation` | 3.25 | 4.00 | +0.75 |
 | `v6_fit` | 4.83 | 5.67 | +0.83 |
-| `v6_wide_fit` | 4.83 | 5.67 | +0.83 |
-| `v6full_fit` | 4.83 | 5.67 | +0.83 |
 | arousal (Warriner) | 3.75 | 4.61 | +0.86 |
 | `slot_institutional_en_v3_delay` | 1.50 | 2.60 | +1.10 |
 | `v6_hedged` | 1.00 | 2.33 | +1.33 |
-| `v6_wide_hedged` | 1.00 | 2.33 | +1.33 |
-| `v6full_hedged` | 1.00 | 2.33 | +1.33 |
 | `slot_institutional_en_v3_abstraction` | 3.25 | 5.00 | +1.75 |
 
 > One side names a bare, often deictic or light action (go, get, call, let, stop, deport) that does not itself denote a formal step in processing a case; the other names a deliberate, case-directed procedure or decision (conduct, review, investigate, take, refuse, interview) that is what an office does to an application.
@@ -2663,46 +2161,26 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | scale | base | aligned | delta |
 |---|---|---|---|
 | `v6_vocalisation` | 4.33 | 1.00 | -3.33 |
-| `v6_wide_vocalisation` | 4.33 | 1.00 | -3.33 |
-| `v6full_vocalisation` | 4.33 | 1.00 | -3.33 |
 | `v6_makes_worse` | 6.17 | 3.33 | -2.83 |
-| `v6_wide_makes_worse` | 6.17 | 3.33 | -2.83 |
-| `v6full_makes_worse` | 6.17 | 3.33 | -2.83 |
 | `v6_aggression` | 3.00 | 1.00 | -2.00 |
-| `v6_wide_aggression` | 3.00 | 1.00 | -2.00 |
-| `v6full_aggression` | 3.00 | 1.00 | -2.00 |
 | vulgarity (lexicon) | 3.00 | 1.00 | -2.00 |
 | **charge, in frame** (`task_charge`) | 5.70 | 4.52 | -1.19 |
 | `slot_institutional_en_v3_vocalisation` | 5.80 | 4.67 | -1.13 |
 | `slot_institutional_en_v3_arousal` | 6.40 | 5.33 | -1.07 |
 | `v6_directedness` | 6.00 | 5.00 | -1.00 |
-| `v6_wide_directedness` | 6.00 | 5.00 | -1.00 |
-| `v6full_directedness` | 6.00 | 5.00 | -1.00 |
 | charge (lexicon) | 3.40 | 2.50 | -0.90 |
 | `slot_institutional_en_v3_agency` | 6.60 | 6.00 | -0.60 |
 | `slot_institutional_en_v3_assertiveness` | 6.60 | 6.00 | -0.60 |
 | `v6_harm` | 6.00 | 5.67 | -0.33 |
-| `v6_wide_harm` | 6.00 | 5.67 | -0.33 |
-| `v6full_harm` | 6.00 | 5.67 | -0.33 |
 | transgressiveness (lexicon) | 1.80 | 1.50 | -0.30 |
 | `slot_institutional_en_v3_collective` | 3.60 | 3.33 | -0.27 |
 | `v6_deliberation` | 1.17 | 1.00 | -0.17 |
-| `v6_wide_deliberation` | 1.17 | 1.00 | -0.17 |
-| `v6full_deliberation` | 1.17 | 1.00 | -0.17 |
 | `slot_institutional_en_v3_abstraction` | 2.40 | 2.33 | -0.07 |
 | `slot_institutional_en_v3_mediation` | 1.00 | 1.00 | +0.00 |
 | `v6_fit` | 7.00 | 7.00 | +0.00 |
 | `v6_hedged` | 1.00 | 1.00 | +0.00 |
 | `v6_interiority` | 1.00 | 1.00 | +0.00 |
 | `v6_superego` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_fit` | 7.00 | 7.00 | +0.00 |
-| `v6_wide_hedged` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_interiority` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_superego` | 1.00 | 1.00 | +0.00 |
-| `v6full_fit` | 7.00 | 7.00 | +0.00 |
-| `v6full_hedged` | 1.00 | 1.00 | +0.00 |
-| `v6full_interiority` | 1.00 | 1.00 | +0.00 |
-| `v6full_superego` | 1.00 | 1.00 | +0.00 |
 | arousal (Warriner) | 5.13 | 5.15 | +0.02 |
 | dominance (Warriner) | 4.40 | 4.49 | +0.08 |
 | valence (Warriner) | 4.48 | 4.63 | +0.16 |
@@ -2711,13 +2189,9 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | valence (lexicon) | 2.80 | 3.00 | +0.20 |
 | `slot_institutional_en_v3_delay` | 1.00 | 1.33 | +0.33 |
 | `v6_makes_better` | 1.00 | 1.33 | +0.33 |
-| `v6_wide_makes_better` | 1.00 | 1.33 | +0.33 |
-| `v6full_makes_better` | 1.00 | 1.33 | +0.33 |
 | `slot_institutional_en_v3_deference` | 1.40 | 2.00 | +0.60 |
 | `slot_institutional_en_v3_procedural` | 1.20 | 2.00 | +0.80 |
 | `v6_mundanity` | 1.50 | 2.33 | +0.83 |
-| `v6_wide_mundanity` | 1.50 | 2.33 | +0.83 |
-| `v6full_mundanity` | 1.50 | 2.33 | +0.83 |
 | concreteness (Brysbaert) | 3.13 | 4.49 | +1.36 |
 | bodily harm (lexicon) | 1.00 | 2.50 | +1.50 |
 | register level (lexicon) | 2.00 | 3.50 | +1.50 |
@@ -2752,10 +2226,6 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | `slot_institutional_en_v3_termination` | 1.00 | 1.00 | +0.00 |
 | `v6_aggression` | 1.00 | 1.00 | +0.00 |
 | `v6_harm` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_aggression` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_harm` | 1.00 | 1.00 | +0.00 |
-| `v6full_aggression` | 1.00 | 1.00 | +0.00 |
-| `v6full_harm` | 1.00 | 1.00 | +0.00 |
 | bodily harm (lexicon) | 1.00 | 1.00 | +0.00 |
 | charge (lexicon) | 1.00 | 1.00 | +0.00 |
 | register level (lexicon) | 4.00 | 4.00 | +0.00 |
@@ -2763,8 +2233,6 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | valence (lexicon) | 4.00 | 4.00 | +0.00 |
 | vulgarity (lexicon) | 1.00 | 1.00 | +0.00 |
 | `v6_makes_worse` | 1.14 | 1.40 | +0.26 |
-| `v6_wide_makes_worse` | 1.14 | 1.40 | +0.26 |
-| `v6full_makes_worse` | 1.14 | 1.40 | +0.26 |
 | `slot_institutional_en_v3_mediation` | 4.00 | 4.33 | +0.33 |
 | `slot_institutional_en_v3_procedural` | 5.00 | 5.33 | +0.33 |
 | **charge, in frame** (`task_charge`) | 3.20 | 3.60 | +0.39 |
@@ -2772,36 +2240,18 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | `slot_institutional_en_v3_delay` | 3.00 | 3.67 | +0.67 |
 | `slot_institutional_en_v3_abstraction` | 4.00 | 4.67 | +0.67 |
 | `v6_hedged` | 2.86 | 3.80 | +0.94 |
-| `v6_wide_hedged` | 2.86 | 3.80 | +0.94 |
-| `v6full_hedged` | 2.86 | 3.80 | +0.94 |
 | `slot_institutional_en_v3_deference` | 4.00 | 5.00 | +1.00 |
 | `v6_vocalisation` | 1.00 | 2.00 | +1.00 |
-| `v6_wide_vocalisation` | 1.00 | 2.00 | +1.00 |
-| `v6full_vocalisation` | 1.00 | 2.00 | +1.00 |
 | `v6_superego` | 1.57 | 2.60 | +1.03 |
-| `v6_wide_superego` | 1.57 | 2.60 | +1.03 |
-| `v6full_superego` | 1.57 | 2.60 | +1.03 |
 | concreteness (lexicon) | 1.43 | 2.60 | +1.17 |
 | `slot_institutional_en_v3_vocalisation` | 1.00 | 2.33 | +1.33 |
 | `v6_makes_better` | 1.86 | 3.40 | +1.54 |
-| `v6_wide_makes_better` | 1.86 | 3.40 | +1.54 |
-| `v6full_makes_better` | 1.86 | 3.40 | +1.54 |
 | `v6_mundanity` | 3.00 | 4.60 | +1.60 |
-| `v6_wide_mundanity` | 3.00 | 4.60 | +1.60 |
-| `v6full_mundanity` | 3.00 | 4.60 | +1.60 |
 | `v6_directedness` | 1.00 | 2.60 | +1.60 |
-| `v6_wide_directedness` | 1.00 | 2.60 | +1.60 |
-| `v6full_directedness` | 1.00 | 2.60 | +1.60 |
 | `slot_institutional_en_v3_specificity` | 2.00 | 3.67 | +1.67 |
 | `v6_deliberation` | 2.00 | 4.00 | +2.00 |
-| `v6_wide_deliberation` | 2.00 | 4.00 | +2.00 |
-| `v6full_deliberation` | 2.00 | 4.00 | +2.00 |
 | `v6_interiority` | 1.86 | 4.00 | +2.14 |
-| `v6_wide_interiority` | 1.86 | 4.00 | +2.14 |
-| `v6full_interiority` | 1.86 | 4.00 | +2.14 |
 | `v6_fit` | 2.71 | 6.00 | +3.29 |
-| `v6_wide_fit` | 2.71 | 6.00 | +3.29 |
-| `v6full_fit` | 2.71 | 6.00 | +3.29 |
 
 > One side supplies a specific act the speaker could perform (such as filing, contacting, or considering), while the other side supplies a general verb or a stance/continuation word that does not name a distinct act.
 
@@ -2828,19 +2278,13 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | arousal (Warriner) | 4.64 | 3.41 | -1.23 |
 | `slot_institutional_en_v3_mediation` | 4.00 | 3.62 | -0.38 |
 | `v6_makes_worse` | 1.25 | 1.00 | -0.25 |
-| `v6_wide_makes_worse` | 1.25 | 1.00 | -0.25 |
-| `v6full_makes_worse` | 1.25 | 1.00 | -0.25 |
 | dominance (Warriner) | 5.94 | 5.71 | -0.22 |
 | **charge, in frame** (`task_charge`) | 2.54 | 2.41 | -0.13 |
 | `v6_aggression` | 1.12 | 1.00 | -0.12 |
-| `v6_wide_aggression` | 1.12 | 1.00 | -0.12 |
-| `v6full_aggression` | 1.12 | 1.00 | -0.12 |
 | transgressiveness (lexicon) | 1.12 | 1.00 | -0.12 |
 | register level (lexicon) | 4.00 | 3.89 | -0.11 |
 | `slot_institutional_en_v3_collective` | 1.00 | 1.00 | +0.00 |
 | `v6_harm` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_harm` | 1.00 | 1.00 | +0.00 |
-| `v6full_harm` | 1.00 | 1.00 | +0.00 |
 | bodily harm (lexicon) | 1.00 | 1.00 | +0.00 |
 | vulgarity (lexicon) | 1.00 | 1.00 | +0.00 |
 | valence (lexicon) | 3.88 | 4.00 | +0.12 |
@@ -2848,37 +2292,19 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | concreteness (Brysbaert) | 2.47 | 2.97 | +0.49 |
 | valence (Warriner) | 5.59 | 6.13 | +0.54 |
 | `v6_superego` | 1.25 | 1.88 | +0.62 |
-| `v6_wide_superego` | 1.25 | 1.89 | +0.64 |
-| `v6full_superego` | 1.25 | 1.89 | +0.64 |
 | concreteness (lexicon) | 1.75 | 2.44 | +0.69 |
 | `v6_deliberation` | 2.00 | 3.00 | +1.00 |
-| `v6_wide_deliberation` | 2.00 | 3.11 | +1.11 |
-| `v6full_deliberation` | 2.00 | 3.11 | +1.11 |
 | `slot_institutional_en_v3_abstraction` | 3.00 | 4.12 | +1.12 |
 | `slot_institutional_en_v3_target` | 2.50 | 3.62 | +1.12 |
-| `v6_wide_hedged` | 2.50 | 3.67 | +1.17 |
-| `v6full_hedged` | 2.50 | 3.67 | +1.17 |
 | `slot_institutional_en_v3_delay` | 2.00 | 3.25 | +1.25 |
 | `v6_hedged` | 2.50 | 3.75 | +1.25 |
 | `v6_makes_better` | 2.25 | 3.62 | +1.38 |
-| `v6_wide_makes_better` | 2.25 | 3.67 | +1.42 |
-| `v6full_makes_better` | 2.25 | 3.67 | +1.42 |
-| `v6_wide_interiority` | 1.50 | 3.22 | +1.72 |
-| `v6full_interiority` | 1.50 | 3.22 | +1.72 |
 | `v6_interiority` | 1.50 | 3.38 | +1.88 |
-| `v6_wide_mundanity` | 3.12 | 5.33 | +2.21 |
-| `v6full_mundanity` | 3.12 | 5.33 | +2.21 |
 | `slot_institutional_en_v3_deference` | 2.50 | 4.75 | +2.25 |
 | `v6_mundanity` | 3.12 | 5.38 | +2.25 |
-| `v6_wide_directedness` | 1.75 | 4.11 | +2.36 |
-| `v6full_directedness` | 1.75 | 4.11 | +2.36 |
 | `v6_vocalisation` | 1.00 | 3.38 | +2.38 |
-| `v6_wide_vocalisation` | 1.00 | 3.44 | +2.44 |
-| `v6full_vocalisation` | 1.00 | 3.44 | +2.44 |
 | `slot_institutional_en_v3_procedural` | 3.00 | 5.50 | +2.50 |
 | `v6_directedness` | 1.75 | 4.25 | +2.50 |
-| `v6_wide_fit` | 3.50 | 6.11 | +2.61 |
-| `v6full_fit` | 3.50 | 6.11 | +2.61 |
 | `slot_institutional_en_v3_vocalisation` | 1.00 | 3.62 | +2.62 |
 | `v6_fit` | 3.50 | 6.12 | +2.62 |
 
@@ -2949,63 +2375,39 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | `slot_institutional_en_v3_agency` | 3.69 | 3.20 | -0.49 |
 | `slot_institutional_en_v3_assertiveness` | 3.08 | 2.60 | -0.48 |
 | `v6_makes_worse` | 1.47 | 1.00 | -0.47 |
-| `v6_wide_makes_worse` | 1.47 | 1.00 | -0.47 |
-| `v6full_makes_worse` | 1.47 | 1.00 | -0.47 |
 | concreteness (lexicon) | 2.53 | 2.09 | -0.44 |
 | `slot_institutional_en_v3_specificity` | 3.54 | 3.10 | -0.44 |
 | `slot_institutional_en_v3_arousal` | 2.54 | 2.20 | -0.34 |
 | concreteness (Brysbaert) | 2.68 | 2.40 | -0.28 |
 | **charge, in frame** (`task_charge`) | 2.11 | 1.94 | -0.17 |
 | `v6_aggression` | 1.06 | 1.00 | -0.06 |
-| `v6_wide_aggression` | 1.06 | 1.00 | -0.06 |
-| `v6full_aggression` | 1.06 | 1.00 | -0.06 |
 | bodily harm (lexicon) | 1.06 | 1.00 | -0.06 |
 | transgressiveness (lexicon) | 1.12 | 1.09 | -0.03 |
 | `slot_institutional_en_v3_target` | 4.00 | 4.00 | +0.00 |
 | `v6_harm` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_harm` | 1.00 | 1.00 | +0.00 |
-| `v6full_harm` | 1.00 | 1.00 | +0.00 |
 | vulgarity (lexicon) | 1.00 | 1.00 | +0.00 |
 | dominance (Warriner) | 5.61 | 5.72 | +0.10 |
 | register level (lexicon) | 3.94 | 4.09 | +0.15 |
 | `v6_mundanity` | 4.47 | 4.64 | +0.17 |
-| `v6_wide_mundanity` | 4.47 | 4.64 | +0.17 |
-| `v6full_mundanity` | 4.47 | 4.64 | +0.17 |
 | `slot_institutional_en_v3_delay` | 2.23 | 2.40 | +0.17 |
 | `v6_hedged` | 3.00 | 3.18 | +0.18 |
-| `v6_wide_hedged` | 3.00 | 3.18 | +0.18 |
-| `v6full_hedged` | 3.00 | 3.18 | +0.18 |
 | `slot_institutional_en_v3_procedural` | 5.15 | 5.40 | +0.25 |
 | arousal (Warriner) | 3.60 | 3.89 | +0.29 |
 | `v6_deliberation` | 1.41 | 1.73 | +0.32 |
-| `v6_wide_deliberation` | 1.41 | 1.73 | +0.32 |
-| `v6full_deliberation` | 1.41 | 1.73 | +0.32 |
 | `slot_institutional_en_v3_collective` | 1.08 | 1.40 | +0.32 |
 | `v6_interiority` | 1.12 | 1.45 | +0.34 |
-| `v6_wide_interiority` | 1.12 | 1.45 | +0.34 |
-| `v6full_interiority` | 1.12 | 1.45 | +0.34 |
 | charge (lexicon) | 1.18 | 1.55 | +0.37 |
 | valence (Warriner) | 5.39 | 5.84 | +0.45 |
 | `v6_directedness` | 2.12 | 2.64 | +0.52 |
-| `v6_wide_directedness` | 2.12 | 2.64 | +0.52 |
-| `v6full_directedness` | 2.12 | 2.64 | +0.52 |
 | valence (lexicon) | 3.88 | 4.45 | +0.57 |
 | `slot_institutional_en_v3_mediation` | 2.31 | 3.00 | +0.69 |
 | `slot_institutional_en_v3_abstraction` | 3.00 | 3.70 | +0.70 |
 | `slot_institutional_en_v3_deference` | 4.08 | 4.80 | +0.72 |
 | `slot_institutional_en_v3_vocalisation` | 2.54 | 3.60 | +1.06 |
 | `v6_superego` | 1.29 | 2.36 | +1.07 |
-| `v6_wide_superego` | 1.29 | 2.36 | +1.07 |
-| `v6full_superego` | 1.29 | 2.36 | +1.07 |
 | `v6_makes_better` | 2.71 | 4.27 | +1.57 |
-| `v6_wide_makes_better` | 2.71 | 4.27 | +1.57 |
-| `v6full_makes_better` | 2.71 | 4.27 | +1.57 |
 | `v6_vocalisation` | 1.88 | 3.55 | +1.66 |
-| `v6_wide_vocalisation` | 1.88 | 3.55 | +1.66 |
-| `v6full_vocalisation` | 1.88 | 3.55 | +1.66 |
 | `v6_fit` | 4.59 | 6.55 | +1.96 |
-| `v6_wide_fit` | 4.59 | 6.55 | +1.96 |
-| `v6full_fit` | 4.59 | 6.55 | +1.96 |
 
 > One group names concrete remedial or procedural steps taken in reaction to a complaint, while the other names communicative replies or temporal framing of the response.
 
@@ -3251,8 +2653,6 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | **charge, in frame** (`task_charge`) | 4.89 | 3.47 | -1.42 |
 | charge (lexicon) | 2.00 | 1.00 | -1.00 |
 | `v6_directedness` | 4.22 | 3.25 | -0.97 |
-| `v6_wide_directedness` | 4.22 | 3.25 | -0.97 |
-| `v6full_directedness` | 4.22 | 3.25 | -0.97 |
 | `sexual_v2_charge` | 4.89 | 4.00 | -0.89 |
 | `sexual_v2_incorporation` | 2.56 | 1.75 | -0.81 |
 | `sexual_v2_genitality` | 1.67 | 1.00 | -0.67 |
@@ -3277,46 +2677,24 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | `v6_hedged` | 1.00 | 1.00 | +0.00 |
 | `v6_makes_worse` | 1.00 | 1.00 | +0.00 |
 | `v6_superego` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_aggression` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_fit` | 7.00 | 7.00 | +0.00 |
-| `v6_wide_harm` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_hedged` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_makes_worse` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_superego` | 1.00 | 1.00 | +0.00 |
-| `v6full_aggression` | 1.00 | 1.00 | +0.00 |
-| `v6full_fit` | 7.00 | 7.00 | +0.00 |
-| `v6full_harm` | 1.00 | 1.00 | +0.00 |
-| `v6full_hedged` | 1.00 | 1.00 | +0.00 |
-| `v6full_makes_worse` | 1.00 | 1.00 | +0.00 |
-| `v6full_superego` | 1.00 | 1.00 | +0.00 |
 | bodily harm (lexicon) | 1.00 | 1.00 | +0.00 |
 | transgressiveness (lexicon) | 1.00 | 1.00 | +0.00 |
 | valence (lexicon) | 4.00 | 4.00 | +0.00 |
 | `v6_makes_better` | 4.22 | 4.25 | +0.03 |
-| `v6_wide_makes_better` | 4.22 | 4.25 | +0.03 |
-| `v6full_makes_better` | 4.22 | 4.25 | +0.03 |
 | `slot_institutional_en_v3_specificity` | 6.44 | 6.50 | +0.06 |
 | concreteness (Brysbaert) | 4.89 | 4.96 | +0.08 |
 | `v6_interiority` | 1.89 | 2.00 | +0.11 |
-| `v6_wide_interiority` | 1.89 | 2.00 | +0.11 |
-| `v6full_interiority` | 1.89 | 2.00 | +0.11 |
 | concreteness (lexicon) | 6.83 | 7.00 | +0.17 |
 | valence (Warriner) | 5.48 | 5.67 | +0.19 |
 | `v6_deliberation` | 1.78 | 2.00 | +0.22 |
-| `v6_wide_deliberation` | 1.78 | 2.00 | +0.22 |
-| `v6full_deliberation` | 1.78 | 2.00 | +0.22 |
 | `slot_institutional_en_v3_vocalisation` | 1.00 | 1.25 | +0.25 |
 | `v6_vocalisation` | 1.00 | 1.25 | +0.25 |
-| `v6_wide_vocalisation` | 1.00 | 1.25 | +0.25 |
-| `v6full_vocalisation` | 1.00 | 1.25 | +0.25 |
 | `slot_institutional_en_v3_deference` | 3.67 | 4.00 | +0.33 |
 | `slot_institutional_en_v3_procedural` | 1.33 | 1.75 | +0.42 |
 | register level (lexicon) | 3.50 | 4.00 | +0.50 |
 | dominance (Warriner) | 5.36 | 5.90 | +0.54 |
 | `sexual_v2_body_distance` | 2.67 | 3.50 | +0.83 |
 | `v6_mundanity` | 3.22 | 4.25 | +1.03 |
-| `v6_wide_mundanity` | 3.22 | 4.25 | +1.03 |
-| `v6full_mundanity` | 3.22 | 4.25 | +1.03 |
 | `sexual_v2_euphemism` | 2.78 | 4.00 | +1.22 |
 
 > The blank is filled by a body part that serves as the target of the placement; the two groups differ in which body parts are treated as the endpoint of the action.
@@ -3337,30 +2715,18 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | scale | base | aligned | delta |
 |---|---|---|---|
 | `v6_directedness` | 3.40 | 1.00 | -2.40 |
-| `v6_wide_directedness` | 3.40 | 1.00 | -2.40 |
-| `v6full_directedness` | 3.40 | 1.00 | -2.40 |
 | `v6_fit` | 7.00 | 5.29 | -1.71 |
-| `v6_wide_fit` | 7.00 | 5.29 | -1.71 |
-| `v6full_fit` | 7.00 | 5.29 | -1.71 |
 | **charge, in frame** (`task_charge`) | 2.62 | 1.01 | -1.61 |
 | `slot_institutional_en_v3_arousal` | 3.80 | 2.33 | -1.47 |
 | concreteness (lexicon) | 6.00 | 4.71 | -1.29 |
 | concreteness (Brysbaert) | 4.79 | 3.68 | -1.11 |
 | `v6_makes_better` | 3.20 | 2.57 | -0.63 |
-| `v6_wide_makes_better` | 3.20 | 2.57 | -0.63 |
-| `v6full_makes_better` | 3.20 | 2.57 | -0.63 |
 | `slot_institutional_en_v3_agency` | 4.40 | 4.00 | -0.40 |
 | `slot_institutional_en_v3_specificity` | 5.40 | 5.00 | -0.40 |
 | `slot_institutional_en_v3_assertiveness` | 3.40 | 3.00 | -0.40 |
 | `v6_deliberation` | 1.40 | 1.00 | -0.40 |
 | `v6_makes_worse` | 1.40 | 1.00 | -0.40 |
 | `v6_superego` | 1.40 | 1.00 | -0.40 |
-| `v6_wide_deliberation` | 1.40 | 1.00 | -0.40 |
-| `v6_wide_makes_worse` | 1.40 | 1.00 | -0.40 |
-| `v6_wide_superego` | 1.40 | 1.00 | -0.40 |
-| `v6full_deliberation` | 1.40 | 1.00 | -0.40 |
-| `v6full_makes_worse` | 1.40 | 1.00 | -0.40 |
-| `v6full_superego` | 1.40 | 1.00 | -0.40 |
 | dominance (Warriner) | 5.76 | 5.48 | -0.28 |
 | `slot_institutional_en_v3_abstraction` | 1.80 | 1.67 | -0.13 |
 | `slot_institutional_en_v3_collective` | 1.00 | 1.00 | +0.00 |
@@ -3373,24 +2739,12 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | `v6_harm` | 1.00 | 1.00 | +0.00 |
 | `v6_hedged` | 1.00 | 1.00 | +0.00 |
 | `v6_vocalisation` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_aggression` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_harm` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_hedged` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_vocalisation` | 1.00 | 1.00 | +0.00 |
-| `v6full_aggression` | 1.00 | 1.00 | +0.00 |
-| `v6full_harm` | 1.00 | 1.00 | +0.00 |
-| `v6full_hedged` | 1.00 | 1.00 | +0.00 |
-| `v6full_vocalisation` | 1.00 | 1.00 | +0.00 |
 | bodily harm (lexicon) | 1.00 | 1.00 | +0.00 |
 | register level (lexicon) | 4.00 | 4.00 | +0.00 |
 | transgressiveness (lexicon) | 1.00 | 1.00 | +0.00 |
 | vulgarity (lexicon) | 1.00 | 1.00 | +0.00 |
 | `v6_mundanity` | 4.80 | 4.86 | +0.06 |
-| `v6_wide_mundanity` | 4.80 | 4.86 | +0.06 |
-| `v6full_mundanity` | 4.80 | 4.86 | +0.06 |
 | `v6_interiority` | 1.00 | 1.14 | +0.14 |
-| `v6_wide_interiority` | 1.00 | 1.14 | +0.14 |
-| `v6full_interiority` | 1.00 | 1.14 | +0.14 |
 | charge (lexicon) | 1.00 | 1.29 | +0.29 |
 | arousal (Warriner) | 4.62 | 5.02 | +0.40 |
 | `slot_institutional_en_v3_target` | 6.40 | 7.00 | +0.60 |
@@ -3425,8 +2779,6 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | arousal (Warriner) | 5.00 | 4.55 | -0.45 |
 | `slot_institutional_en_v3_specificity` | 4.67 | 4.38 | -0.29 |
 | `v6_makes_worse` | 4.00 | 3.89 | -0.11 |
-| `v6_wide_makes_worse` | 4.00 | 3.89 | -0.11 |
-| `v6full_makes_worse` | 4.00 | 3.89 | -0.11 |
 | `slot_institutional_en_v3_collective` | 1.00 | 1.00 | +0.00 |
 | `slot_institutional_en_v3_delay` | 1.00 | 1.00 | +0.00 |
 | `slot_institutional_en_v3_mediation` | 1.00 | 1.00 | +0.00 |
@@ -3441,37 +2793,15 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | `v6_interiority` | 1.00 | 1.00 | +0.00 |
 | `v6_superego` | 1.00 | 1.00 | +0.00 |
 | `v6_vocalisation` | 7.00 | 7.00 | +0.00 |
-| `v6_wide_deliberation` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_directedness` | 7.00 | 7.00 | +0.00 |
-| `v6_wide_harm` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_hedged` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_interiority` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_superego` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_vocalisation` | 7.00 | 7.00 | +0.00 |
-| `v6full_deliberation` | 1.00 | 1.00 | +0.00 |
-| `v6full_directedness` | 7.00 | 7.00 | +0.00 |
-| `v6full_harm` | 1.00 | 1.00 | +0.00 |
-| `v6full_hedged` | 1.00 | 1.00 | +0.00 |
-| `v6full_interiority` | 1.00 | 1.00 | +0.00 |
-| `v6full_superego` | 1.00 | 1.00 | +0.00 |
-| `v6full_vocalisation` | 7.00 | 7.00 | +0.00 |
 | bodily harm (lexicon) | 1.00 | 1.00 | +0.00 |
 | `v6_fit` | 6.75 | 6.78 | +0.03 |
-| `v6_wide_fit` | 6.75 | 6.78 | +0.03 |
-| `v6full_fit` | 6.75 | 6.78 | +0.03 |
 | `v6_mundanity` | 3.50 | 3.56 | +0.06 |
-| `v6_wide_mundanity` | 3.50 | 3.56 | +0.06 |
-| `v6full_mundanity` | 3.50 | 3.56 | +0.06 |
 | `slot_institutional_en_v3_agency` | 5.17 | 5.25 | +0.08 |
 | dominance (Warriner) | 4.31 | 4.45 | +0.13 |
 | `v6_aggression` | 5.62 | 5.78 | +0.15 |
-| `v6_wide_aggression` | 5.62 | 5.78 | +0.15 |
-| `v6full_aggression` | 5.62 | 5.78 | +0.15 |
 | `slot_institutional_en_v3_arousal` | 6.33 | 6.50 | +0.17 |
 | `slot_institutional_en_v3_assertiveness` | 6.33 | 6.50 | +0.17 |
 | `v6_makes_better` | 1.12 | 1.33 | +0.21 |
-| `v6_wide_makes_better` | 1.12 | 1.33 | +0.21 |
-| `v6full_makes_better` | 1.12 | 1.33 | +0.21 |
 | `slot_institutional_en_v3_abstraction` | 1.33 | 1.88 | +0.54 |
 | charge (lexicon) | 3.43 | 4.00 | +0.57 |
 | valence (lexicon) | 2.71 | 3.50 | +0.79 |
@@ -3550,38 +2880,24 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | scale | base | aligned | delta |
 |---|---|---|---|
 | `v6_makes_worse` | 3.75 | 1.25 | -2.50 |
-| `v6_wide_makes_worse` | 3.75 | 1.25 | -2.50 |
-| `v6full_makes_worse` | 3.75 | 1.25 | -2.50 |
 | `v6_harm` | 3.62 | 1.25 | -2.38 |
-| `v6_wide_harm` | 3.62 | 1.25 | -2.38 |
-| `v6full_harm` | 3.62 | 1.25 | -2.38 |
 | `v6_fit` | 6.62 | 4.50 | -2.12 |
-| `v6_wide_fit` | 6.62 | 4.50 | -2.12 |
-| `v6full_fit` | 6.62 | 4.50 | -2.12 |
 | **charge, in frame** (`task_charge`) | 3.33 | 1.65 | -1.68 |
 | bodily harm (lexicon) | 2.80 | 1.14 | -1.66 |
 | concreteness (lexicon) | 6.20 | 4.86 | -1.34 |
 | `slot_institutional_en_v3_arousal` | 3.00 | 1.75 | -1.25 |
 | `v6_directedness` | 2.12 | 1.00 | -1.12 |
-| `v6_wide_directedness` | 2.12 | 1.00 | -1.12 |
-| `v6full_directedness` | 2.12 | 1.00 | -1.12 |
 | concreteness (Brysbaert) | 4.67 | 3.63 | -1.03 |
 | charge (lexicon) | 2.40 | 1.57 | -0.83 |
 | arousal (Warriner) | 5.22 | 4.72 | -0.50 |
 | `v6_aggression` | 1.50 | 1.00 | -0.50 |
-| `v6_wide_aggression` | 1.50 | 1.00 | -0.50 |
-| `v6full_aggression` | 1.50 | 1.00 | -0.50 |
 | transgressiveness (lexicon) | 1.60 | 1.14 | -0.46 |
 | `slot_institutional_en_v3_agency` | 3.12 | 2.75 | -0.38 |
 | `slot_institutional_en_v3_assertiveness` | 2.50 | 2.25 | -0.25 |
 | `v6_interiority` | 1.88 | 1.62 | -0.25 |
-| `v6_wide_interiority` | 1.88 | 1.62 | -0.25 |
-| `v6full_interiority` | 1.88 | 1.62 | -0.25 |
 | `slot_institutional_en_v3_collective` | 1.12 | 1.00 | -0.12 |
 | `slot_institutional_en_v3_termination` | 1.12 | 1.00 | -0.12 |
 | `v6_superego` | 1.12 | 1.00 | -0.12 |
-| `v6_wide_superego` | 1.12 | 1.00 | -0.12 |
-| `v6full_superego` | 1.12 | 1.00 | -0.12 |
 | dominance (Warriner) | 5.14 | 5.04 | -0.10 |
 | `slot_institutional_en_v3_abstraction` | 2.00 | 2.00 | +0.00 |
 | `slot_institutional_en_v3_delay` | 1.00 | 1.00 | +0.00 |
@@ -3590,24 +2906,14 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | `slot_institutional_en_v3_vocalisation` | 5.25 | 5.25 | +0.00 |
 | `v6_deliberation` | 1.00 | 1.00 | +0.00 |
 | `v6_hedged` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_deliberation` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_hedged` | 1.00 | 1.00 | +0.00 |
-| `v6full_deliberation` | 1.00 | 1.00 | +0.00 |
-| `v6full_hedged` | 1.00 | 1.00 | +0.00 |
 | vulgarity (lexicon) | 1.00 | 1.00 | +0.00 |
 | `slot_institutional_en_v3_deference` | 4.12 | 4.25 | +0.12 |
 | `slot_institutional_en_v3_procedural` | 4.12 | 4.25 | +0.12 |
 | register level (lexicon) | 4.00 | 4.14 | +0.14 |
 | `v6_vocalisation` | 2.75 | 3.00 | +0.25 |
-| `v6_wide_vocalisation` | 2.75 | 3.00 | +0.25 |
-| `v6full_vocalisation` | 2.75 | 3.00 | +0.25 |
 | `slot_institutional_en_v3_target` | 2.12 | 2.50 | +0.38 |
 | `v6_makes_better` | 1.75 | 2.38 | +0.62 |
 | `v6_mundanity` | 3.38 | 4.00 | +0.62 |
-| `v6_wide_makes_better` | 1.75 | 2.38 | +0.62 |
-| `v6_wide_mundanity` | 3.38 | 4.00 | +0.62 |
-| `v6full_makes_better` | 1.75 | 2.38 | +0.62 |
-| `v6full_mundanity` | 3.38 | 4.00 | +0.62 |
 | valence (Warriner) | 4.25 | 5.40 | +1.15 |
 | valence (lexicon) | 3.00 | 4.43 | +1.43 |
 
@@ -3709,24 +3015,6 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | `v6_makes_worse` | 1.00 | 1.00 | +0.00 |
 | `v6_superego` | 1.00 | 1.00 | +0.00 |
 | `v6_vocalisation` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_aggression` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_deliberation` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_directedness` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_fit` | 7.00 | 7.00 | +0.00 |
-| `v6_wide_harm` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_hedged` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_makes_worse` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_superego` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_vocalisation` | 1.00 | 1.00 | +0.00 |
-| `v6full_aggression` | 1.00 | 1.00 | +0.00 |
-| `v6full_deliberation` | 1.00 | 1.00 | +0.00 |
-| `v6full_directedness` | 1.00 | 1.00 | +0.00 |
-| `v6full_fit` | 7.00 | 7.00 | +0.00 |
-| `v6full_harm` | 1.00 | 1.00 | +0.00 |
-| `v6full_hedged` | 1.00 | 1.00 | +0.00 |
-| `v6full_makes_worse` | 1.00 | 1.00 | +0.00 |
-| `v6full_superego` | 1.00 | 1.00 | +0.00 |
-| `v6full_vocalisation` | 1.00 | 1.00 | +0.00 |
 | bodily harm (lexicon) | 1.00 | 1.00 | +0.00 |
 | register level (lexicon) | 4.00 | 4.00 | +0.00 |
 | transgressiveness (lexicon) | 1.00 | 1.00 | +0.00 |
@@ -3738,14 +3026,8 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | valence (Warriner) | 5.95 | 6.94 | +0.99 |
 | `slot_institutional_en_v3_assertiveness` | 1.00 | 2.00 | +1.00 |
 | `v6_interiority` | 1.00 | 2.00 | +1.00 |
-| `v6_wide_interiority` | 1.00 | 2.00 | +1.00 |
-| `v6full_interiority` | 1.00 | 2.00 | +1.00 |
 | `v6_makes_better` | 3.00 | 4.33 | +1.33 |
-| `v6_wide_makes_better` | 3.00 | 4.33 | +1.33 |
-| `v6full_makes_better` | 3.00 | 4.33 | +1.33 |
 | `v6_mundanity` | 4.00 | 5.67 | +1.67 |
-| `v6_wide_mundanity` | 4.00 | 5.67 | +1.67 |
-| `v6full_mundanity` | 4.00 | 5.67 | +1.67 |
 | `sexual_v2_euphemism` | 2.25 | 4.00 | +1.75 |
 | `slot_institutional_en_v3_agency` | 1.00 | 3.00 | +2.00 |
 | `sexual_v2_body_distance` | 2.00 | 4.67 | +2.67 |
@@ -3769,8 +3051,6 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | scale | base | aligned | delta |
 |---|---|---|---|
 | `v6_directedness` | 6.00 | 2.50 | -3.50 |
-| `v6_wide_directedness` | 6.00 | 2.50 | -3.50 |
-| `v6full_directedness` | 6.00 | 2.50 | -3.50 |
 | `slot_institutional_en_v3_arousal` | 6.00 | 3.25 | -2.75 |
 | `sexual_v2_charge` | 5.00 | 3.00 | -2.00 |
 | `slot_institutional_en_v3_agency` | 7.00 | 5.50 | -1.50 |
@@ -3783,8 +3063,6 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | `sexual_v2_exposure` | 3.80 | 3.00 | -0.80 |
 | `slot_institutional_en_v3_specificity` | 7.00 | 6.25 | -0.75 |
 | `v6_makes_better` | 3.33 | 3.00 | -0.33 |
-| `v6_wide_makes_better` | 3.33 | 3.00 | -0.33 |
-| `v6full_makes_better` | 3.33 | 3.00 | -0.33 |
 | `sexual_v2_euphemism` | 4.20 | 4.00 | -0.20 |
 | charge (lexicon) | 1.17 | 1.00 | -0.17 |
 | arousal (Warriner) | 3.67 | 3.56 | -0.10 |
@@ -3806,22 +3084,6 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | `v6_makes_worse` | 1.00 | 1.00 | +0.00 |
 | `v6_superego` | 1.00 | 1.00 | +0.00 |
 | `v6_vocalisation` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_aggression` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_deliberation` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_harm` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_hedged` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_interiority` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_makes_worse` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_superego` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_vocalisation` | 1.00 | 1.00 | +0.00 |
-| `v6full_aggression` | 1.00 | 1.00 | +0.00 |
-| `v6full_deliberation` | 1.00 | 1.00 | +0.00 |
-| `v6full_harm` | 1.00 | 1.00 | +0.00 |
-| `v6full_hedged` | 1.00 | 1.00 | +0.00 |
-| `v6full_interiority` | 1.00 | 1.00 | +0.00 |
-| `v6full_makes_worse` | 1.00 | 1.00 | +0.00 |
-| `v6full_superego` | 1.00 | 1.00 | +0.00 |
-| `v6full_vocalisation` | 1.00 | 1.00 | +0.00 |
 | bodily harm (lexicon) | 1.00 | 1.00 | +0.00 |
 | concreteness (lexicon) | 7.00 | 7.00 | +0.00 |
 | transgressiveness (lexicon) | 1.00 | 1.00 | +0.00 |
@@ -3832,13 +3094,9 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | register level (lexicon) | 3.67 | 4.00 | +0.33 |
 | dominance (Warriner) | 5.81 | 6.33 | +0.51 |
 | `v6_fit` | 6.00 | 7.00 | +1.00 |
-| `v6_wide_fit` | 6.00 | 7.00 | +1.00 |
-| `v6full_fit` | 6.00 | 7.00 | +1.00 |
 | `sexual_v2_body_distance` | 2.20 | 3.67 | +1.47 |
 | `slot_institutional_en_v3_procedural` | 1.00 | 3.25 | +2.25 |
 | `v6_mundanity` | 2.83 | 5.75 | +2.92 |
-| `v6_wide_mundanity` | 2.83 | 5.75 | +2.92 |
-| `v6full_mundanity` | 2.83 | 5.75 | +2.92 |
 
 > One group names items worn on the lower body or the fastening of such an item, while the other names an upper-body garment or a carried container.
 
@@ -3903,46 +3161,28 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | bodily harm (lexicon) | 4.00 | 2.91 | -1.09 |
 | `slot_institutional_en_v3_target` | 4.62 | 3.69 | -0.93 |
 | `v6_harm` | 3.80 | 3.08 | -0.72 |
-| `v6_wide_harm` | 3.80 | 3.08 | -0.72 |
-| `v6full_harm` | 3.80 | 3.08 | -0.72 |
 | `slot_institutional_en_v3_delay` | 2.00 | 1.62 | -0.38 |
 | transgressiveness (lexicon) | 2.80 | 2.45 | -0.35 |
 | `v6_interiority` | 2.30 | 2.00 | -0.30 |
-| `v6_wide_interiority` | 2.30 | 2.00 | -0.30 |
-| `v6full_interiority` | 2.30 | 2.00 | -0.30 |
 | `slot_institutional_en_v3_procedural` | 1.38 | 1.08 | -0.30 |
 | **charge, in frame** (`task_charge`) | 4.87 | 4.62 | -0.25 |
 | `v6_makes_worse` | 5.00 | 4.77 | -0.23 |
-| `v6_wide_makes_worse` | 5.00 | 4.77 | -0.23 |
-| `v6full_makes_worse` | 5.00 | 4.77 | -0.23 |
 | `slot_institutional_en_v3_deference` | 1.38 | 1.15 | -0.22 |
 | `v6_makes_better` | 1.20 | 1.00 | -0.20 |
-| `v6_wide_makes_better` | 1.20 | 1.00 | -0.20 |
-| `v6full_makes_better` | 1.20 | 1.00 | -0.20 |
 | valence (Warriner) | 4.00 | 3.80 | -0.19 |
 | register level (lexicon) | 3.80 | 3.64 | -0.16 |
 | `v6_deliberation` | 1.20 | 1.08 | -0.12 |
 | `v6_hedged` | 1.20 | 1.08 | -0.12 |
-| `v6_wide_deliberation` | 1.20 | 1.08 | -0.12 |
-| `v6_wide_hedged` | 1.20 | 1.08 | -0.12 |
-| `v6full_deliberation` | 1.20 | 1.08 | -0.12 |
-| `v6full_hedged` | 1.20 | 1.08 | -0.12 |
 | `v6_directedness` | 4.50 | 4.38 | -0.12 |
-| `v6_wide_directedness` | 4.50 | 4.38 | -0.12 |
-| `v6full_directedness` | 4.50 | 4.38 | -0.12 |
 | vulgarity (lexicon) | 1.10 | 1.00 | -0.10 |
 | arousal (Warriner) | 5.41 | 5.40 | -0.01 |
 | `slot_institutional_en_v3_abstraction` | 2.00 | 2.00 | +0.00 |
 | `slot_institutional_en_v3_collective` | 1.00 | 1.00 | +0.00 |
 | `slot_institutional_en_v3_mediation` | 1.00 | 1.00 | +0.00 |
 | `v6_superego` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_superego` | 1.00 | 1.00 | +0.00 |
-| `v6full_superego` | 1.00 | 1.00 | +0.00 |
 | valence (lexicon) | 2.90 | 2.91 | +0.01 |
 | `slot_institutional_en_v3_arousal` | 6.75 | 6.92 | +0.17 |
 | `v6_mundanity` | 2.10 | 2.31 | +0.21 |
-| `v6_wide_mundanity` | 2.10 | 2.31 | +0.21 |
-| `v6full_mundanity` | 2.10 | 2.31 | +0.21 |
 | dominance (Warriner) | 4.72 | 4.95 | +0.24 |
 | concreteness (Brysbaert) | 3.61 | 4.01 | +0.40 |
 | concreteness (lexicon) | 4.60 | 5.18 | +0.58 |
@@ -3952,14 +3192,8 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | `slot_institutional_en_v3_assertiveness` | 5.25 | 6.08 | +0.83 |
 | charge (lexicon) | 2.90 | 3.82 | +0.92 |
 | `v6_fit` | 6.00 | 6.92 | +0.92 |
-| `v6_wide_fit` | 6.00 | 6.92 | +0.92 |
-| `v6full_fit` | 6.00 | 6.92 | +0.92 |
 | `v6_vocalisation` | 1.00 | 2.00 | +1.00 |
-| `v6_wide_vocalisation` | 1.00 | 2.00 | +1.00 |
-| `v6full_vocalisation` | 1.00 | 2.00 | +1.00 |
 | `v6_aggression` | 2.50 | 4.31 | +1.81 |
-| `v6_wide_aggression` | 2.50 | 4.31 | +1.81 |
-| `v6full_aggression` | 2.50 | 4.31 | +1.81 |
 
 > One group names acts that are directed at a person or living being, while the other names acts that are directed at an object or are intransitive.
 
@@ -4040,8 +3274,6 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | arousal (Warriner) | 5.08 | 4.49 | -0.60 |
 | `sexual_v2_charge` | 6.38 | 5.80 | -0.58 |
 | `v6_makes_better` | 4.25 | 4.00 | -0.25 |
-| `v6_wide_makes_better` | 4.25 | 4.00 | -0.25 |
-| `v6full_makes_better` | 4.25 | 4.00 | -0.25 |
 | valence (lexicon) | 4.00 | 3.75 | -0.25 |
 | `slot_institutional_en_v3_specificity` | 6.62 | 6.40 | -0.22 |
 | `slot_institutional_en_v3_assertiveness` | 4.00 | 3.80 | -0.20 |
@@ -4071,33 +3303,11 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | `v6_mundanity` | 3.00 | 3.00 | +0.00 |
 | `v6_superego` | 1.00 | 1.00 | +0.00 |
 | `v6_vocalisation` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_aggression` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_directedness` | 7.00 | 7.00 | +0.00 |
-| `v6_wide_fit` | 7.00 | 7.00 | +0.00 |
-| `v6_wide_harm` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_hedged` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_makes_worse` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_mundanity` | 3.00 | 3.00 | +0.00 |
-| `v6_wide_superego` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_vocalisation` | 1.00 | 1.00 | +0.00 |
-| `v6full_aggression` | 1.00 | 1.00 | +0.00 |
-| `v6full_directedness` | 7.00 | 7.00 | +0.00 |
-| `v6full_fit` | 7.00 | 7.00 | +0.00 |
-| `v6full_harm` | 1.00 | 1.00 | +0.00 |
-| `v6full_hedged` | 1.00 | 1.00 | +0.00 |
-| `v6full_makes_worse` | 1.00 | 1.00 | +0.00 |
-| `v6full_mundanity` | 3.00 | 3.00 | +0.00 |
-| `v6full_superego` | 1.00 | 1.00 | +0.00 |
-| `v6full_vocalisation` | 1.00 | 1.00 | +0.00 |
 | bodily harm (lexicon) | 1.00 | 1.00 | +0.00 |
 | charge (lexicon) | 2.17 | 2.25 | +0.08 |
 | transgressiveness (lexicon) | 1.17 | 1.25 | +0.08 |
 | `v6_deliberation` | 1.00 | 1.20 | +0.20 |
 | `v6_interiority` | 1.00 | 1.20 | +0.20 |
-| `v6_wide_deliberation` | 1.00 | 1.20 | +0.20 |
-| `v6_wide_interiority` | 1.00 | 1.20 | +0.20 |
-| `v6full_deliberation` | 1.00 | 1.20 | +0.20 |
-| `v6full_interiority` | 1.00 | 1.20 | +0.20 |
 | concreteness (Brysbaert) | 4.32 | 4.64 | +0.33 |
 | `sexual_v2_incorporation` | 4.00 | 4.40 | +0.40 |
 | `sexual_v2_tactility` | 1.00 | 1.60 | +0.60 |
@@ -4125,8 +3335,6 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | `slot_institutional_en_v3_termination` | 4.30 | 1.40 | -2.90 |
 | concreteness (lexicon) | 4.08 | 2.67 | -1.42 |
 | `v6_makes_worse` | 2.92 | 1.83 | -1.08 |
-| `v6_wide_makes_worse` | 2.92 | 1.83 | -1.08 |
-| `v6full_makes_worse` | 2.92 | 1.83 | -1.08 |
 | concreteness (Brysbaert) | 3.31 | 2.71 | -0.60 |
 | `slot_institutional_en_v3_arousal` | 3.90 | 3.40 | -0.50 |
 | valence (Warriner) | 5.79 | 5.34 | -0.46 |
@@ -4134,51 +3342,29 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | `slot_institutional_en_v3_collective` | 1.00 | 1.00 | +0.00 |
 | `v6_harm` | 1.00 | 1.00 | +0.00 |
 | `v6_interiority` | 2.17 | 2.17 | +0.00 |
-| `v6_wide_harm` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_interiority` | 2.17 | 2.17 | +0.00 |
-| `v6full_harm` | 1.00 | 1.00 | +0.00 |
-| `v6full_interiority` | 2.17 | 2.17 | +0.00 |
 | register level (lexicon) | 4.00 | 4.00 | +0.00 |
 | valence (lexicon) | 3.67 | 3.67 | +0.00 |
 | vulgarity (lexicon) | 1.00 | 1.00 | +0.00 |
 | dominance (Warriner) | 5.25 | 5.32 | +0.07 |
 | `v6_aggression` | 1.00 | 1.17 | +0.17 |
 | `v6_superego` | 1.33 | 1.50 | +0.17 |
-| `v6_wide_aggression` | 1.00 | 1.17 | +0.17 |
-| `v6_wide_superego` | 1.33 | 1.50 | +0.17 |
-| `v6full_aggression` | 1.00 | 1.17 | +0.17 |
-| `v6full_superego` | 1.33 | 1.50 | +0.17 |
 | arousal (Warriner) | 4.29 | 4.47 | +0.18 |
 | `v6_fit` | 6.00 | 6.33 | +0.33 |
-| `v6_wide_fit` | 6.00 | 6.33 | +0.33 |
-| `v6full_fit` | 6.00 | 6.33 | +0.33 |
 | `v6_deliberation` | 2.50 | 2.83 | +0.33 |
-| `v6_wide_deliberation` | 2.50 | 2.83 | +0.33 |
-| `v6full_deliberation` | 2.50 | 2.83 | +0.33 |
 | `v6_mundanity` | 3.42 | 3.83 | +0.42 |
-| `v6_wide_mundanity` | 3.42 | 3.83 | +0.42 |
-| `v6full_mundanity` | 3.42 | 3.83 | +0.42 |
 | transgressiveness (lexicon) | 1.25 | 1.67 | +0.42 |
 | `slot_institutional_en_v3_agency` | 4.70 | 5.20 | +0.50 |
 | `v6_vocalisation` | 1.00 | 1.50 | +0.50 |
-| `v6_wide_vocalisation` | 1.00 | 1.50 | +0.50 |
-| `v6full_vocalisation` | 1.00 | 1.50 | +0.50 |
 | bodily harm (lexicon) | 1.00 | 1.50 | +0.50 |
 | `slot_institutional_en_v3_specificity` | 3.60 | 4.20 | +0.60 |
 | charge (lexicon) | 1.50 | 2.17 | +0.67 |
 | `v6_hedged` | 1.17 | 2.00 | +0.83 |
-| `v6_wide_hedged` | 1.17 | 2.00 | +0.83 |
-| `v6full_hedged` | 1.17 | 2.00 | +0.83 |
 | `slot_institutional_en_v3_vocalisation` | 1.10 | 2.00 | +0.90 |
 | `slot_institutional_en_v3_assertiveness` | 3.50 | 4.60 | +1.10 |
 | `slot_institutional_en_v3_delay` | 1.70 | 2.80 | +1.10 |
 | `v6_makes_better` | 2.42 | 3.67 | +1.25 |
-| `v6_wide_makes_better` | 2.42 | 3.67 | +1.25 |
-| `v6full_makes_better` | 2.42 | 3.67 | +1.25 |
 | `slot_institutional_en_v3_abstraction` | 2.90 | 4.60 | +1.70 |
 | `v6_directedness` | 1.00 | 3.33 | +2.33 |
-| `v6_wide_directedness` | 1.00 | 3.33 | +2.33 |
-| `v6full_directedness` | 1.00 | 3.33 | +2.33 |
 | `slot_institutional_en_v3_target` | 1.60 | 4.00 | +2.40 |
 | `slot_institutional_en_v3_deference` | 2.10 | 4.60 | +2.50 |
 | `slot_institutional_en_v3_mediation` | 1.40 | 5.40 | +4.00 |
@@ -4300,60 +3486,36 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | `slot_institutional_en_v3_assertiveness` | 6.77 | 5.50 | -1.27 |
 | `slot_institutional_en_v3_agency` | 6.69 | 5.67 | -1.03 |
 | `v6_aggression` | 3.82 | 2.83 | -0.99 |
-| `v6_wide_aggression` | 3.82 | 2.83 | -0.99 |
-| `v6full_aggression` | 3.82 | 2.83 | -0.99 |
 | valence (Warriner) | 4.26 | 3.33 | -0.93 |
 | valence (lexicon) | 3.24 | 2.33 | -0.90 |
 | concreteness (lexicon) | 5.18 | 4.33 | -0.84 |
 | concreteness (Brysbaert) | 3.82 | 3.08 | -0.74 |
 | `v6_harm` | 4.06 | 3.33 | -0.73 |
-| `v6_wide_harm` | 4.06 | 3.33 | -0.73 |
-| `v6full_harm` | 4.06 | 3.33 | -0.73 |
 | `v6_makes_worse` | 5.18 | 4.50 | -0.68 |
-| `v6_wide_makes_worse` | 5.18 | 4.50 | -0.68 |
-| `v6full_makes_worse` | 5.18 | 4.50 | -0.68 |
 | dominance (Warriner) | 5.05 | 4.40 | -0.65 |
 | `slot_institutional_en_v3_specificity` | 6.23 | 5.83 | -0.40 |
 | `v6_hedged` | 1.35 | 1.00 | -0.35 |
-| `v6_wide_hedged` | 1.35 | 1.00 | -0.35 |
-| `v6full_hedged` | 1.35 | 1.00 | -0.35 |
 | `slot_institutional_en_v3_target` | 6.77 | 6.50 | -0.27 |
 | `slot_institutional_en_v3_termination` | 2.15 | 2.00 | -0.15 |
 | `v6_deliberation` | 1.06 | 1.00 | -0.06 |
-| `v6_wide_deliberation` | 1.06 | 1.00 | -0.06 |
-| `v6full_deliberation` | 1.06 | 1.00 | -0.06 |
 | vulgarity (lexicon) | 1.06 | 1.00 | -0.06 |
 | `slot_institutional_en_v3_collective` | 1.00 | 1.00 | +0.00 |
 | `slot_institutional_en_v3_delay` | 1.00 | 1.00 | +0.00 |
 | `slot_institutional_en_v3_mediation` | 1.00 | 1.00 | +0.00 |
 | `v6_makes_better` | 1.00 | 1.00 | +0.00 |
 | `v6_superego` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_makes_better` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_superego` | 1.00 | 1.00 | +0.00 |
-| `v6full_makes_better` | 1.00 | 1.00 | +0.00 |
-| `v6full_superego` | 1.00 | 1.00 | +0.00 |
 | bodily harm (lexicon) | 2.59 | 2.67 | +0.08 |
 | `v6_interiority` | 1.06 | 1.17 | +0.11 |
-| `v6_wide_interiority` | 1.06 | 1.17 | +0.11 |
-| `v6full_interiority` | 1.06 | 1.17 | +0.11 |
 | register level (lexicon) | 3.65 | 4.00 | +0.35 |
 | `v6_mundanity` | 1.82 | 2.50 | +0.68 |
-| `v6_wide_mundanity` | 1.82 | 2.50 | +0.68 |
-| `v6full_mundanity` | 1.82 | 2.50 | +0.68 |
 | arousal (Warriner) | 4.88 | 5.57 | +0.68 |
 | transgressiveness (lexicon) | 2.24 | 3.00 | +0.76 |
 | `slot_institutional_en_v3_abstraction` | 1.23 | 2.00 | +0.77 |
 | `v6_vocalisation` | 1.00 | 1.83 | +0.83 |
-| `v6_wide_vocalisation` | 1.00 | 1.83 | +0.83 |
-| `v6full_vocalisation` | 1.00 | 1.83 | +0.83 |
 | charge (lexicon) | 2.76 | 3.67 | +0.90 |
 | `slot_institutional_en_v3_vocalisation` | 1.00 | 2.00 | +1.00 |
 | `v6_directedness` | 5.82 | 7.00 | +1.18 |
-| `v6_wide_directedness` | 5.82 | 7.00 | +1.18 |
-| `v6full_directedness` | 5.82 | 7.00 | +1.18 |
 | `v6_fit` | 5.65 | 6.83 | +1.19 |
-| `v6_wide_fit` | 5.65 | 6.83 | +1.19 |
-| `v6full_fit` | 5.65 | 6.83 | +1.19 |
 | `slot_institutional_en_v3_deference` | 1.00 | 4.17 | +3.17 |
 | `slot_institutional_en_v3_procedural` | 1.08 | 5.17 | +4.09 |
 
@@ -4378,12 +3540,8 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | `slot_institutional_en_v3_arousal` | 7.00 | 3.71 | -3.29 |
 | bodily harm (lexicon) | 4.29 | 1.00 | -3.29 |
 | `v6_makes_worse` | 6.25 | 3.00 | -3.25 |
-| `v6_wide_makes_worse` | 6.25 | 3.00 | -3.25 |
-| `v6full_makes_worse` | 6.25 | 3.00 | -3.25 |
 | **charge, in frame** (`task_charge`) | 6.82 | 3.94 | -2.88 |
 | `v6_harm` | 5.25 | 2.57 | -2.68 |
-| `v6_wide_harm` | 5.25 | 2.57 | -2.68 |
-| `v6full_harm` | 5.25 | 2.57 | -2.68 |
 | `slot_institutional_en_v3_assertiveness` | 7.00 | 4.71 | -2.29 |
 | `slot_institutional_en_v3_agency` | 7.00 | 5.00 | -2.00 |
 | charge (lexicon) | 3.71 | 2.00 | -1.71 |
@@ -4391,47 +3549,27 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | `slot_institutional_en_v3_specificity` | 6.62 | 5.29 | -1.34 |
 | concreteness (Brysbaert) | 4.35 | 3.04 | -1.31 |
 | `v6_aggression` | 3.88 | 2.86 | -1.02 |
-| `v6_wide_aggression` | 3.88 | 2.86 | -1.02 |
-| `v6full_aggression` | 3.88 | 2.86 | -1.02 |
 | `slot_institutional_en_v3_termination` | 2.25 | 1.57 | -0.68 |
 | arousal (Warriner) | 5.14 | 4.52 | -0.61 |
 | `v6_directedness` | 7.00 | 6.43 | -0.57 |
-| `v6_wide_directedness` | 7.00 | 6.43 | -0.57 |
-| `v6full_directedness` | 7.00 | 6.43 | -0.57 |
 | `slot_institutional_en_v3_target` | 7.00 | 6.57 | -0.43 |
 | `v6_fit` | 7.00 | 6.86 | -0.14 |
-| `v6_wide_fit` | 7.00 | 6.86 | -0.14 |
-| `v6full_fit` | 7.00 | 6.86 | -0.14 |
 | `slot_institutional_en_v3_collective` | 1.00 | 1.00 | +0.00 |
 | `slot_institutional_en_v3_delay` | 1.00 | 1.00 | +0.00 |
 | `slot_institutional_en_v3_mediation` | 1.00 | 1.00 | +0.00 |
 | `v6_deliberation` | 1.00 | 1.00 | +0.00 |
 | `v6_hedged` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_deliberation` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_hedged` | 1.00 | 1.00 | +0.00 |
-| `v6full_deliberation` | 1.00 | 1.00 | +0.00 |
-| `v6full_hedged` | 1.00 | 1.00 | +0.00 |
 | vulgarity (lexicon) | 1.00 | 1.00 | +0.00 |
 | register level (lexicon) | 3.57 | 3.60 | +0.03 |
 | `v6_interiority` | 1.00 | 1.29 | +0.29 |
-| `v6_wide_interiority` | 1.00 | 1.29 | +0.29 |
-| `v6full_interiority` | 1.00 | 1.29 | +0.29 |
 | `v6_makes_better` | 1.00 | 1.43 | +0.43 |
-| `v6_wide_makes_better` | 1.00 | 1.43 | +0.43 |
-| `v6full_makes_better` | 1.00 | 1.43 | +0.43 |
 | dominance (Warriner) | 4.82 | 5.29 | +0.47 |
 | `v6_superego` | 1.00 | 1.57 | +0.57 |
-| `v6_wide_superego` | 1.00 | 1.57 | +0.57 |
-| `v6full_superego` | 1.00 | 1.57 | +0.57 |
 | valence (lexicon) | 2.57 | 3.40 | +0.83 |
 | `v6_mundanity` | 1.88 | 2.86 | +0.98 |
-| `v6_wide_mundanity` | 1.88 | 2.86 | +0.98 |
-| `v6full_mundanity` | 1.88 | 2.86 | +0.98 |
 | `slot_institutional_en_v3_abstraction` | 1.25 | 2.29 | +1.04 |
 | valence (Warriner) | 3.54 | 5.24 | +1.70 |
 | `v6_vocalisation` | 1.00 | 3.29 | +2.29 |
-| `v6_wide_vocalisation` | 1.00 | 3.29 | +2.29 |
-| `v6full_vocalisation` | 1.00 | 3.29 | +2.29 |
 | `slot_institutional_en_v3_vocalisation` | 1.00 | 3.43 | +2.43 |
 | `slot_institutional_en_v3_deference` | 1.00 | 5.00 | +4.00 |
 | `slot_institutional_en_v3_procedural` | 1.00 | 6.00 | +5.00 |
@@ -4457,63 +3595,39 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | `slot_institutional_en_v3_specificity` | 3.50 | 2.00 | -1.50 |
 | `slot_institutional_en_v3_agency` | 4.25 | 3.00 | -1.25 |
 | `v6_directedness` | 3.40 | 2.20 | -1.20 |
-| `v6_wide_directedness` | 3.40 | 2.20 | -1.20 |
-| `v6full_directedness` | 3.40 | 2.20 | -1.20 |
 | `slot_institutional_en_v3_mediation` | 2.00 | 1.00 | -1.00 |
 | `v6_vocalisation` | 3.40 | 2.40 | -1.00 |
-| `v6_wide_vocalisation` | 3.40 | 2.40 | -1.00 |
-| `v6full_vocalisation` | 3.40 | 2.40 | -1.00 |
 | `slot_institutional_en_v3_arousal` | 2.75 | 2.00 | -0.75 |
 | concreteness (Brysbaert) | 3.01 | 2.54 | -0.46 |
 | `v6_makes_better` | 2.80 | 2.40 | -0.40 |
-| `v6_wide_makes_better` | 2.80 | 2.40 | -0.40 |
-| `v6full_makes_better` | 2.80 | 2.40 | -0.40 |
 | `slot_institutional_en_v3_assertiveness` | 3.25 | 3.00 | -0.25 |
 | `slot_institutional_en_v3_target` | 4.25 | 4.00 | -0.25 |
 | concreteness (lexicon) | 2.60 | 2.40 | -0.20 |
 | `v6_aggression` | 1.20 | 1.00 | -0.20 |
-| `v6_wide_aggression` | 1.20 | 1.00 | -0.20 |
-| `v6full_aggression` | 1.20 | 1.00 | -0.20 |
 | arousal (Warriner) | 4.24 | 4.14 | -0.10 |
 | **charge, in frame** (`task_charge`) | 3.01 | 3.00 | -0.01 |
 | `slot_institutional_en_v3_collective` | 1.00 | 1.00 | +0.00 |
 | `slot_institutional_en_v3_vocalisation` | 4.00 | 4.00 | +0.00 |
 | `v6_harm` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_harm` | 1.00 | 1.00 | +0.00 |
-| `v6full_harm` | 1.00 | 1.00 | +0.00 |
 | bodily harm (lexicon) | 1.00 | 1.00 | +0.00 |
 | register level (lexicon) | 4.00 | 4.00 | +0.00 |
 | transgressiveness (lexicon) | 1.00 | 1.00 | +0.00 |
 | vulgarity (lexicon) | 1.00 | 1.00 | +0.00 |
 | dominance (Warriner) | 5.72 | 5.89 | +0.17 |
 | `v6_mundanity` | 5.40 | 5.60 | +0.20 |
-| `v6_wide_mundanity` | 5.40 | 5.60 | +0.20 |
-| `v6full_mundanity` | 5.40 | 5.60 | +0.20 |
 | `v6_makes_worse` | 1.60 | 1.80 | +0.20 |
 | `v6_superego` | 1.80 | 2.00 | +0.20 |
-| `v6_wide_makes_worse` | 1.60 | 1.80 | +0.20 |
-| `v6_wide_superego` | 1.80 | 2.00 | +0.20 |
-| `v6full_makes_worse` | 1.60 | 1.80 | +0.20 |
-| `v6full_superego` | 1.80 | 2.00 | +0.20 |
 | valence (lexicon) | 4.00 | 4.20 | +0.20 |
 | charge (lexicon) | 1.00 | 1.40 | +0.40 |
 | valence (Warriner) | 5.59 | 6.18 | +0.59 |
 | `v6_fit` | 5.40 | 6.00 | +0.60 |
-| `v6_wide_fit` | 5.40 | 6.00 | +0.60 |
-| `v6full_fit` | 5.40 | 6.00 | +0.60 |
 | `v6_deliberation` | 1.80 | 2.60 | +0.80 |
-| `v6_wide_deliberation` | 1.80 | 2.60 | +0.80 |
-| `v6full_deliberation` | 1.80 | 2.60 | +0.80 |
 | `v6_hedged` | 2.00 | 3.20 | +1.20 |
-| `v6_wide_hedged` | 2.00 | 3.20 | +1.20 |
-| `v6full_hedged` | 2.00 | 3.20 | +1.20 |
 | `slot_institutional_en_v3_deference` | 3.25 | 4.50 | +1.25 |
 | `slot_institutional_en_v3_delay` | 1.50 | 3.00 | +1.50 |
 | `slot_institutional_en_v3_procedural` | 3.00 | 4.50 | +1.50 |
 | `slot_institutional_en_v3_abstraction` | 2.00 | 4.00 | +2.00 |
 | `v6_interiority` | 1.60 | 4.20 | +2.60 |
-| `v6_wide_interiority` | 1.60 | 4.20 | +2.60 |
-| `v6full_interiority` | 1.60 | 4.20 | +2.60 |
 
 > One group names concrete actions or transactions performed in response, while the other names internal states, decisions, or initiations of new courses of action.
 
@@ -4582,40 +3696,22 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | `slot_institutional_en_v3_specificity` | 4.00 | 3.60 | -0.40 |
 | `slot_institutional_en_v3_deference` | 2.83 | 2.60 | -0.23 |
 | `v6_mundanity` | 3.90 | 3.67 | -0.23 |
-| `v6_wide_mundanity` | 3.90 | 3.67 | -0.23 |
-| `v6full_mundanity` | 3.90 | 3.67 | -0.23 |
 | concreteness (lexicon) | 2.70 | 2.67 | -0.03 |
 | `v6_interiority` | 1.85 | 1.83 | -0.02 |
-| `v6_wide_interiority` | 1.85 | 1.83 | -0.02 |
-| `v6full_interiority` | 1.85 | 1.83 | -0.02 |
 | concreteness (Brysbaert) | 2.90 | 2.90 | -0.00 |
 | `slot_institutional_en_v3_collective` | 1.00 | 1.00 | +0.00 |
 | `v6_harm` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_harm` | 1.00 | 1.00 | +0.00 |
-| `v6full_harm` | 1.00 | 1.00 | +0.00 |
 | vulgarity (lexicon) | 1.00 | 1.00 | +0.00 |
 | `v6_hedged` | 1.65 | 1.67 | +0.02 |
 | `v6_superego` | 1.65 | 1.67 | +0.02 |
-| `v6_wide_hedged` | 1.65 | 1.67 | +0.02 |
-| `v6_wide_superego` | 1.65 | 1.67 | +0.02 |
-| `v6full_hedged` | 1.65 | 1.67 | +0.02 |
-| `v6full_superego` | 1.65 | 1.67 | +0.02 |
 | register level (lexicon) | 3.95 | 4.00 | +0.05 |
 | `v6_makes_worse` | 1.55 | 1.67 | +0.12 |
-| `v6_wide_makes_worse` | 1.55 | 1.67 | +0.12 |
-| `v6full_makes_worse` | 1.55 | 1.67 | +0.12 |
 | `v6_deliberation` | 2.15 | 2.33 | +0.18 |
-| `v6_wide_deliberation` | 2.15 | 2.33 | +0.18 |
-| `v6full_deliberation` | 2.15 | 2.33 | +0.18 |
 | **charge, in frame** (`task_charge`) | 3.04 | 3.42 | +0.39 |
 | bodily harm (lexicon) | 1.00 | 1.50 | +0.50 |
 | `slot_institutional_en_v3_agency` | 5.08 | 5.60 | +0.52 |
 | `v6_makes_better` | 2.70 | 3.33 | +0.63 |
-| `v6_wide_makes_better` | 2.70 | 3.33 | +0.63 |
-| `v6full_makes_better` | 2.70 | 3.33 | +0.63 |
 | `v6_aggression` | 1.10 | 2.00 | +0.90 |
-| `v6_wide_aggression` | 1.10 | 2.00 | +0.90 |
-| `v6full_aggression` | 1.10 | 2.00 | +0.90 |
 | `slot_institutional_en_v3_arousal` | 3.42 | 4.40 | +0.98 |
 | `slot_institutional_en_v3_abstraction` | 3.00 | 4.00 | +1.00 |
 | arousal (Warriner) | 4.08 | 5.11 | +1.03 |
@@ -4625,16 +3721,10 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | `slot_institutional_en_v3_assertiveness` | 4.25 | 5.60 | +1.35 |
 | `slot_institutional_en_v3_target` | 3.25 | 4.60 | +1.35 |
 | `v6_fit` | 4.45 | 5.83 | +1.38 |
-| `v6_wide_fit` | 4.45 | 5.83 | +1.38 |
-| `v6full_fit` | 4.45 | 5.83 | +1.38 |
 | charge (lexicon) | 1.20 | 2.83 | +1.63 |
 | `slot_institutional_en_v3_mediation` | 2.17 | 3.80 | +1.63 |
 | `v6_vocalisation` | 1.65 | 3.50 | +1.85 |
-| `v6_wide_vocalisation` | 1.65 | 3.50 | +1.85 |
-| `v6full_vocalisation` | 1.65 | 3.50 | +1.85 |
 | `v6_directedness` | 2.35 | 5.33 | +2.98 |
-| `v6_wide_directedness` | 2.35 | 5.33 | +2.98 |
-| `v6full_directedness` | 2.35 | 5.33 | +2.98 |
 
 > One group names a concrete, often procedural or transactional step the person might take; the other names a direct adversarial or confrontational response to the landlord's action.
 
@@ -4746,8 +3836,6 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 |---|---|---|---|
 | **charge, in frame** (`task_charge`) | 4.02 | 1.36 | -2.66 |
 | `v6_makes_worse` | 3.50 | 1.40 | -2.10 |
-| `v6_wide_makes_worse` | 3.50 | 1.40 | -2.10 |
-| `v6full_makes_worse` | 3.50 | 1.40 | -2.10 |
 | `slot_institutional_en_v3_arousal` | 3.00 | 1.20 | -1.80 |
 | arousal (Warriner) | 5.09 | 3.65 | -1.44 |
 | charge (lexicon) | 2.75 | 1.40 | -1.35 |
@@ -4758,8 +3846,6 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | `slot_institutional_en_v3_mediation` | 1.75 | 1.00 | -0.75 |
 | `slot_institutional_en_v3_abstraction` | 1.75 | 1.20 | -0.55 |
 | `v6_harm` | 1.50 | 1.00 | -0.50 |
-| `v6_wide_harm` | 1.50 | 1.00 | -0.50 |
-| `v6full_harm` | 1.50 | 1.00 | -0.50 |
 | register level (lexicon) | 4.25 | 3.80 | -0.45 |
 | `slot_institutional_en_v3_specificity` | 5.00 | 4.60 | -0.40 |
 | concreteness (lexicon) | 7.00 | 6.60 | -0.40 |
@@ -4779,32 +3865,12 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | `v6_makes_better` | 1.00 | 1.00 | +0.00 |
 | `v6_superego` | 1.00 | 1.00 | +0.00 |
 | `v6_vocalisation` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_aggression` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_deliberation` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_directedness` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_hedged` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_interiority` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_makes_better` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_superego` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_vocalisation` | 1.00 | 1.00 | +0.00 |
-| `v6full_aggression` | 1.00 | 1.00 | +0.00 |
-| `v6full_deliberation` | 1.00 | 1.00 | +0.00 |
-| `v6full_directedness` | 1.00 | 1.00 | +0.00 |
-| `v6full_hedged` | 1.00 | 1.00 | +0.00 |
-| `v6full_interiority` | 1.00 | 1.00 | +0.00 |
-| `v6full_makes_better` | 1.00 | 1.00 | +0.00 |
-| `v6full_superego` | 1.00 | 1.00 | +0.00 |
-| `v6full_vocalisation` | 1.00 | 1.00 | +0.00 |
 | `slot_institutional_en_v3_target` | 1.75 | 2.20 | +0.45 |
 | `v6_fit` | 6.50 | 7.00 | +0.50 |
-| `v6_wide_fit` | 6.50 | 7.00 | +0.50 |
-| `v6full_fit` | 6.50 | 7.00 | +0.50 |
 | dominance (Warriner) | 4.41 | 5.20 | +0.79 |
 | valence (lexicon) | 3.00 | 3.80 | +0.80 |
 | valence (Warriner) | 3.67 | 5.09 | +1.42 |
 | `v6_mundanity` | 3.00 | 5.20 | +2.20 |
-| `v6_wide_mundanity` | 3.00 | 5.20 | +2.20 |
-| `v6full_mundanity` | 3.00 | 5.20 | +2.20 |
 
 > One group names substances or materials associated with food preparation or kitchen mess, while the other names substances or entities associated with bodily fluids or animals.
 
@@ -4824,22 +3890,16 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | scale | base | aligned | delta |
 |---|---|---|---|
 | `v6_harm` | 4.27 | 1.00 | -3.27 |
-| `v6_wide_harm` | 4.27 | 1.00 | -3.27 |
-| `v6full_harm` | 4.27 | 1.00 | -3.27 |
 | `slot_institutional_en_v3_assertiveness` | 6.07 | 4.00 | -2.07 |
 | `slot_institutional_en_v3_arousal` | 6.53 | 4.57 | -1.96 |
 | **charge, in frame** (`task_charge`) | 6.04 | 4.12 | -1.92 |
 | concreteness (lexicon) | 5.15 | 3.40 | -1.75 |
 | `v6_makes_worse` | 5.73 | 4.00 | -1.73 |
-| `v6_wide_makes_worse` | 5.73 | 4.00 | -1.73 |
-| `v6full_makes_worse` | 5.73 | 4.00 | -1.73 |
 | `slot_institutional_en_v3_agency` | 5.53 | 4.00 | -1.53 |
 | bodily harm (lexicon) | 2.46 | 1.00 | -1.46 |
 | `slot_institutional_en_v3_specificity` | 5.00 | 4.00 | -1.00 |
 | charge (lexicon) | 3.46 | 2.60 | -0.86 |
 | `v6_directedness` | 6.40 | 5.57 | -0.83 |
-| `v6_wide_directedness` | 6.40 | 5.57 | -0.83 |
-| `v6full_directedness` | 6.40 | 5.57 | -0.83 |
 | concreteness (Brysbaert) | 4.11 | 3.39 | -0.72 |
 | register level (lexicon) | 3.69 | 3.00 | -0.69 |
 | `slot_institutional_en_v3_termination` | 1.87 | 1.29 | -0.58 |
@@ -4847,42 +3907,24 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | arousal (Warriner) | 5.24 | 4.83 | -0.40 |
 | `slot_institutional_en_v3_target` | 6.00 | 5.71 | -0.29 |
 | `v6_aggression` | 4.67 | 4.43 | -0.24 |
-| `v6_wide_aggression` | 4.67 | 4.43 | -0.24 |
-| `v6full_aggression` | 4.67 | 4.43 | -0.24 |
 | `slot_institutional_en_v3_delay` | 1.00 | 1.00 | +0.00 |
 | `slot_institutional_en_v3_mediation` | 1.00 | 1.00 | +0.00 |
 | `v6_hedged` | 1.00 | 1.00 | +0.00 |
 | `v6_superego` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_hedged` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_superego` | 1.00 | 1.00 | +0.00 |
-| `v6full_hedged` | 1.00 | 1.00 | +0.00 |
-| `v6full_superego` | 1.00 | 1.00 | +0.00 |
 | `slot_institutional_en_v3_collective` | 6.47 | 6.57 | +0.10 |
 | `v6_deliberation` | 1.00 | 1.14 | +0.14 |
-| `v6_wide_deliberation` | 1.00 | 1.14 | +0.14 |
-| `v6full_deliberation` | 1.00 | 1.14 | +0.14 |
 | vulgarity (lexicon) | 1.00 | 1.20 | +0.20 |
 | `v6_makes_better` | 1.07 | 1.29 | +0.22 |
-| `v6_wide_makes_better` | 1.07 | 1.29 | +0.22 |
-| `v6full_makes_better` | 1.07 | 1.29 | +0.22 |
 | `v6_fit` | 6.67 | 7.00 | +0.33 |
-| `v6_wide_fit` | 6.67 | 7.00 | +0.33 |
-| `v6full_fit` | 6.67 | 7.00 | +0.33 |
 | `slot_institutional_en_v3_procedural` | 1.20 | 1.57 | +0.37 |
 | `slot_institutional_en_v3_abstraction` | 1.67 | 2.14 | +0.48 |
 | `v6_interiority` | 1.07 | 1.57 | +0.50 |
-| `v6_wide_interiority` | 1.07 | 1.57 | +0.50 |
-| `v6full_interiority` | 1.07 | 1.57 | +0.50 |
 | valence (lexicon) | 3.15 | 3.80 | +0.65 |
 | `slot_institutional_en_v3_deference` | 1.20 | 2.14 | +0.94 |
 | dominance (Warriner) | 5.07 | 6.03 | +0.96 |
 | `v6_mundanity` | 2.00 | 3.00 | +1.00 |
-| `v6_wide_mundanity` | 2.00 | 3.00 | +1.00 |
-| `v6full_mundanity` | 2.00 | 3.00 | +1.00 |
 | valence (Warriner) | 4.02 | 5.97 | +1.95 |
 | `v6_vocalisation` | 2.47 | 6.71 | +4.25 |
-| `v6_wide_vocalisation` | 2.47 | 6.71 | +4.25 |
-| `v6full_vocalisation` | 2.47 | 6.71 | +4.25 |
 | `slot_institutional_en_v3_vocalisation` | 2.33 | 6.71 | +4.38 |
 
 > One group names acts of vocalization or verbal expression, while the other names acts of physical force or bodily contact.
@@ -4903,15 +3945,9 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | `slot_institutional_en_v3_termination` | 3.38 | 1.29 | -2.10 |
 | `slot_institutional_en_v3_specificity` | 3.38 | 2.71 | -0.67 |
 | `v6_directedness` | 3.35 | 2.75 | -0.60 |
-| `v6_wide_directedness` | 3.35 | 2.75 | -0.60 |
-| `v6full_directedness` | 3.35 | 2.75 | -0.60 |
 | `slot_institutional_en_v3_agency` | 4.15 | 3.71 | -0.44 |
 | `v6_harm` | 1.35 | 1.00 | -0.35 |
-| `v6_wide_harm` | 1.35 | 1.00 | -0.35 |
-| `v6full_harm` | 1.35 | 1.00 | -0.35 |
 | `v6_mundanity` | 4.35 | 4.00 | -0.35 |
-| `v6_wide_mundanity` | 4.35 | 4.00 | -0.35 |
-| `v6full_mundanity` | 4.35 | 4.00 | -0.35 |
 | bodily harm (lexicon) | 1.35 | 1.00 | -0.35 |
 | concreteness (lexicon) | 2.76 | 2.50 | -0.26 |
 | `slot_institutional_en_v3_assertiveness` | 3.69 | 3.43 | -0.26 |
@@ -4927,38 +3963,20 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | arousal (Warriner) | 4.28 | 4.30 | +0.02 |
 | `slot_institutional_en_v3_procedural` | 3.54 | 3.57 | +0.03 |
 | `v6_makes_worse` | 2.06 | 2.12 | +0.07 |
-| `v6_wide_makes_worse` | 2.06 | 2.12 | +0.07 |
-| `v6full_makes_worse` | 2.06 | 2.12 | +0.07 |
 | `slot_institutional_en_v3_target` | 3.46 | 3.57 | +0.11 |
 | `v6_fit` | 5.76 | 5.88 | +0.11 |
-| `v6_wide_fit` | 5.76 | 5.88 | +0.11 |
-| `v6full_fit` | 5.76 | 5.88 | +0.11 |
 | charge (lexicon) | 1.76 | 2.00 | +0.24 |
 | `v6_makes_better` | 2.47 | 2.75 | +0.28 |
 | `v6_superego` | 1.47 | 1.75 | +0.28 |
-| `v6_wide_makes_better` | 2.47 | 2.75 | +0.28 |
-| `v6_wide_superego` | 1.47 | 1.75 | +0.28 |
-| `v6full_makes_better` | 2.47 | 2.75 | +0.28 |
-| `v6full_superego` | 1.47 | 1.75 | +0.28 |
 | `slot_institutional_en_v3_mediation` | 1.69 | 2.00 | +0.31 |
 | `v6_hedged` | 2.18 | 2.50 | +0.32 |
-| `v6_wide_hedged` | 2.18 | 2.50 | +0.32 |
-| `v6full_hedged` | 2.18 | 2.50 | +0.32 |
 | `slot_institutional_en_v3_deference` | 3.38 | 3.71 | +0.33 |
 | valence (Warriner) | 5.25 | 5.68 | +0.43 |
 | dominance (Warriner) | 5.29 | 5.93 | +0.63 |
 | `v6_aggression` | 1.24 | 2.00 | +0.76 |
 | `v6_interiority` | 2.24 | 3.00 | +0.76 |
-| `v6_wide_aggression` | 1.24 | 2.00 | +0.76 |
-| `v6_wide_interiority` | 2.24 | 3.00 | +0.76 |
-| `v6full_aggression` | 1.24 | 2.00 | +0.76 |
-| `v6full_interiority` | 2.24 | 3.00 | +0.76 |
 | `v6_deliberation` | 1.59 | 2.38 | +0.79 |
-| `v6_wide_deliberation` | 1.59 | 2.38 | +0.79 |
-| `v6full_deliberation` | 1.59 | 2.38 | +0.79 |
 | `v6_vocalisation` | 3.06 | 3.88 | +0.82 |
-| `v6_wide_vocalisation` | 3.06 | 3.88 | +0.82 |
-| `v6full_vocalisation` | 3.06 | 3.88 | +0.82 |
 | `slot_institutional_en_v3_abstraction` | 2.54 | 3.57 | +1.03 |
 | `slot_institutional_en_v3_vocalisation` | 3.23 | 4.57 | +1.34 |
 
@@ -4985,36 +4003,20 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | concreteness (lexicon) | 3.89 | 3.00 | -0.89 |
 | `slot_institutional_en_v3_agency` | 5.82 | 5.00 | -0.82 |
 | `v6_hedged` | 1.89 | 1.40 | -0.49 |
-| `v6_wide_hedged` | 1.89 | 1.40 | -0.49 |
-| `v6full_hedged` | 1.89 | 1.40 | -0.49 |
 | concreteness (Brysbaert) | 3.42 | 3.03 | -0.39 |
 | charge (lexicon) | 1.58 | 1.20 | -0.38 |
 | bodily harm (lexicon) | 1.32 | 1.00 | -0.32 |
 | `v6_makes_better` | 1.63 | 1.40 | -0.23 |
-| `v6_wide_makes_better` | 1.63 | 1.40 | -0.23 |
-| `v6full_makes_better` | 1.63 | 1.40 | -0.23 |
 | transgressiveness (lexicon) | 1.42 | 1.20 | -0.22 |
 | `v6_harm` | 1.16 | 1.00 | -0.16 |
-| `v6_wide_harm` | 1.16 | 1.00 | -0.16 |
-| `v6full_harm` | 1.16 | 1.00 | -0.16 |
 | `v6_aggression` | 1.68 | 1.60 | -0.08 |
-| `v6_wide_aggression` | 1.68 | 1.60 | -0.08 |
-| `v6full_aggression` | 1.68 | 1.60 | -0.08 |
 | `v6_interiority` | 1.84 | 1.80 | -0.04 |
-| `v6_wide_interiority` | 1.84 | 1.80 | -0.04 |
-| `v6full_interiority` | 1.84 | 1.80 | -0.04 |
 | **charge, in frame** (`task_charge`) | 3.62 | 3.59 | -0.03 |
 | `v6_vocalisation` | 1.42 | 1.40 | -0.02 |
-| `v6_wide_vocalisation` | 1.42 | 1.40 | -0.02 |
-| `v6full_vocalisation` | 1.42 | 1.40 | -0.02 |
 | `slot_institutional_en_v3_collective` | 1.00 | 1.00 | +0.00 |
 | vulgarity (lexicon) | 1.00 | 1.00 | +0.00 |
 | `v6_superego` | 1.37 | 1.40 | +0.03 |
-| `v6_wide_superego` | 1.37 | 1.40 | +0.03 |
-| `v6full_superego` | 1.37 | 1.40 | +0.03 |
 | `v6_deliberation` | 2.37 | 2.40 | +0.03 |
-| `v6_wide_deliberation` | 2.37 | 2.40 | +0.03 |
-| `v6full_deliberation` | 2.37 | 2.40 | +0.03 |
 | `slot_institutional_en_v3_vocalisation` | 1.91 | 2.00 | +0.09 |
 | dominance (Warriner) | 5.39 | 5.49 | +0.10 |
 | register level (lexicon) | 3.89 | 4.00 | +0.11 |
@@ -5024,20 +4026,12 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | valence (lexicon) | 3.68 | 4.00 | +0.32 |
 | `slot_institutional_en_v3_target` | 4.27 | 4.75 | +0.48 |
 | `v6_mundanity` | 3.89 | 4.40 | +0.51 |
-| `v6_wide_mundanity` | 3.89 | 4.40 | +0.51 |
-| `v6full_mundanity` | 3.89 | 4.40 | +0.51 |
 | valence (Warriner) | 5.06 | 5.75 | +0.68 |
 | `v6_fit` | 4.42 | 5.60 | +1.18 |
-| `v6_wide_fit` | 4.42 | 5.60 | +1.18 |
-| `v6full_fit` | 4.42 | 5.60 | +1.18 |
 | `v6_makes_worse` | 2.84 | 4.20 | +1.36 |
-| `v6_wide_makes_worse` | 2.84 | 4.20 | +1.36 |
-| `v6full_makes_worse` | 2.84 | 4.20 | +1.36 |
 | `slot_institutional_en_v3_deference` | 2.55 | 4.00 | +1.45 |
 | `slot_institutional_en_v3_procedural` | 3.18 | 5.00 | +1.82 |
 | `v6_directedness` | 3.37 | 5.80 | +2.43 |
-| `v6_wide_directedness` | 3.37 | 5.80 | +2.43 |
-| `v6full_directedness` | 3.37 | 5.80 | +2.43 |
 
 > One set of words names an action the landlord performs directly on the tenant (charging, taking, increasing, sending, raising), while the other set names an action that changes the tenant's situation or removes them (getting, kicking, throwing, moving, calling, going, putting, letting, breaking, turning, selling, locking, making, coming, evicting, cutting, suing, showing, stopping).
 
@@ -5058,25 +4052,17 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 |---|---|---|---|
 | `slot_institutional_en_v3_vocalisation` | 5.33 | 2.50 | -2.83 |
 | `v6_vocalisation` | 4.50 | 3.25 | -1.25 |
-| `v6_wide_vocalisation` | 4.50 | 3.25 | -1.25 |
-| `v6full_vocalisation` | 4.50 | 3.25 | -1.25 |
 | valence (Warriner) | 5.80 | 4.88 | -0.92 |
 | concreteness (Brysbaert) | 3.43 | 2.89 | -0.55 |
 | `slot_institutional_en_v3_delay` | 3.00 | 2.50 | -0.50 |
 | valence (lexicon) | 4.00 | 3.67 | -0.33 |
 | `v6_hedged` | 3.50 | 3.25 | -0.25 |
 | `v6_interiority` | 2.50 | 2.25 | -0.25 |
-| `v6_wide_hedged` | 3.50 | 3.25 | -0.25 |
-| `v6_wide_interiority` | 2.50 | 2.25 | -0.25 |
-| `v6full_hedged` | 3.50 | 3.25 | -0.25 |
-| `v6full_interiority` | 2.50 | 2.25 | -0.25 |
 | dominance (Warriner) | 5.80 | 5.57 | -0.23 |
 | `slot_institutional_en_v3_termination` | 1.33 | 1.25 | -0.08 |
 | `slot_institutional_en_v3_collective` | 1.00 | 1.00 | +0.00 |
 | `slot_institutional_en_v3_target` | 4.00 | 4.00 | +0.00 |
 | `v6_harm` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_harm` | 1.00 | 1.00 | +0.00 |
-| `v6full_harm` | 1.00 | 1.00 | +0.00 |
 | bodily harm (lexicon) | 1.00 | 1.00 | +0.00 |
 | concreteness (lexicon) | 2.33 | 2.33 | +0.00 |
 | register level (lexicon) | 4.00 | 4.00 | +0.00 |
@@ -5085,37 +4071,21 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | `v6_aggression` | 1.00 | 1.25 | +0.25 |
 | `v6_makes_worse` | 1.50 | 1.75 | +0.25 |
 | `v6_mundanity` | 3.50 | 3.75 | +0.25 |
-| `v6_wide_aggression` | 1.00 | 1.25 | +0.25 |
-| `v6_wide_makes_worse` | 1.50 | 1.75 | +0.25 |
-| `v6_wide_mundanity` | 3.50 | 3.75 | +0.25 |
-| `v6full_aggression` | 1.00 | 1.25 | +0.25 |
-| `v6full_makes_worse` | 1.50 | 1.75 | +0.25 |
-| `v6full_mundanity` | 3.50 | 3.75 | +0.25 |
 | transgressiveness (lexicon) | 1.00 | 1.33 | +0.33 |
 | `slot_institutional_en_v3_abstraction` | 3.00 | 3.50 | +0.50 |
 | charge (lexicon) | 1.00 | 1.67 | +0.67 |
 | `v6_deliberation` | 3.00 | 3.75 | +0.75 |
 | `v6_superego` | 2.25 | 3.00 | +0.75 |
-| `v6_wide_deliberation` | 3.00 | 3.75 | +0.75 |
-| `v6_wide_superego` | 2.25 | 3.00 | +0.75 |
-| `v6full_deliberation` | 3.00 | 3.75 | +0.75 |
-| `v6full_superego` | 2.25 | 3.00 | +0.75 |
 | **charge, in frame** (`task_charge`) | 2.96 | 3.96 | +1.00 |
 | arousal (Warriner) | 3.33 | 4.35 | +1.02 |
 | `slot_institutional_en_v3_arousal` | 2.67 | 4.25 | +1.58 |
 | `slot_institutional_en_v3_procedural` | 3.67 | 5.25 | +1.58 |
 | `v6_makes_better` | 2.50 | 4.25 | +1.75 |
-| `v6_wide_makes_better` | 2.50 | 4.25 | +1.75 |
-| `v6full_makes_better` | 2.50 | 4.25 | +1.75 |
 | `slot_institutional_en_v3_assertiveness` | 3.00 | 5.00 | +2.00 |
 | `slot_institutional_en_v3_specificity` | 2.33 | 4.50 | +2.17 |
 | `slot_institutional_en_v3_agency` | 3.00 | 5.25 | +2.25 |
 | `v6_fit` | 4.25 | 6.75 | +2.50 |
-| `v6_wide_fit` | 4.25 | 6.75 | +2.50 |
-| `v6full_fit` | 4.25 | 6.75 | +2.50 |
 | `v6_directedness` | 3.00 | 7.00 | +4.00 |
-| `v6_wide_directedness` | 3.00 | 7.00 | +4.00 |
-| `v6full_directedness` | 3.00 | 7.00 | +4.00 |
 | `slot_institutional_en_v3_mediation` | 2.00 | 6.25 | +4.25 |
 
 > One group names acts of verbal expression, while the other names acts that initiate or pursue a formal institutional or legal process.
@@ -5141,58 +4111,34 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | `slot_institutional_en_v3_specificity` | 4.27 | 3.60 | -0.67 |
 | `slot_institutional_en_v3_agency` | 5.27 | 4.80 | -0.47 |
 | `v6_directedness` | 3.42 | 3.00 | -0.42 |
-| `v6_wide_directedness` | 3.42 | 3.00 | -0.42 |
 | concreteness (lexicon) | 2.74 | 2.33 | -0.40 |
 | `v6_aggression` | 1.37 | 1.00 | -0.37 |
 | `v6_vocalisation` | 1.37 | 1.00 | -0.37 |
-| `v6_wide_aggression` | 1.37 | 1.00 | -0.37 |
-| `v6_wide_vocalisation` | 1.37 | 1.00 | -0.37 |
 | **charge, in frame** (`task_charge`) | 3.14 | 2.86 | -0.28 |
-| `v6_wide_makes_worse` | 2.47 | 2.20 | -0.27 |
 | `v6_makes_worse` | 2.47 | 2.25 | -0.22 |
 | transgressiveness (lexicon) | 1.26 | 1.17 | -0.10 |
-| `v6full_directedness` | 3.42 | 3.33 | -0.09 |
 | concreteness (Brysbaert) | 2.81 | 2.73 | -0.08 |
 | valence (lexicon) | 3.89 | 3.83 | -0.06 |
 | register level (lexicon) | 4.05 | 4.00 | -0.05 |
-| `v6full_aggression` | 1.37 | 1.33 | -0.04 |
-| `v6full_vocalisation` | 1.37 | 1.33 | -0.04 |
 | `slot_institutional_en_v3_target` | 4.00 | 4.00 | +0.00 |
 | `v6_harm` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_harm` | 1.00 | 1.00 | +0.00 |
-| `v6full_harm` | 1.00 | 1.00 | +0.00 |
 | bodily harm (lexicon) | 1.00 | 1.00 | +0.00 |
 | vulgarity (lexicon) | 1.00 | 1.00 | +0.00 |
 | charge (lexicon) | 1.32 | 1.33 | +0.02 |
-| `v6full_makes_worse` | 2.47 | 2.50 | +0.03 |
 | `v6_superego` | 1.42 | 1.50 | +0.08 |
-| `v6full_superego` | 1.42 | 1.50 | +0.08 |
 | `slot_institutional_en_v3_vocalisation` | 1.91 | 2.00 | +0.09 |
-| `v6full_makes_better` | 2.21 | 2.33 | +0.12 |
 | `slot_institutional_en_v3_delay` | 2.27 | 2.40 | +0.13 |
 | `v6_interiority` | 1.84 | 2.00 | +0.16 |
-| `v6_wide_interiority` | 1.84 | 2.00 | +0.16 |
-| `v6full_interiority` | 1.84 | 2.00 | +0.16 |
-| `v6_wide_superego` | 1.42 | 1.60 | +0.18 |
 | dominance (Warriner) | 5.45 | 5.64 | +0.19 |
 | `slot_institutional_en_v3_collective` | 1.00 | 1.20 | +0.20 |
 | `v6_fit` | 4.79 | 5.00 | +0.21 |
-| `v6_wide_fit` | 4.79 | 5.00 | +0.21 |
 | `v6_makes_better` | 2.21 | 2.50 | +0.29 |
-| `v6_wide_makes_better` | 2.21 | 2.60 | +0.39 |
 | arousal (Warriner) | 4.12 | 4.56 | +0.44 |
-| `v6full_mundanity` | 4.00 | 4.50 | +0.50 |
-| `v6full_fit` | 4.79 | 5.33 | +0.54 |
 | valence (Warriner) | 5.06 | 5.64 | +0.57 |
 | `v6_deliberation` | 2.16 | 2.75 | +0.59 |
-| `v6_wide_deliberation` | 2.16 | 2.80 | +0.64 |
-| `v6full_deliberation` | 2.16 | 2.83 | +0.68 |
 | `v6_hedged` | 2.00 | 2.75 | +0.75 |
 | `v6_mundanity` | 4.00 | 4.75 | +0.75 |
-| `v6_wide_mundanity` | 4.00 | 4.80 | +0.80 |
 | `slot_institutional_en_v3_abstraction` | 3.09 | 4.00 | +0.91 |
-| `v6full_hedged` | 2.00 | 3.00 | +1.00 |
-| `v6_wide_hedged` | 2.00 | 3.20 | +1.20 |
 | `slot_institutional_en_v3_deference` | 2.82 | 4.20 | +1.38 |
 | `slot_institutional_en_v3_procedural` | 4.09 | 5.80 | +1.71 |
 | `slot_institutional_en_v3_mediation` | 2.55 | 5.00 | +2.45 |
@@ -5214,26 +4160,14 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 |---|---|---|---|
 | valence (Warriner) | 7.55 | 4.50 | -3.04 |
 | `v6_makes_better` | 5.00 | 3.00 | -2.00 |
-| `v6_wide_makes_better` | 5.00 | 3.00 | -2.00 |
-| `v6full_makes_better` | 5.00 | 3.00 | -2.00 |
 | valence (lexicon) | 6.00 | 4.00 | -2.00 |
 | dominance (Warriner) | 6.75 | 5.25 | -1.51 |
 | charge (lexicon) | 2.60 | 1.60 | -1.00 |
 | `v6_superego` | 1.80 | 1.00 | -0.80 |
-| `v6_wide_superego` | 1.80 | 1.00 | -0.80 |
-| `v6full_superego` | 1.80 | 1.00 | -0.80 |
 | `v6_interiority` | 2.40 | 1.60 | -0.80 |
-| `v6_wide_interiority` | 2.40 | 1.60 | -0.80 |
-| `v6full_interiority` | 2.40 | 1.60 | -0.80 |
 | `v6_hedged` | 1.60 | 1.00 | -0.60 |
-| `v6_wide_hedged` | 1.60 | 1.00 | -0.60 |
-| `v6full_hedged` | 1.60 | 1.00 | -0.60 |
 | `v6_mundanity` | 5.80 | 5.20 | -0.60 |
-| `v6_wide_mundanity` | 5.80 | 5.20 | -0.60 |
-| `v6full_mundanity` | 5.80 | 5.20 | -0.60 |
 | `v6_deliberation` | 1.20 | 1.00 | -0.20 |
-| `v6_wide_deliberation` | 1.20 | 1.00 | -0.20 |
-| `v6full_deliberation` | 1.20 | 1.00 | -0.20 |
 | `slot_institutional_en_v3_deference` | 4.00 | 4.00 | +0.00 |
 | `slot_institutional_en_v3_delay` | 1.00 | 1.00 | +0.00 |
 | `slot_institutional_en_v3_mediation` | 1.00 | 1.00 | +0.00 |
@@ -5241,10 +4175,6 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | `slot_institutional_en_v3_termination` | 1.00 | 1.00 | +0.00 |
 | `v6_fit` | 6.80 | 6.80 | +0.00 |
 | `v6_harm` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_fit` | 6.80 | 6.80 | +0.00 |
-| `v6_wide_harm` | 1.00 | 1.00 | +0.00 |
-| `v6full_fit` | 6.80 | 6.80 | +0.00 |
-| `v6full_harm` | 1.00 | 1.00 | +0.00 |
 | bodily harm (lexicon) | 1.00 | 1.00 | +0.00 |
 | register level (lexicon) | 4.00 | 4.00 | +0.00 |
 | vulgarity (lexicon) | 1.00 | 1.00 | +0.00 |
@@ -5256,22 +4186,14 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | `slot_institutional_en_v3_agency` | 1.00 | 1.75 | +0.75 |
 | `slot_institutional_en_v3_target` | 1.00 | 1.75 | +0.75 |
 | `v6_aggression` | 1.00 | 1.80 | +0.80 |
-| `v6_wide_aggression` | 1.00 | 1.80 | +0.80 |
-| `v6full_aggression` | 1.00 | 1.80 | +0.80 |
 | `v6_directedness` | 1.40 | 2.20 | +0.80 |
-| `v6_wide_directedness` | 1.40 | 2.20 | +0.80 |
-| `v6full_directedness` | 1.40 | 2.20 | +0.80 |
 | `slot_institutional_en_v3_specificity` | 1.33 | 2.25 | +0.92 |
 | `slot_institutional_en_v3_assertiveness` | 1.00 | 2.00 | +1.00 |
 | `v6_makes_worse` | 1.00 | 2.00 | +1.00 |
-| `v6_wide_makes_worse` | 1.00 | 2.00 | +1.00 |
-| `v6full_makes_worse` | 1.00 | 2.00 | +1.00 |
 | arousal (Warriner) | 4.07 | 5.09 | +1.03 |
 | `slot_institutional_en_v3_arousal` | 1.67 | 3.50 | +1.83 |
 | `slot_institutional_en_v3_collective` | 1.00 | 3.25 | +2.25 |
 | `v6_vocalisation` | 1.20 | 4.00 | +2.80 |
-| `v6_wide_vocalisation` | 1.20 | 4.00 | +2.80 |
-| `v6full_vocalisation` | 1.20 | 4.00 | +2.80 |
 | `slot_institutional_en_v3_vocalisation` | 1.00 | 4.75 | +3.75 |
 
 > One group consists of adjectives that describe a stable quality or state of the subject, while the other group consists of verbs (often gerunds) that describe an ongoing action or activity performed by the subject.
@@ -5293,16 +4215,12 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 |---|---|---|---|
 | bodily harm (lexicon) | 1.77 | 1.00 | -0.77 |
 | `v6_mundanity` | 5.29 | 4.55 | -0.75 |
-| `v6_wide_mundanity` | 5.29 | 4.55 | -0.75 |
-| `v6full_mundanity` | 5.29 | 4.55 | -0.75 |
 | `slot_institutional_en_v3_delay` | 1.73 | 1.00 | -0.73 |
 | charge (lexicon) | 2.38 | 1.82 | -0.57 |
 | concreteness (lexicon) | 3.00 | 2.45 | -0.55 |
 | transgressiveness (lexicon) | 1.62 | 1.09 | -0.52 |
 | valence (Warriner) | 6.17 | 5.72 | -0.46 |
 | `v6_hedged` | 1.41 | 1.00 | -0.41 |
-| `v6_wide_hedged` | 1.41 | 1.00 | -0.41 |
-| `v6full_hedged` | 1.41 | 1.00 | -0.41 |
 | `slot_institutional_en_v3_deference` | 4.00 | 3.67 | -0.33 |
 | `slot_institutional_en_v3_procedural` | 4.00 | 3.67 | -0.33 |
 | register level (lexicon) | 3.85 | 3.55 | -0.30 |
@@ -5310,29 +4228,15 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | `slot_institutional_en_v3_abstraction` | 2.91 | 2.67 | -0.24 |
 | dominance (Warriner) | 5.85 | 5.65 | -0.20 |
 | `v6_makes_better` | 2.82 | 2.64 | -0.19 |
-| `v6_wide_makes_better` | 2.82 | 2.64 | -0.19 |
-| `v6full_makes_better` | 2.82 | 2.64 | -0.19 |
 | `v6_fit` | 5.82 | 5.64 | -0.19 |
-| `v6_wide_fit` | 5.82 | 5.64 | -0.19 |
-| `v6full_fit` | 5.82 | 5.64 | -0.19 |
 | `v6_deliberation` | 1.18 | 1.00 | -0.18 |
 | `v6_superego` | 1.18 | 1.00 | -0.18 |
-| `v6_wide_deliberation` | 1.18 | 1.00 | -0.18 |
-| `v6_wide_superego` | 1.18 | 1.00 | -0.18 |
-| `v6full_deliberation` | 1.18 | 1.00 | -0.18 |
-| `v6full_superego` | 1.18 | 1.00 | -0.18 |
 | `slot_institutional_en_v3_specificity` | 2.27 | 2.11 | -0.16 |
 | `slot_institutional_en_v3_termination` | 1.27 | 1.11 | -0.16 |
 | `slot_institutional_en_v3_assertiveness` | 1.36 | 1.22 | -0.14 |
 | `v6_interiority` | 1.59 | 1.45 | -0.13 |
-| `v6_wide_interiority` | 1.59 | 1.45 | -0.13 |
-| `v6full_interiority` | 1.59 | 1.45 | -0.13 |
 | `v6_harm` | 1.12 | 1.00 | -0.12 |
-| `v6_wide_harm` | 1.12 | 1.00 | -0.12 |
-| `v6full_harm` | 1.12 | 1.00 | -0.12 |
 | `v6_directedness` | 1.71 | 1.64 | -0.07 |
-| `v6_wide_directedness` | 1.71 | 1.64 | -0.07 |
-| `v6full_directedness` | 1.71 | 1.64 | -0.07 |
 | `slot_institutional_en_v3_agency` | 1.36 | 1.33 | -0.03 |
 | `slot_institutional_en_v3_mediation` | 1.00 | 1.00 | +0.00 |
 | vulgarity (lexicon) | 1.00 | 1.00 | +0.00 |
@@ -5341,17 +4245,11 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | valence (lexicon) | 4.31 | 4.45 | +0.15 |
 | **charge, in frame** (`task_charge`) | 1.85 | 2.08 | +0.23 |
 | `v6_aggression` | 1.24 | 1.55 | +0.31 |
-| `v6_wide_aggression` | 1.24 | 1.55 | +0.31 |
-| `v6full_aggression` | 1.24 | 1.55 | +0.31 |
 | `v6_makes_worse` | 1.47 | 1.82 | +0.35 |
-| `v6_wide_makes_worse` | 1.47 | 1.82 | +0.35 |
-| `v6full_makes_worse` | 1.47 | 1.82 | +0.35 |
 | `slot_institutional_en_v3_arousal` | 2.00 | 2.44 | +0.44 |
 | `slot_institutional_en_v3_vocalisation` | 2.00 | 2.44 | +0.44 |
 | `slot_institutional_en_v3_collective` | 1.27 | 2.00 | +0.73 |
 | `v6_vocalisation` | 1.65 | 2.82 | +1.17 |
-| `v6_wide_vocalisation` | 1.65 | 2.82 | +1.17 |
-| `v6full_vocalisation` | 1.65 | 2.82 | +1.17 |
 
 > One group consists of words that describe an ongoing activity or state (often with a following complement), while the other group consists of words that directly evaluate or characterize the neighbors.
 
@@ -5371,38 +4269,22 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | scale | base | aligned | delta |
 |---|---|---|---|
 | `v6_mundanity` | 5.21 | 4.14 | -1.07 |
-| `v6_wide_mundanity` | 5.21 | 4.14 | -1.07 |
-| `v6full_mundanity` | 5.21 | 4.14 | -1.07 |
 | `slot_institutional_en_v3_target` | 2.43 | 1.60 | -0.83 |
 | `slot_institutional_en_v3_assertiveness` | 2.57 | 1.80 | -0.77 |
 | `v6_hedged` | 1.64 | 1.00 | -0.64 |
-| `v6_wide_hedged` | 1.64 | 1.00 | -0.64 |
-| `v6full_hedged` | 1.64 | 1.00 | -0.64 |
 | `slot_institutional_en_v3_agency` | 2.29 | 1.80 | -0.49 |
 | arousal (Warriner) | 4.28 | 3.81 | -0.47 |
 | `slot_institutional_en_v3_termination` | 1.43 | 1.00 | -0.43 |
 | `v6_makes_better` | 2.36 | 2.00 | -0.36 |
-| `v6_wide_makes_better` | 2.36 | 2.00 | -0.36 |
-| `v6full_makes_better` | 2.36 | 2.00 | -0.36 |
 | charge (lexicon) | 1.92 | 1.57 | -0.35 |
 | bodily harm (lexicon) | 1.33 | 1.00 | -0.33 |
 | `slot_institutional_en_v3_delay` | 1.29 | 1.00 | -0.29 |
 | `v6_interiority` | 1.57 | 1.29 | -0.29 |
-| `v6_wide_interiority` | 1.57 | 1.29 | -0.29 |
-| `v6full_interiority` | 1.57 | 1.29 | -0.29 |
 | `v6_superego` | 1.21 | 1.00 | -0.21 |
-| `v6_wide_superego` | 1.21 | 1.00 | -0.21 |
-| `v6full_superego` | 1.21 | 1.00 | -0.21 |
 | `v6_deliberation` | 1.14 | 1.00 | -0.14 |
 | `v6_harm` | 1.14 | 1.00 | -0.14 |
-| `v6_wide_deliberation` | 1.14 | 1.00 | -0.14 |
-| `v6_wide_harm` | 1.14 | 1.00 | -0.14 |
-| `v6full_deliberation` | 1.14 | 1.00 | -0.14 |
-| `v6full_harm` | 1.14 | 1.00 | -0.14 |
 | transgressiveness (lexicon) | 1.25 | 1.14 | -0.11 |
 | `v6_directedness` | 1.93 | 1.86 | -0.07 |
-| `v6_wide_directedness` | 1.93 | 1.86 | -0.07 |
-| `v6full_directedness` | 1.93 | 1.86 | -0.07 |
 | `slot_institutional_en_v3_abstraction` | 3.00 | 3.00 | +0.00 |
 | `slot_institutional_en_v3_mediation` | 1.00 | 1.00 | +0.00 |
 | valence (lexicon) | 4.00 | 4.00 | +0.00 |
@@ -5411,25 +4293,17 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | register level (lexicon) | 3.83 | 4.00 | +0.17 |
 | `slot_institutional_en_v3_specificity` | 2.00 | 2.20 | +0.20 |
 | `v6_fit` | 5.93 | 6.14 | +0.21 |
-| `v6_wide_fit` | 5.93 | 6.14 | +0.21 |
-| `v6full_fit` | 5.93 | 6.14 | +0.21 |
 | concreteness (Brysbaert) | 2.54 | 2.77 | +0.23 |
 | concreteness (lexicon) | 2.42 | 2.71 | +0.30 |
 | `slot_institutional_en_v3_deference` | 3.43 | 4.00 | +0.57 |
 | `slot_institutional_en_v3_vocalisation` | 3.43 | 4.00 | +0.57 |
 | dominance (Warriner) | 5.70 | 6.29 | +0.59 |
 | `v6_aggression` | 1.36 | 2.00 | +0.64 |
-| `v6_wide_aggression` | 1.36 | 2.00 | +0.64 |
-| `v6full_aggression` | 1.36 | 2.00 | +0.64 |
 | `slot_institutional_en_v3_procedural` | 3.29 | 4.00 | +0.71 |
 | `slot_institutional_en_v3_collective` | 2.14 | 3.00 | +0.86 |
 | `slot_institutional_en_v3_arousal` | 2.71 | 3.80 | +1.09 |
 | `v6_makes_worse` | 1.50 | 2.71 | +1.21 |
-| `v6_wide_makes_worse` | 1.50 | 2.71 | +1.21 |
-| `v6full_makes_worse` | 1.50 | 2.71 | +1.21 |
 | `v6_vocalisation` | 2.00 | 3.57 | +1.57 |
-| `v6_wide_vocalisation` | 2.00 | 3.57 | +1.57 |
-| `v6full_vocalisation` | 2.00 | 3.57 | +1.57 |
 | valence (Warriner) | 5.44 | 7.55 | +2.11 |
 
 > One group consists of words that can directly follow 'always' to form an ongoing activity or behavior (often gerunds or adjectives describing an activity), while the other group consists of words that require additional structure (such as a preposition or copula) to complete the predicate, often indicating a state or location.
@@ -5549,62 +4423,38 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | `slot_institutional_en_v3_agency` | 5.20 | 4.00 | -1.20 |
 | `slot_institutional_en_v3_assertiveness` | 4.40 | 3.22 | -1.18 |
 | `v6_harm` | 1.93 | 1.00 | -0.93 |
-| `v6_wide_harm` | 1.93 | 1.00 | -0.93 |
-| `v6full_harm` | 1.93 | 1.00 | -0.93 |
 | `v6_makes_worse` | 2.14 | 1.33 | -0.81 |
-| `v6_wide_makes_worse` | 2.14 | 1.33 | -0.81 |
-| `v6full_makes_worse` | 2.14 | 1.33 | -0.81 |
 | `slot_institutional_en_v3_termination` | 1.90 | 1.11 | -0.79 |
 | `slot_institutional_en_v3_specificity` | 4.20 | 3.44 | -0.76 |
 | `v6_directedness` | 2.93 | 2.33 | -0.60 |
-| `v6_wide_directedness` | 2.93 | 2.33 | -0.60 |
-| `v6full_directedness` | 2.93 | 2.33 | -0.60 |
 | bodily harm (lexicon) | 1.57 | 1.00 | -0.57 |
 | `slot_institutional_en_v3_arousal` | 4.00 | 3.44 | -0.56 |
 | `slot_institutional_en_v3_collective` | 5.20 | 4.67 | -0.53 |
 | `v6_aggression` | 1.93 | 1.44 | -0.48 |
-| `v6_wide_aggression` | 1.93 | 1.44 | -0.48 |
-| `v6full_aggression` | 1.93 | 1.44 | -0.48 |
 | transgressiveness (lexicon) | 1.50 | 1.11 | -0.39 |
 | concreteness (lexicon) | 3.57 | 3.22 | -0.35 |
 | `v6_hedged` | 1.43 | 1.22 | -0.21 |
-| `v6_wide_hedged` | 1.43 | 1.22 | -0.21 |
-| `v6full_hedged` | 1.43 | 1.22 | -0.21 |
 | register level (lexicon) | 3.79 | 3.67 | -0.12 |
 | vulgarity (lexicon) | 1.07 | 1.00 | -0.07 |
 | `slot_institutional_en_v3_delay` | 1.00 | 1.00 | +0.00 |
 | `slot_institutional_en_v3_mediation` | 1.00 | 1.00 | +0.00 |
 | `v6_superego` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_superego` | 1.00 | 1.00 | +0.00 |
-| `v6full_superego` | 1.00 | 1.00 | +0.00 |
 | arousal (Warriner) | 4.56 | 4.59 | +0.03 |
 | charge (lexicon) | 1.93 | 2.00 | +0.07 |
 | `slot_institutional_en_v3_abstraction` | 2.40 | 2.56 | +0.16 |
 | `v6_deliberation` | 1.07 | 1.44 | +0.37 |
-| `v6_wide_deliberation` | 1.07 | 1.44 | +0.37 |
-| `v6full_deliberation` | 1.07 | 1.44 | +0.37 |
 | concreteness (Brysbaert) | 3.27 | 3.72 | +0.45 |
 | `v6_interiority` | 1.29 | 1.78 | +0.49 |
-| `v6_wide_interiority` | 1.29 | 1.78 | +0.49 |
-| `v6full_interiority` | 1.29 | 1.78 | +0.49 |
 | `slot_institutional_en_v3_procedural` | 3.10 | 3.67 | +0.57 |
 | dominance (Warriner) | 5.66 | 6.27 | +0.61 |
 | `v6_fit` | 6.00 | 6.78 | +0.78 |
-| `v6_wide_fit` | 6.00 | 6.78 | +0.78 |
-| `v6full_fit` | 6.00 | 6.78 | +0.78 |
 | valence (lexicon) | 3.86 | 4.67 | +0.81 |
 | valence (Warriner) | 5.53 | 6.36 | +0.82 |
 | `slot_institutional_en_v3_deference` | 3.10 | 4.00 | +0.90 |
 | `v6_makes_better` | 2.43 | 3.33 | +0.90 |
-| `v6_wide_makes_better` | 2.43 | 3.33 | +0.90 |
-| `v6full_makes_better` | 2.43 | 3.33 | +0.90 |
 | `v6_mundanity` | 4.29 | 5.33 | +1.05 |
-| `v6_wide_mundanity` | 4.29 | 5.33 | +1.05 |
-| `v6full_mundanity` | 4.29 | 5.33 | +1.05 |
 | `slot_institutional_en_v3_vocalisation` | 2.70 | 5.89 | +3.19 |
 | `v6_vocalisation` | 2.29 | 5.67 | +3.38 |
-| `v6_wide_vocalisation` | 2.29 | 5.67 | +3.38 |
-| `v6full_vocalisation` | 2.29 | 5.67 | +3.38 |
 
 > One group consists of intransitive or social/expressive activities that can be engaged in without a specified object, while the other consists of actions that typically require or imply a goal, object, or endpoint.
 
@@ -5627,26 +4477,16 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | `slot_institutional_en_v3_assertiveness` | 4.43 | 3.17 | -1.26 |
 | `slot_institutional_en_v3_agency` | 5.14 | 4.00 | -1.14 |
 | `v6_directedness` | 3.45 | 2.42 | -1.04 |
-| `v6_wide_directedness` | 3.45 | 2.42 | -1.04 |
-| `v6full_directedness` | 3.45 | 2.42 | -1.04 |
 | **charge, in frame** (`task_charge`) | 2.03 | 1.34 | -0.69 |
 | `slot_institutional_en_v3_arousal` | 3.86 | 3.33 | -0.52 |
 | `v6_harm` | 1.82 | 1.33 | -0.48 |
-| `v6_wide_harm` | 1.82 | 1.33 | -0.48 |
-| `v6full_harm` | 1.82 | 1.33 | -0.48 |
 | `slot_institutional_en_v3_termination` | 1.57 | 1.17 | -0.40 |
 | `v6_makes_worse` | 2.00 | 1.67 | -0.33 |
-| `v6_wide_makes_worse` | 2.00 | 1.67 | -0.33 |
-| `v6full_makes_worse` | 2.00 | 1.67 | -0.33 |
 | `slot_institutional_en_v3_collective` | 5.57 | 5.25 | -0.32 |
 | register level (lexicon) | 4.00 | 3.73 | -0.27 |
 | `v6_aggression` | 1.82 | 1.67 | -0.15 |
-| `v6_wide_aggression` | 1.82 | 1.67 | -0.15 |
-| `v6full_aggression` | 1.82 | 1.67 | -0.15 |
 | bodily harm (lexicon) | 1.40 | 1.27 | -0.13 |
 | `v6_hedged` | 1.27 | 1.17 | -0.11 |
-| `v6_wide_hedged` | 1.27 | 1.17 | -0.11 |
-| `v6full_hedged` | 1.27 | 1.17 | -0.11 |
 | transgressiveness (lexicon) | 1.40 | 1.36 | -0.04 |
 | `slot_institutional_en_v3_abstraction` | 2.43 | 2.42 | -0.01 |
 | `slot_institutional_en_v3_delay` | 1.00 | 1.00 | +0.00 |
@@ -5654,19 +4494,11 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | vulgarity (lexicon) | 1.00 | 1.00 | +0.00 |
 | `slot_institutional_en_v3_specificity` | 3.57 | 3.58 | +0.01 |
 | `v6_superego` | 1.00 | 1.08 | +0.08 |
-| `v6_wide_superego` | 1.00 | 1.08 | +0.08 |
-| `v6full_superego` | 1.00 | 1.08 | +0.08 |
 | `v6_interiority` | 1.36 | 1.58 | +0.22 |
-| `v6_wide_interiority` | 1.36 | 1.58 | +0.22 |
-| `v6full_interiority` | 1.36 | 1.58 | +0.22 |
 | `v6_deliberation` | 1.09 | 1.33 | +0.24 |
-| `v6_wide_deliberation` | 1.09 | 1.33 | +0.24 |
-| `v6full_deliberation` | 1.09 | 1.33 | +0.24 |
 | arousal (Warriner) | 4.37 | 4.80 | +0.43 |
 | `slot_institutional_en_v3_procedural` | 3.14 | 3.58 | +0.44 |
 | `v6_makes_better` | 2.55 | 3.08 | +0.54 |
-| `v6_wide_makes_better` | 2.55 | 3.08 | +0.54 |
-| `v6full_makes_better` | 2.55 | 3.08 | +0.54 |
 | `slot_institutional_en_v3_deference` | 3.14 | 3.75 | +0.61 |
 | dominance (Warriner) | 5.51 | 6.18 | +0.67 |
 | valence (Warriner) | 5.55 | 6.28 | +0.73 |
@@ -5674,16 +4506,10 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | charge (lexicon) | 1.50 | 2.27 | +0.77 |
 | valence (lexicon) | 3.80 | 4.64 | +0.84 |
 | `v6_mundanity` | 4.73 | 5.58 | +0.86 |
-| `v6_wide_mundanity` | 4.73 | 5.58 | +0.86 |
-| `v6full_mundanity` | 4.73 | 5.58 | +0.86 |
 | concreteness (Brysbaert) | 2.95 | 3.82 | +0.86 |
 | concreteness (lexicon) | 3.00 | 4.00 | +1.00 |
 | `v6_fit` | 5.82 | 6.92 | +1.10 |
-| `v6_wide_fit` | 5.82 | 6.92 | +1.10 |
-| `v6full_fit` | 5.82 | 6.92 | +1.10 |
 | `v6_vocalisation` | 2.91 | 4.67 | +1.76 |
-| `v6_wide_vocalisation` | 2.91 | 4.67 | +1.76 |
-| `v6full_vocalisation` | 2.91 | 4.67 | +1.76 |
 
 > One group consists of verbs that typically take a direct object or express a directed action, while the other group consists of intransitive verbs of activity or communication that do not require an object.
 
@@ -5704,12 +4530,8 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 |---|---|---|---|
 | `slot_institutional_en_v3_target` | 5.50 | 2.20 | -3.30 |
 | `v6_makes_worse` | 4.40 | 1.40 | -3.00 |
-| `v6_wide_makes_worse` | 4.40 | 1.40 | -3.00 |
-| `v6full_makes_worse` | 4.40 | 1.40 | -3.00 |
 | `slot_institutional_en_v3_arousal` | 6.00 | 3.00 | -3.00 |
 | `v6_harm` | 4.00 | 1.00 | -3.00 |
-| `v6_wide_harm` | 4.00 | 1.00 | -3.00 |
-| `v6full_harm` | 4.00 | 1.00 | -3.00 |
 | `slot_institutional_en_v3_assertiveness` | 6.00 | 3.20 | -2.80 |
 | `slot_institutional_en_v3_agency` | 6.50 | 4.00 | -2.50 |
 | bodily harm (lexicon) | 3.40 | 1.00 | -2.40 |
@@ -5717,14 +4539,10 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | **charge, in frame** (`task_charge`) | 3.23 | 1.02 | -2.21 |
 | arousal (Warriner) | 5.47 | 3.31 | -2.15 |
 | `v6_aggression` | 3.60 | 1.60 | -2.00 |
-| `v6_wide_aggression` | 3.60 | 1.60 | -2.00 |
-| `v6full_aggression` | 3.60 | 1.60 | -2.00 |
 | transgressiveness (lexicon) | 3.00 | 1.00 | -2.00 |
 | `slot_institutional_en_v3_termination` | 3.00 | 1.20 | -1.80 |
 | `slot_institutional_en_v3_collective` | 7.00 | 5.40 | -1.60 |
 | `v6_directedness` | 4.40 | 3.00 | -1.40 |
-| `v6_wide_directedness` | 4.40 | 3.00 | -1.40 |
-| `v6full_directedness` | 4.40 | 3.00 | -1.40 |
 | `slot_institutional_en_v3_specificity` | 4.50 | 3.20 | -1.30 |
 | charge (lexicon) | 3.20 | 2.00 | -1.20 |
 | `slot_institutional_en_v3_delay` | 1.00 | 1.00 | +0.00 |
@@ -5734,35 +4552,19 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | concreteness (Brysbaert) | 3.61 | 3.64 | +0.03 |
 | `v6_hedged` | 1.00 | 1.40 | +0.40 |
 | `v6_superego` | 1.00 | 1.40 | +0.40 |
-| `v6_wide_hedged` | 1.00 | 1.40 | +0.40 |
-| `v6_wide_superego` | 1.00 | 1.40 | +0.40 |
-| `v6full_hedged` | 1.00 | 1.40 | +0.40 |
-| `v6full_superego` | 1.00 | 1.40 | +0.40 |
 | `v6_fit` | 6.20 | 7.00 | +0.80 |
-| `v6_wide_fit` | 6.20 | 7.00 | +0.80 |
-| `v6full_fit` | 6.20 | 7.00 | +0.80 |
 | `v6_deliberation` | 1.00 | 1.80 | +0.80 |
-| `v6_wide_deliberation` | 1.00 | 1.80 | +0.80 |
-| `v6full_deliberation` | 1.00 | 1.80 | +0.80 |
 | `slot_institutional_en_v3_abstraction` | 2.00 | 3.00 | +1.00 |
 | `v6_makes_better` | 1.80 | 3.00 | +1.20 |
-| `v6_wide_makes_better` | 1.80 | 3.00 | +1.20 |
-| `v6full_makes_better` | 1.80 | 3.00 | +1.20 |
 | `v6_interiority` | 1.00 | 2.40 | +1.40 |
-| `v6_wide_interiority` | 1.00 | 2.40 | +1.40 |
-| `v6full_interiority` | 1.00 | 2.40 | +1.40 |
 | valence (lexicon) | 3.00 | 4.50 | +1.50 |
 | dominance (Warriner) | 4.91 | 6.51 | +1.60 |
 | `slot_institutional_en_v3_procedural` | 1.75 | 3.60 | +1.85 |
 | `slot_institutional_en_v3_deference` | 1.75 | 4.00 | +2.25 |
 | `v6_mundanity` | 3.00 | 5.80 | +2.80 |
-| `v6_wide_mundanity` | 3.00 | 5.80 | +2.80 |
-| `v6full_mundanity` | 3.00 | 5.80 | +2.80 |
 | valence (Warriner) | 3.77 | 6.61 | +2.83 |
 | `slot_institutional_en_v3_vocalisation` | 1.50 | 6.60 | +5.10 |
 | `v6_vocalisation` | 1.20 | 6.60 | +5.40 |
-| `v6_wide_vocalisation` | 1.20 | 6.60 | +5.40 |
-| `v6full_vocalisation` | 1.20 | 6.60 | +5.40 |
 
 > One group names activities that are primarily verbal or social, while the other names physical or forceful actions directed at objects or people.
 
@@ -5781,24 +4583,16 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 |---|---|---|---|
 | **charge, in frame** (`task_charge`) | 5.72 | 1.35 | -4.37 |
 | `v6_harm` | 5.00 | 1.00 | -4.00 |
-| `v6_wide_harm` | 5.00 | 1.00 | -4.00 |
-| `v6full_harm` | 5.00 | 1.00 | -4.00 |
 | `v6_makes_worse` | 5.60 | 1.60 | -4.00 |
-| `v6_wide_makes_worse` | 5.60 | 1.60 | -4.00 |
-| `v6full_makes_worse` | 5.60 | 1.60 | -4.00 |
 | `slot_institutional_en_v3_arousal` | 6.20 | 3.00 | -3.20 |
 | `slot_institutional_en_v3_target` | 6.00 | 2.80 | -3.20 |
 | concreteness (lexicon) | 5.20 | 2.00 | -3.20 |
 | `slot_institutional_en_v3_agency` | 6.40 | 3.40 | -3.00 |
 | `slot_institutional_en_v3_assertiveness` | 6.40 | 3.40 | -3.00 |
 | `v6_aggression` | 4.60 | 1.80 | -2.80 |
-| `v6_wide_aggression` | 4.60 | 1.80 | -2.80 |
-| `v6full_aggression` | 4.60 | 1.80 | -2.80 |
 | bodily harm (lexicon) | 3.80 | 1.00 | -2.80 |
 | `slot_institutional_en_v3_collective` | 6.20 | 3.80 | -2.40 |
 | `v6_directedness` | 6.00 | 3.60 | -2.40 |
-| `v6_wide_directedness` | 6.00 | 3.60 | -2.40 |
-| `v6full_directedness` | 6.00 | 3.60 | -2.40 |
 | transgressiveness (lexicon) | 3.20 | 1.00 | -2.20 |
 | `slot_institutional_en_v3_termination` | 3.20 | 1.20 | -2.00 |
 | `slot_institutional_en_v3_specificity` | 4.60 | 2.60 | -2.00 |
@@ -5809,37 +4603,21 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | concreteness (Brysbaert) | 3.96 | 3.87 | -0.10 |
 | `slot_institutional_en_v3_delay` | 1.00 | 1.00 | +0.00 |
 | `v6_superego` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_superego` | 1.00 | 1.00 | +0.00 |
-| `v6full_superego` | 1.00 | 1.00 | +0.00 |
 | `slot_institutional_en_v3_mediation` | 1.00 | 1.20 | +0.20 |
 | `v6_hedged` | 1.00 | 1.40 | +0.40 |
-| `v6_wide_hedged` | 1.00 | 1.40 | +0.40 |
-| `v6full_hedged` | 1.00 | 1.40 | +0.40 |
 | `v6_fit` | 6.60 | 7.00 | +0.40 |
-| `v6_wide_fit` | 6.60 | 7.00 | +0.40 |
-| `v6full_fit` | 6.60 | 7.00 | +0.40 |
 | `v6_deliberation` | 1.00 | 1.60 | +0.60 |
-| `v6_wide_deliberation` | 1.00 | 1.60 | +0.60 |
-| `v6full_deliberation` | 1.00 | 1.60 | +0.60 |
 | `v6_interiority` | 1.00 | 2.00 | +1.00 |
-| `v6_wide_interiority` | 1.00 | 2.00 | +1.00 |
-| `v6full_interiority` | 1.00 | 2.00 | +1.00 |
 | `slot_institutional_en_v3_abstraction` | 2.00 | 3.20 | +1.20 |
 | dominance (Warriner) | 4.87 | 6.33 | +1.46 |
 | valence (lexicon) | 3.00 | 4.50 | +1.50 |
 | `v6_makes_better` | 1.20 | 2.80 | +1.60 |
-| `v6_wide_makes_better` | 1.20 | 2.80 | +1.60 |
-| `v6full_makes_better` | 1.20 | 2.80 | +1.60 |
 | `slot_institutional_en_v3_procedural` | 1.60 | 3.60 | +2.00 |
 | `slot_institutional_en_v3_deference` | 1.60 | 3.80 | +2.20 |
 | valence (Warriner) | 3.80 | 6.20 | +2.39 |
 | `v6_mundanity` | 2.00 | 5.60 | +3.60 |
-| `v6_wide_mundanity` | 2.00 | 5.60 | +3.60 |
-| `v6full_mundanity` | 2.00 | 5.60 | +3.60 |
 | `slot_institutional_en_v3_vocalisation` | 2.20 | 6.80 | +4.60 |
 | `v6_vocalisation` | 2.00 | 7.00 | +5.00 |
-| `v6_wide_vocalisation` | 2.00 | 7.00 | +5.00 |
-| `v6full_vocalisation` | 2.00 | 7.00 | +5.00 |
 
 > One group names physical acts directed at people or objects, while the other names acts of speaking or verbal exchange.
 
@@ -5861,17 +4639,9 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | `slot_institutional_en_v3_assertiveness` | 4.75 | 3.10 | -1.65 |
 | `slot_institutional_en_v3_target` | 3.38 | 1.90 | -1.48 |
 | `v6_harm` | 2.40 | 1.00 | -1.40 |
-| `v6_wide_harm` | 2.40 | 1.00 | -1.40 |
-| `v6full_harm` | 2.40 | 1.00 | -1.40 |
 | `v6_aggression` | 2.70 | 1.40 | -1.30 |
-| `v6_wide_aggression` | 2.70 | 1.40 | -1.30 |
-| `v6full_aggression` | 2.70 | 1.40 | -1.30 |
 | `v6_makes_worse` | 2.60 | 1.30 | -1.30 |
-| `v6_wide_makes_worse` | 2.60 | 1.30 | -1.30 |
-| `v6full_makes_worse` | 2.60 | 1.30 | -1.30 |
 | `v6_directedness` | 3.30 | 2.10 | -1.20 |
-| `v6_wide_directedness` | 3.30 | 2.10 | -1.20 |
-| `v6full_directedness` | 3.30 | 2.10 | -1.20 |
 | concreteness (lexicon) | 4.10 | 2.90 | -1.20 |
 | bodily harm (lexicon) | 2.00 | 1.00 | -1.00 |
 | `slot_institutional_en_v3_arousal` | 4.38 | 3.40 | -0.98 |
@@ -5882,29 +4652,17 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | `slot_institutional_en_v3_specificity` | 4.12 | 3.60 | -0.52 |
 | arousal (Warriner) | 4.72 | 4.21 | -0.51 |
 | `v6_hedged` | 1.60 | 1.20 | -0.40 |
-| `v6_wide_hedged` | 1.60 | 1.20 | -0.40 |
-| `v6full_hedged` | 1.60 | 1.20 | -0.40 |
 | charge (lexicon) | 2.10 | 1.90 | -0.20 |
 | vulgarity (lexicon) | 1.10 | 1.00 | -0.10 |
 | concreteness (Brysbaert) | 3.62 | 3.59 | -0.04 |
 | `slot_institutional_en_v3_delay` | 1.00 | 1.00 | +0.00 |
 | `v6_mundanity` | 4.40 | 4.50 | +0.10 |
-| `v6_wide_mundanity` | 4.40 | 4.50 | +0.10 |
-| `v6full_mundanity` | 4.40 | 4.50 | +0.10 |
 | `slot_institutional_en_v3_mediation` | 1.00 | 1.10 | +0.10 |
 | register level (lexicon) | 3.80 | 3.90 | +0.10 |
 | `v6_superego` | 1.00 | 1.20 | +0.20 |
-| `v6_wide_superego` | 1.00 | 1.20 | +0.20 |
-| `v6full_superego` | 1.00 | 1.20 | +0.20 |
 | `v6_fit` | 6.50 | 6.70 | +0.20 |
-| `v6_wide_fit` | 6.50 | 6.70 | +0.20 |
-| `v6full_fit` | 6.50 | 6.70 | +0.20 |
 | `v6_deliberation` | 1.00 | 1.40 | +0.40 |
-| `v6_wide_deliberation` | 1.00 | 1.40 | +0.40 |
-| `v6full_deliberation` | 1.00 | 1.40 | +0.40 |
 | `v6_interiority` | 1.20 | 1.70 | +0.50 |
-| `v6_wide_interiority` | 1.20 | 1.70 | +0.50 |
-| `v6full_interiority` | 1.20 | 1.70 | +0.50 |
 | dominance (Warriner) | 5.54 | 6.04 | +0.50 |
 | valence (lexicon) | 3.70 | 4.40 | +0.70 |
 | valence (Warriner) | 5.15 | 6.13 | +0.98 |
@@ -5912,12 +4670,8 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | `slot_institutional_en_v3_collective` | 4.38 | 5.60 | +1.22 |
 | `slot_institutional_en_v3_abstraction` | 1.88 | 3.10 | +1.23 |
 | `v6_makes_better` | 1.80 | 3.10 | +1.30 |
-| `v6_wide_makes_better` | 1.80 | 3.10 | +1.30 |
-| `v6full_makes_better` | 1.80 | 3.10 | +1.30 |
 | `slot_institutional_en_v3_deference` | 2.50 | 3.90 | +1.40 |
 | `v6_vocalisation` | 3.10 | 5.20 | +2.10 |
-| `v6_wide_vocalisation` | 3.10 | 5.20 | +2.10 |
-| `v6full_vocalisation` | 3.10 | 5.20 | +2.10 |
 | `slot_institutional_en_v3_vocalisation` | 3.00 | 5.50 | +2.50 |
 
 > One group consists of actions that are primarily physical, combative, or motion-oriented, while the other group consists of actions that are verbal, performative, or ritualistic.
@@ -5948,56 +4702,32 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | `slot_institutional_en_v3_collective` | 5.00 | 4.14 | -0.86 |
 | arousal (Warriner) | 4.59 | 3.75 | -0.84 |
 | `v6_harm` | 1.83 | 1.00 | -0.83 |
-| `v6_wide_harm` | 1.83 | 1.00 | -0.83 |
-| `v6full_harm` | 1.83 | 1.00 | -0.83 |
 | `v6_makes_worse` | 2.17 | 1.43 | -0.74 |
-| `v6_wide_makes_worse` | 2.17 | 1.43 | -0.74 |
-| `v6full_makes_worse` | 2.17 | 1.43 | -0.74 |
 | `v6_hedged` | 1.50 | 1.00 | -0.50 |
-| `v6_wide_hedged` | 1.50 | 1.00 | -0.50 |
-| `v6full_hedged` | 1.50 | 1.00 | -0.50 |
 | `v6_aggression` | 2.00 | 1.57 | -0.43 |
-| `v6_wide_aggression` | 2.00 | 1.57 | -0.43 |
-| `v6full_aggression` | 2.00 | 1.57 | -0.43 |
 | bodily harm (lexicon) | 1.33 | 1.00 | -0.33 |
 | register level (lexicon) | 3.83 | 3.50 | -0.33 |
 | transgressiveness (lexicon) | 1.17 | 1.00 | -0.17 |
 | `v6_directedness` | 3.17 | 3.14 | -0.02 |
-| `v6_wide_directedness` | 3.17 | 3.14 | -0.02 |
-| `v6full_directedness` | 3.17 | 3.14 | -0.02 |
 | `slot_institutional_en_v3_delay` | 1.00 | 1.00 | +0.00 |
 | `slot_institutional_en_v3_mediation` | 1.00 | 1.00 | +0.00 |
 | `v6_superego` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_superego` | 1.00 | 1.00 | +0.00 |
-| `v6full_superego` | 1.00 | 1.00 | +0.00 |
 | charge (lexicon) | 1.50 | 1.50 | +0.00 |
 | vulgarity (lexicon) | 1.00 | 1.00 | +0.00 |
 | concreteness (Brysbaert) | 3.41 | 3.70 | +0.28 |
 | `v6_deliberation` | 1.00 | 1.29 | +0.29 |
-| `v6_wide_deliberation` | 1.00 | 1.29 | +0.29 |
-| `v6full_deliberation` | 1.00 | 1.29 | +0.29 |
 | `v6_interiority` | 1.00 | 1.57 | +0.57 |
-| `v6_wide_interiority` | 1.00 | 1.57 | +0.57 |
-| `v6full_interiority` | 1.00 | 1.57 | +0.57 |
 | `slot_institutional_en_v3_abstraction` | 2.00 | 2.57 | +0.57 |
 | valence (lexicon) | 3.83 | 4.50 | +0.67 |
 | dominance (Warriner) | 5.63 | 6.33 | +0.69 |
 | valence (Warriner) | 5.63 | 6.54 | +0.91 |
 | `v6_makes_better` | 1.67 | 2.86 | +1.19 |
-| `v6_wide_makes_better` | 1.67 | 2.86 | +1.19 |
-| `v6full_makes_better` | 1.67 | 2.86 | +1.19 |
 | `slot_institutional_en_v3_procedural` | 2.50 | 3.71 | +1.21 |
 | `slot_institutional_en_v3_deference` | 2.50 | 3.86 | +1.36 |
 | `v6_mundanity` | 4.00 | 5.43 | +1.43 |
-| `v6_wide_mundanity` | 4.00 | 5.43 | +1.43 |
-| `v6full_mundanity` | 4.00 | 5.43 | +1.43 |
 | `v6_fit` | 5.17 | 6.71 | +1.55 |
-| `v6_wide_fit` | 5.17 | 6.71 | +1.55 |
-| `v6full_fit` | 5.17 | 6.71 | +1.55 |
 | `slot_institutional_en_v3_vocalisation` | 1.00 | 6.29 | +5.29 |
 | `v6_vocalisation` | 1.00 | 6.29 | +5.29 |
-| `v6_wide_vocalisation` | 1.00 | 6.29 | +5.29 |
-| `v6full_vocalisation` | 1.00 | 6.29 | +5.29 |
 
 > One group consists of verbs that do not inherently denote speech or communication, while the other group consists of verbs that inherently denote speech, vocalization, or communicative interaction.
 
@@ -6020,23 +4750,15 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | **charge, in frame** (`task_charge`) | 4.56 | 1.21 | -3.35 |
 | register level (lexicon) | 4.00 | 1.00 | -3.00 |
 | `v6_makes_worse` | 4.20 | 1.60 | -2.60 |
-| `v6_wide_makes_worse` | 4.20 | 1.60 | -2.60 |
-| `v6full_makes_worse` | 4.20 | 1.60 | -2.60 |
 | `slot_institutional_en_v3_arousal` | 5.60 | 3.00 | -2.60 |
 | `slot_institutional_en_v3_assertiveness` | 5.80 | 3.40 | -2.40 |
 | `v6_harm` | 3.20 | 1.00 | -2.20 |
-| `v6_wide_harm` | 3.20 | 1.00 | -2.20 |
-| `v6full_harm` | 3.20 | 1.00 | -2.20 |
 | `slot_institutional_en_v3_agency` | 5.40 | 3.40 | -2.00 |
 | `slot_institutional_en_v3_target` | 5.40 | 3.40 | -2.00 |
 | `v6_directedness` | 5.00 | 3.20 | -1.80 |
-| `v6_wide_directedness` | 5.00 | 3.20 | -1.80 |
-| `v6full_directedness` | 5.00 | 3.20 | -1.80 |
 | bodily harm (lexicon) | 2.50 | 1.00 | -1.50 |
 | `slot_institutional_en_v3_specificity` | 4.40 | 3.00 | -1.40 |
 | `v6_aggression` | 3.20 | 1.80 | -1.40 |
-| `v6_wide_aggression` | 3.20 | 1.80 | -1.40 |
-| `v6full_aggression` | 3.20 | 1.80 | -1.40 |
 | transgressiveness (lexicon) | 2.25 | 1.00 | -1.25 |
 | `slot_institutional_en_v3_collective` | 5.80 | 4.60 | -1.20 |
 | arousal (Warriner) | 5.26 | 4.27 | -0.99 |
@@ -6046,37 +4768,21 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | `slot_institutional_en_v3_termination` | 2.20 | 2.20 | +0.00 |
 | vulgarity (lexicon) | 1.00 | 1.00 | +0.00 |
 | `v6_superego` | 1.00 | 1.20 | +0.20 |
-| `v6_wide_superego` | 1.00 | 1.20 | +0.20 |
-| `v6full_superego` | 1.00 | 1.20 | +0.20 |
 | `v6_hedged` | 1.00 | 1.40 | +0.40 |
-| `v6_wide_hedged` | 1.00 | 1.40 | +0.40 |
-| `v6full_hedged` | 1.00 | 1.40 | +0.40 |
 | `v6_fit` | 6.40 | 7.00 | +0.60 |
-| `v6_wide_fit` | 6.40 | 7.00 | +0.60 |
-| `v6full_fit` | 6.40 | 7.00 | +0.60 |
 | `slot_institutional_en_v3_mediation` | 1.00 | 1.80 | +0.80 |
 | `v6_deliberation` | 1.00 | 1.80 | +0.80 |
-| `v6_wide_deliberation` | 1.00 | 1.80 | +0.80 |
-| `v6full_deliberation` | 1.00 | 1.80 | +0.80 |
 | `slot_institutional_en_v3_abstraction` | 2.00 | 3.00 | +1.00 |
 | `v6_interiority` | 1.00 | 2.20 | +1.20 |
-| `v6_wide_interiority` | 1.00 | 2.20 | +1.20 |
-| `v6full_interiority` | 1.00 | 2.20 | +1.20 |
 | valence (Warriner) | 4.23 | 5.75 | +1.52 |
 | dominance (Warriner) | 4.65 | 6.22 | +1.57 |
 | `v6_makes_better` | 1.00 | 2.60 | +1.60 |
-| `v6_wide_makes_better` | 1.00 | 2.60 | +1.60 |
-| `v6full_makes_better` | 1.00 | 2.60 | +1.60 |
 | valence (lexicon) | 3.25 | 5.00 | +1.75 |
 | `slot_institutional_en_v3_procedural` | 1.60 | 3.60 | +2.00 |
 | `slot_institutional_en_v3_deference` | 1.60 | 4.00 | +2.40 |
 | `v6_mundanity` | 3.00 | 5.60 | +2.60 |
-| `v6_wide_mundanity` | 3.00 | 5.60 | +2.60 |
-| `v6full_mundanity` | 3.00 | 5.60 | +2.60 |
 | `slot_institutional_en_v3_vocalisation` | 1.20 | 6.80 | +5.60 |
 | `v6_vocalisation` | 1.20 | 7.00 | +5.80 |
-| `v6_wide_vocalisation` | 1.20 | 7.00 | +5.80 |
-| `v6full_vocalisation` | 1.20 | 7.00 | +5.80 |
 
 > One group names verbal activities involving speaking or exchanging words, while the other names physical actions that involve force or contact with an object or person.
 
@@ -6099,62 +4805,38 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | **charge, in frame** (`task_charge`) | 4.48 | 3.95 | -0.53 |
 | valence (Warriner) | 5.59 | 5.13 | -0.46 |
 | `v6_makes_worse` | 2.80 | 2.43 | -0.37 |
-| `v6_wide_makes_worse` | 2.80 | 2.43 | -0.37 |
-| `v6full_makes_worse` | 2.80 | 2.43 | -0.37 |
 | `slot_institutional_en_v3_arousal` | 2.59 | 2.33 | -0.25 |
 | `v6_hedged` | 1.80 | 1.57 | -0.23 |
-| `v6_wide_hedged` | 1.80 | 1.57 | -0.23 |
-| `v6full_hedged` | 1.80 | 1.57 | -0.23 |
 | bodily harm (lexicon) | 1.20 | 1.00 | -0.20 |
 | transgressiveness (lexicon) | 1.20 | 1.00 | -0.20 |
 | `slot_institutional_en_v3_specificity` | 4.35 | 4.17 | -0.19 |
 | `v6_superego` | 1.75 | 1.57 | -0.18 |
-| `v6_wide_superego` | 1.75 | 1.57 | -0.18 |
-| `v6full_superego` | 1.75 | 1.57 | -0.18 |
 | `slot_institutional_en_v3_target` | 4.18 | 4.00 | -0.18 |
 | concreteness (lexicon) | 2.85 | 2.71 | -0.14 |
 | `v6_directedness` | 3.25 | 3.14 | -0.11 |
-| `v6_wide_directedness` | 3.25 | 3.14 | -0.11 |
-| `v6full_directedness` | 3.25 | 3.14 | -0.11 |
 | `v6_aggression` | 1.10 | 1.00 | -0.10 |
-| `v6_wide_aggression` | 1.10 | 1.00 | -0.10 |
-| `v6full_aggression` | 1.10 | 1.00 | -0.10 |
 | concreteness (Brysbaert) | 2.89 | 2.82 | -0.07 |
 | `v6_harm` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_harm` | 1.00 | 1.00 | +0.00 |
-| `v6full_harm` | 1.00 | 1.00 | +0.00 |
 | vulgarity (lexicon) | 1.00 | 1.00 | +0.00 |
 | dominance (Warriner) | 5.55 | 5.59 | +0.04 |
 | valence (lexicon) | 4.10 | 4.14 | +0.04 |
 | `slot_institutional_en_v3_assertiveness` | 3.41 | 3.50 | +0.09 |
 | `v6_mundanity` | 4.05 | 4.14 | +0.09 |
-| `v6_wide_mundanity` | 4.05 | 4.14 | +0.09 |
-| `v6full_mundanity` | 4.05 | 4.14 | +0.09 |
 | charge (lexicon) | 1.45 | 1.57 | +0.12 |
 | `v6_interiority` | 1.10 | 1.29 | +0.19 |
-| `v6_wide_interiority` | 1.10 | 1.29 | +0.19 |
-| `v6full_interiority` | 1.10 | 1.29 | +0.19 |
 | `slot_institutional_en_v3_agency` | 4.12 | 4.33 | +0.22 |
 | `v6_deliberation` | 1.90 | 2.14 | +0.24 |
-| `v6_wide_deliberation` | 1.90 | 2.14 | +0.24 |
-| `v6full_deliberation` | 1.90 | 2.14 | +0.24 |
 | register level (lexicon) | 4.00 | 4.29 | +0.29 |
 | `slot_institutional_en_v3_mediation` | 4.18 | 4.50 | +0.32 |
 | `slot_institutional_en_v3_deference` | 5.47 | 5.83 | +0.36 |
 | `slot_institutional_en_v3_procedural` | 6.53 | 7.00 | +0.47 |
 | arousal (Warriner) | 4.08 | 4.65 | +0.57 |
 | `v6_makes_better` | 2.85 | 3.43 | +0.58 |
-| `v6_wide_makes_better` | 2.85 | 3.43 | +0.58 |
-| `v6full_makes_better` | 2.85 | 3.43 | +0.58 |
 | `slot_institutional_en_v3_delay` | 2.12 | 2.83 | +0.72 |
 | `slot_institutional_en_v3_abstraction` | 3.65 | 4.50 | +0.85 |
 | `slot_institutional_en_v3_collective` | 1.29 | 2.17 | +0.87 |
 | `v6_fit` | 5.40 | 6.29 | +0.89 |
-| `v6_wide_fit` | 5.40 | 6.29 | +0.89 |
-| `v6full_fit` | 5.40 | 6.29 | +0.89 |
 | `v6_vocalisation` | 1.30 | 2.29 | +0.99 |
-| `v6_wide_vocalisation` | 1.30 | 2.29 | +0.99 |
-| `v6full_vocalisation` | 1.30 | 2.29 | +0.99 |
 | `slot_institutional_en_v3_vocalisation` | 1.65 | 3.00 | +1.35 |
 
 > One group names steps in looking into or handling the complaint, while the other names concrete employment actions or changes to the employee's status.
@@ -6181,57 +4863,33 @@ Rows are `task_charge` (a rating of the completed scene, in this frame), the typ
 | concreteness (Brysbaert) | 3.63 | 2.21 | -1.41 |
 | `slot_institutional_en_v3_target` | 6.14 | 4.75 | -1.39 |
 | `v6_makes_worse` | 3.57 | 2.20 | -1.37 |
-| `v6_wide_makes_worse` | 3.57 | 2.20 | -1.37 |
-| `v6full_makes_worse` | 3.57 | 2.20 | -1.37 |
 | **charge, in frame** (`task_charge`) | 5.04 | 3.93 | -1.11 |
 | arousal (Warriner) | 4.35 | 3.43 | -0.92 |
 | `slot_institutional_en_v3_specificity` | 4.86 | 4.00 | -0.86 |
 | `v6_aggression` | 2.43 | 1.60 | -0.83 |
-| `v6_wide_aggression` | 2.43 | 1.60 | -0.83 |
-| `v6full_aggression` | 2.43 | 1.60 | -0.83 |
 | `slot_institutional_en_v3_termination` | 2.57 | 1.75 | -0.82 |
 | `v6_harm` | 2.57 | 1.80 | -0.77 |
-| `v6_wide_harm` | 2.57 | 1.80 | -0.77 |
-| `v6full_harm` | 2.57 | 1.80 | -0.77 |
 | `v6_directedness` | 4.14 | 3.40 | -0.74 |
-| `v6_wide_directedness` | 4.14 | 3.40 | -0.74 |
-| `v6full_directedness` | 4.14 | 3.40 | -0.74 |
 | bodily harm (lexicon) | 1.29 | 1.00 | -0.29 |
 | charge (lexicon) | 1.43 | 1.20 | -0.23 |
 | transgressiveness (lexicon) | 1.14 | 1.00 | -0.14 |
 | `v6_mundanity` | 3.29 | 3.20 | -0.09 |
-| `v6_wide_mundanity` | 3.29 | 3.20 | -0.09 |
-| `v6full_mundanity` | 3.29 | 3.20 | -0.09 |
 | `v6_hedged` | 1.86 | 1.80 | -0.06 |
-| `v6_wide_hedged` | 1.86 | 1.80 | -0.06 |
-| `v6full_hedged` | 1.86 | 1.80 | -0.06 |
 | `slot_institutional_en_v3_delay` | 1.00 | 1.00 | +0.00 |
 | `slot_institutional_en_v3_mediation` | 1.00 | 1.00 | +0.00 |
 | `v6_vocalisation` | 1.00 | 1.00 | +0.00 |
-| `v6_wide_vocalisation` | 1.00 | 1.00 | +0.00 |
-| `v6full_vocalisation` | 1.00 | 1.00 | +0.00 |
 | vulgarity (lexicon) | 1.00 | 1.00 | +0.00 |
 | `slot_institutional_en_v3_collective` | 4.14 | 4.25 | +0.11 |
 | register level (lexicon) | 3.86 | 4.00 | +0.14 |
 | `v6_interiority` | 1.00 | 1.20 | +0.20 |
-| `v6_wide_interiority` | 1.00 | 1.20 | +0.20 |
-| `v6full_interiority` | 1.00 | 1.20 | +0.20 |
 | valence (lexicon) | 4.00 | 4.20 | +0.20 |
 | `slot_institutional_en_v3_vocalisation` | 1.00 | 1.25 | +0.25 |
 | dominance (Warriner) | 5.83 | 6.18 | +0.34 |
 | `v6_superego` | 1.00 | 1.40 | +0.40 |
-| `v6_wide_superego` | 1.00 | 1.40 | +0.40 |
-| `v6full_superego` | 1.00 | 1.40 | +0.40 |
 | `v6_fit` | 5.00 | 5.40 | +0.40 |
-| `v6_wide_fit` | 5.00 | 5.40 | +0.40 |
-| `v6full_fit` | 5.00 | 5.40 | +0.40 |
 | `slot_institutional_en_v3_abstraction` | 2.00 | 2.50 | +0.50 |
 | `v6_deliberation` | 1.00 | 1.60 | +0.60 |
-| `v6_wide_deliberation` | 1.00 | 1.60 | +0.60 |
-| `v6full_deliberation` | 1.00 | 1.60 | +0.60 |
 | `v6_makes_better` | 1.00 | 1.80 | +0.80 |
-| `v6_wide_makes_better` | 1.00 | 1.80 | +0.80 |
-| `v6full_makes_better` | 1.00 | 1.80 | +0.80 |
 | `slot_institutional_en_v3_deference` | 3.29 | 4.25 | +0.96 |
 | valence (Warriner) | 5.19 | 6.32 | +1.13 |
 | `slot_institutional_en_v3_procedural` | 3.57 | 5.00 | +1.43 |

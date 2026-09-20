@@ -48,6 +48,16 @@ import pooled_tables as PT
 
 OUT = os.path.join(HERE, "results", "relation_sheet.md")
 
+#: **ONE BATTERY AT THREE SCOPES, NOT THREE INSTRUMENTS.** `v6`, `v6_wide` and
+#: `v6full` carry the SAME twelve scales -- verified, the three name sets are
+#: identical and neither variant holds a scale `v6_` lacks -- differing only in
+#: which words each scope admits. Printing all three puts three near-identical
+#: rows in every table (mundanity read +0.657 / +0.923 / +0.926 in the
+#: aggregate) and a reader scanning a sorted column sees three agreements where
+#: there is one measurement. Dropped from the DOCUMENT; still in
+#: `norm_shift_contextual.csv`, which is a data file and should stay complete.
+SKIP_CTX_PREFIX = ("v6_wide_", "v6full_")
+
 LEX = [("warriner_valence", "valence (Warriner)"),
        ("warriner_arousal", "arousal (Warriner)"),
        ("warriner_dominance", "dominance (Warriner)"),
@@ -96,6 +106,8 @@ def section(r, other_name=None):
             rowsout.append((r["aligned"][k] - r["base"][k], lab,
                             r["base"][k], r["aligned"][k]))
     for k in sorted(r.get("ctx", {})):
+        if k.startswith(SKIP_CTX_PREFIX):
+            continue
         b, a, _c = r["ctx"][k]
         rowsout.append((a - b, "`%s`" % k, b, a))
     L.append("| scale | base | aligned | delta |")
@@ -135,6 +147,12 @@ def build():
          "the type-level lexicons, and the contextual slot-rating batteries "
          "(`v6`, `slot_institutional_en_v3`, `sexual_v2`) whose raters also saw the "
          "frame. A scale is absent where neither side had a rated word.",
+         "",
+         "`v6_wide_*` and `v6full_*` are **not shown**: they are the same twelve "
+         "`v6` scales at wider scopes, so printing them would put three "
+         "near-identical rows in every table and read as three agreements where "
+         "there is one measurement. They remain in "
+         "`results/norm_shift_contextual.csv`.",
          "",
          "**Each table is sorted by delta, ascending** — what the base side holds "
          "most and the aligned side least is at the top. The scales are not "
