@@ -4,7 +4,7 @@ Each row is one scale, its two ends labelled on their own sides. Position is the
 
 Scales keep their native direction, low pole left and high pole right, so the side of every marker is a result. Rows are ordered by the square, most negative at the top, so the eye reads what alignment removes down to what it adds.
 
-Pole words illustrate each end among the words alignment moved: a word appears only if it moved in at least 50 prompt-lineage cells. For the six v6 scales, which rate a word in a particular frame rather than as a type, the number in brackets is how many frames the word was rated in.
+Pole words illustrate each end among the words alignment moved: a word appears only if it moved in at least 50 prompt-lineage cells. The six v6 scales rate a word IN a frame rather than as a type, so their pole words carry a second minimum: every one was rated in at least 7 frames.
 
 Coverage gate and population as in the scatter: minimum of the two arms' coverage at 0.20, the same 50 lineages, selection by Benjamini-Hochberg at 5 percent on both quantities over the eighteen-scale family, from which the four dispersion scales are omitted here as not independent of their parents.
 

@@ -20,6 +20,6 @@ Scales keep their native direction, low pole left and high pole right, so the si
 
 Charge deepens the movement in BOTH directions: at high lift arousal, concreteness, bodily harm and transgressiveness sit further left, and register level, dominance, valence and mundanity further right. Of the fourteen, 12 have their high-lift triangle further from zero than their low-lift one.
 
-Pole words illustrate each end among the words alignment moved: a word appears only if it moved in at least 50 prompt-lineage cells. For the six v6 scales the bracketed number is how many frames the word was rated in. 56 pole words, none repeated.
+Pole words illustrate each end among the words alignment moved: a word appears only if it moved in at least 50 prompt-lineage cells, and for the six v6 scales, which rate a word in a frame rather than as a type, in at least 7 frames. 56 pole words, none repeated.
 
 Population and gate as elsewhere: 50 endpoint lineages, English, coverage at 0.20 on the minimum of the two arms, 5,854,906 gated rows.

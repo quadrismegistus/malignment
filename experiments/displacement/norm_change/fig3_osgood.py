@@ -341,13 +341,9 @@ def draw_dose():
     #: from at high lift, read down to what it pushes toward.
     rs = sorted(POLES, key=lambda k: xy[k]["x"], reverse=True)
     n = len(rs)
-    fr = v6_frames()
 
     def lab(sc, side):
-        ws = PICKS[sc][side]
-        if sc.startswith("v6:"):
-            ws = ["%s (%d)" % (w, fr.get(w, 0)) for w in ws]
-        return "%s\n(%s)" % (POLES[sc][side], ", ".join(ws))
+        return "%s\n(%s)" % (POLES[sc][side], ", ".join(PICKS[sc][side]))
 
     fig, ax = plt.subplots(figsize=(PUB_SIZE[0], 0.30 * n + 1.05),
                            layout="constrained")
@@ -462,6 +458,18 @@ def _up(k):
             if r["field"].split("  (")[0] == k:
                 return r.get("up", 0)
     return 0
+
+
+def _v6_min():
+    """Fewest frames any v6 pole word was rated in. -> int
+
+    Replaces the per-label "(1050)" decoration: the provenance fact that a v6
+    rating is frame-specific is worth one clause in the caption, not a number
+    on eight of the twenty-eight labels.
+    """
+    fr = v6_frames()
+    return min(fr.get(w, 0) for sc in PICKS if sc.startswith("v6:")
+               for side in PICKS[sc] for w in side)
 
 
 def _zsd(scale):
@@ -592,9 +600,10 @@ def _z_caption(out, rs, meta, n_words):
         % sum(1 for r in rs if abs(r[3]) > abs(r[2])),
         "",
         "Pole words illustrate each end among the words alignment moved: a "
-        "word appears only if it moved in at least 50 prompt-lineage cells. "
-        "For the six v6 scales the bracketed number is how many frames the "
-        "word was rated in. %d pole words, none repeated." % n_words,
+        "word appears only if it moved in at least 50 prompt-lineage cells, "
+        "and for the six v6 scales, which rate a word in a frame rather than "
+        "as a type, in at least %d frames. %d pole words, none repeated."
+        % (_v6_min(), n_words),
         "",
         "Population and gate as elsewhere: 50 endpoint lineages, English, "
         "coverage at 0.20 on the minimum of the two arms, %s gated rows."
@@ -626,18 +635,21 @@ def main():
             "fitted" if "--fitted" in sys.argv else "bands")
     rs = rows(orient="--orient" in sys.argv, mode=mode)
     n = len(rs)
-    fr = v6_frames()
 
     flipped = {r[0]: r[5] for r in rs}
 
     def lab(sc, side):
+        #: **NO PER-WORD FRAME COUNT** (RH). The v6 labels used to read
+        #: "said (1050), screamed (170)", the number being how many frames the
+        #: word was rated in. It is a real provenance fact -- a v6 rating is of
+        #: a word IN a frame, so a word rated in 7 frames is thinner evidence
+        #: than one rated in 1,050 -- but it is a footnote riding on every
+        #: label, and it made the six v6 rows read differently from the other
+        #: eight for a reason no reader could infer. The caption carries the
+        #: minimum instead; `v6_frames` still computes it.
         if flipped[sc]:
             side = 1 - side
-        name = POLES[sc][side]
-        ws = PICKS[sc][side]
-        if sc.startswith("v6:"):
-            ws = ["%s (%d)" % (w, fr.get(w, 0)) for w in ws]
-        return "%s\n(%s)" % (name, ", ".join(ws))
+        return "%s\n(%s)" % (POLES[sc][side], ", ".join(PICKS[sc][side]))
 
     fig, ax = plt.subplots(figsize=(PUB_SIZE[0], 0.30 * n + 1.05),
                            layout="constrained")
@@ -754,9 +766,9 @@ def main():
         "",
         "Pole words illustrate each end among the words alignment moved: a "
         "word appears only if it moved in at least 50 prompt-lineage cells. "
-        "For the six v6 scales, which rate a word in a particular frame "
-        "rather than as a type, the number in brackets is how many frames the "
-        "word was rated in.",
+        "The six v6 scales rate a word IN a frame rather than as a type, so "
+        "their pole words carry a second minimum: every one was rated in at "
+        "least %d frames." % _v6_min(),
         "",
         "Coverage gate and population as in the scatter: minimum of the two "
         "arms' coverage at 0.20, the same 50 lineages, selection by "
