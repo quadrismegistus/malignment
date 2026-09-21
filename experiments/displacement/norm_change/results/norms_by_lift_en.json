@@ -1,0 +1,5936 @@
+{
+ "gate": 0.2,
+ "gate_on": "min(base_cov, aligned_cov)",
+ "aggregator": "median over prompts, per lineage, per band",
+ "lift": "charge.lift_per_lineage (T_base - frame)",
+ "cuts": [
+  0.0,
+  0.35999999999999943
+ ],
+ "rows_gated": 5854906,
+ "rows_no_lift": 493256,
+ "excluded_by_name": [
+  "brooke_formality",
+  "brooke_formality_absz",
+  "brooke_formality_z"
+ ],
+ "built": "2026-09-21 13:21",
+ "scales": [
+  {
+   "scale": "brysbaert_concreteness",
+   "n_lineages": 50,
+   "up": 22,
+   "down": 28,
+   "ties": 0,
+   "effective_n": 50,
+   "median": -0.00420616682699293,
+   "p_sign": 0.47988766169832786,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": 0.002434295960392574,
+     "up": 29,
+     "down": 21
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": -0.003103705865981077,
+     "up": 23,
+     "down": 27
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": -0.009678163149814178,
+     "up": 22,
+     "down": 28
+    }
+   ],
+   "table": "levels"
+  },
+  {
+   "scale": "brysbaert_concreteness_absz",
+   "n_lineages": 50,
+   "up": 20,
+   "down": 30,
+   "ties": 0,
+   "effective_n": 50,
+   "median": -0.0009350615104536941,
+   "p_sign": 0.20263875106454066,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": -0.0033948039022368703,
+     "up": 20,
+     "down": 30
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": -0.003630519836451074,
+     "up": 21,
+     "down": 29
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": -0.0022486756286109744,
+     "up": 22,
+     "down": 28
+    }
+   ],
+   "table": "levels"
+  },
+  {
+   "scale": "brysbaert_concreteness_z",
+   "n_lineages": 50,
+   "up": 22,
+   "down": 28,
+   "ties": 0,
+   "effective_n": 50,
+   "median": -0.004185118183274217,
+   "p_sign": 0.47988766169832786,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": 0.0024221141733913806,
+     "up": 29,
+     "down": 21
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": -0.0030881741950633534,
+     "up": 23,
+     "down": 27
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": -0.009629731355171083,
+     "up": 22,
+     "down": 28
+    }
+   ],
+   "table": "levels"
+  },
+  {
+   "scale": "k_bodily_harm",
+   "n_lineages": 50,
+   "up": 4,
+   "down": 43,
+   "ties": 3,
+   "effective_n": 47,
+   "median": -0.006186739326173307,
+   "p_sign": 2.781192165457469e-09,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": -0.004140690178279727,
+     "up": 4,
+     "down": 41
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": -0.00487024133016889,
+     "up": 4,
+     "down": 42
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": -0.013921231692235969,
+     "up": 3,
+     "down": 44
+    }
+   ],
+   "table": "levels"
+  },
+  {
+   "scale": "k_bodily_harm_absz",
+   "n_lineages": 50,
+   "up": 4,
+   "down": 43,
+   "ties": 3,
+   "effective_n": 47,
+   "median": -0.004883586731344508,
+   "p_sign": 2.781192165457469e-09,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": -0.0030491567928645907,
+     "up": 4,
+     "down": 41
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": -0.004092532931750506,
+     "up": 5,
+     "down": 43
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": -0.01137606947709896,
+     "up": 4,
+     "down": 45
+    }
+   ],
+   "table": "levels"
+  },
+  {
+   "scale": "k_bodily_harm_z",
+   "n_lineages": 50,
+   "up": 4,
+   "down": 43,
+   "ties": 3,
+   "effective_n": 47,
+   "median": -0.007109716359218289,
+   "p_sign": 2.781192165457469e-09,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": -0.0047584246154392384,
+     "up": 4,
+     "down": 42
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": -0.0055968148378185215,
+     "up": 6,
+     "down": 43
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": -0.015998089378687005,
+     "up": 4,
+     "down": 46
+    }
+   ],
+   "table": "levels"
+  },
+  {
+   "scale": "k_charge",
+   "n_lineages": 50,
+   "up": 25,
+   "down": 25,
+   "ties": 0,
+   "effective_n": 50,
+   "median": 0.0001142796426271131,
+   "p_sign": 1.0,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": -0.0001346830830479817,
+     "up": 25,
+     "down": 25
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.003568561376916024,
+     "up": 29,
+     "down": 21
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": -0.003961992379213297,
+     "up": 23,
+     "down": 27
+    }
+   ],
+   "table": "levels"
+  },
+  {
+   "scale": "k_charge_absz",
+   "n_lineages": 50,
+   "up": 16,
+   "down": 34,
+   "ties": 0,
+   "effective_n": 50,
+   "median": -0.004202604030794088,
+   "p_sign": 0.015346677832630107,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": -0.0032360619870969165,
+     "up": 13,
+     "down": 37
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": -0.002895221877305898,
+     "up": 15,
+     "down": 35
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": -0.00454568896555535,
+     "up": 14,
+     "down": 36
+    }
+   ],
+   "table": "levels"
+  },
+  {
+   "scale": "k_charge_z",
+   "n_lineages": 50,
+   "up": 25,
+   "down": 25,
+   "ties": 0,
+   "effective_n": 50,
+   "median": 9.968255985196711e-05,
+   "p_sign": 1.0,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": -0.00011747984311429038,
+     "up": 25,
+     "down": 25
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.0031127445349190216,
+     "up": 29,
+     "down": 21
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": -0.003455922099466824,
+     "up": 23,
+     "down": 27
+    }
+   ],
+   "table": "levels"
+  },
+  {
+   "scale": "k_concreteness",
+   "n_lineages": 50,
+   "up": 17,
+   "down": 33,
+   "ties": 0,
+   "effective_n": 50,
+   "median": -0.024133249902657083,
+   "p_sign": 0.032839137564268484,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": -0.00935236301090292,
+     "up": 21,
+     "down": 29
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": -0.014340878802901802,
+     "up": 19,
+     "down": 31
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": -0.037420975397202794,
+     "up": 18,
+     "down": 32
+    }
+   ],
+   "table": "levels"
+  },
+  {
+   "scale": "k_concreteness_absz",
+   "n_lineages": 50,
+   "up": 14,
+   "down": 36,
+   "ties": 0,
+   "effective_n": 50,
+   "median": -0.006984528875489587,
+   "p_sign": 0.0026021714567221466,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": -0.007426858862206537,
+     "up": 14,
+     "down": 36
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": -0.008166455285002483,
+     "up": 16,
+     "down": 34
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": -0.009481183035116636,
+     "up": 14,
+     "down": 36
+    }
+   ],
+   "table": "levels"
+  },
+  {
+   "scale": "k_concreteness_z",
+   "n_lineages": 50,
+   "up": 17,
+   "down": 33,
+   "ties": 0,
+   "effective_n": 50,
+   "median": -0.011854309274602917,
+   "p_sign": 0.032839137564268484,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": -0.0045939027701111385,
+     "up": 21,
+     "down": 29
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": -0.007044273493412689,
+     "up": 19,
+     "down": 31
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": -0.018381271378908173,
+     "up": 18,
+     "down": 32
+    }
+   ],
+   "table": "levels"
+  },
+  {
+   "scale": "k_register_level",
+   "n_lineages": 50,
+   "up": 45,
+   "down": 5,
+   "ties": 0,
+   "effective_n": 50,
+   "median": 0.0058126338845782,
+   "p_sign": 4.209852022540872e-09,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": 0.005082387714068659,
+     "up": 46,
+     "down": 4
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.005791639195113829,
+     "up": 45,
+     "down": 5
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 0.00897310122361794,
+     "up": 45,
+     "down": 5
+    }
+   ],
+   "table": "levels"
+  },
+  {
+   "scale": "k_register_level_absz",
+   "n_lineages": 50,
+   "up": 9,
+   "down": 41,
+   "ties": 0,
+   "effective_n": 50,
+   "median": -0.0030309508389484707,
+   "p_sign": 5.614100093254137e-06,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": -0.0022463769625912927,
+     "up": 8,
+     "down": 42
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": -0.0021753100528590363,
+     "up": 10,
+     "down": 40
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": -0.005894318183187447,
+     "up": 8,
+     "down": 42
+    }
+   ],
+   "table": "levels"
+  },
+  {
+   "scale": "k_register_level_z",
+   "n_lineages": 50,
+   "up": 45,
+   "down": 5,
+   "ties": 0,
+   "effective_n": 50,
+   "median": 0.006505454315431244,
+   "p_sign": 4.209852022540872e-09,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": 0.005688168521142303,
+     "up": 46,
+     "down": 4
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.0064819572234263365,
+     "up": 45,
+     "down": 5
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 0.01004262460652526,
+     "up": 45,
+     "down": 5
+    }
+   ],
+   "table": "levels"
+  },
+  {
+   "scale": "k_transgressiveness",
+   "n_lineages": 50,
+   "up": 6,
+   "down": 42,
+   "ties": 2,
+   "effective_n": 48,
+   "median": -0.0042486821642495065,
+   "p_sign": 1.0087482138487758e-07,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": -0.002908956976949928,
+     "up": 4,
+     "down": 43
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": -0.004055608237844011,
+     "up": 10,
+     "down": 40
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": -0.01126467429214828,
+     "up": 5,
+     "down": 44
+    }
+   ],
+   "table": "levels"
+  },
+  {
+   "scale": "k_transgressiveness_absz",
+   "n_lineages": 50,
+   "up": 6,
+   "down": 43,
+   "ties": 1,
+   "effective_n": 49,
+   "median": -0.003186750627644175,
+   "p_sign": 5.7277652842913085e-08,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": -0.0019349130815355386,
+     "up": 4,
+     "down": 45
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": -0.003092414509776764,
+     "up": 10,
+     "down": 40
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": -0.008971051357607465,
+     "up": 6,
+     "down": 44
+    }
+   ],
+   "table": "levels"
+  },
+  {
+   "scale": "k_transgressiveness_z",
+   "n_lineages": 50,
+   "up": 6,
+   "down": 43,
+   "ties": 1,
+   "effective_n": 49,
+   "median": -0.005025500497957969,
+   "p_sign": 5.7277652842913085e-08,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": -0.003440823335577159,
+     "up": 6,
+     "down": 44
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": -0.0047971254216912645,
+     "up": 10,
+     "down": 40
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": -0.013324278935448615,
+     "up": 6,
+     "down": 44
+    }
+   ],
+   "table": "levels"
+  },
+  {
+   "scale": "k_valence",
+   "n_lineages": 50,
+   "up": 38,
+   "down": 12,
+   "ties": 0,
+   "effective_n": 50,
+   "median": 0.005130719746081036,
+   "p_sign": 0.00030586400160359517,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": 0.004306081561932906,
+     "up": 34,
+     "down": 16
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.00348315958510681,
+     "up": 36,
+     "down": 14
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 0.007434128900641879,
+     "up": 38,
+     "down": 12
+    }
+   ],
+   "table": "levels"
+  },
+  {
+   "scale": "k_valence_absz",
+   "n_lineages": 50,
+   "up": 23,
+   "down": 27,
+   "ties": 0,
+   "effective_n": 50,
+   "median": -0.002957321504820757,
+   "p_sign": 0.6718110337653656,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": -0.001039050179293257,
+     "up": 22,
+     "down": 28
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": -0.0008483112161293757,
+     "up": 25,
+     "down": 25
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": -0.008889333253310039,
+     "up": 14,
+     "down": 36
+    }
+   ],
+   "table": "levels"
+  },
+  {
+   "scale": "k_valence_z",
+   "n_lineages": 50,
+   "up": 38,
+   "down": 12,
+   "ties": 0,
+   "effective_n": 50,
+   "median": 0.005244484822772722,
+   "p_sign": 0.00030586400160359517,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": 0.004401561674544467,
+     "up": 34,
+     "down": 16
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.003560392787647672,
+     "up": 36,
+     "down": 14
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 0.007598968199292667,
+     "up": 38,
+     "down": 12
+    }
+   ],
+   "table": "levels"
+  },
+  {
+   "scale": "k_vulgarity",
+   "n_lineages": 50,
+   "up": 0,
+   "down": 8,
+   "ties": 42,
+   "effective_n": 8,
+   "median": 0.0,
+   "p_sign": 0.0078125,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": 0.0,
+     "up": 0,
+     "down": 5
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.0,
+     "up": 0,
+     "down": 6
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 0.0,
+     "up": 0,
+     "down": 21
+    }
+   ],
+   "table": "levels"
+  },
+  {
+   "scale": "k_vulgarity_absz",
+   "n_lineages": 50,
+   "up": 4,
+   "down": 36,
+   "ties": 10,
+   "effective_n": 40,
+   "median": -2.7755575615628914e-17,
+   "p_sign": 1.8570244719740003e-07,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": -1.3877787807814457e-17,
+     "up": 8,
+     "down": 30
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": -1.3877787807814457e-17,
+     "up": 5,
+     "down": 35
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": -5.204170427930421e-17,
+     "up": 3,
+     "down": 43
+    }
+   ],
+   "table": "levels"
+  },
+  {
+   "scale": "k_vulgarity_z",
+   "n_lineages": 50,
+   "up": 4,
+   "down": 36,
+   "ties": 10,
+   "effective_n": 40,
+   "median": -2.7755575615628914e-17,
+   "p_sign": 1.8570244719740003e-07,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": -1.3877787807814457e-17,
+     "up": 8,
+     "down": 31
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": -1.3877787807814457e-17,
+     "up": 5,
+     "down": 38
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": -4.85722573273506e-17,
+     "up": 3,
+     "down": 44
+    }
+   ],
+   "table": "levels"
+  },
+  {
+   "scale": "warriner_arousal",
+   "n_lineages": 50,
+   "up": 8,
+   "down": 42,
+   "ties": 0,
+   "effective_n": 50,
+   "median": -0.02768892846148363,
+   "p_sign": 1.163555804595262e-06,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": -0.0216967169669956,
+     "up": 8,
+     "down": 42
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": -0.021936006935920238,
+     "up": 11,
+     "down": 39
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": -0.032497375019679864,
+     "up": 10,
+     "down": 40
+    }
+   ],
+   "table": "levels"
+  },
+  {
+   "scale": "warriner_arousal_absz",
+   "n_lineages": 50,
+   "up": 33,
+   "down": 17,
+   "ties": 0,
+   "effective_n": 50,
+   "median": 0.006232235815966797,
+   "p_sign": 0.032839137564268484,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": 0.01004157165853048,
+     "up": 43,
+     "down": 7
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.007518697299989607,
+     "up": 39,
+     "down": 11
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": -0.00570029766495217,
+     "up": 17,
+     "down": 33
+    }
+   ],
+   "table": "levels"
+  },
+  {
+   "scale": "warriner_arousal_z",
+   "n_lineages": 50,
+   "up": 8,
+   "down": 42,
+   "ties": 0,
+   "effective_n": 50,
+   "median": -0.03042147273604042,
+   "p_sign": 1.163555804595262e-06,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": -0.023837906352755553,
+     "up": 8,
+     "down": 42
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": -0.02410081119126402,
+     "up": 11,
+     "down": 39
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": -0.03570445167386142,
+     "up": 10,
+     "down": 40
+    }
+   ],
+   "table": "levels"
+  },
+  {
+   "scale": "warriner_dominance",
+   "n_lineages": 50,
+   "up": 36,
+   "down": 13,
+   "ties": 1,
+   "effective_n": 49,
+   "median": 0.007857037616780138,
+   "p_sign": 0.001402688503695515,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": 0.005779300712755786,
+     "up": 32,
+     "down": 18
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.002130423792773506,
+     "up": 27,
+     "down": 23
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 0.016111063514280044,
+     "up": 37,
+     "down": 13
+    }
+   ],
+   "table": "levels"
+  },
+  {
+   "scale": "warriner_dominance_absz",
+   "n_lineages": 50,
+   "up": 19,
+   "down": 31,
+   "ties": 0,
+   "effective_n": 50,
+   "median": -0.0026528982469781193,
+   "p_sign": 0.11892045255943628,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": -0.00039071207684795994,
+     "up": 24,
+     "down": 26
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": -0.0017575006087217349,
+     "up": 23,
+     "down": 27
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": -0.006976471376742052,
+     "up": 16,
+     "down": 34
+    }
+   ],
+   "table": "levels"
+  },
+  {
+   "scale": "warriner_dominance_z",
+   "n_lineages": 50,
+   "up": 36,
+   "down": 13,
+   "ties": 1,
+   "effective_n": 49,
+   "median": 0.008373208163560403,
+   "p_sign": 0.001402688503695515,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": 0.006158973682951208,
+     "up": 32,
+     "down": 18
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.0022703826510114544,
+     "up": 27,
+     "down": 23
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 0.017169484877261484,
+     "up": 37,
+     "down": 13
+    }
+   ],
+   "table": "levels"
+  },
+  {
+   "scale": "warriner_valence",
+   "n_lineages": 50,
+   "up": 37,
+   "down": 13,
+   "ties": 0,
+   "effective_n": 50,
+   "median": 0.011349495100580587,
+   "p_sign": 0.000936222910851825,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": 0.011800503042448618,
+     "up": 35,
+     "down": 15
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.006690920547430146,
+     "up": 30,
+     "down": 20
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 0.02354265534020694,
+     "up": 39,
+     "down": 11
+    }
+   ],
+   "table": "levels"
+  },
+  {
+   "scale": "warriner_valence_absz",
+   "n_lineages": 50,
+   "up": 13,
+   "down": 37,
+   "ties": 0,
+   "effective_n": 50,
+   "median": -0.0056833500822895955,
+   "p_sign": 0.000936222910851825,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": -0.004680892898512007,
+     "up": 17,
+     "down": 33
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": -0.006441207514260916,
+     "up": 13,
+     "down": 37
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": -0.011062344115660427,
+     "up": 13,
+     "down": 37
+    }
+   ],
+   "table": "levels"
+  },
+  {
+   "scale": "warriner_valence_extremity",
+   "n_lineages": 50,
+   "up": 17,
+   "down": 33,
+   "ties": 0,
+   "effective_n": 50,
+   "median": -0.006938904681808161,
+   "p_sign": 0.032839137564268484,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": -0.003808829783932849,
+     "up": 19,
+     "down": 31
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": -0.009394379354360272,
+     "up": 16,
+     "down": 34
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": -0.010389125227420054,
+     "up": 14,
+     "down": 36
+    }
+   ],
+   "table": "levels"
+  },
+  {
+   "scale": "warriner_valence_extremity_absz",
+   "n_lineages": 50,
+   "up": 12,
+   "down": 38,
+   "ties": 0,
+   "effective_n": 50,
+   "median": -0.007446276138651231,
+   "p_sign": 0.00030586400160359517,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": -0.007260657313495761,
+     "up": 14,
+     "down": 36
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": -0.006328055664824278,
+     "up": 12,
+     "down": 38
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": -0.01157876813653605,
+     "up": 9,
+     "down": 41
+    }
+   ],
+   "table": "levels"
+  },
+  {
+   "scale": "warriner_valence_extremity_z",
+   "n_lineages": 50,
+   "up": 17,
+   "down": 33,
+   "ties": 0,
+   "effective_n": 50,
+   "median": -0.009064865301905423,
+   "p_sign": 0.032839137564268484,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": -0.004975789484434556,
+     "up": 19,
+     "down": 31
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": -0.012272655029480058,
+     "up": 16,
+     "down": 34
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": -0.013572173867453859,
+     "up": 14,
+     "down": 36
+    }
+   ],
+   "table": "levels"
+  },
+  {
+   "scale": "warriner_valence_z",
+   "n_lineages": 50,
+   "up": 37,
+   "down": 13,
+   "ties": 0,
+   "effective_n": 50,
+   "median": 0.008852314669132194,
+   "p_sign": 0.000936222910851825,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": 0.009204089279748792,
+     "up": 35,
+     "down": 15
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.0052187461721524,
+     "up": 30,
+     "down": 20
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 0.018362666477363412,
+     "up": 39,
+     "down": 11
+    }
+   ],
+   "table": "levels"
+  },
+  {
+   "scale": "results:aggression",
+   "n_lineages": 50,
+   "up": 13,
+   "down": 34,
+   "ties": 3,
+   "effective_n": 47,
+   "median": -0.006776848657432055,
+   "p_sign": 0.0030876764615186403,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 21,
+     "median": 0.0,
+     "up": 1,
+     "down": 8
+    },
+    {
+     "band": "mid",
+     "n_lineages": 28,
+     "median": 0.0,
+     "up": 8,
+     "down": 13
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": -0.001988189972453702,
+     "up": 15,
+     "down": 29
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "results:body_distance",
+   "n_lineages": 50,
+   "up": 33,
+   "down": 17,
+   "ties": 0,
+   "effective_n": 50,
+   "median": 0.16175850623990473,
+   "p_sign": 0.032839137564268484,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 17,
+     "median": 0.12689738143885432,
+     "up": 15,
+     "down": 2
+    },
+    {
+     "band": "mid",
+     "n_lineages": 26,
+     "median": 0.027287288417271682,
+     "up": 15,
+     "down": 11
+    },
+    {
+     "band": "high",
+     "n_lineages": 36,
+     "median": 0.17369494441379763,
+     "up": 24,
+     "down": 12
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "results:charge",
+   "n_lineages": 50,
+   "up": 18,
+   "down": 32,
+   "ties": 0,
+   "effective_n": 50,
+   "median": -0.14087594250465146,
+   "p_sign": 0.06490864707227217,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 17,
+     "median": -0.11647196264906823,
+     "up": 4,
+     "down": 13
+    },
+    {
+     "band": "mid",
+     "n_lineages": 26,
+     "median": -0.04210561501654697,
+     "up": 12,
+     "down": 14
+    },
+    {
+     "band": "high",
+     "n_lineages": 36,
+     "median": -0.1419217900382731,
+     "up": 12,
+     "down": 24
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "results:consummation",
+   "n_lineages": 50,
+   "up": 41,
+   "down": 8,
+   "ties": 1,
+   "effective_n": 49,
+   "median": 0.1065149574809372,
+   "p_sign": 1.9646537765538596e-06,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 34,
+     "median": 0.0956579432484973,
+     "up": 22,
+     "down": 12
+    },
+    {
+     "band": "mid",
+     "n_lineages": 39,
+     "median": 0.09662990798218596,
+     "up": 24,
+     "down": 15
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 0.10334688005192494,
+     "up": 40,
+     "down": 10
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "results:deliberation",
+   "n_lineages": 50,
+   "up": 7,
+   "down": 24,
+   "ties": 19,
+   "effective_n": 31,
+   "median": 0.0,
+   "p_sign": 0.003326892852783203,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 21,
+     "median": 0.0,
+     "up": 9,
+     "down": 8
+    },
+    {
+     "band": "mid",
+     "n_lineages": 28,
+     "median": -0.03049123439186563,
+     "up": 8,
+     "down": 18
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 0.0,
+     "up": 6,
+     "down": 20
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "results:directedness",
+   "n_lineages": 50,
+   "up": 11,
+   "down": 38,
+   "ties": 1,
+   "effective_n": 49,
+   "median": -0.16871601195501473,
+   "p_sign": 0.00014197068519905542,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 21,
+     "median": 0.0,
+     "up": 2,
+     "down": 8
+    },
+    {
+     "band": "mid",
+     "n_lineages": 28,
+     "median": -0.07224782827380749,
+     "up": 7,
+     "down": 14
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": -0.18959197897250246,
+     "up": 10,
+     "down": 37
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "results:directness",
+   "n_lineages": 50,
+   "up": 39,
+   "down": 11,
+   "ties": 0,
+   "effective_n": 50,
+   "median": 0.08959259407567632,
+   "p_sign": 9.021490107130603e-05,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 34,
+     "median": 0.09498504209674219,
+     "up": 22,
+     "down": 12
+    },
+    {
+     "band": "mid",
+     "n_lineages": 39,
+     "median": 0.09945030272496513,
+     "up": 25,
+     "down": 14
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 0.07548284143864337,
+     "up": 35,
+     "down": 15
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "results:enactment",
+   "n_lineages": 50,
+   "up": 41,
+   "down": 9,
+   "ties": 0,
+   "effective_n": 50,
+   "median": 0.09091284412503231,
+   "p_sign": 5.614100093254137e-06,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 34,
+     "median": 0.10818485089207419,
+     "up": 21,
+     "down": 13
+    },
+    {
+     "band": "mid",
+     "n_lineages": 39,
+     "median": 0.0659787667380507,
+     "up": 22,
+     "down": 17
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 0.09179983604440589,
+     "up": 38,
+     "down": 12
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "results:euphemism",
+   "n_lineages": 50,
+   "up": 38,
+   "down": 6,
+   "ties": 6,
+   "effective_n": 44,
+   "median": 0.0030454148623122457,
+   "p_sign": 9.430375484953402e-07,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 17,
+     "median": 0.0031599562937683068,
+     "up": 11,
+     "down": 0
+    },
+    {
+     "band": "mid",
+     "n_lineages": 26,
+     "median": 0.0,
+     "up": 8,
+     "down": 3
+    },
+    {
+     "band": "high",
+     "n_lineages": 36,
+     "median": 0.003108896499595337,
+     "up": 21,
+     "down": 3
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "results:explicitness",
+   "n_lineages": 50,
+   "up": 14,
+   "down": 36,
+   "ties": 0,
+   "effective_n": 50,
+   "median": -0.08274615187913736,
+   "p_sign": 0.0026021714567221466,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 17,
+     "median": -0.07723984359598357,
+     "up": 3,
+     "down": 14
+    },
+    {
+     "band": "mid",
+     "n_lineages": 26,
+     "median": -0.040251971311225265,
+     "up": 6,
+     "down": 20
+    },
+    {
+     "band": "high",
+     "n_lineages": 36,
+     "median": -0.06024547970075855,
+     "up": 12,
+     "down": 24
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "results:exposure",
+   "n_lineages": 50,
+   "up": 19,
+   "down": 31,
+   "ties": 0,
+   "effective_n": 50,
+   "median": -0.20562927152685473,
+   "p_sign": 0.11892045255943628,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 17,
+     "median": -0.22034528408993515,
+     "up": 4,
+     "down": 13
+    },
+    {
+     "band": "mid",
+     "n_lineages": 26,
+     "median": -0.04933248592619932,
+     "up": 12,
+     "down": 14
+    },
+    {
+     "band": "high",
+     "n_lineages": 36,
+     "median": -0.24603200559171068,
+     "up": 14,
+     "down": 22
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "results:expressiveness",
+   "n_lineages": 50,
+   "up": 38,
+   "down": 11,
+   "ties": 1,
+   "effective_n": 49,
+   "median": 0.02782703937418951,
+   "p_sign": 0.00014197068519905542,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 34,
+     "median": 0.04689455234708062,
+     "up": 23,
+     "down": 11
+    },
+    {
+     "band": "mid",
+     "n_lineages": 38,
+     "median": 0.056868016468841986,
+     "up": 23,
+     "down": 15
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 0.010902501206114412,
+     "up": 30,
+     "down": 20
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "results:fall",
+   "n_lineages": 50,
+   "up": 3,
+   "down": 47,
+   "ties": 0,
+   "effective_n": 50,
+   "median": -0.5400215187889816,
+   "p_sign": 3.708322537931963e-11,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 34,
+     "median": -0.38961408884071747,
+     "up": 3,
+     "down": 31
+    },
+    {
+     "band": "mid",
+     "n_lineages": 39,
+     "median": -0.35015509710395887,
+     "up": 7,
+     "down": 32
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": -0.5261962503612969,
+     "up": 5,
+     "down": 45
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "results:fit",
+   "n_lineages": 50,
+   "up": 46,
+   "down": 4,
+   "ties": 0,
+   "effective_n": 50,
+   "median": 0.1216966418189771,
+   "p_sign": 4.461782054931973e-10,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 34,
+     "median": 0.1617217330649645,
+     "up": 24,
+     "down": 10
+    },
+    {
+     "band": "mid",
+     "n_lineages": 38,
+     "median": 0.14480310576702937,
+     "up": 27,
+     "down": 11
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 0.08945719166213761,
+     "up": 45,
+     "down": 5
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "results:genitality",
+   "n_lineages": 50,
+   "up": 6,
+   "down": 38,
+   "ties": 6,
+   "effective_n": 44,
+   "median": -0.005173455835871532,
+   "p_sign": 9.430375484953402e-07,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 17,
+     "median": -0.004922838655978534,
+     "up": 0,
+     "down": 11
+    },
+    {
+     "band": "mid",
+     "n_lineages": 26,
+     "median": 0.0,
+     "up": 3,
+     "down": 8
+    },
+    {
+     "band": "high",
+     "n_lineages": 36,
+     "median": -0.0060092115062617135,
+     "up": 4,
+     "down": 22
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "results:harm",
+   "n_lineages": 50,
+   "up": 3,
+   "down": 38,
+   "ties": 9,
+   "effective_n": 41,
+   "median": -0.006160177173752945,
+   "p_sign": 1.0479197953827679e-08,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 21,
+     "median": 0.0,
+     "up": 1,
+     "down": 8
+    },
+    {
+     "band": "mid",
+     "n_lineages": 28,
+     "median": -0.004769156920226947,
+     "up": 5,
+     "down": 15
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": -0.002530038536205037,
+     "up": 4,
+     "down": 36
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "results:hedged",
+   "n_lineages": 50,
+   "up": 9,
+   "down": 41,
+   "ties": 0,
+   "effective_n": 50,
+   "median": -0.01230954221118069,
+   "p_sign": 5.614100093254137e-06,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 21,
+     "median": -0.013276946642525989,
+     "up": 7,
+     "down": 14
+    },
+    {
+     "band": "mid",
+     "n_lineages": 28,
+     "median": -0.04069381704406394,
+     "up": 4,
+     "down": 24
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": -0.009430014321139879,
+     "up": 11,
+     "down": 38
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "results:incorporation",
+   "n_lineages": 50,
+   "up": 0,
+   "down": 0,
+   "ties": 50,
+   "effective_n": 0,
+   "median": 0.0,
+   "p_sign": NaN,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 17,
+     "median": 0.0,
+     "up": 0,
+     "down": 0
+    },
+    {
+     "band": "mid",
+     "n_lineages": 26,
+     "median": 0.0,
+     "up": 0,
+     "down": 0
+    },
+    {
+     "band": "high",
+     "n_lineages": 36,
+     "median": 0.0,
+     "up": 0,
+     "down": 0
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "results:indirection",
+   "n_lineages": 50,
+   "up": 14,
+   "down": 36,
+   "ties": 0,
+   "effective_n": 50,
+   "median": -0.006327402934935611,
+   "p_sign": 0.0026021714567221466,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 34,
+     "median": 0.0029712503501769794,
+     "up": 19,
+     "down": 15
+    },
+    {
+     "band": "mid",
+     "n_lineages": 38,
+     "median": -0.0192362638498772,
+     "up": 11,
+     "down": 27
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": -0.005359306446156231,
+     "up": 18,
+     "down": 32
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "results:institutional",
+   "n_lineages": 50,
+   "up": 12,
+   "down": 33,
+   "ties": 5,
+   "effective_n": 45,
+   "median": -0.004764450144926324,
+   "p_sign": 0.0024589003220967243,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 34,
+     "median": 0.048235716333893564,
+     "up": 20,
+     "down": 8
+    },
+    {
+     "band": "mid",
+     "n_lineages": 39,
+     "median": -0.0014090757617672978,
+     "up": 11,
+     "down": 21
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": -0.004367527491254741,
+     "up": 13,
+     "down": 31
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "results:interiority",
+   "n_lineages": 50,
+   "up": 20,
+   "down": 30,
+   "ties": 0,
+   "effective_n": 50,
+   "median": -0.0031221425523138557,
+   "p_sign": 0.20263875106454066,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 21,
+     "median": 0.0017884504974639004,
+     "up": 12,
+     "down": 9
+    },
+    {
+     "band": "mid",
+     "n_lineages": 28,
+     "median": -0.019303756979233033,
+     "up": 9,
+     "down": 19
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": -0.0013000765191218955,
+     "up": 19,
+     "down": 31
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "results:makes_better",
+   "n_lineages": 50,
+   "up": 28,
+   "down": 22,
+   "ties": 0,
+   "effective_n": 50,
+   "median": 0.002040069534791411,
+   "p_sign": 0.47988766169832786,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 21,
+     "median": 0.011689613904486418,
+     "up": 13,
+     "down": 8
+    },
+    {
+     "band": "mid",
+     "n_lineages": 28,
+     "median": 0.02304263070577761,
+     "up": 18,
+     "down": 10
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": -0.0019324589650487334,
+     "up": 23,
+     "down": 27
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "results:makes_worse",
+   "n_lineages": 50,
+   "up": 15,
+   "down": 35,
+   "ties": 0,
+   "effective_n": 50,
+   "median": -0.038445997677200916,
+   "p_sign": 0.006600447966810918,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 21,
+     "median": -0.0057706385026556895,
+     "up": 6,
+     "down": 15
+    },
+    {
+     "band": "mid",
+     "n_lineages": 28,
+     "median": -0.024246391695606828,
+     "up": 12,
+     "down": 16
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": -0.03134471333153377,
+     "up": 17,
+     "down": 33
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "results:n_eligible",
+   "n_lineages": 50,
+   "up": 40,
+   "down": 10,
+   "ties": 0,
+   "effective_n": 50,
+   "median": 0.32194086716420944,
+   "p_sign": 2.3861331676755526e-05,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 34,
+     "median": 0.17807040586778378,
+     "up": 21,
+     "down": 13
+    },
+    {
+     "band": "mid",
+     "n_lineages": 39,
+     "median": 0.2888404593866234,
+     "up": 30,
+     "down": 9
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 0.3347590393731963,
+     "up": 38,
+     "down": 12
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "results:n_present",
+   "n_lineages": 50,
+   "up": 37,
+   "down": 13,
+   "ties": 0,
+   "effective_n": 50,
+   "median": 0.06706907366635306,
+   "p_sign": 0.000936222910851825,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 34,
+     "median": 0.03977162811099433,
+     "up": 21,
+     "down": 13
+    },
+    {
+     "band": "mid",
+     "n_lineages": 39,
+     "median": 0.12925483374679025,
+     "up": 28,
+     "down": 11
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 0.08208809510246784,
+     "up": 38,
+     "down": 12
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "results:net",
+   "n_lineages": 50,
+   "up": 49,
+   "down": 1,
+   "ties": 0,
+   "effective_n": 50,
+   "median": 1.3031528094573173,
+   "p_sign": 9.059419880941277e-14,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 34,
+     "median": 0.9551379627856773,
+     "up": 32,
+     "down": 2
+    },
+    {
+     "band": "mid",
+     "n_lineages": 41,
+     "median": 1.5112280706295094,
+     "up": 35,
+     "down": 6
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 1.3839289241382704,
+     "up": 47,
+     "down": 3
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "results:net_rate",
+   "n_lineages": 50,
+   "up": 50,
+   "down": 0,
+   "ties": 0,
+   "effective_n": 50,
+   "median": 0.09507180804825406,
+   "p_sign": 1.7763568394002505e-15,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 34,
+     "median": 0.09877766586698643,
+     "up": 31,
+     "down": 3
+    },
+    {
+     "band": "mid",
+     "n_lineages": 39,
+     "median": 0.0839785904923214,
+     "up": 35,
+     "down": 4
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 0.09634996847276231,
+     "up": 48,
+     "down": 2
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "results:orality",
+   "n_lineages": 50,
+   "up": 16,
+   "down": 28,
+   "ties": 6,
+   "effective_n": 44,
+   "median": -0.0007203943736036611,
+   "p_sign": 0.09614175442061423,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 17,
+     "median": 0.0,
+     "up": 7,
+     "down": 7
+    },
+    {
+     "band": "mid",
+     "n_lineages": 26,
+     "median": 0.0,
+     "up": 1,
+     "down": 9
+    },
+    {
+     "band": "high",
+     "n_lineages": 36,
+     "median": 0.0,
+     "up": 8,
+     "down": 12
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "results:p_base",
+   "n_lineages": 50,
+   "up": 37,
+   "down": 13,
+   "ties": 0,
+   "effective_n": 50,
+   "median": 0.0024346352154633565,
+   "p_sign": 0.000936222910851825,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 17,
+     "median": 0.001764096781863414,
+     "up": 10,
+     "down": 7
+    },
+    {
+     "band": "mid",
+     "n_lineages": 26,
+     "median": 0.002687496724105249,
+     "up": 18,
+     "down": 8
+    },
+    {
+     "band": "high",
+     "n_lineages": 36,
+     "median": 0.0039057138071856793,
+     "up": 25,
+     "down": 11
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "results:periphery",
+   "n_lineages": 50,
+   "up": 17,
+   "down": 33,
+   "ties": 0,
+   "effective_n": 50,
+   "median": -0.014971357903042493,
+   "p_sign": 0.032839137564268484,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 21,
+     "median": 0.008427208398203323,
+     "up": 12,
+     "down": 9
+    },
+    {
+     "band": "mid",
+     "n_lineages": 28,
+     "median": -0.04727762712261818,
+     "up": 10,
+     "down": 18
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": -0.012382416448079692,
+     "up": 18,
+     "down": 32
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "results:political",
+   "n_lineages": 50,
+   "up": 2,
+   "down": 2,
+   "ties": 46,
+   "effective_n": 4,
+   "median": 0.0,
+   "p_sign": 1.0,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 34,
+     "median": 8.355600441922739e-05,
+     "up": 18,
+     "down": 14
+    },
+    {
+     "band": "mid",
+     "n_lineages": 39,
+     "median": 0.0,
+     "up": 14,
+     "down": 16
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 0.0,
+     "up": 4,
+     "down": 3
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "results:rise",
+   "n_lineages": 50,
+   "up": 47,
+   "down": 3,
+   "ties": 0,
+   "effective_n": 50,
+   "median": 0.7866213002207618,
+   "p_sign": 3.708322537931963e-11,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 34,
+     "median": 0.5458631379537661,
+     "up": 28,
+     "down": 6
+    },
+    {
+     "band": "mid",
+     "n_lineages": 39,
+     "median": 0.9056323638369719,
+     "up": 35,
+     "down": 4
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 0.9145602370165866,
+     "up": 47,
+     "down": 3
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "results:suggestive",
+   "n_lineages": 50,
+   "up": 0,
+   "down": 11,
+   "ties": 39,
+   "effective_n": 11,
+   "median": 0.0,
+   "p_sign": 0.0009765625,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 34,
+     "median": 0.0,
+     "up": 4,
+     "down": 14
+    },
+    {
+     "band": "mid",
+     "n_lineages": 39,
+     "median": 0.0,
+     "up": 5,
+     "down": 7
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 0.0,
+     "up": 1,
+     "down": 17
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "results:superego",
+   "n_lineages": 50,
+   "up": 11,
+   "down": 34,
+   "ties": 5,
+   "effective_n": 45,
+   "median": -0.002056014947271756,
+   "p_sign": 0.0008240823595997426,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 21,
+     "median": -0.001503467635350919,
+     "up": 7,
+     "down": 12
+    },
+    {
+     "band": "mid",
+     "n_lineages": 28,
+     "median": -0.01285451330222126,
+     "up": 5,
+     "down": 21
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": -0.0014787289728100395,
+     "up": 8,
+     "down": 31
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "results:tactility",
+   "n_lineages": 50,
+   "up": 27,
+   "down": 23,
+   "ties": 0,
+   "effective_n": 50,
+   "median": 0.008327111787886532,
+   "p_sign": 0.6718110337653656,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 17,
+     "median": 0.06504196828352393,
+     "up": 10,
+     "down": 7
+    },
+    {
+     "band": "mid",
+     "n_lineages": 26,
+     "median": 0.011645780161286257,
+     "up": 15,
+     "down": 11
+    },
+    {
+     "band": "high",
+     "n_lineages": 36,
+     "median": -0.0041362811591479365,
+     "up": 17,
+     "down": 19
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "results:transitivity",
+   "n_lineages": 50,
+   "up": 30,
+   "down": 19,
+   "ties": 1,
+   "effective_n": 49,
+   "median": 0.01227009167530052,
+   "p_sign": 0.15240777196147803,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 34,
+     "median": 0.03875047772646484,
+     "up": 22,
+     "down": 12
+    },
+    {
+     "band": "mid",
+     "n_lineages": 39,
+     "median": 0.037453325135137105,
+     "up": 23,
+     "down": 16
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 0.009345376910087133,
+     "up": 28,
+     "down": 22
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "results:typicality",
+   "n_lineages": 50,
+   "up": 43,
+   "down": 6,
+   "ties": 1,
+   "effective_n": 49,
+   "median": 0.15515610982312933,
+   "p_sign": 5.7277652842913085e-08,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 34,
+     "median": 0.07217768198246621,
+     "up": 23,
+     "down": 11
+    },
+    {
+     "band": "mid",
+     "n_lineages": 39,
+     "median": 0.1312429977604448,
+     "up": 26,
+     "down": 13
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 0.16422347207810306,
+     "up": 41,
+     "down": 9
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "results:violent",
+   "n_lineages": 50,
+   "up": 9,
+   "down": 39,
+   "ties": 2,
+   "effective_n": 48,
+   "median": -0.02231170374709257,
+   "p_sign": 1.5221826110689562e-05,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 34,
+     "median": -0.00033346584550514313,
+     "up": 16,
+     "down": 18
+    },
+    {
+     "band": "mid",
+     "n_lineages": 39,
+     "median": -0.004952189638941951,
+     "up": 12,
+     "down": 26
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": -0.02952132043859368,
+     "up": 9,
+     "down": 41
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "results:vocalisation",
+   "n_lineages": 50,
+   "up": 25,
+   "down": 9,
+   "ties": 16,
+   "effective_n": 34,
+   "median": 8.868277381135492e-05,
+   "p_sign": 0.00904118549078703,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 21,
+     "median": 0.0,
+     "up": 6,
+     "down": 2
+    },
+    {
+     "band": "mid",
+     "n_lineages": 28,
+     "median": 0.0,
+     "up": 12,
+     "down": 9
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 8.868277381135492e-05,
+     "up": 25,
+     "down": 10
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "results:zone",
+   "n_lineages": 50,
+   "up": 16,
+   "down": 34,
+   "ties": 0,
+   "effective_n": 50,
+   "median": -0.14884450679036648,
+   "p_sign": 0.015346677832630107,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 17,
+     "median": -0.14511381262457212,
+     "up": 1,
+     "down": 16
+    },
+    {
+     "band": "mid",
+     "n_lineages": 26,
+     "median": -0.059157255054015256,
+     "up": 9,
+     "down": 17
+    },
+    {
+     "band": "high",
+     "n_lineages": 36,
+     "median": -0.15433224422922642,
+     "up": 12,
+     "down": 24
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "sexual_slot_en_v2:body_distance",
+   "n_lineages": 50,
+   "up": 14,
+   "down": 12,
+   "ties": 24,
+   "effective_n": 26,
+   "median": 0.0,
+   "p_sign": 0.8450189828872681,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": 0.0,
+     "up": 6,
+     "down": 7
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.0011594049593775125,
+     "up": 26,
+     "down": 10
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 0.0,
+     "up": 18,
+     "down": 19
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "sexual_slot_en_v2:charge",
+   "n_lineages": 50,
+   "up": 20,
+   "down": 12,
+   "ties": 18,
+   "effective_n": 32,
+   "median": 0.0,
+   "p_sign": 0.21532714972272515,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": 0.0,
+     "up": 2,
+     "down": 10
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.0,
+     "up": 22,
+     "down": 10
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 0.009625185775751,
+     "up": 31,
+     "down": 17
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "sexual_slot_en_v2:euphemism",
+   "n_lineages": 50,
+   "up": 0,
+   "down": 0,
+   "ties": 50,
+   "effective_n": 0,
+   "median": 0.0,
+   "p_sign": NaN,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": 0.0,
+     "up": 0,
+     "down": 0
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.0,
+     "up": 1,
+     "down": 0
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 0.0,
+     "up": 0,
+     "down": 0
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "sexual_slot_en_v2:explicitness",
+   "n_lineages": 50,
+   "up": 0,
+   "down": 32,
+   "ties": 18,
+   "effective_n": 32,
+   "median": -0.0033854539543220485,
+   "p_sign": 4.656612873077393e-10,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": 0.0,
+     "up": 0,
+     "down": 9
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.0,
+     "up": 0,
+     "down": 24
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": -0.008487819783934869,
+     "up": 0,
+     "down": 40
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "sexual_slot_en_v2:exposure",
+   "n_lineages": 50,
+   "up": 0,
+   "down": 0,
+   "ties": 50,
+   "effective_n": 0,
+   "median": 0.0,
+   "p_sign": NaN,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": 0.0,
+     "up": 0,
+     "down": 0
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.0,
+     "up": 0,
+     "down": 1
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 0.0,
+     "up": 0,
+     "down": 0
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "sexual_slot_en_v2:fall",
+   "n_lineages": 50,
+   "up": 8,
+   "down": 42,
+   "ties": 0,
+   "effective_n": 50,
+   "median": -0.5687580922683484,
+   "p_sign": 1.163555804595262e-06,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 36,
+     "median": -0.2761254135070801,
+     "up": 8,
+     "down": 28
+    },
+    {
+     "band": "mid",
+     "n_lineages": 47,
+     "median": -0.6723699676651824,
+     "up": 6,
+     "down": 41
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": -0.4980918126771252,
+     "up": 7,
+     "down": 43
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "sexual_slot_en_v2:genitality",
+   "n_lineages": 50,
+   "up": 0,
+   "down": 0,
+   "ties": 50,
+   "effective_n": 0,
+   "median": 0.0,
+   "p_sign": NaN,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": 0.0,
+     "up": 0,
+     "down": 2
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.0,
+     "up": 0,
+     "down": 2
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 0.0,
+     "up": 0,
+     "down": 8
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "sexual_slot_en_v2:incorporation",
+   "n_lineages": 50,
+   "up": 0,
+   "down": 13,
+   "ties": 37,
+   "effective_n": 13,
+   "median": 0.0,
+   "p_sign": 0.000244140625,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": 0.0,
+     "up": 0,
+     "down": 3
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.0,
+     "up": 1,
+     "down": 12
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 0.0,
+     "up": 2,
+     "down": 23
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "sexual_slot_en_v2:net",
+   "n_lineages": 50,
+   "up": 45,
+   "down": 5,
+   "ties": 0,
+   "effective_n": 50,
+   "median": 1.228793899216532,
+   "p_sign": 4.209852022540872e-09,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 36,
+     "median": 0.9138402573876313,
+     "up": 32,
+     "down": 4
+    },
+    {
+     "band": "mid",
+     "n_lineages": 47,
+     "median": 1.5264090638372871,
+     "up": 39,
+     "down": 8
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 1.0917852800517172,
+     "up": 45,
+     "down": 5
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "sexual_slot_en_v2:orality",
+   "n_lineages": 50,
+   "up": 10,
+   "down": 14,
+   "ties": 26,
+   "effective_n": 24,
+   "median": 0.0,
+   "p_sign": 0.5412561893463135,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": 0.0,
+     "up": 4,
+     "down": 13
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.0,
+     "up": 15,
+     "down": 16
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 0.0,
+     "up": 13,
+     "down": 14
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "sexual_slot_en_v2:rise",
+   "n_lineages": 50,
+   "up": 47,
+   "down": 3,
+   "ties": 0,
+   "effective_n": 50,
+   "median": 0.6194095068219163,
+   "p_sign": 3.708322537931963e-11,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 36,
+     "median": 0.5570946508104124,
+     "up": 30,
+     "down": 6
+    },
+    {
+     "band": "mid",
+     "n_lineages": 47,
+     "median": 1.038915366035249,
+     "up": 37,
+     "down": 10
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 0.6037018298820732,
+     "up": 45,
+     "down": 5
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "sexual_slot_en_v2:tactility",
+   "n_lineages": 50,
+   "up": 2,
+   "down": 32,
+   "ties": 16,
+   "effective_n": 34,
+   "median": -0.011554679188410466,
+   "p_sign": 6.938353180885315e-08,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": -0.0010151101372446458,
+     "up": 0,
+     "down": 25
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": -0.022246306057482235,
+     "up": 11,
+     "down": 34
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": -0.014828192672717622,
+     "up": 9,
+     "down": 35
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "slot_institutional_en_v3:abstraction",
+   "n_lineages": 50,
+   "up": 34,
+   "down": 14,
+   "ties": 2,
+   "effective_n": 48,
+   "median": 0.010924041796088302,
+   "p_sign": 0.005515201485501109,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": 0.014253772247737495,
+     "up": 36,
+     "down": 13
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.019531745181736615,
+     "up": 34,
+     "down": 16
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 0.015343285987797883,
+     "up": 34,
+     "down": 15
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "slot_institutional_en_v3:agency",
+   "n_lineages": 50,
+   "up": 25,
+   "down": 20,
+   "ties": 5,
+   "effective_n": 45,
+   "median": 0.00023219642718086408,
+   "p_sign": 0.5514843298025198,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": 0.0070487499561381894,
+     "up": 28,
+     "down": 14
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.017157917051851546,
+     "up": 34,
+     "down": 11
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": -0.004879921852850522,
+     "up": 16,
+     "down": 28
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "slot_institutional_en_v3:arousal",
+   "n_lineages": 50,
+   "up": 25,
+   "down": 19,
+   "ties": 6,
+   "effective_n": 44,
+   "median": 0.0010765383922033966,
+   "p_sign": 0.4513808323961257,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": 5.9083968064088666e-05,
+     "up": 26,
+     "down": 22
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.008365040182994221,
+     "up": 33,
+     "down": 16
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": -0.0007038237071981812,
+     "up": 24,
+     "down": 26
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "slot_institutional_en_v3:assertiveness",
+   "n_lineages": 50,
+   "up": 18,
+   "down": 25,
+   "ties": 7,
+   "effective_n": 43,
+   "median": -0.000750621693519582,
+   "p_sign": 0.3603776529357674,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": -0.0001353383795151819,
+     "up": 22,
+     "down": 25
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.0020743476349485146,
+     "up": 26,
+     "down": 20
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": -0.009137559118619687,
+     "up": 12,
+     "down": 34
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "slot_institutional_en_v3:collective",
+   "n_lineages": 50,
+   "up": 0,
+   "down": 0,
+   "ties": 50,
+   "effective_n": 0,
+   "median": 0.0,
+   "p_sign": NaN,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": 0.0,
+     "up": 0,
+     "down": 0
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.0,
+     "up": 0,
+     "down": 0
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 0.0,
+     "up": 0,
+     "down": 0
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "slot_institutional_en_v3:deference",
+   "n_lineages": 50,
+   "up": 41,
+   "down": 0,
+   "ties": 9,
+   "effective_n": 41,
+   "median": 0.004851772855492875,
+   "p_sign": 9.094947017729282e-13,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": 0.003117680591621208,
+     "up": 39,
+     "down": 0
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.010638333519038978,
+     "up": 42,
+     "down": 2
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 0.006070642130438619,
+     "up": 36,
+     "down": 3
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "slot_institutional_en_v3:delay",
+   "n_lineages": 50,
+   "up": 8,
+   "down": 39,
+   "ties": 3,
+   "effective_n": 47,
+   "median": -0.010968856454526943,
+   "p_sign": 5.539621596994948e-06,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": -0.02032700064781895,
+     "up": 7,
+     "down": 39
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": -0.011630163930791637,
+     "up": 6,
+     "down": 43
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": -0.005861395690448357,
+     "up": 6,
+     "down": 34
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "slot_institutional_en_v3:mediation",
+   "n_lineages": 50,
+   "up": 0,
+   "down": 1,
+   "ties": 49,
+   "effective_n": 1,
+   "median": 0.0,
+   "p_sign": 1.0,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": 0.0,
+     "up": 0,
+     "down": 1
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.0,
+     "up": 1,
+     "down": 1
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 0.0,
+     "up": 0,
+     "down": 0
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "slot_institutional_en_v3:procedural",
+   "n_lineages": 50,
+   "up": 43,
+   "down": 1,
+   "ties": 6,
+   "effective_n": 44,
+   "median": 0.00933227467237785,
+   "p_sign": 5.115907697472721e-12,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": 0.00850609609064934,
+     "up": 44,
+     "down": 1
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.015426732139981691,
+     "up": 43,
+     "down": 2
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 0.010700820033260006,
+     "up": 36,
+     "down": 2
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "slot_institutional_en_v3:specificity",
+   "n_lineages": 50,
+   "up": 31,
+   "down": 19,
+   "ties": 0,
+   "effective_n": 50,
+   "median": 0.017921655323677732,
+   "p_sign": 0.11892045255943628,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": 0.02641075204127996,
+     "up": 34,
+     "down": 15
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.02236210475664635,
+     "up": 33,
+     "down": 17
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": -0.0024879206532661957,
+     "up": 23,
+     "down": 27
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "slot_institutional_en_v3:target",
+   "n_lineages": 50,
+   "up": 9,
+   "down": 23,
+   "ties": 18,
+   "effective_n": 32,
+   "median": 0.0,
+   "p_sign": 0.020061607006937265,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": -0.011284119386723412,
+     "up": 7,
+     "down": 37
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.0,
+     "up": 21,
+     "down": 18
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 0.0,
+     "up": 7,
+     "down": 18
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "slot_institutional_en_v3:termination",
+   "n_lineages": 50,
+   "up": 3,
+   "down": 47,
+   "ties": 0,
+   "effective_n": 50,
+   "median": -0.04821190691244226,
+   "p_sign": 3.708322537931963e-11,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": -0.05027933984794375,
+     "up": 3,
+     "down": 46
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": -0.05800050635535314,
+     "up": 3,
+     "down": 47
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": -0.05972358120761245,
+     "up": 2,
+     "down": 47
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "slot_institutional_en_v3:vocalisation",
+   "n_lineages": 50,
+   "up": 10,
+   "down": 28,
+   "ties": 12,
+   "effective_n": 38,
+   "median": -0.0017410933641657245,
+   "p_sign": 0.0050976432976312935,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": -0.011104636524179423,
+     "up": 9,
+     "down": 35
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.0,
+     "up": 14,
+     "down": 22
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 0.0,
+     "up": 9,
+     "down": 16
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "slot_rating_en_v6:aggression",
+   "n_lineages": 50,
+   "up": 6,
+   "down": 23,
+   "ties": 21,
+   "effective_n": 29,
+   "median": 0.0,
+   "p_sign": 0.002315700054168701,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": 0.0,
+     "up": 7,
+     "down": 21
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.0,
+     "up": 8,
+     "down": 22
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": -0.0007345570207102359,
+     "up": 13,
+     "down": 30
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "slot_rating_en_v6:deliberation",
+   "n_lineages": 50,
+   "up": 43,
+   "down": 7,
+   "ties": 0,
+   "effective_n": 50,
+   "median": 0.033303656150838634,
+   "p_sign": 2.098677427397888e-07,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": 0.0268866307028629,
+     "up": 40,
+     "down": 10
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.03532042217655462,
+     "up": 40,
+     "down": 10
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 0.03337522765519729,
+     "up": 40,
+     "down": 10
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "slot_rating_en_v6:directedness",
+   "n_lineages": 50,
+   "up": 32,
+   "down": 18,
+   "ties": 0,
+   "effective_n": 50,
+   "median": 0.027697547900118413,
+   "p_sign": 0.06490864707227217,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": 0.025989036217007877,
+     "up": 32,
+     "down": 18
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.014511970509438865,
+     "up": 31,
+     "down": 18
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 0.022049780902135274,
+     "up": 32,
+     "down": 18
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "slot_rating_en_v6:fit",
+   "n_lineages": 50,
+   "up": 47,
+   "down": 3,
+   "ties": 0,
+   "effective_n": 50,
+   "median": 0.09264319306045765,
+   "p_sign": 3.708322537931963e-11,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": 0.09522194395428785,
+     "up": 47,
+     "down": 3
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.0875141410006075,
+     "up": 47,
+     "down": 3
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 0.07273019528075086,
+     "up": 47,
+     "down": 3
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "slot_rating_en_v6:harm",
+   "n_lineages": 50,
+   "up": 0,
+   "down": 0,
+   "ties": 50,
+   "effective_n": 0,
+   "median": 0.0,
+   "p_sign": NaN,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": 0.0,
+     "up": 0,
+     "down": 0
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.0,
+     "up": 0,
+     "down": 0
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 0.0,
+     "up": 0,
+     "down": 0
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "slot_rating_en_v6:hedged",
+   "n_lineages": 50,
+   "up": 34,
+   "down": 16,
+   "ties": 0,
+   "effective_n": 50,
+   "median": 0.009723891359660009,
+   "p_sign": 0.015346677832630107,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": 0.004842611853527301,
+     "up": 30,
+     "down": 20
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.014413895229769214,
+     "up": 29,
+     "down": 21
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 0.014394332565566437,
+     "up": 36,
+     "down": 14
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "slot_rating_en_v6:interiority",
+   "n_lineages": 50,
+   "up": 31,
+   "down": 19,
+   "ties": 0,
+   "effective_n": 50,
+   "median": 0.015051992912090528,
+   "p_sign": 0.11892045255943628,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": 0.005734765652471774,
+     "up": 28,
+     "down": 22
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.01943816032792789,
+     "up": 30,
+     "down": 20
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 0.019573034814832635,
+     "up": 33,
+     "down": 17
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "slot_rating_en_v6:makes_better",
+   "n_lineages": 50,
+   "up": 47,
+   "down": 3,
+   "ties": 0,
+   "effective_n": 50,
+   "median": 0.05804033884052029,
+   "p_sign": 3.708322537931963e-11,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": 0.05016077469311708,
+     "up": 45,
+     "down": 5
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.051776272181116356,
+     "up": 47,
+     "down": 3
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 0.07104276178277946,
+     "up": 47,
+     "down": 3
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "slot_rating_en_v6:makes_worse",
+   "n_lineages": 50,
+   "up": 6,
+   "down": 44,
+   "ties": 0,
+   "effective_n": 50,
+   "median": -0.0325688371492468,
+   "p_sign": 3.243740565039843e-08,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": -0.03256819884406581,
+     "up": 5,
+     "down": 45
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": -0.022549591396387902,
+     "up": 12,
+     "down": 38
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": -0.0417681121472685,
+     "up": 9,
+     "down": 41
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "slot_rating_en_v6:mundanity",
+   "n_lineages": 50,
+   "up": 29,
+   "down": 21,
+   "ties": 0,
+   "effective_n": 50,
+   "median": 0.002689837110097182,
+   "p_sign": 0.3222363203575469,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": 0.007310353133924252,
+     "up": 30,
+     "down": 20
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.006350646518401781,
+     "up": 28,
+     "down": 22
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 0.008517274353769366,
+     "up": 29,
+     "down": 21
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "slot_rating_en_v6:superego",
+   "n_lineages": 50,
+   "up": 39,
+   "down": 11,
+   "ties": 0,
+   "effective_n": 50,
+   "median": 0.01890799365313134,
+   "p_sign": 9.021490107130603e-05,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": 0.015831054164505365,
+     "up": 36,
+     "down": 14
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.01865457451656727,
+     "up": 38,
+     "down": 12
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 0.023474333389312152,
+     "up": 37,
+     "down": 13
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "slot_rating_en_v6:vocalisation",
+   "n_lineages": 50,
+   "up": 26,
+   "down": 24,
+   "ties": 0,
+   "effective_n": 50,
+   "median": 0.00550238818116322,
+   "p_sign": 0.887724827340783,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": -0.008691134975242543,
+     "up": 21,
+     "down": 29
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.013478038931959868,
+     "up": 28,
+     "down": 22
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 0.04555487108121897,
+     "up": 31,
+     "down": 19
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "slotpov:abstraction",
+   "n_lineages": 50,
+   "up": 44,
+   "down": 6,
+   "ties": 0,
+   "effective_n": 50,
+   "median": 0.06656287101898384,
+   "p_sign": 3.243740565039843e-08,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 49,
+     "median": 0.07577289423408784,
+     "up": 33,
+     "down": 16
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.06446863323950314,
+     "up": 40,
+     "down": 10
+    },
+    {
+     "band": "high",
+     "n_lineages": 49,
+     "median": 0.09178462404136267,
+     "up": 40,
+     "down": 9
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "slotpov:agency",
+   "n_lineages": 50,
+   "up": 31,
+   "down": 19,
+   "ties": 0,
+   "effective_n": 50,
+   "median": 0.03189403226570531,
+   "p_sign": 0.11892045255943628,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 49,
+     "median": 0.05747318531870649,
+     "up": 37,
+     "down": 12
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.04072832228357082,
+     "up": 33,
+     "down": 17
+    },
+    {
+     "band": "high",
+     "n_lineages": 49,
+     "median": -0.009940985084442744,
+     "up": 24,
+     "down": 25
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "slotpov:arousal",
+   "n_lineages": 50,
+   "up": 22,
+   "down": 28,
+   "ties": 0,
+   "effective_n": 50,
+   "median": -0.016857558799398098,
+   "p_sign": 0.47988766169832786,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 49,
+     "median": 0.04425175038041096,
+     "up": 28,
+     "down": 21
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": -0.009477224267744666,
+     "up": 24,
+     "down": 26
+    },
+    {
+     "band": "high",
+     "n_lineages": 49,
+     "median": -0.051394820957002096,
+     "up": 16,
+     "down": 33
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "slotpov:assertiveness",
+   "n_lineages": 50,
+   "up": 32,
+   "down": 18,
+   "ties": 0,
+   "effective_n": 50,
+   "median": 0.06886403184611878,
+   "p_sign": 0.06490864707227217,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 49,
+     "median": 0.10924686817103346,
+     "up": 35,
+     "down": 14
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.07864381839772072,
+     "up": 34,
+     "down": 16
+    },
+    {
+     "band": "high",
+     "n_lineages": 49,
+     "median": -0.019542306392801745,
+     "up": 22,
+     "down": 27
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "slotpov:collective",
+   "n_lineages": 50,
+   "up": 15,
+   "down": 21,
+   "ties": 14,
+   "effective_n": 36,
+   "median": 0.0,
+   "p_sign": 0.40503224614076316,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 49,
+     "median": 0.0,
+     "up": 17,
+     "down": 17
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": -0.00010858495627225073,
+     "up": 21,
+     "down": 25
+    },
+    {
+     "band": "high",
+     "n_lineages": 49,
+     "median": 0.0,
+     "up": 20,
+     "down": 24
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "slotpov:deference",
+   "n_lineages": 50,
+   "up": 32,
+   "down": 18,
+   "ties": 0,
+   "effective_n": 50,
+   "median": 0.025269293423752948,
+   "p_sign": 0.06490864707227217,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 49,
+     "median": -0.024488357694476548,
+     "up": 20,
+     "down": 29
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.0434934346453536,
+     "up": 35,
+     "down": 15
+    },
+    {
+     "band": "high",
+     "n_lineages": 49,
+     "median": 0.02581361473878485,
+     "up": 33,
+     "down": 16
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "slotpov:delay",
+   "n_lineages": 50,
+   "up": 34,
+   "down": 16,
+   "ties": 0,
+   "effective_n": 50,
+   "median": 0.01618600709267376,
+   "p_sign": 0.015346677832630107,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 49,
+     "median": -0.004849396180213406,
+     "up": 24,
+     "down": 25
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.0023096123756211617,
+     "up": 27,
+     "down": 23
+    },
+    {
+     "band": "high",
+     "n_lineages": 49,
+     "median": 0.01911545660762226,
+     "up": 31,
+     "down": 18
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "slotpov:mediation",
+   "n_lineages": 50,
+   "up": 31,
+   "down": 19,
+   "ties": 0,
+   "effective_n": 50,
+   "median": 0.01813048905593695,
+   "p_sign": 0.11892045255943628,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 49,
+     "median": 0.029378907177620928,
+     "up": 28,
+     "down": 21
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.1039430164570847,
+     "up": 37,
+     "down": 13
+    },
+    {
+     "band": "high",
+     "n_lineages": 49,
+     "median": -0.00039459780327066873,
+     "up": 24,
+     "down": 25
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "slotpov:procedural",
+   "n_lineages": 50,
+   "up": 43,
+   "down": 7,
+   "ties": 0,
+   "effective_n": 50,
+   "median": 0.07075513932305999,
+   "p_sign": 2.098677427397888e-07,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 49,
+     "median": 0.07078079624921463,
+     "up": 30,
+     "down": 19
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.12458960757287352,
+     "up": 41,
+     "down": 9
+    },
+    {
+     "band": "high",
+     "n_lineages": 49,
+     "median": 0.06927220019154312,
+     "up": 42,
+     "down": 7
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "slotpov:specificity",
+   "n_lineages": 50,
+   "up": 27,
+   "down": 23,
+   "ties": 0,
+   "effective_n": 50,
+   "median": 0.017980408834870287,
+   "p_sign": 0.6718110337653656,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 49,
+     "median": 0.05262984924988112,
+     "up": 33,
+     "down": 16
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.04958803226120112,
+     "up": 31,
+     "down": 19
+    },
+    {
+     "band": "high",
+     "n_lineages": 49,
+     "median": -0.059768140285777926,
+     "up": 18,
+     "down": 31
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "slotpov:target",
+   "n_lineages": 50,
+   "up": 38,
+   "down": 12,
+   "ties": 0,
+   "effective_n": 50,
+   "median": 0.04077420556777511,
+   "p_sign": 0.00030586400160359517,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 49,
+     "median": 0.07166841216952868,
+     "up": 35,
+     "down": 14
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.13318308490477382,
+     "up": 38,
+     "down": 12
+    },
+    {
+     "band": "high",
+     "n_lineages": 49,
+     "median": -0.031407955438303325,
+     "up": 19,
+     "down": 30
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "slotpov:termination",
+   "n_lineages": 50,
+   "up": 13,
+   "down": 37,
+   "ties": 0,
+   "effective_n": 50,
+   "median": -0.14622309897579178,
+   "p_sign": 0.000936222910851825,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 49,
+     "median": -0.1079502910595167,
+     "up": 18,
+     "down": 31
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": -0.26829195425310925,
+     "up": 13,
+     "down": 37
+    },
+    {
+     "band": "high",
+     "n_lineages": 49,
+     "median": -0.25781267939869434,
+     "up": 13,
+     "down": 36
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "slotpov:vocalisation",
+   "n_lineages": 50,
+   "up": 37,
+   "down": 13,
+   "ties": 0,
+   "effective_n": 50,
+   "median": 0.04089841606673855,
+   "p_sign": 0.000936222910851825,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 49,
+     "median": 0.077329265509269,
+     "up": 36,
+     "down": 13
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.050622572480952144,
+     "up": 34,
+     "down": 16
+    },
+    {
+     "band": "high",
+     "n_lineages": 49,
+     "median": 0.011850987929488355,
+     "up": 28,
+     "down": 21
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "v6:aggression",
+   "n_lineages": 50,
+   "up": 0,
+   "down": 2,
+   "ties": 48,
+   "effective_n": 2,
+   "median": 0.0,
+   "p_sign": 0.5,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": 0.0,
+     "up": 0,
+     "down": 0
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.0,
+     "up": 0,
+     "down": 4
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 0.0,
+     "up": 0,
+     "down": 13
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "v6:deliberation",
+   "n_lineages": 50,
+   "up": 10,
+   "down": 11,
+   "ties": 29,
+   "effective_n": 21,
+   "median": 0.0,
+   "p_sign": 1.0,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": 0.0,
+     "up": 17,
+     "down": 10
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.0,
+     "up": 11,
+     "down": 19
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 0.0,
+     "up": 5,
+     "down": 15
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "v6:directedness",
+   "n_lineages": 50,
+   "up": 2,
+   "down": 29,
+   "ties": 19,
+   "effective_n": 31,
+   "median": -0.007926760936403321,
+   "p_sign": 4.628673195838928e-07,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": -0.005516731934272379,
+     "up": 3,
+     "down": 31
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": -0.000685135718696217,
+     "up": 7,
+     "down": 26
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": -0.00862143571684476,
+     "up": 4,
+     "down": 32
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "v6:fall",
+   "n_lineages": 50,
+   "up": 2,
+   "down": 48,
+   "ties": 0,
+   "effective_n": 50,
+   "median": -0.41223769384554376,
+   "p_sign": 2.2666313270747196e-12,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": -0.3562309024026209,
+     "up": 3,
+     "down": 47
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": -0.39101096414252023,
+     "up": 1,
+     "down": 49
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": -0.45392628369097987,
+     "up": 2,
+     "down": 48
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "v6:fit",
+   "n_lineages": 50,
+   "up": 42,
+   "down": 6,
+   "ties": 2,
+   "effective_n": 48,
+   "median": 0.05323178404225615,
+   "p_sign": 1.0087482138487758e-07,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": 0.060813299889767025,
+     "up": 43,
+     "down": 5
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.0483894581450075,
+     "up": 42,
+     "down": 6
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 0.05248577810389099,
+     "up": 44,
+     "down": 6
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "v6:harm",
+   "n_lineages": 50,
+   "up": 0,
+   "down": 1,
+   "ties": 49,
+   "effective_n": 1,
+   "median": 0.0,
+   "p_sign": 1.0,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": 0.0,
+     "up": 0,
+     "down": 0
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.0,
+     "up": 0,
+     "down": 7
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": -0.0008627879130370664,
+     "up": 0,
+     "down": 27
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "v6:hedged",
+   "n_lineages": 50,
+   "up": 5,
+   "down": 36,
+   "ties": 9,
+   "effective_n": 41,
+   "median": -0.010406967249434518,
+   "p_sign": 7.84157236921601e-07,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": -0.011559593196900864,
+     "up": 4,
+     "down": 38
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": -0.013357749881777958,
+     "up": 8,
+     "down": 36
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": -0.010965900738810208,
+     "up": 5,
+     "down": 35
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "v6:interiority",
+   "n_lineages": 50,
+   "up": 33,
+   "down": 9,
+   "ties": 8,
+   "effective_n": 42,
+   "median": 0.00722991610111362,
+   "p_sign": 0.00027153923429068527,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": 0.008291584537510999,
+     "up": 34,
+     "down": 8
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.0053970275451079575,
+     "up": 30,
+     "down": 9
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 0.009966382219877112,
+     "up": 35,
+     "down": 12
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "v6:makes_better",
+   "n_lineages": 50,
+   "up": 33,
+   "down": 3,
+   "ties": 14,
+   "effective_n": 36,
+   "median": 0.005821947591554799,
+   "p_sign": 2.2721360437572002e-07,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": 0.013155462884739455,
+     "up": 37,
+     "down": 3
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.004744392293850486,
+     "up": 31,
+     "down": 3
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 0.0004267043968146922,
+     "up": 25,
+     "down": 13
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "v6:makes_worse",
+   "n_lineages": 50,
+   "up": 3,
+   "down": 25,
+   "ties": 22,
+   "effective_n": 28,
+   "median": -3.07756648137425e-05,
+   "p_sign": 2.744048833847046e-05,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": -0.001543322323304397,
+     "up": 3,
+     "down": 31
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.0,
+     "up": 5,
+     "down": 20
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": -0.0075211591976228065,
+     "up": 11,
+     "down": 31
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "v6:mundanity",
+   "n_lineages": 50,
+   "up": 40,
+   "down": 7,
+   "ties": 3,
+   "effective_n": 47,
+   "median": 0.01788652301005067,
+   "p_sign": 1.0709118214435875e-06,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": 0.01212793287895908,
+     "up": 42,
+     "down": 7
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.010984664340819017,
+     "up": 35,
+     "down": 12
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 0.023926799663606113,
+     "up": 43,
+     "down": 7
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "v6:n_eligible",
+   "n_lineages": 50,
+   "up": 45,
+   "down": 5,
+   "ties": 0,
+   "effective_n": 50,
+   "median": 0.19295445954766377,
+   "p_sign": 4.209852022540872e-09,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": 0.1380872398521582,
+     "up": 39,
+     "down": 11
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.19420729634019196,
+     "up": 43,
+     "down": 7
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 0.20724132664525818,
+     "up": 45,
+     "down": 5
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "v6:n_present",
+   "n_lineages": 50,
+   "up": 48,
+   "down": 2,
+   "ties": 0,
+   "effective_n": 50,
+   "median": 0.05248082723225522,
+   "p_sign": 2.2666313270747196e-12,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": 0.03374060555579561,
+     "up": 43,
+     "down": 7
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.041605930193921115,
+     "up": 43,
+     "down": 7
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 0.0672704765473,
+     "up": 47,
+     "down": 3
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "v6:net",
+   "n_lineages": 50,
+   "up": 49,
+   "down": 1,
+   "ties": 0,
+   "effective_n": 50,
+   "median": 1.0374188176082162,
+   "p_sign": 9.059419880941277e-14,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": 0.8722432677597416,
+     "up": 47,
+     "down": 3
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.9601776091895429,
+     "up": 49,
+     "down": 1
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 1.0610967135588254,
+     "up": 49,
+     "down": 1
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "v6:net_rate",
+   "n_lineages": 50,
+   "up": 49,
+   "down": 1,
+   "ties": 0,
+   "effective_n": 50,
+   "median": 0.07419187237171665,
+   "p_sign": 9.059419880941277e-14,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": 0.06838028241164604,
+     "up": 48,
+     "down": 2
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.06735088844141254,
+     "up": 50,
+     "down": 0
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 0.07623961059381053,
+     "up": 49,
+     "down": 1
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "v6:rise",
+   "n_lineages": 50,
+   "up": 48,
+   "down": 2,
+   "ties": 0,
+   "effective_n": 50,
+   "median": 0.6140677773909223,
+   "p_sign": 2.2666313270747196e-12,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": 0.531960773319074,
+     "up": 47,
+     "down": 3
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.5554974483874864,
+     "up": 47,
+     "down": 3
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 0.6319557392012873,
+     "up": 48,
+     "down": 2
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "v6:superego",
+   "n_lineages": 50,
+   "up": 2,
+   "down": 5,
+   "ties": 43,
+   "effective_n": 7,
+   "median": 0.0,
+   "p_sign": 0.453125,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": 0.0,
+     "up": 6,
+     "down": 3
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.0,
+     "up": 2,
+     "down": 10
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 0.0,
+     "up": 3,
+     "down": 9
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "v6:vocalisation",
+   "n_lineages": 50,
+   "up": 7,
+   "down": 22,
+   "ties": 21,
+   "effective_n": 29,
+   "median": 0.0,
+   "p_sign": 0.008130058646202087,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": -0.005443512800841821,
+     "up": 7,
+     "down": 29
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.0,
+     "up": 10,
+     "down": 21
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 0.0,
+     "up": 8,
+     "down": 15
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "v6_wide:aggression",
+   "n_lineages": 50,
+   "up": 4,
+   "down": 22,
+   "ties": 24,
+   "effective_n": 26,
+   "median": 0.0,
+   "p_sign": 0.0005335211753845215,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": -0.0009262104894742773,
+     "up": 8,
+     "down": 31
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.0,
+     "up": 11,
+     "down": 21
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 0.0,
+     "up": 3,
+     "down": 17
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "v6_wide:deliberation",
+   "n_lineages": 50,
+   "up": 8,
+   "down": 18,
+   "ties": 24,
+   "effective_n": 26,
+   "median": 0.0,
+   "p_sign": 0.07551869750022888,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": -0.0001204401971646174,
+     "up": 23,
+     "down": 25
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.0,
+     "up": 24,
+     "down": 18
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 0.0,
+     "up": 4,
+     "down": 19
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "v6_wide:directedness",
+   "n_lineages": 50,
+   "up": 11,
+   "down": 29,
+   "ties": 10,
+   "effective_n": 40,
+   "median": -0.0032652285962442296,
+   "p_sign": 0.006426576095691416,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": 0.0002535662127162164,
+     "up": 25,
+     "down": 23
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": -0.0024111587757954522,
+     "up": 16,
+     "down": 26
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": -0.0037181937140587373,
+     "up": 12,
+     "down": 31
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "v6_wide:fall",
+   "n_lineages": 50,
+   "up": 2,
+   "down": 48,
+   "ties": 0,
+   "effective_n": 50,
+   "median": -0.3829156974386909,
+   "p_sign": 2.2666313270747196e-12,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": -0.3181670261783196,
+     "up": 4,
+     "down": 46
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": -0.3544791875858404,
+     "up": 1,
+     "down": 49
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": -0.4343404804243428,
+     "up": 2,
+     "down": 48
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "v6_wide:fit",
+   "n_lineages": 50,
+   "up": 46,
+   "down": 3,
+   "ties": 1,
+   "effective_n": 49,
+   "median": 0.05987738335637016,
+   "p_sign": 6.981082378842984e-11,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": 0.05815946507579972,
+     "up": 39,
+     "down": 11
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.080666770873429,
+     "up": 44,
+     "down": 6
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 0.06695399148000236,
+     "up": 45,
+     "down": 5
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "v6_wide:harm",
+   "n_lineages": 50,
+   "up": 0,
+   "down": 35,
+   "ties": 15,
+   "effective_n": 35,
+   "median": -0.0017118204037120388,
+   "p_sign": 5.820766091346741e-11,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": -0.0036712129334155463,
+     "up": 6,
+     "down": 39
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": -0.003237204359574697,
+     "up": 2,
+     "down": 37
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": -0.0003172372552810998,
+     "up": 0,
+     "down": 27
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "v6_wide:hedged",
+   "n_lineages": 50,
+   "up": 4,
+   "down": 36,
+   "ties": 10,
+   "effective_n": 40,
+   "median": -0.004928454924919112,
+   "p_sign": 1.8570244719740003e-07,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": -0.01419331458576023,
+     "up": 12,
+     "down": 34
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": -0.005804365375765563,
+     "up": 6,
+     "down": 34
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": -0.006098631212683725,
+     "up": 4,
+     "down": 33
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "v6_wide:interiority",
+   "n_lineages": 50,
+   "up": 38,
+   "down": 8,
+   "ties": 4,
+   "effective_n": 46,
+   "median": 0.01464198248982157,
+   "p_sign": 9.24769992138863e-06,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": 0.01350035142228434,
+     "up": 35,
+     "down": 15
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.009580781516884074,
+     "up": 35,
+     "down": 11
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 0.019875007068511752,
+     "up": 39,
+     "down": 6
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "v6_wide:makes_better",
+   "n_lineages": 50,
+   "up": 37,
+   "down": 13,
+   "ties": 0,
+   "effective_n": 50,
+   "median": 0.017836868530935468,
+   "p_sign": 0.000936222910851825,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": 0.03700973412187647,
+     "up": 36,
+     "down": 14
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.023323862577304233,
+     "up": 34,
+     "down": 15
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 0.0,
+     "up": 20,
+     "down": 24
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "v6_wide:makes_worse",
+   "n_lineages": 50,
+   "up": 14,
+   "down": 33,
+   "ties": 3,
+   "effective_n": 47,
+   "median": -0.011959893365900975,
+   "p_sign": 0.007942726509483578,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": -0.016578798551201868,
+     "up": 16,
+     "down": 34
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": -0.006116177806373968,
+     "up": 18,
+     "down": 31
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": -0.0018399852497414382,
+     "up": 17,
+     "down": 30
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "v6_wide:mundanity",
+   "n_lineages": 50,
+   "up": 42,
+   "down": 8,
+   "ties": 0,
+   "effective_n": 50,
+   "median": 0.03851479012727155,
+   "p_sign": 1.163555804595262e-06,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": 0.013294206358016591,
+     "up": 28,
+     "down": 22
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.03682514588105512,
+     "up": 32,
+     "down": 18
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 0.040862909233640776,
+     "up": 41,
+     "down": 9
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "v6_wide:n_eligible",
+   "n_lineages": 50,
+   "up": 44,
+   "down": 6,
+   "ties": 0,
+   "effective_n": 50,
+   "median": 0.26414933043014077,
+   "p_sign": 3.243740565039843e-08,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": 0.1986912877622422,
+     "up": 38,
+     "down": 12
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.2522328766092432,
+     "up": 42,
+     "down": 8
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 0.26997261681454354,
+     "up": 44,
+     "down": 6
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "v6_wide:n_present",
+   "n_lineages": 50,
+   "up": 43,
+   "down": 7,
+   "ties": 0,
+   "effective_n": 50,
+   "median": 0.07900057804110716,
+   "p_sign": 2.098677427397888e-07,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": 0.07401803182690525,
+     "up": 42,
+     "down": 8
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.0658639334767912,
+     "up": 44,
+     "down": 6
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 0.10103346791912049,
+     "up": 44,
+     "down": 6
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "v6_wide:net",
+   "n_lineages": 50,
+   "up": 49,
+   "down": 1,
+   "ties": 0,
+   "effective_n": 50,
+   "median": 0.9665183333720122,
+   "p_sign": 9.059419880941277e-14,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": 0.8544036225890517,
+     "up": 47,
+     "down": 3
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.8981883845132446,
+     "up": 49,
+     "down": 1
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 1.0067964414533574,
+     "up": 49,
+     "down": 1
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "v6_wide:net_rate",
+   "n_lineages": 50,
+   "up": 49,
+   "down": 1,
+   "ties": 0,
+   "effective_n": 50,
+   "median": 0.07495355945839548,
+   "p_sign": 9.059419880941277e-14,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": 0.06959974979089617,
+     "up": 48,
+     "down": 2
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.07476742718113913,
+     "up": 50,
+     "down": 0
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 0.07871419138911336,
+     "up": 49,
+     "down": 1
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "v6_wide:rise",
+   "n_lineages": 50,
+   "up": 48,
+   "down": 2,
+   "ties": 0,
+   "effective_n": 50,
+   "median": 0.5947148547827996,
+   "p_sign": 2.2666313270747196e-12,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": 0.48164612239643856,
+     "up": 47,
+     "down": 3
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.562158502821021,
+     "up": 46,
+     "down": 4
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 0.6039666128422694,
+     "up": 48,
+     "down": 2
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "v6_wide:superego",
+   "n_lineages": 50,
+   "up": 4,
+   "down": 13,
+   "ties": 33,
+   "effective_n": 17,
+   "median": 0.0,
+   "p_sign": 0.049041748046875,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": 0.0,
+     "up": 20,
+     "down": 24
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.0,
+     "up": 14,
+     "down": 22
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 0.0,
+     "up": 2,
+     "down": 16
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "v6_wide:vocalisation",
+   "n_lineages": 50,
+   "up": 3,
+   "down": 3,
+   "ties": 44,
+   "effective_n": 6,
+   "median": 0.0,
+   "p_sign": 1.0,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": 0.004956424105865664,
+     "up": 28,
+     "down": 14
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 8.799365746170462e-05,
+     "up": 25,
+     "down": 10
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 0.0,
+     "up": 1,
+     "down": 1
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "v6full:aggression",
+   "n_lineages": 50,
+   "up": 5,
+   "down": 23,
+   "ties": 22,
+   "effective_n": 28,
+   "median": 0.0,
+   "p_sign": 0.0009122341871261597,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": -0.0007866633200380169,
+     "up": 9,
+     "down": 30
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": -9.4588708721699e-05,
+     "up": 14,
+     "down": 25
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 0.0,
+     "up": 5,
+     "down": 21
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "v6full:deliberation",
+   "n_lineages": 50,
+   "up": 14,
+   "down": 17,
+   "ties": 19,
+   "effective_n": 31,
+   "median": 0.0,
+   "p_sign": 0.720100131817162,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": 0.0002395710205040924,
+     "up": 25,
+     "down": 21
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.0,
+     "up": 21,
+     "down": 17
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 0.0,
+     "up": 4,
+     "down": 21
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "v6full:directedness",
+   "n_lineages": 50,
+   "up": 18,
+   "down": 29,
+   "ties": 3,
+   "effective_n": 47,
+   "median": -0.002259021466066713,
+   "p_sign": 0.14386508844054902,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": 0.007729467706197035,
+     "up": 27,
+     "down": 23
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.0,
+     "up": 19,
+     "down": 24
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": -0.0038812762224989528,
+     "up": 14,
+     "down": 33
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "v6full:fit",
+   "n_lineages": 50,
+   "up": 42,
+   "down": 8,
+   "ties": 0,
+   "effective_n": 50,
+   "median": 0.0664392220555734,
+   "p_sign": 1.163555804595262e-06,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": 0.10236793520565368,
+     "up": 40,
+     "down": 10
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.08612382544134967,
+     "up": 43,
+     "down": 7
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 0.07235732889004654,
+     "up": 44,
+     "down": 6
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "v6full:harm",
+   "n_lineages": 50,
+   "up": 2,
+   "down": 34,
+   "ties": 14,
+   "effective_n": 36,
+   "median": -0.0013293030356381075,
+   "p_sign": 1.941225491464138e-08,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": -0.004126796505790287,
+     "up": 6,
+     "down": 39
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": -0.0023927858631552223,
+     "up": 3,
+     "down": 43
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": -0.00018846596133104132,
+     "up": 0,
+     "down": 27
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "v6full:hedged",
+   "n_lineages": 50,
+   "up": 3,
+   "down": 39,
+   "ties": 8,
+   "effective_n": 42,
+   "median": -0.011096607657112345,
+   "p_sign": 5.631591193377972e-09,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": -0.016290209977455505,
+     "up": 11,
+     "down": 38
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": -0.009077604536393447,
+     "up": 9,
+     "down": 35
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": -0.010476522728008975,
+     "up": 3,
+     "down": 39
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "v6full:interiority",
+   "n_lineages": 50,
+   "up": 40,
+   "down": 8,
+   "ties": 2,
+   "effective_n": 48,
+   "median": 0.0113442846888267,
+   "p_sign": 3.305266709219268e-06,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": 0.01765674332235917,
+     "up": 38,
+     "down": 12
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.010812455514147723,
+     "up": 36,
+     "down": 12
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 0.013266550712690395,
+     "up": 38,
+     "down": 9
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "v6full:makes_better",
+   "n_lineages": 50,
+   "up": 39,
+   "down": 9,
+   "ties": 2,
+   "effective_n": 48,
+   "median": 0.01890545811786437,
+   "p_sign": 1.5221826110689562e-05,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": 0.042671362980643335,
+     "up": 36,
+     "down": 14
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.03063665177212449,
+     "up": 37,
+     "down": 13
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 0.0005498364586336013,
+     "up": 27,
+     "down": 19
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "v6full:makes_worse",
+   "n_lineages": 50,
+   "up": 15,
+   "down": 34,
+   "ties": 1,
+   "effective_n": 49,
+   "median": -0.013908581663786057,
+   "p_sign": 0.009399241523873059,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": -0.009176123418469573,
+     "up": 18,
+     "down": 31
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": -0.006564361778703509,
+     "up": 19,
+     "down": 30
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": -0.005672063026637253,
+     "up": 13,
+     "down": 32
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "v6full:mundanity",
+   "n_lineages": 50,
+   "up": 42,
+   "down": 8,
+   "ties": 0,
+   "effective_n": 50,
+   "median": 0.03931433469682599,
+   "p_sign": 1.163555804595262e-06,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": 0.021331348882329126,
+     "up": 36,
+     "down": 14
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.046242854310257875,
+     "up": 37,
+     "down": 13
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 0.04333157698505319,
+     "up": 40,
+     "down": 10
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "v6full:superego",
+   "n_lineages": 50,
+   "up": 5,
+   "down": 14,
+   "ties": 31,
+   "effective_n": 19,
+   "median": 0.0,
+   "p_sign": 0.063568115234375,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": 0.0,
+     "up": 22,
+     "down": 24
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.0,
+     "up": 17,
+     "down": 22
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 0.0,
+     "up": 3,
+     "down": 17
+    }
+   ],
+   "table": "contextual"
+  },
+  {
+   "scale": "v6full:vocalisation",
+   "n_lineages": 50,
+   "up": 3,
+   "down": 1,
+   "ties": 46,
+   "effective_n": 4,
+   "median": 0.0,
+   "p_sign": 0.625,
+   "bands": [
+    {
+     "band": "low",
+     "n_lineages": 50,
+     "median": 0.006046666961317393,
+     "up": 31,
+     "down": 13
+    },
+    {
+     "band": "mid",
+     "n_lineages": 50,
+     "median": 0.002243919342461098,
+     "up": 26,
+     "down": 8
+    },
+    {
+     "band": "high",
+     "n_lineages": 50,
+     "median": 0.0,
+     "up": 2,
+     "down": 0
+    }
+   ],
+   "table": "contextual"
+  }
+ ]
+}
