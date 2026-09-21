@@ -85,6 +85,31 @@ def v6_ratings():
             for sc, by in acc.items()}
 
 
+#: **FLOORS, BECAUSE THE MOST EXTREME RATING IS OFTEN ONE FRAME'S OPINION**
+#: (paper-claude). Ranking the v6 high poles by value put `peas`, `Tommy`,
+#: `ecstasy`, `censor`, `fret` at the head -- each rated in ONE frame, which is
+#: exactly what the axis figure's `n >= 2` rule exists to exclude. A word needs
+#: to have been rated in several frames before its mean means anything.
+MIN_F = 5          # v6 scales: frames the word was rated in
+MIN_F_FALLBACK = 3
+MIN_N = 50         # cells the word moved in
+
+
+def real_word(w):
+    """Is this a word, or corpus debris? `thrept`, `licitation` (paper-claude).
+
+    The lexicons rate whatever string they were given, so OCR wreckage inherits
+    a rating and can win an extremity sort. `wordfreq` is the membership test
+    this repo already uses; zero frequency in English is the discriminator, and
+    it is applied to EVERY list rather than to the two that were noticed.
+    """
+    try:
+        from wordfreq import zipf_frequency
+        return zipf_frequency(w, "en") > 0
+    except Exception:
+        return True
+
+
 def main():
     from malignment import fields as F
     mv = movers()
@@ -112,7 +137,13 @@ def main():
          "",
          "Lexicon scales carry a context-free rating per word type. The six "
          "`v6:` scales are rated per (prompt, word), so a word's value is the "
-         "mean over the frames it was rated in and `f` is how many.", ""]
+         "mean over the frames it was rated in and `f` is how many.", "",
+         "**Floors** (paper-claude): every candidate has moved in at least %d "
+         "cells, and on the `v6:` scales has been rated in at least %d frames "
+         "— ranking by value alone put words rated once at the head of a pole. "
+         "Non-words are excluded by a `wordfreq` membership test, applied to "
+         "every list rather than to the two that were noticed."
+         % (MIN_N, MIN_F), ""]
     for sc, (plo, phi) in POLES.items():
         if sc.startswith("v6:"):
             tab = v6.get(sc, {})
@@ -138,6 +169,17 @@ def main():
         #: identical, which is the failure mode that looks like working code.
         #: Rank by VALUE and take a fixed number from each end instead, ties
         #: broken by how often the word moved.
+        #: floors first, extremity second: filtering after the cut would
+        #: leave a pole short rather than differently chosen
+        got = [t for t in got if real_word(t[0]) and mv[t[0]] >= MIN_N]
+        if sc.startswith("v6:"):
+            hard = [t for t in got if (t[2] or 0) >= MIN_F]
+            soft = [t for t in got if (t[2] or 0) >= MIN_F_FALLBACK]
+            lowered = len(hard) < 40
+            got = soft if lowered else hard
+            if lowered:
+                L.append("_%s: floor lowered to f >= %d; f >= %d left only %d "
+                         "candidates._" % (sc, MIN_F_FALLBACK, MIN_F, len(hard)))
         got.sort(key=lambda t: (t[1], -mv[t[0]]))
         POOL = 60
         def fmt(rows):
