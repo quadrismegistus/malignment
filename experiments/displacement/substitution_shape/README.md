@@ -308,3 +308,17 @@ Adding seeds adds components roughly one for one. **Charged words do not share a
 **AND THE WALK DIES QUICKLY: 37 of the 52 reached nodes are sinks** that never fall again. The `kill` basin is the one that goes more than a step — `kill → die → {suffer, fall, remain, follow, stay → walk}` and `kill → do → {wait, start, create}` — and even it is three deep at most.
 
 This is the crossing graph's fan restated for the charged end specifically: withdrawal is *selective* about what it takes (see the lift table above) and *unselective* about what it puts there.
+
+### Nouns do not chain; verbs do
+
+![noun walk](figures/seed_walk_raw_noun_top20.png)
+
+    seeds            reached   edges   components   largest holds
+    top 10 VERB      52          45         9       2 of 10 seeds
+    top 20 VERB      65          54        13       7 of 20
+    top 10 NOUN      19          10         9       1 of 10
+    top 20 NOUN      31          13        18       1 of 20
+
+Twenty noun seeds reach thirty-one words over **thirteen edges** and fall into **eighteen components**, no component holding more than one seed. Every charged noun is a ONE-STEP substitution that then stops: `shaft → jaw`, `breasts → chest, waist`, `fuck → heck, massage`, `shit → dear, happy`, `suicide → quantum`, `wounds → injuries`, `mouth → bag`, `woman → stranded`. Half the seeds have no outward edge at all.
+
+The verb graph chains — `kill → die → stay → walk`, `kill → do → start` — because a substituted verb is itself a verb that can be substituted elsewhere. A substituted noun is a euphemism and the euphemism is where it stops: `chest` and `injuries` and `heck` are never themselves the biggest faller anywhere in the corpus. **Displacement recurses on the predicate and terminates on the object.**
