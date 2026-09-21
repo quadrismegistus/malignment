@@ -232,6 +232,24 @@ def rows(orient=False, mode="bands"):
                                        "norms_by_lift_en.json")))
     byl = {s["scale"]: s for s in meta["scales"]}
     ref = _ref()
+    if mode == "z":
+        zz = {x["scale"]: x for x in json.load(open(os.path.join(
+            HERE, "results", "norms_levels_z_en.json")))["scales"]}
+        out = []
+        for sc in POLES:
+            b = {x["band"]: x for x in zz[sc]["bands"]}
+            #: **MEAN WITHIN THE LINEAGE BY DEFAULT** (RH). `--z-median`
+            #: restores the median. The two are different questions and on
+            #: `v6:vocalisation` they answer in opposite directions, both
+            #: significant -- see `_z_caption`.
+            f_ = "move_z" if "--z-median" in sys.argv else "move_mean_z"
+            sq, lo, hi = (b["all"][f_], b["low"][f_], b["high"][f_])
+            f = orient and sq < 0
+            if f:
+                sq, lo, hi = -sq, -lo, -hi
+            out.append((sc, sq, lo, hi, zz[sc]["sd"], f))
+        out.sort(key=lambda r: r[1], reverse=not orient)
+        return out
     sl = slopes() if mode == "fitted" else None
     LM, LB = meta["lift_mean"], meta["lift_band_mean"]
     out = []
@@ -446,6 +464,120 @@ def _up(k):
     return 0
 
 
+def _zb(scale, band="all"):
+    """One band record from the z artifact, for the caption."""
+    z = json.load(open(os.path.join(HERE, "results",
+                                    "norms_levels_z_en.json")))
+    for x in z["scales"]:
+        if x["scale"] == scale:
+            for bb in x["bands"]:
+                if bb["band"] == band:
+                    return bb
+    raise KeyError(scale)
+
+
+def _z_caption(out, rs, meta, n_words):
+    """Caption for `--z`. Its own function because almost nothing carries over.
+
+    The band-median caption says the square reproduces the scatter's vertical
+    coordinate and then spends a paragraph on tie counts. **NEITHER IS TRUE
+    HERE**: the quantity is a different one, and medians of LEVELS are
+    continuous, so the tie pile that clipped `v6:vocalisation` and
+    `k_vulgarity` does not exist on this plate. Reusing the caption with the
+    numbers swapped is how a convention dies crossing between two artifacts.
+    """
+    z = json.load(open(os.path.join(HERE, "results",
+                                    "norms_levels_z_en.json")))
+    zz = {x["scale"]: x for x in z["scales"]}
+    big = max(rs, key=lambda r: abs(r[1]))
+    span = max(max(abs(r[2]), abs(r[3])) for r in rs)
+    cap = [
+        "Figure 3z. What alignment does to fourteen norm scales, measured "
+        "against the spread of each norm itself.",
+        "",
+        "Each row is one scale, its two ends labelled on their own sides. "
+        "Position is the median within-lineage move from base to aligned over "
+        "50 endpoint lineages, divided by the standard deviation of that "
+        "norm's own values -- pooled over the base and aligned ratings of "
+        "every gated row for the scale, so neither arm is the anchor. The "
+        "square is all prompts; the triangles are the same quantity on the "
+        "lowest and highest third of charge lift, cut at %+.3f and %+.3f."
+        % (meta["cuts"][0], meta["cuts"][1]),
+        "",
+        "ONE RULER FOR EVERY ROW, WHICH IS THE POINT. The companion plate "
+        "divides each row by the spread of its own CHANGES, a denominator "
+        "that ranges over a factor of 250 across these fourteen scales, so "
+        "its rows cannot be compared with each other. Here one unit means the "
+        "same kind of thing on every row: how far apart the words on that "
+        "scale actually are.",
+        "",
+        "THE MOVEMENTS ARE SMALL. On all prompts the largest is %s at %.3f, "
+        "and nothing anywhere on the plate exceeds %.3f. Alignment moves "
+        "these norms by under a seventh of their own spread -- which the "
+        "companion plate cannot say, because its units do not carry that "
+        "meaning."
+        % (POLES[big[0]][1].lower(), abs(big[1]), span),
+        "",
+        "AND THE ORDER IS NOT THE COMPANION'S ORDER. Bodily harm is the "
+        "largest mover there and fourth here; register level and fit are "
+        "largest here. A scale whose changes are tightly agreed among "
+        "lineages scores high on a per-change denominator whether or not it "
+        "moved far.",
+        "",
+        "THE MOVE IS A MEAN OVER PROMPTS WITHIN EACH LINEAGE, THEN A MEDIAN "
+        "OVER THE 50 LINEAGES. The median-over-prompts version is what every "
+        "earlier plate drew, and on these scales it lands on an exact-zero "
+        "tie for up to 42 of the 50 lineages, which does two things: it pins "
+        "the marker at 0.000, and it makes the sign test a test on the untied "
+        "SUBSET rather than on the roster. The mean has no ties on any of the "
+        "fourteen, so every row here uses all 50 lineages. The scales are "
+        "bounded (1 to 7, 1 to 9) and so are the differences, so the usual "
+        "objection to a mean has a ceiling here it would not have on an "
+        "unbounded quantity.",
+        "",
+        "AND THE TWO ESTIMATORS DISAGREE ABOUT VOCALISATION, IN OPPOSITE "
+        "DIRECTIONS, BOTH SIGNIFICANT. Mean: %+.4f, 33 of 50 lineages up, "
+        "p=0.033 -- alignment moves the completion TOWARD speech. Median: "
+        "0.0000 with 21 lineages tied, 7 up against 22 down of the untied, "
+        "p=0.008 -- away from it. Most prompts in a lineage move slightly "
+        "toward silence and a minority move a long way toward speech, so the "
+        "typical prompt and the net mass go opposite ways. That is a finding "
+        "about the scale, not a defect in either statistic, and it should be "
+        "reported as one."
+        % _zb("v6:vocalisation")["move_mean_z"],
+        "",
+        "Two rows move the other way. Makes worse and directedness are "
+        "decisive on the median (p=2.7e-05 and 4.6e-07, on 28 and 31 untied "
+        "lineages) and null on the mean over all 50 (p=0.89 and 0.20). "
+        "Conditioning on the lineages that did not tie is what made them "
+        "significant.",
+        "",
+        "Scales keep their native direction, low pole left and high pole "
+        "right, so the side of every marker is a result. Rows are ordered by "
+        "the square, most negative at the top.",
+        "",
+        "Charge deepens the movement in BOTH directions: at high lift "
+        "arousal, concreteness, bodily harm and transgressiveness sit further "
+        "left, and register level, dominance, valence and mundanity further "
+        "right. Of the fourteen, %d have their high-lift triangle further "
+        "from zero than their low-lift one."
+        % sum(1 for r in rs if abs(r[3]) > abs(r[2])),
+        "",
+        "Pole words illustrate each end among the words alignment moved: a "
+        "word appears only if it moved in at least 50 prompt-lineage cells. "
+        "For the six v6 scales the bracketed number is how many frames the "
+        "word was rated in. %d pole words, none repeated." % n_words,
+        "",
+        "Population and gate as elsewhere: 50 endpoint lineages, English, "
+        "coverage at 0.20 on the minimum of the two arms, %s gated rows."
+        % format(z["rows_gated"], ","),
+    ]
+    cp = out.replace(".png", ".caption.txt")
+    open(cp, "w", encoding="utf-8").write("\n".join(cap) + "\n")
+    print("  wrote %s" % cp)
+    return 0
+
+
 def main():
     if "--dose" in sys.argv:
         return draw_dose()
@@ -462,7 +594,8 @@ def main():
     matplotlib.rcParams["axes.unicode_minus"] = False
 
     n_words = check_picks()
-    mode = "fitted" if "--fitted" in sys.argv else "bands"
+    mode = ("z" if "--z" in sys.argv else
+            "fitted" if "--fitted" in sys.argv else "bands")
     rs = rows(orient="--orient" in sys.argv, mode=mode)
     n = len(rs)
     fr = v6_frames()
@@ -518,7 +651,13 @@ def main():
     ax.grid(axis="x", color=PUB_GRAY, linewidth=PUB_RULE_PT * 0.6, zorder=0)
     ax.set_axisbelow(True)
     native = "--orient" not in sys.argv
-    ax.set_xlabel(("Median change from base to aligned, in SDs of the scale\n"
+    ax.set_xlabel((("Median move" if "--z-median" in sys.argv else
+                    "Mean move per lineage, median over lineages")
+                   + ", from base to aligned,\nin SDs of the norm's own "
+                     "spread\n"
+                   "Toward the left pole  <<  0  >>  Toward the right pole")
+                  if mode == "z" and native else
+                  ("Median change from base to aligned, in SDs of the scale\n"
                    "Toward the left pole  <<  0  >>  Toward the right pole")
                   if native else
                   ("How far alignment moves the scale, in SDs\n"
@@ -540,12 +679,14 @@ def main():
 
     out = os.path.join(HERE, "figures", "fig3_norms_osgood_en%s%s.png"
                        % ("" if native else "_oriented",
-                          "_fitted" if mode == "fitted" else ""))
+                          "" if mode == "bands" else "_" + mode))
     os.makedirs(os.path.dirname(out), exist_ok=True)
     print("  wrote %s" % save(fig, out))
 
     meta = json.load(open(os.path.join(HERE, "results",
                                        "norms_by_lift_en.json")))
+    if mode == "z":
+        return _z_caption(out, rs, meta, n_words)
     cap = [
         "Figure 3. What alignment does to fourteen norm scales, and how it "
         "changes with charge.",
