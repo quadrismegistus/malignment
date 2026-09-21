@@ -37,6 +37,23 @@ sys.path.insert(0, ROOT)
 FIG2 = "She was so angry she wanted to"
 
 
+def is_word(w):
+    """Does the token contain a letter? -> bool
+
+    The blank-template completions (`____`, `________`) and bare punctuation
+    are real measurements -- they are the genre-collapse signature and they
+    belong in `substitution_shape`'s counts -- but they are not words and a
+    flow of words should not have them as boxes.
+
+    **A LINEAGE EXCLUDED ON ONE SIDE IS EXCLUDED ON BOTH.** Dropping only the
+    offending node would leave its partner's count intact and the two columns
+    would stop summing to the same number, which is the one property this
+    layout has to keep. The count of dropped lineages is printed and the
+    denominator moves with it.
+    """
+    return any(c.isalpha() for c in w)
+
+
 def argmaxes(prompt):
     """-> {model: (word, p)} pass 1 only, over every endpoint arm."""
     from malignment import ch, roster
@@ -55,7 +72,7 @@ def argmaxes(prompt):
     return eps, best
 
 
-def build(prompt, keep_held=True):
+def build(prompt, keep_held=True, words_only=True):
     """-> (edges, held, base_w, aligned_w, n_lineages, n_missing)
 
     **WITH `keep_held`, A LINEAGE THAT DID NOT MOVE IS AN EDGE.** In the
@@ -70,13 +87,16 @@ def build(prompt, keep_held=True):
     eps, best = argmaxes(prompt)
     E, held = collections.Counter(), collections.Counter()
     bw_c, aw_c = collections.Counter(), collections.Counter()
-    n = miss = 0
+    n = miss = nonword = 0
     for b, a in eps.items():
         if b not in best or a not in best:
             miss += 1
             continue
-        n += 1
         bw, aw = best[b][0], best[a][0]
+        if words_only and not (is_word(bw) and is_word(aw)):
+            nonword += 1
+            continue
+        n += 1
         bw_c[bw] += 1
         aw_c[aw] += 1
         if bw == aw:
@@ -85,7 +105,7 @@ def build(prompt, keep_held=True):
                 E[(bw, aw)] += 1
         else:
             E[(bw, aw)] += 1
-    return E, held, bw_c, aw_c, n, miss
+    return E, held, bw_c, aw_c, n, miss, nonword
 
 
 def dot(E, held, bw, aw, n):
@@ -151,7 +171,7 @@ def dot_flow(E, held, bw, aw, n, prompt):
     mx = max(E.values())
 
     def show(w):
-        return ("blank (%d _)" % len(w)) if set(w) == {"_"} else w
+        return ("blank (%d _)" % len(w)) if not is_word(w) else w
 
     L = ['digraph linflow {', '  rankdir=LR; splines=true; overlap=false;',
          '  size="%g,%g";' % (_fig.PUB_SIZE[0], _fig.PUB_SIZE[0] * 2.6),
@@ -191,17 +211,26 @@ def main(argv=None):
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--prompt", default=FIG2)
     ap.add_argument("--tag", default=None, help="filename tag")
+    ap.add_argument("--keep-nonwords", action="store_true",
+                    help="keep blank-template and punctuation completions")
     ap.add_argument("--free", action="store_true",
                     help="one-column force-directed layout instead of the "
                          "two-column flow; held lineages then cannot be edges")
     a = ap.parse_args(argv)
 
-    E, held, bw, aw, n, miss = build(a.prompt, keep_held=not a.free)
+    E, held, bw, aw, n, miss, nonword = build(
+        a.prompt, keep_held=not a.free, words_only=not a.keep_nonwords)
     print("PROMPT: %r" % a.prompt)
-    print("  %d endpoint lineages with both arms measured%s"
-          % (n, "; %d missing" % miss if miss else ""))
-    print("  top word UNCHANGED in %d, CHANGED in %d; %d distinct edges"
-          % (sum(held.values()), sum(E.values()), len(E)))
+    print("  %d endpoint lineages drawn%s%s"
+          % (n, "; %d missing" % miss if miss else "",
+             "; %d dropped for a non-word argmax on one side or the other"
+             % nonword if nonword else ""))
+    #: **`sum(E)` IS NOT THE CHANGED COUNT ONCE HELD LINEAGES ARE EDGES.**
+    #: It became the total, and printed under "CHANGED" it read 47 of 47.
+    print("  top word UNCHANGED in %d, CHANGED in %d; %d distinct edges "
+          "over %d lineage-edges"
+          % (sum(held.values()), n - sum(held.values()), len(E),
+             sum(E.values())))
     print("  base argmax:    %s"
           % ", ".join("%s %d" % x for x in bw.most_common(6)))
     print("  aligned argmax: %s"

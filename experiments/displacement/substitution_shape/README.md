@@ -526,18 +526,20 @@ Laid out as `kind_flow` is: base argmax on the left, aligned argmax on the right
 
 Here one prompt is fixed and **each of the 50 endpoint lineages contributes exactly one edge**, from its own base argmax to its own aligned argmax. Nothing is averaged before the edge is drawn.
 
-    50 lineages, both arms measured, 0 missing
-    top word UNCHANGED in 21, CHANGED in 29, over 14 distinct edges
+    50 lineages measured, 3 dropped for a non-word argmax on one side
+    47 drawn: top word UNCHANGED in 21, CHANGED in 26, over 14 distinct edges
 
-    base argmax      kill 29   scream 16   hit 1   blank 1   throw 1   tell 1   cry 1
-    aligned argmax   scream 29   kill 8   cry 3   blank 2   destroy 1   do 1
-                     hit 1   punch 1   fight 1   rip 1   tell 1   hurt 1
+    base argmax      kill 28   scream 16   throw 1   tell 1   cry 1
+    aligned argmax   scream 29   kill 8   cry 3   destroy 1   fight 1
+                     hit 1   hurt 1   punch 1   rip 1   tell 1
 
-**`kill → scream` is 15 of the 29 changes — fifteen separately trained models, each making that move on this prompt.** That is not an artefact of averaging and it is not one model's behaviour generalised; it is the single fact in this folder that survives the unit objection.
+**NON-WORDS ARE OUT, AND A LINEAGE EXCLUDED ON ONE SIDE IS EXCLUDED ON BOTH.** The blank-template completions (`____`, `________`) are real measurements — they are the genre-collapse signature and they stay in `substitution_shape`'s counts — but a flow of words should not have them as boxes. The test is whether the token contains a letter. Dropping only the offending node would leave its partner's count intact and the columns would stop summing to the same number, which is the one property this layout has to keep; so the denominator moves instead, 50 to 47, and the drop is printed.
 
-The rest of the picture is the fan again, now at lineage grain: `kill` also goes to `cry` (2), `destroy`, `fight`, `hurt`, `punch` and a blank template, one lineage each. Of the 16 lineages whose base already said `scream`, 13 hold it and 3 move away (`hit`, `cry`, `rip`). Seven lineages hold `kill`.
+**`kill → scream` is 15 of the 26 changes — fifteen separately trained models, each making that move on this prompt.** That is not an artefact of averaging and it is not one model's behaviour generalised; it is the single fact in this folder that survives the unit objection.
 
-So at the level of the roster the marginal is stark — `kill` 29 → 8 as the top word, `scream` 16 → 29 — while the *routing* stays one-to-many.
+The rest of the picture is the fan again, now at lineage grain: `kill` also goes to `cry` (2), `destroy`, `fight`, `hurt` and `punch`, one lineage each. Of the 16 lineages whose base already said `scream`, 13 hold it and 3 move away (`hit`, `cry`, `rip`). Seven lineages hold `kill`.
+
+So at the level of the roster the marginal is stark — `kill` 28 → 8 as the top word, `scream` 16 → 29 — while the *routing* stays one-to-many.
 
 **A LINEAGE THAT DID NOT MOVE IS AN EDGE HERE, NOT A SELF-LOOP.** In two columns `kill` on the left and `kill` on the right are different nodes — the word at the base arm and the word at the aligned arm — so `kill → kill` (7) and `scream → scream` (13) are ordinary horizontal edges, drawn **headless** because an arrow would assert a movement the equality denies. That is what makes both columns sum to 50, which is the property a flow diagram has to have and the one-column version could not: there, a held lineage would have been a loop sitting among the arrows, readable as a substitution to itself.
 
