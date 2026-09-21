@@ -143,7 +143,8 @@ def dot(E, held, bw, aw, n):
     return "\n".join(L)
 
 
-def dot_flow(E, held, bw, aw, n, prompt, n_roster=None):
+def dot_flow(E, held, bw, aw, n, prompt, n_roster=None,
+             collapse=False):
     """Two columns, base argmax left and aligned argmax right. -> dot source
 
     The house flow layout (`freudian_hypothesis/kind_flow.py`): `rankdir=LR`,
@@ -173,6 +174,15 @@ def dot_flow(E, held, bw, aw, n, prompt, n_roster=None):
     every number on the plate is one a reader would otherwise have to
     estimate.
 
+    **`collapse` STACKS THE ONE-LINEAGE BOXES INTO ONE PER SIDE, NAMED.** Ten
+    of the sixteen boxes here hold a single lineage and each costs a row; the
+    collapsed version puts their words in one box, one per line. It is not the
+    "other (9)" box this file used to have and which was removed: that hid the
+    identities behind a count, and the objection to it -- the singletons ARE
+    the picture -- does not apply to a box that still shows every word. What
+    is lost is which singleton goes with which source, since their edges merge.
+    Both versions are written, under different names.
+
     Vertical order is forced by an invisible chain: `rank=same` fixes the
     column, not the order within it, so without the chain graphviz sorts the
     boxes by whatever the layout finds convenient and the counts read as
@@ -185,6 +195,31 @@ def dot_flow(E, held, bw, aw, n, prompt, n_roster=None):
     def show(w):
         return ("blank (%d _)" % len(w)) if not is_word(w) else w
 
+    singles = {}
+    if collapse:
+        for side, counts in (("B", bw), ("A", aw)):
+            ones = sorted(w for w, k in counts.items() if k == 1)
+            #: one box replacing one box is not a collapse, it is a rename
+            if len(ones) < 2:
+                continue
+            singles[side] = ones
+        if singles:
+            bw, aw = collections.Counter(bw), collections.Counter(aw)
+            E2 = collections.Counter()
+            for (f, t), v in E.items():
+                if "B" in singles and f in singles["B"]:
+                    f = "ZZ_ONES"
+                if "A" in singles and t in singles["A"]:
+                    t = "ZZ_ONES"
+                E2[(f, t)] += v
+            E = E2
+            for side, counts in (("B", bw), ("A", aw)):
+                if side not in singles:
+                    continue
+                for w in singles[side]:
+                    del counts[w]
+                counts["ZZ_ONES"] = len(singles[side])
+
     L = ['digraph linflow {', '  rankdir=LR; splines=true; overlap=false;',
          '  size="%g,%g";' % (_fig.PUB_SIZE[0], _fig.PUB_SIZE[0] * 2.6),
          '  bgcolor="white"; nodesep=0.10; ranksep=1.60;',
@@ -196,10 +231,17 @@ def dot_flow(E, held, bw, aw, n, prompt, n_roster=None):
     order = {}
     for side, counts in (("B", bw), ("A", aw)):
         ws = sorted(counts, key=lambda x: (-counts[x], x))
+        stack = singles.get(side)
         order[side] = ws
         L.append("  { rank=same;")
         for w in ws:
             k = counts[w]
+            if w == "ZZ_ONES":
+                #: the words themselves, one per line, and NO count: each is
+                #: one lineage and the list is its own tally
+                L.append('  "%s_ZZ_ONES" [label="%s"];'
+                         % (side, "\\n".join(show(x) for x in stack)))
+                continue
             L.append('  "%s_%s" [label="%s%s"];'
                      % (side, w, show(w),
                         "\\n(%d/%d)" % (k, n_roster or n) if k > 1 else ""))
@@ -235,6 +277,9 @@ def main(argv=None):
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--prompt", default=FIG2)
     ap.add_argument("--tag", default=None, help="filename tag")
+    ap.add_argument("--collapse-singletons", action="store_true",
+                    help="stack every one-lineage box into one per side, "
+                         "listing the words; written under its own name")
     ap.add_argument("--keep-nonwords", action="store_true",
                     help="keep blank-template and punctuation completions")
     ap.add_argument("--free", action="store_true",
@@ -266,10 +311,13 @@ def main(argv=None):
     tag = a.tag or ("_".join(a.prompt.lower().split()[:5])
                     .replace("'", "").replace(",", ""))
     base = os.path.join(HERE, "figures", "lineage_graph_%s%s"
-                        % (tag, "_free" if a.free else "_flow"))
+                        % (tag, "_free" if a.free else
+                           "_flow" + ("_collapsed" if a.collapse_singletons
+                                      else "")))
     os.makedirs(os.path.dirname(base), exist_ok=True)
     src = (dot(E, held, bw, aw, n) if a.free
-           else dot_flow(E, held, bw, aw, n, a.prompt, n_roster))
+           else dot_flow(E, held, bw, aw, n, a.prompt, n_roster,
+                         a.collapse_singletons))
     open(base + ".dot", "w", encoding="utf-8").write(src + "\n")
     for ext in ("png", "pdf"):
         r = subprocess.run([("neato" if a.free else "dot"), "-T" + ext,
@@ -310,6 +358,18 @@ def main(argv=None):
         "Pass 1 only (topup=0): the store holds two passes the campaign's "
         "rule forbids merging.",
     ]
+    if a.collapse_singletons:
+        cap[-1:-1] = [
+            "",
+            "THE ONE-LINEAGE BOXES ARE STACKED INTO ONE PER SIDE, listing "
+            "every word. Nothing is hidden behind a count and no lineage is "
+            "dropped: the words are all there, one per line, and each is one "
+            "lineage, so the list is its own tally. What the stacking does "
+            "cost is WHICH singleton came from WHICH source -- those edges "
+            "merge, so an arrow into the stacked box says only that so many "
+            "lineages went somewhere in it. The uncollapsed version, drawn "
+            "without the `_collapsed` suffix, keeps that routing.",
+        ]
     cp = base + ".caption.txt"
     open(cp, "w", encoding="utf-8").write("\n".join(cap) + "\n")
     print("  wrote %s" % cp)
