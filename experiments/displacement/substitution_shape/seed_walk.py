@@ -105,6 +105,8 @@ def main(argv=None):
     ap.add_argument("--edge-pos", default="content",
                     choices=("content", "all"))
     ap.add_argument("--draw", action="store_true")
+    ap.add_argument("--label-prompts", action="store_true",
+                    help="put the prompt that produced each edge on it")
     a = ap.parse_args(argv)
 
     rows = G.crossings(a.arm)
@@ -146,9 +148,12 @@ def main(argv=None):
           % (len(sink), len(nodes)))
 
     if a.draw:
-        src = G.dot(sub, collections.Counter(), a.arm, (0, 0))
-        base = os.path.join(HERE, "figures", "seed_walk_%s_%s_top%d"
-                            % (a.arm, a.pos.lower(), a.top))
+        src = G.dot(sub, collections.Counter(), a.arm, (0, 0),
+                    G.prompt_labels(a.arm, sub) if a.label_prompts
+                    else None)
+        base = os.path.join(HERE, "figures", "seed_walk_%s_%s_top%d%s"
+                            % (a.arm, a.pos.lower(), a.top,
+                               "_prompts" if a.label_prompts else ""))
         open(base + ".dot", "w", encoding="utf-8").write(src + "\n")
         for ext in ("png", "pdf"):
             r = subprocess.run(["sfdp", "-T" + ext, "-Gdpi=300",

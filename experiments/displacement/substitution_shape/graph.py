@@ -125,7 +125,32 @@ def induced(w, min_degree=2, min_weight=3):
     return E, deg, (len(w) - len(E), len(deg) - len({x for e in E for x in e}))
 
 
-def dot(E, deg, arm, drop):
+def prompt_labels(arm, E, wrap=30):
+    """{(faller, riser): label} -- the prompt that produced the edge.
+
+    **89% OF CONTENT EDGES HAVE EXACTLY ONE PROMPT**, so for most of the graph
+    the prompt is not a summary of the edge, it IS the edge. Those are labelled
+    in full. An edge carried by several prompts gets the shortest, marked with
+    how many more there are -- picking one and saying nothing would make a
+    seven-prompt edge look like a one-prompt edge.
+    """
+    import textwrap
+    byedge = collections.defaultdict(list)
+    for r in crossings(arm):
+        k = (r["faller"], r["riser"])
+        if k in E:
+            byedge[k].append(r["prompt"])
+    out = {}
+    for k, v in byedge.items():
+        v = sorted(v, key=len)
+        txt = "\\n".join(textwrap.wrap(v[0], wrap)[:3])
+        if len(v) > 1:
+            txt += "\\n(+%d more)" % (len(v) - 1)
+        out[k] = txt.replace('"', "'")
+    return out
+
+
+def dot(E, deg, arm, drop, labels=None):
     from malignment import figure as _fig
     fam, pt = _fig.pub_font(), _fig.PUB_FONT_PT
     mx = max(E.values())
@@ -134,8 +159,17 @@ def dot(E, deg, arm, drop):
     #: stretching it: `dot -Grankdir=LR` returned 2217 x 12263 px, a ribbon
     #: forty times taller than wide and unreadable at any print size. A
     #: force-directed engine is the right tool for a graph with no levels.
-    L = ['digraph subs {', '  splines=true; overlap=prism; overlap_scaling=-4;',
-         '  graph [bgcolor="white" sep="+6" K=0.7 repulsiveforce=1.2];',
+    #: **A LABELLED EDGE NEEDS ROOM THE NODE DID NOT.** With prompts on the
+    #: edges the drawing is no longer words joined by lines, it is words joined
+    #: by paragraphs, and the spacing that suited bare arrows collides in any
+    #: dense neighbourhood -- `kill` alone has fourteen labelled edges. So the
+    #: separation and the spring length scale with whether labels are on.
+    lab_on = bool(labels)
+    L = ['digraph subs {',
+         '  splines=true; overlap=prism; overlap_scaling=%d;' % (-6 if lab_on else -4),
+         '  graph [bgcolor="white" sep="%s" K=%.1f repulsiveforce=%.1f];'
+         % ("+12" if lab_on else "+6", 1.3 if lab_on else 0.7,
+            1.5 if lab_on else 1.2),
          '  node [shape=plaintext fontname="%s" fontsize=%g '
          'margin="0.02,0.01"];' % (fam, pt - 2),
          '  edge [fontname="%s" fontsize=%g arrowsize=0.45];' % (fam, pt - 3)]
@@ -150,9 +184,15 @@ def dot(E, deg, arm, drop):
         L.append('  "%s" [label="%s" fontcolor="%s"%s];'
                  % (x, x, col, ' fontname="%s-Bold"' % fam if both else ""))
     for (f, t), n in sorted(E.items(), key=lambda kv: -kv[1]):
-        L.append('  "%s" -> "%s" [penwidth=%.2f color="%s"];'
+        lab = ''
+        if labels and (f, t) in labels:
+            #: the prompt sits ON the edge, in the lighter grey and two points
+            #: down, so the words stay the figure and the frames are the gloss
+            lab = (' label="%s" fontcolor="#8c8c8c" labelfloat=false'
+                   % labels[(f, t)])
+        L.append('  "%s" -> "%s" [penwidth=%.2f color="%s"%s];'
                  % (f, t, 0.5 + 2.2 * (n - 1) / max(1, mx - 1),
-                    "#1a1a1a" if n >= 3 else "#8c8c8c"))
+                    "#1a1a1a" if n >= 3 else "#8c8c8c", lab))
     L.append("}")
     return "\n".join(L)
 
@@ -168,6 +208,8 @@ def main(argv=None):
     ap.add_argument("--min-weight", type=int, default=3,
                     help="keep an edge this heavy whatever its endpoints' "
                          "degree; 0 for the pure degree filter")
+    ap.add_argument("--label-prompts", action="store_true",
+                    help="put the prompt that produced each edge on it")
     ap.add_argument("--engine", default="sfdp",
                     choices=("dot", "neato", "sfdp", "fdp"))
     a = ap.parse_args(argv)
@@ -183,7 +225,8 @@ def main(argv=None):
     rep = sorted(((n, f, t) for (f, t), n in E.items()), reverse=True)[:8]
     print("  heaviest: " + ", ".join("%s->%s %d" % (f, t, n) for n, f, t in rep))
 
-    src = dot(E, deg, a.arm, (de, dn))
+    src = dot(E, deg, a.arm, (de, dn),
+              prompt_labels(a.arm, E) if a.label_prompts else None)
     #: **EVERY FILTER THAT CHANGES THE PICTURE CHANGES THE NAME.** Four
     #: combinations of --pos and --min-degree were written to one filename
     #: earlier in this session and each silently replaced the last; the same
