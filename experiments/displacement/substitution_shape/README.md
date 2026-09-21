@@ -563,3 +563,29 @@ So at the level of the roster the marginal is stark — `kill` 28 → 8 as the t
 **The direction holds on all seven — `kill` falls and `scream` rises every time — and the magnitude varies fourfold.** `furious` is the outlier: twice the typical survival, and `kill → kill` (20) is its heaviest edge, so the modal lineage on that prompt *keeps* the word. On two of the seven (`furious`, `She is so angry she wants to`) `kill` is still the top aligned word across the roster, 21 against 17 and 16 against 14.
 
 The base arms disagree too, before alignment touches anything: base `kill` runs from 16 to 42 of 50. So these are neither seven independent observations nor one observation repeated. **A count of "seven prompts" overstates the evidence and "one frame paraphrased" understates it** — what they support is the direction, not any particular magnitude, and a plate drawn from one of them should name which.
+
+## POOLING PROMPTS AGAIN, WITH THE CELL AS THE UNIT (`cell_graph.py`)
+
+    python -u cell_graph.py                  # from `kill`, English
+    python -u cell_graph.py --min-w 10 --depth 3
+
+![cell graph](figures/cell_graph_en_kill_w10_d3.png)
+
+The three units in this folder, and what each gives up:
+
+    run.py            averages 50 lineages, THEN picks a faller   unit = prompt
+    lineage_graph.py  fixes one prompt                            unit = lineage
+    cell_graph.py     pools both                                  unit = CELL
+
+Here a node is a word some model ranked first at some blank, and an edge is one model changing its mind at one blank. **223,437 cells** over 50 endpoint lineages and ~2,400 prompts; 54,554 survive the English and word filters over 1,957 prompts, of which **60% do not change the top word at all**.
+
+**An edge weight is neither models-that-agree nor prompts-that-agree.** `kill → scream` at 105 cells could be 105 models on one prompt or one model on 105 prompts, and this instrument cannot tell you which — `lineage_graph.py` is what answers that. What pooling buys is mass: enough to walk a neighbourhood three steps deep, which neither other unit has.
+
+**Filtered before anything is drawn**, and the first two are not cosmetic: unfiltered, the heaviest edges in the corpus are `have → be` (736) and `he → the` (420), and the third heaviest is the Chinese `把 → 将` (115). Stopwords out (NLTK minus its `n't` fragments), non-words out, English only, held cells counted and never drawn.
+
+    kill ->  scream 105   see 41   hurt 41   make 35   destroy 31   punch 26
+             take 22   get 22   cut 21   shoot 15   know 15   die 10
+
+At weight ≥ 10 and depth 3 that reaches 48 nodes over 61 edges: `scream → cry → {weep, sing, wonder, feel}`, `punch → hit → {struck, missed, swung}`, `die → {suffer, stay, fall}`, `cut → held → {handed, said}`, and through `take` into the institutional cluster `{quit, leave, implement, sue, fire → terminate}`.
+
+**The heaviest edge in `kill`'s neighbourhood is not `kill`'s.** `go → take` carries 123 cells against `kill → scream`'s 105 — the procedural channel is larger than the violent one even in the violent word's own three-hop neighbourhood, which is the same thing `existence` found by a different route when it reported `point → check` at 271 prompts against `kill → scream` at 1.25 specificity.
