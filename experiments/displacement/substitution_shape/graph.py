@@ -59,6 +59,55 @@ def crossings(arm="raw"):
                 if r["crossing"] == "CROSSED" and r["faller"] and r["riser"]]
 
 
+def slot_lemma(rows):
+    """-> {(prompt, word): lemma}, lemmatised IN THE SLOT.
+
+    Only the words that actually appear as a faller or riser are lemmatised,
+    not every rated candidate: that is ~6,400 (prompt, word) pairs instead of
+    ~115,000, and the rest are never drawn. Stash-backed, so reruns are free.
+    """
+    from malignment.pos import get_lemma
+    byp = collections.defaultdict(set)
+    for r in rows:
+        byp[r["prompt"]].update([r["faller"], r["riser"]])
+    out = {}
+    for p, ws in byp.items():
+        for w, l in get_lemma(sorted(ws), p).items():
+            out[(p, w)] = l
+    return out
+
+
+def modal_lemma(rows):
+    """-> {surface: lemma}, the most common slot lemma across its own prompts.
+
+    **A SURFACE FORM GETS ONE LEMMA FOR THE WHOLE GRAPH**, because a node is
+    one node. Taking the per-slot lemma edge by edge would let `saw` be `see`
+    on one arrow and `saw` on another, which is correct about the language and
+    incoherent as a drawing. The modal choice is recorded rather than assumed;
+    disagreements are reported by `lemma_report`.
+    """
+    L = slot_lemma(rows)
+    acc = collections.defaultdict(collections.Counter)
+    for (p, w), l in L.items():
+        acc[w][l] += 1
+    return {w: c.most_common(1)[0][0] for w, c in acc.items()}
+
+
+def lemma_report(rows):
+    """Surfaces whose slot lemma is not constant, and the merges performed."""
+    L = slot_lemma(rows)
+    acc = collections.defaultdict(collections.Counter)
+    for (p, w), l in L.items():
+        acc[w][l] += 1
+    split = {w: dict(c) for w, c in acc.items() if len(c) > 1}
+    m = modal_lemma(rows)
+    groups = collections.defaultdict(set)
+    for w, l in m.items():
+        groups[l].add(w)
+    merges = {l: sorted(v) for l, v in groups.items() if len(v) > 1}
+    return split, merges
+
+
 def slot_pos(rows):
     """-> {(prompt, word): POS}, tagged IN THE SLOT, not as a type.
 
@@ -82,17 +131,32 @@ def slot_pos(rows):
     return tag
 
 
-def edges(arm="raw", pos="content"):
-    """-> (Counter[(faller, riser)], how many crossings the POS cut removed)"""
+def edges(arm="raw", pos="content", lemma=False):
+    """-> (Counter[(faller, riser)], how many crossings the POS cut removed)
+
+    With `lemma`, both ends are replaced by their modal slot lemma BEFORE the
+    edge is counted, so `kill`/`killed`, `stab`/`stabbed` and `punch`/`punched`
+    become one node and their edges add rather than sitting in separate
+    components. **A SELF-LOOP IS DROPPED**: `killed -> kill` is an inflection
+    change, not a substitution, and drawing it as an edge would assert a
+    movement the lemma has just declared absent.
+    """
     rows = crossings(arm)
-    if pos == "all":
-        return collections.Counter((r["faller"], r["riser"]) for r in rows), 0
-    tag = slot_pos(rows)
-    keep = [r for r in rows
-            if tag[(r["prompt"], r["faller"])] in CONTENT
-            and tag[(r["prompt"], r["riser"])] in CONTENT]
-    return (collections.Counter((r["faller"], r["riser"]) for r in keep),
-            len(rows) - len(keep))
+    if pos != "all":
+        tag = slot_pos(rows)
+        rows = [r for r in rows
+                if tag[(r["prompt"], r["faller"])] in CONTENT
+                and tag[(r["prompt"], r["riser"])] in CONTENT]
+    cut = len(crossings(arm)) - len(rows)
+    if not lemma:
+        return collections.Counter((r["faller"], r["riser"]) for r in rows), cut
+    m = modal_lemma(crossings(arm))
+    E = collections.Counter()
+    for r in rows:
+        f, t = m.get(r["faller"], r["faller"]), m.get(r["riser"], r["riser"])
+        if f != t:
+            E[(f, t)] += 1
+    return E, cut
 
 
 def induced(w, min_degree=2, min_weight=3):
@@ -208,13 +272,15 @@ def main(argv=None):
     ap.add_argument("--min-weight", type=int, default=3,
                     help="keep an edge this heavy whatever its endpoints' "
                          "degree; 0 for the pure degree filter")
+    ap.add_argument("--lemma", action="store_true",
+                    help="merge surface forms into their slot lemma")
     ap.add_argument("--label-prompts", action="store_true",
                     help="put the prompt that produced each edge on it")
     ap.add_argument("--engine", default="sfdp",
                     choices=("dot", "neato", "sfdp", "fdp"))
     a = ap.parse_args(argv)
 
-    w, cut = edges(a.arm, a.pos)
+    w, cut = edges(a.arm, a.pos, a.lemma)
     E, deg, (de, dn) = induced(w, a.min_degree, a.min_weight)
     nodes = {x for e in E for x in e}
     print("%s arm, pos=%s: %d crossings -> %d distinct pairs%s"
@@ -233,7 +299,8 @@ def main(argv=None):
     #: defect cost a figure in `fig3_osgood` the same afternoon.
     base = os.path.join(HERE, "figures", "substitution_graph_%s%s%s"
                         % (a.arm, "" if a.pos == "content" else "_allpos",
-                           "" if a.min_degree <= 1 else "_deg%d" % a.min_degree))
+                           ("_lemma" if a.lemma else "")
+                           + ("" if a.min_degree <= 1 else "_deg%d" % a.min_degree)))
     os.makedirs(os.path.dirname(base), exist_ok=True)
     open(base + ".dot", "w", encoding="utf-8").write(src + "\n")
     for ext in ("png", "pdf"):

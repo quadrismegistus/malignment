@@ -366,3 +366,32 @@ Labelled drawings need room a bare arrow does not — `kill` alone has fourteen 
     Three men came into the room and started to          take -> argue
 
 Same frame, one word changed, and the aligned models do not land in the same place. Nothing about this is visible in the bare graph, where those are six unlabelled arrows among 391. It is an observation and not a test — six prompts, no null, no per-lineage split — but it names something worth a designed contrast.
+
+## LEMMATISING THE GRAPH (`--lemma`)
+
+`kill` and `killed`, `stab` and `stabbed`, `throw` and `threw` were separate nodes, so the fragmentation above was partly an inflection artefact. `--lemma` merges each surface into its **slot lemma** (`malignment.pos.get_lemma`, last token of `prompt + " " + word`) before edges are counted, and drops the self-loops that creates — `killed → kill` is an inflection change, not a substitution.
+
+    seeds, raw arm        nodes  edges  components   largest holds
+    top 5   surface          38     36       4       2 of 5 seeds
+    top 5   lemma           119    151       3       3 of 5
+    top 10  surface          52     45       9       2 of 10
+    top 10  lemma           122    154       3       8 of 10
+    top 20  surface          65     54      13       7 of 20
+    top 20  lemma           133    163       6      15 of 20
+
+**Top 10 goes from nine components to three, and from two seeds in the largest to eight.** Reach roughly doubles as well: merging gives a charged lemma all of its surfaces' out-edges, so the walk travels instead of stopping. The earlier reading — "charged words do not share a destination" — was substantially about inflection and should be read as the *lemma* row, which is much weaker: they largely do share one.
+
+    top 5 VERB, surface   kill +4.00, stab +3.00, shoot +3.00, raped +3.00, beat +3.00
+    top 5 VERB, lemma     beat +3.00, shoot +3.00, rape +3.00, kill +2.50, hit +2.00
+
+`kill` drops from +4.00 to +2.50 on merging: the lemma's lift is the observation-weighted median over its surfaces, and `killed` sits lower than `kill`.
+
+### The exceptions list is an audit, not a guess
+
+Every (surface, POS) in the corpus was lemmatised twice — spaCy in the slot, and WordNet `morphy` given the slot POS — and the two disagree on exactly **nineteen** forms. Each was adjudicated; **spaCy is wrong on five**, and those are `pos.LEMMA_FIX`:
+
+    raped -> rape     (spaCy: rap)        stared -> stare   (spaCy: star)
+    drank -> drink    (spaCy: drank)      swam   -> swim    (spaCy: swam)
+    clothes -> clothes (spaCy: clothe, a plural-only noun)
+
+The other fourteen keep spaCy, which wins on irregulars morphy has no exception for (`felt`, `found`, `fell`, `saw`) and on plurals it declines to reduce. **Neither tool dominates**, which is why the table exists rather than a switch of lemmatiser. And NLTK's `WordNetLemmatizer` is the wrong comparison: it calls morphy then takes the *shortest* candidate, so it returns `rap` where bare `morphy` returns `rape` — it would have hidden the case that prompted the audit.

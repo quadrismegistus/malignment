@@ -135,6 +135,92 @@ def _stash():
     return _STASH["st"]
 
 
+#: Surface forms where spaCy's lemma is WRONG and is corrected here.
+#:
+#: **THIS LIST WAS NOT EYEBALLED.** Every (surface, POS) in the displacement
+#: corpus was lemmatised twice, by spaCy in the slot and by WordNet's `morphy`
+#: given the slot POS, and the two disagreed on exactly NINETEEN forms. Each
+#: was adjudicated by hand; these are the five where spaCy is the wrong one.
+#: The other fourteen keep spaCy, which wins on irregulars morphy has no
+#: exception for (`felt`/`felt`, `found`/`found`, `fell`/`fell`, `saw`/`saw`)
+#: and on plurals it declines to reduce (`legs`, `days`, `shoes`).
+#:
+#: **NEITHER TOOL DOMINATES, WHICH IS WHY THIS EXISTS.** spaCy strips `-ed`
+#: to a shorter real verb (`raped` -> `rap`, `stared` -> `star`) and gives up
+#: on some strong pasts (`drank`, `swam` returned unchanged); morphy returns
+#: the surface whenever its exception list lacks the form. Note that NLTK's
+#: `WordNetLemmatizer` is NOT the right comparison and would have hidden the
+#: `raped` case: it calls morphy and then takes the SHORTEST candidate, so it
+#: returns `rap` where bare `morphy` returns `rape`.
+#:
+#: Keyed by surface alone, safely, because every entry is a form whose spaCy
+#: lemma is wrong under EVERY reading -- nothing context-dependent is listed.
+#: `saw`, whose right answer really does depend on the slot, is deliberately
+#: absent: spaCy gets it right from context and a table could not.
+LEMMA_FIX = {
+    "raped": "rape",      # spaCy -> rap
+    "stared": "stare",    # spaCy -> star
+    "drank": "drink",     # spaCy -> drank
+    "swam": "swim",       # spaCy -> swam
+    "clothes": "clothes", # spaCy -> clothe; a plural-only noun
+}
+
+
+def get_lemma(words, prompt, nlp=None, stash=None, lang=None):
+    """Contextual LEMMA for each word at the end of `prompt`. -> {word: lemma}
+
+    The same contract as `get_pos` and the same reason: the tag is taken from
+    the LAST token of `prompt + " " + word`, which is the position the model
+    was predicting, and a miss is tagged rather than dropped.
+
+    **WHY NOT `fields.lemma`**, which already lemmatises contextually. It takes
+    a SENTENCE and finds the word by the FIRST surface match, which is right
+    for the running text it was written for and wrong for a slot whenever the
+    frame already contains the candidate -- which this corpus does constantly.
+    Measured, not asserted:
+
+        frame                      candidate   this      fields.lemma
+        "He put the saw down and"  saw         see       saw
+
+    The frame's `saw` is a noun and the completion's is a verb. `fields.lemma`
+    lemmatises the noun and returns it for the verb. Most pairs agree (`kissed`
+    in "He kissed the parchment ... and" gives `kiss` either way) -- the
+    disagreement is exactly the irregulars its own docstring names as the place
+    a wrong answer is returned instead of none.
+
+    Keyed separately from the POS stash (`kind` in the key) so the two cannot
+    answer for each other.
+    """
+    st = stash if stash is not None else _stash()
+    if nlp is None:
+        lang = lang or detect_lang(prompt)
+        nlp = get_nlp(LANG_MODEL.get(lang, SPACY_MODEL))
+    tid = tagger_id(nlp)
+
+    out, misses = {}, []
+    for w in words:
+        hit = st.get({"tagger": tid, "kind": "lemma", "prompt": prompt,
+                      "word": w})
+        if hit is None:
+            misses.append(w)
+        else:
+            #: applied on READ as well as on write: the stash predates the
+            #: table and a cache hit would otherwise serve the old answer
+            #: forever, which is the warm-hit defect this repo has paid for.
+            out[w] = LEMMA_FIX.get(w.lower(), hit)
+    if misses:
+        join = _JOIN.get((getattr(nlp, "meta", {}) or {}).get("lang"), " ")
+        for w in misses:
+            doc = nlp(prompt + join + w)
+            lem = doc[-1].lemma_.lower() if len(doc) > 0 else w.lower()
+            lem = LEMMA_FIX.get(w.lower(), lem)
+            st[{"tagger": tid, "kind": "lemma", "prompt": prompt,
+                "word": w}] = lem
+            out[w] = lem
+    assert len(out) == len(set(words)), "get_lemma returned short"
+    return out
+
+
 def get_pos(words, prompt, nlp=None, stash=None, lang=None):
     """Contextual POS for each word at the end of `prompt`. Returns {word: pos}.
 

@@ -28,7 +28,7 @@ and `punch` as nouns.
 Several of the most charged words never fall -- `rob` rises once and falls
 never -- so they seed nothing. That is a fact about them and it is printed.
 """
-import argparse, collections, csv, os, subprocess, sys
+import argparse, collections, csv, os, statistics as st, subprocess, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(HERE)))
@@ -104,15 +104,34 @@ def main(argv=None):
                     help="a seed must be rated in this many prompts")
     ap.add_argument("--edge-pos", default="content",
                     choices=("content", "all"))
+    ap.add_argument("--lemma", action="store_true",
+                    help="merge surface forms into their slot lemma first")
     ap.add_argument("--draw", action="store_true")
     ap.add_argument("--label-prompts", action="store_true",
                     help="put the prompt that produced each edge on it")
     a = ap.parse_args(argv)
 
     rows = G.crossings(a.arm)
-    E, _ = G.edges(a.arm, a.edge_pos)
+    E, _ = G.edges(a.arm, a.edge_pos, a.lemma)
     mp = modal_pos(rows)
     lf = lifts(a.min_prompts)
+    if a.lemma:
+        #: seeds must live in the same namespace as the nodes, so the lift
+        #: table and the POS map are folded onto lemmas too -- by the
+        #: observation-weighted median, since a lemma's surface forms can sit
+        #: at different lifts (`kill` +4.00 and `killed` +2.00 give +2.50).
+        m = G.modal_lemma(rows)
+        agg, pacc = collections.defaultdict(list), collections.defaultdict(collections.Counter)
+        import csv as _csv, os as _os
+        for r in _csv.DictReader(open(_os.path.join(HERE, "results",
+                                                    "words_by_lift.csv"))):
+            w = r["word"]
+            if w not in m or int(r["n_prompts"]) < a.min_prompts:
+                continue
+            agg[m[w]] += [float(r["lift_med_med"])] * int(r["n_prompts"])
+            pacc[m[w]][mp.get(w, "?")] += int(r["n_prompts"])
+        lf = {k: st.median(v) for k, v in agg.items() if v}
+        mp = {k: c.most_common(1)[0][0] for k, c in pacc.items()}
 
     cand = [(L, w) for w, L in lf.items()
             if w in mp and (a.pos == "ANY" or mp[w] == a.pos)]
@@ -153,7 +172,8 @@ def main(argv=None):
                     else None)
         base = os.path.join(HERE, "figures", "seed_walk_%s_%s_top%d%s"
                             % (a.arm, a.pos.lower(), a.top,
-                               "_prompts" if a.label_prompts else ""))
+                               ("_lemma" if a.lemma else "")
+                               + ("_prompts" if a.label_prompts else "")))
         open(base + ".dot", "w", encoding="utf-8").write(src + "\n")
         for ext in ("png", "pdf"):
             r = subprocess.run(["sfdp", "-T" + ext, "-Gdpi=300",
