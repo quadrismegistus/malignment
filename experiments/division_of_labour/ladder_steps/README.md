@@ -2,7 +2,7 @@
 subject: division_of_labour
 question: Does kill -> scream happen link by link along an alignment ladder, or in one stage?
 kind: question
-status: RUN 2026-09-21, EXPLORATORY and unregistered. Eight ladders, one prompt.
+status: "RUN 2026-09-21, EXPLORATORY and unregistered. Eight ladders; the stage tables in section 2-4 are ONE PROMPT (Figure 2's), the sweep in section 5 is 21 prompts x 8 ladders = 168 cells. Sections 2-4 were written before the sweep and their single-prompt readings are superseded by it wherever the two differ."
 headline: "**WHICH LINK CARRIES THE RISER'S RISE IS SET BY THE RECIPE.** Over 21 prompts where `kill` is the CROSSED biggest faller and all eight ladders (168 cells), the riser's largest step is base->SFT on Tulu and OLMo-2 only 3-4 times in 21 and on the OLMo-3 family 15 times in 21 -- 64 percent within-ladder modal agreement against a pooled 83/65/20 that would read as noise. The lines CROSS AT SFT in 44 of 54 displacing cases, so the two-link chain seen on the Figure 2 prompt (riser peaking at DPO, crossing after SFT) is one ladder on one frame and NOT the pattern; an earlier version of this line made that chain the headline and breadth overturned it. Only 1 of 8 ladders displaces on the median prompt, and 32 of 168 cells are `already` -- the riser was at or above `kill` in the base, so no crossing was available to find. Three ladders fail in three different ways: OLMo-2 1B suppresses `kill` by 74 percent at SFT with `scream` flat, OLMo-3 7B Instruct collapses the whole candidate set below theta while its Think sibling on the same base displaces, and archangel/pythia does nothing because `scream` already outranks `kill` in its base."
 ---
 
@@ -40,7 +40,9 @@ Figure 2's prompt, `p(word)` at each stage, pass 1 only (`topup=0`):
     punch             0.0447    0.0316    0.0387    0.0398
     die               0.0211    0.0140    0.0092    0.0077
 
-**`kill` falls at every link and its largest step is base→SFT** — true on every ladder where it falls at all. **`scream` rises at every link to DPO and its largest step here is SFT→DPO** (+0.0713 against +0.0538), so the two lines **cross between SFT and DPO**. The substitution is a two-link chain on this ladder, not a single event. **RLVR then partly reverses it**: `scream` −0.0325, `kill` +0.0057.
+**`kill` falls at every link and its largest step is base→SFT** — true on every ladder where it falls at all. **`scream` rises at every link to DPO and its largest step here is SFT→DPO** (+0.0713 against +0.0538), so the two lines **cross between SFT and DPO**. **RLVR then partly reverses it**: `scream` −0.0325, `kill` +0.0057.
+
+> **DO NOT READ THIS AS THE PATTERN.** Section 5 sweeps 21 prompts across all eight ladders and finds the lines cross at **SFT** in 44 of 54 displacing cases and the riser's largest step at **base→SFT** in 43 of 54. This prompt on this ladder is the minority case on both counts. What generalises is not the two-link chain but which link the recipe assigns the rise to — see section 5.
 
 ## 3. The exhibit is not universal — three ladders do something else
 
