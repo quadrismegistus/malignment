@@ -1,0 +1,39 @@
+digraph linrank {
+  rankdir=LR; splines=true; overlap=false;
+  size="4.8,12.48";
+  bgcolor="white"; nodesep=0.10; ranksep=1.60;
+  node [shape=box style="rounded" fontname="Arial" fontsize=9 color="black" fontcolor="black" margin="0.06,0.035" penwidth=0.6];
+  edge [fontname="Arial" fontsize=7.2 color="#4d4d4d" penwidth=0.75 arrowsize=0.5];
+  { rank=same;
+  "B_scream" [label="scream\n(16/50)"];
+  "B_kill" [label="kill\n(28/50)"];
+  "B_cry" [style=invis label=""];
+  "B_ZZ_ONES" [label="cry\ntell\nthrow"];
+  }
+  { rank=same;
+  "A_scream" [label="scream\n(29/50)"];
+  "A_kill" [label="kill\n(8/50)"];
+  "A_cry" [label="cry\n(3/50)"];
+  "A_ZZ_ONES" [label="destroy\nfight\nhit\nhurt\npunch\nrip\ntell"];
+  }
+  "B_scream" -> "B_kill" [style=invis];
+  "B_kill" -> "B_cry" [style=invis];
+  "B_cry" -> "B_ZZ_ONES" [style=invis];
+  "A_scream" -> "A_kill" [style=invis];
+  "A_kill" -> "A_cry" [style=invis];
+  "A_cry" -> "A_ZZ_ONES" [style=invis];
+  "B_scream" -> "A_scream" [style=invis weight=100];
+  "B_kill" -> "A_kill" [style=invis weight=100];
+  "B_cry" -> "A_cry" [style=invis weight=100];
+  "B_ZZ_ONES" -> "A_ZZ_ONES" [style=invis weight=100];
+  "B_kill" -> "A_scream" [penwidth=4.10 color="#1a1a1a" label="15"];
+  "B_scream" -> "A_scream" [penwidth=3.59 color="#1a1a1a" arrowhead=none label="13"];
+  "B_kill" -> "A_kill" [penwidth=2.04 color="#1a1a1a" arrowhead=none label="7"];
+  "B_kill" -> "A_ZZ_ONES" [penwidth=1.27 color="#1a1a1a" label="4"];
+  "B_kill" -> "A_cry" [penwidth=0.76 color="#8c8c8c" label="2"];
+  "B_scream" -> "A_ZZ_ONES" [penwidth=0.76 color="#8c8c8c" label="2"];
+  "B_ZZ_ONES" -> "A_kill" [penwidth=0.50 color="#8c8c8c"];
+  "B_scream" -> "A_cry" [penwidth=0.50 color="#8c8c8c"];
+  "B_ZZ_ONES" -> "A_ZZ_ONES" [penwidth=0.50 color="#8c8c8c" arrowhead=none];
+  "B_ZZ_ONES" -> "A_scream" [penwidth=0.50 color="#8c8c8c"];
+}

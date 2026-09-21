@@ -278,11 +278,103 @@ def dot_flow(E, held, bw, aw, n, prompt, n_roster=None,
     return "\n".join(L)
 
 
+def dot_ranked(E, held, bw, aw, n, prompt, n_roster=None):
+    """Both columns share one row order, keyed on a word's OVERALL incidence.
+
+    RH. `scream` is 16 in the base column and 29 in the aligned; `kill` is 28
+    and 8. Ranked by base count alone `kill` heads the left column and
+    `scream` the right, and the eye has to re-find each word in the other
+    column. Here a word gets ONE row in both columns, ordered by base plus
+    aligned, so `scream` is the top row on both sides and `kill` the second.
+
+    **A WORD EARNS A ROW IF IT CLEARS ONE LINEAGE IN EITHER COLUMN.** `cry` is
+    3 in the aligned arm and 1 in the base, so it gets a row; its single base
+    lineage falls into the base collapsed box while its aligned box is drawn.
+    A row where a column has nothing to show carries an invisible placeholder,
+    which holds the slot so the two columns stay level.
+
+    **THE COLLAPSED BOX IS THE LAST ROW IN BOTH COLUMNS, ALWAYS**, whatever it
+    holds -- it is the residue rather than a rank, and the same argument that
+    keeps it off the count ordering keeps it off this one.
+
+    Rows are held level across the columns by a weighted invisible edge per
+    row. `rank=same` fixes which column a box is in and nothing else; without
+    the per-row edges the shared ordering would be true of the dot source and
+    invisible in the drawing.
+    """
+    from malignment import figure as _fig
+    fam, pt = _fig.pub_font(), _fig.PUB_FONT_PT
+    N = n_roster or n
+
+    def show(w):
+        return ("blank (%d _)" % len(w)) if not is_word(w) else w
+
+    words = set(bw) | set(aw)
+    rows = sorted((w for w in words if max(bw[w], aw[w]) > 1),
+                  key=lambda w: (-(bw[w] + aw[w]), w))
+    #: **MEMBERSHIP IS PER COLUMN, NOT PER ROW.** A word can earn a row on the
+    #: strength of one column and still have a single lineage in the other:
+    #: `cry` is 3 aligned and 1 in the base. The first version kept that base
+    #: lineage attached to the row -- which meant its edge left an INVISIBLE
+    #: placeholder box and appeared in the drawing as a line starting in empty
+    #: space. It belongs to that column's collapsed box, as RH specified, and
+    #: both the residue list and the edge endpoint have to agree about that.
+    resid = {"B": sorted(w for w in bw if bw[w] <= 1),
+             "A": sorted(w for w in aw if aw[w] <= 1)}
+    E2 = collections.Counter()
+    for (f, t), v in E.items():
+        E2[(f if bw[f] > 1 else "ZZ_ONES",
+            t if aw[t] > 1 else "ZZ_ONES")] += v
+    E = E2
+    mx = max(E.values())
+
+    L = ['digraph linrank {', '  rankdir=LR; splines=true; overlap=false;',
+         '  size="%g,%g";' % (_fig.PUB_SIZE[0], _fig.PUB_SIZE[0] * 2.6),
+         '  bgcolor="white"; nodesep=0.10; ranksep=1.60;',
+         '  node [shape=box style="rounded" fontname="%s" fontsize=%g '
+         'color="black" fontcolor="black" margin="0.06,0.035" penwidth=0.6];'
+         % (fam, pt),
+         '  edge [fontname="%s" fontsize=%g color="#4d4d4d" penwidth=0.75 '
+         'arrowsize=0.5];' % (fam, pt * 0.8)]
+    for side, counts in (("B", bw), ("A", aw)):
+        L.append("  { rank=same;")
+        for w in rows:
+            k = counts[w]
+            if k > 1:
+                L.append('  "%s_%s" [label="%s\\n(%d/%d)"];'
+                         % (side, w, show(w), k, N))
+            else:
+                #: the slot is kept even when this column has nothing in it,
+                #: or the rows below would ride up and the alignment would be
+                #: a claim the drawing does not keep
+                L.append('  "%s_%s" [style=invis label=""];' % (side, w))
+        L.append('  "%s_ZZ_ONES" [label="%s"];'
+                 % (side, "\\n".join(show(x) for x in resid[side]) or " "))
+        L.append("  }")
+    seq = rows + ["ZZ_ONES"]
+    for side in ("B", "A"):
+        for x, y in zip(seq, seq[1:]):
+            L.append('  "%s_%s" -> "%s_%s" [style=invis];' % (side, x, side, y))
+    for w in seq:
+        L.append('  "B_%s" -> "A_%s" [style=invis weight=100];' % (w, w))
+    for (f, t), k in sorted(E.items(), key=lambda kv: -kv[1]):
+        L.append('  "B_%s" -> "A_%s" [penwidth=%.2f color="%s"%s%s];'
+                 % (f, t, 0.5 + 3.6 * (k - 1) / max(1, mx - 1),
+                    "#1a1a1a" if k >= 3 else "#8c8c8c",
+                    ' arrowhead=none' if f == t else "",
+                    ' label="%d"' % k if k > 1 else ""))
+    L.append("}")
+    return "\n".join(L)
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--prompt", default=FIG2)
     ap.add_argument("--tag", default=None, help="filename tag")
+    ap.add_argument("--ranked", action="store_true",
+                    help="one shared row per word, ordered by base+aligned "
+                         "incidence; implies --collapse-singletons")
     ap.add_argument("--collapse-singletons", action="store_true",
                     help="stack every one-lineage box into one per side, "
                          "listing the words; written under its own name")
@@ -318,10 +410,12 @@ def main(argv=None):
                     .replace("'", "").replace(",", ""))
     base = os.path.join(HERE, "figures", "lineage_graph_%s%s"
                         % (tag, "_free" if a.free else
-                           "_flow" + ("_collapsed" if a.collapse_singletons
+                           "_flow" + ("_ranked" if a.ranked else
+                                      "_collapsed" if a.collapse_singletons
                                       else "")))
     os.makedirs(os.path.dirname(base), exist_ok=True)
     src = (dot(E, held, bw, aw, n) if a.free
+           else dot_ranked(E, held, bw, aw, n, a.prompt, n_roster) if a.ranked
            else dot_flow(E, held, bw, aw, n, a.prompt, n_roster,
                          a.collapse_singletons))
     open(base + ".dot", "w", encoding="utf-8").write(src + "\n")
@@ -364,7 +458,24 @@ def main(argv=None):
         "Pass 1 only (topup=0): the store holds two passes the campaign's "
         "rule forbids merging.",
     ]
-    if a.collapse_singletons:
+    if a.ranked:
+        cap[-1:-1] = [
+            "",
+            "BOTH COLUMNS SHARE ONE ROW ORDER, keyed on a word's total "
+            "incidence across the two arms, so a word sits at the same height "
+            "on both sides and the eye does not have to re-find it. `scream` "
+            "is 16 in the base column and 29 in the aligned, 45 together, so "
+            "it is the top row on both; `kill` is 28 and 8, so it is the "
+            "second on both -- which is why the left column is NOT in its own "
+            "descending order.",
+            "",
+            "A word earns a row if it clears one lineage in EITHER column. "
+            "`cry` is 3 aligned and 1 in the base, so it has a row, its "
+            "aligned box is drawn, and its single base lineage sits in the "
+            "base collapsed box with the others. Where a column has nothing "
+            "to show on a row the slot is held empty rather than closed up.",
+        ]
+    if a.collapse_singletons or a.ranked:
         cap[-1:-1] = [
             "",
             "THE ONE-LINEAGE BOXES ARE STACKED INTO ONE PER SIDE, listing "
@@ -374,7 +485,10 @@ def main(argv=None):
             "cost is WHICH singleton came from WHICH source -- those edges "
             "merge, so an arrow into the stacked box says only that so many "
             "lineages went somewhere in it. The uncollapsed version, drawn "
-            "without the `_collapsed` suffix, keeps that routing.",
+            "without a suffix, keeps that routing. The collapsed box is the "
+            "LAST row in both columns whatever it holds: it is the residue, "
+            "not a rank, and sorting it by its own size would read as "
+            "agreement among lineages that agreed on nothing.",
         ]
     cp = base + ".caption.txt"
     open(cp, "w", encoding="utf-8").write("\n".join(cap) + "\n")
