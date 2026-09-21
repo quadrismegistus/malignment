@@ -36,12 +36,12 @@ digraph linrank {
   "B_throw" -> "A_throw" [style=invis weight=100];
   "B_strangle" -> "A_strangle" [style=invis weight=100];
   "B_ZZ_ONES" -> "A_ZZ_ONES" [style=invis weight=100];
-  "B_kill" -> "A_kill" [penwidth=4.10 color="#1a1a1a" label="20"];
-  "B_kill" -> "A_scream" [penwidth=2.39 color="#1a1a1a" label="11"];
-  "B_scream" -> "A_scream" [penwidth=1.45 color="#1a1a1a" label="6"];
-  "B_kill" -> "A_ZZ_ONES" [penwidth=1.07 color="#1a1a1a" label="4"];
-  "B_kill" -> "A_punch" [penwidth=0.69 color="#8c8c8c" label="2"];
-  "B_kill" -> "A_strangle" [penwidth=0.69 color="#8c8c8c" label="2"];
+  "B_kill" -> "A_kill" [penwidth=4.10 color="#1a1a1a" label="(20/40)"];
+  "B_kill" -> "A_scream" [penwidth=2.39 color="#1a1a1a" label="(11/40)"];
+  "B_scream" -> "A_scream" [penwidth=1.45 color="#1a1a1a" label="(6/8)"];
+  "B_kill" -> "A_ZZ_ONES" [penwidth=1.07 color="#1a1a1a" label="(4/40)"];
+  "B_kill" -> "A_punch" [penwidth=0.69 color="#8c8c8c" label="(2/40)"];
+  "B_kill" -> "A_strangle" [penwidth=0.69 color="#8c8c8c" label="(2/40)"];
   "B_ZZ_ONES" -> "A_ZZ_ONES" [penwidth=0.50 color="#8c8c8c"];
   "B_scream" -> "A_kill" [penwidth=0.50 color="#8c8c8c"];
   "B_kill" -> "A_throw" [penwidth=0.50 color="#8c8c8c"];

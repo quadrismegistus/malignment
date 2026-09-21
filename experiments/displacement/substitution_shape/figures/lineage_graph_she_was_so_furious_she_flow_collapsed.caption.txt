@@ -6,4 +6,6 @@ Each of the 50 endpoint lineages in `roster.endpoints()` contributes exactly one
 
 An edge is labelled with its share of its SOURCE box -- (15/28) is 15 of the 28 lineages whose base arm said that word -- so the two heaviest edges can be compared without looking anything up. Counts of one are not printed: a box reading (1/50) and a labelled hairline spend a number on what the single thin line already says. Every edge is headed, including the 28 that begin and end on the same word: the arrow marks the passage from the base arm to the aligned arm, which happened to all 50 lineages, and not a change of word.
 
+
+THE ONE-LINEAGE BOXES ARE STACKED INTO ONE PER SIDE, listing every word. Nothing is hidden behind a count and no lineage is dropped: the words are all there, one per line, and each is one lineage, so the list is its own tally. What the stacking does cost is WHICH singleton came from WHICH source -- those edges merge, so an arrow into the stacked box says only that so many lineages went somewhere in it. The uncollapsed version, drawn without a suffix, keeps that routing. The collapsed box is the LAST row in both columns whatever it holds: it is the residue, not a rank, and sorting it by its own size would read as agreement among lineages that agreed on nothing.
 Pass 1 only (topup=0): the store holds two passes the campaign's rule forbids merging.

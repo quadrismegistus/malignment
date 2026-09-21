@@ -277,10 +277,16 @@ def dot_flow(E, held, bw, aw, n, prompt, n_roster=None,
         #: also made the two heaviest facts on the plate -- 13 lineages
         #: holding `scream`, 7 holding `kill` -- read as a different KIND of
         #: thing from the 15 that moved, when they are the same measurement.
+        #: **THE EDGE LABEL IS A SHARE OF ITS SOURCE** (RH): `(15/28)` reads
+        #: "15 of the 28 lineages whose base arm said `kill`". A bare 15 has
+        #: to be divided by a box the reader has to look up, and the two
+        #: heaviest edges on this plate leave sources of very different size
+        #: -- 15 of 28 from `kill` against 13 of 16 from `scream`, which is
+        #: the smaller count and the larger share.
         L.append('  "B_%s" -> "A_%s" [penwidth=%.2f color="%s"%s];'
                  % (f, t, 0.5 + 3.6 * (k - 1) / max(1, mx - 1),
                     "#1a1a1a" if k >= 3 else "#8c8c8c",
-                    ' label="%d"' % k if k > 1 else ""))
+                    ' label="(%d/%d)"' % (k, bw[f]) if k > 1 else ""))
     L.append("}")
     return "\n".join(L)
 
@@ -388,10 +394,16 @@ def dot_ranked(E, held, bw, aw, n, prompt, n_roster=None):
         #: also made the two heaviest facts on the plate -- 13 lineages
         #: holding `scream`, 7 holding `kill` -- read as a different KIND of
         #: thing from the 15 that moved, when they are the same measurement.
+        #: **THE EDGE LABEL IS A SHARE OF ITS SOURCE** (RH): `(15/28)` reads
+        #: "15 of the 28 lineages whose base arm said `kill`". A bare 15 has
+        #: to be divided by a box the reader has to look up, and the two
+        #: heaviest edges on this plate leave sources of very different size
+        #: -- 15 of 28 from `kill` against 13 of 16 from `scream`, which is
+        #: the smaller count and the larger share.
         L.append('  "B_%s" -> "A_%s" [penwidth=%.2f color="%s"%s];'
                  % (f, t, 0.5 + 3.6 * (k - 1) / max(1, mx - 1),
                     "#1a1a1a" if k >= 3 else "#8c8c8c",
-                    ' label="%d"' % k if k > 1 else ""))
+                    ' label="(%d/%d)"' % (k, bw[f]) if k > 1 else ""))
     L.append("}")
     return "\n".join(L)
 
@@ -478,8 +490,11 @@ def main(argv=None):
         "the difference is exactly these %d."
         % (n, n_roster, nonword, n, n_roster, n, n_roster, nonword),
         "",
-        "Counts of one are not printed: a box reading (1/%d) and an edge "
-        "reading 1 spend a number on what the single thin line already "
+        "An edge is labelled with its share of its SOURCE box -- (15/28) is "
+        "15 of the 28 lineages whose base arm said that word -- so the two "
+        "heaviest edges can be compared without looking anything up. Counts "
+        "of one are not printed: a box reading (1/%d) and a labelled hairline "
+        "spend a number on what the single thin line already "
         "says. Every edge is headed, including the %d that begin and end on "
         "the same word: the arrow marks the passage from the base arm to the "
         "aligned arm, which happened to all %d lineages, and not a change of "
