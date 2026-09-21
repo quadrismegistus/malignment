@@ -419,15 +419,27 @@ Dropping costs a third of the reach on the lemmatised graph and splits one extra
     python -u seed_walk.py --seed kill --edge-pos verb --lemma --draw
     python -u seed_walk.py --seed kill --edge-pos verb --lemma --depth 1 --draw
 
-![kill ego](figures/seed_walk_raw_kill_top1_lemma.png)
+*Depth 2 — `kill`'s own sixteen, then the ring off `tell`, `leave`, `die`, `take`:*
+
+![kill ego d2](figures/seed_walk_raw_kill_top1_lemma_d2.png)
+
+*Depth 3:*
+
+![kill ego d3](figures/seed_walk_raw_kill_top1_lemma_d3.png)
+
+*Full outward closure (`--depth 0`):*
+
+![kill ego full](figures/seed_walk_raw_kill_top1_lemma_dfull.png)
 
 Verbs only at both ends, lemmas merged, stopwords gone, outward edges only, from `kill`. **57 nodes, 67 edges, one component.**
 
-    radius   nodes  edges
-      1         17     16      kill's own substitutes
-      2         43     47
-      3         51     61
-      full      57     67
+    radius   nodes  edges   file suffix
+      1         17     16     _d1        kill's own substitutes
+      2         43     47     _d2        the most legible of the four
+      3         51     61     _d3
+      full      57     67     _dfull
+
+**The radius is in the filename.** It changes what is drawn — 17 nodes against 57 — and without it two different pictures share a file. Third instance this session, after the `_z` plate and the four graph filter combinations; the rule is that any flag which changes the picture changes the name.
 
 `kill`'s sixteen destinations, by prompts: **scream (7)**, leave (2), then one apiece — wash, understand, tell, take, miss, make, look, lash, hurt, help, die, defend, continue, bring. One heavy edge and fifteen singletons, which is the fan of the whole corpus reproduced inside one word.
 

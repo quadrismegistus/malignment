@@ -206,6 +206,13 @@ def main(argv=None):
                                else a.pos.lower(), a.top,
                                ("_stop" if a.keep_stop else "")
                                + ("_lemma" if a.lemma else "")
+                               #: **DEPTH IS PART OF THE NAME.** It changes
+                               #: what is drawn -- 17 nodes at radius 1
+                               #: against 57 at full closure -- so leaving it
+                               #: out lets two different pictures share a
+                               #: file. Third instance this session, after
+                               #: `_z` and the four graph filter combinations.
+                               + ("_d%d" % a.depth if a.depth else "_dfull")
                                + ("_prompts" if a.label_prompts else "")))
         open(base + ".dot", "w", encoding="utf-8").write(src + "\n")
         for ext in ("png", "pdf"):
