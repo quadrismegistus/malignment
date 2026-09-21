@@ -474,3 +474,42 @@ Five of the six argmax destinations are in the crossing set, so at radius 1 the 
 So **"the neighbourhood of `kill` becomes a graph of saying things" is a claim about the crossing basis**, not about displacement in general. On what the model would actually say, it becomes a graph of handling things instead. Both are drawn, both are named in the filename, and neither should be quoted without its basis.
 
 **AND AN ARGMAX EDGE IS NOT A SUBSTITUTION CLAIM.** Of its 570 raw prompts only 62 are `MOVED_SUBSTITUTION`; 313 are `MOVED_PROMOTION`, where the new top word was already present and merely rose past the old one. An edge here means the top word changed from x to y, which is weaker than y replacing x.
+
+## HOW WOULD WE GET A *TRUE* SUBSTITUTION GRAPH? (`substitution_replicated.py`)
+
+Two routes were tried. **Neither delivers one, and the second says why.**
+
+### Route 1: stack every within-prompt condition (`--basis strict`)
+
+    CROSSED (the lines swap)                                 589 prompts
+      + the faller IS the base argmax                        194
+      + the riser IS the aligned argmax                      164
+      + the top riser absorbs >= half the mass lost           89   (3.7%)
+      + label MOVED_SUBSTITUTION                              29   (1.2%)
+
+Over verbs, lemmatised, stopwords dropped, the 89-prompt version draws **50 edges over 72 nodes**, headed by `kill → scream` (4), `kiss → whisper` (3), `say → whisper` (2), `marry → spend` (2).
+
+**It still does not establish substitution.** A distribution sums to one, so when one word falls another must rise: conservation is true by definition. `absorb_1` is a ratio of aggregates, not a traced flow, and there is no counterfactual anywhere in this corpus. What `strict` buys is that every rival reading available *inside* a prompt is excluded. What it cannot buy is a direction for the causal claim.
+
+### Route 2: ask whether the lineages agree on the pairing
+
+If fifty models trained by different labs independently take mass off `kill` and put it on `scream` at the same slot, that is evidence about the operation rather than about one averaged distribution. Per lineage, per prompt: the word that lost most and the word that gained most, ties dropped. 80,105 triples over 2,400 English prompts.
+
+    lineages choosing the SAME pair at the same prompt
+      1 lineage    62,098 triples     77.5%
+      2             9,960             12.4%
+      3-4           5,268              6.6%
+      5-9           2,309              2.9%
+      10+             470              0.6%
+
+**REPLICATION ALONE IS NOT EVIDENCE OF PAIRING**, and the raw table shows why: it is topped by `that → of` (34 lineages), `hands → hand` (29), `be → focus` (28). If everyone loses `that` and everyone gains `of`, the pair gets thirty-four votes without any lineage having *paired* them. So the null is marginal-preserving — at each prompt, `Binomial(n, (a_f/n)(b_r/n))` in the upper tail, the same null `kind_flow` uses — and Benjamini-Hochberg over the family actually tested.
+
+**NOTHING SURVIVES.**
+
+    family                                    tests   pass BH at 5%
+    every (prompt, pair) with k >= 2         18,007        0
+    only pairs a graph could draw             6,976        0
+
+The strongest are `left → right` (10 of 50, expected 3.1, p=0.00083), `hand → frail` (7, exp 1.6), `legs → thighs` (11, exp 3.8, p=0.0012) — real-looking and dead under correction. The test is not degenerate: only 18 of 18,007 pairs dominate both marginals.
+
+**SO THE LINEAGES AGREE ON WHICH WORD FALLS AND WHICH RISES, AND NOT ON PAIRING THEM.** That is a bound on every graph in this folder: an edge is one averaged prompt's answer, not a behaviour fifty models share. The graphs remain descriptions of the averaged corpus — which is what `kill → scream` always was — and a *true* substitution graph is not obtainable from observational distributions. It would need an intervention: ablate the faller and see whether the riser takes its mass.

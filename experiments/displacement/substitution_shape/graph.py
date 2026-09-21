@@ -87,6 +87,22 @@ def crossings(arm="raw", basis="crossing"):
                    usually neither is. 589 prompts raw.
         argmax     the base arm's top word and the aligned arm's top word, on
                    the prompts where the top word CHANGED. 570 prompts raw.
+        strict     every condition this corpus can impose at once: the lines
+                   swap, the faller IS the base argmax, the riser IS the
+                   aligned argmax, and the single top riser absorbs at least
+                   half the mass the prompt lost. 89 prompts raw, 70 pairs.
+
+    **AND `strict` STILL DOES NOT ESTABLISH SUBSTITUTION.** A distribution sums
+    to one, so when one word falls another must rise; conservation is true by
+    definition and no arithmetic over these two distributions can distinguish
+    "y replaced x" from "x fell and y rose". `absorb_1` is a ratio of
+    aggregates, not a traced flow, and there is no counterfactual anywhere in
+    this corpus. What `strict` buys is that every rival reading available
+    WITHIN a prompt has been excluded; what it cannot buy is the direction of
+    a causal claim. The evidence that would is REPLICATION ACROSS LINEAGES --
+    the same pair chosen independently by many models -- which this file
+    cannot see, because `run.py` averages the fifty lineages before it picks
+    a faller. See `substitution_replicated.py`.
 
     Nearly the same count and NOT the same population: `run.py` records that
     51% of crossings happen with the top word unchanged, so the two overlap
@@ -103,9 +119,22 @@ def crossings(arm="raw", basis="crossing"):
     p = os.path.join(HERE, "results", "by_prompt_%s.csv" % arm)
     with open(p, encoding="utf-8") as fh:
         rows = list(csv.DictReader(fh))
-    if basis == "crossing":
-        return [r for r in rows
-                if r["crossing"] == "CROSSED" and r["faller"] and r["riser"]]
+    if basis in ("crossing", "strict"):
+        out = [r for r in rows
+               if r["crossing"] == "CROSSED" and r["faller"] and r["riser"]]
+        if basis == "strict":
+            def yes(r, k):
+                return str(r.get(k, "")).lower() in ("true", "1")
+            def num(r, k):
+                try:
+                    return float(r[k])
+                except (TypeError, ValueError):
+                    return 0.0
+            out = [r for r in out
+                   if yes(r, "faller_is_base_argmax")
+                   and yes(r, "riser_is_aligned_argmax")
+                   and num(r, "absorb_1") >= 0.5]
+        return out
     out = []
     for r in rows:
         b, a = r["base_top"], r["aligned_top"]
@@ -352,7 +381,7 @@ def main(argv=None):
                     help="keep an edge this heavy whatever its endpoints' "
                          "degree; 0 for the pure degree filter")
     ap.add_argument("--basis", default="crossing",
-                    choices=("crossing", "argmax"),
+                    choices=("crossing", "argmax", "strict"),
                     help="crossing: biggest faller -> biggest riser where the "
                          "lines swap. argmax: base top word -> aligned top "
                          "word where the top word changed.")

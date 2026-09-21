@@ -124,7 +124,7 @@ def main(argv=None):
     ap.add_argument("--depth", type=int, default=0,
                     help="ego radius; 0 walks the full outward closure")
     ap.add_argument("--basis", default="crossing",
-                    choices=("crossing", "argmax"),
+                    choices=("crossing", "argmax", "strict"),
                     help="see graph.crossings: what an edge MEANS")
     ap.add_argument("--keep-stop", action="store_true",
                     help="do NOT drop NLTK stopwords from the graph")
