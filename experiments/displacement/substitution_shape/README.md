@@ -322,3 +322,28 @@ This is the crossing graph's fan restated for the charged end specifically: with
 Twenty noun seeds reach thirty-one words over **thirteen edges** and fall into **eighteen components**, no component holding more than one seed. Every charged noun is a ONE-STEP substitution that then stops: `shaft → jaw`, `breasts → chest, waist`, `fuck → heck, massage`, `shit → dear, happy`, `suicide → quantum`, `wounds → injuries`, `mouth → bag`, `woman → stranded`. Half the seeds have no outward edge at all.
 
 The verb graph chains — `kill → die → stay → walk`, `kill → do → start` — because a substituted verb is itself a verb that can be substituted elsewhere. A substituted noun is a euphemism and the euphemism is where it stops: `chest` and `injuries` and `heck` are never themselves the biggest faller anywhere in the corpus. **Displacement recurses on the predicate and terminates on the object.**
+
+## DOES THE LIFT TABLE SURVIVE AT THE ROSTER'S UNIT? (`lift_within_lineage.py`)
+
+    python -u lift_within_lineage.py
+    python -u lift_within_lineage.py --hold-out kill,beat --lang zh
+
+The table above is pooled over lineages and counts roles. This asks the same question at the campaign's own unit, and three things had to change to ask it honestly. **There is no per-lineage faller** — `run.py` averages the fifty lineages before it picks one — so the test is over every rated word instead: did THIS word lose mass in THIS lineage. **Lift is taken per lineage too**, from that lineage's own frame rating. **And both denominators are reported**, per observation and per word, because `kill` and `beat` carry 115 of the pooled top band's 190 falls.
+
+    ENGLISH, high lift = word lift >= 2.0 in its cell
+                            lineages       p        fall rate hi / lo
+      per observation        41 of 50   5.6e-06      0.533 / 0.453
+      per word               44 of 50   3.2e-08      0.474 / 0.382
+      per observation, no kill/beat
+                             40 of 50   2.4e-05      0.522 / 0.453
+      per word, no kill/beat 44 of 50   3.2e-08      0.474 / 0.382
+
+    CHINESE
+      per observation        28 of 46   0.184        0.448 / 0.405
+      per word               33 of 46   0.0045       0.420 / 0.370
+
+**It survives, and holding out `kill` and `beat` changes nothing** — the per-word figures are identical to three digits. The effect was never carried by those two words; they carried the pooled COUNT, which is why the per-word column is the one to quote.
+
+**Chinese is weaker and splits on the denominator**: null per observation (p=0.18), significant per word (p=0.0045). Do not quote a pooled bilingual version of this test.
+
+**HOW IT RELATES TO `existence` PART 1, which a reader will ask.** Part 1 regresses each cell's delta on the word's SCENE rating and asks the sign of the slope; this dichotomises LIFT and direction on the same cells with the same ratings. So the per-observation version is largely **one finding measured twice** — English 40/50 there against 41/50 here is not independent corroboration. **The per-word version is the one that adds something**: it changes the unit from observations to types, which is what removes the `kill`/`beat` objection, and it is not recoverable from a slope over observations.

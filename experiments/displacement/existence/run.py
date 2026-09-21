@@ -68,7 +68,8 @@ def slope(xs, ys):
     return sum((x - mx) * (y - my) for x, y in zip(xs, ys)) / sxx
 
 
-def measure(save=None, frame="raw", match_framed=False, arm="delta"):
+def measure(save=None, frame="raw", match_framed=False, arm="delta",
+            lang=None):
     """arm='delta' is the campaign's question: what does ALIGNMENT do.
 
     arm='base' and arm='aligned' ask the LEVEL question instead -- does this
@@ -210,7 +211,17 @@ def measure(save=None, frame="raw", match_framed=False, arm="delta"):
     n_cells_rated = 0
     n_words_rated = 0
 
+    #: **THIS FILE NEVER FILTERED LANGUAGE AND THE HEADLINE POOLED BOTH.**
+    #: `charge` rates English and Chinese on one instrument deliberately, so
+    #: both languages' cells arrive here and 43/50 is a pooled figure. The
+    #: split is now EMITTED by the producer rather than computed beside it --
+    #: the same rule this README applies to the 287/3,768 channel counts,
+    #: which were cited for a fortnight and printed by nothing.
+    n_skipped_lang = 0
     for (lin, prompt), word_deltas in by_cell.items():
+        if lang and charge.language(prompt) != lang:
+            n_skipped_lang += 1
+            continue
         sc = get_scene(prompt)
         if not sc:
             continue
@@ -235,6 +246,8 @@ def measure(save=None, frame="raw", match_framed=False, arm="delta"):
             n_cells_rated += 1
             n_words_rated += len(xs)
 
+    if lang:
+        print("  LANGUAGE FILTER %s: %d cells skipped" % (lang, n_skipped_lang))
     print("  %d cells with >= 3 rated words, %d total word-level observations"
           % (n_cells_rated, n_words_rated))
     print()
@@ -348,7 +361,17 @@ def measure(save=None, frame="raw", match_framed=False, arm="delta"):
     # --- effect size: per-word correlation ---
     print()
     all_sc, all_delta = [], []
+    #: **THIS FILE NEVER FILTERED LANGUAGE AND THE HEADLINE POOLED BOTH.**
+    #: `charge` rates English and Chinese on one instrument deliberately, so
+    #: both languages' cells arrive here and 43/50 is a pooled figure. The
+    #: split is now EMITTED by the producer rather than computed beside it --
+    #: the same rule this README applies to the 287/3,768 channel counts,
+    #: which were cited for a fortnight and printed by nothing.
+    n_skipped_lang = 0
     for (lin, prompt), word_deltas in by_cell.items():
+        if lang and charge.language(prompt) != lang:
+            n_skipped_lang += 1
+            continue
         sc = get_scene(prompt)
         if not sc:
             continue
@@ -514,9 +537,13 @@ def main(argv=None):
                          "a delta being dominated by post-training. Levels "
                          "regress the within-cell SHARE and are NOT on the "
                          "delta's scale.")
+    ap.add_argument("--lang", default=None, choices=("en", "zh"),
+                    help="restrict cells to prompts in this language; the "
+                         "default pools both, which is what the 43/50 "
+                         "headline does")
     a = ap.parse_args(argv)
     return measure(save=a.save, frame=a.frame, match_framed=a.match_framed,
-                   arm=a.arm)
+                   arm=a.arm, lang=a.lang)
 
 
 if __name__ == "__main__":
