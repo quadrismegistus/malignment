@@ -169,10 +169,17 @@ def edges(arm="raw", pos="content", lemma=False, stop=True):
     """
     rows = crossings(arm)
     if pos != "all":
+        #: "verb" is narrower than "content" and is its own choice rather than
+        #: a filter applied afterwards: a crossing survives only if BOTH ends
+        #: are verbs IN THEIR SLOTS. Dropping non-verb NODES after the fact
+        #: would leave the edges that passed through them, which asserts a
+        #: substitution between two verbs that never substituted for one
+        #: another.
+        keep = {"verb": {"VERB"}}.get(pos, CONTENT)
         tag = slot_pos(rows)
         rows = [r for r in rows
-                if tag[(r["prompt"], r["faller"])] in CONTENT
-                and tag[(r["prompt"], r["riser"])] in CONTENT]
+                if tag[(r["prompt"], r["faller"])] in keep
+                and tag[(r["prompt"], r["riser"])] in keep]
     if stop:
         #: **CHECKED ON THE SURFACE AND ON THE LEMMA.** `had` and `having` are
         #: in the list and `have` is their lemma, but the reverse also happens
@@ -304,7 +311,8 @@ def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--arm", default="raw", choices=("raw", "framed"))
-    ap.add_argument("--pos", default="content", choices=("content", "all"),
+    ap.add_argument("--pos", default="content",
+                    choices=("content", "verb", "all"),
                     help="content: keep a crossing only when BOTH words are "
                          "VERB/NOUN/ADJ/PROPN in the slot")
     ap.add_argument("--min-degree", type=int, default=1)

@@ -413,3 +413,26 @@ NLTK's English stoplist is applied inside `edges()`, the one place edges are bui
 Dropping costs a third of the reach on the lemmatised graph and splits one extra component: `have` and `do` were acting as connectors. **`kill → scream` becomes the heaviest edge in the raw arm** once they go.
 
 **NLTK's LIST HAS A TRAP AND IT IS SPRUNG BY THIS CORPUS.** Twenty-two entries are `n't` remnants — `couldn`, `didn`, `hasn` — and two of them are real words: `won` is in the list because "won't" splits that way, and `won`, the past of `win`, is a node in this graph with its own edges. `don` likewise. All twenty-two are removed from the stoplist (`_FRAGMENTS`); the ones that are not words carry one edge between them, so nothing is lost and a verb is not deleted for a spelling coincidence.
+
+## THE EGO GRAPH OF `kill`
+
+    python -u seed_walk.py --seed kill --edge-pos verb --lemma --draw
+    python -u seed_walk.py --seed kill --edge-pos verb --lemma --depth 1 --draw
+
+![kill ego](figures/seed_walk_raw_kill_top1_lemma.png)
+
+Verbs only at both ends, lemmas merged, stopwords gone, outward edges only, from `kill`. **57 nodes, 67 edges, one component.**
+
+    radius   nodes  edges
+      1         17     16      kill's own substitutes
+      2         43     47
+      3         51     61
+      full      57     67
+
+`kill`'s sixteen destinations, by prompts: **scream (7)**, leave (2), then one apiece — wash, understand, tell, take, miss, make, look, lash, hurt, help, die, defend, continue, bring. One heavy edge and fifteen singletons, which is the fan of the whole corpus reproduced inside one word.
+
+**The basin has a second hub and it is `tell`.** `kill → tell` is a single prompt, but `tell` then fans to *whisper, speak, shout, argue, demand, scold, confirm, assure, apologize, threaten, exchange, call, sit, start, plan* — fifteen destinations, all of them speech acts or their management. The other branches are shorter: `die → stay → walk → {grab, defecate}`, `fire → {investigate, forget, proceed, give}`, `leave → {storm, release, hurry}`.
+
+So the graph reached from `kill` by following only what replaces what is, past its first step, **largely a graph of saying things**. That is the `kill → scream` result restated as a neighbourhood rather than a pair, and it is the same convergence the vocalisation and euphemism results point at from other directions.
+
+`--edge-pos verb` requires **both ends** to be verbs in their slots, rather than dropping non-verb nodes afterwards: filtering nodes after the fact would keep edges that passed *through* a dropped noun and assert a substitution between two verbs that never substituted for one another. `--depth` keeps only the edges the walk actually traversed, for the same reason.

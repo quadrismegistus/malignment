@@ -59,20 +59,34 @@ def lifts(min_prompts):
     return out
 
 
-def reach(E, seeds):
-    """-> (reached nodes, edges among them) following out-edges only."""
+def reach(E, seeds, depth=0):
+    """-> (reached nodes, edges among them) following out-edges only.
+
+    `depth` is the ego radius in hops; 0 walks the full outward closure. **A
+    BOUNDED WALK KEEPS ONLY THE EDGES IT ACTUALLY TRAVERSED**, not every edge
+    among the nodes it reached: an edge from a depth-2 node back to a depth-1
+    node was never walked and drawing it would put a step in the picture that
+    the radius excluded.
+    """
     adj = collections.defaultdict(list)
     for (f, t) in E:
         adj[f].append(t)
-    seen, stack = set(), list(seeds)
-    while stack:
-        x = stack.pop()
-        if x in seen:
-            continue
-        seen.add(x)
-        stack.extend(adj.get(x, ()))
-    return seen, {(f, t): n for (f, t), n in E.items()
-                  if f in seen and t in seen}
+    seen = set(seeds)
+    frontier = list(seeds)
+    walked, hop = set(), 0
+    while frontier and (depth == 0 or hop < depth):
+        nxt = []
+        for x in frontier:
+            for y in adj.get(x, ()):
+                walked.add((x, y))
+                if y not in seen:
+                    seen.add(y)
+                    nxt.append(y)
+        frontier, hop = nxt, hop + 1
+    if depth == 0:
+        return seen, {(f, t): n for (f, t), n in E.items()
+                      if f in seen and t in seen}
+    return seen, {e: E[e] for e in walked}
 
 
 def components(nodes, E):
@@ -103,7 +117,12 @@ def main(argv=None):
     ap.add_argument("--min-prompts", type=int, default=3,
                     help="a seed must be rated in this many prompts")
     ap.add_argument("--edge-pos", default="content",
-                    choices=("content", "all"))
+                    choices=("content", "verb", "all"))
+    ap.add_argument("--seed", default="",
+                    help="explicit seed words, comma separated; overrides "
+                         "--pos/--top ranking by lift")
+    ap.add_argument("--depth", type=int, default=0,
+                    help="ego radius; 0 walks the full outward closure")
     ap.add_argument("--keep-stop", action="store_true",
                     help="do NOT drop NLTK stopwords from the graph")
     ap.add_argument("--lemma", action="store_true",
@@ -136,10 +155,17 @@ def main(argv=None):
         mp = {k: c.most_common(1)[0][0] for k, c in pacc.items()}
 
     SW = set() if a.keep_stop else G.stopwords_en()
-    cand = [(L, w) for w, L in lf.items()
+    if a.seed:
+        want = [w.strip() for w in a.seed.split(",") if w.strip()]
+        cand = [(lf.get(w, float("nan")), w) for w in want]
+        a.top = len(cand)
+    else:
+        cand = None
+    cand = cand if cand is not None else [(L, w) for w, L in lf.items()
             if w in mp and (a.pos == "ANY" or mp[w] == a.pos)
             and w not in SW]
-    cand.sort(reverse=True)
+    if not a.seed:
+        cand.sort(reverse=True)
     seeds = [w for _, w in cand[:a.top]]
     out_deg = collections.Counter(f for (f, _) in E)
 
@@ -153,7 +179,7 @@ def main(argv=None):
     live = [w for w in seeds if out_deg[w]]
     print("   %d of %d seeds have an outward edge" % (len(live), len(seeds)))
 
-    nodes, sub = reach(E, seeds)
+    nodes, sub = reach(E, seeds, a.depth)
     comps = components(nodes, sub)
     print("\nREACHED: %d nodes, %d edges, %d weakly connected component(s)"
           % (len(nodes), len(sub), len(comps)))
@@ -175,7 +201,9 @@ def main(argv=None):
                     G.prompt_labels(a.arm, sub) if a.label_prompts
                     else None)
         base = os.path.join(HERE, "figures", "seed_walk_%s_%s_top%d%s"
-                            % (a.arm, a.pos.lower(), a.top,
+                            % (a.arm,
+                               a.seed.replace(",", "_") if a.seed
+                               else a.pos.lower(), a.top,
                                ("_stop" if a.keep_stop else "")
                                + ("_lemma" if a.lemma else "")
                                + ("_prompts" if a.label_prompts else "")))
