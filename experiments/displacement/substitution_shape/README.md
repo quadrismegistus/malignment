@@ -513,3 +513,26 @@ If fifty models trained by different labs independently take mass off `kill` and
 The strongest are `left → right` (10 of 50, expected 3.1, p=0.00083), `hand → frail` (7, exp 1.6), `legs → thighs` (11, exp 3.8, p=0.0012) — real-looking and dead under correction. The test is not degenerate: only 18 of 18,007 pairs dominate both marginals.
 
 **SO THE LINEAGES AGREE ON WHICH WORD FALLS AND WHICH RISES, AND NOT ON PAIRING THEM.** That is a bound on every graph in this folder: an edge is one averaged prompt's answer, not a behaviour fifty models share. The graphs remain descriptions of the averaged corpus — which is what `kill → scream` always was — and a *true* substitution graph is not obtainable from observational distributions. It would need an intervention: ablate the faller and see whether the riser takes its mass.
+
+## THE LINEAGE IS THE UNIT (`lineage_graph.py`)
+
+    python -u lineage_graph.py          # "She was so angry she wanted to"
+
+![lineage graph](figures/lineage_graph_she_was_so_angry_she.png)
+
+**This is the answer to "it is just a corpus average".** Every other graph in this folder has the PROMPT as its unit — `run.py` averages the fifty lineages and *then* picks a faller, so an edge is a property of an averaged distribution, and `substitution_replicated.py` shows the lineages do not agree on those pairings at all.
+
+Here one prompt is fixed and **each of the 50 endpoint lineages contributes exactly one edge**, from its own base argmax to its own aligned argmax. Nothing is averaged before the edge is drawn.
+
+    50 lineages, both arms measured, 0 missing
+    top word UNCHANGED in 21, CHANGED in 29, over 14 distinct edges
+
+    base argmax      kill 29   scream 16   hit 1   blank 1   throw 1   tell 1   cry 1
+    aligned argmax   scream 29   kill 8   cry 3   blank 2   destroy 1   do 1
+                     hit 1   punch 1   fight 1   rip 1   tell 1   hurt 1
+
+**`kill → scream` is 15 of the 29 changes — fifteen separately trained models, each making that move on this prompt.** That is not an artefact of averaging and it is not one model's behaviour generalised; it is the single fact in this folder that survives the unit objection.
+
+The rest of the picture is the fan again, now at lineage grain: `kill` also goes to `cry` (2), `destroy`, `fight`, `hurt`, `punch` and a blank template, one lineage each. Of the 16 lineages whose base already said `scream`, 13 hold it and 3 move away (`hit`, `cry`, `rip`). Seven lineages hold `kill`.
+
+So at the level of the roster the marginal is stark — `kill` 29 → 8 as the top word, `scream` 16 → 29 — while the *routing* stays one-to-many. **Held counts sit in the node label rather than as self-loops**, so a lineage that did not move is visible without being drawn among the arrows as a substitution to itself. Node size is lineage incidence at either arm, not degree: a word fifteen models chose once should not look smaller than one three models chose once each.
