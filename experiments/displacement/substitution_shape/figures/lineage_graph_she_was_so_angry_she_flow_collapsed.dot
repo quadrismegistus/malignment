@@ -12,14 +12,14 @@ digraph linflow {
   { rank=same;
   "A_scream" [label="scream\n(29/50)"];
   "A_kill" [label="kill\n(8/50)"];
-  "A_ZZ_ONES" [label="destroy\nfight\nhit\nhurt\npunch\nrip\ntell"];
   "A_cry" [label="cry\n(3/50)"];
+  "A_ZZ_ONES" [label="destroy\nfight\nhit\nhurt\npunch\nrip\ntell"];
   }
   "B_kill" -> "B_scream" [style=invis];
   "B_scream" -> "B_ZZ_ONES" [style=invis];
   "A_scream" -> "A_kill" [style=invis];
-  "A_kill" -> "A_ZZ_ONES" [style=invis];
-  "A_ZZ_ONES" -> "A_cry" [style=invis];
+  "A_kill" -> "A_cry" [style=invis];
+  "A_cry" -> "A_ZZ_ONES" [style=invis];
   "B_kill" -> "A_scream" [style=invis weight=100];
   "B_kill" -> "A_scream" [penwidth=4.10 color="#1a1a1a" label="15"];
   "B_scream" -> "A_scream" [penwidth=3.59 color="#1a1a1a" arrowhead=none label="13"];

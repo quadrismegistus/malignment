@@ -230,7 +230,13 @@ def dot_flow(E, held, bw, aw, n, prompt, n_roster=None,
          'arrowsize=0.5];' % (fam, pt * 0.8)]
     order = {}
     for side, counts in (("B", bw), ("A", aw)):
-        ws = sorted(counts, key=lambda x: (-counts[x], x))
+        #: **THE STACKED BOX SORTS LAST, NOT BY ITS COUNT** (RH). Its count is
+        #: however many singletons happened to exist -- seven here -- so
+        #: ranking it with the rest put it third, above `cry (3/50)`, as
+        #: though seven lineages had agreed on something. They agreed on
+        #: nothing; the box is the residue and belongs at the foot of the
+        #: column whatever its size.
+        ws = sorted(counts, key=lambda x: (x == "ZZ_ONES", -counts[x], x))
         stack = singles.get(side)
         order[side] = ws
         L.append("  { rank=same;")
