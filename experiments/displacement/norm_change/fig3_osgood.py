@@ -14,6 +14,38 @@ axis figure orients every row by its high-lift destination, which makes the
 side of a marker a definition; here the side of every marker is a RESULT and
 the caption needs no ordering sentence.
 
+**`--orient` PUTS THE ALIGNED POLE ON THE RIGHT OF EVERY ROW AND IS NOT THE
+DEFAULT.** RH asked for it, looked at it, and reverted it himself: oriented,
+`k_bodily_harm` draws as "Bodily harm -> No harm", which reads backwards,
+because the scale's own high end IS harm and flipping the row flips the pole
+NAMES with it. A row whose left label is the high end of its own scale costs
+more than the tidy all-positive axis buys. The flag stays so the comparison is
+reachable; the default is the native direction.
+
+## --dose: THE SAME FOURTEEN ROWS IN THE SCATTER'S METRIC
+
+`--dose` draws one marker per row at the scatter's x -- `med_slope / sd(slopes)`
+over the 50 lineages -- because THIS PLATE CANNOT SHOW `v6:vocalisation` AND
+THAT IS A PROPERTY OF THE ESTIMATOR, not of the norm. Vocalisation carries the
+roster's most consistent dose response (45 of 50 lineages, p=4.2e-09) and lands
+on this plate as a grey triangle at -0.27 against a square on zero, because a
+median of per-lineage medians is clipped by ties: 21 of 50 lineages sit at
+exactly 0.000 marginally and 27 of 50 do in the top band.
+
+**THE TWO PLATES DO NOT AGREE IN RAW UNITS AND SHOULD NOT BE SAID TO.** The
+observed low-to-high band-median difference is 0.0054 norm-points; the fitted
+slope over the actual band separation (band mean lifts -0.203 and +0.952) says
+0.052. The bands recover a TENTH of what the fit implies -- the median clipped
+by ties at one end, OLS pulled by lift's long right tail at the other. The gap
+is the finding about the instrument, and an earlier version of this file said
+the two agreed.
+
+**ONE RULER PER PLATE, AND IT IS NAMED ON THE PLATE.** `--dose` does not also
+draw the marginal: that is the scatter's y, a different denominator, and this
+whole line of work started from two plates whose denominators differed
+silently. The marginal is named in words in the caption for the rows where it
+is zero.
+
 ## ONE SD PER SCALE, FOR ALL THREE MARKERS
 
 The between-lineage POPULATION stdev of the per-lineage medians -- sample stdev
@@ -85,7 +117,99 @@ def check_picks():
     return len(allw)
 
 
-def rows(orient=True):
+def slopes():
+    """{scale: (med_slope, sd_slopes, ratio)} -- THE SCATTER'S OWN NUMBERS.
+
+    Read from `plot_fields.load`, which is what draws the scatter, so the
+    ratio here is its x coordinate by construction rather than by agreement.
+    """
+    import plot_fields as P
+    out = {}
+    for t in ("levels", "contextual"):
+        d, _, _ = P.load(table=t, top=999, pmax=1.01, min_lin=0,
+                         panel="v6", gated=True)
+        for r in d:
+            out[r["field"].split("  (")[0]] = (r["med"], r["sd"],
+                                               r["med"] / r["sd"], r["p"])
+    return out
+
+
+def fitted_vs_observed():
+    """The diagnostic table. -> [(scale, ties, sq, obs, fit, ratio, signflip)]
+
+    **WHY THIS EXISTS AND WHY `--fitted` IS NOT THE DEFAULT.** theorymachines
+    asked for the triangles to be drawn from the fit rather than from band
+    medians -- square plus med_slope times (band mean lift minus all-prompt
+    mean lift), in the scale's SD units -- so that the row plots the scatter's
+    own two numbers. It is the right instinct and it does not survive contact
+    with the denominator:
+
+        k_vulgarity   42 of 50 lineages tied, sd of the per-lineage marginal
+                      medians 0.0004, fitted triangles at +17.5 and -23.1 SD
+        k_bodily_harm  3 ties, so tie clipping explains nothing, and the fit
+                      puts the LOW triangle at +2.36 against an observed band
+                      median of -0.75 -- OPPOSITE SIGN
+
+    Five of the fourteen rows have a fitted low triangle whose sign disagrees
+    with the observed one. On a plate whose whole virtue is that the side of
+    every marker is a result, that is fatal: the fitted marker would put a
+    result on the wrong side of zero.
+
+    **THE STRUCTURAL REASON, WHICH IS THE ANSWER TO "WHY WAS IT A SCATTER".**
+    The square is in SDs of the per-lineage MARGINAL MEDIANS. Any dose quantity
+    is in slope units, whose between-lineage SD is a different number with no
+    fixed relation to the first -- across these fourteen rows the ratio of the
+    two spans a factor of about fifty. Dividing a lift-scaled slope by the
+    marginal SD is therefore not a conversion, it is a collision. The scatter
+    used two axes because two axes are what the quantities support, and any
+    single-axis remake either keeps one statistic on all three markers (the
+    default here, at the cost of tie clipping) or smuggles in a second ruler.
+
+    The ratio column separates the two causes cleanly, which is the use this
+    table has: rows with many ties (vocalisation 21, directedness 19,
+    vulgarity 42) disagree because the MEDIAN is clipped, and the fit is the
+    better estimate. Rows with almost none (bodily harm 3, transgressiveness 2,
+    fit 2) disagree because the FIT overshoots, OLS being pulled by lift's long
+    right tail and then evaluated at a band mean that sits outside where most
+    of the band's rows are.
+    """
+    meta = json.load(open(os.path.join(HERE, "results",
+                                       "norms_by_lift_en.json")))
+    byl = {s["scale"]: s for s in meta["scales"]}
+    ref = _ref()
+    sl = slopes()
+    LM, LB = meta["lift_mean"], meta["lift_band_mean"]
+    out = []
+    for sc in POLES:
+        g, s, sd = ref[sc], byl[sc], _sd(ref[sc])
+        b = {x["band"]: x for x in s["bands"]}
+        sq = g["median"] / sd
+        olo, ohi = b["low"]["median"] / sd, b["high"]["median"] / sd
+        B = sl[sc][0]
+        flo = sq + B * (LB[0] - LM) / sd
+        fhi = sq + B * (LB[2] - LM) / sd
+        obs = abs(b["high"]["median"] - b["low"]["median"])
+        fit = abs(B * (LB[2] - LB[0]))
+        out.append((sc, s["ties"], sq, (olo, ohi), (flo, fhi),
+                    (fit / obs if obs > 1e-12 else float("inf")),
+                    (olo < 0) != (flo < 0)))
+    return out
+
+
+def _ref():
+    r = {}
+    for t in ("levels", "contextual"):
+        for s in json.load(open(os.path.join(
+                HERE, "results", "%s_gated_en.json" % t)))["scales"]:
+            r[s["scale"]] = s
+    return r
+
+
+def _sd(g):
+    return st.pstdev(list(g["per_lineage"].values()))
+
+
+def rows(orient=False, mode="bands"):
     """-> [(scale, square, low, high, sd, flipped)] in SD units.
 
     **`orient=True` PUTS THE ALIGNED SIDE ON THE RIGHT OF EVERY ROW** (RH), by
@@ -104,29 +228,42 @@ def rows(orient=True):
     `orient=False` restores paper-claude's specification, under which every
     marker's side is a result and no row is flipped.
     """
-    byl = {s["scale"]: s for s in json.load(
-        open(os.path.join(HERE, "results", "norms_by_lift_en.json")))["scales"]}
-    ref = {}
-    for t in ("levels", "contextual"):
-        for s in json.load(open(os.path.join(
-                HERE, "results", "%s_gated_en.json" % t)))["scales"]:
-            ref[s["scale"]] = s
+    meta = json.load(open(os.path.join(HERE, "results",
+                                       "norms_by_lift_en.json")))
+    byl = {s["scale"]: s for s in meta["scales"]}
+    ref = _ref()
+    sl = slopes() if mode == "fitted" else None
+    LM, LB = meta["lift_mean"], meta["lift_band_mean"]
     out = []
     for sc in POLES:
         s, g = byl[sc], ref[sc]
-        sd = st.pstdev(list(g["per_lineage"].values()))
+        sd = _sd(g)
         b = {x["band"]: x for x in s["bands"]}
-        sq, lo, hi = (g["median"] / sd, b["low"]["median"] / sd,
-                      b["high"]["median"] / sd)
+        sq = g["median"] / sd
+        if mode == "fitted":
+            B = sl[sc][0]
+            lo = sq + B * (LB[0] - LM) / sd
+            hi = sq + B * (LB[2] - LM) / sd
+        else:
+            lo, hi = b["low"]["median"] / sd, b["high"]["median"] / sd
         f = orient and sq < 0
         if f:
             sq, lo, hi = -sq, -lo, -hi
         out.append((sc, sq, lo, hi, sd, f))
-    #: **ASCENDING, BECAUSE MATPLOTLIB'S y GROWS UPWARD.** Row 0 is drawn
-    #: lowest, so the row that should sit at the top must come last. Oriented,
-    #: every square is positive and the ordering is by how far alignment moves
-    #: the scale, largest at the top.
-    out.sort(key=lambda r: r[1])
+    #: **MATPLOTLIB'S y GROWS UPWARD, SO ROW 0 IS DRAWN LOWEST** and whatever
+    #: should sit at the top must come LAST. The two modes want opposite ends
+    #: at the top, so the direction is not a constant:
+    #:
+    #:     native    most negative at top -- what alignment REMOVES read down
+    #:               to what it adds, which is the ordering the spec asked for
+    #:     oriented  every square is positive, so the ordering is by how far
+    #:               alignment moves the scale, largest at top
+    #:
+    #: **THIS WAS ASCENDING IN BOTH MODES**, which put native's most negative
+    #: row at the BOTTOM while the caption said top. It went unseen because
+    #: every plate shipped in the interim was oriented, where ascending is
+    #: right -- a defect parked in the branch nobody was rendering.
+    out.sort(key=lambda r: r[1], reverse=not orient)
     return out
 
 
@@ -141,7 +278,177 @@ def v6_frames():
     return fr
 
 
+def draw_dose():
+    """The companion plate, ONE RULER, named on the plate. -> figures/fig3_dose_osgood_en.*
+
+    RH asked for a version of the row plate in the scatter's metric, because
+    `v6:vocalisation` carries the roster's most consistent dose response and
+    the band-median plate cannot render it (21 of 50 lineages tied at exactly
+    zero; see `fitted_vs_observed`).
+
+    **ONE MARKER PER ROW AND NO SECOND QUANTITY.** The marginal is the
+    scatter's VERTICAL ruler and is not drawn here at any size, because this
+    entire line of work began with two plates whose denominators differed
+    without saying so. It is named in words in the caption for the rows where
+    it is zero, which is the only place a reader needs it.
+
+    **AND THE RULER IS ON THE PLATE, NOT IN THE CAPTION** (theorymachines).
+    The x label says what the quantity is divided by. A reader who never opens
+    the caption cannot mistake this axis for scale points.
+    """
+    import matplotlib
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+    import numpy as np
+    from matplotlib.font_manager import FontProperties
+    import plot_fields as P
+    from malignment.figure import (PUB_SIZE, PUB_FONT_PT, PUB_INK, PUB_GRAY,
+                                   PUB_FAINT, PUB_RULE_PT, pub_font, save)
+    matplotlib.rcParams["font.family"] = pub_font()
+    matplotlib.rcParams["font.sans-serif"] = [pub_font(), "DejaVu Sans"]
+    matplotlib.rcParams["axes.unicode_minus"] = False
+
+    n_words = check_picks()
+    #: the published scatter's own selection: BH at 5% over the gated family,
+    #: `either` axis. Intersected with POLES so the row set is Figure 3's.
+    xy = {r["scale"]: r for r in P.load_xy(panel="v6", gated=True,
+                                           sig="either", alpha=0.05,
+                                           correct="bh")}
+    ref = _ref()
+    miss = [k for k in POLES if k not in xy]
+    if miss:
+        raise SystemExit("not on the scatter: %s" % ", ".join(miss))
+    #: descending, so matplotlib's upward y puts the most negative at the TOP
+    #: -- the same reading order as the band plate: what alignment pushes away
+    #: from at high lift, read down to what it pushes toward.
+    rs = sorted(POLES, key=lambda k: xy[k]["x"], reverse=True)
+    n = len(rs)
+    fr = v6_frames()
+
+    def lab(sc, side):
+        ws = PICKS[sc][side]
+        if sc.startswith("v6:"):
+            ws = ["%s (%d)" % (w, fr.get(w, 0)) for w in ws]
+        return "%s\n(%s)" % (POLES[sc][side], ", ".join(ws))
+
+    fig, ax = plt.subplots(figsize=(PUB_SIZE[0], 0.30 * n + 1.05),
+                           layout="constrained")
+    y = np.arange(n)
+    x = np.array([xy[k]["x"] for k in rs])
+    pad = 0.08 * (x.max() - x.min())
+    for i in range(n):
+        ax.plot([x.min() - pad, x.max() + pad], [i, i], color=PUB_FAINT,
+                linewidth=PUB_RULE_PT * 0.7, zorder=1, solid_capstyle="butt")
+        ax.plot([0, x[i]], [i, i], color=PUB_GRAY,
+                linewidth=PUB_RULE_PT * 1.6, zorder=2, solid_capstyle="butt")
+    ax.scatter(x, y, marker="o", s=16, facecolor=PUB_INK, edgecolor="none",
+               zorder=4)
+    ax.axvline(0, color=PUB_INK, linewidth=PUB_RULE_PT, zorder=6)
+    ax.set_yticks(y)
+    ax.set_yticklabels([lab(k, 0) for k in rs],
+                       fontsize=PUB_FONT_PT - 2.5, fontfamily=pub_font())
+    r2 = ax.secondary_yaxis("right")
+    r2.set_yticks(y)
+    r2.set_yticklabels([lab(k, 1) for k in rs],
+                       fontsize=PUB_FONT_PT - 2.5, fontfamily=pub_font())
+    r2.tick_params(length=0)
+    r2.spines["right"].set_visible(False)
+    ax.set_ylim(-0.75, n - 0.25)
+    ax.tick_params(axis="y", length=0)
+    ax.tick_params(axis="x", length=2, labelsize=PUB_FONT_PT - 2)
+    for t in ax.get_xticklabels():
+        t.set_fontfamily(pub_font())
+    for sp in ("top", "right", "left"):
+        ax.spines[sp].set_visible(False)
+    ax.spines["bottom"].set_linewidth(PUB_RULE_PT)
+    ax.grid(axis="x", color=PUB_GRAY, linewidth=PUB_RULE_PT * 0.6, zorder=0)
+    ax.set_axisbelow(True)
+    ax.set_xlabel("Median lineage slope of the norm on charge lift, divided "
+                  "by its own\nbetween-lineage SD -- the scatter\'s horizontal "
+                  "ruler, and the only\nquantity on this plate\n"
+                  "At high lift alignment pushes toward the left pole  <<  0 "
+                  " >>  toward the right pole",
+                  fontsize=PUB_FONT_PT - 2, fontfamily=pub_font())
+
+    import collections as _c
+    seen = _c.Counter()
+    for t in fig.findobj(matplotlib.text.Text):
+        if t.get_text().strip():
+            seen[(t.get_fontname(), round(t.get_fontsize(), 1))] += 1
+    print("  FONT AUDIT")
+    for (fam, pt), k in sorted(seen.items()):
+        print("    %-14s %4.1f pt x%-3d%s" % (fam, pt, k,
+                                              "  <-- BELOW 6" if pt < 6 else ""))
+    out = os.path.join(HERE, "figures", "fig3_dose_osgood_en.png")
+    os.makedirs(os.path.dirname(out), exist_ok=True)
+    print("  wrote %s" % save(fig, out))
+
+    zero = [POLES[k][1] for k in rs if abs(ref[k]["median"]) < 1e-12]
+    cap = [
+        "Figure 3b. How strongly each norm answers to charge, on the "
+        "fourteen scales of Figure 3.",
+        "",
+        "One marker per scale. Position is the median per-lineage slope of the "
+        "base-to-aligned change on charge lift over 50 endpoint lineages, "
+        "divided by the between-lineage standard deviation of those slopes. "
+        "It is the horizontal coordinate of the dose scatter, unchanged, and "
+        "it is the ONLY quantity drawn here.",
+        "",
+        "IT IS NOT A SIZE. A scale whose fifty lineages agree scores high "
+        "whether or not its slope is large: register level and bodily harm sit "
+        "at 0.66 and -0.70 on raw median slopes of +0.0082 and -0.0387, a "
+        "factor of 4.7 apart. Read the axis as how reliably a norm answers to "
+        "charge, and the caption below for how far it moves.",
+        "",
+        "The marginal change -- whether the norm moves at all on the typical "
+        "prompt -- is the scatter's VERTICAL ruler, a different denominator, "
+        "and is deliberately not drawn on this plate. "
+        + ("Its MEDIAN is exactly zero for %s -- which is not the same as "
+           "no marginal movement, and should not be written as though it "
+           "were: on vocalisation the sign test over the untied lineages is "
+           "p=0.008. A median of zero on a tie-dominated scale is a "
+           "quantized estimator landing on the tie pile."
+           % ", ".join(zero) if zero else ""),
+        "",
+        "Vocalisation is the case this plate exists for. Its marginal median "
+        "is zero and 21 of 50 lineages are tied there, so Figure 3 can only "
+        "draw it at -0.27 SD and flat; the slope is +0.0448 scale points per "
+        "unit of lift with 45 of 50 lineages positive, p=4.2e-09. The sign "
+        "test on the marginal is not null either, 22 down against 7 up of 29 "
+        "untied, p=0.008: alignment makes the typical completion less vocal, "
+        "and spends that as charge rises.",
+        "",
+        "Selection, population and gate as in Figure 3 and the scatter: 50 "
+        "lineages, English, coverage at 0.20 on the minimum of the two arms, "
+        "Benjamini-Hochberg at 5 percent on either quantity over the "
+        "eighteen-scale family, four dispersion scales omitted.",
+        "",
+        "Lineages with a positive slope, of 50: "
+        + ", ".join("%s %d" % (POLES[k][1], _up(k)) for k in rs) + ".",
+        "",
+        "%d pole words, none repeated and no inflectional pairs." % n_words,
+    ]
+    cp = out.replace(".png", ".caption.txt")
+    open(cp, "w", encoding="utf-8").write("\n".join(cap) + "\n")
+    print("  wrote %s" % cp)
+    return 0
+
+
+def _up(k):
+    """Lineages with a positive slope, from the dose table."""
+    import plot_fields as P
+    for t in ("levels", "contextual"):
+        d, _, _ = P.load(table=t, top=999, pmax=1.01, min_lin=0,
+                         panel="v6", gated=True)
+        for r in d:
+            if r["field"].split("  (")[0] == k:
+                return r.get("up", 0)
+    return 0
+
+
 def main():
+    if "--dose" in sys.argv:
+        return draw_dose()
     import matplotlib
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
@@ -155,7 +462,8 @@ def main():
     matplotlib.rcParams["axes.unicode_minus"] = False
 
     n_words = check_picks()
-    rs = rows(orient=not ("--native" in sys.argv))
+    mode = "fitted" if "--fitted" in sys.argv else "bands"
+    rs = rows(orient="--orient" in sys.argv, mode=mode)
     n = len(rs)
     fr = v6_frames()
 
@@ -209,7 +517,7 @@ def main():
     ax.spines["bottom"].set_linewidth(PUB_RULE_PT)
     ax.grid(axis="x", color=PUB_GRAY, linewidth=PUB_RULE_PT * 0.6, zorder=0)
     ax.set_axisbelow(True)
-    native = "--native" in sys.argv
+    native = "--orient" not in sys.argv
     ax.set_xlabel(("Median change from base to aligned, in SDs of the scale\n"
                    "Toward the left pole  <<  0  >>  Toward the right pole")
                   if native else
@@ -230,8 +538,9 @@ def main():
         print("    %-14s %4.1f pt x%-3d%s" % (fam, pt, k,
                                               "  <-- BELOW 6" if pt < 6 else ""))
 
-    out = os.path.join(HERE, "figures", "fig3_norms_osgood_en%s.png"
-                       % ("_native" if native else ""))
+    out = os.path.join(HERE, "figures", "fig3_norms_osgood_en%s%s.png"
+                       % ("" if native else "_oriented",
+                          "_fitted" if mode == "fitted" else ""))
     os.makedirs(os.path.dirname(out), exist_ok=True)
     print("  wrote %s" % save(fig, out))
 
@@ -253,7 +562,8 @@ def main():
         "",
         ("Scales keep their native direction, low pole left and high pole "
          "right, so the side of every marker is a result. Rows are ordered by "
-         "the square, most negative at the top."
+         "the square, most negative at the top, so the eye reads what "
+         "alignment removes down to what it adds."
          if native else
          "Every scale is oriented so the pole alignment moves TOWARD is on "
          "the right; seven of the fourteen are therefore drawn with their "
@@ -280,6 +590,28 @@ def main():
         "not fit'.",
         "",
         "%d pole words, none repeated and no inflectional pairs." % n_words,
+        "",
+        "TIES PER ROW, and they are why the markers are not comparable across "
+        "rows in the way the eye assumes. The marker is a median of "
+        "per-lineage medians, so a lineage whose median change is exactly zero "
+        "contributes a tie, and a row with many ties is drawn nearer zero than "
+        "it moved. Of 50 lineages, tied: "
+        + ", ".join("%s %d" % (POLES[sc][1], t)
+                    for sc, t, *_ in sorted(fitted_vs_observed(),
+                                            key=lambda r: -r[1]) if t)
+        + ".",
+        "",
+        "The clearest case is vocalisation, 21 tied: its band medians differ "
+        "by 0.0054 scale points across the lift range while an OLS fit on the "
+        "same rows gives 0.038 over the same separation (band median lifts "
+        "%+.3f to %+.3f), so the median recovers about a seventh of the "
+        "movement the fit finds. Drawing the triangles from the fit instead "
+        "was tried and rejected: it is reported in the file\'s docstring and "
+        "reachable with --fitted, and it puts five of the fourteen low "
+        "triangles on the opposite side of zero from the data, because the "
+        "square\'s denominator and a slope\'s denominator are different "
+        "numbers with no fixed ratio between them."
+        % (meta["lift_band_median"][0], meta["lift_band_median"][2]),
     ]
     cp = out.replace(".png", ".caption.txt")
     open(cp, "w", encoding="utf-8").write("\n".join(cap) + "\n")

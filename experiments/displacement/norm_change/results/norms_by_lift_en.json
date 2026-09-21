@@ -7,6 +7,18 @@
   0.0,
   0.35999999999999943
  ],
+ "lift_mean": 0.29457382135378496,
+ "lift_band_mean": [
+  -0.20294909765691196,
+  0.13450640110264775,
+  0.9521641606159065
+ ],
+ "lift_median": 0.11846782685164148,
+ "lift_band_median": [
+  -0.06000000000000005,
+  0.11846782685164148,
+  0.7942927176084913
+ ],
  "rows_gated": 5854906,
  "rows_no_lift": 493256,
  "excluded_by_name": [
@@ -14,7 +26,7 @@
   "brooke_formality_absz",
   "brooke_formality_z"
  ],
- "built": "2026-09-21 13:21",
+ "built": "2026-09-21 15:25",
  "scales": [
   {
    "scale": "brysbaert_concreteness",

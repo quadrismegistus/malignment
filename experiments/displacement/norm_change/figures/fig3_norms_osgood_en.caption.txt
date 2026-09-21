@@ -2,7 +2,7 @@ Figure 3. What alignment does to fourteen norm scales, and how it changes with c
 
 Each row is one scale, its two ends labelled on their own sides. Position is the median within-lineage change from base to aligned over 50 endpoint lineages, in standard deviations of that scale's between-lineage distribution. The square is all prompts and reproduces the vertical coordinate of the scatter it replaces; the triangles are the same median computed on the lowest and highest third of charge lift (T_base minus the frame's own rating), cut at +0.000 and +0.360 over 5,854,906 gated prompt-lineage rows.
 
-Every scale is oriented so the pole alignment moves TOWARD is on the right; seven of the fourteen are therefore drawn with their high end on the left. The square is positive by construction and only its length is a result. A TRIANGLE LEFT OF ZERO is the one thing on the plate whose side still carries information: that lift band moved the scale the opposite way from the corpus as a whole. Rows are ordered by the square, largest movement at the top.
+Scales keep their native direction, low pole left and high pole right, so the side of every marker is a result. Rows are ordered by the square, most negative at the top, so the eye reads what alignment removes down to what it adds.
 
 Pole words illustrate each end among the words alignment moved: a word appears only if it moved in at least 50 prompt-lineage cells. For the six v6 scales, which rate a word in a particular frame rather than as a type, the number in brackets is how many frames the word was rated in.
 
@@ -11,3 +11,7 @@ Coverage gate and population as in the scatter: minimum of the two arms' coverag
 v6:fit runs 3.73 to 7.00 among moved words, so it has no true low end; its left pole is labelled 'fits less well' rather than 'does not fit'.
 
 56 pole words, none repeated and no inflectional pairs.
+
+TIES PER ROW, and they are why the markers are not comparable across rows in the way the eye assumes. The marker is a median of per-lineage medians, so a lineage whose median change is exactly zero contributes a tie, and a row with many ties is drawn nearer zero than it moved. Of 50 lineages, tied: Vulgar 42, Makes worse 22, Vocalized 21, Directed 19, Makes better 14, Bodily harm 3, Mundane 3, Transgressive 2, Fits the frame 2, Dominant 1.
+
+The clearest case is vocalisation, 21 tied: its band medians differ by 0.0054 scale points across the lift range while an OLS fit on the same rows gives 0.038 over the same separation (band median lifts -0.060 to +0.794), so the median recovers about a seventh of the movement the fit finds. Drawing the triangles from the fit instead was tried and rejected: it is reported in the file's docstring and reachable with --fitted, and it puts five of the fourteen low triangles on the opposite side of zero from the data, because the square's denominator and a slope's denominator are different numbers with no fixed ratio between them.

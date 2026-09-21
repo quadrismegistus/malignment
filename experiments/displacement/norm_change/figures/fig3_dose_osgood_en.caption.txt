@@ -1,0 +1,15 @@
+Figure 3b. How strongly each norm answers to charge, on the fourteen scales of Figure 3.
+
+One marker per scale. Position is the median per-lineage slope of the base-to-aligned change on charge lift over 50 endpoint lineages, divided by the between-lineage standard deviation of those slopes. It is the horizontal coordinate of the dose scatter, unchanged, and it is the ONLY quantity drawn here.
+
+IT IS NOT A SIZE. A scale whose fifty lineages agree scores high whether or not its slope is large: register level and bodily harm sit at 0.66 and -0.70 on raw median slopes of +0.0082 and -0.0387, a factor of 4.7 apart. Read the axis as how reliably a norm answers to charge, and the caption below for how far it moves.
+
+The marginal change -- whether the norm moves at all on the typical prompt -- is the scatter's VERTICAL ruler, a different denominator, and is deliberately not drawn on this plate. Its MEDIAN is exactly zero for Vocalized, Vulgar -- which is not the same as no marginal movement, and should not be written as though it were: on vocalisation the sign test over the untied lineages is p=0.008. A median of zero on a tie-dominated scale is a quantized estimator landing on the tie pile.
+
+Vocalisation is the case this plate exists for. Its marginal median is zero and 21 of 50 lineages are tied there, so Figure 3 can only draw it at -0.27 SD and flat; the slope is +0.0448 scale points per unit of lift with 45 of 50 lineages positive, p=4.2e-09. The sign test on the marginal is not null either, 22 down against 7 up of 29 untied, p=0.008: alignment makes the typical completion less vocal, and spends that as charge rises.
+
+Selection, population and gate as in Figure 3 and the scatter: 50 lineages, English, coverage at 0.20 on the minimum of the two arms, Benjamini-Hochberg at 5 percent on either quantity over the eighteen-scale family, four dispersion scales omitted.
+
+Lineages with a positive slope, of 50: Vocalized 45, High register 38, Dominant 34, Pleasant 35, Mundane 37, Makes worse 14, Makes better 15, Directed 10, Fits the frame 11, Vulgar 6, Aroused 14, Concrete 11, Transgressive 9, Bodily harm 8.
+
+56 pole words, none repeated and no inflectional pairs.

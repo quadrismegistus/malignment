@@ -80,12 +80,37 @@ def build(table, lpl, keep):
     #: **THE CUTS COME FROM `levels` AND ARE REUSED FOR `contextual`.** Two
     #: tables cut on their own quantiles would put the same prompt in
     #: different bands, and the figure draws rows from both on one axis.
-    global CUTS
+    global CUTS, LIFT_MEAN, LIFT_BAND_MEAN, LIFT_MEDIAN, LIFT_BAND_MEDIAN
     if CUTS is None:
         vals = sorted(r[3] for r in rows if r[3] is not None)
-        CUTS = (vals[len(vals) // 3], vals[2 * len(vals) // 3])
+        k = len(vals) // 3
+        CUTS = (vals[k], vals[2 * k])
+        #: **WHERE EACH BAND SITS ON THE LIFT AXIS, not just where it is cut.**
+        #: A tertile cut says which rows are in a band; it does not say how far
+        #: apart the bands are, and a fitted slope cannot be turned into a
+        #: position without that distance. Computed from the SAME `vals` that
+        #: produced the cuts -- gated rows, `levels`, row-weighted -- so the
+        #: three means and the three bands are the same partition of the same
+        #: population, not two descriptions that happen to share a name.
+        parts = (vals[:k], vals[k:2 * k], vals[2 * k:])
+        LIFT_MEAN = sum(vals) / len(vals)
+        LIFT_BAND_MEAN = [sum(v) / len(v) for v in parts]
+        #: **AND THE MEDIANS, BECAUSE THE OUTCOME IS A MEDIAN.** Comparing a
+        #: band MEAN lift against a band MEDIAN outcome mixes two estimators
+        #: on opposite sides of one ratio, and lift is right-skewed enough for
+        #: that to matter: the top band is cut at +0.360 and has a mean of
+        #: +0.952, which only happens with a long tail. The fitted triangles
+        #: use the MEAN (an OLS slope is a mean-based fit, so the mean lift is
+        #: where it is evaluated); the under-reporting diagnostic uses the
+        #: MEDIAN against the median outcome.
+        LIFT_MEDIAN = st.median(vals)
+        LIFT_BAND_MEDIAN = [st.median(v) for v in parts]
         print("  lift tertile cuts (from %s, reused): %+.3f and %+.3f"
               % (table, *CUTS))
+        print("  lift band means:   low %+.3f  mid %+.3f  high %+.3f  (all %+.3f)"
+              % (*LIFT_BAND_MEAN, LIFT_MEAN))
+        print("  lift band medians: low %+.3f  mid %+.3f  high %+.3f  (all %+.3f)"
+              % (*LIFT_BAND_MEDIAN, LIFT_MEDIAN))
     lo, hi = CUTS
 
     def band(v):
@@ -148,6 +173,11 @@ def build(table, lpl, keep):
 
 
 CUTS = None
+#: set beside CUTS, from the same vals. See the comment there.
+LIFT_MEAN = None
+LIFT_BAND_MEAN = None
+LIFT_MEDIAN = None
+LIFT_BAND_MEDIAN = None
 
 
 def main():
@@ -166,7 +196,11 @@ def main():
     json.dump({"gate": GATE, "gate_on": "min(base_cov, aligned_cov)",
                "aggregator": "median over prompts, per lineage, per band",
                "lift": "charge.lift_per_lineage (T_base - frame)",
-               "cuts": list(CUTS), "rows_gated": tot, "rows_no_lift": nol,
+               "cuts": list(CUTS), "lift_mean": LIFT_MEAN,
+               "lift_band_mean": LIFT_BAND_MEAN,
+               "lift_median": LIFT_MEDIAN,
+               "lift_band_median": LIFT_BAND_MEDIAN,
+               "rows_gated": tot, "rows_no_lift": nol,
                "excluded_by_name": sorted(SPARSE),
                "built": time.strftime("%Y-%m-%d %H:%M"), "scales": allsc},
               open(p, "w"), indent=1)
