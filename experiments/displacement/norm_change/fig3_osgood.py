@@ -626,7 +626,7 @@ def main():
     from matplotlib.font_manager import FontProperties
     from malignment.figure import (PUB_SIZE, PUB_FONT_PT, PUB_INK, PUB_MID,
                                    PUB_GRAY, PUB_FAINT, PUB_RULE_PT, pub_font,
-                                   save)
+                                   missing_glyphs, save)
     matplotlib.rcParams["font.family"] = pub_font()
     matplotlib.rcParams["font.sans-serif"] = [pub_font(), "DejaVu Sans"]
     matplotlib.rcParams["axes.unicode_minus"] = False
@@ -700,21 +700,12 @@ def main():
     #: to READ it. The poles are already named at both ends of every row and
     #: zero is already drawn, so the axis only has to say what a side means.
     #: The caption states the quantity, the units and the aggregation.
-    #: **ASCII ARROWS, BECAUSE HELVETICA HAS NO ARROW GLYPHS.** Checked
-    #: against the font file itself: `/System/Library/Fonts/Helvetica.ttc`
-    #: carries 2,100 glyphs and neither U+2190 nor U+2192 is among them, so a
-    #: real arrow character would render in DejaVu Sans while the words stayed
-    #: Helvetica -- the same split that `axes.unicode_minus=False` exists on
-    #: this figure to prevent. **AND THE FONT AUDIT CANNOT SEE IT**: a Text
-    #: object reports one font name while rendering fallback glyphs inside
-    #: itself, so this would have shipped looking clean.
-    #:
-    #: Arial DOES have them (2,830 glyphs, both arrows) and is metrically
-    #: compatible with Helvetica, so switching `pub_font()` would buy real
-    #: arrows across every figure in the repo at almost no visual cost. That
-    #: is RH's call, not this file's, because it repaints every published
-    #: plate. Until then, "<-" and "->".
-    ax.set_xlabel("<-  Semantic pole toward which alignment moves  ->",
+    #: **REAL ARROWS, NOW THAT THE HOUSE FONT IS ARIAL** (RH). Helvetica had
+    #: no U+2190/U+2192 and would have rendered them from DejaVu while the
+    #: words stayed Helvetica -- invisible to a per-Text font audit, because
+    #: the fallback happens INSIDE one Text object. `missing_glyphs` below is
+    #: the check that sees it; `figure.pub_font` carries the reasoning.
+    ax.set_xlabel("\u2190  Semantic pole toward which alignment moves  \u2192",
                   fontsize=PUB_FONT_PT - 1, fontfamily=pub_font())
     #: **ORDER IS THE HANDLE LIST, NOT THE DRAW ORDER** (RH): all prompts
     #: first, then the two lift extremes most-charged before least. Drawing
@@ -734,6 +725,18 @@ def main():
     for (fam, pt), k in sorted(seen.items()):
         print("    %-14s %4.1f pt x%-3d%s" % (fam, pt, k,
                                               "  <-- BELOW 6" if pt < 6 else ""))
+    #: **THE FAMILY TALLY ABOVE CANNOT SEE A MISSING GLYPH.** It reports one
+    #: name per Text while matplotlib silently draws an absent character from
+    #: another face inside that same Text. This reads the font's cmap.
+    gone = missing_glyphs("".join(t.get_text()
+                                  for t in fig.findobj(matplotlib.text.Text)))
+    if gone:
+        raise SystemExit("refusing to write: %s cannot draw %s -- it would be "
+                         "rendered from a fallback face and the audit above "
+                         "would still read clean"
+                         % (pub_font(), " ".join("U+%04X %s" % (ord(c), c)
+                                                 for c in gone)))
+    print("    all glyphs present in %s" % pub_font())
 
     out = os.path.join(HERE, "figures", "fig3_norms_osgood_en%s%s.png"
                        % ("" if native else "_oriented",
