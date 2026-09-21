@@ -163,3 +163,39 @@ Pooling therefore confirms the canonical analysis rather than extending it: **on
 | any individual axis's membership | not tested here; ARI 0.311 in `AXIS_RUN.md` says no | no |
 
 So the 38-axis solution is canonical as a **source of named, dosed movements** — `plain naming → euphemism`, `forceful → gentle`, `the deed becomes an utterance` — and is **not** canonical as a factor solution. Exactly one factor is a property of the corpus rather than of a vocabulary.
+
+## G — two checks paper-claude asked for before anything is cited
+
+**THE REVERSAL IS NOT THE INSTITUTIONAL BATTERY.** His hypothesis: low lift *is* the advice battery by construction, and its frames (`say, mention → file, report, sue`) code as speaking → non-verbal for a reason that has nothing to do with the scream.
+
+| `speech_vs_physical_act` | bottom | middle | top |
+|---|---|---|---|
+| all frames | 44/29 p=0.1 | 42/37 p=0.7 | **7/81 p=4e-17** |
+| advice/institutional excluded | 38/28 p=0.3 | 28/35 p=0.4 | **7/79 p=2e-16** |
+| affect-NONE excluded | 6/8 p=0.8 | 3/10 p=0.09 | **2/46 p=8e-12** |
+
+The advice battery is 30 of 290 relations on this axis and sits mostly in the **middle** band (18 of 30), not the bottom (8). The bottom tertile is **90 distinct template families over 90 relations** — every frame unique.
+
+So the bottom lean was never significant and survives neither exclusion; the top survives both. The finding is **the deed becomes an utterance only under high lift**, and the bottom lean is not claimed.
+
+**The denominator moves a lot under the affect gate**: 290 relations become 75, and "7 against 81" becomes "2 against 46". Same finding at two population definitions; only one may be quoted in a given sentence.
+
+**EUPHEMISM RISES WITH LIFT, STEEPLY.** His test: if `plain naming → euphemism` is the largest mean movement but flat on lift, it is the "of course alignment euphemizes" objection made measurable and should not lead.
+
+| movement | slope / unit lift | r | bottom → middle → top | top vs bottom |
+|---|---|---|---|---|
+| plain naming → euphemism | **+0.216** | +0.399 | +0.135 → +0.221 → **+0.448** | t=+16.7, p=9e-58 |
+| forceful → gentle | +0.324 | +0.459 | **+0.004** → +0.153 → **+0.546** | t=+23.8, p=3e-106 |
+| speaking → bodily action | **−0.167** | −0.220 | +0.122 → +0.067 → **−0.167** | t=−10.7, p=9e-26 |
+
+Euphemism is strongly dose-dependent, so it is a response to charge rather than a constant register effect.
+
+**And `forceful → gentle` starts at +0.004** — indistinguishable from zero in the bottom tertile — reaching +0.546 in the top. The softening of force does not exist at low lift at all.
+
+**The third row is the reversal again, measured continuously** on the graded matrix instead of by counting poles: a negative slope that crosses zero between the middle and top tertiles. The assignment run and the survey are independent instruments and both find this axis changing sign with dose.
+
+### Figures: none of A–F is drawn
+
+paper-claude's call, recorded so it is not relitigated. The article is at ~8,350 of 9,500 words with V–VIII undrafted and four figures placed; a figure about method cannot be paid for. `(b)` and `(d)` would read as noise at 4.8 inches, and `(c)` invites the PC1 × PC2 misreading it exists to avoid, since readers assume both biplot axes are real.
+
+**`(a)` is kept for the book's methods chapter** and its spec is recorded here rather than rebuilt: two scatters, each relation's shared-dimension score under the 38-axis vocabulary against the 28-axis one (r=0.80, a diagonal cloud), beside PC2 against PC2 (r≈0.1, a round blob), 2,244 points each. A negative control drawn as a panel.
