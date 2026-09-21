@@ -76,7 +76,17 @@ POLES = {
     "v6:directedness": ("Undirected", "Directed"),
     "v6:makes_better": ("Does not improve", "Makes better"),
     "v6:makes_worse": ("Does not worsen", "Makes worse"),
-    "v6:mundanity": ("Charged", "Mundane"),
+    #: **NOT "Charged"** (RH). The low pole used to read that, which imported a
+    #: construct this study measures SEPARATELY -- `k_charge`, and charge lift
+    #: is the dose variable on this very plate -- so the row looked like a
+    #: second charge axis and invited the reader to confuse an outcome with the
+    #: dose. The instrument never mentions charge. It asks "How ORDINARY and
+    #: unremarkable is what happens, AS IT PLAYS OUT IN THIS SCENE?" with
+    #: 1 = "extraordinary, the kind of event that would be reported or
+    #: remembered" and 7 = "wholly everyday, the sort of thing nobody would
+    #: remark on". An extraordinary event need not be charged and a charged one
+    #: can be mundane in its scene, which is the instrument's own example.
+    "v6:mundanity": ("Extraordinary", "Mundane"),
     "v6:vocalisation": ("Silent", "Vocalized"),
 }
 #: paper-claude's picks, low pole then high
