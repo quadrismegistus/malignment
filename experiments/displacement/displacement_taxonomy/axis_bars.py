@@ -159,6 +159,18 @@ def main(argv=None):
     from malignment.figure import (PUB_SIZE, PUB_FONT_PT, PUB_INK, PUB_MID,
                                    PUB_GRAY, PUB_FAINT, PUB_RULE_PT, pub_font,
                                    save)
+    #: **SET THE FAMILY GLOBALLY, NOT PER ARTIST.** Setting it on each Text
+    #: misses whatever matplotlib builds later: the numeric x ticks came out
+    #: DejaVu Sans even after `set_fontfamily` on `get_xticklabels()`, because
+    #: the formatter regenerates them during layout. rcParams is the only
+    #: place that reaches every default.
+    #:
+    #: **AND `unicode_minus` OFF.** matplotlib writes U+2212 MINUS for negative
+    #: ticks; Helvetica does not carry it, so matplotlib falls back PER GLYPH
+    #: and a tick reading "-0.2" ships in two faces. ASCII hyphen instead.
+    matplotlib.rcParams["font.family"] = pub_font()
+    matplotlib.rcParams["font.sans-serif"] = [pub_font(), "DejaVu Sans"]
+    matplotlib.rcParams["axes.unicode_minus"] = False
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--seed", type=int, default=1)
@@ -409,6 +421,9 @@ def main(argv=None):
         r.spines["right"].set_visible(False)
     (axm or axx).set_ylim(-0.8, n - 0.2)
     axx.tick_params(axis="both", length=2, labelsize=PUB_FONT_PT - 2)
+    #: `tick_params` sets a size and never a family
+    for t in axx.get_xticklabels() + axx.get_yticklabels():
+        t.set_fontfamily(pub_font())
     for s in ("top", "right", "left"):
         axx.spines[s].set_visible(False)
     axx.spines["bottom"].set_linewidth(PUB_RULE_PT)
@@ -439,7 +454,14 @@ def main(argv=None):
         #: panel, horizontal, no frame, no title. Moving it out of the panel
         #: also frees the lower-right corner, where it had been sitting on the
         #: two longest segments in the figure.
-        fig.legend(fontsize=PUB_FONT_PT - 2, frameon=False, handlelength=0.9,
+        #: `prop`, not `fontsize`: a legend built with `fontsize` alone keeps
+        #: matplotlib's default FAMILY, so three labels shipped in DejaVu Sans
+        #: on a plate declared Helvetica. Caught by the audit below, not by
+        #: reading the code -- the code said `pub_font()` four times.
+        from matplotlib.font_manager import FontProperties
+        fig.legend(prop=FontProperties(family=pub_font(),
+                                       size=PUB_FONT_PT - 2),
+                   frameon=False, handlelength=0.9,
                    loc="outside lower center", ncol=3, scatterpoints=1,
                    columnspacing=1.6, handletextpad=0.35)
     elif a.dose:
@@ -463,6 +485,25 @@ def main(argv=None):
     #: it sat on top of the bars it was describing.
     if not (a.facet or a.dots):
         fig.tight_layout(pad=0.4)
+    #: **EVERY TEXT OBJECT AUDITED BEFORE SAVING.** `pub_font()` resolves the
+    #: family but nothing applies it to TICK labels -- `tick_params` takes a
+    #: size and no family -- so the numeric axis can ship in matplotlib's
+    #: default while every declaration in the code reads as true. Same failure
+    #: `pub_font`'s own docstring warns about, one level up: the font is named
+    #: correctly and then not used.
+    import collections as _c
+    seen = _c.Counter()
+    for t in fig.findobj(matplotlib.text.Text):
+        if t.get_text().strip():
+            seen[(t.get_fontname(), round(t.get_fontsize(), 1))] += 1
+    print("  FONT AUDIT")
+    off = [t.get_text() for t in fig.findobj(matplotlib.text.Text)
+           if t.get_text().strip() and t.get_fontname() != pub_font()]
+    if off:
+        print("    NOT %s: %s" % (pub_font(), "; ".join(repr(x)[:24] for x in off)))
+    for (fam, pt), k in sorted(seen.items()):
+        flag = "  <-- BELOW 6 pt" if pt < 6 else ""
+        print("    %-22s %4.1f pt  x%-3d%s" % (fam, pt, k, flag))
     out = a.out or os.path.join(HERE, "figures",
                                 "axis_bars%s%s%s%s%s%s.png"
                                 % ("_dose" if a.dose else "",
