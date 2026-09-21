@@ -398,6 +398,63 @@ def lifts_per_lineage(base=None):
     return out
 
 
+def bases(prompt):
+    """The base arms that annotated this prompt. -> sorted list"""
+    return sorted(index()["offsets"].get(prompt, {}))
+
+
+def word_lift(prompt, base):
+    """{word: scene - frame} for ONE lineage's annotated words. -> dict
+
+    **THE LIFT OF A WORD, not of a prompt.** `lift(prompt)` is the prompt's
+    mean candidate rating over its setup; this is each candidate's own rating
+    over that setup, which is what a question about particular words wants.
+
+    **THE FRAME IS THIS LINEAGE'S OWN**, `cell(prompt, base)["frame"]`, not
+    `frame(prompt)`. The two differ -- on the first cell in the index the
+    lineage rated the frame 1 and the prompt mean is 1.4 -- because `frame()`
+    averages over every lineage that annotated the prompt. A per-lineage
+    quantity built from a prompt-level frame is a hybrid of two populations.
+
+    Added 2026-09-21 (RH) because THREE places had already written it inline,
+    each reading the annotation file directly rather than going through this
+    module: `emergence/tuning_order/explore_q3.py`, `freudian_hypothesis/
+    cathexis.py` and `freudian_hypothesis/lexicon_by_lift.py`. All three agree
+    -- `w["scene"] - fr` with `fr` the record's own frame -- so this is their
+    shared definition given a name, not a fourth one.
+    """
+    c = cell(prompt, base)
+    if not c or c.get("frame") is None:
+        return {}
+    fr = c["frame"]
+    return {w["word"]: w["scene"] - fr for w in c["words"]
+            if w.get("scene") is not None}
+
+
+def word_lifts(prompt, agg="mean"):
+    """{word: lift} for a prompt, aggregated over the lineages that OFFERED it.
+
+    `agg` is "mean", "median", "max", "min" or "n" (how many lineages carried
+    the word). The denominator is the CARRIERS, never the lineage count: which
+    candidates a cell contains is a fact about what that base arm offered, so a
+    word absent from a lineage was not rated low there, it was not rated.
+
+    **NOT `scene(prompt)[w] - frame(prompt)`.** That subtracts a frame averaged
+    over EVERY lineage from a rating averaged over the CARRIERS of one word,
+    which is two populations in one expression. This aggregates the per-lineage
+    lift instead, so every term has one denominator. The two agree only when a
+    word is carried by every lineage.
+    """
+    import statistics as _st
+    acc = collections.defaultdict(list)
+    for b in bases(prompt):
+        for w, L in word_lift(prompt, b).items():
+            acc[w].append(L)
+    f = {"mean": _st.fmean, "median": _st.median, "max": max, "min": min,
+         "n": len}[agg]
+    return {w: f(v) for w, v in acc.items() if v}
+
+
 def frame(prompt):
     """The setup alone on the same 1-7 scale, so `scene - frame` is the increment."""
     d = _p(prompt)
