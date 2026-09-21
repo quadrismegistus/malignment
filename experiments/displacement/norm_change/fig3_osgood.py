@@ -513,8 +513,9 @@ def _z_caption(out, rs, meta, n_words):
         "against the spread of each norm itself.",
         "",
         "Each row is one scale, its two ends labelled on their own sides. "
-        "Position is the median within-lineage move from base to aligned over "
-        "50 endpoint lineages, divided by the standard deviation of that "
+        "Position is the move from base to aligned -- averaged over the "
+        "prompts of a lineage, then the median over the 50 endpoint "
+        "lineages -- divided by the standard deviation of that "
         "norm's own values -- pooled over the base and aligned ratings of "
         "every gated row for the scale, so neither arm is the anchor. The "
         "square is all prompts; the triangles are the same quantity on the "
@@ -664,12 +665,14 @@ def main():
                 linewidth=PUB_RULE_PT * 0.7, zorder=1, solid_capstyle="butt")
         ax.plot([lo[i], hi[i]], [i, i], color=PUB_GRAY,
                 linewidth=PUB_RULE_PT * 1.6, zorder=2, solid_capstyle="butt")
-    ax.scatter(lo, y, marker="v", s=17, facecolor=PUB_GRAY, edgecolor="none",
-               zorder=3, label="lowest third of charge lift")
-    ax.scatter(sq, y, marker="s", s=13, facecolor=PUB_MID, edgecolor="none",
-               zorder=4, label="all prompts")
-    ax.scatter(hi, y, marker="^", s=19, facecolor=PUB_INK, edgecolor="none",
-               zorder=5, label="highest third")
+    h_lo = ax.scatter(lo, y, marker="v", s=17, facecolor=PUB_GRAY,
+                      edgecolor="none", zorder=3,
+                      label="Least charged prompts (lift)")
+    h_sq = ax.scatter(sq, y, marker="s", s=13, facecolor=PUB_MID,
+                      edgecolor="none", zorder=4, label="All prompts")
+    h_hi = ax.scatter(hi, y, marker="^", s=19, facecolor=PUB_INK,
+                      edgecolor="none", zorder=5,
+                      label="Most charged prompts (lift)")
     ax.axvline(0, color=PUB_INK, linewidth=PUB_RULE_PT, zorder=6)
     ax.set_yticks(y)
     ax.set_yticklabels([lab(r[0], 0) for r in rs],
@@ -691,19 +694,20 @@ def main():
     ax.grid(axis="x", color=PUB_GRAY, linewidth=PUB_RULE_PT * 0.6, zorder=0)
     ax.set_axisbelow(True)
     native = "--orient" not in sys.argv
-    ax.set_xlabel((("Median move" if "--z-median" in sys.argv else
-                    "Mean move per lineage, median over lineages")
-                   + ", from base to aligned,\nin SDs of the norm's own "
-                     "spread\n"
-                   "Toward the left pole  <<  0  >>  Toward the right pole")
-                  if mode == "z" and native else
-                  ("Median change from base to aligned, in SDs of the scale\n"
-                   "Toward the left pole  <<  0  >>  Toward the right pole")
-                  if native else
-                  ("How far alignment moves the scale, in SDs\n"
-                   "Base pole at the left, aligned pole at the right"),
+    #: **ONE PLAIN SENTENCE, UNITS TO THE CAPTION** (RH). This label carried
+    #: the estimator, the denominator and a left/right gloss over three lines
+    #: -- everything a reader needs to CHECK the plate and nothing they need
+    #: to READ it. The poles are already named at both ends of every row and
+    #: zero is already drawn, so the axis only has to say what a side means.
+    #: The caption states the quantity, the units and the aggregation.
+    ax.set_xlabel("Semantic pole toward which alignment moves",
                   fontsize=PUB_FONT_PT - 1, fontfamily=pub_font())
-    fig.legend(prop=FontProperties(family=pub_font(), size=PUB_FONT_PT - 2),
+    #: **ORDER IS THE HANDLE LIST, NOT THE DRAW ORDER** (RH): all prompts
+    #: first, then the two lift extremes most-charged before least. Drawing
+    #: order is fixed by z-order (the pale down-triangle has to go down first
+    #: or the black one hides under it), so the two cannot be the same list.
+    fig.legend(handles=[h_sq, h_hi, h_lo],
+               prop=FontProperties(family=pub_font(), size=PUB_FONT_PT - 2),
                frameon=False, handlelength=0.9, loc="outside lower center",
                ncol=3, scatterpoints=1, columnspacing=1.4, handletextpad=0.35)
 
