@@ -92,12 +92,16 @@ def main(argv=None):
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
     from malignment.figure import (PUB_SIZE, PUB_FONT_PT, PUB_INK, PUB_MID,
-                                   PUB_GRAY, PUB_RULE_PT, pub_font, save)
+                                   PUB_GRAY, PUB_FAINT, PUB_RULE_PT, pub_font,
+                                   save)
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--seed", type=int, default=1)
     ap.add_argument("--dose", action="store_true")
     ap.add_argument("--top", type=int, default=0, help="keep only the N largest")
+    ap.add_argument("--raw-poles", action="store_true",
+                    help="keep the vocabulary's arbitrary pole order instead "
+                         "of putting the base end on the left")
     ap.add_argument("--osgood", action="store_true",
                     help="semantic-differential layout: each pole labelled on "
                          "its own side of the scale")
@@ -111,6 +115,32 @@ def main(argv=None):
     a = ap.parse_args(argv)
     M, L, V, ax = load(a.seed)
     mu = M.mean(0)
+    #: **THE VOCABULARY'S POLE ORDER IS ARBITRARY AND THE SIGN INHERITED IT**
+    #: (RH). `pole_x` and `pole_y` are whichever order the consolidator wrote
+    #: them in, so an axis was "negative" only because of a word order, and a
+    #: plot sorted by the signed mean put `Inner state -> Outward act` at the
+    #: bottom as though it were the opposite of `Plain -> Euphemistic` at the
+    #: top. It is not the opposite of anything; it is the same statement with
+    #: the poles typed the other way round.
+    #:
+    #: Oriented so the BASE end is on the left of every row. The left column
+    #: then reads as what the base says and the right as what alignment makes
+    #: of it, and the length is a magnitude rather than a direction plus an
+    #: accident. `--raw-poles` keeps the vocabulary's order.
+    #:
+    #: **ORIENTED ON THE MARGINAL MEAN, INCLUDING WHERE THAT MEAN IS NOISE.**
+    #: `Speech / Bodily act` averages +0.007, so which way it is typed is
+    #: effectively a coin toss -- and the figure SHOWS that, because its two
+    #: tertile markers straddle zero whichever way the row is drawn. Orienting
+    #: such a row on its high-lift mean instead would be choosing the tertile
+    #: that makes the story, which is the thing every check tonight was for.
+    flip_ax = np.ones(len(ax))
+    if not a.raw_poles:
+        flip_ax = np.where(mu < 0, -1.0, 1.0)
+        M = M * flip_ax
+        mu = mu * flip_ax
+        V = [dict(v, pole_x=v["pole_y"], pole_y=v["pole_x"]) if f < 0 else v
+             for v, f in zip(V, flip_ax)]
     q = np.quantile(L, [1 / 3, 2 / 3])
     lowm = M[L <= q[0]].mean(0)
     topm = M[L > q[1]].mean(0)
@@ -144,7 +174,14 @@ def main(argv=None):
               "%d on a dose difference)"
               % (int(ok.sum()), m, int(((qm < 0.05) & (np.abs(mu) >= 0.05)).sum()),
                  int(((qd < 0.05) & (np.abs(topm - lowm) >= 0.10)).sum())))
+        #: **`flip_ax` MUST BE FILTERED WITH EVERYTHING ELSE.** It was not,
+        #: and `zip(ax_filtered, flip_ax_unfiltered)` silently misaligned every
+        #: pair after the first dropped axis -- the plate came out reading
+        #: "Gentle -> Forceful", which is the finding backwards. Two sequences
+        #: of different lengths zipped without complaint, which is the same
+        #: shape as the `imap` pairing bug in `axis_survey` earlier today.
         M = M[:, ok]; mu = mu[ok]; lowm = lowm[ok]; topm = topm[ok]
+        flip_ax = flip_ax[ok]
         V = [v for v, k in zip(V, ok) if k]; ax = [x for x, k in zip(ax, ok) if k]
     o = np.argsort(mu)
     if a.top:
@@ -172,6 +209,19 @@ def main(argv=None):
         #: dots; the thin rule joining the two tertiles makes the dose shift a
         #: LENGTH, which is the quantity the figure is about, and its direction
         #: is legible before any of the labels are read.
+        #: **A THIN RULE ACROSS EACH ROW** (RH): Osgood draws a scale between
+        #: the two poles and the marker sits ON it. Without it the markers
+        #: float and the reader has to supply the axis mentally.
+        #: the rule spans the MARKERS, not the per-relation values: M runs to
+        #: +-2 by construction and using it put every marker in a pinch at the
+        #: centre of a rule four units wide
+        e = np.concatenate([mu, lowm, topm])
+        pad = 0.06 * (e.max() - e.min())
+        xlo, xhi = e.min() - pad, e.max() + pad
+        for i in range(n):
+            axx.plot([xlo, xhi], [i, i], color=PUB_FAINT,
+                     linewidth=PUB_RULE_PT * 0.7, zorder=1,
+                     solid_capstyle="butt")
         for i, j in enumerate(o):
             axx.plot([lowm[j], topm[j]], [i, i], color=PUB_GRAY,
                      linewidth=PUB_RULE_PT * 1.6, zorder=2,
@@ -232,8 +282,9 @@ def main(argv=None):
     #: Labels come from `axis_poles.POLES`, written by hand and capped at 16
     #: characters, and `check()` REFUSES an axis it has no pair for rather than
     #: falling back to a truncated description.
-    from axis_poles import check as _poles
-    pairs = _poles(V)
+    from axis_poles import POLES
+    pairs = [(POLES[k][1], POLES[k][0]) if f < 0 else POLES[k]
+             for k, f in zip(ax, flip_ax)]
     (axm or axx).set_yticklabels([pairs[i][0] for i in o] if a.osgood else
                                  ["%s  <->  %s" % (short(V[i]["pole_x"]),
                                                    short(V[i]["pole_y"]))
