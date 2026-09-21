@@ -284,3 +284,27 @@ Population: every faller and riser in `by_prompt_{raw,framed}.csv` across **all 
 Above lift 2 a word is overwhelmingly the thing withdrawn; below it the roles are a coin flip. The top of the list is `kill` (173 prompts, +4.0, 72 falls and 0 rises), `fuck`, `strangle`, `beat`, `shoot`, `punch`, `stab`. The single negative-lift word is `apologized` (−1.0, 149 prompts), which never falls and rises three times.
 
 **LIFT IS NOT MOVEMENT.** It is measured on the base arm's candidates before alignment touches anything, and says the word is more transgressive than the frame that set it up — not that anything happened to it. `n_faller` and `n_riser` are in the file so the two can be read together rather than conflated.
+
+## WALKING OUTWARD FROM THE MOST CHARGED WORDS (`seed_walk.py`)
+
+    python -u seed_walk.py                  # top 10 verbs by lift, raw arm
+    python -u seed_walk.py --pos NOUN --top 10 --draw
+
+![seed walk](figures/seed_walk_raw_verb_top10.png)
+
+Seeds are the top *n* words of one part of speech ranked by their own charge lift; the walk follows **only outward edges**, faller → riser, transitively. An undirected walk from `kill` reaches everything that ever fell to anything `kill` fell to, which is most of the graph and says nothing; following the arrow asks where the charge *goes*.
+
+**THE TOP TEN VERBS DO NOT FORM ONE COMPONENT. THEY FORM NINE.**
+
+    seeds            reached        components   largest holds
+    top 10 VERB      52 nodes             9      2 of 10 seeds
+    top 20 VERB      65                  13      7 of 20
+    top 40 VERB      91                  27      10 of 40
+    top 10 NOUN      19                   9      1 of 10
+    top 10, framed   62                   8      2 of 10
+
+Adding seeds adds components roughly one for one. **Charged words do not share a destination**: `kill` and `beat` meet (via `take`), and the rest sit in their own small basins — `raped → grabbed → used`, `stabbed → held`, `punched → pinned`, `slashed → brought`, `shoot → refuse`, `killed → missed → laughed`. Two of the ten seed nothing at all: `stab` and `withhold` are never the biggest faller anywhere, so they have no outward edge.
+
+**AND THE WALK DIES QUICKLY: 37 of the 52 reached nodes are sinks** that never fall again. The `kill` basin is the one that goes more than a step — `kill → die → {suffer, fall, remain, follow, stay → walk}` and `kill → do → {wait, start, create}` — and even it is three deep at most.
+
+This is the crossing graph's fan restated for the charged end specifically: withdrawal is *selective* about what it takes (see the lift table above) and *unselective* about what it puts there.
