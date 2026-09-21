@@ -464,6 +464,15 @@ def _up(k):
     return 0
 
 
+def _zsd(scale):
+    """The norm's own SD in rating points, for converting z back."""
+    for x in json.load(open(os.path.join(
+            HERE, "results", "norms_levels_z_en.json")))["scales"]:
+        if x["scale"] == scale:
+            return x["sd"]
+    raise KeyError(scale)
+
+
 def _zb(scale, band="all"):
     """One band record from the z artifact, for the caption."""
     z = json.load(open(os.path.join(HERE, "results",
@@ -545,6 +554,25 @@ def _z_caption(out, rs, meta, n_words):
         "about the scale, not a defect in either statistic, and it should be "
         "reported as one."
         % _zb("v6:vocalisation")["move_mean_z"],
+        "",
+        "THE ORDER OF THE ROWS IS THE DENOMINATOR, and this plate uses a "
+        "third one. Ranked by how far the highest lift band sits from the "
+        "lowest, vocalisation is fourth here (%+.4f) behind bodily harm, "
+        "transgressiveness and vulgarity -- while on the dose scatter it is "
+        "FIRST. Neither is wrong. The scatter ranks by the slope divided by "
+        "the spread OF THE SLOPES, so it measures how unanimous the roster "
+        "is; this plate divides by the spread of the NORM, so a scale whose "
+        "words are widely spread needs to move further to score. In raw "
+        "rating points, which is a third ordering again, vocalisation is "
+        "FIRST on both: %+.4f points from the lowest lift band to the "
+        "highest, against bodily harm's %+.4f. It ranks fourth here only "
+        "because its own spread is 2.5 times bodily harm's."
+        % (_zb("v6:vocalisation", "high")["move_mean_z"]
+           - _zb("v6:vocalisation", "low")["move_mean_z"],
+           (_zb("v6:vocalisation", "high")["move_mean_z"]
+            - _zb("v6:vocalisation", "low")["move_mean_z"]) * _zsd("v6:vocalisation"),
+           (_zb("k_bodily_harm", "high")["move_mean_z"]
+            - _zb("k_bodily_harm", "low")["move_mean_z"]) * _zsd("k_bodily_harm")),
         "",
         "Two rows move the other way. Makes worse and directedness are "
         "decisive on the median (p=2.7e-05 and 4.6e-07, on 28 and 31 untied "
@@ -679,7 +707,17 @@ def main():
 
     out = os.path.join(HERE, "figures", "fig3_norms_osgood_en%s%s.png"
                        % ("" if native else "_oriented",
-                          "" if mode == "bands" else "_" + mode))
+                          #: **THE ESTIMATOR IS PART OF THE NAME.** `--z` and
+                          #: `--z --z-median` are different plates and both
+                          #: used to write `_z`, so rendering the pair in one
+                          #: command silently left the SECOND one under the
+                          #: first one's name -- which is how the median plate
+                          #: reached paper/figures labelled as the mean, with
+                          #: vocalisation sitting on zero. A flag that changes
+                          #: what is drawn has to change where it is written.
+                          "" if mode == "bands" else
+                          "_z_median" if mode == "z"
+                          and "--z-median" in sys.argv else "_" + mode))
     os.makedirs(os.path.dirname(out), exist_ok=True)
     print("  wrote %s" % save(fig, out))
 

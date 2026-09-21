@@ -4,7 +4,7 @@ Each row is one scale, its two ends labelled on their own sides. Position is the
 
 ONE RULER FOR EVERY ROW, WHICH IS THE POINT. The companion plate divides each row by the spread of its own CHANGES, a denominator that ranges over a factor of 250 across these fourteen scales, so its rows cannot be compared with each other. Here one unit means the same kind of thing on every row: how far apart the words on that scale actually are.
 
-THE MOVEMENTS ARE SMALL. On all prompts the largest is bodily harm at 0.067, and nothing anywhere on the plate exceeds 0.127. Alignment moves these norms by under a seventh of their own spread -- which the companion plate cannot say, because its units do not carry that meaning.
+THE MOVEMENTS ARE SMALL. On all prompts the largest is aroused at 0.057, and nothing anywhere on the plate exceeds 0.067. Alignment moves these norms by under a seventh of their own spread -- which the companion plate cannot say, because its units do not carry that meaning.
 
 AND THE ORDER IS NOT THE COMPANION'S ORDER. Bodily harm is the largest mover there and fourth here; register level and fit are largest here. A scale whose changes are tightly agreed among lineages scores high on a per-change denominator whether or not it moved far.
 
@@ -18,7 +18,7 @@ Two rows move the other way. Makes worse and directedness are decisive on the me
 
 Scales keep their native direction, low pole left and high pole right, so the side of every marker is a result. Rows are ordered by the square, most negative at the top.
 
-Charge deepens the movement in BOTH directions: at high lift arousal, concreteness, bodily harm and transgressiveness sit further left, and register level, dominance, valence and mundanity further right. Of the fourteen, 12 have their high-lift triangle further from zero than their low-lift one.
+Charge deepens the movement in BOTH directions: at high lift arousal, concreteness, bodily harm and transgressiveness sit further left, and register level, dominance, valence and mundanity further right. Of the fourteen, 10 have their high-lift triangle further from zero than their low-lift one.
 
 Pole words illustrate each end among the words alignment moved: a word appears only if it moved in at least 50 prompt-lineage cells. For the six v6 scales the bracketed number is how many frames the word was rated in. 56 pole words, none repeated.
 
