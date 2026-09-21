@@ -98,6 +98,9 @@ def main(argv=None):
     ap.add_argument("--seed", type=int, default=1)
     ap.add_argument("--dose", action="store_true")
     ap.add_argument("--top", type=int, default=0, help="keep only the N largest")
+    ap.add_argument("--osgood", action="store_true",
+                    help="semantic-differential layout: each pole labelled on "
+                         "its own side of the scale")
     ap.add_argument("--dots", action="store_true",
                     help="three markers a row on one scale instead of bars")
     ap.add_argument("--facet", action="store_true",
@@ -218,12 +221,31 @@ def main(argv=None):
     #: direction, and a directional label plus a signed bar states it twice
     #: and disagrees with itself whenever the mean is near zero
     (axm or axx).set_yticks(y)
-    #: **THE LABEL IS BIDIRECTIONAL** (RH). "X / Y" reads as a ratio or a
-    #: heading; "X <-> Y" says the row is an axis with two ends and that the
-    #: marker's position on it is the answer.
-    (axm or axx).set_yticklabels(["%s  <->  %s" % (short(V[i]["pole_x"]),
-                                        short(V[i]["pole_y"])) for i in o],
+    #: **OSGOOD LAYOUT: EACH POLE ON ITS OWN SIDE** (RH). A semantic
+    #: differential puts one pole at the left of the scale and the other at the
+    #: right, so the reader's eye travels from a named end, through the
+    #: marker, to the other named end -- the position IS the answer to "which
+    #: of these two". Stacking both names on the left ("X <-> Y") makes the
+    #: reader map a label pair onto a direction, which is the work the layout
+    #: exists to remove.
+    #:
+    #: Labels come from `axis_poles.POLES`, written by hand and capped at 16
+    #: characters, and `check()` REFUSES an axis it has no pair for rather than
+    #: falling back to a truncated description.
+    from axis_poles import check as _poles
+    pairs = _poles(V)
+    (axm or axx).set_yticklabels([pairs[i][0] for i in o] if a.osgood else
+                                 ["%s  <->  %s" % (short(V[i]["pole_x"]),
+                                                   short(V[i]["pole_y"]))
+                                  for i in o],
                         fontsize=PUB_FONT_PT - 2.5, fontfamily=pub_font())
+    if a.osgood:
+        r = axx.secondary_yaxis("right")
+        r.set_yticks(y)
+        r.set_yticklabels([pairs[i][1] for i in o],
+                          fontsize=PUB_FONT_PT - 2.5, fontfamily=pub_font())
+        r.tick_params(length=0)
+        r.spines["right"].set_visible(False)
     (axm or axx).set_ylim(-0.8, n - 0.2)
     axx.tick_params(axis="both", length=2, labelsize=PUB_FONT_PT - 2)
     for s in ("top", "right", "left"):
@@ -273,9 +295,10 @@ def main(argv=None):
     if not (a.facet or a.dots):
         fig.tight_layout(pad=0.4)
     out = a.out or os.path.join(HERE, "figures",
-                                "axis_bars%s%s%s%s.png"
+                                "axis_bars%s%s%s%s%s.png"
                                 % ("_dose" if a.dose else "",
                                    "_dots" if a.dots else "",
+                                   "_osgood" if a.osgood else "",
                                    "_facet" if a.facet else "",
                                    "_sig" if a.sig else ""))
     os.makedirs(os.path.dirname(out), exist_ok=True)
