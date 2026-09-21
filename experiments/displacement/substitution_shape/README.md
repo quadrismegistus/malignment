@@ -262,3 +262,25 @@ Keeping VERB/NOUN/ADJ/PROPN at both ends holds **467 of 589 crossings (79%)** an
 `scream` rises from `kill` and from nothing else, so a pure degree filter drops the heaviest edge in the graph *and* the example in the headline. Either clause now qualifies an edge: degree ≥ 2 at both ends, or weight ≥ 3.
 
 **The two arms have different shapes and that is the finding of the folder restated as a picture.** Raw is many small neighbourhoods around common verbs — `said`, `threw`, `went`, `then`, `put` — each fanning into mostly-unique substitutes, with `whispered` the one real attractor (14 distinct fallers cross into it). Framed collapses onto a single hub: **`have` fans into `need`, `contact`, `consider`, `clarify`, `discuss`, `escalate`, `address`, `prepare`, `check`, `proceed`**, the deliberation vocabulary, and the heaviest edge in the arm is `safe -> uneasy` at 9.
+
+## WORDS BY THEIR OWN CHARGE LIFT (`lift_words.py`)
+
+    python -u lift_words.py                    # -> results/words_by_lift.csv
+    python -u lift_words.py --min-prompts 3
+
+`charge.word_lift(prompt, base)` — added 2026-09-21 — is a word's charge rating over **that lineage's own frame rating**, which is the quantity three other files had each written inline. Aggregating it takes two decisions, so the CSV makes both visible instead of choosing: within a prompt over the lineages that offered the word, then across the prompts the word appears in, each stage with a median and a mean. `lift_med_med` is median-then-median and is what the file sorts on; `lift_med_max` is the word's most charged single prompt.
+
+Population: every faller and riser in `by_prompt_{raw,framed}.csv` across **all four crossing classes**, over this folder's 2,400 prompts. 1,076 words, 4.4 seconds.
+
+**A WORD'S OWN LIFT PREDICTS WHETHER ALIGNMENT REMOVES IT.** Words seen in ten or more prompts, counting how often each is the biggest faller against the biggest riser:
+
+    lift        words   faller    riser   faller share
+    >= 3           23      190       13        94%
+    2 to 3         35       99       31        76%
+    1 to 2         98      189      257        42%
+    0 to 1        636     2258     2421        48%
+    < 0             1        0        3         0%
+
+Above lift 2 a word is overwhelmingly the thing withdrawn; below it the roles are a coin flip. The top of the list is `kill` (173 prompts, +4.0, 72 falls and 0 rises), `fuck`, `strangle`, `beat`, `shoot`, `punch`, `stab`. The single negative-lift word is `apologized` (−1.0, 149 prompts), which never falls and rises three times.
+
+**LIFT IS NOT MOVEMENT.** It is measured on the base arm's candidates before alignment touches anything, and says the word is more transgressive than the frame that set it up — not that anything happened to it. `n_faller` and `n_riser` are in the file so the two can be read together rather than conflated.
