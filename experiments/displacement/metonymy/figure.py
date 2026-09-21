@@ -390,7 +390,8 @@ CI_MIN_PT = 6.0
 PT_PER_IN = 72.0
 #: THE HOUSE FACE, from `malignment.figure.pub_font()` -- the same resolver
 #: `prompt_slopes/plot.py` and `channel_graph.py` use, so all three figures
-#: set in one family. It resolves to Helvetica here.
+#: set in one family. It resolves to ARIAL as of 21 Sep 2026 (it said
+#: Helvetica until then); see `malignment.figure.pub_font` for why.
 #:
 #: The MECHANISM differs and the difference is in this producer's favour. In
 #: matplotlib a name it cannot find is not an error: it substitutes DejaVu
@@ -404,14 +405,21 @@ def font_stack():
         from malignment.figure import pub_font
         head = pub_font()
     except Exception:
-        head = "Helvetica"
-    rest = [f for f in ("Helvetica", "Arial", "sans-serif") if f != head]
+        #: the house face as of 21 Sep 2026; keep this in step with
+        #: `malignment.figure.pub_font`, which this only stands in for
+        head = "Arial"
+    rest = [f for f in ("Arial", "Helvetica", "sans-serif") if f != head]
     return ",".join([head] + rest)
 
 
-#: Helvetica advance widths as a fraction of the em, averaged over mixed case.
-#: Good to a few percent, which is all the margin here needs; the achieved
-#: figures are printed so a wrong guess is visible rather than silent.
+#: Advance widths as a fraction of the em, averaged over mixed case. Good to a
+#: few percent, which is all the margin here needs; the achieved figures are
+#: printed so a wrong guess is visible rather than silent.
+#:
+#: **THESE SURVIVED THE MOVE FROM HELVETICA TO ARIAL** and are not re-measured:
+#: the two are metrically compatible by design, glyph for glyph, which is why
+#: Arial was the face chosen when the house font needed arrow glyphs. Any
+#: OTHER substitution invalidates them and they would have to be remeasured.
 EM_BOLD, EM_PLAIN = 0.58, 0.55
 
 
