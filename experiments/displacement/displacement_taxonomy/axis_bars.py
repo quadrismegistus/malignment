@@ -371,7 +371,27 @@ def main(argv=None):
     pairs = [(POLES[k][1], POLES[k][0]) if f < 0 else POLES[k]
              for k, f in zip(ax, flip_ax)]
     if a.examples:
+        #: **HAND-PICKED WHERE THEY EXIST, DERIVED OTHERWISE.** The frequency
+        #: ranking returns the corpus head, so `said`/`told`/`went` repeated
+        #: across rows; `axis_examples.PICKS` is paper-claude's 52 choices,
+        #: verified here on load: no word twice by stem, every word n>=2 on its
+        #: own pole.
+        #:
+        #: **PICKS ARE STORED IN THE HIGH-LIFT ORIENTATION AND SWAPPED IF THE
+        #: ROW IS DRAWN THE OTHER WAY.** Under `--orient marginal` or `raw` a
+        #: row can flip, and a pair attached without checking would put the
+        #: left pole's words under the right pole -- the same defect as the
+        #: exemplar pooling before it was made orientation-free.
+        from axis_examples import PICKS
+        hl = np.where(M[L > q3].mean(0) < 0, -1.0, 1.0) if a.orient != "highlift" \
+            else np.ones(len(ax))
         ex = exemplars(a.seed, M, ax, mu, L)
+        for j, k in enumerate(ax):
+            if k in PICKS:
+                lft, rgt = PICKS[k]
+                if hl[j] < 0:
+                    lft, rgt = rgt, lft
+                ex[k] = (", ".join(lft), ", ".join(rgt))
         pairs = [("%s\n(%s)" % (p[0], ex[k][0]),
                   "%s\n(%s)" % (p[1], ex[k][1]))
                  for p, k in zip(pairs, ax)]
