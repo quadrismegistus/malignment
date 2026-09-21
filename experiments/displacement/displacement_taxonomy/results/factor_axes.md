@@ -227,6 +227,18 @@ Force starts at **+0.002**, which is the state the objection describes. The sali
 
 ### What the control overturned
 
-**ALIGNMENT DOES NOT DO MORE TO CHARGED PAIRS. IT DOES DIFFERENT THINGS TO THEM.** Total displacement is roughly constant across the lift range — salience 0.252 to 0.268 — while individual axes move steeply and in opposite directions. The composition changes and the magnitude does not.
+**AMONG PAIRS THAT MOVE, TOTAL DISPLACEMENT IS ROUGHLY CONSTANT ACROSS LIFT AND ITS COMPOSITION CHANGES.** Salience 0.252 → 0.268 while individual axes move steeply and in opposite directions.
+
+**THE SCOPE CLAUSE IS NOT OPTIONAL** (paper-claude). This corpus is relations that EXIST — frames where the pooled table found movers clearing `min_agree`. Whether a slot moves at all is charge-specific and is Figure 2's finding: `kill → scream` against flat neutral controls. So alignment **does** do more to charged sites in the sense the essay cares about first. What this control adds is that *among the pairs it moves*, it does not move the charged ones further — it moves them elsewhere. Written without the clause, the sentence contradicts Figure 2.
+
+**AND A SECOND INSTRUMENT AGREES.** In `freudian_hypothesis`, over the same lift tertiles:
+
+| | bottom | middle | top |
+|---|---|---|---|
+| act REPLACED | 79.1% (650) | 85.2% (664) | 77.2% (674) |
+| act REPLACED or GONE | 82.2% | 87.2% | 78.2% |
+| affect GONE (of frames carrying a feeling) | 3.4% (59) | 2.7% (111) | **21.3% (310)** |
+
+The act is replaced at the same rate whatever the charge; the affect is lost seven times more often at the top. **Lift governs the direction of the movement, not its amount** — found once by a graded survey over 38 contrast axes and once by a blinded coder answering symmetric questions about the act and the quota.
 
 This was assumed the other way round throughout the evening's dose work, and by the dose framing generally: `--dose` tables report which axes *emerge* at high lift, and the natural reading of "emerge" is that more happens. More does not happen. Something else happens.
