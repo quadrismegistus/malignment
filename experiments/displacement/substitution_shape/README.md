@@ -395,3 +395,21 @@ Every (surface, POS) in the corpus was lemmatised twice — spaCy in the slot, a
     clothes -> clothes (spaCy: clothe, a plural-only noun)
 
 The other fourteen keep spaCy, which wins on irregulars morphy has no exception for (`felt`, `found`, `fell`, `saw`) and on plurals it declines to reduce. **Neither tool dominates**, which is why the table exists rather than a switch of lemmatiser. And NLTK's `WordNetLemmatizer` is the wrong comparison: it calls morphy then takes the *shortest* candidate, so it returns `rap` where bare `morphy` returns `rape` — it would have hidden the case that prompted the audit.
+
+## STOPWORDS ARE DROPPED AT SOURCE
+
+![lemma walk](figures/seed_walk_raw_verb_top10_lemma.png)
+
+NLTK's English stoplist is applied inside `edges()`, the one place edges are built, so **nothing downstream can walk a node it removes** — not the full graph, not a seeded walk, not a seed. Checked against the surface *and* the lemma, since `had` and `having` are listed while `have` is their lemma. `--keep-stop` reverses it.
+
+**IT IS A BIG CUT AND NOT A TIDYING.** Eight stopword nodes in the raw arm and six in the framed, but they carry 36 edges each — a fifth of the framed arm. What goes is `have` and its forms, which under the deployment frame was the single largest hub: `have → need` (10 prompts), `→ contact` (6), `→ consider` (6), `→ escalate` (5). Defensible, because "have them stop" becoming "contact them" is a construction change rather than a lexical substitution — but it is a decision, so the framed-arm reading above has to be read as being about a hub this default now removes.
+
+    top 10 verb seeds, raw     nodes  edges  components  largest holds
+      surface, stopwords kept     52     45       9      2 of 10
+      surface, dropped            48     41       9      2 of 10
+      lemma,   stopwords kept    122    154       3      8 of 10
+      lemma,   dropped            73     82       4      7 of 10
+
+Dropping costs a third of the reach on the lemmatised graph and splits one extra component: `have` and `do` were acting as connectors. **`kill → scream` becomes the heaviest edge in the raw arm** once they go.
+
+**NLTK's LIST HAS A TRAP AND IT IS SPRUNG BY THIS CORPUS.** Twenty-two entries are `n't` remnants — `couldn`, `didn`, `hasn` — and two of them are real words: `won` is in the list because "won't" splits that way, and `won`, the past of `win`, is a node in this graph with its own edges. `don` likewise. All twenty-two are removed from the stoplist (`_FRAGMENTS`); the ones that are not words carry one edge between them, so nothing is lost and a verb is not deleted for a spelling coincidence.

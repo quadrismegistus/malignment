@@ -104,6 +104,8 @@ def main(argv=None):
                     help="a seed must be rated in this many prompts")
     ap.add_argument("--edge-pos", default="content",
                     choices=("content", "all"))
+    ap.add_argument("--keep-stop", action="store_true",
+                    help="do NOT drop NLTK stopwords from the graph")
     ap.add_argument("--lemma", action="store_true",
                     help="merge surface forms into their slot lemma first")
     ap.add_argument("--draw", action="store_true")
@@ -112,7 +114,7 @@ def main(argv=None):
     a = ap.parse_args(argv)
 
     rows = G.crossings(a.arm)
-    E, _ = G.edges(a.arm, a.edge_pos, a.lemma)
+    E, _ = G.edges(a.arm, a.edge_pos, a.lemma, not a.keep_stop)
     mp = modal_pos(rows)
     lf = lifts(a.min_prompts)
     if a.lemma:
@@ -133,8 +135,10 @@ def main(argv=None):
         lf = {k: st.median(v) for k, v in agg.items() if v}
         mp = {k: c.most_common(1)[0][0] for k, c in pacc.items()}
 
+    SW = set() if a.keep_stop else G.stopwords_en()
     cand = [(L, w) for w, L in lf.items()
-            if w in mp and (a.pos == "ANY" or mp[w] == a.pos)]
+            if w in mp and (a.pos == "ANY" or mp[w] == a.pos)
+            and w not in SW]
     cand.sort(reverse=True)
     seeds = [w for _, w in cand[:a.top]]
     out_deg = collections.Counter(f for (f, _) in E)
@@ -172,7 +176,8 @@ def main(argv=None):
                     else None)
         base = os.path.join(HERE, "figures", "seed_walk_%s_%s_top%d%s"
                             % (a.arm, a.pos.lower(), a.top,
-                               ("_lemma" if a.lemma else "")
+                               ("_stop" if a.keep_stop else "")
+                               + ("_lemma" if a.lemma else "")
                                + ("_prompts" if a.label_prompts else "")))
         open(base + ".dot", "w", encoding="utf-8").write(src + "\n")
         for ext in ("png", "pdf"):

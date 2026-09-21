@@ -50,6 +50,32 @@ sys.path.insert(0, ROOT)
 #: buried, because a POS cut always throws away something it did not mean to.
 CONTENT = {"VERB", "NOUN", "ADJ", "PROPN"}
 
+#: NLTK's `n't` remnants, which are tokenizer debris and not stopwords of
+#: English. **TWO OF THEM ARE REAL WORDS AND ONE IS IN THIS GRAPH**: `won`
+#: is in NLTK's list only because "won't" splits to `wo` + `n't` in some
+#: tokenizers, and `won` the past of `win` is a node here with its own edges.
+#: `don` likewise. Removing the whole set from the stoplist costs nothing --
+#: `couldn` and `didn` are not words either way and carry one edge between
+#: them -- and it stops the filter deleting a verb for a spelling coincidence.
+_FRAGMENTS = {"ain", "aren", "couldn", "didn", "doesn", "don", "hadn", "hasn",
+              "haven", "isn", "ll", "mightn", "mustn", "needn", "re", "shan",
+              "shouldn", "ve", "wasn", "weren", "won", "wouldn"}
+
+
+def stopwords_en():
+    """NLTK's English stoplist, minus its contraction fragments. -> set
+
+    198 entries in, 176 out. What it removes from this graph is mostly `have`
+    and its forms, which under the deployment frame is the single largest hub:
+    `have -> need` (10 prompts), `-> contact` (6), `-> consider` (6),
+    `-> escalate` (5). **THAT IS A QUARTER OF THE FRAMED ARM AND IT IS NOT
+    NOISE** -- it is "have them stop" becoming "contact them", a construction
+    change rather than a lexical substitution. Dropping it is defensible and
+    it is a DECISION, so it is named here and reversible with `--keep-stop`.
+    """
+    from nltk.corpus import stopwords
+    return set(stopwords.words("english")) - _FRAGMENTS
+
 
 def crossings(arm="raw"):
     """-> the CROSSED rows of one arm, with prompt, faller, riser."""
@@ -131,7 +157,7 @@ def slot_pos(rows):
     return tag
 
 
-def edges(arm="raw", pos="content", lemma=False):
+def edges(arm="raw", pos="content", lemma=False, stop=True):
     """-> (Counter[(faller, riser)], how many crossings the POS cut removed)
 
     With `lemma`, both ends are replaced by their modal slot lemma BEFORE the
@@ -147,6 +173,19 @@ def edges(arm="raw", pos="content", lemma=False):
         rows = [r for r in rows
                 if tag[(r["prompt"], r["faller"])] in CONTENT
                 and tag[(r["prompt"], r["riser"])] in CONTENT]
+    if stop:
+        #: **CHECKED ON THE SURFACE AND ON THE LEMMA.** `had` and `having` are
+        #: in the list and `have` is their lemma, but the reverse also happens
+        #: -- a surface the list misses whose lemma it holds -- so a crossing
+        #: dies if EITHER form of EITHER end is a stopword. Applied here, in
+        #: the one place edges are built, so nothing downstream can walk a
+        #: node this filter removed.
+        SW = stopwords_en()
+        lm = modal_lemma(crossings(arm))
+        def stopish(w):
+            return w in SW or lm.get(w, w) in SW
+        rows = [r for r in rows
+                if not stopish(r["faller"]) and not stopish(r["riser"])]
     cut = len(crossings(arm)) - len(rows)
     if not lemma:
         return collections.Counter((r["faller"], r["riser"]) for r in rows), cut
@@ -272,6 +311,9 @@ def main(argv=None):
     ap.add_argument("--min-weight", type=int, default=3,
                     help="keep an edge this heavy whatever its endpoints' "
                          "degree; 0 for the pure degree filter")
+    ap.add_argument("--keep-stop", action="store_true",
+                    help="do NOT drop NLTK stopwords (they are dropped by "
+                         "default, which removes the framed `have` hub)")
     ap.add_argument("--lemma", action="store_true",
                     help="merge surface forms into their slot lemma")
     ap.add_argument("--label-prompts", action="store_true",
@@ -280,7 +322,7 @@ def main(argv=None):
                     choices=("dot", "neato", "sfdp", "fdp"))
     a = ap.parse_args(argv)
 
-    w, cut = edges(a.arm, a.pos, a.lemma)
+    w, cut = edges(a.arm, a.pos, a.lemma, not a.keep_stop)
     E, deg, (de, dn) = induced(w, a.min_degree, a.min_weight)
     nodes = {x for e in E for x in e}
     print("%s arm, pos=%s: %d crossings -> %d distinct pairs%s"
@@ -299,7 +341,8 @@ def main(argv=None):
     #: defect cost a figure in `fig3_osgood` the same afternoon.
     base = os.path.join(HERE, "figures", "substitution_graph_%s%s%s"
                         % (a.arm, "" if a.pos == "content" else "_allpos",
-                           ("_lemma" if a.lemma else "")
+                           ("_stop" if a.keep_stop else "")
+                           + ("_lemma" if a.lemma else "")
                            + ("" if a.min_degree <= 1 else "_deg%d" % a.min_degree)))
     os.makedirs(os.path.dirname(base), exist_ok=True)
     open(base + ".dot", "w", encoding="utf-8").write(src + "\n")
