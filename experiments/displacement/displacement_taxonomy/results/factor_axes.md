@@ -42,3 +42,29 @@ The 77 frames that carry both a norm profile and an axis. Small cells: read the 
 | `specificity_vs_generality` | 5 | -1.10 | +0.78 |
 | `institutional_vs_personal` | 3 | -1.33 | -3.22 |
 
+
+## C — the axes themselves, from the annotations alone
+
+_is there a factor or two behind the 38 axes?_
+
+**The single-choice prompt is what blocks the direct answer, and that was my design decision.** Each agent was asked for "the single best-fitting axis", so every relation has one non-zero and a relation × axis matrix is a partition. Ask instead for *all axes that apply*, or a score per relation per axis, and it is an ordinary loading matrix. Nothing about the data prevents it.
+
+What the existing annotations do support: the two runs assigned **the same 2,466 relations** under **two independently built vocabularies** (28 and 38 axes, different prompts, different shuffles). That 29 × 39 contingency table is a real matrix, and correspondence analysis on it asks whether both readers were tracking a small number of underlying dimensions.
+
+> **dim1 9.0%, dim2 8.6%, dim3 7.6%, dim4 7.0% — first two 17.5%.**
+> **Seven dimensions for half the inertia, fourteen for 80%, of 29 possible.**
+
+**That is a flat spectrum, and it is a clear no.** Two vocabularies built from the same corpus share no two-dimensional structure; the association between them is spread almost evenly across dimensions, which is what near-independent partitions look like. It is the same finding as ARI 0.311 seen from the other side.
+
+The leading dimension is nevertheless interpretable, and both vocabularies order onto it the same way:
+
+| | run 1 | run 2 |
+|---|---|---|
+| **dim1 low** | `granularity`, `referent_substitution`, `explicitness_charge`, `entity_vs_event` | `spatial_configuration`, `body_referent`, `bluntness_vs_euphemism`, `sexual_or_transgressive_content` |
+| **dim1 high** | `act_channel`, `deliberation_vs_action`, `interiority`, `affective_vs_cognitive` | `deliberation_vs_decisive_act`, `inner_state_vs_outward_act`, `realis_vs_irrealis`, `kind_of_inner_state` |
+
+Concrete, bodily, referential contrasts at one end; inner-state, deliberative, communicative ones at the other. Both readers found that split without sharing a vocabulary — **but it is 9% of the inertia**, so it is a tendency in how relations get sorted, not a factor the 38 axes reduce to.
+
+### What would answer the question properly
+
+A multi-label pass: every relation scored on every axis rather than assigned to one. 16 agents × 154 relations × 38 axes, which is a loading matrix and factors without argument. Until that exists, "is there a factor or two" has been asked of a partition and answered no by default, which is not the same as answered.
