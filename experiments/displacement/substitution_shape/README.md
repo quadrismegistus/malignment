@@ -518,7 +518,9 @@ The strongest are `left → right` (10 of 50, expected 3.1, p=0.00083), `hand �
 
     python -u lineage_graph.py          # "She was so angry she wanted to"
 
-![lineage graph](figures/lineage_graph_she_was_so_angry_she.png)
+![lineage flow](figures/lineage_graph_she_was_so_angry_she_flow.png)
+
+Laid out as `kind_flow` is: base argmax on the left, aligned argmax on the right, both columns ordered by count and **both summing to 50**. `--free` gives the one-column force-directed version instead.
 
 **This is the answer to "it is just a corpus average".** Every other graph in this folder has the PROMPT as its unit — `run.py` averages the fifty lineages and *then* picks a faller, so an edge is a property of an averaged distribution, and `substitution_replicated.py` shows the lineages do not agree on those pairings at all.
 
@@ -535,4 +537,8 @@ Here one prompt is fixed and **each of the 50 endpoint lineages contributes exac
 
 The rest of the picture is the fan again, now at lineage grain: `kill` also goes to `cry` (2), `destroy`, `fight`, `hurt`, `punch` and a blank template, one lineage each. Of the 16 lineages whose base already said `scream`, 13 hold it and 3 move away (`hit`, `cry`, `rip`). Seven lineages hold `kill`.
 
-So at the level of the roster the marginal is stark — `kill` 29 → 8 as the top word, `scream` 16 → 29 — while the *routing* stays one-to-many. **Held counts sit in the node label rather than as self-loops**, so a lineage that did not move is visible without being drawn among the arrows as a substitution to itself. Node size is lineage incidence at either arm, not degree: a word fifteen models chose once should not look smaller than one three models chose once each.
+So at the level of the roster the marginal is stark — `kill` 29 → 8 as the top word, `scream` 16 → 29 — while the *routing* stays one-to-many.
+
+**A LINEAGE THAT DID NOT MOVE IS AN EDGE HERE, NOT A SELF-LOOP.** In two columns `kill` on the left and `kill` on the right are different nodes — the word at the base arm and the word at the aligned arm — so `kill → kill` (7) and `scream → scream` (13) are ordinary horizontal edges, drawn **headless** because an arrow would assert a movement the equality denies. That is what makes both columns sum to 50, which is the property a flow diagram has to have and the one-column version could not: there, a held lineage would have been a loop sitting among the arrows, readable as a substitution to itself.
+
+**AND NOTHING IS COLLAPSED.** An intermediate version swept the one-lineage flows into a counted "other" box, because thirteen right-hand boxes force the plate to a tall narrow shape. Two reasons it is gone. The singletons **are** the picture — the fan beside the one heavy edge is the finding, not clutter. And that version collapsed minor *edges* rather than minor *destinations*, which swept `cry → scream` in with them and made the aligned `scream` box read **28** where the true aligned argmax marginal is 29. A column that does not show the marginal is not a marginal, and the fix for a tall plate is a tall plate.

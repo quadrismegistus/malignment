@@ -55,8 +55,18 @@ def argmaxes(prompt):
     return eps, best
 
 
-def build(prompt):
-    """-> (edges, held, base_w, aligned_w, n_lineages, n_missing)"""
+def build(prompt, keep_held=True):
+    """-> (edges, held, base_w, aligned_w, n_lineages, n_missing)
+
+    **WITH `keep_held`, A LINEAGE THAT DID NOT MOVE IS AN EDGE.** In the
+    two-column layout `kill` on the left and `kill` on the right are DIFFERENT
+    NODES -- the word at the base arm and the word at the aligned arm -- so
+    `kill -> kill` is an ordinary horizontal edge and not a self-loop. All
+    fifty lineages then appear in the flow and the columns sum to 50, which is
+    the property a flow diagram has to have and the one-column version could
+    not. `kind_flow` draws its same-kind arrows headless for the same reason
+    and this follows it.
+    """
     eps, best = argmaxes(prompt)
     E, held = collections.Counter(), collections.Counter()
     bw_c, aw_c = collections.Counter(), collections.Counter()
@@ -71,6 +81,8 @@ def build(prompt):
         aw_c[aw] += 1
         if bw == aw:
             held[bw] += 1
+            if keep_held:
+                E[(bw, aw)] += 1
         else:
             E[(bw, aw)] += 1
     return E, held, bw_c, aw_c, n, miss
@@ -111,14 +123,80 @@ def dot(E, held, bw, aw, n):
     return "\n".join(L)
 
 
+def dot_flow(E, held, bw, aw, n, prompt):
+    """Two columns, base argmax left and aligned argmax right. -> dot source
+
+    The house flow layout (`freudian_hypothesis/kind_flow.py`): `rankdir=LR`,
+    one `rank=same` block per column, `size` as a CEILING so the plate shrinks
+    to the text block and is never blown up to it.
+
+    **NOTHING IS COLLAPSED.** An earlier version swept the one-lineage flows
+    into a counted "other" box to stop thirteen right-hand boxes forcing the
+    plate to 2.0 x 5.5 inches. Two reasons it is gone. The point of this plate
+    is the real picture at lineage grain, and the singletons ARE the picture --
+    the fan is the finding beside the one heavy edge. And the first attempt
+    collapsed minor EDGES rather than minor DESTINATIONS, which swept
+    `cry -> scream` in with them and made the aligned `scream` box read 28
+    where the true aligned argmax marginal is 29. **A column that does not
+    show the marginal is not a marginal**, and the fix for a tall plate is a
+    tall plate.
+
+    Vertical order is forced by an invisible chain: `rank=same` fixes the
+    column, not the order within it, so without the chain graphviz sorts the
+    boxes by whatever the layout finds convenient and the counts read as
+    unordered.
+    """
+    from malignment import figure as _fig
+    fam, pt = _fig.pub_font(), _fig.PUB_FONT_PT
+    mx = max(E.values())
+
+    def show(w):
+        return ("blank (%d _)" % len(w)) if set(w) == {"_"} else w
+
+    L = ['digraph linflow {', '  rankdir=LR; splines=true; overlap=false;',
+         '  size="%g,%g";' % (_fig.PUB_SIZE[0], _fig.PUB_SIZE[0] * 2.6),
+         '  bgcolor="white"; nodesep=0.10; ranksep=1.60;',
+         '  node [shape=box style="rounded" fontname="%s" fontsize=%g '
+         'color="black" fontcolor="black" margin="0.06,0.035" penwidth=0.6];'
+         % (fam, pt),
+         '  edge [fontname="%s" fontsize=%g color="#4d4d4d" penwidth=0.75 '
+         'arrowsize=0.5];' % (fam, pt * 0.8)]
+    order = {}
+    for side, counts in (("B", bw), ("A", aw)):
+        ws = sorted(counts, key=lambda x: (-counts[x], x))
+        order[side] = ws
+        L.append("  { rank=same;")
+        for w in ws:
+            L.append('  "%s_%s" [label="%s\\n(%d/%d)"];'
+                     % (side, w, show(w), counts[w], n))
+        L.append("  }")
+    #: the invisible chain that makes the column read top-to-bottom by count
+    for side in ("B", "A"):
+        for x, y in zip(order[side], order[side][1:]):
+            L.append('  "%s_%s" -> "%s_%s" [style=invis];' % (side, x, side, y))
+    for (f, t), k in sorted(E.items(), key=lambda kv: -kv[1]):
+        #: **HEADLESS WHERE THE WORD DID NOT CHANGE.** The arrow would assert
+        #: a movement the equality denies; `kind_flow` makes the same choice
+        #: for its same-kind edges.
+        L.append('  "B_%s" -> "A_%s" [penwidth=%.2f color="%s"%s label="%d"];'
+                 % (f, t, 0.5 + 3.6 * (k - 1) / max(1, mx - 1),
+                    "#1a1a1a" if k >= 3 else "#8c8c8c",
+                    ' arrowhead=none' if f == t else "", k))
+    L.append("}")
+    return "\n".join(L)
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--prompt", default=FIG2)
     ap.add_argument("--tag", default=None, help="filename tag")
+    ap.add_argument("--free", action="store_true",
+                    help="one-column force-directed layout instead of the "
+                         "two-column flow; held lineages then cannot be edges")
     a = ap.parse_args(argv)
 
-    E, held, bw, aw, n, miss = build(a.prompt)
+    E, held, bw, aw, n, miss = build(a.prompt, keep_held=not a.free)
     print("PROMPT: %r" % a.prompt)
     print("  %d endpoint lineages with both arms measured%s"
           % (n, "; %d missing" % miss if miss else ""))
@@ -134,15 +212,19 @@ def main(argv=None):
 
     tag = a.tag or ("_".join(a.prompt.lower().split()[:5])
                     .replace("'", "").replace(",", ""))
-    base = os.path.join(HERE, "figures", "lineage_graph_%s" % tag)
+    base = os.path.join(HERE, "figures", "lineage_graph_%s%s"
+                        % (tag, "_free" if a.free else "_flow"))
     os.makedirs(os.path.dirname(base), exist_ok=True)
-    open(base + ".dot", "w", encoding="utf-8").write(dot(E, held, bw, aw, n) + "\n")
+    src = (dot(E, held, bw, aw, n) if a.free
+           else dot_flow(E, held, bw, aw, n, a.prompt))
+    open(base + ".dot", "w", encoding="utf-8").write(src + "\n")
     for ext in ("png", "pdf"):
-        r = subprocess.run(["neato", "-T" + ext, "-Gdpi=300",
+        r = subprocess.run([("neato" if a.free else "dot"), "-T" + ext,
+                            "-Gdpi=300",
                             base + ".dot", "-o", base + "." + ext],
                            capture_output=True, text=True)
         if r.returncode:
-            raise SystemExit("neato failed: %s" % r.stderr[:300])
+            raise SystemExit("graphviz failed: %s" % r.stderr[:300])
         print("  wrote %s.%s" % (base, ext))
     return 0
 
