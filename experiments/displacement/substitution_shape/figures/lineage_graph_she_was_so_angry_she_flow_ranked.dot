@@ -5,15 +5,15 @@ digraph linrank {
   node [shape=box style="rounded" fontname="Arial" fontsize=9 color="black" fontcolor="black" margin="0.06,0.035" penwidth=0.6];
   edge [fontname="Arial" fontsize=7.2 color="#4d4d4d" penwidth=0.75 arrowsize=0.5];
   { rank=same;
-  "B_scream" [label="scream\n(16/50)"];
-  "B_kill" [label="kill\n(28/50)"];
+  "B_scream" [label="scream\n(16/50)" fontsize=10.9];
+  "B_kill" [label="kill\n(28/50)" fontsize=13.8];
   "B_cry" [style=invis label=""];
   "B_ZZ_ONES" [label="cry\ntell\nthrow"];
   }
   { rank=same;
-  "A_scream" [label="scream\n(29/50)"];
-  "A_kill" [label="kill\n(8/50)"];
-  "A_cry" [label="cry\n(3/50)"];
+  "A_scream" [label="scream\n(29/50)" fontsize=14.0];
+  "A_kill" [label="kill\n(8/50)" fontsize=9.1];
+  "A_cry" [label="cry\n(3/50)" fontsize=7.9];
   "A_ZZ_ONES" [label="destroy\nfight\nhit\nhurt\npunch\nrip\ntell"];
   }
   "B_scream" -> "B_kill" [style=invis];

@@ -341,8 +341,20 @@ def dot_ranked(E, held, bw, aw, n, prompt, n_roster=None):
         for w in rows:
             k = counts[w]
             if k > 1:
-                L.append('  "%s_%s" [label="%s\\n(%d/%d)"];'
-                         % (side, w, show(w), k, N))
+                #: **SIZE CARRIES THE COUNT HERE BECAUSE POSITION NO LONGER
+                #: CAN** (RH). The shared row order is by TOTAL incidence, so
+                #: within a column the boxes are not in descending order --
+                #: `scream (16/50)` sits above `kill (28/50)` on the base
+                #: side. In the unranked layout the column order said how big
+                #: a node was; here only the box can.
+                #:
+                #: Scaled against the ROSTER, not against the column's own
+                #: maximum: 29/50 and 28/50 must look alike, and they would
+                #: not if each column were normalised to its own top box.
+                #: Floored at 6 pt, the house minimum.
+                L.append('  "%s_%s" [label="%s\\n(%d/%d)" fontsize=%.1f];'
+                         % (side, w, show(w), k, N,
+                            max(6.0, pt * (0.80 + 1.30 * k / N))))
             else:
                 #: the slot is kept even when this column has nothing in it,
                 #: or the rows below would ride up and the alignment would be
@@ -474,6 +486,16 @@ def main(argv=None):
             "aligned box is drawn, and its single base lineage sits in the "
             "base collapsed box with the others. Where a column has nothing "
             "to show on a row the slot is held empty rather than closed up.",
+            "",
+            "BOX SIZE CARRIES THE COUNT IN THIS LAYOUT, because position no "
+            "longer can: the shared row order is by total incidence, so "
+            "within a column the boxes are not in descending order. Size is "
+            "scaled against the roster of %d rather than against each "
+            "column's own largest box, so that 29 and 28 look alike -- "
+            "normalising per column would have made the base `kill` and the "
+            "aligned `scream` the same size as each other and as every other "
+            "column maximum, which is the one comparison this layout exists "
+            "to make." % (n_roster or n),
         ]
     if a.collapse_singletons or a.ranked:
         cap[-1:-1] = [
