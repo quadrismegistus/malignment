@@ -91,3 +91,33 @@ The multi-label pass section C called for, run. `axis_survey.py` on `jev-1.13.0`
 | **PC3** | `deliberation_vs_decisive_act`, `creation_vs_destruction`, `compliance_vs_resistance` | `force_and_abruptness`, `evaluative_polarity`, `bluntness_vs_euphemism` |
 
 **And the sparsity is real rather than structural.** Only **27.0%** of the 85,272 cells exceed 0.35 from centre. The rater was asked about all 38 and declined on three-quarters — zeros from a reader that considered the question, which is what the partition could never supply and what makes the covariance meaningful.
+
+## E — two vocabularies, and the one dimension they share
+
+**CORRECTION TO SECTION D's READING.** The loadings there were reported against the raw signed columns, but each axis was *named* from its own mean direction — and 18 of 38 axes have a negative mean. So for those the named arrow corresponded to negative values and for the other 20 to positive ones, and the ends of each component were half-right. Variance is unaffected (a column flip is a reflection); the interpretation was not. Every column is now oriented so **positive = more of the named movement**. The claim "pure charge-drain, isolated on PC3" was an artefact of exactly this and is withdrawn.
+
+Corrected, and with the 28-axis vocabulary run as well (2,244 × 28 = 62,832 judgements, 78 s, $0.74):
+
+| | PC1 | PC2 | PC3 | PC4 |
+|---|---|---|---|---|
+| 38 axes | 21.6% | 12.4% | 11.5% | 7.0% |
+| 28 axes | 22.8% | 12.6% | 11.3% | 7.2% |
+
+**The amount of structure replicates almost exactly.** Two vocabularies built by different readers under different prompts, of different sizes, give the same eigenvalue spectrum. Dimensionality is a property of the corpus.
+
+**The content of the structure does not.** Canonical correlations between the two four-dimensional score subspaces: **0.80, 0.08, 0.02, 0.01.** One shared direction and nothing else. Regressing seed-1's components on all four of seed-0's: PC1 R²=0.34, **PC2 R²=0.10, PC3 R²=0.13**. So the de-agenting-versus-softening reading of PC2, and whatever PC3 is, are properties of a vocabulary, not of the corpus, and must not be cited.
+
+Two things do replicate, and they are different from each other:
+
+**Salience, r = 0.86.** How much a relation separates on anything at all is a robust property of the relation. But it is *not* the shared factor direction (correlation with the first canonical variate: +0.14 and −0.01).
+
+**One substantive dimension, canonical r = 0.80 — and it is the same-field reshuffle.** The strongest loader at one pole in each vocabulary is that vocabulary's name for it:
+
+| | 38-axis | 28-axis |
+|---|---|---|
+| **negative pole** | `one member of a field → another` **−0.83**, `one word class → another` −0.74, `starting a new event → continuing this one` −0.73 | `one member of the referent class → another` **−0.70**, `the event continued → a separate one` −0.62, `bounded part → encompassing whole` −0.53 |
+| **positive pole** | `a bounded place → an open extent` +0.52, `an intimate part → a whole region` +0.48, `what it is → how it seems` +0.47 | `onset → completion` +0.55, `stands in the slot → needs another form` +0.54, `felt emotion → cognitive stance` +0.46 |
+
+**The single replicable dimension of the base → aligned difference is whether the movement leaves its field at all.** Lateral substitution within one class at one pole; going somewhere else at the other. That is `referent_substitution` / `co_member_of_same_field` — the axis that came back 41-unclear of 44 in the assignment run because both word groups sat on the same pole, and the operation `TAXONOMY.md` already names *same-field reshuffle*.
+
+Two independent vocabularies, a graded dense matrix, and a canonical correlation analysis recover the distinction that folder's ten meta-relations arrived at by hand.

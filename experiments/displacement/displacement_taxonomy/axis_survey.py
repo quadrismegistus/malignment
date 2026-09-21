@@ -261,7 +261,12 @@ def main(argv=None):
               % {k: round(v / n) for k, v in tok.items()})
         print("  projected for 2,244 English relations: %s"
               % {k: round(v / n * 2244) for k, v in tok.items()})
-    out = os.path.join(HERE, "results", "axis_survey_en.jsonl")
+    #: **THE SEED IS IN THE FILENAME.** The two vocabularies are 28 and 38
+    #: axes over the same relations, and a shared output path would have the
+    #: second run silently overwrite the first -- the defect that put the wrong
+    #: kind_flow render in Dropbox earlier today.
+    out = os.path.join(HERE, "results",
+                       "axis_survey_en_seed%d.jsonl" % a.seed)
     with open(out, "w", encoding="utf-8") as fh:
         for r in rows:
             fh.write(json.dumps(r, ensure_ascii=False) + "\n")
