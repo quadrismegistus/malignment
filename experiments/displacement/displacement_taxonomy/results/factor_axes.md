@@ -199,3 +199,34 @@ Euphemism is strongly dose-dependent, so it is a response to charge rather than 
 paper-claude's call, recorded so it is not relitigated. The article is at ~8,350 of 9,500 words with V–VIII undrafted and four figures placed; a figure about method cannot be paid for. `(b)` and `(d)` would read as noise at 4.8 inches, and `(c)` invites the PC1 × PC2 misreading it exists to avoid, since readers assume both biplot axes are real.
 
 **`(a)` is kept for the book's methods chapter** and its spec is recorded here rather than rebuilt: two scatters, each relation's shared-dimension score under the 38-axis vocabulary against the 28-axis one (r=0.80, a diagonal cloud), beside PC2 against PC2 (r≈0.1, a round blob), 2,244 points each. A negative control drawn as a panel.
+
+## H — the floor control, and what it overturned
+
+paper-claude's objection to G: both axes have a floor at low lift. Where the base's words carry no more charge than the setup there is nothing blunt to euphemize and nothing forceful to soften, so a rise from +0.004 to +0.546 could be *the axis acquiring room* rather than alignment responding to charge. "The softening of force does not exist at low lift" and "at low lift there is no force to soften" are the same numbers.
+
+**SALIENCE IS NEARLY FLAT ON LIFT.** Mean absolute movement over all 38 axes, same 2,225 relations:
+
+> **0.252 → 0.254 → 0.268, slope +0.016, r = +0.117.**
+
+**Reference axes with no charge floor, against the two under test:**
+
+| | bottom → middle → top | slope |
+|---|---|---|
+| content word → connective | −0.001 → +0.048 → +0.097 | +0.038 |
+| new event → continuing | +0.161 → +0.094 → +0.025 | −0.064 |
+| **plain naming → euphemism** | +0.134 → +0.221 → **+0.448** | **+0.216** |
+| **forceful → gentle** | +0.002 → +0.155 → **+0.546** | **+0.324** |
+
+Five to eight times the reference rate, and the second reference runs the other way. **Partialling salience out changes almost nothing** — euphemism +0.216 → +0.198, force +0.324 → +0.306; normalised by each relation's own total movement, euphemism runs 0.536 → 1.617 and force 0.043 → 1.863.
+
+**THE TWO AXES ARE NOT EQUALLY CLEARED, AND THE DIFFERENCE IS THEIR BOTTOM TERTILE.**
+
+Euphemism starts at **+0.134** — well off the floor. It has room at low lift, uses some of it, and then triples. The floor argument does not touch it.
+
+Force starts at **+0.002**, which is the state the objection describes. The salience control shows the rise is not general mobility, but it cannot separate "alignment softens force only where charge is present" from "at low lift there is no force to soften" — and for this axis those may be one sentence rather than two hypotheses. **So "the softening of force does not exist at low lift" is withdrawn as over-stated**; the defensible form is conditional: where there is force, its softening scales with charge; where there is none, the axis is silent.
+
+### What the control overturned
+
+**ALIGNMENT DOES NOT DO MORE TO CHARGED PAIRS. IT DOES DIFFERENT THINGS TO THEM.** Total displacement is roughly constant across the lift range — salience 0.252 to 0.268 — while individual axes move steeply and in opposite directions. The composition changes and the magnitude does not.
+
+This was assumed the other way round throughout the evening's dose work, and by the dose framing generally: `--dose` tables report which axes *emerge* at high lift, and the natural reading of "emerge" is that more happens. More does not happen. Something else happens.
