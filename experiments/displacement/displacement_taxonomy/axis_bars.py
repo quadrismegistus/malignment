@@ -67,6 +67,46 @@ def load(seed=1):
     return M, L, V, ax
 
 
+def exemplars(seed, M, ax, mu, top=25, k=2):
+    """Two words a pole, from the relations that separate most cleanly on it.
+
+    Taken from the top `top` relations by ORIENTED value on that axis, so the
+    left-pole words are base words from pairs the rater placed firmly at the
+    left end and the right-pole words are their aligned counterparts. Frequency
+    over the head of each list, which is agreement rank.
+
+    **AN AXIS WITH NO DIRECTION HAS NO EXEMPLARS WORTH PRINTING.** Where the
+    marginal mean is near zero the orientation is a coin toss, so "the top 25"
+    is the top of an arbitrary end -- `speech_vs_physical_act` yields
+    `said, told` against `left, now`, which reads as a finding and is the
+    low-lift tertile talking. Such rows get no words.
+    """
+    import collections, json
+    from relation_group_report import load as _l, dose_values
+    rel, _v, _g, _b = _l(seed)
+    lift = dose_values(rel, "shown_lift")
+    rows = [json.loads(x) for x in
+            open(os.path.join(HERE, "results",
+                              "axis_survey_en_seed%d.jsonl" % seed),
+                 encoding="utf-8")]
+    rows = [r for r in rows if rel[r["id"]]["frame"] in lift]
+    import numpy as np
+    out = {}
+    for j, a in enumerate(ax):
+        if abs(mu[j]) < 0.03:
+            out[a] = (None, None)
+            continue
+        v = M[:, j] * (1 if mu[j] >= 0 else -1)
+        idx = np.argsort(-v)[:top]
+        b = collections.Counter(w for i in idx
+                                for w in rel[rows[i]["id"]]["base"][:4])
+        g = collections.Counter(w for i in idx
+                                for w in rel[rows[i]["id"]]["aligned"][:4])
+        out[a] = (", ".join(w for w, _ in b.most_common(k)),
+                  ", ".join(w for w, _ in g.most_common(k)))
+    return out
+
+
 def short(s, n=21):
     """Shorten a pole description to something that fits the label column.
 
@@ -99,6 +139,9 @@ def main(argv=None):
     ap.add_argument("--seed", type=int, default=1)
     ap.add_argument("--dose", action="store_true")
     ap.add_argument("--top", type=int, default=0, help="keep only the N largest")
+    ap.add_argument("--examples", action="store_true",
+                    help="a word pair under each pole, from the relations that "
+                         "separate most cleanly on that axis")
     ap.add_argument("--raw-poles", action="store_true",
                     help="keep the vocabulary's arbitrary pole order instead "
                          "of putting the base end on the left")
@@ -201,7 +244,8 @@ def main(argv=None):
     #: version and the full one is the appendix.
     y = np.arange(n)
     if a.dots:
-        fig, axx = plt.subplots(figsize=(PUB_SIZE[0], 0.165 * n + 1.05),
+        fig, axx = plt.subplots(figsize=(PUB_SIZE[0],
+                                         (0.25 if a.examples else 0.165) * n + 1.05),
                                 layout="constrained")
         axm = None
         #: **THE SEGMENT IS THE POINT, NOT THE MARKERS.** Three markers a row
@@ -245,7 +289,7 @@ def main(argv=None):
         axm.axvline(0, color=PUB_INK, linewidth=PUB_RULE_PT, zorder=4)
         axm.set_title("all frames", fontsize=PUB_FONT_PT - 1,
                       fontfamily=pub_font())
-        axm.set_xlabel("where alignment\nmoves the sentence",
+        axm.set_xlabel("Where alignment\nmoves the sentence",
                        fontsize=PUB_FONT_PT - 1.5, fontfamily=pub_font())
         for sp in ("top", "right", "left"):
             axm.spines[sp].set_visible(False)
@@ -285,6 +329,11 @@ def main(argv=None):
     from axis_poles import POLES
     pairs = [(POLES[k][1], POLES[k][0]) if f < 0 else POLES[k]
              for k, f in zip(ax, flip_ax)]
+    if a.examples:
+        ex = exemplars(a.seed, M, ax, mu)
+        pairs = [(("%s\n(%s)" % (p[0], ex[k][0])) if ex[k][0] else p[0],
+                  ("%s\n(%s)" % (p[1], ex[k][1])) if ex[k][1] else p[1])
+                 for p, k in zip(pairs, ax)]
     (axm or axx).set_yticklabels([pairs[i][0] for i in o] if a.osgood else
                                  ["%s  <->  %s" % (short(V[i]["pole_x"]),
                                                    short(V[i]["pole_y"]))
@@ -317,13 +366,21 @@ def main(argv=None):
     #: reader to ask what the aligned words scored. There is no separate
     #: aligned score; there is one displacement with a sign.
     axx.set_xlabel(("lowest vs highest\nthird of lift" if a.facet else
-                    "where alignment moves the sentence\n"
-                    "toward the left pole  <<  0  >>  toward the right pole"),
+                    "Where alignment moves the sentence\n"
+                    "Toward the left pole  <<  0  >>  Toward the right pole"),
                    fontsize=PUB_FONT_PT - (1.5 if a.facet else 1),
                    fontfamily=pub_font())
     if a.dots:
-        axx.legend(fontsize=PUB_FONT_PT - 2, frameon=False, handlelength=0.8,
-                   loc="lower right", scatterpoints=1, borderpad=0.2)
+        #: **plotnine's LEGEND LOOK, DRAWN BY MATPLOTLIB.** This producer is
+        #: matplotlib -- plotnine cannot put a second labelled axis on the
+        #: right of a discrete scale, which is what the Osgood layout needs --
+        #: so the legend is matplotlib's with plotnine's conventions: below the
+        #: panel, horizontal, no frame, no title. Moving it out of the panel
+        #: also frees the lower-right corner, where it had been sitting on the
+        #: two longest segments in the figure.
+        fig.legend(fontsize=PUB_FONT_PT - 2, frameon=False, handlelength=0.9,
+                   loc="outside lower center", ncol=3, scatterpoints=1,
+                   columnspacing=1.6, handletextpad=0.35)
     elif a.dose:
         (fig if a.facet else axx).legend(handles=[
             plt.Rectangle((0, 0), 1, 1, facecolor="white", edgecolor=PUB_MID,
@@ -346,10 +403,11 @@ def main(argv=None):
     if not (a.facet or a.dots):
         fig.tight_layout(pad=0.4)
     out = a.out or os.path.join(HERE, "figures",
-                                "axis_bars%s%s%s%s%s.png"
+                                "axis_bars%s%s%s%s%s%s.png"
                                 % ("_dose" if a.dose else "",
                                    "_dots" if a.dots else "",
                                    "_osgood" if a.osgood else "",
+                                   "_ex" if a.examples else "",
                                    "_facet" if a.facet else "",
                                    "_sig" if a.sig else ""))
     os.makedirs(os.path.dirname(out), exist_ok=True)
