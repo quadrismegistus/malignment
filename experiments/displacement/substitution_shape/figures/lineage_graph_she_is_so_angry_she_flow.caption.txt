@@ -1,0 +1,9 @@
+One prompt, one edge per lineage. 'She is so angry she wants to'
+
+Each of the 50 endpoint lineages in `roster.endpoints()` contributes exactly one edge, from the word its own BASE arm ranks first at the blank to the word its own ALIGNED arm ranks first. Nothing is averaged before the edge is drawn, so an edge of weight 14 is 14 separately trained models making that move.
+
+48 of the 50 are drawn. 2 are excluded because the first-ranked word at one arm or the other is not a word -- the blank-template completions `____` and `________`, which are a real result and are counted elsewhere in this folder, but are not boxes in a flow of words. A lineage excluded on one side is excluded on both, so the two columns still balance against each other -- each sums to 48 -- while the denominator on every label stays 50, the roster. **A reader who adds the boxes will therefore get 48 and not 50**, and the difference is exactly these 2.
+
+Counts of one are not printed: a box reading (1/50) and an edge reading 1 spend a number on what the single thin line already says. Every edge is headed, including the 15 that begin and end on the same word: the arrow marks the passage from the base arm to the aligned arm, which happened to all 48 lineages, and not a change of word.
+
+Pass 1 only (topup=0): the store holds two passes the campaign's rule forbids merging.

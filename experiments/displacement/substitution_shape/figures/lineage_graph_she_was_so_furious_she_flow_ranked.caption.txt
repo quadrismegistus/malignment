@@ -1,0 +1,17 @@
+One prompt, one edge per lineage. 'She was so furious she wanted to'
+
+Each of the 50 endpoint lineages in `roster.endpoints()` contributes exactly one edge, from the word its own BASE arm ranks first at the blank to the word its own ALIGNED arm ranks first. Nothing is averaged before the edge is drawn, so an edge of weight 20 is 20 separately trained models making that move.
+
+50 of the 50 are drawn. 0 are excluded because the first-ranked word at one arm or the other is not a word -- the blank-template completions `____` and `________`, which are a real result and are counted elsewhere in this folder, but are not boxes in a flow of words. A lineage excluded on one side is excluded on both, so the two columns still balance against each other -- each sums to 50 -- while the denominator on every label stays 50, the roster. **A reader who adds the boxes will therefore get 50 and not 50**, and the difference is exactly these 0.
+
+Counts of one are not printed: a box reading (1/50) and an edge reading 1 spend a number on what the single thin line already says. Every edge is headed, including the 28 that begin and end on the same word: the arrow marks the passage from the base arm to the aligned arm, which happened to all 50 lineages, and not a change of word.
+
+
+BOTH COLUMNS SHARE ONE ROW ORDER, keyed on a word's total incidence across the two arms, so a word sits at the same height on both sides and the eye does not have to re-find it. `scream` is 16 in the base column and 29 in the aligned, 45 together, so it is the top row on both; `kill` is 28 and 8, so it is the second on both -- which is why the left column is NOT in its own descending order.
+
+A word earns a row if it clears one lineage in EITHER column. `cry` is 3 aligned and 1 in the base, so it has a row, its aligned box is drawn, and its single base lineage sits in the base collapsed box with the others. Where a column has nothing to show on a row the slot is held empty rather than closed up.
+
+BOX SIZE CARRIES THE COUNT IN THIS LAYOUT, because position no longer can: the shared row order is by total incidence, so within a column the boxes are not in descending order. Size is scaled against the roster of 50 rather than against each column's own largest box, so that 29 and 28 look alike -- normalising per column would have made the base `kill` and the aligned `scream` the same size as each other and as every other column maximum, which is the one comparison this layout exists to make.
+
+THE ONE-LINEAGE BOXES ARE STACKED INTO ONE PER SIDE, listing every word. Nothing is hidden behind a count and no lineage is dropped: the words are all there, one per line, and each is one lineage, so the list is its own tally. What the stacking does cost is WHICH singleton came from WHICH source -- those edges merge, so an arrow into the stacked box says only that so many lineages went somewhere in it. The uncollapsed version, drawn without a suffix, keeps that routing. The collapsed box is the LAST row in both columns whatever it holds: it is the residue, not a rank, and sorting it by its own size would read as agreement among lineages that agreed on nothing.
+Pass 1 only (topup=0): the store holds two passes the campaign's rule forbids merging.
