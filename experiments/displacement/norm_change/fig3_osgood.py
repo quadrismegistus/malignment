@@ -85,8 +85,25 @@ def check_picks():
     return len(allw)
 
 
-def rows():
-    """-> [(scale, square, low, high, sd)] in SD units, ordered by square."""
+def rows(orient=True):
+    """-> [(scale, square, low, high, sd, flipped)] in SD units.
+
+    **`orient=True` PUTS THE ALIGNED SIDE ON THE RIGHT OF EVERY ROW** (RH), by
+    flipping any scale whose median change is negative and swapping its pole
+    names and pole words with it. The left pole is then where the base sits and
+    the right is where alignment takes it, on all fourteen rows.
+
+    **AND IT CHANGES WHAT THE AXIS MEANS.** Unoriented, a position is "which
+    way did this scale move", and the side of every marker is a result.
+    Oriented, the SQUARE is positive by construction -- that is the definition
+    of the row -- and only its LENGTH is a result. The triangles keep both:
+    a triangle left of zero means that lift band moved the scale the OTHER WAY
+    from the corpus as a whole, which is a finding and the only thing on the
+    plate whose side still carries information.
+
+    `orient=False` restores paper-claude's specification, under which every
+    marker's side is a result and no row is flipped.
+    """
     byl = {s["scale"]: s for s in json.load(
         open(os.path.join(HERE, "results", "norms_by_lift_en.json")))["scales"]}
     ref = {}
@@ -99,14 +116,17 @@ def rows():
         s, g = byl[sc], ref[sc]
         sd = st.pstdev(list(g["per_lineage"].values()))
         b = {x["band"]: x for x in s["bands"]}
-        out.append((sc, g["median"] / sd,
-                    b["low"]["median"] / sd, b["high"]["median"] / sd, sd))
-    #: **DESCENDING, BECAUSE MATPLOTLIB'S y GROWS UPWARD.** Sorted ascending,
-    #: the most negative row lands at y=0 and therefore at the BOTTOM -- the
-    #: opposite of "most negative at top", and the kind of inversion that looks
-    #: deliberate on the plate. Row 0 is drawn lowest, so the top row must be
-    #: last in the list.
-    out.sort(key=lambda r: -r[1])
+        sq, lo, hi = (g["median"] / sd, b["low"]["median"] / sd,
+                      b["high"]["median"] / sd)
+        f = orient and sq < 0
+        if f:
+            sq, lo, hi = -sq, -lo, -hi
+        out.append((sc, sq, lo, hi, sd, f))
+    #: **ASCENDING, BECAUSE MATPLOTLIB'S y GROWS UPWARD.** Row 0 is drawn
+    #: lowest, so the row that should sit at the top must come last. Oriented,
+    #: every square is positive and the ordering is by how far alignment moves
+    #: the scale, largest at the top.
+    out.sort(key=lambda r: r[1])
     return out
 
 
@@ -135,11 +155,15 @@ def main():
     matplotlib.rcParams["axes.unicode_minus"] = False
 
     n_words = check_picks()
-    rs = rows()
+    rs = rows(orient=not ("--native" in sys.argv))
     n = len(rs)
     fr = v6_frames()
 
+    flipped = {r[0]: r[5] for r in rs}
+
     def lab(sc, side):
+        if flipped[sc]:
+            side = 1 - side
         name = POLES[sc][side]
         ws = PICKS[sc][side]
         if sc.startswith("v6:"):
@@ -185,8 +209,12 @@ def main():
     ax.spines["bottom"].set_linewidth(PUB_RULE_PT)
     ax.grid(axis="x", color=PUB_GRAY, linewidth=PUB_RULE_PT * 0.6, zorder=0)
     ax.set_axisbelow(True)
-    ax.set_xlabel("Median change from base to aligned, in SDs of the scale\n"
-                  "Toward the left pole  <<  0  >>  Toward the right pole",
+    native = "--native" in sys.argv
+    ax.set_xlabel(("Median change from base to aligned, in SDs of the scale\n"
+                   "Toward the left pole  <<  0  >>  Toward the right pole")
+                  if native else
+                  ("How far alignment moves the scale, in SDs\n"
+                   "Base pole at the left, aligned pole at the right"),
                   fontsize=PUB_FONT_PT - 1, fontfamily=pub_font())
     fig.legend(prop=FontProperties(family=pub_font(), size=PUB_FONT_PT - 2),
                frameon=False, handlelength=0.9, loc="outside lower center",
@@ -202,7 +230,8 @@ def main():
         print("    %-14s %4.1f pt x%-3d%s" % (fam, pt, k,
                                               "  <-- BELOW 6" if pt < 6 else ""))
 
-    out = os.path.join(HERE, "figures", "fig3_norms_osgood_en.png")
+    out = os.path.join(HERE, "figures", "fig3_norms_osgood_en%s.png"
+                       % ("_native" if native else ""))
     os.makedirs(os.path.dirname(out), exist_ok=True)
     print("  wrote %s" % save(fig, out))
 
@@ -222,10 +251,17 @@ def main():
         "%+.3f and %+.3f over %s gated prompt-lineage rows."
         % (meta["cuts"][0], meta["cuts"][1], format(meta["rows_gated"], ",")),
         "",
-        "Scales keep their native direction, low pole left and high pole "
-        "right, so the side of every marker is a result. Rows are ordered by "
-        "the square, most negative at the top, so the figure reads from what "
-        "alignment removes down to what it adds.",
+        ("Scales keep their native direction, low pole left and high pole "
+         "right, so the side of every marker is a result. Rows are ordered by "
+         "the square, most negative at the top."
+         if native else
+         "Every scale is oriented so the pole alignment moves TOWARD is on "
+         "the right; seven of the fourteen are therefore drawn with their "
+         "high end on the left. The square is positive by construction and "
+         "only its length is a result. A TRIANGLE LEFT OF ZERO is the one "
+         "thing on the plate whose side still carries information: that lift "
+         "band moved the scale the opposite way from the corpus as a whole. "
+         "Rows are ordered by the square, largest movement at the top."),
         "",
         "Pole words illustrate each end among the words alignment moved: a "
         "word appears only if it moved in at least 50 prompt-lineage cells. "
