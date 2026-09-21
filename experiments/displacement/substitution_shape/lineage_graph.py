@@ -105,7 +105,7 @@ def build(prompt, keep_held=True, words_only=True):
                 E[(bw, aw)] += 1
         else:
             E[(bw, aw)] += 1
-    return E, held, bw_c, aw_c, n, miss, nonword
+    return E, held, bw_c, aw_c, n, miss, nonword, len(eps)
 
 
 def dot(E, held, bw, aw, n):
@@ -143,7 +143,7 @@ def dot(E, held, bw, aw, n):
     return "\n".join(L)
 
 
-def dot_flow(E, held, bw, aw, n, prompt):
+def dot_flow(E, held, bw, aw, n, prompt, n_roster=None):
     """Two columns, base argmax left and aligned argmax right. -> dot source
 
     The house flow layout (`freudian_hypothesis/kind_flow.py`): `rankdir=LR`,
@@ -160,6 +160,18 @@ def dot_flow(E, held, bw, aw, n, prompt):
     where the true aligned argmax marginal is 29. **A column that does not
     show the marginal is not a marginal**, and the fix for a tall plate is a
     tall plate.
+
+    **THE DENOMINATOR IS THE ROSTER, NOT THE DRAWN SET** (RH). Labels read
+    `(k/50)` even though 47 lineages are drawn, because 50 is the population
+    the reader is being told about and rebasing to 47 would quietly redefine
+    it mid-figure. The three excluded lineages are named in the caption file
+    instead, where an exclusion belongs.
+
+    **AND A COUNT OF ONE IS NOT PRINTED.** A box reading `(1/50)` and an edge
+    reading `1` spend a number to say "this is the smallest thing here", which
+    the single thin line already says. Only counts above one are shown, so
+    every number on the plate is one a reader would otherwise have to
+    estimate.
 
     Vertical order is forced by an invisible chain: `rank=same` fixes the
     column, not the order within it, so without the chain graphviz sorts the
@@ -187,8 +199,10 @@ def dot_flow(E, held, bw, aw, n, prompt):
         order[side] = ws
         L.append("  { rank=same;")
         for w in ws:
-            L.append('  "%s_%s" [label="%s\\n(%d/%d)"];'
-                     % (side, w, show(w), counts[w], n))
+            k = counts[w]
+            L.append('  "%s_%s" [label="%s%s"];'
+                     % (side, w, show(w),
+                        "\\n(%d/%d)" % (k, n_roster or n) if k > 1 else ""))
         L.append("  }")
     #: the invisible chain that makes the column read top-to-bottom by count
     for side in ("B", "A"):
@@ -198,10 +212,11 @@ def dot_flow(E, held, bw, aw, n, prompt):
         #: **HEADLESS WHERE THE WORD DID NOT CHANGE.** The arrow would assert
         #: a movement the equality denies; `kind_flow` makes the same choice
         #: for its same-kind edges.
-        L.append('  "B_%s" -> "A_%s" [penwidth=%.2f color="%s"%s label="%d"];'
+        L.append('  "B_%s" -> "A_%s" [penwidth=%.2f color="%s"%s%s];'
                  % (f, t, 0.5 + 3.6 * (k - 1) / max(1, mx - 1),
                     "#1a1a1a" if k >= 3 else "#8c8c8c",
-                    ' arrowhead=none' if f == t else "", k))
+                    ' arrowhead=none' if f == t else "",
+                    ' label="%d"' % k if k > 1 else ""))
     L.append("}")
     return "\n".join(L)
 
@@ -218,7 +233,7 @@ def main(argv=None):
                          "two-column flow; held lineages then cannot be edges")
     a = ap.parse_args(argv)
 
-    E, held, bw, aw, n, miss, nonword = build(
+    E, held, bw, aw, n, miss, nonword, n_roster = build(
         a.prompt, keep_held=not a.free, words_only=not a.keep_nonwords)
     print("PROMPT: %r" % a.prompt)
     print("  %d endpoint lineages drawn%s%s"
@@ -245,7 +260,7 @@ def main(argv=None):
                         % (tag, "_free" if a.free else "_flow"))
     os.makedirs(os.path.dirname(base), exist_ok=True)
     src = (dot(E, held, bw, aw, n) if a.free
-           else dot_flow(E, held, bw, aw, n, a.prompt))
+           else dot_flow(E, held, bw, aw, n, a.prompt, n_roster))
     open(base + ".dot", "w", encoding="utf-8").write(src + "\n")
     for ext in ("png", "pdf"):
         r = subprocess.run([("neato" if a.free else "dot"), "-T" + ext,
@@ -255,6 +270,40 @@ def main(argv=None):
         if r.returncode:
             raise SystemExit("graphviz failed: %s" % r.stderr[:300])
         print("  wrote %s.%s" % (base, ext))
+
+    cap = [
+        "One prompt, one edge per lineage. %r" % a.prompt,
+        "",
+        "Each of the %d endpoint lineages in `roster.endpoints()` contributes "
+        "exactly one edge, from the word its own BASE arm ranks first at the "
+        "blank to the word its own ALIGNED arm ranks first. Nothing is "
+        "averaged before the edge is drawn, so an edge of weight %d is %d "
+        "separately trained models making that move."
+        % (n_roster, max(E.values()), max(E.values())),
+        "",
+        "%d of the %d are drawn. %d are excluded because the first-ranked "
+        "word at one arm or the other is not a word -- the blank-template "
+        "completions `____` and `________`, which are a real result and are "
+        "counted elsewhere in this folder, but are not boxes in a flow of "
+        "words. A lineage excluded on one side is excluded on both, so the "
+        "two columns still balance against each other -- each sums to %d -- "
+        "while the denominator on every label stays %d, the roster. **A "
+        "reader who adds the boxes will therefore get %d and not %d**, and "
+        "the difference is exactly these %d."
+        % (n, n_roster, nonword, n, n_roster, n, n_roster, nonword),
+        "",
+        "Counts of one are not printed: a box reading (1/%d) and an edge "
+        "reading 1 spend a number on what the single thin line already says. "
+        "Edges are headless where the word did not change -- %d lineages, "
+        "which moved nothing and whose arrow would assert a movement the "
+        "equality denies." % (n_roster, sum(held.values())),
+        "",
+        "Pass 1 only (topup=0): the store holds two passes the campaign's "
+        "rule forbids merging.",
+    ]
+    cp = base + ".caption.txt"
+    open(cp, "w", encoding="utf-8").write("\n".join(cap) + "\n")
+    print("  wrote %s" % cp)
     return 0
 
 
