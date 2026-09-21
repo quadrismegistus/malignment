@@ -22,13 +22,13 @@ digraph linflow {
   "A_cry" -> "A_ZZ_ONES" [style=invis];
   "B_kill" -> "A_scream" [style=invis weight=100];
   "B_kill" -> "A_scream" [penwidth=4.10 color="#1a1a1a" label="15"];
-  "B_scream" -> "A_scream" [penwidth=3.59 color="#1a1a1a" arrowhead=none label="13"];
-  "B_kill" -> "A_kill" [penwidth=2.04 color="#1a1a1a" arrowhead=none label="7"];
+  "B_scream" -> "A_scream" [penwidth=3.59 color="#1a1a1a" label="13"];
+  "B_kill" -> "A_kill" [penwidth=2.04 color="#1a1a1a" label="7"];
   "B_kill" -> "A_ZZ_ONES" [penwidth=1.27 color="#1a1a1a" label="4"];
   "B_kill" -> "A_cry" [penwidth=0.76 color="#8c8c8c" label="2"];
   "B_scream" -> "A_ZZ_ONES" [penwidth=0.76 color="#8c8c8c" label="2"];
   "B_ZZ_ONES" -> "A_kill" [penwidth=0.50 color="#8c8c8c"];
   "B_scream" -> "A_cry" [penwidth=0.50 color="#8c8c8c"];
-  "B_ZZ_ONES" -> "A_ZZ_ONES" [penwidth=0.50 color="#8c8c8c" arrowhead=none];
+  "B_ZZ_ONES" -> "A_ZZ_ONES" [penwidth=0.50 color="#8c8c8c"];
   "B_ZZ_ONES" -> "A_scream" [penwidth=0.50 color="#8c8c8c"];
 }

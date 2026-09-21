@@ -266,13 +266,20 @@ def dot_flow(E, held, bw, aw, n, prompt, n_roster=None,
         L.append('  "B_%s" -> "A_%s" [style=invis weight=100];'
                  % (order["B"][0], order["A"][0]))
     for (f, t), k in sorted(E.items(), key=lambda kv: -kv[1]):
-        #: **HEADLESS WHERE THE WORD DID NOT CHANGE.** The arrow would assert
-        #: a movement the equality denies; `kind_flow` makes the same choice
-        #: for its same-kind edges.
-        L.append('  "B_%s" -> "A_%s" [penwidth=%.2f color="%s"%s%s];'
+        #: **HEADED EVEN WHERE THE WORD IS THE SAME** (RH), reversing an
+        #: earlier choice here. The argument for headless was that an arrow
+        #: asserts a movement the equality denies. That was wrong about what
+        #: the arrow points at: in this layout EVERY edge runs from a base arm
+        #: to an aligned arm, and that transition happened for all fifty
+        #: lineages whether or not the word changed. A `kill -> kill` lineage
+        #: did pass through alignment and came out saying `kill`; the head
+        #: marks the arm transition, not a change of word. Dropping the head
+        #: also made the two heaviest facts on the plate -- 13 lineages
+        #: holding `scream`, 7 holding `kill` -- read as a different KIND of
+        #: thing from the 15 that moved, when they are the same measurement.
+        L.append('  "B_%s" -> "A_%s" [penwidth=%.2f color="%s"%s];'
                  % (f, t, 0.5 + 3.6 * (k - 1) / max(1, mx - 1),
                     "#1a1a1a" if k >= 3 else "#8c8c8c",
-                    ' arrowhead=none' if f == t else "",
                     ' label="%d"' % k if k > 1 else ""))
     L.append("}")
     return "\n".join(L)
@@ -370,10 +377,20 @@ def dot_ranked(E, held, bw, aw, n, prompt, n_roster=None):
     for w in seq:
         L.append('  "B_%s" -> "A_%s" [style=invis weight=100];' % (w, w))
     for (f, t), k in sorted(E.items(), key=lambda kv: -kv[1]):
-        L.append('  "B_%s" -> "A_%s" [penwidth=%.2f color="%s"%s%s];'
+        #: **HEADED EVEN WHERE THE WORD IS THE SAME** (RH), reversing an
+        #: earlier choice here. The argument for headless was that an arrow
+        #: asserts a movement the equality denies. That was wrong about what
+        #: the arrow points at: in this layout EVERY edge runs from a base arm
+        #: to an aligned arm, and that transition happened for all fifty
+        #: lineages whether or not the word changed. A `kill -> kill` lineage
+        #: did pass through alignment and came out saying `kill`; the head
+        #: marks the arm transition, not a change of word. Dropping the head
+        #: also made the two heaviest facts on the plate -- 13 lineages
+        #: holding `scream`, 7 holding `kill` -- read as a different KIND of
+        #: thing from the 15 that moved, when they are the same measurement.
+        L.append('  "B_%s" -> "A_%s" [penwidth=%.2f color="%s"%s];'
                  % (f, t, 0.5 + 3.6 * (k - 1) / max(1, mx - 1),
                     "#1a1a1a" if k >= 3 else "#8c8c8c",
-                    ' arrowhead=none' if f == t else "",
                     ' label="%d"' % k if k > 1 else ""))
     L.append("}")
     return "\n".join(L)
@@ -462,10 +479,11 @@ def main(argv=None):
         % (n, n_roster, nonword, n, n_roster, n, n_roster, nonword),
         "",
         "Counts of one are not printed: a box reading (1/%d) and an edge "
-        "reading 1 spend a number on what the single thin line already says. "
-        "Edges are headless where the word did not change -- %d lineages, "
-        "which moved nothing and whose arrow would assert a movement the "
-        "equality denies." % (n_roster, sum(held.values())),
+        "reading 1 spend a number on what the single thin line already "
+        "says. Every edge is headed, including the %d that begin and end on "
+        "the same word: the arrow marks the passage from the base arm to the "
+        "aligned arm, which happened to all %d lineages, and not a change of "
+        "word." % (n_roster, sum(held.values()), n),
         "",
         "Pass 1 only (topup=0): the store holds two passes the campaign's "
         "rule forbids merging.",
