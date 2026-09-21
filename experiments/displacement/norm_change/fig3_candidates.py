@@ -126,17 +126,33 @@ def main():
                   % (sc, len(got)), ""]
             continue
         got.sort(key=lambda t: t[1])
-        n = max(12, len(got) // 20)
+        #: **A WIDE SLICE RE-SORTED BY FREQUENCY IS NOT A POLE.** Taking the
+        #: top 15% by rating and then ranking it by how often the word moved
+        #: put `pushed (2.0)` and `saw (2.0)` at the head of "bodily harm"
+        #: while `kill (7.0)` came eleventh -- the common words win any
+        #: frequency sort, which is the same defect that made the axis figure
+        #: repeat `said` and `told`. Cut on the RATING first, hard, then rank.
+        #: **AND PERCENTILES FAIL ON A FLOOR-DOMINATED SCALE.** `k_bodily_harm`
+        #: rates most words 1.0, so its 90th percentile is also 1.0 and a
+        #: `>= q90` filter admitted the whole corpus -- both poles came back
+        #: identical, which is the failure mode that looks like working code.
+        #: Rank by VALUE and take a fixed number from each end instead, ties
+        #: broken by how often the word moved.
+        got.sort(key=lambda t: (t[1], -mv[t[0]]))
+        POOL = 60
         def fmt(rows):
             return ", ".join(
                 "%s (%.1f, n=%d%s)" % (w, r, mv[w],
                                        ", f=%d" % f if f else "")
                 for w, r, f in rows)
-        lowc = sorted(got[:n * 3], key=lambda t: -mv[t[0]])[:14]
-        hic = sorted(got[-n * 3:], key=lambda t: -mv[t[0]])[:14]
+        lowc = sorted(got[:POOL], key=lambda t: -mv[t[0]])[:14]
+        hic = sorted(got[-POOL:], key=lambda t: -mv[t[0]])[:14]
         L += ["## %s  <->  %s" % (plo, phi), "",
-              "`%s`, %d rated movers. Ratings run %.2f to %.2f."
-              % (sc, len(got), got[0][1], got[-1][1]), "",
+              "`%s`, %d rated movers. Ratings run %.2f to %.2f; each pole is "
+              "the %d most extreme by rating (%.2f and %.2f at the cut), "
+              "ranked within that by how often the word moved."
+              % (sc, len(got), got[0][1], got[-1][1], POOL,
+                 got[POOL - 1][1], got[-POOL][1]), "",
               "- **%s** (low end) — %s" % (plo, fmt(lowc)),
               "- **%s** (high end) — %s" % (phi, fmt(hic)), ""]
     p = os.path.join(HERE, "results", "fig3_pole_candidates.md")
