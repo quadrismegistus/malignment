@@ -490,8 +490,23 @@ def load_xy(pmax=1.01, min_lin=0, panel="v6", gated=True, sig="either",
     says nothing about whether the norm moved at all, because `dose.py` fits
     slopes and never records an intercept. Read alone it gets glossed as
     "alignment promoted this", and for `k_charge` (marginal exactly 0.000,
-    25/25) and `v6:vocalisation` (44 of 50 lineages tied) that is simply false.
-    Plotting one against the other makes the four cases separable by eye.
+    25/25) and `v6:vocalisation` (21 of 50 lineages tied, marginal median
+    exactly 0.000) that is simply false. Plotting one against the other makes
+    the four cases separable by eye.
+
+    **THE TIE COUNT IS GATED-POPULATION.** This line said "44 of 50 tied",
+    which is the UNGATED number; on the gated table this figure actually draws
+    it is 21, and the effective n is 29 rather than 6. The claim survives
+    either way -- the median is still exactly zero -- but the number quoted
+    beside it has to come from the population the figure uses.
+
+    **AND `x` IS NOT A SIZE.** It is `med_slope / sd(slopes)`, so a scale whose
+    lineages all agree scores high whether or not the slope is large.
+    `v6:vocalisation` is +1.13 on a raw median slope of +0.045 norm-points per
+    unit lift with 45/50 lineages agreeing; `v6:mundanity` is +0.34 on +0.017
+    with a wider spread. Read x as "how reliably does this scale answer to
+    lift", never as "how far does alignment move it" -- that is y's job, and
+    Figure 3's triangles are in y's units, not these.
 
     Both axes are in BETWEEN-LINEAGE SDs of their own quantity. They have to
     be: the raw units differ per scale (Warriner 1-9, k_* 1-7, v6 1-7) and also
