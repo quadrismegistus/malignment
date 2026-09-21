@@ -121,3 +121,45 @@ Two things do replicate, and they are different from each other:
 **The single replicable dimension of the base → aligned difference is whether the movement leaves its field at all.** Lateral substitution within one class at one pole; going somewhere else at the other. That is `referent_substitution` / `co_member_of_same_field` — the axis that came back 41-unclear of 44 in the assignment run because both word groups sat on the same pole, and the operation `TAXONOMY.md` already names *same-field reshuffle*.
 
 Two independent vocabularies, a graded dense matrix, and a canonical correlation analysis recover the distinction that folder's ten meta-relations arrived at by hand.
+
+## F — pooling the two vocabularies, and the diagnostic that would have over-claimed
+
+RH asked whether, given that the two solutions' *content* differs, the 66 columns could be pooled into one analysis. I had refused earlier on the grounds that `act_channel` and `speech_vs_physical_act` are near-duplicates and would inflate the shared factor — the `warriner_valence`/`_z` problem from section A, reintroduced deliberately.
+
+**THAT OBJECTION WAS AN ASSERTION AND IT IS FALSE.** Cross-vocabulary column correlations, all 38 × 28 = 1,064 pairs:
+
+> **max 0.72; exactly one pair above 0.7; mean best-match per 38-axis column 0.23.**
+
+And the one pair is `co_member_of_same_field` ~ `referent_substitution` — the shared dimension itself. The two vocabularies' *names* overlap heavily; their *measurements* barely do. Pooling is safe.
+
+Pooled, 2,244 × 66: PC1 16.1%, PC2 8.9%, PC3 7.6%, PC4 6.9%, seven components for half.
+
+**A BALANCE DIAGNOSTIC LOOKED LIKE THREE SHARED COMPONENTS AND WAS WRONG.** Share of squared loading from each vocabulary gave PC1 67/33, PC2 43/57, PC3 56/44 — three components drawing on both, which reads as shared structure. It is not. Project each component onto only the 38 columns and only the 28, and correlate the halves:
+
+| PC | variance | 38 / 28 loading | half-correlation | |
+|---|---|---|---|---|
+| PC1 | 16.1% | 67 / 33 | **0.58** | **shared** |
+| PC2 | 8.9% | 43 / 57 | −0.06 | not shared |
+| PC3 | 7.6% | 56 / 44 | 0.07 | not shared |
+| PC4 | 6.9% | 97 / 3 | 0.06 | not shared |
+| PC5 | 5.0% | 4 / 96 | −0.01 | not shared |
+
+**A pooled PCA maximises total variance, so it will assemble a component out of UNRELATED variance from both halves.** Balanced loadings are not evidence of shared structure; co-varying halves are. Had the balance column been the last check, this file would report three shared components instead of one.
+
+Pooling therefore confirms the canonical analysis rather than extending it: **one shared component, and its top loaders are `one member of a field → another`, `starting a new event → continuing this one`, `one word class → another`, `a general term → a specific one`.** The same-field reshuffle, arrived at now by a third method.
+
+## What is canonical
+
+**The 38-axis run (seed 1) is the run of record** — it is the leak-fixed vocabulary, and it supplies the axes, their directions and their dose behaviour. The 28-axis run is confirmation.
+
+**But confirmation succeeded for only two things**, and the distinction has to travel with any citation:
+
+| | replicates | cite |
+|---|---|---|
+| dimensionality (21.6/12.4/11.5 vs 22.8/12.6/11.3) | yes | yes |
+| the same-field-reshuffle dimension (canonical r 0.80, pooled half-corr 0.58) | yes | yes |
+| per-relation salience (r 0.86) | yes | yes, as a separate property |
+| PC2, PC3 and their readings | **no** (R² 0.10, 0.13) | **no** |
+| any individual axis's membership | not tested here; ARI 0.311 in `AXIS_RUN.md` says no | no |
+
+So the 38-axis solution is canonical as a **source of named, dosed movements** — `plain naming → euphemism`, `forceful → gentle`, `the deed becomes an utterance` — and is **not** canonical as a factor solution. Exactly one factor is a property of the corpus rather than of a vocabulary.
