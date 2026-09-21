@@ -67,7 +67,7 @@ def load(seed=1):
     return M, L, V, ax
 
 
-def exemplars(seed, M, ax, mu, top=25, k=2):
+def exemplars(seed, M, ax, mu, L=None, top=25, k=2):
     """Two words a pole, from the relations that separate most cleanly on it.
 
     Taken from the top `top` relations by ORIENTED value on that axis, so the
@@ -75,13 +75,19 @@ def exemplars(seed, M, ax, mu, top=25, k=2):
     left end and the right-pole words are their aligned counterparts. Frequency
     over the head of each list, which is agreement rank.
 
-    **AN AXIS WITH NO DIRECTION HAS NO EXEMPLARS WORTH PRINTING.** Where the
-    marginal mean is near zero the orientation is a coin toss, so "the top 25"
-    is the top of an arbitrary end -- `speech_vs_physical_act` yields
-    `said, told` against `left, now`, which reads as a finding and is the
-    low-lift tertile talking. Such rows get no words.
+    **WHERE THE MARGINAL MEAN IS NOISE, THE WORDS COME FROM THE HIGH-LIFT
+    TERTILE** (RH: "find 2 for each even if they're high lift"). An axis whose
+    overall mean is near zero is in the figure because its DOSE difference
+    earned it a place, so the population that justified the row is the one the
+    exemplars should come from. Previously such rows got no words at all, which
+    left the reversals -- the most interesting rows on the plate -- looking
+    identical to flat ones.
+
+    The words are illustrations, not evidence: the evidence is the marker
+    positions, and no claim rests on which two words appear.
     """
     import collections, json
+    import numpy as np
     from relation_group_report import load as _l, dose_values
     rel, _v, _g, _b = _l(seed)
     lift = dose_values(rel, "shown_lift")
@@ -90,18 +96,37 @@ def exemplars(seed, M, ax, mu, top=25, k=2):
                               "axis_survey_en_seed%d.jsonl" % seed),
                  encoding="utf-8")]
     rows = [r for r in rows if rel[r["id"]]["frame"] in lift]
-    import numpy as np
     out = {}
+    #: **POOL WORDS BY WHICH POLE THEY LANDED ON, NOT BY A CHOSEN DIRECTION.**
+    #: Orienting the search by a mean and then reading base words as the
+    #: left-pole exemplar is right only when every relation on the axis runs
+    #: the same way. On a REVERSAL it is wrong for half of them, and it made
+    #: `Speech | Bodily act` -- a row whose poles are ordered by its marginal
+    #: -- carry `hit, threw -> said, whispered`, which is that row backwards.
+    #:
+    #: For each relation, the SIGN of its value says which pole its base words
+    #: sit on and its aligned words the other. Count each word toward the pole
+    #: it actually occupied. Direction-free, and correct on every axis rather
+    #: than on the ones that do not reverse.
+    hi_mask = (L > np.quantile(L, 2 / 3.0)) if L is not None else None
     for j, a in enumerate(ax):
-        if abs(mu[j]) < 0.03:
-            out[a] = (None, None)
-            continue
-        v = M[:, j] * (1 if mu[j] >= 0 else -1)
-        idx = np.argsort(-v)[:top]
-        b = collections.Counter(w for i in idx
-                                for w in rel[rows[i]["id"]]["base"][:4])
-        g = collections.Counter(w for i in idx
-                                for w in rel[rows[i]["id"]]["aligned"][:4])
+        v = M[:, j]
+        #: where the marginal is noise the axis is drawn for its DOSE
+        #: difference, so the high-lift end is the population that earned the
+        #: row and the words come from there (RH)
+        pool = np.where(hi_mask)[0] if (abs(mu[j]) < 0.03 and hi_mask is not None) \
+            else np.arange(M.shape[0])
+        pool = [i for i in pool if abs(v[i]) >= 0.35]
+        pool.sort(key=lambda i: -abs(v[i]))
+        x_side, y_side = collections.Counter(), collections.Counter()
+        for i in pool[:top]:
+            bw = rel[rows[i]["id"]]["base"][:4]
+            aw = rel[rows[i]["id"]]["aligned"][:4]
+            if v[i] > 0:          # base at pole_x
+                x_side.update(bw); y_side.update(aw)
+            else:                 # base at pole_y
+                y_side.update(bw); x_side.update(aw)
+        b, g = x_side, y_side
         out[a] = (", ".join(w for w, _ in b.most_common(k)),
                   ", ".join(w for w, _ in g.most_common(k)))
     return out
@@ -330,9 +355,9 @@ def main(argv=None):
     pairs = [(POLES[k][1], POLES[k][0]) if f < 0 else POLES[k]
              for k, f in zip(ax, flip_ax)]
     if a.examples:
-        ex = exemplars(a.seed, M, ax, mu)
-        pairs = [(("%s\n(%s)" % (p[0], ex[k][0])) if ex[k][0] else p[0],
-                  ("%s\n(%s)" % (p[1], ex[k][1])) if ex[k][1] else p[1])
+        ex = exemplars(a.seed, M, ax, mu, L)
+        pairs = [("%s\n(%s)" % (p[0], ex[k][0]),
+                  "%s\n(%s)" % (p[1], ex[k][1]))
                  for p, k in zip(pairs, ax)]
     (axm or axx).set_yticklabels([pairs[i][0] for i in o] if a.osgood else
                                  ["%s  <->  %s" % (short(V[i]["pole_x"]),
