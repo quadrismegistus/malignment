@@ -53,7 +53,7 @@ def load(seed=1):
     return M, L, V, ax
 
 
-def short(s, n=22):
+def short(s, n=17):
     s = s.split("—")[0].split(",")[0].strip()
     return s if len(s) <= n else s[:n - 1].rstrip() + "…"
 
@@ -70,6 +70,10 @@ def main(argv=None):
     ap.add_argument("--seed", type=int, default=1)
     ap.add_argument("--dose", action="store_true")
     ap.add_argument("--top", type=int, default=0, help="keep only the N largest")
+    ap.add_argument("--facet", action="store_true",
+                    help="two panels: marginal on the left, lift split on the right")
+    ap.add_argument("--sig", action="store_true",
+                    help="keep only axes with a direction worth drawing")
     ap.add_argument("--out", default=None)
     a = ap.parse_args(argv)
     M, L, V, ax = load(a.seed)
@@ -78,6 +82,37 @@ def main(argv=None):
     lowm = M[L <= q[0]].mean(0)
     topm = M[L > q[1]].mean(0)
 
+    if a.sig:
+        #: **SIGNIFICANCE IS THE GATE, EFFECT SIZE IS THE SELECTOR.** At
+        #: n=2,225 a per-axis Wilcoxon against zero passes 31 of 38, including
+        #: an axis whose mean is +0.007 -- the test cannot discriminate at this
+        #: n and filtering on it alone would keep almost everything.
+        #:
+        #: **AND A MARGINAL FILTER DROPS EXACTLY THE REVERSALS.**
+        #: `specificity_vs_generality` is marginal q=0.12 and dose q=8e-57;
+        #: `argument_structure` q=0.07 and 1e-06. An axis with no overall
+        #: direction and a large dose effect is the most interesting kind here,
+        #: so the dose test is a second entry route rather than an extra hurdle.
+        from scipy import stats
+        m = M.shape[1]
+        def _bh(pv):
+            o_ = np.argsort(pv); q = np.empty(m); prev = 1.0
+            for r, i in enumerate(o_[::-1], 1):
+                prev = min(prev, pv[i] * m / (m - r + 1)); q[i] = prev
+            return q
+        qm = _bh(np.array([stats.wilcoxon(M[:, j])[1] if np.any(M[:, j]) else 1.0
+                           for j in range(m)]))
+        qd = _bh(np.array([stats.mannwhitneyu(M[L > q[1], j],
+                                              M[L <= q[0], j])[1]
+                           for j in range(m)]))
+        ok = ((qm < 0.05) & (np.abs(mu) >= 0.05)) | \
+             ((qd < 0.05) & (np.abs(topm - lowm) >= 0.10))
+        print("  --sig keeps %d of %d axes (%d on a marginal direction, "
+              "%d on a dose difference)"
+              % (int(ok.sum()), m, int(((qm < 0.05) & (np.abs(mu) >= 0.05)).sum()),
+                 int(((qd < 0.05) & (np.abs(topm - lowm) >= 0.10)).sum())))
+        M = M[:, ok]; mu = mu[ok]; lowm = lowm[ok]; topm = topm[ok]
+        V = [v for v, k in zip(V, ok) if k]; ax = [x for x, k in zip(ax, ok) if k]
     o = np.argsort(mu)
     if a.top:
         #: **RANKING BY THE MEAN EXCLUDES EXACTLY THE AXES THAT REVERSE.** An
@@ -94,8 +129,33 @@ def main(argv=None):
     n = len(o)
     #: 0.19 in a row put the full 38 on an 8-inch plate. `--top` is the plate
     #: version and the full one is the appendix.
-    fig, axx = plt.subplots(figsize=(PUB_SIZE[0], 0.155 * n + 1.0))
+    if a.facet:
+        fig, (axm, axx) = plt.subplots(
+            1, 2, sharey=True, figsize=(PUB_SIZE[0], 0.155 * n + 1.1),
+            layout="constrained",
+            gridspec_kw={"width_ratios": [1, 1]})
+    else:
+        fig, axx = plt.subplots(figsize=(PUB_SIZE[0], 0.155 * n + 1.0))
+        axm = None
     y = np.arange(n)
+    if axm is not None:
+        axm.barh(y, mu[o], height=0.62, color=PUB_MID, edgecolor="none", zorder=3)
+        axm.axvline(0, color=PUB_INK, linewidth=PUB_RULE_PT, zorder=4)
+        axm.set_title("all frames", fontsize=PUB_FONT_PT - 1,
+                      fontfamily=pub_font())
+        axm.set_xlabel("mean position\nof the base words",
+                       fontsize=PUB_FONT_PT - 1.5, fontfamily=pub_font())
+        for sp in ("top", "right", "left"):
+            axm.spines[sp].set_visible(False)
+        axm.spines["bottom"].set_linewidth(PUB_RULE_PT)
+        axm.grid(axis="x", color=PUB_GRAY, linewidth=PUB_RULE_PT * 0.6, zorder=0)
+        axm.set_axisbelow(True)
+        axm.tick_params(axis="both", length=2, labelsize=PUB_FONT_PT - 2.5)
+        axx.set_title("by charge lift", fontsize=PUB_FONT_PT - 1,
+                      fontfamily=pub_font())
+        #: the shared axis still draws its own ticks and they read as a second
+        #: column of marks between the panels
+        axx.tick_params(axis="y", length=0, labelleft=False)
     if a.dose:
         axx.barh(y + 0.20, lowm[o], height=0.36, color="white",
                  edgecolor=PUB_MID, linewidth=PUB_RULE_PT, zorder=3)
@@ -108,11 +168,11 @@ def main(argv=None):
     #: the label is the CONTRAST, not the movement: the bar supplies the
     #: direction, and a directional label plus a signed bar states it twice
     #: and disagrees with itself whenever the mean is near zero
-    axx.set_yticks(y)
-    axx.set_yticklabels(["%s  /  %s" % (short(V[i]["pole_x"]),
+    (axm or axx).set_yticks(y)
+    (axm or axx).set_yticklabels(["%s  /  %s" % (short(V[i]["pole_x"]),
                                         short(V[i]["pole_y"])) for i in o],
                         fontsize=PUB_FONT_PT - 2.5, fontfamily=pub_font())
-    axx.set_ylim(-0.8, n - 0.2)
+    (axm or axx).set_ylim(-0.8, n - 0.2)
     axx.tick_params(axis="both", length=2, labelsize=PUB_FONT_PT - 2)
     for s in ("top", "right", "left"):
         axx.spines[s].set_visible(False)
@@ -122,19 +182,37 @@ def main(argv=None):
     #: **NO ARROW GLYPHS.** The publication font has no U+2190/2192 and
     #: matplotlib silently substituted a tofu box, which reads as a stray
     #: symbol rather than a missing one. Words instead.
-    axx.set_xlabel("mean position of the base words\n"
-                   "left pole  <<  0  >>  right pole",
-                   fontsize=PUB_FONT_PT - 1, fontfamily=pub_font())
+    axx.set_xlabel(("lowest vs highest\nthird of lift" if a.facet else
+                    "mean position of the base words\n"
+                    "left pole  <<  0  >>  right pole"),
+                   fontsize=PUB_FONT_PT - (1.5 if a.facet else 1),
+                   fontfamily=pub_font())
     if a.dose:
-        axx.legend(handles=[
+        (fig if a.facet else axx).legend(handles=[
             plt.Rectangle((0, 0), 1, 1, facecolor="white", edgecolor=PUB_MID,
                           linewidth=PUB_RULE_PT, label="lowest third of lift"),
             plt.Rectangle((0, 0), 1, 1, facecolor=PUB_INK, edgecolor="none",
                           label="highest third")],
-            fontsize=PUB_FONT_PT - 2, frameon=False, loc="lower right")
-    fig.tight_layout(pad=0.4)
+            fontsize=PUB_FONT_PT - 2, frameon=False, handlelength=1.2,
+            **({"loc": "outside lower center", "ncol": 2} if a.facet
+               else {"loc": "lower right"}))
+    #: **`tight_layout` DOES NOT RESERVE THE LABEL COLUMN UNDER `sharey`** --
+    #: the 26 axis labels hang off the left edge of the plate and are simply
+    #: cut. The label column is budgeted explicitly instead: at 4.8 in it wants
+    #: about 1.35, which leaves ~1.6 per panel and is readable. Width is not
+    #: the constraint; the labels are.
+    #: `constrained` measures the rendered labels and reserves the column;
+    #: hand-set margins were guesses and both of mine were wrong (labels still
+    #: clipped at left=0.29, and an invented bottom formula left an inch of
+    #: white). The legend goes OUTSIDE the axes for the same reason -- inside,
+    #: it sat on top of the bars it was describing.
+    if not a.facet:
+        fig.tight_layout(pad=0.4)
     out = a.out or os.path.join(HERE, "figures",
-                                "axis_bars%s.png" % ("_dose" if a.dose else ""))
+                                "axis_bars%s%s%s.png"
+                                % ("_dose" if a.dose else "",
+                                   "_facet" if a.facet else "",
+                                   "_sig" if a.sig else ""))
     os.makedirs(os.path.dirname(out), exist_ok=True)
     print("wrote %s" % save(fig, out))
     return 0
