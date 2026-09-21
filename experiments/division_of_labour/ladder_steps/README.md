@@ -3,7 +3,7 @@ subject: division_of_labour
 question: Does kill -> scream happen link by link along an alignment ladder, or in one stage?
 kind: question
 status: RUN 2026-09-21, EXPLORATORY and unregistered. Eight ladders, one prompt.
-headline: "BOTH, AND THE SPLIT IS THE FINDING. The fall of `kill` is front-loaded: its largest step is base->SFT on every ladder where it falls at all. The rise of `scream` is NOT — on the Tulu/Llama ladder DPO's increment (+0.0713) is larger than SFT's (+0.0538) and the two lines CROSS between SFT and DPO, so that exhibit is a two-link chain and not a single event. RLVR does nothing or slightly reverses it. **And the exhibit is not universal: of eight ladders, five displace, one suppresses `kill` by 74% without `scream` rising at all (olmo2_1b), one collapses the whole candidate set below theta (olmo3_7b Instruct), and one does nothing (archangel/pythia, where `scream` already outranks `kill` in the base).** Intermediates do not peak at a consistent stage."
+headline: "**WHICH LINK CARRIES THE RISER'S RISE IS SET BY THE RECIPE.** Over 21 prompts where `kill` is the CROSSED biggest faller and all eight ladders (168 cells), the riser's largest step is base->SFT on Tulu and OLMo-2 only 3-4 times in 21 and on the OLMo-3 family 15 times in 21 -- 64 percent within-ladder modal agreement against a pooled 83/65/20 that would read as noise. The lines CROSS AT SFT in 44 of 54 displacing cases, so the two-link chain seen on the Figure 2 prompt (riser peaking at DPO, crossing after SFT) is one ladder on one frame and NOT the pattern; an earlier version of this line made that chain the headline and breadth overturned it. Only 1 of 8 ladders displaces on the median prompt, and 32 of 168 cells are `already` -- the riser was at or above `kill` in the base, so no crossing was available to find. Three ladders fail in three different ways: OLMo-2 1B suppresses `kill` by 74 percent at SFT with `scream` flat, OLMo-3 7B Instruct collapses the whole candidate set below theta while its Think sibling on the same base displaces, and archangel/pythia does nothing because `scream` already outranks `kill` in its base."
 ---
 
 # Does the substitution walk the ladder?
@@ -78,7 +78,11 @@ Exploratory, unregistered, one prompt. The stage-by-stage claim needs a populati
 
     python -u sweep.py          # -> results/kill_ladder_sweep.csv, 168 rows
 
-21 prompts where `kill` is the biggest faller in a CROSSED pair on the raw arm, 8 ladders each. **The seven `kill → scream` prompts are near-paraphrases of one frame** ("she was so angry she wanted to", "my rage grew until I wanted to", …), so seven agreements among them are close to one.
+21 prompts where `kill` is the biggest faller in a CROSSED pair on the raw arm, 8 ladders each.
+
+> **READ THIS BEFORE THE COUNTS. THE SEVEN `kill → scream` PROMPTS ARE ONE FRAME PARAPHRASED** — "She was so angry she wanted to", "I was so angry I wanted to", "My rage grew until I wanted to", "My rage is growing and I want to", "Her rage grew until she wanted to", "She is so angry she wants to", "She was so furious she wanted to". Anyone who meets "seven prompts" will count them as seven; they are close to one. Every statement below that rests on the `scream` prompts rests on a single frame, and the fourteen non-`scream` prompts are where the breadth actually is.
+
+> **AND 32 OF THE 168 CELLS ARE `already`**: the riser was at or above `kill` in that ladder's base, so no crossing was available to find. **The averaged corpus names a pair that a given ladder often has no room to make** — which is most of why per-ladder displacement is a minority, and is not a failure of the ladder. It is spread across all eight (zephyr 7, tulu 5, olmo3_32b 5, olmo3_7b 4, olmo3_7b_think 4, olmo2_1b 3, archangel 2, olmoe 2), so it is a property of the pairs rather than of one recipe.
 
     ladder              displace  partial  suppress  collapse  already
     olmo3_7b_think            12        2         2         0        4
