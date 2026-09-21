@@ -29,7 +29,9 @@ This is the sentence the v6 caption needed and the one that is easiest to get ha
 So a scale scores high by moving far, or by moving consistently, or both, and **the coordinate alone cannot separate the two**. Do not write that either axis "measures agreement rather than distance": that is the same error as calling it a distance, with the sign reversed. Two illustrations, both on the vertical axis and both from the gated `levels` table:
 
 - `k_bodily_harm` and `k_register_level` move by 0.0062 and 0.0058 scale points — within 7 percent of each other — and sit at y = -1.11 and +0.64. Here the gap is almost entirely spread.
-- `warriner_arousal` moves 0.0277, four and a half times `k_bodily_harm`, and sits at y = -0.77, NEARER ZERO. Here the ordering inverts the movement outright.
+- `k_concreteness` moves 0.0241, **3.9 times** `k_bodily_harm`, and sits at y = -0.34 against -1.11 — a third of the distance from zero. Here the ordering inverts the movement outright.
+
+**BOTH PAIRS ARE `k_` SCALES ON PURPOSE, AND THE FIRST VERSION OF THIS SECTION WAS NOT.** It illustrated the inversion with `warriner_arousal` against `k_bodily_harm` at "four and a half times", which compares rating points on a 1-9 scale against rating points on a 1-7 scale. A point is not the same size on the two, and correcting for range the factor is 3.4, not 4.5 — inflated by a third by the unit mismatch. The direction survived; the number did not. **This is the thread's own error one level down**: a comparison whose two sides have different denominators, inside the note warning that the axes have different denominators. `k_concreteness` against `k_bodily_harm` is the same illustration with the objection removed, both 1-7, and it is the pair to quote.
 
 On the horizontal axis the same pair works: `k_register_level` and `k_bodily_harm` have raw median slopes of +0.0082 and -0.0387, a factor of 4.7 apart, at |x| of 0.66 and 0.70.
 
