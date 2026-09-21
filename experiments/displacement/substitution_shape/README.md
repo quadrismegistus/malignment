@@ -448,3 +448,29 @@ Verbs only at both ends, lemmas merged, stopwords gone, outward edges only, from
 So the graph reached from `kill` by following only what replaces what is, past its first step, **largely a graph of saying things**. That is the `kill → scream` result restated as a neighbourhood rather than a pair, and it is the same convergence the vocalisation and euphemism results point at from other directions.
 
 `--edge-pos verb` requires **both ends** to be verbs in their slots, rather than dropping non-verb nodes afterwards: filtering nodes after the fact would keep edges that passed *through* a dropped noun and assert a substitution between two verbs that never substituted for one another. `--depth` keeps only the edges the walk actually traversed, for the same reason.
+
+## A SECOND BASIS: `--basis argmax`
+
+    python -u seed_walk.py --seed kill --edge-pos verb --lemma --basis argmax --draw
+
+![kill argmax](figures/seed_walk_raw_argmax_kill_top1_lemma_dfull.png)
+
+    basis       what an edge means                              prompts (raw)
+    crossing    biggest faller -> biggest riser, where the        589
+                two lines SWAP. Neither need be the top word.
+    argmax      base arm's top word -> aligned arm's top word,    570
+                where the top word CHANGED.
+
+Nearly the same size, and **the same population only 17 percent of the time**. Over verbs, lemmatised, stopwords dropped: 298 crossing edges, 235 argmax edges, **78 shared — Jaccard 0.171**. `run.py` already records why: 51 percent of crossings happen with the top word unchanged, so the two instruments are mostly looking at different prompts.
+
+**IT CHANGES THE `kill` RESULT AT THE SECOND HOP, AND THAT IS THE FINDING.**
+
+    kill -> crossing   bring, continue, defend, die, help, hurt, lash, leave,
+                       look, make, miss, scream, take, tell, understand, wash
+    kill -> argmax     die, hurt, make, run, scream, take
+
+Five of the six argmax destinations are in the crossing set, so at radius 1 the two roughly agree and `scream` is the heaviest edge either way. **At radius 2 they diverge completely**: of the edges leaving `tell` and `take`, the two bases share **2 of 20 and 13**. On the crossing basis the second hub is `tell` and the basin turns into speech acts (*whisper, shout, scold, demand, threaten, apologize*); on the argmax basis there is no `tell` at all, the second hub is `take`, and the basin turns procedural (*steal, implement, hold, grab, proceed, let, continue*). `scream` is a near-sink here — its only exit is `yell`.
+
+So **"the neighbourhood of `kill` becomes a graph of saying things" is a claim about the crossing basis**, not about displacement in general. On what the model would actually say, it becomes a graph of handling things instead. Both are drawn, both are named in the filename, and neither should be quoted without its basis.
+
+**AND AN ARGMAX EDGE IS NOT A SUBSTITUTION CLAIM.** Of its 570 raw prompts only 62 are `MOVED_SUBSTITUTION`; 313 are `MOVED_PROMOTION`, where the new top word was already present and merely rose past the old one. An edge here means the top word changed from x to y, which is weaker than y replacing x.

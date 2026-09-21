@@ -77,12 +77,43 @@ def stopwords_en():
     return set(stopwords.words("english")) - _FRAGMENTS
 
 
-def crossings(arm="raw"):
-    """-> the CROSSED rows of one arm, with prompt, faller, riser."""
+def crossings(arm="raw", basis="crossing"):
+    """-> rows of one arm carrying `faller` and `riser` under the chosen basis.
+
+    **TWO DIFFERENT QUESTIONS, NOT TWO VIEWS OF ONE.**
+
+        crossing   the biggest faller and the biggest riser, on the prompts
+                   where the two lines SWAP. Neither need be the top word and
+                   usually neither is. 589 prompts raw.
+        argmax     the base arm's top word and the aligned arm's top word, on
+                   the prompts where the top word CHANGED. 570 prompts raw.
+
+    Nearly the same count and NOT the same population: `run.py` records that
+    51% of crossings happen with the top word unchanged, so the two overlap
+    far less than their sizes suggest. Both are real and neither contains the
+    other -- the crossing asks what moved most, the argmax asks what the model
+    would actually say.
+
+    **AND THE ARGMAX BASIS IS NOT A SUBSTITUTION CLAIM.** Of its 570 raw
+    prompts only 62 are classified `MOVED_SUBSTITUTION`; 313 are
+    `MOVED_PROMOTION`, where the new top word was already present and merely
+    rose past the old one. An edge here means "the top word changed from x to
+    y", which is weaker than "y replaced x".
+    """
     p = os.path.join(HERE, "results", "by_prompt_%s.csv" % arm)
     with open(p, encoding="utf-8") as fh:
-        return [r for r in csv.DictReader(fh)
+        rows = list(csv.DictReader(fh))
+    if basis == "crossing":
+        return [r for r in rows
                 if r["crossing"] == "CROSSED" and r["faller"] and r["riser"]]
+    out = []
+    for r in rows:
+        b, a = r["base_top"], r["aligned_top"]
+        if b and a and b != a:
+            q = dict(r)
+            q["faller"], q["riser"] = b, a
+            out.append(q)
+    return out
 
 
 def slot_lemma(rows):
@@ -157,7 +188,8 @@ def slot_pos(rows):
     return tag
 
 
-def edges(arm="raw", pos="content", lemma=False, stop=True):
+def edges(arm="raw", pos="content", lemma=False, stop=True,
+          basis="crossing"):
     """-> (Counter[(faller, riser)], how many crossings the POS cut removed)
 
     With `lemma`, both ends are replaced by their modal slot lemma BEFORE the
@@ -167,7 +199,7 @@ def edges(arm="raw", pos="content", lemma=False, stop=True):
     change, not a substitution, and drawing it as an edge would assert a
     movement the lemma has just declared absent.
     """
-    rows = crossings(arm)
+    rows = crossings(arm, basis)
     if pos != "all":
         #: "verb" is narrower than "content" and is its own choice rather than
         #: a filter applied afterwards: a crossing survives only if BOTH ends
@@ -188,15 +220,15 @@ def edges(arm="raw", pos="content", lemma=False, stop=True):
         #: the one place edges are built, so nothing downstream can walk a
         #: node this filter removed.
         SW = stopwords_en()
-        lm = modal_lemma(crossings(arm))
+        lm = modal_lemma(crossings(arm, basis))
         def stopish(w):
             return w in SW or lm.get(w, w) in SW
         rows = [r for r in rows
                 if not stopish(r["faller"]) and not stopish(r["riser"])]
-    cut = len(crossings(arm)) - len(rows)
+    cut = len(crossings(arm, basis)) - len(rows)
     if not lemma:
         return collections.Counter((r["faller"], r["riser"]) for r in rows), cut
-    m = modal_lemma(crossings(arm))
+    m = modal_lemma(crossings(arm, basis))
     E = collections.Counter()
     for r in rows:
         f, t = m.get(r["faller"], r["faller"]), m.get(r["riser"], r["riser"])
@@ -235,7 +267,7 @@ def induced(w, min_degree=2, min_weight=3):
     return E, deg, (len(w) - len(E), len(deg) - len({x for e in E for x in e}))
 
 
-def prompt_labels(arm, E, wrap=30):
+def prompt_labels(arm, E, wrap=30, basis="crossing"):
     """{(faller, riser): label} -- the prompt that produced the edge.
 
     **89% OF CONTENT EDGES HAVE EXACTLY ONE PROMPT**, so for most of the graph
@@ -246,7 +278,7 @@ def prompt_labels(arm, E, wrap=30):
     """
     import textwrap
     byedge = collections.defaultdict(list)
-    for r in crossings(arm):
+    for r in crossings(arm, basis):
         k = (r["faller"], r["riser"])
         if k in E:
             byedge[k].append(r["prompt"])
@@ -319,6 +351,11 @@ def main(argv=None):
     ap.add_argument("--min-weight", type=int, default=3,
                     help="keep an edge this heavy whatever its endpoints' "
                          "degree; 0 for the pure degree filter")
+    ap.add_argument("--basis", default="crossing",
+                    choices=("crossing", "argmax"),
+                    help="crossing: biggest faller -> biggest riser where the "
+                         "lines swap. argmax: base top word -> aligned top "
+                         "word where the top word changed.")
     ap.add_argument("--keep-stop", action="store_true",
                     help="do NOT drop NLTK stopwords (they are dropped by "
                          "default, which removes the framed `have` hub)")
@@ -330,7 +367,7 @@ def main(argv=None):
                     choices=("dot", "neato", "sfdp", "fdp"))
     a = ap.parse_args(argv)
 
-    w, cut = edges(a.arm, a.pos, a.lemma, not a.keep_stop)
+    w, cut = edges(a.arm, a.pos, a.lemma, not a.keep_stop, a.basis)
     E, deg, (de, dn) = induced(w, a.min_degree, a.min_weight)
     nodes = {x for e in E for x in e}
     print("%s arm, pos=%s: %d crossings -> %d distinct pairs%s"
@@ -342,13 +379,16 @@ def main(argv=None):
     print("  heaviest: " + ", ".join("%s->%s %d" % (f, t, n) for n, f, t in rep))
 
     src = dot(E, deg, a.arm, (de, dn),
-              prompt_labels(a.arm, E) if a.label_prompts else None)
+              prompt_labels(a.arm, E, basis=a.basis)
+              if a.label_prompts else None)
     #: **EVERY FILTER THAT CHANGES THE PICTURE CHANGES THE NAME.** Four
     #: combinations of --pos and --min-degree were written to one filename
     #: earlier in this session and each silently replaced the last; the same
     #: defect cost a figure in `fig3_osgood` the same afternoon.
     base = os.path.join(HERE, "figures", "substitution_graph_%s%s%s"
-                        % (a.arm, "" if a.pos == "content" else "_allpos",
+                        % (a.arm + ("" if a.basis == "crossing"
+                                    else "_" + a.basis),
+                           "" if a.pos == "content" else "_allpos",
                            ("_stop" if a.keep_stop else "")
                            + ("_lemma" if a.lemma else "")
                            + ("" if a.min_degree <= 1 else "_deg%d" % a.min_degree)))

@@ -123,6 +123,9 @@ def main(argv=None):
                          "--pos/--top ranking by lift")
     ap.add_argument("--depth", type=int, default=0,
                     help="ego radius; 0 walks the full outward closure")
+    ap.add_argument("--basis", default="crossing",
+                    choices=("crossing", "argmax"),
+                    help="see graph.crossings: what an edge MEANS")
     ap.add_argument("--keep-stop", action="store_true",
                     help="do NOT drop NLTK stopwords from the graph")
     ap.add_argument("--lemma", action="store_true",
@@ -132,8 +135,8 @@ def main(argv=None):
                     help="put the prompt that produced each edge on it")
     a = ap.parse_args(argv)
 
-    rows = G.crossings(a.arm)
-    E, _ = G.edges(a.arm, a.edge_pos, a.lemma, not a.keep_stop)
+    rows = G.crossings(a.arm, a.basis)
+    E, _ = G.edges(a.arm, a.edge_pos, a.lemma, not a.keep_stop, a.basis)
     mp = modal_pos(rows)
     lf = lifts(a.min_prompts)
     if a.lemma:
@@ -198,10 +201,11 @@ def main(argv=None):
 
     if a.draw:
         src = G.dot(sub, collections.Counter(), a.arm, (0, 0),
-                    G.prompt_labels(a.arm, sub) if a.label_prompts
-                    else None)
+                    G.prompt_labels(a.arm, sub, basis=a.basis)
+                    if a.label_prompts else None)
         base = os.path.join(HERE, "figures", "seed_walk_%s_%s_top%d%s"
-                            % (a.arm,
+                            % (a.arm + ("" if a.basis == "crossing"
+                                        else "_" + a.basis),
                                a.seed.replace(",", "_") if a.seed
                                else a.pos.lower(), a.top,
                                ("_stop" if a.keep_stop else "")
