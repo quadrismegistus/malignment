@@ -226,15 +226,34 @@ Dose shows the same mechanism but **only at the top band** -- flat across the fi
     python -u graph.py --arm framed
     python -u graph.py --min-weight 0  # the pure degree filter
 
-![raw](figures/substitution_graph_raw.png)
+![raw](figures/substitution_graph_raw_deg2.png)
 
-![framed](figures/substitution_graph_framed.png)
+![framed](figures/substitution_graph_framed_deg2.png)
+
+*Shown: content words, degree ≥ 2. The unfiltered content graph is `substitution_graph_{raw,framed}.png`.*
 
 Every CROSSED prompt contributes one edge, biggest faller to biggest riser, its width the number of prompts that took it. Bold nodes are words that both fall and rise somewhere in the graph — 30 of them in the raw arm.
 
 **THE FULL GRAPH IS A FAN, NOT A NETWORK.** 589 crossings give **475 distinct pairs**, 0.81 per crossing: nearly every substitution happens once and never again. Only 25 pairs occur three or more times. So the drawing is filtered, and the filter is where the honesty lives — **220 of 475 edges are drawn and 255 are not**, and the dropped majority is the main fact about this graph.
 
-**AN EDGE IS KEPT IF ITS ENDPOINTS ARE BUSY *OR* THE EDGE IS HEAVY.** Degree alone counts distinct partners, so it deletes exactly the cases the experiment is named for:
+**THE DEFAULT FILTER IS NOW PART OF SPEECH, NOT DEGREE.** `malignment.pos.get_pos` tags `prompt + " " + word` and takes the last token — the position the model was predicting — so every word is tagged IN ITS SLOT. That matters here: the corpus is overwhelmingly verbs at a blank after a subject, exactly where a type-level tagger reads `kiss`, `strike` and `punch` as nouns, and `pos.py` records its own out-of-context lookup at 41.2% verbs inside a "noun" band. 1,178 (prompt, word) pairs tag in 13 seconds and the stash makes the second run free.
+
+    POS in slot     faller   riser
+    VERB               475     451
+    ADV                 64      78
+    NOUN                39      39
+    ADJ                 10      17
+    PROPN                1       4
+
+Keeping VERB/NOUN/ADJ/PROPN at both ends holds **467 of 589 crossings (79%)** and makes `kill -> scream` the heaviest edge in the graph. **The cut is ADV and it is not free**: 102 of its 142 tokens are `then` (36), `now` (25), `only` (12), `there`, `just`, `forth`, `so`, `far`, `back` — deictic and discourse particles — but about twelve are manner adverbs (`carefully`, `quickly`, `quietly`, `urgently`, `tightly`, `accidentally`) and they go with them.
+
+| | edges | nodes | pixels |
+|---|---|---|---|
+| all POS, no degree filter | 475 | 456 | 10412 × 9367 |
+| content, no degree filter | 391 | 392 | 9096 × 8283 |
+| content, degree ≥ 2 | 168 | 116 | 5960 × 3689 |
+
+**AN EDGE SURVIVES THE DEGREE FILTER IF ITS ENDPOINTS ARE BUSY *OR* THE EDGE IS HEAVY.** Degree alone counts distinct partners, so it deletes exactly the cases the experiment is named for:
 
     said  -> only    12 prompts   `only` has degree 1
     kill  -> scream   7           `scream` has degree 1

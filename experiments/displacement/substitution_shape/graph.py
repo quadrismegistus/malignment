@@ -40,13 +40,59 @@ ROOT = os.path.dirname(os.path.dirname(os.path.dirname(HERE)))
 sys.path.insert(0, ROOT)
 
 
-def edges(arm="raw"):
-    """-> Counter[(faller, riser)] over the CROSSED prompts of one arm."""
+#: kept by `--pos content`. spaCy's open classes minus ADV, and ADV is the
+#: whole argument: 102 of its 142 tokens here are `then` (36), `now` (25),
+#: `only` (12), `there` (8), `just` (6), `forth` (6), `so`, `far`, `back` --
+#: deictic and discourse particles that say where the sentence is standing
+#: rather than what happens at the slot. **THE COST IS REAL AND IS ABOUT
+#: TWELVE TOKENS**: `carefully`, `quickly`, `quietly`, `urgently`, `tightly`,
+#: `accidentally` are manner adverbs and they go too. Named here rather than
+#: buried, because a POS cut always throws away something it did not mean to.
+CONTENT = {"VERB", "NOUN", "ADJ", "PROPN"}
+
+
+def crossings(arm="raw"):
+    """-> the CROSSED rows of one arm, with prompt, faller, riser."""
     p = os.path.join(HERE, "results", "by_prompt_%s.csv" % arm)
     with open(p, encoding="utf-8") as fh:
-        return collections.Counter(
-            (r["faller"], r["riser"]) for r in csv.DictReader(fh)
-            if r["crossing"] == "CROSSED" and r["faller"] and r["riser"])
+        return [r for r in csv.DictReader(fh)
+                if r["crossing"] == "CROSSED" and r["faller"] and r["riser"]]
+
+
+def slot_pos(rows):
+    """-> {(prompt, word): POS}, tagged IN THE SLOT, not as a type.
+
+    `malignment.pos.get_pos` tags `prompt + " " + word` and takes the last
+    token, which is the position the model was predicting. **An out-of-context
+    lookup is not a substitute**: its own docstring records 41.2% verbs inside
+    an out-of-context "noun" band, and this corpus is mostly verbs at a blank
+    after a subject -- exactly where a type-level tagger reads `kiss`, `strike`
+    and `punch` as nouns.
+
+    Stash-backed, so the second run costs no spaCy calls.
+    """
+    from malignment.pos import get_pos
+    byp = collections.defaultdict(set)
+    for r in rows:
+        byp[r["prompt"]].update([r["faller"], r["riser"]])
+    tag = {}
+    for p, ws in byp.items():
+        for w, t in get_pos(sorted(ws), p).items():
+            tag[(p, w)] = t
+    return tag
+
+
+def edges(arm="raw", pos="content"):
+    """-> (Counter[(faller, riser)], how many crossings the POS cut removed)"""
+    rows = crossings(arm)
+    if pos == "all":
+        return collections.Counter((r["faller"], r["riser"]) for r in rows), 0
+    tag = slot_pos(rows)
+    keep = [r for r in rows
+            if tag[(r["prompt"], r["faller"])] in CONTENT
+            and tag[(r["prompt"], r["riser"])] in CONTENT]
+    return (collections.Counter((r["faller"], r["riser"]) for r in keep),
+            len(rows) - len(keep))
 
 
 def induced(w, min_degree=2, min_weight=3):
@@ -115,7 +161,10 @@ def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--arm", default="raw", choices=("raw", "framed"))
-    ap.add_argument("--min-degree", type=int, default=2)
+    ap.add_argument("--pos", default="content", choices=("content", "all"),
+                    help="content: keep a crossing only when BOTH words are "
+                         "VERB/NOUN/ADJ/PROPN in the slot")
+    ap.add_argument("--min-degree", type=int, default=1)
     ap.add_argument("--min-weight", type=int, default=3,
                     help="keep an edge this heavy whatever its endpoints' "
                          "degree; 0 for the pure degree filter")
@@ -123,17 +172,25 @@ def main(argv=None):
                     choices=("dot", "neato", "sfdp", "fdp"))
     a = ap.parse_args(argv)
 
-    w = edges(a.arm)
+    w, cut = edges(a.arm, a.pos)
     E, deg, (de, dn) = induced(w, a.min_degree, a.min_weight)
     nodes = {x for e in E for x in e}
-    print("%s arm: %d crossings -> %d distinct pairs" % (a.arm, sum(w.values()), len(w)))
+    print("%s arm, pos=%s: %d crossings -> %d distinct pairs%s"
+          % (a.arm, a.pos, sum(w.values()), len(w),
+             "; the POS cut dropped %d crossings" % cut if cut else ""))
     print("  degree >= %d keeps %d edges and %d nodes; dropped %d edges, %d nodes"
           % (a.min_degree, len(E), len(nodes), de, dn))
     rep = sorted(((n, f, t) for (f, t), n in E.items()), reverse=True)[:8]
     print("  heaviest: " + ", ".join("%s->%s %d" % (f, t, n) for n, f, t in rep))
 
     src = dot(E, deg, a.arm, (de, dn))
-    base = os.path.join(HERE, "figures", "substitution_graph_%s" % a.arm)
+    #: **EVERY FILTER THAT CHANGES THE PICTURE CHANGES THE NAME.** Four
+    #: combinations of --pos and --min-degree were written to one filename
+    #: earlier in this session and each silently replaced the last; the same
+    #: defect cost a figure in `fig3_osgood` the same afternoon.
+    base = os.path.join(HERE, "figures", "substitution_graph_%s%s%s"
+                        % (a.arm, "" if a.pos == "content" else "_allpos",
+                           "" if a.min_degree <= 1 else "_deg%d" % a.min_degree))
     os.makedirs(os.path.dirname(base), exist_ok=True)
     open(base + ".dot", "w", encoding="utf-8").write(src + "\n")
     for ext in ("png", "pdf"):
