@@ -73,3 +73,48 @@ So five of eight displace (tulu, olmo3_32b, olmoe, olmo3_think, zephyr), and the
 A figure is warranted for the ladders that displace: one prompt, one line per candidate word, stages on the x-axis. It draws itself and it shows a two-link chain. **It must not be drawn for one ladder and captioned as the operation** — three of eight would contradict it, and which three depends on the recipe rather than on the base model.
 
 Exploratory, unregistered, one prompt. The stage-by-stage claim needs a population of prompts before it is more than an exhibit.
+
+## 5. BREADTH: all eight ladders over all of `kill`'s crossed prompts (`sweep.py`)
+
+    python -u sweep.py          # -> results/kill_ladder_sweep.csv, 168 rows
+
+21 prompts where `kill` is the biggest faller in a CROSSED pair on the raw arm, 8 ladders each. **The seven `kill → scream` prompts are near-paraphrases of one frame** ("she was so angry she wanted to", "my rage grew until I wanted to", …), so seven agreements among them are close to one.
+
+    ladder              displace  partial  suppress  collapse  already
+    olmo3_7b_think            12        2         2         0        4
+    olmoe_1b7b                10        2         5         1        2
+    olmo3_7b                   9        1         6         1        4
+    tulu_llama31               7        5         2         1        5
+    olmo3_32b                  6        2         7         0        5
+    zephyr_mistral             5        2         3         1        7
+    olmo2_1b                   4        5         9         0        3
+    archangel_pythia           1        8         2         1        2
+
+**Ladders that displace on the median prompt: 1 of 8.** `already` is common (32 of 168 cells): on many of these prompts the riser was at or above `kill` in the base, so no crossing was available to find.
+
+### THE CROSSING IS AT SFT, NOT BETWEEN SFT AND DPO
+
+Over the 54 displacing cases:
+
+    where the lines cross          SFT 44    DPO 8    RLVR 2
+    the riser's largest step   base->SFT 43  SFT->DPO 10  DPO->RLVR 1
+
+**So the Figure 2 prompt is the minority case, not the pattern.** Its two-link chain — riser's biggest increment at DPO, lines crossing after SFT — is what one ladder does on one frame. By the decision rule the paper seat set before seeing this, the chain stays a sentence and any plate goes to the book.
+
+### BUT THE SFT/DPO SPLIT IS A PROPERTY OF THE LADDER, NOT THE PROMPT
+
+Riser's largest step across all 21 prompts:
+
+    ladder              base->SFT  SFT->DPO  DPO->RLVR   modal
+    tulu_llama31                4        15          2    SFT->DPO  71%
+    olmo2_1b                    3        15          3    SFT->DPO  71%
+    archangel_pythia           10        11          0    SFT->DPO  52%
+    olmoe_1b7b                 11         7          3    base->SFT 52%
+    zephyr_mistral             13         8          0    base->SFT 62%
+    olmo3_7b                   12         3          6    base->SFT 57%
+    olmo3_32b                  15         3          3    base->SFT 71%
+    olmo3_7b_think             15         3          3    base->SFT 71%
+
+**Within-ladder modal agreement is 107 of 168, 64%**, against a pooled split of 83/65/20 that would look like noise. Two ladders put the riser's rise mostly at DPO (Tulu, OLMo-2 1B) and four put it mostly at SFT (the OLMo-3 family, zephyr). On Tulu's seven `scream` paraphrases the riser's largest step is **SFT→DPO on all seven** — perfectly consistent — while only one of the seven is a clean displacement, because on three of them `scream` already outranks `kill` in the base.
+
+So the honest statement is not "the substitution is a two-link chain" but: **which link carries the riser's rise is set by the recipe, and the Tulu recipe puts it at DPO.** That is a claim about ladders, needs the eight-ladder table beside it, and is a better candidate for the book than the single-prompt chain.
