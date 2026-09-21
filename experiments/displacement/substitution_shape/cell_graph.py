@@ -41,7 +41,13 @@ import graph as G  # noqa: E402
 
 
 def cells(lang="en"):
-    """-> (Counter[(base_top, aligned_top)], n_cells, n_held, n_prompts)"""
+    """-> (Counter[edge], {edge: (lineages, prompts)}, n_cells, n_held, n_prompts)
+
+    **A CELL COUNT ALONE CANNOT BE READ.** 105 cells on `kill -> scream` is
+    105 models on one prompt or one model on 105 prompts or anything between,
+    and those are different claims. The lineage and prompt counts behind each
+    edge are carried alongside so the label can say which.
+    """
     from malignment import ch, roster, charge
     eps, _ = roster.endpoints()
     models = sorted(set(eps) | set(eps.values()))
@@ -59,6 +65,7 @@ def cells(lang="en"):
         return any(c.isalpha() for c in w) and w.lower() not in SW
 
     E, n, held = collections.Counter(), 0, 0
+    who = collections.defaultdict(lambda: (set(), set()))
     keep = set()
     for p, d in byp.items():
         if lang != "both" and charge.language(p) != lang:
@@ -73,8 +80,11 @@ def cells(lang="en"):
             if d[b] == d[a]:
                 held += 1
             else:
-                E[(d[b], d[a])] += 1
-    return E, n, held, len(keep)
+                e = (d[b], d[a])
+                E[e] += 1
+                who[e][0].add(b)
+                who[e][1].add(p)
+    return E, who, n, held, len(keep)
 
 
 def walk(E, seed, min_w, depth):
@@ -106,7 +116,7 @@ def main(argv=None):
     ap.add_argument("--lang", default="en", choices=("en", "zh", "both"))
     a = ap.parse_args(argv)
 
-    E, n, held, nps = cells(a.lang)
+    E, who, n, held, nps = cells(a.lang)
     print("%d prompt-lineage cells over %d prompts (%s), %d held (%.0f%%)"
           % (n, nps, a.lang, held, 100.0 * held / max(1, n)))
     print("  %d distinct changed edges; heaviest: %s"
@@ -117,7 +127,11 @@ def main(argv=None):
           % (a.seed, a.min_w, a.depth or "full", len(nodes), len(kept)))
     out = sorted(((k, t) for (f, t), k in kept.items() if f == a.seed),
                  reverse=True)
-    print("  %s ->: %s" % (a.seed, ", ".join("%s %d" % (t, k) for k, t in out)))
+    print("  %s ->:" % a.seed)
+    for k, t in out:
+        L_, P_ = who[(a.seed, t)]
+        print("     %-12s %4d cells  %2d lineages  %3d prompts"
+              % (t, k, len(L_), len(P_)))
 
     from malignment import figure as _fig
     fam, pt = _fig.pub_font(), _fig.PUB_FONT_PT
@@ -140,10 +154,15 @@ def main(argv=None):
                     ("#1a1a1a" if inc[w] >= 0.35 * hi else "#4d4d4d")))
     for (f, t), k in sorted(kept.items(), key=lambda kv: -kv[1]):
         L.append('  "%s" -> "%s" [penwidth=%.2f color="%s" fontname="%s" '
-                 'fontsize=%.1f fontcolor="#737373" label="%d"];'
+                 'fontsize=%.1f fontcolor="#737373" label="%s"];'
                  % (f, t, 0.5 + 3.0 * (k - min_w_floor(kept)) /
                     max(1, mx - min_w_floor(kept)),
-                    "#1a1a1a" if k >= 0.4 * mx else "#8c8c8c", fam, pt - 3, k))
+                    "#1a1a1a" if k >= 0.4 * mx else "#8c8c8c", fam, pt - 3,
+                    #: cells, then how many DISTINCT lineages and prompts
+                    #: produced them -- the two numbers that say whether the
+                    #: cell count is breadth or repetition
+                    "%d\\n%dL %dP" % (k, len(who[(f, t)][0]),
+                                      len(who[(f, t)][1]))))
     L.append("}")
     base = os.path.join(HERE, "figures", "cell_graph_%s_%s_w%d_d%s"
                         % (a.lang, a.seed, a.min_w, a.depth or "full"))

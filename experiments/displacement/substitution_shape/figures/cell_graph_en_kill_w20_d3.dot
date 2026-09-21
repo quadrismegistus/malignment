@@ -1,0 +1,34 @@
+digraph cells {
+  splines=true; overlap=prism; overlap_scaling=-4;
+  graph [bgcolor="white" sep="+8" K=0.9];
+  node [shape=plaintext margin="0.03,0.02"];
+  edge [arrowsize=0.5];
+  "began" [label="began" fontname="Arial" fontsize=9.9 fontcolor="#4d4d4d"];
+  "cut" [label="cut" fontname="Arial" fontsize=10.3 fontcolor="#4d4d4d"];
+  "destroy" [label="destroy" fontname="Arial" fontsize=9.0 fontcolor="#4d4d4d"];
+  "get" [label="get" fontname="Arial" fontsize=8.7 fontcolor="#4d4d4d"];
+  "held" [label="held" fontname="Arial" fontsize=8.8 fontcolor="#4d4d4d"];
+  "hurt" [label="hurt" fontname="Arial" fontsize=9.3 fontcolor="#4d4d4d"];
+  "kill" [label="kill" fontname="Arial" fontsize=18.8 fontcolor="#000000"];
+  "make" [label="make" fontname="Arial" fontsize=9.1 fontcolor="#4d4d4d"];
+  "punch" [label="punch" fontname="Arial" fontsize=8.8 fontcolor="#4d4d4d"];
+  "quit" [label="quit" fontname="Arial" fontsize=9.4 fontcolor="#4d4d4d"];
+  "scream" [label="scream" fontname="Arial" fontsize=11.3 fontcolor="#4d4d4d"];
+  "see" [label="see" fontname="Arial" fontsize=9.3 fontcolor="#4d4d4d"];
+  "started" [label="started" fontname="Arial" fontsize=9.1 fontcolor="#4d4d4d"];
+  "take" [label="take" fontname="Arial" fontsize=10.1 fontcolor="#4d4d4d"];
+  "kill" -> "scream" [penwidth=3.50 color="#1a1a1a" fontname="Arial" fontsize=6.0 fontcolor="#737373" label="105"];
+  "kill" -> "hurt" [penwidth=1.21 color="#8c8c8c" fontname="Arial" fontsize=6.0 fontcolor="#737373" label="41"];
+  "kill" -> "see" [penwidth=1.21 color="#8c8c8c" fontname="Arial" fontsize=6.0 fontcolor="#737373" label="41"];
+  "kill" -> "make" [penwidth=1.00 color="#8c8c8c" fontname="Arial" fontsize=6.0 fontcolor="#737373" label="35"];
+  "began" -> "started" [penwidth=1.00 color="#8c8c8c" fontname="Arial" fontsize=6.0 fontcolor="#737373" label="35"];
+  "kill" -> "destroy" [penwidth=0.86 color="#8c8c8c" fontname="Arial" fontsize=6.0 fontcolor="#737373" label="31"];
+  "cut" -> "held" [penwidth=0.71 color="#8c8c8c" fontname="Arial" fontsize=6.0 fontcolor="#737373" label="27"];
+  "kill" -> "punch" [penwidth=0.68 color="#8c8c8c" fontname="Arial" fontsize=6.0 fontcolor="#737373" label="26"];
+  "cut" -> "began" [penwidth=0.68 color="#8c8c8c" fontname="Arial" fontsize=6.0 fontcolor="#737373" label="26"];
+  "quit" -> "take" [penwidth=0.57 color="#8c8c8c" fontname="Arial" fontsize=6.0 fontcolor="#737373" label="23"];
+  "kill" -> "get" [penwidth=0.54 color="#8c8c8c" fontname="Arial" fontsize=6.0 fontcolor="#737373" label="22"];
+  "kill" -> "take" [penwidth=0.54 color="#8c8c8c" fontname="Arial" fontsize=6.0 fontcolor="#737373" label="22"];
+  "take" -> "quit" [penwidth=0.54 color="#8c8c8c" fontname="Arial" fontsize=6.0 fontcolor="#737373" label="22"];
+  "kill" -> "cut" [penwidth=0.50 color="#8c8c8c" fontname="Arial" fontsize=6.0 fontcolor="#737373" label="21"];
+}

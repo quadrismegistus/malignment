@@ -569,7 +569,9 @@ The base arms disagree too, before alignment touches anything: base `kill` runs 
     python -u cell_graph.py                  # from `kill`, English
     python -u cell_graph.py --min-w 10 --depth 3
 
-![cell graph](figures/cell_graph_en_kill_w10_d3.png)
+![cell graph d2](figures/cell_graph_en_kill_w10_d2.png)
+
+*Depth 2. The depth-3 version is `cell_graph_en_kill_w10_d3.png`.*
 
 The three units in this folder, and what each gives up:
 
@@ -585,6 +587,19 @@ Here a node is a word some model ranked first at some blank, and an edge is one 
 
     kill ->  scream 105   see 41   hurt 41   make 35   destroy 31   punch 26
              take 22   get 22   cut 21   shoot 15   know 15   die 10
+
+Every edge carries three numbers — cells, then **how many distinct lineages and prompts produced them** — because a cell count alone cannot be read. It separates breadth from repetition immediately:
+
+    kill ->  scream   105 cells   31 lineages   17 prompts
+             see       41          20            9
+             hurt      41          19           14
+             make      35          16           17
+             destroy   31          17           11
+             punch     26          14            8
+             take      22          18            6
+             cut       21          14            3
+
+`kill → scream` is broad on both axes: a third of the roster, spread over seventeen frames. `kill → cut` has almost as many lineages (14) over **three** prompts, so it is a fact about a few knife frames rather than about the word. `kill → make` is the opposite shape, 16 lineages across 17 prompts — thin everywhere rather than thick somewhere.
 
 At weight ≥ 10 and depth 3 that reaches 48 nodes over 61 edges: `scream → cry → {weep, sing, wonder, feel}`, `punch → hit → {struck, missed, swung}`, `die → {suffer, stay, fall}`, `cut → held → {handed, said}`, and through `take` into the institutional cluster `{quit, leave, implement, sue, fire → terminate}`.
 
