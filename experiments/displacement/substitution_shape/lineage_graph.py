@@ -208,6 +208,15 @@ def dot_flow(E, held, bw, aw, n, prompt, n_roster=None):
     for side in ("B", "A"):
         for x, y in zip(order[side], order[side][1:]):
             L.append('  "%s_%s" -> "%s_%s" [style=invis];' % (side, x, side, y))
+    #: **AND ONE MORE TO TOP-ALIGN THE COLUMNS** (RH). `dot` centres each rank
+    #: against the other, so the five-box left column floated a quarter of the
+    #: way down beside the ten-box right one. A heavily weighted invisible edge
+    #: between the two FIRST nodes costs the layout length whenever they are
+    #: not level, so it pulls the tops together. It is invisible and carries no
+    #: flow -- every visible edge is still one lineage's move.
+    if order["B"] and order["A"]:
+        L.append('  "B_%s" -> "A_%s" [style=invis weight=100];'
+                 % (order["B"][0], order["A"][0]))
     for (f, t), k in sorted(E.items(), key=lambda kv: -kv[1]):
         #: **HEADLESS WHERE THE WORD DID NOT CHANGE.** The arrow would assert
         #: a movement the equality denies; `kind_flow` makes the same choice

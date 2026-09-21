@@ -36,6 +36,7 @@ digraph linflow {
   "A_hurt" -> "A_punch" [style=invis];
   "A_punch" -> "A_rip" [style=invis];
   "A_rip" -> "A_tell" [style=invis];
+  "B_kill" -> "A_scream" [style=invis weight=100];
   "B_kill" -> "A_scream" [penwidth=4.10 color="#1a1a1a" label="15"];
   "B_scream" -> "A_scream" [penwidth=3.59 color="#1a1a1a" arrowhead=none label="13"];
   "B_kill" -> "A_kill" [penwidth=2.04 color="#1a1a1a" arrowhead=none label="7"];
