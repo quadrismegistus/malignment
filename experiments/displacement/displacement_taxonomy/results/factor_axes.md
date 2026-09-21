@@ -68,3 +68,26 @@ Concrete, bodily, referential contrasts at one end; inner-state, deliberative, c
 ### What would answer the question properly
 
 A multi-label pass: every relation scored on every axis rather than assigned to one. 16 agents × 154 relations × 38 axes, which is a loading matrix and factors without argument. Until that exists, "is there a factor or two" has been asked of a partition and answered no by default, which is not the same as answered.
+
+## D — the dense graded matrix, and the answer
+
+The multi-label pass section C called for, run. `axis_survey.py` on `jev-1.13.0`: **2,244 English relations × 38 axes = 85,272 graded judgements, 65 seconds, 0 failures, 22.74M input tokens ≈ $0.96.** Every relation scored on every axis as a `Score` — a probability-weighted position between five levels, centre meaning "these two lists do not separate on this contrast".
+
+**Missing cells: 0.00%.** The 2.6%-filled partition is gone; `Survey`'s per-item question set makes the key set a contract rather than a hope.
+
+> **PC1 21.6%, PC2 12.4% — first two 34.1%.**
+> **Four components for half the variance, twelve for 80%, of 38.**
+
+**So the answer is no.** What alignment does to a frame is not one or two things. It is not the forced-choice prompt hiding the structure either — this is the dense graded matrix the question actually needs, and it gives four dimensions for half.
+
+**But it is not the 9% the correspondence analysis gave**, and the difference is the measurement, not the corpus. Asking every axis and grading the answer more than doubles the leading component. The partition was hiding real structure; there just isn't a *small* amount of it.
+
+**PC1 is not a salience artefact**, which was the obvious worry given its one-sided loadings (negative end −0.25, positive end +0.10 — the shape of a general factor). Correlation between PC1 score and a relation's mean |value| is **−0.202**, and removing the per-relation salience component leaves PC1 at 22.7% rather than collapsing it. It is a contrast, not a count of how many axes fired.
+
+| | negative end | positive end |
+|---|---|---|
+| **PC1** | `orientation_toward_other_party`, `specificity_vs_generality`, `handling_vs_no_contact`, `means_vs_end` | `argument_structure`, `inner_state_vs_outward_act`, `deliberation_vs_decisive_act` |
+| **PC2** | `inner_state_vs_outward_act`, `kind_of_inner_state`, `evaluative_polarity`, `bluntness_vs_euphemism` | `volition_and_agency`, `act_vs_outcome`, `act_vs_state`, `transfer_vs_own_handling` |
+| **PC3** | `deliberation_vs_decisive_act`, `creation_vs_destruction`, `compliance_vs_resistance` | `force_and_abruptness`, `evaluative_polarity`, `bluntness_vs_euphemism` |
+
+**And the sparsity is real rather than structural.** Only **27.0%** of the 85,272 cells exceed 0.35 from centre. The rater was asked about all 38 and declined on three-quarters — zeros from a reader that considered the question, which is what the partition could never supply and what makes the covariance meaningful.
