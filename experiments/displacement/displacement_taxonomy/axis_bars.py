@@ -12,10 +12,24 @@ property of a vocabulary. The per-axis MEAN MOVEMENT does replicate -- it is
 the directions table, measured -- and it is what a reader can check against the
 word lists.
 
-Bar to the right: the base words sit at the LEFT pole, so alignment pushes
-toward the right one. Length is the mean of a probability-weighted position on
-a five-level scale, so |1.0| would be every relation placing the two lists
-cleanly at opposite poles.
+## IT IS A MOVEMENT, NOT A PROPERTY OF THE BASE SIDE
+
+The Survey asks where the two word lists sit RELATIVE TO EACH OTHER on an axis:
+its lowest level is "LIST 1 is wholly at the first pole, LIST 2 at the second".
+So a single value already carries both sides, and orienting it to "which pole
+the base sits on" leaves the aligned side implied at the other end. **There is
+no separate aligned score to plot; there is one displacement with a sign.**
+
+Marker to the right: alignment moves the sentence toward the RIGHT pole.
+Magnitude is the mean of a probability-weighted position on five levels, so
+|1.0| would be every relation placing the two lists cleanly at opposite ends.
+
+## THE SOURCE IS THE GRADED SURVEY, NOT THE ASSIGNMENT RUN
+
+`results/axis_survey_en_seed1.jsonl` — 2,244 relations x 38 axes on
+`jev-1.13.0`, every relation scored on every axis. NOT
+`grouping_seed1/axis_*.json`, which is the single-best-fitting-axis assignment
+and carries one value per relation.
 """
 import argparse, json, os, sys
 
@@ -178,7 +192,7 @@ def main(argv=None):
         axm.axvline(0, color=PUB_INK, linewidth=PUB_RULE_PT, zorder=4)
         axm.set_title("all frames", fontsize=PUB_FONT_PT - 1,
                       fontfamily=pub_font())
-        axm.set_xlabel("mean position\nof the base words",
+        axm.set_xlabel("where alignment\nmoves the sentence",
                        fontsize=PUB_FONT_PT - 1.5, fontfamily=pub_font())
         for sp in ("top", "right", "left"):
             axm.spines[sp].set_visible(False)
@@ -220,9 +234,18 @@ def main(argv=None):
     #: **NO ARROW GLYPHS.** The publication font has no U+2190/2192 and
     #: matplotlib silently substituted a tofu box, which reads as a stray
     #: symbol rather than a missing one. Words instead.
+    #: **THE QUANTITY IS A MOVEMENT, NOT A POSITION** (RH). The Survey asked
+    #: where the TWO lists sit relative to each other -- level 0 is "LIST 1
+    #: wholly at pole_x, LIST 2 at pole_y" -- so every value already encodes
+    #: both sides. Oriented to "which pole the base sits on", the aligned side
+    #: is implied at the other end, which makes the number what ALIGNMENT DID.
+    #: Labelling it "mean position of the base words" described one half of a
+    #: relational measure as though the other half were absent, and invited a
+    #: reader to ask what the aligned words scored. There is no separate
+    #: aligned score; there is one displacement with a sign.
     axx.set_xlabel(("lowest vs highest\nthird of lift" if a.facet else
-                    "mean position of the base words\n"
-                    "left pole  <<  0  >>  right pole"),
+                    "where alignment moves the sentence\n"
+                    "toward the left pole  <<  0  >>  toward the right pole"),
                    fontsize=PUB_FONT_PT - (1.5 if a.facet else 1),
                    fontfamily=pub_font())
     if a.dots:
