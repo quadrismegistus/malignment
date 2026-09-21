@@ -1,6 +1,6 @@
 Figure 3z. What alignment does to fourteen norm scales, measured against the spread of each norm itself.
 
-Each row is one scale, its two ends labelled on their own sides. Position is the median within-lineage move from base to aligned over 50 endpoint lineages, divided by the standard deviation of that norm's own values -- pooled over the base and aligned ratings of every gated row for the scale, so neither arm is the anchor. The square is all prompts; the triangles are the same quantity on the lowest and highest third of charge lift, cut at +0.000 and +0.360.
+Each row is one scale, its two ends labelled on their own sides. Position is the move from base to aligned -- averaged over the prompts of a lineage, then the median over the 50 endpoint lineages -- divided by the standard deviation of that norm's own values -- pooled over the base and aligned ratings of every gated row for the scale, so neither arm is the anchor. The square is all prompts; the triangles are the same quantity on the lowest and highest third of charge lift, cut at +0.000 and +0.360.
 
 ONE RULER FOR EVERY ROW, WHICH IS THE POINT. The companion plate divides each row by the spread of its own CHANGES, a denominator that ranges over a factor of 250 across these fourteen scales, so its rows cannot be compared with each other. Here one unit means the same kind of thing on every row: how far apart the words on that scale actually are.
 

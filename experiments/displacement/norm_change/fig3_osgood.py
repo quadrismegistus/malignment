@@ -700,7 +700,21 @@ def main():
     #: to READ it. The poles are already named at both ends of every row and
     #: zero is already drawn, so the axis only has to say what a side means.
     #: The caption states the quantity, the units and the aggregation.
-    ax.set_xlabel("Semantic pole toward which alignment moves",
+    #: **ASCII ARROWS, BECAUSE HELVETICA HAS NO ARROW GLYPHS.** Checked
+    #: against the font file itself: `/System/Library/Fonts/Helvetica.ttc`
+    #: carries 2,100 glyphs and neither U+2190 nor U+2192 is among them, so a
+    #: real arrow character would render in DejaVu Sans while the words stayed
+    #: Helvetica -- the same split that `axes.unicode_minus=False` exists on
+    #: this figure to prevent. **AND THE FONT AUDIT CANNOT SEE IT**: a Text
+    #: object reports one font name while rendering fallback glyphs inside
+    #: itself, so this would have shipped looking clean.
+    #:
+    #: Arial DOES have them (2,830 glyphs, both arrows) and is metrically
+    #: compatible with Helvetica, so switching `pub_font()` would buy real
+    #: arrows across every figure in the repo at almost no visual cost. That
+    #: is RH's call, not this file's, because it repaints every published
+    #: plate. Until then, "<-" and "->".
+    ax.set_xlabel("<-  Semantic pole toward which alignment moves  ->",
                   fontsize=PUB_FONT_PT - 1, fontfamily=pub_font())
     #: **ORDER IS THE HANDLE LIST, NOT THE DRAW ORDER** (RH): all prompts
     #: first, then the two lift extremes most-charged before least. Drawing
