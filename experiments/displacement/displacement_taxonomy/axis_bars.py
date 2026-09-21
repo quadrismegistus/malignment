@@ -53,9 +53,23 @@ def load(seed=1):
     return M, L, V, ax
 
 
-def short(s, n=17):
-    s = s.split("—")[0].split(",")[0].strip()
-    return s if len(s) <= n else s[:n - 1].rstrip() + "…"
+def short(s, n=21):
+    """Shorten a pole description to something that fits the label column.
+
+    **STRIP BEFORE TRUNCATING.** Cutting at a character count spent the budget
+    on articles and dangling clauses -- "another action or event that follows"
+    became "another action o…" when "another action" says it. Drop the leading
+    article and everything after the first comma or dash first; truncate at a
+    WORD boundary only if it still does not fit.
+    """
+    import re as _re
+    s = s.split("—")[0].split(",")[0].split(" — ")[0].strip()
+    s = _re.sub(r"^(a|an|the) ", "", s)
+    s = _re.sub(r" (that|which|already|typically) .*$", "", s)
+    if len(s) <= n:
+        return s
+    cut = s[:n].rsplit(" ", 1)[0]
+    return (cut if len(cut) >= n - 8 else s[:n - 1]).rstrip() + "…"
 
 
 def main(argv=None):
@@ -70,6 +84,8 @@ def main(argv=None):
     ap.add_argument("--seed", type=int, default=1)
     ap.add_argument("--dose", action="store_true")
     ap.add_argument("--top", type=int, default=0, help="keep only the N largest")
+    ap.add_argument("--dots", action="store_true",
+                    help="three markers a row on one scale instead of bars")
     ap.add_argument("--facet", action="store_true",
                     help="two panels: marginal on the left, lift split on the right")
     ap.add_argument("--sig", action="store_true",
@@ -129,7 +145,27 @@ def main(argv=None):
     n = len(o)
     #: 0.19 in a row put the full 38 on an 8-inch plate. `--top` is the plate
     #: version and the full one is the appendix.
-    if a.facet:
+    y = np.arange(n)
+    if a.dots:
+        fig, axx = plt.subplots(figsize=(PUB_SIZE[0], 0.165 * n + 1.05),
+                                layout="constrained")
+        axm = None
+        #: **THE SEGMENT IS THE POINT, NOT THE MARKERS.** Three markers a row
+        #: on one scale is compact but the eye reads them as three unrelated
+        #: dots; the thin rule joining the two tertiles makes the dose shift a
+        #: LENGTH, which is the quantity the figure is about, and its direction
+        #: is legible before any of the labels are read.
+        for i, j in enumerate(o):
+            axx.plot([lowm[j], topm[j]], [i, i], color=PUB_GRAY,
+                     linewidth=PUB_RULE_PT * 1.6, zorder=2,
+                     solid_capstyle="butt")
+        axx.scatter(lowm[o], y, marker="v", s=17, facecolor=PUB_GRAY,
+                    edgecolor="none", zorder=3, label="lowest third of lift")
+        axx.scatter(mu[o], y, marker="s", s=13, facecolor=PUB_MID,
+                    edgecolor="none", zorder=4, label="all frames")
+        axx.scatter(topm[o], y, marker="^", s=19, facecolor=PUB_INK,
+                    edgecolor="none", zorder=5, label="highest third")
+    elif a.facet:
         fig, (axm, axx) = plt.subplots(
             1, 2, sharey=True, figsize=(PUB_SIZE[0], 0.155 * n + 1.1),
             layout="constrained",
@@ -137,8 +173,7 @@ def main(argv=None):
     else:
         fig, axx = plt.subplots(figsize=(PUB_SIZE[0], 0.155 * n + 1.0))
         axm = None
-    y = np.arange(n)
-    if axm is not None:
+    if axm is not None and not a.dots:
         axm.barh(y, mu[o], height=0.62, color=PUB_MID, edgecolor="none", zorder=3)
         axm.axvline(0, color=PUB_INK, linewidth=PUB_RULE_PT, zorder=4)
         axm.set_title("all frames", fontsize=PUB_FONT_PT - 1,
@@ -156,12 +191,12 @@ def main(argv=None):
         #: the shared axis still draws its own ticks and they read as a second
         #: column of marks between the panels
         axx.tick_params(axis="y", length=0, labelleft=False)
-    if a.dose:
+    if a.dose and not a.dots:
         axx.barh(y + 0.20, lowm[o], height=0.36, color="white",
                  edgecolor=PUB_MID, linewidth=PUB_RULE_PT, zorder=3)
         axx.barh(y - 0.20, topm[o], height=0.36, color=PUB_INK,
                  edgecolor="none", zorder=3)
-    else:
+    elif not a.dots:
         axx.barh(y, mu[o], height=0.62, color=PUB_INK, edgecolor="none",
                  zorder=3)
     axx.axvline(0, color=PUB_INK, linewidth=PUB_RULE_PT, zorder=4)
@@ -169,7 +204,10 @@ def main(argv=None):
     #: direction, and a directional label plus a signed bar states it twice
     #: and disagrees with itself whenever the mean is near zero
     (axm or axx).set_yticks(y)
-    (axm or axx).set_yticklabels(["%s  /  %s" % (short(V[i]["pole_x"]),
+    #: **THE LABEL IS BIDIRECTIONAL** (RH). "X / Y" reads as a ratio or a
+    #: heading; "X <-> Y" says the row is an axis with two ends and that the
+    #: marker's position on it is the answer.
+    (axm or axx).set_yticklabels(["%s  <->  %s" % (short(V[i]["pole_x"]),
                                         short(V[i]["pole_y"])) for i in o],
                         fontsize=PUB_FONT_PT - 2.5, fontfamily=pub_font())
     (axm or axx).set_ylim(-0.8, n - 0.2)
@@ -187,7 +225,10 @@ def main(argv=None):
                     "left pole  <<  0  >>  right pole"),
                    fontsize=PUB_FONT_PT - (1.5 if a.facet else 1),
                    fontfamily=pub_font())
-    if a.dose:
+    if a.dots:
+        axx.legend(fontsize=PUB_FONT_PT - 2, frameon=False, handlelength=0.8,
+                   loc="lower right", scatterpoints=1, borderpad=0.2)
+    elif a.dose:
         (fig if a.facet else axx).legend(handles=[
             plt.Rectangle((0, 0), 1, 1, facecolor="white", edgecolor=PUB_MID,
                           linewidth=PUB_RULE_PT, label="lowest third of lift"),
@@ -206,11 +247,12 @@ def main(argv=None):
     #: clipped at left=0.29, and an invented bottom formula left an inch of
     #: white). The legend goes OUTSIDE the axes for the same reason -- inside,
     #: it sat on top of the bars it was describing.
-    if not a.facet:
+    if not (a.facet or a.dots):
         fig.tight_layout(pad=0.4)
     out = a.out or os.path.join(HERE, "figures",
-                                "axis_bars%s%s%s.png"
+                                "axis_bars%s%s%s%s.png"
                                 % ("_dose" if a.dose else "",
+                                   "_dots" if a.dots else "",
                                    "_facet" if a.facet else "",
                                    "_sig" if a.sig else ""))
     os.makedirs(os.path.dirname(out), exist_ok=True)
