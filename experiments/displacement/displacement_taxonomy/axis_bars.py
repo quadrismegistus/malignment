@@ -167,9 +167,11 @@ def main(argv=None):
     ap.add_argument("--examples", action="store_true",
                     help="a word pair under each pole, from the relations that "
                          "separate most cleanly on that axis")
-    ap.add_argument("--raw-poles", action="store_true",
-                    help="keep the vocabulary's arbitrary pole order instead "
-                         "of putting the base end on the left")
+    ap.add_argument("--orient", choices=("highlift", "marginal", "raw"),
+                    default="highlift",
+                    help="which end goes on the right: where the top lift "
+                         "tertile points (default), where the corpus mean "
+                         "points, or the vocabulary's own arbitrary order")
     ap.add_argument("--osgood", action="store_true",
                     help="semantic-differential layout: each pole labelled on "
                          "its own side of the scale")
@@ -202,9 +204,23 @@ def main(argv=None):
     #: tertile markers straddle zero whichever way the row is drawn. Orienting
     #: such a row on its high-lift mean instead would be choosing the tertile
     #: that makes the story, which is the thing every check tonight was for.
-    flip_ax = np.ones(len(ax))
-    if not a.raw_poles:
-        flip_ax = np.where(mu < 0, -1.0, 1.0)
+    #: **THE RIGHT POLE IS WHERE HIGH LIFT TAKES IT** (RH, default). Applied
+    #: uniformly to all 38, which is what makes it a convention rather than a
+    #: choice: the objection to orienting on a tertile is cherry-picking, and
+    #: cherry-picking is one rule for most rows and another for the awkward
+    #: ones.
+    #:
+    #: **SO THE BLACK TRIANGLES BEING POSITIVE CARRIES NO INFORMATION.** It is
+    #: the definition of the axis, not a result, and a caption has to say so or
+    #: a reader will read "alignment always moves right at high lift" off a
+    #: tautology. What carries information is where the GREY triangle and the
+    #: SQUARE fall relative to it -- and a grey triangle on the far side of
+    #: zero is a reversal, which is the thing the plate is for.
+    q3 = np.quantile(L, 2 / 3.0)
+    key = {"highlift": M[L > q3].mean(0), "marginal": mu,
+           "raw": np.ones(len(ax))}[a.orient]
+    flip_ax = np.where(key < 0, -1.0, 1.0)
+    if a.orient != "raw":
         M = M * flip_ax
         mu = mu * flip_ax
         V = [dict(v, pole_x=v["pole_y"], pole_y=v["pole_x"]) if f < 0 else v
