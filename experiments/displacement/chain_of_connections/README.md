@@ -553,3 +553,39 @@ So the separation is clean once corridors are read rather than only the table: *
 ### What this changes in §12.5's citation list
 
 `NO -- that scream is far from kill because the path is long` stands for the **k-NN** plate, and the plates in this folder are all k-NN. But the underlying claim it was blocking — that `scream` is harder to reach than an unrelated control — **is now supported on the cutoff construction**, by a quantity that needs no k and no cutoff. If the book wants the remoteness point, this is where it comes from, not from hop counts.
+
+## 12.7 Which edge is the bottleneck, and does it move across the ladder?
+
+Asked by the paper seat: the seven destinations tying at 0.469 sit beyond one edge, so that edge is the bottleneck for the whole class. Which is it, and is it the same after alignment?
+
+**The premise needs correcting first.** The capping edge is not a bridge to the vocal side. At base it is **`hurt -> hit`, the second step of the corridor**, at 0.469 — it caps everything downstream of `hit`, which is most of the graph, and the seven tie there because they all lie beyond it rather than because they share a vocal-side entrance.
+
+**And it does move.** At all three aligned stages the cap becomes `break -> bust`, mid-corridor:
+
+    edge             base     sft     dpo    rlvr
+    hurt->hit       0.469   0.473   0.477   0.478
+    break->bust     0.477   0.419   0.416   0.413     <- the cap, after alignment
+    kill->hurt      0.516   0.485   0.481   0.486
+    cry->scream     0.662   0.646   0.643   0.646
+    sing->dance     0.446   0.450   0.439   0.443
+
+    bottleneck to scream   0.469   0.419   0.416   0.413
+    words tied with it         7       2       2       2
+
+At base `break -> bust` (0.477) sits just above `hurt -> hit` (0.469); by SFT it has fallen below it and become the cap. **So this is not two near-equal edges swapping order** — measured against the baseline of how much every pair moves:
+
+    base -> sft, all 46,971 pairs:  median |d| 0.0109, p90 0.0290, max 0.1493
+    break->bust  |d| 0.0577   99.24th percentile   (358 pairs move more)
+    hurt->hit    |d| 0.0047   23rd percentile      (36,119 pairs move more)
+
+`break -> bust` weakens by 0.0577, a top-1% movement, while `hurt -> hit` is static. The fall happens **base → SFT and then stops** (0.419, 0.416, 0.413), which is `own_geometry`'s pattern exactly: SFT does the geometric work and DPO and RLVR do almost none.
+
+### What this is and is not
+
+**It is a real localised change** — the first this work has found — and it has a consequence worth stating: the bottleneck from `kill` to `scream` **falls** after alignment, 0.469 → 0.413. Alignment raises `scream`'s probability by 3.8x (`own_geometry`) while *weakening* its geometric corridor.
+
+**It is not a contradiction of `own_geometry`'s null.** That null was about `scream`'s rank relative to `kill`, and about nothing being singled out among the 307. This is an edge between two other words entirely — `break` and `bust` — which that instrument never looked at.
+
+**And it is one edge.** 358 of 46,971 pairs move more, so a top-1% mover is not rare in absolute terms, and a corridor of ~16 edges containing one of them is roughly eight times expectation on a single observation. **n=1, and it should not be built on** without a declared test: the honest form is that the identity of the capping edge is not stable across the ladder, and the direction of the bottleneck change is down.
+
+**Not at the vocal side.** Both candidate caps are mid-corridor percussive-violence links. Nothing in this locates the censor at the entrance to vocalisation, which is where a chain reading would look for it.
