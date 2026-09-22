@@ -203,11 +203,13 @@ def main(argv=None):
     ch2 = [(x, y) for x, y in edges if x[:2] == y[:2]]
     lc = collections.Counter(w[0] for w in words)
     nn = len(words)
-    base = 100.0 * sum(v * (v - 1) for v in lc.values()) / (nn * (nn - 1))
+    #: NOT `base` -- that name is the output path a few lines down, and
+    #: shadowing it made the writer try to concatenate a float with ".dot".
+    chance = 100.0 * sum(v * (v - 1) for v in lc.values()) / (nn * (nn - 1))
     print("  ORTHOGRAPHY of the %d drawn edges: %.0f%% share a first letter, "
           "%.0f%% a two-letter prefix (chance %.0f%%)"
           % (len(edges), 100.0 * len(ch1) / len(edges),
-             100.0 * len(ch2) / len(edges), base))
+             100.0 * len(ch2) / len(edges), chance))
     print("      same-letter edges: %s"
           % ", ".join("%s>%s" % e for e in sorted(ch1)))
 
