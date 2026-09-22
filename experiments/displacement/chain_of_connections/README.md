@@ -306,10 +306,14 @@ The proposal: sections 8-10 infer contiguity from the FAILURE of a similarity me
 
 **It does not hold.** Three specifications, declared in advance and all reported:
 
-    specification              scream's rank of 305      rank corr. of the two axes
-    prompt unit, all arms            166                        +0.310
-    prompt unit, base arms           187                        +0.315
-    cell unit, all arms              105                        +0.360
+    CO-COMPLETION RANK of 305          scream    eat     dance   sit   write   axes
+    prompt unit, all arms                 166     36       230   131     138   +0.310
+    prompt unit, base arms                187     38       202   122     119   +0.315
+    cell unit, all arms                   105     46       146   117     213   +0.360
+    ------------------------------------------------------------------------------
+    COSINE RANK of 307, for reference     262     39       280   192     120
+
+**The `eat` control sits in the same place on both axes** -- cosine 39, co-completion 36 / 38 / 46 -- and so does `dance` at the other end (cosine 280, co-completion 230 / 202 / 146). A control that lands in the same position under both instruments is the clearest statement that they are one instrument: `eat` is near `kill` whether you ask what it means or what it co-occurs with, and `scream` is not near under either.
 
 `scream` is mid-pack on co-completion in every one -- better than its cosine rank of 262, never near. And `kill`'s top co-completion partners are the same vocabulary as its top cosine neighbours: vandalize, injure, gouge, lunge, avenge, lynch, strangle, retaliate, rape, throttle, bury, suffocate.
 

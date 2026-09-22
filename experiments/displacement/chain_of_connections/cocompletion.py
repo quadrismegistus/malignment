@@ -97,6 +97,8 @@ def main(argv=None):
     ap.add_argument("--arms", default="all", choices=("all", "base"))
     ap.add_argument("--min-co", type=int, default=5)
     ap.add_argument("--basis", default="argmax", choices=("argmax", "faller", "crossing"))
+    ap.add_argument("--controls", default="eat,dance,sit,write",
+                    type=lambda s: [x for x in s.split(",") if x])
     a = ap.parse_args(argv)
 
     import cosines
@@ -132,6 +134,18 @@ def main(argv=None):
         pr = ("pmi %5.2f  rank %3d" % (P[w][0], prank[w])) if w in P else \
              "below min-co %d" % a.min_co
         print("    %-10s %8d  %18s  %18s" % (w, c, cr, pr))
+
+    #: **THE CONTROL HAS TO APPEAR ON BOTH AXES OR IT IS NOT A CONTROL.**
+    #: `eat` is the word that beat `scream` on every similarity measure in
+    #: this folder; if it also beats it on co-completion then the second axis
+    #: is not telling a different story, which is the whole question. Emitted
+    #: rather than transcribed into the README by hand.
+    print("\n  CONTROLS on both axes (%s)" % ", ".join(a.controls))
+    for w in a.controls:
+        cr = "%+.3f  rank %3d" % (cos[w], crank[w]) if w in crank else "not in vocab"
+        pr = ("pmi %5.2f  rank %3d" % (P[w][0], prank[w])) if w in P else \
+             "below min-co %d" % a.min_co
+        print("    %-10s %8s  %18s  %18s" % (w, "-", cr, pr))
 
     #: **THE HEADLINE IS THE DISAGREEMENT.** If the two rankings agreed, one of
     #: them would be redundant and the metonymy claim would have no axis of its
