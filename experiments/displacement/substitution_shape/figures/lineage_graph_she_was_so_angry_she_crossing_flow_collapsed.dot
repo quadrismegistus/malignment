@@ -1,0 +1,48 @@
+digraph linflow {
+  rankdir=LR; splines=true; overlap=false;
+  size="4.8,12.48";
+  bgcolor="white"; nodesep=0.10; ranksep=1.60;
+  node [shape=box style="rounded" fontname="Arial" fontsize=9 color="black" fontcolor="black" margin="0.06,0.035" penwidth=0.6];
+  edge [fontname="Arial" fontsize=7.2 color="#4d4d4d" penwidth=0.75 arrowsize=0.5];
+  { rank=same;
+  "B_kill" [label="kill\n(33/50)"];
+  "B_cry" [label="cry\n(5/50)"];
+  "B_scream" [label="scream\n(2/50)"];
+  "B_ZZ_ONES" [label="break\ndestroy\ngo\nhit\npunch\npunish\nslap"];
+  }
+  { rank=same;
+  "A_scream" [label="scream\n(24/50)"];
+  "A_hit" [label="hit\n(5/50)"];
+  "A_hurt" [label="hurt\n(4/50)"];
+  "A_punch" [label="punch\n(4/50)"];
+  "A_cry" [label="cry\n(2/50)"];
+  "A_kill" [label="kill\n(2/50)"];
+  "A_ZZ_ONES" [label="break\ndestroy\nfight\nrip\nslap\nsmash"];
+  }
+  "B_kill" -> "B_cry" [style=invis];
+  "B_cry" -> "B_scream" [style=invis];
+  "B_scream" -> "B_ZZ_ONES" [style=invis];
+  "A_scream" -> "A_hit" [style=invis];
+  "A_hit" -> "A_hurt" [style=invis];
+  "A_hurt" -> "A_punch" [style=invis];
+  "A_punch" -> "A_cry" [style=invis];
+  "A_cry" -> "A_kill" [style=invis];
+  "A_kill" -> "A_ZZ_ONES" [style=invis];
+  "B_kill" -> "A_scream" [style=invis weight=100];
+  "B_kill" -> "A_scream" [penwidth=4.10 color="#1a1a1a" label="(18/33)"];
+  "B_kill" -> "A_ZZ_ONES" [penwidth=1.35 color="#1a1a1a" label="(5/33)"];
+  "B_cry" -> "A_scream" [penwidth=1.14 color="#1a1a1a" label="(4/5)"];
+  "B_kill" -> "A_hurt" [penwidth=0.92 color="#1a1a1a" label="(3/33)"];
+  "B_kill" -> "A_hit" [penwidth=0.92 color="#1a1a1a" label="(3/33)"];
+  "B_kill" -> "A_punch" [penwidth=0.92 color="#1a1a1a" label="(3/33)"];
+  "B_ZZ_ONES" -> "A_scream" [penwidth=0.71 color="#8c8c8c" label="(2/7)"];
+  "B_kill" -> "A_cry" [penwidth=0.50 color="#8c8c8c"];
+  "B_ZZ_ONES" -> "A_hurt" [penwidth=0.50 color="#8c8c8c"];
+  "B_ZZ_ONES" -> "A_ZZ_ONES" [penwidth=0.50 color="#8c8c8c"];
+  "B_ZZ_ONES" -> "A_kill" [penwidth=0.50 color="#8c8c8c"];
+  "B_cry" -> "A_kill" [penwidth=0.50 color="#8c8c8c"];
+  "B_ZZ_ONES" -> "A_hit" [penwidth=0.50 color="#8c8c8c"];
+  "B_scream" -> "A_cry" [penwidth=0.50 color="#8c8c8c"];
+  "B_scream" -> "A_hit" [penwidth=0.50 color="#8c8c8c"];
+  "B_ZZ_ONES" -> "A_punch" [penwidth=0.50 color="#8c8c8c"];
+}

@@ -54,6 +54,49 @@ def is_word(w):
     return any(c.isalpha() for c in w)
 
 
+def crossers(prompt):
+    """-> {lineage: (biggest faller, biggest riser)} for one prompt.
+
+    **THE OTHER BASIS.** `argmaxes` asks what the model would SAY before and
+    after; this asks which word lost the most probability and which gained the
+    most, which is the `kill -> scream` exhibit's own definition and need not
+    involve the top word at all -- `run.py` records that 51% of crossings
+    happen with the argmax unchanged.
+
+    Read from `movement_v4`, so both arms come from one row and the candidate
+    set is shared by construction.
+
+    **THERE ARE NO HELD LINEAGES HERE AND THAT IS STRUCTURAL.** A distribution
+    sums to one, so if anything fell something rose: every lineage has a
+    faller and a riser and they can never be the same word. The flow layout's
+    held count is therefore 0 by construction rather than by measurement, and
+    the two bases are not comparable on it.
+
+    Ties are dropped rather than broken: if two words lost identically the
+    lineage has no single biggest faller, and choosing one would invent a
+    preference it did not express.
+    """
+    from malignment import ch, roster
+    eps, _ = roster.endpoints()
+    q = ("SELECT base, aligned, word, p_base, p_aligned FROM {db}.movement_v4 "
+         "WHERE prompt='%s' AND frame_base='' AND frame_aligned=''"
+         % prompt.replace("'", "\\'"))
+    by = collections.defaultdict(list)
+    for r in ch.query(q, limit_bytes=None):
+        if eps.get(r["base"]) == r["aligned"]:
+            by[r["base"]].append(
+                (float(r["p_aligned"]) - float(r["p_base"]), r["word"]))
+    out = {}
+    for b, v in by.items():
+        v.sort()
+        if len(v) < 2 or v[0][0] >= 0 or v[-1][0] <= 0:
+            continue
+        if v[0][0] == v[1][0] or v[-1][0] == v[-2][0]:
+            continue
+        out[b] = (v[0][1], v[-1][1])
+    return eps, out
+
+
 def argmaxes(prompt):
     """-> {model: (word, p)} pass 1 only, over every endpoint arm."""
     from malignment import ch, roster
@@ -72,7 +115,7 @@ def argmaxes(prompt):
     return eps, best
 
 
-def build(prompt, keep_held=True, words_only=True):
+def build(prompt, keep_held=True, words_only=True, basis="argmax"):
     """-> (edges, held, base_w, aligned_w, n_lineages, n_missing)
 
     **WITH `keep_held`, A LINEAGE THAT DID NOT MOVE IS AN EDGE.** In the
@@ -84,15 +127,26 @@ def build(prompt, keep_held=True, words_only=True):
     not. `kind_flow` draws its same-kind arrows headless for the same reason
     and this follows it.
     """
-    eps, best = argmaxes(prompt)
+    if basis == "crossing":
+        eps, pair = crossers(prompt)
+        best = None
+    else:
+        eps, best = argmaxes(prompt)
+        pair = None
     E, held = collections.Counter(), collections.Counter()
     bw_c, aw_c = collections.Counter(), collections.Counter()
     n = miss = nonword = 0
     for b, a in eps.items():
-        if b not in best or a not in best:
-            miss += 1
-            continue
-        bw, aw = best[b][0], best[a][0]
+        if pair is not None:
+            if b not in pair:
+                miss += 1
+                continue
+            bw, aw = pair[b]
+        else:
+            if b not in best or a not in best:
+                miss += 1
+                continue
+            bw, aw = best[b][0], best[a][0]
         if words_only and not (is_word(bw) and is_word(aw)):
             nonword += 1
             continue
@@ -413,6 +467,11 @@ def main(argv=None):
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--prompt", default=FIG2)
     ap.add_argument("--tag", default=None, help="filename tag")
+    ap.add_argument("--basis", default="argmax",
+                    choices=("argmax", "crossing"),
+                    help="argmax: base top word -> aligned top word. "
+                         "crossing: biggest faller -> biggest riser, which "
+                         "need not be the top word at either arm.")
     ap.add_argument("--ranked", action="store_true",
                     help="one shared row per word, ordered by base+aligned "
                          "incidence; implies --collapse-singletons")
@@ -427,22 +486,37 @@ def main(argv=None):
     a = ap.parse_args(argv)
 
     E, held, bw, aw, n, miss, nonword, n_roster = build(
-        a.prompt, keep_held=not a.free, words_only=not a.keep_nonwords)
+        a.prompt, keep_held=not a.free, words_only=not a.keep_nonwords,
+        basis=a.basis)
     print("PROMPT: %r" % a.prompt)
+    #: **THE REPORT HAS TO SPEAK THE BASIS'S OWN VOCABULARY.** These lines
+    #: said "argmax" and "top word UNCHANGED" under both bases; on the
+    #: crossing basis there is no argmax involved and the unchanged count is
+    #: 0 BY CONSTRUCTION, since a distribution that loses mass somewhere must
+    #: gain it elsewhere. Printing a structural zero under a measured name is
+    #: how a reader learns something false.
+    LR = ("faller", "riser") if a.basis == "crossing" else ("argmax", "argmax")
     print("  %d endpoint lineages drawn%s%s"
-          % (n, "; %d missing" % miss if miss else "",
-             "; %d dropped for a non-word argmax on one side or the other"
-             % nonword if nonword else ""))
+          % (n, "; %d missing (no clean faller/riser)" % miss
+             if miss and a.basis == "crossing" else
+             ("; %d missing" % miss if miss else ""),
+             "; %d dropped for a non-word %s on one side or the other"
+             % (nonword, LR[0]) if nonword else ""))
     #: **`sum(E)` IS NOT THE CHANGED COUNT ONCE HELD LINEAGES ARE EDGES.**
     #: It became the total, and printed under "CHANGED" it read 47 of 47.
-    print("  top word UNCHANGED in %d, CHANGED in %d; %d distinct edges "
-          "over %d lineage-edges"
-          % (sum(held.values()), n - sum(held.values()), len(E),
-             sum(E.values())))
-    print("  base argmax:    %s"
-          % ", ".join("%s %d" % x for x in bw.most_common(6)))
-    print("  aligned argmax: %s"
-          % ", ".join("%s %d" % x for x in aw.most_common(6)))
+    if a.basis == "crossing":
+        print("  %d distinct edges over %d lineage-edges; no held lineages "
+              "exist on this basis (a faller implies a riser)"
+              % (len(E), sum(E.values())))
+    else:
+        print("  top word UNCHANGED in %d, CHANGED in %d; %d distinct edges "
+              "over %d lineage-edges"
+              % (sum(held.values()), n - sum(held.values()), len(E),
+                 sum(E.values())))
+    print("  biggest %-7s %s"
+          % (LR[0] + ":", ", ".join("%s %d" % x for x in bw.most_common(6))))
+    print("  biggest %-7s %s"
+          % (LR[1] + ":", ", ".join("%s %d" % x for x in aw.most_common(6))))
     print("  heaviest edges:")
     for (f, t), k in E.most_common(8):
         print("    %-12s -> %-12s %2d lineages" % (f, t, k))
@@ -450,7 +524,9 @@ def main(argv=None):
     tag = a.tag or ("_".join(a.prompt.lower().split()[:5])
                     .replace("'", "").replace(",", ""))
     base = os.path.join(HERE, "figures", "lineage_graph_%s%s"
-                        % (tag, "_free" if a.free else
+                        % (tag + ("" if a.basis == "argmax"
+                                  else "_" + a.basis),
+                           "_free" if a.free else
                            "_flow" + ("_ranked" if a.ranked else
                                       "_collapsed" if a.collapse_singletons
                                       else "")))
@@ -473,10 +549,15 @@ def main(argv=None):
         "One prompt, one edge per lineage. %r" % a.prompt,
         "",
         "Each of the %d endpoint lineages in `roster.endpoints()` contributes "
-        "exactly one edge, from the word its own BASE arm ranks first at the "
-        "blank to the word its own ALIGNED arm ranks first. Nothing is "
+        + ("exactly one edge, from the word that lost the most probability "
+           "at the blank to the word that gained the most. Neither need be "
+           "the top word at either arm and usually neither is. Nothing is "
+           if a.basis == "crossing" else
+           "exactly one edge, from the word its own BASE arm ranks first at "
+           "the blank to the word its own ALIGNED arm ranks first. Nothing is ")
+        + (
         "averaged before the edge is drawn, so an edge of weight %d is %d "
-        "separately trained models making that move."
+        "separately trained models making that move.")
         % (n_roster, max(E.values()), max(E.values())),
         "",
         "%d of the %d are drawn. %d are excluded because the first-ranked "
