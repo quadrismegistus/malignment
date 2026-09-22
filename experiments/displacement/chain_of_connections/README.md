@@ -620,3 +620,63 @@ At base `break -> bust` (0.477) sits just above `hurt -> hit` (0.469); by SFT it
 **And it is one edge.** 358 of 46,971 pairs move more, so a top-1% mover is not rare in absolute terms, and a corridor of ~16 edges containing one of them is roughly eight times expectation on a single observation. **n=1, and it should not be built on** without a declared test: the honest form is that the identity of the capping edge is not stable across the ladder, and the direction of the bottleneck change is down.
 
 **Not at the vocal side.** Both candidate caps are mid-corridor percussive-violence links. Nothing in this locates the censor at the entrance to vocalisation, which is where a chain reading would look for it.
+
+## 12.8 Lifting the vocabulary: the corridor survives, §12.6's claim does not
+
+Every chain above routed through the **307 words that clear theta on this prompt** — a small island, and a corridor found on it may be a fact about what was let in rather than about the model. RH asked what happens with a vocabulary that isn't selected by the prompt. Producer: `wide_vocab.py`.
+
+### Three attempts at "every word that could go here", and what each got wrong
+
+**`get_pos` is the wrong instrument at this slot.** Tagging all 16,705 real single-token words contextually returns VERB for **12,099 of them, 72%** — including `abdomen`, `abortion`, `absence`, `abrasive`, `aboard`. After *"wanted to"* the parser **expects** a verb and assigns VERB to whatever follows. It is the right instrument for "what role does this word play here" and the wrong one for "is this a verb".
+
+**WordNet's verb sense fails the other way**: its additions are `absorbs`, `accuses`, `achieves` — real verbs, inflected, and *"wanted to absorbs"* is not English. Requiring a verb sense **and** the base form gives 3,312 infinitives, but that test drops `avenge`, `fling`, `gouge`, `howl`, `injure`, `lunge`, `pounce`, `pummel`, `retaliate`, `lynch` — 47 of the existing 307, and precisely this corpus's displacement vocabulary.
+
+**Admitting every real word reintroduces morphology.** On all 16,739, `kill`'s nearest are `murder`, **`killed`**, **`killing`**, `hurt`, **`murdered`**, `attack`, **`murdering`**, **`kills`** — four of eight are inflections of the query word — and the route ran `kill -> killed -> kills -> hurts -> hits -> beats -> beat`. Those are not steps between ideas; they are one idea in four forms, and they let a route cross the space without associating anything.
+
+**The model's own answer, and why it is not used.** One forward pass gives an exact probability for every single-token word at the blank. The top 25 are all infinitives — `kill` .138, `hit` .052, `cry` .047, `scream` .046, `punch` .045 — and the offending inflections sit at ranks 810–6,356 (`killed` p=1.6e-05). A cut at p >= 1e-4 gives **352 words**, keeps every destination and control, excludes every inflection, and lands almost exactly where the theta-gated 307 did by a completely different route. But it restricts intermediates to words that could actually be **uttered** here, which is the constraint RH had already rejected: *a chain's connections need not be its output.*
+
+**So: one form per lemma.** Every real word, deduplicated by inflection, base form preferred — not "must be an infinitive". 16,739 -> **10,727**, removing 6,012 inflections.
+
+### THE CORRIDOR SURVIVES A THIRTY-FIVE-FOLD VOCABULARY INCREASE
+
+    307     kill -> hurt -> hit -> beat -> POUND -> BANG -> bash -> smash -> break
+            -> bust -> burst -> explode -> DISAPPEAR -> DIE -> FAINT -> CRY -> scream
+    3,359   kill -> hurt -> hit -> beat -> BATTER -> bash -> smash -> break -> bust
+            -> burst -> explode -> IMPLODE -> EXPIRE -> PERISH -> die -> faint -> cry -> scream
+    10,727  kill -> hurt -> hit -> beat -> BATTER -> bash -> smash -> break -> bust
+            -> burst -> explode -> scream
+
+Nine way stations — `hurt`, `hit`, `beat`, `bash`, `smash`, `break`, `bust`, `burst`, `explode` — are identical and in the same order in all three, chosen from 307 words and then from 10,727. **The plate is not an artefact of the candidate set.**
+
+### BUT `eat` BEATS `scream` IN EVERY WIDE VOCABULARY
+
+    vocabulary                scream    eat     verdict
+    307    above-theta         0.469   0.376    scream (§12.6, published)
+    3,359  infinitives         0.564   0.578    eat
+    16,739 all real words      0.643   0.660    eat
+    10,727 one form per lemma  0.629   0.649    eat
+
+**And the cause is isolated.** Restricting the *same* wide embedding back to the original 307 reproduces the published figures to three decimals — `scream` 0.469, `eat` 0.376, `cry` 0.469, `dance` 0.446 — so neither the residual nor the centring changed. What changed is that `eat` gained a route it did not have:
+
+    307      kill -> hurt -> hit -> beat -> pound -> bang -> bash -> slash -> slice
+             -> bite -> chew -> swallow -> eat                        0.376
+    10,727   ... -> destroy -> dismantle -> overhaul -> overthrow -> overrun
+             -> overwhelm -> engulf -> devour -> consume -> eat        0.649
+
+Destruction to engulfing to consumption is a coherent chain, and seven of its way stations clear theta on no arm of this prompt.
+
+### The selection effect, stated plainly
+
+The candidate set is the words the models give probability to **on this prompt**, so it is biased toward the frame's own semantics: `scream` is above theta and so is every way station that reaches it, while `eat`'s natural corridor is not. **The 307 were arbitrarily favourable to `scream`, and §12.6's comparison was made on a vocabulary selected by the thing it was comparing.**
+
+### What this withdraws
+
+- **WITHDRAWN: §12.6's headline.** "`scream` bottlenecks at 0.469 and `eat` at 0.376 — mediated connection exceeding direct connection" holds only on the 307 and reverses in three independent wider vocabularies. I described it to the paper seat as "the only form in which a chain of connections was ever going to be measurable". It is not measurable in that form. The margin also shrinks: 0.093 in favour of `scream` on the 307, 0.020 in favour of `eat` on the lemma set.
+- **WITHDRAWN: the `dance` resolution as a general claim.** True on the 307, where `dance` sits downstream of `scream`; on the wider sets the controls simply interleave with the destinations.
+- **STANDS: the corridor and the plate**, on stronger evidence than before — nine way stations survive a thirty-five-fold increase in what could have replaced them.
+- **STANDS: §11's bimodality**, a cosine-rank fact with no graph in it.
+- **STANDS: every caution.** A different rule gives a different chain; this is adjacency, not travel.
+
+    python wide_vocab.py --vocab lemma        # the run of record here
+    python wide_vocab.py --vocab all          # every real word, morphology and all
+    python wide_vocab.py --vocab infinitive   # the verb-sense + base-form test

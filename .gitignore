@@ -384,3 +384,6 @@ experiments/emergence/capacities/figures/
 # ~15 min, and every number in the README is derived by tables.py from the
 # .json beside them. Tracked artefacts should be the small derived ones.
 experiments/displacement/own_geometry/results/*.npz
+
+# wide-vocab residuals: 33-162 MB, regenerable by wide_vocab.py
+experiments/displacement/chain_of_connections/results/wide_vocab_resid*.npz
