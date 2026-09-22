@@ -164,12 +164,19 @@ def plot(words, adj, pos, src, dsts, B, S, base, controls, clean=False,
         #: the type along with the drawing. 17 ranks at 0.22 in a node plus
         #: 0.14 in of ranksep lands just under the 6.5 in ceiling.
         L = ["digraph {",
-             '  rankdir=BT; bgcolor="white"; ranksep=%.2f; nodesep=0.12;'
-             % max(0.06, min(0.16, (height - 0.3) / 40.0)),
-             '  node [shape=box style="rounded,filled" fontname="Arial" '
-             'fontsize=9 height=0.22 margin="0.05,0.02" color="#9aa0a6" '
-             'fillcolor="#ffffff"];',
-             '  edge [arrowsize=0.55 color="#9aa0a6"];']
+             '  rankdir=TB; bgcolor="white"; ranksep=%.2f; nodesep=0.14;'
+             % max(0.08, min(0.20, (height - 0.3) / 40.0)),
+             #: **NO BOXES (RH).** `plaintext` removes the frame and fill, so
+             #: the plate is words and arrows and nothing else. Emphasis moves
+             #: from a coloured box to a BOLD word, which is the same
+             #: distinction carried by type rather than by furniture -- and it
+             #: survives being printed in one colour, which a blue fill does
+             #: not.
+             '  node [shape=plaintext fontname="Arial" fontsize=9 '
+             'height=0.18 margin="0.02,0.01"];',
+             #: arrowheads and widths were scaled for a plate with boxes and
+             #: labels; without them they dominate the short gaps between words
+             '  edge [arrowsize=0.35 color="#9aa0a6"];']
     else:
         L = ["digraph {", '  rankdir=TB; bgcolor="white"; ranksep=0.30;',
          '  node [shape=box style="rounded,filled" fontname="Arial" '
@@ -178,14 +185,21 @@ def plot(words, adj, pos, src, dsts, B, S, base, controls, clean=False,
     mx = max(dsts.values()) if dsts else 1
     for i in sorted(keep):
         w = words[i]
+        if clean:
+            #: bold marks the source and the destinations; everything else is
+            #: a way station and set in the regular face
+            bold = w == src or w in dsts or w in controls
+            L.append('  "%s" [label=<%s%s%s>];'
+                     % (w, "<B>" if bold else "", w, "</B>" if bold else ""))
+            continue
         if w == src:
             lab, fill, pen = w, "#d8d8d8", 1.6
         elif w in dsts:
-            lab = w if clean else "%s\\n%d of %d\\nbottleneck %.3f" % (
+            lab = "%s\\n%d of %d\\nbottleneck %.3f" % (
                 w, dsts[w], sum(dsts.values()), bott[w])
             fill, pen = "#cfe0f3", 1.6
         elif w in controls:
-            lab = w if clean else "%s\\nCONTROL\\nbottleneck %.3f" % (w, bott[w])
+            lab = "%s\\nCONTROL\\nbottleneck %.3f" % (w, bott[w])
             fill, pen = "#f3e0cf", 1.6
         else:
             lab, fill, pen = w, "#ffffff", 1.0
@@ -214,7 +228,9 @@ def plot(words, adj, pos, src, dsts, B, S, base, controls, clean=False,
     lo, hi = min(vs), max(vs)
     def width(v):
         t = (v - lo) / (hi - lo) if hi > lo else 0.5
-        return 0.5 + 5.0 * t
+        #: the boxed plate could carry 0.5-5.5 pt strokes; between bare words
+        #: at 9 pt a 5 pt arrow reads as the subject rather than the relation
+        return (0.3 + 1.6 * t) if clean else (0.5 + 5.0 * t)
     for (a, b), v in sorted(edges.items()):
         hot = (a, b) in weak
         lab = "" if clean else ' label="%.2f"%s' % (
