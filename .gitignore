@@ -379,3 +379,8 @@ experiments/emergence/capacities/figures/
 #           experiments/passage_analysis/national_story/conflict.sqlite
 # or just rebuild: python experiments/passage_analysis/national_story/export_db.py
 **/national_story/conflict.sqlite
+
+# own_geometry raw matrices: 30-100 MB per ladder, regenerable by run.py in
+# ~15 min, and every number in the README is derived by tables.py from the
+# .json beside them. Tracked artefacts should be the small derived ones.
+experiments/displacement/own_geometry/results/*.npz
