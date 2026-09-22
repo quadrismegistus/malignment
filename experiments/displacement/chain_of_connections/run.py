@@ -147,6 +147,59 @@ def real_words(tok, name="subtlex", min_fpm=0.0, min_zipf=2.0, wordnet=True):
     return out
 
 
+#: The 1- and 2-letter English words that can actually fill this slot. Every
+#: OTHER string of that length in the candidate set is segmentation debris --
+#: measured on `She was so angry she wanted to`: 19 single letters (`g`, `p`,
+#: `d`, `k`, `w`, ...) and 20 two-letter fragments (`cl`, `cr`, `fl`, `sl`,
+#: `sm`, `sn`, `sw`, `th`, `re`, `po`, ...) against these four. A length floor
+#: is the rule and this is its declared exception list, in the shape RH asked
+#: for when the same problem came up on lemmas.
+SHORT_OK = {"be", "do", "go", "up"}
+
+
+def candidate_words(prompt, name="subtlex", min_fpm=0.0, min_zipf=2.0,
+                    wordnet=True, fold=True, min_len=3):
+    """-> ({word: arms above theta}, {reason: n dropped}) -- THE candidate filter.
+
+    `run.main` and `cosines.space` each had their own copy of this and they
+    were already drifting; every producer in this folder now calls one
+    function, so a fix to the vocabulary reaches the graph, the cosines, the
+    connectivity sweep and the pathway tree at once.
+
+    ## CASE IS A DUPLICATE, NOT A WORD
+
+    The candidate set carries `KILL` beside `kill`, `BITE` beside `bite`, and
+    `SCREAM` and `Scream` beside `scream` -- 8 of the 9 non-lowercase entries
+    have a lowercase twin. Left alone they become separate NODES: the pathway
+    tree routed `punch` through `bite -> BITE -> smite`, a hop between two
+    spellings of one word. Folded, their above-theta arm counts add.
+
+    ## AND SINGLE LETTERS PASS EVERY OTHER TEST
+
+    `g`, `p` and `d` are in SUBTLEX and have WordNet entries (gram, phosphorus,
+    vitamin D), so neither the word list nor the dictionary removes them, and
+    the tree ran `destroy` through `gouge -> g -> p -> d -> dis`. They are
+    removed by length, which is the only property that actually distinguishes
+    them. **The residue is proper nouns at exactly 3 letters** -- `dis` (the
+    Roman god) and `las` survive, and are named rather than special-cased.
+    """
+    ok, _n = lexicon(name, min_fpm, min_zipf, wordnet)
+    raw = candidates(prompt)
+    out, why = collections.Counter(), collections.Counter()
+    for w, v in raw.items():
+        key = w.lower() if fold else w
+        if fold and key != w and key in raw:
+            why["folded into a lowercase twin"] += 1
+        if not ok(key):
+            why["not a word (SUBTLEX + WordNet)"] += 1
+            continue
+        if len(key) < min_len and key not in SHORT_OK:
+            why["shorter than %d letters" % min_len] += 1
+            continue
+        out[key] = max(out[key], v) if fold else v
+    return dict(out), dict(why)
+
+
 def candidates(prompt):
     """-> {word: how many of the 100 arms carry it above theta}"""
     from malignment import ch, roster
@@ -247,13 +300,14 @@ def main(argv=None):
         #: two pieces of the word it starts from. Same filter as the `words`
         #: vocabulary, applied to the candidates too -- and SUBTLEX alone does
         #: NOT remove them, because they are in it; the WordNet test does.
-        _ok, _n = lexicon(a.lexicon, a.min_fpm, a.min_zipf, a.wordnet)
         n_all = len(cand)
-        cand = {w: v for w, v in cand.items() if _ok(w.lower())}
-        print("  %d of %d candidates are real words (%d dropped: underscore "
-              "runs, specials, and word-boundary fragments)%s"
-              % (len(cand), n_all, n_all - len(cand),
-                 "" if a.wordnet else "  [--no-wordnet: FRAGMENTS KEPT]"))
+        cand, why = candidate_words(a.prompt, a.lexicon, a.min_fpm,
+                                    a.min_zipf, a.wordnet)
+        print("  %d of %d candidates kept%s"
+              % (len(cand), n_all, "" if a.wordnet else
+                 "  [--no-wordnet: FRAGMENTS KEPT]"))
+        for k in sorted(why):
+            print("      %-34s %d" % (k, why[k]))
         if a.space == "bge":
             #: a contextual encoder gives every token a vector, so a
             #: multi-token word is the mean of its pieces and all 466 are

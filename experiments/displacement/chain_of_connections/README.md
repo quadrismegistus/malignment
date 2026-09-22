@@ -216,3 +216,64 @@ That does not restore the original premise, it inverts it. The experiment asked 
 
     python connectivity.py                       # the sweep, both spaces
     python run.py --vocab candidates --space bge --k 2   # the path above
+
+## 10. Pathways to the words the lineages actually chose — and a WITHDRAWAL of section 9's far-tail claim
+
+RH's proposal: stop nominating `scream` in advance. Take the destinations from the measurement — on this prompt, at lineage grain, `kill`'s base arm goes to `scream` in 15 lineages, `cry` in 2, `hurt`/`punch`/`fight`/`destroy` in 1 each, and stays at `kill` in 7 — and draw the routes to all of them at once. Producer: `pathways.py`.
+
+His own objection, and the answer: **a shared node is not an ambiguity.** The union of shortest paths from one source is a tree, so every node has exactly one parent on its route back to `kill`; two destinations meeting at a node means they genuinely share a prefix. Node weight is then the lineage mass flowing through it. The real ambiguity is ties between equal-length paths, which plain BFS resolves by vocabulary order — so the rule here is declared instead: **fewest hops, then greatest summed cosine, then alphabetical**, i.e. the strongest of the shortest.
+
+### First it exposed two defects in the vocabulary
+
+The first run routed `punch` through `bite -> BITE -> smite` and `destroy` through `gouge -> g -> p -> d -> dis`.
+
+- **Case was making duplicate nodes.** 8 of the 9 non-lowercase candidates have a lowercase twin (`KILL`, `BITE`, `SCREAM`, `Scream`...), so a hop between two spellings of one word counted as a step.
+- **Single letters pass every filter this folder had.** `g`, `p` and `d` are in SUBTLEX *and* have WordNet entries — gram, phosphorus, vitamin D. Neither the word list nor the dictionary removes them. Length does, and length is the only property that actually separates them: of the 39 candidates under three letters, **19 are single letters and 20 are two-letter fragments** (`cl`, `cr`, `fl`, `sl`, `sm`, `sn`, `sw`, `th`, `re`, `po`...) against exactly four real words, `be`, `do`, `go`, `up`, which are now a declared exception list.
+
+Both fixes live in one new `run.candidate_words`, because `run.main` and `cosines.space` each had their own copy of the filter and had already drifted. Candidates: **466 -> 307** (116 not words, 39 too short, 8 folded). Residue named: `dis` and `las` are three-letter proper nouns and survive.
+
+### AND THAT CHANGED THE ANSWER. Section 9's far-tail claim is WITHDRAWN.
+
+Section 9 said `scream` sits at 12 hops against a median of 9 with only 31 of 350 words farther. On the cleaned vocabulary:
+
+    k=2, bge      BEFORE (350 words)          AFTER (307 words)
+    scream        12 hops, median 9           9 hops, median 9
+    farther than  31 of 350                   125 of 307
+
+**`scream` is at the median again, and the 12 hops were partly the debris padding the route.** The claim that it sits in the far tail was an artefact of the same fragments this section removed, and I reported it as a three-instrument agreement when one of the three was reading contaminated vocabulary.
+
+### What actually survives, and it is a weaker and more honest claim
+
+    cosine        scream -0.118, rank 262 of 307 -- the bottom 15%
+    k=1 component kill's is NINE words: bury, die, hang, kill, lynch, murder,
+                  slaughter, smother, strangle. scream, shout, cry, shriek are
+                  out; so are eat, dance, sit, write
+    k=2 hops      scream 9 = median. shout 10, dance 10, write 10, sit 11 are
+                  FARTHER. eat 4, stab 2, strangle 2, shoot 2, murder 1, die 1
+
+Cosine and hop count **disagree about `scream`** and the disagreement is not noise: cosine puts it in the bottom 15%, hops put it mid-pack. Both are right about different things. `kill`'s neighbourhood is very small and entirely homicidal — nine words at k=1, about ten above +0.27 by cosine — and everything else in the lexicon sits outside it at roughly comparable remove. So:
+
+**`scream` is not specially far from `kill`. It is ORDINARILY far, and the notable fact is how near `eat` is** (+0.138, rank 39, 4 hops at k=2 against `scream`'s 9). The median hop distance is 9 because most of the vocabulary is far; being outside `kill`'s neighbourhood is not distinctive, because almost everything is.
+
+That still refutes the premise the experiment was built on — there is no short associative chain from `kill` to `scream` — but it does so by showing the chain is *unremarkable*, not by showing it is *long*. The earlier reading made the negative result more interesting than it is.
+
+### The plate
+
+`pathways_kill_argmax_bge_k2.png`. All six destinations leave `kill` by the same three steps, and the branch point is `bite`:
+
+    kill -> murder -> stab -> bite            21 of the 21 lineages that moved
+      bite -> chew                            19
+        chew -> laugh -> sing -> weep -> shriek -> scream   15
+        chew -> laugh -> sing -> weep -> cry                 2
+        chew -> chuck -> shove -> push -> pinch -> punch      1
+        chew -> choke -> vomit -> dump -> dis -> destroy      1
+      bite -> lick -> skin -> scar -> scare -> harm -> hurt   1
+                                          harm -> injure -> attack -> fight  1
+
+The mouth survives the cleaning and is now the whole structure rather than one path's flavour: every route out of `kill` goes through `bite`, and 19 of 21 continue through `chew` before anything else happens. From there the heavy branch is oral-to-vocal — `laugh`, `sing`, `weep`, `shriek`, `scream`.
+
+**Read it as adjacency, not as travel.** Sections 4, 5 and 9 are the standing warning and this plate is made entirely of the thing they warn about; a forward pass does not walk a graph. What the plate shows is that the words alignment moves to are reached from `kill` through a narrow shared gate, and what it cannot show is any model doing so.
+
+    python pathways.py                          # the plate above
+    python pathways.py --basis faller           # 10 destinations instead of 6
+    python pathways.py --min-lineages 2         # scream and cry only

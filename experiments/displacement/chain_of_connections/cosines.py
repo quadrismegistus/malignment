@@ -32,9 +32,9 @@ PROBE = ["scream", "shout", "yell", "cry", "weep", "shriek", "laugh",
 def space(name, prompt, centre=True):
     """-> (words, unit-normalised matrix, {word: row})"""
     import torch
-    cand = run.candidates(prompt)
-    ok, _ = run.lexicon("subtlex", 0.0, 2.0, True)
-    cand = {w: v for w, v in cand.items() if ok(w.lower())}
+    #: ONE filter for the whole folder -- see `run.candidate_words`. This was
+    #: a second copy of it and the two had already drifted.
+    cand, _why = run.candidate_words(prompt)
     W, tok = embed.matrix(embed.MODEL)
     if name == "bge":
         M, words = embed.bge_in_context(prompt, sorted(cand))
