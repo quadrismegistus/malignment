@@ -107,7 +107,8 @@ def main(argv=None):
     ap.add_argument("--from", dest="src", default="kill")
     ap.add_argument("--basis", default="argmax", choices=("argmax", "faller", "crossing"))
     ap.add_argument("--space", default="bge",
-                    choices=("bge", "llama", "llama_unembed"))
+                    choices=("bge", "llama", "llama_unembed",
+                             "llama_resid_mean", "llama_resid23"))
     ap.add_argument("--k", type=int, default=2)
     ap.add_argument("--min-lineages", type=int, default=1)
     #: the full above-theta candidate list, fragments and all
