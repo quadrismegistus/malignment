@@ -65,14 +65,27 @@ def targets(prompt, basis, src):
     return out, out.pop(src, 0), bw.get(src, 0)
 
 
-def tree(words, W, idx, src, dsts, k):
+def tree(words, W, ids, src, dsts, k):
     """-> (parent, hops, step) under: fewest hops, then greatest summed cosine.
 
     Lexicographic Dijkstra on (hops, -sum cos). `heapq` orders the tuple, and
     the third element is the path itself so equal keys break alphabetically.
+
+    **TWO INDICES, AND CONFUSING THEM SILENTLY PRODUCES A FINDING.**
+    `cosines.space` returns `W` indexed by TOKEN ID for the llama spaces (it
+    hands back the whole embedding matrix) and by POSITION for bge (it builds
+    one row per candidate). `run.graph` needs the former to gather rows;
+    everything downstream -- `adj`, `S`, `best` -- is the latter, because
+    `graph` re-indexes as it gathers. This function took one index and used it
+    for both, which was correct for bge and read arbitrary rows of a 128k
+    matrix for llama. It produced clean, plausible, entirely fictional plates,
+    including a `kill` component of `{kil, kill, le}` that looked like proof
+    the unembedding follows spelling. `ids` in, positions out, and the two are
+    never the same variable again.
     """
-    adj, S = run.graph(words, idx, W, k)
-    s = idx[src]
+    adj, S = run.graph(words, ids, W, k)
+    pos = {w: i for i, w in enumerate(words)}
+    s = pos[src]
     best = {}
     q = [(0, 0.0, (s,))]
     while q:
@@ -97,6 +110,10 @@ def main(argv=None):
                     choices=("bge", "llama", "llama_unembed"))
     ap.add_argument("--k", type=int, default=2)
     ap.add_argument("--min-lineages", type=int, default=1)
+    #: the full above-theta candidate list, fragments and all
+    ap.add_argument("--raw", action="store_true",
+                    help="no dictionary/length/case filter: let the path run "
+                         "through subwords")
     a = ap.parse_args(argv)
 
     dsts, stayed, n_base = targets(a.prompt, a.basis, a.src)
@@ -111,12 +128,13 @@ def main(argv=None):
         print("  dropped below --min-lineages %d: %s"
               % (a.min_lineages, ", ".join(sorted(drop))))
 
-    words, W, ids = cosines.space(a.space, a.prompt)
+    words, W, ids = cosines.space(a.space, a.prompt, filtered=not a.raw)
+    #: `ids` gathers rows out of W; `idx` addresses everything graph-side.
     idx = {w: i for i, w in enumerate(words)}
     missing = [w for w in list(dsts) + [a.src] if w not in idx]
     if missing:
         raise SystemExit("not in the %s vocabulary: %s" % (a.space, ", ".join(missing)))
-    best, S = tree(words, W, idx, a.src, dsts, a.k)
+    best, S = tree(words, W, ids, a.src, dsts, a.k)
 
     #: mass on a node = lineages of every destination whose route passes it
     mass = collections.Counter()
@@ -157,13 +175,42 @@ def main(argv=None):
           % ", ".join("%s %d" % t for t in way) or "  (none)")
 
     os.makedirs(FIGS, exist_ok=True)
-    tag = "%s_%s_%s_k%d%s" % (a.src, a.basis, a.space, a.k,
-                              "_min%d" % a.min_lineages if a.min_lineages > 1 else "")
+    tag = "%s_%s_%s_k%d%s%s" % (a.src, a.basis, a.space, a.k,
+                                "_min%d" % a.min_lineages if a.min_lineages > 1 else "",
+                                "_raw" if a.raw else "")
     base = os.path.join(FIGS, "pathways_" + tag)
     edges = set()
     for w in dsts:
         p = paths[w]
         edges.update(zip(p, p[1:]))
+
+    #: **EVERY PLATE REPORTS ITS OWN ORTHOGRAPHY, because the drawn edges are
+    #: far more alliterative than the space is.** Aggregate 3-NN agreement on
+    #: a first letter runs 21-26% across bge and llama's two spaces; the edges
+    #: a shortest-path tree actually draws run 36-53%, against a 9% chance
+    #: baseline. Two causes, and neither is the space: a path SELECTS chaining
+    #: edges, and this producer's declared tie-break -- greatest summed cosine
+    #: among equal-length paths -- prefers the highest-cosine edges, which are
+    #: disproportionately same-letter. So the number belongs on the plate.
+    #:
+    #: **A ZERO HERE WOULD BE WRONG.** English sound symbolism is real for
+    #: exactly this vocabulary: `sl-`, `sm-` and `scr-` are semantically
+    #: coherent clusters for violence and noise verbs, so `shriek -> scream`
+    #: and `smack -> slap` are alliterative AND semantic. The discriminator is
+    #: not the rate but whether spelling is doing work meaning is not, which
+    #: is why the offending edges are listed rather than only counted.
+    ch1 = [(x, y) for x, y in edges if x[0] == y[0]]
+    ch2 = [(x, y) for x, y in edges if x[:2] == y[:2]]
+    lc = collections.Counter(w[0] for w in words)
+    nn = len(words)
+    base = 100.0 * sum(v * (v - 1) for v in lc.values()) / (nn * (nn - 1))
+    print("  ORTHOGRAPHY of the %d drawn edges: %.0f%% share a first letter, "
+          "%.0f%% a two-letter prefix (chance %.0f%%)"
+          % (len(edges), 100.0 * len(ch1) / len(edges),
+             100.0 * len(ch2) / len(edges), base))
+    print("      same-letter edges: %s"
+          % ", ".join("%s>%s" % e for e in sorted(ch1)))
+
     L = ["digraph {", '  rankdir=LR; bgcolor="white";',
          '  node [shape=box style="rounded,filled" fontname="Arial" '
          'fontsize=10 color="#999999"];',

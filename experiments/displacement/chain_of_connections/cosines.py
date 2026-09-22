@@ -29,12 +29,19 @@ PROBE = ["scream", "shout", "yell", "cry", "weep", "shriek", "laugh",
          "fight", "sell", "destroy"]
 
 
-def space(name, prompt, centre=True):
+def space(name, prompt, centre=True, filtered=True):
     """-> (words, unit-normalised matrix, {word: row})"""
     import torch
     #: ONE filter for the whole folder -- see `run.candidate_words`. This was
     #: a second copy of it and the two had already drifted.
-    cand, _why = run.candidate_words(prompt)
+    #: **`filtered=False` PUTS THE SUBWORDS BACK, ON PURPOSE.** The dictionary
+    #: and length filters exist because fragments corrupted a path through the
+    #: word they started from. But if a space is suspected of following
+    #: SPELLING, removing the spellings is exactly the wrong move: the
+    #: fragments are where an orthographic space would show its hand, and a
+    #: path that runs `kill -> kil -> kill` is evidence rather than noise.
+    cand = run.candidates(prompt) if not filtered \
+        else run.candidate_words(prompt)[0]
     W, tok = embed.matrix(embed.MODEL)
     if name == "bge":
         M, words = embed.bge_in_context(prompt, sorted(cand))
