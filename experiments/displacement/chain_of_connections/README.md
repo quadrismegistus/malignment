@@ -487,3 +487,55 @@ Clean at k=2, gone by k=3, where `scream` at 5 sits among `rip` 5, `destroy` 4 a
 - **NO:** that `scream` is far from `kill` because the path is long. Eight hops is the 84th percentile and `eat` is also at eight.
 - **NO:** any particular waypoint. `talk`, `speak` and `say` are k=2 artefacts; `curse` and `swear` are k=3's.
 - **Still no:** anything traversal-shaped. A forward pass does not walk this graph.
+
+## 12.6 Edges by cosine cutoff, not k nearest — and length says something after all
+
+RH's question after §12.5: would length mean anything if edges were drawn by a cosine cutoff instead of by nearest neighbours? **Yes, and it reverses the check that went against the plate.** Producer: `threshold.py`.
+
+A k-NN graph gives every node degree ≥ k, so an edge means "relatively nearest", not "actually similar", and in a sparse region it manufactures edges between things that are not close. That is exactly why `eat` and `scream` landed on the same eight hops. Under a cutoff an edge means the similarity cleared a bar, so sparse regions genuinely disconnect.
+
+### The threshold-free form: the bottleneck
+
+Choosing a cutoff is choosing an answer, so report the quantity that needs none. The **bottleneck** from `kill` to a word is `max over paths of (min cosine along the path)` — the highest cutoff at which the two are still connected, i.e. the weakest link on the best route. It is the minimum edge on the maximum-spanning-tree path, and one Kruskal plus one BFS answers it for all 307.
+
+    word       direct   bottleneck   hops   kind
+    hurt        0.516      0.516       1    destination
+    cry        -0.010      0.469      15    destination
+    scream     -0.078      0.469      16    destination
+    hit         0.332      0.469       2    destination
+    destroy     0.413      0.469       9    destination
+    slap        0.220      0.469       5    destination
+    punch       0.221      0.469       3    destination
+    smash       0.046      0.469       7    destination
+    dance      -0.092      0.446      19    CONTROL
+    fight       0.332      0.442       2    destination
+    rip         0.032      0.419      10    destination
+    sit        -0.201      0.379      22    CONTROL
+    eat         0.132      0.376      12    CONTROL
+    write      -0.056      0.335       7    CONTROL
+
+    cutoff   edges   comps   kill's comp   hops: scream / eat
+    0.50       122     217          5          -    /   -
+    0.45       207     170         79         10    /   -
+    0.40       348     124        133          5    /   -
+    0.35       557      71        215          4    /   5
+    0.30       923      31        270          3    /   3
+
+**`scream` bottlenecks at 0.469 and `eat` at 0.376.** At a 0.45 cutoff `scream` is reachable and `eat` is not; at 0.40 `scream` is five hops and `eat` is still in another component. §12.5's null was a property of the k-NN construction, not of the two words.
+
+**And the direct cosines run the OTHER WAY** — `eat` +0.132 against `scream` −0.078. So `scream` is reachable through a corridor whose weakest link is stronger than anything available to `eat`, while being less similar to `kill` directly. That is the chain claim as a number: **mediated connection stronger than direct connection**, which is the only form in which "a chain of connections" was ever going to be measurable.
+
+### Two limits, both real
+
+- **The measure saturates.** Seven destinations share a bottleneck of exactly 0.469 because they all sit beyond one bridge edge, so it cannot rank them against each other. It separates classes, not members.
+- **`dance` is a genuine exception at 0.446**, above `fight` (0.442) and `rip` (0.419). So destinations are NOT cleanly separated from controls as a class: the range is 0.419–0.516 for destinations and 0.335–0.446 for controls, overlapping on one control. Three of four controls sit below every destination; the fourth does not.
+
+So the honest form is: **the bottleneck separates `scream` from `eat` decisively and destinations from controls only mostly.** Quoting it for the `eat` comparison is supported; quoting it as "destinations are better connected than unrelated words" is not, until `dance` is explained.
+
+    python threshold.py                       # bottlenecks + sweep, base residual
+    python threshold.py --space bge
+    python threshold.py --stage dpo
+
+### What this changes in §12.5's citation list
+
+`NO -- that scream is far from kill because the path is long` stands for the **k-NN** plate, and the plates in this folder are all k-NN. But the underlying claim it was blocking — that `scream` is harder to reach than an unrelated control — **is now supported on the cutoff construction**, by a quantity that needs no k and no cutoff. If the book wants the remoteness point, this is where it comes from, not from hop counts.
