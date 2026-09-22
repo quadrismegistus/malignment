@@ -54,8 +54,20 @@ def is_word(w):
     return any(c.isalpha() for c in w)
 
 
-def crossers(prompt):
+def crossers(prompt, require_cross=False):
     """-> {lineage: (biggest faller, biggest riser)} for one prompt.
+
+    **`faller` DOES NOT MEAN THE LINES CROSSED, AND AN EARLIER VERSION OF THIS
+    FILE CALLED IT `crossing`.** Biggest-faller-to-biggest-riser says only that
+    one word lost the most and another gained the most in the same lineage. It
+    does NOT say the riser overtook the faller. Measured on the exhibit prompt:
+    of the 18 lineages whose pair is `kill -> scream`, **12 cross, 5 had
+    `scream` ALREADY ABOVE `kill` in the base arm, and 1 narrowed the gap
+    without closing it.** Naming the loose thing after the strict one would
+    have shipped a 50% overstatement of the exhibit.
+
+    `require_cross` applies the test the name promises: the riser must start
+    below the faller and end above it.
 
     **THE OTHER BASIS.** `argmaxes` asks what the model would SAY before and
     after; this asks which word lost the most probability and which gained the
@@ -82,10 +94,12 @@ def crossers(prompt):
          "WHERE prompt='%s' AND frame_base='' AND frame_aligned=''"
          % prompt.replace("'", "\\'"))
     by = collections.defaultdict(list)
+    lv = collections.defaultdict(dict)
     for r in ch.query(q, limit_bytes=None):
         if eps.get(r["base"]) == r["aligned"]:
-            by[r["base"]].append(
-                (float(r["p_aligned"]) - float(r["p_base"]), r["word"]))
+            pb, pa = float(r["p_base"]), float(r["p_aligned"])
+            by[r["base"]].append((pa - pb, r["word"]))
+            lv[r["base"]][r["word"]] = (pb, pa)
     out = {}
     for b, v in by.items():
         v.sort()
@@ -93,7 +107,13 @@ def crossers(prompt):
             continue
         if v[0][0] == v[1][0] or v[-1][0] == v[-2][0]:
             continue
-        out[b] = (v[0][1], v[-1][1])
+        f, t = v[0][1], v[-1][1]
+        if require_cross:
+            fb, fa = lv[b][f]
+            rb, ra = lv[b][t]
+            if not (rb < fb and ra > fa):
+                continue
+        out[b] = (f, t)
     return eps, out
 
 
@@ -127,8 +147,8 @@ def build(prompt, keep_held=True, words_only=True, basis="argmax"):
     not. `kind_flow` draws its same-kind arrows headless for the same reason
     and this follows it.
     """
-    if basis == "crossing":
-        eps, pair = crossers(prompt)
+    if basis in ("faller", "crossing"):
+        eps, pair = crossers(prompt, require_cross=(basis == "crossing"))
         best = None
     else:
         eps, best = argmaxes(prompt)
@@ -468,10 +488,12 @@ def main(argv=None):
     ap.add_argument("--prompt", default=FIG2)
     ap.add_argument("--tag", default=None, help="filename tag")
     ap.add_argument("--basis", default="argmax",
-                    choices=("argmax", "crossing"),
+                    choices=("argmax", "faller", "crossing"),
                     help="argmax: base top word -> aligned top word. "
-                         "crossing: biggest faller -> biggest riser, which "
-                         "need not be the top word at either arm.")
+                         "faller: biggest faller -> biggest riser, which need "
+                         "NOT have crossed. crossing: the same pair, kept only "
+                         "where the riser started below the faller and ended "
+                         "above it.")
     ap.add_argument("--ranked", action="store_true",
                     help="one shared row per word, ordered by base+aligned "
                          "incidence; implies --collapse-singletons")
@@ -495,16 +517,19 @@ def main(argv=None):
     #: 0 BY CONSTRUCTION, since a distribution that loses mass somewhere must
     #: gain it elsewhere. Printing a structural zero under a measured name is
     #: how a reader learns something false.
-    LR = ("faller", "riser") if a.basis == "crossing" else ("argmax", "argmax")
+    LR = (("faller", "riser") if a.basis in ("faller", "crossing")
+          else ("argmax", "argmax"))
     print("  %d endpoint lineages drawn%s%s"
-          % (n, "; %d missing (no clean faller/riser)" % miss
-             if miss and a.basis == "crossing" else
+          % (n, "; %d excluded: the riser did not end above the faller"
+             % miss if miss and a.basis == "crossing" else
+             "; %d missing (no clean faller/riser)" % miss
+             if miss and a.basis == "faller" else
              ("; %d missing" % miss if miss else ""),
              "; %d dropped for a non-word %s on one side or the other"
              % (nonword, LR[0]) if nonword else ""))
     #: **`sum(E)` IS NOT THE CHANGED COUNT ONCE HELD LINEAGES ARE EDGES.**
     #: It became the total, and printed under "CHANGED" it read 47 of 47.
-    if a.basis == "crossing":
+    if a.basis in ("faller", "crossing"):
         print("  %d distinct edges over %d lineage-edges; no held lineages "
               "exist on this basis (a faller implies a riser)"
               % (len(E), sum(E.values())))
@@ -550,9 +575,13 @@ def main(argv=None):
         "",
         "Each of the %d endpoint lineages in `roster.endpoints()` contributes "
         + ("exactly one edge, from the word that lost the most probability "
-           "at the blank to the word that gained the most. Neither need be "
-           "the top word at either arm and usually neither is. Nothing is "
+           "at the blank to the word that gained the most, kept only where "
+           "the riser started below the faller and ended above it. Nothing is "
            if a.basis == "crossing" else
+           "exactly one edge, from the word that lost the most probability "
+           "at the blank to the word that gained the most. THE LINES NEED NOT "
+           "HAVE CROSSED -- use --basis crossing for that. Nothing is "
+           if a.basis == "faller" else
            "exactly one edge, from the word its own BASE arm ranks first at "
            "the blank to the word its own ALIGNED arm ranks first. Nothing is ")
         + (
