@@ -1,0 +1,614 @@
+{
+ "_provenance": {
+  "built": "2026-09-22",
+  "calibrated_against": "population.fluency_rates(), 48 endpoint arms",
+  "membership": "len>=2 and CJK and present in SUBTLEX-CH (fields.freq(w, lang='zh'))",
+  "n_zh_prompts": 407,
+  "producer": "twp_population.rebuild",
+  "source_table": "twp_words_v4_best / twp_cells_v4_best",
+  "topk": 20,
+  "what": "Per-model Chinese legibility for twp cells. See twp_population.py for the calibration."
+ },
+ "models": {
+  "01-ai/Yi-1.5-9B": {
+   "cjk": 0.9637,
+   "lex_share": 0.4339,
+   "mass": 0.6349,
+   "n_prompts": 407
+  },
+  "01-ai/Yi-1.5-9B-Chat": {
+   "cjk": 0.9635,
+   "lex_share": 0.4882,
+   "mass": 0.707,
+   "n_prompts": 407
+  },
+  "BAAI/Aquila2-7B": {
+   "cjk": 0.9658,
+   "lex_share": 0.5034,
+   "mass": 0.7939,
+   "n_prompts": 407
+  },
+  "BAAI/AquilaChat2-7B": {
+   "cjk": 0.9648,
+   "lex_share": 0.4933,
+   "mass": 0.7469,
+   "n_prompts": 407
+  },
+  "BSC-LT/salamandra-7b": {
+   "cjk": 0.2836,
+   "lex_share": 0.0,
+   "mass": 0.0325,
+   "n_prompts": 311
+  },
+  "BSC-LT/salamandra-7b-instruct": {
+   "cjk": 0.2362,
+   "lex_share": 0.0,
+   "mass": 0.0316,
+   "n_prompts": 311
+  },
+  "ContextualAI/archangel_sft-dpo_pythia2-8b": {
+   "cjk": 0.9562,
+   "lex_share": 0.2528,
+   "mass": 0.3675,
+   "n_prompts": 407
+  },
+  "EleutherAI/pythia-2.8b": {
+   "cjk": 0.9536,
+   "lex_share": 0.2348,
+   "mass": 0.347,
+   "n_prompts": 407
+  },
+  "EleutherAI/pythia-6.9b": {
+   "cjk": 0.9464,
+   "lex_share": 0.2583,
+   "mass": 0.3644,
+   "n_prompts": 407
+  },
+  "HuggingFaceTB/SmolLM2-360M": {
+   "cjk": 0.9264,
+   "lex_share": 0.2322,
+   "mass": 0.1894,
+   "n_prompts": 407
+  },
+  "HuggingFaceTB/SmolLM2-360M-Instruct": {
+   "cjk": 0.912,
+   "lex_share": 0.3296,
+   "mass": 0.215,
+   "n_prompts": 407
+  },
+  "HuggingFaceTB/SmolLM3-3B": {
+   "cjk": 0.9713,
+   "lex_share": 0.4181,
+   "mass": 0.6835,
+   "n_prompts": 407
+  },
+  "HuggingFaceTB/SmolLM3-3B-Base": {
+   "cjk": 0.9701,
+   "lex_share": 0.3823,
+   "mass": 0.6412,
+   "n_prompts": 407
+  },
+  "LLM360/Amber": {
+   "cjk": 0.9438,
+   "lex_share": 0.1707,
+   "mass": 0.3978,
+   "n_prompts": 406
+  },
+  "LLM360/AmberSafe": {
+   "cjk": 0.9432,
+   "lex_share": 0.3526,
+   "mass": 0.485,
+   "n_prompts": 406
+  },
+  "OpenLLM-France/Lucie-7B": {
+   "cjk": 0.0,
+   "lex_share": 0.0,
+   "mass": 0.0231,
+   "n_prompts": 227
+  },
+  "OpenLLM-France/Lucie-7B-Instruct-v1.1": {
+   "cjk": 0.0,
+   "lex_share": 0.0,
+   "mass": 0.0239,
+   "n_prompts": 227
+  },
+  "PKU-Alignment/beaver-7b-v1.0": {
+   "cjk": 0.9188,
+   "lex_share": 0.2332,
+   "mass": 0.3619,
+   "n_prompts": 407
+  },
+  "Qwen/Qwen2.5-0.5B": {
+   "cjk": 0.9505,
+   "lex_share": 0.3848,
+   "mass": 0.6245,
+   "n_prompts": 407
+  },
+  "Qwen/Qwen2.5-0.5B-Instruct": {
+   "cjk": 0.9549,
+   "lex_share": 0.4139,
+   "mass": 0.6533,
+   "n_prompts": 407
+  },
+  "Qwen/Qwen2.5-7B": {
+   "cjk": 0.9527,
+   "lex_share": 0.4319,
+   "mass": 0.6887,
+   "n_prompts": 407
+  },
+  "Qwen/Qwen2.5-7B-Instruct": {
+   "cjk": 0.9548,
+   "lex_share": 0.4538,
+   "mass": 0.7194,
+   "n_prompts": 407
+  },
+  "Qwen/Qwen3-8B": {
+   "cjk": 0.9613,
+   "lex_share": 0.4626,
+   "mass": 0.7113,
+   "n_prompts": 407
+  },
+  "Qwen/Qwen3-8B-Base": {
+   "cjk": 0.9601,
+   "lex_share": 0.4382,
+   "mass": 0.6742,
+   "n_prompts": 407
+  },
+  "RWKV/rwkv-4-7b-pile": {
+   "cjk": 0.9551,
+   "lex_share": 0.2835,
+   "mass": 0.389,
+   "n_prompts": 407
+  },
+  "RWKV/rwkv-raven-7b": {
+   "cjk": 0.9525,
+   "lex_share": 0.3108,
+   "mass": 0.3958,
+   "n_prompts": 407
+  },
+  "TinyLlama/TinyLlama-1.1B-Chat-v1.0": {
+   "cjk": 0.9302,
+   "lex_share": 0.1916,
+   "mass": 0.3927,
+   "n_prompts": 407
+  },
+  "TinyLlama/TinyLlama-1.1B-intermediate-step-1431k-3T": {
+   "cjk": 0.9368,
+   "lex_share": 0.1482,
+   "mass": 0.3869,
+   "n_prompts": 407
+  },
+  "Zyphra/Zamba2-7B": {
+   "cjk": 0.9605,
+   "lex_share": 0.3909,
+   "mass": 0.6313,
+   "n_prompts": 407
+  },
+  "Zyphra/Zamba2-7B-Instruct": {
+   "cjk": 0.9591,
+   "lex_share": 0.3994,
+   "mass": 0.6378,
+   "n_prompts": 407
+  },
+  "allenai/OLMo-2-0425-1B": {
+   "cjk": 0.9496,
+   "lex_share": 0.2514,
+   "mass": 0.3923,
+   "n_prompts": 407
+  },
+  "allenai/OLMo-2-0425-1B-Instruct": {
+   "cjk": 0.9529,
+   "lex_share": 0.4635,
+   "mass": 0.5019,
+   "n_prompts": 407
+  },
+  "allenai/OLMoE-1B-7B-0125": {
+   "cjk": 0.9491,
+   "lex_share": 0.284,
+   "mass": 0.4134,
+   "n_prompts": 407
+  },
+  "allenai/OLMoE-1B-7B-0125-Instruct": {
+   "cjk": 0.955,
+   "lex_share": 0.409,
+   "mass": 0.5803,
+   "n_prompts": 407
+  },
+  "allenai/Olmo-3-1025-7B": {
+   "cjk": 0.96,
+   "lex_share": 0.3493,
+   "mass": 0.4907,
+   "n_prompts": 407
+  },
+  "allenai/Olmo-3-1125-32B": {
+   "cjk": 0.9604,
+   "lex_share": 0.365,
+   "mass": 0.5366,
+   "n_prompts": 407
+  },
+  "allenai/Olmo-3-7B-Instruct": {
+   "cjk": 0.9522,
+   "lex_share": 0.3648,
+   "mass": 0.614,
+   "n_prompts": 407
+  },
+  "allenai/Olmo-3.1-32B-Instruct": {
+   "cjk": 0.9747,
+   "lex_share": 0.3639,
+   "mass": 0.6931,
+   "n_prompts": 407
+  },
+  "allenai/Olmo-Hybrid-7B": {
+   "cjk": 0.9556,
+   "lex_share": 0.3486,
+   "mass": 0.4966,
+   "n_prompts": 407
+  },
+  "allenai/Olmo-Hybrid-Instruct-DPO-7B": {
+   "cjk": 0.952,
+   "lex_share": 0.3661,
+   "mass": 0.5525,
+   "n_prompts": 407
+  },
+  "baichuan-inc/Baichuan2-7B-Base": {
+   "cjk": 0.9614,
+   "lex_share": 0.4497,
+   "mass": 0.627,
+   "n_prompts": 407
+  },
+  "baichuan-inc/Baichuan2-7B-Chat": {
+   "cjk": 0.9638,
+   "lex_share": 0.5361,
+   "mass": 0.759,
+   "n_prompts": 407
+  },
+  "bigscience/bloom-7b1": {
+   "cjk": 0.9652,
+   "lex_share": 0.4336,
+   "mass": 0.6265,
+   "n_prompts": 407
+  },
+  "bigscience/bloomz-7b1": {
+   "cjk": 0.1723,
+   "lex_share": 0.0773,
+   "mass": 0.6214,
+   "n_prompts": 407
+  },
+  "croissantllm/CroissantLLMBase": {
+   "cjk": 0.9807,
+   "lex_share": 0.631,
+   "mass": 0.5889,
+   "n_prompts": 1
+  },
+  "croissantllm/CroissantLLMChat-v0.1": {
+   "cjk": 0.9595,
+   "lex_share": 0.6927,
+   "mass": 0.6511,
+   "n_prompts": 1
+  },
+  "deepseek-ai/deepseek-llm-7b-base": {
+   "cjk": 0.9604,
+   "lex_share": 0.4299,
+   "mass": 0.6485,
+   "n_prompts": 407
+  },
+  "deepseek-ai/deepseek-llm-7b-chat": {
+   "cjk": 0.9612,
+   "lex_share": 0.4496,
+   "mass": 0.6685,
+   "n_prompts": 407
+  },
+  "gl198976/mpt-7b": {
+   "cjk": 0.9607,
+   "lex_share": 0.3075,
+   "mass": 0.4312,
+   "n_prompts": 407
+  },
+  "gl198976/mpt-7b-instruct": {
+   "cjk": 0.9648,
+   "lex_share": 0.3312,
+   "mass": 0.5094,
+   "n_prompts": 407
+  },
+  "google/gemma-2-9b": {
+   "cjk": 0.9708,
+   "lex_share": 0.4008,
+   "mass": 0.7773,
+   "n_prompts": 407
+  },
+  "google/gemma-2-9b-it": {
+   "cjk": 0.9664,
+   "lex_share": 0.5277,
+   "mass": 0.8146,
+   "n_prompts": 407
+  },
+  "google/recurrentgemma-9b": {
+   "cjk": 0.949,
+   "lex_share": 0.3447,
+   "mass": 0.5607,
+   "n_prompts": 407
+  },
+  "google/recurrentgemma-9b-it": {
+   "cjk": 0.9526,
+   "lex_share": 0.4141,
+   "mass": 0.8376,
+   "n_prompts": 407
+  },
+  "huggyllama/llama-7b": {
+   "cjk": 0.9416,
+   "lex_share": 0.1416,
+   "mass": 0.3471,
+   "n_prompts": 407
+  },
+  "ibm-granite/granite-3.0-8b-base": {
+   "cjk": 0.9577,
+   "lex_share": 0.3129,
+   "mass": 0.5164,
+   "n_prompts": 407
+  },
+  "ibm-granite/granite-3.0-8b-instruct": {
+   "cjk": 0.9567,
+   "lex_share": 0.3592,
+   "mass": 0.636,
+   "n_prompts": 407
+  },
+  "inceptionai/jais-family-6p7b": {
+   "cjk": 0.9157,
+   "lex_share": 0.1213,
+   "mass": 0.2035,
+   "n_prompts": 407
+  },
+  "inceptionai/jais-family-6p7b-chat": {
+   "cjk": 0.9148,
+   "lex_share": 0.3159,
+   "mass": 0.3953,
+   "n_prompts": 407
+  },
+  "internlm/internlm2-base-7b": {
+   "cjk": 0.9605,
+   "lex_share": 0.485,
+   "mass": 0.6566,
+   "n_prompts": 407
+  },
+  "internlm/internlm2-chat-7b": {
+   "cjk": 0.9634,
+   "lex_share": 0.4976,
+   "mass": 0.6537,
+   "n_prompts": 407
+  },
+  "kakaocorp/kanana-1.5-8b-base": {
+   "cjk": 0.9613,
+   "lex_share": 0.3217,
+   "mass": 0.5684,
+   "n_prompts": 407
+  },
+  "kakaocorp/kanana-1.5-8b-instruct-2505": {
+   "cjk": 0.9548,
+   "lex_share": 0.4078,
+   "mass": 0.6564,
+   "n_prompts": 407
+  },
+  "kakaocorp/kanana-2-3b-base": {
+   "cjk": 0.9594,
+   "lex_share": 0.3767,
+   "mass": 0.6107,
+   "n_prompts": 407
+  },
+  "kakaocorp/kanana-2-3b-instruct": {
+   "cjk": 0.9582,
+   "lex_share": 0.4412,
+   "mass": 0.6787,
+   "n_prompts": 407
+  },
+  "llm-jp/llm-jp-3-7.2b": {
+   "cjk": 0.9568,
+   "lex_share": 0.2875,
+   "mass": 0.5502,
+   "n_prompts": 407
+  },
+  "llm-jp/llm-jp-3-7.2b-instruct3": {
+   "cjk": 0.9524,
+   "lex_share": 0.4159,
+   "mass": 0.6261,
+   "n_prompts": 407
+  },
+  "lomahony/eleuther-pythia6.9b-hh-dpo": {
+   "cjk": 0.9448,
+   "lex_share": 0.2836,
+   "mass": 0.3939,
+   "n_prompts": 407
+  },
+  "m-a-p/CT-LLM-Base": {
+   "cjk": 0.9631,
+   "lex_share": 0.4609,
+   "mass": 0.5989,
+   "n_prompts": 407
+  },
+  "m-a-p/CT-LLM-SFT-DPO": {
+   "cjk": 0.9636,
+   "lex_share": 0.496,
+   "mass": 0.6435,
+   "n_prompts": 407
+  },
+  "m-a-p/neo_7b": {
+   "cjk": 0.9701,
+   "lex_share": 0.4266,
+   "mass": 0.6322,
+   "n_prompts": 407
+  },
+  "m-a-p/neo_7b_instruct_v0.1": {
+   "cjk": 0.9638,
+   "lex_share": 0.4752,
+   "mass": 0.7114,
+   "n_prompts": 407
+  },
+  "meta-llama/Llama-3.1-70B": {
+   "cjk": 0.9538,
+   "lex_share": 0.4194,
+   "mass": 0.6733,
+   "n_prompts": 407
+  },
+  "meta-llama/Llama-3.1-70B-Instruct": {
+   "cjk": 0.9537,
+   "lex_share": 0.4652,
+   "mass": 0.6659,
+   "n_prompts": 407
+  },
+  "meta-llama/Llama-3.1-8B": {
+   "cjk": 0.9576,
+   "lex_share": 0.4105,
+   "mass": 0.6954,
+   "n_prompts": 407
+  },
+  "meta-llama/Llama-3.1-8B-Instruct": {
+   "cjk": 0.9597,
+   "lex_share": 0.4577,
+   "mass": 0.6596,
+   "n_prompts": 407
+  },
+  "mistralai/Mistral-7B-Instruct-v0.1": {
+   "cjk": 0.9569,
+   "lex_share": 0.3394,
+   "mass": 0.6071,
+   "n_prompts": 407
+  },
+  "mistralai/Mistral-7B-v0.1": {
+   "cjk": 0.9592,
+   "lex_share": 0.2794,
+   "mass": 0.546,
+   "n_prompts": 407
+  },
+  "openGPT-X/Teuken-7B-base-v0.6": {
+   "cjk": 0.712,
+   "lex_share": 0.0831,
+   "mass": 0.3549,
+   "n_prompts": 69
+  },
+  "openGPT-X/Teuken-7B-instruct-v0.6": {
+   "cjk": 0.6712,
+   "lex_share": 0.0626,
+   "mass": 0.3922,
+   "n_prompts": 69
+  },
+  "openbmb/MiniCPM5-1B": {
+   "cjk": 0.957,
+   "lex_share": 0.5631,
+   "mass": 0.6522,
+   "n_prompts": 407
+  },
+  "openbmb/MiniCPM5-1B-Base": {
+   "cjk": 0.9665,
+   "lex_share": 0.426,
+   "mass": 0.6116,
+   "n_prompts": 407
+  },
+  "stabilityai/stablelm-2-1_6b": {
+   "cjk": 0.9566,
+   "lex_share": 0.2754,
+   "mass": 0.4065,
+   "n_prompts": 407
+  },
+  "stabilityai/stablelm-2-1_6b-chat": {
+   "cjk": 0.9657,
+   "lex_share": 0.3948,
+   "mass": 0.6188,
+   "n_prompts": 407
+  },
+  "team-hatakeyama-phase2/Tanuki-8B-base-v1.0": {
+   "cjk": 0.8973,
+   "lex_share": 0.1396,
+   "mass": 0.4121,
+   "n_prompts": 407
+  },
+  "tiiuae/Falcon-H1-1.5B-Base": {
+   "cjk": 0.9583,
+   "lex_share": 0.3542,
+   "mass": 0.5819,
+   "n_prompts": 407
+  },
+  "tiiuae/Falcon-H1-1.5B-Instruct": {
+   "cjk": 0.9587,
+   "lex_share": 0.4846,
+   "mass": 0.6994,
+   "n_prompts": 407
+  },
+  "tiiuae/Falcon-H1-7B-Base": {
+   "cjk": 0.965,
+   "lex_share": 0.4148,
+   "mass": 0.6162,
+   "n_prompts": 407
+  },
+  "tiiuae/Falcon-H1-7B-Instruct": {
+   "cjk": 0.9624,
+   "lex_share": 0.5007,
+   "mass": 0.7278,
+   "n_prompts": 407
+  },
+  "tiiuae/Falcon3-7B-Base": {
+   "cjk": 0.9468,
+   "lex_share": 0.32,
+   "mass": 0.4728,
+   "n_prompts": 407
+  },
+  "tiiuae/Falcon3-7B-Instruct": {
+   "cjk": 0.9546,
+   "lex_share": 0.3928,
+   "mass": 0.5778,
+   "n_prompts": 407
+  },
+  "tiiuae/falcon-7b": {
+   "cjk": 0.9602,
+   "lex_share": 0.3306,
+   "mass": 0.5309,
+   "n_prompts": 407
+  },
+  "tiiuae/falcon-7b-instruct": {
+   "cjk": 0.9623,
+   "lex_share": 0.3347,
+   "mass": 0.5128,
+   "n_prompts": 407
+  },
+  "tiiuae/falcon-mamba-7b": {
+   "cjk": 0.9563,
+   "lex_share": 0.3404,
+   "mass": 0.5018,
+   "n_prompts": 407
+  },
+  "tiiuae/falcon-mamba-7b-instruct": {
+   "cjk": 0.9579,
+   "lex_share": 0.4187,
+   "mass": 0.5565,
+   "n_prompts": 407
+  },
+  "togethercomputer/RedPajama-INCITE-7B-Chat": {
+   "cjk": 0.9338,
+   "lex_share": 0.3466,
+   "mass": 0.7187,
+   "n_prompts": 407
+  },
+  "togethercomputer/RedPajama-INCITE-Base-7B-v0.1": {
+   "cjk": 0.9474,
+   "lex_share": 0.244,
+   "mass": 0.3436,
+   "n_prompts": 407
+  },
+  "weblab-GENIAC/Tanuki-8B-dpo-v1.0": {
+   "cjk": 0.7571,
+   "lex_share": 0.3109,
+   "mass": 0.5116,
+   "n_prompts": 69
+  },
+  "zai-org/glm-4-9b-chat-hf": {
+   "cjk": 0.9657,
+   "lex_share": 0.4853,
+   "mass": 0.7396,
+   "n_prompts": 407
+  },
+  "zai-org/glm-4-9b-hf": {
+   "cjk": 0.9644,
+   "lex_share": 0.4325,
+   "mass": 0.6366,
+   "n_prompts": 407
+  }
+ }
+}
