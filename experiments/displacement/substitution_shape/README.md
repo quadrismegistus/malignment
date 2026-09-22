@@ -604,3 +604,20 @@ Every edge carries three numbers — cells, then **how many distinct lineages an
 At weight ≥ 10 and depth 3 that reaches 48 nodes over 61 edges: `scream → cry → {weep, sing, wonder, feel}`, `punch → hit → {struck, missed, swung}`, `die → {suffer, stay, fall}`, `cut → held → {handed, said}`, and through `take` into the institutional cluster `{quit, leave, implement, sue, fire → terminate}`.
 
 **The heaviest edge in `kill`'s neighbourhood is not `kill`'s.** `go → take` carries 123 cells against `kill → scream`'s 105 — the procedural channel is larger than the violent one even in the violent word's own three-hop neighbourhood, which is the same thing `existence` found by a different route when it reported `point → check` at 271 prompts against `kill → scream` at 1.25 specificity.
+
+### `--basis faller` and `--basis crossing`, per lineage
+
+![crossing basis](figures/lineage_graph_she_was_so_angry_she_crossing_flow_collapsed.png)
+
+The same plate on the exhibit's own definition. Per lineage, the word that lost the most probability at the blank and the word that gained the most — neither need be the top word at either arm, and `run.py` records that 51% of crossings happen with the argmax unchanged. Read from `movement_v4`, so both arms come from one row and the candidate set is shared by construction.
+
+    basis      kill -> scream   lineages drawn   biggest faller
+    argmax         15 of 28          47          kill 28, scream 16
+    faller         18 of 33          47          kill 33, cry 5
+    crossing       12 of 21          26          kill 21, hit 1
+
+**`faller` DOES NOT MEAN THE LINES CROSSED.** Biggest-faller-to-biggest-riser says one word lost the most and another gained the most in the same lineage; it says nothing about the riser overtaking the faller. Of the 18 lineages whose pair is `kill → scream`, **12 cross, 5 had `scream` already above `kill` in the base arm, and 1 narrowed the gap without closing it.** Across the whole prompt: 29 of 50 cross, 13 had the riser already on top, 8 closed without swapping.
+
+This flag was briefly called `crossing` while doing the loose thing, which would have shipped a 50 percent overstatement of the exhibit. `--basis crossing` now applies the test the name promises — the riser must start below the faller and end above it — and excludes 21 of the 47 lineages.
+
+**NO HELD LINEAGES EXIST ON EITHER FALLER BASIS, AND THAT IS STRUCTURAL.** A distribution sums to one, so a lineage that lost mass gained it elsewhere: every lineage has a faller and a riser and they can never be the same word. The 21 holds the argmax basis reports is not a number these bases can be compared on. Ties are dropped rather than broken — two words losing identically means no single biggest faller.
