@@ -111,6 +111,9 @@ def main(argv=None):
     ap.add_argument("--k", type=int, default=2)
     ap.add_argument("--min-lineages", type=int, default=1)
     #: the full above-theta candidate list, fragments and all
+    #: drop a candidate that is a strict prefix of another and N times
+    #: rarer -- `bur` between `burn`/`burst`/`bury`. See run.candidate_words.
+    ap.add_argument("--prefix-ratio", type=float, default=0.0)
     ap.add_argument("--raw", action="store_true",
                     help="no dictionary/length/case filter: let the path run "
                          "through subwords")
@@ -128,7 +131,8 @@ def main(argv=None):
         print("  dropped below --min-lineages %d: %s"
               % (a.min_lineages, ", ".join(sorted(drop))))
 
-    words, W, ids = cosines.space(a.space, a.prompt, filtered=not a.raw)
+    words, W, ids = cosines.space(a.space, a.prompt, filtered=not a.raw,
+                                  prefix_ratio=a.prefix_ratio)
     #: `ids` gathers rows out of W; `idx` addresses everything graph-side.
     idx = {w: i for i, w in enumerate(words)}
     missing = [w for w in list(dsts) + [a.src] if w not in idx]
@@ -177,7 +181,8 @@ def main(argv=None):
     os.makedirs(FIGS, exist_ok=True)
     tag = "%s_%s_%s_k%d%s%s" % (a.src, a.basis, a.space, a.k,
                                 "_min%d" % a.min_lineages if a.min_lineages > 1 else "",
-                                "_raw" if a.raw else "")
+                                ("_raw" if a.raw else "")
+                                + ("_pfx%g" % a.prefix_ratio if a.prefix_ratio else ""))
     base = os.path.join(FIGS, "pathways_" + tag)
     edges = set()
     for w in dsts:

@@ -112,6 +112,29 @@ def lexicon(name="subtlex", min_fpm=0.0, min_zipf=2.0, wordnet=True):
     **THE RESIDUE IS CHEMICAL SYMBOLS**: `pu`, `sm`, `sn` survive as plutonium,
     samarium and tin. Real dictionary entries, so the dictionary keeps them;
     they are named rather than special-cased, on the same logic as `cher`.
+
+    ## AND A DICTIONARY-LEGAL WORD CAN STILL DO FRAGMENT WORK (`prefix_ratio`)
+
+    RH spotted it in the plate: the real-words-only unembedding routes
+    `burn -> bur -> bury` and `bur -> burst`. `bur` is a WordNet entry (a seed
+    case) so every filter above passes it, and it is acting as a hub between
+    three spellings of one stem.
+
+    A GLOBAL frequency floor cannot remove it -- that failure is documented
+    above. Comparing a word to ITS OWN EXTENSION can: 14 of the 307 candidates
+    are a strict prefix of another candidate, and the ratio separates them.
+
+        bur   0.12 vs burn      55.22    460x      craw  0.33 vs crawl   36x
+        cur   0.61 vs curl      18.22     30x      pun   1.84 vs punch   16x
+        dis   1.51 vs disappear 20.96     14x
+        ------------------------------- 10x cut ---------------------------
+        scar  8.47 vs scare     33.57      4x      era   5.71 vs erase  1.1x
+        pin, las, tear, who, go, be: MORE frequent than their extension
+
+    At 10x it removes exactly `bur`, `craw`, `cur`, `pun`, `dis` and keeps
+    `scar`, which this corpus actually uses. **OFF BY DEFAULT**: the 307-word
+    set is the population `own_geometry` and `cocompletion` were run on, and a
+    filter that silently changed it would break every cross-folder number.
     """
     if name == "subtlex":
         import csv as _csv
@@ -158,7 +181,7 @@ SHORT_OK = {"be", "do", "go", "up"}
 
 
 def candidate_words(prompt, name="subtlex", min_fpm=0.0, min_zipf=2.0,
-                    wordnet=True, fold=True, min_len=3):
+                    wordnet=True, fold=True, min_len=3, prefix_ratio=0.0):
     """-> ({word: arms above theta}, {reason: n dropped}) -- THE candidate filter.
 
     `run.main` and `cosines.space` each had their own copy of this and they
@@ -197,6 +220,21 @@ def candidate_words(prompt, name="subtlex", min_fpm=0.0, min_zipf=2.0,
             why["shorter than %d letters" % min_len] += 1
             continue
         out[key] = max(out[key], v) if fold else v
+    if prefix_ratio > 0:
+        import csv as _csv
+        from malignment import fields as _F
+        pth, _ok2 = _F.sources()["subtlex_us"]
+        tab = {r["word"].lower(): float(r["fpm"])
+               for r in _csv.DictReader(open(pth, encoding="utf-8"), delimiter="\t")}
+        keep = {}
+        for w in out:
+            ext = [x for x in out if x != w and x.startswith(w)]
+            if ext and tab.get(w, 0.0) * prefix_ratio < max(tab.get(x, 0.0)
+                                                            for x in ext):
+                why["a %gx rarer prefix of another candidate" % prefix_ratio] += 1
+                continue
+            keep[w] = out[w]
+        out = keep
     return dict(out), dict(why)
 
 

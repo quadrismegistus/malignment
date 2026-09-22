@@ -29,7 +29,7 @@ PROBE = ["scream", "shout", "yell", "cry", "weep", "shriek", "laugh",
          "fight", "sell", "destroy"]
 
 
-def space(name, prompt, centre=True, filtered=True):
+def space(name, prompt, centre=True, filtered=True, prefix_ratio=0.0):
     """-> (words, unit-normalised matrix, {word: row})"""
     import torch
     #: ONE filter for the whole folder -- see `run.candidate_words`. This was
@@ -41,7 +41,7 @@ def space(name, prompt, centre=True, filtered=True):
     #: fragments are where an orthographic space would show its hand, and a
     #: path that runs `kill -> kil -> kill` is evidence rather than noise.
     cand = run.candidates(prompt) if not filtered \
-        else run.candidate_words(prompt)[0]
+        else run.candidate_words(prompt, prefix_ratio=prefix_ratio)[0]
     W, tok = embed.matrix(embed.MODEL)
     if name == "bge":
         M, words = embed.bge_in_context(prompt, sorted(cand))
