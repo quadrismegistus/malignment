@@ -562,9 +562,18 @@ So the separation is clean once corridors are read rather than only the table: *
 Widths are scaled over the drawn range, not 0-1: these cosines occupy 0.3-0.8
 and a 0-1 scale would flatten every difference that matters.
 
+### The publication form
+
+`--clean` puts `kill` at the BOTTOM and the far end of the corridor at the top, arrows upward, so the plate reads as ascent out of the violence cluster. Node labels are the word alone and edges carry no numbers — the lineage counts and bottleneck values belong in the table above, and at this size they are unreadable anyway.
+
+**What survives the stripping is the encoding that needs no legend**: width still tracks cosine, so the corridor visibly narrows at its weakest link, and that link is still red. On the destinations-only plate the constriction at `hurt -> hit` is the visible cause of seven destinations reading 0.469.
+
+It is **sized** to fit rather than **scaled** to fit — a `size` cap would shrink the type along with the drawing — so `--height` adjusts `ranksep` and the 17-rank corridor lands at **6.30 x 2.61 in at 300 dpi**, inside a 6.5 in ceiling.
+
     python threshold.py                       # bottlenecks + sweep, base residual
-    python threshold.py --plot                # the corridor plate
+    python threshold.py --plot                # the corridor plate, with controls
     python threshold.py --plot --no-controls  # destinations only
+    python threshold.py --plot --no-controls --clean   # publication form
     python threshold.py --space bge
     python threshold.py --stage dpo
 

@@ -109,7 +109,8 @@ def bottlenecks(W, words, src):
     return {words[i]: v for i, v in out.items() if i != s}, adj, pos
 
 
-def plot(words, adj, pos, src, dsts, B, S, base, controls):
+def plot(words, adj, pos, src, dsts, B, S, base, controls, clean=False,
+         height=6.5):
     """The MST corridor: the union of minimax paths, with the weak links shown.
 
     **THIS IS NOT THE k-NN PLATE AND MUST NOT BE READ AS ONE.** Its edges are
@@ -148,7 +149,29 @@ def plot(words, adj, pos, src, dsts, B, S, base, controls):
     #: TB, not LR: these corridors are 16-22 hops and the LR render came
     #: out 11,652 px wide and unreadable. A long chain is long in one
     #: dimension whichever way it is laid out; tall scrolls better than wide.
-    L = ["digraph {", '  rankdir=TB; bgcolor="white"; ranksep=0.30;',
+    if clean:
+        #: **PUBLICATION FORM (RH): source at the BOTTOM, arrows UPWARD.**
+        #: `rankdir=BT` puts `kill` at the bottom and the far end of the
+        #: corridor at the top, so the plate reads as ascent out of the
+        #: violence cluster. Labels are the word alone and edges carry no
+        #: numbers: the lineage counts and bottleneck values belong in the
+        #: table, and on a 6.5 in plate they are unreadable anyway. What
+        #: SURVIVES the stripping is the encoding that needs no legend --
+        #: width still tracks cosine, so the corridor visibly narrows at its
+        #: weakest link, and that link is still red.
+        #:
+        #: Sized to fit rather than scaled to fit: a `size` cap would shrink
+        #: the type along with the drawing. 17 ranks at 0.22 in a node plus
+        #: 0.14 in of ranksep lands just under the 6.5 in ceiling.
+        L = ["digraph {",
+             '  rankdir=BT; bgcolor="white"; ranksep=%.2f; nodesep=0.12;'
+             % max(0.06, min(0.16, (height - 0.3) / 40.0)),
+             '  node [shape=box style="rounded,filled" fontname="Arial" '
+             'fontsize=9 height=0.22 margin="0.05,0.02" color="#9aa0a6" '
+             'fillcolor="#ffffff"];',
+             '  edge [arrowsize=0.55 color="#9aa0a6"];']
+    else:
+        L = ["digraph {", '  rankdir=TB; bgcolor="white"; ranksep=0.30;',
          '  node [shape=box style="rounded,filled" fontname="Arial" '
          'fontsize=10 color="#999999" fillcolor="#ffffff"];',
          '  edge [fontname="Arial" fontsize=8 color="#888888"];']
@@ -156,12 +179,13 @@ def plot(words, adj, pos, src, dsts, B, S, base, controls):
     for i in sorted(keep):
         w = words[i]
         if w == src:
-            lab, fill, pen = "%s" % w, "#e8e8e8", 2.0
+            lab, fill, pen = w, "#d8d8d8", 1.6
         elif w in dsts:
-            lab = "%s\\n%d of %d\\nbottleneck %.3f" % (w, dsts[w], sum(dsts.values()), bott[w])
+            lab = w if clean else "%s\\n%d of %d\\nbottleneck %.3f" % (
+                w, dsts[w], sum(dsts.values()), bott[w])
             fill, pen = "#cfe0f3", 1.6
         elif w in controls:
-            lab = "%s\\nCONTROL\\nbottleneck %.3f" % (w, bott[w])
+            lab = w if clean else "%s\\nCONTROL\\nbottleneck %.3f" % (w, bott[w])
             fill, pen = "#f3e0cf", 1.6
         else:
             lab, fill, pen = w, "#ffffff", 1.0
@@ -193,10 +217,11 @@ def plot(words, adj, pos, src, dsts, B, S, base, controls):
         return 0.5 + 5.0 * t
     for (a, b), v in sorted(edges.items()):
         hot = (a, b) in weak
-        L.append('  "%s" -> "%s" [label="%.2f" penwidth=%.2f color="%s"%s];'
-                 % (words[a], words[b], v, width(v),
-                    "#b23a3a" if hot else "#9aa0a6",
-                    ' fontcolor="#b23a3a"' if hot else ""))
+        lab = "" if clean else ' label="%.2f"%s' % (
+            v, ' fontcolor="#b23a3a"' if hot else "")
+        L.append('  "%s" -> "%s" [%spenwidth=%.2f color="%s"];'
+                 % (words[a], words[b], lab.strip() + " " if lab else "",
+                    width(v), "#b23a3a" if hot else "#9aa0a6"))
     L.append("}")
     open(base + ".dot", "w").write("\n".join(L) + "\n")
     for ext in ("png", "pdf"):
@@ -219,6 +244,9 @@ def main(argv=None):
     #: the controls earn their place in the TABLE (they are the comparison);
     #: on the plate they add two long corridors that are not the subject
     ap.add_argument("--no-controls", dest="controls", action="store_false")
+    #: publication form: source at the bottom, arrows up, words only
+    ap.add_argument("--clean", action="store_true")
+    ap.add_argument("--height", type=float, default=6.5, help="inches")
     a = ap.parse_args(argv)
     import numpy as np
 
@@ -291,8 +319,9 @@ def main(argv=None):
         tag = "bottleneck_%s_%s_%s%s" % (a.src, a.basis, a.space,
                                          "" if a.stage == "base" else "_" + a.stage)
         plot(words, mstadj, mstpos, a.src, dsts, B, S,
-             os.path.join(figs, tag + ("" if a.controls else "_nocontrols")),
-             CONTROLS if a.controls else [])
+             os.path.join(figs, tag + ("" if a.controls else "_nocontrols")
+                          + ("_clean" if a.clean else "")),
+             CONTROLS if a.controls else [], a.clean, a.height)
     return 0
 
 
