@@ -528,9 +528,23 @@ Choosing a cutoff is choosing an answer, so report the quantity that needs none.
 ### Two limits, both real
 
 - **The measure saturates.** Seven destinations share a bottleneck of exactly 0.469 because they all sit beyond one bridge edge, so it cannot rank them against each other. It separates classes, not members.
-- **`dance` is a genuine exception at 0.446**, above `fight` (0.442) and `rip` (0.419). So destinations are NOT cleanly separated from controls as a class: the range is 0.419–0.516 for destinations and 0.335–0.446 for controls, overlapping on one control. Three of four controls sit below every destination; the fourth does not.
+- **`dance` looked like an exception at 0.446 and is not one** — see below. Its apparent overlap with the destinations was my misreading of the corridor, not a property of the measure.
 
-So the honest form is: **the bottleneck separates `scream` from `eat` decisively and destinations from controls only mostly.** Quoting it for the `eat` comparison is supported; quoting it as "destinations are better connected than unrelated words" is not, until `dance` is explained.
+### The `dance` exception, resolved by looking at the corridor
+
+    scream  0.469   kill -> hurt -> hit -> beat -> pound -> bang -> bash -> smash
+                    -> break -> bust -> burst -> explode -> disappear -> die
+                    -> faint -> cry -> scream
+    dance   0.446   ...that same route, then -> shout -> sing -> dance
+    eat     0.376   ...-> bash -> slash -> slice -> bite -> chew -> swallow -> eat
+    sit     0.379   ...-> faint -> vomit -> puke -> pounce -> lunge -> leap
+                    -> rise -> stand -> sit
+
+**`dance` is reached by going THROUGH `scream`.** It inherits `scream`'s corridor and is capped by its own last step, `sing -> dance` at 0.446. Any node downstream of `scream` must bottleneck at or below `scream`'s 0.469, so 0.446 is what the structure requires, not a counterexample.
+
+So the separation is clean once corridors are read rather than only the table: **every control that branches independently — `eat` 0.376, `sit` 0.379, `write` 0.335 — sits below every destination**, the lowest of which is `rip` at 0.419. The one control above a destination is the one that is not independent of it.
+
+**AND THE MST CORRIDOR IS NOT THE k-NN CHAIN.** The route to `scream` here runs through breaking, explosion, death and fainting; the k-NN plate ran through argument and speech. Both are legible, they are different, and the difference is the construction: an MST path maximises its weakest link and will take sixteen strong hops rather than eight ordinary ones. **Neither route may be quoted as "the" chain** — §12.5's ban on quoting individual waypoints applies here with more force, not less.
 
     python threshold.py                       # bottlenecks + sweep, base residual
     python threshold.py --space bge

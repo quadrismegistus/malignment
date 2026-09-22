@@ -32,7 +32,7 @@ is what makes it answer the question a hop count could not: if `kill -> scream`
 bottlenecks far below `kill -> eat`, then `scream` is genuinely harder to reach
 and the chain's difficulty is a number rather than an artefact of k.
 """
-import argparse, os, sys
+import argparse, collections, os, subprocess, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.dirname(HERE) + "/substitution_shape")
@@ -106,7 +106,94 @@ def bottlenecks(W, words, src):
             if y not in out:
                 out[y] = (min(bx, v), hx + 1)
                 q.append(y)
-    return {words[i]: v for i, v in out.items() if i != s}
+    return {words[i]: v for i, v in out.items() if i != s}, adj, pos
+
+
+def plot(words, adj, pos, src, dsts, B, S, base, controls):
+    """The MST corridor: the union of minimax paths, with the weak links shown.
+
+    **THIS IS NOT THE k-NN PLATE AND MUST NOT BE READ AS ONE.** Its edges are
+    maximum-spanning-tree edges, so a path here is the route whose WEAKEST link
+    is as strong as possible -- not the fewest hops. It is longer than the k-NN
+    plate on purpose: the k-NN plate optimises step count, which §12.5 showed
+    carries no information, and this optimises the bottleneck, which does.
+
+    The weakest edge on each route is drawn heavy and labelled, because that
+    single number IS the result for that word.
+    """
+    parent = {pos[src]: None}
+    q = collections.deque([pos[src]])
+    while q:
+        x = q.popleft()
+        for y, _v in adj[x]:
+            if y not in parent:
+                parent[y] = x
+                q.append(y)
+    want = list(dsts) + [c for c in controls if c in pos]
+    edges, keep = {}, set()
+    bott = {}
+    for w in want:
+        if w not in pos:
+            continue
+        path, x = [], pos[w]
+        while x is not None:
+            path.append(x)
+            x = parent[x]
+        path.reverse()
+        keep.update(path)
+        lo = min(float(S[a, b]) for a, b in zip(path, path[1:])) if len(path) > 1 else 1.0
+        bott[w] = lo
+        for a, b in zip(path, path[1:]):
+            edges[(a, b)] = float(S[a, b])
+    #: TB, not LR: these corridors are 16-22 hops and the LR render came
+    #: out 11,652 px wide and unreadable. A long chain is long in one
+    #: dimension whichever way it is laid out; tall scrolls better than wide.
+    L = ["digraph {", '  rankdir=TB; bgcolor="white"; ranksep=0.30;',
+         '  node [shape=box style="rounded,filled" fontname="Arial" '
+         'fontsize=10 color="#999999" fillcolor="#ffffff"];',
+         '  edge [fontname="Arial" fontsize=8 color="#888888"];']
+    mx = max(dsts.values()) if dsts else 1
+    for i in sorted(keep):
+        w = words[i]
+        if w == src:
+            lab, fill, pen = "%s" % w, "#e8e8e8", 2.0
+        elif w in dsts:
+            lab = "%s\\n%d of %d\\nbottleneck %.3f" % (w, dsts[w], sum(dsts.values()), bott[w])
+            fill, pen = "#cfe0f3", 1.6
+        elif w in controls:
+            lab = "%s\\nCONTROL\\nbottleneck %.3f" % (w, bott[w])
+            fill, pen = "#f3e0cf", 1.6
+        else:
+            lab, fill, pen = w, "#ffffff", 1.0
+        L.append('  "%s" [label="%s" fillcolor="%s" penwidth=%.1f];' % (w, lab, fill, pen))
+    #: an edge is WEAK if it is the minimum on some drawn route: that is the
+    #: quantity the plate exists to show, so it is the only thing emphasised
+    weak = set()
+    for w in want:
+        if w not in pos:
+            continue
+        path, x = [], pos[w]
+        while x is not None:
+            path.append(x)
+            x = parent[x]
+        path.reverse()
+        if len(path) > 1:
+            e = min(zip(path, path[1:]), key=lambda ab: float(S[ab[0], ab[1]]))
+            weak.add(e)
+    for (a, b), v in sorted(edges.items()):
+        hot = (a, b) in weak
+        L.append('  "%s" -> "%s" [label="%.2f" penwidth=%.1f color="%s"%s];'
+                 % (words[a], words[b], v, 3.0 if hot else 0.9,
+                    "#b23a3a" if hot else "#888888",
+                    ' fontcolor="#b23a3a"' if hot else ""))
+    L.append("}")
+    open(base + ".dot", "w").write("\n".join(L) + "\n")
+    for ext in ("png", "pdf"):
+        r = subprocess.run(["dot", "-T" + ext, "-Gdpi=300", base + ".dot",
+                            "-o", base + "." + ext], capture_output=True, text=True)
+        if r.returncode:
+            raise SystemExit("graphviz failed: %s" % r.stderr[:300])
+        print("  wrote %s.%s" % (base, ext))
 
 
 def main(argv=None):
@@ -117,6 +204,7 @@ def main(argv=None):
     ap.add_argument("--space", default="llama_resid_mean")
     ap.add_argument("--basis", default="faller")
     ap.add_argument("--stage", default="base")
+    ap.add_argument("--plot", action="store_true")
     a = ap.parse_args(argv)
     import numpy as np
 
@@ -125,7 +213,7 @@ def main(argv=None):
     pos = {w: i for i, w in enumerate(words)}
     W = W[[ids[w] for w in words]]
     S = (W @ W.T).numpy()
-    B = bottlenecks(W, words, a.src)
+    B, mstadj, mstpos = bottlenecks(W, words, a.src)
     print("PROMPT %r  space=%s stage=%s  %d candidates"
           % (a.prompt, a.space, a.stage, len(words)))
     print("\n  BOTTLENECK = highest cosine cutoff at which %r is still "
@@ -183,6 +271,13 @@ def main(argv=None):
         print("  %-7.2f %8d %9d %9d   scream %-4s eat %-4s"
               % (t, sum(len(v) for v in adj.values()) // 2, comps,
                  sizes[pos[a.src]], h("scream"), h("eat")))
+    if a.plot:
+        figs = os.path.join(HERE, "figures")
+        os.makedirs(figs, exist_ok=True)
+        tag = "bottleneck_%s_%s_%s%s" % (a.src, a.basis, a.space,
+                                         "" if a.stage == "base" else "_" + a.stage)
+        plot(words, mstadj, mstpos, a.src, dsts, B, S,
+             os.path.join(figs, tag), CONTROLS)
     return 0
 
 
