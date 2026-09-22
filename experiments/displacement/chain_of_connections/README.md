@@ -62,3 +62,21 @@ The same walk, to words with nothing to do with the prompt:
 **The instrument is the likely fault rather than the idea.** Two better ones, both already in this project: the **unembedding** (`lm_head`), which is what actually decides the output distribution and need not share the input space's orthographic bias; and **`bge-m3`**, a sentence embedder the campaign already uses for passage work, which would give a semantic space with no tokenizer in it. Either could be run over the same prompt and the same endpoints with the producer as written.
 
 Exploratory, unregistered, one model, one prompt. `embed.py` reads a single tensor out of the safetensors shards rather than instantiating a model, so this costs about a gigabyte and eight seconds.
+
+## 6. A semantic space does not rescue it (`--space glove`)
+
+The orthography result suggested the instrument was at fault, so the same battery was run over **GloVe 300d** — `glove-wiki-gigaword-300`, already on this machine and already read by `named_under_dose/embed.py`. Same word list, 18,007 of the 18,035 have a vector. GloVe is fitted on co-occurrence and has no tokenizer in it.
+
+    space    orthography   kill -> scream   median   pension  accordion  sofa
+    llama        50%            9 hops         8        7         8        9
+    glove        28%            7 hops         7        6         8        8
+
+**Orthography nearly halves, and nothing else moves.** `scream` sits at exactly the median distance, and `pension` is *still* closer to `kill` than `scream` is. The control survives the change of space, which is what makes it a control.
+
+The GloVe path is worth quoting for what it reveals:
+
+    kill -> killed -> wounded -> critically -> acclaimed -> masterpiece -> munch -> scream
+
+**`munch → scream` is Edvard Munch's painting.** GloVe reaches `scream` through art criticism, because in a co-occurrence corpus that is where the word lives. A chain can be semantic, legible and about the wrong sense entirely.
+
+`bge-m3` in context — embedding `"She was so angry she wanted to {word}"` and taking the word's own vectors — is the remaining instrument and would fix exactly that: it is the only one of the three in which `scream` has this prompt's sense rather than its corpus-wide one. It needs a declared candidate list (one forward pass per word), which is the cost the other two do not have.

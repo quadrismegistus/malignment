@@ -63,3 +63,39 @@ def words(tok, vocab):
         else:
             multi += 1
     return out, multi
+
+
+GLOVE = os.path.expanduser(
+    "~/gensim-data/glove-wiki-gigaword-300/glove-wiki-gigaword-300.gz")
+
+
+def glove(want):
+    """-> (torch [n, 300], [word]) for the requested words that GloVe has.
+
+    **A STATIC SEMANTIC SPACE, WHICH IS THE POINT.** The Llama input embedding
+    is about half orthographic -- 50% of its 3-NN pairs share a three-letter
+    prefix -- because it is the table a tokenizer indexes into. GloVe is fitted
+    on co-occurrence and has no tokenizer in it, so if a chain survives here it
+    is a chain of contexts rather than of spellings.
+
+    Same reader as `named_under_dose/embed.py`: the word2vec-text dump is
+    streamed and only the requested rows are materialised, because 400,000 x
+    300 floats is 480 MB and this needs a few thousand.
+    """
+    import gzip
+    import numpy as np
+    import torch
+    if not os.path.exists(GLOVE):
+        raise SystemExit("no GloVe at %s" % GLOVE)
+    lower = {w.lower() for w in want}
+    got = {}
+    with gzip.open(GLOVE, "rt", encoding="utf-8", errors="replace") as fh:
+        fh.readline()
+        for line in fh:
+            sp = line.find(" ")
+            w = line[:sp]
+            if w in lower and w not in got:
+                got[w] = np.fromstring(line[sp + 1:], sep=" ", dtype=np.float32)
+    ws = sorted(w for w in want if w.lower() in got)
+    M = torch.tensor(np.stack([got[w.lower()] for w in ws]))
+    return M, ws

@@ -173,6 +173,10 @@ def main(argv=None):
     ap.add_argument("--from", dest="src", default="kill")
     ap.add_argument("--to", dest="dst", default="scream")
     ap.add_argument("--model", default=embed.MODEL)
+    ap.add_argument("--space", default="llama", choices=("llama", "glove"),
+                    help="llama: the model's input embedding table, which is "
+                         "about half orthographic. glove: a static semantic "
+                         "space with no tokenizer in it.")
     ap.add_argument("--vocab", default="words",
                     choices=("words", "candidates"),
                     help="words: every real English word in the tokenizer, so "
@@ -202,22 +206,45 @@ def main(argv=None):
               "tokenizer, single token with a leading space"
               % (a.lexicon, len(ids)))
     words = sorted(ids)
+    if a.space == "glove":
+        #: the SAME word list, restricted to what GloVe carries, so the two
+        #: spaces are compared over one vocabulary rather than two
+        G, words = embed.glove(words)
+        print("  space=glove: %d of those words have a GloVe vector" % len(words))
+        Wg = torch.zeros(len(words), G.shape[1])
+        Wg[:] = G
+        ids = {w: i for i, w in enumerate(words)}
+        W = Wg
     pos = {w: i for i, w in enumerate(words)}
     for w in (a.src, a.dst):
         if w not in pos:
             raise SystemExit("%r is not a single-token candidate here" % w)
 
+    #: **THE FALSIFIER HAS TO SPEAK THE SPACE IT IS IN.** This block decoded
+    #: row indices with the TOKENIZER, which is right for the Llama table
+    #: (rows are token ids) and nonsense for GloVe (rows are positions in a
+    #: word list). Under `--space glove` it printed "` kill`'s nearest:
+    #: protest 1.000, ils 0.629, psych 0.624" -- a cosine of 1.000 to a
+    #: DIFFERENT WORD is the tell, and it was printed with the same authority
+    #: as the real thing.
     V = torch.nn.functional.normalize(W, dim=1)
-    sims_all = V @ V[ids[a.src]]
-    rank = int((sims_all > sims_all[ids[a.dst]]).sum())
-    print("\n  THE FALSIFIER: ` %s` ranks %d of %d by cosine to ` %s` over the "
-          "WHOLE tokenizer, so it is not simply the nearest word."
-          % (a.dst, rank, W.shape[0], a.src))
+    if a.space == "glove":
+        label = lambda r: words[r]
+        universe = "the %d-word GloVe vocabulary" % len(words)
+        src_row, dst_row = pos[a.src], pos[a.dst]
+    else:
+        label = lambda r: tok.decode([r]).strip()
+        universe = "the whole %d-token vocabulary" % W.shape[0]
+        src_row, dst_row = ids[a.src], ids[a.dst]
+    sims_all = V @ V[src_row]
+    rank = int((sims_all > sims_all[dst_row]).sum())
+    print("\n  THE FALSIFIER: ` %s` ranks %d of %d by cosine to ` %s` over %s, "
+          "so it is not simply the nearest word."
+          % (a.dst, rank, len(sims_all), a.src, universe))
     top = torch.topk(sims_all, 8)
     print("    ` %s`'s nearest: %s" % (a.src, ", ".join(
-        "%s %.3f" % (tok.decode([int(i)]).strip(), float(s))
-        for s, i in zip(top.values, top.indices))))
-
+        "%s %.3f" % (label(int(r)), float(sc))
+        for sc, r in zip(top.values, top.indices))))
     adj, S = graph(words, ids, W, a.k)
     p = shortest(adj, pos[a.src], pos[a.dst])
     print("\n  k=%d, undirected, over the %d candidate words" % (a.k, len(words)))
@@ -292,10 +319,16 @@ def main(argv=None):
         return n
     hit = sum(1 for r, i in enumerate(samp) for j in nb3[r].tolist()
               if shared(words[i], words[j]) >= 3)
+    #: the verdict has to follow the number, not the number the verdict: this
+    #: line said "about half a chain of SPELLINGS" unconditionally and would
+    #: have said it of GloVe, where the share is 28%
+    share = 100.0 * hit / (len(samp) * 3)
     print("\n  ORTHOGRAPHY CHECK: %.0f%% of 3-NN pairs over %d sampled nodes "
-          "share a three-letter prefix.\n  A chain through this graph is "
-          "about half a chain of SPELLINGS." % (100.0 * hit / (len(samp) * 3),
-                                                len(samp)))
+          "share a three-letter prefix." % (share, len(samp)))
+    print("  %s" % ("About half the edges are spellings rather than "
+                    "associations." if share >= 40 else
+                    "A substantial minority of edges are spellings." if share >= 20
+                    else "Orthography is not driving this graph."))
     return 0
 
 
