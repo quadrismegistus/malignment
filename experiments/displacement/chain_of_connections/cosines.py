@@ -75,6 +75,29 @@ def space(name, prompt, centre=True, filtered=True, prefix_ratio=0.0,
     #: agreement BELOW chance where the unembedding sits at 15%. It also fixes
     #: the `eat` anomaly: `eat` is 5th in the unembedding, ahead of every word
     #: `kill` actually moves to, and 54th here, behind all of them.
+    #: **THE WIDE VOCABULARY AS A SPACE.** Same residual, same model, same
+    #: prompt -- only the set of words it is computed over differs: every real
+    #: word in the vocabulary, one form per lemma, 10,727 against 307. Read
+    #: from `wide_vocab.py`'s saved matrix. Centring is over THAT set, so its
+    #: cosines are not comparable with the 307's (§12.8); the ORDERING and the
+    #: routes are what transfer.
+    if name == "llama_resid_wide":
+        import numpy as np
+        npz = os.path.join(HERE, "results", "wide_vocab_resid_lemma.npz")
+        if not os.path.exists(npz):
+            raise SystemExit("%s is missing; run `wide_vocab.py --vocab lemma`"
+                             % npz)
+        if not filtered or prefix_ratio:
+            raise SystemExit("--raw / --prefix-ratio do not apply to "
+                             "llama_resid_wide: it IS the unfiltered "
+                             "vocabulary, deduplicated by lemma")
+        z = np.load(npz, allow_pickle=True)
+        ws = [str(x) for x in z["words"]]
+        M = torch.tensor(z["resid_mean"])
+        X = M - M.mean(0) if centre else M
+        return ws, torch.nn.functional.normalize(X, dim=1), \
+            {w: i for i, w in enumerate(ws)}
+
     if name in ("llama_resid_mean", "llama_resid23"):
         import numpy as np
         key = "resid_mean" if name == "llama_resid_mean" else "resid_23"
@@ -150,7 +173,7 @@ def main(argv=None):
     ap.add_argument("--from", dest="src", default="kill")
     ap.add_argument("--space", default="both",
                     choices=("llama", "llama_unembed", "llama_resid_mean",
-                             "llama_resid23", "bge", "both"))
+                             "llama_resid23", "llama_resid_wide", "bge", "both"))
     ap.add_argument("--raw", action="store_true",
                     help="bge only: also print the uncentred ordering")
     a = ap.parse_args(argv)

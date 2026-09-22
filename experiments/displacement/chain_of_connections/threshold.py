@@ -312,7 +312,17 @@ def main(argv=None):
     pos = {w: i for i, w in enumerate(words)}
     W = W[[ids[w] for w in words]]
     S = (W @ W.T).numpy()
-    B, mstadj, mstpos = bottlenecks(W, words, a.src)
+    #: Kruskal sorts every pair: at 10,727 words that is 57 million edges plus
+    #: two int64 index arrays. It completed, and its bottlenecks agree with
+    #: `wide_vocab`'s Prim to three decimals -- an accidental cross-check of
+    #: two independent MST algorithms -- but Prim is O(n^2) with no edge list
+    #: and is what should run at that size.
+    if len(words) > 6000:
+        import wide_vocab
+        print("  %d words: Prim (dense), not Kruskal" % len(words))
+        B, mstadj, mstpos = wide_vocab.mst_prim(W, words, a.src)
+    else:
+        B, mstadj, mstpos = bottlenecks(W, words, a.src)
     print("PROMPT %r  space=%s stage=%s  %d candidates"
           % (a.prompt, a.space, a.stage, len(words)))
     print("\n  BOTTLENECK = highest cosine cutoff at which %r is still "
