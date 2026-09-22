@@ -117,6 +117,9 @@ def main(argv=None):
     #: rarer -- `bur` between `burn`/`burst`/`bury`. See run.candidate_words.
     #: an edge must be among the node's k nearest AND clear this cosine
     ap.add_argument("--min-cos", type=float, default=None)
+    ap.add_argument("--clean", action="store_true")
+    ap.add_argument("--ranksep", type=float, default=0.08)
+    ap.add_argument("--node-height", type=float, default=0.10)
     ap.add_argument("--prefix-ratio", type=float, default=0.0)
     #: residual spaces only: which rung of the ladder to read
     ap.add_argument("--stage", default="base",
@@ -193,7 +196,8 @@ def main(argv=None):
                                 + ("_pfx%g" % a.prefix_ratio if a.prefix_ratio else "")
                                 + ("_%s" % a.stage if a.stage != "base" else "")
                                 + ("" if a.min_cos is None
-                                   else "_mc%02d" % round(a.min_cos * 100)))
+                                   else "_mc%02d" % round(a.min_cos * 100))
+                                + ("_clean" if a.clean else ""))
     base = os.path.join(FIGS, "pathways_" + tag)
     edges = set()
     for w in dsts:
@@ -238,10 +242,23 @@ def main(argv=None):
     print("      same-letter edges: %s"
           % ", ".join("%s>%s" % e for e in sorted(ch1)))
 
-    L = ["digraph {", '  rankdir=LR; bgcolor="white";',
-         '  node [shape=box style="rounded,filled" fontname="Arial" '
-         'fontsize=10 color="#999999"];',
-         '  edge [fontname="Arial" fontsize=8 color="#666666"];']
+    #: `--clean` is the same visual language as the bottleneck plate
+    #: (`threshold.py`): words and arrows, no boxes, bold destinations, width
+    #: carrying cosine, nothing labelled. Kept identical on purpose -- two
+    #: plates of the same corridor under different graph constructions can
+    #: only be compared if the drawing does not differ as well.
+    if a.clean:
+        L = ["digraph {",
+             '  rankdir=TB; bgcolor="white"; ranksep=%.2f; nodesep=0.14;'
+             % a.ranksep,
+             '  node [shape=plaintext fontname="Arial" fontsize=9 '
+             'height=%.2f width=0.01 margin="0.02,0.005"];' % a.node_height,
+             '  edge [arrowsize=0.35 color="#6f757a"];']
+    else:
+        L = ["digraph {", '  rankdir=LR; bgcolor="white";',
+             '  node [shape=box style="rounded,filled" fontname="Arial" '
+             'fontsize=10 color="#999999"];',
+             '  edge [fontname="Arial" fontsize=8 color="#666666"];']
     mx = max(mass.values())
     for w, m in mass.items():
         if w == a.src:
@@ -253,12 +270,29 @@ def main(argv=None):
         else:
             lab = w
             fill, pen = "#ffffff", 1.0
-        L.append('  "%s" [label="%s" fillcolor="%s" penwidth=%.1f '
-                 'fontsize=%d];' % (w, lab, fill, pen, 9 + int(5.0 * m / mx)))
+        if a.clean:
+            bold = w == a.src or w in dsts
+            L.append('  "%s" [label=<%s%s%s>%s];'
+                     % (w, "<B>" if bold else "", w, "</B>" if bold else "",
+                        "" if bold else ' fontcolor="#999999"'))
+        else:
+            L.append('  "%s" [label="%s" fillcolor="%s" penwidth=%.1f '
+                     'fontsize=%d];' % (w, lab, fill, pen, 9 + int(5.0 * m / mx)))
+    #: **WIDTH CARRIES COSINE IN CLEAN MODE, MASS IN THE OTHER.** The busy
+    #: plate sized edges by lineage traffic, which is a fact about the roster;
+    #: the clean plate sizes them by the link's cosine, which is a fact about
+    #: the space. Two different quantities under one visual channel, so they
+    #: must not be mixed on one plate.
+    cv = [float(S[idx[x], idx[y]]) for x, y in edges]
+    clo, chi = (min(cv), max(cv)) if cv else (0.0, 1.0)
     for x, y in sorted(edges):
-        w = mass[y]
-        L.append('  "%s" -> "%s" [penwidth=%.2f label="%.2f"];'
-                 % (x, y, 0.6 + 3.4 * w / mx, float(S[idx[x], idx[y]])))
+        if a.clean:
+            t = (float(S[idx[x], idx[y]]) - clo) / (chi - clo) if chi > clo else 0.5
+            L.append('  "%s" -> "%s" [penwidth=%.2f];' % (x, y, 0.45 + 1.75 * t))
+        else:
+            w = mass[y]
+            L.append('  "%s" -> "%s" [penwidth=%.2f label="%.2f"];'
+                     % (x, y, 0.6 + 3.4 * w / mx, float(S[idx[x], idx[y]])))
     L.append("}")
     open(base + ".dot", "w").write("\n".join(L) + "\n")
     for ext in ("png", "pdf"):
