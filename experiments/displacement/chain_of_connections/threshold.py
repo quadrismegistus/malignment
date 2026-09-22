@@ -110,7 +110,7 @@ def bottlenecks(W, words, src):
 
 
 def plot(words, adj, pos, src, dsts, B, S, base, controls, clean=False,
-         height=6.5):
+         height=6.5, ranksep=None, node_h=0.18):
     """The MST corridor: the union of minimax paths, with the weak links shown.
 
     **THIS IS NOT THE k-NN PLATE AND MUST NOT BE READ AS ONE.** Its edges are
@@ -164,16 +164,26 @@ def plot(words, adj, pos, src, dsts, B, S, base, controls, clean=False,
         #: the type along with the drawing. 17 ranks at 0.22 in a node plus
         #: 0.14 in of ranksep lands just under the 6.5 in ceiling.
         L = ["digraph {",
+             #: `--ranksep` overrides the height-derived default. Squeezing
+             #: the ranks is the only lever that shortens this plate without
+             #: dropping words: the corridor is 17 ranks deep whatever the
+             #: basis or cutoff, so depth is fixed and only the gap is free.
              '  rankdir=TB; bgcolor="white"; ranksep=%.2f; nodesep=0.14;'
-             % max(0.08, min(0.20, (height - 0.3) / 40.0)),
+             % (ranksep if ranksep is not None
+                else max(0.08, min(0.20, (height - 0.3) / 40.0))),
              #: **NO BOXES (RH).** `plaintext` removes the frame and fill, so
              #: the plate is words and arrows and nothing else. Emphasis moves
              #: from a coloured box to a BOLD word, which is the same
              #: distinction carried by type rather than by furniture -- and it
              #: survives being printed in one colour, which a blue fill does
              #: not.
+             #: **`height` IS THE BINDING CONSTRAINT, NOT `ranksep`.** Below
+             #: about 0.08 in of rank separation nothing moves, because each
+             #: node still reserves its own box height: 0.18 in of padding
+             #: around a 9 pt word. Shrinking the box squeezes the words
+             #: closer without touching the type size.
              '  node [shape=plaintext fontname="Arial" fontsize=9 '
-             'height=0.18 margin="0.02,0.01"];',
+             'height=%.2f margin="0.02,0.005"];' % node_h,
              #: arrowheads and widths were scaled for a plate with boxes and
              #: labels; without them they dominate the short gaps between words
              #:
@@ -275,6 +285,10 @@ def main(argv=None):
     #: publication form: source at the bottom, arrows up, words only
     ap.add_argument("--clean", action="store_true")
     ap.add_argument("--height", type=float, default=6.5, help="inches")
+    ap.add_argument("--ranksep", type=float, default=None,
+                    help="inches between ranks; overrides the height default")
+    ap.add_argument("--node-height", type=float, default=0.18,
+                    help="inches of box per word; the real vertical lever")
     a = ap.parse_args(argv)
     import numpy as np
 
@@ -344,12 +358,16 @@ def main(argv=None):
     if a.plot:
         figs = os.path.join(HERE, "figures")
         os.makedirs(figs, exist_ok=True)
-        tag = "bottleneck_%s_%s_%s%s" % (a.src, a.basis, a.space,
-                                         "" if a.stage == "base" else "_" + a.stage)
+        tag = "bottleneck_%s_%s_%s%s%s" % (
+            a.src, a.basis, a.space,
+            "" if a.stage == "base" else "_" + a.stage,
+            ("" if a.ranksep is None else "_rs%02d" % round(a.ranksep * 100))
+            + ("" if a.node_height == 0.18 else "_nh%02d" % round(a.node_height * 100)))
         plot(words, mstadj, mstpos, a.src, dsts, B, S,
              os.path.join(figs, tag + ("" if a.controls else "_nocontrols")
                           + ("_clean" if a.clean else "")),
-             CONTROLS if a.controls else [], a.clean, a.height)
+             CONTROLS if a.controls else [], a.clean, a.height, a.ranksep,
+             a.node_height)
     return 0
 
 

@@ -83,65 +83,145 @@ def corridor(prompt, space, stage, basis, cut, src="kill"):
     return routes, keep, S, pos, words, sum(dsts.values())
 
 
-def layout(routes, counts, fold_slack=0):
-    """-> ({word: (col, row, lane)}, spine, n_rows). Fold chosen to balance.
+def label_w(w, counts, fontsize):
+    """-> approximate rendered width in inches. Arial averages ~0.55 em."""
+    n = len(w) + (len(" %d" % counts[w]) if w in counts else 0)
+    return n * fontsize * 0.55 / PT
 
-    The SPINE is the route to the heaviest destination -- the word most
-    lineages actually move to -- because that is the sequence the plate is
-    about. Every other route shares a prefix with it and diverges once; the
-    tail after divergence is a branch.
+
+def layout(routes, counts, width_in, fontsize, gap=0.20, pad=0.10):
+    """-> ({word: (x_in, band, sub)}, spine, bands) laid out BOUSTROPHEDON.
+
+    **LEFT TO RIGHT, THEN BACK RIGHT TO LEFT ALONG THE NEXT ROW** (RH). The
+    corridor is 17 ranks and the page is landscape-ish, so running it in rows
+    uses the measure the vertical fold was wasting. The turn is the reason to
+    prefer it: when the direction reverses, the last word of a row sits
+    directly above the first word of the next, so the fold is a SHORT VERTICAL
+    DROP -- not the diagonal that crossed the two-column plate, and not the
+    full-height elbow that read as a divider.
+
+    Rows are packed from MEASURED label widths rather than a fixed count, so a
+    row of `disappear` and `explode` holds fewer words than a row of `hit` and
+    `cry`, and nothing overhangs the measure.
+
+    Branches run in the same direction as their row, one sub-row below the
+    spine, so a branch reads as a parallel strand rather than a descent.
     """
     head = max(counts, key=lambda w: (counts[w], len(routes[w])))
     spine = routes[head]
     on_spine = {w: i for i, w in enumerate(spine)}
-    branches = []          # (attach index on spine, [words])
-    for w, r in routes.items():
-        if w == head:
+
+    #: **BRANCHES COME FROM THE UNION TREE, NOT FROM PER-DESTINATION ROUTES.**
+    #: Taking each route's non-shared tail produced two bugs at once. A
+    #: destination that lies ON the spine (`hurt`, `hit`, `cry`, `smash` all
+    #: do) yields an EMPTY tail, and `min()` over it raises -- which it did,
+    #: silently, because the regeneration had stderr redirected, so the
+    #: measurements were of stale files that looked fine. And `punch` and
+    #: `slap` both hang off `hit`, so their tails were `[punch]` and
+    #: `[punch, slug, slap]`: the same word placed twice.
+    #:
+    #: The drawn object is one TREE. Build the parent map from the union of
+    #: the routes, then every non-spine node has exactly one chain back to a
+    #: spine node, and each such chain is drawn once.
+    parent = {}
+    for r in routes.values():
+        for a, b in zip(r, r[1:]):
+            parent[b] = a
+    chains = {}
+    for w in parent:
+        if w in on_spine:
             continue
-        i = 0
-        while i < len(r) and r[i] in on_spine and on_spine[r[i]] == i:
-            i += 1
-        if i == 0:
-            raise SystemExit("route to %r shares no prefix with the spine" % w)
-        branches.append((i - 1, r[i:]))
-    #: fold where the two columns come out closest in height, counting the rows
-    #: each column's branches need below their attachment
-    best, bestk = None, None
-    for k in range(3, len(spine) - 2):
-        lrows = k + 1
-        rrows = len(spine) - k - 1
-        for at, tail in branches:
-            if at <= k:
-                lrows = max(lrows, at + 1 + len(tail))
-            else:
-                rrows = max(rrows, (at - k - 1) + 1 + len(tail))
-        cost = abs(lrows - rrows) + fold_slack * max(lrows, rrows)
-        if best is None or (max(lrows, rrows), cost) < best:
-            best, bestk = (max(lrows, rrows), cost), k
-    k = bestk
-    place = {}
-    for i, w in enumerate(spine):
-        place[w] = (0, i, 0) if i <= k else (1, i - k - 1, 0)
-    #: branches share ONE outward lane per column wherever their row spans do
-    #: not overlap, which on this corridor they never do
-    used = {0: [], 1: []}
+        path, x = [w], w
+        while parent[x] not in on_spine:
+            x = parent[x]
+            path.append(x)
+        chains.setdefault(parent[x], []).append(list(reversed(path)))
+    #: a spine node with several chains keeps the longest as one run and the
+    #: rest as separate runs; each is laid out and collision-checked below
+    branches = []
+    for anchor, cs in chains.items():
+        for c in sorted(cs, key=len, reverse=True):
+            if any(set(c) < set(o) for o in cs):
+                continue        # this chain is a prefix of another; drawn there
+            branches.append((on_spine[anchor], c))
+
+    avail = width_in - 2 * pad
+
+    def fits(rs):
+        return all(sum(label_w(w, counts, fontsize) for w in r)
+                   + gap * (len(r) - 1) <= avail for r in rs)
+
+    def split(n):
+        """spine into n rows as evenly as possible, in order"""
+        out, i = [], 0
+        for k in range(n):
+            take = (len(spine) - i) // (n - k)
+            out.append(spine[i:i + take])
+            i += take
+        return out
+
+    #: **BALANCED, NOT GREEDY.** Greedy packing filled each row to the measure
+    #: and left the remainder alone on the last -- 8/8/1, with `scream` as an
+    #: orphan row, which reads as a mistake rather than a fold. The smallest
+    #: row count that fits is found first, then the words are divided evenly
+    #: across exactly that many rows, so 17 goes 6/6/5 rather than 8/8/1.
+    n = 1
+    while n <= len(spine) and not fits(split(n)):
+        n += 1
+    rows = split(n)
+
+    #: a branch needs its own horizontal run, so the row that carries it must
+    #: be wide enough for the attachment plus the branch; if it is not, the
+    #: branch simply runs off its own sub-row and we widen the gap search
+    place, row_of = {}, {}
+    for bi, rw in enumerate(rows):
+        ltr = bi % 2 == 0
+        widths = [label_w(w, counts, fontsize) for w in rw]
+        total = sum(widths) + gap * (len(rw) - 1)
+        #: justify the row across the measure, so short rows do not float
+        g = gap if len(rw) < 2 else max(gap, (avail - sum(widths)) / (len(rw) - 1))
+        x = pad
+        seq = rw if ltr else list(reversed(rw))
+        ws = widths if ltr else list(reversed(widths))
+        for w, lw in zip(seq, ws):
+            place[w] = (x + lw / 2.0, bi, 0)
+            row_of[w] = bi
+            x += lw + g
+    #: branches: same direction as their row, starting one slot along
+    #:
+    #: **TWO BRANCHES IN ONE ROW WILL OVERPRINT.** `slash..rip` off `bash` and
+    #: `crush..destroy` off `smash` both hang under the middle row and their x
+    #: spans overlap, which rendered as "desrtipoy" and "crusstcratch" -- two
+    #: words drawn on top of each other, perfectly legibly wrong. Each branch
+    #: now takes the shallowest sub-row whose occupied spans it misses.
+    sub_depth = {bi: 0 for bi in range(len(rows))}
+    taken = {}          # (band, sub) -> [(x0, x1), ...]
     for at, tail in branches:
-        col = 0 if at <= k else 1
-        r0 = (at if col == 0 else at - k - 1) + 1
-        span = set(range(r0, r0 + len(tail)))
-        lane = 1
-        while any(span & s for l, s in used[col] if l == lane):
-            lane += 1
-        used[col].append((lane, span))
+        anchor = spine[at]
+        bi = row_of[anchor]
+        ltr = bi % 2 == 0
+        step = 1 if ltr else -1
+        xs, x = [], place[anchor][0]
         for j, w in enumerate(tail):
-            place[w] = (col, r0 + j, lane)
-    nrows = max(r for _c, r, _l in place.values()) + 1
-    return place, spine, nrows, k
+            lw = label_w(w, counts, fontsize)
+            x = x + step * (lw / 2.0 + gap) if j == 0 else x + step * (lw + gap)
+            x = min(max(x, pad + lw / 2.0), width_in - pad - lw / 2.0)
+            xs.append((w, x, lw))
+        span = (min(x - lw / 2.0 for _w, x, lw in xs),
+                max(x + lw / 2.0 for _w, x, lw in xs))
+        sub = 1
+        while any(not (span[1] < a or span[0] > b)
+                  for a, b in taken.get((bi, sub), [])):
+            sub += 1
+        taken.setdefault((bi, sub), []).append(span)
+        for w, x, _lw in xs:
+            place[w] = (x, bi, sub)
+        sub_depth[bi] = max(sub_depth[bi], sub)
+    return place, spine, rows, sub_depth, head
 
 
-def emit(place, spine, nrows, routes, counts, S, pos, head, base,
+def emit(place, spine, rows, sub_depth, routes, counts, S, pos, head, base,
          width_in=4.33, height_in=5.0, fontsize=8.0):
-    import math
     edges = set()
     for r in routes.values():
         edges.update(zip(r, r[1:]))
@@ -158,48 +238,26 @@ def emit(place, spine, nrows, routes, counts, S, pos, head, base,
     mark = min(zip(hr, hr[1:]), key=lambda ab: float(S[pos[ab[0]], pos[ab[1]]]))
     mark_v = float(S[pos[mark[0]], pos[mark[1]]])
 
-    nlane = {c: max([l for (cc, _r, l) in place.values() if cc == c] + [0])
-             for c in (0, 1)}
-    #: **SPREAD TO THE MEASURE.** Height is the binding constraint and width
-    #: was going spare -- 2.43 in used of 4.33 -- so the columns are placed
-    #: from the available width rather than at a fixed gap. Lanes are 0.42 in
-    #: outward of their spine; whatever is left becomes the gutter.
-    #:
-    #: The inset is half the widest label plus a hair: a node's box is its
-    #: LABEL once `width` stops forcing 0.75 in, and positions are centres, so
-    #: a column placed 0.2 in from the edge still hangs its text over it.
-    lane_w = 0.42
-    widest = max(len(w) for w in place) * fontsize * 0.0077 + 0.16
-    inset = widest / 2.0
-    left_edge = inset + lane_w * nlane[0]
-    right_edge = width_in - inset - lane_w * nlane[1]
-    colx = {0: left_edge, 1: right_edge}
-    #: **THE SECOND COLUMN ASCENDS (serpentine).** With both columns running
-    #: downward the fold connector is a diagonal from bottom-left to top-right
-    #: that crosses the whole plate and dominates it; routing it as an elbow
-    #: through the gutter instead draws a full-height vertical line that reads
-    #: as a divider. Reversing the second column makes the connector a short
-    #: hop at the bottom and sends the chain corner to corner, `kill` at top
-    #: left to `scream` at top right. Direction is never ambiguous because
-    #: every edge is arrowed.
-    step = (height_in - 0.32) / max(1, nrows - 1)
+    #: band heights: a row with a branch needs a sub-row under it
+    sub_h = 0.24
+    band = [0.34 + sub_h * sub_depth[b] for b in range(len(rows))]
+    top = 0.12
+    ytop = {}
+    y = top
+    for b in range(len(rows)):
+        ytop[b] = y
+        y += band[b]
+    total_h = y - band[-1] + 0.34 + sub_h * sub_depth[len(rows) - 1] + 0.12
 
     def xy(w):
-        c, r, l = place[w]
-        x = colx[c] + (-lane_w * l if c == 0 else lane_w * l)
-        y = ((height_in - 0.16) - r * step) if c == 0 else (0.16 + r * step)
-        return x * PT, y * PT
+        x, b, sub = place[w]
+        return x * PT, (total_h - (ytop[b] + sub * sub_h)) * PT
 
-    #: **A plaintext node is still 0.5 in tall by default**, which added a
-    #: quarter inch at each end and pushed a 5.00 in target to 5.29. `height`
-    #: and a near-zero graph margin bring the rendered box back to the span
-    #: the positions actually describe.
     L = ["digraph {", "  graph [bgcolor=white margin=0.02];",
          '  node [shape=plaintext fontname="Arial" fontsize=%.1f '
-         'height=0.16 width=0.01 margin="0.01,0.005"];' % fontsize,
+         'height=0.14 width=0.01 margin="0.01,0.005"];' % fontsize,
          #: graphviz scales the arrowhead with penwidth, so at 2.2 pt the
-         #: heads were larger than the gaps between words. 0.2 holds them
-         #: to a consistent small mark across the whole width range.
+         #: heads were larger than the gaps between words
          '  edge [arrowsize=0.2 color="%s"];' % GREY_EDGE]
     for w in place:
         x, y = xy(w)
@@ -208,8 +266,6 @@ def emit(place, spine, nrows, routes, counts, S, pos, head, base,
                    % (w, GREY_NUM, counts[w]))
             L.append('  "%s" [label=%s pos="%.1f,%.1f!"];' % (w, lab, x, y))
         elif w == spine[0]:
-            #: the source is bold too: it is the word the plate is about, and
-            #: in 60% grey it reads as one more way station
             L.append('  "%s" [label=<<B>%s</B>> pos="%.1f,%.1f!"];' % (w, w, x, y))
         else:
             L.append('  "%s" [label="%s" fontcolor="%s" pos="%.1f,%.1f!"];'
@@ -223,8 +279,6 @@ def emit(place, spine, nrows, routes, counts, S, pos, head, base,
         L.append('  "%s" -> "%s" [penwidth=%.2f%s];' % (a, b, wid(v), extra))
     L.append("}")
     open(base + ".dot", "w").write("\n".join(L) + "\n")
-    #: `-n2` uses the positions in the file instead of running a layout, which
-    #: is the only way to fold a spine; `dot` will not do it.
     for ext, args in (("png", ["-Gdpi=300"]), ("pdf", []), ("tif", ["-Gdpi=300"])):
         r = subprocess.run(["neato", "-n2", "-T" + ext] + args
                            + [base + ".dot", "-o", base + "." + ext],
@@ -237,15 +291,16 @@ def emit(place, spine, nrows, routes, counts, S, pos, head, base,
 def build(a, basis, cut, out_dir, name):
     routes, counts, S, pos, words, tot = corridor(
         a.prompt, a.space, a.stage, basis, cut, a.src)
-    head = max(counts, key=lambda w: (counts[w], len(routes[w])))
-    place, spine, nrows, k = layout(routes, counts)
+    place, spine, rows, sub_depth, head = layout(
+        routes, counts, a.width, a.fontsize)
     base = os.path.join(out_dir, name)
-    mark, mv = emit(place, spine, nrows, routes, counts, S, pos, head, base,
-                    a.width, a.height, a.fontsize)
-    print("  %-34s %2d dst (%2d/%2d lineages)  %2d nodes  %2d rows  fold after "
-          "%r  weakest %s->%s %.2f"
-          % (name, len(counts), sum(counts.values()), tot, len(place), nrows,
-             spine[k], mark[0], mark[1], mv))
+    mark, mv = emit(place, spine, rows, sub_depth, routes, counts, S, pos,
+                    head, base, a.width, a.height, a.fontsize)
+    print("  %-22s %2d dst (%2d/%2d lin)  %2d nodes  %d rows of %s  weakest "
+          "%s->%s %.2f"
+          % (name, len(counts), sum(counts.values()), tot, len(place),
+             len(rows), "/".join(str(len(r)) for r in rows),
+             mark[0], mark[1], mv))
     return base
 
 
