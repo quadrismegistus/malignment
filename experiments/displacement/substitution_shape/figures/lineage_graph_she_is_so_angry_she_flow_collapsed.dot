@@ -1,41 +1,30 @@
-digraph linrank {
+digraph linflow {
   rankdir=LR; splines=true; overlap=false;
   size="4.8,12.48";
   bgcolor="white"; nodesep=0.10; ranksep=1.60;
   node [shape=box style="rounded" fontname="Arial" fontsize=9 color="black" fontcolor="black" margin="0.06,0.035" penwidth=0.6];
   edge [fontname="Arial" fontsize=7.2 color="#4d4d4d" penwidth=0.75 arrowsize=0.5];
   { rank=same;
-  "B_kill" [label="kill\n(42/50)" fontsize=17.0];
-  "B_scream" [label="scream\n(3/50)" fontsize=7.9];
-  "B_punch" [style=invis label=""];
-  "B_hurt" [style=invis label=""];
-  "B_destroy" [style=invis label=""];
+  "B_kill" [label="kill\n(42/50)"];
+  "B_scream" [label="scream\n(3/50)"];
   "B_ZZ_ONES" [label="break\nleave\nthrow"];
   }
   { rank=same;
-  "A_kill" [label="kill\n(16/50)" fontsize=10.9];
-  "A_scream" [label="scream\n(14/50)" fontsize=10.5];
-  "A_punch" [label="punch\n(5/50)" fontsize=8.4];
-  "A_hurt" [label="hurt\n(3/50)" fontsize=7.9];
-  "A_destroy" [label="destroy\n(2/50)" fontsize=7.7];
+  "A_kill" [label="kill\n(16/50)"];
+  "A_scream" [label="scream\n(14/50)"];
+  "A_punch" [label="punch\n(5/50)"];
+  "A_hurt" [label="hurt\n(3/50)"];
+  "A_destroy" [label="destroy\n(2/50)"];
   "A_ZZ_ONES" [label="Options\nbreak\ncry\ndie\nfight\nhit\nrip\nsmash"];
   }
   "B_kill" -> "B_scream" [style=invis];
-  "B_scream" -> "B_punch" [style=invis];
-  "B_punch" -> "B_hurt" [style=invis];
-  "B_hurt" -> "B_destroy" [style=invis];
-  "B_destroy" -> "B_ZZ_ONES" [style=invis];
+  "B_scream" -> "B_ZZ_ONES" [style=invis];
   "A_kill" -> "A_scream" [style=invis];
   "A_scream" -> "A_punch" [style=invis];
   "A_punch" -> "A_hurt" [style=invis];
   "A_hurt" -> "A_destroy" [style=invis];
   "A_destroy" -> "A_ZZ_ONES" [style=invis];
   "B_kill" -> "A_kill" [style=invis weight=100];
-  "B_scream" -> "A_scream" [style=invis weight=100];
-  "B_punch" -> "A_punch" [style=invis weight=100];
-  "B_hurt" -> "A_hurt" [style=invis weight=100];
-  "B_destroy" -> "A_destroy" [style=invis weight=100];
-  "B_ZZ_ONES" -> "A_ZZ_ONES" [style=invis weight=100];
   "B_kill" -> "A_kill" [penwidth=4.10 color="#1a1a1a" label="(14/42)"];
   "B_kill" -> "A_scream" [penwidth=3.82 color="#1a1a1a" label="(13/42)"];
   "B_kill" -> "A_ZZ_ONES" [penwidth=1.88 color="#1a1a1a" label="(6/42)"];

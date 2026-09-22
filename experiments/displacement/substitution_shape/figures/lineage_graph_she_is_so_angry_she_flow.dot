@@ -43,11 +43,11 @@ digraph linflow {
   "A_hit" -> "A_rip" [style=invis];
   "A_rip" -> "A_smash" [style=invis];
   "B_kill" -> "A_kill" [style=invis weight=100];
-  "B_kill" -> "A_kill" [penwidth=4.10 color="#1a1a1a" label="14"];
-  "B_kill" -> "A_scream" [penwidth=3.82 color="#1a1a1a" label="13"];
-  "B_kill" -> "A_punch" [penwidth=1.33 color="#1a1a1a" label="4"];
-  "B_kill" -> "A_hurt" [penwidth=1.05 color="#1a1a1a" label="3"];
-  "B_kill" -> "A_destroy" [penwidth=0.78 color="#8c8c8c" label="2"];
+  "B_kill" -> "A_kill" [penwidth=4.10 color="#1a1a1a" label="(14/42)"];
+  "B_kill" -> "A_scream" [penwidth=3.82 color="#1a1a1a" label="(13/42)"];
+  "B_kill" -> "A_punch" [penwidth=1.33 color="#1a1a1a" label="(4/42)"];
+  "B_kill" -> "A_hurt" [penwidth=1.05 color="#1a1a1a" label="(3/42)"];
+  "B_kill" -> "A_destroy" [penwidth=0.78 color="#8c8c8c" label="(2/42)"];
   "B_kill" -> "A_cry" [penwidth=0.50 color="#8c8c8c"];
   "B_leave" -> "A_kill" [penwidth=0.50 color="#8c8c8c"];
   "B_kill" -> "A_Options" [penwidth=0.50 color="#8c8c8c"];

@@ -12,9 +12,7 @@ digraph linflow {
   "B_know" [label="know\n(3/50)"];
   "B_share" [label="share\n(3/50)"];
   "B_hurt" [label="hurt\n(2/50)"];
-  "B_be" [label="be"];
-  "B_destroy" [label="destroy"];
-  "B_see" [label="see"];
+  "B_ZZ_ONES" [label="be\ndestroy\nsee"];
   }
   { rank=same;
   "A_scream" [label="scream\n(21/50)"];
@@ -26,9 +24,7 @@ digraph linflow {
   "A_get" [label="get\n(2/50)"];
   "A_kill" [label="kill\n(2/50)"];
   "A_smash" [label="smash\n(2/50)"];
-  "A_be" [label="be"];
-  "A_break" [label="break"];
-  "A_express" [label="express"];
+  "A_ZZ_ONES" [label="be\nbreak\nexpress"];
   }
   "B_kill" -> "B_scream" [style=invis];
   "B_scream" -> "B_do" [style=invis];
@@ -36,9 +32,7 @@ digraph linflow {
   "B_get" -> "B_know" [style=invis];
   "B_know" -> "B_share" [style=invis];
   "B_share" -> "B_hurt" [style=invis];
-  "B_hurt" -> "B_be" [style=invis];
-  "B_be" -> "B_destroy" [style=invis];
-  "B_destroy" -> "B_see" [style=invis];
+  "B_hurt" -> "B_ZZ_ONES" [style=invis];
   "A_scream" -> "A_do" [style=invis];
   "A_do" -> "A_hurt" [style=invis];
   "A_hurt" -> "A_know" [style=invis];
@@ -47,9 +41,7 @@ digraph linflow {
   "A_destroy" -> "A_get" [style=invis];
   "A_get" -> "A_kill" [style=invis];
   "A_kill" -> "A_smash" [style=invis];
-  "A_smash" -> "A_be" [style=invis];
-  "A_be" -> "A_break" [style=invis];
-  "A_break" -> "A_express" [style=invis];
+  "A_smash" -> "A_ZZ_ONES" [style=invis];
   "B_kill" -> "A_scream" [style=invis weight=100];
   "B_scream" -> "A_scream" [penwidth=4.10 color="#1a1a1a" label="(7/11)"];
   "B_kill" -> "A_scream" [penwidth=3.50 color="#1a1a1a" label="(6/16)"];
@@ -59,6 +51,7 @@ digraph linflow {
   "B_kill" -> "A_kill" [penwidth=1.10 color="#8c8c8c" label="(2/16)"];
   "B_kill" -> "A_know" [penwidth=1.10 color="#8c8c8c" label="(2/16)"];
   "B_kill" -> "A_hurt" [penwidth=1.10 color="#8c8c8c" label="(2/16)"];
+  "B_get" -> "A_ZZ_ONES" [penwidth=1.10 color="#8c8c8c" label="(2/4)"];
   "B_scream" -> "A_smash" [penwidth=1.10 color="#8c8c8c" label="(2/11)"];
   "B_kill" -> "A_do" [penwidth=1.10 color="#8c8c8c" label="(2/16)"];
   "B_hurt" -> "A_hurt" [penwidth=1.10 color="#8c8c8c" label="(2/2)"];
@@ -67,13 +60,11 @@ digraph linflow {
   "B_get" -> "A_know" [penwidth=0.50 color="#8c8c8c"];
   "B_know" -> "A_scream" [penwidth=0.50 color="#8c8c8c"];
   "B_kill" -> "A_get" [penwidth=0.50 color="#8c8c8c"];
-  "B_destroy" -> "A_destroy" [penwidth=0.50 color="#8c8c8c"];
-  "B_get" -> "A_be" [penwidth=0.50 color="#8c8c8c"];
+  "B_ZZ_ONES" -> "A_destroy" [penwidth=0.50 color="#8c8c8c"];
   "B_do" -> "A_lash" [penwidth=0.50 color="#8c8c8c"];
-  "B_see" -> "A_get" [penwidth=0.50 color="#8c8c8c"];
-  "B_be" -> "A_know" [penwidth=0.50 color="#8c8c8c"];
-  "B_get" -> "A_break" [penwidth=0.50 color="#8c8c8c"];
-  "B_know" -> "A_express" [penwidth=0.50 color="#8c8c8c"];
+  "B_ZZ_ONES" -> "A_get" [penwidth=0.50 color="#8c8c8c"];
+  "B_ZZ_ONES" -> "A_know" [penwidth=0.50 color="#8c8c8c"];
+  "B_know" -> "A_ZZ_ONES" [penwidth=0.50 color="#8c8c8c"];
   "B_get" -> "A_hurt" [penwidth=0.50 color="#8c8c8c"];
   "B_know" -> "A_know" [penwidth=0.50 color="#8c8c8c"];
 }
