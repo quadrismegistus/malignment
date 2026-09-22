@@ -517,6 +517,17 @@ def main(argv=None):
     #: 0 BY CONSTRUCTION, since a distribution that loses mass somewhere must
     #: gain it elsewhere. Printing a structural zero under a measured name is
     #: how a reader learns something false.
+    #: A prompt with no measured cells gives `E` empty, and the first
+    #: consumer dies on `max() arg is an empty sequence` -- which names
+    #: neither the prompt nor the cause. Hit by mistyping a prompt that
+    #: differed from a real one by three words. It must sit BEFORE
+    #: `dot_flow`, not before the caption: the first version was written
+    #: at the caption and the crash was still in `dot_flow` at line 267.
+    if not E:
+        raise SystemExit(
+            "no edges for %r: %d of %d lineages had no usable pair "
+            "(%d dropped as non-words). Is the prompt spelled exactly as "
+            "measured?" % (a.prompt, miss, n_roster, nonword))
     LR = (("faller", "riser") if a.basis in ("faller", "crossing")
           else ("argmax", "argmax"))
     print("  %d endpoint lineages drawn%s%s"
@@ -570,10 +581,25 @@ def main(argv=None):
             raise SystemExit("graphviz failed: %s" % r.stderr[:300])
         print("  wrote %s.%s" % (base, ext))
 
+    #: **THE CAPTION'S SUBTRACTION, GATED.** The paragraph below tells the
+    #: reader that adding the boxes gives `n` and that the roster is
+    #: `n_roster`. If those two and the two exclusion counters do not close,
+    #: the sentence is false and the figure should not be written with it.
+    if n + nonword + miss != n_roster:
+        raise SystemExit(
+            "caption would not close: %d drawn + %d nonword + %d unpaired "
+            "!= %d roster" % (n, nonword, miss, n_roster))
     cap = [
         "One prompt, one edge per lineage. %r" % a.prompt,
         "",
-        "Each of the %d endpoint lineages in `roster.endpoints()` contributes "
+        #: **THE PARENTHESES ARE LOAD-BEARING.** `%` binds tighter than `+`,
+        #: so without the outer pair the format applies to the LAST literal
+        #: alone -- two placeholders, three arguments, `TypeError: not all
+        #: arguments converted`. Introduced at e81a4e10 when the branch was
+        #: added, and it crashed AFTER the .dot/.png/.pdf were written and
+        #: before the caption, so every figure since carried a stale caption
+        #: and looked fine. See the note in the module docstring.
+        ("Each of the %d endpoint lineages in `roster.endpoints()` contributes "
         + ("exactly one edge, from the word that lost the most probability "
            "at the blank to the word that gained the most, kept only where "
            "the riser started below the faller and ended above it. Nothing is "
@@ -584,21 +610,39 @@ def main(argv=None):
            if a.basis == "faller" else
            "exactly one edge, from the word its own BASE arm ranks first at "
            "the blank to the word its own ALIGNED arm ranks first. Nothing is ")
-        + (
-        "averaged before the edge is drawn, so an edge of weight %d is %d "
-        "separately trained models making that move.")
+        + "averaged before the edge is drawn, so an edge of weight %d is %d "
+          "separately trained models making that move.")
         % (n_roster, max(E.values()), max(E.values())),
         "",
-        "%d of the %d are drawn. %d are excluded because the first-ranked "
+        #: **THIS PARAGRAPH IS THE READER'S ARITHMETIC AND IT MUST CLOSE.**
+        #: It was written for the argmax basis, where the only exclusion is
+        #: the word filter, and reused verbatim for `crossing`, where it said
+        #: "26 of the 50 are drawn, the difference is exactly these 3". The
+        #: difference is 24: `miss` drops every lineage with no faller-riser
+        #: pair, and on `crossing` that is most of them. Both counters are
+        #: named now, and n + nonword + miss == n_roster is asserted below.
+        ("%d of the %d are drawn. %d are excluded because the first-ranked "
         "word at one arm or the other is not a word -- the blank-template "
         "completions `____` and `________`, which are a real result and are "
         "counted elsewhere in this folder, but are not boxes in a flow of "
-        "words. A lineage excluded on one side is excluded on both, so the "
+        "words."
+        + ("" if not miss else
+           (" A further %d are excluded because no two words CROSS at the "
+            "blank -- the riser has to start below the faller and end above "
+            "it, and on most lineages nothing does. That exclusion is the "
+            "basis, not a defect: this plate is drawn over the lineages "
+            "where a crossing exists."
+            if a.basis == "crossing" else
+            " A further %d are excluded because the lineage has no clean "
+            "biggest-faller/biggest-riser pair at all -- fewer than two "
+            "rated words, no word on one side of zero, or a tie at either "
+            "extreme.") % miss)
+        + " A lineage excluded on one side is excluded on both, so the "
         "two columns still balance against each other -- each sums to %d -- "
         "while the denominator on every label stays %d, the roster. **A "
         "reader who adds the boxes will therefore get %d and not %d**, and "
-        "the difference is exactly these %d."
-        % (n, n_roster, nonword, n, n_roster, n, n_roster, nonword),
+        "the difference is exactly these %d.")
+        % (n, n_roster, nonword, n, n_roster, n, n_roster, nonword + miss),
         "",
         "An edge is labelled with its share of its SOURCE box -- (15/28) is "
         "15 of the 28 lineages whose base arm said that word -- so the two "

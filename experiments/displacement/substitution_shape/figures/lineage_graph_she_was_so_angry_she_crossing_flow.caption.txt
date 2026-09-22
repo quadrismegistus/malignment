@@ -1,0 +1,9 @@
+One prompt, one edge per lineage. 'She was so angry she wanted to'
+
+Each of the 50 endpoint lineages in `roster.endpoints()` contributes exactly one edge, from the word that lost the most probability at the blank to the word that gained the most, kept only where the riser started below the faller and ended above it. Nothing is averaged before the edge is drawn, so an edge of weight 12 is 12 separately trained models making that move.
+
+26 of the 50 are drawn. 3 are excluded because the first-ranked word at one arm or the other is not a word -- the blank-template completions `____` and `________`, which are a real result and are counted elsewhere in this folder, but are not boxes in a flow of words. A further 21 are excluded because no two words CROSS at the blank -- the riser has to start below the faller and end above it, and on most lineages nothing does. That exclusion is the basis, not a defect: this plate is drawn over the lineages where a crossing exists. A lineage excluded on one side is excluded on both, so the two columns still balance against each other -- each sums to 26 -- while the denominator on every label stays 50, the roster. **A reader who adds the boxes will therefore get 26 and not 50**, and the difference is exactly these 24.
+
+An edge is labelled with its share of its SOURCE box -- (15/28) is 15 of the 28 lineages whose base arm said that word -- so the two heaviest edges can be compared without looking anything up. Counts of one are not printed: a box reading (1/50) and a labelled hairline spend a number on what the single thin line already says. Every edge is headed, including the 0 that begin and end on the same word: the arrow marks the passage from the base arm to the aligned arm, which happened to all 26 lineages, and not a change of word.
+
+Pass 1 only (topup=0): the store holds two passes the campaign's rule forbids merging.
