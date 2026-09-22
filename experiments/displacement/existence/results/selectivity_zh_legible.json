@@ -1,0 +1,298 @@
+{
+ "overall": {
+  "neg": 10,
+  "pos": 1,
+  "p": 0.01171875,
+  "med_slope": -0.0005527521913711532,
+  "n_cells": 4101,
+  "n_words": 193496,
+  "per_lineage": [
+   {
+    "lineage": "01-ai/Yi-1.5-9B>01-ai/Yi-1.5-9B-Chat",
+    "slope": -0.00026057
+   },
+   {
+    "lineage": "BAAI/Aquila2-7B>BAAI/AquilaChat2-7B",
+    "slope": -0.00088381
+   },
+   {
+    "lineage": "Qwen/Qwen2.5-7B>Qwen/Qwen2.5-7B-Instruct",
+    "slope": -0.00027407
+   },
+   {
+    "lineage": "Qwen/Qwen3-8B-Base>Qwen/Qwen3-8B",
+    "slope": -0.00072086
+   },
+   {
+    "lineage": "baichuan-inc/Baichuan2-7B-Base>baichuan-inc/Baichuan2-7B-Chat",
+    "slope": -0.00115533
+   },
+   {
+    "lineage": "deepseek-ai/deepseek-llm-7b-base>deepseek-ai/deepseek-llm-7b-chat",
+    "slope": -0.00020256
+   },
+   {
+    "lineage": "internlm/internlm2-base-7b>internlm/internlm2-chat-7b",
+    "slope": -0.00014741
+   },
+   {
+    "lineage": "m-a-p/CT-LLM-Base>m-a-p/CT-LLM-SFT-DPO",
+    "slope": 0.00017624
+   },
+   {
+    "lineage": "m-a-p/neo_7b>m-a-p/neo_7b_instruct_v0.1",
+    "slope": -0.00055275
+   },
+   {
+    "lineage": "openbmb/MiniCPM5-1B-Base>openbmb/MiniCPM5-1B",
+    "slope": -0.00131317
+   },
+   {
+    "lineage": "zai-org/glm-4-9b-hf>zai-org/glm-4-9b-chat-hf",
+    "slope": -0.00118502
+   }
+  ]
+ },
+ "by_lift": [
+  {
+   "band": "< 0 (no lift)",
+   "lo": -2,
+   "hi": 0,
+   "n_cells": 3078,
+   "n_lineages": 11,
+   "neg": 10,
+   "pos": 1,
+   "p": 0.01171875,
+   "med_slope": -0.0003396686142194548,
+   "per_lineage": [
+    {
+     "lineage": "01-ai/Yi-1.5-9B>01-ai/Yi-1.5-9B-Chat",
+     "slope": -0.00031777
+    },
+    {
+     "lineage": "BAAI/Aquila2-7B>BAAI/AquilaChat2-7B",
+     "slope": -0.0005286
+    },
+    {
+     "lineage": "Qwen/Qwen2.5-7B>Qwen/Qwen2.5-7B-Instruct",
+     "slope": -3.531e-05
+    },
+    {
+     "lineage": "Qwen/Qwen3-8B-Base>Qwen/Qwen3-8B",
+     "slope": -0.00055894
+    },
+    {
+     "lineage": "baichuan-inc/Baichuan2-7B-Base>baichuan-inc/Baichuan2-7B-Chat",
+     "slope": -0.00033804
+    },
+    {
+     "lineage": "deepseek-ai/deepseek-llm-7b-base>deepseek-ai/deepseek-llm-7b-chat",
+     "slope": -0.00033967
+    },
+    {
+     "lineage": "internlm/internlm2-base-7b>internlm/internlm2-chat-7b",
+     "slope": -2.124e-05
+    },
+    {
+     "lineage": "m-a-p/CT-LLM-Base>m-a-p/CT-LLM-SFT-DPO",
+     "slope": 0.00017232
+    },
+    {
+     "lineage": "m-a-p/neo_7b>m-a-p/neo_7b_instruct_v0.1",
+     "slope": -0.0006359
+    },
+    {
+     "lineage": "openbmb/MiniCPM5-1B-Base>openbmb/MiniCPM5-1B",
+     "slope": -0.00095812
+    },
+    {
+     "lineage": "zai-org/glm-4-9b-hf>zai-org/glm-4-9b-chat-hf",
+     "slope": -0.00066036
+    }
+   ]
+  },
+  {
+   "band": "0-0.5 (low)",
+   "lo": 0,
+   "hi": 0.5,
+   "n_cells": 21068,
+   "n_lineages": 11,
+   "neg": 8,
+   "pos": 3,
+   "p": 0.2265625,
+   "med_slope": -0.00043158223332685373,
+   "per_lineage": [
+    {
+     "lineage": "01-ai/Yi-1.5-9B>01-ai/Yi-1.5-9B-Chat",
+     "slope": -0.00040878
+    },
+    {
+     "lineage": "BAAI/Aquila2-7B>BAAI/AquilaChat2-7B",
+     "slope": 0.00023149
+    },
+    {
+     "lineage": "Qwen/Qwen2.5-7B>Qwen/Qwen2.5-7B-Instruct",
+     "slope": 6.06e-06
+    },
+    {
+     "lineage": "Qwen/Qwen3-8B-Base>Qwen/Qwen3-8B",
+     "slope": -0.00112863
+    },
+    {
+     "lineage": "baichuan-inc/Baichuan2-7B-Base>baichuan-inc/Baichuan2-7B-Chat",
+     "slope": -0.00082655
+    },
+    {
+     "lineage": "deepseek-ai/deepseek-llm-7b-base>deepseek-ai/deepseek-llm-7b-chat",
+     "slope": -0.00038621
+    },
+    {
+     "lineage": "internlm/internlm2-base-7b>internlm/internlm2-chat-7b",
+     "slope": 0.00012684
+    },
+    {
+     "lineage": "m-a-p/CT-LLM-Base>m-a-p/CT-LLM-SFT-DPO",
+     "slope": -0.00043158
+    },
+    {
+     "lineage": "m-a-p/neo_7b>m-a-p/neo_7b_instruct_v0.1",
+     "slope": -0.00078887
+    },
+    {
+     "lineage": "openbmb/MiniCPM5-1B-Base>openbmb/MiniCPM5-1B",
+     "slope": -0.0004523
+    },
+    {
+     "lineage": "zai-org/glm-4-9b-hf>zai-org/glm-4-9b-chat-hf",
+     "slope": -0.00075348
+    }
+   ]
+  },
+  {
+   "band": "0.5-1 (moderate)",
+   "lo": 0.5,
+   "hi": 1,
+   "n_cells": 4083,
+   "n_lineages": 11,
+   "neg": 9,
+   "pos": 2,
+   "p": 0.0654296875,
+   "med_slope": -0.00046289732565089924,
+   "per_lineage": [
+    {
+     "lineage": "01-ai/Yi-1.5-9B>01-ai/Yi-1.5-9B-Chat",
+     "slope": -0.00045121
+    },
+    {
+     "lineage": "BAAI/Aquila2-7B>BAAI/AquilaChat2-7B",
+     "slope": -0.001042
+    },
+    {
+     "lineage": "Qwen/Qwen2.5-7B>Qwen/Qwen2.5-7B-Instruct",
+     "slope": 6.584e-05
+    },
+    {
+     "lineage": "Qwen/Qwen3-8B-Base>Qwen/Qwen3-8B",
+     "slope": -0.0004629
+    },
+    {
+     "lineage": "baichuan-inc/Baichuan2-7B-Base>baichuan-inc/Baichuan2-7B-Chat",
+     "slope": -0.00085991
+    },
+    {
+     "lineage": "deepseek-ai/deepseek-llm-7b-base>deepseek-ai/deepseek-llm-7b-chat",
+     "slope": -0.00040812
+    },
+    {
+     "lineage": "internlm/internlm2-base-7b>internlm/internlm2-chat-7b",
+     "slope": 0.00012588
+    },
+    {
+     "lineage": "m-a-p/CT-LLM-Base>m-a-p/CT-LLM-SFT-DPO",
+     "slope": -0.00023472
+    },
+    {
+     "lineage": "m-a-p/neo_7b>m-a-p/neo_7b_instruct_v0.1",
+     "slope": -0.00075633
+    },
+    {
+     "lineage": "openbmb/MiniCPM5-1B-Base>openbmb/MiniCPM5-1B",
+     "slope": -0.00101624
+    },
+    {
+     "lineage": "zai-org/glm-4-9b-hf>zai-org/glm-4-9b-chat-hf",
+     "slope": -0.00062173
+    }
+   ]
+  },
+  {
+   "band": "1-2 (high)",
+   "lo": 1,
+   "hi": 2,
+   "n_cells": 557,
+   "n_lineages": 11,
+   "neg": 9,
+   "pos": 2,
+   "p": 0.0654296875,
+   "med_slope": -0.0006545779978036723,
+   "per_lineage": [
+    {
+     "lineage": "01-ai/Yi-1.5-9B>01-ai/Yi-1.5-9B-Chat",
+     "slope": -0.00091725
+    },
+    {
+     "lineage": "BAAI/Aquila2-7B>BAAI/AquilaChat2-7B",
+     "slope": 0.00108667
+    },
+    {
+     "lineage": "Qwen/Qwen2.5-7B>Qwen/Qwen2.5-7B-Instruct",
+     "slope": -0.00035418
+    },
+    {
+     "lineage": "Qwen/Qwen3-8B-Base>Qwen/Qwen3-8B",
+     "slope": -0.00086586
+    },
+    {
+     "lineage": "baichuan-inc/Baichuan2-7B-Base>baichuan-inc/Baichuan2-7B-Chat",
+     "slope": -0.00103865
+    },
+    {
+     "lineage": "deepseek-ai/deepseek-llm-7b-base>deepseek-ai/deepseek-llm-7b-chat",
+     "slope": -0.00044354
+    },
+    {
+     "lineage": "internlm/internlm2-base-7b>internlm/internlm2-chat-7b",
+     "slope": 1.329e-05
+    },
+    {
+     "lineage": "m-a-p/CT-LLM-Base>m-a-p/CT-LLM-SFT-DPO",
+     "slope": -0.00024753
+    },
+    {
+     "lineage": "m-a-p/neo_7b>m-a-p/neo_7b_instruct_v0.1",
+     "slope": -0.00065458
+    },
+    {
+     "lineage": "openbmb/MiniCPM5-1B-Base>openbmb/MiniCPM5-1B",
+     "slope": -0.00118387
+    },
+    {
+     "lineage": "zai-org/glm-4-9b-hf>zai-org/glm-4-9b-chat-hf",
+     "slope": -0.00066539
+    }
+   ]
+  },
+  {
+   "band": "2+ (very high)",
+   "lo": 2,
+   "hi": 7,
+   "n_cells": 2,
+   "n_lineages": 0,
+   "neg": 0,
+   "pos": 0,
+   "p": NaN,
+   "med_slope": NaN,
+   "per_lineage": []
+  }
+ ]
+}

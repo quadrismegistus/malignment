@@ -68,8 +68,41 @@ def slope(xs, ys):
     return sum((x - mx) * (y - my) for x, y in zip(xs, ys)) / sxx
 
 
+#: **A LANGUAGE FILTER ON THE PROMPTS IS NOT A POPULATION FILTER ON THE MODELS.**
+#: `--lang zh` keeps every lineage that clears the 25-cell floor, and 28 of the
+#: 47 it keeps put their Chinese mass on function words their tokenizer happens
+#: to cover rather than on Chinese the model models. On the k_zh norms that
+#: difference does not add noise, it inverts the sign. So the Chinese arm of
+#: this test wants a model population as well, and the tiers live beside
+#: `population.py` with their calibration: see
+#: `experiments/passage_analysis/jakobson_space/twp_population.py`.
+_POPULATIONS = ("all", "zh_measurable", "zh_legible", "zh_fluent")
+
+
+def _population(name):
+    """-> None for 'all', else the set of MODEL ids a lineage's arms must be in."""
+    if name in (None, "all"):
+        return None
+    import os
+    import sys as _sys
+    d = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(
+        os.path.abspath(__file__)))), "passage_analysis", "jakobson_space")
+    _sys.path.insert(0, d)
+    if name == "zh_fluent":
+        import population as P
+        #: `contrast_models()` returns ALIGNED ids; the arms are paired there by
+        #: construction, so both arms of a surviving lineage are competent.
+        import twp_population as T
+        eps_ok = set(P.contrast_models())
+        from malignment import roster
+        eps, _ = roster.endpoints()
+        return {m for b, a in eps.items() if a in eps_ok for m in (b, a)}
+    import twp_population as T
+    return T.twp_legible() if name == "zh_legible" else T.measurable()
+
+
 def measure(save=None, frame="raw", match_framed=False, arm="delta",
-            lang=None):
+            lang=None, population="all"):
     """arm='delta' is the campaign's question: what does ALIGNMENT do.
 
     arm='base' and arm='aligned' ask the LEVEL question instead -- does this
@@ -92,6 +125,16 @@ def measure(save=None, frame="raw", match_framed=False, arm="delta",
     eps, unresolved = roster.endpoints()
     if unresolved:
         raise SystemExit("unresolved lineages: %s" % sorted(unresolved)[:3])
+
+    #: BOTH ARMS, for the reason `twp_population.twp_contrast_models` gives: a
+    #: lineage whose arms differ in competence yields an arm contrast that
+    #: measures the competence gap. Applied before the queries so the printed
+    #: lineage count is the population actually read.
+    keep = _population(population)
+    if keep is not None:
+        eps = {b: a for b, a in eps.items() if b in keep and a in keep}
+        if not eps:
+            raise SystemExit("population %r selects no lineage" % population)
 
     #: **THE FRAMED CONTRAST IS base_raw -> aligned_framed AND IS ASYMMETRIC.**
     #: There is no framed base for 43 of 50 pairs -- most bases ship no chat
@@ -541,9 +584,18 @@ def main(argv=None):
                     help="restrict cells to prompts in this language; the "
                          "default pools both, which is what the 43/50 "
                          "headline does")
+    ap.add_argument("--population", default="all", choices=_POPULATIONS,
+                    help="restrict to lineages whose BOTH arms are in a "
+                         "Chinese population tier (twp_population.py). "
+                         "zh_measurable: the cell exists and is Chinese. "
+                         "zh_legible: its top mass is Chinese WORDS. "
+                         "zh_fluent: the model writes Chinese prose "
+                         "(population.contrast_models). Pair with --lang zh; "
+                         "a language filter on prompts does not exclude a "
+                         "model that cannot write the language.")
     a = ap.parse_args(argv)
     return measure(save=a.save, frame=a.frame, match_framed=a.match_framed,
-                   arm=a.arm, lang=a.lang)
+                   arm=a.arm, lang=a.lang, population=a.population)
 
 
 if __name__ == "__main__":
