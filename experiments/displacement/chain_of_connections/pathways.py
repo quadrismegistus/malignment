@@ -115,6 +115,9 @@ def main(argv=None):
     #: drop a candidate that is a strict prefix of another and N times
     #: rarer -- `bur` between `burn`/`burst`/`bury`. See run.candidate_words.
     ap.add_argument("--prefix-ratio", type=float, default=0.0)
+    #: residual spaces only: which rung of the ladder to read
+    ap.add_argument("--stage", default="base",
+                    choices=("base", "sft", "dpo", "rlvr"))
     ap.add_argument("--raw", action="store_true",
                     help="no dictionary/length/case filter: let the path run "
                          "through subwords")
@@ -133,7 +136,8 @@ def main(argv=None):
               % (a.min_lineages, ", ".join(sorted(drop))))
 
     words, W, ids = cosines.space(a.space, a.prompt, filtered=not a.raw,
-                                  prefix_ratio=a.prefix_ratio)
+                                  prefix_ratio=a.prefix_ratio,
+                                  stage=a.stage)
     #: `ids` gathers rows out of W; `idx` addresses everything graph-side.
     idx = {w: i for i, w in enumerate(words)}
     missing = [w for w in list(dsts) + [a.src] if w not in idx]
@@ -183,7 +187,8 @@ def main(argv=None):
     tag = "%s_%s_%s_k%d%s%s" % (a.src, a.basis, a.space, a.k,
                                 "_min%d" % a.min_lineages if a.min_lineages > 1 else "",
                                 ("_raw" if a.raw else "")
-                                + ("_pfx%g" % a.prefix_ratio if a.prefix_ratio else ""))
+                                + ("_pfx%g" % a.prefix_ratio if a.prefix_ratio else "")
+                                + ("_%s" % a.stage if a.stage != "base" else ""))
     base = os.path.join(FIGS, "pathways_" + tag)
     edges = set()
     for w in dsts:
@@ -208,14 +213,23 @@ def main(argv=None):
     ch1 = [(x, y) for x, y in edges if x[0] == y[0]]
     ch2 = [(x, y) for x, y in edges if x[:2] == y[:2]]
     lc = collections.Counter(w[0] for w in words)
+    #: **TWO BASELINES, BECAUSE THEY ARE AN ORDER OF MAGNITUDE APART.** On
+    #: this vocabulary chance is 9% for a shared first letter and 1.2% for a
+    #: shared two-letter prefix. This block printed the first-letter chance
+    #: once, next to both columns, and I read "2-prefix 7% against chance 9%"
+    #: as BELOW chance and reported it that way. It is 6x chance.
+    l2 = collections.Counter(w[:2] for w in words)
     nn = len(words)
     #: NOT `base` -- that name is the output path a few lines down, and
     #: shadowing it made the writer try to concatenate a float with ".dot".
-    chance = 100.0 * sum(v * (v - 1) for v in lc.values()) / (nn * (nn - 1))
-    print("  ORTHOGRAPHY of the %d drawn edges: %.0f%% share a first letter, "
-          "%.0f%% a two-letter prefix (chance %.0f%%)"
-          % (len(edges), 100.0 * len(ch1) / len(edges),
-             100.0 * len(ch2) / len(edges), chance))
+    c1 = 100.0 * sum(v * (v - 1) for v in lc.values()) / (nn * (nn - 1))
+    c2 = 100.0 * sum(v * (v - 1) for v in l2.values()) / (nn * (nn - 1))
+    p1 = 100.0 * len(ch1) / len(edges)
+    p2 = 100.0 * len(ch2) / len(edges)
+    print("  ORTHOGRAPHY of the %d drawn edges: first letter %.0f%% vs chance "
+          "%.0f%% (%.1fx); two-letter prefix %.0f%% vs chance %.1f%% (%.1fx)"
+          % (len(edges), p1, c1, p1 / c1 if c1 else 0.0,
+             p2, c2, p2 / c2 if c2 else 0.0))
     print("      same-letter edges: %s"
           % ", ".join("%s>%s" % e for e in sorted(ch1)))
 

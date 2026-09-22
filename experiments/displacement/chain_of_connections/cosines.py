@@ -29,7 +29,8 @@ PROBE = ["scream", "shout", "yell", "cry", "weep", "shriek", "laugh",
          "fight", "sell", "destroy"]
 
 
-def space(name, prompt, centre=True, filtered=True, prefix_ratio=0.0):
+def space(name, prompt, centre=True, filtered=True, prefix_ratio=0.0,
+          stage="base"):
     """-> (words, unit-normalised matrix, {word: row})"""
     import torch
     #: ONE filter for the whole folder -- see `run.candidate_words`. This was
@@ -94,7 +95,16 @@ def space(name, prompt, centre=True, filtered=True, prefix_ratio=0.0):
                 "residual was computed over the 307-word filtered candidate "
                 "set, and changing the vocabulary means recomputing it."
                 % name)
-        M = torch.tensor(z["%s__base" % key].astype("float32"))
+        #: **THE SAME RESIDUAL EXISTS AT ALL FOUR STAGES OF THE LADDER**, so
+        #: the chain can be drawn before and after alignment on identical
+        #: candidates. `own_geometry` found the type-level geometry frozen
+        #: after SFT while the residual kept moving -- this is that movement
+        #: made visible as a path rather than as a rank.
+        kk = "%s__%s" % (key, stage)
+        if kk not in z.files:
+            raise SystemExit("no %s in %s (have: %s)"
+                             % (kk, npz, ", ".join(sorted(z.files))))
+        M = torch.tensor(z[kk].astype("float32"))
         X = M - M.mean(0) if centre else M
         return ws, torch.nn.functional.normalize(X, dim=1), \
             {w: i for i, w in enumerate(ws)}
