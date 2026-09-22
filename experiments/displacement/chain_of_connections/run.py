@@ -66,23 +66,51 @@ import embed  # noqa: E402
 FIG2 = "She was so angry she wanted to"
 
 
-def real_words(tok, min_zipf=2.0):
-    """-> {word: token id} for single-token space-prefixed real English words.
+def lexicon(name="subtlex", min_fpm=0.0, min_zipf=2.0):
+    """-> a membership predicate for "is this a word".
 
-    `wordfreq`'s zipf frequency is the membership test this repo already uses
-    (`norm_change/fig3_candidates.real_word`). A floor above zero is applied
-    because the tokenizer is full of things with a nonzero frequency and no
-    business in a chain -- and because the FIRST version of this graph, built
-    on "lowercase and alphabetic" alone, routed `kill -> murder -> assass ->
-    cruc -> kry -> cry`, where three of the five waypoints are BPE fragments.
-    A chain through segmentation debris is an artefact, not an association.
+    **SUBTLEX-US IS A WORD LIST; `wordfreq` IS A FREQUENCY MODEL** (RH), and
+    for excluding segmentation debris that difference decides it. `wordfreq`
+    assigns frequency to any string that occurs, so BPE fragments inherit one
+    and clear any floor: `shr` 2.37, `shri` 3.58, `kry` 1.55. SUBTLEX simply
+    does not contain them -- 60,384 entries, and `shr`, `shri`, `assass`,
+    `cruc` and `kry` are all absent.
+
+    Already in the repo at `lexicons/frequency/subtlex_us.tsv` and wired
+    through `fields.SOURCES`; nothing new is downloaded.
+
+    **THE KNOWN RESIDUE IS PROPER NAMES.** `cher` survives at 2.47 fpm because
+    Cher appears in film subtitles. A frequency floor would remove it and take
+    `perish` (2.59) and `cherish` (4.45) with it, so the floor is left at zero
+    and the residue is named instead.
+
+    **BYU/COCA IS NOT AVAILABLE AND SHOULD NOT BE.** `fields.py` records that
+    the file was never in the clone -- it lived in two Dropbox paths -- and
+    that it is TYPE-level, one lemma and POS per surface, which is the defect
+    that retired it from this project.
     """
+    if name == "subtlex":
+        import csv as _csv
+        from malignment import fields as F
+        path, ok = F.sources()["subtlex_us"]
+        if not ok:
+            raise SystemExit("missing %s" % path)
+        with open(path, encoding="utf-8") as fh:
+            tab = {r["word"].lower(): float(r["fpm"])
+                   for r in _csv.DictReader(fh, delimiter="\t")}
+        return lambda w: tab.get(w, -1.0) >= min_fpm, len(tab)
     from wordfreq import zipf_frequency
+    return lambda w: zipf_frequency(w, "en") >= min_zipf, None
+
+
+def real_words(tok, name="subtlex", min_fpm=0.0, min_zipf=2.0):
+    """-> {word: token id} for single-token space-prefixed real English words."""
+    ok, _n = lexicon(name, min_fpm, min_zipf)
     out = {}
     for i in range(len(tok)):
         s = tok.decode([i])
         if len(s) > 2 and s[0] == " " and s[1:].isalpha() and s[1:].islower():
-            if zipf_frequency(s[1:], "en") >= min_zipf:
+            if ok(s[1:]):
                 out[s[1:]] = i
     return out
 
@@ -150,6 +178,12 @@ def main(argv=None):
                     help="words: every real English word in the tokenizer, so "
                          "a waypoint need not be sayable. candidates: only "
                          "words above theta on this prompt.")
+    ap.add_argument("--lexicon", default="subtlex",
+                    choices=("subtlex", "wordfreq"),
+                    help="subtlex: membership in SUBTLEX-US, a word LIST. "
+                         "wordfreq: a frequency MODEL, which gives BPE "
+                         "fragments a frequency and lets them through.")
+    ap.add_argument("--min-fpm", type=float, default=0.0)
     ap.add_argument("--min-zipf", type=float, default=2.0)
     a = ap.parse_args(argv)
 
@@ -163,10 +197,10 @@ def main(argv=None):
               "the 100 arms; %d single-token (%d multi-token, dropped)"
               % (len(cand), len(ids), multi))
     else:
-        ids = real_words(tok, a.min_zipf)
-        print("  vocab=words: %d real English words in the tokenizer at "
-              "zipf >= %.1f, single token with a leading space"
-              % (len(ids), a.min_zipf))
+        ids = real_words(tok, a.lexicon, a.min_fpm, a.min_zipf)
+        print("  vocab=words, lexicon=%s: %d real English words in the "
+              "tokenizer, single token with a leading space"
+              % (a.lexicon, len(ids)))
     words = sorted(ids)
     pos = {w: i for i, w in enumerate(words)}
     for w in (a.src, a.dst):
@@ -221,6 +255,21 @@ def main(argv=None):
              if p and len(p) - 1 == med else
              "NOT SHORT: it is LONGER than typical" if p and len(p) - 1 > med
              else "shorter than typical" if p else "absent"))
+
+    #: **THE CONTROL THAT DECIDES IT.** A readable chain is not evidence:
+    #: in a small-world k-NN graph EVERY pair has one, and it will look like
+    #: an association because the steps are near-neighbours by construction.
+    #: So the same path is drawn to words chosen to have nothing to do with
+    #: the prompt. If they read as well as the real one, the real one is a
+    #: property of the graph.
+    print("\n  CONTROL: the same walk to words with nothing to do with it")
+    for t in ("sofa", "accordion", "pension", "wallpaper", "custard"):
+        if t not in pos:
+            continue
+        cp = shortest(adj, pos[a.src], pos[t])
+        if cp:
+            print("    %-10s %d hops  %s"
+                  % (t, len(cp) - 1, " -> ".join(words[i] for i in cp)))
 
     #: **HOW MUCH OF THIS GRAPH IS SPELLING?** Input embeddings carry
     #: orthography heavily, so a chain through them may be a chain of prefixes

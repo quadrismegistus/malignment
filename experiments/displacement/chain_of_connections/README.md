@@ -3,7 +3,7 @@ subject: displacement
 question: Is `kill -> scream` a short walk along a chain of connections in the model's own embedding geometry?
 kind: question
 status: RUN 2026-09-22, EXPLORATORY and unregistered. One model, one prompt.
-headline: "**NO, ON THIS INSTRUMENT.** The question is real -- ` scream` ranks 1,738th of 128,256 tokens by cosine to ` kill`, so the substitute is nowhere near the geometry's nearest word -- but a chain does not explain it. Over the 380 candidate words above theta on the prompt, `kill -> fight -> laugh -> scream` is 3 hops against a MEDIAN of 3. Over 20,809 real words, `kill -> killed -> drown -> drowning -> sinking -> shrinking -> shrink -> shr -> shri -> scream` is 9 hops against a median of 8, i.e. LONGER than typical. **And the graph is about half orthographic**: 48 percent of 3-NN pairs share a three-letter prefix, so `perish -> cherish -> cher -> cheer` is a chain of spellings, not of associations. Input embeddings are the wrong instrument for this question and the next ones to try are the unembedding and a sentence embedder."
+headline: "**NO, AND THE CONTROL IS WHY.** The question is real -- ` scream` ranks 1,738th of 128,256 tokens by cosine to ` kill`, so the substitute is nowhere near the geometry's nearest word. And a chain IS there, reading beautifully: `kill -> killed -> murdered -> murder -> revenge -> rage -> raging -> roaring -> roar -> scream`. **It means nothing.** The same walk reaches `pension` in 7 hops, `accordion` in 8 and `sofa` in 9 -- all as readable (`organ -> piano -> accordion`), and two of them CLOSER to `kill` than `scream` is. Median distance in the graph is 8 and `scream` sits at 9, longer than typical. In a small-world k-NN graph every pair has a plausible chain, which is exactly why a plausible chain is not evidence. Half the edges are orthographic besides (50 percent of 3-NN pairs share a three-letter prefix)."
 ---
 
 # Chain of connections
@@ -27,24 +27,37 @@ The first version restricted the graph to the prompt's own candidate set, which 
     --vocab candidates   380 words above theta in >= 1 of the 100 arms here
     --vocab words        20,809 real English words in the tokenizer (zipf >= 2)
 
-## 3. Chains exist, and they are not short
+## 3. A chain is there, and it reads beautifully
 
-    vocab        path                                          hops  median
-    candidates   kill -> fight -> laugh -> scream                  3       3
-    words        kill -> killed -> drown -> drowning -> sinking
-                 -> shrinking -> shrink -> shr -> shri -> scream   9       8
+Vocabulary is SUBTLEX-US membership (RH), which is a word **list** where `wordfreq` is a frequency **model**: `wordfreq` gives any occurring string a frequency, so BPE fragments clear any floor (`shr` 2.37, `shri` 3.58, `kry` 1.55), while SUBTLEX simply does not contain them. 18,035 of the tokenizer's words survive. It is already in the repo at `lexicons/frequency/subtlex_us.tsv`; nothing was downloaded. BYU/COCA is **not** available and should not be — `fields.py` records that it never existed in the clone and that it is type-level, which is what retired it.
 
-**`kill → scream` sits at exactly the typical distance in one graph and one hop worse than typical in the other.** Whatever connects them, it is not unusual proximity in this space at any number of hops.
+    kill -> killed -> murdered -> murder -> revenge -> rage -> raging -> roaring -> roar -> scream
 
-## 4. And half the graph is spelling
+Nine steps, each a near-neighbour, and it narrates itself: the killing becomes a murder, the murder a revenge, the revenge a rage, the rage a roar, the roar a scream. It is exactly the shape Freud's sentence predicts.
 
-**48 percent of 3-NN pairs over 400 sampled nodes share a three-letter prefix.** The paths show it plainly: `perish → cherish → cher → cheer`, `shrink → shr → shri`, `cherish → cher`. Input embeddings carry orthography heavily, so a walk through them is about half a walk through spellings — and `shr` (zipf 2.37), `shri` (3.58) and `cher` (3.36) all clear the real-word filter, because `wordfreq` assigns frequency to fragments that occur in corpora.
+## 4. And it means nothing, which the control shows
 
-An earlier version with no frequency filter at all was worse still, routing `kill → murder → assass → cruc → kry → cry`.
+The same walk, to words with nothing to do with the prompt:
+
+    pension     7 hops   kill -> killed -> sacrificed -> sacrifices -> trade -> tariff -> tax -> pension
+    accordion   8        kill -> killed -> dead -> corpse -> bodies -> organs -> organ -> piano -> accordion
+    wallpaper   8        kill -> destroy -> destroyer -> catcher -> pitcher -> jug -> rug -> carpet -> wallpaper
+    sofa        9        kill -> killed -> slaughtered -> slaughter -> auction -> sale -> salesman -> chairman -> chair -> sofa
+    scream      9
+
+**`pension` and `accordion` are CLOSER to `kill` than `scream` is**, and each chain reads as well as the real one — `organ → piano → accordion` is as good a displacement as `rage → roar → scream`. The median distance from `kill` to anything in this graph is 8; `scream` sits at 9, longer than typical.
+
+**In a small-world k-NN graph every pair has a plausible chain**, because every step is a near-neighbour by construction. That is precisely why a plausible chain is not evidence, and why the control is the only part of this experiment that settles anything.
+
+## 5. Half the edges are spelling
+
+**50 percent of 3-NN pairs over 400 sampled nodes share a three-letter prefix**, and the control paths show it: `catcher → pitcher`, `jug → rug`, `chairman → chair`. Input embeddings carry orthography heavily. The known residue of the SUBTLEX filter is proper names — `cher` survives at 2.47 fpm because Cher appears in subtitles — and a frequency floor that removed it would take `perish` (2.59) and `cherish` (4.45) too, so the floor is zero and the residue is named instead.
 
 ## What this licenses, and what it does not
 
-**A path in this graph is a fact about geometry, not a mechanism.** Nothing here shows a model traversing anything — a forward pass does not walk a k-NN graph. The strongest available reading was that a chain of short associative steps exists between the two words, and the null says it does not: the steps are neither short nor, half the time, associative.
+**A path in this graph is a fact about geometry, not a mechanism.** Nothing here shows a model traversing anything — a forward pass does not walk a k-NN graph. The strongest available reading was that a chain of short associative steps exists between the two words, and the control says it does not distinguish them: `scream` is farther than `accordion`.
+
+**The seductive part is the readable path, and it is the part to distrust.** Had this experiment stopped at section 3 it would have produced a genuinely beautiful result — `murder → revenge → rage → roar → scream`, Freud's chain in a language model's own geometry — and it would have been an artefact of k-NN connectivity. The control cost four lines.
 
 **The instrument is the likely fault rather than the idea.** Two better ones, both already in this project: the **unembedding** (`lm_head`), which is what actually decides the output distribution and need not share the input space's orthographic bias; and **`bge-m3`**, a sentence embedder the campaign already uses for passage work, which would give a semantic space with no tokenizer in it. Either could be run over the same prompt and the same endpoints with the producer as written.
 
