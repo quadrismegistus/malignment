@@ -277,3 +277,48 @@ The mouth survives the cleaning and is now the whole structure rather than one p
     python pathways.py                          # the plate above
     python pathways.py --basis faller           # 10 destinations instead of 6
     python pathways.py --min-lineages 2         # scream and cry only
+
+## 11. Two questions from the paper seat: one nuance, one refuted test
+
+### Q1. Are the substitutes uniformly far from `kill`? NO -- THEY ARE BIMODAL
+
+Section 10 said `scream` is "ordinarily far". Asked whether that holds for the other destinations, it does not, and the structure is more useful than the uniformity would have been. Cosine rank among the 307 candidates, `kill`'s own destinations at lineage grain:
+
+    basis=argmax                        basis=faller
+    hurt      1   +0.270  rank  10      hurt    3   rank  10
+    destroy   1   +0.184  rank  27      hit     3   rank  19
+    fight     1   +0.139  rank  38      destroy 1   rank  27
+    punch     1   +0.086  rank  55      fight   1   rank  38
+    ---------------------------------   punch   3   rank  55
+    cry       2   -0.078  rank 225      slap    1   rank  77
+    scream   15   -0.118  rank 262      rip     1   rank  78
+                                        smash   1   rank 128
+    control: eat +0.138 rank 39         cry     1   rank 225
+                                        scream 18   rank 262
+
+**The substitutes split on whether the substitution stays in the semantic field.** `hurt`, `hit`, `destroy`, `fight`, `punch` are INSIDE `kill`'s neighbourhood -- several of them nearer than the `eat` control. `scream` and `cry` are outside it. So there are two kinds of move here and cosine separates them cleanly.
+
+Weighted by lineages the mass is on the far side and almost all of it is one word: **17 of 21 (argmax) and 22 of 33 (faller) take the far route, carried by `scream`.** So the displacement is predominantly but not exclusively a move out of the field, and which route a given lineage took is readable per lineage rather than assumed.
+
+### Q2. Can contiguity be measured directly, as co-completion? THE TEST IS RIGHT AND IT FAILS
+
+The proposal: sections 8-10 infer contiguity from the FAILURE of a similarity measure, which is weak -- a null on one axis is not a positive result on the other. If `kill` and `scream` are frame-mates they should co-occur as completions of the same prompts across the corpus even while far apart in the embedding. Producer: `cocompletion.py`, PMI over the 4,600 prompts, with the word's own rate divided out.
+
+**It does not hold.** Three specifications, declared in advance and all reported:
+
+    specification              scream's rank of 305      rank corr. of the two axes
+    prompt unit, all arms            166                        +0.310
+    prompt unit, base arms           187                        +0.315
+    cell unit, all arms              105                        +0.360
+
+`scream` is mid-pack on co-completion in every one -- better than its cosine rank of 262, never near. And `kill`'s top co-completion partners are the same vocabulary as its top cosine neighbours: vandalize, injure, gouge, lunge, avenge, lynch, strangle, retaliate, rape, throttle, bury, suffocate.
+
+**The two axes are positively correlated, +0.31 to +0.36, not orthogonal.** For verbs competing for one slot, words that mean similar things also complete the same frames, so co-completion is not an independent axis here and cannot carry a contiguity claim that similarity has already declined to support.
+
+So the honest position is narrower than section 10's closing paragraph implied: **we have a similarity null and no positive contiguity result.** The metonymic reading remains a plausible interpretation of the null and is not a measured finding, and should not be written as one. What IS measured is Q1's bimodality.
+
+The remaining option, and its hazard: restrict co-completion to the anger-frame family rather than all 4,600 prompts. That would test the claim where it is actually made -- but the frame family is the one the effect was found in, so a positive there is close to circular and would need a declared frame list and a matched control family before it meant anything.
+
+    python cocompletion.py                 # prompt unit, all arms
+    python cocompletion.py --arms base     # base arms only
+    python cocompletion.py --unit cell     # same model and prompt
