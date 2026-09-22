@@ -564,11 +564,13 @@ and a 0-1 scale would flatten every difference that matters.
 
 ### The publication form
 
-`--clean` puts `kill` at the BOTTOM and the far end of the corridor at the top, arrows upward, so the plate reads as ascent out of the violence cluster. Node labels are the word alone and edges carry no numbers — the lineage counts and bottleneck values belong in the table above, and at this size they are unreadable anyway.
+`--clean` is words and arrows and nothing else: `kill` at the top, the corridor descending, **no node boxes at all**. `shape=plaintext` drops the frame and fill, and the emphasis a blue box used to carry moves to a **bold word** -- the same distinction made with type rather than with furniture, and one that survives being printed in a single colour, which a fill does not. Edges carry no numbers; the lineage counts and bottleneck values belong in the table above.
 
-**What survives the stripping is the encoding that needs no legend**: width still tracks cosine, so the corridor visibly narrows at its weakest link, and that link is still red. On the destinations-only plate the constriction at `hurt -> hit` is the visible cause of seven destinations reading 0.469.
+**What survives the stripping is the encoding that needs no legend**: width still tracks cosine and the weakest link is still red, so the corridor narrows visibly at `hurt -> hit`, and that constriction is the visible cause of seven destinations reading 0.469. **A plate that needed its numbers to make its point would not have survived being stripped to words; this one does.**
 
-It is **sized** to fit rather than **scaled** to fit — a `size` cap would shrink the type along with the drawing — so `--height` adjusts `ranksep` and the 17-rank corridor lands at **6.30 x 2.61 in at 300 dpi**, inside a 6.5 in ceiling.
+Arrowheads and strokes are scaled for the bare form -- `arrowsize` 0.35 and widths 0.3-1.9 pt, against the boxed plate's 0.55 and 0.5-5.5 pt. Between words set at 9 pt, a 5 pt arrow reads as the subject rather than as the relation.
+
+It is **sized** to fit rather than **scaled** to fit -- a `size` cap would shrink the type along with the drawing -- so `--height` adjusts `ranksep`. The destinations-only corridor lands at **5.62 x 2.64 in at 300 dpi**, with headroom under a 6.5 in ceiling.
 
     python threshold.py                       # bottlenecks + sweep, base residual
     python threshold.py --plot                # the corridor plate, with controls
