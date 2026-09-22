@@ -66,7 +66,7 @@ import embed  # noqa: E402
 FIG2 = "She was so angry she wanted to"
 
 
-def lexicon(name="subtlex", min_fpm=0.0, min_zipf=2.0):
+def lexicon(name="subtlex", min_fpm=0.0, min_zipf=2.0, wordnet=True):
     """-> a membership predicate for "is this a word".
 
     **SUBTLEX-US IS A WORD LIST; `wordfreq` IS A FREQUENCY MODEL** (RH), and
@@ -88,6 +88,30 @@ def lexicon(name="subtlex", min_fpm=0.0, min_zipf=2.0):
     the file was never in the clone -- it lived in two Dropbox paths -- and
     that it is TYPE-level, one lemma and POS per surface, which is the defect
     that retired it from this project.
+
+    ## THE SECOND FILTER, AND WHY IT IS A DICTIONARY AND NOT A FLOOR
+
+    SUBTLEX membership alone leaves fragments that occur in subtitles as typos
+    and truncations: `sho` 0.961, `shou` 0.137, `kil` 0.059, `sla` 0.039, and
+    the bge path ran `kill -> shoot -> sho -> shou -> scream`, i.e. through two
+    spellings of the word it starts from.
+
+    **A FREQUENCY FLOOR CANNOT REMOVE THEM.** Measured at `--min-fpm 1.0`: the
+    floor takes `sho` (0.961 is below it) but also takes `strangle`, `weep`,
+    `shriek`, `gouge`, `pummel`, `wail`, `thrash` and `smite` -- the exact
+    vocabulary this corpus displaces into. Rare real verbs and common fragments
+    occupy the same frequency band, so no floor separates them.
+
+    A dictionary does. WordNet has an entry for every one of those verbs and
+    for none of the fragments, and the test is orthogonal to frequency. On this
+    prompt's candidate set it removes 31 of 372: 22 fragments (`bl`, `kil`,
+    `sho`, `shou`, `sla`, `thro`, `wr`, ...) and 9 closed-class words WordNet
+    does not cover (`the`, `to`, `him`, `her`, `what`, `something`, ...). It
+    removes no content word.
+
+    **THE RESIDUE IS CHEMICAL SYMBOLS**: `pu`, `sm`, `sn` survive as plutonium,
+    samarium and tin. Real dictionary entries, so the dictionary keeps them;
+    they are named rather than special-cased, on the same logic as `cher`.
     """
     if name == "subtlex":
         import csv as _csv
@@ -98,14 +122,22 @@ def lexicon(name="subtlex", min_fpm=0.0, min_zipf=2.0):
         with open(path, encoding="utf-8") as fh:
             tab = {r["word"].lower(): float(r["fpm"])
                    for r in _csv.DictReader(fh, delimiter="\t")}
-        return lambda w: tab.get(w, -1.0) >= min_fpm, len(tab)
-    from wordfreq import zipf_frequency
-    return lambda w: zipf_frequency(w, "en") >= min_zipf, None
+        base = lambda w: tab.get(w, -1.0) >= min_fpm  # noqa: E731
+        n = len(tab)
+    else:
+        from wordfreq import zipf_frequency
+        base = lambda w: zipf_frequency(w, "en") >= min_zipf  # noqa: E731
+        n = None
+    if not wordnet:
+        return base, n
+    from nltk.corpus import wordnet as wn
+    wn.synsets("seed")  # force the lazy loader outside the lambda
+    return (lambda w: base(w) and bool(wn.synsets(w))), n
 
 
-def real_words(tok, name="subtlex", min_fpm=0.0, min_zipf=2.0):
+def real_words(tok, name="subtlex", min_fpm=0.0, min_zipf=2.0, wordnet=True):
     """-> {word: token id} for single-token space-prefixed real English words."""
-    ok, _n = lexicon(name, min_fpm, min_zipf)
+    ok, _n = lexicon(name, min_fpm, min_zipf, wordnet)
     out = {}
     for i in range(len(tok)):
         s = tok.decode([i])
@@ -173,10 +205,12 @@ def main(argv=None):
     ap.add_argument("--from", dest="src", default="kill")
     ap.add_argument("--to", dest="dst", default="scream")
     ap.add_argument("--model", default=embed.MODEL)
-    ap.add_argument("--space", default="llama", choices=("llama", "glove"),
+    ap.add_argument("--space", default="llama",
+                    choices=("llama", "glove", "bge"),
                     help="llama: the model's input embedding table, which is "
                          "about half orthographic. glove: a static semantic "
-                         "space with no tokenizer in it.")
+                         "space with no tokenizer in it. bge: the word IN "
+                         "THIS PROMPT, mean-pooled over its own tokens.")
     ap.add_argument("--vocab", default="words",
                     choices=("words", "candidates"),
                     help="words: every real English word in the tokenizer, so "
@@ -189,6 +223,14 @@ def main(argv=None):
                          "fragments a frequency and lets them through.")
     ap.add_argument("--min-fpm", type=float, default=0.0)
     ap.add_argument("--min-zipf", type=float, default=2.0)
+    #: **A DICTIONARY, NOT A FLOOR.** See `lexicon.__doc__`: `--min-fpm 1.0`
+    #: removes `strangle`, `weep` and `shriek` before it removes `sho`, and
+    #: WordNet removes the fragments and no content word. On by default; the
+    #: flag exists so the cost of the filter can be measured, not turned off
+    #: because it is inconvenient.
+    ap.add_argument("--no-wordnet", dest="wordnet", action="store_false",
+                    help="do not require a WordNet entry (keeps `kil`, `sho`, "
+                         "`shou`, `sla`, `thro`)")
     a = ap.parse_args(argv)
 
     import torch
@@ -196,17 +238,52 @@ def main(argv=None):
     print("PROMPT: %r" % a.prompt)
     if a.vocab == "candidates":
         cand = candidates(a.prompt)
-        ids, multi = embed.words(tok, sorted(cand))
+        #: **THE CANDIDATE SET CONTAINS DEBRIS AND IT REACHED THE PATH.** 84 of
+        #: the 466 are not words -- 50-odd runs of underscores, `<|im_end|>`,
+        #: and the word-boundary rule's fragments `kil`, `sla`, `sho`, `shou`,
+        #: `thro`. They are genuine above-theta completions and belong in
+        #: `substitution_shape`'s counts, but the bge path ran
+        #: `kill -> shoot -> sho -> shou -> scream`, which is a chain through
+        #: two pieces of the word it starts from. Same filter as the `words`
+        #: vocabulary, applied to the candidates too -- and SUBTLEX alone does
+        #: NOT remove them, because they are in it; the WordNet test does.
+        _ok, _n = lexicon(a.lexicon, a.min_fpm, a.min_zipf, a.wordnet)
+        n_all = len(cand)
+        cand = {w: v for w, v in cand.items() if _ok(w.lower())}
+        print("  %d of %d candidates are real words (%d dropped: underscore "
+              "runs, specials, and word-boundary fragments)%s"
+              % (len(cand), n_all, n_all - len(cand),
+                 "" if a.wordnet else "  [--no-wordnet: FRAGMENTS KEPT]"))
+        if a.space == "bge":
+            #: a contextual encoder gives every token a vector, so a
+            #: multi-token word is the mean of its pieces and all 466 are
+            #: usable -- the single-token rule belongs to the Llama table
+            ids, multi = {w: None for w in sorted(cand)}, 0
+        else:
+            ids, multi = embed.words(tok, sorted(cand))
         print("  vocab=candidates: %d words above theta in at least one of "
               "the 100 arms; %d single-token (%d multi-token, dropped)"
               % (len(cand), len(ids), multi))
     else:
-        ids = real_words(tok, a.lexicon, a.min_fpm, a.min_zipf)
-        print("  vocab=words, lexicon=%s: %d real English words in the "
+        ids = real_words(tok, a.lexicon, a.min_fpm, a.min_zipf, a.wordnet)
+        print("  vocab=words, lexicon=%s%s: %d real English words in the "
               "tokenizer, single token with a leading space"
-              % (a.lexicon, len(ids)))
+              % (a.lexicon, "+wordnet" if a.wordnet else "", len(ids)))
     words = sorted(ids)
-    if a.space == "glove":
+    if a.space == "bge":
+        M, words = embed.bge_in_context(a.prompt, words)
+        #: **CENTRING IS NOT COSMETIC HERE.** Every vector is the same eight-
+        #: token frame with one word changed, so the frame dominates and RAW
+        #: cosines run 0.70-0.97 for everything -- `accordion` 0.715 against
+        #: `scream` 0.781. Subtracting the candidate mean removes the shared
+        #: component and leaves what the word contributes. It moves `scream`
+        #: from rank 230 of 466 to 409, which is the difference between "mid-
+        #: pack" and "one of the least similar words in the set".
+        W = torch.nn.functional.normalize(M - M.mean(0), dim=1)
+        ids = {w: i for i, w in enumerate(words)}
+        print("  space=bge: %d candidates embedded in context, mean-centred"
+              % len(words))
+    elif a.space == "glove":
         #: the SAME word list, restricted to what GloVe carries, so the two
         #: spaces are compared over one vocabulary rather than two
         G, words = embed.glove(words)
@@ -228,9 +305,10 @@ def main(argv=None):
     #: DIFFERENT WORD is the tell, and it was printed with the same authority
     #: as the real thing.
     V = torch.nn.functional.normalize(W, dim=1)
-    if a.space == "glove":
+    if a.space in ("glove", "bge"):
         label = lambda r: words[r]
-        universe = "the %d-word GloVe vocabulary" % len(words)
+        universe = ("the %d-word GloVe vocabulary" if a.space == "glove"
+                    else "the %d in-context candidates") % len(words)
         src_row, dst_row = pos[a.src], pos[a.dst]
     else:
         label = lambda r: tok.decode([r]).strip()
@@ -290,13 +368,25 @@ def main(argv=None):
     #: the prompt. If they read as well as the real one, the real one is a
     #: property of the graph.
     print("\n  CONTROL: the same walk to words with nothing to do with it")
-    for t in ("sofa", "accordion", "pension", "wallpaper", "custard"):
+    #: controls must exist IN the vocabulary being walked. On the candidate
+    #: set `pension` and `accordion` are not above theta at this blank, so the
+    #: control silently printed nothing -- an empty control reads exactly like
+    #: a passed one. These are candidates here and are unrelated to killing.
+    ctrl = (("sit", "sleep", "read", "dance", "write", "eat")
+            if a.vocab == "candidates"
+            else ("sofa", "accordion", "pension", "wallpaper", "custard"))
+    shown = 0
+    for t in ctrl:
         if t not in pos:
             continue
         cp = shortest(adj, pos[a.src], pos[t])
         if cp:
+            shown += 1
             print("    %-10s %d hops  %s"
                   % (t, len(cp) - 1, " -> ".join(words[i] for i in cp)))
+    if not shown:
+        print("    NONE of %s is in this vocabulary -- the control did not "
+              "run, which is not the same as passing." % ", ".join(ctrl))
 
     #: **HOW MUCH OF THIS GRAPH IS SPELLING?** Input embeddings carry
     #: orthography heavily, so a chain through them may be a chain of prefixes

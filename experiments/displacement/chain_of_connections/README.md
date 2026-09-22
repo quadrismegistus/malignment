@@ -80,3 +80,38 @@ The GloVe path is worth quoting for what it reveals:
 **`munch → scream` is Edvard Munch's painting.** GloVe reaches `scream` through art criticism, because in a co-occurrence corpus that is where the word lives. A chain can be semantic, legible and about the wrong sense entirely.
 
 `bge-m3` in context — embedding `"She was so angry she wanted to {word}"` and taking the word's own vectors — is the remaining instrument and would fix exactly that: it is the only one of the three in which `scream` has this prompt's sense rather than its corpus-wide one. It needs a declared candidate list (one forward pass per word), which is the cost the other two do not have.
+
+## 7. The remaining instrument, run: `bge-m3` in context, and it says the same thing
+
+Section 6 named `bge-m3` as the one space in which `scream` would carry *this prompt's* sense rather than its corpus-wide one, and the one that would not reach it through Edvard Munch. It was run. `embed.bge_in_context` encodes `"She was so angry she wanted to {word}"` for each candidate and takes the mean of the word's own token span, using `score._bge()` so this is the same encoder the campaign's passage work uses.
+
+Two things had to be fixed before it could be read, and both are findings about the instrument.
+
+**Centring.** Every vector is the same eight-token frame with one word changed, so the frame dominates: raw cosines run 0.70–0.97 for *everything*, with `accordion` at 0.715 against `scream` at 0.781. Subtracting the candidate mean leaves what the word contributes, and it moves `scream` from rank 230 to 409 of 466 — the difference between "mid-pack" and "one of the least similar words in the set". An uncentred contextual encoder measures the prompt.
+
+**A dictionary, not a frequency floor** — see `lexicon.__doc__`. The candidate set is the above-theta completions, so it contains the word-boundary rule's fragments, and the first bge path ran `kill → shoot → sho → shou → scream`: a chain through two spellings of the word it starts from. `--min-fpm 1.0` does not fix this. It takes `sho` (0.961) but also takes `strangle`, `weep`, `shriek`, `gouge`, `pummel`, `wail`, `thrash` and `smite` — rare real verbs and common fragments occupy the same frequency band. Requiring a **WordNet** entry removes 31 of 372: 22 fragments and 9 closed-class words, and no content word at all.
+
+On the 350 surviving candidates:
+
+    THE FALSIFIER  scream ranks 302 of 350 by cosine to kill
+    PATH           kill -> die -> suffocate -> choke -> shriek -> scream   5 hops
+    MEDIAN         5
+    CONTROL        eat 3,  write 4,  sit 5,  sleep 5,  read 5,  dance 6
+    ORTHOGRAPHY    3%
+
+**This is the best chain the experiment has produced and it changes nothing.** `die → suffocate → choke → shriek` is not art criticism and not spelling — it is the right sense of every word, in the right register, and it is exactly the shape section 3's beautiful path had. It is also exactly the median distance, and `eat` is two hops closer.
+
+The llama space under the same filter is starker still:
+
+    PATH           kill -> fight -> laugh -> scream   3 hops   (median 3)
+    CONTROL        dance 2,  sit 3,  write 3,  eat 3,  sleep 4,  read 4
+    ORTHOGRAPHY    2%
+
+**`dance` is nearer to `kill` than `scream` is.**
+
+So the instrument was not the fault. Three spaces — a decoder's input embedding, a co-occurrence space, and a sentence encoder reading the actual prompt — disagree about orthography (50% / 28% / 3%), about hop counts (9 / 7 / 5), and about which words are adjacent, and agree on the only thing being tested: **`scream` sits at the median distance from `kill`, and words with no relation to the prompt sit nearer.** The section 6 hypothesis that a semantic space would rescue the result is refuted, on the space that was nominated to do it.
+
+The chain of connections is real and it is not a path to `scream`. Whatever selects `scream` out of `kill`'s neighbourhood is not neighbourhood structure, and this producer cannot see it.
+
+    python run.py --vocab candidates --space bge      # the run of record here
+    python run.py --vocab candidates --space bge --no-wordnet   # restores the fragment path

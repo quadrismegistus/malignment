@@ -99,3 +99,44 @@ def glove(want):
     ws = sorted(w for w in want if w.lower() in got)
     M = torch.tensor(np.stack([got[w.lower()] for w in ws]))
     return M, ws
+
+
+def bge_in_context(prompt, want, batch=32):
+    """-> (torch [n, 1024], [word]) for `word` AS IT OCCURS IN `prompt`.
+
+    RH's framing: embed `"<prompt> <word>"` and take the vectors of the WORD's
+    own tokens, mean-pooled. This is the only one of the three spaces in which
+    `scream` carries THIS PROMPT's sense rather than its corpus-wide one --
+    which is exactly what went wrong in GloVe, where the path to `scream` ran
+    through `munch` and the painting.
+
+    **NO SINGLE-TOKEN RESTRICTION HERE.** That constraint belongs to the Llama
+    table, where a word without its own row has no vector. A contextual
+    encoder gives every token a vector and a multi-token word is the mean of
+    its pieces, so all 466 candidates are usable rather than the 380 that
+    happen to be one token.
+
+    **CPU, BY RULE.** `score.py` records that mac-CPU and cuda-GPU bge were
+    verified identical while the MPS pass CORRUPTS short-sequence embeddings,
+    and these sequences are eight tokens long. `device` is not offered.
+    """
+    import torch
+    from malignment import score
+    m = score._bge()
+    tk = m.tokenizer
+    n_prefix = len(tk(prompt, add_special_tokens=False)["input_ids"])
+    ws = sorted(want)
+    out = []
+    for i in range(0, len(ws), batch):
+        chunk = ws[i:i + batch]
+        texts = ["%s %s" % (prompt, w) for w in chunk]
+        tokv = m.encode(texts, output_value="token_embeddings",
+                        convert_to_numpy=False, show_progress_bar=False)
+        for w, T in zip(chunk, tokv):
+            #: [CLS] + prefix + word-pieces + [SEP]; take the word's own span
+            lo = 1 + n_prefix
+            hi = T.shape[0] - 1
+            if hi <= lo:
+                raise SystemExit("no word span for %r" % w)
+            out.append(T[lo:hi].mean(0))
+    return torch.nn.functional.normalize(torch.stack(out), dim=1), ws
