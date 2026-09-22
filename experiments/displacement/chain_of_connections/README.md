@@ -443,3 +443,47 @@ A global frequency floor cannot remove it (§7: it takes `strangle` and `weep` f
     python pathways.py --space llama_resid_mean --k 2 --stage dpo        # after alignment
     python pathways.py --space llama_unembed --k 2 --raw                 # subwords allowed
     python cosines.py --space llama_resid_mean                           # the ordering, no graph
+
+## 12.5 The two graph-parameter checks, asked by the paper seat before citing the plate
+
+§§4 and 9 taught that the objection to any k-NN plate is the graph parameter, not the selection rule. The identical route on all three bases (§12) answers the selection-rule objection. These two answer the other one, and **one of them goes against the plate.**
+
+### Check 1: is eight hops remote, or is eight hops just what this graph is?
+
+Shortest-path length from `kill` to every one of the 307 candidates, base-stage `resid_mean`:
+
+    k    reachable   median   scream   farther than scream   percentile
+    2      307/307      6        8          49 of 307           84th
+    3      307/307      5        5          91 of 307           70th
+    4      307/307      4        5          13 of 307           96th
+
+**At k=2, `eat` sits at exactly the same eight hops as `scream`.** The controls land at 7 (`sit`, `write`), 8 (`eat`), 9 (`cry`, `dance`). So the distribution is unimodal around the median and `scream` is at the 84th percentile — above typical, **not remote**, and not separated from an unrelated control.
+
+**So the chain's LENGTH says nothing about `scream`, and no claim may rest on it.** What separates `scream` from `eat` is cosine rank — 200 against 54 — which is a property of the space and does not involve the graph at all. This is §9's lesson arriving again in the good space: the hop counter compresses, and it compresses `eat` and `scream` onto the same number while the underlying cosines are 1.5 sd apart.
+
+### Check 2: does the route survive a change of k?
+
+    k=2   kill -> attack -> fight -> argue -> talk -> speak -> say -> yell -> scream
+    k=3   kill -> hurt -> punish -> curse -> swear -> scream
+    k=4   kill -> fight -> argue -> rant -> shout -> scream
+
+**The shape is stable and the waypoints are not.** All three run physical violence → verbal aggression → vocalisation; k=2 and k=4 go through argument and shouting, k=3 through punishment and profanity. Two-letter orthography is 0% at every k. So "the route leaves violence through language" is robust to k; "the route passes through `talk` and `speak`" is not, and no individual waypoint should be quoted.
+
+And the split **in hops** does not survive:
+
+            in-field destinations   scream   cry
+    k=2            1 - 5              8       9
+    k=3            1 - 5              5       6
+    k=4            1 - 5              5       5
+
+Clean at k=2, gone by k=3, where `scream` at 5 sits among `rip` 5, `destroy` 4 and `smash` 4.
+
+**But the in-field/out-of-field split is a COSINE fact and is k-independent by construction** — ranks 1–31 against 139–200 do not involve the graph. §11's bimodality is therefore untouched by either check; it is the hop-distance restatement of it that fails.
+
+### What the plate may be cited for, after both checks
+
+- **Yes:** which words lie between `kill` and its destinations, and that every route out leaves physical violence through language rather than through spelling (0% two-letter agreement at every k and on every basis).
+- **Yes:** the in-field/out-of-field split of the destinations, **quoted as cosine rank**, which no graph parameter touches.
+- **NO:** that `scream` is far from `kill` because the path is long. Eight hops is the 84th percentile and `eat` is also at eight.
+- **NO:** any particular waypoint. `talk`, `speak` and `say` are k=2 artefacts; `curse` and `swear` are k=3's.
+- **Still no:** anything traversal-shaped. A forward pass does not walk this graph.
