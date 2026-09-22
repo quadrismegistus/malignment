@@ -261,6 +261,38 @@ def plot(words, adj, pos, src, dsts, B, S, base, controls, clean=False,
                     ' fontcolor="#b23a3a"' if hot else "",
                     width(v), "#b23a3a" if hot else "#9aa0a6"))
     L.append("}")
+
+    #: **EVERY PLATE REPORTS ITS OWN ORTHOGRAPHY, because a producer that does
+    #: not emit a number is a number nobody takes.** `pathways.py` printed this
+    #: and this file did not, so the bottleneck plates went unmeasured -- and
+    #: the one placed in the article inherited a "not spelling, 0% two-letter"
+    #: claim that had been measured on the k-NN plates. It is 12.8x chance.
+    #: The claim was withdrawn (§12.10); the asymmetry between the two
+    #: producers is fixed here so it cannot happen again.
+    #:
+    #: A ZERO WOULD BE THE SUSPICIOUS RESULT. English clusters impact verbs by
+    #: onset -- `ba-` for a blow, `sl-` for a slapping one -- so `bang > bash`
+    #: and `slug > slap` are alliterative AND semantic. The number is for
+    #: judging, not for passing.
+    c1 = collections.Counter(w[0] for w in words)
+    c2 = collections.Counter(w[:2] for w in words)
+    nn = len(words)
+    ch1 = 100.0 * sum(v * (v - 1) for v in c1.values()) / (nn * (nn - 1))
+    ch2 = 100.0 * sum(v * (v - 1) for v in c2.values()) / (nn * (nn - 1))
+    #: `edges` is keyed by node INDEX here, not by word, unlike pathways.py
+    ew = [(words[a], words[b]) for a, b in edges]
+    e1 = [(a, b) for a, b in ew if a[0] == b[0]]
+    e2 = [(a, b) for a, b in ew if a[:2] == b[:2]]
+    p1 = 100.0 * len(e1) / len(edges)
+    p2 = 100.0 * len(e2) / len(edges)
+    print("  ORTHOGRAPHY of the %d drawn edges: first letter %.0f%% vs chance "
+          "%.0f%% (%.1fx); two-letter prefix %.0f%% vs chance %.1f%% (%.1fx)"
+          % (len(edges), p1, ch1, p1 / ch1 if ch1 else 0.0,
+             p2, ch2, p2 / ch2 if ch2 else 0.0))
+    if e2:
+        print("      sharing a two-letter prefix: %s"
+              % ", ".join("%s>%s" % e for e in sorted(e2)))
+
     open(base + ".dot", "w").write("\n".join(L) + "\n")
     for ext in ("png", "pdf"):
         r = subprocess.run(["dot", "-T" + ext, "-Gdpi=300", base + ".dot",
