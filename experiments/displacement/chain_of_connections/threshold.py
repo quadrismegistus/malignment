@@ -276,7 +276,13 @@ def main(argv=None):
     ap.add_argument("--prompt", default=run.FIG2)
     ap.add_argument("--from", dest="src", default="kill")
     ap.add_argument("--space", default="llama_resid_mean")
-    ap.add_argument("--basis", default="faller")
+    ap.add_argument("--basis", default="faller",
+                    choices=("argmax", "faller", "crossing"))
+    #: **THE CUTOFF NARROWS AND DOES NOT SHORTEN.** Measured on all three
+    #: bases: n>=2 drops the tree from 22-28 nodes to 17-18 and leaves the
+    #: DEPTH at 17 every time, because the `scream` corridor IS the depth and
+    #: `scream` survives every filter. It buys width, not height.
+    ap.add_argument("--min-lineages", type=int, default=1)
     ap.add_argument("--stage", default="base")
     ap.add_argument("--plot", action="store_true")
     #: the controls earn their place in the TABLE (they are the comparison);
@@ -293,6 +299,15 @@ def main(argv=None):
     import numpy as np
 
     dsts, stayed, nb = pathways.targets(a.prompt, a.basis, a.src)
+    if a.min_lineages > 1:
+        dropped = {w: c for w, c in dsts.items() if c < a.min_lineages}
+        dsts = {w: c for w, c in dsts.items() if c >= a.min_lineages}
+        if not dsts:
+            raise SystemExit("no destination reaches %d lineages on basis=%s"
+                             % (a.min_lineages, a.basis))
+        print("  --min-lineages %d: kept %d of %d destinations (%d lineages); "
+              "dropped %s" % (a.min_lineages, len(dsts), len(dsts) + len(dropped),
+                              sum(dsts.values()), ", ".join(sorted(dropped))))
     words, W, ids = cosines.space(a.space, a.prompt, stage=a.stage)
     pos = {w: i for i, w in enumerate(words)}
     W = W[[ids[w] for w in words]]
@@ -361,7 +376,8 @@ def main(argv=None):
         tag = "bottleneck_%s_%s_%s%s%s" % (
             a.src, a.basis, a.space,
             "" if a.stage == "base" else "_" + a.stage,
-            ("" if a.ranksep is None else "_rs%02d" % round(a.ranksep * 100))
+            ("" if a.min_lineages == 1 else "_n%d" % a.min_lineages)
+            + ("" if a.ranksep is None else "_rs%02d" % round(a.ranksep * 100))
             + ("" if a.node_height == 0.18 else "_nh%02d" % round(a.node_height * 100)))
         plot(words, mstadj, mstpos, a.src, dsts, B, S,
              os.path.join(figs, tag + ("" if a.controls else "_nocontrols")

@@ -1,0 +1,38 @@
+digraph {
+  rankdir=TB; bgcolor="white"; ranksep=0.08; nodesep=0.14;
+  node [shape=plaintext fontname="Arial" fontsize=9 height=0.10 margin="0.02,0.005"];
+  edge [arrowsize=0.35 color="#6f757a"];
+  "bang" [label=<bang>];
+  "bash" [label=<bash>];
+  "beat" [label=<beat>];
+  "break" [label=<break>];
+  "burst" [label=<burst>];
+  "bust" [label=<bust>];
+  "cry" [label=<<B>cry</B>>];
+  "die" [label=<die>];
+  "disappear" [label=<disappear>];
+  "explode" [label=<explode>];
+  "faint" [label=<faint>];
+  "hit" [label=<hit>];
+  "hurt" [label=<hurt>];
+  "kill" [label=<<B>kill</B>>];
+  "pound" [label=<pound>];
+  "scream" [label=<<B>scream</B>>];
+  "smash" [label=<smash>];
+  "bang" -> "bash" [penwidth=1.34];
+  "bash" -> "smash" [penwidth=2.20];
+  "beat" -> "pound" [penwidth=0.54];
+  "break" -> "bust" [penwidth=0.52];
+  "burst" -> "explode" [penwidth=1.70];
+  "bust" -> "burst" [penwidth=1.75];
+  "cry" -> "scream" [penwidth=2.20];
+  "die" -> "faint" [penwidth=1.53];
+  "disappear" -> "die" [penwidth=1.66];
+  "explode" -> "disappear" [penwidth=1.23];
+  "faint" -> "cry" [penwidth=1.39];
+  "hit" -> "beat" [penwidth=0.52];
+  "hurt" -> "hit" [penwidth=0.45];
+  "kill" -> "hurt" [penwidth=0.87];
+  "pound" -> "bang" [penwidth=1.30];
+  "smash" -> "break" [penwidth=0.95];
+}
