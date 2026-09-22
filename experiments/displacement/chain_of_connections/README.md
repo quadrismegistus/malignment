@@ -326,3 +326,120 @@ The remaining option, and its hazard: restrict co-completion to the anger-frame 
     python cocompletion.py                 # prompt unit, all arms
     python cocompletion.py --arms base     # base arms only
     python cocompletion.py --unit cell     # same model and prompt
+
+## 12. The model's own spaces, and the plate that should have been made first
+
+Sections 7–11 were all run in **foreign** spaces — bge-m3, GloVe, and llama's input embedding read as a static table. RH asked for the plate in llama's own geometry instead, and then for the space that actually results from the prompt. That turned out to be the best instrument in the folder, and getting there cost two corrections.
+
+### There are four llama spaces and they are not one space
+
+    --space llama              input embedding rows (type level)
+    --space llama_unembed      lm_head rows: what the candidates COMPETE with
+    --space llama_resid23      residual at the word's own position, 2/3 depth
+    --space llama_resid_mean   the same, averaged over all layers
+
+The residual spaces are read from `own_geometry/results/geometry_tulu.npz`, whose **base stage is this exact model**, so they cost a file read rather than four checkpoint loads. `--stage {base,sft,dpo,rlvr}` selects the rung.
+
+### THE RESIDUAL BEATS BOTH WEIGHT MATRICES ON EVERY CRITERION
+
+Against `kill`, over the same 307 candidates:
+
+    space         nearest kill                              max     sd    1st   2-pref
+    input         destroy murder attack fight SELL eat    0.123  0.028   23%      8%
+    unembed       murder destroy slaughter SELL shoot     0.229  0.035   28%     15%
+    resid_23      murder slaughter hurt harm destroy      0.751  0.140   23%      8%
+    resid_mean    murder hurt attack harm punish          0.750  0.160   22%      7%
+                                            chance:                       9%    1.2%
+
+Five times the dynamic range — **the cone that made every llama k-NN walk wander is a property of the two weight matrices, not of the model** — and a neighbour list that is clean violence ten deep: murder, hurt, attack, harm, punish, destroy, slaughter, stab, throttle, rape.
+
+**RH's orthography reading is right, and the unembedding is where it bites.** At 15% two-letter agreement against a 1.2% baseline it runs at 12.5x chance, twice the rate of every other space here. §5's "llama 50%" was never comparable to this: it was measured on the unfiltered 18,035-word list and is a fact about a vocabulary.
+
+### And it fixes the `eat` anomaly that had been steering this folder
+
+    word      input  unembed  resid_23  resid_mean
+    hurt         29       80         2          1
+    destroy       0        1         4          5
+    fight         3       12        17         13
+    hit           6      105        15         14
+    punch       211      135        33         31
+    ---------------------------------------------- the gap
+    cry         174      160       112        139
+    scream      175      156       161        200
+    eat           7        5        48          54
+
+`eat` is **5th in the unembedding — ahead of every word `kill` actually moves to** — and 54th in the residual, behind all five in-field destinations. Sections 8 and 10 leaned on "an unrelated control is nearer than the substitutes"; that was substantially an artefact of reading type-level spaces. §11's bimodality survives and sharpens: the in-field destinations now occupy ranks 1–31 and the out-of-field ones 139–200, with nothing between.
+
+The two residual depths agree (+0.962) and both disagree with the weight matrices (unembed vs resid_mean +0.434), so this is **contextual versus type-level, not a choice of layer**.
+
+### The plate
+
+`pathways_kill_faller_llama_resid_mean_k2.png`, base stage, k=2:
+
+    kill -> attack -> fight -> argue -> talk -> speak -> say -> yell -> scream   18
+    kill -> hurt                                                                  3
+    kill -> shoot -> stab -> slap -> smack -> hit                                 3
+    kill -> shoot -> stab -> slug -> punch                                        3
+    kill -> hurt -> punish -> ruin -> destroy -> crush -> smash
+    kill -> attack -> confront -> chase -> catch -> grab -> snatch -> rip
+
+Physical violence → verbal conflict → speech → vocalisation. **Two-letter spelling agreement on the drawn edges: 0%.**
+
+**The base stage is the one of record (RH).** A chain of connections is a property of the material before the defence operates on it; drawing it at DPO would draw the censor's associations rather than the drive's. The aligned-stage plates are kept as the comparison that produced §12.3's negative, not as alternatives.
+
+### The same chain on all three bases
+
+    basis      base-kill lineages  keep kill  destinations  scream  1st   2-pref
+    argmax            28               7           6          15    18%     0%
+    faller            33               0          10          18    25%     0%
+    crossing          21               0           8          12    27%     0%
+
+**The route to `scream` is the identical eight hops on all three.** The basis chooses which endpoints are drawn and how heavy each is; it does not touch the graph. So the chain is a property of the space rather than of the selection rule, and a reader who distrusts one basis can be shown another without the picture changing. `crossing` is the strict plate — only lineages where the riser genuinely overtook `kill` — and `scream` still carries 12 of its 21, more than every other destination combined.
+
+Edge labels are **centred cosine similarity**, not distance: higher is nearer, and the candidate-set mean is subtracted before normalising, so they measure similarity of each word's deviation from the typical candidate. They are not comparable across spaces — the residual's 0.75 and the unembedding's 0.23 for `murder` are the same relationship at different dynamic range. Node labels are lineage counts, which is a different quantity on the same plate.
+
+## 12.1 CORRECTION: the two-letter chance baseline was wrong
+
+Chance on this vocabulary is **9% for a shared first letter and 1.2% for a shared two-letter prefix** — an order of magnitude apart. The orthography reporter computed the first-letter baseline once and printed it beside both columns, and I read "two-letter 7% against chance 9%" as *below chance* and reported it that way. It is nearly 6x chance. Every space in this folder is well above chance on both measures; the ordering between them is what survives, and it widens.
+
+## 12.2 CORRECTION: every llama plate before ba1f8579 was fictional
+
+`cosines.space` returns `W` indexed by **token id** for the llama spaces — it hands back the whole 128k embedding matrix — and by **position** for bge, which builds one row per candidate. `pathways.py` built its own position index and passed it to the row-gathering step. For bge the two are identical and **every bge result in this README stands, verified byte-identical after the fix**. For llama it read arbitrary rows.
+
+It never errored. It produced clean, plausible, fully-formed plates, one of which was shown to RH and read as a finding — that `kill`'s k=2 component was `{kil, kill, le}`, its own subword fragment and nothing else. That component does not exist. Corrected, drawn-edge first-letter agreement is 23–29% for llama's spaces against bge's 44%; the buggy plates reported 48% and 53%.
+
+Then the fix commit staged the pre-fix PNGs by glob **without regenerating them**, in the same commit whose message explained they were fictional. Both corrected; all plates regenerated; every plate now prints its own orthography with both baselines and lists its same-letter edges, so this does not go back to being judged by eye.
+
+## 12.3 Alignment does not move the orthography
+
+The SFT and DPO residuals route to `scream` through `scare -> scar -> scorch -> scold`, an `sc-` run, where base goes `attack -> fight -> argue -> talk -> speak -> say -> yell`. That looks like the censor pulling the geometry toward spelling. It is not:
+
+    space         base   sft   dpo  rlvr      (1st letter / 2-prefix, whole space)
+    resid_mean    22/7  23/8  23/8  23/8
+    resid_23      23/8  24/9  22/9  22/9
+    unembed      28/15 28/15 28/15 28/15
+    input         23/8  24/9  24/9  24/9
+
+Nothing moves. ~30 drawn edges is not a distribution, and the aggregate over 921 neighbour pairs refuses the reading. This is the same failure mode §10 records: the shown case is not the distribution.
+
+## 12.4 A dictionary-legal word can still do fragment work
+
+RH spotted it in the real-words-only unembedding plate: `burn -> bur -> bury` and `bur -> burst`. `bur` is a WordNet entry — a seed case — so the dictionary filter, the length floor and the case fold all pass it, and it is acting as a hub between three spellings of one stem.
+
+A global frequency floor cannot remove it (§7: it takes `strangle` and `weep` first). Comparing a word to **its own extension** can. 14 of the 307 are a strict prefix of another candidate:
+
+    bur  0.12 vs burn 55.22  460x     craw 0.33 vs crawl     36x
+    cur  0.61 vs curl  18.22  30x     pun  1.84 vs punch     16x
+    dis  1.51 vs disappear    14x
+    ------------------------- 10x cut -----------------------------
+    scar 8.47 vs scare   4x           era  5.71 vs erase    1.1x
+    pin, las, tear, who, go, be: MORE frequent than their extension
+
+`--prefix-ratio 10` removes exactly `bur`, `craw`, `cur`, `pun`, `dis` and keeps `scar`, which this corpus uses. In the unembedding it drops two-letter agreement on drawn edges from 16% to 7% — so essentially all the sub-word chaining in that space rode on those five.
+
+**OFF BY DEFAULT.** The 307-word set is the population `own_geometry` and `cocompletion` were run on, and a filter that silently changed it would break every cross-folder number in both folders. `--raw` (no filter at all, subwords allowed) and `--prefix-ratio` both REFUSE on the residual spaces rather than quietly returning the filtered set, because the saved residual was computed over the 307 and changing the vocabulary means recomputing it.
+
+    python pathways.py --space llama_resid_mean --k 2 --basis crossing   # the strict plate
+    python pathways.py --space llama_resid_mean --k 2 --stage dpo        # after alignment
+    python pathways.py --space llama_unembed --k 2 --raw                 # subwords allowed
+    python cosines.py --space llama_resid_mean                           # the ordering, no graph
