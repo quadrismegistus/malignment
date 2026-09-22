@@ -566,9 +566,11 @@ and a 0-1 scale would flatten every difference that matters.
 
 `--clean` is words and arrows and nothing else: `kill` at the top, the corridor descending, **no node boxes at all**. `shape=plaintext` drops the frame and fill, and the emphasis a blue box used to carry moves to a **bold word** -- the same distinction made with type rather than with furniture, and one that survives being printed in a single colour, which a fill does not. Edges carry no numbers; the lineage counts and bottleneck values belong in the table above.
 
-**What survives the stripping is the encoding that needs no legend**: width still tracks cosine and the weakest link is still red, so the corridor narrows visibly at `hurt -> hit`, and that constriction is the visible cause of seven destinations reading 0.469. **A plate that needed its numbers to make its point would not have survived being stripped to words; this one does.**
+**ONE ENCODING, NOT TWO.** Width tracks cosine and nothing else marks anything. The red that used to flag each route's minimum-cosine edge is gone, because width already encodes cosine and **the narrowest point of a corridor IS its bottleneck by definition** -- the colour was restating what the geometry showed. So the constriction at `hurt -> hit`, which is the cause of seven destinations reading 0.469, is read off the stroke rather than off a second channel. **A plate that needed its numbers or its colours to make its point would not have survived being stripped to words and widths; this one does.**
 
-Arrowheads and strokes are scaled for the bare form -- `arrowsize` 0.35 and widths 0.3-1.9 pt, against the boxed plate's 0.55 and 0.5-5.5 pt. Between words set at 9 pt, a 5 pt arrow reads as the subject rather than as the relation.
+The stroke floor is 0.45 pt rather than 0.3 -- at 300 dpi that was under two pixels, and a sole encoding cannot have an illegible low end -- and the grey is darkened to #6f757a for the same reason.
+
+Arrowheads and strokes are scaled for the bare form -- `arrowsize` 0.35 and widths 0.45-2.2 pt, against the boxed plate's 0.55 and 0.5-5.5 pt. Between words set at 9 pt, a 5 pt arrow reads as the subject rather than as the relation.
 
 It is **sized** to fit rather than **scaled** to fit -- a `size` cap would shrink the type along with the drawing -- so `--height` adjusts `ranksep`. The destinations-only corridor lands at **5.62 x 2.64 in at 300 dpi**, with headroom under a 6.5 in ceiling.
 

@@ -176,7 +176,14 @@ def plot(words, adj, pos, src, dsts, B, S, base, controls, clean=False,
              'height=0.18 margin="0.02,0.01"];',
              #: arrowheads and widths were scaled for a plate with boxes and
              #: labels; without them they dominate the short gaps between words
-             '  edge [arrowsize=0.35 color="#9aa0a6"];']
+             #:
+             #: **ONE ENCODING, NOT TWO (RH).** The red marked each route's
+             #: minimum-cosine edge -- but width already encodes cosine, so the
+             #: narrowest point of a corridor IS its bottleneck by definition
+             #: and the colour was restating what the geometry showed. Dropped.
+             #: The grey is darkened from #9aa0a6 because width is now the sole
+             #: carrier and the thinnest strokes have to survive print.
+             '  edge [arrowsize=0.35 color="#6f757a"];']
     else:
         L = ["digraph {", '  rankdir=TB; bgcolor="white"; ranksep=0.30;',
          '  node [shape=box style="rounded,filled" fontname="Arial" '
@@ -230,13 +237,18 @@ def plot(words, adj, pos, src, dsts, B, S, base, controls, clean=False,
         t = (v - lo) / (hi - lo) if hi > lo else 0.5
         #: the boxed plate could carry 0.5-5.5 pt strokes; between bare words
         #: at 9 pt a 5 pt arrow reads as the subject rather than the relation
-        return (0.3 + 1.6 * t) if clean else (0.5 + 5.0 * t)
+        #: floor raised from 0.3 to 0.45 pt: at 300 dpi that is under two
+        #: pixels, and a sole encoding cannot have an illegible low end
+        return (0.45 + 1.75 * t) if clean else (0.5 + 5.0 * t)
     for (a, b), v in sorted(edges.items()):
         hot = (a, b) in weak
-        lab = "" if clean else ' label="%.2f"%s' % (
-            v, ' fontcolor="#b23a3a"' if hot else "")
-        L.append('  "%s" -> "%s" [%spenwidth=%.2f color="%s"];'
-                 % (words[a], words[b], lab.strip() + " " if lab else "",
+        if clean:
+            L.append('  "%s" -> "%s" [penwidth=%.2f];'
+                     % (words[a], words[b], width(v)))
+            continue
+        L.append('  "%s" -> "%s" [label="%.2f"%s penwidth=%.2f color="%s"];'
+                 % (words[a], words[b], v,
+                    ' fontcolor="#b23a3a"' if hot else "",
                     width(v), "#b23a3a" if hot else "#9aa0a6"))
     L.append("}")
     open(base + ".dot", "w").write("\n".join(L) + "\n")
