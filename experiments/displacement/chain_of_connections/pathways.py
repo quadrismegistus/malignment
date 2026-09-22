@@ -93,7 +93,8 @@ def main(argv=None):
     ap.add_argument("--prompt", default=run.FIG2)
     ap.add_argument("--from", dest="src", default="kill")
     ap.add_argument("--basis", default="argmax", choices=("argmax", "faller", "crossing"))
-    ap.add_argument("--space", default="bge", choices=("bge", "llama"))
+    ap.add_argument("--space", default="bge",
+                    choices=("bge", "llama", "llama_unembed"))
     ap.add_argument("--k", type=int, default=2)
     ap.add_argument("--min-lineages", type=int, default=1)
     a = ap.parse_args(argv)
@@ -119,12 +120,31 @@ def main(argv=None):
 
     #: mass on a node = lineages of every destination whose route passes it
     mass = collections.Counter()
-    paths = {}
+    paths, unreachable = {}, {}
     for w, c in dsts.items():
+        #: **AN UNREACHABLE DESTINATION IS A RESULT, NOT A CRASH.** In bge at
+        #: k=2 every candidate is in one component; in llama's spaces the graph
+        #: fragments, and a destination in another component means there is no
+        #: chain of connections to it AT ALL in that space -- which is the
+        #: strongest possible version of the answer and must be reported,
+        #: not raised.
+        if idx[w] not in best:
+            unreachable[w] = c
+            continue
         h, tot, path = best[idx[w]]
         paths[w] = [words[i] for i in path]
         for i in path:
             mass[words[i]] += c
+    if unreachable:
+        print("  NOT REACHABLE from %r in this space at k=%d (separate "
+              "component): %s"
+              % (a.src, a.k, ", ".join("%s (%d lineages)" % kv
+                                       for kv in sorted(unreachable.items(),
+                                                        key=lambda x: -x[1]))))
+    dsts = {w: c for w, c in dsts.items() if w in paths}
+    if not dsts:
+        raise SystemExit("no destination is reachable from %r in space=%s at "
+                         "k=%d; nothing to draw" % (a.src, a.space, a.k))
     for w in sorted(dsts, key=lambda w: -dsts[w]):
         print("  %-8s %2d lineages  %2d hops  %s"
               % (w, dsts[w], len(paths[w]) - 1, " -> ".join(paths[w])))

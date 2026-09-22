@@ -49,6 +49,13 @@ def space(name, prompt, centre=True):
         return sorted(words, key=words.index), \
             torch.nn.functional.normalize(X, dim=1), \
             {w: i for i, w in enumerate(words)}
+    #: **LLAMA HAS TWO SPACES AND THEY ARE NOT THE SAME ONE.** `own_geometry`
+    #: measures both: the input embedding is what the model knows about a word
+    #: before any context, the unembedding is the rows the candidates actually
+    #: COMPETE with at the logit. Their orderings of `kill` differ, and the
+    #: unembedding is the one a "what could be chosen instead" plot is about.
+    if name == "llama_unembed":
+        W, tok = embed.matrix(embed.MODEL, "lm_head.weight")
     ids, _m = embed.words(tok, sorted(cand))
     return sorted(ids), torch.nn.functional.normalize(W.float(), dim=1), ids
 
@@ -81,7 +88,8 @@ def main(argv=None):
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--prompt", default=run.FIG2)
     ap.add_argument("--from", dest="src", default="kill")
-    ap.add_argument("--space", default="both", choices=("llama", "bge", "both"))
+    ap.add_argument("--space", default="both",
+                    choices=("llama", "llama_unembed", "bge", "both"))
     ap.add_argument("--raw", action="store_true",
                     help="bge only: also print the uncentred ordering")
     a = ap.parse_args(argv)
