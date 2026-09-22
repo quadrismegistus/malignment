@@ -176,3 +176,43 @@ Sections 4 and 5 stand as written: the path that reads beautifully is a k-NN art
 The premise was that `scream` would be reachable from `kill` by a chain of short associative steps. The measurement says `scream` is one of the *least* similar words to `kill` in the candidate set. Nothing in these spaces makes them neighbours, because **they are not similar words** — they are two things an angry person wants to do. The relation is the shared frame, not shared meaning: syntagmatic, not paradigmatic.
 
 Which is the distinction this project already has an instrument for. A similarity space is the wrong place to look for Freud's chain of connections, and the right reading of this folder is not "the chain is not short" but "the chain is not a similarity relation at all".
+
+## 9. The k sweep: still one component at k>=2, and k=4 was the wrong setting rather than merely a coarse one
+
+RH asked whether the graph is still a single component at k=2 or 3, and whether `scream` is still reachable. Producer: `connectivity.py`.
+
+**Yes to both, at every k>=2, in both spaces** — 350 of 350 reachable, one component. The graph only fragments at k=1, and that is where the neighbourhood question is answered outright:
+
+    bge   k=1   85 components, kill's has 10:
+                KILL, bury, die, hang, kill, lynch, murder, slaughter, smother, strangle
+    llama k=1   56 components, kill's has 13:
+                burn, destroy, die, divorce, drown, kill, marry, melt, murder,
+                punish, rape, shoot, slaughter
+
+`scream`, `shout`, `cry` and `shriek` are outside `kill`'s component in both — and so are `eat`, `dance`, `sit` and `write`, so this is not a control beating it: at the sparsest setting **nothing but killing is in `kill`'s neighbourhood.** bge's ten are a clean homicide cluster down to the method verbs (`hang`, `smother`, `strangle`, `lynch`) and the disposal (`bury`). llama's thirteen contain **`marry` and `divorce`**, which is the anisotropic cone of section 8 showing up as membership instead of as a number.
+
+### Lowering k restores what the hop count is for
+
+    k        hop distances in bge, kill -> ...
+    2        murder 1, die 1, stab 2, strangle 2, shoot 2, eat 4, cry 8, hurt 9,
+             dance 10, write 10, sit 11, SCREAM 12, shout 13, shriek 13
+    4        murder 1, die 1, stab 1, strangle 2, shoot 1, eat 3, cry 5, hurt 6,
+             dance 6, write 4, sit 5, SCREAM 5, shout 6, shriek 4
+
+At k=2 the distribution runs 1 to 17 hops with a median of 9, and `scream` sits at 12 — **only 31 of the 350 words are farther.** At k=4 the same graph gives a median of 5 with `scream` at 5 and 35% of the vocabulary tied with it. The counter had not lost resolution by accident; k=4 glues the space into a ball in which every question has the same answer.
+
+**So section 7's "the path is not short, it is the typical distance" was an artefact of k.** `scream` is not at the typical distance. It is in the far tail, which is what the cosine ranking (302 of 350) and the k=1 membership both said independently. Three instruments agree once the fourth stops compressing them.
+
+### And the k=2 path is the chain the experiment was looking for
+
+    kill -> murder -> stab -> bite -> chew -> choke -> vomit -> vent
+         -> rant -> rage -> roar -> yell -> scream
+
+Twelve steps from homicide to a scream, and the route is **through the mouth**: biting and chewing, then choking and vomiting, then venting, ranting, raging, roaring. An oral-aggression chain, arrived at by an encoder that was shown one prompt and a list of its own candidate continuations.
+
+Sections 4 and 5 still apply and are the reason this is reported rather than quoted: **a legible path in a k-NN graph is the thing to distrust**, and this one is legible enough to be dangerous. What is load-bearing here is not the path but the three agreeing distance measurements, and what they say is that `kill -> scream` is a long move, not a short one.
+
+That does not restore the original premise, it inverts it. The experiment asked whether `scream` is reachable from `kill` by a chain of short associative steps. It is reachable, and the chain is one of the longest in the candidate set.
+
+    python connectivity.py                       # the sweep, both spaces
+    python run.py --vocab candidates --space bge --k 2   # the path above
