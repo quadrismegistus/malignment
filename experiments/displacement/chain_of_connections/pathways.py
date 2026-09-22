@@ -65,7 +65,7 @@ def targets(prompt, basis, src):
     return out, out.pop(src, 0), bw.get(src, 0)
 
 
-def tree(words, W, ids, src, dsts, k):
+def tree(words, W, ids, src, dsts, k, min_cos=None):
     """-> (parent, hops, step) under: fewest hops, then greatest summed cosine.
 
     Lexicographic Dijkstra on (hops, -sum cos). `heapq` orders the tuple, and
@@ -83,7 +83,7 @@ def tree(words, W, ids, src, dsts, k):
     the unembedding follows spelling. `ids` in, positions out, and the two are
     never the same variable again.
     """
-    adj, S = run.graph(words, ids, W, k)
+    adj, S = run.graph(words, ids, W, k, min_cos)
     pos = {w: i for i, w in enumerate(words)}
     s = pos[src]
     best = {}
@@ -108,12 +108,15 @@ def main(argv=None):
     ap.add_argument("--basis", default="argmax", choices=("argmax", "faller", "crossing"))
     ap.add_argument("--space", default="bge",
                     choices=("bge", "llama", "llama_unembed",
-                             "llama_resid_mean", "llama_resid23"))
+                             "llama_resid_mean", "llama_resid23",
+                             "llama_resid_wide"))
     ap.add_argument("--k", type=int, default=2)
     ap.add_argument("--min-lineages", type=int, default=1)
     #: the full above-theta candidate list, fragments and all
     #: drop a candidate that is a strict prefix of another and N times
     #: rarer -- `bur` between `burn`/`burst`/`bury`. See run.candidate_words.
+    #: an edge must be among the node's k nearest AND clear this cosine
+    ap.add_argument("--min-cos", type=float, default=None)
     ap.add_argument("--prefix-ratio", type=float, default=0.0)
     #: residual spaces only: which rung of the ladder to read
     ap.add_argument("--stage", default="base",
@@ -143,7 +146,7 @@ def main(argv=None):
     missing = [w for w in list(dsts) + [a.src] if w not in idx]
     if missing:
         raise SystemExit("not in the %s vocabulary: %s" % (a.space, ", ".join(missing)))
-    best, S = tree(words, W, ids, a.src, dsts, a.k)
+    best, S = tree(words, W, ids, a.src, dsts, a.k, a.min_cos)
 
     #: mass on a node = lineages of every destination whose route passes it
     mass = collections.Counter()
@@ -188,7 +191,9 @@ def main(argv=None):
                                 "_min%d" % a.min_lineages if a.min_lineages > 1 else "",
                                 ("_raw" if a.raw else "")
                                 + ("_pfx%g" % a.prefix_ratio if a.prefix_ratio else "")
-                                + ("_%s" % a.stage if a.stage != "base" else ""))
+                                + ("_%s" % a.stage if a.stage != "base" else "")
+                                + ("" if a.min_cos is None
+                                   else "_mc%02d" % round(a.min_cos * 100)))
     base = os.path.join(FIGS, "pathways_" + tag)
     edges = set()
     for w in dsts:

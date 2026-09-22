@@ -697,3 +697,34 @@ The drafting seat asked whether two caption clauses survive §§12.7–12.8. Bot
 **"its weakest link is the second step, at 0.47" — true of the plate and of nothing else.** `hurt -> hit` is the cap in exactly one of the five configurations. In the other four the cap is **`break -> bust`**, at step 8 or 9 — after alignment in the 307 tree, and at base on the wide vocabulary. The base-307 tree is the odd one out, which is what §12.8 would predict of a vocabulary selected by the prompt.
 
 So the plate's most robust feature is **the sequence of words** — nine way stations identical from 307 to 10,727 — and its least robust is **where the constriction sits.** A caption may quote the weakest link as a fact about this tree; it should not imply the model has a weakest link there.
+
+## 12.10 k-NN intersected with a cutoff, and an orthography number that was never taken
+
+RH asked for nearest-neighbour in the wide space, then for the hybrid: **at most two edges per node, its two closest, and only those above a cosine cutoff.** That intersection is the right graph in principle — k-NN alone forces every node to degree >= k and so manufactures an edge in a sparse region (§12.5's `eat`/`scream` tie), while a cutoff alone lets a dense region take every edge above the bar. `--min-cos` on `pathways.py`.
+
+### On a large vocabulary, k-NN is the worse construction
+
+    graph                                  1st letter        2-prefix
+    307,    k=2, no cutoff                25%  (2.8x)      0%   (0.0x)
+    10,727  k=2, min-cos 0.55             26%  (4.2x)     10%   (8.3x)
+    10,727  k=2, min-cos 0.50             28%  (4.6x)     15%  (12.0x)
+    10,727  k=2, min-cos 0.45             32%  (5.2x)     16%  (12.8x)
+
+The routes show why. At 0.45: `kill -> drown -> choke -> STRANGE -> strangle -> thrash -> pummel -> puke -> cuss -> swear -> scream`. At 0.55: `kill -> KILLER -> DESTROYER -> BREAKER -> break -> ...`. At 0.50 the route to `scream` runs `puke -> vomit -> YAK -> YAP -> bark -> roar`, pivoting on a word that means both *to vomit* and *to chatter*.
+
+Three distinct cheats: **orthographic** (`strange -> strangle`), **derivational** (`kill -> killer -> destroyer -> breaker` — the lemma dedup removes inflections, and `killer` is not an inflection of `kill`, so derivations survive it), and **polysemous** (`yak`). In a 10,727-word space a word's two nearest are very often its morphological relatives, and k-NN must take them; the MST is free to route around.
+
+### AND A NUMBER I NEVER TOOK, ABOUT THE PLATE THAT IS BEING PRINTED
+
+`pathways.py` prints its own orthography; **`threshold.py` never did**, so the bottleneck plates were never measured. Taken now:
+
+    plate                                    edges   1st letter      2-prefix
+    pathways, 307, k=2   (k-NN)                28   25% (2.8x)    0%  (0.0x)
+    BOTTLENECK, 307      (the article figure)  27   26% (2.9x)   15% (12.8x)
+    BOTTLENECK, 10,727                         39   28% (4.6x)   13% (10.3x)
+
+**§12.5's citation list says "every route out of `kill` leaves physical violence through LANGUAGE, not spelling — 0% two-letter agreement at every k and on every basis". That describes the k-NN plates. The figure in the article is the BOTTLENECK plate, and it is at 12.8x chance.** The four offending edges are `bang -> bash`, `bust -> burst`, `slug -> slap`, `disappear -> die`.
+
+Three of the four are the sound-symbolism case §12 already noted: `ba-` for impact, `sl-` for a slapping blow, and `bust`/`burst` are near-synonyms that are also near-anagrams. English genuinely clusters impact verbs this way, so a plate with *zero* agreement would be the suspicious one. But **"not spelling" is not a property of this figure**, and the claim as written was measured on a different construction.
+
+    python pathways.py --space llama_resid_wide --k 2 --min-cos 0.50

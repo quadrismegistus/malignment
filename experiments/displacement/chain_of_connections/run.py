@@ -251,8 +251,18 @@ def candidates(prompt):
     return {r["word"]: int(r["m"]) for r in ch.query(q, limit_bytes=None)}
 
 
-def graph(words, ids, W, k):
-    """-> (adjacency, similarity matrix, index) over the candidate words."""
+def graph(words, ids, W, k, min_cos=None):
+    """-> (adjacency, similarity matrix, index) over the candidate words.
+
+    `min_cos` intersects the two constructions (RH). k-NN alone forces every
+    node to degree >= k, so in a sparse region it MANUFACTURES an edge between
+    things that are not close -- which is why `eat` and `scream` tied at eight
+    hops in §12.5. A cutoff alone lets a dense region take every edge above the
+    bar and explode in degree. Requiring BOTH means a node offers at most its k
+    best AND only those that clear the bar: dense regions stay bounded, sparse
+    ones genuinely disconnect, and an edge means both "among your nearest" and
+    "actually near".
+    """
     import torch
     M = torch.nn.functional.normalize(W[[ids[w] for w in words]], dim=1)
     S = M @ M.T
@@ -261,6 +271,8 @@ def graph(words, ids, W, k):
     adj = collections.defaultdict(set)
     for i in range(len(words)):
         for j in nb[i].tolist():
+            if min_cos is not None and float(S[i, j]) < min_cos:
+                continue
             #: **UNDIRECTED.** "x is among y's k nearest" is not symmetric, and
             #: a directed k-NN graph would make reachability depend on which
             #: word happens to sit in a dense part of the space.
