@@ -115,3 +115,64 @@ The chain of connections is real and it is not a path to `scream`. Whatever sele
 
     python run.py --vocab candidates --space bge      # the run of record here
     python run.py --vocab candidates --space bge --no-wordnet   # restores the fragment path
+
+## 8. CORRECTION to section 7: the space was right and the GRAPH was the instrument at fault
+
+Section 7 concluded "the instrument was not the fault" because three spaces agreed. RH asked what could possibly put `dance` nearer to `kill` than `scream`, and the answer is that **nothing did** — that was the llama space, and in the llama space nothing is near anything. Looking at the cosines directly, rather than at hop counts derived from them, reverses the reading.
+
+**The llama input embedding is an anisotropic cone at this resolution.** Over the 316 candidates, cosine to `kill` runs 0.006 to 0.206, median 0.088, sd 0.036 — the whole vocabulary inside a fifth of the available range:
+
+    kill's nearest:  destroy .206  murder .183  fight .181  attack .181  hit .173
+                     burn .173  cut .169  shoot .168  SELL .168  catch .165  EAT .164
+    scream  .082 (rank 180)      dance .091 (rank 153)      stab .079 (rank 191)
+
+`sell` outranks `stab`. `eat` is 11th. The gap that put `dance` above `scream` is **0.009 in a space whose sd is 0.036** — a quarter of a standard deviation, i.e. noise. Over the full 128k vocabulary `kill`'s true neighbours are `kills`, `Kill`, `killing`, `killed`: this embedding encodes morphology, and past the inflections of the query word it has nothing left to say.
+
+**bge is not bad. bge is right, and section 7 misread it.**
+
+    NEAREST kill   KILL .92  murder .86  slaughter .79  die .62  lynch .41
+                   shoot .40  stab .37  bury .34  punish .33  strangle .28  hurt .27
+    FARTHEST kill  roll -.23  roar -.21  vent -.20  shake -.20  whoop -.20  splash -.20
+                   burst -.19  swing -.18  pop -.18  wake -.18
+    scream -.124 (302 of 350)   shout -.122 (300)   shriek -.099 (278)   cry -.077 (256)
+
+That is a clean semantic ordering with an interpretable axis at both ends, and the far pole is a coherent cluster: **sudden noisy discharge** — roar, whoop, vent, burst, splash, and with them `scream`, `shout`, `shriek`, `cry`.
+
+**So bge independently reconstructs the pole axis this project declared by hand.** The axis borrowed from `nn_shewantedto_scream-kill` for the `dN` measurement is naughty = kill/strangle/die/murder/shoot/cut/stab, nice = scream/cry/yell/shout. Shown nothing but this prompt and its own candidates, bge orders them the same way, with `slaughter` and `lynch` at one end and `roar` and `whoop` at the other.
+
+### AND THAT LAST CLAIM DEPENDS ON THE CENTRING, WHICH IS A CHOICE
+
+`cosines.py --raw` prints both, and they do not agree about `scream`:
+
+    scream    RAW  0.781  rank 156 of 350      CENTRED  -0.124  rank 302 of 350
+    dance     RAW  0.709  rank 343             CENTRED  -0.136  rank 315
+    eat       RAW  0.814  rank  59             CENTRED  +0.137  rank  40
+    murder    RAW  0.968  rank   2             CENTRED  +0.862  rank   2
+
+Raw, `scream` is **mid-pack, not at the far pole**, and the far pole is a less coherent set (open, shake, Options, rock, laugh, dance, roll, sleep, wake). The clean vocalisation cluster at the bottom is a property of the centred space.
+
+Centring is still the right instrument here -- raw cosines run 0.69-0.98 with sd 0.038, so raw similarity is overwhelmingly the shared eight-token frame -- but centred cosine is similarity of the **deviation from the typical candidate**, which is a different quantity and not a cleaned-up version of the same one. So:
+
+- **Robust across both:** the violence cluster is nearest (murder, die, stab, strangle, shoot, hurt); `eat` is nearer to `kill` than `scream` is (+0.84 sd raw, +1.84 sd centred); and `dance` is FARTHER than `scream` in bge under both (-1.89 sd raw, -0.09 centred), so the `dance` result really is llama-only.
+- **Centring-dependent:** that `scream` sits near the far pole, and that the far pole is the vocalisation cluster. Quote those as facts about deviation from the frame, or not at all.
+
+**What survives without the choice is the weaker but sufficient claim: `kill -> scream` is not a short hop.** Under either reading `scream` is outside `kill`'s neighbourhood while a dozen violence verbs are inside it.
+
+### What the hop graph did to this
+
+The k-NN graph is k=4 and undirected over 350 nodes, so its diameter is 7 and **124 of the 350 words — 35% of the vocabulary — sit at exactly 5 hops.** Hop count discards magnitude:
+
+    cos(kill, eat)     +0.137   ->  3 hops
+    cos(kill, scream)  -0.124   ->  5 hops
+
+A difference of 0.26 in a space with sd 0.14 is compressed into two steps of a counter. **The control did not refute the chain; it refuted the graph**, which is why it "survived" being carried from llama to GloVe to bge — an uninformative metric is robust to changing what it is computed on.
+
+Producer for every number in this section: `cosines.py` (`--raw` for the comparison above).
+
+Sections 4 and 5 stand as written: the path that reads beautifully is a k-NN artefact, and quoting one was the danger. What does not stand is section 7's "the instrument was not the fault". The instrument was the hop count. The space underneath it was measuring the right thing the whole time.
+
+### And the idea the experiment was built on does not survive either, for a better reason
+
+The premise was that `scream` would be reachable from `kill` by a chain of short associative steps. The measurement says `scream` is one of the *least* similar words to `kill` in the candidate set. Nothing in these spaces makes them neighbours, because **they are not similar words** — they are two things an angry person wants to do. The relation is the shared frame, not shared meaning: syntagmatic, not paradigmatic.
+
+Which is the distinction this project already has an instrument for. A similarity space is the wrong place to look for Freud's chain of connections, and the right reading of this folder is not "the chain is not short" but "the chain is not a similarity relation at all".
