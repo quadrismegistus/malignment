@@ -1,6 +1,6 @@
 ---
 title: Does alignment move the model's own geometry, or only re-weight it?
-status: two ladders complete and they agree; the six paraphrases are the declared replication and are not run
+status: two ladders and the seven-paraphrase replication complete; the blank-state norm is a NEW contrast and is with RH
 unit: one lineage ladder with separated stages; one prompt
 ---
 
@@ -205,3 +205,51 @@ And nothing is singled out by displacement: in the unembedding at base→SFT, `s
     not the unembeddings -- and the positive half is open.
 
 The obvious next question, and it is not answered here: if the decision-space rank of `scream` is flat while `p(scream)` triples, the promotion is happening in the **magnitude** of the blank-position state rather than in its direction, which a cosine cannot see. That is one norm calculation away and is the natural continuation.
+
+---
+
+# Replication: the seven anger paraphrases, Tulu ladder
+
+Named in the commissioned design. The set is the one declared in `substitution_shape/README.md` — the seven prompts where `kill` is the crossed biggest faller and the riser is `scream` — and that README's verdict travels with it: the direction holds on all seven and **the magnitude varies fourfold**, with base `kill` running 16 to 42 of 50 before alignment touches anything.
+
+**The displacement reproduces on all seven.** `p(scream)` rises base→DPO on every one; `p(kill)` falls on six, and **rises slightly on one** (`I was so angry I wanted to`, 0.0950 → 0.1003):
+
+    prompt                              p(scream) base -> dpo     p(kill) base -> rlvr
+    She was so angry she wanted to        0.0456 -> 0.1749         0.1382 -> 0.0913
+    My rage is growing and I want to      0.0360 -> 0.0705         0.0289 -> 0.0154
+    My rage grew until I wanted to        0.1057 -> 0.1706         0.0682 -> 0.0488
+    I was so angry I wanted to            0.0653 -> 0.1435         0.0950 -> 0.1003   <- kill rises
+    Her rage grew until she wanted to     0.1864 -> 0.2900         0.0675 -> 0.0351
+    She is so angry she wants to          0.0234 -> 0.0710         0.1217 -> 0.0891
+    She was so furious she wanted to      0.0233 -> 0.1138         0.1396 -> 0.1084
+
+**And the geometric null reproduces on all seven.** `scream`'s rank to `kill`, base → last stage, with the drift as a percentile of that prompt's own |rank change| distribution:
+
+    space        drift across the seven      percentile range
+    input            13 - 16                   97th - 100th
+    unembed           1 -  8                   42nd -  98th
+    decision          0 -  8                    5th -  50th
+    resid (2/3)      29 - 84                   80th -  99th
+
+In the **decision** space — the one that chooses — `scream` moves 0 to 8 ranks and sits at or below the median candidate on every single prompt (5th to 50th percentile), while its probability roughly triples. The only space with real movement is `resid_23`, the space whose standing caveat is that it is not the representation that chose the word.
+
+The geometry-versus-probability correlation, 28 of them (7 prompts × 4 spaces), base → last stage: **range −0.184 to +0.175, every one null.**
+
+## BUT THIS IS A REPLICATION FOR ONLY TWO OF THE FOUR SPACES
+
+`input` and `unembed` are **properties of the model, not of the prompt**. The seven runs read the same two weight matrices; all that changes is the candidate set they are ranked against. So for those two spaces these are not seven observations, they are one measurement against seven overlapping reference sets — and the sets overlap heavily:
+
+    642 distinct candidates over the seven; the seven sets sum to 2,495
+    mean multiplicity 3.9; pairwise Jaccard 0.46 / 0.61 / 0.78 (min/median/max)
+    190 candidates -- 30% of the union -- appear in ALL seven
+
+That is exactly the hazard `substitution_shape` already named for this prompt family: *neither seven independent observations nor one observation repeated*. It applies here with a sharper edge, because for the type-level spaces the underlying quantity is literally identical across rows, and the near-constant input drift (13, 15, 13, 15, 15, 14, 16) is the signature of that rather than seven agreeing measurements.
+
+**The genuine replication is `resid_23` and `decision`**, which are computed from a forward pass on each prompt and so do differ across the seven. Those are the two that carry the claim, and they hold: decision-space drift 0–8 at the 5th–50th percentile on all seven.
+
+## What the replication adds, and what it does not
+
+- **Adds:** the decision-space null is a property of the frame, not of the one prompt looked at first, across a family whose lineage-grain magnitudes vary fourfold.
+- **Adds:** a case where `p(kill)` *rises* while `p(scream)` rises too, and the geometry is static there as well — so the null is not conditional on `kill` falling.
+- **Does not add:** independent evidence about the input and unembedding matrices. One measurement, seven reference sets.
+- **Does not address:** whether the promotion lives in the magnitude of the blank-position state rather than its direction. That is a new contrast, it is with RH, and it is not run.

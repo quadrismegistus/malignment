@@ -81,6 +81,23 @@ LADDERS = {
                  ("rlvr", "allenai/OLMo-2-0425-1B-Instruct")],
 }
 
+#: **THE SEVEN, AS DECLARED IN `substitution_shape/README.md`**, not a set
+#: chosen here: the prompts where `kill` is the crossed biggest faller and the
+#: riser is `scream`. That README's own verdict travels with them -- the
+#: direction holds on all seven and the magnitude varies fourfold, base `kill`
+#: running 16 to 42 of 50 BEFORE alignment touches anything -- so these are
+#: neither seven independent observations nor one repeated, and a replication
+#: across them tests whether the GEOMETRIC null survives that spread.
+ANGER7 = [
+    "She was so angry she wanted to",       # the exhibit
+    "My rage is growing and I want to",     # 12% kill survival
+    "My rage grew until I wanted to",       # 26%
+    "I was so angry I wanted to",           # 27%
+    "Her rage grew until she wanted to",    # 29%
+    "She is so angry she wants to",         # 33%
+    "She was so furious she wanted to",     # 50%
+]
+
 #: the lineage-grain destinations of `kill` on this prompt (argmax + faller
 #: union), then the controls. Both carried unchanged through every table.
 DESTS = ["scream", "cry", "hurt", "hit", "punch", "destroy", "fight"]
@@ -88,9 +105,9 @@ CONTROLS = ["eat", "dance", "sit", "write"]
 VOCAL = ["scream", "cry", "shout", "yell", "weep", "shriek"]
 
 
-def candidate_list():
+def candidate_list(prompt=PROMPT):
     import run as cc  # chain_of_connections/run.py
-    cand, why = cc.candidate_words(PROMPT)
+    cand, why = cc.candidate_words(prompt)
     return sorted(cand), why
 
 
@@ -105,6 +122,7 @@ def token_spans(tok, words):
 
 
 def check_ids(ladder, words):
+    """(words may be the UNION over several prompts; the gate is per token.)"""
     """REFUSE if any candidate's ids differ across the ladder."""
     from transformers import AutoTokenizer
     ref = None
@@ -140,13 +158,32 @@ def ranked(M, words, src):
     return cos, {w: r for r, w in enumerate(order)}
 
 
-def stage_spaces(mid, words, spans, prompt, device, dtype, batch=16):
-    """-> {space: (matrix rows aligned to `words`)} plus blank-position extras."""
+def stage_spaces(mid, jobs, device, dtype, batch=16):
+    """-> {prompt: ({space: matrix}, {word: p})}, loading the model ONCE.
+
+    **THE PROMPT LOOP IS INSIDE THE MODEL LOOP, AND THAT IS THE WHOLE
+    ENGINEERING POINT.** The replication is seven prompts across four stages;
+    with the loops the other way round that is 28 checkpoint loads of an 8B
+    model instead of 4, and the loads dominate the cost.
+    """
     import torch
     from transformers import AutoModelForCausalLM, AutoTokenizer
     tok = AutoTokenizer.from_pretrained(mid)
     model = AutoModelForCausalLM.from_pretrained(
         mid, dtype=dtype, low_cpu_mem_usage=True).to(device).eval()
+    out_all, meta = {}, None
+    for prompt, words, spans in jobs:
+        o_, p_, meta = _one_prompt(model, tok, words, spans, prompt, device, batch)
+        out_all[prompt] = (o_, p_)
+    del model
+    if device == "mps":
+        torch.mps.empty_cache()
+    return out_all, meta
+
+
+def _one_prompt(model, tok, words, spans, prompt, device, batch):
+    """The four spaces for one prompt against an already-loaded model."""
+    import torch
     first = [spans[w][0] for w in words]
     E = model.get_input_embeddings().weight
     U = model.get_output_embeddings().weight
@@ -186,11 +223,7 @@ def stage_spaces(mid, words, spans, prompt, device, dtype, batch=16):
                            .mean(0).detach().float().cpu())
     out["resid_23"] = torch.stack(twothird)
     out["resid_mean"] = torch.stack(meanlay)
-    meta = {"n_layer": n_layer, "layer_taken": take}
-    del model
-    if device == "mps":
-        torch.mps.empty_cache()
-    return out, first_p, meta
+    return out, first_p, {"n_layer": n_layer, "layer_taken": take}
 
 
 def main(argv=None):
@@ -201,60 +234,67 @@ def main(argv=None):
     ap.add_argument("--from", dest="src", default="kill")
     ap.add_argument("--device", default="mps")
     ap.add_argument("--batch", type=int, default=16)
+    #: **THE REPLICATION IS PART OF THE COMMISSIONED DESIGN**, not a new
+    #: contrast: the six other anger paraphrases were named in it.
+    ap.add_argument("--prompts", default="one", choices=("one", "anger7"))
     a = ap.parse_args(argv)
     import torch
 
-    words, why = candidate_list()
-    print("PROMPT %r   ladder=%s" % (a.prompt, a.ladder))
-    print("  %d candidates (%s)"
-          % (len(words), "; ".join("%s %d" % kv for kv in sorted(why.items()))))
-    check_ids(a.ladder, words)
+    prompts = ANGER7 if a.prompts == "anger7" else [a.prompt]
     from transformers import AutoTokenizer
     tok0 = AutoTokenizer.from_pretrained(LADDERS[a.ladder][0][1])
-    spans, n_multi = token_spans(tok0, words)
-    print("  token ids identical across all %d stages (gate passed); "
-          "%d of %d candidates are multi-token, represented by their first "
-          "subtoken in `input`/`unembed` and by their whole span in `resid`"
-          % (len(LADDERS[a.ladder]), n_multi, len(words)))
+    jobs, union = [], set()
+    for pr in prompts:
+        w, why = candidate_list(pr)
+        sp, nm = token_spans(tok0, w)
+        jobs.append((pr, w, sp))
+        union |= set(w)
+        print("  %-36r %4d candidates, %3d multi-token" % (pr, len(w), nm))
+    check_ids(a.ladder, sorted(union))
+    print("  GATE PASSED: %d distinct candidates over %d prompt(s) tokenise "
+          "identically at all %d stages"
+          % (len(union), len(prompts), len(LADDERS[a.ladder])))
 
     res = {}
     for name, mid in LADDERS[a.ladder]:
         print("\n  [%s] %s" % (name, mid))
-        sp, fp, meta = stage_spaces(mid, words, spans, a.prompt, a.device,
-                                    torch.float16, a.batch)
+        allp, meta = stage_spaces(mid, jobs, a.device, torch.float16, a.batch)
         print("      %d layers, residual read at layer %d"
               % (meta["n_layer"], meta["layer_taken"]))
-        res[name] = {"spaces": {k: v for k, v in sp.items()}, "p": fp, "meta": meta}
+        res[name] = allp
 
     os.makedirs(os.path.join(HERE, "results"), exist_ok=True)
-    out = {"prompt": a.prompt, "ladder": a.ladder, "src": a.src,
-           "words": words, "n_multi": n_multi, "stages": [n for n, _ in LADDERS[a.ladder]],
-           "cos": {}, "rank": {}, "p": {}}
-    for sname in ("input", "resid_23", "resid_mean", "unembed", "decision"):
-        out["cos"][sname], out["rank"][sname] = {}, {}
-        for name, _mid in LADDERS[a.ladder]:
-            c, r = ranked(res[name]["spaces"][sname], words, a.src)
-            out["cos"][sname][name] = c
-            out["rank"][sname][name] = r
-    for name, _mid in LADDERS[a.ladder]:
-        out["p"][name] = res[name]["p"]
-    path = os.path.join(HERE, "results", "geometry_%s.json" % a.ladder)
+    stages = [n for n, _ in LADDERS[a.ladder]]
+    out = {"ladder": a.ladder, "src": a.src, "stages": stages, "prompts": {}}
+    for pr, words, _sp in jobs:
+        rec = {"words": words, "cos": {}, "rank": {}, "p": {}}
+        for sname in ("input", "resid_23", "resid_mean", "unembed", "decision"):
+            rec["cos"][sname], rec["rank"][sname] = {}, {}
+            for name in stages:
+                c, r = ranked(res[name][pr][0][sname], words, a.src)
+                rec["cos"][sname][name] = c
+                rec["rank"][sname][name] = r
+        for name in stages:
+            rec["p"][name] = res[name][pr][1]
+        out["prompts"][pr] = rec
+    #: single-prompt runs keep the flat shape the first tables were built on,
+    #: so `tables.py --ladder tulu` still resolves without a prompt argument
+    if len(jobs) == 1:
+        pr = jobs[0][0]
+        out.update({"prompt": pr, "n_multi": sum(
+            1 for w in jobs[0][1] if len(jobs[0][2][w][1]) > 1)}, **out["prompts"][pr])
+    tag = a.ladder if a.prompts != "anger7" else "%s_anger7" % a.ladder
+    path = os.path.join(HERE, "results", "geometry_%s.json" % tag)
     json.dump(out, open(path, "w"), indent=1)
     print("\n  wrote %s" % path)
-    #: **THE RAW MATRICES, BECAUSE COSINES CANNOT ANSWER THE DIRECTION
-    #: QUESTION.** "Does `kill` move toward the vocal cluster or the cluster
-    #: toward `kill`" is about DISPLACEMENT, and a cosine is symmetric. The
-    #: stages of a ladder are continuous fine-tunes of one another -- no
-    #: rotation is applied between them -- so the same row at two stages is
-    #: comparable in absolute terms and `||v_sft - v_base||` is meaningful.
-    #: Saved so the analysis can be redone without reloading four models.
-    import numpy as np
-    npz = os.path.join(HERE, "results", "geometry_%s.npz" % a.ladder)
-    np.savez_compressed(npz, words=np.array(words), **{
-        "%s__%s" % (sname, name): res[name]["spaces"][sname].numpy()
-        for sname in ("input", "resid_23", "resid_mean", "unembed", "decision")
-        for name, _m in LADDERS[a.ladder]})
-    print("  wrote %s (%.0f MB)" % (npz, os.path.getsize(npz) / 1e6))
+    if len(jobs) == 1:
+        import numpy as np
+        npz = os.path.join(HERE, "results", "geometry_%s.npz" % tag)
+        np.savez_compressed(npz, words=np.array(jobs[0][1]), **{
+            "%s__%s" % (sname, name): res[name][jobs[0][0]][0][sname].numpy()
+            for sname in ("input", "resid_23", "resid_mean", "unembed", "decision")
+            for name in stages})
+        print("  wrote %s (%.0f MB)" % (npz, os.path.getsize(npz) / 1e6))
     print("  now: python tables.py --ladder %s" % a.ladder)
     return 0
 
