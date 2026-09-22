@@ -680,3 +680,20 @@ The candidate set is the words the models give probability to **on this prompt**
     python wide_vocab.py --vocab lemma        # the run of record here
     python wide_vocab.py --vocab all          # every real word, morphology and all
     python wide_vocab.py --vocab infinitive   # the verb-sense + base-form test
+
+## 12.9 What the plate's caption may assert: hop count and weakest link across every configuration
+
+The drafting seat asked whether two caption clauses survive §§12.7–12.8. Both are facts of **the 307-word tree at base**, which is the plate; the question is whether a reader will take them as facts about the model. Measured across every configuration:
+
+    tree                    hops   bottleneck   weakest link          at step
+    307 candidates, base      16      0.469      hurt -> hit             2 of 16
+    307 candidates, sft       15      0.419      break -> bust           9 of 15
+    307 candidates, dpo       15      0.416      break -> bust           9 of 15
+    307 candidates, rlvr      16      0.413      break -> bust           9 of 16
+    10,727 lemma, base        11      0.629      break -> bust           8 of 11
+
+**"alignment neither builds nor shortens this one" — the second half is not defensible.** The route shortens from 16 hops to 15 at SFT and DPO, returns to 16 at RLVR, and the bottleneck falls monotonically across the ladder, 0.469 → 0.419 → 0.416 → 0.413. The movement is small and n=1 (§12.7), but the caption asserts *none*, and the table shows some. **"alignment does not build this chain" is defensible** and is the claim the evidence carries: the corridor is present in the base model, and its word order is unchanged on a vocabulary thirty-five times larger.
+
+**"its weakest link is the second step, at 0.47" — true of the plate and of nothing else.** `hurt -> hit` is the cap in exactly one of the five configurations. In the other four the cap is **`break -> bust`**, at step 8 or 9 — after alignment in the 307 tree, and at base on the wide vocabulary. The base-307 tree is the odd one out, which is what §12.8 would predict of a vocabulary selected by the prompt.
+
+So the plate's most robust feature is **the sequence of words** — nine way stations identical from 307 to 10,727 — and its least robust is **where the constriction sits.** A caption may quote the weakest link as a fact about this tree; it should not imply the model has a weakest link there.
