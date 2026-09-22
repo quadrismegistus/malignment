@@ -180,11 +180,22 @@ def plot(words, adj, pos, src, dsts, B, S, base, controls):
         if len(path) > 1:
             e = min(zip(path, path[1:]), key=lambda ab: float(S[ab[0], ab[1]]))
             weak.add(e)
+    #: **THICKNESS TRACKS COSINE, so a bottleneck LOOKS like one** (RH). With
+    #: width proportional to the similarity of the link, the weakest edge on a
+    #: route is literally the narrowest point of the corridor, and the red
+    #: marking only names what the geometry already shows. Scaled over the
+    #: drawn range rather than 0-1, because these cosines occupy 0.3-0.8 and a
+    #: 0-1 scale would flatten every difference that matters.
+    vs = list(edges.values())
+    lo, hi = min(vs), max(vs)
+    def width(v):
+        t = (v - lo) / (hi - lo) if hi > lo else 0.5
+        return 0.5 + 5.0 * t
     for (a, b), v in sorted(edges.items()):
         hot = (a, b) in weak
-        L.append('  "%s" -> "%s" [label="%.2f" penwidth=%.1f color="%s"%s];'
-                 % (words[a], words[b], v, 3.0 if hot else 0.9,
-                    "#b23a3a" if hot else "#888888",
+        L.append('  "%s" -> "%s" [label="%.2f" penwidth=%.2f color="%s"%s];'
+                 % (words[a], words[b], v, width(v),
+                    "#b23a3a" if hot else "#9aa0a6",
                     ' fontcolor="#b23a3a"' if hot else ""))
     L.append("}")
     open(base + ".dot", "w").write("\n".join(L) + "\n")
@@ -205,6 +216,9 @@ def main(argv=None):
     ap.add_argument("--basis", default="faller")
     ap.add_argument("--stage", default="base")
     ap.add_argument("--plot", action="store_true")
+    #: the controls earn their place in the TABLE (they are the comparison);
+    #: on the plate they add two long corridors that are not the subject
+    ap.add_argument("--no-controls", dest="controls", action="store_false")
     a = ap.parse_args(argv)
     import numpy as np
 
@@ -277,7 +291,8 @@ def main(argv=None):
         tag = "bottleneck_%s_%s_%s%s" % (a.src, a.basis, a.space,
                                          "" if a.stage == "base" else "_" + a.stage)
         plot(words, mstadj, mstpos, a.src, dsts, B, S,
-             os.path.join(figs, tag), CONTROLS)
+             os.path.join(figs, tag + ("" if a.controls else "_nocontrols")),
+             CONTROLS if a.controls else [])
     return 0
 
 

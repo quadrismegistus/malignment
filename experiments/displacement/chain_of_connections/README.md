@@ -546,7 +546,25 @@ So the separation is clean once corridors are read rather than only the table: *
 
 **AND THE MST CORRIDOR IS NOT THE k-NN CHAIN.** The route to `scream` here runs through breaking, explosion, death and fainting; the k-NN plate ran through argument and speech. Both are legible, they are different, and the difference is the construction: an MST path maximises its weakest link and will take sixteen strong hops rather than eight ordinary ones. **Neither route may be quoted as "the" chain** — §12.5's ban on quoting individual waypoints applies here with more force, not less.
 
+### Reading the plate
+
+    node fill      blue = a destination, with its lineage count and bottleneck
+                   orange = a control (omit with --no-controls)
+    edge WIDTH     proportional to the cosine, over the drawn range -- so the
+                   weakest link on a route is literally the narrowest point and
+                   a bottleneck LOOKS like one
+    edge RED       the MINIMUM-cosine edge on some drawn route, i.e. that
+                   word's bottleneck. One red edge can cap many words at once:
+                   `hurt -> hit` at 0.469 is the bottleneck for seven of them,
+                   `bash -> slash` 0.42 caps `rip`, `attack -> fight` 0.44 caps
+                   `fight`, and `kill -> hurt` 0.52 is `hurt`'s own only edge
+
+Widths are scaled over the drawn range, not 0-1: these cosines occupy 0.3-0.8
+and a 0-1 scale would flatten every difference that matters.
+
     python threshold.py                       # bottlenecks + sweep, base residual
+    python threshold.py --plot                # the corridor plate
+    python threshold.py --plot --no-controls  # destinations only
     python threshold.py --space bge
     python threshold.py --stage dpo
 
