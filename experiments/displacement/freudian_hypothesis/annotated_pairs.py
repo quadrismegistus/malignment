@@ -148,6 +148,22 @@ def norms_for(frame, words, weights=None):
                     key = ("brysbaert_concreteness" if s == "concreteness"
                            else "warriner_" + s)
                     acc[key].append(float(wn[s])); wt[key].append(u)
+        #: **THE INSTITUTIONAL INSTRUMENT IS NOT RESTRICTED TO INSTITUTIONAL
+        #: FRAMES.** Its name says otherwise and that is why it was missed: it
+        #: covers 2,511 prompts and 92 of the 96 frames here, and it carries
+        #: `arousal` -- "how much emotional INTENSITY does the completion carry,
+        #: regardless of whether it is positive or negative" -- which is the
+        #: CONTEXTUAL affect measure this file twice reported the corpus as
+        #: lacking. Prefixed `inst:` because both instruments define
+        #: `vocalisation` and pooling them would put two constructs on one name.
+        inst = ((ctx.get(w) or {}).get("slot_institutional_en_v3")
+                if isinstance(ctx, dict) else None)
+        if inst:
+            for sc, v in inst.items():
+                if sc in NOT_NORMS or isinstance(v, bool) \
+                        or not isinstance(v, (int, float)):
+                    continue
+                acc["inst:" + sc].append(float(v)); wt["inst:" + sc].append(u)
         v6 = ((ctx.get(w) or {}).get("v6") if isinstance(ctx, dict) else None)
         if v6:
             for s, v in v6.items():

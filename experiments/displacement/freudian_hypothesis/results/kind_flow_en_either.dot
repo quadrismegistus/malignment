@@ -2,8 +2,8 @@ digraph kindflow {
   rankdir=LR; splines=true; overlap=false;
   size="4.8,5.52";
   bgcolor="white"; nodesep=0.14; ranksep=0.50;
-  node [shape=box style="rounded" fontname="Helvetica" fontsize=9 color="black" fontcolor="black" margin="0.06,0.035" penwidth=0.6];
-  edge [fontname="Helvetica" fontsize=7.2 color="#4d4d4d" penwidth=0.75 arrowsize=0.5];
+  node [shape=box style="rounded" fontname="Arial" fontsize=9 color="black" fontcolor="black" margin="0.06,0.035" penwidth=0.6];
+  edge [fontname="Arial" fontsize=7.2 color="#4d4d4d" penwidth=0.75 arrowsize=0.5];
   { rank=same;
     "B_MIXED" [label="mixed\n939" penwidth=0.35 color="#8c8c8c" fontcolor="#595959"];
     "B_PHYSICAL_ACT" [label="physical act\n115"];
