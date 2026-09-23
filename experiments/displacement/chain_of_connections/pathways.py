@@ -118,6 +118,8 @@ def main(argv=None):
     #: an edge must be among the node's k nearest AND clear this cosine
     ap.add_argument("--min-cos", type=float, default=None)
     ap.add_argument("--clean", action="store_true")
+    ap.add_argument("--exclude", default="",
+                    help="comma-separated words to remove as possible nodes")
     ap.add_argument("--ranksep", type=float, default=0.08)
     ap.add_argument("--node-height", type=float, default=0.10)
     ap.add_argument("--prefix-ratio", type=float, default=0.0)
@@ -144,6 +146,32 @@ def main(argv=None):
     words, W, ids = cosines.space(a.space, a.prompt, filtered=not a.raw,
                                   prefix_ratio=a.prefix_ratio,
                                   stage=a.stage)
+    #: **A HAND EXCLUSION IS LEGITIMATE ONLY FOR A KIND ERROR, AND MUST BE
+    #: VISIBLE.** Removing a word because it is not the sort of thing the
+    #: vocabulary is supposed to contain -- a NOUN in a verb vocabulary,
+    #: `vandal` or `crime` -- is a correction to the filter. Removing a word
+    #: because the route through it reads badly is manufacturing the corridor,
+    #: which is what this folder keeps catching itself at. The flag exists for
+    #: the first and the excluded words go in the FILENAME so a plate can
+    #: never quietly differ from its unpruned twin.
+    #:
+    #: `vandal` reaches the verb vocabulary only through the 47 above-theta
+    #: candidates admitted wholesale to keep `avenge`, `gouge`, `lunge`,
+    #: `pummel` and `lynch`, which WordNet has no verb sense for. It is the
+    #: cost of that exemption, not a failure of the verb test.
+    if a.exclude:
+        drop = {w.strip() for w in a.exclude.split(",") if w.strip()}
+        missing = drop - set(words)
+        if missing:
+            print("  --exclude: not in this vocabulary anyway: %s"
+                  % ", ".join(sorted(missing)))
+        keep = [w for w in words if w not in drop]
+        if a.src not in keep:
+            raise SystemExit("--exclude removed the source word %r" % a.src)
+        print("  --exclude: %d words removed, %d remain"
+              % (len(words) - len(keep), len(keep)))
+        ids = {w: ids[w] for w in keep}
+        words = keep
     #: `ids` gathers rows out of W; `idx` addresses everything graph-side.
     idx = {w: i for i, w in enumerate(words)}
     missing = [w for w in list(dsts) + [a.src] if w not in idx]
@@ -197,7 +225,9 @@ def main(argv=None):
                                 + ("_%s" % a.stage if a.stage != "base" else "")
                                 + ("" if a.min_cos is None
                                    else "_mc%02d" % round(a.min_cos * 100))
-                                + ("_clean" if a.clean else ""))
+                                + ("_clean" if a.clean else "")
+                                + ("_ex%d" % len(a.exclude.split(","))
+                                   if a.exclude else ""))
     base = os.path.join(FIGS, "pathways_" + tag)
     edges = set()
     for w in dsts:

@@ -810,3 +810,23 @@ Every test this folder has run points the same way now:
       matrix and not a foreign encoder                       §12
 
 What the plate gives up against the MST version is the social-harm corridor (`punish -> torment -> demean -> malign -> sabotage -> ruin -> destroy`), which needs the all-parts-of-speech vocabulary to exist. That is a real loss and the only argument left for the MST plate: **richer, at 10.3x orthography, against cleanest, at chance.**
+
+## 12.14 `--exclude`, and why it is a no-op on the plate that matters
+
+RH asked for `vandal` and `crime` removed as possible path nodes, by hand if necessary. The flag now exists (`--exclude`, with the count in the filename so a pruned plate can never be mistaken for its twin). On the recommended plate it changes nothing:
+
+    plate                    vandal   crime   effect of --exclude
+    verb 3,359, k=3          absent   absent  NONE: byte-identical, route and
+                                              orthography unchanged
+    verb 3,359, k=2          drawn    absent  reroutes, orthography WORSENS
+                                              (7.3x -> 8.3x two-letter)
+    wide 10,727, k=3         absent   drawn   -
+    MST wide 10,727          absent   absent  -
+
+Neither word lies on any route in the verb k=3 plate, so removing them is a no-op there and the duplicate file was deleted rather than kept as a distinct plate.
+
+**`crime` is not in the verb vocabulary at all** — it is a noun and only reaches the all-parts-of-speech set. **`vandal` is**, but only through the 47 above-theta candidates admitted wholesale to preserve `avenge`, `gouge`, `lunge`, `pummel` and `lynch`, which WordNet has no verb sense for. It is the cost of that exemption rather than a failure of the verb test, and it is drawn only at k=2.
+
+### The rule the flag is under
+
+A hand exclusion is legitimate for a **kind** error — a noun in a verb vocabulary — and illegitimate for a **reading** one. Removing `vandal` because it is not a verb corrects the filter; removing a word because the route through it reads badly manufactures the corridor, which is the failure this folder has caught itself at repeatedly (§12.8's selection effect, and the `gouge`/`gauge` node in §12.11 that was left alone for exactly this reason). The excluded words go in the filename so the distinction is auditable rather than remembered.
