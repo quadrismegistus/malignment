@@ -31,6 +31,21 @@ Not predicted, but in the same direction: exit and self-help nearly disappear on
 
 Eight random pairs are in `results/examples_regen.md` (seeded, not selected). A typical one: RedPajama-Chat sends the tenant with broken winter heating to "your local housing office or the landlord ombudsman", and tells the landlord facing repair demands to have "a professional" inspect. falcon-7b-instruct offers the laid-off worker "freelance or remote work" (exit), and asks the manager who laid them off "have you tried to mediate the situation with your team?" (direct voice).
 
+## The frontier, on the same ruler (`frontier_generate.py`, `frontier_code.py`)
+
+The same 36 prompts were run through the API: the prompt as the user message, the vendor's default system prompt, t=1.0, 256 tokens, 10 draws. top_p is pinned only on DeepSeek, where it is measured to be honoured; elsewhere it runs at the vendor default. There is no base, so this is the gap at the endpoint. The analysis was committed before coding (`results/analysis_frontier.md`). Shares are individual / institution:
+
+| | Sonnet 4.6 | Haiku 4.5 | GPT-4o-mini | open aligned (43) |
+|---|---|---|---|---|
+| sent outward | 0.79 / 0.14 | 0.69 / 0.13 | 0.46 / 0.04 | 0.32 / 0.05 |
+| direct voice with the counterparty | 0.19 / 0.74 | 0.25 / 0.74 | 0.42 / 0.95 | 0.45 / 0.80 |
+| bodies with authority over the counterparty | 0.74 / 0.16 | 0.66 / 0.15 | 0.43 / 0.04 | 0.30 / 0.05 |
+| the counterparty's own channels | 0.42 / 0.07 | 0.48 / 0.07 | 0.60 / 0.01 | 0.45 / 0.02 |
+
+Pooled over the three frontier models, by dispute: outward 18/0 (p=8e-6), direct voice 1/15, authority 17/1, channel 17/0. **The frontier models carry the same asymmetry as the open aligned arm, and on referral they carry it harder.** Sonnet 4.6 sends the individual outward in 79% of answers and the institution in 14%, and gives the institution the conversation three times in four.
+
+`deepseek-chat` now resolves to deepseek-v4-flash, which is served as `deepseek-flash`. That is the coder's own model, so its row is flagged and left out of the pooled test. Its direction agrees: outward 15/1, direct voice 4/12.
+
 ## Why this question, and not F21's
 
 F21 (malign-logits `findings/F21_institutional_alignment.md`) claimed that alignment proceduralises individuals and not institutions. That claim depended on an undeclared cut and an undeclared arm. At its own units (`slot_ratings/institutional/f21_prompt_unit.py`), deference and agency rise equally on both sides, and the deference gap between the sides comes from pretraining.
@@ -106,7 +121,6 @@ Engine facts are recorded in `roster/models/observations.json` (`engine_support.
 
 ## Next
 
-- Frontier API passages on the same 36 prompts and decoder, so the frontier sits on the regeneration's ruler rather than F21's 100-token one.
 - A second coder on a shared sample.
 - The four missing lineages, if wanted, through the transformers path.
 
@@ -122,6 +136,8 @@ Engine facts are recorded in `roster/models/observations.json` (`engine_support.
     run_regen.py          codes the regeneration (render rules, exclusions)
     analyse_regen.py      the declared test, committed before any regenerated text existed
     examples_regen.py     seeded random pairs
-    results/              analysis.md (pass 1 v1), analysis_v2.md, analysis_regen.md, examples_regen.md
+    frontier_generate.py  API passages (Sonnet 4.6, Haiku 4.5, GPT-4o-mini, DeepSeek) into the generation stash
+    frontier_code.py      codes them; the endpoint contrast, declared before coding
+    results/              analysis.md (pass 1 v1), analysis_v2.md, analysis_regen.md, analysis_frontier.md, examples_regen.md
 
 The coded outputs are 20 MB each and live in `~/malignment-data/institution_vs_individual/`.
