@@ -55,8 +55,8 @@ For where alignment SENDS someone, this is close to disqualifying as it stands. 
 
 ## Options for pass 2
 
-1. **Strip M03.** Keep its structure (18 scenarios, position × person × modal, site held fixed) but rewrite each kernel's two clauses to state the harm with no step taken and no verdict, restoring the anchor's severity. The generator enforces the rest, so this changes 36 clauses, not 252 strings. A new lint would flag the step and verdict vocabulary this audit found.
+1. **Strip M03.** Keep its structure (18 scenarios, position × person × modal, site held fixed) but rewrite each kernel's two clauses to state the harm with no step taken and no verdict, restoring the anchor's severity. The generator enforces the rest, so this changes 72 clauses (singular and plural, both sides), not 252 strings. A new lint would flag the step and verdict vocabulary this audit found.
 2. **Run both.** Run the stripped M03 alongside the original, with the same scenarios and sites. The difference then measures what pre-resolution does to referral: whether an individual already inside a procedure is sent outward more, or less, than one who has only been harmed. That is a result in its own right, and the reason to keep the original rather than replace it.
 3. **F21 as is.** Its 16 "I should" prompts are raw grievances with no prior step. But the endings are mixed across the full 24 and the pairs are not clean.
 
-Recommendation: option 2. It costs one set of 36 clause rewrites and doubles the generation budget of the regeneration.
+Recommendation: option 2. It costs one set of 72 clause rewrites and doubles the generation budget of the regeneration.
