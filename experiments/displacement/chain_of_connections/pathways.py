@@ -118,7 +118,8 @@ def main(argv=None):
     ap.add_argument("--space", default="bge",
                     choices=("bge", "llama", "llama_unembed",
                              "llama_resid_mean", "llama_resid23",
-                             "llama_resid_wide", "llama_resid_verb"))
+                             "llama_resid_wide", "llama_resid_verb",
+                             "llama_resid_verbwide"))
     ap.add_argument("--k", type=int, default=2)
     ap.add_argument("--min-lineages", type=int, default=1)
     #: the full above-theta candidate list, fragments and all

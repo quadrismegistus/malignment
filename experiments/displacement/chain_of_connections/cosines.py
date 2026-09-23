@@ -90,6 +90,32 @@ def space(name, prompt, centre=True, filtered=True, prefix_ratio=0.0,
     #: 47 of those fail the verb test (`avenge`, `gouge`, `lunge`, `pummel`,
     #: `lynch`) and are exactly this corpus's displacement vocabulary.
     #: 3,359 words, and none of the bridge words is in it.
+    #: **VERBS WITHIN THE WIDER VOCABULARY** (RH), properly nested. The
+    #: `llama_resid_verb` set is NOT a subset of `llama_resid_wide`: the two
+    #: filters discard different things. Lemma dedup drops a word WordNet can
+    #: reduce to another word present (`tears`->`tear`, `lower`->`low`,
+    #: `options`->`option`); the verb test keeps a word with a verb sense that
+    #: is already a verb base form, and `lower` passes it because *to lower*
+    #: is such a verb. Seven words sit in `verb` and not in `wide`: broker,
+    #: buffer, diss, lighter, lower, options, tears.
+    #:
+    #: The intersection is 3,352 and is a genuine subset, so the two plates
+    #: nest and their comparison is exact rather than approximate. It also
+    #: drops `options` and `diss`, which are not verbs at all and reached the
+    #: verb set only through the 47 above-theta candidates admitted wholesale
+    #: to preserve `avenge`, `gouge`, `lunge`, `pummel` and `lynch`.
+    if name == "llama_resid_verbwide":
+        import numpy as np
+        npz = os.path.join(HERE, "results", "wide_vocab_resid_verbwide.npz")
+        if not os.path.exists(npz):
+            raise SystemExit("%s missing" % npz)
+        z = np.load(npz, allow_pickle=True)
+        ws = [str(x) for x in z["words"]]
+        M = torch.tensor(z["resid_mean"])
+        X = M - M.mean(0) if centre else M
+        return ws, torch.nn.functional.normalize(X, dim=1), \
+            {w: i for i, w in enumerate(ws)}
+
     if name == "llama_resid_verb":
         import numpy as np
         npz = os.path.join(HERE, "results", "wide_vocab_resid_infinitive.npz")
@@ -196,7 +222,8 @@ def main(argv=None):
     ap.add_argument("--space", default="both",
                     choices=("llama", "llama_unembed", "llama_resid_mean",
                              "llama_resid23", "llama_resid_wide",
-                             "llama_resid_verb", "bge", "both"))
+                             "llama_resid_verb", "llama_resid_verbwide",
+                             "bge", "both"))
     ap.add_argument("--raw", action="store_true",
                     help="bge only: also print the uncentred ordering")
     a = ap.parse_args(argv)

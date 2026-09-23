@@ -830,3 +830,26 @@ Neither word lies on any route in the verb k=3 plate, so removing them is a no-o
 ### The rule the flag is under
 
 A hand exclusion is legitimate for a **kind** error — a noun in a verb vocabulary — and illegitimate for a **reading** one. Removing `vandal` because it is not a verb corrects the filter; removing a word because the route through it reads badly manufactures the corridor, which is the failure this folder has caught itself at repeatedly (§12.8's selection effect, and the `gouge`/`gauge` node in §12.11 that was left alone for exactly this reason). The excluded words go in the filename so the distinction is auditable rather than remembered.
+
+## 12.15 The vocabularies do not nest, and the fix costs one hundredth of a point
+
+RH asked whether the verb vocabulary is "the verbs within the wider vocabulary". It is not, quite:
+
+    verb   3,359      wide  10,727      all  16,739
+    verb SUBSET OF all   yes      wide SUBSET OF all   yes      verb SUBSET OF wide   NO
+
+**Seven words sit in `verb` and not in `wide`**: `broker`, `buffer`, `diss`, `lighter`, `lower`, `options`, `tears`. The two filters discard different things. Lemma dedup drops a word WordNet can reduce to another word already present — `tears -> tear`, `lower -> low`, `options -> option`, `lighter -> light`. The verb test keeps a word that has a verb sense and is already a verb base form, and `lower` passes it, because *to lower* is such a verb even though the same string is also the comparative of `low`.
+
+Two of the seven are not verbs at all. `options` and `diss` reach the verb set only through the 47 above-theta candidates admitted wholesale to preserve `avenge`, `gouge`, `lunge`, `pummel` and `lynch` — `options` being OLMo's genre-collapse artefact.
+
+**`llama_resid_verbwide`** is the intersection, 3,352 words, a genuine subset, so the plates nest and their comparison is exact rather than approximate.
+
+### And it changes nothing, which is the useful part
+
+    plate                             nodes  edges  route to scream   orthography
+    verb 3,359, k=3                     26     25   7 hops            8% / 0%
+    verb INTERSECT wide 3,352, k=3      26     25   7 hops            8% / 0%
+
+The two `.dot` files differ in exactly one character: `kill -> hurt` is drawn at penwidth 1.34 in one and 1.33 in the other, because removing seven words shifts the centring mean by a fraction and the cosine with it. **None of the seven was on any route**, so the figure is the same figure.
+
+That is worth stating rather than assuming: a vocabulary change that leaves the plate untouched is evidence the plate is not resting on the vocabulary's edge cases, which is the hazard §12.8 caught it at once already. The nested set is now the one to quote, because the relation to the wider vocabulary can be stated exactly.
