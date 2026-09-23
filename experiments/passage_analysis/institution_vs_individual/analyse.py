@@ -1,4 +1,4 @@
-"""The declared contrast over results/coded.jsonl. -> results/analysis.md
+"""The declared contrast over ~/malignment-data/.../coded.jsonl. -> results/analysis.md
 
     python -u analyse.py
 

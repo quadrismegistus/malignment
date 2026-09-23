@@ -1,4 +1,4 @@
-"""Code every F21 generation with task.py. -> results/coded.jsonl
+"""Code every F21 generation with task.py. -> ~/malignment-data/institution_vs_individual/coded.jsonl
 
     python -u run.py --plan          counts, nothing sent
     python -u run.py --run           code everything (resumable: the Task stash
