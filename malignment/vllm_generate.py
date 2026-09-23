@@ -269,6 +269,20 @@ def generate_model(model_id, conditions, n=10, seed=42, decoder=None,
     existing_stashes = ck.gen_stashes()
 
     has_tpl = _has_template(model_id)
+    #: THE ROSTER CAN BE WRONG, AND A SKIP IS SILENT. 2026-09-23: the roster's
+    #: template_overhead said OLMo-2-0425-1B-Instruct, OLMoE-1B-7B-0125-Instruct
+    #: and Olmo-3-7B-Instruct have NO template; all three ship one, and every
+    #: chat condition was skipped with exit 0. Before skipping, ask the tokenizer.
+    if has_tpl is False and any(_needs_template(c) for c in conditions):
+        try:
+            from transformers import AutoTokenizer
+            if getattr(AutoTokenizer.from_pretrained(model_id, trust_remote_code=True),
+                       "chat_template", None):
+                print("    %s: roster says no template, tokenizer has one -- using it"
+                      % model_id, flush=True)
+                has_tpl = True
+        except Exception:
+            pass
     model_conditions = []
     n_skipped_frame = 0
     for cond in conditions:
@@ -479,6 +493,7 @@ def run(models, conditions, n=10, seed=42, decoder=None,
                 print("    subprocess OK", flush=True)
             else:
                 print("    subprocess FAILED (exit %d)" % result.returncode, flush=True)
+                total = -1
             safe = mid.replace("/", "--")
             cache_dir = os.path.expanduser("~/.cache/huggingface/hub")
             for d in glob.glob(os.path.join(cache_dir, "models--" + safe)):
@@ -487,10 +502,11 @@ def run(models, conditions, n=10, seed=42, decoder=None,
                 except Exception:
                     pass
         print("\ndone across %d models (subprocess mode)" % len(models))
-        return 0
+        return -1 if total == -1 else 0
 
     # in-process fallback
     total = 0
+    failed = False
     for i, mid in enumerate(models, 1):
         print("[%d/%d] %s" % (i, len(models), mid), flush=True)
         try:
@@ -502,8 +518,13 @@ def run(models, conditions, n=10, seed=42, decoder=None,
         except Exception as e:
             import traceback
             print("    FAILED: %s: %s" % (type(e).__name__, e), flush=True)
+            failed = True
             traceback.print_exc()
     print("\ndone: %d passages written across %d models" % (total, len(models)))
+    if failed:
+        #: a caught failure must still reach the caller's exit code: a fleet
+        #: script reading `$?` otherwise records a failed model as done.
+        return -1
     return total
 
 
@@ -554,12 +575,14 @@ Or plain text (one prompt per line, all raw frame).
     print("models: %d | conditions: %d | frames: %s | n: %d | max_new_tokens: %d | t=%.1f p=%.2f"
           % (len(models), len(conditions), sorted(frames), a.n, a.max_new_tokens,
              a.temperature, a.top_p))
-    run(models, conditions, n=a.n, seed=a.seed,
+    rc = run(models, conditions, n=a.n, seed=a.seed,
         decoder={"temperature": a.temperature, "top_p": a.top_p},
         max_new_tokens=a.max_new_tokens, max_model_len=a.max_model_len,
         tp=a.tp, dtype=a.dtype, dry_run=a.dry_run,
         prompts_file=a.prompts_file,
         subprocess_per_model=not a.no_subprocess)
+    if rc == -1:
+        sys.exit(1)
 
 
 if __name__ == "__main__":
