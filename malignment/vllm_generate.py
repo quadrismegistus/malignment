@@ -111,7 +111,7 @@ def _model_gb(model_id):
     return 14.0
 
 
-def _build_llm(model_id, max_model_len=2048, tp=1, dtype="float16"):
+def _build_llm(model_id, max_model_len=2048, tp=1, dtype="float16", revision=None):
     from vllm import LLM
     gb = _model_gb(model_id)
     frac = _gpu_frac(gb)
@@ -132,7 +132,10 @@ def _build_llm(model_id, max_model_len=2048, tp=1, dtype="float16"):
         pass
     print("  vLLM: %s | ~%.0f GB | frac %.2f | dtype %s | ctx %d"
           % (model_id, gb, frac, dtype, actual_len), flush=True)
-    return LLM(model=model_id, dtype=dtype, max_model_len=actual_len,
+    #: `revision` is the roster's pin (Checkpoint.revision). BAAI replaced
+    #: Aquila2-7B's `main` with a re-tokenised model; unpinned, vLLM loaded it.
+    return LLM(model=model_id, revision=revision, tokenizer_revision=revision,
+               dtype=dtype, max_model_len=actual_len,
                gpu_memory_utilization=frac, tensor_parallel_size=tp,
                trust_remote_code=True, enforce_eager=False)
 
@@ -313,7 +316,11 @@ def generate_model(model_id, conditions, n=10, seed=42, decoder=None,
                              None if seed is None else seed + i, i,
                              system_set=(system is not DEFAULT)),
                      user=user, prefill=bool(prefill),
-                     user_msg=(user_msg if prefill else None))
+                     user_msg=(user_msg if prefill else None),
+                     #: in the KEY so a passage rendered by the fixed path can
+                     #: never be served by (or overwrite) one from the old
+                     #: string path, whose templated prompts carried two BOS.
+                     render="ids_v2")
             already = False
             for st in existing_stashes:
                 try:
@@ -335,59 +342,65 @@ def generate_model(model_id, conditions, n=10, seed=42, decoder=None,
     if dry_run:
         return 0
 
-    llm = _build_llm(model_id, max_model_len=max_model_len, tp=tp, dtype=dtype)
-    tok = llm.get_tokenizer()
-
-    # inject chat template override for models with no shipped template
+    #: RENDER WITH THE MODEL'S OWN TRANSFORMERS TOKENIZER AND HAND vLLM TOKEN IDS.
+    #: Three defects found 2026-09-23 on the institution_vs_individual fleet, all
+    #: in the old path that rendered through vLLM's tokenizer wrapper and passed
+    #: STRINGS: (1) a rendered template that already writes BOS text was
+    #: tokenized WITH special tokens, so Mistral-7B-Instruct saw [1, 1, ...] --
+    #: generate.encode's rule (templated -> add_special_tokens=False) was never
+    #: applied here; (2) an authored override set on the wrapper did not reach
+    #: apply_chat_template, which raised, and (3) the except-branch then generated
+    #: the RAW prompt under the chat key's condition. A condition that cannot be
+    #: rendered is now DROPPED and counted, never generated raw.
+    from transformers import AutoTokenizer
     from .runners import _chat_template_override
-    if not getattr(tok, "chat_template", None):
+    htok = AutoTokenizer.from_pretrained(model_id, trust_remote_code=True,
+                                         revision=ck.revision)
+    if not getattr(htok, "chat_template", None):
         override = _chat_template_override(model_id)
         if override:
-            tok.chat_template = override
+            htok.chat_template = override
             print("    chat template override applied", flush=True)
 
-    vllm_texts = []
-    render_info = []
+    kept, inputs, render_info, n_refused = [], [], [], 0
     for prompt, i, k, cond in todo:
         system = _resolve_system(cond["system"])
         user = cond.get("user")
         prefill = cond.get("prefill", False)
         user_msg = cond.get("user_msg", "Hi.")
-
-        frame_refused = False
-        if system is not DEFAULT or prefill or user or cond.get("chat"):
+        templated = bool(system is not DEFAULT or prefill or user or cond.get("chat"))
+        if templated:
             messages = []
-            if system is not DEFAULT:
-                sys_text = system if system else ""
-                if sys_text:
-                    messages.append({"role": "system", "content": sys_text})
+            if system is not DEFAULT and system:
+                messages.append({"role": "system", "content": system})
+            # prefill: turns UP TO the assistant, then the stem AFTER, keeping
+            # the turn OPEN (an assistant message would close it).
+            messages.append({"role": "user",
+                             "content": (user_msg or "") if prefill else prompt})
+            try:
+                rendered = htok.apply_chat_template(
+                    messages, tokenize=False, add_generation_prompt=True)
+            except Exception as e:
+                n_refused += 1
+                if n_refused == 1:
+                    print("    template REFUSED (%s: %s) -- condition dropped, not "
+                          "generated raw" % (type(e).__name__, str(e)[:120]), flush=True)
+                continue
             if prefill:
-                # build turns UP TO the assistant, get generation prompt,
-                # then concatenate the stem AFTER — keeping the turn OPEN.
-                # DO NOT pass the stem as an assistant message: that closes
-                # the turn with <|im_end|> and the model generates nothing.
-                messages.append({"role": "user", "content": user_msg or ""})
-                try:
-                    rendered = tok.apply_chat_template(
-                        messages, tokenize=False, add_generation_prompt=True)
-                    rendered = rendered + prompt
-                    vllm_texts.append(rendered)
-                    render_info.append((True, False))
-                    continue
-                except Exception:
-                    frame_refused = True
-            else:
-                messages.append({"role": "user", "content": prompt})
-                try:
-                    rendered = tok.apply_chat_template(
-                        messages, tokenize=False, add_generation_prompt=True)
-                    vllm_texts.append(rendered)
-                    render_info.append((True, False))
-                    continue
-                except Exception:
-                    frame_refused = True
-        vllm_texts.append(prompt)
-        render_info.append((False, frame_refused))
+                rendered = rendered + prompt
+        else:
+            rendered = prompt
+        ids = htok(rendered, add_special_tokens=not templated)["input_ids"]
+        kept.append((prompt, i, k, cond))
+        inputs.append({"prompt_token_ids": ids})
+        render_info.append((templated, False))
+    todo = kept
+    if not todo:
+        print("    %s: nothing renderable (%d refused)" % (model_id, n_refused), flush=True)
+        return -1 if n_refused else 0
+
+    llm = _build_llm(model_id, max_model_len=max_model_len, tp=tp, dtype=dtype,
+                     revision=ck.revision)
 
     sp_list = []
     for prompt, i, k, cond in todo:
@@ -400,7 +413,7 @@ def generate_model(model_id, conditions, n=10, seed=42, decoder=None,
         ))
 
     t0 = time.time()
-    outputs = llm.generate(vllm_texts, sp_list)
+    outputs = llm.generate(inputs, sp_list)
     elapsed = time.time() - t0
     total_tokens = sum(len(o.outputs[0].token_ids) for o in outputs)
     print("    generated %d passages, %d tokens in %.1fs (%.0f tok/s)"
@@ -435,11 +448,15 @@ def generate_model(model_id, conditions, n=10, seed=42, decoder=None,
             template=templated,
             engine="vllm",
             engine_version=vv,
+            render="ids_v2", dtype=dtype, revision=ck.revision,
         )
         stash[k] = p._asdict()
         n_written += 1
 
     _free_llm(llm, model_id=model_id)
+    if n_refused:
+        print("    %s: %d conditions REFUSED by the template" % (model_id, n_refused), flush=True)
+        return -1
     return n_written
 
 
@@ -514,7 +531,10 @@ def run(models, conditions, n=10, seed=42, decoder=None,
                 mid, conditions, n=n, seed=seed, decoder=dec,
                 max_model_len=max_model_len, tp=tp, dtype=dtype,
                 dry_run=dry_run)
-            total += w
+            if w < 0:
+                failed = True
+            else:
+                total += w
         except Exception as e:
             import traceback
             print("    FAILED: %s: %s" % (type(e).__name__, e), flush=True)
