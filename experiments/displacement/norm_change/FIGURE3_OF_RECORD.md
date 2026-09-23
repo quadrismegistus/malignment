@@ -2,6 +2,8 @@
 
 RH's decision, relayed through the paper seat (`TheoryMachines`), 21 Sep 2026. Recorded here because it is a choice about which of four correct artifacts gets cited, and nothing in the code says so on its own.
 
+> **STALE TITLE, CORRECTED 23 Sep 2026.** This file is named for Figure 3 and the z plate is **Figure 4** in v6. RH chose the z plate on 21 Sep, and a chain-of-connections plate then took the third slot: `theory-machines-v6.qmd` runs `fig1-shoggoth`, `fig2-kill-scream`, **`fig-chain-kill-wide-en` (`#fig-tree`)**, then **`fig3_norms_osgood_en_z` (`#fig-dose`)**. Verified against the qmd, not taken on report. The filename `fig3_norms_osgood_en_z` is now a historical name for a Figure 4, which is worth knowing before anyone greps for "Figure 3" and finds this doc.
+
 ## The scatter stays, and nothing further is built for the article
 
 `figures/dose_vs_marginal_gated_both_bh05_pub.png` remains the article's Figure 3. The two Osgood plates and the fitted diagnostic go to the book, where the tie-rate problem can have the paragraph it needs.
@@ -52,7 +54,34 @@ The median over prompts within a lineage lands on exactly 0.000 for up to 42 of 
     mean within lineage, median over lineages   +0.0311 z   33 up / 17 down / 0 tied   p = 0.033   TOWARD speech
     median within lineage                        0.0000 z    7 up / 22 down / 21 tied   p = 0.008   AWAY from speech
 
-Most prompts inside a lineage move slightly toward silence; a minority move a long way toward speech, so the typical prompt and the net mass go opposite ways. **"Alignment makes the typical completion less vocal" is withdrawn as a headline** — it is a claim about the median prompt, and "charge is talked, not deleted" rests on the mass. `v6:makes_worse` and `v6:directedness` are the cost: decisive on the median (p=2.7e-05, 4.6e-07) and null on the mean over all 50 (p=0.89, 0.20), so if either is cited the conditioning has to be stated.
+Most prompts inside a lineage move slightly toward silence; a minority move a long way toward speech, so the typical prompt and the net mass go opposite ways. **"Alignment makes the typical completion less vocal" is withdrawn as a headline** — it is a claim about the median prompt, and "charge is talked, not deleted" rests on the mass.
+
+### FOUR ROWS FAIL ON THE MEAN, NOT TWO
+
+Reported by the paper seat and re-derived here from `results/norms_levels_z_en.json` — sign test on `up_mean`/`down_mean`, BH at 0.05 over the fourteen rows:
+
+    band "all"                up / down     p        BH
+    v6:makes_worse              24 / 26   0.888     fails
+    v6:directedness             20 / 30   0.203     fails
+    warriner_dominance          31 / 19   0.119     fails
+    k_concreteness              18 / 32   0.065     fails
+    warriner_valence            33 / 17   0.033     survives (threshold)
+    v6:vocalisation             33 / 17   0.033     survives (threshold)
+    ...the other eight          <= 0.003  survive
+
+Ten of fourteen survive. This doc previously named only `v6:makes_worse` and `v6:directedness` as the cost, which was **incomplete**: `warriner_dominance` and `k_concreteness` fail too.
+
+**AND THE FAILURE IS BAND-SPECIFIC, WHICH IS THE PART A CAPTION HAS TO GET RIGHT.** On the high-lift band the same test gives `k_concreteness` 17/33 (p=0.033) and `warriner_dominance` 36/14 (p=0.003) — **both survive there**, and thirteen of fourteen do:
+
+    row                  band "all"        band "high"
+    k_concreteness       18/32  p=0.065    17/33  p=0.033   survives on high
+    warriner_dominance   31/19  p=0.119    36/14  p=0.003   survives on high
+    v6:makes_worse       24/26  p=0.888    17/33  p=0.033   survives on high
+    v6:directedness      20/30  p=0.203    19/31  p=0.119   FAILS ON BOTH
+
+So `v6:directedness` is the only row null on the mean in both bands. The other three are **underpowered on the full band and decisive on the charged one**, which is the direction the dose story predicts and is not the same claim as "null".
+
+**RH's decision, relayed 23 Sep: no re-gate on the mean.** The fourteen rows stay and the caption names all four.
 
 ## THREE WRONG STATISTICS RENDERED CLEANLY BEFORE THIS ONE WAS RIGHT
 
