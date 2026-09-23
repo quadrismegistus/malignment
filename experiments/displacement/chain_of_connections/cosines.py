@@ -81,6 +81,28 @@ def space(name, prompt, centre=True, filtered=True, prefix_ratio=0.0,
     #: from `wide_vocab.py`'s saved matrix. Centring is over THAT set, so its
     #: cosines are not comparable with the 307's (§12.8); the ORDERING and the
     #: routes are what transfer.
+    #: **VERB LEMMAS ONLY** (RH). The wide vocabulary is every real word of
+    #: any part of speech, so it carries the agent nouns (`killer`,
+    #: `destroyer`, `breaker`), an adjective that looks like a verb
+    #: (`strange`), and nouns that bridge on spelling (`outage`, `crime`).
+    #: This set is the 3,312 words with a WordNet verb sense that are already
+    #: the base form, UNIONED with the 307 above-theta candidates -- because
+    #: 47 of those fail the verb test (`avenge`, `gouge`, `lunge`, `pummel`,
+    #: `lynch`) and are exactly this corpus's displacement vocabulary.
+    #: 3,359 words, and none of the bridge words is in it.
+    if name == "llama_resid_verb":
+        import numpy as np
+        npz = os.path.join(HERE, "results", "wide_vocab_resid_infinitive.npz")
+        if not os.path.exists(npz):
+            raise SystemExit("%s missing; run `wide_vocab.py --vocab infinitive`"
+                             % npz)
+        z = np.load(npz, allow_pickle=True)
+        ws = [str(x) for x in z["words"]]
+        M = torch.tensor(z["resid_mean"])
+        X = M - M.mean(0) if centre else M
+        return ws, torch.nn.functional.normalize(X, dim=1), \
+            {w: i for i, w in enumerate(ws)}
+
     if name == "llama_resid_wide":
         import numpy as np
         npz = os.path.join(HERE, "results", "wide_vocab_resid_lemma.npz")
@@ -173,7 +195,8 @@ def main(argv=None):
     ap.add_argument("--from", dest="src", default="kill")
     ap.add_argument("--space", default="both",
                     choices=("llama", "llama_unembed", "llama_resid_mean",
-                             "llama_resid23", "llama_resid_wide", "bge", "both"))
+                             "llama_resid23", "llama_resid_wide",
+                             "llama_resid_verb", "bge", "both"))
     ap.add_argument("--raw", action="store_true",
                     help="bge only: also print the uncentred ordering")
     a = ap.parse_args(argv)

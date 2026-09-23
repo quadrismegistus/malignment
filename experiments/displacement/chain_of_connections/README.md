@@ -777,3 +777,36 @@ Neither dominates, and the choice is what the figure is for.
 - **MST (bottleneck)** is richer: it shows two corridors out of `hurt`, bodily and social, and the social one (`punish -> torment -> annoy -> demean -> malign -> sabotage -> ruin -> destroy`) does not appear in any k-NN plate at any k. It costs 10.3x orthography, which is mostly English's impact clusters.
 
 If the argument is *that the connection exists and is not spelling*, k=3 is the better evidence. If the argument is *what the neighbourhood of killing contains*, the MST shows more and the orthography is the price.
+
+## 12.13 Verb lemmas at k=3: orthography at chance
+
+RH asked for the vocabulary restricted to verb lemmas, at k=2 and k=3. The residual for that set already existed (3,312 WordNet verb-sense base forms, unioned with the 307 candidates because 47 of those fail the verb test and are this corpus's displacement vocabulary — `avenge`, `gouge`, `lunge`, `pummel`, `lynch`). **3,359 words, and none of the bridge words is in it.**
+
+    plate                      size (in)   nodes   1st letter     2-prefix      bridges
+    307, k=2                  2.83 x 2.67    29   25% (2.8x)    0%  (0.0x)     none
+    wide 10,727, k=3          2.62 x 2.14    24   17% (2.9x)    4%  (3.5x)     crime
+    verb 3,359, k=2           3.36 x 3.20    32   26% (3.8x)   10%  (7.3x)     none
+    VERB 3,359, k=3           2.80 x 2.14    26    8% (1.2x)    0%  (0.0x)     none
+    MST wide 10,727           3.53 x 4.00    40   28% (4.6x)   13% (10.3x)     none
+
+**Verb lemmas at k=3 is orthographically at chance on both measures** — 8% first-letter agreement against a 7% baseline, and no two-letter agreement at all. Nothing else in this folder comes close; every other plate runs at 2.8x to 10.3x.
+
+    kill -> hurt -> wound -> offend -> insult -> curse -> swear -> scream
+
+Physical injury to verbal injury to vocalisation, in seven steps, with no word in it that is not a verb and no step that a reader can attribute to spelling.
+
+**k=2 still cheats even on this vocabulary**: its route runs `choke -> gag -> nag -> brag -> boast`, a rhyme chain on `-ag`. Restricting the parts of speech removes the *derivational* bridges (`killer`, `destroyer`) and the *categorial* ones (`crime`, `outage`); it does not remove the *phonological* ones, and only the third neighbour does that. Both filters are needed and neither substitutes for the other.
+
+### This is the plate
+
+Every test this folder has run points the same way now:
+
+    the vocabulary must not be selected by the prompt        §12.8
+    it must be one form per lemma                            §12.8
+    it must be verbs, or the bridges are nouns               §12.13
+    k must be 3, or the bridges are rhymes                   §12.13
+    the basis barely matters; crossing is the strictest      §12 / 84e162ae
+    the space is the base model's residual, not a weight
+      matrix and not a foreign encoder                       §12
+
+What the plate gives up against the MST version is the social-harm corridor (`punish -> torment -> demean -> malign -> sabotage -> ruin -> destroy`), which needs the all-parts-of-speech vocabulary to exist. That is a real loss and the only argument left for the MST plate: **richer, at 10.3x orthography, against cleanest, at chance.**
