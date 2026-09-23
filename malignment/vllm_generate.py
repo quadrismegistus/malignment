@@ -111,6 +111,18 @@ def _model_gb(model_id):
     return 14.0
 
 
+#: Checkpoints whose shipped remote code must NOT be loaded. tiiuae/falcon-7b(-instruct)
+#: carry an `auto_map` to a legacy RW config although Falcon is native: with
+#: trust_remote_code=True vLLM 0.22.1's Falcon loader gets that config and dies on
+#: `'FalconConfig' object has no attribute 'rope_parameters'` (observed under
+#: transformers 4.57.1 AND 5.10.2, 2026-09-23). Native config + transformers 5 loads.
+NO_REMOTE_CODE = {"tiiuae/falcon-7b", "tiiuae/falcon-7b-instruct"}
+
+
+def _trust(model_id):
+    return model_id not in NO_REMOTE_CODE
+
+
 def _build_llm(model_id, max_model_len=2048, tp=1, dtype="float16", revision=None):
     from vllm import LLM
     gb = _model_gb(model_id)
@@ -119,7 +131,7 @@ def _build_llm(model_id, max_model_len=2048, tp=1, dtype="float16", revision=Non
     actual_len = max_model_len
     try:
         from transformers import AutoConfig
-        cfg = AutoConfig.from_pretrained(model_id, trust_remote_code=True)
+        cfg = AutoConfig.from_pretrained(model_id, trust_remote_code=_trust(model_id))
         model_max = (getattr(cfg, "max_position_embeddings", None)
                      or getattr(cfg, "seq_length", None)
                      or getattr(cfg, "n_positions", None)
@@ -137,7 +149,7 @@ def _build_llm(model_id, max_model_len=2048, tp=1, dtype="float16", revision=Non
     return LLM(model=model_id, revision=revision, tokenizer_revision=revision,
                dtype=dtype, max_model_len=actual_len,
                gpu_memory_utilization=frac, tensor_parallel_size=tp,
-               trust_remote_code=True, enforce_eager=False)
+               trust_remote_code=_trust(model_id), enforce_eager=False)
 
 
 def _free_llm(llm, model_id=None):
@@ -354,7 +366,7 @@ def generate_model(model_id, conditions, n=10, seed=42, decoder=None,
     #: rendered is now DROPPED and counted, never generated raw.
     from transformers import AutoTokenizer
     from .runners import _chat_template_override
-    htok = AutoTokenizer.from_pretrained(model_id, trust_remote_code=True,
+    htok = AutoTokenizer.from_pretrained(model_id, trust_remote_code=_trust(model_id),
                                          revision=ck.revision)
     if not getattr(htok, "chat_template", None):
         override = _chat_template_override(model_id)
