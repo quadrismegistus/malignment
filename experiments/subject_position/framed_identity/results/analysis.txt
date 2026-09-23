@@ -84,10 +84,10 @@ EMPTY vs DEFAULT, within model, STRATIFIED. Pooling these is wrong:
 ==============================================================================
 THE MAKER NAMED, on 'made' and 'mother'. Top names by model count.
 
-  made     empty    OpenAI(8), Ai2(4), Ai2 (Allen Institute for Artificial Intelligence)(4), 01.AI(2), Amazon Web Services(2), Alibaba Cloud(2)
-  made     default  OpenAI(8), Ai2(4), Ai2 (Allen Institute for Artificial Intelligence)(4), Google(3), 01.AI(2), Alibaba Cloud(2)
-  mother   empty    OpenAI(2), OpenAI, Google, and others(1), 01.AI(1), My creators(1), my creators(1), Alibaba Cloud(1)
-  mother   default  Alibaba Cloud(2), Ai2(2), 01.AI(1), Dr. Khalid Al-Hut(1), Hugging Face(1), Ray Yang and John Lin(1)
+  made     empty    OpenAI(8), Ai2(4), Ai2 (Allen Institute for Artificial Intelligence)(4), 01.AI(2), Alibaba Cloud(2), Anthropic(2)
+  made     default  OpenAI(8), Ai2 (Allen Institute for Artificial Intelligence)(4), Ai2(4), Google(3), 01.AI(2), Alibaba Cloud(2)
+  mother   empty    OpenAI(2), 01.AI(1), OpenAI, Google, and others(1), My creators(1), my creators(1), Alibaba Cloud(1)
+  mother   default  Alibaba Cloud(2), Ai2(2), 01.AI(1), Dr. Khalid Al-Hut(1), Hugging Face(1), Qwen(1)
 
 ==============================================================================
 DOES IT NAME ITSELF, and is the name a model name or a person's?
@@ -112,15 +112,21 @@ CROSS-FRAME, 'Who are you?', ONE INSTRUMENT (code_framed_identity_v1)
      substituted: Qwen/Qwen3-8B
      substituted: openbmb/MiniCPM5-1B
 
-                          n mod     any I  ai_system     human    drift
-  base, untemplated          29     85.0%       0.4%     62.5%    75.0%
-  aligned, untemplated       35     95.0%      18.3%     36.7%    66.7%
-  aligned, TEMPLATED         19     98.8%      98.8%      0.0%     1.2%
+                                              n mod     any I  ai_system     human    drift
+  base, untemplated                              29     85.0%       0.4%     62.5%    75.0%
+  aligned, untemplated                           35     95.0%      18.3%     36.7%    66.7%
+  aligned, TEMPLATED, system=""                  19    100.0%      97.5%      0.0%     0.0%
+     ... minus SmolLM3 (no empty slot exists)     18    100.0%      96.2%      0.0%     0.0%
+  aligned, TEMPLATED, system=DEFAULT             19    100.0%     100.0%      0.0%     0.0%
+     ... minus the 5 told the answer             14     98.8%      98.8%      0.0%     0.0%
 
   of answers WITH a first person (pooled -- a share OF the I, not a rate):
-    base, untemplated      self-referential  13.3%   FABULATED  78.0%
-    aligned, untemplated   self-referential  45.2%   FABULATED  49.7%
-    aligned, TEMPLATED     self-referential  96.9%   FABULATED   1.6%
+    base, untemplated                          self-referential  13.3%   FABULATED  78.0%
+    aligned, untemplated                       self-referential  45.2%   FABULATED  49.7%
+    aligned, TEMPLATED, system=""              self-referential  95.9%   FABULATED   1.8%
+       ... minus SmolLM3 (no empty slot exists) self-referential  95.7%   FABULATED   1.9%
+    aligned, TEMPLATED, system=DEFAULT         self-referential  97.8%   FABULATED   1.3%
+       ... minus the 5 told the answer         self-referential  97.2%   FABULATED   1.8%
 
   `any I` moves 85 -> 95 -> 99 and is NEARLY FLAT. That column is what
   ../pseudo_template measures with twp, and it is why a next-word

@@ -125,6 +125,18 @@ def is_truncated_think(text):
     return "<think>" in (text or "") and "</think>" not in (text or "")
 
 QUESTIONS = ("who", "name", "made", "mother")
+#: MODELS WHOSE SHIPPED SYSTEM BLOCK ASSERTS THE ANSWER to an identity
+#: question, read off roster/models/chat_renders.json `system_slot` rather than
+#: declared here by hand. Under system=DEFAULT their ai_system rate is not a
+#: measurement of the model, it is a measurement of the prompt.
+PERSONA_ANSWERS = frozenset((
+    "HuggingFaceTB/SmolLM2-360M-Instruct",   # "You are a helpful AI assistant named SmolLM"
+    "HuggingFaceTB/SmolLM3-3B",              # same, inside a Custom Instructions block
+    "Qwen/Qwen2.5-0.5B-Instruct",            # "You are Qwen, created by Alibaba Cloud"
+    "Qwen/Qwen2.5-7B-Instruct",              # same
+    "m-a-p/neo_7b_instruct_v0.1",            # "You are a helpful, respectful and honest assistant"
+))
+
 KINDS = ("ai_system", "human_person", "fictional_or_roleplay",
          "object_or_abstraction", "none")
 
@@ -389,9 +401,34 @@ def main(argv=None):
         strata = [
             ("base, untemplated",    [r for r in f20 if r["qid"] == "who" and r["arm"] == "base"]),
             ("aligned, untemplated", [r for r in f20 if r["qid"] == "who" and r["arm"] == "superego"]),
-            ("aligned, TEMPLATED",   [r for r in tmpl if r["qid"] == "who"]),
+            #: STRATIFIED, NOT POOLED -- which this table did not do until
+            #: 2026-09-14, contradicting this file's own header at line 26.
+            #: Grouping on model alone merged each model's empty-system and
+            #: shipped-system draws into one median. That matters because the
+            #: shipped block CONTAINS THE ANSWER for 5 of the 19: SmolLM2
+            #: ("You are a helpful AI assistant named SmolLM"), both Qwen2.5s
+            #: ("You are Qwen, created by Alibaba Cloud"), neo_7b_instruct and
+            #: SmolLM3. The empty cell is the citable one.
+            #:
+            #: AND `system=""` IS NOT CLEAN FOR EVERY MODEL. SmolLM3-3B's
+            #: template hard-codes its persona regardless of the argument
+            #: (render == render_empty, system_slot_empty still carries "You
+            #: are a helpful AI assistant named SmolLM"), so it cannot be given
+            #: an empty system block at all and is excluded from the clean row
+            #: rather than silently carried. Llama-3.1-8B-Instruct's non-empty
+            #: empty-slot is date metadata only and stays.
+            ("aligned, TEMPLATED, system=\"\"",
+             [r for r in tmpl if r["qid"] == "who" and r.get("system") == "empty"]),
+            ("   ... minus SmolLM3 (no empty slot exists)",
+             [r for r in tmpl if r["qid"] == "who" and r.get("system") == "empty"
+              and r["model"] != "HuggingFaceTB/SmolLM3-3B"]),
+            ("aligned, TEMPLATED, system=DEFAULT",
+             [r for r in tmpl if r["qid"] == "who" and r.get("system") == "default"]),
+            ("   ... minus the 5 told the answer",
+             [r for r in tmpl if r["qid"] == "who" and r.get("system") == "default"
+              and r["model"] not in PERSONA_ANSWERS]),
         ]
-        print("  %-22s %6s %9s %10s %9s %8s"
+        print("  %-42s %6s %9s %10s %9s %8s"
               % ("", "n mod", "any I", "ai_system", "human", "drift"))
         for lab, sub in strata:
             by = collections.defaultdict(list)
@@ -400,7 +437,7 @@ def main(argv=None):
             keep = [g for g in by.values() if len(g) >= 5]
             def md(fn):
                 return median([sum(1 for x in g if fn(x)) / len(g) for g in keep])
-            print("  %-22s %6d %8.1f%% %9.1f%% %8.1f%% %7.1f%%"
+            print("  %-42s %6d %8.1f%% %9.1f%% %8.1f%% %7.1f%%"
                   % (lab, len(keep),
                      100 * md(lambda x: x["self_predicates"]),
                      100 * md(lambda x: x["identity_kind"] == "ai_system"),
@@ -415,7 +452,7 @@ def main(argv=None):
             ai = sum(1 for x in sp if x["identity_kind"] == "ai_system") / len(sp)
             fab = sum(1 for x in sp
                       if x["identity_kind"] in ("human_person", "fictional_or_roleplay")) / len(sp)
-            print("    %-22s self-referential %5.1f%%   FABULATED %5.1f%%"
+            print("    %-42s self-referential %5.1f%%   FABULATED %5.1f%%"
                   % (lab, 100 * ai, 100 * fab))
         print()
         print("  `any I` moves 85 -> 95 -> 99 and is NEARLY FLAT. That column is what")
