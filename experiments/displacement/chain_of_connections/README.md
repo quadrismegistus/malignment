@@ -853,3 +853,53 @@ Two of the seven are not verbs at all. `options` and `diss` reach the verb set o
 The two `.dot` files differ in exactly one character: `kill -> hurt` is drawn at penwidth 1.34 in one and 1.33 in the other, because removing seven words shifts the centring mean by a fraction and the cosine with it. **None of the seven was on any route**, so the figure is the same figure.
 
 That is worth stating rather than assuming: a vocabulary change that leaves the plate untouched is evidence the plate is not resting on the vocabulary's edge cases, which is the hazard §12.8 caught it at once already. The nested set is now the one to quote, because the relation to the wider vocabulary can be stated exactly.
+
+## 12.16 What survives a change of construction: no word, one stage
+
+RH wants the caption's "other methods of drawing such a network alter the routes" replaced by something measured. Producer: `route_agreement.py`. Twelve constructions — three vocabularies (307 candidates, 3,359 verb lemmas, 10,727 all-POS lemmas) crossed with four ways of drawing a route (k-nearest-neighbour shortest path at k=2, 3, 4, and the maximum-spanning-tree corridor) — all on the same base-model residual. `kill -> scream` is drawn in all twelve.
+
+### The baseline is other routes, not other sequences
+
+How often two routes share a word cannot be computed from lengths and vocabulary size: routes are shortest paths in a semantic graph, so any two will share more than random sequences would. The null must be other **routes**. So 150 random (source, target) pairs are sampled from the 305 words present in all three vocabularies, drawn under the same twelve constructions, and scored identically.
+
+### NO WORD AND NO EDGE SURVIVES
+
+    intermediate word   in N of 12 routes        edge                 in N of 12
+    hurt                      5                  swear -> scream           5
+    swear                     5                  kill -> hurt              5
+    curse                     4                  curse -> swear            4
+    cry                       4                  cry -> scream             4
+    fight, break, smash,      3                  smash -> break,           3
+    explode, bust                                burst -> explode,
+    24 words appear in                           bash -> smash,
+    exactly ONE route                            hit -> beat
+
+    against the baseline        kill->scream   null median   percentile
+    mean pairwise Jaccard          0.100          0.075         63rd
+    most-shared word                   5              6         33rd
+    most-shared edge                   5              6         42nd
+
+**The most recurrent way station on this route appears in five of twelve constructions, and the median arbitrary pair does better, at six.** Twenty-four of the intermediate words appear in exactly one route. So: **no intermediate word recurs across constructions beyond chance** — and in fact `kill -> scream`'s routes agree with each other slightly LESS than an arbitrary pair's do.
+
+### ONE STAGE DOES
+
+Classifying intermediates into five stages, declared before the counts were read — bodily injury, verbal injury, vocal noise, death/collapse, destruction — the six distinct stage-sequences are:
+
+    bodily injury
+    bodily injury -> destruction
+    bodily injury -> verbal injury
+    bodily injury -> vocal noise
+    bodily injury -> verbal injury -> vocal noise
+    bodily injury -> destruction -> death/collapse -> vocal noise
+    bodily injury -> bodily injury -> death/collapse -> verbal injury
+
+**Every route passes through words for bodily injury. Only 14% of the 150 arbitrary pairs have ANY stage common to all their routes.** So an invariant stage is itself unusual, and `kill -> scream` has one.
+
+### The two citable sentences
+
+- **"No intermediate word recurs across constructions beyond chance"** — five of twelve at best, against a median of six for an arbitrary pair.
+- **"The one stage every route passes through is bodily injury"** — twelve of twelve, where 86% of arbitrary pairs have no invariant stage at all.
+
+Which together say what the plate is for: the *words* between `kill` and `scream` are an artefact of how the network is drawn, and the *kind* of word is not.
+
+**The stage classification is a hand judgement and is the weakest link here.** It was written before any count was read, and `punish`, `crime` and `riot` are left unclassified rather than forced — classifying `riot` and `crime` as bodily injury would strengthen the result, which is the direction that should make a reader suspicious, so they stay out.
