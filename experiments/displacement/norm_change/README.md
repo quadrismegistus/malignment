@@ -1,6 +1,6 @@
 ---
 subject: norm_change
-status: "RUN. FIRST RESULT, corrected 2026-08-24. Lift dose added 2026-08-30 (lacan [6565])."
+status: "RUN. FIRST RESULT, corrected 2026-08-24. Lift dose added 2026-08-30 (lacan [6565]). Lift joined the agreement vote as a fourth dose 2026-09-12; rule now 2 of 4 across families, and a dose that does not cover a target abstains rather than vetoing."
 kind: question
 headline: "Register rises and valence rises in BOTH languages. Concreteness falls in Chinese only. Lift dose reorders the top: arousal over bodily harm."
 data: ~/malignment-data/norm_change (3.0 GB, outside the checkout)
@@ -731,21 +731,49 @@ Every `fields` number in this folder regresses that constant. RH found it by ask
 why the slopes were so small. NOT YET FIXED: `contextual()` and the dose path need to
 read coverage rather than level, and the table rebuilt.
 
-## ROBUST UNDER 2 OF 3 DOSES: THE FEATURE TABLE
+## ROBUST UNDER 2 OF 4 DOSES, ACROSS FAMILIES: THE FEATURE TABLE
 
 `dose_agreement.py` -> `dose_agreement.csv`. **A feature significant on >=2 of the
-three doses WITH CONSISTENT SIGN is ROBUST**; on 3 of 3 it is unanimous. One dose is
-not enough because each has a known and DIFFERENT defect -- the lexicon is
+four doses WITH CONSISTENT SIGN AND FROM TWO DIFFERENT FAMILIES is ROBUST.** One dose
+is not enough because each has a known and DIFFERENT defect -- the lexicon is
 floor-bound and ranks coercion below knife attacks, the slot tagging collapses where
 the loaded option is rare and saturates where the transgression is in the setup, and
 v6_harm shares the second while covering 744 prompts against 1,944 and ~2,700.
 Because the defects differ, agreement is evidence about alignment rather than about
 how loadedness was measured.
 
-    table         targets    3 of 3    2 of 3    ROBUST   contradictory
-    levels             38        19        12        31        0
-    fields            278        12        43        55       16
-    contextual         34         2         6         8        0
+**LIFT JOINED AS THE FOURTH DOSE (RH, 2026-09-12), AND THE BAR STAYED AT TWO.** The
+three original doses are LEVELS and share a defect: they read the loadedness of the
+SETUP. `charge.lift` is `dose - frame` and is built to separate exactly that, which is
+why holding it outside a robustness vote was backwards. The bar stays at two because
+"2 of 3" encoded "two instruments whose defects differ agree", not a count; 3 of 4
+would raise the standard with nothing behind it and costs 20 of 55 robust field
+targets. The FAMILY constraint closes the hole that opens instead: `v6_harm_mass` and
+`lift` are both LLM contextual ratings of a word in its frame, so two of those
+agreeing is one family twice.
+
+    type-lexicon     k_transgressiveness
+    slot-tagging     slot_loaded_mass
+    llm-contextual   v6_harm_mass, lift
+
+The threshold was chosen after seeing what it does to one contested target (`Q2.2`).
+That is the wrong order and is recorded rather than hidden; the check is that LEVELS
+returns 31-32 robust under 2-of-3, 2-of-4, 2-of-4-cross-family and 3-of-4 alike, so
+the stable core does not depend on the choice. Only `fields` and `contextual` move.
+
+**AND A DOSE THAT DOES NOT COVER A TARGET NOW ABSTAINS RATHER THAN VETOING.** The
+first version intersected the dose tables, so `v6_harm_mass` -- 34 contextual targets
+against 57 -- decided which targets were assessed at all. 70 field and 23 contextual
+targets were never evaluated, and one of them, `slot_rating_en_v6:vocalisation`, is
+robust.
+
+    table         targets  all doses    ROBUST   contradictory   one dose only
+    levels             39         19        32         0               6
+    fields            348          6        78        22             116
+    contextual         57          1        18         1              20
+
+The three-dose table this replaced is kept as `dose_agreement_3dose_2026-08-27.csv`;
+the per-section numbers below it predate the fourth dose and the coverage fix.
 
 **SIGN IS CHECKED, NOT ASSUMED.** Sixteen `fields` targets clear p<0.05 on two doses
 pointing OPPOSITE WAYS -- X3.4+, A10+, X2.5+, G2.2-, A5.3-, Z1m and ten more. That is
@@ -1107,9 +1135,84 @@ base arm is therefore consistent with no effect AND with an effect this arm
 cannot resolve, and n=8 is permanent: a base self-edge needs a base with a chat
 template and only 8 exist in the roster.
 
-### NOT YET DONE
+### DONE 2026-09-12: LIFT AS THE FOURTH DOSE
 
-The three-dose agreement table (`dose_agreement.py`) has not been re-run with
-lift as a fourth dose. That is the next step: the 19 unanimous targets from the
-three level doses should be checked against lift, and lift-specific targets (like
-`warriner_arousal_absz` at 44/50) should be checked against the three levels.
+Ran. `dose.py --lift-dose` wrote `dose_lift__{levels,fields,contextual}_en.csv`,
+n=50, and `dose_agreement.py` now votes over four.
+
+**Lift confirmed all 19 unanimous level targets and contradicted none, in any
+table.** It is not a rival to the level doses; where they speak it agrees.
+
+**And it settles the speech question, which the level doses could not.** Four
+independent measures rise under dose and clear the rule:
+
+    Q2.2 Speech acts                       ROBUST  rise   lexical + lift
+    v6:vocalisation                        ROBUST  rise   lexical + lift
+    slot_rating_en_v6:vocalisation         ROBUST  rise   lexical + slot
+    slot_institutional_en_v2:vocalisation  ROBUST  rise   lexical + slot
+    X3.2 Sensory: Sound                    ROBUST  FALL   3 doses, 3 families
+    Q2.1                                   candidate      lift alone
+    slot_institutional_en_v3:vocalisation  CONTRADICTORY  v6_harm -, lift +
+
+**Alignment moves toward SPEAKING under dose, and the SOUND field falls.** That
+corrects the withdrawn n=153 section above, which has `X3.2 Sensory: Sound` as
+"the largest riser of all -- which is what a scream IS". On 50 lineages it falls
+on every dose. The destination is utterance, not noise, and the acoustic reading
+was an artefact of the inflated unit.
+
+`slot_rating_en_v6:vocalisation` is robust and was invisible before the coverage
+fix. `slot_institutional_en_v3:vocalisation` is the one dissenter, and it is also
+the target whose README figure (+0.3862, p=9e-5) does not match its dose table
+(+0.00020, p=1.000) while the v2 figure beside it matches exactly. **That
+discrepancy is unresolved and no contextual v3 row should be cited until it is.**
+
+### STILL NOT DONE
+
+`register_shift`'s G was tested against the raw condition only. `k_register_level`
+is flat under all three level doses (p=0.67) and significant under lift
+(+0.0027, 34/16, p=0.015), and the framed condition reaches the same place by a
+different route (see the framed section above). A dose-conditional register rise
+visible under lift and under the deployment frame, but not under the level doses,
+is a claim none of G/G1/G2 tested and should be registered as its own question.
+
+## THE TWO READINGS IN ONE PANEL (`plot_fields.py --xy`), 2026-09-16
+
+![Dose response against marginal change](figures/dose_vs_marginal_gated_both_pub.png)
+
+    python -u plot_fields.py --xy --gated --panel v6 --min-signed 0 \
+        --pmax 1.01 --sig both --pub
+
+**The dose figure and the marginal figure were always a pair and this is the pair.** A dose slope says how alignment's effect on a norm SCALES with the prompt's lift; it says nothing about whether the norm moved at all, because `dose.py` fits slopes and never records an intercept. Read alone it gets glossed as "alignment promoted this", and for `Vulgarity` and `Vocalization` — marginal medians of exactly 0.0000 — that is simply false.
+
+    scale                      dose SD   marg SD   up/dn   ties   dose p   marg p   cov%
+    Vocalization                 +1.13     +0.00    7/22     21   4.2e-09  8.1e-03   76%
+    Register                     +0.66     +0.64   45/5       0   3.1e-04  4.2e-09   81%
+    Valence                      +0.44     +0.39   37/13      0   6.6e-03  9.4e-04   61%
+    Mundanity                    +0.34     +0.85   40/7       3   9.4e-04  1.1e-06   76%
+    Makes worse                  -0.24     -0.00    3/25     22   2.6e-03  2.7e-05   76%
+    Makes better                 -0.27     +0.35   33/3      14   6.6e-03  2.3e-07   76%
+    Directedness                 -0.38     -0.34    2/29     19   2.4e-05  4.6e-07   76%
+    Valence spread               -0.41     -0.39   13/37      0   2.6e-03  9.4e-04   61%
+    Fit                          -0.61     +0.55   42/6       2   9.0e-05  1.0e-07   76%
+    Vulgarity                    -0.62     +0.00    0/8      42   3.2e-08  7.8e-03   81%
+    Register level spread        -0.67     -0.49    9/41      0   5.6e-06  5.6e-06   81%
+    Arousal                      -0.70     -0.77    8/42      0   2.6e-03  1.2e-06   61%
+    Transgressiveness            -0.70     -0.65    6/42      2   5.6e-06  1.0e-07   81%
+    Bodily harm                  -0.70     -1.11    4/43      3   1.2e-06  2.8e-09   81%
+    Valence extremity spread     -0.72     -0.46   12/38      0   5.6e-06  3.1e-04   61%
+
+50 endpoint lineages, English, coverage >= 0.20 on BOTH arms (`gated_levels.py`); lift dose = `charge.lifts_per_lineage()` = `T_base - frame` per cell; both axes standardised by each scale's between-lineage SD, because the raw units differ per scale AND between the axes; `up/dn` is the marginal sign test with ties excluded, `ties` is out of 50, `cov%` is the share of prompt-rows surviving the gate. **p UNCORRECTED on both axes, and not corrected alike** — the marginal side has `p_holm` in `norm_stats.json` and the dose tables have none.
+
+### FOUR THINGS THE FIGURE CANNOT SAY AND A CAPTION MUST
+
+**The zeros are MEASURED MEDIANS, not nulls and not imputed.** `Vulgarity` and `Vocalization` sit at exactly 0.0000 because 42 and 21 lineages respectively have a per-lineage median of exactly zero and the overall median falls inside that block; the sign test, which excludes ties, is significant on the minority that move. `Makes worse` is -0.0000308, which rounds to zero on the axis and is not one.
+
+**Equal n, unequal evidence.** `Vulgarity`'s 8 movers all point one way; `Vocalization`'s 29 split 22 down against 7 up. Both reach p ~ 0.008 by different routes. No mark on a figure distinguishes those, which is why this is prose: a size ramp and an `(n=8)` label were both tried and both rejected, the first because it needs a legend and the second because it clutters labels that are already long.
+
+**And "no marginal change" does not mean "nothing happens".** `Vocalization`'s movers reach -0.097 and +0.027, an order of magnitude above most medians here. A y of 0 is a statement about the MEDIAN LINEAGE on a distribution that is wide and two-sided.
+
+**Two of the points are choices.** `Valence` is Warriner's and `Concreteness` is the `k_` lexicon, each picked where two sources existed; `brysbaert_concreteness` is NULL (p=0.48) where `k_concreteness` falls (p=0.033), so the concreteness reading is not unanimous and the figure must not be read as though it were. `Register`/`Register level spread` and `Valence`/`Valence spread` are one lexicon read two ways, so those points are not independent of each other either.
+
+### WHAT WAS TRIED AND DROPPED
+
+An OLS fit was drawn across the panel (`y = +0.586x +0.039`, R2 = 0.366, n = 15) and then removed: on 15 non-independent points it invites the reading it cannot support, and the quadrant structure carries the comparison without it. The slope and R2 are still computed and printed on render, for orientation only. **They belong in no caption.**

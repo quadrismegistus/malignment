@@ -104,7 +104,7 @@ def draw(d, out_path, pub=False, scales=None):
     from plotnine import (ggplot, aes, geom_line, geom_point, geom_errorbar,
                           labs, scale_x_continuous, facet_wrap, theme_minimal,
                           theme, element_text, ggtitle)
-    from malignment.figure import PUB_RED, PUB_RULE_PT, pub_theme
+    from malignment.figure import PUB_INK, PUB_RULE_PT, pub_theme
 
     rng = random.Random(17)
     def ci(v):
@@ -130,10 +130,10 @@ def draw(d, out_path, pub=False, scales=None):
             rows.append({"x": pos, "y": m, "lo": lo, "hi": hi, "scale": lab})
     f = pd.DataFrame(rows)
     p = (ggplot(f, aes("x", "y"))
-         + geom_line(size=0.9, color=PUB_RED)
+         + geom_line(size=0.9, color=PUB_INK)
          + geom_errorbar(aes(ymin="lo", ymax="hi"), width=0.06,
-                         size=PUB_RULE_PT, color=PUB_RED)
-         + geom_point(size=1.1, color=PUB_RED)
+                         size=PUB_RULE_PT, color=PUB_INK)
+         + geom_point(size=1.1, color=PUB_INK)
          #: FREE y. The norms live on different scales (1.03 against 3.94) and
          #: a shared axis would flatten every one of them to a horizontal line.
          #: THREE ACROSS, NOT FIVE. Five panels across a 4.8 in block leaves
@@ -147,8 +147,9 @@ def draw(d, out_path, pub=False, scales=None):
               + theme_minimal() + theme(figure_size=(11, 3.4),
                                         plot_title=element_text(size=11, weight="bold"))))
     os.makedirs(os.path.dirname(out_path), exist_ok=True)
-    p.save(out_path, dpi=300, verbose=False)
-    return out_path
+    #: PNG and PDF together -- see malignment.figure.save
+    from malignment.figure import save as _save
+    return _save(p, out_path)[0]
 
 
 def main():

@@ -265,8 +265,27 @@ def _suffix(rule_version, frame):
     return {"raw": "_v4", "prefill": "_v4_framed", "self": "_v4_self"}[frame]
 
 
+#: **COVERAGE GATE, OFF BY DEFAULT.** Set by `--min-cov`. A mass-weighted mean
+#: over a source covering 3% of a distribution sat in the same column as one
+#: covering 80% -- `README.md` lists that as a live limit and this is the
+#: filter. It gates on `min(base_cov, aligned_cov)`: a level computed over 80%
+#: of one arm and 3% of the other is not a comparison, and gating on the base
+#: alone would leave the aligned arm free to be thin.
+#:
+#: **DEFAULT 0.0 ON PURPOSE.** Turning it on silently would change every
+#: published dose number in this folder at once, and the marginal side is
+#: gated by a SEPARATE producer (`gated_levels.py`, 0.20). Two populations
+#: under one name is the defect this folder has already paid for twice.
+_MIN_COV = {"v": 0.0}
+
+
 def read(name, keep=None):
-    """{(lang, lineage, prompt, scale): (base, aligned)}, streamed."""
+    """{(lang, lineage, prompt, scale): (base, aligned)}, streamed.
+
+    Rows below `--min-cov` on EITHER arm are dropped, and the count is
+    reported by the caller rather than swallowed: a gate that silently
+    removes 40% of a population is indistinguishable from a smaller corpus.
+    """
     p = os.path.join(DATA, "%s_long%s.csv.gz" % (name, _SFX["v"]))
     if not os.path.exists(p):
         return None
@@ -288,6 +307,19 @@ def read(name, keep=None):
             lin = v[ix["base"]] + ">" + v[ix["aligned"]]
             if lin not in EP:
                 continue
+            if _MIN_COV["v"] > 0.0:
+                try:
+                    if min(float(v[ix["base_cov"]]),
+                           float(v[ix["aligned_cov"]])) < _MIN_COV["v"]:
+                        _MIN_COV["dropped"] = _MIN_COV.get("dropped", 0) + 1
+                        continue
+                except (ValueError, KeyError):
+                    #: a row with no coverage recorded cannot clear a coverage
+                    #: gate -- REFUSED, not admitted, or the gate leaks exactly
+                    #: the rows it exists to catch
+                    _MIN_COV["dropped"] = _MIN_COV.get("dropped", 0) + 1
+                    continue
+            _MIN_COV["kept"] = _MIN_COV.get("kept", 0) + 1
             try:
                 out[(v[ix["lang"]], lin, v[ix["prompt"]], sc)] = (float(b), float(a))
             except ValueError:
@@ -444,6 +476,12 @@ def magnitude(a, langs):
 
 def main(argv=None):
     ap = argparse.ArgumentParser()
+    ap.add_argument("--min-cov", type=float, default=0.0,
+                    help="drop rows where min(base_cov, aligned_cov) is below "
+                         "this. 0.20 is the gate `gated_levels.py` uses on the "
+                         "marginal side; 0.0 (default) reproduces every number "
+                         "already published from this file. A row with no "
+                         "coverage recorded is REFUSED, not admitted.")
     ap.add_argument("--rule-version", type=int, default=3, choices=(3, 4),
                     help="which levels_long* set run.py wrote. 3 is the v3 "
                          "artifact, unchanged.")
@@ -507,6 +545,9 @@ def main(argv=None):
                     help="does MORE MASS MOVE where the base is transgressive?")
     a = ap.parse_args(argv)
     _SFX["v"] = _suffix(a.rule_version, a.frame)
+    _MIN_COV["v"] = float(a.min_cov)
+    if _MIN_COV["v"] > 0:
+        print("coverage gate %.2f on min(base_cov, aligned_cov)" % _MIN_COV["v"])
     _MATCH["v"] = bool(a.match_framed)
     if _SFX["v"]:
         print("reading *_long%s.csv.gz" % _SFX["v"])
