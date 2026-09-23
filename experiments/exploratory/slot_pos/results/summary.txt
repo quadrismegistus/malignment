@@ -1,0 +1,44 @@
+rows read (en, 50 endpoint pairs): 3,312,494
+prompts: 2578
+
+PROMPTS BY DOMINANT (median-over-lineages, mass-weighted) POS, BASE SIDE
+  VERB   1839 prompts   purity median 0.79  [q25 0.65, q75 0.90]
+  PRON    430 prompts   purity median 0.69  [q25 0.49, q75 0.89]
+  NOUN    144 prompts   purity median 0.92  [q25 0.76, q75 0.98]
+  ADP      45 prompts   purity median 0.70  [q25 0.58, q75 0.83]
+  AUX      38 prompts   purity median 0.48  [q25 0.42, q75 0.53]
+  NUM      24 prompts   purity median 1.00  [q25 1.00, q75 1.00]
+  ADJ      18 prompts   purity median 0.42  [q25 0.36, q75 0.61]
+  CCONJ    15 prompts   purity median 0.44  [q25 0.36, q75 0.56]
+  ADV      13 prompts   purity median 0.42  [q25 0.31, q75 0.48]
+  INTJ      5 prompts   purity median 0.50  [q25 0.49, q75 0.59]
+  PART      3 prompts   purity median 0.62  [q25 0.43, q75 0.63]
+  PROPN     3 prompts   purity median 0.49  [q25 0.45, q75 0.71]
+  SCONJ     1 prompts   purity median 0.30  [q25 0.30, q75 0.30]
+
+prompts whose dominant POS CHANGES base->aligned: 81 of 2578
+   PRON -> VERB  20
+   PRON -> AUX  9
+   VERB -> PRON  7
+   VERB -> AUX  7
+   AUX -> VERB  5
+   PRON -> NOUN  4
+   PRON -> ADV  3
+   VERB -> NOUN  3
+
+v6 directedness rated (prompt, word) pairs in this population: 135,114 over 2182 prompts
+  eta^2 of word UPOS (unweighted): 0.022
+  eta^2 of the PROMPT's dominant POS: 0.008
+  eta^2 of PROMPT identity (ceiling for any prompt-level variable): 0.325
+
+  mean directedness by word UPOS:
+    VERB   n=117249  mean 2.49  sd 2.24  share>=4 0.24
+    ADV    n=  6954  mean 1.15  sd 0.84  share>=4 0.02
+    NOUN   n=  6914  mean 2.51  sd 2.47  share>=4 0.24
+    ADJ    n=  3440  mean 1.64  sd 1.66  share>=4 0.09
+    PROPN  n=   557  mean 1.24  sd 1.12  share>=4 0.04
+
+  WITHIN VERB words at VERB-dominant slots: n=110032, mean 2.51, sd 2.26, share>=4 0.25
+    eta^2 of prompt identity within that set: 0.289
+
+  prompt-level: rated-mass-weighted directedness vs base VERB share, n=2182 prompts: Spearman 0.363 (p=8.4e-69)

@@ -27,6 +27,10 @@ for itself. Anything shared between its questions belongs in `malignment/`.
                          a two-lineage pilot. It sat beside three live
                          displacement questions while never having been
                          promoted to a declared one.
+    slot_pos/            arrived 2026-09-23. What part of speech each prompt's
+                         slot summons (mass-weighted, above theta), and whether
+                         `directedness` is just that. A stratifier other
+                         questions read, not yet a claim.
 
 ## What has left
 
