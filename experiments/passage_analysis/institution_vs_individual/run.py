@@ -1,4 +1,4 @@
-"""Code every F21 generation with task.py. -> ~/malignment-data/institution_vs_individual/coded.jsonl
+"""Code every F21 generation with task.py. -> ~/malignment-data/institution_vs_individual/coded_v2.jsonl (v1: coded.jsonl)
 
     python -u run.py --plan          counts, nothing sent
     python -u run.py --run           code everything (resumable: the Task stash
@@ -27,7 +27,7 @@ import task as T  # noqa: E402
 ML = os.path.expanduser("~/github/malign-logits")
 SRC = os.path.join(ML, "data", "f21_institutional_generations.csv")
 #: 20 MB, so outside the repo, beside the exported texts.
-OUT = os.path.expanduser("~/malignment-data/institution_vs_individual/coded.jsonl")
+OUT = os.path.expanduser("~/malignment-data/institution_vs_individual/coded_v2.jsonl")
 
 
 TEXTS = os.path.expanduser("~/malignment-data/institution_vs_individual/f21_texts.jsonl")

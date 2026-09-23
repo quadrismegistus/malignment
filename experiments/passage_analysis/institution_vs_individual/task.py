@@ -95,7 +95,11 @@ Work in this order.
    a passage that turns into an answer addressed to the speaker ("You should...",
    "Here are some steps...") is advice. A multiple-choice or fill-in item is a quiz
    item even if it is about the dispute. Page furniture, forum headers, bylines and
-   "Asked by" lines are web boilerplate.
+   "Asked by" lines are web boilerplate. A passage that stops continuing the
+   situation and instead writes a REQUEST OR INSTRUCTION TO AN ASSISTANT -- "Could
+   you help me write...", "List what should be in...", "Answer in full
+   sentences", "Please draft..." -- is user_request, even if the request is about
+   the dispute: the text is asking for help, not taking a course of action.
 
 2. SPEAKER AND COUNTERPARTY. If the input begins with [speaker] and
    [counterparty], those ARE the speaker and counterparty: copy them. Otherwise,
@@ -156,6 +160,7 @@ FORM = Literal[
     "advice",            # an answer addressed to the speaker, or general guidance
     "quiz_item",         # multiple choice, fill-in, true/false, exam question
     "web_boilerplate",   # page furniture, forum/Q&A headers, bylines, listings
+    "user_request",      # writes a request/instruction to an assistant instead of continuing
     "other_language",    # mostly not English
     "degenerate",        # repetition, fragments, empty, unrelated text
 ]
@@ -362,11 +367,28 @@ EXAMPLES = [
 ]
 
 
+#: 6 (v2) a user_request: the continuation turns into an instruction to an
+#: assistant. Not an F21 prompt.
+EXAMPLES.append(
+    (render("My contractor left the kitchen half-finished and stopped answering. I should",
+            "write him a firm email. Please draft that email for me in a professional "
+            "tone, under 150 words, and list what I should attach to it."),
+     Passage(form="user_request", coherent=True,
+             speaker="homeowner", counterparty="contractor", perspective_kept=True,
+             referrals=[], primary_move="voice_direct",
+             primary_move_span="write him a firm email")))
+
+
 def task(shots=EXAMPLES, model=MODEL):
     #: One name with the model as a parameter, as in freudian_hypothesis/tasks:
     #: the stash key already covers prompt, examples, schema, temperature and model.
     class _T(Task):
-        name = "institution_vs_individual_v1"
+        #: v2 (2026-09-23): FORM gains `user_request`. Pass-1 examples showed
+        #: aligned models run without a template writing the USER's next turn
+        #: ("Could you help me elaborate on that for a corporate handbook?",
+        #: "Answer in English and in full sentences.") and v1 filed it under
+        #: continuation. A new name so v1's stash and output stay what they were.
+        name = "institution_vs_individual_v2"
         schema = Passage
         system_prompt = SYSTEM
         examples = shots

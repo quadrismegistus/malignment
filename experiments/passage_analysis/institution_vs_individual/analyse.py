@@ -31,25 +31,46 @@ each with a two-sided sign test. The DIRECTION hypothesis is two one-line
 predictions, stated here before the data: `outward` rises more on the individual
 side (difference > 0); `inward` rises more on the institution side (< 0).
 Nothing else here is a prediction.
+
+V2 FILTERS, DECLARED 2026-09-23 BEFORE THE V2 CODES EXISTED (RH, after reading
+random pass-1 examples): a generation enters the contrast only if its form is
+continuation or advice (so the new `user_request` form is excluded), it is
+coded `coherent`, AND `perspective_kept` -- a text that re-voices the dispute
+from the other side is not a move by the context's speaker. `perspective_flip`
+is therefore not an outcome under v2; its rate is reported separately.
+
+    python -u analyse.py              v2 codes, v2 filters -> results/analysis_v2.md
+    python -u analyse.py --v1         the pass-1 table as first run -> results/analysis.md
 """
-import collections, json, os
+import collections, json, os, sys
 
 import numpy as np
 from scipy.stats import binomtest
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-SRC = os.path.expanduser("~/malignment-data/institution_vs_individual/coded.jsonl")
-OUT = os.path.join(HERE, "results", "analysis.md")
+V1 = "--v1" in sys.argv
+SRC = os.path.expanduser("~/malignment-data/institution_vs_individual/%s.jsonl"
+                         % ("coded" if V1 else "coded_v2"))
+OUT = os.path.join(HERE, "results", "analysis.md" if V1 else "analysis_v2.md")
 
 LAST = {"olmo": "rlvr", "olmo-tiny": "rlvr", "tulu": "rlvr", "zephyr": "dpo",
         "amber": "dpo", "pythia": "dpo", "qwen": "dpo", "qwen-tiny": "dpo",
         "smol": "dpo", "deepseek-7b": "dpo"}
 KEEP_FORM = {"continuation", "advice"}
+FORMS = ["continuation", "advice", "user_request", "quiz_item", "web_boilerplate",
+         "other_language", "degenerate"]
 TAKEN = {"recommended", "marked_correct"}
 OUTCOMES = ["any", "outward", "inward", "channel", "authority", "move_exit",
             "move_voice_direct", "move_third_party", "move_self_help",
-            "move_accept", "perspective_flip"]
+            "move_accept"] + (["perspective_flip"] if "--v1" in sys.argv else [])
 PRED = {"outward": "> 0", "inward": "< 0"}
+
+
+def keep(c):
+    """The form filter (v1), plus coherent and perspective_kept (v2)."""
+    if c["form"] not in KEEP_FORM:
+        return False
+    return V1 or (c["coherent"] and c["perspective_kept"])
 
 
 def pair_of(key):
@@ -79,7 +100,7 @@ def sign(xs):
 def main():
     rows = [json.loads(l) for l in open(SRC)]
     rows = [r for r in rows if r["coded"]]
-    L = ["# institution_vs_individual: the declared contrast", "",
+    L = ["# institution_vs_individual: the declared contrast (%s)" % ("pass 1, v1 codes, form filter only" if V1 else "v2 codes, form + coherent + perspective_kept"), "",
          "Producer `analyse.py`, written before any coded row was read. %d coded rows." % len(rows), ""]
 
     # ---- form, per arm --------------------------------------------------------
@@ -95,12 +116,12 @@ def main():
         if a:
             forms[a][r["coded"]["form"]] += 1
     L += ["## Form, by arm", "", "| arm | n | " + " | ".join(
-        ["continuation", "advice", "quiz_item", "web_boilerplate", "other_language", "degenerate"]) + " |",
-          "|---|---|" + "---|" * 6]
+        FORMS) + " |",
+          "|---|---|" + "---|" * len(FORMS)]
     for a in ("base", "aligned", "frontier"):
         n = sum(forms[a].values())
         L.append("| %s | %d | " % (a, n) + " | ".join("%.1f%%" % (100 * forms[a][f] / n) for f in
-                 ["continuation", "advice", "quiz_item", "web_boilerplate", "other_language", "degenerate"]) + " |")
+                 FORMS) + " |")
     L.append("")
     qb = collections.defaultdict(lambda: [0, 0])
     for r in rows:
@@ -111,12 +132,27 @@ def main():
     d = [qb[(f, "aligned")][0] / qb[(f, "aligned")][1] - qb[(f, "base")][0] / qb[(f, "base")][1] for f in LAST]
     up, dn, p = sign(d)
     L += ["Quiz share, aligned minus base, by family: %d up / %d down, p=%.3g." % (up, dn, p), ""]
+    ex = collections.defaultdict(collections.Counter)
+    for r in rows:
+        a = arm(r)
+        if a and r["coded"]["form"] in KEEP_FORM:
+            c = r["coded"]
+            ex[(a, r["side"])]["kept_form"] += 1
+            ex[(a, r["side"])]["incoherent"] += not c["coherent"]
+            ex[(a, r["side"])]["perspective_flip"] += not c["perspective_kept"]
+    L += ["Among continuation/advice texts: share incoherent / share perspective-flipped "
+          "(%s):" % ("reported, not excluded" if V1 else "EXCLUDED under v2"), ""]
+    for k in sorted(ex):
+        e = ex[k]
+        L.append("- %s %s: %.1f%% / %.1f%% of %d" % (k[0], k[1], 100 * e["incoherent"] / e["kept_form"],
+                                                    100 * e["perspective_flip"] / e["kept_form"], e["kept_form"]))
+    L.append("")
 
     # ---- the contrast ---------------------------------------------------------
     acc = collections.defaultdict(lambda: collections.defaultdict(list))  # (fam, pair, side, arm) -> outcome -> [0/1]
     for r in rows:
         a = arm(r)
-        if a not in ("base", "aligned") or r["coded"]["form"] not in KEEP_FORM:
+        if a not in ("base", "aligned") or not keep(r["coded"]):
             continue
         o = outcomes(r["coded"])
         k = (r["family"], pair_of(r["key"]), r["side"], a)
@@ -160,7 +196,7 @@ def main():
     # ---- frontier endpoint ----------------------------------------------------
     fr = collections.defaultdict(lambda: collections.defaultdict(list))
     for r in rows:
-        if arm(r) != "frontier" or r["coded"]["form"] not in KEEP_FORM:
+        if arm(r) != "frontier" or not keep(r["coded"]):
             continue
         for name, v in outcomes(r["coded"]).items():
             fr[(r["family"], pair_of(r["key"]), r["side"])][name].append(v)

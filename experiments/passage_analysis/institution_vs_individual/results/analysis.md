@@ -1,16 +1,25 @@
-# institution_vs_individual: the declared contrast
+# institution_vs_individual: the declared contrast (pass 1, v1 codes, form filter only)
 
 Producer `analyse.py`, written before any coded row was read. 20387 coded rows.
 
 ## Form, by arm
 
-| arm | n | continuation | advice | quiz_item | web_boilerplate | other_language | degenerate |
-|---|---|---|---|---|---|---|---|
-| base | 6000 | 55.9% | 11.6% | 9.4% | 1.2% | 1.9% | 20.1% |
-| aligned | 5995 | 49.1% | 29.4% | 13.6% | 0.6% | 1.5% | 5.8% |
-| frontier | 2400 | 2.3% | 97.5% | 0.1% | 0.0% | 0.1% | 0.0% |
+| arm | n | continuation | advice | user_request | quiz_item | web_boilerplate | other_language | degenerate |
+|---|---|---|---|---|---|---|---|---|
+| base | 6000 | 55.9% | 11.6% | 0.0% | 9.4% | 1.2% | 1.9% | 20.1% |
+| aligned | 5995 | 49.1% | 29.4% | 0.0% | 13.6% | 0.6% | 1.5% | 5.8% |
+| frontier | 2400 | 2.3% | 97.5% | 0.0% | 0.1% | 0.0% | 0.1% | 0.0% |
 
 Quiz share, aligned minus base, by family: 8 up / 1 down, p=0.0391.
+
+Among continuation/advice texts: share incoherent / share perspective-flipped (reported, not excluded):
+
+- aligned individual: 3.0% / 9.0% of 2417
+- aligned institution: 2.9% / 21.6% of 2293
+- base individual: 9.7% / 8.0% of 2039
+- base institution: 9.8% / 23.3% of 2008
+- frontier individual: 0.0% / 5.9% of 1197
+- frontier institution: 0.0% / 16.0% of 1197
 
 ## Base -> aligned, individual side minus institution side
 
