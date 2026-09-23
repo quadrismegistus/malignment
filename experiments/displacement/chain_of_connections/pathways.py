@@ -225,7 +225,19 @@ def main(argv=None):
                                 + ("_%s" % a.stage if a.stage != "base" else "")
                                 + ("" if a.min_cos is None
                                    else "_mc%02d" % round(a.min_cos * 100))
+                                #: **THE SPACING MUST BE IN THE NAME.** Three
+                                #: runs at different ranksep overwrote one
+                                #: file and only the last survived, so a
+                                #: comparison of three plates was a
+                                #: comparison of one. `threshold.py` already
+                                #: carried rs/nh; this did not.
                                 + ("_clean" if a.clean else "")
+                                + (("_rs%02d_nh%02d"
+                                    % (round(a.ranksep * 100),
+                                       round(a.node_height * 100)))
+                                   if a.clean and (a.ranksep != 0.08
+                                                   or a.node_height != 0.10)
+                                   else "")
                                 + ("_ex%d" % len(a.exclude.split(","))
                                    if a.exclude else ""))
     base = os.path.join(FIGS, "pathways_" + tag)
