@@ -359,8 +359,24 @@ def draw(lev, pairs, meta, stat, out_path, rung_labels, pub=False,
     ytitle = "\n".join(
         ["Probability of word following"]
         + textwrap.wrap('\u201c%s\u201d' % meta["prompt"].replace("\n", " "), 40))
-    COLORS = {"faller": "#c92a2a", "riser": "#1c7ed6",
-              "other": PUB_GRAY if pub else "#868e96"}
+    #: **TWO TONES, NOT THREE. RH, 2026-09-16.** Both named words solid black
+    #: -- points, lines, error bars and labels -- and the flat bundle at
+    #: #808080 throughout. 100% against 49.8% ink: one separation of 50 points,
+    #: well past CI's 20-point minimum, with the only halftone comfortably
+    #: inside the 20-80% band.
+    #:
+    #: **kill AND scream ARE NOT DISTINGUISHED BY TONE, DELIBERATELY.** They
+    #: cross, so each is traceable from either end, and the word sits at the
+    #: end of its own line. A third grey to separate them would have bought a
+    #: distinction the crossing already makes, at the cost of pushing one of
+    #: them toward the flat bundle it is supposed to stand apart from.
+    _GRAY_PUB = "#808080"
+    COLORS = ({"faller": "#000000", "riser": "#000000", "other": _GRAY_PUB}
+              if pub else
+              {"faller": "#c92a2a", "riser": "#1c7ed6", "other": "#868e96"})
+    #: every de-emphasised mark in the pub render uses the same value, so the
+    #: bundle's line, point and label cannot drift apart from each other
+    GRAY = _GRAY_PUB if pub else PUB_GRAY
 
     if not pub:
         p = (ggplot(lev, aes("position", "central"))
@@ -394,7 +410,7 @@ def draw(lev, pairs, meta, stat, out_path, rung_labels, pub=False,
         e_rest = lev[lev["role"] == "other"]
         p = (ggplot(lev, aes("position", "central"))
              + geom_segment(aes(x="x", y="y", xend="xend", yend="yend"),
-                            data=rest, color=PUB_GRAY, size=PUB_RULE_PT)
+                            data=rest, color=GRAY, size=PUB_RULE_PT)
              #: ALL SOLID, RH 2026-09-15. The dash was carrying the grayscale
              #: distinction; with it gone the two named lines differ from the
              #: gray ones by WEIGHT (1.0 pt against 0.5) and from each other by
@@ -412,7 +428,7 @@ def draw(lev, pairs, meta, stat, out_path, rung_labels, pub=False,
              #: so their flatness is still visible -- what goes is the
              #: uncertainty on a quantity nothing in the text claims.
              + (geom_errorbar(aes(ymin="lo", ymax="hi"), data=e_rest,
-                              color=PUB_GRAY, width=0.03, size=PUB_RULE_PT)
+                              color=GRAY, width=0.03, size=PUB_RULE_PT)
                 if intervals == "all" else _noop())
              #: **THE GRAY POINTS GO UNDER THE NAMED ERROR BARS TOO.** Putting
              #: the gray POINT layer after the named ERRORBAR layer left gray
@@ -421,7 +437,7 @@ def draw(lev, pairs, meta, stat, out_path, rung_labels, pub=False,
              #: is not. All gray, then all named. Nothing is hidden by it: a
              #: 0.5 pt whisker crossing a 1.2 pt dot still leaves the dot
              #: readable, so position survives the restacking.
-             + geom_point(data=e_rest, color=PUB_GRAY, size=1.2)
+             + geom_point(data=e_rest, color=GRAY, size=1.2)
              + (geom_errorbar(aes(ymin="lo", ymax="hi", color="role"),
                               data=e_named, width=0.03, size=PUB_RULE_PT)
                 if intervals in ("all", "named") else _noop())
@@ -431,7 +447,7 @@ def draw(lev, pairs, meta, stat, out_path, rung_labels, pub=False,
              #: for the key alike.
              + geom_point(aes(color="role"), data=e_named, size=1.2)
              + geom_text(aes(x="position", y="label_y", label="word"),
-                         data=ends[ends["role"] == "other"], color=PUB_GRAY,
+                         data=ends[ends["role"] == "other"], color=GRAY,
                          ha="left", nudge_x=0.04, size=PUB_FONT_PT, family=fnt)
              + geom_text(aes(x="position", y="label_y", label="word",
                              color="role"),
@@ -442,7 +458,16 @@ def draw(lev, pairs, meta, stat, out_path, rung_labels, pub=False,
              #: key, and a key clipped by the panel edge is not one
              #: sized to the longest word at 9 pt, not guessed: a 6-character
              #: label is ~0.38 in, which is ~0.30 of a rung step on this panel.
+             #: **`minor_breaks=[]` AT THE SCALE, NOT `axis_ticks_minor_x` IN
+             #: THE THEME.** With majors at 0 and 1 the scale generates a minor
+             #: break at 0.5, drawn as an unlabelled tick between "Base models"
+             #: and "Aligned models" that reads as a third, nameless rung.
+             #: Blanking the themeable did NOT remove it: `pub_theme` also sets
+             #: `axis_ticks` explicitly and the parent wins over the child.
+             #: Removing the BREAK removes the tick at source -- checked, the
+             #: axis goes from minor ticks [0.5] to [].
              + scale_x_continuous(breaks=list(range(meta["n_rungs"])),
+                                  minor_breaks=[],
                                   labels=rung_labels,
                                   limits=(-0.08, last_pos + 0.34))
              #: PER CENT, not a decimal fraction: `10%` reads at a glance where
@@ -488,8 +513,9 @@ def draw(lev, pairs, meta, stat, out_path, rung_labels, pub=False,
                      panel_grid_major_y=element_line(color="#e9ecef",
                                                      size=PUB_RULE_PT)))
     os.makedirs(os.path.dirname(out_path), exist_ok=True)
-    p.save(out_path, dpi=300, verbose=False)
-    return out_path
+    #: PNG and PDF together -- see malignment.figure.save
+    from malignment.figure import save as _save
+    return _save(p, out_path)[0]
 
 
 #: ── THE PRODUCER DECLARES ITSELF, AND THE APP READS THE DECLARATION.
@@ -579,6 +605,12 @@ PLOT = {
                  "as the legend), encloses the panel, one sans-serif at one "
                  "size, dashes the riser so it survives grayscale, and draws "
                  "at FINAL size 4.5 x 3.15 in"},
+        {"name": "plus_top", "type": "int", "default": 0, "min": 0, "max": 20,
+         "label": "+ top N by mass",
+         "help": "with `words`: keep the named ones AND add this many by mass. "
+                 "A named pair is often the top of its own distribution, so a "
+                 "curated figure can come back with two lines and no context -- "
+                 "and the flat words are what make a mover legible AS a mover"},
         {"name": "words", "type": "text", "default": "", "label": "words",
          "help": "optional comma-separated list; LABELLED as curated, because "
                  "intervals on words picked because they moved are conditioned "
@@ -589,7 +621,7 @@ PLOT = {
 
 def render(prompt, units="endpoints", top=6, stat="median", words="",
            pub=False, select="pooled", intervals="named", repel="auto",
-           yfloor="zero", height=None, graylabel="cluster"):
+           yfloor="zero", height=None, graylabel="cluster", plus_top=0):
     """Run the whole thing and return `(path, info)`. The app's entry point.
 
     Shares every line of its arithmetic with the CLI below -- there is no second
@@ -599,6 +631,7 @@ def render(prompt, units="endpoints", top=6, stat="median", words="",
     wl = [w.strip() for w in words.split(",") if w.strip()] if words else None
     seq, unit_label = units_for(units, None)
     rows, meta = movement.contrast(prompt, seq, top=int(top), words=wl,
+                                   plus_top=int(plus_top or 0),
                                    select_union=(str(select) == "union"),
                                    select_pooled=(str(select) == "pooled"))
     lev, pairs = build(rows, meta, stat)
@@ -636,6 +669,12 @@ def slug(s, n=48):
 def main():
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("prompt")
+    ap.add_argument("--plus-top", type=int, default=0,
+                    help="with --words: keep the named words AND add this many "
+                         "by mass, deduped. The named half is the caller's, the "
+                         "rest is declared and blind to movement, and the "
+                         "subtitle says `top N by mass + M named` so both "
+                         "warrants travel. 0 (default) leaves --words curated.")
     ap.add_argument("--words", default=None,
                     help="comma-separated; LABELLED as a curated list")
     ap.add_argument("--intervals", default="all",
@@ -691,7 +730,7 @@ def main():
     units, unit_label = units_for(args.units, args.pair)
     words = [w.strip() for w in args.words.split(",")] if args.words else None
     rows, meta = movement.contrast(args.prompt, units, top=args.top,
-                                   words=words,
+                                   words=words, plus_top=args.plus_top,
                                    select_union=(args.select == "union"),
                                    select_pooled=(args.select == "pooled"))
     print("prompt    %r" % meta["prompt"])
