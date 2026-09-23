@@ -3846,7 +3846,14 @@
    ],
    "recovery": "image vllm/vllm-openai:v0.22.1 on an sm_80+ card (profile vllm022_a100). CONFIRMED WORKING 12 Aug: 1782/1796 rows.",
    "do_not": "Do NOT pip-install an old vllm onto a new image. It fails in ABI order through transformers, deep_ep's NCCL symbol, flashinfer-jit-cache and a plan() TypeError, and generation still dies after all four fixes. Take a contemporary IMAGE.",
-   "card_requirement": "Turing will NOT do: the model loads and generates at small batch, then dies in FlashInfer's paged-KV prefill (BatchPrefillWithPagedKVCacheRun, status == cudaSuccess). VLLM_ATTENTION_BACKEND is IGNORED in 0.22.1, so there is no backend workaround."
+   "card_requirement": "Turing will NOT do: the model loads and generates at small batch, then dies in FlashInfer's paged-KV prefill (BatchPrefillWithPagedKVCacheRun, status == cudaSuccess). VLLM_ATTENTION_BACKEND is IGNORED in 0.22.1, so there is no backend workaround.",
+   "observed_2026_09_23": [
+    {
+     "status": "works_pinned",
+     "note": "vllm_generate passed no revision before 89cec931, so Aquila2-7B generated from BAAI's re-tokenised main; regenerated at the roster pin 9c76e143 (revision + tokenizer_revision).",
+     "source": "institution_vs_individual regeneration fleet, 2026-09-23: RunPod A100-80GB, runpod/pytorch:1.0.2-cu1281-torch280 image + pip vllm==0.22.1 (torch 2.11.0+cu130) + transformers 4.57.1, generation via malignment.vllm_generate (render=ids_v2). experiments/passage_analysis/institution_vs_individual/fleet/"
+    }
+   ]
   },
   "BaichuanForCausalLM": {
    "status": "removed",
@@ -3866,7 +3873,14 @@
     "inceptionai/jais-family-6p7b-chat"
    ],
    "recovery": "image vllm/vllm-openai:v0.22.0 — NOT v0.22.1. The Aquila recipe is one tag too late for this one, and the difference is invisible unless the error message is read exactly.",
-   "card_requirement": "assume sm_80+, same FlashInfer era as Aquila"
+   "card_requirement": "assume sm_80+, same FlashInfer era as Aquila",
+   "observed_2026_09_23": [
+    {
+     "status": "works",
+     "note": "Generated 360/360 on BOTH arms on pip-installed vllm 0.22.1 + tf 4.57.1 (runpod/pytorch image), contrary to 'last release hosting JAIS is 0.22.0'. Record as observed, cause not investigated.",
+     "source": "institution_vs_individual regeneration fleet, 2026-09-23: RunPod A100-80GB, runpod/pytorch:1.0.2-cu1281-torch280 image + pip vllm==0.22.1 (torch 2.11.0+cu130) + transformers 4.57.1, generation via malignment.vllm_generate (render=ids_v2). experiments/passage_analysis/institution_vs_individual/fleet/"
+    }
+   ]
   },
   "RwkvForCausalLM": {
    "status": "never_implemented",
@@ -3875,7 +3889,14 @@
     "RWKV/rwkv-raven-7b"
    ],
    "recovery": "NONE via vLLM at any version. PR #11193 was closed unmerged and covered RWKV6, not RWKV-4. Collecting this pair means the HuggingFace generate() path — a DIFFERENT INSTRUMENT, not a bigger box.",
-   "do_not": "Do not spend on hardware for this. No card and no image changes it."
+   "do_not": "Do not spend on hardware for this. No card and no image changes it.",
+   "observed_2026_09_23": [
+    {
+     "status": "unsupported",
+     "note": "Confirmed unsupported at 0.22.1 (both arms failed at load). HF path only.",
+     "source": "institution_vs_individual regeneration fleet, 2026-09-23: RunPod A100-80GB, runpod/pytorch:1.0.2-cu1281-torch280 image + pip vllm==0.22.1 (torch 2.11.0+cu130) + transformers 4.57.1, generation via malignment.vllm_generate (render=ids_v2). experiments/passage_analysis/institution_vs_individual/fleet/"
+    }
+   ]
   },
   "PhariaForCausalLM": {
    "status": "never_implemented",
@@ -3899,7 +3920,14 @@
    "why_the_symptoms_fit": "Sequential small-kernel launches are launch-bound, not compute-bound: the card idles between hundreds of tiny elementwise kernels, which is exactly a steady 20-28% utilisation. And SCORING is disproportionately worse than generation because prompt_logprobs teacher-forcing is pure PREFILL over the full stored sequence -- entirely the O(seq_len) loop, with no O(1)-per-token decode phase to amortise it.",
    "cheap_wins": "NONE FOUND. Batch width does not reduce the number of sequential timesteps. VLLM_USE_V1 targets the native hybrid/Mamba cache path, which this model never enters because it is not registered at all.",
    "alternatives": "JAX/Flax official repo is the ONLY path with a source-confirmed FUSED kernel (Pallas). MLX has recurrentgemma.py but with the SAME Python-loop scan, and its batch_generate does not expose per-token logprobs (open issue ml-explore/mlx-lm#1358). llama.cpp does NOT support the architecture at all (issue #6564 closed unimplemented; llama-arch.cpp has no Griffin entry). HF transformers directly is the same code vLLM already falls back to.",
-   "unknown": "Whether the Pallas RG-LRU kernel runs on non-TPU. And NO public RecurrentGemma GPU tokens/sec figure exists anywhere, so our ~255 tok/s is uncompared."
+   "unknown": "Whether the Pallas RG-LRU kernel runs on non-TPU. And NO public RecurrentGemma GPU tokens/sec figure exists anywhere, so our ~255 tok/s is uncompared.",
+   "observed_2026_09_23": [
+    {
+     "status": "unsupported",
+     "note": "vLLM 0.22.1 REFUSES it outright: ValidationError 'Model architectures [RecurrentGemmaForCausalLM] are not supported for now'. (0.27.1 instead fell back silently to HF reference code at ~255 tok/s.) Not generated; HF path only.",
+     "source": "institution_vs_individual regeneration fleet, 2026-09-23: RunPod A100-80GB, runpod/pytorch:1.0.2-cu1281-torch280 image + pip vllm==0.22.1 (torch 2.11.0+cu130) + transformers 4.57.1, generation via malignment.vllm_generate (render=ids_v2). experiments/passage_analysis/institution_vs_individual/fleet/"
+    }
+   ]
   },
   "Zamba2ForCausalLM": {
    "status": "needs_environment",
@@ -3922,6 +3950,92 @@
    "confounds_eliminated": "Identical traceback reproduced on a verified-clean card at gpu_memory_utilization=0.35 with enforce_eager=True. Not memory, not dtype, not eager mode.",
    "route_CORRECTION_20260812": "THE `nightly` TAG IS NOT NEWER THAN THE RELEASE. Measured on a launched container: vllm/vllm-openai:nightly reports 0.26.1rc1.dev668+g3ee2df303, which PREDATES the 0.27.1 we already run. A fix that postdates 0.27.1 cannot be in it, so the nightly route as specified CANNOT recover this pair and was never going to. Found only because the build was read from the RUNNING CONTAINER at launch rather than inferred from the tag -- @registrar's [5595] condition, which earned its keep immediately.",
    "route_status": "BLOCKED — no known image carries the fix; needs a source build from main, which is a different cost class."
+  },
+  "MPTForCausalLM": {
+   "models": [
+    "gl198976/mpt-7b",
+    "gl198976/mpt-7b-instruct"
+   ],
+   "status": "failed",
+   "observed_2026_09_23": [
+    {
+     "status": "failed",
+     "note": "0.22.1 + tf 4.57.1: AttributeError 'MPTConfig' object has no attribute 'num_attention_heads' at load (trust_remote_code=True). Not tried with remote code off or tf5.",
+     "source": "institution_vs_individual regeneration fleet, 2026-09-23: RunPod A100-80GB, runpod/pytorch:1.0.2-cu1281-torch280 image + pip vllm==0.22.1 (torch 2.11.0+cu130) + transformers 4.57.1, generation via malignment.vllm_generate (render=ids_v2). experiments/passage_analysis/institution_vs_individual/fleet/"
+    }
+   ]
+  },
+  "OlmoHybridForCausalLM": {
+   "models": [
+    "allenai/Olmo-Hybrid-7B",
+    "allenai/Olmo-Hybrid-Instruct-DPO-7B"
+   ],
+   "status": "failed",
+   "observed_2026_09_23": [
+    {
+     "status": "failed",
+     "note": "tf 4.57.1: base KeyError 'rope_type'; instruct 'Tokenizer class TokenizersBackend does not exist' (a tf5 class). Needs tf>=5; the vLLM loader is separately broken through 0.27.1. Not generated.",
+     "source": "institution_vs_individual regeneration fleet, 2026-09-23: RunPod A100-80GB, runpod/pytorch:1.0.2-cu1281-torch280 image + pip vllm==0.22.1 (torch 2.11.0+cu130) + transformers 4.57.1, generation via malignment.vllm_generate (render=ids_v2). experiments/passage_analysis/institution_vs_individual/fleet/"
+    }
+   ]
+  },
+  "Gemma2ForCausalLM": {
+   "models": [
+    "google/gemma-2-9b",
+    "google/gemma-2-9b-it"
+   ],
+   "status": "works_bf16",
+   "observed_2026_09_23": [
+    {
+     "status": "works_bf16",
+     "note": "float16 REFUSED by vLLM 0.22.1 ('does not support float16. Reason: Numerical instability'); bfloat16 generated 360/360 on both arms.",
+     "source": "institution_vs_individual regeneration fleet, 2026-09-23: RunPod A100-80GB, runpod/pytorch:1.0.2-cu1281-torch280 image + pip vllm==0.22.1 (torch 2.11.0+cu130) + transformers 4.57.1, generation via malignment.vllm_generate (render=ids_v2). experiments/passage_analysis/institution_vs_individual/fleet/"
+    }
+   ]
+  },
+  "FalconH1ForCausalLM": {
+   "models": [
+    "tiiuae/Falcon-H1-7B-Base",
+    "tiiuae/Falcon-H1-7B-Instruct",
+    "tiiuae/Falcon-H1-1.5B-Base",
+    "tiiuae/Falcon-H1-1.5B-Instruct"
+   ],
+   "status": "works_bf16",
+   "observed_2026_09_23": [
+    {
+     "status": "works_bf16",
+     "note": "float16 on 0.22.1: Falcon-H1-7B-Base wrote 360/360 EMPTY passages with exit 0 (the NaN-logit failure, generation form). bfloat16: all four arms 360/360.",
+     "source": "institution_vs_individual regeneration fleet, 2026-09-23: RunPod A100-80GB, runpod/pytorch:1.0.2-cu1281-torch280 image + pip vllm==0.22.1 (torch 2.11.0+cu130) + transformers 4.57.1, generation via malignment.vllm_generate (render=ids_v2). experiments/passage_analysis/institution_vs_individual/fleet/"
+    }
+   ]
+  },
+  "FalconForCausalLM": {
+   "models": [
+    "tiiuae/falcon-7b",
+    "tiiuae/falcon-7b-instruct"
+   ],
+   "status": "works_no_remote_code",
+   "observed_2026_09_23": [
+    {
+     "status": "works_no_remote_code",
+     "note": "With trust_remote_code=True the repo's auto_map loads a legacy RW config and 0.22.1's Falcon loader dies: 'FalconConfig' object has no attribute 'rope_parameters' (under tf 4.57.1 AND 5.10.2). trust_remote_code=False + transformers 5.10.2: both arms 360/360 (vllm_generate.NO_REMOTE_CODE).",
+     "source": "institution_vs_individual regeneration fleet, 2026-09-23: RunPod A100-80GB, runpod/pytorch:1.0.2-cu1281-torch280 image + pip vllm==0.22.1 (torch 2.11.0+cu130) + transformers 4.57.1, generation via malignment.vllm_generate (render=ids_v2). experiments/passage_analysis/institution_vs_individual/fleet/"
+    }
+   ]
+  },
+  "InternLM2ForCausalLM": {
+   "models": [
+    "internlm/internlm2-base-7b",
+    "internlm/internlm2-chat-7b"
+   ],
+   "status": "works",
+   "observed_2026_09_23": [
+    {
+     "status": "works",
+     "note": "tf 4.57.1 + sentencepiece 0.2.1 with tiktoken UNINSTALLED: both arms 360/360. With sentencepiece latest + tiktoken present: 'Converting from SentencePiece and Tiktoken failed'.",
+     "source": "institution_vs_individual regeneration fleet, 2026-09-23: RunPod A100-80GB, runpod/pytorch:1.0.2-cu1281-torch280 image + pip vllm==0.22.1 (torch 2.11.0+cu130) + transformers 4.57.1, generation via malignment.vllm_generate (render=ids_v2). experiments/passage_analysis/institution_vs_individual/fleet/"
+    }
+   ]
   }
  },
  "engine_versions": {
@@ -3930,7 +4044,8 @@
   "0.23.0": "last release hosting Baichuan",
   "0.24.0": "last release hosting Aquila",
   "0.27.1": "PyPI newest as of Aug 2026; the passage fleet's default image",
-  "nightly": "vllm/vllm-openai:nightly == 0.26.1rc1.dev668+g3ee2df303 as of 12 Aug 2026 -- BEHIND the 0.27.1 release. Do not assume 'nightly' means 'newest'."
+  "nightly": "vllm/vllm-openai:nightly == 0.26.1rc1.dev668+g3ee2df303 as of 12 Aug 2026 -- BEHIND the 0.27.1 release. Do not assume 'nightly' means 'newest'.",
+  "0.22.1_pip_runpod_2026_09_23": "pip vllm==0.22.1 on runpod/pytorch:1.0.2-cu1281-torch280: brings torch 2.11.0+cu130; unpinned `-e .` then pulls transformers 5.17 (xgrammar needs <5), pinned back to 4.57.1. 43 of 50 endpoint lineages generated. See engine_support.*.observed_2026_09_23."
  },
  "tokenizer_class": {
   "_note": "NOT architecture x engine — these load and host fine and die in TOKENIZATION or DETOKENIZATION. Kept here because the operational question ('will this fleet lose the pair?') is the same one.",
