@@ -19,6 +19,8 @@ controls malign asked for:
                 purity >= 0.6, from slot_pos/results/prompt_pos_en.csv); and
                 grievance frames split at the median of their base VERB share,
                 since they are the least verbal rated slots (malign)
+    charge      each family again by lift third (RH), cut at the tertiles of
+                the lift of this table's rated rows
 
 It is a REPLICATION of a pattern already seen, under a declared rule and a
 control, not a blind test. The drive and grievance directions were known when
@@ -56,7 +58,8 @@ def family(p):
 def main():
     from scipy.stats import binomtest
     from gated_levels import GATE, SRC
-    from malignment import roster
+    from malignment import roster, charge
+    lpl = charge.lifts_per_lineage()
     keep = {"%s>%s" % (b, a) for b, a in roster.endpoints()[0].items()}
     pos = {}
     with open(SLOT_POS, encoding="utf-8") as fh:
@@ -71,6 +74,7 @@ def main():
     }
     acc = {}   # (stratum, family) -> lineage -> [moves]
     prompts = {}
+    rows = []
     with gzip.open(SRC % "contextual", "rt") as fh:
         head = fh.readline().rstrip("\n").split("\t")
         ix = {k: i for i, k in enumerate(head)}
@@ -88,6 +92,7 @@ def main():
             except ValueError:
                 continue
             p = f[ix["prompt"]]
+            rows.append((lin, p, a - b, lpl.get((p, f[ix["base"]]))))
             fam = family(p)
             groups = [(s, fam) for s, test in strata.items() if test(p)]
             if fam == "grievance" and p in pos and gmed is not None:
@@ -97,6 +102,18 @@ def main():
                 acc.setdefault(g, {}).setdefault(lin, []).append(a - b)
                 prompts.setdefault(g, set()).add(p)
 
+    lifts = sorted(r[3] for r in rows if r[3] is not None)
+    lo, hi = lifts[len(lifts) // 3], lifts[2 * len(lifts) // 3]
+    for lin, p, mv, lf in rows:
+        if lf is None:
+            continue
+        band = "low lift" if lf <= lo else ("mid lift" if lf <= hi else "high lift")
+        fam = family(p)
+        for s, test in strata.items():
+            if test(p):
+                g = (s + ", " + band, fam)
+                acc.setdefault(g, {}).setdefault(lin, []).append(mv)
+                prompts.setdefault(g, set()).add(p)
     lines = ["# %s by kind of frame" % SCALE, "",
              "Declared grouping and strata: see the producer's docstring. A REPLICATION "
              "under a declared rule, not a blind test. Move = aligned minus base level, "
@@ -112,6 +129,8 @@ def main():
                      % (g[0], g[1], len(prompts[g]), len(per), st.median(per), up, dn, p))
     if gmed is not None:
         lines += ["", "Grievance frames split at their median base VERB share, %.3f." % gmed]
+    lines += ["Lift thirds cut at %+.3f and %+.3f over this table's rated rows; a family's"
+              " prompt can sit in more than one third across lineages." % (lo, hi)]
     open(OUT, "w").write("\n".join(lines) + "\n")
     print("\n".join(lines))
 
