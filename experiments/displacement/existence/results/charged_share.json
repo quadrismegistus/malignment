@@ -1,0 +1,307 @@
+{
+ "built": "2026-09-15 22:57",
+ "n_lineages": 50,
+ "n_cells": 109591,
+ "per_lineage": [
+  {
+   "lineage": "01-ai/Yi-1.5-9B>01-ai/Yi-1.5-9B-Chat",
+   "n_cells": 2184,
+   "base": 0.08141523004483493,
+   "aligned": 0.07182399545297535
+  },
+  {
+   "lineage": "BAAI/Aquila2-7B>BAAI/AquilaChat2-7B",
+   "n_cells": 2185,
+   "base": 0.08098784560084261,
+   "aligned": 0.07226115451102506
+  },
+  {
+   "lineage": "BSC-LT/salamandra-7b>BSC-LT/salamandra-7b-instruct",
+   "n_cells": 2203,
+   "base": 0.07891271661969614,
+   "aligned": 0.07448990284261608
+  },
+  {
+   "lineage": "EleutherAI/pythia-2.8b>ContextualAI/archangel_sft-dpo_pythia2-8b",
+   "n_cells": 2146,
+   "base": 0.06640438253452619,
+   "aligned": 0.06809469308102942
+  },
+  {
+   "lineage": "EleutherAI/pythia-6.9b>lomahony/eleuther-pythia6.9b-hh-dpo",
+   "n_cells": 2162,
+   "base": 0.07125887440226521,
+   "aligned": 0.06895247218087822
+  },
+  {
+   "lineage": "HuggingFaceTB/SmolLM2-360M>HuggingFaceTB/SmolLM2-360M-Instruct",
+   "n_cells": 2188,
+   "base": 0.06043810684287822,
+   "aligned": 0.05194027841379248
+  },
+  {
+   "lineage": "HuggingFaceTB/SmolLM3-3B-Base>HuggingFaceTB/SmolLM3-3B",
+   "n_cells": 2185,
+   "base": 0.08537735728650887,
+   "aligned": 0.08240630455495629
+  },
+  {
+   "lineage": "LLM360/Amber>LLM360/AmberSafe",
+   "n_cells": 2219,
+   "base": 0.07470387367101697,
+   "aligned": 0.03859424195941294
+  },
+  {
+   "lineage": "OpenLLM-France/Lucie-7B>OpenLLM-France/Lucie-7B-Instruct-v1.1",
+   "n_cells": 2210,
+   "base": 0.07477591667398856,
+   "aligned": 0.04986419324384816
+  },
+  {
+   "lineage": "Qwen/Qwen2.5-0.5B>Qwen/Qwen2.5-0.5B-Instruct",
+   "n_cells": 2208,
+   "base": 0.04870444128416714,
+   "aligned": 0.044334729836692545
+  },
+  {
+   "lineage": "Qwen/Qwen2.5-7B>Qwen/Qwen2.5-7B-Instruct",
+   "n_cells": 2158,
+   "base": 0.07503433938030556,
+   "aligned": 0.07584352379231388
+  },
+  {
+   "lineage": "Qwen/Qwen3-8B-Base>Qwen/Qwen3-8B",
+   "n_cells": 2140,
+   "base": 0.07696771875324956,
+   "aligned": 0.06293668546093406
+  },
+  {
+   "lineage": "RWKV/rwkv-4-7b-pile>RWKV/rwkv-raven-7b",
+   "n_cells": 2159,
+   "base": 0.076896444890041,
+   "aligned": 0.0798569813251928
+  },
+  {
+   "lineage": "TinyLlama/TinyLlama-1.1B-intermediate-step-1431k-3T>TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+   "n_cells": 2187,
+   "base": 0.069951118544587,
+   "aligned": 0.06326750266212715
+  },
+  {
+   "lineage": "Zyphra/Zamba2-7B>Zyphra/Zamba2-7B-Instruct",
+   "n_cells": 2137,
+   "base": 0.08970385302051088,
+   "aligned": 0.08638821694053594
+  },
+  {
+   "lineage": "allenai/OLMo-2-0425-1B>allenai/OLMo-2-0425-1B-Instruct",
+   "n_cells": 2258,
+   "base": 0.07380861259071013,
+   "aligned": 0.05749223894517632
+  },
+  {
+   "lineage": "allenai/OLMoE-1B-7B-0125>allenai/OLMoE-1B-7B-0125-Instruct",
+   "n_cells": 2192,
+   "base": 0.08718874944426404,
+   "aligned": 0.07344092090444962
+  },
+  {
+   "lineage": "allenai/Olmo-3-1025-7B>allenai/Olmo-3-7B-Instruct",
+   "n_cells": 2216,
+   "base": 0.07046926268434875,
+   "aligned": 0.06978132659107647
+  },
+  {
+   "lineage": "allenai/Olmo-3-1125-32B>allenai/Olmo-3.1-32B-Instruct",
+   "n_cells": 2220,
+   "base": 0.08490209331528029,
+   "aligned": 0.07835440483503707
+  },
+  {
+   "lineage": "allenai/Olmo-Hybrid-7B>allenai/Olmo-Hybrid-Instruct-DPO-7B",
+   "n_cells": 2220,
+   "base": 0.07445018013460465,
+   "aligned": 0.06570622905065084
+  },
+  {
+   "lineage": "baichuan-inc/Baichuan2-7B-Base>baichuan-inc/Baichuan2-7B-Chat",
+   "n_cells": 2178,
+   "base": 0.07994066546968322,
+   "aligned": 0.06662174343192916
+  },
+  {
+   "lineage": "bigscience/bloom-7b1>bigscience/bloomz-7b1",
+   "n_cells": 2195,
+   "base": 0.07479497071870977,
+   "aligned": 0.07881989758962593
+  },
+  {
+   "lineage": "croissantllm/CroissantLLMBase>croissantllm/CroissantLLMChat-v0.1",
+   "n_cells": 2189,
+   "base": 0.0666279213976483,
+   "aligned": 0.05335748048043285
+  },
+  {
+   "lineage": "deepseek-ai/deepseek-llm-7b-base>deepseek-ai/deepseek-llm-7b-chat",
+   "n_cells": 2161,
+   "base": 0.07225724458347646,
+   "aligned": 0.06584497446811008
+  },
+  {
+   "lineage": "gl198976/mpt-7b>gl198976/mpt-7b-instruct",
+   "n_cells": 2184,
+   "base": 0.08266074957796513,
+   "aligned": 0.08844750998890162
+  },
+  {
+   "lineage": "google/gemma-2-9b>google/gemma-2-9b-it",
+   "n_cells": 2232,
+   "base": 0.08287417718211239,
+   "aligned": 0.06140328136073924
+  },
+  {
+   "lineage": "google/recurrentgemma-9b>google/recurrentgemma-9b-it",
+   "n_cells": 2214,
+   "base": 0.08652228380816362,
+   "aligned": 0.08385075809970914
+  },
+  {
+   "lineage": "huggyllama/llama-7b>PKU-Alignment/beaver-7b-v1.0",
+   "n_cells": 2170,
+   "base": 0.08245768478482354,
+   "aligned": 0.07488924430665846
+  },
+  {
+   "lineage": "ibm-granite/granite-3.0-8b-base>ibm-granite/granite-3.0-8b-instruct",
+   "n_cells": 2164,
+   "base": 0.09089658889275842,
+   "aligned": 0.085169286360151
+  },
+  {
+   "lineage": "inceptionai/jais-family-6p7b>inceptionai/jais-family-6p7b-chat",
+   "n_cells": 2221,
+   "base": 0.07284994606979418,
+   "aligned": 0.06381649361431413
+  },
+  {
+   "lineage": "internlm/internlm2-base-7b>internlm/internlm2-chat-7b",
+   "n_cells": 2178,
+   "base": 0.07078526191271453,
+   "aligned": 0.07162560911540873
+  },
+  {
+   "lineage": "kakaocorp/kanana-1.5-8b-base>kakaocorp/kanana-1.5-8b-instruct-2505",
+   "n_cells": 2176,
+   "base": 0.07219596566873526,
+   "aligned": 0.043012948294497595
+  },
+  {
+   "lineage": "kakaocorp/kanana-2-3b-base>kakaocorp/kanana-2-3b-instruct",
+   "n_cells": 2179,
+   "base": 0.07205159131491558,
+   "aligned": 0.05416693510625105
+  },
+  {
+   "lineage": "llm-jp/llm-jp-3-7.2b>llm-jp/llm-jp-3-7.2b-instruct3",
+   "n_cells": 2212,
+   "base": 0.07254817768517735,
+   "aligned": 0.06276457050190966
+  },
+  {
+   "lineage": "m-a-p/CT-LLM-Base>m-a-p/CT-LLM-SFT-DPO",
+   "n_cells": 2204,
+   "base": 0.05313342507466227,
+   "aligned": 0.04716293304632324
+  },
+  {
+   "lineage": "m-a-p/neo_7b>m-a-p/neo_7b_instruct_v0.1",
+   "n_cells": 2192,
+   "base": 0.07015924523628081,
+   "aligned": 0.055684182798088365
+  },
+  {
+   "lineage": "meta-llama/Llama-3.1-70B>meta-llama/Llama-3.1-70B-Instruct",
+   "n_cells": 2187,
+   "base": 0.09223727093615529,
+   "aligned": 0.06891833174208771
+  },
+  {
+   "lineage": "meta-llama/Llama-3.1-8B>meta-llama/Llama-3.1-8B-Instruct",
+   "n_cells": 2179,
+   "base": 0.08685884468317664,
+   "aligned": 0.06001727611201407
+  },
+  {
+   "lineage": "mistralai/Mistral-7B-v0.1>mistralai/Mistral-7B-Instruct-v0.1",
+   "n_cells": 2182,
+   "base": 0.0879297258222694,
+   "aligned": 0.07563751004954053
+  },
+  {
+   "lineage": "openGPT-X/Teuken-7B-base-v0.6>openGPT-X/Teuken-7B-instruct-v0.6",
+   "n_cells": 2171,
+   "base": 0.08726293772617107,
+   "aligned": 0.06795444379220326
+  },
+  {
+   "lineage": "openbmb/MiniCPM5-1B-Base>openbmb/MiniCPM5-1B",
+   "n_cells": 2219,
+   "base": 0.06045834262390485,
+   "aligned": 0.045041278848551795
+  },
+  {
+   "lineage": "stabilityai/stablelm-2-1_6b>stabilityai/stablelm-2-1_6b-chat",
+   "n_cells": 2218,
+   "base": 0.07402554184893612,
+   "aligned": 0.06019058405040874
+  },
+  {
+   "lineage": "team-hatakeyama-phase2/Tanuki-8B-base-v1.0>weblab-GENIAC/Tanuki-8B-dpo-v1.0",
+   "n_cells": 2187,
+   "base": 0.043305894803359175,
+   "aligned": 0.04559498819585642
+  },
+  {
+   "lineage": "tiiuae/Falcon-H1-1.5B-Base>tiiuae/Falcon-H1-1.5B-Instruct",
+   "n_cells": 2236,
+   "base": 0.06349495168497774,
+   "aligned": 0.05608852916993189
+  },
+  {
+   "lineage": "tiiuae/Falcon-H1-7B-Base>tiiuae/Falcon-H1-7B-Instruct",
+   "n_cells": 2214,
+   "base": 0.07936558185972932,
+   "aligned": 0.08085815842836284
+  },
+  {
+   "lineage": "tiiuae/Falcon3-7B-Base>tiiuae/Falcon3-7B-Instruct",
+   "n_cells": 2179,
+   "base": 0.0759701392793334,
+   "aligned": 0.0740699819838981
+  },
+  {
+   "lineage": "tiiuae/falcon-7b>tiiuae/falcon-7b-instruct",
+   "n_cells": 2182,
+   "base": 0.09264400453551089,
+   "aligned": 0.08243629379032026
+  },
+  {
+   "lineage": "tiiuae/falcon-mamba-7b>tiiuae/falcon-mamba-7b-instruct",
+   "n_cells": 2193,
+   "base": 0.0790635615241905,
+   "aligned": 0.07512702359023929
+  },
+  {
+   "lineage": "togethercomputer/RedPajama-INCITE-Base-7B-v0.1>togethercomputer/RedPajama-INCITE-7B-Chat",
+   "n_cells": 2219,
+   "base": 0.07517937307276834,
+   "aligned": 0.07476516731963638
+  },
+  {
+   "lineage": "zai-org/glm-4-9b-hf>zai-org/glm-4-9b-chat-hf",
+   "n_cells": 2199,
+   "base": 0.0782055335352687,
+   "aligned": 0.07151854489092621
+  }
+ ]
+}

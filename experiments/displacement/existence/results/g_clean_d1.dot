@@ -1,0 +1,27 @@
+// permitted channels, layered by BFS depth from charge >= 4.0
+// source: channel_table_letter_clean.csv  (p < 0.001, >= 25 distinct prompts)
+// layer means: d0 n=2 charge 4.35; d1 n=3 charge 2.82
+// 100.0% of drawn edges run downhill; shuffle gives ~68%
+// per step: 0->1 n=3 100% downhill +1.53
+digraph channels {
+  rankdir=LR; splines=true; overlap=false; bgcolor="white";
+  node [shape=box style="rounded,filled" fontname="Helvetica" fontsize=9 penwidth=0.6 color="#666666"];
+  edge [fontname="Helvetica" fontsize=7 color="#88888899" arrowsize=0.6];
+
+  // depth 0: 2 nodes, mean charge 4.35
+  { rank=same;
+    "B-" [label="THE BODY [-]\npain  stripped  sting  sore" fillcolor="#c79055" fontcolor="#ffffff"];
+    "E-" [label="EMOTION [-]\nhit  cried  kicked  threatened" fillcolor="#c69056" fontcolor="#ffffff"];
+  }
+
+  // depth 1: 3 nodes, mean charge 2.82
+  { rank=same;
+    "M" [label="MOVEMENT\nwent  go  put  sent" fillcolor="#81988f" fontcolor="#111111"];
+    "Q" [label="LINGUISTIC ACTS\nsaid  told  say  asked" fillcolor="#7a9494" fontcolor="#111111"];
+    "N+" [label="NUMBERS [+]\nall  also  add  up" fillcolor="#789396" fontcolor="#111111"];
+  }
+
+  "B-" -> "N+" [penwidth=1.46 label="pain->surge (24)"];
+  "E-" -> "M" [penwidth=0.78 label="hit->walked (43)"];
+  "E-" -> "Q" [penwidth=0.73 label="hit->said (46)"];
+}

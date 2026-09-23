@@ -1,0 +1,65 @@
+// permitted channels, layered by BFS depth from charge >= 4.0
+// source: channel_table_verb.csv  (p < 0.01, >= 25 distinct prompts)
+// layer means: d0 n=4 charge 5.16; d1 n=5 charge 2.77; d2 n=9 charge 2.68
+// 76.0% of drawn edges run downhill; shuffle gives ~68%
+// per step: 0->1 n=8 100% downhill +2.40; 1->2 n=17 65% downhill +0.07
+digraph channels {
+  rankdir=LR; splines=true; overlap=false; bgcolor="white";
+  size="4.80,7.68!"; ranksep=0.28; nodesep=0.08;
+  node [shape=box style="rounded" fontname="Helvetica" fontsize=11 color="black" fontcolor="black" margin="0.05,0.03"];
+  edge [fontname="Helvetica" fontsize=11 color="#4d4d4d" penwidth=0.75 arrowsize=0.5];
+
+  // depth 0: 4 nodes, mean charge 5.16
+  { rank=same;
+    "L-" [label=<<b>LIFE &amp; LIVING [-]</b><br/>killed  kill  die> fillcolor="#aaaaaa" fontcolor="#111111" penwidth=2.00];
+    "G" [label=<<b>GOVT</b><br/>sue  shot  state> fillcolor="#b6b6b6" fontcolor="#111111" penwidth=1.71];
+    "B-" [label=<<b>THE BODY [-]</b><br/>undress  strip  vomit> fillcolor="#b6b6b6" fontcolor="#111111" penwidth=1.69];
+    "E-" [label=<<b>EMOTION [-]</b><br/>hit  kicked  cried> fillcolor="#bcbcbc" fontcolor="#111111" penwidth=1.56];
+  }
+
+  // depth 1: 5 nodes, mean charge 2.77
+  { rank=same;
+    "S" [label=<<b>SOCIAL</b><br/>kissed  contact  meet> fillcolor="#dbdbdb" fontcolor="#111111" penwidth=0.81];
+    "M" [label=<<b>MOVEMENT</b><br/>went  put  walked> fillcolor="#dfdfdf" fontcolor="#111111" penwidth=0.71];
+    "Q" [label=<<b>LINGUISTIC ACTS</b><br/>said  told  whispered> fillcolor="#e1e1e1" fontcolor="#111111" penwidth=0.65];
+    "X+" [label=<<b>PSYCHOLOGICAL [+]</b><br/>tried  try  decided> fillcolor="#e6e6e6" fontcolor="#111111" penwidth=0.55];
+    "K" [label=<<b>ENTERTAINMENT</b><br/>play  sang  dance> fillcolor="#eaeaea" fontcolor="#111111" penwidth=0.50];
+  }
+
+  // depth 2: 9 nodes, mean charge 2.68
+  { rank=same;
+    "A-" [label=<<b>GENERAL/ABSTRACT [-]</b><br/>gave  give  closed> fillcolor="#e0e0e0" fontcolor="#111111" penwidth=0.70];
+    "X-" [label=<<b>PSYCHOLOGICAL [-]</b><br/>whispered  lost  lose> fillcolor="#e0e0e0" fontcolor="#111111" penwidth=0.69];
+    "A+" [label=<<b>GENERAL/ABSTRACT [+]</b><br/>took  take  had> fillcolor="#e2e2e2" fontcolor="#111111" penwidth=0.64];
+    "T+" [label=<<b>TIME [+]</b><br/>began  started  start> fillcolor="#e2e2e2" fontcolor="#111111" penwidth=0.63];
+    "N-" [label=<<b>NUMBERS [-]</b><br/>stepped  reduce  deduct> fillcolor="#e3e3e3" fontcolor="#111111" penwidth=0.62];
+    "S+" [label=<<b>SOCIAL [+]</b><br/>let  need  ordered> fillcolor="#e4e4e4" fontcolor="#111111" penwidth=0.59];
+    "E" [label=<<b>EMOTION</b><br/>feel  touched  flushed> fillcolor="#e5e5e5" fontcolor="#111111" penwidth=0.55];
+    "X" [label=<<b>PSYCHOLOGICAL</b><br/>watched  saw  felt> fillcolor="#e7e7e7" fontcolor="#111111" penwidth=0.52];
+    "P" [label=<<b>EDUCATION</b><br/>studied  teach  test> fillcolor="#eeeeee" fontcolor="#111111" penwidth=0.50];
+  }
+
+  "M" -> "Q" [ style=dashed constraint=false color="#808080" dir=both tailport=e headport=e];
+  "M" -> "X+" [ style=dashed constraint=false color="#808080" dir=both tailport=e headport=e];
+  "Q" -> "X+" [ style=dashed constraint=false color="#808080" tailport=e headport=e];
+  "B-" -> "K" [ label=<<table border="0" cellborder="0" cellpadding="0" bgcolor="white"><tr><td><i>undress&#8594;play</i></td></tr></table>>];
+  "B-" -> "Q" [ label=<<table border="0" cellborder="0" cellpadding="0" bgcolor="white"><tr><td><i>vomit&#8594;scream</i></td></tr></table>>];
+  "B-" -> "X+" [ label=<<table border="0" cellborder="0" cellpadding="0" bgcolor="white"><tr><td><i>vomit&#8594;understand</i></td></tr></table>>];
+  "E-" -> "M" [ label=<<table border="0" cellborder="0" cellpadding="0" bgcolor="white"><tr><td><i>hit&#8594;walked</i></td></tr></table>>];
+  "E-" -> "Q" [ label=<<table border="0" cellborder="0" cellpadding="0" bgcolor="white"><tr><td><i>hit&#8594;said</i></td></tr></table>>];
+  "G" -> "S" [ label=<<table border="0" cellborder="0" cellpadding="0" bgcolor="white"><tr><td><i>sue&#8594;contact</i></td></tr></table>>];
+  "K" -> "A-" [ label=<<table border="0" cellborder="0" cellpadding="0" bgcolor="white"><tr><td><i>sang&#8594;offered</i></td></tr></table>>];
+  "K" -> "T+" [ label=<<table border="0" cellborder="0" cellpadding="0" bgcolor="white"><tr><td><i>sang&#8594;began</i></td></tr></table>>];
+  "L-" -> "Q" [ label=<<table border="0" cellborder="0" cellpadding="0" bgcolor="white"><tr><td><i>kill&#8594;scream</i></td></tr></table>>];
+  "L-" -> "X+" [ label=<<table border="0" cellborder="0" cellpadding="0" bgcolor="white"><tr><td><i>kill&#8594;try</i></td></tr></table>>];
+  "M" -> "A+" [ label=<<table border="0" cellborder="0" cellpadding="0" bgcolor="white"><tr><td><i>went&#8594;found</i></td></tr></table>>];
+  "M" -> "P" [ label=<<table border="0" cellborder="0" cellpadding="0" bgcolor="white"><tr><td><i>put&#8594;studied</i></td></tr></table>>];
+  "M" -> "X" [ label=<<table border="0" cellborder="0" cellpadding="0" bgcolor="white"><tr><td><i>went&#8594;saw</i></td></tr></table>>];
+  "Q" -> "A+" [ label=<<table border="0" cellborder="0" cellpadding="0" bgcolor="white"><tr><td><i>say&#8594;take</i></td></tr></table>>];
+  "Q" -> "A-" [ label=<<table border="0" cellborder="0" cellpadding="0" bgcolor="white"><tr><td><i>said&#8594;gave</i></td></tr></table>>];
+  "Q" -> "E" [ label=<<table border="0" cellborder="0" cellpadding="0" bgcolor="white"><tr><td><i>say&#8594;feel</i></td></tr></table>>];
+  "Q" -> "N-" [ label=<<table border="0" cellborder="0" cellpadding="0" bgcolor="white"><tr><td><i>told&#8594;stepped</i></td></tr></table>>];
+  "Q" -> "X" [ label=<<table border="0" cellborder="0" cellpadding="0" bgcolor="white"><tr><td><i>told&#8594;watched</i></td></tr></table>>];
+  "S" -> "X-" [ label=<<table border="0" cellborder="0" cellpadding="0" bgcolor="white"><tr><td><i>kissed&#8594;whispered</i></td></tr></table>>];
+  "X+" -> "S+" [ label=<<table border="0" cellborder="0" cellpadding="0" bgcolor="white"><tr><td><i>tried&#8594;let</i></td></tr></table>>];
+}

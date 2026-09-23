@@ -1,0 +1,138 @@
+// permitted channels, layered by BFS depth from charge >= 4.0
+// source: channel_table_letter.csv  (p < 0.001, >= 25 distinct prompts)
+// layer means: d1 n=2 charge 3.74; d2 n=1 charge 3.06; d3 n=2 charge 2.74; d4 n=1 charge 3.01; d5 n=1 charge 2.76; d6 n=1 charge 2.92; d7 n=1 charge 4.18; d8 n=1 charge 2.67; d9 n=1 charge 2.58; d10 n=1 charge 4.16; d11 n=1 charge 3.05; d12 n=1 charge 2.55; d13 n=1 charge 2.73; d14 n=1 charge 4.28; d15 n=1 charge 2.71; d16 n=1 charge 5.96; d17 n=1 charge 2.91; d18 n=1 charge 2.76; d19 n=1 charge 2.86; d20 n=1 charge 2.89; d21 n=1 charge 3.07; d22 n=1 charge 2.79; d23 n=1 charge 2.65; d24 n=1 charge 2.53; d25 n=1 charge 2.94; d26 n=1 charge 2.66; d27 n=1 charge 2.70
+// 54.5% of drawn edges run downhill; shuffle gives ~68%
+// per step: 4->5 n=2 100% downhill +0.26; 5->6 n=3 0% downhill -0.58; 6->7 n=1 100% downhill +0.22; 7->8 n=1 100% downhill +1.39; 8->9 n=2 0% downhill -0.11; 9->10 n=2 0% downhill -0.17; 10->11 n=2 100% downhill +1.31; 11->12 n=2 100% downhill +0.34; 12->13 n=2 0% downhill -2.79; 13->14 n=2 50% downhill -0.01; 14->15 n=1 100% downhill +1.52; 15->16 n=2 0% downhill -0.16; 16->17 n=2 100% downhill +3.11; 17->18 n=5 100% downhill +0.16; 18->19 n=2 50% downhill -0.12; 19->20 n=1 100% downhill +0.07; 20->21 n=1 0% downhill -1.27; 21->22 n=2 100% downhill +0.19; 22->23 n=3 67% downhill -0.04; 23->24 n=2 0% downhill -0.97; 24->25 n=1 0% downhill -0.23; 25->26 n=1 100% downhill +0.15; 26->27 n=1 0% downhill -0.05; 27->28 n=1 0% downhill -0.01
+digraph channels {
+  rankdir=LR; splines=true; overlap=false; bgcolor="white";
+  node [shape=box style="rounded,filled" fontname="Helvetica" fontsize=9 penwidth=0.6 color="#666666"];
+  edge [fontname="Helvetica" fontsize=7 color="#88888899" arrowsize=0.6];
+
+  // depth 1: 2 nodes, mean charge 3.74
+    "G-" [label="G-\ngovt [-]\n4.72" fillcolor="#d88547" fontcolor="#ffffff"];
+    "X-" [label="X-\npsychological [-]\n2.77" fillcolor="#799495" fontcolor="#111111"];
+
+  // depth 2: 1 nodes, mean charge 3.06
+    "S" [label="S\nsocial\n3.06" fillcolor="#889c89" fontcolor="#111111"];
+
+  // depth 3: 2 nodes, mean charge 2.74
+    "T+" [label="T+\ntime [+]\n2.75" fillcolor="#799395" fontcolor="#111111"];
+    "Z" [label="Z\ngrammar/names\n2.73" fillcolor="#789296" fontcolor="#111111"];
+
+  // depth 4: 1 nodes, mean charge 3.01
+    "A" [label="A\ngeneral/abstract\n3.01" fillcolor="#859b8b" fontcolor="#111111"];
+
+  // depth 5: 1 nodes, mean charge 2.76
+    "A+" [label="A+\ngeneral/abstract [+]\n2.76" fillcolor="#799395" fontcolor="#111111"];
+
+  // depth 6: 1 nodes, mean charge 2.92
+    "A-" [label="A-\ngeneral/abstract [-]\n2.92" fillcolor="#81988f" fontcolor="#111111"];
+
+  // depth 7: 1 nodes, mean charge 4.18
+    "B-" [label="B-\nthe body [-]\n4.18" fillcolor="#be955c" fontcolor="#111111"];
+
+  // depth 8: 1 nodes, mean charge 2.67
+    "E" [label="E\nemotion\n2.67" fillcolor="#759199" fontcolor="#111111"];
+
+  // depth 9: 1 nodes, mean charge 2.58
+    "E+" [label="E+\nemotion [+]\n2.58" fillcolor="#708e9c" fontcolor="#111111"];
+
+  // depth 10: 1 nodes, mean charge 4.16
+    "E-" [label="E-\nemotion [-]\n4.16" fillcolor="#bd965d" fontcolor="#111111"];
+
+  // depth 11: 1 nodes, mean charge 3.05
+    "F" [label="F\nfood\n3.05" fillcolor="#879c89" fontcolor="#111111"];
+
+  // depth 12: 1 nodes, mean charge 2.55
+    "H" [label="H\narchitecture\n2.55" fillcolor="#6f8d9e" fontcolor="#111111"];
+
+  // depth 13: 1 nodes, mean charge 2.73
+    "I" [label="I\nmoney\n2.73" fillcolor="#789396" fontcolor="#111111"];
+
+  // depth 14: 1 nodes, mean charge 4.28
+    "I-" [label="I-\nmoney [-]\n4.28" fillcolor="#c39258" fontcolor="#ffffff"];
+
+  // depth 15: 1 nodes, mean charge 2.71
+    "K" [label="K\nentertainment\n2.71" fillcolor="#769297" fontcolor="#111111"];
+
+  // depth 16: 1 nodes, mean charge 5.96
+    "L-" [label="L-\nlife & living [-]\n5.96" fillcolor="#ff6e28" fontcolor="#ffffff"];
+
+  // depth 17: 1 nodes, mean charge 2.91
+    "M" [label="M\nmovement\n2.91" fillcolor="#80988f" fontcolor="#111111"];
+
+  // depth 18: 1 nodes, mean charge 2.76
+    "N+" [label="N+\nnumbers [+]\n2.76" fillcolor="#799395" fontcolor="#111111"];
+
+  // depth 19: 1 nodes, mean charge 2.86
+    "N-" [label="N-\nnumbers [-]\n2.86" fillcolor="#7e9691" fontcolor="#111111"];
+
+  // depth 20: 1 nodes, mean charge 2.89
+    "O" [label="O\nsubstances\n2.89" fillcolor="#7f9790" fontcolor="#111111"];
+
+  // depth 21: 1 nodes, mean charge 3.07
+    "O-" [label="O-\nsubstances [-]\n3.07" fillcolor="#889d89" fontcolor="#111111"];
+
+  // depth 22: 1 nodes, mean charge 2.79
+    "Q" [label="Q\nlinguistic acts\n2.79" fillcolor="#7a9494" fontcolor="#111111"];
+
+  // depth 23: 1 nodes, mean charge 2.65
+    "S+" [label="S+\nsocial [+]\n2.65" fillcolor="#73909a" fontcolor="#111111"];
+
+  // depth 24: 1 nodes, mean charge 2.53
+    "T" [label="T\ntime\n2.53" fillcolor="#6e8c9e" fontcolor="#111111"];
+
+  // depth 25: 1 nodes, mean charge 2.94
+    "T-" [label="T-\ntime [-]\n2.94" fillcolor="#82998e" fontcolor="#111111"];
+
+  // depth 26: 1 nodes, mean charge 2.66
+    "X" [label="X\npsychological\n2.66" fillcolor="#749099" fontcolor="#111111"];
+
+  // depth 27: 1 nodes, mean charge 2.70
+    "X+" [label="X+\npsychological [+]\n2.70" fillcolor="#769297" fontcolor="#111111"];
+
+  "A" -> "A+" [penwidth=0.52 label="looked->found (46)"];
+  "A" -> "T+" [penwidth=0.60 label="looked->began (46)"];
+  "A+" -> "E-" [penwidth=0.95 label="took->pressed (38)"];
+  "A+" -> "Q" [penwidth=0.56 label="receive->contact (46)"];
+  "A+" -> "S" [penwidth=0.58 label="receive->contact (48)"];
+  "A-" -> "X+" [penwidth=0.62 label="gave->noticed (44)"];
+  "B-" -> "Q" [penwidth=0.95 label="vomit->scream (29)"];
+  "E" -> "Q" [penwidth=1.02 label="touched->whispered (44)"];
+  "E" -> "X-" [penwidth=1.07 label="touched->whispered (44)"];
+  "E+" -> "Q" [penwidth=0.64 label="smiled->whispered (42)"];
+  "E+" -> "X+" [penwidth=0.86 label="struck->shouted (41)"];
+  "E-" -> "M" [penwidth=0.66 label="hit->pulled (42)"];
+  "E-" -> "Q" [penwidth=0.65 label="cried->whispered (45)"];
+  "F" -> "N+" [penwidth=0.71 label="smashed->ran (42)"];
+  "F" -> "X" [penwidth=0.80 label="ate->watched (41)"];
+  "H" -> "G-" [penwidth=1.43 label="let->stole (31)"];
+  "H" -> "L-" [penwidth=2.08 label="live->die (26)"];
+  "I" -> "Q" [penwidth=0.59 label="pay->contact (43)"];
+  "I" -> "X+" [penwidth=0.68 label="pay->inform (44)"];
+  "I-" -> "A+" [penwidth=0.73 label="lay->took (41)"];
+  "K" -> "A" [penwidth=0.75 label="shoot->break (35)"];
+  "K" -> "I" [penwidth=1.10 label="shoot->let (29)"];
+  "L-" -> "A-" [penwidth=0.58 label="killed->gave (42)"];
+  "L-" -> "Q" [penwidth=0.82 label="kill->scream (44)"];
+  "M" -> "A+" [penwidth=0.54 label="went->found (46)"];
+  "M" -> "O" [penwidth=0.51 label="went->felt (47)"];
+  "M" -> "X" [penwidth=0.62 label="went->felt (47)"];
+  "M" -> "X+" [penwidth=0.55 label="went->decided (45)"];
+  "M" -> "Z" [penwidth=0.58 label="went->immediately (39)"];
+  "N+" -> "S" [penwidth=0.79 label="add->contact (47)"];
+  "N+" -> "X+" [penwidth=0.58 label="add->try (46)"];
+  "N-" -> "Q" [penwidth=1.13 label="slowly->whispered (41)"];
+  "O" -> "E-" [penwidth=0.74 label="cut->threatened (39)"];
+  "O-" -> "F" [penwidth=1.67 label="rip->eat (18)"];
+  "O-" -> "X+" [penwidth=1.55 label="rip->shout (29)"];
+  "Q" -> "A" [penwidth=0.53 label="headed->looked (43)"];
+  "Q" -> "A+" [penwidth=0.64 label="read->found (45)"];
+  "Q" -> "X+" [penwidth=0.54 label="asked->tried (43)"];
+  "S+" -> "E-" [penwidth=2.13 label="let->threatened (37)"];
+  "S+" -> "O-" [penwidth=2.10 label="obliged->uncomfortable (27)"];
+  "T" -> "N+" [penwidth=1.15 label="passed->added (40)"];
+  "T-" -> "Q" [penwidth=0.67 label="quit->speak (42)"];
+  "X" -> "K" [penwidth=0.85 label="beat->play (36)"];
+  "X+" -> "K" [penwidth=0.79 label="beat->break (38)"];
+}

@@ -1,0 +1,223 @@
+// permitted channels, layered by BFS depth from charge >= 4.0
+// source: channel_table_letter_clean_p01.csv  (p < 0.01, >= 25 distinct prompts)
+// layer means: d1 n=1 charge 2.37; d2 n=4 charge 3.56; d3 n=2 charge 3.85; d4 n=1 charge 3.12; d5 n=1 charge 2.77; d6 n=1 charge 2.91; d7 n=1 charge 3.05; d8 n=1 charge 4.36; d9 n=1 charge 2.64; d10 n=1 charge 2.57; d11 n=1 charge 2.38; d12 n=1 charge 4.35; d13 n=1 charge 3.06; d14 n=1 charge 4.57; d15 n=1 charge 2.53; d16 n=1 charge 2.65; d17 n=1 charge 2.36; d18 n=1 charge 6.18; d19 n=1 charge 2.92; d20 n=1 charge 2.75; d21 n=1 charge 2.65; d22 n=1 charge 2.89; d23 n=1 charge 3.22; d24 n=1 charge 2.63; d25 n=1 charge 2.79; d26 n=1 charge 3.11; d27 n=1 charge 2.65; d28 n=1 charge 2.36; d29 n=1 charge 2.75; d30 n=1 charge 2.91; d31 n=1 charge 2.44; d32 n=1 charge 2.53; d33 n=1 charge 2.58; d34 n=1 charge 2.76; d35 n=1 charge 2.51; d36 n=1 charge 2.69
+// 56.0% of drawn edges run downhill; shuffle gives ~68%
+// per step: 4->5 n=5 100% downhill +0.41; 5->6 n=5 0% downhill -0.49; 6->7 n=2 50% downhill -1.02; 7->8 n=1 100% downhill +0.46; 8->9 n=5 100% downhill +1.70; 9->10 n=3 33% downhill +0.04; 10->11 n=2 0% downhill -0.20; 11->12 n=2 0% downhill -0.30; 12->13 n=6 100% downhill +1.63; 13->14 n=3 67% downhill -0.64; 14->15 n=3 100% downhill +1.74; 15->16 n=2 0% downhill -0.31; 16->17 n=1 100% downhill +0.11; 17->18 n=3 0% downhill -0.29; 18->19 n=1 100% downhill +3.39; 19->20 n=9 78% downhill -0.02; 20->21 n=5 60% downhill -0.04; 21->22 n=1 0% downhill -0.13; 22->23 n=1 100% downhill +0.39; 23->24 n=1 100% downhill +0.45; 24->25 n=1 100% downhill +0.05; 25->26 n=5 80% downhill +0.15; 26->27 n=2 50% downhill +0.21; 27->28 n=3 33% downhill -0.58; 28->29 n=3 0% downhill -0.80; 29->30 n=5 80% downhill +0.11; 30->31 n=3 100% downhill +0.22; 31->32 n=1 0% downhill -0.48; 32->33 n=5 20% downhill -0.28; 33->34 n=2 0% downhill -0.36; 34->35 n=1 0% downhill -0.00; 35->36 n=1 100% downhill +0.13; 36->37 n=7 29% downhill -0.80
+digraph channels {
+  rankdir=LR; splines=true; overlap=false; bgcolor="white";
+  node [shape=box style="rounded,filled" fontname="Helvetica" fontsize=9 penwidth=0.6 color="#666666"];
+  edge [fontname="Helvetica" fontsize=7 color="#88888899" arrowsize=0.6];
+
+  // depth 1: 1 nodes, mean charge 2.37
+    "N" [label="N\nnumbers\n2.37" fillcolor="#6688a5" fontcolor="#111111"];
+
+  // depth 2: 4 nodes, mean charge 3.56
+    "G-" [label="G-\ngovt [-]\n5.12" fillcolor="#ec7937" fontcolor="#ffffff"];
+    "S-" [label="S-\nsocial [-]\n3.75" fillcolor="#a9a26e" fontcolor="#111111"];
+    "W-" [label="W-\nworld [-]\n3.20" fillcolor="#8ea183" fontcolor="#111111"];
+    "P" [label="P\neducation\n2.17" fillcolor="#5c81ad" fontcolor="#111111"];
+
+  // depth 3: 2 nodes, mean charge 3.85
+    "I-" [label="I-\nmoney [-]\n4.65" fillcolor="#d58749" fontcolor="#ffffff"];
+    "L" [label="L\nlife & living\n3.04" fillcolor="#879c8a" fontcolor="#111111"];
+
+  // depth 4: 1 nodes, mean charge 3.12
+    "A" [label="A\ngeneral/abstract\n3.12" fillcolor="#8b9e87" fontcolor="#111111"];
+
+  // depth 5: 1 nodes, mean charge 2.77
+    "A+" [label="A+\ngeneral/abstract [+]\n2.77" fillcolor="#799495" fontcolor="#111111"];
+
+  // depth 6: 1 nodes, mean charge 2.91
+    "A-" [label="A-\ngeneral/abstract [-]\n2.91" fillcolor="#80988f" fontcolor="#111111"];
+
+  // depth 7: 1 nodes, mean charge 3.05
+    "B" [label="B\nthe body\n3.05" fillcolor="#879c8a" fontcolor="#111111"];
+
+  // depth 8: 1 nodes, mean charge 4.36
+    "B-" [label="B-\nthe body [-]\n4.36" fillcolor="#c79055" fontcolor="#ffffff"];
+
+  // depth 9: 1 nodes, mean charge 2.64
+    "C" [label="C\narts\n2.64" fillcolor="#73909a" fontcolor="#111111"];
+
+  // depth 10: 1 nodes, mean charge 2.57
+    "E" [label="E\nemotion\n2.57" fillcolor="#708e9d" fontcolor="#111111"];
+
+  // depth 11: 1 nodes, mean charge 2.38
+    "E+" [label="E+\nemotion [+]\n2.38" fillcolor="#6688a4" fontcolor="#111111"];
+
+  // depth 12: 1 nodes, mean charge 4.35
+    "E-" [label="E-\nemotion [-]\n4.35" fillcolor="#c69056" fontcolor="#ffffff"];
+
+  // depth 13: 1 nodes, mean charge 3.06
+    "F" [label="F\nfood\n3.06" fillcolor="#879c89" fontcolor="#111111"];
+
+  // depth 14: 1 nodes, mean charge 4.57
+    "G" [label="G\ngovt\n4.57" fillcolor="#d1894d" fontcolor="#ffffff"];
+
+  // depth 15: 1 nodes, mean charge 2.53
+    "H" [label="H\narchitecture\n2.53" fillcolor="#6e8d9e" fontcolor="#111111"];
+
+  // depth 16: 1 nodes, mean charge 2.65
+    "I" [label="I\nmoney\n2.65" fillcolor="#73909a" fontcolor="#111111"];
+
+  // depth 17: 1 nodes, mean charge 2.36
+    "K" [label="K\nentertainment\n2.36" fillcolor="#6587a5" fontcolor="#111111"];
+
+  // depth 18: 1 nodes, mean charge 6.18
+    "L-" [label="L-\nlife & living [-]\n6.18" fillcolor="#ff6e28" fontcolor="#ffffff"];
+
+  // depth 19: 1 nodes, mean charge 2.92
+    "M" [label="M\nmovement\n2.92" fillcolor="#81988f" fontcolor="#111111"];
+
+  // depth 20: 1 nodes, mean charge 2.75
+    "N+" [label="N+\nnumbers [+]\n2.75" fillcolor="#789396" fontcolor="#111111"];
+
+  // depth 21: 1 nodes, mean charge 2.65
+    "N-" [label="N-\nnumbers [-]\n2.65" fillcolor="#749099" fontcolor="#111111"];
+
+  // depth 22: 1 nodes, mean charge 2.89
+    "O" [label="O\nsubstances\n2.89" fillcolor="#7f9790" fontcolor="#111111"];
+
+  // depth 23: 1 nodes, mean charge 3.22
+    "O+" [label="O+\nsubstances [+]\n3.22" fillcolor="#8fa183" fontcolor="#111111"];
+
+  // depth 24: 1 nodes, mean charge 2.63
+    "O-" [label="O-\nsubstances [-]\n2.63" fillcolor="#738f9a" fontcolor="#111111"];
+
+  // depth 25: 1 nodes, mean charge 2.79
+    "Q" [label="Q\nlinguistic acts\n2.79" fillcolor="#7a9494" fontcolor="#111111"];
+
+  // depth 26: 1 nodes, mean charge 3.11
+    "S" [label="S\nsocial\n3.11" fillcolor="#8a9e87" fontcolor="#111111"];
+
+  // depth 27: 1 nodes, mean charge 2.65
+    "S+" [label="S+\nsocial [+]\n2.65" fillcolor="#73909a" fontcolor="#111111"];
+
+  // depth 28: 1 nodes, mean charge 2.36
+    "T" [label="T\ntime\n2.36" fillcolor="#6587a5" fontcolor="#111111"];
+
+  // depth 29: 1 nodes, mean charge 2.75
+    "T+" [label="T+\ntime [+]\n2.75" fillcolor="#799395" fontcolor="#111111"];
+
+  // depth 30: 1 nodes, mean charge 2.91
+    "T-" [label="T-\ntime [-]\n2.91" fillcolor="#80988f" fontcolor="#111111"];
+
+  // depth 31: 1 nodes, mean charge 2.44
+    "W" [label="W\nworld\n2.44" fillcolor="#698aa2" fontcolor="#111111"];
+
+  // depth 32: 1 nodes, mean charge 2.53
+    "X" [label="X\npsychological\n2.53" fillcolor="#6e8d9e" fontcolor="#111111"];
+
+  // depth 33: 1 nodes, mean charge 2.58
+    "X+" [label="X+\npsychological [+]\n2.58" fillcolor="#708e9c" fontcolor="#111111"];
+
+  // depth 34: 1 nodes, mean charge 2.76
+    "X-" [label="X-\npsychological [-]\n2.76" fillcolor="#799395" fontcolor="#111111"];
+
+  // depth 35: 1 nodes, mean charge 2.51
+    "Y" [label="Y\nscience\n2.51" fillcolor="#6d8c9f" fontcolor="#111111"];
+
+  // depth 36: 1 nodes, mean charge 2.69
+    "Z" [label="Z\ngrammar/names\n2.69" fillcolor="#759198" fontcolor="#111111"];
+
+  "A" -> "E" [penwidth=0.56];
+  "A" -> "L" [penwidth=1.14];
+  "A" -> "T+" [penwidth=0.51];
+  "A" -> "Y" [penwidth=0.68];
+  "A" -> "Z" [penwidth=0.64];
+  "A+" -> "A" [penwidth=0.48];
+  "A+" -> "A-" [penwidth=0.48];
+  "A+" -> "E-" [penwidth=0.64];
+  "A+" -> "Q" [penwidth=0.70];
+  "A+" -> "S" [penwidth=0.82];
+  "A-" -> "G-" [penwidth=0.75];
+  "A-" -> "T+" [penwidth=0.68];
+  "B" -> "X+" [penwidth=0.83];
+  "B-" -> "C" [penwidth=2.20];
+  "B-" -> "E+" [penwidth=1.07];
+  "B-" -> "N+" [penwidth=1.46];
+  "B-" -> "Q" [penwidth=0.82];
+  "B-" -> "T+" [penwidth=1.23];
+  "C" -> "E+" [penwidth=1.06];
+  "C" -> "Q" [penwidth=0.67];
+  "C" -> "S+" [penwidth=0.85];
+  "E" -> "Q" [penwidth=0.86];
+  "E" -> "T+" [penwidth=1.80];
+  "E+" -> "A+" [penwidth=0.66];
+  "E+" -> "X+" [penwidth=0.87];
+  "E-" -> "K" [penwidth=0.82];
+  "E-" -> "M" [penwidth=0.78];
+  "E-" -> "N+" [penwidth=0.72];
+  "E-" -> "Q" [penwidth=0.73];
+  "E-" -> "T-" [penwidth=0.73];
+  "E-" -> "X+" [penwidth=0.63];
+  "F" -> "L-" [penwidth=1.68];
+  "F" -> "N" [penwidth=0.99];
+  "F" -> "X" [penwidth=0.74];
+  "G" -> "A" [penwidth=0.68];
+  "G" -> "Q" [penwidth=0.57];
+  "G" -> "X+" [penwidth=0.66];
+  "H" -> "A+" [penwidth=0.56];
+  "H" -> "M" [penwidth=0.79];
+  "I" -> "X" [penwidth=0.76];
+  "K" -> "T+" [penwidth=0.62];
+  "K" -> "Y" [penwidth=1.25];
+  "K" -> "Z" [penwidth=1.09];
+  "L-" -> "Q" [penwidth=0.65];
+  "M" -> "A+" [penwidth=0.49];
+  "M" -> "G-" [penwidth=0.55];
+  "M" -> "P" [penwidth=0.78];
+  "M" -> "Q" [penwidth=0.47];
+  "M" -> "W-" [penwidth=1.25];
+  "M" -> "X" [penwidth=0.61];
+  "M" -> "X+" [penwidth=0.54];
+  "M" -> "X-" [penwidth=0.54];
+  "M" -> "Y" [penwidth=0.84];
+  "N+" -> "B" [penwidth=0.60];
+  "N+" -> "E" [penwidth=1.43];
+  "N+" -> "S" [penwidth=0.83];
+  "N+" -> "Y" [penwidth=0.73];
+  "N+" -> "Z" [penwidth=0.51];
+  "N-" -> "Q" [penwidth=1.02];
+  "O" -> "Y" [penwidth=0.67];
+  "O+" -> "A+" [penwidth=0.74];
+  "O-" -> "X+" [penwidth=1.03];
+  "Q" -> "A" [penwidth=0.51];
+  "Q" -> "E" [penwidth=0.90];
+  "Q" -> "T" [penwidth=0.63];
+  "Q" -> "X" [penwidth=0.49];
+  "Q" -> "X+" [penwidth=0.58];
+  "S" -> "A" [penwidth=0.52];
+  "S" -> "Z" [penwidth=0.54];
+  "S+" -> "E-" [penwidth=1.99];
+  "S+" -> "O-" [penwidth=1.88];
+  "S+" -> "Z" [penwidth=0.68];
+  "T" -> "G" [penwidth=0.87];
+  "T" -> "N" [penwidth=0.79];
+  "T" -> "X" [penwidth=0.60];
+  "T+" -> "O-" [penwidth=1.96];
+  "T+" -> "S+" [penwidth=0.63];
+  "T+" -> "X-" [penwidth=0.89];
+  "T+" -> "Y" [penwidth=1.27];
+  "T+" -> "Z" [penwidth=0.69];
+  "T-" -> "N+" [penwidth=0.63];
+  "T-" -> "Q" [penwidth=0.76];
+  "T-" -> "X" [penwidth=0.77];
+  "W" -> "M" [penwidth=1.03];
+  "X" -> "H" [penwidth=0.70];
+  "X" -> "K" [penwidth=1.12];
+  "X" -> "Q" [penwidth=0.51];
+  "X" -> "S+" [penwidth=0.77];
+  "X" -> "S-" [penwidth=0.73];
+  "X+" -> "A+" [penwidth=0.48];
+  "X+" -> "S" [penwidth=0.67];
+  "X-" -> "A+" [penwidth=1.00];
+  "Y" -> "E+" [penwidth=1.17];
+  "Z" -> "A-" [penwidth=0.54];
+  "Z" -> "E+" [penwidth=0.73];
+  "Z" -> "I-" [penwidth=1.01];
+  "Z" -> "L-" [penwidth=0.82];
+  "Z" -> "M" [penwidth=0.59];
+  "Z" -> "T+" [penwidth=0.64];
+  "Z" -> "X+" [penwidth=0.55];
+}

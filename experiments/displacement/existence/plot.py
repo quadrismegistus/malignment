@@ -103,7 +103,7 @@ def draw(bands, meta, out_path, pub=False, show="both"):
     from plotnine import (ggplot, aes, geom_line, geom_point, geom_hline,
                           labs, scale_x_continuous, theme_minimal, theme,
                           element_text, ggtitle)
-    from malignment.figure import (PUB_GRAY, PUB_RED, PUB_LINE_PT, PUB_RULE_PT,
+    from malignment.figure import (PUB_GRAY, PUB_INK, PUB_LINE_PT, PUB_RULE_PT,
                                    PUB_FONT_PT, pub_theme, pub_font)
 
     order = {b["band"]: i for i, b in enumerate(bands)}
@@ -128,8 +128,8 @@ def draw(bands, meta, out_path, pub=False, show="both"):
         p = p + geom_line(aes(group="lineage"), color=PUB_GRAY,
                           size=PUB_RULE_PT, alpha=0.55)
     if show in ("both", "median"):
-        p = (p + geom_line(data=med, color=PUB_RED, size=PUB_LINE_PT)
-             + geom_point(data=med, color=PUB_RED, size=1.6))
+        p = (p + geom_line(data=med, color=PUB_INK, size=PUB_LINE_PT)
+             + geom_point(data=med, color=PUB_INK, size=1.6))
     p = (p + scale_x_continuous(breaks=list(range(len(bands))), labels=labels,
                                 limits=(-0.15, len(bands) - 0.85))
          #: the x axis needs its own name: the tick labels are band EDGES and
@@ -146,8 +146,9 @@ def draw(bands, meta, out_path, pub=False, show="both"):
              + theme(figure_size=(9, 6),
                      plot_title=element_text(size=11, weight="bold")))
     os.makedirs(os.path.dirname(out_path), exist_ok=True)
-    p.save(out_path, dpi=300, verbose=False)
-    return out_path
+    #: PNG and PDF together -- see malignment.figure.save
+    from malignment.figure import save as _save
+    return _save(p, out_path)[0]
 
 
 def draw_mass(d, out_path, pub=False, scale="absolute", drop=()):
@@ -253,8 +254,9 @@ def draw_mass(d, out_path, pub=False, scale="absolute", drop=()):
              + theme_minimal() + theme(figure_size=(9, 6),
                                        plot_title=element_text(size=11, weight="bold")))
     os.makedirs(os.path.dirname(out_path), exist_ok=True)
-    p.save(out_path, dpi=300, verbose=False)
-    return out_path
+    #: PNG and PDF together -- see malignment.figure.save
+    from malignment.figure import save as _save
+    return _save(p, out_path)[0]
 
 
 def draw_wlift(d, out_path, pub=False):
@@ -281,7 +283,7 @@ def draw_wlift(d, out_path, pub=False):
     from plotnine import (ggplot, aes, geom_line, geom_point, geom_errorbar,
                           labs, scale_x_continuous, theme_minimal, theme,
                           element_text, ggtitle)
-    from malignment.figure import PUB_RULE_PT, PUB_RED, pub_theme
+    from malignment.figure import PUB_RULE_PT, PUB_INK, pub_theme
 
     rng = random.Random(13)
     def ci(vals):
@@ -296,10 +298,10 @@ def draw_wlift(d, out_path, pub=False):
         rows.append({"x": pos, "y": m, "lo": lo, "hi": hi})
     lev = pd.DataFrame(rows)
     p = (ggplot(lev, aes("x", "y"))
-         + geom_line(size=1.0, color=PUB_RED)
+         + geom_line(size=1.0, color=PUB_INK)
          + geom_errorbar(aes(ymin="lo", ymax="hi"), width=0.03,
-                         size=PUB_RULE_PT, color=PUB_RED)
-         + geom_point(size=1.6, color=PUB_RED)
+                         size=PUB_RULE_PT, color=PUB_INK)
+         + geom_point(size=1.6, color=PUB_INK)
          + scale_x_continuous(breaks=[0, 1],
                               labels=["Base models", "Aligned models"],
                               limits=(-0.12, 1.12))
@@ -313,8 +315,9 @@ def draw_wlift(d, out_path, pub=False):
              + theme_minimal() + theme(figure_size=(9, 6),
                                        plot_title=element_text(size=11, weight="bold")))
     os.makedirs(os.path.dirname(out_path), exist_ok=True)
-    p.save(out_path, dpi=300, verbose=False)
-    return out_path
+    #: PNG and PDF together -- see malignment.figure.save
+    from malignment.figure import save as _save
+    return _save(p, out_path)[0]
 
 
 def render(pub="no", show="both"):

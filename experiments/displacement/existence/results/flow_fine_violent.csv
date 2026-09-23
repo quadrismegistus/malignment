@@ -1,0 +1,566 @@
+source,source_label,target,target_label,up,n,spec,obs_over_exp,p,grain,perm
+E3-,Calm/Violent/Angry [-],N3.8,Measurement: Speed,31,37,2.0858,2.6408,4.12576e-05,fine,64
+L1-,Life and living things [-],S6-,Obligation and necessity [-],27,40,2.0661,1.9110,0.0384773,fine,64
+E3-,Calm/Violent/Angry [-],A7-,Definite (+ modals) [-],34,43,2.0575,2.6004,0.000170155,fine,64
+E3-,Calm/Violent/Angry [-],T3,"Time: Old, new and young; age",21,34,1.9088,1.8743,0.229481,fine,64
+L1-,Life and living things [-],W4,Weather ,15,25,1.8193,3.1402,0.424356,fine,64
+E3-,Calm/Violent/Angry [-],G2.1,"Crime, law and order: Law and order",37,49,1.7538,1.8225,0.000469757,fine,64
+E3-,Calm/Violent/Angry [-],S9,Religion and the supernatural,37,48,1.7192,2.1946,0.000222245,fine,64
+L1-,Life and living things [-],X2.3+,Learn [+],33,44,1.6890,2.9870,0.00126003,fine,64
+E3-,Calm/Violent/Angry [-],T1,Time,33,47,1.6236,1.4301,0.00794273,fine,64
+L1-,Life and living things [-],A4.2+,Particular/general; detail [+],38,47,1.5911,2.9410,2.4904e-05,fine,64
+E3-,Calm/Violent/Angry [-],Z1mf,Personal names [mf],31,49,1.5748,1.1764,0.0854331,fine,64
+E3-,Calm/Violent/Angry [-],A5.2+,Evaluation:- True/false [+],32,45,1.5674,2.4176,0.00660882,fine,64
+E3-,Calm/Violent/Angry [-],Q3,"Language, speech and grammar",37,48,1.5600,1.7945,0.000222245,fine,64
+E3-,Calm/Violent/Angry [-],S7.3+,Competition [+],19,34,1.5593,1.1834,0.607591,fine,64
+E3-,Calm/Violent/Angry [-],N5+,Quantities [+],38,48,1.5458,1.8401,6.16964e-05,fine,64
+E3-,Calm/Violent/Angry [-],A1.3+,Caution [+],37,48,1.5396,2.3305,0.000222245,fine,64
+E3-,Calm/Violent/Angry [-],T3-,"Time: Old, new and young; age [-]",31,48,1.5056,1.4714,0.0594634,fine,64
+E3-,Calm/Violent/Angry [-],A1.5,Use,19,34,1.4767,1.1262,0.607591,fine,64
+E3-,Calm/Violent/Angry [-],E3+,Calm/Violent/Angry [+],39,49,1.4687,2.0725,3.84591e-05,fine,64
+E3-,Calm/Violent/Angry [-],X4.1,Mental object:- Conceptual object,34,47,1.4464,2.0644,0.00308768,fine,64
+E3-,Calm/Violent/Angry [-],X5.2+,Interest/boredom/excited/energetic [+],34,46,1.4463,1.6147,0.00164149,fine,64
+E3-,Calm/Violent/Angry [-],X2.5+,Understand [+],32,45,1.4424,1.8566,0.00660882,fine,64
+L1-,Life and living things [-],X2.5+,Understand [+],32,47,1.4358,3.0873,0.0186238,fine,64
+E3-,Calm/Violent/Angry [-],I3.2,Work and employmeny: Professionalism,18,33,1.4278,1.0907,0.728332,fine,64
+E3-,Calm/Violent/Angry [-],A2.1,"Affect:- Modify, change",32,48,1.4250,1.8238,0.0293049,fine,64
+E3-,Calm/Violent/Angry [-],I1.1,Money: Affluence,34,47,1.4239,1.3338,0.00308768,fine,64
+E3-,Calm/Violent/Angry [-],A4.1,"Generally kinds, groups, examples",36,49,1.4091,1.9514,0.00140269,fine,64
+L1-,Life and living things [-],N3.8+fn,Measurement: Speed [+fn],31,43,1.3718,3.4078,0.00540157,fine,64
+L1-,Life and living things [-],T3,"Time: Old, new and young; age",17,31,1.3685,2.6434,0.7201,fine,64
+E3-,Calm/Violent/Angry [-],I1.3,Money: Price,29,48,1.3526,1.3681,0.193413,fine,64
+E3-,Calm/Violent/Angry [-],N3.8---,Measurement: Speed [---],15,28,1.3480,0.7522,0.850554,fine,64
+L1-,Life and living things [-],Z1m,Personal names [m],24,43,1.3279,1.7105,0.542384,fine,64
+E3-,Calm/Violent/Angry [-],P1,Education in general,34,49,1.3276,1.6726,0.00939924,fine,64
+L1-,Life and living things [-],P1,Education in general,34,47,1.3240,2.3946,0.00308768,fine,64
+L1-,Life and living things [-],Q1.2,Paper documents and writing,29,49,1.3111,1.9378,0.25287,fine,64
+E3-,Calm/Violent/Angry [-],E1,"EMOTIONAL ACTIONS, STATES AND PROCESSES General",32,48,1.3087,1.8662,0.0293049,fine,64
+E3-,Calm/Violent/Angry [-],K2,Music and related activities,30,48,1.3077,1.8783,0.111403,fine,64
+L1-,Life and living things [-],M8,Remaining/stationary,29,48,1.3056,1.6771,0.193413,fine,64
+E3-,Calm/Violent/Angry [-],A8,Seem,35,49,1.3043,1.2628,0.00380165,fine,64
+L1-,Life and living things [-],A15+,Safety/Danger [+],33,48,1.3011,2.0034,0.0132833,fine,64
+E3-,Calm/Violent/Angry [-],A5,Evaluation,23,39,1.2961,2.6083,0.336784,fine,64
+L1-,Life and living things [-],A7-,Definite (+ modals) [-],18,29,1.2866,3.1386,0.264931,fine,64
+E3-,Calm/Violent/Angry [-],S1.2.4+,Politeness [+],30,48,1.2831,1.4987,0.111403,fine,64
+L1-,Life and living things [-],B4,Cleaning and personal care,28,45,1.2825,1.9355,0.135156,fine,64
+L1-,Life and living things [-],A12-,Easy/difficult [-],33,46,1.2771,2.8713,0.00453386,fine,64
+L1-,Life and living things [-],G2.2-,General ethics [-],28,47,1.2761,1.9626,0.24296,fine,64
+L1-,Life and living things [-],A11.1+,Importance: Important [+],18,33,1.2720,2.2614,0.728332,fine,64
+E3-,Calm/Violent/Angry [-],Q1.1,"LINGUISTIC ACTIONS, STATES AND PROCESSES; COMMUNICATION",41,49,1.2678,1.3385,1.96465e-06,fine,64
+E3-,Calm/Violent/Angry [-],I2.2,Business: Selling,32,48,1.2614,1.2921,0.0293049,fine,64
+E3-,Calm/Violent/Angry [-],K4,"Drama, the theatre and showbusiness",32,49,1.2550,1.9641,0.0443842,fine,64
+L1-,Life and living things [-],A2.2,Affect:- Cause/Connected,33,48,1.2507,2.1439,0.0132833,fine,64
+L1-,Life and living things [-],N3.3+,Measurement: Distance [+],15,28,1.2497,2.8562,0.850554,fine,64
+L1-,Life and living things [-],E4.1+,Happy/sad: Happy [+],31,46,1.2472,2.4180,0.0258961,fine,64
+E3-,Calm/Violent/Angry [-],X3.4+,Sensory:- Sight [+],28,46,1.2450,1.7618,0.183925,fine,64
+E3-,Calm/Violent/Angry [-],E4.2+,Happy/sad: Contentment [+],25,42,1.2439,1.5362,0.279956,fine,64
+L1-,Life and living things [-],G1.1,Government etc.,21,38,1.2399,2.4670,0.627103,fine,64
+E3-,Calm/Violent/Angry [-],Q2.1,Speech etc:- Communicative,36,49,1.2365,1.5005,0.00140269,fine,64
+L1-,Life and living things [-],X3.1,Sensory:- Taste,20,38,1.2353,2.0964,0.871415,fine,64
+E3-,Calm/Violent/Angry [-],T2-,Time: Beginning and ending [-],33,49,1.2232,1.4304,0.0212941,fine,64
+E3-,Calm/Violent/Angry [-],Z6,Negative,27,49,1.2222,1.3294,0.568172,fine,64
+L1-,Life and living things [-],A5.1+,Evaluation:- Good/bad [+],26,46,1.2193,1.8961,0.461391,fine,64
+E3-,Calm/Violent/Angry [-],L2mfn,Living creatures generally [mfn],28,48,1.2165,1.5858,0.312327,fine,64
+E3-,Calm/Violent/Angry [-],A1.5.1,Using,33,49,1.2076,1.2809,0.0212941,fine,64
+E3-,Calm/Violent/Angry [-],X2.3+,Learn [+],19,37,1.2071,1.5261,1,fine,64
+L1-,Life and living things [-],X2.6-,Expect [-],21,37,1.2062,2.6075,0.511376,fine,64
+E3-,Calm/Violent/Angry [-],A10-,Open/closed; Hiding/Hidden; Finding; Showing [-],29,49,1.2045,1.1785,0.25287,fine,64
+E3-,Calm/Violent/Angry [-],A5.4-,Evaluation:- Authenticity [-],28,46,1.2020,1.2994,0.183925,fine,64
+L1-,Life and living things [-],A8,Seem,30,48,1.2014,2.1498,0.111403,fine,64
+E3-,Calm/Violent/Angry [-],S8+,Helping/hindering [+],35,49,1.1991,1.5451,0.00380165,fine,64
+L1-,Life and living things [-],X4.1,Mental object:- Conceptual object,25,44,1.1914,2.1346,0.451381,fine,64
+E3-,Calm/Violent/Angry [-],A5.1,Evaluation:- Good/bad,17,30,1.1874,2.6068,0.584665,fine,64
+E3-,Calm/Violent/Angry [-],O4.4,Shape,31,48,1.1866,1.4499,0.0594634,fine,64
+L1-,Life and living things [-],K1,Entertainment generally,37,49,1.1771,2.4404,0.000469757,fine,64
+E3-,Calm/Violent/Angry [-],B3,medicines and medical treatment,28,48,1.1723,1.2600,0.312327,fine,64
+L1-,Life and living things [-],Q3,"Language, speech and grammar",26,44,1.1680,2.0788,0.291215,fine,64
+L1-,Life and living things [-],X7+,Wanting; planning; choosing [+],30,48,1.1671,2.0476,0.111403,fine,64
+L1-,Life and living things [-],Z4,Discourse Bin,27,49,1.1656,1.9310,0.568172,fine,64
+E3-,Calm/Violent/Angry [-],M1,"Moving, coming and going",35,49,1.1634,1.2245,0.00380165,fine,64
+E3-,Calm/Violent/Angry [-],M2,"Putting, taking, pulling, pushing, transporting &c.",37,49,1.1580,1.1002,0.000469757,fine,64
+E3-,Calm/Violent/Angry [-],Q2.2,Speech acts,28,49,1.1562,1.2672,0.391603,fine,64
+L1-,Life and living things [-],T1,Time,24,47,1.1535,1.2616,1,fine,64
+E3-,Calm/Violent/Angry [-],A1.5.2+,Usefulness [+],26,45,1.1533,1.8629,0.371298,fine,64
+L1-,Life and living things [-],Q2.2,Speech acts,36,49,1.1527,2.4885,0.00140269,fine,64
+E3-,Calm/Violent/Angry [-],A9-,Getting and giving; possession [-],29,49,1.1511,1.4982,0.25287,fine,64
+E3-,Calm/Violent/Angry [-],H1,Architecture and kinds of houses and buildings,28,48,1.1506,1.2656,0.312327,fine,64
+L1-,Life and living things [-],I1.3,Money: Price,26,46,1.1478,1.8958,0.461391,fine,64
+E3-,Calm/Violent/Angry [-],X2.2+,Knowledge [+],26,49,1.1422,1.2153,0.77545,fine,64
+E3-,Calm/Violent/Angry [-],S1.2,Personality traits,31,48,1.1410,1.3228,0.0594634,fine,64
+E3-,Calm/Violent/Angry [-],T2+,Time: Beginning and ending [+],29,49,1.1387,1.3461,0.25287,fine,64
+L1-,Life and living things [-],A1.9,Avoiding,28,47,1.1381,3.0823,0.24296,fine,64
+L1-,Life and living things [-],A4.1,"Generally kinds, groups, examples",31,49,1.1342,2.5636,0.0854331,fine,64
+E3-,Calm/Violent/Angry [-],S4,Kin,25,45,1.1332,0.7314,0.551484,fine,64
+L1-,Life and living things [-],T1.2,Time: Momentary,21,40,1.1325,3.1620,0.874629,fine,64
+E3-,Calm/Violent/Angry [-],S3.2,Relationship: Intimate/sexual,27,49,1.1316,0.9951,0.568172,fine,64
+L1-,Life and living things [-],A3+,Being [+],31,49,1.1284,1.8378,0.0854331,fine,64
+L1-,Life and living things [-],A2.1+,"Affect:- Modify, change [+]",29,49,1.1267,1.9977,0.25287,fine,64
+E3-,Calm/Violent/Angry [-],X5.1+,Attention [+],19,37,1.1248,1.4608,1,fine,64
+L1-,Life and living things [-],M1,"Moving, coming and going",29,49,1.1205,1.9020,0.25287,fine,64
+E3-,Calm/Violent/Angry [-],E4.1+,Happy/sad: Happy [+],32,49,1.1188,1.2315,0.0443842,fine,64
+E3-,Calm/Violent/Angry [-],X7-,Wanting; planning; choosing [-],28,49,1.1142,1.5335,0.391603,fine,64
+E3-,Calm/Violent/Angry [-],A14,Exclusivizers/particularizers,27,48,1.1125,1.2487,0.470879,fine,64
+E3-,Calm/Violent/Angry [-],A5.1+,Evaluation:- Good/bad [+],25,47,1.1079,0.8716,0.770867,fine,64
+L1-,Life and living things [-],N5,Quantities,26,48,1.1055,1.6115,0.665466,fine,64
+E3-,Calm/Violent/Angry [-],K1,Entertainment generally,26,49,1.1055,1.4262,0.77545,fine,64
+L1-,Life and living things [-],O4.4,Shape,26,48,1.1011,2.0691,0.665466,fine,64
+L1-,Life and living things [-],E3+,Calm/Violent/Angry [+],26,46,1.0969,2.6108,0.461391,fine,64
+L1-,Life and living things [-],A1.7-,Constraint [-],28,48,1.0969,2.2230,0.312327,fine,64
+E3-,Calm/Violent/Angry [-],H3,Areas around or near houses,23,44,1.0950,1.2552,0.880396,fine,64
+L1-,Life and living things [-],N5.2+,Exceeding; waste [+],28,46,1.0945,2.0716,0.183925,fine,64
+L1-,Life and living things [-],I2.2,Business: Selling,32,48,1.0926,1.8861,0.0293049,fine,64
+L1-,Life and living things [-],I1.2,Money: Debts,30,49,1.0923,1.4799,0.152408,fine,64
+L1-,Life and living things [-],O3,Electricity and electrical equipment,21,39,1.0922,2.2334,0.749259,fine,64
+L1-,Life and living things [-],X5.1-,Attention [-],25,44,1.0896,2.8369,0.451381,fine,64
+E3-,Calm/Violent/Angry [-],N4,Linear order,29,49,1.0893,1.0313,0.25287,fine,64
+E3-,Calm/Violent/Angry [-],X6+,Deciding [+],26,49,1.0878,1.2266,0.77545,fine,64
+E3-,Calm/Violent/Angry [-],A5.3,Evaluation:- Accuracy,25,47,1.0832,1.4616,0.770867,fine,64
+E3-,Calm/Violent/Angry [-],A1.1.1,"General actions, making etc.",29,49,1.0812,1.2864,0.25287,fine,64
+E3-,Calm/Violent/Angry [-],F4,Farming & Horticulture,26,45,1.0806,1.5192,0.371298,fine,64
+L1-,Life and living things [-],G2.1,"Crime, law and order: Law and order",28,49,1.0785,1.7761,0.391603,fine,64
+E3-,Calm/Violent/Angry [-],A2.1+,"Affect:- Modify, change [+]",26,49,1.0772,1.3978,0.77545,fine,64
+L1-,Life and living things [-],A1.3+,Caution [+],22,41,1.0760,2.7382,0.755229,fine,64
+E3-,Calm/Violent/Angry [-],M6,Location and direction,29,49,1.0749,1.1731,0.25287,fine,64
+E3-,Calm/Violent/Angry [-],E2-,Liking [-],28,48,1.0739,0.9782,0.312327,fine,64
+E3-,Calm/Violent/Angry [-],L1+,Life and living things [+],24,46,1.0715,0.7045,0.882996,fine,64
+E3-,Calm/Violent/Angry [-],I1.2,Money: Debts,25,47,1.0673,1.0380,0.770867,fine,64
+L1-,Life and living things [-],K4,"Drama, the theatre and showbusiness",29,48,1.0664,1.9825,0.193413,fine,64
+L1-,Life and living things [-],A1.1.2,Damaging and destroying,27,49,1.0642,1.8441,0.568172,fine,64
+E3-,Calm/Violent/Angry [-],X2.1,"Thought, belief",25,49,1.0630,1.4209,1,fine,64
+L1-,Life and living things [-],A5.2+,Evaluation:- True/false [+],22,43,1.0619,2.0421,1,fine,64
+L1-,Life and living things [-],X2.4,"Investigate, examine, test, search",27,49,1.0605,2.5753,0.568172,fine,64
+L1-,Life and living things [-],S8+,Helping/hindering [+],29,49,1.0595,2.0019,0.25287,fine,64
+E3-,Calm/Violent/Angry [-],X7+,Wanting; planning; choosing [+],28,49,1.0592,1.2558,0.391603,fine,64
+L1-,Life and living things [-],H1,Architecture and kinds of houses and buildings,26,49,1.0590,1.6730,0.77545,fine,64
+L1-,Life and living things [-],E1,"EMOTIONAL ACTIONS, STATES AND PROCESSES General",29,48,1.0583,2.3174,0.193413,fine,64
+E3-,Calm/Violent/Angry [-],N3.8+,Measurement: Speed [+],31,49,1.0557,1.2313,0.0854331,fine,64
+L1-,Life and living things [-],X3.4+,Sensory:- Sight [+],20,36,1.0520,2.5249,0.617719,fine,64
+L1-,Life and living things [-],X2.2+,Knowledge [+],27,49,1.0490,1.9444,0.568172,fine,64
+L1-,Life and living things [-],T1.3,Time: Period,28,49,1.0490,2.5377,0.391603,fine,64
+E3-,Calm/Violent/Angry [-],F2,Drinks,24,46,1.0473,0.7546,0.882996,fine,64
+E3-,Calm/Violent/Angry [-],Q1.2,Paper documents and writing,27,49,1.0445,1.1201,0.568172,fine,64
+E3-,Calm/Violent/Angry [-],X3.4,Sensory:- Sight,27,49,1.0414,1.4469,0.568172,fine,64
+L1-,Life and living things [-],X7-,Wanting; planning; choosing [-],22,42,1.0401,2.6982,0.877614,fine,64
+L1-,Life and living things [-],E4.1-,Happy/sad: Happy [-],26,49,1.0380,1.5043,0.77545,fine,64
+L1-,Life and living things [-],A9+,Getting and giving; possession [+],27,49,1.0374,1.6314,0.568172,fine,64
+E3-,Calm/Violent/Angry [-],X3.2++,Sensory:- Sound [++],26,49,1.0357,1.4369,0.77545,fine,64
+L1-,Life and living things [-],S1.2.4+,Politeness [+],24,45,1.0344,2.7281,0.765992,fine,64
+L1-,Life and living things [-],T2+,Time: Beginning and ending [+],25,49,1.0328,2.2609,1,fine,64
+L1-,Life and living things [-],A9-,Getting and giving; possession [-],27,49,1.0327,2.0298,0.568172,fine,64
+E3-,Calm/Violent/Angry [-],N3.3-,Measurement: Distance [-],23,45,1.0299,1.4036,1,fine,64
+L1-,Life and living things [-],A1.1.1,"General actions, making etc.",30,49,1.0267,2.2103,0.152408,fine,64
+L1-,Life and living things [-],K2,Music and related activities,24,46,1.0253,2.3967,0.882996,fine,64
+E3-,Calm/Violent/Angry [-],A10+,Open/closed; Hiding/Hidden; Finding; Showing [+],25,49,1.0247,1.4540,1,fine,64
+L1-,Life and living things [-],F4,Farming & Horticulture,22,44,1.0214,1.4352,1,fine,64
+E3-,Calm/Violent/Angry [-],X3.2-,Sensory:- Sound [-],26,49,1.0191,1.7719,0.77545,fine,64
+E3-,Calm/Violent/Angry [-],X4.2,"Mental object:- Means, method",21,41,1.0185,1.0534,1,fine,64
+L1-,Life and living things [-],S9,Religion and the supernatural,27,49,1.0168,1.5333,0.568172,fine,64
+E3-,Calm/Violent/Angry [-],S7.1+,"Power, organizing [+]",25,49,1.0141,1.0970,1,fine,64
+E3-,Calm/Violent/Angry [-],A1.7+,Constraint [+],25,49,1.0131,1.2593,1,fine,64
+L1-,Life and living things [-],G1.2,Politics,23,46,1.0104,1.0715,1,fine,64
+E3-,Calm/Violent/Angry [-],O4.5,Texture,25,48,1.0101,1.3395,0.885433,fine,64
+E3-,Calm/Violent/Angry [-],B4,Cleaning and personal care,24,48,1.0092,1.0128,1,fine,64
+L1-,Life and living things [-],A1.2+,Suitability [+],23,45,1.0079,2.3010,1,fine,64
+L1-,Life and living things [-],X4.2,"Mental object:- Means, method",15,29,1.0068,2.6327,1,fine,64
+L1-,Life and living things [-],Q2.1,Speech etc:- Communicative,26,49,1.0065,1.6826,0.77545,fine,64
+L1-,Life and living things [-],M4,"Shipping, swimming etc.",24,47,1.0053,1.6949,1,fine,64
+E3-,Calm/Violent/Angry [-],O4.3,Colour and colour patterns,24,47,1.0047,1.2292,1,fine,64
+L1-,Life and living things [-],B3,medicines and medical treatment,21,42,1.0044,2.0164,1,fine,64
+E3-,Calm/Violent/Angry [-],A5.4+,Evaluation:- Authenticity [+],22,43,1.0027,1.2436,1,fine,64
+E3-,Calm/Violent/Angry [-],S1.1.3-,Participation [-],22,43,1.0019,0.7850,1,fine,64
+E3-,Calm/Violent/Angry [-],X3.1,Sensory:- Taste,20,40,1.0019,0.9868,1,fine,64
+E3-,Calm/Violent/Angry [-],O4.6+,Temperature      [+],25,49,1.0005,0.7708,1,fine,64
+E3-,Calm/Violent/Angry [-],O1.2,Substances and materials generally: Liquid,23,47,0.9987,0.6154,1,fine,64
+E3-,Calm/Violent/Angry [-],A5.2-,Evaluation:- True/false [-],23,46,0.9973,1.0639,1,fine,64
+E3-,Calm/Violent/Angry [-],A1.7-,Constraint [-],24,49,0.9950,1.0109,1,fine,64
+L1-,Life and living things [-],S1.1.2+,Reciprocity [+],24,48,0.9948,2.9103,1,fine,64
+L1-,Life and living things [-],X3.2++,Sensory:- Sound [++],24,49,0.9941,2.5179,1,fine,64
+L1-,Life and living things [-],X5.1+,Attention [+],17,35,0.9926,3.0840,1,fine,64
+E3-,Calm/Violent/Angry [-],G2.2+,General ethics [+],14,29,0.9919,1.5740,1,fine,64
+L1-,Life and living things [-],A14,Exclusivizers/particularizers,22,46,0.9914,1.4449,0.882996,fine,64
+L1-,Life and living things [-],O4.5,Texture,24,49,0.9900,1.8727,1,fine,64
+E3-,Calm/Violent/Angry [-],X2.4,"Investigate, examine, test, search",24,49,0.9873,1.3082,1,fine,64
+L1-,Life and living things [-],T2++,Time: Beginning and ending [++],23,48,0.9858,1.7619,0.885433,fine,64
+L1-,Life and living things [-],A1.5.1,Using,23,47,0.9804,1.6886,1,fine,64
+E3-,Calm/Violent/Angry [-],N5.1+c,Entirety; maximum [+c],21,42,0.9799,1.4014,1,fine,64
+E3-,Calm/Violent/Angry [-],A11.1+,Importance: Important [+],21,44,0.9782,1.1798,0.880396,fine,64
+E3-,Calm/Violent/Angry [-],S7.4+,Permission [+],23,48,0.9775,1.2567,0.885433,fine,64
+L1-,Life and living things [-],Q1.1,"LINGUISTIC ACTIONS, STATES AND PROCESSES; COMMUNICATION",22,49,0.9774,1.5272,0.568172,fine,64
+L1-,Life and living things [-],C1,Arts and crafts,23,48,0.9768,1.9166,0.885433,fine,64
+L1-,Life and living things [-],A2.1,"Affect:- Modify, change",24,49,0.9763,1.7564,1,fine,64
+L1-,Life and living things [-],S1.2.6-,Sensible [-],15,30,0.9762,0.1948,1,fine,64
+L1-,Life and living things [-],Q2.2-,Speech acts [-],12,26,0.9732,1.8772,0.845019,fine,64
+E3-,Calm/Violent/Angry [-],A11.1-,Importance: Important [-],21,43,0.9730,0.9595,1,fine,64
+E3-,Calm/Violent/Angry [-],A9+,Getting and giving; possession [+],24,49,0.9730,0.9314,1,fine,64
+L1-,Life and living things [-],Z6,Negative,24,49,0.9726,2.1603,1,fine,64
+L1-,Life and living things [-],B5,Clothes and personal belongings,23,47,0.9722,2.1841,1,fine,64
+L1-,Life and living things [-],N5.1+c,Entirety; maximum [+c],18,37,0.9714,1.5397,1,fine,64
+L1-,Life and living things [-],I3.1-,Work and employment: Generally [-],22,48,0.9704,1.6846,0.665466,fine,64
+E3-,Calm/Violent/Angry [-],O4.1,General appearance and physical properties,22,48,0.9700,0.9644,0.665466,fine,64
+E3-,Calm/Violent/Angry [-],T1.3,Time: Period,22,49,0.9677,1.2070,0.568172,fine,64
+L1-,Life and living things [-],T1.1.1,Time: General: Past,22,48,0.9653,1.2157,0.665466,fine,64
+L1-,Life and living things [-],A13.6,Degree: Diminishers,21,43,0.9584,2.2292,1,fine,64
+L1-,Life and living things [-],X5.2+,Interest/boredom/excited/energetic [+],17,39,0.9574,1.9480,0.522397,fine,64
+L1-,Life and living things [-],Z3,Other proper names,24,48,0.9567,1.5604,1,fine,64
+E3-,Calm/Violent/Angry [-],N3.2-,Measurement: Size  [-],20,44,0.9551,1.1601,0.651588,fine,64
+E3-,Calm/Violent/Angry [-],Z3,Other proper names,23,49,0.9546,0.9536,0.77545,fine,64
+E3-,Calm/Violent/Angry [-],Z1f,Personal names [f],23,47,0.9538,0.8299,1,fine,64
+E3-,Calm/Violent/Angry [-],A3+,Being [+],24,49,0.9511,1.2232,1,fine,64
+L1-,Life and living things [-],M2,"Putting, taking, pulling, pushing, transporting &c.",21,49,0.9504,1.5446,0.391603,fine,64
+E3-,Calm/Violent/Angry [-],Y2,Information technology and computing,22,49,0.9502,0.9709,0.568172,fine,64
+E3-,Calm/Violent/Angry [-],X2.6+,Expect [+],19,39,0.9472,0.6771,1,fine,64
+E3-,Calm/Violent/Angry [-],T1.1.2,Time: General: Present; simultaneous,23,49,0.9471,1.2343,0.77545,fine,64
+E3-,Calm/Violent/Angry [-],X3.2+++,Sensory:- Sound [+++],21,43,0.9466,0.6925,1,fine,64
+E3-,Calm/Violent/Angry [-],S5+,Groups and affiliation [+],23,48,0.9453,0.8364,0.885433,fine,64
+L1-,Life and living things [-],M6,Location and direction,22,49,0.9452,1.7357,0.568172,fine,64
+L1-,Life and living things [-],X6+,Deciding [+],21,48,0.9413,1.9584,0.470879,fine,64
+L1-,Life and living things [-],O4.2+,Judgement of appearance (pretty etc.) [+],21,47,0.9400,1.1694,0.560065,fine,64
+L1-,Life and living things [-],T2-,Time: Beginning and ending [-],23,49,0.9399,1.5587,0.77545,fine,64
+L1-,Life and living things [-],S5+c,Groups and affiliation [+c],21,44,0.9378,1.3849,0.880396,fine,64
+E3-,Calm/Violent/Angry [-],A1.9,Avoiding,21,46,0.9362,1.4657,0.658738,fine,64
+E3-,Calm/Violent/Angry [-],S1.2.4-,Politeness [-],22,47,0.9332,0.9542,0.770867,fine,64
+L1-,Life and living things [-],M5,Aircraft and flying,22,44,0.9327,1.2486,1,fine,64
+E3-,Calm/Violent/Angry [-],T1.1.1,Time: General: Past,24,49,0.9317,0.8464,1,fine,64
+L1-,Life and living things [-],G2.2+,General ethics [+],14,37,0.9305,2.0462,0.187742,fine,64
+E3-,Calm/Violent/Angry [-],Z8mf,Pronouns etc. [mf],20,49,0.9299,1.0582,0.25287,fine,64
+L1-,Life and living things [-],S7.1+,"Power, organizing [+]",20,48,0.9292,1.4101,0.312327,fine,64
+E3-,Calm/Violent/Angry [-],A7+,Definite (+ modals) [+],22,49,0.9277,1.0934,0.568172,fine,64
+L1-,Life and living things [-],A10+,Open/closed; Hiding/Hidden; Finding; Showing [+],19,49,0.9276,1.7860,0.152408,fine,64
+L1-,Life and living things [-],A5.3+,Evaluation:- Accuracy [+],20,42,0.9265,1.1315,0.877614,fine,64
+E3-,Calm/Violent/Angry [-],B5-,Clothes and personal belongings [-],22,47,0.9264,0.9322,0.770867,fine,64
+E3-,Calm/Violent/Angry [-],Z8,Pronouns etc.,21,49,0.9249,1.0138,0.391603,fine,64
+E3-,Calm/Violent/Angry [-],B1,Anatomy and physiology,22,49,0.9245,1.1309,0.568172,fine,64
+E3-,Calm/Violent/Angry [-],S7.2+,Respect [+],19,42,0.9227,1.0991,0.643969,fine,64
+E3-,Calm/Violent/Angry [-],A2.2,Affect:- Cause/Connected,21,49,0.9212,0.8019,0.391603,fine,64
+L1-,Life and living things [-],O4.3,Colour and colour patterns,17,44,0.9156,1.4410,0.174171,fine,64
+L1-,Life and living things [-],N5+,Quantities [+],23,49,0.9155,1.5658,0.77545,fine,64
+E3-,Calm/Violent/Angry [-],Z8m,Pronouns etc. [m],19,49,0.9111,0.8269,0.152408,fine,64
+E3-,Calm/Violent/Angry [-],Q1.3,Telecommunications,18,46,0.9101,1.2487,0.183925,fine,64
+L1-,Life and living things [-],S3.1,Relationship: General,21,46,0.9090,2.1935,0.658738,fine,64
+L1-,Life and living things [-],A1.7+,Constraint [+],19,48,0.9076,1.7798,0.193413,fine,64
+E3-,Calm/Violent/Angry [-],A12-,Easy/difficult [-],22,47,0.9056,1.1170,0.770867,fine,64
+L1-,Life and living things [-],N3.8+,Measurement: Speed [+],21,49,0.9043,1.5064,0.391603,fine,64
+L1-,Life and living things [-],M3,Vehicles and transport on land,21,49,0.9038,1.3843,0.391603,fine,64
+E3-,Calm/Violent/Angry [-],B5,Clothes and personal belongings,22,49,0.9020,1.0694,0.568172,fine,64
+L1-,Life and living things [-],A6.1+,Comparing:- Similar/different [+],23,48,0.8981,1.2809,0.885433,fine,64
+E3-,Calm/Violent/Angry [-],N5-,Quantities [-],17,47,0.8977,1.0101,0.0789407,fine,64
+L1-,Life and living things [-],M7,Places,19,49,0.8956,1.8371,0.152408,fine,64
+E3-,Calm/Violent/Angry [-],L3,Plants,21,46,0.8901,1.3262,0.658738,fine,64
+E3-,Calm/Violent/Angry [-],Q4,The Media,11,25,0.8886,1.0041,0.690038,fine,64
+E3-,Calm/Violent/Angry [-],O4.2+,Judgement of appearance (pretty etc.) [+],22,48,0.8886,0.8871,0.665466,fine,64
+L1-,Life and living things [-],A6.1-,Comparing:- Similar/different [-],21,48,0.8873,1.6266,0.470879,fine,64
+L1-,Life and living things [-],A10-,Open/closed; Hiding/Hidden; Finding; Showing [-],22,49,0.8866,1.6422,0.568172,fine,64
+E3-,Calm/Violent/Angry [-],C1,Arts and crafts,23,48,0.8842,0.9910,0.885433,fine,64
+E3-,Calm/Violent/Angry [-],M7,Places,19,48,0.8841,1.1649,0.193413,fine,64
+L1-,Life and living things [-],A5.4-,Evaluation:- Authenticity [-],17,40,0.8839,1.3356,0.429591,fine,64
+E3-,Calm/Violent/Angry [-],Z5,Grammatical bin,16,49,0.8827,1.0786,0.0212941,fine,64
+L1-,Life and living things [-],X2.1,"Thought, belief",21,49,0.8814,2.1208,0.391603,fine,64
+E3-,Calm/Violent/Angry [-],X9.2-,Ability:- Success and failure [-],23,48,0.8802,1.1491,0.885433,fine,64
+L1-,Life and living things [-],X3.4,Sensory:- Sight,19,49,0.8779,1.9619,0.152408,fine,64
+L1-,Life and living things [-],X3.2+++,Sensory:- Sound [+++],18,42,0.8778,0.8236,0.440799,fine,64
+L1-,Life and living things [-],S5+,Groups and affiliation [+],20,46,0.8773,1.1609,0.461391,fine,64
+L1-,Life and living things [-],E3-,Calm/Violent/Angry [-],19,49,0.8772,1.3107,0.152408,fine,64
+L1-,Life and living things [-],A5.4+,Evaluation:- Authenticity [+],19,44,0.8741,1.8527,0.451381,fine,64
+E3-,Calm/Violent/Angry [-],N5,Quantities,18,49,0.8684,0.9757,0.0854331,fine,64
+E3-,Calm/Violent/Angry [-],T1.2,Time: Momentary,22,47,0.8678,1.4221,0.770867,fine,64
+L1-,Life and living things [-],I3.1,Work and employment: Generally,19,49,0.8600,1.3072,0.152408,fine,64
+L1-,Life and living things [-],W3,Geographical terms,17,46,0.8581,1.1478,0.103805,fine,64
+E3-,Calm/Violent/Angry [-],S1.1.1,"SOCIAL ACTIONS, STATES AND PROCESSES",23,48,0.8537,1.7209,0.885433,fine,64
+L1-,Life and living things [-],E2+,Liking [+],20,48,0.8528,1.1883,0.312327,fine,64
+L1-,Life and living things [-],Q4.3,"The Media:- TV, Radio and Cinema",17,49,0.8521,2.1740,0.0443842,fine,64
+L1-,Life and living things [-],Z1mf,Personal names [mf],22,49,0.8484,1.1292,0.568172,fine,64
+L1-,Life and living things [-],O1.1,Substances and materials generally: Solid,19,49,0.8457,1.9864,0.152408,fine,64
+L1-,Life and living things [-],L1+,Life and living things [+],18,47,0.8430,0.9358,0.143865,fine,64
+E3-,Calm/Violent/Angry [-],N3.8-,Measurement: Speed [-],21,47,0.8372,0.8502,0.560065,fine,64
+L1-,Life and living things [-],X2.2-,Knowledge [-],16,45,0.8372,1.2367,0.0724543,fine,64
+L1-,Life and living things [-],S7.2+,Respect [+],10,29,0.8348,1.8053,0.136046,fine,64
+L1-,Life and living things [-],T1.1.2,Time: General: Present; simultaneous,19,49,0.8347,1.6078,0.152408,fine,64
+E3-,Calm/Violent/Angry [-],O2,Objects generally,17,49,0.8345,1.1247,0.0443842,fine,64
+L1-,Life and living things [-],S7.4+,Permission [+],18,48,0.8331,1.7299,0.111403,fine,64
+E3-,Calm/Violent/Angry [-],X3,Sensory,17,35,0.8320,0.3791,1,fine,64
+E3-,Calm/Violent/Angry [-],S7.2-,Respect [-],15,38,0.8276,0.5998,0.255875,fine,64
+E3-,Calm/Violent/Angry [-],L2,Living creatures generally,15,48,0.8272,0.9029,0.0132833,fine,64
+L1-,Life and living things [-],G2.1-,"Crime, law and order: Law and order [-]",18,48,0.8267,0.9768,0.111403,fine,64
+L1-,Life and living things [-],X8+,Trying [+],19,49,0.8243,1.0195,0.152408,fine,64
+E3-,Calm/Violent/Angry [-],A1.8-,Inclusion/Exclusion [-],14,31,0.8222,0.9996,0.7201,fine,64
+L1-,Life and living things [-],A13.3,Degree: Boosters,18,45,0.8212,0.9361,0.232693,fine,64
+L1-,Life and living things [-],X3.3,Sensory:- Touch,15,45,0.8208,1.6498,0.0356978,fine,64
+L1-,Life and living things [-],T1.1.3,Time: General: Future,19,45,0.8197,0.5849,0.371298,fine,64
+E3-,Calm/Violent/Angry [-],S2mf,People [mf],19,49,0.8185,0.9149,0.152408,fine,64
+L1-,Life and living things [-],Z5,Grammatical bin,13,49,0.8184,1.6218,0.00140269,fine,64
+L1-,Life and living things [-],A5.3,Evaluation:- Accuracy,16,44,0.8100,1.4144,0.0961418,fine,64
+L1-,Life and living things [-],S1.1.3+,Participation [+],19,49,0.8099,1.7266,0.152408,fine,64
+E3-,Calm/Violent/Angry [-],S8-,Helping/hindering [-],15,49,0.8016,0.9331,0.00939924,fine,64
+E3-,Calm/Violent/Angry [-],M8,Remaining/stationary,19,49,0.8004,0.8330,0.152408,fine,64
+L1-,Life and living things [-],Z3c,Other proper names [c],18,48,0.7962,1.8184,0.111403,fine,64
+E3-,Calm/Violent/Angry [-],S1.1.3+,Participation [+],19,49,0.7942,1.1058,0.152408,fine,64
+L1-,Life and living things [-],S8-,Helping/hindering [-],20,49,0.7938,1.5792,0.25287,fine,64
+E3-,Calm/Violent/Angry [-],N3.8+fn,Measurement: Speed [+fn],18,38,0.7926,0.7958,0.871415,fine,64
+L1-,Life and living things [-],A5.3-,Evaluation:- Accuracy [-],18,47,0.7920,1.8752,0.143865,fine,64
+L1-,Life and living things [-],T4--,Time: Early/late [--],17,45,0.7893,0.9385,0.135156,fine,64
+E3-,Calm/Violent/Angry [-],N5.1+,Entirety; maximum [+],16,47,0.7853,0.7541,0.0399861,fine,64
+L1-,Life and living things [-],N4,Linear order,21,48,0.7839,1.4760,0.470879,fine,64
+E3-,Calm/Violent/Angry [-],T2++,Time: Beginning and ending [++],18,48,0.7829,0.7009,0.111403,fine,64
+L1-,Life and living things [-],L3,Plants,17,37,0.7799,1.6757,0.742829,fine,64
+E3-,Calm/Violent/Angry [-],E4.1-,Happy/sad: Happy [-],18,48,0.7788,0.8558,0.111403,fine,64
+L1-,Life and living things [-],S1.2.4-,Politeness [-],20,44,0.7769,1.3761,0.651588,fine,64
+L1-,Life and living things [-],N5++,Quantities [++],18,45,0.7760,0.9881,0.232693,fine,64
+E3-,Calm/Violent/Angry [-],F1,Food,16,49,0.7724,0.9910,0.0212941,fine,64
+L1-,Life and living things [-],I1.1,Money: Affluence,21,47,0.7718,1.2676,0.560065,fine,64
+E3-,Calm/Violent/Angry [-],I3.1-,Work and employment: Generally [-],20,49,0.7687,0.7712,0.25287,fine,64
+E3-,Calm/Violent/Angry [-],E3-,Calm/Violent/Angry [-],10,49,0.7616,0.6343,3.84591e-05,fine,64
+E3-,Calm/Violent/Angry [-],K5.1,Sports,14,49,0.7612,0.7846,0.00380165,fine,64
+E3-,Calm/Violent/Angry [-],W3,Geographical terms,16,47,0.7553,0.7885,0.0399861,fine,64
+E3-,Calm/Violent/Angry [-],A1.1.2,Damaging and destroying,9,49,0.7546,0.7283,9.26355e-06,fine,64
+E3-,Calm/Violent/Angry [-],M4,"Shipping, swimming etc.",21,46,0.7515,0.8936,0.658738,fine,64
+L1-,Life and living things [-],N3.3,Measurement: Distance,16,43,0.7421,1.6522,0.126289,fine,64
+L1-,Life and living things [-],A1.4,"Chance, luck",9,45,0.7350,1.7259,6.57466e-05,fine,64
+L1-,Life and living things [-],E6+,"Worry, concern, confident [+]",18,46,0.7335,1.1423,0.183925,fine,64
+L1-,Life and living things [-],S6+,Obligation and necessity [+],19,48,0.7296,1.3215,0.193413,fine,64
+L1-,Life and living things [-],Z8,Pronouns etc.,15,48,0.7275,1.2324,0.0132833,fine,64
+E3-,Calm/Violent/Angry [-],H4,Residence,16,46,0.7270,0.8336,0.054076,fine,64
+E3-,Calm/Violent/Angry [-],M3,Vehicles and transport on land,13,48,0.7268,0.7785,0.00208811,fine,64
+E3-,Calm/Violent/Angry [-],S1.1.2+,Reciprocity [+],18,46,0.7238,1.3098,0.183925,fine,64
+L1-,Life and living things [-],X3.2-,Sensory:- Sound [-],16,47,0.7229,2.4900,0.0399861,fine,64
+L1-,Life and living things [-],A7+,Definite (+ modals) [+],17,48,0.7229,1.1703,0.0594634,fine,64
+E3-,Calm/Violent/Angry [-],X8+,Trying [+],14,49,0.7201,0.6161,0.00380165,fine,64
+L1-,Life and living things [-],O2,Objects generally,12,49,0.7185,1.3868,0.000469757,fine,64
+E3-,Calm/Violent/Angry [-],O1.1,Substances and materials generally: Solid,10,48,0.7177,0.8414,6.16964e-05,fine,64
+L1-,Life and living things [-],O4.6+,Temperature      [+],15,47,0.7131,1.1534,0.0186238,fine,64
+E3-,Calm/Violent/Angry [-],G1.2,Politics,17,42,0.7119,0.5314,0.279956,fine,64
+L1-,Life and living things [-],S7.1-,"Power, organizing [-]",19,48,0.7118,0.8917,0.193413,fine,64
+E3-,Calm/Violent/Angry [-],S7.4-,Permission [-],15,36,0.7105,0.4710,0.405032,fine,64
+L1-,Life and living things [-],S2mf,People [mf],14,49,0.7091,1.4261,0.00380165,fine,64
+E3-,Calm/Violent/Angry [-],N3.3,Measurement: Distance,18,46,0.7075,0.9464,0.183925,fine,64
+E3-,Calm/Violent/Angry [-],Z8f,Pronouns etc. [f],15,49,0.7074,0.8067,0.00939924,fine,64
+E3-,Calm/Violent/Angry [-],X3.2,Sensory:- Sound,6,49,0.7072,0.5454,5.72777e-08,fine,64
+L1-,Life and living things [-],X3.2,Sensory:- Sound,14,49,0.7045,1.2221,0.00380165,fine,64
+E3-,Calm/Violent/Angry [-],Z4,Discourse Bin,13,49,0.7030,0.7673,0.00140269,fine,64
+L1-,Life and living things [-],T3+,"Time: Old, new and young; age [+]",12,31,0.7022,1.3003,0.281042,fine,64
+E3-,Calm/Violent/Angry [-],Z1m,Personal names [m],20,45,0.7013,0.5727,0.551484,fine,64
+L1-,Life and living things [-],S1.1.1,"SOCIAL ACTIONS, STATES AND PROCESSES",15,46,0.7011,2.0668,0.0258961,fine,64
+L1-,Life and living things [-],S7.4-,Permission [-],11,31,0.6999,0.8120,0.149613,fine,64
+L1-,Life and living things [-],B2-,Health and disease [-],7,48,0.6969,1.3282,6.24041e-07,fine,64
+E3-,Calm/Violent/Angry [-],X3.3,Sensory:- Touch,18,48,0.6959,1.0025,0.111403,fine,64
+L1-,Life and living things [-],A15-,Safety/Danger [-],20,44,0.6911,1.0618,0.651588,fine,64
+E3-,Calm/Violent/Angry [-],X2.3,Learn,14,39,0.6871,0.6643,0.108129,fine,64
+E3-,Calm/Violent/Angry [-],E6+,"Worry, concern, confident [+]",15,46,0.6783,0.4732,0.0258961,fine,64
+L1-,Life and living things [-],I1.1-,Money: Affluence [-],11,49,0.6777,0.8702,0.000141971,fine,64
+L1-,Life and living things [-],L2,Living creatures generally,10,47,0.6765,1.2973,9.84888e-05,fine,64
+L1-,Life and living things [-],H5,Furniture and household fittings,15,47,0.6761,1.4690,0.0186238,fine,64
+E3-,Calm/Violent/Angry [-],X2.6-,Expect [-],18,45,0.6746,0.4709,0.232693,fine,64
+E3-,Calm/Violent/Angry [-],S3.1,Relationship: General,17,47,0.6649,0.7970,0.0789407,fine,64
+E3-,Calm/Violent/Angry [-],A13.6,Degree: Diminishers,19,48,0.6648,1.0513,0.193413,fine,64
+E3-,Calm/Violent/Angry [-],A6.1-,Comparing:- Similar/different [-],14,49,0.6627,0.7364,0.00380165,fine,64
+L1-,Life and living things [-],S1.2,Personality traits,18,46,0.6528,1.2243,0.183925,fine,64
+E3-,Calm/Violent/Angry [-],I1.1-,Money: Affluence [-],12,49,0.6506,0.5341,0.000469757,fine,64
+L1-,Life and living things [-],B5-,Clothes and personal belongings [-],15,43,0.6482,1.0302,0.065994,fine,64
+E3-,Calm/Violent/Angry [-],A15+,Safety/Danger [+],12,48,0.6474,0.4574,0.00071727,fine,64
+L1-,Life and living things [-],Y2,Information technology and computing,18,48,0.6471,1.2035,0.111403,fine,64
+E3-,Calm/Violent/Angry [-],X5.1-,Attention [-],17,46,0.6425,0.9237,0.103805,fine,64
+L1-,Life and living things [-],Z8mfn,Pronouns etc. [mfn],18,48,0.6387,1.1842,0.111403,fine,64
+E3-,Calm/Violent/Angry [-],B2-,Health and disease [-],8,49,0.6375,0.8079,1.96465e-06,fine,64
+L1-,Life and living things [-],Z8mf,Pronouns etc. [mf],15,47,0.6350,0.8364,0.0186238,fine,64
+L1-,Life and living things [-],L1-,Life and living things [-],11,49,0.6349,0.4572,0.000141971,fine,64
+L1-,Life and living things [-],Z8m,Pronouns etc. [m],13,49,0.6326,0.7947,0.00140269,fine,64
+E3-,Calm/Violent/Angry [-],A13.4,Degree: Approximators,16,47,0.6243,0.5390,0.0399861,fine,64
+L1-,Life and living things [-],E5-,Fear/bravery/shock [-],19,46,0.6230,1.3694,0.301996,fine,64
+L1-,Life and living things [-],B1,Anatomy and physiology,6,49,0.6201,1.2916,5.72777e-08,fine,64
+L1-,Life and living things [-],X9.2+,Ability:- Success and failure [+],16,49,0.6200,0.7375,0.0212941,fine,64
+E3-,Calm/Violent/Angry [-],X3.2+,Sensory:- Sound [+],16,47,0.6158,0.7402,0.0399861,fine,64
+E3-,Calm/Violent/Angry [-],Q4.3,"The Media:- TV, Radio and Cinema",13,49,0.6157,1.1509,0.00140269,fine,64
+E3-,Calm/Violent/Angry [-],G2.2-,General ethics [-],15,49,0.6140,0.5551,0.00939924,fine,64
+E3-,Calm/Violent/Angry [-],S2mfc,People [mfc],17,37,0.6089,0.1651,0.742829,fine,64
+E3-,Calm/Violent/Angry [-],N2,Mathematics,14,37,0.6051,0.7364,0.187742,fine,64
+L1-,Life and living things [-],N5.1-,Entirety; maximum [-],12,32,0.6029,1.0392,0.215327,fine,64
+E3-,Calm/Violent/Angry [-],A13.2,Degree: Maximizers,17,46,0.6016,0.3699,0.103805,fine,64
+E3-,Calm/Violent/Angry [-],H5,Furniture and household fittings,14,47,0.6009,1.1600,0.00794273,fine,64
+L1-,Life and living things [-],A5.2-,Evaluation:- True/false [-],15,47,0.5988,1.0689,0.0186238,fine,64
+L1-,Life and living things [-],Z8f,Pronouns etc. [f],13,49,0.5914,1.2025,0.00140269,fine,64
+E3-,Calm/Violent/Angry [-],K3,Recorded sound etc.,12,32,0.5883,0.4890,0.215327,fine,64
+E3-,Calm/Violent/Angry [-],I1,Money generally,18,48,0.5865,0.7171,0.111403,fine,64
+E3-,Calm/Violent/Angry [-],S1.2.6+,Sensible [+],13,29,0.5862,0.2743,0.711071,fine,64
+E3-,Calm/Violent/Angry [-],A6.3+,Comparing:- Variety [+],14,32,0.5824,0.6964,0.596615,fine,64
+L1-,Life and living things [-],N6+,Frequency etc. [+],15,44,0.5783,0.7933,0.0487668,fine,64
+E3-,Calm/Violent/Angry [-],G3,"Warfare, defence and the army; weapons",12,49,0.5758,0.5522,0.000469757,fine,64
+E3-,Calm/Violent/Angry [-],S1.2.1+,Approachability and Friendliness [+],9,26,0.5729,0.1716,0.168638,fine,64
+L1-,Life and living things [-],N3.8-,Measurement: Speed [-],12,47,0.5718,0.9453,0.00108854,fine,64
+L1-,Life and living things [-],S3.2,Relationship: Intimate/sexual,9,49,0.5717,0.9213,9.26355e-06,fine,64
+E3-,Calm/Violent/Angry [-],A6.2+,Comparing:- Usual/unusual  [+],15,47,0.5682,0.5895,0.0186238,fine,64
+L1-,Life and living things [-],X9.2-,Ability:- Success and failure [-],15,49,0.5643,1.1113,0.00939924,fine,64
+L1-,Life and living things [-],A13.1,Degree: Non-specific,14,43,0.5632,0.3921,0.0315395,fine,64
+E3-,Calm/Violent/Angry [-],N6-,Frequency etc. [-],19,41,0.5609,0.6332,0.755229,fine,64
+E3-,Calm/Violent/Angry [-],E6-,"Worry, concern, confident [-]",20,49,0.5585,0.7990,0.25287,fine,64
+E3-,Calm/Violent/Angry [-],A5.1-,Evaluation:- Good/bad [-],10,48,0.5508,0.5594,6.16964e-05,fine,64
+E3-,Calm/Violent/Angry [-],N5.2+,Exceeding; waste [+],17,46,0.5473,0.4779,0.103805,fine,64
+L1-,Life and living things [-],S7.3,Competition,11,49,0.5472,0.6059,0.000141971,fine,64
+E3-,Calm/Violent/Angry [-],G2.1-,"Crime, law and order: Law and order [-]",10,49,0.5459,0.5023,3.84591e-05,fine,64
+E3-,Calm/Violent/Angry [-],A6.1+,Comparing:- Similar/different [+],16,48,0.5428,0.4090,0.0293049,fine,64
+E3-,Calm/Violent/Angry [-],X9.2+,Ability:- Success and failure [+],15,49,0.5400,0.4225,0.00939924,fine,64
+L1-,Life and living things [-],S1.2.5-,Toughness; strong/weak [-],12,32,0.5309,2.0277,0.215327,fine,64
+L1-,Life and living things [-],S5-,Groups and affiliation [-],15,46,0.5272,0.8476,0.0258961,fine,64
+E3-,Calm/Violent/Angry [-],X2.2-,Knowledge [-],17,43,0.5271,0.5590,0.222053,fine,64
+L1-,Life and living things [-],N3.3-,Measurement: Distance [-],18,39,0.5193,0.7756,0.749259,fine,64
+E3-,Calm/Violent/Angry [-],T4--,Time: Early/late [--],12,45,0.5186,0.3663,0.0024589,fine,64
+E3-,Calm/Violent/Angry [-],Z3c,Other proper names [c],12,49,0.5125,0.7800,0.000469757,fine,64
+L1-,Life and living things [-],S4,Kin,13,47,0.5115,0.2860,0.00308768,fine,64
+L1-,Life and living things [-],O1.2,Substances and materials generally: Liquid,17,45,0.5097,0.9250,0.135156,fine,64
+L1-,Life and living things [-],A11.1-,Importance: Important [-],8,29,0.5061,1.0176,0.0241195,fine,64
+L1-,Life and living things [-],H4,Residence,11,48,0.5058,1.0003,0.000222245,fine,64
+E3-,Calm/Violent/Angry [-],X5.2-,Interest/boredom/excited/energetic [-],11,42,0.5037,0.3336,0.00288725,fine,64
+E3-,Calm/Violent/Angry [-],N5++,Quantities [++],17,49,0.5013,0.3259,0.0443842,fine,64
+E3-,Calm/Violent/Angry [-],A11.2+,Importance: Noticeability [+],12,32,0.5000,0.3665,0.215327,fine,64
+E3-,Calm/Violent/Angry [-],L1-,Life and living things [-],8,49,0.4978,0.2491,1.96465e-06,fine,64
+L1-,Life and living things [-],N5-,Quantities [-],16,44,0.4972,0.7517,0.0961418,fine,64
+E3-,Calm/Violent/Angry [-],E5+,Fear/bravery/shock [+],11,28,0.4905,0.3512,0.344928,fine,64
+L1-,Life and living things [-],A6.2+,Comparing:- Usual/unusual  [+],17,47,0.4879,0.7676,0.0789407,fine,64
+E3-,Calm/Violent/Angry [-],E5-,Fear/bravery/shock [-],7,49,0.4861,0.3750,3.62458e-07,fine,64
+L1-,Life and living things [-],O4.1,General appearance and physical properties,8,48,0.4850,0.6010,3.30527e-06,fine,64
+E3-,Calm/Violent/Angry [-],X9.1+,"Ability:- Ability, intelligence [+]",8,48,0.4844,0.3664,3.30527e-06,fine,64
+L1-,Life and living things [-],A5.1-,Evaluation:- Good/bad [-],18,48,0.4778,0.7335,0.111403,fine,64
+L1-,Life and living things [-],I1,Money generally,12,43,0.4769,0.6750,0.00540157,fine,64
+L1-,Life and living things [-],S2,People,15,35,0.4751,0.6740,0.49956,fine,64
+E3-,Calm/Violent/Angry [-],Z8mfc,Pronouns etc. [mfc],16,39,0.4612,0.8196,0.336784,fine,64
+E3-,Calm/Violent/Angry [-],I3.1,Work and employment: Generally,9,49,0.4600,0.4543,9.26355e-06,fine,64
+E3-,Calm/Violent/Angry [-],Z8mfn,Pronouns etc. [mfn],9,49,0.4585,0.4910,9.26355e-06,fine,64
+L1-,Life and living things [-],E4.2+,Happy/sad: Contentment [+],14,43,0.4573,0.7312,0.0315395,fine,64
+E3-,Calm/Violent/Angry [-],S5+c,Groups and affiliation [+c],10,48,0.4570,0.4387,6.16964e-05,fine,64
+L1-,Life and living things [-],S7.2-,Respect [-],14,34,0.4560,0.7114,0.391528,fine,64
+L1-,Life and living things [-],A6.3+,Comparing:- Variety [+],10,25,0.4501,0.6519,0.424356,fine,64
+L1-,Life and living things [-],N2,Mathematics,9,27,0.4416,0.5679,0.122078,fine,64
+E3-,Calm/Violent/Angry [-],E2+++,Liking [+++],14,36,0.4412,0.5878,0.242985,fine,64
+L1-,Life and living things [-],Q4.2c,The Media:- Newspapers etc. [c],15,35,0.4410,1.2040,0.49956,fine,64
+E3-,Calm/Violent/Angry [-],N3.3+,Measurement: Distance [+],12,38,0.4410,0.3942,0.0335524,fine,64
+E3-,Calm/Violent/Angry [-],A1.4,"Chance, luck",10,46,0.4318,0.5223,0.000156417,fine,64
+E3-,Calm/Violent/Angry [-],N6+,Frequency etc. [+],11,46,0.4305,0.3807,0.000535585,fine,64
+E3-,Calm/Violent/Angry [-],S4m,Kin [m],16,46,0.4288,0.3159,0.054076,fine,64
+E3-,Calm/Violent/Angry [-],N5---,Quantities [---],14,36,0.4244,0.4103,0.242985,fine,64
+L1-,Life and living things [-],A1.5.2+,Usefulness [+],10,31,0.4150,1.1022,0.0707555,fine,64
+L1-,Life and living things [-],N5.1+,Entirety; maximum [+],13,44,0.4121,0.5808,0.00955988,fine,64
+E3-,Calm/Violent/Angry [-],M5,Aircraft and flying,12,43,0.4097,0.2307,0.00540157,fine,64
+E3-,Calm/Violent/Angry [-],W4,Weather ,15,44,0.3953,0.6010,0.0487668,fine,64
+E3-,Calm/Violent/Angry [-],E2+,Liking [+],5,49,0.3913,0.3817,7.59716e-09,fine,64
+E3-,Calm/Violent/Angry [-],A13.3,Degree: Boosters,13,49,0.3889,0.3076,0.00140269,fine,64
+E3-,Calm/Violent/Angry [-],S5-,Groups and affiliation [-],14,42,0.3885,0.6655,0.0435585,fine,64
+L1-,Life and living things [-],F1,Food,8,49,0.3874,0.6119,1.96465e-06,fine,64
+L1-,Life and living things [-],E6-,"Worry, concern, confident [-]",10,47,0.3873,0.8276,9.84888e-05,fine,64
+E3-,Calm/Violent/Angry [-],Z2,Geographical names,13,48,0.3860,0.4348,0.00208811,fine,64
+E3-,Calm/Violent/Angry [-],O4.2-,Judgement of appearance (pretty etc.) [-],7,48,0.3843,0.3498,6.24041e-07,fine,64
+L1-,Life and living things [-],K5.1,Sports,7,49,0.3795,0.7497,3.62458e-07,fine,64
+L1-,Life and living things [-],A13.5,Degree: Compromisers,9,34,0.3750,0.5369,0.00904119,fine,64
+L1-,Life and living things [-],F3,Cigarettes and drugs,14,48,0.3618,0.1786,0.0055152,fine,64
+E3-,Calm/Violent/Angry [-],I3.2-,Work and employmeny: Professionalism [-],13,47,0.3529,0.3423,0.00308768,fine,64
+E3-,Calm/Violent/Angry [-],S7.3,Competition,15,49,0.3521,0.3187,0.00939924,fine,64
+E3-,Calm/Violent/Angry [-],O4.6-,Temperature      [-],16,47,0.3472,0.4664,0.0399861,fine,64
+E3-,Calm/Violent/Angry [-],A5.3-,Evaluation:- Accuracy [-],10,48,0.3470,0.3123,6.16964e-05,fine,64
+E3-,Calm/Violent/Angry [-],X3.5,Sensory:- Smell,11,31,0.3464,0.4396,0.149613,fine,64
+E3-,Calm/Violent/Angry [-],H1c,Architecture and kinds of houses and buildings [c],17,40,0.3460,0.3497,0.429591,fine,64
+E3-,Calm/Violent/Angry [-],A13.5,Degree: Compromisers,14,45,0.3424,0.3762,0.0160944,fine,64
+E3-,Calm/Violent/Angry [-],S1.2.5+,Toughness; strong/weak [+],13,35,0.3417,0.4022,0.175465,fine,64
+E3-,Calm/Violent/Angry [-],T1.1.3,Time: General: Future,18,47,0.3415,0.1966,0.143865,fine,64
+L1-,Life and living things [-],I3.2-,Work and employmeny: Professionalism [-],12,45,0.3361,0.5784,0.0024589,fine,64
+E3-,Calm/Violent/Angry [-],N3.7,Measurement: Length & height,12,31,0.3354,0.0000,0.281042,fine,64
+L1-,Life and living things [-],S4c,Kin [c],8,25,0.3326,0.0954,0.107752,fine,64
+E3-,Calm/Violent/Angry [-],N3.7--,Measurement: Length & height [--],14,40,0.3190,0.2051,0.0806905,fine,64
+L1-,Life and living things [-],F2,Drinks,9,47,0.3173,0.4730,2.4904e-05,fine,64
+L1-,Life and living things [-],S2mfc,People [mfc],12,36,0.3168,0.3413,0.0652453,fine,64
+L1-,Life and living things [-],O4.2-,Judgement of appearance (pretty etc.) [-],13,46,0.3077,0.5383,0.00453386,fine,64
+E3-,Calm/Violent/Angry [-],N5+++,Quantities [+++],17,41,0.3059,0.2218,0.348889,fine,64
+L1-,Life and living things [-],O4.6-,Temperature      [-],8,43,0.3038,0.5297,4.19342e-05,fine,64
+E3-,Calm/Violent/Angry [-],A4.2+,Particular/general; detail [+],7,49,0.3013,0.1909,3.62458e-07,fine,64
+L1-,Life and living things [-],L2mfn,Living creatures generally [mfn],9,44,0.2909,0.4666,0.000106045,fine,64
+E3-,Calm/Violent/Angry [-],N1,Numbers ,11,47,0.2907,0.2095,0.000346001,fine,64
+L1-,Life and living things [-],A13.4,Degree: Approximators,12,44,0.2871,0.3538,0.00365777,fine,64
+E3-,Calm/Violent/Angry [-],N3.6,Measurement: Area,12,38,0.2864,0.2296,0.0335524,fine,64
+E3-,Calm/Violent/Angry [-],A1.2+,Suitability [+],9,46,0.2768,0.2138,4.05604e-05,fine,64
+L1-,Life and living things [-],Z1f,Personal names [f],18,47,0.2745,0.4237,0.143865,fine,64
+L1-,Life and living things [-],N3.2+,Measurement: Size  [+],10,43,0.2716,0.7568,0.000606107,fine,64
+E3-,Calm/Violent/Angry [-],F3,Cigarettes and drugs,5,49,0.2688,0.1481,7.59716e-09,fine,64
+E3-,Calm/Violent/Angry [-],H2,Parts of buildings,10,44,0.2672,0.2831,0.000388131,fine,64
+E3-,Calm/Violent/Angry [-],W2,Light,16,44,0.2655,0.1751,0.0961418,fine,64
+L1-,Life and living things [-],Z2,Geographical names,8,48,0.2605,0.3645,3.30527e-06,fine,64
+E3-,Calm/Violent/Angry [-],N3.2+,Measurement: Size  [+],16,44,0.2535,0.4127,0.0961418,fine,64
+E3-,Calm/Violent/Angry [-],I2.1,Business: Generally,10,28,0.2489,0.0000,0.184933,fine,64
+E3-,Calm/Violent/Angry [-],Q4.2,The Media:- Newspapers etc.,12,40,0.2454,0.2052,0.016589,fine,64
+E3-,Calm/Violent/Angry [-],Z1,Personal names,14,36,0.2400,0.1416,0.242985,fine,64
+E3-,Calm/Violent/Angry [-],Q4.2c,The Media:- Newspapers etc. [c],10,41,0.2348,0.3009,0.00145049,fine,64
+L1-,Life and living things [-],S1.1.3-,Participation [-],15,42,0.2266,0.1890,0.0884295,fine,64
+E3-,Calm/Violent/Angry [-],N3.7+,Measurement: Length & height [+],15,45,0.2262,0.4810,0.0356978,fine,64
+L1-,Life and living things [-],G3,"Warfare, defence and the army; weapons",6,49,0.2245,0.2253,5.72777e-08,fine,64
+E3-,Calm/Violent/Angry [-],S6+,Obligation and necessity [+],9,49,0.2203,0.2591,9.26355e-06,fine,64
+E3-,Calm/Violent/Angry [-],A5.3+,Evaluation:- Accuracy [+],10,44,0.2195,0.2006,0.000388131,fine,64
+E3-,Calm/Violent/Angry [-],M3fn,Vehicles and transport on land [fn],12,41,0.2173,0.1925,0.0115078,fine,64
+E3-,Calm/Violent/Angry [-],S4c,Kin [c],13,29,0.2161,0.1098,0.711071,fine,64
+E3-,Calm/Violent/Angry [-],G1.1,Government etc.,11,48,0.2131,0.1714,0.000222245,fine,64
+E3-,Calm/Violent/Angry [-],N5.1-,Entirety; maximum [-],14,44,0.2048,0.2282,0.0226288,fine,64
+E3-,Calm/Violent/Angry [-],O3,Electricity and electrical equipment,17,46,0.1850,0.2067,0.103805,fine,64
+E3-,Calm/Violent/Angry [-],A15-,Safety/Danger [-],5,49,0.1849,0.1825,7.59716e-09,fine,64
+E3-,Calm/Violent/Angry [-],E4.2-,Happy/sad: Contentment [-],10,31,0.1801,0.0445,0.0707555,fine,64
+L1-,Life and living things [-],S2.1f,People:- Female [f],11,42,0.1673,0.1440,0.00288725,fine,64
+E3-,Calm/Violent/Angry [-],A1.8+,Inclusion/Exclusion [+],12,40,0.1653,0.1748,0.016589,fine,64
+E3-,Calm/Violent/Angry [-],S4f,Kin [f],14,47,0.1634,0.1315,0.00794273,fine,64
+E3-,Calm/Violent/Angry [-],N3.5-,Measurement: Weight [-],14,38,0.1582,0.0000,0.143307,fine,64
+E3-,Calm/Violent/Angry [-],N6,Frequency etc.,10,38,0.1566,0.2045,0.00509764,fine,64
+L1-,Life and living things [-],X9.1+,"Ability:- Ability, intelligence [+]",10,43,0.1345,0.1418,0.000606107,fine,64
+L1-,Life and living things [-],E2-,Liking [-],13,47,0.1321,0.2066,0.00308768,fine,64
+E3-,Calm/Violent/Angry [-],S7.1-,"Power, organizing [-]",11,43,0.1309,0.1087,0.00191396,fine,64
+L1-,Life and living things [-],A13,Degree,8,45,0.1266,0.1676,1.53741e-05,fine,64
+E3-,Calm/Violent/Angry [-],T4-,Time: Early/late [-],16,44,0.1233,0.1338,0.0961418,fine,64
+E3-,Calm/Violent/Angry [-],A13.7,Degree: Minimizers,12,41,0.1203,0.0304,0.0115078,fine,64
+E3-,Calm/Violent/Angry [-],A5.1+++,Evaluation:- Good/bad [+++],17,39,0.1195,0.1501,0.522397,fine,64
+E3-,Calm/Violent/Angry [-],A13.1,Degree: Non-specific,14,43,0.1111,0.1089,0.0315395,fine,64
+L1-,Life and living things [-],M4fn,"Shipping, swimming etc. [fn]",14,37,0.1068,0.0509,0.187742,fine,64
+L1-,Life and living things [-],H3,Areas around or near houses,14,39,0.1033,0.4316,0.108129,fine,64
+L1-,Life and living things [-],T3-,"Time: Old, new and young; age [-]",13,47,0.0991,0.1504,0.00308768,fine,64
+E3-,Calm/Violent/Angry [-],M4fn,"Shipping, swimming etc. [fn]",11,33,0.0857,0.0683,0.0801433,fine,64
+L1-,Life and living things [-],N1,Numbers ,6,45,0.0752,0.0971,5.41777e-07,fine,64
+E3-,Calm/Violent/Angry [-],Q4.1,The Media:- Books,17,43,0.0705,0.1151,0.222053,fine,64
+E3-,Calm/Violent/Angry [-],A13,Degree,3,47,0.0692,0.0360,2.46473e-10,fine,64
+L1-,Life and living things [-],M3fn,Vehicles and transport on land [fn],10,34,0.0647,0.0637,0.0243065,fine,64
+E3-,Calm/Violent/Angry [-],S6-,Obligation and necessity [-],15,41,0.0636,0.0000,0.117275,fine,64
+L1-,Life and living things [-],Q1.3,Telecommunications,9,35,0.0581,0.2162,0.00598812,fine,64
+E3-,Calm/Violent/Angry [-],S2.2m,People:- Male   [m],12,45,0.0409,0.0448,0.0024589,fine,64
+L1-,Life and living things [-],L2mn,Living creatures generally [mn],8,29,0.0271,0.0000,0.0241195,fine,64
+E3-,Calm/Violent/Angry [-],S2.1f,People:- Female [f],13,41,0.0204,0.0232,0.0275332,fine,64
+L1-,Life and living things [-],S7.3+,Competition [+],7,34,0.0171,0.0000,0.000821395,fine,64
+L1-,Life and living things [-],A13.2,Degree: Maximizers,6,43,0.0119,0.0236,1.63612e-06,fine,64
+E3-,Calm/Violent/Angry [-],N5c,Quantities [c],12,32,0.0055,0.0000,0.215327,fine,64
+E3-,Calm/Violent/Angry [-],S1.2.2+,Avarice [+],3,35,0.0000,0.0000,4.17698e-07,fine,64
+E3-,Calm/Violent/Angry [-],S2,People,13,35,0.0000,0.0000,0.175465,fine,64
+L1-,Life and living things [-],N3.2-,Measurement: Size  [-],5,36,0.0000,0.0000,1.29135e-05,fine,64
+E3-,Calm/Violent/Angry [-],N3.1,Measurement: General,10,25,0.0000,0.0000,0.424356,fine,64
+L1-,Life and living things [-],T3--,"Time: Old, new and young; age [--]",3,26,0.0000,0.0000,8.79765e-05,fine,64
+L1-,Life and living things [-],X5.2-,Interest/boredom/excited/energetic [-],11,36,0.0000,0.0000,0.0288167,fine,64
+L1-,Life and living things [-],H2,Parts of buildings,4,43,0.0000,0.0000,3.10815e-08,fine,64
+L1-,Life and living things [-],X1,"PSYCHOLOGICAL ACTIONS, STATES AND PROCESSES",7,28,0.0000,0.0000,0.012541,fine,64
+E3-,Calm/Violent/Angry [-],A6.2-,Comparing:- Usual/unusual  [-],11,33,0.0000,0.0000,0.0801433,fine,64
+E3-,Calm/Violent/Angry [-],L2mn,Living creatures generally [mn],8,37,0.0000,0.0000,0.000752897,fine,64
+E3-,Calm/Violent/Angry [-],T1.3+,Time: Period [+],15,43,0.0000,0.0000,0.065994,fine,64
+E3-,Calm/Violent/Angry [-],O1.3,Substances and materials generally: Gas,14,41,0.0000,0.0000,0.0595839,fine,64
+E3-,Calm/Violent/Angry [-],T3--,"Time: Old, new and young; age [--]",5,27,0.0000,0.0000,0.00151372,fine,64
+L1-,Life and living things [-],H1c,Architecture and kinds of houses and buildings [c],2,39,0.0000,0.0000,2.84126e-09,fine,64
+L1-,Life and living things [-],O1.3,Substances and materials generally: Gas,8,26,0.0000,0.0000,0.0755187,fine,64
+E3-,Calm/Violent/Angry [-],O4.6,Temperature     ,9,34,0.0000,0.0000,0.00904119,fine,64
+L1-,Life and living things [-],S4f,Kin [f],10,37,0.0000,0.0000,0.00763208,fine,64
+L1-,Life and living things [-],O4.6,Temperature     ,9,33,0.0000,0.0000,0.013531,fine,64
+E3-,Calm/Violent/Angry [-],X1,"PSYCHOLOGICAL ACTIONS, STATES AND PROCESSES",9,33,0.0000,0.0000,0.013531,fine,64
+E3-,Calm/Violent/Angry [-],A11.1++,Importance: Important [++],8,35,0.0000,0.0000,0.00187823,fine,64
+L1-,Life and living things [-],S4m,Kin [m],8,38,0.0000,0.0000,0.000471987,fine,64
+L1-,Life and living things [-],N3.7+,Measurement: Length & height [+],8,37,0.0000,0.0000,0.000752897,fine,64
+L1-,Life and living things [-],B2+,Health and disease [+],6,36,0.0000,0.0000,6.96017e-05,fine,64
+E3-,Calm/Violent/Angry [-],W2-,Light [-],12,33,0.0000,0.0000,0.162756,fine,64
+E3-,Calm/Violent/Angry [-],Z7,If,10,38,0.0000,0.0000,0.00509764,fine,64
+L1-,Life and living things [-],X3.2+,Sensory:- Sound [+],9,32,0.0000,0.0000,0.0200616,fine,64
+L1-,Life and living things [-],S2.2m,People:- Male   [m],11,44,0.0000,0.0000,0.00126003,fine,64
+E3-,Calm/Violent/Angry [-],O1,Substances and materials generally,7,34,0.0000,0.0000,0.000821395,fine,64
+L1-,Life and living things [-],Q4.1,The Media:- Books,9,30,0.0000,0.0000,0.0427739,fine,64
+E3-,Calm/Violent/Angry [-],T3+,"Time: Old, new and young; age [+]",9,37,0.0000,0.0000,0.00256321,fine,64
+L1-,Life and living things [-],O1,Substances and materials generally,6,28,0.0000,0.0000,0.00371917,fine,64
+E3-,Calm/Violent/Angry [-],S1.2.5-,Toughness; strong/weak [-],5,42,0.0000,0.0000,4.4337e-07,fine,64
+E3-,Calm/Violent/Angry [-],S1.2.6-,Sensible [-],7,37,0.0000,0.0000,0.000191076,fine,64
+E3-,Calm/Violent/Angry [-],N3.5,Measurement: Weight,10,27,0.0000,0.0000,0.247789,fine,64
+L1-,Life and living things [-],A13.7,Degree: Minimizers,9,32,0.0000,0.0000,0.0200616,fine,64
+E3-,Calm/Violent/Angry [-],S1.2.2-,Avarice [-],5,32,0.0000,0.0000,0.000113074,fine,64
+E3-,Calm/Violent/Angry [-],N3.3---,Measurement: Distance [---],8,27,0.0000,0.0000,0.052239,fine,64
+E3-,Calm/Violent/Angry [-],W1,The universe,8,30,0.0000,0.0000,0.0161248,fine,64
+E3-,Calm/Violent/Angry [-],S7.1,"Power, organizing",10,34,0.0000,0.0000,0.0243065,fine,64

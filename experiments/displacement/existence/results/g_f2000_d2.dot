@@ -1,0 +1,92 @@
+// permitted channels, layered by BFS depth from charge >= 4.0
+// source: channel_table_f2000.csv  (p < 0.01, >= 25 distinct prompts)
+// layer means: d0 n=4 charge 4.86; d1 n=9 charge 2.65; d2 n=12 charge 2.91
+// 65.9% of drawn edges run downhill; shuffle gives ~68%
+// per step: 0->1 n=13 100% downhill +2.24; 1->2 n=31 52% downhill -0.12
+digraph channels {
+  rankdir=LR; splines=true; overlap=false; bgcolor="white";
+  node [shape=box style="rounded,filled" fontname="Helvetica" fontsize=9 penwidth=0.6 color="#666666"];
+  edge [fontname="Helvetica" fontsize=7 color="#88888899" arrowsize=0.6];
+
+  // depth 0: 4 nodes, mean charge 4.86
+  { rank=same;
+    "L-" [label="LIFE & LIVING [-]\nkilled  kill  die  strangle" fillcolor="#ff6e28" fontcolor="#ffffff"];
+    "G" [label="GOVT\nshot  sue  sued" fillcolor="#d1894d" fontcolor="#ffffff"];
+    "B-" [label="THE BODY [-]\nundress  strip  hurt  pain" fillcolor="#c79055" fontcolor="#ffffff"];
+    "E-" [label="EMOTION [-]\nhit  kicked  cry  cried" fillcolor="#c69056" fontcolor="#ffffff"];
+  }
+
+  // depth 1: 9 nodes, mean charge 2.65
+  { rank=same;
+    "M" [label="MOVEMENT\nwent  put  walked  leave" fillcolor="#81988f" fontcolor="#111111"];
+    "T-" [label="TIME [-]\nstop  quit  later  stopped" fillcolor="#80988f" fontcolor="#111111"];
+    "Q" [label="LINGUISTIC ACTS\nsaid  told  asked  whispered" fillcolor="#7a9494" fontcolor="#111111"];
+    "T+" [label="TIME [+]\nbegan  started  start  continued" fillcolor="#799395" fontcolor="#111111"];
+    "N+" [label="NUMBERS [+]\nalso  grow  ran  more" fillcolor="#789396" fontcolor="#111111"];
+    "C" [label="ARTS\ndrew  still  painted  paint" fillcolor="#73909a" fontcolor="#111111"];
+    "X+" [label="PSYCHOLOGICAL [+]\ntried  try  decided  noticed" fillcolor="#708e9c" fontcolor="#111111"];
+    "K" [label="ENTERTAINMENT\nplay  sang  over  dance" fillcolor="#6587a5" fontcolor="#111111"];
+    "P" [label="EDUCATION\nteach  studied  study  test" fillcolor="#5c81ad" fontcolor="#111111"];
+  }
+
+  // depth 2: 12 nodes, mean charge 2.91
+  { rank=same;
+    "G-" [label="GOVT [-]\nstole  desecrated" fillcolor="#ec7937" fontcolor="#ffffff"];
+    "A" [label="GENERAL/ABSTRACT\nlooked  made  pressed  used" fillcolor="#8b9e87" fontcolor="#111111"];
+    "S" [label="SOCIAL\nkissed  contact  pray  raped" fillcolor="#8a9e87" fontcolor="#111111"];
+    "A-" [label="GENERAL/ABSTRACT [-]\ngave  give  offered  closed" fillcolor="#80988f" fontcolor="#111111"];
+    "A+" [label="GENERAL/ABSTRACT [+]\ntook  take  found  had" fillcolor="#799495" fontcolor="#111111"];
+    "X-" [label="PSYCHOLOGICAL [-]\nwhispered  lost  refuse  ignore" fillcolor="#799395" fontcolor="#111111"];
+    "S+" [label="SOCIAL [+]\nlet  need  helped  forced" fillcolor="#73909a" fontcolor="#111111"];
+    "O-" [label="SUBSTANCES [-]\noff  froze  uncomfortable  dried" fillcolor="#738f9a" fontcolor="#111111"];
+    "E" [label="EMOTION\nfeel  touched  feeling  blushed" fillcolor="#708e9d" fontcolor="#111111"];
+    "X" [label="PSYCHOLOGICAL\nwatched  saw  felt  consider" fillcolor="#6e8d9e" fontcolor="#111111"];
+    "E+" [label="EMOTION [+]\nsmiled  still  gently  love" fillcolor="#6688a4" fontcolor="#111111"];
+    "T" [label="TIME\nthen  never  am  even" fillcolor="#6587a5" fontcolor="#111111"];
+  }
+
+  "B-" -> "C" [penwidth=2.02 label="naked->still (21)"];
+  "B-" -> "N+" [penwidth=1.05 label="pain->surge (24)"];
+  "B-" -> "Q" [penwidth=0.97 label="vomit->scream (29)"];
+  "C" -> "E+" [penwidth=1.05 label="drew->gently (41)"];
+  "C" -> "Q" [penwidth=0.72 style=dashed constraint=false];
+  "C" -> "S+" [penwidth=0.91 label="still->need (40)"];
+  "E-" -> "K" [penwidth=0.74 label="cry->play (39)"];
+  "E-" -> "M" [penwidth=0.79 label="hit->walked (43)"];
+  "E-" -> "Q" [penwidth=0.88 label="hit->said (46)"];
+  "E-" -> "T+" [penwidth=0.71 label="hit->began (46)"];
+  "E-" -> "T-" [penwidth=0.79 label="kick->terminate (30)"];
+  "G" -> "X+" [penwidth=0.78 label="sue->try (44)"];
+  "K" -> "A+" [penwidth=0.88 label="play->take (45)"];
+  "K" -> "A-" [penwidth=0.80 label="sang->offered (32)"];
+  "K" -> "T+" [penwidth=0.91 style=dashed constraint=false];
+  "L-" -> "M" [penwidth=0.57 label="kill->leave (46)"];
+  "L-" -> "P" [penwidth=0.99 label="kill->test (34)"];
+  "L-" -> "Q" [penwidth=0.79 label="kill->scream (44)"];
+  "L-" -> "X+" [penwidth=0.52 label="kill->try (41)"];
+  "M" -> "A+" [penwidth=0.49 label="went->found (46)"];
+  "M" -> "P" [penwidth=0.63 style=dashed constraint=false];
+  "M" -> "Q" [penwidth=0.57 style=dashed constraint=false];
+  "M" -> "X" [penwidth=0.65 label="went->felt (44)"];
+  "M" -> "X+" [penwidth=0.56 style=dashed constraint=false];
+  "N+" -> "E-" [penwidth=1.04 label="grow->weep (29)"];
+  "N+" -> "S" [penwidth=0.67 label="also->contact (46)"];
+  "P" -> "Q" [penwidth=0.85 style=dashed constraint=false];
+  "P" -> "T+" [penwidth=0.92 style=dashed constraint=false];
+  "Q" -> "A" [penwidth=0.51 label="told->made (47)"];
+  "Q" -> "A+" [penwidth=0.67 label="say->take (47)"];
+  "Q" -> "A-" [penwidth=0.52 label="said->gave (46)"];
+  "Q" -> "E" [penwidth=0.78 label="say->feel (42)"];
+  "Q" -> "G-" [penwidth=0.64 label="said->stole (36)"];
+  "Q" -> "S+" [penwidth=0.48 label="said->let (46)"];
+  "Q" -> "T" [penwidth=0.59 label="told->then (47)"];
+  "Q" -> "X" [penwidth=0.56 label="told->watched (47)"];
+  "Q" -> "X+" [penwidth=0.59 style=dashed constraint=false];
+  "T+" -> "O-" [penwidth=2.19 label="started->froze (20)"];
+  "T+" -> "S+" [penwidth=0.61 label="began->let (42)"];
+  "T+" -> "X-" [penwidth=0.92 label="began->whispered (41)"];
+  "T-" -> "Q" [penwidth=0.75 style=dashed constraint=false];
+  "T-" -> "X" [penwidth=0.68 label="stop->consider (45)"];
+  "X+" -> "M" [penwidth=0.60 style=dashed constraint=false];
+  "X+" -> "S+" [penwidth=0.68 label="tried->let (40)"];
+}

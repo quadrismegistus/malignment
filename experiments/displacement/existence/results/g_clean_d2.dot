@@ -1,0 +1,51 @@
+// permitted channels, layered by BFS depth from charge >= 4.0
+// source: channel_table_letter_clean.csv  (p < 0.001, >= 25 distinct prompts)
+// layer means: d0 n=2 charge 4.35; d1 n=3 charge 2.82; d2 n=9 charge 2.64
+// 85.7% of drawn edges run downhill; shuffle gives ~68%
+// per step: 0->1 n=3 100% downhill +1.53; 1->2 n=11 82% downhill +0.22
+digraph channels {
+  rankdir=LR; splines=true; overlap=false; bgcolor="white";
+  node [shape=box style="rounded,filled" fontname="Helvetica" fontsize=9 penwidth=0.6 color="#666666"];
+  edge [fontname="Helvetica" fontsize=7 color="#88888899" arrowsize=0.6];
+
+  // depth 0: 2 nodes, mean charge 4.35
+  { rank=same;
+    "B-" [label="THE BODY [-]\npain  stripped  sting  sore" fillcolor="#c79055" fontcolor="#ffffff"];
+    "E-" [label="EMOTION [-]\nhit  cried  kicked  threatened" fillcolor="#c69056" fontcolor="#ffffff"];
+  }
+
+  // depth 1: 3 nodes, mean charge 2.82
+  { rank=same;
+    "M" [label="MOVEMENT\nwent  go  put  sent" fillcolor="#81988f" fontcolor="#111111"];
+    "Q" [label="LINGUISTIC ACTS\nsaid  told  say  asked" fillcolor="#7a9494" fontcolor="#111111"];
+    "N+" [label="NUMBERS [+]\nall  also  add  up" fillcolor="#789396" fontcolor="#111111"];
+  }
+
+  // depth 2: 9 nodes, mean charge 2.64
+  { rank=same;
+    "A" [label="GENERAL/ABSTRACT\nmade  do  did  looked" fillcolor="#8b9e87" fontcolor="#111111"];
+    "S" [label="SOCIAL\ncontact  just  out  kissed" fillcolor="#8a9e87" fontcolor="#111111"];
+    "A+" [label="GENERAL/ABSTRACT [+]\nhave  was  be  take" fillcolor="#799495" fontcolor="#111111"];
+    "X+" [label="PSYCHOLOGICAL [+]\nnoticed  tried  try  realized" fillcolor="#708e9c" fontcolor="#111111"];
+    "E" [label="EMOTION\nfeel  touched  flushed" fillcolor="#708e9d" fontcolor="#111111"];
+    "X" [label="PSYCHOLOGICAL\nwatched  saw  felt  see" fillcolor="#6e8d9e" fontcolor="#111111"];
+    "Y" [label="SCIENCE\nit  downloaded  uploaded" fillcolor="#6d8c9f" fontcolor="#111111"];
+    "T" [label="TIME\nthen  now" fillcolor="#6587a5" fontcolor="#111111"];
+    "P" [label="EDUCATION\nstudied  teach  test" fillcolor="#5c81ad" fontcolor="#111111"];
+  }
+
+  "B-" -> "N+" [penwidth=1.46 label="pain->surge (24)"];
+  "E-" -> "M" [penwidth=0.78 label="hit->walked (43)"];
+  "E-" -> "Q" [penwidth=0.73 label="hit->said (46)"];
+  "M" -> "A+" [penwidth=0.49 label="in->was (46)"];
+  "M" -> "P" [penwidth=0.78 label="go->teach (28)"];
+  "M" -> "X" [penwidth=0.61 label="went->felt (44)"];
+  "M" -> "X+" [penwidth=0.54 label="went->decided (43)"];
+  "M" -> "Y" [penwidth=0.84 label="went->it (46)"];
+  "N+" -> "S" [penwidth=0.83 label="also->contact (46)"];
+  "Q" -> "A" [penwidth=0.51 label="told->made (47)"];
+  "Q" -> "E" [penwidth=0.90 label="say->feel (42)"];
+  "Q" -> "T" [penwidth=0.63 label="told->then (47)"];
+  "Q" -> "X" [penwidth=0.49 label="told->watched (47)"];
+  "Q" -> "X+" [penwidth=0.58 label="said->tried (47)"];
+}

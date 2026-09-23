@@ -1,0 +1,45 @@
+// permitted channels, layered by BFS depth from charge >= 4.0
+// source: channel_table_f2000.csv  (p < 0.01, >= 25 distinct prompts)
+// layer means: d0 n=4 charge 4.86; d1 n=9 charge 2.65
+// 100.0% of drawn edges run downhill; shuffle gives ~68%
+// per step: 0->1 n=13 100% downhill +2.24
+digraph channels {
+  rankdir=LR; splines=true; overlap=false; bgcolor="white";
+  node [shape=box style="rounded,filled" fontname="Helvetica" fontsize=9 penwidth=0.6 color="#666666"];
+  edge [fontname="Helvetica" fontsize=7 color="#88888899" arrowsize=0.6];
+
+  // depth 0: 4 nodes, mean charge 4.86
+  { rank=same;
+    "L-" [label="LIFE & LIVING [-]\nkilled  kill  die  strangle" fillcolor="#ff6e28" fontcolor="#ffffff"];
+    "G" [label="GOVT\nshot  sue  sued" fillcolor="#d1894d" fontcolor="#ffffff"];
+    "B-" [label="THE BODY [-]\nundress  strip  hurt  pain" fillcolor="#c79055" fontcolor="#ffffff"];
+    "E-" [label="EMOTION [-]\nhit  kicked  cry  cried" fillcolor="#c69056" fontcolor="#ffffff"];
+  }
+
+  // depth 1: 9 nodes, mean charge 2.65
+  { rank=same;
+    "M" [label="MOVEMENT\nwent  put  walked  leave" fillcolor="#81988f" fontcolor="#111111"];
+    "T-" [label="TIME [-]\nstop  quit  later  stopped" fillcolor="#80988f" fontcolor="#111111"];
+    "Q" [label="LINGUISTIC ACTS\nsaid  told  asked  whispered" fillcolor="#7a9494" fontcolor="#111111"];
+    "T+" [label="TIME [+]\nbegan  started  start  continued" fillcolor="#799395" fontcolor="#111111"];
+    "N+" [label="NUMBERS [+]\nalso  grow  ran  more" fillcolor="#789396" fontcolor="#111111"];
+    "C" [label="ARTS\ndrew  still  painted  paint" fillcolor="#73909a" fontcolor="#111111"];
+    "X+" [label="PSYCHOLOGICAL [+]\ntried  try  decided  noticed" fillcolor="#708e9c" fontcolor="#111111"];
+    "K" [label="ENTERTAINMENT\nplay  sang  over  dance" fillcolor="#6587a5" fontcolor="#111111"];
+    "P" [label="EDUCATION\nteach  studied  study  test" fillcolor="#5c81ad" fontcolor="#111111"];
+  }
+
+  "B-" -> "C" [penwidth=2.02 label="naked->still (21)"];
+  "B-" -> "N+" [penwidth=1.05 label="pain->surge (24)"];
+  "B-" -> "Q" [penwidth=0.97 label="vomit->scream (29)"];
+  "E-" -> "K" [penwidth=0.74 label="cry->play (39)"];
+  "E-" -> "M" [penwidth=0.79 label="hit->walked (43)"];
+  "E-" -> "Q" [penwidth=0.88 label="hit->said (46)"];
+  "E-" -> "T+" [penwidth=0.71 label="hit->began (46)"];
+  "E-" -> "T-" [penwidth=0.79 label="kick->terminate (30)"];
+  "G" -> "X+" [penwidth=0.78 label="sue->try (44)"];
+  "L-" -> "M" [penwidth=0.57 label="kill->leave (46)"];
+  "L-" -> "P" [penwidth=0.99 label="kill->test (34)"];
+  "L-" -> "Q" [penwidth=0.79 label="kill->scream (44)"];
+  "L-" -> "X+" [penwidth=0.52 label="kill->try (41)"];
+}

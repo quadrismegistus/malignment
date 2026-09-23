@@ -1,0 +1,168 @@
+// permitted channels, layered by BFS depth from charge >= 4.0
+// source: channel_table.csv  (p < 0.001, >= 25 distinct prompts)
+// layer means: d0 n=6 charge 4.92; d1 n=22 charge 2.63; d2 n=31 charge 2.57
+// 74.1% of drawn edges run downhill; shuffle gives ~68%
+// per step: 0->1 n=25 100% downhill +2.52; 1->2 n=60 63% downhill +0.14
+digraph channels {
+  rankdir=LR; splines=true; overlap=false; bgcolor="white";
+  node [shape=box style="rounded,filled" fontname="Helvetica" fontsize=9 penwidth=0.6 color="#666666"];
+  edge [fontname="Helvetica" fontsize=7 color="#88888899" arrowsize=0.6];
+
+  // depth 0: 6 nodes, mean charge 4.92
+  { rank=same;
+    "L1-" [label="L1-\nLife and living things [-]\n5.96" fillcolor="#ff6e28" fontcolor="#ffffff"];
+    "E3-" [label="E3-\nCalm/Violent/Angry [-]\n5.10" fillcolor="#eb7937" fontcolor="#ffffff"];
+    "S7.3" [label="S7.3\nCompetition\n4.91" fillcolor="#e27f3f" fontcolor="#ffffff"];
+    "A1.1.2" [label="A1.1.2\nDamaging and destroying\n4.80" fillcolor="#dc8243" fontcolor="#ffffff"];
+    "G2.2-" [label="G2.2-\nGeneral ethics [-]\n4.55" fillcolor="#d08a4e" fontcolor="#ffffff"];
+    "X9.2+" [label="X9.2+\nAbility:- Success and failur\n4.18" fillcolor="#be955c" fontcolor="#111111"];
+  }
+
+  // depth 1: 22 nodes, mean charge 2.63
+  { rank=same;
+    "G2.1" [label="G2.1\nCrime, law and order: Law an\n3.98" fillcolor="#b59b64" fontcolor="#111111"];
+    "E6-" [label="E6-\nWorry, concern, confident [-\n3.16" fillcolor="#8c9f85" fontcolor="#111111"];
+    "S7.1+" [label="S7.1+\nPower, organizing [+]\n3.13" fillcolor="#8b9e86" fontcolor="#111111"];
+    "L2mfn" [label="L2mfn\nLiving creatures generally [\n3.00" fillcolor="#859b8b" fontcolor="#111111"];
+    "M1" [label="M1\nMoving, coming and going\n2.85" fillcolor="#7e9691" fontcolor="#111111"];
+    "A2.2" [label="A2.2\nAffect:- Cause/Connected\n2.78" fillcolor="#7a9494" fontcolor="#111111"];
+    "Q1.1" [label="Q1.1\nLINGUISTIC ACTIONS, STATES A\n2.72" fillcolor="#779297" fontcolor="#111111"];
+    "Q1.2" [label="Q1.2\nPaper documents and writing\n2.64" fillcolor="#73909a" fontcolor="#111111"];
+    "I1.1" [label="I1.1\nMoney: Affluence\n2.60" fillcolor="#718f9b" fontcolor="#111111"];
+    "A10+" [label="A10+\nOpen/closed; Hiding/Hidden; \n2.57" fillcolor="#6f8d9d" fontcolor="#111111"];
+    "Q2.1" [label="Q2.1\nSpeech etc:- Communicative\n2.56" fillcolor="#6f8d9d" fontcolor="#111111"];
+    "A2.1" [label="A2.1\nAffect:- Modify, change\n2.53" fillcolor="#6e8c9e" fontcolor="#111111"];
+    "N5+" [label="N5+\nQuantities [+]\n2.52" fillcolor="#6d8c9f" fontcolor="#111111"];
+    "N3.8" [label="N3.8\nMeasurement: Speed\n2.50" fillcolor="#6c8c9f" fontcolor="#111111"];
+    "X2.2+" [label="X2.2+\nKnowledge [+]\n2.45" fillcolor="#6a8aa1" fontcolor="#111111"];
+    "E3+" [label="E3+\nCalm/Violent/Angry [+]\n2.41" fillcolor="#6889a3" fontcolor="#111111"];
+    "A8" [label="A8\nSeem\n2.40" fillcolor="#6889a3" fontcolor="#111111"];
+    "A1.3+" [label="A1.3+\nCaution [+]\n2.37" fillcolor="#6688a5" fontcolor="#111111"];
+    "A7-" [label="A7-\nDefinite (+ modals) [-]\n2.37" fillcolor="#6687a5" fontcolor="#111111"];
+    "E4.1+" [label="E4.1+\nHappy/sad: Happy [+]\n2.28" fillcolor="#6285a8" fontcolor="#111111"];
+    "X2.3+" [label="X2.3+\nLearn [+]\n2.06" fillcolor="#577eb1" fontcolor="#111111"];
+    "N3.8+fn" [label="N3.8+fn\nMeasurement: Speed [+fn]\n2.03" fillcolor="#557db2" fontcolor="#111111"];
+  }
+
+  // depth 2: 31 nodes, mean charge 2.57
+  { rank=same;
+    "S8-" [label="S8-\nHelping/hindering [-]\n4.06" fillcolor="#b89961" fontcolor="#111111"];
+    "E6+" [label="E6+\nWorry, concern, confident [+\n3.22" fillcolor="#8fa183" fontcolor="#111111"];
+    "S6+" [label="S6+\nObligation and necessity [+]\n3.00" fillcolor="#859b8b" fontcolor="#111111"];
+    "A9+" [label="A9+\nGetting and giving; possessi\n2.97" fillcolor="#83998d" fontcolor="#111111"];
+    "O2" [label="O2\nObjects generally\n2.91" fillcolor="#80988f" fontcolor="#111111"];
+    "X8+" [label="X8+\nTrying [+]\n2.88" fillcolor="#7f9790" fontcolor="#111111"];
+    "N3.2+" [label="N3.2+\nMeasurement: Size  [+]\n2.83" fillcolor="#7c9592" fontcolor="#111111"];
+    "T2++" [label="T2++\nTime: Beginning and ending [\n2.82" fillcolor="#7c9593" fontcolor="#111111"];
+    "O1.1" [label="O1.1\nSubstances and materials gen\n2.80" fillcolor="#7b9494" fontcolor="#111111"];
+    "M6" [label="M6\nLocation and direction\n2.75" fillcolor="#789396" fontcolor="#111111"];
+    "I2.2" [label="I2.2\nBusiness: Selling\n2.71" fillcolor="#779297" fontcolor="#111111"];
+    "S7.4+" [label="S7.4+\nPermission [+]\n2.66" fillcolor="#749099" fontcolor="#111111"];
+    "X2.4" [label="X2.4\nInvestigate, examine, test, \n2.60" fillcolor="#718e9c" fontcolor="#111111"];
+    "A9-" [label="A9-\nGetting and giving; possessi\n2.59" fillcolor="#718e9c" fontcolor="#111111"];
+    "A4.2+" [label="A4.2+\nParticular/general; detail [\n2.48" fillcolor="#6b8ba0" fontcolor="#111111"];
+    "X3.4" [label="X3.4\nSensory:- Sight\n2.47" fillcolor="#6b8ba1" fontcolor="#111111"];
+    "X2.1" [label="X2.1\nThought, belief\n2.45" fillcolor="#6a8aa2" fontcolor="#111111"];
+    "A7+" [label="A7+\nDefinite (+ modals) [+]\n2.39" fillcolor="#6788a4" fontcolor="#111111"];
+    "H4" [label="H4\nResidence\n2.34" fillcolor="#6587a6" fontcolor="#111111"];
+    "S8+" [label="S8+\nHelping/hindering [+]\n2.32" fillcolor="#6386a7" fontcolor="#111111"];
+    "S9" [label="S9\nReligion and the supernatura\n2.32" fillcolor="#6386a7" fontcolor="#111111"];
+    "X5.1+" [label="X5.1+\nAttention [+]\n2.30" fillcolor="#6386a7" fontcolor="#111111"];
+    "X2.5+" [label="X2.5+\nUnderstand [+]\n2.27" fillcolor="#6185a9" fontcolor="#111111"];
+    "O4.2+" [label="O4.2+\nJudgement of appearance (pre\n2.26" fillcolor="#6084a9" fontcolor="#111111"];
+    "X2.6+" [label="X2.6+\nExpect [+]\n2.24" fillcolor="#5f84aa" fontcolor="#111111"];
+    "S1.1.1" [label="S1.1.1\nSOCIAL ACTIONS, STATES AND P\n2.17" fillcolor="#5c82ad" fontcolor="#111111"];
+    "A5" [label="A5\nEvaluation\n2.17" fillcolor="#5c82ad" fontcolor="#111111"];
+    "X3.4+" [label="X3.4+\nSensory:- Sight [+]\n2.12" fillcolor="#5a80af" fontcolor="#111111"];
+    "A5.3" [label="A5.3\nEvaluation:- Accuracy\n2.10" fillcolor="#597fb0" fontcolor="#111111"];
+    "K2" [label="K2\nMusic and related activities\n2.06" fillcolor="#577eb1" fontcolor="#111111"];
+    "A7+++" [label="A7+++\nDefinite (+ modals) [+++]\n2.50" fillcolor="#6c8ca0" fontcolor="#111111"];
+  }
+
+  "A1.1.2" -> "A1.3+" [penwidth=1.80 label="broke->carefully (28)"];
+  "A1.1.2" -> "A10+" [penwidth=0.96];
+  "A1.1.2" -> "L2mfn" [penwidth=2.20 label="broke->dove (9)"];
+  "A1.1.2" -> "Q2.1" [penwidth=1.31 label="broke->whispered (35)"];
+  "A1.1.2" -> "S7.1+" [penwidth=1.20 label="ripped->forced (26)"];
+  "A10+" -> "A5" [penwidth=2.01 label="point->review (41)"];
+  "A10+" -> "A5.3" [penwidth=2.20 label="point->check (45)"];
+  "A10+" -> "I2.2" [penwidth=1.20 label="point->let (42)"];
+  "A10+" -> "K2" [penwidth=1.41 label="point->respond (43)"];
+  "A10+" -> "M6" [penwidth=0.90];
+  "A10+" -> "N3.2+" [penwidth=2.20 label="point->escalate (38)"];
+  "A10+" -> "O4.2+" [penwidth=1.64 label="point->appeal (40)"];
+  "A10+" -> "S1.1.1" [penwidth=2.20 label="point->contact (44)"];
+  "A10+" -> "S7.4+" [penwidth=1.15 label="point->let (42)"];
+  "A10+" -> "S9" [penwidth=1.76 label="point->respond (43)"];
+  "A10+" -> "T2++" [penwidth=1.58 label="opened->continued (39)"];
+  "A10+" -> "X2.6+" [penwidth=2.20 label="point->expect (37)"];
+  "A2.1" -> "A7+" [penwidth=1.41 label="add->probably (43)"];
+  "A2.1" -> "A9+" [penwidth=1.08];
+  "A2.1" -> "K2" [penwidth=1.54 label="add->respond (41)"];
+  "A2.1" -> "S1.1.1" [penwidth=0.95];
+  "A2.1" -> "S9" [penwidth=1.48 label="add->respond (41)"];
+  "A2.1" -> "X2.2+" [penwidth=1.28 label="add->inform (46)"];
+  "A2.1" -> "X2.5+" [penwidth=1.53 label="added->realized (31)"];
+  "A8" -> "A10+" [penwidth=0.90];
+  "E3+" -> "Q2.1" [penwidth=1.60 label="rested->whispered (41)"];
+  "E3-" -> "A1.3+" [penwidth=1.20 label="stabbed->carefully (29)"];
+  "E3-" -> "A2.1" [penwidth=1.50 label="kick->increase (27)"];
+  "E3-" -> "A7-" [penwidth=1.64 label="stabbed->hesitated (20)"];
+  "E3-" -> "A8" [penwidth=1.23 label="hit->looked (40)"];
+  "E3-" -> "E3+" [penwidth=1.33 label="hit->gently (29)"];
+  "E3-" -> "G2.1" [penwidth=1.17 label="kicked->handcuffed (19)"];
+  "E3-" -> "I1.1" [penwidth=1.00];
+  "E3-" -> "N3.8" [penwidth=1.74 label="thump->rate (11)"];
+  "E3-" -> "N5+" [penwidth=1.41 label="kick->increase (27)"];
+  "E3-" -> "Q2.1" [penwidth=0.95];
+  "E6-" -> "I2.2" [penwidth=2.18 label="pressed->let (45)"];
+  "E6-" -> "X3.4" [penwidth=1.44 label="pressed->watched (40)"];
+  "G2.1" -> "N3.2+" [penwidth=1.53 label="sue->escalate (38)"];
+  "G2.1" -> "Q1.1" [penwidth=1.47 label="sue->consult (39)"];
+  "G2.1" -> "X5.1+" [penwidth=1.05];
+  "G2.2-" -> "E6-" [penwidth=2.07 label="betrayed->uneasy (27)"];
+  "I1.1" -> "A4.2+" [penwidth=1.60 label="pay->express (19)"];
+  "I1.1" -> "A7+++" [penwidth=2.20 label="pay->definitely (27)"];
+  "I1.1" -> "E4.1+" [penwidth=1.82 label="paid->smiled (32)"];
+  "L1-" -> "A2.2" [penwidth=1.04];
+  "L1-" -> "E4.1+" [penwidth=1.22 label="killed->smiled (31)"];
+  "L1-" -> "N3.8+fn" [penwidth=1.27 label="kill->express (39)"];
+  "L1-" -> "Q1.1" [penwidth=1.19 label="kill->express (39)"];
+  "L1-" -> "Q1.2" [penwidth=0.98];
+  "L1-" -> "X2.3+" [penwidth=1.72 label="kill->learn (31)"];
+  "M1" -> "O1.1" [penwidth=0.88];
+  "M1" -> "S6+" [penwidth=1.22 label="went->promised (32)"];
+  "M1" -> "X3.4+" [penwidth=1.45 label="went->noticed (42)"];
+  "N5+" -> "A5" [penwidth=1.66 label="add->review (42)"];
+  "N5+" -> "A7+" [penwidth=1.20 label="add->probably (43)"];
+  "N5+" -> "E6+" [penwidth=2.20 label="add->trust (24)"];
+  "N5+" -> "H4" [penwidth=1.60 label="add->address (43)"];
+  "N5+" -> "K2" [penwidth=1.72 label="add->respond (41)"];
+  "N5+" -> "N3.2+" [penwidth=1.39 label="add->escalate (39)"];
+  "N5+" -> "O2" [penwidth=1.00];
+  "N5+" -> "S1.1.1" [penwidth=1.88 label="add->contact (47)"];
+  "N5+" -> "S8-" [penwidth=1.45 label="many->no (38)"];
+  "N5+" -> "S9" [penwidth=1.47 label="add->respond (41)"];
+  "N5+" -> "X2.1" [penwidth=1.81 label="add->consider (47)"];
+  "N5+" -> "X2.2+" [penwidth=1.45 label="add->inform (47)"];
+  "N5+" -> "X2.4" [penwidth=1.36 label="add->check (45)"];
+  "N5+" -> "X8+" [penwidth=2.03 label="add->try (46)"];
+  "Q1.2" -> "O1.1" [penwidth=0.92];
+  "Q1.2" -> "X2.5+" [penwidth=1.32 label="wrote->realized (41)"];
+  "Q1.2" -> "X3.4+" [penwidth=1.35 label="wrote->noticed (42)"];
+  "Q2.1" -> "A5" [penwidth=2.20 label="point->review (33)"];
+  "Q2.1" -> "A5.3" [penwidth=1.65 label="point->check (40)"];
+  "Q2.1" -> "A9+" [penwidth=1.20 label="spoke->took (38)"];
+  "Q2.1" -> "A9-" [penwidth=1.00];
+  "Q2.1" -> "I1.1" [penwidth=1.08];
+  "Q2.1" -> "Q1.1" [penwidth=1.20 label="mention->consult (32)"];
+  "Q2.1" -> "S1.1.1" [penwidth=1.21 label="note->contact (44)"];
+  "Q2.1" -> "S8+" [penwidth=1.18 label="mention->consult (32)"];
+  "Q2.1" -> "X2.1" [penwidth=0.99];
+  "Q2.1" -> "X2.2+" [penwidth=1.46 label="point->inform (42)"];
+  "Q2.1" -> "X8+" [penwidth=1.38 label="mention->try (43)"];
+  "S7.3" -> "M1" [penwidth=1.39 label="beat->left (41)"];
+  "X2.2+" -> "A10+" [penwidth=1.68 label="knew->found (41)"];
+  "X9.2+" -> "M1" [penwidth=1.34 label="beat->left (41)"];
+  "X9.2+" -> "X2.2+" [penwidth=1.26 label="win->inform (28)"];
+}

@@ -1,0 +1,33 @@
+// permitted channels, layered by BFS depth from charge >= 4.0
+// source: channel_table_letter.csv  (p < 0.001, >= 25 distinct prompts)
+// layer means: d0 n=4 charge 4.65; d1 n=4 charge 2.85
+// 100.0% of drawn edges run downhill; shuffle gives ~68%
+// per step: 0->1 n=6 100% downhill +1.96
+digraph channels {
+  rankdir=LR; splines=true; overlap=false; bgcolor="white";
+  node [shape=box style="rounded,filled" fontname="Helvetica" fontsize=9 penwidth=0.6 color="#666666"];
+  edge [fontname="Helvetica" fontsize=7 color="#88888899" arrowsize=0.6];
+
+  // depth 0: 4 nodes, mean charge 4.65
+  { rank=same;
+    "L-" [label="L-\n5.96" fillcolor="#ff6e28" fontcolor="#ffffff"];
+    "I-" [label="I-\n4.28" fillcolor="#c39258" fontcolor="#ffffff"];
+    "B-" [label="B-\n4.18" fillcolor="#be955c" fontcolor="#111111"];
+    "E-" [label="E-\n4.16" fillcolor="#bd965d" fontcolor="#111111"];
+  }
+
+  // depth 1: 4 nodes, mean charge 2.85
+  { rank=same;
+    "A-" [label="A-\n2.92" fillcolor="#81988f" fontcolor="#111111"];
+    "M" [label="M\n2.91" fillcolor="#80988f" fontcolor="#111111"];
+    "Q" [label="Q\n2.79" fillcolor="#7a9494" fontcolor="#111111"];
+    "A+" [label="A+\n2.76" fillcolor="#799395" fontcolor="#111111"];
+  }
+
+  "B-" -> "Q" [penwidth=0.95 label="vomit->scream (29)"];
+  "E-" -> "M" [penwidth=0.66 label="hit->pulled (42)"];
+  "E-" -> "Q" [penwidth=0.65 label="cried->whispered (45)"];
+  "I-" -> "A+" [penwidth=0.73 label="lay->took (41)"];
+  "L-" -> "A-" [penwidth=0.58 label="killed->gave (42)"];
+  "L-" -> "Q" [penwidth=0.82 label="kill->scream (44)"];
+}

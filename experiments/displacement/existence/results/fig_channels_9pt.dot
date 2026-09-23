@@ -1,0 +1,67 @@
+// permitted channels, layered by BFS depth from charge >= 4.0
+// source: channel_table_verb.csv  (p < 0.01, >= 25 distinct prompts)
+// layer means: d0 n=4 charge 5.16; d1 n=5 charge 2.77; d2 n=9 charge 2.68
+// 76.0% of drawn edges run downhill; shuffle gives ~68%
+// per step: 0->1 n=8 100% downhill +2.40; 1->2 n=17 65% downhill +0.07
+digraph channels {
+  rankdir=LR; splines=true; overlap=false; bgcolor="white";
+  size="4.80,7.68!"; ranksep=0.28; nodesep=0.08;
+  node [shape=box style="rounded,filled" fontname="Helvetica" fontsize=9 penwidth=0.4 color="#555555" margin="0.05,0.03"];
+  edge [fontname="Helvetica" fontsize=7.02 color="#6e6e6e" arrowsize=0.42];
+
+  // depth 0: 4 nodes, mean charge 5.16
+  { rank=same;
+    "L-" [label="LIFE & LIVING [-]\nkilled  kill  die" fillcolor="#aaaaaa" fontcolor="#111111"];
+    "G" [label="GOVT\nsue  shot  state" fillcolor="#b6b6b6" fontcolor="#111111"];
+    "B-" [label="THE BODY [-]\nundress  strip  vomit" fillcolor="#b6b6b6" fontcolor="#111111"];
+    "E-" [label="EMOTION [-]\nhit  kicked  cried" fillcolor="#bcbcbc" fontcolor="#111111"];
+  }
+
+  // depth 1: 5 nodes, mean charge 2.77
+  { rank=same;
+    "S" [label="SOCIAL\nkissed  contact  meet" fillcolor="#dbdbdb" fontcolor="#111111"];
+    "M" [label="MOVEMENT\nwent  put  walked" fillcolor="#dfdfdf" fontcolor="#111111"];
+    "Q" [label="LINGUISTIC ACTS\nsaid  told  whispered" fillcolor="#e1e1e1" fontcolor="#111111"];
+    "X+" [label="PSYCHOLOGICAL [+]\ntried  try  decided" fillcolor="#e6e6e6" fontcolor="#111111"];
+    "K" [label="ENTERTAINMENT\nplay  sang  dance" fillcolor="#eaeaea" fontcolor="#111111"];
+  }
+
+  // depth 2: 9 nodes, mean charge 2.68
+  { rank=same;
+    "A-" [label="GENERAL/ABSTRACT [-]\ngave  give  closed" fillcolor="#e0e0e0" fontcolor="#111111"];
+    "X-" [label="PSYCHOLOGICAL [-]\nwhispered  lost  lose" fillcolor="#e0e0e0" fontcolor="#111111"];
+    "A+" [label="GENERAL/ABSTRACT [+]\ntook  take  had" fillcolor="#e2e2e2" fontcolor="#111111"];
+    "T+" [label="TIME [+]\nbegan  started  start" fillcolor="#e2e2e2" fontcolor="#111111"];
+    "N-" [label="NUMBERS [-]\nstepped  reduce  deduct" fillcolor="#e3e3e3" fontcolor="#111111"];
+    "S+" [label="SOCIAL [+]\nlet  need  ordered" fillcolor="#e4e4e4" fontcolor="#111111"];
+    "E" [label="EMOTION\nfeel  touched  flushed" fillcolor="#e5e5e5" fontcolor="#111111"];
+    "X" [label="PSYCHOLOGICAL\nwatched  saw  felt" fillcolor="#e7e7e7" fontcolor="#111111"];
+    "P" [label="EDUCATION\nstudied  teach  test" fillcolor="#eeeeee" fontcolor="#111111"];
+  }
+
+  "B-" -> "K" [penwidth=1.01];
+  "B-" -> "Q" [penwidth=1.28];
+  "B-" -> "X+" [penwidth=0.98];
+  "E-" -> "M" [penwidth=0.55];
+  "E-" -> "Q" [penwidth=0.69];
+  "G" -> "S" [penwidth=0.79];
+  "K" -> "A-" [penwidth=0.76];
+  "K" -> "T+" [penwidth=0.77];
+  "L-" -> "Q" [penwidth=0.93];
+  "L-" -> "X+" [penwidth=0.62];
+  "M" -> "A+" [penwidth=0.46];
+  "M" -> "P" [penwidth=0.70];
+  "M" -> "Q" [penwidth=0.55 style=dashed constraint=false color="#6e6e6e55"];
+  "M" -> "X" [penwidth=0.67];
+  "M" -> "X+" [penwidth=0.61 style=dashed constraint=false color="#6e6e6e55"];
+  "Q" -> "A+" [penwidth=0.64];
+  "Q" -> "A-" [penwidth=0.51];
+  "Q" -> "E" [penwidth=0.78];
+  "Q" -> "M" [penwidth=0.47 style=dashed constraint=false color="#6e6e6e55"];
+  "Q" -> "N-" [penwidth=0.64];
+  "Q" -> "X" [penwidth=0.57];
+  "Q" -> "X+" [penwidth=0.60 style=dashed constraint=false color="#6e6e6e55"];
+  "S" -> "X-" [penwidth=0.82];
+  "X+" -> "M" [penwidth=0.53 style=dashed constraint=false color="#6e6e6e55"];
+  "X+" -> "S+" [penwidth=0.83];
+}

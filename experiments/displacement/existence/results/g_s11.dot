@@ -1,0 +1,208 @@
+// permitted channels, layered by BFS depth from charge >= 4.0
+// source: channel_table_letter_clean_p01.csv  (p < 0.01, >= 25 distinct prompts)
+// layer means: d1 n=1 charge 2.37; d2 n=4 charge 3.06; d3 n=1 charge 4.65; d5 n=1 charge 3.04; d6 n=1 charge 3.12; d7 n=1 charge 2.77; d8 n=1 charge 2.91; d9 n=1 charge 3.05; d10 n=1 charge 4.36; d11 n=1 charge 2.64; d12 n=1 charge 2.57; d13 n=1 charge 2.38; d14 n=1 charge 4.35; d15 n=1 charge 3.06; d16 n=1 charge 4.57; d17 n=1 charge 5.12; d18 n=1 charge 2.53; d19 n=1 charge 2.65; d20 n=1 charge 2.36; d21 n=1 charge 6.18; d22 n=1 charge 2.92; d23 n=1 charge 2.75; d24 n=1 charge 2.65; d25 n=1 charge 2.89; d26 n=1 charge 3.22; d27 n=1 charge 2.63; d28 n=1 charge 2.79; d29 n=1 charge 2.65; d30 n=1 charge 2.36; d31 n=1 charge 2.75; d32 n=1 charge 2.91; d33 n=1 charge 2.44; d34 n=1 charge 2.53; d35 n=1 charge 2.58; d36 n=1 charge 2.76; d37 n=1 charge 2.51; d38 n=1 charge 2.69
+// 56.6% of drawn edges run downhill; shuffle gives ~68%
+// per step: 6->7 n=4 100% downhill +0.42; 7->8 n=3 0% downhill -0.65; 8->9 n=2 50% downhill -1.02; 9->10 n=1 100% downhill +0.46; 10->11 n=5 100% downhill +1.70; 11->12 n=3 33% downhill +0.04; 12->13 n=2 0% downhill -0.20; 13->14 n=2 0% downhill -0.30; 14->15 n=6 100% downhill +1.63; 15->16 n=3 67% downhill -0.64; 16->17 n=3 100% downhill +1.74; 18->19 n=2 0% downhill -0.31; 19->20 n=1 100% downhill +0.11; 20->21 n=3 0% downhill -0.29; 21->22 n=1 100% downhill +3.39; 22->23 n=4 75% downhill +0.32; 23->24 n=4 50% downhill -0.06; 24->25 n=1 0% downhill -0.13; 25->26 n=1 100% downhill +0.39; 26->27 n=1 100% downhill +0.45; 27->28 n=1 100% downhill +0.05; 28->29 n=3 100% downhill +0.28; 29->30 n=3 33% downhill -0.58; 30->31 n=3 0% downhill -0.80; 31->32 n=5 80% downhill +0.11; 32->33 n=3 100% downhill +0.22; 33->34 n=1 0% downhill -0.48; 34->35 n=4 25% downhill -0.29; 35->36 n=1 0% downhill -0.53; 36->37 n=1 0% downhill -0.00; 37->38 n=1 100% downhill +0.13; 38->39 n=5 20% downhill -1.09
+digraph channels {
+  rankdir=LR; splines=true; overlap=false; bgcolor="white";
+  node [shape=box style="rounded,filled" fontname="Helvetica" fontsize=9 penwidth=0.6 color="#666666"];
+  edge [fontname="Helvetica" fontsize=7 color="#88888899" arrowsize=0.6];
+
+  // depth 1: 1 nodes, mean charge 2.37
+    "N" [label="NUMBERS\nthen  both  finally  some" fillcolor="#6688a5" fontcolor="#111111" width=1.18 height=0.57 fontsize=8.5];
+
+  // depth 2: 4 nodes, mean charge 3.06
+    "S-" [label="SOCIAL [-]\nfight  removed  swore  under" fillcolor="#a9a26e" fontcolor="#111111" width=1.10 height=0.54 fontsize=8.3];
+    "W-" [label="WORLD [-]\ndark  darkness" fillcolor="#8ea183" fontcolor="#111111" width=1.20 height=0.58 fontsize=8.5];
+    "S" [label="SOCIAL\njust  contact  out  kissed" fillcolor="#8a9e87" fontcolor="#111111" width=3.09 height=1.36 fontsize=13.7];
+    "P" [label="EDUCATION\nstudied  teach  test" fillcolor="#5c81ad" fontcolor="#111111" width=1.09 height=0.54 fontsize=8.2];
+
+  // depth 3: 1 nodes, mean charge 4.65
+    "I-" [label="MONEY [-]\nfired  strike  broke  fire" fillcolor="#d58749" fontcolor="#ffffff" width=1.42 height=0.67 fontsize=9.1];
+
+  // depth 5: 1 nodes, mean charge 3.04
+    "L" [label="LIFE & LIVING\nride  tree  forest  cock" fillcolor="#879c8a" fontcolor="#111111" width=1.58 height=0.74 fontsize=9.6];
+
+  // depth 6: 1 nodes, mean charge 3.12
+    "A" [label="GENERAL/ABSTRACT\nmade  do  did  that" fillcolor="#8b9e87" fontcolor="#111111" width=2.24 height=1.01 fontsize=11.4];
+
+  // depth 7: 1 nodes, mean charge 2.77
+    "A+" [label="GENERAL/ABSTRACT [+]\nhave  was  be  take" fillcolor="#799495" fontcolor="#111111" width=2.45 height=1.09 fontsize=12.0];
+
+  // depth 8: 1 nodes, mean charge 2.91
+    "A-" [label="GENERAL/ABSTRACT [-]\ngave  closed  give  offered" fillcolor="#80988f" fontcolor="#111111" width=1.19 height=0.58 fontsize=8.5];
+
+  // depth 9: 1 nodes, mean charge 3.05
+    "B" [label="THE BODY\nhanded  down  slept  sleep" fillcolor="#879c8a" fontcolor="#111111" width=1.03 height=0.51 fontsize=8.1];
+
+  // depth 10: 1 nodes, mean charge 4.36
+    "B-" [label="THE BODY [-]\nundress  naked  hurt  stripped" fillcolor="#c79055" fontcolor="#ffffff" width=1.00 height=0.50 fontsize=8.0];
+
+  // depth 11: 1 nodes, mean charge 2.64
+    "C" [label="ARTS\ndrew  still  painted  paint" fillcolor="#73909a" fontcolor="#111111" width=1.05 height=0.52 fontsize=8.1];
+
+  // depth 12: 1 nodes, mean charge 2.57
+    "E" [label="EMOTION\nfeel  touched  feeling  flushed" fillcolor="#708e9d" fontcolor="#111111" width=1.91 height=0.87 fontsize=10.5];
+
+  // depth 13: 1 nodes, mean charge 2.38
+    "E+" [label="EMOTION [+]\nsmiled  like  gently  still" fillcolor="#6688a4" fontcolor="#111111" width=2.31 height=1.03 fontsize=11.6];
+
+  // depth 14: 1 nodes, mean charge 4.35
+    "E-" [label="EMOTION [-]\nhit  cry  kicked  cried" fillcolor="#c69056" fontcolor="#ffffff" width=1.46 height=0.69 fontsize=9.3];
+
+  // depth 15: 1 nodes, mean charge 3.06
+    "F" [label="FOOD\nsmashed  ate  eat  drank" fillcolor="#879c89" fontcolor="#111111" width=1.00 height=0.50 fontsize=8.0];
+
+  // depth 16: 1 nodes, mean charge 4.57
+    "G" [label="GOVT\nsue  shot  shoot  sued" fillcolor="#d1894d" fontcolor="#ffffff" width=1.17 height=0.57 fontsize=8.5];
+
+  // depth 17: 1 nodes, mean charge 5.12
+    "G-" [label="GOVT [-]\nstole  desecrated  rob  steal" fillcolor="#ec7937" fontcolor="#ffffff" width=1.20 height=0.58 fontsize=8.5];
+
+  // depth 18: 1 nodes, mean charge 2.53
+    "H" [label="ARCHITECTURE\nlive  built  let  build" fillcolor="#6e8d9e" fontcolor="#111111" width=1.09 height=0.54 fontsize=8.2];
+
+  // depth 19: 1 nodes, mean charge 2.65
+    "I" [label="MONEY\npay  sell  hire  paid" fillcolor="#73909a" fontcolor="#111111" width=1.00 height=0.50 fontsize=8.0];
+
+  // depth 20: 1 nodes, mean charge 2.36
+    "K" [label="ENTERTAINMENT\nout  play  over  dance" fillcolor="#6587a5" fontcolor="#111111" width=1.33 height=0.63 fontsize=8.9];
+
+  // depth 21: 1 nodes, mean charge 6.18
+    "L-" [label="LIFE & LIVING [-]\nkilled  kill  die  died" fillcolor="#ff6e28" fontcolor="#ffffff" width=1.37 height=0.65 fontsize=9.0];
+
+  // depth 22: 1 nodes, mean charge 2.92
+    "M" [label="MOVEMENT\nwent  put  left  walked" fillcolor="#81988f" fontcolor="#111111" width=1.52 height=0.71 fontsize=9.4];
+
+  // depth 23: 1 nodes, mean charge 2.75
+    "N+" [label="NUMBERS [+]\nalso  all  immediately  quickly" fillcolor="#789396" fontcolor="#111111" width=1.16 height=0.57 fontsize=8.4];
+
+  // depth 24: 1 nodes, mean charge 2.65
+    "N-" [label="NUMBERS [-]\nslowly  bit  little" fillcolor="#749099" fontcolor="#111111" width=1.00 height=0.50 fontsize=8.0];
+
+  // depth 25: 1 nodes, mean charge 2.89
+    "O" [label="SUBSTANCES\npoured  rolled  down  pointed" fillcolor="#7f9790" fontcolor="#111111" width=1.00 height=0.50 fontsize=8.0];
+
+  // depth 26: 1 nodes, mean charge 3.22
+    "O+" [label="SUBSTANCES [+]\nin" fillcolor="#8fa183" fontcolor="#111111" width=1.00 height=0.50 fontsize=8.0];
+
+  // depth 27: 1 nodes, mean charge 2.63
+    "O-" [label="SUBSTANCES [-]\nfroze  off  uncomfortable  cold" fillcolor="#738f9a" fontcolor="#111111" width=1.66 height=0.77 fontsize=9.8];
+
+  // depth 28: 1 nodes, mean charge 2.79
+    "Q" [label="LINGUISTIC ACTS\nsaid  told  asked  whispered" fillcolor="#7a9494" fontcolor="#111111" width=2.52 height=1.12 fontsize=12.1];
+
+  // depth 29: 1 nodes, mean charge 2.65
+    "S+" [label="SOCIAL [+]\nlet  need  forced  ordered" fillcolor="#73909a" fontcolor="#111111" width=1.24 height=0.60 fontsize=8.7];
+
+  // depth 30: 1 nodes, mean charge 2.36
+    "T" [label="TIME\nthen  now  never  wait" fillcolor="#6587a5" fontcolor="#111111" width=1.29 height=0.62 fontsize=8.8];
+
+  // depth 31: 1 nodes, mean charge 2.75
+    "T+" [label="TIME [+]\nbegan  started  start  continued" fillcolor="#799395" fontcolor="#111111" width=2.14 height=0.97 fontsize=11.1];
+
+  // depth 32: 1 nodes, mean charge 2.91
+    "T-" [label="TIME [-]\nstop  later  quit  stopped" fillcolor="#80988f" fontcolor="#111111" width=1.09 height=0.54 fontsize=8.2];
+
+  // depth 33: 1 nodes, mean charge 2.44
+    "W" [label="WORLD\nfell" fillcolor="#698aa2" fontcolor="#111111" width=1.00 height=0.50 fontsize=8.0];
+
+  // depth 34: 1 nodes, mean charge 2.53
+    "X" [label="PSYCHOLOGICAL\nwatched  saw  consider  felt" fillcolor="#6e8d9e" fontcolor="#111111" width=1.48 height=0.70 fontsize=9.3];
+
+  // depth 35: 1 nodes, mean charge 2.58
+    "X+" [label="PSYCHOLOGICAL [+]\ntried  know  noticed  try" fillcolor="#708e9c" fontcolor="#111111" width=3.20 height=1.40 fontsize=14.0];
+
+  // depth 36: 1 nodes, mean charge 2.76
+    "X-" [label="PSYCHOLOGICAL [-]\nwhispered  lost  ignore  refuse" fillcolor="#799395" fontcolor="#111111" width=1.19 height=0.58 fontsize=8.5];
+
+  // depth 37: 1 nodes, mean charge 2.51
+    "Y" [label="SCIENCE\nit  downloaded  uploaded" fillcolor="#6d8c9f" fontcolor="#111111" width=1.98 height=0.90 fontsize=10.7];
+
+  // depth 38: 1 nodes, mean charge 2.69
+    "Z" [label="GRAMMAR/NAMES\nthe  then  he  she" fillcolor="#759198" fontcolor="#111111" width=2.51 height=1.12 fontsize=12.1];
+
+  "A" -> "E" [penwidth=0.56];
+  "A" -> "L" [penwidth=1.14];
+  "A" -> "Y" [penwidth=0.68];
+  "A" -> "Z" [penwidth=0.64];
+  "A+" -> "E-" [penwidth=0.64];
+  "A+" -> "Q" [penwidth=0.70];
+  "A+" -> "S" [penwidth=0.82];
+  "A-" -> "G-" [penwidth=0.75];
+  "A-" -> "T+" [penwidth=0.68];
+  "B" -> "X+" [penwidth=0.83];
+  "B-" -> "C" [penwidth=2.20];
+  "B-" -> "E+" [penwidth=1.07];
+  "B-" -> "N+" [penwidth=1.46];
+  "B-" -> "Q" [penwidth=0.82];
+  "B-" -> "T+" [penwidth=1.23];
+  "C" -> "E+" [penwidth=1.06];
+  "C" -> "Q" [penwidth=0.67];
+  "C" -> "S+" [penwidth=0.85];
+  "E" -> "Q" [penwidth=0.86];
+  "E" -> "T+" [penwidth=1.80];
+  "E+" -> "A+" [penwidth=0.66];
+  "E+" -> "X+" [penwidth=0.87];
+  "E-" -> "K" [penwidth=0.82];
+  "E-" -> "M" [penwidth=0.78];
+  "E-" -> "N+" [penwidth=0.72];
+  "E-" -> "Q" [penwidth=0.73];
+  "E-" -> "T-" [penwidth=0.73];
+  "E-" -> "X+" [penwidth=0.63];
+  "F" -> "L-" [penwidth=1.68];
+  "F" -> "N" [penwidth=0.99];
+  "F" -> "X" [penwidth=0.74];
+  "G" -> "A" [penwidth=0.68];
+  "G" -> "Q" [penwidth=0.57];
+  "G" -> "X+" [penwidth=0.66];
+  "H" -> "A+" [penwidth=0.56];
+  "H" -> "M" [penwidth=0.79];
+  "I" -> "X" [penwidth=0.76];
+  "K" -> "T+" [penwidth=0.62];
+  "K" -> "Y" [penwidth=1.25];
+  "K" -> "Z" [penwidth=1.09];
+  "L-" -> "Q" [penwidth=0.65];
+  "M" -> "P" [penwidth=0.78];
+  "M" -> "W-" [penwidth=1.25];
+  "M" -> "X" [penwidth=0.61];
+  "M" -> "Y" [penwidth=0.84];
+  "N+" -> "B" [penwidth=0.60];
+  "N+" -> "E" [penwidth=1.43];
+  "N+" -> "S" [penwidth=0.83];
+  "N+" -> "Y" [penwidth=0.73];
+  "N-" -> "Q" [penwidth=1.02];
+  "O" -> "Y" [penwidth=0.67];
+  "O+" -> "A+" [penwidth=0.74];
+  "O-" -> "X+" [penwidth=1.03];
+  "Q" -> "E" [penwidth=0.90];
+  "Q" -> "T" [penwidth=0.63];
+  "Q" -> "X+" [penwidth=0.58];
+  "S+" -> "E-" [penwidth=1.99];
+  "S+" -> "O-" [penwidth=1.88];
+  "S+" -> "Z" [penwidth=0.68];
+  "T" -> "G" [penwidth=0.87];
+  "T" -> "N" [penwidth=0.79];
+  "T" -> "X" [penwidth=0.60];
+  "T+" -> "O-" [penwidth=1.96];
+  "T+" -> "S+" [penwidth=0.63];
+  "T+" -> "X-" [penwidth=0.89];
+  "T+" -> "Y" [penwidth=1.27];
+  "T+" -> "Z" [penwidth=0.69];
+  "T-" -> "N+" [penwidth=0.63];
+  "T-" -> "Q" [penwidth=0.76];
+  "T-" -> "X" [penwidth=0.77];
+  "W" -> "M" [penwidth=1.03];
+  "X" -> "H" [penwidth=0.70];
+  "X" -> "K" [penwidth=1.12];
+  "X" -> "S+" [penwidth=0.77];
+  "X" -> "S-" [penwidth=0.73];
+  "X+" -> "S" [penwidth=0.67];
+  "X-" -> "A+" [penwidth=1.00];
+  "Y" -> "E+" [penwidth=1.17];
+  "Z" -> "E+" [penwidth=0.73];
+  "Z" -> "I-" [penwidth=1.01];
+  "Z" -> "L-" [penwidth=0.82];
+  "Z" -> "M" [penwidth=0.59];
+  "Z" -> "T+" [penwidth=0.64];
+}

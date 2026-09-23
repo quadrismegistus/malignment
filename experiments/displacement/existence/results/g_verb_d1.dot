@@ -1,0 +1,36 @@
+// permitted channels, layered by BFS depth from charge >= 4.0
+// source: channel_table_verb.csv  (p < 0.01, >= 25 distinct prompts)
+// layer means: d0 n=4 charge 5.16; d1 n=5 charge 2.77
+// 100.0% of drawn edges run downhill; shuffle gives ~68%
+// per step: 0->1 n=8 100% downhill +2.40
+digraph channels {
+  rankdir=LR; splines=true; overlap=false; bgcolor="white";
+  node [shape=box style="rounded,filled" fontname="Helvetica" fontsize=9 penwidth=0.6 color="#666666"];
+  edge [fontname="Helvetica" fontsize=7 color="#88888899" arrowsize=0.6];
+
+  // depth 0: 4 nodes, mean charge 5.16
+  { rank=same;
+    "L-" [label="LIFE & LIVING [-]\nkilled  kill  die  strangle" fillcolor="#ff6e28" fontcolor="#ffffff"];
+    "G" [label="GOVT\nsue  shot  state  shoot" fillcolor="#e27f3f" fontcolor="#ffffff"];
+    "B-" [label="THE BODY [-]\nundress  strip  vomit  hurt" fillcolor="#e08040" fontcolor="#ffffff"];
+    "E-" [label="EMOTION [-]\nhit  kicked  cried  threatened" fillcolor="#d3884b" fontcolor="#ffffff"];
+  }
+
+  // depth 1: 5 nodes, mean charge 2.77
+  { rank=same;
+    "S" [label="SOCIAL\nkissed  contact  meet  pray" fillcolor="#8b9e87" fontcolor="#111111"];
+    "M" [label="MOVEMENT\nwent  put  walked  pulled" fillcolor="#80988f" fontcolor="#111111"];
+    "Q" [label="LINGUISTIC ACTS\nsaid  told  whispered  asked" fillcolor="#7b9593" fontcolor="#111111"];
+    "X+" [label="PSYCHOLOGICAL [+]\ntried  try  decided  noticed" fillcolor="#718f9b" fontcolor="#111111"];
+    "K" [label="ENTERTAINMENT\nplay  sang  dance  sing" fillcolor="#6788a4" fontcolor="#111111"];
+  }
+
+  "B-" -> "K" [penwidth=1.01 label="undress->play (30)"];
+  "B-" -> "Q" [penwidth=1.28 label="vomit->scream (29)"];
+  "B-" -> "X+" [penwidth=0.98 label="vomit->understand (21)"];
+  "E-" -> "M" [penwidth=0.55 label="hit->walked (43)"];
+  "E-" -> "Q" [penwidth=0.69 label="hit->said (46)"];
+  "G" -> "S" [penwidth=0.79 label="sue->contact (46)"];
+  "L-" -> "Q" [penwidth=0.93 label="kill->scream (44)"];
+  "L-" -> "X+" [penwidth=0.62 label="kill->try (41)"];
+}
