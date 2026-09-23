@@ -1,0 +1,12 @@
+EleutherAI/pythia-6.9b lomahony/eleuther-pythia6.9b-hh-dpo
+OpenLLM-France/Lucie-7B OpenLLM-France/Lucie-7B-Instruct-v1.1
+TinyLlama/TinyLlama-1.1B-intermediate-step-1431k-3T TinyLlama/TinyLlama-1.1B-Chat-v1.0
+bigscience/bloom-7b1 bigscience/bloomz-7b1
+google/recurrentgemma-9b google/recurrentgemma-9b-it
+kakaocorp/kanana-2-3b-base kakaocorp/kanana-2-3b-instruct
+mistralai/Mistral-7B-v0.1 mistralai/Mistral-7B-Instruct-v0.1
+team-hatakeyama-phase2/Tanuki-8B-base-v1.0 weblab-GENIAC/Tanuki-8B-dpo-v1.0
+zai-org/glm-4-9b-hf zai-org/glm-4-9b-chat-hf
+allenai/Olmo-3-1125-32B allenai/Olmo-3.1-32B-Instruct
+inceptionai/jais-family-6p7b inceptionai/jais-family-6p7b-chat
+tiiuae/falcon-7b tiiuae/falcon-7b-instruct

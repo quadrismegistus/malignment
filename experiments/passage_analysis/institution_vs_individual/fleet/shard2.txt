@@ -1,0 +1,12 @@
+EleutherAI/pythia-2.8b ContextualAI/archangel_sft-dpo_pythia2-8b
+LLM360/Amber LLM360/AmberSafe
+Qwen/Qwen3-8B-Base Qwen/Qwen3-8B
+allenai/Olmo-3-1025-7B allenai/Olmo-3-7B-Instruct
+google/gemma-2-9b google/gemma-2-9b-it
+kakaocorp/kanana-1.5-8b-base kakaocorp/kanana-1.5-8b-instruct-2505
+m-a-p/neo_7b m-a-p/neo_7b_instruct_v0.1
+stabilityai/stablelm-2-1_6b stabilityai/stablelm-2-1_6b-chat
+togethercomputer/RedPajama-INCITE-Base-7B-v0.1 togethercomputer/RedPajama-INCITE-7B-Chat
+Zyphra/Zamba2-7B Zyphra/Zamba2-7B-Instruct
+gl198976/mpt-7b gl198976/mpt-7b-instruct
+tiiuae/Falcon-H1-7B-Base tiiuae/Falcon-H1-7B-Instruct

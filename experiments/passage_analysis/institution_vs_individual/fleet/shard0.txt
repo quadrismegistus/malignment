@@ -1,0 +1,12 @@
+01-ai/Yi-1.5-9B 01-ai/Yi-1.5-9B-Chat
+HuggingFaceTB/SmolLM2-360M HuggingFaceTB/SmolLM2-360M-Instruct
+Qwen/Qwen2.5-0.5B Qwen/Qwen2.5-0.5B-Instruct
+allenai/OLMo-2-0425-1B allenai/OLMo-2-0425-1B-Instruct
+croissantllm/CroissantLLMBase croissantllm/CroissantLLMChat-v0.1
+huggyllama/llama-7b PKU-Alignment/beaver-7b-v1.0
+llm-jp/llm-jp-3-7.2b llm-jp/llm-jp-3-7.2b-instruct3
+openGPT-X/Teuken-7B-base-v0.6 openGPT-X/Teuken-7B-instruct-v0.6
+tiiuae/Falcon3-7B-Base tiiuae/Falcon3-7B-Instruct
+BAAI/Aquila2-7B BAAI/AquilaChat2-7B
+allenai/Olmo-Hybrid-7B allenai/Olmo-Hybrid-Instruct-DPO-7B
+internlm/internlm2-base-7b internlm/internlm2-chat-7b

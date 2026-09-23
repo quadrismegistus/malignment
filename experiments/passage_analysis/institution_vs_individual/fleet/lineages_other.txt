@@ -1,0 +1,13 @@
+BAAI/Aquila2-7B BAAI/AquilaChat2-7B
+RWKV/rwkv-4-7b-pile RWKV/rwkv-raven-7b
+Zyphra/Zamba2-7B Zyphra/Zamba2-7B-Instruct
+allenai/Olmo-3-1125-32B allenai/Olmo-3.1-32B-Instruct
+allenai/Olmo-Hybrid-7B allenai/Olmo-Hybrid-Instruct-DPO-7B
+baichuan-inc/Baichuan2-7B-Base baichuan-inc/Baichuan2-7B-Chat
+gl198976/mpt-7b gl198976/mpt-7b-instruct
+inceptionai/jais-family-6p7b inceptionai/jais-family-6p7b-chat
+internlm/internlm2-base-7b internlm/internlm2-chat-7b
+meta-llama/Llama-3.1-70B meta-llama/Llama-3.1-70B-Instruct
+tiiuae/Falcon-H1-1.5B-Base tiiuae/Falcon-H1-1.5B-Instruct
+tiiuae/Falcon-H1-7B-Base tiiuae/Falcon-H1-7B-Instruct
+tiiuae/falcon-7b tiiuae/falcon-7b-instruct

@@ -1,0 +1,12 @@
+BSC-LT/salamandra-7b BSC-LT/salamandra-7b-instruct
+HuggingFaceTB/SmolLM3-3B-Base HuggingFaceTB/SmolLM3-3B
+Qwen/Qwen2.5-7B Qwen/Qwen2.5-7B-Instruct
+allenai/OLMoE-1B-7B-0125 allenai/OLMoE-1B-7B-0125-Instruct
+deepseek-ai/deepseek-llm-7b-base deepseek-ai/deepseek-llm-7b-chat
+ibm-granite/granite-3.0-8b-base ibm-granite/granite-3.0-8b-instruct
+m-a-p/CT-LLM-Base m-a-p/CT-LLM-SFT-DPO
+openbmb/MiniCPM5-1B-Base openbmb/MiniCPM5-1B
+tiiuae/falcon-mamba-7b tiiuae/falcon-mamba-7b-instruct
+RWKV/rwkv-4-7b-pile RWKV/rwkv-raven-7b
+baichuan-inc/Baichuan2-7B-Base baichuan-inc/Baichuan2-7B-Chat
+tiiuae/Falcon-H1-1.5B-Base tiiuae/Falcon-H1-1.5B-Instruct
