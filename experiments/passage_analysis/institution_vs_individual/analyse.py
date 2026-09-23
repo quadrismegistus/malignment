@@ -38,7 +38,7 @@ import numpy as np
 from scipy.stats import binomtest
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-SRC = os.path.join(HERE, "results", "coded.jsonl")
+SRC = os.path.expanduser("~/malignment-data/institution_vs_individual/coded.jsonl")
 OUT = os.path.join(HERE, "results", "analysis.md")
 
 LAST = {"olmo": "rlvr", "olmo-tiny": "rlvr", "tulu": "rlvr", "zephyr": "dpo",
@@ -122,33 +122,40 @@ def main():
         k = (r["family"], pair_of(r["key"]), r["side"], a)
         for name, v in o.items():
             acc[k][name].append(v)
-    pairs = sorted({k[1] for k in acc})
-    L += ["## Base -> aligned, individual side minus institution side", "",
-          "Continuation and advice only; referrals counted only if recommended or marked correct. "
-          "`diff` = (aligned - base on the individual side) - (aligned - base on the institution side). "
-          "Cells missing a side or an arm after the form filter are dropped from that unit.", "",
-          "| outcome | base ind | base inst | aligned ind | aligned inst | pairs +/- | p | families +/- | p | predicted |",
-          "|---|---|---|---|---|---|---|---|---|---|"]
-    for name in OUTCOMES:
-        def share(f, pr, side, a):
-            v = acc.get((f, pr, side, a), {}).get(name)
-            return np.mean(v) if v else None
-        cell = {}
-        for f in LAST:
-            for pr in pairs:
-                s = [share(f, pr, sd, a) for sd in ("individual", "institution") for a in ("base", "aligned")]
-                if None not in s:
-                    ib, ia, jb, ja = s
-                    cell[(f, pr)] = ((ia - ib) - (ja - jb), ib, ia, jb, ja)
-        byp = [np.mean([v[0] for (f, pr), v in cell.items() if pr == q]) for q in pairs
-               if any(pr == q for (_, pr) in cell)]
-        byf = [np.mean([v[0] for (f, pr), v in cell.items() if f == fam]) for fam in LAST
-               if any(f == fam for (f, _) in cell)]
-        lv = [np.mean([v[i] for v in cell.values()]) for i in (1, 3, 2, 4)]
-        pu, pd_, pp = sign(byp); fu, fd, fp = sign(byf)
-        L.append("| %s | %.3f | %.3f | %.3f | %.3f | %d/%d | %.3g | %d/%d | %.3g | %s |"
-                 % (name, lv[0], lv[1], lv[2], lv[3], pu, pd_, pp, fu, fd, fp, PRED.get(name, "")))
-    L.append("")
+    #: The second entry is POST-HOC, added after the first table was read
+    #: (promised to RH before the run finished, 2026-09-23): only the pairs whose
+    #: two prompts both end "I should". F21's other six pairs mix endings, and the
+    #: site moves `procedural` +0.221 on M03, more than the position contrast. A
+    #: ROBUSTNESS CHECK, not part of the declared test.
+    for pairs, title in ((sorted({k[1] for k in acc}), "## Base -> aligned, individual side minus institution side"),
+                         (["govt_1", "housing_1", "housing_2", "labor_2", "medical_1", "police_1"],
+                          "## POST-HOC robustness: the 6 pairs ending \"I should\" on both sides")):
+      L += [title, "",
+            "Continuation and advice only; referrals counted only if recommended or marked correct. "
+            "`diff` = (aligned - base on the individual side) - (aligned - base on the institution side). "
+            "Cells missing a side or an arm after the form filter are dropped from that unit.", "",
+            "| outcome | base ind | base inst | aligned ind | aligned inst | pairs +/- | p | families +/- | p | predicted |",
+            "|---|---|---|---|---|---|---|---|---|---|"]
+      for name in OUTCOMES:
+          def share(f, pr, side, a):
+              v = acc.get((f, pr, side, a), {}).get(name)
+              return np.mean(v) if v else None
+          cell = {}
+          for f in LAST:
+              for pr in pairs:
+                  s = [share(f, pr, sd, a) for sd in ("individual", "institution") for a in ("base", "aligned")]
+                  if None not in s:
+                      ib, ia, jb, ja = s
+                      cell[(f, pr)] = ((ia - ib) - (ja - jb), ib, ia, jb, ja)
+          byp = [np.mean([v[0] for (f, pr), v in cell.items() if pr == q]) for q in pairs
+                 if any(pr == q for (_, pr) in cell)]
+          byf = [np.mean([v[0] for (f, pr), v in cell.items() if f == fam]) for fam in LAST
+                 if any(f == fam for (f, _) in cell)]
+          lv = [np.mean([v[i] for v in cell.values()]) for i in (1, 3, 2, 4)]
+          pu, pd_, pp = sign(byp); fu, fd, fp = sign(byf)
+          L.append("| %s | %.3f | %.3f | %.3f | %.3f | %d/%d | %.3g | %d/%d | %.3g | %s |"
+                   % (name, lv[0], lv[1], lv[2], lv[3], pu, pd_, pp, fu, fd, fp, PRED.get(name, "")))
+      L.append("")
 
     # ---- frontier endpoint ----------------------------------------------------
     fr = collections.defaultdict(lambda: collections.defaultdict(list))
@@ -175,7 +182,9 @@ def main():
                 dp.append(np.mean(a) - np.mean(b))
         u, dd, p = sign(dp)
         L.append("| %s | %s | %d/%d | %.3g |" % (name, " | ".join(cells), u, dd, p))
-    L += ["", "Cells read individual / institution."]
+    L += ["", "Cells read individual / institution.", ""]
+    ok = sum(r.get("spans_ok", 0) for r in rows); tot = sum(r.get("spans_total", 0) for r in rows)
+    L += ["Span verification: %d of %d quoted spans found verbatim in their text (%.1f%%)." % (ok, tot, 100 * ok / max(tot, 1))]
     open(OUT, "w").write("\n".join(L) + "\n")
     print("\n".join(L))
 
