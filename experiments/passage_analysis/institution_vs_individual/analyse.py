@@ -163,7 +163,8 @@ def main():
     #: two prompts both end "I should". F21's other six pairs mix endings, and the
     #: site moves `procedural` +0.221 on M03, more than the position contrast. A
     #: ROBUSTNESS CHECK, not part of the declared test.
-    for pairs, title in ((sorted({k[1] for k in acc}), "## Base -> aligned, individual side minus institution side"),
+    all_pairs = sorted({k[1] for k in acc})
+    for pairs, title in ((all_pairs, "## Base -> aligned, individual side minus institution side"),
                          (["govt_1", "housing_1", "housing_2", "labor_2", "medical_1", "police_1"],
                           "## POST-HOC robustness: the 6 pairs ending \"I should\" on both sides")):
       L += [title, "",
@@ -211,7 +212,10 @@ def main():
             ins = [x for (mm, pr, sd), o in fr.items() if mm == m and sd == "institution" for x in o[name]]
             cells.append("%.2f / %.2f" % (np.mean(ind), np.mean(ins)) if ind and ins else "n/a")
         dp = []
-        for q in pairs:
+        #: ALL twelve pairs. This loop once read the name `pairs` after the
+        #: robustness loop above had rebound it to the six "I should" pairs, so
+        #: the frontier column was a six-pair test labelled as twelve.
+        for q in all_pairs:
             a = [np.mean(o[name]) for (mm, pr, sd), o in fr.items() if pr == q and sd == "individual"]
             b = [np.mean(o[name]) for (mm, pr, sd), o in fr.items() if pr == q and sd == "institution"]
             if a and b:
