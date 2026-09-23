@@ -728,3 +728,23 @@ Three distinct cheats: **orthographic** (`strange -> strangle`), **derivational*
 Three of the four are the sound-symbolism case §12 already noted: `ba-` for impact, `sl-` for a slapping blow, and `bust`/`burst` are near-synonyms that are also near-anagrams. English genuinely clusters impact verbs this way, so a plate with *zero* agreement would be the suspicious one. But **"not spelling" is not a property of this figure**, and the claim as written was measured on a different construction.
 
     python pathways.py --space llama_resid_wide --k 2 --min-cos 0.50
+
+## 12.11 `gauge` is not a typo for `gouge`, and the margin is 0.003
+
+The drafting seat spotted `gauge` between `poke` and `claw` on the stabbing branch of the wide plate and asked whether the lemma step had collapsed `gouge` into it. It had not, and the answer is worth keeping because the honest form is "correct but not robust".
+
+    in the 10,727 lemma vocabulary   gauge YES   gouge YES
+    in the 16,739 all-word set       gauge YES   gouge YES
+    in the 307 candidates            gauge no    gouge YES
+    morphy(gouge) = gouge            morphy(gauge) = gauge     -- no collapse
+
+Both words are present as separate entries and neither reduces to the other. The tree chose `gauge` on the edge weights:
+
+    poke -> gauge  0.6262        poke -> gouge  0.6237     margin 0.0025
+    gauge -> claw  0.6645        gouge -> claw  0.6553     margin 0.0092
+
+So the measuring verb beat the gouging verb by three thousandths and nine thousandths, on a plate whose drawn edges span roughly 0.50 to 0.85. **That node is a coin-flip, and the coin came up on the word a reader will query.**
+
+It is left as drawn. Substituting `gouge` because it reads better would be hand-editing the corridor toward the expected answer, which is the failure `wide_vocab.py` exists to avoid — and the two plates would be indistinguishable on every measurement this folder takes. What follows is narrower and true: **the plate's word sequence is robust at the level of the corridor and not at the level of every node.** §12.9 established the same for the constriction; this is the same lesson one rung finer.
+
+If asked, the answer is: both words are in the vocabulary, the model puts `gauge` marginally closer at both ends, and the margin is within any reasonable noise on this measurement.
