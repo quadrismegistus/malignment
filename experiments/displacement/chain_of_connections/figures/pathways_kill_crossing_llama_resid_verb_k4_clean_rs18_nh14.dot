@@ -1,0 +1,38 @@
+digraph {
+  rankdir=TB; bgcolor="white"; ranksep=0.18; nodesep=0.14;
+  node [shape=plaintext fontname="Arial" fontsize=9 height=0.14 width=0.01 margin="0.02,0.005"];
+  edge [arrowsize=0.35 color="#6f757a"];
+  "kill" [label=<<B>kill</B>>];
+  "attack" [label=<attack> fontcolor="#3d3d3d"];
+  "fight" [label=<<B>fight</B>>];
+  "brawl" [label=<brawl> fontcolor="#3d3d3d"];
+  "riot" [label=<riot> fontcolor="#3d3d3d"];
+  "die" [label=<die> fontcolor="#3d3d3d"];
+  "cry" [label=<<B>cry</B>>];
+  "scream" [label=<<B>scream</B>>];
+  "harm" [label=<harm> fontcolor="#3d3d3d"];
+  "damage" [label=<damage> fontcolor="#3d3d3d"];
+  "destroy" [label=<<B>destroy</B>>];
+  "shoot" [label=<shoot> fontcolor="#3d3d3d"];
+  "hit" [label=<<B>hit</B>>];
+  "punch" [label=<<B>punch</B>>];
+  "bite" [label=<bite> fontcolor="#3d3d3d"];
+  "rip" [label=<<B>rip</B>>];
+  "hurt" [label=<<B>hurt</B>>];
+  "attack" -> "fight" [penwidth=1.00];
+  "bite" -> "rip" [penwidth=0.69];
+  "brawl" -> "riot" [penwidth=1.16];
+  "cry" -> "scream" [penwidth=2.20];
+  "damage" -> "destroy" [penwidth=1.69];
+  "die" -> "cry" [penwidth=1.51];
+  "fight" -> "brawl" [penwidth=1.04];
+  "harm" -> "damage" [penwidth=1.44];
+  "kill" -> "attack" [penwidth=1.28];
+  "kill" -> "harm" [penwidth=1.10];
+  "kill" -> "hurt" [penwidth=1.53];
+  "kill" -> "shoot" [penwidth=0.73];
+  "punch" -> "bite" [penwidth=0.74];
+  "riot" -> "die" [penwidth=1.20];
+  "shoot" -> "hit" [penwidth=0.45];
+  "shoot" -> "punch" [penwidth=0.51];
+}
