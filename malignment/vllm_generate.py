@@ -39,6 +39,7 @@ JSONL, one condition per line:
     {"prompt": "She was so angry she wanted to"}
     {"prompt": "She was so angry she wanted to", "system": "", "prefill": true}
     {"prompt": "She was so angry she wanted to", "system": "You are helpful."}
+    {"prompt": "My landlord refuses to fix the heating. I should", "chat": true}
 
 Or plain text (one prompt per line, all raw frame).
 
@@ -49,6 +50,11 @@ Fields:
     user        user-turn prefix (rare; for multi-turn setups)
     prefill     true/false: wrap in the template's prefill format
     user_msg    the user message for prefill mode (default "Hi.")
+    chat        true: the prompt is the USER message under the model's template
+                with its DEFAULT system prompt -- the naive chat call, which is
+                what generate.render(template=True) does. Without this flag a
+                default-system condition renders RAW, so chat with the
+                template's own persona could not be requested at all.
 
 **A base model cannot enter chat mode.** If the model has no template and
 system/prefill are requested, the prompt is generated RAW and `frame_refused`
@@ -197,6 +203,7 @@ def load_prompts(path):
                     "user": d.get("user"),
                     "prefill": bool(d.get("prefill", False)),
                     "user_msg": d.get("user_msg", "Hi."),
+                    "chat": bool(d.get("chat", False)),
                 })
             else:
                 conditions.append({
@@ -223,7 +230,8 @@ def _resolve_system(s):
 def _needs_template(cond):
     """Whether this condition requires a chat template."""
     s = cond.get("system", "_DEFAULT_")
-    return s != "_DEFAULT_" or cond.get("prefill", False) or cond.get("user")
+    return (s != "_DEFAULT_" or cond.get("prefill", False) or cond.get("user")
+            or cond.get("chat", False))
 
 
 def _has_template(model_id):
@@ -280,7 +288,10 @@ def generate_model(model_id, conditions, n=10, seed=42, decoder=None,
         user_msg = cond.get("user_msg", "Hi.")
         prompt = cond["prompt"]
 
-        frame = frame_label(system, user, prefill, None)
+        #: `chat` must reach the KEY: frame_label(templated=None) calls a
+        #: default-system, no-prefill condition "raw", which would give a chat
+        #: passage the raw passage's key and let one overwrite the other.
+        frame = frame_label(system, user, prefill, True if cond.get("chat") else None)
         sysk = "" if system is DEFAULT else (system or "")
 
         for i in range(n):
@@ -330,7 +341,7 @@ def generate_model(model_id, conditions, n=10, seed=42, decoder=None,
         user_msg = cond.get("user_msg", "Hi.")
 
         frame_refused = False
-        if system is not DEFAULT or prefill or user:
+        if system is not DEFAULT or prefill or user or cond.get("chat"):
             messages = []
             if system is not DEFAULT:
                 sys_text = system if system else ""
