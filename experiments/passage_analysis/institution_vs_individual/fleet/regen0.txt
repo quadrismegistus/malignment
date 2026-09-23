@@ -1,0 +1,13 @@
+allenai/Olmo-3.1-32B-Instruct experiments/passage_analysis/institution_vs_individual/prompts/chat.jsonl float16
+ContextualAI/archangel_sft-dpo_pythia2-8b experiments/passage_analysis/institution_vs_individual/prompts/chat.jsonl float16
+LLM360/AmberSafe experiments/passage_analysis/institution_vs_individual/prompts/chat.jsonl float16
+Qwen/Qwen3-8B experiments/passage_analysis/institution_vs_individual/prompts/chat.jsonl float16
+allenai/OLMoE-1B-7B-0125-Instruct experiments/passage_analysis/institution_vs_individual/prompts/chat.jsonl float16
+croissantllm/CroissantLLMChat-v0.1 experiments/passage_analysis/institution_vs_individual/prompts/chat.jsonl float16
+ibm-granite/granite-3.0-8b-instruct experiments/passage_analysis/institution_vs_individual/prompts/chat.jsonl float16
+kakaocorp/kanana-2-3b-instruct experiments/passage_analysis/institution_vs_individual/prompts/chat.jsonl float16
+meta-llama/Llama-3.1-8B-Instruct experiments/passage_analysis/institution_vs_individual/prompts/chat.jsonl float16
+stabilityai/stablelm-2-1_6b-chat experiments/passage_analysis/institution_vs_individual/prompts/chat.jsonl float16
+tiiuae/Falcon3-7B-Instruct experiments/passage_analysis/institution_vs_individual/prompts/chat.jsonl float16
+zai-org/glm-4-9b-chat-hf experiments/passage_analysis/institution_vs_individual/prompts/chat.jsonl float16
+internlm/internlm2-base-7b experiments/passage_analysis/institution_vs_individual/prompts/raw.jsonl float16

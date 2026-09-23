@@ -1,0 +1,12 @@
+BAAI/AquilaChat2-7B experiments/passage_analysis/institution_vs_individual/prompts/chat.jsonl float16
+HuggingFaceTB/SmolLM2-360M-Instruct experiments/passage_analysis/institution_vs_individual/prompts/chat.jsonl float16
+Qwen/Qwen2.5-0.5B-Instruct experiments/passage_analysis/institution_vs_individual/prompts/chat.jsonl float16
+Zyphra/Zamba2-7B-Instruct experiments/passage_analysis/institution_vs_individual/prompts/chat.jsonl float16
+baichuan-inc/Baichuan2-7B-Chat experiments/passage_analysis/institution_vs_individual/prompts/chat.jsonl float16
+google/gemma-2-9b-it experiments/passage_analysis/institution_vs_individual/prompts/chat.jsonl bfloat16
+internlm/internlm2-chat-7b experiments/passage_analysis/institution_vs_individual/prompts/chat.jsonl float16
+m-a-p/CT-LLM-SFT-DPO experiments/passage_analysis/institution_vs_individual/prompts/chat.jsonl float16
+openGPT-X/Teuken-7B-instruct-v0.6 experiments/passage_analysis/institution_vs_individual/prompts/chat.jsonl float16
+tiiuae/Falcon-H1-1.5B-Instruct experiments/passage_analysis/institution_vs_individual/prompts/chat.jsonl bfloat16
+tiiuae/falcon-mamba-7b-instruct experiments/passage_analysis/institution_vs_individual/prompts/chat.jsonl float16
+tiiuae/Falcon-H1-1.5B-Base experiments/passage_analysis/institution_vs_individual/prompts/raw.jsonl bfloat16

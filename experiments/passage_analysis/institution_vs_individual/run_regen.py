@@ -22,6 +22,17 @@ DESIGN = json.load(open(os.path.join(HERE, "prompts", "design.json")))
 BY_PROMPT = {d["prompt"]: (k, d) for k, d in DESIGN.items()}
 OUT = os.path.expanduser("~/malignment-data/institution_vs_individual/coded_regen.jsonl")
 FRAME = {"base": "raw", "aligned": "chat_sysdefault"}
+#: WHICH RENDER COUNTS (2026-09-23). The first fleet passed rendered templates to
+#: vLLM as strings: templated prompts got a second BOS (measured, Mistral-7B-
+#: Instruct [1, 1, ...]) and 8 aligned models silently got RAW prompts. Every
+#: aligned passage must therefore come from the fixed path (render='ids_v2').
+#: Raw base prompts were tokenized correctly (one BOS) and are kept, EXCEPT the
+#: three bases rerun for their own reasons: Falcon-H1 x2 at bfloat16 (the 7B
+#: was 360/360 empty at float16) and Aquila2-7B at the roster's revision pin.
+RERUN_BASES = {"tiiuae/Falcon-H1-7B-Base", "tiiuae/Falcon-H1-1.5B-Base", "BAAI/Aquila2-7B"}
+#: 250,880 embedding rows against 250,680 tokenizer pieces: its raw passages are
+#: multilingual gibberish (sampled ids with no piece). Excluded, not repaired.
+EXCLUDE = {"openGPT-X/Teuken-7B-base-v0.6"}
 
 
 def population():
@@ -36,6 +47,12 @@ def population():
                 for _, v in st.items():
                     hit = BY_PROMPT.get(v.get("prompt"))
                     if not hit or (v.get("decoder") or {}).get("max_new_tokens") != 256:
+                        continue
+                    if m in EXCLUDE:
+                        skipped["excluded_model"] += 1
+                        continue
+                    if (arm == "aligned" or m in RERUN_BASES) and v.get("render") != "ids_v2":
+                        skipped["superseded_render_%s" % arm] += 1
                         continue
                     if v.get("frame") != FRAME[arm]:
                         skipped["wrong_frame_%s" % arm] += 1

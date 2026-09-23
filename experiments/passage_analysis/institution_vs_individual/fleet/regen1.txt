@@ -1,0 +1,12 @@
+01-ai/Yi-1.5-9B-Chat experiments/passage_analysis/institution_vs_individual/prompts/chat.jsonl float16
+lomahony/eleuther-pythia6.9b-hh-dpo experiments/passage_analysis/institution_vs_individual/prompts/chat.jsonl float16
+OpenLLM-France/Lucie-7B-Instruct-v1.1 experiments/passage_analysis/institution_vs_individual/prompts/chat.jsonl float16
+TinyLlama/TinyLlama-1.1B-Chat-v1.0 experiments/passage_analysis/institution_vs_individual/prompts/chat.jsonl float16
+allenai/Olmo-3-7B-Instruct experiments/passage_analysis/institution_vs_individual/prompts/chat.jsonl float16
+deepseek-ai/deepseek-llm-7b-chat experiments/passage_analysis/institution_vs_individual/prompts/chat.jsonl float16
+inceptionai/jais-family-6p7b-chat experiments/passage_analysis/institution_vs_individual/prompts/chat.jsonl float16
+llm-jp/llm-jp-3-7.2b-instruct3 experiments/passage_analysis/institution_vs_individual/prompts/chat.jsonl float16
+mistralai/Mistral-7B-Instruct-v0.1 experiments/passage_analysis/institution_vs_individual/prompts/chat.jsonl float16
+weblab-GENIAC/Tanuki-8B-dpo-v1.0 experiments/passage_analysis/institution_vs_individual/prompts/chat.jsonl float16
+tiiuae/falcon-7b-instruct experiments/passage_analysis/institution_vs_individual/prompts/chat.jsonl float16
+tiiuae/Falcon-H1-7B-Base experiments/passage_analysis/institution_vs_individual/prompts/raw.jsonl bfloat16
