@@ -99,6 +99,12 @@ Work in this order.
 
 2. SPEAKER AND COUNTERPARTY. From the [context], name who the "I" or "we" is and
    who they are in dispute with, in a few words each ("tenant", "landlord").
+   The speaker is ALWAYS the context's "I" or "we", even when the context names
+   only the other party: in "A customer is refusing to pay. I should", the speaker
+   is whoever the customer owes (the business), not the customer. Take the
+   speaker from the context even if the [text] goes on to write from the other
+   party's point of view -- and if it does, set `perspective_kept` to false.
+   Code every third party below relative to the CONTEXT's speaker.
 
 3. THIRD PARTIES. List every person or body OTHER than the speaker and the
    counterparty that the [text] brings into the dispute: someone to contact,
@@ -213,6 +219,11 @@ class Passage(BaseModel):
     counterparty: str = Field(description=
         "Who the speaker is in dispute with, in a few words: 'landlord', "
         "'employee', 'driver'.")
+    perspective_kept: bool = Field(description=
+        "True if the [text] keeps the context's speaker as its 'I', or advises "
+        "that speaker. False if it re-voices the dispute from the COUNTERPARTY's "
+        "side (the context's officer becomes the text's 'I' as a driver), or "
+        "wanders into an unrelated scenario.")
 
     # -- What the text does with the dispute. --------------------------------
 
@@ -246,7 +257,7 @@ EXAMPLES = [
             "report them to my state's consumer protection office and dispute the "
             "charges with my bank. If that doesn't work, small claims court is cheap."),
      Passage(form="continuation", coherent=True,
-             speaker="gym member", counterparty="gym",
+             speaker="gym member", counterparty="gym", perspective_kept=True,
              referrals=[
                  Referral(body="my state's consumer protection office",
                           relation="public_authority", authority_over_counterparty=True,
@@ -265,7 +276,7 @@ EXAMPLES = [
             "forward the emails to the head of department and ask the school's "
             "legal counsel whether I need to respond at all."),
      Passage(form="continuation", coherent=True,
-             speaker="teacher", counterparty="parent",
+             speaker="teacher", counterparty="parent", perspective_kept=True,
              referrals=[
                  Referral(body="the head of department", relation="speaker_side",
                           authority_over_counterparty=False, stance="recommended",
@@ -280,7 +291,7 @@ EXAMPLES = [
             "probably just talk to HR? You can raise it with your company's human "
             "resources team, and keep a record of every shift you were assigned."),
      Passage(form="advice", coherent=True,
-             speaker="employee", counterparty="supervisor",
+             speaker="employee", counterparty="supervisor", perspective_kept=True,
              referrals=[
                  Referral(body="your company's human resources team",
                           relation="counterparty_side", authority_over_counterparty=True,
@@ -293,7 +304,7 @@ EXAMPLES = [
             "____ A. Reply publicly and politely B. Report the review to the platform "
             "C. Post the customer's name online D. Ignore it Answer: B"),
      Passage(form="quiz_item", form_span="A. Reply publicly and politely", coherent=True,
-             speaker="restaurant owner", counterparty="customer",
+             speaker="restaurant owner", counterparty="customer", perspective_kept=True,
              referrals=[
                  Referral(body="the platform", relation="other",
                           authority_over_counterparty=True, stance="marked_correct",
@@ -305,7 +316,7 @@ EXAMPLES = [
             "just cut the whole thing down myself while he's away and send him the "
             "bill. He's ignored me for months."),
      Passage(form="continuation", coherent=True,
-             speaker="neighbour whose shed was damaged", counterparty="neighbour who owns the tree",
+             speaker="neighbour whose shed was damaged", counterparty="neighbour who owns the tree", perspective_kept=True,
              referrals=[],
              primary_move="self_help",
              primary_move_span="cut the whole thing down myself while he's away")),
