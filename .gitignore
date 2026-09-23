@@ -391,3 +391,7 @@ experiments/displacement/chain_of_connections/results/wide_vocab_resid_verbwide.
 
 # model_forum: generated dialogue + podcast work, kept local for now (RH, 2026-09-23)
 model_forum/
+
+# per-example flow dumps (2-148 MB) live in ~/malignment-data/existence/
+experiments/displacement/existence/results/*_examples.csv
+!experiments/displacement/existence/results/flow_channels_with_examples.csv
