@@ -748,3 +748,32 @@ So the measuring verb beat the gouging verb by three thousandths and nine thousa
 It is left as drawn. Substituting `gouge` because it reads better would be hand-editing the corridor toward the expected answer, which is the failure `wide_vocab.py` exists to avoid — and the two plates would be indistinguishable on every measurement this folder takes. What follows is narrower and true: **the plate's word sequence is robust at the level of the corridor and not at the level of every node.** §12.9 established the same for the constriction; this is the same lesson one rung finer.
 
 If asked, the answer is: both words are in the vocabulary, the model puts `gauge` marginally closer at both ends, and the margin is within any reasonable noise on this measurement.
+
+## 12.12 CORRECTION: "k-NN is the worse construction" was true of k=2 and false of k=3
+
+§12.10 concluded that on a large vocabulary k-NN is the worse construction, and §12.11's recommendation rested on it: the MST routes around the agent nouns while k-NN is forced through them. **That was measured at k=2 and at k=2 with a cutoff. Pure k-NN at k=3 had never been run** — RH proposed the hybrid before it did — and it is the cleanest plate in the folder.
+
+    construction (wide vocabulary, crossing)  size (in)   nodes  edges  bad words  2-prefix
+    MST (bottleneck)                         3.53 x 4.00    40     39       0      13% (10.3x)
+    k-NN k=2, pure                           3.75 x 3.20    38     37       6      14% (10.9x)
+    k-NN k=2 + cutoff 0.50                   3.36 x 3.74    45     44      12      15% (12.0x)
+    k-NN k=3, pure                           2.62 x 2.14    24     23       0       4%  (3.5x)
+
+"Bad words" counts `killer`, `destroyer`, `breaker`, `strange`, `outage` — the derivational and orthographic bridges.
+
+**Why k=3 is cleaner than k=2.** In a 10,727-word space a word's two nearest are very often its morphological relatives, and a shortest path has no alternative but to use them. A third option lets the path route around, and the better connectivity also shortens routes, which gives fewer opportunities to pick up a bad edge. The k=2 plate reaches `cry` through `outrage -> outage -> outcry` — `outage` is a power cut, present only because it is spelled like its neighbours. At k=3 that chain is gone.
+
+    k=2  kill -> drown -> choke -> STRANGE -> strangle -> thrash -> pummel
+         -> puke -> cuss -> swear -> scream                             10 hops
+    k=3  kill -> attack -> fight -> brawl -> riot -> crime -> cry -> scream  7 hops
+
+So the generalisation was wrong in the usual way: **one value of a parameter was tested and a property was attributed to the construction.** §12.5 made the same mistake in the other direction, reading a k=4 artefact as a fact about the words.
+
+### Which plate, then
+
+Neither dominates, and the choice is what the figure is for.
+
+- **k-NN k=3** is cleanest: no derivational or orthographic bridges, orthography at 3.5x chance against the others' 10-12x, and compact at 2.62 x 2.14 in. Its routes are short — `kill -> attack -> fight -> brawl -> riot -> crime -> cry -> scream` — which makes it a weaker illustration of a *chain*, and it has 24 nodes against the MST's 40.
+- **MST (bottleneck)** is richer: it shows two corridors out of `hurt`, bodily and social, and the social one (`punish -> torment -> annoy -> demean -> malign -> sabotage -> ruin -> destroy`) does not appear in any k-NN plate at any k. It costs 10.3x orthography, which is mostly English's impact clusters.
+
+If the argument is *that the connection exists and is not spelling*, k=3 is the better evidence. If the argument is *what the neighbourhood of killing contains*, the MST shows more and the orthography is the price.
