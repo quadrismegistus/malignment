@@ -55,6 +55,15 @@ import run  # noqa: E402
 
 FIGS = os.path.join(HERE, "figures")
 
+#: **WAY STATIONS NEAR BLACK, NOT GREY** (RH). At 60% grey the waypoints read
+#: as background and the plate looked like a few bold words floating over
+#: scaffolding -- but the way stations ARE the chain; they are what "a chain of
+#: connections" means. With plaintext nodes the emphasis is already carried by
+#: WEIGHT (bold for source and destinations), so the colour was doing the same
+#: job twice and doing it too hard. Near-black keeps every word legible as a
+#: word and leaves bold to mark which ones the lineages reach.
+WAY = "#3d3d3d"
+
 
 def targets(prompt, basis, src):
     """-> ({word: lineages}, stayed, n_base) from the substitution measurement."""
@@ -316,7 +325,7 @@ def main(argv=None):
             bold = w == a.src or w in dsts
             L.append('  "%s" [label=<%s%s%s>%s];'
                      % (w, "<B>" if bold else "", w, "</B>" if bold else "",
-                        "" if bold else ' fontcolor="#999999"'))
+                        "" if bold else ' fontcolor="%s"' % WAY))
         else:
             L.append('  "%s" [label="%s" fillcolor="%s" penwidth=%.1f '
                      'fontsize=%d];' % (w, lab, fill, pen, 9 + int(5.0 * m / mx)))
