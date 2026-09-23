@@ -32,6 +32,7 @@
 	import Plots from '$lib/components/Plots.svelte';
 	import Prompts from '$lib/components/Prompts.svelte';
 	import Stories from '$lib/components/Stories.svelte';
+	import Generate from '$lib/components/Generate.svelte';
 
 	const SECTIONS = [
 		{ id: 'experiments', label: 'Experiments', sub: 'the register and its questions' },
@@ -39,7 +40,8 @@
 		{ id: 'prompts', label: 'Prompts', sub: 'the frames and how much each moves' },
 		{ id: 'slot', label: 'Slot', sub: 'what the model wants to say' },
 		{ id: 'plots', label: 'Plots', sub: 'registered figures, run on demand' },
-		{ id: 'stories', label: 'Stories', sub: 'national stories, base vs aligned' }
+		{ id: 'stories', label: 'Stories', sub: 'national stories, base vs aligned' },
+		{ id: 'generate', label: 'Generate', sub: 'sample continuations from a model' }
 	] as const;
 
 	//: THE URL IS THE STATE, so a panel can be sent to someone (RH). Path
@@ -182,6 +184,8 @@
 			<Prompts />
 		{:else if section === 'stories'}
 			<Stories />
+		{:else if section === 'generate'}
+			<Generate />
 		{/if}
 	</main>
 </div>

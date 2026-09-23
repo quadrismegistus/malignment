@@ -392,6 +392,39 @@ export interface SaveRequest {
 	overwrite?: boolean;
 }
 
+export interface GenerateRequest {
+	model: string;
+	prompt: string;
+	frame?: string;
+	system?: string;
+	prefill?: boolean;
+	user_msg?: string;
+	n?: number;
+	seed?: number;
+	decoder?: {
+		temperature?: number;
+		max_new_tokens?: number;
+	};
+}
+
+export interface GenerateResult {
+	text: string;
+	prompt: string;
+	model: string;
+	frame: string;
+	n_new_tokens: number;
+	finish: string;
+	decoder: Record<string, unknown>;
+	seed: number | null;
+	sys_supported: boolean | null;
+}
+
+export interface GenerateResponse {
+	model: string;
+	n: number;
+	results: GenerateResult[];
+}
+
 export const api = {
 	//: POST for PAYLOAD SIZE, not side effects — it writes nothing. At k=500 the
 	//: candidate list is kilobytes, past what a URL carries reliably.
@@ -501,5 +534,6 @@ export const api = {
 	slot: (prompt: string, pairBase: string, k: number) =>
 		get<SlotResponse>(
 			`/slot?prompt=${encodeURIComponent(prompt)}&pair=${encodeURIComponent(pairBase)}&k=${k}`
-		)
+		),
+	generate: (body: GenerateRequest) => post<GenerateResponse>('/generate', body)
 };

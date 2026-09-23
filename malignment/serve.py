@@ -1407,7 +1407,8 @@ class Handler(BaseHTTPRequestHandler):
     server_version = "malignment"
 
     def do_POST(self):
-        """`/slot/axis` and `/slot/save`. Only the second has side effects.
+        """`/slot/axis`, `/slot/save` and `/generate`. Save has side effects;
+        generate mutates device state (loading a model) but writes nothing.
 
         `/slot/axis` is a POST for PAYLOAD SIZE, not side effects: it takes the
         candidate word list, which at `k=500` is several kilobytes -- past what a
@@ -1430,6 +1431,8 @@ class Handler(BaseHTTPRequestHandler):
         parsed = urlparse(self.path)
         if parsed.path == "/slot/save":
             return self._save()
+        if parsed.path == "/generate":
+            return self._generate()
         if parsed.path != "/slot/axis":
             return self._json(404, {"error": "no POST route %s" % parsed.path})
         try:
@@ -1584,6 +1587,117 @@ class Handler(BaseHTTPRequestHandler):
                                     "path": path, "item": item})
         except FileExistsError as e:
             return self._json(409, {"error": str(e), "conflict": True})
+        except ValueError as e:
+            return self._json(400, {"error": str(e)})
+        except Exception as e:
+            import traceback
+            traceback.print_exc()
+            return self._json(500, {"error": "%s: %s" % (type(e).__name__, e)})
+
+    def _generate(self):
+        """Sample continuations from a resident model.
+
+        A POST for payload size (the system prompt can be long) and because it
+        is a mutation on device state (loading a model). Uses the same
+        `_SLOT_MODELS` residency as `/slot`, so a model loaded here is reused
+        by `/slot` and vice versa.
+
+        **THIS IS THE SECOND VERB ON THE SAME LOADER** (after `/slot`'s twp
+        measurement). Both reach the device through `Checkpoint.load()` ->
+        `runners.load_for_twp`, so the instrument stays one instrument.
+
+        **MPS CONSTRAINT ENFORCED SERVER-SIDE.** `generate.py` documents the
+        defect: any filter that zeroes logits (top_p != 1.0, top_k > 0)
+        produces out-of-range samples at ~1/400 rate per token on MPS. The
+        pinned `top_p=1.0, top_k=0` is SAFE. A client that asks for filtering
+        gets a 400, not a silently contaminated draw.
+        """
+        try:
+            if not _ALLOW_SLOT:
+                raise ValueError("this server was started with --no-slot; "
+                                 "generation requires model loading")
+            length = int(self.headers.get("Content-Length", 0))
+            body = json.loads(self.rfile.read(length)) if length else {}
+            model = (body.get("model") or "").strip()
+            prompt = (body.get("prompt") or "").strip()
+            if not model:
+                raise ValueError("model required")
+            if not prompt:
+                raise ValueError("prompt required")
+            from . import roster, generate as gen_mod
+            from .checkpoint import Checkpoint
+            all_models = set(roster.population("all"))
+            if model not in all_models:
+                raise ValueError(
+                    "%r is not in the roster. Ask /roster for the %d available."
+                    % (model, len(all_models)))
+            n = max(1, min(int(body.get("n") or 1), 8))
+            frame = (body.get("frame") or "raw").strip()
+            if frame not in gen_mod.FRAMES:
+                raise ValueError("frame must be one of %s; got %r"
+                                 % (gen_mod.FRAMES, frame))
+            dec = dict(gen_mod.DECODER)
+            client_dec = body.get("decoder") or {}
+            if "temperature" in client_dec:
+                t = float(client_dec["temperature"])
+                if not (0.0 < t <= 2.0):
+                    raise ValueError("temperature must be in (0, 2]; got %s" % t)
+                dec["temperature"] = t
+            if "max_new_tokens" in client_dec:
+                m = int(client_dec["max_new_tokens"])
+                if not (1 <= m <= 2048):
+                    raise ValueError("max_new_tokens must be in [1, 2048]; got %s" % m)
+                dec["max_new_tokens"] = m
+            if client_dec.get("top_p", 1.0) != 1.0:
+                raise ValueError(
+                    "top_p != 1.0 breaks sampling on MPS (out-of-range index "
+                    "at ~1/400 rate per token). Pinned to 1.0.")
+            if client_dec.get("top_k", 0) != 0:
+                raise ValueError(
+                    "top_k > 0 breaks sampling on MPS (same defect as top_p). "
+                    "Pinned to 0.")
+            system = body.get("system", gen_mod.DEFAULT)
+            if system is not None and not isinstance(system, str):
+                system = gen_mod.DEFAULT
+            if system is None:
+                system = gen_mod.DEFAULT
+            prefill = bool(body.get("prefill", False))
+            user_msg = body.get("user_msg", "Hi.")
+            seed = body.get("seed")
+            if seed is not None:
+                seed = int(seed)
+            with _SLOT_LOCK:
+                ld = _SLOT_MODELS.get(model)
+                if ld is None:
+                    _evict_to(_SLOT_MAX - 1)
+                    ld = Checkpoint(model).load()
+                _SLOT_MODELS.pop(model, None)
+                _SLOT_MODELS[model] = ld
+                _SLOT_USED[model] = _monotonic()
+                try:
+                    passages = gen_mod.generate(
+                        ld, prompt, n=n,
+                        system=system, prefill=prefill,
+                        user_msg=user_msg, seed=seed,
+                        decoder=dec, keep_prompt=False)
+                except gen_mod.FrameRefused as e:
+                    raise ValueError(str(e))
+            results = []
+            for p in passages:
+                results.append({
+                    "text": p.text,
+                    "prompt": p.prompt,
+                    "model": p.model,
+                    "frame": p.frame,
+                    "n_new_tokens": p.n_new_tokens,
+                    "finish": p.finish,
+                    "decoder": p.decoder,
+                    "seed": p.seed,
+                    "sys_supported": p.sys_supported,
+                })
+            return self._json(200, {
+                "model": model, "n": len(results),
+                "results": results})
         except ValueError as e:
             return self._json(400, {"error": str(e)})
         except Exception as e:
