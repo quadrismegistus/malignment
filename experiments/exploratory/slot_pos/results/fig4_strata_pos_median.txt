@@ -1,0 +1,58 @@
+stat=median (within-lineage aggregator)  by=pos  purity>=0.60  strata with >= 20 prompts; z in the pooled sd; * = BH 0.05 over 14 rows
+pooled reproduces norms_levels_z_en.json (z and up counts, 14 rows x 3 bands)
+prompts: noun 130, verb 1495
+
+BAND LOW
+  row                               pooled                noun                verb
+  k_bodily_harm           -0.009*  4/41 t5   -0.002*  2/34 t14    -0.012*  4/41 t5
+  k_transgressiveness     -0.009*  4/43 t3   -0.002*  2/32 t16       -0.012*  5/45
+  k_concreteness             -0.009  21/29       +0.020* 35/15       -0.007  21/29
+  k_register_level           +0.033* 46/4        +0.029* 44/6        +0.035* 45/5 
+  k_vulgarity            +0.000   0/5  t45   +0.000   0/1  t49   +0.000*  1/10 t39
+  warriner_arousal           -0.045*  8/42       +0.003  27/23       -0.052*  7/43
+  warriner_valence           +0.017* 35/15       +0.003  26/24       +0.024* 35/15
+  warriner_dominance         +0.014  32/18       +0.015  32/18       +0.017* 34/16
+  v6:fit                  +0.044* 43/5  t2    +0.010* 47/2  t1       +0.056* 44/6 
+  v6:directedness        -0.003*  3/31 t16   +0.000   0/0  t50    -0.012*  5/42 t3
+  v6:makes_better        +0.014* 37/3  t10   +0.003* 33/6  t11    +0.026* 43/3  t4
+  v6:makes_worse         -0.001*  3/31 t16   +0.000*  0/13 t37    -0.003*  4/39 t7
+  v6:mundanity            +0.009* 42/7  t1    +0.004* 43/5  t2    +0.014* 40/6  t4
+  v6:vocalisation        -0.005*  7/29 t14   +0.000   0/0  t50    -0.013*  9/35 t6
+
+BAND ALL
+  row                               pooled                noun                verb
+  k_bodily_harm           -0.014*  4/43 t3   -0.003*  0/38 t12    -0.021*  5/43 t2
+  k_transgressiveness     -0.013*  6/42 t2    -0.005*  0/41 t9       -0.020*  6/44
+  k_concreteness             -0.023* 17/33       +0.012* 33/17       -0.022  19/31
+  k_register_level           +0.038* 45/5     +0.056* 45/4  t1    +0.037* 43/5  t2
+  k_vulgarity            +0.000*  0/8  t42   -0.000*  0/30 t20   +0.000*  1/10 t39
+  warriner_arousal           -0.057*  8/42    -0.022* 13/36 t1       -0.068*  8/42
+  warriner_valence           +0.017* 37/13    +0.007  30/19 t1       +0.026* 39/11
+  warriner_dominance      +0.019* 36/13 t1    +0.024* 35/13 t2       +0.025* 36/14
+  v6:fit                  +0.039* 42/6  t2       +0.011* 47/3     +0.049* 43/6  t1
+  v6:directedness        -0.005*  2/29 t19   +0.000   0/0  t50    -0.012*  6/38 t6
+  v6:makes_better        +0.006* 33/3  t14   +0.003* 37/0  t13    +0.014* 41/4  t5
+  v6:makes_worse         -0.000*  3/25 t22   +0.000*  0/24 t26   -0.004*  4/36 t10
+  v6:mundanity            +0.013* 40/7  t3    +0.014* 43/2  t5       +0.018* 41/9 
+  v6:vocalisation        +0.000*  7/22 t21   +0.000   0/0  t50    -0.006* 11/32 t7
+
+BAND HIGH
+  row                               pooled                noun                verb
+  k_bodily_harm           -0.031*  3/44 t3    -0.004*  0/41 t9       -0.048*  4/46
+  k_transgressiveness     -0.035*  5/44 t1    -0.018*  2/43 t5       -0.056*  6/44
+  k_concreteness             -0.036  18/32       +0.005  26/24       -0.047* 14/36
+  k_register_level           +0.059* 45/5        +0.095* 46/4        +0.053* 42/8 
+  k_vulgarity            +0.000*  0/21 t29    -0.012*  2/39 t9   -0.000*  0/28 t22
+  warriner_arousal           -0.067* 10/40       -0.054* 16/34       -0.079*  9/41
+  warriner_valence           +0.035* 39/11       +0.006  29/21       +0.062* 40/10
+  warriner_dominance         +0.038* 37/13       +0.039* 37/13       +0.055* 39/11
+  v6:fit                     +0.038* 44/6     +0.021* 47/2  t1    +0.046* 39/9  t2
+  v6:directedness        -0.005*  4/32 t14   +0.000*  2/12 t36    -0.012*  7/38 t5
+  v6:makes_better        +0.000  25/13 t12    +0.014* 44/0  t6    +0.005  30/17 t3
+  v6:makes_worse          -0.005* 11/31 t8   -0.001*  0/33 t17    -0.016* 11/38 t1
+  v6:mundanity               +0.018* 43/7        +0.046* 43/7     +0.019* 40/9  t1
+  v6:vocalisation        +0.000   8/15 t27   +0.000   0/0  t50    -0.000  20/25 t5
+
+SIGNIFICANT CELLS WHOSE SIGN DISAGREES WITH THE POOLED PLATE:
+  low   noun               k_concreteness       +0.020 35/15  (pooled -0.009)
+  all   noun               k_concreteness       +0.012 33/17  (pooled -0.023*)

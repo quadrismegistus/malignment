@@ -8,7 +8,8 @@
 Same statistic as `norm_change/norms_levels_z.py` and the same test as
 FIGURE3_OF_RECORD.md: per row, band and stratum, the lineage MEAN of the
 per-row move (aligned - base level), then the median over the 50 lineages,
-in z units of the POOLED norm sd so every stratum shares one ruler; up/down
+in z units of the POOLED norm sd (a second report uses the within-lineage
+MEDIAN instead of the mean -> results/fig4_strata_<by>_median.*) so every stratum shares one ruler; up/down
 counts of the lineage means, a two-sided sign test, BH at 0.05 over the
 fourteen plate rows within each (stratum, band). Lift bands use the PUBLISHED
 cuts. Strata come from `results/prompt_pos_en.csv` (base-side dominant UPOS,
@@ -112,20 +113,37 @@ def main():
                         acc[n][sc][k][lin].append(al - b)
         print("read", table, flush=True)
 
+    for stat in STATS:
+        report(stat, a, S, dropped, names, acc, pubz)
+
+
+#: WITHIN-LINEAGE AGGREGATOR. `mean` is the plate's (`move_mean_z`, up_mean /
+#: down_mean); `median` is the older within-lineage median (`move_z`, up / down),
+#: which ties at exactly 0 whenever most of a lineage's prompts did not move --
+#: FIGURE3_OF_RECORD.md, "THE ESTIMATOR IS A SECOND DEFECT". Both are reported
+#: because RH asked to see both; the published caption rests on `mean`.
+STATS = {"mean": (st.fmean, "move_mean_z", "up_mean"),
+         "median": (st.median, "move_z", "up")}
+
+
+def report(stat, a, S, dropped, names, acc, pubz):
+    agg, zkey, upkey = STATS[stat]
+    lo, hi = json.load(open(os.path.join(NC, "results", "norms_levels_z_en.json")))["cuts"]
     out = {"by": a.by, "purity": a.purity, "cuts": [lo, hi], "min_prompts": MIN_PROMPTS,
-           "dropped_small": dropped, "n_prompts": {n: len(S[n]) for n in S}, "strata": {}}
+           "dropped_small": dropped, "n_prompts": {n: len(S[n]) for n in S}, "stat": stat, "strata": {}}
     for n in names:
         out["strata"][n] = {}
         for band in BANDS:
             k = {"low": 0, "mid": 1, "high": 2, "all": 3}[band]
             res = []
             for s in ROWS:
-                dm = [st.fmean(v) for v in acc[n][s][k].values() if v]
+                dm = [agg(v) for v in acc[n][s][k].values() if v]
                 if not dm:
                     res.append({"scale": s, "n_lineages": 0}); continue
                 up = sum(x > 0 for x in dm); dn = sum(x < 0 for x in dm)
+                tie = sum(x == 0 for x in dm)
                 res.append({"scale": s, "n_lineages": len(dm),
-                            "z": st.median(dm) / pubz[s]["sd"], "up": up, "down": dn,
+                            "z": st.median(dm) / pubz[s]["sd"], "up": up, "down": dn, "tied": tie,
                             "p": binomtest(up, up + dn).pvalue if up + dn else 1.0})
             ok = [r for r in res if "p" in r]
             for r, sig in zip(ok, bh([r["p"] for r in ok])):
@@ -135,13 +153,13 @@ def main():
     for band in BANDS:
         for r in out["strata"]["pooled"][band]:
             pb = next(x for x in pubz[r["scale"]]["bands"] if x["band"] == band)
-            if abs(r["z"] - pb["move_mean_z"]) > 1e-9 or r["up"] != pb["up_mean"]:
+            if abs(r["z"] - pb[zkey]) > 1e-9 or r["up"] != pb[upkey]:
                 raise SystemExit("refusing to write: pooled %s/%s does not reproduce" % (r["scale"], band))
 
     L = []
     p = lambda *x: L.append(" ".join(str(y) for y in x))
-    p("by=%s  purity>=%.2f  strata with >= %d prompts; z in the pooled sd; * = BH 0.05 over 14 rows"
-      % (a.by, a.purity, MIN_PROMPTS))
+    p("stat=%s (within-lineage aggregator)  by=%s  purity>=%.2f  strata with >= %d prompts; z in the pooled sd; * = BH 0.05 over 14 rows"
+      % (stat, a.by, a.purity, MIN_PROMPTS))
     p("pooled reproduces norms_levels_z_en.json (z and up counts, 14 rows x 3 bands)")
     p("prompts: " + ", ".join("%s %d" % (n, len(S[n])) for n in S))
     if dropped:
@@ -149,13 +167,14 @@ def main():
     for band in BANDS:
         p()
         p("BAND %s" % band.upper())
-        p("  %-20s" % "row" + "".join("%15s" % n[:14] for n in names))
+        p("  %-20s" % "row" + "".join("%20s" % n[:14] for n in names))
         for i, s in enumerate(ROWS):
             cells = []
             for n in names:
                 r = out["strata"][n][band][i]
-                cells.append("%15s" % ("n/a" if "z" not in r else "%+.3f%s %2d/%-2d" % (
-                    r["z"], "*" if r["bh"] else " ", r["up"], r["down"])))
+                cells.append("%20s" % ("n/a" if "z" not in r else "%+.3f%s %2d/%-2d%s" % (
+                    r["z"], "*" if r["bh"] else " ", r["up"], r["down"],
+                    " t%d" % r["tied"] if r["tied"] else "")))
             p("  %-20s" % s + "".join(cells))
     p()
     p("SIGNIFICANT CELLS WHOSE SIGN DISAGREES WITH THE POOLED PLATE:")
@@ -172,8 +191,8 @@ def main():
     if not nflip:
         p("  none")
     txt = "\n".join(L) + "\n"
-    open(os.path.join(HERE, "results", "fig4_strata_%s.txt" % a.by), "w").write(txt)
-    json.dump(out, open(os.path.join(HERE, "results", "fig4_strata_%s.json" % a.by), "w"), indent=1)
+    open(os.path.join(HERE, "results", "fig4_strata_%s%s.txt" % (a.by, "" if stat == "mean" else "_median")), "w").write(txt)
+    json.dump(out, open(os.path.join(HERE, "results", "fig4_strata_%s%s.json" % (a.by, "" if stat == "mean" else "_median")), "w"), indent=1)
     print(txt)
 
 

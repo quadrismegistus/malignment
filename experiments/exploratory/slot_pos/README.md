@@ -25,10 +25,19 @@ Base-side dominant POS: VERB 1,877 prompts (median purity 0.78), PRON 271 (0.55)
 
 This is the statistic behind the z plate (`norm_change/norms_levels_z.py`): lineage mean of the move, median over the 50 lineages, in the pooled norm sd. Each (stratum, band) gets a sign test with BH over the 14 plate rows. Lift cuts are the published ones. The pooled stratum must reproduce `norms_levels_z_en.json` or nothing is written. `--by pos` was also checked against a run through `norms_levels_z.build` itself, and the two agree to 1e-9.
 
+**Both within-lineage aggregators are reported** (RH): the MEAN, which the plate and its caption use (`fig4_strata_<by>.txt`), and the MEDIAN (`fig4_strata_<by>_median.txt`). The median ties at exactly 0 for many lineages (the `tN` in its tables), and its sign test counts only untied lineages. It is the estimator FIGURE3_OF_RECORD.md sets aside. The bullets below use the mean; the differences under the median are listed after them.
+
 - **Verb slots (1,495 prompts, purity ≥ 0.6): no significant cell changes sign in any band.** Relative to the pooled plate, four cells change significance: `k_register_level` on all prompts (+0.017, 28/22) and `k_concreteness` on high lift (18/32) lose it; `k_transgressiveness` on low lift and `warriner_dominance` on all prompts gain it.
 - **Noun slots (130 prompts)**: no significant sign disagreement. The v6 action scales are not meaningful at noun slots, so read only the k and Warriner rows there.
 - **By kind**: DEGRADING (30 prompts) reverses on valence, dominance, makes_better and makes_worse; aligned completions there go more negative and less dominant. ILLICIT reverses on vocalisation, becoming less vocal where the pooled plate goes more vocal. Only 10 of the 30 DEGRADING prompts are verb slots, so the DEGRADING reversal lives mostly outside verb slots.
 - **Kind × POS** (strata of ≥ 20 prompts): SEXUAL verb slots gain directedness (all prompts 36/14, high lift 34/16), against a pooled plate that is flat to negative. ILLICIT verb slots lose vocalisation. SEXUAL noun slots go more concrete on low lift.
+
+Under the MEDIAN:
+- **Verb slots still show no significant sign disagreement.** `k_register_level` becomes significant on all prompts (43/5); `k_concreteness` on high lift becomes significant (14/36).
+- **Verb slots show the vocalisation estimator split**: mean +0.030 (34/16, toward speech), median −0.006 (11/32, 7 tied, away from speech). This is the split FIGURE3_OF_RECORD.md documents on the pooled plate.
+- `v6:directedness` in verb slots becomes significantly negative (6/38, 6 tied) where the mean is null (22/28).
+- The DEGRADING reversal (valence, dominance, makes_better, makes_worse) holds under both aggregators. The ILLICIT vocalisation drop holds under both. The SEXUAL verb-slot directedness gain is mean-only (median 29/19, not significant).
+- Noun-slot concreteness goes positive under the median (33/17, significant).
 
 ## Directedness is not part of speech, and a third of it is the frame
 
