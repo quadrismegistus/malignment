@@ -68,6 +68,19 @@ def _sections():
             if isinstance(v, dict)}
 
 
+def _packages(pr, env):
+    """{package: PEP 440 specifier} for a node, profile under model. -> dict
+
+    An empty specifier means REQUIRED AT ANY VERSION and is not the same as
+    absent: `einops: ''` says the load fails without it, which an asserting
+    check reports as ABSENT rather than as MISMATCH. Returns {} when neither
+    layer declares any, so a consumer can test truthiness without a None guard.
+    """
+    out = dict(pr.get("packages") or {})
+    out.update(env.get("packages") or {})
+    return out
+
+
 def build():
     import yaml
     nodes = yaml.safe_load(open(os.path.join(ROOT, "roster", "models",
@@ -118,6 +131,25 @@ def build():
             ("compute_dtype_reason",
              ("per-node env.dtype" if env.get("dtype")
               else ("profile %s" % p) if pr.get("compute_dtype") else None)),
+            #: PACKAGES WERE AUTHORED AND NEVER EMITTED. `models.yaml` carries
+            #: `env.packages` for 12 checkpoints -- a PEP 440 specifier per
+            #: package, with a required reason -- and nothing read it, so
+            #: `requirements.json` could not see a pin that exists and a box
+            #: built from declarations got whatever the default install gave it.
+            #: `internlm/internlm2-base-7b` declares `sentencepiece: ==0.2.1`
+            #: and is the only pin in the roster; the other eleven entries are
+            #: bare requirements (`''`), which are still assertable as PRESENT.
+            #:
+            #: Merged profile-then-model so a profile-level block works the day
+            #: one is written, though none carries packages today -- which is
+            #: why `overridden_from` is null rather than set to the profile
+            #: name. A provenance that names a source the value did not come
+            #: from is worse than no provenance.
+            ("packages", _packages(pr, env)),
+            ("packages_why", (env.get("packages_why") or env.get("why") or None)
+             if env.get("packages") else None),
+            ("overridden_from", p if (pr.get("packages") and env.get("packages"))
+             else None),
             ("min_vram_gb", vram),
             ("gpus", gpus),
             ("params_b", pb),
