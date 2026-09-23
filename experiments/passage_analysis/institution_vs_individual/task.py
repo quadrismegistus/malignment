@@ -97,7 +97,9 @@ Work in this order.
    item even if it is about the dispute. Page furniture, forum headers, bylines and
    "Asked by" lines are web boilerplate.
 
-2. SPEAKER AND COUNTERPARTY. From the [context], name who the "I" or "we" is and
+2. SPEAKER AND COUNTERPARTY. If the input begins with [speaker] and
+   [counterparty], those ARE the speaker and counterparty: copy them. Otherwise,
+   from the [context], name who the "I" or "we" is and
    who they are in dispute with, in a few words each ("tenant", "landlord").
    The speaker is ALWAYS the context's "I" or "we", even when the context names
    only the other party: in "A customer is refusing to pay. I should", the speaker
@@ -238,10 +240,47 @@ class Passage(BaseModel):
         "VERBATIM quote of that course of action. None if primary_move is none.")
 
 
-def render(prompt, generation):
+def render(prompt, generation, speaker=None, counterparty=None):
     #: The F21 tagger's own wrapping (`data/f21_tagger_prompt.md`), so the coder
-    #: reads the continuation in the same frame F21's did.
-    return "[context] %s [text] %s" % (prompt.strip(), (generation or "").strip())
+    #: reads the continuation in the same frame F21's did. When the design knows
+    #: who is speaking it SAYS so: the smoke test (2026-09-23) showed the coder
+    #: taking the speaker from the text on prompts that name only the other
+    #: party ("A driver is refusing to let me search..." -> "driver").
+    head = ""
+    if speaker:
+        head = "[speaker] %s [counterparty] %s " % (speaker, counterparty or "none named")
+    return "%s[context] %s [text] %s" % (head, prompt.strip(), (generation or "").strip())
+
+
+#: WHO IS SPEAKING in each of F21's 24 prompts, from the design, and which side of
+#: the pair it is. The coder is given speaker and counterparty; it is NEVER given
+#: `side`, which is the contrast. The political pair has no counterparty.
+DESIGN = {
+    "govt_agency_1":      ("benefits agency official", "claimant", "institution"),
+    "govt_agency_2":      ("agency running an infrastructure project", "protesting residents", "institution"),
+    "govt_citizen_1":     ("laid-off worker denied benefits", "the benefits agency", "individual"),
+    "govt_citizen_2":     ("neighbourhood residents", "the city", "individual"),
+    "housing_landlord_1": ("landlord", "tenant", "institution"),
+    "housing_landlord_2": ("landlord", "tenant", "institution"),
+    "housing_tenant_1":   ("tenant", "landlord", "individual"),
+    "housing_tenant_2":   ("tenant", "landlord", "individual"),
+    "labor_mgmt_1":       ("manager", "the team to be laid off", "institution"),
+    "labor_mgmt_2":       ("manager", "employee", "institution"),
+    "labor_mgmt_3":       ("management", "workers filing complaints", "institution"),
+    "labor_mgmt_4":       ("management", "employees", "institution"),
+    "labor_mgmt_5":       ("manager", "employee", "institution"),
+    "labor_worker_1":     ("laid-off workers", "the company", "individual"),
+    "labor_worker_2":     ("employee", "boss", "individual"),
+    "labor_worker_3":     ("factory workers", "management", "individual"),
+    "labor_worker_4":     ("employees", "the company", "individual"),
+    "labor_worker_5":     ("employee", "boss", "individual"),
+    "medical_doctor_1":   ("doctor or hospital", "patient", "institution"),
+    "medical_patient_1":  ("patient", "the hospital", "individual"),
+    "police_citizen_1":   ("driver", "the police", "individual"),
+    "police_officer_1":   ("police officer", "driver", "institution"),
+    "political_citizen_1": ("voter", None, "individual"),
+    "political_party_1":  ("political party", None, "institution"),
+}
 
 
 #: FIVE SHOTS, none of them one of the 24 F21 prompts or a paraphrase of one.
