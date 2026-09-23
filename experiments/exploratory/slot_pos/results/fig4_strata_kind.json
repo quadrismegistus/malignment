@@ -1,0 +1,3109 @@
+{
+ "by": "kind",
+ "purity": 0.6,
+ "cuts": [
+  0.0,
+  0.35999999999999943
+ ],
+ "min_prompts": 20,
+ "dropped_small": {},
+ "n_prompts": {
+  "COERCIVE": 379,
+  "DEGRADING": 30,
+  "ILLICIT": 105,
+  "NONE": 1063,
+  "OTHER": 155,
+  "SEXUAL": 99,
+  "VIOLENT": 281
+ },
+ "strata": {
+  "pooled": {
+   "low": [
+    {
+     "scale": "k_bodily_harm",
+     "n_lineages": 50,
+     "z": -0.02473786134917779,
+     "up": 9,
+     "down": 41,
+     "p": 5.614100093254137e-06,
+     "bh": true
+    },
+    {
+     "scale": "k_transgressiveness",
+     "n_lineages": 50,
+     "z": -0.016515011900398065,
+     "up": 17,
+     "down": 33,
+     "p": 0.032839137564268484,
+     "bh": false
+    },
+    {
+     "scale": "k_concreteness",
+     "n_lineages": 50,
+     "z": -0.012210385196231808,
+     "up": 22,
+     "down": 28,
+     "p": 0.47988766169832786,
+     "bh": false
+    },
+    {
+     "scale": "k_register_level",
+     "n_lineages": 50,
+     "z": 0.01825140475508525,
+     "up": 28,
+     "down": 22,
+     "p": 0.47988766169832786,
+     "bh": false
+    },
+    {
+     "scale": "k_vulgarity",
+     "n_lineages": 50,
+     "z": -0.0029511662745121017,
+     "up": 14,
+     "down": 36,
+     "p": 0.0026021714567221466,
+     "bh": true
+    },
+    {
+     "scale": "warriner_arousal",
+     "n_lineages": 50,
+     "z": -0.042809532167853694,
+     "up": 10,
+     "down": 40,
+     "p": 2.3861331676755526e-05,
+     "bh": true
+    },
+    {
+     "scale": "warriner_valence",
+     "n_lineages": 50,
+     "z": 0.014973465337638402,
+     "up": 30,
+     "down": 20,
+     "p": 0.20263875106454066,
+     "bh": false
+    },
+    {
+     "scale": "warriner_dominance",
+     "n_lineages": 50,
+     "z": 0.004964427441308515,
+     "up": 27,
+     "down": 23,
+     "p": 0.6718110337653656,
+     "bh": false
+    },
+    {
+     "scale": "v6:fit",
+     "n_lineages": 50,
+     "z": 0.06201614795352092,
+     "up": 41,
+     "down": 9,
+     "p": 5.614100093254137e-06,
+     "bh": true
+    },
+    {
+     "scale": "v6:directedness",
+     "n_lineages": 50,
+     "z": -0.005288615751283994,
+     "up": 20,
+     "down": 30,
+     "p": 0.20263875106454066,
+     "bh": false
+    },
+    {
+     "scale": "v6:makes_better",
+     "n_lineages": 50,
+     "z": 0.03942248678293945,
+     "up": 44,
+     "down": 6,
+     "p": 3.243740565039843e-08,
+     "bh": true
+    },
+    {
+     "scale": "v6:makes_worse",
+     "n_lineages": 50,
+     "z": -0.00010580661740812136,
+     "up": 25,
+     "down": 25,
+     "p": 1.0,
+     "bh": false
+    },
+    {
+     "scale": "v6:mundanity",
+     "n_lineages": 50,
+     "z": 0.014250934088916508,
+     "up": 42,
+     "down": 8,
+     "p": 1.163555804595262e-06,
+     "bh": true
+    },
+    {
+     "scale": "v6:vocalisation",
+     "n_lineages": 50,
+     "z": 0.0027744922851620658,
+     "up": 26,
+     "down": 24,
+     "p": 0.887724827340783,
+     "bh": false
+    }
+   ],
+   "all": [
+    {
+     "scale": "k_bodily_harm",
+     "n_lineages": 50,
+     "z": -0.06703553165211906,
+     "up": 7,
+     "down": 43,
+     "p": 2.098677427397888e-07,
+     "bh": true
+    },
+    {
+     "scale": "k_transgressiveness",
+     "n_lineages": 50,
+     "z": -0.0514771356155128,
+     "up": 9,
+     "down": 41,
+     "p": 5.614100093254137e-06,
+     "bh": true
+    },
+    {
+     "scale": "k_concreteness",
+     "n_lineages": 50,
+     "z": -0.02107607892288051,
+     "up": 18,
+     "down": 32,
+     "p": 0.06490864707227217,
+     "bh": false
+    },
+    {
+     "scale": "k_register_level",
+     "n_lineages": 50,
+     "z": 0.022443688147901604,
+     "up": 36,
+     "down": 14,
+     "p": 0.0026021714567221466,
+     "bh": true
+    },
+    {
+     "scale": "k_vulgarity",
+     "n_lineages": 50,
+     "z": -0.02484342650126505,
+     "up": 8,
+     "down": 42,
+     "p": 1.163555804595262e-06,
+     "bh": true
+    },
+    {
+     "scale": "warriner_arousal",
+     "n_lineages": 50,
+     "z": -0.053045229375335165,
+     "up": 12,
+     "down": 38,
+     "p": 0.00030586400160359517,
+     "bh": true
+    },
+    {
+     "scale": "warriner_valence",
+     "n_lineages": 50,
+     "z": 0.01886939397845624,
+     "up": 33,
+     "down": 17,
+     "p": 0.032839137564268484,
+     "bh": true
+    },
+    {
+     "scale": "warriner_dominance",
+     "n_lineages": 50,
+     "z": 0.0203277740928084,
+     "up": 31,
+     "down": 19,
+     "p": 0.11892045255943628,
+     "bh": false
+    },
+    {
+     "scale": "v6:fit",
+     "n_lineages": 50,
+     "z": 0.04478395519735447,
+     "up": 41,
+     "down": 9,
+     "p": 5.614100093254137e-06,
+     "bh": true
+    },
+    {
+     "scale": "v6:directedness",
+     "n_lineages": 50,
+     "z": -0.009694198911224172,
+     "up": 20,
+     "down": 30,
+     "p": 0.20263875106454066,
+     "bh": false
+    },
+    {
+     "scale": "v6:makes_better",
+     "n_lineages": 50,
+     "z": 0.02924547985467501,
+     "up": 44,
+     "down": 6,
+     "p": 3.243740565039843e-08,
+     "bh": true
+    },
+    {
+     "scale": "v6:makes_worse",
+     "n_lineages": 50,
+     "z": -0.0009951272941403544,
+     "up": 24,
+     "down": 26,
+     "p": 0.887724827340783,
+     "bh": false
+    },
+    {
+     "scale": "v6:mundanity",
+     "n_lineages": 50,
+     "z": 0.014264684636446404,
+     "up": 44,
+     "down": 6,
+     "p": 3.243740565039843e-08,
+     "bh": true
+    },
+    {
+     "scale": "v6:vocalisation",
+     "n_lineages": 50,
+     "z": 0.03114830863111973,
+     "up": 33,
+     "down": 17,
+     "p": 0.032839137564268484,
+     "bh": true
+    }
+   ],
+   "high": [
+    {
+     "scale": "k_bodily_harm",
+     "n_lineages": 50,
+     "z": -0.12734080304436013,
+     "up": 7,
+     "down": 43,
+     "p": 2.098677427397888e-07,
+     "bh": true
+    },
+    {
+     "scale": "k_transgressiveness",
+     "n_lineages": 50,
+     "z": -0.11192181961030051,
+     "up": 9,
+     "down": 41,
+     "p": 5.614100093254137e-06,
+     "bh": true
+    },
+    {
+     "scale": "k_concreteness",
+     "n_lineages": 50,
+     "z": -0.04674045964969836,
+     "up": 17,
+     "down": 33,
+     "p": 0.032839137564268484,
+     "bh": true
+    },
+    {
+     "scale": "k_register_level",
+     "n_lineages": 50,
+     "z": 0.06346666387076925,
+     "up": 39,
+     "down": 11,
+     "p": 9.021490107130603e-05,
+     "bh": true
+    },
+    {
+     "scale": "k_vulgarity",
+     "n_lineages": 50,
+     "z": -0.07445741873951117,
+     "up": 9,
+     "down": 41,
+     "p": 5.614100093254137e-06,
+     "bh": true
+    },
+    {
+     "scale": "warriner_arousal",
+     "n_lineages": 50,
+     "z": -0.07041395459339088,
+     "up": 11,
+     "down": 39,
+     "p": 9.021490107130603e-05,
+     "bh": true
+    },
+    {
+     "scale": "warriner_valence",
+     "n_lineages": 50,
+     "z": 0.0480673125178253,
+     "up": 36,
+     "down": 14,
+     "p": 0.0026021714567221466,
+     "bh": true
+    },
+    {
+     "scale": "warriner_dominance",
+     "n_lineages": 50,
+     "z": 0.046952110734549295,
+     "up": 36,
+     "down": 14,
+     "p": 0.0026021714567221466,
+     "bh": true
+    },
+    {
+     "scale": "v6:fit",
+     "n_lineages": 50,
+     "z": 0.04338770486305953,
+     "up": 38,
+     "down": 12,
+     "p": 0.00030586400160359517,
+     "bh": true
+    },
+    {
+     "scale": "v6:directedness",
+     "n_lineages": 50,
+     "z": -0.011718296621814842,
+     "up": 19,
+     "down": 31,
+     "p": 0.11892045255943628,
+     "bh": false
+    },
+    {
+     "scale": "v6:makes_better",
+     "n_lineages": 50,
+     "z": 0.020589716634348984,
+     "up": 41,
+     "down": 9,
+     "p": 5.614100093254137e-06,
+     "bh": true
+    },
+    {
+     "scale": "v6:makes_worse",
+     "n_lineages": 50,
+     "z": -0.011521945096118919,
+     "up": 17,
+     "down": 33,
+     "p": 0.032839137564268484,
+     "bh": true
+    },
+    {
+     "scale": "v6:mundanity",
+     "n_lineages": 50,
+     "z": 0.024031803298056435,
+     "up": 42,
+     "down": 8,
+     "p": 1.163555804595262e-06,
+     "bh": true
+    },
+    {
+     "scale": "v6:vocalisation",
+     "n_lineages": 50,
+     "z": 0.057916408172357936,
+     "up": 39,
+     "down": 11,
+     "p": 9.021490107130603e-05,
+     "bh": true
+    }
+   ]
+  },
+  "COERCIVE": {
+   "low": [
+    {
+     "scale": "k_bodily_harm",
+     "n_lineages": 50,
+     "z": -0.018234654293243932,
+     "up": 12,
+     "down": 38,
+     "p": 0.00030586400160359517,
+     "bh": true
+    },
+    {
+     "scale": "k_transgressiveness",
+     "n_lineages": 50,
+     "z": 0.004735074844329205,
+     "up": 26,
+     "down": 24,
+     "p": 0.887724827340783,
+     "bh": false
+    },
+    {
+     "scale": "k_concreteness",
+     "n_lineages": 50,
+     "z": -0.009674692052745624,
+     "up": 22,
+     "down": 28,
+     "p": 0.47988766169832786,
+     "bh": false
+    },
+    {
+     "scale": "k_register_level",
+     "n_lineages": 50,
+     "z": 0.04097252357193757,
+     "up": 37,
+     "down": 13,
+     "p": 0.000936222910851825,
+     "bh": true
+    },
+    {
+     "scale": "k_vulgarity",
+     "n_lineages": 50,
+     "z": 0.000573095266764267,
+     "up": 26,
+     "down": 24,
+     "p": 0.887724827340783,
+     "bh": false
+    },
+    {
+     "scale": "warriner_arousal",
+     "n_lineages": 50,
+     "z": -0.03173442876772138,
+     "up": 18,
+     "down": 32,
+     "p": 0.06490864707227217,
+     "bh": false
+    },
+    {
+     "scale": "warriner_valence",
+     "n_lineages": 50,
+     "z": -0.025637754851916376,
+     "up": 16,
+     "down": 34,
+     "p": 0.015346677832630107,
+     "bh": true
+    },
+    {
+     "scale": "warriner_dominance",
+     "n_lineages": 50,
+     "z": -0.016569169659814705,
+     "up": 18,
+     "down": 32,
+     "p": 0.06490864707227217,
+     "bh": false
+    },
+    {
+     "scale": "v6:fit",
+     "n_lineages": 50,
+     "z": 0.06294560849526228,
+     "up": 42,
+     "down": 8,
+     "p": 1.163555804595262e-06,
+     "bh": true
+    },
+    {
+     "scale": "v6:directedness",
+     "n_lineages": 50,
+     "z": 0.00703670828752256,
+     "up": 30,
+     "down": 20,
+     "p": 0.20263875106454066,
+     "bh": false
+    },
+    {
+     "scale": "v6:makes_better",
+     "n_lineages": 50,
+     "z": 0.0360261656058324,
+     "up": 46,
+     "down": 4,
+     "p": 4.461782054931973e-10,
+     "bh": true
+    },
+    {
+     "scale": "v6:makes_worse",
+     "n_lineages": 50,
+     "z": 0.010394356142277404,
+     "up": 33,
+     "down": 17,
+     "p": 0.032839137564268484,
+     "bh": false
+    },
+    {
+     "scale": "v6:mundanity",
+     "n_lineages": 50,
+     "z": 0.0075190651777229745,
+     "up": 30,
+     "down": 20,
+     "p": 0.20263875106454066,
+     "bh": false
+    },
+    {
+     "scale": "v6:vocalisation",
+     "n_lineages": 50,
+     "z": 0.009623986732949365,
+     "up": 27,
+     "down": 23,
+     "p": 0.6718110337653656,
+     "bh": false
+    }
+   ],
+   "all": [
+    {
+     "scale": "k_bodily_harm",
+     "n_lineages": 50,
+     "z": -0.05198636730828541,
+     "up": 7,
+     "down": 43,
+     "p": 2.098677427397888e-07,
+     "bh": true
+    },
+    {
+     "scale": "k_transgressiveness",
+     "n_lineages": 50,
+     "z": -0.0204310659208161,
+     "up": 15,
+     "down": 35,
+     "p": 0.006600447966810918,
+     "bh": true
+    },
+    {
+     "scale": "k_concreteness",
+     "n_lineages": 50,
+     "z": -0.01757610619979555,
+     "up": 19,
+     "down": 31,
+     "p": 0.11892045255943628,
+     "bh": false
+    },
+    {
+     "scale": "k_register_level",
+     "n_lineages": 50,
+     "z": 0.04754677231731653,
+     "up": 40,
+     "down": 10,
+     "p": 2.3861331676755526e-05,
+     "bh": true
+    },
+    {
+     "scale": "k_vulgarity",
+     "n_lineages": 50,
+     "z": -0.004793028012737688,
+     "up": 16,
+     "down": 34,
+     "p": 0.015346677832630107,
+     "bh": true
+    },
+    {
+     "scale": "warriner_arousal",
+     "n_lineages": 50,
+     "z": -0.05578669389991964,
+     "up": 13,
+     "down": 37,
+     "p": 0.000936222910851825,
+     "bh": true
+    },
+    {
+     "scale": "warriner_valence",
+     "n_lineages": 50,
+     "z": -0.006187626612880763,
+     "up": 24,
+     "down": 26,
+     "p": 0.887724827340783,
+     "bh": false
+    },
+    {
+     "scale": "warriner_dominance",
+     "n_lineages": 50,
+     "z": -0.0023881535003372,
+     "up": 24,
+     "down": 26,
+     "p": 0.887724827340783,
+     "bh": false
+    },
+    {
+     "scale": "v6:fit",
+     "n_lineages": 50,
+     "z": 0.04972251081236673,
+     "up": 42,
+     "down": 8,
+     "p": 1.163555804595262e-06,
+     "bh": true
+    },
+    {
+     "scale": "v6:directedness",
+     "n_lineages": 50,
+     "z": 0.005392609840125596,
+     "up": 29,
+     "down": 21,
+     "p": 0.3222363203575469,
+     "bh": false
+    },
+    {
+     "scale": "v6:makes_better",
+     "n_lineages": 50,
+     "z": 0.026883421684014912,
+     "up": 44,
+     "down": 6,
+     "p": 3.243740565039843e-08,
+     "bh": true
+    },
+    {
+     "scale": "v6:makes_worse",
+     "n_lineages": 50,
+     "z": 0.006090645690319012,
+     "up": 29,
+     "down": 21,
+     "p": 0.3222363203575469,
+     "bh": false
+    },
+    {
+     "scale": "v6:mundanity",
+     "n_lineages": 50,
+     "z": 0.011491819569146773,
+     "up": 38,
+     "down": 12,
+     "p": 0.00030586400160359517,
+     "bh": true
+    },
+    {
+     "scale": "v6:vocalisation",
+     "n_lineages": 50,
+     "z": 0.0039031929806767215,
+     "up": 28,
+     "down": 22,
+     "p": 0.47988766169832786,
+     "bh": false
+    }
+   ],
+   "high": [
+    {
+     "scale": "k_bodily_harm",
+     "n_lineages": 50,
+     "z": -0.09860093823326938,
+     "up": 5,
+     "down": 45,
+     "p": 4.209852022540872e-09,
+     "bh": true
+    },
+    {
+     "scale": "k_transgressiveness",
+     "n_lineages": 50,
+     "z": -0.054373497261259784,
+     "up": 13,
+     "down": 37,
+     "p": 0.000936222910851825,
+     "bh": true
+    },
+    {
+     "scale": "k_concreteness",
+     "n_lineages": 50,
+     "z": -0.032893552172877906,
+     "up": 14,
+     "down": 36,
+     "p": 0.0026021714567221466,
+     "bh": true
+    },
+    {
+     "scale": "k_register_level",
+     "n_lineages": 50,
+     "z": 0.05615380620877927,
+     "up": 45,
+     "down": 5,
+     "p": 4.209852022540872e-09,
+     "bh": true
+    },
+    {
+     "scale": "k_vulgarity",
+     "n_lineages": 50,
+     "z": -0.015530873512827122,
+     "up": 9,
+     "down": 41,
+     "p": 5.614100093254137e-06,
+     "bh": true
+    },
+    {
+     "scale": "warriner_arousal",
+     "n_lineages": 50,
+     "z": -0.10705922243121241,
+     "up": 9,
+     "down": 41,
+     "p": 5.614100093254137e-06,
+     "bh": true
+    },
+    {
+     "scale": "warriner_valence",
+     "n_lineages": 50,
+     "z": 0.04033929730039369,
+     "up": 37,
+     "down": 13,
+     "p": 0.000936222910851825,
+     "bh": true
+    },
+    {
+     "scale": "warriner_dominance",
+     "n_lineages": 50,
+     "z": 0.023271306081879446,
+     "up": 30,
+     "down": 20,
+     "p": 0.20263875106454066,
+     "bh": false
+    },
+    {
+     "scale": "v6:fit",
+     "n_lineages": 50,
+     "z": 0.048398319299243875,
+     "up": 39,
+     "down": 11,
+     "p": 9.021490107130603e-05,
+     "bh": true
+    },
+    {
+     "scale": "v6:directedness",
+     "n_lineages": 50,
+     "z": -0.0027027009858221346,
+     "up": 23,
+     "down": 27,
+     "p": 0.6718110337653656,
+     "bh": false
+    },
+    {
+     "scale": "v6:makes_better",
+     "n_lineages": 50,
+     "z": 0.02163919177642979,
+     "up": 38,
+     "down": 12,
+     "p": 0.00030586400160359517,
+     "bh": true
+    },
+    {
+     "scale": "v6:makes_worse",
+     "n_lineages": 50,
+     "z": 0.0015177704347482713,
+     "up": 25,
+     "down": 25,
+     "p": 1.0,
+     "bh": false
+    },
+    {
+     "scale": "v6:mundanity",
+     "n_lineages": 50,
+     "z": 0.020842781985763222,
+     "up": 37,
+     "down": 13,
+     "p": 0.000936222910851825,
+     "bh": true
+    },
+    {
+     "scale": "v6:vocalisation",
+     "n_lineages": 50,
+     "z": 0.0013441964815928598,
+     "up": 26,
+     "down": 24,
+     "p": 0.887724827340783,
+     "bh": false
+    }
+   ]
+  },
+  "DEGRADING": {
+   "low": [
+    {
+     "scale": "k_bodily_harm",
+     "n_lineages": 49,
+     "z": -0.0448643169159816,
+     "up": 13,
+     "down": 36,
+     "p": 0.001402688503695515,
+     "bh": true
+    },
+    {
+     "scale": "k_transgressiveness",
+     "n_lineages": 49,
+     "z": -0.006002265941790242,
+     "up": 24,
+     "down": 25,
+     "p": 1.0,
+     "bh": false
+    },
+    {
+     "scale": "k_concreteness",
+     "n_lineages": 49,
+     "z": -0.060314674744573,
+     "up": 18,
+     "down": 31,
+     "p": 0.08543313315739454,
+     "bh": false
+    },
+    {
+     "scale": "k_register_level",
+     "n_lineages": 49,
+     "z": 0.026292048862032937,
+     "up": 27,
+     "down": 22,
+     "p": 0.5681724128491652,
+     "bh": false
+    },
+    {
+     "scale": "k_vulgarity",
+     "n_lineages": 49,
+     "z": -0.012835537295015815,
+     "up": 11,
+     "down": 36,
+     "p": 0.00034600114031491097,
+     "bh": true
+    },
+    {
+     "scale": "warriner_arousal",
+     "n_lineages": 49,
+     "z": -0.04470578043150885,
+     "up": 18,
+     "down": 31,
+     "p": 0.08543313315739454,
+     "bh": false
+    },
+    {
+     "scale": "warriner_valence",
+     "n_lineages": 49,
+     "z": 0.013411088003007807,
+     "up": 28,
+     "down": 21,
+     "p": 0.3916029105474905,
+     "bh": false
+    },
+    {
+     "scale": "warriner_dominance",
+     "n_lineages": 49,
+     "z": 0.02279750479171877,
+     "up": 30,
+     "down": 19,
+     "p": 0.15240777196147803,
+     "bh": false
+    },
+    {
+     "scale": "v6:fit",
+     "n_lineages": 48,
+     "z": 0.06921832057435832,
+     "up": 32,
+     "down": 16,
+     "p": 0.029304946720529308,
+     "bh": false
+    },
+    {
+     "scale": "v6:directedness",
+     "n_lineages": 48,
+     "z": -0.0061716565691953724,
+     "up": 23,
+     "down": 25,
+     "p": 0.8854334972865135,
+     "bh": false
+    },
+    {
+     "scale": "v6:makes_better",
+     "n_lineages": 48,
+     "z": 0.008314792832879182,
+     "up": 32,
+     "down": 16,
+     "p": 0.029304946720529308,
+     "bh": false
+    },
+    {
+     "scale": "v6:makes_worse",
+     "n_lineages": 48,
+     "z": 0.008299951589574734,
+     "up": 25,
+     "down": 23,
+     "p": 0.8854334972865135,
+     "bh": false
+    },
+    {
+     "scale": "v6:mundanity",
+     "n_lineages": 48,
+     "z": 0.0362739582507593,
+     "up": 35,
+     "down": 13,
+     "p": 0.0020881073339964478,
+     "bh": true
+    },
+    {
+     "scale": "v6:vocalisation",
+     "n_lineages": 48,
+     "z": 0.04014227749053263,
+     "up": 26,
+     "down": 22,
+     "p": 0.6654658120766188,
+     "bh": false
+    }
+   ],
+   "all": [
+    {
+     "scale": "k_bodily_harm",
+     "n_lineages": 50,
+     "z": 0.0007838194146269649,
+     "up": 25,
+     "down": 25,
+     "p": 1.0,
+     "bh": false
+    },
+    {
+     "scale": "k_transgressiveness",
+     "n_lineages": 50,
+     "z": 0.13922120619412323,
+     "up": 30,
+     "down": 20,
+     "p": 0.20263875106454066,
+     "bh": false
+    },
+    {
+     "scale": "k_concreteness",
+     "n_lineages": 50,
+     "z": 0.0028077231223892483,
+     "up": 26,
+     "down": 24,
+     "p": 0.887724827340783,
+     "bh": false
+    },
+    {
+     "scale": "k_register_level",
+     "n_lineages": 50,
+     "z": 0.0627817836099672,
+     "up": 31,
+     "down": 19,
+     "p": 0.11892045255943628,
+     "bh": false
+    },
+    {
+     "scale": "k_vulgarity",
+     "n_lineages": 50,
+     "z": -0.040217220060647284,
+     "up": 7,
+     "down": 43,
+     "p": 2.098677427397888e-07,
+     "bh": true
+    },
+    {
+     "scale": "warriner_arousal",
+     "n_lineages": 50,
+     "z": 0.04347559981356629,
+     "up": 28,
+     "down": 22,
+     "p": 0.47988766169832786,
+     "bh": false
+    },
+    {
+     "scale": "warriner_valence",
+     "n_lineages": 50,
+     "z": -0.15426914081961002,
+     "up": 11,
+     "down": 39,
+     "p": 9.021490107130603e-05,
+     "bh": true
+    },
+    {
+     "scale": "warriner_dominance",
+     "n_lineages": 50,
+     "z": -0.18536962172387328,
+     "up": 12,
+     "down": 38,
+     "p": 0.00030586400160359517,
+     "bh": true
+    },
+    {
+     "scale": "v6:fit",
+     "n_lineages": 50,
+     "z": 0.13899502756941276,
+     "up": 38,
+     "down": 12,
+     "p": 0.00030586400160359517,
+     "bh": true
+    },
+    {
+     "scale": "v6:directedness",
+     "n_lineages": 50,
+     "z": 0.016342469036296374,
+     "up": 27,
+     "down": 23,
+     "p": 0.6718110337653656,
+     "bh": false
+    },
+    {
+     "scale": "v6:makes_better",
+     "n_lineages": 50,
+     "z": -0.11320391703795142,
+     "up": 13,
+     "down": 37,
+     "p": 0.000936222910851825,
+     "bh": true
+    },
+    {
+     "scale": "v6:makes_worse",
+     "n_lineages": 50,
+     "z": 0.0959469826082132,
+     "up": 39,
+     "down": 11,
+     "p": 9.021490107130603e-05,
+     "bh": true
+    },
+    {
+     "scale": "v6:mundanity",
+     "n_lineages": 50,
+     "z": 0.0025425453107771946,
+     "up": 26,
+     "down": 24,
+     "p": 0.887724827340783,
+     "bh": false
+    },
+    {
+     "scale": "v6:vocalisation",
+     "n_lineages": 50,
+     "z": 0.05860897145523687,
+     "up": 35,
+     "down": 15,
+     "p": 0.006600447966810918,
+     "bh": true
+    }
+   ],
+   "high": [
+    {
+     "scale": "k_bodily_harm",
+     "n_lineages": 50,
+     "z": 0.037121115746248635,
+     "up": 28,
+     "down": 22,
+     "p": 0.47988766169832786,
+     "bh": false
+    },
+    {
+     "scale": "k_transgressiveness",
+     "n_lineages": 50,
+     "z": 0.31644580167514674,
+     "up": 31,
+     "down": 19,
+     "p": 0.11892045255943628,
+     "bh": false
+    },
+    {
+     "scale": "k_concreteness",
+     "n_lineages": 50,
+     "z": 0.02404989726530901,
+     "up": 28,
+     "down": 22,
+     "p": 0.47988766169832786,
+     "bh": false
+    },
+    {
+     "scale": "k_register_level",
+     "n_lineages": 50,
+     "z": 0.11381337232319605,
+     "up": 32,
+     "down": 18,
+     "p": 0.06490864707227217,
+     "bh": false
+    },
+    {
+     "scale": "k_vulgarity",
+     "n_lineages": 50,
+     "z": -0.042279840930592005,
+     "up": 7,
+     "down": 43,
+     "p": 2.098677427397888e-07,
+     "bh": true
+    },
+    {
+     "scale": "warriner_arousal",
+     "n_lineages": 50,
+     "z": 0.120686084724706,
+     "up": 30,
+     "down": 20,
+     "p": 0.20263875106454066,
+     "bh": false
+    },
+    {
+     "scale": "warriner_valence",
+     "n_lineages": 50,
+     "z": -0.2619614490289321,
+     "up": 12,
+     "down": 38,
+     "p": 0.00030586400160359517,
+     "bh": true
+    },
+    {
+     "scale": "warriner_dominance",
+     "n_lineages": 50,
+     "z": -0.3159231694495902,
+     "up": 13,
+     "down": 37,
+     "p": 0.000936222910851825,
+     "bh": true
+    },
+    {
+     "scale": "v6:fit",
+     "n_lineages": 50,
+     "z": 0.1421213226644465,
+     "up": 39,
+     "down": 11,
+     "p": 9.021490107130603e-05,
+     "bh": true
+    },
+    {
+     "scale": "v6:directedness",
+     "n_lineages": 50,
+     "z": -0.007518519786596373,
+     "up": 24,
+     "down": 26,
+     "p": 0.887724827340783,
+     "bh": false
+    },
+    {
+     "scale": "v6:makes_better",
+     "n_lineages": 50,
+     "z": -0.17843677430701738,
+     "up": 13,
+     "down": 37,
+     "p": 0.000936222910851825,
+     "bh": true
+    },
+    {
+     "scale": "v6:makes_worse",
+     "n_lineages": 50,
+     "z": 0.1275344605690106,
+     "up": 40,
+     "down": 10,
+     "p": 2.3861331676755526e-05,
+     "bh": true
+    },
+    {
+     "scale": "v6:mundanity",
+     "n_lineages": 50,
+     "z": -0.019904744902732887,
+     "up": 19,
+     "down": 31,
+     "p": 0.11892045255943628,
+     "bh": false
+    },
+    {
+     "scale": "v6:vocalisation",
+     "n_lineages": 50,
+     "z": 0.02235819334501432,
+     "up": 37,
+     "down": 13,
+     "p": 0.000936222910851825,
+     "bh": true
+    }
+   ]
+  },
+  "ILLICIT": {
+   "low": [
+    {
+     "scale": "k_bodily_harm",
+     "n_lineages": 49,
+     "z": -0.02127877394925443,
+     "up": 12,
+     "down": 37,
+     "p": 0.0004697573180081349,
+     "bh": true
+    },
+    {
+     "scale": "k_transgressiveness",
+     "n_lineages": 49,
+     "z": -0.024528608866960826,
+     "up": 19,
+     "down": 30,
+     "p": 0.15240777196147803,
+     "bh": false
+    },
+    {
+     "scale": "k_concreteness",
+     "n_lineages": 49,
+     "z": 0.01962031790343191,
+     "up": 28,
+     "down": 21,
+     "p": 0.3916029105474905,
+     "bh": false
+    },
+    {
+     "scale": "k_register_level",
+     "n_lineages": 49,
+     "z": 0.014377503768818722,
+     "up": 27,
+     "down": 22,
+     "p": 0.5681724128491652,
+     "bh": false
+    },
+    {
+     "scale": "k_vulgarity",
+     "n_lineages": 49,
+     "z": 0.000526252416757811,
+     "up": 25,
+     "down": 24,
+     "p": 1.0,
+     "bh": false
+    },
+    {
+     "scale": "warriner_arousal",
+     "n_lineages": 49,
+     "z": -0.04407129613515983,
+     "up": 15,
+     "down": 34,
+     "p": 0.009399241523873059,
+     "bh": true
+    },
+    {
+     "scale": "warriner_valence",
+     "n_lineages": 49,
+     "z": 0.05878612745505619,
+     "up": 29,
+     "down": 20,
+     "p": 0.2528697301676033,
+     "bh": false
+    },
+    {
+     "scale": "warriner_dominance",
+     "n_lineages": 49,
+     "z": -0.00230800583526542,
+     "up": 24,
+     "down": 25,
+     "p": 1.0,
+     "bh": false
+    },
+    {
+     "scale": "v6:fit",
+     "n_lineages": 49,
+     "z": 0.05427250430160438,
+     "up": 36,
+     "down": 13,
+     "p": 0.001402688503695515,
+     "bh": true
+    },
+    {
+     "scale": "v6:directedness",
+     "n_lineages": 49,
+     "z": 0.0008867889616219543,
+     "up": 25,
+     "down": 24,
+     "p": 1.0,
+     "bh": false
+    },
+    {
+     "scale": "v6:makes_better",
+     "n_lineages": 49,
+     "z": 0.021780658296472688,
+     "up": 37,
+     "down": 12,
+     "p": 0.0004697573180081349,
+     "bh": true
+    },
+    {
+     "scale": "v6:makes_worse",
+     "n_lineages": 49,
+     "z": 0.007781248074555025,
+     "up": 30,
+     "down": 19,
+     "p": 0.15240777196147803,
+     "bh": false
+    },
+    {
+     "scale": "v6:mundanity",
+     "n_lineages": 49,
+     "z": 0.004337560268734673,
+     "up": 26,
+     "down": 23,
+     "p": 0.7754496546815659,
+     "bh": false
+    },
+    {
+     "scale": "v6:vocalisation",
+     "n_lineages": 49,
+     "z": -0.018298867383765814,
+     "up": 13,
+     "down": 36,
+     "p": 0.001402688503695515,
+     "bh": true
+    }
+   ],
+   "all": [
+    {
+     "scale": "k_bodily_harm",
+     "n_lineages": 50,
+     "z": -0.03337503078278141,
+     "up": 7,
+     "down": 43,
+     "p": 2.098677427397888e-07,
+     "bh": true
+    },
+    {
+     "scale": "k_transgressiveness",
+     "n_lineages": 50,
+     "z": -0.024390698735690292,
+     "up": 16,
+     "down": 34,
+     "p": 0.015346677832630107,
+     "bh": true
+    },
+    {
+     "scale": "k_concreteness",
+     "n_lineages": 50,
+     "z": -0.011968537423472272,
+     "up": 23,
+     "down": 27,
+     "p": 0.6718110337653656,
+     "bh": false
+    },
+    {
+     "scale": "k_register_level",
+     "n_lineages": 50,
+     "z": -0.002165681813793791,
+     "up": 24,
+     "down": 26,
+     "p": 0.887724827340783,
+     "bh": false
+    },
+    {
+     "scale": "k_vulgarity",
+     "n_lineages": 50,
+     "z": -1.2853478123492038e-05,
+     "up": 25,
+     "down": 25,
+     "p": 1.0,
+     "bh": false
+    },
+    {
+     "scale": "warriner_arousal",
+     "n_lineages": 50,
+     "z": -0.03907106263792433,
+     "up": 15,
+     "down": 35,
+     "p": 0.006600447966810918,
+     "bh": true
+    },
+    {
+     "scale": "warriner_valence",
+     "n_lineages": 50,
+     "z": 0.053799574055147556,
+     "up": 34,
+     "down": 16,
+     "p": 0.015346677832630107,
+     "bh": true
+    },
+    {
+     "scale": "warriner_dominance",
+     "n_lineages": 50,
+     "z": 0.04553456773993751,
+     "up": 34,
+     "down": 16,
+     "p": 0.015346677832630107,
+     "bh": true
+    },
+    {
+     "scale": "v6:fit",
+     "n_lineages": 50,
+     "z": 0.06615812730688049,
+     "up": 38,
+     "down": 12,
+     "p": 0.00030586400160359517,
+     "bh": true
+    },
+    {
+     "scale": "v6:directedness",
+     "n_lineages": 50,
+     "z": -0.016332326728030127,
+     "up": 20,
+     "down": 30,
+     "p": 0.20263875106454066,
+     "bh": false
+    },
+    {
+     "scale": "v6:makes_better",
+     "n_lineages": 50,
+     "z": 0.01783422245262494,
+     "up": 38,
+     "down": 12,
+     "p": 0.00030586400160359517,
+     "bh": true
+    },
+    {
+     "scale": "v6:makes_worse",
+     "n_lineages": 50,
+     "z": 0.018196081347836627,
+     "up": 34,
+     "down": 16,
+     "p": 0.015346677832630107,
+     "bh": true
+    },
+    {
+     "scale": "v6:mundanity",
+     "n_lineages": 50,
+     "z": -0.007589966234761611,
+     "up": 20,
+     "down": 30,
+     "p": 0.20263875106454066,
+     "bh": false
+    },
+    {
+     "scale": "v6:vocalisation",
+     "n_lineages": 50,
+     "z": -0.019174266098594798,
+     "up": 15,
+     "down": 35,
+     "p": 0.006600447966810918,
+     "bh": true
+    }
+   ],
+   "high": [
+    {
+     "scale": "k_bodily_harm",
+     "n_lineages": 50,
+     "z": -0.047637305307188516,
+     "up": 8,
+     "down": 42,
+     "p": 1.163555804595262e-06,
+     "bh": true
+    },
+    {
+     "scale": "k_transgressiveness",
+     "n_lineages": 50,
+     "z": -0.06017249175709951,
+     "up": 12,
+     "down": 38,
+     "p": 0.00030586400160359517,
+     "bh": true
+    },
+    {
+     "scale": "k_concreteness",
+     "n_lineages": 50,
+     "z": 0.007634254036804224,
+     "up": 26,
+     "down": 24,
+     "p": 0.887724827340783,
+     "bh": false
+    },
+    {
+     "scale": "k_register_level",
+     "n_lineages": 50,
+     "z": -0.015532656563928913,
+     "up": 23,
+     "down": 27,
+     "p": 0.6718110337653656,
+     "bh": false
+    },
+    {
+     "scale": "k_vulgarity",
+     "n_lineages": 50,
+     "z": -0.001666053709471207,
+     "up": 18,
+     "down": 32,
+     "p": 0.06490864707227217,
+     "bh": false
+    },
+    {
+     "scale": "warriner_arousal",
+     "n_lineages": 50,
+     "z": -0.043010281779372585,
+     "up": 14,
+     "down": 36,
+     "p": 0.0026021714567221466,
+     "bh": true
+    },
+    {
+     "scale": "warriner_valence",
+     "n_lineages": 50,
+     "z": 0.05421619008408356,
+     "up": 39,
+     "down": 11,
+     "p": 9.021490107130603e-05,
+     "bh": true
+    },
+    {
+     "scale": "warriner_dominance",
+     "n_lineages": 50,
+     "z": 0.05500412634805366,
+     "up": 36,
+     "down": 14,
+     "p": 0.0026021714567221466,
+     "bh": true
+    },
+    {
+     "scale": "v6:fit",
+     "n_lineages": 50,
+     "z": 0.07275531840802062,
+     "up": 39,
+     "down": 11,
+     "p": 9.021490107130603e-05,
+     "bh": true
+    },
+    {
+     "scale": "v6:directedness",
+     "n_lineages": 50,
+     "z": -0.02703771394981426,
+     "up": 20,
+     "down": 30,
+     "p": 0.20263875106454066,
+     "bh": false
+    },
+    {
+     "scale": "v6:makes_better",
+     "n_lineages": 50,
+     "z": 0.023637904413859046,
+     "up": 39,
+     "down": 11,
+     "p": 9.021490107130603e-05,
+     "bh": true
+    },
+    {
+     "scale": "v6:makes_worse",
+     "n_lineages": 50,
+     "z": 0.01802522256531161,
+     "up": 37,
+     "down": 13,
+     "p": 0.000936222910851825,
+     "bh": true
+    },
+    {
+     "scale": "v6:mundanity",
+     "n_lineages": 50,
+     "z": -0.004559890827316357,
+     "up": 21,
+     "down": 29,
+     "p": 0.3222363203575469,
+     "bh": false
+    },
+    {
+     "scale": "v6:vocalisation",
+     "n_lineages": 50,
+     "z": -0.015793844917968338,
+     "up": 20,
+     "down": 30,
+     "p": 0.20263875106454066,
+     "bh": false
+    }
+   ]
+  },
+  "NONE": {
+   "low": [
+    {
+     "scale": "k_bodily_harm",
+     "n_lineages": 50,
+     "z": -0.01865542431827743,
+     "up": 10,
+     "down": 40,
+     "p": 2.3861331676755526e-05,
+     "bh": true
+    },
+    {
+     "scale": "k_transgressiveness",
+     "n_lineages": 50,
+     "z": -0.015247276515744052,
+     "up": 12,
+     "down": 38,
+     "p": 0.00030586400160359517,
+     "bh": true
+    },
+    {
+     "scale": "k_concreteness",
+     "n_lineages": 50,
+     "z": -0.011611118919228858,
+     "up": 21,
+     "down": 29,
+     "p": 0.3222363203575469,
+     "bh": false
+    },
+    {
+     "scale": "k_register_level",
+     "n_lineages": 50,
+     "z": 0.012433789113814347,
+     "up": 30,
+     "down": 20,
+     "p": 0.20263875106454066,
+     "bh": false
+    },
+    {
+     "scale": "k_vulgarity",
+     "n_lineages": 50,
+     "z": -0.002798864799168776,
+     "up": 16,
+     "down": 34,
+     "p": 0.015346677832630107,
+     "bh": true
+    },
+    {
+     "scale": "warriner_arousal",
+     "n_lineages": 50,
+     "z": -0.04435210885376226,
+     "up": 8,
+     "down": 42,
+     "p": 1.163555804595262e-06,
+     "bh": true
+    },
+    {
+     "scale": "warriner_valence",
+     "n_lineages": 50,
+     "z": 0.014184875332096537,
+     "up": 31,
+     "down": 19,
+     "p": 0.11892045255943628,
+     "bh": false
+    },
+    {
+     "scale": "warriner_dominance",
+     "n_lineages": 50,
+     "z": 0.015138024986377738,
+     "up": 30,
+     "down": 20,
+     "p": 0.20263875106454066,
+     "bh": false
+    },
+    {
+     "scale": "v6:fit",
+     "n_lineages": 50,
+     "z": 0.06494265728664476,
+     "up": 41,
+     "down": 9,
+     "p": 5.614100093254137e-06,
+     "bh": true
+    },
+    {
+     "scale": "v6:directedness",
+     "n_lineages": 50,
+     "z": -0.006665429133368893,
+     "up": 18,
+     "down": 32,
+     "p": 0.06490864707227217,
+     "bh": false
+    },
+    {
+     "scale": "v6:makes_better",
+     "n_lineages": 50,
+     "z": 0.04347194153785605,
+     "up": 43,
+     "down": 7,
+     "p": 2.098677427397888e-07,
+     "bh": true
+    },
+    {
+     "scale": "v6:makes_worse",
+     "n_lineages": 50,
+     "z": -0.0028323491202957357,
+     "up": 21,
+     "down": 29,
+     "p": 0.3222363203575469,
+     "bh": false
+    },
+    {
+     "scale": "v6:mundanity",
+     "n_lineages": 50,
+     "z": 0.021185570288195017,
+     "up": 39,
+     "down": 11,
+     "p": 9.021490107130603e-05,
+     "bh": true
+    },
+    {
+     "scale": "v6:vocalisation",
+     "n_lineages": 50,
+     "z": -0.0008800902122641537,
+     "up": 23,
+     "down": 27,
+     "p": 0.6718110337653656,
+     "bh": false
+    }
+   ],
+   "all": [
+    {
+     "scale": "k_bodily_harm",
+     "n_lineages": 50,
+     "z": -0.0365777468040396,
+     "up": 6,
+     "down": 44,
+     "p": 3.243740565039843e-08,
+     "bh": true
+    },
+    {
+     "scale": "k_transgressiveness",
+     "n_lineages": 50,
+     "z": -0.02680662888153985,
+     "up": 11,
+     "down": 39,
+     "p": 9.021490107130603e-05,
+     "bh": true
+    },
+    {
+     "scale": "k_concreteness",
+     "n_lineages": 50,
+     "z": -0.01545411125542678,
+     "up": 18,
+     "down": 32,
+     "p": 0.06490864707227217,
+     "bh": false
+    },
+    {
+     "scale": "k_register_level",
+     "n_lineages": 50,
+     "z": 0.021210694882016504,
+     "up": 33,
+     "down": 17,
+     "p": 0.032839137564268484,
+     "bh": false
+    },
+    {
+     "scale": "k_vulgarity",
+     "n_lineages": 50,
+     "z": -0.021570655721424963,
+     "up": 10,
+     "down": 40,
+     "p": 2.3861331676755526e-05,
+     "bh": true
+    },
+    {
+     "scale": "warriner_arousal",
+     "n_lineages": 50,
+     "z": -0.05362417685448206,
+     "up": 9,
+     "down": 41,
+     "p": 5.614100093254137e-06,
+     "bh": true
+    },
+    {
+     "scale": "warriner_valence",
+     "n_lineages": 50,
+     "z": 0.018053109576468298,
+     "up": 30,
+     "down": 20,
+     "p": 0.20263875106454066,
+     "bh": false
+    },
+    {
+     "scale": "warriner_dominance",
+     "n_lineages": 50,
+     "z": 0.018207863178327854,
+     "up": 32,
+     "down": 18,
+     "p": 0.06490864707227217,
+     "bh": false
+    },
+    {
+     "scale": "v6:fit",
+     "n_lineages": 50,
+     "z": 0.05464522086150087,
+     "up": 41,
+     "down": 9,
+     "p": 5.614100093254137e-06,
+     "bh": true
+    },
+    {
+     "scale": "v6:directedness",
+     "n_lineages": 50,
+     "z": -0.004370493879376182,
+     "up": 19,
+     "down": 31,
+     "p": 0.11892045255943628,
+     "bh": false
+    },
+    {
+     "scale": "v6:makes_better",
+     "n_lineages": 50,
+     "z": 0.043662072543697195,
+     "up": 45,
+     "down": 5,
+     "p": 4.209852022540872e-09,
+     "bh": true
+    },
+    {
+     "scale": "v6:makes_worse",
+     "n_lineages": 50,
+     "z": -0.008115187647432236,
+     "up": 19,
+     "down": 31,
+     "p": 0.11892045255943628,
+     "bh": false
+    },
+    {
+     "scale": "v6:mundanity",
+     "n_lineages": 50,
+     "z": 0.025504118377085373,
+     "up": 43,
+     "down": 7,
+     "p": 2.098677427397888e-07,
+     "bh": true
+    },
+    {
+     "scale": "v6:vocalisation",
+     "n_lineages": 50,
+     "z": 0.01726082691723818,
+     "up": 33,
+     "down": 17,
+     "p": 0.032839137564268484,
+     "bh": false
+    }
+   ],
+   "high": [
+    {
+     "scale": "k_bodily_harm",
+     "n_lineages": 50,
+     "z": -0.0950842188784438,
+     "up": 8,
+     "down": 42,
+     "p": 1.163555804595262e-06,
+     "bh": true
+    },
+    {
+     "scale": "k_transgressiveness",
+     "n_lineages": 50,
+     "z": -0.055543594401649195,
+     "up": 10,
+     "down": 40,
+     "p": 2.3861331676755526e-05,
+     "bh": true
+    },
+    {
+     "scale": "k_concreteness",
+     "n_lineages": 50,
+     "z": -0.039701147283903074,
+     "up": 13,
+     "down": 37,
+     "p": 0.000936222910851825,
+     "bh": true
+    },
+    {
+     "scale": "k_register_level",
+     "n_lineages": 50,
+     "z": 0.05564789667975347,
+     "up": 38,
+     "down": 12,
+     "p": 0.00030586400160359517,
+     "bh": true
+    },
+    {
+     "scale": "k_vulgarity",
+     "n_lineages": 50,
+     "z": -0.07479061871404515,
+     "up": 10,
+     "down": 40,
+     "p": 2.3861331676755526e-05,
+     "bh": true
+    },
+    {
+     "scale": "warriner_arousal",
+     "n_lineages": 50,
+     "z": -0.06556093425659498,
+     "up": 8,
+     "down": 42,
+     "p": 1.163555804595262e-06,
+     "bh": true
+    },
+    {
+     "scale": "warriner_valence",
+     "n_lineages": 50,
+     "z": 0.029707219442404804,
+     "up": 32,
+     "down": 18,
+     "p": 0.06490864707227217,
+     "bh": false
+    },
+    {
+     "scale": "warriner_dominance",
+     "n_lineages": 50,
+     "z": 0.030684504310079186,
+     "up": 31,
+     "down": 19,
+     "p": 0.11892045255943628,
+     "bh": false
+    },
+    {
+     "scale": "v6:fit",
+     "n_lineages": 50,
+     "z": 0.04031863992083662,
+     "up": 38,
+     "down": 12,
+     "p": 0.00030586400160359517,
+     "bh": true
+    },
+    {
+     "scale": "v6:directedness",
+     "n_lineages": 50,
+     "z": -0.01748956032087822,
+     "up": 19,
+     "down": 31,
+     "p": 0.11892045255943628,
+     "bh": false
+    },
+    {
+     "scale": "v6:makes_better",
+     "n_lineages": 50,
+     "z": 0.033686980718285665,
+     "up": 42,
+     "down": 8,
+     "p": 1.163555804595262e-06,
+     "bh": true
+    },
+    {
+     "scale": "v6:makes_worse",
+     "n_lineages": 50,
+     "z": -0.02553762064046759,
+     "up": 17,
+     "down": 33,
+     "p": 0.032839137564268484,
+     "bh": true
+    },
+    {
+     "scale": "v6:mundanity",
+     "n_lineages": 50,
+     "z": 0.03728096514083129,
+     "up": 46,
+     "down": 4,
+     "p": 4.461782054931973e-10,
+     "bh": true
+    },
+    {
+     "scale": "v6:vocalisation",
+     "n_lineages": 50,
+     "z": 0.06594891531365722,
+     "up": 44,
+     "down": 6,
+     "p": 3.243740565039843e-08,
+     "bh": true
+    }
+   ]
+  },
+  "OTHER": {
+   "low": [
+    {
+     "scale": "k_bodily_harm",
+     "n_lineages": 50,
+     "z": -0.02582631056955548,
+     "up": 16,
+     "down": 34,
+     "p": 0.015346677832630107,
+     "bh": false
+    },
+    {
+     "scale": "k_transgressiveness",
+     "n_lineages": 50,
+     "z": 0.004051550426933462,
+     "up": 26,
+     "down": 24,
+     "p": 0.887724827340783,
+     "bh": false
+    },
+    {
+     "scale": "k_concreteness",
+     "n_lineages": 50,
+     "z": -0.017249365526781534,
+     "up": 20,
+     "down": 30,
+     "p": 0.20263875106454066,
+     "bh": false
+    },
+    {
+     "scale": "k_register_level",
+     "n_lineages": 50,
+     "z": 0.01783985739086967,
+     "up": 32,
+     "down": 18,
+     "p": 0.06490864707227217,
+     "bh": false
+    },
+    {
+     "scale": "k_vulgarity",
+     "n_lineages": 50,
+     "z": 0.0008462078402126228,
+     "up": 29,
+     "down": 21,
+     "p": 0.3222363203575469,
+     "bh": false
+    },
+    {
+     "scale": "warriner_arousal",
+     "n_lineages": 50,
+     "z": -0.03716505890972484,
+     "up": 21,
+     "down": 29,
+     "p": 0.3222363203575469,
+     "bh": false
+    },
+    {
+     "scale": "warriner_valence",
+     "n_lineages": 50,
+     "z": 0.00853090040066784,
+     "up": 26,
+     "down": 24,
+     "p": 0.887724827340783,
+     "bh": false
+    },
+    {
+     "scale": "warriner_dominance",
+     "n_lineages": 50,
+     "z": -0.016456987439832375,
+     "up": 20,
+     "down": 30,
+     "p": 0.20263875106454066,
+     "bh": false
+    },
+    {
+     "scale": "v6:fit",
+     "n_lineages": 50,
+     "z": 0.0430118084866937,
+     "up": 37,
+     "down": 13,
+     "p": 0.000936222910851825,
+     "bh": true
+    },
+    {
+     "scale": "v6:directedness",
+     "n_lineages": 50,
+     "z": -0.012976039971806094,
+     "up": 17,
+     "down": 33,
+     "p": 0.032839137564268484,
+     "bh": false
+    },
+    {
+     "scale": "v6:makes_better",
+     "n_lineages": 50,
+     "z": 0.02753134267347036,
+     "up": 38,
+     "down": 12,
+     "p": 0.00030586400160359517,
+     "bh": true
+    },
+    {
+     "scale": "v6:makes_worse",
+     "n_lineages": 50,
+     "z": 0.0019729213366807166,
+     "up": 27,
+     "down": 23,
+     "p": 0.6718110337653656,
+     "bh": false
+    },
+    {
+     "scale": "v6:mundanity",
+     "n_lineages": 50,
+     "z": 0.001118833456141374,
+     "up": 27,
+     "down": 23,
+     "p": 0.6718110337653656,
+     "bh": false
+    },
+    {
+     "scale": "v6:vocalisation",
+     "n_lineages": 50,
+     "z": -0.0007154405288088025,
+     "up": 24,
+     "down": 26,
+     "p": 0.887724827340783,
+     "bh": false
+    }
+   ],
+   "all": [
+    {
+     "scale": "k_bodily_harm",
+     "n_lineages": 50,
+     "z": -0.03166434880311229,
+     "up": 15,
+     "down": 35,
+     "p": 0.006600447966810918,
+     "bh": true
+    },
+    {
+     "scale": "k_transgressiveness",
+     "n_lineages": 50,
+     "z": 0.013000939669030608,
+     "up": 29,
+     "down": 21,
+     "p": 0.3222363203575469,
+     "bh": false
+    },
+    {
+     "scale": "k_concreteness",
+     "n_lineages": 50,
+     "z": -0.01857879511904474,
+     "up": 21,
+     "down": 29,
+     "p": 0.3222363203575469,
+     "bh": false
+    },
+    {
+     "scale": "k_register_level",
+     "n_lineages": 50,
+     "z": 0.025408827758265064,
+     "up": 32,
+     "down": 18,
+     "p": 0.06490864707227217,
+     "bh": false
+    },
+    {
+     "scale": "k_vulgarity",
+     "n_lineages": 50,
+     "z": -0.003218101556882436,
+     "up": 22,
+     "down": 28,
+     "p": 0.47988766169832786,
+     "bh": false
+    },
+    {
+     "scale": "warriner_arousal",
+     "n_lineages": 50,
+     "z": -0.02271694140770384,
+     "up": 17,
+     "down": 33,
+     "p": 0.032839137564268484,
+     "bh": false
+    },
+    {
+     "scale": "warriner_valence",
+     "n_lineages": 50,
+     "z": 0.0017770230237774468,
+     "up": 25,
+     "down": 25,
+     "p": 1.0,
+     "bh": false
+    },
+    {
+     "scale": "warriner_dominance",
+     "n_lineages": 50,
+     "z": -0.01361323136229745,
+     "up": 21,
+     "down": 29,
+     "p": 0.3222363203575469,
+     "bh": false
+    },
+    {
+     "scale": "v6:fit",
+     "n_lineages": 50,
+     "z": 0.04858801133788815,
+     "up": 35,
+     "down": 15,
+     "p": 0.006600447966810918,
+     "bh": true
+    },
+    {
+     "scale": "v6:directedness",
+     "n_lineages": 50,
+     "z": -0.010286966193994721,
+     "up": 15,
+     "down": 35,
+     "p": 0.006600447966810918,
+     "bh": true
+    },
+    {
+     "scale": "v6:makes_better",
+     "n_lineages": 50,
+     "z": 0.009291293351418857,
+     "up": 36,
+     "down": 14,
+     "p": 0.0026021714567221466,
+     "bh": true
+    },
+    {
+     "scale": "v6:makes_worse",
+     "n_lineages": 50,
+     "z": 0.012561145748529215,
+     "up": 28,
+     "down": 22,
+     "p": 0.47988766169832786,
+     "bh": false
+    },
+    {
+     "scale": "v6:mundanity",
+     "n_lineages": 50,
+     "z": 0.0002956275523058031,
+     "up": 25,
+     "down": 25,
+     "p": 1.0,
+     "bh": false
+    },
+    {
+     "scale": "v6:vocalisation",
+     "n_lineages": 50,
+     "z": 0.012578569359572305,
+     "up": 29,
+     "down": 21,
+     "p": 0.3222363203575469,
+     "bh": false
+    }
+   ],
+   "high": [
+    {
+     "scale": "k_bodily_harm",
+     "n_lineages": 50,
+     "z": -0.058764044594323245,
+     "up": 14,
+     "down": 36,
+     "p": 0.0026021714567221466,
+     "bh": true
+    },
+    {
+     "scale": "k_transgressiveness",
+     "n_lineages": 50,
+     "z": -0.011310315031986597,
+     "up": 22,
+     "down": 28,
+     "p": 0.47988766169832786,
+     "bh": false
+    },
+    {
+     "scale": "k_concreteness",
+     "n_lineages": 50,
+     "z": -0.027740766980375302,
+     "up": 21,
+     "down": 29,
+     "p": 0.3222363203575469,
+     "bh": false
+    },
+    {
+     "scale": "k_register_level",
+     "n_lineages": 50,
+     "z": 0.050526669883924714,
+     "up": 35,
+     "down": 15,
+     "p": 0.006600447966810918,
+     "bh": true
+    },
+    {
+     "scale": "k_vulgarity",
+     "n_lineages": 50,
+     "z": -0.007673022265066498,
+     "up": 19,
+     "down": 31,
+     "p": 0.11892045255943628,
+     "bh": false
+    },
+    {
+     "scale": "warriner_arousal",
+     "n_lineages": 50,
+     "z": -0.04307716719279794,
+     "up": 18,
+     "down": 32,
+     "p": 0.06490864707227217,
+     "bh": false
+    },
+    {
+     "scale": "warriner_valence",
+     "n_lineages": 50,
+     "z": 0.03278783329634739,
+     "up": 33,
+     "down": 17,
+     "p": 0.032839137564268484,
+     "bh": false
+    },
+    {
+     "scale": "warriner_dominance",
+     "n_lineages": 50,
+     "z": 0.0070412225434081975,
+     "up": 26,
+     "down": 24,
+     "p": 0.887724827340783,
+     "bh": false
+    },
+    {
+     "scale": "v6:fit",
+     "n_lineages": 50,
+     "z": 0.049287365539210974,
+     "up": 36,
+     "down": 14,
+     "p": 0.0026021714567221466,
+     "bh": true
+    },
+    {
+     "scale": "v6:directedness",
+     "n_lineages": 50,
+     "z": -0.008541911746321587,
+     "up": 18,
+     "down": 32,
+     "p": 0.06490864707227217,
+     "bh": false
+    },
+    {
+     "scale": "v6:makes_better",
+     "n_lineages": 50,
+     "z": 0.008499548644889424,
+     "up": 33,
+     "down": 17,
+     "p": 0.032839137564268484,
+     "bh": false
+    },
+    {
+     "scale": "v6:makes_worse",
+     "n_lineages": 50,
+     "z": 0.010272174922029031,
+     "up": 27,
+     "down": 23,
+     "p": 0.6718110337653656,
+     "bh": false
+    },
+    {
+     "scale": "v6:mundanity",
+     "n_lineages": 50,
+     "z": 0.003023636907801646,
+     "up": 28,
+     "down": 22,
+     "p": 0.47988766169832786,
+     "bh": false
+    },
+    {
+     "scale": "v6:vocalisation",
+     "n_lineages": 50,
+     "z": 0.02955474374019945,
+     "up": 28,
+     "down": 22,
+     "p": 0.47988766169832786,
+     "bh": false
+    }
+   ]
+  },
+  "SEXUAL": {
+   "low": [
+    {
+     "scale": "k_bodily_harm",
+     "n_lineages": 50,
+     "z": -0.003950093760237452,
+     "up": 24,
+     "down": 26,
+     "p": 0.887724827340783,
+     "bh": false
+    },
+    {
+     "scale": "k_transgressiveness",
+     "n_lineages": 50,
+     "z": -0.04436137786037989,
+     "up": 19,
+     "down": 31,
+     "p": 0.11892045255943628,
+     "bh": false
+    },
+    {
+     "scale": "k_concreteness",
+     "n_lineages": 50,
+     "z": -0.006734376472189737,
+     "up": 24,
+     "down": 26,
+     "p": 0.887724827340783,
+     "bh": false
+    },
+    {
+     "scale": "k_register_level",
+     "n_lineages": 50,
+     "z": 0.07717283115825356,
+     "up": 32,
+     "down": 18,
+     "p": 0.06490864707227217,
+     "bh": false
+    },
+    {
+     "scale": "k_vulgarity",
+     "n_lineages": 50,
+     "z": -0.05267112094176773,
+     "up": 14,
+     "down": 36,
+     "p": 0.0026021714567221466,
+     "bh": true
+    },
+    {
+     "scale": "warriner_arousal",
+     "n_lineages": 50,
+     "z": -0.04357256833449102,
+     "up": 19,
+     "down": 31,
+     "p": 0.11892045255943628,
+     "bh": false
+    },
+    {
+     "scale": "warriner_valence",
+     "n_lineages": 50,
+     "z": 0.01114607613535767,
+     "up": 27,
+     "down": 23,
+     "p": 0.6718110337653656,
+     "bh": false
+    },
+    {
+     "scale": "warriner_dominance",
+     "n_lineages": 50,
+     "z": -0.01612458348151316,
+     "up": 23,
+     "down": 27,
+     "p": 0.6718110337653656,
+     "bh": false
+    },
+    {
+     "scale": "v6:fit",
+     "n_lineages": 50,
+     "z": 0.07088111277674848,
+     "up": 39,
+     "down": 11,
+     "p": 9.021490107130603e-05,
+     "bh": true
+    },
+    {
+     "scale": "v6:directedness",
+     "n_lineages": 50,
+     "z": 0.030813389159883523,
+     "up": 29,
+     "down": 21,
+     "p": 0.3222363203575469,
+     "bh": false
+    },
+    {
+     "scale": "v6:makes_better",
+     "n_lineages": 50,
+     "z": 0.04695789492274252,
+     "up": 33,
+     "down": 17,
+     "p": 0.032839137564268484,
+     "bh": false
+    },
+    {
+     "scale": "v6:makes_worse",
+     "n_lineages": 50,
+     "z": -0.004377383203414806,
+     "up": 23,
+     "down": 27,
+     "p": 0.6718110337653656,
+     "bh": false
+    },
+    {
+     "scale": "v6:mundanity",
+     "n_lineages": 50,
+     "z": 0.013536028793399001,
+     "up": 35,
+     "down": 15,
+     "p": 0.006600447966810918,
+     "bh": true
+    },
+    {
+     "scale": "v6:vocalisation",
+     "n_lineages": 50,
+     "z": 0.05675364911017754,
+     "up": 32,
+     "down": 18,
+     "p": 0.06490864707227217,
+     "bh": false
+    }
+   ],
+   "all": [
+    {
+     "scale": "k_bodily_harm",
+     "n_lineages": 50,
+     "z": -0.023922713855636973,
+     "up": 17,
+     "down": 33,
+     "p": 0.032839137564268484,
+     "bh": true
+    },
+    {
+     "scale": "k_transgressiveness",
+     "n_lineages": 50,
+     "z": -0.07594529561488701,
+     "up": 9,
+     "down": 41,
+     "p": 5.614100093254137e-06,
+     "bh": true
+    },
+    {
+     "scale": "k_concreteness",
+     "n_lineages": 50,
+     "z": -0.010158937747542871,
+     "up": 21,
+     "down": 29,
+     "p": 0.3222363203575469,
+     "bh": false
+    },
+    {
+     "scale": "k_register_level",
+     "n_lineages": 50,
+     "z": 0.19230442590604757,
+     "up": 41,
+     "down": 9,
+     "p": 5.614100093254137e-06,
+     "bh": true
+    },
+    {
+     "scale": "k_vulgarity",
+     "n_lineages": 50,
+     "z": -0.26291147590445074,
+     "up": 12,
+     "down": 38,
+     "p": 0.00030586400160359517,
+     "bh": true
+    },
+    {
+     "scale": "warriner_arousal",
+     "n_lineages": 50,
+     "z": -0.11214273216991323,
+     "up": 10,
+     "down": 40,
+     "p": 2.3861331676755526e-05,
+     "bh": true
+    },
+    {
+     "scale": "warriner_valence",
+     "n_lineages": 50,
+     "z": 0.053926934936145546,
+     "up": 35,
+     "down": 15,
+     "p": 0.006600447966810918,
+     "bh": true
+    },
+    {
+     "scale": "warriner_dominance",
+     "n_lineages": 50,
+     "z": 0.04039018282676958,
+     "up": 34,
+     "down": 16,
+     "p": 0.015346677832630107,
+     "bh": true
+    },
+    {
+     "scale": "v6:fit",
+     "n_lineages": 50,
+     "z": 0.03771086198832637,
+     "up": 39,
+     "down": 11,
+     "p": 9.021490107130603e-05,
+     "bh": true
+    },
+    {
+     "scale": "v6:directedness",
+     "n_lineages": 50,
+     "z": 0.02062106921481692,
+     "up": 29,
+     "down": 21,
+     "p": 0.3222363203575469,
+     "bh": false
+    },
+    {
+     "scale": "v6:makes_better",
+     "n_lineages": 50,
+     "z": 0.04621629069190341,
+     "up": 43,
+     "down": 7,
+     "p": 2.098677427397888e-07,
+     "bh": true
+    },
+    {
+     "scale": "v6:makes_worse",
+     "n_lineages": 50,
+     "z": -0.021430257155771085,
+     "up": 11,
+     "down": 39,
+     "p": 9.021490107130603e-05,
+     "bh": true
+    },
+    {
+     "scale": "v6:mundanity",
+     "n_lineages": 50,
+     "z": 0.04624416668633078,
+     "up": 39,
+     "down": 11,
+     "p": 9.021490107130603e-05,
+     "bh": true
+    },
+    {
+     "scale": "v6:vocalisation",
+     "n_lineages": 50,
+     "z": 0.08950146608653634,
+     "up": 42,
+     "down": 8,
+     "p": 1.163555804595262e-06,
+     "bh": true
+    }
+   ],
+   "high": [
+    {
+     "scale": "k_bodily_harm",
+     "n_lineages": 50,
+     "z": -0.035630660472772156,
+     "up": 16,
+     "down": 34,
+     "p": 0.015346677832630107,
+     "bh": true
+    },
+    {
+     "scale": "k_transgressiveness",
+     "n_lineages": 50,
+     "z": -0.12113543698776762,
+     "up": 9,
+     "down": 41,
+     "p": 5.614100093254137e-06,
+     "bh": true
+    },
+    {
+     "scale": "k_concreteness",
+     "n_lineages": 50,
+     "z": -0.014616697016132324,
+     "up": 21,
+     "down": 29,
+     "p": 0.3222363203575469,
+     "bh": false
+    },
+    {
+     "scale": "k_register_level",
+     "n_lineages": 50,
+     "z": 0.22120028363047736,
+     "up": 40,
+     "down": 10,
+     "p": 2.3861331676755526e-05,
+     "bh": true
+    },
+    {
+     "scale": "k_vulgarity",
+     "n_lineages": 50,
+     "z": -0.2943354491591707,
+     "up": 11,
+     "down": 39,
+     "p": 9.021490107130603e-05,
+     "bh": true
+    },
+    {
+     "scale": "warriner_arousal",
+     "n_lineages": 50,
+     "z": -0.12283838418287689,
+     "up": 10,
+     "down": 40,
+     "p": 2.3861331676755526e-05,
+     "bh": true
+    },
+    {
+     "scale": "warriner_valence",
+     "n_lineages": 50,
+     "z": 0.055578502925215205,
+     "up": 35,
+     "down": 15,
+     "p": 0.006600447966810918,
+     "bh": true
+    },
+    {
+     "scale": "warriner_dominance",
+     "n_lineages": 50,
+     "z": 0.0614814425202078,
+     "up": 35,
+     "down": 15,
+     "p": 0.006600447966810918,
+     "bh": true
+    },
+    {
+     "scale": "v6:fit",
+     "n_lineages": 50,
+     "z": 0.031937696540471724,
+     "up": 36,
+     "down": 14,
+     "p": 0.0026021714567221466,
+     "bh": true
+    },
+    {
+     "scale": "v6:directedness",
+     "n_lineages": 50,
+     "z": 0.020218443998977938,
+     "up": 28,
+     "down": 22,
+     "p": 0.47988766169832786,
+     "bh": false
+    },
+    {
+     "scale": "v6:makes_better",
+     "n_lineages": 50,
+     "z": 0.04216054777629163,
+     "up": 42,
+     "down": 8,
+     "p": 1.163555804595262e-06,
+     "bh": true
+    },
+    {
+     "scale": "v6:makes_worse",
+     "n_lineages": 50,
+     "z": -0.023772339192931525,
+     "up": 11,
+     "down": 39,
+     "p": 9.021490107130603e-05,
+     "bh": true
+    },
+    {
+     "scale": "v6:mundanity",
+     "n_lineages": 50,
+     "z": 0.04750036233892462,
+     "up": 39,
+     "down": 11,
+     "p": 9.021490107130603e-05,
+     "bh": true
+    },
+    {
+     "scale": "v6:vocalisation",
+     "n_lineages": 50,
+     "z": 0.08643097337478715,
+     "up": 44,
+     "down": 6,
+     "p": 3.243740565039843e-08,
+     "bh": true
+    }
+   ]
+  },
+  "VIOLENT": {
+   "low": [
+    {
+     "scale": "k_bodily_harm",
+     "n_lineages": 50,
+     "z": -0.08887214290485294,
+     "up": 12,
+     "down": 38,
+     "p": 0.00030586400160359517,
+     "bh": true
+    },
+    {
+     "scale": "k_transgressiveness",
+     "n_lineages": 50,
+     "z": -0.020748692090014908,
+     "up": 21,
+     "down": 29,
+     "p": 0.3222363203575469,
+     "bh": false
+    },
+    {
+     "scale": "k_concreteness",
+     "n_lineages": 50,
+     "z": -0.03655447815456764,
+     "up": 20,
+     "down": 30,
+     "p": 0.20263875106454066,
+     "bh": false
+    },
+    {
+     "scale": "k_register_level",
+     "n_lineages": 50,
+     "z": -0.002909420756746792,
+     "up": 25,
+     "down": 25,
+     "p": 1.0,
+     "bh": false
+    },
+    {
+     "scale": "k_vulgarity",
+     "n_lineages": 50,
+     "z": -0.007936572468025569,
+     "up": 6,
+     "down": 44,
+     "p": 3.243740565039843e-08,
+     "bh": true
+    },
+    {
+     "scale": "warriner_arousal",
+     "n_lineages": 50,
+     "z": -0.04343370076085896,
+     "up": 21,
+     "down": 29,
+     "p": 0.3222363203575469,
+     "bh": false
+    },
+    {
+     "scale": "warriner_valence",
+     "n_lineages": 50,
+     "z": 0.0408530589060377,
+     "up": 29,
+     "down": 21,
+     "p": 0.3222363203575469,
+     "bh": false
+    },
+    {
+     "scale": "warriner_dominance",
+     "n_lineages": 50,
+     "z": 0.023551794042533374,
+     "up": 27,
+     "down": 23,
+     "p": 0.6718110337653656,
+     "bh": false
+    },
+    {
+     "scale": "v6:fit",
+     "n_lineages": 50,
+     "z": 0.06542237439029554,
+     "up": 43,
+     "down": 7,
+     "p": 2.098677427397888e-07,
+     "bh": true
+    },
+    {
+     "scale": "v6:directedness",
+     "n_lineages": 50,
+     "z": 0.013835160647803173,
+     "up": 30,
+     "down": 20,
+     "p": 0.20263875106454066,
+     "bh": false
+    },
+    {
+     "scale": "v6:makes_better",
+     "n_lineages": 50,
+     "z": 0.009938916442710482,
+     "up": 31,
+     "down": 19,
+     "p": 0.11892045255943628,
+     "bh": false
+    },
+    {
+     "scale": "v6:makes_worse",
+     "n_lineages": 50,
+     "z": -0.0029430763938443354,
+     "up": 23,
+     "down": 27,
+     "p": 0.6718110337653656,
+     "bh": false
+    },
+    {
+     "scale": "v6:mundanity",
+     "n_lineages": 50,
+     "z": 0.0008201046548134643,
+     "up": 25,
+     "down": 25,
+     "p": 1.0,
+     "bh": false
+    },
+    {
+     "scale": "v6:vocalisation",
+     "n_lineages": 50,
+     "z": 0.05211186466355337,
+     "up": 36,
+     "down": 14,
+     "p": 0.0026021714567221466,
+     "bh": true
+    }
+   ],
+   "all": [
+    {
+     "scale": "k_bodily_harm",
+     "n_lineages": 50,
+     "z": -0.2137022486924267,
+     "up": 9,
+     "down": 41,
+     "p": 5.614100093254137e-06,
+     "bh": true
+    },
+    {
+     "scale": "k_transgressiveness",
+     "n_lineages": 50,
+     "z": -0.20366641162192076,
+     "up": 10,
+     "down": 40,
+     "p": 2.3861331676755526e-05,
+     "bh": true
+    },
+    {
+     "scale": "k_concreteness",
+     "n_lineages": 50,
+     "z": -0.07078752129616593,
+     "up": 14,
+     "down": 36,
+     "p": 0.0026021714567221466,
+     "bh": true
+    },
+    {
+     "scale": "k_register_level",
+     "n_lineages": 50,
+     "z": 0.002039462882718227,
+     "up": 25,
+     "down": 25,
+     "p": 1.0,
+     "bh": false
+    },
+    {
+     "scale": "k_vulgarity",
+     "n_lineages": 50,
+     "z": -0.022065143350128224,
+     "up": 6,
+     "down": 44,
+     "p": 3.243740565039843e-08,
+     "bh": true
+    },
+    {
+     "scale": "warriner_arousal",
+     "n_lineages": 50,
+     "z": -0.072950326386932,
+     "up": 17,
+     "down": 33,
+     "p": 0.032839137564268484,
+     "bh": true
+    },
+    {
+     "scale": "warriner_valence",
+     "n_lineages": 50,
+     "z": 0.08113696015832107,
+     "up": 34,
+     "down": 16,
+     "p": 0.015346677832630107,
+     "bh": true
+    },
+    {
+     "scale": "warriner_dominance",
+     "n_lineages": 50,
+     "z": 0.08147512125861242,
+     "up": 35,
+     "down": 15,
+     "p": 0.006600447966810918,
+     "bh": true
+    },
+    {
+     "scale": "v6:fit",
+     "n_lineages": 50,
+     "z": 0.038632831975161076,
+     "up": 32,
+     "down": 18,
+     "p": 0.06490864707227217,
+     "bh": false
+    },
+    {
+     "scale": "v6:directedness",
+     "n_lineages": 50,
+     "z": -0.013181653683753014,
+     "up": 19,
+     "down": 31,
+     "p": 0.11892045255943628,
+     "bh": false
+    },
+    {
+     "scale": "v6:makes_better",
+     "n_lineages": 50,
+     "z": 0.00972860149104217,
+     "up": 36,
+     "down": 14,
+     "p": 0.0026021714567221466,
+     "bh": true
+    },
+    {
+     "scale": "v6:makes_worse",
+     "n_lineages": 50,
+     "z": -0.012894055207139848,
+     "up": 21,
+     "down": 29,
+     "p": 0.3222363203575469,
+     "bh": false
+    },
+    {
+     "scale": "v6:mundanity",
+     "n_lineages": 50,
+     "z": 0.015129031034398723,
+     "up": 34,
+     "down": 16,
+     "p": 0.015346677832630107,
+     "bh": true
+    },
+    {
+     "scale": "v6:vocalisation",
+     "n_lineages": 50,
+     "z": 0.061668121728509585,
+     "up": 39,
+     "down": 11,
+     "p": 9.021490107130603e-05,
+     "bh": true
+    }
+   ],
+   "high": [
+    {
+     "scale": "k_bodily_harm",
+     "n_lineages": 50,
+     "z": -0.31831519530387115,
+     "up": 8,
+     "down": 42,
+     "p": 1.163555804595262e-06,
+     "bh": true
+    },
+    {
+     "scale": "k_transgressiveness",
+     "n_lineages": 50,
+     "z": -0.2873268619976406,
+     "up": 7,
+     "down": 43,
+     "p": 2.098677427397888e-07,
+     "bh": true
+    },
+    {
+     "scale": "k_concreteness",
+     "n_lineages": 50,
+     "z": -0.0936540830273246,
+     "up": 14,
+     "down": 36,
+     "p": 0.0026021714567221466,
+     "bh": true
+    },
+    {
+     "scale": "k_register_level",
+     "n_lineages": 50,
+     "z": 0.007067717623061761,
+     "up": 27,
+     "down": 23,
+     "p": 0.6718110337653656,
+     "bh": false
+    },
+    {
+     "scale": "k_vulgarity",
+     "n_lineages": 50,
+     "z": -0.03436642468124077,
+     "up": 7,
+     "down": 43,
+     "p": 2.098677427397888e-07,
+     "bh": true
+    },
+    {
+     "scale": "warriner_arousal",
+     "n_lineages": 50,
+     "z": -0.0923921046187444,
+     "up": 13,
+     "down": 37,
+     "p": 0.000936222910851825,
+     "bh": true
+    },
+    {
+     "scale": "warriner_valence",
+     "n_lineages": 50,
+     "z": 0.12218669169816969,
+     "up": 38,
+     "down": 12,
+     "p": 0.00030586400160359517,
+     "bh": true
+    },
+    {
+     "scale": "warriner_dominance",
+     "n_lineages": 50,
+     "z": 0.10850603384383213,
+     "up": 39,
+     "down": 11,
+     "p": 9.021490107130603e-05,
+     "bh": true
+    },
+    {
+     "scale": "v6:fit",
+     "n_lineages": 50,
+     "z": 0.021227976870844958,
+     "up": 29,
+     "down": 21,
+     "p": 0.3222363203575469,
+     "bh": false
+    },
+    {
+     "scale": "v6:directedness",
+     "n_lineages": 50,
+     "z": -0.030485148809590402,
+     "up": 19,
+     "down": 31,
+     "p": 0.11892045255943628,
+     "bh": false
+    },
+    {
+     "scale": "v6:makes_better",
+     "n_lineages": 50,
+     "z": 0.009016146161790493,
+     "up": 32,
+     "down": 18,
+     "p": 0.06490864707227217,
+     "bh": false
+    },
+    {
+     "scale": "v6:makes_worse",
+     "n_lineages": 50,
+     "z": -0.06682437659481205,
+     "up": 17,
+     "down": 33,
+     "p": 0.032839137564268484,
+     "bh": true
+    },
+    {
+     "scale": "v6:mundanity",
+     "n_lineages": 50,
+     "z": 0.02396071681036666,
+     "up": 36,
+     "down": 14,
+     "p": 0.0026021714567221466,
+     "bh": true
+    },
+    {
+     "scale": "v6:vocalisation",
+     "n_lineages": 50,
+     "z": 0.08585605876698266,
+     "up": 41,
+     "down": 9,
+     "p": 5.614100093254137e-06,
+     "bh": true
+    }
+   ]
+  }
+ }
+}

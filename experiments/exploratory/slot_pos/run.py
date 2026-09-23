@@ -41,6 +41,13 @@ sys.path.insert(0, ROOT)
 SRC = os.path.expanduser("~/malignment-data/norm_change/words_long_v4.csv.gz")
 OUT = os.path.join(HERE, "results")
 SCALE = "directedness"
+#: **spaCy TAGS A SLOT-FINAL ARTICLE AS PRON.** Tagging "prompt + the" leaves
+#: the article with no noun to govern, and at PRON-dominant slots "the" was 28%
+#: of the PRON mass and "a" 4% (measured 2026-09-23). The articles are remapped
+#: to DET here. Possessives (her, his, my) and demonstratives (this, that) stay
+#: as tagged: "her" is a pronoun as often as a determiner at these slots, and a
+#: closed list cannot tell which without the continuation.
+ARTICLES = {"the", "a", "an"}
 #: ONE RUBRIC FILED UNDER TWO KEYS, disjoint: `v6` (114,524 pairs, 2,188
 #: prompts) and `slot_rating_en_v6` (21,544, 276). The first run read only the
 #: second and measured a fifth of the rows; the paper seat caught it
@@ -76,6 +83,8 @@ def main():
                 continue
             n += 1
             pr, w, u = r["prompt"], r["word"], r["upos"]
+            if u == "PRON" and w.lower() in ARTICLES:
+                u = "DET"
             pb, pa = float(r["p_base"] or 0), float(r["p_aligned"] or 0)
             m = mass[(pr, r["base"])]
             m["b"][u] += pb

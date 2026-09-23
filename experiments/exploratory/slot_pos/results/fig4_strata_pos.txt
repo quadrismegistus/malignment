@@ -1,0 +1,57 @@
+by=pos  purity>=0.60  strata with >= 20 prompts; z in the pooled sd; * = BH 0.05 over 14 rows
+pooled reproduces norms_levels_z_en.json (z and up counts, 14 rows x 3 bands)
+prompts: noun 130, verb 1495
+
+BAND LOW
+  row                          pooled           noun           verb
+  k_bodily_harm         -0.025*  9/41  -0.015  19/31  -0.032*  9/41
+  k_transgressiveness   -0.017  17/33  -0.013* 16/34  -0.020* 15/35
+  k_concreteness        -0.012  22/28  +0.003  25/25  -0.002  25/25
+  k_register_level      +0.018  28/22  +0.014  29/21  +0.010  31/19
+  k_vulgarity           -0.003* 14/36  -0.050*  6/44  -0.004* 16/34
+  warriner_arousal      -0.043* 10/40  +0.003  26/24  -0.050* 10/40
+  warriner_valence      +0.015  30/20  -0.003  23/27  +0.021  30/20
+  warriner_dominance    +0.005  27/23  -0.007  23/27  +0.009  29/21
+  v6:fit                +0.062* 41/9   +0.019* 37/13  +0.073* 43/7 
+  v6:directedness       -0.005  20/30  -0.001  24/26  -0.007  20/30
+  v6:makes_better       +0.039* 44/6   +0.019  32/18  +0.045* 45/5 
+  v6:makes_worse        -0.000  25/25  -0.003* 16/34  -0.004  23/27
+  v6:mundanity          +0.014* 42/8   +0.021* 37/13  +0.016* 42/8 
+  v6:vocalisation       +0.003  26/24  -0.002  23/27  +0.001  26/24
+
+BAND ALL
+  row                          pooled           noun           verb
+  k_bodily_harm         -0.067*  7/43  -0.025* 14/36  -0.086*  6/44
+  k_transgressiveness   -0.051*  9/41  -0.046* 13/37  -0.070*  8/42
+  k_concreteness        -0.021  18/32  -0.014  19/31  -0.025  18/32
+  k_register_level      +0.022* 36/14  +0.175* 40/10  +0.017  28/22
+  k_vulgarity           -0.025*  8/42  -0.258* 10/40  -0.017*  9/41
+  warriner_arousal      -0.053* 12/38  -0.054* 13/37  -0.073* 11/39
+  warriner_valence      +0.019* 33/17  +0.010  30/20  +0.032* 38/12
+  warriner_dominance    +0.020  31/19  +0.020* 37/13  +0.024* 34/16
+  v6:fit                +0.045* 41/9   +0.018* 39/11  +0.055* 41/9 
+  v6:directedness       -0.010  20/30  -0.014* 10/40  -0.006  22/28
+  v6:makes_better       +0.029* 44/6   +0.029* 45/5   +0.040* 46/4 
+  v6:makes_worse        -0.001  24/26  -0.017*  8/42  -0.010  22/28
+  v6:mundanity          +0.014* 44/6   +0.056* 43/7   +0.022* 45/5 
+  v6:vocalisation       +0.031* 33/17  +0.004* 33/17  +0.030* 34/16
+
+BAND HIGH
+  row                          pooled           noun           verb
+  k_bodily_harm         -0.127*  7/43  -0.049* 11/39  -0.174*  7/43
+  k_transgressiveness   -0.112*  9/41  -0.072* 14/36  -0.181*  7/43
+  k_concreteness        -0.047* 17/33  -0.016* 17/33  -0.059  18/32
+  k_register_level      +0.063* 39/11  +0.222* 39/11  +0.026* 33/17
+  k_vulgarity           -0.074*  9/41  -0.412*  9/41  -0.041*  8/42
+  warriner_arousal      -0.070* 11/39  -0.089* 11/39  -0.098*  9/41
+  warriner_valence      +0.048* 36/14  +0.014  32/18  +0.091* 38/12
+  warriner_dominance    +0.047* 36/14  +0.037* 35/15  +0.070* 40/10
+  v6:fit                +0.043* 38/12  +0.016* 36/14  +0.042* 36/14
+  v6:directedness       -0.012  19/31  -0.051* 10/40  -0.015  20/30
+  v6:makes_better       +0.021* 41/9   +0.048* 47/3   +0.040* 44/6 
+  v6:makes_worse        -0.012* 17/33  -0.030*  9/41  -0.026* 13/37
+  v6:mundanity          +0.024* 42/8   +0.097* 45/5   +0.026* 40/10
+  v6:vocalisation       +0.058* 39/11  +0.010* 33/17  +0.066* 42/8 
+
+SIGNIFICANT CELLS WHOSE SIGN DISAGREES WITH THE POOLED PLATE:
+  none
