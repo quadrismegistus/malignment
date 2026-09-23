@@ -5,6 +5,7 @@ direction change with charge? -> results/feature_pairs/<cut>.md, SWEEP.md;
     python -u feature_pairs.py                     sweep every cut in CUTS
     python -u feature_pairs.py --cut fixed:4/6     one cut
     python -u feature_pairs.py --rebuild           re-read the movement table
+    python -u feature_pairs.py --slot verb         verb slots only (purity >= 0.6)
 
 **EXPLORATORY, AND SAID SO ON PURPOSE.** Written by the paper seat
 (TheoryMachines) on 2026-09-23 at RH's request, as a fishing expedition over
@@ -59,6 +60,16 @@ highest lift thirds, each at |median| >= MIN_EFFECT. Near-empty cells (vulgarity
 x anything) produce sign-test "reversals" around a median of 0.000, which is why
 the effect floor exists.
 
+## STRATIFYING BY THE SLOT'S PART OF SPEECH
+
+The v6 scales are written for actions ("what THIS WORD DOES TO THE ACTION"), so a
+pooled cell can move because the mix of verb and noun slots moved rather than
+because anything moved within verbs. `--slot verb|noun` keeps only prompts whose
+BASE-side dominant part of speech is that one at purity >= `--purity`, read from
+`experiments/exploratory/slot_pos/results/prompt_pos_en.csv` (malign). Base side,
+so alignment cannot choose the stratum. Lift thirds keep the POOLED cuts, so a
+stratum's "high" means the same lift as the pooled run's.
+
 ## WHAT THIS CANNOT SHOW
 
 - **Two instruments are mixed.** `inst:*` (slot_institutional_en_v3) covers
@@ -83,6 +94,8 @@ OUT = os.path.join(HERE, "results", "feature_pairs")
 #: the per-cut JSON is ~2 MB a file, so it lives outside the repo (RH: large
 #: files go to ~/malignment-data); the .md reports stay here
 OUT_DATA = os.path.expanduser("~/malignment-data/norm_change/feature_pairs")
+SLOT_POS = os.path.join(ROOT, "experiments", "exploratory", "slot_pos", "results",
+                        "prompt_pos_en.csv")
 
 CTX = ["harm", "aggression", "directedness", "vocalisation", "interiority",
        "deliberation", "superego", "hedged", "makes_better", "makes_worse",
@@ -156,8 +169,8 @@ def build():
         kc[w] = v
         return v
 
-    L, LF, D, X, WID, FN = [], [], [], [], [], []
-    lin_ix, word_ix = {}, {}
+    L, LF, D, X, WID, FN, PID = [], [], [], [], [], [], []
+    lin_ix, word_ix, prompt_ix = {}, {}, {}
     with gzip.open(SRC, "rt") as fh:
         for row in csv.DictReader(fh, delimiter="\t"):
             if row["lang"] != "en" or (row["base"], row["aligned"]) not in pairs:
@@ -172,11 +185,13 @@ def build():
             D.append(d)
             WID.append(word_ix.setdefault(w, len(word_ix)))
             FN.append(row["is_function"] == "1")
+            PID.append(prompt_ix.setdefault(pr, len(prompt_ix)))
             X.append(np.concatenate([ctxvec(pr, w), kvec(w)]))
     if len(lin_ix) != 50:
         raise SystemExit("expected 50 endpoint lineages, matched %d" % len(lin_ix))
     data = {"L": np.array(L, np.int32), "LF": np.array(LF), "D": np.array(D),
-            "X": np.vstack(X), "WID": np.array(WID, np.int32), "FN": np.array(FN, bool),
+            "X": np.vstack(X), "WID": np.array(WID, np.int32), "FN": np.array(FN, bool), "PID": np.array(PID, np.int32),
+            "prompts": np.array(sorted(prompt_ix, key=prompt_ix.get), dtype=object),
             "words": np.array(sorted(word_ix, key=word_ix.get), dtype=object),
             "lineages": np.array(sorted(lin_ix, key=lin_ix.get), dtype=object),
             "feats": np.array(FEATS, dtype=object)}
@@ -188,7 +203,7 @@ def load(rebuild=False):
     if rebuild or not os.path.exists(CACHE):
         return build()
     z = np.load(CACHE, allow_pickle=True)
-    if list(z["feats"]) != FEATS or "FN" not in z.files:
+    if list(z["feats"]) != FEATS or "PID" not in z.files:
         return build()
     return {k: z[k] for k in z.files}
 
@@ -216,12 +231,12 @@ def sign_p(k, n):
     return float(binomtest(k, n).pvalue) if n else 1.0
 
 
-def run_cut(data, cut):
+def run_cut(data, cut, lift_cuts=None, slot="all"):
     L, D, X = data["L"], data["D"], data["X"]
     NL = int(L.max()) + 1
     LF = data["LF"]
     ok = ~np.isnan(LF)
-    lo, hi = np.quantile(LF[ok], [1 / 3, 2 / 3])
+    lo, hi = lift_cuts or np.quantile(LF[ok], [1 / 3, 2 / 3])
     band = np.where(~ok, -1, np.where(LF <= lo, 0, np.where(LF <= hi, 1, 2)))
     thr, strict = thresholds(data, cut)
     rated = ~np.isnan(X)
@@ -289,7 +304,7 @@ def run_cut(data, cut):
                 ex[bn] = top_words(data, m)
             reversals.append({"cell": lab, "low": a, "high": z, "words": ex})
     reversals.sort(key=lambda r: max(r["low"]["q"], r["high"]["q"]))
-    return {"cut": cut, "thresholds": dict(zip(FEATS, map(float, thr))),
+    return {"cut": cut, "slot": slot, "thresholds": dict(zip(FEATS, map(float, thr))),
             "strict": strict, "lift_cuts": [float(lo), float(hi)],
             "n_tests": len(tests), "n_q05": int((qv < Q).sum()),
             "single": single, "cells": cells, "reversals": reversals}
@@ -322,8 +337,10 @@ def write(res):
     os.makedirs(OUT, exist_ok=True)
     os.makedirs(OUT_DATA, exist_ok=True)
     tag = res["cut"].replace(":", "_").replace("/", "-")
+    if res.get("slot", "all") != "all":
+        tag = res["slot"] + "_" + tag
     json.dump(res, open(os.path.join(OUT_DATA, tag + ".json"), "w"), indent=1)
-    lines = ["# feature_pairs, cut `%s`" % res["cut"], "",
+    lines = ["# feature_pairs, cut `%s`, slots: %s" % (res["cut"], res.get("slot", "all")), "",
              "EXPLORATORY; see the producer's docstring. %d tests, %d at q < %.2f. "
              "Lift thirds cut at %+.3f and %+.3f." % (res["n_tests"], res["n_q05"], Q,
                                                      *res["lift_cuts"]), "",
@@ -339,12 +356,12 @@ def write(res):
     open(os.path.join(OUT, tag + ".md"), "w").write("\n".join(lines))
 
 
-def sweep_report(results):
+def sweep_report(results, slot="all"):
     count = collections.defaultdict(list)
     for res in results:
         for r in res["reversals"]:
             count[r["cell"]].append((res["cut"], r))
-    lines = ["# feature_pairs sweep", "",
+    lines = ["# feature_pairs sweep, slots: %s" % slot, "",
              "EXPLORATORY. For each reversal, the cuts that find it, and the words "
              "under the cut where it is strongest. Cuts: %s." % ", ".join(r["cut"] for r in results),
              ""]
@@ -359,7 +376,26 @@ def sweep_report(results):
                 lines.append("- %s, %s: %s" % (bn, side, ", ".join(
                     "%s %.1f" % (w, v) for w, v in r["words"][bn][side][:8])))
         lines.append("")
-    open(os.path.join(OUT, "SWEEP.md"), "w").write("\n".join(lines))
+    name = "SWEEP.md" if slot == "all" else "SWEEP_%s.md" % slot
+    open(os.path.join(OUT, name), "w").write("\n".join(lines))
+
+
+def slot_subset(data, slot, purity):
+    """Rows whose prompt's BASE-side dominant POS is `slot` at >= purity. -> data"""
+    want = {"verb": "VERB", "noun": "NOUN"}[slot]
+    keep = set()
+    with open(SLOT_POS, encoding="utf-8") as fh:
+        for r in csv.DictReader(fh):
+            if r["pos_base"] == want and float(r["purity_base"]) >= purity:
+                keep.add(r["prompt"])
+    pk = np.array([p in keep for p in data["prompts"]])
+    m = pk[data["PID"]]
+    print("slot %s at purity >= %.2f: %d prompts, %d of %d rows"
+          % (slot, purity, int(pk.sum()), int(m.sum()), len(m)), file=sys.stderr)
+    out = dict(data)
+    for k in ("L", "LF", "D", "X", "WID", "FN", "PID"):
+        out[k] = data[k][m]
+    return out
 
 
 def main(argv=None):
@@ -367,19 +403,25 @@ def main(argv=None):
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--cut", action="append", help="one or more cuts; default: all of CUTS")
     ap.add_argument("--rebuild", action="store_true", help="re-read the movement table")
+    ap.add_argument("--slot", choices=["all", "verb", "noun"], default="all")
+    ap.add_argument("--purity", type=float, default=0.6)
     a = ap.parse_args(argv)
     data = load(a.rebuild)
     print("%d movement rows, %d lineages" % (len(data["D"]), len(data["lineages"])),
           file=sys.stderr)
+    LF = data["LF"]
+    pooled = tuple(np.quantile(LF[~np.isnan(LF)], [1 / 3, 2 / 3]))
+    if a.slot != "all":
+        data = slot_subset(data, a.slot, a.purity)
     results = []
     for cut in a.cut or CUTS:
-        res = run_cut(data, cut)
+        res = run_cut(data, cut, lift_cuts=pooled, slot=a.slot)
         write(res)
         results.append(res)
         print("%-12s tests %d, q<%.2f %d, reversals %d"
               % (cut, res["n_tests"], Q, res["n_q05"], len(res["reversals"])), file=sys.stderr)
     if len(results) > 1:
-        sweep_report(results)
+        sweep_report(results, a.slot)
 
 
 if __name__ == "__main__":

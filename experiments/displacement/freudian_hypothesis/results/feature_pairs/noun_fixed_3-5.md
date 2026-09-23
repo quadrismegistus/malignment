@@ -1,0 +1,5 @@
+# feature_pairs, cut `fixed:3/5`, slots: noun
+
+EXPLORATORY; see the producer's docstring. 720 tests, 311 at q < 0.05. Lift thirds cut at +0.000 and +0.332.
+
+## Reversals (low third against high third, |median| >= 0.005)
