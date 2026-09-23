@@ -208,14 +208,15 @@ run. Statuses below were read from each folder's own README, not inherited.
                                 one entry here because nobody has split it, not
                                 because it is one question. See the layout note
                                 in `experiments/README.md`.
-    institution_vs_individual/  DRAFTED 2026-09-23, NOT RUN. When alignment
-                                sends a party in a dispute to a third party, does it
-                                send the weaker party OUTWARD (a regulator, a court)
-                                and the stronger one INWARD (its own counsel, its own
-                                HR)? F21's deference scale cannot see the direction.
-                                `task.py` codes form (quiz / boilerplate / advice /
-                                continuation) and every referral's relation to the
-                                speaker in one pass, over F21's 12 matched pairs.
+    institution_vs_individual/  RUN 2026-09-23/24. Alignment tells the institution
+                                to TALK and sends the individual ELSEWHERE: on a
+                                43-lineage 256-token regeneration, aligned
+                                institutions get direct voice with the counterparty
+                                (0.31 -> 0.75) while aligned individuals are referred
+                                to authorities (0.13 -> 0.33) and into the
+                                counterparty's own channels (0.09 -> 0.43). Four
+                                predictions declared in advance, all supported on 18
+                                disputes AND 39 lineages after Holm.
 
 ## The tension worth keeping visible
 
