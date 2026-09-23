@@ -388,3 +388,6 @@ experiments/displacement/own_geometry/results/*.npz
 # wide-vocab residuals: 33-162 MB, regenerable by wide_vocab.py
 experiments/displacement/chain_of_connections/results/wide_vocab_resid*.npz
 experiments/displacement/chain_of_connections/results/wide_vocab_resid_verbwide.npz
+
+# model_forum: generated dialogue + podcast work, kept local for now (RH, 2026-09-23)
+model_forum/
