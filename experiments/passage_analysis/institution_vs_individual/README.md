@@ -121,6 +121,17 @@ In short: **the individual is told to contact, file, request and seek; the insti
 
 Two caveats. This is exploratory: many words, nothing declared. And the first-person pronouns (my, I, me) collapse on both sides with the move from continuation to advice; that is genre, not side. One contrast is worth keeping. The *word* "rights" rises for the individual (0.05 → 0.21), while F21's coder found *specific* rights named falling. Alignment tells the aggrieved party to "know your rights" without naming any.
 
+## By domain (`by_dispute.py`, EXPLORATORY)
+
+One to four disputes per domain, so this describes rather than tests (`results/by_dispute.md`). The pattern varies in a readable way. **Where alignment sends the individual depends on whether the other side has its own complaint machinery.**
+
+- **Routed INTO the counterparty's apparatus (channel) most where the other side is an organisation with a complaints process.** Bank fee +0.70 (20/1 lineages), university removal +0.70 (22/0), consulate visa refusal +0.55 (20/0), benefits cut +0.55 (25/1), insurance +0.47, utilities +0.46, hospital bill +0.40, workplace safety +0.42. This includes state bodies: police search +0.29 (16/0, internal affairs and the department's own complaints), consulate +0.55.
+- **Routed OUTWARD instead where a regulator exists for the harm or the other side has no apparatus.** Workplace safety +0.50 (20/4, labour inspectorates), layoffs +0.42 (16/0), the highway demolition +0.45 (24/2), housing repairs +0.31 (20/8). **Housing is the exception to capture.** The landlord has no HR, so the tenant is sent outward, to the housing authority or ombudsman, and hardly at all into the landlord's side (repairs +0.05, deposit −0.01). Where the counterparty IS the authority (police, consulate, insurer), outward does not rise at all (−0.06, −0.06, −0.01): the grievance goes to the counterparty's own channel instead.
+- **Direct voice for the institution is strongest where the institution has just done something to a group:** layoffs −0.70 (2/17), the highway −0.57 (4/21), university removal −0.47, hospital bill −0.40, visa −0.38. It is absent in housing (rent −0.05, deposit +0.14): the landlord is not told to talk more than the tenant is.
+- **The frontier models follow the same geography,** mostly more steeply. Their channel gap is near zero in housing (+0.00 to +0.07) and near 1.0 for the bank (+1.00). The one clear divergence: on the rent dispute the frontier tells the tenant, not the landlord, to talk (+0.47).
+
+So "capture" is the general case when the other side is a bureaucracy, public or private. Housing shows the alternative: with no apparatus to route into, alignment sends the aggrieved party outward. Caveats: this is exploratory, one prompt pair per dispute, and 24 of the 36 prompts are my rewrites. A domain's pattern is partly its prompt.
+
 ## The frontier, on the same ruler (`frontier_generate.py`, `frontier_code.py`)
 
 The same 36 prompts were run through the API: the prompt as the user message, the vendor's default system prompt, t=1.0, 256 tokens, 10 draws. top_p is pinned only on DeepSeek, where it is measured to be honoured; elsewhere it runs at the vendor default. There is no base, so this is the gap at the endpoint. The analysis was committed before coding (`results/analysis_frontier.md`). Shares are individual / institution:
@@ -231,8 +242,9 @@ Engine facts are recorded in `roster/models/observations.json` (`engine_support.
     f21_task_sample.py    F21's own annotation task on a 4,361 sample + the frontier, joined to the referral codes
     usas_test.py          USAS government/law and speech fields, no LLM in the measurement, declared first
     word_did.py           EXPLORATORY per-word difference-in-differences, BH over 1,531 words
+    by_dispute.py         EXPLORATORY the four contrasts per dispute, grouped by domain, with the frontier
     frontier_generate.py  API passages (Sonnet 4.6, Haiku 4.5, GPT-4o-mini, DeepSeek) into the generation stash
     frontier_code.py      codes them; the endpoint contrast, declared before coding
-    results/              analysis.md (pass 1 v1), analysis_v2.md, analysis_regen.md, analysis_frontier.md, decompose.md, within_genre_test.md, f21_task.md, usas_test.md, word_did.md, examples_regen.md
+    results/              analysis.md (pass 1 v1), analysis_v2.md, analysis_regen.md, analysis_frontier.md, decompose.md, within_genre_test.md, f21_task.md, usas_test.md, word_did.md, by_dispute.md, examples_regen.md
 
 The coded outputs are 20 MB each and live in `~/malignment-data/institution_vs_individual/`.
