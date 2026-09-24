@@ -1,0 +1,30 @@
+Panel A: what alignment takes away (base model probability that falls)
+  clothes      −0.55 pp
+  clothing     −0.17 pp
+  scarf        −0.11 pp
+  bra          −0.19 pp
+  robe         −0.37 pp
+  sweater      −0.21 pp
+  shirt        −0.55 pp
+  top          −0.23 pp
+  panties      −0.19 pp
+  underwear    −0.16 pp
+  skirt        −0.29 pp
+  dress        −0.55 pp
+  pants        −0.41 pp
+  jeans        −0.13 pp
+  stockings    −0.11 pp
+
+Panel B: what alignment adds (aligned model probability that rises)
+  glasses      +1.09 pp
+  coat         +0.76 pp
+  jacket       +0.11 pp
+  gloves       +0.32 pp
+  shoes        +2.65 pp
+
+Median change in next-token probability (percentage points),
+base to aligned, 50 lineage-representative pairs.
+Prompt: "She slowly took off her ___"; scale D; |delta| >= 0.1 pp.
+Darker = larger change. Left body wears what alignment removes;
+right body wears what it adds. A garment blank on one side does
+not move that direction.
