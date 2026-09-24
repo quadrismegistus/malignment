@@ -79,6 +79,21 @@ In **verse**, the tiers separate on WHERE their meter comes from. Base models' v
 
 The human side is one text per author, so these are points without error bars. The LLM verse tiers are pooled across different model families.
 
+**Prompted poems** (all 16,980 in `genai_rhyme_promptings`, parsed with `--prompted-all`, scrambled with `--scramble`). These are poems written on request: `DO_rhyme` (e.g. "ballad stanzas", "heroic couplets"), `MAYBE_rhyme`, the neutral bucket ("Write a poem."), and `do_NOT_rhyme` (e.g. "that does NOT rhyme", "in blank verse"). There are no base models (a base model cannot follow "write a poem") and no poets' baseline. So there are two tiers, open aligned (Llama-3.1 8B/70B, OLMo-2 7B/13B, an OLMo-7B instruct, DeepSeek-R1-8B, two llama2-uncensored) and API (Claude-3 Haiku/Sonnet/Opus, GPT-3.5, GPT-4, Gemini-Pro, DeepSeek-chat), × three prompt types. "No metre prompts" drops the blank-verse, sonnet, couplet and pentameter prompts.
+
+| tier | prompt | poems | uncertainty | tension | uIP % | puIP % | O − R (uncertainty) |
+|---|---|---|---|---|---|---|---|
+| open aligned | to rhyme | 3,184 | 2.70 | 5.72 | 13.9 | 9.0 | −1.48 |
+| open aligned | neither | 1,846 | 2.95 | 6.90 | 10.9 | 6.7 | −1.31 |
+| open aligned | not to rhyme | 3,172 | 3.67 | 9.50 | 8.1 | 4.9 | −0.68 |
+| open aligned | not to rhyme, no metre prompts | 2,780 | 3.80 | 9.98 | 6.1 | 3.8 | |
+| API | to rhyme | 2,827 | 2.75 | 6.28 | 16.8 | 12.2 | −1.46 |
+| API | neither | 2,059 | 3.25 | 8.51 | 9.6 | 6.5 | −1.07 |
+| API | not to rhyme | 3,891 | 3.43 | 8.73 | 10.5 | 6.5 | −0.87 |
+| API | not to rhyme, no metre prompts | 3,550 | 3.55 | 9.17 | 8.5 | 5.2 | |
+
+On uncertainty, poems prompted to rhyme land at an 18th-century level (human poetry: 1700–1749 2.44, 1750–1799 2.67). Poems prompted not to rhyme land between 1900 (3.25) and 1950 (3.84), the free-verse level. The neutral bucket separates the tiers: open aligned models write at a 1600s or 1850s level (2.95), API models at a 1900–1949 level (3.25). That is the reverse of the continuations, where the API models were the most metrical of all (DeepSeek 2.23, Claude-3-Sonnet 2.60). So the API tier's Augustan canonicity appears when it continues a traditional poem; it is not its default. Metrical-form prompts raise canonical pentameter where present (API "to rhyme" uIP 16.8% with them, 11.4% without). The placement effect (O − R) is largest when rhyme is requested and smallest when it is refused, in both tiers. These are descriptive levels: prompted poems have no paired baseline, and the prompt mix differs across models (e.g. Gemini-Pro wrote 1,184 "not to rhyme" poems and 48 "to rhyme").
+
 **Caveats.** Verse and prose come from different prompts and generation setups (4-bit ollama models for verse, full-precision HF generation for prose). The Olmo-3 base/SFT verse pilot (malign-logits `rhyme_pilot`, 12 primers) is on the page but is never quoted as a result. No sampled verse exists at pretraining checkpoints. National_story's `load_raw` deduplicates only within a (lineage, arm, demonym) cell: 60 texts recur under two demonyms. They are counted once here, and that folder's own per-demonym counts are affected.
 
 ## Method and files

@@ -42,6 +42,37 @@ TIER = {"ollama/llama3.1:8b-text-q4_K_M": ("base", "Llama-3.1-8B"), "ollama/mist
         "claude-3-sonnet-20240229": ("API", "Claude-3-Sonnet"), "deepseek/deepseek-chat": ("API", "DeepSeek-chat")}
 
 
+#: prompted-poem models by tier (genai_rhyme_promptings has no base models: a base model
+#: cannot follow "write a poem"). Everything not listed here is open aligned.
+PROMPT_API = {"claude-3-haiku-20240307", "claude-3-opus-20240229", "claude-3-sonnet-20240229", "gpt-3.5-turbo",
+              "gpt-4-turbo", "gemini-pro", "deepseek/deepseek-chat"}
+PTYPE = {"DO_rhyme": "prompted to rhyme", "MAYBE_rhyme": "prompted neither way", "do_NOT_rhyme": "prompted not to rhyme"}
+
+
+def prompt_meta():
+    """poem_id -> (tier, prompt text, is a metrical-form prompt)."""
+    p = pd.read_csv(os.path.join(GENFORM, "data/data_as_in_paper/genai_rhyme_promptings.csv.gz"), low_memory=False,
+                    usecols=["id", "model", "prompt"])
+    p["tier"] = p.model.map(lambda m: "API" if m in PROMPT_API else "open aligned")
+    p["metrical_form"] = p.prompt.str.contains("blank verse|iambic|pentameter|heroic couplet|sonnet", case=False)
+    return p.rename(columns={"id": "poem_id"}).assign(poem_id=lambda d: d.poem_id.astype(str))[["poem_id", "tier", "prompt", "metrical_form"]]
+
+
+def prompt_buckets(Pp):
+    """One row per (tier, prompt type), and do_NOT_rhyme again without metrical-form prompts."""
+    out = []
+    for (tier, pt), g in Pp.groupby(["tier", "group"]):
+        out.append(dict(group="prompt_bucket", tier=tier, ptype=pt, label="%s poems, %s" % (tier, PTYPE[pt]),
+                        source="generative-formalism promptings", **summ(g, "poem_id")))
+        if g.metrical_form.any():
+            h = g[~g.metrical_form]
+            out.append(dict(group="prompt_bucket", tier=tier, ptype=pt + "_nometre",
+                            label="%s poems, %s (no metrical-form prompts)" % (tier, PTYPE[pt]),
+                            source="generative-formalism promptings, excluding blank verse / sonnet / couplet / pentameter prompts",
+                            **summ(h, "poem_id")))
+    return out
+
+
 def pent(df):
     """uIP: best parse wswswswsws AND the only viable scansion; puIP: also zero violations."""
     ip = (df.meter == IP) & (df.num_parses == 1)
@@ -119,6 +150,10 @@ def scrambles(V, W):
                     ("API", "LLM verse, API"), ("poets", "Poets' continuations")):
         x = C[tier == tr]
         row(lab, "human verse" if tr == "poets" else "LLM verse", tr, {v: x[x.version == VER[v]] for v in "ORS"})
+    Pp = V[V.source == "genai_prompt"].assign(poem_id=lambda d: d.poem_id.astype(str)).merge(prompt_meta(), on="poem_id", how="left")
+    for (tr, pt), x in Pp.groupby(["tier", "group"]):
+        row("%s prompted: %s" % (tr, PTYPE[pt].replace("prompted ", "")), "LLM prompted verse", tr,
+            {v: x[x.version == VER[v]] for v in "ORS"})
     return rows
 
 
@@ -175,7 +210,9 @@ def points():
     for m, (lin, arm) in names.items():
         pts.append(dict(group="llm_verse", lineage=lin, arm=arm, label="%s %s, verse continuation" % (lin, arm),
                         source="generative-formalism completions (ollama, 4-bit)", **summ(C[C.model == m], "poem_id")))
-    Pp = V[V.source == "genai_prompt"]
+    PM = prompt_meta()
+    Pp = V[V.source == "genai_prompt"].assign(poem_id=lambda d: d.poem_id.astype(str)).merge(PM, on="poem_id", how="left")
+    pts += prompt_buckets(Pp)
     for pt, y in Pp.groupby("group"):
         pts.append(dict(group="llm_prompted", arm="aligned", label="Prompted poems: %s" % pt,
                         source="generative-formalism promptings (chat models)", **summ(y, "poem_id")))

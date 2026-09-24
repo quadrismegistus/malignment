@@ -77,6 +77,17 @@ def tier_poems():
     return out
 
 
+def prompted_all():
+    """-> recs for EVERY prompted poem (--prompted-all fills in what the per-cell sample left out).
+    group = prompt_type (DO_rhyme / MAYBE_rhyme / do_NOT_rhyme); the prompt text itself is
+    joined back from genai_rhyme_promptings by poem_id at analysis time."""
+    p = pd.read_csv(os.path.join(GENFORM, "genai_rhyme_promptings.csv.gz"), low_memory=False)
+    out = [dict(source="genai_prompt", model=r.model, arm="instruct", poem_id=str(r.id), group=r.prompt_type,
+                text=str(r.txt)) for r in p.itertuples()]
+    random.Random(SEED).shuffle(out)
+    return out
+
+
 def poems(per_period, per_cell):
     """-> list of dicts: source, model, arm, poem_id, group, text."""
     rng = random.Random(SEED)
@@ -152,10 +163,16 @@ def main(argv=None):
                          "continuations) to the existing file, skipping any already there")
     ap.add_argument("--scramble", action="store_true",
                     help="APPEND within-POS and full scrambles of every continuation (all tiers and "
-                         "the poets'), skipping any already there")
+                         "the poets') and every prompted poem, skipping any already there")
+    ap.add_argument("--prompted-all", action="store_true",
+                    help="APPEND every prompted poem not yet parsed (the default run samples --per-cell)")
     a = ap.parse_args(argv)
-    if a.scramble:
-        recs = [r for r in poems(a.per_period, a.per_cell) + tier_poems() if r["source"] == "genai_completion"]
+    if a.prompted_all:
+        a.tiers = True                                   # same append-and-skip path as --tiers
+        recs = prompted_all()
+    elif a.scramble:
+        recs = [r for r in poems(a.per_period, a.per_cell) + tier_poems() + prompted_all()
+                if r["source"] in ("genai_completion", "genai_prompt")]
         seen, uniq = set(), []                           # a poets' text shared by two recs is scrambled once
         for r in recs:
             k = (r["model"], r["poem_id"])

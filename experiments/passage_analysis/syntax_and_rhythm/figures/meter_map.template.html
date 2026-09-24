@@ -100,7 +100,7 @@ th.n { text-align: right; }
 
   <section class="figure" aria-label="Canonical iambic pentameter by model tier">
     <h2>Canonical iambic pentameter, by model tier</h2>
-    <p class="note" style="color:var(--ink-2)">Share of 10-syllable windows that scan as <b>unambiguous iambic pentameter</b> (uIP: the best parse is <span style="font-family:var(--mono)">wswswswsws</span> and it is the only viable scansion) and as <b>perfect</b> unambiguous iambic pentameter (puIP: that one scansion has no violations). Each row is a model continuing human poems after their first five lines, set against the poets' own continuations of the same poems. The tiers are different model families, not stages of one model: only the base → open-aligned step is paired within a model (Llama, Mistral).</p>
+    <p class="note" style="color:var(--ink-2)">Share of 10-syllable windows that scan as <b>unambiguous iambic pentameter</b> (uIP: the best parse is <span style="font-family:var(--mono)">wswswswsws</span> and it is the only viable scansion) and as <b>perfect</b> unambiguous iambic pentameter (puIP: that one scansion has no violations). Each row is a model continuing human poems after their first five lines, set against the poets' own continuations of the same poems. The tiers are different model families, not stages of one model: only the base → open-aligned step is paired within a model (Llama, Mistral). Below the continuations are poems written on request, by tier and prompt type (prompted to rhyme, prompted not to rhyme, neither). These have no poets' baseline and no base models, since a base model cannot follow "write a poem". "Without metre prompts" drops blank-verse, sonnet, couplet and pentameter prompts from the not-to-rhyme bucket.</p>
     <div class="legend"><span><span class="sw" style="border:2px solid var(--verse);background:transparent;width:8px;height:8px"></span>base model</span><span><span class="sw" style="background:var(--verse)"></span>aligned or API model</span><span><span class="sw" style="border-radius:1px;background:var(--human)"></span>the poets, same poems</span></div>
     <div class="chart-box" id="pentBox">
       <svg class="chart" id="pentU" role="img" aria-label="Unambiguous iambic pentameter share by model and poets; values in the table below"></svg>
@@ -172,7 +172,7 @@ const KIND = {
   human_chadwyck: "Human poetry (Chadwyck sample)", human_all_poetry: "Human poetry, pooled", human_all_fiction: "Human fiction, pooled",
   human_all_nonfiction: "Human non-fiction, pooled", human_continuation: "Human continuation",
   llm_prose: "LLM prose", llm_prose_lineage: "LLM prose, one lineage", llm_verse: "LLM verse continuation",
-  llm_verse_pilot: "LLM verse continuation (pilot)", llm_prompted: "LLM prompted poems", llm_prompted_model: "LLM prompted poems, one model", verse_period: "Verse continuations, by period", verse_overall: "Verse continuations, all periods", tier_model: "Verse continuation model (tier)", ref_author: "Human poet (reference)", ors: "O/R/S row (original values)"
+  llm_verse_pilot: "LLM verse continuation (pilot)", llm_prompted: "LLM prompted poems", llm_prompted_model: "LLM prompted poems, one model", verse_period: "Verse continuations, by period", verse_overall: "Verse continuations, all periods", tier_model: "Verse continuation model (tier)", ref_author: "Human poet (reference)", ors: "O/R/S row (original values)", prompt_bucket: "LLM prompted poems, tier x prompt type"
 };
 const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
 const tip = document.getElementById("tip"), box = document.getElementById("chartBox");
@@ -349,9 +349,18 @@ function leadPanel(svg, key, title, y0, y1, step) {
 function pentPanel(svg, key, title, x1) {
   const rows = PTS.filter(p => p.group === "tier_model");
   const tiers = ["base", "open aligned", "API"];
-  const rowH = 26, headH = 22, top = 46, left = 190, right = 30;
+  const rowH = 26, headH = 22, top = 46, left = 230, right = 30;
   let y = top; const place = [];
   tiers.forEach(tr => { place.push({ head: tr, y: y + 14 }); y += headH; rows.filter(r => r.tier === tr).forEach(r => { place.push({ r, y: y + rowH / 2 }); y += rowH; }); });
+  // prompted poems: no poets' baseline, so the model point alone
+  const PT = { DO_rhyme: "prompted to rhyme", MAYBE_rhyme: "neither", do_NOT_rhyme: "prompted not to rhyme", do_NOT_rhyme_nometre: "  … without metre prompts" };
+  ["open aligned", "API"].forEach(tr => {
+    place.push({ head: "Prompted poems: " + tr, y: y + 14 }); y += headH;
+    ["DO_rhyme", "MAYBE_rhyme", "do_NOT_rhyme", "do_NOT_rhyme_nometre"].forEach(pt => {
+      const r = PTS.find(p => p.group === "prompt_bucket" && p.tier === tr && p.ptype === pt);
+      if (r) { place.push({ r: { ...r, model: PT[pt], prompted: true }, y: y + rowH / 2 }); y += rowH; }
+    });
+  });
   const Hh = y + 34;
   svg.innerHTML = ""; svg.setAttribute("viewBox", `0 0 ${W} ${Hh}`);
   const sx = v => left + v / x1 * (W - left - right);
@@ -372,8 +381,17 @@ function pentPanel(svg, key, title, x1) {
   rl.sort((a, b) => a.x - b.x);
   rl.forEach((r, i) => { const tx = el(svg, "text", { x: r.x, y: top - 10 - (i % 2) * 11, class: "plabel", "text-anchor": "middle" }); tx.textContent = r.lab; hover(tx, r.p); });
   place.forEach(pl => {
-    if (pl.head) { const tx = el(svg, "text", { x: 0, y: pl.y, class: "clabel", "font-weight": 600 }); tx.textContent = pl.head === "API" ? "API models" : pl.head === "base" ? "Base models" : "Open aligned models"; return; }
-    const r = pl.r, col = C("--verse"), base = r.tier === "base";
+    if (pl.head) { const tx = el(svg, "text", { x: 0, y: pl.y, class: "clabel", "font-weight": 600 }); tx.textContent = pl.head === "API" ? "Continuations: API models" : pl.head === "base" ? "Continuations: base models" : pl.head === "open aligned" ? "Continuations: open aligned models" : pl.head; return; }
+    const r = pl.r, base = r.tier === "base";
+    if (r.prompted) {
+      const col = C("--prompt"), vm = r[key];
+      const lab = el(svg, "text", { x: 14, y: pl.y + 4, class: "dlabel" }); lab.textContent = r.model;
+      el(svg, "circle", { cx: sx(vm), cy: pl.y, r: 6, fill: col, stroke: col, "stroke-width": 2 });
+      const vtx = el(svg, "text", { x: sx(vm) + 10, y: pl.y + 4, class: "plabel" }); vtx.textContent = vm.toFixed(1);
+      hover(el(svg, "rect", { x: 0, y: pl.y - rowH / 2, width: W, height: rowH, class: "hit" }), r);
+      return;
+    }
+    const col = C("--verse");
     const vm = r[key], vp = r[key + "_poets"];
     const lab = el(svg, "text", { x: 14, y: pl.y + 4, class: "dlabel" }); lab.textContent = r.model;
     el(svg, "line", { x1: sx(Math.min(vm, vp)), x2: sx(Math.max(vm, vp)), y1: pl.y, y2: pl.y, stroke: C("--ink-3"), "stroke-width": 2 });
@@ -386,7 +404,7 @@ function pentPanel(svg, key, title, x1) {
     hover(el(svg, "rect", { x: 0, y: pl.y - rowH / 2, width: W, height: rowH, class: "hit" }), tipP);
   });
 }
-const ORS_COL = r => r.kind_ors === "LLM prose" ? "--prose" : r.kind_ors === "LLM verse" ? "--verse" : "--human";
+const ORS_COL = r => r.kind_ors === "LLM prose" ? "--prose" : r.kind_ors === "LLM verse" ? "--verse" : r.kind_ors === "LLM prompted verse" ? "--prompt" : "--human";
 const ORS_FILL = r => r.tier !== "base";
 function orsTip(r) {
   const k = [["t", "Tension"], ["u", "Uncertainty"], ["uip", "uIP %"], ["puip", "puIP %"]];
@@ -422,13 +440,13 @@ function orsScatter(svg) {
     if (human) el(svg, "rect", { x: x - 4.5, y: y - 4.5, width: 9, height: 9, fill: C(v) });
     else el(svg, "circle", { cx: x, cy: y, r: 6.5, fill: ORS_FILL(r) ? C(v) : C("--panel"), stroke: C(v), "stroke-width": 2 });
     // labels that would collide in the dense corners are placed individually: [dx, dy, anchor]
-    const off = { "LLM prose, aligned": [0, 20, "middle"], "Browne": [-9, 4, "end"], "LLM verse, API": [-10, 4, "end"], "Shakespeare": [0, 20, "middle"] }[r.label] || [9, -7, "start"];
+    const off = { "LLM prose, aligned": [-8, -10, "end"], "Browne": [0, 18, "middle"], "LLM verse, API": [-10, 4, "end"], "Shakespeare": [0, 20, "middle"] }[r.label] || [9, -7, "start"];
     const t = el(svg, "text", { x: x + off[0], y: y + off[1], "text-anchor": off[2], class: human ? "clabel" : "dlabel" }); t.textContent = r.label.replace("LLM ", "");
     hover(el(svg, "circle", { cx: x, cy: y, r: 12, class: "hit" }), orsTip(r));
   });
 }
 function orsRows(svg, key) {
-  const order = ["human verse", "LLM verse", "human fiction", "human utility prose", "human art prose", "LLM prose"];
+  const order = ["human verse", "LLM verse", "LLM prompted verse", "human fiction", "human utility prose", "human art prose", "LLM prose"];
   const rows = PTS.filter(p => p.group === "ors").sort((a, b) => order.indexOf(a.kind_ors) - order.indexOf(b.kind_ors) || a[key + "_O"] - b[key + "_O"]);
   const rowH = 24, top = 20, left = 210, right = 40, Hh = top + rows.length * rowH + 40;
   svg.innerHTML = ""; svg.setAttribute("viewBox", `0 0 ${W} ${Hh}`);
@@ -480,7 +498,7 @@ let sortK = "kind", sortDir = 1;
 function table() {
   const rows = PTS.map(p => ({ ...p, kind: KIND[p.group] || p.group }));
   rows.sort((a, b) => { const x = a[sortK], y = b[sortK]; return (typeof x === "number" ? x - y : String(x).localeCompare(String(y))) * sortDir; });
-  const col = g => g.startsWith("llm_prose") ? "var(--prose)" : (g.startsWith("llm_verse") || g.startsWith("verse_") || g === "tier_model") ? "var(--verse)" : g.startsWith("llm_prompted") ? "var(--prompt)" : "var(--human)";
+  const col = g => g.startsWith("llm_prose") ? "var(--prose)" : (g.startsWith("llm_verse") || g.startsWith("verse_") || g === "tier_model") ? "var(--verse)" : (g.startsWith("llm_prompted") || g === "prompt_bucket") ? "var(--prompt)" : "var(--human)";
   document.querySelector("#table tbody").innerHTML = rows.map(r =>
     `<tr><td><span class="sw" style="background:${col(r.group)}"></span>${r.label}</td><td>${r.kind}</td><td class="n">${f2(r.u)}</td><td class="n">${f2(r.t)}</td><td class="n">${f2(r.uip)}</td><td class="n">${f2(r.puip)}</td><td class="n">${r.n_windows.toLocaleString()}</td><td class="n">${r.n_units.toLocaleString()}</td><td>${r.source}</td></tr>`).join("");
 }
@@ -490,7 +508,7 @@ document.querySelectorAll("#table th").forEach(th => {
 });
 document.getElementById("orsLegend").innerHTML =
   `<span><span class="sw" style="border-radius:1px;background:var(--human)"></span>human text (small data) or poets' continuations</span>` +
-  `<span><span class="sw" style="background:var(--prose)"></span>LLM prose</span><span><span class="sw" style="background:var(--verse)"></span>LLM verse</span>` +
+  `<span><span class="sw" style="background:var(--prose)"></span>LLM prose</span><span><span class="sw" style="background:var(--verse)"></span>LLM verse continuations</span><span><span class="sw" style="background:var(--prompt)"></span>LLM poems written on request</span>` +
   `<span><span class="sw" style="border:2px solid var(--ink-2);background:transparent;width:8px;height:8px"></span>base model</span>`;
 ["showPilot", "showNonfic", "orsKey"].forEach(id => document.getElementById(id).addEventListener("change", draw));
 matchMedia("(prefers-color-scheme: dark)").addEventListener("change", draw);

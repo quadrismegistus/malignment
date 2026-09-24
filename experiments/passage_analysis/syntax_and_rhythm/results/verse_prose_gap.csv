@@ -1,0 +1,16 @@
+who,tension,uncertainty,uIP %,puIP %
+human 1600–1649,5.955,1.479,14.705,11.122
+human 1650–1699,4.981,1.411,19.236,13.242
+human 1700–1749,6.425,1.951,24.677,17.262
+human 1750–1799,5.161,1.565,21.098,15.041
+human 1800–1849,3.49,1.027,11.506,8.359
+human 1850–1899,4.043,1.186,9.371,6.685
+human 1900–1949,2.708,0.842,6.666,4.576
+human 1950–1999,0.786,0.322,1.881,1.26
+LLM base (34 prose lineages vs 2 verse models),4.67,1.188,10.169,8.065
+LLM open aligned (same),6.319,1.727,14.348,10.594
+API verse vs open-aligned prose (mixed: no API prose),5.24,1.591,18.54,13.955
+matched Llama-3.1-8B base (prose n=84 passages),4.416,1.22,10.528,8.25
+matched Llama-3.1-8B aligned (prose n=17 passages),6.212,1.76,13.482,9.225
+matched Mistral-7B base (prose n=57 passages),4.7,1.15,8.72,7.067
+matched Mistral-7B aligned (prose n=82 passages),5.06,1.499,13.276,10.33
