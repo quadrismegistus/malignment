@@ -4028,12 +4028,19 @@
     "internlm/internlm2-base-7b",
     "internlm/internlm2-chat-7b"
    ],
-   "status": "works",
+   "status": "degraded_output",
    "observed_2026_09_23": [
     {
      "status": "works",
      "note": "tf 4.57.1 + sentencepiece 0.2.1 with tiktoken UNINSTALLED: both arms 360/360. With sentencepiece latest + tiktoken present: 'Converting from SentencePiece and Tiktoken failed'.",
      "source": "institution_vs_individual regeneration fleet, 2026-09-23: RunPod A100-80GB, runpod/pytorch:1.0.2-cu1281-torch280 image + pip vllm==0.22.1 (torch 2.11.0+cu130) + transformers 4.57.1, generation via malignment.vllm_generate (render=ids_v2). experiments/passage_analysis/institution_vs_individual/fleet/"
+    }
+   ],
+   "observed_2026_09_24": [
+    {
+     "status": "degraded_output",
+     "note": "CORRECTS observed_2026_09_23 'works'. Loading and writing 360/360 is not running correctly: every passage is word salad ('pr result sh migration accompanied exposes-to by this form step six ...'). 1,080 of 1,080 passages (internlm2-base-7b raw; internlm2-chat-7b chat and raw) coded degenerate/incoherent by task.py v2. The sentencepiece 0.2.1 / no-tiktoken environment fixes the tokenizer LOAD failure only. Cause not identified; suspect a tokenizer/vocab mismatch between the HF-rendered ids and vLLM's model (the Teuken class).",
+     "source": "institution_vs_individual aligned-raw fleet, 2026-09-24: RunPod A40, vllm 0.22.1, torch 2.11.0+cu130, transformers 4.57.1, sentencepiece 0.2.1, tiktoken uninstalled; found in coded output by the dario seat. experiments/passage_analysis/institution_vs_individual (analyse_regen.BROKEN_LINEAGES)."
     }
    ]
   }

@@ -97,6 +97,7 @@ def did(rows, unit, name):
 def main():
     lex = lexicon()
     rows = [json.loads(l) for l in open(A.SRC)]
+    rows = [r for r in rows if r["lineage"] not in A.BROKEN_LINEAGES]
     arms = collections.defaultdict(set)
     for r in rows:
         arms[r["lineage"]].add(r["arm"])

@@ -6,8 +6,8 @@ Producer `usas_test.py`, declared before tagging. Lexicon coverage of tokens (fi
 
 | field | base ind | base inst | aligned ind | aligned inst | lineages +/- | p | disputes +/- | p | predicted | verdict |
 |---|---|---|---|---|---|---|---|---|---|---|
-| GOV_LAW | 15.69 | 14.67 | 19.13 | 13.37 | 39/4 | 3.11e-08 | 15/3 | 0.00754 | > 0 | SUPPORTED (Holm 6.22e-08 / 0.0151) |
-| SPEECH | 28.94 | 34.48 | 48.43 | 45.23 | 38/5 | 2.5e-07 | 15/3 | 0.00754 | < 0 | not supported (Holm 2.5e-07 / 0.0151) |
+| GOV_LAW | 15.90 | 14.86 | 19.53 | 13.63 | 38/4 | 5.65e-08 | 15/3 | 0.00754 | > 0 | SUPPORTED (Holm 1.13e-07 / 0.0151) |
+| SPEECH | 29.35 | 34.95 | 49.51 | 46.23 | 37/5 | 4.43e-07 | 15/3 | 0.00754 | < 0 | not supported (Holm 4.43e-07 / 0.0151) |
 
 Rates are field tokens per 1,000 tokens, mean over passages.
 

@@ -42,6 +42,14 @@ from scipy.stats import binomtest
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 SRC = os.path.expanduser("~/malignment-data/institution_vs_individual/coded_regen.jsonl")
+#: LINEAGES WHOSE PASSAGES ARE NOISE IN EVERY CELL (2026-09-24, found by the dario
+#: seat). internlm2: 1,080 of 1,080 passages (base raw, aligned chat, aligned raw)
+#: coded degenerate/incoherent -- word salad under vLLM 0.22.1 even with the
+#: sentencepiece 0.2.1 / no-tiktoken environment, which fixed the tokenizer LOAD and
+#: not the output. The `keep` filter already drops every one of them, so the coded
+#: analyses are unchanged; producers that count UNFILTERED passages must drop the
+#: lineage here or they count 720 noise passages as a 43rd lineage.
+BROKEN_LINEAGES = {"internlm/internlm2-base-7b"}
 OUT = os.path.join(HERE, "results", "analysis_regen.md")
 KEEP_FORM = {"continuation", "advice"}
 TAKEN = {"recommended", "marked_correct"}

@@ -2,7 +2,7 @@
 kind: question
 subject: passage_analysis
 question: When alignment answers a party to a dispute, does what it tells them to do depend on which side of the dispute they are on?
-status: RUN 2026-09-23/24 -- F21 corpus coded (pass 1); 43-lineage 256-token regeneration run and coded; four declared predictions all supported on both units
+status: RUN 2026-09-23/24 -- F21 corpus coded (pass 1); 43-lineage 256-token regeneration run and coded (42 usable: internlm2 is noise in every cell); four declared predictions all supported on both units
 headline: >-
   The individual/institution asymmetry is already in the BASE model -- the
   aggrieved party is referred about three times as often, the institution is
@@ -19,7 +19,7 @@ headline: >-
 
 ## The finding
 
-On a 256-token regeneration over **43 lineages × 18 disputes × both sides**, with the base model raw and the aligned model in chat, all four predictions declared before any regenerated text existed hold. Each is sign-tested by dispute (18) and by lineage (39), Holm-corrected over the four (`results/analysis_regen.md`):
+On a 256-token regeneration over **42 usable lineages × 18 disputes × both sides** (43 generated; internlm2 is noise in every cell), with the base model raw and the aligned model in chat, all four predictions declared before any regenerated text existed hold. Each is sign-tested by dispute (18) and by lineage (39), Holm-corrected over the four (`results/analysis_regen.md`):
 
 | prediction | individual, base → aligned | institution, base → aligned | disputes | lineages |
 |---|---|---|---|---|
@@ -77,28 +77,28 @@ F21's `AlignmentAsymmetryTask` was run unchanged, with F21's input convention, o
 
 USAS semantic fields from the repo's lexicon (93% token coverage), measured on the passage text only. The primary population is every regeneration passage, unfiltered, so the LLM coder is not in the selection either. Two predictions were declared before tagging (`results/usas_test.md`). The file states in advance that a word field cannot test P4: it can't say whose department.
 
-- **U1, supported.** Government and law vocabulary (G1, G2) rises for the individual and falls for the institution: individual 15.7 → 19.1 per 1,000 tokens, institution 14.7 → 13.4. Lineages 39/4, disputes 15/3, Holm-significant on both units. That is P1's direction, confirmed by an instrument no LLM touches.
+- **U1, supported.** Government and law vocabulary (G1, G2) rises for the individual and falls for the institution: individual 15.9 → 19.5 per 1,000 tokens, institution 14.9 → 13.6. Lineages 38/4, disputes 15/3, Holm-significant on both units. That is P1's direction, confirmed by an instrument no LLM touches.
 - **But within advice alone (secondary), it does not widen** (lineages 8/5). The individual/institution gap in legal vocabulary is already there in base advice (21.1 against 15.5). So U1 is largely the genre shift: aligned models write advice, and advice to the aggrieved is legalistic. This matches the decomposition, where outward was the small part of the widening.
-- **U2, not supported, and reversed.** Speech vocabulary (Q2) rises MORE for the individual (28.9 → 48.4) than for the institution (34.5 → 45.2): lineages 38/5 the wrong way. A post-hoc look at the words shows why. On the aligned side, the individual's speech words are *request, appeal, consult, statement, contact, claim, complaint*: procedural speech addressed to a body. The institution's are *communication, conversation, explain, acknowledge, apologize*: relational speech addressed to the other party. Splitting Q2.1 (speech) from Q2.2 (speech acts) doesn't help; both rise more for the individual. **A word field cannot separate "talk to them" from "file a request with someone": the individual's procedure is itself made of speech acts.** Q2 was the wrong proxy for direct voice. The failure is a construct mismatch and says nothing against P2. The contrast in the word lists is suggestive, but it is post hoc.
+- **U2, not supported, and reversed.** Speech vocabulary (Q2) rises MORE for the individual (29.4 → 49.5) than for the institution (35.0 → 46.2): lineages 37/5 the wrong way. A post-hoc look at the words shows why. On the aligned side, the individual's speech words are *request, appeal, consult, statement, contact, claim, complaint*: procedural speech addressed to a body. The institution's are *communication, conversation, explain, acknowledge, apologize*: relational speech addressed to the other party. Splitting Q2.1 (speech) from Q2.2 (speech acts) doesn't help; both rise more for the individual. **A word field cannot separate "talk to them" from "file a request with someone": the individual's procedure is itself made of speech acts.** Q2 was the wrong proxy for direct voice. The failure is a construct mismatch and says nothing against P2. The contrast in the word lists is suggestive, but it is post hoc.
 
 So the one prediction a lexicon can check independently (P1, outward) holds, and it mostly reflects the move to advice. The claims that carry the essay (P4's channel routing and P2's direct voice) remain on the LLM coder. That makes the second-coder check the next priority.
 
 ## The words themselves (`word_did.py`, EXPLORATORY)
 
-No LLM anywhere: every passage, unfiltered. For each word in at least 300 passages (1,531 words), the share of passages containing it, as a per-lineage difference-in-differences (individual change minus institution change). Sign test over lineages, Benjamini–Hochberg over all words. 553 words survive, and 261 of those also hold by dispute (`results/word_did.md`). Cells below are passage shares, base → aligned.
+No LLM anywhere: every passage, unfiltered. For each word in at least 300 passages (1,505 words), the share of passages containing it, as a per-lineage difference-in-differences (individual change minus institution change). Sign test over lineages, Benjamini–Hochberg over all words. 548 words survive, and 259 of those also hold by dispute (`results/word_did.md`). Cells below are passage shares, base → aligned.
 
 **Gaining on the individual's side (the routing, in its own words):**
 
 | word | individual | institution | lineages | disputes |
 |---|---|---|---|---|
-| contact | 0.06 → 0.36 | 0.06 → 0.09 | 41/1 | 18/0 |
-| rights | 0.05 → 0.21 | 0.04 → 0.08 | 40/2 | 15/3 |
-| seek | 0.02 → 0.22 | 0.02 → 0.08 | 39/2 | 17/1 |
+| contact | 0.06 → 0.37 | 0.06 → 0.09 | 41/1 | 18/0 |
+| rights | 0.05 → 0.22 | 0.04 → 0.08 | 40/2 | 15/3 |
+| seek | 0.02 → 0.22 | 0.02 → 0.09 | 39/2 | 17/1 |
 | request | 0.04 → 0.26 | 0.05 → 0.13 | 34/8 | 16/2 |
 | file | 0.05 → 0.15 | 0.04 → 0.03 | 41/1 | 17/0 |
-| department | 0.04 → 0.15 | 0.05 → 0.07 | 38/4 | 15/3 |
+| department | 0.04 → 0.16 | 0.05 → 0.07 | 37/4 | 15/3 |
 | complaint | 0.04 → 0.12 | 0.04 → 0.05 | 35/7 | 15/3 |
-| lawyer | 0.04 → 0.11 | 0.03 → 0.03 | 37/5 | 15/1 |
+| lawyer | 0.04 → 0.11 | 0.03 → 0.03 | 37/5 | 16/2 |
 
 Also: local, reach, letter, office, legal, advice, document, contract.
 
@@ -107,13 +107,13 @@ Also: local, reach, letter, office, legal, advice, document, contract.
 | word | individual | institution | lineages | disputes |
 |---|---|---|---|---|
 | listen | 0.007 → 0.005 | 0.02 → 0.21 | 0/42 | 1/17 |
-| concerns | 0.02 → 0.16 | 0.05 → 0.35 | 1/41 | 2/16 |
+| concerns | 0.02 → 0.17 | 0.05 → 0.36 | 1/41 | 2/16 |
 | apologize | 0.004 → 0.005 | 0.02 → 0.12 | 2/39 | 3/15 |
-| acknowledge | 0.005 → 0.03 | 0.01 → 0.20 | 5/36 | 3/15 |
-| empathy | 0.002 → 0.007 | 0.01 → 0.13 | 3/36 | 2/15 |
+| acknowledge | 0.006 → 0.03 | 0.01 → 0.21 | 5/36 | 3/15 |
+| empathy | 0.002 → 0.007 | 0.01 → 0.13 | 3/36 | 2/16 |
 | communicate | 0.01 → 0.09 | 0.02 → 0.21 | 4/36 | 2/16 |
 | transparent | 0.002 → 0.005 | 0.006 → 0.09 | 1/36 | 0/18 |
-| inconvenience | 0.003 → 0.005 | 0.006 → 0.08 | 1/39 | 3/14 |
+| inconvenience | 0.003 → 0.006 | 0.006 → 0.08 | 1/39 | 3/14 |
 
 Also: ensure, offer, handle, maintain, trust, feedback, perspective, understand, clearly.
 
@@ -203,14 +203,14 @@ The corpus is 20,389 F21 generations: 24 prompts (12 matched pairs), 10 open fam
   - Aquila2-7B is now loaded at the roster's revision pin.
   - gemma-2 and Falcon-H1 run in bfloat16. Falcon-H1-7B base wrote 360/360 empty passages at float16, with exit 0.
   - falcon-7b loads with remote code off, under transformers 5.10.2.
-  - InternLM2 needs sentencepiece 0.2.1 with tiktoken removed.
+  - InternLM2 needs sentencepiece 0.2.1 with tiktoken removed to LOAD, and even then its output is word salad in every cell (see Coverage).
 - Every aligned passage carries `render=ids_v2`, which is also in its key. `run_regen.py` counts no aligned passage without it.
 
 Engine facts are recorded in `roster/models/observations.json` (`engine_support.*.observed_2026_09_23`).
 
-**Coverage: 43 of 50 lineages** (30,960 passages).
+**Coverage: 42 of 50 lineages** (30,240 passages; 43 were generated).
 - **Not generated:** RWKV and recurrentgemma (vLLM 0.22.1 refuses both; transformers path only, very slow), OLMo-Hybrid (needs transformers ≥5 plus flash-linear-attention), MPT (config error).
-- **Out of the test:** bloomz and CT-LLM-SFT-DPO ship no chat template and have no authored override, so the aligned arm cannot be framed. Teuken base samples ids beyond its tokenizer (250,880 rows against 250,680 pieces) and writes gibberish.
+- **Out of the test:** bloomz and CT-LLM-SFT-DPO ship no chat template and have no authored override, so the aligned arm cannot be framed. Teuken base samples ids beyond its tokenizer (250,880 rows against 250,680 pieces) and writes gibberish. internlm2 (base and chat) writes word salad in every cell under vLLM 0.22.1: 1,080 of 1,080 passages coded degenerate or incoherent, found by the dario seat 2026-09-24. The coded tests never counted it (`keep` drops all of it), so their lineage count was already 42; the unfiltered producers (`word_did.py`, `usas_test.py`) now drop it via `analyse_regen.BROKEN_LINEAGES`.
 
 ## What limits the finding
 
@@ -241,7 +241,7 @@ Engine facts are recorded in `roster/models/observations.json` (`engine_support.
     within_genre_test.py  the within-genre widening at lineage and dispute units, declared first
     f21_task_sample.py    F21's own annotation task on a 4,361 sample + the frontier, joined to the referral codes
     usas_test.py          USAS government/law and speech fields, no LLM in the measurement, declared first
-    word_did.py           EXPLORATORY per-word difference-in-differences, BH over 1,531 words
+    word_did.py           EXPLORATORY per-word difference-in-differences, BH over 1,505 words
     by_dispute.py         EXPLORATORY the four contrasts per dispute, grouped by domain, with the frontier
     frontier_generate.py  API passages (Sonnet 4.6, Haiku 4.5, GPT-4o-mini, DeepSeek) into the generation stash
     frontier_code.py      codes them; the endpoint contrast, declared before coding
