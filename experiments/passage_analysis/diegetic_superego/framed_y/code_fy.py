@@ -54,8 +54,17 @@ def cells():
     return out
 
 
-def framed_pool(model, mode, C):
-    """{(frame, pid, word): {i: (text, n_new_tokens, finish)}} for the model's declared system mode."""
+THINK = ("<think>", "</think>")
+
+
+def framed_pool(model, mode, C, no_think=None):
+    """{(frame, pid, word): {i: (text, n_new_tokens, finish)}} for the model's declared system mode.
+
+    THINKING OFF (RH, 2026-09-24): for the three models in `population.NO_THINK`
+    only the passages generated with that switch are read (`template_kwargs` /
+    `assistant_prefix` are in the key); for every other model, only passages
+    generated with neither."""
+    nt = no_think or {}
     from malignment.checkpoint import Checkpoint
     want = {"prefill_sys" + mode: "prefill", "chat_sys" + mode: "continue"}
     got = collections.defaultdict(dict)
@@ -68,6 +77,9 @@ def framed_pool(model, mode, C):
             if d.get("max_new_tokens") != FULL or d.get("temperature") != 1.0 or d.get("top_p") != 1.0:
                 continue
             if k.get("seed") != 42 + (k.get("sample_idx") or 0):
+                continue
+            if (k.get("template_kwargs") or None) != nt.get("template_kwargs") or \
+                    (k.get("assistant_prefix") or "") != nt.get("assistant_prefix", ""):
                 continue
             p = k.get("prompt") or ""
             if fr == "prefill":
@@ -110,10 +122,12 @@ def draw(model, pool, keys, strata):
     rows, pools = [], []
     for fr, pid, w in sorted(keys, key=lambda x: (x[0], x[1], x[2] or "")):
         P = pool[(fr, pid, w)]
-        A = sorted(i for i, t in P.items() if t[1] >= FULL)
-        B = sorted(i for i, t in P.items() if MIN_B <= t[1] < FULL)
-        pools.append({"model": model, "frame": fr, "prompt_id": pid, "word": w,
-                      "n_A": len(A), "n_B": len(B), "n_short": N_GEN - len(A) - len(B)})
+        #: a passage carrying a think marker is never coded, whatever the model (RH)
+        think = {i for i, t in P.items() if any(x in t[0] for x in THINK)}
+        A = sorted(i for i, t in P.items() if t[1] >= FULL and i not in think)
+        B = sorted(i for i, t in P.items() if MIN_B <= t[1] < FULL and i not in think)
+        pools.append({"model": model, "frame": fr, "prompt_id": pid, "word": w, "n_A": len(A), "n_B": len(B),
+                      "n_think": len(think), "n_short": N_GEN - len(A) - len(B) - len(think)})
         rng = random.Random("%d|%s|%s|%s|%s" % (SEED, model, fr, pid, w or ""))
         for stratum, elig in (("A", A), ("B", B)):
             pick = sorted(rng.sample(elig, min(N, len(elig))))
@@ -158,11 +172,11 @@ def main():
             p = json.loads(l)
             old_pools[(p["model"], p["frame"], p["prompt_id"], p["word"])] = p
     todo, new_pools = [], []
-    print("%-44s %-8s %6s %6s %6s %6s %6s" % ("model", "mode", "cond", "A", "B", "short", "todo"))
+    print("%-44s %-8s %6s %6s %6s %6s %6s %6s" % ("model", "mode", "cond", "A", "B", "short", "think", "todo"))
     ckeys = sorted({c[:2] for c in C.values()}, key=lambda x: (x[0], x[1] or ""))
     for r in pop:
         m, mode = r["model"], r["system_mode"]
-        fp = framed_pool(m, mode, C)
+        fp = framed_pool(m, mode, C, r.get("no_think"))
         got = draw(m, fp, [(f, p, w) for f in ("prefill", "continue") for p, w in ckeys], ("A", "B"))
         if got is None:
             print("%-44s %-8s %6d  (incomplete: %d of 68 conditions have 50)" % (m, mode, len(fp), sum(len(v) == N_GEN for v in fp.values())))
@@ -178,9 +192,9 @@ def main():
         new_pools += pools
         t = [x for x in rows if x["sid"] not in done]
         fr = collections.Counter(p["frame"] for p in pools)
-        print("%-44s %-8s %6d %6d %6d %6d %6d" % (m, mode, sum(fr.values()), sum(p["n_A"] for p in pools if p["frame"] != "raw"),
-                                                  sum(p["n_B"] for p in pools if p["frame"] != "raw"),
-                                                  sum(p["n_short"] for p in pools if p["frame"] != "raw"), len(t)))
+        fx = [p for p in pools if p["frame"] != "raw"]
+        print("%-44s %-8s %6d %6d %6d %6d %6d %6d" % (m, mode, sum(fr.values()), sum(p["n_A"] for p in fx), sum(p["n_B"] for p in fx),
+                                                      sum(p["n_short"] for p in fx), sum(p["n_think"] for p in pools), len(t)))
         todo += t
     print("to code: %d" % len(todo))
     if not a.run:

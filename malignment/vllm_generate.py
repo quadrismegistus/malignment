@@ -219,6 +219,8 @@ def load_prompts(path):
                     "prefill": bool(d.get("prefill", False)),
                     "user_msg": d.get("user_msg", "Hi."),
                     "chat": bool(d.get("chat", False)),
+                    "template_kwargs": d.get("template_kwargs") or None,
+                    "assistant_prefix": d.get("assistant_prefix") or "",
                 })
             else:
                 conditions.append({
@@ -236,7 +238,8 @@ class SystemIgnored(ValueError):
     """The template renders a supplied system message byte-identically to none."""
 
 
-def render_templated(htok, prompt, system, prefill, user_msg):
+def render_templated(htok, prompt, system, prefill, user_msg, template_kwargs=None,
+                     assistant_prefix=""):
     """The chat-template render for one condition, WITHOUT the prefilled stem. -> str
 
     **AN EMPTY SYSTEM MESSAGE IS A SYSTEM MESSAGE.** This used to read
@@ -253,16 +256,23 @@ def render_templated(htok, prompt, system, prefill, user_msg):
     phi-4-reasoning and others render `""` identically; gemma-2 raises on any
     system role.
     """
+    #: THINKING OFF (2026-09-24, RH: "dont have thinking tokens in the passages").
+    #: `template_kwargs` reaches apply_chat_template -- {"enable_thinking": False} is
+    #: the vendor's own switch on Qwen3 and SmolLM3, and it appends an EMPTY
+    #: `<think></think>` to the assistant turn. `assistant_prefix` is text placed at
+    #: the start of the assistant turn, before any prefilled stem: the same empty
+    #: block, for a template with no switch (phi-4-reasoning). Both are in the KEY.
+    #:
     #: prefill: turns UP TO the assistant, then the stem AFTER, keeping the turn
     #: OPEN (an assistant message would close it).
+    kw = dict(tokenize=False, add_generation_prompt=True, **(template_kwargs or {}))
     turn = [{"role": "user", "content": (user_msg or "") if prefill else prompt}]
     if system is DEFAULT:
-        return htok.apply_chat_template(turn, tokenize=False, add_generation_prompt=True)
-    out = htok.apply_chat_template([{"role": "system", "content": system}] + turn,
-                                   tokenize=False, add_generation_prompt=True)
-    if out == htok.apply_chat_template(turn, tokenize=False, add_generation_prompt=True):
+        return htok.apply_chat_template(turn, **kw) + (assistant_prefix or "")
+    out = htok.apply_chat_template([{"role": "system", "content": system}] + turn, **kw)
+    if out == htok.apply_chat_template(turn, **kw):
         raise SystemIgnored("template renders system=%r byte-identically to none" % system)
-    return out
+    return out + (assistant_prefix or "")
 
 
 def _resolve_system(s):
@@ -367,6 +377,11 @@ def generate_model(model_id, conditions, n=10, seed=42, decoder=None,
                      #: never be served by (or overwrite) one from the old
                      #: string path, whose templated prompts carried two BOS.
                      render="ids_v2")
+            #: only when set, so no existing key changes
+            if cond.get("template_kwargs"):
+                k["template_kwargs"] = cond["template_kwargs"]
+            if cond.get("assistant_prefix"):
+                k["assistant_prefix"] = cond["assistant_prefix"]
             already = False
             for st in existing_stashes:
                 try:
@@ -417,7 +432,8 @@ def generate_model(model_id, conditions, n=10, seed=42, decoder=None,
         templated = bool(system is not DEFAULT or prefill or user or cond.get("chat"))
         if templated:
             try:
-                rendered = render_templated(htok, prompt, system, prefill, user_msg)
+                rendered = render_templated(htok, prompt, system, prefill, user_msg,
+                                            cond.get("template_kwargs"), cond.get("assistant_prefix"))
             except Exception as e:
                 n_refused += 1
                 if n_refused == 1:
@@ -488,7 +504,12 @@ def generate_model(model_id, conditions, n=10, seed=42, decoder=None,
             engine_version=vv,
             render="ids_v2", dtype=dtype, revision=ck.revision,
         )
-        stash[k] = p._asdict()
+        rec = p._asdict()
+        if cond.get("template_kwargs"):
+            rec["template_kwargs"] = cond["template_kwargs"]
+        if cond.get("assistant_prefix"):
+            rec["assistant_prefix"] = cond["assistant_prefix"]
+        stash[k] = rec
         n_written += 1
 
     _free_llm(llm, model_id=model_id)

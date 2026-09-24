@@ -1,0 +1,3 @@
+Qwen/Qwen3-8B experiments/passage_analysis/diegetic_superego/framed_y/prompts/nothink_Qwen3-8B.jsonl float16
+HuggingFaceTB/SmolLM3-3B experiments/passage_analysis/diegetic_superego/framed_y/prompts/nothink_SmolLM3-3B.jsonl float16
+microsoft/phi-4-reasoning experiments/passage_analysis/diegetic_superego/framed_y/prompts/nothink_phi-4-reasoning.jsonl float16

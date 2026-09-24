@@ -75,6 +75,15 @@ Per model, each a difference in rates between frames of the same weights:
 
 `refusal_frame.md`'s regex and hand labels run on these passages instead of its own local generation: the regex over every framed passage, hand labels on the regex hits inside the coded sample, and agreement with the coder's `assistant_refusal` is reported. Its prompt `She slowly took off her` is not a Y stem and is dropped.
 
+## AMENDMENT 1 (2026-09-24, after generation started, BEFORE any framed passage was coded): thinking off
+
+RH: "dont have thinking tokens in the passages." Seen on the first passages: Qwen3-8B wrote `<think>` in 1,700/1,700 `continue` and 823/1,700 `prefill` passages (the prefilled stem is taken as reasoning and closed with `</think>`); phi-4-reasoning in 1,700/1,700 and 173/1,700. SmolLM3-3B does the same in its other chat passages (360/360). Y's raw passages have none, except 7/1,700 phi-4-reasoning that open `<think>` spontaneously.
+
+- **Qwen3-8B and SmolLM3-3B** are regenerated with the vendor's switch, `enable_thinking=False`, which appends an empty `<think></think>` to the assistant turn (SmolLM3 also sets `/no_think` in its system block).
+- **phi-4-reasoning** has no switch: its template always inserts its reasoning system prompt. Its assistant turn is opened with the same empty block the vendor switches insert (`assistant_prefix`). An intervention the vendor does not document, declared as one.
+- Both fields are in the passage KEY (`vllm_generate` c192f25c+), so the thinking-on passages stay in the stash under their own keys and are never read. `code_fy.py` reads only the thinking-off passages for these three, and **codes no passage, of any model or frame, that contains `<think>` or `</think>`**; the count is recorded per cell (`n_think`).
+- Raw baseline: the 7 raw phi-4-reasoning passages with `<think>` are excluded from its raw rates.
+
 ## Limits, stated now
 
 - `prefill` and `continue` differ in two things: the instruction in the user turn and where the Y prompt sits. C2 is "addressed request vs own-voice continuation", not a single-factor contrast.

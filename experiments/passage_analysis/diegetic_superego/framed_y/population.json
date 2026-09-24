@@ -9,7 +9,8 @@
    "why": "empty renders byte-identical to default",
    "twp_modes": [
     "default"
-   ]
+   ],
+   "no_think": null
   },
   {
    "model": "BSC-LT/salamandra-7b-instruct",
@@ -19,7 +20,8 @@
    "why": "renders differ",
    "twp_modes": [
     "empty"
-   ]
+   ],
+   "no_think": null
   },
   {
    "model": "ContextualAI/archangel_sft-dpo_pythia2-8b",
@@ -29,7 +31,8 @@
    "why": "empty renders byte-identical to default",
    "twp_modes": [
     "default"
-   ]
+   ],
+   "no_think": null
   },
   {
    "model": "HuggingFaceTB/SmolLM2-360M-Instruct",
@@ -39,7 +42,8 @@
    "why": "renders differ",
    "twp_modes": [
     "empty"
-   ]
+   ],
+   "no_think": null
   },
   {
    "model": "HuggingFaceTB/SmolLM3-3B",
@@ -49,7 +53,13 @@
    "why": "empty renders byte-identical to default",
    "twp_modes": [
     "default"
-   ]
+   ],
+   "no_think": {
+    "template_kwargs": {
+     "enable_thinking": false
+    }
+   },
+   "prompts": "prompts/nothink_SmolLM3-3B.jsonl"
   },
   {
    "model": "LLM360/AmberSafe",
@@ -59,7 +69,8 @@
    "why": "empty renders byte-identical to default",
    "twp_modes": [
     "default"
-   ]
+   ],
+   "no_think": null
   },
   {
    "model": "OpenLLM-France/Lucie-7B-Instruct-v1.1",
@@ -69,7 +80,8 @@
    "why": "renders differ",
    "twp_modes": [
     "empty"
-   ]
+   ],
+   "no_think": null
   },
   {
    "model": "PKU-Alignment/beaver-7b-v1.0",
@@ -80,7 +92,8 @@
    "twp_modes": [
     "empty",
     "default"
-   ]
+   ],
+   "no_think": null
   },
   {
    "model": "Qwen/Qwen2.5-0.5B-Instruct",
@@ -90,7 +103,8 @@
    "why": "renders differ",
    "twp_modes": [
     "empty"
-   ]
+   ],
+   "no_think": null
   },
   {
    "model": "Qwen/Qwen2.5-7B-Instruct",
@@ -100,7 +114,8 @@
    "why": "renders differ",
    "twp_modes": [
     "empty"
-   ]
+   ],
+   "no_think": null
   },
   {
    "model": "Qwen/Qwen3-8B",
@@ -110,7 +125,13 @@
    "why": "renders differ",
    "twp_modes": [
     "empty"
-   ]
+   ],
+   "no_think": {
+    "template_kwargs": {
+     "enable_thinking": false
+    }
+   },
+   "prompts": "prompts/nothink_Qwen3-8B.jsonl"
   },
   {
    "model": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
@@ -120,7 +141,8 @@
    "why": "renders differ",
    "twp_modes": [
     "empty"
-   ]
+   ],
+   "no_think": null
   },
   {
    "model": "allenai/Llama-3.1-Tulu-3-8B-DPO",
@@ -130,7 +152,8 @@
    "why": "renders differ",
    "twp_modes": [
     "empty"
-   ]
+   ],
+   "no_think": null
   },
   {
    "model": "allenai/Llama-3.1-Tulu-3-8B-SFT",
@@ -140,7 +163,8 @@
    "why": "renders differ",
    "twp_modes": [
     "empty"
-   ]
+   ],
+   "no_think": null
   },
   {
    "model": "allenai/OLMo-2-0425-1B-DPO",
@@ -150,7 +174,8 @@
    "why": "renders differ",
    "twp_modes": [
     "empty"
-   ]
+   ],
+   "no_think": null
   },
   {
    "model": "allenai/OLMo-2-0425-1B-Instruct",
@@ -160,7 +185,8 @@
    "why": "renders differ",
    "twp_modes": [
     "empty"
-   ]
+   ],
+   "no_think": null
   },
   {
    "model": "allenai/OLMo-2-0425-1B-SFT",
@@ -170,7 +196,8 @@
    "why": "renders differ",
    "twp_modes": [
     "empty"
-   ]
+   ],
+   "no_think": null
   },
   {
    "model": "allenai/OLMoE-1B-7B-0125-DPO",
@@ -180,7 +207,8 @@
    "why": "renders differ",
    "twp_modes": [
     "empty"
-   ]
+   ],
+   "no_think": null
   },
   {
    "model": "allenai/OLMoE-1B-7B-0125-Instruct",
@@ -190,7 +218,8 @@
    "why": "renders differ",
    "twp_modes": [
     "empty"
-   ]
+   ],
+   "no_think": null
   },
   {
    "model": "allenai/OLMoE-1B-7B-0125-SFT",
@@ -200,7 +229,8 @@
    "why": "renders differ",
    "twp_modes": [
     "empty"
-   ]
+   ],
+   "no_think": null
   },
   {
    "model": "allenai/Olmo-3-7B-Instruct",
@@ -210,7 +240,8 @@
    "why": "renders differ",
    "twp_modes": [
     "empty"
-   ]
+   ],
+   "no_think": null
   },
   {
    "model": "allenai/Olmo-3-7B-Instruct-DPO",
@@ -220,7 +251,8 @@
    "why": "renders differ",
    "twp_modes": [
     "empty"
-   ]
+   ],
+   "no_think": null
   },
   {
    "model": "allenai/Olmo-3-7B-Instruct-SFT",
@@ -230,7 +262,8 @@
    "why": "renders differ",
    "twp_modes": [
     "empty"
-   ]
+   ],
+   "no_think": null
   },
   {
    "model": "baichuan-inc/Baichuan2-7B-Chat",
@@ -240,7 +273,8 @@
    "why": "empty renders byte-identical to default",
    "twp_modes": [
     "default"
-   ]
+   ],
+   "no_think": null
   },
   {
    "model": "google/gemma-2-9b-it",
@@ -250,7 +284,8 @@
    "why": "system role refused: System role not supported",
    "twp_modes": [
     "default"
-   ]
+   ],
+   "no_think": null
   },
   {
    "model": "inceptionai/jais-family-6p7b-chat",
@@ -260,7 +295,8 @@
    "why": "renders differ",
    "twp_modes": [
     "empty"
-   ]
+   ],
+   "no_think": null
   },
   {
    "model": "llm-jp/llm-jp-3-7.2b-instruct3",
@@ -270,7 +306,8 @@
    "why": "renders differ",
    "twp_modes": [
     "empty"
-   ]
+   ],
+   "no_think": null
   },
   {
    "model": "lomahony/eleuther-pythia6.9b-hh-dpo",
@@ -280,7 +317,8 @@
    "why": "empty renders byte-identical to default",
    "twp_modes": [
     "default"
-   ]
+   ],
+   "no_think": null
   },
   {
    "model": "m-a-p/neo_7b_instruct_v0.1",
@@ -290,7 +328,8 @@
    "why": "renders differ",
    "twp_modes": [
     "empty"
-   ]
+   ],
+   "no_think": null
   },
   {
    "model": "m-a-p/neo_7b_sft_v0.1",
@@ -300,7 +339,8 @@
    "why": "renders differ",
    "twp_modes": [
     "empty"
-   ]
+   ],
+   "no_think": null
   },
   {
    "model": "meta-llama/Llama-3.1-8B-Instruct",
@@ -310,7 +350,8 @@
    "why": "empty renders byte-identical to default",
    "twp_modes": [
     "default"
-   ]
+   ],
+   "no_think": null
   },
   {
    "model": "microsoft/phi-4-reasoning",
@@ -318,7 +359,11 @@
    "template": "tokenizer",
    "system_mode": "default",
    "why": "empty renders byte-identical to default",
-   "twp_modes": []
+   "twp_modes": [],
+   "no_think": {
+    "assistant_prefix": "<think>\n\n</think>\n\n"
+   },
+   "prompts": "prompts/nothink_phi-4-reasoning.jsonl"
   },
   {
    "model": "openbmb/MiniCPM5-1B",
@@ -328,7 +373,8 @@
    "why": "renders differ",
    "twp_modes": [
     "empty"
-   ]
+   ],
+   "no_think": null
   },
   {
    "model": "stabilityai/stablelm-2-zephyr-1_6b",
@@ -338,7 +384,8 @@
    "why": "renders differ",
    "twp_modes": [
     "empty"
-   ]
+   ],
+   "no_think": null
   },
   {
    "model": "tiiuae/Falcon3-10B-Instruct",
@@ -346,7 +393,8 @@
    "template": "tokenizer",
    "system_mode": "empty",
    "why": "renders differ",
-   "twp_modes": []
+   "twp_modes": [],
+   "no_think": null
   },
   {
    "model": "tiiuae/Falcon3-1B-Instruct",
@@ -354,7 +402,8 @@
    "template": "tokenizer",
    "system_mode": "empty",
    "why": "renders differ",
-   "twp_modes": []
+   "twp_modes": [],
+   "no_think": null
   },
   {
    "model": "tiiuae/Falcon3-3B-Instruct",
@@ -362,7 +411,8 @@
    "template": "tokenizer",
    "system_mode": "empty",
    "why": "renders differ",
-   "twp_modes": []
+   "twp_modes": [],
+   "no_think": null
   },
   {
    "model": "tiiuae/Falcon3-7B-Instruct",
@@ -372,7 +422,8 @@
    "why": "renders differ",
    "twp_modes": [
     "empty"
-   ]
+   ],
+   "no_think": null
   },
   {
    "model": "tiiuae/Falcon3-Mamba-7B-Instruct",
@@ -380,7 +431,8 @@
    "template": "tokenizer",
    "system_mode": "empty",
    "why": "renders differ",
-   "twp_modes": []
+   "twp_modes": [],
+   "no_think": null
   },
   {
    "model": "tiiuae/falcon-mamba-7b-instruct",
@@ -390,7 +442,8 @@
    "why": "renders differ",
    "twp_modes": [
     "empty"
-   ]
+   ],
+   "no_think": null
   },
   {
    "model": "togethercomputer/RedPajama-INCITE-7B-Chat",
@@ -400,7 +453,8 @@
    "why": "empty renders byte-identical to default",
    "twp_modes": [
     "default"
-   ]
+   ],
+   "no_think": null
   }
  ],
  "dropped_no_template": [

@@ -42,3 +42,16 @@ def test_prefill_puts_hi_in_the_user_turn_and_leaves_the_stem_out():
     t = tok("Qwen/Qwen2.5-0.5B-Instruct")
     e = render_templated(t, STEM, "", True, "Hi.")
     assert "Hi." in e and STEM not in e and e.rstrip().endswith("assistant")
+
+
+def test_thinking_off_by_the_vendor_switch():
+    t = tok("Qwen/Qwen3-8B")
+    on = render_templated(t, STEM, "", True, "Hi.")
+    off = render_templated(t, STEM, "", True, "Hi.", {"enable_thinking": False})
+    assert "<think>" not in on and off.endswith("<think>\n\n</think>\n\n")
+
+
+def test_thinking_off_by_prefix_where_the_template_has_no_switch():
+    t = tok("microsoft/phi-4-reasoning")
+    off = render_templated(t, STEM, DEFAULT, False, "Hi.", {"enable_thinking": False}, "<think>\n\n</think>\n\n")
+    assert off.endswith("<|im_start|>assistant<|im_sep|><think>\n\n</think>\n\n")
