@@ -9,29 +9,29 @@ Corpus: experiments/passage_analysis/institution_vs_individual, the 256-token re
 Base model raw, aligned model in chat. No LLM in the measurement or the selection: passage text
 only, lower-cased [a-z']+ tokens. Producer word_did.py; table results/word_did.md; this plate plot.py.
 
-SELECTION RULE. Of the 1505 words in at least 300 passages, those whose per-lineage difference-in-
+SELECTION RULE. Of the 1507 words in at least 300 passages, those whose per-lineage difference-in-
 differences (individual change minus institution change) survives a sign test over lineages under
-Benjamini-Hochberg across all 1505 words AND a sign test over the 18 disputes at p < 0.05 (259 words).
+Benjamini-Hochberg across all 1507 words AND a sign test over the 18 disputes at p < 0.05 (265 words).
 Closed-class words removed (pronouns, determiners, modals and auxiliaries, prepositions,
 conjunctions, negation, quantifier and degree adverbs; full list in plot.py STOP). Then the top 8
 by median DiD (gains more for the individual) and the bottom 4 (gains more for the institution).
 Within each panel, rows are ordered by how far right the row's farthest arrow end reaches.
-Largest movers removed as closed-class: their, my, your, can, i, me, may, out, you, had, from, if.
+Largest movers removed as closed-class: their, my, your, may, can, i, out, me, you, or, from, had.
 
 EXPLORATORY: many words tested, nothing declared in advance.
 
 word         ind base ind alig   ins base ins alig    med DiD   lineages   disputes
-consider        0.048    0.409      0.053    0.297     +0.108    33/6       18/0   
-contact         0.059    0.369      0.060    0.095     +0.292    41/1       18/0   
-request         0.041    0.263      0.052    0.134     +0.117    34/8       16/2   
-seek            0.018    0.224      0.017    0.085     +0.136    39/2       17/1   
-rights          0.047    0.219      0.038    0.079     +0.139    40/2       15/3   
-local           0.045    0.184      0.038    0.085     +0.103    38/3       16/2   
-department      0.040    0.158      0.053    0.069     +0.092    37/4       15/3   
-file            0.053    0.153      0.043    0.031     +0.094    41/1       17/0   
-concerns        0.020    0.167      0.046    0.363     -0.175     1/41       2/16  
-ensure          0.027    0.162      0.046    0.298     -0.125     4/37       2/16  
-offer           0.037    0.107      0.056    0.259     -0.117     4/38       3/14  
-listen          0.007    0.005      0.022    0.210     -0.189     0/42       1/17  
+consider        0.048    0.412      0.053    0.293     +0.122    35/5       18/0   
+contact         0.059    0.380      0.060    0.097     +0.300    41/1       18/0   
+request         0.041    0.276      0.052    0.133     +0.128    35/7       16/2   
+seek            0.018    0.234      0.017    0.086     +0.142    39/2       17/1   
+rights          0.047    0.219      0.038    0.078     +0.139    40/2       15/3   
+local           0.045    0.186      0.038    0.087     +0.097    38/3       16/2   
+department      0.040    0.163      0.053    0.069     +0.097    39/2       15/3   
+file            0.053    0.157      0.043    0.033     +0.097    42/0       17/1   
+concerns        0.020    0.175      0.046    0.367     -0.172     2/40       3/15  
+ensure          0.027    0.171      0.046    0.313     -0.131     3/38       2/16  
+listen          0.007    0.005      0.022    0.222     -0.211     0/42       1/17  
+acknowledge     0.006    0.017      0.014    0.217     -0.158     4/37       3/15  
 
 Lineages and disputes: counts with DiD > 0 / DiD < 0 (ties omitted). Shares are proportions (0.36 = 36%).
