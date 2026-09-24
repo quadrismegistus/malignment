@@ -160,6 +160,29 @@ def save(plot, out_path, dpi=300, height=None):
     return out
 
 
+def ink(hexcol):
+    """Percent ink of a NEUTRAL gray: 0 is white, 100 is black. Refuses a hue."""
+    v = [int(hexcol.lstrip("#")[i:i + 2], 16) for i in (0, 2, 4)]
+    assert max(v) - min(v) <= 2, "%s is not a neutral gray" % hexcol
+    return round(100 * (1 - sum(v) / 3 / 255))
+
+
+def check_halftones(tones):
+    """Critical Inquiry's halftone rule over the grays a figure ACTUALLY uses.
+
+    Every halftone between 20% and 80% ink (solid black is line art, exempt;
+    white is paper), and any two tones used at least 20 points apart. Takes
+    {name: hex}; raises naming the offender. Pass only the tones drawn -- the
+    ramp as a whole is not the question, the plate is.
+    """
+    k = {n: ink(c) for n, c in tones.items()}
+    for n, v in k.items():
+        assert v in (0, 100) or 20 <= v <= 80, "%s at %d%% ink is outside 20-80" % (n, v)
+    vals = sorted(set(k.values()))
+    for a, b in zip(vals, vals[1:]):
+        assert b - a >= 20, "tones at %d%% and %d%% ink are under 20 points apart" % (a, b)
+
+
 def pub_theme(height=None, grid="y"):
     """`theme_minimal()` plus the journal's rules. -> a plotnine theme
 

@@ -351,25 +351,6 @@ def _xmax(labels, size_pt, fig_w, pub, nudge=0.05, xmin=-0.1):
 COMPOSITES = {"SUPEREGO_IN_SCENE", "CLEAN_SCENE"}
 
 
-def _ink(hexcol):
-    """Percent ink of a neutral gray: 0 white, 100 black."""
-    v = [int(hexcol.lstrip("#")[i:i + 2], 16) for i in (0, 2, 4)]
-    assert max(v) - min(v) <= 2, "%s is not a neutral gray" % hexcol
-    return round(100 * (1 - sum(v) / 3 / 255))
-
-
-def _halftone_ok(tones):
-    """Critical Inquiry's rule for the grays a figure actually uses: every
-    halftone between 20% and 80% ink (solid black is line art and exempt), and
-    any two tones at least 20 points apart."""
-    ink = {k: _ink(c) for k, c in tones.items()}
-    for k, v in ink.items():
-        assert v == 100 or 20 <= v <= 80, "%s at %d%% ink is outside 20-80" % (k, v)
-    vals = sorted(ink.values())
-    for a, b in zip(vals, vals[1:]):
-        assert b - a >= 20, "tones %d%% and %d%% are under 20 points apart" % (a, b)
-
-
 def draw_ci(panel, name, title, pub=False, drop=(), note=""):
     import matplotlib
     matplotlib.use("Agg")
@@ -406,7 +387,7 @@ def draw_ci(panel, name, title, pub=False, drop=(), note=""):
         #: carries them in the journal render
         ends["txt"] = [w.split(" (")[0] for w in ends.word]
         COL = {"composite": F.PUB_INK, "component": F.PUB_MID, "flat": F.PUB_GRAY}
-        _halftone_ok({k: COL[k] for k in set(lev.dir)})
+        F.check_halftones({k: COL[k] for k in set(lev.dir)})   # malignment.figure
     else:
         ends["txt"] = ["%s  %+.1f [%+.1f, %+.1f]" % (w, d_, lo, hi) for w, d_, lo, hi
                        in zip(ends.word, ends.d, ends.lo_d, ends.hi_d)]
