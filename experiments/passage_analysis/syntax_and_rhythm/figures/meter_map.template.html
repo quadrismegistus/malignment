@@ -87,6 +87,17 @@ th.n { text-align: right; }
     <p class="lede">Every point is a mean over 10-syllable windows cut at word boundaries, with lineation ignored, and scanned with the five constraints of the 2020 antimetricality study (s ≤ 2, w ≤ 2). <b>Uncertainty</b> is the number of viable scansions per window. <b>Tension</b> (MTS) is the sum of constraint violations across those scansions. Lower is more metrical. The first figure compares human and model prose and verse like for like. The second places every group measured so far against all the human baselines.</p>
   </header>
 
+  <section class="figure" aria-label="Alignment rewinds verse to the Augustans">
+    <h2>Alignment rewinds verse to the Augustans</h2>
+    <p class="note" style="color:var(--ink-2)">Models were given the first five lines of a real poem and asked to continue it. Each line here is metrical uncertainty (viable scansions per 10-syllable window; lower is more metrical), plotted against the period of the poem being continued (the year its author turned 30). The thick grey line is human poetry of each period from the antimetricality data; its lowest point, 1700–1749, is marked. The poets' own continuations stay near their time; for 20th-century poems they land on their own period almost exactly. The models do not. Given a modernist poem (1900–49), the base models already continue it about as regularly as a Romantic poet (1800–49), and the aligned models as regularly as a poet of the late eighteenth century (1750–99). A post-war poem comes back from base models at a modernist level and from aligned models at a Romantic one. So alignment's own contribution is a further 50 to 100 years. Given an older poem, the aligned models (the two pairs pooled) bring it to about the regularity of Augustan verse whatever its period; this holds for Llama in every period but not for Mistral, which in 1800–49 sits above its base.</p>
+    <div class="legend" id="augLegend"></div>
+    <div class="chart-box" id="augBox">
+      <svg class="chart" id="augChart" role="img" aria-label="Uncertainty of continuations by period of the poem continued; values in the table below it"></svg>
+    </div>
+    <div class="table-wrap" style="margin-top:12px"><table id="augTable"><thead><tr><th>Poems from</th><th class="n">Human poetry of that period</th><th>Poets' own continuation</th><th>Base models</th><th>Aligned models</th><th>API (Claude-3-Sonnet, DeepSeek)</th></tr></thead><tbody></tbody></table></div>
+    <p class="note">≈ gives the human period(s) whose poetry is closest in uncertainty (within 0.05). "Below any period" means more metrical than 1700–1749, the minimum since 1600. Base and aligned are the Llama-3.1-8B and Mistral-7B text/instruct pairs continuing the same 1,780 poems; the step is significant within each pair (Wilcoxon, paired by poem: p = 2e-21 and 2e-5). GPT-3.5 behaves like the poets and is not in the API column. Before 1800 the human scale is not monotonic, so for earlier poems the reading is "at the Augustan level", not a number of years.</p>
+  </section>
+
   <section class="figure" aria-label="Prose and verse, historical and model, by period">
     <h2>Prose and verse: people and models</h2>
     <p class="note" style="color:var(--ink-2)">Seven lines. The human prose curves are fiction and non-fiction from the antimetricality reparse, dated by publication year. Human verse uses only the poets' own continuations of the poems the models were asked to continue, dated by the year the author turned 30. Model verse uses only those same continuations, placed at the period of the poem being continued. Model prose has no period, so it is drawn as a level. Right-hand values are overall means.</p>
@@ -404,6 +415,61 @@ function pentPanel(svg, key, title, x1) {
     hover(el(svg, "rect", { x: 0, y: pl.y - rowH / 2, width: W, height: rowH, class: "hit" }), tipP);
   });
 }
+function augEq(v) {
+  const H = PTS.filter(p => p.group === "human_poetry");
+  const min = Math.min(...H.map(p => p.u));
+  if (v < min - 0.02) return "below any period";
+  const d = H.map(p => [p.period, Math.abs(p.u - v)]), best = Math.min(...d.map(x => x[1]));
+  return d.filter(x => x[1] <= best + 0.05).sort((a, b) => a[0] - b[0]).map(x => `${x[0]}–${String(x[0] + 49).slice(2)}`).join(" / ");
+}
+function augChart(svg) {
+  const Wd = W, Hs = 400, ml = 58, mr = 170, mt = 20, mb = 40;
+  svg.innerHTML = ""; svg.setAttribute("viewBox", `0 0 ${Wd} ${Hs}`);
+  const X0 = 1600, X1 = 2000, Y0 = 1.9, Y1 = 4.0;
+  const sx = v => ml + (v - X0) / (X1 - X0) * (Wd - ml - mr), sy = v => Hs - mb - (v - Y0) / (Y1 - Y0) * (Hs - mt - mb);
+  const C = k => css(k);
+  const g = el(svg, "g", { class: "axis" });
+  for (let x = 1600; x <= 2000; x += 50) { el(svg, "line", { x1: sx(x), x2: sx(x), y1: mt, y2: Hs - mb, class: "gridline" }, g); if (x % 100 === 0) { const t = el(svg, "text", { x: sx(x), y: Hs - mb + 18, "text-anchor": "middle" }, g); t.textContent = x; } }
+  for (let y = 2.0; y <= Y1 + 1e-9; y += 0.5) { el(svg, "line", { x1: ml, x2: Wd - mr, y1: sy(y), y2: sy(y), class: "gridline" }, g); const t = el(svg, "text", { x: ml - 10, y: sy(y) + 4, "text-anchor": "end" }, g); t.textContent = y.toFixed(1); }
+  const Hp = PTS.filter(p => p.group === "human_poetry").sort((a, b) => a.period - b.period);
+  const minP = Hp.reduce((a, b) => (a.u < b.u ? a : b));
+  el(svg, "line", { x1: ml, x2: Wd - mr, y1: sy(minP.u), y2: sy(minP.u), stroke: C("--ink-3"), "stroke-width": 1, "stroke-dasharray": "4 4" });
+  const al = el(svg, "text", { x: ml + 6, y: sy(minP.u) + 14, class: "plabel" }); al.textContent = `Augustan minimum, 1700–49 (${minP.u.toFixed(2)})`;
+  const labs = [];
+  const series = [
+    [Hp, "--human", "human", "Human poetry of the period"],
+    [PTS.filter(p => p.group === "verse_period" && p.arm === "human"), "--human-2", "poets", "Poets' own continuations"],
+    [PTS.filter(p => p.group === "verse_period" && p.arm === "base"), "--verse", "base", "Base models"],
+    [PTS.filter(p => p.group === "verse_period" && p.arm === "aligned"), "--verse", "aligned", "Aligned models"],
+    [PTS.filter(p => p.group === "verse_period" && p.arm === "api"), "--prompt", "api", "API (Claude, DeepSeek)"],
+  ];
+  for (const [ps0, v, kind, name] of series) {
+    const ps = ps0.slice().sort((a, b) => a.period - b.period); if (!ps.length) continue;
+    const col = C(v), sw = kind === "human" ? 3 : kind === "aligned" || kind === "api" ? 2.6 : 1.8, dash = kind === "base" ? "6 4" : kind === "poets" ? "2 3" : "";
+    el(svg, "polyline", { points: ps.map(p => `${sx(p.period + 25)},${sy(p.u)}`).join(" "), fill: "none", stroke: col, "stroke-width": sw, "stroke-dasharray": dash });
+    ps.forEach(p => {
+      if (kind === "human" || kind === "poets") el(svg, "rect", { x: sx(p.period + 25) - 3.5, y: sy(p.u) - 3.5, width: 7, height: 7, fill: col });
+      else el(svg, "circle", { cx: sx(p.period + 25), cy: sy(p.u), r: 4.5, fill: kind === "base" ? C("--panel") : col, stroke: col, "stroke-width": 1.8 });
+      hover(el(svg, "circle", { cx: sx(p.period + 25), cy: sy(p.u), r: 10, class: "hit" }), p);
+    });
+    const last = ps[ps.length - 1]; labs.push({ y: sy(last.u), text: name, p: last });
+  }
+  labs.sort((a, b) => a.y - b.y); labs[0].ly = labs[0].y;
+  for (let i = 1; i < labs.length; i++) labs[i].ly = Math.max(labs[i].y, labs[i - 1].ly + 14);
+  labs.forEach(l => { const t = el(svg, "text", { x: Wd - mr + 10, y: l.ly, class: "dlabel", "dominant-baseline": "middle" }); t.textContent = l.text; hover(t, l.p); });
+}
+function augTable() {
+  const H = Object.fromEntries(PTS.filter(p => p.group === "human_poetry").map(p => [p.period, p.u]));
+  const get = (arm, per) => PTS.find(p => p.group === "verse_period" && p.arm === arm && p.period === per);
+  const cell = p => p ? `<span class="num">${p.u.toFixed(2)}</span> <span style="color:var(--ink-3)">≈ ${augEq(p.u)}</span>` : "–";
+  document.querySelector("#augTable tbody").innerHTML = Object.keys(H).map(Number).sort((a, b) => a - b).map(per =>
+    `<tr><td>${per}–${per + 49}</td><td class="n">${H[per].toFixed(2)}</td><td>${cell(get("human", per))}</td><td>${cell(get("base", per))}</td><td><b>${cell(get("aligned", per))}</b></td><td>${cell(get("api", per))}</td></tr>`).join("");
+  document.getElementById("augLegend").innerHTML =
+    `<span><span class="sw" style="border-radius:1px;background:var(--human)"></span>human poetry of the period (thick)</span>` +
+    `<span><span class="sw" style="border-radius:1px;background:var(--human-2)"></span>the poets' own continuations (dotted)</span>` +
+    `<span><span class="sw" style="border:2px solid var(--verse);background:transparent;width:8px;height:8px"></span>base models (dashed)</span>` +
+    `<span><span class="sw" style="background:var(--verse)"></span>aligned models</span><span><span class="sw" style="background:var(--prompt)"></span>API: Claude-3-Sonnet, DeepSeek</span>`;
+}
 const ORS_COL = r => r.kind_ors === "LLM prose" ? "--prose" : r.kind_ors === "LLM verse" ? "--verse" : r.kind_ors === "LLM prompted verse" ? "--prompt" : "--human";
 const ORS_FILL = r => r.tier !== "base";
 function orsTip(r) {
@@ -470,6 +536,7 @@ function orsRows(svg, key) {
   });
 }
 function draw() {
+  augChart(document.getElementById("augChart"));
   orsScatter(document.getElementById("orsScatter"));
   orsRows(document.getElementById("orsRows"), document.getElementById("orsKey").value);
   pentPanel(document.getElementById("pentU"), "uip", "Unambiguous iambic pentameter (uIP), % of windows", 36);
@@ -513,5 +580,5 @@ document.getElementById("orsLegend").innerHTML =
 ["showPilot", "showNonfic", "orsKey"].forEach(id => document.getElementById(id).addEventListener("change", draw));
 matchMedia("(prefers-color-scheme: dark)").addEventListener("change", draw);
 new MutationObserver(draw).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
-leadLegend(); legend(); draw(); table();
+augTable(); leadLegend(); legend(); draw(); table();
 </script>

@@ -192,6 +192,13 @@ def points():
                         label="Verse continuations by %s: authors turning 30 in %d–%d" % (AR[arm][0], per, per + 49),
                         source="generative-formalism completions (Llama-3.1-8B + Mistral-7B pairs; poets = line_real)",
                         **summ(g, "poem_id")))
+    # API models that rewind (Claude-3-Sonnet, DeepSeek) by source period; GPT-3.5 behaves like the poets
+    Capi = V[V.model.isin(["claude-3-sonnet-20240229", "deepseek/deepseek-chat"])].merge(
+        meta.rename(columns={"id": "poem_id"})[["poem_id", "p30"]], on="poem_id", how="left")
+    for per, g in Capi[Capi.p30 < LAST].groupby("p30"):
+        pts.append(dict(group="verse_period", period=int(per), arm="api",
+                        label="Verse continuations by API models (Claude-3-Sonnet, DeepSeek): authors turning 30 in %d–%d" % (per, per + 49),
+                        source="generative-formalism completions (Claude-3-Sonnet + DeepSeek-chat)", **summ(g, "poem_id")))
     for arm, g in C.groupby("arm"):
         pts.append(dict(group="verse_overall", arm=AR[arm][1], label="Verse continuations by %s, 1600–1999" % AR[arm][0],
                         source="generative-formalism completions (Llama-3.1-8B + Mistral-7B pairs)", **summ(g, "poem_id")))

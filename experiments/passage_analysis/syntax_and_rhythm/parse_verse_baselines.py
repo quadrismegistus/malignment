@@ -77,6 +77,20 @@ def tier_poems():
     return out
 
 
+def primers():
+    """-> one rec per completed poem: the first 5 lines every model was shown (the rows with no
+    line_gen, identical across models), so continuations can be scored as deltas from their primer."""
+    c = pd.read_csv(os.path.join(GENFORM, "genai_rhyme_completions.csv.gz"), low_memory=False)
+    p = c[c.line_gen.isna()].drop_duplicates(["id_human", "stanza_num", "line_num"])
+    out = []
+    for pid, g in p.groupby("id_human"):
+        g = g.sort_values(["stanza_num", "line_num"]).head(5)
+        out.append(dict(source="genai_primer", model="primer", arm="primer", poem_id=pid, group="primer",
+                        text="\n".join(g.line_real.fillna("").astype(str))))
+    random.Random(SEED).shuffle(out)
+    return out
+
+
 def prompted_all():
     """-> recs for EVERY prompted poem (--prompted-all fills in what the per-cell sample left out).
     group = prompt_type (DO_rhyme / MAYBE_rhyme / do_NOT_rhyme); the prompt text itself is
@@ -166,8 +180,13 @@ def main(argv=None):
                          "the poets') and every prompted poem, skipping any already there")
     ap.add_argument("--prompted-all", action="store_true",
                     help="APPEND every prompted poem not yet parsed (the default run samples --per-cell)")
+    ap.add_argument("--primers", action="store_true",
+                    help="APPEND the 5-line primer of every completed poem (source genai_primer)")
     a = ap.parse_args(argv)
-    if a.prompted_all:
+    if a.primers:
+        a.tiers = True                                   # same append-and-skip path as --tiers
+        recs = primers()
+    elif a.prompted_all:
         a.tiers = True                                   # same append-and-skip path as --tiers
         recs = prompted_all()
     elif a.scramble:
