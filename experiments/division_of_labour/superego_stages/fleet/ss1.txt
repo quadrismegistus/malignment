@@ -1,0 +1,5 @@
+lomahony/eleuther-pythia6.9b-hh-sft experiments/division_of_labour/superego_stages/prompts/y_cells.jsonl float16
+allenai/OLMo-2-0425-1B-Instruct experiments/division_of_labour/superego_stages/prompts/y_cells.jsonl float16
+allenai/Olmo-3-7B-Instruct-SFT experiments/division_of_labour/superego_stages/prompts/y_cells.jsonl float16
+m-a-p/neo_7b_sft_v0.1 experiments/division_of_labour/superego_stages/prompts/y_cells.jsonl float16
+PKU-Alignment/alpaca-7b-reproduced experiments/division_of_labour/superego_stages/prompts/y_cells.jsonl float16

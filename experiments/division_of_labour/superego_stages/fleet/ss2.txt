@@ -1,0 +1,4 @@
+LLM360/AmberChat experiments/division_of_labour/superego_stages/prompts/y_cells.jsonl float16
+allenai/OLMoE-1B-7B-0125-SFT experiments/division_of_labour/superego_stages/prompts/y_cells.jsonl float16
+allenai/Olmo-3-7B-Instruct experiments/division_of_labour/superego_stages/prompts/y_cells.jsonl float16
+allenai/Llama-3.1-Tulu-3-8B-SFT experiments/division_of_labour/superego_stages/prompts/y_cells.jsonl float16

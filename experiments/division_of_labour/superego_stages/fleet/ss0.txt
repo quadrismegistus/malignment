@@ -1,0 +1,5 @@
+ContextualAI/archangel_sft_pythia2-8b experiments/division_of_labour/superego_stages/prompts/y_cells.jsonl float16
+allenai/OLMo-2-0425-1B-SFT experiments/division_of_labour/superego_stages/prompts/y_cells.jsonl float16
+allenai/OLMoE-1B-7B-0125-Instruct experiments/division_of_labour/superego_stages/prompts/y_cells.jsonl float16
+m-a-p/CT-LLM-SFT experiments/division_of_labour/superego_stages/prompts/y_cells.jsonl float16
+allenai/Llama-3.1-Tulu-3-8B-DPO experiments/division_of_labour/superego_stages/prompts/y_cells.jsonl float16
