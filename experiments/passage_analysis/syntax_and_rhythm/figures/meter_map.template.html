@@ -1,0 +1,360 @@
+<title>Metrical Tension Map</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,500;7..72,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root {
+  --bg: #f7f7f5;
+  --panel: #ffffff;
+  --ink: #16181d;
+  --ink-2: #4f545d;
+  --ink-3: #858a93;
+  --rule: #e2e3e5;
+  --grid: #ececee;
+  --human: #3d424a;
+  --human-2: #7a808a;
+  --prose: #2a78d6;
+  --verse: #eb6834;
+  --prompt: #1baf7a;
+  --tip-bg: #16181d;
+  --tip-ink: #f4f5f7;
+  --serif: "Literata", Georgia, "Times New Roman", serif;
+  --sans: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #141518; --panel: #1b1d21; --ink: #f1f2f4; --ink-2: #b6bac1; --ink-3: #80858e;
+    --rule: #2c2f35; --grid: #24262b; --human: #c9ccd2; --human-2: #8d929b;
+    --prose: #3987e5; --verse: #d95926; --prompt: #199e70; --tip-bg: #f1f2f4; --tip-ink: #16181d;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #141518; --panel: #1b1d21; --ink: #f1f2f4; --ink-2: #b6bac1; --ink-3: #80858e;
+  --rule: #2c2f35; --grid: #24262b; --human: #c9ccd2; --human-2: #8d929b;
+  --prose: #3987e5; --verse: #d95926; --prompt: #199e70; --tip-bg: #f1f2f4; --tip-ink: #16181d;
+}
+body { background: var(--bg); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.55; }
+.wrap { max-width: 1080px; margin: 0 auto; padding-inline: 20px; padding-block: 28px 56px; display: grid; gap: 28px; }
+header { display: grid; gap: 8px; max-width: 72ch; }
+.eyebrow { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); font-weight: 500; }
+h1 { font-family: var(--serif); font-weight: 600; font-size: clamp(26px, 4vw, 36px); line-height: 1.15; margin: 0; text-wrap: balance; }
+h2 { font-family: var(--serif); font-weight: 600; font-size: 20px; margin: 0; text-wrap: balance; }
+p { margin: 0; }
+.lede { color: var(--ink-2); max-width: 70ch; }
+.figure { background: var(--panel); border: 1px solid var(--rule); border-radius: 6px; padding-block: 16px 12px; padding-inline: 16px; display: grid; gap: 12px; }
+.controls { display: flex; flex-wrap: wrap; gap: 8px 20px; align-items: center; font-size: 13px; color: var(--ink-2); }
+.controls label { display: inline-flex; gap: 6px; align-items: center; cursor: pointer; }
+.controls input { accent-color: var(--prose); }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 13px; color: var(--ink-2); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.chart-box { position: relative; width: 100%; }
+svg.chart { width: 100%; height: auto; display: block; font-family: var(--sans); }
+.axis text { fill: var(--ink-3); font-size: 11px; font-family: var(--mono); }
+.axis-title { fill: var(--ink-2); font-size: 12px; }
+.gridline { stroke: var(--grid); stroke-width: 1; }
+.clabel { fill: var(--ink-2); font-size: 11.5px; font-weight: 500; }
+svg.chart + svg.chart { margin-top: 8px; }
+.plabel { fill: var(--ink-3); font-size: 10px; font-family: var(--mono); }
+.dlabel { fill: var(--ink); font-size: 11.5px; font-weight: 500; }
+.hit { fill: transparent; cursor: pointer; }
+.tip { position: absolute; pointer-events: none; background: var(--tip-bg); color: var(--tip-ink); font-size: 12px; line-height: 1.45; padding: 8px 10px; border-radius: 5px; max-width: 280px; z-index: 5; box-shadow: 0 4px 16px rgba(0,0,0,.18); }
+.tip b { font-weight: 600; }
+.tip .num { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+.note { font-size: 12.5px; color: var(--ink-3); max-width: 90ch; }
+.findings { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+.finding { border-top: 2px solid var(--rule); padding-top: 10px; display: grid; gap: 6px; }
+.finding h3 { font-size: 14px; margin: 0; font-weight: 600; }
+.finding p { color: var(--ink-2); font-size: 14px; }
+.table-wrap { overflow-x: auto; border: 1px solid var(--rule); border-radius: 6px; background: var(--panel); }
+table { border-collapse: collapse; width: 100%; font-size: 13px; }
+th, td { padding: 7px 10px; text-align: left; border-bottom: 1px solid var(--rule); white-space: nowrap; }
+th { font-weight: 600; color: var(--ink-2); font-size: 12px; position: sticky; top: 0; background: var(--panel); cursor: pointer; user-select: none; }
+th:focus-visible, .controls input:focus-visible { outline: 2px solid var(--prose); outline-offset: 2px; }
+td.n { font-family: var(--mono); font-variant-numeric: tabular-nums; text-align: right; }
+th.n { text-align: right; }
+.sw { display: inline-block; width: 10px; height: 10px; border-radius: 50%; vertical-align: -1px; margin-right: 6px; }
+.caveats { display: grid; gap: 6px; max-width: 90ch; font-size: 13.5px; color: var(--ink-2); }
+.caveats li { margin-block: 2px; }
+@media (max-width: 560px) { .wrap { padding-inline: 16px; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">syntax_and_rhythm · meter windows · 2020 constraint set</div>
+    <h1>Metrical uncertainty and tension, human and LLM</h1>
+    <p class="lede">Every point is a mean over 10-syllable windows cut at word boundaries, with lineation ignored, and scanned with the five constraints of the 2020 antimetricality study (s ≤ 2, w ≤ 2). <b>Uncertainty</b> is the number of viable scansions per window. <b>Tension</b> (MTS) is the sum of constraint violations across those scansions. Lower is more metrical. The first figure compares human and model prose and verse like for like. The second places every group measured so far against all the human baselines.</p>
+  </header>
+
+  <section class="figure" aria-label="Prose and verse, historical and model, by period">
+    <h2>Prose and verse: people and models</h2>
+    <p class="note" style="color:var(--ink-2)">Seven lines. The human prose curves are fiction and non-fiction from the antimetricality reparse, dated by publication year. Human verse uses only the poets' own continuations of the poems the models were asked to continue, dated by the year the author turned 30. Model verse uses only those same continuations, placed at the period of the poem being continued. Model prose has no period, so it is drawn as a level. Right-hand values are overall means.</p>
+    <div class="legend" id="leadLegend"></div>
+    <div class="chart-box" id="leadBox">
+      <svg class="chart" id="leadT" role="img" aria-label="Metrical tension by period for human and model prose and verse; values in the table below"></svg>
+      <svg class="chart" id="leadU" role="img" aria-label="Metrical uncertainty by period for human and model prose and verse; values in the table below"></svg>
+    </div>
+    <p class="note">Hover for values, ±1.96 standard errors across poems, passages or authors, and sample sizes. Hollow points have fewer than 25 authors or 50 poems. Model verse is Llama-3.1-8B and Mistral-7B pooled, base (text) against instruct, continuing the same poems.</p>
+  </section>
+
+  <section class="figure" aria-label="All baselines by period">
+    <h2>All baselines</h2>
+    <div class="legend" id="legend"></div>
+    <div class="controls">
+      <label><input type="checkbox" id="showPilot"> Show the Olmo-3 pilot (12 primers)</label>
+      <label><input type="checkbox" id="showNonfic" checked> Show human non-fiction</label>
+    </div>
+    <div class="chart-box" id="chartBox">
+      <svg class="chart" id="chartT" role="img" aria-label="Metrical tension by period, human curves and LLM levels; values in the table below"></svg>
+      <svg class="chart" id="chartU" role="img" aria-label="Metrical uncertainty by period, human curves and LLM levels; values in the table below"></svg>
+      <div class="tip" id="tip" hidden></div>
+    </div>
+    <p class="note">Hover any point or line for its values, ±1.96 standard errors, and sample size. Standard errors are computed across passages, poems or authors, not windows. Dashed levels with hollow markers are base models; solid levels with filled markers are aligned models. Verse levels pool Llama-3.1-8B and Mistral-7B; hover for each.</p>
+  </section>
+
+  <section class="findings" aria-label="Main readings">
+    <div class="finding"><h3>AI verse sits at the Augustan minimum</h3><p>Base and aligned models continuing the same human poems land at tension ≈ 4.7. That is as regular as the most metrical human period, 1700–1749 (4.44), and well below the poets' own continuations (6.46). The Olmo-3 pilot is an exception: it sits near 19th-century levels.</p></div>
+    <div class="finding"><h3>Base prose is more metrical than any human fiction</h3><p>Base-model prose (9.42) sits below every period of human fiction (10.1–11.6) on both axes. Aligned prose (11.01) moves inside the human range, toward non-fiction.</p></div>
+    <div class="finding"><h3>Alignment widens the verse/prose gap</h3><p>Prose minus verse tension is 4.7 for base models and 6.3 for aligned ones. The human gap peaked at 6.4 in 1700–1749 and fell to 0.8 by 1950–1999.</p></div>
+  </section>
+
+  <section style="display:grid; gap:10px">
+    <h2>All points</h2>
+    <div class="table-wrap"><table id="table"><thead><tr>
+      <th data-k="label" tabindex="0">Group</th><th data-k="kind" tabindex="0">Kind</th>
+      <th class="n" data-k="u" tabindex="0">Uncertainty</th><th class="n" data-k="t" tabindex="0">Tension (MTS)</th>
+      <th class="n" data-k="n_windows" tabindex="0">Windows</th><th class="n" data-k="n_units" tabindex="0">Passages / poems / authors</th>
+      <th data-k="source" tabindex="0">Source</th></tr></thead><tbody></tbody></table></div>
+  </section>
+
+  <section style="display:grid; gap:8px">
+    <h2>Read with care</h2>
+    <ul class="caveats">
+      <li>Verse and prose come from different prompts and generation setups. The verse continuations came from 4-bit ollama models; the prose came from full-precision HF generation with 3,000-token caps.</li>
+      <li>Only the prose results are a registered test (syntax_and_rhythm, H2). There, after controlling for monosyllables, aligned prose is not significantly more tense (13/34 lineages in the predicted direction), but it is more often imperfect on *s/unstressed (31/34, p = 7.7e-7). Everything verse-side is exploratory.</li>
+      <li>Periods run 1600–1999; 2000–2049 is left out everywhere, since it is not a full half-century and is sparse. The human prose curves are thin at the early end: Fiction 1600–1649 has 20 authors and 1700–1749 has 13.</li>
+      <li>The Olmo-3 pilot is 12 primers × 2 samples per rung. Its own docstring says it is never to be quoted as a result.</li>
+      <li>0.14% of prose windows were skipped by the pronunciation-pooling guard. Windows parsed before the guard existed have not had the same rule applied retroactively.</li>
+    </ul>
+  </section>
+</div>
+
+<script>
+const PTS = __DATA__;
+const KIND = {
+  human_poetry: "Human poetry (reparse)", human_fiction: "Human fiction (reparse)", human_nonfiction: "Human non-fiction (reparse)",
+  human_chadwyck: "Human poetry (Chadwyck sample)", human_all_poetry: "Human poetry, pooled", human_all_fiction: "Human fiction, pooled",
+  human_all_nonfiction: "Human non-fiction, pooled", human_continuation: "Human continuation",
+  llm_prose: "LLM prose", llm_prose_lineage: "LLM prose, one lineage", llm_verse: "LLM verse continuation",
+  llm_verse_pilot: "LLM verse continuation (pilot)", llm_prompted: "LLM prompted poems", llm_prompted_model: "LLM prompted poems, one model", verse_period: "Verse continuations, by period", verse_overall: "Verse continuations, all periods"
+};
+const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const tip = document.getElementById("tip"), box = document.getElementById("chartBox");
+const NS = "http://www.w3.org/2000/svg";
+const W = 960, H = 380, m = { l: 58, r: 230, t: 30, b: 40 };
+const f2 = v => v == null ? "–" : v.toFixed(2);
+function el(svg, tag, attrs, parent) {
+  const e = document.createElementNS(NS, tag);
+  for (const k in attrs) e.setAttribute(k, attrs[k]);
+  (parent || svg).appendChild(e); return e;
+}
+function tipHtml(p) {
+  if (p.html) return p.html;
+  const ci = (v, se) => se == null ? f2(v) : `${f2(v)} <span style="opacity:.7">± ${(1.96 * se).toFixed(2)}</span>`;
+  return `<b>${p.label}</b><br><span style="opacity:.75">${p.source}</span><br>` +
+    `Uncertainty <span class="num">${ci(p.u, p.u_se)}</span><br>Tension <span class="num">${ci(p.t, p.t_se)}</span><br>` +
+    `<span class="num">${p.n_windows.toLocaleString()}</span> windows · <span class="num">${p.n_units.toLocaleString()}</span> units`;
+}
+function hover(node, p) {
+  const show = ev => {
+    tip.innerHTML = tipHtml(p); tip.hidden = false;
+    const r = box.getBoundingClientRect(), e = ev.touches ? ev.touches[0] : ev, cx = e.clientX - r.left, cy = e.clientY - r.top;
+    const tw = tip.offsetWidth, th = tip.offsetHeight;
+    tip.style.left = Math.max(4, Math.min(r.width - tw - 4, cx + 14)) + "px";
+    tip.style.top = Math.max(4, cy - th - 12) + "px";
+  };
+  node.addEventListener("mousemove", show); node.addEventListener("touchstart", show, { passive: true });
+  node.addEventListener("mouseleave", () => { tip.hidden = true; });
+}
+const pool = (ps, label, source) => {
+  const n = ps.reduce((s, p) => s + p.n_windows, 0);
+  const u = ps.reduce((s, p) => s + p.u * p.n_windows, 0) / n, t = ps.reduce((s, p) => s + p.t * p.n_windows, 0) / n;
+  return { label, u, t, n_windows: n, n_units: ps.reduce((s, p) => s + p.n_units, 0), arm: ps[0].arm,
+    html: `<b>${label}</b><br><span style="opacity:.75">${source}</span><br>` + ps.map(p => `${p.lineage}: uncertainty <span class="num">${f2(p.u)}</span>, tension <span class="num">${f2(p.t)}</span>`).join("<br>") +
+      `<br>Pooled: <span class="num">${f2(u)}</span> / <span class="num">${f2(t)}</span>` };
+};
+function levels() {
+  const V = PTS.filter(p => p.group === "llm_verse");
+  const L = [
+    [PTS.find(p => p.group === "llm_prose" && p.arm === "base"), "--prose", "Base prose"],
+    [PTS.find(p => p.group === "llm_prose" && p.arm === "aligned"), "--prose", "Aligned prose"],
+    [pool(V.filter(p => p.arm === "base"), "Base verse continuations", "generative-formalism completions (ollama, 4-bit)"), "--verse", "Base verse"],
+    [pool(V.filter(p => p.arm === "aligned"), "Aligned verse continuations", "generative-formalism completions (ollama, 4-bit)"), "--verse", "Aligned verse"],
+    [PTS.find(p => p.label === "Prompted poems: DO_rhyme"), "--prompt", "Prompted: rhyme"],
+    [PTS.find(p => p.label === "Prompted poems: MAYBE_rhyme"), "--prompt", "Prompted: maybe rhyme"],
+    [PTS.find(p => p.label === "Prompted poems: do_NOT_rhyme"), "--prompt", "Prompted: don't rhyme"],
+    [PTS.find(p => p.group === "human_continuation"), "--human", "Poets' own continuations"],
+  ];
+  if (document.getElementById("showPilot").checked) {
+    PTS.filter(p => p.group === "llm_verse_pilot").forEach(p => L.push([p, "--verse", p.arm === "base" ? "Olmo-3 base (pilot)" : "Olmo-3 SFT (pilot)"]));
+  }
+  return L;
+}
+function panel(svg, key, title, y0, y1, step) {
+  svg.innerHTML = ""; svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+  const X0 = 1600, X1 = 2000;
+  const sx = v => m.l + (v - X0) / (X1 - X0) * (W - m.l - m.r), sy = v => H - m.b - (v - y0) / (y1 - y0) * (H - m.t - m.b);
+  const C = k => css(k);
+  const g = el(svg, "g", { class: "axis" });
+  for (let x = 1600; x <= 2000; x += 50) {
+    el(svg, "line", { x1: sx(x), x2: sx(x), y1: m.t, y2: H - m.b, class: "gridline" }, g);
+    if (x % 100 === 0) { const t = el(svg, "text", { x: sx(x), y: H - m.b + 18, "text-anchor": "middle" }, g); t.textContent = x; }
+  }
+  for (let y = Math.ceil(y0 / step) * step; y <= y1 + 1e-9; y += step) {
+    el(svg, "line", { x1: m.l, x2: W - m.r, y1: sy(y), y2: sy(y), class: "gridline" }, g);
+    const t = el(svg, "text", { x: m.l - 10, y: sy(y) + 4, "text-anchor": "end" }, g); t.textContent = step < 1 ? y.toFixed(1) : y;
+  }
+  const tt = el(svg, "text", { x: m.l, y: 16, class: "axis-title", "font-weight": 600 }); tt.textContent = title;
+  // LLM levels (behind human curves)
+  const labs = [];
+  for (const [p, v, name] of levels()) {
+    const col = C(v), base = p.arm === "base", y = sy(p[key]);
+    const ln = el(svg, "line", { x1: m.l, x2: W - m.r, y1: y, y2: y, stroke: col, "stroke-width": base ? 1.5 : 2, "stroke-dasharray": base ? "5 4" : "", opacity: .85 });
+    el(svg, "circle", { cx: W - m.r, cy: y, r: 5, fill: base ? C("--panel") : col, stroke: col, "stroke-width": 2 });
+    hover(el(svg, "rect", { x: m.l, y: y - 5, width: W - m.l - m.r + 8, height: 10, class: "hit" }), p);
+    labs.push({ y, text: `${name}  ${f2(p[key])}`, p });
+  }
+  labs.sort((a, b) => a.y - b.y);
+  for (let i = 1; i < labs.length; i++) labs[i].ly = Math.max(labs[i].y, (labs[i - 1].ly ?? labs[i - 1].y) + 13);
+  labs[0].ly = labs[0].y;
+  const over = (labs[labs.length - 1].ly) - (H - m.b + 6);
+  if (over > 0) labs.forEach(l => l.ly -= over);
+  for (const l of labs) {
+    if (Math.abs(l.ly - l.y) > 1) el(svg, "line", { x1: W - m.r + 6, x2: W - m.r + 12, y1: l.y, y2: l.ly - 4, stroke: C("--ink-3"), "stroke-width": 1 });
+    const t = el(svg, "text", { x: W - m.r + 14, y: l.ly, class: "dlabel", "dominant-baseline": "middle" }); t.textContent = l.text;
+    hover(t, l.p);
+  }
+  // human curves
+  const curves = [["human_poetry", "Poetry", "--human", ""], ["human_fiction", "Fiction", "--human", "6 4"], ["human_chadwyck", "Chadwyck poems", "--human-2", "9 4"]];
+  if (document.getElementById("showNonfic").checked) curves.push(["human_nonfiction", "Non-fiction", "--human-2", "2 3"]);
+  for (const [grp, name, v, dash] of curves) {
+    const col = C(v);
+    const ps = PTS.filter(p => p.group === grp).sort((a, b) => a.period - b.period);
+    el(svg, "polyline", { points: ps.map(p => `${sx(p.period + 25)},${sy(p[key])}`).join(" "), fill: "none", stroke: col, "stroke-width": 2, "stroke-dasharray": dash });
+    ps.forEach(p => {
+      const thin = p.n_units < 25;
+      el(svg, "circle", { cx: sx(p.period + 25), cy: sy(p[key]), r: 3.5, fill: thin ? C("--panel") : col, stroke: col, "stroke-width": 1.5 });
+      hover(el(svg, "circle", { cx: sx(p.period + 25), cy: sy(p[key]), r: 10, class: "hit" }), p);
+    });
+    // each curve named at a different point so names never stack: [index, dx, dy, anchor]
+    const pos = { human_poetry: [2, 0, 18, "middle"], human_fiction: [1, 0, -10, "middle"], human_chadwyck: [ps.length - 1, -8, -10, "end"], human_nonfiction: [ps.length - 1, -8, -10, "end"] }[grp];
+    const at = ps[pos[0]];
+    const t = el(svg, "text", { x: sx(at.period + 25) + pos[1], y: sy(at[key]) + pos[2], class: "clabel", "text-anchor": pos[3] }); t.textContent = name;
+  }
+}
+function leadPanel(svg, key, title, y0, y1, step) {
+  svg.innerHTML = ""; svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+  const X0 = 1600, X1 = 2000;
+  const sx = v => m.l + (v - X0) / (X1 - X0) * (W - m.l - m.r), sy = v => H - m.b - (v - y0) / (y1 - y0) * (H - m.t - m.b);
+  const C = k => css(k);
+  const g = el(svg, "g", { class: "axis" });
+  for (let x = 1600; x <= 2000; x += 50) {
+    el(svg, "line", { x1: sx(x), x2: sx(x), y1: m.t, y2: H - m.b, class: "gridline" }, g);
+    if (x % 100 === 0) { const tx = el(svg, "text", { x: sx(x), y: H - m.b + 18, "text-anchor": "middle" }, g); tx.textContent = x; }
+  }
+  for (let y = Math.ceil(y0 / step) * step; y <= y1 + 1e-9; y += step) {
+    el(svg, "line", { x1: m.l, x2: W - m.r, y1: sy(y), y2: sy(y), class: "gridline" }, g);
+    const tx = el(svg, "text", { x: m.l - 10, y: sy(y) + 4, "text-anchor": "end" }, g); tx.textContent = step < 1 ? y.toFixed(1) : y;
+  }
+  const tt = el(svg, "text", { x: m.l, y: 16, class: "axis-title", "font-weight": 600 }); tt.textContent = title;
+  const labs = [];
+  const level = (p, v, name, base) => {
+    const col = C(v), y = sy(p[key]);
+    el(svg, "line", { x1: m.l, x2: W - m.r, y1: y, y2: y, stroke: col, "stroke-width": base ? 1.6 : 3, "stroke-dasharray": base ? "6 4" : "", opacity: .9 });
+    el(svg, "circle", { cx: W - m.r, cy: y, r: 5.5, fill: base ? C("--panel") : col, stroke: col, "stroke-width": 2 });
+    hover(el(svg, "rect", { x: m.l, y: y - 5, width: W - m.l - m.r + 8, height: 10, class: "hit" }), p);
+    labs.push({ y, text: `${name}  ${f2(p[key])}`, p });
+  };
+  const curve = (ps, v, style, name, overall) => {
+    const col = C(v);
+    ps = ps.slice().sort((a, b) => a.period - b.period);
+    const sw = style === "aligned" ? 3 : style === "base" ? 1.8 : 2, dash = style === "base" ? "6 4" : "";
+    el(svg, "polyline", { points: ps.map(p => `${sx(p.period + 25)},${sy(p[key])}`).join(" "), fill: "none", stroke: col, "stroke-width": sw, "stroke-dasharray": dash, opacity: style === "human" ? .75 : 1 });
+    ps.forEach(p => {
+      const thin = p.n_units < (p.group === "verse_period" ? 50 : 25);
+      const hollow = style === "base" || thin;
+      el(svg, style === "human" ? "rect" : "circle", style === "human"
+        ? { x: sx(p.period + 25) - 3.5, y: sy(p[key]) - 3.5, width: 7, height: 7, fill: thin ? C("--panel") : col, stroke: col, "stroke-width": 1.5 }
+        : { cx: sx(p.period + 25), cy: sy(p[key]), r: style === "aligned" ? 4.5 : 4, fill: hollow ? C("--panel") : col, stroke: col, "stroke-width": 1.8 });
+      hover(el(svg, "circle", { cx: sx(p.period + 25), cy: sy(p[key]), r: 10, class: "hit" }), p);
+    });
+    if (overall) {
+      const y = sy(overall[key]);
+      el(svg, "circle", { cx: W - m.r, cy: y, r: 5.5, fill: style === "base" ? C("--panel") : col, stroke: col, "stroke-width": 2 });
+      el(svg, "line", { x1: W - m.r - 14, x2: W - m.r, y1: y, y2: y, stroke: col, "stroke-width": sw, "stroke-dasharray": dash });
+      hover(el(svg, "circle", { cx: W - m.r, cy: y, r: 10, class: "hit" }), overall);
+      labs.push({ y, text: `${name}  ${f2(overall[key])}`, p: overall });
+    } else {
+      const last = ps[ps.length - 1];
+      labs.push({ y: sy(last[key]), text: `${name}  ${f2(last[key])} (${last.period}s)`, p: last });
+    }
+  };
+  const P = g2 => PTS.filter(p => p.group === g2);
+  curve(P("human_fiction"), "--prose", "human", "Fiction, human");
+  curve(P("human_nonfiction"), "--prompt", "human", "Non-fiction, human");
+  const VP = P("verse_period"), VO = P("verse_overall");
+  curve(VP.filter(p => p.arm === "human"), "--verse", "human", "Verse, poets", VO.find(p => p.arm === "human"));
+  curve(VP.filter(p => p.arm === "base"), "--verse", "base", "Verse, base models", VO.find(p => p.arm === "base"));
+  curve(VP.filter(p => p.arm === "aligned"), "--verse", "aligned", "Verse, aligned models", VO.find(p => p.arm === "aligned"));
+  level(PTS.find(p => p.group === "llm_prose" && p.arm === "base"), "--prose", "Prose fiction, base models", true);
+  level(PTS.find(p => p.group === "llm_prose" && p.arm === "aligned"), "--prose", "Prose fiction, aligned models", false);
+  labs.sort((a, b) => a.y - b.y);
+  labs[0].ly = labs[0].y;
+  for (let i = 1; i < labs.length; i++) labs[i].ly = Math.max(labs[i].y, labs[i - 1].ly + 13);
+  const over = labs[labs.length - 1].ly - (H - m.b + 6);
+  if (over > 0) labs.forEach(l => l.ly -= over);
+  for (const l of labs) {
+    if (Math.abs(l.ly - l.y) > 1) el(svg, "line", { x1: W - m.r + 7, x2: W - m.r + 12, y1: l.y, y2: l.ly, stroke: C("--ink-3"), "stroke-width": 1 });
+    const tx = el(svg, "text", { x: W - m.r + 14, y: l.ly, class: "dlabel", "dominant-baseline": "middle" }); tx.textContent = l.text;
+    hover(tx, l.p);
+  }
+}
+function draw() {
+  leadPanel(document.getElementById("leadT"), "t", "Metrical tension (MTS) per 10-syllable window", 3, 14, 2);
+  leadPanel(document.getElementById("leadU"), "u", "Metrical uncertainty: viable scansions per window", 2.0, 4.8, 0.5);
+  panel(document.getElementById("chartT"), "t", "Metrical tension (MTS) per 10-syllable window", 4, 14, 2);
+  panel(document.getElementById("chartU"), "u", "Metrical uncertainty: viable scansions per window", 2.3, 4.7, 0.5);
+}
+function leadLegend() {
+  document.getElementById("leadLegend").innerHTML =
+    `<span><span class="sw" style="background:var(--prose)"></span>Prose fiction</span>` +
+    `<span><span class="sw" style="background:var(--prompt)"></span>Prose non-fiction</span>` +
+    `<span><span class="sw" style="background:var(--verse)"></span>Verse</span>` +
+    `<span><span class="sw" style="border-radius:1px;background:var(--ink-2)"></span>human: thin line, squares</span>` +
+    `<span><span class="sw" style="border:2px solid var(--ink-2);background:transparent;width:8px;height:8px"></span>base model: dashed, hollow</span>` +
+    `<span><span class="sw" style="background:var(--ink-2)"></span>aligned model: thick, filled</span>`;
+}
+function legend() {
+  const items = [["--prose", "LLM prose (national_story pure stories)"], ["--verse", "LLM verse continuations of human poems"], ["--prompt", "LLM poems written on request"], ["--human", "Human writing by 50-year period (hollow = under 25 authors)"]];
+  document.getElementById("legend").innerHTML = items.map(([v, l]) => `<span><span class="sw" style="background:var(${v})"></span>${l}</span>`).join("") +
+    `<span><span class="sw" style="border:2px solid var(--ink-2);background:transparent;width:8px;height:8px"></span>base: dashed, hollow · aligned: solid, filled</span>`;
+}
+
+let sortK = "kind", sortDir = 1;
+function table() {
+  const rows = PTS.map(p => ({ ...p, kind: KIND[p.group] || p.group }));
+  rows.sort((a, b) => { const x = a[sortK], y = b[sortK]; return (typeof x === "number" ? x - y : String(x).localeCompare(String(y))) * sortDir; });
+  const col = g => g.startsWith("llm_prose") ? "var(--prose)" : (g.startsWith("llm_verse") || g.startsWith("verse_")) ? "var(--verse)" : g.startsWith("llm_prompted") ? "var(--prompt)" : "var(--human)";
+  document.querySelector("#table tbody").innerHTML = rows.map(r =>
+    `<tr><td><span class="sw" style="background:${col(r.group)}"></span>${r.label}</td><td>${r.kind}</td><td class="n">${f2(r.u)}</td><td class="n">${f2(r.t)}</td><td class="n">${r.n_windows.toLocaleString()}</td><td class="n">${r.n_units.toLocaleString()}</td><td>${r.source}</td></tr>`).join("");
+}
+document.querySelectorAll("#table th").forEach(th => {
+  const go = () => { const k = th.dataset.k; sortDir = sortK === k ? -sortDir : 1; sortK = k; table(); };
+  th.addEventListener("click", go); th.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); go(); } });
+});
+["showPilot", "showNonfic"].forEach(id => document.getElementById(id).addEventListener("change", draw));
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change", draw);
+new MutationObserver(draw).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+leadLegend(); legend(); draw(); table();
+</script>

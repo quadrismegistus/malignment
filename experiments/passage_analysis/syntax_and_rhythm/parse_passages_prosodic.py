@@ -288,10 +288,46 @@ def windows(c):
     return out
 
 
+#: pronunciation-pooling guard. prosodic pools every combination of word
+#: pronunciations; a window like "is fair hon hon oh hon oh hon hon yes" ("hon" =
+#: 1, 3 or 4 syllables, 5 times) is 486 combinations up to 25 syllables, and the
+#: exact bounding step never returns. Such windows are recorded with `skipped`
+#: set, not parsed. Deterministic (no timeout), so a rerun skips the same ones.
+MAX_COMBOS = 64
+MAX_VARIANT_SYLLS = 18                                  # prosodic's MAX_SYLL_IN_PARSE_UNIT
+
+
+def _pooling_load(sd):
+    """-> {line_num: (combos, longest variant in syllables)} from a _syll_df."""
+    w = sd[~sd.is_punc.astype(bool)]
+    per_form = w.groupby(["line_num", "word_num", "form_idx"]).size()
+    per_word = per_form.groupby(level=[0, 1]).agg(["size", "max"])
+    return {int(ln): (int(np.prod(g["size"].values, dtype=float)), int(g["max"].sum()))
+            for ln, g in per_word.groupby(level=0)}
+
+
 def meter_rows(lines):
     """Parse window lines with the 2020 meter -> one row per window, baseline columns."""
     if not lines:
         return []
+    t = TextModel("\n".join(lines))
+    sd = t._syll_df
+    present = sorted(int(x) for x in sd.line_num.unique())
+    if len(present) == len(lines):
+        load = _pooling_load(sd)
+        bad = {i for i, ln in enumerate(present)
+               if load.get(ln, (1, 0))[0] > MAX_COMBOS or load.get(ln, (1, 0))[1] > MAX_VARIANT_SYLLS}
+        if bad:
+            ok = [l for i, l in enumerate(lines) if i not in bad]
+            rows = {l: r for l, r in zip(ok, meter_rows(ok))} if ok else {}
+            out = []
+            for i, l in enumerate(lines):
+                if i in bad:
+                    c, m = load[present[i]]
+                    out.append({"window": l, "skipped": "pooling: %d combos, longest %d sylls" % (c, m)})
+                elif l in rows:
+                    out.append(rows[l])
+            return out
     t = TextModel("\n".join(lines))
     sd = t._syll_df
     present = sorted(int(x) for x in sd.line_num.unique())
