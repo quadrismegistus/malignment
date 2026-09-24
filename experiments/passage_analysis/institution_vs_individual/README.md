@@ -4,12 +4,15 @@ subject: passage_analysis
 question: When alignment answers a party to a dispute, does what it tells them to do depend on which side of the dispute they are on?
 status: RUN 2026-09-23/24 -- F21 corpus coded (pass 1); 43-lineage 256-token regeneration run and coded; four declared predictions all supported on both units
 headline: >-
-  Alignment tells the institution to TALK and sends the individual ELSEWHERE.
-  Aligned landlords, managers and officers are told to take it up directly with
-  the other party (0.31 -> 0.75); aligned tenants, workers and patients are
-  referred on -- to a regulator or collective (0.13 -> 0.33), and above all into
-  the counterparty's own apparatus, its HR or billing department (0.09 -> 0.43).
-  The institution side's referrals barely move.
+  The individual/institution asymmetry is already in the BASE model -- the
+  aggrieved party is referred about three times as often, the institution is
+  told to talk. What alignment adds is a specific routing: the individual is
+  sent into the COUNTERPARTY'S OWN APPARATUS (its HR, its billing office, the
+  landlord's management). Within advice-form text on both arms, base already
+  sends individuals to regulators and lawyers about as often as aligned does
+  (0.27 vs 0.33); the counterparty-channel share more than doubles for the
+  individual (0.22 -> 0.47) and stays flat for the institution. Institutions
+  get the conversation (direct voice 0.49 -> 0.85 in institutional advice).
 ---
 
 # institution_vs_individual
@@ -30,6 +33,32 @@ Holm p is 0.015–0.0006 by dispute and 5e-6–1e-6 by lineage. The shares are o
 Not predicted, but in the same direction: exit and self-help nearly disappear on both sides, and bringing in a third party as the main move rises only for the individual (0.34 → 0.46, against 0.18 → 0.11 for the institution). In-house help (speaker_side) rises on both sides, with no reliable difference between them.
 
 Eight random pairs are in `results/examples_regen.md` (seeded, not selected). A typical one: RedPajama-Chat sends the tenant with broken winter heating to "your local housing office or the landlord ombudsman", and tells the landlord facing repair demands to have "a professional" inspect. falcon-7b-instruct offers the laid-off worker "freelance or remote work" (exit), and asks the manager who laid them off "have you tried to mediate the situation with your team?" (direct voice).
+
+## The two differences, taken apart (`decompose.py`, POST HOC)
+
+RH, 2026-09-24: "Is the story 'base is already procedural' true? We have two differences to account for." This decomposition was computed after the declared test and is pooled over passages, not tested at the lineage unit (`results/decompose.md`).
+
+**1. Individual against institution: the asymmetry is in the base, in every direction.** Across kept passages, the base refers the individual about three times as often as the institution (outward 0.14 vs 0.05, authority 0.14 vs 0.05, counterparty channel 0.10 vs 0.02), and tells the institution to talk more (direct voice 0.30 vs 0.21). This is the same shape as F21's deference gap: pretraining carries the social pattern.
+
+**2. Base against aligned: mostly a change of genre, plus a real widening.** Aligned models write advice 77% of the time; base models 11%. Referral lives in advice, and base advice is already procedural: it refers the individual in 62% of cases (aligned 78%). Much of the base-to-aligned rise in referral is alignment converting everything into advice. With a raw base against a chat aligned arm, part of that conversion is the chat frame.
+
+Within the same genre, the gap still widens:
+
+| change in the individual-minus-institution gap, base → aligned | within advice | within continuation |
+|---|---|---|
+| the counterparty's own channels | +0.26 (0.19 → 0.45) | +0.09 |
+| direct voice (institution minus individual) | +0.18 (0.20 → 0.38) | +0.13 |
+| sent outward | +0.10 | +0.05 |
+| authority over the counterparty | +0.09 | +0.06 |
+
+**The takeaway.** Individuals are routed into the other side's own apparatus. Base advice already sends them to regulators and lawyers about as often as aligned advice does (outward 0.27 against 0.33). What alignment adds is "take it to the company's HR, the hospital's billing office, your landlord's management": the counterparty-channel share more than doubles for the individual (0.22 → 0.47) and stays flat for the institution (0.03 → 0.02). Institutions, meanwhile, get the conversation: direct voice rises from 0.49 to 0.85 in institutional advice, against 0.29 to 0.46 for individuals.
+
+The caveats are specific to this decomposition:
+- It is post hoc and pooled.
+- Base advice is a small, self-selected sample, about 600 texts per side: the base passages that happened to become answers, often forum-style.
+- "Within continuation" is thin on the aligned side (472 and 721 texts).
+
+The clean version is a declared lineage-unit test of the within-advice widening, not yet run.
 
 ## The frontier, on the same ruler (`frontier_generate.py`, `frontier_code.py`)
 
@@ -136,8 +165,9 @@ Engine facts are recorded in `roster/models/observations.json` (`engine_support.
     run_regen.py          codes the regeneration (render rules, exclusions)
     analyse_regen.py      the declared test, committed before any regenerated text existed
     examples_regen.py     seeded random pairs
+    decompose.py          POST HOC: the 2x2, and within-genre (advice / continuation)
     frontier_generate.py  API passages (Sonnet 4.6, Haiku 4.5, GPT-4o-mini, DeepSeek) into the generation stash
     frontier_code.py      codes them; the endpoint contrast, declared before coding
-    results/              analysis.md (pass 1 v1), analysis_v2.md, analysis_regen.md, analysis_frontier.md, examples_regen.md
+    results/              analysis.md (pass 1 v1), analysis_v2.md, analysis_regen.md, analysis_frontier.md, decompose.md, examples_regen.md
 
 The coded outputs are 20 MB each and live in `~/malignment-data/institution_vs_individual/`.
