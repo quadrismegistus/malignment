@@ -1,11 +1,14 @@
 PLATE A3. The words of the capture: what the weights add, and what the chat frame adds.
 
 Per word, two rows: the aggrieved individual (black, upper) and the institution (gray, lower).
-Open circle: base model. Filled circle: the aligned model run with no chat template. Filled square:
-the aligned model in chat. SOLID line, base to no-template: the change in the WEIGHTS, the frame held
-at raw text. DOTTED line, no-template to chat: the CHAT FRAME, the weights held at the aligned model.
-Segments are drawn where the values fall, so a dotted segment can run backward (contact and file for
-the institution, listen for the individual): there the chat frame lowers the word's share.
+Each row is a two-step arrow. Open circle: base model. Filled circle: the aligned model run with no
+chat template. Filled square: the aligned model in chat. SOLID arrow, base to no-template: the change
+in the WEIGHTS, the frame held at raw text. DOTTED arrow, no-template to chat: the CHAT FRAME, the
+weights held at the aligned model. Arrowheads point the way each step moves and stop just short of
+the mark they point at; a step shorter than 1.6 points has no room for a head beside its mark and is
+drawn plain (listed below). Steps are drawn where the values fall.
+Where a step runs backward the word's share falls: contact/inst frame, file/inst weights, file/inst
+frame, listen/ind frame; all of them are short and drawn without a head.
 Value: share of ALL passages in that condition and side that contain the word (a passage counts once).
 
 Corpus: institution_vs_individual, 256-token regeneration, the same 42 lineages in all three
@@ -45,3 +48,4 @@ listen      individual     0.007   0.009   0.005      +0.001    -0.003
 listen      institution    0.022   0.079   0.210      +0.058    +0.131
 
 weights = no-template minus base; frame = chat minus no-template; shares are proportions.
+Steps drawn without a head (under 1.6 points): contact/inst frame, rights/inst frame, department/inst weights, department/inst frame, file/inst weights, file/inst frame, listen/ind weights, listen/ind frame.
