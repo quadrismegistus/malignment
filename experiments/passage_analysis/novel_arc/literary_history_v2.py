@@ -40,7 +40,17 @@ sys.path.insert(0, HERE)
 import literary_history as LH  # noqa: E402
 from literary_history import F  # noqa: E402
 
-OUT = os.path.join(HERE, "figures", "ci_literary_history_v2")
+#: VERSIONS. v2 is the committed plate (c37a86ed) and must keep reproducing it; v3 (RH,
+#: 2026-09-24) fixes two things v2 got wrong or left loose:
+#:   - the rhythm label's SIGN: the quantity is prose uncertainty minus verse uncertainty,
+#:     and uncertainty (viable parses per line) is INVERSE metricality, so as metricality
+#:     it reads verse - prose, not prose - verse;
+#:   - interiority is a proportion of content words (measure_lltk.py: USAS-X content words
+#:     / content words), so its axis reads in percent.
+#: Select with `python literary_history_v2.py v3`; LH_OUT_DIR redirects output (checks).
+VERSION = next((a for a in sys.argv[1:] if a in ("v2", "v3")), "v2")
+OUT = os.path.join(os.environ.get("LH_OUT_DIR", os.path.join(HERE, "figures")),
+                   "ci_literary_history_" + VERSION)
 REPARSE = os.environ.get("ANTIMETRICALITY_REPARSE", os.path.expanduser(
     "~/Dropbox/Prof/Articles/Antimetricality/data/data.2026.reparse.big_data.parquet"))
 NAME = {"base": "Base models", "aligned": "Aligned models"}
@@ -72,12 +82,12 @@ def gap_decades():
     return pd.DataFrame(rows)
 
 
-def panel(hist, curve, arms, cross, title, ylab, show_x, ylim=None):
+def panel(hist, curve, arms, cross, title, ylab, show_x, ylim=None, ypct=False, vgrid=()):
     """ylim, when given, is a VIEW window (coord_cartesian): points beyond it stay in the
     data and in the lowess, they are only not drawn inside the panel."""
     from plotnine import coord_cartesian
     from plotnine import (ggplot, aes, geom_point, geom_line, geom_segment, geom_text, labs,
-                          scale_x_continuous, scale_linetype_manual, theme, element_text)
+                          scale_x_continuous, scale_y_continuous, scale_linetype_manual, theme, element_text)
     fnt = F.pub_font()
     cv = pd.DataFrame(curve, columns=["year", "value"])
     A = pd.DataFrame([{"arm": NAME[a], "value": v} for a, v in arms.items()])
@@ -88,7 +98,12 @@ def panel(hist, curve, arms, cross, title, ylab, show_x, ylim=None):
     for i in range(1, len(order)):
         order.loc[i, "ly"] = max(order.loc[i, "ly"], order.loc[i - 1, "ly"] + 0.11 * (hi - lo))
     X = pd.DataFrame([{"year": y, "value": arms[a]} for a, ys in cross.items() for y in ys])
+    from plotnine import geom_vline
     p = (ggplot()
+         #: RH (v3): thin century lines, drawn first so everything else sits on top;
+         #: the house grid colour and rule weight, so they read as grid and not data
+         + (geom_vline(xintercept=list(vgrid), color="#e9ecef", size=F.PUB_RULE_PT) if vgrid
+            else geom_point(aes("year", "value"), data=hist.iloc[:0]))
          + geom_point(aes("year", "value"), data=hist, color=F.PUB_GRAY, size=0.9)
          + geom_line(aes("year", "value"), data=cv, color=F.PUB_INK, size=F.PUB_LINE_PT)
          + geom_segment(aes(x=X0, xend=X1, y="value", yend="value", linetype="arm"), data=A,
@@ -96,6 +111,8 @@ def panel(hist, curve, arms, cross, title, ylab, show_x, ylim=None):
          + geom_text(aes(x=XLAB, y="ly", label="arm"), data=order, ha="left", va="center",
                      size=F.PUB_FONT_PT, family=fnt, color=F.PUB_INK)
          + scale_linetype_manual(LINETYPE, guide=None)
+         + (scale_y_continuous(labels=lambda v: ["%g%%" % round(100 * x, 6) for x in v]) if ypct
+            else scale_y_continuous())
          + scale_x_continuous(limits=(X0 - 5, XMAX), breaks=list(range(1600, 2001, 50)), expand=(0, 0),
                               labels=(lambda v: ["%d" % x for x in v]) if show_x else (lambda v: [""] * len(v)))
          + labs(x="", y=ylab, title=title)
@@ -161,10 +178,13 @@ def main():
     assert len(off) == 1 and int(off.year.iloc[0]) == 1705, off
     print("   panel 3: one decade outside the view window: %d at %.3f (in the smooth)" % (
         int(off.year.iloc[0]) - 5, float(off.value.iloc[0])))
-    p1 = panel(h1, c1, arms1, x1, "Concreteness", "Concreteness (word norm)", False)
-    p2 = panel(h2, c2, arms2, x2, "Interiority", "Interiority (semantic field)", False)
+    VG = (1700, 1800, 1900) if VERSION == "v3" else ()
+    p1 = panel(h1, c1, arms1, x1, "Concreteness", "Concreteness (word norm)", False, vgrid=VG)
+    p2 = panel(h2, c2, arms2, x2, "Interiority", "Interiority (semantic field)", False,
+               ypct=(VERSION == "v3"), vgrid=VG)
     p3 = panel(h3, c3, a3, x3, "Rhythmic distinctiveness of verse from prose",
-               "Metricality (stress pattern),\nprose \u2212 verse", True, ylim=(bot3, top3))
+               "Metricality (stress pattern),\n" + ("verse \u2212 prose" if VERSION == "v3" else "prose \u2212 verse"),
+               True, ylim=(bot3, top3), vgrid=VG)
     W_IN, H_IN = F.PUB_SIZE[0], 6.0
     fig = Stack([p1, p2, p3]).draw()
     fig.set_size_inches(W_IN, H_IN)
@@ -189,10 +209,15 @@ def main():
          "  arms: " + ", ".join("%s %+.4f (n=%d passages)" % (NAME[a], a1[a][0], a1[a][1]) for a in arms1),
          "  crossings: " + fmt_x(x1),
          "  texts per decade: " + ", ".join("%d:%d" % (r.year - 5, r.n) for r in h1.itertuples()), "",
-         *wrap("INTERIORITY (usas_x: share of a passage's tokens in USAS field X, psychological actions, "
-               "states and processes), same recipe."),
-         "  arms: " + ", ".join("%s %.4f (n=%d)" % (NAME[a], a2[a][0], a2[a][1]) for a in arms2),
-         "  crossings: none; both arms sit above the whole history (max %.4f)." % max(h2.value.max(), c2[:, 1].max()),
+         *(wrap("INTERIORITY (usas_x: share of a passage's tokens in USAS field X, psychological actions, "
+                "states and processes), same recipe.") if VERSION == "v2" else
+           wrap("INTERIORITY (usas_x: the percentage of a passage's content words tagged in USAS field X, "
+                "psychological actions, states and processes; measure_lltk.py), same recipe.")),
+         ("  arms: " + ", ".join("%s %.4f (n=%d)" % (NAME[a], a2[a][0], a2[a][1]) for a in arms2)) if VERSION == "v2"
+         else ("  arms: " + ", ".join("%s %.2f%% (n=%d)" % (NAME[a], 100 * a2[a][0], a2[a][1]) for a in arms2)),
+         ("  crossings: none; both arms sit above the whole history (max %.4f)." % max(h2.value.max(), c2[:, 1].max()))
+         if VERSION == "v2" else
+         ("  crossings: none; both arms sit above the whole history (max %.2f%%)." % (100 * max(h2.value.max(), c2[:, 1].max()))),
          "",
          *wrap("RHYTHMIC DISTINCTIVENESS OF VERSE FROM PROSE: the gap in scansion uncertainty (viable parses "
                "per 10-syllable line), prose fiction minus poetry, from the Antimetricality reparse. Fiction "
@@ -200,6 +225,10 @@ def main():
                "with at least 3 texts in each genre. Pooled to 50-year periods this reproduces "
                "verse_prose_gap.csv exactly. Arms: that csv's LLM rows, prose from 34 lineages against verse "
                "from two model families."),
+         *([] if VERSION == "v2" else wrap(
+             "  Direction: uncertainty is the number of viable scansions of a line, so fewer means MORE "
+             "metrical. Prose uncertainty minus verse uncertainty is therefore how much more metrical verse "
+             "is than prose: as metricality, verse minus prose, and the higher, the more distinct the two.")),
          "  arms: Base models %.3f, Aligned models %.3f." % (a3["base"], a3["aligned"]),
          "  crossings of the smooth: " + fmt_x(x3),
          "  decades (fiction texts / poetry texts): " + ", ".join(
