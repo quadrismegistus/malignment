@@ -31,6 +31,7 @@ EIGHT = ["LLM360/AmberSafe", "PKU-Alignment/beaver-7b-v1.0",
          "togethercomputer/RedPajama-INCITE-7B-Chat", "BAAI/AquilaChat2-7B",
          "bigscience/bloomz-7b1", "m-a-p/CT-LLM-SFT-DPO"]
 OUTCOMES = ["channel", "outward", "authority", "move_voice_direct"]
+NO_CHAT = {"bloomz-7b1", "CT-LLM-SFT-DPO"}   #: no chat cell by design
 
 
 def population():
@@ -156,6 +157,16 @@ def analyse():
                 up, len(W_), "MET" if up >= 6 else "NOT MET"),
                 "**Decomposition verdict (declared rule, 5 of 6):** %s." % v]
         L.append("")
+    #: A "--" is an EMPTY CELL, not a zero: say which, and how many passages each cell kept.
+    L += ["## Empty cells", ""]
+    for l in sorted(lineages, key=lambda x: name[x]):
+        k = {(a, s): len(c.get((l, a, s, "channel"), [])) for a in ("base", "aligned_raw", "aligned_chat")
+             for s in ("individual", "institution")}
+        if any(v == 0 for (a, s), v in k.items() if not (a == "aligned_chat" and name[l] in NO_CHAT)):
+            L.append("- %s: kept passages per cell %s. A DiD needs all four of its cells, so it is undefined here, "
+                     "and the lineage drops out of that count." % (
+                         name[l], ", ".join("%s/%s %d" % (a, s[:4], v) for (a, s), v in k.items())))
+    L += ["- bloomz-7b1 and CT-LLM-SFT-DPO have no aligned-chat cell by design (no chat template).", ""]
     L += ["Cells: mean of the outcome over kept passages (continuation or advice, coherent, perspective kept).",
           "Each DiD = (individual change) - (institution change). total = weights + frame exactly (asserted).",
           "Six lineages for the decomposition, eight for weights: descriptive; see the registration's limits."]
