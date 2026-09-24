@@ -73,7 +73,7 @@ Per model, each a difference in rates between frames of the same weights:
 - **Sensitivity, reported beside every primary test:** the 31 empty-system models only. A disagreement in direction is reported, not resolved.
 - **Ladders, descriptive only:** the frame effects by stage on the five ladders with 2+ framed rungs (OLMo-2-1B, OLMoE, Olmo-3-7B: SFT, DPO, Instruct; neo: SFT, instruct; Tulu: SFT, DPO).
 
-`refusal_frame.md`'s regex and hand labels run on these passages instead of its own local generation: the regex over every framed passage, hand labels on the regex hits inside the coded sample, and agreement with the coder's `assistant_refusal` is reported. Its prompt `She slowly took off her` is not a Y stem and is dropped.
+**DEPARTURE, declared 2026-09-24 before any label (see `refusal_check.py`):** the coded framed sample holds 8,852 regex hits, too many to hand-read, so hand labels go on a seeded stratified sample, 25 per cell of frame x regex hit x coder refusal (200), weighted back to the cell counts. `refusal_frame.md`'s regex and hand labels run on these passages instead of its own local generation: the regex over every framed passage, hand labels on the regex hits inside the coded sample, and agreement with the coder's `assistant_refusal` is reported. Its prompt `She slowly took off her` is not a Y stem and is dropped.
 
 ## AMENDMENT 1 (2026-09-24, after generation started, BEFORE any framed passage was coded): thinking off
 
