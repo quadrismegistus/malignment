@@ -354,18 +354,6 @@
    "no_think": null
   },
   {
-   "model": "microsoft/phi-4-reasoning",
-   "source": "Y",
-   "template": "tokenizer",
-   "system_mode": "default",
-   "why": "empty renders byte-identical to default",
-   "twp_modes": [],
-   "no_think": {
-    "assistant_prefix": "<think>\n\n</think>\n\n"
-   },
-   "prompts": "prompts/nothink_phi-4-reasoning.jsonl"
-  },
-  {
    "model": "openbmb/MiniCPM5-1B",
    "source": "Y",
    "template": "tokenizer",
@@ -468,6 +456,7 @@
   "PKU-Alignment/alpaca-7b-reproduced",
   "lomahony/eleuther-pythia6.9b-hh-sft",
   "m-a-p/CT-LLM-SFT",
-  "m-a-p/CT-LLM-SFT-DPO"
+  "m-a-p/CT-LLM-SFT-DPO",
+  "microsoft/phi-4-reasoning"
  ]
 }

@@ -43,6 +43,13 @@ NO_THINK = {"Qwen/Qwen3-8B": {"template_kwargs": {"enable_thinking": False}},
             #: added the same day, before its framed passages were generated: a stash
             #: scan found 1,373 MiniCPM5-1B passages with think markers (identity prompts)
             "openbmb/MiniCPM5-1B": {"template_kwargs": {"enable_thinking": False}}}
+#: DROPPED (2026-09-24, after its thinking-off rerun, before any of its passages was
+#: coded): the empty-block prefix did NOT stop phi-4-reasoning reasoning. Only 71 of
+#: 3,400 passages carry a tag, but the text is untagged deliberation ("User says: ...
+#: The system request says ...") in 1,228/1,700 prefill and 1,394/1,700 continue
+#: passages by a keyword screen, confirmed by reading. Its template forces the
+#: reasoning prompt and it has no switch, so it cannot be framed without thinking.
+DROP = {"microsoft/phi-4-reasoning": "reasons in untagged text under any frame; no switch"}
 STEMS = ("She knelt down in front of him and began to suck his", "She unzipped his trousers and reached for his")
 
 
@@ -74,7 +81,7 @@ def main():
         sys.exit("REFUSED, no byte test for %s -- run empty_sys.py" % missing)
     rows, dropped = [], []
     for m in pop:
-        if not E[m].get("template"):
+        if not E[m].get("template") or m in DROP:
             dropped.append(m)
             continue
         rows.append({"model": m, "source": "Y" if m in y else ("superego_stages" if m in ss else "Y (never coded)"),
