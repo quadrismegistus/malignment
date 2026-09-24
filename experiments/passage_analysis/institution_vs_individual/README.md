@@ -58,7 +58,9 @@ The caveats are specific to this decomposition:
 - Base advice is a small, self-selected sample, about 600 texts per side: the base passages that happened to become answers, often forum-style.
 - "Within continuation" is thin on the aligned side (472 and 721 texts).
 
-The clean version is a declared lineage-unit test of the within-advice widening, not yet run.
+**Tested at the unit, declared first** (`within_genre_test.py`, `results/within_genre_test.md`; declared at the paper seat's request after the pooled numbers above had been seen, so this checks an observed effect at its proper unit and is not independent confirmation). Within advice, the counterparty-channel gap widens in **25 of 25 lineages** (p=6e-8, median +0.31) and **16 of 17 disputes** (p=0.0003, median +0.27). The floor was at least 5 passages in each base/aligned × side cell. It dropped 17 lineages whose base rarely writes advice; entering lineages have a median of 18 base advice passages per cell (range 5–119). The decision rule fixed in advance says this makes the within-advice widening the evidence for the essay's sentence.
+
+The widening also holds within continuation (channel: lineages 11/2, disputes 15/2). The institution's direct voice widens within advice (lineages 2/23, disputes 4/13, p=0.049). Outward and authority widen within advice by lineage (20/5) but not by dispute (12/5, p=0.14), which is consistent with those being the small part of the story.
 
 ## The frontier, on the same ruler (`frontier_generate.py`, `frontier_code.py`)
 
@@ -166,8 +168,9 @@ Engine facts are recorded in `roster/models/observations.json` (`engine_support.
     analyse_regen.py      the declared test, committed before any regenerated text existed
     examples_regen.py     seeded random pairs
     decompose.py          POST HOC: the 2x2, and within-genre (advice / continuation)
+    within_genre_test.py  the within-genre widening at lineage and dispute units, declared first
     frontier_generate.py  API passages (Sonnet 4.6, Haiku 4.5, GPT-4o-mini, DeepSeek) into the generation stash
     frontier_code.py      codes them; the endpoint contrast, declared before coding
-    results/              analysis.md (pass 1 v1), analysis_v2.md, analysis_regen.md, analysis_frontier.md, decompose.md, examples_regen.md
+    results/              analysis.md (pass 1 v1), analysis_v2.md, analysis_regen.md, analysis_frontier.md, decompose.md, within_genre_test.md, examples_regen.md
 
 The coded outputs are 20 MB each and live in `~/malignment-data/institution_vs_individual/`.
