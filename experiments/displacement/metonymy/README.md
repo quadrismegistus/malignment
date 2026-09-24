@@ -3,7 +3,7 @@ subject: metonymy
 status: "RUN 2026-09-18, 50 endpoint lineages, English, both took-off frames. Ports the `X_metonymy` finding out of `malign-logits/meta/M01_displacement` and re-runs it at 50 lineages on a new instrument. The word-level test and the figure producer are new here and are EXPLORATORY: nothing in this folder was registered before it was run."
 kind: question
 question: Inside one scene, does the word alignment moves TO sit further from the body than the word it moves FROM?
-headline: "It does, and the ordering replicates at 50 lineages on an instrument built after the original. Unit = the word, statistic = the median of its per-lineage delta over the lineages that carry it, minimum 10 carriers: on the published scale D the correlation between how far out a word sits and how much alignment raises it runs rho +0.726 (n=72, p=5.3e-13) in the her-frame and +0.535 (n=57, p=1.8e-05) in the his-frame, and it is flat across carrier thresholds from 1 to 40. A NEW survey instrument, administered blind over 479 candidate nouns rather than the original's 122-word list, reproduces it independently: +0.524 (n=96) and +0.387 (n=78). Eight of the nine rulers give the same sign in both frames; the one null is scale A, the open dimension the coder named WITHOUT seeing the sentences, which is the priming comparison the original registration set up and is the scale the finding does not rest on. The PAIRED cell test -- top faller against top riser at the same cell, 100 cells -- is the weaker of the two and carries the her-frame only (35/50, p=0.0066 on D; 29/49, p=0.25 on his). **The figure X.1 needs no new garments**: all 27 + 22 words it draws still move at 50 lineages, every value keeps its sign but two near-zero ones, and `figure.py` recolors it from the producer's own output."
+headline: "It does, and the ordering replicates at 50 lineages on an instrument built after the original. Unit = the word, statistic = the median of its per-lineage delta over the lineages that carry it, minimum 10 carriers: on the published scale D the correlation between how far out a word sits and how much alignment raises it runs rho +0.726 (n=72, p=5.3e-13) in the her-frame and +0.535 (n=57, p=1.8e-05) in the his-frame, and it is flat across carrier thresholds from 1 to 40. A NEW survey instrument, administered blind over 479 candidate nouns rather than the original's 122-word list, reproduces it independently: +0.524 (n=96) and +0.387 (n=78). Eight of the nine grid rows give the same sign in both frames, but the rows are not nine independent rulers: they inter-correlate at 0.70 to 0.93 and `survey` is the mean of three others, so they are three or four overlapping rankings recovering one ordering. The one null row is scale A, the open dimension named WITHOUT the sentences, and it is null because its two coder runs named opposite axes and their mean cancels; run alone, the Opus run (\"layering depth\") recovers the ordering from the word list alone (rho +0.40 her). What the scene adds is agreement on the axis, not the ordering. The PAIRED cell test -- top faller against top riser at the same cell, 100 cells -- is the weaker of the two and carries the her-frame only (35/50, p=0.0066 on D; 29/49, p=0.25 on his). **The figure X.1 needs no new garments**: all 27 + 22 words it draws still move at 50 lineages, every value keeps its sign but two near-zero ones, and `figure.py` recolors it from the producer's own output."
 ---
 
 # metonymy
@@ -56,6 +56,10 @@ Every scale is converted by the producer to one quantity, `out`, HIGH = further 
 | `dressing` | when it goes on | 15/25 p=0.42 | n=96 rho +0.549 p=6.8e-09 | 12/30 p=0.36 | n=78 rho +0.340 p=0.0023 |
 | `survey` | the three above, pooled | 15/25 p=0.42 | n=96 rho +0.524 p=4.3e-08 | 12/30 p=0.36 | n=78 rho +0.387 p=0.00047 |
 
+**The A row is not a measurement of one axis** -- see the A section below: its two runs point opposite ways and `run.py` negates both as if they pointed like B.
+
+**Nine rows, not nine rulers.** `data/scale_independence_check.md` (largeliterarymodels seat, 2026-09-20) measured the grid's collinearity: Cexp against D +0.926, and B, Cexp, Ccharge and D all at 0.70 to 0.93 with one another on the 71 words they share; exposure against position +0.867 on jev; `survey` correlates +0.83 to +0.94 with its own three components. So the grid is three or four overlapping operationalisations recovering one ordering, not nine instruments concurring, and the agreement should be quoted that way.
+
 Reproduce any row with `python run.py --scale <name>`; the files are `results/words_<scale>.csv` and `results/pairs_<scale>.csv`, one pair per scale because a sweep that wrote to one filename would leave the last ruler's numbers under the default run's name.
 
 ### The word-level test does not depend on the threshold
@@ -76,9 +80,23 @@ Every cell is significant at p<0.01. The default of 10 is not a threshold the ef
 
 On the scale the published figure used, the her-frame runs 35/50 (p=0.0066) and the his-frame 29/49 (p=0.25). On the survey scales the paired test loses most of its cells -- the two-coder veto admits 181 of 479 words, so only 55 of 100 cells carry a score on BOTH the faller and the riser -- and it is null or negative there. **The word-level and paired tests are not interchangeable and this folder's headline is the word-level one.**
 
-## `A` against `D` is the original's own priming check, and it fires
+## `A` against `D`: the scene settles the axis, not the ordering
 
-The registration asked the coder for an open dimension twice: once with the sentences withheld (`A`) and once with both sentences shown (`D`). Identical scores would mean the scene adds nothing to the ranking. A is the only null in the grid, in both frames, and D is the strongest ported scale in both. Suggested reading, not asserted: the ordering the finding measures is one the coder produces when shown the scene and does not produce from the word list alone. What that says about the construct is a separate question from whether the ordering exists -- the survey instrument, built later and shown both frames as named fields, reproduces it.
+The registration asked the coder for an open dimension twice: once with the sentences withheld (`A`) and once with both sentences shown (`D`). A is the only null in the grid. **This section used to read that null as the coder not producing the ordering from the word list alone. That reading is wrong**, and `scale_a_check.py` (-> `results/scale_a_check.md`) shows why.
+
+A's two runs did not name one dimension. From `malign-logits/meta/M01_displacement/results/x_coders/A_{opus,sonnet}.json`:
+
+| run | dimension it named | 100 means | raw rho with Δ, her | his |
+|---|---|---|---|---|
+| `A_opus` | "Layering depth: how far from the skin the item sits" | outermost, removed first | **+0.396** (p=0.00058) | +0.218 (p=0.10) |
+| `A_sonnet` | "How much of the body the item covers, or how large/bulky it is" | full-length garment over other clothing | −0.354 (p=0.0023) | −0.395 (p=0.0022) |
+| `mean`, as `run.py` uses it | -- | -- | +0.141 (p=0.23) | −0.056 (p=0.68) |
+
+The runs agree at +0.064 on the 71 words the ported scales share. `A_opus` runs OPPOSITE to the other ported scales (100 = outermost, where B-D put 100 against the skin), which is why it correlates −0.846 with B, and it is the source of the −0.838 the independence check could not reconcile. `run.py` negates A with B-D, so `A_opus` enters the mean with the wrong sign and `A_sonnet`, a different axis, cancels what is left. **The null is two opposite signals averaged, not the absence of a signal.** The archive already recorded this: `x_coder_analysis.py` excluded A from the headline grid as "two models improvising, not an instrument". The port kept it as a row and lost the reason.
+
+What the comparison does show: without the scene, one coder (Opus) found the ordering unprompted, as layering depth, and it predicts the deltas in the finding's direction in the her-frame (+0.40). The other chose size, a different axis. With both sentences shown, the two runs converge on one dimension, intimacy of exposure, and agree at +0.89. **So the scene is what makes coders agree on the axis; it is not what makes the ordering available.** That is a weaker claim than the old one and a better-founded one, and it removes the worry that the ordering is a product of showing the coder the sentences.
+
+`A` is kept in the grid and in `run.py` unchanged, because it is the provenance of the original comparison, but it should not be quoted as a ruler or as a null.
 
 ## The new instrument
 

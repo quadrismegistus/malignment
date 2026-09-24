@@ -49,3 +49,7 @@ wording and review are in `levels_draft.md`.
 
 These files stay because they are the provenance of a published figure, not
 because they are the current measurement.
+
+## A IS TWO AXES
+
+A's two runs named different dimensions and point opposite ways: `A_opus` "layering depth", 100 = outermost; `A_sonnet` size or coverage, 100 = full-length garment. They agree at +0.06. `run.py` negates A like the others, so its `mean` is a wrong-signed axis averaged with an unrelated one, and its null is that cancellation. See the README's A section and `../scale_a_check.py`.
