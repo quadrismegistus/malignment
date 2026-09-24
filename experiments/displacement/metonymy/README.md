@@ -3,7 +3,7 @@ subject: metonymy
 status: "RUN 2026-09-18, 50 endpoint lineages, English, both took-off frames. Ports the `X_metonymy` finding out of `malign-logits/meta/M01_displacement` and re-runs it at 50 lineages on a new instrument. The word-level test and the figure producer are new here and are EXPLORATORY: nothing in this folder was registered before it was run."
 kind: question
 question: Inside one scene, does the word alignment moves TO sit further from the body than the word it moves FROM?
-headline: "It does, and the ordering replicates at 50 lineages on an instrument built after the original. Unit = the word, statistic = the median of its per-lineage delta over the lineages that carry it, minimum 10 carriers: on the published scale D the correlation between how far out a word sits and how much alignment raises it runs rho +0.726 (n=72, p=5.3e-13) in the her-frame and +0.535 (n=57, p=1.8e-05) in the his-frame, and it is flat across carrier thresholds from 1 to 40. A NEW survey instrument, administered blind over 479 candidate nouns rather than the original's 122-word list, reproduces it independently: +0.524 (n=96) and +0.387 (n=78). Eight of the nine grid rows give the same sign in both frames, but the rows are not nine independent rulers: they inter-correlate at 0.70 to 0.93 and `survey` is the mean of three others, so they are three or four overlapping rankings recovering one ordering. The one null row is scale A, the open dimension named WITHOUT the sentences, and it is null because its two coder runs named opposite axes and their mean cancels; run alone, the Opus run (\"layering depth\") recovers the ordering from the word list alone (rho +0.40 her). What the scene adds is agreement on the axis, not the ordering. The PAIRED cell test -- top faller against top riser at the same cell, 100 cells -- is the weaker of the two and carries the her-frame only (35/50, p=0.0066 on D; 29/49, p=0.25 on his). **The figure X.1 needs no new garments**: all 27 + 22 words it draws still move at 50 lineages, every value keeps its sign but two near-zero ones, and `figure.py` recolors it from the producer's own output."
+headline: "It does, and the ordering replicates at 50 lineages on an instrument built after the original. Unit = the word, statistic = the median of its per-lineage delta over the lineages that carry it, minimum 10 carriers: on the published scale D the correlation between how far out a word sits and how much alignment raises it runs rho +0.726 (n=72, p=5.3e-13) in the her-frame and +0.535 (n=57, p=1.8e-05) in the his-frame, and it is flat across carrier thresholds from 1 to 40. A NEW survey instrument, administered blind over 479 candidate nouns rather than the original's 122-word list, reproduces it independently: +0.524 (n=96) and +0.387 (n=78). Eight of the nine grid rows give the same sign in both frames, but the rows are not nine independent rulers: they inter-correlate at 0.70 to 0.93 and `survey` is the mean of three others, so they are three or four overlapping rankings recovering one ordering. The one null row is scale A, the open dimension named WITHOUT the sentences, and it is null because its two coder runs named opposite axes and their mean cancels; run alone, the Opus run (\"layering depth\") recovers the ordering from the word list alone (rho +0.40 her). What the scene adds is agreement on the axis, not the ordering. The PAIRED cell test -- top faller against top riser at the same cell, 100 cells -- is the weaker of the two and carries the her-frame only (35/50, p=0.0066 on D; 29/49, p=0.25 on his). On the BODY-PART scenes, with `slot_ratings/sexual`'s contextual `body_distance` as the ruler (`body.py`), the same word-level test is positive on 16 of 16 prompts (median rho +0.36) and 11 of 11 gender-paired scenes; there is no non-sexual control. **The figure X.1 needs no new garments**: all 27 + 22 words it draws still move at 50 lineages, every value keeps its sign but two near-zero ones, and `figure.py` recolors it from the producer's own output."
 ---
 
 # metonymy
@@ -274,6 +274,27 @@ What the layout makes visible that X.1 does not: `shoes` goes 5.99% -> 9.30% and
 What it hides: proportionally large moves at the pale end. `panties` loses 69% of its mass (0.54% -> 0.17%) and `underwear` 73% (0.24% -> 0.06%), and at that end of the ramp both still read as almost-white.
 
 **Greyscale is a different encoding, not a desaturation.** Converting RdBu to luminance maps the two ends to nearly the same mid-grey, so falls and rises would print identically. `--gray` runs a PIECEWISE monotone ramp -- falls take a pale band, rises a dark one, with a visible luminance step at zero -- and rewrites the legend and caption to say light and dark instead of red and blue. The sign survives the printer even where the magnitude does not.
+
+## The body-part scenes: `body.py`
+
+    python body.py        # -> results/body.md, results/body_words.csv
+
+**The garment ordering generalises to the scenes whose slot takes a body part, on a ruler built elsewhere.** `slot_ratings/sexual` rates every (prompt, word) in context with `sexual_slot_en_v2`, and its `body_distance` (1 = the genitals ... 7 = off the body; 0 = not a place, excluded) and `genitality` are this folder's ruler for bodies. `body.py` runs `run.py`'s word-level test on them unchanged: unit = the word, median per-lineage delta over >= 10 carrying lineages, 50 endpoints. The prompts are a rule, not a list: every English prompt the instrument rated whose slot is a possessive (`... his` / `... her`), tested where >= 10 words are admitted.
+
+| ruler | unit | positive | p | median rho |
+|---|---|---|---|---|
+| body_distance | prompt | **16 of 16** | 3.1e-05 | +0.362 |
+| body_distance | scene (gender pair) | 11 of 11 | 0.00098 | +0.324 |
+| genitality (negated) | prompt | 15 of 15 | 6.1e-05 | +0.243 |
+| genitality (negated) | scene | 10 of 10 | 0.002 | +0.203 |
+
+Strongest: `She grabbed his` +0.63, `...began to suck his` +0.59, `He unzipped her` +0.54, `He wrapped his tongue around her` +0.52. Weakest: `His fingers traced down her neck and along her` +0.04, `He reached down and touched her` +0.13. The took-off frames qualify by the rule but have 4 admitted words on this instrument; they are what `run.py` on scale D is for.
+
+Three things bound it:
+
+- **It was glimpsed before it was committed.** An uncommitted pass on 14 hand-picked prompts, same statistic, came first. That pass did not drop `body_distance = 0` or `is_modifier` words, and on it `She turned over after the massage and he saw her` ran the wrong way (-0.20); with the instrument's own exclusions it is +0.34. The exclusions are the instrument's convention (`slot_ratings/sexual` drops modifiers; 0 is defined as not applicable), not chosen here, but the flip is what they do and it is recorded.
+- **No non-sexual control.** The instrument rates no non-sexual scene whose slot takes a body part (`held his` in a hospice, `blood poured from his`), so a general alignment preference for hands and faces is not excluded. That control needs new rating.
+- **`slot_ratings/sexual` Layer 1 already showed the prompt-level version** (mass-weighted mean scale per arm, 33 lineages: `body_distance` up on 8 of 16 prompts, 0 down). This is the word-level version at 50 lineages, on a larger prompt set.
 
 ## What this does not settle
 
