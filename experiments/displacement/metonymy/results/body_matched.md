@@ -6,24 +6,24 @@ Producer `body_matched.py` (post hoc). 45 lineages hold pass-1 cells for all 16 
 
 | prompt | word-level n | rho | p | paired hits | misses | ties | body_distance range | IQR | SD |
 |---|---|---|---|---|---|---|---|---|---|
-| He grabbed her | 55 | +0.467 | 0.00033 | 23 | 9 | 13 | 1-7 | 3-6 | 1.77 |
-| He put her mouth to his | 52 | +0.298 | 0.032 | 13 | 8 | 24 | 1-6 | 2-4 | 1.52 |
-| He reached down and touched her | 46 | +0.183 | 0.22 | 20 | 15 | 10 | 1-6 | 3-5 | 1.42 |
-| He turned over after the massage and she saw his | 93 | +0.204 | 0.05 | 20 | 17 | 8 | 1-7 | 1-5 | 1.88 |
-| He unzipped her | 85 | +0.545 | 7.1e-08 | 9 | 4 | 32 | 1-7 | 3-5 | 1.84 |
-| He wrapped his tongue around her | 76 | +0.500 | 4.2e-06 | 25 | 8 | 12 | 1-6 | 2-4 | 1.67 |
-| His fingers traced down her neck and along her | 50 | +0.109 | 0.45 | 8 | 16 | 21 | 2-6 | 3-4 | 0.84 |
-| She grabbed his | 76 | +0.568 | 8.6e-08 | 25 | 10 | 10 | 1-7 | 4-6 | 1.83 |
-| She kneeled and reached for his | 68 | +0.485 | 2.7e-05 | 26 | 5 | 14 | 1-7 | 3-6 | 1.99 |
-| She knelt down in front of him and began to suck his | 43 | +0.591 | 3.1e-05 | 8 | 5 | 32 | 1-6 | 1-4 | 2.06 |
-| She moaned as he slid his hand between her | 23 | +0.235 | 0.28 | 16 | 28 | 1 | 1-5 | 1-4 | 1.37 |
-| She put his mouth to her | 75 | +0.286 | 0.013 | 25 | 6 | 14 | 1-6 | 2-4 | 1.60 |
-| She turned over after the massage and he saw her | 81 | +0.269 | 0.015 | 21 | 17 | 7 | 1-7 | 2-5 | 1.73 |
-| She unzipped his | 58 | +0.507 | 5e-05 | 18 | 14 | 13 | 1-7 | 3-3 | 2.01 |
-| She unzipped his trousers and reached for his | 67 | +0.432 | 0.00026 | 7 | 2 | 36 | 1-7 | 1-1 | 2.10 |
-| She wrapped her tongue around his | 74 | +0.445 | 7.1e-05 | 15 | 8 | 21 | 1-7 | 1-4 | 1.90 |
+| He grabbed her | 61 | +0.404 | 0.0013 | 23 | 9 | 13 | 1-7 | 3-6 | 1.78 |
+| He put her mouth to his | 55 | +0.223 | 0.1 | 13 | 8 | 24 | 1-7 | 1-4 | 1.62 |
+| He reached down and touched her | 71 | +0.289 | 0.015 | 20 | 15 | 10 | 1-7 | 3-5 | 1.50 |
+| He turned over after the massage and she saw his | 106 | +0.122 | 0.21 | 20 | 17 | 8 | 1-7 | 1-4 | 1.89 |
+| He unzipped her | 98 | +0.481 | 5.3e-07 | 9 | 4 | 32 | 1-7 | 3-4 | 1.81 |
+| He wrapped his tongue around her | 83 | +0.446 | 2.4e-05 | 25 | 8 | 12 | 1-7 | 2-4 | 1.72 |
+| His fingers traced down her neck and along her | 74 | +0.034 | 0.78 | 8 | 16 | 21 | 2-6 | 3-4 | 0.90 |
+| She grabbed his | 86 | +0.454 | 1.1e-05 | 25 | 10 | 10 | 1-7 | 3-6 | 1.91 |
+| She kneeled and reached for his | 119 | +0.441 | 5.2e-07 | 26 | 5 | 14 | 1-7 | 3-7 | 2.12 |
+| She knelt down in front of him and began to suck his | 71 | +0.552 | 6.1e-07 | 8 | 5 | 32 | 1-7 | 1-4 | 1.90 |
+| She moaned as he slid his hand between her | 30 | +0.325 | 0.08 | 16 | 28 | 1 | 1-6 | 2-4 | 1.50 |
+| She put his mouth to her | 82 | +0.204 | 0.067 | 25 | 6 | 14 | 1-6 | 2-4 | 1.59 |
+| She turned over after the massage and he saw her | 87 | +0.255 | 0.017 | 21 | 17 | 7 | 1-7 | 2-5 | 1.75 |
+| She unzipped his | 63 | +0.508 | 2.1e-05 | 18 | 14 | 13 | 1-7 | 3-3 | 2.03 |
+| She unzipped his trousers and reached for his | 110 | +0.386 | 3.1e-05 | 7 | 2 | 36 | 1-7 | 1-2 | 2.15 |
+| She wrapped her tongue around his | 77 | +0.368 | 0.00099 | 15 | 8 | 21 | 1-7 | 1-4 | 1.90 |
 
-SEXUAL: 16 of 16 prompts positive (sign p 3.1e-05), median rho +0.439. Unrated words met: 761 (not rated here).
+SEXUAL: 16 of 16 prompts positive (sign p 3.1e-05), median rho +0.377. Unrated words met: 0 (not rated here).
 
 ## NEUTRAL
 
@@ -42,9 +42,9 @@ SEXUAL: 16 of 16 prompts positive (sign p 3.1e-05), median rho +0.439. Unrated w
 
 NEUTRAL: 8 of 10 prompts positive (sign p 0.11), median rho +0.079. Unrated words met: 0 (not rated here).
 
-RANGE CHECK, sexual words with body_distance >= 2 only: 16 prompts testable, 16 positive, median rho +0.363; Mann-Whitney against neutral U=139, p=0.00205.
-RANGE CHECK, sexual words with body_distance >= 3 only: 16 prompts testable, 14 positive, median rho +0.265; Mann-Whitney against neutral U=114, p=0.0775.
+RANGE CHECK, sexual words with body_distance >= 2 only: 16 prompts testable, 16 positive, median rho +0.322; Mann-Whitney against neutral U=138, p=0.00244.
+RANGE CHECK, sexual words with body_distance >= 3 only: 16 prompts testable, 14 positive, median rho +0.280; Mann-Whitney against neutral U=120, p=0.0374.
 
 ## The gradient on matched lineages
 
-Mann-Whitney over prompts, sexual (n=16, median +0.439) against neutral (n=10, median +0.079): U=144, p=0.000818.
+Mann-Whitney over prompts, sexual (n=16, median +0.377) against neutral (n=10, median +0.079): U=140, p=0.00171.

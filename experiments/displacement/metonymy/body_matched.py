@@ -20,8 +20,9 @@ Same tests as `body.py` / `body_paired.py`: word-level Spearman of body_distance
 against the median per-lineage delta (>= 10 carriers, >= 10 admitted words), and
 the paired largest-valid-faller against largest-valid-riser count. Ruler: the
 sexual_slot_en_v2 task (ratable, not a modifier, body_distance > 0). No new
-rating: a word this matched read admits that no source has rated is COUNTED
-and reported, not rated.
+rating by default: a word this read meets that no source has rated is COUNTED
+and reported. `--rate` (RH approved, 2026-09-24) rates them first, into
+`results/body_matched_rated.json`.
 
 Also reported, per group: the SPREAD of body_distance among admitted words
 (range, IQR, SD), because neutral candidates rarely include the genitals and a
@@ -40,6 +41,7 @@ import body_neutral as BN  # noqa: E402
 import body_paired as BP  # noqa: E402
 
 MIN_CARRIERS, MIN_WORDS = 10, 10
+RATED = os.path.join(HERE, "results", "body_matched_rated.json")
 
 
 def stash(model, prompts):
@@ -68,10 +70,35 @@ def stash(model, prompts):
     return out
 
 
+def _rate(jobs, R):
+    sys.path.insert(0, os.path.join(ROOT, "experiments", "slot_ratings", "sexual"))
+    from task import SexualSlotEN, SCALES_SEX, render
+    t = SexualSlotEN()
+    errs = {}
+    res = t.map([render(p, w) for p, w in jobs], metadata_list=[{"prompt": p, "word": w} for p, w in jobs],
+                num_workers=16, errors=errs)
+    old = json.load(open(RATED))["rows"] if os.path.exists(RATED) else []
+    for (p, w), r in zip(jobs, res):
+        if r is None:
+            continue
+        rec = dict(prompt=p, word=w, ratable=bool(r.ratable), reading=r.reading, referent_kind=r.referent_kind,
+                   zone_kind=r.zone_kind, is_modifier=bool(r.is_modifier))
+        if r.ratable:
+            rec.update({s: getattr(r, s) for s in SCALES_SEX})
+        old.append(rec)
+        R[(p, w)] = rec
+    json.dump(dict(_what="sexual_slot_en_v2 ratings for words body_matched.py's pass-1 read met unrated; "
+                         "NOT filed under slot_ratings/", rows=old), open(RATED, "w"), indent=1)
+    print("  rated %d, errors %d" % (len(jobs) - len(errs), len(errs)), flush=True)
+
+
 def main():
     from scipy.stats import binomtest, mannwhitneyu, spearmanr
     from malignment import roster
     R = BN.ratings()
+    if os.path.exists(RATED):
+        for r in json.load(open(RATED))["rows"]:
+            R.setdefault((r["prompt"], r["word"]), r)
     sexual = BP.sexual_prompts(R)
     neutral = list(BN.PROMPTS)
     groups = {"SEXUAL": sexual, "NEUTRAL": neutral}
@@ -80,6 +107,24 @@ def main():
     S = {m: stash(m, allp) for pair in eps.items() for m in pair}
     #: a lineage enters if BOTH arms hold pass-1 cells for EVERY prompt in BOTH groups
     lin = [(b, a) for b, a in eps.items() if all(p in S[b] and p in S[a] for p in allp)]
+    if "--rate" in sys.argv:
+        #: RH approved 2026-09-24: rate what this read meets unrated, word-level
+        #: carriers first, then the paired walk until it meets none.
+        for rnd in range(6):
+            need = set()
+            for p in allp:
+                car = collections.Counter()
+                for b, a in lin:
+                    wb, wa = S[b][p], S[a][p]
+                    ws = [(w, wa.get(w, 0.0) - wb.get(w, 0.0)) for w in set(wb) | set(wa)]
+                    car.update(w for w, _x in ws)
+                    for lst in BN.sorted_sides(ws):
+                        need |= {(p, w) for w in BP.walk(lst, R, p)[1]}
+                need |= {(p, w) for w, n in car.items() if n >= MIN_CARRIERS and (p, w) not in R}
+            print("rating round %d: %d unrated" % (rnd + 1, len(need)), flush=True)
+            if not need:
+                break
+            _rate(sorted(need), R)
     L = ["# Sexual against neutral on matched lineages and a matched pass", "",
          "Producer `body_matched.py` (post hoc). %d lineages hold pass-1 cells for all %d sexual and %d neutral "
          "prompts on both arms; every number below is on exactly those lineages, pass 1 only, read from the "
