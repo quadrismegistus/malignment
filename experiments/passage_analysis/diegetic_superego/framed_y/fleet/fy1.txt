@@ -1,0 +1,7 @@
+tiiuae/Falcon3-10B-Instruct experiments/passage_analysis/diegetic_superego/framed_y/prompts/framed_empty.jsonl float16
+llm-jp/llm-jp-3-7.2b-instruct3 experiments/passage_analysis/diegetic_superego/framed_y/prompts/framed_empty.jsonl float16
+allenai/OLMoE-1B-7B-0125-DPO experiments/passage_analysis/diegetic_superego/framed_y/prompts/framed_empty.jsonl float16
+baichuan-inc/Baichuan2-7B-Chat experiments/passage_analysis/diegetic_superego/framed_y/prompts/framed_default.jsonl float16
+tiiuae/falcon-mamba-7b-instruct experiments/passage_analysis/diegetic_superego/framed_y/prompts/framed_empty.jsonl float16
+allenai/OLMo-2-0425-1B-DPO experiments/passage_analysis/diegetic_superego/framed_y/prompts/framed_empty.jsonl float16
+openbmb/MiniCPM5-1B experiments/passage_analysis/diegetic_superego/framed_y/prompts/framed_empty.jsonl float16

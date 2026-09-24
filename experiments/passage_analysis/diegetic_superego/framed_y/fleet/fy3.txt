@@ -1,0 +1,7 @@
+google/gemma-2-9b-it experiments/passage_analysis/diegetic_superego/framed_y/prompts/framed_default.jsonl bfloat16
+allenai/Llama-3.1-Tulu-3-8B-SFT experiments/passage_analysis/diegetic_superego/framed_y/prompts/framed_empty.jsonl float16
+PKU-Alignment/beaver-7b-v1.0 experiments/passage_analysis/diegetic_superego/framed_y/prompts/framed_empty.jsonl float16
+allenai/Olmo-3-7B-Instruct-DPO experiments/passage_analysis/diegetic_superego/framed_y/prompts/framed_empty.jsonl float16
+tiiuae/Falcon3-7B-Instruct experiments/passage_analysis/diegetic_superego/framed_y/prompts/framed_empty.jsonl float16
+stabilityai/stablelm-2-zephyr-1_6b experiments/passage_analysis/diegetic_superego/framed_y/prompts/framed_empty.jsonl float16
+tiiuae/Falcon3-1B-Instruct experiments/passage_analysis/diegetic_superego/framed_y/prompts/framed_empty.jsonl float16

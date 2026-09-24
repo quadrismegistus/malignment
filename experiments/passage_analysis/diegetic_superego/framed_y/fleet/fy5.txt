@@ -1,0 +1,7 @@
+ContextualAI/archangel_sft-dpo_pythia2-8b experiments/passage_analysis/diegetic_superego/framed_y/prompts/framed_default.jsonl float16
+Qwen/Qwen3-8B experiments/passage_analysis/diegetic_superego/framed_y/prompts/framed_empty.jsonl float16
+LLM360/AmberSafe experiments/passage_analysis/diegetic_superego/framed_y/prompts/framed_default.jsonl float16
+allenai/OLMoE-1B-7B-0125-SFT experiments/passage_analysis/diegetic_superego/framed_y/prompts/framed_empty.jsonl float16
+m-a-p/neo_7b_instruct_v0.1 experiments/passage_analysis/diegetic_superego/framed_y/prompts/framed_empty.jsonl float16
+HuggingFaceTB/SmolLM3-3B experiments/passage_analysis/diegetic_superego/framed_y/prompts/framed_default.jsonl float16
+Qwen/Qwen2.5-0.5B-Instruct experiments/passage_analysis/diegetic_superego/framed_y/prompts/framed_empty.jsonl float16

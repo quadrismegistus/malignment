@@ -1,0 +1,6 @@
+microsoft/phi-4-reasoning experiments/passage_analysis/diegetic_superego/framed_y/prompts/framed_default.jsonl float16
+BSC-LT/salamandra-7b-instruct experiments/passage_analysis/diegetic_superego/framed_y/prompts/framed_empty.jsonl float16
+allenai/OLMoE-1B-7B-0125-Instruct experiments/passage_analysis/diegetic_superego/framed_y/prompts/framed_empty.jsonl float16
+inceptionai/jais-family-6p7b-chat experiments/passage_analysis/diegetic_superego/framed_y/prompts/framed_empty.jsonl float16
+togethercomputer/RedPajama-INCITE-7B-Chat experiments/passage_analysis/diegetic_superego/framed_y/prompts/framed_default.jsonl float16
+allenai/OLMo-2-0425-1B-Instruct experiments/passage_analysis/diegetic_superego/framed_y/prompts/framed_empty.jsonl float16

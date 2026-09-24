@@ -1,0 +1,7 @@
+01-ai/Yi-1.5-9B-Chat experiments/passage_analysis/diegetic_superego/framed_y/prompts/framed_default.jsonl float16
+allenai/Llama-3.1-Tulu-3-8B-DPO experiments/passage_analysis/diegetic_superego/framed_y/prompts/framed_empty.jsonl float16
+OpenLLM-France/Lucie-7B-Instruct-v1.1 experiments/passage_analysis/diegetic_superego/framed_y/prompts/framed_empty.jsonl float16
+allenai/Olmo-3-7B-Instruct experiments/passage_analysis/diegetic_superego/framed_y/prompts/framed_empty.jsonl float16
+m-a-p/neo_7b_sft_v0.1 experiments/passage_analysis/diegetic_superego/framed_y/prompts/framed_empty.jsonl float16
+tiiuae/Falcon3-3B-Instruct experiments/passage_analysis/diegetic_superego/framed_y/prompts/framed_empty.jsonl float16
+HuggingFaceTB/SmolLM2-360M-Instruct experiments/passage_analysis/diegetic_superego/framed_y/prompts/framed_empty.jsonl float16

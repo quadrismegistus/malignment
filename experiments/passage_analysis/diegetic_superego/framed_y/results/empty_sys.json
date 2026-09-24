@@ -1,0 +1,317 @@
+{
+ "01-ai/Yi-1.5-9B-Chat": {
+  "default_chars": 53,
+  "empty_able": false,
+  "empty_chars": 53,
+  "template": "tokenizer",
+  "why": "empty renders byte-identical to default"
+ },
+ "BSC-LT/salamandra-7b-instruct": {
+  "default_chars": 1491,
+  "empty_able": true,
+  "empty_chars": 83,
+  "template": "tokenizer",
+  "why": "renders differ"
+ },
+ "ContextualAI/archangel_sft-dpo_pythia2-8b": {
+  "default_chars": 41,
+  "empty_able": false,
+  "empty_chars": 41,
+  "template": "override",
+  "why": "empty renders byte-identical to default"
+ },
+ "ContextualAI/archangel_sft_pythia2-8b": {
+  "empty_able": false,
+  "template": null,
+  "why": "no template"
+ },
+ "HuggingFaceTB/SmolLM2-360M-Instruct": {
+  "default_chars": 151,
+  "empty_able": true,
+  "empty_chars": 83,
+  "template": "tokenizer",
+  "why": "renders differ"
+ },
+ "HuggingFaceTB/SmolLM3-3B": {
+  "default_chars": 1360,
+  "empty_able": false,
+  "empty_chars": 1360,
+  "template": "tokenizer",
+  "why": "empty renders byte-identical to default"
+ },
+ "LLM360/AmberChat": {
+  "empty_able": false,
+  "template": null,
+  "why": "no template"
+ },
+ "LLM360/AmberSafe": {
+  "default_chars": 175,
+  "empty_able": false,
+  "empty_chars": 175,
+  "template": "override",
+  "why": "empty renders byte-identical to default"
+ },
+ "OpenLLM-France/Lucie-7B-Instruct-v1.1": {
+  "default_chars": 105,
+  "empty_able": true,
+  "empty_chars": 159,
+  "template": "tokenizer",
+  "why": "renders differ"
+ },
+ "PKU-Alignment/alpaca-7b-reproduced": {
+  "empty_able": false,
+  "template": null,
+  "why": "no template"
+ },
+ "PKU-Alignment/beaver-7b-v1.0": {
+  "default_chars": 47,
+  "empty_able": true,
+  "empty_chars": 20,
+  "template": "override",
+  "why": "renders differ"
+ },
+ "Qwen/Qwen2.5-0.5B-Instruct": {
+  "default_chars": 151,
+  "empty_able": true,
+  "empty_chars": 83,
+  "template": "tokenizer",
+  "why": "renders differ"
+ },
+ "Qwen/Qwen2.5-7B-Instruct": {
+  "default_chars": 151,
+  "empty_able": true,
+  "empty_chars": 83,
+  "template": "tokenizer",
+  "why": "renders differ"
+ },
+ "Qwen/Qwen3-8B": {
+  "default_chars": 53,
+  "empty_able": true,
+  "empty_chars": 83,
+  "template": "tokenizer",
+  "why": "renders differ"
+ },
+ "TinyLlama/TinyLlama-1.1B-Chat-v1.0": {
+  "default_chars": 31,
+  "empty_able": true,
+  "empty_chars": 47,
+  "template": "tokenizer",
+  "why": "renders differ"
+ },
+ "allenai/Llama-3.1-Tulu-3-8B-DPO": {
+  "default_chars": 27,
+  "empty_able": true,
+  "empty_chars": 39,
+  "template": "tokenizer",
+  "why": "renders differ"
+ },
+ "allenai/Llama-3.1-Tulu-3-8B-SFT": {
+  "default_chars": 27,
+  "empty_able": true,
+  "empty_chars": 39,
+  "template": "tokenizer",
+  "why": "renders differ"
+ },
+ "allenai/OLMo-2-0425-1B-DPO": {
+  "default_chars": 40,
+  "empty_able": true,
+  "empty_chars": 52,
+  "template": "tokenizer",
+  "why": "renders differ"
+ },
+ "allenai/OLMo-2-0425-1B-Instruct": {
+  "default_chars": 40,
+  "empty_able": true,
+  "empty_chars": 52,
+  "template": "tokenizer",
+  "why": "renders differ"
+ },
+ "allenai/OLMo-2-0425-1B-SFT": {
+  "default_chars": 40,
+  "empty_able": true,
+  "empty_chars": 52,
+  "template": "tokenizer",
+  "why": "renders differ"
+ },
+ "allenai/OLMoE-1B-7B-0125-DPO": {
+  "default_chars": 43,
+  "empty_able": true,
+  "empty_chars": 55,
+  "template": "tokenizer",
+  "why": "renders differ"
+ },
+ "allenai/OLMoE-1B-7B-0125-Instruct": {
+  "default_chars": 43,
+  "empty_able": true,
+  "empty_chars": 55,
+  "template": "tokenizer",
+  "why": "renders differ"
+ },
+ "allenai/OLMoE-1B-7B-0125-SFT": {
+  "default_chars": 43,
+  "empty_able": true,
+  "empty_chars": 55,
+  "template": "tokenizer",
+  "why": "renders differ"
+ },
+ "allenai/Olmo-3-7B-Instruct": {
+  "default_chars": 206,
+  "empty_able": true,
+  "empty_chars": 83,
+  "template": "tokenizer",
+  "why": "renders differ"
+ },
+ "allenai/Olmo-3-7B-Instruct-DPO": {
+  "default_chars": 206,
+  "empty_able": true,
+  "empty_chars": 83,
+  "template": "tokenizer",
+  "why": "renders differ"
+ },
+ "allenai/Olmo-3-7B-Instruct-SFT": {
+  "default_chars": 206,
+  "empty_able": true,
+  "empty_chars": 83,
+  "template": "tokenizer",
+  "why": "renders differ"
+ },
+ "baichuan-inc/Baichuan2-7B-Chat": {
+  "default_chars": 31,
+  "empty_able": false,
+  "empty_chars": 31,
+  "template": "override",
+  "why": "empty renders byte-identical to default"
+ },
+ "google/gemma-2-9b-it": {
+  "empty_able": false,
+  "template": "tokenizer",
+  "why": "system role refused: System role not supported"
+ },
+ "inceptionai/jais-family-6p7b-chat": {
+  "default_chars": 363,
+  "empty_able": true,
+  "empty_chars": 126,
+  "template": "tokenizer",
+  "why": "renders differ"
+ },
+ "llm-jp/llm-jp-3-7.2b-instruct3": {
+  "default_chars": 26,
+  "empty_able": true,
+  "empty_chars": 61,
+  "template": "tokenizer",
+  "why": "renders differ"
+ },
+ "lomahony/eleuther-pythia6.9b-hh-dpo": {
+  "default_chars": 24,
+  "empty_able": false,
+  "empty_chars": 24,
+  "template": "override",
+  "why": "empty renders byte-identical to default"
+ },
+ "lomahony/eleuther-pythia6.9b-hh-sft": {
+  "empty_able": false,
+  "template": null,
+  "why": "no template"
+ },
+ "m-a-p/CT-LLM-SFT": {
+  "empty_able": false,
+  "template": null,
+  "why": "no template"
+ },
+ "m-a-p/CT-LLM-SFT-DPO": {
+  "empty_able": false,
+  "template": null,
+  "why": "no template"
+ },
+ "m-a-p/neo_7b_instruct_v0.1": {
+  "default_chars": 547,
+  "empty_able": true,
+  "empty_chars": 21,
+  "template": "tokenizer",
+  "why": "renders differ"
+ },
+ "m-a-p/neo_7b_sft_v0.1": {
+  "default_chars": 547,
+  "empty_able": true,
+  "empty_chars": 21,
+  "template": "tokenizer",
+  "why": "renders differ"
+ },
+ "meta-llama/Llama-3.1-8B-Instruct": {
+  "default_chars": 236,
+  "empty_able": false,
+  "empty_chars": 236,
+  "template": "tokenizer",
+  "why": "empty renders byte-identical to default"
+ },
+ "microsoft/phi-4-reasoning": {
+  "default_chars": 1340,
+  "empty_able": false,
+  "empty_chars": 1340,
+  "template": "tokenizer",
+  "why": "empty renders byte-identical to default"
+ },
+ "openbmb/MiniCPM5-1B": {
+  "default_chars": 56,
+  "empty_able": true,
+  "empty_chars": 86,
+  "template": "tokenizer",
+  "why": "renders differ"
+ },
+ "stabilityai/stablelm-2-zephyr-1_6b": {
+  "default_chars": 40,
+  "empty_able": true,
+  "empty_chars": 65,
+  "template": "tokenizer",
+  "why": "renders differ"
+ },
+ "tiiuae/Falcon3-10B-Instruct": {
+  "default_chars": 27,
+  "empty_able": true,
+  "empty_chars": 39,
+  "template": "tokenizer",
+  "why": "renders differ"
+ },
+ "tiiuae/Falcon3-1B-Instruct": {
+  "default_chars": 27,
+  "empty_able": true,
+  "empty_chars": 39,
+  "template": "tokenizer",
+  "why": "renders differ"
+ },
+ "tiiuae/Falcon3-3B-Instruct": {
+  "default_chars": 27,
+  "empty_able": true,
+  "empty_chars": 39,
+  "template": "tokenizer",
+  "why": "renders differ"
+ },
+ "tiiuae/Falcon3-7B-Instruct": {
+  "default_chars": 27,
+  "empty_able": true,
+  "empty_chars": 39,
+  "template": "tokenizer",
+  "why": "renders differ"
+ },
+ "tiiuae/Falcon3-Mamba-7B-Instruct": {
+  "default_chars": 70,
+  "empty_able": true,
+  "empty_chars": 100,
+  "template": "tokenizer",
+  "why": "renders differ"
+ },
+ "tiiuae/falcon-mamba-7b-instruct": {
+  "default_chars": 70,
+  "empty_able": true,
+  "empty_chars": 100,
+  "template": "tokenizer",
+  "why": "renders differ"
+ },
+ "togethercomputer/RedPajama-INCITE-7B-Chat": {
+  "default_chars": 19,
+  "empty_able": false,
+  "empty_chars": 19,
+  "template": "override",
+  "why": "empty renders byte-identical to default"
+ }
+}

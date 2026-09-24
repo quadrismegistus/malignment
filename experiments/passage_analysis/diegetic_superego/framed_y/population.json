@@ -1,0 +1,414 @@
+{
+ "_what": "framed-Y population, written by population.py",
+ "models": [
+  {
+   "model": "01-ai/Yi-1.5-9B-Chat",
+   "source": "Y",
+   "template": "tokenizer",
+   "system_mode": "default",
+   "why": "empty renders byte-identical to default",
+   "twp_modes": [
+    "default"
+   ]
+  },
+  {
+   "model": "BSC-LT/salamandra-7b-instruct",
+   "source": "Y",
+   "template": "tokenizer",
+   "system_mode": "empty",
+   "why": "renders differ",
+   "twp_modes": [
+    "empty"
+   ]
+  },
+  {
+   "model": "ContextualAI/archangel_sft-dpo_pythia2-8b",
+   "source": "Y",
+   "template": "override",
+   "system_mode": "default",
+   "why": "empty renders byte-identical to default",
+   "twp_modes": [
+    "default"
+   ]
+  },
+  {
+   "model": "HuggingFaceTB/SmolLM2-360M-Instruct",
+   "source": "Y",
+   "template": "tokenizer",
+   "system_mode": "empty",
+   "why": "renders differ",
+   "twp_modes": [
+    "empty"
+   ]
+  },
+  {
+   "model": "HuggingFaceTB/SmolLM3-3B",
+   "source": "Y",
+   "template": "tokenizer",
+   "system_mode": "default",
+   "why": "empty renders byte-identical to default",
+   "twp_modes": [
+    "default"
+   ]
+  },
+  {
+   "model": "LLM360/AmberSafe",
+   "source": "Y",
+   "template": "override",
+   "system_mode": "default",
+   "why": "empty renders byte-identical to default",
+   "twp_modes": [
+    "default"
+   ]
+  },
+  {
+   "model": "OpenLLM-France/Lucie-7B-Instruct-v1.1",
+   "source": "Y",
+   "template": "tokenizer",
+   "system_mode": "empty",
+   "why": "renders differ",
+   "twp_modes": [
+    "empty"
+   ]
+  },
+  {
+   "model": "PKU-Alignment/beaver-7b-v1.0",
+   "source": "Y (never coded)",
+   "template": "override",
+   "system_mode": "empty",
+   "why": "renders differ",
+   "twp_modes": [
+    "empty",
+    "default"
+   ]
+  },
+  {
+   "model": "Qwen/Qwen2.5-0.5B-Instruct",
+   "source": "Y",
+   "template": "tokenizer",
+   "system_mode": "empty",
+   "why": "renders differ",
+   "twp_modes": [
+    "empty"
+   ]
+  },
+  {
+   "model": "Qwen/Qwen2.5-7B-Instruct",
+   "source": "Y",
+   "template": "tokenizer",
+   "system_mode": "empty",
+   "why": "renders differ",
+   "twp_modes": [
+    "empty"
+   ]
+  },
+  {
+   "model": "Qwen/Qwen3-8B",
+   "source": "Y",
+   "template": "tokenizer",
+   "system_mode": "empty",
+   "why": "renders differ",
+   "twp_modes": [
+    "empty"
+   ]
+  },
+  {
+   "model": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+   "source": "Y",
+   "template": "tokenizer",
+   "system_mode": "empty",
+   "why": "renders differ",
+   "twp_modes": [
+    "empty"
+   ]
+  },
+  {
+   "model": "allenai/Llama-3.1-Tulu-3-8B-DPO",
+   "source": "superego_stages",
+   "template": "tokenizer",
+   "system_mode": "empty",
+   "why": "renders differ",
+   "twp_modes": [
+    "empty"
+   ]
+  },
+  {
+   "model": "allenai/Llama-3.1-Tulu-3-8B-SFT",
+   "source": "superego_stages",
+   "template": "tokenizer",
+   "system_mode": "empty",
+   "why": "renders differ",
+   "twp_modes": [
+    "empty"
+   ]
+  },
+  {
+   "model": "allenai/OLMo-2-0425-1B-DPO",
+   "source": "Y",
+   "template": "tokenizer",
+   "system_mode": "empty",
+   "why": "renders differ",
+   "twp_modes": [
+    "empty"
+   ]
+  },
+  {
+   "model": "allenai/OLMo-2-0425-1B-Instruct",
+   "source": "superego_stages",
+   "template": "tokenizer",
+   "system_mode": "empty",
+   "why": "renders differ",
+   "twp_modes": [
+    "empty"
+   ]
+  },
+  {
+   "model": "allenai/OLMo-2-0425-1B-SFT",
+   "source": "superego_stages",
+   "template": "tokenizer",
+   "system_mode": "empty",
+   "why": "renders differ",
+   "twp_modes": [
+    "empty"
+   ]
+  },
+  {
+   "model": "allenai/OLMoE-1B-7B-0125-DPO",
+   "source": "Y",
+   "template": "tokenizer",
+   "system_mode": "empty",
+   "why": "renders differ",
+   "twp_modes": [
+    "empty"
+   ]
+  },
+  {
+   "model": "allenai/OLMoE-1B-7B-0125-Instruct",
+   "source": "superego_stages",
+   "template": "tokenizer",
+   "system_mode": "empty",
+   "why": "renders differ",
+   "twp_modes": [
+    "empty"
+   ]
+  },
+  {
+   "model": "allenai/OLMoE-1B-7B-0125-SFT",
+   "source": "superego_stages",
+   "template": "tokenizer",
+   "system_mode": "empty",
+   "why": "renders differ",
+   "twp_modes": [
+    "empty"
+   ]
+  },
+  {
+   "model": "allenai/Olmo-3-7B-Instruct",
+   "source": "superego_stages",
+   "template": "tokenizer",
+   "system_mode": "empty",
+   "why": "renders differ",
+   "twp_modes": [
+    "empty"
+   ]
+  },
+  {
+   "model": "allenai/Olmo-3-7B-Instruct-DPO",
+   "source": "Y",
+   "template": "tokenizer",
+   "system_mode": "empty",
+   "why": "renders differ",
+   "twp_modes": [
+    "empty"
+   ]
+  },
+  {
+   "model": "allenai/Olmo-3-7B-Instruct-SFT",
+   "source": "superego_stages",
+   "template": "tokenizer",
+   "system_mode": "empty",
+   "why": "renders differ",
+   "twp_modes": [
+    "empty"
+   ]
+  },
+  {
+   "model": "baichuan-inc/Baichuan2-7B-Chat",
+   "source": "Y",
+   "template": "override",
+   "system_mode": "default",
+   "why": "empty renders byte-identical to default",
+   "twp_modes": [
+    "default"
+   ]
+  },
+  {
+   "model": "google/gemma-2-9b-it",
+   "source": "Y",
+   "template": "tokenizer",
+   "system_mode": "default",
+   "why": "system role refused: System role not supported",
+   "twp_modes": [
+    "default"
+   ]
+  },
+  {
+   "model": "inceptionai/jais-family-6p7b-chat",
+   "source": "Y",
+   "template": "tokenizer",
+   "system_mode": "empty",
+   "why": "renders differ",
+   "twp_modes": [
+    "empty"
+   ]
+  },
+  {
+   "model": "llm-jp/llm-jp-3-7.2b-instruct3",
+   "source": "Y",
+   "template": "tokenizer",
+   "system_mode": "empty",
+   "why": "renders differ",
+   "twp_modes": [
+    "empty"
+   ]
+  },
+  {
+   "model": "lomahony/eleuther-pythia6.9b-hh-dpo",
+   "source": "Y",
+   "template": "override",
+   "system_mode": "default",
+   "why": "empty renders byte-identical to default",
+   "twp_modes": [
+    "default"
+   ]
+  },
+  {
+   "model": "m-a-p/neo_7b_instruct_v0.1",
+   "source": "Y",
+   "template": "tokenizer",
+   "system_mode": "empty",
+   "why": "renders differ",
+   "twp_modes": [
+    "empty"
+   ]
+  },
+  {
+   "model": "m-a-p/neo_7b_sft_v0.1",
+   "source": "superego_stages",
+   "template": "tokenizer",
+   "system_mode": "empty",
+   "why": "renders differ",
+   "twp_modes": [
+    "empty"
+   ]
+  },
+  {
+   "model": "meta-llama/Llama-3.1-8B-Instruct",
+   "source": "Y",
+   "template": "tokenizer",
+   "system_mode": "default",
+   "why": "empty renders byte-identical to default",
+   "twp_modes": [
+    "default"
+   ]
+  },
+  {
+   "model": "microsoft/phi-4-reasoning",
+   "source": "Y",
+   "template": "tokenizer",
+   "system_mode": "default",
+   "why": "empty renders byte-identical to default",
+   "twp_modes": []
+  },
+  {
+   "model": "openbmb/MiniCPM5-1B",
+   "source": "Y",
+   "template": "tokenizer",
+   "system_mode": "empty",
+   "why": "renders differ",
+   "twp_modes": [
+    "empty"
+   ]
+  },
+  {
+   "model": "stabilityai/stablelm-2-zephyr-1_6b",
+   "source": "Y",
+   "template": "tokenizer",
+   "system_mode": "empty",
+   "why": "renders differ",
+   "twp_modes": [
+    "empty"
+   ]
+  },
+  {
+   "model": "tiiuae/Falcon3-10B-Instruct",
+   "source": "Y",
+   "template": "tokenizer",
+   "system_mode": "empty",
+   "why": "renders differ",
+   "twp_modes": []
+  },
+  {
+   "model": "tiiuae/Falcon3-1B-Instruct",
+   "source": "Y",
+   "template": "tokenizer",
+   "system_mode": "empty",
+   "why": "renders differ",
+   "twp_modes": []
+  },
+  {
+   "model": "tiiuae/Falcon3-3B-Instruct",
+   "source": "Y",
+   "template": "tokenizer",
+   "system_mode": "empty",
+   "why": "renders differ",
+   "twp_modes": []
+  },
+  {
+   "model": "tiiuae/Falcon3-7B-Instruct",
+   "source": "Y",
+   "template": "tokenizer",
+   "system_mode": "empty",
+   "why": "renders differ",
+   "twp_modes": [
+    "empty"
+   ]
+  },
+  {
+   "model": "tiiuae/Falcon3-Mamba-7B-Instruct",
+   "source": "Y",
+   "template": "tokenizer",
+   "system_mode": "empty",
+   "why": "renders differ",
+   "twp_modes": []
+  },
+  {
+   "model": "tiiuae/falcon-mamba-7b-instruct",
+   "source": "Y",
+   "template": "tokenizer",
+   "system_mode": "empty",
+   "why": "renders differ",
+   "twp_modes": [
+    "empty"
+   ]
+  },
+  {
+   "model": "togethercomputer/RedPajama-INCITE-7B-Chat",
+   "source": "Y",
+   "template": "override",
+   "system_mode": "default",
+   "why": "empty renders byte-identical to default",
+   "twp_modes": [
+    "default"
+   ]
+  }
+ ],
+ "dropped_no_template": [
+  "ContextualAI/archangel_sft_pythia2-8b",
+  "LLM360/AmberChat",
+  "PKU-Alignment/alpaca-7b-reproduced",
+  "lomahony/eleuther-pythia6.9b-hh-sft",
+  "m-a-p/CT-LLM-SFT",
+  "m-a-p/CT-LLM-SFT-DPO"
+ ]
+}

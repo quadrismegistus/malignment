@@ -376,6 +376,9 @@ This table exists because separating instrument registrations from hypothesis re
 | **SS-1** | SFT installs the in-scene superego (Y's SUPEREGO_IN_SCENE given sexual_scene): step1 = SFT rung - base > 0 over ladders | `division_of_labour/superego_stages` | **REGISTERED 2026-09-24, NOT RUN** -- 10 ladders, Y's ends re-used, 14 new rungs; chosen after seeing Y and sft_share |
 | **SS-2** | the later stage (DPO / preference / safety) adds to it: step2 > 0 | `division_of_labour/superego_stages` | **REGISTERED, NOT RUN** -- declared underpowered; the SFT SHARE with its interval is the reported quantity |
 | **SS-3** | RLVR moves it (DPO -> Instruct) | `division_of_labour/superego_stages` | **REGISTERED, NOT RUN** -- descriptive, three OLMo ladders |
+| **FY-1** | the chat template alone moves Y's in-scene superego (SUPEREGO_IN_SCENE given sexual_scene, pass A): prefill - raw, same weights | `passage_analysis/diegetic_superego/framed_y` | **REGISTERED 2026-09-24, NOT RUN** -- 41 templated non-base checkpoints, 32 lineages; direction not predicted |
+| **FY-2** | being addressed installs refusal: continue - prefill on the coder's assistant_refusal > 0 | `passage_analysis/diegetic_superego/framed_y` | **REGISTERED, NOT RUN** -- supersedes refusal_frame's generation |
+| **FY-3** | refusal displaces the in-scene superego rather than adding to it: among models with FY-2 > 0, continue - prefill on SUPEREGO given scene < 0 | `passage_analysis/diegetic_superego/framed_y` | **REGISTERED, NOT RUN** |
 | **R1a** | vulgar-register sexual mass FALLS under alignment | `register_shift` | **SUPERSEDED before any run** — see G/G1/G2 below |
 | **R1b** | clinical/euphemistic mass RISES — **required**, or it is suppression not displacement | `register_shift` | **SUPERSEDED before any run** — see G/G1/G2 below |
 | **R2** | the register signature is larger for sexual than violent | `register_shift` | **SUPERSEDED before any run** — see G/G1/G2 below |

@@ -1,0 +1,7 @@
+lomahony/eleuther-pythia6.9b-hh-dpo experiments/passage_analysis/diegetic_superego/framed_y/prompts/framed_default.jsonl float16
+meta-llama/Llama-3.1-8B-Instruct experiments/passage_analysis/diegetic_superego/framed_y/prompts/framed_default.jsonl float16
+Qwen/Qwen2.5-7B-Instruct experiments/passage_analysis/diegetic_superego/framed_y/prompts/framed_empty.jsonl float16
+allenai/Olmo-3-7B-Instruct-SFT experiments/passage_analysis/diegetic_superego/framed_y/prompts/framed_empty.jsonl float16
+tiiuae/Falcon3-Mamba-7B-Instruct experiments/passage_analysis/diegetic_superego/framed_y/prompts/framed_empty.jsonl float16
+TinyLlama/TinyLlama-1.1B-Chat-v1.0 experiments/passage_analysis/diegetic_superego/framed_y/prompts/framed_empty.jsonl float16
+allenai/OLMo-2-0425-1B-SFT experiments/passage_analysis/diegetic_superego/framed_y/prompts/framed_empty.jsonl float16
