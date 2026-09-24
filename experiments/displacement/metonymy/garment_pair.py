@@ -38,6 +38,8 @@ plate whose numbers are typed in does not notice when the data moves. Now:
 
 Checked when wired: at `--width 4.33` the SVG is byte-identical to the plate
 delivered on 2026-09-21.
+The caption file is not: it said "Panel A"/"Panel B" for a plate with no
+panel letters, and now names the left and right bodies (2026-09-24).
 """
 
 import argparse
@@ -414,11 +416,13 @@ def export(svg_path):
 
 
 def write_caption():
-    lines = ["Panel A: what alignment takes away (base model probability that falls)"]
+    #: WIRED: the plate has no panel letters (disabled on 21 Sep), so the
+    #: caption names the bodies by the subtitles the plate actually carries
+    lines = ["Left body, falls under alignment: what alignment takes away"]
     for word, num, _, _, sy in sorted(BASE_LABELS, key=lambda x: x[4]):
         lines.append("  %-12s %s pp" % (word, num))
     lines.append("")
-    lines.append("Panel B: what alignment adds (aligned model probability that rises)")
+    lines.append("Right body, rises under alignment: what alignment adds")
     for word, num, _, _, sy in sorted(ALIGNED_LABELS, key=lambda x: x[4]):
         lines.append("  %-12s %s pp" % (word, num))
     lines.append("")

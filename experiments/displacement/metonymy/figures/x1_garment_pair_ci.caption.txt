@@ -1,4 +1,4 @@
-Panel A: what alignment takes away (base model probability that falls)
+Left body, falls under alignment: what alignment takes away
   clothes      −0.55 pp
   clothing     −0.17 pp
   scarf        −0.11 pp
@@ -15,7 +15,7 @@ Panel A: what alignment takes away (base model probability that falls)
   jeans        −0.13 pp
   stockings    −0.11 pp
 
-Panel B: what alignment adds (aligned model probability that rises)
+Right body, rises under alignment: what alignment adds
   glasses      +1.09 pp
   coat         +0.76 pp
   jacket       +0.11 pp
