@@ -252,6 +252,120 @@ def fig_words():
     save(p, "ci_word_did", W_IN, H_IN, "\n".join(lines))
 
 
+# ──────────────────────────────────────────── plate A2, words by condition
+def fig_frames():
+    """Plate A2: plate A's words as % of passages in base, aligned raw, aligned chat, API."""
+    import matplotlib
+    matplotlib.use("Agg")
+    import pandas as pd
+    from plotnine import (ggplot, aes, geom_segment, geom_point, geom_text, geom_vline, facet_grid,
+                          labs, arrow, scale_x_continuous, scale_y_continuous, scale_color_manual,
+                          scale_shape_manual, theme, element_text, element_blank, element_rect,
+                          guides, guide_legend)
+    import word_frames as WF
+    sel, meta = word_frame()
+    words = [s_["word"] for s_ in sel]
+    share, n, units = WF.all_data(words)
+    #: plate A's own shares for base and chat come from the same passages:
+    #: asserted, so the two plates cannot disagree about the same cell
+    for s_ in sel:
+        for side, b, a_ in (("individual", s_["b_ind"], s_["a_ind"]), ("institution", s_["b_inst"], s_["a_inst"])):
+            assert abs(share[("Base, raw", side)][s_["word"]] - b) < 1e-12, s_["word"]
+            assert abs(share[("Aligned, chat", side)][s_["word"]] - a_) < 1e-12, s_["word"]
+    val = lambda c, side, w: 100 * share[(c, side)][w]
+    reach = lambda w: max(val(c, sd, w) for c in WF.COND for sd in ("individual", "institution"))
+    grp = {s_["word"]: s_["grp"] for s_ in sel}
+    order = [w for g in ("ind", "inst") for w in sorted((x for x in words if grp[x] == g),
+                                                        key=lambda x: (-reach(x), x))]
+    SIDE = {"individual": "The aggrieved individual", "institution": "The institution"}
+    TONE = {SIDE["individual"]: F.PUB_INK, SIDE["institution"]: F.PUB_GRAY}
+    F.check_halftones(TONE)
+    GRP = {"ind": "Gains more for the individual", "inst": "Gains more for the institution"}
+    seg, pts = [], []
+    for k, w in enumerate(order):
+        y0 = len(order) - k
+        for side, dy in (("individual", +0.17), ("institution", -0.17)):
+            b, r_, c_, api = (val(c, side, w) for c in WF.COND)
+            seg.append(dict(word=w, grp=GRP[grp[w]], side=SIDE[side], y=y0 + dy, ypos=y0, b=b, c=c_))
+            for cond, x in (("Base model", b), ("Aligned, no chat template", r_), ("API model", api)):
+                pts.append(dict(word=w, grp=GRP[grp[w]], side=SIDE[side], y=y0 + dy, x=x, cond=cond))
+    d, q = pd.DataFrame(seg), pd.DataFrame(pts)
+    for t in (d, q):
+        t["grp"] = pd.Categorical(t.grp, categories=list(GRP.values()))
+        t["side"] = pd.Categorical(t.side, categories=list(TONE))
+    ticks = d.drop_duplicates("word")
+    head = (d.groupby("grp", observed=True).ypos.max() + 0.85).reset_index()
+    head["label"] = list(head.grp)
+    xmax = float(max(d.c.max(), q.x.max()))
+    fnt = F.pub_font()
+    W_IN, H_IN = F.PUB_SIZE[0], 5.0
+    SHAPE = {"Base model": "o", "Aligned, no chat template": "|", "API model": "D"}
+    p = (ggplot()
+         + geom_vline(xintercept=0, color=F.PUB_GRAY, size=F.PUB_RULE_PT)
+         + geom_segment(aes(x="b", xend="c", y="y", yend="y", color="side"), data=d,
+                        size=F.PUB_LINE_PT, arrow=arrow(length=0.05, type="closed", angle=25))
+         + geom_point(aes(x="x", y="y", color="side", shape="cond"), data=q, size=1.6, stroke=0.7,
+                      fill="white")
+         + geom_text(aes(x=0.4, y="ypos", label="label"), data=head, ha="left", va="center",
+                     size=F.PUB_FONT_PT, family=fnt, fontweight="bold")
+         + geom_text(aes(x=-0.8, y="ypos", label="word"), data=ticks, ha="right", va="center",
+                     size=F.PUB_FONT_PT, family=fnt)
+         + facet_grid("grp ~ .", scales="free_y", space="free")
+         + scale_color_manual(TONE, name="")
+         + scale_shape_manual(SHAPE, name="", breaks=list(SHAPE))
+         + guides(color=guide_legend(order=1, nrow=1), shape=guide_legend(order=2, nrow=1))
+         + scale_x_continuous(limits=(-12, xmax * 1.04), expand=(0, 0), breaks=[0, 10, 20, 30, 40, 50],
+                              labels=lambda v: ["%g%%" % x for x in v])
+         + scale_y_continuous(breaks=[], expand=(0, 0.5))
+         + labs(x="Passages containing the word (arrow: base model → aligned model in chat)", y="")
+         + F.pub_theme(height=H_IN, grid="none")
+         + theme(figure_size=(W_IN, H_IN), legend_position="top", legend_box="vertical",
+                 legend_title=element_blank(), legend_text=element_text(family=fnt, size=F.PUB_FONT_PT),
+                 legend_key=element_rect(fill="white", color="white"),
+                 strip_text_y=element_blank(), strip_background=element_blank(),
+                 axis_ticks_major_y=element_blank()))
+
+    def mono(w, side):
+        v = [val(c, side, w) for c in WF.COND]
+        return "up" if all(a <= b for a, b in zip(v, v[1:])) else \
+            "down" if all(a >= b for a, b in zip(v, v[1:])) else "no"
+    lines = [
+        "PLATE A2. The words of the capture, base to aligned, with and without the chat frame, and the API.",
+        "",
+        "Per word, two rows: the aggrieved individual (black, upper) and the institution (gray, lower).",
+        "Circle: base model. Arrow: base model to aligned model in chat. Bar: aligned model run with no chat",
+        "template. Diamond: API model (no base, so drawn apart from the arrow, not as its continuation).",
+        "Value: share of ALL passages in that condition and side that contain the word (a passage counts once).",
+        "",
+        "SUPPORT. The three open conditions stand on the SAME %d lineages (internlm2 excluded: its" % units["Base, raw"],
+        "generation is word salad in every cell); API is four vendor models:",
+        "  base, raw       %2d lineages, %5s passages per side" % (units["Base, raw"], format(n[("Base, raw", "individual")], ",")),
+        "  aligned, raw    %2d lineages, %5s passages per side  (the aligned model with no chat template;" % (
+            units["Aligned, raw"], format(n[("Aligned, raw", "individual")], ",")),
+        "                                   aligned_raw.md, 459f6c97)",
+        "  aligned, chat   %2d lineages, %5s passages per side" % (units["Aligned, chat"], format(n[("Aligned, chat", "individual")], ",")),
+        "  API              %d models,   %5s passages per side  (Sonnet 4.6, Haiku 4.5, GPT-4o-mini, DeepSeek v4;"
+        % (units["API"], format(n[("API", "individual")], ",")),
+        "                                   prompt as the user message, vendor default system prompt)",
+        "Base to aligned-raw is the change in weights; aligned-raw to aligned-chat is the chat frame. The coded",
+        "decomposition behind this (results/aligned_raw.md) finds both carry the channel routing.",
+        "",
+        "Word selection is plate A's rule (plot.py STOP, BH over lineages and p < 0.05 by dispute, top %d /" % N_IND,
+        "bottom %d by median DiD between base and chat); rows ordered by the farthest-right mark. No LLM in the" % N_INST,
+        "measurement: passage text only, lower-cased [a-z']+ tokens, every passage unfiltered. EXPLORATORY.",
+        "",
+        "%-11s %-12s %7s %7s %7s %7s   base -> chat -> API monotonic?" % ("word", "side", "base", "raw", "chat", "API"),
+    ]
+    for w in order:
+        for side in ("individual", "institution"):
+            lines.append("%-11s %-12s %7.3f %7.3f %7.3f %7.3f   %s" % (
+                w, side, *(share[(c, side)][w] for c in WF.COND), mono(w, side)))
+    nm = sum(mono(w, sd) == "no" for w in order for sd in ("individual", "institution"))
+    lines += ["", "%d of %d series are not monotonic across the four conditions; see the column. Shares are proportions."
+              % (nm, 2 * len(order))]
+    save(p, "ci_word_frames", W_IN, H_IN, "\n".join(lines))
+
+
 # ────────────────────────────────────────────────────────── plate B, channel
 LABEL = {"housing_repairs": "Repairs", "housing_rent": "Rent", "housing_deposit": "Deposit",
          "labor_credit": "Credit for work", "labor_safety": "Workplace safety",
@@ -385,7 +499,7 @@ def fig_channel():
     save(p, "ci_channel_by_dispute", W_IN, H_IN, "\n".join(lines))
 
 
-FIGURES = {"words": fig_words, "channel": fig_channel}
+FIGURES = {"words": fig_words, "frames": fig_frames, "channel": fig_channel}
 
 
 def main():

@@ -114,8 +114,11 @@ def main():
     arms = collections.defaultdict(set)
     for r in main_rows:
         arms[r["lineage"]].add(r["arm"])
-    lineages = sorted(l for l, s in arms.items() if s == {"base", "aligned"})
-    assert len(lineages) == 43, "the registration's population is 43 lineages; found %d" % len(lineages)
+    #: 43 generated; internlm2 is word salad in every cell (analyse_regen.BROKEN_LINEAGES,
+    #: malign 8e2badca). It contributed no kept passage to any contrast before its exclusion,
+    #: so excluding it changes no verdict here; it changes the count we print.
+    lineages = sorted(l for l, s in arms.items() if s == {"base", "aligned"} and l not in A.BROKEN_LINEAGES)
+    assert len(lineages) == 42, "43 generated less the broken lineage is 42; found %d" % len(lineages)
     raw = [json.loads(l) for l in open(a.source)]
     for r in raw:
         r["arm"] = "aligned_raw"

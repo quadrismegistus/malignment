@@ -1,13 +1,13 @@
 # Aligned raw: weights against frame over every lineage
 
-Registration `aligned_raw.md` (459f6c97); producer `aligned_raw.py`, written before the data. Source `coded_aligned_raw.jsonl`: 15480 rows, 15479 coded, over 43 of the 43 lineages.
+Registration `aligned_raw.md` (459f6c97); producer `aligned_raw.py`, written before the data. Source `coded_aligned_raw.jsonl`: 15480 rows, 15479 coded, over 42 of the 42 lineages.
 
 **Determinism check (reported, not pooled):** the frame pilot's accidental raw passages against the new ones on the same model, prompt and seed: 872 of 2160 texts identical.
 
 ## E1: form
 
-Aligned-raw writes advice less often than aligned-chat in 39 of 43 lineages (fewer: 3; sign p 5.63e-09) -> **MET**.
-Median advice share: base 0.07, aligned raw 0.46, aligned chat 0.92.
+Aligned-raw writes advice less often than aligned-chat in 39 of 42 lineages (fewer: 3; sign p 5.63e-09) -> **MET**.
+Median advice share: base 0.08, aligned raw 0.48, aligned chat 0.93.
 
 ## channel (PRIMARY), lineages
 
@@ -53,7 +53,6 @@ Defined in 42 lineages. Median weights +0.118, frame +0.221, total +0.348 (raw D
 | gemma-2-9b-it | +0.212 | +0.186 | +0.398 | 121/95 | 167/109 | 180/148 |
 | glm-4-9b-chat-hf | +0.073 | +0.230 | +0.302 | 106/129 | 124/135 | 171/162 |
 | granite-3.0-8b-instruct | +0.092 | +0.276 | +0.368 | 39/24 | 128/115 | 174/168 |
-| internlm2-chat-7b | -- | -- | -- | 0/0 | 0/0 | 0/0 |
 | jais-family-6p7b-chat | +0.055 | +0.397 | +0.452 | 16/18 | 89/78 | 146/137 |
 | kanana-1.5-8b-instruct-2505 | +0.224 | +0.178 | +0.402 | 36/23 | 137/66 | 171/157 |
 | kanana-2-3b-instruct | +0.094 | +0.226 | +0.321 | 50/41 | 90/60 | 160/123 |
@@ -106,7 +105,6 @@ Defined in 42 lineages. Median weights +0.075, frame +0.099, total +0.174 (raw D
 | gemma-2-9b-it | +0.064 | +0.156 | +0.219 | 121/95 | 167/109 | 180/148 |
 | glm-4-9b-chat-hf | +0.080 | +0.100 | +0.179 | 106/129 | 124/135 | 171/162 |
 | granite-3.0-8b-instruct | +0.166 | +0.088 | +0.254 | 39/24 | 128/115 | 174/168 |
-| internlm2-chat-7b | -- | -- | -- | 0/0 | 0/0 | 0/0 |
 | jais-family-6p7b-chat | -0.080 | +0.121 | +0.041 | 16/18 | 89/78 | 146/137 |
 | kanana-1.5-8b-instruct-2505 | -0.014 | +0.122 | +0.108 | 36/23 | 137/66 | 171/157 |
 | kanana-2-3b-instruct | +0.259 | -0.149 | +0.110 | 50/41 | 90/60 | 160/123 |
@@ -159,7 +157,6 @@ Defined in 42 lineages. Median weights +0.043, frame +0.099, total +0.160 (raw D
 | gemma-2-9b-it | +0.022 | +0.195 | +0.217 | 121/95 | 167/109 | 180/148 |
 | glm-4-9b-chat-hf | +0.153 | +0.026 | +0.179 | 106/129 | 124/135 | 171/162 |
 | granite-3.0-8b-instruct | +0.047 | +0.096 | +0.143 | 39/24 | 128/115 | 174/168 |
-| internlm2-chat-7b | -- | -- | -- | 0/0 | 0/0 | 0/0 |
 | jais-family-6p7b-chat | -0.042 | +0.130 | +0.089 | 16/18 | 89/78 | 146/137 |
 | kanana-1.5-8b-instruct-2505 | +0.183 | +0.090 | +0.274 | 36/23 | 137/66 | 171/157 |
 | kanana-2-3b-instruct | +0.194 | -0.087 | +0.107 | 50/41 | 90/60 | 160/123 |
@@ -212,7 +209,6 @@ Defined in 42 lineages. Median weights -0.133, frame -0.126, total -0.271 (raw D
 | gemma-2-9b-it | -0.307 | -0.089 | -0.396 | 121/95 | 167/109 | 180/148 |
 | glm-4-9b-chat-hf | -0.013 | -0.146 | -0.159 | 106/129 | 124/135 | 171/162 |
 | granite-3.0-8b-instruct | -0.441 | -0.214 | -0.654 | 39/24 | 128/115 | 174/168 |
-| internlm2-chat-7b | -- | -- | -- | 0/0 | 0/0 | 0/0 |
 | jais-family-6p7b-chat | +0.062 | -0.214 | -0.151 | 16/18 | 89/78 | 146/137 |
 | kanana-1.5-8b-instruct-2505 | -0.186 | -0.280 | -0.466 | 36/23 | 137/66 | 171/157 |
 | kanana-2-3b-instruct | -0.180 | -0.203 | -0.383 | 50/41 | 90/60 | 160/123 |
