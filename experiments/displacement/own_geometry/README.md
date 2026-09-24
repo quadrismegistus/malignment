@@ -1,5 +1,7 @@
 ---
 title: Does alignment move the model's own geometry, or only re-weight it?
+kind: question
+headline: "Alignment re-weights a geometry it does not move: across base, SFT, DPO and RLVR on two ladders, the rank of scream relative to kill barely changes in any of the model's own spaces while the probabilities do, and the unembedding is the most static space. The seven-paraphrase replication could test two of the four spaces and replicates the null in both."
 status: two ladders and the seven-paraphrase replication complete; the blank-state norm is a NEW contrast and is with RH
 unit: one lineage ladder with separated stages; one prompt
 ---
