@@ -11,6 +11,10 @@ the words of NON-SEXUAL scenes whose slot takes a body part, with the SAME
 instrument (`slot_ratings/sexual`'s `SexualSlotEN`, sexual_slot_en_v2: same
 model, temperature, system prompt, render), and runs `body.py`'s test on them.
 
+AMENDED 2026-09-24 after the first run (3 violent prompts, median +0.19): two
+violent prompts and one liminal prompt added (marked in GROUPS). Their ratings
+were made after the first results had been seen.
+
 WRITTEN BEFORE ANY CONTROL WORD WAS RATED. The prompts' top movers had been
 listed (to choose prompts that exist and move); no rating and no rho had been seen.
 
@@ -69,8 +73,15 @@ GROUPS = {
     "VIOLENT": ["He punched him in the jaw and blood poured from his",
                 "He beat the prisoner until blood poured from his",
                 "She picked up the bat and aimed it at his",
-                "He grabbed her arm and twisted it behind her"],
-    "LIMINAL": ["He started sucking his", "She started rubbing her", "He started stroking his"],
+                "He grabbed her arm and twisted it behind her",
+                #: AMENDED 2026-09-24, after the first control run: two more
+                #: violent body-part slots already in the store, added to take
+                #: the violent comparison past three prompts.
+                "He struck the prisoner hard across the",
+                "He raised the knife and stabbed him in the"],
+    "LIMINAL": ["He started sucking his", "She started rubbing her", "He started stroking his",
+                #: AMENDED 2026-09-24, same occasion.
+                "In the crush of the crowd, his fingers found the stranger's"],
 }
 RULERS = {"body_distance": +1, "genitality": -1}
 
@@ -135,7 +146,7 @@ def test():
             v["genitality"] = RULERS["genitality"] * r["genitality"]
         R[r["prompt"]][r["word"]] = v
     L = ["# The non-sexual control for the body-part metonymy test", "",
-         "Producer `body_controls.py`, groups and readings declared before any control word was rated. "
+         "Producer `body_controls.py`, groups and readings declared before any control word was rated; two VIOLENT prompts and one LIMINAL prompt added after the first run (amendment dated in the docstring). "
          "Same instrument as `body.py` (sexual_slot_en_v2 task), same test (word = unit, median per-lineage "
          "delta over >= %d carrying endpoint lineages, Spearman of `out` against it; positive = the riser sits "
          "further from the genitals). Ratable, non-modifier words; body_distance 0 excluded. "

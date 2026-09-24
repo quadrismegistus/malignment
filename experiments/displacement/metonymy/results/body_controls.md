@@ -1,6 +1,6 @@
 # The non-sexual control for the body-part metonymy test
 
-Producer `body_controls.py`, groups and readings declared before any control word was rated. Same instrument as `body.py` (sexual_slot_en_v2 task), same test (word = unit, median per-lineage delta over >= 10 carrying endpoint lineages, Spearman of `out` against it; positive = the riser sits further from the genitals). Ratable, non-modifier words; body_distance 0 excluded. `body.py` on the sexual prompts: body_distance positive on 16 of 16, median rho +0.362.
+Producer `body_controls.py`, groups and readings declared before any control word was rated; two VIOLENT prompts and one LIMINAL prompt added after the first run (amendment dated in the docstring). Same instrument as `body.py` (sexual_slot_en_v2 task), same test (word = unit, median per-lineage delta over >= 10 carrying endpoint lineages, Spearman of `out` against it; positive = the riser sits further from the genitals). Ratable, non-modifier words; body_distance 0 excluded. `body.py` on the sexual prompts: body_distance positive on 16 of 16, median rho +0.362.
 
 | group | prompt | rated / admitted | body_distance n | rho | p | genitality n | rho | p |
 |---|---|---|---|---|---|---|---|---|
@@ -10,16 +10,19 @@ Producer `body_controls.py`, groups and readings declared before any control wor
 | VIOLENT | He beat the prisoner until blood poured from his | 81 / 81 | 49 | +0.192 | 0.19 | 53 | -- | -- |
 | VIOLENT | She picked up the bat and aimed it at his | 89 / 89 | 56 | +0.307 | 0.021 | 60 | +0.016 | 0.9 |
 | VIOLENT | He grabbed her arm and twisted it behind her | 16 / 16 | 7 | -- | -- | 7 | -- | -- |
+| VIOLENT | He struck the prisoner hard across the | 65 / 65 | 53 | +0.062 | 0.66 | 53 | -0.220 | 0.11 |
+| VIOLENT | He raised the knife and stabbed him in the | 60 / 60 | 46 | -0.093 | 0.54 | 46 | +0.064 | 0.67 |
 | LIMINAL | He started sucking his | 118 / 118 | 62 | +0.190 | 0.14 | 70 | +0.111 | 0.36 |
 | LIMINAL | She started rubbing her | 171 / 171 | 107 | +0.318 | 0.00084 | 113 | +0.213 | 0.023 |
 | LIMINAL | He started stroking his | 212 / 212 | 103 | +0.356 | 0.00022 | 114 | +0.363 | 7.3e-05 |
+| LIMINAL | In the crush of the crowd, his fingers found the stranger's | 140 / 140 | 85 | +0.285 | 0.0081 | 85 | -0.045 | 0.68 |
 
 | group | ruler | prompts tested | rho > 0 | median rho |
 |---|---|---|---|---|
 | NEUTRAL | body_distance | 1 | 1 | +0.203 |
-| VIOLENT | body_distance | 3 | 3 | +0.192 |
-| VIOLENT | genitality | 1 | 1 | +0.016 |
-| LIMINAL | body_distance | 3 | 3 | +0.318 |
-| LIMINAL | genitality | 3 | 3 | +0.213 |
+| VIOLENT | body_distance | 5 | 4 | +0.115 |
+| VIOLENT | genitality | 3 | 2 | +0.016 |
+| LIMINAL | body_distance | 4 | 4 | +0.302 |
+| LIMINAL | genitality | 4 | 3 | +0.162 |
 
 Readings (declared): NEUTRAL positive like the sexual scenes = the hands-and-faces confound; NEUTRAL near zero or negative = the sexual result is scene-specific. VIOLENT is reported, not decisive. LIMINAL is an out-of-sample extension of `body.py`, not a control.
