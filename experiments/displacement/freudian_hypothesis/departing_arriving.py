@@ -201,14 +201,18 @@ def compute():
                               * 2 / 2 ** nn)}
 
     res = {}
+    #: scale -> {lineage: arriving - departing}, for consumers that need the
+    #: per-lineage values rather than the summary (`departing_arriving_ci.py`)
+    per = {}
     for s in SCALES:
-        diffs = []
+        diffs = {}
         for lin, a in acc.items():
             dw, dn, aw, an = a[s]
             if dn > 0 and an > 0:
-                diffs.append(aw / an - dw / dn)
+                diffs[lin] = aw / an - dw / dn
         if len(diffs) >= 25:
-            res[s] = test(diffs)
+            res[s] = test(list(diffs.values()))
+            per[s] = diffs
     #: **NOT A TEST OF CONSERVATION, AND IT MUST NOT BE PRINTED AS ONE.** Each
     #: distribution sums to 1 by construction, so the quantity is conserved by
     #: definition and nothing here could falsify it. What this ratio measures is
@@ -222,7 +226,7 @@ def compute():
     cons = {"median_ratio": st.median([m[1] / m[0] for m in mass.values()]),
             "n_lineages": len(mass),
             "IS_NOT": "a test of conservation; see the comment at this line"}
-    return res, cons
+    return res, cons, per
 
 
 def main(argv=None):
@@ -230,7 +234,7 @@ def main(argv=None):
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--write", action="store_true")
     a = ap.parse_args(argv)
-    res, cons = compute()
+    res, cons, _per = compute()
     anchor = abs(res[ANCHOR]["median"]) if ANCHOR in res else None
     print("\nARRIVING MINUS DEPARTING, mass-weighted, per lineage then median\n")
     for lab, ss in PREDICT:
