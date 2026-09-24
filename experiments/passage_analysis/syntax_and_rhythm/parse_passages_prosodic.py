@@ -8,7 +8,7 @@
 
 ## THREE GRAINS, THREE FILES
 
-    results/by_passage.csv                         (id, version)       tracked; no text
+    $MALIGNMENT_DATA/syntax_and_rhythm/by_passage.csv   (id, version)       no text
     $MALIGNMENT_DATA/syntax_and_rhythm/by_sentence.csv  (id, version, sent_idx)
     $MALIGNMENT_DATA/syntax_and_rhythm/by_window.csv    (id, version, win_idx)   carries window text
 
@@ -148,7 +148,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 DATA = os.environ.get("MALIGNMENT_DATA", os.path.expanduser("~/malignment-data"))
 JUDGED = os.path.join(DATA, "national_story", "judged_stories_v2.jsonl")
 OUT_DIR = os.path.join(DATA, "syntax_and_rhythm")
-OUTS = {"passage": os.path.join(HERE, "results", "by_passage.csv"),
+OUTS = {"passage": os.path.join(OUT_DIR, "by_passage.csv"),
         "sentence": os.path.join(OUT_DIR, "by_sentence.csv"),
         "window": os.path.join(OUT_DIR, "by_window.csv")}
 POP = os.path.join(HERE, "population.json")

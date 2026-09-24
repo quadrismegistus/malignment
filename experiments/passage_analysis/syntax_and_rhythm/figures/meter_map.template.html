@@ -98,6 +98,17 @@ th.n { text-align: right; }
     <p class="note">Hover for values, ±1.96 standard errors across poems, passages or authors, and sample sizes. Hollow points have fewer than 25 authors or 50 poems. Model verse is Llama-3.1-8B and Mistral-7B pooled, base (text) against instruct, continuing the same poems.</p>
   </section>
 
+  <section class="figure" aria-label="Canonical iambic pentameter by model tier">
+    <h2>Canonical iambic pentameter, by model tier</h2>
+    <p class="note" style="color:var(--ink-2)">Share of 10-syllable windows that scan as <b>unambiguous iambic pentameter</b> (uIP: the best parse is <span style="font-family:var(--mono)">wswswswsws</span> and it is the only viable scansion) and as <b>perfect</b> unambiguous iambic pentameter (puIP: that one scansion has no violations). Each row is a model continuing human poems after their first five lines, set against the poets' own continuations of the same poems. The tiers are different model families, not stages of one model: only the base → open-aligned step is paired within a model (Llama, Mistral).</p>
+    <div class="legend"><span><span class="sw" style="border:2px solid var(--verse);background:transparent;width:8px;height:8px"></span>base model</span><span><span class="sw" style="background:var(--verse)"></span>aligned or API model</span><span><span class="sw" style="border-radius:1px;background:var(--human)"></span>the poets, same poems</span></div>
+    <div class="chart-box" id="pentBox">
+      <svg class="chart" id="pentU" role="img" aria-label="Unambiguous iambic pentameter share by model and poets; values in the table below"></svg>
+      <svg class="chart" id="pentP" role="img" aria-label="Perfect unambiguous iambic pentameter share by model and poets; values in the table below"></svg>
+    </div>
+    <p class="note">Dashed vertical lines are human references from the antimetricality data: poetry by period, Pope's and Wordsworth's verse, and human fiction. Prose sits far left: human fiction 3.1% uIP and 1.6% puIP; LLM prose 2.6–2.8% and 1.5–1.6%. Hover a row for paired values, the Wilcoxon p against the poets, and sample sizes.</p>
+  </section>
+
   <section class="figure" aria-label="All baselines by period">
     <h2>All baselines</h2>
     <div class="legend" id="legend"></div>
@@ -116,6 +127,7 @@ th.n { text-align: right; }
   <section class="findings" aria-label="Main readings">
     <div class="finding"><h3>AI verse sits at the Augustan minimum</h3><p>Base and aligned models continuing the same human poems land at tension ≈ 4.7. That is as regular as the most metrical human period, 1700–1749 (4.44), and well below the poets' own continuations (6.46). The Olmo-3 pilot is an exception: it sits near 19th-century levels.</p></div>
     <div class="finding"><h3>Base prose is more metrical than any human fiction</h3><p>Base-model prose (9.42) sits below every period of human fiction (10.1–11.6) on both axes. Aligned prose (11.01) moves inside the human range, toward non-fiction.</p></div>
+    <div class="finding"><h3>Canonical pentameter climbs by tier</h3><p>Continuing the same poems, base models write fewer unambiguous iambic pentameters than the poets (12.8% vs 16.3%). Open aligned models write slightly more (17.1%), and DeepSeek and Claude-3-Sonnet write 27–30%, near the 1700–1749 peak (28.8%) and approaching Pope (34.4%). GPT-3.5 matches the poets.</p></div>
     <div class="finding"><h3>Alignment widens the verse/prose gap</h3><p>Prose minus verse tension is 4.7 for base models and 6.3 for aligned ones. The human gap peaked at 6.4 in 1700–1749 and fell to 0.8 by 1950–1999.</p></div>
   </section>
 
@@ -124,7 +136,7 @@ th.n { text-align: right; }
     <div class="table-wrap"><table id="table"><thead><tr>
       <th data-k="label" tabindex="0">Group</th><th data-k="kind" tabindex="0">Kind</th>
       <th class="n" data-k="u" tabindex="0">Uncertainty</th><th class="n" data-k="t" tabindex="0">Tension (MTS)</th>
-      <th class="n" data-k="n_windows" tabindex="0">Windows</th><th class="n" data-k="n_units" tabindex="0">Passages / poems / authors</th>
+      <th class="n" data-k="uip" tabindex="0">uIP %</th><th class="n" data-k="puip" tabindex="0">puIP %</th><th class="n" data-k="n_windows" tabindex="0">Windows</th><th class="n" data-k="n_units" tabindex="0">Passages / poems / authors</th>
       <th data-k="source" tabindex="0">Source</th></tr></thead><tbody></tbody></table></div>
   </section>
 
@@ -147,7 +159,7 @@ const KIND = {
   human_chadwyck: "Human poetry (Chadwyck sample)", human_all_poetry: "Human poetry, pooled", human_all_fiction: "Human fiction, pooled",
   human_all_nonfiction: "Human non-fiction, pooled", human_continuation: "Human continuation",
   llm_prose: "LLM prose", llm_prose_lineage: "LLM prose, one lineage", llm_verse: "LLM verse continuation",
-  llm_verse_pilot: "LLM verse continuation (pilot)", llm_prompted: "LLM prompted poems", llm_prompted_model: "LLM prompted poems, one model", verse_period: "Verse continuations, by period", verse_overall: "Verse continuations, all periods"
+  llm_verse_pilot: "LLM verse continuation (pilot)", llm_prompted: "LLM prompted poems", llm_prompted_model: "LLM prompted poems, one model", verse_period: "Verse continuations, by period", verse_overall: "Verse continuations, all periods", tier_model: "Verse continuation model (tier)", ref_author: "Human poet (reference)"
 };
 const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
 const tip = document.getElementById("tip"), box = document.getElementById("chartBox");
@@ -164,6 +176,7 @@ function tipHtml(p) {
   const ci = (v, se) => se == null ? f2(v) : `${f2(v)} <span style="opacity:.7">± ${(1.96 * se).toFixed(2)}</span>`;
   return `<b>${p.label}</b><br><span style="opacity:.75">${p.source}</span><br>` +
     `Uncertainty <span class="num">${ci(p.u, p.u_se)}</span><br>Tension <span class="num">${ci(p.t, p.t_se)}</span><br>` +
+    (p.uip != null ? `uIP <span class="num">${p.uip.toFixed(2)}%</span> · puIP <span class="num">${p.puip.toFixed(2)}%</span><br>` : "") +
     `<span class="num">${p.n_windows.toLocaleString()}</span> windows · <span class="num">${p.n_units.toLocaleString()}</span> units`;
 }
 function hover(node, p) {
@@ -320,7 +333,49 @@ function leadPanel(svg, key, title, y0, y1, step) {
     hover(tx, l.p);
   }
 }
+function pentPanel(svg, key, title, x1) {
+  const rows = PTS.filter(p => p.group === "tier_model");
+  const tiers = ["base", "open aligned", "API"];
+  const rowH = 26, headH = 22, top = 46, left = 190, right = 30;
+  let y = top; const place = [];
+  tiers.forEach(tr => { place.push({ head: tr, y: y + 14 }); y += headH; rows.filter(r => r.tier === tr).forEach(r => { place.push({ r, y: y + rowH / 2 }); y += rowH; }); });
+  const Hh = y + 34;
+  svg.innerHTML = ""; svg.setAttribute("viewBox", `0 0 ${W} ${Hh}`);
+  const sx = v => left + v / x1 * (W - left - right);
+  const C = k => css(k);
+  const g = el(svg, "g", { class: "axis" });
+  for (let v = 0; v <= x1 + 1e-9; v += 5) {
+    el(svg, "line", { x1: sx(v), x2: sx(v), y1: top - 6, y2: Hh - 30, class: "gridline" }, g);
+    const tx = el(svg, "text", { x: sx(v), y: Hh - 12, "text-anchor": "middle" }, g); tx.textContent = v + "%";
+  }
+  const tt = el(svg, "text", { x: 0, y: 16, class: "axis-title", "font-weight": 600 }); tt.textContent = title;
+  const refs = [["human_poetry", 1700, "Poetry 1700–49"], ["human_poetry", 1850, "Poetry 1850–99"], ["human_poetry", 1950, "Poetry 1950–99"], ["ref_author", "Pope (verse)", "Pope"], ["ref_author", "Wordsworth (verse)", "Wordsworth"], ["human_all_fiction", null, "Fiction"]];
+  const rl = [];
+  refs.forEach(([grp, k, lab]) => {
+    const p = PTS.find(q => q.group === grp && (k == null || q.period === k || q.label === k)); if (!p || p[key] == null) return;
+    el(svg, "line", { x1: sx(p[key]), x2: sx(p[key]), y1: top - 6, y2: Hh - 30, stroke: C("--ink-3"), "stroke-width": 1, "stroke-dasharray": "3 3" });
+    rl.push({ x: sx(p[key]), lab, p });
+  });
+  rl.sort((a, b) => a.x - b.x);
+  rl.forEach((r, i) => { const tx = el(svg, "text", { x: r.x, y: top - 10 - (i % 2) * 11, class: "plabel", "text-anchor": "middle" }); tx.textContent = r.lab; hover(tx, r.p); });
+  place.forEach(pl => {
+    if (pl.head) { const tx = el(svg, "text", { x: 0, y: pl.y, class: "clabel", "font-weight": 600 }); tx.textContent = pl.head === "API" ? "API models" : pl.head === "base" ? "Base models" : "Open aligned models"; return; }
+    const r = pl.r, col = C("--verse"), base = r.tier === "base";
+    const vm = r[key], vp = r[key + "_poets"];
+    const lab = el(svg, "text", { x: 14, y: pl.y + 4, class: "dlabel" }); lab.textContent = r.model;
+    el(svg, "line", { x1: sx(Math.min(vm, vp)), x2: sx(Math.max(vm, vp)), y1: pl.y, y2: pl.y, stroke: C("--ink-3"), "stroke-width": 2 });
+    el(svg, "rect", { x: sx(vp) - 4, y: pl.y - 4, width: 8, height: 8, fill: C("--human") });
+    el(svg, "circle", { cx: sx(vm), cy: pl.y, r: 6, fill: base ? C("--panel") : col, stroke: col, "stroke-width": 2 });
+    const pv = r[key + "_p"];
+    const vtx = el(svg, "text", { x: sx(Math.max(vm, vp)) + 10, y: pl.y + 4, class: "plabel" });
+    vtx.textContent = `${vm.toFixed(1)} vs ${vp.toFixed(1)}` + (pv != null && pv < 0.05 ? (vm > vp ? "  ↑" : "  ↓") : "");
+    const tipP = { html: `<b>${r.model}</b> (${r.tier})<br>${key === "uip" ? "uIP" : "puIP"}: model <span class="num">${vm.toFixed(2)}%</span>, poets <span class="num">${vp.toFixed(2)}%</span><br>Wilcoxon paired by poem: <span class="num">p = ${pv == null ? "–" : pv.toExponential(1)}</span><br><span class="num">${r.n_paired.toLocaleString()}</span> poems · <span class="num">${r.n_windows.toLocaleString()}</span> windows` };
+    hover(el(svg, "rect", { x: 0, y: pl.y - rowH / 2, width: W, height: rowH, class: "hit" }), tipP);
+  });
+}
 function draw() {
+  pentPanel(document.getElementById("pentU"), "uip", "Unambiguous iambic pentameter (uIP), % of windows", 36);
+  pentPanel(document.getElementById("pentP"), "puip", "Perfect unambiguous iambic pentameter (puIP), % of windows", 26);
   leadPanel(document.getElementById("leadT"), "t", "Metrical tension (MTS) per 10-syllable window", 3, 14, 2);
   leadPanel(document.getElementById("leadU"), "u", "Metrical uncertainty: viable scansions per window", 2.0, 4.8, 0.5);
   panel(document.getElementById("chartT"), "t", "Metrical tension (MTS) per 10-syllable window", 4, 14, 2);
@@ -345,9 +400,9 @@ let sortK = "kind", sortDir = 1;
 function table() {
   const rows = PTS.map(p => ({ ...p, kind: KIND[p.group] || p.group }));
   rows.sort((a, b) => { const x = a[sortK], y = b[sortK]; return (typeof x === "number" ? x - y : String(x).localeCompare(String(y))) * sortDir; });
-  const col = g => g.startsWith("llm_prose") ? "var(--prose)" : (g.startsWith("llm_verse") || g.startsWith("verse_")) ? "var(--verse)" : g.startsWith("llm_prompted") ? "var(--prompt)" : "var(--human)";
+  const col = g => g.startsWith("llm_prose") ? "var(--prose)" : (g.startsWith("llm_verse") || g.startsWith("verse_") || g === "tier_model") ? "var(--verse)" : g.startsWith("llm_prompted") ? "var(--prompt)" : "var(--human)";
   document.querySelector("#table tbody").innerHTML = rows.map(r =>
-    `<tr><td><span class="sw" style="background:${col(r.group)}"></span>${r.label}</td><td>${r.kind}</td><td class="n">${f2(r.u)}</td><td class="n">${f2(r.t)}</td><td class="n">${r.n_windows.toLocaleString()}</td><td class="n">${r.n_units.toLocaleString()}</td><td>${r.source}</td></tr>`).join("");
+    `<tr><td><span class="sw" style="background:${col(r.group)}"></span>${r.label}</td><td>${r.kind}</td><td class="n">${f2(r.u)}</td><td class="n">${f2(r.t)}</td><td class="n">${f2(r.uip)}</td><td class="n">${f2(r.puip)}</td><td class="n">${r.n_windows.toLocaleString()}</td><td class="n">${r.n_units.toLocaleString()}</td><td>${r.source}</td></tr>`).join("");
 }
 document.querySelectorAll("#table th").forEach(th => {
   const go = () => { const k = th.dataset.k; sortDir = sortK === k ? -sortDir : 1; sortK = k; table(); };

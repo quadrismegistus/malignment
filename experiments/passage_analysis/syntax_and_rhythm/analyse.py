@@ -2,6 +2,7 @@
 
     python analyse.py                  primary filter: judge story AND pure_story
     python analyse.py --sensitivity a  no-demonym control only
+    python analyse.py --sensitivity b  no judge filter: every parsed passage
     python analyse.py --sensitivity c  lineages with >= 10 filtered passages per arm
     python analyse.py --write          also write results/tests.csv, results/by_lineage.csv
 
@@ -9,7 +10,8 @@ Unit = the lineage. Per lineage the statistic is aligned minus base; tested by
 exact sign test and Wilcoxon signed-rank, two-sided; Holm within each family
 ({H1a, H1b, H2a, H2b} and H3). H1 is directly standardised over sentence-length
 bins, H2 over monosyllable-count bins, as registered. Sensitivity (b), no judge
-filter, needs `parse_passages_prosodic.py --subset all` first.
+filter, needs `parse_passages_prosodic.py --subset all` first; it includes the
+essays, incoherent, repetitive and drifting texts the primary filter drops.
 
 Each text is counted once: national_story's load_raw deduplicates within a
 (lineage, arm, demonym) cell only, and 60 texts recur under two demonyms.
@@ -31,8 +33,10 @@ MONO_BINS = ([-1, 3, 5, 7, 10], ["0-3", "4-5", "6-7", "8-10"])
 
 
 def load(sensitivity=None):
-    P = pd.read_csv(os.path.join(HERE, "results", "by_passage.csv"), low_memory=False).drop_duplicates(["id", "version"])
-    keep = P[(P.version == "orig") & (P.overall == "story") & (P.pure_story == True) & (P.error.fillna("") == "")]
+    P = pd.read_csv(os.path.join(DATA, "by_passage.csv"), low_memory=False).drop_duplicates(["id", "version"])
+    keep = P[(P.version == "orig") & (P.error.fillna("") == "")]
+    if sensitivity != "b":                              # (b) = no judge filter at all
+        keep = keep[(keep.overall == "story") & (keep.pure_story == True)]
     if sensitivity == "a":
         keep = keep[keep.demonym.fillna("") == ""]
     if sensitivity == "c":
@@ -109,14 +113,14 @@ def run(sensitivity=None):
     for fam in ("primary", "H3"):
         i = T.family == fam
         T.loc[i, "p_sign_holm"] = holm(T.loc[i, "p_sign"])
-    T.insert(0, "population", {None: "primary", "a": "sensitivity a", "c": "sensitivity c"}[sensitivity])
+    T.insert(0, "population", {None: "primary", "a": "sensitivity a", "b": "sensitivity b", "c": "sensitivity c"}[sensitivity])
     head = dict(passages=len(keep), base=int((keep.arm == "base").sum()), aligned=int((keep.arm == "aligned").sum()))
     return T, lin, head
 
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--sensitivity", choices=("a", "c"))
+    ap.add_argument("--sensitivity", choices=("a", "b", "c"))
     ap.add_argument("--write", action="store_true")
     a = ap.parse_args()
     T, lin, head = run(a.sensitivity)

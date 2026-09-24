@@ -7061,8 +7061,8 @@
   "ffecb108d0e3",
   "fff013cda5eb"
  ],
- "parsed_subset": "pure",
- "n_parsed_subset": 3089,
+ "parsed_subset": "all",
+ "n_parsed_subset": 6938,
  "date": "2026-09-24",
  "seed": 20260924,
  "instrument": "syntax_and_rhythm-v1",

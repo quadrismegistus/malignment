@@ -3,9 +3,9 @@ kind: question
 subject: syntax_and_rhythm
 question: Does alignment change the syntax and rhythm of narrative prose, or only its content?
 status: |
-  RUN 2026-09-24. Registered LIGHT (registration.md, amendments A1-A2). 3,089 pure stories, 34 paired lineages. H1b and five of six H3 supported; H1a, H2a, H2b not; the draft's *s/unstressed measure goes against H2 (31/34).
+  RUN 2026-09-24. Registered LIGHT (registration.md, amendments A1-A2). 3,089 pure stories, 34 paired lineages. H1b and five of six H3 supported; H1a, H2a, H2b not; the draft's *s/unstressed measure goes against H2 (31/34). Sensitivities (a)-(c) run; (b), no judge filter, 37 lineages, holds and adds H3c.
 grain: sentence, window, passage
-headline: "Alignment makes clauses more uniform and prose less metrical, and leaves verse meter where it was."
+headline: "Alignment makes clauses more uniform and prose less metrical, and pushes verse toward canonical iambic pentameter."
 ---
 
 # syntax_and_rhythm: syntax, stress-grid rhythm and meter of base vs aligned prose
@@ -31,15 +31,30 @@ Unit = lineage; aligned minus base; exact sign test, Holm within family. Populat
 
 **Declared secondaries.** Against H2, the draft's own measure: the share of windows with any `*s/unstressed` tension is HIGHER in aligned prose in 31/34 lineages (p = 7.7e-7, monosyllable-stratified). On the grid, aligned prose alternates more (`alt2` higher 29/34) and lapses less (23/34), but clashes MORE at the primary-stress level (25/34) and the phrasal level (27/34). Stress density does not differ. The grid difference is word choice rather than order: a within-POS scramble leaves every lexical grid measure unchanged in both arms. Word order makes prose more metrical than its scramble in both arms, but less so for aligned models (MTS arrangement effect: aligned higher in 22/34, Wilcoxon p = 0.03).
 
-**Sensitivity.** (c) lineages with ≥ 10 pure stories per arm (27 lineages): the same results; H1b 23/27, H3 22–25/27 on the five supported. (a) the no-demonym control only (378 passages, about 7 per arm per lineage): H3b, H3d, H3e and H3f hold; H1b does not reach significance. (b) no judge filter has not been run; it needs `--subset all`.
+**Sensitivity.** (c) lineages with ≥ 10 pure stories per arm (27 lineages): the same results; H1b 23/27, H3 22–25/27 on the five supported. (a) the no-demonym control only (378 passages, about 7 per arm per lineage): H3b, H3d, H3e and H3f hold; H1b does not reach significance. (b) no judge filter: every parsed passage, 6,877 of them (3,739 base, 3,138 aligned), including essays, incoherent, repetitive and drifting texts, and all 37 lineages. Nothing reverses: H1b 31/37 (Holm p = 0.0002); all six H3 predictions hold, H3c included (26/37, Holm p = 0.02); H2 stays null; `*s/unstressed` still goes the other way (33/37). The judge filter removes far more base text than aligned (it is arm-asymmetric), but the results do not depend on it. One incoherent SmolLM2 passage failed with a RecursionError in prosodic's phrasal-stress tree and is recorded as an error row.
 
 ## Exploratory: verse, and history
 
 Not registered. Added 2026-09-24 at RH's request. See `figures/meter-map.html`, from `plot.py`.
 
-**Verse baselines** (`parse_verse_baselines.py`, `by_window_verse.csv`): the same window protocol over RH's *Generative Aesthetics* data (JCA 10.3, 2025). The key set is the continuations: base against instruct models continuing the same human poems after their first five lines (Llama-3.1-8B text/instruct and Mistral-7B text/instruct, 4-bit via ollama), with the poet's own continuation of the same lines. In every period, both model types continue a poem more metrically than its poet did, by about 1–3 MTS. They loosen for 20th-century poems but stop around 18th/19th-century human levels. Base and instruct are nearly identical throughout (MTS 4.75 and 4.70, poets 6.46), except that instruct has lower metrical uncertainty (2.58 against 2.89; Wilcoxon p < 1e-4 in both pairs).
+**Verse baselines** (`parse_verse_baselines.py`, `by_window_verse.csv`): the same window protocol over RH's *Generative Aesthetics* data (JCA 10.3, 2025). The key set is the continuations: base against instruct models continuing the same human poems after their first five lines (Llama-3.1-8B text/instruct and Mistral-7B text/instruct, 4-bit via ollama), with the poet's own continuation of the same lines. In every period, both model types continue a poem more metrically than its poet did, by about 1–3 MTS. They loosen for 20th-century poems but stop around 18th/19th-century human levels. Base and instruct have nearly identical tension throughout (MTS 4.75 and 4.70, poets 6.46), but instruct has lower metrical uncertainty (2.58 against 2.89; Wilcoxon p < 1e-4 in both pairs) and writes more canonical iambic pentameter (below).
 
 **History** (the antimetricality reparse, 1600–1999, by 50-year period; prose dated by publication year, verse by author_dob + 30): base prose (MTS 9.42) is more metrical than human fiction in every period (10.1–11.6). Aligned prose (11.01) sits at fiction's high end and toward non-fiction. The prose-minus-verse tension gap is about 4.7 for base models and 6.3 for aligned ones. The human gap was largest in 1700–1749 (6.4) and fell to 0.8 by 1950–1999. On this measure alignment restores the verse/prose opposition of the early eighteenth century, from the prose side only.
+
+**Canonical iambic pentameter.** uIP is the share of windows whose best parse is `wswswswsws` AND is the only viable scansion; puIP additionally requires zero violations. Human poetry peaks in 1700–1749 (uIP 28.8%, puIP 19.3%) and falls to 4.8% and 2.8% by 1950–1999; Pope's verse is 34.4% and 23.8%. Human prose is flat across four centuries (fiction 3.1% and 1.6%). In **prose**, uIP does not differ between base and aligned models (2.6% and 2.75%, both slightly below human fiction), but aligned prose has FEWER perfect pentameters (puIP 1.62% → 1.46%, lower in 25/34 lineages, sign p = 0.009). Base prose's pentameters are unusually clean: 62% of them are perfect, a verse-like share (human poetry 67%, fiction 52%). In **verse**, alignment raises canonical pentameter. Paired by poem against the poets' own continuations:
+
+| tier | model | uIP % (poets) | puIP % (poets) |
+|---|---|---|---|
+| base | Llama-3.1-8B text | 13.1 (14.8) | 9.9 (9.9) |
+| base | Mistral-7B text | 11.5 (15.2) | 8.8 (10.0) |
+| open aligned | Llama-3.1-8B | 17.2 (14.8) | 11.9 (9.9) |
+| open aligned | Mistral-7B | 16.3 (15.1) | 12.2 (10.0) |
+| open aligned | OLMo-2 | 17.0 (15.4) | 11.7 (10.1) |
+| API | GPT-3.5 | 16.2 (15.1) | 11.4 (10.2) |
+| API | Claude-3-Sonnet | 26.8 (15.1) | 18.7 (10.1) |
+| API | DeepSeek-chat | 29.8 (15.1) | 22.8 (10.4) |
+
+Within the Llama and Mistral pairs, instruct exceeds base on both measures (Wilcoxon p ≤ 6e-5). Claude-3-Sonnet and DeepSeek write canonical pentameter at the 1700–1749 peak, approaching Pope (puIP p < 1e-34 against their poets). GPT-3.5 does not differ from the poets. The tiers are different model families, not stages of one model: only base → open aligned is paired within a model. Prompted poems order the same way: API models write more canonical pentameter than open aligned models under every prompt, most under "rhyme" (puIP 12.7% vs 8.0%). The API-tier and OLMo-2 completions were parsed with `parse_verse_baselines.py --tiers`.
 
 **Caveats.** Verse and prose come from different prompts and generation setups (4-bit ollama models for verse, full-precision HF generation for prose). The Olmo-3 base/SFT verse pilot (malign-logits `rhyme_pilot`, 12 primers) is on the page but is never quoted as a result. No sampled verse exists at pretraining checkpoints. National_story's `load_raw` deduplicates only within a (lineage, arm, demonym) cell: 60 texts recur under two demonyms. They are counted once here, and that folder's own per-demonym counts are affected.
 
@@ -53,11 +68,11 @@ Not registered. Added 2026-09-24 at RH's request. See `figures/meter-map.html`, 
 
 **Outputs:**
 
-    results/by_passage.csv                                   (id, version)             tracked, no text
     results/by_lineage.csv                                   lineage x arm means       tracked
     results/tests.csv                                        every test, per population tracked
     population.json                                          receipt: rule, ids, exclusions, prosodic sha
     figures/meter-map.html, meter_points.json                the figure and every plotted value
+    ~/malignment-data/syntax_and_rhythm/by_passage.csv       (id, version)             no text; moved out of git 2026-09-24 at 6,878 x 3 rows
     ~/malignment-data/syntax_and_rhythm/by_sentence.csv      (id, version, sent_idx)   H1's grain
     ~/malignment-data/syntax_and_rhythm/by_window.csv        (id, version, win_idx)    H2's grain, carries window text
     ~/malignment-data/syntax_and_rhythm/by_window_verse.csv  (source, model, arm, poem, win_idx)
@@ -71,4 +86,4 @@ Not registered. Added 2026-09-24 at RH's request. See `figures/meter-map.html`, 
 
 If prosodic, spaCy or `keep_parse` is missing, the producer says so and exits. The prose run takes about 50 min at 6 CPU workers and needs no GPU.
 
-**Population:** national_story's own, imported rather than retyped: `analyse.load_raw(min_words=150, drop_escapes=True)` restricted to `_paired` lineages. As of 2026-09-24 that is 37 lineages and 6,938 texts (6,878 unique), not the 21 in national_story's README; the stash has grown since that run. Judge labels are joined by `md5(text)[:12]`. Per amendment A1, the 3,089 pure stories were parsed, plus 530 other passages parsed before the restriction. Any prefix of the outputs is a random sample, and a failed passage is a row with `error` set, never an absence.
+**Population:** national_story's own, imported rather than retyped: `analyse.load_raw(min_words=150, drop_escapes=True)` restricted to `_paired` lineages. As of 2026-09-24 that is 37 lineages and 6,938 texts (6,878 unique), not the 21 in national_story's README; the stash has grown since that run. Judge labels are joined by `md5(text)[:12]`. Per amendment A1, the 3,089 pure stories were parsed first; the rest were then parsed with `--subset all` for sensitivity (b), so all 6,878 unique texts are measured. Any prefix of the outputs is a random sample, and a failed passage is a row with `error` set, never an absence.

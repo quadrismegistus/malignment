@@ -2,7 +2,7 @@
 
     python plot.py
 
-Reads the stored grains (by_window.csv, by_window_verse.csv, results/by_passage.csv)
+Reads the stored grains (by_window.csv, by_window_verse.csv, by_passage.csv)
 and the human baseline, writes figures/meter_points.json (every plotted value, with
 standard errors and sample sizes) and figures/meter-map.html (the page, from
 figures/meter_map.template.html). Not a registered analysis: the verse side and the
@@ -31,7 +31,21 @@ BASE = os.environ.get("ANTIMETRICALITY_REPARSE", os.path.expanduser(
     "~/Dropbox/Prof/Articles/Antimetricality/data/data.2026.reparse.big_data.parquet"))
 GENFORM = os.environ.get("GENFORM_REPO", os.path.expanduser("~/github/generative-formalism"))
 PILOT = os.path.expanduser("~/github/malign-logits/meta/M05_emergence/data/rhyme_pilot.parquet")
+SMALL = os.path.join(os.path.dirname(BASE), "data.2026.reparse.small_data.parquet")
 M = ["num_parses", "num_viols_allparse_sum"]
+IP = "wswswswsws"
+#: completion models by tier. base/open-aligned pairs share a poets' baseline (group =
+#: the base model); the others each carry their own (group = the model).
+TIER = {"ollama/llama3.1:8b-text-q4_K_M": ("base", "Llama-3.1-8B"), "ollama/mistral:text": ("base", "Mistral-7B"),
+        "ollama/llama3.1:8b": ("open aligned", "Llama-3.1-8B"), "ollama/mistral": ("open aligned", "Mistral-7B"),
+        "ollama/olmo2:latest": ("open aligned", "OLMo-2"), "gpt-3.5-turbo": ("API", "GPT-3.5"),
+        "claude-3-sonnet-20240229": ("API", "Claude-3-Sonnet"), "deepseek/deepseek-chat": ("API", "DeepSeek-chat")}
+
+
+def pent(df):
+    """uIP: best parse wswswswsws AND the only viable scansion; puIP: also zero violations."""
+    ip = (df.meter == IP) & (df.num_parses == 1)
+    return ip, ip & (df.num_viols_allparse_sum == 0)
 LAST = 2000                                              # periods start < LAST
 
 
@@ -39,13 +53,39 @@ def summ(df, cluster):
     g = df.groupby(cluster)[M].mean()
     n = len(g)
     se = lambda c: float(g[c].std() / np.sqrt(n)) if n > 1 else None
-    return dict(n_windows=int(len(df)), n_units=int(n), u=float(df.num_parses.mean()),
-                t=float(df.num_viols_allparse_sum.mean()), u_se=se("num_parses"), t_se=se("num_viols_allparse_sum"))
+    out = dict(n_windows=int(len(df)), n_units=int(n), u=float(df.num_parses.mean()),
+               t=float(df.num_viols_allparse_sum.mean()), u_se=se("num_parses"), t_se=se("num_viols_allparse_sum"))
+    if "meter" in df:
+        a, b = pent(df)
+        out.update(uip=float(100 * a.mean()), puip=float(100 * b.mean()))
+    return out
+
+
+def tiers(C):
+    """One row per completion model: its uIP/puIP against its OWN poets, paired by poem."""
+    from scipy.stats import wilcoxon
+    C = C.assign(uip=100 * pent(C)[0].astype(float), puip=100 * pent(C)[1].astype(float))
+    out = []
+    for m, (tier, name) in TIER.items():
+        g = C[C.model == m]
+        if not len(g):
+            continue
+        hum = C[(C.arm == "human") & (C.group == g.group.iloc[0])]
+        j = g.groupby("poem_id")[["uip", "puip"]].mean().join(hum.groupby("poem_id")[["uip", "puip"]].mean(), rsuffix="_poets", how="inner")
+        r = dict(group="tier_model", tier=tier, model=name, label="%s (%s), verse continuations" % (name, tier),
+                 source="generative-formalism completions; poets = line_real of the same poems", **summ(g, "poem_id"))
+        for k in ("uip", "puip"):
+            d = j[k] - j[k + "_poets"]
+            r[k + "_poets"] = float(j[k + "_poets"].mean())
+            r[k + "_p"] = float(wilcoxon(d).pvalue) if (d != 0).any() else None
+        r["n_paired"] = int(len(j))
+        out.append(r)
+    return out
 
 
 def points():
     pts = []
-    b = pd.read_parquet(BASE, columns=["metagenre", "year", "num_sylls_canonical", "author"] + M)
+    b = pd.read_parquet(BASE, columns=["metagenre", "year", "num_sylls_canonical", "author", "meter"] + M)
     b = b[(b.num_sylls_canonical == 10) & b.year.notna() & (b.year < LAST)]
     b["period"] = (b.year // 50 * 50).astype(int)
     for g in ["Poetry", "Fiction", "Non-Fiction"]:
@@ -66,7 +106,9 @@ def points():
     meta = pd.read_csv(os.path.join(GENFORM, "data/raw/corpus/chadwyck_corpus_metadata.csv.gz"),
                        usecols=["id", "author_dob"], low_memory=False)
     meta["p30"] = ((pd.to_numeric(meta.author_dob, errors="coerce") + 30) // 50 * 50).astype("Int64")
-    C = V[V.source == "genai_completion"].merge(meta.rename(columns={"id": "poem_id"})[["poem_id", "p30"]], on="poem_id", how="left")
+    # the by-period figure is the two base/instruct pairs only (their shared poets' baseline)
+    PAIR_BASES = ("ollama/llama3.1:8b-text-q4_K_M", "ollama/mistral:text")
+    C = V[(V.source == "genai_completion") & V.group.isin(PAIR_BASES)].merge(meta.rename(columns={"id": "poem_id"})[["poem_id", "p30"]], on="poem_id", how="left")
     C = C[C.p30 < LAST]
     AR = {"human": ("poets", "human"), "base": ("base models", "base"), "instruct": ("aligned models", "aligned")}
     for (per, arm), g in C.groupby(["p30", "arm"]):
@@ -79,6 +121,14 @@ def points():
                         source="generative-formalism completions (Llama-3.1-8B + Mistral-7B pairs)", **summ(g, "poem_id")))
     pts.append(dict(group="human_continuation", label="Poets' own continuations, 1600–1999", source="generative-formalism completions (line_real)",
                     **summ(C[C.arm == "human"], "poem_id")))
+    Call = V[V.source == "genai_completion"]                    # every model and poets' baseline, all periods
+    pts += tiers(Call)
+    if os.path.exists(SMALL):
+        sm = pd.read_parquet(SMALL)
+        sm = sm[(sm.method == "new_nsyll") & (sm.num_sylls_canonical == 10) & sm.num_parses.notna()]
+        for au, lab in (("pope", "Pope (verse)"), ("wordsworth", "Wordsworth (verse)")):
+            x = sm[(sm.corpus == "AMP") & (sm.author == au) & (sm.genre == "verse")]
+            pts.append(dict(group="ref_author", label=lab, source="antimetricality small data (AMP)", **summ(x.assign(poem=0), "poem")))
     names = {"ollama/llama3.1:8b-text-q4_K_M": ("Llama-3.1-8B", "base"), "ollama/llama3.1:8b": ("Llama-3.1-8B", "aligned"),
              "ollama/mistral:text": ("Mistral-7B", "base"), "ollama/mistral": ("Mistral-7B", "aligned")}
     for m, (lin, arm) in names.items():
@@ -108,9 +158,9 @@ def points():
                             label="Olmo-3-7B %s verse (PILOT, 12 primers)" % ("base" if arm == "base" else "SFT"),
                             source="malign-logits rhyme_pilot (HF raw generation)", **summ(Wp[Wp.model == m], "uid")))
 
-    P = pd.read_csv(os.path.join(HERE, "results", "by_passage.csv"), low_memory=False).drop_duplicates(["id", "version"])
+    P = pd.read_csv(os.path.join(DATA, "by_passage.csv"), low_memory=False).drop_duplicates(["id", "version"])
     ok = set(P[(P.version == "orig") & (P.overall == "story") & (P.pure_story == True)].id)
-    W = pd.read_csv(os.path.join(DATA, "by_window.csv"), low_memory=False, usecols=["id", "version", "win_idx", "arm", "lineage"] + M)
+    W = pd.read_csv(os.path.join(DATA, "by_window.csv"), low_memory=False, usecols=["id", "version", "win_idx", "arm", "lineage", "meter"] + M)
     W = W[(W.version == "orig") & W.id.isin(ok) & W.num_parses.notna()].drop_duplicates(["id", "win_idx"])
     for arm in ["base", "aligned"]:
         pts.append(dict(group="llm_prose", lineage="all lineages", arm=arm, label="LLM prose, %s (all lineages)" % arm,

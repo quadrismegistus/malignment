@@ -55,6 +55,26 @@ SEED = 20260924
 #: base -> instruct, as named in genai_rhyme_completions
 PAIRS = {"ollama/llama3.1:8b-text-q4_K_M": "ollama/llama3.1:8b",
          "ollama/mistral:text": "ollama/mistral"}
+#: the other completion models (--tiers): the API tier, and one open instruct model
+#: with no base partner in the data. Each carries its own poets' baseline: the
+#: line_real of exactly the poems and lines it continued.
+TIERS = {"claude-3-sonnet-20240229": "api", "gpt-3.5-turbo": "api",
+         "deepseek/deepseek-chat": "api", "ollama/olmo2:latest": "open_aligned"}
+
+
+def tier_poems():
+    """-> recs for every poem each TIERS model completed, plus its poets' continuation."""
+    c = pd.read_csv(os.path.join(GENFORM, "genai_rhyme_completions.csv.gz"), low_memory=False)
+    c = c[c.line_gen.notna() & c.model.isin(list(TIERS))]
+    out = []
+    for (m, pid), g in c.groupby(["model", "id_human"]):
+        g = g.sort_values(["stanza_num", "line_num"])
+        out.append(dict(source="genai_completion", model=m, arm=TIERS[m], poem_id=pid, group=m,
+                        text="\n".join(g.line_gen.astype(str))))
+        out.append(dict(source="genai_completion", model="human:" + m, arm="human", poem_id=pid, group=m,
+                        text="\n".join(g.line_real.fillna("").astype(str))))
+    random.Random(SEED).shuffle(out)
+    return out
 
 
 def poems(per_period, per_cell):
@@ -104,8 +124,11 @@ def main(argv=None):
     ap.add_argument("--workers", type=int, default=1)
     ap.add_argument("--per-period", type=int, default=250, help="human poems per 50-year period")
     ap.add_argument("--per-cell", type=int, default=150, help="prompted poems per (model, prompt_type)")
+    ap.add_argument("--tiers", action="store_true",
+                    help="APPEND the API-tier and unpaired open-instruct completions (and their poets' "
+                         "continuations) to the existing file, skipping any already there")
     a = ap.parse_args(argv)
-    recs = poems(a.per_period, a.per_cell)
+    recs = tier_poems() if a.tiers else poems(a.per_period, a.per_cell)
     out = OUT
     if a.smoke:
         seen, pick = {}, []
@@ -117,7 +140,10 @@ def main(argv=None):
         recs = pick
         import tempfile
         out = os.path.join(tempfile.gettempdir(), "syntax_and_rhythm_smoke_by_window_verse.csv")
-    if os.path.exists(out):
+    if a.tiers and os.path.exists(out):
+        have = set(map(tuple, pd.read_csv(out, usecols=["source", "model", "poem_id"]).drop_duplicates().values))
+        recs = [r for r in recs if (r["source"], r["model"], r["poem_id"]) not in have]
+    elif os.path.exists(out):
         os.remove(out)
     os.makedirs(os.path.dirname(out), exist_ok=True)
     print("%d poems: %s" % (len(recs), pd.Series([(r["source"], r["arm"]) for r in recs]).value_counts().to_dict()),
