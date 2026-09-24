@@ -231,6 +231,40 @@ def load_prompts(path):
     return conditions
 
 
+
+class SystemIgnored(ValueError):
+    """The template renders a supplied system message byte-identically to none."""
+
+
+def render_templated(htok, prompt, system, prefill, user_msg):
+    """The chat-template render for one condition, WITHOUT the prefilled stem. -> str
+
+    **AN EMPTY SYSTEM MESSAGE IS A SYSTEM MESSAGE.** This used to read
+    `if system is not DEFAULT and system:`, and `""` is falsy, so every
+    `sysempty` condition was rendered with the template's DEFAULT system turn and
+    stamped `sysempty` -- the vendor persona under a label that says it is absent.
+    `generate.render` found and fixed the identical guard on 2026-08-26; this path
+    never got the fix (found 2026-09-24 planning the framed-Y run).
+
+    **THE BYTE TEST**, as `generate.render`: if supplying the system message
+    renders the same bytes as supplying none, it had no effect, and the condition
+    is REFUSED (raised, so the caller drops and counts it) rather than generated
+    under a label it did not receive. Measured: Llama-3.1-Instruct, SmolLM3, Yi,
+    phi-4-reasoning and others render `""` identically; gemma-2 raises on any
+    system role.
+    """
+    #: prefill: turns UP TO the assistant, then the stem AFTER, keeping the turn
+    #: OPEN (an assistant message would close it).
+    turn = [{"role": "user", "content": (user_msg or "") if prefill else prompt}]
+    if system is DEFAULT:
+        return htok.apply_chat_template(turn, tokenize=False, add_generation_prompt=True)
+    out = htok.apply_chat_template([{"role": "system", "content": system}] + turn,
+                                   tokenize=False, add_generation_prompt=True)
+    if out == htok.apply_chat_template(turn, tokenize=False, add_generation_prompt=True):
+        raise SystemIgnored("template renders system=%r byte-identically to none" % system)
+    return out
+
+
 def _resolve_system(s):
     """Convert the prompts-file system field to generate.py's convention."""
     if s == "_DEFAULT_":
@@ -382,16 +416,8 @@ def generate_model(model_id, conditions, n=10, seed=42, decoder=None,
         user_msg = cond.get("user_msg", "Hi.")
         templated = bool(system is not DEFAULT or prefill or user or cond.get("chat"))
         if templated:
-            messages = []
-            if system is not DEFAULT and system:
-                messages.append({"role": "system", "content": system})
-            # prefill: turns UP TO the assistant, then the stem AFTER, keeping
-            # the turn OPEN (an assistant message would close it).
-            messages.append({"role": "user",
-                             "content": (user_msg or "") if prefill else prompt})
             try:
-                rendered = htok.apply_chat_template(
-                    messages, tokenize=False, add_generation_prompt=True)
+                rendered = render_templated(htok, prompt, system, prefill, user_msg)
             except Exception as e:
                 n_refused += 1
                 if n_refused == 1:
