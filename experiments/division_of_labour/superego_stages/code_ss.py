@@ -66,7 +66,7 @@ def from_stash(model, C):
         for k, v in st.items():
             c = C.get(k.get("prompt"))
             d = k.get("decoder") or {}
-            if (not c or k.get("frame") != "raw" or k.get("seed") != 42 or k.get("render") != "ids_v2" or v.get("engine") != "vllm"
+            if (not c or k.get("frame") != "raw" or k.get("seed") != 42 + (k.get("sample_idx") or 0) or k.get("render") != "ids_v2" or v.get("engine") != "vllm"
                     or d.get("max_new_tokens") != FULL or d.get("temperature") != 1.0 or d.get("top_p") != 1.0):
                 continue
             got[c[:2]].setdefault(k.get("sample_idx"), (v.get("text") or "", int(v.get("n_new_tokens") or 0)))
