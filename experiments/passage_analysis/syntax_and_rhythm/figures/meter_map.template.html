@@ -95,6 +95,9 @@ th.n { text-align: right; }
       <svg class="chart" id="augChart" role="img" aria-label="Uncertainty of continuations by period of the poem continued; values in the table below it"></svg>
     </div>
     <div class="table-wrap" style="margin-top:12px"><table id="augTable"><thead><tr><th>Poems from</th><th class="n">Human poetry of that period</th><th>Poets' own continuation</th><th>Base models</th><th>Aligned models</th><th>API (Claude-3-Sonnet, DeepSeek)</th></tr></thead><tbody></tbody></table></div>
+    <h3 style="font-size:14px;margin:18px 0 6px">Change from each poem's own opening</h3>
+    <p class="note" style="color:var(--ink-2)">The same continuations, now minus the uncertainty of the five lines each model was shown, poem by poem (negative = the continuation is more metrically determinate than its opening). The poets continue at about their opening's level. Base models leave most pre-1900 poems roughly alone (1650–99 is the exception) and regularize 20th-century ones. Aligned models regularize significantly in every period except the 18th-century poems (1700–1799), whose openings already sit at the Augustan level: they pull toward that level and leave what is already there. Within each family, aligned regularizes more than base in every period for Llama, and in every period but 1800–49 for Mistral, where the two are level.</p>
+    <div class="table-wrap"><table id="augDelta"><thead><tr><th>Poems from</th><th class="n">Opening (primer)</th><th>Poets</th><th>Base models</th><th>Aligned models</th><th>API (Claude, DeepSeek)</th></tr></thead><tbody></tbody></table></div>
     <p class="note">≈ gives the human period(s) whose poetry is closest in uncertainty (within 0.05). "Below any period" means more metrical than 1700–1749, the minimum since 1600. Base and aligned are the Llama-3.1-8B and Mistral-7B text/instruct pairs continuing the same 1,780 poems; the step is significant within each pair (Wilcoxon, paired by poem: p = 2e-21 and 2e-5). GPT-3.5 behaves like the poets and is not in the API column. Before 1800 the human scale is not monotonic, so for earlier poems the reading is "at the Augustan level", not a number of years.</p>
   </section>
 
@@ -183,7 +186,7 @@ const KIND = {
   human_chadwyck: "Human poetry (Chadwyck sample)", human_all_poetry: "Human poetry, pooled", human_all_fiction: "Human fiction, pooled",
   human_all_nonfiction: "Human non-fiction, pooled", human_continuation: "Human continuation",
   llm_prose: "LLM prose", llm_prose_lineage: "LLM prose, one lineage", llm_verse: "LLM verse continuation",
-  llm_verse_pilot: "LLM verse continuation (pilot)", llm_prompted: "LLM prompted poems", llm_prompted_model: "LLM prompted poems, one model", verse_period: "Verse continuations, by period", verse_overall: "Verse continuations, all periods", tier_model: "Verse continuation model (tier)", ref_author: "Human poet (reference)", ors: "O/R/S row (original values)", prompt_bucket: "LLM prompted poems, tier x prompt type"
+  llm_verse_pilot: "LLM verse continuation (pilot)", llm_prompted: "LLM prompted poems", llm_prompted_model: "LLM prompted poems, one model", verse_period: "Verse continuations, by period", verse_overall: "Verse continuations, all periods", tier_model: "Verse continuation model (tier)", ref_author: "Human poet (reference)", ors: "O/R/S row (original values)", prompt_bucket: "LLM prompted poems, tier x prompt type", primer_delta: "Continuation minus its primer (by period)"
 };
 const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
 const tip = document.getElementById("tip"), box = document.getElementById("chartBox");
@@ -464,6 +467,14 @@ function augTable() {
   const cell = p => p ? `<span class="num">${p.u.toFixed(2)}</span> <span style="color:var(--ink-3)">≈ ${augEq(p.u)}</span>` : "–";
   document.querySelector("#augTable tbody").innerHTML = Object.keys(H).map(Number).sort((a, b) => a - b).map(per =>
     `<tr><td>${per}–${per + 49}</td><td class="n">${H[per].toFixed(2)}</td><td>${cell(get("human", per))}</td><td>${cell(get("base", per))}</td><td><b>${cell(get("aligned", per))}</b></td><td>${cell(get("api", per))}</td></tr>`).join("");
+  const D = PTS.filter(p => p.group === "primer_delta");
+  const dcell = (arm, per) => { const r = D.find(p => p.arm === arm && String(p.period) === per); if (!r) return "–";
+    const sig = r.p != null && r.p < 0.05; const pv = r.p == null ? "–" : r.p < 1e-4 ? r.p.toExponential(0) : r.p.toFixed(r.p < 0.01 ? 4 : 2);
+    return `<span class="num" style="${sig ? "font-weight:600" : "color:var(--ink-3)"}">${r.delta_u >= 0 ? "+" : ""}${r.delta_u.toFixed(2)}</span> <span style="color:var(--ink-3)">±${r.ci95.toFixed(2)} · p ${pv} · n ${r.n_units}</span>`; };
+  const pers = ["1600", "1650", "1700", "1750", "1800", "1850", "1900", "1950", "all"];
+  document.querySelector("#augDelta tbody").innerHTML = pers.map(per => {
+    const pr = D.find(p => p.arm === "poets" && String(p.period) === per);
+    return `<tr><td>${per === "all" ? "all periods" : per + "–" + (+per + 49)}</td><td class="n">${pr ? pr.primer.toFixed(2) : "–"}</td><td>${dcell("poets", per)}</td><td>${dcell("base", per)}</td><td>${dcell("aligned", per)}</td><td>${dcell("API (Claude, DeepSeek)", per)}</td></tr>`; }).join("");
   document.getElementById("augLegend").innerHTML =
     `<span><span class="sw" style="border-radius:1px;background:var(--human)"></span>human poetry of the period (thick)</span>` +
     `<span><span class="sw" style="border-radius:1px;background:var(--human-2)"></span>the poets' own continuations (dotted)</span>` +

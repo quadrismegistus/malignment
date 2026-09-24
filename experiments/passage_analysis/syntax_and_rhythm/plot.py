@@ -259,8 +259,21 @@ def points():
     return pts
 
 
+def primer_delta_points():
+    """Rows of results/primer_deltas_by_period.csv (from rewind_primers.py), pooled families only."""
+    f = os.path.join(HERE, "results", "primer_deltas_by_period.csv")
+    if not os.path.exists(f):
+        return []
+    R = pd.read_csv(f, dtype={"period": str})
+    R = R[R.family == "pooled"]
+    return [dict(group="primer_delta", arm=r.arm, period=r.period, label="Δ from primer: %s, %s" % (r.arm, r.period),
+                 source="continuation minus its own 5-line primer (rewind_primers.py)", delta_u=float(r.delta_u),
+                 ci95=float(r.ci95), p=None if pd.isna(r.p) else float(r.p), primer=float(r.primer),
+                 delta_uip=float(r.delta_uip), n_windows=0, n_units=int(r.poems)) for r in R.itertuples()]
+
+
 def main():
-    pts = points()
+    pts = points() + primer_delta_points()
     os.makedirs(os.path.join(HERE, "figures"), exist_ok=True)
     with open(os.path.join(HERE, "figures", "meter_points.json"), "w") as f:
         json.dump(pts, f, indent=0)

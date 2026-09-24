@@ -205,10 +205,38 @@ def primer_deltas(T):
     return pd.DataFrame(rows)
 
 
+def primer_deltas_by_period(T):
+    """Delta uncertainty and uIP, continuation minus its own primer, by source period: poets,
+    base and aligned (the Llama and Mistral pairs, pooled and per family), API (Claude,
+    DeepSeek). Mean, 95% CI, Wilcoxon against 0, share of poems below their primer."""
+    from scipy.stats import wilcoxon
+    pr = T[T.who == "primer"].set_index("poem_id")[["num_parses", "uip", "period"]]
+    G = {"poets": [("poets:ollama/llama3.1:8b-text-q4_K_M", "Llama"), ("poets:ollama/mistral:text", "Mistral")],
+         "base": [("ollama/llama3.1:8b-text-q4_K_M", "Llama"), ("ollama/mistral:text", "Mistral")],
+         "aligned": [("ollama/llama3.1:8b", "Llama"), ("ollama/mistral", "Mistral")],
+         "API (Claude, DeepSeek)": [("claude-3-sonnet-20240229", "Claude"), ("deepseek/deepseek-chat", "DeepSeek")]}
+    rows = []
+    for arm, members in G.items():
+        X = pd.concat([T[T.who == w].set_index("poem_id")[["num_parses", "uip"]].join(pr, rsuffix="_primer", how="inner")
+                       .dropna().assign(fam=f) for w, f in members])
+        X["d_u"], X["d_uip"] = X.num_parses - X.num_parses_primer, X.uip - X.uip_primer
+        for scope, g in [("all", X)] + [(str(int(p)), g) for p, g in X.groupby("period")]:
+            fams = [("pooled", g)] + ([(f, h) for f, h in g.groupby("fam")] if arm != "API (Claude, DeepSeek)" else [])
+            for fam, gg in fams:
+                d = gg.d_u
+                rows.append(dict(arm=arm, family=fam, period=scope, poems=len(gg), primer=gg.num_parses_primer.mean(),
+                                 delta_u=d.mean(), ci95=1.96 * d.std() / np.sqrt(len(d)),
+                                 p=wilcoxon(d).pvalue if len(d) > 10 and (d != 0).any() else np.nan,
+                                 share_below_primer=(d < 0).mean(), delta_uip=gg.d_uip.mean()))
+    return pd.DataFrame(rows)
+
+
 def main():
     V = load()
     T = texts(V)
     primer_deltas(T).round(4).to_csv(os.path.join(HERE, "results", "primer_deltas.csv"), index=False)
+    primer_deltas_by_period(T).to_csv(os.path.join(HERE, "results", "primer_deltas_by_period.csv"), index=False,
+                                      float_format="%.4g")
     L, H = lookup(T)
     configs = {"base features, poets + primers": (FEATS, True),
                "base features, poets only": (FEATS, False),
