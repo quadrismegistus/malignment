@@ -83,6 +83,44 @@ USAS semantic fields from the repo's lexicon (93% token coverage), measured on t
 
 So the one prediction a lexicon can check independently (P1, outward) holds, and it mostly reflects the move to advice. The claims that carry the essay (P4's channel routing and P2's direct voice) remain on the LLM coder. That makes the second-coder check the next priority.
 
+## The words themselves (`word_did.py`, EXPLORATORY)
+
+No LLM anywhere: every passage, unfiltered. For each word in at least 300 passages (1,531 words), the share of passages containing it, as a per-lineage difference-in-differences (individual change minus institution change). Sign test over lineages, Benjamini–Hochberg over all words. 553 words survive, and 261 of those also hold by dispute (`results/word_did.md`). Cells below are passage shares, base → aligned.
+
+**Gaining on the individual's side (the routing, in its own words):**
+
+| word | individual | institution | lineages | disputes |
+|---|---|---|---|---|
+| contact | 0.06 → 0.36 | 0.06 → 0.09 | 41/1 | 18/0 |
+| rights | 0.05 → 0.21 | 0.04 → 0.08 | 40/2 | 15/3 |
+| seek | 0.02 → 0.22 | 0.02 → 0.08 | 39/2 | 17/1 |
+| request | 0.04 → 0.26 | 0.05 → 0.13 | 34/8 | 16/2 |
+| file | 0.05 → 0.15 | 0.04 → 0.03 | 41/1 | 17/0 |
+| department | 0.04 → 0.15 | 0.05 → 0.07 | 38/4 | 15/3 |
+| complaint | 0.04 → 0.12 | 0.04 → 0.05 | 35/7 | 15/3 |
+| lawyer | 0.04 → 0.11 | 0.03 → 0.03 | 37/5 | 15/1 |
+
+Also: local, reach, letter, office, legal, advice, document, contract.
+
+**Gaining on the institution's side (the conversation, in its own words):**
+
+| word | individual | institution | lineages | disputes |
+|---|---|---|---|---|
+| listen | 0.007 → 0.005 | 0.02 → 0.21 | 0/42 | 1/17 |
+| concerns | 0.02 → 0.16 | 0.05 → 0.35 | 1/41 | 2/16 |
+| apologize | 0.004 → 0.005 | 0.02 → 0.12 | 2/39 | 3/15 |
+| acknowledge | 0.005 → 0.03 | 0.01 → 0.20 | 5/36 | 3/15 |
+| empathy | 0.002 → 0.007 | 0.01 → 0.13 | 3/36 | 2/15 |
+| communicate | 0.01 → 0.09 | 0.02 → 0.21 | 4/36 | 2/16 |
+| transparent | 0.002 → 0.005 | 0.006 → 0.09 | 1/36 | 0/18 |
+| inconvenience | 0.003 → 0.005 | 0.006 → 0.08 | 1/39 | 3/14 |
+
+Also: ensure, offer, handle, maintain, trust, feedback, perspective, understand, clearly.
+
+In short: **the individual is told to contact, file, request and seek; the institution is told to listen, acknowledge, apologise and empathise.** Alignment teaches the institution a therapeutic, managerial register toward the aggrieved party. It gives the aggrieved party the vocabulary of the complaint form. "listen" rises only on the institution's side and does not move on the individual's (0/42 lineages): the aggrieved party is never told to listen.
+
+Two caveats. This is exploratory: many words, nothing declared. And the first-person pronouns (my, I, me) collapse on both sides with the move from continuation to advice; that is genre, not side. One contrast is worth keeping. The *word* "rights" rises for the individual (0.05 → 0.21), while F21's coder found *specific* rights named falling. Alignment tells the aggrieved party to "know your rights" without naming any.
+
 ## The frontier, on the same ruler (`frontier_generate.py`, `frontier_code.py`)
 
 The same 36 prompts were run through the API: the prompt as the user message, the vendor's default system prompt, t=1.0, 256 tokens, 10 draws. top_p is pinned only on DeepSeek, where it is measured to be honoured; elsewhere it runs at the vendor default. There is no base, so this is the gap at the endpoint. The analysis was committed before coding (`results/analysis_frontier.md`). Shares are individual / institution:
@@ -192,8 +230,9 @@ Engine facts are recorded in `roster/models/observations.json` (`engine_support.
     within_genre_test.py  the within-genre widening at lineage and dispute units, declared first
     f21_task_sample.py    F21's own annotation task on a 4,361 sample + the frontier, joined to the referral codes
     usas_test.py          USAS government/law and speech fields, no LLM in the measurement, declared first
+    word_did.py           EXPLORATORY per-word difference-in-differences, BH over 1,531 words
     frontier_generate.py  API passages (Sonnet 4.6, Haiku 4.5, GPT-4o-mini, DeepSeek) into the generation stash
     frontier_code.py      codes them; the endpoint contrast, declared before coding
-    results/              analysis.md (pass 1 v1), analysis_v2.md, analysis_regen.md, analysis_frontier.md, decompose.md, within_genre_test.md, f21_task.md, usas_test.md, examples_regen.md
+    results/              analysis.md (pass 1 v1), analysis_v2.md, analysis_regen.md, analysis_frontier.md, decompose.md, within_genre_test.md, f21_task.md, usas_test.md, word_did.md, examples_regen.md
 
 The coded outputs are 20 MB each and live in `~/malignment-data/institution_vs_individual/`.
