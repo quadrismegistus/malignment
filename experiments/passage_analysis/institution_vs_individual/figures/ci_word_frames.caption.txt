@@ -20,30 +20,32 @@ Word selection is plate A's rule (plot.py STOP, BH over lineages and p < 0.05 by
 bottom 4 by median DiD between base and chat); rows ordered by the farthest-right mark. No LLM in the
 measurement: passage text only, lower-cased [a-z']+ tokens, every passage unfiltered. EXPLORATORY.
 
-word        side            base     raw    chat     API   base -> chat -> API monotonic?
-file        individual     0.053   0.096   0.153   0.565   up
-file        institution    0.043   0.036   0.031   0.087   no
-contact     individual     0.059   0.171   0.369   0.547   up
-contact     institution    0.060   0.099   0.095   0.086   no
-consider    individual     0.048   0.158   0.409   0.544   up
-consider    institution    0.053   0.146   0.297   0.535   up
-request     individual     0.041   0.118   0.263   0.501   up
-request     institution    0.052   0.099   0.134   0.124   no
-rights      individual     0.047   0.124   0.219   0.347   up
-rights      institution    0.038   0.064   0.079   0.106   up
-local       individual     0.045   0.103   0.184   0.290   up
-local       institution    0.038   0.056   0.085   0.153   up
-department  individual     0.040   0.080   0.158   0.246   up
-department  institution    0.053   0.068   0.069   0.108   up
-seek        individual     0.018   0.083   0.224   0.140   no
-seek        institution    0.017   0.052   0.085   0.054   no
-listen      individual     0.007   0.009   0.005   0.001   no
-listen      institution    0.022   0.079   0.210   0.464   up
-concerns    individual     0.020   0.089   0.167   0.126   no
-concerns    institution    0.046   0.211   0.363   0.383   up
-offer       individual     0.037   0.067   0.107   0.226   up
-offer       institution    0.056   0.146   0.259   0.307   up
-ensure      individual     0.027   0.097   0.162   0.056   no
-ensure      institution    0.046   0.191   0.298   0.175   no
+word        side            base     raw    chat     API   base->raw->chat->API monotonic?  API reverses base->chat?
+file        individual     0.053   0.096   0.153   0.565   up                              
+file        institution    0.043   0.036   0.031   0.087   no                              yes
+contact     individual     0.059   0.171   0.369   0.547   up                              
+contact     institution    0.060   0.099   0.095   0.086   no                              yes
+consider    individual     0.048   0.158   0.409   0.544   up                              
+consider    institution    0.053   0.146   0.297   0.535   up                              
+request     individual     0.041   0.118   0.263   0.501   up                              
+request     institution    0.052   0.099   0.134   0.124   no                              yes
+rights      individual     0.047   0.124   0.219   0.347   up                              
+rights      institution    0.038   0.064   0.079   0.106   up                              
+local       individual     0.045   0.103   0.184   0.290   up                              
+local       institution    0.038   0.056   0.085   0.153   up                              
+department  individual     0.040   0.080   0.158   0.246   up                              
+department  institution    0.053   0.068   0.069   0.108   up                              
+seek        individual     0.018   0.083   0.224   0.140   no                              yes
+seek        institution    0.017   0.052   0.085   0.054   no                              yes
+listen      individual     0.007   0.009   0.005   0.001   no                              
+listen      institution    0.022   0.079   0.210   0.464   up                              
+concerns    individual     0.020   0.089   0.167   0.126   no                              yes
+concerns    institution    0.046   0.211   0.363   0.383   up                              
+offer       individual     0.037   0.067   0.107   0.226   up                              
+offer       institution    0.056   0.146   0.259   0.307   up                              
+ensure      individual     0.027   0.097   0.162   0.056   no                              yes
+ensure      institution    0.046   0.191   0.298   0.175   no                              yes
 
-9 of 24 series are not monotonic across the four conditions; see the column. Shares are proportions.
+9 of 24 series are not monotonic across the four conditions (base, raw, chat, API).
+In 8 of 24 the API model moves against the base-to-chat direction; that is why the diamond is drawn
+apart from the arrow, not at its tip. Shares are proportions.

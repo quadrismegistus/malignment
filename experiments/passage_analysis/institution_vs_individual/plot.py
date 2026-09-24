@@ -325,6 +325,10 @@ def fig_frames():
                  strip_text_y=element_blank(), strip_background=element_blank(),
                  axis_ticks_major_y=element_blank()))
 
+    def reverses(w, side):
+        v = {c: val(c, side, w) for c in WF.COND}
+        return (v["Aligned, chat"] - v["Base, raw"]) * (v["API"] - v["Aligned, chat"]) < 0
+
     def mono(w, side):
         v = [val(c, side, w) for c in WF.COND]
         return "up" if all(a <= b for a, b in zip(v, v[1:])) else \
@@ -354,15 +358,21 @@ def fig_frames():
         "bottom %d by median DiD between base and chat); rows ordered by the farthest-right mark. No LLM in the" % N_INST,
         "measurement: passage text only, lower-cased [a-z']+ tokens, every passage unfiltered. EXPLORATORY.",
         "",
-        "%-11s %-12s %7s %7s %7s %7s   base -> chat -> API monotonic?" % ("word", "side", "base", "raw", "chat", "API"),
+        #: the column tests all FOUR conditions; the header once said three (paper seat's catch)
+        "%-11s %-12s %7s %7s %7s %7s   base->raw->chat->API monotonic?  API reverses base->chat?"
+        % ("word", "side", "base", "raw", "chat", "API"),
     ]
     for w in order:
         for side in ("individual", "institution"):
-            lines.append("%-11s %-12s %7.3f %7.3f %7.3f %7.3f   %s" % (
-                w, side, *(share[(c, side)][w] for c in WF.COND), mono(w, side)))
+            lines.append("%-11s %-12s %7.3f %7.3f %7.3f %7.3f   %-31s %s" % (
+                w, side, *(share[(c, side)][w] for c in WF.COND), mono(w, side),
+                "yes" if reverses(w, side) else ""))
     nm = sum(mono(w, sd) == "no" for w in order for sd in ("individual", "institution"))
-    lines += ["", "%d of %d series are not monotonic across the four conditions; see the column. Shares are proportions."
-              % (nm, 2 * len(order))]
+    nr = sum(reverses(w, sd) for w in order for sd in ("individual", "institution"))
+    lines += ["", "%d of %d series are not monotonic across the four conditions (base, raw, chat, API)." % (nm, 2 * len(order)),
+              "In %d of %d the API model moves against the base-to-chat direction; that is why the diamond is drawn"
+              % (nr, 2 * len(order)),
+              "apart from the arrow, not at its tip. Shares are proportions."]
     save(p, "ci_word_frames", W_IN, H_IN, "\n".join(lines))
 
 
