@@ -73,6 +73,16 @@ F21's `AlignmentAsymmetryTask` was run unchanged, with F21's input convention, o
 - **Apology:** no side difference in the change (lineages 20/21). The frontier differs by model: GPT-4o-mini apologises to the individual in 56% of answers against 9% for the institution ("I'm sorry to hear…"); Haiku almost never apologises.
 - **Frontier, at the endpoint:** every model scores the individual lower on deference than the institution (Sonnet 2.60 against 3.85), and higher on agency, assertiveness and specificity.
 
+## A check with no LLM in the measurement: USAS fields (`usas_test.py`)
+
+USAS semantic fields from the repo's lexicon (93% token coverage), measured on the passage text only. The primary population is every regeneration passage, unfiltered, so the LLM coder is not in the selection either. Two predictions were declared before tagging (`results/usas_test.md`). The file states in advance that a word field cannot test P4: it can't say whose department.
+
+- **U1, supported.** Government and law vocabulary (G1, G2) rises for the individual and falls for the institution: individual 15.7 → 19.1 per 1,000 tokens, institution 14.7 → 13.4. Lineages 39/4, disputes 15/3, Holm-significant on both units. That is P1's direction, confirmed by an instrument no LLM touches.
+- **But within advice alone (secondary), it does not widen** (lineages 8/5). The individual/institution gap in legal vocabulary is already there in base advice (21.1 against 15.5). So U1 is largely the genre shift: aligned models write advice, and advice to the aggrieved is legalistic. This matches the decomposition, where outward was the small part of the widening.
+- **U2, not supported, and reversed.** Speech vocabulary (Q2) rises MORE for the individual (28.9 → 48.4) than for the institution (34.5 → 45.2): lineages 38/5 the wrong way. A post-hoc look at the words shows why. On the aligned side, the individual's speech words are *request, appeal, consult, statement, contact, claim, complaint*: procedural speech addressed to a body. The institution's are *communication, conversation, explain, acknowledge, apologize*: relational speech addressed to the other party. Splitting Q2.1 (speech) from Q2.2 (speech acts) doesn't help; both rise more for the individual. **A word field cannot separate "talk to them" from "file a request with someone": the individual's procedure is itself made of speech acts.** Q2 was the wrong proxy for direct voice. The failure is a construct mismatch and says nothing against P2. The contrast in the word lists is suggestive, but it is post hoc.
+
+So the one prediction a lexicon can check independently (P1, outward) holds, and it mostly reflects the move to advice. The claims that carry the essay (P4's channel routing and P2's direct voice) remain on the LLM coder. That makes the second-coder check the next priority.
+
 ## The frontier, on the same ruler (`frontier_generate.py`, `frontier_code.py`)
 
 The same 36 prompts were run through the API: the prompt as the user message, the vendor's default system prompt, t=1.0, 256 tokens, 10 draws. top_p is pinned only on DeepSeek, where it is measured to be honoured; elsewhere it runs at the vendor default. There is no base, so this is the gap at the endpoint. The analysis was committed before coding (`results/analysis_frontier.md`). Shares are individual / institution:
@@ -181,8 +191,9 @@ Engine facts are recorded in `roster/models/observations.json` (`engine_support.
     decompose.py          POST HOC: the 2x2, and within-genre (advice / continuation)
     within_genre_test.py  the within-genre widening at lineage and dispute units, declared first
     f21_task_sample.py    F21's own annotation task on a 4,361 sample + the frontier, joined to the referral codes
+    usas_test.py          USAS government/law and speech fields, no LLM in the measurement, declared first
     frontier_generate.py  API passages (Sonnet 4.6, Haiku 4.5, GPT-4o-mini, DeepSeek) into the generation stash
     frontier_code.py      codes them; the endpoint contrast, declared before coding
-    results/              analysis.md (pass 1 v1), analysis_v2.md, analysis_regen.md, analysis_frontier.md, decompose.md, within_genre_test.md, f21_task.md, examples_regen.md
+    results/              analysis.md (pass 1 v1), analysis_v2.md, analysis_regen.md, analysis_frontier.md, decompose.md, within_genre_test.md, f21_task.md, usas_test.md, examples_regen.md
 
 The coded outputs are 20 MB each and live in `~/malignment-data/institution_vs_individual/`.
