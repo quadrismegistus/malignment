@@ -62,6 +62,17 @@ The caveats are specific to this decomposition:
 
 The widening also holds within continuation (channel: lineages 11/2, disputes 15/2). The institution's direct voice widens within advice (lineages 2/23, disputes 4/13, p=0.049). Outward and authority widen within advice by lineage (20/5) but not by dispute (12/5, p=0.14), which is consistent with those being the small part of the story.
 
+## F21's own instrument on the same passages (`f21_task_sample.py`)
+
+F21's `AlignmentAsymmetryTask` was run unchanged, with F21's input convention, on a seeded sample of 4,361 regeneration passages (up to 30 per lineage × arm × side cell) and on all 1,440 frontier passages. The expectations were committed before coding (`results/f21_task.md`).
+
+- **E1 holds: F21's deference scale sees no asymmetry in the change.** Deference rises on both sides: individual 2.88 → 3.36, institution 3.74 → 4.11. The individual-minus-institution change is null (lineages 25/16, p=0.21; disputes 11/7). This is F21's unit result again, on new texts.
+- **On the same passages, the deference scale is blind to the routing.** Passages that send the individual into the counterparty's channel have exactly the same mean deference as passages that don't (3.55 against 3.55). Outward referral goes with slightly *lower* deference (3.34 against 3.58); direct voice with higher (3.81 against 3.33). Channel referral does move agency (3.61 against 2.96) and strategy specificity (3.13 against 2.44). So a deference scale cannot register the capture that the referral codes register.
+- **E2 holds on specificity and concrete action.** Both rise more for the individual: strategy specificity lineages 38/4, disputes 17/1; concrete action recommended 33/8 and 14/4. "Specific rights named" *falls* on both sides (individual 0.12 → 0.08, institution 0.13 → 0.04). It falls less for the individual (28/11), so the prediction holds in form, but alignment names fewer rights overall.
+- **Not expected: the individual is given homework.** "Homework assigned" (document everything, gather evidence, keep records) rises from 0.19 to 0.73 for the individual and from 0.22 to 0.49 for the institution (lineages 37/4, disputes 16/2). F21's "agency" rises more for the individual too (35/7). Read beside the channel result, the agency alignment grants the aggrieved party is procedural labour, done inside the other side's apparatus.
+- **Apology:** no side difference in the change (lineages 20/21). The frontier differs by model: GPT-4o-mini apologises to the individual in 56% of answers against 9% for the institution ("I'm sorry to hear…"); Haiku almost never apologises.
+- **Frontier, at the endpoint:** every model scores the individual lower on deference than the institution (Sonnet 2.60 against 3.85), and higher on agency, assertiveness and specificity.
+
 ## The frontier, on the same ruler (`frontier_generate.py`, `frontier_code.py`)
 
 The same 36 prompts were run through the API: the prompt as the user message, the vendor's default system prompt, t=1.0, 256 tokens, 10 draws. top_p is pinned only on DeepSeek, where it is measured to be honoured; elsewhere it runs at the vendor default. There is no base, so this is the gap at the endpoint. The analysis was committed before coding (`results/analysis_frontier.md`). Shares are individual / institution:
@@ -169,8 +180,9 @@ Engine facts are recorded in `roster/models/observations.json` (`engine_support.
     examples_regen.py     seeded random pairs
     decompose.py          POST HOC: the 2x2, and within-genre (advice / continuation)
     within_genre_test.py  the within-genre widening at lineage and dispute units, declared first
+    f21_task_sample.py    F21's own annotation task on a 4,361 sample + the frontier, joined to the referral codes
     frontier_generate.py  API passages (Sonnet 4.6, Haiku 4.5, GPT-4o-mini, DeepSeek) into the generation stash
     frontier_code.py      codes them; the endpoint contrast, declared before coding
-    results/              analysis.md (pass 1 v1), analysis_v2.md, analysis_regen.md, analysis_frontier.md, decompose.md, within_genre_test.md, examples_regen.md
+    results/              analysis.md (pass 1 v1), analysis_v2.md, analysis_regen.md, analysis_frontier.md, decompose.md, within_genre_test.md, f21_task.md, examples_regen.md
 
 The coded outputs are 20 MB each and live in `~/malignment-data/institution_vs_individual/`.
