@@ -374,7 +374,12 @@
    "twp_modes": [
     "empty"
    ],
-   "no_think": null
+   "no_think": {
+    "template_kwargs": {
+     "enable_thinking": false
+    }
+   },
+   "prompts": "prompts/nothink_MiniCPM5-1B.jsonl"
   },
   {
    "model": "stabilityai/stablelm-2-zephyr-1_6b",

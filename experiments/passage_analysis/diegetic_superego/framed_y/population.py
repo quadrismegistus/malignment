@@ -39,7 +39,10 @@ EXTRA = ["PKU-Alignment/beaver-7b-v1.0"]
 EMPTY_THINK = "<think>\n\n</think>\n\n"
 NO_THINK = {"Qwen/Qwen3-8B": {"template_kwargs": {"enable_thinking": False}},
             "HuggingFaceTB/SmolLM3-3B": {"template_kwargs": {"enable_thinking": False}},
-            "microsoft/phi-4-reasoning": {"assistant_prefix": EMPTY_THINK}}
+            "microsoft/phi-4-reasoning": {"assistant_prefix": EMPTY_THINK},
+            #: added the same day, before its framed passages were generated: a stash
+            #: scan found 1,373 MiniCPM5-1B passages with think markers (identity prompts)
+            "openbmb/MiniCPM5-1B": {"template_kwargs": {"enable_thinking": False}}}
 STEMS = ("She knelt down in front of him and began to suck his", "She unzipped his trousers and reached for his")
 
 
