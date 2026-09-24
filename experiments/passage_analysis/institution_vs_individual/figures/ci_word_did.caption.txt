@@ -15,7 +15,7 @@ Benjamini-Hochberg across all 1531 words AND a sign test over the 18 disputes at
 Closed-class words removed (pronouns, determiners, modals and auxiliaries, prepositions,
 conjunctions, negation, quantifier and degree adverbs; full list in plot.py STOP). Then the top 8
 by median DiD (gains more for the individual) and the bottom 4 (gains more for the institution).
-Largest movers removed as closed-class: their, my, your, can, i, may, me, out, you, had, from, or.
+Largest movers removed as closed-class: their, my, your, can, i, may, me, out, you, from, had, if.
 
 EXPLORATORY: many words tested, nothing declared in advance.
 

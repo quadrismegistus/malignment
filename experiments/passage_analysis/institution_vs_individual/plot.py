@@ -19,11 +19,10 @@ refuse to draw unless they reproduce it:
     words    word_did.py   -> results/word_did.md     no LLM; passage text only
     channel  by_dispute.py -> results/by_dispute.md   the LLM coder's `channel`
 
-The helpers are IMPORTED from those producers and from `analyse_regen.py` (the
-tokeniser, BH, the sign test, the keep filter, the domain map), not retyped, so
-a change there reaches the plate. The arithmetic around them is repeated here
-because neither producer exposes it as a function, and the booked-table asserts
-are what keeps the two copies from drifting apart.
+The numbers are IMPORTED: `word_did.compute()` and `by_dispute.compute()`
+(malign, efd6a276, exposed for this file) return the arrays the two tables
+summarise, so there is one copy of the arithmetic. The booked-table asserts stay:
+they are what fails if a table and its producer ever disagree.
 
 ## PLATE A DRAWS POOLED SHARES; ITS STATISTIC IS A MEDIAN OVER LINEAGES
 
@@ -40,7 +39,6 @@ the caption file), then take the top N_IND by median DiD and the bottom N_INST.
 Ties are broken by the unrounded median, then alphabetically.
 """
 import argparse
-import collections
 import json
 import os
 import sys
@@ -54,9 +52,8 @@ for p in (HERE, REPO):
     if p not in sys.path:
         sys.path.insert(0, p)
 
-import analyse_regen as A                     # noqa: E402  SRC, keep, outcomes, sign
-import by_dispute as BD                       # noqa: E402  DOM
-import word_did as W                          # noqa: E402  TOK, MIN_DOCS, bh
+import by_dispute as BD                       # noqa: E402  compute, DOM
+import word_did as W                          # noqa: E402  compute, MIN_DOCS
 from malignment import figure as F            # noqa: E402
 
 FIG = os.path.join(HERE, "figures")
@@ -108,50 +105,13 @@ def booked_table(path, header_prefix):
 
 # ───────────────────────────────────────────────────────────── plate A, words
 def word_frame():
-    """Recompute word_did.md for every word, assert it, apply the selection rule."""
-    rows = [json.loads(l) for l in open(A.SRC)]
-    arms = collections.defaultdict(set)
-    for r in rows:
-        arms[r["lineage"]].add(r["arm"])
-    rows = [r for r in rows if arms[r["lineage"]] == {"base", "aligned"}]
-    docs = [set(W.TOK.findall((r["text"] or "").lower())) for r in rows]
-    df = collections.Counter(w for d in docs for w in d)
-    vocab = sorted(w for w, n in df.items() if n >= W.MIN_DOCS)
-    idx = {w: i for i, w in enumerate(vocab)}
-
-    def tally(unit):
-        n = collections.Counter()
-        c = collections.defaultdict(lambda: np.zeros(len(vocab)))
-        for r, d in zip(rows, docs):
-            k = (r[unit], r["arm"], r["side"])
-            n[k] += 1
-            for w in d:
-                if w in idx:
-                    c[k][idx[w]] += 1
-        out = []
-        for u in sorted({k[0] for k in n}):
-            ks = [(u, a, s) for a in ("base", "aligned") for s in ("individual", "institution")]
-            if min(n[k] for k in ks) == 0:
-                continue
-            f = {k: c[k] / n[k] for k in ks}
-            out.append((f[(u, "aligned", "individual")] - f[(u, "base", "individual")])
-                       - (f[(u, "aligned", "institution")] - f[(u, "base", "institution")]))
-        return np.array(out)
-
-    L_, D_ = tally("lineage"), tally("scenario")
-    res = {}
-    for w, i in idx.items():
-        lu, ld, lp = A.sign(list(L_[:, i]))
-        du, dd, dp = A.sign(list(D_[:, i]))
-        res[w] = dict(lu=lu, ld=ld, lp=lp, du=du, dd=dd, dp=dp, med=float(np.median(L_[:, i])))
-    sig = dict(zip(res, W.bh([res[w]["lp"] for w in res])))
-    both = {w for w in res if sig[w] and res[w]["dp"] < 0.05}
-
-    share = {}
-    for a in ("base", "aligned"):
-        for s in ("individual", "institution"):
-            sub = [d for r, d in zip(rows, docs) if r["arm"] == a and r["side"] == s]
-            share[(a, s)] = {w: sum(1 for d in sub if w in d) / len(sub) for w in vocab}
+    """word_did.compute(), asserted against word_did.md, then the selection rule."""
+    R = W.compute()
+    res = {w: dict(lu=v["lineage_up"], ld=v["lineage_down"], lp=v["lineage_p"],
+                   du=v["dispute_up"], dd=v["dispute_down"], dp=v["dispute_p"], med=v["median_did"])
+           for w, v in R["words"].items()}
+    both = {w for w, v in R["words"].items() if v["bh_lineage"] and v["dispute_p"] < 0.05}
+    share = R["share"]
 
     #: THE BOOKED TABLE, every row of both halves, to its printed precision.
     booked = 0
@@ -167,7 +127,7 @@ def word_frame():
     #: and the README's own headline word, categorically
     assert (res["contact"]["lu"], res["contact"]["ld"], res["contact"]["du"], res["contact"]["dd"]) == (41, 1, 18, 0)
     print("   word_did.md reproduced: %d booked rows, %d passages, %d words, %d in both tests"
-          % (booked, len(rows), len(vocab), len(both)))
+          % (booked, R["n_passages"], len(R["vocab"]), len(both)))
 
     content = [w for w in both if w not in STOP]
     ind = sorted([w for w in content if res[w]["med"] > 0], key=lambda w: (-res[w]["med"], w))[:N_IND]
@@ -178,9 +138,11 @@ def word_frame():
             sel.append(dict(word=w, grp=grp, **res[w],
                             b_ind=share[("base", "individual")][w], b_inst=share[("base", "institution")][w],
                             a_ind=share[("aligned", "individual")][w], a_inst=share[("aligned", "institution")][w]))
-    meta = dict(n_pass=len(rows), n_vocab=len(vocab), n_both=len(both),
-                n_lin=len(L_), n_disp=len(D_),
-                dropped=sorted((w for w in both if w in STOP), key=lambda w: -abs(res[w]["med"])))
+    meta = dict(n_pass=R["n_passages"], n_vocab=len(R["vocab"]), n_both=len(both),
+                n_lin=R["n_lineages"], n_disp=R["n_disputes"],
+                #: tie broken by the word: equal medians came out in hash order,
+                #: so the caption changed between runs with nothing moved (malign's catch)
+                dropped=sorted((w for w in both if w in STOP), key=lambda w: (-abs(res[w]["med"]), w)))
     return sel, meta
 
 
@@ -297,12 +259,7 @@ LABEL = {"housing_repairs": "Repairs", "housing_rent": "Rent", "housing_deposit"
 
 def channel_frame():
     """Recompute by_dispute.md's `channel` column, assert it, add a lineage bootstrap."""
-    rows = [json.loads(l) for l in open(A.SRC)]
-    rows = [r for r in rows if r.get("coded") and A.keep(r["coded"])]
-    arms = collections.defaultdict(set)
-    for r in rows:
-        arms[r["lineage"]].add(r["arm"])
-    rows = [r for r in rows if arms[r["lineage"]] == {"base", "aligned"}]
+    C = BD.compute()
     design = json.load(open(os.path.join(HERE, "prompts", "design.json")))
     #: by_dispute.md's one table sits under an H1, so rows are picked by dispute id
     booked = {}
@@ -315,17 +272,7 @@ def channel_frame():
     out = []
     for dom, ss in BD.DOM.items():
         for s in ss:
-            c = collections.defaultdict(list)
-            for r in rows:
-                if r["scenario"] == s:
-                    c[(r["lineage"], r["arm"], r["side"])].append(A.outcomes(r["coded"])["channel"])
-            dd = []
-            for l in sorted({k[0] for k in c}):
-                v = [c.get((l, a, sd)) for a in ("base", "aligned") for sd in ("individual", "institution")]
-                if all(v):
-                    bi, bs, ai, as_ = (np.mean(x) for x in v)
-                    dd.append((ai - bi) - (as_ - bs))
-            dd = np.array(dd)
+            dd = np.asarray(C[s]["channel"]["did"], dtype=float)
             got = "%+.2f (%d/%d)" % (dd.mean(), (dd > 0).sum(), (dd < 0).sum())
             assert booked[s].startswith(got), "by_dispute.md %s: booked %r, derived %r" % (s, booked[s], got)
             boots = dd[rng.integers(0, len(dd), size=(4000, len(dd)))].mean(axis=1)
@@ -341,7 +288,8 @@ def channel_frame():
     by = {o["scenario"]: o for o in out}
     assert max(out, key=lambda o: o["mean"])["scenario"] in ("banking_fee", "education_removal")
     assert (by["education_removal"]["up"], by["education_removal"]["dn"]) == (22, 0)
-    print("   by_dispute.md channel reproduced: 18 disputes, %s coded passages kept" % format(len(rows), ","))
+    print("   by_dispute.md channel reproduced: 18 disputes, %d-%d lineages each"
+          % (min(o["n"] for o in out), max(o["n"] for o in out)))
     return out
 
 
