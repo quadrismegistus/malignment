@@ -1,14 +1,13 @@
 PLATE A3. The words of the capture: what the weights add, and what the chat frame adds.
 
-Per word, two rows: the aggrieved individual (black, upper) and the institution (gray, lower).
-Each row is a two-step arrow. Open circle: base model. Filled circle: the aligned model run with no
-chat template. Filled square: the aligned model in chat. SOLID arrow, base to no-template: the change
-in the WEIGHTS, the frame held at raw text. DASHED arrow, no-template to chat: the CHAT FRAME, the
-weights held at the aligned model. Arrowheads point the way each step moves and stop just short of
-the mark they point at; a step shorter than 2.0 points has no room for a head beside its mark and is
-drawn plain (listed below). Steps are drawn where the values fall.
-Where a step runs backward the word's share falls: contact/inst frame, file/inst weights, file/inst
-frame, listen/ind frame; all of them are short and drawn without a head.
+Per word, two rows: the aggrieved individual (dark gray, upper) and the institution (lighter gray,
+lower). Each row runs in two steps, read from the circle. Circle: base model.
+Triangle: the aligned model run with no chat template. Square: the aligned model in chat. The step
+from circle to triangle is the change in the WEIGHTS, the frame held at raw text; the step from
+triangle to square is the CHAT FRAME, the weights held at the aligned model. Steps are drawn where
+the values fall; the triangle marks a condition, not a direction.
+A step that runs right to left is a fall in the word's share: contact/inst frame, file/inst weights,
+file/inst frame, listen/ind frame.
 Value: share of ALL passages in that condition and side that contain the word (a passage counts once).
 
 Corpus: institution_vs_individual, 256-token regeneration, the same 42 lineages in all three
@@ -48,4 +47,3 @@ listen      individual     0.007   0.009   0.005      +0.001    -0.003
 listen      institution    0.022   0.079   0.210      +0.058    +0.131
 
 weights = no-template minus base; frame = chat minus no-template; shares are proportions.
-Steps drawn without a head (under 2.0 points): contact/inst frame, rights/inst frame, local/inst weights, department/inst weights, department/inst frame, file/inst weights, file/inst frame, listen/ind weights, listen/ind frame.

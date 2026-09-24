@@ -376,16 +376,16 @@ def fig_frames():
     save(p, "ci_word_frames", W_IN, H_IN, "\n".join(lines))
 
 
-# ─────────────────────────────────── plate A3, weights (solid) and frame (dashed)
+# ─────────────────────────────────── plate A3, weights and frame, told apart by the marks
 def fig_split():
-    """Plate A3: plate A's words, base -> aligned raw (solid) -> aligned chat (dashed), no API."""
+    """Plate A3: plate A's words, base -> aligned raw -> aligned chat, no API."""
     import matplotlib
     matplotlib.use("Agg")
     import pandas as pd
     from plotnine import (ggplot, aes, geom_segment, geom_point, geom_text, geom_vline, facet_grid,
                           labs, scale_x_continuous, scale_y_continuous, scale_color_manual,
                           scale_shape_manual, scale_fill_manual, theme, element_text, element_blank,
-                          element_rect, guides, guide_legend, arrow)
+                          element_rect, guides, guide_legend)
     import word_frames as WF
     sel, meta = word_frame()
     words = [s_["word"] for s_ in sel]
@@ -404,78 +404,74 @@ def fig_split():
     #: RH, 2026-09-24: the institution's gray a small step darker than plate A's
     #: PUB_GRAY (30% ink -> 40%), still 60 points from the individual's black
     GRAY = "#999999"
-    TONE = {SIDE["individual"]: F.PUB_INK, SIDE["institution"]: GRAY}
+    #: RH: the individual's series a little less than black. CI's halftone band
+    #: allows no gray above 80% ink (solid black alone is exempt), so 80% is the
+    #: least-black step available; 40 points clear of the institution's 40%.
+    INDIV = "#333333"
+    TONE = {SIDE["individual"]: INDIV, SIDE["institution"]: GRAY}
     F.check_halftones(TONE)
     COND = {"Base, raw": "Base model", "Aligned, raw": "Aligned, no chat template",
             "Aligned, chat": "Aligned, in chat"}
-    GRP = {"ind": "Gains more for the individual", "inst": "Gains more for the institution"}
+    #: RH, 2026-09-24: headings say whose advice the word is in. Too wide for one line at 9 pt
+    #: in a 4.4 in panel, so each breaks in two; the break is placed by hand, not by width.
+    GRP = {"ind": "Words that alignment promotes more to individuals\n(in disputes with institutions)",
+           "inst": "Words that alignment promotes more to institutions\n(in disputes with individuals)"}
     seg, pts = [], []
     for k, w in enumerate(order):
         y0 = len(order) - k
         for side, dy in (("individual", +0.17), ("institution", -0.17)):
             b, r_, c_ = (val(c, side, w) for c in OPEN3)
-            #: drawn where the values fall, even where the dashed segment runs
+            #: drawn where the values fall, even where the second step runs
             #: backward (RH): contact/institution, file/institution, listen/individual
             seg.append(dict(word=w, grp=GRP[grp[w]], side=SIDE[side], y=y0 + dy, x0=b, x1=r_, part="weights"))
             seg.append(dict(word=w, grp=GRP[grp[w]], side=SIDE[side], y=y0 + dy, x0=r_, x1=c_, part="frame"))
             for c, x in zip(OPEN3, (b, r_, c_)):
                 pts.append(dict(word=w, grp=GRP[grp[w]], side=SIDE[side], y=y0 + dy, ypos=y0, x=x,
-                                cond=COND[c], fillkey=("open" if c == "Base, raw" else SIDE[side])))
+                                cond=COND[c], fillkey=SIDE[side]))
     d, q = pd.DataFrame(seg), pd.DataFrame(pts)
     for t in (d, q):
         t["grp"] = pd.Categorical(t.grp, categories=list(GRP.values()))
         t["side"] = pd.Categorical(t.side, categories=list(TONE))
     q["cond"] = pd.Categorical(q.cond, categories=list(COND.values()))
     ticks = q.drop_duplicates("word")
-    head = (q.groupby("grp", observed=True).ypos.max() + 0.85).reset_index()
+    head = (q.groupby("grp", observed=True).ypos.max() + 1.15).reset_index()   # two-line heading
     head["label"] = list(head.grp)
     xmax = float(q.x.max())
     fnt = F.pub_font()
-    W_IN, H_IN = F.PUB_SIZE[0], 5.0
-    #: ARROWHEADS OFFSET BACK FROM THE SYMBOL (RH): a head drawn at the symbol's
-    #: centre disappears under it. Each head is its own tiny solid segment whose
-    #: tip stops BACK_OFF data units short of the target, measured along the
-    #: direction of travel, so a backward dashed step gets its head on the right.
-    #: A step too short to hold a head beside its symbol is drawn plain; the
-    #: caption says which. ~11 data units per inch on this panel: 0.75 puts the
-    #: tip about 0.03 in clear of a 1.7-size marker's edge.
-    #: RH 2026-09-24: heads larger (0.05 -> 0.08 in). A head now spans ~0.9 data
-    #: units behind its tip, so the shortest step that can hold one rises to 2.0.
-    BACK_OFF, MIN_LEN, HEAD_IN = 0.75, 2.0, 0.08
-    d["len"] = (d.x1 - d.x0).abs()
-    dirn = np.sign(d.x1 - d.x0)
-    d["tip"] = d.x1 - dirn * BACK_OFF
-    d["tail"] = d.tip - dirn * 0.05
-    heads = d[d.len >= MIN_LEN]
-    plain = d[d.len < MIN_LEN]
+    W_IN, H_IN = F.PUB_SIZE[0], 5.4
+    LINE_PT = 0.85 * F.PUB_LINE_PT
+    #: NO ARROWHEADS (RH, 2026-09-24). Tried at the far end (hidden by the mark),
+    #: pulled back from it, then midway along each step; all three read as too busy.
+    #: The order of the marks and the line style carry the direction instead.
     p = (ggplot()
          + geom_vline(xintercept=0, color=F.PUB_GRAY, size=F.PUB_RULE_PT)
+         #: RH: lines a touch thinner than the house 1.0 pt, all solid; tone alone
+         #: separates the sides (a broken line for the institution was tried once)
          + geom_segment(aes(x="x0", xend="x1", y="y", yend="y", color="side"),
-                        data=d[d.part == "weights"], size=F.PUB_LINE_PT, linetype="solid")
-         + geom_segment(aes(x="x0", xend="x1", y="y", yend="y", color="side"),
-                        data=d[d.part == "frame"], size=F.PUB_LINE_PT, linetype="dashed")
-         + geom_segment(aes(x="tail", xend="tip", y="y", yend="y", color="side"), data=heads,
-                        size=F.PUB_LINE_PT, linetype="solid",
-                        arrow=arrow(length=HEAD_IN, type="closed", angle=25))
+                        data=d, size=LINE_PT)
+         #: the points stay out of the COLOUR legend (RH): its keys are plain line
+         #: swatches; the symbols have their own legend row
          + geom_point(aes(x="x", y="y", color="side", shape="cond", fill="fillkey"), data=q,
-                      size=1.7, stroke=0.7)
+                      size=1.7, stroke=0.7, show_legend={"color": False})
          + geom_text(aes(x=0.4, y="ypos", label="label"), data=head, ha="left", va="center",
                      size=F.PUB_FONT_PT, family=fnt, fontweight="bold")
          + geom_text(aes(x=-0.8, y="ypos", label="word"), data=ticks, ha="right", va="center",
                      size=F.PUB_FONT_PT, family=fnt)
          + facet_grid("grp ~ .", scales="free_y", space="free")
          + scale_color_manual(TONE, name="")
-         + scale_shape_manual({"Base model": "o", "Aligned, no chat template": "o", "Aligned, in chat": "s"},
+         #: RH: the no-template mark is a filled triangle pointing right (matplotlib ">"),
+         #: after an open circle and a heavy X were tried
+         + scale_shape_manual({"Base model": "o", "Aligned, no chat template": ">", "Aligned, in chat": "s"},
                               name="", breaks=list(COND.values()))
-         + scale_fill_manual({"open": "#ffffff", **TONE}, guide=None)
-         #: the symbol legend shows shape AND fill: open, filled, filled square
+         + scale_fill_manual(TONE, guide=None)
+         #: the symbol legend: filled circle, filled right-pointing triangle, filled square
          + guides(color=guide_legend(order=1, nrow=1),
                   shape=guide_legend(order=2, nrow=1,
-                                     override_aes={"fill": ["#ffffff", F.PUB_INK, F.PUB_INK]}))
+                                     override_aes={"fill": [INDIV] * 3, "color": [INDIV] * 3}))
          + scale_x_continuous(limits=(-8.5, xmax * 1.04), expand=(0, 0), breaks=[0, 10, 20, 30, 40],
                               labels=lambda v: ["%g%%" % x for x in v])
-         + scale_y_continuous(breaks=[], expand=(0, 0.5))
-         + labs(x="Passages containing the word (arrows: base model \u2192 no chat template \u2192 in chat)", y="")
+         + scale_y_continuous(breaks=[], expand=(0, 0.6))
+         + labs(x="Passages containing the word", y="")
          + F.pub_theme(height=H_IN, grid="none")
          + theme(figure_size=(W_IN, H_IN), legend_position="bottom", legend_box="vertical",
                  legend_spacing=0, legend_box_spacing=0.02, legend_margin=0, legend_box_just="center",
@@ -484,23 +480,20 @@ def fig_split():
                  strip_text_y=element_blank(), strip_background=element_blank(),
                  axis_ticks_major_y=element_blank()))
 
-    #: WHICH STEPS RUN BACKWARD, and whether they got a head -- from the data, so the caption
-    #: cannot claim a backward arrowhead the plate does not draw (it once did)
+    #: WHICH STEPS RUN BACKWARD -- from the data, so the caption cannot name a different set
     back = d[d.x1 < d.x0]
-    back_note = ("Where a step runs backward the word's share falls: %s; %s." % (
-        ", ".join("%s/%s %s" % (r.word, "ind" if "individual" in r.side else "inst", r.part) for r in back.itertuples()),
-        "all of them are short and drawn without a head" if (back.len < MIN_LEN).all()
-        else "the longer ones carry a head pointing left") if len(back) else "No step runs backward.")
+    back_note = ("A step that runs right to left is a fall in the word's share: %s." % ", ".join(
+        "%s/%s %s" % (r.word, "ind" if "individual" in r.side else "inst", r.part)
+        for r in back.itertuples())) if len(back) else "No step runs right to left."
     lines = [
         "PLATE A3. The words of the capture: what the weights add, and what the chat frame adds.",
         "",
-        "Per word, two rows: the aggrieved individual (black, upper) and the institution (gray, lower).",
-        "Each row is a two-step arrow. Open circle: base model. Filled circle: the aligned model run with no",
-        "chat template. Filled square: the aligned model in chat. SOLID arrow, base to no-template: the change",
-        "in the WEIGHTS, the frame held at raw text. DASHED arrow, no-template to chat: the CHAT FRAME, the",
-        "weights held at the aligned model. Arrowheads point the way each step moves and stop just short of",
-        "the mark they point at; a step shorter than %.1f points has no room for a head beside its mark and is" % MIN_LEN,
-        "drawn plain (listed below). Steps are drawn where the values fall.",
+        "Per word, two rows: the aggrieved individual (dark gray, upper) and the institution (lighter gray,",
+        "lower). Each row runs in two steps, read from the circle. Circle: base model.",
+        "Triangle: the aligned model run with no chat template. Square: the aligned model in chat. The step",
+        "from circle to triangle is the change in the WEIGHTS, the frame held at raw text; the step from",
+        "triangle to square is the CHAT FRAME, the weights held at the aligned model. Steps are drawn where",
+        "the values fall; the triangle marks a condition, not a direction.",
         *textwrap.wrap(back_note, 100),
         "Value: share of ALL passages in that condition and side that contain the word (a passage counts once).",
         "",
@@ -521,10 +514,7 @@ def fig_split():
         for side in ("individual", "institution"):
             b, r_, c_ = (share[(c, side)][w] for c in OPEN3)
             lines.append("%-11s %-12s %7.3f %7.3f %7.3f   %+9.3f %+9.3f" % (w, side, b, r_, c_, r_ - b, c_ - r_))
-    lines += ["", "weights = no-template minus base; frame = chat minus no-template; shares are proportions.",
-              "Steps drawn without a head (under %.1f points): %s." % (MIN_LEN, ", ".join(
-                  "%s/%s %s" % (r.word, "ind" if "individual" in r.side else "inst", r.part)
-                  for r in plain.itertuples()) or "none")]
+    lines += ["", "weights = no-template minus base; frame = chat minus no-template; shares are proportions."]
     save(p, "ci_word_weights_frame", W_IN, H_IN, "\n".join(lines))
 
 
