@@ -1,0 +1,27 @@
+FIGURE 2 WITH A THIRD TICK (EXTENDED). "She was so angry she wanted to" at the blank.
+
+Ticks: base model (raw); aligned model (raw); aligned model in its chat template with the sentence
+prefilled at the start of the assistant's turn after a user turn "Hi." (frame='prefill',
+system_mode='empty'; the 'default' mode is ruled non-poolable, [6557]).
+Points: median over lineages of each word's probability; error bars: bootstrap 95% intervals on
+that median, lineage as unit, for the two named words (plot.build, as Figure 2).
+
+SUPPORT: ticks 1-2 are Figure 2's 50 lineages exactly (asserted); tick 3 is the 31 of them whose aligned model has a prefilled cell in this mode.
+Words: Figure 2's five (top 5 by pooled mass over base and aligned, raw). 7 of the 155 prefilled cells are at or below 0.001 and drawn at the floor.
+
+Median within-lineage change, points [bootstrap 95%], lineages up/down:
+  base -> aligned        kill     -5.5 [ -7.1,  -2.8]   6 up / 44 down of 50
+  base -> aligned        scream   +5.0 [ +1.5,  +8.6]  42 up /  8 down of 50
+  aligned -> prefilled   kill     -1.4 [ -2.9,  +0.2]  11 up / 20 down of 31
+  aligned -> prefilled   scream   +6.5 [ +4.0, +14.0]  25 up /  6 down of 31
+  base -> prefilled      kill     -6.7 [ -8.7,  -5.2]   4 up / 27 down of 31
+  base -> prefilled      scream  +18.1 [ +6.7, +23.2]  28 up /  3 down of 31
+
+Levels, median probability per tick (lo, hi):
+  scream  0.054 (0.040, 0.076)   0.131 (0.091, 0.165)   0.239 (0.118, 0.298)
+  kill    0.099 (0.091, 0.113)   0.040 (0.030, 0.061)   0.023 (0.009, 0.036)
+  hit     0.042 (0.039, 0.047)   0.037 (0.031, 0.053)   0.027 (0.018, 0.053)
+  cry     0.034 (0.026, 0.043)   0.030 (0.020, 0.035)   0.030 (0.021, 0.040)
+  throw   0.037 (0.034, 0.039)   0.036 (0.028, 0.043)   0.041 (0.025, 0.061)
+
+Producer: experiments/exploratory/prompt_slopes/prefill_tick.py (imports plot.build/draw and movement.contrast). Type: ArialMT, read back from the PDF's embedded fonts.

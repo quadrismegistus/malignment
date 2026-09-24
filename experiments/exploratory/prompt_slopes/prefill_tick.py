@@ -41,6 +41,7 @@ mtime)) is mirrored for the prefilled cells, which have no view of their own.
 """
 import importlib.util
 import os
+import re
 import sys
 
 import numpy as np
@@ -125,6 +126,19 @@ def pairs_of(lev_rows, a, b, stat="median"):
     return out
 
 
+def embedded_face(pdf, want):
+    """The face the PDF actually embeds, asserted against the one asked for.
+
+    The caption states the face, and at 20423046 it stated one the file did not
+    carry. Read it back from /BaseFont so the sentence cannot outrun the file.
+    """
+    names = set(re.findall(rb"/BaseFont\s*/(?:[A-Z]{6}\+)?([A-Za-z-]+)", open(pdf, "rb").read()))
+    names = sorted(n.decode() for n in names)
+    assert names and all(n.lower().startswith(want) for n in names), \
+        "asked for %s, PDF embeds %s" % (want, names)
+    return ", ".join(names)
+
+
 def out_path(tag):
     p = os.path.join(PS.FIGURES, "slope_%s_endpoints_median_top5p_prefill_%s_pub.png" % (PS.slug(PROMPT), tag))
     for ext in (".png", ".pdf", ".caption.txt"):
@@ -142,9 +156,18 @@ def main():
     ap.add_argument("--graylabel", default="cluster", choices=["cluster", "each"],
                     help="cluster (Figure 2's): one label for the flat words; each: one per word")
     ap.add_argument("--suffix", default="", help="appended to the filename tag, e.g. _v2")
+    ap.add_argument("--face", default="helvetica", choices=["helvetica", "arial"],
+                    help="helvetica: plot.py's own _pub_font, as Figure 2 and 20423046 were set; "
+                         "arial: the house face, malignment.figure.pub_font (since 21 Sep)")
     args = ap.parse_args()
     global GRAYLABEL
     GRAYLABEL = args.graylabel
+    if args.face == "arial":
+        #: plot.py resolves its OWN font, Helvetica first, so this plate shipped in
+        #: Helvetica at 20423046 while its caption said Arial (paper seat, pdffonts,
+        #: 2026-09-24). Swap the resolver on the imported module; plot.py is untouched.
+        from malignment.figure import pub_font
+        PS._pub_font = pub_font
     seq, _ = PS.units_for("endpoints")
     rows, meta = movement.contrast(PROMPT, seq, top=5, select_pooled=True)
     words = list(meta["words"])
@@ -195,13 +218,14 @@ def main():
         with wider_right(RIGHT_EDGE):
             PS.draw(lev, pairs, m, "median", path, RUNGS, pub=True, intervals="named",
                     yfloor="zero", graylabel=GRAYLABEL)
+        face = embedded_face(path[:-4] + ".pdf", args.face)
         steps = {k: pairs_of(rr, a_, b_) for k, (a_, b_) in
                  {"base -> aligned": (0, 1), "aligned -> prefilled": (1, 2), "base -> prefilled": (0, 2)}.items()}
         L = ["FIGURE 2 WITH A THIRD TICK (%s). \"%s\" at the blank." % (tag.upper(), PROMPT), "",
              "Ticks: base model (raw); aligned model (raw); aligned model in its chat template with the sentence",
              "prefilled at the start of the assistant's turn after a user turn \"Hi.\" (frame='prefill',",
              "system_mode='%s'; the 'default' mode is ruled non-poolable, [6557])." % MODE,
-             "Points: median over lineages of each word's probability; error bars: bootstrap 95%% intervals on",
+             "Points: median over lineages of each word's probability; error bars: bootstrap 95% intervals on",
              "that median, lineage as unit, for the two named words (plot.build, as Figure 2).", "",
              ("SUPPORT: ticks 1-2 are Figure 2's %d lineages exactly (asserted); tick 3 is the %d of them whose "
               "aligned model has a prefilled cell in this mode." % (meta["n_units"], len(has))) if tag == "extended"
@@ -220,8 +244,8 @@ def main():
             L.append("  %-7s " % w + "   ".join("%.3f (%.3f, %.3f)" % tuple(
                 lev[(lev.word == w) & (lev.position == i)][["central", "lo", "hi"]].iloc[0]) for i in range(3)))
         L += ["", "Producer: experiments/exploratory/prompt_slopes/prefill_tick.py (imports plot.build/draw and "
-              "movement.contrast). Type is the current house face (Arial); Figure 2 was set before the 21 Sep "
-              "switch from Helvetica."]
+              "movement.contrast). Type: %s, read back from the PDF's embedded fonts%s."
+              % (face, "" if face.startswith("Arial") else "; Figure 2's face, not the house Arial of Figures 3-6")]
         open(path[:-4] + ".caption.txt", "w").write("\n".join(L) + "\n")
         print("   ->", os.path.relpath(path, HERE), "(+ .pdf, .caption.txt)")
 
