@@ -376,9 +376,9 @@ def fig_frames():
     save(p, "ci_word_frames", W_IN, H_IN, "\n".join(lines))
 
 
-# ─────────────────────────────────── plate A3, weights (solid) and frame (dotted)
+# ─────────────────────────────────── plate A3, weights (solid) and frame (dashed)
 def fig_split():
-    """Plate A3: plate A's words, base -> aligned raw (solid) -> aligned chat (dotted), no API."""
+    """Plate A3: plate A's words, base -> aligned raw (solid) -> aligned chat (dashed), no API."""
     import matplotlib
     matplotlib.use("Agg")
     import pandas as pd
@@ -414,7 +414,7 @@ def fig_split():
         y0 = len(order) - k
         for side, dy in (("individual", +0.17), ("institution", -0.17)):
             b, r_, c_ = (val(c, side, w) for c in OPEN3)
-            #: drawn where the values fall, even where the dotted segment runs
+            #: drawn where the values fall, even where the dashed segment runs
             #: backward (RH): contact/institution, file/institution, listen/individual
             seg.append(dict(word=w, grp=GRP[grp[w]], side=SIDE[side], y=y0 + dy, x0=b, x1=r_, part="weights"))
             seg.append(dict(word=w, grp=GRP[grp[w]], side=SIDE[side], y=y0 + dy, x0=r_, x1=c_, part="frame"))
@@ -435,11 +435,13 @@ def fig_split():
     #: ARROWHEADS OFFSET BACK FROM THE SYMBOL (RH): a head drawn at the symbol's
     #: centre disappears under it. Each head is its own tiny solid segment whose
     #: tip stops BACK_OFF data units short of the target, measured along the
-    #: direction of travel, so a backward dotted step gets its head on the right.
+    #: direction of travel, so a backward dashed step gets its head on the right.
     #: A step too short to hold a head beside its symbol is drawn plain; the
     #: caption says which. ~11 data units per inch on this panel: 0.75 puts the
     #: tip about 0.03 in clear of a 1.7-size marker's edge.
-    BACK_OFF, MIN_LEN = 0.75, 1.6
+    #: RH 2026-09-24: heads larger (0.05 -> 0.08 in). A head now spans ~0.9 data
+    #: units behind its tip, so the shortest step that can hold one rises to 2.0.
+    BACK_OFF, MIN_LEN, HEAD_IN = 0.75, 2.0, 0.08
     d["len"] = (d.x1 - d.x0).abs()
     dirn = np.sign(d.x1 - d.x0)
     d["tip"] = d.x1 - dirn * BACK_OFF
@@ -451,10 +453,10 @@ def fig_split():
          + geom_segment(aes(x="x0", xend="x1", y="y", yend="y", color="side"),
                         data=d[d.part == "weights"], size=F.PUB_LINE_PT, linetype="solid")
          + geom_segment(aes(x="x0", xend="x1", y="y", yend="y", color="side"),
-                        data=d[d.part == "frame"], size=F.PUB_LINE_PT, linetype="dotted")
+                        data=d[d.part == "frame"], size=F.PUB_LINE_PT, linetype="dashed")
          + geom_segment(aes(x="tail", xend="tip", y="y", yend="y", color="side"), data=heads,
                         size=F.PUB_LINE_PT, linetype="solid",
-                        arrow=arrow(length=0.05, type="closed", angle=25))
+                        arrow=arrow(length=HEAD_IN, type="closed", angle=25))
          + geom_point(aes(x="x", y="y", color="side", shape="cond", fill="fillkey"), data=q,
                       size=1.7, stroke=0.7)
          + geom_text(aes(x=0.4, y="ypos", label="label"), data=head, ha="left", va="center",
@@ -495,7 +497,7 @@ def fig_split():
         "Per word, two rows: the aggrieved individual (black, upper) and the institution (gray, lower).",
         "Each row is a two-step arrow. Open circle: base model. Filled circle: the aligned model run with no",
         "chat template. Filled square: the aligned model in chat. SOLID arrow, base to no-template: the change",
-        "in the WEIGHTS, the frame held at raw text. DOTTED arrow, no-template to chat: the CHAT FRAME, the",
+        "in the WEIGHTS, the frame held at raw text. DASHED arrow, no-template to chat: the CHAT FRAME, the",
         "weights held at the aligned model. Arrowheads point the way each step moves and stop just short of",
         "the mark they point at; a step shorter than %.1f points has no room for a head beside its mark and is" % MIN_LEN,
         "drawn plain (listed below). Steps are drawn where the values fall.",
