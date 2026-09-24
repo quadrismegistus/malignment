@@ -91,3 +91,5 @@ No direction is registered. If an H1/H2 difference persists in `shuffle_pos` it 
 ## Amendments
 
 Append only, with date and reason.
+
+- **2026-09-24, A1: parse order restricted to the primary filter.** The run was started over all 6,938 passages; at 958 parsed (428 pure stories), RH stopped it, since 55% of the population is drifting stories, essays or degenerate text that the primary analysis drops. The producer now takes `--subset pure` (default: judge `overall == story` AND `pure_story`), in the same seeded order; `--subset all` parses the rest for sensitivity (b). No measure, filter, hypothesis or test changed. Interim numbers were looked at on the first ~680 passages (293 pure stories, 28 lineages) before this amendment.

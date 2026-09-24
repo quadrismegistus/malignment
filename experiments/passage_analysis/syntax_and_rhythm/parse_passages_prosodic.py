@@ -75,6 +75,15 @@ lexical one. Follows the O/R/S (original/randomized/scrambled) design of the
 antimetricality small data; which of R/S was the within-POS one is not recorded
 there, so these are named for what they do.
 
+## SUBSET
+
+`--subset pure` (default) parses only passages the judge labelled
+`overall == story` AND `pure_story` -- the registration's primary filter; 55% of
+the population is drifting stories, essays or degenerate text, and parsing it
+first would spend most of the run on rows the primary analysis drops.
+`--subset all` parses the rest, for sensitivity analysis (b); it resumes, so
+it adds only what is missing. Either way the order is the same seeded shuffle.
+
 ## ORDER, RESUMPTION, FAILURES
 
 Passages run in a FIXED-SEED shuffle and are appended as they finish, so any
@@ -496,6 +505,9 @@ def main(argv=None):
     ap.add_argument("--smoke", action="store_true")
     ap.add_argument("--limit", type=int, default=0, help="stop after N new passages")
     ap.add_argument("--workers", type=int, default=1)
+    ap.add_argument("--subset", choices=("pure", "all"), default="pure",
+                    help="pure (default): only judge overall == story AND pure_story, the "
+                         "registration's primary filter; all: every passage (sensitivity b)")
     ap.add_argument("--demonym", default=None,
                     help="restrict to one demonym ('none' = the no-demonym control)")
     ap.add_argument("--restart", action="store_true")
@@ -503,7 +515,11 @@ def main(argv=None):
 
     d, receipt = population(a.demonym)
     recs = d.to_dict("records")
-    random.Random(SEED).shuffle(recs)
+    random.Random(SEED).shuffle(recs)                   # shuffle BEFORE subsetting: same order either way
+    if a.subset == "pure":
+        recs = [r for r in recs if r["overall"] == "story" and r["pure_story"] == True]
+    receipt["parsed_subset"] = a.subset
+    receipt["n_parsed_subset"] = len(recs)
     outs = dict(OUTS)
     if a.smoke:
         pick, seen = [], {}
