@@ -27,7 +27,19 @@ DOM = {"housing": ["housing_repairs", "housing_rent", "housing_deposit"],
 O = ["channel", "outward", "authority", "move_voice_direct"]
 
 
-def main():
+def compute():
+    """Per dispute, per outcome, the arrays the table summarises. -> dict
+
+    For `plot.py` (dario, 2026-09-24), which bootstraps the per-lineage DiD:
+
+        {dispute: {outcome: {"lineages": [lineage, ...]   sorted,
+                             "did": np.array                aligned with lineages,
+                             "frontier_gap": float}}}       individual minus institution,
+                                                            DeepSeek excluded (self-coded)
+
+    Lineages are SORTED: the table's mean does not depend on order, a bootstrap's
+    reproducibility does, and the previous set iteration had no order.
+    """
     rows = [json.loads(l) for l in open(A.SRC)]
     rows = [r for r in rows if r.get("coded") and A.keep(r["coded"])]
     arms = collections.defaultdict(set)
@@ -36,6 +48,30 @@ def main():
     rows = [r for r in rows if arms[r["lineage"]] == {"base", "aligned"}]
     fr = [json.loads(l) for l in open(FRONTIER)]
     fr = [r for r in fr if r.get("coded") and A.keep(r["coded"]) and "deepseek" not in r["model"]]
+    out = {}
+    for d, ss in DOM.items():
+        for s in ss:
+            out[s] = {}
+            for n in O:
+                c = collections.defaultdict(list)
+                for r in rows:
+                    if r["scenario"] == s:
+                        c[(r["lineage"], r["arm"], r["side"])].append(A.outcomes(r["coded"])[n])
+                lins, dd = [], []
+                for l in sorted({k[0] for k in c}):
+                    v = [c.get((l, a, sd)) for a in ("base", "aligned") for sd in ("individual", "institution")]
+                    if all(v):
+                        bi, bs, ai, as_ = (np.mean(x) for x in v)
+                        lins.append(l)
+                        dd.append((ai - bi) - (as_ - bs))
+                fi = [A.outcomes(r["coded"])[n] for r in fr if r["scenario"] == s and r["side"] == "individual"]
+                fs = [A.outcomes(r["coded"])[n] for r in fr if r["scenario"] == s and r["side"] == "institution"]
+                out[s][n] = {"lineages": lins, "did": np.array(dd), "frontier_gap": float(np.mean(fi) - np.mean(fs))}
+    return out
+
+
+def main():
+    C = compute()
     L = ["# The four contrasts by dispute (EXPLORATORY)", "",
          "Cells: mean per-lineage DiD (lineages +/-); F = frontier endpoint gap, individual minus institution.", "",
          "| domain | dispute | " + " | ".join(O) + " |", "|---|---|" + "---|" * len(O)]
@@ -43,20 +79,8 @@ def main():
         for s in ss:
             cells = []
             for n in O:
-                c = collections.defaultdict(list)
-                for r in rows:
-                    if r["scenario"] == s:
-                        c[(r["lineage"], r["arm"], r["side"])].append(A.outcomes(r["coded"])[n])
-                dd = []
-                for l in {k[0] for k in c}:
-                    v = [c.get((l, a, sd)) for a in ("base", "aligned") for sd in ("individual", "institution")]
-                    if all(v):
-                        bi, bs, ai, as_ = (np.mean(x) for x in v)
-                        dd.append((ai - bi) - (as_ - bs))
-                fi = [A.outcomes(r["coded"])[n] for r in fr if r["scenario"] == s and r["side"] == "individual"]
-                fs = [A.outcomes(r["coded"])[n] for r in fr if r["scenario"] == s and r["side"] == "institution"]
-                cells.append("%+.2f (%d/%d) F%+.2f" % (np.mean(dd), sum(x > 0 for x in dd), sum(x < 0 for x in dd),
-                                                        np.mean(fi) - np.mean(fs)))
+                dd, fg = C[s][n]["did"], C[s][n]["frontier_gap"]
+                cells.append("%+.2f (%d/%d) F%+.2f" % (np.mean(dd), sum(x > 0 for x in dd), sum(x < 0 for x in dd), fg))
             L.append("| %s | %s | %s |" % (d, s, " | ".join(cells)))
     open(os.path.join(HERE, "results", "by_dispute.md"), "w").write("\n".join(L) + "\n")
     print("\n".join(L))

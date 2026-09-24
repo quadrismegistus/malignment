@@ -35,7 +35,19 @@ def bh(ps, q=0.05):
     return [i in keep for i in range(len(ps))]
 
 
-def main():
+def compute():
+    """Everything the table is built from. -> dict
+
+    For `plot.py` (dario, 2026-09-24): import this rather than recompute it.
+
+        n_passages, vocab, min_docs     the population and the tested words
+        n_lineages, n_disputes          units with all four (arm x side) cells
+        words   {word: {lineage_up, lineage_down, lineage_p, dispute_up,
+                        dispute_down, dispute_p, median_did, bh_lineage}}
+                median_did is over LINEAGES; bh_lineage is BH over every tested
+                word's lineage p
+        share   {(arm, side): {word: share of that cell's passages containing it}}
+    """
     rows = [json.loads(l) for l in open(A.SRC)]
     arms = collections.defaultdict(set)
     for r in rows:
@@ -70,27 +82,37 @@ def main():
         lu, ld, lp = A.sign(list(L_[:, i])); du, dd, dp = A.sign(list(D_[:, i]))
         res.append((w, lu, ld, lp, du, dd, dp, float(np.median(L_[:, i]))))
     sig = bh([r[3] for r in res])
-    keep = [r for r, s in zip(res, sig) if s]
-    both = [r for r in keep if r[6] < 0.05]
-    tot = lambda cell: None
-    # cell shares for display
     share = {}
     for a in ("base", "aligned"):
         for s in ("individual", "institution"):
             sub = [d for r, d in zip(rows, docs) if r["arm"] == a and r["side"] == s]
             share[(a, s)] = {w: sum(1 for d in sub if w in d) / len(sub) for w in vocab}
+    words = {w: dict(lineage_up=lu, lineage_down=ld, lineage_p=lp, dispute_up=du, dispute_down=dd,
+                     dispute_p=dp, median_did=med, bh_lineage=s)
+             for (w, lu, ld, lp, du, dd, dp, med), s in zip(res, sig)}
+    return dict(n_passages=len(rows), vocab=vocab, min_docs=MIN_DOCS, n_lineages=int(L_.shape[0]),
+                n_disputes=int(D_.shape[0]), words=words, share=share)
+
+
+def main():
+    C = compute()
+    words, share = C["words"], C["share"]
+    keep = [(w, v) for w, v in words.items() if v["bh_lineage"]]
+    both = [(w, v) for w, v in keep if v["dispute_p"] < 0.05]
     L = ["# Word-level base/aligned x individual/institution (EXPLORATORY)", "",
          "Producer `word_did.py`. %d passages, %d words tested (in >= %d passages), %d survive BH over "
          "lineages, %d of those also p<0.05 by dispute. Cells: share of passages containing the word." % (
-             len(rows), len(vocab), MIN_DOCS, len(keep), len(both)), ""]
+             C["n_passages"], len(C["vocab"]), C["min_docs"], len(keep), len(both)), ""]
     for sign_, title in ((1, "Gains MORE on the individual's side"), (-1, "Gains MORE on the institution's side")):
-        sel = sorted([r for r in both if np.sign(r[7]) == sign_], key=lambda r: -abs(r[7]))[:40]
+        sel = sorted([(w, v) for w, v in both if np.sign(v["median_did"]) == sign_],
+                     key=lambda wv: -abs(wv[1]["median_did"]))[:40]
         L += ["## " + title, "", "| word | base ind | base inst | aligned ind | aligned inst | median did | lineages +/- | disputes +/- |",
               "|---|---|---|---|---|---|---|---|"]
-        for w, lu, ld, lp, du, dd, dp, med in sel:
+        for w, v in sel:
             L.append("| %s | %.3f | %.3f | %.3f | %.3f | %+.3f | %d/%d | %d/%d |" % (
                 w, share[("base", "individual")][w], share[("base", "institution")][w],
-                share[("aligned", "individual")][w], share[("aligned", "institution")][w], med, lu, ld, du, dd))
+                share[("aligned", "individual")][w], share[("aligned", "institution")][w], v["median_did"],
+                v["lineage_up"], v["lineage_down"], v["dispute_up"], v["dispute_down"]))
         L.append("")
     open(os.path.join(HERE, "results", "word_did.md"), "w").write("\n".join(L) + "\n")
     print("\n".join(L))
