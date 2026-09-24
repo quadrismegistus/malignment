@@ -48,16 +48,22 @@ from literary_history import F  # noqa: E402
 #:   - interiority is a proportion of content words (measure_lltk.py: USAS-X content words
 #:     / content words), so its axis reads in percent.
 #: Select with `python literary_history_v2.py v3`; LH_OUT_DIR redirects output (checks).
-VERSION = next((a for a in sys.argv[1:] if a in ("v2", "v3")), "v2")
+#: v4 (RH): v3 with the metricality label reordered, "(stress pattern)" on its own line
+#: v5 (RH): v4 with the right margin trimmed nearer the end of "Aligned models", and
+#: the aligned arm dashed (base stays dotted)
+#: v6 (RH): v5 plus a short leader from each crossing to a small year label
+VERSION = next((a for a in sys.argv[1:] if a in ("v2", "v3", "v4", "v5", "v6")), "v2")
+LATER = VERSION in ("v3", "v4", "v5", "v6")    # the v3 corrections, carried forward
+V5ON = VERSION in ("v5", "v6")                 # v5's margin and dashed aligned arm
 OUT = os.path.join(os.environ.get("LH_OUT_DIR", os.path.join(HERE, "figures")),
                    "ci_literary_history_" + VERSION)
 REPARSE = os.environ.get("ANTIMETRICALITY_REPARSE", os.path.expanduser(
     "~/Dropbox/Prof/Articles/Antimetricality/data/data.2026.reparse.big_data.parquet"))
 NAME = {"base": "Base models", "aligned": "Aligned models"}
-LINETYPE = {"Base models": "dotted", "Aligned models": "solid"}
+LINETYPE = {"Base models": "dotted", "Aligned models": "dashed" if V5ON else "solid"}
 #: "Aligned models" is ~0.95 in at 9 pt; at ~140 data units per inch on this panel it
 #: needs ~135 units past XLAB. 2105 clipped it at the panel edge (an image-only defect).
-X0, X1, XLAB, XMAX = 1600, 2005, 2011, 2165
+X0, X1, XLAB, XMAX = 1600, 2005, 2011, (2150 if V5ON else 2165)
 
 
 def gap_decades():
@@ -80,6 +86,28 @@ def gap_decades():
                      "n": int(ft), "n_poetry": int(pt), "lines_f": int(r[("lines", "Fiction")]),
                      "lines_p": int(r[("lines", "Poetry")])})
     return pd.DataFrame(rows)
+
+
+def year_leaders(cross, arms, lo, hi):
+    """(leaders, labels) for the crossings. A leader runs 13% of the panel's range from
+    the circle, away from the other arm's line. Two crossings closer than 45
+    years splay their labels apart (earlier to the left, later to the right), since a
+    year at 7.5 pt is about 35 years wide on this axis."""
+    span, L, T = hi - lo, [], []
+    pts = sorted((y, arms[a], a) for a, ys in cross.items() for y in ys)
+    for i, (y, v, arm) in enumerate(pts):
+        #: AWAY FROM THE OTHER ARM'S LINE: a label drawn toward it sat on it (v6's first
+        #: render put "1920" on the base line). With no other arm on one side, go up.
+        others = [w for b, w in arms.items() if b != arm]
+        up = not (others and all(w > v for w in others))
+        end = v + (1 if up else -1) * 0.13 * span
+        near_prev = i > 0 and y - pts[i - 1][0] < 45 and abs(v - pts[i - 1][1]) < 0.05 * span
+        near_next = i + 1 < len(pts) and pts[i + 1][0] - y < 45 and abs(v - pts[i + 1][1]) < 0.05 * span
+        ha = "right" if near_next else "left" if near_prev else "center"
+        L.append(dict(x=y, xend=y, y=v + (1 if up else -1) * 0.025 * span, yend=end))
+        T.append(dict(x=y + {"right": 2, "left": -2, "center": 0}[ha], y=end + (1 if up else -1) * 0.012 * span,
+                      label="%d" % round(y), ha=ha, va="bottom" if up else "top"))
+    return pd.DataFrame(L), pd.DataFrame(T)
 
 
 def panel(hist, curve, arms, cross, title, ylab, show_x, ylim=None, ypct=False, vgrid=()):
@@ -121,6 +149,24 @@ def panel(hist, curve, arms, cross, title, ylab, show_x, ylim=None, ypct=False, 
                  plot_title=element_text(family=fnt, size=F.PUB_FONT_PT, weight="bold", ha="left")))
     if ylim is not None:
         p = p + coord_cartesian(ylim=ylim)
+    if len(X) and VERSION == "v6":
+        vlo, vhi = ylim if ylim is not None else (lo, hi)
+        Ld, Td = year_leaders(cross, arms, vlo, vhi)
+        p = p + geom_segment(aes(x="x", xend="xend", y="y", yend="yend"), data=Ld,
+                             color=F.PUB_INK, size=F.PUB_RULE_PT)
+        #: the scale trains on a label's ANCHOR, not its extent, so a label above the data
+        #: was clipped at the panel edge ("1972"); an invisible point one label-height
+        #: beyond each anchor makes the panel hold the text too
+        from plotnine import geom_blank
+        span_ = vhi - vlo
+        Td2 = Td.assign(yb=[y + (0.10 if va == "bottom" else -0.10) * span_ for y, va in zip(Td.y, Td.va)])
+        p = p + geom_blank(aes(x="x", y="yb"), data=Td2)
+        for ha in ("left", "right", "center"):
+            for va in ("bottom", "top"):
+                sub = Td[(Td.ha == ha) & (Td.va == va)]
+                if len(sub):
+                    p = p + geom_text(aes(x="x", y="y", label="label"), data=sub, ha=ha, va=va,
+                                      size=7.5, family=fnt, color=F.PUB_INK)
     if len(X):
         p = p + geom_point(aes("year", "value"), data=X, shape="o", fill="#ffffff", color=F.PUB_INK,
                            size=1.8, stroke=0.7)
@@ -178,12 +224,16 @@ def main():
     assert len(off) == 1 and int(off.year.iloc[0]) == 1705, off
     print("   panel 3: one decade outside the view window: %d at %.3f (in the smooth)" % (
         int(off.year.iloc[0]) - 5, float(off.value.iloc[0])))
-    VG = (1700, 1800, 1900) if VERSION == "v3" else ()
+    VG = (1700, 1800, 1900) if LATER else ()
     p1 = panel(h1, c1, arms1, x1, "Concreteness", "Concreteness (word norm)", False, vgrid=VG)
     p2 = panel(h2, c2, arms2, x2, "Interiority", "Interiority (semantic field)", False,
-               ypct=(VERSION == "v3"), vgrid=VG)
+               ypct=LATER, vgrid=VG)
     p3 = panel(h3, c3, a3, x3, "Rhythmic distinctiveness of verse from prose",
-               "Metricality (stress pattern),\n" + ("verse \u2212 prose" if VERSION == "v3" else "prose \u2212 verse"),
+               {"v2": "Metricality (stress pattern),\nprose \u2212 verse",
+                "v3": "Metricality (stress pattern),\nverse \u2212 prose",
+                "v4": "Metricality, verse \u2212 prose\n(stress pattern)",
+                "v5": "Metricality, verse \u2212 prose\n(stress pattern)",
+                "v6": "Metricality, verse \u2212 prose\n(stress pattern)"}[VERSION],
                True, ylim=(bot3, top3), vgrid=VG)
     W_IN, H_IN = F.PUB_SIZE[0], 6.0
     fig = Stack([p1, p2, p3]).draw()
@@ -197,11 +247,17 @@ def main():
                                 for a, ys in d.items())
     sm, n80c, n80i = LH.seam(chad, chi, "rh_absconc_median")
     wrap = lambda s: textwrap.wrap(s, 100)
-    L = ["REWINDING LITERARY HISTORY (version 2). Three measures of English writing, 1600-2000, with the",
+    #: committed v2/v3 captions say "(version 2)"; kept for them so they still reproduce
+    L = ["REWINDING LITERARY HISTORY (version %s). Three measures of English writing, 1600-2000, with the"
+         % ("2" if VERSION in ("v2", "v3", "v4") else VERSION[1:]),
          "base and aligned model arms as horizontal lines.", "",
-         *wrap("Lines: base models dotted, aligned models solid, labelled at the right. Gray points: decade "
+         #: the line styles come from LINETYPE, the mapping that draws them (v5's first caption said
+         #: "solid" for a dashed line)
+         *wrap(("Lines: base models %s, aligned models %s, labelled at the right. Gray points: decade "
+                % (LINETYPE["Base models"], LINETYPE["Aligned models"])) +
                "values of the human history; black line: their lowess smooth (span 0.3). Open circle: where "
-               "an arm's line crosses the smooth. No API arm is drawn (RH)."), "",
+               "an arm's line crosses the smooth" + (", with a short leader to the year" if VERSION == "v6" else "")
+               + ". No API arm is drawn (RH)."), "",
          *wrap("CONCRETENESS (rh_absconc_median, z; up = more concrete). Per text the median over its "
                "passages; per decade the median over texts; Chadwyck 1600-1879 (1,333 texts), Chicago from "
                "1880 (9,089 texts); decades under 3 texts dropped. Arms: median over each arm's passages "
