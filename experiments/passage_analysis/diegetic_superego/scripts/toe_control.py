@@ -49,9 +49,10 @@ def stored(ck, text):
     from malignment import generate as G
     dec = {k: G.DECODER[k] for k in sorted(G.DECODER)}
     out = {}
-    for g in ck.generations(prompt=text, seed=SEED):
+    for g in ck.generations(prompt=text):
         k = g.extra.get("__key__", {}) if getattr(g, "extra", None) else {}
-        if k.get("frame") == "raw" and k.get("decoder") == dec and k.get("sample_idx", 99) < N_GEN:
+        if (k.get("frame") == "raw" and k.get("seed") == SEED and k.get("decoder") == dec
+                and k.get("sample_idx", 99) < N_GEN):
             out[k["sample_idx"]] = g
     return out
 
