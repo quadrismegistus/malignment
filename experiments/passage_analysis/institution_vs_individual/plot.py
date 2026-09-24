@@ -155,6 +155,12 @@ def fig_words():
                           scale_x_continuous, scale_y_continuous, scale_color_manual, theme,
                           element_text, element_blank, element_rect)
     sel, meta = word_frame()
+    #: DISPLAY ORDER (RH, 2026-09-24): within each panel, descending by how far
+    #: right the row's farthest arrow end reaches. Selection is still the rule's
+    #: (median DiD); only the order on the plate changes. Ties on the word.
+    reach = lambda s_: max(s_["b_ind"], s_["a_ind"], s_["b_inst"], s_["a_inst"])
+    sel = [s_ for g in ("ind", "inst")
+           for s_ in sorted((x for x in sel if x["grp"] == g), key=lambda x: (-reach(x), x["word"]))]
     TONE = {"The aggrieved individual": F.PUB_INK, "The institution": F.PUB_GRAY}
     F.check_halftones(TONE)
     GRP = {"ind": "Gains more for the individual", "inst": "Gains more for the institution"}
@@ -230,6 +236,7 @@ def fig_words():
         "Closed-class words removed (pronouns, determiners, modals and auxiliaries, prepositions,",
         "conjunctions, negation, quantifier and degree adverbs; full list in plot.py STOP). Then the top %d" % N_IND,
         "by median DiD (gains more for the individual) and the bottom %d (gains more for the institution)." % N_INST,
+        "Within each panel, rows are ordered by how far right the row's farthest arrow end reaches.",
         "Largest movers removed as closed-class: %s." % ", ".join(meta["dropped"][:12]),
         "",
         "EXPLORATORY: many words tested, nothing declared in advance.",

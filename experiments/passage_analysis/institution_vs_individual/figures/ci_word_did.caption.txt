@@ -15,22 +15,23 @@ Benjamini-Hochberg across all 1531 words AND a sign test over the 18 disputes at
 Closed-class words removed (pronouns, determiners, modals and auxiliaries, prepositions,
 conjunctions, negation, quantifier and degree adverbs; full list in plot.py STOP). Then the top 8
 by median DiD (gains more for the individual) and the bottom 4 (gains more for the institution).
+Within each panel, rows are ordered by how far right the row's farthest arrow end reaches.
 Largest movers removed as closed-class: their, my, your, can, i, may, me, out, you, from, had, if.
 
 EXPLORATORY: many words tested, nothing declared in advance.
 
 word         ind base ind alig   ins base ins alig    med DiD   lineages   disputes
-contact         0.058    0.360      0.058    0.093     +0.289    41/1       18/0   
-rights          0.045    0.213      0.037    0.078     +0.139    40/2       15/3   
-seek            0.018    0.219      0.017    0.083     +0.133    39/2       17/1   
-request         0.040    0.257      0.051    0.131     +0.111    34/8       16/2   
-local           0.044    0.180      0.037    0.083     +0.100    38/3       16/2   
 consider        0.047    0.399      0.051    0.290     +0.100    33/6       18/0   
-file            0.052    0.150      0.042    0.030     +0.094    41/1       17/0   
+contact         0.058    0.360      0.058    0.093     +0.289    41/1       18/0   
+request         0.040    0.257      0.051    0.131     +0.111    34/8       16/2   
+seek            0.018    0.219      0.017    0.083     +0.133    39/2       17/1   
+rights          0.045    0.213      0.037    0.078     +0.139    40/2       15/3   
+local           0.044    0.180      0.037    0.083     +0.100    38/3       16/2   
 department      0.039    0.154      0.052    0.067     +0.089    38/4       15/3   
-listen          0.007    0.005      0.021    0.205     -0.183     0/42       1/17  
+file            0.052    0.150      0.042    0.030     +0.094    41/1       17/0   
 concerns        0.020    0.163      0.045    0.354     -0.172     1/41       2/16  
 ensure          0.027    0.158      0.045    0.291     -0.122     4/37       2/16  
 offer           0.036    0.104      0.055    0.253     -0.117     4/38       3/14  
+listen          0.007    0.005      0.021    0.205     -0.183     0/42       1/17  
 
 Lineages and disputes: counts with DiD > 0 / DiD < 0 (ties omitted). Shares are proportions (0.36 = 36%).
