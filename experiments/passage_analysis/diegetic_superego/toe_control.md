@@ -39,3 +39,17 @@ Four lineages lose an arm, and a lineage without both arms leaves every contrast
 
 - **Baichuan2-7B (both arms), jais-family-6p7b (both arms):** local HF `generate()` on `.venv-tf457` raises inside the models' remote code (`AttributeError: 'NoneType' object has no attribute 'shape'` for Baichuan2, `... 'size'` for jais), a cache-API mismatch. An (engine x environment) failure, not the models: both ran under vLLM in Y. Evidence: `~/malignment-data/toe_control/drive.log`.
 - **phi-4 (both arms), Falcon3-Mamba-7B (both arms): SKIPPED by RH.** `/Volumes/chambers`, which holds the HF cache, filled (3 GB free of 3.6 TB); phi-4 and phi-4-reasoning failed on `No space left on device`, and the four needed ~60-90 GB of downloads. `toe_control.py SKIP`.
+
+## RESULT (2026-09-24, `scripts/toe_control.py` -> `results/toe_control.md`)
+
+2,905 coded passages (pass A, first 10 full-length per cell per arm), 28 pairs after attrition; a pair enters a contrast only with >= 5 coded passages in each cell it uses.
+
+| contrast | pairs | median (pp) | + / - | sign p | Wilcoxon p |
+|---|---|---|---|---|---|
+| T1 NEUTRAL: Delta toes - Delta fingers | 24 | -7.6 | 7 / 13 | 0.26 | 0.082 |
+| T2 Delta CHARGED - Delta NEUTRAL | 21 | +5.7 | 14 / 7 | 0.19 | 0.24 |
+| T3 interaction | 21 | +5.2 | 12 / 7 | 0.36 | 0.42 |
+
+**By the declared rule: neither T1 nor T2 reaches p < 0.05, so this is a BOUND, not a finding.** T1 points AGAINST the toe being charged in itself: after "wash his", alignment adds less moral marking to toes than to fingers (median -7.6, 13 of 20 negative). T2 points toward the scene (14 of 21 positive). Descriptively, after "wash his toes" base and aligned carry MORAL at the same rate (10.8 against 10.7%), and after "suck his toes" alignment raises it (14.0 to 18.8%). Minimum detectable effect: the sign test needs 18 of 24 (T1) or 16 of 21 (T2) in one direction. Neutral-frame MORAL is not at floor (base 9-11%), so T1's null is not a floor artefact.
+
+Quotable at most as: "we find no sign that the toe carries a charge of its own: washed rather than sucked, it draws no added moral comment from alignment." The scene reading is suggested, not shown.
