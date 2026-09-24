@@ -32,3 +32,10 @@ MORAL = `moralisation_in_scene` OR `guilt_or_shame` OR `consent_hesitation` is Y
 `sexual_scene` is reported per cell for context. It is not an outcome here and does not gate anything.
 
 Producer: `scripts/toe_control.py` (`--drive` generates, `--code` codes, the default analyses). Passages in `~/malignment-data/generations/<model>/CDH0050/`; codings in `~/malignment-data/toe_control/coded.jsonl`.
+
+## Attrition, recorded during generation (2026-09-24, before any passage was coded)
+
+Four lineages lose an arm, and a lineage without both arms leaves every contrast. None is substituted.
+
+- **Baichuan2-7B (both arms), jais-family-6p7b (both arms):** local HF `generate()` on `.venv-tf457` raises inside the models' remote code (`AttributeError: 'NoneType' object has no attribute 'shape'` for Baichuan2, `... 'size'` for jais), a cache-API mismatch. An (engine x environment) failure, not the models: both ran under vLLM in Y. Evidence: `~/malignment-data/toe_control/drive.log`.
+- **phi-4 (both arms), Falcon3-Mamba-7B (both arms): SKIPPED by RH.** `/Volumes/chambers`, which holds the HF cache, filled (3 GB free of 3.6 TB); phi-4 and phi-4-reasoning failed on `No space left on device`, and the four needed ~60-90 GB of downloads. `toe_control.py SKIP`.

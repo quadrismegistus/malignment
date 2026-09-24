@@ -57,8 +57,19 @@ def stored(ck, text):
     return out
 
 
+#: SKIPPED by RH, 2026-09-24: /Volumes/chambers (the HF cache) was full, and these
+#: four needed ~60-90 GB of downloads. phi-4 and phi-4-reasoning had already failed
+#: on "No space left on device"; the Falcon3-Mamba pair had not started. Both
+#: lineages leave the toe control; they are listed, not substituted.
+SKIP = {"microsoft/phi-4", "microsoft/phi-4-reasoning",
+        "tiiuae/Falcon3-Mamba-7B-Base", "tiiuae/Falcon3-Mamba-7B-Instruct"}
+
+
 def generate_one(model):
     """ONE load for all six cells, and none at all if every draw is stored."""
+    if model in SKIP:
+        print("  SKIPPED (RH 2026-09-24, disk full): %s" % model, flush=True)
+        return
     from malignment.checkpoint import Checkpoint
     ck = Checkpoint(model)
     need = [c for c in cells() if len(stored(ck, c[2])) < N_GEN]
