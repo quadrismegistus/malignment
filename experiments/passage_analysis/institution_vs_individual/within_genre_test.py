@@ -72,8 +72,8 @@ def widening(rows, unit, floor, name):
     return out, dropped, base_ns
 
 
-def main():
-    rows = [json.loads(l) for l in open(A.SRC)]
+def report(src=None):
+    rows = [json.loads(l) for l in open(src or A.SRC)]
     rows = [r for r in rows if r.get("coded") and A.keep(r["coded"])]
     arms = collections.defaultdict(set)
     for r in rows:
@@ -110,7 +110,35 @@ def main():
               lu, ld, lp, du, dn, dp,
               "**HOLDS on both units: the within-advice widening is the sentence's evidence.**" if ok else
               "**Does NOT hold on both units: the sentence falls back to the declared P4.**")]
-    open(os.path.join(HERE, "results", "within_genre_test.md"), "w").write("\n".join(L) + "\n")
+    return L, rows
+
+
+def main():
+    """`python within_genre_test.py [--out NAME] [--shares]`
+
+    --out writes results/NAME instead of within_genre_test.md, and refuses to
+    overwrite (added 2026-09-24 so the pre-thinking-off result survives beside the
+    rerun; thinking_off.md). --shares appends the POOLED advice shares from
+    decompose.table (malign's, imported, not reimplemented) over the SAME rows,
+    because the paper quotes them beside this test; they are post hoc context and
+    do not enter the decision.
+    """
+    import argparse
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--out", default="within_genre_test.md")
+    ap.add_argument("--shares", action="store_true")
+    args = ap.parse_args()
+    L, rows = report()
+    if args.shares:
+        import decompose as D
+        L += ["", "## Context, not the test: pooled shares within advice (post hoc)", "",
+              "`decompose.table` over the rows above (both arms, kept, advice). The paper quotes the channel "
+              "row (individual base -> aligned) and the institution's.", ""]
+        L += D.table([r for r in rows if r["coded"]["form"] == "advice"], "Advice only (both arms)")[2:]
+    out = os.path.join(HERE, "results", args.out)
+    if args.out != "within_genre_test.md":
+        assert not os.path.exists(out), "refusing to overwrite %s" % out
+    open(out, "w").write("\n".join(L) + "\n")
     print("\n".join(L))
 
 
