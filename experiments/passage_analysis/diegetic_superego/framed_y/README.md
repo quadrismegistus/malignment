@@ -1,7 +1,7 @@
 ---
 kind: registration
 question: Does the chat template change the in-scene superego Y found, and does being addressed as "you" add refusal?
-status: "DECLARED 2026-09-24, before any framed passage was generated. Chosen after seeing Y; a follow-up selected on a prior result, declared as one. SUPERSEDES the generation step of refusal_frame.md."
+status: "RUN 2026-09-24 as registered + amendment 1 (declared before generation; amendment after generation, before coding). FY-2 SUPPORTED (refusal rises when addressed, 32/38); FY-1 and FY-3 NOT SUPPORTED."
 ---
 
 # Framed Y: the diegetic superego under the chat template
@@ -84,6 +84,25 @@ RH: "dont have thinking tokens in the passages." Seen on the first passages: Qwe
 - Both fields are in the passage KEY (`vllm_generate` c192f25c+), so the thinking-on passages stay in the stash under their own keys and are never read. `code_fy.py` reads only the thinking-off passages for these three, and **codes no passage, of any model or frame, that contains `<think>` or `</think>`**; the count is recorded per cell (`n_think`).
 - **phi-4-reasoning is DROPPED** (after its thinking-off rerun, before any of its passages was coded). The empty block did not stop it reasoning: only 71 of 3,400 passages carry a tag, but 1,228/1,700 prefill and 1,394/1,700 continue passages are untagged deliberation ("User says: ... The system request says ...") by a keyword screen, confirmed by reading. Its template forces the reasoning prompt and has no switch, so it cannot be framed without thinking. The vendor switches work: Qwen3-8B's remaining screen hits are refusals addressed to the user, and SmolLM3-3B's are 41 and 6 of 1,700. Population now **40 checkpoints, 31 lineages** (phi-4 leaves).
 - Raw baseline: the 7 raw phi-4-reasoning passages with `<think>` are excluded from its raw rates.
+
+## RESULT (2026-09-24, `analyse.py` -> `results/framed_y.md`, `results/per_model.csv`)
+
+40 checkpoints, 31 lineages; about 78,350 framed passages coded (0.1% validator rejects). Raw baselines check: they reproduce `superego_stages` exactly (AmberSafe 48.3, OLMo-2-1B-SFT 27.1). All rates in points; SUPEREGO = SUPEREGO_IN_SCENE given sexual_scene on pass A; the rest all-length.
+
+| measure | C1 prefill - raw | C2 continue - prefill | C3 continue - raw |
+|---|---|---|---|
+| SUPEREGO given scene | 15/39 up, median -1.8, p=0.20 | 15/39, -2.0, p=0.20 | **12/40, -5.0, p=0.017** (lineages 9/31, p=0.029) |
+| REFUSAL | 24/37, +0.6, p=0.10 | **32/38, +6.9, p=2.4e-05** (lineages 23/29, p=0.002) | **33/37, +6.5, p=1.1e-06** |
+| EXIT (leaves the story frame) | **7/40, -18.2, p=4.2e-05** | 10/40, -2.8, p=0.002 | 5/40, -22.4, p=1.4e-06 |
+| SEXUAL_SCENE | **11/40, -6.8, p=0.006** | 21/40, +1.1, p=0.88 | 11/40, -8.4, p=0.006 |
+
+**Registered readings.** **FY-1 NOT SUPPORTED**: the template alone (prefill) does not move the in-scene superego (15/39, p=0.20). **FY-2 SUPPORTED**: being addressed installs refusal (32/38 models, median +6.9 points; 23/29 lineages). **FY-3 NOT SUPPORTED**: among the 32 models whose refusal rises, the superego falls in 17 of 31 (p=0.72), so refusal does not replace the in-scene superego model by model. Sensitivity (the 31 empty-system models) agrees in direction on every primary reading; C3 on SUPEREGO weakens there (10/31, p=0.07).
+
+**What moves, read plainly.** The chat frame does two different things. The template keeps the model inside the fiction and writes less sex: under prefill, leaving the story frame falls by a median 18 points (7/40 up) and the scene rate by 7 (11/40 up). Being addressed adds refusal (+7), and the addressed frame does not change the scene rate further (21/40). The in-scene superego is the quantity that moves LEAST: only continue against raw is significant (-5.0, 12/40), and that contrast was not a registered reading, so it is reported, not claimed.
+
+**Caveat on thin cells.** Under `continue` 9 of 40 models write fewer than 20 full-length scenes, and 3 fewer than 5 (Olmo-3-7B-Instruct's 100.0 is 2 scenes). No minimum was declared, so the tests stand as run; the SUPEREGO contrasts involving `continue` rest partly on these.
+
+**Ladders (descriptive).** Refusal under `continue` is where the OLMo-3 and neo stages differ most: Olmo-3-7B SFT 44.9 -> DPO 65.6 -> Instruct 66.8; neo SFT 53.0 -> instruct 48.5; the OLMo-2-1B, OLMoE and Tulu ladders refuse far less (6-23) at every stage.
 
 ## Limits, stated now
 
