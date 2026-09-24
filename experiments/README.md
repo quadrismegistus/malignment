@@ -373,6 +373,9 @@ This table exists because separating instrument registrations from hypothesis re
 | **L1** | the same claim at WORD level, via the lexicon | `division_of_labour/lexical_domains` | **NOT SUPPORTED AS TESTED** — +0.0024, CI ±0.047. Operationalisation later found wrong (see its README) |
 | **L2** | is it content or stimulus? sexual-word displacement measured *inside violence and neutral prompts* | `division_of_labour/lexical_domains` | **RUN** — under *sexual* prompts the effect runs BACKWARDS (−0.0433, 5/16); `taboo` is the one positive cell |
 | **L3** | does displaced mass leave the domain or move within it | `division_of_labour/lexical_domains` | **RUN** — both categories lose net mass; departure ≈ 2× arrival |
+| **SS-1** | SFT installs the in-scene superego (Y's SUPEREGO_IN_SCENE given sexual_scene): step1 = SFT rung - base > 0 over ladders | `division_of_labour/superego_stages` | **REGISTERED 2026-09-24, NOT RUN** -- 10 ladders, Y's ends re-used, 14 new rungs; chosen after seeing Y and sft_share |
+| **SS-2** | the later stage (DPO / preference / safety) adds to it: step2 > 0 | `division_of_labour/superego_stages` | **REGISTERED, NOT RUN** -- declared underpowered; the SFT SHARE with its interval is the reported quantity |
+| **SS-3** | RLVR moves it (DPO -> Instruct) | `division_of_labour/superego_stages` | **REGISTERED, NOT RUN** -- descriptive, three OLMo ladders |
 | **R1a** | vulgar-register sexual mass FALLS under alignment | `register_shift` | **SUPERSEDED before any run** — see G/G1/G2 below |
 | **R1b** | clinical/euphemistic mass RISES — **required**, or it is suppression not displacement | `register_shift` | **SUPERSEDED before any run** — see G/G1/G2 below |
 | **R2** | the register signature is larger for sexual than violent | `register_shift` | **SUPERSEDED before any run** — see G/G1/G2 below |

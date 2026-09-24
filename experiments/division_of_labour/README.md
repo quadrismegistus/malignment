@@ -31,6 +31,7 @@ storing `relation`.
 | [`sft_share/`](sft_share/) | RUN 2026-08-16 | SFT carries most of the displacement; the split by branch is large; content-dependence not supported |
 | [`lexical_domains/`](lexical_domains/) | RUN 2026-08-16 | the same content-dependence question at word level, via a blind-built lexicon — not supported **as tested**, and the operationalisation was afterwards found wrong |
 | [`removal_rates/`](removal_rates/) | RUN 2026-08-16 | which stage *removes* sexual, and which removes violent, each measured against blind-rated neutral vocabulary and never against each other |
+| [`superego_stages/`](superego_stages/) | REGISTERED 2026-09-24, not run | which stage installs the in-scene superego (Y), on 10 ladders re-using Y's ends; chosen after seeing Y and sft_share |
 
 ## Open, arising from `sft_share`
 

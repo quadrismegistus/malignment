@@ -1,0 +1,14 @@
+ContextualAI/archangel_sft_pythia2-8b
+lomahony/eleuther-pythia6.9b-hh-sft
+LLM360/AmberChat
+allenai/OLMo-2-0425-1B-SFT
+allenai/OLMo-2-0425-1B-Instruct
+allenai/OLMoE-1B-7B-0125-SFT
+allenai/OLMoE-1B-7B-0125-Instruct
+allenai/Olmo-3-7B-Instruct-SFT
+allenai/Olmo-3-7B-Instruct
+m-a-p/CT-LLM-SFT
+m-a-p/neo_7b_sft_v0.1
+allenai/Llama-3.1-Tulu-3-8B-SFT
+allenai/Llama-3.1-Tulu-3-8B-DPO
+PKU-Alignment/alpaca-7b-reproduced
