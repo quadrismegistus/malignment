@@ -2,7 +2,7 @@
 kind: question
 subject: passage_analysis
 question: When alignment answers a party to a dispute, does what it tells them to do depend on which side of the dispute they are on?
-status: RUN 2026-09-23/24 -- F21 corpus coded (pass 1); 43-lineage 256-token regeneration run and coded (42 usable: internlm2 is noise in every cell); four declared predictions all supported on both units
+status: "RUN 2026-09-23/24 -- F21 corpus coded (pass 1); 43-lineage 256-token regeneration run and coded (42 usable: internlm2 is noise in every cell); four declared predictions all supported on both units"
 headline: >-
   The individual/institution asymmetry is already in the BASE model -- the
   aggrieved party is referred about three times as often, the institution is
