@@ -146,10 +146,11 @@ def main():
     stems = {c[:2]: c[2] for c in C.values()}
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
     errors, n_ok = {}, 0
+    task = Y.SuperegoV3Task()
     for start in range(0, len(todo), 2000):
         part = todo[start:start + 2000]
         items = [Y.prepare(stems[(r["prompt_id"], r["word"])], r["word"] or "", r["_text"]) for r in part]
-        res = Y.SuperegoV3Task().map(items, model=a.model, num_workers=a.workers, errors=errors)
+        res = task.map(items, model=a.model, num_workers=a.workers, errors=errors)
         if len(res) != len(part):
             raise RuntimeError("map returned %d results for %d items" % (len(res), len(part)))
         with open(OUT, "a", encoding="utf-8") as fh:
@@ -170,7 +171,7 @@ def main():
             os.fsync(fh.fileno())
         print("[%d-%d] written, parsed %d, errors %d" % (start, start + len(part), n_ok, len(errors)), flush=True)
     try:
-        print("usage: %s" % Y.SuperegoV3Task().usage.summary_line())
+        print("usage: %s" % task.usage.summary_line())
     except Exception:
         pass
     print("parsed %d of %d -> %s" % (n_ok, len(todo), OUT))
