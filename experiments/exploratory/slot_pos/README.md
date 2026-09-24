@@ -1,3 +1,8 @@
+---
+kind: question
+status: "RUN 2026-09-23, exploratory, not registered. A stratifier (prompt_pos_en.csv, 2,578 English prompts) that other questions read, plus the directedness-vs-POS check."
+headline: "Directedness is not part of speech: the word's UPOS explains 0.022 of its variance and the slot's dominant POS 0.008, while prompt identity explains 0.325. Stratifying the Figure 4 plate by slot POS changes no significant cell's sign at verb slots."
+---
 # slot_pos
 
 **What part of speech does each prompt's slot summon, and is `directedness` just that?** RH, 2026-09-23. Exploratory: a stratifier that other questions read (`freudian_hypothesis/feature_pairs.py --slot`, the Figure 4 within-verb check), not a registered result.
