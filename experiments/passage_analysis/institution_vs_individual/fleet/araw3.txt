@@ -1,0 +1,11 @@
+ContextualAI/archangel_sft-dpo_pythia2-8b experiments/passage_analysis/institution_vs_individual/prompts/raw.jsonl float16
+LLM360/AmberSafe experiments/passage_analysis/institution_vs_individual/prompts/raw.jsonl float16
+Qwen/Qwen3-8B experiments/passage_analysis/institution_vs_individual/prompts/raw.jsonl float16
+allenai/OLMoE-1B-7B-0125-Instruct experiments/passage_analysis/institution_vs_individual/prompts/raw.jsonl float16
+deepseek-ai/deepseek-llm-7b-chat experiments/passage_analysis/institution_vs_individual/prompts/raw.jsonl float16
+internlm/internlm2-chat-7b experiments/passage_analysis/institution_vs_individual/prompts/raw.jsonl float16
+m-a-p/neo_7b_instruct_v0.1 experiments/passage_analysis/institution_vs_individual/prompts/raw.jsonl float16
+stabilityai/stablelm-2-1_6b-chat experiments/passage_analysis/institution_vs_individual/prompts/raw.jsonl float16
+tiiuae/Falcon3-7B-Instruct experiments/passage_analysis/institution_vs_individual/prompts/raw.jsonl float16
+google/gemma-2-9b-it experiments/passage_analysis/institution_vs_individual/prompts/raw.jsonl bfloat16
+zai-org/glm-4-9b-chat-hf experiments/passage_analysis/institution_vs_individual/prompts/raw.jsonl float16

@@ -1,0 +1,2 @@
+meta-llama/Llama-3.1-70B-Instruct experiments/passage_analysis/institution_vs_individual/prompts/raw.jsonl float16
+allenai/Olmo-3.1-32B-Instruct experiments/passage_analysis/institution_vs_individual/prompts/raw.jsonl float16
