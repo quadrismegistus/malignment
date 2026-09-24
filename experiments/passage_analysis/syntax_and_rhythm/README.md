@@ -56,6 +56,29 @@ Not registered. Added 2026-09-24 at RH's request. See `figures/meter-map.html`, 
 
 Within the Llama and Mistral pairs, instruct exceeds base on both measures (Wilcoxon p ≤ 6e-5). Claude-3-Sonnet and DeepSeek write canonical pentameter at the 1700–1749 peak, approaching Pope (puIP p < 1e-34 against their poets). GPT-3.5 does not differ from the poets. The tiers are different model families, not stages of one model: only base → open aligned is paired within a model. Prompted poems order the same way: API models write more canonical pentameter than open aligned models under every prompt, most under "rhyme" (puIP 12.7% vs 8.0%). The API-tier and OLMo-2 completions were parsed with `parse_verse_baselines.py --tiers`.
 
+**Original, within-POS scramble, full scramble (O/R/S).** Every text is measured as written (O), with its content words permuted within their part of speech so the syntactic frame is kept (R, `shuffle_pos`), and with all content words permuted (S, `shuffle_all`). O − R is the metrical work done by the writer's placement of words beyond the frame; (S − R)/(S − O) is the share of O's advantage over S that the frame alone supplies. The human texts are the antimetricality small data's LSA set, whose R and S were checked against the texts on 2026-09-24. R keeps the original's POS-sequence dependence (bigram MI 0.42–0.59 against 0.61–0.73 for O) and almost never produces function-word pairs like "the of" (0.3–1.4 per 1,000), while S destroys both (MI ≈ 0.02, 6–33 per 1,000). So R is the within-POS scramble and S the full one. LLM verse scrambles were parsed with `parse_verse_baselines.py --scramble`. Tension (MTS):
+
+| text | O | R | S | O − R | frame share | uIP % O / R / S |
+|---|---|---|---|---|---|---|
+| Shakespeare (verse) | 5.22 | 10.99 | 11.66 | −5.78 | 0.10 | 20.4 / 4.0 / 1.1 |
+| LLM verse, API | 5.04 | 10.71 | 12.47 | −5.67 | 0.24 | 25.3 / 4.6 / 2.1 |
+| LLM verse, open aligned | 6.07 | 11.40 | 13.02 | −5.34 | 0.23 | 17.0 / 3.8 / 2.1 |
+| poets' continuations | 6.53 | 11.04 | 12.46 | −4.51 | 0.24 | 16.5 / 3.5 / 2.1 |
+| LLM verse, base | 4.76 | 7.96 | 9.71 | −3.20 | 0.35 | 12.7 / 3.6 / 1.7 |
+| Dickens (fiction) | 9.08 | 11.52 | 12.53 | −2.44 | 0.29 | 3.8 / 2.3 / 1.4 |
+| Dibble (utility prose) | 9.60 | 10.60 | 11.95 | −1.00 | 0.57 | 2.6 / 2.8 / 2.0 |
+| Browne (art prose) | 10.84 | 11.60 | 13.87 | −0.76 | 0.75 | 4.4 / 3.0 / 2.8 |
+| Ruskin (art prose) | 11.28 | 12.03 | 12.97 | −0.75 | 0.55 | 2.5 / 2.6 / 2.4 |
+| LLM prose, base | 9.42 | 9.97 | 11.23 | −0.54 | 0.70 | 2.6 / 2.5 / 1.9 |
+| LLM prose, aligned | 11.01 | 11.41 | 12.46 | −0.40 | 0.72 | 2.75 / 2.7 / 2.15 |
+| Pater (art prose) | 11.26 | 11.49 | 13.25 | −0.23 | 0.88 | 3.6 / 2.1 / 2.2 |
+
+In **prose**, base models sit at Dibble's level of tension, and aligned models at Pater's and Ruskin's. Both get their metricality mostly from the frame (0.70), as art prose does, not from Dickensian placement. Alignment reduces what little metrical placement there is (window-pooled here, −0.54 → −0.40; lineage-averaged, −0.61 → −0.33, aligned higher in 22/34, Wilcoxon p = 0.03).
+
+In **verse**, the tiers separate on WHERE their meter comes from. Base models' verse is the most regular as written (4.76), but much of that survives shuffling within POS: R = 7.96, against 10.7–11.4 for every other verse source. So it lives in the vocabulary and frame (many monosyllables: 7.4 per window, against 6.3 for the poets). Open aligned and API models, like the poets and Shakespeare, get their meter from placement: shuffling within POS destroys it. By O − R, the API tier (−5.67) is nearly Shakespeare's (−5.78) and beyond the poets they continue (−4.51). Alignment moves verse meter from the words chosen to the way the words are placed.
+
+The human side is one text per author, so these are points without error bars. The LLM verse tiers are pooled across different model families.
+
 **Caveats.** Verse and prose come from different prompts and generation setups (4-bit ollama models for verse, full-precision HF generation for prose). The Olmo-3 base/SFT verse pilot (malign-logits `rhyme_pilot`, 12 primers) is on the page but is never quoted as a result. No sampled verse exists at pretraining checkpoints. National_story's `load_raw` deduplicates only within a (lineage, arm, demonym) cell: 60 texts recur under two demonyms. They are counted once here, and that folder's own per-demonym counts are affected.
 
 ## Method and files

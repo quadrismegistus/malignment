@@ -109,6 +109,19 @@ th.n { text-align: right; }
     <p class="note">Dashed vertical lines are human references from the antimetricality data: poetry by period, Pope's and Wordsworth's verse, and human fiction. Prose sits far left: human fiction 3.1% uIP and 1.6% puIP; LLM prose 2.6–2.8% and 1.5–1.6%. Hover a row for paired values, the Wilcoxon p against the poets, and sample sizes.</p>
   </section>
 
+  <section class="figure" aria-label="Original against scrambled texts">
+    <h2>Original, within-POS scramble, full scramble</h2>
+    <p class="note" style="color:var(--ink-2)">Each text is measured as written (O), with its content words shuffled within their part of speech so the syntactic frame is kept (R), and with all content words shuffled (S). O minus R is how much more metrical the writer's own placement of words is than their frame alone; the R-to-S gap is what the frame contributes. Human texts are the antimetricality small data (one text per author, so no error bars). LLM prose is the national_story pure stories. LLM verse is continuations of human poems, pooled by tier, with the poets' own continuations of the same poems.</p>
+    <div class="legend" id="orsLegend"></div>
+    <div class="chart-box" id="orsBox">
+      <svg class="chart" id="orsScatter" role="img" aria-label="Tension of the original text against the effect of word placement; values in the table below"></svg>
+      <div class="controls" style="margin-top:10px"><label for="orsKey">Measure</label>
+        <select id="orsKey"><option value="t">Tension (MTS)</option><option value="u">Uncertainty</option><option value="uip">uIP %</option><option value="puip">puIP %</option></select></div>
+      <svg class="chart" id="orsRows" role="img" aria-label="Each text as original, within-POS scramble and full scramble; values in the table below"></svg>
+    </div>
+    <p class="note">Hover a point or row for all values. Lower tension and uncertainty and higher uIP/puIP mean more metrical. In the lower panel, a filled marker is the original, a half-filled one the within-POS scramble, and a hollow one the full scramble.</p>
+  </section>
+
   <section class="figure" aria-label="All baselines by period">
     <h2>All baselines</h2>
     <div class="legend" id="legend"></div>
@@ -159,7 +172,7 @@ const KIND = {
   human_chadwyck: "Human poetry (Chadwyck sample)", human_all_poetry: "Human poetry, pooled", human_all_fiction: "Human fiction, pooled",
   human_all_nonfiction: "Human non-fiction, pooled", human_continuation: "Human continuation",
   llm_prose: "LLM prose", llm_prose_lineage: "LLM prose, one lineage", llm_verse: "LLM verse continuation",
-  llm_verse_pilot: "LLM verse continuation (pilot)", llm_prompted: "LLM prompted poems", llm_prompted_model: "LLM prompted poems, one model", verse_period: "Verse continuations, by period", verse_overall: "Verse continuations, all periods", tier_model: "Verse continuation model (tier)", ref_author: "Human poet (reference)"
+  llm_verse_pilot: "LLM verse continuation (pilot)", llm_prompted: "LLM prompted poems", llm_prompted_model: "LLM prompted poems, one model", verse_period: "Verse continuations, by period", verse_overall: "Verse continuations, all periods", tier_model: "Verse continuation model (tier)", ref_author: "Human poet (reference)", ors: "O/R/S row (original values)"
 };
 const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
 const tip = document.getElementById("tip"), box = document.getElementById("chartBox");
@@ -373,7 +386,74 @@ function pentPanel(svg, key, title, x1) {
     hover(el(svg, "rect", { x: 0, y: pl.y - rowH / 2, width: W, height: rowH, class: "hit" }), tipP);
   });
 }
+const ORS_COL = r => r.kind_ors === "LLM prose" ? "--prose" : r.kind_ors === "LLM verse" ? "--verse" : "--human";
+const ORS_FILL = r => r.tier !== "base";
+function orsTip(r) {
+  const k = [["t", "Tension"], ["u", "Uncertainty"], ["uip", "uIP %"], ["puip", "puIP %"]];
+  return { html: `<b>${r.label}</b> <span style="opacity:.75">(${r.kind_ors})</span><br>` + k.map(([c, l]) =>
+    `${l}: O <span class="num">${f2(r[c + "_O"])}</span> · R <span class="num">${f2(r[c + "_R"])}</span> · S <span class="num">${f2(r[c + "_S"])}</span>`).join("<br>") +
+    `<br><span class="num">${r.n_O.toLocaleString()}</span> original windows` };
+}
+function orsScatter(svg) {
+  const rows = PTS.filter(p => p.group === "ors");
+  const Hs = 420, ml = 58, mr = 30, mt = 24, mb = 44;
+  svg.innerHTML = ""; svg.setAttribute("viewBox", `0 0 ${W} ${Hs}`);
+  const xs = rows.map(r => r.t_O), ys = rows.map(r => r.t_O - r.t_R);
+  const X0 = Math.floor(Math.min(...xs)) - 0.5, X1 = Math.ceil(Math.max(...xs)) + 0.5;
+  const Y0 = Math.floor(Math.min(...ys)) - 0.5, Y1 = Math.max(0.5, Math.ceil(Math.max(...ys) * 2) / 2 + 0.25);
+  const sx = v => ml + (v - X0) / (X1 - X0) * (W - ml - mr), sy = v => Hs - mb - (v - Y0) / (Y1 - Y0) * (Hs - mt - mb);
+  const C = k => css(k);
+  const g = el(svg, "g", { class: "axis" });
+  for (let x = Math.ceil(X0); x <= X1; x += 1) { el(svg, "line", { x1: sx(x), x2: sx(x), y1: mt, y2: Hs - mb, class: "gridline" }, g); const t = el(svg, "text", { x: sx(x), y: Hs - mb + 18, "text-anchor": "middle" }, g); t.textContent = x; }
+  for (let y = Math.ceil(Y0); y <= Y1; y += 1) { el(svg, "line", { x1: ml, x2: W - mr, y1: sy(y), y2: sy(y), class: "gridline" }, g); const t = el(svg, "text", { x: ml - 10, y: sy(y) + 4, "text-anchor": "end" }, g); t.textContent = y; }
+  el(svg, "line", { x1: ml, x2: W - mr, y1: sy(0), y2: sy(0), stroke: C("--ink-3"), "stroke-width": 1 });
+  const xt = el(svg, "text", { x: ml + (W - ml - mr) / 2, y: Hs - 8, "text-anchor": "middle", class: "axis-title" }); xt.textContent = "Tension of the original (MTS per window): lower is more metrical";
+  const yt = el(svg, "text", { x: 14, y: mt + (Hs - mt - mb) / 2, "text-anchor": "middle", class: "axis-title", transform: `rotate(-90 14 ${mt + (Hs - mt - mb) / 2})` }); yt.textContent = "O − R: placement effect (below 0 = placed metrically)";
+  const defs = el(svg, "defs", {});
+  for (const [id, v] of [["orsAp", "--prose"], ["orsAv", "--verse"]]) { const mk = el(svg, "marker", { id, viewBox: "0 0 10 10", refX: 9, refY: 5, markerWidth: 7, markerHeight: 7, orient: "auto" }, defs); el(svg, "path", { d: "M0,1 L9,5 L0,9 z", fill: C(v) }, mk); }
+  const by = l => rows.find(r => r.label === l);
+  const arrow = (a, b, v) => { if (!a || !b) return; const x1 = sx(a.t_O), y1 = sy(a.t_O - a.t_R), x2 = sx(b.t_O), y2 = sy(b.t_O - b.t_R), L = Math.hypot(x2 - x1, y2 - y1) || 1;
+    el(svg, "line", { x1: x1 + (x2 - x1) / L * 8, y1: y1 + (y2 - y1) / L * 8, x2: x2 - (x2 - x1) / L * 9, y2: y2 - (y2 - y1) / L * 9, stroke: C(v), "stroke-width": 1.8, "marker-end": v === "--prose" ? "url(#orsAp)" : "url(#orsAv)" }); };
+  arrow(by("LLM prose, base"), by("LLM prose, aligned"), "--prose");
+  arrow(by("LLM verse, base"), by("LLM verse, open aligned"), "--verse");
+  arrow(by("LLM verse, open aligned"), by("LLM verse, API"), "--verse");
+  rows.forEach(r => {
+    const x = sx(r.t_O), y = sy(r.t_O - r.t_R), v = ORS_COL(r), human = v === "--human";
+    if (human) el(svg, "rect", { x: x - 4.5, y: y - 4.5, width: 9, height: 9, fill: C(v) });
+    else el(svg, "circle", { cx: x, cy: y, r: 6.5, fill: ORS_FILL(r) ? C(v) : C("--panel"), stroke: C(v), "stroke-width": 2 });
+    // labels that would collide in the dense corners are placed individually: [dx, dy, anchor]
+    const off = { "LLM prose, aligned": [0, 20, "middle"], "Browne": [-9, 4, "end"], "LLM verse, API": [-10, 4, "end"], "Shakespeare": [0, 20, "middle"] }[r.label] || [9, -7, "start"];
+    const t = el(svg, "text", { x: x + off[0], y: y + off[1], "text-anchor": off[2], class: human ? "clabel" : "dlabel" }); t.textContent = r.label.replace("LLM ", "");
+    hover(el(svg, "circle", { cx: x, cy: y, r: 12, class: "hit" }), orsTip(r));
+  });
+}
+function orsRows(svg, key) {
+  const order = ["human verse", "LLM verse", "human fiction", "human utility prose", "human art prose", "LLM prose"];
+  const rows = PTS.filter(p => p.group === "ors").sort((a, b) => order.indexOf(a.kind_ors) - order.indexOf(b.kind_ors) || a[key + "_O"] - b[key + "_O"]);
+  const rowH = 24, top = 20, left = 210, right = 40, Hh = top + rows.length * rowH + 40;
+  svg.innerHTML = ""; svg.setAttribute("viewBox", `0 0 ${W} ${Hh}`);
+  const vals = rows.flatMap(r => ["O", "R", "S"].map(v => r[key + "_" + v]));
+  const lo = Math.min(...vals), hi = Math.max(...vals), pad = (hi - lo) * 0.05, X0 = Math.max(0, lo - pad), X1 = hi + pad;
+  const sx = v => left + (v - X0) / (X1 - X0) * (W - left - right);
+  const C = k => css(k);
+  const g = el(svg, "g", { class: "axis" });
+  const step = (X1 - X0) > 20 ? 5 : (X1 - X0) > 6 ? 1 : 0.5;
+  for (let x = Math.ceil(X0 / step) * step; x <= X1; x += step) { el(svg, "line", { x1: sx(x), x2: sx(x), y1: top - 4, y2: Hh - 34, class: "gridline" }, g); const t = el(svg, "text", { x: sx(x), y: Hh - 16, "text-anchor": "middle" }, g); t.textContent = step < 1 ? x.toFixed(1) : x; }
+  rows.forEach((r, i) => {
+    const y = top + i * rowH + rowH / 2, v = C(ORS_COL(r)), human = ORS_COL(r) === "--human";
+    const lab = el(svg, "text", { x: 0, y: y + 4, class: human ? "clabel" : "dlabel" }); lab.textContent = r.label;
+    const [o, rr, s] = ["O", "R", "S"].map(k => r[key + "_" + k]);
+    el(svg, "line", { x1: sx(Math.min(o, rr, s)), x2: sx(Math.max(o, rr, s)), y1: y, y2: y, stroke: C("--ink-3"), "stroke-width": 1.5 });
+    el(svg, "circle", { cx: sx(s), cy: y, r: 5.5, fill: C("--panel"), stroke: v, "stroke-width": 2 });
+    el(svg, "circle", { cx: sx(rr), cy: y, r: 5.5, fill: C("--panel"), stroke: v, "stroke-width": 2 });
+    el(svg, "path", { d: `M ${sx(rr)} ${y - 5.5} A 5.5 5.5 0 0 1 ${sx(rr)} ${y + 5.5} Z`, fill: v });
+    el(svg, "circle", { cx: sx(o), cy: y, r: 6, fill: v, stroke: v, "stroke-width": 2 });
+    hover(el(svg, "rect", { x: 0, y: y - rowH / 2, width: W, height: rowH, class: "hit" }), orsTip(r));
+  });
+}
 function draw() {
+  orsScatter(document.getElementById("orsScatter"));
+  orsRows(document.getElementById("orsRows"), document.getElementById("orsKey").value);
   pentPanel(document.getElementById("pentU"), "uip", "Unambiguous iambic pentameter (uIP), % of windows", 36);
   pentPanel(document.getElementById("pentP"), "puip", "Perfect unambiguous iambic pentameter (puIP), % of windows", 26);
   leadPanel(document.getElementById("leadT"), "t", "Metrical tension (MTS) per 10-syllable window", 3, 14, 2);
@@ -408,7 +488,11 @@ document.querySelectorAll("#table th").forEach(th => {
   const go = () => { const k = th.dataset.k; sortDir = sortK === k ? -sortDir : 1; sortK = k; table(); };
   th.addEventListener("click", go); th.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); go(); } });
 });
-["showPilot", "showNonfic"].forEach(id => document.getElementById(id).addEventListener("change", draw));
+document.getElementById("orsLegend").innerHTML =
+  `<span><span class="sw" style="border-radius:1px;background:var(--human)"></span>human text (small data) or poets' continuations</span>` +
+  `<span><span class="sw" style="background:var(--prose)"></span>LLM prose</span><span><span class="sw" style="background:var(--verse)"></span>LLM verse</span>` +
+  `<span><span class="sw" style="border:2px solid var(--ink-2);background:transparent;width:8px;height:8px"></span>base model</span>`;
+["showPilot", "showNonfic", "orsKey"].forEach(id => document.getElementById(id).addEventListener("change", draw));
 matchMedia("(prefers-color-scheme: dark)").addEventListener("change", draw);
 new MutationObserver(draw).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
 leadLegend(); legend(); draw(); table();

@@ -83,6 +83,45 @@ def tiers(C):
     return out
 
 
+def scrambles(V, W):
+    """Original / within-POS scramble (R) / full scramble (S), one row per text or tier.
+
+    Human: the antimetricality small data's LSA texts (O/R/S = original, randomized
+    within POS, fully scrambled; checked on the texts: R keeps the POS sequence, S
+    does not). LLM prose: national_story pure stories. LLM verse: the continuations,
+    pooled by tier, with the poets' own continuations of the same poems."""
+    rows = []
+
+    def row(who, kind, tier, frames):                      # frames: {"O": df, "R": df, "S": df}
+        if any(len(df) == 0 for df in frames.values()):
+            return
+        r = dict(group="ors", label=who, kind_ors=kind, tier=tier, source="O/R/S scrambles")
+        for v, df in frames.items():
+            a, b = pent(df)
+            r.update({"t_" + v: float(df.num_viols_allparse_sum.mean()), "u_" + v: float(df.num_parses.mean()),
+                      "uip_" + v: float(100 * a.mean()), "puip_" + v: float(100 * b.mean()), "n_" + v: int(len(df))})
+        r.update(t=r["t_O"], u=r["u_O"], uip=r["uip_O"], puip=r["puip_O"], n_windows=r["n_O"], n_units=0)
+        rows.append(r)
+
+    if os.path.exists(SMALL):
+        sm = pd.read_parquet(SMALL)
+        sm = sm[(sm.corpus == "LSA") & (sm.method == "new_nsyll") & (sm.num_sylls_canonical == 10) & sm.num_parses.notna()]
+        KIND = {"shakespeare": "human verse", "dibble": "human utility prose", "dickens": "human fiction"}
+        for au, g in sm.groupby("author"):
+            row(au.capitalize(), KIND.get(au, "human art prose"), "human", {v: g[g.text_type == v] for v in "ORS"})
+    VER = {"O": "orig", "R": "shuffle_pos", "S": "shuffle_all"}
+    for arm in ("base", "aligned"):
+        x = W[W.arm == arm]
+        row("LLM prose, " + arm, "LLM prose", arm, {v: x[x.version == VER[v]] for v in "ORS"})
+    C = V[V.source == "genai_completion"]
+    tier = C.model.map(lambda m: "poets" if str(m).startswith("human:") else TIER.get(m, ("?",))[0])
+    for tr, lab in (("base", "LLM verse, base"), ("open aligned", "LLM verse, open aligned"),
+                    ("API", "LLM verse, API"), ("poets", "Poets' continuations")):
+        x = C[tier == tr]
+        row(lab, "human verse" if tr == "poets" else "LLM verse", tr, {v: x[x.version == VER[v]] for v in "ORS"})
+    return rows
+
+
 def points():
     pts = []
     b = pd.read_parquet(BASE, columns=["metagenre", "year", "num_sylls_canonical", "author", "meter"] + M)
@@ -99,6 +138,8 @@ def points():
 
     V = pd.read_csv(os.path.join(DATA, "by_window_verse.csv"), low_memory=False)
     V = V[V.win_idx >= 0]
+    V["version"] = V.version.fillna("orig") if "version" in V else "orig"
+    Vall, V = V, V[V.version == "orig"]                  # scrambles only for scrambles()
     for per, y in V[V.source == "human_period"].groupby("group"):
         if int(per[:4]) + 30 + 25 < LAST:                # the +30 bin's midpoint must fall before 2000
             pts.append(dict(group="human_chadwyck", label="Chadwyck poems, authors born %s" % per, period=int(per[:4]) + 30,
@@ -161,7 +202,9 @@ def points():
     P = pd.read_csv(os.path.join(DATA, "by_passage.csv"), low_memory=False).drop_duplicates(["id", "version"])
     ok = set(P[(P.version == "orig") & (P.overall == "story") & (P.pure_story == True)].id)
     W = pd.read_csv(os.path.join(DATA, "by_window.csv"), low_memory=False, usecols=["id", "version", "win_idx", "arm", "lineage", "meter"] + M)
-    W = W[(W.version == "orig") & W.id.isin(ok) & W.num_parses.notna()].drop_duplicates(["id", "win_idx"])
+    W = W[W.id.isin(ok) & W.num_parses.notna()].drop_duplicates(["id", "version", "win_idx"])
+    Wall, W = W, W[W.version == "orig"]
+    pts += scrambles(Vall, Wall)
     for arm in ["base", "aligned"]:
         pts.append(dict(group="llm_prose", lineage="all lineages", arm=arm, label="LLM prose, %s (all lineages)" % arm,
                         source="national_story pure stories", **summ(W[W.arm == arm], "id")))

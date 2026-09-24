@@ -45,7 +45,7 @@ warnings.filterwarnings("ignore")
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 from parse_passages_prosodic import (TextModel, content_sylls, windows, meter_rows,  # noqa: E402
-                                     INSTRUMENT, OUT_DIR, Appender, _init_worker)
+                                     INSTRUMENT, OUT_DIR, Appender, _init_worker, scramble)
 import pandas as pd  # noqa: E402
 
 GENFORM = os.environ.get("GENFORM_DATA", os.path.expanduser(
@@ -118,6 +118,29 @@ def work(rec):
         return [dict(base, win_idx=-1, error="%s: %s" % (type(e).__name__, str(e)[:200]))]
 
 
+def work_scramble(rec):
+    """The two scrambles of one text, as in the prose producer: content words permuted
+    within UPOS (`shuffle_pos`, the antimetricality small data's R) and across the text
+    (`shuffle_all`, its S), punctuation fixed, seeded by the text's key. The original is
+    already in the file as version-less rows (read as `orig`)."""
+    base = {k: rec[k] for k in ("source", "model", "arm", "poem_id", "group")}
+    base["instrument"] = INSTRUMENT
+    out = []
+    try:
+        df = TextModel(rec["text"], keep_parse=True)._syll_df
+    except Exception as e:
+        return [dict(base, version=v, win_idx=-1, error="%s: %s" % (type(e).__name__, str(e)[:200]))
+                for v in ("shuffle_pos", "shuffle_all")]
+    for v in ("shuffle_pos", "shuffle_all"):
+        seed = int(hashlib.md5(("%s|%s|%s" % (rec["model"], rec["poem_id"], v)).encode()).hexdigest()[:8], 16)
+        try:
+            c = content_sylls(TextModel(scramble(df, v, seed))._syll_df)
+            out += [dict(base, version=v, win_idx=i, **r) for i, r in enumerate(meter_rows(windows(c)))]
+        except Exception as e:
+            out.append(dict(base, version=v, win_idx=-1, error="%s: %s" % (type(e).__name__, str(e)[:200])))
+    return out
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser()
     ap.add_argument("--smoke", action="store_true")
@@ -127,8 +150,20 @@ def main(argv=None):
     ap.add_argument("--tiers", action="store_true",
                     help="APPEND the API-tier and unpaired open-instruct completions (and their poets' "
                          "continuations) to the existing file, skipping any already there")
+    ap.add_argument("--scramble", action="store_true",
+                    help="APPEND within-POS and full scrambles of every continuation (all tiers and "
+                         "the poets'), skipping any already there")
     a = ap.parse_args(argv)
-    recs = tier_poems() if a.tiers else poems(a.per_period, a.per_cell)
+    if a.scramble:
+        recs = [r for r in poems(a.per_period, a.per_cell) + tier_poems() if r["source"] == "genai_completion"]
+        seen, uniq = set(), []                           # a poets' text shared by two recs is scrambled once
+        for r in recs:
+            k = (r["model"], r["poem_id"])
+            if k not in seen:
+                seen.add(k); uniq.append(r)
+        recs = uniq
+    else:
+        recs = tier_poems() if a.tiers else poems(a.per_period, a.per_cell)
     out = OUT
     if a.smoke:
         seen, pick = {}, []
@@ -140,10 +175,16 @@ def main(argv=None):
         recs = pick
         import tempfile
         out = os.path.join(tempfile.gettempdir(), "syntax_and_rhythm_smoke_by_window_verse.csv")
-    if a.tiers and os.path.exists(out):
+    if a.scramble and os.path.exists(out):
+        cols = pd.read_csv(out, nrows=0).columns
+        if "version" in cols:
+            have = pd.read_csv(out, usecols=["model", "poem_id", "version"], low_memory=False)
+            have = set(map(tuple, have[have.version.notna()][["model", "poem_id"]].drop_duplicates().values))
+            recs = [r for r in recs if (r["model"], r["poem_id"]) not in have]
+    elif a.tiers and os.path.exists(out):
         have = set(map(tuple, pd.read_csv(out, usecols=["source", "model", "poem_id"]).drop_duplicates().values))
         recs = [r for r in recs if (r["source"], r["model"], r["poem_id"]) not in have]
-    elif os.path.exists(out):
+    elif not (a.scramble or a.tiers) and os.path.exists(out):
         os.remove(out)
     os.makedirs(os.path.dirname(out), exist_ok=True)
     print("%d poems: %s" % (len(recs), pd.Series([(r["source"], r["arm"]) for r in recs]).value_counts().to_dict()),
@@ -152,10 +193,10 @@ def main(argv=None):
     if a.workers > 1:
         from multiprocessing import get_context
         pool = get_context("spawn").Pool(a.workers, initializer=_init_worker)
-        results = pool.imap(work, recs, chunksize=4)
+        results = pool.imap(work_scramble if a.scramble else work, recs, chunksize=4)
     else:
         _init_worker()
-        pool, results = None, map(work, recs)
+        pool, results = None, map(work_scramble if a.scramble else work, recs)
     try:
         for i, rows in enumerate(results, 1):
             app.write(rows)
