@@ -1,0 +1,53 @@
+PLATE A3. The words of the capture: what the weights add, and what the chat frame adds.
+
+Per word, two rows: the aggrieved individual (dark gray, upper) and the institution (lighter gray,
+lower). Each row runs in two steps, read from the circle. Circle: base model.
+Triangle: the aligned model run with no chat template. Square: the aligned model in chat. The step
+from circle to triangle is the change in the WEIGHTS, the frame held at raw text; the step from
+triangle to square is the CHAT FRAME, the weights held at the aligned model. Steps are drawn where
+the values fall; the triangle marks a condition, not a direction.
+A step that runs right to left is a fall in the word's share: contact/inst frame, file/inst weights,
+file/inst frame, listen/ind frame.
+Value: share of ALL passages in that condition and side that contain the word (a passage counts once).
+
+Corpus: institution_vs_individual, 256-token regeneration, the same 42 lineages in all three
+conditions (7,560 passages per condition and side; internlm2 excluded, its generation is word salad).
+Base: raw continuation. No template: the aligned model on the same raw prompt (aligned_raw.md,
+registered before generation). Chat: the prompt as the user message under the model's template and
+default system prompt. No LLM in the measurement: passage text only, every passage unfiltered.
+Thinking off: the chat cells of Qwen3-8B, SmolLM3-3B and MiniCPM5-1B are rendered with the vendor
+switch enable_thinking=False (thinking_off.md, f4150fe0); under their default templates all 1,080
+were reasoning traces cut off before any answer. Selection on these rows: acknowledge replaces
+offer.
+
+Word selection is plate A's rule (plot.py STOP; BH over lineages and p < 0.05 by dispute; top 8 /
+bottom 4 by median DiD between base and chat); rows ordered by the farthest-right mark. EXPLORATORY.
+The coded decomposition of the same split is results/aligned_raw.md.
+
+word        side            base no-tmpl    chat     weights     frame
+consider    individual     0.048   0.158   0.412      +0.110    +0.254
+consider    institution    0.053   0.146   0.293      +0.094    +0.146
+contact     individual     0.059   0.171   0.380      +0.112    +0.209
+contact     institution    0.060   0.099   0.097      +0.039    -0.001
+request     individual     0.041   0.118   0.276      +0.077    +0.158
+request     institution    0.052   0.099   0.133      +0.047    +0.033
+seek        individual     0.018   0.083   0.234      +0.065    +0.151
+seek        institution    0.017   0.052   0.086      +0.035    +0.034
+rights      individual     0.047   0.124   0.219      +0.078    +0.095
+rights      institution    0.038   0.064   0.078      +0.026    +0.014
+local       individual     0.045   0.103   0.186      +0.058    +0.083
+local       institution    0.038   0.056   0.087      +0.017    +0.031
+department  individual     0.040   0.080   0.163      +0.040    +0.083
+department  institution    0.053   0.068   0.069      +0.015    +0.001
+file        individual     0.053   0.096   0.157      +0.042    +0.062
+file        institution    0.043   0.036   0.033      -0.008    -0.003
+concerns    individual     0.020   0.089   0.175      +0.069    +0.085
+concerns    institution    0.046   0.211   0.367      +0.166    +0.156
+ensure      individual     0.027   0.097   0.171      +0.070    +0.074
+ensure      institution    0.046   0.191   0.313      +0.145    +0.122
+listen      individual     0.007   0.009   0.005      +0.001    -0.003
+listen      institution    0.022   0.079   0.222      +0.058    +0.142
+acknowledge individual     0.006   0.014   0.017      +0.008    +0.003
+acknowledge institution    0.014   0.063   0.217      +0.049    +0.154
+
+weights = no-template minus base; frame = chat minus no-template; shares are proportions.

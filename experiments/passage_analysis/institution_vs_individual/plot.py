@@ -104,8 +104,12 @@ def booked_table(path, header_prefix):
 
 
 # ───────────────────────────────────────────────────────────── plate A, words
-def word_frame():
-    """word_did.compute(), asserted against word_did.md, then the selection rule."""
+def word_frame(booked_md="word_did.md"):
+    """word_did.compute(), asserted against a booked word_did table, then the selection rule.
+
+    `booked_md` names the table in results/: word_did.md (malign's, the old rows)
+    or word_did_nothink.md (the same producer on the thinking-off rows).
+    """
     R = W.compute()
     res = {w: dict(lu=v["lineage_up"], ld=v["lineage_down"], lp=v["lineage_p"],
                    du=v["dispute_up"], dd=v["dispute_down"], dp=v["dispute_p"], med=v["median_did"])
@@ -116,18 +120,18 @@ def word_frame():
     #: THE BOOKED TABLE, every row of both halves, to its printed precision.
     booked = 0
     for half in ("Gains MORE on the individual", "Gains MORE on the institution"):
-        for c in booked_table(os.path.join(HERE, "results", "word_did.md"), half):
+        for c in booked_table(os.path.join(HERE, "results", booked_md), half):
             w = c[0]
             got = ["%.3f" % share[("base", "individual")][w], "%.3f" % share[("base", "institution")][w],
                    "%.3f" % share[("aligned", "individual")][w], "%.3f" % share[("aligned", "institution")][w],
                    "%+.3f" % res[w]["med"], "%d/%d" % (res[w]["lu"], res[w]["ld"]),
                    "%d/%d" % (res[w]["du"], res[w]["dd"])]
-            assert got == c[1:] and w in both, "word_did.md row %s: booked %s, derived %s" % (w, c[1:], got)
+            assert got == c[1:] and w in both, "%s row %s: booked %s, derived %s" % (booked_md, w, c[1:], got)
             booked += 1
     #: and the README's own headline word, categorically
     assert (res["contact"]["lu"], res["contact"]["ld"], res["contact"]["du"], res["contact"]["dd"]) == (41, 1, 18, 0)
-    print("   word_did.md reproduced: %d booked rows, %d passages, %d words, %d in both tests"
-          % (booked, R["n_passages"], len(R["vocab"]), len(both)))
+    print("   %s reproduced: %d booked rows, %d passages, %d words, %d in both tests"
+          % (booked_md, booked, R["n_passages"], len(R["vocab"]), len(both)))
 
     content = [w for w in both if w not in STOP]
     ind = sorted([w for w in content if res[w]["med"] > 0], key=lambda w: (-res[w]["med"], w))[:N_IND]
@@ -377,7 +381,7 @@ def fig_frames():
 
 
 # ─────────────────────────────────── plate A3, weights and frame, told apart by the marks
-def fig_split():
+def fig_split(name="ci_word_weights_frame", booked_md="word_did.md", chat_note=None, xmin=-8.5):
     """Plate A3: plate A's words, base -> aligned raw -> aligned chat, no API."""
     import matplotlib
     matplotlib.use("Agg")
@@ -387,7 +391,7 @@ def fig_split():
                           scale_shape_manual, scale_fill_manual, theme, element_text, element_blank,
                           element_rect, guides, guide_legend)
     import word_frames as WF
-    sel, meta = word_frame()
+    sel, meta = word_frame(booked_md)
     words = [s_["word"] for s_ in sel]
     share, n, units = WF.all_data(words)
     for s_ in sel:     # base and chat are plate A's own cells, to the bit
@@ -468,7 +472,9 @@ def fig_split():
          + guides(color=guide_legend(order=1, nrow=1),
                   shape=guide_legend(order=2, nrow=1,
                                      override_aes={"fill": [INDIV] * 3, "color": [INDIV] * 3}))
-         + scale_x_continuous(limits=(-8.5, xmax * 1.04), expand=(0, 0), breaks=[0, 10, 20, 30, 40],
+         #: xmin holds the word labels, which hang left of zero: -8.5 fits "department"
+         #: and cut "acknowledge" to "cknowledge" (the pixel audit scans the right edge only)
+         + scale_x_continuous(limits=(xmin, xmax * 1.04), expand=(0, 0), breaks=[0, 10, 20, 30, 40],
                               labels=lambda v: ["%g%%" % x for x in v])
          + scale_y_continuous(breaks=[], expand=(0, 0.6))
          + labs(x="Passages containing the word", y="")
@@ -503,6 +509,7 @@ def fig_split():
         "Base: raw continuation. No template: the aligned model on the same raw prompt (aligned_raw.md,",
         "registered before generation). Chat: the prompt as the user message under the model's template and",
         "default system prompt. No LLM in the measurement: passage text only, every passage unfiltered.",
+        *(textwrap.wrap(chat_note, 100) if chat_note else []),
         "",
         "Word selection is plate A's rule (plot.py STOP; BH over lineages and p < 0.05 by dispute; top %d /" % N_IND,
         "bottom %d by median DiD between base and chat); rows ordered by the farthest-right mark. EXPLORATORY." % N_INST,
@@ -515,7 +522,32 @@ def fig_split():
             b, r_, c_ = (share[(c, side)][w] for c in OPEN3)
             lines.append("%-11s %-12s %7.3f %7.3f %7.3f   %+9.3f %+9.3f" % (w, side, b, r_, c_, r_ - b, c_ - r_))
     lines += ["", "weights = no-template minus base; frame = chat minus no-template; shares are proportions."]
-    save(p, "ci_word_weights_frame", W_IN, H_IN, "\n".join(lines))
+    save(p, name, W_IN, H_IN, "\n".join(lines))
+
+
+#: the twelve plate A's rule returned on the rows 64fac6fb was drawn from
+WORDS_64FAC6FB = ["contact", "rights", "seek", "request", "consider", "local", "file", "department",
+                  "listen", "concerns", "ensure", "offer"]
+
+
+def fig_split_nothink():
+    """Plate A3 redrawn on the thinking-off chat cells (thinking_off.md), same design, new filename."""
+    name = "ci_word_weights_frame_nothink"
+    for ext in (".png", ".pdf", ".tif", ".caption.txt"):
+        #: RH: "Don't overwrite any files"; 64fac6fb's plate stays as settled
+        assert not os.path.exists(os.path.join(FIG, name + ext)), "refusing to overwrite %s%s" % (name, ext)
+    sel, _ = word_frame("word_did_nothink.md")
+    now = [s_["word"] for s_ in sel]
+    #: the rule is unchanged and its answer moved: acknowledge's median fell past
+    #: ensure's and offer's, so offer is fifth on the institution side and cut
+    assert now == ["contact", "seek", "rights", "request", "consider", "local", "department", "file",
+                   "listen", "concerns", "acknowledge", "ensure"], now
+    fig_split(name, "word_did_nothink.md", chat_note=(
+        "Thinking off: the chat cells of Qwen3-8B, SmolLM3-3B and MiniCPM5-1B are rendered with the vendor "
+        "switch enable_thinking=False (thinking_off.md, f4150fe0); under their default templates all 1,080 "
+        "were reasoning traces cut off before any answer. Selection on these rows: %s replaces %s."
+        % (", ".join(sorted(set(now) - set(WORDS_64FAC6FB))), ", ".join(sorted(set(WORDS_64FAC6FB) - set(now))))),
+        xmin=-10.5)
 
 
 # ────────────────────────────────────────────────────────── plate B, channel
@@ -651,7 +683,8 @@ def fig_channel():
     save(p, "ci_channel_by_dispute", W_IN, H_IN, "\n".join(lines))
 
 
-FIGURES = {"words": fig_words, "frames": fig_frames, "split": fig_split, "channel": fig_channel}
+FIGURES = {"words": fig_words, "frames": fig_frames, "split": fig_split, "split_nothink": fig_split_nothink,
+           "channel": fig_channel}
 
 
 def main():
