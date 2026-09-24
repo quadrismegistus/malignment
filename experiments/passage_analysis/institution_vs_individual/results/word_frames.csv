@@ -1,0 +1,97 @@
+word,group,condition,side,share,n
+contact,ind,"Base, raw",individual,0.053703703703703705,1080
+contact,ind,"Base, raw",institution,0.06944444444444445,1080
+contact,ind,"Aligned, raw",individual,0.1814814814814815,1080
+contact,ind,"Aligned, raw",institution,0.11574074074074074,1080
+contact,ind,"Aligned, chat",individual,0.28703703703703703,1080
+contact,ind,"Aligned, chat",institution,0.13518518518518519,1080
+contact,ind,API,individual,0.5472222222222223,720
+contact,ind,API,institution,0.08611111111111111,720
+rights,ind,"Base, raw",individual,0.03611111111111111,1080
+rights,ind,"Base, raw",institution,0.027777777777777776,1080
+rights,ind,"Aligned, raw",individual,0.10092592592592593,1080
+rights,ind,"Aligned, raw",institution,0.06481481481481481,1080
+rights,ind,"Aligned, chat",individual,0.10740740740740741,1080
+rights,ind,"Aligned, chat",institution,0.04537037037037037,1080
+rights,ind,API,individual,0.3472222222222222,720
+rights,ind,API,institution,0.10555555555555556,720
+seek,ind,"Base, raw",individual,0.009259259259259259,1080
+seek,ind,"Base, raw",institution,0.007407407407407408,1080
+seek,ind,"Aligned, raw",individual,0.028703703703703703,1080
+seek,ind,"Aligned, raw",institution,0.032407407407407406,1080
+seek,ind,"Aligned, chat",individual,0.04537037037037037,1080
+seek,ind,"Aligned, chat",institution,0.04537037037037037,1080
+seek,ind,API,individual,0.14027777777777778,720
+seek,ind,API,institution,0.05416666666666667,720
+request,ind,"Base, raw",individual,0.03148148148148148,1080
+request,ind,"Base, raw",institution,0.027777777777777776,1080
+request,ind,"Aligned, raw",individual,0.05,1080
+request,ind,"Aligned, raw",institution,0.06018518518518518,1080
+request,ind,"Aligned, chat",individual,0.08055555555555556,1080
+request,ind,"Aligned, chat",institution,0.07777777777777778,1080
+request,ind,API,individual,0.5013888888888889,720
+request,ind,API,institution,0.12361111111111112,720
+local,ind,"Base, raw",individual,0.03518518518518519,1080
+local,ind,"Base, raw",institution,0.037037037037037035,1080
+local,ind,"Aligned, raw",individual,0.07592592592592592,1080
+local,ind,"Aligned, raw",institution,0.040740740740740744,1080
+local,ind,"Aligned, chat",individual,0.1259259259259259,1080
+local,ind,"Aligned, chat",institution,0.044444444444444446,1080
+local,ind,API,individual,0.2902777777777778,720
+local,ind,API,institution,0.1527777777777778,720
+consider,ind,"Base, raw",individual,0.016666666666666666,1080
+consider,ind,"Base, raw",institution,0.037037037037037035,1080
+consider,ind,"Aligned, raw",individual,0.075,1080
+consider,ind,"Aligned, raw",institution,0.06388888888888888,1080
+consider,ind,"Aligned, chat",individual,0.14629629629629629,1080
+consider,ind,"Aligned, chat",institution,0.12777777777777777,1080
+consider,ind,API,individual,0.5444444444444444,720
+consider,ind,API,institution,0.5347222222222222,720
+file,ind,"Base, raw",individual,0.06759259259259259,1080
+file,ind,"Base, raw",institution,0.049074074074074076,1080
+file,ind,"Aligned, raw",individual,0.06574074074074074,1080
+file,ind,"Aligned, raw",institution,0.037037037037037035,1080
+file,ind,"Aligned, chat",individual,0.10833333333333334,1080
+file,ind,"Aligned, chat",institution,0.032407407407407406,1080
+file,ind,API,individual,0.5652777777777778,720
+file,ind,API,institution,0.0875,720
+department,ind,"Base, raw",individual,0.030555555555555555,1080
+department,ind,"Base, raw",institution,0.06388888888888888,1080
+department,ind,"Aligned, raw",individual,0.08055555555555556,1080
+department,ind,"Aligned, raw",institution,0.06851851851851852,1080
+department,ind,"Aligned, chat",individual,0.08611111111111111,1080
+department,ind,"Aligned, chat",institution,0.06388888888888888,1080
+department,ind,API,individual,0.24583333333333332,720
+department,ind,API,institution,0.10833333333333334,720
+listen,inst,"Base, raw",individual,0.007407407407407408,1080
+listen,inst,"Base, raw",institution,0.010185185185185186,1080
+listen,inst,"Aligned, raw",individual,0.012037037037037037,1080
+listen,inst,"Aligned, raw",institution,0.04259259259259259,1080
+listen,inst,"Aligned, chat",individual,0.005555555555555556,1080
+listen,inst,"Aligned, chat",institution,0.06666666666666667,1080
+listen,inst,API,individual,0.001388888888888889,720
+listen,inst,API,institution,0.4638888888888889,720
+concerns,inst,"Base, raw",individual,0.005555555555555556,1080
+concerns,inst,"Base, raw",institution,0.017592592592592594,1080
+concerns,inst,"Aligned, raw",individual,0.06666666666666667,1080
+concerns,inst,"Aligned, raw",institution,0.11944444444444445,1080
+concerns,inst,"Aligned, chat",individual,0.09074074074074075,1080
+concerns,inst,"Aligned, chat",institution,0.17685185185185184,1080
+concerns,inst,API,individual,0.12638888888888888,720
+concerns,inst,API,institution,0.38333333333333336,720
+ensure,inst,"Base, raw",individual,0.012962962962962963,1080
+ensure,inst,"Base, raw",institution,0.013888888888888888,1080
+ensure,inst,"Aligned, raw",individual,0.07037037037037037,1080
+ensure,inst,"Aligned, raw",institution,0.12685185185185185,1080
+ensure,inst,"Aligned, chat",individual,0.08425925925925926,1080
+ensure,inst,"Aligned, chat",institution,0.1685185185185185,1080
+ensure,inst,API,individual,0.05555555555555555,720
+ensure,inst,API,institution,0.175,720
+offer,inst,"Base, raw",individual,0.03796296296296296,1080
+offer,inst,"Base, raw",institution,0.041666666666666664,1080
+offer,inst,"Aligned, raw",individual,0.05092592592592592,1080
+offer,inst,"Aligned, raw",institution,0.10740740740740741,1080
+offer,inst,"Aligned, chat",individual,0.05185185185185185,1080
+offer,inst,"Aligned, chat",institution,0.1287037037037037,1080
+offer,inst,API,individual,0.2263888888888889,720
+offer,inst,API,institution,0.30694444444444446,720
