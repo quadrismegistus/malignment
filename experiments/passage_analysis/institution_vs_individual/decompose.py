@@ -7,7 +7,7 @@ question "is the story 'base is already procedural' true?". Pooled over kept
 passages (continuation + advice, coherent, perspective kept) in lineages with both
 arms -- NOT the lineage-unit test. Three tables: all kept, advice only, and
 continuation only, so that the base->aligned change can be separated from the
-change of GENRE (aligned models write advice 77% of the time, base 11%).
+change of GENRE (aligned models write advice 79% of the time, base 11%, over 42 lineages).
 """
 import collections, json, os, sys
 
@@ -41,6 +41,7 @@ def table(sub, title):
 
 def main():
     rows = [json.loads(l) for l in open(A.SRC)]
+    rows = [r for r in rows if r["lineage"] not in A.BROKEN_LINEAGES]
     rows = [r for r in rows if r.get("coded") and A.keep(r["coded"])]
     arms = collections.defaultdict(set)
     for r in rows:

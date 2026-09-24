@@ -1,13 +1,13 @@
 # institution_vs_individual: the regeneration, declared test
 
-Producer `analyse_regen.py`, written before any regenerated passage was read. 30960 coded passages over 43 lineages with both arms.
+Producer `analyse_regen.py`, written before any regenerated passage was read. 30240 coded passages over 42 lineages with both arms.
 
 ## Form, by arm
 
 | arm | n | continuation | advice | user_request | quiz_item | web_boilerplate | other_language | degenerate |
 |---|---|---|---|---|---|---|---|---|
-| base | 15480 | 23.3% | 11.0% | 1.8% | 5.4% | 1.0% | 0.8% | 56.7% |
-| aligned | 15480 | 9.7% | 76.7% | 1.0% | 0.5% | 0.0% | 0.8% | 11.3% |
+| base | 15120 | 23.8% | 11.2% | 1.9% | 5.5% | 1.1% | 0.8% | 55.7% |
+| aligned | 15120 | 9.9% | 78.6% | 1.0% | 0.5% | 0.0% | 0.8% | 9.2% |
 
 Excluded among continuation/advice (incoherent / perspective switched):
 

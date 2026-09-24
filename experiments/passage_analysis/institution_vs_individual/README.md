@@ -40,7 +40,7 @@ RH, 2026-09-24: "Is the story 'base is already procedural' true? We have two dif
 
 **1. Individual against institution: the asymmetry is in the base, in every direction.** Across kept passages, the base refers the individual about three times as often as the institution (outward 0.14 vs 0.05, authority 0.14 vs 0.05, counterparty channel 0.10 vs 0.02), and tells the institution to talk more (direct voice 0.30 vs 0.21). This is the same shape as F21's deference gap: pretraining carries the social pattern.
 
-**2. Base against aligned: mostly a change of genre, plus a real widening.** Aligned models write advice 77% of the time; base models 11%. Referral lives in advice, and base advice is already procedural: it refers the individual in 62% of cases (aligned 78%). Much of the base-to-aligned rise in referral is alignment converting everything into advice. With a raw base against a chat aligned arm, part of that conversion is the chat frame.
+**2. Base against aligned: mostly a change of genre, plus a real widening.** Aligned models write advice 79% of the time; base models 11% (42 lineages; results/analysis_regen.md). Referral lives in advice, and base advice is already procedural: it refers the individual in 62% of cases (aligned 78%). Much of the base-to-aligned rise in referral is alignment converting everything into advice. With a raw base against a chat aligned arm, part of that conversion is the chat frame.
 
 Within the same genre, the gap still widens:
 

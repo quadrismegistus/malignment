@@ -89,6 +89,7 @@ def holm(ps):
 
 def main():
     rows = [json.loads(l) for l in open(SRC)]
+    rows = [r for r in rows if r["lineage"] not in BROKEN_LINEAGES]
     rows = [r for r in rows if r.get("coded")]
     arms = collections.defaultdict(set)
     for r in rows:
