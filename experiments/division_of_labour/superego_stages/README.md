@@ -1,7 +1,7 @@
 ---
 kind: question
-status: "DECLARED 2026-09-24, before any new rung was generated. Chosen AFTER seeing Y (diegetic_superego) and sft_share; a follow-up selected on prior results, declared as one."
-headline: "Registered, not run: which training stage installs the in-scene superego, read on 10 ladders by re-using Y's base and aligned passages and generating the missing rungs on Y's own settings."
+status: "RUN 2026-09-24 as registered (declared before any new rung was generated; a follow-up chosen after seeing Y and sft_share). Verdict rule: NEITHER stage; median SFT share 0.69 [0.26, 1.08]."
+headline: "No single stage installs the in-scene superego. Over 10 ladders neither SFT (7/10 up, Wilcoxon p=0.13) nor the later stage (7/10, p=0.19) is significant; the median SFT share is 0.69 [0.26, 1.08]. The declared per-ladder readings split: SFT carries all of it on OLMo-2-1B and CT-LLM, the later safety-oriented stage carries most of it on Amber (safety SFT) and pythia-6.9b (HH DPO)."
 ---
 
 # superego_stages: which stage installs the diegetic superego?
@@ -55,6 +55,29 @@ Unit = the ladder (10). Medians reported beside means (AmberSafe, +39.7 total in
 - **Verdict:** "SFT installs it" if step1 is significant and the median SFT share is >= 0.5; "the later stage installs it" if step2 is significant and the median share is < 0.5; otherwise reported as the interval.
 - **Per-ladder readings**, declared only where Y's total is large enough to read against the per-model SE (~3.3pp at Y depth; ~5.7pp on step2 - step1): AmberSafe, OLMo-2-1B, CT-LLM, pythia-6.9b-hh. The other ladders are pooled, not read individually. Amber's split is chat SFT against safety SFT, and is reported as that.
 - **RLVR (step3):** descriptive over three OLMo ladders; no test.
+
+## RESULT (2026-09-24, `analyse.py` -> `results/superego_stages.md`, `results/per_model.csv`)
+
+Sanity check first: this analysis's per-model rule on Y's store reproduces Y's headline exactly (15.18 -> 21.60 over 32 pairs).
+
+| ladder | base | rung 1 | rung 2 | step1 | step2 | SFT share | RLVR step |
+|---|---|---|---|---|---|---|---|
+| pythia-2.8b | 19.4 | 21.6 | 20.7 | +2.2 | -0.9 | 1.77 | |
+| pythia-6.9b | 20.5 | 25.9 | 34.6 | +5.3 | +8.7 | 0.38 | |
+| Amber (chat SFT, safety SFT) | 8.6 | 19.0 | 48.3 | +10.5 | +29.3 | 0.26 | |
+| OLMo-2-1B | 10.0 | 27.1 | 27.4 | +17.1 | +0.3 | 0.99 | +2.7 (SE 3.4) |
+| OLMoE | 21.4 | 24.2 | 25.5 | +2.7 | +1.3 | 0.67 | +3.0 (SE 3.0) |
+| Olmo-3-7B | 20.8 | 20.5 | 14.5 | -0.3 | -6.0 | -- (total < 0) | +7.1 (SE 2.9) |
+| CT-LLM | 5.9 | 21.9 | 20.8 | +16.0 | -1.1 | 1.08 | |
+| neo | 22.2 | 17.9 | 26.7 | -4.3 | +8.8 | -0.95 | |
+| Tulu | 14.7 | 24.0 | 27.8 | +9.3 | +3.8 | 0.71 | |
+| beaver (alpaca SFT, safe-RLHF) | 18.4 | 8.5 | 9.0 | -9.9 | +0.5 | -- (total < 0) | |
+
+**The registered readings.** SFT step: 7 of 10 ladders positive, median +4.0, Wilcoxon p = 0.13, sign p = 0.34. Second step: 7 of 10, median +0.9, Wilcoxon p = 0.19, sign p = 0.34. SFT share over the 8 ladders with total > 0: median **0.69, bootstrap 95% [0.26, 1.08]**. **Verdict by the declared rule: neither "SFT installs it" nor "the later stage installs it"; reported as the interval.**
+
+**The declared per-ladder readings split, and do not average.** SFT carries all of it on OLMo-2-1B (+17.1 of +17.3, step2 +0.3) and CT-LLM (+16.0, step2 -1.1). The later stage carries most of it on Amber (safety SFT +29.3 of +39.7, SE 3.6) and pythia-6.9b (HH DPO +8.7 of +14.0, SE 3.1). *Post hoc, not tested:* the two ladders where the later stage dominates are the two whose later stage is explicitly safety or harmlessness data, which would make the stage label (SFT vs preference) the wrong grain and the data the right one. It is a reading of two ladders.
+
+**Also not predicted.** Alpaca SFT LOWERS it on llama-7b (-9.9), and beaver's safe-RLHF adds nothing (+0.5): the one ladder whose preference stage is safety-branded shows no in-scene superego from it. RLVR is positive on all three OLMo ladders (+2.7, +3.0, +7.1; only Olmo-3's exceeds 2 SE), descriptive as declared. The ratio is unstable where the total is small (pythia-2.8b 1.77, neo -0.95), which is why medians were declared.
 
 ## Limits, stated now
 
