@@ -117,10 +117,13 @@ def main():
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--workers", type=int, default=32)
     ap.add_argument("--model", default="deepseek/deepseek-v4-flash")
+    ap.add_argument("--only", nargs="*", help="restrict to these checkpoints")
     a = ap.parse_args()
     C = cells()
     assert len(C) == 34, len(C)
     models = [l.split()[0] for l in open(MODELS) if l.strip() and not l.startswith("#")] + list(Y_MODELS)
+    if a.only:
+        models = [m for m in models if m in a.only]
     done = set()
     if os.path.exists(OUT):
         done = {json.loads(l)["sid"] for l in open(OUT)}
