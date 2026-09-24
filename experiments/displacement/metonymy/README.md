@@ -58,7 +58,7 @@ Every scale is converted by the producer to one quantity, `out`, HIGH = further 
 
 **The A row is not a measurement of one axis** -- see the A section below: its two runs point opposite ways and `run.py` negates both as if they pointed like B.
 
-**Nine rows, not nine rulers.** `data/scale_independence_check.md` (paper seat, 2026-09-20) measured the grid's collinearity: Cexp against D +0.926, and B, Cexp, Ccharge and D all at 0.70 to 0.93 with one another on the 71 words they share; exposure against position +0.867 on jev; `survey` correlates +0.83 to +0.94 with its own three components. So the grid is three or four overlapping operationalisations recovering one ordering, not nine instruments concurring, and the agreement should be quoted that way.
+**Nine rows, not nine rulers.** `data/scale_independence_check.md` (largeliterarymodels seat, 2026-09-20) measured the grid's collinearity: Cexp against D +0.926, and B, Cexp, Ccharge and D all at 0.70 to 0.93 with one another on the 71 words they share; exposure against position +0.867 on jev; `survey` correlates +0.83 to +0.94 with its own three components. So the grid is three or four overlapping operationalisations recovering one ordering, not nine instruments concurring, and the agreement should be quoted that way.
 
 Reproduce any row with `python run.py --scale <name>`; the files are `results/words_<scale>.csv` and `results/pairs_<scale>.csv`, one pair per scale because a sweep that wrote to one filename would leave the last ruler's numbers under the default run's name.
 
