@@ -1,0 +1,3 @@
+Qwen/Qwen3-8B experiments/passage_analysis/institution_vs_individual/prompts/chat_nothink.jsonl float16
+HuggingFaceTB/SmolLM3-3B experiments/passage_analysis/institution_vs_individual/prompts/chat_nothink.jsonl float16
+openbmb/MiniCPM5-1B experiments/passage_analysis/institution_vs_individual/prompts/chat_nothink.jsonl float16

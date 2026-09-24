@@ -35,6 +35,13 @@ RERUN_BASES = {"tiiuae/Falcon-H1-7B-Base", "tiiuae/Falcon-H1-1.5B-Base", "BAAI/A
 EXCLUDE = {"openGPT-X/Teuken-7B-base-v0.6"}
 
 
+#: THINKING OFF (thinking_off.md, 2026-09-24): these three aligned endpoints think by
+#: default under their template; their chat cells are read ONLY from passages generated
+#: with the vendor switch, and every other model only from passages with no switch.
+NO_THINK = {"Qwen/Qwen3-8B", "HuggingFaceTB/SmolLM3-3B", "openbmb/MiniCPM5-1B"}
+THINK_OFF = {"enable_thinking": False}
+
+
 def population():
     from malignment import roster
     from malignment.checkpoint import Checkpoint
@@ -56,6 +63,10 @@ def population():
                         continue
                     if v.get("frame") != FRAME[arm]:
                         skipped["wrong_frame_%s" % arm] += 1
+                        continue
+                    want = THINK_OFF if (arm == "aligned" and m in NO_THINK) else None
+                    if (v.get("template_kwargs") or None) != want:
+                        skipped["thinking_switch_%s" % arm] += 1
                         continue
                     key = (hit[0], v.get("seed"))
                     if key in seen:
