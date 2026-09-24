@@ -84,9 +84,9 @@ def pt(n):
     return n / PPU
 
 
-FS = pt(6.5)             # one size throughout, per the brief
+FS = pt(7.0)             # one size throughout; 7 pt so a reduction to CI's 4.33 in print width stays over the 6 pt floor (RH, 2026-09-24)
 PANEL_FS = pt(9.0)
-AXIS_FS = pt(6.0)
+AXIS_FS = pt(7.0)
 SWATCH = pt(5.0)
 
 BODY_SCALE = 0.85
@@ -356,7 +356,8 @@ def build():
     with open(svg_path, "w") as f:
         f.write("\n".join(o) + "\n")
     print("-> %s  (%.2f x %.2f in)" % (svg_path, PHYS_W, PHYS_H))
-    print("   label font: 6.5 pt, panel letter: 9.0 pt, axis: 6.0 pt")
+    #: WIRED: printed from the constants, not typed -- it said 6.5/6.0 after they moved
+    print("   label font: %.1f pt, axis: %.1f pt" % (FS * PPU, AXIS_FS * PPU))
 
     # Print label placements for audit
     print("\n  Base label placements:")
