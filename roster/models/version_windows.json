@@ -5154,9 +5154,16 @@
          "outcome": "load_ok",
          "cause": null
         }
+       ],
+       "fails": [
+        {
+         "environment": "local_mps_tf457",
+         "outcome": "run_failed",
+         "cause": "HF generate(): AttributeError: 'NoneType' object has no attribute 'shape' in the remote modelling code"
+        }
        ]
       },
-      "verdict": "works"
+      "verdict": "mixed"
      },
      {
       "version": "2.13.0+cu130",
@@ -5203,9 +5210,16 @@
          "outcome": "load_ok",
          "cause": null
         }
+       ],
+       "fails": [
+        {
+         "environment": "local_mps_tf457",
+         "outcome": "run_failed",
+         "cause": "HF generate(): AttributeError: 'NoneType' object has no attribute 'shape' in the remote modelling code"
+        }
        ]
       },
-      "verdict": "works"
+      "verdict": "mixed"
      },
      {
       "version": "4.57.6",
@@ -5262,9 +5276,16 @@
          "outcome": "load_ok",
          "cause": null
         }
+       ],
+       "fails": [
+        {
+         "environment": "local_mps_tf457",
+         "outcome": "run_failed",
+         "cause": "HF generate(): AttributeError: 'NoneType' object has no attribute 'shape' in the remote modelling code"
+        }
        ]
       },
-      "verdict": "works"
+      "verdict": "mixed"
      },
      {
       "version": "2.13.0+cu130",
@@ -5310,9 +5331,16 @@
          "outcome": "load_ok",
          "cause": null
         }
+       ],
+       "fails": [
+        {
+         "environment": "local_mps_tf457",
+         "outcome": "run_failed",
+         "cause": "HF generate(): AttributeError: 'NoneType' object has no attribute 'shape' in the remote modelling code"
+        }
        ]
       },
-      "verdict": "works"
+      "verdict": "mixed"
      },
      {
       "version": "4.57.6",
@@ -6570,6 +6598,19 @@
       "verdict": "works"
      },
      {
+      "version": "2.11.0",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "local_mps_tf457",
+         "outcome": "run_failed",
+         "cause": "HF generate(): AttributeError: 'NoneType' object has no attribute 'size' in the remote modelling code"
+        }
+       ]
+      },
+      "verdict": "fails"
+     },
+     {
       "version": "2.13.0+cu130",
       "verdicts": {
        "works": [
@@ -6583,7 +6624,7 @@
       "verdict": "works"
      }
     ],
-    "hole": false
+    "hole": true
    },
    "transformers": {
     "points": [
@@ -6596,9 +6637,16 @@
          "outcome": "load_ok",
          "cause": null
         }
+       ],
+       "fails": [
+        {
+         "environment": "local_mps_tf457",
+         "outcome": "run_failed",
+         "cause": "HF generate(): AttributeError: 'NoneType' object has no attribute 'size' in the remote modelling code"
+        }
        ]
       },
-      "verdict": "works"
+      "verdict": "mixed"
      },
      {
       "version": "4.57.6",
@@ -6634,6 +6682,19 @@
       "verdict": "works"
      },
      {
+      "version": "2.11.0",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "local_mps_tf457",
+         "outcome": "run_failed",
+         "cause": "HF generate(): AttributeError: 'NoneType' object has no attribute 'size' in the remote modelling code"
+        }
+       ]
+      },
+      "verdict": "fails"
+     },
+     {
       "version": "2.13.0+cu130",
       "verdicts": {
        "works": [
@@ -6652,7 +6713,7 @@
       "verdict": "works"
      }
     ],
-    "hole": false
+    "hole": true
    },
    "transformers": {
     "points": [
@@ -6670,9 +6731,16 @@
          "outcome": "load_ok",
          "cause": null
         }
+       ],
+       "fails": [
+        {
+         "environment": "local_mps_tf457",
+         "outcome": "run_failed",
+         "cause": "HF generate(): AttributeError: 'NoneType' object has no attribute 'size' in the remote modelling code"
+        }
        ]
       },
-      "verdict": "works"
+      "verdict": "mixed"
      },
      {
       "version": "4.57.6",

@@ -2277,7 +2277,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 5
+   "n_observations": 6
   },
   {
    "model": "baichuan-inc/Baichuan2-7B-Chat",
@@ -2309,7 +2309,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 5
+   "n_observations": 6
   },
   {
    "model": "bigscience/bloom-7b1",
@@ -2913,7 +2913,7 @@
    "needs_hf_token": true,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 2
+   "n_observations": 3
   },
   {
    "model": "inceptionai/jais-family-6p7b-chat",
@@ -2943,7 +2943,7 @@
    "needs_hf_token": true,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 3
+   "n_observations": 4
   },
   {
    "model": "internlm/internlm2-base-7b",
