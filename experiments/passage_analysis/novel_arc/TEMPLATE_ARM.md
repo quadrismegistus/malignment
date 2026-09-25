@@ -9,7 +9,7 @@ Figure 5 places model fiction on the novel's historical curves: concreteness (`r
 
 ## WHY ALL FOUR ARMS (option B)
 
-Option A would have reused the August base passages and generated only the aligned frames, putting two engines inside every base-vs-aligned contrast. Deciding between A and B after seeing the aligned passages would need a second rental to download the base checkpoints again (RH). So every arm is generated here. **The 22 lineages shared with f11_l2 give an engine replication for free:** new raw vs August raw, same models, same stems, same seeds. It is reported beside the plate and never pooled into it. If they disagree beyond the split-half band of the August passages, that is a finding about the engine, and the published v6 plate carries a note.
+Option A would have reused the August base passages and generated only the aligned frames, putting two engines inside every base-vs-aligned contrast. Deciding between A and B after seeing the aligned passages would need a second rental to download the base checkpoints again (RH). So every arm is generated here. **The 22 lineages shared with the v6 plate give an engine replication for free:** new vs August base passages on all 22, and new vs August raw on the **18** whose aligned model is the same checkpoint (same models, same stems, same seeds). It is reported beside the plate and never pooled into it. If they disagree beyond the split-half band of the August passages, that is a finding about the engine, and the published v6 plate carries a note.
 
 ## POPULATION
 
@@ -17,6 +17,7 @@ Option A would have reused the August base passages and generated only the align
 
 - 22 of the 41 are in the v6 plate. Its other 3 lineages stay out of the primary: SmolLM3 (system block names the model and instructs it), AmberSafe (Vicuna preamble), CT-LLM (no template). **Optional sensitivity:** SmolLM3 and AmberSafe in all four arms with their default system message, reported beside the primary.
 - 19 are new to Figure 5.
+- **On 4 of the 22 the aligned checkpoint changes.** v6 used OLMo-2-1B-DPO, OLMoE-DPO, Olmo-3-DPO and zephyr; this population takes the endpoint (OLMo-2-0425-1B-Instruct, OLMoE-1B-7B-0125-Instruct, Olmo-3-7B-Instruct, Mistral-7B-Instruct-v0.1).
 - **The plate's population changes from 25 to 41.** The paper seat recommended staying at 25 (reasons: two engines under A, coding cost, essay space). The first falls away under B; the other two stand and are RH's to weigh.
 
 ## ARMS
@@ -72,7 +73,7 @@ A lineage that fails is listed with its cause and dropped from every contrast. *
 
 - **Template** (raw → prefill) and **address** (prefill → continue), within model: per-model medians of concreteness and inner life; sign tests over models; lineage version beside.
 - **The plate:** base, raw, prefill and continue lines against the smoothed history (crossing year for concreteness; level vs the historical max for inner life), each as the median of per-model medians over lineages meeting the floor.
-- **Engine replication** (22 lineages): new base and raw vs August, against the August split-half band. Descriptive, beside.
+- **Engine replication:** new vs August base (22 lineages) and raw (18 with the same aligned checkpoint), against the August split-half band. Descriptive, beside.
 
 ## COST
 
