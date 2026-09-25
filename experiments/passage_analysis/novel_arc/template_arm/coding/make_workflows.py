@@ -43,6 +43,11 @@ def main():
              "{ label: `ta%d:b${bi}`, phase: 'Code', schema: SCHEMA, effort: 'high', model: 'claude-opus-5' }" % k),
             ("log(`shard 0:", "log(`ta chunk %d:" % k), ("log(`shard 0 done:", "log(`ta chunk %d done:" % k),
             ("_shard: 0,", "_shard: 'ta%d'," % k),
+            #: passC's return carries every id twice (_missing_B is all of them with one
+            #: coder) and fails the workflow boundary's 4,096-element cap after every agent
+            #: has finished; the codings are read from the journal (harvest.py). Counts only.
+            ("_missing_A: missA, _missing_B: missB, A: out.A, B: out.B }",
+             "_n_missing_A: missA.length, _n_coded_A: Object.keys(out.A).length }"),
         ]
         for a, b in rep:
             assert s.count(a) == 1, (k, a[:50], s.count(a))

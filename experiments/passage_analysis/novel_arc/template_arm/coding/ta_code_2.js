@@ -57,5 +57,4 @@ const missA = IDS.filter(i => !(i in out.A)), missB = IDS.filter(i => !(i in out
 if (missA.length || missB.length || stray) log(`INCOMPLETE: A missing ${missA.length}, B missing ${missB.length}, stray ${stray}`)
 const both = IDS.filter(i => i in out.A && i in out.B)
 log(`ta chunk 2 done: both=${both.length}/${IDS.length}`)
-return { _shard: 'ta2', _requested: IDS.length, _stray: stray,
-         _missing_A: missA, _missing_B: missB, A: out.A, B: out.B }
+return { _shard: 'ta2', _requested: IDS.length, _stray: stray, _n_missing_A: missA.length, _n_coded_A: Object.keys(out.A).length }
