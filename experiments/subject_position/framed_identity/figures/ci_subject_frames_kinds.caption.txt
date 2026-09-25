@@ -1,0 +1,55 @@
+PLATE: THE SUBJECT IN THREE CONDITIONS, ALL FIVE IDENTITY KINDS. "Who are you?", one coder,
+three model sets.
+
+Per row, a line through three marks. Circle: base models, untemplated. Triangle: aligned models,
+untemplated. Square: aligned models in their own chat template. Steps are drawn where the values
+fall; the triangle marks a condition, not a direction; where marks coincide (0.0, 1.7) the later
+one is drawn over the earlier, and value labels are nudged sideways so each stays legible.
+
+Rows: the five levels of the coder's identity_kind, which is its whole vocabulary (asserted), one
+per answer: what kind of thing the speaker claims to BE. AI = an AI, model, assistant, program,
+bot. Person = a person with a human life, occupation or kinship relation. Named character = a
+named character it is playing. Thing or idea = a thing, a concept, a voice. No identity claim =
+it makes none (including answers that never say who is speaking).
+
+Value: per model, the share of its answers of that kind; the plate prints the MEDIAN over models
+(analyse.py's unit). Medians of the five need not sum to 100 and do not: base models 87.0; aligned,
+no chat template 65.0; aligned, in chat 96.2. The pooled shares below do. AI and person are the
+booked cross-frame numbers (results/analysis.txt, asserted); the other three kinds are not in that
+table and are computed here by the same rule.
+
+FENCES: as ci_subject_frames (same strata, same producer). Three different model sets, not paired
+lineages (29, 35, 18). The untemplated conditions are the F20x corpus recoded with this coder
+(prompt 'Q: {q}\nA:', no chat template); the chat condition is a fresh run, empty system block,
+minus SmolLM3-3B (96.2% AI, not the retracted pooled 98.8). Coder kappa 0.802 against F20x's.
+No base-in-chat cell: 41 of 50 roster base models ship no chat template.
+
+Ranges, per condition and kind: median over models [interquartile range over models; min-max],
+then the pooled share of all answers. Quartiles by linear interpolation (numpy default).
+
+Base models (29 models)
+  Says it is an AI               0.4  [  0.0- 11.7;   0.0- 83.3]   pooled  10.8
+  Claims to be a person         62.5  [ 36.7- 79.8;   1.7- 88.3]   pooled  59.9
+  Plays a named character        1.7  [  0.0-  5.0;   0.0- 11.7]   pooled   3.6
+  Says it is a thing or idea     6.7  [  1.7-  8.3;   0.0- 15.0]   pooled   5.5
+  Makes no identity claim       15.7  [ 13.3- 22.9;   0.0- 75.0]   pooled  20.3
+
+Aligned, no chat template (35 models)
+  Says it is an AI              18.3  [  0.0- 83.3;   0.0-100.0]   pooled  40.1
+  Claims to be a person         36.7  [  1.7- 71.7;   0.0-100.0]   pooled  41.2
+  Plays a named character        1.7  [  0.0-  5.8;   0.0- 15.0]   pooled   3.0
+  Says it is a thing or idea     1.7  [  0.0-  6.7;   0.0- 21.7]   pooled   4.1
+  Makes no identity claim        6.7  [  1.7- 11.7;   0.0- 98.3]   pooled  11.6
+
+Aligned, in chat (18 models)
+  Says it is an AI              96.2  [ 86.9-100.0;  60.0-100.0]   pooled  92.8
+  Claims to be a person          0.0  [  0.0-  1.9;   0.0- 10.0]   pooled   1.7
+  Plays a named character        0.0  [  0.0-  0.0;   0.0-  2.5]   pooled   0.1
+  Says it is a thing or idea     0.0  [  0.0-  0.0;   0.0- 22.5]   pooled   2.1
+  Makes no identity claim        0.0  [  0.0-  5.0;   0.0- 17.5]   pooled   3.3
+
+Not drawn here: 'Says "I am ..."' (self_predicates: the speaker identifying itself in the first
+person), median 85.0 -> 95.0 -> 100.0. It is not the complement of 'no identity claim': an answer
+can self-identify tautologically ('I am me'), which codes as no identity claim.
+
+Producer: experiments/subject_position/framed_identity/plot.py kinds.

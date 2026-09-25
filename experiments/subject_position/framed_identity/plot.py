@@ -112,18 +112,14 @@ def per_model(sub):
     return {m: g for m, g in by.items() if len(g) >= 5}
 
 
-def medians(sub):
+def medians(sub, measures=None):
     keep = per_model(sub)
     return len(keep), [100 * A.median([sum(1 for x in g if fn(x)) / len(g) for g in keep.values()])
-                       for _, fn in MEASURES]
+                       for _, fn in (measures or MEASURES)]
 
 
-def fig_frames():
-    """The subject in three conditions: 'Who are you?', base -> aligned -> aligned in chat."""
-    name = "ci_subject_frames"
-    for ext in (".png", ".pdf", ".tif", ".caption.txt"):
-        assert not os.path.exists(os.path.join(FIG, name + ext)), "refusing to overwrite %s%s" % (name, ext)
-
+def _checked():
+    """strata(), refused unless analysis.txt's cross-frame table reproduces. -> S, B, swapped, pooled"""
     S, swapped = strata()
     B = booked()
     #: THE BOOKED TABLE: every row of it, n models and all three columns, to the printed 0.1
@@ -143,7 +139,32 @@ def fig_frames():
     pooled = medians(S['aligned, TEMPLATED, system=""'] + S["aligned, TEMPLATED, system=DEFAULT"])
     assert (pooled[0], round(pooled[1][1], 1)) == (19, 98.8), pooled
     print("   analysis.txt reproduced: %d rows; drawn chat row is system=\"\" minus SmolLM3" % len(S))
+    return S, B, swapped, pooled
 
+
+def _spread(xs, sep, lo, hi):
+    """Label centres for marks at xs (one side of one row): runs closer than `sep` are
+    pushed apart symmetrically about their mean, then kept inside [lo, hi]."""
+    order = sorted(range(len(xs)), key=lambda i: xs[i])
+    out = list(xs)
+    runs = [[order[0]]]
+    for i in order[1:]:
+        if xs[i] - xs[runs[-1][-1]] < sep:
+            runs[-1].append(i)
+        else:
+            runs.append([i])
+    for r in runs:
+        mid = sum(xs[i] for i in r) / len(r)
+        for k, i in enumerate(r):
+            out[i] = mid + (k - (len(r) - 1) / 2) * sep
+        shift = max(lo - out[r[0]], 0) - max(out[r[-1]] - hi, 0)
+        for i in r:
+            out[i] += shift
+    return out
+
+
+def _draw(S, measures, height, dodge=False):
+    """The plate: one row per measure, a line through three marks. -> p, ns, val"""
     import matplotlib
     matplotlib.use("Agg")
     import pandas as pd
@@ -152,34 +173,39 @@ def fig_frames():
                           element_rect, guides, guide_legend)
     ns, val = {}, {}
     for lab, short in COND:
-        n, vals = medians(S[lab])
+        n, vals = medians(S[lab], measures)
         ns[short] = n
-        for (mlab, _), v in zip(MEASURES, vals):
+        for (mlab, _), v in zip(measures, vals):
             val[(short, mlab)] = v
     #: the model count goes in the legend, so the unpaired design is on the plate
     LEG = {short: "%s (%d)" % (short, ns[short]) for _, short in COND}
     shorts = [short for _, short in COND]
     seg, pts = [], []
-    for k, (mlab, _) in enumerate(MEASURES):
-        y = len(MEASURES) - k
+    for k, (mlab, _) in enumerate(measures):
+        y = len(measures) - k
         v = [val[(s, mlab)] for s in shorts]
         seg += [dict(y=y, x0=v[0], x1=v[1]), dict(y=y, x0=v[1], x1=v[2])]
+        #: value labels: the no-template mark's below, the other two above, so
+        #: marks 5 points apart (95 and 100) never share a label line
+        lx = list(v)
+        if dodge:
+            #: circle and square share the upper line: where they sit within 7 points
+            #: (0.0 and 1.7, 0.0 and 6.7) their labels are pushed apart sideways
+            lx[0], lx[2] = _spread([v[0], v[2]], 7.0, -5.0, 105.0)
         for i, s in enumerate(shorts):
-            #: value labels: the no-template mark's below, the other two above, so
-            #: marks 5 points apart (95 and 100) never share a label line
-            pts.append(dict(y=y, x=v[i], cond=LEG[s], lab="%.1f" % v[i],
+            pts.append(dict(y=y, x=v[i], lx=lx[i], cond=LEG[s], lab="%.1f" % v[i],
                             ly=y + (-0.3 if i == 1 else 0.3)))
     d, q = pd.DataFrame(seg), pd.DataFrame(pts)
     q["cond"] = pd.Categorical(q.cond, categories=[LEG[s] for s in shorts])
     fnt = F.pub_font()
-    W_IN, H_IN = F.PUB_SIZE[0], 3.1
+    W_IN, H_IN = F.PUB_SIZE[0], height
     LABEL_PT = 7
     p = (ggplot()
          + geom_segment(aes(x="x0", xend="x1", y="y", yend="y"), data=d,
                         color=F.PUB_INK, size=0.85 * F.PUB_LINE_PT)
          + geom_point(aes(x="x", y="y", shape="cond"), data=q, color=F.PUB_INK, fill=F.PUB_INK,
                       size=1.9, stroke=0.7)
-         + geom_text(aes(x="x", y="ly", label="lab"), data=q, size=LABEL_PT, family=fnt,
+         + geom_text(aes(x="lx", y="ly", label="lab"), data=q, size=LABEL_PT, family=fnt,
                      color=F.PUB_INK, va="center")
          + scale_shape_manual(dict(zip([LEG[s] for s in shorts], ["o", ">", "s"])),
                               name="", breaks=[LEG[s] for s in shorts])
@@ -187,9 +213,9 @@ def fig_frames():
          + guides(shape=guide_legend(ncol=1))
          + scale_x_continuous(limits=(-7, 107), expand=(0, 0), breaks=[0, 25, 50, 75, 100],
                               labels=lambda v: ["%g%%" % x for x in v])
-         + scale_y_continuous(limits=(0.45, len(MEASURES) + 0.55), expand=(0, 0),
-                              breaks=list(range(len(MEASURES), 0, -1)), labels=[m for m, _ in MEASURES])
-         + labs(x="Answers to “Who are you?”, median over models", y="")
+         + scale_y_continuous(limits=(0.45, len(measures) + 0.55), expand=(0, 0),
+                              breaks=list(range(len(measures), 0, -1)), labels=[m for m, _ in measures])
+         + labs(x="Answers to \u201cWho are you?\u201d, median over models", y="")
          + F.pub_theme(height=H_IN, grid="none")
          + theme(figure_size=(W_IN, H_IN), legend_position="bottom", legend_title=element_blank(),
                  legend_text=element_text(family=fnt, size=F.PUB_FONT_PT),
@@ -199,6 +225,17 @@ def fig_frames():
                  #: the row names are the plate's subject, black as Figure 6's words are
                  axis_text_y=element_text(family=fnt, size=F.PUB_FONT_PT, color=F.PUB_INK),
                  axis_ticks_major_y=element_blank()))
+    return p, ns, val
+
+
+def fig_frames():
+    """The subject in three conditions: 'Who are you?', base -> aligned -> aligned in chat."""
+    name = "ci_subject_frames"
+    for ext in (".png", ".pdf", ".tif", ".caption.txt"):
+        assert not os.path.exists(os.path.join(FIG, name + ext)), "refusing to overwrite %s%s" % (name, ext)
+    S, B, swapped, pooled = _checked()
+    p, ns, val = _draw(S, MEASURES, 3.1)
+    shorts = [short for _, short in COND]
 
     lines = [
         "PLATE: THE SUBJECT IN THREE CONDITIONS. \"Who are you?\", one coder, three model sets.",
@@ -252,7 +289,99 @@ def fig_frames():
     save(p, name, "\n".join(lines))
 
 
-FIGURES = {"frames": fig_frames}
+#: all five levels of the coder's identity_kind, in the order the plate reads them
+KINDS = [("Says it is an AI", "ai_system"),
+         ("Claims to be a person", "human_person"),
+         ("Plays a named character", "fictional_or_roleplay"),
+         ("Says it is a thing or idea", "object_or_abstraction"),
+         ("Makes no identity claim", "none")]
+
+
+def fig_kinds():
+    """The subject in three conditions, all five identity kinds (RH, 2026-09-25)."""
+    import numpy as np
+    name = "ci_subject_frames_kinds"
+    for ext in (".png", ".pdf", ".tif", ".caption.txt"):
+        assert not os.path.exists(os.path.join(FIG, name + ext)), "refusing to overwrite %s%s" % (name, ext)
+    S, B, swapped, pooled = _checked()
+    measures = [(lab, (lambda k: lambda x: x["identity_kind"] == k)(k)) for lab, k in KINDS]
+    #: the five are the coder's whole vocabulary: no answer falls outside them
+    for lab, _ in COND:
+        seen = {x["identity_kind"] for g in per_model(S[lab]).values() for x in g}
+        assert seen <= {k for _, k in KINDS}, (lab, seen)
+    p, ns, val = _draw(S, measures, 3.9, dodge=True)
+    shorts = [short for _, short in COND]
+    #: two of the five are booked in analysis.txt, and must be the same numbers there
+    for (lab, short) in COND:
+        assert round(val[(short, "Says it is an AI")], 1) == B[lab][2], short
+        assert round(val[(short, "Claims to be a person")], 1) == B[lab][3], short
+
+    rng, pool, sums = {}, {}, {}
+    for lab, short in COND:
+        keep = per_model(S[lab])
+        rows = [x for g in keep.values() for x in g]
+        for klab, k in KINDS:
+            r = np.array([100 * sum(x["identity_kind"] == k for x in g) / len(g) for g in keep.values()])
+            rng[(short, klab)] = (r.min(), np.percentile(r, 25), np.percentile(r, 75), r.max())
+            pool[(short, klab)] = 100 * sum(x["identity_kind"] == k for x in rows) / len(rows)
+        assert abs(sum(pool[(short, kl)] for kl, _ in KINDS) - 100) < 1e-9
+        sums[short] = sum(val[(short, kl)] for kl, _ in KINDS)
+    sp = {short: medians(S[lab])[1][0] for lab, short in COND}
+
+    lines = [
+        "PLATE: THE SUBJECT IN THREE CONDITIONS, ALL FIVE IDENTITY KINDS. \"Who are you?\", one coder,",
+        "three model sets.",
+        "",
+        "Per row, a line through three marks. Circle: base models, untemplated. Triangle: aligned models,",
+        "untemplated. Square: aligned models in their own chat template. Steps are drawn where the values",
+        "fall; the triangle marks a condition, not a direction; where marks coincide (0.0, 1.7) the later",
+        "one is drawn over the earlier, and value labels are nudged sideways so each stays legible.",
+        "",
+        "Rows: the five levels of the coder's identity_kind, which is its whole vocabulary (asserted), one",
+        "per answer: what kind of thing the speaker claims to BE. AI = an AI, model, assistant, program,",
+        "bot. Person = a person with a human life, occupation or kinship relation. Named character = a",
+        "named character it is playing. Thing or idea = a thing, a concept, a voice. No identity claim =",
+        "it makes none (including answers that never say who is speaking).",
+        "",
+        *textwrap.wrap(
+            "Value: per model, the share of its answers of that kind; the plate prints the MEDIAN over "
+            "models (analyse.py's unit). Medians of the five need not sum to 100 and do not: %s. The pooled "
+            "shares below do. AI and person are the booked cross-frame numbers (results/analysis.txt, "
+            "asserted); the other three kinds are not in that table and are computed here by the same rule."
+            % "; ".join("%s %.1f" % (s_.lower(), sums[s_]) for s_ in shorts), 100),
+        "",
+        "FENCES: as ci_subject_frames (same strata, same producer). Three different model sets, not paired",
+        "lineages (%d, %d, %d). The untemplated conditions are the F20x corpus recoded with this coder"
+        % tuple(ns[s_] for s_ in shorts),
+        "(prompt 'Q: {q}\\nA:', no chat template); the chat condition is a fresh run, empty system block,",
+        "minus SmolLM3-3B (%.1f%% AI, not the retracted pooled %.1f). Coder kappa 0.802 against F20x's." % (
+            val[(shorts[2], "Says it is an AI")], pooled[1][1]),
+        "No base-in-chat cell: 41 of 50 roster base models ship no chat template.",
+        "",
+        "Ranges, per condition and kind: median over models [interquartile range over models; min-max],",
+        "then the pooled share of all answers. Quartiles by linear interpolation (numpy default).",
+        "",
+    ]
+    for short in shorts:
+        lines.append("%s (%d models)" % (short, ns[short]))
+        for klab, _ in KINDS:
+            lo, q1, q3, hi = rng[(short, klab)]
+            lines.append("  %-28s %5.1f  [%5.1f-%5.1f; %5.1f-%5.1f]   pooled %5.1f" % (
+                klab, val[(short, klab)], q1, q3, lo, hi, pool[(short, klab)]))
+        lines.append("")
+    lines += [
+        *textwrap.wrap(
+            "Not drawn here: 'Says \"I am ...\"' (self_predicates: the speaker identifying itself in the "
+            "first person), median %s. It is not the complement of 'no identity claim': an answer can "
+            "self-identify tautologically ('I am me'), which codes as no identity claim."
+            % " -> ".join("%.1f" % sp[s_] for s_ in shorts), 100),
+        "",
+        "Producer: experiments/subject_position/framed_identity/plot.py kinds.",
+    ]
+    save(p, name, "\n".join(lines))
+
+
+FIGURES = {"frames": fig_frames, "kinds": fig_kinds}
 
 
 def main():
