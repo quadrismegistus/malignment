@@ -40,6 +40,17 @@ Plain vs orthogonalized (concreteness direction projected out per model run) VAD
 | VAD-Dominance.Warriner.median | +0.168 | up +0.188, 28/32 (p 0.000) | up +0.128, 17/23 (p 0.035) | up +0.155, 17/20 (p 0.003) |
 | VAD-Dominance.Warriner_orth.median | +0.175 | up +0.191, 29/32 (p 0.000) | up +0.135, 18/23 (p 0.011) | up +0.163, 17/20 (p 0.003) |
 
+Within-condition partial on concreteness (slope from lineage variation within each condition):
+
+| column | rho with concreteness (meta-texts) | within-condition slope | base -> aligned, raw, adjusted | base -> aligned, chat, prefilled, adjusted | base -> aligned, chat, asked, adjusted |
+|---|---|---|---|---|---|
+| VAD-Valence.Warriner.median | -0.41 | -0.127 | up +0.111, 26/32 (p 0.001) | up +0.105, 18/23 (p 0.011) | up +0.049, 14/20 (p 0.115) |
+| VAD-Valence.Warriner_orth.median | -0.64 | -0.441 | up +0.122, 26/32 (p 0.001) | up +0.123, 18/23 (p 0.011) | up +0.058, 14/20 (p 0.115) |
+| VAD-Arousal.Warriner.median | -0.74 | -0.473 | down -0.003, 19/32 (p 0.377) | up +0.039, 10/23 (p 0.678) | up +0.051, 10/20 (p 1.000) |
+| VAD-Arousal.Warriner_orth.median | +0.31 | +0.176 | down -0.005, 19/32 (p 0.377) | up +0.048, 10/23 (p 0.678) | up +0.060, 11/20 (p 0.824) |
+| VAD-Dominance.Warriner.median | -0.67 | -0.493 | up +0.076, 21/32 (p 0.110) | up +0.030, 14/23 (p 0.405) | down -0.020, 7/20 (p 0.263) |
+| VAD-Dominance.Warriner_orth.median | -0.68 | -0.513 | up +0.073, 21/32 (p 0.110) | up +0.028, 13/23 (p 0.678) | down -0.021, 7/20 (p 0.263) |
+
 ## By stem (TEMPLATE_ARM, 100 stems; each stem-arm = its continuations over all 30 lineages as one text)
 
 | measure | stems' own median | base: median over stems (share of stems above / below every decade) | aligned, raw: median over stems (share of stems above / below every decade) | aligned, chat, prefilled: median over stems (share of stems above / below every decade) | aligned, chat, asked: median over stems (share of stems above / below every decade) |

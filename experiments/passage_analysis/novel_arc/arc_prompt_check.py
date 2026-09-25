@@ -180,6 +180,32 @@ def national():
                 cells.append("%s %+.3f, %d/%d (p %.3f)" % ("up" if sgn > 0 else "down", R[R.cond == cd][c].median() - R[R.cond == "base"][c].median(),
                                                          n_ok, len(d), binomtest(n_ok, len(d)).pvalue))
             L.append("| %s | %+.3f | %s |" % (c, R[R.cond == "base"][c].median(), " | ".join(cells)))
+    #: RH: "do the within-condition partial for all 6 of these vectors". Slope of each VAD column on concreteness
+    #: fitted WITHIN CONDITION (both demeaned by condition over the model-condition meta-texts, so the slope comes
+    #: from lineage-to-lineage variation, not from the base -> aligned shift it adjusts for), subtracted from the
+    #: raw values; then the same lineage test. Direction is that of the ADJUSTED medians' difference.
+    from scipy.stats import spearmanr
+    Cc = COLS["conc"]
+    Q = R[R.cond.isin(conds)].dropna(subset=[Cc])
+    L += ["", "Within-condition partial on concreteness (slope from lineage variation within each condition):", "",
+          "| column | rho with concreteness (meta-texts) | within-condition slope | " +
+          " | ".join("base -> %s, adjusted" % lab[c] for c in conds[1:]) + " |", "|---|---|---|" + "---|" * (len(conds) - 1)]
+    for d_ in ("Valence", "Arousal", "Dominance"):
+        for o in ("", "_orth"):
+            c = "VAD-%s.Warriner%s.median" % (d_, o)
+            q = Q.dropna(subset=[c])
+            yd = q[c] - q.groupby("cond")[c].transform("mean")
+            xd = q[Cc] - q.groupby("cond")[Cc].transform("mean")
+            b = float(np.polyfit(xd, yd, 1)[0])
+            q = q.assign(adj=q[c] - b * q[Cc])
+            piv = q.pivot_table(index="lineage", columns="cond", values="adj")
+            cells = []
+            for cd in conds[1:]:
+                d = piv[["base", cd]].dropna()
+                diff = q[q.cond == cd].adj.median() - q[q.cond == "base"].adj.median()
+                n_ok = int((np.sign(d[cd] - d["base"]) == np.sign(diff)).sum())
+                cells.append("%s %+.3f, %d/%d (p %.3f)" % ("up" if diff > 0 else "down", diff, n_ok, len(d), binomtest(n_ok, len(d)).pvalue))
+            L.append("| %s | %+.2f | %+.3f | %s |" % (c, spearmanr(q[c], q[Cc])[0], b, " | ".join(cells)))
     return L
 
 
