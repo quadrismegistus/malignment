@@ -2,6 +2,7 @@
 
     .venv/bin/python -u arc_interiority_precision.py --count    -> $MALIGNMENT_DATA/novel_arc/arc_interiority_texts_precision.parquet
     .venv/bin/python -u arc_interiority_precision.py --report   -> ARC_INTERIORITY_PRECISION.md, figures/arc_interiority_precision_decades.*
+    add --vetted to either: lists from interiority_vetting.py's conservative hand vetting; outputs suffixed _vetted
 
 BEFORE is arc_interiority.py: clean X (1,526) and the period candidates (2,161) with every MorphAdorner
 variant and long-s reading added mechanically. The candidates' tokens were dominated by would, like, say,
@@ -24,12 +25,16 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 import arc_interiority as A                                   # noqa: E402
 
-KEEP_CSV = os.path.join(A.SHARED, "precision_keep_v2.csv")
-OUT = os.path.join(A.DATA, "arc_interiority_texts_precision.parquet")
+VETTED = "--vetted" in sys.argv
+SUF = "_vetted" if VETTED else ""
+KEEP_CSV = os.path.join(A.SHARED, "precision_keep_v2%s.csv" % SUF)
+KEEP_COL = "keep_vetted" if VETTED else "keep"
+OUT = os.path.join(A.DATA, "arc_interiority_texts_precision%s.parquet" % SUF)
+AFTER = "vetted" if VETTED else "precision"
 NEW = ("cleanx_p", "cand_p", "comb_p")
-LABEL = {"cleanx": "Clean X, before", "cleanx_p": "Clean X, precision",
-         "comb": "Clean X + candidates, before", "comb_p": "Clean X + candidates, precision",
-         "cand": "Candidates, before", "cand_p": "Candidates, precision"}
+LABEL = {"cleanx": "Clean X, before", "cleanx_p": "Clean X, " + AFTER,
+         "comb": "Clean X + candidates, before", "comb_p": "Clean X + candidates, " + AFTER,
+         "cand": "Candidates, before", "cand_p": "Candidates, " + AFTER}
 MODERN_ZIPF = 3.0
 
 
@@ -39,10 +44,10 @@ def lists_precision():
     K = pd.read_csv(KEEP_CSV)
     assert len(K) == 15099, len(K)       # 15,101 rated forms less bright and would, rated only as anchors
     base = K[K.spelling_of.isna()]
-    kept = {s: set(base[(base.source == s) & base.keep].form) for s in ("cleanx", "cand")}
+    kept = {s: set(base[(base.source == s) & base[KEEP_COL]].form) for s in ("cleanx", "cand")}
     assert not (kept["cleanx"] | kept["cand"]) & A_RH_REMOVED(), "an RH removal survived consensus"
     info, ex = {}, {}
-    var = K[K.spelling_of.notna() & K.keep]
+    var = K[K.spelling_of.notna() & K[KEEP_COL]]
     modern = {v for v in var.form if zipf_frequency(v, "en") >= MODERN_ZIPF}
     _, sw, _ = A.lists_expanded()
     for s in ("cleanx", "cand"):
@@ -132,7 +137,7 @@ def report():
          + labs(x="", y="Decade median, % of content tokens", color="", linetype="")
          + F.pub_theme(height=6.0) + theme(legend_position="bottom", figure_size=(F.PUB_SIZE[0], 6.0),
                                            strip_text=element_text(family=F.pub_font(), size=F.PUB_FONT_PT)))
-    fig = os.path.join(HERE, "figures", "arc_interiority_precision_decades")
+    fig = os.path.join(HERE, "figures", "arc_interiority_precision_decades" + SUF)
     for ext in (".png", ".pdf"):
         assert not os.path.exists(fig + ext), "refusing to overwrite " + fig + ext
     F.save(p, fig + ".png")
@@ -148,14 +153,14 @@ def report():
           GROUP BY word ORDER BY n DESC
           FORMAT TSVWithNames"""
         T = pd.read_csv(io.StringIO(A.ch_query(sql, {"cw": ("word String", [(w,) for w in sorted(ex[k])])})), sep="\t")
-        T.to_csv(os.path.join(A.SHARED, "arc_token_mass_%s.csv" % k), index=False)
+        T.to_csv(os.path.join(A.SHARED, "arc_token_mass_%s%s.csv" % (k, SUF)), index=False)
         mass[k] = T
-    L = ["# Interiority curves over arc_fiction, before and after the precision re-rating (EXPLORATORY)", "",
+    L = ["# Interiority curves over arc_fiction, before and after the %s lists (EXPLORATORY)" % AFTER, "",
          "Producer `arc_interiority_precision.py`. Same %d arc_fiction reps, denominator, floors (at least %d content "
          "tokens, %d texts per decade and source group) as ARC_INTERIORITY.md; %d texts enter. BEFORE numerators from "
          "arc_interiority's parquet; AFTER lists from %s (see the docstring for the rule). Plate: "
-         "figures/arc_interiority_precision_decades.png (levels, not indexed)." % (
-             82080, A.MIN_CONTENT, A.MIN_TEXTS, len(D), os.path.basename(KEEP_CSV)), "",
+         "figures/arc_interiority_precision_decades%s.png (levels, not indexed)." % (
+             82080, A.MIN_CONTENT, A.MIN_TEXTS, len(D), os.path.basename(KEEP_CSV) + (" (keep_vetted)" if VETTED else ""), SUF), "",
          "## Lists", ""]
     for k, v in info.items():
         L.append("- %s: %s" % (LABEL.get(k, k), ", ".join("%s %s" % (a, b if not isinstance(b, list) else
@@ -179,7 +184,7 @@ def report():
         L.append("- %s: top 10 %.0f%%, top 25 %.0f%% of %d forms with any tokens. Top 25: %s" % (
             LABEL[k], 100 * cum.iloc[9], 100 * cum.iloc[24], len(T),
             ", ".join("%s %.1f%%" % (w, 100 * n / T.n.sum()) for w, n in zip(T.word.head(25), T.n.head(25)))))
-    open(os.path.join(HERE, "ARC_INTERIORITY_PRECISION.md"), "w").write("\n".join(L) + "\n")
+    open(os.path.join(HERE, "ARC_INTERIORITY_PRECISION%s.md" % SUF.upper()), "w").write("\n".join(L) + "\n")
     print("\n".join(L))
 
 
