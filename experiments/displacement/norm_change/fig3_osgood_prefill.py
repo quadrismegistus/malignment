@@ -1,0 +1,336 @@
+"""Figure 3z with the prefilled aligned arm beside it. -> figures/fig3_norms_osgood_en_z_prefill.{png,pdf,caption.txt}
+
+    python -u fig3_osgood_prefill.py --build   -> results/norms_levels_z_en_prefill30.json  (reads the long tables)
+    python -u fig3_osgood_prefill.py           -> the plate, from that JSON only
+
+RH, 2026-09-25: the published z plate (`fig3_osgood.py --z`, base -> aligned
+RAW, 50 endpoint lineages) with OPEN equivalents of its three markers for base
+-> aligned PREFILLED, on the SAME ruler.
+
+## THE STATISTIC IS THE PUBLISHED ONE, IMPORTED
+
+`norms_levels_z.build` does the work, unedited: per lineage the MEAN over its
+gated prompts of (aligned - base), then the median over lineages (`move_mean_z`),
+bands cut at the published lift tertiles (asserted equal to
+`norms_by_lift_en.json`). Only its SOURCE and its LINEAGE SET change here.
+
+## ONE RULER: THE PUBLISHED PLATE'S SD
+
+`build` z-scores each scale by the SD of that scale's own pooled values, so a
+prefilled build would divide by a different SD and its markers would sit on a
+different ruler from the filled ones. Every open marker is converted back to
+rating points with its own SD and divided by the PUBLISHED SD
+(`norms_levels_z_en.json`), so one unit means the same thing for both.
+
+## THE POPULATION IS 30 OF THE 50, AND THE FILLED MARKERS ARE STILL THE 50
+
+The prefilled arm exists at `system_mode='empty'` for 30 endpoint lineages, all
+of them rendering an empty slot (`movement.clean_frame_pairs`); 17 more exist
+only at `default`, which is not poolable with `empty` ([6557]) and is not used.
+RH: "take the 30 for now". The filled markers are the published plate's, 50
+lineages; the caption also carries raw on the SAME 30, so a reader can tell a
+frame effect from a population one.
+
+## THE CONTROL
+
+`--build` first runs the wrapper on the RAW table over all 50 and requires every
+scale and band to equal the committed `norms_levels_z_en.json` exactly. A wrapper
+that changed a cut or a lineage key would fail there rather than in the plate.
+"""
+import json, os, sys
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.dirname(os.path.dirname(os.path.dirname(HERE)))
+for p in (ROOT, HERE):
+    if p not in sys.path:
+        sys.path.insert(0, p)
+
+OUT_JSON = os.path.join(HERE, "results", "norms_levels_z_en_prefill30.json")
+PUB_JSON = os.path.join(HERE, "results", "norms_levels_z_en.json")
+FRAMED_SRC = os.path.expanduser("~/malignment-data/norm_change/%s_long_v4_framed.csv.gz")
+BANDS = ("low", "all", "high")
+N_PREFILL = 30
+
+
+def populations():
+    """-> (keep50, keep30) as 'base>aligned' keys."""
+    from malignment import roster, movement as M
+    eps, unresolved = roster.endpoints()
+    assert not unresolved
+    E = set(eps.items())
+    keep50 = {"%s>%s" % e for e in E}
+    thirty = {(b, a) for b, a, m in M.clean_frame_pairs() if m == "empty" and (b, a) in E}
+    assert len(thirty) == N_PREFILL, len(thirty)
+    return keep50, {"%s>%s" % e for e in thirty}
+
+
+def run(src, keep, lpl, cuts):
+    """norms_levels_z.build over both tables from `src`, cuts fixed. -> {scale: rec}"""
+    import norms_levels_z as NLZ
+    NLZ.SRC, NLZ.CUTS = src, tuple(cuts)
+    out = {}
+    for table in ("levels", "contextual"):
+        recs, n, nn = NLZ.build(table, lpl, keep)
+        for r in recs:
+            out[r["scale"]] = r
+    assert NLZ.CUTS == tuple(cuts)          # build must not have re-cut
+    return out
+
+
+def build():
+    import gated_levels as G
+    from malignment import charge
+    keep50, keep30 = populations()
+    pub = {x["scale"]: x for x in json.load(open(PUB_JSON))["scales"]}
+    cuts = json.load(open(os.path.join(HERE, "results", "norms_by_lift_en.json")))["cuts"]
+    assert [round(c, 9) for c in cuts] == [round(c, 9) for c in json.load(open(PUB_JSON))["cuts"]]
+    lpl = charge.lifts_per_lineage()
+
+    #: THE CONTROL: raw over 50 must BE the committed JSON, every scale and band
+    raw50 = run(G.SRC, keep50, lpl, cuts)
+    bad = []
+    for sc, p in pub.items():
+        g = raw50.get(sc)
+        if g is None or abs(g["sd"] - p["sd"]) > 1e-12:
+            bad.append((sc, "sd"))
+            continue
+        gb = {b["band"]: b for b in g["bands"]}
+        for b in p["bands"]:
+            for k in ("move_mean_z", "move_z", "n_lineages"):
+                if k in b and abs(gb[b["band"]].get(k, float("nan")) - b[k]) > 1e-12:
+                    bad.append((sc, b["band"], k))
+    if bad:
+        raise SystemExit("refusing to write: the wrapper does not reproduce norms_levels_z_en.json: %s" % bad[:8])
+    print("  CONTROL: raw over 50 reproduces norms_levels_z_en.json on %d scales" % len(pub))
+
+    raw30 = run(G.SRC, keep30, lpl, cuts)
+    pre30 = run(FRAMED_SRC, keep30, lpl, cuts)
+    #: **THE PREFILLED ARM COVERS A SUBSET OF PROMPTS** (a median of ~827 English prompts a
+    #: lineage against ~2,576 raw). So a fourth arm: RAW on the same 30 lineages AND the same
+    #: (lineage, prompt) pairs the prefilled table holds, which separates the frame from the
+    #: prompt subset. Built by filtering the raw tables to those pairs, then the same build.
+    import gzip, tempfile, collections
+    pairs, cov = set(), collections.defaultdict(lambda: [set(), set()])
+    for table in ("levels", "contextual"):
+        with gzip.open(FRAMED_SRC % table, "rt") as fh:
+            ix = {k: i for i, k in enumerate(fh.readline().rstrip("\n").split("\t"))}
+            for line in fh:
+                f = line.rstrip("\n").split("\t")
+                lin = "%s>%s" % (f[ix["base"]], f[ix["aligned"]])
+                if lin in keep30 and f[ix["lang"]] == "en":
+                    pairs.add((lin, f[ix["prompt"]])); cov[lin][1].add(f[ix["prompt"]])
+    tmp = tempfile.mkdtemp(prefix="nlz_raw30p_")
+    for table in ("levels", "contextual"):
+        with gzip.open(G.SRC % table, "rt") as fi, gzip.open(os.path.join(tmp, "%s.csv.gz" % table), "wt") as fo:
+            head = fi.readline(); fo.write(head)
+            ix = {k: i for i, k in enumerate(head.rstrip("\n").split("\t"))}
+            for line in fi:
+                f = line.rstrip("\n").split("\t")
+                lin = "%s>%s" % (f[ix["base"]], f[ix["aligned"]])
+                if lin in keep30 and f[ix["lang"]] == "en":
+                    cov[lin][0].add(f[ix["prompt"]])
+                    if (lin, f[ix["prompt"]]) in pairs:
+                        fo.write(line)
+    raw30p = run(os.path.join(tmp, "%s.csv.gz"), keep30, lpl, cuts)
+    import shutil
+    shutil.rmtree(tmp)                                  # the filtered copies are rebuilt on every --build
+    import statistics as st
+    coverage = {"en_prompts_per_lineage_median_raw": st.median(len(v[0]) for v in cov.values()),
+                "en_prompts_per_lineage_median_prefill": st.median(len(v[1]) for v in cov.values()),
+                "prefill_prompts_also_raw": sum(len(v[1] & v[0]) for v in cov.values()),
+                "prefill_prompts": sum(len(v[1]) for v in cov.values())}
+
+    def on_pub_ruler(rec, sc):
+        """per band: move in rating points (mean within lineage, median over lineages) / PUBLISHED sd"""
+        return {b["band"]: {"move_pub_z": b["move_mean_z"] * rec["sd"] / pub[sc]["sd"],
+                            "move_points": b["move_mean_z"] * rec["sd"],
+                            "n_lineages": b["n_lineages"],
+                            "up": b.get("up_mean"), "down": b.get("down_mean")}
+                for b in rec["bands"] if b.get("n_lineages")}
+    out = {"cuts": cuts, "n_raw": len(keep50), "n_prefill": len(keep30), "coverage": coverage,
+           "prefill_lineages": sorted(keep30),
+           "ruler": "published sd per scale (norms_levels_z_en.json)",
+           "scales": {}}
+    for sc in pub:
+        out["scales"][sc] = {"pub_sd": pub[sc]["sd"],
+                             "raw50": on_pub_ruler(raw50[sc], sc),
+                             "raw30": on_pub_ruler(raw30[sc], sc),
+                             "raw30p": on_pub_ruler(raw30p[sc], sc),
+                             "prefill30": on_pub_ruler(pre30[sc], sc),
+                             "prefill_own_sd": pre30[sc]["sd"]}
+    json.dump(out, open(OUT_JSON, "w"), indent=1)
+    print("wrote %s" % os.path.relpath(OUT_JSON, HERE))
+
+
+def draw():
+    import matplotlib
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+    import numpy as np
+    from matplotlib.font_manager import FontProperties
+    from malignment.figure import (PUB_SIZE, PUB_FONT_PT, PUB_INK, PUB_MID, PUB_GRAY, PUB_FAINT,
+                                   PUB_RULE_PT, pub_font, missing_glyphs, save)
+    import fig3_osgood as FO
+    matplotlib.rcParams["font.family"] = pub_font()
+    matplotlib.rcParams["font.sans-serif"] = [pub_font(), "DejaVu Sans"]
+    matplotlib.rcParams["axes.unicode_minus"] = False
+    name = "fig3_norms_osgood_en_z_prefill"
+    for ext in (".png", ".pdf", ".caption.txt"):
+        assert not os.path.exists(os.path.join(HERE, "figures", name + ext)), "refusing to overwrite " + name + ext
+
+    D = json.load(open(OUT_JSON))
+    sys.argv = [sys.argv[0], "--z"]                       # FO.rows reads its estimator flag from argv
+    FO.check_picks()
+    rs = FO.rows(orient=False, mode="z")                  # the published rows, order and values
+    n = len(rs)
+    #: the filled markers ARE the published plate's: the JSON's raw50 must equal FO.rows
+    for sc, sq, lo, hi, sd, _ in rs:
+        r = D["scales"][sc]["raw50"]
+        for band, v in (("all", sq), ("low", lo), ("high", hi)):
+            assert abs(r[band]["move_pub_z"] - v) < 1e-12, (sc, band)
+    P = {sc: D["scales"][sc]["prefill30"] for sc, *_ in rs}
+    psq = np.array([P[r[0]]["all"]["move_pub_z"] for r in rs])
+    plo = np.array([P[r[0]]["low"]["move_pub_z"] for r in rs])
+    phi = np.array([P[r[0]]["high"]["move_pub_z"] for r in rs])
+
+    def lab(sc, side):
+        return "%s\n(%s)" % (FO.POLES[sc][side], ", ".join(FO.PICKS[sc][side]))
+
+    fig, ax = plt.subplots(figsize=(PUB_SIZE[0], 0.30 * n + 1.25), layout="constrained")
+    y = np.arange(n)
+    sq = np.array([r[1] for r in rs]); lo = np.array([r[2] for r in rs]); hi = np.array([r[3] for r in rs])
+    e = np.concatenate([sq, lo, hi, psq, plo, phi])
+    pad = 0.06 * (e.max() - e.min())
+    #: the prefilled markers sit a hair below their row, the raw ones a hair above, so a
+    #: coincident pair stays two marks; the row rule runs between them
+    DY = 0.17
+    for i in range(n):
+        ax.plot([e.min() - pad, e.max() + pad], [i, i], color=PUB_FAINT, linewidth=PUB_RULE_PT * 0.7,
+                zorder=1, solid_capstyle="butt")
+        ax.plot([lo[i], hi[i]], [i + DY] * 2, color=PUB_GRAY, linewidth=PUB_RULE_PT * 1.6, zorder=2,
+                solid_capstyle="butt")
+        ax.plot([plo[i], phi[i]], [i - DY] * 2, color=PUB_GRAY, linewidth=PUB_RULE_PT * 0.9, zorder=2,
+                solid_capstyle="butt", linestyle=(0, (2, 1.2)))
+    h_lo = ax.scatter(lo, y + DY, marker="v", s=17, facecolor=PUB_GRAY, edgecolor="none", zorder=3,
+                      label="Least charged (lift)")
+    h_sq = ax.scatter(sq, y + DY, marker="s", s=13, facecolor=PUB_MID, edgecolor="none", zorder=4,
+                      label="All prompts")
+    h_hi = ax.scatter(hi, y + DY, marker="^", s=19, facecolor=PUB_INK, edgecolor="none", zorder=5,
+                      label="Most charged (lift)")
+    #: OPEN equivalents: the same shape and the same gray, as an outline
+    k_lo = ax.scatter(plo, y - DY, marker="v", s=17, facecolor="white", edgecolor=PUB_GRAY, linewidth=0.8,
+                      zorder=3, label="Least charged (lift), prefilled")
+    k_sq = ax.scatter(psq, y - DY, marker="s", s=13, facecolor="white", edgecolor=PUB_MID, linewidth=0.8,
+                      zorder=4, label="All prompts, prefilled")
+    k_hi = ax.scatter(phi, y - DY, marker="^", s=19, facecolor="white", edgecolor=PUB_INK, linewidth=0.8,
+                      zorder=5, label="Most charged (lift), prefilled")
+    ax.axvline(0, color=PUB_INK, linewidth=PUB_RULE_PT, zorder=6)
+    ax.set_yticks(y)
+    ax.set_yticklabels([lab(r[0], 0) for r in rs], fontsize=PUB_FONT_PT - 2.5, fontfamily=pub_font())
+    r2 = ax.secondary_yaxis("right")
+    r2.set_yticks(y)
+    r2.set_yticklabels([lab(r[0], 1) for r in rs], fontsize=PUB_FONT_PT - 2.5, fontfamily=pub_font())
+    r2.tick_params(length=0)
+    r2.spines["right"].set_visible(False)
+    ax.set_ylim(-0.75, n - 0.25)
+    ax.tick_params(axis="y", length=0)
+    ax.tick_params(axis="x", length=2, labelsize=PUB_FONT_PT - 2)
+    for t in ax.get_xticklabels():
+        t.set_fontfamily(pub_font())
+    for s in ("top", "right", "left"):
+        ax.spines[s].set_visible(False)
+    ax.spines["bottom"].set_linewidth(PUB_RULE_PT)
+    ax.grid(axis="x", color=PUB_GRAY, linewidth=PUB_RULE_PT * 0.6, zorder=0)
+    ax.set_axisbelow(True)
+    ax.set_xlabel("←  Semantic pole toward which alignment moves  →",
+                  fontsize=PUB_FONT_PT - 1, fontfamily=pub_font())
+    #: two legend rows: filled = raw (base -> aligned, no template), open = prefilled
+    leg_font = FontProperties(family=pub_font(), size=PUB_FONT_PT - 2)
+    #: matplotlib fills legend COLUMNS first, so pairs go in column order: row 1 filled, row 2 open
+    fig.legend(handles=[h_sq, k_sq, h_hi, k_hi, h_lo, k_lo],
+               labels=["All prompts", "All, prefilled", "Most charged", "Most charged, prefilled",
+                       "Least charged", "Least charged, prefilled"],
+               prop=leg_font, frameon=False, handlelength=0.9, loc="outside lower center", ncol=3,
+               scatterpoints=1, columnspacing=1.2, handletextpad=0.35)
+
+    gone = missing_glyphs("".join(t.get_text() for t in fig.findobj(matplotlib.text.Text)))
+    if gone:
+        raise SystemExit("refusing to write: missing glyphs %s" % gone)
+    small = min(t.get_fontsize() for t in fig.findobj(matplotlib.text.Text) if t.get_text().strip())
+    out = os.path.join(HERE, "figures", name + ".png")
+    print("  wrote %s (smallest type %.1f pt)" % (save(fig, out), small))
+    caption(out, rs, D)
+
+
+def caption(out, rs, D):
+    import textwrap
+    #: one line per paragraph, as fig3_osgood's captions (and RH: no hard-wrapping in prose files)
+    W = lambda s: [s]
+    S = D["scales"]
+    #: against the MATCHED raw arm (same 30 lineages, same prompts), not the 50
+    n_off = sum(1 for sc, *_ in rs if abs(S[sc]["prefill30"]["all"]["move_pub_z"]) > abs(S[sc]["raw30p"]["all"]["move_pub_z"]))
+    C = D["coverage"]
+    L = [
+        "Figure 3z with the prefilled aligned arm. What alignment does to fourteen norm scales, raw and "
+        "prefilled, on one ruler.",
+        "",
+        *W("FILLED markers are the published plate (fig3_norms_osgood_en_z), unchanged: base -> aligned "
+           "with no template, per lineage the MEAN over its gated prompts of the change, then the median over "
+           "the %d endpoint lineages, divided by the SD of that scale's own pooled values. Square: all prompts; "
+           "triangles: lowest and highest third of charge lift, cut at %+.3f and %+.3f." % (
+               D["n_raw"], D["cuts"][0], D["cuts"][1])),
+        "",
+        *W("OPEN markers are the same statistic for base -> aligned PREFILLED: the aligned model's chat "
+           "template with an empty system message, the prompt's text prefilled at the start of the model's own "
+           "turn (movement_v4, frame_aligned='prefill'). The base side is the same raw base. They are drawn "
+           "just below the filled ones on each row, their lift range dashed."),
+        "",
+        *W("ONE RULER. Each open marker is converted to rating points and divided by the PUBLISHED plate's "
+           "SD for that scale, not by the prefilled build's own, so a unit means the same thing for both sets "
+           "of markers."),
+        "",
+        *W("POPULATION: 30 OF THE 50. The prefilled arm exists with system_mode='empty' for %d of the 50 "
+           "endpoint lineages, all of which render an empty system slot; 17 more exist only with the default "
+           "system message, which is not poolable with 'empty' ([6557]) and is not used; 3 have no prefilled "
+           "cell. The filled markers stay on all 50. The 30 include jais-family-6p7b-chat and "
+           "llm-jp-3-7.2b-instruct3, whose templates inject preamble text outside the system slot (malign "
+           "would hold them to a sensitivity set), and omit beaver-7b-v1.0, whose empty-mode rows movement_v4 "
+           "collapsed into byte-identical default-mode ones (its sort key carries no system mode)." % D["n_prefill"]),
+        "",
+        *W("AND A SUBSET OF PROMPTS. Prefilled cells cover a declared 874-prompt set (the transgressive and "
+           "institutional batteries, the slot corpus and a 105-pair transgressive sample; "
+           "roster/prompts/populations/prefill.json), not a sample of the raw prompts, so it over-represents "
+           "charged and institutional stems. The prefilled arm was measured on a median of %d English prompts a "
+           "lineage against %d raw; %d of its %d (lineage, prompt) cells are also raw cells. So the table "
+           "below gives RAW three ways: all 50 lineages (the filled markers); the same 30; and the same 30 "
+           "on the SAME prompts as the prefilled arm, which is the comparison that isolates the frame." % (
+               C["en_prompts_per_lineage_median_prefill"], C["en_prompts_per_lineage_median_raw"],
+               C["prefill_prompts_also_raw"], C["prefill_prompts"])),
+        "",
+        *W("On %d of the 14 scales the prefilled all-prompts value sits further from zero than raw on the same "
+           "30 lineages and the same prompts." % n_off),
+        "",
+        *W("Control: the build reruns the published computation on the raw table over all 50 lineages and "
+           "requires every scale and band to equal results/norms_levels_z_en.json exactly; the filled "
+           "markers are then asserted equal to fig3_osgood.rows. Exploratory; lift bands are the published "
+           "raw-arm cuts, applied to the prefilled rows unchanged."),
+        "",
+        "Per scale, on the published ruler (z): all prompts [least charged, most charged].",
+        "  %-20s %-19s %-19s %-19s %-19s" % ("scale", "raw, 50", "raw, same 30", "raw, 30, same pr.",
+                                              "prefilled, 30"),
+    ]
+    for sc, *_ in rs:
+        cell = lambda k: "%+.3f [%+.3f,%+.3f]" % (S[sc][k]["all"]["move_pub_z"], S[sc][k]["low"]["move_pub_z"],
+                                                 S[sc][k]["high"]["move_pub_z"])
+        L.append("  %-20s %-19s %-19s %-19s %-19s" % (sc[:20], cell("raw50"), cell("raw30"), cell("raw30p"),
+                                                     cell("prefill30")))
+    L += ["", "Producer: experiments/displacement/norm_change/fig3_osgood_prefill.py (imports norms_levels_z.build "
+          "and fig3_osgood.rows unedited)."]
+    open(out[:-4] + ".caption.txt", "w", encoding="utf-8").write("\n".join(L) + "\n")
+
+
+if __name__ == "__main__":
+    if "--build" in sys.argv:
+        build()
+    else:
+        draw()
