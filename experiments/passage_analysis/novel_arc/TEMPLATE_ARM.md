@@ -117,3 +117,11 @@ The first box reports measured tok/s before the rest launch. Boxes are sharded b
 1. RH: 41 lineages, run (2026-09-25). The optional SmolLM3/AmberSafe sensitivity is **not** generated.
 2. Paper seat: contrasts and plate rules as above (reviewed 2026-09-25).
 3. Preflight: every vLLM checkpoint here ran on vLLM 0.22.1 / A40 with this render path in the institution fleet (23-24 Sep), except the four routed to batched HF. The first pod's first model is read (a stored passage's frame, template, render fields and text) before the rest are trusted.
+
+## AMENDMENT 1, before any template-arm passage was coded (2026-09-25)
+
+RH: "only 40+", and "just add the 'where does it break off, return a span of first non-narrative text' to the workflow we run now". Selection and coder, replacing the corresponding lines above:
+
+- **Selection** (`template_arm/select_for_coding.py`): f11 stems; continue replies stripped of a leading assistant preamble by one declared regex (0.7% of continue passages, almost all MiniCPM5-1B, 0 elsewhere; flagged per row); **>= 40 words**; ranked by passC's classifier (`template_arm/triage.py`, recovered verbatim, reproduces triage.parquet exactly) over ALL passages in the cell, not a 714 draw (the spec above misdescribed passC); top 200, or all where fewer qualify. 31,831 passages over 161 cells; 4 cells have under 200 eligible (prefill: kanana-2-3b 43, Llama-3.1-8B 106, Qwen2.5-0.5B 117, AquilaChat2 165).
+- **Coder**: passC's rubric and per-batch prompt, verbatim, with ONE added code, `break`, and "five codes" -> "six codes". Single coder, effort high, **model pinned to claude-opus-5** (`template_arm/coding/CALIBRATION.md`: neither 5.5 nor pinned opus-5 matches August's coder A, so no old coding enters the template-arm Figure 5). The fragment shown is the STEM in every arm; arm and frame are never shown. Batches of 45, shuffled across models and arms.
+- **The survival table** gains a column: among non-narrative passages, those whose `break` quote is found AFTER the passage's opening (fiction, then interruption) against those non-narrative from the first words; the words of fiction before the break are reported per arm.

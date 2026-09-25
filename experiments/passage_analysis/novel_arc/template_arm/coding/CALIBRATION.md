@@ -35,3 +35,21 @@ The disagreement is almost entirely one-directional: 65 of the 200 A-narrative p
 ## Arm 2, declared before its output exists: claude-opus-5 PINNED
 
 A Workflow agent accepts `model: 'claude-opus-5'` (probe wf_413c3d18-443: its transcript shows `claude-opus-5`). `calib_opus5.js` is `calib_opus55.js` with that one key added (and names). Same 400 passages, same pass rule, same report. **If it passes, the template arm is coded by pinned claude-opus-5, the model passC used, and no replication recode is needed.** If it fails too, the model id is not the whole instrument (the harness or its defaults moved) and the fallback is the declared one above.
+
+## RESULT, arm 2: claude-opus-5 PINNED also FAILS (read 2026-09-25)
+
+Agents ran on `claude-opus-5` (36/36 turns, run wf_b9863426-3b8).
+
+| set | n | opus-5 vs A | A vs B (Wilson 95%) | op5=T,A=F / op5=F,A=T | McNemar p | net shift, pts [boot 95%] | PASS |
+|---|---|---|---|---|---|---|---|
+| all | 400 | 347/400 = 0.868 | 378/400 = 0.945 [0.918, 0.963] | 2 / 51 | 0.000 | -4.2 [-5.8, -2.5] | FAIL |
+| base | 192 | 160/192 = 0.833 | 181/192 = 0.943 [0.900, 0.968] | 0 / 32 | 0.000 | -6.5 [-8.4, -4.7] | FAIL |
+| aligned | 208 | 187/208 = 0.899 | 197/208 = 0.947 [0.908, 0.970] | 2 / 19 | 0.000 | -2.0 [-4.3, +0.9] | FAIL |
+
+Base minus aligned net shift: -4.6 points [-8.0, -1.5].
+
+Same direction as 5.5, a little smaller. **The model id is not the whole instrument.** Untested candidates: the harness (agent system prompt, effort semantics) moved since August; or batch composition -- these calibration batches are 50% A-narrative against ~20% in passC's, and a coder may calibrate "clumsy but continuous" against what surrounds it.
+
+## DECISION (RH, 2026-09-25: "We're recoding all data right, no old data will be in Fig 5 anyway")
+
+Every passage in the template-arm Figure 5 is coded fresh by ONE coder, so the calibration bears only on the descriptive engine replication against August. The coder is **claude-opus-5, pinned**: closer to August's coder A than 5.5 (0.868 vs 0.835) and the model the method was built on. The replication against August, if it is reported, recodes the August replication cells with the same pinned coder (the declared fallback); not run now. The coder shift is a CAVEAT for any comparison with the v6 plate: it moves which passages count (more on base), and, on the paper seat's 384-passage check, barely where the arms sit.
