@@ -1,0 +1,14 @@
+COGNITIVE AND EMOTIONAL LANGUAGE IN FICTION, POOLED, 1600-2000, as drawn (top) and with concreteness
+regressed out (bottom).
+
+Per text, the share of content words on either list (v4: cognition, attention, perception and
+volition words; emotion words; USAS X and E with period-model neighbours, LLM-rated for precision
+and hand-vetted). Gray points: decade medians over 75,974 arc_fiction texts; black line: lowess
+(span 0.3). Bottom: the share minus a linear fit on the text's concreteness (Abs-Conc.Median.median,
+corpus-bias corrected; 75,974 texts with both), plus the mean share; part of that fit is mechanical,
+since the list words are abstract and enter the concreteness mean. Model arms: TEMPLATE_ARM, 29
+lineages, coherent narrative passages; per model the median over passages (bottom: adjusted with the
+history's slope), then the median over lineages.
+
+  slope -0.0377 per concreteness unit; text-level r -0.664; decade rho raw vs adjusted 0.14; decade rho with concreteness raw -0.92, adjusted 0.02
+  arms raw {'base': 5.57, 'raw': 7.37}; adjusted {'base': 6.63, 'raw': 7.36}
