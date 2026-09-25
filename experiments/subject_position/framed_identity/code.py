@@ -90,6 +90,14 @@ RECOVERY = os.path.join(HERE, "results", "framed_identity_mn1024.jsonl")
 RECOVERY_OUT = os.path.join(HERE, "results", "coded_mn1024.jsonl")
 RECOVERY_KEY = ("model", "qid", "temp", "system", "idx", "max_new", "surface")
 
+#: THE LADDER (ladder.md, 2026-09-25): four ticks, one question, 18 models. `tick` is
+#: IN THE KEY because the four ticks share model, question, temperature and idx. An
+#: EMPTY reply (immediate end-of-text, 28 of 2,880) has nothing to code and is not sent;
+#: analyse counts it as its own outcome. The coder still sees only QUESTION and ANSWER.
+LADDER = os.path.join(HERE, "results", "ladder.jsonl")
+LADDER_OUT = os.path.join(HERE, "results", "coded_ladder.jsonl")
+LADDER_KEY = ("model", "tick", "temp", "idx")
+
 #: THE SURFACE, WHICH HAD TO BE CHOSEN BEFORE 1,920 CODER CALLS AND NOT AFTER.
 #:
 #: The 60-token corpus codes AT MOST 60 tokens of answer -- that is what the cap
@@ -164,7 +172,7 @@ def load_done(out_path=OUT, key=KEY):
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--corpus", choices=("framed", "f20x", "recovery"),
+    ap.add_argument("--corpus", choices=("framed", "f20x", "recovery", "ladder"),
                     default="framed")
     ap.add_argument("--surface", choices=("matched", "full"), default="matched",
                     help="recovery only. matched = first %d tokens after "
@@ -176,10 +184,12 @@ def main(argv=None):
     ap.add_argument("--workers", type=int, default=8)
     a = ap.parse_args(argv)
 
-    key = {"f20x": F20X_KEY, "recovery": RECOVERY_KEY}.get(a.corpus, KEY)
-    out_path = {"f20x": F20X_OUT, "recovery": RECOVERY_OUT}.get(a.corpus, OUT)
+    key = {"f20x": F20X_KEY, "recovery": RECOVERY_KEY, "ladder": LADDER_KEY}.get(a.corpus, KEY)
+    out_path = {"f20x": F20X_OUT, "recovery": RECOVERY_OUT, "ladder": LADDER_OUT}.get(a.corpus, OUT)
     rows = (load_f20x() if a.corpus == "f20x"
-            else load_generations(RECOVERY if a.corpus == "recovery" else GEN))
+            else load_generations({"recovery": RECOVERY, "ladder": LADDER}.get(a.corpus, GEN)))
+    if a.corpus == "ladder":
+        rows = [r for r in rows if (r.get("text") or "").strip()]
     if a.corpus == "recovery":
         for r in rows:
             r["surface"] = a.surface
@@ -192,7 +202,7 @@ def main(argv=None):
 
     print("%d generations | %d already coded | %d to code"
           % (len(rows), len(done), len(todo)))
-    grp = "arm" if a.corpus == "f20x" else "system"
+    grp = {"f20x": "arm", "ladder": "tick"}.get(a.corpus, "system")
     cc = collections.Counter((r[grp], r["qid"]) for r in rows)
     for k in sorted(cc):
         print("   %-18s %5d" % ("%s/%s" % k, cc[k]))
