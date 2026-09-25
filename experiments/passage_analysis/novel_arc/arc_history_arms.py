@@ -1,7 +1,9 @@
 """Concreteness, cognitive and emotional language over arc_fiction, with TEMPLATE_ARM model arms. (RH, 2026-09-25)
 
     .venv/bin/python -u arc_history_arms.py --no-arms   -> figures/arc_history_three_preview.{png,pdf,caption.txt}
-    .venv/bin/python -u arc_history_arms.py --arms      -> $MALIGNMENT_DATA/novel_arc/arc_history_arm_passages.parquet
+    .venv/bin/python -u arc_history_arms.py --write-lists  -> $MALIGNMENT_DATA/novel_arc/arc_vetted_lists_expanded.json
+    ~/github/lltk/.venv/bin/python -u arc_history_arms.py --arms   (measure_lltk needs lltk)
+                                                        -> $MALIGNMENT_DATA/novel_arc/arc_history_arm_passages.parquet
                                                           figures/arc_history_three_arms.{png,pdf,caption.txt}
 
 HISTORY, all three panels over the book's arc_fiction set (abstraction.scores_rep, arc_corpus =
@@ -46,8 +48,12 @@ TA = os.path.join(os.environ.get("MALIGNMENT_DATA", os.path.expanduser("~/malign
 COUNTS = os.path.join(DATA, "arc_interiority_texts_precision_vetted.parquet")
 CONC = os.path.join(DATA, "arc_concreteness_texts.parquet")
 ARM_OUT = os.path.join(DATA, "arc_history_arm_passages.parquet")
+LISTS = os.path.join(DATA, "arc_vetted_lists_expanded.json")
 BIAS = "/Volumes/diderot/DH/data/data_abslithist/scores/corpus_bias_coefficients.json"
 MIN_CONTENT, MIN_DECADE, MIN_ARM = 2000, 3, 10
+#: RH dropped RWKV (TEMPLATE_ARM.md amendment 3, malignment 4bd3f90b: its bf16 output is 88-90% repeated-word
+#: loops). Its raw cells are coded and in selection.parquet, so the exclusion is stated, not left to the floor.
+DROPPED = {"RWKV/rwkv-4-7b-pile"}
 ARMS_ON = "--arms" in sys.argv
 OUT = os.path.join(HERE, "figures", "arc_history_three_" + ("arms" if ARMS_ON else "preview"))
 NAME = {"base": "Base models", "raw": "Aligned models"}
@@ -108,10 +114,13 @@ def history():
 
 
 def arm_passages():
-    """-> per narrative passage of the registered primary: model, base, arm, conc, cog, emo."""
+    """-> per narrative passage of the registered primary: model, base, arm, conc, cog, emo.
+    selection.text, not passages.parquet's: continue replies there have a leading assistant preamble
+    stripped (malign; flag `stripped`). Only selection.parquet's 161 cells; the leftovers (internlm2-chat
+    continue, rwkv-raven prefill/continue) arrive as selection_2.parquet, and until then those two lineages
+    drop out under the all-four-arms rule."""
     if os.path.exists(ARM_OUT):
         return pd.read_parquet(ARM_OUT)
-    import arc_interiority_precision as AP
     from measure_lltk import Scorer
     S_ = pd.read_parquet(os.path.join(TA, "selection.parquet"))
     Cd = pd.read_parquet(os.path.join(TA, "codings.parquet"))
@@ -119,17 +128,17 @@ def arm_passages():
     assert S_.id.isin(Cd.id).all(), "coding incomplete: %d of %d selected passages uncoded" % (
         (~S_.id.isin(Cd.id)).sum(), len(S_))
     P = S_.merge(Cd[["id", "narrative"]], on="id", how="inner", validate="1:1")
+    #: the key is checked against the SELECTION: all 400 RWKV passages are coded non-narrative, so after the
+    #: narrative filter there is nothing left to exclude and the exclusion would be untestable
+    assert DROPPED <= set(P.base), ("a dropped lineage is not in the selection; check its key", DROPPED - set(P.base))
+    P = P[~P.base.isin(DROPPED)]
     P = P[(P.narrative == True) & (P.n_words >= 40)]                    # noqa: E712
     n = P.groupby(["base", "arm"]).size().unstack(fill_value=0)
     keep = n.index[(n.reindex(columns=["base", "raw", "prefill", "continue"], fill_value=0) >= MIN_ARM).all(axis=1)]
     P = P[P.base.isin(keep) & P.arm.isin(["base", "raw"])]
-    old = sys.argv
-    sys.argv = [old[0], "--vetted"]                  # the list module reads its mode at import
-    import importlib
-    AP = importlib.reload(AP)
-    sys.argv = old
-    ex, sw, _ = AP.lists_precision()
-    cog, emo = ex["cleanx_p"], ex["cand_p"]
+    #: the expanded lists come from write_lists() (wordfreq lives in the malignment venv, lltk in its own)
+    Lj = json.load(open(LISTS))
+    cog, emo, sw = set(Lj["cog"]), set(Lj["emo"]), set(Lj["stopwords"])
     Sc = Scorer()
     rows = []
     for r in P.itertuples():
@@ -193,8 +202,10 @@ def main():
         D = arm_passages()
         for k in ("conc", "cog", "emo"):
             arms[k], nl = arm_values(D, k)
-        info = " Arms: TEMPLATE_ARM, %d lineages with at least %d narrative passages in all four arms; base %s and aligned (raw) %s passages." % (
-            nl, MIN_ARM, format(int((D.arm == "base").sum()), ","), format(int((D.arm == "raw").sum()), ","))
+        info = (" Arms: TEMPLATE_ARM (41 lineages, one vLLM engine, Figure 5's 100 English stems), %d lineages with at "
+                "least %d coherent narrative passages in all four arms (coder claude-opus-5, stricter about coherence "
+                "than Figure 5's); base %s and aligned (no template) %s passages." % (
+            nl, MIN_ARM, format(int((D.arm == "base").sum()), ","), format(int((D.arm == "raw").sum()), ",")))
     spec = (("conc", "Concreteness in fiction", "Concreteness\n(word norm mean)", False),
             ("cog", "Cognitive language in fiction", "Cognitive words\n(share of words)", True),
             ("emo", "Emotional language in fiction", "Emotional words\n(share of words)", True))
@@ -219,7 +230,7 @@ def main():
         "hand-vetted (872 base words; 68%% cognition by token mass). Emotional: period-model neighbours of X rated "
         "and vetted the same way (1,077 base words; 67%% emotion)." % (
             MIN_DECADE, format(H["conc"][1], ","), format(MIN_CONTENT, ","), format(H["cog"][1], ",")) + (
-        info + " Model arms: per model the median over its narrative passages, then the median over lineages; "
+        info + " Model arms: per model the median over its coherent narrative passages, then the median over lineages; "
         "passage values, not text values, so medians compare and spreads do not. Model concreteness is not "
         "bias-corrected (clean digital text)." if ARMS_ON else ""))
     L += ["", "  arms: " + json.dumps({k: {a: round(v, 4) for a, v in d.items()} for k, d in arms.items()})] if ARMS_ON else []
@@ -229,5 +240,17 @@ def main():
         print(k, "decades %d, texts %d, range %.4f..%.4f" % (len(h), n, h.value.min(), h.value.max()))
 
 
+def write_lists():
+    """The expanded vetted lists exactly as the history counted them, for the arms' passage count."""
+    assert not os.path.exists(LISTS), "refusing to overwrite " + LISTS
+    sys.argv = [sys.argv[0], "--vetted"]             # the list module reads its mode at import
+    import arc_interiority_precision as AP
+    assert AP.VETTED
+    ex, sw, info = AP.lists_precision()
+    assert (len(ex["cleanx_p"]), len(ex["cand_p"])) == (4216, 6117), (len(ex["cleanx_p"]), len(ex["cand_p"]))  # ARC_INTERIORITY_PRECISION_VETTED.md
+    json.dump({"cog": sorted(ex["cleanx_p"]), "emo": sorted(ex["cand_p"]), "stopwords": sorted(sw)}, open(LISTS, "w"))
+    print("-> %s" % LISTS)
+
+
 if __name__ == "__main__":
-    main()
+    write_lists() if "--write-lists" in sys.argv else main()
