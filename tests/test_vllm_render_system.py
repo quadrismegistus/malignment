@@ -67,3 +67,20 @@ def test_hf_render_takes_the_thinking_switch():
     off, ok = render(ld, "Q: Who are you?\nA:", system="", prefill=True, user_msg="Hi.",
                      template_kwargs={"enable_thinking": False})
     assert "<think>" not in on and "<think>\n\n</think>\n\nQ: Who are you?\nA:" in off and ok
+
+
+def test_encode_restores_a_multi_token_start_once():
+    """generate.restore_lead: glm-4's [gMASK]<sop> is restored on raw text, never doubled
+    on a rendered template, and every single-BOS or no-BOS tokenizer is unchanged."""
+    from malignment.generate import _old_bos_rule, encode_tag, restore_lead
+    g = tok("zai-org/glm-4-9b-chat-hf")
+    raw = "Q: Who are you?\nA:"
+    assert g.decode(restore_lead(g, raw)).startswith("[gMASK]<sop>Q:")
+    assert encode_tag(g, raw) == "lead=[gMASK]<sop>"
+    rendered = g.apply_chat_template([{"role": "user", "content": "Who are you?"}], tokenize=False, add_generation_prompt=True)
+    assert g.decode(restore_lead(g, rendered)).count("[gMASK]") == 1 and encode_tag(g, rendered) is None
+    for m in ("meta-llama/Llama-3.1-8B-Instruct", "allenai/Llama-3.1-Tulu-3-8B-SFT", "Qwen/Qwen2.5-7B-Instruct",
+              "TinyLlama/TinyLlama-1.1B-Chat-v1.0", "HuggingFaceH4/zephyr-7b-beta", "01-ai/Yi-1.5-9B-Chat"):
+        t = tok(m)
+        assert restore_lead(t, raw) == _old_bos_rule(t, raw), m
+        assert encode_tag(t, raw) is None, m

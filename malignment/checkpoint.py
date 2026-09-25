@@ -31,6 +31,7 @@ what they read rather than for what someone hoped they meant.
 `twp._repo_of` / `_revision_of`. `split("@")` written at each call site is one
 chance per site at `[-1]`.
 """
+import functools
 import json
 import os
 
@@ -62,6 +63,14 @@ from .generate import DEFAULT
 #: sites. Verified safe: no use of `T` at class-definition time (lines 45, 46,
 #: 81, 234, 250, all method bodies).
 
+
+
+@functools.lru_cache(maxsize=64)
+def _tokenizer(model_id, revision=None):
+    """The tokenizer alone (no weights), for decisions a cache key must make before loading."""
+    from transformers import AutoTokenizer
+    from .vllm_generate import _trust
+    return AutoTokenizer.from_pretrained(model_id, trust_remote_code=_trust(model_id), revision=revision)
 
 class Checkpoint:
     """One checkpoint, addressable as `repo` or `repo@revision`."""
@@ -684,13 +693,20 @@ class Checkpoint:
         #: share a label and differ in the strings, and a cache that ignored
         #: that would hand back the wrong condition.
         sysk = "" if system is G.DEFAULT else system
+        #: THE ENCODING, WHERE IT CHANGED (2026-09-25). `generate.encode` now restores a
+        #: tokenizer's whole leading special-token run, not one BOS (glm-4: `[gMASK]<sop>`).
+        #: An untemplated input whose ids changed gets `encode` in its key, so a passage
+        #: generated from the old, prefix-less input is never served for the new one. None
+        #: -- and no field -- for every input the old rule already encoded right.
+        etag = G.encode_tag(_tokenizer(self.model_id, getattr(self, "revision", None)), text) if frame == "raw" else None
         keys = [dict(G.gen_key(self.model_id, text, frame, sysk, dec, seed, i,
                                system_set=(system is not G.DEFAULT)),
                      user=user, prefill=bool(prefill),
                      user_msg=(user_msg if prefill else None),
                      template=template,
                      #: only when set, so no existing key changes (as vllm_generate)
-                     **({"template_kwargs": template_kwargs} if template_kwargs else {}))
+                     **({"template_kwargs": template_kwargs} if template_kwargs else {}),
+                     **({"encode": etag} if etag else {}))
                 for i in range(n)]
 
         out = [None] * n

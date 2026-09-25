@@ -328,6 +328,55 @@ def render(loaded, text, system=DEFAULT, user=None, prefill=False,
     return out, sys_ok
 
 
+
+def _old_bos_rule(tok, text_in):
+    """The rule before 2026-09-25: restore a single BOS. Kept to define the tag."""
+    ids = tok(text_in, add_special_tokens=False)["input_ids"]
+    b = getattr(tok, "bos_token_id", None)
+    if b is not None and (not ids or ids[0] != b):
+        default = tok(text_in)["input_ids"]
+        if default and default[0] == b:
+            ids = [b] + list(ids)
+    return list(ids)
+
+
+def restore_lead(tok, text_in):
+    """Token ids for `text_in` with the tokenizer's LEADING special tokens restored once.
+
+    **A START IS NOT ALWAYS ONE BOS (2026-09-25).** The rule encoded without specials
+    and put back a single `bos_token_id`. glm-4 has NO bos token: its default encoding
+    prepends TWO special tokens, `[gMASK]<sop>`, which its chat template also opens
+    with. So every untemplated glm input on this path went in with no start at all --
+    found when framed_identity's bare tick for glm-4-9b-chat-hf read 15% ai_system
+    against F20x's 100% on the same prompt, whose input had the prefix.
+
+    Now: take the tokenizer's DEFAULT encoding, and if it equals the specials-free ids
+    with a leading run of special tokens in front, restore that run -- unless the text
+    already begins with it (a rendered template carries it as text). Where the leading
+    run is one BOS this is exactly the old rule; where the default also appends a
+    suffix (an EOS), the old single-BOS rule applies unchanged.
+    """
+    ids = list(tok(text_in, add_special_tokens=False)["input_ids"])
+    default = list(tok(text_in)["input_ids"])
+    n = len(ids)
+    pre = default[:len(default) - n] if (n and len(default) > n and default[len(default) - n:] == ids) else None
+    special = set(getattr(tok, "all_special_ids", None) or [])
+    if pre and all(t in special for t in pre):
+        return ids if ids[:len(pre)] == pre else pre + ids
+    return _old_bos_rule(tok, text_in)
+
+
+def encode_tag(tok, text_in):
+    """None where `restore_lead` gives what the old single-BOS rule gave; else a short tag.
+
+    Goes into a generation cache KEY only when not None, so every existing key is
+    unchanged and only inputs whose encoding actually changed (glm's untemplated ones)
+    stop being served passages generated from the old, wrong input."""
+    new, old = restore_lead(tok, text_in), _old_bos_rule(tok, text_in)
+    if new == old:
+        return None
+    return "lead=" + tok.decode(new[:len(new) - len(old)])
+
 def encode(loaded, text_in, templated):
     """Tokenise with EXACTLY ONE leading BOS, whatever the model does.
 
@@ -348,12 +397,7 @@ def encode(loaded, text_in, templated):
     if the model uses one, the string does not already start with it, and the
     tokenizer's own default would have added it.
     """
-    ids = loaded.tok(text_in, add_special_tokens=False)["input_ids"]
-    b = getattr(loaded.tok, "bos_token_id", None)
-    if b is not None and (not ids or ids[0] != b):
-        default = loaded.tok(text_in)["input_ids"]
-        if default and default[0] == b:
-            ids = [b] + list(ids)
+    ids = restore_lead(loaded.tok, text_in)
     import torch
     t = torch.tensor([ids], device=loaded.dev)
     return {"input_ids": t, "attention_mask": torch.ones_like(t)}
