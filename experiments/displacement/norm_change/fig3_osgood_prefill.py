@@ -206,6 +206,12 @@ EXTRA_POLES = {"v6:interiority": ("In the world", "In a mind"),
 EXTRA_PICKS = {"v6:interiority": (("slapped", "yanked"), ("realized", "wondered")),
                "v6:hedged": (("grabbed", "opened"), ("tried", "wait")),
                "v6:deliberation": (("rushed", "hurried"), ("decided", "consider"))}
+#: RH's choice from the same candidate lists (2026-09-25), drawn with --rh-picks as ..._union_v2.
+#: "thought" was his first high-pole word for interiority; it is already concreteness's Abstract
+#: example, so check_picks refused it and RH chose "realized" instead.
+EXTRA_PICKS_RH = {"v6:interiority": (("yanked", "spat"), ("realized", "wondered")),
+                  "v6:hedged": (("shouted", "grabbed"), ("consider", "wait")),
+                  "v6:deliberation": (("quickly", "immediately"), ("carefully", "probably"))}
 
 
 def select():
@@ -297,8 +303,9 @@ def draw():
     #: with their lift range dashed, keeping V2's row order and legend
     OFFSET = (not V2) or "--offset" in sys.argv
     UNION = V2 and "--union" in sys.argv
+    RH_PICKS = UNION and "--rh-picks" in sys.argv
     name = ("fig3_norms_osgood_en_z_prefill" + ("40" if V2 else "") + ("_offset" if V2 and OFFSET else "")
-            + ("_union" if UNION else ""))
+            + ("_union" if UNION else "") + ("_v2" if RH_PICKS else ""))
     for ext in (".png", ".pdf", ".caption.txt"):
         assert not os.path.exists(os.path.join(HERE, "figures", name + ext)), "refusing to overwrite " + name + ext
 
@@ -309,7 +316,7 @@ def draw():
         #: additions join FO's dictionaries AT RUNTIME (fig3_osgood.py is not edited)
         SEL = json.load(open(SEL_JSON))
         FO.POLES = dict(FO.POLES, **EXTRA_POLES)
-        FO.PICKS = dict(FO.PICKS, **EXTRA_PICKS)
+        FO.PICKS = dict(FO.PICKS, **(EXTRA_PICKS_RH if RH_PICKS else EXTRA_PICKS))
         assert sorted(FO.POLES) == SEL["union_native"], (sorted(FO.POLES), SEL["union_native"])
     FO.check_picks()
     rs = FO.rows(orient=False, mode="z")                  # the published rows, order and values
@@ -403,10 +410,10 @@ def draw():
     small = min(t.get_fontsize() for t in fig.findobj(matplotlib.text.Text) if t.get_text().strip())
     out = os.path.join(HERE, "figures", name + ".png")
     print("  wrote %s (smallest type %.1f pt)" % (save(fig, out), small))
-    caption(out, rs, D, V2, OFFSET, UNION)
+    caption(out, rs, D, V2, OFFSET, UNION, RH_PICKS)
 
 
-def union_text(rs, D):
+def union_text(rs, D, rh_picks=False):
     """The selection paragraph for the union plate, every count read from SEL_JSON."""
     SEL = json.load(open(SEL_JSON))
     by = {r["scale"]: r for r in SEL["scales"]}
@@ -420,19 +427,21 @@ def union_text(rs, D):
             "on both the marginal sign test and the lift-dose slope, Benjamini-Hochberg at 0.05 within each axis "
             "over the 29 gated scales -- less its four absolute-deviation variants. The same rule applied to the "
             "PREFILLED arm over the %d lineages admits three native scales the raw arm does not: %s. Their pole "
-            "words follow the plate's own rule (moved in at least 50 cells, rated in at least 5 frames, none "
+            "words %s (moved in at least 50 cells, rated in at least 5 frames, none "
             "repeated). %d of the published fourteen do not pass the rule on the prefilled arm (%s), most failing "
             "one axis only; they stay. DELIBERATION CARRIES VOCALISATION'S CAVEAT: it is admitted by its MEDIAN "
             "sign test (%d up / %d down among untied lineages, the rest tied at zero) while the plate draws the "
             "MEAN, which sits at %+.3f prefilled and %+.3f raw -- most prompts barely move and a minority move "
             "toward deliberation, so the typical prompt and the net mass point opposite ways. Selection: "
             "results/fig3_prefill_selection40.json." % (
-                D["n_prefill"], "; ".join(one(sc) for sc in add), len(lost), ", ".join(lost),
+                D["n_prefill"], "; ".join(one(sc) for sc in add),
+                "were chosen by RH from the candidates the plate's own rule produces" if rh_picks
+                else "follow the plate's own rule", len(lost), ", ".join(lost),
                 d["marg_up"], d["marg_down"], Z["v6:deliberation"]["prefill30"]["all"]["move_pub_z"],
                 Z["v6:deliberation"]["raw50"]["all"]["move_pub_z"]))
 
 
-def caption(out, rs, D, V2=False, OFFSET=True, UNION=False):
+def caption(out, rs, D, V2=False, OFFSET=True, UNION=False, RH_PICKS=False):
     import textwrap
     #: one line per paragraph, as fig3_osgood's captions (and RH: no hard-wrapping in prose files)
     W = lambda s: [s]
@@ -460,7 +469,7 @@ def caption(out, rs, D, V2=False, OFFSET=True, UNION=False):
                if V2 else
                "They are drawn just below the filled ones on each row, their lift range dashed.")),
         "",
-        *(W(union_text(rs, D)) + [""] if UNION else []),
+        *(W(union_text(rs, D, RH_PICKS)) + [""] if UNION else []),
         *W("ONE RULER. Each open marker is converted to rating points and divided by the PUBLISHED plate's "
            "SD for that scale, not by the prefilled build's own, so a unit means the same thing for both sets "
            "of markers."),
