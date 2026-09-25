@@ -85,7 +85,13 @@ MIN_CONTENT, MIN_DECADE, MIN_ARM = 2000, 3, 10
 #: loops). Its raw cells are coded and in selection.parquet, so the exclusion is stated, not left to the floor.
 DROPPED = {"RWKV/rwkv-4-7b-pile"}
 ARMS_ON = "--arms" in sys.argv
-OUT = os.path.join(HERE, "figures", "arc_history_three_" + ("arms" if ARMS_ON else "preview") + SUF)
+#: meta (RH, 2026-09-25): "pool all the text from a given model into one meta-text, then take the median of
+#: the models' meta-text freqs". A passage of ~88 content words moves its share in steps of ~1.1 points, so a
+#: median over passages is coarse and the median of a sum is not the sum of the medians. A model's meta-text
+#: (its coherent narrative passages concatenated) is scored as a novel is: one share, one concreteness.
+META = "meta" in sys.argv[1:]
+META_OUT = os.path.join(DATA, "arc_history_arm_meta%s.parquet" % SUF)
+OUT = os.path.join(HERE, "figures", "arc_history_three_" + ("arms" if ARMS_ON else "preview") + SUF + ("_meta" if META else ""))
 NAME = {"base": "Base models", "raw": "Aligned models"}
 LINETYPE = {"Base models": "dotted", "Aligned models": "dashed"}      # Figure 5 v5+
 X0, X1, XLAB, XMAX = 1600, 2005, 2011, 2150
@@ -185,6 +191,34 @@ def arm_passages():
     return D
 
 
+def arm_meta():
+    """-> per model: base, arm, model, n_passages, n_content, cog, emo (list tokens / content tokens of the
+    concatenated text) and conc (measure_lltk.Scorer on the concatenated text, the book's token mean). The
+    passages are exactly arm_passages()'s. Needs the lltk venv once; cached."""
+    if os.path.exists(META_OUT):
+        return pd.read_parquet(META_OUT)
+    from measure_lltk import Scorer
+    D = arm_passages()
+    S_ = pd.read_parquet(os.path.join(TA, "selection.parquet")).set_index("id")
+    Lj = json.load(open(LISTS))
+    cog, emo, sw = set(Lj["cog"]), set(Lj["emo"]), set(Lj["stopwords"])
+    Sc = Scorer()
+    rows = []
+    for (base, arm, model), g in D.groupby(["base", "arm", "model"]):
+        txt = "\n\n".join(S_.loc[i, "text"] or "" for i in g.id)
+        content = [w for w in re.findall(r"[a-z]+", txt.lower()) if w not in sw]
+        n = len(content)
+        #: the meta-text count is the passages' pooled count, by construction: assert it
+        assert n == int(g.n_content.sum()), (model, arm, n, int(g.n_content.sum()))
+        v = Sc.score(txt) or {}
+        rows.append(dict(base=base, arm=arm, model=model, n_passages=len(g), n_content=n,
+                         cog=sum(w in cog for w in content) / n, emo=sum(w in emo for w in content) / n,
+                         conc=v.get("rh_absconc_median")))
+    M = pd.DataFrame(rows)
+    M.to_parquet(META_OUT, index=False)
+    return M
+
+
 def arm_values(D, col, pooled=False):
     """Per model the median over passages (Figure 5), or with pooled=True the model's POOLED rate -- its list
     tokens over its content tokens across all its passages, the analogue of a whole-text share -- then the
@@ -239,7 +273,15 @@ def main():
     arms, info = {}, ""
     if ARMS_ON:
         D = arm_passages()
-        for k in ("conc", "cog", "emo"):
+        if META:
+            M = arm_meta()
+            for k in ("conc", "cog", "emo"):
+                per = M.pivot_table(index="base", columns="arm", values=k)
+                arms[k] = {a: float(per[a].median()) for a in ("base", "raw")}
+                print("  %s: meta-text %s | passage median %s" % (k, {a: round(v, 4) for a, v in arms[k].items()},
+                                                                  {a: round(v, 4) for a, v in arm_values(D, k)[0].items()}))
+            nl = M.base.nunique()
+        for k in (() if META else ("conc", "cog", "emo")):
             arms[k], nl = arm_values(D, k, pooled=PAST and k != "conc")
             if k != "conc":
                 print("  %s arms: median-of-passages %s, pooled %s" % (k, {a: round(100 * v, 3) for a, v in arm_values(D, k)[0].items()},
@@ -275,11 +317,13 @@ def main():
         "Cognitive: the USAS X words an LLM rater kept under a precision-first rule, "
         "hand-vetted (872 base words; 68% cognition by token mass). Emotional: period-model neighbours of X rated "
         "and vetted the same way (1,077 base words; 67% emotion).") + (
-        info + (" Model arms for the two word-list panels: per model the POOLED rate over its coherent narrative "
+        info + (" Model arms: each model's coherent narrative passages concatenated into ONE META-TEXT and scored "
+                "as a novel is (list share; concreteness as the token mean); then the median over lineages." if META else "") + (
+                "" if META else " Model arms for the two word-list panels: per model the POOLED rate over its coherent narrative "
                 "passages (list tokens over content tokens; past forms are too sparse for a passage median, which is 0 "
                 "for every model's emotional forms), then the median over lineages; concreteness as below." if PAST else "") +
-        " Model arms: per model the median over its coherent narrative passages, then the median over lineages; "
-        "passage values, not text values, so medians compare and spreads do not. Model concreteness is not "
+        ("" if META else " Model arms: per model the median over its coherent narrative passages, then the median over lineages; "
+        "passage values, not text values, so medians compare and spreads do not.") + " Model concreteness is not "
         "bias-corrected (clean digital text)." if ARMS_ON else ""))
     L += ["", "  arms: " + json.dumps({k: {a: round(v, 4) for a, v in d.items()} for k, d in arms.items()})] if ARMS_ON else []
     open(OUT + ".caption.txt", "w").write("\n".join(L) + "\n")

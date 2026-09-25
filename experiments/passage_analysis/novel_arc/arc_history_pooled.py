@@ -1,6 +1,8 @@
 """Cognitive and emotional language POOLED, as drawn and with concreteness regressed out. (RH, 2026-09-25)
 
-    .venv/bin/python -u arc_history_pooled.py   -> figures/arc_history_pooled_v4.{png,pdf,caption.txt}
+    .venv/bin/python -u arc_history_pooled.py [meta]   -> figures/arc_history_pooled_v4[_meta].{png,pdf,caption.txt}
+    meta: arms from each model's passages concatenated into one meta-text (arc_history_arms.arm_meta), scored
+    as a novel is; the median over lineages. Without it, Figure 5's median over passages.
 
 RH: "Can we try Cognitive + Emotional pooled, one facet for normal, one facet for residualized -- the
 non-residual ones in arc_history_three_arms_v4 are similar enough to pool." Under the v4 lists they are:
@@ -23,11 +25,12 @@ import pandas as pd
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
-sys.argv = [sys.argv[0], "v4"]                         # arc_history_arms reads its version at import
+META = "meta" in sys.argv[1:]
+sys.argv = [sys.argv[0], "v4"] + (["meta"] if META else [])   # arc_history_arms reads its version at import
 import arc_history_arms as H                           # noqa: E402
 from malignment import figure as F                     # noqa: E402
 
-OUT = os.path.join(HERE, "figures", "arc_history_pooled_v4")
+OUT = os.path.join(HERE, "figures", "arc_history_pooled_v4" + ("_meta" if META else ""))
 
 
 def main():
@@ -48,11 +51,17 @@ def main():
     adj = H.decades(Tc.year, Tc.share - b * (Tc.conc_corr - cm))
     A = pd.read_parquet(H.ARM_OUT)
     A["share"] = A.cog + A.emo
-    arms_raw = {x: v for x, v in (lambda per: {x: float(per[x].median()) for x in ("base", "raw")})(
-        A.groupby(["base", "arm"]).share.median().unstack()).items()}
-    Ac = A.dropna(subset=["conc", "share"]).assign(adj=lambda d: d.share - b * (d.conc - cm))
-    per = Ac.groupby(["base", "arm"]).adj.median().unstack()
-    arms_adj = {x: float(per[x].median()) for x in ("base", "raw")}
+    if META:
+        M = pd.read_parquet(H.META_OUT).assign(share=lambda d: d.cog + d.emo)
+        M["adj"] = M.share - b * (M.conc - cm)
+        arms_raw = {x: float(M[M.arm == x].share.median()) for x in ("base", "raw")}
+        arms_adj = {x: float(M[M.arm == x].adj.median()) for x in ("base", "raw")}
+    else:
+        arms_raw = {x: v for x, v in (lambda per: {x: float(per[x].median()) for x in ("base", "raw")})(
+            A.groupby(["base", "arm"]).share.median().unstack()).items()}
+        Ac = A.dropna(subset=["conc", "share"]).assign(adj=lambda d: d.share - b * (d.conc - cm))
+        per = Ac.groupby(["base", "arm"]).adj.median().unstack()
+        arms_adj = {x: float(per[x].median()) for x in ("base", "raw")}
     dconc = H.decades(Tc.year, Tc.conc_corr)
     import matplotlib
     matplotlib.use("Agg")
@@ -68,14 +77,16 @@ def main():
     fig.savefig(OUT + ".pdf")
     wrap = lambda s: textwrap.wrap(s, 100)
     L = wrap("COGNITIVE AND EMOTIONAL LANGUAGE IN FICTION, POOLED, 1600-2000, as drawn (top) and with concreteness "
-             "regressed out (bottom).") + [""] + wrap(
+             "regressed out (bottom).") + [""] + wrap((
         "Per text, the share of content words on either list (v4: cognition, attention, perception and volition "
         "words; emotion words; USAS X and E with period-model neighbours, LLM-rated for precision and hand-vetted). "
         "Gray points: decade medians over %s arc_fiction texts; black line: lowess (span 0.3). Bottom: the share "
         "minus a linear fit on the text's concreteness (Abs-Conc.Median.median, corpus-bias corrected; %s texts "
         "with both), plus the mean share; part of that fit is mechanical, since the list words are abstract and "
-        "enter the concreteness mean. Model arms: TEMPLATE_ARM, %d lineages, coherent narrative passages; per model "
-        "the median over passages (bottom: adjusted with the history's slope), then the median over lineages." % (
+        "enter the concreteness mean. Model arms: TEMPLATE_ARM, %d lineages, coherent narrative passages; " + (
+        "each model's passages concatenated into one meta-text and scored as a novel is (bottom: adjusted with the "
+        "history's slope), then the median over lineages." if META else "per model "
+        "the median over passages (bottom: adjusted with the history's slope), then the median over lineages.")) % (
             format(len(T), ","), format(len(Tc), ","), A.base.nunique())) + ["",
         "  slope %.4f per concreteness unit; text-level r %.3f; decade rho raw vs adjusted %.2f; decade rho with "
         "concreteness raw %.2f, adjusted %.2f" % (b, np.corrcoef(Tc.conc_corr, Tc.share)[0, 1],
