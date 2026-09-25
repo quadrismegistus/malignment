@@ -3,7 +3,10 @@
     .venv/bin/python -u interiority_candidates.py --pilot     three batches, printed
     .venv/bin/python -u interiority_candidates.py --run       both passes -> candidate_ratings_v1.parquet
     .venv/bin/python -u interiority_candidates.py --summary   -> INTERIORITY_CANDIDATES.md
-    add --seeds to any of the three: rate the USAS X words THEMSELVES (3,225, every primary-sense X word
+    .venv/bin/python -u interiority_candidates.py --tiebreak   a THIRD pass over words whose two ratings
+                                                              disagree -> *_pass3.parquet
+    .venv/bin/python -u interiority_candidates.py --consensus  -> *_consensus_v1.csv, INTERIORITY_TIEBREAK.md
+    add --seeds to any of these: rate the USAS X words THEMSELVES (3,225, every primary-sense X word
     less NLTK stopwords) -> usasx_ratings_v1.parquet, USAS_X_KINDS.md, with anchors that are not X words
 
 WHERE THE CANDIDATES COME FROM. The abstraction seat took every USAS X word (primary sense, any POS entry)
@@ -26,6 +29,8 @@ companions; agreement between a word's two ratings measures how much batch conte
 ANCHORS: four fixed words (think, wonder, door, walk -- none of them a candidate) in every batch; their ratings should never move.
 """
 import json, os, random, sys
+
+import numpy as np
 from typing import List, Literal
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -189,6 +194,10 @@ def main():
         return
     if "--summary" in sys.argv:
         seeds_summary() if SEEDS else summary()
+    if "--tiebreak" in sys.argv:
+        tiebreak()
+    if "--consensus" in sys.argv:
+        consensus_report()
 
 
 def summary():
@@ -248,6 +257,97 @@ def summary():
         ws = sl[sl.kind == k].word.tolist()
         L.append("- **%s** (%d): %s" % (k, len(ws), ", ".join(ws[:60]) + (" ..." if len(ws) > 60 else "")))
     open(os.path.join(HERE, "INTERIORITY_CANDIDATES.md"), "w").write("\n".join(L) + "\n")
+    print("\n".join(L))
+
+
+OUT3 = OUT.replace("_v1.parquet", "_v1_pass3.parquet")
+
+
+def two_pass():
+    """-> wide table of passes 1 and 2 (non-anchor) and the words whose interior or kind disagree."""
+    import pandas as pd
+    d = pd.read_parquet(OUT)
+    w = d[~d.anchor].pivot_table(index="word", columns="pass_", values=["interior", "kind"], aggfunc="first").dropna()
+    dis = (w[("interior", 1)] != w[("interior", 2)]) | (w[("kind", 1)] != w[("kind", 2)])
+    return w, sorted(w.index[dis])
+
+
+def tiebreak():
+    """Pass 3 over the disagreeing words only, in a fresh shuffle with the same anchors."""
+    import pandas as pd
+    assert not os.path.exists(OUT3), "refusing to overwrite %s" % OUT3
+    _, dis = two_pass()
+    cents = dict(pool())
+    items = [(x, cents[x]) for x in dis]
+    rng = random.Random(SEED + 3)
+    rng.shuffle(items)
+    bs = []
+    for b in range(0, len(items), BATCH):
+        chunk = items[b:b + BATCH] + list(ANCHORS.items())
+        rng.shuffle(chunk)
+        bs.append(dict(pass_=3, batch=b // BATCH, items=chunk))
+    rows, miss, extra, nerr = rate(bs)
+    pd.DataFrame(rows).to_parquet(OUT3, index=False)
+    print("-> %s: %d words in %d batches; %d missing, %d extra, %d failed calls" % (
+        OUT3, len(dis), len(bs), miss, extra, nerr))
+
+
+def consensus():
+    """Median interior of three, majority kind of three ('mixed' if all differ); two-pass agreement kept."""
+    import collections
+    import pandas as pd
+    w, dis = two_pass()
+    p3 = pd.read_parquet(OUT3)
+    anc3 = p3[p3.anchor].groupby("word").agg(interior=("interior", lambda s: sorted(set(s))),
+                                             kind=("kind", lambda s: sorted(set(s))), n=("interior", "size"))
+    p3 = p3[~p3.anchor].set_index("word")
+    rows = []
+    for x in w.index:
+        i = [int(w.loc[x, ("interior", 1)]), int(w.loc[x, ("interior", 2)])]
+        k = [w.loc[x, ("kind", 1)], w.loc[x, ("kind", 2)]]
+        third = x in p3.index
+        if third:
+            i.append(int(p3.loc[x, "interior"])); k.append(p3.loc[x, "kind"])
+        top, n = collections.Counter(k).most_common(1)[0]
+        rows.append(dict(word=x, interior=int(np.median(i)), kind=top if n >= 2 else "mixed",
+                         n_ratings=len(i), tiebroken=third, ratings_interior=" ".join(map(str, i)),
+                         ratings_kind=" ".join(k)))
+    c = pd.DataFrame(rows)
+    assert set(c.word[c.tiebroken]) == set(dis), "pass 3 does not cover exactly the disagreeing words"
+    return c, anc3
+
+
+def consensus_report():
+    import pandas as pd
+    L = ["# Tie-break pass and consensus ratings (EXPLORATORY)", "",
+         "Producer `interiority_candidates.py --tiebreak / --consensus` (and `--seeds`). Where a word's two "
+         "ratings disagreed on interior (0-3) or kind, a THIRD rating was taken in a fresh shuffle with the same "
+         "task, prompt and anchors. Consensus: interior = median of the ratings; kind = the majority label, "
+         "'mixed' if all three differ. Words whose first two ratings agreed keep them. Two-pass readouts: "
+         "INTERIORITY_CANDIDATES.md, USAS_X_KINDS.md.", ""]
+    for label, seeds in (("Candidates (period-model neighbours)", False), ("USAS X words", True)):
+        global OUT, OUT3, ANCHORS, SEEDS
+        SEEDS = seeds
+        OUT = os.path.join(SHARED, "usasx_ratings_v1.parquet" if seeds else "candidate_ratings_v1.parquet")
+        OUT3 = OUT.replace("_v1.parquet", "_v1_pass3.parquet")
+        c, anc3 = consensus()
+        dest = os.path.join(SHARED, ("usasx" if seeds else "candidate") + "_consensus_v1.csv")
+        if seeds:
+            xw = x_words()
+            c["x_codes"] = [" ".join(xw[x]) for x in c.word]
+        c.to_csv(dest, index=False)
+        tb = c[c.tiebroken]
+        mental = c[(c.interior >= 2) & c.kind.isin(MENTAL)]
+        L += ["## %s" % label, "",
+              "- words %d; tie-broken %d (%.1f%%); after the third rating, kind still 'mixed' (all three differ) for %d"
+              % (len(c), len(tb), 100 * len(tb) / len(c), int((tb.kind == "mixed").sum())),
+              "- pass-3 anchors: " + "; ".join("%s interior %s kind %s (n=%d)" % (
+                  x, r.interior, r.kind, r.n) for x, r in anc3.iterrows()),
+              "- consensus interior >= 2 with a mental kind: %d words (%s)" % (
+                  len(mental), ", ".join("%s %d" % (k, int((mental.kind == k).sum())) for k in MENTAL)),
+              "- consensus kinds, all words: " + ", ".join("%s %d" % (k, n) for k, n in c.kind.value_counts().items()),
+              "- per word: %s" % dest, ""]
+    open(os.path.join(HERE, "INTERIORITY_TIEBREAK.md"), "w").write("\n".join(L) + "\n")
     print("\n".join(L))
 
 
