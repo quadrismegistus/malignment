@@ -439,7 +439,7 @@ MACHINE = re.compile(r"\b(robot|computer|machine|android|cyborg)s?\b")
 
 
 def _stack_plot(shorts, ns, mean, groups, fmt="%.1f", min_w=7, height=2.7, legend_nrow=None, counts=True,
-                xtitle="Answers to \u201cWho are you?\u201d, mean over models", disp=None):
+                xtitle="Answers to \u201cWho are you?\u201d, mean over models", disp=None, label_ma=None):
     """One horizontal bar per condition, segments in `groups` order [(label, gray)]. -> plotnine plot"""
     import matplotlib
     matplotlib.use("Agg")
@@ -487,7 +487,9 @@ def _stack_plot(shorts, ns, mean, groups, fmt="%.1f", min_w=7, height=2.7, legen
          + theme(figure_size=(W_IN, H_IN), legend_position="bottom", legend_title=element_blank(),
                  legend_text=element_text(family=fnt, size=F.PUB_FONT_PT),
                  legend_margin=0, legend_box_spacing=0.02, legend_key_size=9,
-                 axis_text_y=element_text(family=fnt, size=F.PUB_FONT_PT, color=F.PUB_INK),
+                 #: label_ma="right": every line of a two-line row label flush against the axis (RH)
+                 axis_text_y=element_text(family=fnt, size=F.PUB_FONT_PT, color=F.PUB_INK,
+                                          **({"ma": label_ma} if label_ma else {})),
                  axis_ticks_major_y=element_blank()))
 
     return p
@@ -1094,7 +1096,7 @@ LADDER_V4_LABELS = ("Aligned models\n(untemplated)", "Aligned models\n(prefilled
                     "Aligned models\n(chat template)")
 
 
-def fig_ladder_v4(name="ci_subject_ladder_v4", labels=LADDER_V4_LABELS):
+def fig_ladder_v4(name="ci_subject_ladder_v4", labels=LADDER_V4_LABELS, label_ma=None):
     """In ci_subject_stack4w_v4's design: base (F20x, unpaired) plus three ladder ticks on the same 18
     aligned models; the Q/A-as-user-message tick is left off the plate (RH, 2026-09-25)."""
     import numpy as np
@@ -1136,7 +1138,7 @@ def fig_ladder_v4(name="ci_subject_ladder_v4", labels=LADDER_V4_LABELS):
     disp = {b: b for b in shorts}
     p = _stack_plot(shorts, ns, mean, [(g, c) for g, _, c in LADDER_GROUPS], fmt="%.0f%%", min_w=5,
                     height=3.2, legend_nrow=1, counts=False,
-                    xtitle="Answers to “Who are you?” claiming to be …", disp=disp)
+                    xtitle="Answers to “Who are you?” claiming to be …", disp=disp, label_ma=label_ma)
 
     W = lambda txt: textwrap.wrap(txt, 100)
     flat = lambda b: b.replace("\n", " ")
@@ -1199,7 +1201,7 @@ def fig_ladder_v4(name="ci_subject_ladder_v4", labels=LADDER_V4_LABELS):
 def fig_ladder_v5():
     """As ladder_v4, the aligned bars labelled (raw), (prefilled), (chat) (RH)."""
     fig_ladder_v4("ci_subject_ladder_v5", ("Aligned models\n(raw)", "Aligned models\n(prefilled)",
-                                           "Aligned models\n(chat)"))
+                                           "Aligned models\n(chat)"), label_ma="right")
 
 
 def fig_stack4():
