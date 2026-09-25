@@ -89,6 +89,22 @@ def main():
                      "arm), then applied to the raw values. Pooled-slope version: ARC_FIG5_PARTIALS.md."] + L[2:]
         L += ["", "## Split-half reliability across the 120 meta-texts (odd vs even passages; Spearman-Brown)", ""]
         L += reliability()
+        L += ["", "## Reading (agreed with the abstraction seat, 2026-09-25)", "",
+              "- Concreteness separates every arm and survives every reverse partial.",
+              "- With the within-arm slope, the emotional-word rise in the CHAT-ASKED arm exceeds what concreteness predicts: "
+              "26 of 30 lineages, sign-test p < 0.001, which survives Bonferroni over the 9 list-by-arm cells (0.0056). The "
+              "raw and prefill cells (20 of 30, p 0.099) do not, so the claim rests on the asked arm alone.",
+              "- Word it as the chat-asked arm, not alignment in general. That arm's user turn is 'Continue this text: ' plus "
+              "the stem (TEMPLATE_ARM.md), against prefill's reply opening on the stem: the difference is being addressed "
+              "with a request, so part of the excess may be a task-framing effect of the request.",
+              "- Cognitive words and vector arousal are accounted for by concreteness in every arm; vector valence is null "
+              "throughout. Dominance falls in the asked arm (7 of 30, p 0.005), just short of Bonferroni: a lead, and the "
+              "same arm pairing more emotion with less dominance.",
+              "- Reliability rules out a precision artefact at meta-text grain, not at passage grain.",
+              "- Not yet reconciled: the 25-pair passage-level decomposition on usas_x (model_placement raw arm, within-"
+              "passage slope) kept ~60% of the aligned rise after a concreteness partial (20/25 pairs); here the raw arm keeps "
+              "less. Measure (usas_x vs the v4 emotion list), population (model_placement vs TEMPLATE_ARM), grain (passage vs "
+              "meta-text) and slope all differ, so both can hold; the write-up needs one sentence saying which differences matter."]
     open(os.path.join(HERE, "ARC_FIG5_PARTIALS%s.md" % ("_v2" if V2 else "")), "w").write("\n".join(L) + "\n")
     print("\n".join(L))
 
