@@ -2,6 +2,9 @@
 starting at 1700 not 1600 (filter out c17)")
 
     .venv/bin/python -u arc_fig5_conc_valence.py [f11]   -> figures/arc_fig5_conc_valence_v1[_f11].{png,pdf,caption.txt}
+    .venv/bin/python -u arc_fig5_conc_valence.py extremity -> figures/arc_fig5_conc_valence_extremity_v1.*: a third
+        panel, valence EXTREMITY (arc_valence_extremity.py: each word's distance from Warriner-neutral valence,
+        token-averaged; RH "could we plot abs val of valence"). No bias coefficients exist for it: uncorrected.
 
 HISTORY: the abstraction project's vector norms over arc_fiction (vad_scores_arc_fiction.parquet):
 Abs-Conc.Median.median, corrected with the book's corpus_bias_coefficients.json (abstraction's re-estimate awaits
@@ -22,12 +25,14 @@ import pandas as pd
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 F11 = "f11" in sys.argv[1:]
+EXT = "extremity" in sys.argv[1:]
 sys.argv = [sys.argv[0], "v4", "meta", "sel12", "arms4"]
 import arc_history_arms as H                               # noqa: E402
 from malignment import figure as F                         # noqa: E402
 
 SH = os.path.expanduser("~/malignment-data/interiority_norms")
-OUT = os.path.join(HERE, "figures", "arc_fig5_conc_valence_v1" + ("_f11" if F11 else ""))
+OUT = os.path.join(HERE, "figures", "arc_fig5_conc_valence" + ("_extremity" if EXT else "") + "_v1" + ("_f11" if F11 else ""))
+XC = "VAD-ValenceExtremity.Warriner.median"
 COLS = {"conc": "Abs-Conc.Median.median", "valence": "VAD-Valence.Warriner.median"}
 START = 1700
 
@@ -43,6 +48,11 @@ def main():
     vad = json.load(open(os.path.join(SH, "vad_corpus_bias.json")))["estimates"]
     T["c_conc"] = T[COLS["conc"]] - T.corpus.map(book).fillna(0.0)
     T["c_valence"] = T[COLS["valence"]] - T.corpus.map(vad[COLS["valence"]]["coefficients"]).fillna(0.0)
+    if EXT:
+        E = pd.read_parquet(os.path.join(H.DATA, "valence_extremity_arc.parquet"))[["_id", XC]]
+        T = T.merge(E, on="_id", how="left", validate="1:1")
+        T["c_extremity"] = T[XC]
+        COLS["extremity"] = XC
     T = T[T.year.between(START, 2009)]
     if F11:
         M = pd.read_parquet(os.path.join(SH, "fig5_meta_texts_arms4_scored.parquet"))
@@ -53,6 +63,9 @@ def main():
         M = M.assign(arm=M.cond.map({"base": "base", "aligned_raw": "raw", "aligned_prefill": "prefill", "aligned_rettberg": "continue"}))
         key, conds, lin = "arm", ["base", "raw", "prefill", "continue"], "lineage"
         src = "no-demonym national stories, judged proper stories, %d lineages" % M.lineage.nunique()
+    if EXT:
+        Mx = pd.read_parquet(os.path.join(H.DATA, "valence_extremity_meta_%s.parquet" % ("f11" if F11 else "national")))[["id", XC]]
+        M = M.merge(Mx, on="id", how="left", validate="1:1")
     hist, arms, n = {}, {}, {}
     for k, c in COLS.items():
         d = T[["year", "c_" + k]].dropna()
@@ -67,9 +80,11 @@ def main():
     H.X0, H.XMAX = START, 2185
     spec = (("conc", "Concreteness in fiction", "Concreteness\n(vector norm)"),
             ("valence", "Valence in fiction", "Valence\n(vector norm)"))
-    ps = [H.panel(hist[k], H.smooth(hist[k]), arms[k], t, yl, i == 1, False) for i, (k, t, yl) in enumerate(spec)]
+    if EXT:
+        spec += (("extremity", "Valence extremity in fiction", "Distance from\nneutral valence"),)
+    ps = [H.panel(hist[k], H.smooth(hist[k]), arms[k], t, yl, i == len(spec) - 1, False) for i, (k, t, yl) in enumerate(spec)]
     fig = Stack(ps).draw()
-    fig.set_size_inches(F.PUB_SIZE[0], 4.4)
+    fig.set_size_inches(F.PUB_SIZE[0], 4.4 if not EXT else 6.4)
     fig.savefig(OUT + ".png", dpi=300)
     fig.savefig(OUT + ".pdf")
     rows = []
@@ -88,7 +103,10 @@ def main():
                         "black line: lowess (span 0.3). Arms: %s; each model-condition's texts as one meta-text scored the "
                         "same way; median over lineages. Base models (dotted); aligned models given raw text (dashed); "
                         "aligned models in their chat template, reply prefilled (dash-dot) or asked (solid)." % (
-                            format(n["conc"], ","), src), 100) + [""] + rows
+                            format(n["conc"], ","), src) + (
+                        " Bottom: valence extremity, each word's distance from neutral valence (the point where Warriner's "
+                        "midpoint, 5, falls on the vector axis) averaged over tokens -- emotional charge of either sign; "
+                        "not corpus-bias corrected (no coefficients exist for it)." if EXT else ""), 100) + [""] + rows
     open(OUT + ".caption.txt", "w").write("\n".join(cap) + "\n")
     print("\n".join(cap))
 
