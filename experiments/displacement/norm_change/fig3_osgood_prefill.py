@@ -208,12 +208,15 @@ def draw():
     #: V2 (RH, 2026-09-25, on the 40-lineage plate): open glyphs on the SAME line as the filled,
     #: no dashed prefilled range, rows by each row's most extreme glyph, legend All/Least/Most
     V2 = POP == "40"
-    name = "fig3_norms_osgood_en_z_prefill" + ("40" if V2 else "")
+    #: --offset (RH, after seeing the shared line): the prefilled glyphs back just below the raw ones
+    #: with their lift range dashed, keeping V2's row order and legend
+    OFFSET = (not V2) or "--offset" in sys.argv
+    name = "fig3_norms_osgood_en_z_prefill" + ("40" if V2 else "") + ("_offset" if V2 and OFFSET else "")
     for ext in (".png", ".pdf", ".caption.txt"):
         assert not os.path.exists(os.path.join(HERE, "figures", name + ext)), "refusing to overwrite " + name + ext
 
     D = json.load(open(OUT_JSON))
-    sys.argv = [sys.argv[0], "--z"]                       # FO.rows reads its estimator flag from argv
+    sys.argv = [sys.argv[0], "--z"]                       # FO.rows reads its estimator flag from argv (OFFSET read above)
     FO.check_picks()
     rs = FO.rows(orient=False, mode="z")                  # the published rows, order and values
     n = len(rs)
@@ -243,14 +246,14 @@ def draw():
     pad = 0.06 * (e.max() - e.min())
     #: the prefilled markers sit a hair below their row, the raw ones a hair above, so a
     #: coincident pair stays two marks; the row rule runs between them
-    DY = 0.0 if V2 else 0.17
-    OPEN_FACE = "none" if V2 else "white"      # on a shared line, an open glyph must not hide a filled one
+    DY = 0.17 if OFFSET else 0.0
+    OPEN_FACE = "white" if OFFSET else "none"  # on a shared line, an open glyph must not hide a filled one
     for i in range(n):
         ax.plot([e.min() - pad, e.max() + pad], [i, i], color=PUB_FAINT, linewidth=PUB_RULE_PT * 0.7,
                 zorder=1, solid_capstyle="butt")
         ax.plot([lo[i], hi[i]], [i + DY] * 2, color=PUB_GRAY, linewidth=PUB_RULE_PT * 1.6, zorder=2,
                 solid_capstyle="butt")
-        if not V2:
+        if OFFSET:
             ax.plot([plo[i], phi[i]], [i - DY] * 2, color=PUB_GRAY, linewidth=PUB_RULE_PT * 0.9, zorder=2,
                     solid_capstyle="butt", linestyle=(0, (2, 1.2)))
     h_lo = ax.scatter(lo, y + DY, marker="v", s=17, facecolor=PUB_GRAY, edgecolor="none", zorder=3,
@@ -305,10 +308,10 @@ def draw():
     small = min(t.get_fontsize() for t in fig.findobj(matplotlib.text.Text) if t.get_text().strip())
     out = os.path.join(HERE, "figures", name + ".png")
     print("  wrote %s (smallest type %.1f pt)" % (save(fig, out), small))
-    caption(out, rs, D, V2)
+    caption(out, rs, D, V2, OFFSET)
 
 
-def caption(out, rs, D, V2=False):
+def caption(out, rs, D, V2=False, OFFSET=True):
     import textwrap
     #: one line per paragraph, as fig3_osgood's captions (and RH: no hard-wrapping in prose files)
     W = lambda s: [s]
@@ -329,9 +332,11 @@ def caption(out, rs, D, V2=False):
         *W("OPEN markers are the same statistic for base -> aligned PREFILLED: the aligned model's chat "
            "template with an empty system message, the prompt's text prefilled at the start of the model's own "
            "turn (movement_v4, frame_aligned='prefill'). The base side is the same raw base. " + (
-               "They are drawn as outlines on the same line as the filled ones; only the filled markers' lift "
-               "range is drawn. Rows are ordered by each row's most extreme marker, filled or open, most "
-               "negative at the top." if V2 else
+               ("They are drawn just below the filled ones on each row, their lift range dashed. " if OFFSET else
+                "They are drawn as outlines on the same line as the filled ones; only the filled markers' lift "
+                "range is drawn. ") +
+               "Rows are ordered by each row's most extreme marker, filled or open, most negative at the top."
+               if V2 else
                "They are drawn just below the filled ones on each row, their lift range dashed.")),
         "",
         *W("ONE RULER. Each open marker is converted to rating points and divided by the PUBLISHED plate's "
