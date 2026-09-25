@@ -1,0 +1,17 @@
+CONCRETENESS AND VALENCE IN ENGLISH FICTION, 1700-2000, with four model arms. Vector norms from
+period word2vec models seeded by human ratings (concreteness: the book's Abs-Conc; valence: Warriner
+et al. 2013), median across periods; held-out agreement with the human ratings 0.68 and 0.66. Gray
+points: decade medians over 81,120 arc_fiction texts (1700-2009, corpus-bias corrected); black line:
+lowess (span 0.3). Arms: no-demonym national stories, judged proper stories, 38 lineages; each
+model-condition's texts as one meta-text scored the same way; median over lineages. Base models
+(dotted); aligned models given raw text (dashed); aligned models in their chat template, reply
+prefilled (dash-dot) or asked (solid).
+
+  conc Base models: +0.097 (1983)
+  conc Aligned models: -0.125 (1910)
+  conc Aligned, chat, prefilled: -0.059 (1924)
+  conc Aligned, chat, asked: -0.178 (1898)
+  valence Base models: +0.191 (above all)
+  valence Aligned models: +0.347 (above all)
+  valence Aligned, chat, prefilled: +0.342 (above all)
+  valence Aligned, chat, asked: +0.299 (above all)
