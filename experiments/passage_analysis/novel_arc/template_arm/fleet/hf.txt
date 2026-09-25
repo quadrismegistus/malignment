@@ -1,0 +1,4 @@
+RWKV/rwkv-4-7b-pile RWKV/rwkv-raven-7b
+allenai/Olmo-Hybrid-7B allenai/Olmo-Hybrid-Instruct-DPO-7B
+google/recurrentgemma-9b google/recurrentgemma-9b-it
+internlm/internlm2-base-7b internlm/internlm2-chat-7b

@@ -1,0 +1,12 @@
+meta-llama/Llama-3.1-8B experiments/passage_analysis/novel_arc/template_arm/prompts/meta-llama__Llama-3.1-8B.jsonl float16
+meta-llama/Llama-3.1-8B-Instruct experiments/passage_analysis/novel_arc/template_arm/prompts/meta-llama__Llama-3.1-8B-Instruct.jsonl float16
+kakaocorp/kanana-1.5-8b-base experiments/passage_analysis/novel_arc/template_arm/prompts/kakaocorp__kanana-1.5-8b-base.jsonl float16
+kakaocorp/kanana-1.5-8b-instruct-2505 experiments/passage_analysis/novel_arc/template_arm/prompts/kakaocorp__kanana-1.5-8b-instruct-2505.jsonl float16
+Zyphra/Zamba2-7B experiments/passage_analysis/novel_arc/template_arm/prompts/Zyphra__Zamba2-7B.jsonl bfloat16
+Zyphra/Zamba2-7B-Instruct experiments/passage_analysis/novel_arc/template_arm/prompts/Zyphra__Zamba2-7B-Instruct.jsonl bfloat16
+EleutherAI/pythia-2.8b experiments/passage_analysis/novel_arc/template_arm/prompts/EleutherAI__pythia-2.8b.jsonl float16
+ContextualAI/archangel_sft-dpo_pythia2-8b experiments/passage_analysis/novel_arc/template_arm/prompts/ContextualAI__archangel_sft-dpo_pythia2-8b.jsonl float16
+Qwen/Qwen2.5-0.5B experiments/passage_analysis/novel_arc/template_arm/prompts/Qwen__Qwen2.5-0.5B.jsonl float16
+Qwen/Qwen2.5-0.5B-Instruct experiments/passage_analysis/novel_arc/template_arm/prompts/Qwen__Qwen2.5-0.5B-Instruct.jsonl float16
+tiiuae/falcon-7b experiments/passage_analysis/novel_arc/template_arm/prompts/tiiuae__falcon-7b.jsonl float16 transformers==5.10.2
+tiiuae/falcon-7b-instruct experiments/passage_analysis/novel_arc/template_arm/prompts/tiiuae__falcon-7b-instruct.jsonl float16 transformers==5.10.2

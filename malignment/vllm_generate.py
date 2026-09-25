@@ -221,6 +221,11 @@ def load_prompts(path):
                     "chat": bool(d.get("chat", False)),
                     "template_kwargs": d.get("template_kwargs") or None,
                     "assistant_prefix": d.get("assistant_prefix") or "",
+                    #: per-condition overrides of --n and --seed (TEMPLATE_ARM:
+                    #: n=20 for f11_l2 stems, n=50 for Y cells, one file per model;
+                    #: seed from sha256(model|arm|prompt)). Absent -> the CLI's.
+                    "n": d.get("n"),
+                    "seed": d.get("seed"),
                 })
             else:
                 conditions.append({
@@ -367,9 +372,11 @@ def generate_model(model_id, conditions, n=10, seed=42, decoder=None,
         frame = frame_label(system, user, prefill, True if cond.get("chat") else None)
         sysk = "" if system is DEFAULT else (system or "")
 
-        for i in range(n):
+        n_c = cond.get("n") or n
+        seed_c = cond["seed"] if cond.get("seed") is not None else seed
+        for i in range(n_c):
             k = dict(gen_key(model_id, prompt, frame, sysk, dec,
-                             None if seed is None else seed + i, i,
+                             None if seed_c is None else seed_c + i, i,
                              system_set=(system is not DEFAULT)),
                      user=user, prefill=bool(prefill),
                      user_msg=(user_msg if prefill else None),
@@ -398,8 +405,9 @@ def generate_model(model_id, conditions, n=10, seed=42, decoder=None,
               % (model_id, len(conditions), n))
         return 0
 
+    n_all = sum((c.get("n") or n) for c in model_conditions)
     print("    %s: %d to generate (%d cached)"
-          % (model_id, len(todo), len(conditions) * n - len(todo)))
+          % (model_id, len(todo), n_all - len(todo)))
     if dry_run:
         return 0
 
@@ -456,15 +464,20 @@ def generate_model(model_id, conditions, n=10, seed=42, decoder=None,
     llm = _build_llm(model_id, max_model_len=max_model_len, tp=tp, dtype=dtype,
                      revision=ck.revision)
 
+    #: EVERY FIELD NAMED, including the ones equal to vLLM's defaults, and the
+    #: resolved object checked against the declaration (f11_l2_cloud's
+    #: _assert_decoder): a field not named is a field the engine chooses.
+    declared = dict(temperature=dec.get("temperature", 1.0), top_p=dec.get("top_p", 1.0),
+                    top_k=-1, max_tokens=max_tok, min_tokens=0, presence_penalty=0.0,
+                    frequency_penalty=0.0, repetition_penalty=1.0)
     sp_list = []
     for prompt, i, k, cond in todo:
-        sp_list.append(SamplingParams(
-            temperature=dec.get("temperature", 1.0),
-            top_p=dec.get("top_p", 1.0),
-            top_k=-1,
-            max_tokens=max_tok,
-            seed=None if seed is None else seed + i,
-        ))
+        seed_c = cond["seed"] if cond.get("seed") is not None else seed
+        sp_list.append(SamplingParams(seed=None if seed_c is None else seed_c + i, **declared))
+    bad = ["%s declared %r resolved %r" % (f, v, getattr(sp_list[0], f, "<absent>"))
+           for f, v in declared.items() if getattr(sp_list[0], f, "<absent>") != v]
+    if bad:
+        raise SystemExit("DECODER MISMATCH, refusing to generate: " + "; ".join(bad))
 
     t0 = time.time()
     outputs = llm.generate(inputs, sp_list)
@@ -483,6 +496,7 @@ def generate_model(model_id, conditions, n=10, seed=42, decoder=None,
         prefill = cond.get("prefill", False)
         user_msg = cond.get("user_msg", "Hi.")
         comp = output.outputs[0]
+        seed_c = cond["seed"] if cond.get("seed") is not None else seed
 
         p = _passage(
             text=comp.text,
@@ -490,7 +504,7 @@ def generate_model(model_id, conditions, n=10, seed=42, decoder=None,
             model=model_id,
             frame=frame_label(system, user, prefill,
                               templated if not refused else False),
-            seed=None if seed is None else seed + i,
+            seed=None if seed_c is None else seed_c + i,
             decoder=dict(dec, max_new_tokens=max_tok),
             n_new_tokens=len(comp.token_ids),
             finish=("length" if comp.finish_reason == "length" else "eos"),

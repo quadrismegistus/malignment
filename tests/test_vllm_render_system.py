@@ -84,3 +84,14 @@ def test_encode_restores_a_multi_token_start_once():
         t = tok(m)
         assert restore_lead(t, raw) == _old_bos_rule(t, raw), m
         assert encode_tag(t, raw) is None, m
+
+
+def test_prompts_file_carries_per_condition_n_and_seed(tmp_path):
+    """TEMPLATE_ARM: n=20 for f11 stems and n=50 for Y cells in ONE file, seeds per condition."""
+    import json
+    from malignment.vllm_generate import load_prompts
+    p = tmp_path / "p.jsonl"
+    p.write_text(json.dumps({"prompt": "a", "n": 20, "seed": 7}) + "\n" + json.dumps({"prompt": "b"}) + "\n")
+    c = load_prompts(str(p))
+    assert (c[0]["n"], c[0]["seed"]) == (20, 7)
+    assert (c[1]["n"], c[1]["seed"]) == (None, None)

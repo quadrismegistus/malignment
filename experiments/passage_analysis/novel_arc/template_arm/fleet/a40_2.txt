@@ -1,0 +1,12 @@
+01-ai/Yi-1.5-9B experiments/passage_analysis/novel_arc/template_arm/prompts/01-ai__Yi-1.5-9B.jsonl float16
+01-ai/Yi-1.5-9B-Chat experiments/passage_analysis/novel_arc/template_arm/prompts/01-ai__Yi-1.5-9B-Chat.jsonl float16
+Qwen/Qwen2.5-7B experiments/passage_analysis/novel_arc/template_arm/prompts/Qwen__Qwen2.5-7B.jsonl float16
+Qwen/Qwen2.5-7B-Instruct experiments/passage_analysis/novel_arc/template_arm/prompts/Qwen__Qwen2.5-7B-Instruct.jsonl float16
+allenai/Olmo-3-1025-7B experiments/passage_analysis/novel_arc/template_arm/prompts/allenai__Olmo-3-1025-7B.jsonl float16
+allenai/Olmo-3-7B-Instruct experiments/passage_analysis/novel_arc/template_arm/prompts/allenai__Olmo-3-7B-Instruct.jsonl float16
+allenai/OLMoE-1B-7B-0125 experiments/passage_analysis/novel_arc/template_arm/prompts/allenai__OLMoE-1B-7B-0125.jsonl float16
+allenai/OLMoE-1B-7B-0125-Instruct experiments/passage_analysis/novel_arc/template_arm/prompts/allenai__OLMoE-1B-7B-0125-Instruct.jsonl float16
+stabilityai/stablelm-2-1_6b experiments/passage_analysis/novel_arc/template_arm/prompts/stabilityai__stablelm-2-1_6b.jsonl float16
+stabilityai/stablelm-2-1_6b-chat experiments/passage_analysis/novel_arc/template_arm/prompts/stabilityai__stablelm-2-1_6b-chat.jsonl float16
+croissantllm/CroissantLLMBase experiments/passage_analysis/novel_arc/template_arm/prompts/croissantllm__CroissantLLMBase.jsonl float16
+croissantllm/CroissantLLMChat-v0.1 experiments/passage_analysis/novel_arc/template_arm/prompts/croissantllm__CroissantLLMChat-v0.1.jsonl float16

@@ -1,6 +1,6 @@
 ---
 question: Does the chat template move where aligned-model fiction sits on the historical curves (Figure 5), and does being addressed move it further?
-status: "SPEC 2026-09-25, not registered, not run. RH: 'Maybe we just do all arms (B) -- base, aligned-raw, aligned-prefilled, aligned-chat. Can we spec that for the 41-empty-sysable lineages'."
+status: "REGISTERED 2026-09-25, before any passage exists. RH: 'Maybe we just do all arms (B) -- base, aligned-raw, aligned-prefilled, aligned-chat. Can we spec that for the 41-empty-sysable lineages', then 'go ahead and run, Y + f11_l2 in the way you suggest ... stick to A40s where possible'. Contrasts reviewed by the paper seat."
 ---
 
 # Figure 5 under the chat template: all four arms, 41 lineages, one engine
@@ -22,7 +22,12 @@ Option A would have reused the August base passages and generated only the align
 
 ## ARMS
 
-The prompts are the **100 English f11_l2 strings**, all roles, the population Figure 5 already draws from (`f11_l2_population.json`, list sha256/16 `e5da397ff891af74`, en subset). n=20 per (model, prompt, arm).
+Two prompt sets, every arm, every lineage (`template_arm/build.py` -> `template_arm/prompts/<model>.jsonl`):
+
+- **f11**: the **100 English f11_l2 strings**, all roles, the population Figure 5 draws from (the distinct `en` prompts of `f11_l2_full.parquet`; `f11_l2_population.json`, list sha256/16 `e5da397ff891af74`). **n = 20.**
+- **y**: **Y's 34 cells** (`superego_stages/prompts/y_cells.jsonl`: 5 stems, each bare and with 6 forced words). **n = 50**, as Y and framed_y, because Y's coding draws 20 per cell from passages that ran the full 256 tokens and templated arms stop early. RH, 2026-09-25: the checkpoints are downloaded once, so Y's cells ride on this rental; coding them is a separate decision (DeepSeek, paid).
+
+**606,800 passages**: f11 41 × 4 × 100 × 20 = 328,000; y 41 × 4 × 34 × 50 = 278,800. The Y arms are framed exactly as framed_y's (same user turns, same system rule), so they join framed_y's cells and extend Y to the 19 lineages it never had.
 
     base       base model, raw text, NO TEMPLATE EVER (RH), even where a
                tokenizer ships one
@@ -41,23 +46,22 @@ Thinking off via the vendor switch on every templated arm where one exists (Qwen
 | setting | value |
 |---|---|
 | sampling | temperature 1.0, top_p 1.0, top_k −1, max_tokens 256, min_tokens 0, presence and frequency penalty 0, repetition penalty 1.0, no stop sequences |
-| n | 20 per (model, prompt, arm) |
-| seeds | `int(sha16(model+"\|"+prompt)[:8], 16) % 2**31` for `base`/`raw` (identical to f11_l2, so the replication shares seeds); `sha16(model+"\|"+arm+"\|"+prompt)` for templated arms |
+| n | 20 per (model, f11 stem, arm); 50 per (model, Y cell, arm) |
+| seeds | per condition `int(sha256(model+"\|"+arm+"\|"+stem)[:8], 16) % 2**31`; sample i uses seed + i (one SamplingParams per sample). **One scheme for both sets.** f11_l2 drew n=20 from ONE seed per cell and Y's seeds came from Python's per-process-randomised `hash()`, so neither can be reproduced draw for draw on another engine anyway; the replication against August is distributional (split-half band), never token-identical. |
 | dtype | float16, except bfloat16 where `requirements.json` declares a compute dtype (gemma-2, Falcon-H1, Zamba2, falcon-mamba) |
 | context | `max_model_len` 1024 |
 | recorded per row | engine and **engine version**, GPU name, dtype, rendered-prompt sha, system_mode, template_kwargs, resolved sampling params. f11_l2's plan declared `engine_version` and its runner never wrote it; this one does. |
 
-Runner: `malignment.vllm_generate` (`render_templated`, `SystemIgnored`, with the 23 Sep fixes for double BOS, raw fallback under a chat key, and skipped templates), extended with an f11_l2 prompt file and the seed formula above. The runner asserts that the decoder the engine resolved equals this table and refuses to generate otherwise.
+Runner: `malignment.vllm_generate` (`render_templated`, `SystemIgnored`, with the 23 Sep fixes for double BOS, raw fallback under a chat key, and skipped templates), extended 2026-09-25 with per-condition `n` and `seed` in the prompts file and every sampling field named explicitly. It asserts that the decoder the engine resolved equals this table and refuses to generate otherwise. vLLM 0.22.1 on RunPod A40s (`template_arm/fleet/`: 6 single-A40 pods by parameter load, one 4×A40 pod at tp=4; each checkpoint purged after its run).
 
 ## ENGINE CLASSES (all four arms of a lineage always on ONE engine)
 
 | class | lineages | handling |
 |---|---|---|
 | standard vLLM | 29 | 22 of the 41 aligned models were in framed_y's vLLM 0.22.1 / A40 fleet; the rest are dense transformers of familiar architectures |
-| Aug known-dead on vLLM | Baichuan2, Croissant, deepseek, internlm2 | preflight against `observations.json`; deepseek's verdict was stale (malign-logits 2a5640e1); drop only on an observed cause |
-| SSM / hybrid kernels | Zamba2, Falcon-H1 1.5B + 7B, falcon-mamba, Olmo-Hybrid | the mamba-kernel profile (`project_image_revokes_a_capability`: wheels, `--no-deps`, torch 2.8), bf16 |
-| no vLLM implementation | rwkv-raven, recurrentgemma | HF transformers on the box, same decoder; engine recorded; slow (~4 h each) |
-| 32B | Olmo-3.1-32B | one A100 80GB (or 2×A40 with tensor parallelism) |
+| ran on this exact setup in the institution fleet (23-24 Sep) | Baichuan2, Croissant, deepseek, Zamba2, Falcon-H1 1.5B, falcon-mamba, gemma-2, falcon-7b (tf 5.10.2, placed last on its pod and re-pinned after) | bf16 where `requirements.json` declares it (gemma-2, Falcon-H1, Zamba2, falcon-mamba) |
+| batched HF (`template_arm/hf_batch.py`, one A40 each) | rwkv (vLLM refuses), recurrentgemma (vLLM refuses), Olmo-Hybrid (tf ≥ 5 + fla), internlm2 (word salad in every cell under vLLM 0.22.1) | same prompts, `generate.DECODER` (top_k=0), `generate.render`/`encode`; ONE `generate` per condition with num_return_sequences=n after `torch.manual_seed(seed)`, so `batch_seed` is on the record; **bf16** (fp16 HF sampling hit NaN probabilities in the smoke test); key `render="hf_batch"` |
+| 4×A40, tp=4 | Olmo-3.1-32B (fp16 does not fit one card), Falcon-H1-7B (OOMs at engine init on one A40) | `NCCL_P2P_DISABLE=1 NCCL_IB_DISABLE=1`, without which NCCL init hangs at 100% util |
 
 A lineage that fails is listed with its cause and dropped from every contrast. **No substitution.**
 
@@ -101,14 +105,15 @@ Two-sided sign tests on the per-lineage paired differences of per-model medians,
 | item | size | estimate |
 |---|---|---|
 | downloads | 82 checkpoints, ~1.1 TB at fp16 | ~2.5 h wall at the measured ~125 MB/s, spread over boxes |
-| generation | 41 × 4 arms × 100 × 20 = **328,000 passages**, ≤ 84M tokens | ~15–20 A40-hours at $0.49/h, plus ~2 h A100 for the 32B |
-| **total, RunPod** | | **~$12–15; cap $25** |
-| coding | 32,800 passages | Workflow agents, $0 API; about 3× passC's agent time |
+| generation | **606,800 passages**, ≤ 155M tokens | ~30 A40-hours at $0.49/h (6 vLLM pods, 4 HF pods, one 4×A40 pod at $1.96/h) |
+| **total, RunPod** | | **~$20–25; cap $35** |
+| coding, Figure 5 | 32,800 passages + 16,400 refusal reads | Workflow agents, $0 API |
+| coding, Y | not authorised by this registration | DeepSeek `code_y_superego_v3`, ~$0.0001–0.0003 per call; RH decides after generation |
 
 The first box reports measured tok/s before the rest launch. Boxes are sharded by lineage (both checkpoints resident; purge after each lineage) and deleted after byte verification.
 
 ## GATES
 
-1. RH: population (41 vs 25), the optional sensitivity, spend word.
-2. Paper seat: contrasts and plate rules as above.
-3. Registration committed. Preflight of all 82 checkpoints. First box. Fleet.
+1. RH: 41 lineages, run (2026-09-25). The optional SmolLM3/AmberSafe sensitivity is **not** generated.
+2. Paper seat: contrasts and plate rules as above (reviewed 2026-09-25).
+3. Preflight: every vLLM checkpoint here ran on vLLM 0.22.1 / A40 with this render path in the institution fleet (23-24 Sep), except the four routed to batched HF. The first pod's first model is read (a stored passage's frame, template, render fields and text) before the rest are trusted.

@@ -1,0 +1,14 @@
+zai-org/glm-4-9b-hf experiments/passage_analysis/novel_arc/template_arm/prompts/zai-org__glm-4-9b-hf.jsonl float16
+zai-org/glm-4-9b-chat-hf experiments/passage_analysis/novel_arc/template_arm/prompts/zai-org__glm-4-9b-chat-hf.jsonl float16
+baichuan-inc/Baichuan2-7B-Base experiments/passage_analysis/novel_arc/template_arm/prompts/baichuan-inc__Baichuan2-7B-Base.jsonl float16
+baichuan-inc/Baichuan2-7B-Chat experiments/passage_analysis/novel_arc/template_arm/prompts/baichuan-inc__Baichuan2-7B-Chat.jsonl float16
+mistralai/Mistral-7B-v0.1 experiments/passage_analysis/novel_arc/template_arm/prompts/mistralai__Mistral-7B-v0.1.jsonl float16
+mistralai/Mistral-7B-Instruct-v0.1 experiments/passage_analysis/novel_arc/template_arm/prompts/mistralai__Mistral-7B-Instruct-v0.1.jsonl float16
+huggyllama/llama-7b experiments/passage_analysis/novel_arc/template_arm/prompts/huggyllama__llama-7b.jsonl float16
+PKU-Alignment/beaver-7b-v1.0 experiments/passage_analysis/novel_arc/template_arm/prompts/PKU-Alignment__beaver-7b-v1.0.jsonl float16
+tiiuae/Falcon-H1-1.5B-Base experiments/passage_analysis/novel_arc/template_arm/prompts/tiiuae__Falcon-H1-1.5B-Base.jsonl bfloat16
+tiiuae/Falcon-H1-1.5B-Instruct experiments/passage_analysis/novel_arc/template_arm/prompts/tiiuae__Falcon-H1-1.5B-Instruct.jsonl bfloat16
+openbmb/MiniCPM5-1B-Base experiments/passage_analysis/novel_arc/template_arm/prompts/openbmb__MiniCPM5-1B-Base.jsonl float16
+openbmb/MiniCPM5-1B experiments/passage_analysis/novel_arc/template_arm/prompts/openbmb__MiniCPM5-1B.jsonl float16
+HuggingFaceTB/SmolLM2-360M experiments/passage_analysis/novel_arc/template_arm/prompts/HuggingFaceTB__SmolLM2-360M.jsonl float16
+HuggingFaceTB/SmolLM2-360M-Instruct experiments/passage_analysis/novel_arc/template_arm/prompts/HuggingFaceTB__SmolLM2-360M-Instruct.jsonl float16

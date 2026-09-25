@@ -1,0 +1,4 @@
+allenai/Olmo-3-1125-32B experiments/passage_analysis/novel_arc/template_arm/prompts/allenai__Olmo-3-1125-32B.jsonl float16
+allenai/Olmo-3.1-32B-Instruct experiments/passage_analysis/novel_arc/template_arm/prompts/allenai__Olmo-3.1-32B-Instruct.jsonl float16
+tiiuae/Falcon-H1-7B-Base experiments/passage_analysis/novel_arc/template_arm/prompts/tiiuae__Falcon-H1-7B-Base.jsonl bfloat16
+tiiuae/Falcon-H1-7B-Instruct experiments/passage_analysis/novel_arc/template_arm/prompts/tiiuae__Falcon-H1-7B-Instruct.jsonl bfloat16

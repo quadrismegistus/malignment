@@ -1,0 +1,12 @@
+google/gemma-2-9b experiments/passage_analysis/novel_arc/template_arm/prompts/google__gemma-2-9b.jsonl bfloat16
+google/gemma-2-9b-it experiments/passage_analysis/novel_arc/template_arm/prompts/google__gemma-2-9b-it.jsonl bfloat16
+team-hatakeyama-phase2/Tanuki-8B-base-v1.0 experiments/passage_analysis/novel_arc/template_arm/prompts/team-hatakeyama-phase2__Tanuki-8B-base-v1.0.jsonl float16
+weblab-GENIAC/Tanuki-8B-dpo-v1.0 experiments/passage_analysis/novel_arc/template_arm/prompts/weblab-GENIAC__Tanuki-8B-dpo-v1.0.jsonl float16
+tiiuae/falcon-mamba-7b experiments/passage_analysis/novel_arc/template_arm/prompts/tiiuae__falcon-mamba-7b.jsonl bfloat16
+tiiuae/falcon-mamba-7b-instruct experiments/passage_analysis/novel_arc/template_arm/prompts/tiiuae__falcon-mamba-7b-instruct.jsonl bfloat16
+deepseek-ai/deepseek-llm-7b-base experiments/passage_analysis/novel_arc/template_arm/prompts/deepseek-ai__deepseek-llm-7b-base.jsonl float16
+deepseek-ai/deepseek-llm-7b-chat experiments/passage_analysis/novel_arc/template_arm/prompts/deepseek-ai__deepseek-llm-7b-chat.jsonl float16
+allenai/OLMo-2-0425-1B experiments/passage_analysis/novel_arc/template_arm/prompts/allenai__OLMo-2-0425-1B.jsonl float16
+allenai/OLMo-2-0425-1B-Instruct experiments/passage_analysis/novel_arc/template_arm/prompts/allenai__OLMo-2-0425-1B-Instruct.jsonl float16
+TinyLlama/TinyLlama-1.1B-intermediate-step-1431k-3T experiments/passage_analysis/novel_arc/template_arm/prompts/TinyLlama__TinyLlama-1.1B-intermediate-step-1431k-3T.jsonl float16
+TinyLlama/TinyLlama-1.1B-Chat-v1.0 experiments/passage_analysis/novel_arc/template_arm/prompts/TinyLlama__TinyLlama-1.1B-Chat-v1.0.jsonl float16

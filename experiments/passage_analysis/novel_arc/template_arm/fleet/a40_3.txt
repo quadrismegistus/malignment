@@ -1,0 +1,10 @@
+Qwen/Qwen3-8B-Base experiments/passage_analysis/novel_arc/template_arm/prompts/Qwen__Qwen3-8B-Base.jsonl float16
+Qwen/Qwen3-8B experiments/passage_analysis/novel_arc/template_arm/prompts/Qwen__Qwen3-8B.jsonl float16
+BSC-LT/salamandra-7b experiments/passage_analysis/novel_arc/template_arm/prompts/BSC-LT__salamandra-7b.jsonl float16
+BSC-LT/salamandra-7b-instruct experiments/passage_analysis/novel_arc/template_arm/prompts/BSC-LT__salamandra-7b-instruct.jsonl float16
+BAAI/Aquila2-7B experiments/passage_analysis/novel_arc/template_arm/prompts/BAAI__Aquila2-7B.jsonl float16
+BAAI/AquilaChat2-7B experiments/passage_analysis/novel_arc/template_arm/prompts/BAAI__AquilaChat2-7B.jsonl float16
+togethercomputer/RedPajama-INCITE-Base-7B-v0.1 experiments/passage_analysis/novel_arc/template_arm/prompts/togethercomputer__RedPajama-INCITE-Base-7B-v0.1.jsonl float16
+togethercomputer/RedPajama-INCITE-7B-Chat experiments/passage_analysis/novel_arc/template_arm/prompts/togethercomputer__RedPajama-INCITE-7B-Chat.jsonl float16
+OpenLLM-France/Lucie-7B experiments/passage_analysis/novel_arc/template_arm/prompts/OpenLLM-France__Lucie-7B.jsonl float16
+OpenLLM-France/Lucie-7B-Instruct-v1.1 experiments/passage_analysis/novel_arc/template_arm/prompts/OpenLLM-France__Lucie-7B-Instruct-v1.1.jsonl float16

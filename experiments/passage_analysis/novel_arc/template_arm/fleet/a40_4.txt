@@ -1,0 +1,10 @@
+ibm-granite/granite-3.0-8b-base experiments/passage_analysis/novel_arc/template_arm/prompts/ibm-granite__granite-3.0-8b-base.jsonl float16
+ibm-granite/granite-3.0-8b-instruct experiments/passage_analysis/novel_arc/template_arm/prompts/ibm-granite__granite-3.0-8b-instruct.jsonl float16
+m-a-p/neo_7b experiments/passage_analysis/novel_arc/template_arm/prompts/m-a-p__neo_7b.jsonl float16
+m-a-p/neo_7b_instruct_v0.1 experiments/passage_analysis/novel_arc/template_arm/prompts/m-a-p__neo_7b_instruct_v0.1.jsonl float16
+tiiuae/Falcon3-7B-Base experiments/passage_analysis/novel_arc/template_arm/prompts/tiiuae__Falcon3-7B-Base.jsonl float16
+tiiuae/Falcon3-7B-Instruct experiments/passage_analysis/novel_arc/template_arm/prompts/tiiuae__Falcon3-7B-Instruct.jsonl float16
+EleutherAI/pythia-6.9b experiments/passage_analysis/novel_arc/template_arm/prompts/EleutherAI__pythia-6.9b.jsonl float16
+lomahony/eleuther-pythia6.9b-hh-dpo experiments/passage_analysis/novel_arc/template_arm/prompts/lomahony__eleuther-pythia6.9b-hh-dpo.jsonl float16
+kakaocorp/kanana-2-3b-base experiments/passage_analysis/novel_arc/template_arm/prompts/kakaocorp__kanana-2-3b-base.jsonl float16
+kakaocorp/kanana-2-3b-instruct experiments/passage_analysis/novel_arc/template_arm/prompts/kakaocorp__kanana-2-3b-instruct.jsonl float16
