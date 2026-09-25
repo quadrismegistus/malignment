@@ -6,7 +6,7 @@ Producer `ladder_analyse.py`, registered in `ladder.md` before generation. 18 mo
 
 | tick | ai_system | human_person | says_I | empty | fictional | object/abstraction | none |
 |---|---|---|---|---|---|---|---|
-| bare | 11.2 (29.2) | 55.0 (46.4) | 92.5 (85.7) | 0.0 (0.0) | 2.5 | 7.5 | 7.5 |
+| bare | 11.2 (33.9) | 50.0 (42.8) | 92.5 (86.4) | 0.0 (0.0) | 2.5 | 6.2 | 7.5 |
 | prefill | 95.0 (89.4) | 0.0 (3.8) | 98.8 (93.3) | 0.0 (0.0) | 0.0 | 0.0 | 0.0 |
 | chat_scaffold | 92.5 (89.3) | 0.0 (1.9) | 97.5 (91.5) | 0.0 (3.5) | 0.0 | 0.0 | 0.0 |
 | chat | 97.5 (95.4) | 0.0 (0.8) | 97.5 (97.4) | 0.0 (0.4) | 0.0 | 0.0 | 0.0 |
@@ -15,35 +15,35 @@ Producer `ladder_analyse.py`, registered in `ladder.md` before generation. 18 mo
 
 | step | measure | models + / - | sign p | median change | lineages + / - | sign p |
 |---|---|---|---|---|---|---|
-| template (bare -> prefill) | ai_system | 17 / 0 | 1.53e-05 | +68.8 | 12 / 0 | 0.000488 |
-| template (bare -> prefill) | human_person | 0 / 15 | 6.1e-05 | -51.2 | 0 / 10 | 0.00195 |
-| template (bare -> prefill) | says_I | 11 / 3 | 0.0574 | +2.5 | 9 / 1 | 0.0215 |
+| template (bare -> prefill) | ai_system | 16 / 0 | 3.05e-05 | +67.5 | 11 / 0 | 0.000977 |
+| template (bare -> prefill) | human_person | 0 / 14 | 0.000122 | -46.2 | 0 / 9 | 0.00391 |
+| template (bare -> prefill) | says_I | 10 / 3 | 0.0923 | +2.5 | 8 / 1 | 0.0391 |
 | address (prefill -> chat_scaffold) | ai_system | 5 / 5 | 1 | +0.0 | 3 / 3 | 1 |
 | address (prefill -> chat_scaffold) | human_person | 4 / 4 | 1 | +0.0 | 2 / 2 | 1 |
 | address (prefill -> chat_scaffold) | says_I | 5 / 5 | 1 | +0.0 | 3 / 3 | 1 |
 | scaffold (chat_scaffold -> chat) | ai_system | 8 / 3 | 0.227 | +0.0 | 5 / 2 | 0.453 |
 | scaffold (chat_scaffold -> chat) | human_person | 3 / 5 | 0.727 | +0.0 | 1 / 3 | 0.625 |
 | scaffold (chat_scaffold -> chat) | says_I | 8 / 2 | 0.109 | +0.0 | 6 / 2 | 0.289 |
-| overall (bare -> chat) | ai_system | 17 / 0 | 1.53e-05 | +82.5 | 12 / 0 | 0.000488 |
-| overall (bare -> chat) | human_person | 0 / 15 | 6.1e-05 | -53.8 | 0 / 10 | 0.00195 |
-| overall (bare -> chat) | says_I | 15 / 1 | 0.000519 | +5.0 | 11 / 0 | 0.000977 |
+| overall (bare -> chat) | ai_system | 16 / 0 | 3.05e-05 | +77.5 | 11 / 0 | 0.000977 |
+| overall (bare -> chat) | human_person | 0 / 14 | 0.000122 | -48.8 | 0 / 9 | 0.00391 |
+| overall (bare -> chat) | says_I | 14 / 1 | 0.000977 | +5.0 | 10 / 0 | 0.00195 |
 
 ## Steps, within model (sensitivity: without Llama-3.1-8B-Instruct, 17 models)
 
 | step | measure | models + / - | sign p | median change | lineages + / - | sign p |
 |---|---|---|---|---|---|---|
-| template (bare -> prefill) | ai_system | 16 / 0 | 3.05e-05 | +67.5 | 12 / 0 | 0.000488 |
-| template (bare -> prefill) | human_person | 0 / 14 | 0.000122 | -50.0 | 0 / 10 | 0.00195 |
-| template (bare -> prefill) | says_I | 10 / 3 | 0.0923 | +2.5 | 9 / 1 | 0.0215 |
+| template (bare -> prefill) | ai_system | 15 / 0 | 6.1e-05 | +67.5 | 11 / 0 | 0.000977 |
+| template (bare -> prefill) | human_person | 0 / 13 | 0.000244 | -42.5 | 0 / 9 | 0.00391 |
+| template (bare -> prefill) | says_I | 9 / 3 | 0.146 | +2.5 | 8 / 1 | 0.0391 |
 | address (prefill -> chat_scaffold) | ai_system | 5 / 5 | 1 | +0.0 | 3 / 3 | 1 |
 | address (prefill -> chat_scaffold) | human_person | 4 / 4 | 1 | +0.0 | 2 / 2 | 1 |
 | address (prefill -> chat_scaffold) | says_I | 5 / 5 | 1 | +0.0 | 3 / 3 | 1 |
 | scaffold (chat_scaffold -> chat) | ai_system | 8 / 3 | 0.227 | +0.0 | 5 / 2 | 0.453 |
 | scaffold (chat_scaffold -> chat) | human_person | 3 / 5 | 0.727 | +0.0 | 1 / 3 | 0.625 |
 | scaffold (chat_scaffold -> chat) | says_I | 8 / 2 | 0.109 | +0.0 | 6 / 2 | 0.289 |
-| overall (bare -> chat) | ai_system | 16 / 0 | 3.05e-05 | +80.0 | 12 / 0 | 0.000488 |
-| overall (bare -> chat) | human_person | 0 / 14 | 0.000122 | -50.0 | 0 / 10 | 0.00195 |
-| overall (bare -> chat) | says_I | 14 / 1 | 0.000977 | +5.0 | 11 / 0 | 0.000977 |
+| overall (bare -> chat) | ai_system | 15 / 0 | 6.1e-05 | +75.0 | 11 / 0 | 0.000977 |
+| overall (bare -> chat) | human_person | 0 / 13 | 0.000244 | -47.5 | 0 / 9 | 0.00391 |
+| overall (bare -> chat) | says_I | 13 / 1 | 0.00183 | +5.0 | 10 / 0 | 0.00195 |
 
 ## Per model: ai_system % by tick (bare / prefill / chat_scaffold / chat)
 
@@ -66,4 +66,4 @@ Producer `ladder_analyse.py`, registered in `ladder.md` before generation. 18 mo
 | `openbmb/MiniCPM5-1B` | 0 / 90 / 85 / 100 | 0 / 0 / 0 / 0 | 0 / 95 / 80 / 98 | 0 / 0 / 0 / 0 |
 | `stabilityai/stablelm-2-zephyr-1_6b` | 0 / 88 / 92 / 88 | 78 / 2 / 0 / 0 | 92 / 90 / 95 / 98 | 0 / 0 / 0 / 0 |
 | `tiiuae/Falcon3-7B-Instruct` | 95 / 100 / 100 / 100 | 2 / 0 / 0 / 0 | 98 / 100 / 100 / 100 | 0 / 0 / 0 / 0 |
-| `zai-org/glm-4-9b-chat-hf` | 15 / 100 / 100 / 100 | 65 / 0 / 0 / 0 | 88 / 100 / 100 / 100 | 0 / 0 / 0 / 0 |
+| `zai-org/glm-4-9b-chat-hf` | 100 / 100 / 100 / 100 | 0 / 0 / 0 / 0 | 100 / 100 / 100 / 100 | 0 / 0 / 0 / 0 |

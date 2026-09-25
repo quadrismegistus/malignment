@@ -67,7 +67,7 @@ tiiuae/Falcon3-7B-Instruct,tiiuae/Falcon3-7B-Base,bare,95.00,2.50,0.00,0.00,2.50
 tiiuae/Falcon3-7B-Instruct,tiiuae/Falcon3-7B-Base,prefill,100.00,0.00,0.00,0.00,0.00,0.00,100.00,40
 tiiuae/Falcon3-7B-Instruct,tiiuae/Falcon3-7B-Base,chat_scaffold,100.00,0.00,0.00,0.00,0.00,0.00,100.00,40
 tiiuae/Falcon3-7B-Instruct,tiiuae/Falcon3-7B-Base,chat,100.00,0.00,0.00,0.00,0.00,0.00,100.00,40
-zai-org/glm-4-9b-chat-hf,zai-org/glm-4-9b-hf,bare,15.00,65.00,0.00,10.00,10.00,0.00,87.50,40
+zai-org/glm-4-9b-chat-hf,zai-org/glm-4-9b-hf,bare,100.00,0.00,0.00,0.00,0.00,0.00,100.00,40
 zai-org/glm-4-9b-chat-hf,zai-org/glm-4-9b-hf,prefill,100.00,0.00,0.00,0.00,0.00,0.00,100.00,40
 zai-org/glm-4-9b-chat-hf,zai-org/glm-4-9b-hf,chat_scaffold,100.00,0.00,0.00,0.00,0.00,0.00,100.00,40
 zai-org/glm-4-9b-chat-hf,zai-org/glm-4-9b-hf,chat,100.00,0.00,0.00,0.00,0.00,0.00,100.00,40
