@@ -55,3 +55,15 @@ def test_thinking_off_by_prefix_where_the_template_has_no_switch():
     t = tok("microsoft/phi-4-reasoning")
     off = render_templated(t, STEM, DEFAULT, False, "Hi.", {"enable_thinking": False}, "<think>\n\n</think>\n\n")
     assert off.endswith("<|im_start|>assistant<|im_sep|><think>\n\n</think>\n\n")
+
+
+def test_hf_render_takes_the_thinking_switch():
+    """generate.render (the local HF path) carries template_kwargs like vllm_generate."""
+    from types import SimpleNamespace
+    from malignment.generate import render
+    t = tok("Qwen/Qwen3-8B")
+    ld = SimpleNamespace(tok=t)
+    on, _ = render(ld, "Q: Who are you?\nA:", system="", prefill=True, user_msg="Hi.")
+    off, ok = render(ld, "Q: Who are you?\nA:", system="", prefill=True, user_msg="Hi.",
+                     template_kwargs={"enable_thinking": False})
+    assert "<think>" not in on and "<think>\n\n</think>\n\nQ: Who are you?\nA:" in off and ok

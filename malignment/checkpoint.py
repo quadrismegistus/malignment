@@ -643,7 +643,7 @@ class Checkpoint:
 
     def generate(self, text, n=1, system=None, user=None, prefill=False,
                  user_msg="Hi.", template=None, seed=None, decoder=None,
-                 loaded=None, cache=True, **kw):
+                 loaded=None, cache=True, template_kwargs=None, **kw):
         """Sample `n` continuations. -> [passage.Passage], length `n`.
 
         The third verb on the one loader, beside `run_twp` (measure and write)
@@ -688,7 +688,9 @@ class Checkpoint:
                                system_set=(system is not G.DEFAULT)),
                      user=user, prefill=bool(prefill),
                      user_msg=(user_msg if prefill else None),
-                     template=template)
+                     template=template,
+                     #: only when set, so no existing key changes (as vllm_generate)
+                     **({"template_kwargs": template_kwargs} if template_kwargs else {}))
                 for i in range(n)]
 
         out = [None] * n
@@ -727,7 +729,7 @@ class Checkpoint:
                                prefill=prefill, user_msg=user_msg,
                                template=template,
                                seed=None if seed is None else seed + i,
-                               decoder=dec)[0]
+                               decoder=dec, template_kwargs=template_kwargs)[0]
                 out[i] = p
                 if wst is not None:
                     wst[keys[i]] = p._asdict()

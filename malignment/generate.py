@@ -218,7 +218,7 @@ DEFAULT = object()
 
 
 def render(loaded, text, system=DEFAULT, user=None, prefill=False,
-           user_msg="Hi.", template=None):
+           user_msg="Hi.", template=None, template_kwargs=None):
     """Compose the three free slots into the string the model sees.
 
     ## THREE FREE PARAMETERS, NOT ONE
@@ -272,16 +272,21 @@ def render(loaded, text, system=DEFAULT, user=None, prefill=False,
         msgs.append({"role": "system", "content": system})
     msgs.append({"role": "user", "content": turn})
     sys_ok = True
+    #: THINKING OFF (2026-09-24), as vllm_generate.render_templated: extra kwargs
+    #: to the template, e.g. {"enable_thinking": False} -- the vendor's own switch
+    #: on Qwen3, SmolLM3, MiniCPM5. Passed to EVERY render here, including the
+    #: bare one the byte test compares against, so the test compares like with like.
+    tkw = dict(template_kwargs or {})
     try:
         out = tok.apply_chat_template(msgs, add_generation_prompt=True,
-                                      tokenize=False)
+                                      tokenize=False, **tkw)
     except Exception as e:
         if system is DEFAULT:
             raise FrameRefused("template refused: %s: %s" % (type(e).__name__, e))
         try:
             out = tok.apply_chat_template([{"role": "user", "content": turn}],
                                           add_generation_prompt=True,
-                                          tokenize=False)
+                                          tokenize=False, **tkw)
             sys_ok = False
         except Exception as e2:
             raise FrameRefused("template refused: %s: %s" % (type(e2).__name__, e2))
@@ -312,7 +317,7 @@ def render(loaded, text, system=DEFAULT, user=None, prefill=False,
     #: vacuously False and would never fire.
     if sys_ok and system is not DEFAULT:
         bare = tok.apply_chat_template([{"role": "user", "content": turn}],
-                                       add_generation_prompt=True, tokenize=False)
+                                       add_generation_prompt=True, tokenize=False, **tkw)
         #: THE BYTE TEST for the DISCARD case, which throws nothing of its own.
         if out == bare or (system and system[:24] not in out):
             sys_ok = False
@@ -356,7 +361,7 @@ def encode(loaded, text_in, templated):
 
 def generate(loaded, text, n=1, system=DEFAULT, user=None, prefill=False,
              user_msg="Hi.", template=None, seed=None, decoder=None,
-             keep_prompt=False):
+             keep_prompt=False, template_kwargs=None):
     """Sample `n` continuations. -> [Passage]
 
     `seed` is per SAMPLE, derived as `seed + i`, so `n` samples are `n`
@@ -367,7 +372,7 @@ def generate(loaded, text, n=1, system=DEFAULT, user=None, prefill=False,
     dec.update(decoder or {})
     text_in, sys_ok = render(loaded, text, system=system, user=user,
                              prefill=prefill, user_msg=user_msg,
-                             template=template)
+                             template=template, template_kwargs=template_kwargs)
     templated = text_in != text
     enc = encode(loaded, text_in, templated)
     plen = int(enc["input_ids"].shape[1])
