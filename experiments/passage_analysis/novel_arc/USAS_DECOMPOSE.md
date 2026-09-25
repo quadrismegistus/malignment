@@ -1,6 +1,6 @@
 # USAS decomposition of Figure 5's interiority (EXPLORATORY)
 
-Producer `usas_decompose.py`. Per passage: share of content words (percent) carrying each USAS code, every sense counted, as `measure_lltk` counts `usas_x` (control: X rebuilt equals usas_x on every passage). Arms as Figure 5 v7: per model the median over its passages, then the median over the 25 matched pairs. Paired: aligned minus base within each pair. Human reference: the c20_fiction anchor (500 passages), median over passages.
+Producer `usas_decompose.py`. Per passage: share of content words (percent) carrying each USAS code, counted as `measure_lltk` counts `usas_x`: the primary tag of each of the word's part-of-speech entries in the USAS lexicon, not every sense (control: X rebuilt equals usas_x on every passage). Arms as Figure 5 v7: per model the median over its passages, then the median over the 25 matched pairs. Paired: aligned minus base within each pair. Human reference: the c20_fiction anchor (500 passages), median over passages.
 
 | field | base | aligned | aligned - base (median) | pairs up / down | c20 fiction |
 |---|---|---|---|---|---|
@@ -62,4 +62,4 @@ Producer `usas_decompose.py`. Per passage: share of content words (percent) carr
 | O4 | 4.00 | 3.45 | -0.40 | 8 / 17 | 3.80 |
 | Q2 | 4.12 | 3.94 | -0.22 | 8 / 16 | 3.17 |
 
-Codes: X1 general psychological; X2 mental actions (X2.1 thought/belief, X2.2 knowledge, X2.3 learn, X2.4 investigate/search, X2.5 understand, X2.6 expect); X3 sensory (X3.1 taste, X3.2 sound, X3.3 touch, X3.4 sight, X3.5 smell); X4 mental object; X5 attention; X6 deciding; X7 wanting/planning; X8 trying; X9 ability/success. E1-E6 emotion. M1 moving, M2 putting/taking/pushing, M6 location/direction; A1.1.1 general actions; A9 getting and giving; B1 body; H2 architecture parts; O2 objects; O4 physical attributes; Q2 speech acts. Shares can sum past 100: a word with two tags counts twice, as in usas_x.
+Codes: X1 general psychological; X2 mental actions (X2.1 thought/belief, X2.2 knowledge, X2.3 learn, X2.4 investigate/search, X2.5 understand, X2.6 expect); X3 sensory (X3.1 taste, X3.2 sound, X3.3 touch, X3.4 sight, X3.5 smell); X4 mental object; X5 attention; X6 deciding; X7 wanting/planning; X8 trying; X9 ability/success. E1-E6 emotion. M1 moving, M2 putting/taking/pushing, M6 location/direction; A1.1.1 general actions; A9 getting and giving; B1 body; H2 architecture parts; O2 objects; O4 physical attributes; Q2 speech acts. Shares can sum past 100: a word with two part-of-speech entries counts each entry's primary tag, as in usas_x. Medians of per-model medians read 0.00 for sparse codes even where the pair counts show movement; the counts are the reliable column there.

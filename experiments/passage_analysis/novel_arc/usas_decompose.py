@@ -11,7 +11,9 @@ and giving), B (body), H (architecture), O (objects and physical attributes) and
 
 So this re-scores the SAME passages with the SAME machinery and keeps the whole tally: per passage the
 count of every base USAS code (modifiers stripped) over its content words, as `measure_lltk.Scorer`
-counts them (every tag the lookup returns, all senses). The report then reads it at three grains -- top-
+counts them: `fields.usas_codes` returns the PRIMARY (first-listed) tag of each of the word's part-of-
+speech entries in the USAS lexicon, whatever the word's part of speech in the passage -- not every
+sense (a verb entry like `saw` lists nine tags; only X3.4 counts, plus the noun entry's O2). The report then reads it at three grains -- top-
 level letter, X's subfields, and a few named exterior fields -- rather than choosing an exterior set in
 advance.
 
@@ -107,7 +109,8 @@ def report():
     human = d[d.category == "c20_fiction"]
     L = ["# USAS decomposition of Figure 5's interiority (EXPLORATORY)", "",
          "Producer `usas_decompose.py`. Per passage: share of content words (percent) carrying each USAS code, "
-         "every sense counted, as `measure_lltk` counts `usas_x` (control: X rebuilt equals usas_x on every "
+         "counted as `measure_lltk` counts `usas_x`: the primary tag of each of the word's part-of-speech "
+         "entries in the USAS lexicon, not every sense (control: X rebuilt equals usas_x on every "
          "passage). Arms as Figure 5 v7: per model the median over its passages, then the median over the 25 "
          "matched pairs. Paired: aligned minus base within each pair. Human reference: the c20_fiction anchor "
          "(%d passages), median over passages." % len(human), "",
@@ -124,15 +127,61 @@ def report():
           "X3.3 touch, X3.4 sight, X3.5 smell); X4 mental object; X5 attention; X6 deciding; X7 wanting/"
           "planning; X8 trying; X9 ability/success. E1-E6 emotion. M1 moving, M2 putting/taking/pushing, M6 "
           "location/direction; A1.1.1 general actions; A9 getting and giving; B1 body; H2 architecture parts; "
-          "O2 objects; O4 physical attributes; Q2 speech acts. Shares can sum past 100: a word with two tags "
-          "counts twice, as in usas_x."]
+          "O2 objects; O4 physical attributes; Q2 speech acts. Shares can sum past 100: a word with two "
+          "part-of-speech entries counts each entry's primary tag, as in usas_x. Medians of per-model medians "
+          "read 0.00 for sparse codes even where the pair counts show movement; the counts are the reliable "
+          "column there."]
     out = os.path.join(HERE, "USAS_DECOMPOSE.md")
     open(out, "w").write("\n".join(L) + "\n")
     print("\n".join(L))
 
 
+FIELDS_JSON = os.path.join(DATA, "usas_fields_members.json")
+
+
+def export_fields():
+    """Every USAS base code with its name and ALL member words, from the raw English lexicon (not the
+    primary-tag view `fields` uses), for choosing seed words. -> $MALIGNMENT_DATA/novel_arc/usas_fields_members.json
+
+    Per member: word, part of speech, `rank` (the tag's position in that entry's sense list, 0 =
+    primary, which is the only one `usas_x` counts), and the entry's full tag list. A compound tag
+    (`X9.2+/A12+`) files the word under both codes; a modifier (+, -, %) is kept on the member."""
+    from malignment import fields as F
+    names = F._usas_names()
+    codes = collections.defaultdict(list)
+    n_entries = 0
+    for line in open(F.SOURCES["usas"], encoding="utf-8", errors="replace"):
+        p = line.rstrip("\n").split("\t")
+        if len(p) < 3 or p[0] == "lemma":            # the header row
+            continue
+        n_entries += 1
+        tags = p[2].split()
+        for rank, t in enumerate(tags):
+            for part in t.split("/"):
+                m = BASE.match(part)
+                if m:
+                    codes[m.group(1)].append({"word": p[0].lower(), "pos": p[1], "rank": rank, "tag": part,
+                                              "tags": tags})
+    top = {k: v for k, v in names.items() if len(k) <= 2 and k[0].isalpha()}
+    out = {"_about": export_fields.__doc__.strip(), "_source": os.path.relpath(F.SOURCES["usas"], REPO),
+           "_entries": n_entries, "_decomposition": "experiments/passage_analysis/novel_arc/USAS_DECOMPOSE.md",
+           "categories": {L_: names.get(L_, "") for L_ in sorted({c[0] for c in codes})},
+           "codes": {c: {"name": names.get(c, ""), "n_members": len(ms), "n_primary": sum(m["rank"] == 0 for m in ms),
+                         "members": sorted(ms, key=lambda m: (m["rank"], m["word"], m["pos"]))}
+                     for c, ms in sorted(codes.items())}}
+    os.makedirs(DATA, exist_ok=True)
+    json.dump(out, open(FIELDS_JSON, "w"), indent=0)
+    print("-> %s  (%d codes, %d lexicon entries)" % (FIELDS_JSON, len(out["codes"]), n_entries))
+    for c in ("X2.1", "X3.4", "E4.1", "M1", "B1", "O2"):
+        x = out["codes"].get(c, {})
+        print("   %-6s %-40s members %5d  primary %5d" % (c, x.get("name", "")[:40], x.get("n_members", 0),
+                                                         x.get("n_primary", 0)))
+
+
 if __name__ == "__main__":
-    if "--score" in sys.argv:
+    if "--export-fields" in sys.argv:
+        export_fields()
+    elif "--score" in sys.argv:
         score()
     elif "--report" in sys.argv:
         report()
