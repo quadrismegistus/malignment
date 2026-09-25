@@ -1,0 +1,11 @@
+COGNITIVE AND EMOTIONAL LANGUAGE WITH CONCRETENESS REGRESSED OUT (diagnostic; v4 lists).
+
+Per text, the list share minus what a linear fit on the text's concreteness predicts, plus the
+list's mean share; one fit per list over 75,974 arc_fiction texts carrying both measures. Gray
+points: decade medians; black line: lowess (span 0.3). Model arms adjusted with the history's slope,
+then per model the median over coherent narrative passages and the median over 29 lineages. Part of
+the text-level correlation is mechanical: the list words are abstract content words and enter the
+concreteness mean themselves, so the adjustment removes some of the lists' own signal.
+
+  cog: slope -0.0181 per concreteness unit, text-level r -0.516; decade rho with concreteness raw -0.66, adjusted 0.57; decade rho raw vs adjusted 0.14; arms adjusted {'base': 4.08, 'raw': 4.48}
+  emo: slope -0.0196 per concreteness unit, text-level r -0.633; decade rho with concreteness raw -0.95, adjusted -0.84; decade rho raw vs adjusted 0.95; arms adjusted {'base': 2.34, 'raw': 2.43}

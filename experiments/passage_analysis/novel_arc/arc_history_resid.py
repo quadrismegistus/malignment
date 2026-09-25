@@ -1,6 +1,6 @@
 """Cognitive and emotional language with concreteness regressed out: a diagnostic, not a replacement. (RH, 2026-09-25)
 
-    .venv/bin/python -u arc_history_resid.py   -> figures/arc_history_resid_v3.{png,pdf,caption.txt}
+    .venv/bin/python -u arc_history_resid.py [v3|v4]   -> figures/arc_history_resid_<v>.{png,pdf,caption.txt}
 
 QUESTION (RH: "does it make sense to try residualizing cognitive and emotion away from tracking
 concreteness? not as replacement, just curious"). Concreteness bottoms out near 1770 where both word
@@ -25,11 +25,12 @@ import pandas as pd
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
-sys.argv = [sys.argv[0], "v3"] + sys.argv[1:]          # arc_history_arms reads its version at import
+VER = next((a for a in sys.argv[1:] if a in ("v3", "v4")), "v3")
+sys.argv = [sys.argv[0], VER]                          # arc_history_arms reads its version at import
 import arc_history_arms as H                           # noqa: E402
 from malignment import figure as F                     # noqa: E402
 
-OUT = os.path.join(HERE, "figures", "arc_history_resid_v3")
+OUT = os.path.join(HERE, "figures", "arc_history_resid_" + VER)
 
 
 def main():
@@ -71,7 +72,7 @@ def main():
     fig.savefig(OUT + ".png", dpi=300)
     fig.savefig(OUT + ".pdf")
     wrap = lambda s: textwrap.wrap(s, 100)
-    L = wrap("COGNITIVE AND EMOTIONAL LANGUAGE WITH CONCRETENESS REGRESSED OUT (diagnostic; v3 lists).") + [""] + wrap(
+    L = wrap("COGNITIVE AND EMOTIONAL LANGUAGE WITH CONCRETENESS REGRESSED OUT (diagnostic; %s lists)." % VER) + [""] + wrap(
         "Per text, the list share minus what a linear fit on the text's concreteness predicts, plus the list's mean "
         "share; one fit per list over %s arc_fiction texts carrying both measures. Gray points: decade medians; black "
         "line: lowess (span 0.3). Model arms adjusted with the history's slope, then per model the median over "

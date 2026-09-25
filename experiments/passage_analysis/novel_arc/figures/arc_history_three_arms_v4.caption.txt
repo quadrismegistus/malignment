@@ -1,0 +1,21 @@
+CONCRETENESS, COGNITIVE AND EMOTIONAL LANGUAGE IN FICTION, 1600-2000, drawn as Figure 5 draws its
+history, with base and aligned model arms.
+
+Gray points: per decade, the median over texts; black line: their lowess smooth (span 0.3); decades
+under 3 texts dropped. Texts: the book's arc_fiction set (abstraction.scores_rep, deduplicated),
+every source pooled. Top: concreteness, the book's Abs-Conc.Median.median, corrected for corpus bias
+as in the book (v5) (81,555 texts). Middle and bottom: share of a text's alphabetic non-stopword
+tokens on a word list (lltk.text_freqs surface forms, with MorphAdorner and long-s variants of kept
+words), texts with at least 2,000 such tokens (75,974 texts). Word lists from USAS X (cognition) and
+USAS E (emotion), each with its period-model neighbours, rated by an LLM under a precision-first
+rule (keep a word only if every common sense is mental) and hand-vetted; split by the rated kind of
+each word, not by field. Cognitive: cognition, attention, perception and volition words (1,411 base
+words). Emotional: emotion words (1,121), with fear and happy restored after an interiority vetting
+removed them. Arms: TEMPLATE_ARM (41 lineages, one vLLM engine, Figure 5's 100 English stems), 29
+lineages with at least 10 coherent narrative passages in all four arms (coder claude-opus-5,
+stricter about coherence than Figure 5's); base 2,598 and aligned (no template) 3,779 passages.
+Model arms: per model the median over its coherent narrative passages, then the median over
+lineages; passage values, not text values, so medians compare and spreads do not. Model concreteness
+is not bias-corrected (clean digital text).
+
+  arms: {"conc": {"base": 0.1226, "raw": -0.0617}, "cog": {"base": 0.0361, "raw": 0.0426}, "emo": {"base": 0.0182, "raw": 0.0217}}

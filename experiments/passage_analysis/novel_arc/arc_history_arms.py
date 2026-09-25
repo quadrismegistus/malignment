@@ -59,11 +59,14 @@ DATA = os.path.join(os.environ.get("MALIGNMENT_DATA", os.path.expanduser("~/mali
 TA = os.path.join(os.environ.get("MALIGNMENT_DATA", os.path.expanduser("~/malignment-data")), "template_arm", "coding")
 #: v3 (RH, 2026-09-25): v2 with fear, happy and loved restored to the emotion list ("I only removed love
 #: because it can sign letters, you can call someone love"; love stays out) and volition added to cognitive
-V3 = "v3" in sys.argv[1:]
+#: v4 (RH, 2026-09-25): v3 without loved -- a common adjective and epithet ("loved ones"), and on its own it
+#: moved the base arm most of the way from v2 to v3
+V4 = "v4" in sys.argv[1:]
+V3 = "v3" in sys.argv[1:] or V4
 V2 = "v2" in sys.argv[1:] or V3
-VER = "v3" if V3 else "v2"
+VER = "v4" if V4 else "v3" if V3 else "v2"
 SUF = "_" + VER if V2 else ""
-RESTORE = {"fear", "happy", "loved"} if V3 else set()
+RESTORE = ({"fear", "happy"} if V4 else {"fear", "happy", "loved"}) if V3 else set()
 COUNTS = os.path.join(DATA, "arc_cogemo_texts_%s.parquet" % VER if V2 else "arc_interiority_texts_precision_vetted.parquet")
 COG_COL, EMO_COL = ("n_cog", "n_emo") if V2 else ("n_cleanx_p", "n_cand_p")
 COG_KINDS, EMO_KINDS = {"cognition", "attention", "perception"} | ({"volition"} if V3 else set()), {"emotion"}
@@ -267,9 +270,10 @@ def V2_CAPTION():
     return ("Word lists from USAS X (cognition) and USAS E (emotion), each with its period-model neighbours, rated "
             "by an LLM under a precision-first rule (keep a word only if every common sense is mental) and hand-vetted; "
             "split by the rated kind of each word, not by field. " + (
-            "Cognitive: cognition, attention, perception and volition words (%s base words). Emotional: emotion words "
-            "(%s), with fear, happy and loved restored after an interiority vetting removed them." % (
-                format(info["cog_base"], ","), format(info["emo_base"], ",")) if V3 else
+            ("Cognitive: cognition, attention, perception and volition words (%s base words). Emotional: emotion words "
+             "(%s), with %s restored after an interiority vetting removed them.") % (
+                format(info["cog_base"], ","), format(info["emo_base"], ","),
+                "fear and happy" if V4 else "fear, happy and loved") if V3 else
             "Cognitive: cognition, attention and perception words "
             "(%s base words). Emotional: emotion words (%s). Volition words (%s) are in neither panel."
             % (format(info["cog_base"], ","), format(info["emo_base"], ","), format(info["volition_base"], ","))))
