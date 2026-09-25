@@ -164,6 +164,22 @@ def national():
             n_ok = int((np.sign(d[cd] - d["base"]) == sgn).sum())
             cells.append("%s %d/%d (p %.3f)" % ("up" if sgn > 0 else "down", n_ok, len(d), binomtest(n_ok, len(d)).pvalue))
         L.append("| %s | %s |" % (k, " | ".join(cells)))
+    #: RH: "lineage check with the _orth vectors too just to see" -- plain and orthogonalized side by side,
+    #: dominance included; agreement only (no history placement: the orth columns have no bias coefficients)
+    L += ["", "Plain vs orthogonalized (concreteness direction projected out per model run) VAD, same test:", "",
+          "| column | base median | " + " | ".join("base -> %s" % lab[c] for c in conds[1:]) + " |", "|---|---|" + "---|" * (len(conds) - 1)]
+    for d_ in ("Valence", "Arousal", "Dominance"):
+        for o in ("", "_orth"):
+            c = "VAD-%s.Warriner%s.median" % (d_, o)
+            piv = R.pivot_table(index="lineage", columns="cond", values=c)
+            cells = []
+            for cd in conds[1:]:
+                d = piv[["base", cd]].dropna()
+                sgn = np.sign(R[R.cond == cd][c].median() - R[R.cond == "base"][c].median())
+                n_ok = int((np.sign(d[cd] - d["base"]) == sgn).sum())
+                cells.append("%s %+.3f, %d/%d (p %.3f)" % ("up" if sgn > 0 else "down", R[R.cond == cd][c].median() - R[R.cond == "base"][c].median(),
+                                                         n_ok, len(d), binomtest(n_ok, len(d)).pvalue))
+            L.append("| %s | %+.3f | %s |" % (c, R[R.cond == "base"][c].median(), " | ".join(cells)))
     return L
 
 

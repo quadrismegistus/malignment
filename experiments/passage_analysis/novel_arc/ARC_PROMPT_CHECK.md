@@ -29,6 +29,17 @@ Lineage agreement with the median direction (lineages with both cells; sign-test
 | valence | up 28/32 (p 0.000) | up 19/23 (p 0.003) | up 17/20 (p 0.003) |
 | arousal | up 21/32 (p 0.110) | up 15/23 (p 0.210) | up 17/20 (p 0.003) |
 
+Plain vs orthogonalized (concreteness direction projected out per model run) VAD, same test:
+
+| column | base median | base -> aligned, raw | base -> aligned, chat, prefilled | base -> aligned, chat, asked |
+|---|---|---|---|---|
+| VAD-Valence.Warriner.median | +0.191 | up +0.156, 28/32 (p 0.000) | up +0.151, 19/23 (p 0.003) | up +0.108, 17/20 (p 0.003) |
+| VAD-Valence.Warriner_orth.median | +0.199 | up +0.250, 28/32 (p 0.000) | up +0.236, 22/23 (p 0.000) | up +0.216, 20/20 (p 0.000) |
+| VAD-Arousal.Warriner.median | -0.020 | up +0.074, 21/32 (p 0.110) | up +0.053, 15/23 (p 0.210) | up +0.150, 17/20 (p 0.003) |
+| VAD-Arousal.Warriner_orth.median | +0.026 | down -0.049, 23/32 (p 0.020) | down -0.013, 13/23 (p 0.678) | down -0.003, 11/20 (p 0.824) |
+| VAD-Dominance.Warriner.median | +0.168 | up +0.188, 28/32 (p 0.000) | up +0.128, 17/23 (p 0.035) | up +0.155, 17/20 (p 0.003) |
+| VAD-Dominance.Warriner_orth.median | +0.175 | up +0.191, 29/32 (p 0.000) | up +0.135, 18/23 (p 0.011) | up +0.163, 17/20 (p 0.003) |
+
 ## By stem (TEMPLATE_ARM, 100 stems; each stem-arm = its continuations over all 30 lineages as one text)
 
 | measure | stems' own median | base: median over stems (share of stems above / below every decade) | aligned, raw: median over stems (share of stems above / below every decade) | aligned, chat, prefilled: median over stems (share of stems above / below every decade) | aligned, chat, asked: median over stems (share of stems above / below every decade) |
