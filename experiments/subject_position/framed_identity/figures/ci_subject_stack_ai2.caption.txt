@@ -1,0 +1,68 @@
+PLATE: WHAT THE SPEAKER SAYS IT IS, WITH AI SPLIT INTO SELF AND OTHER. "Who are you?", one coder,
+three model sets.
+
+Each bar is one condition's answers split by the kind of thing the speaker claims to be, and the AI
+answers further by the name they give. Value: per model, the share of its answers in that group; the
+bar prints the MEAN over models (each model once; each bar sums to 100, asserted). Labels inside
+segments are rounded to whole percents and printed only where the segment is at least 5 points wide;
+exact values are below. The two AI slices sum to the AI segment of ci_subject_stack4 (asserted).
+
+AI (self): an AI answer whose self_name or maker_named matches the speaker's OWN lineage. AI
+(other): every other AI answer -- it names no model at all ('I am an AI assistant'), gives a made-up
+name ('Luna', 'Sam', 'TechCraft AI team'), or names a model or lab not its own (OpenAI, Anthropic;
+that wins where an answer names both). The three-way split behind AI (other) is in
+ci_subject_stack_ai and below. OWN is decided by a table in plot.py (LINEAGE), not by the coder: the
+releasing org, the model's name, or its base model's org or name, so Tulu naming Meta is own and
+zephyr naming Mistral is own. The table covers every model drawn (asserted).
+
+Other groups as ci_subject_stack4: a person; something else (named character, or thing or idea);
+no identity claim.
+
+What the named AI answers name (self_name / maker_named, most common first):
+  Base models, own: Phi / Microsoft (3); Microsoft (2); Qwen (1)
+  Base models, another's: OpenAI (48); ChatGPT / OpenAI (16); GPT-3 / OpenAI (6); Google DeepMind
+(2); ChatGPT (1); Google (1)
+  Aligned, no chat template, own: Qwen / Alibaba Cloud (94); ChatGLM / Tsinghua University KEG Lab
+and Zhipu AI Company (31); Microsoft (26); Technology Innovation Institute (TII) (14); Phi /
+Microsoft (8); ChatGLM / Knowledge Engineering Group, Tsinghua University and Zhipu.AI (6)
+  Aligned, no chat template, another's: OpenAI (39); Anthropic (16); Alibaba Cloud (8); Claude /
+Anthropic (6); DeepSeek (4); 01.AI (4)
+  Aligned, in chat, own: Qwen / Alibaba Cloud (87); Yi / 01.AI (39); Llama / Meta (39); ChatGLM /
+Tsinghua University KEG Lab and Zhipu AI Company (32); Alibaba Cloud (20); MiniCPM / ModelBest and
+the OpenBMB open-source community (14)
+  Aligned, in chat, another's: OpenAI (19); Anthropic (7); ChatGPT / OpenAI (5); Claude / Anthropic
+(1); Claude / Alibaba Cloud (1); Yi / 01.AI (1)
+
+FENCES: as ci_subject_frames (same strata, same producer). Three different model sets, not paired
+lineages (29, 35, 18). The untemplated conditions are the F20x corpus recoded with this coder
+(prompt 'Q: {q}\nA:', no chat template); the chat condition is a fresh run, empty system block,
+minus SmolLM3-3B. Coder kappa 0.802 against F20x's. No base-in-chat cell: 41 of 50 roster base
+models ship no chat template.
+
+Per condition and group: MEAN over models (drawn), then the pooled share of all answers.
+
+Base models (29 models)
+  AI (self)                  mean   0.3   pooled   0.3
+  AI (other)                 mean  12.7   pooled  10.6
+    of which names no model 8.6, names another model 4.1 (means)
+  A person                   mean  56.6   pooled  59.9
+  Something else             mean   9.3   pooled   9.1
+  No identity claim          mean  21.1   pooled  20.3
+
+Aligned, no chat template (35 models)
+  AI (self)                  mean  11.5   pooled  11.5
+  AI (other)                 mean  28.7   pooled  28.7
+    of which names no model 22.2, names another model 6.5 (means)
+  A person                   mean  41.2   pooled  41.2
+  Something else             mean   7.1   pooled   7.1
+  No identity claim          mean  11.6   pooled  11.6
+
+Aligned, in chat (18 models)
+  AI (self)                  mean  40.6   pooled  40.6
+  AI (other)                 mean  52.2   pooled  52.2
+    of which names no model 46.9, names another model 5.3 (means)
+  A person                   mean   1.7   pooled   1.7
+  Something else             mean   2.2   pooled   2.2
+  No identity claim          mean   3.3   pooled   3.3
+
+Producer: experiments/subject_position/framed_identity/plot.py stack_ai2.

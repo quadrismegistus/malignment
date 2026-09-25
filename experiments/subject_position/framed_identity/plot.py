@@ -670,16 +670,33 @@ def group_ai(x):
             "object_or_abstraction": "Something else", "none": "No identity claim"}[k]
 
 
-def fig_stack_ai():
+#: RH, 2026-09-25: two AI slices only, for contrast -- self, and everything else
+GROUPS_AI2 = [("AI (self)", "#000000"),
+              ("AI (other)", "#4d4d4d"),
+              ("A person", "#8c8c8c"),
+              ("Something else", "#cccccc"),
+              ("No identity claim", "#ffffff")]
+
+
+def group_ai2(x):
+    g = group_ai(x)
+    return {"AI, names itself": "AI (self)", "AI, names no model": "AI (other)",
+            "AI, names another model": "AI (other)"}.get(g, g)
+
+
+def fig_stack_ai(two=False):
     """Stacked bars, AI split by whose name it gives: its own, none, or another model's (RH, 2026-09-25)."""
     import numpy as np
-    name = "ci_subject_stack_ai"
+    name = "ci_subject_stack_ai" + ("2" if two else "")
+    GROUPS, gfn, n_ai = (GROUPS_AI2, group_ai2, 2) if two else (GROUPS_AI, group_ai, 3)
     for ext in (".png", ".pdf", ".tif", ".caption.txt"):
         assert not os.path.exists(os.path.join(FIG, name + ext)), "refusing to overwrite %s%s" % (name, ext)
     S, B, swapped, pooled = _checked()
-    F.check_halftones(dict(GROUPS_AI))
-    labels = [g for g, _ in GROUPS_AI]
-    measures = [(g, (lambda g: lambda x: group_ai(x) == g)(g)) for g in labels]
+    F.check_halftones(dict(GROUPS))
+    labels = [g for g, _ in GROUPS]
+    measures = [(g, (lambda g: lambda x: gfn(x) == g)(g)) for g in labels]
+    #: in the two-slice plate, the three-way split behind AI (other), for the caption
+    three = {}
     shorts = [short for _, short in COND]
     ns, mean, pool, ex = {}, {}, {}, collections.defaultdict(collections.Counter)
     for lab, short in COND:
@@ -692,7 +709,13 @@ def fig_stack_ai():
         rows = [x for g in keep.values() for x in g]
         for g, v in zip(labels, m):
             mean[(short, g)] = v
-            pool[(short, g)] = 100 * sum(group_ai(x) == g for x in rows) / len(rows)
+            pool[(short, g)] = 100 * sum(gfn(x) == g for x in rows) / len(rows)
+        if two:
+            three[short] = dict(zip([g for g, _ in GROUPS_AI],
+                                    medians(S[lab], [(g, (lambda g: lambda x: group_ai(x) == g)(g))
+                                                     for g, _ in GROUPS_AI], "mean")[1]))
+            assert abs(three[short]["AI, names no model"] + three[short]["AI, names another model"]
+                       - mean[(short, "AI (other)")]) < 1e-9
         for x in rows:
             if x["identity_kind"] == "ai_system":
                 w = ai_whose(x)
@@ -701,29 +724,37 @@ def fig_stack_ai():
                     ex[(short, w)][nm] += 1
         #: the AI slices together are the AI kind: same mean as the four-group plate
         ai_mean = medians(S[lab], [("ai", lambda x: x["identity_kind"] == "ai_system")], "mean")[1][0]
-        assert abs(sum(mean[(short, g)] for g in labels[:3]) - ai_mean) < 1e-9
+        assert abs(sum(mean[(short, g)] for g in labels[:n_ai]) - ai_mean) < 1e-9
     #: categorical anchors, one per condition, from the per-model tables
     assert ex[(shorts[0], "another")].most_common(1)[0][0].lower().endswith("openai")
     assert any("qwen" in k.lower() for k in ex[(shorts[2], "itself")])
 
-    p = _stack_plot(shorts, ns, mean, GROUPS_AI, fmt="%.0f%%", min_w=5, height=2.9, legend_nrow=3)
+    p = _stack_plot(shorts, ns, mean, GROUPS, fmt="%.0f%%", min_w=5, height=2.9, legend_nrow=3)
 
     W = lambda txt: textwrap.wrap(txt, 100)
-    lines = [
+    lines = ([
         "PLATE: WHAT THE SPEAKER SAYS IT IS, WITH AI SPLIT BY WHOSE NAME IT GIVES. \"Who are you?\", one",
-        "coder, three model sets.",
+        "coder, three model sets."] if not two else [
+        "PLATE: WHAT THE SPEAKER SAYS IT IS, WITH AI SPLIT INTO SELF AND OTHER. \"Who are you?\", one coder,",
+        "three model sets."]) + [
         "",
         *W("Each bar is one condition's answers split by the kind of thing the speaker claims to be, and "
            "the AI answers further by the name they give. Value: per model, the share of its answers in "
            "that group; the bar prints the MEAN over models (each model once; each bar sums to 100, "
            "asserted). Labels inside segments are rounded to whole percents and printed only where the "
-           "segment is at least 5 points wide; exact values are below. The three AI slices sum to the AI "
-           "segment of ci_subject_stack4 (asserted)."),
+           "segment is at least 5 points wide; exact values are below. The %s AI slices sum to the AI "
+           "segment of ci_subject_stack4 (asserted)." % ("two" if two else "three")),
         "",
-        *W("AI, names itself: the speaker's self_name or maker_named matches its OWN lineage. AI, names "
-           "another model: it names a known model or lab that is not its own (another wins where both "
-           "occur). AI, names no model: neither, including a made-up name ('Luna', 'Sam', 'TechCraft AI "
-           "team'). OWN is decided by a table in plot.py (LINEAGE), not by the coder: the releasing org, "
+        *W(("AI, names itself: the speaker's self_name or maker_named matches its OWN lineage. AI, names "
+            "another model: it names a known model or lab that is not its own (another wins where both "
+            "occur). AI, names no model: neither, including a made-up name ('Luna', 'Sam', 'TechCraft AI "
+            "team'). " if not two else
+            "AI (self): an AI answer whose self_name or maker_named matches the speaker's OWN lineage. "
+            "AI (other): every other AI answer -- it names no model at all ('I am an AI assistant'), gives "
+            "a made-up name ('Luna', 'Sam', 'TechCraft AI team'), or names a model or lab not its own "
+            "(OpenAI, Anthropic; that wins where an answer names both). The three-way split behind AI "
+            "(other) is in ci_subject_stack_ai and below. ") +
+           "OWN is decided by a table in plot.py (LINEAGE), not by the coder: the releasing org, "
            "the model's name, or its base model's org or name, so Tulu naming Meta is own and zephyr "
            "naming Mistral is own. The table covers every model drawn (asserted)."),
         "",
@@ -752,9 +783,17 @@ def fig_stack_ai():
         lines.append("%s (%d models)" % (short, ns[short]))
         for g in labels:
             lines.append("  %-26s mean %5.1f   pooled %5.1f" % (g, mean[(short, g)], pool[(short, g)]))
+            if two and g == "AI (other)":
+                lines.append("    of which names no model %.1f, names another model %.1f (means)" % (
+                    three[short]["AI, names no model"], three[short]["AI, names another model"]))
         lines.append("")
-    lines.append("Producer: experiments/subject_position/framed_identity/plot.py stack_ai.")
+    lines.append("Producer: experiments/subject_position/framed_identity/plot.py %s." % ("stack_ai2" if two else "stack_ai"))
     save(p, name, "\n".join(lines))
+
+
+def fig_stack_ai2():
+    """Stacked bars, AI (self) against AI (other): its own name, or anything else (RH, 2026-09-25)."""
+    fig_stack_ai(two=True)
 
 
 def fig_stack4():
@@ -768,7 +807,7 @@ def fig_stack5():
 
 
 FIGURES = {"frames": fig_frames, "kinds": fig_kinds, "kinds_mean": fig_kinds_mean,
-           "stack4": fig_stack4, "stack5": fig_stack5, "stack_ai": fig_stack_ai}
+           "stack4": fig_stack4, "stack5": fig_stack5, "stack_ai": fig_stack_ai, "stack_ai2": fig_stack_ai2}
 
 
 def main():
