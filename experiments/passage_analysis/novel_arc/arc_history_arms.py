@@ -69,8 +69,13 @@ V2 = "v2" in sys.argv[1:] or V3
 #: lemmatises to another verb, and WordNet's irregular verb forms; past tense and past participle cannot be
 #: told apart for regular verbs, so both count, and irregular participles (known, forgotten) count too.
 PAST = "past" in sys.argv[1:]
-assert not PAST or V4, "past is a v4 option"
-VER = ("v4_past" if PAST else "v4") if V4 else "v3" if V3 else "v2"
+#: present (RH, 2026-09-25): the complementary test -- is the post-1800 cognitive climb carried by present
+#: forms (know, think, guess), i.e. more likely dialogue than narration? See is_present(): uninflected verb
+#: forms and third-person -s forms; they cannot be told from infinitives or imperatives.
+PRESENT = "present" in sys.argv[1:]
+assert not (PAST or PRESENT) or V4, "past/present are v4 options"
+assert not (PAST and PRESENT)
+VER = ("v4_past" if PAST else "v4_present" if PRESENT else "v4") if V4 else "v3" if V3 else "v2"
 SUF = "_" + VER if V2 else ""
 RESTORE = ({"fear", "happy"} if V4 else {"fear", "happy", "loved"}) if V3 else set()
 COUNTS = os.path.join(DATA, "arc_cogemo_texts_%s.parquet" % VER if V2 else "arc_interiority_texts_precision_vetted.parquet")
@@ -305,9 +310,11 @@ def main():
                 "than Figure 5's); base %s and aligned (no template) %s passages." % (
             nl, MIN_ARM, format(int((D.arm == "base").sum()), ","), format(int((D.arm == "raw").sum()), ",")))
     spec = (("conc", "Concreteness in fiction", "Concreteness\n(word norm mean)", False),
-            ("cog", "Cognitive verbs in fiction, past forms" if PAST else "Cognitive language in fiction",
+            ("cog", "Cognitive verbs in fiction, past forms" if PAST else "Cognitive verbs in fiction, present forms"
+             if PRESENT else "Cognitive language in fiction",
              "Cognitive words\n(share of words)", True),
-            ("emo", "Emotional verbs in fiction, past forms" if PAST else "Emotional language in fiction",
+            ("emo", "Emotional verbs in fiction, past forms" if PAST else "Emotional verbs in fiction, present forms"
+             if PRESENT else "Emotional language in fiction",
              "Emotional words\n(share of words)", True))
     import matplotlib
     matplotlib.use("Agg")
@@ -355,7 +362,10 @@ def V2_CAPTION():
              "(%s), with %s restored after an interiority vetting removed them." + (
                  " PAST FORMS ONLY: past-tense and past-participle verb forms by WordNet (regular -ed forms and irregular "
                  "inflections; the two cannot be separated for regular verbs), with their old spellings; many of the "
-                 "emotional ones are participial adjectives (pleased, surprised, frightened)." if PAST else "")) % (
+                 "emotional ones are participial adjectives (pleased, surprised, frightened)." if PAST else
+                 " PRESENT FORMS ONLY: uninflected and third-person -s verb forms by WordNet (not separable from "
+                 "infinitives and imperatives; noun homographs such as hope and fear included), with their old "
+                 "spellings." if PRESENT else "")) % (
                 format(info["cog_base"], ","), format(info["emo_base"], ","),
                 "fear and happy" if V4 else "fear, happy and loved") if V3 else
             "Cognitive: cognition, attention and perception words "
@@ -377,6 +387,19 @@ def is_past(w):
         m = wn.morphy(w, "v")
         return m is not None and m != w
     return False
+
+
+def is_present(w):
+    """An uninflected verb form (WordNet lemmatises it to itself and it has verb senses) or a third-person -s
+    form of a verb. Never an -ing or past form. Homographs with nouns (hope, fear, doubt) are included."""
+    from nltk.corpus import wordnet as wn
+    wn.ensure_loaded()
+    if w.endswith("ing") or is_past(w) or not wn.synsets(w, "v"):
+        return False
+    m = wn.morphy(w, "v")
+    if m == w:
+        return True
+    return bool(m) and w in (m + "s", m + "es", m[:-1] + "ies")
 
 
 def v2_lists():
@@ -406,6 +429,10 @@ def v2_lists():
         base = {k: {w for w in v if is_past(w)} for k, v in base.items()}
         #: booked on 2026-09-25: 187 of 1,411 cognitive and 173 of 1,121 emotional base words are past forms
         assert {k: len(v) for k, v in base.items()} == {"cog": 187, "emo": 173}, ({k: len(v) for k, v in base.items()}, n0)
+    if PRESENT:
+        n0 = {k: len(v) for k, v in base.items()}
+        base = {k: {w for w in v if is_present(w)} for k, v in base.items()}
+        print("present forms:", {k: len(v) for k, v in base.items()}, "of", n0)
     V = pd.concat([X[X.spelling_of.notna() & X.keep], E[E.spelling_of.notna() & E.keep]])
     _, sw, _ = A.lists_expanded()
     out, info = {}, {"cog_base": len(base["cog"]), "emo_base": len(base["emo"]), "emo_anchor_seeds_added": sorted(anchors),
