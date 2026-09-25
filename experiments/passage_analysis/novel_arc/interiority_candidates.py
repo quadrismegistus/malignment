@@ -3,6 +3,8 @@
     .venv/bin/python -u interiority_candidates.py --pilot     three batches, printed
     .venv/bin/python -u interiority_candidates.py --run       both passes -> candidate_ratings_v1.parquet
     .venv/bin/python -u interiority_candidates.py --summary   -> INTERIORITY_CANDIDATES.md
+    add --seeds to any of the three: rate the USAS X words THEMSELVES (3,225, every primary-sense X word
+    less NLTK stopwords) -> usasx_ratings_v1.parquet, USAS_X_KINDS.md, with anchors that are not X words
 
 WHERE THE CANDIDATES COME FROM. The abstraction seat took every USAS X word (primary sense, any POS entry)
 as a seed in each models_century5 word2vec model, C16-C21, and kept stable nearest neighbours not already
@@ -88,8 +90,35 @@ class InteriorityCandidateTask(Task):
     usage_log = True
 
 
+SEEDS = "--seeds" in sys.argv
+if SEEDS:
+    #: think and wonder ARE X words; the anchors must be outside the pool being rated
+    ANCHORS = {"dread": "C16, C17, C18, C19, C20, C21", "grief": "C16, C17, C18, C19, C20, C21",
+               "door": "C16, C17, C18, C19, C20, C21", "walk": "C16, C17, C18, C19, C20, C21"}
+    OUT = os.path.join(SHARED, "usasx_ratings_v1.parquet")
+X_JSON = os.path.expanduser("~/malignment-data/novel_arc/usas_fields_members.json")
+
+
+def x_words():
+    """{word: sorted X codes} for every primary-sense X member, NLTK stopwords dropped."""
+    from nltk.corpus import stopwords
+    sw = set(stopwords.words("english"))
+    w = {}
+    for code, x in json.load(open(X_JSON))["codes"].items():
+        if code.startswith("X"):
+            for m in x["members"]:
+                if m["rank"] == 0 and m["word"] not in sw:
+                    w.setdefault(m["word"], set()).add(code)
+    return {k: sorted(v) for k, v in w.items()}
+
+
 def pool():
-    """-> [(word, 'C17, C18')] for the 5,383-word vetting pool."""
+    """-> [(word, 'C17, C18')] for the 5,383-word vetting pool, or with --seeds the 3,225 X words."""
+    if SEEDS:
+        out = sorted((w, "any period") for w in x_words())
+        assert len(out) == 3225, len(out)
+        assert not set(ANCHORS) & {w for w, _ in out}
+        return out
     import pandas as pd
     c = pd.read_csv(CAND)
     p = c[(c["count"] >= 500) & (c.n_seeds_nonX3 >= 5)]
@@ -159,7 +188,7 @@ def main():
             OUT, len(d), len(bs), miss, extra, nerr))
         return
     if "--summary" in sys.argv:
-        summary()
+        seeds_summary() if SEEDS else summary()
 
 
 def summary():
@@ -219,6 +248,49 @@ def summary():
         ws = sl[sl.kind == k].word.tolist()
         L.append("- **%s** (%d): %s" % (k, len(ws), ", ".join(ws[:60]) + (" ..." if len(ws) > 60 else "")))
     open(os.path.join(HERE, "INTERIORITY_CANDIDATES.md"), "w").write("\n".join(L) + "\n")
+    print("\n".join(L))
+
+
+def seeds_summary():
+    """USAS X words by kind: which subfields are inner states and which are argument or other."""
+    import pandas as pd
+    from scipy.stats import spearmanr
+    d = pd.read_parquet(OUT)
+    xw = x_words()
+    w = d[~d.anchor].pivot_table(index="word", columns="pass_", values=["interior", "kind"], aggfunc="first").dropna()
+    i1, i2 = w[("interior", 1)].astype(int), w[("interior", 2)].astype(int)
+    k1, k2 = w[("kind", 1)], w[("kind", 2)]
+    agree_k = k1.where(k1 == k2, "mixed")
+    t = pd.DataFrame({"word": w.index, "interior_mean": ((i1 + i2) / 2).values, "kind": agree_k.values,
+                      "x_codes": [" ".join(xw[x]) for x in w.index]})
+    t.to_csv(os.path.join(SHARED, "usasx_kinds_v1.csv"), index=False)
+    a = d[d.anchor].groupby("word").agg(interior=("interior", lambda s: sorted(set(s))),
+                                        kind=("kind", lambda s: sorted(set(s))), n=("interior", "size"))
+    #: one row per (word, X code): a word in two subfields counts in both
+    long = t.assign(code=t.x_codes.str.split()).explode("code")
+    long["sub"] = long.code.str.extract(r"^(X\d+(?:\.\d)?)")[0]
+    kinds = ["cognition", "emotion", "volition", "perception", "attention", "argument", "other", "mixed"]
+    L = ["# USAS X words by kind (EXPLORATORY)", "",
+         "Producer `interiority_candidates.py --seeds`. Every primary-sense USAS X word less NLTK stopwords, %d "
+         "words (the abstraction seat's seed list was 2,826 under a rule not reproduced here), each rated twice by "
+         "deepseek-v4-flash (resolved: deepseek-flash) at temperature 0 in shuffled batches of %d, the same "
+         "InteriorityCandidateTask and prompt as the candidates, anchors dread, grief, door, walk. Ratings: %s; "
+         "per word: %s." % (len(w), BATCH, OUT, os.path.join(SHARED, "usasx_kinds_v1.csv")), "",
+         "- interior (0-3) between passes: exact %.1f%%, within one %.1f%%, Spearman %.3f; kind agreement %.1f%%" % (
+             100 * float((i1 == i2).mean()), 100 * float(((i1 - i2).abs() <= 1).mean()),
+             float(spearmanr(i1, i2)[0]), 100 * float((k1 == k2).mean())),
+         "- anchors: " + "; ".join("%s interior %s kind %s (n=%d)" % (x, r.interior, r.kind, r.n) for x, r in a.iterrows()),
+         "- mean interior over all X words: %.2f; share rated >= 2 in both passes: %.1f%%" % (
+             float(t.interior_mean.mean()), 100 * float(((i1 >= 2) & (i2 >= 2)).mean())), "",
+         "## X subfield by agreed kind (words; a word in two subfields counts in both)", "",
+         "| subfield | n | mean interior | " + " | ".join(kinds) + " |", "|---|---|---|" + "---|" * len(kinds)]
+    for sub, g in long.groupby("sub"):
+        L.append("| %s | %d | %.2f | " % (sub, len(g), g.interior_mean.mean()) +
+                 " | ".join(str(int((g.kind == k).sum())) for k in kinds) + " |")
+    L += ["", "## X words the rater does not read as inner states (agreed kind argument or other, mean interior < 1.5)", ""]
+    low = t[t.kind.isin(["argument", "other"]) & (t.interior_mean < 1.5)].sort_values("interior_mean")
+    L.append("%d words, e.g.: %s" % (len(low), ", ".join(low.word.head(80))))
+    open(os.path.join(HERE, "USAS_X_KINDS.md"), "w").write("\n".join(L) + "\n")
     print("\n".join(L))
 
 
