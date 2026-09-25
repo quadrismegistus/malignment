@@ -1,0 +1,12 @@
+CONCRETENESS, COGNITIVE AND EMOTIONAL LANGUAGE IN FICTION, 1600-2000, drawn as Figure 5 draws its
+history (preview, no model arms).
+
+Gray points: per decade, the median over texts; black line: their lowess smooth (span 0.3); decades
+under 3 texts dropped. Texts: the book's arc_fiction set (abstraction.scores_rep, deduplicated),
+every source pooled. Top: concreteness, the book's Abs-Conc.Median.median, corrected for corpus bias
+as in the book (v5) (81,555 texts). Middle and bottom: share of a text's alphabetic non-stopword
+tokens on a word list (lltk.text_freqs surface forms, with MorphAdorner and long-s variants of kept
+words), texts with at least 2,000 such tokens (75,974 texts). Cognitive: the USAS X words an LLM
+rater kept under a precision-first rule, hand-vetted (872 base words; 68% cognition by token mass).
+Emotional: period-model neighbours of X rated and vetted the same way (1,077 base words; 67%
+emotion).
