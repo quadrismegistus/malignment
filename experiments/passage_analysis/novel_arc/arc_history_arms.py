@@ -64,7 +64,13 @@ TA = os.path.join(os.environ.get("MALIGNMENT_DATA", os.path.expanduser("~/malign
 V4 = "v4" in sys.argv[1:]
 V3 = "v3" in sys.argv[1:] or V4
 V2 = "v2" in sys.argv[1:] or V3
-VER = "v4" if V4 else "v3" if V3 else "v2"
+#: past (RH, 2026-09-25): v4 restricted to PAST verb forms, to test whether the post-1800 shift in cognitive
+#: vocabulary is narrated mental acts (she realized, he wondered). See is_past(): regular -ed forms WordNet
+#: lemmatises to another verb, and WordNet's irregular verb forms; past tense and past participle cannot be
+#: told apart for regular verbs, so both count, and irregular participles (known, forgotten) count too.
+PAST = "past" in sys.argv[1:]
+assert not PAST or V4, "past is a v4 option"
+VER = ("v4_past" if PAST else "v4") if V4 else "v3" if V3 else "v2"
 SUF = "_" + VER if V2 else ""
 RESTORE = ({"fear", "happy"} if V4 else {"fear", "happy", "loved"}) if V3 else set()
 COUNTS = os.path.join(DATA, "arc_cogemo_texts_%s.parquet" % VER if V2 else "arc_interiority_texts_precision_vetted.parquet")
@@ -179,8 +185,17 @@ def arm_passages():
     return D
 
 
-def arm_values(D, col):
-    per = D.groupby(["base", "arm"])[col].median().unstack()
+def arm_values(D, col, pooled=False):
+    """Per model the median over passages (Figure 5), or with pooled=True the model's POOLED rate -- its list
+    tokens over its content tokens across all its passages, the analogue of a whole-text share -- then the
+    median over lineages. Pooled is used where a list is too sparse for a passage median: past-form emotion
+    words are absent from most ~100-word passages, and every model's median is 0."""
+    if pooled:
+        d = D.dropna(subset=[col]).assign(hits=lambda x: x[col] * x.n_content)
+        g = d.groupby(["base", "arm"])
+        per = (g.hits.sum() / g.n_content.sum()).unstack()
+    else:
+        per = D.groupby(["base", "arm"])[col].median().unstack()
     return {a: float(per[a].median()) for a in ("base", "raw")}, len(per)
 
 
@@ -225,14 +240,19 @@ def main():
     if ARMS_ON:
         D = arm_passages()
         for k in ("conc", "cog", "emo"):
-            arms[k], nl = arm_values(D, k)
+            arms[k], nl = arm_values(D, k, pooled=PAST and k != "conc")
+            if k != "conc":
+                print("  %s arms: median-of-passages %s, pooled %s" % (k, {a: round(100 * v, 3) for a, v in arm_values(D, k)[0].items()},
+                                                                      {a: round(100 * v, 3) for a, v in arm_values(D, k, True)[0].items()}))
         info = (" Arms: TEMPLATE_ARM (41 lineages, one vLLM engine, Figure 5's 100 English stems), %d lineages with at "
                 "least %d coherent narrative passages in all four arms (coder claude-opus-5, stricter about coherence "
                 "than Figure 5's); base %s and aligned (no template) %s passages." % (
             nl, MIN_ARM, format(int((D.arm == "base").sum()), ","), format(int((D.arm == "raw").sum()), ",")))
     spec = (("conc", "Concreteness in fiction", "Concreteness\n(word norm mean)", False),
-            ("cog", "Cognitive language in fiction", "Cognitive words\n(share of words)", True),
-            ("emo", "Emotional language in fiction", "Emotional words\n(share of words)", True))
+            ("cog", "Cognitive verbs in fiction, past forms" if PAST else "Cognitive language in fiction",
+             "Cognitive words\n(share of words)", True),
+            ("emo", "Emotional verbs in fiction, past forms" if PAST else "Emotional language in fiction",
+             "Emotional words\n(share of words)", True))
     import matplotlib
     matplotlib.use("Agg")
     matplotlib.rcParams["pdf.fonttype"] = 42
@@ -255,7 +275,10 @@ def main():
         "Cognitive: the USAS X words an LLM rater kept under a precision-first rule, "
         "hand-vetted (872 base words; 68% cognition by token mass). Emotional: period-model neighbours of X rated "
         "and vetted the same way (1,077 base words; 67% emotion).") + (
-        info + " Model arms: per model the median over its coherent narrative passages, then the median over lineages; "
+        info + (" Model arms for the two word-list panels: per model the POOLED rate over its coherent narrative "
+                "passages (list tokens over content tokens; past forms are too sparse for a passage median, which is 0 "
+                "for every model's emotional forms), then the median over lineages; concreteness as below." if PAST else "") +
+        " Model arms: per model the median over its coherent narrative passages, then the median over lineages; "
         "passage values, not text values, so medians compare and spreads do not. Model concreteness is not "
         "bias-corrected (clean digital text)." if ARMS_ON else ""))
     L += ["", "  arms: " + json.dumps({k: {a: round(v, 4) for a, v in d.items()} for k, d in arms.items()})] if ARMS_ON else []
@@ -271,12 +294,31 @@ def V2_CAPTION():
             "by an LLM under a precision-first rule (keep a word only if every common sense is mental) and hand-vetted; "
             "split by the rated kind of each word, not by field. " + (
             ("Cognitive: cognition, attention, perception and volition words (%s base words). Emotional: emotion words "
-             "(%s), with %s restored after an interiority vetting removed them.") % (
+             "(%s), with %s restored after an interiority vetting removed them." + (
+                 " PAST FORMS ONLY: past-tense and past-participle verb forms by WordNet (regular -ed forms and irregular "
+                 "inflections; the two cannot be separated for regular verbs), with their old spellings; many of the "
+                 "emotional ones are participial adjectives (pleased, surprised, frightened)." if PAST else "")) % (
                 format(info["cog_base"], ","), format(info["emo_base"], ","),
                 "fear and happy" if V4 else "fear, happy and loved") if V3 else
             "Cognitive: cognition, attention and perception words "
             "(%s base words). Emotional: emotion words (%s). Volition words (%s) are in neither panel."
             % (format(info["cog_base"], ","), format(info["emo_base"], ","), format(info["volition_base"], ","))))
+
+
+def is_past(w):
+    """A past verb form by WordNet: an irregular inflection in its verb exception list, or an -ed form it
+    lemmatises to a different verb. -ing and -s forms are never past."""
+    from nltk.corpus import wordnet as wn
+    wn.ensure_loaded()
+    if w.endswith("ing") or (w.endswith("s") and not w.endswith("ss")):
+        return False
+    ex = wn._exception_map["v"].get(w)
+    if ex and ex[0] != w:
+        return True
+    if w.endswith("ed"):
+        m = wn.morphy(w, "v")
+        return m is not None and m != w
+    return False
 
 
 def v2_lists():
@@ -301,6 +343,11 @@ def v2_lists():
     for w in RESTORE:
         assert Xi.loc[w, "keep_llm"] and Xi.loc[w, "rh_removed"] and Xi.loc[w, "kind"] == "emotion", w
     base["emo"] |= RESTORE
+    if PAST:
+        n0 = {k: len(v) for k, v in base.items()}
+        base = {k: {w for w in v if is_past(w)} for k, v in base.items()}
+        #: booked on 2026-09-25: 187 of 1,411 cognitive and 173 of 1,121 emotional base words are past forms
+        assert {k: len(v) for k, v in base.items()} == {"cog": 187, "emo": 173}, ({k: len(v) for k, v in base.items()}, n0)
     V = pd.concat([X[X.spelling_of.notna() & X.keep], E[E.spelling_of.notna() & E.keep]])
     _, sw, _ = A.lists_expanded()
     out, info = {}, {"cog_base": len(base["cog"]), "emo_base": len(base["emo"]), "emo_anchor_seeds_added": sorted(anchors),
