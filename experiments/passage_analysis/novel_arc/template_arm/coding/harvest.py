@@ -8,7 +8,7 @@ cap AFTER every agent has finished (chunk 1, 2026-09-25). The agents' results ar
 each run's journal.jsonl, one line per agent; this reads them there, keeps only ids the
 selection asked for, and reports any requested id that never came back.
 """
-import json, os, sys
+import json, os, re, sys
 DATA = os.environ.get("MALIGNMENT_DATA", os.path.expanduser("~/malignment-data"))
 WF = os.path.expanduser("~/.claude/projects/-Users-rj416-github-malign-logits/412328a9-b178-4724-9c75-eca7f1f0e80b/subagents/workflows")
 OUT = os.path.join(DATA, "template_arm", "coding", "codings.parquet")
@@ -18,7 +18,7 @@ def main(runs):
     import pyarrow as pa, pyarrow.parquet as pq
     batches = []
     for f in sorted(os.listdir(os.path.join(DATA, "template_arm", "coding"))):
-        if f.startswith("batches") and f.endswith(".json"):          #: batches.json + stragglers
+        if re.fullmatch(r"batches(_\d+)?\.json", f):                #: batches.json + batches_2.json ..., not *_fillers
             batches += json.load(open(os.path.join(DATA, "template_arm", "coding", f)))
     asked = {i for b in batches for i in b["ids"]}
     got, stray = {}, 0

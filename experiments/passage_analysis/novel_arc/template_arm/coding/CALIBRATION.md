@@ -53,3 +53,14 @@ Same direction as 5.5, a little smaller. **The model id is not the whole instrum
 ## DECISION (RH, 2026-09-25: "We're recoding all data right, no old data will be in Fig 5 anyway")
 
 Every passage in the template-arm Figure 5 is coded fresh by ONE coder, so the calibration bears only on the descriptive engine replication against August. The coder is **claude-opus-5, pinned**: closer to August's coder A than 5.5 (0.868 vs 0.835) and the model the method was built on. The replication against August, if it is reported, recodes the August replication cells with the same pinned coder (the declared fallback); not run now. The coder shift is a CAVEAT for any comparison with the v6 plate: it moves which passages count (more on base), and, on the paper seat's 384-passage check, barely where the arms sit.
+
+## TEST-RETEST, and evidence that batch composition moves the coder (2026-09-25)
+
+The straggler pass (internlm2-chat continue, 200 passages) was coded in batches mixed with 205 passages drawn at random from the main selection, so that no batch held one cell only; their second codings are kept apart (`coding/codings_retest.parquet`), never overwriting the first. Same coder (claude-opus-5 pinned), same prompt:
+
+    narrative   183/205 = 0.893   first -> retest: T->T 89, F->F 94, T->F 20, F->T 2
+    mode        0.893   drift 0.902   degree 0.780
+
+Two readings. (1) **The coder's test-retest floor on `narrative` is ~0.89**, below August's A-vs-B 0.945: near the boundary the call is not stable. (2) **The misses are one-sided (20 vs 2), and these batches were half polished continue passages (97.5% narrative).** Against that company borderline passages read worse -- the batch-composition effect proposed above as an untested candidate for the calibration failure (whose batches were 50% narrative against ~20% in passC's). It is now evidenced, not proved (n=205, one configuration).
+
+What it does and does not touch: the main run's 708 batches were drawn at random across all 161 cells, so every arm was coded in the same company and the effect cannot differ by arm there. It does bound what the survival table can show: an arm difference in narrative RATE of the order of 10 points is inside the coder's own instability and is not read as a finding.
