@@ -112,9 +112,11 @@ def per_model(sub):
     return {m: g for m, g in by.items() if len(g) >= 5}
 
 
-def medians(sub, measures=None):
+def medians(sub, measures=None, stat="median"):
+    """-> n models, [per measure: the MEDIAN (analyse.py's) or MEAN over models of each model's rate]"""
+    agg = A.median if stat == "median" else (lambda xs: sum(xs) / len(xs))
     keep = per_model(sub)
-    return len(keep), [100 * A.median([sum(1 for x in g if fn(x)) / len(g) for g in keep.values()])
+    return len(keep), [100 * agg([sum(1 for x in g if fn(x)) / len(g) for g in keep.values()])
                        for _, fn in (measures or MEASURES)]
 
 
@@ -163,7 +165,7 @@ def _spread(xs, sep, lo, hi):
     return out
 
 
-def _draw(S, measures, height, dodge=False):
+def _draw(S, measures, height, dodge=False, stat="median"):
     """The plate: one row per measure, a line through three marks. -> p, ns, val"""
     import matplotlib
     matplotlib.use("Agg")
@@ -173,7 +175,7 @@ def _draw(S, measures, height, dodge=False):
                           element_rect, guides, guide_legend)
     ns, val = {}, {}
     for lab, short in COND:
-        n, vals = medians(S[lab], measures)
+        n, vals = medians(S[lab], measures, stat)
         ns[short] = n
         for (mlab, _), v in zip(measures, vals):
             val[(short, mlab)] = v
@@ -215,7 +217,7 @@ def _draw(S, measures, height, dodge=False):
                               labels=lambda v: ["%g%%" % x for x in v])
          + scale_y_continuous(limits=(0.45, len(measures) + 0.55), expand=(0, 0),
                               breaks=list(range(len(measures), 0, -1)), labels=[m for m, _ in measures])
-         + labs(x="Answers to \u201cWho are you?\u201d, median over models", y="")
+         + labs(x="Answers to \u201cWho are you?\u201d, %s over models" % stat, y="")
          + F.pub_theme(height=H_IN, grid="none")
          + theme(figure_size=(W_IN, H_IN), legend_position="bottom", legend_title=element_blank(),
                  legend_text=element_text(family=fnt, size=F.PUB_FONT_PT),
@@ -297,10 +299,11 @@ KINDS = [("Says it is an AI", "ai_system"),
          ("Makes no identity claim", "none")]
 
 
-def fig_kinds():
+def fig_kinds(stat="median"):
     """The subject in three conditions, all five identity kinds (RH, 2026-09-25)."""
     import numpy as np
-    name = "ci_subject_frames_kinds"
+    MEAN = stat == "mean"
+    name = "ci_subject_frames_kinds" + ("_mean" if MEAN else "")
     for ext in (".png", ".pdf", ".tif", ".caption.txt"):
         assert not os.path.exists(os.path.join(FIG, name + ext)), "refusing to overwrite %s%s" % (name, ext)
     S, B, swapped, pooled = _checked()
@@ -309,12 +312,13 @@ def fig_kinds():
     for lab, _ in COND:
         seen = {x["identity_kind"] for g in per_model(S[lab]).values() for x in g}
         assert seen <= {k for _, k in KINDS}, (lab, seen)
-    p, ns, val = _draw(S, measures, 3.9, dodge=True)
+    p, ns, val = _draw(S, measures, 3.9, dodge=True, stat=stat)
     shorts = [short for _, short in COND]
-    #: two of the five are booked in analysis.txt, and must be the same numbers there
+    med = {(short, klab): v for lab, short in COND for (klab, _), v in zip(measures, medians(S[lab], measures)[1])}
+    #: two of the five are booked in analysis.txt (as MEDIANS), and must be the same numbers there
     for (lab, short) in COND:
-        assert round(val[(short, "Says it is an AI")], 1) == B[lab][2], short
-        assert round(val[(short, "Claims to be a person")], 1) == B[lab][3], short
+        assert round(med[(short, "Says it is an AI")], 1) == B[lab][2], short
+        assert round(med[(short, "Claims to be a person")], 1) == B[lab][3], short
 
     rng, pool, sums = {}, {}, {}
     for lab, short in COND:
@@ -326,16 +330,25 @@ def fig_kinds():
             pool[(short, klab)] = 100 * sum(x["identity_kind"] == k for x in rows) / len(rows)
         assert abs(sum(pool[(short, kl)] for kl, _ in KINDS) - 100) < 1e-9
         sums[short] = sum(val[(short, kl)] for kl, _ in KINDS)
+        if MEAN:
+            #: the reason for the mean: the parts of one whole sum to the whole
+            assert abs(sums[short] - 100) < 1e-9, (short, sums[short])
+    #: the mean equals the pooled share exactly where every model gives the same number of answers
+    same_n = {short: len({len(g) for g in per_model(S[lab]).values()}) == 1 for lab, short in COND}
     sp = {short: medians(S[lab])[1][0] for lab, short in COND}
 
     lines = [
-        "PLATE: THE SUBJECT IN THREE CONDITIONS, ALL FIVE IDENTITY KINDS. \"Who are you?\", one coder,",
+        "PLATE: THE SUBJECT IN THREE CONDITIONS, ALL FIVE IDENTITY KINDS%s. \"Who are you?\", one coder,"
+        % (", MEANS" if MEAN else ""),
         "three model sets.",
         "",
         "Per row, a line through three marks. Circle: base models, untemplated. Triangle: aligned models,",
         "untemplated. Square: aligned models in their own chat template. Steps are drawn where the values",
-        "fall; the triangle marks a condition, not a direction; where marks coincide (0.0, 1.7) the later",
-        "one is drawn over the earlier, and value labels are nudged sideways so each stays legible.",
+        *(["fall; the triangle marks a condition, not a direction; where marks coincide (0.0, 1.7) the later",
+           "one is drawn over the earlier, and value labels are nudged sideways so each stays legible."]
+          if not MEAN else
+          ["fall; the triangle marks a condition, not a direction; where marks nearly coincide the later one",
+           "is drawn over the earlier, and value labels are nudged sideways so each stays legible."]),
         "",
         "Rows: the five levels of the coder's identity_kind, which is its whole vocabulary (asserted), one",
         "per answer: what kind of thing the speaker claims to BE. AI = an AI, model, assistant, program,",
@@ -343,29 +356,51 @@ def fig_kinds():
         "named character it is playing. Thing or idea = a thing, a concept, a voice. No identity claim =",
         "it makes none (including answers that never say who is speaking).",
         "",
-        *textwrap.wrap(
+        *(textwrap.wrap(
             "Value: per model, the share of its answers of that kind; the plate prints the MEDIAN over "
             "models (analyse.py's unit). Medians of the five need not sum to 100 and do not: %s. The pooled "
             "shares below do. AI and person are the booked cross-frame numbers (results/analysis.txt, "
             "asserted); the other three kinds are not in that table and are computed here by the same rule."
-            % "; ".join("%s %.1f" % (s_.lower(), sums[s_]) for s_ in shorts), 100),
+            % "; ".join("%s %.1f" % (s_.lower(), sums[s_]) for s_ in shorts), 100) if not MEAN else
+          textwrap.wrap(
+            "Value: per model, the share of its answers of that kind; the plate prints the MEAN over "
+            "models. Each model counts once, as in analyse.py, and unlike a median the mean keeps the five "
+            "rows summing to 100 in each condition (asserted): every model's own five shares sum to 100, and "
+            "an average of wholes is a whole. The mean equals the pooled share of all answers where every "
+            "model gives the same number of answers (%s) and differs slightly where they do not (%s). "
+            "The booked cross-frame figures (results/analysis.txt) are MEDIANS, printed in the table "
+            "below and asserted for AI and person: AI %s. Median and mean part most where models split "
+            "between none and nearly all, which is what the interquartile ranges below show."
+            % ("; ".join(s_.lower() for s_ in shorts if same_n[s_]),
+               "; ".join(s_.lower() for s_ in shorts if not same_n[s_]),
+               " -> ".join("%.1f" % med[(s_, "Says it is an AI")] for s_ in shorts)), 100)),
         "",
         "FENCES: as ci_subject_frames (same strata, same producer). Three different model sets, not paired",
         "lineages (%d, %d, %d). The untemplated conditions are the F20x corpus recoded with this coder"
         % tuple(ns[s_] for s_ in shorts),
         "(prompt 'Q: {q}\\nA:', no chat template); the chat condition is a fresh run, empty system block,",
-        "minus SmolLM3-3B (%.1f%% AI, not the retracted pooled %.1f). Coder kappa 0.802 against F20x's." % (
-            val[(shorts[2], "Says it is an AI")], pooled[1][1]),
+        ("minus SmolLM3-3B (%.1f%% AI, not the retracted pooled %.1f). Coder kappa 0.802 against F20x's." % (
+            val[(shorts[2], "Says it is an AI")], pooled[1][1])) if not MEAN else
+        #: 98.8 is a MEDIAN; set beside the mean it would read as a 6-point retraction
+        ("minus SmolLM3-3B (AI: median %.1f, not the retracted pooled median %.1f). Kappa 0.802 vs F20x." % (
+            med[(shorts[2], "Says it is an AI")], pooled[1][1])),
         "No base-in-chat cell: 41 of 50 roster base models ship no chat template.",
         "",
-        "Ranges, per condition and kind: median over models [interquartile range over models; min-max],",
-        "then the pooled share of all answers. Quartiles by linear interpolation (numpy default).",
+        *(["Ranges, per condition and kind: median over models [interquartile range over models; min-max],",
+           "then the pooled share of all answers. Quartiles by linear interpolation (numpy default)."]
+          if not MEAN else
+          ["Per condition and kind: MEAN over models (drawn), MEDIAN over models, [interquartile range over",
+           "models; min-max], then the pooled share of all answers. Quartiles by linear interpolation."]),
         "",
     ]
     for short in shorts:
         lines.append("%s (%d models)" % (short, ns[short]))
         for klab, _ in KINDS:
             lo, q1, q3, hi = rng[(short, klab)]
+            if MEAN:
+                lines.append("  %-28s mean %5.1f  median %5.1f  [%5.1f-%5.1f; %5.1f-%5.1f]  pooled %5.1f" % (
+                    klab, val[(short, klab)], med[(short, klab)], q1, q3, lo, hi, pool[(short, klab)]))
+                continue
             lines.append("  %-28s %5.1f  [%5.1f-%5.1f; %5.1f-%5.1f]   pooled %5.1f" % (
                 klab, val[(short, klab)], q1, q3, lo, hi, pool[(short, klab)]))
         lines.append("")
@@ -376,12 +411,17 @@ def fig_kinds():
             "self-identify tautologically ('I am me'), which codes as no identity claim."
             % " -> ".join("%.1f" % sp[s_] for s_ in shorts), 100),
         "",
-        "Producer: experiments/subject_position/framed_identity/plot.py kinds.",
+        "Producer: experiments/subject_position/framed_identity/plot.py %s." % ("kinds_mean" if MEAN else "kinds"),
     ]
     save(p, name, "\n".join(lines))
 
 
-FIGURES = {"frames": fig_frames, "kinds": fig_kinds}
+def fig_kinds_mean():
+    """All five identity kinds, MEAN over models, so each condition's rows sum to 100 (RH, 2026-09-25)."""
+    fig_kinds("mean")
+
+
+FIGURES = {"frames": fig_frames, "kinds": fig_kinds, "kinds_mean": fig_kinds_mean}
 
 
 def main():
