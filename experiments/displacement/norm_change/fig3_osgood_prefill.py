@@ -193,6 +193,91 @@ def build():
     print("wrote %s" % os.path.relpath(OUT_JSON, HERE))
 
 
+# ────────────────────────────── the union selection (RH, 2026-09-25): raw-significant OR prefill-significant
+SEL_JSON = os.path.join(HERE, "results", "fig3_prefill_selection40.json")
+PRE_DOSE_DIR = os.path.join(HERE, "results", "dose_lift_v4_framed_cov20")
+#: the three native scales the prefilled arm adds under the published rule; pole names from the v6
+#: rater's own definitions (experiments/slot_ratings/task.py), pole words from fig3_candidates'
+#: rule (movers >= 50 cells, rated in >= 5 frames, most extreme 60 by rating, then most-moved),
+#: chosen from the top of each list, none repeating a word already on the plate (check_picks)
+EXTRA_POLES = {"v6:interiority": ("In the world", "In a mind"),
+               "v6:hedged": ("Committed", "Hedged"),
+               "v6:deliberation": ("Acts", "Deliberates")}
+EXTRA_PICKS = {"v6:interiority": (("slapped", "yanked"), ("realized", "wondered")),
+               "v6:hedged": (("grabbed", "opened"), ("tried", "wait")),
+               "v6:deliberation": (("rushed", "hurried"), ("decided", "consider"))}
+
+
+def select():
+    """The published scatter's rule (both axes, BH 0.05 within axis, over the 29 gated scales) applied
+    to the PREFILLED arm on the 40 lineages. -> results/fig3_prefill_selection40.json
+
+    Dose axis: dose.py's own per-lineage lift slopes, `--frame prefill` with the published
+    invocation, written to results/dose_lift_v4_framed_cov20/ (the raw run's sibling directory).
+    Marginal axis: norms_levels_z.build's per-lineage median change, sign test, ties dropped --
+    the counts that reproduce the scatter's marginal p on all 29 raw scales (checked below)."""
+    import csv, collections, subprocess
+    from scipy.stats import binomtest
+    import plot_fields as PF
+    from malignment import charge, roster
+    assert POP == "40", "--select is defined on the 40-lineage population"
+    fam = PF.load_xy(sig="none", correct="bh", alpha=0.05)
+    raw_both = {r["scale"] for r in PF.load_xy(sig="both", correct="bh", alpha=0.05)}
+    assert len(fam) == 29 and len(raw_both) == 18, (len(fam), len(raw_both))
+    F = [r["scale"] for r in fam]
+    keep50, keep40 = populations()
+    sign = lambda xs: (lambda up, dn: (up, dn, binomtest(up, up + dn).pvalue if up + dn else 1.0))(
+        sum(x > 0 for x in xs), sum(x < 0 for x in xs))
+
+    def slopes(d, sfx, keep):
+        out = collections.defaultdict(list)
+        for t in ("levels", "contextual"):
+            for r in csv.DictReader(open(os.path.join(d, "dose_lift%s__%s_en__by_lineage.csv" % (sfx, t)))):
+                if r["lineage"] in keep:
+                    out[r["target"]].append(float(r["slope"]))
+        return out
+    #: CONTROL, both axes, raw: the published p values rebuilt from their per-lineage inputs
+    R = slopes(os.path.join(HERE, "results", "dose_lift_v4_cov20"), "_v4", keep50)
+    Z = {x["scale"]: {b["band"]: b for b in x["bands"]} for x in json.load(open(PUB_JSON))["scales"]}
+    for sc, r in zip(F, fam):
+        assert abs(sign(R[sc])[2] - r["xp"]) < 1e-9, ("dose", sc)
+        a = Z[sc]["all"]
+        assert abs(binomtest(a["up"], a["up"] + a["down"]).pvalue - r["yp"]) < 1e-9, ("marginal", sc)
+    print("  CONTROL: raw dose and marginal p rebuilt from per-lineage inputs on all %d scales" % len(F))
+
+    if not os.path.isdir(PRE_DOSE_DIR):
+        for t in ("levels", "contextual"):
+            subprocess.run([sys.executable, "-u", os.path.join(HERE, "dose.py"), "--rule-version", "4",
+                            "--lift-dose", "--min-cov", "0.2", "--lang", "en", "--table", t, "--per-lineage",
+                            "--top", "0", "--frame", "prefill", "--out", PRE_DOSE_DIR], check=True, cwd=HERE)
+    Pd = slopes(PRE_DOSE_DIR, "_v4_framed", keep40)
+    cuts = json.load(open(os.path.join(HERE, "results", "norms_by_lift_en.json")))["cuts"]
+    Pm = run(FRAMED_SRC, keep40, charge.lifts_per_lineage(), cuts)
+    rows = []
+    for sc in F:
+        xu, xd, xp = sign(Pd.get(sc, []))
+        a = {b["band"]: b for b in Pm[sc]["bands"]}["all"]
+        yu, yd = a["up"], a["down"]
+        rows.append(dict(scale=sc, dose_up=xu, dose_down=xd, xp=xp, n_slopes=len(Pd.get(sc, [])),
+                         marg_up=yu, marg_down=yd, yp=binomtest(yu, yu + yd).pvalue if yu + yd else 1.0,
+                         raw_xq=next(r["xq"] for r in fam if r["scale"] == sc),
+                         raw_yq=next(r["yq"] for r in fam if r["scale"] == sc)))
+    for ax in ("x", "y"):
+        for r, q in zip(rows, PF._adjust([r[ax + "p"] for r in rows], "bh")):
+            r[ax + "q"] = q
+    pre_both = {r["scale"] for r in rows if r["xq"] < 0.05 and r["yq"] < 0.05}
+    union_native = sorted(sc for sc in raw_both | pre_both if not sc.endswith("_absz"))
+    #: booked from the first (scratch) pass, 2026-09-25: what the prefilled arm adds
+    assert sorted(pre_both - raw_both) == ["k_concreteness_absz", "v6:deliberation", "v6:hedged",
+                                           "v6:interiority"], sorted(pre_both - raw_both)
+    json.dump({"rule": "both axes, BH 0.05 within axis over the 29 gated scales (plot_fields.load_xy)",
+               "population_prefill": "framed_empty, 40 lineages", "family": F, "raw_both": sorted(raw_both),
+               "prefill_both": sorted(pre_both), "union_native": union_native, "scales": rows},
+              open(SEL_JSON, "w"), indent=1)
+    print("wrote %s: raw %d, prefill %d, union (native) %d" % (os.path.relpath(SEL_JSON, HERE), len(raw_both),
+                                                            len(pre_both), len(union_native)))
+
+
 def draw():
     import matplotlib
     matplotlib.use("Agg")
@@ -211,16 +296,26 @@ def draw():
     #: --offset (RH, after seeing the shared line): the prefilled glyphs back just below the raw ones
     #: with their lift range dashed, keeping V2's row order and legend
     OFFSET = (not V2) or "--offset" in sys.argv
-    name = "fig3_norms_osgood_en_z_prefill" + ("40" if V2 else "") + ("_offset" if V2 and OFFSET else "")
+    UNION = V2 and "--union" in sys.argv
+    name = ("fig3_norms_osgood_en_z_prefill" + ("40" if V2 else "") + ("_offset" if V2 and OFFSET else "")
+            + ("_union" if UNION else ""))
     for ext in (".png", ".pdf", ".caption.txt"):
         assert not os.path.exists(os.path.join(HERE, "figures", name + ext)), "refusing to overwrite " + name + ext
 
     D = json.load(open(OUT_JSON))
     sys.argv = [sys.argv[0], "--z"]                       # FO.rows reads its estimator flag from argv (OFFSET read above)
+    if UNION:
+        #: the rows are the union selection, read from the committed selection file; the three
+        #: additions join FO's dictionaries AT RUNTIME (fig3_osgood.py is not edited)
+        SEL = json.load(open(SEL_JSON))
+        FO.POLES = dict(FO.POLES, **EXTRA_POLES)
+        FO.PICKS = dict(FO.PICKS, **EXTRA_PICKS)
+        assert sorted(FO.POLES) == SEL["union_native"], (sorted(FO.POLES), SEL["union_native"])
     FO.check_picks()
     rs = FO.rows(orient=False, mode="z")                  # the published rows, order and values
     n = len(rs)
-    #: the filled markers ARE the published plate's: the JSON's raw50 must equal FO.rows
+    #: the filled markers ARE the published plate's (or, for the added rows, the same published
+    #: computation): the JSON's raw50 must equal FO.rows
     for sc, sq, lo, hi, sd, _ in rs:
         r = D["scales"][sc]["raw50"]
         for band, v in (("all", sq), ("low", lo), ("high", hi)):
@@ -308,10 +403,36 @@ def draw():
     small = min(t.get_fontsize() for t in fig.findobj(matplotlib.text.Text) if t.get_text().strip())
     out = os.path.join(HERE, "figures", name + ".png")
     print("  wrote %s (smallest type %.1f pt)" % (save(fig, out), small))
-    caption(out, rs, D, V2, OFFSET)
+    caption(out, rs, D, V2, OFFSET, UNION)
 
 
-def caption(out, rs, D, V2=False, OFFSET=True):
+def union_text(rs, D):
+    """The selection paragraph for the union plate, every count read from SEL_JSON."""
+    SEL = json.load(open(SEL_JSON))
+    by = {r["scale"]: r for r in SEL["scales"]}
+    Z = D["scales"]
+    add = [sc for sc in SEL["union_native"] if sc not in SEL["raw_both"]]
+    lost = [sc for sc in SEL["raw_both"] if sc not in SEL["prefill_both"] and not sc.endswith("_absz")]
+    d = by["v6:deliberation"]
+    one = lambda sc: "%s (lift dose %d up / %d down, marginal %d / %d)" % (
+        EXTRA_POLES[sc][1].lower(), by[sc]["dose_up"], by[sc]["dose_down"], by[sc]["marg_up"], by[sc]["marg_down"])
+    return ("ROWS: THE UNION OF TWO SELECTIONS. The published fourteen are Figure 3's scatter rule -- significant "
+            "on both the marginal sign test and the lift-dose slope, Benjamini-Hochberg at 0.05 within each axis "
+            "over the 29 gated scales -- less its four absolute-deviation variants. The same rule applied to the "
+            "PREFILLED arm over the %d lineages admits three native scales the raw arm does not: %s. Their pole "
+            "words follow the plate's own rule (moved in at least 50 cells, rated in at least 5 frames, none "
+            "repeated). %d of the published fourteen do not pass the rule on the prefilled arm (%s), most failing "
+            "one axis only; they stay. DELIBERATION CARRIES VOCALISATION'S CAVEAT: it is admitted by its MEDIAN "
+            "sign test (%d up / %d down among untied lineages, the rest tied at zero) while the plate draws the "
+            "MEAN, which sits at %+.3f prefilled and %+.3f raw -- most prompts barely move and a minority move "
+            "toward deliberation, so the typical prompt and the net mass point opposite ways. Selection: "
+            "results/fig3_prefill_selection40.json." % (
+                D["n_prefill"], "; ".join(one(sc) for sc in add), len(lost), ", ".join(lost),
+                d["marg_up"], d["marg_down"], Z["v6:deliberation"]["prefill30"]["all"]["move_pub_z"],
+                Z["v6:deliberation"]["raw50"]["all"]["move_pub_z"]))
+
+
+def caption(out, rs, D, V2=False, OFFSET=True, UNION=False):
     import textwrap
     #: one line per paragraph, as fig3_osgood's captions (and RH: no hard-wrapping in prose files)
     W = lambda s: [s]
@@ -339,6 +460,7 @@ def caption(out, rs, D, V2=False, OFFSET=True):
                if V2 else
                "They are drawn just below the filled ones on each row, their lift range dashed.")),
         "",
+        *(W(union_text(rs, D)) + [""] if UNION else []),
         *W("ONE RULER. Each open marker is converted to rating points and divided by the PUBLISHED plate's "
            "SD for that scale, not by the prefilled build's own, so a unit means the same thing for both sets "
            "of markers."),
@@ -398,5 +520,7 @@ def caption(out, rs, D, V2=False, OFFSET=True):
 if __name__ == "__main__":
     if "--build" in sys.argv:
         build()
+    elif "--select" in sys.argv:
+        select()
     else:
         draw()
