@@ -6,6 +6,7 @@ true? Is it because of our prompts?")
     .venv/bin/python -u arc_prompt_check.py --stems      TEMPLATE_ARM by stem: the stem's own score and its
                                                          continuations' per arm
     .venv/bin/python -u arc_prompt_check.py --strip      the chat-asked arm with echoed stems removed
+    .venv/bin/python -u arc_prompt_check.py --pairs      arousal versions (matched-pair axes), lineage tests
     -> $DATA/prompt_check_*.parquet (inputs) and *_scored.parquet (abstraction's scorer), ARC_PROMPT_CHECK.md
 
 SCORER: abstraction's own `scripts/vad_score.py meta`, run in its venv on parquets written here (book-policy
@@ -287,12 +288,43 @@ def strip():
     return L
 
 
+def pairs():
+    """Lineage tests, UNPARTIALLED, for every arousal version on both model sets (abstraction 6abf824: matched-pair
+    axes A band, B nnpair, C wnpair, same-POS; plus plain, orth and the raw Warriner lookup under their scorer)."""
+    from scipy.stats import binomtest
+    cols = ["Warriner-Arousal.lookup", "VAD-Arousal.Warriner.median", "VAD-Arousal.Warriner_orth.median",
+            "VAD-Arousal.Warriner_band.median", "VAD-Arousal.Warriner_nnpair.median", "VAD-Arousal.Warriner_wnpair.median"]
+    sets = {"national stories (judged; base / raw / prefill / asked)":
+                (pd.read_parquet(os.path.join(DATA, "prompt_check_national_judged_meta_scored.parquet")), "lineage", "cond",
+                 ["base", "aligned_raw", "aligned_prefill", "aligned_rettberg"]),
+            "F11 stems (TEMPLATE_ARM; base / raw / prefill / asked)":
+                (pd.read_parquet(os.path.expanduser("~/malignment-data/interiority_norms/fig5_meta_texts_arms4_scored.parquet")),
+                 "base", "arm", ["base", "raw", "prefill", "continue"])}
+    L = ["## Arousal versions: lineage tests, unpartialled", "",
+         "Per set: median over lineages per condition; for each aligned condition, lineages (with both cells) moving from "
+         "base in the direction of the medians' difference, sign-test p.", ""]
+    for name, (M, lin, key, conds) in sets.items():
+        L += ["### " + name, "", "| column | medians | " + " | ".join("base -> " + c for c in conds[1:]) + " |", "|---|---|" + "---|" * 3]
+        for c in cols:
+            piv = M.pivot_table(index=lin, columns=key, values=c)
+            med = piv.median()
+            cells = []
+            for cd in conds[1:]:
+                d = piv[["base", cd]].dropna()
+                sgn = np.sign(med[cd] - med["base"])
+                k = int((np.sign(d[cd] - d["base"]) == sgn).sum())
+                cells.append("%s %d/%d (p %.3f)" % ("up" if sgn > 0 else "down", k, len(d), binomtest(k, len(d)).pvalue))
+            L.append("| %s | %s | %s |" % (c, " / ".join("%+.3f" % med[x] for x in conds), " | ".join(cells)))
+        L.append("")
+    return L
+
+
 def main():
     L = ["# Is it the prompts? Vector concreteness, valence, arousal (EXPLORATORY)", "",
          "Producer `arc_prompt_check.py` (method in its docstring).", ""]
     #: read once: history() rewrites sys.argv to import arc_history_arms in its v4 arms4 mode
     flags = set(sys.argv[1:])
-    for flag, fn in (("--national", national), ("--stems", stems), ("--strip", strip)):
+    for flag, fn in (("--national", national), ("--stems", stems), ("--strip", strip), ("--pairs", pairs)):
         if flag in flags:
             L += fn() + [""]
     out = os.path.join(HERE, "ARC_PROMPT_CHECK.md")

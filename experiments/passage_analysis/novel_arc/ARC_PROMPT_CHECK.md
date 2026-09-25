@@ -86,3 +86,30 @@ Valence, the 5 most negative and 5 most positive stems (stem score -> base / raw
 | valence | -0.095 | -0.088 | below all |
 | arousal | +0.386 | +0.379 | 1648, 1815 |
 
+## Arousal versions: lineage tests, unpartialled
+
+Per set: median over lineages per condition; for each aligned condition, lineages (with both cells) moving from base in the direction of the medians' difference, sign-test p.
+
+### national stories (judged; base / raw / prefill / asked)
+
+| column | medians | base -> aligned_raw | base -> aligned_prefill | base -> aligned_rettberg |
+|---|---|---|---|---|
+| Warriner-Arousal.lookup | +4.122 / +4.130 / +4.117 / +4.251 | up 18/32 (p 0.597) | down 9/23 (p 0.405) | up 14/20 (p 0.115) |
+| VAD-Arousal.Warriner.median | -0.020 / +0.054 / +0.033 / +0.130 | up 21/32 (p 0.110) | up 15/23 (p 0.210) | up 17/20 (p 0.003) |
+| VAD-Arousal.Warriner_orth.median | +0.026 / -0.022 / +0.013 / +0.023 | down 23/32 (p 0.020) | down 13/23 (p 0.678) | down 11/20 (p 0.824) |
+| VAD-Arousal.Warriner_band.median | -0.049 / -0.074 / -0.030 / -0.011 | down 20/32 (p 0.215) | up 8/23 (p 0.210) | up 11/20 (p 0.824) |
+| VAD-Arousal.Warriner_nnpair.median | -0.179 / -0.230 / -0.226 / -0.104 | down 23/32 (p 0.020) | down 14/23 (p 0.405) | up 13/20 (p 0.263) |
+| VAD-Arousal.Warriner_wnpair.median | -0.090 / -0.102 / -0.056 / -0.021 | down 19/32 (p 0.377) | up 10/23 (p 0.678) | up 11/20 (p 0.824) |
+
+### F11 stems (TEMPLATE_ARM; base / raw / prefill / asked)
+
+| column | medians | base -> raw | base -> prefill | base -> continue |
+|---|---|---|---|---|
+| Warriner-Arousal.lookup | +4.287 / +4.284 / +4.289 / +4.280 | down 11/30 (p 0.200) | up 13/30 (p 0.585) | down 14/30 (p 0.856) |
+| VAD-Arousal.Warriner.median | +0.128 / +0.235 / +0.242 / +0.386 | up 26/30 (p 0.000) | up 25/30 (p 0.000) | up 29/30 (p 0.000) |
+| VAD-Arousal.Warriner_orth.median | +0.265 / +0.265 / +0.197 / +0.284 | up 17/30 (p 0.585) | down 21/30 (p 0.043) | up 18/30 (p 0.362) |
+| VAD-Arousal.Warriner_band.median | +0.199 / +0.218 / +0.168 / +0.272 | up 19/30 (p 0.200) | down 18/30 (p 0.362) | up 23/30 (p 0.005) |
+| VAD-Arousal.Warriner_nnpair.median | -0.079 / -0.093 / -0.101 / -0.034 | down 12/30 (p 0.362) | down 20/30 (p 0.099) | up 22/30 (p 0.016) |
+| VAD-Arousal.Warriner_wnpair.median | +0.140 / +0.160 / +0.117 / +0.233 | up 21/30 (p 0.043) | down 18/30 (p 0.362) | up 26/30 (p 0.000) |
+
+
