@@ -39,22 +39,18 @@ COLS = (("rh_absconc_median", "concreteness", 1), ("usas_x", "inner life", 100))
 
 
 def codings():
+    """pid -> CODER A's fields. A codes all 13,565 passages and is the population
+    Figure 5 used (drift_geometry/embed_passages.py: "Coder A is the population; B is
+    the overlap"). An earlier version walked the whole file and let coder B's 3,610
+    overlap codings overwrite A's, which put 61 A=True/B=False passages outside the
+    narrative set and produced the "56 non-narrative passages in quadrants.csv"
+    that were never there (corrected 2026-09-25)."""
     C = {}
-    def walk(d):
-        for k, v in d.items():
-            if isinstance(v, dict) and "narrative" in v:
-                C[k] = v
-            elif isinstance(v, dict):
-                walk(v)
-            elif isinstance(v, str) and v.startswith("{'"):
-                try:
-                    vv = ast.literal_eval(v)
-                    if isinstance(vv, dict) and "narrative" in vv:
-                        C[k] = vv
-                except Exception:
-                    pass
     for f in glob.glob(os.path.join(PASSC, "*.json")):
-        walk(json.load(open(f)))
+        d = json.load(open(f))
+        for pid, v in (d.get("A") or {}).items():
+            if isinstance(v, dict) and "narrative" in v:
+                C[pid] = v
     return C
 
 
