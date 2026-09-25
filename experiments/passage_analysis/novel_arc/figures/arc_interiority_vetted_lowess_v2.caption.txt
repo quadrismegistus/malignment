@@ -1,0 +1,14 @@
+COGNITIVE AND EMOTIONAL LANGUAGE IN FICTION, 1600-2000, drawn as Figure 5 draws its history.
+
+Gray points: per decade, the median over texts of the share of a text's alphabetic non-stopword
+tokens that are on the list; black line: their lowess smooth (span 0.3). Texts: the book's
+arc_fiction set (abstraction.scores_rep, deduplicated), every source pooled, counted from
+lltk.text_freqs as surface forms with MorphAdorner and long-s spelling variants of kept words;
+75,974 texts with at least 2,000 such tokens; decades under 3 texts dropped. Top: clean X, the USAS
+X words an LLM rater kept as interior under a precision-first rule, then hand-vetted (872 base
+words). Bottom: the same plus the period-model candidates that passed the same rating and vetting
+(1,949 base words). No model arms: model prose has not been counted under this rule. By token mass
+the top list is 68% cognition words (10% emotion, 10% volition, 8% perception); the candidates it
+adds are 67% emotion.
+
+  texts per decade: 1600:45, 1610:28, 1620:25, 1630:38, 1640:21, 1650:40, 1660:32, 1670:35, 1680:78, 1690:51, 1700:18, 1710:23, 1720:58, 1730:29, 1740:35, 1750:70, 1760:86, 1770:78, 1780:89, 1790:214, 1800:483, 1810:796, 1820:1288, 1830:1825, 1840:2813, 1850:3733, 1860:3826, 1870:4870, 1880:7073, 1890:11378, 1900:11282, 1910:10861, 1920:3612, 1930:1113, 1940:955, 1950:797, 1960:756, 1970:1059, 1980:1775, 1990:3390, 2000:1196
