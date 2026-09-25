@@ -283,3 +283,19 @@ def test_lineages_measured_filter_runs():
     n_all = sum(len(v) for v in all_l.values())
     n_got = sum(len(v) for v in got.values())
     assert 0 < n_got <= n_all, "measured=True kept %d of %d" % (n_got, n_all)
+
+
+def test_framed_empty_population():
+    """roster.population('framed_empty'): the 40 endpoint lineages with no system context
+    under prefill, by the render (scripts/build_framed_empty.py, 2026-09-25)."""
+    import json
+    from malignment import roster
+    fe = roster.population("framed_empty")
+    assert len(fe) == 40
+    assert fe <= roster.population("endpoints")
+    for m in ("HuggingFaceTB/SmolLM3-3B", "meta-llama/Llama-3.1-8B-Instruct", "LLM360/AmberSafe",
+              "openGPT-X/Teuken-7B-instruct-v0.6", "gl198976/mpt-7b-instruct",
+              "inceptionai/jais-family-6p7b-chat", "llm-jp/llm-jp-3-7.2b-instruct3", "bigscience/bloomz-7b1"):
+        assert m not in fe, m
+    rows = json.load(open(roster.FRAMED_EMPTY_PATH))["models"]
+    assert all(r["system_mode"] in ("empty", "default") for r in rows)

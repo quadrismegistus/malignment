@@ -1095,7 +1095,9 @@ def direction(pre_op, post_op):
 #: comprehensions in four files, which is how `panel()` and the endpoint rule
 #: both came to have three incompatible versions.
 POPULATIONS = ("all", "bases", "aligned", "endpoints", "chain_rungs",
-               "representative", "unavailable")
+               "representative", "unavailable", "framed_empty")
+FRAMED_EMPTY_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+                                 "roster", "models", "populations", "framed_empty.json")
 
 
 def population(kind="endpoints", measured=False):
@@ -1138,6 +1140,12 @@ def population(kind="endpoints", measured=False):
     elif kind == "representative":
         rep = {f for f, m in fams.items() if m.get("representative")}
         out = {m for m, v in nodes.items() if rep & set(v.get("family") or [])}
+    elif kind == "framed_empty":
+        #: endpoint lineages whose aligned model receives NO system context under the
+        #: prefill frame, judged on the RENDER, not the system_mode label, and with
+        #: prefill cells in that state. Built by scripts/build_framed_empty.py; each
+        #: lineage's `system_mode` (which cells to read) is in the JSON beside it.
+        out = {r["model"] for r in json.load(open(FRAMED_EMPTY_PATH))["models"]}
     else:                                                       # unavailable
         return set(d.get("unavailable") or {})
     if measured:

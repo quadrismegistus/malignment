@@ -1,0 +1,459 @@
+{
+ "_about": "Endpoint lineages whose aligned model receives no system context under the prefill frame, with prefill cells in that state. Producer scripts/build_framed_empty.py; read by roster.population('framed_empty'). Use each lineage's system_mode to select its cells.",
+ "marker_chars": 20,
+ "n": 40,
+ "models": [
+  {
+   "model": "01-ai/Yi-1.5-9B-Chat",
+   "base": "01-ai/Yi-1.5-9B",
+   "template": "tokenizer",
+   "residue": "user",
+   "pre_user": "<|im_start|>user\n",
+   "empty_equals_default": true,
+   "system_mode": "default"
+  },
+  {
+   "model": "BAAI/AquilaChat2-7B",
+   "base": "BAAI/Aquila2-7B",
+   "template": "override",
+   "residue": "",
+   "pre_user": "<|startofpiece|>",
+   "empty_equals_default": true,
+   "system_mode": "default"
+  },
+  {
+   "model": "BSC-LT/salamandra-7b-instruct",
+   "base": "BSC-LT/salamandra-7b",
+   "template": "tokenizer",
+   "residue": "system user",
+   "pre_user": "<|im_start|>system\n<|im_end|>\n<|im_start|>user\n",
+   "empty_equals_default": false,
+   "system_mode": "empty"
+  },
+  {
+   "model": "ContextualAI/archangel_sft-dpo_pythia2-8b",
+   "base": "EleutherAI/pythia-2.8b",
+   "template": "override",
+   "residue": "",
+   "pre_user": "<|endoftext|>\n<|user|>\n",
+   "empty_equals_default": true,
+   "system_mode": "default"
+  },
+  {
+   "model": "lomahony/eleuther-pythia6.9b-hh-dpo",
+   "base": "EleutherAI/pythia-6.9b",
+   "template": "override",
+   "residue": "Human:",
+   "pre_user": "\n\nHuman: ",
+   "empty_equals_default": true,
+   "system_mode": "default"
+  },
+  {
+   "model": "HuggingFaceTB/SmolLM2-360M-Instruct",
+   "base": "HuggingFaceTB/SmolLM2-360M",
+   "template": "tokenizer",
+   "residue": "system user",
+   "pre_user": "<|im_start|>system\n<|im_end|>\n<|im_start|>user\n",
+   "empty_equals_default": false,
+   "system_mode": "empty"
+  },
+  {
+   "model": "OpenLLM-France/Lucie-7B-Instruct-v1.1",
+   "base": "OpenLLM-France/Lucie-7B",
+   "template": "tokenizer",
+   "residue": "system user",
+   "pre_user": "<s><|start_header_id|>system<|end_header_id|>\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n",
+   "empty_equals_default": false,
+   "system_mode": "empty"
+  },
+  {
+   "model": "Qwen/Qwen2.5-0.5B-Instruct",
+   "base": "Qwen/Qwen2.5-0.5B",
+   "template": "tokenizer",
+   "residue": "system user",
+   "pre_user": "<|im_start|>system\n<|im_end|>\n<|im_start|>user\n",
+   "empty_equals_default": false,
+   "system_mode": "empty"
+  },
+  {
+   "model": "Qwen/Qwen2.5-7B-Instruct",
+   "base": "Qwen/Qwen2.5-7B",
+   "template": "tokenizer",
+   "residue": "system user",
+   "pre_user": "<|im_start|>system\n<|im_end|>\n<|im_start|>user\n",
+   "empty_equals_default": false,
+   "system_mode": "empty"
+  },
+  {
+   "model": "Qwen/Qwen3-8B",
+   "base": "Qwen/Qwen3-8B-Base",
+   "template": "tokenizer",
+   "residue": "system user",
+   "pre_user": "<|im_start|>system\n<|im_end|>\n<|im_start|>user\n",
+   "empty_equals_default": false,
+   "system_mode": "empty"
+  },
+  {
+   "model": "RWKV/rwkv-raven-7b",
+   "base": "RWKV/rwkv-4-7b-pile",
+   "template": "override",
+   "residue": "Bob:",
+   "pre_user": "Bob: ",
+   "empty_equals_default": true,
+   "system_mode": "default"
+  },
+  {
+   "model": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+   "base": "TinyLlama/TinyLlama-1.1B-intermediate-step-1431k-3T",
+   "template": "tokenizer",
+   "residue": "",
+   "pre_user": "<|system|>\n</s>\n<|user|>\n",
+   "empty_equals_default": false,
+   "system_mode": "empty"
+  },
+  {
+   "model": "Zyphra/Zamba2-7B-Instruct",
+   "base": "Zyphra/Zamba2-7B",
+   "template": "tokenizer",
+   "residue": "system user",
+   "pre_user": "<|im_start|>system\n<|im_end|>\n<|im_start|>user\n",
+   "empty_equals_default": false,
+   "system_mode": "empty"
+  },
+  {
+   "model": "allenai/OLMo-2-0425-1B-Instruct",
+   "base": "allenai/OLMo-2-0425-1B",
+   "template": "tokenizer",
+   "residue": "",
+   "pre_user": "<|endoftext|><|system|>\n\n<|user|>\n",
+   "empty_equals_default": false,
+   "system_mode": "empty"
+  },
+  {
+   "model": "allenai/OLMoE-1B-7B-0125-Instruct",
+   "base": "allenai/OLMoE-1B-7B-0125",
+   "template": "tokenizer",
+   "residue": "",
+   "pre_user": "|||IP_ADDRESS|||<|system|>\n\n<|user|>\n",
+   "empty_equals_default": false,
+   "system_mode": "empty"
+  },
+  {
+   "model": "allenai/Olmo-3-7B-Instruct",
+   "base": "allenai/Olmo-3-1025-7B",
+   "template": "tokenizer",
+   "residue": "system user",
+   "pre_user": "<|im_start|>system\n<|im_end|>\n<|im_start|>user\n",
+   "empty_equals_default": false,
+   "system_mode": "empty"
+  },
+  {
+   "model": "allenai/Olmo-3.1-32B-Instruct",
+   "base": "allenai/Olmo-3-1125-32B",
+   "template": "tokenizer",
+   "residue": "system user",
+   "pre_user": "<|im_start|>system\n<|im_end|>\n<|im_start|>user\n",
+   "empty_equals_default": false,
+   "system_mode": "empty"
+  },
+  {
+   "model": "allenai/Olmo-Hybrid-Instruct-DPO-7B",
+   "base": "allenai/Olmo-Hybrid-7B",
+   "template": "tokenizer",
+   "residue": "system user",
+   "pre_user": "<|im_start|>system\n<|im_end|>\n<|im_start|>user\n",
+   "empty_equals_default": false,
+   "system_mode": "empty"
+  },
+  {
+   "model": "baichuan-inc/Baichuan2-7B-Chat",
+   "base": "baichuan-inc/Baichuan2-7B-Base",
+   "template": "override",
+   "residue": "<reserved_106>",
+   "pre_user": "<reserved_106>",
+   "empty_equals_default": true,
+   "system_mode": "default"
+  },
+  {
+   "model": "croissantllm/CroissantLLMChat-v0.1",
+   "base": "croissantllm/CroissantLLMBase",
+   "template": "tokenizer",
+   "residue": "system user",
+   "pre_user": "<|im_start|>system\n<|im_end|>\n<|im_start|>user\n",
+   "empty_equals_default": false,
+   "system_mode": "empty"
+  },
+  {
+   "model": "deepseek-ai/deepseek-llm-7b-chat",
+   "base": "deepseek-ai/deepseek-llm-7b-base",
+   "template": "tokenizer",
+   "residue": "User:",
+   "pre_user": "<｜begin▁of▁sentence｜>\n\nUser: ",
+   "empty_equals_default": false,
+   "system_mode": "empty"
+  },
+  {
+   "model": "google/gemma-2-9b-it",
+   "base": "google/gemma-2-9b",
+   "template": "tokenizer",
+   "residue": "user",
+   "pre_user": "<bos><start_of_turn>user\n",
+   "empty_equals_default": true,
+   "system_mode": "default"
+  },
+  {
+   "model": "google/recurrentgemma-9b-it",
+   "base": "google/recurrentgemma-9b",
+   "template": "tokenizer",
+   "residue": "user",
+   "pre_user": "<bos><start_of_turn>user\n",
+   "empty_equals_default": true,
+   "system_mode": "default"
+  },
+  {
+   "model": "PKU-Alignment/beaver-7b-v1.0",
+   "base": "huggyllama/llama-7b",
+   "template": "override",
+   "residue": "USER:",
+   "pre_user": "USER: ",
+   "empty_equals_default": false,
+   "system_mode": "empty"
+  },
+  {
+   "model": "ibm-granite/granite-3.0-8b-instruct",
+   "base": "ibm-granite/granite-3.0-8b-base",
+   "template": "tokenizer",
+   "residue": "system user",
+   "pre_user": "<|start_of_role|>system<|end_of_role|><|end_of_text|>\n<|start_of_role|>user<|end_of_role|>",
+   "empty_equals_default": false,
+   "system_mode": "empty"
+  },
+  {
+   "model": "internlm/internlm2-chat-7b",
+   "base": "internlm/internlm2-base-7b",
+   "template": "tokenizer",
+   "residue": "system user",
+   "pre_user": "<s><|im_start|>system\n<|im_end|>\n<|im_start|>user\n",
+   "empty_equals_default": false,
+   "system_mode": "empty"
+  },
+  {
+   "model": "kakaocorp/kanana-1.5-8b-instruct-2505",
+   "base": "kakaocorp/kanana-1.5-8b-base",
+   "template": "tokenizer",
+   "residue": "system system user",
+   "pre_user": "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\n\n<|eot_id|><|start_header_id|>system<|end_header_id|>\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n",
+   "empty_equals_default": false,
+   "system_mode": "empty"
+  },
+  {
+   "model": "kakaocorp/kanana-2-3b-instruct",
+   "base": "kakaocorp/kanana-2-3b-base",
+   "template": "tokenizer",
+   "residue": "system user",
+   "pre_user": "<|im_start|>system\n<|im_end|>\n<|im_start|>user\n",
+   "empty_equals_default": false,
+   "system_mode": "empty"
+  },
+  {
+   "model": "m-a-p/neo_7b_instruct_v0.1",
+   "base": "m-a-p/neo_7b",
+   "template": "tokenizer",
+   "residue": "[INST]",
+   "pre_user": "<s>[INST] ",
+   "empty_equals_default": false,
+   "system_mode": "empty"
+  },
+  {
+   "model": "mistralai/Mistral-7B-Instruct-v0.1",
+   "base": "mistralai/Mistral-7B-v0.1",
+   "template": "tokenizer",
+   "residue": "[INST]",
+   "pre_user": "<s> [INST] \n\n",
+   "empty_equals_default": false,
+   "system_mode": "empty"
+  },
+  {
+   "model": "openbmb/MiniCPM5-1B",
+   "base": "openbmb/MiniCPM5-1B-Base",
+   "template": "tokenizer",
+   "residue": "system user",
+   "pre_user": "<s><|im_start|>system\n<|im_end|>\n<|im_start|>user\n",
+   "empty_equals_default": false,
+   "system_mode": "empty"
+  },
+  {
+   "model": "stabilityai/stablelm-2-1_6b-chat",
+   "base": "stabilityai/stablelm-2-1_6b",
+   "template": "tokenizer",
+   "residue": "system user",
+   "pre_user": "<|im_start|>system\n<|im_end|>\n<|im_start|>user\n",
+   "empty_equals_default": false,
+   "system_mode": "empty"
+  },
+  {
+   "model": "weblab-GENIAC/Tanuki-8B-dpo-v1.0",
+   "base": "team-hatakeyama-phase2/Tanuki-8B-base-v1.0",
+   "template": "tokenizer",
+   "residue": "### 指示:",
+   "pre_user": "<s>\n\n### 指示:\n",
+   "empty_equals_default": false,
+   "system_mode": "empty"
+  },
+  {
+   "model": "tiiuae/Falcon-H1-1.5B-Instruct",
+   "base": "tiiuae/Falcon-H1-1.5B-Base",
+   "template": "tokenizer",
+   "residue": "system user",
+   "pre_user": "<|begin_of_text|><|im_start|>system\n<|im_end|>\n<|im_start|>user\n",
+   "empty_equals_default": false,
+   "system_mode": "empty"
+  },
+  {
+   "model": "tiiuae/Falcon-H1-7B-Instruct",
+   "base": "tiiuae/Falcon-H1-7B-Base",
+   "template": "tokenizer",
+   "residue": "system user",
+   "pre_user": "<|begin_of_text|><|im_start|>system\n<|im_end|>\n<|im_start|>user\n",
+   "empty_equals_default": false,
+   "system_mode": "empty"
+  },
+  {
+   "model": "tiiuae/Falcon3-7B-Instruct",
+   "base": "tiiuae/Falcon3-7B-Base",
+   "template": "tokenizer",
+   "residue": "",
+   "pre_user": "<|system|>\n\n<|user|>\n",
+   "empty_equals_default": false,
+   "system_mode": "empty"
+  },
+  {
+   "model": "tiiuae/falcon-7b-instruct",
+   "base": "tiiuae/falcon-7b",
+   "template": "tokenizer",
+   "residue": "User:",
+   "pre_user": "\n\nUser: ",
+   "empty_equals_default": true,
+   "system_mode": "default"
+  },
+  {
+   "model": "tiiuae/falcon-mamba-7b-instruct",
+   "base": "tiiuae/falcon-mamba-7b",
+   "template": "tokenizer",
+   "residue": "system user",
+   "pre_user": "<|begin_of_text|><|im_start|>system\n<|im_end|>\n<|im_start|>user\n",
+   "empty_equals_default": false,
+   "system_mode": "empty"
+  },
+  {
+   "model": "togethercomputer/RedPajama-INCITE-7B-Chat",
+   "base": "togethercomputer/RedPajama-INCITE-Base-7B-v0.1",
+   "template": "override",
+   "residue": "<human>:",
+   "pre_user": "<human>: ",
+   "empty_equals_default": true,
+   "system_mode": "default"
+  },
+  {
+   "model": "zai-org/glm-4-9b-chat-hf",
+   "base": "zai-org/glm-4-9b-hf",
+   "template": "tokenizer",
+   "residue": "",
+   "pre_user": "[gMASK]<sop><|user|>\n",
+   "empty_equals_default": true,
+   "system_mode": "default"
+  }
+ ],
+ "excluded": [
+  {
+   "model": "HuggingFaceTB/SmolLM3-3B",
+   "base": "HuggingFaceTB/SmolLM3-3B-Base",
+   "template": "tokenizer",
+   "residue": "system ## Metadata Knowledge Cutoff Date: June 2025 Today Date: 25 September 2026 Reasoning Mode: /think ## Custom Instructions You are a helpful AI assistant named SmolLM, trained by Hugging Face. Your role as an assistant involves thoroughly exploring questions through a systematic thinking process before providing the final precise and accurate solutions. This requires engaging in a comprehensive cycle of analysis, summarizing, exploration, reassessment, reflection, backtracking, and iteration to develop well-considered thinking process. Please structure your response into two main sections: Thought and Solution using the specified format: <think> Thought section </think> Solution section. In the Thought section, detail your reasoning process in steps. Each step should include detailed considerations such as analysing questions, summarizing relevant findings, brainstorming new ideas, verifying the accuracy of the current steps, refining any errors, and revisiting previous steps. In the Solution section, based on various attempts, explorations, and reflections from the Thought section, systematically present the final solution that you deem correct. The Solution section should be logical, accurate, and concise and detail necessary steps needed to reach the conclusion. user",
+   "pre_user": "ematically present the final solution that you deem correct. The Solution section should be logical, accurate, and concise and detail necessary steps needed to reach the conclusion.\n\n<|im_start|>user\n",
+   "empty_equals_default": true,
+   "system_mode": "default",
+   "why": "text before the user turn beyond role markers"
+  },
+  {
+   "model": "LLM360/AmberSafe",
+   "base": "LLM360/Amber",
+   "template": "override",
+   "residue": "A chat between a curious user and an artificial intelligence assistant. The assistant gives helpful, detailed, and polite answers to the user's questions. USER:",
+   "pre_user": "A chat between a curious user and an artificial intelligence assistant. The assistant gives helpful, detailed, and polite answers to the user's questions. USER: ",
+   "empty_equals_default": true,
+   "system_mode": "default",
+   "why": "text before the user turn beyond role markers"
+  },
+  {
+   "model": "bigscience/bloomz-7b1",
+   "base": "bigscience/bloom-7b1",
+   "why": "no chat template (tokenizer or override)"
+  },
+  {
+   "model": "gl198976/mpt-7b-instruct",
+   "base": "gl198976/mpt-7b",
+   "template": "override",
+   "residue": "Below is an instruction that describes a task. Write a response that appropriately completes the request. ### Instruction:",
+   "pre_user": "Below is an instruction that describes a task. Write a response that appropriately completes the request.\n### Instruction:\n",
+   "empty_equals_default": true,
+   "system_mode": "default",
+   "why": "text before the user turn beyond role markers"
+  },
+  {
+   "model": "inceptionai/jais-family-6p7b-chat",
+   "base": "inceptionai/jais-family-6p7b",
+   "template": "tokenizer",
+   "residue": "### Instruction: Complete the conversation below between [|Human|] and [|AI|]: ### Input: [|Human|]",
+   "pre_user": "### Instruction: \nComplete the conversation below between [|Human|] and [|AI|]:\n### Input: [|Human|] ",
+   "empty_equals_default": false,
+   "system_mode": "empty",
+   "why": "text before the user turn beyond role markers"
+  },
+  {
+   "model": "llm-jp/llm-jp-3-7.2b-instruct3",
+   "base": "llm-jp/llm-jp-3-7.2b",
+   "template": "tokenizer",
+   "residue": "以下は、タスクを説明する指示です。要求を適切に満たす応答を書きなさい。 ### 指示:",
+   "pre_user": "<s>以下は、タスクを説明する指示です。要求を適切に満たす応答を書きなさい。\n\n### 指示:\n",
+   "empty_equals_default": false,
+   "system_mode": "empty",
+   "why": "text before the user turn beyond role markers"
+  },
+  {
+   "model": "m-a-p/CT-LLM-SFT-DPO",
+   "base": "m-a-p/CT-LLM-Base",
+   "why": "no chat template (tokenizer or override)"
+  },
+  {
+   "model": "meta-llama/Llama-3.1-70B-Instruct",
+   "base": "meta-llama/Llama-3.1-70B",
+   "template": "tokenizer",
+   "residue": "system Cutting Knowledge Date: December 2023 Today Date: 26 Jul 2024 user",
+   "pre_user": "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n",
+   "empty_equals_default": true,
+   "system_mode": null,
+   "why": "text before the user turn beyond role markers"
+  },
+  {
+   "model": "meta-llama/Llama-3.1-8B-Instruct",
+   "base": "meta-llama/Llama-3.1-8B",
+   "template": "tokenizer",
+   "residue": "system Cutting Knowledge Date: December 2023 Today Date: 26 Jul 2024 user",
+   "pre_user": "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n",
+   "empty_equals_default": true,
+   "system_mode": "default",
+   "why": "text before the user turn beyond role markers"
+  },
+  {
+   "model": "openGPT-X/Teuken-7B-instruct-v0.6",
+   "base": "openGPT-X/Teuken-7B-base-v0.6",
+   "template": "tokenizer",
+   "residue": "System: A chat between a human and an artificial intelligence assistant.The assistant gives helpful and polite answers to the human's questions. User:",
+   "pre_user": "System: A chat between a human and an artificial intelligence assistant.The assistant gives helpful and polite answers to the human's questions.\nUser: ",
+   "empty_equals_default": true,
+   "system_mode": "default",
+   "why": "text before the user turn beyond role markers"
+  }
+ ]
+}
