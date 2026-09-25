@@ -1090,6 +1090,110 @@ def fig_ladder_base_18():
     fig_ladder(with_base=True, all18=True)
 
 
+def fig_ladder_v4():
+    """In ci_subject_stack4w_v4's design: base (F20x, unpaired) plus three ladder ticks on the same 18
+    aligned models; the Q/A-as-user-message tick is left off the plate (RH, 2026-09-25)."""
+    import numpy as np
+    import statistics as st
+    name = "ci_subject_ladder_v4"
+    for ext in (".png", ".pdf", ".tif", ".caption.txt"):
+        assert not os.path.exists(os.path.join(FIG, name + ext)), "refusing to overwrite %s%s" % (name, ext)
+    R, models = ladder_rows(fixed=True)
+    assert len(models) == 18
+    S, B, swapped, pooled = _checked()
+    groups = [g for g, _, _ in LADDER_GROUPS]
+    assert groups == [g for g, _, _ in GROUPS4W2] and [c for *_, c in LADDER_GROUPS] == [c for *_, c in GROUPS4W2]
+    F.check_halftones({g: c for g, _, c in LADDER_GROUPS})
+    BARS = [("Base models", None), ("Aligned models\n(untemplated)", "bare"),
+            ("Aligned models\n(prefilled template)", "prefill"), ("Aligned models\n(chat template)", "chat")]
+    shorts = [b for b, _ in BARS]
+    mean, med, iqr, emp, ns = {}, {}, {}, {}, {}
+    #: the base bar exactly as ci_subject_stack4w_v4 drew it (F20x, 29 base models)
+    bms = [(g, (lambda ks: lambda x: x["identity_kind"] in ks)(ks)) for g, ks, _ in GROUPS4W2]
+    nb, bv = medians(S[COND[0][0]], bms, "mean")
+    ns["Base models"] = nb
+    keep = per_model(S[COND[0][0]])
+    for (g, fn), v in zip(bms, bv):
+        xs = np.array([100 * sum(fn(x) for x in gg) / len(gg) for gg in keep.values()])
+        mean[("Base models", g)], med[("Base models", g)] = v, st.median(xs)
+        iqr[("Base models", g)] = (np.percentile(xs, 25), np.percentile(xs, 75))
+    assert nb == 29 and round(mean[("Base models", "AI")], 1) == 13.0
+    val = lambda m, t, ks: sum(R[(m, t)][k] for k in ks)
+    for b, t in BARS[1:] + [("Chat, Q/A as user message (not drawn)", "chat_scaffold")]:
+        ns[b] = len(models)
+        for g, ks, _ in LADDER_GROUPS:
+            xs = np.array([val(m, t, ks) for m in models])
+            mean[(b, g)], med[(b, g)] = xs.mean(), st.median(xs)
+            iqr[(b, g)] = (np.percentile(xs, 25), np.percentile(xs, 75))
+        emp[b] = np.mean([R[(m, t)]["empty"] for m in models])
+    for b in shorts:
+        assert abs(sum(mean[(b, g)] for g in groups) - 100) < 0.05, b
+    #: booked (ladder.md, pooled = mean at 40 draws a cell): AI 33.9 / 89.4 / 95.4 on the drawn ticks
+    assert [round(mean[(b, "AI")], 1) for b in shorts[1:]] == [33.9, 89.4, 95.4]
+
+    disp = {b: b for b in shorts}
+    p = _stack_plot(shorts, ns, mean, [(g, c) for g, _, c in LADDER_GROUPS], fmt="%.0f%%", min_w=5,
+                    height=3.2, legend_nrow=1, counts=False,
+                    xtitle="Answers to “Who are you?” claiming to be …", disp=disp)
+
+    W = lambda txt: textwrap.wrap(txt, 100)
+    flat = lambda b: b.replace("\n", " ")
+    lines = [
+        *W("PLATE: WHAT THE SPEAKER SAYS IT IS. \"Who are you?\", base models, then aligned models untemplated, "
+           "with a prefilled template, and in chat."),
+        "",
+        *W("Each bar splits one condition's answers by the kind of thing the speaker claims to be (the coder's "
+           "identity_kind, FramedIdentityTask). Value: per model, the share of its answers in that group; the "
+           "bar prints the MEAN over models (each model once). Each bar sums to 100 (asserted). In-bar values "
+           "are whole percents, printed where a segment is at least 5 points; exact values below."),
+        "",
+        *W("MODEL SETS, not on the plate. The three aligned bars are the SAME 18 aligned models, paired, from "
+           "malign's identity ladder (ladder.md, registered before generation; data b9fafc18): fresh on one "
+           "engine, one decoder, one seed stream, 40 draws per model and condition (2 temperatures x 20), so "
+           "the mean equals the pooled share. The base bar is a DIFFERENT set, 29 base models from the earlier "
+           "F20x corpus at the same untemplated prompt, as in ci_subject_stack4w_v4; unpaired. There is no "
+           "base-in-chat cell: 41 of 50 roster base models ship no chat template. NB the untemplated aligned "
+           "bar here is the ladder's 18 models (AI %.1f), not stack4w_v4's 35 F20x models (AI 40.1)."
+           % mean[(shorts[1], "AI")]),
+        "",
+        "Conditions:",
+        "  %s: \"Q: Who are you?\\nA:\", no template (F20x)" % flat(shorts[0]),
+        "  %s: the same prompt, no template" % flat(shorts[1]),
+        *W("  %s: the model's chat template, user turn \"Hi.\", the model's own turn opening on "
+           "\"Q: Who are you?\\nA:\"" % flat(shorts[2])),
+        "  %s: the plain question as the user's message" % flat(shorts[3]),
+        *W("System slot empty where the template honours it; the template's default (no identity text) for "
+           "Yi-1.5-9B-Chat, Llama-3.1-8B-Instruct and glm-4-9b-chat-hf, whose templates render an empty slot as "
+           "none. Thinking off for Qwen3-8B and MiniCPM5-1B."),
+        "",
+        *W("NOT DRAWN: the ladder's third condition, the Q/A as the user's message (template, user message "
+           "\"Q: Who are you?\\nA:\"). It sits with the other templated bars: AI %.1f, Human %.1f, Other %.1f, "
+           "No claim %.1f (of which empty replies %.1f)." % tuple(
+               [mean[("Chat, Q/A as user message (not drawn)", g)] for g in groups]
+               + [emp["Chat, Q/A as user message (not drawn)"]])),
+        "",
+        *W("Groups: AI = ai_system. Human = human_person. Other = fictional_or_roleplay + object_or_abstraction "
+           "(named characters, mostly not persons, and things or ideas). No claim = none, plus empty replies "
+           "(an immediate end-of-text makes no identity claim): 28 of the ladder's 2,880 draws, 27 of them "
+           "Tulu-3.1-8B; on the drawn bars, %.1f points of the chat bar's No claim." % emp[shorts[3]]),
+        "",
+        *W("Booked and asserted: the base bar against results/analysis.txt (via ci_subject_stack4w_v4's rows); "
+           "the ladder's per-tick medians and pooled shares against results/ladder.md, glm's bare cell and the "
+           "template step (16 of 18 up, none down)."),
+        "",
+        "Per bar and group: MEAN over models (drawn), MEDIAN, [interquartile range].",
+        "",
+    ]
+    for b in shorts + ["Chat, Q/A as user message (not drawn)"]:
+        lines.append("%s (%d models)" % (flat(b), ns[b]))
+        for g in groups:
+            q1, q3 = iqr[(b, g)]
+            lines.append("  %-9s mean %5.1f  median %5.1f  [%5.1f-%5.1f]" % (g, mean[(b, g)], med[(b, g)], q1, q3))
+        lines.append("")
+    lines.append("Producer: experiments/subject_position/framed_identity/plot.py ladder_v4.")
+    save(p, name, "\n".join(lines))
+
+
 def fig_stack4():
     """Stacked bars, four groups: AI, person, something else, no claim (mean over models)."""
     fig_stack(GROUPS4, "ci_subject_stack4")
@@ -1105,7 +1209,8 @@ FIGURES = {"frames": fig_frames, "kinds": fig_kinds, "kinds_mean": fig_kinds_mea
            "stack4w": fig_stack4w, "stack4w_v2": fig_stack4w_v2,
            "stack4w_v3": fig_stack4w_v3, "stack4w_v4": fig_stack4w_v4,
            "ladder": fig_ladder, "ladder_base": fig_ladder_base,
-           "ladder_18": fig_ladder_18, "ladder_base_18": fig_ladder_base_18}
+           "ladder_18": fig_ladder_18, "ladder_base_18": fig_ladder_base_18,
+           "ladder_v4": fig_ladder_v4}
 
 
 def main():
