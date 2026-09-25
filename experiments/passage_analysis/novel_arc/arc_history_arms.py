@@ -57,14 +57,19 @@ from malignment import figure as F                              # noqa: E402
 
 DATA = os.path.join(os.environ.get("MALIGNMENT_DATA", os.path.expanduser("~/malignment-data")), "novel_arc")
 TA = os.path.join(os.environ.get("MALIGNMENT_DATA", os.path.expanduser("~/malignment-data")), "template_arm", "coding")
-V2 = "v2" in sys.argv[1:]
-SUF = "_v2" if V2 else ""
-COUNTS = os.path.join(DATA, "arc_cogemo_texts_v2.parquet" if V2 else "arc_interiority_texts_precision_vetted.parquet")
+#: v3 (RH, 2026-09-25): v2 with fear, happy and loved restored to the emotion list ("I only removed love
+#: because it can sign letters, you can call someone love"; love stays out) and volition added to cognitive
+V3 = "v3" in sys.argv[1:]
+V2 = "v2" in sys.argv[1:] or V3
+VER = "v3" if V3 else "v2"
+SUF = "_" + VER if V2 else ""
+RESTORE = {"fear", "happy", "loved"} if V3 else set()
+COUNTS = os.path.join(DATA, "arc_cogemo_texts_%s.parquet" % VER if V2 else "arc_interiority_texts_precision_vetted.parquet")
 COG_COL, EMO_COL = ("n_cog", "n_emo") if V2 else ("n_cleanx_p", "n_cand_p")
-COG_KINDS, EMO_KINDS = {"cognition", "attention", "perception"}, {"emotion"}
+COG_KINDS, EMO_KINDS = {"cognition", "attention", "perception"} | ({"volition"} if V3 else set()), {"emotion"}
 CONC = os.path.join(DATA, "arc_concreteness_texts.parquet")
 ARM_OUT = os.path.join(DATA, "arc_history_arm_passages%s.parquet" % SUF)
-LISTS = os.path.join(DATA, "arc_cogemo_lists_v2.json" if V2 else "arc_vetted_lists_expanded.json")
+LISTS = os.path.join(DATA, "arc_cogemo_lists_%s.json" % VER if V2 else "arc_vetted_lists_expanded.json")
 BIAS = "/Volumes/diderot/DH/data/data_abslithist/scores/corpus_bias_coefficients.json"
 MIN_CONTENT, MIN_DECADE, MIN_ARM = 2000, 3, 10
 #: RH dropped RWKV (TEMPLATE_ARM.md amendment 3, malignment 4bd3f90b: its bf16 output is 88-90% repeated-word
@@ -261,9 +266,13 @@ def V2_CAPTION():
     info = json.load(open(LISTS))["info"]
     return ("Word lists from USAS X (cognition) and USAS E (emotion), each with its period-model neighbours, rated "
             "by an LLM under a precision-first rule (keep a word only if every common sense is mental) and hand-vetted; "
-            "split by the rated kind of each word, not by field. Cognitive: cognition, attention and perception words "
+            "split by the rated kind of each word, not by field. " + (
+            "Cognitive: cognition, attention, perception and volition words (%s base words). Emotional: emotion words "
+            "(%s), with fear, happy and loved restored after an interiority vetting removed them." % (
+                format(info["cog_base"], ","), format(info["emo_base"], ",")) if V3 else
+            "Cognitive: cognition, attention and perception words "
             "(%s base words). Emotional: emotion words (%s). Volition words (%s) are in neither panel."
-            % (format(info["cog_base"], ","), format(info["emo_base"], ","), format(info["volition_base"], ",")))
+            % (format(info["cog_base"], ","), format(info["emo_base"], ","), format(info["volition_base"], ","))))
 
 
 def v2_lists():
@@ -283,6 +292,11 @@ def v2_lists():
     anchors = {"dreaded", "regretted"}
     assert not anchors & (set(X.form) | set(E.form))
     base["emo"] |= anchors
+    #: v3 restorations: RH's interiority removals that the rater kept as emotion
+    Xi = X.set_index("form")
+    for w in RESTORE:
+        assert Xi.loc[w, "keep_llm"] and Xi.loc[w, "rh_removed"] and Xi.loc[w, "kind"] == "emotion", w
+    base["emo"] |= RESTORE
     V = pd.concat([X[X.spelling_of.notna() & X.keep], E[E.spelling_of.notna() & E.keep]])
     _, sw, _ = A.lists_expanded()
     out, info = {}, {"cog_base": len(base["cog"]), "emo_base": len(base["emo"]), "emo_anchor_seeds_added": sorted(anchors),
