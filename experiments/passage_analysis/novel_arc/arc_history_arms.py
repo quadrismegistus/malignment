@@ -90,8 +90,14 @@ ARMS_ON = "--arms" in sys.argv
 #: median over passages is coarse and the median of a sum is not the sum of the medians. A model's meta-text
 #: (its coherent narrative passages concatenated) is scored as a novel is: one share, one concreteness.
 META = "meta" in sys.argv[1:]
-META_OUT = os.path.join(DATA, "arc_history_arm_meta%s.parquet" % SUF)
-OUT = os.path.join(HERE, "figures", "arc_history_three_" + ("arms" if ARMS_ON else "preview") + SUF + ("_meta" if META else ""))
+#: sel12 (malign, 2026-09-25): selection.parquet UNION coding/selection_2.parquet (internlm2-chat continue, coded),
+#: so internlm2 can meet the all-four-arms floor. codings.parquet holds one coding per id; codings_retest.parquet
+#: is a reliability retest and is NOT the population. New artifacts and figures carry the suffix.
+UNION = "sel12" in sys.argv[1:]
+USUF = "_sel12" if UNION else ""
+ARM_OUT = ARM_OUT.replace(".parquet", USUF + ".parquet")
+META_OUT = os.path.join(DATA, "arc_history_arm_meta%s%s.parquet" % (SUF, USUF))
+OUT = os.path.join(HERE, "figures", "arc_history_three_" + ("arms" if ARMS_ON else "preview") + SUF + ("_meta" if META else "") + USUF)
 NAME = {"base": "Base models", "raw": "Aligned models"}
 LINETYPE = {"Base models": "dotted", "Aligned models": "dashed"}      # Figure 5 v5+
 X0, X1, XLAB, XMAX = 1600, 2005, 2011, 2150
@@ -159,7 +165,12 @@ def arm_passages():
         return pd.read_parquet(ARM_OUT)
     from measure_lltk import Scorer
     S_ = pd.read_parquet(os.path.join(TA, "selection.parquet"))
+    if UNION:
+        S2 = pd.read_parquet(os.path.join(TA, "selection_2.parquet"))
+        S_ = pd.concat([S_, S2[S_.columns.intersection(S2.columns)]])
+        assert S_.id.is_unique and len(S_) == 32031, len(S_)       # malign: 32,031 ids, all coded
     Cd = pd.read_parquet(os.path.join(TA, "codings.parquet"))
+    assert Cd.id.is_unique, "codings.parquet must hold one coding per id"
     #: malign asked for the COMPLETE coding; a half-coded cell would enter as a thin cell, not an error
     assert S_.id.isin(Cd.id).all(), "coding incomplete: %d of %d selected passages uncoded" % (
         (~S_.id.isin(Cd.id)).sum(), len(S_))
@@ -199,7 +210,10 @@ def arm_meta():
         return pd.read_parquet(META_OUT)
     from measure_lltk import Scorer
     D = arm_passages()
-    S_ = pd.read_parquet(os.path.join(TA, "selection.parquet")).set_index("id")
+    S_ = pd.read_parquet(os.path.join(TA, "selection.parquet"))
+    if UNION:
+        S_ = pd.concat([S_, pd.read_parquet(os.path.join(TA, "selection_2.parquet"))])
+    S_ = S_.set_index("id")
     Lj = json.load(open(LISTS))
     cog, emo, sw = set(Lj["cog"]), set(Lj["emo"]), set(Lj["stopwords"])
     Sc = Scorer()

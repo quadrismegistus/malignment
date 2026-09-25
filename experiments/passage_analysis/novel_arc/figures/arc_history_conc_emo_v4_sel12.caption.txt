@@ -1,0 +1,10 @@
+CONCRETENESS AND EMOTIONAL LANGUAGE IN FICTION, 1600-2000, with base and aligned model arms.
+
+Gray points: decade medians over the book's arc_fiction texts; black line: lowess (span 0.3). Top:
+concreteness (Abs-Conc.Median.median, corpus-bias corrected; 81,555 texts). Bottom: share of content
+words on the emotional list (USAS E and emotion-rated USAS X words with period-model neighbours,
+LLM-rated for precision and hand-vetted, 1,121 base words; 75,974 texts). Model arms: TEMPLATE_ARM,
+30 lineages; each model's coherent narrative passages concatenated into one meta-text and scored as
+a novel is; the median over lineages. Model concreteness is not bias-corrected (clean digital text).
+
+  arms: concreteness {'base': 0.137, 'raw': -0.036}; emotional {'base': 2.1, 'raw': 2.51}; decade rho(emotional, concreteness) -0.96
