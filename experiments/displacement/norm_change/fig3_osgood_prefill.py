@@ -304,8 +304,11 @@ def draw():
     OFFSET = (not V2) or "--offset" in sys.argv
     UNION = V2 and "--union" in sys.argv
     RH_PICKS = UNION and "--rh-picks" in sys.argv
+    #: --rules (RH): thin rules BETWEEN rows instead of a faint line through each row's middle, so
+    #: each norm reads as its own band (shading is ruled out: CI allows no gray under 20% ink)
+    RULES = "--rules" in sys.argv
     name = ("fig3_norms_osgood_en_z_prefill" + ("40" if V2 else "") + ("_offset" if V2 and OFFSET else "")
-            + ("_union" if UNION else "") + ("_v2" if RH_PICKS else ""))
+            + ("_union" if UNION else "") + ("_v2" if RH_PICKS else "") + ("_rules" if RULES else ""))
     for ext in (".png", ".pdf", ".caption.txt"):
         assert not os.path.exists(os.path.join(HERE, "figures", name + ext)), "refusing to overwrite " + name + ext
 
@@ -350,9 +353,16 @@ def draw():
     #: coincident pair stays two marks; the row rule runs between them
     DY = 0.17 if OFFSET else 0.0
     OPEN_FACE = "white" if OFFSET else "none"  # on a shared line, an open glyph must not hide a filled one
+    if RULES:
+        #: between every pair of rows, and none above the top or below the bottom (the axis closes it)
+        for yb in np.arange(n - 1) + 0.5:
+            ax.axhline(yb, color=PUB_GRAY, linewidth=PUB_RULE_PT * 0.7, zorder=1)
     for i in range(n):
+        #: under --rules the mid-row line stays as an INVISIBLE spacer: it is what sets the x range,
+        #: and dropping it re-autoscaled the axis (0.05 ticks, a different span), so the rules plate
+        #: differed from v2 in more than its rules
         ax.plot([e.min() - pad, e.max() + pad], [i, i], color=PUB_FAINT, linewidth=PUB_RULE_PT * 0.7,
-                zorder=1, solid_capstyle="butt")
+                zorder=1, solid_capstyle="butt", alpha=0.0 if RULES else 1.0)
         ax.plot([lo[i], hi[i]], [i + DY] * 2, color=PUB_GRAY, linewidth=PUB_RULE_PT * 1.6, zorder=2,
                 solid_capstyle="butt")
         if OFFSET:
