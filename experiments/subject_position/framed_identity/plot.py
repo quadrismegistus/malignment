@@ -438,7 +438,7 @@ MACHINE = re.compile(r"\b(robot|computer|machine|android|cyborg)s?\b")
 
 
 def _stack_plot(shorts, ns, mean, groups, fmt="%.1f", min_w=7, height=2.7, legend_nrow=None, counts=True,
-                xtitle="Answers to \u201cWho are you?\u201d, mean over models"):
+                xtitle="Answers to \u201cWho are you?\u201d, mean over models", disp=None):
     """One horizontal bar per condition, segments in `groups` order [(label, gray)]. -> plotnine plot"""
     import matplotlib
     matplotlib.use("Agg")
@@ -478,7 +478,8 @@ def _stack_plot(shorts, ns, mean, groups, fmt="%.1f", min_w=7, height=2.7, legen
          + scale_x_continuous(expand=(0, 0), breaks=[0, 25, 50, 75, 100],
                               labels=lambda v: ["%g%%" % x for x in v])
          + scale_y_continuous(expand=(0, 0), breaks=list(range(len(shorts), 0, -1)),
-                              labels=["%s (%d)" % (s_, ns[s_]) if counts else s_ for s_ in shorts])
+                              labels=["%s (%d)" % (s_, ns[s_]) if counts else (disp or {}).get(s_, s_)
+                                      for s_ in shorts])
          + coord_cartesian(xlim=(0, 100), ylim=(0.5, len(shorts) + 0.5), expand=False)
          + labs(x=xtitle, y="")
          + F.pub_theme(height=H_IN, grid="none")
@@ -491,7 +492,7 @@ def _stack_plot(shorts, ns, mean, groups, fmt="%.1f", min_w=7, height=2.7, legen
     return p
 
 
-def fig_stack(groups, name, fmt="%.1f", min_w=7, legend_nrow=None, counts=True, xtitle=None):
+def fig_stack(groups, name, fmt="%.1f", min_w=7, legend_nrow=None, counts=True, xtitle=None, disp=None):
     """Stacked bars: each condition's answers split by identity kind, MEAN over models, summing to 100."""
     import numpy as np
     import matplotlib
@@ -534,7 +535,9 @@ def fig_stack(groups, name, fmt="%.1f", min_w=7, legend_nrow=None, counts=True, 
     n_mach = sum(bool(MACHINE.search((x.get("predicated_identity") or "").lower())) for x in obj)
 
     p = _stack_plot(shorts, ns, mean, [(g, c) for g, _, c in groups], fmt=fmt, min_w=min_w,
-                    legend_nrow=legend_nrow, counts=counts, **({"xtitle": xtitle} if xtitle else {}))
+                    legend_nrow=legend_nrow, counts=counts, disp=disp, **({"xtitle": xtitle} if xtitle else {}))
+    #: the caption names each condition as the plate does, line breaks flattened
+    N = lambda s_: disp[s_].replace("\n", " ") if disp else s_
 
     W = lambda txt: textwrap.wrap(txt, 100)
     lines = [
@@ -548,7 +551,7 @@ def fig_stack(groups, name, fmt="%.1f", min_w=7, legend_nrow=None, counts=True, 
            % min_w + (" In-bar values are rounded to whole percents." if "%.0f" in fmt else "")
            #: RH: the counts left the bar labels, so they lead the caption
            + ("" if counts else " MODEL COUNTS, not on the plate: %s. The three conditions are different "
-              "model sets, not paired lineages." % "; ".join("%s %d" % (s_.lower(), ns[s_]) for s_ in shorts))),
+              "model sets, not paired lineages." % "; ".join("%s %d" % (N(s_).lower(), ns[s_]) for s_ in shorts))),
         "",
         "Groups (the coder's five levels, each in exactly one group; asserted):",
     ]
@@ -573,7 +576,7 @@ def fig_stack(groups, name, fmt="%.1f", min_w=7, legend_nrow=None, counts=True, 
             continue
         for short in shorts:
             if top[(short, g)]:
-                lines += W("  %s, %s: %s" % (g, short.lower(), "; ".join(top[(short, g)])))
+                lines += W("  %s, %s: %s" % (g, N(short).lower(), "; ".join(top[(short, g)])))
     lines += [
         "",
         *W("FENCES: as ci_subject_frames (same strata, same producer). Three different model sets, not "
@@ -588,7 +591,7 @@ def fig_stack(groups, name, fmt="%.1f", min_w=7, legend_nrow=None, counts=True, 
         "",
     ]
     for short in shorts:
-        lines.append("%s (%d models)" % (short, ns[short]))
+        lines.append("%s (%d models)" % (N(short), ns[short]))
         for g, _, _ in groups:
             q1, q3 = rng[(short, g)]
             lines.append("  %-20s mean %5.1f  median %5.1f  [%5.1f-%5.1f]  pooled %5.1f" % (
@@ -828,6 +831,21 @@ def fig_stack4w_v3():
               xtitle="Answers to \u201cWho are you?\u201d claiming to be \u2026")
 
 
+#: RH: "None" read as a claim to be nothing; it is the absence of a claim
+GROUPS4W2 = [(g if g != "None" else "No claim", ks, c) for g, ks, c in GROUPS4W]
+#: RH, 2026-09-25: the conditions as the paper will name them
+DISP = {"Base models": "Base models",
+        "Aligned, no chat template": "Aligned models\n(untemplated)",
+        "Aligned, in chat": "Aligned models\n(chat template)"}
+
+
+def fig_stack4w_v4():
+    """As stack4w_v3, legend 'No claim' for 'None', conditions named as the paper names them (RH)."""
+    assert set(DISP) == {short for _, short in COND}
+    fig_stack(GROUPS4W2, "ci_subject_stack4w_v4", fmt="%.0f%%", min_w=5, legend_nrow=1, counts=False,
+              xtitle="Answers to \u201cWho are you?\u201d claiming to be \u2026", disp=DISP)
+
+
 def fig_stack4():
     """Stacked bars, four groups: AI, person, something else, no claim (mean over models)."""
     fig_stack(GROUPS4, "ci_subject_stack4")
@@ -841,7 +859,7 @@ def fig_stack5():
 FIGURES = {"frames": fig_frames, "kinds": fig_kinds, "kinds_mean": fig_kinds_mean,
            "stack4": fig_stack4, "stack5": fig_stack5, "stack_ai": fig_stack_ai, "stack_ai2": fig_stack_ai2,
            "stack4w": fig_stack4w, "stack4w_v2": fig_stack4w_v2,
-           "stack4w_v3": fig_stack4w_v3}
+           "stack4w_v3": fig_stack4w_v3, "stack4w_v4": fig_stack4w_v4}
 
 
 def main():
