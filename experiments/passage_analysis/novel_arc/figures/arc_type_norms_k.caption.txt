@@ -1,0 +1,8 @@
+TYPE-BASED NORMS IN FICTION, 1600-2000: k lexicon (one model's ratings, not human norms). Per text
+the token-weighted mean rating of its content words that the lexicon covers after mapping
+inflections, British and old spellings and long-s OCR to lexicon entries; gray points: decade
+medians over 75,974 arc_fiction texts; black line: lowess (span 0.3). Model arms: TEMPLATE_ARM, 30
+lineages, each model's coherent narrative passages as one meta-text scored the same way; the median
+over lineages. The k scales are one model's out-of-context ratings (deepseek-v4-flash), not human
+norms; register level is not established as a scale and vulgarity is a sparse indicator
+(fields.k_warnings).
