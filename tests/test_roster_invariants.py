@@ -286,14 +286,16 @@ def test_lineages_measured_filter_runs():
 
 
 def test_framed_empty_population():
-    """roster.population('framed_empty'): the 40 endpoint lineages with no system context
-    under prefill, by the render (scripts/build_framed_empty.py, 2026-09-25)."""
+    """roster.population('framed_empty'): the 41 endpoint lineages with no system context
+    under prefill, by the render (scripts/build_framed_empty.py, 2026-09-25). Llama-3.1-8B's
+    date-only block is accepted as empty (RH); its 70B sibling has no prefill cells."""
     import json
     from malignment import roster
     fe = roster.population("framed_empty")
-    assert len(fe) == 40
+    assert len(fe) == 41
     assert fe <= roster.population("endpoints")
-    for m in ("HuggingFaceTB/SmolLM3-3B", "meta-llama/Llama-3.1-8B-Instruct", "LLM360/AmberSafe",
+    assert "meta-llama/Llama-3.1-8B-Instruct" in fe
+    for m in ("HuggingFaceTB/SmolLM3-3B", "LLM360/AmberSafe",
               "openGPT-X/Teuken-7B-instruct-v0.6", "gl198976/mpt-7b-instruct",
               "inceptionai/jais-family-6p7b-chat", "llm-jp/llm-jp-3-7.2b-instruct3", "bigscience/bloomz-7b1"):
         assert m not in fe, m

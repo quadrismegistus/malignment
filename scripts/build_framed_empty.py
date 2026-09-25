@@ -19,7 +19,8 @@ the user turn is read.
 
 THE RULE. With the tokenizer's special tokens removed, what precedes the user's "Hi." must be
 at most MARKER_CHARS characters of non-whitespace (role labels such as "user", "USER:",
-"Bob:", "### 指示:", "[INST]"). Longer residue is preamble or system content, and the
+"Bob:", "### 指示:", "[INST]"), after removing a date-only block (DATE_BLOCK: Llama 3.1's
+"Cutting Knowledge Date / Today Date", which carries no identity or instruction). Longer residue is preamble or system content, and the
 lineage is excluded with the residue recorded. The residue is kept for every lineage, so the
 rule can be audited by reading it, not trusted.
 
@@ -34,6 +35,9 @@ ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 sys.path.insert(0, ROOT)
 OUT = os.path.join(ROOT, "roster", "models", "populations", "framed_empty.json")
 MARKER_CHARS = 20
+#: residue accepted as "empty enough" (RH, 2026-09-25, of Llama-3.1-8B-Instruct: "if it just
+#: adds a date we can consider that empty enough"). Dates only -- no identity, no instruction.
+DATE_BLOCK = re.compile(r"Cutting Knowledge Date:\s*\w+ \d{4}\s*Today Date:\s*\d{1,2} \w+ \d{4}")
 
 
 def modes():
@@ -92,7 +96,7 @@ def main():
         if not st.get("template"):
             excluded.append({"model": m, "base": base, "why": "no chat template (tokenizer or override)"})
             continue
-        clean = len(re.sub(r"\s", "", st["residue"])) <= MARKER_CHARS
+        clean = len(re.sub(r"\s", "", DATE_BLOCK.sub("", st["residue"]))) <= MARKER_CHARS
         have = M.get(m, set())
         mode = "empty" if "empty" in have else ("default" if "default" in have and st["empty_equals_default"] is not False else None)
         rec = dict(model=m, base=base, template=st["template"], residue=st["residue"],

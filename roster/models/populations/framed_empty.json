@@ -1,7 +1,7 @@
 {
  "_about": "Endpoint lineages whose aligned model receives no system context under the prefill frame, with prefill cells in that state. Producer scripts/build_framed_empty.py; read by roster.population('framed_empty'). Use each lineage's system_mode to select its cells.",
  "marker_chars": 20,
- "n": 40,
+ "n": 41,
  "models": [
   {
    "model": "01-ai/Yi-1.5-9B-Chat",
@@ -265,6 +265,15 @@
    "system_mode": "empty"
   },
   {
+   "model": "meta-llama/Llama-3.1-8B-Instruct",
+   "base": "meta-llama/Llama-3.1-8B",
+   "template": "tokenizer",
+   "residue": "system Cutting Knowledge Date: December 2023 Today Date: 26 Jul 2024 user",
+   "pre_user": "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n",
+   "empty_equals_default": true,
+   "system_mode": "default"
+  },
+  {
    "model": "mistralai/Mistral-7B-Instruct-v0.1",
    "base": "mistralai/Mistral-7B-v0.1",
    "template": "tokenizer",
@@ -433,17 +442,7 @@
    "pre_user": "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n",
    "empty_equals_default": true,
    "system_mode": null,
-   "why": "text before the user turn beyond role markers"
-  },
-  {
-   "model": "meta-llama/Llama-3.1-8B-Instruct",
-   "base": "meta-llama/Llama-3.1-8B",
-   "template": "tokenizer",
-   "residue": "system Cutting Knowledge Date: December 2023 Today Date: 26 Jul 2024 user",
-   "pre_user": "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n",
-   "empty_equals_default": true,
-   "system_mode": "default",
-   "why": "text before the user turn beyond role markers"
+   "why": "no prefill cells at a clean system_mode (have: [])"
   },
   {
    "model": "openGPT-X/Teuken-7B-instruct-v0.6",

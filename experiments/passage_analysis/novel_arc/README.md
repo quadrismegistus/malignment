@@ -217,7 +217,7 @@ chicago 895 MB.
 
 ## LENGTH RULE FOR FIGURE 5 (2026-09-25, `length_rule_test.py`; results/length_rule_test.md is local, results/ is ignored)
 
-The paper seat's objection: the human reference passages are 200 words; the model arms carry `quadrants.csv`'s 200-token cut; the Scorer's own minimum is 40 words. Tested on 5,197 passC narrative passages of the 25 pairs' models (rule (a) = the 4,574 `quadrants.csv` holds; (b) = all >= 40 words; median words 199 vs 197). Rule (a) reproduces the paper seat's 25-pair numbers exactly.
+The paper seat's objection: the human reference passages are 200 words; the model arms carry `quadrants.csv`'s 200-token cut; the Scorer's own minimum is 40 words. Tested on 5,197 passC narrative passages of the 25 pairs' models (rule (a) = the 4,574 `quadrants.csv` holds; (b) = all >= 40 words; median words 199 vs 197). Rule (a) reproduces the paper seat's crossings, but not its membership: it matches quadrants.csv by (model, text) against passC's narrative-coded passages, and 56 of quadrants.csv's 4,630 passages for these pairs (Yi, SmolLM2, neo, pythia-2.8b pairs) are coded narrative=False by passC, so they are not in the scored set. That moves one pair (22/25 vs the paper seat's 23/25) and base inner life (14.37 vs 14.29). Rule (b) is built from passC directly and is unaffected.
 
     concreteness crossings   (a) base 1965, aligned 1914 (floor 10: 1915)   (b) base 1962, aligned 1908 (floor 10: 1907)
     inner life (max 13.71)   (a) base 14.37, aligned 16.34                   (b) base 14.49, aligned 16.15
