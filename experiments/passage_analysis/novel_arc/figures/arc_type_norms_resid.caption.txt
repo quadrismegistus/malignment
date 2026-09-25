@@ -1,0 +1,6 @@
+TYPE-NORM HISTORIES WITH CONCRETENESS REGRESSED OUT. Gray line: the raw lowess; black line: the
+lowess of the adjusted decade medians (gray points) -- the scale minus a text-level linear fit on
+the book's concreteness, plus its mean; 75,974 arc_fiction texts. Panels ordered survivors first.
+Arms: 30 lineages' meta-texts adjusted with the history's slope. Brysbaert and k concreteness are
+near-duplicates of the regressor and serve as a check; shared vocabulary makes part of every fit
+mechanical.
