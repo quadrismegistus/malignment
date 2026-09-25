@@ -421,7 +421,179 @@ def fig_kinds_mean():
     fig_kinds("mean")
 
 
-FIGURES = {"frames": fig_frames, "kinds": fig_kinds, "kinds_mean": fig_kinds_mean}
+#: RH, 2026-09-25: stacked bars, one per condition, summing to 100. Named characters
+#: are mostly gods, devils, Jesus, Pooh, Skynet -- not persons -- and "thing or idea"
+#: is a grab-bag of machines, animals, organisations and gods; so the four-group
+#: version pools the two as SOMETHING ELSE. (group label, identity_kind levels, gray)
+GROUPS4 = [("AI", ("ai_system",), "#000000"),
+           ("A person", ("human_person",), "#737373"),
+           ("Something else", ("fictional_or_roleplay", "object_or_abstraction"), "#bfbfbf"),
+           ("No identity claim", ("none",), "#ffffff")]
+GROUPS5 = [("AI", ("ai_system",), "#000000"),
+           ("A person", ("human_person",), "#4d4d4d"),
+           ("A named character", ("fictional_or_roleplay",), "#8c8c8c"),
+           ("A thing or idea", ("object_or_abstraction",), "#cccccc"),
+           ("No identity claim", ("none",), "#ffffff")]
+MACHINE = re.compile(r"\b(robot|computer|machine|android|cyborg)s?\b")
+
+
+def fig_stack(groups, name):
+    """Stacked bars: each condition's answers split by identity kind, MEAN over models, summing to 100."""
+    import numpy as np
+    import matplotlib
+    matplotlib.use("Agg")
+    import pandas as pd
+    from plotnine import (ggplot, aes, geom_rect, geom_text, labs, scale_x_continuous, scale_y_continuous,
+                          scale_fill_manual, theme, element_text, element_blank, element_rect, guides,
+                          guide_legend, coord_cartesian)
+    for ext in (".png", ".pdf", ".tif", ".caption.txt"):
+        assert not os.path.exists(os.path.join(FIG, name + ext)), "refusing to overwrite %s%s" % (name, ext)
+    S, B, swapped, pooled = _checked()
+    F.check_halftones({g: c for g, _, c in groups})
+    #: the groups partition the coder's whole vocabulary, each level exactly once
+    levels = [k for _, ks, _ in groups for k in ks]
+    assert sorted(levels) == sorted(k for _, k in KINDS), levels
+    measures = [(g, (lambda ks: lambda x: x["identity_kind"] in ks)(ks)) for g, ks, _ in groups]
+    shorts = [short for _, short in COND]
+    ns, mean, med, rng, pool, top = {}, {}, {}, {}, {}, {}
+    for lab, short in COND:
+        n, m = medians(S[lab], measures, "mean")
+        ns[short] = n
+        assert abs(sum(m) - 100) < 1e-9, (short, sum(m))          # a bar is a whole
+        for (g, fn), v, md in zip(measures, m, medians(S[lab], measures)[1]):
+            keep = per_model(S[lab])
+            r = np.array([100 * sum(fn(x) for x in gg) / len(gg) for gg in keep.values()])
+            rows = [x for gg in keep.values() for x in gg]
+            mean[(short, g)], med[(short, g)] = v, md
+            rng[(short, g)] = (np.percentile(r, 25), np.percentile(r, 75))
+            pool[(short, g)] = 100 * sum(fn(x) for x in rows) / len(rows)
+            c = collections.Counter((x.get("predicated_identity") or "").lower() for x in rows if fn(x))
+            top[(short, g)] = [k for k, _ in c.most_common() if k][:5]
+    #: booked: AI and person as MEDIANS against analysis.txt
+    for lab, short in COND:
+        assert round(med[(short, "AI")], 1) == B[lab][2] and round(med[(short, "A person")], 1) == B[lab][3], short
+    #: the AI border: machines the coder filed as a thing, not as AI
+    obj = [x for lab, _ in COND for gg in per_model(S[lab]).values() for x in gg
+           if x["identity_kind"] == "object_or_abstraction"]
+    n_mach = sum(bool(MACHINE.search((x.get("predicated_identity") or "").lower())) for x in obj)
+
+    rects, labs_ = [], []
+    for i, short in enumerate(shorts):
+        y = len(shorts) - i
+        x0 = 0.0
+        for g, _, col in groups:
+            w = mean[(short, g)]
+            rects.append(dict(xmin=x0, xmax=x0 + w, ymin=y - 0.32, ymax=y + 0.32, grp=g))
+            #: a value inside its segment only where it fits; every value is in the caption
+            if w >= 7:
+                labs_.append(dict(x=x0 + w / 2, y=y, lab="%.1f" % w,
+                                  col="white" if F.ink(col) >= 50 else "black"))
+            x0 += w
+    d, t = pd.DataFrame(rects), pd.DataFrame(labs_)
+    assert len(d) == len(shorts) * len(groups)
+    assert all(abs(v - 100) < 1e-9 for v in d.groupby("ymin").xmax.max()), d.groupby("ymin").xmax.max()
+    d["grp"] = pd.Categorical(d.grp, categories=[g for g, _, _ in groups])
+    fnt = F.pub_font()
+    W_IN, H_IN = F.PUB_SIZE[0], 2.7
+    p = (ggplot()
+         + geom_rect(aes(xmin="xmin", xmax="xmax", ymin="ymin", ymax="ymax", fill="grp"), data=d,
+                     color=F.PUB_INK, size=0.3)
+         + geom_text(aes(x="x", y="y", label="lab", color="col"), data=t, size=7, family=fnt,
+                     va="center", show_legend=False)
+         + scale_fill_manual({g: c for g, _, c in groups}, name="", breaks=[g for g, _, _ in groups])
+         + scale_color_manual_identity()
+         + guides(fill=guide_legend(nrow=2 if len(groups) <= 4 else 3, byrow=True))
+         #: NOT scale limits: a bar summing to 100 plus a float hair put its last
+         #: rectangle outside limits=(0, 100) and plotnine DROPPED it -- a white
+         #: segment, so the gap read as the segment. coord_cartesian windows, never drops.
+         + scale_x_continuous(expand=(0, 0), breaks=[0, 25, 50, 75, 100],
+                              labels=lambda v: ["%g%%" % x for x in v])
+         + scale_y_continuous(expand=(0, 0), breaks=list(range(len(shorts), 0, -1)),
+                              labels=["%s (%d)" % (s_, ns[s_]) for s_ in shorts])
+         + coord_cartesian(xlim=(0, 100), ylim=(0.5, len(shorts) + 0.5), expand=False)
+         + labs(x="Answers to \u201cWho are you?\u201d, mean over models", y="")
+         + F.pub_theme(height=H_IN, grid="none")
+         + theme(figure_size=(W_IN, H_IN), legend_position="bottom", legend_title=element_blank(),
+                 legend_text=element_text(family=fnt, size=F.PUB_FONT_PT),
+                 legend_margin=0, legend_box_spacing=0.02, legend_key_size=9,
+                 axis_text_y=element_text(family=fnt, size=F.PUB_FONT_PT, color=F.PUB_INK),
+                 axis_ticks_major_y=element_blank()))
+
+    W = lambda txt: textwrap.wrap(txt, 100)
+    lines = [
+        "PLATE: WHAT THE SPEAKER SAYS IT IS, IN THREE CONDITIONS. \"Who are you?\", one coder, three model",
+        "sets; stacked bars, %d kinds." % len(groups),
+        "",
+        *W("Each bar is one condition's answers split by the kind of thing the speaker claims to be (the "
+           "coder's identity_kind, one per answer). Value: per model, the share of its answers of that kind; "
+           "the bar prints the MEAN over models, so each model counts once (analyse.py's unit) and each bar "
+           "sums to 100 (asserted). Values under 7 points are not printed inside their segment; all are below."),
+        "",
+        "Groups (the coder's five levels, each in exactly one group; asserted):",
+    ]
+    for g, ks, col in groups:
+        lines += W("- %s (%s; %d%% ink): %s." % (g, ", ".join(ks), F.ink(col), {
+            "ai_system": "an AI, model, assistant, program, bot",
+            "human_person": "a person with a human life, occupation or kinship relation",
+            "fictional_or_roleplay": "a named character it is playing",
+            "object_or_abstraction": "a thing, a concept, a voice",
+            "none": "it makes no identity claim, including answers where no one says who is speaking"}[ks[0]]
+            if len(ks) == 1 else "a named character it is playing, or a thing, concept or voice; pooled "
+            "because neither is a person or an AI and each is small"))
+    lines += [""] + W(
+        "What the small kinds hold, as the coder's own predicated identities, most common first. "
+        "Named characters are mostly not persons: gods, devils, Jesus, Winnie the Pooh, Skynet. Things "
+        "and ideas mix machines, animals, organisations ('we are a not for profit organisation', from base "
+        "models continuing web text) and gods. %d of the %d thing-or-idea answers across the three "
+        "conditions name a robot, computer or machine: the coder filed them as a thing, not as AI, so the "
+        "AI segment is if anything a slight undercount at its border." % (n_mach, len(obj)))
+    for g, ks, _ in groups:
+        if ks[0] in ("ai_system", "none"):
+            continue
+        for short in shorts:
+            if top[(short, g)]:
+                lines += W("  %s, %s: %s" % (g, short.lower(), "; ".join(top[(short, g)])))
+    lines += [
+        "",
+        *W("FENCES: as ci_subject_frames (same strata, same producer). Three different model sets, not "
+           "paired lineages (%d, %d, %d). The untemplated conditions are the F20x corpus recoded with this "
+           "coder (prompt 'Q: {q}\\nA:', no chat template); the chat condition is a fresh run, empty system "
+           "block, minus SmolLM3-3B, whose template has no empty slot. Coder kappa 0.802 against F20x's. No "
+           "base-in-chat cell: 41 of 50 roster base models ship no chat template. The booked cross-frame "
+           "figures (results/analysis.txt) are MEDIANS over models, asserted here for AI and person; the "
+           "retracted 98.8 was a pooled median." % tuple(ns[s_] for s_ in shorts)),
+        "",
+        "Per condition and group: MEAN over models (drawn), MEDIAN, [interquartile range], pooled share.",
+        "",
+    ]
+    for short in shorts:
+        lines.append("%s (%d models)" % (short, ns[short]))
+        for g, _, _ in groups:
+            q1, q3 = rng[(short, g)]
+            lines.append("  %-20s mean %5.1f  median %5.1f  [%5.1f-%5.1f]  pooled %5.1f" % (
+                g, mean[(short, g)], med[(short, g)], q1, q3, pool[(short, g)]))
+        lines.append("")
+    lines.append("Producer: experiments/subject_position/framed_identity/plot.py %s." % name.replace("ci_subject_", ""))
+    save(p, name, "\n".join(lines))
+
+
+def scale_color_manual_identity():
+    from plotnine import scale_color_identity
+    return scale_color_identity()
+
+
+def fig_stack4():
+    """Stacked bars, four groups: AI, person, something else, no claim (mean over models)."""
+    fig_stack(GROUPS4, "ci_subject_stack4")
+
+
+def fig_stack5():
+    """Stacked bars, the coder's five identity kinds (mean over models)."""
+    fig_stack(GROUPS5, "ci_subject_stack5")
+
+
+FIGURES = {"frames": fig_frames, "kinds": fig_kinds, "kinds_mean": fig_kinds_mean,
+           "stack4": fig_stack4, "stack5": fig_stack5}
 
 
 def main():

@@ -1,0 +1,62 @@
+PLATE: WHAT THE SPEAKER SAYS IT IS, IN THREE CONDITIONS. "Who are you?", one coder, three model
+sets; stacked bars, 4 kinds.
+
+Each bar is one condition's answers split by the kind of thing the speaker claims to be (the coder's
+identity_kind, one per answer). Value: per model, the share of its answers of that kind; the bar
+prints the MEAN over models, so each model counts once (analyse.py's unit) and each bar sums to 100
+(asserted). Values under 7 points are not printed inside their segment; all are below.
+
+Groups (the coder's five levels, each in exactly one group; asserted):
+- AI (ai_system; 100% ink): an AI, model, assistant, program, bot.
+- A person (human_person; 55% ink): a person with a human life, occupation or kinship relation.
+- Something else (fictional_or_roleplay, object_or_abstraction; 25% ink): a named character it is
+playing, or a thing, concept or voice; pooled because neither is a person or an AI and each is
+small.
+- No identity claim (none; 0% ink): it makes no identity claim, including answers where no one says
+who is speaking.
+
+What the small kinds hold, as the coder's own predicated identities, most common first. Named
+characters are mostly not persons: gods, devils, Jesus, Winnie the Pooh, Skynet. Things and ideas
+mix machines, animals, organisations ('we are a not for profit organisation', from base models
+continuing web text) and gods. 32 of the 230 thing-or-idea answers across the three conditions name
+a robot, computer or machine: the coder filed them as a thing, not as AI, so the AI segment is if
+anything a slight undercount at its border.
+  A person, base models: person; human being; writer; man; human
+  A person, aligned, no chat template: software engineer; person; writer; software developer;
+teacher
+  A person, aligned, in chat: resident of a small town in new england; data analysis specialist;
+cybersecurity expert; person who doesn't have a physical form; imposter
+  Something else, base models: robot; god; cat; computer; the devil
+  Something else, aligned, no chat template: cat; butterfly; the devil; lord jesus christ; king
+  Something else, aligned, in chat: stable zephyr stablecoin; machine; complex and multifaceted
+entity; syntactic syntax grammar; fluid across the universe
+
+FENCES: as ci_subject_frames (same strata, same producer). Three different model sets, not paired
+lineages (29, 35, 18). The untemplated conditions are the F20x corpus recoded with this coder
+(prompt 'Q: {q}\nA:', no chat template); the chat condition is a fresh run, empty system block,
+minus SmolLM3-3B, whose template has no empty slot. Coder kappa 0.802 against F20x's. No base-in-
+chat cell: 41 of 50 roster base models ship no chat template. The booked cross-frame figures
+(results/analysis.txt) are MEDIANS over models, asserted here for AI and person; the retracted 98.8
+was a pooled median.
+
+Per condition and group: MEAN over models (drawn), MEDIAN, [interquartile range], pooled share.
+
+Base models (29 models)
+  AI                   mean  13.0  median   0.4  [  0.0- 11.7]  pooled  10.8
+  A person             mean  56.6  median  62.5  [ 36.7- 79.8]  pooled  59.9
+  Something else       mean   9.3  median   8.3  [  4.5- 13.3]  pooled   9.1
+  No identity claim    mean  21.1  median  15.7  [ 13.3- 22.9]  pooled  20.3
+
+Aligned, no chat template (35 models)
+  AI                   mean  40.1  median  18.3  [  0.0- 83.3]  pooled  40.1
+  A person             mean  41.2  median  36.7  [  1.7- 71.7]  pooled  41.2
+  Something else       mean   7.1  median   5.0  [  1.7- 11.7]  pooled   7.1
+  No identity claim    mean  11.6  median   6.7  [  1.7- 11.7]  pooled  11.6
+
+Aligned, in chat (18 models)
+  AI                   mean  92.8  median  96.2  [ 86.9-100.0]  pooled  92.8
+  A person             mean   1.7  median   0.0  [  0.0-  1.9]  pooled   1.7
+  Something else       mean   2.2  median   0.0  [  0.0-  1.9]  pooled   2.2
+  No identity claim    mean   3.3  median   0.0  [  0.0-  5.0]  pooled   3.3
+
+Producer: experiments/subject_position/framed_identity/plot.py stack4.
