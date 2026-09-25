@@ -866,7 +866,7 @@ LADDER_GROUPS = [("AI", ("ai_system",), "#000000"),
                  ("No claim", ("none", "empty"), "#ffffff")]
 
 
-def ladder_rows():
+def ladder_rows(fixed=True):
     """ladder_per_model.csv -> {(model, tick): {kind: pct, 'says_I': pct, 'n': int}}, asserted against ladder.md."""
     import statistics as st
     R = {}
@@ -890,15 +890,24 @@ def ladder_rows():
                 assert round(sum(R[(m, t)][k] for m in models) / 18, 1) == pooled, (t, k)
             for k, i in (("fictional_or_roleplay", 5), ("object_or_abstraction", 6), ("none", 7)):
                 assert round(st.median(R[(m, t)][k] for m in models), 1) == float(c[i]), (t, k)
-    #: categorical anchors: glm's bare cell as flagged, and the template step 17 / 0
-    assert (R[(GLM, "bare")]["ai_system"], R[(GLM, "bare")]["human_person"]) == (15.0, 65.0)
+    #: categorical anchors, per version of the table. 3dc12072: glm's bare cell off-distribution
+    #: (15 / 65), template step 17 / 0. b9fafc18 (encode fix, glm bare regenerated): glm 100 AI
+    #: at every tick, so it ties the template step, 16 / 0.
+    glm = (R[(GLM, "bare")]["ai_system"], R[(GLM, "bare")]["human_person"])
     d = [R[(m, "prefill")]["ai_system"] - R[(m, "bare")]["ai_system"] for m in models]
-    assert (sum(x > 0 for x in d), sum(x < 0 for x in d)) == (17, 0)
+    step = (sum(x > 0 for x in d), sum(x < 0 for x in d))
+    want = ((100.0, 0.0), (16, 0)) if fixed else ((15.0, 65.0), (17, 0))
+    assert (glm, step) == want, ("ladder_per_model.csv is not the %s table: glm bare %s, template step %s; the "
+                                 "17-model plates (2c13f8e4) reproduce only from 3dc12072" % (
+                                     "b9fafc18" if fixed else "3dc12072", glm, step))
     return R, models
 
 
-def fig_ladder(with_base=False):
-    """The identity ladder as stacked bars: 17 paired aligned models over four ticks (RH, 2026-09-25)."""
+def fig_ladder(with_base=False, all18=False):
+    """The identity ladder as stacked bars: 17 paired aligned models over four ticks (RH, 2026-09-25).
+
+    all18: the table after malign's encode fix (b9fafc18), glm restored, all 18 models paired.
+    """
     import numpy as np
     import statistics as st
     import matplotlib
@@ -907,17 +916,19 @@ def fig_ladder(with_base=False):
     from plotnine import (ggplot, aes, geom_rect, geom_text, labs, scale_x_continuous, scale_y_continuous,
                           scale_fill_manual, scale_color_identity, theme, element_text, element_blank,
                           guides, guide_legend, coord_cartesian)
-    name = "ci_subject_ladder" + ("_base" if with_base else "")
+    name = "ci_subject_ladder" + ("_base" if with_base else "") + ("_18" if all18 else "")
     for ext in (".png", ".pdf", ".tif", ".caption.txt"):
         assert not os.path.exists(os.path.join(FIG, name + ext)), "refusing to overwrite %s%s" % (name, ext)
-    R, models18 = ladder_rows()
-    models = [m for m in models18 if m != GLM]
-    assert len(models) == 17
+    R, models18 = ladder_rows(fixed=all18)
+    models = models18 if all18 else [m for m in models18 if m != GLM]
+    N = len(models)
+    assert N == (18 if all18 else 17)
+    SETS = ((models, N),) if all18 else ((models, 17), (models18, 18))
     F.check_halftones({g: c for g, _, c in LADDER_GROUPS})
     groups = [g for g, _, _ in LADDER_GROUPS]
     val = lambda m, t, ks: sum(R[(m, t)][k] for k in ks)
     mean, med, iqr, emp = {}, {}, {}, {}
-    for ms, tag in ((models, 17), (models18, 18)):
+    for ms, tag in SETS:
         for t in TICKS:
             for g, ks, _ in LADDER_GROUPS:
                 xs = np.array([val(m, t, ks) for m in ms])
@@ -926,11 +937,11 @@ def fig_ladder(with_base=False):
             assert abs(sum(mean[(tag, t, g)] for g in groups) - 100) < 0.05, (tag, t)
             emp[(tag, t)] = np.mean([R[(m, t)]["empty"] for m in ms])
     says = {(tag, t): (st.median(R[(m, t)]["says_I"] for m in ms), np.mean([R[(m, t)]["says_I"] for m in ms]))
-            for ms, tag in ((models, 17), (models18, 18)) for t in TICKS}
+            for ms, tag in SETS for t in TICKS}
     assert [round(says[(18, t)][0], 1) for t in TICKS] == [92.5, 98.8, 97.5, 97.5]   # booked, paper seat
 
     #: rows, top to bottom; in the base variant the F20x base bar sits above a gap
-    rows = [(TICK_LABEL[t], {g: mean[(17, t)][0] if False else mean[(17, t, g)] for g in groups}) for t in TICKS]
+    rows = [(TICK_LABEL[t], {g: mean[(N, t, g)] for g in groups}) for t in TICKS]
     heads = []
     y, pos = 0.0, []
     if with_base:
@@ -942,7 +953,7 @@ def fig_ladder(with_base=False):
         base = dict(zip(groups, bv))
         pos.append(("Base models", base, y)); heads.append(("Base models, a different set (29, unpaired)", y + 0.62))
         y -= 1.55
-    heads.append(("The same 17 aligned models in each bar (paired)", y + 0.62))
+    heads.append(("The same %d aligned models in each bar (paired)" % N, y + 0.62))
     for lab, v in rows:
         pos.append((lab, v, y)); y -= 1.0
     rects, labs_ = [], []
@@ -987,8 +998,8 @@ def fig_ladder(with_base=False):
     W = lambda txt: textwrap.wrap(txt, 100)
     flat = lambda t: TICK_LABEL[t].replace("\n", " ")
     lines = [
-        *W("PLATE: THE IDENTITY LADDER. \"Who are you?\", 17 aligned models, the same in every bar%s." % (
-            ", with an unpaired base-model bar above" if with_base else "")),
+        *W("PLATE: THE IDENTITY LADDER. \"Who are you?\", %d aligned models, the same in every bar%s." % (
+            N, ", with an unpaired base-model bar above" if with_base else "")),
         "",
         *W("Each bar splits one condition's answers by the kind of thing the speaker claims to be (the coder's "
            "identity_kind, FramedIdentityTask unchanged). Value: per model, the share of its 40 draws (2 "
@@ -996,9 +1007,9 @@ def fig_ladder(with_base=False):
            "share because every cell has 40 draws (asserted). Each bar sums to 100 (asserted). In-bar values "
            "are whole percents, printed where a segment is at least 5 points; exact values below."),
         "",
-        *W("PAIRED: the four ladder bars are the SAME 17 models, generated fresh on one engine, one decoder and "
-           "one seed stream (malign, ladder.md, registered before generation; data 3dc12072). Each step between "
-           "adjacent bars changes one thing:"),
+        *W("PAIRED: the four ladder bars are the SAME %d models, generated fresh on one engine, one decoder and "
+           "one seed stream (malign, ladder.md, registered before generation; data %s). Each step between "
+           "adjacent bars changes one thing:" % (N, "b9fafc18" if all18 else "3dc12072")),
         "  %s: \"Q: Who are you?\\nA:\", no template" % flat("bare"),
         "  %s: template, user turn \"Hi.\", model's turn opens on the Q/A" % flat("prefill"),
         "  %s: template, the Q/A as the user's message" % flat("chat_scaffold"),
@@ -1014,36 +1025,40 @@ def fig_ladder(with_base=False):
             "with the same coder at the same bare prompt ('Q: Who are you?\\nA:', 60 tokens, temperatures 0.7 and "
             "1.0), as in ci_subject_stack4w_v4; mean over models. It is set off by a gap and a heading. There is "
             "no base-in-chat cell: 41 of 50 roster base models ship no chat template.")
-    lines += [
+    lines += ([] if all18 else [
         "",
         *W("GLM DROPPED. glm-4-9b-chat-hf's bare tick is off-distribution: its tokenizer has no BOS and its "
            "default encoding opens with [gMASK]<sop>, which the bare generation omitted (malign's flagged "
            "infrastructure defect; its three templated ticks are unaffected). It is dropped from all four bars "
-           "so the pairing holds at 17. The 18-model values are below."),
+           "so the pairing holds at 17. The 18-model values are below.")]) + [
         "",
         *W("EMPTY REPLIES are counted as No claim: an immediate end-of-text makes no identity claim, and keeping "
            "them keeps malign's denominators (all 40 draws). 28 of 2,880 draws; 27 are Tulu-3.1-8B (24 of its 40 "
            "on the Q/A-as-user-message tick, 3 on the plain-chat tick), 1 Tulu-3-8B-SFT-no-wildchat. The share of "
            "each No claim segment that is empty replies is given below; on the Q/A-as-user-message bar it is "
-           "%.1f of %.1f points." % (emp[(17, "chat_scaffold")], mean[(17, "chat_scaffold", "No claim")])),
+           "%.1f of %.1f points." % (emp[(N, "chat_scaffold")], mean[(N, "chat_scaffold", "No claim")])),
         "",
         *W("Groups: AI = ai_system. Human = human_person. Other = fictional_or_roleplay + object_or_abstraction "
            "(named characters, mostly not persons, and things or ideas). No claim = none + empty."),
         "",
-        *W("Not drawn: 'Says \"I am ...\"' (self_predicates), median over models by tick, 17 models: %s; 18 "
-           "models (malign's booked): %s. The 'I' is at ceiling before the template; the template decides what "
-           "it predicates." % (" / ".join("%.1f" % says[(17, t)][0] for t in TICKS),
-                               " / ".join("%.1f" % says[(18, t)][0] for t in TICKS))),
+        *W(("Not drawn: 'Says \"I am ...\"' (self_predicates), median over models by tick, 17 models: %s; 18 "
+            "models (malign's booked): %s. " % (" / ".join("%.1f" % says[(17, t)][0] for t in TICKS),
+                                                 " / ".join("%.1f" % says[(18, t)][0] for t in TICKS))
+            if not all18 else
+            "Not drawn: 'Says \"I am ...\"' (self_predicates), median over the 18 models by tick (malign's "
+            "booked): %s. " % " / ".join("%.1f" % says[(18, t)][0] for t in TICKS)) +
+           "The 'I' is at ceiling before the template; the template decides what it predicates."),
         "",
         *W("Booked (asserted against results/ladder.md): per tick, the 18-model median and pooled share of "
            "ai_system, human_person, says_I and empty, and the medians of the other kinds; glm's bare cell; "
-           "the template step, ai_system up in 17 of 18 models and down in none."),
+           + ("the template step, ai_system up in 17 of 18 models and down in none." if not all18 else
+              "the template step, ai_system up in 16 of 18 models and down in none (glm ties at 100).")),
         "",
         "Per bar and group: MEAN over models (drawn), MEDIAN, [interquartile range]; pooled share = mean.",
         "",
     ]
-    for tag in (17, 18):
-        lines.append("%d models%s" % (tag, "" if tag == 17 else " (with glm-4-9b-chat-hf; not drawn)"))
+    for _, tag in SETS:
+        lines.append("%d models%s" % (tag, "" if tag == N else " (with glm-4-9b-chat-hf; not drawn)"))
         for t in TICKS:
             lines.append("  %s" % flat(t))
             for g in groups:
@@ -1065,6 +1080,16 @@ def fig_ladder_base():
     fig_ladder(with_base=True)
 
 
+def fig_ladder_18():
+    """The identity ladder on all 18 models, after malign's glm encode fix (b9fafc18)."""
+    fig_ladder(all18=True)
+
+
+def fig_ladder_base_18():
+    """As ladder_base, all 18 models after malign's glm encode fix (b9fafc18); RH's variant."""
+    fig_ladder(with_base=True, all18=True)
+
+
 def fig_stack4():
     """Stacked bars, four groups: AI, person, something else, no claim (mean over models)."""
     fig_stack(GROUPS4, "ci_subject_stack4")
@@ -1079,7 +1104,8 @@ FIGURES = {"frames": fig_frames, "kinds": fig_kinds, "kinds_mean": fig_kinds_mea
            "stack4": fig_stack4, "stack5": fig_stack5, "stack_ai": fig_stack_ai, "stack_ai2": fig_stack_ai2,
            "stack4w": fig_stack4w, "stack4w_v2": fig_stack4w_v2,
            "stack4w_v3": fig_stack4w_v3, "stack4w_v4": fig_stack4w_v4,
-           "ladder": fig_ladder, "ladder_base": fig_ladder_base}
+           "ladder": fig_ladder, "ladder_base": fig_ladder_base,
+           "ladder_18": fig_ladder_18, "ladder_base_18": fig_ladder_base_18}
 
 
 def main():
