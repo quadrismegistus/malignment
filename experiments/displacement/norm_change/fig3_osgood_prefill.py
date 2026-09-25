@@ -45,11 +45,19 @@ for p in (ROOT, HERE):
     if p not in sys.path:
         sys.path.insert(0, p)
 
-OUT_JSON = os.path.join(HERE, "results", "norms_levels_z_en_prefill30.json")
+#: --pop 30: RH's first cut, the 30 lineages with system_mode='empty' prefill cells (committed 5e7e3104).
+#: --pop 40: malign's declared population, roster.population("framed_empty"): 29 lineages read at
+#: 'empty' and 11 at 'default' whose render is byte-identical to empty (framed_empty.json records
+#: the evidence). The JSON keys below say "30" for the PREFILL POPULATION in both, so the drawing
+#: code reads one schema; "population" in the JSON says which.
+POP = sys.argv[sys.argv.index("--pop") + 1] if "--pop" in sys.argv else "30"
+assert POP in ("30", "40"), POP
+OUT_JSON = os.path.join(HERE, "results", "norms_levels_z_en_prefill%s.json" % POP)
 PUB_JSON = os.path.join(HERE, "results", "norms_levels_z_en.json")
 FRAMED_SRC = os.path.expanduser("~/malignment-data/norm_change/%s_long_v4_framed.csv.gz")
 BANDS = ("low", "all", "high")
-N_PREFILL = 30
+N_PREFILL = int(POP)
+FRAMED_EMPTY = os.path.join(ROOT, "roster", "models", "populations", "framed_empty.json")
 
 
 def populations():
@@ -59,7 +67,29 @@ def populations():
     assert not unresolved
     E = set(eps.items())
     keep50 = {"%s>%s" % e for e in E}
-    thirty = {(b, a) for b, a, m in M.clean_frame_pairs() if m == "empty" and (b, a) in E}
+    if POP == "40":
+        fe = json.load(open(FRAMED_EMPTY))["models"]
+        assert {m["model"] for m in fe} == set(roster.population("framed_empty"))
+        thirty = {(m["base"], m["model"]) for m in fe}
+        assert thirty <= E
+        #: every lineage must hold prefill cells at the mode framed_empty records -- except beaver,
+        #: whose 'empty' rows movement_v4 collapsed into byte-identical 'default' ones (no system
+        #: mode in its sort key; malign). The long table has ONE mode per lineage, so a lineage
+        #: filter selects the recorded cells.
+        from malignment import ch
+        got = {}
+        for x in ch.query("SELECT DISTINCT base, aligned, system_mode_aligned m FROM {db}.movement_v4 "
+                          "WHERE frame_aligned='prefill' AND base != aligned"):
+            got.setdefault((x["base"], x["aligned"]), set()).add(x["m"])
+        for m in fe:
+            k = (m["base"], m["model"])
+            assert len(got.get(k, ())) == 1, (k, got.get(k))
+            if "beaver" in m["model"]:
+                assert got[k] == {"default"} and m["system_mode"] == "empty", (k, got[k])
+            else:
+                assert got[k] == {m["system_mode"]}, (k, got[k], m["system_mode"])
+    else:
+        thirty = {(b, a) for b, a, m in M.clean_frame_pairs() if m == "empty" and (b, a) in E}
     assert len(thirty) == N_PREFILL, len(thirty)
     return keep50, {"%s>%s" % e for e in thirty}
 
@@ -147,7 +177,8 @@ def build():
                             "n_lineages": b["n_lineages"],
                             "up": b.get("up_mean"), "down": b.get("down_mean")}
                 for b in rec["bands"] if b.get("n_lineages")}
-    out = {"cuts": cuts, "n_raw": len(keep50), "n_prefill": len(keep30), "coverage": coverage,
+    out = {"population": "framed_empty" if POP == "40" else "system_mode empty (clean_frame_pairs)",
+           "cuts": cuts, "n_raw": len(keep50), "n_prefill": len(keep30), "coverage": coverage,
            "prefill_lineages": sorted(keep30),
            "ruler": "published sd per scale (norms_levels_z_en.json)",
            "scales": {}}
@@ -174,7 +205,10 @@ def draw():
     matplotlib.rcParams["font.family"] = pub_font()
     matplotlib.rcParams["font.sans-serif"] = [pub_font(), "DejaVu Sans"]
     matplotlib.rcParams["axes.unicode_minus"] = False
-    name = "fig3_norms_osgood_en_z_prefill"
+    #: V2 (RH, 2026-09-25, on the 40-lineage plate): open glyphs on the SAME line as the filled,
+    #: no dashed prefilled range, rows by each row's most extreme glyph, legend All/Least/Most
+    V2 = POP == "40"
+    name = "fig3_norms_osgood_en_z_prefill" + ("40" if V2 else "")
     for ext in (".png", ".pdf", ".caption.txt"):
         assert not os.path.exists(os.path.join(HERE, "figures", name + ext)), "refusing to overwrite " + name + ext
 
@@ -189,6 +223,12 @@ def draw():
         for band, v in (("all", sq), ("low", lo), ("high", hi)):
             assert abs(r[band]["move_pub_z"] - v) < 1e-12, (sc, band)
     P = {sc: D["scales"][sc]["prefill30"] for sc, *_ in rs}
+    if V2:
+        #: the signed value of the row's most extreme glyph, filled or open; most negative at the
+        #: top, which on matplotlib's upward y means sorted DESCENDING (row 0 is drawn lowest)
+        ext = lambda r: max((r[1], r[2], r[3], P[r[0]]["all"]["move_pub_z"], P[r[0]]["low"]["move_pub_z"],
+                             P[r[0]]["high"]["move_pub_z"]), key=abs)
+        rs = sorted(rs, key=ext, reverse=True)
     psq = np.array([P[r[0]]["all"]["move_pub_z"] for r in rs])
     plo = np.array([P[r[0]]["low"]["move_pub_z"] for r in rs])
     phi = np.array([P[r[0]]["high"]["move_pub_z"] for r in rs])
@@ -203,14 +243,16 @@ def draw():
     pad = 0.06 * (e.max() - e.min())
     #: the prefilled markers sit a hair below their row, the raw ones a hair above, so a
     #: coincident pair stays two marks; the row rule runs between them
-    DY = 0.17
+    DY = 0.0 if V2 else 0.17
+    OPEN_FACE = "none" if V2 else "white"      # on a shared line, an open glyph must not hide a filled one
     for i in range(n):
         ax.plot([e.min() - pad, e.max() + pad], [i, i], color=PUB_FAINT, linewidth=PUB_RULE_PT * 0.7,
                 zorder=1, solid_capstyle="butt")
         ax.plot([lo[i], hi[i]], [i + DY] * 2, color=PUB_GRAY, linewidth=PUB_RULE_PT * 1.6, zorder=2,
                 solid_capstyle="butt")
-        ax.plot([plo[i], phi[i]], [i - DY] * 2, color=PUB_GRAY, linewidth=PUB_RULE_PT * 0.9, zorder=2,
-                solid_capstyle="butt", linestyle=(0, (2, 1.2)))
+        if not V2:
+            ax.plot([plo[i], phi[i]], [i - DY] * 2, color=PUB_GRAY, linewidth=PUB_RULE_PT * 0.9, zorder=2,
+                    solid_capstyle="butt", linestyle=(0, (2, 1.2)))
     h_lo = ax.scatter(lo, y + DY, marker="v", s=17, facecolor=PUB_GRAY, edgecolor="none", zorder=3,
                       label="Least charged (lift)")
     h_sq = ax.scatter(sq, y + DY, marker="s", s=13, facecolor=PUB_MID, edgecolor="none", zorder=4,
@@ -218,11 +260,11 @@ def draw():
     h_hi = ax.scatter(hi, y + DY, marker="^", s=19, facecolor=PUB_INK, edgecolor="none", zorder=5,
                       label="Most charged (lift)")
     #: OPEN equivalents: the same shape and the same gray, as an outline
-    k_lo = ax.scatter(plo, y - DY, marker="v", s=17, facecolor="white", edgecolor=PUB_GRAY, linewidth=0.8,
+    k_lo = ax.scatter(plo, y - DY, marker="v", s=17, facecolor=OPEN_FACE, edgecolor=PUB_GRAY, linewidth=0.8,
                       zorder=3, label="Least charged (lift), prefilled")
-    k_sq = ax.scatter(psq, y - DY, marker="s", s=13, facecolor="white", edgecolor=PUB_MID, linewidth=0.8,
+    k_sq = ax.scatter(psq, y - DY, marker="s", s=13, facecolor=OPEN_FACE, edgecolor=PUB_MID, linewidth=0.8,
                       zorder=4, label="All prompts, prefilled")
-    k_hi = ax.scatter(phi, y - DY, marker="^", s=19, facecolor="white", edgecolor=PUB_INK, linewidth=0.8,
+    k_hi = ax.scatter(phi, y - DY, marker="^", s=19, facecolor=OPEN_FACE, edgecolor=PUB_INK, linewidth=0.8,
                       zorder=5, label="Most charged (lift), prefilled")
     ax.axvline(0, color=PUB_INK, linewidth=PUB_RULE_PT, zorder=6)
     ax.set_yticks(y)
@@ -247,9 +289,13 @@ def draw():
     #: two legend rows: filled = raw (base -> aligned, no template), open = prefilled
     leg_font = FontProperties(family=pub_font(), size=PUB_FONT_PT - 2)
     #: matplotlib fills legend COLUMNS first, so pairs go in column order: row 1 filled, row 2 open
-    fig.legend(handles=[h_sq, k_sq, h_hi, k_hi, h_lo, k_lo],
-               labels=["All prompts", "All, prefilled", "Most charged", "Most charged, prefilled",
-                       "Least charged", "Least charged, prefilled"],
+    #: V2 (RH): row 1 solid, row 2 open, each in the order All, Least charged, Most charged
+    order = ([(h_sq, "All prompts"), (k_sq, "All, prefilled"), (h_lo, "Least charged"),
+              (k_lo, "Least charged, prefilled"), (h_hi, "Most charged"), (k_hi, "Most charged, prefilled")]
+             if V2 else
+             [(h_sq, "All prompts"), (k_sq, "All, prefilled"), (h_hi, "Most charged"),
+              (k_hi, "Most charged, prefilled"), (h_lo, "Least charged"), (k_lo, "Least charged, prefilled")])
+    fig.legend(handles=[h for h, _ in order], labels=[l for _, l in order],
                prop=leg_font, frameon=False, handlelength=0.9, loc="outside lower center", ncol=3,
                scatterpoints=1, columnspacing=1.2, handletextpad=0.35)
 
@@ -259,10 +305,10 @@ def draw():
     small = min(t.get_fontsize() for t in fig.findobj(matplotlib.text.Text) if t.get_text().strip())
     out = os.path.join(HERE, "figures", name + ".png")
     print("  wrote %s (smallest type %.1f pt)" % (save(fig, out), small))
-    caption(out, rs, D)
+    caption(out, rs, D, V2)
 
 
-def caption(out, rs, D):
+def caption(out, rs, D, V2=False):
     import textwrap
     #: one line per paragraph, as fig3_osgood's captions (and RH: no hard-wrapping in prose files)
     W = lambda s: [s]
@@ -271,8 +317,8 @@ def caption(out, rs, D):
     n_off = sum(1 for sc, *_ in rs if abs(S[sc]["prefill30"]["all"]["move_pub_z"]) > abs(S[sc]["raw30p"]["all"]["move_pub_z"]))
     C = D["coverage"]
     L = [
-        "Figure 3z with the prefilled aligned arm. What alignment does to fourteen norm scales, raw and "
-        "prefilled, on one ruler.",
+        "Figure 3z with the prefilled aligned arm%s. What alignment does to fourteen norm scales, raw and "
+        "prefilled, on one ruler." % (" (%d lineages)" % D["n_prefill"] if V2 else ""),
         "",
         *W("FILLED markers are the published plate (fig3_norms_osgood_en_z), unchanged: base -> aligned "
            "with no template, per lineage the MEAN over its gated prompts of the change, then the median over "
@@ -282,33 +328,47 @@ def caption(out, rs, D):
         "",
         *W("OPEN markers are the same statistic for base -> aligned PREFILLED: the aligned model's chat "
            "template with an empty system message, the prompt's text prefilled at the start of the model's own "
-           "turn (movement_v4, frame_aligned='prefill'). The base side is the same raw base. They are drawn "
-           "just below the filled ones on each row, their lift range dashed."),
+           "turn (movement_v4, frame_aligned='prefill'). The base side is the same raw base. " + (
+               "They are drawn as outlines on the same line as the filled ones; only the filled markers' lift "
+               "range is drawn. Rows are ordered by each row's most extreme marker, filled or open, most "
+               "negative at the top." if V2 else
+               "They are drawn just below the filled ones on each row, their lift range dashed.")),
         "",
         *W("ONE RULER. Each open marker is converted to rating points and divided by the PUBLISHED plate's "
            "SD for that scale, not by the prefilled build's own, so a unit means the same thing for both sets "
            "of markers."),
         "",
-        *W("POPULATION: 30 OF THE 50. The prefilled arm exists with system_mode='empty' for %d of the 50 "
+        *(W("POPULATION: %d OF THE 50, malign's declared framed_empty (roster.population('framed_empty'); "
+            "roster/models/populations/framed_empty.json, which records the render evidence and every "
+            "exclusion). A lineage qualifies if nothing precedes the user turn but role markers, BOS and empty "
+            "system turns: 29 read at system_mode='empty', and 11 at 'default' whose template renders an empty "
+            "system message byte-identically to the default (Yi-1.5-9B-Chat, glm-4-9b-chat-hf, "
+            "falcon-7b-instruct and others) or refuses a system role (gemma-2-9b-it, recurrentgemma-9b-it). "
+            "beaver-7b-v1.0 is read at 'default': its empty-mode rows collapsed into byte-identical default-mode "
+            "ones in movement_v4, whose sort key carries no system mode. Excluded: templates that inject preamble "
+            "text (jais, llm-jp, AmberSafe, Teuken, mpt-7b-instruct, Llama-3.1-8B-Instruct's date block; "
+            "malign's sensitivity set), SmolLM3-3B's persona, and 3 lineages with no prefilled cells. The "
+            "filled markers stay on all 50." % D["n_prefill"]) if V2 else
+          W("POPULATION: 30 OF THE 50. The prefilled arm exists with system_mode='empty' for %d of the 50 "
            "endpoint lineages, all of which render an empty system slot; 17 more exist only with the default "
            "system message, which is not poolable with 'empty' ([6557]) and is not used; 3 have no prefilled "
            "cell. The filled markers stay on all 50. The 30 include jais-family-6p7b-chat and "
            "llm-jp-3-7.2b-instruct3, whose templates inject preamble text outside the system slot (malign "
            "would hold them to a sensitivity set), and omit beaver-7b-v1.0, whose empty-mode rows movement_v4 "
-           "collapsed into byte-identical default-mode ones (its sort key carries no system mode)." % D["n_prefill"]),
+           "collapsed into byte-identical default-mode ones (its sort key carries no system mode)." % D["n_prefill"])),
         "",
         *W("AND A SUBSET OF PROMPTS. Prefilled cells cover a declared 874-prompt set (the transgressive and "
            "institutional batteries, the slot corpus and a 105-pair transgressive sample; "
            "roster/prompts/populations/prefill.json), not a sample of the raw prompts, so it over-represents "
            "charged and institutional stems. The prefilled arm was measured on a median of %d English prompts a "
            "lineage against %d raw; %d of its %d (lineage, prompt) cells are also raw cells. So the table "
-           "below gives RAW three ways: all 50 lineages (the filled markers); the same 30; and the same 30 "
+           "below gives RAW three ways: all 50 lineages (the filled markers); the same %d; and the same %d "
            "on the SAME prompts as the prefilled arm, which is the comparison that isolates the frame." % (
                C["en_prompts_per_lineage_median_prefill"], C["en_prompts_per_lineage_median_raw"],
-               C["prefill_prompts_also_raw"], C["prefill_prompts"])),
+               C["prefill_prompts_also_raw"], C["prefill_prompts"], D["n_prefill"], D["n_prefill"])),
         "",
         *W("On %d of the 14 scales the prefilled all-prompts value sits further from zero than raw on the same "
-           "30 lineages and the same prompts." % n_off),
+           "%d lineages and the same prompts." % (n_off, D["n_prefill"])),
         "",
         *W("Control: the build reruns the published computation on the raw table over all 50 lineages and "
            "requires every scale and band to equal results/norms_levels_z_en.json exactly; the filled "
@@ -316,8 +376,9 @@ def caption(out, rs, D):
            "raw-arm cuts, applied to the prefilled rows unchanged."),
         "",
         "Per scale, on the published ruler (z): all prompts [least charged, most charged].",
-        "  %-20s %-19s %-19s %-19s %-19s" % ("scale", "raw, 50", "raw, same 30", "raw, 30, same pr.",
-                                              "prefilled, 30"),
+        "  %-20s %-19s %-19s %-19s %-19s" % ("scale", "raw, 50", "raw, same %d" % D["n_prefill"],
+                                              "raw, %d, same pr." % D["n_prefill"],
+                                              "prefilled, %d" % D["n_prefill"]),
     ]
     for sc, *_ in rs:
         cell = lambda k: "%+.3f [%+.3f,%+.3f]" % (S[sc][k]["all"]["move_pub_z"], S[sc][k]["low"]["move_pub_z"],

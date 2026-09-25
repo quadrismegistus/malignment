@@ -1,0 +1,34 @@
+Figure 3z with the prefilled aligned arm (40 lineages). What alignment does to fourteen norm scales, raw and prefilled, on one ruler.
+
+FILLED markers are the published plate (fig3_norms_osgood_en_z), unchanged: base -> aligned with no template, per lineage the MEAN over its gated prompts of the change, then the median over the 50 endpoint lineages, divided by the SD of that scale's own pooled values. Square: all prompts; triangles: lowest and highest third of charge lift, cut at +0.000 and +0.360.
+
+OPEN markers are the same statistic for base -> aligned PREFILLED: the aligned model's chat template with an empty system message, the prompt's text prefilled at the start of the model's own turn (movement_v4, frame_aligned='prefill'). The base side is the same raw base. They are drawn as outlines on the same line as the filled ones; only the filled markers' lift range is drawn. Rows are ordered by each row's most extreme marker, filled or open, most negative at the top.
+
+ONE RULER. Each open marker is converted to rating points and divided by the PUBLISHED plate's SD for that scale, not by the prefilled build's own, so a unit means the same thing for both sets of markers.
+
+POPULATION: 40 OF THE 50, malign's declared framed_empty (roster.population('framed_empty'); roster/models/populations/framed_empty.json, which records the render evidence and every exclusion). A lineage qualifies if nothing precedes the user turn but role markers, BOS and empty system turns: 29 read at system_mode='empty', and 11 at 'default' whose template renders an empty system message byte-identically to the default (Yi-1.5-9B-Chat, glm-4-9b-chat-hf, falcon-7b-instruct and others) or refuses a system role (gemma-2-9b-it, recurrentgemma-9b-it). beaver-7b-v1.0 is read at 'default': its empty-mode rows collapsed into byte-identical default-mode ones in movement_v4, whose sort key carries no system mode. Excluded: templates that inject preamble text (jais, llm-jp, AmberSafe, Teuken, mpt-7b-instruct, Llama-3.1-8B-Instruct's date block; malign's sensitivity set), SmolLM3-3B's persona, and 3 lineages with no prefilled cells. The filled markers stay on all 50.
+
+AND A SUBSET OF PROMPTS. Prefilled cells cover a declared 874-prompt set (the transgressive and institutional batteries, the slot corpus and a 105-pair transgressive sample; roster/prompts/populations/prefill.json), not a sample of the raw prompts, so it over-represents charged and institutional stems. The prefilled arm was measured on a median of 827 English prompts a lineage against 2558 raw; 33078 of its 33080 (lineage, prompt) cells are also raw cells. So the table below gives RAW three ways: all 50 lineages (the filled markers); the same 40; and the same 40 on the SAME prompts as the prefilled arm, which is the comparison that isolates the frame.
+
+On 13 of the 14 scales the prefilled all-prompts value sits further from zero than raw on the same 40 lineages and the same prompts.
+
+Control: the build reruns the published computation on the raw table over all 50 lineages and requires every scale and band to equal results/norms_levels_z_en.json exactly; the filled markers are then asserted equal to fig3_osgood.rows. Exploratory; lift bands are the published raw-arm cuts, applied to the prefilled rows unchanged.
+
+Per scale, on the published ruler (z): all prompts [least charged, most charged].
+  scale                raw, 50             raw, same 40        raw, 40, same pr.   prefilled, 40      
+  v6:vocalisation      +0.031 [+0.003,+0.058] +0.040 [+0.006,+0.059] +0.041 [+0.024,+0.058] +0.137 [+0.078,+0.170]
+  v6:fit               +0.045 [+0.062,+0.043] +0.050 [+0.069,+0.045] +0.046 [+0.065,+0.049] +0.093 [+0.118,+0.078]
+  v6:mundanity         +0.014 [+0.014,+0.024] +0.014 [+0.014,+0.028] +0.031 [+0.014,+0.041] +0.063 [+0.041,+0.098]
+  v6:makes_better      +0.029 [+0.039,+0.021] +0.028 [+0.037,+0.021] +0.029 [+0.045,+0.010] +0.071 [+0.091,+0.039]
+  warriner_valence     +0.019 [+0.015,+0.048] +0.018 [+0.015,+0.045] +0.003 [-0.008,+0.020] +0.079 [+0.026,+0.088]
+  warriner_dominance   +0.020 [+0.005,+0.047] +0.017 [+0.004,+0.036] -0.011 [-0.012,-0.003] +0.048 [+0.055,+0.075]
+  k_register_level     +0.022 [+0.018,+0.063] +0.021 [+0.012,+0.069] +0.051 [+0.025,+0.089] +0.022 [-0.039,+0.071]
+  v6:makes_worse       -0.001 [-0.000,-0.012] +0.001 [+0.002,-0.017] -0.002 [+0.002,-0.007] -0.027 [+0.003,-0.055]
+  v6:directedness      -0.010 [-0.005,-0.012] -0.010 [-0.005,-0.012] -0.006 [+0.004,-0.012] -0.021 [+0.002,-0.074]
+  k_concreteness       -0.021 [-0.012,-0.047] -0.019 [-0.012,-0.044] -0.022 [-0.008,-0.040] -0.052 [-0.018,-0.077]
+  k_vulgarity          -0.025 [-0.003,-0.074] -0.025 [-0.002,-0.061] -0.042 [-0.001,-0.087] -0.069 [+0.005,-0.145]
+  warriner_arousal     -0.053 [-0.043,-0.070] -0.047 [-0.043,-0.066] -0.035 [-0.015,-0.074] -0.059 [-0.034,-0.147]
+  k_bodily_harm        -0.067 [-0.025,-0.127] -0.067 [-0.025,-0.127] -0.054 [-0.019,-0.117] -0.089 [-0.043,-0.193]
+  k_transgressiveness  -0.051 [-0.017,-0.112] -0.053 [-0.016,-0.114] -0.039 [-0.009,-0.088] -0.120 [-0.031,-0.233]
+
+Producer: experiments/displacement/norm_change/fig3_osgood_prefill.py (imports norms_levels_z.build and fig3_osgood.rows unedited).
