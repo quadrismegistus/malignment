@@ -214,3 +214,12 @@ chicago 895 MB.
 
     chadwyck   1,333 texts   551,575 passages   1582-1954
     chicago    9,089 texts 4,198,863 passages   1880-2000
+
+## LENGTH RULE FOR FIGURE 5 (2026-09-25, `length_rule_test.py`; results/length_rule_test.md is local, results/ is ignored)
+
+The paper seat's objection: the human reference passages are 200 words; the model arms carry `quadrants.csv`'s 200-token cut; the Scorer's own minimum is 40 words. Tested on 5,197 passC narrative passages of the 25 pairs' models (rule (a) = the 4,574 `quadrants.csv` holds; (b) = all >= 40 words; median words 199 vs 197). Rule (a) reproduces the paper seat's 25-pair numbers exactly.
+
+    concreteness crossings   (a) base 1965, aligned 1914 (floor 10: 1915)   (b) base 1962, aligned 1908 (floor 10: 1907)
+    inner life (max 13.71)   (a) base 14.37, aligned 16.34                   (b) base 14.49, aligned 16.15
+
+The rule barely moves the existing placement. But within-model length slopes are not zero (per doubling of length: concreteness -0.052 z, inner life +0.24 points), so a frame with shorter passages (chat) needs a length-matched sensitivity (>= 150 words) beside the 40-word primary.
