@@ -1090,12 +1090,15 @@ def fig_ladder_base_18():
     fig_ladder(with_base=True, all18=True)
 
 
-def fig_ladder_v4():
+LADDER_V4_LABELS = ("Aligned models\n(untemplated)", "Aligned models\n(prefilled template)",
+                    "Aligned models\n(chat template)")
+
+
+def fig_ladder_v4(name="ci_subject_ladder_v4", labels=LADDER_V4_LABELS):
     """In ci_subject_stack4w_v4's design: base (F20x, unpaired) plus three ladder ticks on the same 18
     aligned models; the Q/A-as-user-message tick is left off the plate (RH, 2026-09-25)."""
     import numpy as np
     import statistics as st
-    name = "ci_subject_ladder_v4"
     for ext in (".png", ".pdf", ".tif", ".caption.txt"):
         assert not os.path.exists(os.path.join(FIG, name + ext)), "refusing to overwrite %s%s" % (name, ext)
     R, models = ladder_rows(fixed=True)
@@ -1104,8 +1107,7 @@ def fig_ladder_v4():
     groups = [g for g, _, _ in LADDER_GROUPS]
     assert groups == [g for g, _, _ in GROUPS4W2] and [c for *_, c in LADDER_GROUPS] == [c for *_, c in GROUPS4W2]
     F.check_halftones({g: c for g, _, c in LADDER_GROUPS})
-    BARS = [("Base models", None), ("Aligned models\n(untemplated)", "bare"),
-            ("Aligned models\n(prefilled template)", "prefill"), ("Aligned models\n(chat template)", "chat")]
+    BARS = [("Base models", None)] + list(zip(labels, ("bare", "prefill", "chat")))
     shorts = [b for b, _ in BARS]
     mean, med, iqr, emp, ns = {}, {}, {}, {}, {}
     #: the base bar exactly as ci_subject_stack4w_v4 drew it (F20x, 29 base models)
@@ -1190,8 +1192,14 @@ def fig_ladder_v4():
             q1, q3 = iqr[(b, g)]
             lines.append("  %-9s mean %5.1f  median %5.1f  [%5.1f-%5.1f]" % (g, mean[(b, g)], med[(b, g)], q1, q3))
         lines.append("")
-    lines.append("Producer: experiments/subject_position/framed_identity/plot.py ladder_v4.")
+    lines.append("Producer: experiments/subject_position/framed_identity/plot.py %s." % name.replace("ci_subject_", ""))
     save(p, name, "\n".join(lines))
+
+
+def fig_ladder_v5():
+    """As ladder_v4, the aligned bars labelled (raw), (prefilled), (chat) (RH)."""
+    fig_ladder_v4("ci_subject_ladder_v5", ("Aligned models\n(raw)", "Aligned models\n(prefilled)",
+                                           "Aligned models\n(chat)"))
 
 
 def fig_stack4():
@@ -1210,7 +1218,7 @@ FIGURES = {"frames": fig_frames, "kinds": fig_kinds, "kinds_mean": fig_kinds_mea
            "stack4w_v3": fig_stack4w_v3, "stack4w_v4": fig_stack4w_v4,
            "ladder": fig_ladder, "ladder_base": fig_ladder_base,
            "ladder_18": fig_ladder_18, "ladder_base_18": fig_ladder_base_18,
-           "ladder_v4": fig_ladder_v4}
+           "ladder_v4": fig_ladder_v4, "ladder_v5": fig_ladder_v5}
 
 
 def main():
