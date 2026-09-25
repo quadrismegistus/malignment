@@ -99,12 +99,17 @@ META = "meta" in sys.argv[1:]
 #: so internlm2 can meet the all-four-arms floor. codings.parquet holds one coding per id; codings_retest.parquet
 #: is a reliability retest and is NOT the population. New artifacts and figures carry the suffix.
 UNION = "sel12" in sys.argv[1:]
-USUF = "_sel12" if UNION else ""
+#: arms4 (RH, 2026-09-25): keep all four TEMPLATE_ARM arms -- base, raw (aligned, no template), prefill (aligned,
+#: chat template, the reply opening on the stem) and continue (aligned, chat template, "Continue this text:") --
+#: over the same lineages; until now only base and raw were drawn
+ALL4 = "arms4" in sys.argv[1:]
+USUF = ("_sel12" if UNION else "") + ("_arms4" if ALL4 else "")
 ARM_OUT = ARM_OUT.replace(".parquet", USUF + ".parquet")
 META_OUT = os.path.join(DATA, "arc_history_arm_meta%s%s.parquet" % (SUF, USUF))
 OUT = os.path.join(HERE, "figures", "arc_history_three_" + ("arms" if ARMS_ON else "preview") + SUF + ("_meta" if META else "") + USUF)
-NAME = {"base": "Base models", "raw": "Aligned models"}
-LINETYPE = {"Base models": "dotted", "Aligned models": "dashed"}      # Figure 5 v5+
+NAME = {"base": "Base models", "raw": "Aligned models", "prefill": "Aligned, chat, prefilled", "continue": "Aligned, chat, asked"}
+LINETYPE = {"Base models": "dotted", "Aligned models": "dashed",      # Figure 5 v5+
+            "Aligned, chat, prefilled": "dashdot", "Aligned, chat, asked": "solid"}
 X0, X1, XLAB, XMAX = 1600, 2005, 2011, 2150
 
 
@@ -187,7 +192,7 @@ def arm_passages():
     P = P[(P.narrative == True) & (P.n_words >= 40)]                    # noqa: E712
     n = P.groupby(["base", "arm"]).size().unstack(fill_value=0)
     keep = n.index[(n.reindex(columns=["base", "raw", "prefill", "continue"], fill_value=0) >= MIN_ARM).all(axis=1)]
-    P = P[P.base.isin(keep) & P.arm.isin(["base", "raw"])]
+    P = P[P.base.isin(keep) & P.arm.isin(["base", "raw", "prefill", "continue"] if ALL4 else ["base", "raw"])]
     #: the expanded lists come from write_lists() (wordfreq lives in the malignment venv, lltk in its own)
     Lj = json.load(open(LISTS))
     cog, emo, sw = set(Lj["cog"]), set(Lj["emo"]), set(Lj["stopwords"])

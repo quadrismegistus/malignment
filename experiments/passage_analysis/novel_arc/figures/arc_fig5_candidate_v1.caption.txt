@@ -1,0 +1,13 @@
+FIGURE 5 CANDIDATE: concreteness, valence, arousal and emotional language in English fiction,
+1600-2000, with four model arms.
+
+Gray points: decade medians over the book's arc_fiction texts (concreteness 81,555 texts; the rest
+75,974 with at least 2,000 content words); black line: lowess (span 0.3). Concreteness: Abs-
+Conc.Median.median, corpus-bias corrected. Valence, arousal: Warriner norms, token-weighted over
+content words mapped to the lexicon (inflections, British and old spellings, long-s). Emotional:
+share of words on a vetted emotion list (USAS E and emotion-rated X words with period-model
+neighbours, 1,121 base words). Arms: 30 model lineages (TEMPLATE_ARM), each model-arm's coherent
+narrative passages as one meta-text; median over lineages. Base models (dotted); aligned models
+given raw text (dashed); aligned models in their chat template with the reply prefilled with the
+story's opening (dash-dot) or asked to continue it (solid). Model concreteness is not bias-corrected
+(clean digital text).
