@@ -60,7 +60,18 @@ def run(model_id):
     from malignment import runners
     _cd = runners.compute_dtype
     runners.compute_dtype = lambda m, default=None: _cd(m, default=torch.bfloat16)
-    ld = ck.load()
+    if os.environ.get("HF_BATCH_PLAIN_LOAD"):
+        #: internlm2 (2026-09-25): its remote code needs transformers < 4.48 (it calls the
+        #: removed DynamicCache.get_max_length), and malignment's loader passes `dtype=`,
+        #: which 4.45 rejects. So load plainly; render/encode are unchanged.
+        from types import SimpleNamespace
+        from transformers import AutoModelForCausalLM, AutoTokenizer
+        tok = AutoTokenizer.from_pretrained(model_id, trust_remote_code=True, revision=ck.revision)
+        mdl = AutoModelForCausalLM.from_pretrained(model_id, trust_remote_code=True, revision=ck.revision,
+                                                   torch_dtype=torch.bfloat16).to("cuda").eval()
+        ld = SimpleNamespace(model=mdl, tok=tok, dev="cuda")
+    else:
+        ld = ck.load()
     if not getattr(ld.tok, "chat_template", None):
         o = _chat_template_override(model_id)
         if o:
