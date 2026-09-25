@@ -1,0 +1,3 @@
+K-LEXICON CHECK of the Figure 5 candidate: k valence and k charge (one model's 1-7 ratings; k has no
+arousal, and charge agrees with human arousal at r 0.60) over the arc_fiction history, with the four
+TEMPLATE_ARM arms as in arc_fig5_candidate_v1. Not human norms.
