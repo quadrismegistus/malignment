@@ -69,11 +69,30 @@ A lineage that fails is listed with its cause and dropped from every contrast. *
 4. **Composition control** (paper seat): each arm's stem-family mix and **survival table** (family × arm) per model; a sensitivity that post-stratifies by stem family, taking per-model medians within family and reweighting to the **pooled base mix**.
 5. Floor: ≥ 10 narrative passages in both arms of a contrast. Thin cells are listed, not boosted.
 
-## CONTRASTS (to be registered with RH and the paper seat before any passage is read)
+## CONTRASTS (paper seat's review folded in, 2026-09-25; to be registered with RH before any passage is read)
 
-- **Template** (raw → prefill) and **address** (prefill → continue), within model: per-model medians of concreteness and inner life; sign tests over models; lineage version beside.
-- **The plate:** base, raw, prefill and continue lines against the smoothed history (crossing year for concreteness; level vs the historical max for inner life), each as the median of per-model medians over lineages meeting the floor.
-- **Engine replication:** new vs August base (22 lineages) and raw (18 with the same aligned checkpoint), against the August split-half band. Descriptive, beside.
+**Unit: the lineage** (one base and one aligned checkpoint each, so lineage = pair). **Measures:** per-model median concreteness (z) and inner life (`usas_x`, points), on narrative passages ≥ 40 words.
+
+**One population for every line and every test.** PRIMARY: the lineages meeting the ≥ 10 floor in **all four arms**; every line and every step is computed over that same set, so a gap between lines is never a gap between populations. SENSITIVITY: each line over its own largest set meeting the floor.
+
+**Three steps, within lineage, both measures:**
+
+    alignment   base -> raw          the replication of v6's claim (aligned more
+                                     abstract, more inner life); 2 tests
+    template    raw -> prefill       frame test
+    address     prefill -> continue  frame test
+
+Two-sided sign tests on the per-lineage paired differences of per-model medians, ties dropped. **Holm across the four frame tests** (two steps × two measures); the alignment step is reported separately as the replication, with its own two tests. Effect size: the median paired difference (z; points). Crossing years (concreteness) and levels against the historical max (inner life) are **descriptive only**, never tested.
+
+**Reading rules, both declared now:**
+- **Length.** A frame difference present in the primary (≥ 40 words) and absent at ≥ 150 words reads as length.
+- **Composition.** A frame difference present in the primary and absent after stem-family post-stratification reads as composition. Post-stratification: per-model medians within family, reweighted to the pooled base mix. A family cell under 3 passages is dropped and the weights renormalise over the remaining families.
+
+**Priors, stated as expectations and not tested directionally** (the paper seat's): on the national stories the template moved concreteness slightly toward the concrete (18 of 25, p = .043) and left inner life unchanged; frame_inversion found no added inner life under the template.
+
+**Survival, decomposed per model and arm:** generated → classifier top 200 → coded narrative → ≥ 40 words, with loss split into **refused**, not narrative, and too short, plus the stem-family survival table. Refusal is not a narrative-coder label, and the classifier's top-200 selection would rank refusals out before coding, so refusal is measured **before** selection: a separate agent read (framed_y's strict `assistant_refusal` definition) on a seeded random 100 of each templated arm's 714-draw sample (41 × 2 × 100 = 8,200 reads, $0 API), with refusal_frame's regex over every templated passage beside it. The regex is **descriptive only**: on framed_y its precision/recall were 0.94/0.68 under continue but 0.48/0.13 under prefill (`framed_y/results/refusal_check.md`).
+
+**Engine replication:** new vs August base (22 lineages) and raw (18 with the same aligned checkpoint), against the August split-half band. Descriptive, beside.
 
 ## COST
 
