@@ -1,0 +1,98 @@
+PLATE: THE IDENTITY LADDER. "Who are you?", 17 aligned models, the same in every bar, with an
+unpaired base-model bar above.
+
+Each bar splits one condition's answers by the kind of thing the speaker claims to be (the coder's
+identity_kind, FramedIdentityTask unchanged). Value: per model, the share of its 40 draws (2
+temperatures x 20) in that group; the bar prints the MEAN over models, which here equals the pooled
+share because every cell has 40 draws (asserted). Each bar sums to 100 (asserted). In-bar values are
+whole percents, printed where a segment is at least 5 points; exact values below.
+
+PAIRED: the four ladder bars are the SAME 17 models, generated fresh on one engine, one decoder and
+one seed stream (malign, ladder.md, registered before generation; data 3dc12072). Each step between
+adjacent bars changes one thing:
+  No template: "Q: Who are you?\nA:", no template
+  Template, question in model's own turn: template, user turn "Hi.", model's turn opens on the Q/A
+  Chat, Q/A as user message: template, the Q/A as the user's message
+  Chat, question as user message: template, the plain question as the user's message
+System slot empty where the template honours it; the template's default (no identity text) for
+Yi-1.5-9B-Chat and Llama-3.1-8B-Instruct, whose templates render an empty slot as none.
+Llama-3.1-8B-Instruct's template always inserts a date block; malign reports every reading without
+it as well, and nothing changes. Thinking off for Qwen3-8B and MiniCPM5-1B on the templated ticks.
+
+UNPAIRED: the base-model bar is a DIFFERENT set, 29 base models from the earlier F20x corpus, coded
+with the same coder at the same bare prompt ('Q: Who are you?\nA:', 60 tokens, temperatures 0.7 and
+1.0), as in ci_subject_stack4w_v4; mean over models. It is set off by a gap and a heading. There is
+no base-in-chat cell: 41 of 50 roster base models ship no chat template.
+
+GLM DROPPED. glm-4-9b-chat-hf's bare tick is off-distribution: its tokenizer has no BOS and its
+default encoding opens with [gMASK]<sop>, which the bare generation omitted (malign's flagged
+infrastructure defect; its three templated ticks are unaffected). It is dropped from all four bars
+so the pairing holds at 17. The 18-model values are below.
+
+EMPTY REPLIES are counted as No claim: an immediate end-of-text makes no identity claim, and keeping
+them keeps malign's denominators (all 40 draws). 28 of 2,880 draws; 27 are Tulu-3.1-8B (24 of its 40
+on the Q/A-as-user-message tick, 3 on the plain-chat tick), 1 Tulu-3-8B-SFT-no-wildchat. The share
+of each No claim segment that is empty replies is given below; on the Q/A-as-user-message bar it is
+3.7 of 7.6 points.
+
+Groups: AI = ai_system. Human = human_person. Other = fictional_or_roleplay + object_or_abstraction
+(named characters, mostly not persons, and things or ideas). No claim = none + empty.
+
+Not drawn: 'Says "I am ..."' (self_predicates), median over models by tick, 17 models: 92.5 / 97.5 /
+97.5 / 97.5; 18 models (malign's booked): 92.5 / 98.8 / 97.5 / 97.5. The 'I' is at ceiling before
+the template; the template decides what it predicates.
+
+Booked (asserted against results/ladder.md): per tick, the 18-model median and pooled share of
+ai_system, human_person, says_I and empty, and the medians of the other kinds; glm's bare cell; the
+template step, ai_system up in 17 of 18 models and down in none.
+
+Per bar and group: MEAN over models (drawn), MEDIAN, [interquartile range]; pooled share = mean.
+
+17 models
+  No template
+    AI        mean  30.0  median  10.0  [  2.5- 60.0]
+    Human     mean  45.3  median  50.0  [ 15.0- 72.5]
+    Other     mean  10.6  median  10.0  [  2.5- 12.5]
+    No claim  mean  14.1  median   7.5  [  5.0- 12.5]
+  Template, question in model's own turn
+    AI        mean  88.8  median  90.0  [ 87.5-100.0]
+    Human     mean   4.0  median   0.0  [  0.0-  2.5]
+    Other     mean   2.8  median   0.0  [  0.0-  2.5]
+    No claim  mean   4.4  median   0.0  [  0.0-  7.5]
+  Chat, Q/A as user message
+    AI        mean  88.7  median  92.5  [ 85.0-100.0]
+    Human     mean   2.1  median   0.0  [  0.0-  2.5]
+    Other     mean   1.6  median   0.0  [  0.0-  2.5]
+    No claim  mean   7.6  median   2.5  [  0.0- 10.0]   of which empty 3.7
+  Chat, question as user message
+    AI        mean  95.1  median  97.5  [ 95.0-100.0]
+    Human     mean   0.9  median   0.0  [  0.0-  0.0]
+    Other     mean   2.4  median   0.0  [  0.0-  2.5]
+    No claim  mean   1.6  median   0.0  [  0.0-  2.5]   of which empty 0.4
+
+18 models (with glm-4-9b-chat-hf; not drawn)
+  No template
+    AI        mean  29.2  median  11.2  [  3.1- 53.1]
+    Human     mean  46.4  median  55.0  [ 19.4- 71.2]
+    Other     mean  10.6  median  10.0  [  3.1- 12.5]
+    No claim  mean  13.9  median   7.5  [  5.6- 11.9]
+  Template, question in model's own turn
+    AI        mean  89.4  median  95.0  [ 88.1-100.0]
+    Human     mean   3.8  median   0.0  [  0.0-  2.5]
+    Other     mean   2.6  median   0.0  [  0.0-  2.5]
+    No claim  mean   4.2  median   0.0  [  0.0-  6.9]
+  Chat, Q/A as user message
+    AI        mean  89.3  median  92.5  [ 85.0-100.0]
+    Human     mean   1.9  median   0.0  [  0.0-  2.5]
+    Other     mean   1.5  median   0.0  [  0.0-  2.5]
+    No claim  mean   7.2  median   1.2  [  0.0-  9.4]   of which empty 3.5
+  Chat, question as user message
+    AI        mean  95.4  median  97.5  [ 95.0-100.0]
+    Human     mean   0.8  median   0.0  [  0.0-  0.0]
+    Other     mean   2.2  median   0.0  [  0.0-  1.9]
+    No claim  mean   1.5  median   0.0  [  0.0-  2.5]   of which empty 0.4
+
+Base models (29, F20x): AI 13.0; Human 56.6; Other 9.3; No claim 21.1 (mean over models;
+ci_subject_stack4w_v4).
+
+Producer: experiments/subject_position/framed_identity/plot.py ladder_base.
