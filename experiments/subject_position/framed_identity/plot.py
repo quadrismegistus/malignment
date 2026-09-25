@@ -437,6 +437,59 @@ GROUPS5 = [("AI", ("ai_system",), "#000000"),
 MACHINE = re.compile(r"\b(robot|computer|machine|android|cyborg)s?\b")
 
 
+def _stack_plot(shorts, ns, mean, groups, fmt="%.1f", min_w=7, height=2.7, legend_nrow=None):
+    """One horizontal bar per condition, segments in `groups` order [(label, gray)]. -> plotnine plot"""
+    import matplotlib
+    matplotlib.use("Agg")
+    import pandas as pd
+    from plotnine import (ggplot, aes, geom_rect, geom_text, labs, scale_x_continuous, scale_y_continuous,
+                          scale_fill_manual, theme, element_text, element_blank, guides, guide_legend,
+                          coord_cartesian)
+    rects, labs_ = [], []
+    for i, short in enumerate(shorts):
+        y = len(shorts) - i
+        x0 = 0.0
+        for g, col in groups:
+            w = mean[(short, g)]
+            rects.append(dict(xmin=x0, xmax=x0 + w, ymin=y - 0.32, ymax=y + 0.32, grp=g))
+            #: a value inside its segment only where it fits; every value is in the caption
+            if w >= min_w:
+                labs_.append(dict(x=x0 + w / 2, y=y, lab=fmt % w,
+                                  col="white" if F.ink(col) >= 50 else "black"))
+            x0 += w
+    d, t = pd.DataFrame(rects), pd.DataFrame(labs_)
+    assert len(d) == len(shorts) * len(groups)
+    assert all(abs(v - 100) < 1e-9 for v in d.groupby("ymin").xmax.max()), d.groupby("ymin").xmax.max()
+    d["grp"] = pd.Categorical(d.grp, categories=[g for g, _ in groups])
+    fnt = F.pub_font()
+    W_IN, H_IN = F.PUB_SIZE[0], height
+    p = (ggplot()
+         + geom_rect(aes(xmin="xmin", xmax="xmax", ymin="ymin", ymax="ymax", fill="grp"), data=d,
+                     color=F.PUB_INK, size=0.3)
+         + geom_text(aes(x="x", y="y", label="lab", color="col"), data=t, size=7, family=fnt,
+                     va="center", show_legend=False)
+         + scale_fill_manual(dict(groups), name="", breaks=[g for g, _ in groups])
+         + scale_color_manual_identity()
+         + guides(fill=guide_legend(nrow=legend_nrow or (2 if len(groups) <= 4 else 3), byrow=True))
+         #: NOT scale limits: a bar summing to 100 plus a float hair put its last
+         #: rectangle outside limits=(0, 100) and plotnine DROPPED it -- a white
+         #: segment, so the gap read as the segment. coord_cartesian windows, never drops.
+         + scale_x_continuous(expand=(0, 0), breaks=[0, 25, 50, 75, 100],
+                              labels=lambda v: ["%g%%" % x for x in v])
+         + scale_y_continuous(expand=(0, 0), breaks=list(range(len(shorts), 0, -1)),
+                              labels=["%s (%d)" % (s_, ns[s_]) for s_ in shorts])
+         + coord_cartesian(xlim=(0, 100), ylim=(0.5, len(shorts) + 0.5), expand=False)
+         + labs(x="Answers to \u201cWho are you?\u201d, mean over models", y="")
+         + F.pub_theme(height=H_IN, grid="none")
+         + theme(figure_size=(W_IN, H_IN), legend_position="bottom", legend_title=element_blank(),
+                 legend_text=element_text(family=fnt, size=F.PUB_FONT_PT),
+                 legend_margin=0, legend_box_spacing=0.02, legend_key_size=9,
+                 axis_text_y=element_text(family=fnt, size=F.PUB_FONT_PT, color=F.PUB_INK),
+                 axis_ticks_major_y=element_blank()))
+
+    return p
+
+
 def fig_stack(groups, name):
     """Stacked bars: each condition's answers split by identity kind, MEAN over models, summing to 100."""
     import numpy as np
@@ -477,47 +530,7 @@ def fig_stack(groups, name):
            if x["identity_kind"] == "object_or_abstraction"]
     n_mach = sum(bool(MACHINE.search((x.get("predicated_identity") or "").lower())) for x in obj)
 
-    rects, labs_ = [], []
-    for i, short in enumerate(shorts):
-        y = len(shorts) - i
-        x0 = 0.0
-        for g, _, col in groups:
-            w = mean[(short, g)]
-            rects.append(dict(xmin=x0, xmax=x0 + w, ymin=y - 0.32, ymax=y + 0.32, grp=g))
-            #: a value inside its segment only where it fits; every value is in the caption
-            if w >= 7:
-                labs_.append(dict(x=x0 + w / 2, y=y, lab="%.1f" % w,
-                                  col="white" if F.ink(col) >= 50 else "black"))
-            x0 += w
-    d, t = pd.DataFrame(rects), pd.DataFrame(labs_)
-    assert len(d) == len(shorts) * len(groups)
-    assert all(abs(v - 100) < 1e-9 for v in d.groupby("ymin").xmax.max()), d.groupby("ymin").xmax.max()
-    d["grp"] = pd.Categorical(d.grp, categories=[g for g, _, _ in groups])
-    fnt = F.pub_font()
-    W_IN, H_IN = F.PUB_SIZE[0], 2.7
-    p = (ggplot()
-         + geom_rect(aes(xmin="xmin", xmax="xmax", ymin="ymin", ymax="ymax", fill="grp"), data=d,
-                     color=F.PUB_INK, size=0.3)
-         + geom_text(aes(x="x", y="y", label="lab", color="col"), data=t, size=7, family=fnt,
-                     va="center", show_legend=False)
-         + scale_fill_manual({g: c for g, _, c in groups}, name="", breaks=[g for g, _, _ in groups])
-         + scale_color_manual_identity()
-         + guides(fill=guide_legend(nrow=2 if len(groups) <= 4 else 3, byrow=True))
-         #: NOT scale limits: a bar summing to 100 plus a float hair put its last
-         #: rectangle outside limits=(0, 100) and plotnine DROPPED it -- a white
-         #: segment, so the gap read as the segment. coord_cartesian windows, never drops.
-         + scale_x_continuous(expand=(0, 0), breaks=[0, 25, 50, 75, 100],
-                              labels=lambda v: ["%g%%" % x for x in v])
-         + scale_y_continuous(expand=(0, 0), breaks=list(range(len(shorts), 0, -1)),
-                              labels=["%s (%d)" % (s_, ns[s_]) for s_ in shorts])
-         + coord_cartesian(xlim=(0, 100), ylim=(0.5, len(shorts) + 0.5), expand=False)
-         + labs(x="Answers to \u201cWho are you?\u201d, mean over models", y="")
-         + F.pub_theme(height=H_IN, grid="none")
-         + theme(figure_size=(W_IN, H_IN), legend_position="bottom", legend_title=element_blank(),
-                 legend_text=element_text(family=fnt, size=F.PUB_FONT_PT),
-                 legend_margin=0, legend_box_spacing=0.02, legend_key_size=9,
-                 axis_text_y=element_text(family=fnt, size=F.PUB_FONT_PT, color=F.PUB_INK),
-                 axis_ticks_major_y=element_blank()))
+    p = _stack_plot(shorts, ns, mean, [(g, c) for g, _, c in groups])
 
     W = lambda txt: textwrap.wrap(txt, 100)
     lines = [
@@ -582,6 +595,168 @@ def scale_color_manual_identity():
     return scale_color_identity()
 
 
+#: WHOSE NAME IS IT. The coder records the name and maker a speaker gives
+#: (self_name, maker_named) but not whether they are the speaker's own. This table
+#: decides that, per model: OWN = the releasing org, the model's own name, or its
+#: BASE model's org or name (so Tulu naming Meta or Llama is own; zephyr naming
+#: Mistral is own). First match on the model id wins; every model must match one
+#: (asserted), so a new model cannot fall through to "unnamed" silently.
+LINEAGE = [
+    ("tulu", r"tulu|\bai2\b|allen|llama|\bmeta\b"),
+    ("olmo", r"olmo|\bai2\b|allen"),
+    ("qwen", r"qwen|alibaba|tongyi"),
+    ("tinyllama", r"tinyllama"),
+    ("meta-llama/", r"llama|\bmeta\b"),
+    ("huggyllama/", r"llama|\bmeta\b"),
+    ("beaver", r"beaver|\bpku\b|alpaca|stanford|llama|\bmeta\b"),
+    ("smollm", r"smol ?lm|hugging ?face"),
+    ("huggingfaceh4/zephyr", r"zephyr|hugging ?face|mistral"),
+    ("stablelm", r"stable ?lm|stable zephyr|stability"),
+    ("mistralai/", r"mistral"),
+    ("01-ai/yi", r"\byi\b|01\.? ?ai"),
+    ("m-a-p/neo", r"\bneo\b|m-a-p|multimodal art projection"),
+    ("m-a-p/ct-llm", r"ct-llm|m-a-p"),
+    ("microsoft/phi", r"\bphi\b|microsoft"),
+    ("tiiuae/falcon", r"falcon|\btii\b|technology innovation"),
+    ("zai-org/glm", r"glm|zhipu|tsinghua|knowledge engineering|\bz\.ai\b"),
+    ("openbmb/minicpm", r"minicpm|modelbest|openbmb|tsinghua"),
+    ("deepseek", r"deepseek"),
+    ("llm360/amber", r"amber|llm360"),
+    ("togethercomputer/redpajama", r"redpajama|together"),
+    #: word-bounded: "BloomReach" (a stablelm answer's maker) is not BigScience
+    ("bigscience/bloom", r"\bbloomz?\b|bigscience|hugging ?face"),
+    ("pythia", r"pythia|eleuther|archangel|contextual ?ai"),
+]
+#: every name that is SOMEBODY's: the union of the table plus the labs no model here comes from
+KNOWN = "|".join([pat for _, pat in LINEAGE] + [
+    #: spaced spellings occur ("Open AI" twice, "Deep Mind Technologies" once; audited 2026-09-25)
+    r"open ?ai|chat ?gpt|\bgpt|anthropic|claude|google|gemini|\bbard\b|deep ?mind|open ?assistant|laion",
+    r"cohere|baidu|ernie|\bbing\b|copilot|alexa|siri|\bibm\b|watson|\bxai\b|grok|moonshot|kimi"])
+
+
+def own_pattern(model):
+    m = model.lower()
+    hits = [pat for key, pat in LINEAGE if key in m]
+    assert hits, "no lineage entry for %s" % model
+    return hits[0]
+
+
+def ai_whose(x):
+    """For an ai_system answer: 'itself', 'another', or 'unnamed' (no name, or only a made-up one)."""
+    own = re.compile(own_pattern(x["model"]))
+    names = [n.lower() for n in (x.get("self_name"), x.get("maker_named")) if n]
+    #: another wins: a speaker that names its own maker AND OpenAI has put someone else's name on itself
+    if any(re.search(KNOWN, n) and not own.search(n) for n in names):
+        return "another"
+    if any(own.search(n) for n in names):
+        return "itself"
+    return "unnamed"
+
+
+GROUPS_AI = [("AI, names itself", "#000000"),
+             ("AI, names no model", "#333333"),
+             ("AI, names another model", "#666666"),
+             ("A person", "#999999"),
+             ("Something else", "#cccccc"),
+             ("No identity claim", "#ffffff")]
+
+
+def group_ai(x):
+    k = x["identity_kind"]
+    if k == "ai_system":
+        return {"itself": "AI, names itself", "unnamed": "AI, names no model",
+                "another": "AI, names another model"}[ai_whose(x)]
+    return {"human_person": "A person", "fictional_or_roleplay": "Something else",
+            "object_or_abstraction": "Something else", "none": "No identity claim"}[k]
+
+
+def fig_stack_ai():
+    """Stacked bars, AI split by whose name it gives: its own, none, or another model's (RH, 2026-09-25)."""
+    import numpy as np
+    name = "ci_subject_stack_ai"
+    for ext in (".png", ".pdf", ".tif", ".caption.txt"):
+        assert not os.path.exists(os.path.join(FIG, name + ext)), "refusing to overwrite %s%s" % (name, ext)
+    S, B, swapped, pooled = _checked()
+    F.check_halftones(dict(GROUPS_AI))
+    labels = [g for g, _ in GROUPS_AI]
+    measures = [(g, (lambda g: lambda x: group_ai(x) == g)(g)) for g in labels]
+    shorts = [short for _, short in COND]
+    ns, mean, pool, ex = {}, {}, {}, collections.defaultdict(collections.Counter)
+    for lab, short in COND:
+        keep = per_model(S[lab])
+        for m_ in keep:
+            own_pattern(m_)                                     # every model is in the table
+        n, m = medians(S[lab], measures, "mean")
+        ns[short] = n
+        assert abs(sum(m) - 100) < 1e-9, (short, sum(m))
+        rows = [x for g in keep.values() for x in g]
+        for g, v in zip(labels, m):
+            mean[(short, g)] = v
+            pool[(short, g)] = 100 * sum(group_ai(x) == g for x in rows) / len(rows)
+        for x in rows:
+            if x["identity_kind"] == "ai_system":
+                w = ai_whose(x)
+                nm = " / ".join(n for n in (x.get("self_name"), x.get("maker_named")) if n)
+                if nm:
+                    ex[(short, w)][nm] += 1
+        #: the AI slices together are the AI kind: same mean as the four-group plate
+        ai_mean = medians(S[lab], [("ai", lambda x: x["identity_kind"] == "ai_system")], "mean")[1][0]
+        assert abs(sum(mean[(short, g)] for g in labels[:3]) - ai_mean) < 1e-9
+    #: categorical anchors, one per condition, from the per-model tables
+    assert ex[(shorts[0], "another")].most_common(1)[0][0].lower().endswith("openai")
+    assert any("qwen" in k.lower() for k in ex[(shorts[2], "itself")])
+
+    p = _stack_plot(shorts, ns, mean, GROUPS_AI, fmt="%.0f%%", min_w=5, height=2.9, legend_nrow=3)
+
+    W = lambda txt: textwrap.wrap(txt, 100)
+    lines = [
+        "PLATE: WHAT THE SPEAKER SAYS IT IS, WITH AI SPLIT BY WHOSE NAME IT GIVES. \"Who are you?\", one",
+        "coder, three model sets.",
+        "",
+        *W("Each bar is one condition's answers split by the kind of thing the speaker claims to be, and "
+           "the AI answers further by the name they give. Value: per model, the share of its answers in "
+           "that group; the bar prints the MEAN over models (each model once; each bar sums to 100, "
+           "asserted). Labels inside segments are rounded to whole percents and printed only where the "
+           "segment is at least 5 points wide; exact values are below. The three AI slices sum to the AI "
+           "segment of ci_subject_stack4 (asserted)."),
+        "",
+        *W("AI, names itself: the speaker's self_name or maker_named matches its OWN lineage. AI, names "
+           "another model: it names a known model or lab that is not its own (another wins where both "
+           "occur). AI, names no model: neither, including a made-up name ('Luna', 'Sam', 'TechCraft AI "
+           "team'). OWN is decided by a table in plot.py (LINEAGE), not by the coder: the releasing org, "
+           "the model's name, or its base model's org or name, so Tulu naming Meta is own and zephyr "
+           "naming Mistral is own. The table covers every model drawn (asserted)."),
+        "",
+        "Other groups as ci_subject_stack4: a person; something else (named character, or thing or idea);",
+        "no identity claim.",
+        "",
+        "What the named AI answers name (self_name / maker_named, most common first):",
+    ]
+    for short in shorts:
+        for w, lab_ in (("itself", "own"), ("another", "another's")):
+            c = ex[(short, w)]
+            if c:
+                lines += W("  %s, %s: %s" % (short, lab_, "; ".join("%s (%d)" % kv for kv in c.most_common(6))))
+    lines += [
+        "",
+        *W("FENCES: as ci_subject_frames (same strata, same producer). Three different model sets, not "
+           "paired lineages (%d, %d, %d). The untemplated conditions are the F20x corpus recoded with this "
+           "coder (prompt 'Q: {q}\\nA:', no chat template); the chat condition is a fresh run, empty "
+           "system block, minus SmolLM3-3B. Coder kappa 0.802 against F20x's. No base-in-chat cell: 41 of "
+           "50 roster base models ship no chat template." % tuple(ns[s_] for s_ in shorts)),
+        "",
+        "Per condition and group: MEAN over models (drawn), then the pooled share of all answers.",
+        "",
+    ]
+    for short in shorts:
+        lines.append("%s (%d models)" % (short, ns[short]))
+        for g in labels:
+            lines.append("  %-26s mean %5.1f   pooled %5.1f" % (g, mean[(short, g)], pool[(short, g)]))
+        lines.append("")
+    lines.append("Producer: experiments/subject_position/framed_identity/plot.py stack_ai.")
+    save(p, name, "\n".join(lines))
+
+
 def fig_stack4():
     """Stacked bars, four groups: AI, person, something else, no claim (mean over models)."""
     fig_stack(GROUPS4, "ci_subject_stack4")
@@ -593,7 +768,7 @@ def fig_stack5():
 
 
 FIGURES = {"frames": fig_frames, "kinds": fig_kinds, "kinds_mean": fig_kinds_mean,
-           "stack4": fig_stack4, "stack5": fig_stack5}
+           "stack4": fig_stack4, "stack5": fig_stack5, "stack_ai": fig_stack_ai}
 
 
 def main():
