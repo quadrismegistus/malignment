@@ -16,7 +16,10 @@ OUT = os.path.join(DATA, "template_arm", "coding", "codings.parquet")
 
 def main(runs):
     import pyarrow as pa, pyarrow.parquet as pq
-    batches = json.load(open(os.path.join(DATA, "template_arm", "coding", "batches.json")))
+    batches = []
+    for f in sorted(os.listdir(os.path.join(DATA, "template_arm", "coding"))):
+        if f.startswith("batches") and f.endswith(".json"):          #: batches.json + stragglers
+            batches += json.load(open(os.path.join(DATA, "template_arm", "coding", f)))
     asked = {i for b in batches for i in b["ids"]}
     got, stray = {}, 0
     for run in runs:
@@ -31,8 +34,19 @@ def main(runs):
     old = {}
     if os.path.exists(OUT):
         old = {r["id"]: r for r in pq.read_table(OUT).to_pylist()}
-    old.update(got)
+    #: NEVER overwrite a coding from another run. A second coding of an id (the straggler
+    #: pass's fillers) is a RETEST and goes to its own file.
+    retest = {i: c for i, c in got.items() if i in old and old[i].get("run") != c["run"]}
+    for i, c in got.items():
+        if i not in retest:
+            old[i] = c
     pq.write_table(pa.Table.from_pylist(list(old.values())), OUT, compression="zstd")
+    if retest:
+        RT = OUT.replace("codings.parquet", "codings_retest.parquet")
+        prev = {(r["id"], r["run"]): r for r in pq.read_table(RT).to_pylist()} if os.path.exists(RT) else {}
+        prev.update({(i, c["run"]): c for i, c in retest.items()})
+        pq.write_table(pa.Table.from_pylist(list(prev.values())), RT, compression="zstd")
+        print("retest codings (not overwritten): %d -> %s" % (len(retest), RT))
     per_batch_missing = [b["file"] for b in batches if any(i not in old for i in b["ids"])]
     print("this harvest %d | total %d of %d asked | stray %d | batches with a missing id: %d"
           % (len(got), len(old), len(asked), stray, len(per_batch_missing)))

@@ -19,18 +19,23 @@ BREAK = ("## break\\n\\nIf narrative is false, find where the non-narrative mate
 
 
 def main():
+    import argparse
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--tag", default="", help="batches<tag>.json -> ta_code<tag>_<k>.js")
+    ap.add_argument("--nchunk", type=int, default=NCHUNK)
+    args = ap.parse_args()
     src = open(SRC).read()
-    batches = json.load(open(os.path.join(DATA, "template_arm", "coding", "batches.json")))
-    size = -(-len(batches) // NCHUNK)
-    for k in range(NCHUNK):
+    batches = json.load(open(os.path.join(DATA, "template_arm", "coding", "batches%s.json" % args.tag)))
+    size = -(-len(batches) // args.nchunk)
+    for k in range(args.nchunk):
         chunk = batches[k * size:(k + 1) * size]
         s = src
         i = s.index("const BATCHES = "); j = s.index("\n", i)
         s = s[:i] + "const BATCHES = " + json.dumps(chunk) + s[j:]
         rep = [
-            ("name: 'passc-shard-00'", "name: 'ta-code-%d'" % k),
+            ("name: 'passc-shard-00'", "name: 'ta-code%s-%d'" % (args.tag, k)),
             ("description: 'Pass C shard 0 of 12: two blind coders over 3210 passages'",
-             "description: 'TEMPLATE_ARM Figure 5 coding, chunk %d of %d: passC rubric + break, claude-opus-5, %d batches'" % (k, NCHUNK, len(chunk))),
+             "description: 'TEMPLATE_ARM Figure 5 coding%s, chunk %d of %d: passC rubric + break, claude-opus-5, %d batches'" % (args.tag, k, args.nchunk, len(chunk))),
             ("phases: [{ title: 'Code', detail: '2 coders x 72 batches, Opus high effort' }]",
              "phases: [{ title: 'Code', detail: '1 coder x %d batches, claude-opus-5 pinned, high effort' }]" % len(chunk)),
             ("For each passage return five codes.", "For each passage return six codes."),
@@ -40,9 +45,9 @@ def main():
             ("degree: r.degree, span: r.span }", "degree: r.degree, span: r.span, break: r.break }"),
             ("for (const coder of ['A', 'B'])", "for (const coder of ['A'])"),
             ("{ label: `s00:${coder}:b${bi}`, phase: 'Code', schema: SCHEMA, effort: 'high' }",
-             "{ label: `ta%d:b${bi}`, phase: 'Code', schema: SCHEMA, effort: 'high', model: 'claude-opus-5' }" % k),
-            ("log(`shard 0:", "log(`ta chunk %d:" % k), ("log(`shard 0 done:", "log(`ta chunk %d done:" % k),
-            ("_shard: 0,", "_shard: 'ta%d'," % k),
+             "{ label: `ta%s%d:b${bi}`, phase: 'Code', schema: SCHEMA, effort: 'high', model: 'claude-opus-5' }" % (args.tag, k)),
+            ("log(`shard 0:", "log(`ta%s chunk %d:" % (args.tag, k)), ("log(`shard 0 done:", "log(`ta%s chunk %d done:" % (args.tag, k)),
+            ("_shard: 0,", "_shard: 'ta%s%d'," % (args.tag, k)),
             #: passC's return carries every id twice (_missing_B is all of them with one
             #: coder) and fails the workflow boundary's 4,096-element cap after every agent
             #: has finished; the codings are read from the journal (harvest.py). Counts only.
@@ -52,7 +57,7 @@ def main():
         for a, b in rep:
             assert s.count(a) == 1, (k, a[:50], s.count(a))
             s = s.replace(a, b)
-        out = os.path.join(HERE, "ta_code_%d.js" % k)
+        out = os.path.join(HERE, "ta_code%s_%d.js" % (args.tag, k))
         open(out, "w").write(s)
         print("%s  %d batches, %d passages" % (out, len(chunk), sum(len(b["ids"]) for b in chunk)))
 

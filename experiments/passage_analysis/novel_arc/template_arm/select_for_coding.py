@@ -39,7 +39,10 @@ def pid(m, arm, stem, i):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--write", action="store_true")
+    ap.add_argument("--cells", nargs="*", help="only these cells, as model:arm (a straggler pass)")
+    ap.add_argument("--tag", default="", help="output suffix, e.g. _2 -> selection_2.parquet, batches_2.json")
     a = ap.parse_args()
+    only = {tuple(c.rsplit(":", 1)) for c in (a.cells or [])}
     import pyarrow as pa, pyarrow.parquet as pq, collections
     t = pq.read_table(SRC).to_pydict()
     cells = collections.defaultdict(list)
@@ -51,6 +54,8 @@ def main():
     clf = None
     sel, survival, skipped = [], [], []
     for (m, arm), js in sorted(cells.items()):
+        if only and (m, arm) not in only:
+            continue
         if len(js) < FULL[arm]:
             skipped.append((m, arm, len(js)))
             continue
@@ -83,18 +88,20 @@ def main():
     if not a.write:
         return
     os.makedirs(os.path.join(OUT, "batches"), exist_ok=True)
-    pq.write_table(pa.Table.from_pylist(sel), os.path.join(OUT, "selection.parquet"), compression="zstd")
-    pq.write_table(pa.Table.from_pylist(survival), os.path.join(OUT, "survival_generation.parquet"))
+    if not a.tag and os.path.exists(os.path.join(OUT, "selection.parquet")):
+        raise SystemExit("selection.parquet exists and is FIXED (coded); write a straggler pass with --tag")
+    pq.write_table(pa.Table.from_pylist(sel), os.path.join(OUT, "selection%s.parquet" % a.tag), compression="zstd")
+    pq.write_table(pa.Table.from_pylist(survival), os.path.join(OUT, "survival_generation%s.parquet" % a.tag))
     import random
     order = list(range(len(sel))); random.Random(20260925).shuffle(order)   #: mixed batches: arms and models interleaved
     batches = []
     for b in range(0, len(order), BATCH):
         ids = [sel[k]["id"] for k in order[b:b + BATCH]]
-        fn = os.path.join(OUT, "batches", "ta-%04d.json" % (b // BATCH))
+        fn = os.path.join(OUT, "batches", "ta%s-%04d.json" % (a.tag, b // BATCH))
         json.dump({sel[k]["id"]: {"f": sel[k]["stem"], "c": sel[k]["text"]} for k in order[b:b + BATCH]},
                   open(fn, "w"), ensure_ascii=False)
         batches.append({"file": fn, "ids": ids})
-    json.dump(batches, open(os.path.join(OUT, "batches.json"), "w"))
+    json.dump(batches, open(os.path.join(OUT, "batches%s.json" % a.tag), "w"))
     print("wrote %d batches -> %s" % (len(batches), OUT))
 
 
