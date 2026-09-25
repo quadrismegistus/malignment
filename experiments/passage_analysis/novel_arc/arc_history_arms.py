@@ -5,6 +5,18 @@
     ~/github/lltk/.venv/bin/python -u arc_history_arms.py --arms   (measure_lltk needs lltk)
                                                         -> $MALIGNMENT_DATA/novel_arc/arc_history_arm_passages.parquet
                                                           figures/arc_history_three_arms.{png,pdf,caption.txt}
+    add v2 to any of these (and run --count v2 after --write-lists v2): the lists PARTITIONED BY RATED KIND
+    across the X and E work, not by the list a word came from (RH, 2026-09-25: emotion words carry the trend;
+    E through the X procedure). Outputs suffixed _v2.
+
+V2 LISTS. Base words: X's vetted keeps (precision_keep_v2_vetted.csv, keep_vetted) and E's
+(precision_e_keep_v2_vetted.csv, keep_vetted), disjoint by construction (E never re-rated an X-rated form).
+COGNITIVE = rated kind cognition, attention or perception; EMOTIONAL = emotion. VOLITION (want-less:
+wish, hope, desire, intend...) sits in neither until RH places it; speech and other in neither. RH's
+interiority removals (happy, fear, love, loved...) stand: they are X keep_vetted False. Variants: a
+MorphAdorner variant the rater kept enters a list when a word it spells is on that list, less common
+modern words (zipf >= 3); long-s readings of every form (zipf < 2); the expanded stopwords out --
+arc_interiority_precision.py's rules, unchanged.
 
 HISTORY, all three panels over the book's arc_fiction set (abstraction.scores_rep, arc_corpus =
 'arc_fiction', 82,080 reps, each rep's own score), drawn as Figure 5 draws its history: per decade the
@@ -45,17 +57,21 @@ from malignment import figure as F                              # noqa: E402
 
 DATA = os.path.join(os.environ.get("MALIGNMENT_DATA", os.path.expanduser("~/malignment-data")), "novel_arc")
 TA = os.path.join(os.environ.get("MALIGNMENT_DATA", os.path.expanduser("~/malignment-data")), "template_arm", "coding")
-COUNTS = os.path.join(DATA, "arc_interiority_texts_precision_vetted.parquet")
+V2 = "v2" in sys.argv[1:]
+SUF = "_v2" if V2 else ""
+COUNTS = os.path.join(DATA, "arc_cogemo_texts_v2.parquet" if V2 else "arc_interiority_texts_precision_vetted.parquet")
+COG_COL, EMO_COL = ("n_cog", "n_emo") if V2 else ("n_cleanx_p", "n_cand_p")
+COG_KINDS, EMO_KINDS = {"cognition", "attention", "perception"}, {"emotion"}
 CONC = os.path.join(DATA, "arc_concreteness_texts.parquet")
-ARM_OUT = os.path.join(DATA, "arc_history_arm_passages.parquet")
-LISTS = os.path.join(DATA, "arc_vetted_lists_expanded.json")
+ARM_OUT = os.path.join(DATA, "arc_history_arm_passages%s.parquet" % SUF)
+LISTS = os.path.join(DATA, "arc_cogemo_lists_v2.json" if V2 else "arc_vetted_lists_expanded.json")
 BIAS = "/Volumes/diderot/DH/data/data_abslithist/scores/corpus_bias_coefficients.json"
 MIN_CONTENT, MIN_DECADE, MIN_ARM = 2000, 3, 10
 #: RH dropped RWKV (TEMPLATE_ARM.md amendment 3, malignment 4bd3f90b: its bf16 output is 88-90% repeated-word
 #: loops). Its raw cells are coded and in selection.parquet, so the exclusion is stated, not left to the floor.
 DROPPED = {"RWKV/rwkv-4-7b-pile"}
 ARMS_ON = "--arms" in sys.argv
-OUT = os.path.join(HERE, "figures", "arc_history_three_" + ("arms" if ARMS_ON else "preview"))
+OUT = os.path.join(HERE, "figures", "arc_history_three_" + ("arms" if ARMS_ON else "preview") + SUF)
 NAME = {"base": "Base models", "raw": "Aligned models"}
 LINETYPE = {"Base models": "dotted", "Aligned models": "dashed"}      # Figure 5 v5+
 X0, X1, XLAB, XMAX = 1600, 2005, 2011, 2150
@@ -109,8 +125,8 @@ def history():
     T = T[(T.n_content >= MIN_CONTENT) & T.year.between(1600, 2009)]
     assert len(T) == 75974, len(T)                   # ARC_INTERIORITY_PRECISION_VETTED.md
     return {"conc": (decades(C.year, C.conc_corr), len(C)),
-            "cog": (decades(T.year, T.n_cleanx_p / T.n_content), len(T)),
-            "emo": (decades(T.year, T.n_cand_p / T.n_content), len(T))}
+            "cog": (decades(T.year, T[COG_COL] / T.n_content), len(T)),
+            "emo": (decades(T.year, T[EMO_COL] / T.n_content), len(T))}
 
 
 def arm_passages():
@@ -226,10 +242,11 @@ def main():
         "pooled. Top: concreteness, the book's Abs-Conc.Median.median, corrected for corpus bias as in the book "
         "(v5) (%s texts). Middle and bottom: share of a text's alphabetic non-stopword tokens on a word list "
         "(lltk.text_freqs surface forms, with MorphAdorner and long-s variants of kept words), texts with at least "
-        "%s such tokens (%s texts). Cognitive: the USAS X words an LLM rater kept under a precision-first rule, "
-        "hand-vetted (872 base words; 68%% cognition by token mass). Emotional: period-model neighbours of X rated "
-        "and vetted the same way (1,077 base words; 67%% emotion)." % (
-            MIN_DECADE, format(H["conc"][1], ","), format(MIN_CONTENT, ","), format(H["cog"][1], ",")) + (
+        "%s such tokens (%s texts). " % (MIN_DECADE, format(H["conc"][1], ","), format(MIN_CONTENT, ","), format(H["cog"][1], ",")) + (
+        V2_CAPTION() if V2 else
+        "Cognitive: the USAS X words an LLM rater kept under a precision-first rule, "
+        "hand-vetted (872 base words; 68% cognition by token mass). Emotional: period-model neighbours of X rated "
+        "and vetted the same way (1,077 base words; 67% emotion).") + (
         info + " Model arms: per model the median over its coherent narrative passages, then the median over lineages; "
         "passage values, not text values, so medians compare and spreads do not. Model concreteness is not "
         "bias-corrected (clean digital text)." if ARMS_ON else ""))
@@ -240,9 +257,88 @@ def main():
         print(k, "decades %d, texts %d, range %.4f..%.4f" % (len(h), n, h.value.min(), h.value.max()))
 
 
+def V2_CAPTION():
+    info = json.load(open(LISTS))["info"]
+    return ("Word lists from USAS X (cognition) and USAS E (emotion), each with its period-model neighbours, rated "
+            "by an LLM under a precision-first rule (keep a word only if every common sense is mental) and hand-vetted; "
+            "split by the rated kind of each word, not by field. Cognitive: cognition, attention and perception words "
+            "(%s base words). Emotional: emotion words (%s). Volition words (%s) are in neither panel."
+            % (format(info["cog_base"], ","), format(info["emo_base"], ","), format(info["volition_base"], ",")))
+
+
+def v2_lists():
+    """-> {cog, emo, stopwords, info}: the kind partition, expanded by arc_interiority_precision's rules."""
+    from wordfreq import zipf_frequency
+    import arc_interiority as A
+    SH = os.path.expanduser("~/malignment-data/interiority_norms")
+    X = pd.read_csv(os.path.join(SH, "precision_keep_v2_vetted.csv"))
+    E = pd.read_csv(os.path.join(SH, "precision_e_keep_v2_vetted.csv"))
+    assert (len(X), len(E)) == (15099, 17635), (len(X), len(E))
+    assert not set(X.form) & set(E.form), "an E form was re-rated"
+    B = pd.concat([X[X.spelling_of.isna() & X.keep_vetted][["form", "kind"]],
+                   E[E.spelling_of.isna() & E.keep_vetted][["form", "kind"]]])
+    base = {"cog": set(B.form[B.kind.isin(COG_KINDS)]), "emo": set(B.form[B.kind.isin(EMO_KINDS)])}
+    #: dreaded and regretted are E seeds AND the keep-anchors, so neither consensus file carries them (items
+    #: excluded anchors; the anchor rows are dropped). Rated keep, kind emotion, in every calibrated batch.
+    anchors = {"dreaded", "regretted"}
+    assert not anchors & (set(X.form) | set(E.form))
+    base["emo"] |= anchors
+    V = pd.concat([X[X.spelling_of.notna() & X.keep], E[E.spelling_of.notna() & E.keep]])
+    _, sw, _ = A.lists_expanded()
+    out, info = {}, {"cog_base": len(base["cog"]), "emo_base": len(base["emo"]), "emo_anchor_seeds_added": sorted(anchors),
+                     "volition_base": int((B.kind == "volition").sum()), "other_base": int((~B.kind.isin(COG_KINDS | EMO_KINDS | {"volition"})).sum())}
+    for k in ("cog", "emo"):
+        mv = {r.form for r in V.itertuples() if set(r.spelling_of.split(", ")) & base[k]}
+        modern = {v for v in mv if zipf_frequency(v, "en") >= 3.0}
+        forms = base[k] | (mv - modern)
+        ls = set()
+        for w in forms:
+            ls |= A.long_s(w, zipf_frequency)
+        forms = {w for w in forms | ls if w.isalpha()} - sw
+        out[k] = sorted(forms)
+        info.update({k + "_variants": len(mv - modern), k + "_dropped_modern": sorted(modern), k + "_expanded": len(forms)})
+    #: a long-s reading can arise from a word on each list (penfive: pensive, cognition, and a sibling on the
+    #: emotion side); a form either list could claim goes in neither, and is counted
+    both = set(out["cog"]) & set(out["emo"])
+    assert len(both) <= 5, sorted(both)
+    out = {k: sorted(set(v) - both) for k, v in out.items()}
+    info["in_both_dropped"] = sorted(both)
+    return {"cog": out["cog"], "emo": out["emo"], "stopwords": sorted(sw), "info": info}
+
+
+def count_v2():
+    """Per text over arc_fiction: n_cog, n_emo under the v2 lists, joined to arc_interiority's denominator."""
+    import io
+    import arc_interiority as A
+    assert not os.path.exists(COUNTS), "refusing to overwrite " + COUNTS
+    Lj = json.load(open(LISTS))
+    lw = [(w, "cog") for w in Lj["cog"]] + [(w, "emo") for w in Lj["emo"]]
+    sql = f"""
+      SELECT _id,
+        sumIf(v, k IN (SELECT word FROM lw WHERE list = 'cog')) AS n_cog,
+        sumIf(v, k IN (SELECT word FROM lw WHERE list = 'emo')) AS n_emo
+      FROM (SELECT _id, freqs FROM lltk.text_freqs FINAL WHERE _id IN ({A.REPS}))
+      ARRAY JOIN mapKeys(freqs) AS k, mapValues(freqs) AS v
+      GROUP BY _id
+      FORMAT TSVWithNames"""
+    N = pd.read_csv(io.StringIO(A.ch_query(sql, {"lw": ("word String, list String", lw)})), sep="\t")
+    assert len(N) == 82080, len(N)
+    D = pd.read_parquet(A.OUT).rename(columns={"r._id": "_id"})[["_id", "year", "corpus", "source", "n_content"]]
+    D = D.merge(N, on="_id", how="inner", validate="1:1")
+    assert len(D) == 82080 and (D.n_cog + D.n_emo <= D.n_content).all()
+    D.to_parquet(COUNTS, index=False)
+    print("-> %s" % COUNTS)
+
+
 def write_lists():
     """The expanded vetted lists exactly as the history counted them, for the arms' passage count."""
     assert not os.path.exists(LISTS), "refusing to overwrite " + LISTS
+    if V2:
+        Lj = v2_lists()
+        json.dump(Lj, open(LISTS, "w"))
+        print(json.dumps(Lj["info"], indent=1)[:1500])
+        print("-> %s" % LISTS)
+        return
     sys.argv = [sys.argv[0], "--vetted"]             # the list module reads its mode at import
     import arc_interiority_precision as AP
     assert AP.VETTED
@@ -253,4 +349,9 @@ def write_lists():
 
 
 if __name__ == "__main__":
-    write_lists() if "--write-lists" in sys.argv else main()
+    if "--write-lists" in sys.argv:
+        write_lists()
+    elif "--count" in sys.argv:
+        count_v2()
+    else:
+        main()
