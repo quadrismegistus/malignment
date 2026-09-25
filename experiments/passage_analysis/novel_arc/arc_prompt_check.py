@@ -150,6 +150,20 @@ def national():
             cells.append("%+.3f [%d] (%s)" % (v.median(), v.notna().sum(), place(cv[k], v.median())))
         L.append("| %s | %s |" % (k, " | ".join(cells)))
     L += ["", "History range (smoothed): " + "; ".join("%s %.3f to %.3f" % (k, cv[k][:, 1].min(), cv[k][:, 1].max()) for k in COLS)]
+    #: lineage agreement: among lineages with BOTH the base cell and the aligned cell, how many move from base in
+    #: the direction of the medians' difference; two-sided sign test (ties counted against)
+    from scipy.stats import binomtest
+    L += ["", "Lineage agreement with the median direction (lineages with both cells; sign-test p):", "",
+          "| measure | " + " | ".join("base -> %s" % lab[c] for c in conds[1:]) + " |", "|---|" + "---|" * (len(conds) - 1)]
+    for k, c in COLS.items():
+        piv = R.pivot_table(index="lineage", columns="cond", values=c)
+        cells = []
+        for cd in conds[1:]:
+            d = piv[["base", cd]].dropna()
+            sgn = np.sign(R[R.cond == cd][c].median() - R[R.cond == "base"][c].median())
+            n_ok = int((np.sign(d[cd] - d["base"]) == sgn).sum())
+            cells.append("%s %d/%d (p %.3f)" % ("up" if sgn > 0 else "down", n_ok, len(d), binomtest(n_ok, len(d)).pvalue))
+        L.append("| %s | %s |" % (k, " | ".join(cells)))
     return L
 
 

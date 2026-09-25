@@ -21,6 +21,14 @@ Kept / spliced / dropped per condition:
 
 History range (smoothed): conc -0.584 to 0.145; valence 0.007 to 0.131; arousal -0.005 to 0.439
 
+Lineage agreement with the median direction (lineages with both cells; sign-test p):
+
+| measure | base -> aligned, raw | base -> aligned, chat, prefilled | base -> aligned, chat, asked |
+|---|---|---|---|
+| conc | down 25/32 (p 0.002) | down 19/23 (p 0.003) | down 19/20 (p 0.000) |
+| valence | up 28/32 (p 0.000) | up 19/23 (p 0.003) | up 17/20 (p 0.003) |
+| arousal | up 21/32 (p 0.110) | up 15/23 (p 0.210) | up 17/20 (p 0.003) |
+
 ## By stem (TEMPLATE_ARM, 100 stems; each stem-arm = its continuations over all 30 lineages as one text)
 
 | measure | stems' own median | base: median over stems (share of stems above / below every decade) | aligned, raw: median over stems (share of stems above / below every decade) | aligned, chat, prefilled: median over stems (share of stems above / below every decade) | aligned, chat, asked: median over stems (share of stems above / below every decade) |
