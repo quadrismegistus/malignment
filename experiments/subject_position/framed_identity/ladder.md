@@ -26,3 +26,21 @@ status: "DECLARED 2026-09-25, before the ladder was generated (a 16-draw smoke t
 **Smoke test, recorded:** Qwen3-8B, n=2 per cell, 16 draws, no think markers; the self-description "I am Qwen, ... developed by Alibaba Cloud" is already present at tick 1.
 
 **System slot, verified on the rendered prompt (2026-09-25, during generation, before any coding).** Rendering the chat tick for all 18 with the producer's own arguments: 14 carry an EMPTY system block (`<|im_start|>system\n<|im_end|>`, `<|system|>\n\n`, ...); 3 carry NO system block (neo_7b_instruct, whose 544-character default persona is gone under `""`; Yi-1.5-9B-Chat and glm-4-9b-chat-hf at DEFAULT, whose default renders no system turn); **1 is not empty: Llama-3.1-8B-Instruct**, whose template always inserts "Cutting Knowledge Date: December 2023 / Today Date: 26 Jul 2024" whatever system message is passed. It carries no identity text and cannot be removed (it was equally present in the existing chat cell), so the model stays in, and **every reading is also reported without it** as a declared sensitivity.
+
+## RESULT (2026-09-25; `ladder_analyse.py` -> `results/ladder.md`, `results/ladder_per_model.csv`)
+
+2,880 draws (18 models x 4 ticks x 40), generated locally in ~95 min; 2,852 coded with `FramedIdentityTask` unchanged (spans 100% located); 28 empty replies (immediate end-of-text) counted as their own kind: Tulu-3.1-8B 24 of 40 on chat_scaffold and 3 on chat, Tulu-SFT-no-wildchat 1.
+
+    tick            ai_system median (pooled)   human_person median (pooled)   says "I am..."
+    bare            11.2 (29.2)                  55.0 (46.4)                    92.5
+    prefill         95.0 (89.4)                   0.0 (3.8)                     98.8
+    chat_scaffold   92.5 (89.3)                   0.0 (1.9)                     97.5
+    chat            97.5 (95.4)                   0.0 (0.8)                     97.5
+
+**THE TEMPLATE DOES THE WORK; BEING ASKED DOES NOT.** Template (bare -> prefill): ai_system up in 17 of 17 changing models, median +68.8 points (p=1.5e-05; 12/0 lineages, p=0.0005); human_person down in 15 of 15, median -51.2. Address (prefill -> chat_scaffold): 5 up / 5 down, median 0. Scaffold (chat_scaffold -> chat): 8 / 3, p=0.23. "Says 'I am...'" is near ceiling throughout (92.5 -> 97.5): the "I" is there before the template; the template decides what it predicates. Sensitivity without Llama-3.1-8B-Instruct: identical in every reading. The contrast with `framed_y` is exact: there the template alone left the in-scene superego where it was and address installed refusal; here the template alone installs the AI self-description and address adds nothing.
+
+**Before the template, five models already describe themselves as AI** (bare ai_system: Qwen2.5-7B 100, Qwen3-8B 98, Falcon3-7B 95, Qwen2.5-0.5B 60, neo 60) -- the self-description is in their weights; the rest answer as people at bare.
+
+**Reproduction checks (declared).** Tick 4 against the existing chat cell (system empty, 16 non-thinking models): median 97.5 vs 95.0, per-model |diff| median 2.5 (max 15, TinyLlama). Tick 1 against F20x (same coder, 17 overlapping models): per-model |diff| median 3.3, **except glm-4-9b-chat-hf, 85 points apart**.
+
+**glm-4-9b-chat-hf's BARE tick is off-distribution, and why.** glm's tokenizer has no BOS token; its default encoding prepends two special tokens, `[gMASK]<sop>`, which its chat template also opens with. `generate.encode` encodes without specials and restores a single BOS where one exists, so glm's bare input here lacked `[gMASK]<sop>` entirely, while F20x's had it (and there glm answers "I am an AI assistant named ChatGLM" in 60 of 60). glm's three templated ticks are unaffected (the template supplies the tokens). The readings do not depend on it: without glm, template ai_system is 16/0 (p=3e-05). Not regenerated here: the fix belongs in `generate.encode` (restore the tokenizer's full leading special-token prefix), and the passage cache keys do not record the encoding, so a regeneration would be served the stale passages. Flagged as an infrastructure defect.
