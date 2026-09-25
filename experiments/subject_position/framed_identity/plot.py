@@ -490,7 +490,7 @@ def _stack_plot(shorts, ns, mean, groups, fmt="%.1f", min_w=7, height=2.7, legen
     return p
 
 
-def fig_stack(groups, name):
+def fig_stack(groups, name, fmt="%.1f", min_w=7):
     """Stacked bars: each condition's answers split by identity kind, MEAN over models, summing to 100."""
     import numpy as np
     import matplotlib
@@ -522,15 +522,17 @@ def fig_stack(groups, name):
             pool[(short, g)] = 100 * sum(fn(x) for x in rows) / len(rows)
             c = collections.Counter((x.get("predicated_identity") or "").lower() for x in rows if fn(x))
             top[(short, g)] = [k for k, _ in c.most_common() if k][:5]
-    #: booked: AI and person as MEDIANS against analysis.txt
+    #: booked: AI and person as MEDIANS against analysis.txt (groups found by kind, not by label)
+    g_ai = [g for g, ks, _ in groups if ks == ("ai_system",)][0]
+    g_hu = [g for g, ks, _ in groups if ks == ("human_person",)][0]
     for lab, short in COND:
-        assert round(med[(short, "AI")], 1) == B[lab][2] and round(med[(short, "A person")], 1) == B[lab][3], short
+        assert round(med[(short, g_ai)], 1) == B[lab][2] and round(med[(short, g_hu)], 1) == B[lab][3], short
     #: the AI border: machines the coder filed as a thing, not as AI
     obj = [x for lab, _ in COND for gg in per_model(S[lab]).values() for x in gg
            if x["identity_kind"] == "object_or_abstraction"]
     n_mach = sum(bool(MACHINE.search((x.get("predicated_identity") or "").lower())) for x in obj)
 
-    p = _stack_plot(shorts, ns, mean, [(g, c) for g, _, c in groups])
+    p = _stack_plot(shorts, ns, mean, [(g, c) for g, _, c in groups], fmt=fmt, min_w=min_w)
 
     W = lambda txt: textwrap.wrap(txt, 100)
     lines = [
@@ -540,7 +542,8 @@ def fig_stack(groups, name):
         *W("Each bar is one condition's answers split by the kind of thing the speaker claims to be (the "
            "coder's identity_kind, one per answer). Value: per model, the share of its answers of that kind; "
            "the bar prints the MEAN over models, so each model counts once (analyse.py's unit) and each bar "
-           "sums to 100 (asserted). Values under 7 points are not printed inside their segment; all are below."),
+           "sums to 100 (asserted). Values under %d points are not printed inside their segment; all are below."
+           % min_w + (" In-bar values are rounded to whole percents." if "%.0f" in fmt else "")),
         "",
         "Groups (the coder's five levels, each in exactly one group; asserted):",
     ]
@@ -796,6 +799,18 @@ def fig_stack_ai2():
     fig_stack_ai(two=True)
 
 
+#: RH, 2026-09-25: the four groups under one-word names
+GROUPS4W = [("AI", ("ai_system",), "#000000"),
+            ("Human", ("human_person",), "#737373"),
+            ("Other", ("fictional_or_roleplay", "object_or_abstraction"), "#bfbfbf"),
+            ("None", ("none",), "#ffffff")]
+
+
+def fig_stack4w():
+    """Stacked bars, four groups named AI, Human, Other, None; whole-percent labels."""
+    fig_stack(GROUPS4W, "ci_subject_stack4w", fmt="%.0f%%", min_w=5)
+
+
 def fig_stack4():
     """Stacked bars, four groups: AI, person, something else, no claim (mean over models)."""
     fig_stack(GROUPS4, "ci_subject_stack4")
@@ -807,7 +822,8 @@ def fig_stack5():
 
 
 FIGURES = {"frames": fig_frames, "kinds": fig_kinds, "kinds_mean": fig_kinds_mean,
-           "stack4": fig_stack4, "stack5": fig_stack5, "stack_ai": fig_stack_ai, "stack_ai2": fig_stack_ai2}
+           "stack4": fig_stack4, "stack5": fig_stack5, "stack_ai": fig_stack_ai, "stack_ai2": fig_stack_ai2,
+           "stack4w": fig_stack4w}
 
 
 def main():
