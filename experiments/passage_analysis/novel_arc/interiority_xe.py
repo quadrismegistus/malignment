@@ -2,6 +2,8 @@
 
     ~/github/lltk/.venv/bin/python -u interiority_xe.py --benchmark
         -> INTERIORITY_XE_BENCHMARK.md, and per-passage scores beside the coder data
+    ~/github/lltk/.venv/bin/python -u interiority_xe.py --lists
+        -> INTERIORITY_LISTS_BENCHMARK.md: word LISTS from the LLM consensus ratings against the coder
     ~/github/lltk/.venv/bin/python -u interiority_xe.py --history --corpus chadwyck --workers 8
         -> $MALIGNMENT_DATA/novel_arc/interiority_{corpus}_n200.parquet
     ~/github/lltk/.venv/bin/python -u interiority_xe.py --models
@@ -97,6 +99,81 @@ class XE:
         for fam in FAMILIES:
             out["int_" + fam] = hits[fam] / n if n else None
         return out
+
+
+def word_lists():
+    """The lists under test (RH, 2026-09-25), from interiority_candidates.py's consensus ratings.
+    A word is ON a list if its consensus interior >= 2 and its consensus kind is a mental one."""
+    import pandas as pd
+    mental = ("cognition", "emotion", "volition", "perception", "attention")
+    x = pd.read_csv(os.path.join(SHARED, "usasx_consensus_v1.csv"))
+    c = pd.read_csv(os.path.join(SHARED, "candidate_consensus_v1.csv"))
+    clean_x = set(x.word[(x.interior >= 2) & x.kind.isin(mental)])
+    cand = set(c.word[(c.interior >= 2) & c.kind.isin(mental)])
+    full_x = set(x.word)
+    assert (len(clean_x), len(cand), len(full_x)) == (1526, 2161, 3225), (len(clean_x), len(cand), len(full_x))
+    assert not clean_x & cand                    # candidates are non-X by construction
+    return {"full X list (3,225)": full_x, "clean X (1,526)": clean_x, "new candidates (2,161)": cand,
+            "clean X + candidates (3,687)": clean_x | cand}
+
+
+def list_shares(X, txt, lists):
+    """Share of content words whose surface form or lemma is on each list, each word counted once."""
+    from measure_lltk import TOK
+    S = X.S
+    v = S.score(txt)
+    if not v:
+        return None
+    raw = [w.lower() for w in TOK.findall(txt)]
+    mod = [S._modernise(w) for w in raw]
+    content = [(w, S._lem.get(w, w)) for w in mod if S._pos.get(w) in ("NOUN", "VERB", "ADJ", "ADV")]
+    n = len(content)
+    out = {"n_content": n, "usas_x_old": v.get("usas_x"), "rh_absconc_median": v.get("rh_absconc_median")}
+    for name, L_ in lists.items():
+        out[name] = sum(1 for w, l in content if w in L_ or l in L_) / n if n else None
+    return out
+
+
+def benchmark_lists():
+    import pandas as pd
+    from scipy.stats import spearmanr
+    import usas_x_coder_benchmark as B
+    P = B.passages()
+    assert len(P) == 13564, len(P)
+    lists = word_lists()
+    X = XE()
+    rows = []
+    for i, (pid, r) in enumerate(P.iterrows()):
+        rows.append(dict(id=pid, **(list_shares(X, r.text or "", lists) or {})))
+        if (i + 1) % 3000 == 0:
+            print("  %d scored" % (i + 1), flush=True)
+    D = pd.DataFrame(rows).set_index("id").join(P[["degree", "narrative", "prompt"]])
+    ok = D[(D.n_content >= B.MIN_CONTENT) & D.rh_absconc_median.notna()]
+    c, y, nar = ok.rh_absconc_median, ok.degree, ok.narrative.astype(bool)
+    assert abs(spearmanr(ok.usas_x_old, y)[0] - 0.368) < 0.0005          # the earlier benchmark, unchanged
+    L = ["# Interiority word lists from the LLM consensus ratings, against the blind coder (EXPLORATORY)", "",
+         "Producer `interiority_xe.py --lists`. The abstraction seat's %d coded English passages, %d with at least "
+         "%d content words (%d narrative); coder degree 0-3, mean over coders A and B; control the plate's "
+         "concreteness. Each list: share of content words whose surface form or lemma is on the list, each word "
+         "counted once. Lists from interiority_candidates.py's consensus ratings (interior >= 2 and a mental kind; "
+         "INTERIORITY_TIEBREAK.md): CLEAN X is the USAS X words that pass; NEW CANDIDATES are period-model "
+         "neighbours of X from outside X that pass. The FULL X LIST is every X word under the same rule, so "
+         "clean X against it isolates the cleaning from the counting rule. The coder is an LLM and so is the "
+         "rater that made these lists: agreement here is not independent validation." % (
+             len(P), len(ok), B.MIN_CONTENT, int(nar.sum())), "",
+         "| measure | raw | partial (concreteness) | partial within prompt | partial narrative | rho with concreteness | median share |",
+         "|---|---|---|---|---|---|---|"]
+    for col in ["usas_x_old"] + list(lists):
+        x = ok[col]
+        lab = "usas_x (panel now)" if col == "usas_x_old" else col
+        L.append("| %s | %+.3f | %+.3f | %+.3f | %+.3f | %+.3f | %.3f |" % (
+            lab, spearmanr(x, y)[0], B.partial(x, y, c)[0], B.partial(x, y, c, groups=ok.prompt)[0],
+            B.partial(x[nar], y[nar], c[nar])[0], spearmanr(x, c)[0], float(x.median())))
+    L += ["", "Sampling error of each coefficient is about 0.009 overall and 0.013 in the narrative subset; gaps "
+          "smaller than ~0.03 between measures on the same passages are not differences without a dependent-"
+          "correlation test."]
+    open(os.path.join(HERE, "INTERIORITY_LISTS_BENCHMARK.md"), "w").write("\n".join(L) + "\n")
+    print("\n".join(L))
 
 
 # ─────────────────────────────────────────────────────────────── the coder benchmark
@@ -235,5 +312,7 @@ if __name__ == "__main__":
                 int(a[a.index("--limit") + 1]) if "--limit" in a else None)
     elif "--benchmark" in sys.argv:
         benchmark()
+    elif "--lists" in sys.argv:
+        benchmark_lists()
     else:
         print(__doc__)
