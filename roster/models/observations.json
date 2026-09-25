@@ -213,6 +213,40 @@
    "transformers": "4.57.1",
    "note": "rented CUDA box. Derived from the cells that actually ran in it.",
    "source": "derived by record_successes.py from twp_cells_v4"
+  },
+  "runpod_a40_hf_tf4571_bf16": {
+   "device": "cuda",
+   "gpu": "NVIDIA A40",
+   "torch": "2.11 (vllm 0.22.1 image)",
+   "transformers": "4.57.1",
+   "dtype": "bfloat16",
+   "note": "RunPod secure A40; batched HF generate (num_return_sequences=n) via malignment Checkpoint.load + generate.render/encode.",
+   "source": "malign seat, TEMPLATE_ARM fleet on RunPod A40 (novel_arc/template_arm/hf_batch.py), 2026-09-25"
+  },
+  "runpod_a40_hf_tf4452_plain": {
+   "device": "cuda",
+   "gpu": "NVIDIA A40",
+   "transformers": "4.45.2",
+   "dtype": "bfloat16",
+   "note": "AutoModelForCausalLM.from_pretrained(trust_remote_code, torch_dtype=bf16), NOT Checkpoint.load (which passes dtype=, rejected by 4.45).",
+   "source": "malign seat, TEMPLATE_ARM fleet on RunPod A40 (novel_arc/template_arm/hf_batch.py), 2026-09-25"
+  },
+  "runpod_a40_hf_tf4471_plain": {
+   "device": "cuda",
+   "gpu": "NVIDIA A40",
+   "transformers": "4.47.1",
+   "dtype": "bfloat16",
+   "note": "as runpod_a40_hf_tf4452_plain, transformers 4.47.1.",
+   "source": "malign seat, TEMPLATE_ARM fleet on RunPod A40 (novel_arc/template_arm/hf_batch.py), 2026-09-25"
+  },
+  "runpod_a40_hf_tf5102_fla": {
+   "device": "cuda",
+   "gpu": "NVIDIA A40",
+   "transformers": "5.10.2",
+   "packages": "flash-linear-attention",
+   "dtype": "bfloat16",
+   "note": "batched HF generate via Checkpoint.load.",
+   "source": "malign seat, TEMPLATE_ARM fleet on RunPod A40 (novel_arc/template_arm/hf_batch.py), 2026-09-25"
   }
  },
  "observations": [
@@ -3866,6 +3900,94 @@
    "cause": "HF generate(): AttributeError: 'NoneType' object has no attribute 'size' in the remote modelling code",
    "fix": "None applied (toe control, 2026-09-24). LOADS on local_mps_tf457 and fails inside HF generate() in the model's remote code; a cache-API mismatch between the bundled modelling code and transformers 4.57.1's generate loop. RAN under vLLM 0.22.1 in Y, so this is (engine x environment), not the checkpoint. Evidence: ~/malignment-data/toe_control/drive.log. A local HF generation of this model needs a use_cache=False or legacy-cache path, untested.",
    "source": "malign seat, toe_control drive on CDH0050, 2026-09-24"
+  },
+  {
+   "model_id": "RWKV/rwkv-4-7b-pile",
+   "environment": "runpod_a40_hf_tf4571_bf16",
+   "outcome": "loads_degraded",
+   "cause": "88% of 3,700 256-token samples (t=1, top_p=1, top_k=0) are a repeated-word loop ('destroy destroy destroy ...'); fp16 was not tried here because fp16 HF sampling hit NaN probabilities in the smoke test",
+   "fix": "None: lineage DROPPED from TEMPLATE_ARM by RH. Untested: fp32. Do not read these passages as the model's behaviour.",
+   "source": "malign seat, TEMPLATE_ARM fleet on RunPod A40 (novel_arc/template_arm/hf_batch.py), 2026-09-25"
+  },
+  {
+   "model_id": "RWKV/rwkv-raven-7b",
+   "environment": "runpod_a40_hf_tf4571_bf16",
+   "outcome": "loads_degraded",
+   "cause": "90% of synced raw samples loop ('kill kill kill ...'); the pod went unreachable before the templated arms synced",
+   "fix": "As rwkv-4-7b-pile: dropped; fp32 untested.",
+   "source": "malign seat, TEMPLATE_ARM fleet on RunPod A40 (novel_arc/template_arm/hf_batch.py), 2026-09-25"
+  },
+  {
+   "model_id": "internlm/internlm2-base-7b",
+   "environment": "runpod_a40_hf_tf4571_bf16",
+   "outcome": "run_failed",
+   "cause": "HF generate(): AttributeError: 'DynamicCache' object has no attribute 'get_max_length' in the remote modelling code",
+   "fix": "Ran on runpod_a40_hf_tf4452_plain (next row).",
+   "source": "malign seat, TEMPLATE_ARM fleet on RunPod A40 (novel_arc/template_arm/hf_batch.py), 2026-09-25"
+  },
+  {
+   "model_id": "internlm/internlm2-base-7b",
+   "environment": "runpod_a40_hf_tf4452_plain",
+   "outcome": "ok",
+   "cause": "3,700 passages, 0 empty, 0 loops; coherent on reading",
+   "fix": "Plain load; transformers 4.45.2 keeps DynamicCache.get_max_length. vLLM 0.22.1 writes word salad for this model (institution_vs_individual).",
+   "source": "malign seat, TEMPLATE_ARM fleet on RunPod A40 (novel_arc/template_arm/hf_batch.py), 2026-09-25"
+  },
+  {
+   "model_id": "internlm/internlm2-chat-7b",
+   "environment": "runpod_a40_hf_tf4571_bf16",
+   "outcome": "run_failed",
+   "cause": "HF generate(): causal-mask size mismatch in _update_causal_mask (tensor a 11 vs b 10) in the remote modelling code (revision c2ba6448)",
+   "fix": "See the tf 4.45.2 / 4.47.1 rows.",
+   "source": "malign seat, TEMPLATE_ARM fleet on RunPod A40 (novel_arc/template_arm/hf_batch.py), 2026-09-25"
+  },
+  {
+   "model_id": "internlm/internlm2-chat-7b",
+   "environment": "runpod_a40_hf_tf4452_plain",
+   "outcome": "run_failed",
+   "cause": "AttributeError: 'DynamicCache' object has no attribute 'get_max_cache_shape' (its remote code is NEWER than the base's and needs the newer cache API)",
+   "fix": "Ran on runpod_a40_hf_tf4471_plain (next row).",
+   "source": "malign seat, TEMPLATE_ARM fleet on RunPod A40 (novel_arc/template_arm/hf_batch.py), 2026-09-25"
+  },
+  {
+   "model_id": "internlm/internlm2-chat-7b",
+   "environment": "runpod_a40_hf_tf4471_plain",
+   "outcome": "ok",
+   "cause": "11,100 passages, 0 empty, 0 loops; 8/3,700 prefill passages carry markup debris; generation_config stops on [2, 92542]",
+   "fix": "transformers 4.47.1 has both get_max_length and get_max_cache_shape. So base and chat of ONE lineage need DIFFERENT transformers (4.45.2 vs 4.47.1).",
+   "source": "malign seat, TEMPLATE_ARM fleet on RunPod A40 (novel_arc/template_arm/hf_batch.py), 2026-09-25"
+  },
+  {
+   "model_id": "google/recurrentgemma-9b",
+   "environment": "runpod_a40_hf_tf4571_bf16",
+   "outcome": "ok",
+   "cause": "3,700 passages, 0 empty, 0 loops",
+   "fix": "vLLM 0.22.1 refuses it; batched HF is the path.",
+   "source": "malign seat, TEMPLATE_ARM fleet on RunPod A40 (novel_arc/template_arm/hf_batch.py), 2026-09-25"
+  },
+  {
+   "model_id": "google/recurrentgemma-9b-it",
+   "environment": "runpod_a40_hf_tf4571_bf16",
+   "outcome": "ok",
+   "cause": "11,100 passages, 0 empty, 0 loops",
+   "fix": "As the base.",
+   "source": "malign seat, TEMPLATE_ARM fleet on RunPod A40 (novel_arc/template_arm/hf_batch.py), 2026-09-25"
+  },
+  {
+   "model_id": "allenai/Olmo-Hybrid-7B",
+   "environment": "runpod_a40_hf_tf5102_fla",
+   "outcome": "ok",
+   "cause": "3,700 passages, 0 empty, 0 loops",
+   "fix": "transformers 5.10.2 + flash-linear-attention.",
+   "source": "malign seat, TEMPLATE_ARM fleet on RunPod A40 (novel_arc/template_arm/hf_batch.py), 2026-09-25"
+  },
+  {
+   "model_id": "allenai/Olmo-Hybrid-Instruct-DPO-7B",
+   "environment": "runpod_a40_hf_tf5102_fla",
+   "outcome": "ok",
+   "cause": "11,100 passages, 0 empty, 0 loops",
+   "fix": "As the base.",
+   "source": "malign seat, TEMPLATE_ARM fleet on RunPod A40 (novel_arc/template_arm/hf_batch.py), 2026-09-25"
   }
  ],
  "engine_support": {

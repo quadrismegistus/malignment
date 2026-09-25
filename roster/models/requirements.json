@@ -1213,7 +1213,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 5
+   "n_observations": 6
   },
   {
    "model": "RWKV/rwkv-raven-7b",
@@ -1243,7 +1243,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 6
+   "n_observations": 7
   },
   {
    "model": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
@@ -2181,7 +2181,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 5
+   "n_observations": 6
   },
   {
    "model": "allenai/Olmo-Hybrid-Instruct-DPO-7B",
@@ -2213,7 +2213,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 2
+   "n_observations": 3
   },
   {
    "model": "allenai/Olmo-Hybrid-Instruct-SFT-7B",
@@ -2763,7 +2763,7 @@
    "needs_hf_token": true,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 3
+   "n_observations": 4
   },
   {
    "model": "google/recurrentgemma-9b-it",
@@ -2793,7 +2793,7 @@
    "needs_hf_token": true,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 3
+   "n_observations": 4
   },
   {
    "model": "huggyllama/llama-7b",
@@ -2976,7 +2976,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 4
+   "n_observations": 6
   },
   {
    "model": "internlm/internlm2-chat-7b",
@@ -3009,7 +3009,7 @@
    "needs_hf_token": false,
    "blocked": false,
    "blocked_reason": null,
-   "n_observations": 4
+   "n_observations": 7
   },
   {
    "model": "internlm/internlm2-chat-7b-sft",

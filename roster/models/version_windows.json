@@ -5011,6 +5011,19 @@
       "verdict": "works"
      },
      {
+      "version": "5.10.2",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "runpod_a40_hf_tf5102_fla",
+         "outcome": "ok",
+         "cause": "3,700 passages, 0 empty, 0 loops"
+        }
+       ]
+      },
+      "verdict": "works"
+     },
+     {
       "version": "5.15.1",
       "verdicts": {
        "works": [
@@ -5069,6 +5082,19 @@
          "environment": "cloud_cuda130_tf540",
          "outcome": "load_ok",
          "cause": null
+        }
+       ]
+      },
+      "verdict": "works"
+     },
+     {
+      "version": "5.10.2",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "runpod_a40_hf_tf5102_fla",
+         "outcome": "ok",
+         "cause": "11,100 passages, 0 empty, 0 loops"
         }
        ]
       },
@@ -6284,12 +6310,38 @@
        ]
       },
       "verdict": "works"
+     },
+     {
+      "version": "2.11 (vllm 0.22.1 image)",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "runpod_a40_hf_tf4571_bf16",
+         "outcome": "ok",
+         "cause": "3,700 passages, 0 empty, 0 loops"
+        }
+       ]
+      },
+      "verdict": "works"
      }
     ],
     "hole": false
    },
    "transformers": {
     "points": [
+     {
+      "version": "4.57.1",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "runpod_a40_hf_tf4571_bf16",
+         "outcome": "ok",
+         "cause": "3,700 passages, 0 empty, 0 loops"
+        }
+       ]
+      },
+      "verdict": "works"
+     },
      {
       "version": "5.15.1",
       "verdicts": {
@@ -6335,12 +6387,38 @@
        ]
       },
       "verdict": "works"
+     },
+     {
+      "version": "2.11 (vllm 0.22.1 image)",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "runpod_a40_hf_tf4571_bf16",
+         "outcome": "ok",
+         "cause": "11,100 passages, 0 empty, 0 loops"
+        }
+       ]
+      },
+      "verdict": "works"
      }
     ],
     "hole": false
    },
    "transformers": {
     "points": [
+     {
+      "version": "4.57.1",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "runpod_a40_hf_tf4571_bf16",
+         "outcome": "ok",
+         "cause": "11,100 passages, 0 empty, 0 loops"
+        }
+       ]
+      },
+      "verdict": "works"
+     },
      {
       "version": "5.4.0",
       "verdicts": {
@@ -6789,6 +6867,19 @@
       "verdict": "fails"
      },
      {
+      "version": "2.11 (vllm 0.22.1 image)",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "runpod_a40_hf_tf4571_bf16",
+         "outcome": "run_failed",
+         "cause": "HF generate(): AttributeError: 'DynamicCache' object has no attribute 'get_max_length' in the remote modelling code"
+        }
+       ]
+      },
+      "verdict": "fails"
+     },
+     {
       "version": ">=2.6",
       "verdicts": {
        "fails": [
@@ -6814,6 +6905,19 @@
    "transformers": {
     "points": [
      {
+      "version": "4.45.2",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "runpod_a40_hf_tf4452_plain",
+         "outcome": "ok",
+         "cause": "3,700 passages, 0 empty, 0 loops; coherent on reading"
+        }
+       ]
+      },
+      "verdict": "works"
+     },
+     {
       "version": "4.57.1",
       "verdicts": {
        "works": [
@@ -6828,6 +6932,11 @@
          "environment": "cloud_cuda_tf4571",
          "outcome": "load_failed",
          "cause": "Died in the TOKENIZER/CONFIG stage of the rhyme fleet, producer f6fe32703174, 2026-09-11 21:05. BOUNDED BY THE LOG, not guessed: run_v4.log's last line is `device cuda | dict_sha b"
+        },
+        {
+         "environment": "runpod_a40_hf_tf4571_bf16",
+         "outcome": "run_failed",
+         "cause": "HF generate(): AttributeError: 'DynamicCache' object has no attribute 'get_max_length' in the remote modelling code"
         }
        ]
       },
@@ -6893,6 +7002,19 @@
       "verdict": "fails"
      },
      {
+      "version": "2.11 (vllm 0.22.1 image)",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "runpod_a40_hf_tf4571_bf16",
+         "outcome": "run_failed",
+         "cause": "HF generate(): causal-mask size mismatch in _update_causal_mask (tensor a 11 vs b 10) in the remote modelling code (revision c2ba6448)"
+        }
+       ]
+      },
+      "verdict": "fails"
+     },
+     {
       "version": ">=2.6",
       "verdicts": {
        "fails": [
@@ -6918,6 +7040,32 @@
    "transformers": {
     "points": [
      {
+      "version": "4.45.2",
+      "verdicts": {
+       "fails": [
+        {
+         "environment": "runpod_a40_hf_tf4452_plain",
+         "outcome": "run_failed",
+         "cause": "AttributeError: 'DynamicCache' object has no attribute 'get_max_cache_shape' (its remote code is NEWER than the base's and needs the newer cache API)"
+        }
+       ]
+      },
+      "verdict": "fails"
+     },
+     {
+      "version": "4.47.1",
+      "verdicts": {
+       "works": [
+        {
+         "environment": "runpod_a40_hf_tf4471_plain",
+         "outcome": "ok",
+         "cause": "11,100 passages, 0 empty, 0 loops; 8/3,700 prefill passages carry markup debris; generation_config stops on [2, 92542]"
+        }
+       ]
+      },
+      "verdict": "works"
+     },
+     {
       "version": "4.57.1",
       "verdicts": {
        "works": [
@@ -6932,6 +7080,11 @@
          "environment": "cloud_cuda_tf4571",
          "outcome": "load_failed",
          "cause": "Died in the TOKENIZER/CONFIG stage of the rhyme fleet, producer f6fe32703174, 2026-09-11 21:05. BOUNDED BY THE LOG, not guessed: run_v4.log's last line is `device cuda | dict_sha b"
+        },
+        {
+         "environment": "runpod_a40_hf_tf4571_bf16",
+         "outcome": "run_failed",
+         "cause": "HF generate(): causal-mask size mismatch in _update_causal_mask (tensor a 11 vs b 10) in the remote modelling code (revision c2ba6448)"
         }
        ]
       },
