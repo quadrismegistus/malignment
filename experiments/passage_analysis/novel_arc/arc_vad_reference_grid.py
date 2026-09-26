@@ -12,7 +12,7 @@ with the national-story arms. (RH, 2026-09-26: "Can you plot them all just for m
 Rows: valence, arousal, dominance. Columns: the raw Warriner LOOKUP (human ratings, same scorer), and the
 abstraction project's vector axes plain, orth, band, nnpair, wnpair (3013bcc). Recommended axis per row
 (abstraction): valence plain, arousal nnpair, dominance nnpair -- marked * in the panel title.
-History: vad_scores_arc_fiction.parquet, texts 1700-2009, decade medians (>= 3 texts), lowess 0.3. NOT corpus-bias
+History: vad_scores_arc_fiction.parquet, texts 1700-2009 (1600-2009 with `from1600`), decade medians (>= 3 texts), lowess 0.3. NOT corpus-bias
 corrected, in every panel alike: coefficients exist only for the plain columns, and a grid mixing corrected and
 uncorrected panels would compare unlike things. Arms: the no-demonym national stories (judged; one meta-text per
 model-condition; median over lineages): base dotted, aligned raw dashed, chat prefilled dash-dot, chat asked
@@ -26,12 +26,14 @@ import pandas as pd
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 PARTIAL = "partial" in sys.argv[1:]                         # read before the argv rewrite below
+#: from1600 (RH, 2026-09-26: "remake prev graphs adding back in c17 so history is year 1600+")
+START = 1600 if "from1600" in sys.argv[1:] else 1700
 sys.argv = [sys.argv[0], "v4", "meta", "sel12", "arms4"]
 import arc_history_arms as H                               # noqa: E402
 from malignment import figure as F                         # noqa: E402
 
 SH = os.path.expanduser("~/malignment-data/interiority_norms")
-OUT = os.path.join(HERE, "figures", "arc_vad_reference_grid" + ("_partial" if PARTIAL else "") + "_v1")
+OUT = os.path.join(HERE, "figures", "arc_vad_reference_grid" + ("_partial" if PARTIAL else "") + ("_1600" if START == 1600 else "") + "_v1")
 CONC = "Abs-Conc.Median.median"
 VERS = [("lookup", "human lookup"), ("", "plain"), ("_orth", "orth"), ("_band", "band"), ("_nnpair", "nnpair"), ("_wnpair", "wnpair")]
 REC = {"Valence": "", "Arousal": "_nnpair", "Dominance": "_nnpair"}
@@ -49,7 +51,7 @@ def main():
         assert not os.path.exists(OUT + ext), "refusing to overwrite " + OUT + ext
     V = pd.read_parquet(os.path.join(SH, "vad_scores_arc_fiction.parquet"))
     T = H.concreteness_texts()[["_id", "year"]].merge(V, on="_id", validate="1:1")
-    T = T[T.year.between(1700, 2009)]
+    T = T[T.year.between(START, 2009)]
     M = pd.read_parquet(os.path.join(H.DATA, "prompt_check_national_judged_meta_scored.parquet"))
     pts, cvs, arms, order, slopes = [], [], [], [], []
     for dim in ("Valence", "Arousal", "Dominance"):
@@ -87,18 +89,19 @@ def main():
          + geom_hline(aes(yintercept="value", linetype="arm"), data=A, color=F.PUB_MID, size=F.PUB_RULE_PT * 1.2)
          + scale_linetype_manual(dict(zip(ARMS.values(), ["dotted", "dashed", "dashdot", "solid"])))
          + facet_wrap("~panel", ncol=6, scales="free_y")
-         + scale_x_continuous(breaks=[1700, 1800, 1900, 2000])
+         + scale_x_continuous(breaks=[1600, 1700, 1800, 1900, 2000] if START == 1600 else [1700, 1800, 1900, 2000])
          + labs(x="", y="Score, concreteness regressed out (own scale)" if PARTIAL else "Score (each panel on its own scale)", linetype="")
          + F.pub_theme(height=6.6)
          + theme(legend_position="bottom", figure_size=(13.0, 6.6),
                  strip_text=element_text(family=F.pub_font(), size=F.PUB_FONT_PT)))
     F.save(p, OUT + ".png")
-    cap = textwrap.wrap(("CONCRETENESS REGRESSED OUT (text-level OLS over the 1700-2009 novels per panel; arms adjusted "
-                         "with the same slope). " if PARTIAL else "") + "REFERENCE GRID: valence, arousal and dominance in English fiction 1700-2000, every version -- the "
-                        "human Warriner lookup and the vector axes plain, orth, band, nnpair, wnpair (* = recommended). "
-                        "Decade medians over arc_fiction texts, lowess; not bias-corrected in any panel. Lines: the "
-                        "national-story arms (judged no-demonym stories, median over lineages). Free y per panel. Working "
-                        "reference, not a figure draft.", 110)
+    head = ("CONCRETENESS REGRESSED OUT (text-level OLS over the %d-2009 novels per panel; arms adjusted with the same "
+            "slope). " % START) if PARTIAL else ""
+    cap = textwrap.wrap(head + ("REFERENCE GRID: valence, arousal and dominance in English fiction %d-2000, every version -- the "
+                                "human Warriner lookup and the vector axes plain, orth, band, nnpair, wnpair (* = recommended). "
+                                "Decade medians over arc_fiction texts, lowess; not bias-corrected in any panel. Lines: the "
+                                "national-story arms (judged no-demonym stories, median over lineages). Free y per panel. Working "
+                                "reference, not a figure draft." % START), 110)
     if PARTIAL:
         cap += ["", "  slopes on concreteness: " + "; ".join(slopes)]
     open(OUT + ".caption.txt", "w").write("\n".join(cap) + "\n")
