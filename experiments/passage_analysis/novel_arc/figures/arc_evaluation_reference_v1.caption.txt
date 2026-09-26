@@ -1,0 +1,10 @@
+THE FALL OF EVALUATION IN THE NOVEL, 1600-2000, and where model fiction sits on it. Per text, words
+of clear positive or negative valence per content word, from a cleaned valence lexicon (Warriner et
+al. 2013 lemmas and forms kept under an ambiguity standard, plus period vocabulary proposed by a
+Warriner-seeded vector norm and confirmed by an LLM rater; positive above 6, negative below 4 on
+Warriner's 1-9 scale). Positivity = positive share of evaluative words; negative intensity = mean
+distance below neutral (5) of negative words. Gray points: decade medians over 9,922 Chadwyck and
+Chicago novels; black line: lowess (span 0.3). Model arms: national stories (no-demonym prompt,
+judged proper stories), each model-condition as one text, median over lineages: base models
+(dotted); aligned models given raw text (dashed); aligned models in their chat template, reply
+prefilled (dash-dot) or asked (solid).
