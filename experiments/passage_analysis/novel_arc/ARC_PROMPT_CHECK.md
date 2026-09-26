@@ -86,9 +86,35 @@ Valence, the 5 most negative and 5 most positive stems (stem score -> base / raw
 | valence | -0.095 | -0.088 | below all |
 | arousal | +0.386 | +0.379 | 1648, 1815 |
 
-## Arousal versions: lineage tests, unpartialled
+## VAD versions: lineage tests, unpartialled
 
-Per set: median over lineages per condition; for each aligned condition, lineages (with both cells) moving from base in the direction of the medians' difference, sign-test p.
+Per set: median over lineages per condition; for each aligned condition, lineages (with both cells) moving from base in the direction of the medians' difference, sign-test p. RECOMMENDED axis per dimension (abstraction, 3013bcc) marked *.
+
+## Valence
+
+### national stories (judged; base / raw / prefill / asked)
+
+| column | medians | base -> aligned_raw | base -> aligned_prefill | base -> aligned_rettberg |
+|---|---|---|---|---|
+| Warriner-Valence.lookup | +5.691 / +6.012 / +5.992 / +5.900 | up 28/32 (p 0.000) | up 22/23 (p 0.000) | up 16/20 (p 0.012) |
+| VAD-Valence.Warriner.median* | +0.191 / +0.347 / +0.342 / +0.299 | up 28/32 (p 0.000) | up 19/23 (p 0.003) | up 17/20 (p 0.003) |
+| VAD-Valence.Warriner_orth.median | +0.199 / +0.448 / +0.435 / +0.415 | up 28/32 (p 0.000) | up 22/23 (p 0.000) | up 20/20 (p 0.000) |
+| VAD-Valence.Warriner_band.median | +0.231 / +0.461 / +0.444 / +0.439 | up 29/32 (p 0.000) | up 22/23 (p 0.000) | up 19/20 (p 0.000) |
+| VAD-Valence.Warriner_nnpair.median | +0.192 / +0.370 / +0.357 / +0.379 | up 27/32 (p 0.000) | up 20/23 (p 0.000) | up 20/20 (p 0.000) |
+| VAD-Valence.Warriner_wnpair.median | +0.382 / +0.614 / +0.564 / +0.556 | up 28/32 (p 0.000) | up 21/23 (p 0.000) | up 19/20 (p 0.000) |
+
+### F11 stems (TEMPLATE_ARM; base / raw / prefill / asked)
+
+| column | medians | base -> raw | base -> prefill | base -> continue |
+|---|---|---|---|---|
+| Warriner-Valence.lookup | +5.499 / +5.555 / +5.588 / +5.508 | up 23/30 (p 0.005) | up 24/30 (p 0.001) | up 14/30 (p 0.856) |
+| VAD-Valence.Warriner.median* | -0.066 / -0.075 / -0.017 / -0.095 | down 16/30 (p 0.856) | up 20/30 (p 0.099) | down 19/30 (p 0.200) |
+| VAD-Valence.Warriner_orth.median | -0.082 / -0.030 / +0.064 / +0.017 | up 23/30 (p 0.005) | up 27/30 (p 0.000) | up 20/30 (p 0.099) |
+| VAD-Valence.Warriner_band.median | -0.019 / +0.016 / +0.100 / +0.037 | up 21/30 (p 0.043) | up 26/30 (p 0.000) | up 17/30 (p 0.585) |
+| VAD-Valence.Warriner_nnpair.median | -0.086 / -0.078 / +0.005 / -0.070 | up 18/30 (p 0.362) | up 25/30 (p 0.000) | up 14/30 (p 0.856) |
+| VAD-Valence.Warriner_wnpair.median | +0.118 / +0.153 / +0.247 / +0.177 | up 21/30 (p 0.043) | up 25/30 (p 0.000) | up 17/30 (p 0.585) |
+
+## Arousal
 
 ### national stories (judged; base / raw / prefill / asked)
 
@@ -98,7 +124,7 @@ Per set: median over lineages per condition; for each aligned condition, lineage
 | VAD-Arousal.Warriner.median | -0.020 / +0.054 / +0.033 / +0.130 | up 21/32 (p 0.110) | up 15/23 (p 0.210) | up 17/20 (p 0.003) |
 | VAD-Arousal.Warriner_orth.median | +0.026 / -0.022 / +0.013 / +0.023 | down 23/32 (p 0.020) | down 13/23 (p 0.678) | down 11/20 (p 0.824) |
 | VAD-Arousal.Warriner_band.median | -0.049 / -0.074 / -0.030 / -0.011 | down 20/32 (p 0.215) | up 8/23 (p 0.210) | up 11/20 (p 0.824) |
-| VAD-Arousal.Warriner_nnpair.median | -0.179 / -0.230 / -0.226 / -0.104 | down 23/32 (p 0.020) | down 14/23 (p 0.405) | up 13/20 (p 0.263) |
+| VAD-Arousal.Warriner_nnpair.median* | -0.179 / -0.230 / -0.226 / -0.104 | down 23/32 (p 0.020) | down 14/23 (p 0.405) | up 13/20 (p 0.263) |
 | VAD-Arousal.Warriner_wnpair.median | -0.090 / -0.102 / -0.056 / -0.021 | down 19/32 (p 0.377) | up 10/23 (p 0.678) | up 11/20 (p 0.824) |
 
 ### F11 stems (TEMPLATE_ARM; base / raw / prefill / asked)
@@ -109,7 +135,31 @@ Per set: median over lineages per condition; for each aligned condition, lineage
 | VAD-Arousal.Warriner.median | +0.128 / +0.235 / +0.242 / +0.386 | up 26/30 (p 0.000) | up 25/30 (p 0.000) | up 29/30 (p 0.000) |
 | VAD-Arousal.Warriner_orth.median | +0.265 / +0.265 / +0.197 / +0.284 | up 17/30 (p 0.585) | down 21/30 (p 0.043) | up 18/30 (p 0.362) |
 | VAD-Arousal.Warriner_band.median | +0.199 / +0.218 / +0.168 / +0.272 | up 19/30 (p 0.200) | down 18/30 (p 0.362) | up 23/30 (p 0.005) |
-| VAD-Arousal.Warriner_nnpair.median | -0.079 / -0.093 / -0.101 / -0.034 | down 12/30 (p 0.362) | down 20/30 (p 0.099) | up 22/30 (p 0.016) |
+| VAD-Arousal.Warriner_nnpair.median* | -0.079 / -0.093 / -0.101 / -0.034 | down 12/30 (p 0.362) | down 20/30 (p 0.099) | up 22/30 (p 0.016) |
 | VAD-Arousal.Warriner_wnpair.median | +0.140 / +0.160 / +0.117 / +0.233 | up 21/30 (p 0.043) | down 18/30 (p 0.362) | up 26/30 (p 0.000) |
+
+## Dominance
+
+### national stories (judged; base / raw / prefill / asked)
+
+| column | medians | base -> aligned_raw | base -> aligned_prefill | base -> aligned_rettberg |
+|---|---|---|---|---|
+| Warriner-Dominance.lookup | +5.512 / +5.667 / +5.642 / +5.634 | up 29/32 (p 0.000) | up 21/23 (p 0.000) | up 17/20 (p 0.003) |
+| VAD-Dominance.Warriner.median | +0.168 / +0.356 / +0.296 / +0.323 | up 28/32 (p 0.000) | up 17/23 (p 0.035) | up 17/20 (p 0.003) |
+| VAD-Dominance.Warriner_orth.median | +0.175 / +0.366 / +0.310 / +0.338 | up 29/32 (p 0.000) | up 18/23 (p 0.011) | up 17/20 (p 0.003) |
+| VAD-Dominance.Warriner_band.median | +0.244 / +0.440 / +0.372 / +0.418 | up 29/32 (p 0.000) | up 17/23 (p 0.035) | up 17/20 (p 0.003) |
+| VAD-Dominance.Warriner_nnpair.median* | +0.174 / +0.332 / +0.313 / +0.325 | up 28/32 (p 0.000) | up 18/23 (p 0.011) | up 17/20 (p 0.003) |
+| VAD-Dominance.Warriner_wnpair.median | +0.230 / +0.438 / +0.370 / +0.404 | up 28/32 (p 0.000) | up 18/23 (p 0.011) | up 17/20 (p 0.003) |
+
+### F11 stems (TEMPLATE_ARM; base / raw / prefill / asked)
+
+| column | medians | base -> raw | base -> prefill | base -> continue |
+|---|---|---|---|---|
+| Warriner-Dominance.lookup | +5.466 / +5.489 / +5.497 / +5.488 | up 21/30 (p 0.043) | up 22/30 (p 0.016) | up 21/30 (p 0.043) |
+| VAD-Dominance.Warriner.median | -0.099 / -0.067 / +0.030 / -0.013 | up 22/30 (p 0.016) | up 27/30 (p 0.000) | up 18/30 (p 0.362) |
+| VAD-Dominance.Warriner_orth.median | -0.096 / -0.058 / +0.042 / -0.001 | up 24/30 (p 0.001) | up 27/30 (p 0.000) | up 19/30 (p 0.200) |
+| VAD-Dominance.Warriner_band.median | -0.035 / -0.007 / +0.083 / +0.040 | up 21/30 (p 0.043) | up 27/30 (p 0.000) | up 18/30 (p 0.362) |
+| VAD-Dominance.Warriner_nnpair.median* | -0.097 / -0.103 / -0.021 / -0.087 | down 12/30 (p 0.362) | up 24/30 (p 0.001) | up 13/30 (p 0.585) |
+| VAD-Dominance.Warriner_wnpair.median | -0.039 / -0.000 / +0.095 / +0.056 | up 23/30 (p 0.005) | up 27/30 (p 0.000) | up 18/30 (p 0.362) |
 
 

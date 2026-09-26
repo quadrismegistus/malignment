@@ -289,33 +289,38 @@ def strip():
 
 
 def pairs():
-    """Lineage tests, UNPARTIALLED, for every arousal version on both model sets (abstraction 6abf824: matched-pair
-    axes A band, B nnpair, C wnpair, same-POS; plus plain, orth and the raw Warriner lookup under their scorer)."""
+    """Lineage tests, UNPARTIALLED, for every version of each VAD dimension on both model sets (abstraction 6abf824,
+    3013bcc: matched-pair axes band / nnpair / wnpair, same-POS; plain; orth; and the raw Warriner lookup scored by
+    the same scorer on the same texts). Abstraction's recommendation: valence plain, arousal nnpair, dominance nnpair."""
     from scipy.stats import binomtest
-    cols = ["Warriner-Arousal.lookup", "VAD-Arousal.Warriner.median", "VAD-Arousal.Warriner_orth.median",
-            "VAD-Arousal.Warriner_band.median", "VAD-Arousal.Warriner_nnpair.median", "VAD-Arousal.Warriner_wnpair.median"]
     sets = {"national stories (judged; base / raw / prefill / asked)":
                 (pd.read_parquet(os.path.join(DATA, "prompt_check_national_judged_meta_scored.parquet")), "lineage", "cond",
                  ["base", "aligned_raw", "aligned_prefill", "aligned_rettberg"]),
             "F11 stems (TEMPLATE_ARM; base / raw / prefill / asked)":
                 (pd.read_parquet(os.path.expanduser("~/malignment-data/interiority_norms/fig5_meta_texts_arms4_scored.parquet")),
                  "base", "arm", ["base", "raw", "prefill", "continue"])}
-    L = ["## Arousal versions: lineage tests, unpartialled", "",
+    rec = {"Valence": "", "Arousal": "_nnpair", "Dominance": "_nnpair"}
+    L = ["## VAD versions: lineage tests, unpartialled", "",
          "Per set: median over lineages per condition; for each aligned condition, lineages (with both cells) moving from "
-         "base in the direction of the medians' difference, sign-test p.", ""]
-    for name, (M, lin, key, conds) in sets.items():
-        L += ["### " + name, "", "| column | medians | " + " | ".join("base -> " + c for c in conds[1:]) + " |", "|---|---|" + "---|" * 3]
-        for c in cols:
-            piv = M.pivot_table(index=lin, columns=key, values=c)
-            med = piv.median()
-            cells = []
-            for cd in conds[1:]:
-                d = piv[["base", cd]].dropna()
-                sgn = np.sign(med[cd] - med["base"])
-                k = int((np.sign(d[cd] - d["base"]) == sgn).sum())
-                cells.append("%s %d/%d (p %.3f)" % ("up" if sgn > 0 else "down", k, len(d), binomtest(k, len(d)).pvalue))
-            L.append("| %s | %s | %s |" % (c, " / ".join("%+.3f" % med[x] for x in conds), " | ".join(cells)))
-        L.append("")
+         "base in the direction of the medians' difference, sign-test p. RECOMMENDED axis per dimension (abstraction, "
+         "3013bcc) marked *.", ""]
+    for dim in ("Valence", "Arousal", "Dominance"):
+        cols = ["Warriner-%s.lookup" % dim] + ["VAD-%s.Warriner%s.median" % (dim, v) for v in ("", "_orth", "_band", "_nnpair", "_wnpair")]
+        L += ["## " + dim, ""]
+        for name, (M, lin, key, conds) in sets.items():
+            L += ["### " + name, "", "| column | medians | " + " | ".join("base -> " + c for c in conds[1:]) + " |", "|---|---|" + "---|" * 3]
+            for c in cols:
+                piv = M.pivot_table(index=lin, columns=key, values=c)
+                med = piv.median()
+                cells = []
+                for cd in conds[1:]:
+                    d = piv[["base", cd]].dropna()
+                    sgn = np.sign(med[cd] - med["base"])
+                    k = int((np.sign(d[cd] - d["base"]) == sgn).sum())
+                    cells.append("%s %d/%d (p %.3f)" % ("up" if sgn > 0 else "down", k, len(d), binomtest(k, len(d)).pvalue))
+                star = "*" if c == "VAD-%s.Warriner%s.median" % (dim, rec[dim]) else ""
+                L.append("| %s%s | %s | %s |" % (c, star, " / ".join("%+.3f" % med[x] for x in conds), " | ".join(cells)))
+            L.append("")
     return L
 
 
