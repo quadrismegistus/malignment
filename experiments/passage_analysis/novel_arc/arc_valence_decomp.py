@@ -1,6 +1,8 @@
 """Is a rise in valence fewer negative words, more positive words, or a change in their intensity? (RH, 2026-09-26)
 
-    ~/github/abslithists/abstraction/.venv/bin/python -u arc_valence_decomp.py   -> ARC_VALENCE_DECOMP.md
+    ~/github/abslithists/abstraction/.venv/bin/python -u arc_valence_decomp.py      -> ARC_VALENCE_DECOMP.md
+    ~/github/abslithists/abstraction/.venv/bin/python -u arc_valence_decomp.py cc   -> ARC_VALENCE_DECOMP_cc.md: the history
+        on Chadwyck and Chicago only (RH, 2026-09-26; Figure 5's corpora, no bpo entities, no OCR); national unchanged, skipped
 
 THE IDENTITY. Over a group's scored tokens (tokens whose surface form the valence table covers; book-policy
 stopwords and names removed, abstraction's tokenize_agnostic on lowercased text), with n the neutral point and
@@ -47,6 +49,7 @@ PLAIN = "VAD-Valence.Warriner.median"
 #: HTML entity residue in lltk.text_freqs (&apos; &quot; ...) tokenises to words the vector vocabulary scores: `apos`
 #: topped the first history ranking. Never scored, in any group.
 ENTITIES = {"apos", "quot", "amp", "lt", "gt", "nbsp", "mdash", "ndash", "hellip", "rsquo", "lsquo", "rdquo", "ldquo"}
+CC = "cc" in sys.argv[1:]
 COMP = ["more positive words", "fewer negative words", "positive words stronger", "negative words weaker", "neutral band"]
 
 
@@ -155,16 +158,18 @@ def national(V, L):
 
 
 def history(V, L):
+    CORP = " AND corpus IN ('chadwyck', 'chicago')" if CC else ""
+
     def counts(lo, hi):
         sql = f"""SELECT k AS word, sum(v) AS n
           FROM (SELECT _id, freqs FROM lltk.text_freqs FINAL WHERE _id IN ({A.REPS})
-                AND _id IN (SELECT _id FROM lltk.texts FINAL WHERE year BETWEEN {lo} AND {hi}))
+                AND _id IN (SELECT _id FROM lltk.texts FINAL WHERE year BETWEEN {lo} AND {hi}{CORP}))
           ARRAY JOIN mapKeys(freqs) AS k, mapValues(freqs) AS v
           WHERE match(k, '^[a-z]+$') GROUP BY word HAVING n >= 3 FORMAT TSVWithNames"""
         T = pd.read_csv(io.StringIO(A.ch_query(sql, {})), sep="\t", keep_default_na=False)
         return collections.Counter(dict(zip(T.word, T.n)))
     c1, c2 = counts(1750, 1799), counts(1850, 1899)
-    L += ["## History: arc_fiction 1750-1799 -> 1850-1899 (pooled word counts)", ""]
+    L += ["## History: arc_fiction%s 1750-1799 -> 1850-1899 (pooled word counts)" % (", Chadwyck and Chicago only," if CC else ""), ""]
     for name, (table, n0, h) in V.items():
         a, b = stats(c1, table, n0, h), stats(c2, table, n0, h)
         tot = b["mean"] - a["mean"]
@@ -184,9 +189,10 @@ def main():
     L = ["# Decomposing valence: fewer negative words, more positive words, or intensity? (EXPLORATORY)", "",
          "Producer `arc_valence_decomp.py` (method and identity in its docstring). Components sum exactly to the observed "
          "change (asserted). Percentages are shares of the observed change and can exceed 100 or go negative.", ""]
-    national(V, L)
+    if not CC:
+        national(V, L)
     history(V, L)
-    open(os.path.join(HERE, "ARC_VALENCE_DECOMP.md"), "w").write("\n".join(L) + "\n")
+    open(os.path.join(HERE, "ARC_VALENCE_DECOMP%s.md" % ("_cc" if CC else "")), "w").write("\n".join(L) + "\n")
     print("\n".join(L))
 
 
