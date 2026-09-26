@@ -15,6 +15,8 @@ measure like the concreteness score above it. (RH, 2026-09-26: "Did we ever try 
     .venv/bin/python -u arc_fig5_net_valence.py three3  -> figures/arc_fig5_conc_val3_v3_1700.*: RH (2026-09-26): panels of EQUAL
         height in a 6.5 in figure; titles "Concreteness of fictional language" / "Valenced language (positive + negative)" /
         "Net valence (positive - negative)"; % signs on the percentage-point axis; panel 3 headroom to 15 (paper seat).
+    .venv/bin/python -u arc_fig5_net_valence.py three4  -> figures/arc_fig5_conc_val3_v4_1700.*: v3 with the top panel's 1875 label
+        (Aligned (chat)) set below and right of its point, off the reference line above it (RH, 2026-09-26).
 
 Everything as Figure 5 v4 (arc_fig5_conc_eval.py v4 1700): same 9,836 Chadwyck and Chicago novels 1700-2009, same
 national-story meta-texts, same cleaned "+vector" lexicon with the same declared exclusions (model-text names and
@@ -30,7 +32,8 @@ import pandas as pd
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
-THREE3 = "three3" in sys.argv[1:]                            # read before the argv rewrite below
+THREE4 = "three4" in sys.argv[1:]                            # read before the argv rewrite below
+THREE3 = "three3" in sys.argv[1:] or THREE4                  # v4 = v3 plus one moved year label
 THREE2 = "three2" in sys.argv[1:] or THREE3                  # v3 inherits v2's caption, axis title and frame test
 THREE = "three" in sys.argv[1:] or THREE2
 sys.argv = [sys.argv[0], "v4", "1700"]
@@ -38,7 +41,7 @@ import arc_fig5_conc_eval as E                               # noqa: E402
 V, H, A, F = E.V, E.H, E.A, E.F
 from scipy.stats import binomtest                            # noqa: E402
 
-OUT = os.path.join(HERE, "figures", "arc_fig5_conc_val3_v3_1700" if THREE3 else "arc_fig5_conc_val3_v2_1700" if THREE2 else "arc_fig5_conc_val3_v1_1700" if THREE else "arc_fig5_conc_netval_v1_1700")
+OUT = os.path.join(HERE, "figures", "arc_fig5_conc_val3_v4_1700" if THREE4 else "arc_fig5_conc_val3_v3_1700" if THREE3 else "arc_fig5_conc_val3_v2_1700" if THREE2 else "arc_fig5_conc_val3_v1_1700" if THREE else "arc_fig5_conc_netval_v1_1700")
 COND, NAME = E.COND, E.NAME
 #: booked (arc_fig5_conc_eval_v4_1700.caption.txt): v4's evaluative arms, which pos + neg must reproduce
 V4_EVAL = {"base": 0.1721, "raw": 0.2174, "prefill": 0.2217, "continue": 0.2322}
@@ -126,7 +129,7 @@ def main():
         assert cross_v == {"base": [1906], "raw": [1821], "prefill": [1815], "continue": [1744, 1797]}, cross_v
         #: THREE3's panels are ~0.8 of THREE's height, so every label stack needs proportionally more room (0.10 of range)
         ps = [E.panel(hs, cvs, arms_s, "Concreteness of fictional language", "Concreteness\n(word norm mean)", False, pct=False,
-                      gap=0.1 if THREE3 else 0.075),
+                      gap=0.1 if THREE3 else 0.075, quad={NAME["continue"]: "lr"} if THREE4 else None),
               E.panel(hv, cvv, arms_v, "Valenced language (positive + negative)" if THREE3 else "Valenced language in fiction (positive + negative)",
                       "Valenced words\n(per content word)", False, gap=0.1 if THREE3 else 0.075),
               E.panel(hn, cvn, arms_n, "Net valence (positive \u2212 negative)" if THREE3 else "Valence in fiction (positive \u2212 negative)",

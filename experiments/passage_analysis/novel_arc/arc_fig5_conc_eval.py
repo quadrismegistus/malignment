@@ -168,7 +168,7 @@ def crossings(cv, v):
     return [(y0 + (v - v0) / (v1 - v0) * (y1 - y0), v) for (y0, v0), (y1, v1) in zip(cv[:-1], cv[1:]) if (v0 - v) * (v1 - v) < 0]
 
 
-def panel(hist, curve, arms, title, ylab, show_x, pct=True, gap=0.075, ymax=None):
+def panel(hist, curve, arms, title, ylab, show_x, pct=True, gap=0.075, ymax=None, quad=None):
     from plotnine import (ggplot, aes, geom_point, geom_line, geom_segment, geom_text, geom_vline, labs,
                           scale_x_continuous, scale_y_continuous, scale_linetype_manual, theme, element_text, element_blank)
     fnt = F.pub_font()
@@ -208,7 +208,9 @@ def panel(hist, curve, arms, title, ylab, show_x, pct=True, gap=0.075, ymax=None
         from plotnine import geom_text as _gt
         rows = []
         vals = sorted(Ad.value)
-        for v in Ad.value:
+        #: quad = {arm label: "ll"|"ul"|"ur"|"lr"} overrides the rule for that line's year label, where the rule's
+        #: quadrant is empty of curve but not of the neighbouring reference line (RH, 2026-09-26: 1875 on the top panel)
+        for arm, v in zip(Ad.arm, Ad.value):
             cs = crossings(curve, v)
             for i, (x, y) in enumerate(cs):
                 row = dict(x=x, y=y, lab="%d" % round(x), q=None)
@@ -222,6 +224,8 @@ def panel(hist, curve, arms, title, ylab, show_x, pct=True, gap=0.075, ymax=None
                         row["q"] = "ll" if not below or v - max(below) > room else "ur"
                     else:
                         row["q"] = "ul" if not above or min(above) - v > room else "lr"
+                    if quad and arm in quad:
+                        row["q"] = quad[arm]
                 rows.append(row)
         #: explicit columns: a panel where no line meets the history has no rows, and a column-less frame breaks X.q
         X = pd.DataFrame(rows, columns=["x", "y", "lab", "q"])
