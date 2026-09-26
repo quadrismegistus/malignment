@@ -1,0 +1,9 @@
+CONCRETENESS REGRESSED OUT (text-level OLS over the 1600-2009 novels per panel; arms adjusted with the same
+slope). HISTORY FROM CHADWYCK AND CHICAGO ONLY (9,964 texts). Fourth row: valence EXTREMITY, each version's
+per-word distance from neutral (lookup: |V - 5|; vector axes: from where Warriner 5 falls on that axis),
+token-averaged. REFERENCE GRID: valence, arousal and dominance in English fiction 1600-2000, every version --
+the human Warriner lookup and the vector axes plain, orth, band, nnpair, wnpair (* = recommended). Decade
+medians over arc_fiction texts, lowess; not bias-corrected in any panel. Lines: the national-story arms
+(judged no-demonym stories, median over lineages). Free y per panel. Working reference, not a figure draft.
+
+  slopes on concreteness: Valence: human lookup -0.003; Valence: plain +0.008; Valence: orth -0.300; Valence: band -0.164; Valence: nnpair -0.139; Valence: wnpair -0.157; Arousal: human lookup -0.164; Arousal: plain -0.531; Arousal: orth +0.111; Arousal: band -0.075; Arousal: nnpair -0.106; Arousal: wnpair -0.072; Dominance: human lookup -0.071; Dominance: plain -0.275; Dominance: orth -0.298; Dominance: band -0.231; Dominance: nnpair -0.084; Dominance: wnpair -0.278; Val. extremity: human lookup -0.149; Val. extremity: plain -0.115; Val. extremity: orth -0.188; Val. extremity: band -0.157; Val. extremity: nnpair -0.156; Val. extremity: wnpair -0.188

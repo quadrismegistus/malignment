@@ -31,13 +31,16 @@ START = 1600 if "from1600" in sys.argv[1:] else 1700
 #: extremity (RH, 2026-09-26: "What about valence extremity"): a fourth row, each valence version's per-word distance
 #: from neutral, token-averaged (arc_valence_extremity.py six); recommended as valence: plain
 EXT = "extremity" in sys.argv[1:]
+#: cc (RH, 2026-09-26: "just using chadwyck and chicago"): history from Figure 5's own corpora only -- no bpo (whose
+#: unescaped HTML entities are scored), no OCR mix. Chadwyck runs to ~1880, Chicago from 1880.
+CC = "cc" in sys.argv[1:]
 sys.argv = [sys.argv[0], "v4", "meta", "sel12", "arms4"]
 import arc_history_arms as H                               # noqa: E402
 from malignment import figure as F                         # noqa: E402
 
 SH = os.path.expanduser("~/malignment-data/interiority_norms")
 OUT = os.path.join(HERE, "figures", "arc_vad_reference_grid" + ("_partial" if PARTIAL else "") + ("_1600" if START == 1600 else "")
-                   + ("_ext" if EXT else "") + "_v1")
+                   + ("_ext" if EXT else "") + ("_cc" if CC else "") + "_v1")
 CONC = "Abs-Conc.Median.median"
 VERS = [("lookup", "human lookup"), ("", "plain"), ("_orth", "orth"), ("_band", "band"), ("_nnpair", "nnpair"), ("_wnpair", "wnpair")]
 REC = {"Valence": "", "Arousal": "_nnpair", "Dominance": "_nnpair", "ValenceExtremity": ""}
@@ -55,7 +58,9 @@ def main():
     for ext in (".png", ".pdf", ".caption.txt"):
         assert not os.path.exists(OUT + ext), "refusing to overwrite " + OUT + ext
     V = pd.read_parquet(os.path.join(SH, "vad_scores_arc_fiction.parquet"))
-    T = H.concreteness_texts()[["_id", "year"]].merge(V, on="_id", validate="1:1")
+    T = H.concreteness_texts()[["_id", "year", "corpus"]].merge(V, on="_id", validate="1:1")
+    if CC:
+        T = T[T.corpus.isin(["chadwyck", "chicago"])]
     T = T[T.year.between(START, 2009)]
     M = pd.read_parquet(os.path.join(H.DATA, "prompt_check_national_judged_meta_scored.parquet"))
     if EXT:
@@ -107,6 +112,8 @@ def main():
     F.save(p, OUT + ".png")
     head = ("CONCRETENESS REGRESSED OUT (text-level OLS over the %d-2009 novels per panel; arms adjusted with the same "
             "slope). " % START) if PARTIAL else ""
+    if CC:
+        head += "HISTORY FROM CHADWYCK AND CHICAGO ONLY (%s texts). " % format(len(T), ",")
     if EXT:
         head += ("Fourth row: valence EXTREMITY, each version's per-word distance from neutral (lookup: |V - 5|; vector "
                  "axes: from where Warriner 5 falls on that axis), token-averaged. ")
