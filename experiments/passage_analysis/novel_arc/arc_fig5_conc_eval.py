@@ -168,15 +168,17 @@ def crossings(cv, v):
     return [(y0 + (v - v0) / (v1 - v0) * (y1 - y0), v) for (y0, v0), (y1, v1) in zip(cv[:-1], cv[1:]) if (v0 - v) * (v1 - v) < 0]
 
 
-def panel(hist, curve, arms, title, ylab, show_x, pct=True, gap=0.075):
+def panel(hist, curve, arms, title, ylab, show_x, pct=True, gap=0.075, ymax=None):
     from plotnine import (ggplot, aes, geom_point, geom_line, geom_segment, geom_text, geom_vline, labs,
                           scale_x_continuous, scale_y_continuous, scale_linetype_manual, theme, element_text, element_blank)
     fnt = F.pub_font()
     cv = pd.DataFrame(curve, columns=["year", "value"])
     Ad = pd.DataFrame([{"arm": NAME[k], "value": v} for k, v in arms.items()])
     lo = min(cv.value.min(), hist.value.min(), Ad.value.min()); hi = max(cv.value.max(), hist.value.max(), Ad.value.max())
-    #: bounds only for the short panel: every earlier plate was drawn without them and must redraw identically
-    pos = label_positions({NAME[k]: v for k, v in arms.items()}, gap * (hi - lo), *((lo, hi) if gap != 0.075 else (None, None)))
+    #: bounds only for the short panel: every earlier plate was drawn without them and must redraw identically.
+    #: ymax (headroom above the top line) widens the band the labels may use.
+    pos = label_positions({NAME[k]: v for k, v in arms.items()}, gap * (hi - lo),
+                          *((lo, max(hi, ymax or hi)) if gap != 0.075 else (None, None)))
     Ad["ly"] = Ad.arm.map(pos)
     X0 = START
     p = (ggplot()
@@ -232,6 +234,9 @@ def panel(hist, curve, arms, title, ylab, show_x, pct=True, gap=0.075):
             if len(d):
                 p = p + _gt(aes("x", "y", label="lab"), data=d.assign(x=d.x + sx * dx, y=d.y + sy * dy), ha=ha, va=va,
                             size=F.PUB_FONT_PT * 0.8, family=fnt, color=F.PUB_INK)
+    if ymax is not None:
+        from plotnine import expand_limits
+        p = p + expand_limits(y=ymax)
     if not show_x:
         p = p + theme(axis_text_x=element_blank())
     return p

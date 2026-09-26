@@ -12,6 +12,9 @@ measure like the concreteness score above it. (RH, 2026-09-26: "Did we ever try 
         caption drops "more than twice its highest point" (a level that depends on the lexicon's balance of poles) and
         calls base "at the top of the historical range"; and the FRAME test -- prefilled and chat each against aligned-raw
         on net valence, paired by lineage.
+    .venv/bin/python -u arc_fig5_net_valence.py three3  -> figures/arc_fig5_conc_val3_v3_1700.*: RH (2026-09-26): panels of EQUAL
+        height in a 6.5 in figure; titles "Concreteness of fictional language" / "Valenced language (positive + negative)" /
+        "Net valence (positive - negative)"; % signs on the percentage-point axis; panel 3 headroom to 15 (paper seat).
 
 Everything as Figure 5 v4 (arc_fig5_conc_eval.py v4 1700): same 9,836 Chadwyck and Chicago novels 1700-2009, same
 national-story meta-texts, same cleaned "+vector" lexicon with the same declared exclusions (model-text names and
@@ -27,14 +30,15 @@ import pandas as pd
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
-THREE2 = "three2" in sys.argv[1:]                            # read before the argv rewrite below
+THREE3 = "three3" in sys.argv[1:]                            # read before the argv rewrite below
+THREE2 = "three2" in sys.argv[1:] or THREE3                  # v3 inherits v2's caption, axis title and frame test
 THREE = "three" in sys.argv[1:] or THREE2
 sys.argv = [sys.argv[0], "v4", "1700"]
 import arc_fig5_conc_eval as E                               # noqa: E402
 V, H, A, F = E.V, E.H, E.A, E.F
 from scipy.stats import binomtest                            # noqa: E402
 
-OUT = os.path.join(HERE, "figures", "arc_fig5_conc_val3_v2_1700" if THREE2 else "arc_fig5_conc_val3_v1_1700" if THREE else "arc_fig5_conc_netval_v1_1700")
+OUT = os.path.join(HERE, "figures", "arc_fig5_conc_val3_v3_1700" if THREE3 else "arc_fig5_conc_val3_v2_1700" if THREE2 else "arc_fig5_conc_val3_v1_1700" if THREE else "arc_fig5_conc_netval_v1_1700")
 COND, NAME = E.COND, E.NAME
 #: booked (arc_fig5_conc_eval_v4_1700.caption.txt): v4's evaluative arms, which pos + neg must reproduce
 V4_EVAL = {"base": 0.1721, "raw": 0.2174, "prefill": 0.2217, "continue": 0.2322}
@@ -120,12 +124,17 @@ def main():
         assert round(100 * hist_v[2] / hist_v[1]) == 65, hist_v
         cross_v = {k: [round(x) for x, _ in E.crossings(cvv, v)] for k, v in arms_v.items()}
         assert cross_v == {"base": [1906], "raw": [1821], "prefill": [1815], "continue": [1744, 1797]}, cross_v
-        ps = [E.panel(hs, cvs, arms_s, "Concreteness of fictional language", "Concreteness\n(word norm mean)", False, pct=False),
-              E.panel(hv, cvv, arms_v, "Valenced language in fiction (positive + negative)", "Valenced words\n(per content word)", False),
-              E.panel(hn, cvn, arms_n, "Valence in fiction (positive \u2212 negative)",
+        #: THREE3's panels are ~0.8 of THREE's height, so every label stack needs proportionally more room (0.10 of range)
+        ps = [E.panel(hs, cvs, arms_s, "Concreteness of fictional language", "Concreteness\n(word norm mean)", False, pct=False,
+                      gap=0.1 if THREE3 else 0.075),
+              E.panel(hv, cvv, arms_v, "Valenced language (positive + negative)" if THREE3 else "Valenced language in fiction (positive + negative)",
+                      "Valenced words\n(per content word)", False, gap=0.1 if THREE3 else 0.075),
+              E.panel(hn, cvn, arms_n, "Net valence (positive \u2212 negative)" if THREE3 else "Valence in fiction (positive \u2212 negative)",
                       "Positive minus negative\n(percentage points)" if THREE2 else "Positive minus negative\nwords (per content word)", True,
                       #: two thirds the height of the others, so labels need half again the spacing in data units
-                      pct="pp" if THREE2 else True, gap=0.12 if THREE2 else 0.075)]
+                      #: RH: % signs on the ticks even though the unit is percentage points (the axis title says which)
+                      pct=True if THREE3 else "pp" if THREE2 else True, gap=0.1 if THREE3 else 0.12 if THREE2 else 0.075,
+                      ymax=0.15 if THREE3 else None)]
         frame = {}
         for a, b_ in (("prefill", "raw"), ("continue", "raw")):
             piv = Mm.pivot_table(index="lineage", columns="cond", values="net")[[COND[a], COND[b_]]].dropna()
@@ -136,7 +145,12 @@ def main():
     else:
         ps = [E.panel(hs, cvs, arms_s, "Concreteness of fictional language", "Concreteness\n(word norm mean)", False, pct=False),
               E.panel(hn, cvn, arms_n, "Valence in fictional language", "Positive minus negative\nwords (per content word)", True)]
-    if THREE2:
+    if THREE3:
+        fig = Stack(ps).draw()
+        fig.set_size_inches(F.PUB_SIZE[0], 6.5)
+        fig.savefig(OUT + ".png", dpi=300)
+        fig.savefig(OUT + ".pdf")
+    elif THREE2:
         #: plotnine 0.15 has no height option for a Stack, and its layout pass (RowsTree.resize) sets every PANEL to the
         #: mean panel height, overwriting any ratio given to the gridspec. Patched for this draw only, then restored:
         #: panel i gets mean * RATIO[i] / mean(RATIO), the space around it unchanged.
@@ -189,7 +203,8 @@ def main():
             "  concreteness arms: " + ", ".join("%s %.4f" % (NAME[k], v) for k, v in arms_s.items())]
     if THREE:
         cap = textwrap.wrap((
-            "CONCRETENESS, VALENCED LANGUAGE AND VALENCE IN FICTION, 1700-2000. Top: concreteness, the mean over a text's words of a "
+            ("CONCRETENESS, VALENCED LANGUAGE AND NET VALENCE IN FICTION, 1700-2000." if THREE3 else
+             "CONCRETENESS, VALENCED LANGUAGE AND VALENCE IN FICTION, 1700-2000.") + " Top: concreteness, the mean over a text's words of a "
             "concreteness norm (z-scored median of human concreteness and imageability norms, extended to period vocabulary); "
             "positive is concrete, negative abstract. Middle and bottom: per text, positive words PLUS negative words, and positive "
             "words MINUS negative words, as shares of content words (a cleaned Warriner et al. 2013 lexicon plus rater-confirmed "
