@@ -8,6 +8,10 @@ we make Concreteness a share too?")
         NORM SCORE on top (RH, 2026-09-26: "keep Concreteness as a norm"), on the SAME Chadwyck and Chicago texts as the
         evaluative panel ("at least use the same historical corpus in both"), uncorrected like the model lines (the
         two corpora's bias coefficients differ by 0.005)
+    .venv/bin/python -u arc_fig5_conc_eval.py v3 [1700]   -> figures/arc_fig5_conc_eval_v3[_1700].*: v2 plus a point where
+        each model line crosses the smoothed history, labelled with its year, and titles "Concreteness of fictional
+        language" (a degree: the panel is a norm mean) / "Evaluative language in fiction" (a quantity: a share) (RH,
+        2026-09-26: "score on top, share on bottom"; "add the intersection points and year labels")
     .venv/bin/python -u arc_fig5_conc_eval.py ext [1700]  -> figures/arc_fig5_eval_extremity_ref_v1[_1700].*: reference
         plate adding EVALUATIVE EXTREMITY, the norm-average form of the evaluative share on the same cleaned lexicon:
         mean |v - 5| over every scored token, where scored = the kept polar words (as in the share) PLUS the
@@ -39,8 +43,9 @@ import arc_valence_clean_components as V                   # noqa: E402
 H, F, A = V.H, V.F, V.A
 
 START = 1700 if "1700" in _ARGS else 1600
-MODE = "ext" if "ext" in _ARGS else "v2" if "v2" in _ARGS else "v1"
-OUT = os.path.join(HERE, "figures", {"v1": "arc_fig5_conc_eval_v1", "v2": "arc_fig5_conc_eval_v2", "ext": "arc_fig5_eval_extremity_ref_v1"}[MODE]
+MODE = "ext" if "ext" in _ARGS else "v3" if "v3" in _ARGS else "v2" if "v2" in _ARGS else "v1"
+OUT = os.path.join(HERE, "figures", {"v1": "arc_fig5_conc_eval_v1", "v2": "arc_fig5_conc_eval_v2", "v3": "arc_fig5_conc_eval_v3",
+                                     "ext": "arc_fig5_eval_extremity_ref_v1"}[MODE]
                    + ("_1700" if START == 1700 else ""))
 EXT_TEXTS = os.path.join(A.DATA, "eval_extremity_texts_cc.parquet")
 NORMS = "/Users/rj416/github/abslithists/abstraction/data/fields/data.allnorms.pkl.gz"
@@ -141,6 +146,11 @@ def label_positions(vals, gap):
     return pos
 
 
+def crossings(cv, v):
+    """-> [(year, value)] where the horizontal line at v crosses the lowess curve, linearly interpolated"""
+    return [(y0 + (v - v0) / (v1 - v0) * (y1 - y0), v) for (y0, v0), (y1, v1) in zip(cv[:-1], cv[1:]) if (v0 - v) * (v1 - v) < 0]
+
+
 def panel(hist, curve, arms, title, ylab, show_x, pct=True):
     from plotnine import (ggplot, aes, geom_point, geom_line, geom_segment, geom_text, geom_vline, labs,
                           scale_x_continuous, scale_y_continuous, scale_linetype_manual, theme, element_text, element_blank)
@@ -164,6 +174,41 @@ def panel(hist, curve, arms, title, ylab, show_x, pct=True):
          + F.pub_theme(grid="y")
          + theme(axis_title_y=element_text(family=fnt, size=F.PUB_FONT_PT),
                  plot_title=element_text(family=fnt, size=F.PUB_FONT_PT, weight="bold", ha="left")))
+    if MODE == "v3":
+        from plotnine import geom_label
+        #: every crossing gets a point; only each line's LAST (the one on the long trend) gets a year. Earlier crossings,
+        #: where a line grazes the 18th-century plateau, are listed in the caption: eight labels there overprint.
+        #: Plain text, NO fill (a filled box erased the curve under it), set in a quadrant the curve leaves empty: a
+        #: falling curve occupies upper-left and lower-right of the point, a rising one lower-left and upper-right. The
+        #: preferred quadrant is the one BETWEEN this line and its neighbour; when that gap is shorter than a label, the
+        #: opposite free quadrant.
+        from plotnine import geom_text as _gt
+        rows = []
+        vals = sorted(Ad.value)
+        for v in Ad.value:
+            cs = crossings(curve, v)
+            for i, (x, y) in enumerate(cs):
+                row = dict(x=x, y=y, lab="%d" % round(x), q=None)
+                if i == len(cs) - 1:
+                    j = int(np.searchsorted(curve[:, 0], x))
+                    falling = curve[j, 1] < curve[j - 1, 1]
+                    below = [u for u in vals if u < v]
+                    above = [u for u in vals if u > v]
+                    room = 0.06 * (hi - lo)
+                    if falling:
+                        row["q"] = "ll" if not below or v - max(below) > room else "ur"
+                    else:
+                        row["q"] = "ul" if not above or min(above) - v > room else "lr"
+                rows.append(row)
+        X = pd.DataFrame(rows)
+        p = p + geom_point(aes("x", "y"), data=X, color=F.PUB_INK, fill="white", size=2.0, stroke=0.6, shape="o")
+        dx, dy = 4, 0.012 * (hi - lo)
+        for q, (sx, sy, ha, va) in {"ll": (-1, -1, "right", "top"), "ul": (-1, 1, "right", "bottom"),
+                                    "ur": (1, 1, "left", "bottom"), "lr": (1, -1, "left", "top")}.items():
+            d = X[X.q == q]
+            if len(d):
+                p = p + _gt(aes("x", "y", label="lab"), data=d.assign(x=d.x + sx * dx, y=d.y + sy * dy), ha=ha, va=va,
+                            size=F.PUB_FONT_PT * 0.8, family=fnt, color=F.PUB_INK)
     if not show_x:
         p = p + theme(axis_text_x=element_blank())
     return p
@@ -251,7 +296,15 @@ def main():
         for k, v in {"base": 0.097, "raw": -0.125, "prefill": -0.059, "continue": -0.178}.items():
             assert abs(arms_s[k] - v) < 5e-4, (k, arms_s[k], v)
         hs = H.decades(Th.year, Th.conc)
-        ps = [panel(hs, H.smooth(hs), arms_s, "Concrete language in fiction", "Concreteness\n(word norm mean)", False, pct=False), ev]
+        ps = [panel(hs, H.smooth(hs), arms_s, "Concreteness of fictional language" if MODE == "v3" else "Concrete language in fiction",
+                    "Concreteness\n(word norm mean)", False, pct=False), ev]
+        if MODE == "v3":
+            cross = {(nm, k): [round(x) for x, _ in crossings(H.smooth(h_), v)] for nm, h_, arms in (("conc", hs, arms_s), ("eval", he, arms_e))
+                     for k, v in arms.items()}
+            #: booked (arc_fig5_eval_extremity_ref_v1 placement lines): the share's crossing years
+            booked = {1600: {"base": [1906], "raw": [1812], "prefill": [1702, 1711, 1792], "continue": [1676, 1746, 1775]},
+                      1700: {"base": [1904], "raw": [1816], "prefill": [1726, 1803], "continue": [1745, 1797]}}[START]
+            assert all(cross[("eval", k)] == v for k, v in booked.items()), cross
         arms_c = arms_s
     if MODE == "ext":
         ext = extremity_lexicon(L)
@@ -294,6 +347,12 @@ def main():
            round(100 * hist_score[2] / hist_score[1]),
            c["raw"]["k"], c["raw"]["n"], c["prefill"]["k"], c["prefill"]["n"], c["continue"]["k"], c["continue"]["n"],
            *[round(100 * c[k]["gap_part"] / c[k]["gap_raw"]) for k in ("raw", "prefill", "continue")])), 100)
+    if MODE == "v3":
+        early = [(NAME[k], cross[("eval", k)][:-1]) for k in COND if len(cross[("eval", k)]) > 1]
+        cap += textwrap.wrap("Circles mark where each model line crosses the smoothed history; the year labels its last crossing." +
+                             (" Earlier crossings, in evaluative language: " + "; ".join("%s %s" % (n, ", ".join(map(str, ys))) for n, ys in early) + "."
+                              if early else ""), 100)
+        cap += ["", "  crossings: " + "; ".join("%s %s %s" % (nm, NAME[k], ", ".join(map(str, ys))) for (nm, k), ys in cross.items())]
     if MODE == "ext":
         cap += textwrap.wrap("REFERENCE ONLY: third panel, evaluative extremity on the same cleaned lexicon, mean |valence - 5| "
                              "over every scored token including the neutral band (4-6).", 100)
