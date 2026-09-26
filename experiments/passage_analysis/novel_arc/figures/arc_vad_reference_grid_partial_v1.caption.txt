@@ -1,0 +1,7 @@
+CONCRETENESS REGRESSED OUT (text-level OLS over the 1700-2009 novels per panel; arms adjusted with the same
+slope). REFERENCE GRID: valence, arousal and dominance in English fiction 1700-2000, every version -- the
+human Warriner lookup and the vector axes plain, orth, band, nnpair, wnpair (* = recommended). Decade medians
+over arc_fiction texts, lowess; not bias-corrected in any panel. Lines: the national-story arms (judged no-
+demonym stories, median over lineages). Free y per panel. Working reference, not a figure draft.
+
+  slopes on concreteness: Valence: human lookup +0.019; Valence: plain +0.015; Valence: orth -0.290; Valence: band -0.153; Valence: nnpair -0.119; Valence: wnpair -0.157; Arousal: human lookup -0.160; Arousal: plain -0.509; Arousal: orth +0.142; Arousal: band -0.049; Arousal: nnpair -0.068; Arousal: wnpair -0.039; Dominance: human lookup -0.071; Dominance: plain -0.287; Dominance: orth -0.309; Dominance: band -0.236; Dominance: nnpair -0.076; Dominance: wnpair -0.295

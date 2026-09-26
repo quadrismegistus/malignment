@@ -1,7 +1,13 @@
 """Reference grid, not a figure draft: every version of valence, arousal and dominance over the arc_fiction history,
 with the national-story arms. (RH, 2026-09-26: "Can you plot them all just for my reference")
 
-    .venv/bin/python -u arc_vad_reference_grid.py   -> figures/arc_vad_reference_grid_v1.{png,pdf,caption.txt}
+    .venv/bin/python -u arc_vad_reference_grid.py           -> figures/arc_vad_reference_grid_v1.{png,pdf,caption.txt}
+    .venv/bin/python -u arc_vad_reference_grid.py partial   -> figures/arc_vad_reference_grid_partial_v1.*
+        (RH: "a new version of same fig that plots concreteness-partialed-out versions"): every panel's text scores
+        minus a text-level OLS fit on concreteness (Abs-Conc.Median.median, uncorrected like the rest) over the
+        1700-2009 novels, plus the mean; the arms adjusted with THAT history slope applied to their meta-texts'
+        concreteness, so arm and history stay on one scale (the within-condition slope of the lineage tests
+        answers a different question: whether the arms separate, not where they sit).
 
 Rows: valence, arousal, dominance. Columns: the raw Warriner LOOKUP (human ratings, same scorer), and the
 abstraction project's vector axes plain, orth, band, nnpair, wnpair (3013bcc). Recommended axis per row
@@ -19,12 +25,14 @@ import pandas as pd
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
+PARTIAL = "partial" in sys.argv[1:]                         # read before the argv rewrite below
 sys.argv = [sys.argv[0], "v4", "meta", "sel12", "arms4"]
 import arc_history_arms as H                               # noqa: E402
 from malignment import figure as F                         # noqa: E402
 
 SH = os.path.expanduser("~/malignment-data/interiority_norms")
-OUT = os.path.join(HERE, "figures", "arc_vad_reference_grid_v1")
+OUT = os.path.join(HERE, "figures", "arc_vad_reference_grid" + ("_partial" if PARTIAL else "") + "_v1")
+CONC = "Abs-Conc.Median.median"
 VERS = [("lookup", "human lookup"), ("", "plain"), ("_orth", "orth"), ("_band", "band"), ("_nnpair", "nnpair"), ("_wnpair", "wnpair")]
 REC = {"Valence": "", "Arousal": "_nnpair", "Dominance": "_nnpair"}
 ARMS = {"base": "Base models", "aligned_raw": "Aligned models", "aligned_prefill": "Aligned, chat, prefilled",
@@ -43,17 +51,27 @@ def main():
     T = H.concreteness_texts()[["_id", "year"]].merge(V, on="_id", validate="1:1")
     T = T[T.year.between(1700, 2009)]
     M = pd.read_parquet(os.path.join(H.DATA, "prompt_check_national_judged_meta_scored.parquet"))
-    pts, cvs, arms, order = [], [], [], []
+    pts, cvs, arms, order, slopes = [], [], [], [], []
     for dim in ("Valence", "Arousal", "Dominance"):
         for v, lab in VERS:
             c = col(dim, v)
             name = "%s: %s%s" % (dim, lab, " *" if v == REC[dim] else "")
             order.append(name)
-            d = T[["year", c]].dropna()
-            h = H.decades(d.year, d[c])
+            d = T[["year", c, CONC]].dropna()
+            y = d[c]
+            if PARTIAL:
+                b = float(np.polyfit(d[CONC], d[c], 1)[0])
+                cm = float(d[CONC].mean())
+                y = d[c] - b * (d[CONC] - cm)
+                slopes.append("%s %+.3f" % (name.replace(" *", ""), b))
+            h = H.decades(d.year, y)
             pts += [dict(panel=name, year=y, value=x) for y, x in zip(h.year, h.value)]
             cvs += [dict(panel=name, year=x, value=y) for x, y in lowess(h.value.values, h.year.values, frac=0.3, return_sorted=True)]
-            arms += [dict(panel=name, arm=ARMS[k], value=float(M[M.cond == k][c].median())) for k in ARMS]
+            if PARTIAL:
+                adj = M[c] - b * (M[CONC] - cm)
+                arms += [dict(panel=name, arm=ARMS[k], value=float(adj[M.cond == k].median())) for k in ARMS]
+            else:
+                arms += [dict(panel=name, arm=ARMS[k], value=float(M[M.cond == k][c].median())) for k in ARMS]
     P, C, A = pd.DataFrame(pts), pd.DataFrame(cvs), pd.DataFrame(arms)
     for df in (P, C, A):
         df["panel"] = pd.Categorical(df.panel, categories=order)
@@ -70,16 +88,19 @@ def main():
          + scale_linetype_manual(dict(zip(ARMS.values(), ["dotted", "dashed", "dashdot", "solid"])))
          + facet_wrap("~panel", ncol=6, scales="free_y")
          + scale_x_continuous(breaks=[1700, 1800, 1900, 2000])
-         + labs(x="", y="Score (each panel on its own scale)", linetype="")
+         + labs(x="", y="Score, concreteness regressed out (own scale)" if PARTIAL else "Score (each panel on its own scale)", linetype="")
          + F.pub_theme(height=6.6)
          + theme(legend_position="bottom", figure_size=(13.0, 6.6),
                  strip_text=element_text(family=F.pub_font(), size=F.PUB_FONT_PT)))
     F.save(p, OUT + ".png")
-    cap = textwrap.wrap("REFERENCE GRID: valence, arousal and dominance in English fiction 1700-2000, every version -- the "
+    cap = textwrap.wrap(("CONCRETENESS REGRESSED OUT (text-level OLS over the 1700-2009 novels per panel; arms adjusted "
+                         "with the same slope). " if PARTIAL else "") + "REFERENCE GRID: valence, arousal and dominance in English fiction 1700-2000, every version -- the "
                         "human Warriner lookup and the vector axes plain, orth, band, nnpair, wnpair (* = recommended). "
                         "Decade medians over arc_fiction texts, lowess; not bias-corrected in any panel. Lines: the "
                         "national-story arms (judged no-demonym stories, median over lineages). Free y per panel. Working "
                         "reference, not a figure draft.", 110)
+    if PARTIAL:
+        cap += ["", "  slopes on concreteness: " + "; ".join(slopes)]
     open(OUT + ".caption.txt", "w").write("\n".join(cap) + "\n")
     print("\n".join(cap))
 
