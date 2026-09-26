@@ -1,0 +1,14 @@
+CONCRETE AND EVALUATIVE LANGUAGE IN FICTION, 1700-2000. Per text, as shares of content words. Top:
+concrete words (z >= 1 on the median of human concreteness and imageability norms, extended to
+period vocabulary). Bottom: words of clear positive or negative valence (a cleaned Warriner et al.
+2013 lexicon plus rater-confirmed period vocabulary; above 6 or below 4 on the 1-9 scale). Gray
+points: decade medians over 9,836 Chadwyck and Chicago novels; black line: lowess (span 0.3). Lines:
+model fiction, national stories from a neutral prompt (judged proper stories), each model-condition
+as one text, median over the lineages run in that condition (34 base, 36 aligned, 27 prefilled, 24
+chat). Both effects survive controlling for concreteness (abstraction's text score, partialled out
+by the slope within decade or within condition): the fall of evaluative language from the 1760s to
+the 1950s keeps 65% of its size, and aligned exceeds base in 25 of 32 paired lineages (raw), 20 of
+23 (prefilled) and 17 of 20 (chat), keeping 78%, 80% and 75% of the median gap.
+
+  concrete arms: Base models 0.1057, Aligned models 0.0975, Aligned (prefilled) 0.1126, Aligned (chat) 0.0821
+  evaluative arms: Base models 0.1732, Aligned models 0.2212, Aligned (prefilled) 0.2291, Aligned (chat) 0.2327
