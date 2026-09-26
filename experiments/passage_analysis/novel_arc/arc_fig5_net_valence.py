@@ -2,7 +2,10 @@
 measure like the concreteness score above it. (RH, 2026-09-26: "Did we ever try Positive - Negative? Then we could say
 'Valence in fictional language'?")
 
-    .venv/bin/python -u arc_fig5_net_valence.py   -> figures/arc_fig5_conc_netval_v1_1700.{png,pdf,caption.txt}, ARC_FIG5_NET_VALENCE.md
+    .venv/bin/python -u arc_fig5_net_valence.py         -> figures/arc_fig5_conc_netval_v1_1700.{png,pdf,caption.txt}, ARC_FIG5_NET_VALENCE.md
+    .venv/bin/python -u arc_fig5_net_valence.py three   -> figures/arc_fig5_conc_val3_v1_1700.*: THREE panels (RH, 2026-09-26: "Maybe
+        we could do both? They tell different stories"): concreteness; "Valenced language in fiction (positive + negative)",
+        v4's panel with its crossings; "Valence in fiction (positive - negative)". Both valence controls in the caption.
 
 Everything as Figure 5 v4 (arc_fig5_conc_eval.py v4 1700): same 9,836 Chadwyck and Chicago novels 1700-2009, same
 national-story meta-texts, same cleaned "+vector" lexicon with the same declared exclusions (model-text names and
@@ -18,12 +21,13 @@ import pandas as pd
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
+THREE = "three" in sys.argv[1:]                              # read before the argv rewrite below
 sys.argv = [sys.argv[0], "v4", "1700"]
 import arc_fig5_conc_eval as E                               # noqa: E402
 V, H, A, F = E.V, E.H, E.A, E.F
 from scipy.stats import binomtest                            # noqa: E402
 
-OUT = os.path.join(HERE, "figures", "arc_fig5_conc_netval_v1_1700")
+OUT = os.path.join(HERE, "figures", "arc_fig5_conc_val3_v1_1700" if THREE else "arc_fig5_conc_netval_v1_1700")
 COND, NAME = E.COND, E.NAME
 #: booked (arc_fig5_conc_eval_v4_1700.caption.txt): v4's evaluative arms, which pos + neg must reproduce
 V4_EVAL = {"base": 0.1721, "raw": 0.2174, "prefill": 0.2217, "continue": 0.2322}
@@ -96,10 +100,27 @@ def main():
     matplotlib.use("Agg")
     matplotlib.rcParams["pdf.fonttype"] = 42
     from plotnine.composition import Stack
-    ps = [E.panel(hs, cvs, arms_s, "Concreteness of fictional language", "Concreteness\n(word norm mean)", False, pct=False),
-          E.panel(hn, cvn, arms_n, "Valence in fictional language", "Positive minus negative\nwords (per content word)", True)]
+    if THREE:
+        Th["eval_rate"] = Th.pos_rate + Th.neg_rate
+        Mm["eval_rate"] = Mm.pos_rate + Mm.neg_rate
+        arms_v = {k: float(med_sum[COND[k]]) for k in COND}
+        hv = H.decades(Th.year, Th.eval_rate)
+        cvv = H.smooth(hv)
+        _, ctl_v = E.control(Mm, "eval_rate", "conc")
+        hist_v = E.history_control(Th, "conc")
+        #: booked (arc_fig5_conc_eval_v4_1700.caption.txt): the middle panel IS v4's, so its controls must be v4's
+        assert [(ctl_v[k]["k"], ctl_v[k]["n"]) for k in ("raw", "prefill", "continue")] == [(25, 32), (20, 23), (17, 20)], ctl_v
+        assert round(100 * hist_v[2] / hist_v[1]) == 65, hist_v
+        cross_v = {k: [round(x) for x, _ in E.crossings(cvv, v)] for k, v in arms_v.items()}
+        assert cross_v == {"base": [1906], "raw": [1821], "prefill": [1815], "continue": [1744, 1797]}, cross_v
+        ps = [E.panel(hs, cvs, arms_s, "Concreteness of fictional language", "Concreteness\n(word norm mean)", False, pct=False),
+              E.panel(hv, cvv, arms_v, "Valenced language in fiction (positive + negative)", "Valenced words\n(per content word)", False),
+              E.panel(hn, cvn, arms_n, "Valence in fiction (positive \u2212 negative)", "Positive minus negative\nwords (per content word)", True)]
+    else:
+        ps = [E.panel(hs, cvs, arms_s, "Concreteness of fictional language", "Concreteness\n(word norm mean)", False, pct=False),
+              E.panel(hn, cvn, arms_n, "Valence in fictional language", "Positive minus negative\nwords (per content word)", True)]
     fig = Stack(ps).draw()
-    fig.set_size_inches(F.PUB_SIZE[0], 5.6)
+    fig.set_size_inches(F.PUB_SIZE[0], 8.2 if THREE else 5.6)
     fig.savefig(OUT + ".png", dpi=300)
     fig.savefig(OUT + ".pdf")
 
@@ -124,7 +145,36 @@ def main():
     cap += ["", "  net arms: " + ", ".join("%s %.4f" % (NAME[k], v) for k, v in arms_n.items()),
             "  placements (net): " + "; ".join("%s %s" % (NAME[k], place(cvn, v)) for k, v in arms_n.items()),
             "  concreteness arms: " + ", ".join("%s %.4f" % (NAME[k], v) for k, v in arms_s.items())]
+    if THREE:
+        cap = textwrap.wrap(
+            "CONCRETENESS, VALENCED LANGUAGE AND VALENCE IN FICTION, 1700-2000. Top: concreteness, the mean over a text's words of a "
+            "concreteness norm (z-scored median of human concreteness and imageability norms, extended to period vocabulary); "
+            "positive is concrete, negative abstract. Middle and bottom: per text, positive words PLUS negative words, and positive "
+            "words MINUS negative words, as shares of content words (a cleaned Warriner et al. 2013 lexicon plus rater-confirmed "
+            "period vocabulary; positive above 6, negative below 4 on the 1-9 scale). The middle panel measures how much charged "
+            "vocabulary a text uses, the bottom which way it leans. Gray points: decade medians over %s Chadwyck and Chicago novels; "
+            "black line: lowess (span 0.3). Lines: model fiction, national stories from a neutral prompt (judged proper stories), "
+            "each model-condition as one text, median over the lineages run in that condition (%d base, %d aligned, %d prefilled, "
+            "%d chat). Removed from the valence lexicon on both sides: words used mostly as names in the model stories (%s), and "
+            "\"haven\", which the tokenisation makes of \"haven't\". Circles mark where a model line crosses the smoothed history; the "
+            "year labels its last crossing (an earlier one: Aligned (chat) %d in the middle panel). No model line meets the valence "
+            "history: all four lie above it, base models just above (decade medians reach the base line in %d decades), aligned "
+            "models at more than twice its highest point. Controlling for concreteness (abstraction's score, partialled out by the "
+            "slope within decade or within condition): the fall of valenced language from the 1760s to the 1950s keeps %d%% of its "
+            "size, and aligned exceeds base in %d of %d paired lineages (raw), %d of %d (prefilled) and %d of %d (chat) in valenced "
+            "language, and in %d of %d, %d of %d and %d of %d in valence."
+            % (format(len(Th), ","), *[n_cond[COND[k]] for k in COND], ", ".join(sorted(X - {"haven"})), cross_v["continue"][0],
+               int((hn.value >= arms_n["base"]).sum()), round(100 * hist_v[2] / hist_v[1]),
+               *[x for k in ("raw", "prefill", "continue") for x in (ctl_v[k]["k"], ctl_v[k]["n"])],
+               *[x for k in ("raw", "prefill", "continue") for x in ctl[k][1][:2]]), 100)
+        cap += ["", "  valenced arms: " + ", ".join("%s %.4f" % (NAME[k], v) for k, v in arms_v.items()),
+                "  valenced crossings: " + "; ".join("%s %s" % (NAME[k], ", ".join(map(str, v))) for k, v in cross_v.items()),
+                "  net arms: " + ", ".join("%s %.4f" % (NAME[k], v) for k, v in arms_n.items()),
+                "  concreteness arms: " + ", ".join("%s %.4f" % (NAME[k], v) for k, v in arms_s.items())]
     open(OUT + ".caption.txt", "w").write("\n".join(cap) + "\n")
+    if THREE:
+        print("\n".join(cap))
+        return
 
     R = ["# Net valence (positive minus negative), Figure 5 variant (EXPLORATORY)", "",
          "Producer `arc_fig5_net_valence.py` (method in its docstring). Plate: figures/arc_fig5_conc_netval_v1_1700.png. Per content word.", "",
