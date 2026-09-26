@@ -1,0 +1,10 @@
+EVALUATIVE WORDS IN FICTION, 1700-2000. Per text, words of clear positive or negative valence per
+content word, from a cleaned valence lexicon (Warriner et al. 2013 lemmas and forms kept under an
+ambiguity standard, plus period vocabulary proposed by a Warriner-seeded vector norm and confirmed
+by an LLM rater; positive above 6, negative below 4 on Warriner's 1-9 scale). Gray points: decade
+medians over 9,836 Chadwyck and Chicago novels; black line: lowess (span 0.3). Lines: model fiction,
+national stories from a neutral prompt (judged proper stories), each model-condition as one text,
+median over 38 lineages -- base models; aligned models given the raw prompt; aligned models in their
+chat template with the reply prefilled; aligned models asked in chat to write the story.
+
+  arms: Base models 0.1732, Aligned models 0.2212, Aligned (prefilled) 0.2291, Aligned (chat) 0.2327

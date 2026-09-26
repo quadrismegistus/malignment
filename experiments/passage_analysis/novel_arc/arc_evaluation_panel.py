@@ -1,7 +1,9 @@
 """Evaluative word share alone, Figure 5 style, with RH's arm labels. (RH, 2026-09-26: "the strongest panel is Evaluative
 word share"; labels "Base models / Aligned models (raw) / Aligned models (prefilled) / Aligned models (chat)")
 
-    .venv/bin/python -u arc_evaluation_panel.py   -> figures/arc_evaluation_share_v1.{png,pdf,caption.txt}
+    .venv/bin/python -u arc_evaluation_panel.py           -> figures/arc_evaluation_share_v1.{png,pdf,caption.txt}
+    .venv/bin/python -u arc_evaluation_panel.py v2        -> figures/arc_evaluation_share_v2.*        (labels "Base models / Aligned models / Aligned (prefilled) / Aligned (chat)")
+    .venv/bin/python -u arc_evaluation_panel.py v2 1700   -> figures/arc_evaluation_share_v2_1700.*   (history 1700-2009)
 
 The top panel of arc_evaluation_reference.py, unchanged in data: evaluative (positive + negative) words per content word
 from the symmetric cleaned lexicon; Chadwyck and Chicago novels, decade medians, lowess 0.3; national-story arms, one
@@ -12,13 +14,18 @@ import os, sys, textwrap
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
+_ARGS = sys.argv[1:]                                        # read before the argv rewrite below
 sys.argv = [sys.argv[0], "v2"]
 import arc_valence_clean_components as V                   # noqa: E402
 H, F = V.H, V.F
 
-OUT = os.path.join(HERE, "figures", "arc_evaluation_share_v1")
+#: v2 (RH, 2026-09-26): shorter labels; "1700" starts the history at 1700 (decades and lowess fitted on 1700-2009)
+V2 = "v2" in _ARGS
+START = 1700 if "1700" in _ARGS else 1600
+OUT = os.path.join(HERE, "figures", "arc_evaluation_share_" + ("v2" if V2 else "v1") + ("_1700" if START == 1700 else ""))
 LEX = "+vector"
-NAME = {"base": "Base models", "raw": "Aligned models (raw)", "prefill": "Aligned models (prefilled)", "continue": "Aligned models (chat)"}
+NAME = ({"base": "Base models", "raw": "Aligned models", "prefill": "Aligned (prefilled)", "continue": "Aligned (chat)"} if V2 else
+        {"base": "Base models", "raw": "Aligned models (raw)", "prefill": "Aligned models (prefilled)", "continue": "Aligned models (chat)"})
 
 
 def label_positions(vals, gap):
@@ -49,7 +56,7 @@ def panel(hist, curve, arms):
     lo = min(cv.value.min(), hist.value.min(), A.value.min()); hi = max(cv.value.max(), hist.value.max(), A.value.max())
     pos = label_positions({NAME[k]: v for k, v in arms.items()}, 0.075 * (hi - lo))
     A["ly"] = A.arm.map(pos)
-    X0, X1, XL, XMAX = 1600, 2005, 2040, 2325   # "Aligned models (prefilled)" at 9 pt ended ~12 px inside 2290
+    X0, X1, XL, XMAX = START, 2005, 2040, (2325 if not V2 else 2240 if START == 1600 else 2210)   # v1 label ended ~12 px inside 2290; v2 labels are shorter
     return (ggplot()
             + geom_vline(xintercept=[1700, 1800, 1900], color="#e9ecef", size=F.PUB_RULE_PT)
             + geom_point(aes("year", "value"), data=hist, color=F.PUB_GRAY, size=0.9)
@@ -60,7 +67,7 @@ def panel(hist, curve, arms):
             + geom_text(aes(x=XL, y="ly", label="arm"), data=A, ha="left", va="center", size=F.PUB_FONT_PT, family=fnt, color=F.PUB_INK)
             + scale_linetype_manual({NAME["base"]: "dotted", NAME["raw"]: "dashed", NAME["prefill"]: "dashdot", NAME["continue"]: "solid"}, guide=None)
             + scale_y_continuous(labels=lambda v: ["%g%%" % round(100 * x, 6) for x in v])
-            + scale_x_continuous(limits=(X0 - 5, XMAX), breaks=[1600, 1700, 1800, 1900, 2000], expand=(0, 0))
+            + scale_x_continuous(limits=(X0 - 5, XMAX), breaks=[y for y in (1600, 1700, 1800, 1900, 2000) if y >= X0], expand=(0, 0))
             + labs(x="", y="Evaluative words\n(per content word)", title="Evaluative words in fiction")
             + F.pub_theme(grid="y")
             + theme(axis_title_y=element_text(family=fnt, size=F.PUB_FONT_PT),
@@ -72,7 +79,7 @@ def main():
         assert not os.path.exists(OUT + ext), "refusing to overwrite " + OUT + ext
     L = V.lexicons()
     Th = V.history(L).merge(H.concreteness_texts()[["_id", "year"]], on="_id")
-    Th = Th[(Th.lexicon == LEX) & Th.year.between(1600, 2009) & (Th.n_content >= H.MIN_CONTENT)]
+    Th = Th[(Th.lexicon == LEX) & Th.year.between(START, 2009) & (Th.n_content >= H.MIN_CONTENT)]
     Mm = V.meta(L)
     Mm = Mm[Mm.lexicon == LEX]
     med = Mm.pivot_table(index="lineage", columns="cond", values="eval_rate").median()
@@ -89,14 +96,14 @@ def main():
     fig.savefig(OUT + ".png", dpi=300)
     fig.savefig(OUT + ".pdf")
     cap = textwrap.wrap(
-        "EVALUATIVE WORDS IN FICTION, 1600-2000. Per text, words of clear positive or negative valence per content word, "
+        "EVALUATIVE WORDS IN FICTION, %d-2000. Per text, words of clear positive or negative valence per content word, "
         "from a cleaned valence lexicon (Warriner et al. 2013 lemmas and forms kept under an ambiguity standard, plus "
         "period vocabulary proposed by a Warriner-seeded vector norm and confirmed by an LLM rater; positive above 6, "
         "negative below 4 on Warriner's 1-9 scale). Gray points: decade medians over %s Chadwyck and Chicago novels; black "
         "line: lowess (span 0.3). Lines: model fiction, national stories from a neutral prompt (judged proper stories), "
         "each model-condition as one text, median over %d lineages -- base models; aligned models given the raw prompt; "
         "aligned models in their chat template with the reply prefilled; aligned models asked in chat to write the story."
-        % (format(Th._id.nunique(), ","), Mm.lineage.nunique()), 100) + ["", "  arms: " + ", ".join("%s %.4f" % (NAME[k], v) for k, v in arms.items())]
+        % (START, format(Th._id.nunique(), ","), Mm.lineage.nunique()), 100) + ["", "  arms: " + ", ".join("%s %.4f" % (NAME[k], v) for k, v in arms.items())]
     open(OUT + ".caption.txt", "w").write("\n".join(cap) + "\n")
     print("\n".join(cap))
 
