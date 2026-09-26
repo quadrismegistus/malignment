@@ -1,6 +1,10 @@
 """Does the surface-form Warriner lookup's coverage gap move the valence components? (RH, 2026-09-26)
 
-    .venv/bin/python -u arc_valence_lemma_check.py   -> ARC_VALENCE_LEMMA_CHECK.md, figures/arc_valence_lemma_check_v1.*
+    .venv/bin/python -u arc_valence_lemma_check.py           -> ARC_VALENCE_LEMMA_CHECK.md, figures/arc_valence_lemma_check_v1.*
+    .venv/bin/python -u arc_valence_lemma_check.py partial   -> ARC_VALENCE_LEMMA_CHECK_partial.md (RH, 2026-09-26: "Does
+        partialing out concreteness affect it"): for each component and lookup, (a) the lineage test with the slope on
+        concreteness fitted WITHIN CONDITION over the national meta-texts; (b) placement on the history with the
+        history's own text-level slope, arms adjusted with it. Concreteness: Abs-Conc.Median.median, uncorrected.
 
 THE WORRY. The human lookup in abstraction's scorer matches SURFACE forms only, so inflections outside Warriner's
 lemma list (killed, screamed, died) go unscored. Model fiction narrates in the past tense more than the history
@@ -23,6 +27,7 @@ import pandas as pd
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
+PARTIAL = "partial" in sys.argv[1:]                         # read before the argv rewrite below
 sys.argv = [sys.argv[0], "v4", "meta", "sel12", "arms4"]
 import arc_interiority as A                               # noqa: E402
 import arc_type_norms as N                                # noqa: E402
@@ -167,5 +172,56 @@ def main():
         "lines: national-story arms, median over lineages.", 100)) + "\n")
 
 
+def partial():
+    from scipy.stats import binomtest, spearmanr
+    from statsmodels.nonparametric.smoothers_lowess import lowess
+    SH = os.path.expanduser("~/malignment-data/interiority_norms")
+    CONC = "Abs-Conc.Median.median"
+    Th = pd.read_parquet(TEXTS).merge(H.concreteness_texts()[["_id", "year"]], on="_id")
+    Th = Th[Th.year.between(1600, 2009)].merge(pd.read_parquet(os.path.join(SH, "vad_scores_arc_fiction.parquet"))[["_id", CONC]], on="_id")
+    val = {w: d["warriner_valence"] for w, d in N.lexicons()["warriner"].items()}
+    Mf = pd.read_parquet(N.MAP)
+    Mf = Mf[Mf.source == "warriner"]
+    Mm = meta(val, list(zip(Mf.form, Mf.entry, Mf.rule)))
+    Mm = Mm.merge(pd.read_parquet(os.path.join(A.DATA, "prompt_check_national_judged_meta_scored.parquet"))[["id", CONC]], on="id")
+    conds = ["base", "aligned_raw", "aligned_prefill", "aligned_rettberg"]
+    L = ["# Valence components with concreteness partialled out (EXPLORATORY)", "",
+         "Producer `arc_valence_lemma_check.py partial` (method in its docstring). Lineage cells: lineages moving from base in "
+         "the direction of the ADJUSTED medians' difference, sign-test p. Placement: the adjusted arm against the adjusted "
+         "history's smoothed range.", "",
+         "| component | lookup | rho with concreteness: texts / meta-texts | lineages raw / prefill / asked, unadjusted | the same, within-condition partial | history range adjusted | arms adjusted: base / raw / prefill / asked |",
+         "|---|---|---|---|---|---|---|"]
+    for c in COMPS:
+        for mode in ("surface", "mapped"):
+            h = Th[Th["mode"] == mode].dropna(subset=[c, CONC])
+            m = Mm[Mm["mode"] == mode].dropna(subset=[c, CONC]).copy()
+            def lin(y):
+                piv = m.assign(y=y).pivot_table(index="lineage", columns="cond", values="y")
+                med = piv.median()
+                out = []
+                for cd in conds[1:]:
+                    dd = piv[["base", cd]].dropna()
+                    sgn = np.sign(med[cd] - med["base"])
+                    k = int((np.sign(dd[cd] - dd["base"]) == sgn).sum())
+                    out.append("%s %d/%d (p %.3f)" % ("up" if sgn > 0 else "down", k, len(dd), binomtest(k, len(dd)).pvalue))
+                return " / ".join(out)
+            yd = m[c] - m.groupby("cond")[c].transform("mean")
+            xd = m[CONC] - m.groupby("cond")[CONC].transform("mean")
+            bw = float(np.polyfit(xd, yd, 1)[0])
+            bh = float(np.polyfit(h[CONC], h[c], 1)[0])
+            cm = float(h[CONC].mean())
+            adjh = h[c] - bh * (h[CONC] - cm)
+            dec = H.decades(h.year, adjh)
+            cv = lowess(dec.value.values, dec.year.values, frac=0.3, return_sorted=True)
+            lo, hi = cv[:, 1].min(), cv[:, 1].max()
+            am = (m[c] - bh * (m[CONC] - cm)).groupby([m.cond, m.lineage]).first().groupby(level=0).median()
+            place = lambda v: "%.3f (%s)" % (v, "above all" if v > hi else "below all" if v < lo else "inside")
+            L.append("| %s | %s | %+.2f / %+.2f | %s | %s | %.3f to %.3f | %s |" % (
+                c, mode, spearmanr(h[c], h[CONC])[0], spearmanr(m[c], m[CONC])[0], lin(m[c]), lin(m[c] - bw * m[CONC]),
+                lo, hi, " / ".join(place(am[k]) for k in conds)))
+    open(os.path.join(HERE, "ARC_VALENCE_LEMMA_CHECK_partial.md"), "w").write("\n".join(L) + "\n")
+    print("\n".join(L))
+
+
 if __name__ == "__main__":
-    main()
+    partial() if PARTIAL else main()
