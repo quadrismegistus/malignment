@@ -1,0 +1,6 @@
+VALENCE DECOMPOSED, 1600-2000: the share of positive and of negative words among a text's valence-
+rated words, and each bin's mean distance from neutral (human Warriner lookup, neutral 5, band 4-6;
+plain vector valence, the same band mapped onto the axis). Gray points: decade medians over 9,964
+Chadwyck and Chicago arc_fiction texts; black line: lowess (span 0.3); HTML entity tokens and book-
+policy stopwords and names removed; not bias-corrected. Lines: national-story arms (judged no-
+demonym stories), median over lineages.
