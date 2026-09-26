@@ -3,7 +3,7 @@ over a text's words of a concreteness norm (z-scored median of human concretenes
 norms, extended to period vocabulary); positive is concrete, negative abstract. Middle and bottom:
 per text, positive words PLUS negative words, and positive words MINUS negative words, as shares of
 content words (a cleaned Warriner et al. 2013 lexicon plus rater-confirmed period vocabulary;
-positive above 6, negative below 4 on the 1-9 scale). The middle panel measures how much charged
+positive above 6, negative below 4 on the 1-9 scale). The middle panel measures how much valenced
 vocabulary a text uses, the bottom which way it leans. Gray points: decade medians over 9,836
 Chadwyck and Chicago novels; black line: lowess (span 0.3). Lines: model fiction, national stories
 from a neutral prompt (judged proper stories), each model-condition as one text, median over the

@@ -211,7 +211,9 @@ def main():
             "concreteness norm (z-scored median of human concreteness and imageability norms, extended to period vocabulary); "
             "positive is concrete, negative abstract. Middle and bottom: per text, positive words PLUS negative words, and positive "
             "words MINUS negative words, as shares of content words (a cleaned Warriner et al. 2013 lexicon plus rater-confirmed "
-            "period vocabulary; positive above 6, negative below 4 on the 1-9 scale). The middle panel measures how much charged "
+            "period vocabulary; positive above 6, negative below 4 on the 1-9 scale). The middle panel measures how much " +
+            #: RH ruled out "charge" (the paper uses it for rated transgressive charge); v4 onward says "valenced"
+            ("valenced" if THREE4 else "charged") + " "
             "vocabulary a text uses, the bottom which way it leans. Gray points: decade medians over %s Chadwyck and Chicago novels; "
             "black line: lowess (span 0.3). Lines: model fiction, national stories from a neutral prompt (judged proper stories), "
             "each model-condition as one text, median over the lineages run in that condition (%d base, %d aligned, %d prefilled, "
