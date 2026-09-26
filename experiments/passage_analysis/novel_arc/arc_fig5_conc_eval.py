@@ -211,8 +211,10 @@ def panel(hist, curve, arms, title, ylab, show_x, pct=True):
                     else:
                         row["q"] = "ul" if not above or min(above) - v > room else "lr"
                 rows.append(row)
-        X = pd.DataFrame(rows)
-        p = p + geom_point(aes("x", "y"), data=X, color=F.PUB_INK, fill="white", size=2.0, stroke=0.6, shape="o")
+        #: explicit columns: a panel where no line meets the history has no rows, and a column-less frame breaks X.q
+        X = pd.DataFrame(rows, columns=["x", "y", "lab", "q"])
+        if len(X):
+            p = p + geom_point(aes("x", "y"), data=X, color=F.PUB_INK, fill="white", size=2.0, stroke=0.6, shape="o")
         dx, dy = 4, 0.012 * (hi - lo)
         for q, (sx, sy, ha, va) in {"ll": (-1, -1, "right", "top"), "ul": (-1, 1, "right", "bottom"),
                                     "ur": (1, 1, "left", "bottom"), "lr": (1, -1, "left", "top")}.items():
