@@ -1,0 +1,4 @@
+REFERENCE GRID: valence, arousal and dominance in English fiction 1700-2000, every version -- the human
+Warriner lookup and the vector axes plain, orth, band, nnpair, wnpair (* = recommended). Decade medians over
+arc_fiction texts, lowess; not bias-corrected in any panel. Lines: the national-story arms (judged no-demonym
+stories, median over lineages). Free y per panel. Working reference, not a figure draft.
