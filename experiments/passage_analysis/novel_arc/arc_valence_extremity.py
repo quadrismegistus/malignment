@@ -3,6 +3,8 @@ sign. (RH, 2026-09-25: "could we plot abs val of valence")
 
     ~/github/abslithists/abstraction/.venv/bin/python -u arc_valence_extremity.py
         -> $DATA/valence_extremity_arc.parquet, valence_extremity_meta_{national,f11}.parquet
+    ~/github/abslithists/abstraction/.venv/bin/python -u arc_valence_extremity.py six
+        -> $DATA/valence_extremity6_arc.parquet, valence_extremity6_meta_national.parquet (all six valence versions)
 
 Runs in the ABSTRACTION venv so the scorer is theirs, unedited: abstraction.scoring.score_ids_ch over lltk
 text_freqs for the arc_fiction reps, and vad_score.py's meta path (tokenize_agnostic on lowercased text, token
@@ -113,7 +115,96 @@ def meta(src, name):
     print("-> %s (%d)" % (out, len(S)))
 
 
+#: ALL SIX VALENCE VERSIONS (RH, 2026-09-26: "What about valence extremity", after the six-version reference grid).
+#: The human lookup: each Warriner word's |V - 5| (the scale midpoint), the lexicon's own surface forms, lowercased.
+#: Each vector axis (plain, orth: vad_norms; band, nnpair, wnpair: vad_pairs_norms): |value - neutral|, neutral where
+#: Warriner 5 falls on THAT axis by an OLS over the Warriner lemmas. Book-policy stopwords and names removed from
+#: every table, as vad_score.norms(). Plain must reproduce the single-version run above (asserted).
+SIX = {"lookup": None, "": "vad_norms.parquet", "_orth": "vad_norms.parquet", "_band": "vad_pairs_norms.parquet",
+       "_nnpair": "vad_pairs_norms.parquet", "_wnpair": "vad_pairs_norms.parquet"}
+_N6 = None
+
+
+def xcol(v):
+    return "Warriner-ValenceExtremity.lookup" if v == "lookup" else "VAD-ValenceExtremity.Warriner%s.median" % v
+
+
+def norms6():
+    global _N6
+    if _N6 is None:
+        W = {}
+        for r in csv.DictReader(open(warriner_path(), encoding="utf-8", errors="replace")):
+            try:
+                W[r["Word"].lower()] = float(r["V.Mean.Sum"])
+            except (KeyError, ValueError, TypeError):
+                pass
+        drop = get_stopwords_and_names()
+        cols = {}
+        cols[xcol("lookup")] = pd.Series({w: abs(v - 5.0) for w, v in W.items() if w.isalpha() and w not in drop})
+        for v, f in SIX.items():
+            if f is None:
+                continue
+            c = "VAD-Valence.Warriner%s.median" % v
+            n = pd.read_parquet(os.path.join(SH, f), columns=[c])
+            n = n[n.index.map(lambda w: isinstance(w, str))]
+            n = n[~n.index.duplicated()]
+            n = n[~n.index.str.lower().isin(drop)][c].dropna()
+            common = [w for w in W if w in n.index]
+            b, a = np.polyfit([W[w] for w in common], n.loc[common].values, 1)
+            neutral = a + 5.0 * b
+            print("  %-8s neutral %+.4f (slope %.4f, %d lemmas)" % (v or "plain", neutral, b, len(common)), flush=True)
+            cols[xcol(v)] = (n - neutral).abs()
+        _N6 = pd.DataFrame(cols)
+    return _N6
+
+
+def _shard6(ids):
+    from abstraction.scoring import score_ids_ch
+    return score_ids_ch(ids, norms6())
+
+
+def arc6(j=6):
+    out = os.path.join(DATA, "valence_extremity6_arc.parquet")
+    if os.path.exists(out):
+        return
+    import vad_score as VS
+    ids = list(VS.ch_df("SELECT _id FROM abstraction.scores_rep WHERE arc_corpus = 'arc_fiction'")._id)
+    assert len(ids) == 82080
+    norms6()
+    shards = [ids[i:i + 2000] for i in range(0, len(ids), 2000)]
+    with ProcessPoolExecutor(j) as ex:
+        S = pd.concat(list(ex.map(_shard6, shards)), ignore_index=True)
+    ref = pd.read_parquet(os.path.join(DATA, "valence_extremity_arc.parquet"))[["_id", X]].rename(columns={X: "ref"})
+    d = S.merge(ref, on="_id").dropna(subset=[xcol(""), "ref"])
+    print("plain extremity vs the single-version run: max|diff| %.2e (n %d)" % ((d[xcol("")] - d.ref).abs().max(), len(d)))
+    assert (d[xcol("")] - d.ref).abs().max() < 1e-4
+    S.to_parquet(out, index=False)
+
+
+def meta6(src, name):
+    out = os.path.join(DATA, "valence_extremity6_meta_%s.parquet" % name)
+    if os.path.exists(out):
+        return
+    T = pd.read_parquet(src)
+    N = norms6()
+    d = {c: N[c].dropna().to_dict() for c in N.columns}
+    rows = []
+    for _id, text in zip(T.id, T.text):
+        toks = tokenize_agnostic(text.lower())
+        r = {"id": _id}
+        for c in N.columns:
+            v = [d[c][t] for t in toks if t in d[c]]
+            r[c] = float(np.mean(v)) if v else np.nan
+        rows.append(r)
+    T.drop(columns=["text"]).merge(pd.DataFrame(rows), on="id").to_parquet(out, index=False)
+    print("-> %s" % out)
+
+
 if __name__ == "__main__":
-    meta(os.path.join(DATA, "prompt_check_national_judged_meta.parquet"), "national")
-    meta(os.path.join(SH, "fig5_meta_texts_arms4.parquet"), "f11")
-    arc()
+    if "six" in sys.argv[1:]:
+        meta6(os.path.join(DATA, "prompt_check_national_judged_meta.parquet"), "national")
+        arc6()
+    else:
+        meta(os.path.join(DATA, "prompt_check_national_judged_meta.parquet"), "national")
+        meta(os.path.join(SH, "fig5_meta_texts_arms4.parquet"), "f11")
+        arc()

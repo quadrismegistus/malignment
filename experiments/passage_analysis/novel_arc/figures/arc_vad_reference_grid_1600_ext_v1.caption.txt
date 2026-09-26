@@ -1,0 +1,6 @@
+Fourth row: valence EXTREMITY, each version's per-word distance from neutral (lookup: |V - 5|; vector axes:
+from where Warriner 5 falls on that axis), token-averaged. REFERENCE GRID: valence, arousal and dominance in
+English fiction 1600-2000, every version -- the human Warriner lookup and the vector axes plain, orth, band,
+nnpair, wnpair (* = recommended). Decade medians over arc_fiction texts, lowess; not bias-corrected in any
+panel. Lines: the national-story arms (judged no-demonym stories, median over lineages). Free y per panel.
+Working reference, not a figure draft.

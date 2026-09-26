@@ -1,0 +1,9 @@
+CONCRETENESS REGRESSED OUT (text-level OLS over the 1600-2009 novels per panel; arms adjusted with the same
+slope). Fourth row: valence EXTREMITY, each version's per-word distance from neutral (lookup: |V - 5|; vector
+axes: from where Warriner 5 falls on that axis), token-averaged. REFERENCE GRID: valence, arousal and
+dominance in English fiction 1600-2000, every version -- the human Warriner lookup and the vector axes plain,
+orth, band, nnpair, wnpair (* = recommended). Decade medians over arc_fiction texts, lowess; not bias-
+corrected in any panel. Lines: the national-story arms (judged no-demonym stories, median over lineages). Free
+y per panel. Working reference, not a figure draft.
+
+  slopes on concreteness: Valence: human lookup +0.021; Valence: plain +0.018; Valence: orth -0.287; Valence: band -0.150; Valence: nnpair -0.117; Valence: wnpair -0.153; Arousal: human lookup -0.163; Arousal: plain -0.512; Arousal: orth +0.138; Arousal: band -0.053; Arousal: nnpair -0.073; Arousal: wnpair -0.043; Dominance: human lookup -0.070; Dominance: plain -0.284; Dominance: orth -0.306; Dominance: band -0.233; Dominance: nnpair -0.074; Dominance: wnpair -0.292; Val. extremity: human lookup -0.146; Val. extremity: plain -0.104; Val. extremity: orth -0.187; Val. extremity: band -0.149; Val. extremity: nnpair -0.148; Val. extremity: wnpair -0.182

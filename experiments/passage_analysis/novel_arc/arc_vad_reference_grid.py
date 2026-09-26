@@ -28,21 +28,26 @@ sys.path.insert(0, HERE)
 PARTIAL = "partial" in sys.argv[1:]                         # read before the argv rewrite below
 #: from1600 (RH, 2026-09-26: "remake prev graphs adding back in c17 so history is year 1600+")
 START = 1600 if "from1600" in sys.argv[1:] else 1700
+#: extremity (RH, 2026-09-26: "What about valence extremity"): a fourth row, each valence version's per-word distance
+#: from neutral, token-averaged (arc_valence_extremity.py six); recommended as valence: plain
+EXT = "extremity" in sys.argv[1:]
 sys.argv = [sys.argv[0], "v4", "meta", "sel12", "arms4"]
 import arc_history_arms as H                               # noqa: E402
 from malignment import figure as F                         # noqa: E402
 
 SH = os.path.expanduser("~/malignment-data/interiority_norms")
-OUT = os.path.join(HERE, "figures", "arc_vad_reference_grid" + ("_partial" if PARTIAL else "") + ("_1600" if START == 1600 else "") + "_v1")
+OUT = os.path.join(HERE, "figures", "arc_vad_reference_grid" + ("_partial" if PARTIAL else "") + ("_1600" if START == 1600 else "")
+                   + ("_ext" if EXT else "") + "_v1")
 CONC = "Abs-Conc.Median.median"
 VERS = [("lookup", "human lookup"), ("", "plain"), ("_orth", "orth"), ("_band", "band"), ("_nnpair", "nnpair"), ("_wnpair", "wnpair")]
-REC = {"Valence": "", "Arousal": "_nnpair", "Dominance": "_nnpair"}
+REC = {"Valence": "", "Arousal": "_nnpair", "Dominance": "_nnpair", "ValenceExtremity": ""}
 ARMS = {"base": "Base models", "aligned_raw": "Aligned models", "aligned_prefill": "Aligned, chat, prefilled",
         "aligned_rettberg": "Aligned, chat, asked"}
 
 
 def col(dim, v):
     return "Warriner-%s.lookup" % dim if v == "lookup" else "VAD-%s.Warriner%s.median" % (dim, v)
+    # ValenceExtremity follows the same pattern: Warriner-ValenceExtremity.lookup, VAD-ValenceExtremity.Warriner<v>.median
 
 
 def main():
@@ -53,11 +58,16 @@ def main():
     T = H.concreteness_texts()[["_id", "year"]].merge(V, on="_id", validate="1:1")
     T = T[T.year.between(START, 2009)]
     M = pd.read_parquet(os.path.join(H.DATA, "prompt_check_national_judged_meta_scored.parquet"))
+    if EXT:
+        T = T.merge(pd.read_parquet(os.path.join(H.DATA, "valence_extremity6_arc.parquet")), on="_id", how="left", validate="1:1")
+        M = M.merge(pd.read_parquet(os.path.join(H.DATA, "valence_extremity6_meta_national.parquet"))[
+            ["id"] + [c for c in pd.read_parquet(os.path.join(H.DATA, "valence_extremity6_meta_national.parquet")).columns if "Extremity" in c]],
+            on="id", how="left", validate="1:1")
     pts, cvs, arms, order, slopes = [], [], [], [], []
-    for dim in ("Valence", "Arousal", "Dominance"):
+    for dim in ("Valence", "Arousal", "Dominance") + (("ValenceExtremity",) if EXT else ()):
         for v, lab in VERS:
             c = col(dim, v)
-            name = "%s: %s%s" % (dim, lab, " *" if v == REC[dim] else "")
+            name = "%s: %s%s" % (dim.replace("ValenceExtremity", "Val. extremity"), lab, " *" if v == REC[dim] else "")
             order.append(name)
             d = T[["year", c, CONC]].dropna()
             y = d[c]
@@ -91,12 +101,15 @@ def main():
          + facet_wrap("~panel", ncol=6, scales="free_y")
          + scale_x_continuous(breaks=[1600, 1700, 1800, 1900, 2000] if START == 1600 else [1700, 1800, 1900, 2000])
          + labs(x="", y="Score, concreteness regressed out (own scale)" if PARTIAL else "Score (each panel on its own scale)", linetype="")
-         + F.pub_theme(height=6.6)
-         + theme(legend_position="bottom", figure_size=(13.0, 6.6),
+         + F.pub_theme(height=8.6 if EXT else 6.6)
+         + theme(legend_position="bottom", figure_size=(13.0, 8.6 if EXT else 6.6),
                  strip_text=element_text(family=F.pub_font(), size=F.PUB_FONT_PT)))
     F.save(p, OUT + ".png")
     head = ("CONCRETENESS REGRESSED OUT (text-level OLS over the %d-2009 novels per panel; arms adjusted with the same "
             "slope). " % START) if PARTIAL else ""
+    if EXT:
+        head += ("Fourth row: valence EXTREMITY, each version's per-word distance from neutral (lookup: |V - 5|; vector "
+                 "axes: from where Warriner 5 falls on that axis), token-averaged. ")
     cap = textwrap.wrap(head + ("REFERENCE GRID: valence, arousal and dominance in English fiction %d-2000, every version -- the "
                                 "human Warriner lookup and the vector axes plain, orth, band, nnpair, wnpair (* = recommended). "
                                 "Decade medians over arc_fiction texts, lowess; not bias-corrected in any panel. Lines: the "
