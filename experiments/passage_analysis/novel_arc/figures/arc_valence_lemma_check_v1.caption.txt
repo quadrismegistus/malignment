@@ -1,0 +1,4 @@
+SURFACE VS LEMMA-MAPPED WARRINER LOOKUP, valence components: positive and negative share of scored
+words and each bin's mean distance from neutral (5; band 4-6). Left: surface forms only; right:
+forms mapped to Warriner entries (WordNet lemma, British and old spellings, long-s). Chadwyck and
+Chicago arc_fiction, decade medians, lowess; lines: national-story arms, median over lineages.
