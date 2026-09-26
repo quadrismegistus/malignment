@@ -1,0 +1,6 @@
+VALENCE COMPONENTS ON THE CLEANED LEXICON: negative and positive words per content word and their
+mean distance from neutral (5), 1600-2000. Left: kept Warriner lemmas and their kept forms; right:
+plus the vector negative-pole candidates the rater confirmed (their 1-9 rating as value) and,
+symmetrically, the positive-pole candidates it confirmed; top row: evaluative words (positive +
+negative) per content word. Chadwyck and Chicago arc_fiction, decade medians, lowess; lines:
+national-story arms, median over lineages.

@@ -52,10 +52,15 @@ from pydantic import BaseModel, Field                     # noqa: E402
 from largeliterarymodels.task import Task                 # noqa: E402
 
 SHARED = os.path.expanduser("~/malignment-data/interiority_norms")
-OUT = os.path.join(SHARED, "valence_clean_ratings_v1.parquet")
-OUT3 = os.path.join(SHARED, "valence_clean_ratings_v1_pass3.parquet")
-FILLS = [os.path.join(SHARED, "valence_clean_ratings_v1_fill%s.parquet" % s) for s in ("", "2", "3", "4")]
-KEEP_CSV = os.path.join(SHARED, "valence_clean_keep_v1.csv")
+#: --pos (RH, 2026-09-26: "maybe we do need positive word seeds if we want to discuss negative/positive as fall of
+#: evaluation"): a separate batch of the vector's POSITIVE-pole candidates (beyond where Warriner 7 falls on the axis,
+#: >= 500 arc tokens, not Warriner lemmas or mapped forms), same task and anchors, its own files
+POS = "--pos" in sys.argv
+_V = "v1_pos" if POS else "v1"
+OUT = os.path.join(SHARED, "valence_clean_ratings_%s.parquet" % _V)
+OUT3 = os.path.join(SHARED, "valence_clean_ratings_%s_pass3.parquet" % _V)
+FILLS = [os.path.join(SHARED, "valence_clean_ratings_%s_fill%s.parquet" % (_V, s)) for s in ("", "2", "3", "4")]
+KEEP_CSV = os.path.join(SHARED, "valence_clean_keep_%s.csv" % _V)
 BATCH, SEED, N_FORMS, VEC_FLOOR = 40, 20260927, 2500, 500
 ANCHORS = {"murder": "rated negative", "sunshine": "rated positive", "old": "rated negative", "late": "rated negative"}
 ANCHOR_KEEP = {"murder": True, "sunshine": True, "old": False, "late": False}
@@ -77,9 +82,9 @@ Some items are inflected or respelled FORMS, shown as "form (counted as: lemma, 
 as written usually carries the LEMMA's rated sense: "means (counted as: mean, rated negative)" is rejected, because
 "means" is almost always "by means of", not "cruel".
 
-Some items are marked "(inferred negative)": no human rated them; a statistical model guessed. KEEP one only if the
-word really does carry a negative connotation AND meets the standard above. Reject it as wrong_direction if it is not
-negative ("utterly", "together"), and reject proper names as proper_name.
+Some items are marked "(inferred negative)" or "(inferred positive)": no human rated them; a statistical model
+guessed. KEEP one only if the word really does carry that connotation AND meets the standard above. Reject it as
+wrong_direction if it does not ("utterly", "together", "exactly"), and reject proper names as proper_name.
 
 ALSO RATE EVERY ITEM'S VALENCE on a 1-9 scale (1 = very negative, 5 = neutral, 9 = very positive), for its dominant
 sense in fiction, whatever you decide about keeping it. Rungs, from human ratings: 1-1.5 murder, torture; 2 death,
@@ -120,7 +125,7 @@ def items():
     val = {w: d["warriner_valence"] for w, d in N.lexicons()["warriner"].items()}
     direction = lambda v: "rated negative" if v < 4 else "rated positive"
     lem = sorted(w for w, v in val.items() if v < 4 or v > 6)
-    out = [(w, "%s (%s)" % (w, direction(val[w])), "lemma", w) for w in lem if w not in ANCHORS]
+    out = [] if POS else [(w, "%s (%s)" % (w, direction(val[w])), "lemma", w) for w in lem if w not in ANCHORS]
     M = pd.read_parquet(N.MAP)
     M = M[(M.source == "warriner") & (M.rule != "self")]
     M = M[M.entry.map(lambda e: val[e] < 4 or val[e] > 6)]
@@ -130,7 +135,8 @@ def items():
       ORDER BY n DESC LIMIT {N_FORMS} FORMAT TSVWithNames"""
     T = pd.read_csv(io.StringIO(A.ch_query(sql, {"fm": ("form String", [(f,) for f in M.form])})), sep="\t", keep_default_na=False)
     ent = dict(zip(M.form, M.entry))
-    out += [(f, "%s (counted as: %s, %s)" % (f, ent[f], direction(val[ent[f]])), "form", ent[f]) for f in T.form]
+    if not POS:
+        out += [(f, "%s (counted as: %s, %s)" % (f, ent[f], direction(val[ent[f]])), "form", ent[f]) for f in T.form]
     import numpy as np
     V = pd.read_parquet(os.path.join(SHARED, "vad_norms.parquet"), columns=["VAD-Valence.Warriner.median"])["VAD-Valence.Warriner.median"]
     V = V[V.index.map(lambda w: isinstance(w, str) and w.isalpha() and w.islower())]
@@ -138,13 +144,15 @@ def items():
     b, a = np.polyfit([val[w] for w in common], V.loc[common].values, 1)
     _, sw, _ = A.lists_expanded()
     allmapped = set(pd.read_parquet(N.MAP).query("source == 'warriner'").form)
-    cand = V[(V < a + 3.0 * b) & ~V.index.isin(set(val) | allmapped | sw | set(ANCHORS))]
+    pole = (V > a + 7.0 * b) if POS else (V < a + 3.0 * b)
+    cand = V[pole & ~V.index.isin(set(val) | allmapped | sw | set(ANCHORS))]
     sql = f"""SELECT k AS w, sum(v) AS n FROM (SELECT _id, freqs FROM lltk.text_freqs FINAL WHERE _id IN ({A.REPS}))
       ARRAY JOIN mapKeys(freqs) AS k, mapValues(freqs) AS v WHERE k IN (SELECT w FROM c) GROUP BY w HAVING n >= {VEC_FLOOR}
       FORMAT TSVWithNames"""
     C = pd.read_csv(io.StringIO(A.ch_query(sql, {"c": ("w String", [(w,) for w in cand.index])})), sep="\t", keep_default_na=False)
     have = {f for f, *_ in out}
-    out += [(w, "%s (inferred negative)" % w, "vector", w) for w in sorted(C.w) if w not in have]
+    out += [(w, "%s (inferred %s)" % (w, "positive" if POS else "negative"), "vector_pos" if POS else "vector", w)
+            for w in sorted(C.w) if w not in have]
     assert len({f for f, *_ in out}) == len(out)
     return out
 
@@ -234,24 +242,26 @@ def consensus(its):
     lm = K[K.kind == "lemma"].copy()
     lm["warriner"] = [val.get(w) for w in lm.index]
     lm = lm.dropna(subset=["warriner", "llm_valence"])
-    L += ["- CALIBRATION, LLM valence vs Warriner on %d polar lemmas: Spearman %.3f, Pearson %.3f, mean |diff| %.2f; on kept "
-          "lemmas only: Spearman %.3f" % (len(lm), spearmanr(lm.llm_valence, lm.warriner)[0], pearsonr(lm.llm_valence, lm.warriner)[0],
-                                          (lm.llm_valence - lm.warriner).abs().mean(), spearmanr(lm[lm.keep].llm_valence, lm[lm.keep].warriner)[0]),
-          "- largest LLM-above-Warriner gaps (period or sense shift?): " + ", ".join("%s %.1f/%.1f" % (w, r.llm_valence, r.warriner) for w, r in lm.assign(d=lm.llm_valence - lm.warriner).nlargest(15, "d").iterrows()),
-          "- largest LLM-below-Warriner gaps: " + ", ".join("%s %.1f/%.1f" % (w, r.llm_valence, r.warriner) for w, r in lm.assign(d=lm.llm_valence - lm.warriner).nsmallest(15, "d").iterrows()), ""]
-    for kind, lab in (("lemma", "polar lemmas"), ("form", "mapped forms"), ("vector", "vector negative-pole candidates")):
+    if len(lm):
+        L += ["- CALIBRATION, LLM valence vs Warriner on %d polar lemmas: Spearman %.3f, Pearson %.3f, mean |diff| %.2f; on kept "
+              "lemmas only: Spearman %.3f" % (len(lm), spearmanr(lm.llm_valence, lm.warriner)[0], pearsonr(lm.llm_valence, lm.warriner)[0],
+                                              (lm.llm_valence - lm.warriner).abs().mean(), spearmanr(lm[lm.keep].llm_valence, lm[lm.keep].warriner)[0]),
+              "- largest LLM-above-Warriner gaps (period or sense shift?): " + ", ".join("%s %.1f/%.1f" % (w, r.llm_valence, r.warriner) for w, r in lm.assign(d=lm.llm_valence - lm.warriner).nlargest(15, "d").iterrows()),
+              "- largest LLM-below-Warriner gaps: " + ", ".join("%s %.1f/%.1f" % (w, r.llm_valence, r.warriner) for w, r in lm.assign(d=lm.llm_valence - lm.warriner).nsmallest(15, "d").iterrows()), ""]
+    for kind, lab in (("lemma", "polar lemmas"), ("form", "mapped forms"), ("vector", "vector negative-pole candidates"),
+                      ("vector_pos", "vector positive-pole candidates")):
         s = K[K.kind == kind]
         L.append("- %s: %d rated, %d kept (%.0f%%); rejections by reason: %s" % (lab, len(s), int(s.keep.sum()), 100 * s.keep.mean(),
                  ", ".join("%s %d" % (r, c) for r, c in s[~s.keep].reason.value_counts().items())))
     for sign, lab in ((-1, "negative"), (1, "positive")):
         s = K[(K.kind == "lemma") & K.index.map(lambda w: (val.get(w, 5) - 5) * sign > 1)]
         L += ["", "Rejected %s lemmas (sample): " % lab + "; ".join("%s (%s)" % (w, r.competing_sense or r.reason) for w, r in s[~s.keep].head(60).iterrows())]
-    v = K[K.kind == "vector"]
+    v = K[K.kind.isin(["vector", "vector_pos"])]
     L += ["", "Vector candidates kept (most frequent first is not available here; alphabetical sample): " + ", ".join(
         "%s %.1f" % (w, r.llm_valence) for w, r in v[v.keep].head(60).iterrows())]
     f = K[K.kind == "form"]
     L += ["", "Rejected mapped forms (sample): " + "; ".join("%s -> %s (%s)" % (w, r.lemma, r.competing_sense or r.reason) for w, r in f[~f.keep].head(40).iterrows())]
-    open(os.path.join(HERE, "VALENCE_LEXICON_CLEAN.md"), "w").write("\n".join(L) + "\n")
+    open(os.path.join(HERE, "VALENCE_LEXICON_CLEAN%s.md" % ("_pos" if POS else "")), "w").write("\n".join(L) + "\n")
     print("\n".join(L))
 
 

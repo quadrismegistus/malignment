@@ -1,7 +1,11 @@
 """Valence components on the CLEANED lexicon: negative and positive words per content word, and their intensity,
 history with national-story arms. (RH, 2026-09-26, after valence_lexicon_clean.py)
 
-    .venv/bin/python -u arc_valence_clean_components.py   -> ARC_VALENCE_CLEAN.md, figures/arc_valence_clean_v1.{png,pdf,caption.txt}
+    .venv/bin/python -u arc_valence_clean_components.py      -> ARC_VALENCE_CLEAN.md, figures/arc_valence_clean_v1.*
+    .venv/bin/python -u arc_valence_clean_components.py v2   -> ARC_VALENCE_CLEAN_v2.md, figures/arc_valence_clean_v2.*: SYMMETRIC
+        (RH, 2026-09-26: "we do need positive word seeds if we want to discuss negative/positive as fall of evaluation"):
+        the +vector lexicon also takes the vector POSITIVE-pole words the rater kept (valence_clean_keep_v1_pos.csv,
+        rated > 6), and an EVALUATION rate (positive + negative words per content word) is added.
 
 LEXICON (valence_clean_keep_v1.csv). A form scores when:
   - it is a KEPT polar Warriner lemma (value: Warriner's rating); or
@@ -24,18 +28,23 @@ import pandas as pd
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
+_V2FLAG = "v2" in sys.argv[1:]
 sys.argv = [sys.argv[0], "v4", "meta", "sel12", "arms4"]
 import arc_interiority as A                              # noqa: E402
 import arc_type_norms as N                               # noqa: E402
 import arc_history_arms as H                             # noqa: E402
 from malignment import figure as F                       # noqa: E402
 
+V2 = _V2FLAG
 SH = os.path.expanduser("~/malignment-data/interiority_norms")
 KEEP = os.path.join(SH, "valence_clean_keep_v1.csv")
-TEXTS = os.path.join(A.DATA, "valence_clean_texts_cc.parquet")
-OUT = os.path.join(HERE, "figures", "arc_valence_clean_v1")
+KEEP_POS = os.path.join(SH, "valence_clean_keep_v1_pos.csv")
+TEXTS = os.path.join(A.DATA, "valence_clean_texts_cc%s.parquet" % ("_v2" if V2 else ""))
+OUT = os.path.join(HERE, "figures", "arc_valence_clean_" + ("v2" if V2 else "v1"))
 COMPS = [("neg_rate", "Negative words per content word"), ("neg_int", "Negative intensity"),
          ("pos_rate", "Positive words per content word"), ("pos_int", "Positive intensity")]
+if V2:
+    COMPS = [("eval_rate", "Evaluative words per content word")] + COMPS
 CONC = "Abs-Conc.Median.median"
 
 
@@ -55,6 +64,11 @@ def lexicons():
     for w, r in K[(K.kind == "vector") & K.keep.astype(bool)].iterrows():
         if pd.notna(r.llm_valence) and float(r.llm_valence) < 4:
             vec[w] = float(r.llm_valence)
+    if V2:
+        Kp = pd.read_csv(KEEP_POS, keep_default_na=False, na_values=[""]).set_index("form")
+        for w, r in Kp[(Kp.kind == "vector_pos") & Kp.keep.astype(bool)].iterrows():
+            if pd.notna(r.llm_valence) and float(r.llm_valence) > 6 and w not in vec:
+                vec[w] = float(r.llm_valence)
     return {"human": human, "+vector": vec}
 
 
@@ -68,7 +82,7 @@ def stats(counts, n_content, lex):
             neg += c; sneg += c * (5 - v)
         elif v > 6:
             pos += c; spos += c * (v - 5)
-    return dict(neg_rate=neg / n_content, pos_rate=pos / n_content,
+    return dict(neg_rate=neg / n_content, pos_rate=pos / n_content, eval_rate=(neg + pos) / n_content,
                 neg_int=sneg / neg if neg else np.nan, pos_int=spos / pos if pos else np.nan)
 
 
@@ -88,6 +102,7 @@ def history(L):
         R = R.merge(C, on="_id")
         for r in R.itertuples():
             rows.append(dict(_id=r._1, lexicon=name, n_content=r.n_content, neg_rate=r.neg / r.n_content, pos_rate=r.pos / r.n_content,
+                             eval_rate=(r.neg + r.pos) / r.n_content,
                              neg_int=r.sneg / r.neg if r.neg else np.nan, pos_int=r.spos / r.pos if r.pos else np.nan))
     D = pd.DataFrame(rows)
     D.to_parquet(TEXTS, index=False)
@@ -154,7 +169,7 @@ def main():
             pts += [dict(panel=pname, year=y, value=v) for y, v in zip(dec.year, dec.value)]
             cvs += [dict(panel=pname, year=x, value=y) for x, y in cv]
             arms_ += [dict(panel=pname, arm=H.NAME[arm[k]], value=float(med[k])) for k in conds]
-    open(os.path.join(HERE, "ARC_VALENCE_CLEAN.md"), "w").write("\n".join(R) + "\n")
+    open(os.path.join(HERE, "ARC_VALENCE_CLEAN%s.md" % ("_v2" if V2 else "")), "w").write("\n".join(R) + "\n")
     print("\n".join(R))
     P, C, A_ = pd.DataFrame(pts), pd.DataFrame(cvs), pd.DataFrame(arms_)
     for df in (P, C, A_):
@@ -173,13 +188,14 @@ def main():
          + facet_wrap("~panel", ncol=2, scales="free_y")
          + scale_x_continuous(breaks=[1600, 1700, 1800, 1900, 2000])
          + labs(x="", y="Rate per content word / mean distance from neutral", linetype="")
-         + F.pub_theme(height=8.0)
-         + theme(legend_position="bottom", figure_size=(7.5, 8.0), strip_text=element_text(family=F.pub_font(), size=F.PUB_FONT_PT)))
+         + F.pub_theme(height=10.0 if V2 else 8.0)
+         + theme(legend_position="bottom", figure_size=(7.5, 10.0 if V2 else 8.0), strip_text=element_text(family=F.pub_font(), size=F.PUB_FONT_PT)))
     F.save(p, OUT + ".png")
     open(OUT + ".caption.txt", "w").write("\n".join(textwrap.wrap(
         "VALENCE COMPONENTS ON THE CLEANED LEXICON: negative and positive words per content word and their mean distance "
         "from neutral (5), 1600-2000. Left: kept Warriner lemmas and their kept forms; right: plus the vector negative-pole "
-        "candidates the rater confirmed (their 1-9 rating as value). Chadwyck and Chicago arc_fiction, decade medians, "
+        "candidates the rater confirmed (their 1-9 rating as value)" + (" and, symmetrically, the positive-pole candidates it "
+        "confirmed; top row: evaluative words (positive + negative) per content word" if V2 else "") + ". Chadwyck and Chicago arc_fiction, decade medians, "
         "lowess; lines: national-story arms, median over lineages.", 100)) + "\n")
 
 
