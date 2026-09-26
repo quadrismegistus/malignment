@@ -12,6 +12,12 @@ we make Concreteness a share too?")
         each model line crosses the smoothed history, labelled with its year, and titles "Concreteness of fictional
         language" (a degree: the panel is a norm mean) / "Evaluative language in fiction" (a quantity: a share) (RH,
         2026-09-26: "score on top, share on bottom"; "add the intersection points and year labels")
+    .venv/bin/python -u arc_fig5_conc_eval.py v4 [1700] [nolady]   -> figures/arc_fig5_conc_eval_v4[_1700][_nolady].*: v3 with a
+        DECLARED EXCLUSION LIST removed from the evaluative lexicon on both sides (paper seat, 2026-09-26): the twelve
+        lexicon words mostly capitalised mid-sentence in model text (names: arc_fig5_eval_words' check), and "haven",
+        which lltk's tokenisation makes of every "haven't" (text_freqs splits contractions; the meta-texts' [a-z]+ does
+        the same). `nolady` also drops "lady", 44% capitalised mid-sentence at the 1765-1795 peak (a title), as a
+        sensitivity. Removal = the excluded words' per-text rate subtracted from the evaluative share.
     .venv/bin/python -u arc_fig5_conc_eval.py ext [1700]  -> figures/arc_fig5_eval_extremity_ref_v1[_1700].*: reference
         plate adding EVALUATIVE EXTREMITY, the norm-average form of the evaluative share on the same cleaned lexicon:
         mean |v - 5| over every scored token, where scored = the kept polar words (as in the share) PLUS the
@@ -43,10 +49,15 @@ import arc_valence_clean_components as V                   # noqa: E402
 H, F, A = V.H, V.F, V.A
 
 START = 1700 if "1700" in _ARGS else 1600
-MODE = "ext" if "ext" in _ARGS else "v3" if "v3" in _ARGS else "v2" if "v2" in _ARGS else "v1"
+MODE = "ext" if "ext" in _ARGS else "v4" if "v4" in _ARGS else "v3" if "v3" in _ARGS else "v2" if "v2" in _ARGS else "v1"
+V3LIKE = MODE in ("v3", "v4")
+NOLADY = MODE == "v4" and "nolady" in _ARGS
+#: names in model text (mid-sentence capitalised > 50%, n >= 20: ARC_FIG5_EVAL_WORDS check) and the haven't artifact
+EXCLUDE = ({"lily", "creek", "queen", "grandma", "christmas", "glade", "fiend", "mama", "bunny", "mystique", "bliss", "orchard", "haven"}
+           | ({"lady"} if NOLADY else set())) if MODE == "v4" else set()
 OUT = os.path.join(HERE, "figures", {"v1": "arc_fig5_conc_eval_v1", "v2": "arc_fig5_conc_eval_v2", "v3": "arc_fig5_conc_eval_v3",
-                                     "ext": "arc_fig5_eval_extremity_ref_v1"}[MODE]
-                   + ("_1700" if START == 1700 else ""))
+                                     "v4": "arc_fig5_conc_eval_v4", "ext": "arc_fig5_eval_extremity_ref_v1"}[MODE]
+                   + ("_1700" if START == 1700 else "") + ("_nolady" if NOLADY else ""))
 EXT_TEXTS = os.path.join(A.DATA, "eval_extremity_texts_cc.parquet")
 NORMS = "/Users/rj416/github/abslithists/abstraction/data/fields/data.allnorms.pkl.gz"
 NORM_COL, ZCUT = "Abs-Conc.Median.median", 1.0
@@ -174,7 +185,7 @@ def panel(hist, curve, arms, title, ylab, show_x, pct=True):
          + F.pub_theme(grid="y")
          + theme(axis_title_y=element_text(family=fnt, size=F.PUB_FONT_PT),
                  plot_title=element_text(family=fnt, size=F.PUB_FONT_PT, weight="bold", ha="left")))
-    if MODE == "v3":
+    if V3LIKE:
         from plotnine import geom_label
         #: every crossing gets a point; only each line's LAST (the one on the long trend) gets a year. Earlier crossings,
         #: where a line grazes the 18th-century plateau, are listed in the caption: eight labels there overprint.
@@ -262,6 +273,24 @@ def main():
     assert Th._id.nunique() == len(Th), "duplicate texts after merge"
     Mm = V.meta(L)
     Mm = Mm[Mm.lexicon == LEX].merge(meta_conc(conc, sw), on="id")
+    if EXCLUDE:
+        lexv = L[LEX]
+        #: every excluded word must be a scoring (polar) word, or removing it changes nothing and the list misdescribes itself
+        assert all(w in lexv and (lexv[w] < 4 or lexv[w] > 6) for w in EXCLUDE), [w for w in EXCLUDE if w not in lexv]
+        sql = f"""SELECT f._id AS _id, sum(f.v) AS n_x FROM (SELECT _id, k, v FROM (SELECT _id, freqs FROM lltk.text_freqs FINAL
+                  WHERE _id IN ({A.REPS}) AND _id IN (SELECT _id FROM lltk.texts FINAL WHERE corpus IN ('chadwyck', 'chicago')))
+                  ARRAY JOIN mapKeys(freqs) AS k, mapValues(freqs) AS v) f INNER JOIN w ON f.k = w.form
+                  GROUP BY _id FORMAT TSVWithNames"""
+        Rx = pd.read_csv(io.StringIO(A.ch_query(sql, {"w": ("form String", [(w,) for w in sorted(EXCLUDE)])})), sep="\t")
+        Th = Th.merge(Rx, on="_id", how="left").fillna({"n_x": 0})
+        Th["eval_rate"] = Th.eval_rate - Th.n_x / Th.n_content
+        Mt = pd.read_parquet(os.path.join(A.DATA, "prompt_check_national_judged_meta.parquet"))
+        mx = {}
+        for r in Mt.itertuples():
+            t = [w for w in re.findall(r"[a-z]+", r.text.lower()) if w not in sw]
+            mx[r.id] = sum(w in EXCLUDE for w in t) / len(t)
+        Mm["eval_rate"] = Mm.eval_rate - Mm.id.map(mx)
+        print("excluded: history mean %.4f per content word, model meta-texts mean %.4f" % ((Th.n_x / Th.n_content).mean(), Mm.id.map(mx).mean()))
     r_hist = pearsonr(Th.conc_rate, Th.conc.astype(float))[0]
     r_meta = pearsonr(Mm.conc_rate, Mm[V.CONC])[0]
     #: the share must track the score it thresholds, or it is a different measure wearing the name
@@ -269,7 +298,8 @@ def main():
     #: booked (arc_evaluation_share_v2 caption): the evaluative arms are unchanged by this figure
     med_e = Mm.pivot_table(index="lineage", columns="cond", values="eval_rate").median()
     for k, v in {"base": 0.1732, "raw": 0.2212, "prefill": 0.2291, "continue": 0.2327}.items():
-        assert abs(med_e[COND[k]] - v) < 5e-5, (k, med_e[COND[k]], v)
+        #: v4 removes words from the lexicon, so its arms are NOT these; its first run reports them in the caption
+        assert EXCLUDE or abs(med_e[COND[k]] - v) < 5e-5, (k, med_e[COND[k]], v)
     med_c = Mm.pivot_table(index="lineage", columns="cond", values="conc_rate").median()
     arms_c = {k: float(med_c[COND[k]]) for k in COND}
     arms_e = {k: float(med_e[COND[k]]) for k in COND}
@@ -278,7 +308,7 @@ def main():
     hist_score, hist_share = history_control(Th, "conc"), history_control(Th, "conc_rate")
     n_cond = Mm.groupby("cond").lineage.nunique()
     #: booked (ARC_VALENCE_CLEAN_v2.md, +vector, partialled on the concreteness score): 25/32, 20/23, 17/20
-    assert [(ctl_score[k]["k"], ctl_score[k]["n"]) for k in ("raw", "prefill", "continue")] == [(25, 32), (20, 23), (17, 20)], ctl_score
+    assert EXCLUDE or [(ctl_score[k]["k"], ctl_score[k]["n"]) for k in ("raw", "prefill", "continue")] == [(25, 32), (20, 23), (17, 20)], ctl_score
 
     import matplotlib
     matplotlib.use("Agg")
@@ -296,15 +326,15 @@ def main():
         for k, v in {"base": 0.097, "raw": -0.125, "prefill": -0.059, "continue": -0.178}.items():
             assert abs(arms_s[k] - v) < 5e-4, (k, arms_s[k], v)
         hs = H.decades(Th.year, Th.conc)
-        ps = [panel(hs, H.smooth(hs), arms_s, "Concreteness of fictional language" if MODE == "v3" else "Concrete language in fiction",
+        ps = [panel(hs, H.smooth(hs), arms_s, "Concreteness of fictional language" if V3LIKE else "Concrete language in fiction",
                     "Concreteness\n(word norm mean)", False, pct=False), ev]
-        if MODE == "v3":
+        if V3LIKE:
             cross = {(nm, k): [round(x) for x, _ in crossings(H.smooth(h_), v)] for nm, h_, arms in (("conc", hs, arms_s), ("eval", he, arms_e))
                      for k, v in arms.items()}
             #: booked (arc_fig5_eval_extremity_ref_v1 placement lines): the share's crossing years
             booked = {1600: {"base": [1906], "raw": [1812], "prefill": [1702, 1711, 1792], "continue": [1676, 1746, 1775]},
                       1700: {"base": [1904], "raw": [1816], "prefill": [1726, 1803], "continue": [1745, 1797]}}[START]
-            assert all(cross[("eval", k)] == v for k, v in booked.items()), cross
+            assert EXCLUDE or all(cross[("eval", k)] == v for k, v in booked.items()), cross
         arms_c = arms_s
     if MODE == "ext":
         ext = extremity_lexicon(L)
@@ -347,7 +377,11 @@ def main():
            round(100 * hist_score[2] / hist_score[1]),
            c["raw"]["k"], c["raw"]["n"], c["prefill"]["k"], c["prefill"]["n"], c["continue"]["k"], c["continue"]["n"],
            *[round(100 * c[k]["gap_part"] / c[k]["gap_raw"]) for k in ("raw", "prefill", "continue")])), 100)
-    if MODE == "v3":
+    if EXCLUDE:
+        cap += textwrap.wrap("Removed from the evaluative lexicon on both sides: words used mostly as names in the model stories (%s), "
+                             "and \"haven\", which the tokenisation makes of \"haven't\"%s." % (", ".join(sorted(EXCLUDE - {"haven", "lady"})),
+                             "; and, as a sensitivity, \"lady\", mostly a title in the eighteenth-century novels" if NOLADY else ""), 100)
+    if V3LIKE:
         early = [(NAME[k], cross[("eval", k)][:-1]) for k in COND if len(cross[("eval", k)]) > 1]
         cap += textwrap.wrap("Circles mark where each model line crosses the smoothed history; the year labels its last crossing." +
                              (" Earlier crossings, in evaluative language: " + "; ".join("%s %s" % (n, ", ".join(map(str, ys))) for n, ys in early) + "."

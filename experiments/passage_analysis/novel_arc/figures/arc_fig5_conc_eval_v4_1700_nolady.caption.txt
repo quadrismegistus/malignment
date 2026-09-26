@@ -1,0 +1,24 @@
+CONCRETE AND EVALUATIVE LANGUAGE IN FICTION, 1700-2000. Top: concreteness, the mean over a text's
+words of a concreteness norm (z-scored median of human concreteness and imageability norms, extended
+to period vocabulary); positive is concrete, negative abstract. Bottom: per text, the share of
+content words that are words of clear positive or negative valence (a cleaned Warriner et al. 2013
+lexicon plus rater-confirmed period vocabulary; above 6 or below 4 on the 1-9 scale). Gray points:
+decade medians over 9,836 Chadwyck and Chicago novels; black line: lowess (span 0.3). Lines: model
+fiction, national stories from a neutral prompt (judged proper stories), each model-condition as one
+text, median over the lineages run in that condition (34 base, 36 aligned, 27 prefilled, 24 chat).
+Evaluative language's historical fall and its rise under alignment both survive controlling for
+concreteness (abstraction's text score, partialled out by the slope within decade or within
+condition): the fall of evaluative language from the 1760s to the 1950s keeps 61% of its size, and
+aligned exceeds base in 25 of 32 paired lineages (raw), 20 of 23 (prefilled) and 17 of 20 (chat),
+keeping 78%, 72% and 73% of the median gap.
+Removed from the evaluative lexicon on both sides: words used mostly as names in the model stories
+(bliss, bunny, christmas, creek, fiend, glade, grandma, lily, mama, mystique, orchard, queen), and
+"haven", which the tokenisation makes of "haven't"; and, as a sensitivity, "lady", mostly a title in
+the eighteenth-century novels.
+Circles mark where each model line crosses the smoothed history; the year labels its last crossing.
+Earlier crossings, in evaluative language: Aligned (prefilled) 1707; Aligned (chat) 1759.
+
+  crossings: conc Base models 1969; conc Aligned models 1894; conc Aligned (prefilled) 1914; conc Aligned (chat) 1875; eval Base models 1904; eval Aligned models 1820; eval Aligned (prefilled) 1707, 1813; eval Aligned (chat) 1759, 1796
+
+  concrete arms: Base models 0.0968, Aligned models -0.1248, Aligned (prefilled) -0.0594, Aligned (chat) -0.1776
+  evaluative arms: Base models 0.1719, Aligned models 0.2174, Aligned (prefilled) 0.2217, Aligned (chat) 0.2315
