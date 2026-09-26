@@ -6,6 +6,12 @@ measure like the concreteness score above it. (RH, 2026-09-26: "Did we ever try 
     .venv/bin/python -u arc_fig5_net_valence.py three   -> figures/arc_fig5_conc_val3_v1_1700.*: THREE panels (RH, 2026-09-26: "Maybe
         we could do both? They tell different stories"): concreteness; "Valenced language in fiction (positive + negative)",
         v4's panel with its crossings; "Valence in fiction (positive - negative)". Both valence controls in the caption.
+    .venv/bin/python -u arc_fig5_net_valence.py three2  -> figures/arc_fig5_conc_val3_v2_1700.*: the paper seat's revisions
+        (2026-09-26): panel 3 at two thirds the height of the others (plotnine 0.15's Stack has no height option, so a
+        subclass passes height_ratios to p9GridSpec); its axis in PERCENTAGE POINTS, being a difference of two shares;
+        caption drops "more than twice its highest point" (a level that depends on the lexicon's balance of poles) and
+        calls base "at the top of the historical range"; and the FRAME test -- prefilled and chat each against aligned-raw
+        on net valence, paired by lineage.
 
 Everything as Figure 5 v4 (arc_fig5_conc_eval.py v4 1700): same 9,836 Chadwyck and Chicago novels 1700-2009, same
 national-story meta-texts, same cleaned "+vector" lexicon with the same declared exclusions (model-text names and
@@ -21,13 +27,14 @@ import pandas as pd
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
-THREE = "three" in sys.argv[1:]                              # read before the argv rewrite below
+THREE2 = "three2" in sys.argv[1:]                            # read before the argv rewrite below
+THREE = "three" in sys.argv[1:] or THREE2
 sys.argv = [sys.argv[0], "v4", "1700"]
 import arc_fig5_conc_eval as E                               # noqa: E402
 V, H, A, F = E.V, E.H, E.A, E.F
 from scipy.stats import binomtest                            # noqa: E402
 
-OUT = os.path.join(HERE, "figures", "arc_fig5_conc_val3_v1_1700" if THREE else "arc_fig5_conc_netval_v1_1700")
+OUT = os.path.join(HERE, "figures", "arc_fig5_conc_val3_v2_1700" if THREE2 else "arc_fig5_conc_val3_v1_1700" if THREE else "arc_fig5_conc_netval_v1_1700")
 COND, NAME = E.COND, E.NAME
 #: booked (arc_fig5_conc_eval_v4_1700.caption.txt): v4's evaluative arms, which pos + neg must reproduce
 V4_EVAL = {"base": 0.1721, "raw": 0.2174, "prefill": 0.2217, "continue": 0.2322}
@@ -115,14 +122,49 @@ def main():
         assert cross_v == {"base": [1906], "raw": [1821], "prefill": [1815], "continue": [1744, 1797]}, cross_v
         ps = [E.panel(hs, cvs, arms_s, "Concreteness of fictional language", "Concreteness\n(word norm mean)", False, pct=False),
               E.panel(hv, cvv, arms_v, "Valenced language in fiction (positive + negative)", "Valenced words\n(per content word)", False),
-              E.panel(hn, cvn, arms_n, "Valence in fiction (positive \u2212 negative)", "Positive minus negative\nwords (per content word)", True)]
+              E.panel(hn, cvn, arms_n, "Valence in fiction (positive \u2212 negative)",
+                      "Positive minus negative\n(percentage points)" if THREE2 else "Positive minus negative\nwords (per content word)", True,
+                      #: two thirds the height of the others, so labels need half again the spacing in data units
+                      pct="pp" if THREE2 else True, gap=0.12 if THREE2 else 0.075)]
+        frame = {}
+        for a, b_ in (("prefill", "raw"), ("continue", "raw")):
+            piv = Mm.pivot_table(index="lineage", columns="cond", values="net")[[COND[a], COND[b_]]].dropna()
+            g = piv[COND[a]] - piv[COND[b_]]
+            frame[a] = (int((g > 0).sum()), len(g), binomtest(int((g > 0).sum()), len(g)).pvalue, float(g.median()))
+        #: booked (paper seat's frame test, run 2026-09-26 before this mode existed): 16/27 and 12/24
+        assert [(frame[k][0], frame[k][1]) for k in ("prefill", "continue")] == [(16, 27), (12, 24)], frame
     else:
         ps = [E.panel(hs, cvs, arms_s, "Concreteness of fictional language", "Concreteness\n(word norm mean)", False, pct=False),
               E.panel(hn, cvn, arms_n, "Valence in fictional language", "Positive minus negative\nwords (per content word)", True)]
-    fig = Stack(ps).draw()
-    fig.set_size_inches(F.PUB_SIZE[0], 8.2 if THREE else 5.6)
-    fig.savefig(OUT + ".png", dpi=300)
-    fig.savefig(OUT + ".pdf")
+    if THREE2:
+        #: plotnine 0.15 has no height option for a Stack, and its layout pass (RowsTree.resize) sets every PANEL to the
+        #: mean panel height, overwriting any ratio given to the gridspec. Patched for this draw only, then restored:
+        #: panel i gets mean * RATIO[i] / mean(RATIO), the space around it unchanged.
+        from plotnine._mpl.layout_manager import _layout_tree as LT
+        RATIO = np.array([3.0, 3.0, 2.0])
+        orig = LT.RowsTree.resize
+
+        def resize(self):
+            ph, pn = np.array(self.plot_heights), np.array(self.panel_heights)
+            if len(pn) != len(RATIO):
+                return orig(self)
+            new = pn.mean() * RATIO / RATIO.mean() + (ph - pn)
+            self.gridspec.set_height_ratios(new / new.max())
+            self.resize_sub_compositions()
+        #: the layout engine runs again at every savefig, so the patch must stand until both files are written
+        LT.RowsTree.resize = resize
+        try:
+            fig = Stack(ps).draw()
+            fig.set_size_inches(F.PUB_SIZE[0], 6.8)
+            fig.savefig(OUT + ".png", dpi=300)
+            fig.savefig(OUT + ".pdf")
+        finally:
+            LT.RowsTree.resize = orig
+    else:
+        fig = Stack(ps).draw()
+        fig.set_size_inches(F.PUB_SIZE[0], 8.2 if THREE else 5.6)
+        fig.savefig(OUT + ".png", dpi=300)
+        fig.savefig(OUT + ".pdf")
 
     n_cond = Mm.groupby("cond").lineage.nunique()
     above = [NAME[k] for k in COND if arms_n[k] > cvn[:, 1].max()]
@@ -146,7 +188,7 @@ def main():
             "  placements (net): " + "; ".join("%s %s" % (NAME[k], place(cvn, v)) for k, v in arms_n.items()),
             "  concreteness arms: " + ", ".join("%s %.4f" % (NAME[k], v) for k, v in arms_s.items())]
     if THREE:
-        cap = textwrap.wrap(
+        cap = textwrap.wrap((
             "CONCRETENESS, VALENCED LANGUAGE AND VALENCE IN FICTION, 1700-2000. Top: concreteness, the mean over a text's words of a "
             "concreteness norm (z-scored median of human concreteness and imageability norms, extended to period vocabulary); "
             "positive is concrete, negative abstract. Middle and bottom: per text, positive words PLUS negative words, and positive "
@@ -158,11 +200,16 @@ def main():
             "%d chat). Removed from the valence lexicon on both sides: words used mostly as names in the model stories (%s), and "
             "\"haven\", which the tokenisation makes of \"haven't\". Circles mark where a model line crosses the smoothed history; the "
             "year labels its last crossing (an earlier one: Aligned (chat) %d in the middle panel). No model line meets the valence "
-            "history: all four lie above it, base models just above (decade medians reach the base line in %d decades), aligned "
-            "models at more than twice its highest point. Controlling for concreteness (abstraction's score, partialled out by the "
+            "history: " + ("base models sit at the top of its range (decade medians reach them in %d decades), and all three aligned "
+            "conditions lie above every decade and do not differ reliably from one another" if THREE2 else
+            "all four lie above it, base models just above (decade medians reach the base line in %d decades), aligned "
+            "models at more than twice its highest point") + ". Controlling for concreteness (abstraction's score, partialled out by the "
             "slope within decade or within condition): the fall of valenced language from the 1760s to the 1950s keeps %d%% of its "
             "size, and aligned exceeds base in %d of %d paired lineages (raw), %d of %d (prefilled) and %d of %d (chat) in valenced "
-            "language, and in %d of %d, %d of %d and %d of %d in valence."
+            "language, and in %d of %d, %d of %d and %d of %d in valence." + (
+            " Against aligned models, prefilled is higher in net valence in %d of %d lineages and chat in %d of %d (p %.2f, %.2f)."
+            % (frame["prefill"][0], frame["prefill"][1], frame["continue"][0], frame["continue"][1], frame["prefill"][2], frame["continue"][2])
+            if THREE2 else ""))
             % (format(len(Th), ","), *[n_cond[COND[k]] for k in COND], ", ".join(sorted(X - {"haven"})), cross_v["continue"][0],
                int((hn.value >= arms_n["base"]).sum()), round(100 * hist_v[2] / hist_v[1]),
                *[x for k in ("raw", "prefill", "continue") for x in (ctl_v[k]["k"], ctl_v[k]["n"])],

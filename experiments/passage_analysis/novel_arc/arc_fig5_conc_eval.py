@@ -141,7 +141,9 @@ def meta_conc(conc, sw):
     return pd.DataFrame(rows)
 
 
-def label_positions(vals, gap):
+def label_positions(vals, gap, lo=None, hi=None):
+    """Labels in value order, >= gap apart, each cluster centred on its lines' mean. With lo/hi, a CLUSTER whose stack
+    would cross the range (half a label past it sits on the panel border) is shifted back inside -- that cluster only."""
     order = sorted(vals, key=vals.get)
     groups = [[order[0]]]
     for k in order[1:]:
@@ -152,8 +154,12 @@ def label_positions(vals, gap):
     pos = {}
     for g in groups:
         c = sum(vals[k] for k in g) / len(g)
-        for i, k in enumerate(g):
-            pos[k] = c + (i - (len(g) - 1) / 2) * gap
+        ys = [c + (i - (len(g) - 1) / 2) * gap for i in range(len(g))]
+        if hi is not None and ys[-1] > hi - gap / 2:
+            ys = [y - (ys[-1] - (hi - gap / 2)) for y in ys]
+        if lo is not None and ys[0] < lo + gap / 2:
+            ys = [y + (lo + gap / 2 - ys[0]) for y in ys]
+        pos.update(zip(g, ys))
     return pos
 
 
@@ -162,14 +168,16 @@ def crossings(cv, v):
     return [(y0 + (v - v0) / (v1 - v0) * (y1 - y0), v) for (y0, v0), (y1, v1) in zip(cv[:-1], cv[1:]) if (v0 - v) * (v1 - v) < 0]
 
 
-def panel(hist, curve, arms, title, ylab, show_x, pct=True):
+def panel(hist, curve, arms, title, ylab, show_x, pct=True, gap=0.075):
     from plotnine import (ggplot, aes, geom_point, geom_line, geom_segment, geom_text, geom_vline, labs,
                           scale_x_continuous, scale_y_continuous, scale_linetype_manual, theme, element_text, element_blank)
     fnt = F.pub_font()
     cv = pd.DataFrame(curve, columns=["year", "value"])
     Ad = pd.DataFrame([{"arm": NAME[k], "value": v} for k, v in arms.items()])
     lo = min(cv.value.min(), hist.value.min(), Ad.value.min()); hi = max(cv.value.max(), hist.value.max(), Ad.value.max())
-    Ad["ly"] = Ad.arm.map(label_positions({NAME[k]: v for k, v in arms.items()}, 0.075 * (hi - lo)))
+    #: bounds only for the short panel: every earlier plate was drawn without them and must redraw identically
+    pos = label_positions({NAME[k]: v for k, v in arms.items()}, gap * (hi - lo), *((lo, hi) if gap != 0.075 else (None, None)))
+    Ad["ly"] = Ad.arm.map(pos)
     X0 = START
     p = (ggplot()
          + geom_vline(xintercept=[y for y in (1700, 1800, 1900) if y > X0], color="#e9ecef", size=F.PUB_RULE_PT)
@@ -179,7 +187,9 @@ def panel(hist, curve, arms, title, ylab, show_x, pct=True):
          + geom_segment(aes(x=X1, xend=XL - 3, y="value", yend="ly"), data=Ad, color=F.PUB_MID, size=F.PUB_RULE_PT * 0.8)
          + geom_text(aes(x=XL, y="ly", label="arm"), data=Ad, ha="left", va="center", size=F.PUB_FONT_PT, family=fnt, color=F.PUB_INK)
          + scale_linetype_manual({NAME["base"]: "dotted", NAME["raw"]: "dashed", NAME["prefill"]: "dashdot", NAME["continue"]: "solid"}, guide=None)
-         + (scale_y_continuous(labels=lambda v: ["%g%%" % round(100 * x, 6) for x in v]) if pct else scale_y_continuous())
+         #: pct="pp": a DIFFERENCE of two shares, labelled in percentage points (no % sign; the axis title says so)
+         + (scale_y_continuous(labels=lambda v: ["%g" % round(100 * x, 6) for x in v]) if pct == "pp" else
+            scale_y_continuous(labels=lambda v: ["%g%%" % round(100 * x, 6) for x in v]) if pct else scale_y_continuous())
          + scale_x_continuous(limits=(X0 - 5, XMAX), breaks=[y for y in (1600, 1700, 1800, 1900, 2000) if y >= X0], expand=(0, 0))
          + labs(x="", y=ylab, title=title)
          + F.pub_theme(grid="y")
