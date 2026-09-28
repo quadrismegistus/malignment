@@ -29,6 +29,7 @@ import disjunction as DJ  # noqa: E402
 
 JEV = os.path.expanduser("~/malignment-data/affect_proportionality/type_survey.parquet")
 OUT = os.path.join(HERE, "results", "disjunction_kind")
+OUT = OUT + os.environ.get("FH_TAG", "")
 FEEL = ["anger", "fear", "grief", "desire", "disgust", "shame", "tenderness", "joy", "none"]
 NAMED = FEEL[:-1]
 Q = ["SUBSTITUTE (full act, feeling kept)", "MILDER ACT (partial act, feeling kept)", "DISPLACED FEELING (no act, feeling kept)",

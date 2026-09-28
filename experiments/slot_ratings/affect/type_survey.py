@@ -64,8 +64,10 @@ class TypeFeelingSurvey(Survey):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--pilot", type=int, default=0)
+    ap.add_argument("--words", default=os.path.join(DATA, "type_words.txt"),
+                    help="word list; the union with prefill movers is type_words_all.txt (2026-09-28)")
     a = ap.parse_args()
-    words = [l.strip() for l in open(os.path.join(DATA, "type_words.txt")) if l.strip()]
+    words = [l.strip() for l in open(a.words) if l.strip()]
     if a.pilot:
         rest = [w for w in words if w not in SMOKE]
         words = list(SMOKE) + random.Random(20260928).sample(rest, a.pilot - len(SMOKE))

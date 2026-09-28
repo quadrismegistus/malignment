@@ -74,8 +74,14 @@ def main():
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--chunk", type=int, default=2000)
     ap.add_argument("--workers", type=int, default=16)
+    ap.add_argument("--extra", help="JSON [[prompt, word|null], ...]: rate THESE items instead (the prefill movers, "
+                                    "2026-09-28), written to affect_proportionality_extra.parquet")
     a = ap.parse_args()
-    its = items()
+    if a.extra:
+        import json as _j
+        its = [(p, w) for p, w in _j.load(open(a.extra))]
+    else:
+        its = items()
     print("%d prompts, %d calls (%d frames, %d words)" % (sum(1 for _, w in its if w is None), len(its),
           sum(1 for _, w in its if w is None), sum(1 for _, w in its if w)), flush=True)
     if a.plan:
@@ -98,7 +104,7 @@ def main():
             rows.append(d)
         print("  %d / %d  (%.1f min)" % (len(rows), len(its), (time.time() - t0) / 60), flush=True)
     os.makedirs(OUT, exist_ok=True)
-    fn = os.path.join(OUT, "pilot.parquet" if a.limit else "affect_proportionality.parquet")
+    fn = os.path.join(OUT, "pilot.parquet" if a.limit else ("affect_proportionality_extra.parquet" if a.extra else "affect_proportionality.parquet"))
     pq.write_table(pa.Table.from_pylist(rows), fn, compression="zstd")
     ok = sum(r["ok"] for r in rows); echo = sum(r.get("echo_ok", False) for r in rows)
     print("wrote %s | %d rows, %d returned, %d echo ok" % (fn, len(rows), ok, echo))

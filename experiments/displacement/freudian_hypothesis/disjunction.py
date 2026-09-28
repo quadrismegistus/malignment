@@ -63,7 +63,12 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, "..", "..", ".."))
 sys.path.insert(0, ROOT)
 SRC = os.path.expanduser("~/malignment-data/norm_change/words_long_v4.csv.gz")
+#: the INPUT and an output TAG are switchable (RH, 2026-09-28: base -> aligned-raw AND base ->
+#: aligned-prefilled): FH_WORDS=words_long_v4_matched.csv.gz FH_TAG=_rawmatched, or
+#: FH_WORDS=words_long_v4_framed.csv.gz FH_TAG=_prefill. Default: the original, untagged.
+SRC = os.path.expanduser(os.environ.get("FH_WORDS", SRC)) if "/" in os.environ.get("FH_WORDS", "/") else os.path.join(os.path.dirname(SRC), os.environ["FH_WORDS"])
 OUT = os.path.join(HERE, "results", "disjunction.json")
+OUT = OUT.replace(".json", os.environ.get("FH_TAG", "") + ".json")
 #: **THE ACT AXIS IS GRADED, BECAUSE A BINARY ONE PUTS `hurt` WHERE `scream` IS.**
 #: The reference is what actually departed, so after `kill` (act 7) a word must
 #: reach ~6 to count as keeping the act -- and `hurt` at 5 then lands in the same

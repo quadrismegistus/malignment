@@ -85,7 +85,12 @@ ROOT = os.path.abspath(os.path.join(HERE, "..", "..", ".."))
 sys.path.insert(0, ROOT)
 sys.path.insert(0, HERE)
 SRC = os.path.expanduser("~/malignment-data/norm_change/words_long_v4.csv.gz")
+#: the INPUT and an output TAG are switchable (RH, 2026-09-28: base -> aligned-raw AND base ->
+#: aligned-prefilled): FH_WORDS=words_long_v4_matched.csv.gz FH_TAG=_rawmatched, or
+#: FH_WORDS=words_long_v4_framed.csv.gz FH_TAG=_prefill. Default: the original, untagged.
+SRC = os.path.expanduser(os.environ.get("FH_WORDS", SRC)) if "/" in os.environ.get("FH_WORDS", "/") else os.path.join(os.path.dirname(SRC), os.environ["FH_WORDS"])
 OUT = os.path.join(HERE, "results", "proportionality")
+OUT = OUT + os.environ.get("FH_TAG", "")
 #: RH, 2026-09-28: "I'd prefer if we used charge, or both separately." k_charge PRIMARY,
 #: inst:arousal beside it, never pooled. warriner_arousal dropped from this producer.
 SCALES = ["k_charge", "inst:arousal"]
@@ -98,7 +103,10 @@ def affect_ratings():
     """({(prompt, word): {scale: v}}, {prompt: {scale: frame v}}), echo-correct and ratable rows only."""
     import pyarrow.parquet as pq
     wd, fr = {}, {}
-    for r in pq.read_table(AFFECT_SRC).to_pylist():
+    #: the original items plus the prefill movers rated later (same task, same rater, 2026-09-28)
+    extra = AFFECT_SRC.replace("affect_proportionality.parquet", "affect_proportionality_extra.parquet")
+    rows = pq.read_table(AFFECT_SRC).to_pylist() + (pq.read_table(extra).to_pylist() if os.path.exists(extra) else [])
+    for r in rows:
         if not r["ok"] or not r.get("echo_ok"):
             continue
         v = {"affect:scene_intensity": float(r["scene_intensity"]), "affect:intensity": float(r["intensity"])}
