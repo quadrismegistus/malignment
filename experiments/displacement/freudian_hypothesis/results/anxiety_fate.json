@@ -1,0 +1,148 @@
+{
+ "n_cells": 25196,
+ "anxiety_vs_scene": {
+  "median": 0.026184441509024884,
+  "iqr": [
+   0.0038281471300970673,
+   0.048318006983343056
+  ],
+  "pos": 38,
+  "neg": 11,
+  "n": 49,
+  "p": 0.00014197068519905542
+ },
+ "kept_vs_scene": {
+  "median": -0.03730979565703288,
+  "iqr": [
+   -0.056108123782336324,
+   -0.024161803438548672
+  ],
+  "pos": 4,
+  "neg": 45,
+  "n": 49,
+  "p": 8.225455871979648e-10
+ },
+ "fates": {
+  "fear": {
+   "suppression": 0.7136049799705726,
+   "kept": 0.07159426057081897,
+   "kept_fear": 0.0,
+   "recoloured": 0.21480075945860755,
+   "cells": 7024
+  },
+  "anger": {
+   "suppression": 0.6852773165690752,
+   "kept": 0.08827317952108307,
+   "anxiety": 0.06965999807998677,
+   "recoloured": 0.1567895058298512,
+   "cells": 13871
+  },
+  "grief": {
+   "suppression": 0.6890562523684038,
+   "kept": 0.04133517423919045,
+   "anxiety": 0.06535808781963486,
+   "recoloured": 0.20425048557277067,
+   "cells": 1109
+  },
+  "desire": {
+   "suppression": 0.7490750155440081,
+   "kept": 0.017559218122228003,
+   "anxiety": 0.05012206074830211,
+   "recoloured": 0.1832437055854604,
+   "cells": 2355
+  },
+  "disgust": {
+   "suppression": 0.6882854751382687,
+   "kept": 0.00022828705928302245,
+   "anxiety": 0.04413048395022758,
+   "recoloured": 0.2673557538522208,
+   "cells": 263
+  },
+  "shame": {
+   "suppression": 0.585318286634277,
+   "kept": 0.041428968014971396,
+   "anxiety": 0.11814267234349199,
+   "recoloured": 0.25511007300725935,
+   "cells": 547
+  },
+  "joy": {
+   "suppression": 0.7957901659082678,
+   "kept": 0.022415638027446193,
+   "anxiety": 0.02916410196856282,
+   "recoloured": 0.15263009409572342,
+   "cells": 27
+  }
+ },
+ "ctx_of_affective": {
+  "desire|tenderness": 19.235622387600003,
+  "fear|fear": 144.75274218599984,
+  "anger|anger": 239.74042190560027,
+  "joy|anger": 26.222032678700018,
+  "tenderness|tenderness": 58.533184614299934,
+  "tenderness|fear": 13.338803017799993,
+  "fear|anger": 92.50235510049997,
+  "desire|none": 16.392875399599987,
+  "joy|joy": 67.50457309720004,
+  "desire|fear": 30.730059471800015,
+  "joy|none": 59.097609327999905,
+  "joy|fear": 36.70542278989996,
+  "anger|fear": 100.89792385940015,
+  "desire|joy": 0.4913755316,
+  "grief|desire": 3.922444887900002,
+  "desire|shame": 0.3893689659000001,
+  "tenderness|anger": 4.2537520275,
+  "shame|desire": 1.1437722513,
+  "joy|tenderness": 5.4505270900000005,
+  "joy|desire": 34.330639777600005,
+  "grief|grief": 47.920826095899976,
+  "shame|anger": 29.34734076559995,
+  "shame|fear": 22.2455463503,
+  "tenderness|none": 25.999041449600018,
+  "desire|desire": 17.59594261850002,
+  "tenderness|desire": 68.96639981129996,
+  "shame|none": 7.503786260199995,
+  "fear|none": 30.045448849500023,
+  "anger|none": 10.3264250599,
+  "grief|fear": 24.074414685299992,
+  "disgust|none": 0.48220850569999996,
+  "fear|disgust": 6.0494415196,
+  "joy|shame": 6.214780985900003,
+  "desire|anger": 30.771812292800032,
+  "joy|grief": 3.7080339606,
+  "fear|tenderness": 0.9534539704,
+  "fear|shame": 2.5874570388,
+  "fear|desire": 16.0425690259,
+  "anger|disgust": 1.1333645207,
+  "grief|anger": 64.75134453109996,
+  "grief|shame": 4.847266767599998,
+  "disgust|anger": 4.408360009300001,
+  "shame|shame": 7.839978131899999,
+  "disgust|shame": 0.35165338960000003,
+  "tenderness|shame": 3.1280848246,
+  "fear|joy": 1.4387484310000007,
+  "disgust|disgust": 7.424088894799999,
+  "desire|disgust": 0.0491753854,
+  "shame|tenderness": 1.0108909137,
+  "fear|grief": 1.9083342638,
+  "grief|none": 10.637269483100003,
+  "joy|disgust": 3.9235069059999996,
+  "tenderness|grief": 0.8547145734,
+  "anger|grief": 1.8083285489000005,
+  "grief|tenderness": 3.4904708974,
+  "grief|disgust": 2.6499455343000013,
+  "tenderness|joy": 4.4579496358,
+  "anger|joy": 1.7457217885,
+  "disgust|fear": 0.37506104139999996,
+  "desire|grief": 0.3880736738000001,
+  "tenderness|disgust": 1.5418990894,
+  "shame|disgust": 0.3651486081,
+  "anger|desire": 0.15286882689999998,
+  "anger|tenderness": 0.5456016,
+  "shame|grief": 0.9737212080000001,
+  "grief|joy": 0.023695614,
+  "shame|joy": 0.3078746025,
+  "disgust|desire": 0.2275474305,
+  "disgust|joy": 0.0194968971,
+  "anger|shame": 0.1532752992
+ }
+}

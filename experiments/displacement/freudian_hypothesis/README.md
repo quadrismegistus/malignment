@@ -113,3 +113,18 @@ Same 12,113 gated cells as the contextual proportionality arm; the affect task n
              DECISIVE                          -0.147                    +0/-49
 
 **Anger does not stay anger word to word.** On the doer reading only 9% of the mass leaving anger words arrives on anger words (7% on fear words); **~68% arrives on words with no feeling of their own** (82% where the barred word carried none). The arrivals share the barred word's feeling slightly LESS than the scene's other words do, and where barred and scene differ they take the scene's, in every lineage, on both readings. **The contextual diagonal (anger 0.59, fear 0.60) was mostly the rater lending the scene's feeling to affectless substitutes** it could only read through the fragment. With the proportionality result: no transport of the barred affect, in amount or in kind, on any instrument; the substitutes are mostly affectless, and what survives is the scene.
+
+## THE VICISSITUDES, BY THE WORDS THAT ARRIVE (`anxiety_fate.py`, 2026-09-28, declared 4bdeb7da before it ran)
+
+RH: "anger -> fear is Freud's 'becomes anxiety' vicissitude." On the word-alone doer rating, `kill` is anger and `scream` fear, so kill -> scream is that fate. Fates of the barred mass by its dominant named feeling (25,196 cells, 49 lineages):
+
+    suppression (arrives on affectless words)   0.69-0.75 for every barred feeling
+    kept (same feeling)                         0.02-0.09
+    anxiety (-> fear)                           0.04-0.07; shame 0.12
+    recoloured (another named feeling)          0.16-0.27
+
+    ANXIETY beyond the scene   +0.026 [+0.004, +0.048]   +38/-11   p = 0.0001
+      (fear's share of AFFECTIVE arrivals minus its share of the scene's affective words, barred feeling != fear)
+    KEPT beyond the scene      -0.037 [-0.056, -0.024]   +4/-45    p = 8e-10
+
+**Order of the fates: suppression dominates; what keeps a feeling avoids the barred one; and it leans to fear a little beyond the scene -- the anxiety vicissitude, small (about 1% of arriving mass) and systematic.** It is instrument-dependent at exactly the words that carry it: of arrivals rated fear ALONE, 31% read as ANGER in their slot (49% fear) -- `scream` in an anger scene. Word-alone, that is anxiety; in context, anger kept and voiced through a fear-typed word. The data cannot choose between them.
