@@ -172,6 +172,98 @@ def compute():
                 matrix={"%s->%s" % k: v for k, v in matrix.items()})
 
 
+TYPE = os.path.expanduser("~/malignment-data/affect_proportionality/type_feeling.parquet")
+
+
+def compute_type(field):
+    """The type arm on `doer_feeling` or `evoked_feeling` (declared in the docstring)."""
+    import pyarrow.parquet as pq
+    from departing_arriving import norms
+    from malignment import roster
+    F, _ = norms()
+    tf, unrat = {}, set()
+    for r in pq.read_table(TYPE).to_pylist():
+        if not r["ok"]:
+            continue
+        if not r["ratable"]:
+            unrat.add(r["word"])
+        else:
+            tf[r["word"]] = r[field]
+    pairs = {(b, a) for b, a in roster.endpoints()[0].items()}
+    kc = {}
+
+    def act(w):
+        if w not in kc:
+            k = F.k(w) or {}
+            kc[w] = max(float(k.get("bodily_harm", 0) or 0), float(k.get("transgressiveness", 0) or 0)) if k else None
+        return kc[w]
+    Z = lambda: dict(t=0.0, c=collections.Counter())
+    cell = collections.defaultdict(lambda: dict(b=Z(), a=Z(), s=Z()))
+    with gzip.open(SRC, "rt") as fh:
+        for r in csv.DictReader(fh, delimiter="\t"):
+            if r["lang"] != "en" or (r["base"], r["aligned"]) not in pairs:
+                continue
+            w = r["word"]
+            if w in unrat:                      #: function words and fragments: out of every side
+                continue
+            d = float(r["delta"]); x = act(w); barred = x is not None and x >= MIN_ACT
+            c = cell[(r["base"], r["prompt"])]; fe = tf.get(w)
+            sides = []
+            if barred and d < 0:
+                sides.append(("b", -d))
+            elif not barred and d > 0:
+                sides.append(("a", d))
+            if not barred:
+                sides.append(("s", float(r["p_base"] or 0)))
+            for side, m in sides:
+                c[side]["t"] += m
+                if fe:
+                    c[side]["c"][fe] += m
+    per_lin, dec_lin, matrix = collections.defaultdict(list), collections.defaultdict(list), collections.defaultdict(float)
+    nstat = collections.Counter()
+    for (lin, pr), c in cell.items():
+        if c["b"]["t"] <= 0 or c["a"]["t"] <= 0 or c["s"]["t"] <= 0:
+            continue
+        ok = all(sum(c[k]["c"].values()) >= COVER * c[k]["t"] and sum(c[k]["c"].values()) > 0 for k in "bas")
+        if not ok:
+            continue
+        nstat["cells"] += 1
+        n = {k: {f: v / sum(c[k]["c"].values()) for f, v in c[k]["c"].items()} for k in "bas"}
+        b, a, sc = n["b"], n["a"], n["s"]
+        O = sum(b.get(f, 0) * a.get(f, 0) for f in FEEL); S = sum(b.get(f, 0) * sc.get(f, 0) for f in FEEL)
+        per_lin[lin].append(O - S)
+        named = lambda d: max((f for f in d if f != "none"), key=d.get, default=None)
+        bm, sm = named(b), named(sc)
+        if bm and sm and bm != sm:
+            dec_lin[lin].append(a.get(bm, 0) - a.get(sm, 0)); nstat["decisive"] += 1
+        for fb, vb in b.items():
+            for fa, va in a.items():
+                matrix[(fb, fa)] += vb * va
+    carry = [st.fmean(v) for v in per_lin.values() if len(v) >= 15]
+    dec = [st.fmean(v) for v in dec_lin.values() if len(v) >= 5]
+    return dict(field=field, carry=summ(carry), decisive=summ(dec) if len(dec) >= 4 else None,
+                n_cells=nstat["cells"], n_decisive_cells=nstat["decisive"], n_decisive_lineages=len(dec),
+                matrix={"%s->%s" % k: v for k, v in matrix.items()})
+
+
+def report_type(r):
+    f = lambda s: "%+.3f [%+.3f, %+.3f] +%d/-%d of %d, p=%.2g" % (s["median"], s["iqr"][0], s["iqr"][1], s["pos"], s["neg"], s["n"], s["p"])
+    L = ["", "## TYPE ARM: `%s` (words rated alone)" % r["field"], "",
+         "%d gated cells." % r["n_cells"], "",
+         "- **CARRY beyond the scene's own words** (O - S per lineage): %s" % f(r["carry"]),
+         "- **DECISIVE** (barred named feeling differs from the scene's named feeling; %d cells, %d lineages with >= 5): arriving share with the BARRED feeling minus with the SCENE's: %s"
+         % (r["n_decisive_cells"], r["n_decisive_lineages"], f(r["decisive"]) if r["decisive"] else "--"), "",
+         "| barred \\ arriving | " + " | ".join(FEEL) + " | row mass |", "|---|" + "---|" * (len(FEEL) + 1)]
+    M = collections.defaultdict(dict)
+    for k, v in r["matrix"].items():
+        x, y = k.split("->"); M[x][y] = v
+    for x in FEEL:
+        tot = sum(M[x].values())
+        if tot > 0:
+            L.append("| %s | %s | %.0f |" % (x, " | ".join(("**%.2f**" if y == x else "%.2f") % (M[x].get(y, 0) / tot) for y in FEEL), tot))
+    return "\n".join(L) + "\n"
+
+
 def report(r):
     f = lambda s: "%+.3f [%+.3f, %+.3f] +%d/-%d of %d, p=%.2g" % (s["median"], s["iqr"][0], s["iqr"][1], s["pos"], s["neg"], s["n"], s["p"])
     L = ["# Does the arriving mass keep the barred word's feeling, or the scene's?", "",
@@ -196,7 +288,11 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--write", action="store_true")
     a = ap.parse_args()
-    r = compute(); md = report(r); print(md)
+    r = compute(); md = report(r)
+    if os.path.exists(TYPE):
+        r["type"] = {fld: compute_type(fld) for fld in ("doer_feeling", "evoked_feeling")}
+        md += "".join(report_type(r["type"][fld]) for fld in ("doer_feeling", "evoked_feeling"))
+    print(md)
     if a.write:
         json.dump(r, open(OUT + ".json", "w"), indent=1); open(OUT + ".md", "w").write(md)
 
