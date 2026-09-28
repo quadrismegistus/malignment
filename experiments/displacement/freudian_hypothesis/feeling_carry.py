@@ -37,6 +37,29 @@ the frame's.
 
 Reported beside: the pooled mass-weighted matrix barred feeling -> arriving feeling, and the
 suppression share (arriving mass `none` where the barred mass carried a feeling).
+
+## THE TYPE ARMS, declared 2026-09-28 before the type ratings existed (RH)
+
+The contextual rater sees the fragment, so a mild substitute may be given the scene's feeling:
+"takes the scene's feeling" and "has none of its own" read the same. `slot_ratings/affect/
+type_task.py` rates each word ALONE, twice in one call -- `doer_feeling` (the person who
+performs or undergoes it: the Freudian question, the barred subject's affect) and
+`evoked_feeling` (what it provokes in a witness or reader) -- because no single wording fixed a
+feeling for act words (`kill` came back anger, fear and none under three wordings). Each is a
+separate arm; neither is pooled with the other or with the contextual arm.
+
+    b, a       as above, from the words' TYPE feelings (ratable words only)
+    s          the SCENE, now built from words too: the cell's NON-barred base words, p_base-
+               weighted, by type feeling -- no frame rating exists at type level
+    gate       rated words carry >= 80% of the barred, the arriving and the non-barred base mass
+    CARRY      O - S, S = sum_k b_k s_k: arrivals share the barred word's type feeling beyond
+               what the rest of the scene's own words share with it
+    DECISIVE   cells where the barred mass's dominant NAMED feeling differs from the scene's
+               dominant NAMED feeling (`none` excluded from both modes, since most words carry
+               none): arriving share with the barred feeling minus share with the scene's
+
+Freud's displacement (doer arm): CARRY > 0 and DECISIVE > 0 -- anger words replaced by anger
+words even where the scene's words carry another feeling.
 """
 import argparse, collections, csv, gzip, json, os, statistics as st, sys
 from math import comb
