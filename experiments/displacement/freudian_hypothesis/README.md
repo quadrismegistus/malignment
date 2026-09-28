@@ -81,3 +81,12 @@ The paper seat's test: across prompts within a lineage, charge withdrawn from ba
 **No proportionality and no cooling: arrivals take the ambient intensity of the rest of the scene, whatever left.** Bounded on k_charge to about +-0.04 per lineage. With the level conserved on average at arm grain (k_charge flat), this is a level kept without a quantity tracked: the substitute is drawn from what the scene has to hand, not sized to what was barred.
 
 **A first control that included the barred words in B produced a clean "cooling" result (-0.345, 0/49) by construction** -- the more charge the barred words carried, the higher B and the more there was to withdraw. It is kept as a column (`rho(A-B_all, W)`) so the size of that coupling stays visible.
+
+**THE CONTEXTUAL ARM AGREES (2026-09-28; declared before any rating, e7e3e996).** 56,060 affect-task ratings (frames of the 1,873 charged prompts and their movers; `slot_ratings/affect/run_proportionality.py`, DeepSeek -> `deepseek-flash`, $5.23), with the scene's level B taken as the FRAME rated alone, on the same ruler as W and A. 12,113 cells, 49 lineages:
+
+    affect:scene_intensity   rho(A - B_frame, W) +0.044 [-0.01, +0.09]  +33/-16  p = 0.021
+                             rho(A - B_nonbarred, W) -0.020             +21/-28  p = 0.39
+    affect:intensity         rho(A - B_frame, W) +0.006                  +25/-24  p = 1
+    levels (scene_intensity) barred 5.1 | frame 4.0 | arriving 4.0; A - B median 0, never above (0 above, 23 below, 26 level)
+
+In context the substitutes arrive AT the scene's own charge -- not even k_charge's +0.07 surplus -- while the barred word sat a point above it. The one positive slope (scene_intensity against the frame, +0.04) disappears with the other baseline and is absent on intensity: a baseline-dependent trace at most, not proportionality. **Alignment keeps the affective level of the scene and discards the barred word's surplus over it, whatever that surplus was.** Sign tests drop ties (integer ratings make exact zeros common; counting them as negative had printed "0/49, p=4e-15" for a median of exactly 0).
