@@ -1,0 +1,347 @@
+{
+ "tol=0.5": {
+  "SUBSTITUTE (full act, feeling kept)": {
+   "median_enrichment": 0.34967137066222137,
+   "n": 49,
+   "below_1": 45,
+   "words": [
+    "punch",
+    "destroy",
+    "strangle",
+    "shoot",
+    "die",
+    "lash",
+    "kill",
+    "strike",
+    "stab",
+    "punish"
+   ]
+  },
+  "MILDER ACT (partial act, feeling kept)": {
+   "median_enrichment": 0.6887409973743517,
+   "n": 49,
+   "below_1": 37,
+   "words": [
+    "hit",
+    "destroy",
+    "beat",
+    "smash",
+    "confront",
+    "fight",
+    "strike",
+    "yell",
+    "argue",
+    "demanded"
+   ]
+  },
+  "DISPLACED FEELING (no act, feeling kept)": {
+   "median_enrichment": 0.6480369139366607,
+   "n": 47,
+   "below_1": 35,
+   "words": [
+    "shout",
+    "shouted",
+    "gasp",
+    "scream",
+    "rummaged",
+    "lose",
+    "hurl",
+    "vent",
+    "clenched",
+    "defend"
+   ]
+  },
+  "act kept, feeling lost": {
+   "median_enrichment": 0.7415405984876382,
+   "n": 49,
+   "below_1": 40,
+   "words": [
+    "hurt",
+    "break",
+    "suffer",
+    "fire",
+    "cut",
+    "die",
+    "fight",
+    "loot",
+    "explode",
+    "hell"
+   ]
+  },
+  "NEITHER (content word)": {
+   "median_enrichment": 1.0879495435832027,
+   "n": 49,
+   "below_1": 9,
+   "words": [
+    "scream",
+    "make",
+    "fall",
+    "take",
+    "see",
+    "leave",
+    "have",
+    "search",
+    "know",
+    "get"
+   ]
+  },
+  "NEITHER (function word)": {
+   "median_enrichment": 2.022811040138586,
+   "n": 49,
+   "below_1": 7,
+   "words": [
+    "be",
+    "the",
+    "was",
+    "her",
+    "any",
+    "to",
+    "he",
+    "in",
+    "a",
+    "it"
+   ]
+  },
+  "_headline": {
+   "median_ratio": 2.199038119217337,
+   "above_1": 32,
+   "n": 44,
+   "p_sign": 0.003657766827927844
+  },
+  "_coverage": {
+   "cells": 1820,
+   "candidate_rows": 35982,
+   "rated_rows": 35852
+  }
+ },
+ "tol=1.0": {
+  "SUBSTITUTE (full act, feeling kept)": {
+   "median_enrichment": 0.374067338064408,
+   "n": 49,
+   "below_1": 45,
+   "words": [
+    "destroy",
+    "punch",
+    "strangle",
+    "shoot",
+    "die",
+    "lash",
+    "strike",
+    "fight",
+    "kill",
+    "punish"
+   ]
+  },
+  "MILDER ACT (partial act, feeling kept)": {
+   "median_enrichment": 0.6268920519507808,
+   "n": 49,
+   "below_1": 39,
+   "words": [
+    "hit",
+    "beat",
+    "smash",
+    "destroy",
+    "confront",
+    "yell",
+    "fight",
+    "argue",
+    "demanded",
+    "harm"
+   ]
+  },
+  "DISPLACED FEELING (no act, feeling kept)": {
+   "median_enrichment": 0.6480369139366607,
+   "n": 47,
+   "below_1": 35,
+   "words": [
+    "shout",
+    "shouted",
+    "gasp",
+    "scream",
+    "rummaged",
+    "lose",
+    "hurl",
+    "vent",
+    "clenched",
+    "defend"
+   ]
+  },
+  "act kept, feeling lost": {
+   "median_enrichment": 0.7415405984876382,
+   "n": 49,
+   "below_1": 40,
+   "words": [
+    "hurt",
+    "break",
+    "suffer",
+    "fire",
+    "cut",
+    "die",
+    "fight",
+    "loot",
+    "explode",
+    "hell"
+   ]
+  },
+  "NEITHER (content word)": {
+   "median_enrichment": 1.0879495435832027,
+   "n": 49,
+   "below_1": 9,
+   "words": [
+    "scream",
+    "make",
+    "fall",
+    "take",
+    "see",
+    "leave",
+    "have",
+    "search",
+    "know",
+    "get"
+   ]
+  },
+  "NEITHER (function word)": {
+   "median_enrichment": 2.022811040138586,
+   "n": 49,
+   "below_1": 7,
+   "words": [
+    "be",
+    "the",
+    "was",
+    "her",
+    "any",
+    "to",
+    "he",
+    "in",
+    "a",
+    "it"
+   ]
+  },
+  "_headline": {
+   "median_ratio": 1.8467831796169398,
+   "above_1": 31,
+   "n": 45,
+   "p_sign": 0.016094360031274846
+  },
+  "_coverage": {
+   "cells": 1820,
+   "candidate_rows": 35982,
+   "rated_rows": 35852
+  }
+ },
+ "tol=1.5": {
+  "SUBSTITUTE (full act, feeling kept)": {
+   "median_enrichment": 0.41276608967442624,
+   "n": 49,
+   "below_1": 44,
+   "words": [
+    "destroy",
+    "punch",
+    "strangle",
+    "shoot",
+    "beat",
+    "die",
+    "strike",
+    "fight",
+    "lash",
+    "hit"
+   ]
+  },
+  "MILDER ACT (partial act, feeling kept)": {
+   "median_enrichment": 0.6688292577158392,
+   "n": 49,
+   "below_1": 40,
+   "words": [
+    "hit",
+    "smash",
+    "yell",
+    "argue",
+    "demanded",
+    "destroy",
+    "confront",
+    "fight",
+    "beat",
+    "writhe"
+   ]
+  },
+  "DISPLACED FEELING (no act, feeling kept)": {
+   "median_enrichment": 0.6480369139366607,
+   "n": 47,
+   "below_1": 35,
+   "words": [
+    "shout",
+    "shouted",
+    "gasp",
+    "scream",
+    "rummaged",
+    "lose",
+    "hurl",
+    "vent",
+    "clenched",
+    "defend"
+   ]
+  },
+  "act kept, feeling lost": {
+   "median_enrichment": 0.7415405984876382,
+   "n": 49,
+   "below_1": 40,
+   "words": [
+    "hurt",
+    "break",
+    "suffer",
+    "fire",
+    "cut",
+    "die",
+    "fight",
+    "loot",
+    "explode",
+    "hell"
+   ]
+  },
+  "NEITHER (content word)": {
+   "median_enrichment": 1.0879495435832027,
+   "n": 49,
+   "below_1": 9,
+   "words": [
+    "scream",
+    "make",
+    "fall",
+    "take",
+    "see",
+    "leave",
+    "have",
+    "search",
+    "know",
+    "get"
+   ]
+  },
+  "NEITHER (function word)": {
+   "median_enrichment": 2.022811040138586,
+   "n": 49,
+   "below_1": 7,
+   "words": [
+    "be",
+    "the",
+    "was",
+    "her",
+    "any",
+    "to",
+    "he",
+    "in",
+    "a",
+    "it"
+   ]
+  },
+  "_headline": {
+   "median_ratio": 1.7886802659292587,
+   "above_1": 28,
+   "n": 45,
+   "p_sign": 0.1351564508456704
+  },
+  "_coverage": {
+   "cells": 1820,
+   "candidate_rows": 35982,
+   "rated_rows": 35852
+  }
+ }
+}

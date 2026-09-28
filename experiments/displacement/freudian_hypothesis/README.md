@@ -155,3 +155,15 @@ RH: "anger -> fear is Freud's 'becomes anxiety' vicissitude." On the word-alone 
     CHARGE (26,570 cells, 49 lin)   carry -0.002 p=0.25   kept -0.003 p=0.78   anxiety -0.003 p=0.25   suppression +0.003 p=0.78
 
 **Not ordinary prompts going to ordinariness:** in the most charged third (barred words ~3.8 points of lift over the scene) the substitutes behave as in the mildest -- away from the barred feeling, at the scene's affectlessness, a slight lean to fear. The fates are dose-INVARIANT across a five-fold range of lift and a three-fold range of prompt charge; only anxiety leans with lift, not significantly. With the proportionality null: the substitute does not register how much was barred. Limits: lift exists for 10,752 cells only; terciles would dilute an effect confined to the extreme top.
+
+## THE DISJUNCTION ON KIND (`disjunction_kind.py`, 2026-09-28, declared 349b5fea before it ran)
+
+Paper seat, for RH's Displacement section: `disjunction.py`'s "affect route ~3x the substitution route (45/49)" uses AFFECT = `k_charge` -- word-level INTENSITY, type-level, same call as the act; not the label feelings and not the fragment-visible rater. Its "keeps the feeling" means keeps the CHARGE. Same 2x2 with the affect axis swapped for KIND (arriving word's validated Jev doer feeling = the departing mass's dominant named feeling, P(none) < 0.5), 1,820 charged cells:
+
+    displaced-feeling / substitute enrichment ratio   tol 0.5: 2.20 (32/44, p=0.004)   tol 1.0: 1.85 (31/45, p=0.016)   tol 1.5: 1.79 (28/45, p=0.14)
+    at tol 1.0, enrichment vs availability            substitute 0.37 | milder act 0.63 | DISPLACED FEELING 0.65 (35/47 below 1)
+                                                      act kept, feeling lost 0.74 | NEITHER content 1.09 | NEITHER function 2.02
+
+**On kind the relative preference half-survives (~2x, tol-dependent) and the absolute picture reverses:** words keeping the SAME FEELING without the act are AVOIDED (0.65), just less than act-keepers (0.37); on `k_charge` intensity the same route is ENRICHED (1.49: scream, cry, kiss, shout). `scream` changes quadrant between the two -- anger's charge, not anger's kind. The arriving mass goes to words that keep neither. Supported sentence: alignment prefers words that keep the CHARGE without the act over words that keep the act; words keeping the feeling's KIND are avoided, less than act-keepers; most mass goes to words keeping neither.
+
+**The linked-pair fall ("intensity in context falls, 47/50", `annotated_pairs.py`, `inst:arousal`, fragment-visible) survives on fragment-free type-level instruments on the same 8,614 pairs:** `k_charge` -0.190 (41/50 below 0), `warriner_arousal` -0.364 (47/50).
