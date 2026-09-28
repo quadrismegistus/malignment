@@ -66,8 +66,14 @@ def items():
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--pilot", type=int, default=0)
+    ap.add_argument("--extra", help="JSON [[prompt, word|null], ...] (the prefill movers, 2026-09-28) -> context_survey_extra.parquet")
+    ap.add_argument("--out", default="extra", help="suffix for --extra output: context_survey_<out>.parquet")
     a = ap.parse_args()
-    its = items()
+    if a.extra:
+        import json as _j
+        its = [(p, w) for p, w in _j.load(open(a.extra))]
+    else:
+        its = items()
     if a.pilot:
         frames = list(dict.fromkeys(p for p, _ in its))[:4]
         its = [x for x in its if x[0] in frames][:a.pilot]
@@ -86,7 +92,7 @@ def main():
             d["intensity_conf"] = y.confidence
         rows.append(d)
     import pyarrow as pa, pyarrow.parquet as pq
-    fn = os.path.join(DATA, "context_survey_pilot.parquet" if a.pilot else "context_survey.parquet")
+    fn = os.path.join(DATA, "context_survey_pilot.parquet" if a.pilot else ("context_survey_%s.parquet" % a.out if a.extra else "context_survey.parquet"))
     pq.write_table(pa.Table.from_pylist(rows), fn, compression="zstd")
     print("wrote %s | %d items, %d answered" % (fn, len(rows), sum(r["ok"] for r in rows)))
     if a.pilot:

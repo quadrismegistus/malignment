@@ -46,6 +46,23 @@ Per lineage the mean over cells (>= 15); median over lineages, two-sided sign te
         ADJ, ADV, PROPN, minus the light verbs LIGHT below; every quantity recomputed
     DOSE   within-lineage terciles of the barred words' lift (`charge.word_lift`) and of prompt
            charge (`charge.dose`); top minus bottom for each quantity
+
+## THE ELASTICITY CONTROL, declared 2026-09-28 AFTER the first run and BEFORE its ratings exist
+
+The first run gave PROPORTIONALITY rho +0.255 (48/49); it survives the frame's LEVEL (+0.262
+partial) but VANISHES when the withdrawn charge comes from an instrument that never saw the
+frame (k_charge: +0.026), and appears again on the DeepSeek affect task under the same increment
+design (+0.24 / +0.28). So it is either context-dependent transfer or a frame-level common cause:
+frames in which ANY word moves the subject's feeling a lot inflate both the barred increments
+(W) and the arrivals' (dI_A) with nothing transferred.
+
+ELASTICITY of a frame = the mean |dI| of up to 5 candidate words drawn per frame (seed
+20260928, weighted by pooled base probability) from the frame's candidates that are NEITHER
+barred (act >= 4) NOR among the rated movers -- words whose shift says how much this frame lets
+a word move it, independent of what alignment did. Rated by the same Jev survey
+(`context_survey.py --extra ... --out elastic`). TEST: within lineage, partial Spearman of dI_A
+on W controlling for elasticity (and, beside it, elasticity + frame level). If it survives: the
+proportionality is transfer. If it collapses: it was the frame.
 """
 import argparse, collections, csv, gzip, json, math, os, statistics as st, sys
 from math import comb
@@ -229,7 +246,7 @@ def main():
         L += ["## by %s, top minus bottom tercile" % dose, ""] + ["- %s: %s" % (q, f(r[q])) for q in QTY] + [""]
     md = "\n".join(L) + "\n"; print(md)
     if a.write:
-        json.dump(res, open(OUT + ".json", "w"), indent=1); open(OUT + ".md", "w").write(md)
+        json.dump(res, open(OUT + ".json", "w"), indent=1, default=float); open(OUT + ".md", "w").write(md)
 
 
 if __name__ == "__main__":
