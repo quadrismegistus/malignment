@@ -65,3 +65,19 @@ Act and affect come from the **same rating call on the same word**, so a quadran
 - **`tol` has no principled value** and is swept at 0.5/1.0/1.5. Every sign in result 4 holds at all three; "the affect route beats its OWN availability" does not, failing BH at tol 1.0 — which is why the headline is the comparative contrast and not that one.
 - **`existence/` has the prior claim on where the mass goes.** `adjacency.py`, `channel_table.py` and `channel_graph.py` measure the RELATION between a faller and a riser; this folder measures the PROPERTIES of each side. Neither supersedes the other, and `channel_graph.py`'s result that the whole descent happens at the first move (charge 4.92 → 2.67 → 2.59) bears directly on whether "chain of connections" is the right phrase.
 - **Two defects found and fixed mid-session, both in the git log with before/after:** `words_long_v4` is not sorted by cell and a single-pass grouper fragmented it (`ba4587da`); and the disjunction was specified as two one-sample tests when the argument makes one comparative claim (`4dc58770`).
+
+
+## PROPORTIONALITY: does the affect that arrives scale with the charge that left? (`proportionality.py`, 2026-09-28)
+
+The paper seat's test: across prompts within a lineage, charge withdrawn from barred words (act >= 4) against the intensity of what arrives. Freud predicts a positive slope (diminished but proportionate), a cooling account zero or negative. The control is the frame's own level over its NON-barred words (B); raw arrival intensity climbs with charge withdrawn only because hot scenes offer hot replacements.
+
+    k_charge (primary, RH; full coverage, 49 lineages)
+      rho(A - B, W)     +0.010  IQR [-0.04, +0.04]   27/49 positive   p = 0.57
+      rho(A, W)         +0.165                        46/49 -- the scene, not the withdrawal
+      rho(B, W)         +0.228                        48/49
+    inst:arousal (separate; rated words cover ~0 of barred mass, 4,296 cells pass the gate)
+      rho(A - B, W)     -0.073  IQR [-0.26, +0.05]   19/47            p = 0.24
+
+**No proportionality and no cooling: arrivals take the ambient intensity of the rest of the scene, whatever left.** Bounded on k_charge to about +-0.04 per lineage. With the level conserved on average at arm grain (k_charge flat), this is a level kept without a quantity tracked: the substitute is drawn from what the scene has to hand, not sized to what was barred.
+
+**A first control that included the barred words in B produced a clean "cooling" result (-0.345, 0/49) by construction** -- the more charge the barred words carried, the higher B and the more there was to withdraw. It is kept as a column (`rho(A-B_all, W)`) so the size of that coupling stays visible.
