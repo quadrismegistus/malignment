@@ -28,3 +28,23 @@ Reliability gate: **FAIL -- instrument not validated; fates below are not to be 
 
 Mean levels: P(none) barred 0.06 / scene 0.62 / arriving 0.59; P(fear) barred 0.37 / scene 0.07 / arriving 0.08
 
+## BY DOSE (doer), within-lineage terciles, top minus bottom
+
+### LIFT of the barred words (primary) (10752 cells, 47 lineages)
+
+| fate | low | mid | high | high - low |
+|---|---|---|---|---|
+| carry | -0.0294 | -0.0317 | -0.0282 | +0.0018 [-0.0123, +0.0105] +26/-21 of 47, p=0.56 |
+| kept | -0.0094 | -0.0097 | -0.0060 | +0.0005 [-0.0164, +0.0053] +24/-23 of 47, p=1 |
+| anxiety | +0.0068 | +0.0105 | +0.0096 | +0.0059 [-0.0078, +0.0251] +30/-17 of 47, p=0.079 |
+| suppression | -0.0143 | -0.0094 | -0.0218 | -0.0112 [-0.0261, +0.0234] +22/-25 of 47, p=0.77 |
+
+### prompt CHARGE (separate) (26570 cells, 49 lineages)
+
+| fate | low | mid | high | high - low |
+|---|---|---|---|---|
+| carry | -0.0254 | -0.0236 | -0.0285 | -0.0019 [-0.0143, +0.0084] +20/-29 of 49, p=0.25 |
+| kept | -0.0077 | -0.0011 | -0.0084 | -0.0030 [-0.0166, +0.0141] +23/-26 of 49, p=0.78 |
+| anxiety | +0.0052 | +0.0128 | +0.0059 | -0.0025 [-0.0070, +0.0051] +20/-29 of 49, p=0.25 |
+| suppression | -0.0202 | -0.0182 | -0.0163 | +0.0025 [-0.0211, +0.0299] +26/-23 of 49, p=0.78 |
+

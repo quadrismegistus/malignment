@@ -147,3 +147,11 @@ RH: "anger -> fear is Freud's 'becomes anxiety' vicissitude." On the word-alone 
     levels       P(none) barred 0.33 / scene 0.75 / arriving 0.73;  P(fear) 0.06 / 0.03 / 0.04
 
 **The substitutes are drawn from the scene's ordinary vocabulary -- as affectless as it, a touch less -- moving AWAY from the barred word's feeling in every lineage, with a small systematic lean toward fear (the anxiety vicissitude, ~1 point of probability).** The label version's "suppression ~70%" was the scene's own baseline (75% affectless), not a fate beyond it.
+
+**THE FATES ARE NOT DOSED (`feeling_space.py --dose`, declared 908bd725 before it ran).** RH: "is this dosed by charge? Or are we just reading ordinary prompts go to ordinariness ... dosed by LIFT especially but let's also use prompt charge separately." Within-lineage terciles, doer (validated), top minus bottom:
+
+    dose ranges (tercile medians)   LIFT of the barred words 0.71 | 2.00 | 3.81      prompt CHARGE 1.71 | 3.42 | 5.15
+    LIFT (10,752 cells, 47 lin)     carry +0.002 p=0.56   kept +0.001 p=1   anxiety +0.006 (30/47) p=0.08   suppression -0.011 p=0.77
+    CHARGE (26,570 cells, 49 lin)   carry -0.002 p=0.25   kept -0.003 p=0.78   anxiety -0.003 p=0.25   suppression +0.003 p=0.78
+
+**Not ordinary prompts going to ordinariness:** in the most charged third (barred words ~3.8 points of lift over the scene) the substitutes behave as in the mildest -- away from the barred feeling, at the scene's affectlessness, a slight lean to fear. The fates are dose-INVARIANT across a five-fold range of lift and a three-fold range of prompt charge; only anxiety leans with lift, not significantly. With the proportionality null: the substitute does not register how much was barred. Limits: lift exists for 10,752 cells only; terciles would dilute an effect confined to the extreme top.
