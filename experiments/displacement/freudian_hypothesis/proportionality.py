@@ -167,10 +167,15 @@ def compute():
             Ba = [x[4] for x in v]
             rows[lin] = dict(n=len(v), rho_AmB_W=spearman(W, [a - b for a, b in zip(A, B)]),
                              rho_A_W=spearman(W, A), rho_AmB_M=spearman(M, [a - b for a, b in zip(A, B)]),
-                             rho_B_W=spearman(W, B), rho_AmBall_W=spearman(W, [a - b for a, b in zip(A, Ba)]))
+                             rho_B_W=spearman(W, B), rho_AmBall_W=spearman(W, [a - b for a, b in zip(A, Ba)]),
+                             #: THE LEVEL, which the slope cannot give: do arrivals sit AT the rest
+                             #: of the scene's intensity (preservation of the field) or below it by
+                             #: a constant (uniform cooling)? And the departing barred words' own level.
+                             lvl_AmB=st.median([a - b for a, b in zip(A, B)]), lvl_A=st.median(A), lvl_B=st.median(B),
+                             lvl_barred=st.median([x[0] / x[3] for x in v]))
         out = {"cells_with_barred_departure": ncell, "cells_past_coverage_gate": ngate,
                "lineages": len(rows), "per_lineage": rows}
-        for key in ("rho_AmB_W", "rho_A_W", "rho_AmB_M", "rho_B_W", "rho_AmBall_W"):
+        for key in ("rho_AmB_W", "rho_A_W", "rho_AmB_M", "rho_B_W", "rho_AmBall_W", "lvl_AmB", "lvl_A", "lvl_B", "lvl_barred"):
             v = [r[key] for r in rows.values() if r[key] is not None]
             if v:
                 q = st.quantiles(v, n=4) if len(v) >= 4 else [min(v), st.median(v), max(v)]
@@ -199,6 +204,12 @@ def report(res, cover):
         r = res[s]
         L.append("| `%s` | %d / %d | %d | %s | %s | %s | %s | %s |" % (s, r["cells_with_barred_departure"], r["cells_past_coverage_gate"],
                  r["lineages"], f(r.get("rho_AmB_W")), f(r.get("rho_A_W")), f(r.get("rho_B_W")), f(r.get("rho_AmB_M")), f(r.get("rho_AmBall_W"))))
+    L += ["", "**Levels** (per lineage the median over prompts, then median over lineages [IQR]; positive/n is lineages with arrivals ABOVE the scene):", "",
+          "| scale | barred departing | rest of scene (B) | arriving (A) | A - B |", "|---|---|---|---|---|"]
+    for s in SCALES:
+        r = res[s]
+        g = lambda k: ("%.2f" % r[k]["median"]) if r.get(k) else "--"
+        L.append("| `%s` | %s | %s | %s | %s |" % (s, g("lvl_barred"), g("lvl_B"), g("lvl_A"), f(r.get("lvl_AmB"))))
     L += ["", "Each cell: median rho [interquartile range over lineages], lineages positive / lineages, sign-test p.", "",
           "Coverage of rated words (median over charged cells, share of mass): " +
           "; ".join("`%s` barred %.2f, arriving %.2f, base %.2f" % (s, c["median_barred"] or 0, c["median_arriving"] or 0, c["median_base"] or 0)
