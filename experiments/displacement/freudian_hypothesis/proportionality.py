@@ -48,6 +48,24 @@ offered); raw A is reported beside it so the scene's share is visible.
 >= 80% of its arriving mass and >= 80% of its base mass. Coverage is reported, so a slope
 fitted on whichever words happened to be rated is visible as such.
 
+## THE CONTEXTUAL ARM, DECLARED 2026-09-28 BEFORE ANY OF ITS RATINGS EXISTED
+
+k_charge is TYPE-level (it misread `raped -> kissed`). The contextual arm rates frames and
+movers with the affect task (`slot_ratings/affect/task.py`, run by `run_proportionality.py`;
+smoke `smoke_proportionality.md`), on ONE ruler for the frame, the barred word and the arrivals:
+
+    affect:scene_intensity   PRIMARY of this arm: "how charged is the scene for someone
+                             reading it, whatever the people in it feel", 1-7 -- the charge,
+                             independent of the task's open `whose` fault
+    affect:intensity         beside it; ceiling-bound on the smoke (frames 5-6)
+
+Same W, A and test as above, with ONE change: **B is the FRAME's own rating** (the fragment
+rated with no word), the scene's level measured directly rather than reconstructed from the
+base model's non-barred words; the non-barred-word B is reported beside it. Only rows whose
+`target` echo is correct and that are `ratable` enter. The levels table (barred, frame,
+arriving, A - B) is reported for this arm too. PASS/FAIL is not re-litigated: the k_charge
+answer stands as its own result, and this arm either agrees with it or it does not.
+
 ## THE TEST
 
 Per lineage with >= 15 qualifying prompts: Spearman rho of (A - B) on W across prompts.
