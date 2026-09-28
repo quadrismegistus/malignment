@@ -90,3 +90,17 @@ The paper seat's test: across prompts within a lineage, charge withdrawn from ba
     levels (scene_intensity) barred 5.1 | frame 4.0 | arriving 4.0; A - B median 0, never above (0 above, 23 below, 26 level)
 
 In context the substitutes arrive AT the scene's own charge -- not even k_charge's +0.07 surplus -- while the barred word sat a point above it. The one positive slope (scene_intensity against the frame, +0.04) disappears with the other baseline and is absent on intensity: a baseline-dependent trace at most, not proportionality. **Alignment keeps the affective level of the scene and discards the barred word's surplus over it, whatever that surplus was.** Sign tests drop ties (integer ratings make exact zeros common; counting them as negative had printed "0/49, p=4e-15" for a median of exactly 0).
+
+
+## FEELING CARRY: does the arriving mass keep the barred word's FEELING, or the scene's? (`feeling_carry.py`, 2026-09-28, declared before it ran)
+
+Same 12,113 gated cells as the contextual proportionality arm; the affect task names a feeling for the frame, each barred word and each arrival.
+
+    CARRY beyond the frame's LABEL      +0.100 [+0.086, +0.113]   +49/-0   p = 4e-15
+    DECISIVE cells (barred feeling differs from the frame's):
+      arriving share with the BARRED feeling minus share with the FRAME's
+                                        -0.371 [-0.42, -0.30]     +0/-49   p = 4e-15
+
+**When the barred word's feeling and the scene's disagree, the substitutes take the scene's, in every lineage.** The positive "carry" conditions on the frame's single label only, so a prompt's finer affective colour shared by everything in it counts as carry; it does not show the barred word's feeling travelling. The kind of feeling is largely kept (anger 0.59, fear 0.60, desire 0.71 on the diagonal of the mass-weighted barred -> arriving matrix), as the scene's colour. Fates at the margin: ~a fifth of anger/fear mass arrives affectless (suppression, concentrated in some prompts: the median cell has none); **shame -> fear 0.27**, Freud's anxiety fate; idealization (anger/desire -> tenderness) marginal. `affect_move` is not used: it contradicts the rater's own `feeling` labels in 14,500 of 52,014 rows.
+
+**Caveat.** The rater sees the fragment when it rates a word, so a mild arrival may be given the fragment's feeling by default. "The substitute carries the scene's feeling" and "the substitute has none of its own" read the same here; both mean the substitute adds no affect of its own, which is the claim. It is not evidence that the scene's feeling was actively re-supplied.
