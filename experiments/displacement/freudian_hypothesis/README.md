@@ -128,3 +128,22 @@ RH: "anger -> fear is Freud's 'becomes anxiety' vicissitude." On the word-alone 
     KEPT beyond the scene      -0.037 [-0.056, -0.024]   +4/-45    p = 8e-10
 
 **Order of the fates: suppression dominates; what keeps a feeling avoids the barred one; and it leans to fear a little beyond the scene -- the anxiety vicissitude, small (about 1% of arriving mass) and systematic.** It is instrument-dependent at exactly the words that carry it: of arrivals rated fear ALONE, 31% read as ANGER in their slot (49% fear) -- `scream` in an anger scene. Word-alone, that is anxiety; in context, anger kept and voiced through a fear-typed word. The data cannot choose between them.
+
+## THE FATES ON A VALIDATED INSTRUMENT (`feeling_space.py`, 2026-09-28, declared 619acec7 before the run and the check)
+
+**SUPERSEDES the label-based kind results above** (`feeling_carry.py` type arms, `anxiety_fate.py`), which RH judged unreliable: the DeepSeek labels for act words moved with the wording and the fates lived on two hard boundaries. Here each of 7,690 words is a PROBABILITY over the nine feelings (Jev Survey, `slot_ratings/affect/type_survey.py` v2, `jev-1.13.0`, word alone; doer = the grammatical subject, never the victim).
+
+**RELIABILITY GATE (declared: argmax agreement >= 0.70 and kappa >= 0.60 against a second rater, Claude via Workflow, on the 400 words carrying 73.5% of barred + arriving mass):**
+
+    doer     agreement 0.873  kappa 0.713  none-boundary 0.890  fear/anger 1.000 (n=39)   PASS
+    evoked   agreement 0.785  kappa 0.541  none-boundary 0.850  fear/anger 0.590 (n=39)   FAIL -- not quoted
+
+**DOER, 29,968 cells, 49 lineages, arrivals against the scene's own non-barred words:**
+
+    CARRY        JS(B,S) - JS(B,A)   -0.024 [-0.035, -0.018]   +0/-49    arrivals FURTHER from what left than the scene is
+    KEPT         A[X] - S[X]         -0.006                    +15/-34   the barred feeling slightly avoided
+    ANXIETY      A[fear] - S[fear]   +0.009 [+0.001, +0.016]   +42/-7    p = 4e-7, small and systematic
+    SUPPRESSION  A[none] - S[none]   -0.016                    +11/-38   arrivals NOT more affectless than the scene
+    levels       P(none) barred 0.33 / scene 0.75 / arriving 0.73;  P(fear) 0.06 / 0.03 / 0.04
+
+**The substitutes are drawn from the scene's ordinary vocabulary -- as affectless as it, a touch less -- moving AWAY from the barred word's feeling in every lineage, with a small systematic lean toward fear (the anxiety vicissitude, ~1 point of probability).** The label version's "suppression ~70%" was the scene's own baseline (75% affectless), not a fate beyond it.
