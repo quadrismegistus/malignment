@@ -18,7 +18,7 @@ import argparse, os, sys
 
 os.environ.setdefault("LITMOD_DATA_DIR", "/Users/rj416/github/largeliterarymodels/data")
 from largeliterarymodels.survey import Survey  # noqa: E402
-from largeliterarymodels.questions import Choice  # noqa: E402
+from largeliterarymodels.questions import Choice, Score  # noqa: E402
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
@@ -34,11 +34,24 @@ QUESTIONS = {
                                   "victim, a target, or a reader.",
                       "inspect": "fragment and word"},
         criteria=FEELINGS),
+    #: RH, 2026-09-28: intensity on the SAME instrument and design as the kind, so the fates and
+    #: the intensity result come from one set of ratings (frame alone vs frame + word, in context).
+    "doer_intensity": Score(
+        instructions={"question": "This is an UNFINISHED sentence. If `word` is given, it fills the blank; if "
+                                  "`word` is empty, the blank is still open -- judge the fragment as it stands. How "
+                                  "INTENSE is what the GRAMMATICAL SUBJECT is feeling at this point, whatever the "
+                                  "feeling is? Never a victim's, a target's or a reader's.",
+                      "inspect": "fragment and word"},
+        criteria=["The subject feels nothing in particular: calm, flat, going about something procedural.",
+                  "A mild feeling: slight irritation, passing interest, faint unease.",
+                  "A clear, engaged feeling: annoyed, worried, pleased, wanting something.",
+                  "A strong feeling: furious, frightened, elated, desperate.",
+                  "An overwhelming feeling: blind rage, terror, ecstasy, despair."]),
 }
 
 
 class ContextFeelingSurvey(Survey):
-    name = "context_feeling_survey_en_v1"
+    name = "context_feeling_survey_en_v2"
     questions = QUESTIONS
     model = "jev-latest"
     usage_log = True
@@ -68,6 +81,9 @@ def main():
             d["doer_feeling"] = x.choice
             for f in FEELINGS:
                 d["p_" + f] = float(x.probabilities.get(f, 0.0))
+            y = r["doer_intensity"]
+            d["intensity"] = float(y.score)            # 0..4, probability-weighted position
+            d["intensity_conf"] = y.confidence
         rows.append(d)
     import pyarrow as pa, pyarrow.parquet as pq
     fn = os.path.join(DATA, "context_survey_pilot.parquet" if a.pilot else "context_survey.parquet")
@@ -77,7 +93,7 @@ def main():
         for d in rows:
             if d["ok"]:
                 top = ", ".join("%s %.2f" % (f, d["p_" + f]) for f in sorted(FEELINGS, key=lambda f: -d["p_" + f])[:3])
-                print("  %-60s %-14s %s" % (d["prompt"][:60], d["word"] or "(FRAME)", top))
+                print("  %-55s %-12s int %.2f | %s" % (d["prompt"][:55], d["word"] or "(FRAME)", d["intensity"], top))
 
 
 if __name__ == "__main__":
